@@ -19,39 +19,6 @@ public class ModItems {
             () ->new SwordItem(Tiers.NETHERITE,1000,3,new Item.Properties()));
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public static final RegistryObject<Item> STEEL = ITEMS.register("steel",
-            () ->new Item(new Item.Properties()));
-    public static final RegistryObject<Item> MANASHARD = ITEMS.register("manashard",
-            () ->new Item(new Item.Properties()));
-    public static final RegistryObject<Item> ELDERDRAGONFLESHB = ITEMS.register("elderdragonfleshb",
-            () ->new Item(new Item.Properties()));
-    public static final RegistryObject<Item> ELDERDRAGONFLESHW = ITEMS.register("elderdragonfleshw",
-            () ->new Item(new Item.Properties()));
-    public static final RegistryObject<Item> ELDERDRAGONHEARTB = ITEMS.register("elderdragonheartb",
-            () ->new Item(new Item.Properties()));
-    public static final RegistryObject<Item> ELDERDRAGONHEARTW = ITEMS.register("elderdragonheartw",
-            () ->new Item(new Item.Properties()));
-
-
-
-
-
-
-
-
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }
