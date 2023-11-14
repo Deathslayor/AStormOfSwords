@@ -1,7 +1,7 @@
-package net.deathslayor.examplemod.ModItems.Client;
+package net.deathslayor.agotmod.ModItems.Client;
 
 
-import net.deathslayor.examplemod.ModItems.Custom.Stark1ArmorItem;
+import net.deathslayor.agotmod.ModItems.Custom.Stark1ArmorItem;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
 public class Stark1ArmorRenderer extends GeoArmorRenderer<Stark1ArmorItem> {

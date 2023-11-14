@@ -1,4 +1,4 @@
-package net.deathslayor.examplemod.ModItems.Custom;
+package net.deathslayor.agotmod.ModItems.Custom;
 
 import net.minecraft.Util;
 import net.minecraft.sounds.SoundEvent;

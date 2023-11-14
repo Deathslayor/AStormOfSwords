@@ -1,8 +1,8 @@
-package net.deathslayor.examplemod.ModItems.Custom;
+package net.deathslayor.agotmod.ModItems.Custom;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 
-import net.deathslayor.examplemod.ModItems.Client.Stark1ArmorRenderer;
+import net.deathslayor.agotmod.ModItems.Client.Stark1ArmorRenderer;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
