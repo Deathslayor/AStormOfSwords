@@ -1,5 +1,6 @@
 package net.deathslayor.agotmod.ModItems;
 import net.deathslayor.agotmod.AGoTMod;
+import net.deathslayor.agotmod.block.ModBLocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -16,30 +17,16 @@ public class Tabs {
                     .title(Component.translatable("creativetab.got_tab"))
                     .displayItems((pParameters, pOutput) ->{
 
-
                         pOutput.accept(ModItems.BATTLEAXE.get());
                         pOutput.accept(ModItems.GOTSWORD.get());
                         pOutput.accept(ModItems.NEDSWORD.get());
 
 
-
-
-
-
-
-
-
+                        //Blocks
+                        pOutput.accept(ModBLocks.MINT_BLOCK.get());
 
                     })
                     .build());
-
-
-
-
-
-
-
-
 
     public static void register(IEventBus eventBus) {
         CREATIVE_MODE_TAB.register(eventBus);

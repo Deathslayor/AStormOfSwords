@@ -1,6 +1,7 @@
 package net.deathslayor.agotmod;
 
 import com.mojang.logging.LogUtils;
+import net.deathslayor.agotmod.block.ModBLocks;
 import net.deathslayor.agotmod.villager.ModVillagers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
@@ -75,8 +76,9 @@ public class AGoTMod
         ITEMS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS.register(modEventBus);
-        // Register the Deferred Register to the mod event bus so Modded Villagers get registered
+
         ModVillagers.register(modEventBus);
+        //ModBLocks.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
