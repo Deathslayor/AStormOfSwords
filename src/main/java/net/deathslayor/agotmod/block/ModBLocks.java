@@ -1,7 +1,7 @@
 package net.deathslayor.agotmod.block;
 
 import net.deathslayor.agotmod.AGoTMod;
-import net.deathslayor.agotmod.ModItems.ModItems;
+import net.deathslayor.agotmod.item.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -16,7 +16,7 @@ import java.util.function.Supplier;
 
 public class ModBLocks {
     public static final DeferredRegister<Block> BLOCKS =
-            DeferredRegister.create(ForgeRegistries.BLOCKS, AGoTMod.MODID);
+            DeferredRegister.create(ForgeRegistries.BLOCKS, AGoTMod.MOD_ID);
 
     public static final RegistryObject<Block> MINT_BLOCK = registerBlock("mint_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));

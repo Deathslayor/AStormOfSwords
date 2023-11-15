@@ -1,16 +1,9 @@
 {
-  "item.examplemod.battleaxe": "Battle Axe",
-  "item.examplemod.gotsword": "Blackfyre",
-
-
 
   "block.agotmod.mint_block": "Mint Block",
 
 
 
 
-  "creativetab.got_tab": "GOT"
-
-
+  "creativetab.agot_tab": "AGoT Tab"
 }
-

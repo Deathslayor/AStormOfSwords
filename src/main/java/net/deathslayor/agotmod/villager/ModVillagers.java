@@ -9,9 +9,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModVillagers {
     public static final DeferredRegister<PoiType> POI_TYPE =
-            DeferredRegister.create(ForgeRegistries.POI_TYPES, AGoTMod.MODID);
+            DeferredRegister.create(ForgeRegistries.POI_TYPES, AGoTMod.MOD_ID);
     public static final DeferredRegister<VillagerProfession> VILLAGER_PROFESSIONs =
-            DeferredRegister.create(ForgeRegistries.VILLAGER_PROFESSIONS, AGoTMod.MODID);
+            DeferredRegister.create(ForgeRegistries.VILLAGER_PROFESSIONS, AGoTMod.MOD_ID);
 
 
 
