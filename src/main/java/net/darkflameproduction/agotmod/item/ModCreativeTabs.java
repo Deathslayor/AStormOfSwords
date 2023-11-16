@@ -1,7 +1,7 @@
-package net.deathslayor.agotmod.item;
+package net.darkflameproduction.agotmod.item;
 
-import net.deathslayor.agotmod.AGoTMod;
-import net.deathslayor.agotmod.block.ModBLocks;
+import net.darkflameproduction.agotmod.AGoTMod;
+import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;

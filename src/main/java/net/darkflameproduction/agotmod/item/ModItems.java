@@ -1,6 +1,6 @@
-package net.deathslayor.agotmod.item;
+package net.darkflameproduction.agotmod.item;
 
-import net.deathslayor.agotmod.AGoTMod;
+import net.darkflameproduction.agotmod.AGoTMod;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;

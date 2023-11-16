@@ -1,7 +1,7 @@
-package net.deathslayor.agotmod.block;
+package net.darkflameproduction.agotmod.block;
 
-import net.deathslayor.agotmod.AGoTMod;
-import net.deathslayor.agotmod.item.ModItems;
+import net.darkflameproduction.agotmod.AGoTMod;
+import net.darkflameproduction.agotmod.item.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;

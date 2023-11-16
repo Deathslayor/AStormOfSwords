@@ -1,8 +1,9 @@
-package net.deathslayor.agotmod.event;
+package net.darkflameproduction.agotmod.event;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import net.deathslayor.agotmod.AGoTMod;
-import net.deathslayor.agotmod.item.ModItems;
+import net.darkflameproduction.agotmod.AGoTMod;
+import net.darkflameproduction.agotmod.item.ModItems;
+import net.darkflameproduction.agotmod.villager.ModVillagers;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.item.ItemStack;
@@ -22,7 +23,7 @@ public class ModEvents {
     public static void addCustomTrades(VillagerTradesEvent event) {
 
         // Template for Future Usage STANDARD ITEMS trade
-        if (event.getType() == VillagerProfession.FARMER) {
+        if (event.getType() == ModVillagers.MINTER.get()) {
             Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
 
             // Level 1
@@ -63,7 +64,7 @@ public class ModEvents {
         }
     }
 
-    @SubscribeEvent
+    @SubscribeEvent // Adds custom trades for WANDERING TRADERS
     public static void addCustomWanderingTrades(WandererTradesEvent event) {
         // For generic trades aka what trades most often happens
         List<VillagerTrades.ItemListing> genericTrades = event.getGenericTrades();
