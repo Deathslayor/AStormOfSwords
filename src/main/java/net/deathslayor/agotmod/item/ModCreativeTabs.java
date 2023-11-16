@@ -10,20 +10,26 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
-public class Tabs {
+public class ModCreativeTabs {
+    // makes creating modded tabs possible
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TAB =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, AGoTMod.MOD_ID);
 
-
+    // Adding items into the MAIN mod tab in creative
     public static final RegistryObject<CreativeModeTab> AGOT_TAB = CREATIVE_MODE_TAB.register("agot_tab",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModBLocks.MINT_BLOCK.get()))
                     .title(Component.translatable("creativetab.agot_tab"))
                     .displayItems((pParameters, pOutput) -> {
-                        pOutput.accept(ModBLocks.MINT_BLOCK.get());
+                        // Blocks
+                        pOutput.accept(ModBLocks.MINT_BLOCK.get()); // Adds the mint Working station block for villagers
+
+                        // Items
+                        pOutput.accept(ModItems.COIN.get()); // Adds Default currency COIN used for trading with villagers
+
                     })
                     .build());
 
-
+    // tells the AGoTMod class to call the modded tabs into the game
     public static void register(IEventBus eventBus) {
         CREATIVE_MODE_TAB.register(eventBus);
     }

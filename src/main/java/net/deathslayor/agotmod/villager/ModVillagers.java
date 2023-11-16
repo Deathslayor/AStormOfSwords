@@ -8,15 +8,17 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModVillagers {
+
+    // makes creating custom possible
     public static final DeferredRegister<PoiType> POI_TYPE =
             DeferredRegister.create(ForgeRegistries.POI_TYPES, AGoTMod.MOD_ID);
-    public static final DeferredRegister<VillagerProfession> VILLAGER_PROFESSIONs =
+    public static final DeferredRegister<VillagerProfession> VILLAGER_PROFESSIONS =
             DeferredRegister.create(ForgeRegistries.VILLAGER_PROFESSIONS, AGoTMod.MOD_ID);
 
 
 
     public static void register(IEventBus eventBus) {
         POI_TYPE.register(eventBus);
-        VILLAGER_PROFESSIONs.register(eventBus);
+        VILLAGER_PROFESSIONS.register(eventBus);
     }
 }

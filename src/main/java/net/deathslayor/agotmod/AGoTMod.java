@@ -2,8 +2,9 @@ package net.deathslayor.agotmod;
 
 import com.mojang.logging.LogUtils;
 import net.deathslayor.agotmod.block.ModBLocks;
-import net.deathslayor.agotmod.item.Tabs;
+import net.deathslayor.agotmod.item.ModCreativeTabs;
 import net.deathslayor.agotmod.item.ModItems;
+import net.deathslayor.agotmod.villager.ModVillagers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -26,8 +27,9 @@ public class AGoTMod {
     public AGoTMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        Tabs.register(modEventBus);
+        ModCreativeTabs.register(modEventBus);
 
+        ModVillagers.register(modEventBus);
         ModBLocks.register(modEventBus);
         ModItems.register(modEventBus);
 
