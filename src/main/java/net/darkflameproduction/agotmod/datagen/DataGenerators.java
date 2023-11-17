@@ -16,11 +16,16 @@ import java.util.concurrent.CompletableFuture;
 public class DataGenerators {
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
+
+        // DON'T TOUCH DON'T ASK ME WHAT IT DOES ~Nugget
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+        // DON'T TOUCH DON'T ASK ME WHAT IT DOES ~Nugget
 
+
+        // Adds Villager Professions
         generator.addProvider(event.includeServer(), new ModPoiTypeTagsProvider(packOutput, lookupProvider, existingFileHelper));
     }
 }

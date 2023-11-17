@@ -11,11 +11,16 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
+
+// IDK what this does but its important don't touch ~Nugget
 public class ModPoiTypeTagsProvider extends PoiTypeTagsProvider {
     public ModPoiTypeTagsProvider(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> pProvider, @Nullable ExistingFileHelper existingFileHelper) {
         super(pOutput, pProvider, AGoTMod.MOD_ID, existingFileHelper);
     }
 
+
+
+    // Adds The job type to Minecraft
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
         tag(PoiTypeTags.ACQUIRABLE_JOB_SITE)
