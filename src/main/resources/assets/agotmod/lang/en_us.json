@@ -2,12 +2,18 @@
 
 
   "item.agotmod.coin" : "Coin",
+  "item.agotmod.stark1_helmet": "Stark Helmet",
+  "item.agotmod.stark1_chestplate": "Stark Chestplate",
+  "item.agotmod.stark1_leggings": "Stark Leggins",
+  "item.agotmod.stark1_boots": "Stark Boots",
 
 
   "block.agotmod.mint_block": "Mint Block",
 
 
   "entity.minecraft.villager.agotmod.minter": "Minter",
+
+
 
 
   "creativetab.agot_tab": "AGoT Tab"

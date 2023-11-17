@@ -25,6 +25,11 @@ public class ModCreativeTabs {
 
                         // Items
                         pOutput.accept(ModItems.COIN.get()); // Adds Default currency COIN used for trading with villagers
+                        // Armour
+                        pOutput.accept(ModItems.STARK1_HELMET.get());
+                        pOutput.accept(ModItems.STARK1_CHESTPLATE.get());
+                        pOutput.accept(ModItems.STARK1_LEGGINGS.get());
+                        pOutput.accept(ModItems.STARK1_BOOTS.get());
 
                     })
                     .build());
