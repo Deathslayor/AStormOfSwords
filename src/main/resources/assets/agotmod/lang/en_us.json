@@ -4,11 +4,17 @@
   "item.agotmod.coin" : "Coin",
   "item.agotmod.stark1_helmet": "Stark Helmet",
   "item.agotmod.stark1_chestplate": "Stark Chestplate",
-  "item.agotmod.stark1_leggings": "Stark Leggins",
+  "item.agotmod.stark1_leggings": "Stark Leggings",
   "item.agotmod.stark1_boots": "Stark Boots",
 
 
   "block.agotmod.mint_block": "Mint Block",
+  "block.agotmod.tin_ore": "Tin Ore",
+  "block.agotmod.raw_tin_block": "Raw Tin Block",
+  "block.agotmod.deepslate_tin_ore": "Deepslate Tin Ore",
+  "block.agotmod.bronze_block": "Bronze Block",
+  "block.agotmod.dark_stone_brick": "Dark Stone Bricks",
+  "block.agotmod.kings_landing_brick_large": "Kings Landing Large Brick",
 
 
   "entity.minecraft.villager.agotmod.minter": "Minter",

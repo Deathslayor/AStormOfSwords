@@ -24,6 +24,35 @@ public class ModBLocks {
     public static final RegistryObject<Block> MINT_BLOCK = registerBlock("mint_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
 
+    // ---------------------------(TIN)--------------------------- //
+    // TIN ORE
+    public static final RegistryObject<Block> TIN_ORE = registerBlock("tin_ore",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE)));
+    // RAW TIN ORE BLOCK
+    public static final RegistryObject<Block> RAW_TIN_BLOCK = registerBlock("raw_tin_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_COPPER_BLOCK)));
+    // DEEPSLATE TIN ORE
+    public static final RegistryObject<Block> DEEPSLATE_TIN_ORE = registerBlock("deepslate_tin_ore",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)));
+    // ---------------------------(TIN)--------------------------- //
+
+    // ---------------------------(BRONZE)--------------------------- //
+    // BRONZE BLOCK
+    public static final RegistryObject<Block> BRONZE_BLOCK = registerBlock("bronze_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
+    // ---------------------------(BRONZE)--------------------------- //
+
+    // ---------------------------(BRICKS)--------------------------- //
+    // DARK STONE BRICK
+    public static final RegistryObject<Block> DARK_STONE_BRICK = registerBlock("dark_stone_brick",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+    // KINGS LANDING BRICK LARGE
+    public static final RegistryObject<Block> KINGS_LANDING_BRICK_LARGE = registerBlock("kings_landing_brick_large",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+    // ---------------------------(BRICKS)--------------------------- //
+
+
+
 
     // Makes the block into an item that can be shown in your inventory
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {

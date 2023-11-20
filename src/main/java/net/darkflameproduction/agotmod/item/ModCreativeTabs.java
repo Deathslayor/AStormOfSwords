@@ -20,12 +20,21 @@ public class ModCreativeTabs {
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModBLocks.MINT_BLOCK.get()))
                     .title(Component.translatable("creativetab.agot_tab"))
                     .displayItems((pParameters, pOutput) -> {
-                        // Blocks
+                        /** Blocks */
                         pOutput.accept(ModBLocks.MINT_BLOCK.get()); // Adds the mint Working station block for villagers
+                        // TIN
+                        pOutput.accept(ModBLocks.TIN_ORE.get());
+                        pOutput.accept(ModBLocks.RAW_TIN_BLOCK.get());
+                        pOutput.accept(ModBLocks.DEEPSLATE_TIN_ORE.get());
+                        // BRONZE
+                        pOutput.accept(ModBLocks.BRONZE_BLOCK.get());
+                        // Bricks
+                        pOutput.accept(ModBLocks.DARK_STONE_BRICK.get());
+                        pOutput.accept(ModBLocks.KINGS_LANDING_BRICK_LARGE.get());
 
-                        // Items
+                        /** Items */
                         pOutput.accept(ModItems.COIN.get()); // Adds Default currency COIN used for trading with villagers
-                        // Armour
+                        /** Armour */
                         pOutput.accept(ModItems.STARK1_HELMET.get());
                         pOutput.accept(ModItems.STARK1_CHESTPLATE.get());
                         pOutput.accept(ModItems.STARK1_LEGGINGS.get());
