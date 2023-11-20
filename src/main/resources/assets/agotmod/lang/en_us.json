@@ -2,6 +2,9 @@
 
 
   "item.agotmod.coin" : "Coin",
+  "item.agotmod.tin_ingot": "Tin Ingot",
+  "item.agotmod.bronze_ingot": "Bronze Ingot",
+  "item.agotmod.raw_tin": "Raw Tin",
   "item.agotmod.stark1_helmet": "Stark Helmet",
   "item.agotmod.stark1_chestplate": "Stark Chestplate",
   "item.agotmod.stark1_leggings": "Stark Leggings",
@@ -15,6 +18,7 @@
   "block.agotmod.bronze_block": "Bronze Block",
   "block.agotmod.dark_stone_brick": "Dark Stone Bricks",
   "block.agotmod.kings_landing_brick_large": "Kings Landing Large Brick",
+  "block.agotmod.tin_block": "Tin Block",
 
 
   "entity.minecraft.villager.agotmod.minter": "Minter",

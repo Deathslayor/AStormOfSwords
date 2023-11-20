@@ -34,6 +34,9 @@ public class ModBLocks {
     // DEEPSLATE TIN ORE
     public static final RegistryObject<Block> DEEPSLATE_TIN_ORE = registerBlock("deepslate_tin_ore",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)));
+    // TIN BLOCK
+    public static final RegistryObject<Block> TIN_BLOCK = registerBlock("tin_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)));
     // ---------------------------(TIN)--------------------------- //
 
     // ---------------------------(BRONZE)--------------------------- //

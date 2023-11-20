@@ -26,14 +26,23 @@ public class ModCreativeTabs {
                         pOutput.accept(ModBLocks.TIN_ORE.get());
                         pOutput.accept(ModBLocks.RAW_TIN_BLOCK.get());
                         pOutput.accept(ModBLocks.DEEPSLATE_TIN_ORE.get());
+                        pOutput.accept(ModBLocks.TIN_BLOCK.get());
                         // BRONZE
                         pOutput.accept(ModBLocks.BRONZE_BLOCK.get());
                         // Bricks
                         pOutput.accept(ModBLocks.DARK_STONE_BRICK.get());
+                        // Kings LANDING BRICKS
                         pOutput.accept(ModBLocks.KINGS_LANDING_BRICK_LARGE.get());
 
                         /** Items */
-                        pOutput.accept(ModItems.COIN.get()); // Adds Default currency COIN used for trading with villagers
+                        // COINS
+                        pOutput.accept(ModItems.COIN.get());
+
+                        // INGOTS
+                        pOutput.accept(ModItems.TIN_INGOT.get());
+                        pOutput.accept(ModItems.RAW_TIN.get());
+                        pOutput.accept(ModItems.BRONZE_INGOT.get());
+
                         /** Armour */
                         pOutput.accept(ModItems.STARK1_HELMET.get());
                         pOutput.accept(ModItems.STARK1_CHESTPLATE.get());
@@ -47,4 +56,15 @@ public class ModCreativeTabs {
     public static void register(IEventBus eventBus) {
         CREATIVE_MODE_TAB.register(eventBus);
     }
+    /*
+    private void createBlocks() {
+
+    }
+    private void createArmour() {
+
+    }
+    private void createItems() {
+
+    }
+     */
 }

@@ -17,10 +17,13 @@ public class ModItems {
 
     // Here I am adding the items
 
+    // ---------------------------(COINS)--------------------------- //
     // Main currency Coin
     public static final RegistryObject<Item> COIN = ITEMS.register("coin",
             () -> new Item(new Item.Properties()));
+    // ---------------------------(COINS)--------------------------- //
 
+    // ---------------------------(ARMOUR)--------------------------- //
     // Adding tier 1 STARK Armour
     public static final RegistryObject<Item> STARK1_HELMET = ITEMS.register("stark1_helmet",
             () ->new Stark1ArmorItem(ModArmorMaterials.STARK1, ArmorItem.Type.HELMET,new Item.Properties()));
@@ -33,6 +36,21 @@ public class ModItems {
 
     public static final RegistryObject<Item> STARK1_BOOTS = ITEMS.register("stark1_boots",
             () ->new Stark1ArmorItem(ModArmorMaterials.STARK1, ArmorItem.Type.BOOTS,new Item.Properties()));
+    // ---------------------------(ARMOUR)--------------------------- //
+
+    // ---------------------------(INGOTS)--------------------------- //
+    // TIN INGOT
+    public static final RegistryObject<Item> TIN_INGOT = ITEMS.register("tin_ingot",
+            () -> new Item(new Item.Properties()));
+    // RAW TIN
+    public static final RegistryObject<Item> RAW_TIN = ITEMS.register("raw_tin",
+            () -> new Item(new Item.Properties()));
+    // BRONZE INGOT
+    public static final RegistryObject<Item> BRONZE_INGOT = ITEMS.register("bronze_ingot",
+            () -> new Item(new Item.Properties()));
+    // ---------------------------(INGOTS)--------------------------- //
+
+
 
 
     // tells the AGoTMod class to call the modded items into the game
