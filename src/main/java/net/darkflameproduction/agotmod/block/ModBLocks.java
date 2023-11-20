@@ -2,10 +2,12 @@ package net.darkflameproduction.agotmod.block;
 
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.item.ModItems;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -27,13 +29,15 @@ public class ModBLocks {
     // ---------------------------(TIN)--------------------------- //
     // TIN ORE
     public static final RegistryObject<Block> TIN_ORE = registerBlock("tin_ore",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE)));
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE)
+                    .strength(2f).requiresCorrectToolForDrops(), UniformInt.of(3, 6)));
     // RAW TIN ORE BLOCK
     public static final RegistryObject<Block> RAW_TIN_BLOCK = registerBlock("raw_tin_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_COPPER_BLOCK)));
     // DEEPSLATE TIN ORE
     public static final RegistryObject<Block> DEEPSLATE_TIN_ORE = registerBlock("deepslate_tin_ore",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)));
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE)
+                    .strength(3f).requiresCorrectToolForDrops(), UniformInt.of(3, 6)));
     // TIN BLOCK
     public static final RegistryObject<Block> TIN_BLOCK = registerBlock("tin_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)));
