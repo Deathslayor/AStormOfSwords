@@ -30,6 +30,7 @@ public class ModCreativeTabs {
                         // BRONZE
                         pOutput.accept(ModBLocks.BRONZE_BLOCK.get());
                         // Bricks
+                        pOutput.accept(ModBLocks.STONE_BRICK_BUT_COOLER.get());
                         pOutput.accept(ModBLocks.DARK_STONE_BRICK.get());
                         // Kings LANDING BRICKS
                         pOutput.accept(ModBLocks.KINGS_LANDING_BRICK_LARGE.get());

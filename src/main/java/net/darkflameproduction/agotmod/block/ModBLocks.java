@@ -18,7 +18,7 @@ import java.util.function.Supplier;
 
 public class ModBLocks {
     // Makes creating items possible
-    private static final DeferredRegister<Block> BLOCKS =
+    public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, AGoTMod.MOD_ID);
     // Here I am adding the blocks
 
@@ -55,6 +55,9 @@ public class ModBLocks {
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
     // KINGS LANDING BRICK LARGE
     public static final RegistryObject<Block> KINGS_LANDING_BRICK_LARGE = registerBlock("kings_landing_brick_large",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+    // ROUNDED STONE BRICK
+    public static final RegistryObject<Block> STONE_BRICK_BUT_COOLER = registerBlock("stone_brick_but_cooler",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
     // ---------------------------(BRICKS)--------------------------- //
 

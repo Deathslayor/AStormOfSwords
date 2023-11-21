@@ -1,0 +1,4 @@
+// 1.20.1	2023-11-21T15:16:19.3412744	Tags for minecraft:block mod id agotmod
+6f23951949595183704ab8f7db4cb60761d044b1 data/minecraft/tags/blocks/mineable/pickaxe.json
+add20b0e5782888ccfc35ca325ac5a1c2e39f150 data/minecraft/tags/blocks/needs_iron_tool.json
+1d362ae9180c50329f003c4f281866a2b676dd0d data/minecraft/tags/blocks/needs_stone_tool.json
