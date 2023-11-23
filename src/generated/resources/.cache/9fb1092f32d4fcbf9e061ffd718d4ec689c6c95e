@@ -1,4 +1,4 @@
-// 1.20.1	2023-11-21T15:52:17.5049418	Recipes
+// 1.20.1	2023-11-23T22:32:48.7373946	Recipes
 eab80ffb2af1e11dd32c12177cf4b8577cb9b5b6 data/agotmod/advancements/recipes/misc/bronze_block.json
 81c1fe53fcb31496e6d254a4db92b3f66e2f61fd data/agotmod/advancements/recipes/misc/bronze_ingot.json
 8f3b66bf11531078fbb7dee0f82637c9b5070a80 data/agotmod/advancements/recipes/misc/raw_tin.json
@@ -11,8 +11,18 @@ c4719f901b5462b1dbafbd768c489c8fccd57c5e data/agotmod/advancements/recipes/misc/
 3aae538fa4c88a91429fad66e55e23c1196b6e5f data/agotmod/advancements/recipes/misc/tin_ingot_from_smelting_deepslate_tin_ore.json
 fd9b53437cb451fdd2d739f56f15471aa43c3e24 data/agotmod/advancements/recipes/misc/tin_ingot_from_smelting_raw_tin.json
 6d4e5c96a29928941dae30a44a38532046997be7 data/agotmod/advancements/recipes/misc/tin_ingot_from_smelting_tin_ore.json
+145c59e3f4907cb220b87cd1ff9ee6628eaaa70f data/agotmod/advancements/recipes/tools/bronze_axe.json
+a24a37f906868736d25e72b90af583f05d994f8f data/agotmod/advancements/recipes/tools/bronze_hoe.json
+54ca2662712dc101a943e86504cb95a7adb4e0c4 data/agotmod/advancements/recipes/tools/bronze_pickaxe.json
+5540751c5688d63c342244488ef7618032a6fc32 data/agotmod/advancements/recipes/tools/bronze_shovel.json
+389395a30ccb8e7ed15955313a836a008823f0b6 data/agotmod/advancements/recipes/tools/bronze_sword.json
+5b796592227eb92a52de4f0b6917c26463b710df data/agotmod/recipes/bronze_axe.json
 4a587a97dc926eda93006c1b9257c80d10807eff data/agotmod/recipes/bronze_block.json
+c2b8d3bf390f615fa71ae939d4ab4274203ed275 data/agotmod/recipes/bronze_hoe.json
 a21fb0ca8b54af67f12701b507a25f0328bf9186 data/agotmod/recipes/bronze_ingot.json
+c79f9264bf623d9d511445e9e16e01981935c6e9 data/agotmod/recipes/bronze_pickaxe.json
+232edc022e273638f3b76958167a3673b0f00b3f data/agotmod/recipes/bronze_shovel.json
+291e9e880c97d05a0af7cd63b3921f770f69aba0 data/agotmod/recipes/bronze_sword.json
 53ec99bae42af27e44678eb4db9b3f9772d99bb3 data/agotmod/recipes/raw_tin.json
 5adc7759822ca11dae9aee69ce27aa687ced71b9 data/agotmod/recipes/raw_tin_block.json
 8a629c50cf45a335d09dfad1242d46b77f7af211 data/agotmod/recipes/tin_block.json

@@ -11,6 +11,13 @@
   "item.agotmod.stark1_boots": "Stark Boots",
 
 
+  "item.agotmod.bronze_sword": "Bronze Sword",
+  "item.agotmod.bronze_pickaxe": "Bronze Pickaxe",
+  "item.agotmod.bronze_axe": "Bronze Axe",
+  "item.agotmod.bronze_shovel": "Bronze Shovel",
+  "item.agotmod.bronze_hoe": "Bronze Hoe",
+
+
   "block.agotmod.mint_block": "Mint Block",
   "block.agotmod.tin_ore": "Tin Ore",
   "block.agotmod.raw_tin_block": "Raw Tin Block",
