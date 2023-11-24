@@ -59,6 +59,7 @@ public class ModCreativeTabs {
                         pOutput.accept(ModItems.BRONZE_HOE.get());
                         pOutput.accept(ModItems.BRONZE_PICKAXE.get());
                         pOutput.accept(ModItems.BRONZE_SHOVEL.get());
+                        pOutput.accept(ModItems.BRONZE_SPATHA.get());
 
                     })
                     .build());

@@ -59,15 +59,17 @@ public class ModItems {
     // ---------------------------(TOOLS)--------------------------- //
     // Bronze TOOLS
     public static final RegistryObject<Item> BRONZE_SWORD = ITEMS.register("bronze_sword",
-            () -> new SwordItem(ModToolTiers.BRONZE, 5, 1.4F, new Item.Properties()));
+            () -> new SwordItem(ModToolTiers.BRONZE, 3, 1, new Item.Properties()));
     public static final RegistryObject<Item> BRONZE_PICKAXE = ITEMS.register("bronze_pickaxe",
-            () -> new PickaxeItem(ModToolTiers.BRONZE, 1, 1, new Item.Properties()));
+            () -> new PickaxeItem(ModToolTiers.BRONZE, 0, 0, new Item.Properties()));
     public static final RegistryObject<Item> BRONZE_SHOVEL = ITEMS.register("bronze_shovel",
             () -> new ShovelItem(ModToolTiers.BRONZE, 0, 0, new Item.Properties()));
     public static final RegistryObject<Item> BRONZE_AXE = ITEMS.register("bronze_axe",
-            () -> new AxeItem(ModToolTiers.BRONZE, 7, 0.9F, new Item.Properties()));
+            () -> new AxeItem(ModToolTiers.BRONZE, 5.5F, 0.9F, new Item.Properties()));
     public static final RegistryObject<Item> BRONZE_HOE = ITEMS.register("bronze_hoe",
             () -> new HoeItem(ModToolTiers.BRONZE, 0, 0, new Item.Properties()));
+    public static final RegistryObject<Item> BRONZE_SPATHA = ITEMS.register("bronze_spatha",
+            () -> new SwordItem(ModToolTiers.BRONZE, 6, .5F, new Item.Properties()));
     // ---------------------------(TOOLS)--------------------------- //
 
 
