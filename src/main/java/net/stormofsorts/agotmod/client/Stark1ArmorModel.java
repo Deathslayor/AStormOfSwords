@@ -14,7 +14,7 @@ public class Stark1ArmorModel extends GeoModel<Stark1ArmorItem>{
 
     @Override
     public ResourceLocation getTextureResource(Stark1ArmorItem object) {
-        return new ResourceLocation(AGoTMod.MOD_ID, "textures/armor/stark1.png");
+        return new ResourceLocation(AGoTMod.MOD_ID, "textures/item/armor/stark1.png");
     }
 
     @Override
