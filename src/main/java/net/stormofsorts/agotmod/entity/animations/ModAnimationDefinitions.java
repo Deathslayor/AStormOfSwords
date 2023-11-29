@@ -6,6 +6,7 @@ import net.minecraft.client.animation.Keyframe;
 import net.minecraft.client.animation.KeyframeAnimations;
 
 public class ModAnimationDefinitions {
+    /** ---------------------------(Rhino Animations)--------------------------- // */
     public static final AnimationDefinition RHINO_IDLE = AnimationDefinition.Builder.withLength(2f).looping()
             .addAnimation("rhino",
                     new AnimationChannel(AnimationChannel.Targets.POSITION,
@@ -366,4 +367,5 @@ public class ModAnimationDefinitions {
                     new AnimationChannel(AnimationChannel.Targets.POSITION,
                             new Keyframe(0f, KeyframeAnimations.posVec(0f, 0f, 2f),
                                     AnimationChannel.Interpolations.LINEAR))).build();
+    /** ---------------------------(Rhino Animations)--------------------------- // */
 }
