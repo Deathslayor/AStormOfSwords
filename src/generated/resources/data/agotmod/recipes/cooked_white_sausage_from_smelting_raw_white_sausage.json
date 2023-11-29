@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.25,
+  "group": "meat",
+  "ingredient": {
+    "item": "agotmod:raw_white_sausage"
+  },
+  "result": "agotmod:cooked_white_sausage"
+}

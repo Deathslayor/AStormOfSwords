@@ -61,6 +61,16 @@ public class ModCreativeTabs {
                         pOutput.accept(ModItems.BRONZE_SHOVEL.get());
                         pOutput.accept(ModItems.BRONZE_SPATHA.get());
 
+                        /** FOODS */
+                        pOutput.accept(ModItems.RAW_BEAR_MEAT.get());
+                        pOutput.accept(ModItems.COOKED_BEAR_MEAT.get());
+                        pOutput.accept(ModItems.RAW_SAUSAGE.get());
+                        pOutput.accept(ModItems.RAW_BLOOD_SAUSAGE.get());
+                        pOutput.accept(ModItems.COOKED_WHITE_SAUSAGE.get());
+                        pOutput.accept(ModItems.COOKED_SAUSAGE.get());
+                        pOutput.accept(ModItems.RAW_WHITE_SAUSAGE.get());
+                        pOutput.accept(ModItems.COOKED_BLOOD_SAUSAGE.get());
+
                     })
                     .build());
 

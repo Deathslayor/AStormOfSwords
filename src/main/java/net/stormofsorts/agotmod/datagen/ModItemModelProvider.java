@@ -1,5 +1,6 @@
 package net.stormofsorts.agotmod.datagen;
 
+import net.minecraft.world.item.SaddleItem;
 import net.stormofsorts.agotmod.AGoTMod;
 import net.stormofsorts.agotmod.item.ModItems;
 import net.minecraft.data.PackOutput;
@@ -46,6 +47,17 @@ public class ModItemModelProvider extends ItemModelProvider {
         handheldItem(ModItems.BRONZE_SHOVEL);
 
         // ---------------------------(TOOLS)--------------------------- //
+
+        // ---------------------------(FOODS)--------------------------- //
+        simpleItem(ModItems.RAW_BEAR_MEAT);
+        simpleItem(ModItems.COOKED_BEAR_MEAT);
+        simpleItem(ModItems.RAW_SAUSAGE);
+        simpleItem(ModItems.RAW_WHITE_SAUSAGE);
+        simpleItem(ModItems.RAW_BLOOD_SAUSAGE);
+        simpleItem(ModItems.COOKED_SAUSAGE);
+        simpleItem(ModItems.COOKED_BLOOD_SAUSAGE);
+        simpleItem(ModItems.COOKED_WHITE_SAUSAGE);
+        // ---------------------------(FOODS)--------------------------- //
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {

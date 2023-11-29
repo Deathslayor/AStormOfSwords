@@ -1,5 +1,6 @@
 package net.stormofsorts.agotmod.datagen;
 
+import net.minecraft.world.level.block.Block;
 import net.stormofsorts.agotmod.AGoTMod;
 import net.stormofsorts.agotmod.block.ModBLocks;
 import net.stormofsorts.agotmod.item.ModItems;
@@ -13,6 +14,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -142,6 +144,32 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         // -------------------------------------------------(BRONZE)------------------------------------------------- //
 
 
+
+        // -------------------------------------------------(STONE CUTTER)------------------------------------------------- //
+        stonecutting(Ingredient.of(Blocks.STONE_BRICKS),RecipeCategory.BUILDING_BLOCKS, ModBLocks.DARK_STONE_BRICK.get())
+                .unlockedBy(getHasName(Blocks.STONE_BRICKS), has(Blocks.STONE_BRICKS))
+                .save(pWriter);
+        stonecutting(Ingredient.of(Blocks.STONE_BRICKS),RecipeCategory.BUILDING_BLOCKS, ModBLocks.STONE_BRICK_BUT_COOLER.get())
+                .unlockedBy(getHasName(Blocks.STONE_BRICKS), has(Blocks.STONE_BRICKS))
+                .save(pWriter);
+        stonecutting(Ingredient.of(Blocks.STONE_BRICKS),RecipeCategory.BUILDING_BLOCKS, ModBLocks.KINGS_LANDING_BRICK_LARGE.get())
+                .unlockedBy(getHasName(Blocks.STONE_BRICKS), has(Blocks.STONE_BRICKS))
+                .save(pWriter);
+        // -------------------------------------------------(STONE CUTTER)------------------------------------------------- //
+
+
+
+        // -------------------------------------------------(FOODS)------------------------------------------------- //
+        oreSmelting(pWriter, Collections.singletonList(ModItems.RAW_BEAR_MEAT.get()), RecipeCategory.FOOD, ModItems.COOKED_BEAR_MEAT.get(), 0.25f, 200, "meat");
+        oreSmelting(pWriter, Collections.singletonList(ModItems.RAW_SAUSAGE.get()), RecipeCategory.FOOD, ModItems.COOKED_SAUSAGE.get(), 0.25f, 200, "meat");
+        oreSmelting(pWriter, Collections.singletonList(ModItems.RAW_BLOOD_SAUSAGE.get()), RecipeCategory.FOOD, ModItems.COOKED_BLOOD_SAUSAGE.get(), 0.25f, 200, "meat");
+        oreSmelting(pWriter, Collections.singletonList(ModItems.RAW_WHITE_SAUSAGE.get()), RecipeCategory.FOOD, ModItems.COOKED_WHITE_SAUSAGE.get(), 0.25f, 200, "meat");
+        // -------------------------------------------------(FOODS)------------------------------------------------- //
+
+
+    }
+    public static SingleItemRecipeBuilder stonecutting(Ingredient pIngredient, RecipeCategory pCategory, ItemLike pResult) {
+        return new SingleItemRecipeBuilder(pCategory, RecipeSerializer.STONECUTTER, pIngredient, pResult, 1);
     }
 
     protected static void oreSmelting(Consumer<FinishedRecipe> pFinishedRecipeConsumer, List<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult, float pExperience, int pCookingTIme, String pGroup) {
@@ -159,6 +187,5 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                     .group(pGroup).unlockedBy(getHasName(itemlike), has(itemlike))
                     .save(pFinishedRecipeConsumer, AGoTMod.MOD_ID + ":" + getItemName(pResult) + pRecipeName + "_" + getItemName(itemlike));
         }
-
     }
 }

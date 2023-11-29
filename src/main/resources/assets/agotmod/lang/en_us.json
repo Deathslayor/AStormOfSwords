@@ -11,6 +11,16 @@
   "item.agotmod.stark1_boots": "Stark Boots",
 
 
+  "item.agotmod.raw_bear_meat": "Raw Bear Meat",
+  "item.agotmod.cooked_bear_meat": "Cooked Bear Meat",
+  "item.agotmod.raw_blood_sausage": "Raw Blood Sausage",
+  "item.agotmod.cooked_blood_sausage": "Cooked Blood Sausage",
+  "item.agotmod.raw_white_sausage": "Raw White Sausage",
+  "item.agotmod.cooked_white_sausage": "Cooked White Sausage",
+  "item.agotmod.raw_sausage": "Raw Sausage",
+  "item.agotmod.cooked_sausage": "Cooked Sausage",
+
+
   "item.agotmod.bronze_sword": "Bronze Sword",
   "item.agotmod.bronze_pickaxe": "Bronze Pickaxe",
   "item.agotmod.bronze_axe": "Bronze Axe",

@@ -72,6 +72,25 @@ public class ModItems {
             () -> new SwordItem(ModToolTiers.BRONZE, 6, .5F, new Item.Properties()));
     // ---------------------------(TOOLS)--------------------------- //
 
+    // ---------------------------(FOODS)--------------------------- //
+    public static final RegistryObject<Item> RAW_BEAR_MEAT = ITEMS.register("raw_bear_meat",
+            () -> new Item(new Item.Properties().food(ModFoods.RAW_BEAR_MEAT)));
+    public static final RegistryObject<Item> COOKED_BEAR_MEAT = ITEMS.register("cooked_bear_meat",
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+    public static final RegistryObject<Item> COOKED_WHITE_SAUSAGE = ITEMS.register("cooked_white_sausage",
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+    public static final RegistryObject<Item> COOKED_BLOOD_SAUSAGE = ITEMS.register("cooked_blood_sausage",
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+    public static final RegistryObject<Item> COOKED_SAUSAGE = ITEMS.register("cooked_sausage",
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+    public static final RegistryObject<Item> RAW_WHITE_SAUSAGE = ITEMS.register("raw_white_sausage",
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+    public static final RegistryObject<Item> RAW_BLOOD_SAUSAGE = ITEMS.register("raw_blood_sausage",
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+    public static final RegistryObject<Item> RAW_SAUSAGE = ITEMS.register("raw_sausage",
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+    // ---------------------------(FOODS)--------------------------- //
+
 
 
 
