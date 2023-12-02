@@ -3,6 +3,8 @@
 
   "item.agotmod.coin" : "Coin",
   "item.agotmod.tin_ingot": "Tin Ingot",
+  "item.agotmod.steel_ingot": "Steel Ingot",
+  "item.agotmod.steel_nugget": "Steel Nugget",
   "item.agotmod.bronze_ingot": "Bronze Ingot",
   "item.agotmod.raw_tin": "Raw Tin",
   "item.agotmod.stark1_helmet": "Stark Helmet",
@@ -28,6 +30,11 @@
   "item.agotmod.bronze_hoe": "Bronze Hoe",
   "item.agotmod.bronze_spatha": "Bronze Spatha",
 
+  "item.agotmod.steel_sword": "Steel Sword",
+  "item.agotmod.steel_pickaxe": "Steel Pickaxe",
+  "item.agotmod.steel_axe": "Steel Axe",
+  "item.agotmod.steel_shovel": "Steel Shovel",
+  "item.agotmod.steel_hoe": "Steel Hoe",
 
   "block.agotmod.mint_block": "Mint Block",
   "block.agotmod.tin_ore": "Tin Ore",

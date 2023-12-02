@@ -1,5 +1,6 @@
 package net.stormofsorts.agotmod.datagen;
 
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.stormofsorts.agotmod.AGoTMod;
 import net.stormofsorts.agotmod.block.ModBLocks;
@@ -142,6 +143,81 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
         // ---------------------------(CRAFTING)--------------------------- //
         // -------------------------------------------------(BRONZE)------------------------------------------------- //
+
+
+
+        // -------------------------------------------------(STEEL)------------------------------------------------- //
+        // STEEL INGOT
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.STEEL_INGOT.get(), 2)
+                .pattern("III")
+                .pattern("ICC")
+                .pattern("CC ")
+                .define('I', Items.IRON_INGOT)
+                .define('C', Items.COAL)
+                .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
+                .save(pWriter, "steel_with_coal");
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.STEEL_INGOT.get(), 2)
+                .pattern("III")
+                .pattern("ICC")
+                .pattern("CC ")
+                .define('I', Items.IRON_INGOT)
+                .define('C', Items.CHARCOAL)
+                .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
+                .save(pWriter, "steel_with_charcoal");
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.STEEL_INGOT.get())
+                .pattern("SSS")
+                .pattern("SSS")
+                .pattern("SSS")
+                .define('S', ModItems.STEEL_NUGGET.get())
+                .unlockedBy(getHasName(ModItems.STEEL_NUGGET.get()), has(ModItems.STEEL_NUGGET.get()))
+                .save(pWriter, "steel_from_nuggets");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.STEEL_NUGGET.get(), 9)
+                .requires(ModItems.STEEL_INGOT.get())
+                .unlockedBy(getHasName(ModItems.STEEL_INGOT.get()), has(ModItems.STEEL_INGOT.get()))
+                .save(pWriter, "nuggets_from_steel");
+
+        // BRONZE TOOLS
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.STEEL_PICKAXE.get())
+                .pattern("BBB")
+                .pattern(" S ")
+                .pattern(" S ")
+                .define('S', Items.STICK)
+                .define('B', ModItems.STEEL_INGOT.get())
+                .unlockedBy(getHasName(ModItems.STEEL_INGOT.get()), has(ModItems.STEEL_INGOT.get()))
+                .save(pWriter);
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.STEEL_AXE.get())
+                .pattern("BB")
+                .pattern("BS")
+                .pattern(" S")
+                .define('S', Items.STICK)
+                .define('B', ModItems.STEEL_INGOT.get())
+                .unlockedBy(getHasName(ModItems.STEEL_INGOT.get()), has(ModItems.STEEL_INGOT.get()))
+                .save(pWriter);
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.STEEL_SHOVEL.get())
+                .pattern("B")
+                .pattern("S")
+                .pattern("S")
+                .define('S', Items.STICK)
+                .define('B', ModItems.STEEL_INGOT.get())
+                .unlockedBy(getHasName(ModItems.STEEL_INGOT.get()), has(ModItems.STEEL_INGOT.get()))
+                .save(pWriter);
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.STEEL_HOE.get())
+                .pattern("BB")
+                .pattern(" S")
+                .pattern(" S")
+                .define('S', Items.STICK)
+                .define('B', ModItems.STEEL_INGOT.get())
+                .unlockedBy(getHasName(ModItems.STEEL_INGOT.get()), has(ModItems.STEEL_INGOT.get()))
+                .save(pWriter);
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.STEEL_SWORD.get())
+                .pattern("B")
+                .pattern("B")
+                .pattern("S")
+                .define('S', Items.STICK)
+                .define('B', ModItems.STEEL_INGOT.get())
+                .unlockedBy(getHasName(ModItems.STEEL_INGOT.get()), has(ModItems.STEEL_INGOT.get()))
+                .save(pWriter);
+        // -------------------------------------------------(STEEL)------------------------------------------------- //
 
 
 

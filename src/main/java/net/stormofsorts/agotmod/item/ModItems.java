@@ -39,7 +39,7 @@ public class ModItems {
             () ->new Stark1ArmorItem(ModArmorMaterials.STARK1, ArmorItem.Type.BOOTS,new Item.Properties()));
     // ---------------------------(ARMOUR)--------------------------- //
 
-    // ---------------------------(INGOTS)--------------------------- //
+    // ---------------------------(INGOTS/NUGGETS)--------------------------- //
     // TIN INGOT
     public static final RegistryObject<Item> TIN_INGOT = ITEMS.register("tin_ingot",
             () -> new Item(new Item.Properties()));
@@ -48,6 +48,12 @@ public class ModItems {
             () -> new Item(new Item.Properties()));
     // BRONZE INGOT
     public static final RegistryObject<Item> BRONZE_INGOT = ITEMS.register("bronze_ingot",
+            () -> new Item(new Item.Properties()));
+
+    // STEEL INGOT
+    public static final RegistryObject<Item> STEEL_INGOT = ITEMS.register("steel_ingot",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> STEEL_NUGGET = ITEMS.register("steel_nugget",
             () -> new Item(new Item.Properties()));
     // ---------------------------(INGOTS)--------------------------- //
 
@@ -70,6 +76,19 @@ public class ModItems {
             () -> new HoeItem(ModToolTiers.BRONZE, 0, 0, new Item.Properties()));
     public static final RegistryObject<Item> BRONZE_SPATHA = ITEMS.register("bronze_spatha",
             () -> new SwordItem(ModToolTiers.BRONZE, 6, .5F, new Item.Properties()));
+
+
+    // Steel TOOLS
+    public static final RegistryObject<Item> STEEL_SWORD = ITEMS.register("steel_sword",
+            () -> new SwordItem(ModToolTiers.STEEL, 4, 2, new Item.Properties()));
+    public static final RegistryObject<Item> STEEL_PICKAXE = ITEMS.register("steel_pickaxe",
+            () -> new PickaxeItem(ModToolTiers.STEEL, 1, 1, new Item.Properties()));
+    public static final RegistryObject<Item> STEEL_SHOVEL = ITEMS.register("steel_shovel",
+            () -> new ShovelItem(ModToolTiers.STEEL, 0, 0, new Item.Properties()));
+    public static final RegistryObject<Item> STEEL_AXE = ITEMS.register("steel_axe",
+            () -> new AxeItem(ModToolTiers.STEEL, 7, 1, new Item.Properties()));
+    public static final RegistryObject<Item> STEEL_HOE = ITEMS.register("steel_hoe",
+            () -> new HoeItem(ModToolTiers.STEEL, 0, 0, new Item.Properties()));
     // ---------------------------(TOOLS)--------------------------- //
 
     // ---------------------------(FOODS)--------------------------- //

@@ -33,6 +33,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.RAW_TIN);
         simpleItem(ModItems.TIN_INGOT);
         simpleItem(ModItems.BRONZE_INGOT);
+        simpleItem(ModItems.STEEL_INGOT);
+        simpleItem(ModItems.STEEL_NUGGET);
         // ---------------------------(INGOTS)--------------------------- //
 
         // ---------------------------(ANIMAL SPAWN EGGS)--------------------------- //
@@ -45,6 +47,11 @@ public class ModItemModelProvider extends ItemModelProvider {
         handheldItem(ModItems.BRONZE_HOE);
         handheldItem(ModItems.BRONZE_SWORD);
         handheldItem(ModItems.BRONZE_SHOVEL);
+        handheldItem(ModItems.STEEL_AXE);
+        handheldItem(ModItems.STEEL_PICKAXE);
+        handheldItem(ModItems.STEEL_HOE);
+        handheldItem(ModItems.STEEL_SWORD);
+        handheldItem(ModItems.STEEL_SHOVEL);
 
         // ---------------------------(TOOLS)--------------------------- //
 

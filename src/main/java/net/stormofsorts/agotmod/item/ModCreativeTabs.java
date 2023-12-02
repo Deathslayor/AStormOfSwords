@@ -43,6 +43,8 @@ public class ModCreativeTabs {
                         pOutput.accept(ModItems.TIN_INGOT.get());
                         pOutput.accept(ModItems.RAW_TIN.get());
                         pOutput.accept(ModItems.BRONZE_INGOT.get());
+                        pOutput.accept(ModItems.STEEL_INGOT.get());
+                        pOutput.accept(ModItems.STEEL_NUGGET.get());
 
                         /** Armour */
                         pOutput.accept(ModItems.STARK1_HELMET.get());
@@ -60,6 +62,12 @@ public class ModCreativeTabs {
                         pOutput.accept(ModItems.BRONZE_PICKAXE.get());
                         pOutput.accept(ModItems.BRONZE_SHOVEL.get());
                         pOutput.accept(ModItems.BRONZE_SPATHA.get());
+
+                        pOutput.accept(ModItems.STEEL_SWORD.get());
+                        pOutput.accept(ModItems.STEEL_AXE.get());
+                        pOutput.accept(ModItems.STEEL_HOE.get());
+                        pOutput.accept(ModItems.STEEL_PICKAXE.get());
+                        pOutput.accept(ModItems.STEEL_SHOVEL.get());
 
                         /** FOODS */
                         pOutput.accept(ModItems.RAW_BEAR_MEAT.get());

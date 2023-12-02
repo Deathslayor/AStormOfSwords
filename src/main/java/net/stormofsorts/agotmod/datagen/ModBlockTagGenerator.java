@@ -72,7 +72,6 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         /** // ---------------------------(IRON TOOL)--------------------------- // */
 
 
-
         /** // ---------------------------(BRONZE TOOL)--------------------------- // */
         this.tag(ModTags.Blocks.NEEDS_BRONZE_TOOL)
                 .add(ModBLocks.MINT_BLOCK.get());
@@ -83,6 +82,18 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         /** // ---------------------------(DIAMOND TOOL)--------------------------- // */
 
         /** // ---------------------------(DIAMOND TOOL)--------------------------- // */
+
+
+
+        /** // ---------------------------(NETHERITE TOOL)--------------------------- // */
+
+        /** // ---------------------------(NETHERITE TOOL)--------------------------- // */
+
+
+
+        /** // ---------------------------(STEEL TOOL)--------------------------- // */
+
+        /** // ---------------------------(STEEL TOOL)--------------------------- // */
 
     }
 

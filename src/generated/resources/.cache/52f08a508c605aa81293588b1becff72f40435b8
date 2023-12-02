@@ -1,4 +1,4 @@
-// 1.20.1	2023-11-29T23:15:51.380753	Item Models: agotmod
+// 1.20.1	2023-12-02T16:07:30.2296376	Item Models: agotmod
 0dab22b088410722aac001ac40df80dbd863484e assets/agotmod/models/item/bronze_axe.json
 d7e33c38c6093c1a67c74158ee7bde9b9c074c1f assets/agotmod/models/item/bronze_hoe.json
 aba50e705591db3e25fb0f58603f57d416ef2e83 assets/agotmod/models/item/bronze_ingot.json
@@ -20,4 +20,11 @@ c2bdbd085d2abe7f81cba70517ee0248004ea1ca assets/agotmod/models/item/cooked_bear_
 1ed0598bc9f4cb12f5d5dd69876df1786da4af37 assets/agotmod/models/item/stark1_chestplate.json
 608b9824d603bc2fa01681e35b8071ed9173634f assets/agotmod/models/item/stark1_helmet.json
 4ecc7c6cc56fdc8ee971c4f9fea6b2c9431762a0 assets/agotmod/models/item/stark1_leggings.json
+bb7ffa7d9ab25ec0f75d09b0543397afa00987af assets/agotmod/models/item/steel_axe.json
+2f064db8ba110a836144231b6ed3bdb827556fb8 assets/agotmod/models/item/steel_hoe.json
+8e0f9b42922845ae9f9039a22cfffe412e7f78bd assets/agotmod/models/item/steel_ingot.json
+77844eb5d9859588c57b4a19715f465b5cc29c7d assets/agotmod/models/item/steel_nugget.json
+1e938898196ef545a7a632eb96e65533359eee6a assets/agotmod/models/item/steel_pickaxe.json
+5a579a94176207f114bf8829c62ea370b0249c09 assets/agotmod/models/item/steel_shovel.json
+430815d3e92a3e1332c412b31137804abf033e42 assets/agotmod/models/item/steel_sword.json
 ac94d794235ba519b056e33a28d1507d2c073db5 assets/agotmod/models/item/tin_ingot.json
