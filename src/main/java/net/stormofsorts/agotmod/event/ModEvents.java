@@ -1,5 +1,7 @@
+// This code belongs to the package net.stormofsorts.agotmod.event
 package net.stormofsorts.agotmod.event;
 
+// Importing necessary classes from other packages
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.stormofsorts.agotmod.AGoTMod;
 import net.stormofsorts.agotmod.item.ModItems;
@@ -15,10 +17,13 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.List;
 
+// Annotating the class as a subscriber to the Forge Mod Event Bus
 @Mod.EventBusSubscriber(modid = AGoTMod.MOD_ID)
 public class ModEvents {
 
-    @SubscribeEvent // Adds custom trades for the SPECIFIC Villager Profession
+    // Annotation indicating that this method should subscribe to the specified event
+    @SubscribeEvent
+    // Adds custom trades for the SPECIFIC Villager Profession
     public static void addCustomTrades(VillagerTradesEvent event) {
 
         // Template for Future Usage STANDARD ITEMS trade
@@ -63,7 +68,9 @@ public class ModEvents {
         }
     }
 
-    @SubscribeEvent // Adds custom trades for WANDERING TRADERS
+    // Annotation indicating that this method should subscribe to the specified event
+    @SubscribeEvent
+    // Adds custom trades for WANDERING TRADERS
     public static void addCustomWanderingTrades(WandererTradesEvent event) {
         // For generic trades aka what trades most often happens
         List<VillagerTrades.ItemListing> genericTrades = event.getGenericTrades();

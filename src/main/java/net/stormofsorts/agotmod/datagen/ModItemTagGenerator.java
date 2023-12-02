@@ -11,12 +11,21 @@ import org.jetbrains.annotations.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 public class ModItemTagGenerator extends ItemTagsProvider {
+    // Constructor for ModItemTagGenerator
     public ModItemTagGenerator(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> pLookupProvider, CompletableFuture<TagLookup<Block>> pBlockTags, @Nullable ExistingFileHelper existingFileHelper) {
+        // Call the constructor of the superclass (ItemTagsProvider)
         super(pOutput, pLookupProvider, pBlockTags, AGoTMod.MOD_ID, existingFileHelper);
     }
 
+    // Method to add tags to items
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-
+        // This method is where you would add tags to items
+        // Tags are used for grouping items together for various purposes
+        // You can add tags based on your mod's requirements
+        // For example:
+        // this.tag(ModTags.Items.MY_CUSTOM_TAG).add(ModItems.MY_ITEM.get());
+        // This would create a custom tag for your item
+        // and include your item in that tag
     }
 }

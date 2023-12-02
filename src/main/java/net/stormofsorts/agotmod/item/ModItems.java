@@ -1,5 +1,7 @@
+// This code belongs to the package net.stormofsorts.agotmod.item
 package net.stormofsorts.agotmod.item;
 
+// Importing necessary classes from other packages
 import net.minecraft.world.item.*;
 import net.stormofsorts.agotmod.AGoTMod;
 import net.stormofsorts.agotmod.custom.ModArmorMaterials;
@@ -11,12 +13,12 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+// A utility class for creating and registering modded items
 public class ModItems {
-    // makes creating items possible
+
+    // Deferred register for items
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, AGoTMod.MOD_ID);
-
-    // Here I am adding the items
 
     // ---------------------------(COINS)--------------------------- //
     // Main currency Coin
@@ -27,16 +29,16 @@ public class ModItems {
     // ---------------------------(ARMOUR)--------------------------- //
     // Adding tier 1 STARK Armour
     public static final RegistryObject<Item> STARK1_HELMET = ITEMS.register("stark1_helmet",
-            () ->new Stark1ArmorItem(ModArmorMaterials.STARK1, ArmorItem.Type.HELMET,new Item.Properties()));
+            () -> new Stark1ArmorItem(ModArmorMaterials.STARK1, ArmorItem.Type.HELMET, new Item.Properties()));
 
     public static final RegistryObject<Item> STARK1_CHESTPLATE = ITEMS.register("stark1_chestplate",
-            () ->new Stark1ArmorItem(ModArmorMaterials.STARK1, ArmorItem.Type.CHESTPLATE,new Item.Properties()));
+            () -> new Stark1ArmorItem(ModArmorMaterials.STARK1, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
 
     public static final RegistryObject<Item> STARK1_LEGGINGS = ITEMS.register("stark1_leggings",
-            () ->new Stark1ArmorItem(ModArmorMaterials.STARK1, ArmorItem.Type.LEGGINGS,new Item.Properties()));
+            () -> new Stark1ArmorItem(ModArmorMaterials.STARK1, ArmorItem.Type.LEGGINGS, new Item.Properties()));
 
     public static final RegistryObject<Item> STARK1_BOOTS = ITEMS.register("stark1_boots",
-            () ->new Stark1ArmorItem(ModArmorMaterials.STARK1, ArmorItem.Type.BOOTS,new Item.Properties()));
+            () -> new Stark1ArmorItem(ModArmorMaterials.STARK1, ArmorItem.Type.BOOTS, new Item.Properties()));
     // ---------------------------(ARMOUR)--------------------------- //
 
     // ---------------------------(INGOTS/NUGGETS)--------------------------- //
@@ -77,7 +79,6 @@ public class ModItems {
     public static final RegistryObject<Item> BRONZE_SPATHA = ITEMS.register("bronze_spatha",
             () -> new SwordItem(ModToolTiers.BRONZE, 6, .5F, new Item.Properties()));
 
-
     // Steel TOOLS
     public static final RegistryObject<Item> STEEL_SWORD = ITEMS.register("steel_sword",
             () -> new SwordItem(ModToolTiers.STEEL, 4, 2, new Item.Properties()));
@@ -110,10 +111,7 @@ public class ModItems {
             () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
     // ---------------------------(FOODS)--------------------------- //
 
-
-
-
-    // tells the AGoTMod class to call the modded items into the game
+    // Tells the AGoTMod class to call the modded items into the game
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

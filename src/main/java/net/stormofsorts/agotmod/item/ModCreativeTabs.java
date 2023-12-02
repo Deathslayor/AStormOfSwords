@@ -1,5 +1,7 @@
+// This code belongs to the package net.stormofsorts.agotmod.item
 package net.stormofsorts.agotmod.item;
 
+// Importing necessary classes from other packages
 import net.stormofsorts.agotmod.AGoTMod;
 import net.stormofsorts.agotmod.block.ModBLocks;
 import net.minecraft.core.registries.Registries;
@@ -10,15 +12,18 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
+// A utility class for creating custom creative mode tabs
 public class ModCreativeTabs {
-    // makes creating modded tabs possible
+
+    // Deferred register for creative mode tabs
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TAB =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, AGoTMod.MOD_ID);
 
     // Adding items into the MAIN mod tab in creative
     public static final RegistryObject<CreativeModeTab> AGOT_TAB = CREATIVE_MODE_TAB.register("agot_tab",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModBLocks.MINT_BLOCK.get()))
-                    .title(Component.translatable("creativetab.agot_tab"))
+            () -> CreativeModeTab.builder()
+                    .icon(() -> new ItemStack(ModBLocks.MINT_BLOCK.get())) // Icon for the creative mode tab
+                    .title(Component.translatable("creativetab.agot_tab")) // Title for the creative mode tab
                     .displayItems((pParameters, pOutput) -> {
                         /** Blocks */
                         pOutput.accept(ModBLocks.MINT_BLOCK.get()); // Adds the mint Working station block for villagers
@@ -82,19 +87,8 @@ public class ModCreativeTabs {
                     })
                     .build());
 
-    // tells the AGoTMod class to call the modded tabs into the game
+    // Tells the AGoTMod class to call the modded tabs into the game
     public static void register(IEventBus eventBus) {
         CREATIVE_MODE_TAB.register(eventBus);
     }
-    /*
-    private void createBlocks() {
-
-    }
-    private void createArmour() {
-
-    }
-    private void createItems() {
-
-    }
-     */
 }

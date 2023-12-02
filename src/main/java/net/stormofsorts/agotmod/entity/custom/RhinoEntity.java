@@ -25,39 +25,48 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
+// RhinoEntity represents the custom entity class for the Rhino
 public class RhinoEntity extends Animal {
+
+    // Data accessor for tracking whether the Rhino is attacking
     private static final EntityDataAccessor<Boolean> ATTACKING =
             SynchedEntityData.defineId(RhinoEntity.class, EntityDataSerializers.BOOLEAN);
 
+    // Animation state for idle animations
+    public final AnimationState idleAnimationState = new AnimationState();
+    private int idleAnimationTimeout = 0;
 
+    // Animation state for attack animations
+    public final AnimationState attackAnimationState = new AnimationState();
+    public int attackAnimationTimeout = 0;
+
+    // Constructor for RhinoEntity
     public RhinoEntity(EntityType<? extends Animal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
-    public final AnimationState idleAnimationState = new AnimationState();
-    private int idleAnimationTimeout = 0;
-
-    public final AnimationState attackAnimationState = new AnimationState();
-    public int attackAnimationTimeout = 0;
-
-
+    // Tick method for entity behavior
     @Override
     public void tick() {
         super.tick();
 
-        if(this.level().isClientSide()) {
+        // Client-side animation setup
+        if (this.level().isClientSide()) {
             setupAnimationStates();
         }
     }
 
+    // Method for setting up animation states
     private void setupAnimationStates() {
-        if(this.idleAnimationTimeout <= 0) {
+        // Idle animation logic
+        if (this.idleAnimationTimeout <= 0) {
             this.idleAnimationTimeout = this.random.nextInt(40) + 80;
             this.idleAnimationState.start(this.tickCount);
         } else {
             --this.idleAnimationTimeout;
         }
 
+        // Attack animation logic
         if (this.isAttacking() && attackAnimationTimeout <= 0) {
             attackAnimationTimeout = 80; // Length in ticks
             attackAnimationState.start(this.tickCount);
@@ -65,15 +74,17 @@ public class RhinoEntity extends Animal {
             --this.attackAnimationTimeout;
         }
 
+        // Stop attack animation when not attacking
         if (!this.isAttacking()) {
             attackAnimationState.stop();
         }
     }
 
+    // Update walk animation based on the entity's pose
     @Override
     protected void updateWalkAnimation(float pPartialTick) {
         float f;
-        if(this.getPose() == Pose.STANDING) {
+        if (this.getPose() == Pose.STANDING) {
             f = Math.min(pPartialTick * 6F, 1f);
         } else {
             f = 0f;
@@ -82,20 +93,24 @@ public class RhinoEntity extends Animal {
         this.walkAnimation.update(f, 0.2f);
     }
 
+    // Method for setting the attacking state
     public void setAttacking(boolean attacking) {
         this.entityData.set(ATTACKING, attacking);
     }
 
+    // Method for checking if the Rhino is attacking
     public boolean isAttacking() {
         return this.entityData.get(ATTACKING);
     }
 
+    // Method for defining synchronized data
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(ATTACKING, false);
     }
 
+    // Method for registering AI goals
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
@@ -112,9 +127,9 @@ public class RhinoEntity extends Animal {
         this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
 
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-
     }
 
+    // Method for creating attribute builder for Rhino
     public static AttributeSupplier.Builder createAttributes() {
         return Animal.createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 20D)
@@ -125,29 +140,34 @@ public class RhinoEntity extends Animal {
                 .add(Attributes.ATTACK_DAMAGE, 10f);
     }
 
+    // Method for getting the offspring of two Rhino entities
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
         return ModEntities.RHINO.get().create(pLevel);
     }
 
+    // Method for checking if an item is food for the Rhino
     @Override
     public boolean isFood(ItemStack pStack) {
         return pStack.is(Items.COOKED_BEEF);
     }
 
+    // Method for getting the ambient sound of the Rhino
     @Nullable
     @Override
     protected SoundEvent getAmbientSound() {
         return SoundEvents.HOGLIN_AMBIENT;
     }
 
+    // Method for getting the hurt sound of the Rhino
     @Nullable
     @Override
     protected SoundEvent getHurtSound(DamageSource pDamageSource) {
         return SoundEvents.RAVAGER_HURT;
     }
 
+    // Method for getting the death sound of the Rhino
     @Nullable
     @Override
     protected SoundEvent getDeathSound() {

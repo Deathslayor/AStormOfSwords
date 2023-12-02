@@ -1,5 +1,7 @@
+// This code belongs to the package net.stormofsorts.agotmod
 package net.stormofsorts.agotmod;
 
+// Importing necessary classes from other packages
 import com.mojang.logging.LogUtils;
 import net.stormofsorts.agotmod.block.ModBLocks;
 import net.stormofsorts.agotmod.entity.ModEntities;
@@ -27,9 +29,12 @@ public class AGoTMod {
     public static final String MOD_ID = "agotmod";
     public static final Logger LOGGER = LogUtils.getLogger();
 
+    // Constructor for AGoTMod class
     public AGoTMod() {
+        // Get the mod event bus
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        // Register various mod features with the mod event bus
 
         // Adds Creative Mod Tabs
         ModCreativeTabs.register(modEventBus);
@@ -46,29 +51,39 @@ public class AGoTMod {
         // Adds custom Entities to the game
         ModEntities.register(modEventBus);
 
+        // Listen for common setup event
         modEventBus.addListener(this::commonSetup);
 
+        // Register this class as an event listener
         MinecraftForge.EVENT_BUS.register(this);
+
+        // Listen for creative mode tab build event
         modEventBus.addListener(this::addCreative);
     }
 
+    // Common setup method
     private void commonSetup(final FMLCommonSetupEvent event) {
-
+        // Perform common setup tasks here
     }
 
+    // Creative mode tab build method
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-
+        // Add custom items/blocks to the creative mode tab here
     }
 
+    // Server starting event listener
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
-
+        // Perform tasks when the server is starting
     }
 
+    // Static inner class for handling client-side events
     @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
+        // Subscribe to client setup event
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
+            // Register custom renderer for the Rhino entity
             EntityRenderers.register(ModEntities.RHINO.get(), RhinoRenderer::new);
         }
     }

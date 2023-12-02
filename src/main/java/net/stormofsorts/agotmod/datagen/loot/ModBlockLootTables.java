@@ -18,6 +18,7 @@ import java.util.Set;
 
 public class ModBlockLootTables extends BlockLootSubProvider {
     public ModBlockLootTables() {
+        // Initialize the ModBlockLootTables, specifying sets of known blocks and flags
         super(Set.of(), FeatureFlags.REGISTRY.allFlags());
     }
 
@@ -25,6 +26,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     protected void generate() {
         /** // ---------------------------(ORES)--------------------------- // */
         // ---------------------------(TIN)--------------------------- //
+        // Add loot table for tin ores
         this.add(ModBLocks.DEEPSLATE_TIN_ORE.get(),
                 block -> oreDropBetween2And5(ModBLocks.DEEPSLATE_TIN_ORE.get(), ModItems.RAW_TIN.get()));
         this.add(ModBLocks.TIN_ORE.get(),
@@ -32,25 +34,27 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         // ---------------------------(TIN)--------------------------- //
         /** // ---------------------------(ORES)--------------------------- // */
 
-
-
         /** // ---------------------------(NORMAL BLOCKS)--------------------------- // */
         // ---------------------------(TIN)--------------------------- //
+        // Add loot tables for tin blocks
         this.dropSelf(ModBLocks.TIN_BLOCK.get());
         this.dropSelf(ModBLocks.RAW_TIN_BLOCK.get());
         // ---------------------------(TIN)--------------------------- //
 
         // ---------------------------(BRONZE)--------------------------- //
+        // Add loot table for bronze block
         this.dropSelf(ModBLocks.BRONZE_BLOCK.get());
         // ---------------------------(BRONZE)--------------------------- //
 
         // ---------------------------(BRICKS)--------------------------- //
+        // Add loot tables for various brick blocks
         this.dropSelf(ModBLocks.KINGS_LANDING_BRICK_LARGE.get());
         this.dropSelf(ModBLocks.DARK_STONE_BRICK.get());
         this.dropSelf(ModBLocks.STONE_BRICK_BUT_COOLER.get());
         // ---------------------------(BRICKS)--------------------------- //
 
         // ---------------------(VILLAGER PROFESSIONS BLOCKS)--------------------- //
+        // Add loot table for mint block
         this.dropSelf(ModBLocks.MINT_BLOCK.get());
         // ---------------------(VILLAGER PROFESSIONS BLOCKS)--------------------- //
         /** // ---------------------------(NORMAL BLOCKS)--------------------------- // */
@@ -58,10 +62,12 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
     @Override
     protected Iterable<Block> getKnownBlocks() {
+        // Retrieve known blocks from the ModBLocks registry
         return ModBLocks.BLOCKS.getEntries().stream().map(RegistryObject::get)::iterator;
     }
 
     protected LootTable.Builder oreDropBetween2And5(Block pBlock, Item item) {
+        // Create a loot table for ore drops with random count between 2 and 5
         return createSilkTouchDispatchTable(pBlock,
                 this.applyExplosionDecay(pBlock,
                         LootItem.lootTableItem(item)

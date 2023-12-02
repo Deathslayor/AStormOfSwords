@@ -11,18 +11,20 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-
-// IDK what this does but its important don't touch ~Nugget
+// This class extends PoiTypeTagsProvider and is used for adding custom job site tags
+// PoiTypeTags are used to associate points of interest (job sites) with specific jobs for villagers
 public class ModPoiTypeTagsProvider extends PoiTypeTagsProvider {
+    // Constructor for ModPoiTypeTagsProvider
     public ModPoiTypeTagsProvider(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> pProvider, @Nullable ExistingFileHelper existingFileHelper) {
+        // Call the constructor of the superclass (PoiTypeTagsProvider)
         super(pOutput, pProvider, AGoTMod.MOD_ID, existingFileHelper);
     }
 
-
-
-    // Adds The job type to Minecraft
+    // Method to add tags to points of interest
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
+        // Add the custom job site tag to the ACQUIRABLE_JOB_SITE tag
+        // This associates the "mint_poi" point of interest with jobs in Minecraft
         tag(PoiTypeTags.ACQUIRABLE_JOB_SITE)
                 .addOptional(new ResourceLocation(AGoTMod.MOD_ID, "mint_poi"));
     }
