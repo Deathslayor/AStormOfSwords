@@ -1,7 +1,5 @@
 package net.stormofsorts.agotmod.entity.custom;
 
-import net.stormofsorts.agotmod.entity.ModEntities;
-import net.stormofsorts.agotmod.entity.ai.RhinoAttackGoal;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -23,14 +21,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.stormofsorts.agotmod.entity.ModEntities;
+import net.stormofsorts.agotmod.entity.ai.BearAttackGoal;
 import org.jetbrains.annotations.Nullable;
 
-// RhinoEntity represents the custom entity class for the Rhino
-public class RhinoEntity extends Animal {
+// BearEntity represents the custom entity class for the Bear
+public class BearEntity extends Animal {
 
-    // Data accessor for tracking whether the Rhino is attacking
+    // Data accessor for tracking whether the Bear is attacking
     private static final EntityDataAccessor<Boolean> ATTACKING =
-            SynchedEntityData.defineId(RhinoEntity.class, EntityDataSerializers.BOOLEAN);
+            SynchedEntityData.defineId(BearEntity.class, EntityDataSerializers.BOOLEAN);
 
     // Animation state for idle animations
     public final AnimationState idleAnimationState = new AnimationState();
@@ -40,8 +40,8 @@ public class RhinoEntity extends Animal {
     public final AnimationState attackAnimationState = new AnimationState();
     public int attackAnimationTimeout = 0;
 
-    // Constructor for RhinoEntity
-    public RhinoEntity(EntityType<? extends Animal> pEntityType, Level pLevel) {
+    // Constructor for BearEntity
+    public BearEntity(EntityType<? extends Animal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
@@ -98,7 +98,7 @@ public class RhinoEntity extends Animal {
         this.entityData.set(ATTACKING, attacking);
     }
 
-    // Method for checking if the Rhino is attacking
+    // Method for checking if the Bear is attacking
     public boolean isAttacking() {
         return this.entityData.get(ATTACKING);
     }
@@ -115,7 +115,7 @@ public class RhinoEntity extends Animal {
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
 
-        this.goalSelector.addGoal(1, new RhinoAttackGoal(this, 1, true));
+        this.goalSelector.addGoal(1, new BearAttackGoal(this, 1, true));
 
         this.goalSelector.addGoal(1, new BreedGoal(this, 1.15D));
         this.goalSelector.addGoal(2, new TemptGoal(this, 1.2D, Ingredient.of(Items.COOKED_BEEF), false));
@@ -129,10 +129,10 @@ public class RhinoEntity extends Animal {
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
     }
 
-    // Method for creating attribute builder for Rhino
+    // Method for creating attribute builder for Bear
     public static AttributeSupplier.Builder createAttributes() {
         return Animal.createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 1D)
+                .add(Attributes.MAX_HEALTH, 200D)
                 .add(Attributes.FOLLOW_RANGE, 24D)
                 .add(Attributes.MOVEMENT_SPEED, 0.25D)
                 .add(Attributes.ARMOR_TOUGHNESS, 0.1f)
@@ -140,34 +140,34 @@ public class RhinoEntity extends Animal {
                 .add(Attributes.ATTACK_DAMAGE, 10f);
     }
 
-    // Method for getting the offspring of two Rhino entities
+    // Method for getting the offspring of two Bear entities
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
-        return ModEntities.RHINO.get().create(pLevel);
+        return ModEntities.BEAR.get().create(pLevel);
     }
 
-    // Method for checking if an item is food for the Rhino
+    // Method for checking if an item is food for the Bear
     @Override
     public boolean isFood(ItemStack pStack) {
         return pStack.is(Items.COOKED_BEEF);
     }
 
-    // Method for getting the ambient sound of the Rhino
+    // Method for getting the ambient sound of the Bear
     @Nullable
     @Override
     protected SoundEvent getAmbientSound() {
         return SoundEvents.HOGLIN_AMBIENT;
     }
 
-    // Method for getting the hurt sound of the Rhino
+    // Method for getting the hurt sound of the Bear
     @Nullable
     @Override
     protected SoundEvent getHurtSound(DamageSource pDamageSource) {
         return SoundEvents.RAVAGER_HURT;
     }
 
-    // Method for getting the death sound of the Rhino
+    // Method for getting the death sound of the Bear
     @Nullable
     @Override
     protected SoundEvent getDeathSound() {

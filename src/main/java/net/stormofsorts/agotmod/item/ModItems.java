@@ -62,6 +62,8 @@ public class ModItems {
     // ---------------------------(ANIMAL SPAWN EGGS)--------------------------- //
     public static final RegistryObject<Item> RHINO_SPANW_EGG = ITEMS.register("rhino_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.RHINO, 0x7e9680, 0xc5d1c5, new Item.Properties()));
+    public static final RegistryObject<Item> BEAR_SPANW_EGG = ITEMS.register("bear_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.BEAR, 0x7e9680, 0xc5d1c5, new Item.Properties()));
     // ---------------------------(ANIMAL SPAWN EGGS)--------------------------- //
 
     // ---------------------------(TOOLS)--------------------------- //
@@ -77,7 +79,23 @@ public class ModItems {
     public static final RegistryObject<Item> BRONZE_HOE = ITEMS.register("bronze_hoe",
             () -> new HoeItem(ModToolTiers.BRONZE, 0, 0, new Item.Properties()));
     public static final RegistryObject<Item> BRONZE_SPATHA = ITEMS.register("bronze_spatha",
-            () -> new SwordItem(ModToolTiers.BRONZE, 6, .5F, new Item.Properties()));
+            () -> new SwordItem(ModToolTiers.BRONZE, 5, .5F, new Item.Properties()));
+
+    // IRON TOOLS
+    public static final RegistryObject<Item> IRON_LONGSWORD = ITEMS.register("iron_longsword",
+            () -> new SwordItem(Tiers.IRON, 6, .5F, new Item.Properties()));
+    public static final RegistryObject<Item> IRON_SPEAR = ITEMS.register("iron_spear",
+            () -> new SwordItem(Tiers.IRON, 6, .2F, new Item.Properties()));
+    public static final RegistryObject<Item> IRON_PIKE = ITEMS.register("iron_pike",
+            () -> new SwordItem(Tiers.IRON, 7, .2F, new Item.Properties()));
+    public static final RegistryObject<Item> IRON_MACE = ITEMS.register("iron_mace",
+            () -> new SwordItem(Tiers.IRON, 7, .2F, new Item.Properties()));
+    public static final RegistryObject<Item> IRON_DAGGER = ITEMS.register("iron_dagger",
+            () -> new SwordItem(Tiers.IRON, 7, .2F, new Item.Properties()));
+    public static final RegistryObject<Item> IRON_BATTLE_AXE = ITEMS.register("iron_battle_axe",
+            () -> new SwordItem(Tiers.IRON, 7, .2F, new Item.Properties()));
+
+
 
     // Steel TOOLS
     public static final RegistryObject<Item> STEEL_SWORD = ITEMS.register("steel_sword",

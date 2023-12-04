@@ -5,6 +5,7 @@ package net.stormofsorts.agotmod;
 import com.mojang.logging.LogUtils;
 import net.stormofsorts.agotmod.block.ModBLocks;
 import net.stormofsorts.agotmod.entity.ModEntities;
+import net.stormofsorts.agotmod.entity.client.BearRenderer;
 import net.stormofsorts.agotmod.entity.client.RhinoRenderer;
 import net.stormofsorts.agotmod.item.ModCreativeTabs;
 import net.stormofsorts.agotmod.item.ModItems;
@@ -85,6 +86,7 @@ public class AGoTMod {
         public static void onClientSetup(FMLClientSetupEvent event) {
             // Register custom renderer for the Rhino entity
             EntityRenderers.register(ModEntities.RHINO.get(), RhinoRenderer::new);
+            EntityRenderers.register(ModEntities.BEAR.get(), BearRenderer::new);
         }
     }
 }

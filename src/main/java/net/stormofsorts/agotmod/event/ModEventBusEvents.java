@@ -4,6 +4,7 @@ package net.stormofsorts.agotmod.event;
 // Importing necessary classes from other packages
 import net.stormofsorts.agotmod.AGoTMod;
 import net.stormofsorts.agotmod.entity.ModEntities;
+import net.stormofsorts.agotmod.entity.custom.BearEntity;
 import net.stormofsorts.agotmod.entity.custom.RhinoEntity;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -19,5 +20,6 @@ public class ModEventBusEvents {
         // Registering attributes for the RhinoEntity when an EntityAttributeCreationEvent occurs
         // The attributes are created using the createAttributes() method of RhinoEntity
         event.put(ModEntities.RHINO.get(), RhinoEntity.createAttributes().build());
+        event.put(ModEntities.BEAR.get(), BearEntity.createAttributes().build());
     }
 }

@@ -3,6 +3,7 @@ package net.stormofsorts.agotmod.event;
 
 // Importing necessary classes from other packages
 import net.stormofsorts.agotmod.AGoTMod;
+import net.stormofsorts.agotmod.entity.client.BearModel;
 import net.stormofsorts.agotmod.entity.client.ModModelLayers;
 import net.stormofsorts.agotmod.entity.client.RhinoModel;
 import net.minecraftforge.api.distmarker.Dist;
@@ -20,5 +21,6 @@ public class ModEventBusClientEvents {
         // Registering a layer definition for a custom model (RhinoModel)
         // The layer definition is associated with the RhinoModel's createBodyLayer method
         event.registerLayerDefinition(ModModelLayers.RHINO_LAYER, RhinoModel::createBodyLayer);
+        event.registerLayerDefinition(ModModelLayers.BEAR_LAYER, BearModel::createBodyLayer);
     }
 }

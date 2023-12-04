@@ -59,6 +59,7 @@ public class ModCreativeTabs {
 
                         /** SPAWN EGGS */
                         pOutput.accept(ModItems.RHINO_SPANW_EGG.get());
+                        pOutput.accept(ModItems.BEAR_SPANW_EGG.get());
 
                         /** TOOLS */
                         pOutput.accept(ModItems.BRONZE_SWORD.get());
@@ -67,6 +68,14 @@ public class ModCreativeTabs {
                         pOutput.accept(ModItems.BRONZE_PICKAXE.get());
                         pOutput.accept(ModItems.BRONZE_SHOVEL.get());
                         pOutput.accept(ModItems.BRONZE_SPATHA.get());
+
+                        pOutput.accept(ModItems.IRON_LONGSWORD.get());
+                        pOutput.accept(ModItems.IRON_SPEAR.get());
+                        pOutput.accept(ModItems.IRON_PIKE.get());
+                        pOutput.accept(ModItems.IRON_DAGGER.get());
+                        pOutput.accept(ModItems.IRON_MACE.get());
+                        pOutput.accept(ModItems.IRON_BATTLE_AXE.get());
+
 
                         pOutput.accept(ModItems.STEEL_SWORD.get());
                         pOutput.accept(ModItems.STEEL_AXE.get());
