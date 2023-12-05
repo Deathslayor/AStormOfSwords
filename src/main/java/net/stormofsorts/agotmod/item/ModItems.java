@@ -81,7 +81,7 @@ public class ModItems {
     public static final RegistryObject<Item> BRONZE_SPATHA = ITEMS.register("bronze_spatha",
             () -> new SwordItem(ModToolTiers.BRONZE, 5, .5F, new Item.Properties()));
 
-    // IRON TOOLS
+    // IRON WEAPONS
     public static final RegistryObject<Item> IRON_LONGSWORD = ITEMS.register("iron_longsword",
             () -> new SwordItem(Tiers.IRON, 6, .5F, new Item.Properties()));
     public static final RegistryObject<Item> IRON_SPEAR = ITEMS.register("iron_spear",
@@ -94,6 +94,22 @@ public class ModItems {
             () -> new SwordItem(Tiers.IRON, 7, .2F, new Item.Properties()));
     public static final RegistryObject<Item> IRON_BATTLE_AXE = ITEMS.register("iron_battle_axe",
             () -> new SwordItem(Tiers.IRON, 7, .2F, new Item.Properties()));
+
+    // STEEL EAPONS
+    public static final RegistryObject<Item> STEEL_LONGSWORD = ITEMS.register("steel_longsword",
+            () -> new SwordItem(ModToolTiers.STEEL, 6, .5F, new Item.Properties()));
+    public static final RegistryObject<Item> STEEL_SPEAR = ITEMS.register("steel_spear",
+            () -> new SwordItem(ModToolTiers.STEEL, 6, .2F, new Item.Properties()));
+    public static final RegistryObject<Item> STEEL_PIKE = ITEMS.register("steel_pike",
+            () -> new SwordItem(ModToolTiers.STEEL, 7, .2F, new Item.Properties()));
+    public static final RegistryObject<Item> STEEL_MACE = ITEMS.register("steel_mace",
+            () -> new SwordItem(ModToolTiers.STEEL, 7, .2F, new Item.Properties()));
+    public static final RegistryObject<Item> STEEL_DAGGER = ITEMS.register("steel_dagger",
+            () -> new SwordItem(ModToolTiers.STEEL, 7, .2F, new Item.Properties()));
+    public static final RegistryObject<Item> STEEL_BATTLEAXE = ITEMS.register("steel_battleaxe",
+            () -> new SwordItem(ModToolTiers.STEEL, 7, .2F, new Item.Properties()));
+    public static final RegistryObject<Item> STEEL_HALBERD = ITEMS.register("steel_halberd",
+            () -> new SwordItem(ModToolTiers.STEEL, 7, .2F, new Item.Properties()));
 
 
 

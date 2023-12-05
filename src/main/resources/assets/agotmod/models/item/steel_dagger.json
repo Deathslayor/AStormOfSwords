@@ -1,0 +1,18 @@
+{
+  "parent": "minecraft:item/handheld",
+  "loader": "forge:separate_transforms",
+  "base": {
+    "parent": "agotmod:item/steel_dagger_3d"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "agotmod:item/steel_dagger_2d"
+    },
+    "ground": {
+      "parent": "agotmod:item/steel_dagger_2d"
+    },
+    "fixed": {
+      "parent": "agotmod:item/steel_dagger_2d"
+    }
+  }
+}

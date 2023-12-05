@@ -11,7 +11,21 @@
   "item.agotmod.stark1_chestplate": "Stark Chestplate",
   "item.agotmod.stark1_leggings": "Stark Leggings",
   "item.agotmod.stark1_boots": "Stark Boots",
+
   "item.agotmod.iron_longsword": "Iron Longsword",
+  "item.agotmod.iron_battle_axe": "Iron Battleaxe",
+  "item.agotmod.iron_dagger": "Iron Dagger",
+  "item.agotmod.iron_mace": "Iron Mace",
+  "item.agotmod.iron_pike": "Iron Pike",
+  "item.agotmod.iron_spear": "Iron Spear",
+
+  "item.agotmod.steel_longsword": "Steel Longsword",
+  "item.agotmod.steel_battleaxe": "Steel Battleaxe",
+  "item.agotmod.steel_dagger": "Steel Dagger",
+  "item.agotmod.steel_mace": "Steel Mace",
+  "item.agotmod.steel_pike": "Steel Pike",
+  "item.agotmod.steel_spear": "Steel Spear",
+  "item.agotmod.steel_halberd": "Steel Halberd",
 
 
   "item.agotmod.raw_bear_meat": "Raw Bear Meat",

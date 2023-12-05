@@ -76,6 +76,14 @@ public class ModCreativeTabs {
                         pOutput.accept(ModItems.IRON_MACE.get());
                         pOutput.accept(ModItems.IRON_BATTLE_AXE.get());
 
+                        pOutput.accept(ModItems.STEEL_LONGSWORD.get());
+                        pOutput.accept(ModItems.STEEL_SPEAR.get());
+                        pOutput.accept(ModItems.STEEL_PIKE.get());
+                        pOutput.accept(ModItems.STEEL_DAGGER.get());
+                        pOutput.accept(ModItems.STEEL_MACE.get());
+                        pOutput.accept(ModItems.STEEL_BATTLEAXE.get());
+                        pOutput.accept(ModItems.STEEL_HALBERD.get());
+
 
                         pOutput.accept(ModItems.STEEL_SWORD.get());
                         pOutput.accept(ModItems.STEEL_AXE.get());
