@@ -7,7 +7,7 @@ import net.stormofsorts.agotmod.block.ModBLocks;
 import net.stormofsorts.agotmod.entity.ModEntities;
 import net.stormofsorts.agotmod.entity.client.BearRenderer;
 import net.stormofsorts.agotmod.entity.client.RhinoRenderer;
-import net.stormofsorts.agotmod.item.ModCreativeTabs;
+import net.stormofsorts.agotmod.item.creativetabs.*;
 import net.stormofsorts.agotmod.item.ModItems;
 import net.stormofsorts.agotmod.villager.ModVillagers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -39,6 +39,12 @@ public class AGoTMod {
 
         // Adds Creative Mod Tabs
         ModCreativeTabs.register(modEventBus);
+        ModCreativeAnimals.register(modEventBus);
+        ModCreativeArmour.register(modEventBus);
+        ModCreativeBuildingBlocks.register(modEventBus);
+        ModCreativeFoods.register(modEventBus);
+        ModCreativeHandheld.register(modEventBus);
+        ModCreativeIngots.register(modEventBus);
 
         // Adds Custom Villagers to the game
         ModVillagers.register(modEventBus);

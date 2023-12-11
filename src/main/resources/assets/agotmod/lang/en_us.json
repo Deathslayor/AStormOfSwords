@@ -67,5 +67,11 @@
 
 
 
-  "creativetab.agot_tab": "AGoT Tab"
+  "creativetab.agot_tab": "AGoT Tab",
+  "creativetab.agot_tab_handheld": "AGoT Handheld",
+  "creativetab.agot_tab_foods": "AGoT Foods",
+  "creativetab.agot_tab_armour": "AGoT Armour",
+  "creativetab.agot_tab_animals": "AGoT Animals",
+  "creativetab.agot_tab_ingots": "AGoT Ingots",
+  "creativetab.agot_tab_building_blocks": "AGoT Building Blocks"
 }

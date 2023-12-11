@@ -1,5 +1,5 @@
 // This code belongs to the package net.stormofsorts.agotmod.item
-package net.stormofsorts.agotmod.item;
+package net.stormofsorts.agotmod.item.creativetabs;
 
 // Importing necessary classes from other packages
 import net.stormofsorts.agotmod.AGoTMod;
@@ -11,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
+import net.stormofsorts.agotmod.item.ModItems;
 
 // A utility class for creating custom creative mode tabs
 public class ModCreativeTabs {
