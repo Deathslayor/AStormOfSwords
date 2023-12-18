@@ -23,7 +23,6 @@ public class DataGenerators {
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
-
         // ADDS MOD RECIPES
         // Add a provider for generating mod recipes
         generator.addProvider(event.includeServer(), new ModRecipeProvider(packOutput));
@@ -43,11 +42,15 @@ public class DataGenerators {
         // ADDS BLOCK AND ITEM TAGS
         // Add a provider for generating mod block and item tags
         ModBlockTagGenerator blockTagGenerator = generator.addProvider(event.includeServer(),
-                new ModBlockTagGenerator(packOutput, lookupProvider, existingFileHelper));
+        new ModBlockTagGenerator(packOutput, lookupProvider, existingFileHelper));
         generator.addProvider(event.includeServer(), new ModItemTagGenerator(packOutput, lookupProvider, blockTagGenerator.contentsGetter(), existingFileHelper));
 
         // Adds Villager Professions
         // Add a provider for generating mod villager profession tags
         generator.addProvider(event.includeServer(), new ModPoiTypeTagsProvider(packOutput, lookupProvider, existingFileHelper));
+
+        // Add a provider for generating custom world generation features
+        generator.addProvider(event.includeServer(), new ModWorldGenProvider(packOutput, lookupProvider));
+
     }
 }

@@ -1,4 +1,4 @@
-// 1.20.1	2023-12-04T22:47:10.3415432	Item Models: agotmod
+// 1.20.1	2023-12-18T22:53:31.6695009	Item Models: agotmod
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/agotmod/models/item/bear_spawn_egg.json
 0dab22b088410722aac001ac40df80dbd863484e assets/agotmod/models/item/bronze_axe.json
 d7e33c38c6093c1a67c74158ee7bde9b9c074c1f assets/agotmod/models/item/bronze_hoe.json
@@ -11,7 +11,6 @@ c2bdbd085d2abe7f81cba70517ee0248004ea1ca assets/agotmod/models/item/cooked_bear_
 205bbac540b4e5b88235b84a5ab31aabfa32df21 assets/agotmod/models/item/cooked_blood_sausage.json
 46cc2db16d9afd4d6733bdf3b38ced09622356c1 assets/agotmod/models/item/cooked_sausage.json
 98c4d31107d3f80cddba537a9655759368609e3a assets/agotmod/models/item/cooked_white_sausage.json
-1c791a60e7cbdca4929cd67f67a0acdb63320170 assets/agotmod/models/item/iron_longsword.json
 84769282272f3935e9efb55f839b9bd893333a6b assets/agotmod/models/item/raw_bear_meat.json
 790cc6f5e0dce5bcec413e5314281885b3738756 assets/agotmod/models/item/raw_blood_sausage.json
 37575b5c5af6022f9ba3c2a09e2b643a5bdbbad8 assets/agotmod/models/item/raw_sausage.json
