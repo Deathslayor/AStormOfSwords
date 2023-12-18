@@ -1,0 +1,45 @@
+package net.stormofsorts.agotmod.worldgen;
+
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraft.world.level.levelgen.placement.PlacementModifier;
+import net.stormofsorts.agotmod.AGoTMod;
+
+import java.util.List;
+
+public class ModplacedFeatures {
+
+    // Define a ResourceKey for the placed feature of tin ore
+    public static final ResourceKey<PlacedFeature> TIN_ORE_PLACED_KEY = registerKey("tin_ore_placed");
+
+    // Bootstrap method for initializing placed features
+    public static void bootstrap(BootstapContext<PlacedFeature> context) {
+        // Get a holder for configured features from the context
+        HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
+
+        // Register the placed feature for tin ore with specified configuration and modifiers
+        register(context, TIN_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_TIN_ORE),
+                ModOrePlacement.commonOrePlacement(14,
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(80))));
+    }
+
+    // Helper method to register a ResourceKey for a placed feature
+    private static ResourceKey<PlacedFeature> registerKey(String name) {
+        return ResourceKey.create(Registries.PLACED_FEATURE, new ResourceLocation(AGoTMod.MOD_ID, name));
+    }
+
+    // Helper method to register a placed feature
+    private static void register(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key, Holder<ConfiguredFeature<?, ?>> configuration,
+                                 List<PlacementModifier> modifiers) {
+        // Use the context to register a new PlacedFeature with the specified key, configuration, and modifiers
+        context.register(key, new PlacedFeature(configuration, List.copyOf(modifiers)));
+    }
+}

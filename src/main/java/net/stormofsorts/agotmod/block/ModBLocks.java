@@ -55,7 +55,7 @@ public class ModBLocks {
 
     // TIN BLOCK
     public static final RegistryObject<Block> TIN_BLOCK = registerBlock("tin_block",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)));
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
 
     // BRONZE BLOCK
     public static final RegistryObject<Block> BRONZE_BLOCK = registerBlock("bronze_block",
