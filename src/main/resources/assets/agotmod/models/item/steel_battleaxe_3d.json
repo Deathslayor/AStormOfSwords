@@ -3,7 +3,7 @@
 	"texture_size": [32, 32],
 	"textures": {
 		"0": "agotmod:item/steel_battleaxe_3d",
-		"particle": "agotmod:item/steel_battleaxe_3d"
+		"particle": "agotmod:item/steel_battle_axe_3d"
 	},
 	"elements": [
 		{
