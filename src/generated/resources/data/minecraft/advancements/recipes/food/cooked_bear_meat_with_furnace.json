@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_raw_sausage": {
+    "has_raw_bear_meat": {
       "conditions": {
         "items": [
           {
             "items": [
-              "agotmod:raw_sausage"
+              "agotmod:raw_bear_meat"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "agotmod:cooked_sausage_from_smelting_raw_sausage"
+        "recipe": "minecraft:cooked_bear_meat_with_furnace"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_raw_sausage",
+      "has_raw_bear_meat",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "agotmod:cooked_sausage_from_smelting_raw_sausage"
+      "minecraft:cooked_bear_meat_with_furnace"
     ]
   },
   "sends_telemetry_event": false
