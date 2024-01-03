@@ -1,5 +1,5 @@
 // This code belongs to the package net.stormofsorts.agotmod.custom
-package net.stormofsorts.agotmod.custom;
+package net.stormofsorts.agotmod.armor.custom;
 
 // Importing necessary classes from other packages
 import net.minecraft.Util;

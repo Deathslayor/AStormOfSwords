@@ -1,9 +1,9 @@
 // This code belongs to the package net.stormofsorts.agotmod.client
-package net.stormofsorts.agotmod.client;
+package net.stormofsorts.agotmod.armor.client;
 
 // Importing necessary classes from other packages
 import net.stormofsorts.agotmod.AGoTMod;
-import net.stormofsorts.agotmod.custom.Stark1ArmorItem;
+import net.stormofsorts.agotmod.armor.custom.Stark1ArmorItem;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
 

@@ -1,9 +1,9 @@
 // This code belongs to the package net.stormofsorts.agotmod.custom
-package net.stormofsorts.agotmod.custom;
+package net.stormofsorts.agotmod.armor.custom;
 
 // Importing necessary classes from other packages
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.stormofsorts.agotmod.client.Stark1ArmorRenderer;
+import net.stormofsorts.agotmod.armor.client.Stark1ArmorRenderer;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;

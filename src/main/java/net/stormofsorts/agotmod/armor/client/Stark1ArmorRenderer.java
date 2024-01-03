@@ -1,5 +1,5 @@
-package net.stormofsorts.agotmod.client;// Importing necessary classes from other packages
-import net.stormofsorts.agotmod.custom.Stark1ArmorItem;
+package net.stormofsorts.agotmod.armor.client;// Importing necessary classes from other packages
+import net.stormofsorts.agotmod.armor.custom.Stark1ArmorItem;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
 // Stark1ArmorRenderer class extending GeoArmorRenderer for Stark1ArmorItem

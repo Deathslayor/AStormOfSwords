@@ -4,8 +4,8 @@ package net.stormofsorts.agotmod.item;
 // Importing necessary classes from other packages
 import net.minecraft.world.item.*;
 import net.stormofsorts.agotmod.AGoTMod;
-import net.stormofsorts.agotmod.custom.ModArmorMaterials;
-import net.stormofsorts.agotmod.custom.Stark1ArmorItem;
+import net.stormofsorts.agotmod.armor.custom.ModArmorMaterials;
+import net.stormofsorts.agotmod.armor.custom.Stark1ArmorItem;
 import net.stormofsorts.agotmod.entity.ModEntities;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
