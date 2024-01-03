@@ -57,6 +57,18 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         // Add loot table for mint block
         this.dropSelf(ModBLocks.MINT_BLOCK.get());
         // ---------------------(VILLAGER PROFESSIONS BLOCKS)--------------------- //
+
+        // ---------------------------(TREES)--------------------------- //
+        this.dropSelf(ModBLocks.SYCAMORE_LOG.get());
+        this.dropSelf(ModBLocks.STRIPPED_SYCAMORE_LOG.get());
+        this.dropSelf(ModBLocks.SYCAMORE_WOOD.get());
+        this.dropSelf(ModBLocks.STRIPPED_SYCAMORE_WOOD.get());
+        this.dropSelf(ModBLocks.SYCAMORE_PLANKS.get());
+
+        this.add(ModBLocks.SYCAMORE_LEAVES.get(), block ->
+                createLeavesDrops(block, ModBLocks.SYCAMORE_LOG.get(), NORMAL_LEAVES_SAPLING_CHANCES)); // TODO: Change to Sapling!
+        // ---------------------------(TREES)--------------------------- //
+
         /** // ---------------------------(NORMAL BLOCKS)--------------------------- // */
     }
 

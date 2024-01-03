@@ -1,4 +1,4 @@
-package net.stormofsorts.agotmod.worldgen;
+package net.stormofsorts.agotmod.worldgen.ore;
 
 import net.minecraft.world.level.levelgen.placement.*;
 

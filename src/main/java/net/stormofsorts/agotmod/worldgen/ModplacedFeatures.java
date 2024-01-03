@@ -12,6 +12,7 @@ import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 import net.stormofsorts.agotmod.AGoTMod;
+import net.stormofsorts.agotmod.worldgen.ore.ModOrePlacement;
 
 import java.util.List;
 

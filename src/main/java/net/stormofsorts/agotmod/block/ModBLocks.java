@@ -1,5 +1,9 @@
 package net.stormofsorts.agotmod.block;// Importing necessary classes from other packages
+import net.minecraft.world.level.block.LeavesBlock;
 import net.stormofsorts.agotmod.AGoTMod;
+import net.stormofsorts.agotmod.block.custom.ModFlammableLeaves;
+import net.stormofsorts.agotmod.block.custom.ModFlammableRotatedPillarBlock;
+import net.stormofsorts.agotmod.block.custom.ModFlammablePlanks;
 import net.stormofsorts.agotmod.item.ModItems;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
@@ -74,6 +78,25 @@ public class ModBLocks {
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
 
     // ---------------------------(BLOCKS)--------------------------- //
+
+    // ---------------------------(TREE BLOCKS)--------------------------- //
+
+    public static final RegistryObject<Block> SYCAMORE_LOG = registerBlock("sycamore_log",
+            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).strength(3f)));
+    public static final RegistryObject<Block> SYCAMORE_WOOD = registerBlock("sycamore_wood",
+            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD).strength(3f)));
+    public static final RegistryObject<Block> STRIPPED_SYCAMORE_LOG = registerBlock("stripped_sycamore_log",
+            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG).strength(3f)));
+    public static final RegistryObject<Block> STRIPPED_SYCAMORE_WOOD = registerBlock("stripped_sycamore_wood",
+            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD).strength(3f)));
+
+
+    public static final RegistryObject<Block> SYCAMORE_PLANKS = registerBlock("sycamore_planks",
+            () -> new ModFlammablePlanks(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> SYCAMORE_LEAVES = registerBlock("sycamore_leaves",
+            () -> new ModFlammableLeaves(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
+
+    // ---------------------------(TREE BLOCKS)--------------------------- //
 
     // Tells the AGoTMod class to call the modded blocks into the game
     public static void register(IEventBus eventBus) {

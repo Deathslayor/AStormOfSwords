@@ -10,6 +10,8 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
@@ -21,6 +23,9 @@ import java.util.List;
 public class ModConfiguredFeatures {
     // Define a ResourceKey for the configured feature of overworld tin ore
     public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_TIN_ORE = registerKey("tin_ore");
+
+
+    public static final ResourceKey<ConfiguredFeature<? , ?>> SYCAMORE_KEY = registerKey("sycamore");
 
     // Bootstrap method for initializing configured features
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
@@ -38,6 +43,14 @@ public class ModConfiguredFeatures {
 
         // Register the configured feature for overworld tin ore
         register(context, OVERWORLD_TIN_ORE, Feature.ORE, new OreConfiguration(overworldTinOre, 5));
+
+        /*
+        register(context, SYCAMORE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks)
+        ));
+
+         */
+
     }
 
     // Register a ResourceKey for a configured feature

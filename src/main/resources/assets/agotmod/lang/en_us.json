@@ -64,14 +64,19 @@
 
   "entity.minecraft.villager.agotmod.minter": "Minter",
 
+  "block.agotmod.sycamore_log": "Sycamore Log",
+  "block.agotmod.stripped_sycamore_log": "Stripped Sycamore Log",
+  "block.agotmod.sycamore_wood": "Sycamore Log",
+  "block.agotmod.stripped_sycamore_wood": "Stripped Sycamore Wood",
+  "block.agotmod.sycamore_planks": "Sycamore Planks",
+  "block.agotmod.sycamore_leaves": "Sycamore Leaves",
 
-
-
-  "creativetab.agot_tab": "AGoT Tab",
-  "creativetab.agot_tab_handheld": "AGoT Handheld",
-  "creativetab.agot_tab_foods": "AGoT Foods",
-  "creativetab.agot_tab_armour": "AGoT Armour",
-  "creativetab.agot_tab_animals": "AGoT Animals",
-  "creativetab.agot_tab_ingots": "AGoT Ingots",
-  "creativetab.agot_tab_building_blocks": "AGoT Building Blocks"
+  "creativetab.agot_tab": "ASoS Tab",
+  "creativetab.agot_tab_handheld": "ASoS Handheld",
+  "creativetab.agot_tab_foods": "ASoS Foods",
+  "creativetab.agot_tab_armour": "ASoS Armour",
+  "creativetab.agot_tab_animals": "ASoS Animals",
+  "creativetab.agot_tab_ingots": "ASoS Ingots",
+  "creativetab.agot_tab_building_blocks": "ASoS Building Blocks",
+  "creativetab.agot_tab_natural_blocks": "ASoS Natural Blocks"
 }
