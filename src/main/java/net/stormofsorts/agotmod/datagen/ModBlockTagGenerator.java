@@ -38,6 +38,28 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                         ModBLocks.KINGS_LANDING_BRICK_LARGE.get());
         /** // ---------------------------(PICKAXE)--------------------------- // */
 
+
+
+
+
+        /** // ---------------------------(BLOCKS THAT BURN)--------------------------- // */
+
+        this.tag(BlockTags.LOGS_THAT_BURN)
+                .add(ModBLocks.SYCAMORE_LOG.get())
+                .add(ModBLocks.STRIPPED_SYCAMORE_LOG.get())
+                .add(ModBLocks.SYCAMORE_WOOD.get())
+                .add(ModBLocks.STRIPPED_SYCAMORE_WOOD.get());
+
+        this.tag(BlockTags.PLANKS)
+                .add(ModBLocks.SYCAMORE_PLANKS.get());
+
+        /** // ---------------------------(BLOCKS THAT BURN)--------------------------- // */
+
+
+
+
+
+
         /** // ---------------------------(STONE TOOL)--------------------------- // */
         // Add blocks that need a stone tool to the NEEDS_STONE_TOOL tag
         // ---------------------------(TIN)--------------------------- //

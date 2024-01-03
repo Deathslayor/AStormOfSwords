@@ -28,13 +28,11 @@ public class ModCreativeNaturalBlocks {
                     .displayItems((pParameters, pOutput) -> {
 
                         pOutput.accept(ModBLocks.SYCAMORE_LOG.get());
-                        /* no textures
                         pOutput.accept(ModBLocks.STRIPPED_SYCAMORE_LOG.get());
                         pOutput.accept(ModBLocks.SYCAMORE_WOOD.get());
                         pOutput.accept(ModBLocks.STRIPPED_SYCAMORE_WOOD.get());
                         pOutput.accept(ModBLocks.SYCAMORE_PLANKS.get());
 
-                         */
                         pOutput.accept(ModBLocks.SYCAMORE_LEAVES.get());
 
                     })

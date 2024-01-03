@@ -47,6 +47,7 @@ public class AGoTMod {
         ModCreativeFoods.register(modEventBus);
         ModCreativeHandheld.register(modEventBus);
         ModCreativeIngots.register(modEventBus);
+        ModCreativeNaturalBlocks.register(modEventBus);
 
         // Adds Custom Villagers to the game
         ModVillagers.register(modEventBus);

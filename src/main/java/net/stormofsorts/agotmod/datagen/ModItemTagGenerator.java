@@ -1,11 +1,14 @@
 package net.stormofsorts.agotmod.datagen;
 
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.stormofsorts.agotmod.AGoTMod;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.stormofsorts.agotmod.block.ModBLocks;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -27,5 +30,14 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         // this.tag(ModTags.Items.MY_CUSTOM_TAG).add(ModItems.MY_ITEM.get());
         // This would create a custom tag for your item
         // and include your item in that tag
+
+        this.tag(ItemTags.LOGS_THAT_BURN)
+                .add(ModBLocks.SYCAMORE_LOG.get().asItem())
+                .add(ModBLocks.STRIPPED_SYCAMORE_LOG.get().asItem())
+                .add(ModBLocks.SYCAMORE_WOOD.get().asItem())
+                .add(ModBLocks.STRIPPED_SYCAMORE_WOOD.get().asItem());
+
+        this.tag(ItemTags.PLANKS)
+                .add(ModBLocks.SYCAMORE_PLANKS.get().asItem());
     }
 }

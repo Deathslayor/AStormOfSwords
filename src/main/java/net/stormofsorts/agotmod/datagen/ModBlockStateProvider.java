@@ -1,5 +1,9 @@
 package net.stormofsorts.agotmod.datagen;
 
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.stormofsorts.agotmod.AGoTMod;
 import net.stormofsorts.agotmod.block.ModBLocks;
 import net.minecraft.data.PackOutput;
@@ -38,10 +42,46 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBLocks.STONE_BRICK_BUT_COOLER);
         // ---------------------------(BRICKS)--------------------------- //
 
+        // ---------------------------(TREES)--------------------------- //
+        logBlock((RotatedPillarBlock) ModBLocks.SYCAMORE_LOG.get());
+        axisBlock(((RotatedPillarBlock) ModBLocks.SYCAMORE_WOOD.get()),
+                blockTexture(ModBLocks.SYCAMORE_LOG.get()), // side of the block
+                blockTexture(ModBLocks.SYCAMORE_LOG.get())); // top of the block
+
+        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_SYCAMORE_WOOD.get()),
+                blockTexture(ModBLocks.STRIPPED_SYCAMORE_LOG.get()), // side of the block
+                new ResourceLocation(AGoTMod.MOD_ID, "block/stripped_sycamore_log_top")); // top of the block
+
+        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_SYCAMORE_LOG.get()),
+                blockTexture(ModBLocks.STRIPPED_SYCAMORE_LOG.get()), // side of the block
+                blockTexture(ModBLocks.STRIPPED_SYCAMORE_LOG.get())); // top of the block
+
+        blockItem(ModBLocks.SYCAMORE_LOG);
+        blockItem(ModBLocks.STRIPPED_SYCAMORE_LOG);
+        blockItem(ModBLocks.SYCAMORE_WOOD);
+        blockItem(ModBLocks.STRIPPED_SYCAMORE_WOOD);
+
+        blockWithItem(ModBLocks.SYCAMORE_PLANKS);
+
+        leavesBlock(ModBLocks.SYCAMORE_LEAVES);
+
+        // ---------------------------(TREES)--------------------------- //
+
         // ---------------------(VILLAGER PROFESSIONS BLOCKS)--------------------- //
         // Register block states and models for villager profession-related blocks
         blockWithItem(ModBLocks.MINT_BLOCK);
         // ---------------------(VILLAGER PROFESSIONS BLOCKS)--------------------- //
+    }
+
+    private void leavesBlock(RegistryObject<Block> blockRegistryObject) {
+        simpleBlockWithItem(blockRegistryObject.get(),
+                models().singleTexture(ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath(), new ResourceLocation("minecraft:block/leaves"),
+                        "all", blockTexture(blockRegistryObject.get())).renderType("cutout"));
+    }
+
+    private void blockItem(RegistryObject<Block> blockRegistryObject) {
+        simpleBlockItem(blockRegistryObject.get(), new ModelFile.UncheckedModelFile(AGoTMod.MOD_ID +
+                ":block/" + ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath()));
     }
 
     // Method to simplify the process of registering block states and models

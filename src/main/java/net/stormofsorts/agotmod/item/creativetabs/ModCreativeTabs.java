@@ -102,6 +102,15 @@ public class ModCreativeTabs {
                         pOutput.accept(ModItems.RAW_WHITE_SAUSAGE.get());
                         pOutput.accept(ModItems.COOKED_BLOOD_SAUSAGE.get());
 
+                        /** TREES */
+                        pOutput.accept(ModBLocks.SYCAMORE_LOG.get());
+                        pOutput.accept(ModBLocks.STRIPPED_SYCAMORE_LOG.get());
+                        pOutput.accept(ModBLocks.SYCAMORE_WOOD.get());
+                        pOutput.accept(ModBLocks.STRIPPED_SYCAMORE_WOOD.get());
+                        pOutput.accept(ModBLocks.SYCAMORE_PLANKS.get());
+
+                        pOutput.accept(ModBLocks.SYCAMORE_LEAVES.get());
+
                     })
                     .build());
 
