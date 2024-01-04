@@ -4,12 +4,14 @@ import net.astormofsorts.agotmod.block.custom.ModFlammableLeaves;
 import net.astormofsorts.agotmod.block.custom.ModFlammableRotatedPillarBlock;
 import net.astormofsorts.agotmod.block.custom.ModFlammablePlanks;
 import net.astormofsorts.agotmod.item.ModItems;
+import net.astormofsorts.agotmod.worldgen.tree.SycamoreTreeGrower;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DropExperienceBlock;
+import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -94,6 +96,9 @@ public class ModBLocks {
             () -> new ModFlammablePlanks(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> SYCAMORE_LEAVES = registerBlock("sycamore_leaves",
             () -> new ModFlammableLeaves(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
+
+    public static final RegistryObject<Block> SYCAMORE_SAPLING = registerBlock("sycamore_sapling",
+            () -> new SaplingBlock(new SycamoreTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
 
     // ---------------------------(TREE BLOCKS)--------------------------- //
 

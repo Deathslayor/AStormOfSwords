@@ -2,10 +2,10 @@
 package net.astormofsorts.agotmod.item;
 
 // Importing necessary classes from other packages
-import net.minecraft.world.item.*;
-import net.astormofsorts.agotmod.AGoTMod;
 import net.astormofsorts.agotmod.armor.custom.ModArmorMaterials;
 import net.astormofsorts.agotmod.armor.custom.Stark1ArmorItem;
+import net.minecraft.world.item.*;
+import net.astormofsorts.agotmod.AGoTMod;
 import net.astormofsorts.agotmod.entity.ModEntities;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -38,6 +38,19 @@ public class ModItems {
             () -> new Stark1ArmorItem(ModArmorMaterials.STARK1, ArmorItem.Type.LEGGINGS, new Item.Properties()));
 
     public static final RegistryObject<Item> STARK1_BOOTS = ITEMS.register("stark1_boots",
+            () -> new Stark1ArmorItem(ModArmorMaterials.STARK1, ArmorItem.Type.BOOTS, new Item.Properties()));
+
+    // Adding Stark Levy Armour
+    public static final RegistryObject<Item> STARK_LEVY_HELMET = ITEMS.register("stark_levy_helmet",
+            () -> new Stark1ArmorItem(ModArmorMaterials.STARK1, ArmorItem.Type.HELMET, new Item.Properties()));
+
+    public static final RegistryObject<Item> STARK_LEVY_CHESTPLATE = ITEMS.register("stark_levy_chestplate",
+            () -> new Stark1ArmorItem(ModArmorMaterials.STARK1, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+
+    public static final RegistryObject<Item> STARK_LEVY_LEGGINGS = ITEMS.register("stark_levy_leggings",
+            () -> new Stark1ArmorItem(ModArmorMaterials.STARK1, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+
+    public static final RegistryObject<Item> STARK_LEVY_BOOTS = ITEMS.register("stark_levy_boots",
             () -> new Stark1ArmorItem(ModArmorMaterials.STARK1, ArmorItem.Type.BOOTS, new Item.Properties()));
     // ---------------------------(ARMOUR)--------------------------- //
 

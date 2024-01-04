@@ -64,9 +64,10 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBLocks.SYCAMORE_WOOD.get());
         this.dropSelf(ModBLocks.STRIPPED_SYCAMORE_WOOD.get());
         this.dropSelf(ModBLocks.SYCAMORE_PLANKS.get());
+        this.dropSelf(ModBLocks.SYCAMORE_SAPLING.get());
 
         this.add(ModBLocks.SYCAMORE_LEAVES.get(), block ->
-                createLeavesDrops(block, ModBLocks.SYCAMORE_LOG.get(), NORMAL_LEAVES_SAPLING_CHANCES)); // TODO: Change to Sapling!
+                createLeavesDrops(block, ModBLocks.SYCAMORE_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
         // ---------------------------(TREES)--------------------------- //
 
         /** // ---------------------------(NORMAL BLOCKS)--------------------------- // */

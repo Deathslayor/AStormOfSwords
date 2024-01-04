@@ -1,4 +1,4 @@
-// 1.20.1	2023-12-18T22:53:31.6695009	Item Models: agotmod
+// 1.20.1	2024-01-04T14:16:26.4516719	Item Models: agotmod
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/agotmod/models/item/bear_spawn_egg.json
 0dab22b088410722aac001ac40df80dbd863484e assets/agotmod/models/item/bronze_axe.json
 d7e33c38c6093c1a67c74158ee7bde9b9c074c1f assets/agotmod/models/item/bronze_hoe.json
@@ -17,10 +17,10 @@ c2bdbd085d2abe7f81cba70517ee0248004ea1ca assets/agotmod/models/item/cooked_bear_
 89aae95d8e71d6799881bccdf84d2fccba4caf9d assets/agotmod/models/item/raw_tin.json
 8150fc40f51d6fc505b520c7b43474041f5d811e assets/agotmod/models/item/raw_white_sausage.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/agotmod/models/item/rhino_spawn_egg.json
-69d9150d74a3a6a94084a6ff7b900cfce5cee988 assets/agotmod/models/item/stark1_boots.json
-1ed0598bc9f4cb12f5d5dd69876df1786da4af37 assets/agotmod/models/item/stark1_chestplate.json
-608b9824d603bc2fa01681e35b8071ed9173634f assets/agotmod/models/item/stark1_helmet.json
-4ecc7c6cc56fdc8ee971c4f9fea6b2c9431762a0 assets/agotmod/models/item/stark1_leggings.json
+e6d20cb665c0e1f3786ee3104db6f9237539d615 assets/agotmod/models/item/stark_levy_boots.json
+6561b2e4478fd134d42770813f5841d134fa5581 assets/agotmod/models/item/stark_levy_chestplate.json
+429aa0ace0d15b538173c412bfe983845f46bde3 assets/agotmod/models/item/stark_levy_helmet.json
+f9a60b729ea472cf08e0dd339f35dfe044e0731b assets/agotmod/models/item/stark_levy_leggings.json
 bb7ffa7d9ab25ec0f75d09b0543397afa00987af assets/agotmod/models/item/steel_axe.json
 2f064db8ba110a836144231b6ed3bdb827556fb8 assets/agotmod/models/item/steel_hoe.json
 8e0f9b42922845ae9f9039a22cfffe412e7f78bd assets/agotmod/models/item/steel_ingot.json
@@ -28,4 +28,5 @@ bb7ffa7d9ab25ec0f75d09b0543397afa00987af assets/agotmod/models/item/steel_axe.js
 1e938898196ef545a7a632eb96e65533359eee6a assets/agotmod/models/item/steel_pickaxe.json
 5a579a94176207f114bf8829c62ea370b0249c09 assets/agotmod/models/item/steel_shovel.json
 430815d3e92a3e1332c412b31137804abf033e42 assets/agotmod/models/item/steel_sword.json
+a1e61152c96497f6b4f566379550fc1f35b8d23d assets/agotmod/models/item/sycamore_sapling.json
 ac94d794235ba519b056e33a28d1507d2c073db5 assets/agotmod/models/item/tin_ingot.json

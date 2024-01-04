@@ -64,6 +64,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBLocks.SYCAMORE_PLANKS);
 
         leavesBlock(ModBLocks.SYCAMORE_LEAVES);
+        saplingBlock(ModBLocks.SYCAMORE_SAPLING);
 
         // ---------------------------(TREES)--------------------------- //
 
@@ -71,6 +72,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
         // Register block states and models for villager profession-related blocks
         blockWithItem(ModBLocks.MINT_BLOCK);
         // ---------------------(VILLAGER PROFESSIONS BLOCKS)--------------------- //
+    }
+
+    private void saplingBlock(RegistryObject<Block> blockRegistryObject) {
+        simpleBlock(blockRegistryObject.get(),
+                models().cross(ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath(), blockTexture(blockRegistryObject.get())).renderType("cutout"));
     }
 
     private void leavesBlock(RegistryObject<Block> blockRegistryObject) {

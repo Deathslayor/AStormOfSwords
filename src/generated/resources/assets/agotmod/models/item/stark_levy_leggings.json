@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "agotmod:item/stark1_leggings"
+    "layer0": "agotmod:item/stark_levy_leggings"
   }
 }

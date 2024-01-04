@@ -1,4 +1,5 @@
-// 1.20.1	2023-12-18T22:53:31.6725013	Registries
+// 1.20.1	2024-01-04T13:48:03.780816	Registries
 93e760cad11de5820019b78ad58c1464485f3b41 data/agotmod/forge/biome_modifier/add_tin_ore.json
+d482d82a0a18f6f099bba0a19368613a9de0ba3d data/agotmod/worldgen/configured_feature/sycamore.json
 cfe58f15dffd7cd9a827082b5872596243c1a9d5 data/agotmod/worldgen/configured_feature/tin_ore.json
 174bd861a214e5e9e447f57b86f92b9deca5e42d data/agotmod/worldgen/placed_feature/tin_ore_placed.json

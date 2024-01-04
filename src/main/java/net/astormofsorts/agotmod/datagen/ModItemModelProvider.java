@@ -1,10 +1,12 @@
 package net.astormofsorts.agotmod.datagen;
 
 import net.astormofsorts.agotmod.AGoTMod;
+import net.astormofsorts.agotmod.block.ModBLocks;
 import net.astormofsorts.agotmod.item.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -73,6 +75,16 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.COOKED_BLOOD_SAUSAGE);
         simpleItem(ModItems.COOKED_WHITE_SAUSAGE);
         // ---------------------------(FOODS)--------------------------- //
+
+        // ---------------------------(SAPLINGS)--------------------------- //
+        saplingItem(ModBLocks.SYCAMORE_SAPLING);
+        // ---------------------------(SAPLINGS)--------------------------- //
+    }
+
+    private ItemModelBuilder saplingItem(RegistryObject<Block> item) {
+        return withExistingParent(item.getId().getPath(),
+                new ResourceLocation("item/generated")).texture("layer0",
+                new ResourceLocation(AGoTMod.MOD_ID,"block/" + item.getId().getPath()));
     }
 
     // Method to create a simple item model

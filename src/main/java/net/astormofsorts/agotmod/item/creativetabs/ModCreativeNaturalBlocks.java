@@ -34,6 +34,7 @@ public class ModCreativeNaturalBlocks {
                         pOutput.accept(ModBLocks.SYCAMORE_PLANKS.get());
 
                         pOutput.accept(ModBLocks.SYCAMORE_LEAVES.get());
+                        pOutput.accept(ModBLocks.SYCAMORE_SAPLING.get());
 
                     })
                     .build());

@@ -1,5 +1,6 @@
 package net.astormofsorts.agotmod.worldgen.tree;
 
+import net.astormofsorts.agotmod.worldgen.ModConfiguredFeatures;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
@@ -10,6 +11,6 @@ public class SycamoreTreeGrower extends AbstractTreeGrower {
     @Nullable
     @Override
     protected ResourceKey<ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource pRandom, boolean pHasFlowers) {
-        return null;
+        return ModConfiguredFeatures.SYCAMORE_KEY;
     }
 }

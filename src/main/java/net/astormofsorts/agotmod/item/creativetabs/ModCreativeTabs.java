@@ -52,12 +52,6 @@ public class ModCreativeTabs {
                         pOutput.accept(ModItems.STEEL_INGOT.get());
                         pOutput.accept(ModItems.STEEL_NUGGET.get());
 
-                        /** Armour */
-                        pOutput.accept(ModItems.STARK1_HELMET.get());
-                        pOutput.accept(ModItems.STARK1_CHESTPLATE.get());
-                        pOutput.accept(ModItems.STARK1_LEGGINGS.get());
-                        pOutput.accept(ModItems.STARK1_BOOTS.get());
-
                         /** SPAWN EGGS */
                         pOutput.accept(ModItems.RHINO_SPANW_EGG.get());
                         pOutput.accept(ModItems.BEAR_SPANW_EGG.get());
@@ -110,6 +104,7 @@ public class ModCreativeTabs {
                         pOutput.accept(ModBLocks.SYCAMORE_PLANKS.get());
 
                         pOutput.accept(ModBLocks.SYCAMORE_LEAVES.get());
+                        pOutput.accept(ModBLocks.SYCAMORE_SAPLING.get());
 
                     })
                     .build());
