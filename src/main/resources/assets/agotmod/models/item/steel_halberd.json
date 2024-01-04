@@ -2,7 +2,14 @@
   "parent": "minecraft:item/handheld",
   "loader": "forge:separate_transforms",
   "base": {
-    "parent": "agotmod:item/steel_halberd_3d"
+    "parent": "agotmod:item/steel_halberd_2d",
+    "display": {
+      "thirdperson_righthand": {
+        "rotation": [ -25, 270, 0 ],
+        "translation": [ 0, 10, 5 ],
+        "scale": [ 2, 2, 2 ]
+      }
+    }
   },
   "perspectives": {
     "gui": {
