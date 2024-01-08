@@ -78,6 +78,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         // ---------------------------(FOODS)--------------------------- //
 
         // ---------------------------(SAPLINGS)--------------------------- //
+        saplingItem(ModBLocks.WEIRWOOD_SAPLING);
         saplingItem(ModBLocks.SYCAMORE_SAPLING);
         // ---------------------------(SAPLINGS)--------------------------- //
     }

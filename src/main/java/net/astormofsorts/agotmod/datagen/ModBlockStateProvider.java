@@ -43,6 +43,32 @@ public class ModBlockStateProvider extends BlockStateProvider {
         // ---------------------------(BRICKS)--------------------------- //
 
         // ---------------------------(TREES)--------------------------- //
+
+        //Weirwood
+        logBlock((RotatedPillarBlock) ModBLocks.WEIRWOOD_LOG.get());
+        axisBlock(((RotatedPillarBlock) ModBLocks.WEIRWOOD_WOOD.get()),
+                blockTexture(ModBLocks.WEIRWOOD_LOG.get()), // side of the block
+                blockTexture(ModBLocks.WEIRWOOD_LOG.get())); // top of the block
+
+        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_WEIRWOOD_WOOD.get()),
+                blockTexture(ModBLocks.STRIPPED_WEIRWOOD_LOG.get()), // side of the block
+                new ResourceLocation(AGoTMod.MOD_ID, "block/stripped_weirwood_log_top")); // top of the block
+
+        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_WEIRWOOD_LOG.get()),
+                blockTexture(ModBLocks.STRIPPED_WEIRWOOD_LOG.get()), // side of the block
+                blockTexture(ModBLocks.STRIPPED_WEIRWOOD_LOG.get())); // top of the block
+
+        blockItem(ModBLocks.WEIRWOOD_LOG);
+        blockItem(ModBLocks.STRIPPED_WEIRWOOD_LOG);
+        blockItem(ModBLocks.WEIRWOOD_WOOD);
+        blockItem(ModBLocks.STRIPPED_WEIRWOOD_WOOD);
+
+        blockWithItem(ModBLocks.WEIRWOOD_PLANKS);
+
+        leavesBlock(ModBLocks.WEIRWOOD_LEAVES);
+        saplingBlock(ModBLocks.WEIRWOOD_SAPLING);
+
+        //Sycamore
         logBlock((RotatedPillarBlock) ModBLocks.SYCAMORE_LOG.get());
         axisBlock(((RotatedPillarBlock) ModBLocks.SYCAMORE_WOOD.get()),
                 blockTexture(ModBLocks.SYCAMORE_LOG.get()), // side of the block

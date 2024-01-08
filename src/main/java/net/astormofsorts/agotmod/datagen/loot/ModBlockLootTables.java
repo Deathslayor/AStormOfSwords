@@ -59,6 +59,19 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         // ---------------------(VILLAGER PROFESSIONS BLOCKS)--------------------- //
 
         // ---------------------------(TREES)--------------------------- //
+
+        //Weirwood
+        this.dropSelf(ModBLocks.WEIRWOOD_LOG.get());
+        this.dropSelf(ModBLocks.STRIPPED_WEIRWOOD_LOG.get());
+        this.dropSelf(ModBLocks.WEIRWOOD_WOOD.get());
+        this.dropSelf(ModBLocks.STRIPPED_WEIRWOOD_WOOD.get());
+        this.dropSelf(ModBLocks.WEIRWOOD_PLANKS.get());
+        this.dropSelf(ModBLocks.WEIRWOOD_SAPLING.get());
+
+        this.add(ModBLocks.WEIRWOOD_LEAVES.get(), block ->
+                createLeavesDrops(block, ModBLocks.WEIRWOOD_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+
+        //Sycamore
         this.dropSelf(ModBLocks.SYCAMORE_LOG.get());
         this.dropSelf(ModBLocks.STRIPPED_SYCAMORE_LOG.get());
         this.dropSelf(ModBLocks.SYCAMORE_WOOD.get());

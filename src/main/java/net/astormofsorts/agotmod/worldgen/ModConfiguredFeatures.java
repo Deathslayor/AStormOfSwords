@@ -30,6 +30,7 @@ public class ModConfiguredFeatures {
 
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> SYCAMORE_KEY = registerKey("sycamore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> WEIRWOOD_KEY = registerKey("weirwood");
 
     // Bootstrap method for initializing configured features
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
@@ -54,6 +55,15 @@ public class ModConfiguredFeatures {
                 new StraightTrunkPlacer(5, 4, 3),
 
                 BlockStateProvider.simple(ModBLocks.SYCAMORE_LEAVES.get()),
+                new BlobFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), 3),
+
+                new TwoLayersFeatureSize(1,0,2)).build());
+
+        register(context, WEIRWOOD_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.WEIRWOOD_LOG.get()),
+                new StraightTrunkPlacer(5, 4, 3),
+
+                BlockStateProvider.simple(ModBLocks.WEIRWOOD_LEAVES.get()),
                 new BlobFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), 3),
 
                 new TwoLayersFeatureSize(1,0,2)).build());

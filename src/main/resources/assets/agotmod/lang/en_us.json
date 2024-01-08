@@ -72,6 +72,15 @@
   "block.agotmod.sycamore_leaves": "Sycamore Leaves",
   "block.agotmod.sycamore_sapling": "Sycamore Sapling",
 
+  "block.agotmod.weirwood_log": "Weirwood Log",
+  "block.agotmod.stripped_weirwood_log": "Stripped Weirwood Log",
+  "block.agotmod.weirwood_wood": "Weirwood Log",
+  "block.agotmod.stripped_weirwood_wood": "Stripped Weirwood Wood",
+  "block.agotmod.weirwood_planks": "Weirwood Planks",
+  "block.agotmod.weirwood_leaves": "Weirwood Leaves",
+  "block.agotmod.weirwood_sapling": "Weirwood Sapling",
+
+
   "creativetab.agot_tab": "ASoS Tab",
   "creativetab.agot_tab_handheld": "ASoS Handheld",
   "creativetab.agot_tab_foods": "ASoS Foods",

@@ -5,6 +5,7 @@ import net.astormofsorts.agotmod.block.custom.ModFlammableRotatedPillarBlock;
 import net.astormofsorts.agotmod.block.custom.ModFlammablePlanks;
 import net.astormofsorts.agotmod.item.ModItems;
 import net.astormofsorts.agotmod.worldgen.tree.SycamoreTreeGrower;
+import net.astormofsorts.agotmod.worldgen.tree.WeirwoodTreeGrower;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -82,6 +83,25 @@ public class ModBLocks {
 
     // ---------------------------(TREE BLOCKS)--------------------------- //
 
+    //Weirwood
+    public static final RegistryObject<Block> WEIRWOOD_LOG = registerBlock("weirwood_log",
+            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).strength(3f)));
+    public static final RegistryObject<Block> WEIRWOOD_WOOD = registerBlock("weirwood_wood",
+            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD).strength(3f)));
+    public static final RegistryObject<Block> STRIPPED_WEIRWOOD_LOG = registerBlock("stripped_weirwood_log",
+            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG).strength(3f)));
+    public static final RegistryObject<Block> STRIPPED_WEIRWOOD_WOOD = registerBlock("stripped_weirwood_wood",
+            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD).strength(3f)));
+
+    public static final RegistryObject<Block> WEIRWOOD_PLANKS = registerBlock("weirwood_planks",
+            () -> new ModFlammablePlanks(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> WEIRWOOD_LEAVES = registerBlock("weirwood_leaves",
+            () -> new ModFlammableLeaves(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
+
+    public static final RegistryObject<Block> WEIRWOOD_SAPLING = registerBlock("weirwood_sapling",
+            () -> new SaplingBlock(new WeirwoodTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
+
+    //Sycamore
     public static final RegistryObject<Block> SYCAMORE_LOG = registerBlock("sycamore_log",
             () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).strength(3f)));
     public static final RegistryObject<Block> SYCAMORE_WOOD = registerBlock("sycamore_wood",

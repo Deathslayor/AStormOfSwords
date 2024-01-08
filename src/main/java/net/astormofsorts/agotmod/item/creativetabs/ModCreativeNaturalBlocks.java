@@ -23,9 +23,18 @@ public class ModCreativeNaturalBlocks {
     // Adding items into the MAIN mod tab in creative
     public static final RegistryObject<CreativeModeTab> AGOT_TAB_NATURAL_BLOCKS = CREATIVE_MODE_TAB.register("agot_tab_natural_blocks",
             () -> CreativeModeTab.builder()
-                    .icon(() -> new ItemStack(ModBLocks.SYCAMORE_LOG.get())) // Icon for the creative mode tab
+                    .icon(() -> new ItemStack(ModBLocks.WEIRWOOD_SAPLING.get())) // Icon for the creative mode tab
                     .title(Component.translatable("creativetab.agot_tab_natural_blocks")) // Title for the creative mode tab
                     .displayItems((pParameters, pOutput) -> {
+
+                        pOutput.accept(ModBLocks.WEIRWOOD_LOG.get());
+                        pOutput.accept(ModBLocks.STRIPPED_WEIRWOOD_LOG.get());
+                        pOutput.accept(ModBLocks.WEIRWOOD_WOOD.get());
+                        pOutput.accept(ModBLocks.STRIPPED_WEIRWOOD_WOOD.get());
+                        pOutput.accept(ModBLocks.WEIRWOOD_PLANKS.get());
+
+                        pOutput.accept(ModBLocks.WEIRWOOD_LEAVES.get());
+                        pOutput.accept(ModBLocks.WEIRWOOD_SAPLING.get());
 
                         pOutput.accept(ModBLocks.SYCAMORE_LOG.get());
                         pOutput.accept(ModBLocks.STRIPPED_SYCAMORE_LOG.get());
@@ -35,6 +44,7 @@ public class ModCreativeNaturalBlocks {
 
                         pOutput.accept(ModBLocks.SYCAMORE_LEAVES.get());
                         pOutput.accept(ModBLocks.SYCAMORE_SAPLING.get());
+
 
                     })
                     .build());

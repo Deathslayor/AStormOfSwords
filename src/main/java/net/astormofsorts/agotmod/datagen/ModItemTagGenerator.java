@@ -31,12 +31,17 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         // and include your item in that tag
 
         this.tag(ItemTags.LOGS_THAT_BURN)
+                .add(ModBLocks.WEIRWOOD_LOG.get().asItem())
+                .add(ModBLocks.STRIPPED_WEIRWOOD_LOG.get().asItem())
+                .add(ModBLocks.WEIRWOOD_WOOD.get().asItem())
+                .add(ModBLocks.STRIPPED_WEIRWOOD_WOOD.get().asItem())
                 .add(ModBLocks.SYCAMORE_LOG.get().asItem())
                 .add(ModBLocks.STRIPPED_SYCAMORE_LOG.get().asItem())
                 .add(ModBLocks.SYCAMORE_WOOD.get().asItem())
                 .add(ModBLocks.STRIPPED_SYCAMORE_WOOD.get().asItem());
 
         this.tag(ItemTags.PLANKS)
+                .add(ModBLocks.WEIRWOOD_PLANKS.get().asItem())
                 .add(ModBLocks.SYCAMORE_PLANKS.get().asItem());
     }
 }

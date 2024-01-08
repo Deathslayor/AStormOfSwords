@@ -1,4 +1,5 @@
 // 1.20.1	2024-01-08T15:15:29.8924098	Item Models: agotmod
+// 1.20.1	2024-01-08T21:38:15.4173049	Item Models: agotmod
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/agotmod/models/item/bear_spawn_egg.json
 0dab22b088410722aac001ac40df80dbd863484e assets/agotmod/models/item/bronze_axe.json
 d7e33c38c6093c1a67c74158ee7bde9b9c074c1f assets/agotmod/models/item/bronze_hoe.json
@@ -30,4 +31,5 @@ bb7ffa7d9ab25ec0f75d09b0543397afa00987af assets/agotmod/models/item/steel_axe.js
 430815d3e92a3e1332c412b31137804abf033e42 assets/agotmod/models/item/steel_sword.json
 a1e61152c96497f6b4f566379550fc1f35b8d23d assets/agotmod/models/item/sycamore_sapling.json
 ac94d794235ba519b056e33a28d1507d2c073db5 assets/agotmod/models/item/tin_ingot.json
+136d3d0a071bccad11ee1989941c8e9fdf870dea assets/agotmod/models/item/weirwood_sapling.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/agotmod/models/item/wight_spawn_egg.json
