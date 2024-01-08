@@ -12,4 +12,7 @@ public class ModModelLayers {
     // Model layer location for the Bear entity
     public static final ModelLayerLocation BEAR_LAYER = new ModelLayerLocation(
             new ResourceLocation(AGoTMod.MOD_ID, "bear_layer"), "main");
+
+    public static final ModelLayerLocation WIGHT_LAYER = new ModelLayerLocation(
+            new ResourceLocation(AGoTMod.MOD_ID, "wight_layer"), "main");
 }

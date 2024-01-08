@@ -30,6 +30,7 @@ public class ModCreativeAnimals {
                         /** SPAWN EGGS */
                         pOutput.accept(ModItems.RHINO_SPANW_EGG.get());
                         pOutput.accept(ModItems.BEAR_SPANW_EGG.get());
+                        pOutput.accept(ModItems.WIGHT_SPANW_EGG.get());
 
                     })
                     .build());

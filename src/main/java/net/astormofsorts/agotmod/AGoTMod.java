@@ -7,6 +7,7 @@ import net.astormofsorts.agotmod.block.ModBLocks;
 import net.astormofsorts.agotmod.entity.ModEntities;
 import net.astormofsorts.agotmod.entity.client.BearRenderer;
 import net.astormofsorts.agotmod.entity.client.RhinoRenderer;
+import net.astormofsorts.agotmod.entity.client.norththewall.WightRenderer;
 import net.astormofsorts.agotmod.item.creativetabs.*;
 import net.astormofsorts.agotmod.item.ModItems;
 import net.astormofsorts.agotmod.villager.ModVillagers;
@@ -94,6 +95,7 @@ public class AGoTMod {
             // Register custom renderer for the Rhino entity
             EntityRenderers.register(ModEntities.RHINO.get(), RhinoRenderer::new);
             EntityRenderers.register(ModEntities.BEAR.get(), BearRenderer::new);
+            EntityRenderers.register(ModEntities.WIGHT.get(), WightRenderer::new);
         }
     }
 }

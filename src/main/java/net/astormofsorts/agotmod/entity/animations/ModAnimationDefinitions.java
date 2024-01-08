@@ -368,4 +368,53 @@ public class ModAnimationDefinitions {
                             new Keyframe(0f, KeyframeAnimations.posVec(0f, 0f, 2f),
                                     AnimationChannel.Interpolations.LINEAR))).build();
     /** ---------------------------(Rhino Animations)--------------------------- // */
+
+    public static final AnimationDefinition WIGHT_EMERGING = AnimationDefinition.Builder.withLength(2.625f)
+            .addAnimation("Head",
+                    new AnimationChannel(AnimationChannel.Targets.ROTATION,
+                            new Keyframe(0f, KeyframeAnimations.degreeVec(15f, 0f, 0f),
+                                    AnimationChannel.Interpolations.LINEAR),
+                            new Keyframe(1f, KeyframeAnimations.degreeVec(14.66f, -3.21f, 12.09f),
+                                    AnimationChannel.Interpolations.LINEAR),
+                            new Keyframe(2.125f, KeyframeAnimations.degreeVec(15f, 0f, 0f),
+                                    AnimationChannel.Interpolations.LINEAR),
+                            new Keyframe(2.625f, KeyframeAnimations.degreeVec(4.92f, -0.87f, 9.96f),
+                                    AnimationChannel.Interpolations.LINEAR)))
+            .addAnimation("Body",
+                    new AnimationChannel(AnimationChannel.Targets.ROTATION,
+                            new Keyframe(0f, KeyframeAnimations.degreeVec(2.5f, 0f, 0f),
+                                    AnimationChannel.Interpolations.LINEAR)))
+            .addAnimation("RightArm",
+                    new AnimationChannel(AnimationChannel.Targets.ROTATION,
+                            new Keyframe(0f, KeyframeAnimations.degreeVec(-122.5f, 0f, 0f),
+                                    AnimationChannel.Interpolations.LINEAR),
+                            new Keyframe(1f, KeyframeAnimations.degreeVec(-124.14f, 16.77f, -11.07f),
+                                    AnimationChannel.Interpolations.LINEAR),
+                            new Keyframe(1.9583433f, KeyframeAnimations.degreeVec(-108.57f, 9.67f, -8.58f),
+                                    AnimationChannel.Interpolations.LINEAR),
+                            new Keyframe(2.625f, KeyframeAnimations.degreeVec(-130.01f, 25.49f, -21.47f),
+                                    AnimationChannel.Interpolations.LINEAR)))
+            .addAnimation("LeftArm",
+                    new AnimationChannel(AnimationChannel.Targets.ROTATION,
+                            new Keyframe(0f, KeyframeAnimations.degreeVec(-25f, 0f, 0f),
+                                    AnimationChannel.Interpolations.LINEAR),
+                            new Keyframe(1f, KeyframeAnimations.degreeVec(-50.25f, -32.83f, -24.27f),
+                                    AnimationChannel.Interpolations.LINEAR),
+                            new Keyframe(1.9583433f, KeyframeAnimations.degreeVec(-136.36f, -12.28f, 12.57f),
+                                    AnimationChannel.Interpolations.LINEAR),
+                            new Keyframe(2.625f, KeyframeAnimations.degreeVec(-55f, -40f, -97.5f),
+                                    AnimationChannel.Interpolations.LINEAR)))
+            .addAnimation("RightLeg",
+                    new AnimationChannel(AnimationChannel.Targets.ROTATION,
+                            new Keyframe(0f, KeyframeAnimations.degreeVec(-20f, 0f, 0f),
+                                    AnimationChannel.Interpolations.LINEAR),
+                            new Keyframe(1f, KeyframeAnimations.degreeVec(13.64f, 12.93f, 11.58f),
+                                    AnimationChannel.Interpolations.LINEAR)))
+            .addAnimation("LeftLeg",
+                    new AnimationChannel(AnimationChannel.Targets.ROTATION,
+                            new Keyframe(0f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
+                                    AnimationChannel.Interpolations.LINEAR),
+                            new Keyframe(2.5416765f, KeyframeAnimations.degreeVec(-12.09f, -3.21f, -14.66f),
+                                    AnimationChannel.Interpolations.LINEAR))).build();
+
 }

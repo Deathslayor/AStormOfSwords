@@ -6,6 +6,7 @@ import net.astormofsorts.agotmod.AGoTMod;
 import net.astormofsorts.agotmod.entity.ModEntities;
 import net.astormofsorts.agotmod.entity.custom.BearEntity;
 import net.astormofsorts.agotmod.entity.custom.RhinoEntity;
+import net.astormofsorts.agotmod.entity.custom.norththewall.WightEntity;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -21,5 +22,6 @@ public class ModEventBusEvents {
         // The attributes are created using the createAttributes() method of RhinoEntity
         event.put(ModEntities.RHINO.get(), RhinoEntity.createAttributes().build());
         event.put(ModEntities.BEAR.get(), BearEntity.createAttributes().build());
+        event.put(ModEntities.WIGHT.get(), WightEntity.createAttributes().build());
     }
 }
