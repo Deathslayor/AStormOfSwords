@@ -44,7 +44,8 @@ public class AGoTMod {
         ModCreativeArmour.register(modEventBus);
         ModCreativeBuildingBlocks.register(modEventBus);
         ModCreativeFoods.register(modEventBus);
-        ModCreativeHandheld.register(modEventBus);
+        ModCreativeWeapons.register(modEventBus);
+        ModCreativeTools.register(modEventBus);
         ModCreativeIngots.register(modEventBus);
         ModCreativeNaturalBlocks.register(modEventBus);
 

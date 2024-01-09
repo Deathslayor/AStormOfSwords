@@ -1,4 +1,4 @@
-// 1.20.1	2024-01-08T21:38:15.4224017	Block States: agotmod
+// 1.20.1	2024-01-08T22:57:02.705875	Block States: agotmod
 c1198d04c0be535f489d7706116baf755e34083f assets/agotmod/blockstates/bronze_block.json
 cbf740f379ae9985b83668c87abe090097209087 assets/agotmod/blockstates/dark_stone_brick.json
 df31d72dd7ce74965809089f52b54abd0f239919 assets/agotmod/blockstates/deepslate_tin_ore.json
@@ -33,10 +33,10 @@ f19d2b68ec45982b662329f7742cd98d0dc4d4df assets/agotmod/models/block/stone_brick
 04b676526d2e91cef627cff2a3ea318884310bbc assets/agotmod/models/block/stripped_sycamore_log_horizontal.json
 bd34c7321909bdba8da9a3477224097b811c1123 assets/agotmod/models/block/stripped_sycamore_wood.json
 061b120505d2698eeca30c39846c4e2455fc139b assets/agotmod/models/block/stripped_sycamore_wood_horizontal.json
-ccd3556d57bb80175ff8b9ab453c5aaca348bb9a assets/agotmod/models/block/stripped_weirwood_log.json
-8bfa67691100b6cf12c691f39cd1b430fe9783c8 assets/agotmod/models/block/stripped_weirwood_log_horizontal.json
-1379edce409e5903e37f83e5f8594b7afda092f3 assets/agotmod/models/block/stripped_weirwood_wood.json
-199b27d46dc47f8a4150d8a8c051eff5bef8f871 assets/agotmod/models/block/stripped_weirwood_wood_horizontal.json
+1379edce409e5903e37f83e5f8594b7afda092f3 assets/agotmod/models/block/stripped_weirwood_log.json
+199b27d46dc47f8a4150d8a8c051eff5bef8f871 assets/agotmod/models/block/stripped_weirwood_log_horizontal.json
+ccd3556d57bb80175ff8b9ab453c5aaca348bb9a assets/agotmod/models/block/stripped_weirwood_wood.json
+8bfa67691100b6cf12c691f39cd1b430fe9783c8 assets/agotmod/models/block/stripped_weirwood_wood_horizontal.json
 441ab395a636515be79615551937617fc84c310b assets/agotmod/models/block/sycamore_leaves.json
 059670b1b3b401ef0e40fec88d669ebc61c32792 assets/agotmod/models/block/sycamore_log.json
 a2eb7f3589b398ff352e8d3b72588367069e707a assets/agotmod/models/block/sycamore_log_horizontal.json

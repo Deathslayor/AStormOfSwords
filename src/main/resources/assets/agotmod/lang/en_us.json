@@ -36,6 +36,8 @@
   "item.agotmod.cooked_white_sausage": "Cooked White Sausage",
   "item.agotmod.raw_sausage": "Raw Sausage",
   "item.agotmod.cooked_sausage": "Cooked Sausage",
+  "item.agotmod.cooked_bacon": "Cooked Bacon",
+  "item.agotmod.raw_bacon": "Raw Bacon",
 
 
   "item.agotmod.bronze_sword": "Bronze Sword",
@@ -74,15 +76,17 @@
 
   "block.agotmod.weirwood_log": "Weirwood Log",
   "block.agotmod.stripped_weirwood_log": "Stripped Weirwood Log",
-  "block.agotmod.weirwood_wood": "Weirwood Log",
-  "block.agotmod.stripped_weirwood_wood": "Stripped Weirwood Wood",
+  "block.agotmod.weirwood_wood": "Weirwood",
+  "block.agotmod.stripped_weirwood_wood": "Stripped Weirwood",
   "block.agotmod.weirwood_planks": "Weirwood Planks",
   "block.agotmod.weirwood_leaves": "Weirwood Leaves",
   "block.agotmod.weirwood_sapling": "Weirwood Sapling",
+  "item.agotmod.weirwood_stick": "Weirwood Stick",
 
 
   "creativetab.agot_tab": "ASoS Tab",
-  "creativetab.agot_tab_handheld": "ASoS Handheld",
+  "creativetab.agot_tab_weapons": "ASoS Weapons",
+  "creativetab.agot_tab_tools": "ASoS Tools",
   "creativetab.agot_tab_foods": "ASoS Foods",
   "creativetab.agot_tab_armour": "ASoS Armour",
   "creativetab.agot_tab_animals": "ASoS Animals",

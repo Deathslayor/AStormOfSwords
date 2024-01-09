@@ -148,17 +148,26 @@ public class ModItems {
             () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
     public static final RegistryObject<Item> COOKED_WHITE_SAUSAGE = ITEMS.register("cooked_white_sausage",
             () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
-    public static final RegistryObject<Item> COOKED_BLOOD_SAUSAGE = ITEMS.register("cooked_blood_sausage",
-            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
-    public static final RegistryObject<Item> COOKED_SAUSAGE = ITEMS.register("cooked_sausage",
-            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
     public static final RegistryObject<Item> RAW_WHITE_SAUSAGE = ITEMS.register("raw_white_sausage",
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+    public static final RegistryObject<Item> COOKED_BLOOD_SAUSAGE = ITEMS.register("cooked_blood_sausage",
             () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
     public static final RegistryObject<Item> RAW_BLOOD_SAUSAGE = ITEMS.register("raw_blood_sausage",
             () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+    public static final RegistryObject<Item> COOKED_SAUSAGE = ITEMS.register("cooked_sausage",
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
     public static final RegistryObject<Item> RAW_SAUSAGE = ITEMS.register("raw_sausage",
             () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+    public static final RegistryObject<Item> COOKED_BACON = ITEMS.register("cooked_bacon",
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+    public static final RegistryObject<Item> RAW_BACON = ITEMS.register("raw_bacon",
+            () -> new Item(new Item.Properties().food(ModFoods.RAW_BEAR_MEAT)));
+
     // ---------------------------(FOODS)--------------------------- //
+
+    // ---------------------------(CRAFTING ITEMS)--------------------------- //
+    public static final RegistryObject<Item> WEIRWOOD_STICK = ITEMS.register("weirwood_stick",
+            () -> new Item(new Item.Properties()));
 
     // Tells the AGoTMod class to call the modded items into the game
     public static void register(IEventBus eventBus) {

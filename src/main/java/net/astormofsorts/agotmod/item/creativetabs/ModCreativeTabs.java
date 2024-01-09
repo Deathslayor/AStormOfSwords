@@ -90,11 +90,13 @@ public class ModCreativeTabs {
                         pOutput.accept(ModItems.RAW_BEAR_MEAT.get());
                         pOutput.accept(ModItems.COOKED_BEAR_MEAT.get());
                         pOutput.accept(ModItems.RAW_SAUSAGE.get());
-                        pOutput.accept(ModItems.RAW_BLOOD_SAUSAGE.get());
-                        pOutput.accept(ModItems.COOKED_WHITE_SAUSAGE.get());
                         pOutput.accept(ModItems.COOKED_SAUSAGE.get());
-                        pOutput.accept(ModItems.RAW_WHITE_SAUSAGE.get());
+                        pOutput.accept(ModItems.RAW_BLOOD_SAUSAGE.get());
                         pOutput.accept(ModItems.COOKED_BLOOD_SAUSAGE.get());
+                        pOutput.accept(ModItems.RAW_WHITE_SAUSAGE.get());
+                        pOutput.accept(ModItems.COOKED_WHITE_SAUSAGE.get());
+                        pOutput.accept(ModItems.RAW_BACON.get());
+                        pOutput.accept(ModItems.COOKED_BACON.get());
 
                         /** TREES */
                         pOutput.accept(ModBLocks.SYCAMORE_LOG.get());

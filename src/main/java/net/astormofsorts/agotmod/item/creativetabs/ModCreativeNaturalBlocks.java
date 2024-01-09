@@ -3,6 +3,7 @@ package net.astormofsorts.agotmod.item.creativetabs;
 
 // Importing necessary classes from other packages
 
+import net.astormofsorts.agotmod.item.ModItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -35,6 +36,7 @@ public class ModCreativeNaturalBlocks {
 
                         pOutput.accept(ModBLocks.WEIRWOOD_LEAVES.get());
                         pOutput.accept(ModBLocks.WEIRWOOD_SAPLING.get());
+                        pOutput.accept(ModItems.WEIRWOOD_STICK.get());
 
                         pOutput.accept(ModBLocks.SYCAMORE_LOG.get());
                         pOutput.accept(ModBLocks.STRIPPED_SYCAMORE_LOG.get());

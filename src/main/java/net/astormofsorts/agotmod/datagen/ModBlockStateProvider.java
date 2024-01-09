@@ -50,11 +50,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 blockTexture(ModBLocks.WEIRWOOD_LOG.get()), // side of the block
                 blockTexture(ModBLocks.WEIRWOOD_LOG.get())); // top of the block
 
-        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_WEIRWOOD_WOOD.get()),
+        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_WEIRWOOD_LOG.get()),
                 blockTexture(ModBLocks.STRIPPED_WEIRWOOD_LOG.get()), // side of the block
                 new ResourceLocation(AGoTMod.MOD_ID, "block/stripped_weirwood_log_top")); // top of the block
 
-        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_WEIRWOOD_LOG.get()),
+        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_WEIRWOOD_WOOD.get()),
                 blockTexture(ModBLocks.STRIPPED_WEIRWOOD_LOG.get()), // side of the block
                 blockTexture(ModBLocks.STRIPPED_WEIRWOOD_LOG.get())); // top of the block
 

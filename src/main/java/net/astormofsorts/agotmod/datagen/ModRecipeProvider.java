@@ -245,6 +245,10 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy(getHasName(ModItems.RAW_WHITE_SAUSAGE.get()), has(ModItems.RAW_WHITE_SAUSAGE.get())) // Unlock condition
                 .save(pWriter, "cooked_white_sausage_with_furnace");
 
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.RAW_BACON.get()),RecipeCategory.FOOD, ModItems.COOKED_BACON.get(), 0.35f, 200)
+                .unlockedBy(getHasName(ModItems.RAW_BACON.get()), has(ModItems.RAW_BACON.get())) // Unlock condition
+                .save(pWriter, "cooked_bacon_with_furnace");
+
         // Food Smelting recipes Smoker
         SimpleCookingRecipeBuilder.smoking(Ingredient.of(ModItems.RAW_SAUSAGE.get()),RecipeCategory.FOOD, ModItems.COOKED_SAUSAGE.get(), 0.35f, 100)
                 .unlockedBy(getHasName(ModItems.RAW_SAUSAGE.get()), has(ModItems.RAW_SAUSAGE.get())) // Unlock condition
@@ -262,9 +266,14 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy(getHasName(ModItems.RAW_WHITE_SAUSAGE.get()), has(ModItems.RAW_WHITE_SAUSAGE.get())) // Unlock condition
                 .save(pWriter, "cooked_white_sausage_with_smoker");
 
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(ModItems.RAW_BACON.get()),RecipeCategory.FOOD, ModItems.COOKED_BACON.get(), 0.35f, 100)
+                .unlockedBy(getHasName(ModItems.RAW_BACON.get()), has(ModItems.RAW_BACON.get())) // Unlock condition
+                .save(pWriter, "cooked_bacon_with_smoker");
 
 
-         // -------------------------------------------------(FOODS)------------------------------------------------- //
+
+
+        // -------------------------------------------------(FOODS)------------------------------------------------- //
 
 
     }

@@ -70,17 +70,23 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.RAW_BEAR_MEAT);
         simpleItem(ModItems.COOKED_BEAR_MEAT);
         simpleItem(ModItems.RAW_SAUSAGE);
-        simpleItem(ModItems.RAW_WHITE_SAUSAGE);
-        simpleItem(ModItems.RAW_BLOOD_SAUSAGE);
         simpleItem(ModItems.COOKED_SAUSAGE);
-        simpleItem(ModItems.COOKED_BLOOD_SAUSAGE);
+        simpleItem(ModItems.RAW_WHITE_SAUSAGE);
         simpleItem(ModItems.COOKED_WHITE_SAUSAGE);
+        simpleItem(ModItems.RAW_BLOOD_SAUSAGE);
+        simpleItem(ModItems.COOKED_BLOOD_SAUSAGE);
+        simpleItem(ModItems.RAW_BACON);
+        simpleItem(ModItems.COOKED_BACON);
         // ---------------------------(FOODS)--------------------------- //
 
         // ---------------------------(SAPLINGS)--------------------------- //
         saplingItem(ModBLocks.WEIRWOOD_SAPLING);
         saplingItem(ModBLocks.SYCAMORE_SAPLING);
         // ---------------------------(SAPLINGS)--------------------------- //
+
+        // ---------------------------(CRAFTING ITEMS)--------------------------- //
+        // Register item models for crafting items
+        simpleItem(ModItems.WEIRWOOD_STICK);
     }
 
     private ItemModelBuilder saplingItem(RegistryObject<Block> item) {
