@@ -100,6 +100,8 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         // ---------------------------(CRAFTING ITEMS)--------------------------- //
         // Register item models for crafting items
+        simpleItem(ModItems.BOAR_INTESTINES);
+        simpleItem(ModItems.BOAR_TUSK);
         simpleItem(ModItems.WEIRWOOD_STICK);
     }
 

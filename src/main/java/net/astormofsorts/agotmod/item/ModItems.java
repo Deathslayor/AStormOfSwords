@@ -193,7 +193,11 @@ public class ModItems {
 
     // ---------------------------(FOODS)--------------------------- //
 
-    // ---------------------------(CRAFTING ITEMS)--------------------------- //
+    // ---------------------------(CRAFTING INGREDIENTS)--------------------------- //
+    public static final RegistryObject<Item> BOAR_INTESTINES = ITEMS.register("boar_intestines",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> BOAR_TUSK = ITEMS.register("boar_tusk",
+            () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> WEIRWOOD_STICK = ITEMS.register("weirwood_stick",
             () -> new Item(new Item.Properties()));
 

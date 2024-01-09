@@ -52,6 +52,8 @@ public class ModCreativeFoods {
                         pOutput.accept(ModItems.COOKED_HORSE_MEAT.get());
                         pOutput.accept(ModItems.RAW_MAMMOTH_MEAT.get());
                         pOutput.accept(ModItems.COOKED_MAMMOTH_MEAT.get());
+                        pOutput.accept(ModItems.BOAR_INTESTINES.get());
+                        pOutput.accept(ModItems.BOAR_TUSK.get());
                     })
                     .build());
 
