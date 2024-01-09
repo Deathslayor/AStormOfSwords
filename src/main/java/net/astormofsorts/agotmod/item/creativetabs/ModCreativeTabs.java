@@ -97,6 +97,20 @@ public class ModCreativeTabs {
                         pOutput.accept(ModItems.COOKED_WHITE_SAUSAGE.get());
                         pOutput.accept(ModItems.RAW_BACON.get());
                         pOutput.accept(ModItems.COOKED_BACON.get());
+                        pOutput.accept(ModItems.RAW_BOAR_VENISON.get());
+                        pOutput.accept(ModItems.COOKED_BOAR_VENISON.get());
+                        pOutput.accept(ModItems.RAW_CHICKEN_NUGGETS.get());
+                        pOutput.accept(ModItems.COOKED_CHICKEN_NUGGETS.get());
+                        pOutput.accept(ModItems.RAW_DEER_VENISON.get());
+                        pOutput.accept(ModItems.COOKED_DEER_VENISON.get());
+                        pOutput.accept(ModItems.RAW_GOAT_MEAT.get());
+                        pOutput.accept(ModItems.COOKED_GOAT_MEAT.get());
+                        pOutput.accept(ModItems.RAW_HARE_MEAT.get());
+                        pOutput.accept(ModItems.COOKED_HARE_MEAT.get());
+                        pOutput.accept(ModItems.RAW_HORSE_MEAT.get());
+                        pOutput.accept(ModItems.COOKED_HORSE_MEAT.get());
+                        pOutput.accept(ModItems.RAW_MAMMOTH_MEAT.get());
+                        pOutput.accept(ModItems.COOKED_MAMMOTH_MEAT.get());
 
                         /** TREES */
                         pOutput.accept(ModBLocks.SYCAMORE_LOG.get());

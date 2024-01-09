@@ -23,7 +23,7 @@ public class ModCreativeFoods {
     // Adding items into the MAIN mod tab in creative
     public static final RegistryObject<CreativeModeTab> AGOT_TAB_FOODS = CREATIVE_MODE_TAB.register("agot_tab_foods",
             () -> CreativeModeTab.builder()
-                    .icon(() -> new ItemStack(ModItems.COOKED_BEAR_MEAT.get())) // Icon for the creative mode tab
+                    .icon(() -> new ItemStack(ModItems.RAW_BACON.get())) // Icon for the creative mode tab
                     .title(Component.translatable("creativetab.agot_tab_foods")) // Title for the creative mode tab
                     .displayItems((pParameters, pOutput) -> {
 
@@ -38,6 +38,20 @@ public class ModCreativeFoods {
                         pOutput.accept(ModItems.COOKED_WHITE_SAUSAGE.get());
                         pOutput.accept(ModItems.RAW_BACON.get());
                         pOutput.accept(ModItems.COOKED_BACON.get());
+                        pOutput.accept(ModItems.RAW_BOAR_VENISON.get());
+                        pOutput.accept(ModItems.COOKED_BOAR_VENISON.get());
+                        pOutput.accept(ModItems.RAW_CHICKEN_NUGGETS.get());
+                        pOutput.accept(ModItems.COOKED_CHICKEN_NUGGETS.get());
+                        pOutput.accept(ModItems.RAW_DEER_VENISON.get());
+                        pOutput.accept(ModItems.COOKED_DEER_VENISON.get());
+                        pOutput.accept(ModItems.RAW_GOAT_MEAT.get());
+                        pOutput.accept(ModItems.COOKED_GOAT_MEAT.get());
+                        pOutput.accept(ModItems.RAW_HARE_MEAT.get());
+                        pOutput.accept(ModItems.COOKED_HARE_MEAT.get());
+                        pOutput.accept(ModItems.RAW_HORSE_MEAT.get());
+                        pOutput.accept(ModItems.COOKED_HORSE_MEAT.get());
+                        pOutput.accept(ModItems.RAW_MAMMOTH_MEAT.get());
+                        pOutput.accept(ModItems.COOKED_MAMMOTH_MEAT.get());
                     })
                     .build());
 

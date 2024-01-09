@@ -162,6 +162,34 @@ public class ModItems {
             () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
     public static final RegistryObject<Item> RAW_BACON = ITEMS.register("raw_bacon",
             () -> new Item(new Item.Properties().food(ModFoods.RAW_BEAR_MEAT)));
+    public static final RegistryObject<Item> COOKED_BOAR_VENISON = ITEMS.register("cooked_boar_venison",
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+    public static final RegistryObject<Item> RAW_BOAR_VENISON = ITEMS.register("raw_boar_venison",
+            () -> new Item(new Item.Properties().food(ModFoods.RAW_BEAR_MEAT)));
+    public static final RegistryObject<Item> COOKED_CHICKEN_NUGGETS = ITEMS.register("cooked_chicken_nuggets",
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+    public static final RegistryObject<Item> RAW_CHICKEN_NUGGETS = ITEMS.register("raw_chicken_nuggets",
+            () -> new Item(new Item.Properties().food(ModFoods.RAW_BEAR_MEAT)));
+    public static final RegistryObject<Item> COOKED_DEER_VENISON = ITEMS.register("cooked_deer_venison",
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+    public static final RegistryObject<Item> RAW_DEER_VENISON  = ITEMS.register("raw_deer_venison",
+            () -> new Item(new Item.Properties().food(ModFoods.RAW_BEAR_MEAT)));
+    public static final RegistryObject<Item> COOKED_GOAT_MEAT = ITEMS.register("cooked_goat_meat",
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+    public static final RegistryObject<Item> RAW_GOAT_MEAT  = ITEMS.register("raw_goat_meat",
+            () -> new Item(new Item.Properties().food(ModFoods.RAW_BEAR_MEAT)));
+    public static final RegistryObject<Item> COOKED_HARE_MEAT = ITEMS.register("cooked_hare_meat",
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+    public static final RegistryObject<Item> RAW_HARE_MEAT  = ITEMS.register("raw_hare_meat",
+            () -> new Item(new Item.Properties().food(ModFoods.RAW_BEAR_MEAT)));
+    public static final RegistryObject<Item> COOKED_HORSE_MEAT = ITEMS.register("cooked_horse_meat",
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+    public static final RegistryObject<Item> RAW_HORSE_MEAT  = ITEMS.register("raw_horse_meat",
+            () -> new Item(new Item.Properties().food(ModFoods.RAW_BEAR_MEAT)));
+    public static final RegistryObject<Item> COOKED_MAMMOTH_MEAT = ITEMS.register("cooked_mammoth_meat",
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+    public static final RegistryObject<Item> RAW_MAMMOTH_MEAT  = ITEMS.register("raw_mammoth_meat",
+            () -> new Item(new Item.Properties().food(ModFoods.RAW_BEAR_MEAT)));
 
     // ---------------------------(FOODS)--------------------------- //
 

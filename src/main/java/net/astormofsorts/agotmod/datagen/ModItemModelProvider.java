@@ -77,6 +77,20 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.COOKED_BLOOD_SAUSAGE);
         simpleItem(ModItems.RAW_BACON);
         simpleItem(ModItems.COOKED_BACON);
+        simpleItem(ModItems.COOKED_BOAR_VENISON);
+        simpleItem(ModItems.RAW_BOAR_VENISON);
+        simpleItem(ModItems.COOKED_CHICKEN_NUGGETS);
+        simpleItem(ModItems.RAW_CHICKEN_NUGGETS);
+        simpleItem(ModItems.COOKED_DEER_VENISON);
+        simpleItem(ModItems.RAW_DEER_VENISON);
+        simpleItem(ModItems.COOKED_GOAT_MEAT);
+        simpleItem(ModItems.RAW_GOAT_MEAT);
+        simpleItem(ModItems.COOKED_HARE_MEAT);
+        simpleItem(ModItems.RAW_HARE_MEAT);
+        simpleItem(ModItems.COOKED_HORSE_MEAT);
+        simpleItem(ModItems.RAW_HORSE_MEAT);
+        simpleItem(ModItems.COOKED_MAMMOTH_MEAT);
+        simpleItem(ModItems.RAW_MAMMOTH_MEAT);
         // ---------------------------(FOODS)--------------------------- //
 
         // ---------------------------(SAPLINGS)--------------------------- //
