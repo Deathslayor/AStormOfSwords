@@ -46,4 +46,19 @@ public class ModToolTiers {
             // List of downgrade tiers (e.g., no downgrade tiers for STEEL)
             List.of());
 
+    // Custom tool tier: NOBLE
+    public static final Tier NOBLE = TierSortingRegistry.registerTier(
+            // ForgeTier constructor parameters:
+            new ForgeTier(4, 4062, 9.0F, 5.0F, 18,
+                    // Custom block tag for tools requiring STEEL
+                    ModTags.Blocks.NEEDS_STEEL_TOOL,
+                    // Ingredient for crafting tools with STEEL
+                    () -> Ingredient.of(ModItems.STEEL_INGOT.get())),
+            // Resource location for the custom tier
+            new ResourceLocation(AGoTMod.MOD_ID, "noble_ingot"),
+            // List of upgrade tiers (e.g., Netherite)
+            List.of(Tiers.NETHERITE),
+            // List of downgrade tiers (e.g., no downgrade tiers for STEEL)
+            List.of());
+
 }

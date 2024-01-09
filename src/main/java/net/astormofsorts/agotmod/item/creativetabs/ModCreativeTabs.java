@@ -79,6 +79,13 @@ public class ModCreativeTabs {
                         pOutput.accept(ModItems.STEEL_BATTLEAXE.get());
                         pOutput.accept(ModItems.STEEL_HALBERD.get());
 
+                        pOutput.accept(ModItems.NOBLE_LONGSWORD.get());
+                        pOutput.accept(ModItems.NOBLE_SPEAR.get());
+                        pOutput.accept(ModItems.NOBLE_DAGGER.get());
+                        pOutput.accept(ModItems.NOBLE_MACE.get());
+                        pOutput.accept(ModItems.NOBLE_BATTLEAXE.get());
+                        pOutput.accept(ModItems.NOBLE_HALBERD.get());
+
 
                         pOutput.accept(ModItems.STEEL_SWORD.get());
                         pOutput.accept(ModItems.STEEL_AXE.get());
