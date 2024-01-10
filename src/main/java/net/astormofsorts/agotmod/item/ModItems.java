@@ -161,49 +161,49 @@ public class ModItems {
     public static final RegistryObject<Item> COOKED_BEAR_MEAT = ITEMS.register("cooked_bear_meat",
             () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
     public static final RegistryObject<Item> COOKED_WHITE_SAUSAGE = ITEMS.register("cooked_white_sausage",
-            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_WHITE_SAUSAGE)));
     public static final RegistryObject<Item> RAW_WHITE_SAUSAGE = ITEMS.register("raw_white_sausage",
-            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+            () -> new Item(new Item.Properties().food(ModFoods.RAW_WHITE_SAUSAGE)));
     public static final RegistryObject<Item> COOKED_BLOOD_SAUSAGE = ITEMS.register("cooked_blood_sausage",
-            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BLOOD_SAUSAGE)));
     public static final RegistryObject<Item> RAW_BLOOD_SAUSAGE = ITEMS.register("raw_blood_sausage",
-            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+            () -> new Item(new Item.Properties().food(ModFoods.RAW_BLOOD_SAUSAGE)));
     public static final RegistryObject<Item> COOKED_SAUSAGE = ITEMS.register("cooked_sausage",
-            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_SAUSAGE)));
     public static final RegistryObject<Item> RAW_SAUSAGE = ITEMS.register("raw_sausage",
-            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+            () -> new Item(new Item.Properties().food(ModFoods.RAW_SAUSAGE)));
     public static final RegistryObject<Item> COOKED_BACON = ITEMS.register("cooked_bacon",
-            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BACON)));
     public static final RegistryObject<Item> RAW_BACON = ITEMS.register("raw_bacon",
-            () -> new Item(new Item.Properties().food(ModFoods.RAW_BEAR_MEAT)));
+            () -> new Item(new Item.Properties().food(ModFoods.RAW_BACON)));
     public static final RegistryObject<Item> COOKED_BOAR_VENISON = ITEMS.register("cooked_boar_venison",
-            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BOAR_VENISON)));
     public static final RegistryObject<Item> RAW_BOAR_VENISON = ITEMS.register("raw_boar_venison",
-            () -> new Item(new Item.Properties().food(ModFoods.RAW_BEAR_MEAT)));
+            () -> new Item(new Item.Properties().food(ModFoods.RAW_BOAR_VENISON)));
     public static final RegistryObject<Item> COOKED_CHICKEN_NUGGETS = ITEMS.register("cooked_chicken_nuggets",
-            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_CHICKEN_NUGGETS)));
     public static final RegistryObject<Item> RAW_CHICKEN_NUGGETS = ITEMS.register("raw_chicken_nuggets",
-            () -> new Item(new Item.Properties().food(ModFoods.RAW_BEAR_MEAT)));
+            () -> new Item(new Item.Properties().food(ModFoods.RAW_CHICKEN_NUGGETS)));
     public static final RegistryObject<Item> COOKED_DEER_VENISON = ITEMS.register("cooked_deer_venison",
-            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_DEER_VENISON)));
     public static final RegistryObject<Item> RAW_DEER_VENISON  = ITEMS.register("raw_deer_venison",
-            () -> new Item(new Item.Properties().food(ModFoods.RAW_BEAR_MEAT)));
+            () -> new Item(new Item.Properties().food(ModFoods.RAW_DEER_VENISON)));
     public static final RegistryObject<Item> COOKED_GOAT_MEAT = ITEMS.register("cooked_goat_meat",
-            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_GOAT_MEAT)));
     public static final RegistryObject<Item> RAW_GOAT_MEAT  = ITEMS.register("raw_goat_meat",
-            () -> new Item(new Item.Properties().food(ModFoods.RAW_BEAR_MEAT)));
+            () -> new Item(new Item.Properties().food(ModFoods.RAW_GOAT_MEAT)));
     public static final RegistryObject<Item> COOKED_HARE_MEAT = ITEMS.register("cooked_hare_meat",
-            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_HARE_MEAT)));
     public static final RegistryObject<Item> RAW_HARE_MEAT  = ITEMS.register("raw_hare_meat",
-            () -> new Item(new Item.Properties().food(ModFoods.RAW_BEAR_MEAT)));
+            () -> new Item(new Item.Properties().food(ModFoods.RAW_HARE_MEAT)));
     public static final RegistryObject<Item> COOKED_HORSE_MEAT = ITEMS.register("cooked_horse_meat",
-            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_HORSE_MEAT)));
     public static final RegistryObject<Item> RAW_HORSE_MEAT  = ITEMS.register("raw_horse_meat",
-            () -> new Item(new Item.Properties().food(ModFoods.RAW_BEAR_MEAT)));
+            () -> new Item(new Item.Properties().food(ModFoods.RAW_HORSE_MEAT)));
     public static final RegistryObject<Item> COOKED_MAMMOTH_MEAT = ITEMS.register("cooked_mammoth_meat",
-            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_MAMMOTH_MEAT)));
     public static final RegistryObject<Item> RAW_MAMMOTH_MEAT  = ITEMS.register("raw_mammoth_meat",
-            () -> new Item(new Item.Properties().food(ModFoods.RAW_BEAR_MEAT)));
+            () -> new Item(new Item.Properties().food(ModFoods.RAW_MAMMOTH_MEAT)));
 
     // ---------------------------(FOODS)--------------------------- //
 

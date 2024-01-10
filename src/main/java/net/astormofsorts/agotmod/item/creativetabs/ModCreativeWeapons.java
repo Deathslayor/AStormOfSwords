@@ -28,6 +28,7 @@ public class ModCreativeWeapons {
                     .displayItems((pParameters, pOutput) -> {
                         /** TOOLS */
                         pOutput.accept(ModItems.BRONZE_SWORD.get());
+                        pOutput.accept(ModItems.BRONZE_SPATHA.get());
 
                         pOutput.accept(ModItems.IRON_LONGSWORD.get());
                         pOutput.accept(ModItems.IRON_SPEAR.get());
