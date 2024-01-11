@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "agotmod:stripped_sycamore_log"
+    },
+    {
+      "item": "agotmod:stripped_sycamore_log"
+    },
+    {
+      "item": "agotmod:stripped_sycamore_log"
+    },
+    {
+      "item": "agotmod:stripped_sycamore_log"
+    }
+  ],
+  "result": {
+    "count": 3,
+    "item": "agotmod:stripped_sycamore_wood"
+  }
+}

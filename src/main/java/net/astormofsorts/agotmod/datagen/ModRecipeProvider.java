@@ -225,6 +225,49 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .save(pWriter);
         // -------------------------------------------------(STONE CUTTER)------------------------------------------------- //
 
+        // -------------------------------------------------(WOOD)------------------------------------------------- //
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.SYCAMORE_WOOD.get(), 3)
+                .requires(ModBLocks.SYCAMORE_LOG.get(), 4)
+                .unlockedBy(getHasName(ModBLocks.SYCAMORE_LOG.get()), has(ModBLocks.SYCAMORE_LOG.get()))
+                .save(pWriter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.STRIPPED_SYCAMORE_WOOD.get(), 3)
+                .requires(ModBLocks.STRIPPED_SYCAMORE_LOG.get(), 4)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_SYCAMORE_LOG.get()), has(ModBLocks.STRIPPED_SYCAMORE_LOG.get()))
+                .save(pWriter);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.SYCAMORE_PLANKS.get(), 4)
+                .requires(ModBLocks.STRIPPED_SYCAMORE_WOOD.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_SYCAMORE_WOOD.get()), has(ModBLocks.STRIPPED_SYCAMORE_WOOD.get()))
+                .save(pWriter, "planks_from_sycamore_stripped_wood");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.SYCAMORE_PLANKS.get(), 4)
+                .requires(ModBLocks.SYCAMORE_WOOD.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.SYCAMORE_WOOD.get()), has(ModBLocks.SYCAMORE_WOOD.get()))
+                .save(pWriter, "planks_from_sycamore_wood");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.SYCAMORE_PLANKS.get(), 4)
+                .requires(ModBLocks.STRIPPED_SYCAMORE_LOG.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_SYCAMORE_LOG.get()), has(ModBLocks.STRIPPED_SYCAMORE_LOG.get()))
+                .save(pWriter, "planks_from_sycamore_stripped_log");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.SYCAMORE_PLANKS.get(), 4)
+                .requires(ModBLocks.SYCAMORE_LOG.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.SYCAMORE_LOG.get()), has(ModBLocks.SYCAMORE_LOG.get()))
+                .save(pWriter, "planks_from_sycamore_log");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Blocks.CRAFTING_TABLE)
+                .pattern("BB")
+                .pattern("BB")
+                .pattern("  ")
+                .define('B', ModBLocks.SYCAMORE_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.SYCAMORE_PLANKS.get()), has(ModBLocks.SYCAMORE_PLANKS.get()))
+                .save(pWriter);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.STICK)
+                .pattern("B")
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.SYCAMORE_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.SYCAMORE_PLANKS.get()), has(ModBLocks.SYCAMORE_PLANKS.get()))
+                .save(pWriter);
+        // -------------------------------------------------(WOOD)------------------------------------------------- //
+
 
 
         // -------------------------------------------------(FOODS)------------------------------------------------- //
@@ -331,13 +374,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
 
         // -------------------------------------------------(FOODS)------------------------------------------------- //
-
-
-    }
-
-
-    protected static void simpleCookingRecipe(Consumer<FinishedRecipe> pFinishedRecipeConsumer, String pCookingMethod, RecipeSerializer<? extends AbstractCookingRecipe> pCookingSerializer, int pCookingTime, ItemLike pIngredient, ItemLike pResult, float pExperience) {
-        SimpleCookingRecipeBuilder.generic(Ingredient.of(pIngredient), RecipeCategory.FOOD, pResult, pExperience, pCookingTime, pCookingSerializer).unlockedBy(getHasName(pIngredient), has(pIngredient)).save(pFinishedRecipeConsumer, getItemName(pResult) + "_from_" + pCookingMethod);
     }
 
     /**
