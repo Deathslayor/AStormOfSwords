@@ -82,7 +82,6 @@ public class ModBLocks {
     // ---------------------------(BLOCKS)--------------------------- //
 
     // ---------------------------(TREE BLOCKS)--------------------------- //
-
     //Weirwood
     public static final RegistryObject<Block> WEIRWOOD_LOG = registerBlock("weirwood_log",
             () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).strength(3f)));
@@ -100,7 +99,6 @@ public class ModBLocks {
 
     public static final RegistryObject<Block> WEIRWOOD_SAPLING = registerBlock("weirwood_sapling",
             () -> new SaplingBlock(new WeirwoodTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
-
     //Sycamore
     public static final RegistryObject<Block> SYCAMORE_LOG = registerBlock("sycamore_log",
             () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).strength(3f)));

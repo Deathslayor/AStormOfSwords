@@ -15,7 +15,6 @@ import java.util.List;
 
 // A utility class for defining custom tool tiers
 public class ModToolTiers {
-
     // Custom tool tier: DRAGONGLASS
     public static final Tier DRAGONGLASS = TierSortingRegistry.registerTier(
             // ForgeTier constructor parameters:
@@ -60,7 +59,6 @@ public class ModToolTiers {
             List.of(Tiers.NETHERITE),
             // List of downgrade tiers (e.g., no downgrade tiers for STEEL)
             List.of());
-
     // Custom tool tier: NOBLE
     public static final Tier NOBLE = TierSortingRegistry.registerTier(
             // ForgeTier constructor parameters:
@@ -75,5 +73,4 @@ public class ModToolTiers {
             List.of(Tiers.NETHERITE),
             // List of downgrade tiers (e.g., no downgrade tiers for STEEL)
             List.of());
-
 }

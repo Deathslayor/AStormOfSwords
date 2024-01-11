@@ -43,7 +43,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
         // ---------------------------(BRICKS)--------------------------- //
 
         // ---------------------------(TREES)--------------------------- //
-
         //Weirwood
         logBlock((RotatedPillarBlock) ModBLocks.WEIRWOOD_LOG.get());
         axisBlock(((RotatedPillarBlock) ModBLocks.WEIRWOOD_WOOD.get()),

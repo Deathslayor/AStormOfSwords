@@ -3,6 +3,15 @@ package net.astormofsorts.agotmod.item;
 
 // Importing necessary classes from other packages
 import net.astormofsorts.agotmod.armor.custom.ModArmorMaterials;
+import net.astormofsorts.agotmod.armor.custom.bolten.BoltenLevyArmorItem;
+import net.astormofsorts.agotmod.armor.custom.bolten.BoltenNobleArmorItem;
+import net.astormofsorts.agotmod.armor.custom.bolten.BoltenPlateArmorItem;
+import net.astormofsorts.agotmod.armor.custom.manderly.ManderlyLevyArmorItem;
+import net.astormofsorts.agotmod.armor.custom.manderly.ManderlyNobleArmorItem;
+import net.astormofsorts.agotmod.armor.custom.manderly.ManderlyPlateArmorItem;
+import net.astormofsorts.agotmod.armor.custom.stark.StarkLevyArmorItem;
+import net.astormofsorts.agotmod.armor.custom.stark.StarkNoblePlateArmorItem;
+import net.astormofsorts.agotmod.armor.custom.stark.StarkPlateArmorItem;
 import net.astormofsorts.agotmod.armor.custom.Stark1ArmorItem;
 import net.minecraft.world.item.*;
 import net.astormofsorts.agotmod.AGoTMod;
@@ -19,6 +28,13 @@ public class ModItems {
     // Deferred register for items
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, AGoTMod.MOD_ID);
+    // ---------------------------(Magic)--------------------------- //
+    // Blood
+    public static final RegistryObject<Item> BLOOD_BOTTLED = ITEMS.register("blood_bottled",
+            () -> new PotionItem(new Item.Properties()));
+    // Magical Dagger
+    public static final RegistryObject<Item> BLOOD_DAGGER = ITEMS.register("blood_dagger",
+            () -> new SwordItem(ModToolTiers.STEEL, 3, 1, new Item.Properties()));
 
     // ---------------------------(COINS)--------------------------- //
     // Main currency Coin
@@ -27,31 +43,128 @@ public class ModItems {
     // ---------------------------(COINS)--------------------------- //
 
     // ---------------------------(ARMOUR)--------------------------- //
-    // Adding tier 1 STARK Armour
-    public static final RegistryObject<Item> STARK1_HELMET = ITEMS.register("stark1_helmet",
-            () -> new Stark1ArmorItem(ModArmorMaterials.STARK1, ArmorItem.Type.HELMET, new Item.Properties()));
+    // Adding Bolten Armour
 
-    public static final RegistryObject<Item> STARK1_CHESTPLATE = ITEMS.register("stark1_chestplate",
-            () -> new Stark1ArmorItem(ModArmorMaterials.STARK1, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+    //Bolten Levy
+    public static final RegistryObject<BoltenLevyArmorItem> BOLTEN_LEVY_HELMET = ITEMS.register("bolten_levy_helmet",
+            () -> new BoltenLevyArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.HELMET, new Item.Properties()));
 
-    public static final RegistryObject<Item> STARK1_LEGGINGS = ITEMS.register("stark1_leggings",
-            () -> new Stark1ArmorItem(ModArmorMaterials.STARK1, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+    public static final RegistryObject<BoltenLevyArmorItem> BOLTEN_LEVY_CHESTPLATE = ITEMS.register("bolten_levy_chestplate",
+            () -> new BoltenLevyArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
 
-    public static final RegistryObject<Item> STARK1_BOOTS = ITEMS.register("stark1_boots",
-            () -> new Stark1ArmorItem(ModArmorMaterials.STARK1, ArmorItem.Type.BOOTS, new Item.Properties()));
+    public static final RegistryObject<BoltenLevyArmorItem> BOLTEN_LEVY_LEGGINGS = ITEMS.register("bolten_levy_leggings",
+            () -> new BoltenLevyArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.LEGGINGS, new Item.Properties()));
 
-    // Adding Stark Levy Armour
-    public static final RegistryObject<Item> STARK_LEVY_HELMET = ITEMS.register("stark_levy_helmet",
-            () -> new Stark1ArmorItem(ModArmorMaterials.STARK1, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static final RegistryObject<BoltenLevyArmorItem> BOLTEN_LEVY_BOOTS = ITEMS.register("bolten_levy_boots",
+            () -> new BoltenLevyArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.BOOTS, new Item.Properties()));
 
-    public static final RegistryObject<Item> STARK_LEVY_CHESTPLATE = ITEMS.register("stark_levy_chestplate",
-            () -> new Stark1ArmorItem(ModArmorMaterials.STARK1, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+    //Bolten Plate
+    public static final RegistryObject<BoltenPlateArmorItem> BOLTEN_PLATE_HELMET = ITEMS.register("bolten_plate_helmet",
+            () -> new BoltenPlateArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.HELMET, new Item.Properties()));
 
-    public static final RegistryObject<Item> STARK_LEVY_LEGGINGS = ITEMS.register("stark_levy_leggings",
-            () -> new Stark1ArmorItem(ModArmorMaterials.STARK1, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+    public static final RegistryObject<BoltenPlateArmorItem> BOLTEN_PLATE_CHESTPLATE = ITEMS.register("bolten_plate_chestplate",
+            () -> new BoltenPlateArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
 
-    public static final RegistryObject<Item> STARK_LEVY_BOOTS = ITEMS.register("stark_levy_boots",
-            () -> new Stark1ArmorItem(ModArmorMaterials.STARK1, ArmorItem.Type.BOOTS, new Item.Properties()));
+    public static final RegistryObject<BoltenPlateArmorItem> BOLTEN_PLATE_LEGGINGS = ITEMS.register("bolten_plate_leggings",
+            () -> new BoltenPlateArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+
+    public static final RegistryObject<BoltenPlateArmorItem> BOLTEN_PLATE_BOOTS = ITEMS.register("bolten_plate_boots",
+            () -> new BoltenPlateArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.BOOTS, new Item.Properties()));
+
+    //Bolten Noble
+    public static final RegistryObject<BoltenNobleArmorItem> BOLTEN_NOBLE_HELMET = ITEMS.register("bolten_noble_helmet",
+            () -> new BoltenNobleArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.HELMET, new Item.Properties()));
+
+    public static final RegistryObject<BoltenNobleArmorItem> BOLTEN_NOBLE_CHESTPLATE = ITEMS.register("bolten_noble_chestplate",
+            () -> new BoltenNobleArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+
+    public static final RegistryObject<BoltenNobleArmorItem> BOLTEN_NOBLE_LEGGINGS = ITEMS.register("bolten_noble_leggings",
+            () -> new BoltenNobleArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+
+    public static final RegistryObject<BoltenNobleArmorItem> BOLTEN_NOBLE_BOOTS = ITEMS.register("bolten_noble_boots",
+            () -> new BoltenNobleArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.BOOTS, new Item.Properties()));
+
+    //Manderly Levy
+    public static final RegistryObject<ManderlyLevyArmorItem> MANDERLY_LEVY_HELMET = ITEMS.register("manderly_levy_helmet",
+            () -> new ManderlyLevyArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.HELMET, new Item.Properties()));
+
+    public static final RegistryObject<ManderlyLevyArmorItem> MANDERLY_LEVY_CHESTPLATE = ITEMS.register("manderly_levy_chestplate",
+            () -> new ManderlyLevyArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+
+    public static final RegistryObject<ManderlyLevyArmorItem> MANDERLY_LEVY_LEGGINGS = ITEMS.register("manderly_levy_leggings",
+            () -> new ManderlyLevyArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+
+    public static final RegistryObject<ManderlyLevyArmorItem> MANDERLY_LEVY_BOOTS = ITEMS.register("manderly_levy_boots",
+            () -> new ManderlyLevyArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.BOOTS, new Item.Properties()));
+
+    //Manderly Plate
+    public static final RegistryObject<ManderlyPlateArmorItem> MANDERLY_PLATE_HELMET = ITEMS.register("manderly_plate_helmet",
+            () -> new ManderlyPlateArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.HELMET, new Item.Properties()));
+
+    public static final RegistryObject<ManderlyPlateArmorItem> MANDERLY_PLATE_CHESTPLATE = ITEMS.register("manderly_plate_chestplate",
+            () -> new ManderlyPlateArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+
+    public static final RegistryObject<ManderlyPlateArmorItem> MANDERLY_PLATE_LEGGINGS = ITEMS.register("manderly_plate_leggings",
+            () -> new ManderlyPlateArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+
+    public static final RegistryObject<ManderlyPlateArmorItem> MANDERLY_PLATE_BOOTS = ITEMS.register("manderly_plate_boots",
+            () -> new ManderlyPlateArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.BOOTS, new Item.Properties()));
+
+    //Manderly Noble
+    public static final RegistryObject<ManderlyNobleArmorItem> MANDERLY_NOBLE_HELMET = ITEMS.register("manderly_noble_helmet",
+            () -> new ManderlyNobleArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.HELMET, new Item.Properties()));
+
+    public static final RegistryObject<ManderlyNobleArmorItem> MANDERLY_NOBLE_CHESTPLATE = ITEMS.register("manderly_noble_chestplate",
+            () -> new ManderlyNobleArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+
+    public static final RegistryObject<ManderlyNobleArmorItem> MANDERLY_NOBLE_LEGGINGS = ITEMS.register("manderly_noble_leggings",
+            () -> new ManderlyNobleArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+
+    public static final RegistryObject<ManderlyNobleArmorItem> MANDERLY_NOBLE_BOOTS = ITEMS.register("manderly_noble_boots",
+            () -> new ManderlyNobleArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.BOOTS, new Item.Properties()));
+
+
+
+    // Adding Stark Armour
+
+    //Stark Levy
+    public static final RegistryObject<StarkLevyArmorItem> STARK_LEVY_HELMET = ITEMS.register("stark_levy_helmet",
+            () -> new StarkLevyArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.HELMET, new Item.Properties()));
+
+    public static final RegistryObject<StarkLevyArmorItem> STARK_LEVY_CHESTPLATE = ITEMS.register("stark_levy_chestplate",
+            () -> new StarkLevyArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+
+    public static final RegistryObject<StarkLevyArmorItem> STARK_LEVY_LEGGINGS = ITEMS.register("stark_levy_leggings",
+            () -> new StarkLevyArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+
+    public static final RegistryObject<StarkLevyArmorItem> STARK_LEVY_BOOTS = ITEMS.register("stark_levy_boots",
+            () -> new StarkLevyArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.BOOTS, new Item.Properties()));
+
+    //Stark PLate
+    public static final RegistryObject<StarkPlateArmorItem> STARKPLATE_HELMET = ITEMS.register("starkplate_helmet",
+            () -> new StarkPlateArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.HELMET, new Item.Properties()));
+
+    public static final RegistryObject<StarkPlateArmorItem> STARKPLATE_CHESTPLATE = ITEMS.register("starkplate_chestplate",
+            () -> new StarkPlateArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+
+    public static final RegistryObject<StarkPlateArmorItem> STARKPLATE_LEGGINGS = ITEMS.register("starkplate_leggings",
+            () -> new StarkPlateArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+
+    public static final RegistryObject<StarkPlateArmorItem> STARKPLATE_BOOTS = ITEMS.register("starkplate_boots",
+            () -> new StarkPlateArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.BOOTS, new Item.Properties()));
+
+    //Stark Noble
+    public static final RegistryObject<StarkNoblePlateArmorItem> STARK_NOBLE_PLATE_HELMET = ITEMS.register("stark_noble_plate_helmet",
+            () -> new StarkNoblePlateArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.HELMET, new Item.Properties()));
+
+    public static final RegistryObject<StarkNoblePlateArmorItem> STARK_NOBLE_PLATE_CHESTPLATE = ITEMS.register("stark_nobleplate_chestplate",
+            () -> new StarkNoblePlateArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+
+    public static final RegistryObject<StarkNoblePlateArmorItem> STARK_NOBLE_PLATE_LEGGINGS = ITEMS.register("stark_nobleplate_leggings",
+            () -> new StarkNoblePlateArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+
+    public static final RegistryObject<StarkNoblePlateArmorItem> STARK_NOBLE_PLATE_BOOTS = ITEMS.register("stark_nobleplate_boots",
+            () -> new StarkNoblePlateArmorItem(ModArmorMaterials.STARK_LEVY, ArmorItem.Type.BOOTS, new Item.Properties()));
     // ---------------------------(ARMOUR)--------------------------- //
 
     // ---------------------------(INGOTS/NUGGETS)--------------------------- //
@@ -73,12 +186,15 @@ public class ModItems {
     // ---------------------------(INGOTS)--------------------------- //
 
     // ---------------------------(ANIMAL SPAWN EGGS)--------------------------- //
-    public static final RegistryObject<Item> RHINO_SPANW_EGG = ITEMS.register("rhino_spawn_egg",
-            () -> new ForgeSpawnEggItem(ModEntities.RHINO, 0x7e9680, 0xc5d1c5, new Item.Properties()));
     public static final RegistryObject<Item> BEAR_SPANW_EGG = ITEMS.register("bear_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.BEAR, 0x7e9680, 0xc5d1c5, new Item.Properties()));
+
     public static final RegistryObject<Item> WIGHT_SPANW_EGG = ITEMS.register("wight_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.WIGHT, 0x7e9680, 0xc5d1c5, new Item.Properties()));
+
+    public static final RegistryObject<Item> RHINO_SPANW_EGG = ITEMS.register("rhino_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.RHINO, 0x7e9680, 0xc5d1c5, new Item.Properties()));
+
     // ---------------------------(ANIMAL SPAWN EGGS)--------------------------- //
 
     // ---------------------------(TOOLS)--------------------------- //
@@ -93,14 +209,15 @@ public class ModItems {
             () -> new AxeItem(ModToolTiers.BRONZE, 5.5F, 0.9F, new Item.Properties()));
     public static final RegistryObject<Item> BRONZE_HOE = ITEMS.register("bronze_hoe",
             () -> new HoeItem(ModToolTiers.BRONZE, 0, 0, new Item.Properties()));
+    public static final RegistryObject<Item> BRONZE_SPATHA = ITEMS.register("bronze_spatha",
+            () -> new SwordItem(ModToolTiers.BRONZE, 5, .5F, new Item.Properties()));
+
     //DRAGONGLASS WEAPONS
     public static final RegistryObject<Item> DRAGONGLASS_SPEAR = ITEMS.register("dragonglass_spear",
             () -> new SwordItem(ModToolTiers.DRAGONGLASS, 5, .5F, new Item.Properties()));
     public static final RegistryObject<Item> DRAGONGLASS_DAGGER = ITEMS.register("dragonglass_dagger",
             () -> new SwordItem(ModToolTiers.DRAGONGLASS, 5, .5F, new Item.Properties()));
     //BRONZE WEAPONS
-    public static final RegistryObject<Item> BRONZE_SPATHA = ITEMS.register("bronze_spatha",
-            () -> new SwordItem(ModToolTiers.BRONZE, 5, .5F, new Item.Properties()));
     public static final RegistryObject<Item> BRONZE_SPEAR = ITEMS.register("bronze_spear",
             () -> new SwordItem(ModToolTiers.BRONZE, 5, .5F, new Item.Properties()));
     public static final RegistryObject<Item> BRONZE_PIKE = ITEMS.register("bronze_pike",
@@ -139,7 +256,6 @@ public class ModItems {
             () -> new SwordItem(ModToolTiers.STEEL, 7, .2F, new Item.Properties()));
     public static final RegistryObject<Item> STEEL_HALBERD = ITEMS.register("steel_halberd",
             () -> new SwordItem(ModToolTiers.STEEL, 7, .2F, new Item.Properties()));
-
     // NOBLE WEAPONS
     public static final RegistryObject<Item> NOBLE_LONGSWORD = ITEMS.register("noble_longsword",
             () -> new SwordItem(ModToolTiers.NOBLE, 6, .5F, new Item.Properties()));
@@ -155,8 +271,6 @@ public class ModItems {
             () -> new SwordItem(ModToolTiers.NOBLE, 7, .2F, new Item.Properties()));
     public static final RegistryObject<Item> NOBLE_HALBERD = ITEMS.register("noble_halberd",
             () -> new SwordItem(ModToolTiers.NOBLE, 7, .2F, new Item.Properties()));
-
-
 
     // Steel TOOLS
     public static final RegistryObject<Item> STEEL_SWORD = ITEMS.register("steel_sword",
@@ -177,17 +291,17 @@ public class ModItems {
     public static final RegistryObject<Item> COOKED_BEAR_MEAT = ITEMS.register("cooked_bear_meat",
             () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
     public static final RegistryObject<Item> COOKED_WHITE_SAUSAGE = ITEMS.register("cooked_white_sausage",
-            () -> new Item(new Item.Properties().food(ModFoods.COOKED_WHITE_SAUSAGE)));
-    public static final RegistryObject<Item> RAW_WHITE_SAUSAGE = ITEMS.register("raw_white_sausage",
-            () -> new Item(new Item.Properties().food(ModFoods.RAW_WHITE_SAUSAGE)));
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
     public static final RegistryObject<Item> COOKED_BLOOD_SAUSAGE = ITEMS.register("cooked_blood_sausage",
-            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BLOOD_SAUSAGE)));
-    public static final RegistryObject<Item> RAW_BLOOD_SAUSAGE = ITEMS.register("raw_blood_sausage",
-            () -> new Item(new Item.Properties().food(ModFoods.RAW_BLOOD_SAUSAGE)));
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
     public static final RegistryObject<Item> COOKED_SAUSAGE = ITEMS.register("cooked_sausage",
-            () -> new Item(new Item.Properties().food(ModFoods.COOKED_SAUSAGE)));
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+    public static final RegistryObject<Item> RAW_WHITE_SAUSAGE = ITEMS.register("raw_white_sausage",
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+    public static final RegistryObject<Item> RAW_BLOOD_SAUSAGE = ITEMS.register("raw_blood_sausage",
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
     public static final RegistryObject<Item> RAW_SAUSAGE = ITEMS.register("raw_sausage",
-            () -> new Item(new Item.Properties().food(ModFoods.RAW_SAUSAGE)));
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
     public static final RegistryObject<Item> COOKED_BACON = ITEMS.register("cooked_bacon",
             () -> new Item(new Item.Properties().food(ModFoods.COOKED_BACON)));
     public static final RegistryObject<Item> RAW_BACON = ITEMS.register("raw_bacon",
@@ -230,7 +344,6 @@ public class ModItems {
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> WEIRWOOD_STICK = ITEMS.register("weirwood_stick",
             () -> new Item(new Item.Properties()));
-
     // Tells the AGoTMod class to call the modded items into the game
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

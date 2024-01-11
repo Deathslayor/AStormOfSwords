@@ -1,6 +1,7 @@
 package net.astormofsorts.agotmod.datagen;
 
 import net.astormofsorts.agotmod.AGoTMod;
+import net.astormofsorts.agotmod.armor.custom.stark.StarkLevyArmorItem;
 import net.astormofsorts.agotmod.block.ModBLocks;
 import net.astormofsorts.agotmod.item.ModItems;
 import net.minecraft.data.PackOutput;
@@ -29,10 +30,10 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         // ---------------------------(ARMOUR)--------------------------- //
         // Register item models for Stark Tier 1 Armour
-        simpleItem(ModItems.STARK1_BOOTS);
-        simpleItem(ModItems.STARK1_LEGGINGS);
-        simpleItem(ModItems.STARK1_CHESTPLATE);
-        simpleItem(ModItems.STARK1_HELMET);
+        simpleItemStark(ModItems.STARK_LEVY_HELMET);
+        simpleItemStark(ModItems.STARK_LEVY_CHESTPLATE);
+        simpleItemStark(ModItems.STARK_LEVY_LEGGINGS);
+        simpleItemStark(ModItems.STARK_LEVY_BOOTS);
         // ---------------------------(ARMOUR)--------------------------- //
 
         // ---------------------------(INGOTS)--------------------------- //
@@ -70,6 +71,16 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.RAW_BEAR_MEAT);
         simpleItem(ModItems.COOKED_BEAR_MEAT);
         simpleItem(ModItems.RAW_SAUSAGE);
+        simpleItem(ModItems.RAW_WHITE_SAUSAGE);
+        simpleItem(ModItems.RAW_BLOOD_SAUSAGE);
+        simpleItem(ModItems.COOKED_SAUSAGE);
+        simpleItem(ModItems.COOKED_BLOOD_SAUSAGE);
+        simpleItem(ModItems.COOKED_WHITE_SAUSAGE);
+        // ---------------------------(FOODS)--------------------------- //
+
+        // ---------------------------(SAPLINGS)--------------------------- //
+        saplingItem(ModBLocks.SYCAMORE_SAPLING);
+        // ---------------------------(SAPLINGS)--------------------------- //
         simpleItem(ModItems.COOKED_SAUSAGE);
         simpleItem(ModItems.RAW_WHITE_SAUSAGE);
         simpleItem(ModItems.COOKED_WHITE_SAUSAGE);
@@ -113,6 +124,12 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     // Method to create a simple item model
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
+        return withExistingParent(item.getId().getPath(),
+                new ResourceLocation("item/generated")).texture("layer0",
+                new ResourceLocation(AGoTMod.MOD_ID, "item/" + item.getId().getPath()));
+    }
+    // Method to create a simple item model
+    private ItemModelBuilder simpleItemStark(RegistryObject<StarkLevyArmorItem> item) {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(AGoTMod.MOD_ID, "item/" + item.getId().getPath()));

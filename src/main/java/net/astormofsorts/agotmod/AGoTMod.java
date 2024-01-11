@@ -7,9 +7,10 @@ import net.astormofsorts.agotmod.block.ModBLocks;
 import net.astormofsorts.agotmod.entity.ModEntities;
 import net.astormofsorts.agotmod.entity.client.BearRenderer;
 import net.astormofsorts.agotmod.entity.client.RhinoRenderer;
-import net.astormofsorts.agotmod.entity.client.norththewall.WightRenderer;
 import net.astormofsorts.agotmod.item.creativetabs.*;
 import net.astormofsorts.agotmod.item.ModItems;
+import net.astormofsorts.agotmod.sound.ModSounds;
+import net.astormofsorts.agotmod.entity.client.norththewall.WightRenderer;
 import net.astormofsorts.agotmod.villager.ModVillagers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
@@ -47,6 +48,10 @@ public class AGoTMod {
         ModCreativeFoods.register(modEventBus);
         ModCreativeIngredients.register(modEventBus);
         ModCreativeAnimals.register(modEventBus);
+        ModCreativeMagic.register(modEventBus);
+
+        // Adds Sounds to the game
+        ModSounds.register(modEventBus);
 
         // Adds Custom Villagers to the game
         ModVillagers.register(modEventBus);
@@ -95,6 +100,7 @@ public class AGoTMod {
             // Register custom renderer for the Rhino entity
             EntityRenderers.register(ModEntities.RHINO.get(), RhinoRenderer::new);
             EntityRenderers.register(ModEntities.BEAR.get(), BearRenderer::new);
+
             EntityRenderers.register(ModEntities.WIGHT.get(), WightRenderer::new);
         }
     }

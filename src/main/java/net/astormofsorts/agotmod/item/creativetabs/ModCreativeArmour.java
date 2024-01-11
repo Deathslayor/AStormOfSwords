@@ -23,14 +23,54 @@ public class ModCreativeArmour {
     // Adding items into the MAIN mod tab in creative
     public static final RegistryObject<CreativeModeTab> AGOT_TAB_ARMOUR = CREATIVE_MODE_TAB.register("agot_tab_armour",
             () -> CreativeModeTab.builder()
-                    .icon(() -> new ItemStack(ModItems.STARK1_CHESTPLATE.get())) // Icon for the creative mode tab
+                    .icon(() -> new ItemStack(ModItems.STARK_LEVY_CHESTPLATE.get())) // Icon for the creative mode tab
                     .title(Component.translatable("creativetab.agot_tab_armour")) // Title for the creative mode tab
                     .displayItems((pParameters, pOutput) -> {
 
-                        pOutput.accept(ModItems.STARK1_HELMET.get());
-                        pOutput.accept(ModItems.STARK1_CHESTPLATE.get());
-                        pOutput.accept(ModItems.STARK1_LEGGINGS.get());
-                        pOutput.accept(ModItems.STARK1_BOOTS.get());
+                        pOutput.accept(ModItems.STARK_LEVY_HELMET.get());
+                        pOutput.accept(ModItems.STARK_LEVY_CHESTPLATE.get());
+                        pOutput.accept(ModItems.STARK_LEVY_LEGGINGS.get());
+                        pOutput.accept(ModItems.STARK_LEVY_BOOTS.get());
+
+                        pOutput.accept(ModItems.STARKPLATE_HELMET.get());
+                        pOutput.accept(ModItems.STARKPLATE_CHESTPLATE.get());
+                        pOutput.accept(ModItems.STARKPLATE_LEGGINGS.get());
+                        pOutput.accept(ModItems.STARKPLATE_BOOTS.get());
+
+                        pOutput.accept(ModItems.STARK_NOBLE_PLATE_HELMET.get());
+                        pOutput.accept(ModItems.STARK_NOBLE_PLATE_CHESTPLATE.get());
+                        pOutput.accept(ModItems.STARK_NOBLE_PLATE_LEGGINGS.get());
+                        pOutput.accept(ModItems.STARK_NOBLE_PLATE_BOOTS.get());
+
+                        pOutput.accept(ModItems.MANDERLY_LEVY_HELMET.get());
+                        pOutput.accept(ModItems.MANDERLY_LEVY_CHESTPLATE.get());
+                        pOutput.accept(ModItems.MANDERLY_LEVY_LEGGINGS.get());
+                        pOutput.accept(ModItems.MANDERLY_LEVY_BOOTS.get());
+
+                        pOutput.accept(ModItems.MANDERLY_PLATE_HELMET.get());
+                        pOutput.accept(ModItems.MANDERLY_PLATE_CHESTPLATE.get());
+                        pOutput.accept(ModItems.MANDERLY_PLATE_LEGGINGS.get());
+                        pOutput.accept(ModItems.MANDERLY_PLATE_BOOTS.get());
+
+                        pOutput.accept(ModItems.MANDERLY_NOBLE_HELMET.get());
+                        pOutput.accept(ModItems.MANDERLY_NOBLE_CHESTPLATE.get());
+                        pOutput.accept(ModItems.MANDERLY_NOBLE_LEGGINGS.get());
+                        pOutput.accept(ModItems.MANDERLY_NOBLE_BOOTS.get());
+
+                        pOutput.accept(ModItems.BOLTEN_LEVY_HELMET.get());
+                        pOutput.accept(ModItems.BOLTEN_LEVY_CHESTPLATE.get());
+                        pOutput.accept(ModItems.BOLTEN_LEVY_LEGGINGS.get());
+                        pOutput.accept(ModItems.BOLTEN_LEVY_BOOTS.get());
+
+                        pOutput.accept(ModItems.BOLTEN_PLATE_HELMET.get());
+                        pOutput.accept(ModItems.BOLTEN_PLATE_CHESTPLATE.get());
+                        pOutput.accept(ModItems.BOLTEN_PLATE_LEGGINGS.get());
+                        pOutput.accept(ModItems.BOLTEN_PLATE_BOOTS.get());
+
+                        pOutput.accept(ModItems.BOLTEN_NOBLE_HELMET.get());
+                        pOutput.accept(ModItems.BOLTEN_NOBLE_CHESTPLATE.get());
+                        pOutput.accept(ModItems.BOLTEN_NOBLE_LEGGINGS.get());
+                        pOutput.accept(ModItems.BOLTEN_NOBLE_BOOTS.get());
 
                     })
                     .build());

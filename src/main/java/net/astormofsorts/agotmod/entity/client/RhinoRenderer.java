@@ -14,7 +14,7 @@ public class RhinoRenderer extends MobRenderer<RhinoEntity, RhinoModel<RhinoEnti
     // Constructor for RhinoRenderer
     public RhinoRenderer(EntityRendererProvider.Context pContext) {
         // Call the constructor of the superclass (MobRenderer) with RhinoModel, layer, and shadow size parameters
-        super(pContext, new RhinoModel<>(pContext.bakeLayer(ModModelLayers.RHINO_LAYER)), 2f);
+        super(pContext, new RhinoModel<>(pContext.bakeLayer(ModModelLayers.RHINO_LAYER)), 1f);
     }
 
     // Get the texture location for RhinoEntity
@@ -31,6 +31,16 @@ public class RhinoRenderer extends MobRenderer<RhinoEntity, RhinoModel<RhinoEnti
         if (pEntity.isBaby()) {
             // Scale down the rendering for baby RhinoEntities
             pMatrixStack.scale(0.5f, 0.5f, 0.5f);
+        }
+        if (pEntity.isAlive()) {
+            // Scale down the rendering for baby RhinoEntities
+            pMatrixStack.scale(3.5f, 3.5f, 3.5f);
+
+        }
+        if (pEntity.isDeadOrDying()) {
+            // Scale down the rendering for baby RhinoEntities
+            pMatrixStack.scale(3.5f, 3.5f, 3.5f);
+
         }
 
         // Call the render method of the superclass with the scaled matrix stack

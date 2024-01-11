@@ -6,9 +6,7 @@ package net.astormofsorts.agotmod.entity.client.norththewall;// Made with Blockb
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.astormofsorts.agotmod.entity.animations.ModAnimationDefinitions;
-import net.astormofsorts.agotmod.entity.custom.RhinoEntity;
 import net.astormofsorts.agotmod.entity.custom.norththewall.WightEntity;
-import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;

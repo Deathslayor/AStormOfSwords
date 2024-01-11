@@ -1,5 +1,6 @@
 package net.astormofsorts.agotmod.entity.client;
 
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.astormofsorts.agotmod.entity.animations.ModAnimationDefinitions;
@@ -11,151 +12,187 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 
+
 /**
- * The RhinoModel class represents the 3D model for the RhinoEntity in the client-side rendering.
+ * The RhinoModel class represents the 3D model for the MammothEntity in the client-side rendering.
  * It extends HierarchicalModel, providing a hierarchical structure for organizing model parts.
  *
  * @param <T> The type of entity associated with the model.
  */
 public class RhinoModel<T extends Entity> extends HierarchicalModel<T> {
-	// The root model part representing the entire rhino model
-	private final ModelPart rhino;
+    // The root model part representing the entire Mammoth model
+    private final ModelPart mammoth;
+    // The model part representing the head of the Mammoth
+    private final ModelPart head;
+    /**
+     * Constructor for RhinoModel.
+     *
+     * @param root The root model part of the Mammoth model.
+     */
+    public RhinoModel(ModelPart root) {
+        // Get references to the Mammoth and head model parts from the provided root
+        this.mammoth = root.getChild("mammoth");
+        this.head = mammoth.getChild("body").getChild("head");
+    }
+    /**
+     * Creates a LayerDefinition for a Mammoth model.
+     * The method defines the mesh structure using CubeListBuilder and PartDefinition,
+     * setting the position, size, and textures for each part of the Mammoth.
+     *
+     * @return The LayerDefinition for the rhino model with a specified texture size.
+     */
 
-	// The model part representing the head of the rhino
-	private final ModelPart head;
+    public static LayerDefinition createBodyLayer() {
+        // Create a new MeshDefinition for defining the model's mesh structure
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
+        // Create the main body part named "Mammoth" with an initial pose
 
-	/**
-	 * Constructor for RhinoModel.
-	 *
-	 * @param root The root model part of the rhino model.
-	 */
-	public RhinoModel(ModelPart root) {
-		// Get references to the rhino and head model parts from the provided root
-		this.rhino = root.getChild("rhino");
-		this.head = rhino.getChild("body").getChild("torso").getChild("head");
-	}
+        PartDefinition mammoth = partdefinition.addOrReplaceChild("mammoth", CubeListBuilder.create(), PartPose.offsetAndRotation(3.0019F, 24.0F, 7.4118F, 0.0F, 3.1416F, 0.0F));
+        // Add or replace child parts for torso, head, skull, horns, ears, eyes, eyelids, tail, and legs
+        PartDefinition body = mammoth.addOrReplaceChild("body", CubeListBuilder.create().texOffs(1, 53).addBox(-8.0F, -16.0F, 7.0F, 16.0F, 18.0F, 17.0F, new CubeDeformation(0.0F))
+                .texOffs(57, 11).addBox(-7.0F, -14.0F, -4.0F, 14.0F, 16.0F, 11.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 91).addBox(-8.0F, 2.0F, 7.0F, 16.0F, 2.0F, 17.0F, new CubeDeformation(0.0F))
+                .texOffs(55, 49).addBox(-7.0F, 2.0F, -4.0F, 14.0F, 2.0F, 11.0F, new CubeDeformation(0.0F)), PartPose.offset(3.0F, -10.0F, -11.0F));
 
-	/**
-	 * Creates a LayerDefinition for a rhino model.
-	 * The method defines the mesh structure using CubeListBuilder and PartDefinition,
-	 * setting the position, size, and textures for each part of the rhino.
-	 *
-	 * @return The LayerDefinition for the rhino model with a specified texture size.
-	 */
-	public static LayerDefinition createBodyLayer() {
-		// Create a new MeshDefinition for defining the model's mesh structure
-		MeshDefinition meshdefinition = new MeshDefinition();
-		PartDefinition partdefinition = meshdefinition.getRoot();
+        PartDefinition shoulders = body.addOrReplaceChild("shoulders", CubeListBuilder.create(), PartPose.offset(0.0F, -12.0F, 11.25F));
 
-		// Create the main body part named "rhino" with an initial pose
-		PartDefinition rhino = partdefinition.addOrReplaceChild("rhino", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 2.5F));
+        PartDefinition cube_r1 = shoulders.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(7, 28).addBox(-5.5F, -3.8397F, -0.8135F, 11.0F, 7.0F, 14.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, -1.0F, 0.5236F, 0.0F, 0.0F));
 
-		// Add or replace child parts for torso, head, skull, horns, ears, eyes, eyelids, tail, and legs
-		PartDefinition body = rhino.addOrReplaceChild("body", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
-		PartDefinition torso = body.addOrReplaceChild("torso", CubeListBuilder.create().texOffs(0, 0).addBox(-10.0F, -38.0F, -26.0F, 20.0F, 24.0F, 16.0F, new CubeDeformation(0.0F))
-				.texOffs(0, 41).addBox(-9.0F, -37.0F, -10.0F, 18.0F, 25.0F, 16.0F, new CubeDeformation(0.0F))
-				.texOffs(53, 67).addBox(-7.0F, -37.0F, 6.0F, 14.0F, 21.0F, 16.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
-		PartDefinition head = torso.addOrReplaceChild("head", CubeListBuilder.create(), PartPose.offset(0.0F, -21.0F, -26.0F));
-		PartDefinition skull = head.addOrReplaceChild("skull", CubeListBuilder.create().texOffs(69, 29).addBox(-6.0F, -9.0F, -12.0F, 12.0F, 20.0F, 12.0F, new CubeDeformation(0.0F))
-				.texOffs(0, 8).addBox(-1.0F, -1.0F, -15.0F, 2.0F, 2.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
-		PartDefinition horn = skull.addOrReplaceChild("horn", CubeListBuilder.create().texOffs(0, 102).addBox(-5.0F, -5.0F, -9.0F, 5.0F, 5.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(2.5F, 8.5F, -11.0F, -0.1745F, 0.0F, 0.0F));
-		PartDefinition horn2 = horn.addOrReplaceChild("horn2", CubeListBuilder.create().texOffs(103, 15).addBox(-3.0F, -3.0F, -9.0F, 3.0F, 3.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, -1.0F, -9.0F, -0.4363F, 0.0F, 0.0F));
-		PartDefinition left_ear = skull.addOrReplaceChild("left_ear", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, -5.0F, -0.5F, 4.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(5.0F, -8.0F, -9.5F));
-		PartDefinition right_ear = skull.addOrReplaceChild("right_ear", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(-3.0F, -5.0F, -0.5F, 4.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(-5.0F, -8.0F, -9.5F));
-		PartDefinition left_eye = skull.addOrReplaceChild("left_eye", CubeListBuilder.create().texOffs(55, 46).addBox(-0.45F, -0.4F, -0.9F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
-				.texOffs(57, 46).addBox(-0.55F, -1.6F, -1.1F, 1.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(5.8F, 5.1F, -9.4F, 0.2618F, 0.0F, 0.0F));
-		PartDefinition left_eyelid = skull.addOrReplaceChild("left_eyelid", CubeListBuilder.create().texOffs(42, 85).addBox(-0.55F, -2.1F, -1.6F, 1.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(5.05F, 5.1F, -9.4F));
-		PartDefinition right_eyelid = skull.addOrReplaceChild("right_eyelid", CubeListBuilder.create().texOffs(42, 85).mirror().addBox(-0.45F, -2.1F, -1.6F, 1.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(-5.05F, 5.1F, -9.4F));
-		PartDefinition right_eye = skull.addOrReplaceChild("right_eye", CubeListBuilder.create().texOffs(55, 46).mirror().addBox(-0.55F, -0.4F, -0.9F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)).mirror(false)
-				.texOffs(57, 46).mirror().addBox(-0.45F, -1.6F, -1.1F, 1.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(-5.8F, 5.1F, -9.4F, 0.2618F, 0.0F, 0.0F));
-		PartDefinition tail = torso.addOrReplaceChild("tail", CubeListBuilder.create().texOffs(16, 88).addBox(-1.5F, 0.0F, 0.0F, 3.0F, 0.0F, 13.0F, new CubeDeformation(0.0F))
-				.texOffs(57, 0).addBox(-2.5F, 0.0F, 13.0F, 5.0F, 0.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -35.0F, 22.0F, -1.309F, 0.0F, 0.0F));
-		PartDefinition left_back_leg = body.addOrReplaceChild("left_back_leg", CubeListBuilder.create().texOffs(73, 0).addBox(-4.5F, -4.5F, -5.0F, 9.0F, 13.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offset(7.0F, -28.5F, 15.5F));
-		PartDefinition left_back_knee = left_back_leg.addOrReplaceChild("left_back_knee", CubeListBuilder.create().texOffs(98, 62).addBox(-3.5F, 0.0F, -1.0F, 7.0F, 10.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 8.5F, -3.0F));
-		PartDefinition left_back_heel = left_back_knee.addOrReplaceChild("left_back_heel", CubeListBuilder.create().texOffs(54, 105).addBox(-3.0F, 0.0F, 0.0F, 6.0F, 10.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 10.0F, -0.5F));
-		PartDefinition right_back_leg = body.addOrReplaceChild("right_back_leg", CubeListBuilder.create().texOffs(73, 0).mirror().addBox(-4.5F, -4.5F, -5.0F, 9.0F, 13.0F, 10.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(-7.0F, -28.5F, 15.5F));
-		PartDefinition right_back_knee = right_back_leg.addOrReplaceChild("right_back_knee", CubeListBuilder.create().texOffs(98, 62).mirror().addBox(-3.5F, 0.0F, -1.0F, 7.0F, 10.0F, 7.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(0.0F, 8.5F, -3.0F));
-		PartDefinition right_back_heel = right_back_knee.addOrReplaceChild("right_back_heel", CubeListBuilder.create().texOffs(54, 105).mirror().addBox(-3.0F, 0.0F, 0.0F, 6.0F, 10.0F, 6.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(0.0F, 10.0F, -0.5F));
-		PartDefinition right_front_leg = body.addOrReplaceChild("right_front_leg", CubeListBuilder.create().texOffs(100, 111).mirror().addBox(-3.5F, -3.0F, -3.0F, 7.0F, 10.0F, 7.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(-7.0F, -17.0F, -20.5F));
-		PartDefinition right_front_knee = right_front_leg.addOrReplaceChild("right_front_knee", CubeListBuilder.create().texOffs(54, 105).mirror().addBox(-3.0F, 0.0F, 0.0F, 6.0F, 10.0F, 6.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(0.0F, 7.0F, -2.5F));
-		PartDefinition left_front_leg = body.addOrReplaceChild("left_front_leg", CubeListBuilder.create().texOffs(100, 111).addBox(-3.5F, -3.0F, -3.0F, 7.0F, 10.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offset(7.0F, -17.0F, -20.5F));
-		PartDefinition left_front_knee = left_front_leg.addOrReplaceChild("left_front_knee", CubeListBuilder.create().texOffs(54, 105).addBox(-3.0F, 0.0F, 0.0F, 6.0F, 10.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 7.0F, -2.5F));
+        PartDefinition tail = body.addOrReplaceChild("tail", CubeListBuilder.create(), PartPose.offset(0.0F, -10.0F, -3.5F));
 
-		// Return a LayerDefinition created from the meshdefinition with a texture size of 128x128
-		return LayerDefinition.create(meshdefinition, 128, 128);
-	}
+        PartDefinition cube_r2 = tail.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(29, 114).addBox(-1.0F, -2.0F, 0.0F, 2.0F, 10.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 2.0F, -1.0F, -0.2618F, 0.0F, 0.0F));
 
+        PartDefinition head = body.addOrReplaceChild("head", CubeListBuilder.create(), PartPose.offset(0.0F, -13.0F, 23.0F));
 
-	/**
-	 * The setupAnim method is responsible for setting up animations for the RhinoModel during rendering.
-	 *
-	 * @param entity          The entity being rendered.
-	 * @param limbSwing       The limb swing progress for walking animations.
-	 * @param limbSwingAmount The limb swing amount for walking animations.
-	 * @param ageInTicks      The age of the entity in ticks.
-	 * @param netHeadYaw      The yaw rotation of the entity's head relative to the body.
-	 * @param headPitch       The pitch rotation of the entity's head relative to the body.
-	 */
-	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		// Reset the pose for all parts of the model to their default positions
-		this.root().getAllParts().forEach(ModelPart::resetPose);
+        PartDefinition cube_r3 = head.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(113, 67).addBox(-0.55F, -11.5F, 6.45F, 2.5F, 8.0F, 2.5F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-10.9915F, 20.9816F, 14.8086F, 1.1863F, -0.0745F, 0.3447F));
 
-		// Apply head rotation based on yaw, pitch, and age
-		this.applyHeadRotation(netHeadYaw, headPitch, ageInTicks);
+        PartDefinition cube_r4 = head.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(114, 81).addBox(-0.45F, 2.3F, 6.95F, 2.3F, 10.0F, 2.3F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-10.8505F, 20.9255F, 13.2838F, 1.7972F, -0.0745F, 0.3447F));
 
-		// Animate the walk using the RHINO_WALK animation definition
-		this.animateWalk(ModAnimationDefinitions.RHINO_WALK, limbSwing, limbSwingAmount, 2f, 2.5f);
+        PartDefinition cube_r5 = head.addOrReplaceChild("cube_r5", CubeListBuilder.create().texOffs(113, 67).addBox(-1.95F, -11.5F, 6.45F, 2.5F, 8.0F, 2.5F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(10.9915F, 20.9816F, 14.8086F, 1.1863F, 0.0745F, -0.3447F));
 
-		// Animate the idle state using the RHINO_IDLE animation definition
-		this.animate(((RhinoEntity) entity).idleAnimationState, ModAnimationDefinitions.RHINO_IDLE, ageInTicks, 1f);
+        PartDefinition cube_r6 = head.addOrReplaceChild("cube_r6", CubeListBuilder.create().texOffs(114, 81).addBox(-1.85F, 2.3F, 6.95F, 2.3F, 9.0F, 2.3F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(10.8505F, 20.9255F, 13.2838F, 1.7972F, 0.0745F, -0.3447F));
 
-		// Animate the attack state using the RHINO_ATTACK animation definition
-		this.animate(((RhinoEntity) entity).attackAnimationState, ModAnimationDefinitions.RHINO_ATTACK, ageInTicks, 1f);
-	}
+        PartDefinition cube_r7 = head.addOrReplaceChild("cube_r7", CubeListBuilder.create().texOffs(111, 57).addBox(-2.75F, -16.0F, -5.75F, 3.5F, 4.0F, 3.5F, new CubeDeformation(0.0F))
+                .texOffs(111, 44).addBox(-3.0F, -22.0F, -6.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(11.0F, 21.0F, 15.0F, 0.262F, 0.0421F, -0.3316F));
 
-	/**
-	 * Applies the head rotation to the model based on the specified yaw, pitch, and age.
-	 *
-	 * @param pNetHeadYaw The yaw rotation of the entity's head relative to the body.
-	 * @param pHeadPitch  The pitch rotation of the entity's head relative to the body.
-	 * @param pAgeInTicks The age of the entity in ticks.
-	 */
-	private void applyHeadRotation(float pNetHeadYaw, float pHeadPitch, float pAgeInTicks) {
-		// Clamp the yaw and pitch values to a specified range
-		pNetHeadYaw = Mth.clamp(pNetHeadYaw, -30.0F, 30.0F);
-		pHeadPitch = Mth.clamp(pHeadPitch, -25.0F, 45.0F);
+        PartDefinition cube_r8 = head.addOrReplaceChild("cube_r8", CubeListBuilder.create().texOffs(111, 57).addBox(-0.75F, -16.0F, -5.75F, 3.5F, 4.0F, 3.5F, new CubeDeformation(0.0F))
+                .texOffs(111, 44).addBox(-1.0F, -22.0F, -6.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-11.0F, 21.0F, 15.0F, 0.262F, -0.0421F, 0.3316F));
 
-		// Apply the yaw and pitch rotations to the head
-		this.head.yRot = pNetHeadYaw * ((float) Math.PI / 180F);
-		this.head.xRot = pHeadPitch * ((float) Math.PI / 180F);
-	}
+        PartDefinition cube_r9 = head.addOrReplaceChild("cube_r9", CubeListBuilder.create().texOffs(12, 0).addBox(-5.0F, -29.0F, -10.0F, 10.0F, 12.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 21.0F, 15.0F, 0.2618F, 0.0F, 0.0F));
 
-	/**
-	 * Renders the RhinoModel to the specified VertexConsumer.
-	 *
-	 * @param poseStack       The PoseStack for managing transformations during rendering.
-	 * @param vertexConsumer  The VertexConsumer for recording geometry.
-	 * @param packedLight     The packed light value.
-	 * @param packedOverlay   The packed overlay value.
-	 * @param red             Red color factor.
-	 * @param green           Green color factor.
-	 * @param blue            Blue color factor.
-	 * @param alpha           Alpha (transparency) factor.
-	 */
-	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		// Render the rhino model using the specified parameters
-		rhino.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-	}
+        PartDefinition ears = head.addOrReplaceChild("ears", CubeListBuilder.create(), PartPose.offset(0.0F, 21.0F, 15.0F));
 
-	/**
-	 * Returns the root ModelPart of the RhinoModel.
-	 *
-	 * @return The root ModelPart.
-	 */
-	@Override
-	public ModelPart root() {
-		return rhino;
-	}
+        PartDefinition ear_left = ears.addOrReplaceChild("ear_left", CubeListBuilder.create(), PartPose.offset(5.0F, -22.0F, -11.0F));
+
+        PartDefinition cube_r10 = ear_left.addOrReplaceChild("cube_r10", CubeListBuilder.create().texOffs(57, 1).addBox(7.4737F, -5.7496F, -9.5F, 3.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-5.0F, 0.0F, 11.0F, 0.2706F, 0.2527F, 0.0692F));
+
+        PartDefinition ear_right = ears.addOrReplaceChild("ear_right", CubeListBuilder.create(), PartPose.offset(-5.0F, -22.0F, -11.0F));
+
+        PartDefinition cube_r11 = ear_right.addOrReplaceChild("cube_r11", CubeListBuilder.create().texOffs(57, 1).addBox(-9.0F, -27.0F, -4.0F, 3.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(5.0F, 22.0F, 11.0F, 0.2706F, -0.2527F, -0.0692F));
+
+        PartDefinition slurf = head.addOrReplaceChild("slurf", CubeListBuilder.create(), PartPose.offset(0.0F, 4.0F, 9.0F));
+
+        PartDefinition slurf_1 = slurf.addOrReplaceChild("slurf_1", CubeListBuilder.create().texOffs(111, 0).addBox(-2.0F, -0.5F, -1.5F, 4.0F, 8.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 1.0F, -1.0F));
+
+        PartDefinition lower_slurf = slurf_1.addOrReplaceChild("lower_slurf", CubeListBuilder.create(), PartPose.offset(0.0F, 6.0F, 0.5F));
+
+        PartDefinition slurf_2 = lower_slurf.addOrReplaceChild("slurf_2", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.5F));
+
+        PartDefinition cube_r12 = slurf_2.addOrReplaceChild("cube_r12", CubeListBuilder.create().texOffs(112, 14).addBox(-1.75F, -0.6786F, -2.2783F, 3.5F, 8.0F, 3.5F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 1.0F, 0.0F, -0.1745F, 0.0F, 0.0F));
+
+        PartDefinition slurf_3 = lower_slurf.addOrReplaceChild("slurf_3", CubeListBuilder.create(), PartPose.offset(0.0F, 7.0F, -1.0F));
+
+        PartDefinition cube_r13 = slurf_3.addOrReplaceChild("cube_r13", CubeListBuilder.create().texOffs(114, 28).addBox(-1.25F, -0.0792F, -0.784F, 2.5F, 4.0F, 2.5F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, -0.5F, -0.8901F, 0.0F, 0.0F));
+
+        PartDefinition legs = mammoth.addOrReplaceChild("legs", CubeListBuilder.create(), PartPose.offset(3.0F, -2.0F, 27.0F));
+
+        PartDefinition legs_front = legs.addOrReplaceChild("legs_front", CubeListBuilder.create(), PartPose.offset(4.0F, -8.0F, -18.0F));
+
+        PartDefinition leg_front_right = legs_front.addOrReplaceChild("leg_front_right", CubeListBuilder.create().texOffs(108, 110).addBox(-3.0F, 0.0F, -2.0F, 5.0F, 13.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(-8.0F, -3.0F, -1.0F));
+
+        PartDefinition leg_front_left = legs_front.addOrReplaceChild("leg_front_left", CubeListBuilder.create().texOffs(108, 110).addBox(-2.0F, 0.0F, -2.0F, 5.0F, 13.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -3.0F, -1.0F));
+
+        PartDefinition legs_back = legs.addOrReplaceChild("legs_back", CubeListBuilder.create(), PartPose.offset(0.0F, -6.0F, -37.0F));
+
+        PartDefinition leg_back_right = legs_back.addOrReplaceChild("leg_back_right", CubeListBuilder.create().texOffs(108, 110).addBox(-2.0F, 0.0F, -3.0F, 5.0F, 13.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(-4.0F, -5.0F, 0.0F));
+
+        PartDefinition leg_back_left = legs_back.addOrReplaceChild("leg_back_left", CubeListBuilder.create().texOffs(108, 110).addBox(-2.0F, 0.0F, -3.0F, 5.0F, 13.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(3.0F, -5.0F, 0.0F));
+        // Return a LayerDefinition created from the meshdefinition with a texture size of 128x128
+        return LayerDefinition.create(meshdefinition, 128, 128);
+    }
+    /**
+     * The setupAnim method is responsible for setting up animations for the RhinoModel during rendering.
+     *
+     * @param entity          The entity being rendered.
+     * @param limbSwing       The limb swing progress for walking animations.
+     * @param limbSwingAmount The limb swing amount for walking animations.
+     * @param ageInTicks      The age of the entity in ticks.
+     * @param netHeadYaw      The yaw rotation of the entity's head relative to the body.
+     * @param headPitch       The pitch rotation of the entity's head relative to the body.
+     */
+
+    @Override
+    public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+        // Reset the pose for all parts of the model to their default positions
+        this.root().getAllParts().forEach(ModelPart::resetPose);
+        // Apply head rotation based on yaw, pitch, and age
+
+        this.applyHeadRotation(netHeadYaw, headPitch, ageInTicks);
+
+        // Animate the walk using the Mammoth_WALK animation definition
+        this.animateWalk(ModAnimationDefinitions.RHINO_WALK, limbSwing, limbSwingAmount, 2f, 2.5f);
+
+        // Animate the idle state using the Mammoth_IDLE animation definition
+        this.animate(((RhinoEntity) entity).idleAnimationState, ModAnimationDefinitions.RHINO_IDLE, ageInTicks, 1f);
+
+        // Animate the attack state using the Mammoth_ATTACK animation definition
+        this.animate(((RhinoEntity) entity).attackAnimationState, ModAnimationDefinitions.RHINO_ATTACK, ageInTicks, 1f);
+    }
+    /**
+     * Applies the head rotation to the model based on the specified yaw, pitch, and age.
+     *
+     * @param pNetHeadYaw The yaw rotation of the entity's head relative to the body.
+     * @param pHeadPitch  The pitch rotation of the entity's head relative to the body.
+     * @param pAgeInTicks The age of the entity in ticks.
+     */
+    private void applyHeadRotation(float pNetHeadYaw, float pHeadPitch, float pAgeInTicks) {
+        // Clamp the yaw and pitch values to a specified range
+        pNetHeadYaw = Mth.clamp(pNetHeadYaw, -30.0F, 30.0F);
+        pHeadPitch = Mth.clamp(pHeadPitch, -25.0F, 45.0F);
+
+        // Apply the yaw and pitch rotations to the head
+        this.head.yRot = pNetHeadYaw * ((float)Math.PI / 180F);
+        this.head.xRot = pHeadPitch * ((float)Math.PI / 180F);
+    }
+
+    /**
+     * Renders the RhinoModel to the specified VertexConsumer.
+     *
+     * @param poseStack       The PoseStack for managing transformations during rendering.
+     * @param vertexConsumer  The VertexConsumer for recording geometry.
+     * @param packedLight     The packed light value.
+     * @param packedOverlay   The packed overlay value.
+     * @param red             Red color factor.
+     * @param green           Green color factor.
+     * @param blue            Blue color factor.
+     * @param alpha           Alpha (transparency) factor.
+     */
+
+    @Override
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        // Render the rhino model using the specified parameters
+        mammoth.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+    }
+
+    /**
+     * Returns the root ModelPart of the MammothModel.
+     *
+     * @return The root ModelPart.
+     */
+
+    @Override
+    public ModelPart root() {
+        return mammoth;
+    }
 }

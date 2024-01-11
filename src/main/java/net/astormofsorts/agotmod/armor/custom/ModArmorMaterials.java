@@ -19,7 +19,7 @@ import java.util.function.Supplier;
 // ModArmorMaterials enum implementing ArmorMaterial interface
 public enum ModArmorMaterials implements ArmorMaterial {
     // Definition of the STARK1 armor material
-    STARK1("stark1", 500, Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266655_) -> {
+    STARK_LEVY("stark_levy", 500, Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266655_) -> {
         p_266655_.put(ArmorItem.Type.BOOTS, 300);
         p_266655_.put(ArmorItem.Type.LEGGINGS, 300);
         p_266655_.put(ArmorItem.Type.CHESTPLATE, 300);

@@ -28,9 +28,10 @@ public class ModConfiguredFeatures {
     // Define a ResourceKey for the configured feature of overworld tin ore
     public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_TIN_ORE = registerKey("tin_ore");
 
-
     public static final ResourceKey<ConfiguredFeature<?, ?>> SYCAMORE_KEY = registerKey("sycamore");
+
     public static final ResourceKey<ConfiguredFeature<?, ?>> WEIRWOOD_KEY = registerKey("weirwood");
+
 
     // Bootstrap method for initializing configured features
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
@@ -58,6 +59,7 @@ public class ModConfiguredFeatures {
                 new BlobFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), 3),
 
                 new TwoLayersFeatureSize(1,0,2)).build());
+
 
         register(context, WEIRWOOD_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBLocks.WEIRWOOD_LOG.get()),

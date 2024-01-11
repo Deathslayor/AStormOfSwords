@@ -3,7 +3,8 @@ package net.astormofsorts.agotmod.item.creativetabs;
 
 // Importing necessary classes from other packages
 
-import net.astormofsorts.agotmod.item.ModItems;
+import net.astormofsorts.agotmod.AGoTMod;
+import net.astormofsorts.agotmod.block.ModBLocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -11,8 +12,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
-import net.astormofsorts.agotmod.AGoTMod;
-import net.astormofsorts.agotmod.block.ModBLocks;
 
 // A utility class for creating custom creative mode tabs
 public class ModCreativeNaturalBlocks {

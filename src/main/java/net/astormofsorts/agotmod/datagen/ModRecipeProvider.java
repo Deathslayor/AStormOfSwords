@@ -268,8 +268,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .save(pWriter);
         // -------------------------------------------------(WOOD)------------------------------------------------- //
 
-
-
         // -------------------------------------------------(FOODS)------------------------------------------------- //
         // Food smelting recipes Furnace
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.RAW_SAUSAGE.get()),RecipeCategory.FOOD, ModItems.COOKED_SAUSAGE.get(), 0.35f, 200)
@@ -320,7 +318,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy(getHasName(ModItems.RAW_MAMMOTH_MEAT.get()), has(ModItems.RAW_MAMMOTH_MEAT.get())) // Unlock condition
                 .save(pWriter, "cooked_mammoth_meat_with_furnace");
 
-
         // Food Smelting recipes Smoker
         SimpleCookingRecipeBuilder.smoking(Ingredient.of(ModItems.RAW_SAUSAGE.get()),RecipeCategory.FOOD, ModItems.COOKED_SAUSAGE.get(), 0.35f, 100)
                 .unlockedBy(getHasName(ModItems.RAW_SAUSAGE.get()), has(ModItems.RAW_SAUSAGE.get())) // Unlock condition
@@ -338,42 +335,9 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy(getHasName(ModItems.RAW_WHITE_SAUSAGE.get()), has(ModItems.RAW_WHITE_SAUSAGE.get())) // Unlock condition
                 .save(pWriter, "cooked_white_sausage_with_smoker");
 
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(ModItems.RAW_BACON.get()),RecipeCategory.FOOD, ModItems.COOKED_BACON.get(), 0.35f, 100)
-                .unlockedBy(getHasName(ModItems.RAW_BACON.get()), has(ModItems.RAW_BACON.get())) // Unlock condition
-                .save(pWriter, "cooked_bacon_with_smoker");
 
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(ModItems.RAW_BOAR_VENISON.get()),RecipeCategory.FOOD, ModItems.COOKED_BOAR_VENISON.get(), 0.35f, 100)
-                .unlockedBy(getHasName(ModItems.RAW_BOAR_VENISON.get()), has(ModItems.RAW_BOAR_VENISON.get())) // Unlock condition
-                .save(pWriter, "cooked_boar_venison_with_smoker");
+         // -------------------------------------------------(FOODS)------------------------------------------------- //
 
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(ModItems.RAW_CHICKEN_NUGGETS.get()),RecipeCategory.FOOD, ModItems.COOKED_CHICKEN_NUGGETS.get(), 0.35f, 100)
-                .unlockedBy(getHasName(ModItems.RAW_CHICKEN_NUGGETS.get()), has(ModItems.RAW_CHICKEN_NUGGETS.get())) // Unlock condition
-                .save(pWriter, "cooked_chicken_nuggets_with_smoker");
-
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(ModItems.RAW_DEER_VENISON.get()),RecipeCategory.FOOD, ModItems.COOKED_DEER_VENISON.get(), 0.35f, 100)
-                .unlockedBy(getHasName(ModItems.RAW_DEER_VENISON.get()), has(ModItems.RAW_DEER_VENISON.get())) // Unlock condition
-                .save(pWriter, "cooked_deer_venison_with_smoker");
-
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(ModItems.RAW_GOAT_MEAT.get()),RecipeCategory.FOOD, ModItems.COOKED_GOAT_MEAT.get(), 0.35f, 100)
-                .unlockedBy(getHasName(ModItems.RAW_GOAT_MEAT.get()), has(ModItems.RAW_GOAT_MEAT.get())) // Unlock condition
-                .save(pWriter, "cooked_goat_meat_with_smoker");
-
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(ModItems.RAW_HARE_MEAT.get()),RecipeCategory.FOOD, ModItems.COOKED_HARE_MEAT.get(), 0.35f, 100)
-                .unlockedBy(getHasName(ModItems.RAW_HARE_MEAT.get()), has(ModItems.RAW_HARE_MEAT.get())) // Unlock condition
-                .save(pWriter, "cooked_hare_meat_with_smoker");
-
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(ModItems.RAW_HORSE_MEAT.get()),RecipeCategory.FOOD, ModItems.COOKED_HORSE_MEAT.get(), 0.35f, 100)
-                .unlockedBy(getHasName(ModItems.RAW_HORSE_MEAT.get()), has(ModItems.RAW_HORSE_MEAT.get())) // Unlock condition
-                .save(pWriter, "cooked_horse_meat_with_smoker");
-
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(ModItems.RAW_MAMMOTH_MEAT.get()),RecipeCategory.FOOD, ModItems.COOKED_MAMMOTH_MEAT.get(), 0.35f, 100)
-                .unlockedBy(getHasName(ModItems.RAW_MAMMOTH_MEAT.get()), has(ModItems.RAW_MAMMOTH_MEAT.get())) // Unlock condition
-                .save(pWriter, "cooked_mammoth_meat_with_smoker");
-
-
-
-
-        // -------------------------------------------------(FOODS)------------------------------------------------- //
     }
 
     /**

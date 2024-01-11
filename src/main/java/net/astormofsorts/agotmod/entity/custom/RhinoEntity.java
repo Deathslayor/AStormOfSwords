@@ -2,12 +2,12 @@ package net.astormofsorts.agotmod.entity.custom;
 
 import net.astormofsorts.agotmod.entity.ModEntities;
 import net.astormofsorts.agotmod.entity.ai.RhinoAttackGoal;
+import net.astormofsorts.agotmod.sound.ModSounds;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.AnimationState;
@@ -115,10 +115,10 @@ public class RhinoEntity extends Animal {
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
 
-        this.goalSelector.addGoal(1, new RhinoAttackGoal(this, 1, true));
+        this.goalSelector.addGoal(1, new RhinoAttackGoal(this, 2.5, true));
 
         this.goalSelector.addGoal(1, new BreedGoal(this, 1.15D));
-        this.goalSelector.addGoal(2, new TemptGoal(this, 1.2D, Ingredient.of(Items.COOKED_BEEF), false));
+        this.goalSelector.addGoal(2, new TemptGoal(this, 1.2D, Ingredient.of(Items.SWEET_BERRIES), false));
 
         this.goalSelector.addGoal(3, new FollowParentGoal(this, 1.1D));
 
@@ -126,18 +126,18 @@ public class RhinoEntity extends Animal {
         this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 3f));
         this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
 
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+        this.targetSelector.addGoal(7, new HurtByTargetGoal(this));
     }
 
     // Method for creating attribute builder for Rhino
     public static AttributeSupplier.Builder createAttributes() {
         return Animal.createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 1D)
+                .add(Attributes.MAX_HEALTH, 400D)
                 .add(Attributes.FOLLOW_RANGE, 24D)
                 .add(Attributes.MOVEMENT_SPEED, 0.25D)
                 .add(Attributes.ARMOR_TOUGHNESS, 0.1f)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.5f)
-                .add(Attributes.ATTACK_DAMAGE, 10f);
+                .add(Attributes.ATTACK_DAMAGE, 24f);
     }
 
     // Method for getting the offspring of two Rhino entities
@@ -150,27 +150,31 @@ public class RhinoEntity extends Animal {
     // Method for checking if an item is food for the Rhino
     @Override
     public boolean isFood(ItemStack pStack) {
-        return pStack.is(Items.COOKED_BEEF);
+
+        return pStack.is(Items.SWEET_BERRIES);
     }
 
     // Method for getting the ambient sound of the Rhino
     @Nullable
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.HOGLIN_AMBIENT;
+
+        return ModSounds.MAMMOTH_IDLE.get();
     }
 
     // Method for getting the hurt sound of the Rhino
     @Nullable
     @Override
     protected SoundEvent getHurtSound(DamageSource pDamageSource) {
-        return SoundEvents.RAVAGER_HURT;
+
+        return ModSounds.MAMMOTH_DAMAGED.get();
     }
 
     // Method for getting the death sound of the Rhino
     @Nullable
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.DOLPHIN_DEATH;
+
+        return ModSounds.MAMMOTH_ATTACK.get();
     }
 }

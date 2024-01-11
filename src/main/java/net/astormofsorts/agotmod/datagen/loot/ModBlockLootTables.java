@@ -59,7 +59,6 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         // ---------------------(VILLAGER PROFESSIONS BLOCKS)--------------------- //
 
         // ---------------------------(TREES)--------------------------- //
-
         //Weirwood
         this.dropSelf(ModBLocks.WEIRWOOD_LOG.get());
         this.dropSelf(ModBLocks.STRIPPED_WEIRWOOD_LOG.get());
