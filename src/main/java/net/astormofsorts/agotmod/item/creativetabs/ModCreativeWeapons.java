@@ -27,15 +27,23 @@ public class ModCreativeWeapons {
                     .title(Component.translatable("creativetab.agot_tab_weapons")) // Title for the creative mode tab
                     .displayItems((pParameters, pOutput) -> {
                         /** TOOLS */
+                        pOutput.accept(ModItems.DRAGONGLASS_SPEAR.get());
+                        pOutput.accept(ModItems.DRAGONGLASS_DAGGER.get());
+
                         pOutput.accept(ModItems.BRONZE_SWORD.get());
                         pOutput.accept(ModItems.BRONZE_SPATHA.get());
+                        pOutput.accept(ModItems.BRONZE_SPEAR.get());
+                        pOutput.accept(ModItems.BRONZE_PIKE.get());
+                        pOutput.accept(ModItems.BRONZE_DAGGER.get());
+                        pOutput.accept(ModItems.BRONZE_BATTLEAXE.get());
+
 
                         pOutput.accept(ModItems.IRON_LONGSWORD.get());
                         pOutput.accept(ModItems.IRON_SPEAR.get());
                         pOutput.accept(ModItems.IRON_PIKE.get());
                         pOutput.accept(ModItems.IRON_DAGGER.get());
                         pOutput.accept(ModItems.IRON_MACE.get());
-                        pOutput.accept(ModItems.IRON_BATTLE_AXE.get());
+                        pOutput.accept(ModItems.IRON_BATTLEAXE.get());
 
                         pOutput.accept(ModItems.STEEL_SWORD.get());
                         pOutput.accept(ModItems.STEEL_LONGSWORD.get());
@@ -48,6 +56,7 @@ public class ModCreativeWeapons {
 
                         pOutput.accept(ModItems.NOBLE_LONGSWORD.get());
                         pOutput.accept(ModItems.NOBLE_SPEAR.get());
+                        pOutput.accept(ModItems.NOBLE_PIKE.get());
                         pOutput.accept(ModItems.NOBLE_DAGGER.get());
                         pOutput.accept(ModItems.NOBLE_MACE.get());
                         pOutput.accept(ModItems.NOBLE_BATTLEAXE.get());

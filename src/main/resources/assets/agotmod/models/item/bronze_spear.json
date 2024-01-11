@@ -2,7 +2,7 @@
   "parent": "minecraft:item/handheld",
   "loader": "forge:separate_transforms",
   "base": {
-    "parent": "agotmod:item/steel_halberd_2d",
+    "parent": "agotmod:item/bronze_spear_2d",
     "display": {
       "thirdperson_righthand": {
         "rotation": [ -50, 270, 0 ],
@@ -13,13 +13,13 @@
   },
   "perspectives": {
     "gui": {
-      "parent": "agotmod:item/steel_halberd_2d"
+      "parent": "agotmod:item/bronze_spear_2d"
     },
     "ground": {
-      "parent": "agotmod:item/steel_halberd_2d"
+      "parent": "agotmod:item/bronze_spear_2d"
     },
     "fixed": {
-      "parent": "agotmod:item/steel_halberd_2d"
+      "parent": "agotmod:item/bronze_spear_2d"
     }
   }
 }

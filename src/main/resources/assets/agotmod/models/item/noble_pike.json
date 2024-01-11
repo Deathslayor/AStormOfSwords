@@ -2,24 +2,24 @@
   "parent": "minecraft:item/handheld",
   "loader": "forge:separate_transforms",
   "base": {
-    "parent": "agotmod:item/steel_halberd_2d",
+    "parent": "agotmod:item/noble_pike_2d",
     "display": {
       "thirdperson_righthand": {
         "rotation": [ -50, 270, 0 ],
-        "translation": [ 0, 2, 1 ],
-        "scale": [ 2.3, 2.3, 1 ]
+        "translation": [ 0, 3.5, 0.5 ],
+        "scale": [ 3.1, 3.1, 1 ]
       }
     }
   },
   "perspectives": {
     "gui": {
-      "parent": "agotmod:item/steel_halberd_2d"
+      "parent": "agotmod:item/noble_pike_2d"
     },
     "ground": {
-      "parent": "agotmod:item/steel_halberd_2d"
+      "parent": "agotmod:item/noble_pike_2d"
     },
     "fixed": {
-      "parent": "agotmod:item/steel_halberd_2d"
+      "parent": "agotmod:item/noble_pike_2d"
     }
   }
 }

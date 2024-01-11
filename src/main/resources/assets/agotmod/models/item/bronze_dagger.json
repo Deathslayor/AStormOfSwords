@@ -2,24 +2,24 @@
   "parent": "minecraft:item/handheld",
   "loader": "forge:separate_transforms",
   "base": {
-    "parent": "agotmod:item/iron_battle_axe_2d",
+    "parent": "agotmod:item/bronze_dagger_2d",
     "display": {
       "thirdperson_righthand": {
         "rotation": [ -25, 270, 0 ],
-        "translation": [ 0, 10, 5 ],
-        "scale": [ 2, 2, 2 ]
+        "translation": [ 0, 2.5, 2 ],
+        "scale": [ 0.8, 0.8, 1 ]
       }
     }
   },
   "perspectives": {
     "gui": {
-      "parent": "agotmod:item/iron_battle_axe_2d"
+      "parent": "agotmod:item/bronze_dagger_2d"
     },
     "ground": {
-      "parent": "agotmod:item/iron_battle_axe_2d"
+      "parent": "agotmod:item/bronze_dagger_2d"
     },
     "fixed": {
-      "parent": "agotmod:item/iron_battle_axe_2d"
+      "parent": "agotmod:item/bronze_dagger_2d"
     }
   }
 }

@@ -16,6 +16,21 @@ import java.util.List;
 // A utility class for defining custom tool tiers
 public class ModToolTiers {
 
+    // Custom tool tier: DRAGONGLASS
+    public static final Tier DRAGONGLASS = TierSortingRegistry.registerTier(
+            // ForgeTier constructor parameters:
+            new ForgeTier(1, 170, 7F, 2.5F, 14,
+                    // Custom block tag for tools requiring BRONZE
+                    ModTags.Blocks.NEEDS_BRONZE_TOOL,
+                    // Ingredient for crafting tools with BRONZE
+                    () -> Ingredient.of(ModItems.BRONZE_INGOT.get())),
+            // Resource location for the custom tier
+            new ResourceLocation(AGoTMod.MOD_ID, "dragonglass"),
+            // List of upgrade tiers (e.g., Iron)
+            List.of(Tiers.IRON),
+            // List of downgrade tiers (e.g., no downgrade tiers for BRONZE)
+            List.of());
+
     // Custom tool tier: BRONZE
     public static final Tier BRONZE = TierSortingRegistry.registerTier(
             // ForgeTier constructor parameters:

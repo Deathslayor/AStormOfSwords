@@ -13,7 +13,7 @@
   "item.agotmod.stark1_boots": "Stark Boots",
 
   "item.agotmod.iron_longsword": "Iron Longsword",
-  "item.agotmod.iron_battle_axe": "Iron Battleaxe",
+  "item.agotmod.iron_battleaxe": "Iron Battleaxe",
   "item.agotmod.iron_dagger": "Iron Dagger",
   "item.agotmod.iron_mace": "Iron Mace",
   "item.agotmod.iron_pike": "Iron Pike",
@@ -32,6 +32,7 @@
   "item.agotmod.noble_dagger": "Noble Dagger",
   "item.agotmod.noble_mace": "Noble Mace",
   "item.agotmod.noble_spear": "Noble Spear",
+  "item.agotmod.noble_pike": "Noble Pike",
   "item.agotmod.noble_halberd": "Noble Halberd",
 
 
@@ -69,6 +70,10 @@
   "item.agotmod.bronze_shovel": "Bronze Shovel",
   "item.agotmod.bronze_hoe": "Bronze Hoe",
   "item.agotmod.bronze_spatha": "Bronze Spatha",
+  "item.agotmod.bronze_spear": "Bronze Spear",
+  "item.agotmod.bronze_pike": "Bronze Pike",
+  "item.agotmod.bronze_dagger": "Bronze Dagger",
+  "item.agotmod.bronze_battleaxe": "Bronze Battleaxe",
 
   "item.agotmod.steel_sword": "Steel Sword",
   "item.agotmod.steel_pickaxe": "Steel Pickaxe",
