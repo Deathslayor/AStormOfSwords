@@ -27,6 +27,18 @@ public class ModCreativeBuildingBlocks {
                     .title(Component.translatable("creativetab.agot_tab_building_blocks")) // Title for the creative mode tab
                     .displayItems((pParameters, pOutput) -> {
 
+                        //Wood
+                        pOutput.accept(ModBLocks.WEIRWOOD_LOG.get());
+                        pOutput.accept(ModBLocks.STRIPPED_WEIRWOOD_LOG.get());
+                        pOutput.accept(ModBLocks.WEIRWOOD_WOOD.get());
+                        pOutput.accept(ModBLocks.STRIPPED_WEIRWOOD_WOOD.get());
+                        pOutput.accept(ModBLocks.WEIRWOOD_PLANKS.get());
+
+                        pOutput.accept(ModBLocks.SYCAMORE_LOG.get());
+                        pOutput.accept(ModBLocks.STRIPPED_SYCAMORE_LOG.get());
+                        pOutput.accept(ModBLocks.SYCAMORE_WOOD.get());
+                        pOutput.accept(ModBLocks.STRIPPED_SYCAMORE_WOOD.get());
+                        pOutput.accept(ModBLocks.SYCAMORE_PLANKS.get());
                         // Bricks
                         pOutput.accept(ModBLocks.STONE_BRICK_BUT_COOLER.get());
                         pOutput.accept(ModBLocks.DARK_STONE_BRICK.get());

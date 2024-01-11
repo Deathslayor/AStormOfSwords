@@ -14,17 +14,17 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
 // A utility class for creating custom creative mode tabs
-public class ModCreativeTools {
+public class ModCreativeToolsUtilities {
 
     // Deferred register for creative mode tabs
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TAB =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, AGoTMod.MOD_ID);
 
     // Adding items into the MAIN mod tab in creative
-    public static final RegistryObject<CreativeModeTab> AGOT_TAB_TOOLS = CREATIVE_MODE_TAB.register("agot_tab_tools",
+    public static final RegistryObject<CreativeModeTab> AGOT_TAB_TOOLS = CREATIVE_MODE_TAB.register("agot_tab_tools_utilities",
             () -> CreativeModeTab.builder()
                     .icon(() -> new ItemStack(ModItems.STEEL_PICKAXE.get())) // Icon for the creative mode tab
-                    .title(Component.translatable("creativetab.agot_tab_tools")) // Title for the creative mode tab
+                    .title(Component.translatable("creativetab.agot_tab_tools_utilities")) // Title for the creative mode tab
                     .displayItems((pParameters, pOutput) -> {
                         /** TOOLS */
                         pOutput.accept(ModItems.BRONZE_AXE.get());

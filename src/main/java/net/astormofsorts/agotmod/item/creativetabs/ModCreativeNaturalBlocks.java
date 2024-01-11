@@ -28,6 +28,12 @@ public class ModCreativeNaturalBlocks {
                     .title(Component.translatable("creativetab.agot_tab_natural_blocks")) // Title for the creative mode tab
                     .displayItems((pParameters, pOutput) -> {
 
+                        //Ores
+                        pOutput.accept(ModBLocks.TIN_ORE.get());
+                        pOutput.accept(ModBLocks.DEEPSLATE_TIN_ORE.get());
+                        pOutput.accept(ModBLocks.RAW_TIN_BLOCK.get());
+
+                        //Wood
                         pOutput.accept(ModBLocks.WEIRWOOD_LOG.get());
                         pOutput.accept(ModBLocks.STRIPPED_WEIRWOOD_LOG.get());
                         pOutput.accept(ModBLocks.WEIRWOOD_WOOD.get());
@@ -36,7 +42,6 @@ public class ModCreativeNaturalBlocks {
 
                         pOutput.accept(ModBLocks.WEIRWOOD_LEAVES.get());
                         pOutput.accept(ModBLocks.WEIRWOOD_SAPLING.get());
-                        pOutput.accept(ModItems.WEIRWOOD_STICK.get());
 
                         pOutput.accept(ModBLocks.SYCAMORE_LOG.get());
                         pOutput.accept(ModBLocks.STRIPPED_SYCAMORE_LOG.get());

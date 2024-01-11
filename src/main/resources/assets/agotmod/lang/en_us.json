@@ -112,13 +112,12 @@
   "item.agotmod.weirwood_stick": "Weirwood Stick",
 
 
-  "creativetab.agot_tab": "ASoS Tab",
-  "creativetab.agot_tab_weapons": "ASoS Weapons",
-  "creativetab.agot_tab_tools": "ASoS Tools",
-  "creativetab.agot_tab_foods": "ASoS Foods",
-  "creativetab.agot_tab_armour": "ASoS Armour",
-  "creativetab.agot_tab_animals": "ASoS Animals",
-  "creativetab.agot_tab_ingots": "ASoS Ingots",
-  "creativetab.agot_tab_building_blocks": "ASoS Building Blocks",
-  "creativetab.agot_tab_natural_blocks": "ASoS Natural Blocks"
+  "creativetab.agot_tab_weapons": "aSoS Weapons",
+  "creativetab.agot_tab_tools_utilities": "aSoS Tools & Utilities",
+  "creativetab.agot_tab_foods": "aSoS Foods",
+  "creativetab.agot_tab_armour": "aSoS Armour",
+  "creativetab.agot_tab_animals": "aSoS Spawn Eggs",
+  "creativetab.agot_tab_ingredients": "aSoS Ingredients",
+  "creativetab.agot_tab_building_blocks": "aSoS Building Blocks",
+  "creativetab.agot_tab_natural_blocks": "aSoS Natural Blocks"
 }

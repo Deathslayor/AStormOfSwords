@@ -5,9 +5,9 @@
     "parent": "agotmod:item/noble_mace_2d",
     "display": {
       "thirdperson_righthand": {
-        "rotation": [ -25, 270, 0 ],
-        "translation": [ 0, 10, 5 ],
-        "scale": [ 2, 2, 2 ]
+        "rotation": [ -50, 270, 0 ],
+        "translation": [ 0, 4, 0.5 ],
+        "scale": [ 1.5, 1.5, 1 ]
       }
     }
   },

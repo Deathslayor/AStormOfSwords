@@ -39,15 +39,14 @@ public class AGoTMod {
         // Register various mod features with the mod event bus
 
         // Adds Creative Mod Tabs
-        ModCreativeTabs.register(modEventBus);
-        ModCreativeAnimals.register(modEventBus);
-        ModCreativeArmour.register(modEventBus);
         ModCreativeBuildingBlocks.register(modEventBus);
-        ModCreativeFoods.register(modEventBus);
-        ModCreativeWeapons.register(modEventBus);
-        ModCreativeTools.register(modEventBus);
-        ModCreativeIngots.register(modEventBus);
         ModCreativeNaturalBlocks.register(modEventBus);
+        ModCreativeToolsUtilities.register(modEventBus);
+        ModCreativeWeapons.register(modEventBus);
+        ModCreativeArmour.register(modEventBus);
+        ModCreativeFoods.register(modEventBus);
+        ModCreativeIngredients.register(modEventBus);
+        ModCreativeAnimals.register(modEventBus);
 
         // Adds Custom Villagers to the game
         ModVillagers.register(modEventBus);

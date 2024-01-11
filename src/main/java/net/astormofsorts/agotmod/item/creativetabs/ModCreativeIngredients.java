@@ -15,27 +15,28 @@ import net.astormofsorts.agotmod.block.ModBLocks;
 import net.astormofsorts.agotmod.item.ModItems;
 
 // A utility class for creating custom creative mode tabs
-public class ModCreativeIngots {
+public class ModCreativeIngredients {
 
     // Deferred register for creative mode tabs
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TAB =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, AGoTMod.MOD_ID);
 
     // Adding items into the MAIN mod tab in creative
-    public static final RegistryObject<CreativeModeTab> AGOT_TAB_INGOTS = CREATIVE_MODE_TAB.register("agot_tab_ingots",
+    public static final RegistryObject<CreativeModeTab> AGOT_TAB_INGREDIENTS = CREATIVE_MODE_TAB.register("agot_tab_ingredients",
             () -> CreativeModeTab.builder()
                     .icon(() -> new ItemStack(ModItems.STEEL_NUGGET.get())) // Icon for the creative mode tab
                     .title(Component.translatable("creativetab.agot_tab_ingots")) // Title for the creative mode tab
                     .displayItems((pParameters, pOutput) -> {
                         /** Blocks */
                         // TIN
-                        pOutput.accept(ModBLocks.TIN_ORE.get());
-                        pOutput.accept(ModBLocks.RAW_TIN_BLOCK.get());
-                        pOutput.accept(ModBLocks.DEEPSLATE_TIN_ORE.get());
                         pOutput.accept(ModBLocks.TIN_BLOCK.get());
                         // BRONZE
                         pOutput.accept(ModBLocks.BRONZE_BLOCK.get());
                         /** Items */
+                        //INGREDIENTS
+                        pOutput.accept(ModItems.WEIRWOOD_STICK.get());
+                        pOutput.accept(ModItems.BOAR_INTESTINES.get());
+                        pOutput.accept(ModItems.BOAR_TUSK.get());
 
                         // INGOTS
                         pOutput.accept(ModItems.TIN_INGOT.get());
