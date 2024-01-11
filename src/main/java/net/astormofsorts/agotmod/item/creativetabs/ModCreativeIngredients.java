@@ -25,13 +25,10 @@ public class ModCreativeIngredients {
     public static final RegistryObject<CreativeModeTab> AGOT_TAB_INGREDIENTS = CREATIVE_MODE_TAB.register("agot_tab_ingredients",
             () -> CreativeModeTab.builder()
                     .icon(() -> new ItemStack(ModItems.STEEL_NUGGET.get())) // Icon for the creative mode tab
-                    .title(Component.translatable("creativetab.agot_tab_ingots")) // Title for the creative mode tab
+                    .title(Component.translatable("creativetab.agot_tab_ingredients")) // Title for the creative mode tab
                     .displayItems((pParameters, pOutput) -> {
                         /** Blocks */
-                        // TIN
-                        pOutput.accept(ModBLocks.TIN_BLOCK.get());
-                        // BRONZE
-                        pOutput.accept(ModBLocks.BRONZE_BLOCK.get());
+
                         /** Items */
                         //INGREDIENTS
                         pOutput.accept(ModItems.WEIRWOOD_STICK.get());
