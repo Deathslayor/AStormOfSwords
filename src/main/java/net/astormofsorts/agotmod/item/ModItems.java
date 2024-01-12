@@ -260,7 +260,7 @@ public class ModItems {
     public static final RegistryObject<Item> NOBLE_LONGSWORD = ITEMS.register("noble_longsword",
             () -> new SwordItem(ModToolTiers.NOBLE, 7, -2.6F, new Item.Properties()));
     public static final RegistryObject<Item> NOBLE_SPEAR = ITEMS.register("noble_spear",
-            () -> new SwordItem(ModToolTiers.NOBLE, 5, 2.2F, new Item.Properties()));
+            () -> new SwordItem(ModToolTiers.NOBLE, 5, -2.2F, new Item.Properties()));
     public static final RegistryObject<Item> NOBLE_PIKE = ITEMS.register("noble_pike",
             () -> new SwordItem(ModToolTiers.NOBLE, 6, -3F, new Item.Properties()));
     public static final RegistryObject<Item> NOBLE_MACE = ITEMS.register("noble_mace",
