@@ -200,81 +200,81 @@ public class ModItems {
     // ---------------------------(TOOLS)--------------------------- //
     // Bronze TOOLS
     public static final RegistryObject<Item> BRONZE_SWORD = ITEMS.register("bronze_sword",
-            () -> new SwordItem(ModToolTiers.BRONZE, 3, 1, new Item.Properties()));
+            () -> new SwordItem(ModToolTiers.BRONZE, 5, -2.4F, new Item.Properties()));
     public static final RegistryObject<Item> BRONZE_PICKAXE = ITEMS.register("bronze_pickaxe",
             () -> new PickaxeItem(ModToolTiers.BRONZE, 0, 0, new Item.Properties()));
     public static final RegistryObject<Item> BRONZE_SHOVEL = ITEMS.register("bronze_shovel",
             () -> new ShovelItem(ModToolTiers.BRONZE, 0, 0, new Item.Properties()));
     public static final RegistryObject<Item> BRONZE_AXE = ITEMS.register("bronze_axe",
-            () -> new AxeItem(ModToolTiers.BRONZE, 5.5F, 0.9F, new Item.Properties()));
+            () -> new AxeItem(ModToolTiers.BRONZE, 6F, 0.9F, new Item.Properties()));
     public static final RegistryObject<Item> BRONZE_HOE = ITEMS.register("bronze_hoe",
             () -> new HoeItem(ModToolTiers.BRONZE, 0, 0, new Item.Properties()));
-    public static final RegistryObject<Item> BRONZE_SPATHA = ITEMS.register("bronze_spatha",
-            () -> new SwordItem(ModToolTiers.BRONZE, 5, .5F, new Item.Properties()));
 
     //DRAGONGLASS WEAPONS
     public static final RegistryObject<Item> DRAGONGLASS_SPEAR = ITEMS.register("dragonglass_spear",
-            () -> new SwordItem(ModToolTiers.DRAGONGLASS, 5, .5F, new Item.Properties()));
+            () -> new SwordItem(ModToolTiers.DRAGONGLASS, 5, -2.2F, new Item.Properties()));
     public static final RegistryObject<Item> DRAGONGLASS_DAGGER = ITEMS.register("dragonglass_dagger",
-            () -> new SwordItem(ModToolTiers.DRAGONGLASS, 5, .5F, new Item.Properties()));
+            () -> new SwordItem(ModToolTiers.DRAGONGLASS, 2, -1.5F, new Item.Properties()));
     //BRONZE WEAPONS
+    public static final RegistryObject<Item> BRONZE_SPATHA = ITEMS.register("bronze_spatha",
+            () -> new SwordItem(ModToolTiers.BRONZE, 7, -2.6F, new Item.Properties()));
     public static final RegistryObject<Item> BRONZE_SPEAR = ITEMS.register("bronze_spear",
-            () -> new SwordItem(ModToolTiers.BRONZE, 5, .5F, new Item.Properties()));
+            () -> new SwordItem(ModToolTiers.BRONZE, 5, -2.2F, new Item.Properties()));
     public static final RegistryObject<Item> BRONZE_PIKE = ITEMS.register("bronze_pike",
-            () -> new SwordItem(ModToolTiers.BRONZE, 5, .5F, new Item.Properties()));
+            () -> new SwordItem(ModToolTiers.BRONZE, 6, -3F, new Item.Properties()));
     public static final RegistryObject<Item> BRONZE_DAGGER = ITEMS.register("bronze_dagger",
-            () -> new SwordItem(ModToolTiers.BRONZE, 5, .5F, new Item.Properties()));
+            () -> new SwordItem(ModToolTiers.BRONZE, 2, -1.5F, new Item.Properties()));
     public static final RegistryObject<Item> BRONZE_BATTLEAXE = ITEMS.register("bronze_battleaxe",
-            () -> new SwordItem(ModToolTiers.BRONZE, 5, .5F, new Item.Properties()));
+            () -> new SwordItem(ModToolTiers.BRONZE, 8, -3F, new Item.Properties()));
 
     // IRON WEAPONS
     public static final RegistryObject<Item> IRON_LONGSWORD = ITEMS.register("iron_longsword",
-            () -> new SwordItem(Tiers.IRON, 6, .5F, new Item.Properties()));
+            () -> new SwordItem(Tiers.IRON, 9, -2.6F, new Item.Properties()));
     public static final RegistryObject<Item> IRON_SPEAR = ITEMS.register("iron_spear",
-            () -> new SwordItem(Tiers.IRON, 6, .2F, new Item.Properties()));
+            () -> new SwordItem(Tiers.IRON, 7, -2.2F, new Item.Properties()));
     public static final RegistryObject<Item> IRON_PIKE = ITEMS.register("iron_pike",
-            () -> new SwordItem(Tiers.IRON, 7, .2F, new Item.Properties()));
+            () -> new SwordItem(Tiers.IRON, 8, -3F, new Item.Properties()));
     public static final RegistryObject<Item> IRON_MACE = ITEMS.register("iron_mace",
-            () -> new SwordItem(Tiers.IRON, 7, .2F, new Item.Properties()));
+            () -> new SwordItem(Tiers.IRON, 7, -2.6F, new Item.Properties()));
     public static final RegistryObject<Item> IRON_DAGGER = ITEMS.register("iron_dagger",
-            () -> new SwordItem(Tiers.IRON, 7, .2F, new Item.Properties()));
+            () -> new SwordItem(Tiers.IRON, 4, -1.5F, new Item.Properties()));
     public static final RegistryObject<Item> IRON_BATTLEAXE = ITEMS.register("iron_battleaxe",
-            () -> new SwordItem(Tiers.IRON, 7, .2F, new Item.Properties()));
+            () -> new SwordItem(Tiers.IRON, 10, -3F, new Item.Properties()));
 
     // STEEL WEAPONS
     public static final RegistryObject<Item> STEEL_LONGSWORD = ITEMS.register("steel_longsword",
-            () -> new SwordItem(ModToolTiers.STEEL, 6, .5F, new Item.Properties()));
+            () -> new SwordItem(ModToolTiers.STEEL, 7, -2.6F, new Item.Properties()));
     public static final RegistryObject<Item> STEEL_SPEAR = ITEMS.register("steel_spear",
-            () -> new SwordItem(ModToolTiers.STEEL, 6, .2F, new Item.Properties()));
+            () -> new SwordItem(ModToolTiers.STEEL, 5, -2.2F, new Item.Properties()));
     public static final RegistryObject<Item> STEEL_PIKE = ITEMS.register("steel_pike",
-            () -> new SwordItem(ModToolTiers.STEEL, 7, .2F, new Item.Properties()));
+            () -> new SwordItem(ModToolTiers.STEEL, 6, -3F, new Item.Properties()));
     public static final RegistryObject<Item> STEEL_MACE = ITEMS.register("steel_mace",
-            () -> new SwordItem(ModToolTiers.STEEL, 7, .2F, new Item.Properties()));
+            () -> new SwordItem(ModToolTiers.STEEL, 5, -2.6F, new Item.Properties()));
     public static final RegistryObject<Item> STEEL_DAGGER = ITEMS.register("steel_dagger",
-            () -> new SwordItem(ModToolTiers.STEEL, 7, .2F, new Item.Properties()));
+            () -> new SwordItem(ModToolTiers.STEEL, 2, -1.5F, new Item.Properties()));
     public static final RegistryObject<Item> STEEL_BATTLEAXE = ITEMS.register("steel_battleaxe",
-            () -> new SwordItem(ModToolTiers.STEEL, 7, .2F, new Item.Properties()));
+            () -> new SwordItem(ModToolTiers.STEEL, 8, -3F, new Item.Properties()));
     public static final RegistryObject<Item> STEEL_HALBERD = ITEMS.register("steel_halberd",
-            () -> new SwordItem(ModToolTiers.STEEL, 7, .2F, new Item.Properties()));
+            () -> new SwordItem(ModToolTiers.STEEL, 9, -3.2F, new Item.Properties()));
     // NOBLE WEAPONS
     public static final RegistryObject<Item> NOBLE_LONGSWORD = ITEMS.register("noble_longsword",
-            () -> new SwordItem(ModToolTiers.NOBLE, 6, .5F, new Item.Properties()));
+            () -> new SwordItem(ModToolTiers.NOBLE, 7, -2.6F, new Item.Properties()));
     public static final RegistryObject<Item> NOBLE_SPEAR = ITEMS.register("noble_spear",
-            () -> new SwordItem(ModToolTiers.NOBLE, 6, .2F, new Item.Properties()));
+            () -> new SwordItem(ModToolTiers.NOBLE, 5, 2.2F, new Item.Properties()));
     public static final RegistryObject<Item> NOBLE_PIKE = ITEMS.register("noble_pike",
-            () -> new SwordItem(ModToolTiers.NOBLE, 7, .2F, new Item.Properties()));
+            () -> new SwordItem(ModToolTiers.NOBLE, 6, -3F, new Item.Properties()));
     public static final RegistryObject<Item> NOBLE_MACE = ITEMS.register("noble_mace",
-            () -> new SwordItem(ModToolTiers.NOBLE, 7, .2F, new Item.Properties()));
+            () -> new SwordItem(ModToolTiers.NOBLE, 5, -2.6F, new Item.Properties()));
     public static final RegistryObject<Item> NOBLE_DAGGER = ITEMS.register("noble_dagger",
-            () -> new SwordItem(ModToolTiers.NOBLE, 7, .2F, new Item.Properties()));
+            () -> new SwordItem(ModToolTiers.NOBLE, 2, -1.5F, new Item.Properties()));
     public static final RegistryObject<Item> NOBLE_BATTLEAXE = ITEMS.register("noble_battleaxe",
-            () -> new SwordItem(ModToolTiers.NOBLE, 7, .2F, new Item.Properties()));
+            () -> new SwordItem(ModToolTiers.NOBLE, 8, -3F, new Item.Properties()));
     public static final RegistryObject<Item> NOBLE_HALBERD = ITEMS.register("noble_halberd",
-            () -> new SwordItem(ModToolTiers.NOBLE, 7, .2F, new Item.Properties()));
+            () -> new SwordItem(ModToolTiers.NOBLE, 9, -3.2F, new Item.Properties()));
 
     // Steel TOOLS
     public static final RegistryObject<Item> STEEL_SWORD = ITEMS.register("steel_sword",
-            () -> new SwordItem(ModToolTiers.STEEL, 4, 2, new Item.Properties()));
+            () -> new SwordItem(ModToolTiers.STEEL, 5, -2.4F, new Item.Properties()));
     public static final RegistryObject<Item> STEEL_PICKAXE = ITEMS.register("steel_pickaxe",
             () -> new PickaxeItem(ModToolTiers.STEEL, 1, 1, new Item.Properties()));
     public static final RegistryObject<Item> STEEL_SHOVEL = ITEMS.register("steel_shovel",

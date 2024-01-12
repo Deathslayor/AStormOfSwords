@@ -18,7 +18,7 @@ public class ModToolTiers {
     // Custom tool tier: DRAGONGLASS
     public static final Tier DRAGONGLASS = TierSortingRegistry.registerTier(
             // ForgeTier constructor parameters:
-            new ForgeTier(1, 170, 7F, 2.5F, 14,
+            new ForgeTier(1, 170, 1.6F, 3F, 14,
                     // Custom block tag for tools requiring BRONZE
                     ModTags.Blocks.NEEDS_BRONZE_TOOL,
                     // Ingredient for crafting tools with BRONZE
@@ -33,7 +33,7 @@ public class ModToolTiers {
     // Custom tool tier: BRONZE
     public static final Tier BRONZE = TierSortingRegistry.registerTier(
             // ForgeTier constructor parameters:
-            new ForgeTier(2, 170, 7F, 2.5F, 14,
+            new ForgeTier(2, 170, 1.6F, 3.5F, 14,
                     // Custom block tag for tools requiring BRONZE
                     ModTags.Blocks.NEEDS_BRONZE_TOOL,
                     // Ingredient for crafting tools with BRONZE
@@ -48,7 +48,7 @@ public class ModToolTiers {
     // Custom tool tier: STEEL
     public static final Tier STEEL = TierSortingRegistry.registerTier(
             // ForgeTier constructor parameters:
-            new ForgeTier(4, 2031, 9.0F, 4.0F, 15,
+            new ForgeTier(4, 2031, 1.6F, 5F, 15,
                     // Custom block tag for tools requiring STEEL
                     ModTags.Blocks.NEEDS_STEEL_TOOL,
                     // Ingredient for crafting tools with STEEL
@@ -62,7 +62,7 @@ public class ModToolTiers {
     // Custom tool tier: NOBLE
     public static final Tier NOBLE = TierSortingRegistry.registerTier(
             // ForgeTier constructor parameters:
-            new ForgeTier(4, 4062, 9.0F, 5.0F, 18,
+            new ForgeTier(4, 4062, 1.6F, 6F, 18,
                     // Custom block tag for tools requiring STEEL
                     ModTags.Blocks.NEEDS_STEEL_TOOL,
                     // Ingredient for crafting tools with STEEL
