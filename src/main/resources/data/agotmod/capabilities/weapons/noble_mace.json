@@ -3,9 +3,9 @@
   {
     "common":
     {
-      "armor_negation":30.0,
-      "impact":2.6,
-      "max_strikes":3
+      "armor_negation":50.0,
+      "impact":2.4,
+      "max_strikes":0
     }
   },
   "type":"epicfight:pickaxe"
