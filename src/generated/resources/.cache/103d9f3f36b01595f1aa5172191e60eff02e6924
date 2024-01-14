@@ -1,0 +1,7 @@
+// 1.20.1	2024-01-12T18:40:13.4011036	Registries
+93e760cad11de5820019b78ad58c1464485f3b41 data/agotmod/forge/biome_modifier/add_tin_ore.json
+8490c57cb370c2d194a5b9d120fbc8f816698c14 data/agotmod/forge/biome_modifier/spawn_mammoth.json
+d482d82a0a18f6f099bba0a19368613a9de0ba3d data/agotmod/worldgen/configured_feature/sycamore.json
+cfe58f15dffd7cd9a827082b5872596243c1a9d5 data/agotmod/worldgen/configured_feature/tin_ore.json
+487c96eff1ba3e01a37594a9483c9f4de8a3799b data/agotmod/worldgen/configured_feature/weirwood.json
+174bd861a214e5e9e447f57b86f92b9deca5e42d data/agotmod/worldgen/placed_feature/tin_ore_placed.json

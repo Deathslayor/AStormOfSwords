@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "agotmod:block/stripped_weirwood_log_top",
+    "side": "agotmod:block/stripped_weirwood_log"
+  }
+}

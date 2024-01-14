@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "agotmod:tin_block"
+    },
+    {
+      "item": "minecraft:copper_block"
+    }
+  ],
+  "result": {
+    "item": "agotmod:bronze_block"
+  }
+}

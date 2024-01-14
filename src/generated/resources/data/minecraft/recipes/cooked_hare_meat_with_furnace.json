@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "agotmod:raw_hare_meat"
+  },
+  "result": "agotmod:cooked_hare_meat"
+}
