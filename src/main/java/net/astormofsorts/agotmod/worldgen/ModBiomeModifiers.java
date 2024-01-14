@@ -38,7 +38,7 @@ public class ModBiomeModifiers {
        //Spawns Mammoths
         context.register(SPAWN_MAMMOTH,new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
                 biomes.getOrThrow(Tags.Biomes.IS_COLD_OVERWORLD),
-                List.of(new MobSpawnSettings.SpawnerData(ModEntities.RHINO.get(), 20, 3,5))));
+                List.of(new MobSpawnSettings.SpawnerData(ModEntities.RHINO.get(), 100, 3,5))));
     }
 
     // Helper method to register a ResourceKey for a biome modifier

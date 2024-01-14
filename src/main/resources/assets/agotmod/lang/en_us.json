@@ -19,9 +19,9 @@
   "item.agotmod.starkplate_boots": "Stark Plate Boots",
 
   "item.agotmod.stark_noble_plate_helmet": "Stark Noble Plate Helmet",
-  "item.agotmod.stark_nobleplate_chestplate": "Stark Noble Plate Chestplate",
-  "item.agotmod.stark_nobleplate_leggings": "Stark Noble Plate Leggings",
-  "item.agotmod.stark_nobleplate_boots": "Stark Noble Plate Boots",
+  "item.agotmod.stark_noble_plate_chestplate": "Stark Noble Plate Chestplate",
+  "item.agotmod.stark_noble_plate_leggings": "Stark Noble Plate Leggings",
+  "item.agotmod.stark_noble_plate_boots": "Stark Noble Plate Boots",
 
   "item.agotmod.manderly_levy_helmet": "Manderly Levy Helmet",
   "item.agotmod.manderly_levy_chestplate": "Manderly Levy Chestplate",
@@ -38,20 +38,20 @@
   "item.agotmod.manderly_noble_leggings": "Manderly Noble Plate Leggings",
   "item.agotmod.manderly_noble_boots": "Manderly Noble Plate Boots",
 
-  "item.agotmod.bolten_levy_helmet": "Bolten Levy Helmet",
-  "item.agotmod.bolten_levy_chestplate": "Bolten Levy Chestplate",
-  "item.agotmod.bolten_levy_leggings": "Bolten Levy Leggings",
-  "item.agotmod.bolten_levy_boots": "Bolten Levy Boots",
+  "item.agotmod.bolton_levy_helmet": "Bolten Levy Helmet",
+  "item.agotmod.bolton_levy_chestplate": "Bolten Levy Chestplate",
+  "item.agotmod.bolton_levy_leggings": "Bolten Levy Leggings",
+  "item.agotmod.bolton_levy_boots": "Bolten Levy Boots",
 
-  "item.agotmod.bolten_plate_helmet": "Bolten Plate Helmet",
-  "item.agotmod.bolten_plate_chestplate": "Bolten Plate Chestplate",
-  "item.agotmod.bolten_plate_leggings": "Bolten Plate Leggings",
-  "item.agotmod.bolten_plate_boots": "Bolten Plate Boots",
+  "item.agotmod.bolton_plate_helmet": "Bolten Plate Helmet",
+  "item.agotmod.bolton_plate_chestplate": "Bolten Plate Chestplate",
+  "item.agotmod.bolton_plate_leggings": "Bolten Plate Leggings",
+  "item.agotmod.bolton_plate_boots": "Bolten Plate Boots",
 
-  "item.agotmod.bolten_noble_helmet": "Bolten Noble Plate Helmet",
-  "item.agotmod.bolten_noble_chestplate": "Bolten Noble Plate Chestplate",
-  "item.agotmod.bolten_noble_leggings": "Bolten Noble Plate Leggings",
-  "item.agotmod.bolten_noble_boots": "Bolten Noble Plate Boots",
+  "item.agotmod.bolton_noble_helmet": "Bolten Noble Plate Helmet",
+  "item.agotmod.bolton_noble_chestplate": "Bolten Noble Plate Chestplate",
+  "item.agotmod.bolton_noble_leggings": "Bolten Noble Plate Leggings",
+  "item.agotmod.bolton_noble_boots": "Bolten Noble Plate Boots",
 
   "item.agotmod.iron_longsword": "Iron Longsword",
   "item.agotmod.iron_battle_axe": "Iron Battleaxe",
@@ -147,6 +147,9 @@
   "item.agotmod.bear_spawn_egg": "Bear Spawn Egg",
 
   "entity.minecraft.villager.agotmod.minter": "Minter",
+  "entity.agotmod.rhino": "Mammoth",
+  "entity.agotmod.bear": "Bear",
+
 
   "item.agotmod.blood_bottled.effect.empty": "Bottle Of Blood",
   "item.agotmod.blood_dagger": "Blood Dagger",

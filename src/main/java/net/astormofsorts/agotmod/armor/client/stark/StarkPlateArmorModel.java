@@ -14,14 +14,14 @@ public class StarkPlateArmorModel extends GeoModel<StarkPlateArmorItem> {
     @Override
     public ResourceLocation getModelResource(StarkPlateArmorItem object) {
         // Return the resource location for the model
-        return new ResourceLocation(AGoTMod.MOD_ID, "geo/starkplate.geo.json");
+        return new ResourceLocation(AGoTMod.MOD_ID, "geo/stark_plate.geo.json");
     }
 
     // Override method to get the texture resource location
     @Override
     public ResourceLocation getTextureResource(StarkPlateArmorItem object) {
         // Return the resource location for the texture
-        return new ResourceLocation(AGoTMod.MOD_ID, "textures/item/armor/starkplate.png");
+        return new ResourceLocation(AGoTMod.MOD_ID, "textures/item/armor/stark_plate.png");
     }
 
     // Override method to get the animation resource location

@@ -5,6 +5,6 @@
     "type": "agotmod:rhino",
     "maxCount": 5,
     "minCount": 3,
-    "weight": 20
+    "weight": 100
   }
 }

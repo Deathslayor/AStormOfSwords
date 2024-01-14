@@ -33,7 +33,7 @@ public class ModEntities {
     // Registry object for the Rhino entity type
     public static final RegistryObject<EntityType<RhinoEntity>> RHINO =
             ENTITY_TYPES.register("rhino", () -> EntityType.Builder.of(RhinoEntity::new, MobCategory.CREATURE)
-                    .sized(2f, 4f).build("rhino"));
+                    .sized(3f, 4f).build("rhino"));
 
 
     // Method for registering the deferred register with the event bus

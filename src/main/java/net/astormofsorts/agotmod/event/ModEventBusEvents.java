@@ -25,9 +25,11 @@ public class ModEventBusEvents {
         // The attributes are created using the createAttributes() method of RhinoEntity
         event.put(ModEntities.BEAR.get(), BearEntity.createAttributes().build());
         event.put(ModEntities.WIGHT.get(), WightEntity.createAttributes().build());
+        event.put(ModEntities.RHINO.get(), WightEntity.createAttributes().build());
     }
     @SubscribeEvent
-    public static void registerSpawnPlacement(SpawnPlacementRegisterEvent event) {
+    public static void registerSpawnPlacement(SpawnPlacementRegisterEvent event) {event.register(ModEntities.RHINO.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+            Animal::checkAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
 
     }
 }
