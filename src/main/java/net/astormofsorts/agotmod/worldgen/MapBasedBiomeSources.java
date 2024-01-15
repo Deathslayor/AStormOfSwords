@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.astormofsorts.agotmod.map.MapManager;
 import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeSource;
 import net.minecraft.world.level.biome.Climate;
@@ -34,6 +35,12 @@ public class MapBasedBiomeSources extends BiomeSource {
     }
 
     public @NotNull Holder<Biome> getNoiseBiome(int pX, int pY, int pZ, Climate.@NotNull Sampler pSampler) {
-        return MapManager.getBiomeFromColor(pX, pY);
+        ResourceKey<Biome> biome = MapManager.getBiomeFromColor(pX, pZ);
+        for (Holder<Biome> possibleBiome : possibleBiomes()) {
+            if (possibleBiome.is(biome))
+                return possibleBiome;
+        }
+        // again, return ocean if biome not found
+        return possibleBiomes().stream().findFirst().orElseThrow();
     }
 }

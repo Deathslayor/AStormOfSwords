@@ -17,13 +17,10 @@ import net.astormofsorts.agotmod.worldgen.MapBasedBiomeSources;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -40,8 +37,6 @@ public class AGoTMod {
     // Define mod id in a common place for everything to reference
     public static final String MOD_ID = "agotmod";
     public static final Logger LOGGER = LogUtils.getLogger();
-    public static Registry<Biome> VANILLA_BIOMES = null;
-
     // Constructor for AGoTMod class
     public AGoTMod() {
         // Get the mod event bus
@@ -86,9 +81,6 @@ public class AGoTMod {
 
         // Listen for Register Event
         modEventBus.addListener(this::onRegister);
-
-        // Register Level Load event
-        MinecraftForge.EVENT_BUS.addListener(this::levelLoad);
     }
 
     // Common setup method
@@ -103,11 +95,6 @@ public class AGoTMod {
 
     private void onRegister(RegisterEvent event) {
         Registry.register(BuiltInRegistries.BIOME_SOURCE, new ResourceLocation(MOD_ID, "map_based_biome_source"), MapBasedBiomeSources.MAP_CODEC);
-    }
-
-    private void levelLoad(LevelEvent.Load event) {
-        if (VANILLA_BIOMES == null)
-            VANILLA_BIOMES = event.getLevel().registryAccess().registryOrThrow(Registries.BIOME);
     }
 
     // Server starting event listener

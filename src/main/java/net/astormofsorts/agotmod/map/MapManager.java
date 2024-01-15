@@ -1,7 +1,6 @@
 package net.astormofsorts.agotmod.map;
 
 import net.astormofsorts.agotmod.AGoTMod;
-import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
@@ -27,24 +26,22 @@ public class MapManager {
         }
     }
 
-    public static Holder<Biome> getBiomeFromColor(int x, int y) {
+    public static ResourceKey<Biome> getBiomeFromColor(int x, int y) {
         // 0 | 0 should be in the mddle of the image
         y -= mapImage.getHeight() / 2;
         x += mapImage.getWidth() / 2;
 
         // get biome via color
         try {
-            //assert mapImage != null;
-
             ResourceKey<Biome> biome = BiomeColorRegistry.getBiomeByColor(new Color(mapImage.getRGB(x, y)));
             if (biome != null)
-                return AGoTMod.VANILLA_BIOMES.getHolderOrThrow(biome);
+                return biome;
         }
         // ignore exception since in case of failure, an ocean biome is returned
         catch (Exception ignored) {
         }
 
         // return ocean biome if something went wrong obtaining the biome from the map
-        return AGoTMod.VANILLA_BIOMES.getHolderOrThrow(Biomes.OCEAN);
+        return Biomes.OCEAN;
     }
 }
