@@ -1,4 +1,6 @@
-// 1.20.1	2024-01-12T18:40:13.4011036	Registries
+// 1.20.1	2024-01-15T14:49:36.4089897	Registries
+e5603e0e9e96a06d13aaa23e9a96613ce03595c9 data/agotmod/dimension/known_world.json
+069da1c47784e1326d2724bbb07708273d2b55c9 data/agotmod/dimension_type/known_world_type.json
 93e760cad11de5820019b78ad58c1464485f3b41 data/agotmod/forge/biome_modifier/add_tin_ore.json
 8490c57cb370c2d194a5b9d120fbc8f816698c14 data/agotmod/forge/biome_modifier/spawn_mammoth.json
 d482d82a0a18f6f099bba0a19368613a9de0ba3d data/agotmod/worldgen/configured_feature/sycamore.json

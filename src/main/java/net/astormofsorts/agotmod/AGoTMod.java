@@ -2,20 +2,28 @@
 package net.astormofsorts.agotmod;
 
 // Importing necessary classes from other packages
+
 import com.mojang.logging.LogUtils;
 import net.astormofsorts.agotmod.block.ModBLocks;
 import net.astormofsorts.agotmod.entity.ModEntities;
 import net.astormofsorts.agotmod.entity.client.BearRenderer;
 import net.astormofsorts.agotmod.entity.client.RhinoRenderer;
-import net.astormofsorts.agotmod.item.creativetabs.*;
-import net.astormofsorts.agotmod.item.ModItems;
-import net.astormofsorts.agotmod.sound.ModSounds;
 import net.astormofsorts.agotmod.entity.client.norththewall.WightRenderer;
+import net.astormofsorts.agotmod.item.ModItems;
+import net.astormofsorts.agotmod.item.creativetabs.*;
+import net.astormofsorts.agotmod.sound.ModSounds;
 import net.astormofsorts.agotmod.villager.ModVillagers;
+import net.astormofsorts.agotmod.worldgen.MapBasedBiomeSources;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
+import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -23,6 +31,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.RegisterEvent;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -31,6 +40,7 @@ public class AGoTMod {
     // Define mod id in a common place for everything to reference
     public static final String MOD_ID = "agotmod";
     public static final Logger LOGGER = LogUtils.getLogger();
+    public static Registry<Biome> VANILLA_BIOMES = null;
 
     // Constructor for AGoTMod class
     public AGoTMod() {
@@ -73,6 +83,12 @@ public class AGoTMod {
 
         // Listen for creative mode tab build event
         modEventBus.addListener(this::addCreative);
+
+        // Listen for Register Event
+        modEventBus.addListener(this::onRegister);
+
+        // Register Level Load event
+        MinecraftForge.EVENT_BUS.addListener(this::levelLoad);
     }
 
     // Common setup method
@@ -83,6 +99,15 @@ public class AGoTMod {
     // Creative mode tab build method
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         // Add custom items/blocks to the creative mode tab here
+    }
+
+    private void onRegister(RegisterEvent event) {
+        Registry.register(BuiltInRegistries.BIOME_SOURCE, new ResourceLocation(MOD_ID, "map_based_biome_source"), MapBasedBiomeSources.MAP_CODEC);
+    }
+
+    private void levelLoad(LevelEvent.Load event) {
+        if (VANILLA_BIOMES == null)
+            VANILLA_BIOMES = event.getLevel().registryAccess().registryOrThrow(Registries.BIOME);
     }
 
     // Server starting event listener

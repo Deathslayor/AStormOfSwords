@@ -1,0 +1,14 @@
+{
+  "type": "agotmod:known_world_type",
+  "generator": {
+    "type": "minecraft:noise",
+    "biome_source": {
+      "type": "agotmod:map_based_biome_source",
+      "wrapped": {
+        "type": "minecraft:multi_noise",
+        "preset": "minecraft:overworld"
+      }
+    },
+    "settings": "minecraft:overworld"
+  }
+}
