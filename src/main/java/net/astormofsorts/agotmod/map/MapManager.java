@@ -27,9 +27,13 @@ public class MapManager {
     }
 
     public static ResourceKey<Biome> getBiomeFromColor(int x, int y) {
-        // 0 | 0 should be in the mddle of the image
+        // 0 | 0 should be in the middle of the image
         y -= mapImage.getHeight() / 2;
         x += mapImage.getWidth() / 2;
+
+        // one pixel should be one chunk (16x16)
+        x /= 16;
+        y /= 16;
 
         // get biome via color
         try {
