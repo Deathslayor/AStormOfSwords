@@ -13,7 +13,7 @@ import net.astormofsorts.agotmod.item.ModItems;
 import net.astormofsorts.agotmod.item.creativetabs.*;
 import net.astormofsorts.agotmod.sound.ModSounds;
 import net.astormofsorts.agotmod.villager.ModVillagers;
-import net.astormofsorts.agotmod.worldgen.MapBasedBiomeSources;
+import net.astormofsorts.agotmod.worldgen.MapBasedBiomeSource;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -94,7 +94,7 @@ public class AGoTMod {
     }
 
     private void onRegister(RegisterEvent event) {
-        Registry.register(BuiltInRegistries.BIOME_SOURCE, new ResourceLocation(MOD_ID, "map_based_biome_source"), MapBasedBiomeSources.MAP_CODEC);
+        Registry.register(BuiltInRegistries.BIOME_SOURCE, new ResourceLocation(MOD_ID, "map_based_biome_source"), MapBasedBiomeSource.MAP_CODEC);
     }
 
     // Server starting event listener

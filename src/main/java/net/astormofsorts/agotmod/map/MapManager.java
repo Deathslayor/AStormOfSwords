@@ -1,51 +1,58 @@
 package net.astormofsorts.agotmod.map;
 
 import net.astormofsorts.agotmod.AGoTMod;
+import net.astormofsorts.agotmod.datagen.ModDimensionProvider;
+import net.minecraft.core.QuartPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Biomes;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.net.URL;
 
 
 public class MapManager {
     private static final BufferedImage mapImage = getMapImage();
 
     private static BufferedImage getMapImage() {
-        URL mapURL = AGoTMod.class.getResource("/assets/agotmod/map.png");
         try {
-            assert mapURL != null;
-            return ImageIO.read(mapURL);
+            assert ModDimensionProvider.MAP_URL != null;
+            return ImageIO.read(ModDimensionProvider.MAP_URL);
         } catch (IOException e) {
-            AGoTMod.LOGGER.error("Failed to load map located at: " + mapURL.getPath());
+            AGoTMod.LOGGER.error("Failed to load map located at: " + ModDimensionProvider.MAP_URL.getPath());
             return null;
         }
     }
 
-    public static ResourceKey<Biome> getBiomeFromColor(int x, int y) {
-        // 0 | 0 should be in the middle of the image
-        y -= mapImage.getHeight() / 2;
-        x += mapImage.getWidth() / 2;
+    /**
+     * Gets the ResourceKey of the Biome from a pixel from the map, specified above.
+     * This also uses the @see {@link BiomeColorRegistry} .
+     *
+     * @param pX this should be a block position x
+     * @param pY this should be a block position z
+     * @return Returns the ResourceKey of the Biome from a pixel from the map, specified above.
+     */
+    public static ResourceKey<Biome> getBiomeFromColor(int pX, int pY) {
+        // one pixel shouldn't be one block but rather a chunk
+        int x = QuartPos.fromBlock(pX);
+        int y = QuartPos.fromBlock(pY);
 
-        // one pixel should be one chunk (16x16)
-        x /= 16;
-        y /= 16;
+        // 0 | 0 should be in the middle of the image, comment this lines to move it to the top-left corner
+        x += mapImage.getWidth() / 2;
+        y -= mapImage.getHeight() / 2;
+
+        // return ocean in case the specified position wasn't found on the map
+        if (x < 0 || x > mapImage.getWidth() || y < 0 || y > mapImage.getHeight())
+            return ModDimensionProvider.DEFAULT_BIOME;
 
         // get biome via color
         try {
-            ResourceKey<Biome> biome = BiomeColorRegistry.getBiomeByColor(new Color(mapImage.getRGB(x, y)));
-            if (biome != null)
-                return biome;
+            return BiomeColorRegistry.getBiomeByColor(new Color(mapImage.getRGB(x, y)));
         }
-        // ignore exception since in case of failure, an ocean biome is returned
         catch (Exception ignored) {
+            // return null if something went wrong obtaining the biome from the map
+            return null;
         }
-
-        // return ocean biome if something went wrong obtaining the biome from the map
-        return Biomes.OCEAN;
     }
 }
