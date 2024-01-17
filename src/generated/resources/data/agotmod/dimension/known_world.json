@@ -1,13 +1,20 @@
 {
   "type": "agotmod:known_world_type",
   "generator": {
-    "type": "minecraft:noise",
+    "type": "agotmod:map_based_chunk_generator",
     "biome_source": {
       "type": "agotmod:map_based_biome_source",
-      "wrapped": {
-        "type": "minecraft:multi_noise",
-        "preset": "minecraft:overworld"
-      }
+      "biome_list": [
+        {
+          "biome": "minecraft:plains"
+        },
+        {
+          "biome": "minecraft:ocean"
+        },
+        {
+          "biome": "minecraft:desert"
+        }
+      ]
     },
     "settings": "minecraft:overworld"
   }

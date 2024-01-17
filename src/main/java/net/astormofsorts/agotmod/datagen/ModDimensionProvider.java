@@ -1,7 +1,11 @@
 package net.astormofsorts.agotmod.datagen;
 
 import net.astormofsorts.agotmod.AGoTMod;
+import net.astormofsorts.agotmod.map.BiomeColorRegistry;
+import net.astormofsorts.agotmod.worldgen.MapBasedBiomeChunkGenerator;
 import net.astormofsorts.agotmod.worldgen.MapBasedBiomeSource;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
@@ -10,14 +14,13 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
-import net.minecraft.world.level.biome.MultiNoiseBiomeSource;
-import net.minecraft.world.level.biome.MultiNoiseBiomeSourceParameterLists;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.dimension.LevelStem;
-import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;
 import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.OptionalLong;
 
 import static net.astormofsorts.agotmod.AGoTMod.MOD_ID;
@@ -50,9 +53,17 @@ public class ModDimensionProvider {
     }
 
     public static void bootstrapStem(BootstapContext<LevelStem> context) {
-        MapBasedBiomeSource biomeSources = new MapBasedBiomeSource(MultiNoiseBiomeSource.createFromPreset(context.lookup(Registries.MULTI_NOISE_BIOME_SOURCE_PARAMETER_LIST).getOrThrow(MultiNoiseBiomeSourceParameterLists.OVERWORLD)));
+        HolderGetter<Biome> biomeRegistry = context.lookup(Registries.BIOME);
+
+        // gets the list of registered biomes and gives them to the biome source
+        List<Holder<Biome>> biomeList = new ArrayList<>();
+        for (ResourceKey<Biome> registeredBiome : BiomeColorRegistry.getAllRegisteredBiomes()) {
+            biomeList.add(biomeRegistry.getOrThrow(registeredBiome));
+        }
+
+        MapBasedBiomeSource biomeSources = new MapBasedBiomeSource(biomeList);
         context.register(DIMENSION_STEM, new LevelStem(context.lookup(Registries.DIMENSION_TYPE).getOrThrow(DIMENSION_TYPE),
-                new NoiseBasedChunkGenerator(
+                new MapBasedBiomeChunkGenerator(
                         biomeSources,
                         context.lookup(Registries.NOISE_SETTINGS).getOrThrow(NoiseGeneratorSettings.OVERWORLD))
         ));

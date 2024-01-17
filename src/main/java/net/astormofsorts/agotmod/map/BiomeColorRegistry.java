@@ -6,9 +6,11 @@ import net.minecraft.world.level.biome.Biomes;
 
 import java.awt.*;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class BiomeColorRegistry {
+    public static final Exception COLOR_NOT_REGISTERED_EXCPETION = new Exception("Found a not registered color on the image at %s . Placed %s instead.");
     private static final Map<Color, ResourceKey<Biome>> BIOME_COLORS = new HashMap<>();
 
     static {
@@ -23,5 +25,9 @@ public class BiomeColorRegistry {
 
     public static ResourceKey<Biome> getBiomeByColor(Color color) {
         return BIOME_COLORS.get(color);
+    }
+
+    public static List<ResourceKey<Biome>> getAllRegisteredBiomes() {
+        return BIOME_COLORS.values().stream().toList();
     }
 }

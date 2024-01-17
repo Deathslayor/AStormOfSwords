@@ -11,6 +11,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+import static net.astormofsorts.agotmod.map.BiomeColorRegistry.COLOR_NOT_REGISTERED_EXCPETION;
+
 
 public class MapManager {
     private static final BufferedImage mapImage = getMapImage();
@@ -30,29 +32,33 @@ public class MapManager {
      * This also uses the @see {@link BiomeColorRegistry} .
      *
      * @param pX this should be a block position x
-     * @param pY this should be a block position z
+     * @param pZ this should be a block position z
      * @return Returns the ResourceKey of the Biome from a pixel from the map, specified above.
      */
-    public static ResourceKey<Biome> getBiomeFromColor(int pX, int pY) {
+    public static ResourceKey<Biome> getBiomeFromColor(int pX, int pZ) {
+        assert mapImage != null;
+
         // one pixel shouldn't be one block but rather a chunk
         int x = QuartPos.fromBlock(pX);
-        int y = QuartPos.fromBlock(pY);
+        int y = QuartPos.fromBlock(pZ);
 
-        // 0 | 0 should be in the middle of the image, comment this lines to move it to the top-left corner
+        // 0 | 0 should be in the middle of the image, comment this lines to move it to the top-left corner of the image
         x += mapImage.getWidth() / 2;
-        y -= mapImage.getHeight() / 2;
-
-        // return ocean in case the specified position wasn't found on the map
-        if (x < 0 || x > mapImage.getWidth() || y < 0 || y > mapImage.getHeight())
-            return ModDimensionProvider.DEFAULT_BIOME;
+        y += mapImage.getHeight() / 2;
 
         // get biome via color
         try {
-            return BiomeColorRegistry.getBiomeByColor(new Color(mapImage.getRGB(x, y)));
+            ResourceKey<Biome> biome = BiomeColorRegistry.getBiomeByColor(new Color(mapImage.getRGB(x, y)));
+            if (biome != null)
+                return biome;
+            else
+                throw COLOR_NOT_REGISTERED_EXCPETION;
+        } catch (Exception e) {
+            if (e == COLOR_NOT_REGISTERED_EXCPETION)
+                AGoTMod.LOGGER.error(e.getMessage(), "X: " + x + " Y: " + y, ModDimensionProvider.DEFAULT_BIOME.location());
         }
-        catch (Exception ignored) {
-            // return null if something went wrong obtaining the biome from the map
-            return null;
-        }
+
+        // return a default biome in case the specified position wasn't found on the map or something went wrong in general
+        return ModDimensionProvider.DEFAULT_BIOME;
     }
 }
