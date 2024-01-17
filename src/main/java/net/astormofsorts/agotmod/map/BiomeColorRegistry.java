@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public class BiomeColorRegistry {
-    public static final Exception COLOR_NOT_REGISTERED_EXCPETION = new Exception("Found a not registered color on the image at %s . Placed %s instead.");
+    public static final Exception COLOR_NOT_REGISTERED_EXCPETION = new Exception("Found a not registered color on the image");
     private static final Map<Color, ResourceKey<Biome>> BIOME_COLORS = new HashMap<>();
 
     static {
