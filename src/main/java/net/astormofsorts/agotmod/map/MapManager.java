@@ -55,7 +55,7 @@ public class MapManager {
                 throw COLOR_NOT_REGISTERED_EXCPETION;
         } catch (Exception e) {
             if (e == COLOR_NOT_REGISTERED_EXCPETION)
-                AGoTMod.LOGGER.error(e.getMessage() + " at X: " + x + " Y: " + y ". Placed " + ModDimensionProvider.DEFAULT_BIOME.location() + " instead.");
+                AGoTMod.LOGGER.error(e.getMessage() + " at X: " + x + " Y: " + y + ". Placed " + ModDimensionProvider.DEFAULT_BIOME.location() + " instead.");
         }
 
         // return a default biome in case the specified position wasn't found on the map or something went wrong in general
