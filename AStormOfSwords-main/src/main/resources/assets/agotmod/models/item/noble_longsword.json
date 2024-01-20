@@ -1,0 +1,30 @@
+{
+  "parent": "minecraft:item/handheld",
+  "loader": "forge:separate_transforms",
+  "base": {
+    "parent": "agotmod:item/noble_longsword_2d",
+    "display": {
+      "thirdperson_righthand": {
+        "rotation": [ -50, 270, 0 ],
+        "translation": [ 0, 6.5, 2 ],
+        "scale": [ 1.5, 1.5, 1 ]
+      },
+      "thirdperson_lefthand": {
+        "rotation": [ -50, 90, 0 ],
+        "translation": [ 0, 6.5, 2 ],
+        "scale": [ 1.5, 1.5, 1 ]
+      }
+    }
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "agotmod:item/noble_longsword_2d"
+    },
+    "ground": {
+      "parent": "agotmod:item/noble_longsword_2d"
+    },
+    "fixed": {
+      "parent": "agotmod:item/noble_longsword_2d"
+    }
+  }
+}

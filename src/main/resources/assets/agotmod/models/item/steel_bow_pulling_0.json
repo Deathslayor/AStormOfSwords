@@ -1,0 +1,6 @@
+{
+    "parent": "agotmod:item/steel_bow",
+    "textures": {
+        "layer0": "agotmod:item/steel_bow_pulling_0"
+    }
+}
