@@ -9,6 +9,7 @@ import net.astormofsorts.agotmod.entity.ModEntities;
 import net.astormofsorts.agotmod.entity.client.BearRenderer;
 import net.astormofsorts.agotmod.entity.client.RhinoRenderer;
 import net.astormofsorts.agotmod.entity.client.norththewall.WightRenderer;
+import net.astormofsorts.agotmod.item.ModItemProperties;
 import net.astormofsorts.agotmod.item.ModItems;
 import net.astormofsorts.agotmod.item.creativetabs.*;
 import net.astormofsorts.agotmod.sound.ModSounds;
@@ -55,6 +56,7 @@ public class AGoTMod {
         ModCreativeIngredients.register(modEventBus);
         ModCreativeAnimals.register(modEventBus);
         ModCreativeMagic.register(modEventBus);
+        ModCreativeArchery.register(modEventBus);
 
         // Adds Sounds to the game
         ModSounds.register(modEventBus);
@@ -116,6 +118,9 @@ public class AGoTMod {
             EntityRenderers.register(ModEntities.BEAR.get(), BearRenderer::new);
 
             EntityRenderers.register(ModEntities.WIGHT.get(), WightRenderer::new);
+            event.enqueueWork(() -> {
+                ModItemProperties.addCustomItemProperties();
+            });
         }
     }
 }
