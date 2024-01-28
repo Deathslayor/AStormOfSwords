@@ -10,21 +10,22 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
 // RhinoRenderer is responsible for rendering RhinoEntity in the game
 public class RhinoRenderer extends MobRenderer<RhinoEntity, RhinoModel<RhinoEntity>> {
     public static final Map<RhinoVariant, ResourceLocation> LOCATION_BY_VARIANT =
-            Util.make(Maps.newEnumMap(RhinoVariant.class), map->{
+            Util.make(Maps.newEnumMap(RhinoVariant.class), map -> {
                 map.put(RhinoVariant.DEFAULT,
-                        new ResourceLocation(AGoTMod.MOD_ID,"textures/entity/rhino.png"));
+                        new ResourceLocation(AGoTMod.MOD_ID, "textures/entity/rhino.png"));
                 map.put(RhinoVariant.DARK,
-                        new ResourceLocation(AGoTMod.MOD_ID,"textures/entity/dark_rhino.png"));
+                        new ResourceLocation(AGoTMod.MOD_ID, "textures/entity/dark_rhino.png"));
                 map.put(RhinoVariant.BLACK,
-                        new ResourceLocation(AGoTMod.MOD_ID,"textures/entity/black_rhino.png"));
+                        new ResourceLocation(AGoTMod.MOD_ID, "textures/entity/black_rhino.png"));
                 map.put(RhinoVariant.WHITE,
-                        new ResourceLocation(AGoTMod.MOD_ID,"textures/entity/white_rhino.png"));
+                        new ResourceLocation(AGoTMod.MOD_ID, "textures/entity/white_rhino.png"));
 
             });
 
@@ -32,19 +33,20 @@ public class RhinoRenderer extends MobRenderer<RhinoEntity, RhinoModel<RhinoEnti
     public RhinoRenderer(EntityRendererProvider.Context pContext) {
         // Call the constructor of the superclass (MobRenderer) with RhinoModel, layer, and shadow size parameters
         super(pContext, new RhinoModel<>(pContext.bakeLayer(ModModelLayers.RHINO_LAYER)), 1f);
+        this.addLayer(new RhinoSaddleLayer(this, pContext.getModelSet()));
     }
 
     // Get the texture location for RhinoEntity
     @Override
-    public ResourceLocation getTextureLocation(RhinoEntity pEntity) {
+    public @NotNull ResourceLocation getTextureLocation(RhinoEntity pEntity) {
         return LOCATION_BY_VARIANT.get(pEntity.getVariant());
 
     }
 
     // Override the render method to apply scaling for baby RhinoEntities
     @Override
-    public void render(RhinoEntity pEntity, float pEntityYaw, float pPartialTicks, PoseStack pMatrixStack,
-                       MultiBufferSource pBuffer, int pPackedLight) {
+    public void render(RhinoEntity pEntity, float pEntityYaw, float pPartialTicks, @NotNull PoseStack pMatrixStack,
+                       @NotNull MultiBufferSource pBuffer, int pPackedLight) {
         // Check if the RhinoEntity is a baby
         if (pEntity.isBaby()) {
             // Scale down the rendering for baby RhinoEntities
@@ -64,4 +66,4 @@ public class RhinoRenderer extends MobRenderer<RhinoEntity, RhinoModel<RhinoEnti
         // Call the render method of the superclass with the scaled matrix stack
         super.render(pEntity, pEntityYaw, pPartialTicks, pMatrixStack, pBuffer, pPackedLight);
     }
-    }
+}
