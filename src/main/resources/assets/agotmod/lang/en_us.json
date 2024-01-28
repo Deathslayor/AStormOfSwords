@@ -151,7 +151,6 @@
 
   "item.agotmod.rhino_spawn_egg": "Mammoth Spawn Egg",
   "item.agotmod.bear_spawn_egg": "Bear Spawn Egg",
-  "item.agotmod.wight_spawn_egg": "Wight Spawn Egg",
 
   "entity.minecraft.villager.agotmod.minter": "Minter",
   "entity.agotmod.rhino": "Mammoth",
@@ -161,7 +160,7 @@
   "item.agotmod.blood_bottled.effect.empty": "Bottle Of Blood",
   "item.agotmod.blood_dagger": "Blood Dagger",
 
-  "key.categoriesmagic.agotmod": "Storm Of Swords",
+  "key.categoriesmagic.agotmod": "Storm Of Swords Magic",
   "key.agotmod.use_spell_one": "Spell 1",
   "key.agotmod.use_spell_two": "Spell 2",
   "key.agotmod.use_spell_three": "Spell 3",
@@ -203,6 +202,7 @@
   "creativetab.agot_tab_natural_blocks": "ASoS Natural Blocks",
   "creativetab.agot_tab_magic": "Magic",
   "block.agotmod.weirwood_log": "Weirwood Log",
+  "block.agotmod.weirwood_face_log": "Weirwood Log with Face",
   "block.agotmod.stripped_weirwood_log": "Stripped Weirwood Log",
   "block.agotmod.weirwood_wood": "Weirwood",
   "block.agotmod.stripped_weirwood_wood": "Stripped Weirwood",

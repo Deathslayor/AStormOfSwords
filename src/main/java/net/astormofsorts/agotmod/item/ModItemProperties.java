@@ -1,11 +1,10 @@
 package net.astormofsorts.agotmod.item;
 
-import net.astormofsorts.agotmod.util.ModTags;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
-public class ModItemProperties{
+public class ModItemProperties {
     public static void addCustomItemProperties() {
         makeBow(ModItems.STEEL_BOW.get());
     }

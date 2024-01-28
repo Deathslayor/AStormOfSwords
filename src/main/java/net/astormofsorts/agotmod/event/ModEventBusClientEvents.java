@@ -43,7 +43,5 @@ public class ModEventBusClientEvents {
         event.register(KeyBindings.INSTANCE.OpenBasicMenu);
         event.register(KeyBindings.INSTANCE.OpenMap);
         event.register(KeyBindings.INSTANCE.SetWayPoint);
-        event.register(KeyBindings.INSTANCE.ToggleMiniMap);
-        event.register(KeyBindings.INSTANCE.AnimalMountedAttack);
     }
 }
