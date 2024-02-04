@@ -1,19 +1,27 @@
 package net.astormofsorts.agotmod.block;// Importing necessary classes from other packages
+
 import net.astormofsorts.agotmod.AGoTMod;
 import net.astormofsorts.agotmod.block.custom.ModFlammableLeaves;
-import net.astormofsorts.agotmod.block.custom.ModFlammableRotatedPillarBlock;
 import net.astormofsorts.agotmod.block.custom.ModFlammablePlanks;
+import net.astormofsorts.agotmod.block.custom.ModFlammableRotatedPillarBlock;
+import net.astormofsorts.agotmod.block.custom.specialleaves.WeirwoodLeavesBlock;
 import net.astormofsorts.agotmod.item.ModItems;
 import net.astormofsorts.agotmod.worldgen.tree.SycamoreTreeGrower;
 import net.astormofsorts.agotmod.worldgen.tree.WeirwoodTreeGrower;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -95,7 +103,7 @@ public class ModBLocks {
     public static final RegistryObject<Block> WEIRWOOD_PLANKS = registerBlock("weirwood_planks",
             () -> new ModFlammablePlanks(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> WEIRWOOD_LEAVES = registerBlock("weirwood_leaves",
-            () -> new ModFlammableLeaves(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
+            () -> new WeirwoodLeavesBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_LEAVES)));
 
     public static final RegistryObject<Block> WEIRWOOD_SAPLING = registerBlock("weirwood_sapling",
             () -> new SaplingBlock(new WeirwoodTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
@@ -123,5 +131,16 @@ public class ModBLocks {
     // Tells the AGoTMod class to call the modded blocks into the game
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);
+    }
+
+    public static void spawnParticles(Level level, BlockPos pos, BlockState state, RandomSource random) {
+        // Play cherry blossom particle effects
+
+            double x = pos.getX() + 0.2 + random.nextGaussian() * 0.2;
+            double y = pos.getY() - 0.1;
+            double z = pos.getZ() + 0.2 + random.nextGaussian() * 0.2;
+            level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK ,state)
+                    , x, y, z, 0, 0, 0);
+
     }
 }
