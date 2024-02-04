@@ -8,6 +8,9 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
+
+import java.awt.*;
 
 public class WeirwoodLeavesBlock extends LeavesBlock {
     public WeirwoodLeavesBlock(Properties pProperties) {
@@ -30,7 +33,15 @@ public class WeirwoodLeavesBlock extends LeavesBlock {
     }
 
     @Override
-    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-        ModBLocks.spawnParticles(level, pos, state, random);
+    public void animateTick(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull RandomSource random) {
+        super.animateTick(state, level, pos, random);
+        if (random.nextInt(10) == 0) {
+            BlockPos blockpos = pos.below();
+            BlockState blockstate = level.getBlockState(blockpos);
+            if (!isFaceFull(blockstate.getCollisionShape(level, blockpos), Direction.UP)) {
+                // here should the particles spawn
+                //ModBLocks.spawnLeaveParticlesBelow(level, pos, random, new Color(255, 0, 0).getRGB());
+            }
+        }
     }
 }

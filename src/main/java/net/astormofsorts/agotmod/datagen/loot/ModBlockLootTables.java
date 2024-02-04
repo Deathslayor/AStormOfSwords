@@ -27,10 +27,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         /** // ---------------------------(ORES)--------------------------- // */
         // ---------------------------(TIN)--------------------------- //
         // Add loot table for tin ores
-        this.add(ModBLocks.DEEPSLATE_TIN_ORE.get(),
-                block -> oreDropBetween2And5(ModBLocks.DEEPSLATE_TIN_ORE.get(), ModItems.RAW_TIN.get()));
-        this.add(ModBLocks.TIN_ORE.get(),
-                block -> oreDropBetween2And5(ModBLocks.TIN_ORE.get(), ModItems.RAW_TIN.get()));
+        this.add(ModBLocks.DEEPSLATE_TIN_ORE.get(), block -> oreDropBetween2And5(ModBLocks.DEEPSLATE_TIN_ORE.get(), ModItems.RAW_TIN.get()));
+        this.add(ModBLocks.TIN_ORE.get(), block -> oreDropBetween2And5(ModBLocks.TIN_ORE.get(), ModItems.RAW_TIN.get()));
         // ---------------------------(TIN)--------------------------- //
         /** // ---------------------------(ORES)--------------------------- // */
 
@@ -61,14 +59,14 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         // ---------------------------(TREES)--------------------------- //
         //Weirwood
         this.dropSelf(ModBLocks.WEIRWOOD_LOG.get());
+        this.dropSelf(ModBLocks.WEIRWOOD_FACE_LOG.get());
         this.dropSelf(ModBLocks.STRIPPED_WEIRWOOD_LOG.get());
         this.dropSelf(ModBLocks.WEIRWOOD_WOOD.get());
         this.dropSelf(ModBLocks.STRIPPED_WEIRWOOD_WOOD.get());
         this.dropSelf(ModBLocks.WEIRWOOD_PLANKS.get());
         this.dropSelf(ModBLocks.WEIRWOOD_SAPLING.get());
 
-        this.add(ModBLocks.WEIRWOOD_LEAVES.get(), block ->
-                createLeavesDrops(block, ModBLocks.WEIRWOOD_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+        this.add(ModBLocks.WEIRWOOD_LEAVES.get(), block -> createLeavesDrops(block, ModBLocks.WEIRWOOD_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 
         //Sycamore
         this.dropSelf(ModBLocks.SYCAMORE_LOG.get());
@@ -78,8 +76,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBLocks.SYCAMORE_PLANKS.get());
         this.dropSelf(ModBLocks.SYCAMORE_SAPLING.get());
 
-        this.add(ModBLocks.SYCAMORE_LEAVES.get(), block ->
-                createLeavesDrops(block, ModBLocks.SYCAMORE_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+        this.add(ModBLocks.SYCAMORE_LEAVES.get(), block -> createLeavesDrops(block, ModBLocks.SYCAMORE_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
         // ---------------------------(TREES)--------------------------- //
 
         /** // ---------------------------(NORMAL BLOCKS)--------------------------- // */
@@ -93,10 +90,6 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
     protected LootTable.Builder oreDropBetween2And5(Block pBlock, Item item) {
         // Create a loot table for ore drops with random count between 2 and 5
-        return createSilkTouchDispatchTable(pBlock,
-                this.applyExplosionDecay(pBlock,
-                        LootItem.lootTableItem(item)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 5.0F)))
-                                .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))));
+        return createSilkTouchDispatchTable(pBlock, this.applyExplosionDecay(pBlock, LootItem.lootTableItem(item).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 5.0F))).apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))));
     }
 }

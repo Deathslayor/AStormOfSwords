@@ -1,4 +1,4 @@
-// 1.20.1	2024-01-12T00:06:48.0896023	Block States: agotmod
+// 1.20.1	2024-02-04T21:33:45.7745824	Block States: agotmod
 c1198d04c0be535f489d7706116baf755e34083f assets/agotmod/blockstates/bronze_block.json
 cbf740f379ae9985b83668c87abe090097209087 assets/agotmod/blockstates/dark_stone_brick.json
 df31d72dd7ce74965809089f52b54abd0f239919 assets/agotmod/blockstates/deepslate_tin_ore.json
@@ -17,6 +17,7 @@ f1d7f793bf41e85276924b45cc52bdc3ddc8bd6c assets/agotmod/blockstates/sycamore_sap
 13a41a28877fe30babcd878e0d96af030b5e0af5 assets/agotmod/blockstates/sycamore_wood.json
 2746fd6d2facbb356988011b2cadb4eca0428c88 assets/agotmod/blockstates/tin_block.json
 8b912c6d986196db86f3756db3ee4f47ee0fad04 assets/agotmod/blockstates/tin_ore.json
+aa8d860241390fefbcb96efad4d7078c5ebc10bb assets/agotmod/blockstates/weirwood_face_log.json
 2b5812a0a42b18443cd361025e467cbad7cd3e8d assets/agotmod/blockstates/weirwood_leaves.json
 60484402b2856855b3e07e0438437798ce14bdf9 assets/agotmod/blockstates/weirwood_log.json
 30c58063d2bc7243ee0d7f9a659368b62f76fe2b assets/agotmod/blockstates/weirwood_planks.json
@@ -46,6 +47,8 @@ a2eb7f3589b398ff352e8d3b72588367069e707a assets/agotmod/models/block/sycamore_lo
 19e8ddfaa04a86d33a7f529a0d2ff0046d10360d assets/agotmod/models/block/sycamore_wood_horizontal.json
 42a2893f993b6678838c355149babdc177200e7d assets/agotmod/models/block/tin_block.json
 dc609c673d00d09cbdd40e654c4fadc384d38e1a assets/agotmod/models/block/tin_ore.json
+1b6f28660bd65198aace6043e6e1e1a8cbb7a1ef assets/agotmod/models/block/weirwood_face_log.json
+f0b8f850e64b60301ec3685e119dd5e8f6112444 assets/agotmod/models/block/weirwood_face_log_horizontal.json
 7728c5fd77532bb62a033f1aed729933b6ec46a7 assets/agotmod/models/block/weirwood_leaves.json
 754de1779d55b2cd7fee3c87facc925ac0b44b85 assets/agotmod/models/block/weirwood_log.json
 cb53c52d99432e4e43242a994d49017deb720876 assets/agotmod/models/block/weirwood_log_horizontal.json
@@ -70,6 +73,7 @@ daae6af4b3c1266cdf29d73ca70d2dedafd992e9 assets/agotmod/models/item/stripped_wei
 a414c33496b9327018f7cb18a68fe08a427cbb28 assets/agotmod/models/item/sycamore_wood.json
 4597b105297969ed5c54504fd542b20f3b37db28 assets/agotmod/models/item/tin_block.json
 a874bcfe8c1aeced6885a4b65a778048032933bd assets/agotmod/models/item/tin_ore.json
+f3f0da01fbd466008537a5729a0d69cf494abbc0 assets/agotmod/models/item/weirwood_face_log.json
 6e80986edc04ca4bc88a441a43c7343d591f380a assets/agotmod/models/item/weirwood_leaves.json
 818c64f03f685eb1332e94cfa74ab6abc3a5f03c assets/agotmod/models/item/weirwood_log.json
 842635e099253aa3893589bbb42e74df9676e933 assets/agotmod/models/item/weirwood_planks.json
