@@ -3,10 +3,7 @@ package net.astormofsorts.agotmod.entity.custom;
 import net.astormofsorts.agotmod.entity.ModEntities;
 import net.astormofsorts.agotmod.entity.ai.RhinoAttackGoal;
 import net.astormofsorts.agotmod.entity.variant.RhinoVariant;
-import net.astormofsorts.agotmod.item.ModFoods;
-import net.astormofsorts.agotmod.item.ModItems;
 import net.astormofsorts.agotmod.sound.ModSounds;
-import net.astormofsorts.agotmod.util.ModTags;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -17,9 +14,8 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.*;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -27,28 +23,33 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.camel.Camel;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.DismountHelper;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.ForgeEventFactory;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 // RhinoEntity represents the custom entity class for the Rhino
-public class RhinoEntity extends TamableAnimal implements PlayerRideable {
+public class RhinoEntity extends TamableAnimal implements PlayerRideable, Saddleable, ContainerListener {
+    protected SimpleContainer inventory;
+    public static final int INV_SLOT_SADDLE = 0;
+    public static final int INV_SLOT_ARMOR = 1;
+    public static final int INV_BASE_COUNT = 2;
+    public static final int EQUIPMENT_SLOT_OFFSET = 400;
+    public static final int CHEST_SLOT_OFFSET = 499;
+    public static final int INVENTORY_SLOT_OFFSET = 500;
 
     // Data accessor for tracking whether the Rhino is attacking
-    private static final EntityDataAccessor<Boolean> ATTACKING =
-            SynchedEntityData.defineId(RhinoEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> ATTACKING = SynchedEntityData.defineId(RhinoEntity.class, EntityDataSerializers.BOOLEAN);
 
-    public static final EntityDataAccessor<Integer> DATA_ID_TYPE_VARIANT =
-            SynchedEntityData.defineId(RhinoEntity.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> DATA_ID_TYPE_VARIANT = SynchedEntityData.defineId(RhinoEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Boolean> DATA_IS_SADDLED = SynchedEntityData.defineId(RhinoEntity.class, EntityDataSerializers.BOOLEAN);
 
 
     // Animation state for idle animations
@@ -65,6 +66,7 @@ public class RhinoEntity extends TamableAnimal implements PlayerRideable {
 
         super(pEntityType, pLevel);
         this.setMaxUpStep(1f);
+        this.createInventory();
     }
 
     // Tick method for entity behavior
@@ -131,35 +133,39 @@ public class RhinoEntity extends TamableAnimal implements PlayerRideable {
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(ATTACKING, false);
-        this.entityData.define(DATA_ID_TYPE_VARIANT,0);
+        this.entityData.define(DATA_ID_TYPE_VARIANT, 0);
+        this.entityData.define(DATA_IS_SADDLED, false);
     }
+
     public RhinoVariant getVariant() {
         return RhinoVariant.byId(this.getTypeVariant() & 255);
     }
 
-    private int getTypeVariant () {
+    private int getTypeVariant() {
         return this.entityData.get(DATA_ID_TYPE_VARIANT);
     }
 
     private void setVariant(RhinoVariant variant) {
-        this.entityData.set(DATA_ID_TYPE_VARIANT, variant.getId() & 255 );
+        this.entityData.set(DATA_ID_TYPE_VARIANT, variant.getId() & 255);
     }
 
     @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
+    public SpawnGroupData finalizeSpawn(@NotNull ServerLevelAccessor pLevel, @NotNull DifficultyInstance pDifficulty, @NotNull MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
         RhinoVariant variant = Util.getRandom(RhinoVariant.values(), this.random);
         this.setVariant(variant);
         return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag pCompound) {
+    public void readAdditionalSaveData(@NotNull CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
         this.entityData.set(DATA_ID_TYPE_VARIANT, pCompound.getInt("Varient"));
+        Camel.areAllEffectsAmbient()
+        this.updateContainerEquipment();
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag pCompound) {
+    public void addAdditionalSaveData(@NotNull CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
         pCompound.putInt("Varient", this.getTypeVariant());
     }
@@ -179,27 +185,20 @@ public class RhinoEntity extends TamableAnimal implements PlayerRideable {
     }
 
     // Method for creating attribute builder for Rhino
-    public static AttributeSupplier.Builder createAttributes() {
-        return Animal.createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 20D)
-                .add(Attributes.FOLLOW_RANGE, 24D)
-                .add(Attributes.MOVEMENT_SPEED, 0.25D)
-                .add(Attributes.ARMOR_TOUGHNESS, 0.1f)
-                .add(Attributes.ATTACK_KNOCKBACK, 0.5f)
-                .add(Attributes.ATTACK_DAMAGE, 24f);
+    public static AttributeSupplier.@NotNull Builder createAttributes() {
+        return Animal.createLivingAttributes().add(Attributes.MAX_HEALTH, 20D).add(Attributes.FOLLOW_RANGE, 24D).add(Attributes.MOVEMENT_SPEED, 0.25D).add(Attributes.ARMOR_TOUGHNESS, 0.1f).add(Attributes.ATTACK_KNOCKBACK, 0.5f).add(Attributes.ATTACK_DAMAGE, 24f);
     }
 
     // Method for getting the offspring of two Rhino entities
     @Nullable
     @Override
-    public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
+    public AgeableMob getBreedOffspring(@NotNull ServerLevel pLevel, @NotNull AgeableMob pOtherParent) {
         return ModEntities.RHINO.get().create(pLevel);
     }
 
     // Method for checking if an item is food for the Rhino
     @Override
     public boolean isFood(ItemStack pStack) {
-
         return pStack.is(Items.APPLE);
     }
 
@@ -214,8 +213,7 @@ public class RhinoEntity extends TamableAnimal implements PlayerRideable {
     // Method for getting the hurt sound of the Rhino
     @Nullable
     @Override
-    protected SoundEvent getHurtSound(DamageSource pDamageSource) {
-
+    protected SoundEvent getHurtSound(@NotNull DamageSource pDamageSource) {
         return ModSounds.MAMMOTH_DAMAGED.get();
     }
 
@@ -227,53 +225,29 @@ public class RhinoEntity extends TamableAnimal implements PlayerRideable {
         return ModSounds.MAMMOTH_ATTACK.get();
     }
 
-    @Override
-    public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
-        ItemStack itemstack = pPlayer.getItemInHand(pHand);
-        Item item = itemstack.getItem();
-        Item itemForTaming = Items.APPLE;
-
-        if(item == itemForTaming && !isTame()) {
-            if(this.level().isClientSide()) {
-                return InteractionResult.CONSUME;
+    public @NotNull InteractionResult mobInteract(@NotNull Player pPlayer, @NotNull InteractionHand pHand) {
+        if (!this.isVehicle() && !this.isBaby()) {
+            if (this.isTame() && pPlayer.isSecondaryUseActive()) {
+                //this.openCustomInventoryScreen(pPlayer);
+                return InteractionResult.sidedSuccess(this.level().isClientSide);
             } else {
-                if (!pPlayer.getAbilities().instabuild) {
-                    itemstack.shrink(1);
+                ItemStack itemstack = pPlayer.getItemInHand(pHand);
+                if (!itemstack.isEmpty()) {
+                    InteractionResult interactionresult = itemstack.interactLivingEntity(pPlayer, this, pHand);
+                    if (interactionresult.consumesAction()) {
+                        return interactionresult;
+                    }
+
                 }
-
-                if (!ForgeEventFactory.onAnimalTame(this, pPlayer)) {
-                    super.tame(pPlayer);
-                    this.navigation.recomputePath();
-                    this.setTarget(null);
-                    this.level().broadcastEntityEvent(this, (byte)7);
-                    setOrderedToSit(true);
-                    this.setInSittingPose(true);
-                }
-
-                return InteractionResult.SUCCESS;
             }
+
+
+        } else {
+            return super.mobInteract(pPlayer, pHand);
         }
+        return InteractionResult.SUCCESS;
 
-        // TOGGLES SITTING FOR OUR ENTITY
-        if(isTame() && pHand == InteractionHand.MAIN_HAND) {
-            if(!pPlayer.isCrouching()) {
-                setRiding(pPlayer);
-            } else {
-                setOrderedToSit(!isOrderedToSit());
-                setInSittingPose(!isOrderedToSit());
-            }
-            return InteractionResult.SUCCESS;
-        }
 
-        return super.mobInteract(pPlayer, pHand);
-
-    }
-    private void setRiding(Player pPlayer) {
-        this.setInSittingPose(false);
-
-        pPlayer.setYRot(this.getYRot());
-        pPlayer.setXRot(this.getXRot());
-        pPlayer.startRiding(this);
     }
 
     @Nullable
@@ -283,8 +257,8 @@ public class RhinoEntity extends TamableAnimal implements PlayerRideable {
     }
 
     @Override
-    public void travel(Vec3 pTravelVector) {
-        if(this.isVehicle() && getControllingPassenger() instanceof Player) {
+    public void travel(@NotNull Vec3 pTravelVector) {
+        if (this.isVehicle() && getControllingPassenger() instanceof Player) {
             LivingEntity livingentity = this.getControllingPassenger();
             this.setYRot(livingentity.getYRot());
             this.yRotO = this.getYRot();
@@ -299,7 +273,7 @@ public class RhinoEntity extends TamableAnimal implements PlayerRideable {
             if (this.isControlledByLocalInstance()) {
                 float newSpeed = (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED);
                 // increasing speed by 100% if the spring key is held down (number for testing purposes)
-                if(Minecraft.getInstance().options.keySprint.isDown()) {
+                if (Minecraft.getInstance().options.keySprint.isDown()) {
                     newSpeed *= 2f;
                 }
 
@@ -312,7 +286,7 @@ public class RhinoEntity extends TamableAnimal implements PlayerRideable {
     }
 
     @Override
-    public Vec3 getDismountLocationForPassenger(LivingEntity pLivingEntity) {
+    public @NotNull Vec3 getDismountLocationForPassenger(@NotNull LivingEntity pLivingEntity) {
         Direction direction = this.getMotionDirection();
         if (direction.getAxis() != Direction.Axis.Y) {
             int[][] offsets = DismountHelper.offsetsForDirection(direction);
@@ -338,9 +312,72 @@ public class RhinoEntity extends TamableAnimal implements PlayerRideable {
 
         return super.getDismountLocationForPassenger(pLivingEntity);
     }
+
+    @Override
+    public boolean isSaddleable() {
+        return this.isAlive() && !this.isBaby();
+    }
+
+    @Override
+    public void equipSaddle(@javax.annotation.Nullable SoundSource pSource) {
+        this.inventory.setItem(0, new ItemStack(Items.SADDLE));
+    }
+
+
+    @Override
+    public @NotNull SoundEvent getSaddleSoundEvent() {
+        return Saddleable.super.getSaddleSoundEvent();
+    }
+
+    @Override
+    public boolean isSaddled() {
+        return this.entityData.get(DATA_IS_SADDLED);
+    }
+
+
+    @Override
+    public void containerChanged(@NotNull Container pContainer) {
+        this.updateContainerEquipment();
+    }
+
+    @Override
+    public boolean alwaysAccepts() {
+        return super.alwaysAccepts();
+    }
+
+    @Nullable
+    @Override
+    public LivingEntity getOwner() {
+        return super.getOwner();
+    }
+
+
+    protected int getInventorySize() {
+        return 2;
+    }
+
+    protected void createInventory() {
+        SimpleContainer simplecontainer = this.inventory;
+        this.inventory = new SimpleContainer(this.getInventorySize());
+        if (simplecontainer != null) {
+            simplecontainer.removeListener(this);
+            int i = Math.min(simplecontainer.getContainerSize(), this.inventory.getContainerSize());
+
+            for(int j = 0; j < i; ++j) {
+                ItemStack itemstack = simplecontainer.getItem(j);
+                if (!itemstack.isEmpty()) {
+                    this.inventory.setItem(j, itemstack.copy());
+                }
+            }
+        }
+
+        this.inventory.addListener(this);
+        this.updateContainerEquipment();
+    }
+
+    protected void updateContainerEquipment() {
+        if (!this.level().isClientSide) {
+            this.entityData.set(DATA_IS_SADDLED, !this.inventory.getItem(0).isEmpty());
+        }
+    }
 }
-
-
-
-
-
