@@ -287,6 +287,7 @@ public class ModItems {
             () -> new BowItem(new Item.Properties()));
 
 
+
     //Arrows
     public static final RegistryObject<Item> ARROW_BRONZE = ITEMS.register("arrow_bronze",
             () -> new ArrowItem(new Item.Properties()));
@@ -297,21 +298,8 @@ public class ModItems {
     public static final RegistryObject<Item> ARROW_IRON = ITEMS.register("arrow_iron",
             () -> new ArrowItem(new Item.Properties()));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // ---------------------------(BOW & ARROW)--------------------------- //
+
 
     // ---------------------------(FOODS)--------------------------- //
     public static final RegistryObject<Item> RAW_BEAR_MEAT = ITEMS.register("raw_bear_meat",

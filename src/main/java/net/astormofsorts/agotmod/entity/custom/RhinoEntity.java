@@ -14,8 +14,9 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.*;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -23,7 +24,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.camel.Camel;
+import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.DismountHelper;
 import net.minecraft.world.item.ItemStack;
@@ -32,24 +33,17 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-// RhinoEntity represents the custom entity class for the Rhino
-public class RhinoEntity extends TamableAnimal implements PlayerRideable, Saddleable, ContainerListener {
-    protected SimpleContainer inventory;
-    public static final int INV_SLOT_SADDLE = 0;
-    public static final int INV_SLOT_ARMOR = 1;
-    public static final int INV_BASE_COUNT = 2;
-    public static final int EQUIPMENT_SLOT_OFFSET = 400;
-    public static final int CHEST_SLOT_OFFSET = 499;
-    public static final int INVENTORY_SLOT_OFFSET = 500;
+public class RhinoEntity extends AbstractHorse {
+    public RhinoEntity(EntityType<? extends AbstractHorse> pEntityType, Level pLevel) {
+        super(pEntityType, pLevel);
+    }
+    private static final EntityDataAccessor<Boolean> ATTACKING =
+            SynchedEntityData.defineId(RhinoEntity.class, EntityDataSerializers.BOOLEAN);
 
-    // Data accessor for tracking whether the Rhino is attacking
-    private static final EntityDataAccessor<Boolean> ATTACKING = SynchedEntityData.defineId(RhinoEntity.class, EntityDataSerializers.BOOLEAN);
-
-    public static final EntityDataAccessor<Integer> DATA_ID_TYPE_VARIANT = SynchedEntityData.defineId(RhinoEntity.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Boolean> DATA_IS_SADDLED = SynchedEntityData.defineId(RhinoEntity.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Integer> DATA_ID_TYPE_VARIANT =
+            SynchedEntityData.defineId(RhinoEntity.class, EntityDataSerializers.INT);
 
 
     // Animation state for idle animations
@@ -62,12 +56,8 @@ public class RhinoEntity extends TamableAnimal implements PlayerRideable, Saddle
 
 
     // Constructor for RhinoEntity
-    public RhinoEntity(EntityType<? extends TamableAnimal> pEntityType, Level pLevel) {
 
-        super(pEntityType, pLevel);
-        this.setMaxUpStep(1f);
-        this.createInventory();
-    }
+
 
     // Tick method for entity behavior
     @Override
@@ -133,39 +123,35 @@ public class RhinoEntity extends TamableAnimal implements PlayerRideable, Saddle
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(ATTACKING, false);
-        this.entityData.define(DATA_ID_TYPE_VARIANT, 0);
-        this.entityData.define(DATA_IS_SADDLED, false);
+        this.entityData.define(DATA_ID_TYPE_VARIANT,0);
     }
-
     public RhinoVariant getVariant() {
         return RhinoVariant.byId(this.getTypeVariant() & 255);
     }
 
-    private int getTypeVariant() {
+    private int getTypeVariant () {
         return this.entityData.get(DATA_ID_TYPE_VARIANT);
     }
 
     private void setVariant(RhinoVariant variant) {
-        this.entityData.set(DATA_ID_TYPE_VARIANT, variant.getId() & 255);
+        this.entityData.set(DATA_ID_TYPE_VARIANT, variant.getId() & 255 );
     }
 
     @Override
-    public SpawnGroupData finalizeSpawn(@NotNull ServerLevelAccessor pLevel, @NotNull DifficultyInstance pDifficulty, @NotNull MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
         RhinoVariant variant = Util.getRandom(RhinoVariant.values(), this.random);
         this.setVariant(variant);
         return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
     }
 
     @Override
-    public void readAdditionalSaveData(@NotNull CompoundTag pCompound) {
+    public void readAdditionalSaveData(CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
         this.entityData.set(DATA_ID_TYPE_VARIANT, pCompound.getInt("Varient"));
-        Camel.areAllEffectsAmbient()
-        this.updateContainerEquipment();
     }
 
     @Override
-    public void addAdditionalSaveData(@NotNull CompoundTag pCompound) {
+    public void addAdditionalSaveData(CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
         pCompound.putInt("Varient", this.getTypeVariant());
     }
@@ -185,20 +171,27 @@ public class RhinoEntity extends TamableAnimal implements PlayerRideable, Saddle
     }
 
     // Method for creating attribute builder for Rhino
-    public static AttributeSupplier.@NotNull Builder createAttributes() {
-        return Animal.createLivingAttributes().add(Attributes.MAX_HEALTH, 20D).add(Attributes.FOLLOW_RANGE, 24D).add(Attributes.MOVEMENT_SPEED, 0.25D).add(Attributes.ARMOR_TOUGHNESS, 0.1f).add(Attributes.ATTACK_KNOCKBACK, 0.5f).add(Attributes.ATTACK_DAMAGE, 24f);
+    public static AttributeSupplier.Builder createAttributes() {
+        return Animal.createLivingAttributes()
+                .add(Attributes.MAX_HEALTH, 20D)
+                .add(Attributes.FOLLOW_RANGE, 24D)
+                .add(Attributes.MOVEMENT_SPEED, 0.25D)
+                .add(Attributes.ARMOR_TOUGHNESS, 0.1f)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.5f)
+                .add(Attributes.ATTACK_DAMAGE, 24f);
     }
 
     // Method for getting the offspring of two Rhino entities
     @Nullable
     @Override
-    public AgeableMob getBreedOffspring(@NotNull ServerLevel pLevel, @NotNull AgeableMob pOtherParent) {
+    public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
         return ModEntities.RHINO.get().create(pLevel);
     }
 
     // Method for checking if an item is food for the Rhino
     @Override
     public boolean isFood(ItemStack pStack) {
+
         return pStack.is(Items.APPLE);
     }
 
@@ -213,7 +206,8 @@ public class RhinoEntity extends TamableAnimal implements PlayerRideable, Saddle
     // Method for getting the hurt sound of the Rhino
     @Nullable
     @Override
-    protected SoundEvent getHurtSound(@NotNull DamageSource pDamageSource) {
+    protected SoundEvent getHurtSound(DamageSource pDamageSource) {
+
         return ModSounds.MAMMOTH_DAMAGED.get();
     }
 
@@ -225,10 +219,12 @@ public class RhinoEntity extends TamableAnimal implements PlayerRideable, Saddle
         return ModSounds.MAMMOTH_ATTACK.get();
     }
 
-    public @NotNull InteractionResult mobInteract(@NotNull Player pPlayer, @NotNull InteractionHand pHand) {
+
+
+    public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
         if (!this.isVehicle() && !this.isBaby()) {
-            if (this.isTame() && pPlayer.isSecondaryUseActive()) {
-                //this.openCustomInventoryScreen(pPlayer);
+            if (this.isTamed() && pPlayer.isSecondaryUseActive()) {
+                this.openCustomInventoryScreen(pPlayer);
                 return InteractionResult.sidedSuccess(this.level().isClientSide);
             } else {
                 ItemStack itemstack = pPlayer.getItemInHand(pHand);
@@ -238,17 +234,22 @@ public class RhinoEntity extends TamableAnimal implements PlayerRideable, Saddle
                         return interactionresult;
                     }
 
+                    if (this.canWearArmor() && this.isArmor(itemstack) && !this.isWearingArmor()) {
+                        this.equipArmor(pPlayer, itemstack);
+                        return InteractionResult.sidedSuccess(this.level().isClientSide);
+                    }
                 }
+
+                this.doPlayerRide(pPlayer);
+                return InteractionResult.sidedSuccess(this.level().isClientSide);
             }
-
-
         } else {
             return super.mobInteract(pPlayer, pHand);
         }
-        return InteractionResult.SUCCESS;
-
-
     }
+
+
+
 
     @Nullable
     @Override
@@ -257,8 +258,8 @@ public class RhinoEntity extends TamableAnimal implements PlayerRideable, Saddle
     }
 
     @Override
-    public void travel(@NotNull Vec3 pTravelVector) {
-        if (this.isVehicle() && getControllingPassenger() instanceof Player) {
+    public void travel(Vec3 pTravelVector) {
+        if(this.isVehicle() && getControllingPassenger() instanceof Player) {
             LivingEntity livingentity = this.getControllingPassenger();
             this.setYRot(livingentity.getYRot());
             this.yRotO = this.getYRot();
@@ -273,7 +274,7 @@ public class RhinoEntity extends TamableAnimal implements PlayerRideable, Saddle
             if (this.isControlledByLocalInstance()) {
                 float newSpeed = (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED);
                 // increasing speed by 100% if the spring key is held down (number for testing purposes)
-                if (Minecraft.getInstance().options.keySprint.isDown()) {
+                if(Minecraft.getInstance().options.keySprint.isDown()) {
                     newSpeed *= 2f;
                 }
 
@@ -286,7 +287,7 @@ public class RhinoEntity extends TamableAnimal implements PlayerRideable, Saddle
     }
 
     @Override
-    public @NotNull Vec3 getDismountLocationForPassenger(@NotNull LivingEntity pLivingEntity) {
+    public Vec3 getDismountLocationForPassenger(LivingEntity pLivingEntity) {
         Direction direction = this.getMotionDirection();
         if (direction.getAxis() != Direction.Axis.Y) {
             int[][] offsets = DismountHelper.offsetsForDirection(direction);
@@ -312,72 +313,7 @@ public class RhinoEntity extends TamableAnimal implements PlayerRideable, Saddle
 
         return super.getDismountLocationForPassenger(pLivingEntity);
     }
-
-    @Override
-    public boolean isSaddleable() {
-        return this.isAlive() && !this.isBaby();
-    }
-
-    @Override
-    public void equipSaddle(@javax.annotation.Nullable SoundSource pSource) {
-        this.inventory.setItem(0, new ItemStack(Items.SADDLE));
-    }
-
-
-    @Override
-    public @NotNull SoundEvent getSaddleSoundEvent() {
-        return Saddleable.super.getSaddleSoundEvent();
-    }
-
-    @Override
-    public boolean isSaddled() {
-        return this.entityData.get(DATA_IS_SADDLED);
-    }
-
-
-    @Override
-    public void containerChanged(@NotNull Container pContainer) {
-        this.updateContainerEquipment();
-    }
-
-    @Override
-    public boolean alwaysAccepts() {
-        return super.alwaysAccepts();
-    }
-
-    @Nullable
-    @Override
-    public LivingEntity getOwner() {
-        return super.getOwner();
-    }
-
-
-    protected int getInventorySize() {
-        return 2;
-    }
-
-    protected void createInventory() {
-        SimpleContainer simplecontainer = this.inventory;
-        this.inventory = new SimpleContainer(this.getInventorySize());
-        if (simplecontainer != null) {
-            simplecontainer.removeListener(this);
-            int i = Math.min(simplecontainer.getContainerSize(), this.inventory.getContainerSize());
-
-            for(int j = 0; j < i; ++j) {
-                ItemStack itemstack = simplecontainer.getItem(j);
-                if (!itemstack.isEmpty()) {
-                    this.inventory.setItem(j, itemstack.copy());
-                }
-            }
-        }
-
-        this.inventory.addListener(this);
-        this.updateContainerEquipment();
-    }
-
-    protected void updateContainerEquipment() {
-        if (!this.level().isClientSide) {
-            this.entityData.set(DATA_IS_SADDLED, !this.inventory.getItem(0).isEmpty());
-        }
-    }
 }
+
+
+

@@ -110,13 +110,6 @@ public final class KeyBindings {
             CATEGORY
 
     );
-    public final KeyMapping AnimalMountedAttack = new KeyMapping(
-            "key." + AGoTMod.MOD_ID + ".toggle_mini_map",
-            KeyConflictContext.IN_GAME,
-            InputConstants.getKey(InputConstants.KEY_0,-1),
-            CATEGORY
-
-    );
 
 
 
