@@ -281,6 +281,25 @@ public class ModItems {
     public static final RegistryObject<Item> STEEL_HOE = ITEMS.register("steel_hoe",
             () -> new HoeItem(ModToolTiers.STEEL, 0, 0, new Item.Properties()));
     // ---------------------------(TOOLS)--------------------------- //
+    // ---------------------------(BOW & ARROW)--------------------------- //
+    //Bows
+    public static final RegistryObject<Item> STEEL_BOW = ITEMS.register("steel_bow",
+            () -> new BowItem(new Item.Properties()));
+
+
+
+    //Arrows
+    public static final RegistryObject<Item> ARROW_BRONZE = ITEMS.register("arrow_bronze",
+            () -> new ArrowItem(new Item.Properties()));
+    public static final RegistryObject<Item> ARROW_DRAGONGLASS = ITEMS.register("arrow_dragon_glass",
+            () -> new ArrowItem(new Item.Properties()));
+    public static final RegistryObject<Item> ARROW_STEEL = ITEMS.register("arrow_steel",
+            () -> new ArrowItem(new Item.Properties()));
+    public static final RegistryObject<Item> ARROW_IRON = ITEMS.register("arrow_iron",
+            () -> new ArrowItem(new Item.Properties()));
+
+    // ---------------------------(BOW & ARROW)--------------------------- //
+
 
     // ---------------------------(FOODS)--------------------------- //
     public static final RegistryObject<Item> RAW_BEAR_MEAT = ITEMS.register("raw_bear_meat",

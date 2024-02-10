@@ -133,6 +133,12 @@
   "item.agotmod.steel_shovel": "Steel Shovel",
   "item.agotmod.steel_hoe": "Steel Hoe",
 
+  "item.agotmod.steel_bow": "Steel Bow",
+  "item.agotmod.arrow_bronze": "Bronze Arrow",
+  "item.agotmod.arrow_iron": "Iron Arrow",
+  "item.agotmod.arrow_dragon_glass": "Dragon Glass Arrow",
+  "item.agotmod.arrow_steel": "Steel Arrow",
+
   "block.agotmod.mint_block": "Mint Block",
   "block.agotmod.tin_ore": "Tin Ore",
   "block.agotmod.raw_tin_block": "Raw Tin Block",
@@ -213,5 +219,6 @@
   "creativetab.agot_tab_animals": "aSoS Spawn Eggs",
   "creativetab.agot_tab_ingredients": "aSoS Ingredients",
   "creativetab.agot_tab_building_blocks": "aSoS Building Blocks",
-  "creativetab.agot_tab_natural_blocks": "aSoS Natural Blocks"
+  "creativetab.agot_tab_natural_blocks": "aSoS Natural Blocks",
+  "creativetab.agot_tab_archery": "aSoS Archery"
 }
