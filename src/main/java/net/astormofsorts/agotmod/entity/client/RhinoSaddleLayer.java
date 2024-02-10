@@ -24,7 +24,7 @@ public class RhinoSaddleLayer extends RenderLayer<RhinoEntity, RhinoModel<RhinoE
 
     @Override
     public void render(@NotNull PoseStack pPoseStack, @NotNull MultiBufferSource pBuffer, int pPackedLight, @NotNull RhinoEntity pLivingEntity, float pLimbSwing, float pLimbSwingAmount, float pPartialTick, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
-        if (pLivingEntity.isSaddled()) {
+        if (pLivingEntity.getVehicle() != null) {
             this.getParentModel().copyPropertiesTo(this.model);
             this.model.prepareMobModel(pLivingEntity, pLimbSwing, pLimbSwingAmount, pPartialTick);
             this.model.setupAnim(pLivingEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);

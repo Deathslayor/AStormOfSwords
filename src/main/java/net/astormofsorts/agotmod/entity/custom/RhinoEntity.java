@@ -23,28 +23,27 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.DismountHelper;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.event.ForgeEventFactory;
 import org.jetbrains.annotations.Nullable;
 
-public class RhinoEntity extends AbstractHorse {
-    public RhinoEntity(EntityType<? extends AbstractHorse> pEntityType, Level pLevel) {
-        super(pEntityType, pLevel);
-    }
+// RhinoEntity represents the custom entity class for the Rhino
+public class RhinoEntity extends TamableAnimal implements PlayerRideable {
+
+    // Data accessor for tracking whether the Rhino is attacking
     private static final EntityDataAccessor<Boolean> ATTACKING =
             SynchedEntityData.defineId(RhinoEntity.class, EntityDataSerializers.BOOLEAN);
 
     public static final EntityDataAccessor<Integer> DATA_ID_TYPE_VARIANT =
             SynchedEntityData.defineId(RhinoEntity.class, EntityDataSerializers.INT);
-
 
     // Animation state for idle animations
     public final AnimationState idleAnimationState = new AnimationState();
@@ -54,10 +53,11 @@ public class RhinoEntity extends AbstractHorse {
     public final AnimationState attackAnimationState = new AnimationState();
     public int attackAnimationTimeout = 0;
 
-
     // Constructor for RhinoEntity
-
-
+    public RhinoEntity(EntityType<? extends TamableAnimal> pEntityType, Level pLevel) {
+        super(pEntityType, pLevel);
+        this.setMaxUpStep(1f);
+    }
 
     // Tick method for entity behavior
     @Override
@@ -92,7 +92,6 @@ public class RhinoEntity extends AbstractHorse {
         if (!this.isAttacking()) {
             attackAnimationState.stop();
         }
-
     }
 
     // Update walk animation based on the entity's pose
@@ -123,18 +122,19 @@ public class RhinoEntity extends AbstractHorse {
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(ATTACKING, false);
-        this.entityData.define(DATA_ID_TYPE_VARIANT,0);
+        this.entityData.define(DATA_ID_TYPE_VARIANT, 0);
     }
+
     public RhinoVariant getVariant() {
         return RhinoVariant.byId(this.getTypeVariant() & 255);
     }
 
-    private int getTypeVariant () {
+    private int getTypeVariant() {
         return this.entityData.get(DATA_ID_TYPE_VARIANT);
     }
 
     private void setVariant(RhinoVariant variant) {
-        this.entityData.set(DATA_ID_TYPE_VARIANT, variant.getId() & 255 );
+        this.entityData.set(DATA_ID_TYPE_VARIANT, variant.getId() & 255);
     }
 
     @Override
@@ -160,7 +160,6 @@ public class RhinoEntity extends AbstractHorse {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-
         this.goalSelector.addGoal(1, new RhinoAttackGoal(this, 1.5, true));
         this.goalSelector.addGoal(3, new FollowParentGoal(this, 1.1D));
         this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 1.1D));
@@ -172,7 +171,7 @@ public class RhinoEntity extends AbstractHorse {
 
     // Method for creating attribute builder for Rhino
     public static AttributeSupplier.Builder createAttributes() {
-        return Animal.createLivingAttributes()
+        return TamableAnimal.createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 20D)
                 .add(Attributes.FOLLOW_RANGE, 24D)
                 .add(Attributes.MOVEMENT_SPEED, 0.25D)
@@ -191,7 +190,6 @@ public class RhinoEntity extends AbstractHorse {
     // Method for checking if an item is food for the Rhino
     @Override
     public boolean isFood(ItemStack pStack) {
-
         return pStack.is(Items.APPLE);
     }
 
@@ -199,7 +197,6 @@ public class RhinoEntity extends AbstractHorse {
     @Nullable
     @Override
     protected SoundEvent getAmbientSound() {
-
         return ModSounds.MAMMOTH_IDLE.get();
     }
 
@@ -207,7 +204,6 @@ public class RhinoEntity extends AbstractHorse {
     @Nullable
     @Override
     protected SoundEvent getHurtSound(DamageSource pDamageSource) {
-
         return ModSounds.MAMMOTH_DAMAGED.get();
     }
 
@@ -215,75 +211,56 @@ public class RhinoEntity extends AbstractHorse {
     @Nullable
     @Override
     protected SoundEvent getDeathSound() {
-
         return ModSounds.MAMMOTH_ATTACK.get();
     }
 
-
-
+    @Override
     public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
-        if (!this.isVehicle() && !this.isBaby()) {
-            if (this.isTamed() && pPlayer.isSecondaryUseActive()) {
-                this.openCustomInventoryScreen(pPlayer);
-                return InteractionResult.sidedSuccess(this.level().isClientSide);
+        ItemStack itemstack = pPlayer.getItemInHand(pHand);
+        Item item = itemstack.getItem();
+        Item itemForTaming = Items.APPLE;
+
+        if (item == itemForTaming && !isTame()) {
+            if (this.level().isClientSide()) {
+                return InteractionResult.CONSUME;
             } else {
-                ItemStack itemstack = pPlayer.getItemInHand(pHand);
-                if (!itemstack.isEmpty()) {
-                    InteractionResult interactionresult = itemstack.interactLivingEntity(pPlayer, this, pHand);
-                    if (interactionresult.consumesAction()) {
-                        return interactionresult;
-                    }
-
-                    if (this.canWearArmor() && this.isArmor(itemstack) && !this.isWearingArmor()) {
-                        this.equipArmor(pPlayer, itemstack);
-                        return InteractionResult.sidedSuccess(this.level().isClientSide);
-                    }
+                if (!pPlayer.getAbilities().instabuild) {
+                    itemstack.shrink(1);
                 }
 
-                this.doPlayerRide(pPlayer);
-                return InteractionResult.sidedSuccess(this.level().isClientSide);
-            }
-        } else {
-            return super.mobInteract(pPlayer, pHand);
-        }
-    }
-
-
-
-
-    @Nullable
-    @Override
-    public LivingEntity getControllingPassenger() {
-        return ((LivingEntity) this.getFirstPassenger());
-    }
-
-    @Override
-    public void travel(Vec3 pTravelVector) {
-        if(this.isVehicle() && getControllingPassenger() instanceof Player) {
-            LivingEntity livingentity = this.getControllingPassenger();
-            this.setYRot(livingentity.getYRot());
-            this.yRotO = this.getYRot();
-            this.setXRot(livingentity.getXRot() * 0.5F);
-            this.setRot(this.getYRot(), this.getXRot());
-            this.yBodyRot = this.getYRot();
-            this.yHeadRot = this.yBodyRot;
-            float f = livingentity.xxa * 0.5F;
-            float f1 = livingentity.zza;
-
-            // Inside this if statement, we are on the client!
-            if (this.isControlledByLocalInstance()) {
-                float newSpeed = (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED);
-                // increasing speed by 100% if the spring key is held down (number for testing purposes)
-                if(Minecraft.getInstance().options.keySprint.isDown()) {
-                    newSpeed *= 2f;
+                if (!ForgeEventFactory.onAnimalTame(this, pPlayer)) {
+                    super.tame(pPlayer);
+                    this.navigation.recomputePath();
+                    this.setTarget(null);
+                    this.level().broadcastEntityEvent(this, (byte) 7);
+                    setOrderedToSit(true);
+                    this.setInSittingPose(true);
                 }
 
-                this.setSpeed(newSpeed);
-                super.travel(new Vec3(f, pTravelVector.y, f1));
+                return InteractionResult.SUCCESS;
             }
-        } else {
-            super.travel(pTravelVector);
         }
+
+        // TOGGLES SITTING FOR OUR ENTITY
+        if (isTame() && pHand == InteractionHand.MAIN_HAND) {
+            if (!pPlayer.isCrouching()) {
+                setRiding(pPlayer);
+            } else {
+                setOrderedToSit(!isOrderedToSit());
+                setInSittingPose(!isOrderedToSit());
+            }
+            return InteractionResult.SUCCESS;
+        }
+
+        return super.mobInteract(pPlayer, pHand);
+    }
+
+    private void setRiding(Player pPlayer) {
+        this.setInSittingPose(false);
+
+        pPlayer.setYRot(this.getYRot());
+        pPlayer.setXRot(this.getXRot());
+        pPlayer.startRiding(this);
     }
 
     @Override
@@ -314,6 +291,3 @@ public class RhinoEntity extends AbstractHorse {
         return super.getDismountLocationForPassenger(pLivingEntity);
     }
 }
-
-
-
