@@ -11,7 +11,6 @@
             "deepslate_block": "minecraft:deepslate",
             "dirt_block": "minecraft:dirt",
             "grass_block": "minecraft:grass_block",
-            "height": 0,
             "stone_block": "minecraft:stone"
           },
           {
@@ -20,7 +19,6 @@
             "deepslate_block": "minecraft:deepslate",
             "dirt_block": "minecraft:sandstone",
             "grass_block": "minecraft:sand",
-            "height": 4,
             "stone_block": "minecraft:stone"
           },
           {
@@ -29,7 +27,6 @@
             "deepslate_block": "minecraft:deepslate",
             "dirt_block": "minecraft:water",
             "grass_block": "minecraft:water",
-            "height": -100,
             "stone_block": "minecraft:stone"
           }
         ],

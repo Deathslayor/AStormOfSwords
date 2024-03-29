@@ -72,7 +72,7 @@ public class MapBasedBiomeChunkGenerator extends ChunkGenerator {
                 }
 
                 if (biomeData != null) {
-                    float height = MapManager.getBlockHeight(pos.getX(), pos.getZ());
+                    float height = MapManager.getHeightFromPosition(pos.getX(), pos.getZ());
 
                     for (int y = chunk.getMinBuildHeight(); y < chunk.getMinBuildHeight() + 4; y++) {
                         chunk.setBlockState(chunk.getPos().getBlockAt(x, y, z), Blocks.BEDROCK.defaultBlockState(), false);
@@ -146,7 +146,7 @@ public class MapBasedBiomeChunkGenerator extends ChunkGenerator {
 
     @Override
     public int getBaseHeight(int pX, int pZ, @NotNull Heightmap.Types pType, @NotNull LevelHeightAccessor pLevel, @NotNull RandomState pRandom) {
-        return (int) (1 + biomeSource.getSettings().dirtLevel() + Math.abs(MapManager.getBlockHeight(pX, pZ)));
+        return (int) (1 + biomeSource.getSettings().dirtLevel() + Math.abs(MapManager.getHeightFromPosition(pX, pZ)));
     }
 
     @Override

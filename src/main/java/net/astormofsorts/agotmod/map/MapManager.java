@@ -99,15 +99,6 @@ public class MapManager {
                 (float) (x % 5) / 5, (float) (z % 5) / 5);
     }
 
-    public static float getBlockHeight(int x, int z) {
-        float topLeft = getHeightFromPosition(x, z);
-        float topRight = getHeightFromPosition(x + 5, z);
-        float bottomLeft = getHeightFromPosition(x, z + 5);
-        float bottomRight = getHeightFromPosition(x + 5, z + 5);
-        return getHeightBetween(new float[]{topLeft, topRight, bottomLeft, bottomRight},
-                (float) (x % 5) / 5, (float) (z % 5) / 5);
-    }
-
     private static float getHeightBetween(float[] heights, float xPercent, float zPercent) {
         float h1 = getMiddleHeight(heights[0], heights[1], xPercent);
         float h2 = getMiddleHeight(heights[2], heights[3], xPercent);
@@ -119,6 +110,6 @@ public class MapManager {
     }
 
     private static boolean isCoordinateInImage(BufferedImage image, int x, int y) {
-        return x >= 0 && y >= 0 && x <= image.getWidth() && y <= image.getHeight();
+        return x >= 0 && y >= 0 && x < image.getWidth() && y < image.getHeight();
     }
 }
