@@ -8,26 +8,36 @@
           {
             "biome": "minecraft:plains",
             "color": -16711936,
-            "dirt_block": "minecraft:grass_block",
+            "deepslate_block": "minecraft:deepslate",
+            "dirt_block": "minecraft:dirt",
+            "grass_block": "minecraft:grass_block",
+            "height": 0,
             "stone_block": "minecraft:stone"
           },
           {
             "biome": "minecraft:desert",
             "color": -256,
-            "dirt_block": "minecraft:sand",
+            "deepslate_block": "minecraft:deepslate",
+            "dirt_block": "minecraft:sandstone",
+            "grass_block": "minecraft:sand",
+            "height": 4,
             "stone_block": "minecraft:stone"
           },
           {
             "biome": "minecraft:ocean",
             "color": -16776961,
+            "deepslate_block": "minecraft:deepslate",
             "dirt_block": "minecraft:water",
+            "grass_block": "minecraft:water",
+            "height": -100,
             "stone_block": "minecraft:stone"
           }
         ],
-        "dirt_level": 50,
-        "height": 265,
-        "minY": 0,
-        "sea_level": 64
+        "deepslate_level": 0,
+        "dirt_level": 66,
+        "height": 256,
+        "min_y": -32,
+        "sea_level": 54
       }
     }
   }

@@ -1,4 +1,4 @@
-package net.astormofsorts.agotmod.worldgen;
+package net.astormofsorts.agotmod.worldgen.map;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
