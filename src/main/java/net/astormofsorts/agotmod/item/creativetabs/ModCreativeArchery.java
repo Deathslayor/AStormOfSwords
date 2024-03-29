@@ -24,6 +24,8 @@ public class ModCreativeArchery {
                         pOutput.accept(ModItems.STEEL_BOW.get());
 
 
+
+
                         // Arrows
                         pOutput.accept(ModItems.ARROW_BRONZE.get());
                         pOutput.accept(ModItems.ARROW_DRAGONGLASS.get());
@@ -31,8 +33,23 @@ public class ModCreativeArchery {
                         pOutput.accept(ModItems.ARROW_IRON.get());
 
 
+
+
+
                     })
                     .build());
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     public static void register(IEventBus eventBus) {
