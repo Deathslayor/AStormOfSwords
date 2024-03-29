@@ -2,6 +2,7 @@
 package net.astormofsorts.agotmod.util;
 
 // Importing necessary classes from other packages
+
 import net.astormofsorts.agotmod.AGoTMod;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;

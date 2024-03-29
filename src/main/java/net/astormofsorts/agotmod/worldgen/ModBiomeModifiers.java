@@ -14,6 +14,7 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.common.world.ForgeBiomeModifiers;
 import net.minecraftforge.registries.ForgeRegistries;
+
 import java.util.List;
 
 public class ModBiomeModifiers {
@@ -35,10 +36,10 @@ public class ModBiomeModifiers {
                 HolderSet.direct(placedFeatures.getOrThrow(ModplacedFeatures.TIN_ORE_PLACED_KEY)),
                 // Specify the generation step for the features (underground ores)
                 GenerationStep.Decoration.UNDERGROUND_ORES));
-       //Spawns Mammoths
-        context.register(SPAWN_MAMMOTH,new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
+        //Spawns Mammoths
+        context.register(SPAWN_MAMMOTH, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
                 biomes.getOrThrow(Tags.Biomes.IS_COLD_OVERWORLD),
-                List.of(new MobSpawnSettings.SpawnerData(ModEntities.RHINO.get(), 100, 3,5))));
+                List.of(new MobSpawnSettings.SpawnerData(ModEntities.RHINO.get(), 100, 3, 5))));
     }
 
     // Helper method to register a ResourceKey for a biome modifier

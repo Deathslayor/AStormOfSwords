@@ -14,6 +14,7 @@ public class PlayerMana {
     public void addMana(int add) {
         this.mana = Math.min(mana + add, MAX_MANA);
     }
+
     public void subMana(int sub) {
         this.mana = Math.max(mana - sub, MIN_MANA);
     }
@@ -23,13 +24,13 @@ public class PlayerMana {
 
     }
 
-    public void saveNBTData (CompoundTag nbt) {
-        nbt.putInt("mana",mana);
+    public void saveNBTData(CompoundTag nbt) {
+        nbt.putInt("mana", mana);
     }
 
 
     public void loadNBTData(CompoundTag nbt) {
         mana = nbt.getInt("mana");
 
-         }
     }
+}

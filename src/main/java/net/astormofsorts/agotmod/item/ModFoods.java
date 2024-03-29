@@ -2,6 +2,7 @@
 package net.astormofsorts.agotmod.item;
 
 // Importing necessary classes from other packages
+
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;

@@ -1,6 +1,5 @@
 package net.astormofsorts.agotmod.block.custom.specialleaves;
 
-import net.astormofsorts.agotmod.block.ModBLocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -9,8 +8,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
-
-import java.awt.*;
 
 public class WeirwoodLeavesBlock extends LeavesBlock {
     public WeirwoodLeavesBlock(Properties pProperties) {

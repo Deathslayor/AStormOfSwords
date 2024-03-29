@@ -2,12 +2,12 @@ package net.astormofsorts.agotmod.datagen;
 
 import net.astormofsorts.agotmod.AGoTMod;
 import net.astormofsorts.agotmod.block.ModBLocks;
+import net.astormofsorts.agotmod.util.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.astormofsorts.agotmod.util.ModTags;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -39,9 +39,6 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         /** // ---------------------------(PICKAXE)--------------------------- // */
 
 
-
-
-
         /** // ---------------------------(BLOCKS THAT BURN)--------------------------- // */
 
         this.tag(BlockTags.LOGS_THAT_BURN)
@@ -54,10 +51,6 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBLocks.SYCAMORE_PLANKS.get());
 
         /** // ---------------------------(BLOCKS THAT BURN)--------------------------- // */
-
-
-
-
 
 
         /** // ---------------------------(STONE TOOL)--------------------------- // */

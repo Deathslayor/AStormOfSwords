@@ -10,7 +10,6 @@ public enum RhinoVariant {
     WHITE(3);
 
 
-
     private static final RhinoVariant[] BY_ID = Arrays.stream(values()).sorted(Comparator.
             comparingInt(RhinoVariant::getId)).toArray(RhinoVariant[]::new);
     private final int id;

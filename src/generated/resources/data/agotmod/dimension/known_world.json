@@ -3,19 +3,32 @@
   "generator": {
     "type": "agotmod:map_based_chunk_generator",
     "biome_source": {
-      "type": "agotmod:map_based_biome_source",
-      "biome_list": [
-        {
-          "biome": "minecraft:plains"
-        },
-        {
-          "biome": "minecraft:ocean"
-        },
-        {
-          "biome": "minecraft:desert"
-        }
-      ]
-    },
-    "settings": "minecraft:overworld"
+      "settings": {
+        "biome_data": [
+          {
+            "biome": "minecraft:plains",
+            "color": -16711936,
+            "dirt_block": "minecraft:grass_block",
+            "stone_block": "minecraft:stone"
+          },
+          {
+            "biome": "minecraft:desert",
+            "color": -256,
+            "dirt_block": "minecraft:sand",
+            "stone_block": "minecraft:stone"
+          },
+          {
+            "biome": "minecraft:ocean",
+            "color": -16776961,
+            "dirt_block": "minecraft:water",
+            "stone_block": "minecraft:stone"
+          }
+        ],
+        "dirt_level": 50,
+        "height": 265,
+        "minY": 0,
+        "sea_level": 64
+      }
+    }
   }
 }

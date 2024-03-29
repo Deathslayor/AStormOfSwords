@@ -1,10 +1,10 @@
 package net.astormofsorts.agotmod.entity.ai;
 
+import net.astormofsorts.agotmod.entity.custom.BearEntity;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
-import net.astormofsorts.agotmod.entity.custom.BearEntity;
 
 /**
  * Custom attack goal for Bear entities.
@@ -23,8 +23,8 @@ public class BearAttackGoal extends MeleeAttackGoal {
     /**
      * Constructor for BearAttackGoal.
      *
-     * @param pMob                        The Bear entity using this goal.
-     * @param pSpeedModifier              Speed modifier for the attack.
+     * @param pMob                          The Bear entity using this goal.
+     * @param pSpeedModifier                Speed modifier for the attack.
      * @param pFollowingTargetEvenIfNotSeen Flag indicating whether to follow the target even if not seen.
      */
     public BearAttackGoal(PathfinderMob pMob, double pSpeedModifier, boolean pFollowingTargetEvenIfNotSeen) {

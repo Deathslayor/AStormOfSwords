@@ -2,6 +2,7 @@
 package net.astormofsorts.agotmod.event;
 
 // Importing necessary classes from other packages
+
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.astormofsorts.agotmod.AGoTMod;
 import net.astormofsorts.agotmod.item.ModItems;
@@ -106,17 +107,19 @@ public class ModEvents {
                 5, 5, 0.2f));
 
     }
+
     @SubscribeEvent
     public static void onAttachCapabilitiesPlayer(AttachCapabilitiesEvent<Entity> event) {
-        if(event.getObject() instanceof Player) {
-            if(!event.getObject().getCapability(PlayerManaProvider.PLAYER_MANA).isPresent()) {
+        if (event.getObject() instanceof Player) {
+            if (!event.getObject().getCapability(PlayerManaProvider.PLAYER_MANA).isPresent()) {
                 event.addCapability(new ResourceLocation(AGoTMod.MOD_ID, "properties"), new PlayerManaProvider());
             }
         }
     }
+
     @SubscribeEvent
     public static void onPlayerCloned(PlayerEvent.Clone event) {
-        if(event.isWasDeath()) {
+        if (event.isWasDeath()) {
             event.getOriginal().getCapability(PlayerManaProvider.PLAYER_MANA).ifPresent(oldStore -> {
                 event.getOriginal().getCapability(PlayerManaProvider.PLAYER_MANA).ifPresent(newStore -> {
                     newStore.copyFrom(oldStore);
@@ -124,15 +127,17 @@ public class ModEvents {
             });
         }
     }
+
     @SubscribeEvent
     public static void onRegisterCapabilities(RegisterCapabilitiesEvent event) {
         event.register(PlayerMana.class);
     }
+
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if(event.side == LogicalSide.SERVER) {
+        if (event.side == LogicalSide.SERVER) {
             event.player.getCapability(PlayerManaProvider.PLAYER_MANA).ifPresent(mana -> {
-                if(mana.getMana() > 0 && event.player.getRandom().nextFloat() < 0.005f) { // Once Every 10 Seconds on Avg
+                if (mana.getMana() > 0 && event.player.getRandom().nextFloat() < 0.005f) { // Once Every 10 Seconds on Avg
                     mana.addMana(1);
                     event.player.sendSystemMessage(Component.literal("Subtracted Mana"));
                 }

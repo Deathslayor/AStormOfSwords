@@ -2,8 +2,8 @@
 package net.astormofsorts.agotmod.armor.client.manderly;
 
 // Importing necessary classes from other packages
+
 import net.astormofsorts.agotmod.AGoTMod;
-import net.astormofsorts.agotmod.armor.custom.manderly.ManderlyLevyArmorItem;
 import net.astormofsorts.agotmod.armor.custom.manderly.ManderlyPlateArmorItem;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;

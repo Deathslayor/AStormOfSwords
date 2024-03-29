@@ -2,6 +2,7 @@
 package net.astormofsorts.agotmod.villager;
 
 // Importing necessary classes from other packages
+
 import com.google.common.collect.ImmutableSet;
 import net.astormofsorts.agotmod.AGoTMod;
 import net.minecraft.sounds.SoundEvents;

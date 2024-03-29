@@ -2,9 +2,9 @@
 package net.astormofsorts.agotmod.armor.custom.manderly;
 
 // Importing necessary classes from other packages
+
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.astormofsorts.agotmod.armor.client.manderly.ManderlyNobleArmorRenderer;
-import net.astormofsorts.agotmod.armor.client.manderly.ManderlyPlateArmorRenderer;
 import net.astormofsorts.agotmod.armor.custom.ModArmorMaterials;
 import net.astormofsorts.agotmod.item.ModItems;
 import net.minecraft.client.model.HumanoidModel;

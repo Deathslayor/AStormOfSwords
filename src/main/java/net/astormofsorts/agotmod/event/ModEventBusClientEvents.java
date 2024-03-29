@@ -2,15 +2,16 @@
 package net.astormofsorts.agotmod.event;
 
 // Importing necessary classes from other packages
+
 import net.astormofsorts.agotmod.AGoTMod;
 import net.astormofsorts.agotmod.entity.client.BearModel;
 import net.astormofsorts.agotmod.entity.client.ModModelLayers;
 import net.astormofsorts.agotmod.entity.client.RhinoModel;
+import net.astormofsorts.agotmod.entity.client.norththewall.WightModel;
 import net.astormofsorts.agotmod.event.KeyMappings.KeyBindings;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
-import net.astormofsorts.agotmod.entity.client.norththewall.WightModel;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -27,6 +28,7 @@ public class ModEventBusClientEvents {
         event.registerLayerDefinition(ModModelLayers.WIGHT_LAYER, WightModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.RHINO_LAYER, RhinoModel::createBodyLayer);
     }
+
     //Registers Keys
     @SubscribeEvent
     public static void registerKeys(RegisterKeyMappingsEvent event) {

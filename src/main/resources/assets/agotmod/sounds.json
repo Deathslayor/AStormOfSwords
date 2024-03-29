@@ -1,26 +1,23 @@
 {
   "mammoth_attack": {
     "subtitles": "sounds.agotmod:mammoth_attack",
-    "sounds":  [
+    "sounds": [
       "agotmod:mammoth_attack"
-
     ]
   },
   "mammoth_damaged": {
     "subtitles": "sounds.agotmod:mammoth_damaged",
-    "sounds":  [
+    "sounds": [
       "agotmod:mammoth_damaged"
-
     ]
   },
   "mammoth_idle": {
     "subtitles": "sounds.agotmod:mammoth_idle",
-    "sounds":  [
+    "sounds": [
       "agotmod:mammoth_idle"
     ]
-
-      }
-    }
+  }
+}
 
 
 

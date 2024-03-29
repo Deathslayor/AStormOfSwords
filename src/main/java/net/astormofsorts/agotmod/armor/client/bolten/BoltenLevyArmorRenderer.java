@@ -1,7 +1,6 @@
 package net.astormofsorts.agotmod.armor.client.bolten;
-import net.astormofsorts.agotmod.armor.client.manderly.ManderlyLevyArmorModel;
+
 import net.astormofsorts.agotmod.armor.custom.bolten.BoltenLevyArmorItem;
-import net.astormofsorts.agotmod.armor.custom.manderly.ManderlyLevyArmorItem;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
 // Stark1ArmorRenderer class extending GeoArmorRenderer for Stark1ArmorItem

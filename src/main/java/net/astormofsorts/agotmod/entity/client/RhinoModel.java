@@ -24,6 +24,7 @@ public class RhinoModel<T extends Entity> extends HierarchicalModel<T> {
     private final ModelPart mammoth;
     // The model part representing the head of the Mammoth
     private final ModelPart head;
+
     /**
      * Constructor for RhinoModel.
      *
@@ -34,6 +35,7 @@ public class RhinoModel<T extends Entity> extends HierarchicalModel<T> {
         this.mammoth = root.getChild("mammoth");
         this.head = mammoth.getChild("body").getChild("head");
     }
+
     /**
      * Creates a LayerDefinition for a Mammoth model.
      * The method defines the mesh structure using CubeListBuilder and PartDefinition,
@@ -124,6 +126,7 @@ public class RhinoModel<T extends Entity> extends HierarchicalModel<T> {
 
         return LayerDefinition.create(meshdefinition, 128, 128);
     }
+
     /**
      * The setupAnim method is responsible for setting up animations for the RhinoModel during rendering.
      *
@@ -153,6 +156,7 @@ public class RhinoModel<T extends Entity> extends HierarchicalModel<T> {
         this.animate(((RhinoEntity) entity).attackAnimationState, ModAnimationDefinitions.RHINO_ATTACK, ageInTicks, 1f);
 
     }
+
     /**
      * Applies the head rotation to the model based on the specified yaw, pitch, and age.
      *
@@ -166,21 +170,21 @@ public class RhinoModel<T extends Entity> extends HierarchicalModel<T> {
         pHeadPitch = Mth.clamp(pHeadPitch, -25.0F, 45.0F);
 
         // Apply the yaw and pitch rotations to the head
-        this.head.yRot = pNetHeadYaw * ((float)Math.PI / 180F);
-        this.head.xRot = pHeadPitch * ((float)Math.PI / 180F);
+        this.head.yRot = pNetHeadYaw * ((float) Math.PI / 180F);
+        this.head.xRot = pHeadPitch * ((float) Math.PI / 180F);
     }
 
     /**
      * Renders the RhinoModel to the specified VertexConsumer.
      *
-     * @param poseStack       The PoseStack for managing transformations during rendering.
-     * @param vertexConsumer  The VertexConsumer for recording geometry.
-     * @param packedLight     The packed light value.
-     * @param packedOverlay   The packed overlay value.
-     * @param red             Red color factor.
-     * @param green           Green color factor.
-     * @param blue            Blue color factor.
-     * @param alpha           Alpha (transparency) factor.
+     * @param poseStack      The PoseStack for managing transformations during rendering.
+     * @param vertexConsumer The VertexConsumer for recording geometry.
+     * @param packedLight    The packed light value.
+     * @param packedOverlay  The packed overlay value.
+     * @param red            Red color factor.
+     * @param green          Green color factor.
+     * @param blue           Blue color factor.
+     * @param alpha          Alpha (transparency) factor.
      */
 
     @Override

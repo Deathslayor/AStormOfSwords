@@ -2,6 +2,7 @@
 package net.astormofsorts.agotmod.armor.client.manderly;
 
 // Importing necessary classes from other packages
+
 import net.astormofsorts.agotmod.AGoTMod;
 import net.astormofsorts.agotmod.armor.custom.manderly.ManderlyLevyArmorItem;
 import net.minecraft.resources.ResourceLocation;

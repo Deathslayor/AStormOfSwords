@@ -1,12 +1,12 @@
 package net.astormofsorts.agotmod.entity.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.astormofsorts.agotmod.AGoTMod;
+import net.astormofsorts.agotmod.entity.custom.BearEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
-import net.astormofsorts.agotmod.AGoTMod;
-import net.astormofsorts.agotmod.entity.custom.BearEntity;
 
 // BearRenderer is responsible for rendering BearEntity in the game
 public class BearRenderer extends MobRenderer<BearEntity, BearModel<BearEntity>> {

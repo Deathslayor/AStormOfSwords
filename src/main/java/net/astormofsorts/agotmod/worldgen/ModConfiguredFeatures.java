@@ -1,5 +1,7 @@
 package net.astormofsorts.agotmod.worldgen;
 
+import net.astormofsorts.agotmod.AGoTMod;
+import net.astormofsorts.agotmod.block.ModBLocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
@@ -19,8 +21,6 @@ import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlac
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
-import net.astormofsorts.agotmod.AGoTMod;
-import net.astormofsorts.agotmod.block.ModBLocks;
 
 import java.util.List;
 
@@ -58,7 +58,7 @@ public class ModConfiguredFeatures {
                 BlockStateProvider.simple(ModBLocks.SYCAMORE_LEAVES.get()),
                 new BlobFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), 3),
 
-                new TwoLayersFeatureSize(1,0,2)).build());
+                new TwoLayersFeatureSize(1, 0, 2)).build());
 
 
         register(context, WEIRWOOD_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
@@ -68,8 +68,7 @@ public class ModConfiguredFeatures {
                 BlockStateProvider.simple(ModBLocks.WEIRWOOD_LEAVES.get()),
                 new BlobFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), 3),
 
-                new TwoLayersFeatureSize(1,0,2)).build());
-
+                new TwoLayersFeatureSize(1, 0, 2)).build());
 
 
     }

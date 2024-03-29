@@ -2,9 +2,7 @@ package net.astormofsorts.agotmod.entity.client.norththewall;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.astormofsorts.agotmod.AGoTMod;
-import net.astormofsorts.agotmod.entity.client.norththewall.WightModel;
 import net.astormofsorts.agotmod.entity.client.ModModelLayers;
-import net.astormofsorts.agotmod.entity.custom.BearEntity;
 import net.astormofsorts.agotmod.entity.custom.norththewall.WightEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

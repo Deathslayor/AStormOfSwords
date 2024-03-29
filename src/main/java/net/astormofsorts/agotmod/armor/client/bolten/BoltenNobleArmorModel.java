@@ -2,9 +2,9 @@
 package net.astormofsorts.agotmod.armor.client.bolten;
 
 // Importing necessary classes from other packages
+
 import net.astormofsorts.agotmod.AGoTMod;
 import net.astormofsorts.agotmod.armor.custom.bolten.BoltenNobleArmorItem;
-import net.astormofsorts.agotmod.armor.custom.manderly.ManderlyNobleArmorItem;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
 

@@ -168,7 +168,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     private ItemModelBuilder saplingItem(RegistryObject<Block> item) {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
-                new ResourceLocation(AGoTMod.MOD_ID,"block/" + item.getId().getPath()));
+                new ResourceLocation(AGoTMod.MOD_ID, "block/" + item.getId().getPath()));
     }
 
     // Method to create a simple item model
@@ -177,6 +177,7 @@ public class ModItemModelProvider extends ItemModelProvider {
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(AGoTMod.MOD_ID, "item/" + item.getId().getPath()));
     }
+
     // Method to create a simple Armor item model
     //Stark
     private ItemModelBuilder simpleItemStarkLevy(RegistryObject<StarkLevyArmorItem> item) {
@@ -184,50 +185,56 @@ public class ModItemModelProvider extends ItemModelProvider {
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(AGoTMod.MOD_ID, "item/" + item.getId().getPath()));
     }
+
     private ItemModelBuilder simpleItemStarkPlate(RegistryObject<StarkPlateArmorItem> item) {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(AGoTMod.MOD_ID, "item/" + item.getId().getPath()));
     }
+
     private ItemModelBuilder simpleItemStarkNoblePlate(RegistryObject<StarkNoblePlateArmorItem> item) {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(AGoTMod.MOD_ID, "item/" + item.getId().getPath()));
     }
+
     //Bolten
     private ItemModelBuilder simpleItemBoltenLevy(RegistryObject<BoltenLevyArmorItem> item) {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(AGoTMod.MOD_ID, "item/" + item.getId().getPath()));
     }
+
     private ItemModelBuilder simpleItemBoltenPlate(RegistryObject<BoltenPlateArmorItem> item) {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(AGoTMod.MOD_ID, "item/" + item.getId().getPath()));
     }
+
     private ItemModelBuilder simpleItemBoltenNoblePlate(RegistryObject<BoltenNobleArmorItem> item) {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(AGoTMod.MOD_ID, "item/" + item.getId().getPath()));
     }
+
     //Manderly
     private ItemModelBuilder simpleItemManderlyLevy(RegistryObject<ManderlyLevyArmorItem> item) {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(AGoTMod.MOD_ID, "item/" + item.getId().getPath()));
     }
+
     private ItemModelBuilder simpleItemManderlyPlate(RegistryObject<ManderlyPlateArmorItem> item) {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(AGoTMod.MOD_ID, "item/" + item.getId().getPath()));
     }
+
     private ItemModelBuilder simpleItemManderlyNoble(RegistryObject<ManderlyNobleArmorItem> item) {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(AGoTMod.MOD_ID, "item/" + item.getId().getPath()));
     }
-
-
 
 
     // Method to create a handheld item model

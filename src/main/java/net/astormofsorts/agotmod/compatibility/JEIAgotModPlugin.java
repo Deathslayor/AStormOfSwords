@@ -2,8 +2,8 @@ package net.astormofsorts.agotmod.compatibility;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
-import net.minecraft.resources.ResourceLocation;
 import net.astormofsorts.agotmod.AGoTMod;
+import net.minecraft.resources.ResourceLocation;
 
 @JeiPlugin
 public class JEIAgotModPlugin implements IModPlugin {

@@ -1,16 +1,12 @@
 package net.astormofsorts.agotmod.magic.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
-import mezz.jei.api.helpers.IGuiHelper;
 import net.astormofsorts.agotmod.AGoTMod;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.client.event.RenderTooltipEvent;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
-import org.apache.logging.log4j.core.config.builder.api.Component;
 
 
 public class ManaHudOverlay implements IGuiOverlay {
@@ -37,7 +33,7 @@ public class ManaHudOverlay implements IGuiOverlay {
         RenderSystem.setShaderTexture(0, FULL_MANA);
         for
         (int i = 0; i < 10; i++) {
-            if(ClientManaData.getPlayerMana() > i) {
+            if (ClientManaData.getPlayerMana() > i) {
 
             } else {
                 break;

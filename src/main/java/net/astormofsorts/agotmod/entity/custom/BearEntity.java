@@ -1,5 +1,7 @@
 package net.astormofsorts.agotmod.entity.custom;
 
+import net.astormofsorts.agotmod.entity.ModEntities;
+import net.astormofsorts.agotmod.entity.ai.BearAttackGoal;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -21,8 +23,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
-import net.astormofsorts.agotmod.entity.ModEntities;
-import net.astormofsorts.agotmod.entity.ai.BearAttackGoal;
 import org.jetbrains.annotations.Nullable;
 
 // BearEntity represents the custom entity class for the Bear

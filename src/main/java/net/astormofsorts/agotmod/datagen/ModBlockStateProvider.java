@@ -1,16 +1,15 @@
 package net.astormofsorts.agotmod.datagen;
 
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.RotatedPillarBlock;
-import net.minecraftforge.client.model.generators.ModelFile;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.astormofsorts.agotmod.AGoTMod;
 import net.astormofsorts.agotmod.block.ModBLocks;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ModBlockStateProvider extends BlockStateProvider {

@@ -23,8 +23,8 @@ public class RhinoAttackGoal extends MeleeAttackGoal {
     /**
      * Constructor for RhinoAttackGoal.
      *
-     * @param pMob                        The Rhino entity using this goal.
-     * @param pSpeedModifier              Speed modifier for the attack.
+     * @param pMob                          The Rhino entity using this goal.
+     * @param pSpeedModifier                Speed modifier for the attack.
      * @param pFollowingTargetEvenIfNotSeen Flag indicating whether to follow the target even if not seen.
      */
     public RhinoAttackGoal(PathfinderMob pMob, double pSpeedModifier, boolean pFollowingTargetEvenIfNotSeen) {

@@ -1,5 +1,5 @@
 package net.astormofsorts.agotmod.armor.client.manderly;
-import net.astormofsorts.agotmod.armor.custom.manderly.ManderlyLevyArmorItem;
+
 import net.astormofsorts.agotmod.armor.custom.manderly.ManderlyPlateArmorItem;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
 

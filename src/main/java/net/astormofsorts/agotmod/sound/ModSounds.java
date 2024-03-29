@@ -22,19 +22,9 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> MAMMOTH_BABY_DAMAGED = registerSoundEvents("mammoth_baby_damaged");
 
 
-
-
-
-
-
-
-
-
-
-
     //Helper Method to register the sounds
     private static RegistryObject<SoundEvent> registerSoundEvents(String name) {
-        ResourceLocation id = new ResourceLocation(AGoTMod.MOD_ID,name);
+        ResourceLocation id = new ResourceLocation(AGoTMod.MOD_ID, name);
         return SOUNDS_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(id));
     }
 
