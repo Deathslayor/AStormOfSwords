@@ -36,6 +36,21 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                         ModBLocks.DARK_STONE_BRICK.get(),
                         ModBLocks.DEEPSLATE_TIN_ORE.get(),
                         ModBLocks.KINGS_LANDING_BRICK_LARGE.get());
+                        ModBLocks.YELLOW_DIAMOND_BLOCK.get();
+                        ModBLocks.TRANSPARENT_DIAMOND_BLOCK.get();
+                        ModBLocks.AMBER_BLOCK.get();
+                        ModBLocks.AMBER_ORE.get();
+                        ModBLocks.AMBER_DEEPSLATE_ORE.get();
+                        ModBLocks.AMETHYST_BLOCK.get();
+                        ModBLocks.AMETHYST_ORE.get();
+                        ModBLocks.AMETHYST_DEEPSLATE_ORE.get();
+                        ModBLocks.BLACK_DIAMOND_BLOCK.get();
+                        ModBLocks.BLOODSTONE_BLOCK.get();
+                        ModBLocks.BLOODSTONE_ORE.get();
+                        ModBLocks.BLOODSTONE_DEEPSLATE_ORE.get();
+                        ModBLocks.CARNELIAN_ORE.get();
+                        ModBLocks.CARNELIAN_DEEPSLATE_ORE.get();
+                        ModBLocks.CARNELIAN_BLOCK.get();
         /** // ---------------------------(PICKAXE)--------------------------- // */
 
 

@@ -92,6 +92,14 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.BRONZE_INGOT);
         simpleItem(ModItems.STEEL_INGOT);
         simpleItem(ModItems.STEEL_NUGGET);
+        simpleItem(ModItems.YELLOW_DIAMOND);
+        simpleItem(ModItems.TRANSPARENT_DIAMOND);
+        simpleItem(ModItems.AMBER);
+        simpleItem(ModItems.AMETHYST);
+        simpleItem(ModItems.BLACK_DIAMOND);
+        simpleItem(ModItems.BLOODSTONE);
+        simpleItem(ModItems.CARNELIAN);
+
         // ---------------------------(INGOTS)--------------------------- //
 
         // ---------------------------(ANIMAL SPAWN EGGS)--------------------------- //

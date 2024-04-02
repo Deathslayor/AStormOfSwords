@@ -30,6 +30,26 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBLocks.TIN_ORE);
         // ---------------------------(TIN)--------------------------- //
 
+        // ---------------------------(GEMS)--------------------------- //
+        blockWithItem(ModBLocks.YELLOW_DIAMOND_BLOCK);
+        blockWithItem(ModBLocks.TRANSPARENT_DIAMOND_BLOCK);
+        blockWithItem(ModBLocks.AMBER_BLOCK);
+        blockWithItem(ModBLocks.AMETHYST_BLOCK);
+        blockWithItem(ModBLocks.AMETHYST_ORE);
+        blockWithItem(ModBLocks.AMETHYST_DEEPSLATE_ORE);
+        blockWithItem(ModBLocks.BLACK_DIAMOND_BLOCK);
+        blockWithItem(ModBLocks.AMBER_ORE);
+        blockWithItem(ModBLocks.AMBER_DEEPSLATE_ORE);
+        blockWithItem(ModBLocks.BLOODSTONE_BLOCK);
+        blockWithItem(ModBLocks.BLOODSTONE_ORE);
+        blockWithItem(ModBLocks.BLOODSTONE_DEEPSLATE_ORE);
+        blockWithItem(ModBLocks.CARNELIAN_BLOCK);
+        blockWithItem(ModBLocks.CARNELIAN_ORE);
+        blockWithItem(ModBLocks.CARNELIAN_DEEPSLATE_ORE);
+        // ---------------------------(GEMS)--------------------------- //
+
+
+
         // ---------------------------(BRONZE)--------------------------- //
         // Register block states and models for bronze-related blocks
         blockWithItem(ModBLocks.BRONZE_BLOCK);

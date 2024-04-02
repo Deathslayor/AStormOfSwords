@@ -55,6 +55,39 @@ public class ModBLocks {
     // RAW TIN ORE BLOCK
     public static final RegistryObject<Block> RAW_TIN_BLOCK = registerBlock("raw_tin_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_COPPER_BLOCK)));
 
+    public static final RegistryObject<Block> YELLOW_DIAMOND_BLOCK = registerBlock("yellow_diamond_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)));
+
+    public static final RegistryObject<Block> TRANSPARENT_DIAMOND_BLOCK = registerBlock("transparent_diamond_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)));
+
+    public static final RegistryObject<Block> AMBER_BLOCK = registerBlock("amber_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)));
+
+    public static final RegistryObject<Block> AMBER_ORE = registerBlock("amber_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE)));
+
+    public static final RegistryObject<Block> AMBER_DEEPSLATE_ORE = registerBlock("amber_deepslate_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_COPPER_ORE)));
+
+    public static final RegistryObject<Block> AMETHYST_BLOCK = registerBlock("amethyst_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)));
+
+    public static final RegistryObject<Block> AMETHYST_ORE = registerBlock("amethyst_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE)));
+
+    public static final RegistryObject<Block> AMETHYST_DEEPSLATE_ORE = registerBlock("amethyst_deepslate_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_DIAMOND_ORE)));
+
+    public static final RegistryObject<Block> BLACK_DIAMOND_BLOCK = registerBlock("black_diamond_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)));
+
+    public static final RegistryObject<Block> BLOODSTONE_BLOCK = registerBlock("bloodstone_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)));
+
+    public static final RegistryObject<Block> BLOODSTONE_ORE = registerBlock("bloodstone_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE)));
+
+    public static final RegistryObject<Block> BLOODSTONE_DEEPSLATE_ORE = registerBlock("bloodstone_deepslate_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_COPPER_ORE)));
+
+    public static final RegistryObject<Block> CARNELIAN_BLOCK = registerBlock("carnelian_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)));
+
+    public static final RegistryObject<Block> CARNELIAN_ORE = registerBlock("carnelian_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE)));
+
+    public static final RegistryObject<Block> CARNELIAN_DEEPSLATE_ORE = registerBlock("carnelian_deepslate_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_COPPER_ORE)));
+
+
+
+
     // DEEPSLATE TIN ORE
     public static final RegistryObject<Block> DEEPSLATE_TIN_ORE = registerBlock("deepslate_tin_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE).strength(3f).requiresCorrectToolForDrops(), UniformInt.of(3, 6)));
 

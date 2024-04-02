@@ -180,6 +180,23 @@ public class ModItems {
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> STEEL_NUGGET = ITEMS.register("steel_nugget",
             () -> new Item(new Item.Properties()));
+
+    // GEMS
+    public static final RegistryObject<Item> YELLOW_DIAMOND = ITEMS.register("yellow_diamond",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> TRANSPARENT_DIAMOND = ITEMS.register("transparent_diamond",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> AMBER = ITEMS.register("amber",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> AMETHYST = ITEMS.register("amethyst",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> BLACK_DIAMOND = ITEMS.register("black_diamond",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> BLOODSTONE = ITEMS.register("bloodstone",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> CARNELIAN = ITEMS.register("carnelian",
+            () -> new Item(new Item.Properties()));
+
     // ---------------------------(INGOTS)--------------------------- //
 
     // ---------------------------(ANIMAL SPAWN EGGS)--------------------------- //

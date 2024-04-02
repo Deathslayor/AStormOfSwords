@@ -30,6 +30,13 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(ModBLocks.DEEPSLATE_TIN_ORE.get(), block -> oreDropBetween2And5(ModBLocks.DEEPSLATE_TIN_ORE.get(), ModItems.RAW_TIN.get()));
         this.add(ModBLocks.TIN_ORE.get(), block -> oreDropBetween2And5(ModBLocks.TIN_ORE.get(), ModItems.RAW_TIN.get()));
         // ---------------------------(TIN)--------------------------- //
+
+        // ---------------------------(GEMS)--------------------------- //
+        this.add(ModBLocks.AMBER_ORE.get(), block -> oreDropBetween2And5(ModBLocks.AMBER_ORE.get(), ModItems.AMBER.get()));
+        this.add(ModBLocks.AMBER_DEEPSLATE_ORE.get(), block -> oreDropBetween2And5(ModBLocks.AMBER_DEEPSLATE_ORE.get(), ModItems.AMBER.get()));
+        // ---------------------------(GEMS)--------------------------- //
+
+
         /** // ---------------------------(ORES)--------------------------- // */
 
         /** // ---------------------------(NORMAL BLOCKS)--------------------------- // */
@@ -43,6 +50,18 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         // Add loot table for bronze block
         this.dropSelf(ModBLocks.BRONZE_BLOCK.get());
         // ---------------------------(BRONZE)--------------------------- //
+
+        // ---------------------------(GEMS)--------------------------- //
+        // Add loot table for bronze block
+        this.dropSelf(ModBLocks.AMBER_BLOCK.get());
+        this.dropSelf(ModBLocks.AMETHYST_BLOCK.get());
+        this.dropSelf(ModBLocks.BLACK_DIAMOND_BLOCK.get());
+        this.dropSelf(ModBLocks.YELLOW_DIAMOND_BLOCK.get());
+        this.dropSelf(ModBLocks.TRANSPARENT_DIAMOND_BLOCK.get());
+        this.dropSelf(ModBLocks.BLOODSTONE_BLOCK.get());
+        this.dropSelf(ModBLocks.CARNELIAN_BLOCK.get());
+
+        // ---------------------------(GEMS)--------------------------- //
 
         // ---------------------------(BRICKS)--------------------------- //
         // Add loot tables for various brick blocks
