@@ -51,6 +51,46 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                         ModBLocks.CARNELIAN_ORE.get();
                         ModBLocks.CARNELIAN_DEEPSLATE_ORE.get();
                         ModBLocks.CARNELIAN_BLOCK.get();
+                        ModBLocks.CHALCEDONY_BLOCK.get();
+                        ModBLocks.CHALCEDONY_ORE.get();
+                        ModBLocks.CHALCEDONY_DEEPSLATE_ORE.get();
+                        ModBLocks.DIAMONDS_ORE.get();
+                        ModBLocks.DIAMONDS_DEEPSLATE_ORE.get();
+                        ModBLocks.GARNET_BLOCK.get();
+                        ModBLocks.GARNET_ORE.get();
+                        ModBLocks.GARNET_DEEPSLATE_ORE.get();
+                        ModBLocks.JADE_BLOCK.get();
+                        ModBLocks.JADE_ORE.get();
+                        ModBLocks.JADE_DEEPSLATE_ORE.get();
+                        ModBLocks.JASPER_BLOCK.get();
+                        ModBLocks.JASPER_ORE.get();
+                        ModBLocks.JASPER_DEEPSLATE_ORE.get();
+                        ModBLocks.MALACHITE_BLOCK.get();
+                        ModBLocks.MALACHITE_ORE.get();
+                        ModBLocks.MALACHITE_DEEPSLATE_ORE.get();
+                        ModBLocks.MOONSTONE_BLOCK.get();
+                        ModBLocks.MOONSTONE_ORE.get();
+                        ModBLocks.MOONSTONE_DEEPSLATE_ORE.get();
+                        ModBLocks.ONYX_BLOCK.get();
+                        ModBLocks.ONYX_ORE.get();
+                        ModBLocks.ONYX_DEEPSLATE_ORE.get();
+                        ModBLocks.OPAL_BLOCK.get();
+                        ModBLocks.OPAL_ORE.get();
+                        ModBLocks.OPAL_DEEPSLATE_ORE.get();
+                        ModBLocks.RUBY_BLOCK.get();
+                        ModBLocks.RUBY_ORE.get();
+                        ModBLocks.RUBY_DEEPSLATE_ORE.get();
+                        ModBLocks.SAPPHIRE_BLOCK.get();
+                        ModBLocks.SAPPHIRE_ORE.get();
+                        ModBLocks.SAPPHIRE_DEEPSLATE_ORE.get();
+                        ModBLocks.TIGERS_EYE_BLOCK.get();
+                        ModBLocks.TIGERS_EYE_ORE.get();
+                        ModBLocks.TIGERS_EYE_DEEPSLATE_ORE.get();
+                        ModBLocks.TOPAZ_BLOCK.get();
+                        ModBLocks.TOPAZ_ORE.get();
+                        ModBLocks.TOPAZ_DEEPSLATE_ORE.get();
+                        ModBLocks.TOURMALINE_ORE.get();
+                        ModBLocks.TOURMALINE_DEEPSLATE_ORE.get();
         /** // ---------------------------(PICKAXE)--------------------------- // */
 
 

@@ -39,7 +39,28 @@ public class ModCreativeIngredients {
                         pOutput.accept(ModItems.RAW_TIN.get());
                         pOutput.accept(ModItems.BRONZE_INGOT.get());
                         pOutput.accept(ModItems.STEEL_INGOT.get());
-                        pOutput.accept(ModItems.STEEL_NUGGET.get());
+
+                        pOutput.accept(ModItems.YELLOW_DIAMOND.get());
+                        pOutput.accept(ModItems.TRANSPARENT_DIAMOND.get());
+                        pOutput.accept(ModItems.BLOODSTONE.get());
+                        pOutput.accept(ModItems.BLACK_DIAMOND.get());
+                        pOutput.accept(ModItems.CHALCEDONY.get());
+                        pOutput.accept(ModItems.AMBER.get());
+                        pOutput.accept(ModItems.AMETHYST.get());
+                        pOutput.accept(ModItems.CARNELIAN.get());
+                        pOutput.accept(ModItems.GARNET.get());
+                        pOutput.accept(ModItems.JADE.get());
+                        pOutput.accept(ModItems.JASPER.get());
+                        pOutput.accept(ModItems.MALACHITE.get());
+                        pOutput.accept(ModItems.RUBY.get());
+                        pOutput.accept(ModItems.ONYX.get());
+                        pOutput.accept(ModItems.OPAL.get());
+                        pOutput.accept(ModItems.SAPPHIRE.get());
+                        pOutput.accept(ModItems.MOONSTONE.get());
+                        pOutput.accept(ModItems.TIGERS_EYE.get());
+                        pOutput.accept(ModItems.TOPAZ.get());
+                        pOutput.accept(ModItems.TOURMALINE.get());
+
 
                     })
                     .build());

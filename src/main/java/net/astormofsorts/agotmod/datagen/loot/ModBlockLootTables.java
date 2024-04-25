@@ -6,6 +6,7 @@ import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -14,9 +15,15 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.List;
 import java.util.Set;
 
 public class ModBlockLootTables extends BlockLootSubProvider {
+
+    private static final List<ItemLike> diamonds = List.of(
+            ModItems.YELLOW_DIAMOND.get(),
+            ModItems.TRANSPARENT_DIAMOND.get(),
+            ModItems.BLACK_DIAMOND.get());
     public ModBlockLootTables() {
         // Initialize the ModBlockLootTables, specifying sets of known blocks and flags
         super(Set.of(), FeatureFlags.REGISTRY.allFlags());
@@ -34,6 +41,10 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         // ---------------------------(GEMS)--------------------------- //
         this.add(ModBLocks.AMBER_ORE.get(), block -> oreDropBetween2And5(ModBLocks.AMBER_ORE.get(), ModItems.AMBER.get()));
         this.add(ModBLocks.AMBER_DEEPSLATE_ORE.get(), block -> oreDropBetween2And5(ModBLocks.AMBER_DEEPSLATE_ORE.get(), ModItems.AMBER.get()));
+
+        this.add(ModBLocks.DIAMONDS_ORE.get(), block -> oreDropBetween1And3(ModBLocks.DIAMONDS_ORE.get(), (Item) diamonds));
+        this.add(ModBLocks.DIAMONDS_DEEPSLATE_ORE.get(), block -> oreDropBetween1And3(ModBLocks.DIAMONDS_DEEPSLATE_ORE.get(), (Item) diamonds));
+
         // ---------------------------(GEMS)--------------------------- //
 
 
@@ -60,6 +71,10 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBLocks.TRANSPARENT_DIAMOND_BLOCK.get());
         this.dropSelf(ModBLocks.BLOODSTONE_BLOCK.get());
         this.dropSelf(ModBLocks.CARNELIAN_BLOCK.get());
+        this.dropSelf(ModBLocks.CHALCEDONY_BLOCK.get());
+        this.dropSelf(ModBLocks.GARNET_BLOCK.get());
+        this.dropSelf(ModBLocks.JADE_BLOCK.get());
+
 
         // ---------------------------(GEMS)--------------------------- //
 
@@ -110,5 +125,10 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     protected LootTable.Builder oreDropBetween2And5(Block pBlock, Item item) {
         // Create a loot table for ore drops with random count between 2 and 5
         return createSilkTouchDispatchTable(pBlock, this.applyExplosionDecay(pBlock, LootItem.lootTableItem(item).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 5.0F))).apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))));
+    }
+
+    protected LootTable.Builder oreDropBetween1And3(Block pBlock, Item item) {
+        // Create a loot table for ore drops with random count between 1 and 3
+        return createSilkTouchDispatchTable(pBlock, this.applyExplosionDecay(pBlock, LootItem.lootTableItem(item).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))).apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))));
     }
 }

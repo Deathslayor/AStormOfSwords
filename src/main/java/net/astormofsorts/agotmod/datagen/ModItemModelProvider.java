@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ModItemModelProvider extends ItemModelProvider {
@@ -99,6 +100,19 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.BLACK_DIAMOND);
         simpleItem(ModItems.BLOODSTONE);
         simpleItem(ModItems.CARNELIAN);
+        simpleItem(ModItems.CHALCEDONY);
+        simpleItem(ModItems.GARNET);
+        simpleItem(ModItems.JADE);
+        simpleItem(ModItems.JASPER);
+        simpleItem(ModItems.MALACHITE);
+        simpleItem(ModItems.MOONSTONE);
+        simpleItem(ModItems.ONYX);
+        simpleItem(ModItems.OPAL);
+        simpleItem(ModItems.RUBY);
+        simpleItem(ModItems.SAPPHIRE);
+        simpleItem(ModItems.TIGERS_EYE);
+        simpleItem(ModItems.TOPAZ);
+        simpleItem(ModItems.TOURMALINE);
 
         // ---------------------------(INGOTS)--------------------------- //
 

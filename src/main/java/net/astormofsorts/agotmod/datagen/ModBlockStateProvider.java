@@ -33,19 +33,78 @@ public class ModBlockStateProvider extends BlockStateProvider {
         // ---------------------------(GEMS)--------------------------- //
         blockWithItem(ModBLocks.YELLOW_DIAMOND_BLOCK);
         blockWithItem(ModBLocks.TRANSPARENT_DIAMOND_BLOCK);
-        blockWithItem(ModBLocks.AMBER_BLOCK);
+        blockWithItem(ModBLocks.BLACK_DIAMOND_BLOCK);
+
         blockWithItem(ModBLocks.AMETHYST_BLOCK);
         blockWithItem(ModBLocks.AMETHYST_ORE);
         blockWithItem(ModBLocks.AMETHYST_DEEPSLATE_ORE);
-        blockWithItem(ModBLocks.BLACK_DIAMOND_BLOCK);
+
+
+        blockWithItem(ModBLocks.AMBER_BLOCK);
         blockWithItem(ModBLocks.AMBER_ORE);
         blockWithItem(ModBLocks.AMBER_DEEPSLATE_ORE);
+
         blockWithItem(ModBLocks.BLOODSTONE_BLOCK);
         blockWithItem(ModBLocks.BLOODSTONE_ORE);
         blockWithItem(ModBLocks.BLOODSTONE_DEEPSLATE_ORE);
+
         blockWithItem(ModBLocks.CARNELIAN_BLOCK);
         blockWithItem(ModBLocks.CARNELIAN_ORE);
         blockWithItem(ModBLocks.CARNELIAN_DEEPSLATE_ORE);
+
+        blockWithItem(ModBLocks.CHALCEDONY_BLOCK);
+        blockWithItem(ModBLocks.CHALCEDONY_ORE);
+        blockWithItem(ModBLocks.CHALCEDONY_DEEPSLATE_ORE);
+
+        blockWithItem(ModBLocks.DIAMONDS_ORE);
+        blockWithItem(ModBLocks.DIAMONDS_DEEPSLATE_ORE);
+
+        blockWithItem(ModBLocks.GARNET_BLOCK);
+        blockWithItem(ModBLocks.GARNET_ORE);
+        blockWithItem(ModBLocks.GARNET_DEEPSLATE_ORE);
+
+        blockWithItem(ModBLocks.JADE_BLOCK);
+        blockWithItem(ModBLocks.JADE_ORE);
+        blockWithItem(ModBLocks.JADE_DEEPSLATE_ORE);
+
+        blockWithItem(ModBLocks.JASPER_BLOCK);
+        blockWithItem(ModBLocks.JASPER_ORE);
+        blockWithItem(ModBLocks.JASPER_DEEPSLATE_ORE);
+
+        blockWithItem(ModBLocks.MALACHITE_BLOCK);
+        blockWithItem(ModBLocks.MALACHITE_ORE);
+        blockWithItem(ModBLocks.MALACHITE_DEEPSLATE_ORE);
+
+        blockWithItem(ModBLocks.MOONSTONE_BLOCK);
+        blockWithItem(ModBLocks.MOONSTONE_ORE);
+        blockWithItem(ModBLocks.MOONSTONE_DEEPSLATE_ORE);
+
+        blockWithItem(ModBLocks.ONYX_BLOCK);
+        blockWithItem(ModBLocks.ONYX_ORE);
+        blockWithItem(ModBLocks.ONYX_DEEPSLATE_ORE);
+
+        blockWithItem(ModBLocks.OPAL_BLOCK);
+        blockWithItem(ModBLocks.OPAL_ORE);
+        blockWithItem(ModBLocks.OPAL_DEEPSLATE_ORE);
+
+        blockWithItem(ModBLocks.RUBY_BLOCK);
+        blockWithItem(ModBLocks.RUBY_ORE);
+        blockWithItem(ModBLocks.RUBY_DEEPSLATE_ORE);
+
+        blockWithItem(ModBLocks.SAPPHIRE_BLOCK);
+        blockWithItem(ModBLocks.SAPPHIRE_ORE);
+        blockWithItem(ModBLocks.SAPPHIRE_DEEPSLATE_ORE);
+
+        blockWithItem(ModBLocks.TOURMALINE_ORE);
+        blockWithItem(ModBLocks.TOURMALINE_DEEPSLATE_ORE);
+
+        blockWithItem(ModBLocks.TOPAZ_BLOCK);
+        blockWithItem(ModBLocks.TOPAZ_ORE);
+        blockWithItem(ModBLocks.TOPAZ_DEEPSLATE_ORE);
+
+        blockWithItem(ModBLocks.TIGERS_EYE_BLOCK);
+        blockWithItem(ModBLocks.TIGERS_EYE_ORE);
+        blockWithItem(ModBLocks.TIGERS_EYE_DEEPSLATE_ORE);
         // ---------------------------(GEMS)--------------------------- //
 
 

@@ -196,6 +196,33 @@ public class ModItems {
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> CARNELIAN = ITEMS.register("carnelian",
             () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> CHALCEDONY = ITEMS.register("chalcedony",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> GARNET = ITEMS.register("garnet",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> JADE = ITEMS.register("jade",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> JASPER = ITEMS.register("jasper",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> MALACHITE = ITEMS.register("malachite",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> MOONSTONE = ITEMS.register("moonstone",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ONYX = ITEMS.register("onyx",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> OPAL = ITEMS.register("opal",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> RUBY = ITEMS.register("ruby",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> SAPPHIRE = ITEMS.register("sapphire",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> TIGERS_EYE = ITEMS.register("tigers_eye",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> TOPAZ = ITEMS.register("topaz",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> TOURMALINE = ITEMS.register("tourmaline",
+            () -> new Item(new Item.Properties()));
+
 
     // ---------------------------(INGOTS)--------------------------- //
 

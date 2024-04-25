@@ -85,6 +85,86 @@ public class ModBLocks {
 
     public static final RegistryObject<Block> CARNELIAN_DEEPSLATE_ORE = registerBlock("carnelian_deepslate_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_COPPER_ORE)));
 
+    public static final RegistryObject<Block> CHALCEDONY_BLOCK = registerBlock("chalcedony_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)));
+
+    public static final RegistryObject<Block> CHALCEDONY_ORE = registerBlock("chalcedony_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE)));
+
+    public static final RegistryObject<Block> CHALCEDONY_DEEPSLATE_ORE = registerBlock("chalcedony_deepslate_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_COPPER_ORE)));
+
+    public static final RegistryObject<Block> DIAMONDS_ORE = registerBlock("diamonds_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE)));
+
+    public static final RegistryObject<Block> DIAMONDS_DEEPSLATE_ORE = registerBlock("diamonds_deepslate_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_COPPER_ORE)));
+
+    public static final RegistryObject<Block> GARNET_BLOCK = registerBlock("garnet_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)));
+
+    public static final RegistryObject<Block> GARNET_ORE = registerBlock("garnet_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE)));
+
+    public static final RegistryObject<Block> GARNET_DEEPSLATE_ORE = registerBlock("garnet_deepslate_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_COPPER_ORE)));
+
+    public static final RegistryObject<Block> JADE_BLOCK = registerBlock("jade_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)));
+
+    public static final RegistryObject<Block> JADE_ORE = registerBlock("jade_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE)));
+
+    public static final RegistryObject<Block> JADE_DEEPSLATE_ORE = registerBlock("jade_deepslate_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_COPPER_ORE)));
+
+    public static final RegistryObject<Block> JASPER_BLOCK = registerBlock("jasper_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)));
+
+    public static final RegistryObject<Block> JASPER_ORE = registerBlock("jasper_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE)));
+
+    public static final RegistryObject<Block> JASPER_DEEPSLATE_ORE = registerBlock("jasper_deepslate_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_COPPER_ORE)));
+
+    public static final RegistryObject<Block> MALACHITE_BLOCK = registerBlock("malachite_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)));
+
+    public static final RegistryObject<Block> MALACHITE_ORE = registerBlock("malachite_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE)));
+
+    public static final RegistryObject<Block> MALACHITE_DEEPSLATE_ORE = registerBlock("malachite_deepslate_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_COPPER_ORE)));
+
+    public static final RegistryObject<Block> MOONSTONE_BLOCK = registerBlock("moonstone_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)));
+
+    public static final RegistryObject<Block> MOONSTONE_ORE = registerBlock("moonstone_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE)));
+
+    public static final RegistryObject<Block> MOONSTONE_DEEPSLATE_ORE = registerBlock("moonstone_deepslate_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_COPPER_ORE)));
+
+    public static final RegistryObject<Block> ONYX_BLOCK = registerBlock("onyx_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)));
+
+    public static final RegistryObject<Block> ONYX_ORE = registerBlock("onyx_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE)));
+
+    public static final RegistryObject<Block> ONYX_DEEPSLATE_ORE = registerBlock("onyx_deepslate_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_COPPER_ORE)));
+
+    public static final RegistryObject<Block> OPAL_BLOCK = registerBlock("opal_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)));
+
+    public static final RegistryObject<Block> OPAL_ORE = registerBlock("opal_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE)));
+
+    public static final RegistryObject<Block> OPAL_DEEPSLATE_ORE = registerBlock("opal_deepslate_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_COPPER_ORE)));
+
+    public static final RegistryObject<Block> RUBY_BLOCK = registerBlock("ruby_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)));
+
+    public static final RegistryObject<Block> RUBY_ORE = registerBlock("ruby_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE)));
+
+    public static final RegistryObject<Block> RUBY_DEEPSLATE_ORE = registerBlock("ruby_deepslate_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_COPPER_ORE)));
+
+    public static final RegistryObject<Block> SAPPHIRE_BLOCK = registerBlock("sapphire_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)));
+
+    public static final RegistryObject<Block> SAPPHIRE_ORE = registerBlock("sapphire_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE)));
+
+    public static final RegistryObject<Block> SAPPHIRE_DEEPSLATE_ORE = registerBlock("sapphire_deepslate_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_COPPER_ORE)));
+
+    public static final RegistryObject<Block> TIGERS_EYE_BLOCK = registerBlock("tigers_eye_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)));
+
+    public static final RegistryObject<Block> TIGERS_EYE_ORE = registerBlock("tigers_eye_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE)));
+
+    public static final RegistryObject<Block> TIGERS_EYE_DEEPSLATE_ORE = registerBlock("tigers_eye_deepslate_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_COPPER_ORE)));
+
+    public static final RegistryObject<Block> TOPAZ_BLOCK = registerBlock("topaz_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)));
+
+    public static final RegistryObject<Block> TOPAZ_ORE = registerBlock("topaz_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE)));
+
+    public static final RegistryObject<Block> TOPAZ_DEEPSLATE_ORE = registerBlock("topaz_deepslate_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_COPPER_ORE)));
+
+    public static final RegistryObject<Block> TOURMALINE_ORE = registerBlock("tourmaline_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE)));
+
+    public static final RegistryObject<Block> TOURMALINE_DEEPSLATE_ORE = registerBlock("tourmaline_deepslate_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_COPPER_ORE)));
+
 
 
 
