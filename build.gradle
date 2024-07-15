@@ -14,6 +14,11 @@ base {
     archivesName = mod_id
 }
 
+mixin {
+    add sourceSets.main, "mixins.asos.refmap.json"
+    config "asos.mixins.json"
+}
+
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
@@ -196,6 +201,13 @@ dependencies {
     compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}"))
     // at runtime, use the full JEI jar for Forge
     runtimeOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}"))
+
+
+    // MixinExtras
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.4.0"))
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.4.0")) {
+        jarJar.ranged(it, "[0.4.0,)")
+    }
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

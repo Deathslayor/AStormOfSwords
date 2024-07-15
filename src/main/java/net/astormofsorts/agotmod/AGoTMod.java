@@ -3,6 +3,7 @@ package net.astormofsorts.agotmod;
 
 // Importing necessary classes from other packages
 
+import com.llamalad7.mixinextras.MixinExtrasBootstrap;
 import com.mojang.logging.LogUtils;
 import net.astormofsorts.agotmod.block.ModBLocks;
 import net.astormofsorts.agotmod.entity.ModEntities;
@@ -42,6 +43,8 @@ public class AGoTMod {
 
     // Constructor for AGoTMod class
     public AGoTMod() {
+        MixinExtrasBootstrap.init();
+
         // Get the mod event bus
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
