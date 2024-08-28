@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "agotmod:tigers_eye"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_tigers_eye_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "agotmod:tigers_eye_block"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_tigers_eye_block",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "agotmod:tigers_eye"
+    ]
+  },
+  "sends_telemetry_event": false
+}

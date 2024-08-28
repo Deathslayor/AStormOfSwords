@@ -116,6 +116,37 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         // ---------------------------(INGOTS)--------------------------- //
 
+        // ---------------------------(Weapons)--------------------------- //
+        handheldItem(ModItems.DRAGONGLASS_SPEAR);
+        handheldItem(ModItems.DRAGONGLASS_DAGGER);
+        handheldItem(ModItems.BRONZE_SPATHA);
+        handheldItem(ModItems.BRONZE_SPEAR);
+        handheldItem(ModItems.BRONZE_PIKE);
+        handheldItem(ModItems.BRONZE_DAGGER);
+        handheldItem(ModItems.BRONZE_BATTLEAXE);
+        handheldItem(ModItems.IRON_LONGSWORD);
+        handheldItem(ModItems.IRON_SPEAR);
+        handheldItem(ModItems.IRON_PIKE);
+        handheldItem(ModItems.IRON_DAGGER);
+        handheldItem(ModItems.IRON_MACE);
+        handheldItem(ModItems.IRON_BATTLEAXE);
+        handheldItem(ModItems.STEEL_LONGSWORD);
+        handheldItem(ModItems.STEEL_SPEAR);
+        handheldItem(ModItems.STEEL_PIKE);
+        handheldItem(ModItems.STEEL_DAGGER);
+        handheldItem(ModItems.STEEL_MACE);
+        handheldItem(ModItems.STEEL_BATTLEAXE);
+        handheldItem(ModItems.STEEL_HALBERD);
+        handheldItem(ModItems.NOBLE_LONGSWORD);
+        handheldItem(ModItems.NOBLE_SPEAR);
+        handheldItem(ModItems.NOBLE_PIKE);
+        handheldItem(ModItems.NOBLE_DAGGER);
+        handheldItem(ModItems.NOBLE_MACE);
+        handheldItem(ModItems.NOBLE_BATTLEAXE);
+        handheldItem(ModItems.NOBLE_HALBERD);
+
+        // ---------------------------(Weapons)--------------------------- //
+
         // ---------------------------(ANIMAL SPAWN EGGS)--------------------------- //
         // Register item model for the Rhino Spawn Egg
         withExistingParent(ModItems.RHINO_SPANW_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
@@ -135,6 +166,11 @@ public class ModItemModelProvider extends ItemModelProvider {
         handheldItem(ModItems.STEEL_HOE);
         handheldItem(ModItems.STEEL_SWORD);
         handheldItem(ModItems.STEEL_SHOVEL);
+        handheldItem(ModItems.BLOOD_DAGGER);
+        // ---------------------------(TOOLS)--------------------------- //
+
+        // ---------------------------(TOOLS)--------------------------- //
+        handheldItem(ModItems.BLOOD_BOTTLED);
         // ---------------------------(TOOLS)--------------------------- //
 
         // ---------------------------(FOODS)--------------------------- //
