@@ -21,6 +21,7 @@ public class ModBiomeModifiers {
     // Define a ResourceKey for the biome modifier to add tin ore features
     public static final ResourceKey<BiomeModifier> ADD_TIN_ORE = registerKey("add_tin_ore");
     public static final ResourceKey<BiomeModifier> SPAWN_MAMMOTH = registerKey("spawn_mammoth");
+    public static final ResourceKey<BiomeModifier> CREATE_WEIRWOOD_TREE = registerKey("create_weirwood_tree");
 
     // Bootstrap method for initializing biome modifiers
     public static void bootstrap(BootstapContext<BiomeModifier> context) {
@@ -40,6 +41,10 @@ public class ModBiomeModifiers {
         context.register(SPAWN_MAMMOTH, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
                 biomes.getOrThrow(Tags.Biomes.IS_COLD_OVERWORLD),
                 List.of(new MobSpawnSettings.SpawnerData(ModEntities.RHINO.get(), 100, 3, 5))));
+        context.register(CREATE_WEIRWOOD_TREE, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
+                biomes.getOrThrow(Tags.Biomes.IS_PLAINS),
+                HolderSet.direct(placedFeatures.getOrThrow(ModplacedFeatures.WEIRWOOD_KEY)),
+                GenerationStep.Decoration.VEGETAL_DECORATION));
     }
 
     // Helper method to register a ResourceKey for a biome modifier
