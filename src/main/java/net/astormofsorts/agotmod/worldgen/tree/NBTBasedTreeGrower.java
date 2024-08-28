@@ -19,6 +19,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
+import java.util.Random;
 
 public class NBTBasedTreeGrower extends AbstractTreeGrower {
     private final String base;
@@ -39,8 +40,8 @@ public class NBTBasedTreeGrower extends AbstractTreeGrower {
     @Override
     public boolean growTree(ServerLevel level, @NotNull ChunkGenerator pGenerator, @NotNull BlockPos pos, @NotNull BlockState pState, @NotNull RandomSource random) {
         // randomly get variant number
-        int variant = random.nextInt(variants);
-        Optional<StructureTemplate> template = level.getStructureManager().get(new ResourceLocation(AGoTMod.MOD_ID, base + variant));
+        int randomNumber = random.nextInt(variants + 1);
+        Optional<StructureTemplate> template = level.getStructureManager().get(new ResourceLocation(AGoTMod.MOD_ID, base + randomNumber));
 
         if (template.isPresent()) {
             // Calculate the position for the structure
