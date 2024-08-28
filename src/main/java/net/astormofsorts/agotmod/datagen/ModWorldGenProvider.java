@@ -3,6 +3,7 @@ package net.astormofsorts.agotmod.datagen;
 import net.astormofsorts.agotmod.AGoTMod;
 import net.astormofsorts.agotmod.worldgen.ModBiomeModifiers;
 import net.astormofsorts.agotmod.worldgen.ModConfiguredFeatures;
+import net.astormofsorts.agotmod.worldgen.ModTrunkPlacerTypes;
 import net.astormofsorts.agotmod.worldgen.ModplacedFeatures;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
