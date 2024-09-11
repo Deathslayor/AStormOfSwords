@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "agotmod:hawthorn_wood_stripped"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "item": "agotmod:hawthorn_planks"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "agotmod:ironwood_log"
+    },
+    {
+      "item": "agotmod:ironwood_log"
+    },
+    {
+      "item": "agotmod:ironwood_log"
+    },
+    {
+      "item": "agotmod:ironwood_log"
+    }
+  ],
+  "result": {
+    "count": 3,
+    "item": "agotmod:ironwood_wood"
+  }
+}
