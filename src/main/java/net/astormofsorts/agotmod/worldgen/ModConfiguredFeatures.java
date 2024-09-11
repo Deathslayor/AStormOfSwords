@@ -2,7 +2,6 @@ package net.astormofsorts.agotmod.worldgen;
 
 import net.astormofsorts.agotmod.AGoTMod;
 import net.astormofsorts.agotmod.block.ModBLocks;
-import net.astormofsorts.agotmod.worldgen.tree.NBTBasedTrunkPlacer;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
@@ -64,7 +63,7 @@ public class ModConfiguredFeatures {
 
         register(context, WEIRWOOD_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBLocks.WEIRWOOD_LOG.get()),
-                new NBTBasedTrunkPlacer(5, 4, 3),
+                new StraightTrunkPlacer(5, 4, 3),
 
                 BlockStateProvider.simple(ModBLocks.WEIRWOOD_LEAVES.get()),
                 new BlobFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), 3),
