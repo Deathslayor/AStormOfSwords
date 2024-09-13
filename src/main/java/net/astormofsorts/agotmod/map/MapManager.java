@@ -1,6 +1,7 @@
 package net.astormofsorts.agotmod.map;
 
 import net.astormofsorts.agotmod.AGoTMod;
+import net.astormofsorts.agotmod.datagen.MapProvider;
 import net.astormofsorts.agotmod.datagen.ModDimensionProvider;
 import net.minecraft.core.QuartPos;
 import org.jetbrains.annotations.NotNull;
@@ -10,32 +11,43 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.URL;
+import java.util.Objects;
 
 
 public class MapManager {
-    private static final BufferedImage mapBiomeImage = getMapBiomeImage();
-    private static final BufferedImage mapHeightImage = getHeightImage();
+    @Nullable
+    public static final BufferedImage MAP_BIOME_IMAGE = getMapBiomeImage();
+    @Nullable
+    public static final BufferedImage MAP_HEIGHT_IMAGE = getMapHeightImage();
+    private static final int PIXEL_WEIGHT = 5;
+    @Nullable
+    private final BufferedImage noisedHeightmap;
+
+    public MapManager(long seed) {
+        this.noisedHeightmap = MAP_HEIGHT_IMAGE != null ? MapUtils.addNoise(MAP_HEIGHT_IMAGE, seed) : null;
+    }
 
     @Nullable
     private static BufferedImage getMapBiomeImage() {
+        URL biomeMapUrl = AGoTMod.class.getResource("/" + MapProvider.BIOME_MAP_PATH);
         try {
-            if (ModDimensionProvider.BIOME_MAP_URL != null) {
-                return ImageIO.read(ModDimensionProvider.BIOME_MAP_URL);
+            if (biomeMapUrl != null) {
+                return ImageIO.read(biomeMapUrl);
             }
-        } catch (IOException e) {
-            AGoTMod.LOGGER.error("Failed to load biome map located at: " + ModDimensionProvider.BIOME_MAP_URL.getPath());
+        } catch (IOException ignored) {
         }
         return null;
     }
 
     @Nullable
-    private static BufferedImage getHeightImage() {
+    private static BufferedImage getMapHeightImage() {
+        URL heightMapUrl = AGoTMod.class.getResource("/" + MapProvider.HEIGHT_MAP_PATH);
         try {
-            if (ModDimensionProvider.HEIGHT_MAP_URL != null) {
-                return ImageIO.read(ModDimensionProvider.HEIGHT_MAP_URL);
+            if (heightMapUrl != null) {
+                return ImageIO.read(Objects.requireNonNull(heightMapUrl));
             }
-        } catch (IOException e) {
-            AGoTMod.LOGGER.error("Failed to load height map located at: " + ModDimensionProvider.HEIGHT_MAP_URL.getPath());
+        } catch (IOException ignored) {
         }
         return null;
     }
@@ -48,19 +60,18 @@ public class MapManager {
      * @return Returns the biome color
      */
     public static @NotNull Color getColorFromPosition(int pX, int pZ) {
-        if (mapBiomeImage != null) {
+        if (MAP_BIOME_IMAGE != null) {
             // one pixel shouldn't be one block but rather a chunk
             int x = QuartPos.fromBlock(pX);
             int y = QuartPos.fromBlock(pZ);
 
-            // TODO: Define custom spawn position
             // 0 | 0 should be in the middle of the image, comment this lines to move it to the top-left corner of the image
-            x += mapBiomeImage.getWidth() / 2;
-            y += mapBiomeImage.getHeight() / 2;
+            x += MAP_BIOME_IMAGE.getWidth() / 2;
+            y += MAP_BIOME_IMAGE.getHeight() / 2;
 
             // check if coordinate is inbound
-            if (isCoordinateInImage(mapBiomeImage, x, y)) {
-                return new Color(mapBiomeImage.getRGB(x, y));
+            if (isCoordinateInImage(MAP_BIOME_IMAGE, x, y)) {
+                return new Color(MAP_BIOME_IMAGE.getRGB(x, y));
             }
         }
 
@@ -68,19 +79,18 @@ public class MapManager {
         return ModDimensionProvider.DEFAULT_BIOME_COLOR;
     }
 
-    public static float getHeightFromChunkPosition(int pX, int pZ) {
-        if (mapHeightImage != null) {
+    public float getHeightFromChunkPosition(int pX, int pZ) {
+        if (noisedHeightmap != null) {
             int x = QuartPos.fromBlock(pX);
             int y = QuartPos.fromBlock(pZ);
 
-            // TODO: Define custom spawn position
             // 0 | 0 should be in the middle of the image, comment this lines to move it to the top-left corner of the image
-            x += mapHeightImage.getWidth() / 2;
-            y += mapHeightImage.getHeight() / 2;
+            x += noisedHeightmap.getWidth() / 2;
+            y += noisedHeightmap.getHeight() / 2;
 
             // check if coordinate is inbound
-            if (isCoordinateInImage(mapHeightImage, x, y)) {
-                return new Color(mapHeightImage.getRGB(x, y)).getRed() / 5f;
+            if (isCoordinateInImage(noisedHeightmap, x, y)) {
+                return (float) new Color(noisedHeightmap.getRGB(x, y)).getRed() / PIXEL_WEIGHT;
             }
         }
 
@@ -88,15 +98,15 @@ public class MapManager {
         return 0;
     }
 
-    public static float getHeightFromPosition(int pX, int pZ) {
+    public float getHeightFromPosition(int pX, int pZ) {
         int x = QuartPos.fromBlock(pX);
         int z = QuartPos.fromBlock(pZ);
         float topLeft = getHeightFromChunkPosition(x, z);
-        float topRight = getHeightFromChunkPosition(x + 5, z);
-        float bottomLeft = getHeightFromChunkPosition(x, z + 5);
-        float bottomRight = getHeightFromChunkPosition(x + 5, z + 5);
+        float topRight = getHeightFromChunkPosition(x + PIXEL_WEIGHT, z);
+        float bottomLeft = getHeightFromChunkPosition(x, z + PIXEL_WEIGHT);
+        float bottomRight = getHeightFromChunkPosition(x + PIXEL_WEIGHT, z + PIXEL_WEIGHT);
         return getHeightBetween(new float[]{topLeft, topRight, bottomLeft, bottomRight},
-                (float) (x % 5) / 5, (float) (z % 5) / 5);
+                (float) (x % PIXEL_WEIGHT) / PIXEL_WEIGHT, (float) (z % PIXEL_WEIGHT) / PIXEL_WEIGHT);
     }
 
     private static float getHeightBetween(float[] heights, float xPercent, float zPercent) {

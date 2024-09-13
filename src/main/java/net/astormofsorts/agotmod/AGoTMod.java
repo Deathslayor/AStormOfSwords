@@ -122,9 +122,7 @@ public class AGoTMod {
             EntityRenderers.register(ModEntities.BEAR.get(), BearRenderer::new);
 
             EntityRenderers.register(ModEntities.WIGHT.get(), WightRenderer::new);
-            event.enqueueWork(() -> {
-                ModItemProperties.addCustomItemProperties();
-            });
+            event.enqueueWork(ModItemProperties::addCustomItemProperties);
         }
     }
 }

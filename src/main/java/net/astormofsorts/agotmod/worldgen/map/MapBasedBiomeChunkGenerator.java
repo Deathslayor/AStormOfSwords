@@ -22,7 +22,9 @@ import net.minecraft.world.level.levelgen.blending.Blender;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
@@ -32,15 +34,23 @@ public class MapBasedBiomeChunkGenerator extends ChunkGenerator {
     ).apply(instance, instance.stable(MapBasedBiomeChunkGenerator::new)));
 
     protected final MapBasedBiomeSource biomeSource;
+    protected final MapManager mapManager;
+    private final long seed;
 
     private MapBasedBiomeChunkGenerator(MapBasedBiomeSource biomeSource) {
         super(biomeSource);
         this.biomeSource = biomeSource;
+        this.seed = RandomSupport.generateUniqueSeed();
+        Map<Color, Integer> heights = new HashMap<>();
+        for (MapBiomeData biomedata : biomeSource.getSettings().biomeData()) {
+            heights.put(biomedata.color(), biomedata.height());
+        }
+        this.mapManager = new MapManager(RandomSupport.generateUniqueSeed());
     }
 
-    public MapBasedBiomeChunkGenerator(GeneratorSettings settings) {
-        super(new MapBasedBiomeSource(settings));
-        this.biomeSource = new MapBasedBiomeSource(settings);
+    public static MapBasedBiomeChunkGenerator of(GeneratorSettings settings) {
+        MapBasedBiomeSource biomeSource = new MapBasedBiomeSource(settings);
+        return new MapBasedBiomeChunkGenerator(biomeSource);
     }
 
     @Override
@@ -72,7 +82,7 @@ public class MapBasedBiomeChunkGenerator extends ChunkGenerator {
                 }
 
                 if (biomeData != null) {
-                    float height = MapManager.getHeightFromPosition(pos.getX(), pos.getZ());
+                    float height = mapManager.getHeightFromPosition(pos.getX(), pos.getZ());
 
                     for (int y = chunk.getMinBuildHeight(); y < chunk.getMinBuildHeight() + 4; y++) {
                         chunk.setBlockState(chunk.getPos().getBlockAt(x, y, z), Blocks.BEDROCK.defaultBlockState(), false);
@@ -146,7 +156,7 @@ public class MapBasedBiomeChunkGenerator extends ChunkGenerator {
 
     @Override
     public int getBaseHeight(int pX, int pZ, @NotNull Heightmap.Types pType, @NotNull LevelHeightAccessor pLevel, @NotNull RandomState pRandom) {
-        return (int) (1 + biomeSource.getSettings().dirtLevel() + Math.abs(MapManager.getHeightFromPosition(pX, pZ)));
+        return (int) (1 + biomeSource.getSettings().dirtLevel() + Math.abs(mapManager.getHeightFromPosition(pX, pZ)));
     }
 
     @Override

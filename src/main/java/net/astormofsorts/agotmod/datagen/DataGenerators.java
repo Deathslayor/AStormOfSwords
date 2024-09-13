@@ -16,7 +16,6 @@ public class DataGenerators {
     // Subscribe to the GatherDataEvent to add custom data generators
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
-
         // Extracting necessary objects from the event for data generation
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
@@ -52,5 +51,7 @@ public class DataGenerators {
         // Add a provider for generating custom world generation features
         generator.addProvider(event.includeServer(), new ModWorldGenProvider(packOutput, lookupProvider));
 
+        // World gen maps
+        generator.addProvider(true, new MapProvider(packOutput, lookupProvider));
     }
 }

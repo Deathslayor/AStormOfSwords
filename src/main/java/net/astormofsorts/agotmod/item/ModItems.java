@@ -2,6 +2,8 @@
 package net.astormofsorts.agotmod.item;
 
 // Importing necessary classes from other packages
+
+import net.astormofsorts.agotmod.AGoTMod;
 import net.astormofsorts.agotmod.armor.custom.ModArmorMaterials;
 import net.astormofsorts.agotmod.armor.custom.bolten.BoltenLevyArmorItem;
 import net.astormofsorts.agotmod.armor.custom.bolten.BoltenNobleArmorItem;
@@ -12,9 +14,8 @@ import net.astormofsorts.agotmod.armor.custom.manderly.ManderlyPlateArmorItem;
 import net.astormofsorts.agotmod.armor.custom.stark.StarkLevyArmorItem;
 import net.astormofsorts.agotmod.armor.custom.stark.StarkNoblePlateArmorItem;
 import net.astormofsorts.agotmod.armor.custom.stark.StarkPlateArmorItem;
-import net.minecraft.world.item.*;
-import net.astormofsorts.agotmod.AGoTMod;
 import net.astormofsorts.agotmod.entity.ModEntities;
+import net.minecraft.world.item.*;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
