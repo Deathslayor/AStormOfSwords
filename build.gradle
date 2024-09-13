@@ -273,5 +273,5 @@ tasks.withType(JavaCompile).configureEach {
 
 tasks.withType(ProcessResources).configureEach {
     // required so the images will be written
-    duplicatesStrategy(DuplicatesStrategy.INCLUDE)
+    duplicatesStrategy(DuplicatesStrategy.WARN)
 }

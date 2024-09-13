@@ -1,8 +1,6 @@
 package net.astormofsorts.agotmod.map;
 
 import net.astormofsorts.agotmod.util.ColorUtils;
-import net.astormofsorts.agotmod.util.SimplexNoise;
-import net.minecraft.util.Mth;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -36,27 +34,5 @@ public class MapUtils {
         }
 
         return gen_heightmap;
-    }
-
-    public static BufferedImage addNoise(BufferedImage gen_heightmap, long seed) {
-        // add noise
-        SimplexNoise noise = new SimplexNoise(seed);
-        BufferedImage noise_heightmap = new BufferedImage(gen_heightmap.getWidth(), gen_heightmap.getHeight(), BufferedImage.TYPE_INT_ARGB);
-        for (int x = 0; x < noise_heightmap.getWidth(); x++) {
-            for (int y = 0; y < noise_heightmap.getHeight(); y++) {
-                Color in = new Color(gen_heightmap.getRGB(x, y));
-                Color out;
-                if (in.getBlue() <= 0) {
-                    int r = (int) Mth.clamp(in.getRed() + ColorUtils.getPerlinColor(noise, x, y, 32, 50, 50, 20), 0, 255);
-                    out = new Color(r, in.getGreen(), in.getBlue(), in.getAlpha());
-                } else {
-                    int b = (int) Mth.clamp(in.getBlue() - ColorUtils.getPerlinColor(noise, x, y, 32, 50, 50, 25), 0, 255);
-                    out = new Color(in.getRed(), in.getGreen(), b, in.getAlpha());
-                }
-                noise_heightmap.setRGB(x, y, out.getRGB());
-            }
-        }
-
-        return noise_heightmap;
     }
 }

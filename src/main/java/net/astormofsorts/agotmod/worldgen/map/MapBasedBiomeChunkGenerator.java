@@ -6,7 +6,6 @@ import net.astormofsorts.agotmod.map.MapManager;
 import net.astormofsorts.agotmod.worldgen.biome.MapBiomeData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.core.QuartPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.WorldGenRegion;
 import net.minecraft.world.level.*;
@@ -20,11 +19,10 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.*;
 import net.minecraft.world.level.levelgen.blending.Blender;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
@@ -34,18 +32,14 @@ public class MapBasedBiomeChunkGenerator extends ChunkGenerator {
     ).apply(instance, instance.stable(MapBasedBiomeChunkGenerator::new)));
 
     protected final MapBasedBiomeSource biomeSource;
-    protected final MapManager mapManager;
-    private final long seed;
+    @Nullable
+    protected MapManager mapManager = null;
+    @Nullable
+    private Long seed = null;
 
     private MapBasedBiomeChunkGenerator(MapBasedBiomeSource biomeSource) {
         super(biomeSource);
         this.biomeSource = biomeSource;
-        this.seed = RandomSupport.generateUniqueSeed();
-        Map<Color, Integer> heights = new HashMap<>();
-        for (MapBiomeData biomedata : biomeSource.getSettings().biomeData()) {
-            heights.put(biomedata.color(), biomedata.height());
-        }
-        this.mapManager = new MapManager(RandomSupport.generateUniqueSeed());
     }
 
     public static MapBasedBiomeChunkGenerator of(GeneratorSettings settings) {
@@ -60,6 +54,7 @@ public class MapBasedBiomeChunkGenerator extends ChunkGenerator {
 
     @Override
     public void applyCarvers(@NotNull WorldGenRegion pLevel, long pSeed, @NotNull RandomState pRandom, @NotNull BiomeManager pBiomeManager, @NotNull StructureManager pStructureManager, @NotNull ChunkAccess pChunk, GenerationStep.@NotNull Carving pStep) {
+
     }
 
     /**
@@ -67,6 +62,13 @@ public class MapBasedBiomeChunkGenerator extends ChunkGenerator {
      */
     @Override
     public void buildSurface(@NotNull WorldGenRegion pLevel, @NotNull StructureManager pStructureManager, @NotNull RandomState pRandom, @NotNull ChunkAccess chunk) {
+        if (this.seed == null) {
+            this.seed = pLevel.getSeed();
+        }
+        if (this.mapManager == null) {
+            this.mapManager = new MapManager(this.seed);
+        }
+
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
                 MapBiomeData biomeData = null;
@@ -82,7 +84,7 @@ public class MapBasedBiomeChunkGenerator extends ChunkGenerator {
                 }
 
                 if (biomeData != null) {
-                    float height = mapManager.getHeightFromPosition(pos.getX(), pos.getZ());
+                    double height = mapManager.getPerlinHeight(pos.getX(), pos.getZ());
 
                     for (int y = chunk.getMinBuildHeight(); y < chunk.getMinBuildHeight() + 4; y++) {
                         chunk.setBlockState(chunk.getPos().getBlockAt(x, y, z), Blocks.BEDROCK.defaultBlockState(), false);
@@ -92,7 +94,7 @@ public class MapBasedBiomeChunkGenerator extends ChunkGenerator {
                         chunk.setBlockState(chunk.getPos().getBlockAt(x, y, z), pLevel.registryAccess().registryOrThrow(Registries.BLOCK).getOrThrow(biomeData.deepSlateBlock()).defaultBlockState(), false);
                     }
 
-                    float dirtHeight = this.biomeSource.getSettings().dirtLevel() + height - 1;
+                    double dirtHeight = this.biomeSource.getSettings().dirtLevel() + height - 1;
 
                     for (int y = this.biomeSource.getSettings().deepslateLevel(); y < (dirtHeight / 2); y++) {
                         chunk.setBlockState(chunk.getPos().getBlockAt(x, y, z), pLevel.registryAccess().registryOrThrow(Registries.BLOCK).getOrThrow(biomeData.stoneBlock()).defaultBlockState(), false);
@@ -156,7 +158,7 @@ public class MapBasedBiomeChunkGenerator extends ChunkGenerator {
 
     @Override
     public int getBaseHeight(int pX, int pZ, @NotNull Heightmap.Types pType, @NotNull LevelHeightAccessor pLevel, @NotNull RandomState pRandom) {
-        return (int) (1 + biomeSource.getSettings().dirtLevel() + Math.abs(mapManager.getHeightFromPosition(pX, pZ)));
+        return (int) (1 + biomeSource.getSettings().dirtLevel() + Math.abs((mapManager != null ? mapManager.getPerlinHeight(pX, pZ) : 0)));
     }
 
     @Override
@@ -166,7 +168,7 @@ public class MapBasedBiomeChunkGenerator extends ChunkGenerator {
 
     @Override
     public void addDebugScreenInfo(@NotNull List<String> pInfo, @NotNull RandomState pRandom, @NotNull BlockPos pPos) {
-        Color biomeColor = MapManager.getColorFromPosition(QuartPos.fromBlock(pPos.getX()), QuartPos.fromBlock(pPos.getZ()));
+        Color biomeColor = MapManager.getBiomeColor(pPos.getX(), pPos.getZ());
         pInfo.add("Biome Color: R:" + biomeColor.getRed() + " G: " + biomeColor.getGreen() + " B: " + biomeColor.getBlue() + " A: " + biomeColor.getAlpha());
     }
 

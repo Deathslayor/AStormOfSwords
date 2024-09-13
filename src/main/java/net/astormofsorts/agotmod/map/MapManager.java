@@ -3,7 +3,7 @@ package net.astormofsorts.agotmod.map;
 import net.astormofsorts.agotmod.AGoTMod;
 import net.astormofsorts.agotmod.datagen.MapProvider;
 import net.astormofsorts.agotmod.datagen.ModDimensionProvider;
-import net.minecraft.core.QuartPos;
+import net.astormofsorts.agotmod.util.SimplexNoise;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -20,12 +20,14 @@ public class MapManager {
     public static final BufferedImage MAP_BIOME_IMAGE = getMapBiomeImage();
     @Nullable
     public static final BufferedImage MAP_HEIGHT_IMAGE = getMapHeightImage();
-    private static final int PIXEL_WEIGHT = 5;
-    @Nullable
-    private final BufferedImage noisedHeightmap;
+    private static final int PIXEL_WEIGHT = 16;
+    private static final int PIXEL_STRETCH = 250;
+    private static final int PIXEL_RANGE = 50;
+    @NotNull
+    private final SimplexNoise noise;
 
     public MapManager(long seed) {
-        this.noisedHeightmap = MAP_HEIGHT_IMAGE != null ? MapUtils.addNoise(MAP_HEIGHT_IMAGE, seed) : null;
+        this.noise = new SimplexNoise(seed);
     }
 
     @Nullable
@@ -35,7 +37,8 @@ public class MapManager {
             if (biomeMapUrl != null) {
                 return ImageIO.read(biomeMapUrl);
             }
-        } catch (IOException ignored) {
+        } catch (IOException e) {
+            AGoTMod.LOGGER.error("Caught an error while reading the biome map!", e);
         }
         return null;
     }
@@ -47,7 +50,8 @@ public class MapManager {
             if (heightMapUrl != null) {
                 return ImageIO.read(Objects.requireNonNull(heightMapUrl));
             }
-        } catch (IOException ignored) {
+        } catch (Exception e) {
+            AGoTMod.LOGGER.error("Caught an error while reading the height map!", e);
         }
         return null;
     }
@@ -55,16 +59,12 @@ public class MapManager {
     /**
      * Gets the Color from a position on the mob
      *
-     * @param pX this should be a block position x
-     * @param pZ this should be a block position z
+     * @param x this should be a block position x
+     * @param y this should be a block position z
      * @return Returns the biome color
      */
-    public static @NotNull Color getColorFromPosition(int pX, int pZ) {
+    public static @NotNull Color getBiomeColor(int x, int y) {
         if (MAP_BIOME_IMAGE != null) {
-            // one pixel shouldn't be one block but rather a chunk
-            int x = QuartPos.fromBlock(pX);
-            int y = QuartPos.fromBlock(pZ);
-
             // 0 | 0 should be in the middle of the image, comment this lines to move it to the top-left corner of the image
             x += MAP_BIOME_IMAGE.getWidth() / 2;
             y += MAP_BIOME_IMAGE.getHeight() / 2;
@@ -79,43 +79,71 @@ public class MapManager {
         return ModDimensionProvider.DEFAULT_BIOME_COLOR;
     }
 
-    public float getHeightFromChunkPosition(int pX, int pZ) {
-        if (noisedHeightmap != null) {
-            int x = QuartPos.fromBlock(pX);
-            int y = QuartPos.fromBlock(pZ);
-
+    private static @NotNull Color getHeightColor(int x, int y) {
+        if (MAP_HEIGHT_IMAGE != null) {
             // 0 | 0 should be in the middle of the image, comment this lines to move it to the top-left corner of the image
-            x += noisedHeightmap.getWidth() / 2;
-            y += noisedHeightmap.getHeight() / 2;
+            x += MAP_HEIGHT_IMAGE.getWidth() / 2;
+            y += MAP_HEIGHT_IMAGE.getHeight() / 2;
 
             // check if coordinate is inbound
-            if (isCoordinateInImage(noisedHeightmap, x, y)) {
-                return (float) new Color(noisedHeightmap.getRGB(x, y)).getRed() / PIXEL_WEIGHT;
+            if (isCoordinateInImage(MAP_HEIGHT_IMAGE, x, y)) {
+                return new Color(MAP_HEIGHT_IMAGE.getRGB(x, y));
             }
         }
 
         // fallback
-        return 0;
+        return new Color(0);
     }
 
-    public float getHeightFromPosition(int pX, int pZ) {
-        int x = QuartPos.fromBlock(pX);
-        int z = QuartPos.fromBlock(pZ);
-        float topLeft = getHeightFromChunkPosition(x, z);
-        float topRight = getHeightFromChunkPosition(x + PIXEL_WEIGHT, z);
-        float bottomLeft = getHeightFromChunkPosition(x, z + PIXEL_WEIGHT);
-        float bottomRight = getHeightFromChunkPosition(x + PIXEL_WEIGHT, z + PIXEL_WEIGHT);
-        return getHeightBetween(new float[]{topLeft, topRight, bottomLeft, bottomRight},
-                (float) (x % PIXEL_WEIGHT) / PIXEL_WEIGHT, (float) (z % PIXEL_WEIGHT) / PIXEL_WEIGHT);
+    private static double getColorHeight(int x, int y) {
+        Color color = getHeightColor(x / PIXEL_WEIGHT, y / PIXEL_WEIGHT);
+        return color.getBlue() < 0 ? color.getRed() : -color.getBlue();
     }
 
-    private static float getHeightBetween(float[] heights, float xPercent, float zPercent) {
-        float h1 = getMiddleHeight(heights[0], heights[1], xPercent);
-        float h2 = getMiddleHeight(heights[2], heights[3], xPercent);
+    private static double getBiomeHeight(int x, int y) {
+        double topLeft = getColorHeight(x, y);
+        double topRight = getColorHeight(x + PIXEL_WEIGHT, y);
+        double bottomLeft = getColorHeight(x, y + PIXEL_WEIGHT);
+        double bottomRight = getColorHeight(x + PIXEL_WEIGHT, y + PIXEL_WEIGHT);
+        return getHeightBetween(new double[]{topLeft, topRight, bottomLeft, bottomRight},
+                (double) (x % PIXEL_WEIGHT) / PIXEL_WEIGHT, (double) (y % PIXEL_WEIGHT) / PIXEL_WEIGHT);
+    }
+
+    public double getPerlinHeight(int x, int y) {
+        double perlin = getPerlin(x, y) * 0.5;
+
+        // TODO: Replace with something more smooth for water generation
+        if (getBiomeColor(x >> 2, y >> 2).getBlue() == 255) {
+            perlin = 0;
+        }
+
+        double defHeight = getBiomeHeight(x >> 2, y >> 2);
+        return perlin + defHeight;
+    }
+
+    private double getPerlin(int x, int y) {
+        int scale = 32;
+
+        double perlin = noise.noise2((double) x / PIXEL_STRETCH,(double) y / PIXEL_STRETCH);
+        double d = 1;
+        for (int i = 2; i <= scale; i *= 2) {
+            perlin += (1d / i) * noise.noise2((double) x * i / PIXEL_STRETCH,(double) y * i / PIXEL_STRETCH);
+            d += (1d / i);
+        }
+
+        perlin = perlin / d;
+        perlin *= PIXEL_RANGE;
+
+        return perlin;
+    }
+
+    private static double getHeightBetween(double[] heights, double xPercent, double zPercent) {
+        double h1 = getMiddleHeight(heights[0], heights[1], xPercent);
+        double h2 = getMiddleHeight(heights[2], heights[3], xPercent);
         return getMiddleHeight(h1, h2, zPercent);
     }
 
-    private static float getMiddleHeight(float a, float b, float percentage) {
+    private static double getMiddleHeight(double a, double b, double percentage) {
         return (a * (1 - percentage)) + (b * percentage);
     }
 

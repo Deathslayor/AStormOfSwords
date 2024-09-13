@@ -49,7 +49,7 @@ public class MapProvider implements DataProvider {
         this.lookupProvider = lookupProvider;
     }
 
-    @SuppressWarnings("UnstableApiUsage")
+    @SuppressWarnings({"UnstableApiUsage", "deprecation"})
     @Override
     public @NotNull CompletableFuture<?> run(@NotNull CachedOutput cache) {
         return CompletableFuture.runAsync(() -> {
@@ -64,7 +64,7 @@ public class MapProvider implements DataProvider {
                     Path output = packOutput.getOutputFolder().resolve(BIOME_MAP_PATH);
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     ImageIO.write(validMap, "PNG", baos);
-                    HashingOutputStream hashStream = new HashingOutputStream(Hashing.sha256(), baos);
+                    HashingOutputStream hashStream = new HashingOutputStream(Hashing.sha1(), baos);
                     cache.writeIfNeeded(output, baos.toByteArray(), hashStream.hash());
                 }
 
@@ -73,7 +73,7 @@ public class MapProvider implements DataProvider {
                     Path output = packOutput.getOutputFolder().resolve(HEIGHT_MAP_PATH);
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     ImageIO.write(heightmap, "PNG", baos);
-                    HashingOutputStream hashStream = new HashingOutputStream(Hashing.sha256(), baos);
+                    HashingOutputStream hashStream = new HashingOutputStream(Hashing.sha1(), baos);
                     cache.writeIfNeeded(output, baos.toByteArray(), hashStream.hash());
                 }
             } catch (IOException e) {
