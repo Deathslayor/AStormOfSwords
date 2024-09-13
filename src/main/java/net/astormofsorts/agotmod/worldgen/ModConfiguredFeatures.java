@@ -68,7 +68,7 @@ public class ModConfiguredFeatures {
                 BlockStateProvider.simple(ModBLocks.WEIRWOOD_LEAVES.get()),
                 new BlobFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), 3),
 
-                new TwoLayersFeatureSize(1, 0, 2)).build());
+                new TwoLayersFeatureSize(2, 0, 2)).build());
 
 
     }

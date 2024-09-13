@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "agotmod:block/sentinel_planks",
-    "side": "agotmod:block/sentinel_planks",
-    "top": "agotmod:block/sentinel_planks"
-  }
-}

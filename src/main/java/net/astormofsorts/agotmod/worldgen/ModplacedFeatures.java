@@ -36,7 +36,7 @@ public class ModplacedFeatures {
                         HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(80))));
 
         register(context, WEIRWOOD_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.WEIRWOOD_KEY),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.1f, 1),
                         ModBLocks.WEIRWOOD_SAPLING.get()));
     }
 
