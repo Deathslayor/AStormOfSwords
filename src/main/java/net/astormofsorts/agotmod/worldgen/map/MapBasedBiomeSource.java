@@ -40,7 +40,7 @@ public class MapBasedBiomeSource extends BiomeSource {
     }
 
     public @NotNull MapBiome getBiomeData(int pX, int pZ) {
-        Color biomeColor = MapManager.getBiomeColor(pX >> 2, pZ >> 2);
+        Color biomeColor = MapManager.getBiomeColor(pX, pZ);
         for (MapBiome biomeData : MapBiome.BIOME_LIST) {
             if (biomeData.color().getRGB() == biomeColor.getRGB()) {
                 return biomeData;

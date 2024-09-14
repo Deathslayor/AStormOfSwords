@@ -22,7 +22,7 @@ import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
 public class MapProvider implements DataProvider {
-    private static final BufferedImage ORGINAL_MAP_IMAGE = getOriginalMapImage();
+    public static final BufferedImage ORGINAL_MAP_IMAGE = getOriginalMapImage();
 
     private static BufferedImage getOriginalMapImage() {
         URL orignalMapUrl = AGoTMod.class.getResource("/assets/agotmod/map.png");
@@ -49,7 +49,8 @@ public class MapProvider implements DataProvider {
             Map<Color, Integer> heights = MapBiome.toHeightMap(MapBiome.BIOME_LIST);
 
             try {
-                BufferedImage validMap = MapUtils.removeInvalidColors(ORGINAL_MAP_IMAGE, heights.keySet());
+                BufferedImage upScaled = MapUtils.upScale(ORGINAL_MAP_IMAGE, 4);
+                BufferedImage validMap = MapUtils.removeInvalidColors(upScaled, heights.keySet());
                 {
                     Path output = packOutput.getOutputFolder().resolve(BIOME_MAP_PATH);
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -59,11 +60,12 @@ public class MapProvider implements DataProvider {
                 }
 
                 BufferedImage heightmap = MapUtils.generateHeightMap(validMap, heights);
+                BufferedImage blurredHeightmap = MapUtils.blur(heightmap, 2);
                 {
                     Path output = packOutput.getOutputFolder().resolve(HEIGHT_MAP_PATH);
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     HashingOutputStream hashStream = new HashingOutputStream(Hashing.sha1(), baos);
-                    ImageIO.write(heightmap, "PNG", hashStream);
+                    ImageIO.write(blurredHeightmap, "PNG", hashStream);
                     cache.writeIfNeeded(output, baos.toByteArray(), hashStream.hash());
                 }
             } catch (IOException e) {

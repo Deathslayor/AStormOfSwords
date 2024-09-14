@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 public record MapBiome(ResourceKey<Biome> biome, Color color, Block stoneBlock,
-                       Block dirtBlock, Block grassBlock, boolean isWater, int height, double perlinModifier) {
+                       Block dirtBlock, Block grassBlock, int height, double perlinModifier) {
 
     public static final List<MapBiome> BIOME_LIST = new ArrayList<>();
 
@@ -23,12 +23,14 @@ public record MapBiome(ResourceKey<Biome> biome, Color color, Block stoneBlock,
     public static MapBiome WARN_OCEAN;
     public static MapBiome PLAINS;
     public static MapBiome DESERT;
+    public static MapBiome MOUNTAINS;
 
     public static void initialize() {
-        OCEAN = register(new MapBiome(Biomes.OCEAN, new Color(0, 0, 100), Blocks.STONE, Blocks.STONE, Blocks.GRAVEL, true, -14, 0.1));
-        WARN_OCEAN = register(new MapBiome(Biomes.WARM_OCEAN, new Color(0, 0, 255), Blocks.STONE, Blocks.STONE, Blocks.SAND, true, -14, 0.1));
-        PLAINS = register(new MapBiome(Biomes.PLAINS, new Color(0, 255, 0), Blocks.STONE, Blocks.DIRT, Blocks.GRASS_BLOCK, true, 10, 1.4));
-        DESERT = register(new MapBiome(Biomes.DESERT, new Color(255, 255, 0), Blocks.STONE, Blocks.SANDSTONE, Blocks.SAND, true, 10, 1.3));
+        OCEAN = register(new MapBiome(Biomes.OCEAN, new Color(0, 0, 100), Blocks.STONE, Blocks.STONE, Blocks.GRAVEL, -45, 0.1));
+        WARN_OCEAN = register(new MapBiome(Biomes.WARM_OCEAN, new Color(0, 0, 255), Blocks.STONE, Blocks.STONE, Blocks.SAND, -14, 0.1));
+        PLAINS = register(new MapBiome(Biomes.PLAINS, new Color(0, 255, 0), Blocks.STONE, Blocks.DIRT, Blocks.GRASS_BLOCK, 10, 1.4));
+        DESERT = register(new MapBiome(Biomes.DESERT, new Color(255, 255, 0), Blocks.STONE, Blocks.SANDSTONE, Blocks.SAND, 10, 1.2));
+        MOUNTAINS = register(new MapBiome(Biomes.STONY_PEAKS, new Color(255, 255, 255), Blocks.STONE, Blocks.STONE, Blocks.STONE, 100, 5));
     }
 
     public static MapBiome register(MapBiome biome) {

@@ -30,13 +30,12 @@ public class MapBasedBiomeChunkGenerator extends ChunkGenerator {
     ).apply(instance, instance.stable(MapBasedBiomeChunkGenerator::new)));
 
     protected final MapBasedBiomeSource biomeSource;
-    protected final MapManager mapManager;
+    private final MapManager mapManager;
 
     private MapBasedBiomeChunkGenerator(MapBasedBiomeSource biomeSource) {
         super(biomeSource);
         this.biomeSource = biomeSource;
-        long seed = 0;
-        this.mapManager = new MapManager(seed);
+        this.mapManager = new MapManager(0);
     }
 
     public static MapBasedBiomeChunkGenerator of(GeneratorSettings settings) {
@@ -74,7 +73,7 @@ public class MapBasedBiomeChunkGenerator extends ChunkGenerator {
                 }
 
                 if (biomeData != null) {
-                    double height = mapManager.getPerlinHeight(pos.getX(), pos.getZ());
+                    double height = mapManager.getHeight(pos.getX(), pos.getZ());
 
                     for (int y = chunk.getMinBuildHeight(); y < chunk.getMinBuildHeight() + 4; y++) {
                         chunk.setBlockState(chunk.getPos().getBlockAt(x, y, z), Blocks.BEDROCK.defaultBlockState(), false);
@@ -147,7 +146,7 @@ public class MapBasedBiomeChunkGenerator extends ChunkGenerator {
 
     @Override
     public int getBaseHeight(int pX, int pZ, @NotNull Heightmap.Types pType, @NotNull LevelHeightAccessor pLevel, @NotNull RandomState pRandom) {
-        return Math.max((int) (1 + biomeSource.getSettings().dirtLevel() + mapManager.getPerlinHeight(pX , pZ)), getSeaLevel());
+        return Math.max((int) (1 + biomeSource.getSettings().dirtLevel() + mapManager.getHeight(pX , pZ)), getSeaLevel());
     }
 
     @Override
@@ -157,7 +156,7 @@ public class MapBasedBiomeChunkGenerator extends ChunkGenerator {
 
     @Override
     public void addDebugScreenInfo(@NotNull List<String> pInfo, @NotNull RandomState pRandom, @NotNull BlockPos pPos) {
-        Color biomeColor = biomeSource.getBiomeData(pPos.getX() >> 4, pPos.getZ() >> 4).color();
+        Color biomeColor = biomeSource.getBiomeData(pPos.getX() >> 2, pPos.getZ() >> 2).color();
         pInfo.add("Biome Color: R:" + biomeColor.getRed() + " G: " + biomeColor.getGreen() + " B: " + biomeColor.getBlue() + " A: " + biomeColor.getAlpha());
     }
 

@@ -19,7 +19,7 @@ public class MapManager {
     public static final BufferedImage MAP_BIOME_IMAGE = getMapBiomeImage();
     @Nullable
     public static final BufferedImage MAP_HEIGHT_IMAGE = getMapHeightImage();
-    private static final int PIXEL_WEIGHT = 32;
+    private static final int PIXEL_WEIGHT = 4;
     private static final int PERLIN_STRETCH = 250;
     private static final int PERLIN_RANGE = 50;
     @NotNull
@@ -87,7 +87,7 @@ public class MapManager {
     }
 
     private static int getColorHeight(int x, int y) {
-        Color color = getHeightColor(x  >> 4, y  >> 4);
+        Color color = getHeightColor(x  >> 2, y  >> 2);
         if (color != null) {
             return color.getBlue() > 0 ? -color.getBlue() : color.getRed();
         } else {
@@ -104,17 +104,30 @@ public class MapManager {
                 (double) (x % PIXEL_WEIGHT) / PIXEL_WEIGHT, (double) (y % PIXEL_WEIGHT) / PIXEL_WEIGHT);
     }
 
+    public double getHeight(int x, int y) {
+        return getPerlinHeight(x, y);
+    }
+
+    private double getPerlinMultiplier(int x, int y) {
+        MapBiome biome = MapBiome.getByColor(getBiomeColor(x >> 2, y >> 2));
+        return biome != null ? biome.perlinModifier() : 1;
+    }
+
+    private double interpolatePerlinMultiplier(int x, int y) {
+        double topLeft = getPerlinMultiplier(x, y);
+        double topRight = getPerlinMultiplier(x + PIXEL_WEIGHT, y);
+        double bottomLeft = getPerlinMultiplier(x, y + PIXEL_WEIGHT);
+        double bottomRight = getPerlinMultiplier(x + PIXEL_WEIGHT, y + PIXEL_WEIGHT);
+        return getHeightBetween(new double[]{topLeft, topRight, bottomLeft, bottomRight},
+                (double) (x % PIXEL_WEIGHT) / PIXEL_WEIGHT, (double) (y % PIXEL_WEIGHT) / PIXEL_WEIGHT);
+    }
+
     public double getPerlinHeight(int x, int y) {
         double perlin = getPerlin(x, y);
         double defHeight;
 
-        // get chunk pos
-        int xChunk = x >> 4;
-        int yChunk = y >> 4;
-
         if (isCoordinateInImages(x, y)) {
-            MapBiome biome = MapBiome.getByColor(getBiomeColor(xChunk, yChunk));
-            perlin *= biome != null ? biome.perlinModifier() : 1;
+            perlin *= interpolatePerlinMultiplier(x, y);
 
             defHeight = getBiomeHeight(x, y);
         } else {
@@ -125,7 +138,7 @@ public class MapManager {
     }
 
     private double getPerlin(int x, int y) {
-        int scale = 32;
+        int scale = 8;
 
         double perlin = noise.noise2((double) x / PERLIN_STRETCH,(double) y / PERLIN_STRETCH) * 4;
         double d = 1;
@@ -141,18 +154,18 @@ public class MapManager {
     }
 
     private static double getHeightBetween(double[] heights, double xPercent, double zPercent) {
-        double h1 = getMiddleHeight(heights[0], heights[1], xPercent);
-        double h2 = getMiddleHeight(heights[2], heights[3], xPercent);
-        return getMiddleHeight(h1, h2, zPercent);
+        double h1 = lerp(heights[0], heights[1], xPercent);
+        double h2 = lerp(heights[2], heights[3], xPercent);
+        return lerp(h1, h2, zPercent);
     }
 
-    private static double getMiddleHeight(double a, double b, double percentage) {
+    private static double lerp(double a, double b, double percentage) {
         return (a * (1 - percentage)) + (b * percentage);
     }
 
     private static boolean isCoordinateInImages(int x, int y) {
-        int xPos = x >> 4;
-        int yPos = y >> 4;
+        int xPos = x >> 2;
+        int yPos = y >> 2;
         return isPosInImage(MAP_BIOME_IMAGE, xPos, yPos) && isPosInImage(MAP_HEIGHT_IMAGE, xPos, yPos);
     }
 
