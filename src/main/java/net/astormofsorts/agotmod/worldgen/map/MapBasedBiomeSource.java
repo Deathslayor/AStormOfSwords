@@ -2,8 +2,8 @@ package net.astormofsorts.agotmod.worldgen.map;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.astormofsorts.agotmod.map.MapBiome;
 import net.astormofsorts.agotmod.map.MapManager;
-import net.astormofsorts.agotmod.worldgen.biome.MapBiomeData;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeSource;
@@ -31,25 +31,24 @@ public class MapBasedBiomeSource extends BiomeSource {
 
     @Override
     protected @NotNull Stream<Holder<Biome>> collectPossibleBiomes() {
-        return this.settings.biomeData().stream().map(MapBiomeData::biome);
+        return this.settings.biomeData().stream();
     }
 
     @Override
     public @NotNull Holder<Biome> getNoiseBiome(int pX, int pY, int pZ, Climate.@NotNull Sampler pSampler) {
-        return getBiomeData(pX, pZ).biome();
+        return this.settings.biomeData().stream().filter(b -> b.is(getBiomeData(pX, pZ).biome())).findAny().orElseThrow();
     }
 
-    public @NotNull MapBiomeData getBiomeData(int pX, int pZ) {
-        Color biomeColor = MapManager.getBiomeColor(pX, pZ);
-
-        for (MapBiomeData biomeData : this.settings.biomeData()) {
+    public @NotNull MapBiome getBiomeData(int pX, int pZ) {
+        Color biomeColor = MapManager.getBiomeColor(pX >> 2, pZ >> 2);
+        for (MapBiome biomeData : MapBiome.BIOME_LIST) {
             if (biomeData.color().getRGB() == biomeColor.getRGB()) {
                 return biomeData;
             }
         }
 
         // this shouldn't be triggered
-        return this.settings.biomeData().get(0);
+        return MapBiome.getDefault();
     }
 
     public GeneratorSettings getSettings() {

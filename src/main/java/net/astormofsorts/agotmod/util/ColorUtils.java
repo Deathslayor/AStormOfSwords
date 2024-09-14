@@ -28,18 +28,4 @@ public class ColorUtils {
         }
         return differences.getOrDefault(lowestDifference, fallback);
     }
-
-    public static double getPerlinColor(SimplexNoise noise, int x, int z, int scale, int xStrech, int yStretch, int range) {
-        double perlin = noise.noise2((double) x / xStrech,(double) z / yStretch);
-        double d = 1;
-        for (int i = 2; i <= scale; i *= 2) {
-            perlin += (1d / i) * noise.noise2((double) x * i / xStrech,(double) z * i / yStretch);
-            d += (1d / i);
-        }
-
-        perlin = perlin / d;
-        perlin *= range;
-
-        return perlin;
-    }
 }

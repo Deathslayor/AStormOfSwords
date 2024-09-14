@@ -2,7 +2,6 @@ package net.astormofsorts.agotmod.map;
 
 import net.astormofsorts.agotmod.AGoTMod;
 import net.astormofsorts.agotmod.datagen.MapProvider;
-import net.astormofsorts.agotmod.datagen.ModDimensionProvider;
 import net.astormofsorts.agotmod.util.SimplexNoise;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -20,9 +19,9 @@ public class MapManager {
     public static final BufferedImage MAP_BIOME_IMAGE = getMapBiomeImage();
     @Nullable
     public static final BufferedImage MAP_HEIGHT_IMAGE = getMapHeightImage();
-    private static final int PIXEL_WEIGHT = 16;
-    private static final int PIXEL_STRETCH = 250;
-    private static final int PIXEL_RANGE = 50;
+    private static final int PIXEL_WEIGHT = 32;
+    private static final int PERLIN_STRETCH = 250;
+    private static final int PERLIN_RANGE = 50;
     @NotNull
     private final SimplexNoise noise;
 
@@ -65,42 +64,38 @@ public class MapManager {
      */
     public static @NotNull Color getBiomeColor(int x, int y) {
         if (MAP_BIOME_IMAGE != null) {
-            // 0 | 0 should be in the middle of the image, comment this lines to move it to the top-left corner of the image
-            x += MAP_BIOME_IMAGE.getWidth() / 2;
-            y += MAP_BIOME_IMAGE.getHeight() / 2;
-
             // check if coordinate is inbound
-            if (isCoordinateInImage(MAP_BIOME_IMAGE, x, y)) {
+            if (isPosInImage(MAP_BIOME_IMAGE, x, y)) {
                 return new Color(MAP_BIOME_IMAGE.getRGB(x, y));
             }
         }
 
         // fallback
-        return ModDimensionProvider.DEFAULT_BIOME_COLOR;
+        return MapBiome.getDefault().color();
     }
 
-    private static @NotNull Color getHeightColor(int x, int y) {
+    private static @Nullable Color getHeightColor(int x, int y) {
         if (MAP_HEIGHT_IMAGE != null) {
-            // 0 | 0 should be in the middle of the image, comment this lines to move it to the top-left corner of the image
-            x += MAP_HEIGHT_IMAGE.getWidth() / 2;
-            y += MAP_HEIGHT_IMAGE.getHeight() / 2;
-
             // check if coordinate is inbound
-            if (isCoordinateInImage(MAP_HEIGHT_IMAGE, x, y)) {
+            if (isPosInImage(MAP_HEIGHT_IMAGE, x, y)) {
                 return new Color(MAP_HEIGHT_IMAGE.getRGB(x, y));
             }
         }
 
         // fallback
-        return new Color(0);
+        return null;
     }
 
-    private static double getColorHeight(int x, int y) {
-        Color color = getHeightColor(x / PIXEL_WEIGHT, y / PIXEL_WEIGHT);
-        return color.getBlue() < 0 ? color.getRed() : -color.getBlue();
+    private static int getColorHeight(int x, int y) {
+        Color color = getHeightColor(x  >> 4, y  >> 4);
+        if (color != null) {
+            return color.getBlue() > 0 ? -color.getBlue() : color.getRed();
+        } else {
+            return MapBiome.getDefault().height();
+        }
     }
 
-    private static double getBiomeHeight(int x, int y) {
+    public static double getBiomeHeight(int x, int y) {
         double topLeft = getColorHeight(x, y);
         double topRight = getColorHeight(x + PIXEL_WEIGHT, y);
         double bottomLeft = getColorHeight(x, y + PIXEL_WEIGHT);
@@ -110,29 +105,37 @@ public class MapManager {
     }
 
     public double getPerlinHeight(int x, int y) {
-        double perlin = getPerlin(x, y) * 0.5;
+        double perlin = getPerlin(x, y);
+        double defHeight;
 
-        // TODO: Replace with something more smooth for water generation
-        if (getBiomeColor(x >> 2, y >> 2).getBlue() == 255) {
-            perlin = 0;
+        // get chunk pos
+        int xChunk = x >> 4;
+        int yChunk = y >> 4;
+
+        if (isCoordinateInImages(x, y)) {
+            MapBiome biome = MapBiome.getByColor(getBiomeColor(xChunk, yChunk));
+            perlin *= biome != null ? biome.perlinModifier() : 1;
+
+            defHeight = getBiomeHeight(x, y);
+        } else {
+            defHeight = MapBiome.getDefault().height();
         }
 
-        double defHeight = getBiomeHeight(x >> 2, y >> 2);
         return perlin + defHeight;
     }
 
     private double getPerlin(int x, int y) {
         int scale = 32;
 
-        double perlin = noise.noise2((double) x / PIXEL_STRETCH,(double) y / PIXEL_STRETCH);
+        double perlin = noise.noise2((double) x / PERLIN_STRETCH,(double) y / PERLIN_STRETCH) * 4;
         double d = 1;
         for (int i = 2; i <= scale; i *= 2) {
-            perlin += (1d / i) * noise.noise2((double) x * i / PIXEL_STRETCH,(double) y * i / PIXEL_STRETCH);
+            perlin += (1d / i) * noise.noise2((double) x * i / PERLIN_STRETCH,(double) y * i / PERLIN_STRETCH) * 4;
             d += (1d / i);
         }
 
         perlin = perlin / d;
-        perlin *= PIXEL_RANGE;
+        perlin *= PERLIN_RANGE;
 
         return perlin;
     }
@@ -147,7 +150,13 @@ public class MapManager {
         return (a * (1 - percentage)) + (b * percentage);
     }
 
-    private static boolean isCoordinateInImage(BufferedImage image, int x, int y) {
+    private static boolean isCoordinateInImages(int x, int y) {
+        int xPos = x >> 4;
+        int yPos = y >> 4;
+        return isPosInImage(MAP_BIOME_IMAGE, xPos, yPos) && isPosInImage(MAP_HEIGHT_IMAGE, xPos, yPos);
+    }
+
+    private static boolean isPosInImage(BufferedImage image, int x, int y) {
         return x >= 0 && y >= 0 && x < image.getWidth() && y < image.getHeight();
     }
 }

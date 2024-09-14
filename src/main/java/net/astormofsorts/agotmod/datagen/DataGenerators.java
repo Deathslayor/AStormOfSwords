@@ -52,6 +52,6 @@ public class DataGenerators {
         generator.addProvider(event.includeServer(), new ModWorldGenProvider(packOutput, lookupProvider));
 
         // World gen maps
-        generator.addProvider(true, new MapProvider(packOutput, lookupProvider));
+        generator.addProvider(true, new MapProvider(packOutput));
     }
 }

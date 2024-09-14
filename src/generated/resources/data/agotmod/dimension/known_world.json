@@ -4,43 +4,17 @@
     "type": "agotmod:map_based_chunk_generator",
     "biome_source": {
       "settings": {
-        "biome_data": [
-          {
-            "biome": "minecraft:plains",
-            "color": -16711936,
-            "deepslate_block": "minecraft:deepslate",
-            "dirt_block": "minecraft:dirt",
-            "grass_block": "minecraft:grass_block",
-            "height": 64,
-            "is_water": false,
-            "stone_block": "minecraft:stone"
-          },
-          {
-            "biome": "minecraft:desert",
-            "color": -256,
-            "deepslate_block": "minecraft:deepslate",
-            "dirt_block": "minecraft:sandstone",
-            "grass_block": "minecraft:sand",
-            "height": 75,
-            "is_water": false,
-            "stone_block": "minecraft:stone"
-          },
-          {
-            "biome": "minecraft:ocean",
-            "color": -16776961,
-            "deepslate_block": "minecraft:deepslate",
-            "dirt_block": "minecraft:water",
-            "grass_block": "minecraft:water",
-            "height": 50,
-            "is_water": true,
-            "stone_block": "minecraft:stone"
-          }
+        "biomes": [
+          "minecraft:ocean",
+          "minecraft:warm_ocean",
+          "minecraft:plains",
+          "minecraft:desert"
         ],
         "deepslate_level": 0,
         "dirt_level": 66,
         "height": 256,
         "min_y": -32,
-        "sea_level": 54
+        "sea_level": 64
       }
     }
   }

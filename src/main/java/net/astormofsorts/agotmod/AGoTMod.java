@@ -13,6 +13,7 @@ import net.astormofsorts.agotmod.entity.client.norththewall.WightRenderer;
 import net.astormofsorts.agotmod.item.ModItemProperties;
 import net.astormofsorts.agotmod.item.ModItems;
 import net.astormofsorts.agotmod.item.creativetabs.*;
+import net.astormofsorts.agotmod.map.MapBiome;
 import net.astormofsorts.agotmod.sound.ModSounds;
 import net.astormofsorts.agotmod.villager.ModVillagers;
 import net.astormofsorts.agotmod.worldgen.map.MapBasedBiomeChunkGenerator;
@@ -44,6 +45,9 @@ public class AGoTMod {
     // Constructor for AGoTMod class
     public AGoTMod() {
         MixinExtrasBootstrap.init();
+
+        // initialize Biomes
+        MapBiome.initialize();
 
         // Get the mod event bus
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();

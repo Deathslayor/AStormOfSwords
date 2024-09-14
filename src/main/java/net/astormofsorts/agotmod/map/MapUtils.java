@@ -7,16 +7,16 @@ import java.awt.image.BufferedImage;
 import java.util.Map;
 
 public class MapUtils {
-    public static BufferedImage removeInvalidColors(BufferedImage map, Map<Color, Integer> heights) {
-        // remove not registered colors
+    public static BufferedImage removeInvalidColors(BufferedImage map, Iterable<Color> colorList) {
         BufferedImage valid_in = new BufferedImage(map.getWidth(), map.getHeight(), BufferedImage.TYPE_INT_ARGB);
         for (int x = 0; x < valid_in.getWidth(); x++) {
             for (int y = 0; y < valid_in.getHeight(); y++) {
                 Color in = new Color(map.getRGB(x, y));
-                Color out = ColorUtils.getNearestColor(in, heights.keySet(), new Color(-1));
+                Color out = ColorUtils.getNearestColor(in, colorList, new Color(-1));
                 valid_in.setRGB(x, y, out.getRGB());
             }
         }
+
 
         return valid_in;
     }

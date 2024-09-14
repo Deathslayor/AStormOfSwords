@@ -2,11 +2,10 @@ package net.astormofsorts.agotmod.worldgen.map;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.astormofsorts.agotmod.map.MapBiome;
 import net.astormofsorts.agotmod.map.MapManager;
-import net.astormofsorts.agotmod.worldgen.biome.MapBiomeData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.WorldGenRegion;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.biome.Biome;
@@ -19,7 +18,6 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.*;
 import net.minecraft.world.level.levelgen.blending.Blender;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.util.List;
@@ -32,14 +30,13 @@ public class MapBasedBiomeChunkGenerator extends ChunkGenerator {
     ).apply(instance, instance.stable(MapBasedBiomeChunkGenerator::new)));
 
     protected final MapBasedBiomeSource biomeSource;
-    @Nullable
-    protected MapManager mapManager = null;
-    @Nullable
-    private Long seed = null;
+    protected final MapManager mapManager;
 
     private MapBasedBiomeChunkGenerator(MapBasedBiomeSource biomeSource) {
         super(biomeSource);
         this.biomeSource = biomeSource;
+        long seed = 0;
+        this.mapManager = new MapManager(seed);
     }
 
     public static MapBasedBiomeChunkGenerator of(GeneratorSettings settings) {
@@ -62,22 +59,15 @@ public class MapBasedBiomeChunkGenerator extends ChunkGenerator {
      */
     @Override
     public void buildSurface(@NotNull WorldGenRegion pLevel, @NotNull StructureManager pStructureManager, @NotNull RandomState pRandom, @NotNull ChunkAccess chunk) {
-        if (this.seed == null) {
-            this.seed = pLevel.getSeed();
-        }
-        if (this.mapManager == null) {
-            this.mapManager = new MapManager(this.seed);
-        }
-
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
-                MapBiomeData biomeData = null;
+                MapBiome biomeData = null;
 
                 BlockPos pos = chunk.getPos().getBlockAt(x, chunk.getHeight(), z);
 
                 Holder<Biome> biomeHolder = pLevel.getBiome(pos);
-                for (MapBiomeData biomeDataI : this.biomeSource.getSettings().biomeData()) {
-                    if (biomeDataI.biome() == biomeHolder) {
+                for (MapBiome biomeDataI : MapBiome.BIOME_LIST) {
+                    if (biomeHolder.is(biomeDataI.biome())) {
                         biomeData = biomeDataI;
                         break;
                     }
@@ -91,25 +81,24 @@ public class MapBasedBiomeChunkGenerator extends ChunkGenerator {
                     }
 
                     for (int y = chunk.getMinBuildHeight() + 4; y < biomeSource.getSettings().deepslateLevel(); y++) {
-                        chunk.setBlockState(chunk.getPos().getBlockAt(x, y, z), pLevel.registryAccess().registryOrThrow(Registries.BLOCK).getOrThrow(biomeData.deepSlateBlock()).defaultBlockState(), false);
+                        chunk.setBlockState(chunk.getPos().getBlockAt(x, y, z), Blocks.DEEPSLATE.defaultBlockState(), false);
                     }
 
                     double dirtHeight = this.biomeSource.getSettings().dirtLevel() + height - 1;
 
                     for (int y = this.biomeSource.getSettings().deepslateLevel(); y < (dirtHeight / 2); y++) {
-                        chunk.setBlockState(chunk.getPos().getBlockAt(x, y, z), pLevel.registryAccess().registryOrThrow(Registries.BLOCK).getOrThrow(biomeData.stoneBlock()).defaultBlockState(), false);
+                        chunk.setBlockState(chunk.getPos().getBlockAt(x, y, z), biomeData.stoneBlock().defaultBlockState(), false);
                     }
 
                     // upper stone
                     for (int y = (int) (dirtHeight / 2); y <= dirtHeight; y++) {
-                        chunk.setBlockState(chunk.getPos().getBlockAt(x, y, z), pLevel.registryAccess().registryOrThrow(Registries.BLOCK).getOrThrow(biomeData.stoneBlock()).defaultBlockState(), false);
+                        chunk.setBlockState(chunk.getPos().getBlockAt(x, y, z), biomeData.stoneBlock().defaultBlockState(), false);
                     }
 
                     for (int y = (int) (this.biomeSource.getSettings().dirtLevel() - 4 + height); y < this.biomeSource.getSettings().dirtLevel() + height; y++) {
-                        chunk.setBlockState(chunk.getPos().getBlockAt(x, y, z), pLevel.registryAccess().registryOrThrow(Registries.BLOCK).getOrThrow(biomeData.dirtBlock()).defaultBlockState(), false);
+                        chunk.setBlockState(chunk.getPos().getBlockAt(x, y, z), biomeData.dirtBlock().defaultBlockState(), false);
                     }
-
-                    Block grassBlock = pLevel.registryAccess().registryOrThrow(Registries.BLOCK).getOrThrow(biomeData.grassBlock());
+                    Block grassBlock = biomeData.grassBlock();
 
                     // no grass underwater
                     if (this.biomeSource.getSettings().dirtLevel() + height < getSeaLevel() && grassBlock == Blocks.GRASS_BLOCK) {
@@ -158,7 +147,7 @@ public class MapBasedBiomeChunkGenerator extends ChunkGenerator {
 
     @Override
     public int getBaseHeight(int pX, int pZ, @NotNull Heightmap.Types pType, @NotNull LevelHeightAccessor pLevel, @NotNull RandomState pRandom) {
-        return (int) (1 + biomeSource.getSettings().dirtLevel() + Math.abs((mapManager != null ? mapManager.getPerlinHeight(pX, pZ) : 0)));
+        return Math.max((int) (1 + biomeSource.getSettings().dirtLevel() + mapManager.getPerlinHeight(pX , pZ)), getSeaLevel());
     }
 
     @Override
@@ -168,7 +157,7 @@ public class MapBasedBiomeChunkGenerator extends ChunkGenerator {
 
     @Override
     public void addDebugScreenInfo(@NotNull List<String> pInfo, @NotNull RandomState pRandom, @NotNull BlockPos pPos) {
-        Color biomeColor = MapManager.getBiomeColor(pPos.getX(), pPos.getZ());
+        Color biomeColor = biomeSource.getBiomeData(pPos.getX() >> 4, pPos.getZ() >> 4).color();
         pInfo.add("Biome Color: R:" + biomeColor.getRed() + " G: " + biomeColor.getGreen() + " B: " + biomeColor.getBlue() + " A: " + biomeColor.getAlpha());
     }
 
