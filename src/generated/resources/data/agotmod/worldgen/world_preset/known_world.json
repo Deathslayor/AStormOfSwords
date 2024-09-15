@@ -1,0 +1,26 @@
+{
+  "dimensions": {
+    "minecraft:overworld": {
+      "type": "agotmod:known_world_type",
+      "generator": {
+        "type": "agotmod:map_based_chunk_generator",
+        "biome_source": {
+          "settings": {
+            "biomes": [
+              "minecraft:ocean",
+              "minecraft:warm_ocean",
+              "minecraft:plains",
+              "minecraft:desert",
+              "minecraft:stony_peaks"
+            ],
+            "deepslate_level": 0,
+            "dirt_level": 66,
+            "height": 256,
+            "min_y": -32,
+            "sea_level": 64
+          }
+        }
+      }
+    }
+  }
+}

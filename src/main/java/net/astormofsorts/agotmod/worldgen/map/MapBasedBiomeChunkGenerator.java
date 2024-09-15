@@ -20,7 +20,6 @@ import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.*;
 import net.minecraft.world.level.levelgen.blending.Blender;
-import net.minecraft.world.level.levelgen.synth.SimplexNoise;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;

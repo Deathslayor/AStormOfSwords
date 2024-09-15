@@ -17,10 +17,8 @@ import java.util.function.BiFunction;
 
 
 public class MapManager {
-    @Nullable
-    public static final BufferedImage MAP_BIOME_IMAGE = getMapBiomeImage();
-    @Nullable
-    public static final BufferedImage MAP_HEIGHT_IMAGE = getMapHeightImage();
+    private static final BufferedImage MAP_BIOME_IMAGE = getMapBiomeImage();
+    private static final BufferedImage MAP_HEIGHT_IMAGE = getMapHeightImage();
     private static final int PIXEL_WEIGHT = 16;
     private static final int PERLIN_STRETCH = 250;
     private static final int PERLIN_RANGE = 8;
@@ -31,30 +29,22 @@ public class MapManager {
         this.noise = new SimplexNoise(randSource);
     }
 
-    @Nullable
     private static BufferedImage getMapBiomeImage() {
         URL biomeMapUrl = AGoTMod.class.getResource("/" + MapProvider.BIOME_MAP_PATH);
         try {
-            if (biomeMapUrl != null) {
-                return ImageIO.read(biomeMapUrl);
-            }
+            return ImageIO.read(Objects.requireNonNull(biomeMapUrl));
         } catch (IOException e) {
-            AGoTMod.LOGGER.error("Caught an error while reading the biome map!", e);
+            throw new RuntimeException("Caught an error while reading the biome map!", e);
         }
-        return null;
     }
 
-    @Nullable
     private static BufferedImage getMapHeightImage() {
         URL heightMapUrl = AGoTMod.class.getResource("/" + MapProvider.HEIGHT_MAP_PATH);
         try {
-            if (heightMapUrl != null) {
-                return ImageIO.read(Objects.requireNonNull(heightMapUrl));
-            }
+            return ImageIO.read(Objects.requireNonNull(heightMapUrl));
         } catch (Exception e) {
-            AGoTMod.LOGGER.error("Caught an error while reading the height map!", e);
+            throw new RuntimeException("Caught an error while reading the height map!", e);
         }
-        return null;
     }
 
     /**
@@ -64,24 +54,24 @@ public class MapManager {
      * @param y this should be a block position z
      * @return Returns the biome color
      */
-    public static @Nullable Color getBiomeColor(int x, int y) {
-        if (MAP_BIOME_IMAGE != null) {
-            // check if coordinate is inbound
-            if (isPosInImage(MAP_BIOME_IMAGE, x, y)) {
-                return new Color(MAP_BIOME_IMAGE.getRGB(x, y));
-            }
+    public static @Nullable Color getBiomeColor(int pX, int pY) {
+        int x = xOffset(pX);
+        int y = yOffset(pY);
+        // check if coordinate is inbound
+        if (isPosInImage(MAP_BIOME_IMAGE, x, y)) {
+            return new Color(MAP_BIOME_IMAGE.getRGB(x, y));
         }
 
         // fallback
         return null;
     }
 
-    private static @Nullable Color getHeightColor(int x, int y) {
-        if (MAP_HEIGHT_IMAGE != null) {
-            // check if coordinate is inbound
-            if (isPosInImage(MAP_HEIGHT_IMAGE, x, y)) {
-                return new Color(MAP_HEIGHT_IMAGE.getRGB(x, y));
-            }
+    private static @Nullable Color getHeightColor(int pX, int pY) {
+        int x = xOffset(pX);
+        int y = yOffset(pY);
+        // check if coordinate is inbound
+        if (isPosInImage(MAP_HEIGHT_IMAGE, x, y)) {
+            return new Color(MAP_HEIGHT_IMAGE.getRGB(x, y));
         }
 
         // fallback
@@ -98,14 +88,14 @@ public class MapManager {
     }
 
     public double getHeight(int x, int y) {
-        return getPerlinHeight(x, y);
+        return getPerlinHeight(x,y);
     }
 
     private double getPerlinMultiplier(int x, int y) {
         return MapBiome.getByColor(getBiomeColor(x >> 2, y >> 2)).perlinModifier();
     }
 
-    public double getPerlinHeight(int x, int y) {
+    private double getPerlinHeight(int x, int y) {
         double perlin = getPerlin(x, y) * getTransformedMapValue(x, y, this::getPerlinMultiplier);
         double defHeight = getTransformedMapValue(x, y, (a, b) -> (double) getColorHeight(a, b));
         return perlin + defHeight;
@@ -167,5 +157,14 @@ public class MapManager {
 
     private static boolean isPosInImage(BufferedImage image, int x, int y) {
         return x >= 0 && y >= 0 && x < image.getWidth() && y < image.getHeight();
+    }
+
+
+    // used to move the map in order to spawn in the center
+    public static int xOffset(int x) {
+        return x + (Objects.requireNonNull(MAP_BIOME_IMAGE).getWidth() / 2);
+    }
+    public static int yOffset(int y) {
+        return y + (Objects.requireNonNull(MAP_BIOME_IMAGE).getHeight() / 2);
     }
 }

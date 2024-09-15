@@ -13,8 +13,10 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.dimension.LevelStem;
+import net.minecraft.world.level.levelgen.presets.WorldPreset;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.OptionalLong;
 
 import static net.astormofsorts.agotmod.AGoTMod.MOD_ID;
@@ -23,20 +25,27 @@ public class ModDimensionProvider {
     public final static ResourceLocation DIMENSION = new ResourceLocation(MOD_ID, "known_world");
     public final static ResourceKey<DimensionType> DIMENSION_TYPE = ResourceKey.create(Registries.DIMENSION_TYPE, new ResourceLocation(MOD_ID, "known_world_type"));
     public final static ResourceKey<LevelStem> DIMENSION_STEM = ResourceKey.create(Registries.LEVEL_STEM, DIMENSION);
+    public final static ResourceKey<WorldPreset> KNOWN_WORLD_PRESET = ResourceKey.create(Registries.WORLD_PRESET, DIMENSION);
 
     public static void bootstrapType(BootstapContext<DimensionType> context) {
         context.register(DIMENSION_TYPE, new DimensionType(OptionalLong.empty(), true, false, false, true, 1, true, false, -64, 384, 384, BlockTags.INFINIBURN_OVERWORLD, new ResourceLocation(MOD_ID, "renderer"), 0, new DimensionType.MonsterSettings(false, false, UniformInt.of(0, 0), 0)));
     }
 
     public static void bootstrapStem(BootstapContext<LevelStem> context) {
-        HolderGetter<Biome> biomeRegistry = context.lookup(Registries.BIOME);
+        context.register(DIMENSION_STEM, getDimensionStem(context.lookup(Registries.DIMENSION_TYPE), context.lookup(Registries.BIOME)));
+    }
 
-        context.register(DIMENSION_STEM, new LevelStem(context.lookup(Registries.DIMENSION_TYPE).getOrThrow(DIMENSION_TYPE), MapBasedBiomeChunkGenerator.of(new GeneratorSettings(new ArrayList<>() {
+    public static void boostrapPreset(BootstapContext<WorldPreset> context) {
+        context.register(KNOWN_WORLD_PRESET, new WorldPreset(Map.of(LevelStem.OVERWORLD, getDimensionStem(context.lookup(Registries.DIMENSION_TYPE), context.lookup(Registries.BIOME)))));
+    }
+
+    private static LevelStem getDimensionStem(HolderGetter<DimensionType> dimTypeRegistry, HolderGetter<Biome> biomeRegistry) {
+        return new LevelStem(dimTypeRegistry.getOrThrow(DIMENSION_TYPE), MapBasedBiomeChunkGenerator.of(new GeneratorSettings(new ArrayList<>() {
             {
                 for (MapBiome biome : MapBiome.BIOME_LIST) {
                     add(biomeRegistry.getOrThrow(biome.biome()));
                 }
             }
-        }, 0, 66, -32, 256, 64))));
+        }, 0, 66, -32, 256, 64)));
     }
 }

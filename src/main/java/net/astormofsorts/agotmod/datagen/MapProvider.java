@@ -2,6 +2,7 @@ package net.astormofsorts.agotmod.datagen;
 
 import com.google.common.hash.Hashing;
 import com.google.common.hash.HashingOutputStream;
+import com.mojang.logging.LogUtils;
 import net.astormofsorts.agotmod.AGoTMod;
 import net.astormofsorts.agotmod.map.MapBiome;
 import net.astormofsorts.agotmod.map.MapUtils;
@@ -32,7 +33,6 @@ public class MapProvider implements DataProvider {
             throw new RuntimeException("Failed to load biome map located at: " + (orignalMapUrl != null ? orignalMapUrl.getPath() : "invalid location"), e);
         }
     }
-    public static final String UPSACLE_MAP_PATH = "assets/agotmod/map_orignal_upscaled.png";
     public static final String BIOME_MAP_PATH = "assets/agotmod/map_biome.png";
     public static final String HEIGHT_MAP_PATH = "assets/agotmod/map_height.png";
 
@@ -46,7 +46,6 @@ public class MapProvider implements DataProvider {
     @Override
     public @NotNull CompletableFuture<?> run(@NotNull CachedOutput cache) {
         return CompletableFuture.runAsync(() -> {
-            System.out.println("Generating map images...");
             Map<Color, Integer> heights = MapBiome.toHeightMap(MapBiome.BIOME_LIST);
             try {
                 BufferedImage upScaled = MapUtils.scaleImage(ORGINAL_MAP_IMAGE, 4);
@@ -68,7 +67,6 @@ public class MapProvider implements DataProvider {
                     ImageIO.write(blurredHeightmap, "PNG", hashStream);
                     cache.writeIfNeeded(output, baos.toByteArray(), hashStream.hash());
                 }
-                System.out.println("Successfully generated map images!");
             } catch (Exception e) {
                 // should be fine since it's async
                 throw new RuntimeException(e);

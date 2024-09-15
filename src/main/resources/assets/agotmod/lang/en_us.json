@@ -220,5 +220,7 @@
   "creativetab.agot_tab_ingredients": "aSoS Ingredients",
   "creativetab.agot_tab_building_blocks": "aSoS Building Blocks",
   "creativetab.agot_tab_natural_blocks": "aSoS Natural Blocks",
-  "creativetab.agot_tab_archery": "aSoS Archery"
+  "creativetab.agot_tab_archery": "aSoS Archery",
+
+  "generator.agotmod.known_world": "Known World"
 }
