@@ -1,5 +1,5 @@
-// 1.20.1	2024-09-15T12:43:30.422918967	Registries
-4048132e44308866318d93a7043694dbf4cd90f7 data/agotmod/dimension/known_world.json
+// 1.20.1	2024-09-15T13:19:03.196119772	Registries
+7494adb01f9f28885b073a6abee55c68d8f145db data/agotmod/dimension/known_world.json
 d9b8841fb4f70112819e531f1d554f4fa2097372 data/agotmod/dimension_type/known_world_type.json
 93e760cad11de5820019b78ad58c1464485f3b41 data/agotmod/forge/biome_modifier/add_tin_ore.json
 bbbb83d5636c6d2773c315a21d253009c920a117 data/agotmod/forge/biome_modifier/create_weirwood_tree.json
@@ -9,4 +9,4 @@ cfe58f15dffd7cd9a827082b5872596243c1a9d5 data/agotmod/worldgen/configured_featur
 5996f666ddb2112e1e1ade5d0703100ccd7002db data/agotmod/worldgen/configured_feature/weirwood.json
 174bd861a214e5e9e447f57b86f92b9deca5e42d data/agotmod/worldgen/placed_feature/tin_ore_placed.json
 9dae1e269ebe83e946cbd785b286362c8327f171 data/agotmod/worldgen/placed_feature/weirwood.json
-6d8fb29f2291d3ae235139f1b81e94f1462bd7f1 data/agotmod/worldgen/world_preset/known_world.json
+27ae4ededca75d5d127248d607340b1845b74a40 data/agotmod/worldgen/world_preset/known_world.json

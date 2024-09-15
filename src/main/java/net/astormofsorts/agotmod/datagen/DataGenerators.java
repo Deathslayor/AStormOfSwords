@@ -22,6 +22,9 @@ public class DataGenerators {
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
+        // World gen maps
+        generator.addProvider(true, new MapProvider(packOutput));
+
         // ADDS MOD RECIPES
         // Add a provider for generating mod recipes
         generator.addProvider(event.includeServer(), new ModRecipeProvider(packOutput));
@@ -50,8 +53,5 @@ public class DataGenerators {
 
         // Add a provider for generating custom world generation features
         generator.addProvider(event.includeServer(), new ModWorldGenProvider(packOutput, lookupProvider));
-
-        // World gen maps
-        generator.addProvider(true, new MapProvider(packOutput));
     }
 }

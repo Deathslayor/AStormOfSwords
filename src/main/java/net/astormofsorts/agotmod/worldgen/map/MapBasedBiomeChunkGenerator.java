@@ -162,7 +162,7 @@ public class MapBasedBiomeChunkGenerator extends ChunkGenerator {
 
     @Override
     public void addDebugScreenInfo(@NotNull List<String> pInfo, @NotNull RandomState pRandom, @NotNull BlockPos pPos) {
-        Color biomeColor = biomeSource.getBiomeData(pPos.getX() >> 2, pPos.getZ() >> 2).color();
+        Color biomeColor = new Color(biomeSource.getBiomeData(pPos.getX() >> 2, pPos.getZ() >> 2).color());
         pInfo.add("Biome Color: R:" + biomeColor.getRed() + " G: " + biomeColor.getGreen() + " B: " + biomeColor.getBlue() + " A: " + biomeColor.getAlpha());
     }
 

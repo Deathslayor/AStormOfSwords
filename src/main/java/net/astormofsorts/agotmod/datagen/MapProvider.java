@@ -46,9 +46,10 @@ public class MapProvider implements DataProvider {
     @Override
     public @NotNull CompletableFuture<?> run(@NotNull CachedOutput cache) {
         return CompletableFuture.runAsync(() -> {
-            Map<Color, Integer> heights = MapBiome.toHeightMap(MapBiome.BIOME_LIST);
+            Map<Integer, Integer> heights = MapBiome.toHeightMap(MapBiome.BIOME_LIST);
             try {
-                BufferedImage upScaled = MapUtils.scaleImage(ORGINAL_MAP_IMAGE, 4);
+                BufferedImage validIn = MapUtils.approachColors(ORGINAL_MAP_IMAGE, heights.keySet().stream().map(Color::new).toList());
+                BufferedImage upScaled = MapUtils.scaleImage(validIn, 2);
                 BufferedImage validMap = MapUtils.removeInvalidColors(upScaled, heights.keySet());
                 {
                     Path output = packOutput.getOutputFolder().resolve(BIOME_MAP_PATH);
@@ -56,6 +57,7 @@ public class MapProvider implements DataProvider {
                     HashingOutputStream hashStream = new HashingOutputStream(Hashing.sha1(), baos);
                     ImageIO.write(validMap, "PNG", hashStream);
                     cache.writeIfNeeded(output, baos.toByteArray(), hashStream.hash());
+                    LogUtils.getLogger().info("Generated Biome Map.");
                 }
 
                 BufferedImage heightmap = MapUtils.generateHeightMap(validMap, heights);
@@ -66,6 +68,7 @@ public class MapProvider implements DataProvider {
                     HashingOutputStream hashStream = new HashingOutputStream(Hashing.sha1(), baos);
                     ImageIO.write(blurredHeightmap, "PNG", hashStream);
                     cache.writeIfNeeded(output, baos.toByteArray(), hashStream.hash());
+                    LogUtils.getLogger().info("Generated Height Map.");
                 }
             } catch (Exception e) {
                 // should be fine since it's async

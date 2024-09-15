@@ -7,11 +7,14 @@
         "biome_source": {
           "settings": {
             "biomes": [
+              "minecraft:deep_ocean",
               "minecraft:ocean",
-              "minecraft:warm_ocean",
+              "minecraft:river",
+              "minecraft:stony_peaks",
+              "minecraft:dark_forest",
+              "minecraft:forest",
               "minecraft:plains",
-              "minecraft:desert",
-              "minecraft:stony_peaks"
+              "minecraft:swamp"
             ],
             "deepslate_level": 0,
             "dirt_level": 66,

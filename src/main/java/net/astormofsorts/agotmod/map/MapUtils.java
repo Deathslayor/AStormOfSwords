@@ -1,67 +1,77 @@
 package net.astormofsorts.agotmod.map;
 
+import net.astormofsorts.agotmod.util.ColorUtils;
+import net.astormofsorts.agotmod.util.ImageScaler;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ConvolveOp;
 import java.awt.image.Kernel;
-import java.util.Collection;
-import java.util.Map;
-import java.util.stream.Stream;
+import java.util.*;
 
 public class MapUtils {
-    public static BufferedImage removeInvalidColors(BufferedImage map, Collection<Color> colorList) {
+    public static BufferedImage approachColors(BufferedImage inImage, Collection<Color> colors) {
+        BufferedImage output = new BufferedImage(inImage.getWidth(), inImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        for (int x = 0; x < output.getWidth(); x++) {
+            for (int y = 0; y < output.getHeight(); y++) {
+                Color in = new Color(inImage.getRGB(x, y));
+                Color out = ColorUtils.getNearestColor(in, colors, null);
+                if (out != null) {
+                    output.setRGB(x, y, out.getRGB());
+                }
+            }
+        }
+
+        return output;
+    }
+
+    public static BufferedImage removeInvalidColors(BufferedImage map, Collection<Integer> colorList) {
         BufferedImage filtered = new BufferedImage(map.getWidth(), map.getHeight(), BufferedImage.TYPE_INT_ARGB);
         for (int x = 0; x < filtered.getWidth(); x++) {
             for (int y = 0; y < filtered.getHeight(); y++) {
-                Color in = new Color(map.getRGB(x, y));
+                int in = map.getRGB(x, y);
                 if (colorList.contains(in)) {
-                    filtered.setRGB(x, y, in.getRGB());
+                    filtered.setRGB(x, y, in);
                 }
             }
         }
 
         BufferedImage valid_only = new BufferedImage(filtered.getWidth(), filtered.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        valid_only.setData(filtered.getData());
 
-        for (int x = 0; x < filtered.getWidth(); x++) {
-            for (int y = 0; y < filtered.getHeight(); y++) {
-                int originalColor = filtered.getRGB(x, y);
-                Color originalPixel = new Color(originalColor, true);
-
-                // If the pixel already has a non-transparent color, copy it to the output directly
-                if (originalPixel.getAlpha() != 0) {
-                    valid_only.setRGB(x, y, originalColor);
-                    continue;
-                }
-
-                // Stream to find the nearest non-transparent neighbor pixel
-                Stream<SnakePixelStream.Pixel> pixelStream = new SnakePixelStream(filtered.getWidth(), filtered.getHeight(), x, y).stream();
-                final int finalX = x;
-                final int finalY = y;
-
-                // This flag will stop the search once a valid pixel is found
-                boolean foundValidPixel = pixelStream
-                        .filter(pixel -> {
-                            // Avoid checking the center pixel itself
-                            return !(pixel.x() == finalX && pixel.y() == finalY);
-                        })
-                        .anyMatch(pixel -> {
-                            int neighborColor = filtered.getRGB(pixel.x(), pixel.y());
-                            Color neighborPixel = new Color(neighborColor, true);
-                            if (neighborPixel.getAlpha() != 0) {
-                                valid_only.setRGB(finalX, finalY, neighborColor); // Set the first valid color found
-                                return true; // Stop searching
-                            }
-                            return false;
-                        });
-
-                // If no valid pixel was found within the neighborhood, throw an error
-                if (!foundValidPixel) {
-                    throw new RuntimeException("No valid color could be found for pixel at: x: " + x + " y: " + y);
-                }
+        // use random with seed 0 so the image is always the same
+        Random random = new Random(0);
+        for (int x = 0; x < valid_only.getWidth(); x++) {
+            for (int y = 0; y < valid_only.getHeight(); y++) {
+                fillColor(valid_only, x, y, MapBiome.getDefault().color(), random);
             }
         }
 
         return valid_only;
+    }
+
+    private static final int[][] directions = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
+
+    private static int fillColor(BufferedImage image, int x, int y, int fallback, Random random) {
+        int rgb = image.getRGB(x, y);
+
+        if ((rgb >> 24) == 0x00) {
+            int[] dirs = directions[random.nextInt(directions.length - 1)];
+            int x2 = x + dirs[0];
+            int y2 = y + dirs[1];
+
+            // check if coordinat are inbound
+            if (x2 < 0 || y2 < 0 || x2 >= image.getWidth() || y2 >= image.getHeight()) {
+                image.setRGB(x, y, fallback);
+                return fallback;
+            } else {
+                int out = fillColor(image, x2, y2, fallback, random);
+                image.setRGB(x, y, out);
+                return out;
+            }
+        } else {
+            return rgb;
+        }
     }
 
     public static BufferedImage blur(BufferedImage image) {
@@ -81,31 +91,16 @@ public class MapUtils {
        return blurOp.filter(image, null);
     }
 
-    public static BufferedImage scaleImage(BufferedImage originalImage, int scaleFactor) {
-        int width = originalImage.getWidth() * scaleFactor;
-        int height = originalImage.getHeight() * scaleFactor;
-
-        BufferedImage scaledImage = new BufferedImage(width, height, originalImage.getType());
-
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                int origX = x / scaleFactor;
-                int origY = y / scaleFactor;
-
-                int rgb = originalImage.getRGB(origX, origY);
-                scaledImage.setRGB(x, y, rgb);
-            }
-        }
-
-        return scaledImage;
+    public static BufferedImage scaleImage(BufferedImage originalImage, int factor) {
+        return ImageScaler.scaleImage(originalImage, factor);
     }
 
-    public static BufferedImage generateHeightMap(BufferedImage valid_in, Map<Color, Integer> heights) {
+    public static BufferedImage generateHeightMap(BufferedImage valid_in, Map<Integer, Integer> heights) {
         // generate generic heightmap
         BufferedImage gen_heightmap = new BufferedImage(valid_in.getWidth(), valid_in.getHeight(), BufferedImage.TYPE_INT_ARGB);
         for (int x = 0; x < gen_heightmap.getWidth(); x++) {
             for (int y = 0; y < gen_heightmap.getHeight(); y++) {
-                Color in = new Color(valid_in.getRGB(x, y));
+                int in =valid_in.getRGB(x, y);
                 int height = heights.get(in);
                 Color out = height > 0 ? new Color(height, 0, 0) : new Color(0, 0, Math.abs(height));
                 gen_heightmap.setRGB(x, y, out.getRGB());
