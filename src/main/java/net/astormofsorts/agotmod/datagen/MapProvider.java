@@ -32,7 +32,7 @@ public class MapProvider implements DataProvider {
             throw new RuntimeException("Failed to load biome map located at: " + (orignalMapUrl != null ? orignalMapUrl.getPath() : "invalid location"), e);
         }
     }
-
+    public static final String UPSACLE_MAP_PATH = "assets/agotmod/map_orignal_upscaled.png";
     public static final String BIOME_MAP_PATH = "assets/agotmod/map_biome.png";
     public static final String HEIGHT_MAP_PATH = "assets/agotmod/map_height.png";
 
@@ -46,10 +46,10 @@ public class MapProvider implements DataProvider {
     @Override
     public @NotNull CompletableFuture<?> run(@NotNull CachedOutput cache) {
         return CompletableFuture.runAsync(() -> {
+            System.out.println("Generating map images...");
             Map<Color, Integer> heights = MapBiome.toHeightMap(MapBiome.BIOME_LIST);
-
             try {
-                BufferedImage upScaled = MapUtils.upScale(ORGINAL_MAP_IMAGE, 4);
+                BufferedImage upScaled = MapUtils.scaleImage(ORGINAL_MAP_IMAGE, 4);
                 BufferedImage validMap = MapUtils.removeInvalidColors(upScaled, heights.keySet());
                 {
                     Path output = packOutput.getOutputFolder().resolve(BIOME_MAP_PATH);
@@ -60,7 +60,7 @@ public class MapProvider implements DataProvider {
                 }
 
                 BufferedImage heightmap = MapUtils.generateHeightMap(validMap, heights);
-                BufferedImage blurredHeightmap = MapUtils.blur(heightmap, 2);
+                BufferedImage blurredHeightmap = MapUtils.blur(heightmap);
                 {
                     Path output = packOutput.getOutputFolder().resolve(HEIGHT_MAP_PATH);
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -68,7 +68,9 @@ public class MapProvider implements DataProvider {
                     ImageIO.write(blurredHeightmap, "PNG", hashStream);
                     cache.writeIfNeeded(output, baos.toByteArray(), hashStream.hash());
                 }
-            } catch (IOException e) {
+                System.out.println("Successfully generated map images!");
+            } catch (Exception e) {
+                // should be fine since it's async
                 throw new RuntimeException(e);
             }
         });

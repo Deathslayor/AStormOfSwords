@@ -19,6 +19,12 @@ public class SnakePixelStream implements Iterable<SnakePixelStream.Pixel> {
         private final int[] dx = {0, 0, -1, 1, -1, 1, -1, 1};
         private final int[] dy = {-1, 1, 0, 0, -1, -1, 1, 1};
 
+        /**
+         * @param width the width of the image
+         * @param height the width of the image
+         * @param startX the x pos where the snake should start
+         * @param startY the y pos where the snake should start
+         */
         public SnakePixelIterator(int width, int height, int startX, int startY) {
             this.width = width;
             this.height = height;
@@ -83,14 +89,10 @@ public class SnakePixelStream implements Iterable<SnakePixelStream.Pixel> {
     }
 
     /**
-     * @param width the width of the image
-     * @param height the width of the image
-     * @param startX the x pos where the snake should start
-     * @param startY the y pos where the snake should start
      * @return a stream of the neighbour pixels
      */
     // This method creates a dynamic stream from the iterator
-    public static @NotNull Stream<Pixel> getSnakePixelStream(int width, int height, int startX, int startY) {
+    public @NotNull Stream<Pixel> stream() {
         SnakePixelIterator pixelIterator = new SnakePixelIterator(width, height, startX, startY);
 
         // Use StreamSupport to wrap the iterator in a stream

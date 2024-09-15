@@ -2,7 +2,8 @@ package net.astormofsorts.agotmod.map;
 
 import net.astormofsorts.agotmod.AGoTMod;
 import net.astormofsorts.agotmod.datagen.MapProvider;
-import net.astormofsorts.agotmod.util.SimplexNoise;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.levelgen.synth.SimplexNoise;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -12,6 +13,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
+import java.util.function.BiFunction;
 
 
 public class MapManager {
@@ -19,14 +21,14 @@ public class MapManager {
     public static final BufferedImage MAP_BIOME_IMAGE = getMapBiomeImage();
     @Nullable
     public static final BufferedImage MAP_HEIGHT_IMAGE = getMapHeightImage();
-    private static final int PIXEL_WEIGHT = 4;
+    private static final int PIXEL_WEIGHT = 16;
     private static final int PERLIN_STRETCH = 250;
-    private static final int PERLIN_RANGE = 50;
+    private static final int PERLIN_RANGE = 8;
     @NotNull
     private final SimplexNoise noise;
 
-    public MapManager(long seed) {
-        this.noise = new SimplexNoise(seed);
+    public MapManager(RandomSource randSource) {
+        this.noise = new SimplexNoise(randSource);
     }
 
     @Nullable
@@ -56,13 +58,13 @@ public class MapManager {
     }
 
     /**
-     * Gets the Color from a position on the mob
+     * Gets the Color from a position on the map
      *
      * @param x this should be a block position x
      * @param y this should be a block position z
      * @return Returns the biome color
      */
-    public static @NotNull Color getBiomeColor(int x, int y) {
+    public static @Nullable Color getBiomeColor(int x, int y) {
         if (MAP_BIOME_IMAGE != null) {
             // check if coordinate is inbound
             if (isPosInImage(MAP_BIOME_IMAGE, x, y)) {
@@ -71,7 +73,7 @@ public class MapManager {
         }
 
         // fallback
-        return MapBiome.getDefault().color();
+        return null;
     }
 
     private static @Nullable Color getHeightColor(int x, int y) {
@@ -87,7 +89,7 @@ public class MapManager {
     }
 
     private static int getColorHeight(int x, int y) {
-        Color color = getHeightColor(x  >> 2, y  >> 2);
+        Color color = getHeightColor(x >> 2, y >> 2);
         if (color != null) {
             return color.getBlue() > 0 ? -color.getBlue() : color.getRed();
         } else {
@@ -95,55 +97,27 @@ public class MapManager {
         }
     }
 
-    public static double getBiomeHeight(int x, int y) {
-        double topLeft = getColorHeight(x, y);
-        double topRight = getColorHeight(x + PIXEL_WEIGHT, y);
-        double bottomLeft = getColorHeight(x, y + PIXEL_WEIGHT);
-        double bottomRight = getColorHeight(x + PIXEL_WEIGHT, y + PIXEL_WEIGHT);
-        return getHeightBetween(new double[]{topLeft, topRight, bottomLeft, bottomRight},
-                (double) (x % PIXEL_WEIGHT) / PIXEL_WEIGHT, (double) (y % PIXEL_WEIGHT) / PIXEL_WEIGHT);
-    }
-
     public double getHeight(int x, int y) {
         return getPerlinHeight(x, y);
     }
 
     private double getPerlinMultiplier(int x, int y) {
-        MapBiome biome = MapBiome.getByColor(getBiomeColor(x >> 2, y >> 2));
-        return biome != null ? biome.perlinModifier() : 1;
-    }
-
-    private double interpolatePerlinMultiplier(int x, int y) {
-        double topLeft = getPerlinMultiplier(x, y);
-        double topRight = getPerlinMultiplier(x + PIXEL_WEIGHT, y);
-        double bottomLeft = getPerlinMultiplier(x, y + PIXEL_WEIGHT);
-        double bottomRight = getPerlinMultiplier(x + PIXEL_WEIGHT, y + PIXEL_WEIGHT);
-        return getHeightBetween(new double[]{topLeft, topRight, bottomLeft, bottomRight},
-                (double) (x % PIXEL_WEIGHT) / PIXEL_WEIGHT, (double) (y % PIXEL_WEIGHT) / PIXEL_WEIGHT);
+        return MapBiome.getByColor(getBiomeColor(x >> 2, y >> 2)).perlinModifier();
     }
 
     public double getPerlinHeight(int x, int y) {
-        double perlin = getPerlin(x, y);
-        double defHeight;
-
-        if (isCoordinateInImages(x, y)) {
-            perlin *= interpolatePerlinMultiplier(x, y);
-
-            defHeight = getBiomeHeight(x, y);
-        } else {
-            defHeight = MapBiome.getDefault().height();
-        }
-
+        double perlin = getPerlin(x, y) * getTransformedMapValue(x, y, this::getPerlinMultiplier);
+        double defHeight = getTransformedMapValue(x, y, (a, b) -> (double) getColorHeight(a, b));
         return perlin + defHeight;
     }
 
     private double getPerlin(int x, int y) {
         int scale = 8;
 
-        double perlin = noise.noise2((double) x / PERLIN_STRETCH,(double) y / PERLIN_STRETCH) * 4;
+        double perlin = noise.getValue((double) x / PERLIN_STRETCH, (double) y / PERLIN_STRETCH) * 4;
         double d = 1;
         for (int i = 2; i <= scale; i *= 2) {
-            perlin += (1d / i) * noise.noise2((double) x * i / PERLIN_STRETCH,(double) y * i / PERLIN_STRETCH) * 4;
+            perlin += (1d / i) * noise.getValue((double) x * i / PERLIN_STRETCH, (double) y * i / PERLIN_STRETCH) * 4;
             d += (1d / i);
         }
 
@@ -153,20 +127,42 @@ public class MapManager {
         return perlin;
     }
 
-    private static double getHeightBetween(double[] heights, double xPercent, double zPercent) {
-        double h1 = lerp(heights[0], heights[1], xPercent);
-        double h2 = lerp(heights[2], heights[3], xPercent);
-        return lerp(h1, h2, zPercent);
+    private static double getTransformedMapValue(int x, int y, BiFunction<Integer, Integer, Double> function) {
+        // Determine the base coordinates for the current biome grid
+        int baseX = (x / PIXEL_WEIGHT) * PIXEL_WEIGHT;
+        int baseY = (y / PIXEL_WEIGHT) * PIXEL_WEIGHT;
+
+        // Adjust base coordinates for negative values
+        if (x < 0) baseX -= PIXEL_WEIGHT;
+        if (y < 0) baseY -= PIXEL_WEIGHT;
+
+        // Sample the four surrounding biome heights at the corners of the grid
+        double h00 = function.apply(baseX, baseY); // Top-left
+        double h10 = function.apply(baseX + PIXEL_WEIGHT, baseY); // Top-right
+        double h01 = function.apply(baseX, baseY + PIXEL_WEIGHT); // Bottom-left
+        double h11 = function.apply(baseX + PIXEL_WEIGHT, baseY + PIXEL_WEIGHT); // Bottom-right
+
+        // Calculate the fractional positions within the grid, relative to base coordinates
+        double xPercent = (double)(x - baseX) / PIXEL_WEIGHT;
+        double yPercent = (double)(y - baseY) / PIXEL_WEIGHT;
+
+        // Ensure fractional values are within [0, 1] (handling negative values)
+        xPercent = Math.abs(xPercent);
+        yPercent = Math.abs(yPercent);
+
+        // Perform bilinear interpolation to smoothly transition between the biome heights
+        return bilinearInterpolation(h00, h10, h01, h11, xPercent, yPercent);
     }
 
-    private static double lerp(double a, double b, double percentage) {
-        return (a * (1 - percentage)) + (b * percentage);
-    }
+    private static double bilinearInterpolation(double h00, double h10, double h01, double h11, double xPercent, double yPercent) {
+        // Calculate the weights for each corner based on the fractional distances
+        double w00 = (1 - xPercent) * (1 - yPercent); // Top-left corner weight
+        double w10 = xPercent * (1 - yPercent);       // Top-right corner weight
+        double w01 = (1 - xPercent) * yPercent;       // Bottom-left corner weight
+        double w11 = xPercent * yPercent;             // Bottom-right corner weight
 
-    private static boolean isCoordinateInImages(int x, int y) {
-        int xPos = x >> 2;
-        int yPos = y >> 2;
-        return isPosInImage(MAP_BIOME_IMAGE, xPos, yPos) && isPosInImage(MAP_HEIGHT_IMAGE, xPos, yPos);
+        // Perform weighted bilinear interpolation
+        return h00 * w00 + h10 * w10 + h01 * w01 + h11 * w11;
     }
 
     private static boolean isPosInImage(BufferedImage image, int x, int y) {

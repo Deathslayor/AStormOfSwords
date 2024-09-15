@@ -41,14 +41,7 @@ public class MapBasedBiomeSource extends BiomeSource {
 
     public @NotNull MapBiome getBiomeData(int pX, int pZ) {
         Color biomeColor = MapManager.getBiomeColor(pX, pZ);
-        for (MapBiome biomeData : MapBiome.BIOME_LIST) {
-            if (biomeData.color().getRGB() == biomeColor.getRGB()) {
-                return biomeData;
-            }
-        }
-
-        // this shouldn't be triggered
-        return MapBiome.getDefault();
+        return MapBiome.getByColor(biomeColor);
     }
 
     public GeneratorSettings getSettings() {

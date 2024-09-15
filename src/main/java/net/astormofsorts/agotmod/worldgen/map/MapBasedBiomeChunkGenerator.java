@@ -2,11 +2,14 @@ package net.astormofsorts.agotmod.worldgen.map;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.astormofsorts.agotmod.AGoTMod;
 import net.astormofsorts.agotmod.map.MapBiome;
 import net.astormofsorts.agotmod.map.MapManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.WorldGenRegion;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeManager;
@@ -17,6 +20,7 @@ import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.*;
 import net.minecraft.world.level.levelgen.blending.Blender;
+import net.minecraft.world.level.levelgen.synth.SimplexNoise;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
@@ -30,12 +34,10 @@ public class MapBasedBiomeChunkGenerator extends ChunkGenerator {
     ).apply(instance, instance.stable(MapBasedBiomeChunkGenerator::new)));
 
     protected final MapBasedBiomeSource biomeSource;
-    private final MapManager mapManager;
 
     private MapBasedBiomeChunkGenerator(MapBasedBiomeSource biomeSource) {
         super(biomeSource);
         this.biomeSource = biomeSource;
-        this.mapManager = new MapManager(0);
     }
 
     public static MapBasedBiomeChunkGenerator of(GeneratorSettings settings) {
@@ -50,7 +52,6 @@ public class MapBasedBiomeChunkGenerator extends ChunkGenerator {
 
     @Override
     public void applyCarvers(@NotNull WorldGenRegion pLevel, long pSeed, @NotNull RandomState pRandom, @NotNull BiomeManager pBiomeManager, @NotNull StructureManager pStructureManager, @NotNull ChunkAccess pChunk, GenerationStep.@NotNull Carving pStep) {
-
     }
 
     /**
@@ -58,6 +59,10 @@ public class MapBasedBiomeChunkGenerator extends ChunkGenerator {
      */
     @Override
     public void buildSurface(@NotNull WorldGenRegion pLevel, @NotNull StructureManager pStructureManager, @NotNull RandomState pRandom, @NotNull ChunkAccess chunk) {
+
+        RandomSource randomSource = pRandom.getOrCreateRandomFactory(new ResourceLocation(AGoTMod.MOD_ID, "generator")).at(0, 0, 0);
+        MapManager mapManager = new MapManager(randomSource);
+
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
                 MapBiome biomeData = null;
@@ -146,6 +151,8 @@ public class MapBasedBiomeChunkGenerator extends ChunkGenerator {
 
     @Override
     public int getBaseHeight(int pX, int pZ, @NotNull Heightmap.Types pType, @NotNull LevelHeightAccessor pLevel, @NotNull RandomState pRandom) {
+        RandomSource randomSource = pRandom.getOrCreateRandomFactory(new ResourceLocation(AGoTMod.MOD_ID, "generator")).at(0, 0, 0);
+        MapManager mapManager = new MapManager(randomSource);
         return Math.max((int) (1 + biomeSource.getSettings().dirtLevel() + mapManager.getHeight(pX , pZ)), getSeaLevel());
     }
 
