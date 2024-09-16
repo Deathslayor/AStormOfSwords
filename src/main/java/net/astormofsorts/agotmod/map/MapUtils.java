@@ -74,6 +74,17 @@ public class MapUtils {
         }
     }
 
+    public static BufferedImage blur(BufferedImage image, int times) {
+        BufferedImage out = new BufferedImage(image.getWidth(), image.getHeight(), image.getType());
+        out.setData(image.getData());
+
+        for (int i = 0; i < times; i++) {
+            out = blur(out);
+        }
+
+        return out;
+    }
+
     public static BufferedImage blur(BufferedImage image) {
 
         // Define a Gaussian blur kernel

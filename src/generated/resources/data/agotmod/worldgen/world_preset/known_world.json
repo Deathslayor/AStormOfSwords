@@ -7,14 +7,23 @@
         "biome_source": {
           "settings": {
             "biomes": [
-              "minecraft:deep_ocean",
-              "minecraft:ocean",
-              "minecraft:river",
-              "minecraft:stony_peaks",
+              "minecraft:mangrove_swamp",
               "minecraft:dark_forest",
-              "minecraft:forest",
+              "minecraft:snowy_plains",
               "minecraft:plains",
-              "minecraft:swamp"
+              "minecraft:windswept_hills",
+              "minecraft:jagged_peaks",
+              "minecraft:swamp",
+              "minecraft:savanna_plateau",
+              "minecraft:savanna",
+              "minecraft:forest",
+              "minecraft:meadow",
+              "minecraft:snowy_taiga",
+              "minecraft:frozen_peaks",
+              "minecraft:river",
+              "minecraft:lukewarm_ocean",
+              "minecraft:cold_ocean",
+              "minecraft:deep_cold_ocean"
             ],
             "deepslate_level": 0,
             "dirt_level": 66,

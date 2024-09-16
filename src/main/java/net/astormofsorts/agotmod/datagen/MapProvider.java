@@ -61,7 +61,7 @@ public class MapProvider implements DataProvider {
                 }
 
                 BufferedImage heightmap = MapUtils.generateHeightMap(validMap, heights);
-                BufferedImage blurredHeightmap = MapUtils.blur(heightmap);
+                BufferedImage blurredHeightmap = MapUtils.blur(heightmap, 4);
                 {
                     Path output = packOutput.getOutputFolder().resolve(HEIGHT_MAP_PATH);
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();

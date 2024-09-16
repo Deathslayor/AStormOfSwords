@@ -19,17 +19,29 @@ public record MapBiome(ResourceKey<Biome> biome, int color, Block stoneBlock,
 
     public static final List<MapBiome> BIOME_LIST = new ArrayList<>();
 
-    private static MapBiome DEEP_OCEAN;
+    private static MapBiome DEEP_COLD_OCEAN;
 
     public static void initialize() {
-        DEEP_OCEAN = register(new MapBiome(Biomes.DEEP_OCEAN, new Color(0, 35, 85).getRGB(), Blocks.STONE, Blocks.STONE, Blocks.GRAVEL, -18, 0.2));
-        register(new MapBiome(Biomes.OCEAN, new Color(0, 42, 103).getRGB(), Blocks.STONE, Blocks.STONE, Blocks.GRAVEL, -10, 0.1));
-        register(new MapBiome(Biomes.RIVER, new Color(34, 96, 136).getRGB(), Blocks.STONE, Blocks.STONE, Blocks.GRAVEL, -5, 0.05));
-        register(new MapBiome(Biomes.STONY_PEAKS, new Color(151, 151, 151).getRGB(), Blocks.STONE, Blocks.STONE, Blocks.STONE, 75, 2));
-        register(new MapBiome(Biomes.DARK_FOREST, new Color(34, 51, 34).getRGB(), Blocks.STONE, Blocks.DIRT, Blocks.GRASS_BLOCK, 5, 0.4));
-        register(new MapBiome(Biomes.FOREST, new Color(43, 70, 43).getRGB(), Blocks.STONE, Blocks.DIRT, Blocks.GRASS_BLOCK, 6, 0.5));
-        register(new MapBiome(Biomes.PLAINS, new Color(56, 93, 56).getRGB(), Blocks.STONE, Blocks.DIRT, Blocks.GRASS_BLOCK, 5, 0.4));
-        register(new MapBiome(Biomes.SWAMP, new Color(98, 123, 64).getRGB(), Blocks.STONE, Blocks.DIRT, Blocks.GRASS_BLOCK, 0, 0.2));
+        register(new MapBiome(Biomes.MANGROVE_SWAMP, new Color(34, 51, 34).getRGB(), Blocks.STONE, Blocks.DIRT, Blocks.GRASS_BLOCK, 0, 0.01));
+        register(new MapBiome(Biomes.DARK_FOREST, new Color(43, 70, 43).getRGB(), Blocks.STONE, Blocks.DIRT, Blocks.GRASS_BLOCK, 5, 0.1));
+        register(new MapBiome(Biomes.SNOWY_PLAINS, new Color(57, 95, 57).getRGB(), Blocks.STONE, Blocks.DIRT, Blocks.GRASS_BLOCK, 5, 0.1));
+        register(new MapBiome(Biomes.PLAINS, new Color(57, 95, 57).getRGB(), Blocks.STONE, Blocks.DIRT, Blocks.GRASS_BLOCK, 5, 0.1));
+        register(new MapBiome(Biomes.WINDSWEPT_HILLS, new Color(151, 151, 151).getRGB(), Blocks.STONE, Blocks.DIRT, Blocks.GRASS_BLOCK, 45, 1.7));
+        register(new MapBiome(Biomes.JAGGED_PEAKS, new Color(130, 130, 130).getRGB(), Blocks.STONE, Blocks.DIRT, Blocks.GRASS_BLOCK, 100, 3.5));
+        register(new MapBiome(Biomes.SWAMP, new Color(76, 95, 49).getRGB(), Blocks.STONE, Blocks.DIRT, Blocks.GRASS_BLOCK, 0, 0.01));
+        register(new MapBiome(Biomes.SAVANNA_PLATEAU, new Color(85, 109, 51).getRGB(), Blocks.STONE, Blocks.DIRT, Blocks.GRASS_BLOCK, 5, 0.07));
+        register(new MapBiome(Biomes.SAVANNA, new Color(98, 123, 64).getRGB(), Blocks.STONE, Blocks.DIRT, Blocks.GRASS_BLOCK, 5, 0.04));
+        register(new MapBiome(Biomes.FOREST, new Color(61, 81, 51).getRGB(), Blocks.STONE, Blocks.DIRT, Blocks.GRASS_BLOCK, 5, 0.1));
+        register(new MapBiome(Biomes.MEADOW, new Color(72, 122, 72).getRGB(), Blocks.STONE, Blocks.DIRT, Blocks.GRASS_BLOCK, 5, 0.1));
+        register(new MapBiome(Biomes.SNOWY_TAIGA, new Color(38, 62, 38).getRGB(), Blocks.STONE, Blocks.DIRT, Blocks.GRASS_BLOCK, 5, 0.1));
+        register(new MapBiome(Biomes.FROZEN_PEAKS, new Color(255, 255, 255).getRGB(), Blocks.STONE, Blocks.PACKED_ICE, Blocks.SNOW_BLOCK, 150, 0)); // wall
+
+
+        // water biomes
+        register(new MapBiome(Biomes.RIVER, new Color(1, 98, 255).getRGB(), Blocks.STONE, Blocks.DIRT, Blocks.GRASS_BLOCK, -5, 0));
+        register(new MapBiome(Biomes.LUKEWARM_OCEAN, new Color(0, 83, 217).getRGB(), Blocks.STONE, Blocks.DIRT, Blocks.GRASS_BLOCK, -5, 1)); // lake
+        register(new MapBiome(Biomes.COLD_OCEAN, new Color(0, 42, 103).getRGB(), Blocks.STONE, Blocks.DIRT, Blocks.GRASS_BLOCK, -35, 0.2));
+        DEEP_COLD_OCEAN = register(new MapBiome(Biomes.DEEP_COLD_OCEAN, new Color(0, 35, 85).getRGB(), Blocks.STONE, Blocks.DIRT, Blocks.GRASS_BLOCK, -125, 0.5));
     }
 
     public static MapBiome register(MapBiome biome) {
@@ -51,6 +63,6 @@ public record MapBiome(ResourceKey<Biome> biome, int color, Block stoneBlock,
     }
 
     public static @NotNull MapBiome getDefault() {
-        return DEEP_OCEAN;
+        return DEEP_COLD_OCEAN;
     }
 }
