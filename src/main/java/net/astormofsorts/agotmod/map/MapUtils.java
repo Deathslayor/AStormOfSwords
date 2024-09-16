@@ -2,6 +2,7 @@ package net.astormofsorts.agotmod.map;
 
 import net.astormofsorts.agotmod.util.ColorUtils;
 import net.astormofsorts.agotmod.util.ImageScaler;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -55,7 +56,7 @@ public class MapUtils {
     private static int fillColor(BufferedImage image, int x, int y, int fallback, Random random) {
         int rgb = image.getRGB(x, y);
 
-        if ((rgb >> 24) == 0x00) {
+        if ((rgb >> 24) == 0x00) { // check if is transparent
             int[] dirs = directions[random.nextInt(directions.length - 1)];
             int x2 = x + dirs[0];
             int y2 = y + dirs[1];
@@ -119,5 +120,23 @@ public class MapUtils {
         }
 
         return gen_heightmap;
+    }
+
+    public static BufferedImage acceptOverwriteMap(BufferedImage blurredHeightmap, @Nullable BufferedImage overwriteHeightmapImage) {
+        BufferedImage out = new BufferedImage(blurredHeightmap.getWidth(), blurredHeightmap.getHeight(), blurredHeightmap.getType());
+        out.setData(blurredHeightmap.getData());
+
+        if (overwriteHeightmapImage != null) {
+            for (int x = 0; x < out.getWidth(); x++) {
+                for (int y = 0; y < out.getHeight(); y++) {
+                    int overwrite = overwriteHeightmapImage.getRGB(x, y);
+                    if ((overwrite >> 24) != 0x00) { // check if the overwrite pixel is transparent
+                        out.setRGB(x, y, overwrite); // accept overwrite pixel if defined
+                    }
+                }
+            }
+        }
+
+        return out;
     }
 }

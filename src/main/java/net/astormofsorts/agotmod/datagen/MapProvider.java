@@ -10,6 +10,7 @@ import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -24,6 +25,8 @@ import java.util.concurrent.CompletableFuture;
 
 public class MapProvider implements DataProvider {
     public static final BufferedImage ORGINAL_MAP_IMAGE = getOriginalMapImage();
+    @Nullable
+    public static final BufferedImage OVERWRITE_HEIGHTMAP_IMAGE = getOverwriteHeightmapImage();
 
     private static BufferedImage getOriginalMapImage() {
         URL orignalMapUrl = AGoTMod.class.getResource("/assets/agotmod/map.png");
@@ -31,6 +34,20 @@ public class MapProvider implements DataProvider {
             return ImageIO.read(Objects.requireNonNull(orignalMapUrl));
         } catch (IOException e) {
             throw new RuntimeException("Failed to load biome map located at: " + (orignalMapUrl != null ? orignalMapUrl.getPath() : "invalid location"), e);
+        }
+    }
+
+    @Nullable
+    private static BufferedImage getOverwriteHeightmapImage() {
+        URL orignalMapUrl = AGoTMod.class.getResource("/assets/agotmod/overwrite.png");
+        try {
+            if (orignalMapUrl != null) {
+                return ImageIO.read(orignalMapUrl);
+            } else {
+                return null;
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load biome map located at: " + orignalMapUrl.getPath(), e);
         }
     }
     public static final String BIOME_MAP_PATH = "assets/agotmod/map_biome.png";
@@ -62,11 +79,12 @@ public class MapProvider implements DataProvider {
 
                 BufferedImage heightmap = MapUtils.generateHeightMap(validMap, heights);
                 BufferedImage blurredHeightmap = MapUtils.blur(heightmap, 4);
+                BufferedImage overwrittenHeightmap = MapUtils.acceptOverwriteMap(blurredHeightmap, OVERWRITE_HEIGHTMAP_IMAGE);
                 {
                     Path output = packOutput.getOutputFolder().resolve(HEIGHT_MAP_PATH);
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     HashingOutputStream hashStream = new HashingOutputStream(Hashing.sha1(), baos);
-                    ImageIO.write(blurredHeightmap, "PNG", hashStream);
+                    ImageIO.write(overwrittenHeightmap, "PNG", hashStream);
                     cache.writeIfNeeded(output, baos.toByteArray(), hashStream.hash());
                     LogUtils.getLogger().info("Generated Height Map.");
                 }
