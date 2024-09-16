@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_stripped_sycamore_log": {
+    "has_sycamore_log_stripped": {
       "conditions": {
         "items": [
           {
             "items": [
-              "agotmod:stripped_sycamore_log"
+              "agotmod:sycamore_log_stripped"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_stripped_sycamore_log",
+      "has_sycamore_log_stripped",
       "has_the_recipe"
     ]
   ],

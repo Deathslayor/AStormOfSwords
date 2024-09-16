@@ -95,15 +95,237 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
 
 
         /** // ---------------------------(BLOCKS THAT BURN)--------------------------- // */
+        //Weirwood
+        this.tag(BlockTags.LOGS_THAT_BURN)
+                .add(ModBLocks.WEIRWOOD_LOG.get())
+                .add(ModBLocks.STRIPPED_WEIRWOOD_LOG.get())
+                .add(ModBLocks.WEIRWOOD_WOOD.get())
+                .add(ModBLocks.STRIPPED_WEIRWOOD_WOOD.get());
+        this.tag(BlockTags.FENCES)
+                .add(ModBLocks.WEIRWOOD_FENCE.get());
+        this.tag(BlockTags.FENCE_GATES)
+                .add(ModBLocks.WEIRWOOD_FENCE_GATE.get());
+        this.tag(BlockTags.WALLS)
+                .add(ModBLocks.WEIRWOOD_WALL.get());
 
+
+        this.tag(BlockTags.PLANKS)
+                .add(ModBLocks.WEIRWOOD_PLANKS.get());
+        //Sycamore
         this.tag(BlockTags.LOGS_THAT_BURN)
                 .add(ModBLocks.SYCAMORE_LOG.get())
                 .add(ModBLocks.STRIPPED_SYCAMORE_LOG.get())
                 .add(ModBLocks.SYCAMORE_WOOD.get())
                 .add(ModBLocks.STRIPPED_SYCAMORE_WOOD.get());
+        this.tag(BlockTags.FENCES)
+                .add(ModBLocks.SYCAMORE_FENCE.get());
+        this.tag(BlockTags.FENCE_GATES)
+                .add(ModBLocks.SYCAMORE_FENCE_GATE.get());
+        this.tag(BlockTags.WALLS)
+                .add(ModBLocks.SYCAMORE_WALL.get());
 
         this.tag(BlockTags.PLANKS)
                 .add(ModBLocks.SYCAMORE_PLANKS.get());
+        //Sentinel
+        this.tag(BlockTags.LOGS_THAT_BURN)
+                .add(ModBLocks.SENTINEL_LOG.get())
+                .add(ModBLocks.STRIPPED_SENTINEL_LOG.get())
+                .add(ModBLocks.SENTINEL_WOOD.get())
+                .add(ModBLocks.STRIPPED_SENTINEL_WOOD.get());
+
+        this.tag(BlockTags.FENCES)
+                .add(ModBLocks.SENTINEL_FENCE.get());
+        this.tag(BlockTags.FENCE_GATES)
+                .add(ModBLocks.SENTINEL_FENCE_GATE.get());
+        this.tag(BlockTags.WALLS)
+                .add(ModBLocks.SENTINEL_WALL.get());
+
+
+        this.tag(BlockTags.PLANKS)
+                .add(ModBLocks.SENTINEL_PLANKS.get());
+
+
+        //Pine
+        this.tag(BlockTags.LOGS_THAT_BURN)
+                .add(ModBLocks.PINE_LOG.get())
+                .add(ModBLocks.STRIPPED_PINE_LOG.get())
+                .add(ModBLocks.PINE_WOOD.get())
+                .add(ModBLocks.STRIPPED_PINE_WOOD.get());
+
+        this.tag(BlockTags.PLANKS)
+                .add(ModBLocks.PINE_PLANKS.get());
+
+        this.tag(BlockTags.FENCES)
+                .add(ModBLocks.PINE_FENCE.get());
+        this.tag(BlockTags.FENCE_GATES)
+                .add(ModBLocks.PINE_FENCE_GATE.get());
+        this.tag(BlockTags.WALLS)
+                .add(ModBLocks.PINE_WALL.get());
+
+
+        //Ironwood
+        this.tag(BlockTags.LOGS_THAT_BURN)
+                .add(ModBLocks.IRONWOOD_LOG.get())
+                .add(ModBLocks.STRIPPED_IRONWOOD_LOG.get())
+                .add(ModBLocks.IRONWOOD_WOOD.get())
+                .add(ModBLocks.STRIPPED_IRONWOOD_WOOD.get());
+
+        this.tag(BlockTags.PLANKS)
+                .add(ModBLocks.IRONWOOD_PLANKS.get());
+
+        this.tag(BlockTags.FENCES)
+                .add(ModBLocks.IRONWOOD_FENCE.get());
+        this.tag(BlockTags.FENCE_GATES)
+                .add(ModBLocks.IRONWOOD_FENCE_GATE.get());
+        this.tag(BlockTags.WALLS)
+                .add(ModBLocks.IRONWOOD_WALL.get());
+
+
+
+        //Hawthorn
+        this.tag(BlockTags.LOGS_THAT_BURN)
+                .add(ModBLocks.HAWTHORN_LOG.get())
+                .add(ModBLocks.STRIPPED_HAWTHORN_LOG.get())
+                .add(ModBLocks.HAWTHORN_WOOD.get())
+                .add(ModBLocks.STRIPPED_HAWTHORN_WOOD.get());
+
+        this.tag(BlockTags.PLANKS)
+                .add(ModBLocks.HAWTHORN_PLANKS.get());
+
+        this.tag(BlockTags.FENCES)
+                .add(ModBLocks.HAWTHORN_FENCE.get());
+        this.tag(BlockTags.FENCE_GATES)
+                .add(ModBLocks.HAWTHORN_FENCE_GATE.get());
+        this.tag(BlockTags.WALLS)
+                .add(ModBLocks.HAWTHORN_WALL.get());
+
+
+
+        //Chestnut
+        this.tag(BlockTags.LOGS_THAT_BURN)
+                .add(ModBLocks.CHESTNUT_LOG.get())
+                .add(ModBLocks.STRIPPED_CHESTNUT_LOG.get())
+                .add(ModBLocks.CHESTNUT_WOOD.get())
+                .add(ModBLocks.STRIPPED_CHESTNUT_WOOD.get());
+
+        this.tag(BlockTags.PLANKS)
+                .add(ModBLocks.CHESTNUT_PLANKS.get());
+
+        this.tag(BlockTags.FENCES)
+                .add(ModBLocks.CHESTNUT_FENCE.get());
+        this.tag(BlockTags.FENCE_GATES)
+                .add(ModBLocks.CHESTNUT_FENCE_GATE.get());
+        this.tag(BlockTags.WALLS)
+                .add(ModBLocks.CHESTNUT_WALL.get());
+
+        //Cedar
+        this.tag(BlockTags.LOGS_THAT_BURN)
+                .add(ModBLocks.CEDAR_LOG.get())
+                .add(ModBLocks.STRIPPED_CEDAR_LOG.get())
+                .add(ModBLocks.CEDAR_WOOD.get())
+                .add(ModBLocks.STRIPPED_CEDAR_WOOD.get());
+
+        this.tag(BlockTags.PLANKS)
+                .add(ModBLocks.CEDAR_PLANKS.get());
+
+        this.tag(BlockTags.FENCES)
+                .add(ModBLocks.CEDAR_FENCE.get());
+        this.tag(BlockTags.FENCE_GATES)
+                .add(ModBLocks.CEDAR_FENCE_GATE.get());
+        this.tag(BlockTags.WALLS)
+                .add(ModBLocks.CEDAR_WALL.get());
+
+        //Beech
+        this.tag(BlockTags.LOGS_THAT_BURN)
+                .add(ModBLocks.BEECH_LOG.get())
+                .add(ModBLocks.STRIPPED_BEECH_LOG.get())
+                .add(ModBLocks.BEECH_WOOD.get())
+                .add(ModBLocks.STRIPPED_BEECH_WOOD.get());
+
+        this.tag(BlockTags.PLANKS)
+                .add(ModBLocks.BEECH_PLANKS.get());
+
+        this.tag(BlockTags.FENCES)
+                .add(ModBLocks.BEECH_FENCE.get());
+        this.tag(BlockTags.FENCE_GATES)
+                .add(ModBLocks.BEECH_FENCE_GATE.get());
+        this.tag(BlockTags.WALLS)
+                .add(ModBLocks.BEECH_WALL.get());
+
+
+        //Ash
+        this.tag(BlockTags.LOGS_THAT_BURN)
+                .add(ModBLocks.ASH_LOG.get())
+                .add(ModBLocks.STRIPPED_ASH_LOG.get())
+                .add(ModBLocks.ASH_WOOD.get())
+                .add(ModBLocks.STRIPPED_ASH_WOOD.get());
+
+        this.tag(BlockTags.PLANKS)
+                .add(ModBLocks.ASH_PLANKS.get());
+
+        this.tag(BlockTags.FENCES)
+                .add(ModBLocks.ASH_FENCE.get());
+        this.tag(BlockTags.FENCE_GATES)
+                .add(ModBLocks.ASH_FENCE_GATE.get());
+        this.tag(BlockTags.WALLS)
+                .add(ModBLocks.ASH_WALL.get());
+
+
+        //Blackbark
+        this.tag(BlockTags.LOGS_THAT_BURN)
+                .add(ModBLocks.BLACKBARK_LOG.get())
+                .add(ModBLocks.STRIPPED_BLACKBARK_LOG.get())
+                .add(ModBLocks.BLACKBARK_WOOD.get())
+                .add(ModBLocks.STRIPPED_BLACKBARK_WOOD.get());
+
+        this.tag(BlockTags.PLANKS)
+                .add(ModBLocks.BLACKBARK_PLANKS.get());
+
+        this.tag(BlockTags.FENCES)
+                .add(ModBLocks.BLACKBARK_FENCE.get());
+        this.tag(BlockTags.FENCE_GATES)
+                .add(ModBLocks.BLACKBARK_FENCE_GATE.get());
+        this.tag(BlockTags.WALLS)
+                .add(ModBLocks.BLACKBARK_WALL.get());
+
+
+        //Aspen
+        this.tag(BlockTags.LOGS_THAT_BURN)
+                .add(ModBLocks.ASPEN_LOG.get())
+                .add(ModBLocks.STRIPPED_ASPEN_LOG.get())
+                .add(ModBLocks.ASPEN_WOOD.get())
+                .add(ModBLocks.STRIPPED_ASPEN_WOOD.get());
+
+        this.tag(BlockTags.PLANKS)
+                .add(ModBLocks.ASPEN_PLANKS.get());
+
+        this.tag(BlockTags.FENCES)
+                .add(ModBLocks.ASPEN_FENCE.get());
+        this.tag(BlockTags.FENCE_GATES)
+                .add(ModBLocks.ASPEN_FENCE_GATE.get());
+        this.tag(BlockTags.WALLS)
+                .add(ModBLocks.ASPEN_WALL.get());
+
+
+        //Alder
+        this.tag(BlockTags.LOGS_THAT_BURN)
+                .add(ModBLocks.ALDER_LOG.get())
+                .add(ModBLocks.STRIPPED_ALDER_LOG.get())
+                .add(ModBLocks.ALDER_WOOD.get())
+                .add(ModBLocks.STRIPPED_ALDER_WOOD.get());
+
+        this.tag(BlockTags.PLANKS)
+                .add(ModBLocks.ALDER_PLANKS.get());
+
+        this.tag(BlockTags.FENCES)
+                .add(ModBLocks.ALDER_FENCE.get());
+        this.tag(BlockTags.FENCE_GATES)
+                .add(ModBLocks.ALDER_FENCE_GATE.get());
+        this.tag(BlockTags.WALLS)
+                .add(ModBLocks.ALDER_WALL.get());
+
+
+
 
         /** // ---------------------------(BLOCKS THAT BURN)--------------------------- // */
 

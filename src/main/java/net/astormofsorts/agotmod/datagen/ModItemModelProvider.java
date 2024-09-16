@@ -19,6 +19,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ModItemModelProvider extends ItemModelProvider {
@@ -213,7 +215,156 @@ public class ModItemModelProvider extends ItemModelProvider {
         // ---------------------------(SAPLINGS)--------------------------- //
         saplingItem(ModBLocks.WEIRWOOD_SAPLING);
         saplingItem(ModBLocks.SYCAMORE_SAPLING);
-        // ---------------------------(SAPLINGS)--------------------------- //
+        saplingItem(ModBLocks.SENTINEL_SAPLING);
+        saplingItem(ModBLocks.PINE_SAPLING);
+        saplingItem(ModBLocks.IRONWOOD_SAPLING);
+        saplingItem(ModBLocks.HAWTHORN_SAPLING);
+        saplingItem(ModBLocks.CHESTNUT_SAPLING);
+        saplingItem(ModBLocks.CEDAR_SAPLING);
+        saplingItem(ModBLocks.BEECH_SAPLING);
+        saplingItem(ModBLocks.ASH_SAPLING);
+        saplingItem(ModBLocks.BLACKBARK_SAPLING);
+        saplingItem(ModBLocks.ASPEN_SAPLING);
+        saplingItem(ModBLocks.ALDER_SAPLING);
+        // ---------------------------(WOODBLOCKS)--------------------------- //
+        //Weirwood
+        simpleBlockItem(ModBLocks.WEIRWOOD_DOOR);
+        fenceItem(ModBLocks.WEIRWOOD_FENCE, ModBLocks.WEIRWOOD_PLANKS);
+        buttonItem(ModBLocks.WEIRWOOD_BUTTON, ModBLocks.WEIRWOOD_PLANKS);
+        wallItem(ModBLocks.WEIRWOOD_WALL, ModBLocks.WEIRWOOD_PLANKS);
+        evenSimplerBlockItem(ModBLocks.WEIRWOOD_STAIRS);
+        evenSimplerBlockItem(ModBLocks.WEIRWOOD_SLAB);
+        evenSimplerBlockItem(ModBLocks.WEIRWOOD_PRESSURE_PLATE);
+        evenSimplerBlockItem(ModBLocks.WEIRWOOD_FENCE_GATE);
+        trapdoorItem(ModBLocks.WEIRWOOD_TRAPDOOR);
+        //Sycamore
+        simpleBlockItem(ModBLocks.SYCAMORE_DOOR);
+        fenceItem(ModBLocks.SYCAMORE_FENCE, ModBLocks.SYCAMORE_PLANKS);
+        buttonItem(ModBLocks.SYCAMORE_BUTTON, ModBLocks.SYCAMORE_PLANKS);
+        wallItem(ModBLocks.SYCAMORE_WALL, ModBLocks.SYCAMORE_PLANKS);
+        evenSimplerBlockItem(ModBLocks.SYCAMORE_STAIRS);
+        evenSimplerBlockItem(ModBLocks.SYCAMORE_SLAB);
+        evenSimplerBlockItem(ModBLocks.SYCAMORE_PRESSURE_PLATE);
+        evenSimplerBlockItem(ModBLocks.SYCAMORE_FENCE_GATE);
+        trapdoorItem(ModBLocks.SYCAMORE_TRAPDOOR);
+        //Sentinel
+        simpleBlockItem(ModBLocks.SENTINEL_DOOR);
+        fenceItem(ModBLocks.SENTINEL_FENCE, ModBLocks.SENTINEL_PLANKS);
+        buttonItem(ModBLocks.SENTINEL_BUTTON, ModBLocks.SENTINEL_PLANKS);
+        wallItem(ModBLocks.SENTINEL_WALL, ModBLocks.SENTINEL_PLANKS);
+        evenSimplerBlockItem(ModBLocks.SENTINEL_STAIRS);
+        evenSimplerBlockItem(ModBLocks.SENTINEL_SLAB);
+        evenSimplerBlockItem(ModBLocks.SENTINEL_PRESSURE_PLATE);
+        evenSimplerBlockItem(ModBLocks.SENTINEL_FENCE_GATE);
+        trapdoorItem(ModBLocks.SENTINEL_TRAPDOOR);
+        //Pine
+        simpleBlockItem(ModBLocks.PINE_DOOR);
+        fenceItem(ModBLocks.PINE_FENCE, ModBLocks.PINE_PLANKS);
+        buttonItem(ModBLocks.PINE_BUTTON, ModBLocks.PINE_PLANKS);
+        wallItem(ModBLocks.PINE_WALL, ModBLocks.PINE_PLANKS);
+        evenSimplerBlockItem(ModBLocks.PINE_STAIRS);
+        evenSimplerBlockItem(ModBLocks.PINE_SLAB);
+        evenSimplerBlockItem(ModBLocks.PINE_PRESSURE_PLATE);
+        evenSimplerBlockItem(ModBLocks.PINE_FENCE_GATE);
+        trapdoorItem(ModBLocks.PINE_TRAPDOOR);
+        //Ironwood
+        simpleBlockItem(ModBLocks.IRONWOOD_DOOR);
+        fenceItem(ModBLocks.IRONWOOD_FENCE, ModBLocks.IRONWOOD_PLANKS);
+        buttonItem(ModBLocks.IRONWOOD_BUTTON, ModBLocks.IRONWOOD_PLANKS);
+        wallItem(ModBLocks.IRONWOOD_WALL, ModBLocks.IRONWOOD_PLANKS);
+        evenSimplerBlockItem(ModBLocks.IRONWOOD_STAIRS);
+        evenSimplerBlockItem(ModBLocks.IRONWOOD_SLAB);
+        evenSimplerBlockItem(ModBLocks.IRONWOOD_PRESSURE_PLATE);
+        evenSimplerBlockItem(ModBLocks.IRONWOOD_FENCE_GATE);
+        trapdoorItem(ModBLocks.IRONWOOD_TRAPDOOR);
+        //Hawthorn
+        simpleBlockItem(ModBLocks.HAWTHORN_DOOR);
+        fenceItem(ModBLocks.HAWTHORN_FENCE, ModBLocks.HAWTHORN_PLANKS);
+        buttonItem(ModBLocks.HAWTHORN_BUTTON, ModBLocks.HAWTHORN_PLANKS);
+        wallItem(ModBLocks.HAWTHORN_WALL, ModBLocks.HAWTHORN_PLANKS);
+        evenSimplerBlockItem(ModBLocks.HAWTHORN_STAIRS);
+        evenSimplerBlockItem(ModBLocks.HAWTHORN_SLAB);
+        evenSimplerBlockItem(ModBLocks.HAWTHORN_PRESSURE_PLATE);
+        evenSimplerBlockItem(ModBLocks.HAWTHORN_FENCE_GATE);
+        trapdoorItem(ModBLocks.HAWTHORN_TRAPDOOR);
+        //Chestnut
+        simpleBlockItem(ModBLocks.CHESTNUT_DOOR);
+        fenceItem(ModBLocks.CHESTNUT_FENCE, ModBLocks.CHESTNUT_PLANKS);
+        buttonItem(ModBLocks.CHESTNUT_BUTTON, ModBLocks.CHESTNUT_PLANKS);
+        wallItem(ModBLocks.CHESTNUT_WALL, ModBLocks.CHESTNUT_PLANKS);
+        evenSimplerBlockItem(ModBLocks.CHESTNUT_STAIRS);
+        evenSimplerBlockItem(ModBLocks.CHESTNUT_SLAB);
+        evenSimplerBlockItem(ModBLocks.CHESTNUT_PRESSURE_PLATE);
+        evenSimplerBlockItem(ModBLocks.CHESTNUT_FENCE_GATE);
+        trapdoorItem(ModBLocks.CHESTNUT_TRAPDOOR);
+        //Cedar
+        simpleBlockItem(ModBLocks.CEDAR_DOOR);
+        fenceItem(ModBLocks.CEDAR_FENCE, ModBLocks.CEDAR_PLANKS);
+        buttonItem(ModBLocks.CEDAR_BUTTON, ModBLocks.CEDAR_PLANKS);
+        wallItem(ModBLocks.CEDAR_WALL, ModBLocks.CEDAR_PLANKS);
+        evenSimplerBlockItem(ModBLocks.CEDAR_STAIRS);
+        evenSimplerBlockItem(ModBLocks.CEDAR_SLAB);
+        evenSimplerBlockItem(ModBLocks.CEDAR_PRESSURE_PLATE);
+        evenSimplerBlockItem(ModBLocks.CEDAR_FENCE_GATE);
+        trapdoorItem(ModBLocks.CEDAR_TRAPDOOR);
+        //Beech
+        simpleBlockItem(ModBLocks.BEECH_DOOR);
+        fenceItem(ModBLocks.BEECH_FENCE, ModBLocks.BEECH_PLANKS);
+        buttonItem(ModBLocks.BEECH_BUTTON, ModBLocks.BEECH_PLANKS);
+        wallItem(ModBLocks.BEECH_WALL, ModBLocks.BEECH_PLANKS);
+        evenSimplerBlockItem(ModBLocks.BEECH_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BEECH_SLAB);
+        evenSimplerBlockItem(ModBLocks.BEECH_PRESSURE_PLATE);
+        evenSimplerBlockItem(ModBLocks.BEECH_FENCE_GATE);
+        trapdoorItem(ModBLocks.BEECH_TRAPDOOR);
+        //Ash
+        simpleBlockItem(ModBLocks.ASH_DOOR);
+        fenceItem(ModBLocks.ASH_FENCE, ModBLocks.ASH_PLANKS);
+        buttonItem(ModBLocks.ASH_BUTTON, ModBLocks.ASH_PLANKS);
+        wallItem(ModBLocks.ASH_WALL, ModBLocks.ASH_PLANKS);
+        evenSimplerBlockItem(ModBLocks.ASH_STAIRS);
+        evenSimplerBlockItem(ModBLocks.ASH_SLAB);
+        evenSimplerBlockItem(ModBLocks.ASH_PRESSURE_PLATE);
+        evenSimplerBlockItem(ModBLocks.ASH_FENCE_GATE);
+        trapdoorItem(ModBLocks.ASH_TRAPDOOR);
+        //Blackbark
+        simpleBlockItem(ModBLocks.BLACKBARK_DOOR);
+        fenceItem(ModBLocks.BLACKBARK_FENCE, ModBLocks.BLACKBARK_PLANKS);
+        buttonItem(ModBLocks.BLACKBARK_BUTTON, ModBLocks.BLACKBARK_PLANKS);
+        wallItem(ModBLocks.BLACKBARK_WALL, ModBLocks.BLACKBARK_PLANKS);
+        evenSimplerBlockItem(ModBLocks.BLACKBARK_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BLACKBARK_SLAB);
+        evenSimplerBlockItem(ModBLocks.BLACKBARK_PRESSURE_PLATE);
+        evenSimplerBlockItem(ModBLocks.BLACKBARK_FENCE_GATE);
+        trapdoorItem(ModBLocks.BLACKBARK_TRAPDOOR);
+        //Aspen
+        simpleBlockItem(ModBLocks.ASPEN_DOOR);
+        fenceItem(ModBLocks.ASPEN_FENCE, ModBLocks.ASPEN_PLANKS);
+        buttonItem(ModBLocks.ASPEN_BUTTON, ModBLocks.ASPEN_PLANKS);
+        wallItem(ModBLocks.ASPEN_WALL, ModBLocks.ASPEN_PLANKS);
+        evenSimplerBlockItem(ModBLocks.ASPEN_STAIRS);
+        evenSimplerBlockItem(ModBLocks.ASPEN_SLAB);
+        evenSimplerBlockItem(ModBLocks.ASPEN_PRESSURE_PLATE);
+        evenSimplerBlockItem(ModBLocks.ASPEN_FENCE_GATE);
+        trapdoorItem(ModBLocks.ASPEN_TRAPDOOR);
+        //Alder
+        simpleBlockItem(ModBLocks.ALDER_DOOR);
+        fenceItem(ModBLocks.ALDER_FENCE, ModBLocks.ALDER_PLANKS);
+        buttonItem(ModBLocks.ALDER_BUTTON, ModBLocks.ALDER_PLANKS);
+        wallItem(ModBLocks.ALDER_WALL, ModBLocks.ALDER_PLANKS);
+        evenSimplerBlockItem(ModBLocks.ALDER_STAIRS);
+        evenSimplerBlockItem(ModBLocks.ALDER_SLAB);
+        evenSimplerBlockItem(ModBLocks.ALDER_PRESSURE_PLATE);
+        evenSimplerBlockItem(ModBLocks.ALDER_FENCE_GATE);
+        trapdoorItem(ModBLocks.ALDER_TRAPDOOR);
+
+
+
+
+
+
+
+
 
         // ---------------------------(CRAFTING ITEMS)--------------------------- //
         // Register item models for crafting items
@@ -299,5 +450,35 @@ public class ModItemModelProvider extends ItemModelProvider {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/handheld")).texture("layer0",
                 new ResourceLocation(AGoTMod.MOD_ID, "item/" + item.getId().getPath()));
+    }
+    public void trapdoorItem(RegistryObject<Block> block) {
+        this.withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(),
+                modLoc("block/" + ForgeRegistries.BLOCKS.getKey(block.get()).getPath() + "_bottom"));
+    }
+
+    private void fenceItem(RegistryObject<Block> block, RegistryObject<Block> baseBlock) {
+        this.withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(), mcLoc("block/fence_inventory"))
+                .texture("texture",  new ResourceLocation(AGoTMod.MOD_ID, "block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
+    }
+
+    private  void buttonItem(RegistryObject<Block> block, RegistryObject<Block> baseBlock) {
+        this.withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(), mcLoc("block/button_inventory"))
+                .texture("texture",  new ResourceLocation(AGoTMod.MOD_ID, "block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
+    }
+
+    private void wallItem(RegistryObject<Block> block, RegistryObject<Block> baseBlock) {
+        this.withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(), mcLoc("block/wall_inventory"))
+                .texture("wall",  new ResourceLocation(AGoTMod.MOD_ID, "block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
+    }
+
+    private ItemModelBuilder simpleBlockItem(RegistryObject<Block> block) {
+        return withExistingParent(block.getId().getPath(),
+                new ResourceLocation("item/generated")).texture("layer0",
+                new ResourceLocation(AGoTMod.MOD_ID, "item/" + block.getId().getPath()));
+    }
+
+    public void evenSimplerBlockItem(RegistryObject<Block> block) {
+        this.withExistingParent(AGoTMod.MOD_ID + ":" + ForgeRegistries.BLOCKS.getKey(block.get()).getPath(),
+                modLoc("block/" + ForgeRegistries.BLOCKS.getKey(block.get()).getPath()));
     }
 }

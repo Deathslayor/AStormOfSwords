@@ -24,6 +24,18 @@ public class ModplacedFeatures {
     // Define a ResourceKey for the placed feature of tin ore
     public static final ResourceKey<PlacedFeature> TIN_ORE_PLACED_KEY = registerKey("tin_ore_placed");
     public static final ResourceKey<PlacedFeature> WEIRWOOD_KEY = registerKey("weirwood");
+    public static final ResourceKey<PlacedFeature> SENTINEL_KEY = registerKey("sentinel");
+    public static final ResourceKey<PlacedFeature> PINE_KEY = registerKey("pine");
+    public static final ResourceKey<PlacedFeature> IRONWOOD_KEY = registerKey("ironwood");
+    public static final ResourceKey<PlacedFeature> HAWTHORN_KEY = registerKey("hawthorn");
+    public static final ResourceKey<PlacedFeature> CHESTNUT_KEY = registerKey("chestnut");
+    public static final ResourceKey<PlacedFeature> CEDAR_KEY = registerKey("cedar");
+    public static final ResourceKey<PlacedFeature> BEECH_KEY = registerKey("beech");
+    public static final ResourceKey<PlacedFeature> ASH_KEY = registerKey("ash");
+    public static final ResourceKey<PlacedFeature> BLACKBARK_KEY = registerKey("blackbark");
+    public static final ResourceKey<PlacedFeature> ASPEN_KEY = registerKey("aspen");
+    public static final ResourceKey<PlacedFeature> ALDER_KEY = registerKey("alder");
+
 
     // Bootstrap method for initializing placed features
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
@@ -38,6 +50,50 @@ public class ModplacedFeatures {
         register(context, WEIRWOOD_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.WEIRWOOD_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.1f, 1),
                         ModBLocks.WEIRWOOD_SAPLING.get()));
+
+        register(context, SENTINEL_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SENTINEL_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SENTINEL_SAPLING.get()));
+
+        register(context, PINE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PINE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.PINE_SAPLING.get()));
+
+        register(context, IRONWOOD_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.IRONWOOD_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.IRONWOOD_SAPLING.get()));
+
+        register(context, HAWTHORN_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.HAWTHORN_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.HAWTHORN_SAPLING.get()));
+
+        register(context, CHESTNUT_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.CHESTNUT_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.CHESTNUT_SAPLING.get()));
+
+        register(context, CEDAR_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.CEDAR_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.CEDAR_SAPLING.get()));
+
+        register(context, BEECH_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BEECH_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.BEECH_SAPLING.get()));
+
+        register(context, ASH_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ASH_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.ASH_SAPLING.get()));
+
+        register(context, BLACKBARK_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BLACKBARK_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.BLACKBARK_SAPLING.get()));
+
+        register(context, ASPEN_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ASPEN_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.ASPEN_SAPLING.get()));
+
+        register(context, ALDER_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ALDER_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.ALDER_SAPLING.get()));
     }
 
     // Helper method to register a ResourceKey for a placed feature

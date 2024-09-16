@@ -34,12 +34,198 @@ public class ModCreativeBuildingBlocks {
                         pOutput.accept(ModBLocks.STRIPPED_WEIRWOOD_WOOD.get());
                         pOutput.accept(ModBLocks.WEIRWOOD_PLANKS.get());
                         pOutput.accept(ModBLocks.WEIRWOOD_FACE_LOG.get());
+                        pOutput.accept(ModBLocks.WEIRWOOD_STAIRS.get());
+                        pOutput.accept(ModBLocks.WEIRWOOD_SLAB.get());
+                        pOutput.accept(ModBLocks.WEIRWOOD_BUTTON.get());
+                        pOutput.accept(ModBLocks.WEIRWOOD_PRESSURE_PLATE.get());
+                        pOutput.accept(ModBLocks.WEIRWOOD_FENCE.get());
+                        pOutput.accept(ModBLocks.WEIRWOOD_FENCE_GATE.get());
+                        pOutput.accept(ModBLocks.WEIRWOOD_WALL.get());
+                        pOutput.accept(ModBLocks.WEIRWOOD_DOOR.get());
+                        pOutput.accept(ModBLocks.WEIRWOOD_TRAPDOOR.get());
 
                         pOutput.accept(ModBLocks.SYCAMORE_LOG.get());
                         pOutput.accept(ModBLocks.STRIPPED_SYCAMORE_LOG.get());
                         pOutput.accept(ModBLocks.SYCAMORE_WOOD.get());
                         pOutput.accept(ModBLocks.STRIPPED_SYCAMORE_WOOD.get());
                         pOutput.accept(ModBLocks.SYCAMORE_PLANKS.get());
+                        pOutput.accept(ModBLocks.SYCAMORE_STAIRS.get());
+                        pOutput.accept(ModBLocks.SYCAMORE_SLAB.get());
+                        pOutput.accept(ModBLocks.SYCAMORE_BUTTON.get());
+                        pOutput.accept(ModBLocks.SYCAMORE_PRESSURE_PLATE.get());
+                        pOutput.accept(ModBLocks.SYCAMORE_FENCE.get());
+                        pOutput.accept(ModBLocks.SYCAMORE_FENCE_GATE.get());
+                        pOutput.accept(ModBLocks.SYCAMORE_WALL.get());
+                        pOutput.accept(ModBLocks.SYCAMORE_DOOR.get());
+                        pOutput.accept(ModBLocks.SYCAMORE_TRAPDOOR.get());
+
+                        pOutput.accept(ModBLocks.SENTINEL_LOG.get());
+                        pOutput.accept(ModBLocks.STRIPPED_SENTINEL_LOG.get());
+                        pOutput.accept(ModBLocks.SENTINEL_WOOD.get());
+                        pOutput.accept(ModBLocks.STRIPPED_SENTINEL_WOOD.get());
+                        pOutput.accept(ModBLocks.SENTINEL_PLANKS.get());
+                        pOutput.accept(ModBLocks.SENTINEL_STAIRS.get());
+                        pOutput.accept(ModBLocks.SENTINEL_SLAB.get());
+                        pOutput.accept(ModBLocks.SENTINEL_BUTTON.get());
+                        pOutput.accept(ModBLocks.SENTINEL_PRESSURE_PLATE.get());
+                        pOutput.accept(ModBLocks.SENTINEL_FENCE.get());
+                        pOutput.accept(ModBLocks.SENTINEL_FENCE_GATE.get());
+                        pOutput.accept(ModBLocks.SENTINEL_WALL.get());
+                        pOutput.accept(ModBLocks.SENTINEL_DOOR.get());
+                        pOutput.accept(ModBLocks.SENTINEL_TRAPDOOR.get());
+
+                        pOutput.accept(ModBLocks.PINE_LOG.get());
+                        pOutput.accept(ModBLocks.STRIPPED_PINE_LOG.get());
+                        pOutput.accept(ModBLocks.PINE_WOOD.get());
+                        pOutput.accept(ModBLocks.STRIPPED_PINE_WOOD.get());
+                        pOutput.accept(ModBLocks.PINE_PLANKS.get());
+                        pOutput.accept(ModBLocks.PINE_STAIRS.get());
+                        pOutput.accept(ModBLocks.PINE_SLAB.get());
+                        pOutput.accept(ModBLocks.PINE_BUTTON.get());
+                        pOutput.accept(ModBLocks.PINE_PRESSURE_PLATE.get());
+                        pOutput.accept(ModBLocks.PINE_FENCE.get());
+                        pOutput.accept(ModBLocks.PINE_FENCE_GATE.get());
+                        pOutput.accept(ModBLocks.PINE_WALL.get());
+                        pOutput.accept(ModBLocks.PINE_DOOR.get());
+                        pOutput.accept(ModBLocks.PINE_TRAPDOOR.get());
+
+                        pOutput.accept(ModBLocks.IRONWOOD_LOG.get());
+                        pOutput.accept(ModBLocks.STRIPPED_IRONWOOD_LOG.get());
+                        pOutput.accept(ModBLocks.IRONWOOD_WOOD.get());
+                        pOutput.accept(ModBLocks.STRIPPED_IRONWOOD_WOOD.get());
+                        pOutput.accept(ModBLocks.IRONWOOD_PLANKS.get());
+                        pOutput.accept(ModBLocks.IRONWOOD_STAIRS.get());
+                        pOutput.accept(ModBLocks.IRONWOOD_SLAB.get());
+                        pOutput.accept(ModBLocks.IRONWOOD_BUTTON.get());
+                        pOutput.accept(ModBLocks.IRONWOOD_PRESSURE_PLATE.get());
+                        pOutput.accept(ModBLocks.IRONWOOD_FENCE.get());
+                        pOutput.accept(ModBLocks.IRONWOOD_FENCE_GATE.get());
+                        pOutput.accept(ModBLocks.IRONWOOD_WALL.get());
+                        pOutput.accept(ModBLocks.IRONWOOD_DOOR.get());
+                        pOutput.accept(ModBLocks.IRONWOOD_TRAPDOOR.get());
+
+                        pOutput.accept(ModBLocks.HAWTHORN_LOG.get());
+                        pOutput.accept(ModBLocks.STRIPPED_HAWTHORN_LOG.get());
+                        pOutput.accept(ModBLocks.HAWTHORN_WOOD.get());
+                        pOutput.accept(ModBLocks.STRIPPED_HAWTHORN_WOOD.get());
+                        pOutput.accept(ModBLocks.HAWTHORN_PLANKS.get());
+                        pOutput.accept(ModBLocks.HAWTHORN_STAIRS.get());
+                        pOutput.accept(ModBLocks.HAWTHORN_SLAB.get());
+                        pOutput.accept(ModBLocks.HAWTHORN_BUTTON.get());
+                        pOutput.accept(ModBLocks.HAWTHORN_PRESSURE_PLATE.get());
+                        pOutput.accept(ModBLocks.HAWTHORN_FENCE.get());
+                        pOutput.accept(ModBLocks.HAWTHORN_FENCE_GATE.get());
+                        pOutput.accept(ModBLocks.HAWTHORN_WALL.get());
+                        pOutput.accept(ModBLocks.HAWTHORN_DOOR.get());
+                        pOutput.accept(ModBLocks.HAWTHORN_TRAPDOOR.get());
+
+                        pOutput.accept(ModBLocks.CHESTNUT_LOG.get());
+                        pOutput.accept(ModBLocks.STRIPPED_CHESTNUT_LOG.get());
+                        pOutput.accept(ModBLocks.CHESTNUT_WOOD.get());
+                        pOutput.accept(ModBLocks.STRIPPED_CHESTNUT_WOOD.get());
+                        pOutput.accept(ModBLocks.CHESTNUT_PLANKS.get());
+                        pOutput.accept(ModBLocks.CHESTNUT_STAIRS.get());
+                        pOutput.accept(ModBLocks.CHESTNUT_SLAB.get());
+                        pOutput.accept(ModBLocks.CHESTNUT_BUTTON.get());
+                        pOutput.accept(ModBLocks.CHESTNUT_PRESSURE_PLATE.get());
+                        pOutput.accept(ModBLocks.CHESTNUT_FENCE.get());
+                        pOutput.accept(ModBLocks.CHESTNUT_FENCE_GATE.get());
+                        pOutput.accept(ModBLocks.CHESTNUT_WALL.get());
+                        pOutput.accept(ModBLocks.CHESTNUT_DOOR.get());
+                        pOutput.accept(ModBLocks.CHESTNUT_TRAPDOOR.get());
+
+                        pOutput.accept(ModBLocks.CEDAR_LOG.get());
+                        pOutput.accept(ModBLocks.STRIPPED_CEDAR_LOG.get());
+                        pOutput.accept(ModBLocks.CEDAR_WOOD.get());
+                        pOutput.accept(ModBLocks.STRIPPED_CEDAR_WOOD.get());
+                        pOutput.accept(ModBLocks.CEDAR_PLANKS.get());
+                        pOutput.accept(ModBLocks.CEDAR_STAIRS.get());
+                        pOutput.accept(ModBLocks.CEDAR_SLAB.get());
+                        pOutput.accept(ModBLocks.CEDAR_BUTTON.get());
+                        pOutput.accept(ModBLocks.CEDAR_PRESSURE_PLATE.get());
+                        pOutput.accept(ModBLocks.CEDAR_FENCE.get());
+                        pOutput.accept(ModBLocks.CEDAR_FENCE_GATE.get());
+                        pOutput.accept(ModBLocks.CEDAR_WALL.get());
+                        pOutput.accept(ModBLocks.CEDAR_DOOR.get());
+                        pOutput.accept(ModBLocks.CEDAR_TRAPDOOR.get());
+
+                        pOutput.accept(ModBLocks.BEECH_LOG.get());
+                        pOutput.accept(ModBLocks.STRIPPED_BEECH_LOG.get());
+                        pOutput.accept(ModBLocks.BEECH_WOOD.get());
+                        pOutput.accept(ModBLocks.STRIPPED_BEECH_WOOD.get());
+                        pOutput.accept(ModBLocks.BEECH_PLANKS.get());
+                        pOutput.accept(ModBLocks.BEECH_STAIRS.get());
+                        pOutput.accept(ModBLocks.BEECH_SLAB.get());
+                        pOutput.accept(ModBLocks.BEECH_BUTTON.get());
+                        pOutput.accept(ModBLocks.BEECH_PRESSURE_PLATE.get());
+                        pOutput.accept(ModBLocks.BEECH_FENCE.get());
+                        pOutput.accept(ModBLocks.BEECH_FENCE_GATE.get());
+                        pOutput.accept(ModBLocks.BEECH_WALL.get());
+                        pOutput.accept(ModBLocks.BEECH_DOOR.get());
+                        pOutput.accept(ModBLocks.BEECH_TRAPDOOR.get());
+
+                        pOutput.accept(ModBLocks.ASH_LOG.get());
+                        pOutput.accept(ModBLocks.STRIPPED_ASH_LOG.get());
+                        pOutput.accept(ModBLocks.ASH_WOOD.get());
+                        pOutput.accept(ModBLocks.STRIPPED_ASH_WOOD.get());
+                        pOutput.accept(ModBLocks.ASH_PLANKS.get());
+                        pOutput.accept(ModBLocks.ASH_STAIRS.get());
+                        pOutput.accept(ModBLocks.ASH_SLAB.get());
+                        pOutput.accept(ModBLocks.ASH_BUTTON.get());
+                        pOutput.accept(ModBLocks.ASH_PRESSURE_PLATE.get());
+                        pOutput.accept(ModBLocks.ASH_FENCE.get());
+                        pOutput.accept(ModBLocks.ASH_FENCE_GATE.get());
+                        pOutput.accept(ModBLocks.ASH_WALL.get());
+                        pOutput.accept(ModBLocks.ASH_DOOR.get());
+                        pOutput.accept(ModBLocks.ASH_TRAPDOOR.get());
+
+                        pOutput.accept(ModBLocks.BLACKBARK_LOG.get());
+                        pOutput.accept(ModBLocks.STRIPPED_BLACKBARK_LOG.get());
+                        pOutput.accept(ModBLocks.BLACKBARK_WOOD.get());
+                        pOutput.accept(ModBLocks.STRIPPED_BLACKBARK_WOOD.get());
+                        pOutput.accept(ModBLocks.BLACKBARK_PLANKS.get());
+                        pOutput.accept(ModBLocks.BLACKBARK_STAIRS.get());
+                        pOutput.accept(ModBLocks.BLACKBARK_SLAB.get());
+                        pOutput.accept(ModBLocks.BLACKBARK_BUTTON.get());
+                        pOutput.accept(ModBLocks.BLACKBARK_PRESSURE_PLATE.get());
+                        pOutput.accept(ModBLocks.BLACKBARK_FENCE.get());
+                        pOutput.accept(ModBLocks.BLACKBARK_FENCE_GATE.get());
+                        pOutput.accept(ModBLocks.BLACKBARK_WALL.get());
+                        pOutput.accept(ModBLocks.BLACKBARK_DOOR.get());
+                        pOutput.accept(ModBLocks.BLACKBARK_TRAPDOOR.get());
+
+
+                        pOutput.accept(ModBLocks.ASPEN_LOG.get());
+                        pOutput.accept(ModBLocks.STRIPPED_ASPEN_LOG.get());
+                        pOutput.accept(ModBLocks.ASPEN_WOOD.get());
+                        pOutput.accept(ModBLocks.STRIPPED_ASPEN_WOOD.get());
+                        pOutput.accept(ModBLocks.ASPEN_PLANKS.get());
+                        pOutput.accept(ModBLocks.ASPEN_STAIRS.get());
+                        pOutput.accept(ModBLocks.ASPEN_SLAB.get());
+                        pOutput.accept(ModBLocks.ASPEN_BUTTON.get());
+                        pOutput.accept(ModBLocks.ASPEN_PRESSURE_PLATE.get());
+                        pOutput.accept(ModBLocks.ASPEN_FENCE.get());
+                        pOutput.accept(ModBLocks.ASPEN_FENCE_GATE.get());
+                        pOutput.accept(ModBLocks.ASPEN_WALL.get());
+                        pOutput.accept(ModBLocks.ASPEN_DOOR.get());
+                        pOutput.accept(ModBLocks.ASPEN_TRAPDOOR.get());
+
+
+                        pOutput.accept(ModBLocks.ALDER_LOG.get());
+                        pOutput.accept(ModBLocks.STRIPPED_ALDER_LOG.get());
+                        pOutput.accept(ModBLocks.ALDER_WOOD.get());
+                        pOutput.accept(ModBLocks.STRIPPED_ALDER_WOOD.get());
+                        pOutput.accept(ModBLocks.ALDER_PLANKS.get());
+                        pOutput.accept(ModBLocks.ALDER_STAIRS.get());
+                        pOutput.accept(ModBLocks.ALDER_SLAB.get());
+                        pOutput.accept(ModBLocks.ALDER_BUTTON.get());
+                        pOutput.accept(ModBLocks.ALDER_PRESSURE_PLATE.get());
+                        pOutput.accept(ModBLocks.ALDER_FENCE.get());
+                        pOutput.accept(ModBLocks.ALDER_FENCE_GATE.get());
+                        pOutput.accept(ModBLocks.ALDER_WALL.get());
+                        pOutput.accept(ModBLocks.ALDER_DOOR.get());
+                        pOutput.accept(ModBLocks.ALDER_TRAPDOOR.get());
+
                         // Bricks
                         pOutput.accept(ModBLocks.STONE_BRICK_BUT_COOLER.get());
                         pOutput.accept(ModBLocks.DARK_STONE_BRICK.get());
@@ -54,6 +240,27 @@ public class ModCreativeBuildingBlocks {
                         pOutput.accept(ModBLocks.TIN_BLOCK.get());
                         // BRONZE
                         pOutput.accept(ModBLocks.BRONZE_BLOCK.get());
+                        // GEMSTONES
+                        pOutput.accept(ModBLocks.YELLOW_DIAMOND_BLOCK.get());
+                        pOutput.accept(ModBLocks.TRANSPARENT_DIAMOND_BLOCK.get());
+                        pOutput.accept(ModBLocks.BLOODSTONE_BLOCK.get());
+                        pOutput.accept(ModBLocks.BLACK_DIAMOND_BLOCK.get());
+                        pOutput.accept(ModBLocks.CHALCEDONY_BLOCK.get());
+                        pOutput.accept(ModBLocks.AMBER_BLOCK.get());
+                        pOutput.accept(ModBLocks.AMETHYST_BLOCK.get());
+                        pOutput.accept(ModBLocks.CARNELIAN_BLOCK.get());
+                        pOutput.accept(ModBLocks.GARNET_BLOCK.get());
+                        pOutput.accept(ModBLocks.JADE_BLOCK.get());
+                        pOutput.accept(ModBLocks.JASPER_BLOCK.get());
+                        pOutput.accept(ModBLocks.MALACHITE_BLOCK.get());
+                        pOutput.accept(ModBLocks.RUBY_BLOCK.get());
+                        pOutput.accept(ModBLocks.ONYX_BLOCK.get());
+                        pOutput.accept(ModBLocks.OPAL_BLOCK.get());
+                        pOutput.accept(ModBLocks.SAPPHIRE_BLOCK.get());
+                        pOutput.accept(ModBLocks.MOONSTONE_BLOCK.get());
+                        pOutput.accept(ModBLocks.TIGERS_EYE_BLOCK.get());
+                        pOutput.accept(ModBLocks.TOPAZ_BLOCK.get());
+                        //pOutput.accept(ModBLocks.TOURMALINE_BLOCK.get());
 
                     })
                     .build());

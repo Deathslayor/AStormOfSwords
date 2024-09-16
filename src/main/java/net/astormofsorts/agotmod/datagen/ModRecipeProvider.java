@@ -456,6 +456,52 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         // -------------------------------------------------(STONE CUTTER)------------------------------------------------- //
 
         // -------------------------------------------------(WOOD)------------------------------------------------- //
+
+        //Weirwood
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.WEIRWOOD_WOOD.get(), 3)
+                .requires(ModBLocks.WEIRWOOD_LOG.get(), 4)
+                .unlockedBy(getHasName(ModBLocks.WEIRWOOD_LOG.get()), has(ModBLocks.WEIRWOOD_LOG.get()))
+                .save(pWriter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.STRIPPED_WEIRWOOD_WOOD.get(), 3)
+                .requires(ModBLocks.STRIPPED_WEIRWOOD_LOG.get(), 4)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_WEIRWOOD_LOG.get()), has(ModBLocks.STRIPPED_WEIRWOOD_LOG.get()))
+                .save(pWriter);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.WEIRWOOD_PLANKS.get(), 4)
+                .requires(ModBLocks.STRIPPED_WEIRWOOD_WOOD.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_WEIRWOOD_WOOD.get()), has(ModBLocks.STRIPPED_WEIRWOOD_WOOD.get()))
+                .save(pWriter, "planks_from_weirwood_stripped_wood");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.WEIRWOOD_PLANKS.get(), 4)
+                .requires(ModBLocks.WEIRWOOD_WOOD.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.WEIRWOOD_WOOD.get()), has(ModBLocks.WEIRWOOD_WOOD.get()))
+                .save(pWriter, "planks_from_weirwood_wood");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.WEIRWOOD_PLANKS.get(), 4)
+                .requires(ModBLocks.STRIPPED_WEIRWOOD_LOG.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_WEIRWOOD_LOG.get()), has(ModBLocks.STRIPPED_WEIRWOOD_LOG.get()))
+                .save(pWriter, "planks_from_weirwood_stripped_log");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.WEIRWOOD_PLANKS.get(), 4)
+                .requires(ModBLocks.WEIRWOOD_LOG.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.WEIRWOOD_LOG.get()), has(ModBLocks.WEIRWOOD_LOG.get()))
+                .save(pWriter, "planks_from_weirwood_log");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Blocks.CRAFTING_TABLE)
+                .pattern("BB")
+                .pattern("BB")
+                .pattern("  ")
+                .define('B', ModBLocks.WEIRWOOD_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.WEIRWOOD_PLANKS.get()), has(ModBLocks.WEIRWOOD_PLANKS.get()))
+                .save(pWriter, "weirwood_plank_craftingtable");
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.STICK)
+                .pattern("B")
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.WEIRWOOD_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.WEIRWOOD_PLANKS.get()), has(ModBLocks.WEIRWOOD_PLANKS.get()))
+                .save(pWriter, "weirwood_plank_stick");
+
+        //Sycamore
+
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.SYCAMORE_WOOD.get(), 3)
                 .requires(ModBLocks.SYCAMORE_LOG.get(), 4)
                 .unlockedBy(getHasName(ModBLocks.SYCAMORE_LOG.get()), has(ModBLocks.SYCAMORE_LOG.get()))
@@ -488,14 +534,500 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("  ")
                 .define('B', ModBLocks.SYCAMORE_PLANKS.get())
                 .unlockedBy(getHasName(ModBLocks.SYCAMORE_PLANKS.get()), has(ModBLocks.SYCAMORE_PLANKS.get()))
-                .save(pWriter);
+                .save(pWriter, "sycamore_plank_craftingtable");
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.STICK)
                 .pattern("B")
                 .pattern("B")
                 .pattern(" ")
                 .define('B', ModBLocks.SYCAMORE_PLANKS.get())
                 .unlockedBy(getHasName(ModBLocks.SYCAMORE_PLANKS.get()), has(ModBLocks.SYCAMORE_PLANKS.get()))
+                .save(pWriter, "sycamore_plank_stick");
+
+        //Sentinel
+
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.SENTINEL_WOOD.get(), 3)
+                .requires(ModBLocks.SENTINEL_LOG.get(), 4)
+                .unlockedBy(getHasName(ModBLocks.SENTINEL_LOG.get()), has(ModBLocks.SENTINEL_LOG.get()))
                 .save(pWriter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.STRIPPED_SENTINEL_WOOD.get(), 3)
+                .requires(ModBLocks.STRIPPED_SENTINEL_LOG.get(), 4)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_SENTINEL_LOG.get()), has(ModBLocks.STRIPPED_SENTINEL_LOG.get()))
+                .save(pWriter);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.SENTINEL_PLANKS.get(), 4)
+                .requires(ModBLocks.STRIPPED_SENTINEL_WOOD.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_SENTINEL_WOOD.get()), has(ModBLocks.STRIPPED_SENTINEL_WOOD.get()))
+                .save(pWriter, "planks_from_sentinel_stripped_wood");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.SENTINEL_PLANKS.get(), 4)
+                .requires(ModBLocks.SENTINEL_WOOD.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.SENTINEL_WOOD.get()), has(ModBLocks.SENTINEL_WOOD.get()))
+                .save(pWriter, "planks_from_sentinel_wood");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.SENTINEL_PLANKS.get(), 4)
+                .requires(ModBLocks.STRIPPED_SENTINEL_LOG.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_SENTINEL_LOG.get()), has(ModBLocks.STRIPPED_SENTINEL_LOG.get()))
+                .save(pWriter, "planks_from_sentinel_stripped_log");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.SENTINEL_PLANKS.get(), 4)
+                .requires(ModBLocks.SENTINEL_LOG.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.SENTINEL_LOG.get()), has(ModBLocks.SENTINEL_LOG.get()))
+                .save(pWriter, "planks_from_sentinel_log");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Blocks.CRAFTING_TABLE)
+                .pattern("BB")
+                .pattern("BB")
+                .pattern("  ")
+                .define('B', ModBLocks.SENTINEL_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.SENTINEL_PLANKS.get()), has(ModBLocks.SENTINEL_PLANKS.get()))
+                .save(pWriter, "sentinel_plank_craftingtable");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.STICK)
+                .pattern("B")
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.SENTINEL_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.SENTINEL_PLANKS.get()), has(ModBLocks.SENTINEL_PLANKS.get()))
+                .save(pWriter, "sentinel_plank_stick");
+
+        //Pine
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.PINE_WOOD.get(), 3)
+                .requires(ModBLocks.PINE_LOG.get(), 4)
+                .unlockedBy(getHasName(ModBLocks.PINE_LOG.get()), has(ModBLocks.PINE_LOG.get()))
+                .save(pWriter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.STRIPPED_PINE_WOOD.get(), 3)
+                .requires(ModBLocks.STRIPPED_PINE_LOG.get(), 4)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_PINE_LOG.get()), has(ModBLocks.STRIPPED_PINE_LOG.get()))
+                .save(pWriter);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.PINE_PLANKS.get(), 4)
+                .requires(ModBLocks.STRIPPED_PINE_WOOD.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_PINE_WOOD.get()), has(ModBLocks.STRIPPED_PINE_WOOD.get()))
+                .save(pWriter, "planks_from_pine_stripped_wood");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.PINE_PLANKS.get(), 4)
+                .requires(ModBLocks.PINE_WOOD.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.PINE_WOOD.get()), has(ModBLocks.PINE_WOOD.get()))
+                .save(pWriter, "planks_from_pine_wood");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.PINE_PLANKS.get(), 4)
+                .requires(ModBLocks.STRIPPED_PINE_LOG.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_PINE_LOG.get()), has(ModBLocks.STRIPPED_PINE_LOG.get()))
+                .save(pWriter, "planks_from_pine_stripped_log");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.PINE_PLANKS.get(), 4)
+                .requires(ModBLocks.PINE_LOG.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.PINE_LOG.get()), has(ModBLocks.PINE_LOG.get()))
+                .save(pWriter, "planks_from_pine_log");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Blocks.CRAFTING_TABLE)
+                .pattern("BB")
+                .pattern("BB")
+                .pattern("  ")
+                .define('B', ModBLocks.PINE_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.PINE_PLANKS.get()), has(ModBLocks.PINE_PLANKS.get()))
+                .save(pWriter, "pine_plank_craftingtable");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.STICK)
+                .pattern("B")
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.PINE_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.PINE_PLANKS.get()), has(ModBLocks.PINE_PLANKS.get()))
+                .save(pWriter, "pine_plank_stick");
+
+        //Ironwood
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.IRONWOOD_WOOD.get(), 3)
+                .requires(ModBLocks.IRONWOOD_LOG.get(), 4)
+                .unlockedBy(getHasName(ModBLocks.IRONWOOD_LOG.get()), has(ModBLocks.IRONWOOD_LOG.get()))
+                .save(pWriter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.STRIPPED_IRONWOOD_WOOD.get(), 3)
+                .requires(ModBLocks.STRIPPED_IRONWOOD_LOG.get(), 4)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_IRONWOOD_LOG.get()), has(ModBLocks.STRIPPED_IRONWOOD_LOG.get()))
+                .save(pWriter);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.IRONWOOD_PLANKS.get(), 4)
+                .requires(ModBLocks.STRIPPED_IRONWOOD_WOOD.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_PINE_WOOD.get()), has(ModBLocks.STRIPPED_IRONWOOD_WOOD.get()))
+                .save(pWriter, "planks_from_ironwood_stripped_wood");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.IRONWOOD_PLANKS.get(), 4)
+                .requires(ModBLocks.IRONWOOD_WOOD.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.IRONWOOD_WOOD.get()), has(ModBLocks.IRONWOOD_WOOD.get()))
+                .save(pWriter, "planks_from_ironwood_wood");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.IRONWOOD_PLANKS.get(), 4)
+                .requires(ModBLocks.STRIPPED_IRONWOOD_LOG.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_IRONWOOD_LOG.get()), has(ModBLocks.STRIPPED_IRONWOOD_LOG.get()))
+                .save(pWriter, "planks_from_ironwood_stripped_log");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.IRONWOOD_PLANKS.get(), 4)
+                .requires(ModBLocks.IRONWOOD_LOG.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.IRONWOOD_LOG.get()), has(ModBLocks.IRONWOOD_LOG.get()))
+                .save(pWriter, "planks_from_ironwood_log");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Blocks.CRAFTING_TABLE)
+                .pattern("BB")
+                .pattern("BB")
+                .pattern("  ")
+                .define('B', ModBLocks.IRONWOOD_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.IRONWOOD_PLANKS.get()), has(ModBLocks.IRONWOOD_PLANKS.get()))
+                .save(pWriter, "ironwood_plank_craftingtable");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.STICK)
+                .pattern("B")
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.IRONWOOD_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.IRONWOOD_PLANKS.get()), has(ModBLocks.IRONWOOD_PLANKS.get()))
+                .save(pWriter, "ironwood_plank_stick");
+
+        //Hawhtorn
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.HAWTHORN_WOOD.get(), 3)
+                .requires(ModBLocks.HAWTHORN_LOG.get(), 4)
+                .unlockedBy(getHasName(ModBLocks.HAWTHORN_LOG.get()), has(ModBLocks.HAWTHORN_LOG.get()))
+                .save(pWriter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.STRIPPED_HAWTHORN_WOOD.get(), 3)
+                .requires(ModBLocks.STRIPPED_HAWTHORN_LOG.get(), 4)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_HAWTHORN_LOG.get()), has(ModBLocks.STRIPPED_HAWTHORN_LOG.get()))
+                .save(pWriter);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.HAWTHORN_PLANKS.get(), 4)
+                .requires(ModBLocks.STRIPPED_HAWTHORN_WOOD.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_PINE_WOOD.get()), has(ModBLocks.STRIPPED_HAWTHORN_WOOD.get()))
+                .save(pWriter, "planks_from_hawthorn_stripped_wood");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.HAWTHORN_PLANKS.get(), 4)
+                .requires(ModBLocks.HAWTHORN_WOOD.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.HAWTHORN_WOOD.get()), has(ModBLocks.HAWTHORN_WOOD.get()))
+                .save(pWriter, "planks_from_hawthorn_wood");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.HAWTHORN_PLANKS.get(), 4)
+                .requires(ModBLocks.STRIPPED_HAWTHORN_LOG.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_HAWTHORN_LOG.get()), has(ModBLocks.STRIPPED_HAWTHORN_LOG.get()))
+                .save(pWriter, "planks_from_hawthorn_stripped_log");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.HAWTHORN_PLANKS.get(), 4)
+                .requires(ModBLocks.HAWTHORN_LOG.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.HAWTHORN_LOG.get()), has(ModBLocks.HAWTHORN_LOG.get()))
+                .save(pWriter, "planks_from_hawthorn_log");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Blocks.CRAFTING_TABLE)
+                .pattern("BB")
+                .pattern("BB")
+                .pattern("  ")
+                .define('B', ModBLocks.HAWTHORN_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.HAWTHORN_PLANKS.get()), has(ModBLocks.HAWTHORN_PLANKS.get()))
+                .save(pWriter, "hawthorn_plank_craftingtable");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.STICK)
+                .pattern("B")
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.HAWTHORN_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.HAWTHORN_PLANKS.get()), has(ModBLocks.HAWTHORN_PLANKS.get()))
+                .save(pWriter, "hawthorn_plank_stick");
+
+        //Chestnut
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.CHESTNUT_WOOD.get(), 3)
+                .requires(ModBLocks.CHESTNUT_LOG.get(), 4)
+                .unlockedBy(getHasName(ModBLocks.CHESTNUT_LOG.get()), has(ModBLocks.CHESTNUT_LOG.get()))
+                .save(pWriter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.STRIPPED_CHESTNUT_WOOD.get(), 3)
+                .requires(ModBLocks.STRIPPED_CHESTNUT_LOG.get(), 4)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_CHESTNUT_LOG.get()), has(ModBLocks.STRIPPED_CHESTNUT_LOG.get()))
+                .save(pWriter);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.CHESTNUT_PLANKS.get(), 4)
+                .requires(ModBLocks.STRIPPED_CHESTNUT_WOOD.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_PINE_WOOD.get()), has(ModBLocks.STRIPPED_CHESTNUT_WOOD.get()))
+                .save(pWriter, "planks_from_chestnut_stripped_wood");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.CHESTNUT_PLANKS.get(), 4)
+                .requires(ModBLocks.CHESTNUT_WOOD.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.CHESTNUT_WOOD.get()), has(ModBLocks.CHESTNUT_WOOD.get()))
+                .save(pWriter, "planks_from_chestnut_wood");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.CHESTNUT_PLANKS.get(), 4)
+                .requires(ModBLocks.STRIPPED_CHESTNUT_LOG.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_CHESTNUT_LOG.get()), has(ModBLocks.STRIPPED_CHESTNUT_LOG.get()))
+                .save(pWriter, "planks_from_chestnut_stripped_log");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.CHESTNUT_PLANKS.get(), 4)
+                .requires(ModBLocks.CHESTNUT_LOG.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.CHESTNUT_LOG.get()), has(ModBLocks.CHESTNUT_LOG.get()))
+                .save(pWriter, "planks_from_chestnut_log");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Blocks.CRAFTING_TABLE)
+                .pattern("BB")
+                .pattern("BB")
+                .pattern("  ")
+                .define('B', ModBLocks.CHESTNUT_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.CHESTNUT_PLANKS.get()), has(ModBLocks.CHESTNUT_PLANKS.get()))
+                .save(pWriter, "chestnut_plank_craftingtable");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.STICK)
+                .pattern("B")
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.CHESTNUT_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.CHESTNUT_PLANKS.get()), has(ModBLocks.CHESTNUT_PLANKS.get()))
+                .save(pWriter, "chestnut_plank_stick");
+
+        //Cedar
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.CEDAR_WOOD.get(), 3)
+                .requires(ModBLocks.CEDAR_LOG.get(), 4)
+                .unlockedBy(getHasName(ModBLocks.CEDAR_LOG.get()), has(ModBLocks.CEDAR_LOG.get()))
+                .save(pWriter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.STRIPPED_CEDAR_WOOD.get(), 3)
+                .requires(ModBLocks.STRIPPED_CEDAR_LOG.get(), 4)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_CEDAR_LOG.get()), has(ModBLocks.STRIPPED_CEDAR_LOG.get()))
+                .save(pWriter);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.CEDAR_PLANKS.get(), 4)
+                .requires(ModBLocks.STRIPPED_CEDAR_WOOD.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_PINE_WOOD.get()), has(ModBLocks.STRIPPED_CEDAR_WOOD.get()))
+                .save(pWriter, "planks_from_cedar_stripped_wood");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.CEDAR_PLANKS.get(), 4)
+                .requires(ModBLocks.CEDAR_WOOD.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.CEDAR_WOOD.get()), has(ModBLocks.CEDAR_WOOD.get()))
+                .save(pWriter, "planks_from_cedar_wood");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.CEDAR_PLANKS.get(), 4)
+                .requires(ModBLocks.STRIPPED_CEDAR_LOG.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_CEDAR_LOG.get()), has(ModBLocks.STRIPPED_CEDAR_LOG.get()))
+                .save(pWriter, "planks_from_cedar_stripped_log");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.CEDAR_PLANKS.get(), 4)
+                .requires(ModBLocks.CEDAR_LOG.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.CEDAR_LOG.get()), has(ModBLocks.CEDAR_LOG.get()))
+                .save(pWriter, "planks_from_cedar_log");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Blocks.CRAFTING_TABLE)
+                .pattern("BB")
+                .pattern("BB")
+                .pattern("  ")
+                .define('B', ModBLocks.CEDAR_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.CEDAR_PLANKS.get()), has(ModBLocks.CEDAR_PLANKS.get()))
+                .save(pWriter, "cedar_plank_craftingtable");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.STICK)
+                .pattern("B")
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.CEDAR_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.CEDAR_PLANKS.get()), has(ModBLocks.CEDAR_PLANKS.get()))
+                .save(pWriter, "cedar_plank_stick");
+
+        //beech
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.BEECH_WOOD.get(), 3)
+                .requires(ModBLocks.BEECH_LOG.get(), 4)
+                .unlockedBy(getHasName(ModBLocks.BEECH_LOG.get()), has(ModBLocks.BEECH_LOG.get()))
+                .save(pWriter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.STRIPPED_BEECH_WOOD.get(), 3)
+                .requires(ModBLocks.STRIPPED_BEECH_LOG.get(), 4)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_BEECH_LOG.get()), has(ModBLocks.STRIPPED_BEECH_LOG.get()))
+                .save(pWriter);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.BEECH_PLANKS.get(), 4)
+                .requires(ModBLocks.STRIPPED_BEECH_WOOD.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_BEECH_WOOD.get()), has(ModBLocks.STRIPPED_BEECH_WOOD.get()))
+                .save(pWriter, "planks_from_beech_stripped_wood");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.BEECH_PLANKS.get(), 4)
+                .requires(ModBLocks.BEECH_WOOD.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.BEECH_WOOD.get()), has(ModBLocks.BEECH_WOOD.get()))
+                .save(pWriter, "planks_from_beech_wood");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.BEECH_PLANKS.get(), 4)
+                .requires(ModBLocks.STRIPPED_BEECH_LOG.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_BEECH_LOG.get()), has(ModBLocks.STRIPPED_BEECH_LOG.get()))
+                .save(pWriter, "planks_from_beech_stripped_log");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.BEECH_PLANKS.get(), 4)
+                .requires(ModBLocks.BEECH_LOG.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.BEECH_LOG.get()), has(ModBLocks.BEECH_LOG.get()))
+                .save(pWriter, "planks_from_beech_log");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Blocks.CRAFTING_TABLE)
+                .pattern("BB")
+                .pattern("BB")
+                .pattern("  ")
+                .define('B', ModBLocks.BEECH_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.BEECH_PLANKS.get()), has(ModBLocks.BEECH_PLANKS.get()))
+                .save(pWriter, "beech_plank_craftingtable");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.STICK)
+                .pattern("B")
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.BEECH_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.BEECH_PLANKS.get()), has(ModBLocks.BEECH_PLANKS.get()))
+                .save(pWriter, "beech_plank_stick");
+
+        //ash
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.ASH_WOOD.get(), 3)
+                .requires(ModBLocks.ASH_LOG.get(), 4)
+                .unlockedBy(getHasName(ModBLocks.ASH_LOG.get()), has(ModBLocks.ASH_LOG.get()))
+                .save(pWriter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.STRIPPED_ASH_WOOD.get(), 3)
+                .requires(ModBLocks.STRIPPED_ASH_LOG.get(), 4)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_ASH_LOG.get()), has(ModBLocks.STRIPPED_ASH_LOG.get()))
+                .save(pWriter);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.ASH_PLANKS.get(), 4)
+                .requires(ModBLocks.STRIPPED_ASH_WOOD.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_ASH_WOOD.get()), has(ModBLocks.STRIPPED_ASH_WOOD.get()))
+                .save(pWriter, "planks_from_ash_stripped_wood");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.ASH_PLANKS.get(), 4)
+                .requires(ModBLocks.ASH_WOOD.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.ASH_WOOD.get()), has(ModBLocks.ASH_WOOD.get()))
+                .save(pWriter, "planks_from_ash_wood");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.ASH_PLANKS.get(), 4)
+                .requires(ModBLocks.STRIPPED_ASH_LOG.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_ASH_LOG.get()), has(ModBLocks.STRIPPED_ASH_LOG.get()))
+                .save(pWriter, "planks_from_ash_stripped_log");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.ASH_PLANKS.get(), 4)
+                .requires(ModBLocks.ASH_LOG.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.ASH_LOG.get()), has(ModBLocks.ASH_LOG.get()))
+                .save(pWriter, "planks_from_ash_log");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Blocks.CRAFTING_TABLE)
+                .pattern("BB")
+                .pattern("BB")
+                .pattern("  ")
+                .define('B', ModBLocks.ASH_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.ASH_PLANKS.get()), has(ModBLocks.ASH_PLANKS.get()))
+                .save(pWriter, "ash_plank_craftingtable");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.STICK)
+                .pattern("B")
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.ASH_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.ASH_PLANKS.get()), has(ModBLocks.ASH_PLANKS.get()))
+                .save(pWriter, "ash_plank_stick");
+
+        //Blackbark
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.BLACKBARK_WOOD.get(), 3)
+                .requires(ModBLocks.BLACKBARK_LOG.get(), 4)
+                .unlockedBy(getHasName(ModBLocks.BLACKBARK_LOG.get()), has(ModBLocks.BLACKBARK_LOG.get()))
+                .save(pWriter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.STRIPPED_BLACKBARK_WOOD.get(), 3)
+                .requires(ModBLocks.STRIPPED_BLACKBARK_LOG.get(), 4)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_BLACKBARK_LOG.get()), has(ModBLocks.STRIPPED_BLACKBARK_LOG.get()))
+                .save(pWriter);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.BLACKBARK_PLANKS.get(), 4)
+                .requires(ModBLocks.STRIPPED_BLACKBARK_WOOD.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_BLACKBARK_WOOD.get()), has(ModBLocks.STRIPPED_BLACKBARK_WOOD.get()))
+                .save(pWriter, "planks_from_blackbark_stripped_wood");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.BLACKBARK_PLANKS.get(), 4)
+                .requires(ModBLocks.BLACKBARK_WOOD.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.BLACKBARK_WOOD.get()), has(ModBLocks.BLACKBARK_WOOD.get()))
+                .save(pWriter, "planks_from_blackbark_wood");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.BLACKBARK_PLANKS.get(), 4)
+                .requires(ModBLocks.STRIPPED_BLACKBARK_LOG.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_BLACKBARK_LOG.get()), has(ModBLocks.STRIPPED_BLACKBARK_LOG.get()))
+                .save(pWriter, "planks_from_blackbark_stripped_log");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.BLACKBARK_PLANKS.get(), 4)
+                .requires(ModBLocks.BLACKBARK_LOG.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.BLACKBARK_LOG.get()), has(ModBLocks.BLACKBARK_LOG.get()))
+                .save(pWriter, "planks_from_blackbark_log");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Blocks.CRAFTING_TABLE)
+                .pattern("BB")
+                .pattern("BB")
+                .pattern("  ")
+                .define('B', ModBLocks.BLACKBARK_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.BLACKBARK_PLANKS.get()), has(ModBLocks.BLACKBARK_PLANKS.get()))
+                .save(pWriter, "blackbark_plank_craftingtable");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.STICK)
+                .pattern("B")
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.BLACKBARK_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.BLACKBARK_PLANKS.get()), has(ModBLocks.BLACKBARK_PLANKS.get()))
+                .save(pWriter, "blackbark_plank_stick");
+
+        //Aspen
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.ASPEN_WOOD.get(), 3)
+                .requires(ModBLocks.ASPEN_LOG.get(), 4)
+                .unlockedBy(getHasName(ModBLocks.ASPEN_LOG.get()), has(ModBLocks.ASPEN_LOG.get()))
+                .save(pWriter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.STRIPPED_ASPEN_WOOD.get(), 3)
+                .requires(ModBLocks.STRIPPED_ASPEN_LOG.get(), 4)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_ASPEN_LOG.get()), has(ModBLocks.STRIPPED_ASPEN_LOG.get()))
+                .save(pWriter);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.ASPEN_PLANKS.get(), 4)
+                .requires(ModBLocks.STRIPPED_ASPEN_WOOD.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_ASPEN_WOOD.get()), has(ModBLocks.STRIPPED_ASPEN_WOOD.get()))
+                .save(pWriter, "planks_from_aspen_stripped_wood");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.ASPEN_PLANKS.get(), 4)
+                .requires(ModBLocks.ASPEN_WOOD.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.ASPEN_WOOD.get()), has(ModBLocks.ASPEN_WOOD.get()))
+                .save(pWriter, "planks_from_aspen_wood");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.ASPEN_PLANKS.get(), 4)
+                .requires(ModBLocks.STRIPPED_ASPEN_LOG.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_ASPEN_LOG.get()), has(ModBLocks.STRIPPED_ASPEN_LOG.get()))
+                .save(pWriter, "planks_from_aspen_stripped_log");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.ASPEN_PLANKS.get(), 4)
+                .requires(ModBLocks.ASPEN_LOG.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.ASPEN_LOG.get()), has(ModBLocks.ASPEN_LOG.get()))
+                .save(pWriter, "planks_from_aspen_log");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Blocks.CRAFTING_TABLE)
+                .pattern("BB")
+                .pattern("BB")
+                .pattern("  ")
+                .define('B', ModBLocks.ASPEN_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.ASPEN_PLANKS.get()), has(ModBLocks.ASPEN_PLANKS.get()))
+                .save(pWriter, "aspen_plank_craftingtable");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.STICK)
+                .pattern("B")
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.ASPEN_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.ASPEN_PLANKS.get()), has(ModBLocks.ASPEN_PLANKS.get()))
+                .save(pWriter, "aspen_plank_stick");
+
+        //Alder
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.ALDER_WOOD.get(), 3)
+                .requires(ModBLocks.ALDER_LOG.get(), 4)
+                .unlockedBy(getHasName(ModBLocks.ALDER_LOG.get()), has(ModBLocks.ALDER_LOG.get()))
+                .save(pWriter);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.STRIPPED_ALDER_WOOD.get(), 3)
+                .requires(ModBLocks.STRIPPED_ALDER_LOG.get(), 4)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_ALDER_LOG.get()), has(ModBLocks.STRIPPED_ALDER_LOG.get()))
+                .save(pWriter);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.ALDER_PLANKS.get(), 4)
+                .requires(ModBLocks.STRIPPED_ALDER_WOOD.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_ALDER_WOOD.get()), has(ModBLocks.STRIPPED_ALDER_WOOD.get()))
+                .save(pWriter, "planks_from_alder_stripped_wood");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.ALDER_PLANKS.get(), 4)
+                .requires(ModBLocks.ALDER_WOOD.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.ALDER_WOOD.get()), has(ModBLocks.ALDER_WOOD.get()))
+                .save(pWriter, "planks_from_alder_wood");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.ALDER_PLANKS.get(), 4)
+                .requires(ModBLocks.STRIPPED_ALDER_LOG.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_ALDER_LOG.get()), has(ModBLocks.STRIPPED_ALDER_LOG.get()))
+                .save(pWriter, "planks_from_alder_stripped_log");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBLocks.ALDER_PLANKS.get(), 4)
+                .requires(ModBLocks.ALDER_LOG.get(), 1)
+                .unlockedBy(getHasName(ModBLocks.ALDER_LOG.get()), has(ModBLocks.ALDER_LOG.get()))
+                .save(pWriter, "planks_from_alder_log");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Blocks.CRAFTING_TABLE)
+                .pattern("BB")
+                .pattern("BB")
+                .pattern("  ")
+                .define('B', ModBLocks.ALDER_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.ALDER_PLANKS.get()), has(ModBLocks.ALDER_PLANKS.get()))
+                .save(pWriter, "alder_plank_craftingtable");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.STICK)
+                .pattern("B")
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.ALDER_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.ALDER_PLANKS.get()), has(ModBLocks.ALDER_PLANKS.get()))
+                .save(pWriter, "alder_plank_stick");
         // -------------------------------------------------(WOOD)------------------------------------------------- //
 
         // -------------------------------------------------(FOODS)------------------------------------------------- //

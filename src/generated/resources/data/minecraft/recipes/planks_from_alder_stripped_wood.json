@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "agotmod:alder_wood_stripped"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "item": "agotmod:alder_planks"
+  }
+}

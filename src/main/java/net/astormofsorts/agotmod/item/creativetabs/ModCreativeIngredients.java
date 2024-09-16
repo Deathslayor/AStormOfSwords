@@ -23,7 +23,7 @@ public class ModCreativeIngredients {
     // Adding items into the MAIN mod tab in creative
     public static final RegistryObject<CreativeModeTab> AGOT_TAB_INGREDIENTS = CREATIVE_MODE_TAB.register("agot_tab_ingredients",
             () -> CreativeModeTab.builder()
-                    .icon(() -> new ItemStack(ModItems.STEEL_NUGGET.get())) // Icon for the creative mode tab
+                    .icon(() -> new ItemStack(ModItems.STEEL_INGOT.get())) // Icon for the creative mode tab
                     .title(Component.translatable("creativetab.agot_tab_ingredients")) // Title for the creative mode tab
                     .displayItems((pParameters, pOutput) -> {
                         /** Blocks */

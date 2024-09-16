@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "agotmod:block/cedar_slabs"
+    },
+    "type=double": {
+      "model": "agotmod:block/cedar_planks"
+    },
+    "type=top": {
+      "model": "agotmod:block/cedar_slabs_top"
+    }
+  }
+}
