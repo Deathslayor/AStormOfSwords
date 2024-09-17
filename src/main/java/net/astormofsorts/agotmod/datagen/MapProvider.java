@@ -27,6 +27,8 @@ public class MapProvider implements DataProvider {
     public static final BufferedImage ORGINAL_MAP_IMAGE = getOriginalMapImage();
     @Nullable
     public static final BufferedImage OVERWRITE_HEIGHTMAP_IMAGE = getOverwriteHeightmapImage();
+    @Nullable
+    public static final BufferedImage OVERWRITE_BIOME_MAP_IMAGE = getOverwriteBiomeMapImage();
 
     private static BufferedImage getOriginalMapImage() {
         URL orignalMapUrl = AGoTMod.class.getResource("/assets/agotmod/map.png");
@@ -36,10 +38,9 @@ public class MapProvider implements DataProvider {
             throw new RuntimeException("Failed to load biome map located at: " + (orignalMapUrl != null ? orignalMapUrl.getPath() : "invalid location"), e);
         }
     }
-
     @Nullable
     private static BufferedImage getOverwriteHeightmapImage() {
-        URL orignalMapUrl = AGoTMod.class.getResource("/assets/agotmod/overwrite.png");
+        URL orignalMapUrl = AGoTMod.class.getResource("/assets/agotmod/overwrite_height.png");
         try {
             if (orignalMapUrl != null) {
                 return ImageIO.read(orignalMapUrl);
@@ -50,6 +51,20 @@ public class MapProvider implements DataProvider {
             throw new RuntimeException("Failed to load biome map located at: " + orignalMapUrl.getPath(), e);
         }
     }
+    @Nullable
+    private static BufferedImage getOverwriteBiomeMapImage() {
+        URL orignalMapUrl = AGoTMod.class.getResource("/assets/agotmod/overwrite_biomes.png");
+        try {
+            if (orignalMapUrl != null) {
+                return ImageIO.read(orignalMapUrl);
+            } else {
+                return null;
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load biome map located at: " + orignalMapUrl.getPath(), e);
+        }
+    }
+
     public static final String BIOME_MAP_PATH = "assets/agotmod/map_biome.png";
     public static final String HEIGHT_MAP_PATH = "assets/agotmod/map_height.png";
 
@@ -65,21 +80,20 @@ public class MapProvider implements DataProvider {
         return CompletableFuture.runAsync(() -> {
             Map<Integer, Integer> heights = MapBiome.toHeightMap(MapBiome.BIOME_LIST);
             try {
-                BufferedImage validIn = MapUtils.approachColors(ORGINAL_MAP_IMAGE, heights.keySet().stream().map(Color::new).toList());
-                BufferedImage upScaled = MapUtils.scaleImage(validIn, 2);
-                BufferedImage validMap = MapUtils.removeInvalidColors(upScaled, heights.keySet());
+                BufferedImage validOriginal = MapUtils.approachColors(ORGINAL_MAP_IMAGE, heights.keySet().stream().map(Color::new).toList());
+                BufferedImage biomeMap = MapUtils.generateBiomeMap(validOriginal);
+                BufferedImage overwrittenBiomeMap = MapUtils.acceptOverwriteMap(biomeMap, OVERWRITE_BIOME_MAP_IMAGE);
                 {
                     Path output = packOutput.getOutputFolder().resolve(BIOME_MAP_PATH);
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     HashingOutputStream hashStream = new HashingOutputStream(Hashing.sha1(), baos);
-                    ImageIO.write(validMap, "PNG", hashStream);
+                    ImageIO.write(overwrittenBiomeMap, "PNG", hashStream);
                     cache.writeIfNeeded(output, baos.toByteArray(), hashStream.hash());
                     LogUtils.getLogger().info("Generated Biome Map.");
                 }
 
-                BufferedImage heightmap = MapUtils.generateHeightMap(validMap, heights);
-                BufferedImage blurredHeightmap = MapUtils.blur(heightmap, 4);
-                BufferedImage overwrittenHeightmap = MapUtils.acceptOverwriteMap(blurredHeightmap, OVERWRITE_HEIGHTMAP_IMAGE);
+                BufferedImage heightmap = MapUtils.generateHeightMap(overwrittenBiomeMap, heights);
+                BufferedImage overwrittenHeightmap = MapUtils.acceptOverwriteMap(heightmap, OVERWRITE_HEIGHTMAP_IMAGE);
                 {
                     Path output = packOutput.getOutputFolder().resolve(HEIGHT_MAP_PATH);
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -97,6 +111,6 @@ public class MapProvider implements DataProvider {
 
     @Override
     public @NotNull String getName() {
-        return "Generate Heightmap";
+        return "Generate Maps for map based chunk generation";
     }
 }

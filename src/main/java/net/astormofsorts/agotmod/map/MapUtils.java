@@ -1,17 +1,16 @@
 package net.astormofsorts.agotmod.map;
 
+import com.mojang.logging.LogUtils;
 import net.astormofsorts.agotmod.util.ColorUtils;
-import net.astormofsorts.agotmod.util.ImageScaler;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.ConvolveOp;
-import java.awt.image.Kernel;
 import java.util.*;
+import java.util.List;
 
 public class MapUtils {
-    public static BufferedImage approachColors(BufferedImage inImage, Collection<Color> colors) {
+    public static BufferedImage approachColors(final BufferedImage inImage, final Collection<Color> colors) {
         BufferedImage output = new BufferedImage(inImage.getWidth(), inImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
         for (int x = 0; x < output.getWidth(); x++) {
             for (int y = 0; y < output.getHeight(); y++) {
@@ -26,93 +25,130 @@ public class MapUtils {
         return output;
     }
 
-    public static BufferedImage removeInvalidColors(BufferedImage map, Collection<Integer> colorList) {
-        BufferedImage filtered = new BufferedImage(map.getWidth(), map.getHeight(), BufferedImage.TYPE_INT_ARGB);
-        for (int x = 0; x < filtered.getWidth(); x++) {
-            for (int y = 0; y < filtered.getHeight(); y++) {
-                int in = map.getRGB(x, y);
-                if (colorList.contains(in)) {
-                    filtered.setRGB(x, y, in);
+    private static final int[][] diagonal = {{-1, -1}, {1, -1}, {-1, 1}, {1, 1}};
+    private static final int[][] orthogonal = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
+
+    public static BufferedImage generateBiomeMap(final BufferedImage original) {
+        final BufferedImage greatMap = new BufferedImage(original.getWidth() * 2, original.getHeight() * 2, original.getType());
+        // seed is 0 so the map is always the same
+        final Random random = new Random(0);
+
+        // set each forth pixel
+        for (int x = 0; x < original.getWidth(); x++) {
+            for (int y = 0; y < original.getHeight(); y++) {
+                greatMap.setRGB(x * 2, y * 2, original.getRGB(x, y));
+            }
+        }
+
+        // define missing pixels diagonally
+        for (int x = 1; x < greatMap.getWidth(); x += 2) {
+            for (int y = 1; y < greatMap.getHeight(); y += 2) {
+                ArrayList<Integer> nearColors = new ArrayList<>();
+                    for (int[] direction : diagonal) {
+                        int x1 = x + direction[0];
+                        int y1 = y + direction[1];
+
+                        if (isInBound(x1, y1, greatMap.getWidth(), greatMap.getHeight())) {
+                            nearColors.add(greatMap.getRGB(x1, y1));
+                        }
+                    }
+
+                int out = getMostWeightColor(nearColors, random);
+                greatMap.setRGB(x, y, out);
+            }
+        }
+
+        // define missing pixels orthogonally
+        for (int x = 0; x < greatMap.getWidth(); x++) {
+            // x % 2 is always 1 or 0, so we can define this as an offset
+            for (int y = 1 - (x % 2); y < greatMap.getHeight(); y+=2) {
+                ArrayList<Integer> nearColors = new ArrayList<>();
+                    for (int[] direction : orthogonal) {
+                        int x1 = x + direction[0];
+                        int y1 = y + direction[1];
+
+                        if (isInBound(x1, y1, greatMap.getWidth(), greatMap.getHeight())) {
+                            nearColors.add(greatMap.getRGB(x1, y1));
+                        }
+                    }
+
+                int out = getMostWeightColor(nearColors, random);
+                greatMap.setRGB(x, y, out);
+            }
+        }
+        LogUtils.getLogger().info("Biome Map was generated and will now be post-processed.");
+
+        // post-processing:
+        // replace diagonally defined pixels that are orthogonally surrounded
+        // by the same color with that color
+        // TODO: improve to only take 3 neighbour pixels into account
+        for (int x = 0; x < original.getWidth(); x++) {
+            for (int y = x % 2; y < greatMap.getHeight(); y+=2) {
+                ArrayList<Integer> nearColors = new ArrayList<>();
+                for (int[] direction : orthogonal) {
+                    int x1 = x + direction[0];
+                    int y1 = y + direction[1];
+
+                    if (isInBound(x1, y1, greatMap.getWidth(), greatMap.getHeight())) {
+                        nearColors.add(greatMap.getRGB(x1, y1));
+                    }
+                }
+
+                if (!nearColors.contains(greatMap.getRGB(x, y)) && allAreSame(nearColors)) {
+                    // rework pixel
+                    int out = getMostWeightColor(nearColors, random);
+                    greatMap.setRGB(x, y, out);
                 }
             }
         }
 
-        BufferedImage valid_only = new BufferedImage(filtered.getWidth(), filtered.getHeight(), BufferedImage.TYPE_INT_ARGB);
-        valid_only.setData(filtered.getData());
+        return greatMap;
+    }
 
-        // use random with seed 0 so the image is always the same
-        Random random = new Random(0);
-        for (int x = 0; x < valid_only.getWidth(); x++) {
-            for (int y = 0; y < valid_only.getHeight(); y++) {
-                fillColor(valid_only, x, y, MapBiome.getDefault().color(), random);
+    private static <O> boolean allAreSame(List<O> list) {
+        if (list.isEmpty()) {
+            return false;
+        }
+        O first = list.get(0);
+        for (O obj : list) {
+            if (!Objects.equals(first, obj)) {
+                return false;
+            }
+        }
+        return true;
+
+    }
+
+    private static boolean isInBound(int x, int y, int width, int height) {
+        return x >= 0 && y >= 0 && x < width && y < height;
+    }
+
+    private static int getMostWeightColor(final List<Integer> colors, final Random random) {
+        double highestWeight = 0;
+        List<Integer> validNearestColors = new ArrayList<>();
+        for (int color : colors) {
+            double wight = MapBiome.getByColor(color).weight();
+            if (wight == highestWeight) {
+                highestWeight = wight;
+                validNearestColors.add(color);
+            } else if (wight > highestWeight) {
+                highestWeight = wight;
+                validNearestColors.clear();
+                validNearestColors.add(color);
             }
         }
 
-        return valid_only;
+        int i = validNearestColors.size() - 1;
+        return validNearestColors.get(i > 0 ? random.nextInt(i) : 0);
     }
 
-    private static final int[][] directions = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
-
-    private static int fillColor(BufferedImage image, int x, int y, int fallback, Random random) {
-        int rgb = image.getRGB(x, y);
-
-        if ((rgb >> 24) == 0x00) { // check if is transparent
-            int[] dirs = directions[random.nextInt(directions.length - 1)];
-            int x2 = x + dirs[0];
-            int y2 = y + dirs[1];
-
-            // check if coordinat are inbound
-            if (x2 < 0 || y2 < 0 || x2 >= image.getWidth() || y2 >= image.getHeight()) {
-                image.setRGB(x, y, fallback);
-                return fallback;
-            } else {
-                int out = fillColor(image, x2, y2, fallback, random);
-                image.setRGB(x, y, out);
-                return out;
-            }
-        } else {
-            return rgb;
-        }
-    }
-
-    public static BufferedImage blur(BufferedImage image, int times) {
-        BufferedImage out = new BufferedImage(image.getWidth(), image.getHeight(), image.getType());
-        out.setData(image.getData());
-
-        for (int i = 0; i < times; i++) {
-            out = blur(out);
-        }
-
-        return out;
-    }
-
-    public static BufferedImage blur(BufferedImage image) {
-
-        // Define a Gaussian blur kernel
-        float[] kernel = {
-                1f/16f, 1f/8f, 1f/16f,
-                1f/8f, 1f/4f, 1f/8f,
-                1f/16f, 1f/8f, 1f/16f
-        };
-
-        // Create the ConvolveOp object with the kernel
-        Kernel blurKernel = new Kernel(3, 3, kernel);
-        ConvolveOp blurOp = new ConvolveOp(blurKernel, ConvolveOp.EDGE_NO_OP, null);
-
-        // Apply the blur
-       return blurOp.filter(image, null);
-    }
-
-    public static BufferedImage scaleImage(BufferedImage originalImage, int factor) {
-        return ImageScaler.scaleImage(originalImage, factor);
-    }
-
-    public static BufferedImage generateHeightMap(BufferedImage valid_in, Map<Integer, Integer> heights) {
+    public static BufferedImage generateHeightMap(final BufferedImage valid_in, final Map<Integer, Integer> heights) {
         // generate generic heightmap
         BufferedImage gen_heightmap = new BufferedImage(valid_in.getWidth(), valid_in.getHeight(), BufferedImage.TYPE_INT_ARGB);
-        for (int x = 0; x < gen_heightmap.getWidth(); x++) {
-            for (int y = 0; y < gen_heightmap.getHeight(); y++) {
-                int in =valid_in.getRGB(x, y);
+        for (int x = 1; x < gen_heightmap.getWidth(); x++) {
+            for (int y = 1; y < gen_heightmap.getHeight(); y++) {
+                int in = valid_in.getRGB(x, y);
+                // this might crash when something when wrong up scaling the image and removing the invalid colors
                 int height = heights.get(in);
                 Color out = height > 0 ? new Color(height, 0, 0) : new Color(0, 0, Math.abs(height));
                 gen_heightmap.setRGB(x, y, out.getRGB());
@@ -122,21 +158,21 @@ public class MapUtils {
         return gen_heightmap;
     }
 
-    public static BufferedImage acceptOverwriteMap(BufferedImage blurredHeightmap, @Nullable BufferedImage overwriteHeightmapImage) {
-        BufferedImage out = new BufferedImage(blurredHeightmap.getWidth(), blurredHeightmap.getHeight(), blurredHeightmap.getType());
-        out.setData(blurredHeightmap.getData());
+    public static BufferedImage acceptOverwriteMap(final BufferedImage originalMap, final @Nullable BufferedImage overwriteMap) {
+        BufferedImage combinedMap = new BufferedImage(originalMap.getWidth(), originalMap.getHeight(), originalMap.getType());
+        combinedMap.setData(originalMap.getData());
 
-        if (overwriteHeightmapImage != null) {
-            for (int x = 0; x < out.getWidth(); x++) {
-                for (int y = 0; y < out.getHeight(); y++) {
-                    int overwrite = overwriteHeightmapImage.getRGB(x, y);
+        if (overwriteMap != null) {
+            for (int x = 0; x < combinedMap.getWidth(); x++) {
+                for (int y = 0; y < combinedMap.getHeight(); y++) {
+                    int overwrite = overwriteMap.getRGB(x, y);
                     if ((overwrite >> 24) != 0x00) { // check if the overwrite pixel is transparent
-                        out.setRGB(x, y, overwrite); // accept overwrite pixel if defined
+                        combinedMap.setRGB(x, y, overwrite); // accept overwrite pixel if defined
                     }
                 }
             }
         }
 
-        return out;
+        return combinedMap;
     }
 }

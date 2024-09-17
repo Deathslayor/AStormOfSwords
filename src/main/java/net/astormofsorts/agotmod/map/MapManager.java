@@ -22,6 +22,7 @@ public class MapManager {
     private static final int PIXEL_WEIGHT = 64;
     private static final int PERLIN_STRETCH = 250;
     private static final int PERLIN_RANGE = 8;
+    private static final int PERLIN_DETAIL = 8;
     @NotNull
     private final SimplexNoise noise;
 
@@ -50,8 +51,8 @@ public class MapManager {
     /**
      * Gets the Color from a position on the map
      *
-     * @param x this should be a block position x
-     * @param y this should be a block position z
+     * @param pX this should be a block position x
+     * @param pY this should be a block position z
      * @return Returns the biome color
      */
     public static @Nullable Color getBiomeColor(int pX, int pY) {
@@ -102,11 +103,9 @@ public class MapManager {
     }
 
     private double getPerlin(int x, int y) {
-        int scale = 8;
-
         double perlin = noise.getValue((double) x / PERLIN_STRETCH, (double) y / PERLIN_STRETCH) * 4;
         double d = 1;
-        for (int i = 2; i <= scale; i *= 2) {
+        for (int i = 2; i <= PERLIN_DETAIL; i *= 2) {
             perlin += (1d / i) * noise.getValue((double) x * i / PERLIN_STRETCH, (double) y * i / PERLIN_STRETCH) * 4;
             d += (1d / i);
         }
