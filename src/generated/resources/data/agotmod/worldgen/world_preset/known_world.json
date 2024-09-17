@@ -8,7 +8,7 @@
           "settings": {
             "biomes": [
               "minecraft:mangrove_swamp",
-              "minecraft:dark_forest",
+              "minecraft:taiga",
               "minecraft:snowy_plains",
               "minecraft:plains",
               "minecraft:windswept_hills",
@@ -18,10 +18,14 @@
               "minecraft:savanna",
               "minecraft:forest",
               "minecraft:meadow",
-              "minecraft:snowy_taiga",
               "minecraft:frozen_peaks",
+              "minecraft:snowy_taiga",
+              "minecraft:snowy_slopes",
+              "minecraft:sunflower_plains",
               "minecraft:river",
+              "minecraft:frozen_river",
               "minecraft:lukewarm_ocean",
+              "minecraft:frozen_ocean",
               "minecraft:cold_ocean",
               "minecraft:deep_cold_ocean"
             ],
