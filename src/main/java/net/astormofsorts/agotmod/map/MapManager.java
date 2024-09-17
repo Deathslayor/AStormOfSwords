@@ -19,7 +19,7 @@ import java.util.function.BiFunction;
 public class MapManager {
     private static final BufferedImage MAP_BIOME_IMAGE = getMapBiomeImage();
     private static final BufferedImage MAP_HEIGHT_IMAGE = getMapHeightImage();
-    private static final int PIXEL_WEIGHT = 16;
+    private static final int PIXEL_WEIGHT = 64;
     private static final int PERLIN_STRETCH = 250;
     private static final int PERLIN_RANGE = 8;
     @NotNull

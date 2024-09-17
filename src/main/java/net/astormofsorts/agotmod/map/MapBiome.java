@@ -46,8 +46,8 @@ public record MapBiome(ResourceKey<Biome> biome, int color, Block stoneBlock,
         // water biomes
         register(new MapBiome(Biomes.RIVER, new Color(1, 98, 255).getRGB(), Blocks.STONE, Blocks.DIRT, Blocks.GRASS_BLOCK, -5, 0));
         register(new MapBiome(Biomes.FROZEN_RIVER, new Color(87, 145, 240).getRGB(), Blocks.STONE, Blocks.DIRT, Blocks.GRASS_BLOCK, -5, 0));
-        register(new MapBiome(Biomes.LUKEWARM_OCEAN, new Color(0, 83, 217).getRGB(), Blocks.STONE, Blocks.DIRT, Blocks.GRASS_BLOCK, -5, 1)); // lake
-        register(new MapBiome(Biomes.FROZEN_OCEAN, new Color(78, 126, 204).getRGB(), Blocks.STONE, Blocks.DIRT, Blocks.GRASS_BLOCK, -5, 1)); // Frozen Lake
+        register(new MapBiome(Biomes.LUKEWARM_OCEAN, new Color(0, 83, 217).getRGB(), Blocks.STONE, Blocks.DIRT, Blocks.GRASS_BLOCK, -5, 0)); // lake
+        register(new MapBiome(Biomes.FROZEN_OCEAN, new Color(78, 126, 204).getRGB(), Blocks.STONE, Blocks.DIRT, Blocks.GRASS_BLOCK, -5, 0)); // Frozen Lake
         register(new MapBiome(Biomes.COLD_OCEAN, new Color(0, 42, 103).getRGB(), Blocks.STONE, Blocks.DIRT, Blocks.GRASS_BLOCK, -35, 0.2));
         DEEP_COLD_OCEAN = register(new MapBiome(Biomes.DEEP_COLD_OCEAN, new Color(0, 35, 85).getRGB(), Blocks.STONE, Blocks.DIRT, Blocks.GRASS_BLOCK, -125, 0.5));
     }
