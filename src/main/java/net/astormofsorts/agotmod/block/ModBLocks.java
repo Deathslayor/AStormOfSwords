@@ -196,7 +196,7 @@ public class ModBLocks {
     public static final RegistryObject<Block> STRIPPED_WEIRWOOD_WOOD = registerBlock("stripped_weirwood_wood", () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD).strength(3f)));
     public static final RegistryObject<Block> WEIRWOOD_PLANKS = registerBlock("weirwood_planks", () -> new ModFlammablePlanks(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> WEIRWOOD_LEAVES = registerBlock("weirwood_leaves", () -> new WeirwoodLeavesBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_LEAVES)));
-    public static final RegistryObject<Block> WEIRWOOD_SAPLING = registerBlock("weirwood_sapling", () -> new SaplingBlock(new NBTBasedTreeGrower("weirwood_variant_", 2), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
+    public static final RegistryObject<Block> WEIRWOOD_SAPLING = registerBlock("weirwood_sapling", () -> new SaplingBlock(new NBTBasedTreeGrower("weirwood_variant_", 5), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
     public static final RegistryObject<Block> WEIRWOOD_STAIRS = registerBlock("weirwood_stairs",
             () -> new StairBlock(() -> ModBLocks.WEIRWOOD_PLANKS.get().defaultBlockState(),
                     BlockBehaviour.Properties.copy(Blocks.OAK_STAIRS)));
