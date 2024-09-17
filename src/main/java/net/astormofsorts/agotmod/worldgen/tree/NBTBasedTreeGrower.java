@@ -50,7 +50,7 @@ public class NBTBasedTreeGrower extends AbstractTreeGrower {
             StructurePlaceSettings settings = new StructurePlaceSettings()
                     .setRotation(Rotation.NONE)
                     .setMirror(Mirror.NONE)
-                    .setBoundingBox(new BoundingBox(structurePos).inflatedBy(10)); // Adjust the bounding box size as needed
+                    .setBoundingBox(new BoundingBox(structurePos).inflatedBy(100)); // Adjust the bounding box size as needed
 
             template.get().placeInWorld(level, structurePos, structurePos, settings, random, 2);
             return true;
