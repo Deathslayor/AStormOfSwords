@@ -33,7 +33,7 @@ public record MapBiome(ResourceKey<Biome> biome, int color, Block deepslateBlock
         register(new MapBiomeBuilder().setBiome(Biomes.FOREST).setColor(new Color(61, 81, 51)).setHeight(5).setPerlinModifier(0.1).build());
         register(new MapBiomeBuilder().setBiome(Biomes.MEADOW).setColor(new Color(72, 122, 72)).setHeight(5).setPerlinModifier(0.1).build());
         // wall
-        register(new MapBiomeBuilder().setBiome(Biomes.FROZEN_PEAKS).setColor(new Color(255, 255, 255)).setStoneBlock(Blocks.PACKED_ICE).setDirtBlock(Blocks.PACKED_ICE).setGrassBlock(Blocks.SNOW_BLOCK).setHeight(150).setPerlinModifier(0).build());
+        register(new MapBiomeBuilder().setBiome(Biomes.FROZEN_PEAKS).setColor(new Color(255, 255, 255)).setStoneBlock(Blocks.PACKED_ICE).setDirtBlock(Blocks.PACKED_ICE).setGrassBlock(Blocks.SNOW_BLOCK).setHeight(255).setPerlinModifier(0).build());
         //North Of The Wall
         register(new MapBiomeBuilder().setBiome(Biomes.SNOWY_TAIGA).setColor(new Color(130, 140, 130)).setHeight(5).setPerlinModifier(0.1).build());
         register(new MapBiomeBuilder().setBiome(Biomes.SNOWY_SLOPES).setColor(new Color(217, 217, 217)).setHeight(5).setPerlinModifier(0.1).build());
@@ -41,7 +41,7 @@ public record MapBiome(ResourceKey<Biome> biome, int color, Block deepslateBlock
 
 
         // water biomes
-        register(new MapBiomeBuilder().setBiome(Biomes.RIVER).setColor(new Color(1, 98, 255)).setHeight(-5).setPerlinModifier(0).setWeight(2).build());
+        register(new MapBiomeBuilder().setBiome(Biomes.RIVER).setColor(new Color(1, 98, 255)).setGrassBlock(Blocks.WATER).setHeight(-25).setPerlinModifier(0.1).setWeight(2).build());
         register(new MapBiomeBuilder().setBiome(Biomes.FROZEN_RIVER).setColor(new Color(87, 145, 240)).setHeight(-5).setPerlinModifier(0).build());
         register(new MapBiomeBuilder().setBiome(Biomes.LUKEWARM_OCEAN).setColor(new Color(0, 83, 217)).setHeight(-5).setPerlinModifier(0).build()); // lake
         register(new MapBiomeBuilder().setBiome(Biomes.FROZEN_OCEAN).setColor(new Color(78, 126, 204)).setHeight(-5).setPerlinModifier(0).build()); // Frozen Lake
