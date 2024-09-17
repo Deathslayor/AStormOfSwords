@@ -60,7 +60,7 @@ public record MapBiome(ResourceKey<Biome> biome, int color, Block deepslateBlock
 
     @NotNull
     public static MapBiome getByColor(@Nullable Color color) {
-        return color != null ? getByColor(color) : MapBiome.getDefault();
+        return color != null ? getByColor(color.getRGB()) : MapBiome.getDefault();
     }
 
     @NotNull
