@@ -21,7 +21,6 @@ public class ModWorldGenProvider extends DatapackBuiltinEntriesProvider {
             .add(Registries.PLACED_FEATURE, ModplacedFeatures::bootstrap)
             .add(ForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomeModifiers::bootstrap)
             .add(Registries.DIMENSION_TYPE, ModDimensionProvider::bootstrapType)
-            .add(Registries.LEVEL_STEM, ModDimensionProvider::bootstrapStem)
             .add(Registries.WORLD_PRESET, ModDimensionProvider::boostrapPreset);
 
     public ModWorldGenProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
