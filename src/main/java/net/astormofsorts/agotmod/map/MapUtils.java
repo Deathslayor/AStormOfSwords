@@ -1,6 +1,5 @@
 package net.astormofsorts.agotmod.map;
 
-import com.mojang.logging.LogUtils;
 import net.astormofsorts.agotmod.util.ColorUtils;
 import org.jetbrains.annotations.Nullable;
 
@@ -15,7 +14,7 @@ public class MapUtils {
         for (int x = 0; x < output.getWidth(); x++) {
             for (int y = 0; y < output.getHeight(); y++) {
                 Color in = new Color(inImage.getRGB(x, y));
-                Color out = ColorUtils.getNearestColor(in, colors, null);
+                Color out = ColorUtils.getNearestColor(in, colors);
                 if (out != null) {
                     output.setRGB(x, y, out.getRGB());
                 }
@@ -41,8 +40,8 @@ public class MapUtils {
         }
 
         // define missing pixels diagonally
-        for (int x = 1; x < greatMap.getWidth(); x += 2) {
-            for (int y = 1; y < greatMap.getHeight(); y += 2) {
+        for (int x = 1; x < greatMap.getWidth(); x+=2) {
+            for (int y = 1; y < greatMap.getHeight(); y+=2) {
                 ArrayList<Integer> nearColors = new ArrayList<>();
                     for (int[] direction : diagonal) {
                         int x1 = x + direction[0];
@@ -52,7 +51,6 @@ public class MapUtils {
                             nearColors.add(greatMap.getRGB(x1, y1));
                         }
                     }
-
                 int out = getMostWeightColor(nearColors, random);
                 greatMap.setRGB(x, y, out);
             }
@@ -76,70 +74,28 @@ public class MapUtils {
                 greatMap.setRGB(x, y, out);
             }
         }
-        LogUtils.getLogger().info("Biome Map was generated and will now be post-processed.");
-
-        // post-processing:
-        // replace diagonally defined pixels that are orthogonally surrounded
-        // by the same color with that color
-        // TODO: improve to only take 3 neighbour pixels into account
-        for (int x = 0; x < original.getWidth(); x++) {
-            for (int y = x % 2; y < greatMap.getHeight(); y+=2) {
-                ArrayList<Integer> nearColors = new ArrayList<>();
-                for (int[] direction : orthogonal) {
-                    int x1 = x + direction[0];
-                    int y1 = y + direction[1];
-
-                    if (isInBound(x1, y1, greatMap.getWidth(), greatMap.getHeight())) {
-                        nearColors.add(greatMap.getRGB(x1, y1));
-                    }
-                }
-
-                if (!nearColors.contains(greatMap.getRGB(x, y)) && allAreSame(nearColors)) {
-                    // rework pixel
-                    int out = getMostWeightColor(nearColors, random);
-                    greatMap.setRGB(x, y, out);
-                }
-            }
-        }
-
         return greatMap;
-    }
-
-    private static <O> boolean allAreSame(List<O> list) {
-        if (list.isEmpty()) {
-            return false;
-        }
-        O first = list.get(0);
-        for (O obj : list) {
-            if (!Objects.equals(first, obj)) {
-                return false;
-            }
-        }
-        return true;
-
     }
 
     private static boolean isInBound(int x, int y, int width, int height) {
         return x >= 0 && y >= 0 && x < width && y < height;
     }
 
-    private static int getMostWeightColor(final List<Integer> colors, final Random random) {
-        double highestWeight = 0;
-        List<Integer> validNearestColors = new ArrayList<>();
-        for (int color : colors) {
-            double wight = MapBiome.getByColor(color).biomeWeight();
-            if (wight == highestWeight) {
-                highestWeight = wight;
-                validNearestColors.add(color);
-            } else if (wight > highestWeight) {
-                highestWeight = wight;
-                validNearestColors.clear();
-                validNearestColors.add(color);
+    public static int getMostWeightColor(List<Integer> list, Random random) {
+        double totalWeight = 0;
+        for (int color : list) {
+            totalWeight += MapBiome.getByColor(color).biomeWeight();
+        }
+        double randomWeight = random.nextDouble(totalWeight);
+        double currentWeight = 0;
+        for (int color : list) {
+            currentWeight += MapBiome.getByColor(color).biomeWeight();
+            if (currentWeight >= randomWeight) {
+                return color;
             }
         }
 
-        int i = validNearestColors.size() - 1;
-        return validNearestColors.get(i > 0 ? random.nextInt(i) : 0);
+        return MapBiome.getDefault().color();
     }
 
     public static BufferedImage acceptOverwriteMap(final BufferedImage originalMap, final @Nullable BufferedImage overwriteMap) {

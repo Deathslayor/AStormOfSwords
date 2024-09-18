@@ -13,7 +13,7 @@ public class ColorUtils {
         return a + r + g + b;
     }
 
-    public static Color getNearestColor(Color color, Iterable<Color> colorList, Color fallback) {
+    public static Color getNearestColor(Color color, Iterable<Color> colorList) {
         Map<Integer, Color> differences = new HashMap<>();
         for (Color color1 : colorList) {
             int i = compareColors(color, color1);
@@ -26,6 +26,6 @@ public class ColorUtils {
                 lowestDifference = i;
             }
         }
-        return differences.getOrDefault(lowestDifference, fallback);
+        return differences.get(lowestDifference);
     }
 }

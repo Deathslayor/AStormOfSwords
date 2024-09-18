@@ -16,9 +16,8 @@ import java.util.function.BiFunction;
 
 public class MapManager {
     private static final BufferedImage MAP_BIOME_IMAGE = getMapBiomeImage();
-    private static final int PIXEL_WEIGHT = 64;
+    private static final int TRANSITON_WEIGHT = 48;
     private static final int PERLIN_STRETCH = 250;
-    private static final int PERLIN_RANGE = 8;
     private static final int PERLIN_DETAIL = 8;
     @NotNull
     private final SimplexNoise noise;
@@ -57,14 +56,10 @@ public class MapManager {
         }
     }
 
-    public double getHeight(int x, int y) {
-        return getPerlinHeight(x,y);
-    }
-
-    private double getPerlinHeight(int pX, int pY) {
-        double perlin = getPerlin(pX, pY) * getTransformedMapValue(pX, pY, (x, y) -> getMapBiome(x >> 2, y >> 2).perlinModifier());
-        double defHeight = getTransformedMapValue(pX, pY, (x, y) -> (double) getMapBiome(x >> 2, y >> 2).height());
-        return perlin + defHeight;
+    public double getHeight(int pX, int pY) {;
+        double perlin = getPerlin(pX, pY) * getValueWithTransition(pX, pY, (x, y) -> getMapBiome(x >> 2, y >> 2).perlinMultiplier());
+        double genHeight = getValueWithTransition(pX, pY, (x, y) -> (double) getMapBiome(x >> 2, y >> 2).height());
+        return genHeight + perlin;
     }
 
     private double getPerlin(int x, int y) {
@@ -76,44 +71,43 @@ public class MapManager {
         }
 
         perlin = perlin / d;
-        perlin *= PERLIN_RANGE;
 
         return perlin;
     }
 
-    private static double getTransformedMapValue(int x, int y, BiFunction<Integer, Integer, Double> function) {
-        // Determine the base coordinates for the current biome grid
-        int baseX = (x / PIXEL_WEIGHT) * PIXEL_WEIGHT;
-        int baseY = (y / PIXEL_WEIGHT) * PIXEL_WEIGHT;
+    private static double getValueWithTransition(int x, int y, BiFunction<Integer, Integer, Double> function) {
+        // Determine the base coordinates for the current grid
+        int baseX = (x / TRANSITON_WEIGHT) * TRANSITON_WEIGHT;
+        int baseY = (y / TRANSITON_WEIGHT) * TRANSITON_WEIGHT;
 
         // Adjust base coordinates for negative values
-        if (x < 0) baseX -= PIXEL_WEIGHT;
-        if (y < 0) baseY -= PIXEL_WEIGHT;
+        if (x < 0) baseX -= TRANSITON_WEIGHT;
+        if (y < 0) baseY -= TRANSITON_WEIGHT;
 
-        // Sample the four surrounding biome heights at the corners of the grid
+        // Sample the four surrounding values at the corners of the grid
         double h00 = function.apply(baseX, baseY); // Top-left
-        double h10 = function.apply(baseX + PIXEL_WEIGHT, baseY); // Top-right
-        double h01 = function.apply(baseX, baseY + PIXEL_WEIGHT); // Bottom-left
-        double h11 = function.apply(baseX + PIXEL_WEIGHT, baseY + PIXEL_WEIGHT); // Bottom-right
+        double h10 = function.apply(baseX + TRANSITON_WEIGHT, baseY); // Top-right
+        double h01 = function.apply(baseX, baseY + TRANSITON_WEIGHT); // Bottom-left
+        double h11 = function.apply(baseX + TRANSITON_WEIGHT, baseY + TRANSITON_WEIGHT); // Bottom-right
 
         // Calculate the fractional positions within the grid, relative to base coordinates
-        double xPercent = (double)(x - baseX) / PIXEL_WEIGHT;
-        double yPercent = (double)(y - baseY) / PIXEL_WEIGHT;
+        double xPercent = (double)(x - baseX) / TRANSITON_WEIGHT;
+        double yPercent = (double)(y - baseY) / TRANSITON_WEIGHT;
 
         // Ensure fractional values are within [0, 1] (handling negative values)
         xPercent = Math.abs(xPercent);
         yPercent = Math.abs(yPercent);
 
-        // Perform bilinear interpolation to smoothly transition between the biome heights
+        // Perform bilinear interpolation to smoothly transition between the values
         return bilinearInterpolation(h00, h10, h01, h11, xPercent, yPercent);
     }
 
     private static double bilinearInterpolation(double h00, double h10, double h01, double h11, double xPercent, double yPercent) {
         // Calculate the weights for each corner based on the fractional distances
-        double w00 = (1 - xPercent) * (1 - yPercent); // Top-left corner biomeWeight
-        double w10 = xPercent * (1 - yPercent);       // Top-right corner biomeWeight
-        double w01 = (1 - xPercent) * yPercent;       // Bottom-left corner biomeWeight
-        double w11 = xPercent * yPercent;             // Bottom-right corner biomeWeight
+        double w00 = (1 - xPercent) * (1 - yPercent); // Top-left corner weight
+        double w10 = xPercent * (1 - yPercent);       // Top-right corner weight
+        double w01 = (1 - xPercent) * yPercent;       // Bottom-left corner weight
+        double w11 = xPercent * yPercent;             // Bottom-right corner weight
 
         // Perform weighted bilinear interpolation
         return h00 * w00 + h10 * w10 + h01 * w01 + h11 * w11;
@@ -126,9 +120,9 @@ public class MapManager {
 
     // used to move the map in order to spawn in the center
     public static int xOffset(int x) {
-        return x + (Objects.requireNonNull(MAP_BIOME_IMAGE).getWidth() / 2);
+        return x + (MAP_BIOME_IMAGE.getWidth() / 2);
     }
     public static int yOffset(int y) {
-        return y + (Objects.requireNonNull(MAP_BIOME_IMAGE).getHeight() / 2);
+        return y + (MAP_BIOME_IMAGE.getHeight() / 2);
     }
 }

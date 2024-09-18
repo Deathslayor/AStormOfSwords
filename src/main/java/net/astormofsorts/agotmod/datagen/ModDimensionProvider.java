@@ -39,6 +39,6 @@ public class ModDimensionProvider {
                     add(biomeRegistry.getOrThrow(biome.biome()));
                 }
             }
-        }, 0, 66, -32, 320, 64))))));
+        }, 0, 66, -32, 279, 64))))));
     }
 }

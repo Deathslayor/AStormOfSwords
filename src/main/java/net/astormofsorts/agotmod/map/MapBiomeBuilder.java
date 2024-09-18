@@ -16,8 +16,8 @@ public class MapBiomeBuilder {
     private Block dirtBlock = Blocks.DIRT;
     private Block grassBlock = Blocks.GRASS_BLOCK;
     private int height = 0;
-    private double perlinModifier = 1;
-    private double weight = 1;
+    private double perlinMultiplier = 8;
+    private double biomeWeight = 1;
 
     public MapBiomeBuilder setBiome(ResourceKey<Biome> biome) {
         this.biome = biome;
@@ -58,17 +58,18 @@ public class MapBiomeBuilder {
         return this;
     }
 
-    public MapBiomeBuilder setPerlinModifier(double perlinModifier) {
-        this.perlinModifier = perlinModifier;
+    public MapBiomeBuilder setPerlinMultiplier(double perlinMultiplier) {
+        this.perlinMultiplier = perlinMultiplier;
         return this;
     }
 
-    public MapBiomeBuilder setWeight(double weight) {
-        this.weight = weight;
+    public MapBiomeBuilder setBiomeWeight(double biomeWeight) {
+        this.biomeWeight = biomeWeight;
         return this;
     }
+
 
     public MapBiome build() {
-        return new MapBiome(biome, color, deepslateBlock, stoneBlock, dirtBlock, grassBlock, height, perlinModifier, weight);
+        return new MapBiome(biome, color, deepslateBlock, stoneBlock, dirtBlock, grassBlock, height, perlinMultiplier, biomeWeight);
     }
 }

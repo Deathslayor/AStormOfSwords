@@ -89,12 +89,8 @@ public class MapBasedBiomeChunkGenerator extends ChunkGenerator {
 
                     double dirtHeight = this.biomeSource.getSettings().dirtLevel() + height - 1;
 
-                    for (int y = this.biomeSource.getSettings().deepslateLevel(); y < (dirtHeight / 2); y++) {
-                        chunk.setBlockState(chunk.getPos().getBlockAt(x, y, z), biomeData.stoneBlock().defaultBlockState(), false);
-                    }
-
-                    // upper stone
-                    for (int y = (int) (dirtHeight / 2); y <= dirtHeight; y++) {
+                    // stone
+                    for (int y = this.biomeSource.getSettings().deepslateLevel(); y <= dirtHeight; y++) {
                         chunk.setBlockState(chunk.getPos().getBlockAt(x, y, z), biomeData.stoneBlock().defaultBlockState(), false);
                     }
 
