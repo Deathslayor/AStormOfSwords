@@ -16,9 +16,9 @@ import java.util.function.BiFunction;
 
 public class MapManager {
     private static final BufferedImage MAP_BIOME_IMAGE = getMapBiomeImage();
-    private static final int TRANSITON_WEIGHT = 48;
+    private static final int TRANSITON_WEIGHT = 24;
     private static final int PERLIN_STRETCH = 250;
-    private static final int PERLIN_DETAIL = 8;
+    private static final int PERLIN_DETAIL = 4;
     @NotNull
     private final SimplexNoise noise;
 
@@ -62,16 +62,12 @@ public class MapManager {
         return genHeight + perlin;
     }
 
-    private double getPerlin(int x, int y) {
-        double perlin = noise.getValue((double) x / PERLIN_STRETCH, (double) y / PERLIN_STRETCH) * 4;
-        double d = 1;
-        for (int i = 2; i <= PERLIN_DETAIL; i *= 2) {
-            perlin += (1d / i) * noise.getValue((double) x * i / PERLIN_STRETCH, (double) y * i / PERLIN_STRETCH) * 4;
-            d += (1d / i);
+    public double getPerlin(int x, int z) {
+        double perlin = 0;
+        for (int i = 0; i < PERLIN_DETAIL; i++) {
+            perlin += Math.pow(0.5, i) * noise.getValue(x * Math.pow(2, i) / PERLIN_STRETCH, z * Math.pow(2, i) / PERLIN_STRETCH);
         }
-
-        perlin = perlin / d;
-
+        perlin = perlin / (1 - Math.pow(0.5, PERLIN_DETAIL));
         return perlin;
     }
 
