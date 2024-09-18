@@ -127,7 +127,7 @@ public class MapUtils {
         double highestWeight = 0;
         List<Integer> validNearestColors = new ArrayList<>();
         for (int color : colors) {
-            double wight = MapBiome.getByColor(color).weight();
+            double wight = MapBiome.getByColor(color).biomeWeight();
             if (wight == highestWeight) {
                 highestWeight = wight;
                 validNearestColors.add(color);
@@ -140,22 +140,6 @@ public class MapUtils {
 
         int i = validNearestColors.size() - 1;
         return validNearestColors.get(i > 0 ? random.nextInt(i) : 0);
-    }
-
-    public static BufferedImage generateHeightMap(final BufferedImage valid_in, final Map<Integer, Integer> heights) {
-        // generate generic heightmap
-        BufferedImage gen_heightmap = new BufferedImage(valid_in.getWidth(), valid_in.getHeight(), BufferedImage.TYPE_INT_ARGB);
-        for (int x = 1; x < gen_heightmap.getWidth(); x++) {
-            for (int y = 1; y < gen_heightmap.getHeight(); y++) {
-                int in = valid_in.getRGB(x, y);
-                // this might crash when something when wrong up scaling the image and removing the invalid colors
-                int height = heights.get(in);
-                Color out = height > 0 ? new Color(height, 0, 0) : new Color(0, 0, Math.abs(height));
-                gen_heightmap.setRGB(x, y, out.getRGB());
-            }
-        }
-
-        return gen_heightmap;
     }
 
     public static BufferedImage acceptOverwriteMap(final BufferedImage originalMap, final @Nullable BufferedImage overwriteMap) {

@@ -2,7 +2,6 @@ package net.astormofsorts.agotmod.datagen;
 
 import com.google.common.hash.Hashing;
 import com.google.common.hash.HashingOutputStream;
-import com.mojang.logging.LogUtils;
 import net.astormofsorts.agotmod.AGoTMod;
 import net.astormofsorts.agotmod.map.MapBiome;
 import net.astormofsorts.agotmod.map.MapUtils;
@@ -26,8 +25,6 @@ import java.util.concurrent.CompletableFuture;
 public class MapProvider implements DataProvider {
     public static final BufferedImage ORGINAL_MAP_IMAGE = getOriginalMapImage();
     @Nullable
-    public static final BufferedImage OVERWRITE_HEIGHTMAP_IMAGE = getOverwriteHeightmapImage();
-    @Nullable
     public static final BufferedImage OVERWRITE_BIOME_MAP_IMAGE = getOverwriteBiomeMapImage();
 
     private static BufferedImage getOriginalMapImage() {
@@ -36,19 +33,6 @@ public class MapProvider implements DataProvider {
             return ImageIO.read(Objects.requireNonNull(orignalMapUrl));
         } catch (IOException e) {
             throw new RuntimeException("Failed to load biome map located at: " + (orignalMapUrl != null ? orignalMapUrl.getPath() : "invalid location"), e);
-        }
-    }
-    @Nullable
-    private static BufferedImage getOverwriteHeightmapImage() {
-        URL orignalMapUrl = AGoTMod.class.getResource("/assets/agotmod/overwrite_height.png");
-        try {
-            if (orignalMapUrl != null) {
-                return ImageIO.read(orignalMapUrl);
-            } else {
-                return null;
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to load biome map located at: " + orignalMapUrl.getPath(), e);
         }
     }
     @Nullable
@@ -66,7 +50,6 @@ public class MapProvider implements DataProvider {
     }
 
     public static final String BIOME_MAP_PATH = "assets/agotmod/map_biome.png";
-    public static final String HEIGHT_MAP_PATH = "assets/agotmod/map_height.png";
 
     private final PackOutput packOutput;
 
@@ -89,18 +72,6 @@ public class MapProvider implements DataProvider {
                     HashingOutputStream hashStream = new HashingOutputStream(Hashing.sha1(), baos);
                     ImageIO.write(overwrittenBiomeMap, "PNG", hashStream);
                     cache.writeIfNeeded(output, baos.toByteArray(), hashStream.hash());
-                    LogUtils.getLogger().info("Generated Biome Map.");
-                }
-
-                BufferedImage heightmap = MapUtils.generateHeightMap(overwrittenBiomeMap, heights);
-                BufferedImage overwrittenHeightmap = MapUtils.acceptOverwriteMap(heightmap, OVERWRITE_HEIGHTMAP_IMAGE);
-                {
-                    Path output = packOutput.getOutputFolder().resolve(HEIGHT_MAP_PATH);
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    HashingOutputStream hashStream = new HashingOutputStream(Hashing.sha1(), baos);
-                    ImageIO.write(overwrittenHeightmap, "PNG", hashStream);
-                    cache.writeIfNeeded(output, baos.toByteArray(), hashStream.hash());
-                    LogUtils.getLogger().info("Generated Height Map.");
                 }
             } catch (Exception e) {
                 // should be fine since it's async
