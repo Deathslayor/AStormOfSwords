@@ -165,8 +165,6 @@ public class ModBLocks {
     public static final RegistryObject<Block> TOURMALINE_DEEPSLATE_ORE = registerBlock("tourmaline_deepslate_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_COPPER_ORE)));
 
 
-
-
     // DEEPSLATE TIN ORE
     public static final RegistryObject<Block> DEEPSLATE_TIN_ORE = registerBlock("deepslate_tin_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE).strength(3f).requiresCorrectToolForDrops(), UniformInt.of(3, 6)));
 
@@ -204,7 +202,7 @@ public class ModBLocks {
             () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SLAB)));
     public static final RegistryObject<Block> WEIRWOOD_BUTTON = registerBlock("weirwood_button",
             () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON),
-                    BlockSetType.OAK, 10,true));
+                    BlockSetType.OAK, 10, true));
     public static final RegistryObject<Block> WEIRWOOD_PRESSURE_PLATE = registerBlock("weirwood_pressure_plate",
             () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING,
                     BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE),
@@ -238,7 +236,7 @@ public class ModBLocks {
             () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SLAB)));
     public static final RegistryObject<Block> SYCAMORE_BUTTON = registerBlock("sycamore_button",
             () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON),
-                    BlockSetType.OAK, 10,true));
+                    BlockSetType.OAK, 10, true));
     public static final RegistryObject<Block> SYCAMORE_PRESSURE_PLATE = registerBlock("sycamore_pressure_plate",
             () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING,
                     BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE),
@@ -272,7 +270,7 @@ public class ModBLocks {
             () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SLAB)));
     public static final RegistryObject<Block> SENTINEL_BUTTON = registerBlock("sentinel_button",
             () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON),
-                    BlockSetType.OAK, 10,true));
+                    BlockSetType.OAK, 10, true));
     public static final RegistryObject<Block> SENTINEL_PRESSURE_PLATE = registerBlock("sentinel_pressure_plate",
             () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING,
                     BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE),
@@ -306,7 +304,7 @@ public class ModBLocks {
             () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SLAB)));
     public static final RegistryObject<Block> PINE_BUTTON = registerBlock("pine_button",
             () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON),
-                    BlockSetType.OAK, 10,true));
+                    BlockSetType.OAK, 10, true));
     public static final RegistryObject<Block> PINE_PRESSURE_PLATE = registerBlock("pine_pressure_plate",
             () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING,
                     BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE),
@@ -341,7 +339,7 @@ public class ModBLocks {
             () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SLAB)));
     public static final RegistryObject<Block> IRONWOOD_BUTTON = registerBlock("ironwood_button",
             () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON),
-                    BlockSetType.OAK, 10,true));
+                    BlockSetType.OAK, 10, true));
     public static final RegistryObject<Block> IRONWOOD_PRESSURE_PLATE = registerBlock("ironwood_pressure_plate",
             () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING,
                     BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE),
@@ -375,7 +373,7 @@ public class ModBLocks {
             () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SLAB)));
     public static final RegistryObject<Block> HAWTHORN_BUTTON = registerBlock("hawthorn_button",
             () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON),
-                    BlockSetType.OAK, 10,true));
+                    BlockSetType.OAK, 10, true));
     public static final RegistryObject<Block> HAWTHORN_PRESSURE_PLATE = registerBlock("hawthorn_pressure_plate",
             () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING,
                     BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE),
@@ -637,7 +635,6 @@ public class ModBLocks {
     public static final RegistryObject<Block> ALDER_TRAPDOOR = registerBlock("alder_trapdoor",
             () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR),
                     BlockSetType.OAK));
-
 
 
     // ---------------------------(TREE BLOCKS)--------------------------- //

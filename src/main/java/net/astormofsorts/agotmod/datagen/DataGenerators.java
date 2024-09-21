@@ -1,7 +1,13 @@
 package net.astormofsorts.agotmod.datagen;
 
+import dev.tocraft.crafted.ctgen.CTerrainGeneration;
+import dev.tocraft.crafted.ctgen.data.MapProvider;
+import dev.tocraft.crafted.ctgen.map.MapBiome;
 import net.astormofsorts.agotmod.AGoTMod;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -9,8 +15,10 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
+@SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = AGoTMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
     // Subscribe to the GatherDataEvent to add custom data generators
@@ -52,6 +60,12 @@ public class DataGenerators {
         generator.addProvider(event.includeServer(), new ModWorldGenProvider(packOutput, lookupProvider));
 
         // World gen maps
-        generator.addProvider(true, new MapProvider(packOutput));
+        generator.addProvider(true, new MapProvider(ModDimensionProvider.getOriginalMapImage(), ModDimensionProvider.KNOWN_WORLD, lookupProvider.thenCompose(oProvider -> {
+            // get provider with custom registry entries
+            RegistryAccess.Frozen registryaccess$frozen = RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY);
+            HolderLookup.Provider provider = ModWorldGenProvider.BUILDER.buildPatch(registryaccess$frozen, oProvider);
+            List<MapBiome> mapBiomes = ModDimensionProvider.getMapBiomeList(provider.lookupOrThrow(CTerrainGeneration.MAP_BIOME_REGISTRY)).stream().map(Holder::value).toList();
+            return CompletableFuture.completedFuture(mapBiomes);
+        }), packOutput));
     }
 }

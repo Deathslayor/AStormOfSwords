@@ -180,7 +180,6 @@ public class ModConfiguredFeatures {
                 new TwoLayersFeatureSize(1, 0, 2)).build());
 
 
-
     }
 
     // Register a ResourceKey for a configured feature

@@ -1,0 +1,7 @@
+{
+  "biome": "minecraft:cold_ocean",
+  "color": -16766361,
+  "height": -35,
+  "perlin_multiplier": 16.0,
+  "surface_block": "minecraft:sand"
+}

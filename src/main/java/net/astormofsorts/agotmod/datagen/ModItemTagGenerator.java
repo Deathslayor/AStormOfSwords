@@ -98,7 +98,6 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModBLocks.ALDER_WOOD.get().asItem())
 
 
-
         ;
 
         this.tag(ItemTags.PLANKS)

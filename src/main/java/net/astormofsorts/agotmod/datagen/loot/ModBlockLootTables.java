@@ -25,6 +25,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
             ModItems.YELLOW_DIAMOND.get(),
             ModItems.TRANSPARENT_DIAMOND.get(),
             ModItems.BLACK_DIAMOND.get());
+
     public ModBlockLootTables() {
         // Initialize the ModBlockLootTables, specifying sets of known blocks and flags
         super(Set.of(), FeatureFlags.REGISTRY.allFlags());

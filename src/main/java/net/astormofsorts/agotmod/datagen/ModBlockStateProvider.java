@@ -107,7 +107,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
         // ---------------------------(GEMS)--------------------------- //
 
 
-
         // ---------------------------(BRONZE)--------------------------- //
         // Register block states and models for bronze-related blocks
         blockWithItem(ModBLocks.BRONZE_BLOCK);

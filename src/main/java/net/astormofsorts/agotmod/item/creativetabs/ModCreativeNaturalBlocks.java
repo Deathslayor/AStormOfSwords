@@ -183,7 +183,6 @@ public class ModCreativeNaturalBlocks {
                 pOutput.accept(ModBLocks.ALDER_SAPLING.get());
 
 
-
             }).build());
 
     // Tells the AGoTMod class to call the modded tabs into the game

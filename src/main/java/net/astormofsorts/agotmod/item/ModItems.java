@@ -332,7 +332,6 @@ public class ModItems {
             () -> new BowItem(new Item.Properties()));
 
 
-
     //Arrows
     public static final RegistryObject<Item> ARROW_BRONZE = ITEMS.register("arrow_bronze",
             () -> new ArrowItem(new Item.Properties()));
@@ -377,23 +376,23 @@ public class ModItems {
             () -> new Item(new Item.Properties().food(ModFoods.RAW_CHICKEN_NUGGETS)));
     public static final RegistryObject<Item> COOKED_DEER_VENISON = ITEMS.register("cooked_deer_venison",
             () -> new Item(new Item.Properties().food(ModFoods.COOKED_DEER_VENISON)));
-    public static final RegistryObject<Item> RAW_DEER_VENISON  = ITEMS.register("raw_deer_venison",
+    public static final RegistryObject<Item> RAW_DEER_VENISON = ITEMS.register("raw_deer_venison",
             () -> new Item(new Item.Properties().food(ModFoods.RAW_DEER_VENISON)));
     public static final RegistryObject<Item> COOKED_GOAT_MEAT = ITEMS.register("cooked_goat_meat",
             () -> new Item(new Item.Properties().food(ModFoods.COOKED_GOAT_MEAT)));
-    public static final RegistryObject<Item> RAW_GOAT_MEAT  = ITEMS.register("raw_goat_meat",
+    public static final RegistryObject<Item> RAW_GOAT_MEAT = ITEMS.register("raw_goat_meat",
             () -> new Item(new Item.Properties().food(ModFoods.RAW_GOAT_MEAT)));
     public static final RegistryObject<Item> COOKED_HARE_MEAT = ITEMS.register("cooked_hare_meat",
             () -> new Item(new Item.Properties().food(ModFoods.COOKED_HARE_MEAT)));
-    public static final RegistryObject<Item> RAW_HARE_MEAT  = ITEMS.register("raw_hare_meat",
+    public static final RegistryObject<Item> RAW_HARE_MEAT = ITEMS.register("raw_hare_meat",
             () -> new Item(new Item.Properties().food(ModFoods.RAW_HARE_MEAT)));
     public static final RegistryObject<Item> COOKED_HORSE_MEAT = ITEMS.register("cooked_horse_meat",
             () -> new Item(new Item.Properties().food(ModFoods.COOKED_HORSE_MEAT)));
-    public static final RegistryObject<Item> RAW_HORSE_MEAT  = ITEMS.register("raw_horse_meat",
+    public static final RegistryObject<Item> RAW_HORSE_MEAT = ITEMS.register("raw_horse_meat",
             () -> new Item(new Item.Properties().food(ModFoods.RAW_HORSE_MEAT)));
     public static final RegistryObject<Item> COOKED_MAMMOTH_MEAT = ITEMS.register("cooked_mammoth_meat",
             () -> new Item(new Item.Properties().food(ModFoods.COOKED_MAMMOTH_MEAT)));
-    public static final RegistryObject<Item> RAW_MAMMOTH_MEAT  = ITEMS.register("raw_mammoth_meat",
+    public static final RegistryObject<Item> RAW_MAMMOTH_MEAT = ITEMS.register("raw_mammoth_meat",
             () -> new Item(new Item.Properties().food(ModFoods.RAW_MAMMOTH_MEAT)));
 
     // ---------------------------(FOODS)--------------------------- //
@@ -405,6 +404,7 @@ public class ModItems {
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> WEIRWOOD_STICK = ITEMS.register("weirwood_stick",
             () -> new Item(new Item.Properties()));
+
     // Tells the AGoTMod class to call the modded items into the game
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

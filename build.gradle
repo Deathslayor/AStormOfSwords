@@ -168,6 +168,12 @@ repositories {
         name = "Jared's maven"
         url = "https://maven.blamejared.com/"
     }
+    maven {
+        name = "ToCraftMavenPublic"
+        url = "https://maven.tocraft.dev/public"
+    }
+
+    mavenLocal()
 
 }
 
@@ -208,6 +214,8 @@ dependencies {
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.4.1")) {
         jarJar.ranged(it, "[0.4.1,)")
     }
+
+    implementation(fg.deobf("dev.tocraft.crafted:ctgen-forge:1.20.1-0.1.21"))
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

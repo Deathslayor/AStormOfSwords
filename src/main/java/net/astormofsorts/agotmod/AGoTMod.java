@@ -13,15 +13,9 @@ import net.astormofsorts.agotmod.entity.client.norththewall.WightRenderer;
 import net.astormofsorts.agotmod.item.ModItemProperties;
 import net.astormofsorts.agotmod.item.ModItems;
 import net.astormofsorts.agotmod.item.creativetabs.*;
-import net.astormofsorts.agotmod.map.MapBiome;
 import net.astormofsorts.agotmod.sound.ModSounds;
 import net.astormofsorts.agotmod.villager.ModVillagers;
-import net.astormofsorts.agotmod.worldgen.map.MapBasedBiomeChunkGenerator;
-import net.astormofsorts.agotmod.worldgen.map.MapBasedBiomeSource;
 import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -32,7 +26,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.RegisterEvent;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -45,9 +38,6 @@ public class AGoTMod {
     // Constructor for AGoTMod class
     public AGoTMod() {
         MixinExtrasBootstrap.init();
-
-        // initialize Biomes
-        MapBiome.initialize();
 
         // Get the mod event bus
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -89,9 +79,6 @@ public class AGoTMod {
 
         // Listen for creative mode tab build event
         modEventBus.addListener(this::addCreative);
-
-        // Listen for Register Event
-        modEventBus.addListener(this::onRegister);
     }
 
     // Common setup method
@@ -102,11 +89,6 @@ public class AGoTMod {
     // Creative mode tab build method
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         // Add custom items/blocks to the creative mode tab here
-    }
-
-    private void onRegister(RegisterEvent event) {
-        Registry.register(BuiltInRegistries.BIOME_SOURCE, new ResourceLocation(MOD_ID, "map_based_biome_source"), MapBasedBiomeSource.CODEC);
-        Registry.register(BuiltInRegistries.CHUNK_GENERATOR, new ResourceLocation(MOD_ID, "map_based_chunk_generator"), MapBasedBiomeChunkGenerator.CODEC);
     }
 
     // Server starting event listener

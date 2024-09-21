@@ -1,0 +1,10 @@
+{
+  "biome": "minecraft:frozen_peaks",
+  "color": -1,
+  "dirt_block": "minecraft:packed_ice",
+  "height": 213,
+  "perlin_multiplier": 0.0,
+  "pixel_weight": 16.0,
+  "stone_block": "minecraft:packed_ice",
+  "surface_block": "minecraft:snow_block"
+}

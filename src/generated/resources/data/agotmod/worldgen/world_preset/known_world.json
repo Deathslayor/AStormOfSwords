@@ -3,38 +3,40 @@
     "minecraft:overworld": {
       "type": "agotmod:known_world_type",
       "generator": {
-        "type": "agotmod:map_based_chunk_generator",
-        "biome_source": {
-          "settings": {
-            "biomes": [
-              "minecraft:mangrove_swamp",
-              "minecraft:taiga",
-              "minecraft:snowy_plains",
-              "minecraft:plains",
-              "minecraft:windswept_hills",
-              "minecraft:jagged_peaks",
-              "minecraft:swamp",
-              "minecraft:savanna_plateau",
-              "minecraft:savanna",
-              "minecraft:forest",
-              "minecraft:meadow",
-              "minecraft:frozen_peaks",
-              "minecraft:snowy_taiga",
-              "minecraft:snowy_slopes",
-              "minecraft:sunflower_plains",
-              "minecraft:river",
-              "minecraft:frozen_river",
-              "minecraft:lukewarm_ocean",
-              "minecraft:frozen_ocean",
-              "minecraft:cold_ocean",
-              "minecraft:deep_cold_ocean"
-            ],
-            "deepslate_level": 0,
-            "dirt_level": 66,
-            "height": 279,
-            "min_y": -32,
-            "sea_level": 64
-          }
+        "type": "ctgen:map_based_chunk_generator",
+        "settings": {
+          "biome_map": "agotmod:known_world",
+          "deepslate_level": 0,
+          "default_map_biome": "agotmod:deep_cold_ocean",
+          "dirt_level": 66,
+          "height": 279,
+          "map_biomes": [
+            "agotmod:mangroves",
+            "agotmod:taiga",
+            "agotmod:snowy_plains",
+            "agotmod:plains",
+            "agotmod:windswept_hills",
+            "agotmod:jagged_peaks",
+            "agotmod:swamp",
+            "agotmod:savanna_plateu",
+            "agotmod:savanna",
+            "agotmod:forest",
+            "agotmod:meadow",
+            "agotmod:the_wall",
+            "agotmod:snowy_taiga",
+            "agotmod:snowy_slopes",
+            "agotmod:sunflower_plains",
+            "agotmod:river",
+            "agotmod:frozen_river",
+            "agotmod:lake",
+            "agotmod:frozen_lake",
+            "agotmod:cold_ocean",
+            "agotmod:deep_cold_ocean"
+          ],
+          "min_y": -32,
+          "noise_detail": 3,
+          "sea_level": 64,
+          "transition": 23
         }
       }
     }
