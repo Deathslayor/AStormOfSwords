@@ -200,7 +200,10 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
-    implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.20.1:4.2.2')
+    // Apply Mixin AP
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    jarJar(implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.20.1:[4.2.2,)'))
 
     // compile against the JEI API but do not include it at runtime
     compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"))
@@ -208,14 +211,7 @@ dependencies {
     // at runtime, use the full JEI jar for Forge
     runtimeOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}"))
 
-
-    // MixinExtras
-    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.4.1"))
-    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.4.1")) {
-        jarJar.ranged(it, "[0.4.1,)")
-    }
-
-    implementation(fg.deobf("dev.tocraft.crafted:ctgen-forge:1.20.1-0.1.21"))
+    jarJar(implementation(fg.deobf("dev.tocraft.crafted:ctgen-forge:[1.20.1-0.1.22,)")))
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
@@ -252,6 +248,10 @@ jar {
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
+}
+
+jarJar {
+    enable()
 }
 
 // Example configuration to allow publishing using the maven-publish plugin
