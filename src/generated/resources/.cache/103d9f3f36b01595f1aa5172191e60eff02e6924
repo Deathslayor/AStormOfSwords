@@ -1,5 +1,4 @@
-// 1.20.1	2024-09-21T22:10:20.354856092	Registries
-d9b8841fb4f70112819e531f1d554f4fa2097372 data/agotmod/dimension_type/known_world_type.json
+// 1.20.1	2024-09-25T20:33:40.099998039	Registries
 93e760cad11de5820019b78ad58c1464485f3b41 data/agotmod/forge/biome_modifier/add_tin_ore.json
 bbbb83d5636c6d2773c315a21d253009c920a117 data/agotmod/forge/biome_modifier/create_weirwood_tree.json
 8490c57cb370c2d194a5b9d120fbc8f816698c14 data/agotmod/forge/biome_modifier/spawn_mammoth.json
@@ -22,7 +21,6 @@ ddd6573e87e46c5ca6b1f4f00937189a022cd11f data/agotmod/worldgen/map_based/biome/c
 6b97747afb8c0f19d7a4be87f99d62e1bb48a734 data/agotmod/worldgen/map_based/biome/forest.json
 5e24f26a8d44efedfd4a4dc4a99aed889f08cdeb data/agotmod/worldgen/map_based/biome/frozen_lake.json
 2dd0579c470cfc88aeac2d26130b11b1de228a73 data/agotmod/worldgen/map_based/biome/frozen_river.json
-23993c2bf3a0576bb9897efe4eb566a3e54bfdc2 data/agotmod/worldgen/map_based/biome/jagged_peaks.json
 7574684155b142b44b7325ea427cdb35ac177e85 data/agotmod/worldgen/map_based/biome/lake.json
 fabf734c8bc30f528ab5962b54a2eaa79038b1ec data/agotmod/worldgen/map_based/biome/mangroves.json
 4cd28495ef6980a90ce502f91b01ea4aa54432a4 data/agotmod/worldgen/map_based/biome/meadow.json
@@ -30,6 +28,7 @@ fabf734c8bc30f528ab5962b54a2eaa79038b1ec data/agotmod/worldgen/map_based/biome/m
 f850cb3d5ac728f1fa5107b94c7569ad13cba855 data/agotmod/worldgen/map_based/biome/river.json
 cfda8b817090ffc610231ba675c9ec72a10ce0d9 data/agotmod/worldgen/map_based/biome/savanna.json
 b54b8eaed64ebbeab7ea821edc739a293a9cc0dc data/agotmod/worldgen/map_based/biome/savanna_plateu.json
+f6f2a050f8b1ea8aedf2687ed8620731fde0607d data/agotmod/worldgen/map_based/biome/snowy_mountains.json
 8c0f905d4928ce98420f99f5088c6ebb06961f98 data/agotmod/worldgen/map_based/biome/snowy_plains.json
 c93c833c9131ae7b00ac95546ef6b2069ea5ea49 data/agotmod/worldgen/map_based/biome/snowy_slopes.json
 74a0c89002b93c2fb206949d4cd380c3720e7ddf data/agotmod/worldgen/map_based/biome/snowy_taiga.json
@@ -51,4 +50,4 @@ cbbdf1f85245bbd7f83c356f9bb8522f0016ec69 data/agotmod/worldgen/placed_feature/pi
 9e7bf3801e41892d4a52cb57d009312cf9a8d837 data/agotmod/worldgen/placed_feature/sentinel.json
 174bd861a214e5e9e447f57b86f92b9deca5e42d data/agotmod/worldgen/placed_feature/tin_ore_placed.json
 9dae1e269ebe83e946cbd785b286362c8327f171 data/agotmod/worldgen/placed_feature/weirwood.json
-5f29cb21cc3ad710cbd773991cfac80eae448e8e data/agotmod/worldgen/world_preset/known_world.json
+e54adf95cc6ff467dae139b652502a64b0ddbe48 data/agotmod/worldgen/world_preset/known_world.json

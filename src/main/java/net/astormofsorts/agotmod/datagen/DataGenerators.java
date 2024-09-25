@@ -2,7 +2,7 @@ package net.astormofsorts.agotmod.datagen;
 
 import dev.tocraft.crafted.ctgen.CTerrainGeneration;
 import dev.tocraft.crafted.ctgen.data.MapProvider;
-import dev.tocraft.crafted.ctgen.map.MapBiome;
+import dev.tocraft.crafted.ctgen.biome.MapBiome;
 import net.astormofsorts.agotmod.AGoTMod;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;

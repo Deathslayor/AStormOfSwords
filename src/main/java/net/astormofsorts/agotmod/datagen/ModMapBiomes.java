@@ -1,8 +1,8 @@
 package net.astormofsorts.agotmod.datagen;
 
 import dev.tocraft.crafted.ctgen.CTerrainGeneration;
-import dev.tocraft.crafted.ctgen.map.MapBiome;
-import dev.tocraft.crafted.ctgen.map.MapBiomeBuilder;
+import dev.tocraft.crafted.ctgen.biome.MapBiome;
+import dev.tocraft.crafted.ctgen.biome.MapBiomeBuilder;
 import net.astormofsorts.agotmod.AGoTMod;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
@@ -14,6 +14,7 @@ import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
 
 import java.awt.*;
+import java.util.Optional;
 
 public class ModMapBiomes {
     public static final ResourceKey<MapBiome> MANGOVES = getKey("mangroves");
@@ -21,7 +22,7 @@ public class ModMapBiomes {
     public static final ResourceKey<MapBiome> SNOWY_PLAINS = getKey("snowy_plains");
     public static final ResourceKey<MapBiome> PLAINS = getKey("plains");
     public static final ResourceKey<MapBiome> WINDSWEPT_HILLS = getKey("windswept_hills");
-    public static final ResourceKey<MapBiome> JAGGED_PEAKS = getKey("jagged_peaks");
+    public static final ResourceKey<MapBiome> SNOWY_MOUNTAINS = getKey("snowy_mountains");
     public static final ResourceKey<MapBiome> SWAMP = getKey("swamp");
     public static final ResourceKey<MapBiome> SAVANNA_PLATEAU = getKey("savanna_plateu");
     public static final ResourceKey<MapBiome> SAVANNA = getKey("savanna");
@@ -45,7 +46,7 @@ public class ModMapBiomes {
         context.register(SNOWY_PLAINS, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.SNOWY_PLAINS)).setColor(new Color(57, 95, 57)).setHeight(3).setPerlinMultiplier(4).build());
         context.register(PLAINS, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.PLAINS)).setColor(new Color(57, 95, 57)).setHeight(3).setPerlinMultiplier(4).build());
         context.register(WINDSWEPT_HILLS, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.WINDSWEPT_HILLS)).setColor(new Color(151, 151, 151)).setHeight(33).setPerlinMultiplier(20).setPixelWeight(1.5).build());
-        context.register(JAGGED_PEAKS, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.JAGGED_PEAKS)).setColor(new Color(130, 130, 130)).setHeight(60).setPerlinMultiplier(28).build());
+        context.register(SNOWY_MOUNTAINS, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.JAGGED_PEAKS)).setColor(new Color(130, 130, 130)).setHeight(60).setPerlinMultiplier(28).setCaveThreshold(0.7).build());
         context.register(SWAMP, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.SWAMP)).setColor(new Color(76, 95, 49)).setHeight(-3).setPerlinMultiplier(4).build());
         context.register(SAVANNA_PLATEAU, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.SAVANNA_PLATEAU)).setColor(new Color(85, 109, 51)).setHeight(3).setPerlinMultiplier(4).build());
         context.register(SAVANNA, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.SAVANNA)).setColor(new Color(98, 123, 64)).setHeight(3).setPerlinMultiplier(0.1).build());

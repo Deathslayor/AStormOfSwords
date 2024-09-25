@@ -1,22 +1,19 @@
 {
   "dimensions": {
     "minecraft:overworld": {
-      "type": "agotmod:known_world_type",
+      "type": "minecraft:overworld",
       "generator": {
         "type": "ctgen:map_based_chunk_generator",
         "settings": {
           "biome_map": "agotmod:known_world",
-          "deepslate_level": 0,
           "default_map_biome": "agotmod:deep_cold_ocean",
-          "dirt_level": 66,
-          "height": 279,
           "map_biomes": [
             "agotmod:mangroves",
             "agotmod:taiga",
             "agotmod:snowy_plains",
             "agotmod:plains",
             "agotmod:windswept_hills",
-            "agotmod:jagged_peaks",
+            "agotmod:snowy_mountains",
             "agotmod:swamp",
             "agotmod:savanna_plateu",
             "agotmod:savanna",
@@ -32,11 +29,7 @@
             "agotmod:frozen_lake",
             "agotmod:cold_ocean",
             "agotmod:deep_cold_ocean"
-          ],
-          "min_y": -32,
-          "noise_detail": 3,
-          "sea_level": 64,
-          "transition": 23
+          ]
         }
       }
     }
