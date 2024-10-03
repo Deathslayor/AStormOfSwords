@@ -30,7 +30,7 @@ public class ModMapBiomes {
     public static final ResourceKey<MapBiome> MEADOW = getKey("meadow");
     public static final ResourceKey<MapBiome> THE_WALL = getKey("the_wall");
     public static final ResourceKey<MapBiome> SNOWY_TAIGA = getKey("snowy_taiga");
-    public static final ResourceKey<MapBiome> SNOWY_SLOPES = getKey("snowy_slopes");
+    public static final ResourceKey<MapBiome> SNOWY_FLATS = getKey("snowy_flats");
     public static final ResourceKey<MapBiome> SUNFLOWER_PLAINS = getKey("sunflower_plains");
     public static final ResourceKey<MapBiome> RIVER = getKey("river");
     public static final ResourceKey<MapBiome> FROZEN_RIVER = getKey("frozen_river");
@@ -39,6 +39,9 @@ public class ModMapBiomes {
     public static final ResourceKey<MapBiome> COLD_OCEAN = getKey("cold_ocean");
     public static final ResourceKey<MapBiome> DEEP_COLD_OCEAN = getKey("deep_cold_ocean");
     public static final ResourceKey<MapBiome> BASALT_DELTAS = getKey("basalt_deltas");
+    public static final ResourceKey<MapBiome> SNOWY_SLOPES = getKey("snowy_slopes");
+    public static final ResourceKey<MapBiome> FROZEN_MOUNTAINS = getKey("frozen_mountains");
+    public static final ResourceKey<MapBiome> OLD_GROWTH_SPRUCE_TAIGA = getKey("old_growth_spruce_taiga");
 
     public static void bootstrap(BootstapContext<MapBiome> context) {
         // The North
@@ -53,12 +56,15 @@ public class ModMapBiomes {
         context.register(SAVANNA, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.SAVANNA)).setColor(new Color(98, 123, 64)).setHeight(3).setPerlinMultiplier(0.1).build());
         context.register(FOREST, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.FOREST)).setColor(new Color(61, 81, 51)).setHeight(3).setPerlinMultiplier(7).build());
         context.register(MEADOW, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.MEADOW)).setColor(new Color(72, 122, 72)).setHeight(3).build());
+        context.register(OLD_GROWTH_SPRUCE_TAIGA, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.OLD_GROWTH_SPRUCE_TAIGA)).setColor(new Color(38, 59, 38)).setHeight(3).setPerlinMultiplier(6).build());
         // wall
         context.register(THE_WALL, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.FROZEN_PEAKS)).setColor(new Color(255, 255, 255)).setStoneBlock(Blocks.PACKED_ICE).setDirtBlock(Blocks.PACKED_ICE).setSurfaceBlock(Blocks.SNOW_BLOCK).setHeight(213).setPerlinMultiplier(0).setPixelWeight(16).build());
         //North Of The Wall
         context.register(SNOWY_TAIGA, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.SNOWY_TAIGA)).setColor(new Color(130, 140, 130)).setHeight(5).build());
-        context.register(SNOWY_SLOPES, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.SNOWY_SLOPES)).setColor(new Color(217, 217, 217)).setHeight(5).build());
+        context.register(SNOWY_FLATS, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.SNOWY_SLOPES)).setColor(new Color(217, 217, 217)).setHeight(5).build());
         context.register(SUNFLOWER_PLAINS, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.SUNFLOWER_PLAINS)).setColor(new Color(107, 143, 107)).setHeight(5).build());
+        context.register(SNOWY_SLOPES, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.SNOWY_SLOPES)).setColor(new Color(192, 192, 192)).setStoneBlock(Blocks.STONE).setDirtBlock(Blocks.SNOW_BLOCK).setSurfaceBlock(Blocks.SNOW).setHeight(33).setPerlinMultiplier(20).setPixelWeight(1.5).build());
+        context.register(FROZEN_MOUNTAINS, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.JAGGED_PEAKS)).setColor(new Color(174, 174, 174)).setStoneBlock(Blocks.STONE).setDirtBlock(Blocks.POWDER_SNOW).setSurfaceBlock(Blocks.POWDER_SNOW).setHeight(60).setPerlinMultiplier(28).setCaveThreshold(0.7).build());
         //Essos
         context.register(BASALT_DELTAS, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.BASALT_DELTAS)).setColor(new Color(0, 0, 0)).setHeight(5).build());
         // water biomes

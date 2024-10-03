@@ -54,7 +54,7 @@ public class ModDimensionProvider {
                 mapBiomeRegistry.getOrThrow(ModMapBiomes.MEADOW),
                 mapBiomeRegistry.getOrThrow(ModMapBiomes.THE_WALL),
                 mapBiomeRegistry.getOrThrow(ModMapBiomes.SNOWY_TAIGA),
-                mapBiomeRegistry.getOrThrow(ModMapBiomes.SNOWY_SLOPES),
+                mapBiomeRegistry.getOrThrow(ModMapBiomes.SNOWY_FLATS),
                 mapBiomeRegistry.getOrThrow(ModMapBiomes.SUNFLOWER_PLAINS),
                 mapBiomeRegistry.getOrThrow(ModMapBiomes.RIVER),
                 mapBiomeRegistry.getOrThrow(ModMapBiomes.FROZEN_RIVER),
@@ -62,7 +62,10 @@ public class ModDimensionProvider {
                 mapBiomeRegistry.getOrThrow(ModMapBiomes.FROZEN_LAKE),
                 mapBiomeRegistry.getOrThrow(ModMapBiomes.COLD_OCEAN),
                 mapBiomeRegistry.getOrThrow(ModMapBiomes.DEEP_COLD_OCEAN),
-                mapBiomeRegistry.getOrThrow(ModMapBiomes.BASALT_DELTAS)
+                mapBiomeRegistry.getOrThrow(ModMapBiomes.BASALT_DELTAS),
+                mapBiomeRegistry.getOrThrow(ModMapBiomes.SNOWY_SLOPES),
+                mapBiomeRegistry.getOrThrow(ModMapBiomes.FROZEN_MOUNTAINS),
+                mapBiomeRegistry.getOrThrow(ModMapBiomes.OLD_GROWTH_SPRUCE_TAIGA)
         );
     }
 

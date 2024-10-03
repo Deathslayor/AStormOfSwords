@@ -21,7 +21,7 @@
             "agotmod:meadow",
             "agotmod:the_wall",
             "agotmod:snowy_taiga",
-            "agotmod:snowy_slopes",
+            "agotmod:snowy_flats",
             "agotmod:sunflower_plains",
             "agotmod:river",
             "agotmod:frozen_river",
@@ -29,7 +29,10 @@
             "agotmod:frozen_lake",
             "agotmod:cold_ocean",
             "agotmod:deep_cold_ocean",
-            "agotmod:basalt_deltas"
+            "agotmod:basalt_deltas",
+            "agotmod:snowy_slopes",
+            "agotmod:frozen_mountains",
+            "agotmod:old_growth_spruce_taiga"
           ]
         }
       }
