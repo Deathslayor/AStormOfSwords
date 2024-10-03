@@ -2,7 +2,7 @@ package net.astormofsorts.agotmod.entity;
 
 import net.astormofsorts.agotmod.AGoTMod;
 import net.astormofsorts.agotmod.entity.custom.BearEntity;
-import net.astormofsorts.agotmod.entity.custom.RhinoEntity;
+import net.astormofsorts.agotmod.entity.custom.MammothEntity;
 import net.astormofsorts.agotmod.entity.custom.norththewall.WightEntity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -30,10 +30,10 @@ public class ModEntities {
             ENTITY_TYPES.register("wight", () -> EntityType.Builder.of(WightEntity::new, MobCategory.CREATURE)
                     .sized(1f, 1f).build("wight"));
 
-    // Registry object for the Rhino entity type
-    public static final RegistryObject<EntityType<RhinoEntity>> RHINO =
-            ENTITY_TYPES.register("rhino", () -> EntityType.Builder.of(RhinoEntity::new, MobCategory.CREATURE)
-                    .sized(3f, 4f).build("rhino"));
+    // Registry object for the Mammoth entity type
+    public static final RegistryObject<EntityType<MammothEntity>> MAMMOTH =
+            ENTITY_TYPES.register("mammoth", () -> EntityType.Builder.of(MammothEntity::new, MobCategory.CREATURE)
+                    .sized(3f, 4f).build("mammoth"));
 
 
     // Method for registering the deferred register with the event bus

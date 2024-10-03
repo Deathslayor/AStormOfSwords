@@ -13,7 +13,7 @@ public class ModModelLayers {
     public static final ModelLayerLocation WIGHT_LAYER = new ModelLayerLocation(
             new ResourceLocation(AGoTMod.MOD_ID, "wight_layer"), "main");
 
-    // Model layer location for the Rhino entity
-    public static final ModelLayerLocation RHINO_LAYER = new ModelLayerLocation(
-            new ResourceLocation(AGoTMod.MOD_ID, "rhino_layer"), "main");
+    // Model layer location for the Mammoth entity
+    public static final ModelLayerLocation MAMMOTH_LAYER = new ModelLayerLocation(
+            new ResourceLocation(AGoTMod.MOD_ID, "mammoth_layer"), "main");
 }

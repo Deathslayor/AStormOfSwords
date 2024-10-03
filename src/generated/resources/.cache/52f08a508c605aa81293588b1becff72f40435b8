@@ -1,4 +1,4 @@
-// 1.20.1	2024-09-16T17:09:48.929709257	Item Models: agotmod
+// 1.20.1	2024-10-03T14:16:47.4307	Item Models: agotmod
 65c44e6f1f29781252c76032b90c20b3bc8f7b8a assets/agotmod/models/item/alder_button.json
 f0b6afe25a5640838c024d02c663e7c8f821ffd6 assets/agotmod/models/item/alder_door.json
 2af83e95998f18d674056268682572a94f141042 assets/agotmod/models/item/alder_fence.json
@@ -42,7 +42,6 @@ bcfbc4200e06ce34a58681c2b7d67d722377c712 assets/agotmod/models/item/beech_saplin
 191f073e896562b09388091e0fe645759876f7d6 assets/agotmod/models/item/beech_stairs.json
 81025a63462da2879baaae02fdc15de934c58f05 assets/agotmod/models/item/beech_trapdoor.json
 88fa73ef6398a6f41f57afed278b7d5b774828a7 assets/agotmod/models/item/beech_wall.json
-c29c1a2478602c1a3c3cf3b40965b68582d5390c assets/agotmod/models/item/black_diamond.json
 4e2af5796c5daf5d641db4541c0651ef3badbe0d assets/agotmod/models/item/blackbark_button.json
 9db40ba1fe9d7f205432dabff28ca08763c6423d assets/agotmod/models/item/blackbark_door.json
 dc0dbc32e94c80d64ba13f0d912d20be060ad97d assets/agotmod/models/item/blackbark_fence.json
@@ -53,9 +52,10 @@ b459bfdecd36fa08dc1828837a37df3126ad9386 assets/agotmod/models/item/blackbark_sl
 d8f10d472bcebb04e636fa9fa0fcda6a820ef7a6 assets/agotmod/models/item/blackbark_stairs.json
 de913b5ca2d37097900148885d738827548a0539 assets/agotmod/models/item/blackbark_trapdoor.json
 e1d53f209e7bcbf76f6a057d86a7af689e6455a5 assets/agotmod/models/item/blackbark_wall.json
+c29c1a2478602c1a3c3cf3b40965b68582d5390c assets/agotmod/models/item/black_diamond.json
+2e3d6eade5319bb3a545e66c233098e4db8e7907 assets/agotmod/models/item/bloodstone.json
 cc03d44f4925341042827a95def53ffee5ce0d4e assets/agotmod/models/item/blood_bottled.json
 bfc0297ac1c5e4265c363894d137206f0080e690 assets/agotmod/models/item/blood_dagger.json
-2e3d6eade5319bb3a545e66c233098e4db8e7907 assets/agotmod/models/item/bloodstone.json
 e244337b4337933d0e2f14b69adea7cb8fc9f5f9 assets/agotmod/models/item/boar_intestines.json
 c0fc5f29d19af68aa1841d93ded63a6c91545b23 assets/agotmod/models/item/boar_tusk.json
 616da0194702f3fa0750d8968f1740bf6a7b1ff2 assets/agotmod/models/item/bolton_levy_boots.json
@@ -129,12 +129,6 @@ eb0af69f4c0c1398b3db8081e1fd35ffe972943e assets/agotmod/models/item/hawthorn_sla
 eb3d9e4331167d0e5b3b62027955e3419da30f83 assets/agotmod/models/item/hawthorn_stairs.json
 67ba370510f23c2a12424aaa4509eb2c223eefec assets/agotmod/models/item/hawthorn_trapdoor.json
 b4238ebf9dbc88b507b7e90cbef9f7a28369d225 assets/agotmod/models/item/hawthorn_wall.json
-020e6619c56818fc1bc6c9de93e830d0ce628bc6 assets/agotmod/models/item/iron_battleaxe.json
-c61c2a12850719d640ae0604bd0a445734b7320b assets/agotmod/models/item/iron_dagger.json
-1c791a60e7cbdca4929cd67f67a0acdb63320170 assets/agotmod/models/item/iron_longsword.json
-8c010d01661601760c3255cd4c934b118e06154d assets/agotmod/models/item/iron_mace.json
-dd44e66e0df6e530109de36a3d30bf4745d39ed7 assets/agotmod/models/item/iron_pike.json
-76201fd545dfb4f9f490db6eb379665e368b511f assets/agotmod/models/item/iron_spear.json
 0ba4e7fafb26c823c11e1168e33b626809c48454 assets/agotmod/models/item/ironwood_button.json
 6c97ce0a52be9aec2f6a513d996db849952b0af9 assets/agotmod/models/item/ironwood_door.json
 367a8e20007bfa224562716a174ef21f6fe74840 assets/agotmod/models/item/ironwood_fence.json
@@ -145,9 +139,16 @@ fc0b044ee9af33dd5431561c72eb47c3013c3a2c assets/agotmod/models/item/ironwood_sla
 c5052c785f141df80659105efe5c5de50acf8aeb assets/agotmod/models/item/ironwood_stairs.json
 95ce4c5238183d4c488c7e1a54c7c6d421af5e11 assets/agotmod/models/item/ironwood_trapdoor.json
 7b2dceae4b9b6c7a7d0e4f5ddf6b81c8f21f043c assets/agotmod/models/item/ironwood_wall.json
+020e6619c56818fc1bc6c9de93e830d0ce628bc6 assets/agotmod/models/item/iron_battleaxe.json
+c61c2a12850719d640ae0604bd0a445734b7320b assets/agotmod/models/item/iron_dagger.json
+1c791a60e7cbdca4929cd67f67a0acdb63320170 assets/agotmod/models/item/iron_longsword.json
+8c010d01661601760c3255cd4c934b118e06154d assets/agotmod/models/item/iron_mace.json
+dd44e66e0df6e530109de36a3d30bf4745d39ed7 assets/agotmod/models/item/iron_pike.json
+76201fd545dfb4f9f490db6eb379665e368b511f assets/agotmod/models/item/iron_spear.json
 1ab57e133a5bdfad5537d260d3392b09167b8a5a assets/agotmod/models/item/jade.json
 7c5d92efd578e1fcfbde48a888af64e87159a9da assets/agotmod/models/item/jasper.json
 475677e084b0bfaf5b039690f0633468e69012de assets/agotmod/models/item/malachite.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/agotmod/models/item/mammoth_spawn_egg.json
 5afee6286410ec276902a7e351abc7ca911827b5 assets/agotmod/models/item/manderly_levy_boots.json
 07fb85b17d9846ad8f8faa1debe8fe25e523a67d assets/agotmod/models/item/manderly_levy_chestplate.json
 5f65e88749b7437a9fc4b8d38ec0c82a9b20a522 assets/agotmod/models/item/manderly_levy_helmet.json
@@ -193,7 +194,6 @@ b18dbcea844bbcdd7b95493865b14955258d33d2 assets/agotmod/models/item/raw_horse_me
 37575b5c5af6022f9ba3c2a09e2b643a5bdbbad8 assets/agotmod/models/item/raw_sausage.json
 89aae95d8e71d6799881bccdf84d2fccba4caf9d assets/agotmod/models/item/raw_tin.json
 8150fc40f51d6fc505b520c7b43474041f5d811e assets/agotmod/models/item/raw_white_sausage.json
-63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/agotmod/models/item/rhino_spawn_egg.json
 a65c8f9295ac6424a6b9bddd169d157903f48820 assets/agotmod/models/item/ruby.json
 efd06f94ebd99312133bda5d526439a8f6475d85 assets/agotmod/models/item/sapphire.json
 f69e96f26d3f650edce9e0272598f2fc4a064529 assets/agotmod/models/item/sentinel_button.json
@@ -206,6 +206,10 @@ c8bb4842f270a26d0694ed7d2cb735f34d6b4638 assets/agotmod/models/item/sentinel_sap
 9596802d8b5f7bdca34a2c99f9a9ab14e54db96b assets/agotmod/models/item/sentinel_stairs.json
 b0c31034ee95cf406a0f300af3fb1060d5297e1b assets/agotmod/models/item/sentinel_trapdoor.json
 6239b1c06ab826a2c75b04c89cca9a6c1be5b83a assets/agotmod/models/item/sentinel_wall.json
+508d4fc036c74565337e2645241a1e56fb34c342 assets/agotmod/models/item/starkplate_boots.json
+a7f1b5d107af0b476b206521913e7abad7f2699f assets/agotmod/models/item/starkplate_chestplate.json
+fdc3280f2fb1f634fe0a95b17df2091e04d6b35c assets/agotmod/models/item/starkplate_helmet.json
+06caf57501150f518397702eab68b15a9223f306 assets/agotmod/models/item/starkplate_leggings.json
 e6d20cb665c0e1f3786ee3104db6f9237539d615 assets/agotmod/models/item/stark_levy_boots.json
 6561b2e4478fd134d42770813f5841d134fa5581 assets/agotmod/models/item/stark_levy_chestplate.json
 429aa0ace0d15b538173c412bfe983845f46bde3 assets/agotmod/models/item/stark_levy_helmet.json
@@ -214,10 +218,6 @@ f9a60b729ea472cf08e0dd339f35dfe044e0731b assets/agotmod/models/item/stark_levy_l
 a847dc751a9cc315f3fe44c138303f85ba978f48 assets/agotmod/models/item/stark_noble_plate_chestplate.json
 34bdd7d7076722456e486163f1e86bf77d39281e assets/agotmod/models/item/stark_noble_plate_helmet.json
 289d1f13107d7e911010f2820674b796a046efdb assets/agotmod/models/item/stark_noble_plate_leggings.json
-508d4fc036c74565337e2645241a1e56fb34c342 assets/agotmod/models/item/starkplate_boots.json
-a7f1b5d107af0b476b206521913e7abad7f2699f assets/agotmod/models/item/starkplate_chestplate.json
-fdc3280f2fb1f634fe0a95b17df2091e04d6b35c assets/agotmod/models/item/starkplate_helmet.json
-06caf57501150f518397702eab68b15a9223f306 assets/agotmod/models/item/starkplate_leggings.json
 bb7ffa7d9ab25ec0f75d09b0543397afa00987af assets/agotmod/models/item/steel_axe.json
 be5f9cb32e9a1b395b2ac6ff4adf4fa5f06f8442 assets/agotmod/models/item/steel_battleaxe.json
 7ffccb87f20db3a8282c5be632b08a3064575d03 assets/agotmod/models/item/steel_dagger.json

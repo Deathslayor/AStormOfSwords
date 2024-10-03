@@ -7,9 +7,9 @@ import net.minecraft.client.animation.KeyframeAnimations;
 
 public class ModAnimationDefinitions {
     /**
-     * ---------------------------(Rhino Animations)--------------------------- //
+     * ---------------------------(Mammoth Animations)--------------------------- //
      */
-    public static final AnimationDefinition RHINO_IDLE = AnimationDefinition.Builder.withLength(3f).looping()
+    public static final AnimationDefinition MAMMOTH_IDLE = AnimationDefinition.Builder.withLength(3f).looping()
             .addAnimation("body",
                     new AnimationChannel(AnimationChannel.Targets.POSITION,
                             new Keyframe(0f, KeyframeAnimations.posVec(0f, 0f, 0f),
@@ -88,7 +88,7 @@ public class ModAnimationDefinitions {
                                     AnimationChannel.Interpolations.LINEAR),
                             new Keyframe(3f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.LINEAR))).build();
-    public static final AnimationDefinition RHINO_WALK = AnimationDefinition.Builder.withLength(3f).looping()
+    public static final AnimationDefinition MAMMOTH_WALK = AnimationDefinition.Builder.withLength(3f).looping()
             .addAnimation("head",
                     new AnimationChannel(AnimationChannel.Targets.ROTATION,
                             new Keyframe(0f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
@@ -223,7 +223,7 @@ public class ModAnimationDefinitions {
                                     AnimationChannel.Interpolations.LINEAR),
                             new Keyframe(3f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.LINEAR))).build();
-    public static final AnimationDefinition RHINO_ATTACK = AnimationDefinition.Builder.withLength(1.4167667f)
+    public static final AnimationDefinition MAMMOTH_ATTACK = AnimationDefinition.Builder.withLength(1.4167667f)
             .addAnimation("body",
                     new AnimationChannel(AnimationChannel.Targets.ROTATION,
                             new Keyframe(0f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
@@ -321,8 +321,8 @@ public class ModAnimationDefinitions {
                             new Keyframe(1f, KeyframeAnimations.degreeVec(82.5f, 0f, 0f),
                                     AnimationChannel.Interpolations.LINEAR))).build();
 
-    public static final AnimationDefinition RHINO_SIT = AnimationDefinition.Builder.withLength(2f).looping()
-            .addAnimation("rhino",
+    public static final AnimationDefinition MAMMOTH_SIT = AnimationDefinition.Builder.withLength(2f).looping()
+            .addAnimation("mammoth",
                     new AnimationChannel(AnimationChannel.Targets.POSITION,
                             new Keyframe(0f, KeyframeAnimations.posVec(0f, -1f, 0f),
                                     AnimationChannel.Interpolations.LINEAR),
@@ -415,7 +415,7 @@ public class ModAnimationDefinitions {
                             new Keyframe(0f, KeyframeAnimations.posVec(0f, 0f, 2f),
                                     AnimationChannel.Interpolations.LINEAR))).build();
     /**
-     * ---------------------------(Rhino Animations)--------------------------- //
+     * ---------------------------(Mammoth Animations)--------------------------- //
      */
     public static final AnimationDefinition WIGHT_EMERGING = AnimationDefinition.Builder.withLength(2.625f)
             .addAnimation("Head",

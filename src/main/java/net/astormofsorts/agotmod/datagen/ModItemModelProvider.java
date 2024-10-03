@@ -150,9 +150,9 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         // ---------------------------(ANIMAL SPAWN EGGS)--------------------------- //
         // Register item model for the Rhino Spawn Egg
-        withExistingParent(ModItems.RHINO_SPANW_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.BEAR_SPANW_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.WIGHT_SPANW_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.MAMMOTH_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.BEAR_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.WIGHT_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         // ---------------------------(ANIMAL SPAWN EGGS)--------------------------- //
 
         // ---------------------------(TOOLS)--------------------------- //

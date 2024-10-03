@@ -7,7 +7,7 @@ import com.mojang.logging.LogUtils;
 import net.astormofsorts.agotmod.block.ModBLocks;
 import net.astormofsorts.agotmod.entity.ModEntities;
 import net.astormofsorts.agotmod.entity.client.BearRenderer;
-import net.astormofsorts.agotmod.entity.client.RhinoRenderer;
+import net.astormofsorts.agotmod.entity.client.MammothRenderer;
 import net.astormofsorts.agotmod.entity.client.norththewall.WightRenderer;
 import net.astormofsorts.agotmod.item.ModItemProperties;
 import net.astormofsorts.agotmod.item.ModItems;
@@ -101,7 +101,7 @@ public class AGoTMod {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             // Register custom renderer for the Rhino entity
-            EntityRenderers.register(ModEntities.RHINO.get(), RhinoRenderer::new);
+            EntityRenderers.register(ModEntities.MAMMOTH.get(), MammothRenderer::new);
             EntityRenderers.register(ModEntities.BEAR.get(), BearRenderer::new);
 
             EntityRenderers.register(ModEntities.WIGHT.get(), WightRenderer::new);

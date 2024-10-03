@@ -61,7 +61,8 @@ public class ModDimensionProvider {
                 mapBiomeRegistry.getOrThrow(ModMapBiomes.LAKE),
                 mapBiomeRegistry.getOrThrow(ModMapBiomes.FROZEN_LAKE),
                 mapBiomeRegistry.getOrThrow(ModMapBiomes.COLD_OCEAN),
-                mapBiomeRegistry.getOrThrow(ModMapBiomes.DEEP_COLD_OCEAN)
+                mapBiomeRegistry.getOrThrow(ModMapBiomes.DEEP_COLD_OCEAN),
+                mapBiomeRegistry.getOrThrow(ModMapBiomes.BASALT_DELTAS)
         );
     }
 

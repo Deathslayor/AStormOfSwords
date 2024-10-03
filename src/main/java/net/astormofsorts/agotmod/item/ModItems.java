@@ -228,14 +228,14 @@ public class ModItems {
     // ---------------------------(INGOTS)--------------------------- //
 
     // ---------------------------(ANIMAL SPAWN EGGS)--------------------------- //
-    public static final RegistryObject<Item> BEAR_SPANW_EGG = ITEMS.register("bear_spawn_egg",
+    public static final RegistryObject<Item> BEAR_SPAWN_EGG = ITEMS.register("bear_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.BEAR, 0x7e9680, 0xc5d1c5, new Item.Properties()));
 
-    public static final RegistryObject<Item> WIGHT_SPANW_EGG = ITEMS.register("wight_spawn_egg",
+    public static final RegistryObject<Item> WIGHT_SPAWN_EGG = ITEMS.register("wight_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.WIGHT, 0x7e9680, 0xc5d1c5, new Item.Properties()));
 
-    public static final RegistryObject<Item> RHINO_SPANW_EGG = ITEMS.register("rhino_spawn_egg",
-            () -> new ForgeSpawnEggItem(ModEntities.RHINO, 0x7e9680, 0xc5d1c5, new Item.Properties()));
+    public static final RegistryObject<Item> MAMMOTH_SPAWN_EGG = ITEMS.register("mammoth_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.MAMMOTH, 0x7e9680, 0xc5d1c5, new Item.Properties()));
 
     // ---------------------------(ANIMAL SPAWN EGGS)--------------------------- //
 

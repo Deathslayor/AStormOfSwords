@@ -40,7 +40,7 @@ public class ModBiomeModifiers {
         //Spawns Mammoths
         context.register(SPAWN_MAMMOTH, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
                 biomes.getOrThrow(Tags.Biomes.IS_COLD_OVERWORLD),
-                List.of(new MobSpawnSettings.SpawnerData(ModEntities.RHINO.get(), 100, 3, 5))));
+                List.of(new MobSpawnSettings.SpawnerData(ModEntities.MAMMOTH.get(), 100, 3, 5))));
         context.register(CREATE_WEIRWOOD_TREE, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
                 biomes.getOrThrow(Tags.Biomes.IS_PLAINS),
                 HolderSet.direct(placedFeatures.getOrThrow(ModplacedFeatures.WEIRWOOD_KEY)),

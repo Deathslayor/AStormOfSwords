@@ -2,7 +2,7 @@
   "type": "forge:add_spawns",
   "biomes": "#forge:is_cold/overworld",
   "spawners": {
-    "type": "agotmod:rhino",
+    "type": "agotmod:mammoth",
     "maxCount": 5,
     "minCount": 3,
     "weight": 100

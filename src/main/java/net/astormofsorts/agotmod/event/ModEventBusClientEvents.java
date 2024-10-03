@@ -6,7 +6,7 @@ package net.astormofsorts.agotmod.event;
 import net.astormofsorts.agotmod.AGoTMod;
 import net.astormofsorts.agotmod.entity.client.BearModel;
 import net.astormofsorts.agotmod.entity.client.ModModelLayers;
-import net.astormofsorts.agotmod.entity.client.RhinoModel;
+import net.astormofsorts.agotmod.entity.client.MammothModel;
 import net.astormofsorts.agotmod.entity.client.norththewall.WightModel;
 import net.astormofsorts.agotmod.event.KeyMappings.KeyBindings;
 import net.minecraftforge.api.distmarker.Dist;
@@ -26,7 +26,7 @@ public class ModEventBusClientEvents {
         // The layer definition is associated with the RhinoModel's createBodyLayer method
         event.registerLayerDefinition(ModModelLayers.BEAR_LAYER, BearModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.WIGHT_LAYER, WightModel::createBodyLayer);
-        event.registerLayerDefinition(ModModelLayers.RHINO_LAYER, RhinoModel::createBodyLayer);
+        event.registerLayerDefinition(ModModelLayers.MAMMOTH_LAYER, MammothModel::createBodyLayer);
     }
 
     //Registers Keys

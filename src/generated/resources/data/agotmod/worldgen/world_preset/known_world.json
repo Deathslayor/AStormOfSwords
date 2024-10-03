@@ -28,7 +28,8 @@
             "agotmod:lake",
             "agotmod:frozen_lake",
             "agotmod:cold_ocean",
-            "agotmod:deep_cold_ocean"
+            "agotmod:deep_cold_ocean",
+            "agotmod:basalt_deltas"
           ]
         }
       }

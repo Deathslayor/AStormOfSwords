@@ -1,17 +1,17 @@
 package net.astormofsorts.agotmod.entity.ai;
 
-import net.astormofsorts.agotmod.entity.custom.RhinoEntity;
+import net.astormofsorts.agotmod.entity.custom.MammothEntity;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 
 /**
- * Custom attack goal for Rhino entities.
+ * Custom attack goal for Mammoth entities.
  */
-public class RhinoAttackGoal extends MeleeAttackGoal {
-    // Reference to the Rhino entity associated with this goal
-    private final RhinoEntity entity;
+public class MammothAttackGoal extends MeleeAttackGoal {
+    // Reference to the Mammoth entity associated with this goal
+    private final MammothEntity entity;
 
     // Cooldown parameters for the attack
     private int attackDelay = 40;
@@ -21,15 +21,15 @@ public class RhinoAttackGoal extends MeleeAttackGoal {
     private boolean shouldCountTillNextAttack = false;
 
     /**
-     * Constructor for RhinoAttackGoal.
+     * Constructor for MammothAttackGoal.
      *
-     * @param pMob                          The Rhino entity using this goal.
+     * @param pMob                          The Mammoth entity using this goal.
      * @param pSpeedModifier                Speed modifier for the attack.
      * @param pFollowingTargetEvenIfNotSeen Flag indicating whether to follow the target even if not seen.
      */
-    public RhinoAttackGoal(PathfinderMob pMob, double pSpeedModifier, boolean pFollowingTargetEvenIfNotSeen) {
+    public MammothAttackGoal(PathfinderMob pMob, double pSpeedModifier, boolean pFollowingTargetEvenIfNotSeen) {
         super(pMob, pSpeedModifier, pFollowingTargetEvenIfNotSeen);
-        entity = ((RhinoEntity) pMob);
+        entity = ((MammothEntity) pMob);
     }
 
     /**

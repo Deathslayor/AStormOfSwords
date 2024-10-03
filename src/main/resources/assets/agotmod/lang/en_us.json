@@ -225,11 +225,11 @@
   "block.agotmod.tourmaline_ore": "Tourmaline Ore",
   "block.agotmod.tourmaline_deepslate_ore": "Deepslate Tourmaline Ore",
 
-  "item.agotmod.rhino_spawn_egg": "Mammoth Spawn Egg",
+  "item.agotmod.mammoth_spawn_egg": "Mammoth Spawn Egg",
   "item.agotmod.bear_spawn_egg": "Bear Spawn Egg",
 
   "entity.minecraft.villager.agotmod.minter": "Minter",
-  "entity.agotmod.rhino": "Mammoth",
+  "entity.agotmod.mammoth": "Mammoth",
   "entity.agotmod.bear": "Bear",
 
 

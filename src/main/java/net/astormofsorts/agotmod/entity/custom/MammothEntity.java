@@ -1,8 +1,8 @@
 package net.astormofsorts.agotmod.entity.custom;
 
 import net.astormofsorts.agotmod.entity.ModEntities;
-import net.astormofsorts.agotmod.entity.ai.RhinoAttackGoal;
-import net.astormofsorts.agotmod.entity.variant.RhinoVariant;
+import net.astormofsorts.agotmod.entity.ai.MammothAttackGoal;
+import net.astormofsorts.agotmod.entity.variant.MammothVariant;
 import net.astormofsorts.agotmod.sound.ModSounds;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
@@ -34,15 +34,15 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.ForgeEventFactory;
 import org.jetbrains.annotations.Nullable;
 
-// RhinoEntity represents the custom entity class for the Rhino
-public class RhinoEntity extends TamableAnimal implements PlayerRideable {
+// MammothEntity represents the custom entity class for the Mammoth
+public class MammothEntity extends TamableAnimal implements PlayerRideable {
 
-    // Data accessor for tracking whether the Rhino is attacking
+    // Data accessor for tracking whether the Mammoth is attacking
     private static final EntityDataAccessor<Boolean> ATTACKING =
-            SynchedEntityData.defineId(RhinoEntity.class, EntityDataSerializers.BOOLEAN);
+            SynchedEntityData.defineId(MammothEntity.class, EntityDataSerializers.BOOLEAN);
 
     public static final EntityDataAccessor<Integer> DATA_ID_TYPE_VARIANT =
-            SynchedEntityData.defineId(RhinoEntity.class, EntityDataSerializers.INT);
+            SynchedEntityData.defineId(MammothEntity.class, EntityDataSerializers.INT);
 
     // Animation state for idle animations
     public final AnimationState idleAnimationState = new AnimationState();
@@ -52,8 +52,8 @@ public class RhinoEntity extends TamableAnimal implements PlayerRideable {
     public final AnimationState attackAnimationState = new AnimationState();
     public int attackAnimationTimeout = 0;
 
-    // Constructor for RhinoEntity
-    public RhinoEntity(EntityType<? extends TamableAnimal> pEntityType, Level pLevel) {
+    // Constructor for MammothEntity
+    public MammothEntity(EntityType<? extends TamableAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.setMaxUpStep(1f);
     }
@@ -111,7 +111,7 @@ public class RhinoEntity extends TamableAnimal implements PlayerRideable {
         this.entityData.set(ATTACKING, attacking);
     }
 
-    // Method for checking if the Rhino is attacking
+    // Method for checking if the Mammoth is attacking
     public boolean isAttacking() {
         return this.entityData.get(ATTACKING);
     }
@@ -124,21 +124,21 @@ public class RhinoEntity extends TamableAnimal implements PlayerRideable {
         this.entityData.define(DATA_ID_TYPE_VARIANT, 0);
     }
 
-    public RhinoVariant getVariant() {
-        return RhinoVariant.byId(this.getTypeVariant() & 255);
+    public MammothVariant getVariant() {
+        return MammothVariant.byId(this.getTypeVariant() & 255);
     }
 
     private int getTypeVariant() {
         return this.entityData.get(DATA_ID_TYPE_VARIANT);
     }
 
-    private void setVariant(RhinoVariant variant) {
+    private void setVariant(MammothVariant variant) {
         this.entityData.set(DATA_ID_TYPE_VARIANT, variant.getId() & 255);
     }
 
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
-        RhinoVariant variant = Util.getRandom(RhinoVariant.values(), this.random);
+        MammothVariant variant = Util.getRandom(MammothVariant.values(), this.random);
         this.setVariant(variant);
         return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
     }
@@ -159,7 +159,7 @@ public class RhinoEntity extends TamableAnimal implements PlayerRideable {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new RhinoAttackGoal(this, 1.5, true));
+        this.goalSelector.addGoal(1, new MammothAttackGoal(this, 1.5, true));
         this.goalSelector.addGoal(3, new FollowParentGoal(this, 1.1D));
         this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 1.1D));
         this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 3f));
@@ -168,7 +168,7 @@ public class RhinoEntity extends TamableAnimal implements PlayerRideable {
         this.goalSelector.addGoal(8, new BreedGoal(this, 1.15D));
     }
 
-    // Method for creating attribute builder for Rhino
+    // Method for creating attribute builder for Mammoth
     public static AttributeSupplier.Builder createAttributes() {
         return TamableAnimal.createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 20D)
@@ -179,34 +179,34 @@ public class RhinoEntity extends TamableAnimal implements PlayerRideable {
                 .add(Attributes.ATTACK_DAMAGE, 24f);
     }
 
-    // Method for getting the offspring of two Rhino entities
+    // Method for getting the offspring of two Mammoth entities
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
-        return ModEntities.RHINO.get().create(pLevel);
+        return ModEntities.MAMMOTH.get().create(pLevel);
     }
 
-    // Method for checking if an item is food for the Rhino
+    // Method for checking if an item is food for the Mammoth
     @Override
     public boolean isFood(ItemStack pStack) {
         return pStack.is(Items.APPLE);
     }
 
-    // Method for getting the ambient sound of the Rhino
+    // Method for getting the ambient sound of the Mammoth
     @Nullable
     @Override
     protected SoundEvent getAmbientSound() {
         return ModSounds.MAMMOTH_IDLE.get();
     }
 
-    // Method for getting the hurt sound of the Rhino
+    // Method for getting the hurt sound of the Mammoth
     @Nullable
     @Override
     protected SoundEvent getHurtSound(DamageSource pDamageSource) {
         return ModSounds.MAMMOTH_DAMAGED.get();
     }
 
-    // Method for getting the death sound of the Rhino
+    // Method for getting the death sound of the Mammoth
     @Nullable
     @Override
     protected SoundEvent getDeathSound() {

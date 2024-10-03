@@ -38,6 +38,7 @@ public class ModMapBiomes {
     public static final ResourceKey<MapBiome> FROZEN_LAKE = getKey("frozen_lake");
     public static final ResourceKey<MapBiome> COLD_OCEAN = getKey("cold_ocean");
     public static final ResourceKey<MapBiome> DEEP_COLD_OCEAN = getKey("deep_cold_ocean");
+    public static final ResourceKey<MapBiome> BASALT_DELTAS = getKey("basalt_deltas");
 
     public static void bootstrap(BootstapContext<MapBiome> context) {
         // The North
@@ -58,7 +59,8 @@ public class ModMapBiomes {
         context.register(SNOWY_TAIGA, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.SNOWY_TAIGA)).setColor(new Color(130, 140, 130)).setHeight(5).build());
         context.register(SNOWY_SLOPES, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.SNOWY_SLOPES)).setColor(new Color(217, 217, 217)).setHeight(5).build());
         context.register(SUNFLOWER_PLAINS, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.SUNFLOWER_PLAINS)).setColor(new Color(107, 143, 107)).setHeight(5).build());
-
+        //Essos
+        context.register(BASALT_DELTAS, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.BASALT_DELTAS)).setColor(new Color(0, 0, 0)).setHeight(5).build());
         // water biomes
         context.register(RIVER, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.RIVER)).setColor(new Color(1, 98, 255)).setDirtBlock(Blocks.SAND).setSurfaceBlock(Blocks.SAND).setHeight(-15).setPixelWeight(2).build());
         context.register(FROZEN_RIVER, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.FROZEN_RIVER)).setColor(new Color(87, 145, 240)).setDirtBlock(Blocks.SAND).setSurfaceBlock(Blocks.SAND).setHeight(-15).setPixelWeight(2).build());
