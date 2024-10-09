@@ -36,6 +36,8 @@ public class ModDimensionProvider {
                 .setBiomeMapId(KNOWN_WORLD)
                 .setBiomeData(getMapBiomeList(mapBiomeRegistry))
                 .setDefaultBiome(mapBiomeRegistry.getOrThrow(ModMapBiomes.DEEP_COLD_OCEAN))
+                .setSpawnX(3500)
+                .setSpawnY(6000)
                 .build())))));
     }
 

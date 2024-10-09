@@ -33,7 +33,9 @@
             "agotmod:snowy_slopes",
             "agotmod:frozen_mountains",
             "agotmod:old_growth_spruce_taiga"
-          ]
+          ],
+          "spawn_pixel_x": 3500,
+          "spawn_pixel_y": 6000
         }
       }
     }

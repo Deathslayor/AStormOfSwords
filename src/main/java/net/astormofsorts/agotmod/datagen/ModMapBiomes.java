@@ -72,8 +72,8 @@ public class ModMapBiomes {
         context.register(FROZEN_RIVER, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.FROZEN_RIVER)).setColor(new Color(87, 145, 240)).setDirtBlock(Blocks.SAND).setSurfaceBlock(Blocks.SAND).setHeight(-15).setPixelWeight(2).build());
         context.register(LAKE, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.LUKEWARM_OCEAN)).setColor(new Color(0, 83, 217)).setSurfaceBlock(Blocks.SAND).setHeight(-20).setPixelWeight(3).build()); // lake
         context.register(FROZEN_LAKE, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.FROZEN_OCEAN)).setColor(new Color(78, 126, 204)).setSurfaceBlock(Blocks.SAND).setHeight(-20).setPixelWeight(3).build()); // Frozen Lake
-        context.register(COLD_OCEAN, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.COLD_OCEAN)).setColor(new Color(0, 42, 103)).setSurfaceBlock(Blocks.SAND).setHeight(-35).setPerlinMultiplier(16).build());
-        context.register(DEEP_COLD_OCEAN, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.DEEP_COLD_OCEAN)).setColor(new Color(0, 35, 85)).setHeight(-60).setPerlinMultiplier(33).build());
+        context.register(COLD_OCEAN, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.COLD_OCEAN)).setColor(new Color(0, 42, 103)).setSurfaceBlock(Blocks.SAND).setHeight(-35).setPerlinMultiplier(16).setCaveAir(Blocks.WATER).build());
+        context.register(DEEP_COLD_OCEAN, new MapBiomeBuilder().setBiome(getBiome(context, Biomes.DEEP_COLD_OCEAN)).setColor(new Color(0, 35, 85)).setHeight(-60).setPerlinMultiplier(33).setCaveAir(Blocks.WATER).build());
     }
 
     private static Holder<Biome> getBiome(BootstapContext<?> context, ResourceKey<Biome> biome) {
