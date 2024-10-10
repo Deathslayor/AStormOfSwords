@@ -2,7 +2,7 @@ package net.astormofsorts.agotmod.datagen;
 
 import dev.tocraft.crafted.ctgen.CTerrainGeneration;
 import dev.tocraft.crafted.ctgen.data.MapProvider;
-import dev.tocraft.crafted.ctgen.biome.MapBiome;
+import dev.tocraft.crafted.ctgen.zone.Zone;
 import net.astormofsorts.agotmod.AGoTMod;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -64,8 +64,8 @@ public class DataGenerators {
             // get provider with custom registry entries
             RegistryAccess.Frozen registryaccess$frozen = RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY);
             HolderLookup.Provider provider = ModWorldGenProvider.BUILDER.buildPatch(registryaccess$frozen, oProvider);
-            List<MapBiome> mapBiomes = ModDimensionProvider.getMapBiomeList(provider.lookupOrThrow(CTerrainGeneration.MAP_BIOME_REGISTRY)).stream().map(Holder::value).toList();
-            return CompletableFuture.completedFuture(mapBiomes);
+            List<Zone> Zones = ModDimensionProvider.getZoneList(provider.lookupOrThrow(CTerrainGeneration.MAP_ZONES_REGISTRY)).stream().map(Holder::value).toList();
+            return CompletableFuture.completedFuture(Zones);
         }), packOutput));
     }
 }
