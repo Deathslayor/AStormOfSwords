@@ -1,6 +1,10 @@
 {
   "biome": "minecraft:snowy_slopes",
-  "color": -4144960,
+  "color": {
+    "b": 192,
+    "g": 192,
+    "r": 192
+  },
   "dirt_block": "minecraft:snow_block",
   "height": 33,
   "perlin_multiplier": 20.0,

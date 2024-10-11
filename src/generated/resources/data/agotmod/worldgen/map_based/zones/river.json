@@ -1,8 +1,13 @@
 {
   "biome": "minecraft:river",
-  "color": -16686337,
+  "color": {
+    "b": 255,
+    "g": 98,
+    "r": 1
+  },
   "dirt_block": "minecraft:sand",
   "height": -15,
   "pixel_weight": 2.0,
-  "surface_block": "minecraft:sand"
+  "surface_block": "minecraft:sand",
+  "threshold_modifier": 26
 }

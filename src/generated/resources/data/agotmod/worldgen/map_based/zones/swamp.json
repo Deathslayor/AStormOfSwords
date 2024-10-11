@@ -1,6 +1,10 @@
 {
   "biome": "minecraft:swamp",
-  "color": -11772111,
+  "color": {
+    "b": 49,
+    "g": 95,
+    "r": 76
+  },
   "height": -3,
   "perlin_multiplier": 4.0
 }

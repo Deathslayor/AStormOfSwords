@@ -1,5 +1,9 @@
 {
   "biome": "minecraft:snowy_slopes",
-  "color": -2500135,
+  "color": {
+    "b": 217,
+    "g": 217,
+    "r": 217
+  },
   "height": 5
 }

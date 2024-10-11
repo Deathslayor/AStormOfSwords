@@ -14,7 +14,7 @@ public class WorldPresetsMixin {
     @Redirect(method = {"createNormalWorldDimensions", "getNormalOverworld"},
             require = 2,
             at = @At(value = "FIELD", opcode = Opcodes.GETSTATIC, target = "Lnet/minecraft/world/level/levelgen/presets/WorldPresets;NORMAL:Lnet/minecraft/resources/ResourceKey;"))
-    private static ResourceKey<WorldPreset> defaultWorldTypes$replaceDefault() {
+    private static ResourceKey<WorldPreset> replaceDefault() {
         return ModDimensionProvider.KNOWN_WORLD_PRESET;
     }
 }

@@ -1,6 +1,10 @@
 {
   "biome": "minecraft:savanna",
-  "color": -10323136,
+  "color": {
+    "b": 64,
+    "g": 123,
+    "r": 98
+  },
   "height": 3,
   "perlin_multiplier": 0.1
 }

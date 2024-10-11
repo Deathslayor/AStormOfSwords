@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class CreateWorldScreenMixin {
     @Redirect(method = "openFresh",
             at = @At(value = "FIELD", opcode = Opcodes.GETSTATIC, target = "Lnet/minecraft/world/level/levelgen/presets/WorldPresets;NORMAL:Lnet/minecraft/resources/ResourceKey;"))
-    private static ResourceKey<WorldPreset> defaultWorldTypes$replaceDefault() {
+    private static ResourceKey<WorldPreset> replaceDefault() {
         return ModDimensionProvider.KNOWN_WORLD_PRESET;
     }
 }

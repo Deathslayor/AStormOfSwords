@@ -1,6 +1,10 @@
 {
   "biome": "minecraft:old_growth_spruce_taiga",
-  "color": -14271706,
+  "color": {
+    "b": 38,
+    "g": 59,
+    "r": 38
+  },
   "height": 3,
   "perlin_multiplier": 6.0
 }

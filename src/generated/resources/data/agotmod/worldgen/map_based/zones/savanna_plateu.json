@@ -1,6 +1,10 @@
 {
   "biome": "minecraft:savanna_plateau",
-  "color": -11178701,
+  "color": {
+    "b": 51,
+    "g": 109,
+    "r": 85
+  },
   "height": 3,
   "perlin_multiplier": 4.0
 }

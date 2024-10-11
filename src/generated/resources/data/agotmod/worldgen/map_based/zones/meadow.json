@@ -1,5 +1,9 @@
 {
   "biome": "minecraft:meadow",
-  "color": -12027320,
+  "color": {
+    "b": 72,
+    "g": 122,
+    "r": 72
+  },
   "height": 3
 }

@@ -1,5 +1,9 @@
 {
   "biome": "minecraft:sunflower_plains",
-  "color": -9728149,
+  "color": {
+    "b": 107,
+    "g": 143,
+    "r": 107
+  },
   "height": 5
 }

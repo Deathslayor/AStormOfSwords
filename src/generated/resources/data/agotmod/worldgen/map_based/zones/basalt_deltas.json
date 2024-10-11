@@ -1,5 +1,9 @@
 {
   "biome": "minecraft:basalt_deltas",
-  "color": -16777216,
+  "color": {
+    "b": 0,
+    "g": 0,
+    "r": 0
+  },
   "height": 5
 }

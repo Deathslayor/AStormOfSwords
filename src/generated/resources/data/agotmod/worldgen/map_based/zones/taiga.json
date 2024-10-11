@@ -1,6 +1,10 @@
 {
   "biome": "minecraft:taiga",
-  "color": -13941205,
+  "color": {
+    "b": 43,
+    "g": 70,
+    "r": 43
+  },
   "height": 3,
   "perlin_multiplier": 6.0
 }

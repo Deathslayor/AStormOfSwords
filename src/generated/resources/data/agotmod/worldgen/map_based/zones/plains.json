@@ -1,6 +1,10 @@
 {
   "biome": "minecraft:plains",
-  "color": -13017287,
+  "color": {
+    "b": 57,
+    "g": 95,
+    "r": 57
+  },
   "height": 3,
   "perlin_multiplier": 4.0
 }

@@ -33,41 +33,41 @@ public class ModDimensionProvider {
         HolderGetter<Zone> ZoneRegistry = context.lookup(CTerrainGeneration.MAP_ZONES_REGISTRY);
         context.register(KNOWN_WORLD_PRESET, new WorldPreset(Map.of(LevelStem.OVERWORLD, new LevelStem(dimTypeRegistry.getOrThrow(BuiltinDimensionTypes.OVERWORLD), MapBasedChunkGenerator.of(new MapSettingsBuilder()
                 .setBiomeMapId(KNOWN_WORLD)
-                .setBiomeData(getZoneList(ZoneRegistry))
-                .setDefaultBiome(ZoneRegistry.getOrThrow(ModMapZones.DEEP_COLD_OCEAN))
+                .setZones(getZones(ZoneRegistry))
+                .setDefaultBiome(ZoneRegistry.getOrThrow(ModZones.DEEP_COLD_OCEAN))
                 .setSpawnX(3500)
                 .setSpawnY(6000)
                 .setPixelsAreChunks(false)
                 .build())))));
     }
 
-    public static List<Holder<Zone>> getZoneList(HolderGetter<Zone> ZoneRegistry) {
+    public static List<Holder<Zone>> getZones(HolderGetter<Zone> ZoneRegistry) {
         return List.of(
-                ZoneRegistry.getOrThrow(ModMapZones.MANGOVES),
-                ZoneRegistry.getOrThrow(ModMapZones.TAIGA),
-                ZoneRegistry.getOrThrow(ModMapZones.SNOWY_PLAINS),
-                ZoneRegistry.getOrThrow(ModMapZones.PLAINS),
-                ZoneRegistry.getOrThrow(ModMapZones.WINDSWEPT_HILLS),
-                ZoneRegistry.getOrThrow(ModMapZones.SNOWY_MOUNTAINS),
-                ZoneRegistry.getOrThrow(ModMapZones.SWAMP),
-                ZoneRegistry.getOrThrow(ModMapZones.SAVANNA_PLATEAU),
-                ZoneRegistry.getOrThrow(ModMapZones.SAVANNA),
-                ZoneRegistry.getOrThrow(ModMapZones.FOREST),
-                ZoneRegistry.getOrThrow(ModMapZones.MEADOW),
-                ZoneRegistry.getOrThrow(ModMapZones.THE_WALL),
-                ZoneRegistry.getOrThrow(ModMapZones.SNOWY_TAIGA),
-                ZoneRegistry.getOrThrow(ModMapZones.SNOWY_FLATS),
-                ZoneRegistry.getOrThrow(ModMapZones.SUNFLOWER_PLAINS),
-                ZoneRegistry.getOrThrow(ModMapZones.RIVER),
-                ZoneRegistry.getOrThrow(ModMapZones.FROZEN_RIVER),
-                ZoneRegistry.getOrThrow(ModMapZones.LAKE),
-                ZoneRegistry.getOrThrow(ModMapZones.FROZEN_LAKE),
-                ZoneRegistry.getOrThrow(ModMapZones.COLD_OCEAN),
-                ZoneRegistry.getOrThrow(ModMapZones.DEEP_COLD_OCEAN),
-                ZoneRegistry.getOrThrow(ModMapZones.BASALT_DELTAS),
-                ZoneRegistry.getOrThrow(ModMapZones.SNOWY_SLOPES),
-                ZoneRegistry.getOrThrow(ModMapZones.FROZEN_MOUNTAINS),
-                ZoneRegistry.getOrThrow(ModMapZones.OLD_GROWTH_SPRUCE_TAIGA)
+                ZoneRegistry.getOrThrow(ModZones.MANGOVES),
+                ZoneRegistry.getOrThrow(ModZones.TAIGA),
+                ZoneRegistry.getOrThrow(ModZones.SNOWY_PLAINS),
+                ZoneRegistry.getOrThrow(ModZones.PLAINS),
+                ZoneRegistry.getOrThrow(ModZones.WINDSWEPT_HILLS),
+                ZoneRegistry.getOrThrow(ModZones.SNOWY_MOUNTAINS),
+                ZoneRegistry.getOrThrow(ModZones.SWAMP),
+                ZoneRegistry.getOrThrow(ModZones.SAVANNA_PLATEAU),
+                ZoneRegistry.getOrThrow(ModZones.SAVANNA),
+                ZoneRegistry.getOrThrow(ModZones.FOREST),
+                ZoneRegistry.getOrThrow(ModZones.MEADOW),
+                ZoneRegistry.getOrThrow(ModZones.THE_WALL),
+                ZoneRegistry.getOrThrow(ModZones.SNOWY_TAIGA),
+                ZoneRegistry.getOrThrow(ModZones.SNOWY_FLATS),
+                ZoneRegistry.getOrThrow(ModZones.SUNFLOWER_PLAINS),
+                ZoneRegistry.getOrThrow(ModZones.RIVER),
+                ZoneRegistry.getOrThrow(ModZones.FROZEN_RIVER),
+                ZoneRegistry.getOrThrow(ModZones.LAKE),
+                ZoneRegistry.getOrThrow(ModZones.FROZEN_LAKE),
+                ZoneRegistry.getOrThrow(ModZones.COLD_OCEAN),
+                ZoneRegistry.getOrThrow(ModZones.DEEP_COLD_OCEAN),
+                ZoneRegistry.getOrThrow(ModZones.BASALT_DELTAS),
+                ZoneRegistry.getOrThrow(ModZones.SNOWY_SLOPES),
+                ZoneRegistry.getOrThrow(ModZones.FROZEN_MOUNTAINS),
+                ZoneRegistry.getOrThrow(ModZones.OLD_GROWTH_SPRUCE_TAIGA)
         );
     }
 

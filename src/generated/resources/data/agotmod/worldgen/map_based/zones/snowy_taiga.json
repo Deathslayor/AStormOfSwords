@@ -1,5 +1,9 @@
 {
   "biome": "minecraft:snowy_taiga",
-  "color": -8221566,
+  "color": {
+    "b": 130,
+    "g": 140,
+    "r": 130
+  },
   "height": 5
 }

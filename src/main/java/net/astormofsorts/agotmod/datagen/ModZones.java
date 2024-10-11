@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.Blocks;
 
 import java.awt.*;
 
-public class ModMapZones {
+public class ModZones {
     public static final ResourceKey<Zone> MANGOVES = getKey("mangroves");
     public static final ResourceKey<Zone> TAIGA = getKey("taiga");
     public static final ResourceKey<Zone> SNOWY_PLAINS = getKey("snowy_plains");
@@ -67,12 +67,12 @@ public class ModMapZones {
         //Essos
         context.register(BASALT_DELTAS, new ZoneBuilder().setBiome(getBiome(context, Biomes.BASALT_DELTAS)).setColor(new Color(0, 0, 0)).setHeight(5).build());
         // water biomes
-        context.register(RIVER, new ZoneBuilder().setBiome(getBiome(context, Biomes.RIVER)).setColor(new Color(1, 98, 255)).setDirtBlock(Blocks.SAND).setSurfaceBlock(Blocks.SAND).setHeight(-15).setPixelWeight(2).build());
-        context.register(FROZEN_RIVER, new ZoneBuilder().setBiome(getBiome(context, Biomes.FROZEN_RIVER)).setColor(new Color(87, 145, 240)).setDirtBlock(Blocks.SAND).setSurfaceBlock(Blocks.SAND).setHeight(-15).setPixelWeight(2).build());
-        context.register(LAKE, new ZoneBuilder().setBiome(getBiome(context, Biomes.LUKEWARM_OCEAN)).setColor(new Color(0, 83, 217)).setSurfaceBlock(Blocks.SAND).setHeight(-20).setPixelWeight(3).build()); // lake
-        context.register(FROZEN_LAKE, new ZoneBuilder().setBiome(getBiome(context, Biomes.FROZEN_OCEAN)).setColor(new Color(78, 126, 204)).setSurfaceBlock(Blocks.SAND).setHeight(-20).setPixelWeight(3).build()); // Frozen Lake
-        context.register(COLD_OCEAN, new ZoneBuilder().setBiome(getBiome(context, Biomes.COLD_OCEAN)).setColor(new Color(0, 42, 103)).setSurfaceBlock(Blocks.SAND).setHeight(-35).setPerlinMultiplier(16).setCaveAir(Blocks.WATER).build());
-        context.register(DEEP_COLD_OCEAN, new ZoneBuilder().setBiome(getBiome(context, Biomes.DEEP_COLD_OCEAN)).setColor(new Color(0, 35, 85)).setHeight(-60).setPerlinMultiplier(33).setCaveAir(Blocks.WATER).build());
+        context.register(RIVER, new ZoneBuilder().setBiome(getBiome(context, Biomes.RIVER)).setColor(new Color(1, 98, 255)).setDirtBlock(Blocks.SAND).setSurfaceBlock(Blocks.SAND).setHeight(-15).setPixelWeight(2).setThresholdModifier(26).build());
+        context.register(FROZEN_RIVER, new ZoneBuilder().setBiome(getBiome(context, Biomes.FROZEN_RIVER)).setColor(new Color(87, 145, 240)).setDirtBlock(Blocks.SAND).setSurfaceBlock(Blocks.SAND).setHeight(-15).setPixelWeight(2).setThresholdModifier(26).build());
+        context.register(LAKE, new ZoneBuilder().setBiome(getBiome(context, Biomes.LUKEWARM_OCEAN)).setColor(new Color(0, 83, 217)).setSurfaceBlock(Blocks.SAND).setHeight(-20).setPixelWeight(3).setThresholdModifier(26).build()); // lake
+        context.register(FROZEN_LAKE, new ZoneBuilder().setBiome(getBiome(context, Biomes.FROZEN_OCEAN)).setColor(new Color(78, 126, 204)).setSurfaceBlock(Blocks.SAND).setHeight(-20).setPixelWeight(3).setThresholdModifier(26).build()); // Frozen Lake
+        context.register(COLD_OCEAN, new ZoneBuilder().setBiome(getBiome(context, Biomes.COLD_OCEAN)).setColor(new Color(0, 42, 103)).setSurfaceBlock(Blocks.SAND).setHeight(-35).setPerlinMultiplier(16).setThresholdModifier(26).build());
+        context.register(DEEP_COLD_OCEAN, new ZoneBuilder().setBiome(getBiome(context, Biomes.DEEP_COLD_OCEAN)).setColor(new Color(0, 35, 85)).setHeight(-60).setPerlinMultiplier(33).setThresholdModifier(26).build());
     }
 
     private static Holder<Biome> getBiome(BootstapContext<?> context, ResourceKey<Biome> biome) {

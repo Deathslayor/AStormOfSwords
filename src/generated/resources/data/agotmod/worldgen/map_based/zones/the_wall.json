@@ -1,6 +1,10 @@
 {
   "biome": "minecraft:frozen_peaks",
-  "color": -1,
+  "color": {
+    "b": 255,
+    "g": 255,
+    "r": 255
+  },
   "dirt_block": "minecraft:packed_ice",
   "height": 213,
   "perlin_multiplier": 0.0,

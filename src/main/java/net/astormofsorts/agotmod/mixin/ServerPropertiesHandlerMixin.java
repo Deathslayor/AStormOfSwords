@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class ServerPropertiesHandlerMixin {
     @Redirect(method = "<init>",
             at = @At(value = "FIELD", opcode = Opcodes.GETSTATIC, target = "Lnet/minecraft/world/level/levelgen/presets/WorldPresets;NORMAL:Lnet/minecraft/resources/ResourceKey;"))
-    private ResourceKey<WorldPreset> defaultWorldTypes$replaceDefault() {
+    private ResourceKey<WorldPreset> replaceDefault() {
         return ModDimensionProvider.KNOWN_WORLD_PRESET;
     }
 
@@ -23,7 +23,7 @@ public class ServerPropertiesHandlerMixin {
     private static class WorldGenPropertiesMixin {
         @Redirect(method = "create",
                 at = @At(value = "FIELD", opcode = Opcodes.GETSTATIC, target = "Lnet/minecraft/world/level/levelgen/presets/WorldPresets;NORMAL:Lnet/minecraft/resources/ResourceKey;"))
-        private ResourceKey<WorldPreset> defaultWorldTypes$replaceDefault() {
+        private ResourceKey<WorldPreset> replaceDefault() {
             return ModDimensionProvider.KNOWN_WORLD_PRESET;
         }
     }

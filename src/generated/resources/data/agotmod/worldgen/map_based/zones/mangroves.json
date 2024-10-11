@@ -1,6 +1,10 @@
 {
   "biome": "minecraft:mangrove_swamp",
-  "color": -14535902,
+  "color": {
+    "b": 34,
+    "g": 51,
+    "r": 34
+  },
   "height": -3,
   "perlin_multiplier": 4.0
 }
