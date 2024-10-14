@@ -49,7 +49,7 @@ public class ModZones {
         context.register(SNOWY_PLAINS, new ZoneBuilder().setBiome(getBiome(context, Biomes.SNOWY_PLAINS)).setColor(new Color(57, 95, 57)).setHeight(3).setPerlinMultiplier(4).build());
         context.register(PLAINS, new ZoneBuilder().setBiome(getBiome(context, Biomes.PLAINS)).setColor(new Color(57, 95, 57)).setHeight(3).setPerlinMultiplier(4).build());
         context.register(WINDSWEPT_HILLS, new ZoneBuilder().setBiome(getBiome(context, Biomes.WINDSWEPT_HILLS)).setColor(new Color(151, 151, 151)).setHeight(33).setPerlinMultiplier(20).setPixelWeight(1.5).build());
-        context.register(SNOWY_MOUNTAINS, new ZoneBuilder().setBiome(getBiome(context, Biomes.JAGGED_PEAKS)).setColor(new Color(130, 130, 130)).setHeight(60).setPerlinMultiplier(28).setCaveThreshold(0.7).build());
+        context.register(SNOWY_MOUNTAINS, new ZoneBuilder().setBiome(getBiome(context, Biomes.JAGGED_PEAKS)).setColor(new Color(130, 130, 130)).setHeight(60).setPerlinMultiplier(28).build());
         context.register(SWAMP, new ZoneBuilder().setBiome(getBiome(context, Biomes.SWAMP)).setColor(new Color(76, 95, 49)).setHeight(-3).setPerlinMultiplier(4).build());
         context.register(SAVANNA_PLATEAU, new ZoneBuilder().setBiome(getBiome(context, Biomes.SAVANNA_PLATEAU)).setColor(new Color(85, 109, 51)).setHeight(3).setPerlinMultiplier(4).build());
         context.register(SAVANNA, new ZoneBuilder().setBiome(getBiome(context, Biomes.SAVANNA)).setColor(new Color(98, 123, 64)).setHeight(3).setPerlinMultiplier(0.1).build());
@@ -63,7 +63,7 @@ public class ModZones {
         context.register(SNOWY_FLATS, new ZoneBuilder().setBiome(getBiome(context, Biomes.SNOWY_SLOPES)).setColor(new Color(217, 217, 217)).setHeight(5).build());
         context.register(SUNFLOWER_PLAINS, new ZoneBuilder().setBiome(getBiome(context, Biomes.SUNFLOWER_PLAINS)).setColor(new Color(107, 143, 107)).setHeight(5).build());
         context.register(SNOWY_SLOPES, new ZoneBuilder().setBiome(getBiome(context, Biomes.SNOWY_SLOPES)).setColor(new Color(192, 192, 192)).setStoneBlock(Blocks.STONE).setDirtBlock(Blocks.SNOW_BLOCK).setSurfaceBlock(Blocks.SNOW).setHeight(33).setPerlinMultiplier(20).setPixelWeight(1.5).build());
-        context.register(FROZEN_MOUNTAINS, new ZoneBuilder().setBiome(getBiome(context, Biomes.JAGGED_PEAKS)).setColor(new Color(174, 174, 174)).setStoneBlock(Blocks.STONE).setDirtBlock(Blocks.POWDER_SNOW).setSurfaceBlock(Blocks.POWDER_SNOW).setHeight(60).setPerlinMultiplier(28).setCaveThreshold(0.7).build());
+        context.register(FROZEN_MOUNTAINS, new ZoneBuilder().setBiome(getBiome(context, Biomes.JAGGED_PEAKS)).setColor(new Color(174, 174, 174)).setStoneBlock(Blocks.STONE).setDirtBlock(Blocks.POWDER_SNOW).setSurfaceBlock(Blocks.POWDER_SNOW).setHeight(60).setPerlinMultiplier(28).build());
         //Essos
         context.register(BASALT_DELTAS, new ZoneBuilder().setBiome(getBiome(context, Biomes.BASALT_DELTAS)).setColor(new Color(0, 0, 0)).setHeight(5).build());
         // water biomes
