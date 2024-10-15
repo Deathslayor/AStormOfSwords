@@ -72,7 +72,7 @@ public class ModDimensionProvider {
     }
 
     public static BufferedImage getOriginalMapImage() {
-        URL orignalMapUrl = AGoTMod.class.getResource("/map.png");
+        URL orignalMapUrl = AGoTMod.class.getResource("/assets/agotmod/textures/gui/known_world.png");
         try {
             return ImageIO.read(Objects.requireNonNull(orignalMapUrl));
         } catch (IOException e) {
