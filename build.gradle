@@ -211,7 +211,7 @@ dependencies {
     // at runtime, use the full JEI jar for Forge
     runtimeOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}"))
 
-    jarJar(implementation(fg.deobf("dev.tocraft.crafted:ctgen-forge:[1.20.1-0.16,)")))
+    jarJar(implementation(fg.deobf("dev.tocraft.crafted:ctgen-forge:[1.20.1-0.18]")))
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
