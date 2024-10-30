@@ -1,4 +1,4 @@
-// 1.20.1	2024-10-30T22:04:00.014548207	Registries
+// 1.20.1	2024-10-30T22:55:31.017189527	Registries
 93e760cad11de5820019b78ad58c1464485f3b41 data/agotmod/forge/biome_modifier/add_tin_ore.json
 bbbb83d5636c6d2773c315a21d253009c920a117 data/agotmod/forge/biome_modifier/create_weirwood_tree.json
 550c6c1a3c385ee1220774953a983223da54a5ed data/agotmod/forge/biome_modifier/spawn_mammoth.json
@@ -16,7 +16,7 @@ b8cedd8747f6b305ac7c7456fd846b49846e54f3 data/agotmod/worldgen/configured_featur
 d482d82a0a18f6f099bba0a19368613a9de0ba3d data/agotmod/worldgen/configured_feature/sycamore.json
 cfe58f15dffd7cd9a827082b5872596243c1a9d5 data/agotmod/worldgen/configured_feature/tin_ore.json
 5996f666ddb2112e1e1ade5d0703100ccd7002db data/agotmod/worldgen/configured_feature/weirwood.json
-60ce400e81f505f41457ecb6787b69cc35432b1e data/agotmod/worldgen/map_based/zones/basalt_deltas.json
+c1b93325928b8a303148fda4b6c5b9f3b8a2386f data/agotmod/worldgen/map_based/zones/basalt_deltas.json
 0923153376be7f41ffe5d60a28953643b185ab2d data/agotmod/worldgen/map_based/zones/cold_ocean.json
 52c87aea48f2b2375511d64719185f5e9959d656 data/agotmod/worldgen/map_based/zones/deep_cold_ocean.json
 cb5c0836661693605975fb470424e50126172ee6 data/agotmod/worldgen/map_based/zones/forest.json
@@ -54,4 +54,4 @@ cbbdf1f85245bbd7f83c356f9bb8522f0016ec69 data/agotmod/worldgen/placed_feature/pi
 9e7bf3801e41892d4a52cb57d009312cf9a8d837 data/agotmod/worldgen/placed_feature/sentinel.json
 174bd861a214e5e9e447f57b86f92b9deca5e42d data/agotmod/worldgen/placed_feature/tin_ore_placed.json
 9dae1e269ebe83e946cbd785b286362c8327f171 data/agotmod/worldgen/placed_feature/weirwood.json
-0abe0d127f745f0c755c583338e8545fb15ef895 data/agotmod/worldgen/world_preset/known_world.json
+2980830b77dded88190dcab0948f4ce0da3961b0 data/agotmod/worldgen/world_preset/known_world.json

@@ -7,7 +7,6 @@
         "settings": {
           "biome_map": "agotmod:known_world",
           "default_map_biome": "agotmod:deep_cold_ocean",
-          "pixels_are_chunks": false,
           "spawn_pixel_x": 3500,
           "spawn_pixel_y": 6000,
           "zones": [
