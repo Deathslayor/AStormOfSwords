@@ -1,9 +1,9 @@
 package net.astormofsorts.agotmod.datagen;
 
-import dev.tocraft.crafted.ctgen.CTerrainGeneration;
-import dev.tocraft.crafted.ctgen.zone.Zone;
-import dev.tocraft.crafted.ctgen.worldgen.MapBasedChunkGenerator;
-import dev.tocraft.crafted.ctgen.worldgen.MapSettingsBuilder;
+import dev.tocraft.ctgen.worldgen.MapBasedChunkGenerator;
+import dev.tocraft.ctgen.worldgen.MapSettingsBuilder;
+import dev.tocraft.ctgen.xtend.CTRegistries;
+import dev.tocraft.ctgen.zone.Zone;
 import net.astormofsorts.agotmod.AGoTMod;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
@@ -20,7 +20,9 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 import static net.astormofsorts.agotmod.AGoTMod.MOD_ID;
 
@@ -28,13 +30,13 @@ public class ModDimensionProvider {
     public final static ResourceLocation KNOWN_WORLD = new ResourceLocation(MOD_ID, "known_world");
     public final static ResourceKey<WorldPreset> KNOWN_WORLD_PRESET = ResourceKey.create(Registries.WORLD_PRESET, KNOWN_WORLD);
 
-    public static void boostrapPreset(BootstapContext<WorldPreset> context) {
+    public static void bootstrap(BootstapContext<WorldPreset> context) {
         HolderGetter<DimensionType> dimTypeRegistry = context.lookup(Registries.DIMENSION_TYPE);
-        HolderGetter<Zone> ZoneRegistry = context.lookup(CTerrainGeneration.MAP_ZONES_REGISTRY);
+        HolderGetter<Zone> zoneRegistry = context.lookup(CTRegistries.ZONES_KEY);
         context.register(KNOWN_WORLD_PRESET, new WorldPreset(Map.of(LevelStem.OVERWORLD, new LevelStem(dimTypeRegistry.getOrThrow(BuiltinDimensionTypes.OVERWORLD), MapBasedChunkGenerator.of(new MapSettingsBuilder()
                 .setBiomeMapId(KNOWN_WORLD)
-                .setZones(getZones(ZoneRegistry))
-                .setDefaultBiome(ZoneRegistry.getOrThrow(ModZones.DEEP_COLD_OCEAN))
+                .setZones(getZones(zoneRegistry))
+                .setDefaultBiome(zoneRegistry.getOrThrow(ModZones.DEEP_COLD_OCEAN))
                 .setSpawnX(3500)
                 .setSpawnY(6000)
                 .setPixelsAreChunks(false)

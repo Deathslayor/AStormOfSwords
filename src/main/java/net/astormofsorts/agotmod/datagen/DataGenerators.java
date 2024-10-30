@@ -1,8 +1,8 @@
 package net.astormofsorts.agotmod.datagen;
 
-import dev.tocraft.crafted.ctgen.CTerrainGeneration;
-import dev.tocraft.crafted.ctgen.data.MapProvider;
-import dev.tocraft.crafted.ctgen.zone.Zone;
+import dev.tocraft.ctgen.data.MapProvider;
+import dev.tocraft.ctgen.xtend.CTRegistries;
+import dev.tocraft.ctgen.zone.Zone;
 import net.astormofsorts.agotmod.AGoTMod;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -64,7 +64,7 @@ public class DataGenerators {
             // get provider with custom registry entries
             RegistryAccess.Frozen registryaccess$frozen = RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY);
             HolderLookup.Provider provider = ModWorldGenProvider.BUILDER.buildPatch(registryaccess$frozen, oProvider);
-            List<Zone> Zones = ModDimensionProvider.getZones(provider.lookupOrThrow(CTerrainGeneration.MAP_ZONES_REGISTRY)).stream().map(Holder::value).toList();
+            List<Zone> Zones = ModDimensionProvider.getZones(provider.lookupOrThrow(CTRegistries.ZONES_KEY)).stream().map(Holder::value).toList();
             return CompletableFuture.completedFuture(Zones);
         }), packOutput));
     }

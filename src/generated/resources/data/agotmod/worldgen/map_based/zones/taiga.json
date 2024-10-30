@@ -6,5 +6,5 @@
     "r": 43
   },
   "height": 3,
-  "perlin_multiplier": 6.0
+  "terrain_modifier": 6.0
 }

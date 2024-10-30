@@ -17,6 +17,7 @@ public abstract class PlayerMixin extends LivingEntity {
     protected PlayerMixin(EntityType<? extends LivingEntity> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
+
     @Unique
     private static final int COOLDOWN_TME = 100;
     @Unique

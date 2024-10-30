@@ -6,7 +6,9 @@
     "r": 0
   },
   "height": -35,
-  "perlin_multiplier": 16.0,
-  "surface_block": "minecraft:sand",
+  "layers": {
+    "surface": "minecraft:sand"
+  },
+  "terrain_modifier": 16.0,
   "threshold_modifier": 26
 }

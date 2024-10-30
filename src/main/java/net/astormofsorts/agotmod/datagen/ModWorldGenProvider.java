@@ -1,6 +1,6 @@
 package net.astormofsorts.agotmod.datagen;
 
-import dev.tocraft.crafted.ctgen.CTerrainGeneration;
+import dev.tocraft.ctgen.xtend.CTRegistries;
 import net.astormofsorts.agotmod.AGoTMod;
 import net.astormofsorts.agotmod.worldgen.ModBiomeModifiers;
 import net.astormofsorts.agotmod.worldgen.ModConfiguredFeatures;
@@ -18,11 +18,11 @@ import java.util.concurrent.CompletableFuture;
 public class ModWorldGenProvider extends DatapackBuiltinEntriesProvider {
 
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
-            .add(CTerrainGeneration.MAP_ZONES_REGISTRY, ModZones::bootstrap)
+            .add(CTRegistries.ZONES_KEY, ModZones::bootstrap)
             .add(Registries.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap)
             .add(Registries.PLACED_FEATURE, ModplacedFeatures::bootstrap)
             .add(ForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomeModifiers::bootstrap)
-            .add(Registries.WORLD_PRESET, ModDimensionProvider::boostrapPreset);
+            .add(Registries.WORLD_PRESET, ModDimensionProvider::bootstrap);
 
     public ModWorldGenProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, BUILDER, Set.of(AGoTMod.MOD_ID));

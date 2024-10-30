@@ -5,8 +5,11 @@
     "g": 174,
     "r": 174
   },
-  "dirt_block": "minecraft:powder_snow",
   "height": 60,
-  "perlin_multiplier": 28.0,
-  "surface_block": "minecraft:powder_snow"
+  "layers": {
+    "dirt": "minecraft:powder_snow",
+    "stone": "minecraft:stone",
+    "surface": "minecraft:powder_snow"
+  },
+  "terrain_modifier": 28.0
 }

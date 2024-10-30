@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(DedicatedServerProperties.class)
-public class ServerPropertiesHandlerMixin {
+public class ServerPropertiesMixin {
     @Redirect(method = "<init>",
             at = @At(value = "FIELD", opcode = Opcodes.GETSTATIC, target = "Lnet/minecraft/world/level/levelgen/presets/WorldPresets;NORMAL:Lnet/minecraft/resources/ResourceKey;"))
     private ResourceKey<WorldPreset> replaceDefault() {

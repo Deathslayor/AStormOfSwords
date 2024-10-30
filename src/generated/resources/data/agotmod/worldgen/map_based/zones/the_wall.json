@@ -5,10 +5,12 @@
     "g": 255,
     "r": 255
   },
-  "dirt_block": "minecraft:packed_ice",
   "height": 213,
-  "perlin_multiplier": 0.0,
+  "layers": {
+    "dirt": "minecraft:packed_ice",
+    "stone": "minecraft:packed_ice",
+    "surface": "minecraft:snow_block"
+  },
   "pixel_weight": 16.0,
-  "stone_block": "minecraft:packed_ice",
-  "surface_block": "minecraft:snow_block"
+  "terrain_modifier": 0.0
 }
