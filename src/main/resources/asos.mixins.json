@@ -4,13 +4,13 @@
   "package": "net.astormofsorts.agotmod.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "PlayerMixin",
-    "ServerPropertiesMixin",
+    "net.darkflameproduction.agotmod.mixin.PlayerMixin",
+    "net.darkflameproduction.agotmod.mixin.ServerPropertiesMixin",
     "ServerPropertiesMixin$WorldGenPropertiesMixin",
-    "WorldPresetsMixin"
+    "net.darkflameproduction.agotmod.mixin.WorldPresetsMixin"
   ],
   "client": [
-    "client.CreateWorldScreenMixin"
+    "net.darkflameproduction.agotmod.mixin.client.CreateWorldScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
