@@ -9,10 +9,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.AgeableMob;
-import net.minecraft.world.entity.AnimationState;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -23,6 +20,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 // BearEntity represents the custom entity class for the Bear
@@ -90,7 +88,7 @@ public class BearEntity extends Animal {
             f = 0f;
         }
 
-        this.walkAnimation.update(f, 0.2f);
+        this.walkAnimation.update(f, pPartialTick, 0.2f);
     }
 
     // Method for setting the attacking state
@@ -103,11 +101,10 @@ public class BearEntity extends Animal {
         return this.entityData.get(ATTACKING);
     }
 
-    // Method for defining synchronized data
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(ATTACKING, false);
+    protected void defineSynchedData(SynchedEntityData.@NotNull Builder pBuilder) {
+        super.defineSynchedData(pBuilder);
+        pBuilder.define(ATTACKING, false);
     }
 
     // Method for registering AI goals
@@ -143,8 +140,8 @@ public class BearEntity extends Animal {
     // Method for getting the offspring of two Bear entities
     @Nullable
     @Override
-    public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
-        return ModEntities.BEAR.get().create(pLevel);
+    public AgeableMob getBreedOffspring(@NotNull ServerLevel pLevel, @NotNull AgeableMob pOtherParent) {
+        return ModEntities.BEAR.get().create(pLevel, EntitySpawnReason.BREEDING);
     }
 
     // Method for checking if an item is food for the Bear
@@ -163,7 +160,7 @@ public class BearEntity extends Animal {
     // Method for getting the hurt sound of the Bear
     @Nullable
     @Override
-    protected SoundEvent getHurtSound(DamageSource pDamageSource) {
+    protected SoundEvent getHurtSound(@NotNull DamageSource pDamageSource) {
         return SoundEvents.RAVAGER_HURT;
     }
 

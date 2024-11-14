@@ -35,9 +35,9 @@ public class ModVillagers {
             // Registers the custom Villager profession
             VILLAGER_PROFESSIONS.register("minter", () -> new VillagerProfession("minter",
                     // Condition for villagers to become this profession
-                    holder -> holder.get() == MINT_POI.get(),
+                    holder -> holder.value() == MINT_POI.get(),
                     // Condition for villagers to lose this profession
-                    holder -> holder.get() == MINT_POI.get(),
+                    holder -> holder.value() == MINT_POI.get(),
                     // Sets of work blocks and POI types for the profession
                     ImmutableSet.of(), ImmutableSet.of(),
                     // Sound played when the villager works

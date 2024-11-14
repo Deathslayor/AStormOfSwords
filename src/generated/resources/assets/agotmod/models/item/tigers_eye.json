@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:item/generated",
+  "parent": "agotmod:item/tigers_eye",
   "textures": {
     "layer0": "agotmod:item/tigers_eye"
   }

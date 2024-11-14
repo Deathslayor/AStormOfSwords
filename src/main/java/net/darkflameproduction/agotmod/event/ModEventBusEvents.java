@@ -7,11 +7,14 @@ import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.entity.ModEntities;
 import net.darkflameproduction.agotmod.entity.custom.BearEntity;
 import net.darkflameproduction.agotmod.entity.custom.norththewall.WightEntity;
+import net.darkflameproduction.agotmod.magic.custom.PlayerManaProvider;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import org.jetbrains.annotations.NotNull;
@@ -35,5 +38,10 @@ public class ModEventBusEvents {
         event.register(ModEntities.MAMMOTH.get(), SpawnPlacements.getPlacementType(ModEntities.MAMMOTH.get()), Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 Animal::checkAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
 
+    }
+
+    @SubscribeEvent
+    public static void onRegisterCapabilities(@NotNull RegisterCapabilitiesEvent event) {
+        event.registerEntity(PlayerManaProvider.PLAYER_MANA, EntityType.PLAYER, new PlayerManaProvider());
     }
 }

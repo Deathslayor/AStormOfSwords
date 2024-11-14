@@ -1,21 +1,23 @@
 package net.darkflameproduction.agotmod.magic.custom;
 
 
-import cpw.mods.util.Lazy;
+import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.magic.client.PlayerMana;
-import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.entity.player.Player;
+import net.neoforged.neoforge.capabilities.EntityCapability;
 import net.neoforged.neoforge.capabilities.ICapabilityProvider;
+import net.neoforged.neoforge.common.util.INBTSerializable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.UnknownNullability;
 
 
-public class PlayerManaProvider implements ICapabilityProvider, INBTSerializable<CompoundTag> {
-    public static Capability<PlayerMana> PLAYER_MANA = CapabilityManager.get(new CapabilityToken<PlayerMana>() {
-    });
+public class PlayerManaProvider implements ICapabilityProvider<Player, Void, PlayerMana>, INBTSerializable<CompoundTag> {
+    public static final EntityCapability<PlayerMana, Void> PLAYER_MANA = EntityCapability.createVoid(AGoTMod.id("player_mana"), PlayerMana.class);
 
     private PlayerMana mana = null;
-    private final LazyOptional<PlayerMana> optional = LazyOptional.of(this::createPlayerMana);
 
     private PlayerMana createPlayerMana() {
         if (this.mana == null) {
@@ -25,27 +27,20 @@ public class PlayerManaProvider implements ICapabilityProvider, INBTSerializable
         return this.mana;
     }
 
-
     @Override
-    public @NotNull <T> Lazy<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if (cap == PLAYER_MANA) {
-            return optional.cast();
-        }
-
-
-        return LazyOptional.empty();
+    public @Nullable PlayerMana getCapability(@NotNull Player player, Void context) {
+        return createPlayerMana();
     }
 
     @Override
-    public CompoundTag serializeNBT() {
+    public @UnknownNullability CompoundTag serializeNBT(HolderLookup.@NotNull Provider provider) {
         CompoundTag nbt = new CompoundTag();
         createPlayerMana().saveNBTData(nbt);
         return nbt;
     }
 
     @Override
-    public void deserializeNBT(CompoundTag nbt) {
+    public void deserializeNBT(HolderLookup.@NotNull Provider provider, @NotNull CompoundTag nbt) {
         createPlayerMana().loadNBTData(nbt);
-
     }
 }

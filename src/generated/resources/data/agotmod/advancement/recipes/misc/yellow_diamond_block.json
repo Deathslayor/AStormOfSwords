@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "agotmod:yellow_diamond_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_yellow_diamond": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:yellow_diamond"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_yellow_diamond"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "agotmod:yellow_diamond_block"
+    ]
+  }
+}

@@ -7,6 +7,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
+import org.jetbrains.annotations.NotNull;
 
 
 /**
@@ -15,7 +16,7 @@ import net.minecraft.util.Mth;
  *
  * @param <T> The type of entity associated with the model.
  */
-public class MammothModel<T extends MammothRenderState> extends EntityModel<T> {
+public class MammothModel extends EntityModel<MammothRenderState> {
     // The model part representing the head of the Mammoth
     private final ModelPart head;
 
@@ -121,14 +122,15 @@ public class MammothModel<T extends MammothRenderState> extends EntityModel<T> {
     }
 
     @Override
-    public void setupAnim(T state) {
+    public void setupAnim(@NotNull MammothRenderState state) {
         super.setupAnim(state);
 
         // Reset the pose for all parts of the model to their default positions
         this.root().getAllParts().forEach(ModelPart::resetPose);
         // Apply head rotation based on yaw, pitch, and age
 
-        this.applyHeadRotation(netHeadYaw, headPitch, ageInTicks);
+        // FIXME: No head rotation?
+        //this.applyHeadRotation(netHeadYaw, headPitch, ageInTicks);
 
         // Animate the walk using the Mammoth_WALK animation definition
         this.animateWalk(ModAnimationDefinitions.MAMMOTH_WALK, state.walkAnimationPos, state.walkAnimationSpeed, 2f, 2.5f);

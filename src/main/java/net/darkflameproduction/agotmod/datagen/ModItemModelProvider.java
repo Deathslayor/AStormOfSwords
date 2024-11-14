@@ -12,8 +12,8 @@ import net.darkflameproduction.agotmod.armor.custom.stark.StarkNoblePlateArmorIt
 import net.darkflameproduction.agotmod.armor.custom.stark.StarkPlateArmorItem;
 import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.darkflameproduction.agotmod.item.ModItems;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
@@ -365,112 +365,113 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.WEIRWOOD_STICK);
     }
 
-    private @NotNull ItemModelBuilder saplingItem(@NotNull DeferredHolder<Item, Block> item) {
+    private @NotNull ItemModelBuilder saplingItem(@NotNull DeferredHolder<Block, Block> item) {
         return withExistingParent(item.getId().getPath(),
-                ResourceLocation.parse("item/generated")).texture("layer0",
-                AGoTMod.id("block/" + item.getId().getPath()));
+                mcLoc("item/generated")).texture("layer0",
+                modLoc("block/" + item.getId().getPath()));
     }
 
     // Method to create a simple item model
-    private ItemModelBuilder simpleItem(DeferredHolder<Item, Item> item) {
+    private @NotNull ItemModelBuilder simpleItem(DeferredHolder<Item, Item> item) {
         return withExistingParent(item.getId().getPath(),
-                ResourceLocation.parse("item/generated")).texture("layer0",
-                AGoTMod.id("item/" + item.getId().getPath()));
+                modLoc(item.getId().getPath()))
+                .texture("layer0",
+                        modLoc("item/" + item.getId().getPath()));
     }
 
     // Method to create a simple Armor item model
     //Stark
     private ItemModelBuilder simpleItemStarkLevy(DeferredHolder<Item, StarkLevyArmorItem> item) {
         return withExistingParent(item.getId().getPath(),
-                ResourceLocation.parse("item/generated")).texture("layer0",
-                AGoTMod.id("item/" + item.getId().getPath()));
+                mcLoc("item/generated")).texture("layer0",
+                modLoc("item/" + item.getId().getPath()));
     }
 
     private ItemModelBuilder simpleItemStarkPlate(DeferredHolder<Item, StarkPlateArmorItem> item) {
         return withExistingParent(item.getId().getPath(),
-                ResourceLocation.parse("item/generated")).texture("layer0",
-                AGoTMod.id("item/" + item.getId().getPath()));
+                mcLoc("item/generated")).texture("layer0",
+                modLoc("item/" + item.getId().getPath()));
     }
 
     private ItemModelBuilder simpleItemStarkNoblePlate(DeferredHolder<Item, StarkNoblePlateArmorItem> item) {
         return withExistingParent(item.getId().getPath(),
-                ResourceLocation.parse("item/generated")).texture("layer0",
-                AGoTMod.id("item/" + item.getId().getPath()));
+                mcLoc("item/generated")).texture("layer0",
+                modLoc("item/" + item.getId().getPath()));
     }
 
     //Bolten
     private ItemModelBuilder simpleItemBoltenLevy(DeferredHolder<Item, BoltenLevyArmorItem> item) {
         return withExistingParent(item.getId().getPath(),
-                ResourceLocation.parse("item/generated")).texture("layer0",
-                AGoTMod.id("item/" + item.getId().getPath()));
+                mcLoc("item/generated")).texture("layer0",
+                modLoc("item/" + item.getId().getPath()));
     }
 
     private ItemModelBuilder simpleItemBoltenPlate(DeferredHolder<Item, BoltenPlateArmorItem> item) {
         return withExistingParent(item.getId().getPath(),
-                ResourceLocation.parse("item/generated")).texture("layer0",
-                AGoTMod.id("item/" + item.getId().getPath()));
+                mcLoc("item/generated")).texture("layer0",
+                modLoc("item/" + item.getId().getPath()));
     }
 
     private ItemModelBuilder simpleItemBoltenNoblePlate(DeferredHolder<Item, BoltenNobleArmorItem> item) {
         return withExistingParent(item.getId().getPath(),
-                ResourceLocation.parse("item/generated")).texture("layer0",
-                AGoTMod.id("item/" + item.getId().getPath()));
+                mcLoc("item/generated")).texture("layer0",
+                modLoc("item/" + item.getId().getPath()));
     }
 
     //Manderly
     private ItemModelBuilder simpleItemManderlyLevy(DeferredHolder<Item, ManderlyLevyArmorItem> item) {
         return withExistingParent(item.getId().getPath(),
-                ResourceLocation.parse("item/generated")).texture("layer0",
-                AGoTMod.id("item/" + item.getId().getPath()));
+                mcLoc("item/generated")).texture("layer0",
+                modLoc("item/" + item.getId().getPath()));
     }
 
     private ItemModelBuilder simpleItemManderlyPlate(DeferredHolder<Item, ManderlyPlateArmorItem> item) {
         return withExistingParent(item.getId().getPath(),
-                ResourceLocation.parse("item/generated")).texture("layer0",
-                AGoTMod.id("item/" + item.getId().getPath()));
+                mcLoc("item/generated")).texture("layer0",
+                modLoc("item/" + item.getId().getPath()));
     }
 
     private ItemModelBuilder simpleItemManderlyNoble(DeferredHolder<Item, ManderlyNobleArmorItem> item) {
         return withExistingParent(item.getId().getPath(),
-                ResourceLocation.parse("item/generated")).texture("layer0",
-                AGoTMod.id("item/" + item.getId().getPath()));
+                mcLoc("item/generated")).texture("layer0",
+                modLoc("item/" + item.getId().getPath()));
     }
 
 
     // Method to create a handheld item model
     private ItemModelBuilder handheldItem(DeferredHolder<Item, Item> item) {
         return withExistingParent(item.getId().getPath(),
-                ResourceLocation.parse("item/handheld")).texture("layer0",
-                AGoTMod.id("item/" + item.getId().getPath()));
+                mcLoc("item/handheld")).texture("layer0",
+                modLoc("item/" + item.getId().getPath()));
     }
 
-    public void trapdoorItem(DeferredHolder<Item, Block> block) {
+    public void trapdoorItem(DeferredHolder<Block, Block> block) {
         this.withExistingParent(BuiltInRegistries.BLOCK.getKey(block.get()).getPath(),
                 modLoc("block/" + BuiltInRegistries.BLOCK.getKey(block.get()).getPath() + "_bottom"));
     }
 
-    private void fenceItem(DeferredHolder<Item, Block> block, DeferredHolder<Item, Block> baseBlock) {
+    private void fenceItem(DeferredHolder<Block, Block> block, DeferredHolder<Block, Block> baseBlock) {
         this.withExistingParent(BuiltInRegistries.BLOCK.getKey(block.get()).getPath(), mcLoc("block/fence_inventory"))
-                .texture("texture", AGoTMod.id("block/" + BuiltInRegistries.BLOCK.getKey(baseBlock.get()).getPath()));
+                .texture("texture", modLoc("block/" + BuiltInRegistries.BLOCK.getKey(baseBlock.get()).getPath()));
     }
 
-    private void buttonItem(DeferredHolder<Item, Block> block, DeferredHolder<Item, Block> baseBlock) {
+    private void buttonItem(DeferredHolder<Block, Block> block, DeferredHolder<Block, Block> baseBlock) {
         this.withExistingParent(BuiltInRegistries.BLOCK.getKey(block.get()).getPath(), mcLoc("block/button_inventory"))
-                .texture("texture", AGoTMod.id("block/" + BuiltInRegistries.BLOCK.getKey(baseBlock.get()).getPath()));
+                .texture("texture", modLoc("block/" + BuiltInRegistries.BLOCK.getKey(baseBlock.get()).getPath()));
     }
 
-    private void wallItem(DeferredHolder<Item, Block> block, DeferredHolder<Item, Block> baseBlock) {
+    private void wallItem(DeferredHolder<Block, Block> block, DeferredHolder<Block, Block> baseBlock) {
         this.withExistingParent(BuiltInRegistries.BLOCK.getKey(block.get()).getPath(), mcLoc("block/wall_inventory"))
-                .texture("wall", AGoTMod.id("block/" + BuiltInRegistries.BLOCK.getKey(baseBlock.get()).getPath()));
+                .texture("wall", modLoc("block/" + BuiltInRegistries.BLOCK.getKey(baseBlock.get()).getPath()));
     }
 
-    private ItemModelBuilder simpleBlockItem(DeferredHolder<Item, Block> block) {
+    private ItemModelBuilder simpleBlockItem(DeferredHolder<Block, Block> block) {
         return withExistingParent(block.getId().getPath(),
-                ResourceLocation.parse("item/generated")).texture("layer0",
-                AGoTMod.id("item/" + block.getId().getPath()));
+                mcLoc("item/generated")).texture("layer0",
+                modLoc("item/" + block.getId().getPath()));
     }
 
-    public void evenSimplerBlockItem(DeferredHolder<Item, Block> block) {
+    public void evenSimplerBlockItem(DeferredHolder<Block, Block> block) {
         this.withExistingParent(AGoTMod.MOD_ID + ":" + BuiltInRegistries.BLOCK.getKey(block.get()).getPath(),
                 modLoc("block/" + BuiltInRegistries.BLOCK.getKey(block.get()).getPath()));
     }

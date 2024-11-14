@@ -3,8 +3,6 @@ package net.darkflameproduction.agotmod.item;
 
 // Importing necessary classes from other packages
 
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 
 // A utility class for defining custom food properties
@@ -14,8 +12,6 @@ public class ModFoods {
     public static final FoodProperties RAW_BEAR_MEAT = new FoodProperties.Builder()
             .nutrition(4) // Amount of hunger restored
             .saturationModifier(0.3F) // Saturation modifier
-            .effect(() -> new MobEffectInstance(MobEffects.POISON, 60), 0.90F) // Poison effect with a chance
-            .effect(() -> new MobEffectInstance(MobEffects.HUNGER, 60), 0.20F) // Hunger effect with a chance
             .build();
 
     // Food properties for cooked bear meat
@@ -28,24 +24,18 @@ public class ModFoods {
     public static final FoodProperties RAW_WHITE_SAUSAGE = new FoodProperties.Builder()
             .nutrition(2) // Amount of hunger restored
             .saturationModifier(0.1F) // Saturation modifier
-            .effect(() -> new MobEffectInstance(MobEffects.POISON, 60), 0.20F) // Poison effect with a chance
-            .effect(() -> new MobEffectInstance(MobEffects.HUNGER, 60), 0.20F) // Hunger effect with a chance
             .build();
 
     // Food properties for raw blood sausage
     public static final FoodProperties RAW_BLOOD_SAUSAGE = new FoodProperties.Builder()
             .nutrition(2) // Amount of hunger restored
             .saturationModifier(0.1F) // Saturation modifier
-            .effect(() -> new MobEffectInstance(MobEffects.POISON, 60), 0.20F) // Poison effect with a chance
-            .effect(() -> new MobEffectInstance(MobEffects.HUNGER, 60), 0.20F) // Hunger effect with a chance
             .build();
 
     // Food properties for raw sausage
     public static final FoodProperties RAW_SAUSAGE = new FoodProperties.Builder()
             .nutrition(2) // Amount of hunger restored
             .saturationModifier(0.1F) // Saturation modifier
-            .effect(() -> new MobEffectInstance(MobEffects.POISON, 60), 0.20F) // Poison effect with a chance
-            .effect(() -> new MobEffectInstance(MobEffects.HUNGER, 60), 0.20F) // Hunger effect with a chance
             .build();
 
     // Food properties for cooked white sausage
@@ -70,8 +60,6 @@ public class ModFoods {
     public static final FoodProperties RAW_BACON = new FoodProperties.Builder()
             .nutrition(1) // Amount of hunger restored
             .saturationModifier(0.3F) // Saturation modifier
-            .effect(() -> new MobEffectInstance(MobEffects.POISON, 60), 0.90F) // Poison effect with a chance
-            .effect(() -> new MobEffectInstance(MobEffects.HUNGER, 60), 0.20F) // Hunger effect with a chance
             .build();
 
     // Food properties for cooked bacon
@@ -84,8 +72,6 @@ public class ModFoods {
     public static final FoodProperties RAW_BOAR_VENISON = new FoodProperties.Builder()
             .nutrition(3) // Amount of hunger restored
             .saturationModifier(0.3F) // Saturation modifier
-            .effect(() -> new MobEffectInstance(MobEffects.POISON, 60), 0.90F) // Poison effect with a chance
-            .effect(() -> new MobEffectInstance(MobEffects.HUNGER, 60), 0.20F) // Hunger effect with a chance
             .build();
 
     // Food properties for cooked boar venison
@@ -98,8 +84,6 @@ public class ModFoods {
     public static final FoodProperties RAW_CHICKEN_NUGGETS = new FoodProperties.Builder()
             .nutrition(1) // Amount of hunger restored
             .saturationModifier(0.3F) // Saturation modifier
-            .effect(() -> new MobEffectInstance(MobEffects.POISON, 60), 0.90F) // Poison effect with a chance
-            .effect(() -> new MobEffectInstance(MobEffects.HUNGER, 60), 0.20F) // Hunger effect with a chance
             .build();
 
     // Food properties for cooked chicken nuggets
@@ -112,8 +96,6 @@ public class ModFoods {
     public static final FoodProperties RAW_DEER_VENISON = new FoodProperties.Builder()
             .nutrition(2) // Amount of hunger restored
             .saturationModifier(0.3F) // Saturation modifier
-            .effect(() -> new MobEffectInstance(MobEffects.POISON, 60), 0.90F) // Poison effect with a chance
-            .effect(() -> new MobEffectInstance(MobEffects.HUNGER, 60), 0.20F) // Hunger effect with a chance
             .build();
 
     // Food properties for cooked deer venison
@@ -126,8 +108,6 @@ public class ModFoods {
     public static final FoodProperties RAW_GOAT_MEAT = new FoodProperties.Builder()
             .nutrition(2) // Amount of hunger restored
             .saturationModifier(0.3F) // Saturation modifier
-            .effect(() -> new MobEffectInstance(MobEffects.POISON, 60), 0.90F) // Poison effect with a chance
-            .effect(() -> new MobEffectInstance(MobEffects.HUNGER, 60), 0.20F) // Hunger effect with a chance
             .build();
 
     // Food properties for cooked goat meat
@@ -140,8 +120,6 @@ public class ModFoods {
     public static final FoodProperties RAW_HARE_MEAT = new FoodProperties.Builder()
             .nutrition(2) // Amount of hunger restored
             .saturationModifier(0.3F) // Saturation modifier
-            .effect(() -> new MobEffectInstance(MobEffects.POISON, 60), 0.90F) // Poison effect with a chance
-            .effect(() -> new MobEffectInstance(MobEffects.HUNGER, 60), 0.20F) // Hunger effect with a chance
             .build();
 
     // Food properties for cooked hare meat
@@ -154,8 +132,6 @@ public class ModFoods {
     public static final FoodProperties RAW_HORSE_MEAT = new FoodProperties.Builder()
             .nutrition(2) // Amount of hunger restored
             .saturationModifier(0.3F) // Saturation modifier
-            .effect(() -> new MobEffectInstance(MobEffects.POISON, 60), 0.90F) // Poison effect with a chance
-            .effect(() -> new MobEffectInstance(MobEffects.HUNGER, 60), 0.20F) // Hunger effect with a chance
             .build();
 
     // Food properties for cooked horse meat
@@ -168,8 +144,6 @@ public class ModFoods {
     public static final FoodProperties RAW_MAMMOTH_MEAT = new FoodProperties.Builder()
             .nutrition(4) // Amount of hunger restored
             .saturationModifier(0.3F) // Saturation modifier
-            .effect(() -> new MobEffectInstance(MobEffects.POISON, 60), 0.90F) // Poison effect with a chance
-            .effect(() -> new MobEffectInstance(MobEffects.HUNGER, 60), 0.20F) // Hunger effect with a chance
             .build();
 
     // Food properties for cooked mammoth meat

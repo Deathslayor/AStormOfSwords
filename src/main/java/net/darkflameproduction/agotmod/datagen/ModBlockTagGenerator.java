@@ -8,6 +8,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -21,10 +22,9 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
 
     // Method to add custom tags to blocks
     @Override
-    protected void addTags(HolderLookup.Provider pProvider) {
+    protected void addTags(HolderLookup.@NotNull Provider pProvider) {
         // MAKES BLOCKS MINEABLE FILE LOCATION IN RESOURCES/DATA/MINECRAFT/TAGS/BLOCKS
 
-        /** // ---------------------------(PICKAXE)--------------------------- // */
         // Add blocks that can be mined with a pickaxe to the MINEABLE_WITH_PICKAXE tag
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(ModBLocks.TIN_ORE.get(),
@@ -91,10 +91,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         ModBLocks.TOPAZ_DEEPSLATE_ORE.get();
         ModBLocks.TOURMALINE_ORE.get();
         ModBLocks.TOURMALINE_DEEPSLATE_ORE.get();
-        /** // ---------------------------(PICKAXE)--------------------------- // */
 
 
-        /** // ---------------------------(BLOCKS THAT BURN)--------------------------- // */
         //Weirwood
         this.tag(BlockTags.LOGS_THAT_BURN)
                 .add(ModBLocks.WEIRWOOD_LOG.get())
@@ -323,36 +321,32 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBLocks.ALDER_WALL.get());
 
 
-        /** // ---------------------------(BLOCKS THAT BURN)--------------------------- // */
-
-
-        /** // ---------------------------(STONE TOOL)--------------------------- // */
         // Add blocks that need a stone tool to the NEEDS_STONE_TOOL tag
         // ---------------------------(TIN)--------------------------- //
         this.tag(BlockTags.NEEDS_STONE_TOOL)
-                .add(ModBLocks.TIN_ORE.get());
-        // ---------------------------(TIN)--------------------------- //
-
-        // ---------------------------(BRICKS)--------------------------- //
-        // Add brick blocks that need a stone tool to the NEEDS_STONE_TOOL tag
-        this.tag(BlockTags.NEEDS_STONE_TOOL)
-                .add(ModBLocks.DARK_STONE_BRICK.get());
-        this.tag(BlockTags.NEEDS_STONE_TOOL)
-                .add(ModBLocks.STONE_BRICK_BUT_COOLER.get());
-        this.tag(BlockTags.NEEDS_STONE_TOOL)
+                .add(ModBLocks.TIN_ORE.get())
+                .add(ModBLocks.DARK_STONE_BRICK.get())
+                .add(ModBLocks.STONE_BRICK_BUT_COOLER.get())
                 .add(ModBLocks.KINGS_LANDING_BRICK_LARGE.get());
         // ---------------------------(BRICKS)--------------------------- //
-        /** // ---------------------------(STONE TOOL)--------------------------- // */
-
-        /** ---------------------------(IRON TOOL)--------------------------- // */
+        this.tag(BlockTags.INCORRECT_FOR_WOODEN_TOOL)
+                .addTag(ModTags.Blocks.NEEDS_DRAGONGLASS_TOOL)
+                .addTag(ModTags.Blocks.NEEDS_STEEL_TOOL);
+        this.tag(BlockTags.INCORRECT_FOR_STONE_TOOL)
+                .addTag(ModTags.Blocks.NEEDS_DRAGONGLASS_TOOL)
+                .addTag(ModTags.Blocks.NEEDS_STEEL_TOOL);
+        this.tag(BlockTags.INCORRECT_FOR_GOLD_TOOL)
+                .addTag(ModTags.Blocks.NEEDS_DRAGONGLASS_TOOL)
+                .addTag(ModTags.Blocks.NEEDS_STEEL_TOOL);
         // Add blocks that need an iron tool to the NEEDS_IRON_TOOL tag
         // ---------------------------(TIN)--------------------------- //
         this.tag(BlockTags.NEEDS_IRON_TOOL)
-                .add(ModBLocks.TIN_BLOCK.get());
-        this.tag(BlockTags.NEEDS_IRON_TOOL)
-                .add(ModBLocks.RAW_TIN_BLOCK.get());
-        this.tag(BlockTags.NEEDS_IRON_TOOL)
+                .add(ModBLocks.TIN_BLOCK.get())
+                .add(ModBLocks.RAW_TIN_BLOCK.get())
                 .add(ModBLocks.DEEPSLATE_TIN_ORE.get());
+        this.tag(BlockTags.INCORRECT_FOR_IRON_TOOL)
+                .addTag(ModTags.Blocks.NEEDS_DRAGONGLASS_TOOL)
+                .addTag(ModTags.Blocks.NEEDS_STEEL_TOOL);
         // ---------------------------(TIN)--------------------------- //
 
         // ---------------------------(BRONZE)--------------------------- //
@@ -360,24 +354,18 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         this.tag(BlockTags.NEEDS_IRON_TOOL)
                 .add(ModBLocks.BRONZE_BLOCK.get());
         // ---------------------------(BRONZE)--------------------------- //
-        /** // ---------------------------(IRON TOOL)--------------------------- // */
-
-        /** // ---------------------------(BRONZE TOOL)--------------------------- // */
         // Add blocks that need a bronze tool to the custom NEEDS_BRONZE_TOOL tag
+        this.tag(ModTags.Blocks.INCORRECT_FOR_BRONZE_TOOL)
+                .addTag(ModTags.Blocks.NEEDS_STEEL_TOOL)
+                .addTag(ModTags.Blocks.NEEDS_DRAGONGLASS_TOOL)
+                .addTag(BlockTags.NEEDS_IRON_TOOL)
+                .addTag(BlockTags.NEEDS_DIAMOND_TOOL);
         this.tag(ModTags.Blocks.NEEDS_BRONZE_TOOL)
                 .add(ModBLocks.MINT_BLOCK.get());
-        /** // ---------------------------(BRONZE TOOL)--------------------------- // */
 
-        /** // ---------------------------(DIAMOND TOOL)--------------------------- // */
+        /* // ---------------------------(NETHERITE TOOL)--------------------------- // */
 
-        /** // ---------------------------(DIAMOND TOOL)--------------------------- // */
+        this.tag(ModTags.Blocks.INCORRECT_FOR_STEEL_TOOL).addTag(BlockTags.NEEDS_DIAMOND_TOOL);
 
-        /** // ---------------------------(NETHERITE TOOL)--------------------------- // */
-
-        /** // ---------------------------(NETHERITE TOOL)--------------------------- // */
-
-        /** // ---------------------------(STEEL TOOL)--------------------------- // */
-
-        /** // ---------------------------(STEEL TOOL)--------------------------- // */
     }
 }

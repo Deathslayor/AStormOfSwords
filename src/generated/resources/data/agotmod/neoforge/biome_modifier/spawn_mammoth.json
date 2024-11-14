@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_cold/overworld",
+  "spawners": {
+    "type": "agotmod:mammoth",
+    "maxCount": 5,
+    "minCount": 3,
+    "weight": 100
+  }
+}

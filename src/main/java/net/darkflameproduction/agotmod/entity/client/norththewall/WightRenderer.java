@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 
 // BearRenderer is responsible for rendering BearEntity in the game
 public class WightRenderer extends MobRenderer<WightEntity, WightEntityRenderState, WightModel<WightEntityRenderState>> {
@@ -19,24 +20,24 @@ public class WightRenderer extends MobRenderer<WightEntity, WightEntityRenderSta
     }
 
     @Override
-    public WightEntityRenderState createRenderState() {
+    public @NotNull WightEntityRenderState createRenderState() {
         return new WightEntityRenderState();
     }
 
     @Override
-    public void extractRenderState(WightEntity wight, WightEntityRenderState state, float p_361424_) {
+    public void extractRenderState(@NotNull WightEntity wight, @NotNull WightEntityRenderState state, float p_361424_) {
         super.extractRenderState(wight, state, p_361424_);
         state.emerginState.copyFrom(wight.emerginState);
     }
 
     // Get the texture location for BearEntity
     @Override
-    public ResourceLocation getTextureLocation(WightEntityRenderState state) {
+    public @NotNull ResourceLocation getTextureLocation(@NotNull WightEntityRenderState state) {
         return AGoTMod.id("textures/entity/wight.png");
     }
 
     @Override
-    public void render(WightEntityRenderState state, PoseStack poseStack, MultiBufferSource buffer, int light) {
+    public void render(WightEntityRenderState state, @NotNull PoseStack poseStack, @NotNull MultiBufferSource buffer, int light) {
         // Check if the BearEntity is a baby
         if (state.isBaby) {
             // Scale down the rendering for baby BearEntities

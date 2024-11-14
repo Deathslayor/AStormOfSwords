@@ -1,10 +1,6 @@
 {
   "biome": "minecraft:savanna",
-  "color": {
-    "b": 64,
-    "g": 123,
-    "r": 98
-  },
+  "color": "#627b40",
   "height": 3,
   "terrain_modifier": 0.1
 }

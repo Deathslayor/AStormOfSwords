@@ -13,19 +13,13 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 // Class for generating data pack recipes
 public class ModRecipeProvider extends RecipeProvider implements IConditionBuilder {
-
-    // CREATES LIST OF TIN SMELTABLES
-    private static final List<ItemLike> TIN_SMELTABLES = List.of(
-            ModItems.RAW_TIN.get(),
-            ModBLocks.TIN_ORE.get(),
-            ModBLocks.DEEPSLATE_TIN_ORE.get());
-
     // Constructor
     public ModRecipeProvider(HolderLookup.Provider provider, RecipeOutput pOutput) {
         super(provider, pOutput);
@@ -34,12 +28,16 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     // Main method for building recipes
     @Override
     protected void buildRecipes() {
+        List<ItemLike> tinSmeltables = List.of(
+                ModItems.RAW_TIN.get(),
+                ModBLocks.TIN_ORE.get(),
+                ModBLocks.DEEPSLATE_TIN_ORE.get());
 
         // -------------------------------------------------(TIN)------------------------------------------------- //
         // ---------------------------(SMELTING)--------------------------- //
         // Smelting recipes for tin
-        oreSmelting(TIN_SMELTABLES, RecipeCategory.MISC, ModItems.TIN_INGOT.get(), 0.25f, 200, "tin");
-        oreBlasting(TIN_SMELTABLES, RecipeCategory.MISC, ModItems.TIN_INGOT.get(), 0.25f, 100, "tin");
+        oreSmelting(tinSmeltables, RecipeCategory.MISC, ModItems.TIN_INGOT.get(), 0.25f, 200, "tin");
+        oreBlasting(tinSmeltables, RecipeCategory.MISC, ModItems.TIN_INGOT.get(), 0.25f, 100, "tin");
         // ---------------------------(SMELTING)--------------------------- //
 
         // ---------------------------(CRAFTING)--------------------------- //
@@ -1103,12 +1101,12 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         }
 
         @Override
-        protected RecipeProvider createRecipeProvider(HolderLookup.Provider p_364945_, RecipeOutput p_362956_) {
+        protected @NotNull RecipeProvider createRecipeProvider(HolderLookup.@NotNull Provider p_364945_, @NotNull RecipeOutput p_362956_) {
             return new ModRecipeProvider(p_364945_, p_362956_);
         }
 
         @Override
-        public String getName() {
+        public @NotNull String getName() {
             return "ASOS Recipes";
         }
     }

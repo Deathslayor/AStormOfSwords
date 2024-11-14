@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:item/generated",
+  "parent": "agotmod:item/yellow_diamond",
   "textures": {
     "layer0": "agotmod:item/yellow_diamond"
   }

@@ -2,12 +2,15 @@ package net.darkflameproduction.agotmod.datagen;
 
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.block.ModBLocks;
+import net.darkflameproduction.agotmod.item.ModItems;
+import net.darkflameproduction.agotmod.util.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -21,7 +24,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
 
     // Method to add tags to items
     @Override
-    protected void addTags(HolderLookup.Provider pProvider) {
+    protected void addTags(HolderLookup.@NotNull Provider pProvider) {
         // This method is where you would add tags to items
         // Tags are used for grouping items together for various purposes
         // You can add tags based on your mod's requirements
@@ -112,9 +115,11 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModBLocks.BEECH_PLANKS.get().asItem())
                 .add(ModBLocks.ASH_PLANKS.get().asItem())
                 .add(ModBLocks.BLACKBARK_PLANKS.get().asItem())
-                .add(ModBLocks.ASPEN_PLANKS.get().asItem())
+                .add(ModBLocks.ASPEN_PLANKS.get().asItem());
 
-
-        ;
+        // Tool Tier Tags
+        this.tag(ModTags.Items.DRAGONGLASS_TOOL_MATERIALS);
+        this.tag(ModTags.Items.BRONZE_TOOL_MATERIALS).add(ModItems.BRONZE_INGOT.get());
+        this.tag(ModTags.Items.STEEL_TOOL_MATERIALS).add(ModItems.STEEL_INGOT.get());
     }
 }

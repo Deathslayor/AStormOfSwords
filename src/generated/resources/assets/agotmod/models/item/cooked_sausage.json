@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:item/generated",
+  "parent": "agotmod:item/cooked_sausage",
   "textures": {
     "layer0": "agotmod:item/cooked_sausage"
   }

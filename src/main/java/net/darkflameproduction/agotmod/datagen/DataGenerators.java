@@ -8,11 +8,11 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.registries.RegistryPatchGenerator;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -22,7 +22,7 @@ import java.util.concurrent.CompletableFuture;
 public class DataGenerators {
     // Subscribe to the GatherDataEvent to add custom data generators
     @SubscribeEvent
-    public static void gatherData(GatherDataEvent event) {
+    public static void gatherData(@NotNull GatherDataEvent event) {
         // Extracting necessary objects from the event for data generation
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
@@ -35,7 +35,7 @@ public class DataGenerators {
 
         // ADDS LOOT TABLES
         // Add a provider for generating mod loot tables
-        generator.addProvider(event.includeServer(), ModLootTableProvider.create(packOutput));
+        generator.addProvider(event.includeServer(), ModLootTableProvider.create(packOutput, lookupProvider));
 
         // ADDS BLOCK STATES
         // Add a provider for generating mod block states (for rendering)
@@ -47,22 +47,22 @@ public class DataGenerators {
 
         // ADDS BLOCK AND ITEM TAGS
         // Add a provider for generating mod block and item tags
-        ModBlockTagGenerator blockTagGenerator = generator.addProvider(event.includeServer(),
+        /*ModBlockTagGenerator blockTagGenerator = generator.addProvider(event.includeServer(),
                 new ModBlockTagGenerator(packOutput, lookupProvider, existingFileHelper));
         generator.addProvider(event.includeServer(), new ModItemTagGenerator(packOutput, lookupProvider, blockTagGenerator.contentsGetter(), existingFileHelper));
+         */
 
         // Adds Villager Professions
         // Add a provider for generating mod villager profession tags
         generator.addProvider(event.includeServer(), new ModPoiTypeTagsProvider(packOutput, lookupProvider, existingFileHelper));
 
         // Add a provider for generating custom world generation features
-        generator.addProvider(event.includeServer(), new ModWorldGenProvider(packOutput, lookupProvider));
+        ModWorldGenProvider worldGenProvider = generator.addProvider(event.includeServer(), new ModWorldGenProvider(packOutput, lookupProvider));
 
         // World gen maps
         generator.addProvider(true, new MapProvider(ModDimensionProvider.getOriginalMapImage(), ModDimensionProvider.KNOWN_WORLD,
                 // get provider with custom registry entries
-                RegistryPatchGenerator.createLookup(lookupProvider, ModWorldGenProvider.BUILDER).thenComposeAsync(patchedRegistries ->
-                        CompletableFuture.completedFuture(patchedRegistries.patches())).thenCompose(provider -> {
+                worldGenProvider.getRegistryProvider().thenComposeAsync(provider -> {
                     List<Zone> Zones = ModDimensionProvider.getZones(provider.lookupOrThrow(CTRegistries.ZONES_KEY)).stream().map(Holder::value).toList();
                     return CompletableFuture.completedFuture(Zones);
                 }), packOutput));

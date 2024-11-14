@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 
 // BearRenderer is responsible for rendering BearEntity in the game
 public class BearRenderer extends MobRenderer<BearEntity, LivingEntityRenderState, BearModel<LivingEntityRenderState>> {
@@ -19,18 +20,18 @@ public class BearRenderer extends MobRenderer<BearEntity, LivingEntityRenderStat
     }
 
     @Override
-    public LivingEntityRenderState createRenderState() {
+    public @NotNull LivingEntityRenderState createRenderState() {
         return new LivingEntityRenderState();
     }
 
     // Get the texture location for BearEntity
     @Override
-    public ResourceLocation getTextureLocation(LivingEntityRenderState state) {
+    public @NotNull ResourceLocation getTextureLocation(@NotNull LivingEntityRenderState state) {
         return AGoTMod.id("textures/entity/bear.png");
     }
 
     @Override
-    public void render(LivingEntityRenderState state, PoseStack poseStack, MultiBufferSource buffer, int light) {
+    public void render(LivingEntityRenderState state, @NotNull PoseStack poseStack, @NotNull MultiBufferSource buffer, int light) {
         // Check if the BearEntity is a baby
         if (state.isBaby) {
             // Scale down the rendering for baby BearEntities

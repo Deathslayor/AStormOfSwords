@@ -1,10 +1,6 @@
 {
   "biome": "minecraft:swamp",
-  "color": {
-    "b": 49,
-    "g": 95,
-    "r": 76
-  },
+  "color": "#4c5f31",
   "height": -3,
   "terrain_modifier": 4.0
 }

@@ -3,7 +3,6 @@ package net.darkflameproduction.agotmod;
 
 // Importing necessary classes from other packages
 
-import com.mojang.logging.LogUtils;
 import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.darkflameproduction.agotmod.entity.ModEntities;
 import net.darkflameproduction.agotmod.entity.client.BearRenderer;
@@ -23,19 +22,18 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(AGoTMod.MOD_ID)
 public class AGoTMod {
     // Define mod id in a common place for everything to reference
     public static final String MOD_ID = "agotmod";
-    public static final Logger LOGGER = LogUtils.getLogger();
 
     // Constructor for AGoTMod class
     public AGoTMod(IEventBus modEventBus) {
@@ -72,7 +70,7 @@ public class AGoTMod {
         modEventBus.addListener(this::commonSetup);
 
         // Register this class as an event listener
-        MinecraftForge.EVENT_BUS.register(this);
+        NeoForge.EVENT_BUS.register(this);
 
         // Listen for creative mode tab build event
         modEventBus.addListener(this::addCreative);

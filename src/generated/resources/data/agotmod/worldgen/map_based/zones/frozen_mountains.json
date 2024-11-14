@@ -1,10 +1,6 @@
 {
   "biome": "minecraft:jagged_peaks",
-  "color": {
-    "b": 174,
-    "g": 174,
-    "r": 174
-  },
+  "color": "#aeaeae",
   "height": 60,
   "layers": {
     "dirt": "minecraft:powder_snow",

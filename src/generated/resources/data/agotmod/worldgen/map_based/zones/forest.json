@@ -1,10 +1,6 @@
 {
   "biome": "minecraft:forest",
-  "color": {
-    "b": 51,
-    "g": 81,
-    "r": 61
-  },
+  "color": "#3d5133",
   "height": 3,
   "terrain_modifier": 7.0
 }

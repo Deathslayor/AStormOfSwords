@@ -8,4 +8,5 @@ public class MammothRenderState extends LivingEntityRenderState {
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState attackAnimationState = new AnimationState();
     public MammothVariant variant = MammothVariant.DEFAULT;
+    public boolean hasSaddle = false;
 }

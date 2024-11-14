@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:bloodstone_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "agotmod:bloodstone"
+  }
+}

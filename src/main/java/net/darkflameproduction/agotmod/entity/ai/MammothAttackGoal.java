@@ -5,6 +5,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Custom attack goal for Mammoth entities.
@@ -43,12 +44,9 @@ public class MammothAttackGoal extends MeleeAttackGoal {
         ticksUntilNextAttack = 40;
     }
 
-    /**
-     * Main method to check and perform the attack.
-     */
     @Override
-    protected void checkAndPerformAttack(LivingEntity pEnemy, double pDistToEnemySqr) {
-        if (isEnemyWithinAttackDistance(pEnemy, pDistToEnemySqr)) {
+    protected void checkAndPerformAttack(@NotNull LivingEntity pEnemy) {
+        if (this.mob.isWithinMeleeAttackRange(pEnemy)) {
             shouldCountTillNextAttack = true;
 
             // Start attack animation
@@ -68,11 +66,6 @@ public class MammothAttackGoal extends MeleeAttackGoal {
             entity.setAttacking(false);
             entity.attackAnimationTimeout = 0;
         }
-    }
-
-    // Helper method to check if the enemy is within attack distance
-    private boolean isEnemyWithinAttackDistance(LivingEntity pEnemy, double pDistToEnemySqr) {
-        return pDistToEnemySqr <= this.getAttackReachSqr(pEnemy);
     }
 
     // Helper method to reset the attack cooldown
@@ -99,7 +92,7 @@ public class MammothAttackGoal extends MeleeAttackGoal {
     protected void performAttack(LivingEntity pEnemy) {
         this.resetAttackCooldown();
         this.mob.swing(InteractionHand.MAIN_HAND);
-        this.mob.doHurtTarget(pEnemy);
+        this.mob.doHurtTarget(getServerLevel(this.mob), pEnemy);
     }
 
     /**

@@ -1,10 +1,6 @@
 {
   "biome": "minecraft:windswept_hills",
-  "color": {
-    "b": 151,
-    "g": 151,
-    "r": 151
-  },
+  "color": "#979797",
   "height": 33,
   "pixel_weight": 1.5,
   "terrain_modifier": 20.0

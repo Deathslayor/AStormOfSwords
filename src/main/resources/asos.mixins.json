@@ -1,16 +1,16 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "net.astormofsorts.agotmod.mixin",
+  "package": "net.darkflameproduction.agotmod.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "net.darkflameproduction.agotmod.mixin.PlayerMixin",
-    "net.darkflameproduction.agotmod.mixin.ServerPropertiesMixin",
+    "PlayerMixin",
+    "ServerPropertiesMixin",
     "ServerPropertiesMixin$WorldGenPropertiesMixin",
-    "net.darkflameproduction.agotmod.mixin.WorldPresetsMixin"
+    "WorldPresetsMixin"
   ],
   "client": [
-    "net.darkflameproduction.agotmod.mixin.client.CreateWorldScreenMixin"
+    "client.CreateWorldScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

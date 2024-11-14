@@ -1,6 +1,7 @@
 package net.darkflameproduction.agotmod.magic.client;
 
 import net.minecraft.nbt.CompoundTag;
+import org.jetbrains.annotations.NotNull;
 
 public class PlayerMana {
     private int mana;
@@ -19,18 +20,17 @@ public class PlayerMana {
         this.mana = Math.max(mana - sub, MIN_MANA);
     }
 
-    public void copyFrom(PlayerMana source) {
+    public void copyFrom(@NotNull PlayerMana source) {
         this.mana = source.mana;
 
     }
 
-    public void saveNBTData(CompoundTag nbt) {
+    public void saveNBTData(@NotNull CompoundTag nbt) {
         nbt.putInt("mana", mana);
     }
 
 
-    public void loadNBTData(CompoundTag nbt) {
+    public void loadNBTData(@NotNull CompoundTag nbt) {
         mana = nbt.getInt("mana");
-
     }
 }

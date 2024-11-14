@@ -32,6 +32,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.EventHooks;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 // MammothEntity represents the custom entity class for the Mammoth
@@ -118,7 +119,7 @@ public class MammothEntity extends TamableAnimal implements PlayerRideable {
     // Method for defining synchronized data
 
     @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+    protected void defineSynchedData(SynchedEntityData.@NotNull Builder builder) {
         super.defineSynchedData(builder);
         builder.define(ATTACKING, false);
         builder.define(DATA_ID_TYPE_VARIANT, 0);
@@ -137,20 +138,20 @@ public class MammothEntity extends TamableAnimal implements PlayerRideable {
     }
 
     @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, EntitySpawnReason pReason, @Nullable SpawnGroupData pSpawnData) {
+    public @NotNull SpawnGroupData finalizeSpawn(@NotNull ServerLevelAccessor pLevel, @NotNull DifficultyInstance pDifficulty, @NotNull EntitySpawnReason pReason, @Nullable SpawnGroupData pSpawnData) {
         MammothVariant variant = Util.getRandom(MammothVariant.values(), this.random);
         this.setVariant(variant);
         return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData);
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag pCompound) {
+    public void readAdditionalSaveData(@NotNull CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
         this.entityData.set(DATA_ID_TYPE_VARIANT, pCompound.getInt("Varient"));
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag pCompound) {
+    public void addAdditionalSaveData(@NotNull CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
         pCompound.putInt("Varient", this.getTypeVariant());
     }
@@ -182,7 +183,7 @@ public class MammothEntity extends TamableAnimal implements PlayerRideable {
     // Method for getting the offspring of two Mammoth entities
     @Nullable
     @Override
-    public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
+    public AgeableMob getBreedOffspring(@NotNull ServerLevel pLevel, @NotNull AgeableMob pOtherParent) {
         return ModEntities.MAMMOTH.get().create(pLevel, EntitySpawnReason.BREEDING);
     }
 
@@ -202,7 +203,7 @@ public class MammothEntity extends TamableAnimal implements PlayerRideable {
     // Method for getting the hurt sound of the Mammoth
     @Nullable
     @Override
-    protected SoundEvent getHurtSound(DamageSource pDamageSource) {
+    protected SoundEvent getHurtSound(@NotNull DamageSource pDamageSource) {
         return ModSounds.MAMMOTH_DAMAGED.get();
     }
 
@@ -214,7 +215,7 @@ public class MammothEntity extends TamableAnimal implements PlayerRideable {
     }
 
     @Override
-    public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
+    public @NotNull InteractionResult mobInteract(Player pPlayer, @NotNull InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
         Item item = itemstack.getItem();
         Item itemForTaming = Items.APPLE;
@@ -263,7 +264,7 @@ public class MammothEntity extends TamableAnimal implements PlayerRideable {
     }
 
     @Override
-    public Vec3 getDismountLocationForPassenger(LivingEntity pLivingEntity) {
+    public @NotNull Vec3 getDismountLocationForPassenger(@NotNull LivingEntity pLivingEntity) {
         Direction direction = this.getMotionDirection();
         if (direction.getAxis() != Direction.Axis.Y) {
             int[][] offsets = DismountHelper.offsetsForDirection(direction);
