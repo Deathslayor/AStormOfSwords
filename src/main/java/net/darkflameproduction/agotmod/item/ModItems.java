@@ -227,16 +227,8 @@ public class ModItems {
     // ---------------------------(INGOTS)--------------------------- //
 
     // ---------------------------(ANIMAL SPAWN EGGS)--------------------------- //
-    public static final DeferredItem<Item> BEAR_SPAWN_EGG = ITEMS.registerItem("bear_spawn_egg",
-            properties -> new SpawnEggItem(ModEntities.BEAR.get(), 0x7e9680, 0xc5d1c5, properties));
-
-    public static final DeferredItem<Item> WIGHT_SPAWN_EGG = ITEMS.registerItem("wight_spawn_egg",
-            properties -> new SpawnEggItem(ModEntities.WIGHT.get(), 0x7e9680, 0xc5d1c5, properties));
-
     public static final DeferredItem<Item> MAMMOTH_SPAWN_EGG = ITEMS.registerItem("mammoth_spawn_egg",
             properties -> new SpawnEggItem(ModEntities.MAMMOTH.get(), 0x7e9680, 0xc5d1c5, properties));
-
-    // ---------------------------(ANIMAL SPAWN EGGS)--------------------------- //
 
     // ---------------------------(TOOLS)--------------------------- //
     // Bronze TOOLS

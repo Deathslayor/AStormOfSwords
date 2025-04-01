@@ -5,9 +5,7 @@ package net.darkflameproduction.agotmod;
 
 import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.darkflameproduction.agotmod.entity.ModEntities;
-import net.darkflameproduction.agotmod.entity.client.BearRenderer;
 import net.darkflameproduction.agotmod.entity.client.MammothRenderer;
-import net.darkflameproduction.agotmod.entity.client.norththewall.WightRenderer;
 import net.darkflameproduction.agotmod.item.ModItemProperties;
 import net.darkflameproduction.agotmod.item.ModItems;
 import net.darkflameproduction.agotmod.item.creativetabs.*;
@@ -100,9 +98,7 @@ public class AGoTMod {
         public static void onClientSetup(@NotNull FMLClientSetupEvent event) {
             // Register custom renderer for the Rhino entity
             EntityRenderers.register(ModEntities.MAMMOTH.get(), MammothRenderer::new);
-            EntityRenderers.register(ModEntities.BEAR.get(), BearRenderer::new);
 
-            EntityRenderers.register(ModEntities.WIGHT.get(), WightRenderer::new);
             event.enqueueWork(ModItemProperties::addCustomItemProperties);
         }
     }

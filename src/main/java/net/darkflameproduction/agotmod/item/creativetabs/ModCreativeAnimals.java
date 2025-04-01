@@ -23,14 +23,13 @@ public class ModCreativeAnimals {
     // Adding items into the MAIN mod tab in creative
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AGOT_TAB_ANIMALS = CREATIVE_MODE_TAB.register("agot_tab_animals",
             () -> CreativeModeTab.builder()
-                    .icon(() -> new ItemStack(ModItems.BEAR_SPAWN_EGG.get())) // Icon for the creative mode tab
+                    // Icon for the creative mode tab
                     .title(Component.translatable("creativetab.agot_tab_animals")) // Title for the creative mode tab
+                    .icon(() -> new ItemStack(ModItems.MAMMOTH_SPAWN_EGG.get())) // Icon for the creative mode tab
                     .displayItems((pParameters, pOutput) -> {
 
                         /** SPAWN EGGS */
                         pOutput.accept(ModItems.MAMMOTH_SPAWN_EGG.get());
-                        pOutput.accept(ModItems.BEAR_SPAWN_EGG.get());
-                        pOutput.accept(ModItems.WIGHT_SPAWN_EGG.get());
 
                     })
                     .build());

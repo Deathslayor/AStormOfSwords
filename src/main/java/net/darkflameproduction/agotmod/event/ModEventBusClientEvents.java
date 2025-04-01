@@ -4,10 +4,8 @@ package net.darkflameproduction.agotmod.event;
 // Importing necessary classes from other packages
 
 import net.darkflameproduction.agotmod.AGoTMod;
-import net.darkflameproduction.agotmod.entity.client.BearModel;
 import net.darkflameproduction.agotmod.entity.client.MammothModel;
 import net.darkflameproduction.agotmod.entity.client.ModModelLayers;
-import net.darkflameproduction.agotmod.entity.client.norththewall.WightModel;
 import net.darkflameproduction.agotmod.event.KeyMappings.KeyBindings;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -25,8 +23,6 @@ public class ModEventBusClientEvents {
     public static void registerLayer(EntityRenderersEvent.@NotNull RegisterLayerDefinitions event) {
         // Registering a layer definition for a custom model (RhinoModel)
         // The layer definition is associated with the RhinoModel's createBodyLayer method
-        event.registerLayerDefinition(ModModelLayers.BEAR_LAYER, BearModel::createBodyLayer);
-        event.registerLayerDefinition(ModModelLayers.WIGHT_LAYER, WightModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.MAMMOTH_LAYER, MammothModel::createBodyLayer);
     }
 

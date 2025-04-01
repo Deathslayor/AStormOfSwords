@@ -150,8 +150,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         // ---------------------------(ANIMAL SPAWN EGGS)--------------------------- //
         // Register item model for the Rhino Spawn Egg
         withExistingParent(ModItems.MAMMOTH_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.BEAR_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.WIGHT_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         // ---------------------------(ANIMAL SPAWN EGGS)--------------------------- //
 
         // ---------------------------(TOOLS)--------------------------- //
@@ -175,19 +173,11 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         // ---------------------------(FOODS)--------------------------- //
         // Register item models for food items
-        simpleItem(ModItems.RAW_BEAR_MEAT);
-        simpleItem(ModItems.COOKED_BEAR_MEAT);
-        simpleItem(ModItems.RAW_SAUSAGE);
-        simpleItem(ModItems.RAW_WHITE_SAUSAGE);
-        simpleItem(ModItems.RAW_BLOOD_SAUSAGE);
-        simpleItem(ModItems.COOKED_SAUSAGE);
-        simpleItem(ModItems.COOKED_BLOOD_SAUSAGE);
-        simpleItem(ModItems.COOKED_WHITE_SAUSAGE);
-        // ---------------------------(FOODS)--------------------------- //
+
 
         // ---------------------------(SAPLINGS)--------------------------- //
         saplingItem(ModBLocks.SYCAMORE_SAPLING);
-        // ---------------------------(SAPLINGS)--------------------------- //
+        // ---------------------------(FOODS)--------------------------- //
         simpleItem(ModItems.COOKED_SAUSAGE);
         simpleItem(ModItems.RAW_WHITE_SAUSAGE);
         simpleItem(ModItems.COOKED_WHITE_SAUSAGE);
@@ -209,8 +199,14 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.RAW_HORSE_MEAT);
         simpleItem(ModItems.COOKED_MAMMOTH_MEAT);
         simpleItem(ModItems.RAW_MAMMOTH_MEAT);
-        // ---------------------------(FOODS)--------------------------- //
-
+        simpleItem(ModItems.RAW_BEAR_MEAT);
+        simpleItem(ModItems.COOKED_BEAR_MEAT);
+        simpleItem(ModItems.RAW_SAUSAGE);
+        simpleItem(ModItems.RAW_WHITE_SAUSAGE);
+        simpleItem(ModItems.RAW_BLOOD_SAUSAGE);
+        simpleItem(ModItems.COOKED_SAUSAGE);
+        simpleItem(ModItems.COOKED_BLOOD_SAUSAGE);
+        simpleItem(ModItems.COOKED_WHITE_SAUSAGE);
         // ---------------------------(SAPLINGS)--------------------------- //
         saplingItem(ModBLocks.WEIRWOOD_SAPLING);
         saplingItem(ModBLocks.SYCAMORE_SAPLING);

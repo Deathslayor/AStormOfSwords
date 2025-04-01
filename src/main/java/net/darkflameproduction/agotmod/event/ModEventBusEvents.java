@@ -5,7 +5,6 @@ package net.darkflameproduction.agotmod.event;
 
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.entity.ModEntities;
-import net.darkflameproduction.agotmod.entity.custom.BearEntity;
 import net.darkflameproduction.agotmod.entity.custom.norththewall.WightEntity;
 import net.darkflameproduction.agotmod.magic.custom.PlayerManaProvider;
 import net.minecraft.world.entity.EntityType;
@@ -28,8 +27,6 @@ public class ModEventBusEvents {
     public static void registerAttributes(@NotNull EntityAttributeCreationEvent event) {
         // Registering attributes for the RhinoEntity when an EntityAttributeCreationEvent occurs
         // The attributes are created using the createAttributes() method of RhinoEntity
-        event.put(ModEntities.BEAR.get(), BearEntity.createAttributes().build());
-        event.put(ModEntities.WIGHT.get(), WightEntity.createAttributes().build());
         event.put(ModEntities.MAMMOTH.get(), WightEntity.createAttributes().build());
     }
 

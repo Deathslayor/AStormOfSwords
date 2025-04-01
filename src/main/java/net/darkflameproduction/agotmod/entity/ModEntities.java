@@ -1,7 +1,6 @@
 package net.darkflameproduction.agotmod.entity;
 
 import net.darkflameproduction.agotmod.AGoTMod;
-import net.darkflameproduction.agotmod.entity.custom.BearEntity;
 import net.darkflameproduction.agotmod.entity.custom.MammothEntity;
 import net.darkflameproduction.agotmod.entity.custom.norththewall.WightEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -19,18 +18,6 @@ public class ModEntities {
     // Deferred register for entity types
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
             DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, AGoTMod.MOD_ID);
-
-
-    // Registry object for the Bear entity type
-    public static final DeferredHolder<EntityType<?>, EntityType<BearEntity>> BEAR =
-            ENTITY_TYPES.register("bear", () -> EntityType.Builder.of(BearEntity::new, MobCategory.CREATURE)
-                    .sized(1f, 1f).build(ResourceKey.create(Registries.ENTITY_TYPE, AGoTMod.id("bear"))));
-
-
-    // Registry object for the Bear entity type
-    public static final DeferredHolder<EntityType<?>, EntityType<WightEntity>> WIGHT =
-            ENTITY_TYPES.register("wight", () -> EntityType.Builder.of(WightEntity::new, MobCategory.CREATURE)
-                    .sized(1f, 1f).build(ResourceKey.create(Registries.ENTITY_TYPE, AGoTMod.id("wight"))));
 
     // Registry object for the Mammoth entity type
     public static final DeferredHolder<EntityType<?>, EntityType<MammothEntity>> MAMMOTH =
