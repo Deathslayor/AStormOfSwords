@@ -1,4 +1,4 @@
-// 1.21.3	2024-11-14T18:16:43.470214688	Item Models: agotmod
+// 1.21.3	2025-04-01T20:35:58.883003195	Item Models: agotmod
 65c44e6f1f29781252c76032b90c20b3bc8f7b8a assets/agotmod/models/item/alder_button.json
 f0b6afe25a5640838c024d02c663e7c8f821ffd6 assets/agotmod/models/item/alder_door.json
 2af83e95998f18d674056268682572a94f141042 assets/agotmod/models/item/alder_fence.json
@@ -31,7 +31,6 @@ a4960420ff48470b2f0248f1949d988b134fdf1b assets/agotmod/models/item/aspen_slabs.
 651e08a3b8f691372c28397d538d8dbd315647ed assets/agotmod/models/item/aspen_stairs.json
 13ea2ead616a6b9ebafd9645593b6bb11a481693 assets/agotmod/models/item/aspen_trapdoor.json
 dc1c774c17c0235458674b66227d123f77e58165 assets/agotmod/models/item/aspen_wall.json
-63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/agotmod/models/item/bear_spawn_egg.json
 dd56749bf8466bf89fcf95a418d3ae2abc99e145 assets/agotmod/models/item/beech_button.json
 b4916b9cb8409f527512f5a1394f7cb2bbf4feba assets/agotmod/models/item/beech_door.json
 e3a18534fbf6792beacda87a7b9a46ab767c024f assets/agotmod/models/item/beech_fence.json
@@ -258,5 +257,4 @@ f5b85997626abad91c874aca84f399ce936f83bd assets/agotmod/models/item/weirwood_sta
 6ae750ebf83c1cb6855106dc45a19b6046dae619 assets/agotmod/models/item/weirwood_stick.json
 0d0a449bd9a059a77b5e5a5c5d8ad18487ad708d assets/agotmod/models/item/weirwood_trapdoor.json
 3c37c18cf57d3ab2fcee13f31ae2339e72c31228 assets/agotmod/models/item/weirwood_wall.json
-63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/agotmod/models/item/wight_spawn_egg.json
 3df6ebab24c5b9654be1dd35f665a305dcff2474 assets/agotmod/models/item/yellow_diamond.json

@@ -11,6 +11,7 @@ import net.darkflameproduction.agotmod.item.ModItems;
 import net.darkflameproduction.agotmod.item.creativetabs.*;
 import net.darkflameproduction.agotmod.sound.ModSounds;
 import net.darkflameproduction.agotmod.villager.ModVillagers;
+import net.darkflameproduction.agotmod.worldgen.biome.ModTerrablender;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
@@ -72,6 +73,9 @@ public class AGoTMod {
 
         // Listen for creative mode tab build event
         modEventBus.addListener(this::addCreative);
+
+        // Register Biomes
+        ModTerrablender.registerBiomes();
     }
 
     // Common setup method
