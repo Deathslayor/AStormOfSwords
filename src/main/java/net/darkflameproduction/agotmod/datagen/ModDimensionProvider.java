@@ -59,17 +59,17 @@ public class ModDimensionProvider {
                 ZoneRegistry.getOrThrow(ModZones.MEADOW),
                 ZoneRegistry.getOrThrow(ModZones.THE_WALL),
                 ZoneRegistry.getOrThrow(ModZones.HAUNTED_FOREST),
-                ZoneRegistry.getOrThrow(ModZones.SUNFLOWER_PLAINS),
                 ZoneRegistry.getOrThrow(ModZones.RIVER),
                 ZoneRegistry.getOrThrow(ModZones.FROZEN_RIVER),
                 ZoneRegistry.getOrThrow(ModZones.LAKE),
                 ZoneRegistry.getOrThrow(ModZones.FROZEN_LAKE),
                 ZoneRegistry.getOrThrow(ModZones.COLD_OCEAN),
                 ZoneRegistry.getOrThrow(ModZones.DEEP_COLD_OCEAN),
-                ZoneRegistry.getOrThrow(ModZones.SNOWY_SLOPES),
-                ZoneRegistry.getOrThrow(ModZones.FROZEN_MOUNTAINS),
                 ZoneRegistry.getOrThrow(ModZones.BASALT_DELTAS),
                 ZoneRegistry.getOrThrow(ModZones.OLD_GROWTH_SPRUCE_TAIGA),
+                ZoneRegistry.getOrThrow(ModZones.FROSTFANG_FOOTHILLS),
+                ZoneRegistry.getOrThrow(ModZones.FROSTFANGS),
+                ZoneRegistry.getOrThrow(ModZones.VALLEY_OF_THENN),
                 ZoneRegistry.getOrThrow(ModZones.LANDS_OF_ALWAYS_WINTER)
         );
     }

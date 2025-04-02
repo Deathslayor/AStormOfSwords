@@ -1,9 +1,9 @@
 {
-  "biome": "minecraft:snowy_slopes",
+  "biome": "agotmod:frostfang_foothills",
   "color": "#c0c0c0",
   "height": 33,
   "layers": {
-    "dirt": "minecraft:snow_block",
+    "dirt": "minecraft:stone",
     "stone": "minecraft:stone",
     "surface": "minecraft:snow"
   },

@@ -1,9 +1,12 @@
-// 1.21.3	2025-04-02T22:51:46.8677646	Registries
+// 1.21.3	2025-04-03T00:08:47.065647	Registries
 ffe3d912e363745b0043a61fc7b67f35a53f2228 data/agotmod/neoforge/biome_modifier/add_tin_ore.json
 2cd0b3508ddcea7e502f1cf50b1ab12343351354 data/agotmod/neoforge/biome_modifier/create_weirwood_tree.json
 3afcdacdb87e2deda10b1fe27c5811a14f392390 data/agotmod/neoforge/biome_modifier/spawn_mammoth.json
+27094da8fca0a90b2fdd060e0ab1a4c7befee25f data/agotmod/worldgen/biome/frostfangs.json
+39baf3c66c3a00dac188912e5e53fc07a6813889 data/agotmod/worldgen/biome/frostfang_foothills.json
 6abc12107dd0e780b290523baca40212456ad729 data/agotmod/worldgen/biome/haunted_forest.json
 c206a3741cf9f9f61ddcac0e0eaac392dc858271 data/agotmod/worldgen/biome/lands_of_always_winter.json
+348c45e166445e7cc4179634d648a0585aba1a5d data/agotmod/worldgen/biome/valley_of_thenn.json
 7e4afe94980f0fa61520604ac24389e42c65ebf5 data/agotmod/worldgen/configured_feature/alder.json
 65b978dea1f12a2e97e0b926f4b61819ea637a35 data/agotmod/worldgen/configured_feature/ash.json
 ec50eae4ca8c92c6b05fa9dbdc4a03b55a38a21d data/agotmod/worldgen/configured_feature/aspen.json
@@ -22,12 +25,13 @@ f9f5c6ecf40e76233c999c5d5f0c76cd98a03dda data/agotmod/worldgen/map_based/zones/b
 9ebdc779123067faf8c9141019331922c2d56fa7 data/agotmod/worldgen/map_based/zones/cold_ocean.json
 f1c0d7f03e5d33868dc422e823bf350523699852 data/agotmod/worldgen/map_based/zones/deep_cold_ocean.json
 7e80a094d20b0dae51c3dfdb09b35e58c4773d39 data/agotmod/worldgen/map_based/zones/forest.json
+b099cbbbb968768664edd98a696b8a6926394ec4 data/agotmod/worldgen/map_based/zones/frostfangs.json
+61d0a38e1ccdac150eaef9c3be5a9246f5ac56ad data/agotmod/worldgen/map_based/zones/frostfang_foothills.json
 7e4477583efb49a9ee6fcb344282ed1cefbc6c43 data/agotmod/worldgen/map_based/zones/frozen_lake.json
-cbf5fb061f8a2e77aa34accfdbbe8a4dad40ad8f data/agotmod/worldgen/map_based/zones/frozen_mountains.json
 c8b6815ea720a5bb4312e5805143598c40b31648 data/agotmod/worldgen/map_based/zones/frozen_river.json
 9bf124923be5c67745e803738ec86ba845c7ff2e data/agotmod/worldgen/map_based/zones/haunted_forest.json
 a520f76fd27fcdf5b8958a52802a41051439f24c data/agotmod/worldgen/map_based/zones/lake.json
-2b6925405eef6ba04f18d9bb03a8032c78b1d193 data/agotmod/worldgen/map_based/zones/lands_of_always_winter.json
+22e5b5e9385a4cbb4897636ad2e8c2aa8f2b2be7 data/agotmod/worldgen/map_based/zones/lands_of_always_winter.json
 8d364ef58ea979b8b237cf7c64f13398af48f869 data/agotmod/worldgen/map_based/zones/mangroves.json
 12d4223bf0cf920981ef186fcc959ac8bea22386 data/agotmod/worldgen/map_based/zones/meadow.json
 e86255b6566fc67a46d56372054cfb809a4a2633 data/agotmod/worldgen/map_based/zones/old_growth_spruce_taiga.json
@@ -37,11 +41,10 @@ a0432f3114eaaeca727c52f71e231dc7abbc6852 data/agotmod/worldgen/map_based/zones/r
 b140688a52a01c00d100b8aac7d18549ee86498e data/agotmod/worldgen/map_based/zones/savanna_plateu.json
 9f52e3193f61f566a86c914e3b6c19b424e751f4 data/agotmod/worldgen/map_based/zones/snowy_mountains.json
 1c3678da20ec580bbbc3949c772ba24048f435ba data/agotmod/worldgen/map_based/zones/snowy_plains.json
-adc91dc1396fa2c124d5ce561fff05ae6d2c045a data/agotmod/worldgen/map_based/zones/snowy_slopes.json
-993024f71c1fa37173e531b6b5b3aa3044c3bdaf data/agotmod/worldgen/map_based/zones/sunflower_plains.json
 282ff67aeead17a7c3d868dbe095e5965e1a1d87 data/agotmod/worldgen/map_based/zones/swamp.json
 9b2573b81a8f92a83716ba0db76badd825648a23 data/agotmod/worldgen/map_based/zones/taiga.json
 0c7abfe6148b7a210d7328e2ee4ee864daca9bcb data/agotmod/worldgen/map_based/zones/the_wall.json
+0b2bfa53b6adc404cdedbca7f355386883606464 data/agotmod/worldgen/map_based/zones/valley_of_thenn.json
 39964a99a1a3c1145d5ff4aa9439fdd47f5c8b9d data/agotmod/worldgen/map_based/zones/windswept_hills.json
 b64c0b72b488bade1bed77a66abdd88f870634d0 data/agotmod/worldgen/placed_feature/alder.json
 eadc8681cab18893c3217c488dec8aa346a1e0f9 data/agotmod/worldgen/placed_feature/ash.json
@@ -56,4 +59,4 @@ cbbdf1f85245bbd7f83c356f9bb8522f0016ec69 data/agotmod/worldgen/placed_feature/pi
 9e7bf3801e41892d4a52cb57d009312cf9a8d837 data/agotmod/worldgen/placed_feature/sentinel.json
 174bd861a214e5e9e447f57b86f92b9deca5e42d data/agotmod/worldgen/placed_feature/tin_ore_placed.json
 9dae1e269ebe83e946cbd785b286362c8327f171 data/agotmod/worldgen/placed_feature/weirwood.json
-9341f8cba4eb06571dcc5d0d0805a2c6849ae330 data/agotmod/worldgen/world_preset/known_world.json
+70a7241f728cd7578ff23d484216e9a2f747c6f2 data/agotmod/worldgen/world_preset/known_world.json

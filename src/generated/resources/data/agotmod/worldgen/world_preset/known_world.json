@@ -23,17 +23,17 @@
             "agotmod:meadow",
             "agotmod:the_wall",
             "agotmod:haunted_forest",
-            "agotmod:sunflower_plains",
             "agotmod:river",
             "agotmod:frozen_river",
             "agotmod:lake",
             "agotmod:frozen_lake",
             "agotmod:cold_ocean",
             "agotmod:deep_cold_ocean",
-            "agotmod:snowy_slopes",
-            "agotmod:frozen_mountains",
             "agotmod:basalt_deltas",
             "agotmod:old_growth_spruce_taiga",
+            "agotmod:frostfang_foothills",
+            "agotmod:frostfangs",
+            "agotmod:valley_of_thenn",
             "agotmod:lands_of_always_winter"
           ]
         }

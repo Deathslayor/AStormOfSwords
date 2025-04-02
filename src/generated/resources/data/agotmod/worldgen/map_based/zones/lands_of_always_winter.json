@@ -1,12 +1,12 @@
 {
   "biome": "agotmod:lands_of_always_winter",
   "color": "#d9d9d9",
-  "height": 33,
+  "height": 3,
   "layers": {
     "dirt": "minecraft:snow_block",
     "stone": "minecraft:stone",
     "surface": "minecraft:snow"
   },
   "pixel_weight": 1.5,
-  "terrain_modifier": 20.0
+  "terrain_modifier": 6.0
 }
