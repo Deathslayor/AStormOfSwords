@@ -5,6 +5,7 @@ import dev.tocraft.ctgen.worldgen.MapSettingsBuilder;
 import dev.tocraft.ctgen.xtend.CTRegistries;
 import dev.tocraft.ctgen.zone.Zone;
 import net.darkflameproduction.agotmod.AGoTMod;
+import net.darkflameproduction.agotmod.worldgen.biome.ModBiomes;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -57,8 +58,7 @@ public class ModDimensionProvider {
                 ZoneRegistry.getOrThrow(ModZones.FOREST),
                 ZoneRegistry.getOrThrow(ModZones.MEADOW),
                 ZoneRegistry.getOrThrow(ModZones.THE_WALL),
-                ZoneRegistry.getOrThrow(ModZones.SNOWY_TAIGA),
-                ZoneRegistry.getOrThrow(ModZones.SNOWY_FLATS),
+                ZoneRegistry.getOrThrow(ModZones.HAUNTED_FOREST),
                 ZoneRegistry.getOrThrow(ModZones.SUNFLOWER_PLAINS),
                 ZoneRegistry.getOrThrow(ModZones.RIVER),
                 ZoneRegistry.getOrThrow(ModZones.FROZEN_RIVER),
@@ -66,10 +66,11 @@ public class ModDimensionProvider {
                 ZoneRegistry.getOrThrow(ModZones.FROZEN_LAKE),
                 ZoneRegistry.getOrThrow(ModZones.COLD_OCEAN),
                 ZoneRegistry.getOrThrow(ModZones.DEEP_COLD_OCEAN),
-                ZoneRegistry.getOrThrow(ModZones.BASALT_DELTAS),
                 ZoneRegistry.getOrThrow(ModZones.SNOWY_SLOPES),
                 ZoneRegistry.getOrThrow(ModZones.FROZEN_MOUNTAINS),
-                ZoneRegistry.getOrThrow(ModZones.OLD_GROWTH_SPRUCE_TAIGA)
+                ZoneRegistry.getOrThrow(ModZones.BASALT_DELTAS),
+                ZoneRegistry.getOrThrow(ModZones.OLD_GROWTH_SPRUCE_TAIGA),
+                ZoneRegistry.getOrThrow(ModZones.LANDS_OF_ALWAYS_WINTER)
         );
     }
 

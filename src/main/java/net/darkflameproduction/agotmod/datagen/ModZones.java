@@ -4,6 +4,7 @@ import dev.tocraft.ctgen.xtend.CTRegistries;
 import dev.tocraft.ctgen.zone.Zone;
 import dev.tocraft.ctgen.zone.ZoneBuilder;
 import net.darkflameproduction.agotmod.AGoTMod;
+import net.darkflameproduction.agotmod.worldgen.biome.ModBiomes;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -27,8 +28,7 @@ public class ModZones {
     public static final ResourceKey<Zone> FOREST = getKey("forest");
     public static final ResourceKey<Zone> MEADOW = getKey("meadow");
     public static final ResourceKey<Zone> THE_WALL = getKey("the_wall");
-    public static final ResourceKey<Zone> SNOWY_TAIGA = getKey("snowy_taiga");
-    public static final ResourceKey<Zone> SNOWY_FLATS = getKey("snowy_flats");
+    public static final ResourceKey<Zone> HAUNTED_FOREST = getKey("haunted_forest");
     public static final ResourceKey<Zone> SUNFLOWER_PLAINS = getKey("sunflower_plains");
     public static final ResourceKey<Zone> RIVER = getKey("river");
     public static final ResourceKey<Zone> FROZEN_RIVER = getKey("frozen_river");
@@ -36,10 +36,11 @@ public class ModZones {
     public static final ResourceKey<Zone> FROZEN_LAKE = getKey("frozen_lake");
     public static final ResourceKey<Zone> COLD_OCEAN = getKey("cold_ocean");
     public static final ResourceKey<Zone> DEEP_COLD_OCEAN = getKey("deep_cold_ocean");
-    public static final ResourceKey<Zone> BASALT_DELTAS = getKey("basalt_deltas");
     public static final ResourceKey<Zone> SNOWY_SLOPES = getKey("snowy_slopes");
     public static final ResourceKey<Zone> FROZEN_MOUNTAINS = getKey("frozen_mountains");
+    public static final ResourceKey<Zone> BASALT_DELTAS = getKey("basalt_deltas");
     public static final ResourceKey<Zone> OLD_GROWTH_SPRUCE_TAIGA = getKey("old_growth_spruce_taiga");
+    public static final ResourceKey<Zone> LANDS_OF_ALWAYS_WINTER = getKey("lands_of_always_winter");
 
     public static void bootstrap(BootstrapContext<Zone> context) {
         // The North
@@ -58,13 +59,12 @@ public class ModZones {
         // wall
         context.register(THE_WALL, new ZoneBuilder().setBiome(getBiome(context, Biomes.FROZEN_PEAKS)).setColor(new Color(255, 255, 255)).setStoneBlock(Blocks.PACKED_ICE).setDirtBlock(Blocks.PACKED_ICE).setSurfaceBlock(Blocks.SNOW_BLOCK).setHeight(213).setTerrainModifier(0).setPixelWeight(16).build());
         //North Of The Wall
-        context.register(SNOWY_TAIGA, new ZoneBuilder().setBiome(getBiome(context, Biomes.SNOWY_TAIGA)).setColor(new Color(130, 140, 130)).setHeight(5).build());
-        context.register(SNOWY_FLATS, new ZoneBuilder().setBiome(getBiome(context, Biomes.SNOWY_SLOPES)).setColor(new Color(217, 217, 217)).setHeight(5).build());
-        context.register(SUNFLOWER_PLAINS, new ZoneBuilder().setBiome(getBiome(context, Biomes.SUNFLOWER_PLAINS)).setColor(new Color(107, 143, 107)).setHeight(5).build());
+        context.register(HAUNTED_FOREST, new ZoneBuilder().setBiome(getBiome(context, ModBiomes.HAUNTED_FOREST)).setColor(new Color(130, 140, 130)).setHeight(5).build());
+        context.register(LANDS_OF_ALWAYS_WINTER, new ZoneBuilder().setBiome(getBiome(context, ModBiomes.LANDS_OF_ALWAYS_WINTER)).setColor(new Color(217, 217, 217)).setStoneBlock(Blocks.STONE).setDirtBlock(Blocks.SNOW_BLOCK).setSurfaceBlock(Blocks.SNOW).setHeight(33).setTerrainModifier(20).setPixelWeight(1.5).build());        context.register(SUNFLOWER_PLAINS, new ZoneBuilder().setBiome(getBiome(context, Biomes.SUNFLOWER_PLAINS)).setColor(new Color(107, 143, 107)).setHeight(5).build());
         context.register(SNOWY_SLOPES, new ZoneBuilder().setBiome(getBiome(context, Biomes.SNOWY_SLOPES)).setColor(new Color(192, 192, 192)).setStoneBlock(Blocks.STONE).setDirtBlock(Blocks.SNOW_BLOCK).setSurfaceBlock(Blocks.SNOW).setHeight(33).setTerrainModifier(20).setPixelWeight(1.5).build());
         context.register(FROZEN_MOUNTAINS, new ZoneBuilder().setBiome(getBiome(context, Biomes.JAGGED_PEAKS)).setColor(new Color(174, 174, 174)).setStoneBlock(Blocks.STONE).setDirtBlock(Blocks.POWDER_SNOW).setSurfaceBlock(Blocks.POWDER_SNOW).setHeight(60).setTerrainModifier(28).build());
         //Essos
-        context.register(BASALT_DELTAS, new ZoneBuilder().setBiome(getBiome(context, Biomes.BASALT_DELTAS)).setColor(new Color(0, 0, 0)).setSurfaceBlock(Blocks.BASALT).setHeight(5).build());
+        context.register(BASALT_DELTAS, new ZoneBuilder().setBiome(getBiome(context, Biomes.BASALT_DELTAS)).setColor(new Color(0, 0, 0)).setStoneBlock(Blocks.BASALT).setDirtBlock(Blocks.BASALT).setSurfaceBlock(Blocks.BASALT).setHeight(33).setTerrainModifier(20).setPixelWeight(1.5).build());
         // water biomes
         context.register(RIVER, new ZoneBuilder().setBiome(getBiome(context, Biomes.RIVER)).setColor(new Color(1, 98, 255)).setDirtBlock(Blocks.SAND).setSurfaceBlock(Blocks.SAND).setHeight(-15).setPixelWeight(2).setCarverModifier(26).build());
         context.register(FROZEN_RIVER, new ZoneBuilder().setBiome(getBiome(context, Biomes.FROZEN_RIVER)).setColor(new Color(87, 145, 240)).setDirtBlock(Blocks.SAND).setSurfaceBlock(Blocks.SAND).setHeight(-15).setPixelWeight(2).setCarverModifier(26).build());
