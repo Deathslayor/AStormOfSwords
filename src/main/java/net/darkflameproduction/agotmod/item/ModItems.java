@@ -258,13 +258,13 @@ public class ModItems {
             properties -> new WildlingChiefArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.BOOTS, properties));
 
     //Stark Noble
-    public static final DeferredItem<ThennLevyArmorItem> THENN_LEVY_HELMET = ITEMS.registerItem("thenn_levy__helmet",
+    public static final DeferredItem<ThennLevyArmorItem> THENN_LEVY_HELMET = ITEMS.registerItem("thenn_levy_helmet",
             properties -> new ThennLevyArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.HELMET, properties));
 
-    public static final DeferredItem<ThennLevyArmorItem> THENN_LEVY_CHESTPLATE = ITEMS.registerItem("thenn_levy__chestplate",
+    public static final DeferredItem<ThennLevyArmorItem> THENN_LEVY_CHESTPLATE = ITEMS.registerItem("thenn_levy_chestplate",
             properties -> new ThennLevyArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.CHESTPLATE, properties));
 
-    public static final DeferredItem<ThennLevyArmorItem> THENN_LEVY_LEGGINGS = ITEMS.registerItem("thenn_levy__leggings",
+    public static final DeferredItem<ThennLevyArmorItem> THENN_LEVY_LEGGINGS = ITEMS.registerItem("thenn_levy_leggings",
             properties -> new ThennLevyArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.LEGGINGS, properties));
 
     public static final DeferredItem<ThennLevyArmorItem> THENN_LEVY_BOOTS = ITEMS.registerItem("thenn_levy_boots",

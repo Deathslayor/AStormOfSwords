@@ -1,11 +1,11 @@
 {
   "biome": "agotmod:frostfangs",
   "color": "#aeaeae",
-  "height": 80,
+  "height": 150,
   "layers": {
-    "dirt": "minecraft:snow_block",
+    "dirt": "minecraft:powder_snow",
     "stone": "minecraft:stone",
-    "surface": "minecraft:powder_snow"
+    "surface": "minecraft:snow"
   },
-  "terrain_modifier": 40.0
+  "terrain_modifier": 80.0
 }

@@ -15,6 +15,8 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
+import net.minecraft.world.level.block.Blocks;
+
 
 import java.util.List;
 
@@ -23,6 +25,7 @@ public class ModplacedFeatures {
     // Define a ResourceKey for the placed feature of tin ore
     public static final ResourceKey<PlacedFeature> TIN_ORE_PLACED_KEY = registerKey("tin_ore_placed");
     public static final ResourceKey<PlacedFeature> WEIRWOOD_KEY = registerKey("weirwood");
+    public static final ResourceKey<PlacedFeature> OAK2_KEY = registerKey("oak");
     public static final ResourceKey<PlacedFeature> SENTINEL_KEY = registerKey("sentinel");
     public static final ResourceKey<PlacedFeature> PINE_KEY = registerKey("pine");
     public static final ResourceKey<PlacedFeature> IRONWOOD_KEY = registerKey("ironwood");
@@ -49,6 +52,11 @@ public class ModplacedFeatures {
         register(context, WEIRWOOD_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.WEIRWOOD_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.1f, 1),
                         ModBLocks.WEIRWOOD_SAPLING.get()));
+
+        register(context, OAK2_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OAK2_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        Blocks.OAK_SAPLING));
+
 
         register(context, SENTINEL_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SENTINEL_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),

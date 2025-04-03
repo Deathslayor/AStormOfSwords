@@ -1,7 +1,7 @@
 {
   "biome": "agotmod:frostfang_foothills",
   "color": "#c0c0c0",
-  "height": 33,
+  "height": 50,
   "layers": {
     "dirt": "minecraft:stone",
     "stone": "minecraft:stone",
