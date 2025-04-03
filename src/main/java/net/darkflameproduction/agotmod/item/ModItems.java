@@ -4,24 +4,38 @@ package net.darkflameproduction.agotmod.item;
 // Importing necessary classes from other packages
 
 import net.darkflameproduction.agotmod.AGoTMod;
+import net.darkflameproduction.agotmod.armor.client.mountin_clan.MountainClanLevyArmorModel;
 import net.darkflameproduction.agotmod.armor.custom.ModArmorMaterials;
 import net.darkflameproduction.agotmod.armor.custom.bolten.BoltenLevyArmorItem;
 import net.darkflameproduction.agotmod.armor.custom.bolten.BoltenNobleArmorItem;
 import net.darkflameproduction.agotmod.armor.custom.bolten.BoltenPlateArmorItem;
+import net.darkflameproduction.agotmod.armor.custom.ironborn.IronBornLevyArmorItem;
+import net.darkflameproduction.agotmod.armor.custom.ironborn.IronBornNobleArmorItem;
+import net.darkflameproduction.agotmod.armor.custom.ironborn.IronBornPlateArmorItem;
 import net.darkflameproduction.agotmod.armor.custom.manderly.ManderlyLevyArmorItem;
 import net.darkflameproduction.agotmod.armor.custom.manderly.ManderlyNobleArmorItem;
 import net.darkflameproduction.agotmod.armor.custom.manderly.ManderlyPlateArmorItem;
+import net.darkflameproduction.agotmod.armor.custom.mountin_clan.MountainClanChiefArmorItem;
+import net.darkflameproduction.agotmod.armor.custom.mountin_clan.MountainClanLevyArmorItem;
+import net.darkflameproduction.agotmod.armor.custom.mountin_clan.MountainClanPlateArmorItem;
+import net.darkflameproduction.agotmod.armor.custom.night_watch.NightsWatchEliteArmorItem;
+import net.darkflameproduction.agotmod.armor.custom.night_watch.NightsWatchLeatherArmorItem;
+import net.darkflameproduction.agotmod.armor.custom.night_watch.NightsWatchRangerArmorItem;
 import net.darkflameproduction.agotmod.armor.custom.stark.StarkLevyArmorItem;
 import net.darkflameproduction.agotmod.armor.custom.stark.StarkNoblePlateArmorItem;
 import net.darkflameproduction.agotmod.armor.custom.stark.StarkPlateArmorItem;
+import net.darkflameproduction.agotmod.armor.custom.thenn.ThennLevyArmorItem;
+import net.darkflameproduction.agotmod.armor.custom.thenn.ThennNobleArmorItem;
+import net.darkflameproduction.agotmod.armor.custom.thenn.ThennPlateArmorItem;
+import net.darkflameproduction.agotmod.armor.custom.wildling.WildlingChiefArmorItem;
+import net.darkflameproduction.agotmod.armor.custom.wildling.WildlingFurArmorItem;
+import net.darkflameproduction.agotmod.armor.custom.wildling.WildlingLeatherArmorItem;
 import net.darkflameproduction.agotmod.entity.ModEntities;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import net.minecraft.world.item.Item;
 
 // A utility class for creating and registering modded items
 public class ModItems {
@@ -44,7 +58,7 @@ public class ModItems {
     // ---------------------------(COINS)--------------------------- //
 
     // ---------------------------(ARMOUR)--------------------------- //
-    // Adding Bolten Armour
+
 
     //Bolten Levy
     public static final DeferredItem<BoltenLevyArmorItem> BOLTEN_LEVY_HELMET = ITEMS.registerItem("bolton_levy_helmet",
@@ -164,6 +178,201 @@ public class ModItems {
 
     public static final DeferredItem<StarkNoblePlateArmorItem> STARK_NOBLE_PLATE_BOOTS = ITEMS.registerItem("stark_noble_plate_boots",
             properties -> new StarkNoblePlateArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.BOOTS, properties));
+
+    //Stark Noble
+    public static final DeferredItem<IronBornLevyArmorItem> IRONBORN_LEVY_HELMET = ITEMS.registerItem("ironborn_levy_helmet",
+            properties -> new IronBornLevyArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.HELMET, properties));
+
+    public static final DeferredItem<IronBornLevyArmorItem> IRONBORN_LEVY_CHESTPLATE = ITEMS.registerItem("ironborn_levy_chestplate",
+            properties -> new IronBornLevyArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.CHESTPLATE, properties));
+
+    public static final DeferredItem<IronBornLevyArmorItem> IRONBORN_LEVY_LEGGINGS = ITEMS.registerItem("ironborn_levy_leggings",
+            properties -> new IronBornLevyArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.LEGGINGS, properties));
+
+    public static final DeferredItem<IronBornLevyArmorItem> IRONBORN_LEVY_BOOTS = ITEMS.registerItem("ironborn_levy_boots",
+            properties -> new IronBornLevyArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.BOOTS, properties));
+
+    //Stark Noble
+    public static final DeferredItem<IronBornPlateArmorItem> IRONBORN_PLATE_HELMET = ITEMS.registerItem("ironborn_plate_helmet",
+            properties -> new IronBornPlateArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.HELMET, properties));
+
+    public static final DeferredItem<IronBornPlateArmorItem> IRONBORN_PLATE_CHESTPLATE = ITEMS.registerItem("ironborn_plate_chestplate",
+            properties -> new IronBornPlateArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.CHESTPLATE, properties));
+
+    public static final DeferredItem<IronBornPlateArmorItem> IRONBORN_PLATE_LEGGINGS = ITEMS.registerItem("ironborn_plate_leggings",
+            properties -> new IronBornPlateArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.LEGGINGS, properties));
+
+    public static final DeferredItem<IronBornPlateArmorItem> IRONBORN_PLATE_BOOTS = ITEMS.registerItem("ironborn_plate_boots",
+            properties -> new IronBornPlateArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.BOOTS, properties));
+
+    //Stark Noble
+    public static final DeferredItem<IronBornNobleArmorItem> IRONBORN_NOBLE_HELMET = ITEMS.registerItem("ironborn_noble_helmet",
+            properties -> new IronBornNobleArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.HELMET, properties));
+
+    public static final DeferredItem<IronBornNobleArmorItem> IRONBORN_NOBLE_CHESTPLATE = ITEMS.registerItem("ironborn_noble_chestplate",
+            properties -> new IronBornNobleArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.CHESTPLATE, properties));
+
+    public static final DeferredItem<IronBornNobleArmorItem> IRONBORN_NOBLE_LEGGINGS = ITEMS.registerItem("ironborn_noble_leggings",
+            properties -> new IronBornNobleArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.LEGGINGS, properties));
+
+    public static final DeferredItem<IronBornNobleArmorItem> IRONBORN_NOBLE_BOOTS = ITEMS.registerItem("ironborn_noble_boots",
+            properties -> new IronBornNobleArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.BOOTS, properties));
+
+    //Stark Noble
+    public static final DeferredItem<WildlingLeatherArmorItem> WILDLING_LEATHER_HELMET = ITEMS.registerItem("wildling_leather_helmet",
+            properties -> new WildlingLeatherArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.HELMET, properties));
+
+    public static final DeferredItem<WildlingLeatherArmorItem> WILDLING_LEATHER_CHESTPLATE = ITEMS.registerItem("wildling_leather_chestplate",
+            properties -> new WildlingLeatherArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.CHESTPLATE, properties));
+
+    public static final DeferredItem<WildlingLeatherArmorItem> WILDLING_LEATHER_LEGGINGS = ITEMS.registerItem("wildling_leather_leggings",
+            properties -> new WildlingLeatherArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.LEGGINGS, properties));
+
+    public static final DeferredItem<WildlingLeatherArmorItem> WILDLING_LEATHER_BOOTS = ITEMS.registerItem("wildling_leather_boots",
+            properties -> new WildlingLeatherArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.BOOTS, properties));
+
+    //Stark Noble
+    public static final DeferredItem<WildlingFurArmorItem> WILDLING_FUR_HELMET = ITEMS.registerItem("wildling_fur_helmet",
+            properties -> new WildlingFurArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.HELMET, properties));
+
+    public static final DeferredItem<WildlingFurArmorItem> WILDLING_FUR_CHESTPLATE = ITEMS.registerItem("wildling_fur_chestplate",
+            properties -> new WildlingFurArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.CHESTPLATE, properties));
+
+    public static final DeferredItem<WildlingFurArmorItem> WILDLING_FUR_LEGGINGS = ITEMS.registerItem("wildling_fur_leggings",
+            properties -> new WildlingFurArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.LEGGINGS, properties));
+
+    public static final DeferredItem<WildlingFurArmorItem> WILDLING_FUR_BOOTS = ITEMS.registerItem("wildling_fur_boots",
+            properties -> new WildlingFurArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.BOOTS, properties));
+
+    //Stark Noble
+    public static final DeferredItem<WildlingChiefArmorItem> WILDLING_CHIEF_HELMET = ITEMS.registerItem("wildling_chief_helmet",
+            properties -> new WildlingChiefArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.HELMET, properties));
+
+    public static final DeferredItem<WildlingChiefArmorItem> WILDLING_CHIEF_CHESTPLATE = ITEMS.registerItem("wildling_chief_chestplate",
+            properties -> new WildlingChiefArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.CHESTPLATE, properties));
+
+    public static final DeferredItem<WildlingChiefArmorItem> WILDLING_CHIEF_LEGGINGS = ITEMS.registerItem("wildling_chief_leggings",
+            properties -> new WildlingChiefArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.LEGGINGS, properties));
+
+    public static final DeferredItem<WildlingChiefArmorItem> WILDLING_CHIEF_BOOTS = ITEMS.registerItem("wildling_chief_boots",
+            properties -> new WildlingChiefArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.BOOTS, properties));
+
+    //Stark Noble
+    public static final DeferredItem<ThennLevyArmorItem> THENN_LEVY_HELMET = ITEMS.registerItem("thenn_levy__helmet",
+            properties -> new ThennLevyArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.HELMET, properties));
+
+    public static final DeferredItem<ThennLevyArmorItem> THENN_LEVY_CHESTPLATE = ITEMS.registerItem("thenn_levy__chestplate",
+            properties -> new ThennLevyArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.CHESTPLATE, properties));
+
+    public static final DeferredItem<ThennLevyArmorItem> THENN_LEVY_LEGGINGS = ITEMS.registerItem("thenn_levy__leggings",
+            properties -> new ThennLevyArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.LEGGINGS, properties));
+
+    public static final DeferredItem<ThennLevyArmorItem> THENN_LEVY_BOOTS = ITEMS.registerItem("thenn_levy_boots",
+            properties -> new ThennLevyArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.BOOTS, properties));
+
+    //Stark Noble
+    public static final DeferredItem<ThennPlateArmorItem> THENN_PLATE_HELMET = ITEMS.registerItem("thenn_plate_helmet",
+            properties -> new ThennPlateArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.HELMET, properties));
+
+    public static final DeferredItem<ThennPlateArmorItem> THENN_PLATE_CHESTPLATE = ITEMS.registerItem("thenn_plate_chestplate",
+            properties -> new ThennPlateArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.CHESTPLATE, properties));
+
+    public static final DeferredItem<ThennPlateArmorItem> THENN_PLATE_LEGGINGS = ITEMS.registerItem("thenn_plate_leggings",
+            properties -> new ThennPlateArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.LEGGINGS, properties));
+
+    public static final DeferredItem<ThennPlateArmorItem> THENN_PLATE_BOOTS = ITEMS.registerItem("thenn_plate_boots",
+            properties -> new ThennPlateArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.BOOTS, properties));
+
+    //Stark Noble
+    public static final DeferredItem<ThennNobleArmorItem> THENN_NOBLE_HELMET = ITEMS.registerItem("thenn_noble_helmet",
+            properties -> new ThennNobleArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.HELMET, properties));
+
+    public static final DeferredItem<ThennNobleArmorItem> THENN_NOBLE_CHESTPLATE = ITEMS.registerItem("thenn_noble_chestplate",
+            properties -> new ThennNobleArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.CHESTPLATE, properties));
+
+    public static final DeferredItem<ThennNobleArmorItem> THENN_NOBLE_LEGGINGS = ITEMS.registerItem("thenn_noble_leggings",
+            properties -> new ThennNobleArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.LEGGINGS, properties));
+
+    public static final DeferredItem<ThennNobleArmorItem> THENN_NOBLE_BOOTS = ITEMS.registerItem("thenn_noble_boots",
+            properties -> new ThennNobleArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.BOOTS, properties));
+
+    //Stark Noble
+    public static final DeferredItem<MountainClanLevyArmorItem> MOUNTAIN_CLAN_LEVY_HELMET = ITEMS.registerItem("mountain_clan_levy_helmet",
+            properties -> new MountainClanLevyArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.HELMET, properties));
+
+    public static final DeferredItem<MountainClanLevyArmorItem> MOUNTAIN_CLAN_LEVY_CHESTPLATE = ITEMS.registerItem("mountain_clan_levy_chestplate",
+            properties -> new MountainClanLevyArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.CHESTPLATE, properties));
+
+    public static final DeferredItem<MountainClanLevyArmorItem> MOUNTAIN_CLAN_LEVY_LEGGINGS = ITEMS.registerItem("mountain_clan_levy_leggings",
+            properties -> new MountainClanLevyArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.LEGGINGS, properties));
+
+    public static final DeferredItem<MountainClanLevyArmorItem> MOUNTAIN_CLAN_LEVY_BOOTS = ITEMS.registerItem("mountain_clan_levy_boots",
+            properties -> new MountainClanLevyArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.BOOTS, properties));
+
+    //Stark Noble
+    public static final DeferredItem<MountainClanPlateArmorItem> MOUNTAIN_CLAN_PLATE_HELMET = ITEMS.registerItem("mountain_clan_plate_helmet",
+            properties -> new MountainClanPlateArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.HELMET, properties));
+
+    public static final DeferredItem<MountainClanPlateArmorItem> MOUNTAIN_CLAN_PLATE_CHESTPLATE = ITEMS.registerItem("mountain_clan_plate_chestplate",
+            properties -> new MountainClanPlateArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.CHESTPLATE, properties));
+
+    public static final DeferredItem<MountainClanPlateArmorItem> MOUNTAIN_CLAN_PLATE_LEGGINGS = ITEMS.registerItem("mountain_clan_plate_leggings",
+            properties -> new MountainClanPlateArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.LEGGINGS, properties));
+
+    public static final DeferredItem<MountainClanPlateArmorItem> MOUNTAIN_CLAN_PLATE_BOOTS = ITEMS.registerItem("mountain_clan_plate_boots",
+            properties -> new MountainClanPlateArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.BOOTS, properties));
+
+    //Stark Noble
+    public static final DeferredItem<MountainClanChiefArmorItem> MOUNTAIN_CLAN_CHIEF_HELMET = ITEMS.registerItem("mountain_clan_chief_helmet",
+            properties -> new MountainClanChiefArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.HELMET, properties));
+
+    public static final DeferredItem<MountainClanChiefArmorItem> MOUNTAIN_CLAN_CHIEF_CHESTPLATE = ITEMS.registerItem("mountain_clan_chief_chestplate",
+            properties -> new MountainClanChiefArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.CHESTPLATE, properties));
+
+    public static final DeferredItem<MountainClanChiefArmorItem> MOUNTAIN_CLAN_CHIEF_LEGGINGS = ITEMS.registerItem("mountain_clan_chief_leggings",
+            properties -> new MountainClanChiefArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.LEGGINGS, properties));
+
+    public static final DeferredItem<MountainClanChiefArmorItem> MOUNTAIN_CLAN_CHIEF_BOOTS = ITEMS.registerItem("mountain_clan_chief_boots",
+            properties -> new MountainClanChiefArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.BOOTS, properties));
+
+    //Stark Noble
+    public static final DeferredItem<NightsWatchLeatherArmorItem> NIGHT_WATCH_LEATHER_HELMET = ITEMS.registerItem("night_watch_leather_helmet",
+            properties -> new NightsWatchLeatherArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.HELMET, properties));
+
+    public static final DeferredItem<NightsWatchLeatherArmorItem> NIGHT_WATCH_LEATHER_CHESTPLATE = ITEMS.registerItem("night_watch_leather_chestplate",
+            properties -> new NightsWatchLeatherArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.CHESTPLATE, properties));
+
+    public static final DeferredItem<NightsWatchLeatherArmorItem> NIGHT_WATCH_LEATHER_LEGGINGS = ITEMS.registerItem("night_watch_leather_leggings",
+            properties -> new NightsWatchLeatherArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.LEGGINGS, properties));
+
+    public static final DeferredItem<NightsWatchLeatherArmorItem> NIGHT_WATCH_LEATHER_BOOTS = ITEMS.registerItem("night_watch_leather_boots",
+            properties -> new NightsWatchLeatherArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.BOOTS, properties));
+
+    //Stark Noble
+    public static final DeferredItem<NightsWatchRangerArmorItem> NIGHT_WATCH_RANGER_HELMET = ITEMS.registerItem("night_watch_ranger_helmet",
+            properties -> new NightsWatchRangerArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.HELMET, properties));
+
+    public static final DeferredItem<NightsWatchRangerArmorItem> NIGHT_WATCH_RANGER_CHESTPLATE = ITEMS.registerItem("night_watch_ranger_chestplate",
+            properties -> new NightsWatchRangerArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.CHESTPLATE, properties));
+
+    public static final DeferredItem<NightsWatchRangerArmorItem> NIGHT_WATCH_RANGER_LEGGINGS = ITEMS.registerItem("night_watch_ranger_leggings",
+            properties -> new NightsWatchRangerArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.LEGGINGS, properties));
+
+    public static final DeferredItem<NightsWatchRangerArmorItem> NIGHT_WATCH_RANGER_BOOTS = ITEMS.registerItem("night_watch_ranger_boots",
+            properties -> new NightsWatchRangerArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.BOOTS, properties));
+
+    //Stark Noble
+    public static final DeferredItem<NightsWatchEliteArmorItem> NIGHT_WATCH_ELITE_HELMET = ITEMS.registerItem("night_watch_elite_helmet",
+            properties -> new NightsWatchEliteArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.HELMET, properties));
+
+    public static final DeferredItem<NightsWatchEliteArmorItem> NIGHT_WATCH_ELITE_CHESTPLATE = ITEMS.registerItem("night_watch_elite_chestplate",
+            properties -> new NightsWatchEliteArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.CHESTPLATE, properties));
+
+    public static final DeferredItem<NightsWatchEliteArmorItem> NIGHT_WATCH_ELITE_LEGGINGS = ITEMS.registerItem("night_watch_elite_leggings",
+            properties -> new NightsWatchEliteArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.LEGGINGS, properties));
+
+    public static final DeferredItem<NightsWatchEliteArmorItem> NIGHT_WATCH_ELITE_BOOTS = ITEMS.registerItem("night_watch_elite_boots",
+            properties -> new NightsWatchEliteArmorItem(ModArmorMaterials.STARK_LEVY, ArmorType.BOOTS, properties));
     // ---------------------------(ARMOUR)--------------------------- //
 
     // ---------------------------(INGOTS/NUGGETS)--------------------------- //
@@ -184,7 +393,6 @@ public class ModItems {
             Item::new);
 
     // GEMS
-
     public static final DeferredItem<Item> YELLOW_DIAMOND = ITEMS.registerItem("yellow_diamond",
             Item::new);
     public static final DeferredItem<Item> TRANSPARENT_DIAMOND = ITEMS.registerItem("transparent_diamond",
@@ -230,8 +438,12 @@ public class ModItems {
     // ---------------------------(INGOTS)--------------------------- //
 
     // ---------------------------(ANIMAL SPAWN EGGS)--------------------------- //
+
+
     public static final DeferredItem<Item> MAMMOTH_SPAWN_EGG = ITEMS.registerItem("mammoth_spawn_egg",
             properties -> new SpawnEggItem(ModEntities.MAMMOTH.get(), 0x7e9680, 0xc5d1c5, properties));
+
+    // ---------------------------(ANIMAL SPAWN EGGS)--------------------------- //
 
     // ---------------------------(TOOLS)--------------------------- //
     // Bronze TOOLS

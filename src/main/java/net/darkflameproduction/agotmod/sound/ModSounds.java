@@ -20,6 +20,8 @@ public class ModSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> MAMMOTH_DAMAGED = registerSoundEvents("mammoth_damaged");
     public static final DeferredHolder<SoundEvent, SoundEvent> MAMMOTH_BABY_IDLE = registerSoundEvents("mammoth_baby_idle");
     public static final DeferredHolder<SoundEvent, SoundEvent> MAMMOTH_BABY_DAMAGED = registerSoundEvents("mammoth_baby_damaged");
+    public static final DeferredHolder<SoundEvent, SoundEvent> WINTER_WIND = registerSoundEvents("winter_wind");
+    public static final DeferredHolder<SoundEvent, SoundEvent> FOREST_WIND = registerSoundEvents("forest_wind");
 
 
     //Helper Method to register the sounds

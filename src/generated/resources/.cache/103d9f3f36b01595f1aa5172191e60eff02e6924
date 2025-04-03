@@ -1,12 +1,12 @@
-// 1.21.3	2025-04-03T00:08:47.065647	Registries
+// 1.21.3	2025-04-03T16:57:14.1845788	Registries
 ffe3d912e363745b0043a61fc7b67f35a53f2228 data/agotmod/neoforge/biome_modifier/add_tin_ore.json
 2cd0b3508ddcea7e502f1cf50b1ab12343351354 data/agotmod/neoforge/biome_modifier/create_weirwood_tree.json
 3afcdacdb87e2deda10b1fe27c5811a14f392390 data/agotmod/neoforge/biome_modifier/spawn_mammoth.json
-27094da8fca0a90b2fdd060e0ab1a4c7befee25f data/agotmod/worldgen/biome/frostfangs.json
-39baf3c66c3a00dac188912e5e53fc07a6813889 data/agotmod/worldgen/biome/frostfang_foothills.json
-6abc12107dd0e780b290523baca40212456ad729 data/agotmod/worldgen/biome/haunted_forest.json
-c206a3741cf9f9f61ddcac0e0eaac392dc858271 data/agotmod/worldgen/biome/lands_of_always_winter.json
-348c45e166445e7cc4179634d648a0585aba1a5d data/agotmod/worldgen/biome/valley_of_thenn.json
+873778c082dded4bed27fcbc46744d7dc989b415 data/agotmod/worldgen/biome/frostfangs.json
+500b67d5004d7d07e995cde74f73bd089e90624c data/agotmod/worldgen/biome/frostfang_foothills.json
+0fd4c199703bc4c1b31352dd4ce0013a7486f6e4 data/agotmod/worldgen/biome/haunted_forest.json
+d7880d23ddecb8f3e2f7727b44822476d2007e8e data/agotmod/worldgen/biome/lands_of_always_winter.json
+15719c85707ec25613b54e760f4d883e77ada1bc data/agotmod/worldgen/biome/valley_of_thenn.json
 7e4afe94980f0fa61520604ac24389e42c65ebf5 data/agotmod/worldgen/configured_feature/alder.json
 65b978dea1f12a2e97e0b926f4b61819ea637a35 data/agotmod/worldgen/configured_feature/ash.json
 ec50eae4ca8c92c6b05fa9dbdc4a03b55a38a21d data/agotmod/worldgen/configured_feature/aspen.json
@@ -16,7 +16,7 @@ c60b878cd53d72f8bdfb260a4ada4c0b655877c7 data/agotmod/worldgen/configured_featur
 7a087664bd5472c11a860998cc5cd8146b861750 data/agotmod/worldgen/configured_feature/chestnut.json
 4e682115ea2915ebd29d885536f410b1c6cfda8e data/agotmod/worldgen/configured_feature/hawthorn.json
 f1ac85ac5071bd6154a755c90a97a2261f5da617 data/agotmod/worldgen/configured_feature/ironwood.json
-b8cedd8747f6b305ac7c7456fd846b49846e54f3 data/agotmod/worldgen/configured_feature/pine.json
+5bb6d1f6b705b2ccf92729e3075e2a9af75da4bb data/agotmod/worldgen/configured_feature/pine.json
 8b27ae0a602671745c63712213ffbcd8e220a774 data/agotmod/worldgen/configured_feature/sentinel.json
 d482d82a0a18f6f099bba0a19368613a9de0ba3d data/agotmod/worldgen/configured_feature/sycamore.json
 cfe58f15dffd7cd9a827082b5872596243c1a9d5 data/agotmod/worldgen/configured_feature/tin_ore.json

@@ -4,6 +4,7 @@ import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.entity.ModEntities;
 import net.darkflameproduction.agotmod.sound.ModSounds;
 import net.darkflameproduction.agotmod.worldgen.ModplacedFeatures;
+import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -82,7 +83,8 @@ public class ModBiomes {
                         .foliageColorOverride(0xd9d9d9)
                         .fogColor(0x000000)
                         .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
-                        .backgroundMusic(Musics.createGameMusic(ModSounds.MAMMOTH_SOUNDS)).build())
+                        .ambientLoopSound(ModSounds.WINTER_WIND)
+                        .backgroundMusic(Musics.createGameMusic(ModSounds.WINTER_WIND)).build())
                 .build();
     }
     //Haunted Forest
@@ -98,7 +100,7 @@ public class ModBiomes {
                 new BiomeGenerationSettings.Builder(context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
         //we need to follow the same order as vanilla biomes for the BiomeDefaultFeatures
         globalOverworldGeneration(biomeBuilder);
-        //BiomeDefaultFeatures.addMossyStoneBlock(biomeBuilder);
+        BiomeDefaultFeatures.addMossyStoneBlock(biomeBuilder);
         BiomeDefaultFeatures.addForestFlowers(biomeBuilder);
         BiomeDefaultFeatures.addFerns(biomeBuilder);
         BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
@@ -113,7 +115,7 @@ public class ModBiomes {
         //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FIR_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.IRONWOOD_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SENTINEL_KEY);
-        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SOLDIER_PINE_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.PINE_KEY);
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true)
@@ -129,7 +131,8 @@ public class ModBiomes {
                         .foliageColorOverride(0x324d38)
                         .fogColor(0x000000)
                         .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
-                        .backgroundMusic(Musics.createGameMusic(ModSounds.MAMMOTH_SOUNDS)).build())
+                        .ambientLoopSound(ModSounds.FOREST_WIND)
+                        .backgroundMusic(Musics.createGameMusic(ModSounds.WINTER_WIND)).build())
                 .build();
     }
     //Frostfang Foothills
@@ -170,7 +173,8 @@ public class ModBiomes {
                         .foliageColorOverride(0x324d38)
                         .fogColor(0x000000)
                         .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
-                        .backgroundMusic(Musics.createGameMusic(ModSounds.MAMMOTH_SOUNDS)).build())
+                        .ambientLoopSound(ModSounds.WINTER_WIND)
+                        .backgroundMusic(Musics.createGameMusic(ModSounds.WINTER_WIND)).build())
                 .build();
     }
     //Frostfangs
@@ -211,7 +215,8 @@ public class ModBiomes {
                         .foliageColorOverride(0x324d38)
                         .fogColor(0x000000)
                         .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
-                        .backgroundMusic(Musics.createGameMusic(ModSounds.MAMMOTH_SOUNDS)).build())
+                        .ambientLoopSound(ModSounds.WINTER_WIND)
+                        .backgroundMusic(Musics.createGameMusic(ModSounds.WINTER_WIND)).build())
                 .build();
     }
     //Valley Of Thenn
@@ -229,7 +234,7 @@ public class ModBiomes {
         globalOverworldGeneration(biomeBuilder);
         BiomeDefaultFeatures.addDefaultCarversAndLakes(biomeBuilder);
         BiomeDefaultFeatures.addDefaultSprings(biomeBuilder);
-        BiomeDefaultFeatures.addMossyStoneBlock(biomeBuilder);
+        //BiomeDefaultFeatures.addMossyStoneBlock(biomeBuilder);
         BiomeDefaultFeatures.addForestFlowers(biomeBuilder);
         BiomeDefaultFeatures.addFerns(biomeBuilder);
         BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
@@ -249,7 +254,7 @@ public class ModBiomes {
                 .specialEffects((new BiomeSpecialEffects.Builder())
                         .waterColor(0x3d4ed1)
                         .waterFogColor(0x0c113b)
-                        .skyColor(0x3e6bb5)
+                        .skyColor(0x5a6ef2)
                         .grassColorOverride(0x5c9967)
                         .foliageColorOverride(0x324d38)
                         .fogColor(0x000000)

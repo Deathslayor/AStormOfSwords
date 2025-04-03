@@ -258,6 +258,9 @@
   "sounds.agotmod.mammoth_attack": "Attacking Mammoth",
 
 
+  "sounds.agotmod.winter_wind": "Blowing Wind",
+  "sounds.agotmod.forest_wind": "Blowing Wind",
+
   "entity.minecraft.villager.agotmod.minter": "Minter",
 
   "block.agotmod.weirwood_log": "Weirwood Log",

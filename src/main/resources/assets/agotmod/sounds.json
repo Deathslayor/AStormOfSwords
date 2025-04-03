@@ -16,6 +16,18 @@
     "sounds": [
       "agotmod:mammoth_idle"
     ]
+  },
+  "winter_wind": {
+    "subtitles": "sounds.agotmod:winter_wind",
+    "sounds": [
+      "agotmod:winter_wind"
+    ]
+  },
+  "forest_wind": {
+    "subtitles": "sounds.agotmod:forest_wind",
+    "sounds": [
+      "agotmod:forest_wind"
+    ]
   }
 }
 

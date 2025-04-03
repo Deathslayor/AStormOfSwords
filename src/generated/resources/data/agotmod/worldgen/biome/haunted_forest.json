@@ -2,6 +2,7 @@
   "carvers": [],
   "downfall": 0.8,
   "effects": {
+    "ambient_sound": "agotmod:forest_wind",
     "fog_color": 0,
     "foliage_color": 3296568,
     "grass_color": 5732959,
@@ -15,7 +16,7 @@
       "max_delay": 24000,
       "min_delay": 12000,
       "replace_current_music": false,
-      "sound": "agotmod:mammoth_sounds"
+      "sound": "agotmod:winter_wind"
     },
     "sky_color": 7964853,
     "water_color": 4017873,
@@ -25,7 +26,8 @@
     [],
     [],
     [
-      "minecraft:amethyst_geode"
+      "minecraft:amethyst_geode",
+      "minecraft:forest_rock"
     ],
     [],
     [],
@@ -70,7 +72,8 @@
       "agotmod:ash",
       "agotmod:chestnut",
       "agotmod:ironwood",
-      "agotmod:sentinel"
+      "agotmod:sentinel",
+      "agotmod:pine"
     ],
     [
       "minecraft:freeze_top_layer"
