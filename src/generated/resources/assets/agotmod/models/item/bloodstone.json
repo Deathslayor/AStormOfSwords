@@ -1,6 +1,7 @@
 {
-  "parent": "agotmod:item/bloodstone",
+  "parent": "item/generated",
   "textures": {
     "layer0": "agotmod:item/bloodstone"
   }
 }
+

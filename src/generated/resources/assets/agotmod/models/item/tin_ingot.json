@@ -1,5 +1,5 @@
 {
-  "parent": "agotmod:item/tin_ingot",
+  "parent": "item/generated",
   "textures": {
     "layer0": "agotmod:item/tin_ingot"
   }

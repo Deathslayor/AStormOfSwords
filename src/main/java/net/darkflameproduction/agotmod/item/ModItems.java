@@ -15,11 +15,13 @@ import net.darkflameproduction.agotmod.armor.custom.stark.StarkLevyArmorItem;
 import net.darkflameproduction.agotmod.armor.custom.stark.StarkNoblePlateArmorItem;
 import net.darkflameproduction.agotmod.armor.custom.stark.StarkPlateArmorItem;
 import net.darkflameproduction.agotmod.entity.ModEntities;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraft.world.item.Item;
 
 // A utility class for creating and registering modded items
 public class ModItems {
@@ -182,6 +184,7 @@ public class ModItems {
             Item::new);
 
     // GEMS
+
     public static final DeferredItem<Item> YELLOW_DIAMOND = ITEMS.registerItem("yellow_diamond",
             Item::new);
     public static final DeferredItem<Item> TRANSPARENT_DIAMOND = ITEMS.registerItem("transparent_diamond",

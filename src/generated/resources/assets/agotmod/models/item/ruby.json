@@ -1,6 +1,7 @@
 {
-  "parent": "agotmod:item/ruby",
+  "parent": "item/generated",
   "textures": {
     "layer0": "agotmod:item/ruby"
   }
 }
+

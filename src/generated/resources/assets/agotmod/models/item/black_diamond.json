@@ -1,6 +1,7 @@
 {
-  "parent": "agotmod:item/black_diamond",
+  "parent": "item/generated",
   "textures": {
     "layer0": "agotmod:item/black_diamond"
   }
 }
+

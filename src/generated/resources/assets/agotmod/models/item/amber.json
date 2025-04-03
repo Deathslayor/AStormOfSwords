@@ -1,6 +1,7 @@
 {
-  "parent": "agotmod:item/amber",
+  "parent": "item/generated",
   "textures": {
     "layer0": "agotmod:item/amber"
   }
 }
+

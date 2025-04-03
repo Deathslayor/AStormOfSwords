@@ -1,6 +1,7 @@
 {
-  "parent": "agotmod:item/chalcedony",
+  "parent": "item/generated",
   "textures": {
     "layer0": "agotmod:item/chalcedony"
   }
 }
+

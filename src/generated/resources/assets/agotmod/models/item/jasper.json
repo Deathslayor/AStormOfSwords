@@ -1,6 +1,7 @@
 {
-  "parent": "agotmod:item/jasper",
+  "parent": "item/generated",
   "textures": {
     "layer0": "agotmod:item/jasper"
   }
 }
+

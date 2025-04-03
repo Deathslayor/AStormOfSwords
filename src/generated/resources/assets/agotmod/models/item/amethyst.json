@@ -1,6 +1,7 @@
 {
-  "parent": "agotmod:item/amethyst",
+  "parent": "item/generated",
   "textures": {
     "layer0": "agotmod:item/amethyst"
   }
 }
+

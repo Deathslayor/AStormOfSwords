@@ -1,5 +1,5 @@
 {
-  "parent": "agotmod:item/coin",
+  "parent": "item/generated",
   "textures": {
     "layer0": "agotmod:item/coin"
   }

@@ -1,5 +1,5 @@
 {
-  "parent": "agotmod:item/raw_chicken_nuggets",
+  "parent": "item/generated",
   "textures": {
     "layer0": "agotmod:item/raw_chicken_nuggets"
   }

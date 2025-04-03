@@ -1,5 +1,5 @@
 {
-  "parent": "agotmod:item/cooked_blood_sausage",
+  "parent": "item/generated",
   "textures": {
     "layer0": "agotmod:item/cooked_blood_sausage"
   }
