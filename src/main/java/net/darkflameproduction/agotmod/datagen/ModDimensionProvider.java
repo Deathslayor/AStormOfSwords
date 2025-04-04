@@ -47,7 +47,6 @@ public class ModDimensionProvider {
     public static @Unmodifiable List<Holder<Zone>> getZones(@NotNull HolderGetter<Zone> ZoneRegistry) {
         return List.of(
                 ZoneRegistry.getOrThrow(ModZones.MANGOVES),
-                ZoneRegistry.getOrThrow(ModZones.TAIGA),
                 ZoneRegistry.getOrThrow(ModZones.SNOWY_PLAINS),
                 ZoneRegistry.getOrThrow(ModZones.PLAINS),
                 ZoneRegistry.getOrThrow(ModZones.WINDSWEPT_HILLS),
@@ -66,11 +65,12 @@ public class ModDimensionProvider {
                 ZoneRegistry.getOrThrow(ModZones.COLD_OCEAN),
                 ZoneRegistry.getOrThrow(ModZones.DEEP_COLD_OCEAN),
                 ZoneRegistry.getOrThrow(ModZones.BASALT_DELTAS),
-                ZoneRegistry.getOrThrow(ModZones.OLD_GROWTH_SPRUCE_TAIGA),
                 ZoneRegistry.getOrThrow(ModZones.FROSTFANG_FOOTHILLS),
                 ZoneRegistry.getOrThrow(ModZones.FROSTFANGS),
                 ZoneRegistry.getOrThrow(ModZones.VALLEY_OF_THENN),
-                ZoneRegistry.getOrThrow(ModZones.LANDS_OF_ALWAYS_WINTER)
+                ZoneRegistry.getOrThrow(ModZones.LANDS_OF_ALWAYS_WINTER),
+                ZoneRegistry.getOrThrow(ModZones.WOLFSWOOD),
+                ZoneRegistry.getOrThrow(ModZones.IRONWOOD)
         );
     }
 

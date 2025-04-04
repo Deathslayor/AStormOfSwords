@@ -25,6 +25,8 @@ public class ModOverworldRegion extends Region {
             modifiedVanillaOverworldBuilder.replaceBiome(Biomes.SNOWY_SLOPES, ModBiomes.FROSTFANG_FOOTHILLS);
             modifiedVanillaOverworldBuilder.replaceBiome(Biomes.FROZEN_PEAKS, ModBiomes.FROSTFANGS);
             modifiedVanillaOverworldBuilder.replaceBiome(Biomes.MEADOW, ModBiomes.VALLEY_OF_THENN);
+            modifiedVanillaOverworldBuilder.replaceBiome(Biomes.TAIGA, ModBiomes.WOLFSWOOD);
+            modifiedVanillaOverworldBuilder.replaceBiome(Biomes.OLD_GROWTH_SPRUCE_TAIGA, ModBiomes.IRONWOOD);
         });
     }
 }

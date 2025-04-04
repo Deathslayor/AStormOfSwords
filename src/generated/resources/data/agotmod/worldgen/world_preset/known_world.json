@@ -11,7 +11,6 @@
           "spawn_pixel_y": 6000,
           "zones": [
             "agotmod:mangroves",
-            "agotmod:taiga",
             "agotmod:snowy_plains",
             "agotmod:plains",
             "agotmod:windswept_hills",
@@ -30,11 +29,12 @@
             "agotmod:cold_ocean",
             "agotmod:deep_cold_ocean",
             "agotmod:basalt_deltas",
-            "agotmod:old_growth_spruce_taiga",
             "agotmod:frostfang_foothills",
             "agotmod:frostfangs",
             "agotmod:valley_of_thenn",
-            "agotmod:lands_of_always_winter"
+            "agotmod:lands_of_always_winter",
+            "agotmod:wolfswood",
+            "agotmod:ironwood"
           ]
         }
       }

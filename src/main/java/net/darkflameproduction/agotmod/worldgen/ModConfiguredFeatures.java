@@ -166,10 +166,9 @@ public class ModConfiguredFeatures {
 
         register(context, BLACKBARK_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBLocks.BLACKBARK_LOG.get()),  // Blackbark log
-                // Taller trunk with more branch variance to penetrate deeper into leaves
-                new FancyTrunkPlacer(9, 6, 6),
-                BlockStateProvider.simple(ModBLocks.BLACKBARK_LEAVES.get()),
-                // Increased foliage height and offset to surround the trunk more
+                new FancyTrunkPlacer(7, 2, 3),  // Mimicking Cherry tree trunk
+
+                BlockStateProvider.simple(ModBLocks.BLACKBARK_LEAVES.get()),  // Beech leaves instead of Weirwood leaves
                 new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
 
                 new TwoLayersFeatureSize(1, 0, 2)).build());

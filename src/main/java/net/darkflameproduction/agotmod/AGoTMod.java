@@ -14,6 +14,8 @@ import net.darkflameproduction.agotmod.villager.ModVillagers;
 import net.darkflameproduction.agotmod.worldgen.biome.ModTerrablender;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -27,6 +29,12 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.tags.TagKey;
+
+import static net.darkflameproduction.agotmod.block.ModBLocks.WEIRWOOD_LOG;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(AGoTMod.MOD_ID)
@@ -106,6 +114,7 @@ public class AGoTMod {
             event.enqueueWork(ModItemProperties::addCustomItemProperties);
         }
     }
+
 
     @Contract("_ -> new")
     @ApiStatus.Internal

@@ -17,7 +17,6 @@ import java.awt.*;
 
 public class ModZones {
     public static final ResourceKey<Zone> MANGOVES = getKey("mangroves");
-    public static final ResourceKey<Zone> TAIGA = getKey("taiga");
     public static final ResourceKey<Zone> SNOWY_PLAINS = getKey("snowy_plains");
     public static final ResourceKey<Zone> PLAINS = getKey("plains");
     public static final ResourceKey<Zone> WINDSWEPT_HILLS = getKey("windswept_hills");
@@ -35,17 +34,18 @@ public class ModZones {
     public static final ResourceKey<Zone> COLD_OCEAN = getKey("cold_ocean");
     public static final ResourceKey<Zone> DEEP_COLD_OCEAN = getKey("deep_cold_ocean");
     public static final ResourceKey<Zone> BASALT_DELTAS = getKey("basalt_deltas");
-    public static final ResourceKey<Zone> OLD_GROWTH_SPRUCE_TAIGA = getKey("old_growth_spruce_taiga");
     public static final ResourceKey<Zone> HAUNTED_FOREST = getKey("haunted_forest");
     public static final ResourceKey<Zone> VALLEY_OF_THENN = getKey("valley_of_thenn");
     public static final ResourceKey<Zone> FROSTFANG_FOOTHILLS = getKey("frostfang_foothills");
     public static final ResourceKey<Zone> FROSTFANGS = getKey("frostfangs");
     public static final ResourceKey<Zone> LANDS_OF_ALWAYS_WINTER = getKey("lands_of_always_winter");
+    public static final ResourceKey<Zone> WOLFSWOOD = getKey("wolfswood");
+    public static final ResourceKey<Zone> IRONWOOD = getKey("ironwood");
 
     public static void bootstrap(BootstrapContext<Zone> context) {
         // The North
         context.register(MANGOVES, new ZoneBuilder().setBiome(getBiome(context, Biomes.MANGROVE_SWAMP)).setColor(new Color(34, 51, 34)).setHeight(-3).setTerrainModifier(4).build());
-        context.register(TAIGA, new ZoneBuilder().setBiome(getBiome(context, Biomes.TAIGA)).setColor(new Color(43, 70, 43)).setHeight(3).setTerrainModifier(6).build());
+        context.register(WOLFSWOOD, new ZoneBuilder().setBiome(getBiome(context, ModBiomes.WOLFSWOOD)).setColor(new Color(43, 70, 43)).setHeight(3).setTerrainModifier(6).build());
         context.register(SNOWY_PLAINS, new ZoneBuilder().setBiome(getBiome(context, Biomes.SNOWY_PLAINS)).setColor(new Color(57, 95, 57)).setHeight(3).setTerrainModifier(4).build());
         context.register(PLAINS, new ZoneBuilder().setBiome(getBiome(context, Biomes.PLAINS)).setColor(new Color(57, 95, 57)).setHeight(3).setTerrainModifier(4).build());
         context.register(WINDSWEPT_HILLS, new ZoneBuilder().setBiome(getBiome(context, Biomes.WINDSWEPT_HILLS)).setColor(new Color(151, 151, 151)).setHeight(33).setTerrainModifier(20).setPixelWeight(1.5).build());
@@ -55,7 +55,7 @@ public class ModZones {
         context.register(SAVANNA, new ZoneBuilder().setBiome(getBiome(context, Biomes.SAVANNA)).setColor(new Color(98, 123, 64)).setHeight(3).setTerrainModifier(0.1).build());
         context.register(FOREST, new ZoneBuilder().setBiome(getBiome(context, Biomes.FOREST)).setColor(new Color(61, 81, 51)).setHeight(3).setTerrainModifier(7).build());
         context.register(MEADOW, new ZoneBuilder().setBiome(getBiome(context, Biomes.MEADOW)).setColor(new Color(72, 122, 72)).setHeight(3).build());
-        context.register(OLD_GROWTH_SPRUCE_TAIGA, new ZoneBuilder().setBiome(getBiome(context, Biomes.OLD_GROWTH_SPRUCE_TAIGA)).setColor(new Color(38, 59, 38)).setHeight(3).setTerrainModifier(6).build());
+        context.register(IRONWOOD, new ZoneBuilder().setBiome(getBiome(context, ModBiomes.IRONWOOD)).setColor(new Color(38, 59, 38)).setHeight(3).setTerrainModifier(6).build());
         // wall
         context.register(THE_WALL, new ZoneBuilder().setBiome(getBiome(context, Biomes.FROZEN_PEAKS)).setColor(new Color(255, 255, 255)).setStoneBlock(Blocks.PACKED_ICE).setDirtBlock(Blocks.PACKED_ICE).setSurfaceBlock(Blocks.SNOW_BLOCK).setHeight(213).setTerrainModifier(0).setPixelWeight(16).build());
         //North Of The Wall
