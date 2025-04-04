@@ -75,10 +75,11 @@ public class ModConfiguredFeatures {
 
         register(context, WEIRWOOD_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBLocks.WEIRWOOD_LOG.get()),
-                new FancyTrunkPlacer(9, 3, 4),  // Mimicking Cherry tree trunk
-
+                // Taller trunk with more branch variance to penetrate deeper into leaves
+                new FancyTrunkPlacer(9, 6, 6),
                 BlockStateProvider.simple(ModBLocks.WEIRWOOD_LEAVES.get()),
-                new CherryFoliagePlacer(ConstantInt.of(5), ConstantInt.of(4), ConstantInt.of(6), 0.25f, 0.1f, 0.5f, 0.8f),
+                // Increased foliage height and offset to surround the trunk more
+                new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
 
                 new TwoLayersFeatureSize(1, 0, 2)).build());
 
