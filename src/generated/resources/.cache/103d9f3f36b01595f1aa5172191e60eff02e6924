@@ -1,4 +1,4 @@
-// 1.21.3	2025-04-04T12:08:40.3035668	Registries
+// 1.21.3	2025-04-04T13:51:41.0249217	Registries
 ffe3d912e363745b0043a61fc7b67f35a53f2228 data/agotmod/neoforge/biome_modifier/add_tin_ore.json
 2cd0b3508ddcea7e502f1cf50b1ab12343351354 data/agotmod/neoforge/biome_modifier/create_weirwood_tree.json
 3afcdacdb87e2deda10b1fe27c5811a14f392390 data/agotmod/neoforge/biome_modifier/spawn_mammoth.json
@@ -7,11 +7,11 @@ ffe3d912e363745b0043a61fc7b67f35a53f2228 data/agotmod/neoforge/biome_modifier/ad
 cb38048a023640d92256232eb9e77ba3af80b36d data/agotmod/worldgen/biome/haunted_forest.json
 d7880d23ddecb8f3e2f7727b44822476d2007e8e data/agotmod/worldgen/biome/lands_of_always_winter.json
 15719c85707ec25613b54e760f4d883e77ada1bc data/agotmod/worldgen/biome/valley_of_thenn.json
-acc018176eabb7260126309d37fd60ee805e80a3 data/agotmod/worldgen/configured_feature/alder.json
+8095114aba496217399e9d7b0b8a711d9e55748e data/agotmod/worldgen/configured_feature/alder.json
 1946e23ea4dcbc6ecacbcdc98291a9695614430c data/agotmod/worldgen/configured_feature/ash.json
-b243547488d3ee7620d2e075d87db56c9615460b data/agotmod/worldgen/configured_feature/aspen.json
+73952635c371dd2bc0ccf3fc42c8486e214b8fab data/agotmod/worldgen/configured_feature/aspen.json
 5febf4b36ddaf67c0513cdb2a58cccb1707ac2dc data/agotmod/worldgen/configured_feature/beech.json
-99bda66e33e533eb34ab934c4144b55adcdee2e1 data/agotmod/worldgen/configured_feature/blackbark.json
+62ed0074b174692e128c4e85249fee292cbc549e data/agotmod/worldgen/configured_feature/blackbark.json
 af7b8a414dd3660fd69a0e3e066b321eeb1654f9 data/agotmod/worldgen/configured_feature/cedar.json
 835a605c379766c517a5f2fc349a9248dcec75db data/agotmod/worldgen/configured_feature/chestnut.json
 ae736a1d2f03b3737c69f05fff76b68361ccaa0a data/agotmod/worldgen/configured_feature/hawthorn.json

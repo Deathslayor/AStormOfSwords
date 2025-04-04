@@ -72,30 +72,45 @@ public class ModCreativeArmour {
                         pOutput.accept(ModItems.BOLTEN_NOBLE_LEGGINGS.get());
                         pOutput.accept(ModItems.BOLTEN_NOBLE_BOOTS.get());
 
-                        pOutput.accept(ModItems.IRONBORN_LEVY_HELMET.get());
-                        pOutput.accept(ModItems.IRONBORN_LEVY_CHESTPLATE.get());
-                        pOutput.accept(ModItems.IRONBORN_LEVY_LEGGINGS.get());
-                        pOutput.accept(ModItems.IRONBORN_LEVY_BOOTS.get());
+                        pOutput.accept(ModItems.MOUNTAIN_CLAN_LEVY_HELMET.get());
+                        pOutput.accept(ModItems.MOUNTAIN_CLAN_LEVY_CHESTPLATE.get());
+                        pOutput.accept(ModItems.MOUNTAIN_CLAN_LEVY_LEGGINGS.get());
+                        pOutput.accept(ModItems.MOUNTAIN_CLAN_LEVY_BOOTS.get());
 
-                        pOutput.accept(ModItems.IRONBORN_PLATE_HELMET.get());
-                        pOutput.accept(ModItems.IRONBORN_PLATE_CHESTPLATE.get());
-                        pOutput.accept(ModItems.IRONBORN_PLATE_LEGGINGS.get());
-                        pOutput.accept(ModItems.IRONBORN_PLATE_BOOTS.get());
+                        pOutput.accept(ModItems.MOUNTAIN_CLAN_PLATE_HELMET.get());
+                        pOutput.accept(ModItems.MOUNTAIN_CLAN_PLATE_CHESTPLATE.get());
+                        pOutput.accept(ModItems.MOUNTAIN_CLAN_PLATE_LEGGINGS.get());
+                        pOutput.accept(ModItems.MOUNTAIN_CLAN_PLATE_BOOTS.get());
 
-                        pOutput.accept(ModItems.IRONBORN_NOBLE_HELMET.get());
-                        pOutput.accept(ModItems.IRONBORN_NOBLE_CHESTPLATE.get());
-                        pOutput.accept(ModItems.IRONBORN_NOBLE_LEGGINGS.get());
-                        pOutput.accept(ModItems.IRONBORN_NOBLE_BOOTS.get());
+                        pOutput.accept(ModItems.MOUNTAIN_CLAN_CHIEF_HELMET.get());
+                        pOutput.accept(ModItems.MOUNTAIN_CLAN_CHIEF_CHESTPLATE.get());
+                        pOutput.accept(ModItems.MOUNTAIN_CLAN_CHIEF_LEGGINGS.get());
+                        pOutput.accept(ModItems.MOUNTAIN_CLAN_CHIEF_BOOTS.get());
 
-                        pOutput.accept(ModItems.WILDLING_LEATHER_HELMET.get());
-                        pOutput.accept(ModItems.WILDLING_LEATHER_CHESTPLATE.get());
-                        pOutput.accept(ModItems.WILDLING_LEATHER_LEGGINGS.get());
-                        pOutput.accept(ModItems.WILDLING_LEATHER_BOOTS.get());
+                        pOutput.accept(ModItems.NIGHT_WATCH_RANGER_HELMET.get());
+                        pOutput.accept(ModItems.NIGHT_WATCH_RANGER_CHESTPLATE.get());
+                        pOutput.accept(ModItems.NIGHT_WATCH_RANGER_LEGGINGS.get());
+                        pOutput.accept(ModItems.NIGHT_WATCH_RANGER_BOOTS.get());
+
+                        pOutput.accept(ModItems.NIGHT_WATCH_LEATHER_HELMET.get());
+                        pOutput.accept(ModItems.NIGHT_WATCH_LEATHER_CHESTPLATE.get());
+                        pOutput.accept(ModItems.NIGHT_WATCH_LEATHER_LEGGINGS.get());
+                        pOutput.accept(ModItems.NIGHT_WATCH_LEATHER_BOOTS.get());
+
+                        pOutput.accept(ModItems.NIGHT_WATCH_ELITE_HELMET.get());
+                        pOutput.accept(ModItems.NIGHT_WATCH_ELITE_CHESTPLATE.get());
+                        pOutput.accept(ModItems.NIGHT_WATCH_ELITE_LEGGINGS.get());
+                        pOutput.accept(ModItems.NIGHT_WATCH_ELITE_BOOTS.get());
 
                         pOutput.accept(ModItems.WILDLING_FUR_HELMET.get());
                         pOutput.accept(ModItems.WILDLING_FUR_CHESTPLATE.get());
                         pOutput.accept(ModItems.WILDLING_FUR_LEGGINGS.get());
                         pOutput.accept(ModItems.WILDLING_FUR_BOOTS.get());
+
+                        pOutput.accept(ModItems.WILDLING_LEATHER_HELMET.get());
+                        pOutput.accept(ModItems.WILDLING_LEATHER_CHESTPLATE.get());
+                        pOutput.accept(ModItems.WILDLING_LEATHER_LEGGINGS.get());
+                        pOutput.accept(ModItems.WILDLING_LEATHER_BOOTS.get());
 
                         pOutput.accept(ModItems.WILDLING_CHIEF_HELMET.get());
                         pOutput.accept(ModItems.WILDLING_CHIEF_CHESTPLATE.get());
@@ -117,35 +132,20 @@ public class ModCreativeArmour {
                         pOutput.accept(ModItems.THENN_NOBLE_LEGGINGS.get());
                         pOutput.accept(ModItems.THENN_NOBLE_BOOTS.get());
 
-                        pOutput.accept(ModItems.MOUNTAIN_CLAN_LEVY_HELMET.get());
-                        pOutput.accept(ModItems.MOUNTAIN_CLAN_LEVY_CHESTPLATE.get());
-                        pOutput.accept(ModItems.MOUNTAIN_CLAN_LEVY_LEGGINGS.get());
-                        pOutput.accept(ModItems.MOUNTAIN_CLAN_LEVY_BOOTS.get());
+                        pOutput.accept(ModItems.IRONBORN_LEVY_HELMET.get());
+                        pOutput.accept(ModItems.IRONBORN_LEVY_CHESTPLATE.get());
+                        pOutput.accept(ModItems.IRONBORN_LEVY_LEGGINGS.get());
+                        pOutput.accept(ModItems.IRONBORN_LEVY_BOOTS.get());
 
-                        pOutput.accept(ModItems.MOUNTAIN_CLAN_PLATE_HELMET.get());
-                        pOutput.accept(ModItems.MOUNTAIN_CLAN_PLATE_CHESTPLATE.get());
-                        pOutput.accept(ModItems.MOUNTAIN_CLAN_PLATE_LEGGINGS.get());
-                        pOutput.accept(ModItems.MOUNTAIN_CLAN_PLATE_BOOTS.get());
+                        pOutput.accept(ModItems.IRONBORN_PLATE_HELMET.get());
+                        pOutput.accept(ModItems.IRONBORN_PLATE_CHESTPLATE.get());
+                        pOutput.accept(ModItems.IRONBORN_PLATE_LEGGINGS.get());
+                        pOutput.accept(ModItems.IRONBORN_PLATE_BOOTS.get());
 
-                        pOutput.accept(ModItems.MOUNTAIN_CLAN_CHIEF_HELMET.get());
-                        pOutput.accept(ModItems.MOUNTAIN_CLAN_CHIEF_CHESTPLATE.get());
-                        pOutput.accept(ModItems.MOUNTAIN_CLAN_CHIEF_LEGGINGS.get());
-                        pOutput.accept(ModItems.MOUNTAIN_CLAN_CHIEF_BOOTS.get());
-
-                        pOutput.accept(ModItems.NIGHT_WATCH_LEATHER_HELMET.get());
-                        pOutput.accept(ModItems.NIGHT_WATCH_LEATHER_CHESTPLATE.get());
-                        pOutput.accept(ModItems.NIGHT_WATCH_LEATHER_LEGGINGS.get());
-                        pOutput.accept(ModItems.NIGHT_WATCH_LEATHER_BOOTS.get());
-
-                        pOutput.accept(ModItems.NIGHT_WATCH_RANGER_HELMET.get());
-                        pOutput.accept(ModItems.NIGHT_WATCH_RANGER_CHESTPLATE.get());
-                        pOutput.accept(ModItems.NIGHT_WATCH_RANGER_LEGGINGS.get());
-                        pOutput.accept(ModItems.NIGHT_WATCH_RANGER_BOOTS.get());
-
-                        pOutput.accept(ModItems.NIGHT_WATCH_ELITE_HELMET.get());
-                        pOutput.accept(ModItems.NIGHT_WATCH_ELITE_CHESTPLATE.get());
-                        pOutput.accept(ModItems.NIGHT_WATCH_ELITE_LEGGINGS.get());
-                        pOutput.accept(ModItems.NIGHT_WATCH_ELITE_BOOTS.get());
+                        pOutput.accept(ModItems.IRONBORN_NOBLE_HELMET.get());
+                        pOutput.accept(ModItems.IRONBORN_NOBLE_CHESTPLATE.get());
+                        pOutput.accept(ModItems.IRONBORN_NOBLE_LEGGINGS.get());
+                        pOutput.accept(ModItems.IRONBORN_NOBLE_BOOTS.get());
 
                     })
                     .build());

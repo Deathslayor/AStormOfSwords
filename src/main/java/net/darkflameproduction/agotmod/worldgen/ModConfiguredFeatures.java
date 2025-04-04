@@ -166,10 +166,11 @@ public class ModConfiguredFeatures {
 
         register(context, BLACKBARK_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBLocks.BLACKBARK_LOG.get()),  // Blackbark log
-                new FancyTrunkPlacer(8, 3, 4),  // Mimicking Cherry tree trunk
-
-                BlockStateProvider.simple(ModBLocks.BLACKBARK_LEAVES.get()),  // Blackbark leaves
-                new CherryFoliagePlacer(ConstantInt.of(5), ConstantInt.of(4), ConstantInt.of(6), 0.25f, 0.1f, 0.5f, 0.8f),
+                // Taller trunk with more branch variance to penetrate deeper into leaves
+                new FancyTrunkPlacer(9, 6, 6),
+                BlockStateProvider.simple(ModBLocks.BLACKBARK_LEAVES.get()),
+                // Increased foliage height and offset to surround the trunk more
+                new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
 
                 new TwoLayersFeatureSize(1, 0, 2)).build());
 
@@ -177,16 +178,16 @@ public class ModConfiguredFeatures {
                 BlockStateProvider.simple(ModBLocks.ASPEN_LOG.get()),
                 new StraightTrunkPlacer(7, 2, 2),
                 BlockStateProvider.simple(ModBLocks.ASPEN_LEAVES.get()),
-                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(3), ConstantInt.of(3)),
-                new TwoLayersFeatureSize(1, 0, 1)
+                new SpruceFoliagePlacer(ConstantInt.of(2), ConstantInt.of(2), ConstantInt.of(2)),
+                new TwoLayersFeatureSize(1, 1, 1)
         ).build());
 
         register(context, ALDER_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBLocks.ALDER_LOG.get()),
                 new StraightTrunkPlacer(7, 2, 2),
                 BlockStateProvider.simple(ModBLocks.ALDER_LEAVES.get()),
-                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(3), ConstantInt.of(3)),
-                new TwoLayersFeatureSize(1, 0, 1)
+                new SpruceFoliagePlacer(ConstantInt.of(2), ConstantInt.of(3), ConstantInt.of(2)),
+                new TwoLayersFeatureSize(1, 1, 1)
         ).build());
 
 
