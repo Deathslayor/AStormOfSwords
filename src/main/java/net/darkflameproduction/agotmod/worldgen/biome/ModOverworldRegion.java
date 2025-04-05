@@ -27,6 +27,10 @@ public class ModOverworldRegion extends Region {
             modifiedVanillaOverworldBuilder.replaceBiome(Biomes.MEADOW, ModBiomes.VALLEY_OF_THENN);
             modifiedVanillaOverworldBuilder.replaceBiome(Biomes.TAIGA, ModBiomes.WOLFSWOOD);
             modifiedVanillaOverworldBuilder.replaceBiome(Biomes.OLD_GROWTH_SPRUCE_TAIGA, ModBiomes.IRONWOOD);
+            modifiedVanillaOverworldBuilder.replaceBiome(Biomes.TAIGA, ModBiomes.WOLFSWOOD_CLEARING);
+            modifiedVanillaOverworldBuilder.replaceBiome(Biomes.WINDSWEPT_HILLS, ModBiomes.NORTHERN_HILLS);
+            modifiedVanillaOverworldBuilder.replaceBiome(Biomes.JAGGED_PEAKS, ModBiomes.NORTHERN_MOUNTAINS);
+            modifiedVanillaOverworldBuilder.replaceBiome(Biomes.SAVANNA, ModBiomes.BARROWLANDS);
         });
     }
 }

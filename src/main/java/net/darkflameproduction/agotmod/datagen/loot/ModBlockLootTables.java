@@ -464,7 +464,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(ModBLocks.ALDER_SLAB.get(),
                 block -> createSlabItemTable(ModBLocks.ALDER_SLAB.get()));
 
-        // ---------------------------(TREES)--------------------------- //
+        // ---------------------------(FLOWERS)--------------------------- //
+        this.dropSelf(ModBLocks.WINTER_ROSE.get());
 
         /** // ---------------------------(NORMAL BLOCKS)--------------------------- // */
     }

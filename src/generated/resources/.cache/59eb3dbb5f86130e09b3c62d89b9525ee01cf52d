@@ -1,4 +1,4 @@
-// 1.21.3	2024-11-14T18:08:09.075737852	Loot Tables
+// 1.21.3	2025-04-05T20:03:49.1761204	Loot Tables
 dcab3871310df0811beb8de47adc40c83d85986b data/agotmod/loot_table/blocks/alder_button.json
 81071778b6225f49c02483465d22441e05162a1b data/agotmod/loot_table/blocks/alder_door.json
 33ccfef8d939079aebfc7963299df0ced91481b5 data/agotmod/loot_table/blocks/alder_fence.json
@@ -69,7 +69,6 @@ a3392db7013cfaf0ea7b5f3a1e6c2b1dac7a51af data/agotmod/loot_table/blocks/beech_st
 9fd546a3d675b4d03a6866f60c62e3f91b8c1218 data/agotmod/loot_table/blocks/beech_wall.json
 f02af37b1f2914abaee72487872ced3f86f92ef2 data/agotmod/loot_table/blocks/beech_wood.json
 78c34f49962648c0a01484b529e7065d3acaa31a data/agotmod/loot_table/blocks/beech_wood_stripped.json
-759c7bb93c5225fa4e260d5e241155242b69be99 data/agotmod/loot_table/blocks/black_diamond_block.json
 efad34f8ad998fa9ac938a706eaf08c082ccb8ce data/agotmod/loot_table/blocks/blackbark_button.json
 77199da4059380ce290d9df51bcaa09386616d8e data/agotmod/loot_table/blocks/blackbark_door.json
 6970db9e8d8ee59bf42628214cb894025c21228d data/agotmod/loot_table/blocks/blackbark_fence.json
@@ -86,6 +85,7 @@ b5911bbed9025eca14fc2d3f7bb60e154087ba4d data/agotmod/loot_table/blocks/blackbar
 4010bb15c3bcdcebba527d14b53ec11519bf38e8 data/agotmod/loot_table/blocks/blackbark_wall.json
 a4b89708439728c9e3971803028e00c1809ec80f data/agotmod/loot_table/blocks/blackbark_wood.json
 3e8d5e4d9d875b7c95ffc5c615d622fc09d46fbb data/agotmod/loot_table/blocks/blackbark_wood_stripped.json
+759c7bb93c5225fa4e260d5e241155242b69be99 data/agotmod/loot_table/blocks/black_diamond_block.json
 b761590c87dfb982ed41a51f1ac082212f5f33fc data/agotmod/loot_table/blocks/bloodstone_block.json
 46695b1982c2477b19b6351e7ea48f96cd00ccec data/agotmod/loot_table/blocks/bloodstone_deepslate_ore.json
 2b5ff91692738f9d8cacb129d2d5a211f5046402 data/agotmod/loot_table/blocks/bloodstone_ore.json
@@ -271,4 +271,5 @@ cb8d47df6a5d4c5356111daa109fb051c73c000b data/agotmod/loot_table/blocks/weirwood
 cfbb70c62567aaaeafb6bdd1cce6038c85ea6413 data/agotmod/loot_table/blocks/weirwood_trapdoor.json
 ce09aed9d48db8165c808a62844e22c71d93d5a9 data/agotmod/loot_table/blocks/weirwood_wall.json
 9fbbbe36cd1471e65caf9209710f89ac145b9705 data/agotmod/loot_table/blocks/weirwood_wood.json
+2a7ae40f5083c13e499d75fc9e4fde8e48048f5b data/agotmod/loot_table/blocks/winter_rose.json
 015716c07825bc0adc2965c574b6894ea7f74e99 data/agotmod/loot_table/blocks/yellow_diamond_block.json

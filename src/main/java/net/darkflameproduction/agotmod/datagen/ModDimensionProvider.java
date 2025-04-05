@@ -5,7 +5,6 @@ import dev.tocraft.ctgen.worldgen.MapSettingsBuilder;
 import dev.tocraft.ctgen.xtend.CTRegistries;
 import dev.tocraft.ctgen.zone.Zone;
 import net.darkflameproduction.agotmod.AGoTMod;
-import net.darkflameproduction.agotmod.worldgen.biome.ModBiomes;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -49,13 +48,9 @@ public class ModDimensionProvider {
                 ZoneRegistry.getOrThrow(ModZones.MANGOVES),
                 ZoneRegistry.getOrThrow(ModZones.SNOWY_PLAINS),
                 ZoneRegistry.getOrThrow(ModZones.PLAINS),
-                ZoneRegistry.getOrThrow(ModZones.WINDSWEPT_HILLS),
-                ZoneRegistry.getOrThrow(ModZones.SNOWY_MOUNTAINS),
                 ZoneRegistry.getOrThrow(ModZones.SWAMP),
                 ZoneRegistry.getOrThrow(ModZones.SAVANNA_PLATEAU),
-                ZoneRegistry.getOrThrow(ModZones.SAVANNA),
                 ZoneRegistry.getOrThrow(ModZones.FOREST),
-                ZoneRegistry.getOrThrow(ModZones.MEADOW),
                 ZoneRegistry.getOrThrow(ModZones.THE_WALL),
                 ZoneRegistry.getOrThrow(ModZones.HAUNTED_FOREST),
                 ZoneRegistry.getOrThrow(ModZones.RIVER),
@@ -70,7 +65,11 @@ public class ModDimensionProvider {
                 ZoneRegistry.getOrThrow(ModZones.VALLEY_OF_THENN),
                 ZoneRegistry.getOrThrow(ModZones.LANDS_OF_ALWAYS_WINTER),
                 ZoneRegistry.getOrThrow(ModZones.WOLFSWOOD),
-                ZoneRegistry.getOrThrow(ModZones.IRONWOOD)
+                ZoneRegistry.getOrThrow(ModZones.WOLFSWOOD_CLEARING),
+                ZoneRegistry.getOrThrow(ModZones.IRONWOOD),
+                ZoneRegistry.getOrThrow(ModZones.NORTHERN_HILLS),
+                ZoneRegistry.getOrThrow(ModZones.NORTHERN_MOUNTAINS),
+                ZoneRegistry.getOrThrow(ModZones.BARROWLANDS)
         );
     }
 

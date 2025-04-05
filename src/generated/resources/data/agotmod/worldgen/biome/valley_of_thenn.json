@@ -74,9 +74,7 @@
       "minecraft:glow_lichen",
       "minecraft:forest_flowers",
       "minecraft:patch_large_fern",
-      "minecraft:flower_meadow",
-      "minecraft:patch_sugar_cane",
-      "minecraft:patch_pumpkin"
+      "minecraft:flower_meadow"
     ],
     [
       "minecraft:freeze_top_layer"

@@ -13,13 +13,9 @@
             "agotmod:mangroves",
             "agotmod:snowy_plains",
             "agotmod:plains",
-            "agotmod:windswept_hills",
-            "agotmod:snowy_mountains",
             "agotmod:swamp",
             "agotmod:savanna_plateu",
-            "agotmod:savanna",
             "agotmod:forest",
-            "agotmod:meadow",
             "agotmod:the_wall",
             "agotmod:haunted_forest",
             "agotmod:river",
@@ -34,7 +30,11 @@
             "agotmod:valley_of_thenn",
             "agotmod:lands_of_always_winter",
             "agotmod:wolfswood",
-            "agotmod:ironwood"
+            "agotmod:wolfswood_clearing",
+            "agotmod:ironwood",
+            "agotmod:northern_hills",
+            "agotmod:northern_mountains",
+            "agotmod:barrowlands"
           ]
         }
       }

@@ -9,6 +9,7 @@ import net.darkflameproduction.agotmod.item.ModItems;
 import net.darkflameproduction.agotmod.worldgen.tree.ModTreeGrower;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -600,6 +601,9 @@ public class ModBLocks {
 
 
     // ---------------------------(TREE BLOCKS)--------------------------- //
+
+    //Flowers
+    public static final DeferredBlock<Block> WINTER_ROSE = registerBlock("winter_rose", properties -> new FlowerBlock(MobEffects.MOVEMENT_SPEED, 8, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
 
     // Tells the AGoTMod class to call the modded blocks into the game
     public static void register(IEventBus eventBus) {

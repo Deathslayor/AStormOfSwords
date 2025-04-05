@@ -31,6 +31,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.FlowerBlock;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -444,6 +445,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         evenSimplerBlockItem(ModBLocks.ALDER_FENCE_GATE);
         trapdoorItem(ModBLocks.ALDER_TRAPDOOR);
 
+        // ---------------------------(FLOWERS)--------------------------- //
+        FlowerBlock(ModBLocks.WINTER_ROSE);
 
         // ---------------------------(CRAFTING ITEMS)--------------------------- //
         // Register item models for crafting items
@@ -456,6 +459,11 @@ public class ModItemModelProvider extends ItemModelProvider {
         return withExistingParent(item.getId().getPath(),
                 mcLoc("item/generated")).texture("layer0",
                 modLoc("block/" + item.getId().getPath()));
+    }
+
+    private @NotNull ItemModelBuilder FlowerBlock(@NotNull DeferredHolder<Block, Block> item) {
+        return withExistingParent(item.getId().getPath(), mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/" + item.getId().getPath()));
     }
 
     // Method to create a simple item model
@@ -657,4 +665,5 @@ public class ModItemModelProvider extends ItemModelProvider {
         this.withExistingParent(AGoTMod.MOD_ID + ":" + BuiltInRegistries.BLOCK.getKey(block.get()).getPath(),
                 modLoc("block/" + BuiltInRegistries.BLOCK.getKey(block.get()).getPath()));
     }
+
 }

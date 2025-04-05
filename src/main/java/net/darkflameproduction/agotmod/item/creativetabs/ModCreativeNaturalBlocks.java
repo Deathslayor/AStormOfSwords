@@ -182,6 +182,9 @@ public class ModCreativeNaturalBlocks {
                 pOutput.accept(ModBLocks.ALDER_LEAVES.get());
                 pOutput.accept(ModBLocks.ALDER_SAPLING.get());
 
+                //Flowers
+                pOutput.accept(ModBLocks.WINTER_ROSE.get());
+
 
             }).build());
 

@@ -1,4 +1,4 @@
-// 1.21.3	2025-04-04T16:02:27.1380816	Item Models: agotmod
+// 1.21.3	2025-04-05T20:03:49.1505744	Item Models: agotmod
 65c44e6f1f29781252c76032b90c20b3bc8f7b8a assets/agotmod/models/item/alder_button.json
 f0b6afe25a5640838c024d02c663e7c8f821ffd6 assets/agotmod/models/item/alder_door.json
 2af83e95998f18d674056268682572a94f141042 assets/agotmod/models/item/alder_fence.json
@@ -317,4 +317,5 @@ bd476e73ba592ef201ca0cd18bc72389180467d9 assets/agotmod/models/item/wildling_fur
 35b7e33321633ad09b33bf51512bac5a84609e56 assets/agotmod/models/item/wildling_leather_chestplate.json
 b5f611bb12f767a365b8ed824d94ad12341bafd1 assets/agotmod/models/item/wildling_leather_helmet.json
 3229cb333ac24e026b5bf831e356ddf9ea2cfda8 assets/agotmod/models/item/wildling_leather_leggings.json
+cd3ca2b5678c47eaeefc633695e8e7145e869b74 assets/agotmod/models/item/winter_rose.json
 3df6ebab24c5b9654be1dd35f665a305dcff2474 assets/agotmod/models/item/yellow_diamond.json
