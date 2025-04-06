@@ -1021,7 +1021,47 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('B', ModBLocks.ALDER_PLANKS.get())
                 .unlockedBy(getHasName(ModBLocks.ALDER_PLANKS.get()), has(ModBLocks.ALDER_PLANKS.get()))
                 .save(this.output, "alder_plank_stick");
-        // -------------------------------------------------(WOOD)------------------------------------------------- //
+        // -------------------------------------------------(FLOWERS)------------------------------------------------- //
+        this.shaped(RecipeCategory.MISC, ModBLocks.RED_ROSE_BUSH)
+                .pattern("B")
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.ROSE.get())
+                .unlockedBy(getHasName(ModBLocks.ROSE.get()), has(ModBLocks.ROSE.get()))
+                .save(this.output, "rose_bush");
+
+        this.shaped(RecipeCategory.MISC, ModBLocks.BLUE_ROSE_BUSH)
+                .pattern("B")
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.BLUE_ROSE.get())
+                .unlockedBy(getHasName(ModBLocks.BLUE_ROSE.get()), has(ModBLocks.BLUE_ROSE.get()))
+                .save(this.output, "blue_rose_bush");
+
+        this.shaped(RecipeCategory.MISC, ModBLocks.WHITE_ROSE_BUSH)
+                .pattern("B")
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.WHITE_ROSE.get())
+                .unlockedBy(getHasName(ModBLocks.WHITE_ROSE.get()), has(ModBLocks.WHITE_ROSE.get()))
+                .save(this.output, "white_rose_bush");
+
+        this.shaped(RecipeCategory.MISC, ModBLocks.WINTER_ROSE_BUSH)
+                .pattern("B")
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.WINTER_ROSE.get())
+                .unlockedBy(getHasName(ModBLocks.WINTER_ROSE.get()), has(ModBLocks.WINTER_ROSE.get()))
+                .save(this.output, "winter_rose_bush");
+
+        this.shaped(RecipeCategory.MISC, ModBLocks.DUSKY_ROSE_BUSH)
+                .pattern("B")
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.DUSKY_ROSE.get())
+                .unlockedBy(getHasName(ModBLocks.DUSKY_ROSE.get()), has(ModBLocks.DUSKY_ROSE.get()))
+                .save(this.output, "dusky_rose_bush");
+
 
         // -------------------------------------------------(FOODS)------------------------------------------------- //
         // Food smelting recipes Furnace

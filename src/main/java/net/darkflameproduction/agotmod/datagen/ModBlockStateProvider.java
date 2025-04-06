@@ -2,14 +2,18 @@ package net.darkflameproduction.agotmod.datagen;
 
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.block.ModBLocks;
+import net.minecraft.commands.arguments.ResourceLocationArgument;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import net.minecraft.resources.ResourceLocation;
+
 import org.jetbrains.annotations.NotNull;
 
 public class ModBlockStateProvider extends BlockStateProvider {
@@ -746,7 +750,733 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 "cutout");
 
 
-        // ---------------------------(TREES)--------------------------- //
+
+        // ---------------------------(FLOWERS)--------------------------- //
+
+        // Register the block model
+        models().withExistingParent("block/" + ModBLocks.WINTER_ROSE.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/winter_rose"))
+                .renderType("cutout");
+
+// Register the item model (using the same texture)
+        models().withExistingParent("item/" + ModBLocks.WINTER_ROSE.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/winter_rose"))
+                .renderType("cutout");
+
+// Register the blockstate pointing to the single model
+        getVariantBuilder(ModBLocks.WINTER_ROSE.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.WINTER_ROSE.getId().getPath())))
+                .addModel();
+
+// Block model
+        models().withExistingParent("block/" + ModBLocks.WILD_RADISH.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/wild_radish"))
+                .renderType("cutout");
+
+// Item model
+        models().withExistingParent("item/" + ModBLocks.WILD_RADISH.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/wild_radish"))
+                .renderType("cutout");
+
+// Blockstate
+        getVariantBuilder(ModBLocks.WILD_RADISH.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.WILD_RADISH.getId().getPath())))
+                .addModel();
+
+
+        models().withExistingParent("block/" + ModBLocks.WHITE_ROSE.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/white_rose"))
+                .renderType("cutout");
+
+        models().withExistingParent("item/" + ModBLocks.WHITE_ROSE.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/white_rose"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.WHITE_ROSE.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.WHITE_ROSE.getId().getPath())))
+                .addModel();
+
+
+        models().withExistingParent("block/" + ModBLocks.THORN_BUSH.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/thorn_bush"))
+                .renderType("cutout");
+
+        models().withExistingParent("item/" + ModBLocks.THORN_BUSH.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/thorn_bush"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.THORN_BUSH.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.THORN_BUSH.getId().getPath())))
+                .addModel();
+
+
+        models().withExistingParent("block/" + ModBLocks.THISTLE.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/thistle"))
+                .renderType("cutout");
+
+        models().withExistingParent("item/" + ModBLocks.THISTLE.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/thistle"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.THISTLE.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.THISTLE.getId().getPath())))
+                .addModel();
+
+
+        models().withExistingParent("block/" + ModBLocks.TANSY.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/tansy"))
+                .renderType("cutout");
+
+        models().withExistingParent("item/" + ModBLocks.TANSY.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/tansy"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.TANSY.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.TANSY.getId().getPath())))
+                .addModel();
+
+
+        models().withExistingParent("block/" + ModBLocks.SPICEFLOWER.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/spiceflower"))
+                .renderType("cutout");
+
+        models().withExistingParent("item/" + ModBLocks.SPICEFLOWER.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/spiceflower"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.SPICEFLOWER.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.SPICEFLOWER.getId().getPath())))
+                .addModel();
+
+
+        models().withExistingParent("block/" + ModBLocks.SEDGE.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/sedge"))
+                .renderType("cutout");
+
+        models().withExistingParent("item/" + ModBLocks.SEDGE.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/sedge"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.SEDGE.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.SEDGE.getId().getPath())))
+                .addModel();
+
+
+        models().withExistingParent("block/" + ModBLocks.SAFFRON_CROCUS.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/saffron_crocus"))
+                .renderType("cutout");
+
+        models().withExistingParent("item/" + ModBLocks.SAFFRON_CROCUS.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/saffron_crocus"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.SAFFRON_CROCUS.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.SAFFRON_CROCUS.getId().getPath())))
+                .addModel();
+
+
+        models().withExistingParent("block/" + ModBLocks.ROSE.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/rose"))
+                .renderType("cutout");
+
+        models().withExistingParent("item/" + ModBLocks.ROSE.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/rose"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.ROSE.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.ROSE.getId().getPath())))
+                .addModel();
+
+
+        models().withExistingParent("block/" + ModBLocks.POISON_KISSES.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/poison_kisses"))
+                .renderType("cutout");
+
+        models().withExistingParent("item/" + ModBLocks.POISON_KISSES.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/poison_kisses"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.POISON_KISSES.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.POISON_KISSES.getId().getPath())))
+                .addModel();
+
+
+        models().withExistingParent("block/" + ModBLocks.PENNYROYAL.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/pennyroyal"))
+                .renderType("cutout");
+
+        models().withExistingParent("item/" + ModBLocks.PENNYROYAL.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/pennyroyal"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.PENNYROYAL.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.PENNYROYAL.getId().getPath())))
+                .addModel();
+
+
+        models().withExistingParent("block/" + ModBLocks.OPIUM_POPPY.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/opium_poppy"))
+                .renderType("cutout");
+
+        models().withExistingParent("item/" + ModBLocks.OPIUM_POPPY.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/opium_poppy"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.OPIUM_POPPY.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.OPIUM_POPPY.getId().getPath())))
+                .addModel();
+
+
+        models().withExistingParent("block/" + ModBLocks.NIGHTSHADE.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/nightshade"))
+                .renderType("cutout");
+
+        models().withExistingParent("item/" + ModBLocks.NIGHTSHADE.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/nightshade"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.NIGHTSHADE.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.NIGHTSHADE.getId().getPath())))
+                .addModel();
+
+
+        models().withExistingParent("block/" + ModBLocks.MOONBLOOM.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/moonbloom"))
+                .renderType("cutout");
+
+        models().withExistingParent("item/" + ModBLocks.MOONBLOOM.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/moonbloom"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.MOONBLOOM.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.MOONBLOOM.getId().getPath())))
+                .addModel();
+
+
+        models().withExistingParent("block/" + ModBLocks.LUNGWORT.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/lungwort"))
+                .renderType("cutout");
+
+        models().withExistingParent("item/" + ModBLocks.LUNGWORT.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/lungwort"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.LUNGWORT.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.LUNGWORT.getId().getPath())))
+                .addModel();
+
+
+        models().withExistingParent("block/" + ModBLocks.LIVERWORT.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/liverwort"))
+                .renderType("cutout");
+
+        models().withExistingParent("item/" + ModBLocks.LIVERWORT.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/liverwort"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.LIVERWORT.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.LIVERWORT.getId().getPath())))
+                .addModel();
+
+
+        models().withExistingParent("block/" + ModBLocks.LAVENDER.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/lavender"))
+                .renderType("cutout");
+
+        models().withExistingParent("item/" + ModBLocks.LAVENDER.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/lavender"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.LAVENDER.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.LAVENDER.getId().getPath())))
+                .addModel();
+
+
+        models().withExistingParent("block/" + ModBLocks.LADYS_LACE.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/ladys_lace"))
+                .renderType("cutout");
+
+        models().withExistingParent("item/" + ModBLocks.LADYS_LACE.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/ladys_lace"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.LADYS_LACE.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.LADYS_LACE.getId().getPath())))
+                .addModel();
+
+
+        models().withExistingParent("block/" + ModBLocks.GORSE.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/gorse"))
+                .renderType("cutout");
+
+        models().withExistingParent("item/" + ModBLocks.GORSE.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/gorse"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.GORSE.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.GORSE.getId().getPath())))
+                .addModel();
+
+
+        models().withExistingParent("block/" + ModBLocks.GOLDENROD.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/goldenrod"))
+                .renderType("cutout");
+
+        models().withExistingParent("item/" + ModBLocks.GOLDENROD.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/goldenrod"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.GOLDENROD.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.GOLDENROD.getId().getPath())))
+                .addModel();
+
+
+        models().withExistingParent("block/" + ModBLocks.GOLDENCUP.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/goldencup"))
+                .renderType("cutout");
+
+        models().withExistingParent("item/" + ModBLocks.GOLDENCUP.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/goldencup"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.GOLDENCUP.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.GOLDENCUP.getId().getPath())))
+                .addModel();
+
+
+        models().withExistingParent("block/" + ModBLocks.GOATHEAD.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/goathead"))
+                .renderType("cutout");
+
+        models().withExistingParent("item/" + ModBLocks.GOATHEAD.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/goathead"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.GOATHEAD.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.GOATHEAD.getId().getPath())))
+                .addModel();
+
+
+        models().withExistingParent("block/" + ModBLocks.GINGER.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/ginger"))
+                .renderType("cutout");
+
+        models().withExistingParent("item/" + ModBLocks.GINGER.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/ginger"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.GINGER.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.GINGER.getId().getPath())))
+                .addModel();
+
+
+        models().withExistingParent("block/" + ModBLocks.GILLYFLOWER.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/gillyflower"))
+                .renderType("cutout");
+
+        models().withExistingParent("item/" + ModBLocks.GILLYFLOWER.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/gillyflower"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.GILLYFLOWER.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.GILLYFLOWER.getId().getPath())))
+                .addModel();
+
+        models().withExistingParent("block/" + ModBLocks.FROSTFIRE.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/frostfire"))
+                .renderType("cutout");
+
+        models().withExistingParent("item/" + ModBLocks.FROSTFIRE.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/frostfire"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.FROSTFIRE.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.FROSTFIRE.getId().getPath())))
+                .addModel();
+
+
+        models().withExistingParent("block/" + ModBLocks.FORGET_ME_NOT.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/forget_me_not"))
+                .renderType("cutout");
+
+        models().withExistingParent("item/" + ModBLocks.FORGET_ME_NOT.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/forget_me_not"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.FORGET_ME_NOT.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.FORGET_ME_NOT.getId().getPath())))
+                .addModel();
+
+
+        models().withExistingParent("block/" + ModBLocks.EVENING_STAR.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/evening_star"))
+                .renderType("cutout");
+
+        models().withExistingParent("item/" + ModBLocks.EVENING_STAR.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/evening_star"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.EVENING_STAR.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.EVENING_STAR.getId().getPath())))
+                .addModel();
+
+
+        models().withExistingParent("block/" + ModBLocks.DUSKY_ROSE.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/dusky_rose"))
+                .renderType("cutout");
+
+        models().withExistingParent("item/" + ModBLocks.DUSKY_ROSE.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/dusky_rose"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.DUSKY_ROSE.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.DUSKY_ROSE.getId().getPath())))
+                .addModel();
+
+
+        models().withExistingParent("block/" + ModBLocks.DRAGONS_BREATH.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/dragons_breath"))
+                .renderType("cutout");
+
+        models().withExistingParent("item/" + ModBLocks.DRAGONS_BREATH.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/dragons_breath"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.DRAGONS_BREATH.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.DRAGONS_BREATH.getId().getPath())))
+                .addModel();
+
+
+        models().withExistingParent("block/" + ModBLocks.COLDSNAP.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/coldsnap"))
+                .renderType("cutout");
+
+        models().withExistingParent("item/" + ModBLocks.COLDSNAP.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/coldsnap"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.COLDSNAP.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.COLDSNAP.getId().getPath())))
+                .addModel();
+
+
+        models().withExistingParent("block/" + ModBLocks.BLUE_ROSE.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/blue_rose"))
+                .renderType("cutout");
+
+        models().withExistingParent("item/" + ModBLocks.BLUE_ROSE.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/blue_rose"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.BLUE_ROSE.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.BLUE_ROSE.getId().getPath())))
+                .addModel();
+
+
+        models().withExistingParent("block/" + ModBLocks.BLOODBLOOM.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/bloodbloom"))
+                .renderType("cutout");
+
+        models().withExistingParent("item/" + ModBLocks.BLOODBLOOM.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/bloodbloom"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.BLOODBLOOM.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.BLOODBLOOM.getId().getPath())))
+                .addModel();
+
+
+        models().withExistingParent("block/" + ModBLocks.BLACK_LOTUS.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/black_lotus"))
+                .renderType("cutout");
+
+        models().withExistingParent("item/" + ModBLocks.BLACK_LOTUS.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/black_lotus"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.BLACK_LOTUS.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.BLACK_LOTUS.getId().getPath())))
+                .addModel();
+
+
+// First register the bottom half
+        models().withExistingParent("block/" + ModBLocks.WINTER_ROSE_BUSH.getId().getPath() + "_bottom",
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/winter_rose_bush_bottom"))
+                .renderType("cutout");
+
+// Then register the top half
+        models().withExistingParent("block/" + ModBLocks.WINTER_ROSE_BUSH.getId().getPath() + "_top",
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/winter_rose_bush_top"))
+                .renderType("cutout");
+
+// Register the item model (using bottom texture typically)
+        models().withExistingParent("item/" + ModBLocks.WINTER_ROSE_BUSH.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/winter_rose_bush_top"))
+                .renderType("cutout");
+
+// Now register the blockstate that references both models
+        getVariantBuilder(ModBLocks.WINTER_ROSE_BUSH.get())
+                .partialState().with(TallFlowerBlock.HALF, DoubleBlockHalf.LOWER)
+                .modelForState().modelFile(models().getExistingFile(
+                        modLoc("block/" + ModBLocks.WINTER_ROSE_BUSH.getId().getPath() + "_bottom"))).addModel()
+                .partialState().with(TallFlowerBlock.HALF, DoubleBlockHalf.UPPER)
+                .modelForState().modelFile(models().getExistingFile(
+                        modLoc("block/" + ModBLocks.WINTER_ROSE_BUSH.getId().getPath() + "_top"))).addModel();
+
+        // First register the bottom half
+        models().withExistingParent("block/" + ModBLocks.WHITE_ROSE_BUSH.getId().getPath() + "_bottom",
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/white_rose_bush_bottom"))
+                .renderType("cutout");
+
+// Then register the top half
+        models().withExistingParent("block/" + ModBLocks.WHITE_ROSE_BUSH.getId().getPath() + "_top",
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/white_rose_bush_top"))
+                .renderType("cutout");
+
+// Register the item model (using bottom texture typically)
+        models().withExistingParent("item/" + ModBLocks.WHITE_ROSE_BUSH.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/white_rose_bush_top"))
+                .renderType("cutout");
+
+// Now register the blockstate that references both models
+        getVariantBuilder(ModBLocks.WHITE_ROSE_BUSH.get())
+                .partialState().with(TallFlowerBlock.HALF, DoubleBlockHalf.LOWER)
+                .modelForState().modelFile(models().getExistingFile(
+                        modLoc("block/" + ModBLocks.WHITE_ROSE_BUSH.getId().getPath() + "_bottom"))).addModel()
+                .partialState().with(TallFlowerBlock.HALF, DoubleBlockHalf.UPPER)
+                .modelForState().modelFile(models().getExistingFile(
+                        modLoc("block/" + ModBLocks.WHITE_ROSE_BUSH.getId().getPath() + "_top"))).addModel();
+
+        // First register the bottom half
+        models().withExistingParent("block/" + ModBLocks.DUSKY_ROSE_BUSH.getId().getPath() + "_bottom",
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/dusky_rose_bush_bottom"))
+                .renderType("cutout");
+
+// Then register the top half
+        models().withExistingParent("block/" + ModBLocks.DUSKY_ROSE_BUSH.getId().getPath() + "_top",
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/dusky_rose_bush_top"))
+                .renderType("cutout");
+
+// Register the item model (using bottom texture typically)
+        models().withExistingParent("item/" + ModBLocks.DUSKY_ROSE_BUSH.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/dusky_rose_bush_top"))
+                .renderType("cutout");
+
+// Now register the blockstate that references both models
+        getVariantBuilder(ModBLocks.DUSKY_ROSE_BUSH.get())
+                .partialState().with(TallFlowerBlock.HALF, DoubleBlockHalf.LOWER)
+                .modelForState().modelFile(models().getExistingFile(
+                        modLoc("block/" + ModBLocks.DUSKY_ROSE_BUSH.getId().getPath() + "_bottom"))).addModel()
+                .partialState().with(TallFlowerBlock.HALF, DoubleBlockHalf.UPPER)
+                .modelForState().modelFile(models().getExistingFile(
+                        modLoc("block/" + ModBLocks.DUSKY_ROSE_BUSH.getId().getPath() + "_top"))).addModel();
+
+        // First register the bottom half
+        models().withExistingParent("block/" + ModBLocks.RED_ROSE_BUSH.getId().getPath() + "_bottom",
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/red_rose_bush_bottom"))
+                .renderType("cutout");
+
+// Then register the top half
+        models().withExistingParent("block/" + ModBLocks.RED_ROSE_BUSH.getId().getPath() + "_top",
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/red_rose_bush_top"))
+                .renderType("cutout");
+
+// Register the item model (using bottom texture typically)
+        models().withExistingParent("item/" + ModBLocks.RED_ROSE_BUSH.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/red_rose_bush_top"))
+                .renderType("cutout");
+
+// Now register the blockstate that references both models
+        getVariantBuilder(ModBLocks.RED_ROSE_BUSH.get())
+                .partialState().with(TallFlowerBlock.HALF, DoubleBlockHalf.LOWER)
+                .modelForState().modelFile(models().getExistingFile(
+                        modLoc("block/" + ModBLocks.RED_ROSE_BUSH.getId().getPath() + "_bottom"))).addModel()
+                .partialState().with(TallFlowerBlock.HALF, DoubleBlockHalf.UPPER)
+                .modelForState().modelFile(models().getExistingFile(
+                        modLoc("block/" + ModBLocks.RED_ROSE_BUSH.getId().getPath() + "_top"))).addModel();
+
+        // First register the bottom half
+        models().withExistingParent("block/" + ModBLocks.BLUE_ROSE_BUSH.getId().getPath() + "_bottom",
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/blue_rose_bush_bottom"))
+                .renderType("cutout");
+
+// Then register the top half
+        models().withExistingParent("block/" + ModBLocks.BLUE_ROSE_BUSH.getId().getPath() + "_top",
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/blue_rose_bush_top"))
+                .renderType("cutout");
+
+// Register the item model (using bottom texture typically)
+        models().withExistingParent("item/" + ModBLocks.BLUE_ROSE_BUSH.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/blue_rose_bush_top"))
+                .renderType("cutout");
+
+// Now register the blockstate that references both models
+        getVariantBuilder(ModBLocks.BLUE_ROSE_BUSH.get())
+                .partialState().with(TallFlowerBlock.HALF, DoubleBlockHalf.LOWER)
+                .modelForState().modelFile(models().getExistingFile(
+                        modLoc("block/" + ModBLocks.BLUE_ROSE_BUSH.getId().getPath() + "_bottom"))).addModel()
+                .partialState().with(TallFlowerBlock.HALF, DoubleBlockHalf.UPPER)
+                .modelForState().modelFile(models().getExistingFile(
+                        modLoc("block/" + ModBLocks.BLUE_ROSE_BUSH.getId().getPath() + "_top"))).addModel();
+
+
+
+
+
+
+
+        //simpleBlockWithItem(ModBLocks.POTTED_WINTER_ROSE.get(), models().singleTexture("potted_winter_rose", new ResourceLocation.Serializer("flower_pot_cross"), "plant", blockTexture(ModBLocks.WINTER_ROSE.get())).renderType("cutout"));
 
         // ---------------------(VILLAGER PROFESSIONS BLOCKS)--------------------- //
         // Register block states and models for villager profession-related blocks

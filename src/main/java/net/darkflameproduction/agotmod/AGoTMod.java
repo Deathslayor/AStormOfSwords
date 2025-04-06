@@ -16,6 +16,8 @@ import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FlowerPotBlock;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -89,6 +91,9 @@ public class AGoTMod {
     // Common setup method
     private void commonSetup(final FMLCommonSetupEvent event) {
         // Perform common setup tasks here
+        event.enqueueWork(() -> {
+            //((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBLocks.WINTER_ROSE.getId(), ModBLocks.POTTED_WINTER_ROSE);
+        });
     }
 
     // Creative mode tab build method

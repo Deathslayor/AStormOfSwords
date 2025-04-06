@@ -24,44 +24,54 @@ public class ModCreativeNaturalBlocks {
             .title(Component.translatable("creativetab.agot_tab_natural_blocks")) // Title for the creative mode tab
             .displayItems((pParameters, pOutput) -> {
 
-                //Ores
-                pOutput.accept(ModBLocks.TIN_ORE.get());
-                pOutput.accept(ModBLocks.DEEPSLATE_TIN_ORE.get());
-                pOutput.accept(ModBLocks.RAW_TIN_BLOCK.get());
-                pOutput.accept(ModBLocks.DIAMONDS_ORE.get());
-                pOutput.accept(ModBLocks.DIAMONDS_DEEPSLATE_ORE.get());
-                pOutput.accept(ModBLocks.BLOODSTONE_ORE.get());
-                pOutput.accept(ModBLocks.BLOODSTONE_DEEPSLATE_ORE.get());
-                pOutput.accept(ModBLocks.CHALCEDONY_ORE.get());
-                pOutput.accept(ModBLocks.CHALCEDONY_DEEPSLATE_ORE.get());
-                pOutput.accept(ModBLocks.AMBER_ORE.get());
-                pOutput.accept(ModBLocks.AMBER_DEEPSLATE_ORE.get());
-                pOutput.accept(ModBLocks.AMETHYST_ORE.get());
-                pOutput.accept(ModBLocks.AMETHYST_DEEPSLATE_ORE.get());
-                pOutput.accept(ModBLocks.CARNELIAN_ORE.get());
-                pOutput.accept(ModBLocks.CARNELIAN_DEEPSLATE_ORE.get());
-                pOutput.accept(ModBLocks.GARNET_ORE.get());
-                pOutput.accept(ModBLocks.GARNET_DEEPSLATE_ORE.get());
-                pOutput.accept(ModBLocks.JADE_ORE.get());
-                pOutput.accept(ModBLocks.JADE_DEEPSLATE_ORE.get());
-                pOutput.accept(ModBLocks.JASPER_ORE.get());
-                pOutput.accept(ModBLocks.JASPER_DEEPSLATE_ORE.get());
-                pOutput.accept(ModBLocks.MALACHITE_ORE.get());
-                pOutput.accept(ModBLocks.MALACHITE_DEEPSLATE_ORE.get());
-                pOutput.accept(ModBLocks.RUBY_ORE.get());
-                pOutput.accept(ModBLocks.RUBY_DEEPSLATE_ORE.get());
-                pOutput.accept(ModBLocks.ONYX_ORE.get());
-                pOutput.accept(ModBLocks.ONYX_DEEPSLATE_ORE.get());
-                pOutput.accept(ModBLocks.OPAL_ORE.get());
-                pOutput.accept(ModBLocks.OPAL_DEEPSLATE_ORE.get());
-                pOutput.accept(ModBLocks.SAPPHIRE_ORE.get());
-                pOutput.accept(ModBLocks.SAPPHIRE_DEEPSLATE_ORE.get());
-                pOutput.accept(ModBLocks.MOONSTONE_ORE.get());
-                pOutput.accept(ModBLocks.MOONSTONE_DEEPSLATE_ORE.get());
-                pOutput.accept(ModBLocks.TIGERS_EYE_ORE.get());
-                pOutput.accept(ModBLocks.TIGERS_EYE_DEEPSLATE_ORE.get());
-                pOutput.accept(ModBLocks.TOPAZ_ORE.get());
-                pOutput.accept(ModBLocks.TOPAZ_DEEPSLATE_ORE.get());
+                // Roses
+                pOutput.accept(ModBLocks.ROSE.get());
+                pOutput.accept(ModBLocks.RED_ROSE_BUSH.get());
+                pOutput.accept(ModBLocks.WHITE_ROSE.get());
+                pOutput.accept(ModBLocks.WHITE_ROSE_BUSH.get());
+                pOutput.accept(ModBLocks.DUSKY_ROSE.get());
+                pOutput.accept(ModBLocks.DUSKY_ROSE_BUSH.get());
+                pOutput.accept(ModBLocks.WINTER_ROSE.get());
+                pOutput.accept(ModBLocks.WINTER_ROSE_BUSH.get());
+                pOutput.accept(ModBLocks.BLUE_ROSE.get());
+                pOutput.accept(ModBLocks.BLUE_ROSE_BUSH.get());
+                pOutput.accept(ModBLocks.BLOODBLOOM.get());
+
+// Other Wildflowers
+                pOutput.accept(ModBLocks.WILD_RADISH.get());
+                pOutput.accept(ModBLocks.THORN_BUSH.get());
+                pOutput.accept(ModBLocks.THISTLE.get());
+                pOutput.accept(ModBLocks.TANSY.get());
+                pOutput.accept(ModBLocks.SPICEFLOWER.get());
+                pOutput.accept(ModBLocks.SEDGE.get());
+                pOutput.accept(ModBLocks.LAVENDER.get());
+                pOutput.accept(ModBLocks.LADYS_LACE.get());
+                pOutput.accept(ModBLocks.GORSE.get());
+                pOutput.accept(ModBLocks.GOLDENROD.get());
+                pOutput.accept(ModBLocks.GOLDENCUP.get());
+
+// Exotic Flowers
+                pOutput.accept(ModBLocks.SAFFRON_CROCUS.get());
+                pOutput.accept(ModBLocks.POISON_KISSES.get());
+                pOutput.accept(ModBLocks.PENNYROYAL.get());
+                pOutput.accept(ModBLocks.OPIUM_POPPY.get());
+                pOutput.accept(ModBLocks.NIGHTSHADE.get());
+                pOutput.accept(ModBLocks.MOONBLOOM.get());
+                pOutput.accept(ModBLocks.LUNGWORT.get());
+                pOutput.accept(ModBLocks.LIVERWORT.get());
+                pOutput.accept(ModBLocks.GINGER.get());
+                pOutput.accept(ModBLocks.GILLYFLOWER.get());
+
+// Rare and Magical Flowers
+                pOutput.accept(ModBLocks.FROSTFIRE.get());
+                pOutput.accept(ModBLocks.FORGET_ME_NOT.get());
+                pOutput.accept(ModBLocks.EVENING_STAR.get());
+                pOutput.accept(ModBLocks.DRAGONS_BREATH.get());
+                pOutput.accept(ModBLocks.COLDSNAP.get());
+                pOutput.accept(ModBLocks.BLACK_LOTUS.get());
+
+// Miscellaneous
+                pOutput.accept(ModBLocks.GOATHEAD.get());
 
                 //Wood
                 pOutput.accept(ModBLocks.WEIRWOOD_LOG.get());
@@ -182,8 +192,46 @@ public class ModCreativeNaturalBlocks {
                 pOutput.accept(ModBLocks.ALDER_LEAVES.get());
                 pOutput.accept(ModBLocks.ALDER_SAPLING.get());
 
-                //Flowers
-                pOutput.accept(ModBLocks.WINTER_ROSE.get());
+                //Ores
+                pOutput.accept(ModBLocks.TIN_ORE.get());
+                pOutput.accept(ModBLocks.DEEPSLATE_TIN_ORE.get());
+                pOutput.accept(ModBLocks.RAW_TIN_BLOCK.get());
+                pOutput.accept(ModBLocks.DIAMONDS_ORE.get());
+                pOutput.accept(ModBLocks.DIAMONDS_DEEPSLATE_ORE.get());
+                pOutput.accept(ModBLocks.BLOODSTONE_ORE.get());
+                pOutput.accept(ModBLocks.BLOODSTONE_DEEPSLATE_ORE.get());
+                pOutput.accept(ModBLocks.CHALCEDONY_ORE.get());
+                pOutput.accept(ModBLocks.CHALCEDONY_DEEPSLATE_ORE.get());
+                pOutput.accept(ModBLocks.AMBER_ORE.get());
+                pOutput.accept(ModBLocks.AMBER_DEEPSLATE_ORE.get());
+                pOutput.accept(ModBLocks.AMETHYST_ORE.get());
+                pOutput.accept(ModBLocks.AMETHYST_DEEPSLATE_ORE.get());
+                pOutput.accept(ModBLocks.CARNELIAN_ORE.get());
+                pOutput.accept(ModBLocks.CARNELIAN_DEEPSLATE_ORE.get());
+                pOutput.accept(ModBLocks.GARNET_ORE.get());
+                pOutput.accept(ModBLocks.GARNET_DEEPSLATE_ORE.get());
+                pOutput.accept(ModBLocks.JADE_ORE.get());
+                pOutput.accept(ModBLocks.JADE_DEEPSLATE_ORE.get());
+                pOutput.accept(ModBLocks.JASPER_ORE.get());
+                pOutput.accept(ModBLocks.JASPER_DEEPSLATE_ORE.get());
+                pOutput.accept(ModBLocks.MALACHITE_ORE.get());
+                pOutput.accept(ModBLocks.MALACHITE_DEEPSLATE_ORE.get());
+                pOutput.accept(ModBLocks.RUBY_ORE.get());
+                pOutput.accept(ModBLocks.RUBY_DEEPSLATE_ORE.get());
+                pOutput.accept(ModBLocks.ONYX_ORE.get());
+                pOutput.accept(ModBLocks.ONYX_DEEPSLATE_ORE.get());
+                pOutput.accept(ModBLocks.OPAL_ORE.get());
+                pOutput.accept(ModBLocks.OPAL_DEEPSLATE_ORE.get());
+                pOutput.accept(ModBLocks.SAPPHIRE_ORE.get());
+                pOutput.accept(ModBLocks.SAPPHIRE_DEEPSLATE_ORE.get());
+                pOutput.accept(ModBLocks.MOONSTONE_ORE.get());
+                pOutput.accept(ModBLocks.MOONSTONE_DEEPSLATE_ORE.get());
+                pOutput.accept(ModBLocks.TIGERS_EYE_ORE.get());
+                pOutput.accept(ModBLocks.TIGERS_EYE_DEEPSLATE_ORE.get());
+                pOutput.accept(ModBLocks.TOPAZ_ORE.get());
+                pOutput.accept(ModBLocks.TOPAZ_DEEPSLATE_ORE.get());
+
+
 
 
             }).build());

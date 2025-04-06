@@ -446,7 +446,41 @@ public class ModItemModelProvider extends ItemModelProvider {
         trapdoorItem(ModBLocks.ALDER_TRAPDOOR);
 
         // ---------------------------(FLOWERS)--------------------------- //
-        FlowerBlock(ModBLocks.WINTER_ROSE);
+        simpleBlockItemBlockTexture(ModBLocks.WINTER_ROSE);
+        simpleBlockItemBlockTexture(ModBLocks.WILD_RADISH);
+        simpleBlockItemBlockTexture(ModBLocks.WHITE_ROSE);
+        simpleBlockItemBlockTexture(ModBLocks.THORN_BUSH);
+        simpleBlockItemBlockTexture(ModBLocks.THISTLE);
+        simpleBlockItemBlockTexture(ModBLocks.TANSY);
+        simpleBlockItemBlockTexture(ModBLocks.SPICEFLOWER);
+        simpleBlockItemBlockTexture(ModBLocks.SEDGE);
+        simpleBlockItemBlockTexture(ModBLocks.SAFFRON_CROCUS);
+        simpleBlockItemBlockTexture(ModBLocks.ROSE);
+        simpleBlockItemBlockTexture(ModBLocks.POISON_KISSES);
+        simpleBlockItemBlockTexture(ModBLocks.PENNYROYAL);
+        simpleBlockItemBlockTexture(ModBLocks.OPIUM_POPPY);
+        simpleBlockItemBlockTexture(ModBLocks.NIGHTSHADE);
+        simpleBlockItemBlockTexture(ModBLocks.MOONBLOOM);
+        simpleBlockItemBlockTexture(ModBLocks.LUNGWORT);
+        simpleBlockItemBlockTexture(ModBLocks.LIVERWORT);
+        simpleBlockItemBlockTexture(ModBLocks.LAVENDER);
+        simpleBlockItemBlockTexture(ModBLocks.LADYS_LACE);
+        simpleBlockItemBlockTexture(ModBLocks.GORSE);
+        simpleBlockItemBlockTexture(ModBLocks.GOLDENROD);
+        simpleBlockItemBlockTexture(ModBLocks.GOLDENCUP);
+        simpleBlockItemBlockTexture(ModBLocks.GOATHEAD);
+        simpleBlockItemBlockTexture(ModBLocks.GINGER);
+        simpleBlockItemBlockTexture(ModBLocks.GILLYFLOWER);
+        simpleBlockItemBlockTexture(ModBLocks.FROSTFIRE);
+        simpleBlockItemBlockTexture(ModBLocks.FORGET_ME_NOT);
+        simpleBlockItemBlockTexture(ModBLocks.EVENING_STAR);
+        simpleBlockItemBlockTexture(ModBLocks.DUSKY_ROSE);
+        simpleBlockItemBlockTexture(ModBLocks.DRAGONS_BREATH);
+        simpleBlockItemBlockTexture(ModBLocks.COLDSNAP);
+        simpleBlockItemBlockTexture(ModBLocks.BLUE_ROSE);
+        simpleBlockItemBlockTexture(ModBLocks.BLOODBLOOM);
+        simpleBlockItemBlockTexture(ModBLocks.BLACK_LOTUS);
+
 
         // ---------------------------(CRAFTING ITEMS)--------------------------- //
         // Register item models for crafting items
@@ -459,11 +493,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         return withExistingParent(item.getId().getPath(),
                 mcLoc("item/generated")).texture("layer0",
                 modLoc("block/" + item.getId().getPath()));
-    }
-
-    private @NotNull ItemModelBuilder FlowerBlock(@NotNull DeferredHolder<Block, Block> item) {
-        return withExistingParent(item.getId().getPath(), mcLoc("item/generated"))
-                .texture("layer0", modLoc("block/" + item.getId().getPath()));
     }
 
     // Method to create a simple item model
@@ -659,6 +688,12 @@ public class ModItemModelProvider extends ItemModelProvider {
         return withExistingParent(block.getId().getPath(),
                 mcLoc("item/generated")).texture("layer0",
                 modLoc("item/" + block.getId().getPath()));
+    }
+
+    private ItemModelBuilder simpleBlockItemBlockTexture(DeferredHolder<Block, Block> block) {
+        return withExistingParent(block.getId().getPath(),
+                mcLoc("item/generated")).texture("layer0",
+                modLoc("block/" + block.getId().getPath()));
     }
 
     public void evenSimplerBlockItem(DeferredHolder<Block, Block> block) {

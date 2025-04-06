@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "agotmod:rose"
+  },
+  "pattern": [
+    "B",
+    "B",
+    " "
+  ],
+  "result": {
+    "count": 1,
+    "id": "agotmod:red_rose_bush"
+  }
+}

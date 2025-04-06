@@ -7,13 +7,18 @@ import net.darkflameproduction.agotmod.block.custom.ModFlammableRotatedPillarBlo
 import net.darkflameproduction.agotmod.block.custom.specialleaves.WeirwoodLeavesBlock;
 import net.darkflameproduction.agotmod.item.ModItems;
 import net.darkflameproduction.agotmod.worldgen.tree.ModTreeGrower;
+import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -600,10 +605,169 @@ public class ModBLocks {
             properties -> new TrapDoorBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR));
 
 
-    // ---------------------------(TREE BLOCKS)--------------------------- //
+    // ---------------------------(FLOWERS)--------------------------- //
+    public static final DeferredBlock<Block> WINTER_ROSE = registerBlock("winter_rose",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
 
-    //Flowers
-    public static final DeferredBlock<Block> WINTER_ROSE = registerBlock("winter_rose", properties -> new FlowerBlock(MobEffects.MOVEMENT_SPEED, 8, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+    public static final DeferredBlock<Block> WILD_RADISH = registerBlock("wild_radish",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> WHITE_ROSE = registerBlock("white_rose",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> THORN_BUSH = registerBlock("thorn_bush",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> THISTLE = registerBlock("thistle",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> TANSY = registerBlock("tansy",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> SPICEFLOWER = registerBlock("spiceflower",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> SEDGE = registerBlock("sedge",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> SAFFRON_CROCUS = registerBlock("saffron_crocus",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> ROSE = registerBlock("rose",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> POISON_KISSES = registerBlock("poison_kisses",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> PENNYROYAL = registerBlock("pennyroyal",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> OPIUM_POPPY = registerBlock("opium_poppy",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> NIGHTSHADE = registerBlock("nightshade",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> MOONBLOOM = registerBlock("moonbloom",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> LUNGWORT = registerBlock("lungwort",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> LIVERWORT = registerBlock("liverwort",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> LAVENDER = registerBlock("lavender",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> LADYS_LACE = registerBlock("ladys_lace",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> GORSE = registerBlock("gorse",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> GOLDENROD = registerBlock("goldenrod",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> GOLDENCUP = registerBlock("goldencup",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> GOATHEAD = registerBlock("goathead",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> GINGER = registerBlock("ginger",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> GILLYFLOWER = registerBlock("gillyflower",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> FROSTFIRE = registerBlock("frostfire",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> FORGET_ME_NOT = registerBlock("forget_me_not",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> EVENING_STAR = registerBlock("evening_star",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> DUSKY_ROSE = registerBlock("dusky_rose",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> DRAGONS_BREATH = registerBlock("dragons_breath",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> COLDSNAP = registerBlock("coldsnap",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> BLUE_ROSE = registerBlock("blue_rose",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> BLOODBLOOM = registerBlock("bloodbloom",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> BLACK_LOTUS = registerBlock("black_lotus",
+            properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+
+    public static final DeferredBlock<Block> WINTER_ROSE_BUSH = registerBlock("winter_rose_bush",
+            TallFlowerBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.ROSE_BUSH));
+
+    public static final DeferredBlock<Block> WHITE_ROSE_BUSH = registerBlock("white_rose_bush",
+            TallFlowerBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.ROSE_BUSH));
+
+    public static final DeferredBlock<Block> DUSKY_ROSE_BUSH = registerBlock("dusky_rose_bush",
+            TallFlowerBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.ROSE_BUSH));
+
+    public static final DeferredBlock<Block> BLUE_ROSE_BUSH = registerBlock("blue_rose_bush",
+            TallFlowerBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.ROSE_BUSH));
+
+    public static final DeferredBlock<Block> RED_ROSE_BUSH = registerBlock("red_rose_bush",
+            TallFlowerBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.ROSE_BUSH));
+
+
+
+    // ---------------------------(POTTED PLANTS)--------------------------- //
+    //public static final DeferredBlock<Block> POTTED_WINTER_ROSE = BLOCKS.register("potted_winter_rose",
+    //        properties -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT), ModBLocks.WINTER_ROSE,
+    //               BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()));
 
     // Tells the AGoTMod class to call the modded blocks into the game
     public static void register(IEventBus eventBus) {

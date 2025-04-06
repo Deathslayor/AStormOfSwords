@@ -2,6 +2,10 @@ package net.darkflameproduction.agotmod.datagen.loot;
 
 import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.darkflameproduction.agotmod.item.ModItems;
+import net.minecraft.advancements.critereon.EnchantmentPredicate;
+import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.advancements.critereon.MinMaxBounds;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -12,15 +16,23 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.AlternativesEntry;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.MatchTool;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Set;
+
 
 public class ModBlockLootTables extends BlockLootSubProvider {
 
@@ -466,6 +478,70 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
         // ---------------------------(FLOWERS)--------------------------- //
         this.dropSelf(ModBLocks.WINTER_ROSE.get());
+        this.dropSelf(ModBLocks.WILD_RADISH.get());
+        this.dropSelf(ModBLocks.WHITE_ROSE.get());
+        this.dropSelf(ModBLocks.THORN_BUSH.get());
+        this.dropSelf(ModBLocks.THISTLE.get());
+        this.dropSelf(ModBLocks.TANSY.get());
+        this.dropSelf(ModBLocks.SPICEFLOWER.get());
+        this.dropSelf(ModBLocks.SEDGE.get());
+        this.dropSelf(ModBLocks.SAFFRON_CROCUS.get());
+        this.dropSelf(ModBLocks.ROSE.get());
+        this.dropSelf(ModBLocks.POISON_KISSES.get());
+        this.dropSelf(ModBLocks.PENNYROYAL.get());
+        this.dropSelf(ModBLocks.OPIUM_POPPY.get());
+        this.dropSelf(ModBLocks.NIGHTSHADE.get());
+        this.dropSelf(ModBLocks.MOONBLOOM.get());
+        this.dropSelf(ModBLocks.LUNGWORT.get());
+        this.dropSelf(ModBLocks.LIVERWORT.get());
+        this.dropSelf(ModBLocks.LAVENDER.get());
+        this.dropSelf(ModBLocks.LADYS_LACE.get());
+        this.dropSelf(ModBLocks.GORSE.get());
+        this.dropSelf(ModBLocks.GOLDENROD.get());
+        this.dropSelf(ModBLocks.GOLDENCUP.get());
+        this.dropSelf(ModBLocks.GOATHEAD.get());
+        this.dropSelf(ModBLocks.GINGER.get());
+        this.dropSelf(ModBLocks.GILLYFLOWER.get());
+        this.dropSelf(ModBLocks.FROSTFIRE.get());
+        this.dropSelf(ModBLocks.FORGET_ME_NOT.get());
+        this.dropSelf(ModBLocks.EVENING_STAR.get());
+        this.dropSelf(ModBLocks.DUSKY_ROSE.get());
+        this.dropSelf(ModBLocks.DRAGONS_BREATH.get());
+        this.dropSelf(ModBLocks.COLDSNAP.get());
+        this.dropSelf(ModBLocks.BLUE_ROSE.get());
+        this.dropSelf(ModBLocks.BLOODBLOOM.get());
+        this.dropSelf(ModBLocks.BLACK_LOTUS.get());
+        this.add(ModBLocks.WINTER_ROSE_BUSH.get(),
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1))
+                                .add(LootItem.lootTableItem(ModBLocks.WINTER_ROSE.get()))));
+        this.add(ModBLocks.WHITE_ROSE_BUSH.get(),
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1))
+                                .add(LootItem.lootTableItem(ModBLocks.WHITE_ROSE.get()))));
+
+        this.add(ModBLocks.DUSKY_ROSE_BUSH.get(),
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1))
+                                .add(LootItem.lootTableItem(ModBLocks.DUSKY_ROSE.get()))));
+
+        this.add(ModBLocks.BLUE_ROSE_BUSH.get(),
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1))
+                                .add(LootItem.lootTableItem(ModBLocks.BLUE_ROSE.get()))));
+
+        this.add(ModBLocks.RED_ROSE_BUSH.get(),
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1))
+                                .add(LootItem.lootTableItem(ModBLocks.ROSE.get()))));
+
+        // ---------------------------(POTTED PLANTS)--------------------------- //
+        //this.add(ModBLocks.POTTED_WINTER_ROSE.get(), createPotFlowerItemTable(ModBLocks.WINTER_ROSE.get()));
 
         /** // ---------------------------(NORMAL BLOCKS)--------------------------- // */
     }
