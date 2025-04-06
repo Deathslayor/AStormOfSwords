@@ -1030,6 +1030,20 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy(getHasName(ModBLocks.ROSE.get()), has(ModBLocks.ROSE.get()))
                 .save(this.output, "rose_bush");
 
+        this.shaped(RecipeCategory.MISC, Items.RED_DYE, 2) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.RED_ROSE_BUSH.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.RED_ROSE_BUSH.get()), has(ModBLocks.RED_ROSE_BUSH.get()))
+                .save(this.output, "rose_bush_to_red_dye");
+
+        this.shaped(RecipeCategory.MISC, Items.RED_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.ROSE.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.ROSE.get()), has(ModBLocks.ROSE.get()))
+                .save(this.output, "rose_to_red_dye");
+
         this.shaped(RecipeCategory.MISC, ModBLocks.BLUE_ROSE_BUSH)
                 .pattern("B")
                 .pattern("B")
@@ -1037,6 +1051,20 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('B', ModBLocks.BLUE_ROSE.get())
                 .unlockedBy(getHasName(ModBLocks.BLUE_ROSE.get()), has(ModBLocks.BLUE_ROSE.get()))
                 .save(this.output, "blue_rose_bush");
+
+        this.shaped(RecipeCategory.MISC, Items.BLUE_DYE, 2) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.BLUE_ROSE_BUSH.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.BLUE_ROSE_BUSH.get()), has(ModBLocks.BLUE_ROSE_BUSH.get()))
+                .save(this.output, "rose_bush_to_blue_dye");
+
+        this.shaped(RecipeCategory.MISC, Items.BLUE_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.BLUE_ROSE.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.BLUE_ROSE.get()), has(ModBLocks.BLUE_ROSE.get()))
+                .save(this.output, "rose_to_blue_dye");
 
         this.shaped(RecipeCategory.MISC, ModBLocks.WHITE_ROSE_BUSH)
                 .pattern("B")
@@ -1046,6 +1074,20 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy(getHasName(ModBLocks.WHITE_ROSE.get()), has(ModBLocks.WHITE_ROSE.get()))
                 .save(this.output, "white_rose_bush");
 
+        this.shaped(RecipeCategory.MISC, Items.WHITE_DYE, 2) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.WHITE_ROSE_BUSH.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.WHITE_ROSE_BUSH.get()), has(ModBLocks.WHITE_ROSE_BUSH.get()))
+                .save(this.output, "rose_bush_to_white_dye");
+
+        this.shaped(RecipeCategory.MISC, Items.WHITE_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.WHITE_ROSE.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.WHITE_ROSE.get()), has(ModBLocks.WHITE_ROSE.get()))
+                .save(this.output, "rose_to_white_dye");
+
         this.shaped(RecipeCategory.MISC, ModBLocks.WINTER_ROSE_BUSH)
                 .pattern("B")
                 .pattern("B")
@@ -1054,6 +1096,20 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy(getHasName(ModBLocks.WINTER_ROSE.get()), has(ModBLocks.WINTER_ROSE.get()))
                 .save(this.output, "winter_rose_bush");
 
+        this.shaped(RecipeCategory.MISC, Items.LIGHT_BLUE_DYE, 2) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.WINTER_ROSE_BUSH.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.WINTER_ROSE_BUSH.get()), has(ModBLocks.WINTER_ROSE_BUSH.get()))
+                .save(this.output, "rose_bush_to_light_blue_dye");
+
+        this.shaped(RecipeCategory.MISC, Items.LIGHT_BLUE_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.WINTER_ROSE.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.WINTER_ROSE.get()), has(ModBLocks.WINTER_ROSE.get()))
+                .save(this.output, "rose_to_light_blue_dye");
+
         this.shaped(RecipeCategory.MISC, ModBLocks.DUSKY_ROSE_BUSH)
                 .pattern("B")
                 .pattern("B")
@@ -1061,6 +1117,218 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('B', ModBLocks.DUSKY_ROSE.get())
                 .unlockedBy(getHasName(ModBLocks.DUSKY_ROSE.get()), has(ModBLocks.DUSKY_ROSE.get()))
                 .save(this.output, "dusky_rose_bush");
+
+        this.shaped(RecipeCategory.MISC, Items.RED_DYE, 2) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.DUSKY_ROSE_BUSH.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.DUSKY_ROSE_BUSH.get()), has(ModBLocks.DUSKY_ROSE_BUSH.get()))
+                .save(this.output, "rose_bush_to_two_red_dye");
+
+        this.shaped(RecipeCategory.MISC, Items.RED_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.DUSKY_ROSE.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.DUSKY_ROSE.get()), has(ModBLocks.DUSKY_ROSE.get()))
+                .save(this.output, "rose_to_two_red_dye");
+
+        this.shaped(RecipeCategory.MISC, Items.MAGENTA_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.THISTLE.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.THISTLE.get()), has(ModBLocks.THISTLE.get()))
+                .save(this.output, "thistle_to_magenta_dye");
+
+        this.shaped(RecipeCategory.MISC, Items.YELLOW_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.TANSY.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.TANSY.get()), has(ModBLocks.TANSY.get()))
+                .save(this.output, "tansy_to_yellow_dye");
+
+        this.shaped(RecipeCategory.MISC, Items.ORANGE_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.SPICEFLOWER.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.SPICEFLOWER.get()), has(ModBLocks.SPICEFLOWER.get()))
+                .save(this.output, "spiceflower_to_orange_dye");
+
+        this.shaped(RecipeCategory.MISC, Items.YELLOW_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.SEDGE.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.SEDGE.get()), has(ModBLocks.SEDGE.get()))
+                .save(this.output, "sedge_to_yellow_dye");
+
+        this.shaped(RecipeCategory.MISC, Items.MAGENTA_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.SAFFRON_CROCUS.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.SAFFRON_CROCUS.get()), has(ModBLocks.SAFFRON_CROCUS.get()))
+                .save(this.output, "saffron_to_magenta_dye");
+
+        this.shaped(RecipeCategory.MISC, Items.PURPLE_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.POISON_KISSES.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.POISON_KISSES.get()), has(ModBLocks.POISON_KISSES.get()))
+                .save(this.output, "poison_kisses_to_purple_dye");
+
+        this.shaped(RecipeCategory.MISC, Items.PURPLE_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.PENNYROYAL.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.PENNYROYAL.get()), has(ModBLocks.PENNYROYAL.get()))
+                .save(this.output, "penny_royal_to_purple_dye");
+
+        this.shaped(RecipeCategory.MISC, Items.MAGENTA_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.OPIUM_POPPY.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.OPIUM_POPPY.get()), has(ModBLocks.OPIUM_POPPY.get()))
+                .save(this.output, "opium_poppy_to_magenta_dye");
+
+        this.shaped(RecipeCategory.MISC, Items.PURPLE_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.NIGHTSHADE.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.NIGHTSHADE.get()), has(ModBLocks.NIGHTSHADE.get()))
+                .save(this.output, "nightshade_to_purple_dye");
+
+        this.shaped(RecipeCategory.MISC, Items.BLUE_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.MOONBLOOM.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.MOONBLOOM.get()), has(ModBLocks.MOONBLOOM.get()))
+                .save(this.output, "moonbloom_to_blue_dye");
+
+        this.shaped(RecipeCategory.MISC, Items.MAGENTA_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.LUNGWORT.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.LUNGWORT.get()), has(ModBLocks.LUNGWORT.get()))
+                .save(this.output, "lungwort_to_magenta_dye");
+
+        this.shaped(RecipeCategory.MISC, Items.PINK_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.LIVERWORT.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.LIVERWORT.get()), has(ModBLocks.LIVERWORT.get()))
+                .save(this.output, "liverwort_to_pink_dye");
+
+        this.shaped(RecipeCategory.MISC, Items.PURPLE_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.LAVENDER.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.LAVENDER.get()), has(ModBLocks.LAVENDER.get()))
+                .save(this.output, "lavender_to_purple_dye");
+
+        this.shaped(RecipeCategory.MISC, Items.WHITE_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.LADYS_LACE.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.LADYS_LACE.get()), has(ModBLocks.LADYS_LACE.get()))
+                .save(this.output, "ladyslace_to_white_dye");
+
+        this.shaped(RecipeCategory.MISC, Items.YELLOW_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.GORSE.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.GORSE.get()), has(ModBLocks.GORSE.get()))
+                .save(this.output, "gorse_to_yellow_dye");
+
+        this.shaped(RecipeCategory.MISC, Items.YELLOW_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.GOLDENROD.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.GOLDENROD.get()), has(ModBLocks.GOLDENROD.get()))
+                .save(this.output, "goldenrod_to_yellow_dye");
+
+        this.shaped(RecipeCategory.MISC, Items.YELLOW_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.GOLDENCUP.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.GOLDENCUP.get()), has(ModBLocks.GOLDENCUP.get()))
+                .save(this.output, "goldencup_to_yellow_dye");
+
+        this.shaped(RecipeCategory.MISC, Items.YELLOW_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.GOATHEAD.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.GOATHEAD.get()), has(ModBLocks.GOATHEAD.get()))
+                .save(this.output, "goathead_to_yellow_dye");
+
+        this.shaped(RecipeCategory.MISC, Items.RED_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.GINGER.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.GINGER.get()), has(ModBLocks.GINGER.get()))
+                .save(this.output, "ginger_to_yellow_dye");
+
+
+        this.shaped(RecipeCategory.MISC, Items.PINK_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.GILLYFLOWER.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.GILLYFLOWER.get()), has(ModBLocks.GILLYFLOWER.get()))
+                .save(this.output, "gillyflower_to_yellow_dye");
+
+        this.shaped(RecipeCategory.MISC, Items.RED_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.FROSTFIRE.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.FROSTFIRE.get()), has(ModBLocks.FROSTFIRE.get()))
+                .save(this.output, "frostfire_to_red_dye");
+
+
+        this.shaped(RecipeCategory.MISC, Items.LIGHT_BLUE_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.FORGET_ME_NOT.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.FORGET_ME_NOT.get()), has(ModBLocks.FORGET_ME_NOT.get()))
+                .save(this.output, "forget_me_not_to_light_blue_dye");
+
+        this.shaped(RecipeCategory.MISC, Items.YELLOW_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.EVENING_STAR.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.EVENING_STAR.get()), has(ModBLocks.EVENING_STAR.get()))
+                .save(this.output, "evening_star_to_yellow_dye");
+
+        this.shaped(RecipeCategory.MISC, Items.RED_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.DRAGONS_BREATH.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.DRAGONS_BREATH.get()), has(ModBLocks.DRAGONS_BREATH.get()))
+                .save(this.output, "dragons_breath_to_red_dye");
+
+        this.shaped(RecipeCategory.MISC, Items.LIGHT_BLUE_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.COLDSNAP.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.COLDSNAP.get()), has(ModBLocks.COLDSNAP.get()))
+                .save(this.output, "coldsnap_to_light_blue_dye");
+
+        this.shaped(RecipeCategory.MISC, Items.RED_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.BLOODBLOOM.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.BLOODBLOOM.get()), has(ModBLocks.BLOODBLOOM.get()))
+                .save(this.output, "bloodbloom_to_red_dye");
+
+        this.shaped(RecipeCategory.MISC, Items.BLACK_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.BLACK_LOTUS.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.BLACK_LOTUS.get()), has(ModBLocks.BLACK_LOTUS.get()))
+                .save(this.output, "black_lotus_to_black_dye");
+
+        this.shaped(RecipeCategory.MISC, Items.WHITE_DYE) // Crafting 2 red dye from a single rose bush
+                .pattern("B")
+                .pattern(" ")
+                .define('B', ModBLocks.WILD_RADISH.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.WILD_RADISH.get()), has(ModBLocks.WILD_RADISH.get()))
+                .save(this.output, "wild_radish_to_white_dye");
 
 
         // -------------------------------------------------(FOODS)------------------------------------------------- //
