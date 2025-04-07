@@ -64,8 +64,11 @@
     [],
     [
       "minecraft:glow_lichen",
-      "minecraft:forest_flowers",
       "minecraft:patch_large_fern",
+      "agotmod:thorn_bush",
+      "agotmod:thistle",
+      "agotmod:frostfire",
+      "agotmod:winter_rose_bush",
       "agotmod:ash",
       "agotmod:chestnut",
       "agotmod:ironwood",

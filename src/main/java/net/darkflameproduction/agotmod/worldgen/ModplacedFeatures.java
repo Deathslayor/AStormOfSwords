@@ -12,9 +12,7 @@ import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
-import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.minecraft.world.level.levelgen.placement.PlacementModifier;
+import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraft.world.level.block.Blocks;
 
 
@@ -37,6 +35,42 @@ public class ModplacedFeatures {
     public static final ResourceKey<PlacedFeature> BLACKBARK_KEY = registerKey("blackbark");
     public static final ResourceKey<PlacedFeature> ASPEN_KEY = registerKey("aspen");
     public static final ResourceKey<PlacedFeature> ALDER_KEY = registerKey("alder");
+    public static final ResourceKey<PlacedFeature> THORN_BUSH_KEY = registerKey("thorn_bush");
+    public static final ResourceKey<PlacedFeature> THISTLE_KEY = registerKey("thistle");
+    public static final ResourceKey<PlacedFeature> TANSY_KEY = registerKey("tansy");
+    public static final ResourceKey<PlacedFeature> SPICEFLOWER_KEY = registerKey("spiceflower");
+    public static final ResourceKey<PlacedFeature> SEDGE_KEY = registerKey("sedge");
+    public static final ResourceKey<PlacedFeature> SAFFRON_CROCUS_KEY = registerKey("saffron_crocus");
+    public static final ResourceKey<PlacedFeature> POISON_KISSES_KEY = registerKey("poison_kisses");
+    public static final ResourceKey<PlacedFeature> PENNYROYAL_KEY = registerKey("pennyroyal");
+    public static final ResourceKey<PlacedFeature> OPIUM_POPPY_KEY = registerKey("opium_poppy");
+    public static final ResourceKey<PlacedFeature> NIGHTSHADE_KEY = registerKey("nightshade");
+    public static final ResourceKey<PlacedFeature> MOONBLOOM_KEY = registerKey("moonbloom");
+    public static final ResourceKey<PlacedFeature> LUNGWORT_KEY = registerKey("lungwort");
+    public static final ResourceKey<PlacedFeature> LIVERWORT_KEY = registerKey("liverwort");
+    public static final ResourceKey<PlacedFeature> LAVENDER_KEY = registerKey("lavender");
+    public static final ResourceKey<PlacedFeature> LADYS_LACE_KEY = registerKey("ladys_lace");
+    public static final ResourceKey<PlacedFeature> GORSE_KEY = registerKey("gorse");
+    public static final ResourceKey<PlacedFeature> GOLDENROD_KEY = registerKey("goldenrod");
+    public static final ResourceKey<PlacedFeature> GOLDENCUP_KEY = registerKey("goldencup");
+    public static final ResourceKey<PlacedFeature> GOATHEAD_KEY = registerKey("goathead");
+    public static final ResourceKey<PlacedFeature> GINGER_KEY = registerKey("ginger");
+    public static final ResourceKey<PlacedFeature> GILLYFLOWER_KEY = registerKey("gillyflower");
+    public static final ResourceKey<PlacedFeature> FROSTFIRE_KEY = registerKey("frostfire");
+    public static final ResourceKey<PlacedFeature> FORGET_ME_NOT_KEY = registerKey("forget_me_not");
+    public static final ResourceKey<PlacedFeature> EVENING_STAR_KEY = registerKey("evening_star");
+    public static final ResourceKey<PlacedFeature> DRAGONS_BREATH_KEY = registerKey("dragons_breath");
+    public static final ResourceKey<PlacedFeature> COLDSNAP_KEY = registerKey("coldsnap");
+    public static final ResourceKey<PlacedFeature> BLUE_ROSE_KEY = registerKey("blue_rose");
+    public static final ResourceKey<PlacedFeature> BLOODBLOOM_KEY = registerKey("bloodbloom");
+    public static final ResourceKey<PlacedFeature> BLACK_LOTUS_KEY = registerKey("black_lotus");
+    public static final ResourceKey<PlacedFeature> BLUE_ROSE_BUSH_KEY = registerKey("blue_rose_bush");
+    public static final ResourceKey<PlacedFeature> WHITE_ROSE_BUSH_KEY = registerKey("white_rose_bush");
+    public static final ResourceKey<PlacedFeature> DUSKY_ROSE_BUSH_KEY = registerKey("dusky_rose_bush");
+    public static final ResourceKey<PlacedFeature> WINTER_ROSE_BUSH_KEY = registerKey("winter_rose_bush");
+    public static final ResourceKey<PlacedFeature> RED_ROSE_BUSH_KEY = registerKey("red_rose_bush");
+
+
 
 
     // Bootstrap method for initializing placed features
@@ -101,7 +135,272 @@ public class ModplacedFeatures {
         register(context, ALDER_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ALDER_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
                         ModBLocks.ALDER_SAPLING.get()));
+
+        register(context, THORN_BUSH_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.THORN_BUSH_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, THISTLE_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.THISTLE_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, TANSY_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.TANSY_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, SPICEFLOWER_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.SPICEFLOWER_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, SEDGE_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.SEDGE_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, SAFFRON_CROCUS_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.SAFFRON_CROCUS_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, POISON_KISSES_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.POISON_KISSES_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, PENNYROYAL_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.PENNYROYAL_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, OPIUM_POPPY_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.OPIUM_POPPY_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, NIGHTSHADE_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.NIGHTSHADE_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, MOONBLOOM_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.MOONBLOOM_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, LUNGWORT_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.LUNGWORT_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, LIVERWORT_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.LIVERWORT_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, LAVENDER_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.LAVENDER_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, LADYS_LACE_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.LADYS_LACE_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, GORSE_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.GORSE_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, GOLDENROD_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.GOLDENROD_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, GOLDENCUP_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.GOLDENCUP_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, GOATHEAD_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.GOATHEAD_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, GINGER_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.GINGER_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, GILLYFLOWER_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.GILLYFLOWER_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, FROSTFIRE_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.FROSTFIRE_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, FORGET_ME_NOT_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.FORGET_ME_NOT_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, EVENING_STAR_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.EVENING_STAR_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, DRAGONS_BREATH_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.DRAGONS_BREATH_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, COLDSNAP_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.COLDSNAP_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, BLOODBLOOM_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.BLOODBLOOM_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, BLACK_LOTUS_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.BLACK_LOTUS_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, BLUE_ROSE_BUSH_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.BLUE_ROSE_BUSH_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, WHITE_ROSE_BUSH_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.WHITE_ROSE_BUSH_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, DUSKY_ROSE_BUSH_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.DUSKY_ROSE_BUSH_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, WINTER_ROSE_BUSH_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.WINTER_ROSE_BUSH_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, RED_ROSE_BUSH_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.RED_ROSE_BUSH_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(32),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
     }
+
 
     // Helper method to register a ResourceKey for a placed feature
     private static ResourceKey<PlacedFeature> registerKey(String name) {

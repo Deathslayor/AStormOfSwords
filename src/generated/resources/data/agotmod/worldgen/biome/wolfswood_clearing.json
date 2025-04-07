@@ -62,10 +62,17 @@
     [],
     [
       "minecraft:glow_lichen",
-      "minecraft:forest_flowers",
       "minecraft:patch_large_fern",
       "minecraft:patch_grass_savanna",
-      "minecraft:flower_plains"
+      "agotmod:winter_rose_bush",
+      "agotmod:thorn_bush",
+      "agotmod:thistle",
+      "agotmod:pennyroyal",
+      "agotmod:lungwort",
+      "agotmod:liverwort",
+      "agotmod:frostfire",
+      "agotmod:forget_me_not",
+      "agotmod:red_rose_bush"
     ],
     [
       "minecraft:freeze_top_layer"

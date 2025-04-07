@@ -72,9 +72,11 @@
     ],
     [
       "minecraft:glow_lichen",
-      "minecraft:forest_flowers",
       "minecraft:patch_large_fern",
-      "minecraft:flower_meadow"
+      "agotmod:thorn_bush",
+      "agotmod:thistle",
+      "agotmod:frostfire",
+      "agotmod:winter_rose_bush"
     ],
     [
       "minecraft:freeze_top_layer"
