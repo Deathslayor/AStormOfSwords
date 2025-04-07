@@ -42,6 +42,20 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> BLACKBARK_KEY = registerKey("blackbark");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ASPEN_KEY = registerKey("aspen");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ALDER_KEY = registerKey("alder");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SYCAMORE_RARE_KEY = registerKey("sycamore_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> WEIRWOOD_RARE_KEY = registerKey("weirwood_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OAK2_RARE_KEY = registerKey("oak2_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SENTINEL_RARE_KEY = registerKey("sentinel_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PINE_RARE_KEY = registerKey("pine_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> IRONWOOD_RARE_KEY = registerKey("ironwood_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> HAWTHORN_RARE_KEY = registerKey("hawthorn_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> CHESTNUT_RARE_KEY = registerKey("chestnut_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> CEDAR_RARE_KEY = registerKey("cedar_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BEECH_RARE_KEY = registerKey("beech_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ASH_RARE_KEY = registerKey("ash_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BLACKBARK_RARE_KEY = registerKey("blackbark_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ASPEN_RARE_KEY = registerKey("aspen_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ALDER_RARE_KEY = registerKey("alder_rare");
     public static final ResourceKey<ConfiguredFeature<?, ?>> THORN_BUSH_KEY = registerKey("thorn_bush");
     public static final ResourceKey<ConfiguredFeature<?, ?>> THISTLE_KEY = registerKey("thistle");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TANSY_KEY = registerKey("tansy");
@@ -96,6 +110,7 @@ public class ModConfiguredFeatures {
         // Register the configured feature for overworld tin ore
         register(context, OVERWORLD_TIN_ORE, Feature.ORE, new OreConfiguration(overworldTinOre, 5));
 
+        //Forest Trees
 
         register(context, SYCAMORE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBLocks.SYCAMORE_LOG.get()),  // Ironwood log instead of Weirwood log
@@ -222,6 +237,107 @@ public class ModConfiguredFeatures {
                 new SpruceFoliagePlacer(ConstantInt.of(2), ConstantInt.of(3), ConstantInt.of(2)),
                 new TwoLayersFeatureSize(1, 1, 1)
         ).build());
+
+        //Rare Trees For Plains
+
+        register(context, SYCAMORE_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.SYCAMORE_LOG.get()),
+                new FancyTrunkPlacer(7, 2, 3),
+                BlockStateProvider.simple(ModBLocks.SYCAMORE_LEAVES.get()),
+                new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
+                new TwoLayersFeatureSize(1, 0, 2)).build());
+
+        register(context, WEIRWOOD_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.WEIRWOOD_LOG.get()),
+                new FancyTrunkPlacer(9, 6, 6),
+                BlockStateProvider.simple(ModBLocks.WEIRWOOD_LEAVES.get()),
+                new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
+                new TwoLayersFeatureSize(1, 0, 2)).build());
+
+        register(context, OAK2_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(Blocks.OAK_LOG),
+                new FancyTrunkPlacer(7, 2, 3),
+                BlockStateProvider.simple(Blocks.OAK_LEAVES),
+                new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
+                new TwoLayersFeatureSize(1, 0, 2)).build());
+
+        register(context, SENTINEL_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.SENTINEL_LOG.get()),
+                new StraightTrunkPlacer(12, 3, 3),
+                BlockStateProvider.simple(ModBLocks.SENTINEL_LEAVES.get()),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, PINE_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.PINE_LOG.get()),
+                new StraightTrunkPlacer(7, 2, 2),
+                BlockStateProvider.simple(ModBLocks.PINE_LEAVES.get()),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, IRONWOOD_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.IRONWOOD_LOG.get()),
+                new FancyTrunkPlacer(7, 2, 3),
+                BlockStateProvider.simple(ModBLocks.IRONWOOD_LEAVES.get()),
+                new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
+                new TwoLayersFeatureSize(1, 0, 2)).build());
+
+        register(context, HAWTHORN_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.HAWTHORN_LOG.get()),
+                new FancyTrunkPlacer(7, 2, 3),
+                BlockStateProvider.simple(ModBLocks.HAWTHORN_LEAVES.get()),
+                new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
+                new TwoLayersFeatureSize(1, 0, 2)).build());
+
+        register(context, CHESTNUT_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.CHESTNUT_LOG.get()),
+                new FancyTrunkPlacer(7, 2, 3),
+                BlockStateProvider.simple(ModBLocks.CHESTNUT_LEAVES.get()),
+                new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
+                new TwoLayersFeatureSize(1, 0, 2)).build());
+
+        register(context, CEDAR_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.CEDAR_LOG.get()),
+                new FancyTrunkPlacer(7, 2, 3),
+                BlockStateProvider.simple(ModBLocks.CEDAR_LEAVES.get()),
+                new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
+                new TwoLayersFeatureSize(1, 0, 2)).build());
+
+        register(context, BEECH_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.BEECH_LOG.get()),
+                new FancyTrunkPlacer(7, 2, 3),
+                BlockStateProvider.simple(ModBLocks.BEECH_LEAVES.get()),
+                new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
+                new TwoLayersFeatureSize(1, 0, 2)).build());
+
+        register(context, ASH_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.ASH_LOG.get()),
+                new FancyTrunkPlacer(7, 2, 3),
+                BlockStateProvider.simple(ModBLocks.ASH_LEAVES.get()),
+                new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
+                new TwoLayersFeatureSize(1, 0, 2)).build());
+
+        register(context, BLACKBARK_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.BLACKBARK_LOG.get()),
+                new FancyTrunkPlacer(7, 2, 3),
+                BlockStateProvider.simple(ModBLocks.BLACKBARK_LEAVES.get()),
+                new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
+                new TwoLayersFeatureSize(1, 0, 2)).build());
+
+        register(context, ASPEN_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.ASPEN_LOG.get()),
+                new StraightTrunkPlacer(7, 2, 2),
+                BlockStateProvider.simple(ModBLocks.ASPEN_LEAVES.get()),
+                new SpruceFoliagePlacer(ConstantInt.of(2), ConstantInt.of(2), ConstantInt.of(2)),
+                new TwoLayersFeatureSize(1, 1, 1)).build());
+
+        register(context, ALDER_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.ALDER_LOG.get()),
+                new StraightTrunkPlacer(7, 2, 2),
+                BlockStateProvider.simple(ModBLocks.ALDER_LEAVES.get()),
+                new SpruceFoliagePlacer(ConstantInt.of(2), ConstantInt.of(3), ConstantInt.of(2)),
+                new TwoLayersFeatureSize(1, 1, 1)).build());
+
 
         register(context, THORN_BUSH_KEY, Feature.FLOWER,
                 new RandomPatchConfiguration(

@@ -10,8 +10,15 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.SpruceFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraft.world.level.block.Blocks;
 
@@ -35,6 +42,19 @@ public class ModplacedFeatures {
     public static final ResourceKey<PlacedFeature> BLACKBARK_KEY = registerKey("blackbark");
     public static final ResourceKey<PlacedFeature> ASPEN_KEY = registerKey("aspen");
     public static final ResourceKey<PlacedFeature> ALDER_KEY = registerKey("alder");
+    public static final ResourceKey<PlacedFeature> WEIRWOOD_RARE_KEY = registerKey("weirwood_rare");
+    public static final ResourceKey<PlacedFeature> OAK2_RARE_KEY = registerKey("oak_rare");
+    public static final ResourceKey<PlacedFeature> SENTINEL_RARE_KEY = registerKey("sentinel_rare");
+    public static final ResourceKey<PlacedFeature> PINE_RARE_KEY = registerKey("pine_rare");
+    public static final ResourceKey<PlacedFeature> IRONWOOD_RARE_KEY = registerKey("ironwood_rare");
+    public static final ResourceKey<PlacedFeature> HAWTHORN_RARE_KEY = registerKey("hawthorn_rare");
+    public static final ResourceKey<PlacedFeature> CHESTNUT_RARE_KEY = registerKey("chestnut_rare");
+    public static final ResourceKey<PlacedFeature> CEDAR_RARE_KEY = registerKey("cedar_rare");
+    public static final ResourceKey<PlacedFeature> BEECH_RARE_KEY = registerKey("beech_rare");
+    public static final ResourceKey<PlacedFeature> ASH_RARE_KEY = registerKey("ash_rare");
+    public static final ResourceKey<PlacedFeature> BLACKBARK_RARE_KEY = registerKey("blackbark_rare");
+    public static final ResourceKey<PlacedFeature> ASPEN_RARE_KEY = registerKey("aspen_rare");
+    public static final ResourceKey<PlacedFeature> ALDER_RARE_KEY = registerKey("alder_rare");
     public static final ResourceKey<PlacedFeature> THORN_BUSH_KEY = registerKey("thorn_bush");
     public static final ResourceKey<PlacedFeature> THISTLE_KEY = registerKey("thistle");
     public static final ResourceKey<PlacedFeature> TANSY_KEY = registerKey("tansy");
@@ -61,7 +81,6 @@ public class ModplacedFeatures {
     public static final ResourceKey<PlacedFeature> EVENING_STAR_KEY = registerKey("evening_star");
     public static final ResourceKey<PlacedFeature> DRAGONS_BREATH_KEY = registerKey("dragons_breath");
     public static final ResourceKey<PlacedFeature> COLDSNAP_KEY = registerKey("coldsnap");
-    public static final ResourceKey<PlacedFeature> BLUE_ROSE_KEY = registerKey("blue_rose");
     public static final ResourceKey<PlacedFeature> BLOODBLOOM_KEY = registerKey("bloodbloom");
     public static final ResourceKey<PlacedFeature> BLACK_LOTUS_KEY = registerKey("black_lotus");
     public static final ResourceKey<PlacedFeature> BLUE_ROSE_BUSH_KEY = registerKey("blue_rose_bush");
@@ -82,6 +101,8 @@ public class ModplacedFeatures {
         register(context, TIN_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_TIN_ORE),
                 ModOrePlacement.commonOrePlacement(14,
                         HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(80))));
+
+        //Forest Trees
 
         register(context, WEIRWOOD_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.WEIRWOOD_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.1f, 1),
@@ -136,7 +157,65 @@ public class ModplacedFeatures {
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
                         ModBLocks.ALDER_SAPLING.get()));
 
-        register(context, THORN_BUSH_KEY,
+        //Rare Trees For plains
+        register(context, WEIRWOOD_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.WEIRWOOD_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.WEIRWOOD_SAPLING.get()));
+
+        register(context, OAK2_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OAK2_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        Blocks.OAK_SAPLING));
+
+        register(context, SENTINEL_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SENTINEL_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SENTINEL_SAPLING.get()));
+
+        register(context, PINE_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PINE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.PINE_SAPLING.get()));
+
+        register(context, IRONWOOD_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.IRONWOOD_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.IRONWOOD_SAPLING.get()));
+
+        register(context, HAWTHORN_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.HAWTHORN_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.HAWTHORN_SAPLING.get()));
+
+        register(context, CHESTNUT_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.CHESTNUT_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.CHESTNUT_SAPLING.get()));
+
+        register(context, CEDAR_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.CEDAR_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.CEDAR_SAPLING.get()));
+
+        register(context, BEECH_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BEECH_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.BEECH_SAPLING.get()));
+
+        register(context, ASH_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ASH_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.ASH_SAPLING.get()));
+
+        register(context, BLACKBARK_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BLACKBARK_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.BLACKBARK_SAPLING.get()));
+
+        register(context, ASPEN_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ASPEN_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.ASPEN_SAPLING.get()));
+
+        register(context, ALDER_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ALDER_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.ALDER_SAPLING.get()));
+
+
+
+
+
+
+                        register(context, THORN_BUSH_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.THORN_BUSH_KEY),
                 List.of(CountPlacement.of(1),
                         RarityFilter.onAverageOnceEvery(32),

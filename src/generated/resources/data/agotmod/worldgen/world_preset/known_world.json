@@ -11,8 +11,6 @@
           "spawn_pixel_y": 6000,
           "zones": [
             "agotmod:mangroves",
-            "agotmod:snowy_plains",
-            "agotmod:plains",
             "agotmod:swamp",
             "agotmod:savanna_plateu",
             "agotmod:forest",
@@ -34,6 +32,8 @@
             "agotmod:ironwood",
             "agotmod:northern_hills",
             "agotmod:northern_mountains",
+            "agotmod:the_north",
+            "agotmod:the_north",
             "agotmod:barrowlands"
           ]
         }
