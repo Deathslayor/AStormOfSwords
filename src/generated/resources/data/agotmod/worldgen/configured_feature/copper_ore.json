@@ -6,7 +6,7 @@
     "targets": [
       {
         "state": {
-          "Name": "agotmod:tin_ore"
+          "Name": "minecraft:copper_ore"
         },
         "target": {
           "predicate_type": "minecraft:tag_match",
@@ -15,7 +15,7 @@
       },
       {
         "state": {
-          "Name": "agotmod:deepslate_tin_ore"
+          "Name": "minecraft:deepslate_copper_ore"
         },
         "target": {
           "predicate_type": "minecraft:tag_match",

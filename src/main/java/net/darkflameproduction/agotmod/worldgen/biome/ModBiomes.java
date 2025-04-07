@@ -130,6 +130,34 @@ public class ModBiomes {
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.BEECH_RARE_KEY);
     }
 
+    private static void addModOres (BiomeGenerationSettings.Builder biomeBuilder, BootstrapContext<Biome> context) {
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ModplacedFeatures.TIN_ORE_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ModplacedFeatures.IRON_ORE_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ModplacedFeatures.COAL_ORE_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ModplacedFeatures.COPPER_ORE_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ModplacedFeatures.GOLD_ORE_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ModplacedFeatures.LAPIS_ORE_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ModplacedFeatures.EMERALD_ORE_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ModplacedFeatures.DIAMONDS_ORE_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ModplacedFeatures.BLOODSTONE_ORE_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ModplacedFeatures.CHALCEDONY_ORE_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ModplacedFeatures.AMBER_ORE_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ModplacedFeatures.AMETHYST_ORE_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ModplacedFeatures.CARNELIAN_ORE_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ModplacedFeatures.GARNET_ORE_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ModplacedFeatures.JADE_ORE_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ModplacedFeatures.JASPER_ORE_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ModplacedFeatures.MALACHITE_ORE_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ModplacedFeatures.RUBY_ORE_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ModplacedFeatures.ONYX_ORE_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ModplacedFeatures.OPAL_ORE_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ModplacedFeatures.SAPPHIRE_ORE_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ModplacedFeatures.MOONSTONE_ORE_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ModplacedFeatures.TIGERS_EYE_ORE_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ModplacedFeatures.TOPAZ_ORE_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ModplacedFeatures.TOURMALINE_ORE_PLACED_KEY);
+    }
+
 
 
 
@@ -152,7 +180,7 @@ public class ModBiomes {
         //BiomeDefaultFeatures.addMossyStoneBlock(biomeBuilder);
         //BiomeDefaultFeatures.addForestFlowers(biomeBuilder);
         //BiomeDefaultFeatures.addFerns(biomeBuilder);
-        BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
+        addModOres(biomeBuilder, context);
         //BiomeDefaultFeatures.addExtraGold(biomeBuilder);
 
         //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.TREES_PLAINS);
@@ -193,7 +221,7 @@ public class ModBiomes {
         BiomeDefaultFeatures.addMossyStoneBlock(biomeBuilder);
         BiomeDefaultFeatures.addFerns(biomeBuilder);
         BiomeDefaultFeatures.addForestGrass(biomeBuilder);
-        BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
+        addModOres(biomeBuilder, context);
         //BiomeDefaultFeatures.addExtraGold(biomeBuilder);
         addFlowerFeaturesBeyondTheWall(biomeBuilder, context);
         addForestHauntedForest(biomeBuilder, context);
@@ -237,7 +265,7 @@ public class ModBiomes {
         //BiomeDefaultFeatures.addMossyStoneBlock(biomeBuilder);
         BiomeDefaultFeatures.addForestFlowers(biomeBuilder);
         BiomeDefaultFeatures.addFerns(biomeBuilder);
-        BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
+        addModOres(biomeBuilder, context);
         //BiomeDefaultFeatures.addExtraGold(biomeBuilder);
 
         //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.TREES_TAIGA);
@@ -278,7 +306,7 @@ public class ModBiomes {
         //BiomeDefaultFeatures.addMossyStoneBlock(biomeBuilder);
         BiomeDefaultFeatures.addForestFlowers(biomeBuilder);
         BiomeDefaultFeatures.addFerns(biomeBuilder);
-        BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
+        addModOres(biomeBuilder, context);
         //BiomeDefaultFeatures.addExtraGold(biomeBuilder);
 
         //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.TREES_TAIGA);
@@ -321,7 +349,7 @@ public class ModBiomes {
         //BiomeDefaultFeatures.addMossyStoneBlock(biomeBuilder);
         BiomeDefaultFeatures.addFerns(biomeBuilder);
         BiomeDefaultFeatures.addSavannaGrass(biomeBuilder);
-        BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
+        addModOres(biomeBuilder, context);
         //BiomeDefaultFeatures.addExtraGold(biomeBuilder);
         addFlowerFeaturesBeyondTheWall(biomeBuilder, context);
 
@@ -356,7 +384,7 @@ public class ModBiomes {
         BiomeDefaultFeatures.addMossyStoneBlock(biomeBuilder);
         BiomeDefaultFeatures.addFerns(biomeBuilder);
         BiomeDefaultFeatures.addForestGrass(biomeBuilder);
-        BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
+        addModOres(biomeBuilder, context);
         addFlowerFeaturesNorth(biomeBuilder, context);
         addForestFeaturesWolfswood(biomeBuilder, context);
 
@@ -391,7 +419,7 @@ public class ModBiomes {
         BiomeDefaultFeatures.addMossyStoneBlock(biomeBuilder);
         BiomeDefaultFeatures.addFerns(biomeBuilder);
         BiomeDefaultFeatures.addForestGrass(biomeBuilder);
-        BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
+        addModOres(biomeBuilder, context);
         addFlowerFeaturesNorth(biomeBuilder, context);
         addForestIronwood(biomeBuilder, context);
 
@@ -423,7 +451,7 @@ public class ModBiomes {
         globalOverworldGeneration(biomeBuilder);
         BiomeDefaultFeatures.addFerns(biomeBuilder);
         BiomeDefaultFeatures.addSavannaExtraGrass(biomeBuilder);
-        BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
+        addModOres(biomeBuilder, context);
         addFlowerFeaturesNorth(biomeBuilder, context);
         addTreesNorthPlains(biomeBuilder, context);
 
@@ -454,7 +482,7 @@ public class ModBiomes {
         globalOverworldGeneration(biomeBuilder);
         BiomeDefaultFeatures.addFerns(biomeBuilder);
         BiomeDefaultFeatures.addSavannaGrass(biomeBuilder);
-        BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
+        addModOres(biomeBuilder, context);
         addFlowerFeaturesNorth(biomeBuilder, context);
         addTreesNorthPlains(biomeBuilder, context);
         return new Biome.BiomeBuilder()
@@ -482,7 +510,7 @@ public class ModBiomes {
         BiomeGenerationSettings.Builder biomeBuilder =
                 new BiomeGenerationSettings.Builder(context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
         globalOverworldGeneration(biomeBuilder);
-        BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
+        addModOres(biomeBuilder, context);
 
 
         return new Biome.BiomeBuilder()
@@ -519,7 +547,7 @@ public class ModBiomes {
         //BiomeDefaultFeatures.addForestFlowers(biomeBuilder);
         BiomeDefaultFeatures.addFerns(biomeBuilder);
         BiomeDefaultFeatures.addSavannaExtraGrass(biomeBuilder);
-        BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
+        addModOres(biomeBuilder, context);
         //BiomeDefaultFeatures.addExtraGold(biomeBuilder);
         addFlowerFeaturesNorth(biomeBuilder, context);
         addTreesNorthPlains(biomeBuilder, context);
@@ -561,7 +589,7 @@ public class ModBiomes {
         //BiomeDefaultFeatures.addForestFlowers(biomeBuilder);
         BiomeDefaultFeatures.addFerns(biomeBuilder);
         BiomeDefaultFeatures.addSavannaExtraGrass(biomeBuilder);
-        BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
+        addModOres(biomeBuilder, context);
         //BiomeDefaultFeatures.addExtraGold(biomeBuilder);
         addFlowerFeaturesNorth(biomeBuilder, context);
         addTreesNorthPlains(biomeBuilder, context);

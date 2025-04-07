@@ -28,6 +28,30 @@ import java.util.List;
 public class ModConfiguredFeatures {
     // Define a ResourceKey for the configured feature of overworld tin ore
     public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_TIN_ORE = registerKey("tin_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_IRON_ORE = registerKey("iron_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_COAL_ORE = registerKey("coal_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_COPPER_ORE = registerKey("copper_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_GOLD_ORE = registerKey("gold_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_LAPIS_ORE = registerKey("lapis_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_EMERALD_ORE = registerKey("emerald_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_DIAMONDS_ORE = registerKey("diamonds_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_BLOODSTONE_ORE = registerKey("bloodstone_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_CHALCEDONY_ORE = registerKey("chalcedony_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_AMBER_ORE = registerKey("amber_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_AMETHYST_ORE = registerKey("amethyst_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_CARNELIAN_ORE = registerKey("carnelian_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_GARNET_ORE = registerKey("garnet_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_JADE_ORE = registerKey("jade_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_JASPER_ORE = registerKey("jasper_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_MALACHITE_ORE = registerKey("malachite_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_RUBY_ORE = registerKey("ruby_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_ONYX_ORE = registerKey("onyx_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_OPAL_ORE = registerKey("opal_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_SAPPHIRE_ORE = registerKey("sapphire_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_MOONSTONE_ORE = registerKey("moonstone_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_TIGERS_EYE_ORE = registerKey("tigers_eye_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_TOPAZ_ORE = registerKey("topaz_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_TOURMALINE_ORE = registerKey("tourmaline_ore");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SYCAMORE_KEY = registerKey("sycamore");
     public static final ResourceKey<ConfiguredFeature<?, ?>> WEIRWOOD_KEY = registerKey("weirwood");
     public static final ResourceKey<ConfiguredFeature<?, ?>> OAK2_KEY = registerKey("oak2");
@@ -107,8 +131,156 @@ public class ModConfiguredFeatures {
                 OreConfiguration.target(deepslateReplaceables, ModBLocks.DEEPSLATE_TIN_ORE.get().defaultBlockState())
         );
 
+        List<OreConfiguration.TargetBlockState> overworldIronOre = List.of(
+                OreConfiguration.target(stoneReplaceables, Blocks.IRON_ORE.defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, Blocks.DEEPSLATE_IRON_ORE.defaultBlockState())
+        );
+
+        List<OreConfiguration.TargetBlockState> overworldCoalOre = List.of(
+                OreConfiguration.target(stoneReplaceables, Blocks.COAL_ORE.defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, Blocks.DEEPSLATE_COAL_ORE.defaultBlockState())
+        );
+
+        List<OreConfiguration.TargetBlockState> overworldCopperOre = List.of(
+                OreConfiguration.target(stoneReplaceables, Blocks.COPPER_ORE.defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, Blocks.DEEPSLATE_COPPER_ORE.defaultBlockState())
+        );
+
+        List<OreConfiguration.TargetBlockState> overworldGoldOre = List.of(
+                OreConfiguration.target(stoneReplaceables, Blocks.GOLD_ORE.defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, Blocks.DEEPSLATE_GOLD_ORE.defaultBlockState())
+        );
+
+        List<OreConfiguration.TargetBlockState> overworldLapisOre = List.of(
+                OreConfiguration.target(stoneReplaceables, Blocks.LAPIS_ORE.defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, Blocks.DEEPSLATE_LAPIS_ORE.defaultBlockState())
+        );
+
+        List<OreConfiguration.TargetBlockState> overworldEmeraldOre = List.of(
+                OreConfiguration.target(stoneReplaceables, Blocks.EMERALD_ORE.defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, Blocks.DEEPSLATE_EMERALD_ORE.defaultBlockState())
+        );
+
+        List<OreConfiguration.TargetBlockState> overworldDiamondsOre = List.of(
+                OreConfiguration.target(stoneReplaceables, ModBLocks.DIAMONDS_ORE.get().defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, ModBLocks.DIAMONDS_DEEPSLATE_ORE.get().defaultBlockState())
+        );
+
+        List<OreConfiguration.TargetBlockState> overworldBloodstoneOre = List.of(
+                OreConfiguration.target(stoneReplaceables, ModBLocks.BLOODSTONE_ORE.get().defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, ModBLocks.BLOODSTONE_DEEPSLATE_ORE.get().defaultBlockState())
+        );
+
+        List<OreConfiguration.TargetBlockState> overworldChalcedonyOre = List.of(
+                OreConfiguration.target(stoneReplaceables, ModBLocks.CHALCEDONY_ORE.get().defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, ModBLocks.CHALCEDONY_DEEPSLATE_ORE.get().defaultBlockState())
+        );
+
+        List<OreConfiguration.TargetBlockState> overworldAmberOre = List.of(
+                OreConfiguration.target(stoneReplaceables, ModBLocks.AMBER_ORE.get().defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, ModBLocks.AMBER_DEEPSLATE_ORE.get().defaultBlockState())
+        );
+
+        List<OreConfiguration.TargetBlockState> overworldAmethystOre = List.of(
+                OreConfiguration.target(stoneReplaceables, ModBLocks.AMETHYST_ORE.get().defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, ModBLocks.AMETHYST_DEEPSLATE_ORE.get().defaultBlockState())
+        );
+
+        List<OreConfiguration.TargetBlockState> overworldCarnelianOre = List.of(
+                OreConfiguration.target(stoneReplaceables, ModBLocks.CARNELIAN_ORE.get().defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, ModBLocks.CARNELIAN_DEEPSLATE_ORE.get().defaultBlockState())
+        );
+
+        List<OreConfiguration.TargetBlockState> overworldGarnetOre = List.of(
+                OreConfiguration.target(stoneReplaceables, ModBLocks.GARNET_ORE.get().defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, ModBLocks.GARNET_DEEPSLATE_ORE.get().defaultBlockState())
+        );
+
+        List<OreConfiguration.TargetBlockState> overworldJadeOre = List.of(
+                OreConfiguration.target(stoneReplaceables, ModBLocks.JADE_ORE.get().defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, ModBLocks.JADE_DEEPSLATE_ORE.get().defaultBlockState())
+        );
+
+        List<OreConfiguration.TargetBlockState> overworldJasperOre = List.of(
+                OreConfiguration.target(stoneReplaceables, ModBLocks.JASPER_ORE.get().defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, ModBLocks.JASPER_DEEPSLATE_ORE.get().defaultBlockState())
+        );
+
+        List<OreConfiguration.TargetBlockState> overworldMalachiteOre = List.of(
+                OreConfiguration.target(stoneReplaceables, ModBLocks.MALACHITE_ORE.get().defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, ModBLocks.MALACHITE_DEEPSLATE_ORE.get().defaultBlockState())
+        );
+
+        List<OreConfiguration.TargetBlockState> overworldRubyOre = List.of(
+                OreConfiguration.target(stoneReplaceables, ModBLocks.RUBY_ORE.get().defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, ModBLocks.RUBY_DEEPSLATE_ORE.get().defaultBlockState())
+        );
+
+        List<OreConfiguration.TargetBlockState> overworldOnyxOre = List.of(
+                OreConfiguration.target(stoneReplaceables, ModBLocks.ONYX_ORE.get().defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, ModBLocks.ONYX_DEEPSLATE_ORE.get().defaultBlockState())
+        );
+
+        List<OreConfiguration.TargetBlockState> overworldOpalOre = List.of(
+                OreConfiguration.target(stoneReplaceables, ModBLocks.OPAL_ORE.get().defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, ModBLocks.OPAL_DEEPSLATE_ORE.get().defaultBlockState())
+        );
+
+        List<OreConfiguration.TargetBlockState> overworldSapphireOre = List.of(
+                OreConfiguration.target(stoneReplaceables, ModBLocks.SAPPHIRE_ORE.get().defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, ModBLocks.SAPPHIRE_DEEPSLATE_ORE.get().defaultBlockState())
+        );
+
+        List<OreConfiguration.TargetBlockState> overworldMoonstoneOre = List.of(
+                OreConfiguration.target(stoneReplaceables, ModBLocks.MOONSTONE_ORE.get().defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, ModBLocks.MOONSTONE_DEEPSLATE_ORE.get().defaultBlockState())
+        );
+
+        List<OreConfiguration.TargetBlockState> overworldTigersEyeOre = List.of(
+                OreConfiguration.target(stoneReplaceables, ModBLocks.TIGERS_EYE_ORE.get().defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, ModBLocks.TIGERS_EYE_DEEPSLATE_ORE.get().defaultBlockState())
+        );
+
+        List<OreConfiguration.TargetBlockState> overworldTopazOre = List.of(
+                OreConfiguration.target(stoneReplaceables, ModBLocks.TOPAZ_ORE.get().defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, ModBLocks.TOPAZ_DEEPSLATE_ORE.get().defaultBlockState())
+        );
+
+        List<OreConfiguration.TargetBlockState> overworldTourmalineOre = List.of(
+                OreConfiguration.target(stoneReplaceables, ModBLocks.TOURMALINE_ORE.get().defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, ModBLocks.TOURMALINE_DEEPSLATE_ORE.get().defaultBlockState())
+        );
+
+
         // Register the configured feature for overworld tin ore
-        register(context, OVERWORLD_TIN_ORE, Feature.ORE, new OreConfiguration(overworldTinOre, 5));
+        register(context, OVERWORLD_TIN_ORE, Feature.ORE, new OreConfiguration(overworldTinOre, 9));
+        register(context, OVERWORLD_IRON_ORE, Feature.ORE, new OreConfiguration(overworldIronOre, 9));
+        register(context, OVERWORLD_COAL_ORE, Feature.ORE, new OreConfiguration(overworldCoalOre, 17));
+        register(context, OVERWORLD_COPPER_ORE, Feature.ORE, new OreConfiguration(overworldCopperOre, 9));
+        register(context, OVERWORLD_GOLD_ORE, Feature.ORE, new OreConfiguration(overworldGoldOre, 9));
+        register(context, OVERWORLD_LAPIS_ORE, Feature.ORE, new OreConfiguration(overworldLapisOre, 7));
+        register(context, OVERWORLD_EMERALD_ORE, Feature.ORE, new OreConfiguration(overworldEmeraldOre, 4));
+        register(context, OVERWORLD_DIAMONDS_ORE, Feature.ORE, new OreConfiguration(overworldDiamondsOre, 8));
+        register(context, OVERWORLD_BLOODSTONE_ORE, Feature.ORE, new OreConfiguration(overworldBloodstoneOre, 8));
+        register(context, OVERWORLD_CHALCEDONY_ORE, Feature.ORE, new OreConfiguration(overworldChalcedonyOre, 8));
+        register(context, OVERWORLD_AMBER_ORE, Feature.ORE, new OreConfiguration(overworldAmberOre, 8));
+        register(context, OVERWORLD_AMETHYST_ORE, Feature.ORE, new OreConfiguration(overworldAmethystOre, 8));
+        register(context, OVERWORLD_CARNELIAN_ORE, Feature.ORE, new OreConfiguration(overworldCarnelianOre, 8));
+        register(context, OVERWORLD_GARNET_ORE, Feature.ORE, new OreConfiguration(overworldGarnetOre, 8));
+        register(context, OVERWORLD_JADE_ORE, Feature.ORE, new OreConfiguration(overworldJadeOre, 8));
+        register(context, OVERWORLD_JASPER_ORE, Feature.ORE, new OreConfiguration(overworldJasperOre, 8));
+        register(context, OVERWORLD_MALACHITE_ORE, Feature.ORE, new OreConfiguration(overworldMalachiteOre, 8));
+        register(context, OVERWORLD_RUBY_ORE, Feature.ORE, new OreConfiguration(overworldRubyOre, 8));
+        register(context, OVERWORLD_ONYX_ORE, Feature.ORE, new OreConfiguration(overworldOnyxOre, 8));
+        register(context, OVERWORLD_OPAL_ORE, Feature.ORE, new OreConfiguration(overworldOpalOre, 8));
+        register(context, OVERWORLD_SAPPHIRE_ORE, Feature.ORE, new OreConfiguration(overworldSapphireOre, 8));
+        register(context, OVERWORLD_MOONSTONE_ORE, Feature.ORE, new OreConfiguration(overworldMoonstoneOre, 8));
+        register(context, OVERWORLD_TIGERS_EYE_ORE, Feature.ORE, new OreConfiguration(overworldTigersEyeOre, 8));
+        register(context, OVERWORLD_TOPAZ_ORE, Feature.ORE, new OreConfiguration(overworldTopazOre, 8));
+        register(context, OVERWORLD_TOURMALINE_ORE, Feature.ORE, new OreConfiguration(overworldTourmalineOre, 8));
+
+
+
 
         //Forest Trees
 

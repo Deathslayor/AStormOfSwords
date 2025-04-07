@@ -29,6 +29,30 @@ public class ModplacedFeatures {
 
     // Define a ResourceKey for the placed feature of tin ore
     public static final ResourceKey<PlacedFeature> TIN_ORE_PLACED_KEY = registerKey("tin_ore_placed");
+    public static final ResourceKey<PlacedFeature> IRON_ORE_PLACED_KEY = registerKey("iron_ore_placed");
+    public static final ResourceKey<PlacedFeature> COAL_ORE_PLACED_KEY = registerKey("coal_ore_placed");
+    public static final ResourceKey<PlacedFeature> COPPER_ORE_PLACED_KEY = registerKey("copper_ore_placed");
+    public static final ResourceKey<PlacedFeature> GOLD_ORE_PLACED_KEY = registerKey("gold_ore_placed");
+    public static final ResourceKey<PlacedFeature> LAPIS_ORE_PLACED_KEY = registerKey("lapis_ore_placed");
+    public static final ResourceKey<PlacedFeature> EMERALD_ORE_PLACED_KEY = registerKey("emerald_ore_placed");
+    public static final ResourceKey<PlacedFeature> DIAMONDS_ORE_PLACED_KEY = registerKey("diamonds_ore_placed");
+    public static final ResourceKey<PlacedFeature> BLOODSTONE_ORE_PLACED_KEY = registerKey("bloodstone_ore_placed");
+    public static final ResourceKey<PlacedFeature> CHALCEDONY_ORE_PLACED_KEY = registerKey("chalcedony_ore_placed");
+    public static final ResourceKey<PlacedFeature> AMBER_ORE_PLACED_KEY = registerKey("amber_ore_placed");
+    public static final ResourceKey<PlacedFeature> AMETHYST_ORE_PLACED_KEY = registerKey("amethyst_ore_placed");
+    public static final ResourceKey<PlacedFeature> CARNELIAN_ORE_PLACED_KEY = registerKey("carnelian_ore_placed");
+    public static final ResourceKey<PlacedFeature> GARNET_ORE_PLACED_KEY = registerKey("garnet_ore_placed");
+    public static final ResourceKey<PlacedFeature> JADE_ORE_PLACED_KEY = registerKey("jade_ore_placed");
+    public static final ResourceKey<PlacedFeature> JASPER_ORE_PLACED_KEY = registerKey("jasper_ore_placed");
+    public static final ResourceKey<PlacedFeature> MALACHITE_ORE_PLACED_KEY = registerKey("malachite_ore_placed");
+    public static final ResourceKey<PlacedFeature> RUBY_ORE_PLACED_KEY = registerKey("ruby_ore_placed");
+    public static final ResourceKey<PlacedFeature> ONYX_ORE_PLACED_KEY = registerKey("onyx_ore_placed");
+    public static final ResourceKey<PlacedFeature> OPAL_ORE_PLACED_KEY = registerKey("opal_ore_placed");
+    public static final ResourceKey<PlacedFeature> SAPPHIRE_ORE_PLACED_KEY = registerKey("sapphire_ore_placed");
+    public static final ResourceKey<PlacedFeature> MOONSTONE_ORE_PLACED_KEY = registerKey("moonstone_ore_placed");
+    public static final ResourceKey<PlacedFeature> TIGERS_EYE_ORE_PLACED_KEY = registerKey("tigers_eye_ore_placed");
+    public static final ResourceKey<PlacedFeature> TOPAZ_ORE_PLACED_KEY = registerKey("topaz_ore_placed");
+    public static final ResourceKey<PlacedFeature> TOURMALINE_ORE_PLACED_KEY = registerKey("tourmaline_ore_placed");
     public static final ResourceKey<PlacedFeature> WEIRWOOD_KEY = registerKey("weirwood");
     public static final ResourceKey<PlacedFeature> OAK2_KEY = registerKey("oak");
     public static final ResourceKey<PlacedFeature> SENTINEL_KEY = registerKey("sentinel");
@@ -101,6 +125,104 @@ public class ModplacedFeatures {
         register(context, TIN_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_TIN_ORE),
                 ModOrePlacement.commonOrePlacement(14,
                         HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(80))));
+
+        register(context, IRON_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_IRON_ORE),
+                ModOrePlacement.commonOrePlacement(9,
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(64))));
+
+        register(context, COAL_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_COAL_ORE),
+                ModOrePlacement.commonOrePlacement(17,
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+
+        register(context, COPPER_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_COPPER_ORE),
+                ModOrePlacement.commonOrePlacement(10,
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(112))));
+
+        register(context, GOLD_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_GOLD_ORE),
+                ModOrePlacement.commonOrePlacement(2,
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(32))));
+
+        register(context, LAPIS_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_LAPIS_ORE),
+                ModOrePlacement.commonOrePlacement(1,
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(64))));
+
+        register(context, EMERALD_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_EMERALD_ORE),
+                ModOrePlacement.commonOrePlacement(1,
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(32))));
+
+        register(context, DIAMONDS_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_DIAMONDS_ORE),
+                ModOrePlacement.commonOrePlacement(1, // 1 vein per chunk
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(150))));
+
+        register(context, BLOODSTONE_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_BLOODSTONE_ORE),
+                ModOrePlacement.commonOrePlacement(1, // 1 vein per chunk
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(150))));
+
+        register(context, CHALCEDONY_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_CHALCEDONY_ORE),
+                ModOrePlacement.commonOrePlacement(1, // 1 vein per chunk
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(150))));
+
+        register(context, AMBER_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_AMBER_ORE),
+                ModOrePlacement.commonOrePlacement(1, // 1 vein per chunk
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(150))));
+
+        register(context, AMETHYST_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_AMETHYST_ORE),
+                ModOrePlacement.commonOrePlacement(1, // 1 vein per chunk
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(150))));
+
+        register(context, CARNELIAN_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_CARNELIAN_ORE),
+                ModOrePlacement.commonOrePlacement(1, // 1 vein per chunk
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(150))));
+
+        register(context, GARNET_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_GARNET_ORE),
+                ModOrePlacement.commonOrePlacement(1, // 1 vein per chunk
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(150))));
+
+        register(context, JADE_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_JADE_ORE),
+                ModOrePlacement.commonOrePlacement(1, // 1 vein per chunk
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(150))));
+
+        register(context, JASPER_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_JASPER_ORE),
+                ModOrePlacement.commonOrePlacement(1, // 1 vein per chunk
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(150))));
+
+        register(context, MALACHITE_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_MALACHITE_ORE),
+                ModOrePlacement.commonOrePlacement(1, // 1 vein per chunk
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(150))));
+
+        register(context, RUBY_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_RUBY_ORE),
+                ModOrePlacement.commonOrePlacement(1, // 1 vein per chunk
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(150))));
+
+        register(context, ONYX_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_ONYX_ORE),
+                ModOrePlacement.commonOrePlacement(1, // 1 vein per chunk
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(150))));
+
+        register(context, OPAL_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_OPAL_ORE),
+                ModOrePlacement.commonOrePlacement(1, // 1 vein per chunk
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(150))));
+
+        register(context, SAPPHIRE_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_SAPPHIRE_ORE),
+                ModOrePlacement.commonOrePlacement(1, // 1 vein per chunk
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(150))));
+
+        register(context, MOONSTONE_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_MOONSTONE_ORE),
+                ModOrePlacement.commonOrePlacement(1, // 1 vein per chunk
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(150))));
+
+        register(context, TIGERS_EYE_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_TIGERS_EYE_ORE),
+                ModOrePlacement.commonOrePlacement(1, // 1 vein per chunk
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(150))));
+
+        register(context, TOPAZ_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_TOPAZ_ORE),
+                ModOrePlacement.commonOrePlacement(1, // 1 vein per chunk
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(150))));
+
+        register(context, TOURMALINE_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_TOURMALINE_ORE),
+                ModOrePlacement.commonOrePlacement(1, // 1 vein per chunk
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(150))));
+
+
 
         //Forest Trees
 
