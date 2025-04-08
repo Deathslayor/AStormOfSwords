@@ -364,6 +364,12 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         this.tag(ModTags.Blocks.NEEDS_BRONZE_TOOL)
                 .add(ModBLocks.MINT_BLOCK.get());
 
+        // ---------------------------(STEEL)--------------------------- //
+        this.tag(ModTags.Blocks.NEEDS_STEEL_TOOL);
+
+        // ---------------------------(DRAGON GLASS)--------------------------- //
+        this.tag(ModTags.Blocks.NEEDS_DRAGONGLASS_TOOL);
+
         /* // ---------------------------(NETHERITE TOOL)--------------------------- // */
 
         this.tag(ModTags.Blocks.INCORRECT_FOR_STEEL_TOOL).addTag(BlockTags.NEEDS_DIAMOND_TOOL);

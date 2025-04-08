@@ -1,0 +1,6 @@
+// 1.21.3	2025-04-08T18:09:38.241594488	Tags for minecraft:item mod id agotmod
+eef23bfe9f45027b3b8670ec55cfa37f8a45a919 data/agotmod/tags/item/bronze_tool_materials.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/agotmod/tags/item/dragonglass_tool_materials.json
+ef380d32ef9f54efeffc7c1c7d9ccf13299c2588 data/agotmod/tags/item/steel_tool_materials.json
+f06893dcdba64711018fd0985e8fbb2d0b57c6ed data/minecraft/tags/item/logs_that_burn.json
+e636a9617c8d2bcd1f59b705170957c4760a4fc2 data/minecraft/tags/item/planks.json

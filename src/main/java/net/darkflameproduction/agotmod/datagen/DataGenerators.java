@@ -47,10 +47,10 @@ public class DataGenerators {
 
         // ADDS BLOCK AND ITEM TAGS
         // Add a provider for generating mod block and item tags
-        /*ModBlockTagGenerator blockTagGenerator = generator.addProvider(event.includeServer(),
+        ModBlockTagGenerator blockTagGenerator = generator.addProvider(event.includeServer(),
                 new ModBlockTagGenerator(packOutput, lookupProvider, existingFileHelper));
         generator.addProvider(event.includeServer(), new ModItemTagGenerator(packOutput, lookupProvider, blockTagGenerator.contentsGetter(), existingFileHelper));
-         */
+
 
         // Adds Villager Professions
         // Add a provider for generating mod villager profession tags
