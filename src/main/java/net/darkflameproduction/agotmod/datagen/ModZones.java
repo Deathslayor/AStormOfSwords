@@ -19,11 +19,9 @@ public class ModZones {
     public static final ResourceKey<Zone> MANGOVES = getKey("mangroves");
     public static final ResourceKey<Zone> SWAMP = getKey("swamp");
     public static final ResourceKey<Zone> SAVANNA_PLATEAU = getKey("savanna_plateu");
-    public static final ResourceKey<Zone> FOREST = getKey("forest");
+    public static final ResourceKey<Zone> RILLS = getKey("rills");
     public static final ResourceKey<Zone> THE_WALL = getKey("the_wall");
-    public static final ResourceKey<Zone> RIVER = getKey("river");
     public static final ResourceKey<Zone> FROZEN_RIVER = getKey("frozen_river");
-    public static final ResourceKey<Zone> LAKE = getKey("lake");
     public static final ResourceKey<Zone> FROZEN_LAKE = getKey("frozen_lake");
     public static final ResourceKey<Zone> COLD_OCEAN = getKey("cold_ocean");
     public static final ResourceKey<Zone> DEEP_COLD_OCEAN = getKey("deep_cold_ocean");
@@ -39,14 +37,15 @@ public class ModZones {
     public static final ResourceKey<Zone> NORTHERN_HILLS = getKey("northern_hills");
     public static final ResourceKey<Zone> NORTHERN_MOUNTAINS = getKey("northern_mountains");
     public static final ResourceKey<Zone> BARROWLANDS = getKey("barrowlands");
+    public static final ResourceKey<Zone> NORTHERN_RIVER = getKey("river");
+    public static final ResourceKey<Zone> NORTHERN_LAKE = getKey("lake");
     public static final ResourceKey<Zone> THE_NORTH = getKey("the_north");
 
     public static void bootstrap(BootstrapContext<Zone> context) {
         // The North
         context.register(MANGOVES, new ZoneBuilder().setBiome(getBiome(context, Biomes.MANGROVE_SWAMP)).setColor(new Color(34, 51, 34)).setHeight(-3).setTerrainModifier(4).build());
         context.register(SWAMP, new ZoneBuilder().setBiome(getBiome(context, Biomes.SWAMP)).setColor(new Color(76, 95, 49)).setHeight(-3).setTerrainModifier(4).build());
-        context.register(SAVANNA_PLATEAU, new ZoneBuilder().setBiome(getBiome(context, Biomes.SAVANNA_PLATEAU)).setColor(new Color(85, 109, 51)).setHeight(3).setTerrainModifier(4).build());
-        context.register(FOREST, new ZoneBuilder().setBiome(getBiome(context, Biomes.FOREST)).setColor(new Color(61, 81, 51)).setHeight(3).setTerrainModifier(7).build());
+        context.register(SAVANNA_PLATEAU, new ZoneBuilder().setBiome(getBiome(context, Biomes.SAVANNA_PLATEAU)).setColor(new Color(85, 109, 51)).setHeight(3).setTerrainModifier(8).build());
         context.register(WOLFSWOOD_CLEARING, new ZoneBuilder().setBiome(getBiome(context, ModBiomes.WOLFSWOOD_CLEARING)).setColor(new Color(72, 122, 72)).setHeight(3).build());
         context.register(IRONWOOD, new ZoneBuilder().setBiome(getBiome(context, ModBiomes.IRONWOOD)).setColor(new Color(38, 59, 38)).setHeight(3).setTerrainModifier(6).build());
         context.register(WOLFSWOOD, new ZoneBuilder().setBiome(getBiome(context, ModBiomes.WOLFSWOOD)).setColor(new Color(43, 70, 43)).setHeight(3).setTerrainModifier(6).build());
@@ -54,6 +53,9 @@ public class ModZones {
         context.register(NORTHERN_MOUNTAINS, new ZoneBuilder().setBiome(getBiome(context, ModBiomes.NORTHERN_MOUNTAINS)).setColor(new Color(130, 130, 130)).setStoneBlock(Blocks.STONE).setDirtBlock(Blocks.CALCITE).setSurfaceBlock(Blocks.SNOW).setHeight(100).setTerrainModifier(80).build());
         context.register(BARROWLANDS, new ZoneBuilder().setBiome(getBiome(context, ModBiomes.BARROWLANDS)).setColor(new Color(98, 123, 64)).setHeight(15).setTerrainModifier(20).build());
         context.register(THE_NORTH, new ZoneBuilder().setBiome(getBiome(context, ModBiomes.THE_NORTH)).setColor(new Color(57, 95, 57)).setHeight(8).setTerrainModifier(10).build());
+        context.register(RILLS, new ZoneBuilder().setBiome(getBiome(context, ModBiomes.RILLS)).setColor(new Color(61, 81, 51)).setHeight(1).setTerrainModifier(12).build());
+        context.register(NORTHERN_LAKE, new ZoneBuilder().setBiome(getBiome(context, ModBiomes.NORTHERN_WATERS)).setColor(new Color(0, 83, 217)).setSurfaceBlock(Blocks.SAND).setHeight(-20).setPixelWeight(3).setCarverModifier(26).build());
+        context.register(NORTHERN_RIVER, new ZoneBuilder().setBiome(getBiome(context, ModBiomes.NORTHERN_WATERS)).setColor(new Color(1, 98, 255)).setDirtBlock(Blocks.SAND).setSurfaceBlock(Blocks.SAND).setHeight(-15).setPixelWeight(40).setCarverModifier(26).build());
         // wall
         context.register(THE_WALL, new ZoneBuilder().setBiome(getBiome(context, Biomes.FROZEN_PEAKS)).setColor(new Color(255, 255, 255)).setStoneBlock(Blocks.PACKED_ICE).setDirtBlock(Blocks.PACKED_ICE).setSurfaceBlock(Blocks.SNOW_BLOCK).setHeight(213).setTerrainModifier(0).setPixelWeight(16).build());
         //North Of The Wall
@@ -65,9 +67,7 @@ public class ModZones {
         //Essos
         context.register(BASALT_DELTAS, new ZoneBuilder().setBiome(getBiome(context, Biomes.BASALT_DELTAS)).setColor(new Color(0, 0, 0)).setStoneBlock(Blocks.BASALT).setDirtBlock(Blocks.BASALT).setSurfaceBlock(Blocks.BASALT).setHeight(33).setTerrainModifier(20).setPixelWeight(1.5).build());
         // water biomes
-        context.register(RIVER, new ZoneBuilder().setBiome(getBiome(context, Biomes.RIVER)).setColor(new Color(1, 98, 255)).setDirtBlock(Blocks.SAND).setSurfaceBlock(Blocks.SAND).setHeight(-15).setPixelWeight(2).setCarverModifier(26).build());
-        context.register(FROZEN_RIVER, new ZoneBuilder().setBiome(getBiome(context, Biomes.FROZEN_RIVER)).setColor(new Color(87, 145, 240)).setDirtBlock(Blocks.SAND).setSurfaceBlock(Blocks.SAND).setHeight(-15).setPixelWeight(2).setCarverModifier(26).build());
-        context.register(LAKE, new ZoneBuilder().setBiome(getBiome(context, Biomes.LUKEWARM_OCEAN)).setColor(new Color(0, 83, 217)).setSurfaceBlock(Blocks.SAND).setHeight(-20).setPixelWeight(3).setCarverModifier(26).build()); // lake
+        context.register(FROZEN_RIVER, new ZoneBuilder().setBiome(getBiome(context, Biomes.FROZEN_RIVER)).setColor(new Color(87, 145, 240)).setDirtBlock(Blocks.SAND).setSurfaceBlock(Blocks.SAND).setHeight(-15).setPixelWeight(40).setCarverModifier(26).build());
         context.register(FROZEN_LAKE, new ZoneBuilder().setBiome(getBiome(context, Biomes.FROZEN_OCEAN)).setColor(new Color(78, 126, 204)).setSurfaceBlock(Blocks.SAND).setHeight(-20).setPixelWeight(3).setCarverModifier(26).build()); // Frozen Lake
         context.register(COLD_OCEAN, new ZoneBuilder().setBiome(getBiome(context, Biomes.COLD_OCEAN)).setColor(new Color(0, 42, 103)).setSurfaceBlock(Blocks.SAND).setHeight(-35).setTerrainModifier(16).setCarverModifier(26).build());
         context.register(DEEP_COLD_OCEAN, new ZoneBuilder().setBiome(getBiome(context, Biomes.DEEP_COLD_OCEAN)).setColor(new Color(0, 35, 85)).setHeight(-60).setTerrainModifier(33).setCarverModifier(26).build());

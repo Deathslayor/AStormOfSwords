@@ -1,5 +1,5 @@
 {
-  "biome": "minecraft:river",
+  "biome": "agotmod:northern_waters",
   "carver_modifier": 26.0,
   "color": "#0162ff",
   "height": -15,
@@ -7,5 +7,5 @@
     "dirt": "minecraft:sand",
     "surface": "minecraft:sand"
   },
-  "pixel_weight": 2.0
+  "pixel_weight": 40.0
 }

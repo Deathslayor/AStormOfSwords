@@ -51,12 +51,9 @@ public class ModDimensionProvider {
                 ZoneRegistry.getOrThrow(ModZones.MANGOVES),
                 ZoneRegistry.getOrThrow(ModZones.SWAMP),
                 ZoneRegistry.getOrThrow(ModZones.SAVANNA_PLATEAU),
-                ZoneRegistry.getOrThrow(ModZones.FOREST),
                 ZoneRegistry.getOrThrow(ModZones.THE_WALL),
                 ZoneRegistry.getOrThrow(ModZones.HAUNTED_FOREST),
-                ZoneRegistry.getOrThrow(ModZones.RIVER),
                 ZoneRegistry.getOrThrow(ModZones.FROZEN_RIVER),
-                ZoneRegistry.getOrThrow(ModZones.LAKE),
                 ZoneRegistry.getOrThrow(ModZones.FROZEN_LAKE),
                 ZoneRegistry.getOrThrow(ModZones.COLD_OCEAN),
                 ZoneRegistry.getOrThrow(ModZones.DEEP_COLD_OCEAN),
@@ -72,6 +69,9 @@ public class ModDimensionProvider {
                 ZoneRegistry.getOrThrow(ModZones.NORTHERN_MOUNTAINS),
                 ZoneRegistry.getOrThrow(ModZones.THE_NORTH),
                 ZoneRegistry.getOrThrow(ModZones.THE_NORTH),
+                ZoneRegistry.getOrThrow(ModZones.RILLS),
+                ZoneRegistry.getOrThrow(ModZones.NORTHERN_RIVER),
+                ZoneRegistry.getOrThrow(ModZones.NORTHERN_LAKE),
                 ZoneRegistry.getOrThrow(ModZones.BARROWLANDS)
         );
     }

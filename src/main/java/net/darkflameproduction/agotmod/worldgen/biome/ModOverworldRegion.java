@@ -32,6 +32,8 @@ public class ModOverworldRegion extends Region {
             modifiedVanillaOverworldBuilder.replaceBiome(Biomes.JAGGED_PEAKS, ModBiomes.NORTHERN_MOUNTAINS);
             modifiedVanillaOverworldBuilder.replaceBiome(Biomes.SAVANNA, ModBiomes.BARROWLANDS);
             modifiedVanillaOverworldBuilder.replaceBiome(Biomes.PLAINS, ModBiomes.THE_NORTH);
+            modifiedVanillaOverworldBuilder.replaceBiome(Biomes.PLAINS, ModBiomes.RILLS);
+            modifiedVanillaOverworldBuilder.replaceBiome(Biomes.RIVER, ModBiomes.NORTHERN_WATERS);
         });
     }
 }

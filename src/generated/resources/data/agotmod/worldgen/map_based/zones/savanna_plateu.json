@@ -1,6 +1,5 @@
 {
   "biome": "minecraft:savanna_plateau",
   "color": "#556d33",
-  "height": 3,
-  "terrain_modifier": 4.0
+  "height": 3
 }

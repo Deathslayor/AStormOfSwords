@@ -17,12 +17,9 @@
             "agotmod:mangroves",
             "agotmod:swamp",
             "agotmod:savanna_plateu",
-            "agotmod:forest",
             "agotmod:the_wall",
             "agotmod:haunted_forest",
-            "agotmod:river",
             "agotmod:frozen_river",
-            "agotmod:lake",
             "agotmod:frozen_lake",
             "agotmod:cold_ocean",
             "agotmod:deep_cold_ocean",
@@ -38,6 +35,9 @@
             "agotmod:northern_mountains",
             "agotmod:the_north",
             "agotmod:the_north",
+            "agotmod:rills",
+            "agotmod:river",
+            "agotmod:lake",
             "agotmod:barrowlands"
           ]
         }

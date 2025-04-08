@@ -46,6 +46,10 @@ public class ModBiomes {
             AGoTMod.id("barrowlands"));
     public static final ResourceKey<Biome> THE_NORTH = ResourceKey.create(Registries.BIOME,
             AGoTMod.id("the_north"));
+    public static final ResourceKey<Biome> RILLS = ResourceKey.create(Registries.BIOME,
+            AGoTMod.id("rills"));
+    public static final ResourceKey<Biome> NORTHERN_WATERS = ResourceKey.create(Registries.BIOME,
+            AGoTMod.id("northern_waters"));
 
     public static void boostrap(BootstrapContext<Biome> context) {
         context.register(LANDS_OF_ALWAYS_WINTER, alwayswinter(context));
@@ -60,6 +64,8 @@ public class ModBiomes {
         context.register(NORTHERN_MOUNTAINS, northernmountains(context));
         context.register(BARROWLANDS, barrowlands(context));
         context.register(THE_NORTH, the_north(context));
+        context.register(RILLS, rills(context));
+        context.register(NORTHERN_WATERS, northernwaters(context));
     }
 
     public static void globalOverworldGeneration(BiomeGenerationSettings.Builder builder) {
@@ -157,6 +163,7 @@ public class ModBiomes {
         biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ModplacedFeatures.TOPAZ_ORE_PLACED_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ModplacedFeatures.TOURMALINE_ORE_PLACED_KEY);
     }
+
 
 
 
@@ -615,5 +622,89 @@ public class ModBiomes {
                         .backgroundMusic(Musics.createGameMusic(ModSounds.WINTER_WIND)).build())
                 .build();
     }
+
+    //The Rills
+    public static Biome rills(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+
+        //Add Mob Spawns Here
+
+        //Features
+        BiomeGenerationSettings.Builder biomeBuilder =
+                new BiomeGenerationSettings.Builder(context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        //we need to follow the same order as vanilla biomes for the BiomeDefaultFeatures
+        globalOverworldGeneration(biomeBuilder);
+        //BiomeDefaultFeatures.addMossyStoneBlock(biomeBuilder);
+        //BiomeDefaultFeatures.addForestFlowers(biomeBuilder);
+        BiomeDefaultFeatures.addFerns(biomeBuilder);
+        BiomeDefaultFeatures.addSavannaExtraGrass(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultCarversAndLakes(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        //BiomeDefaultFeatures.addExtraGold(biomeBuilder);
+        addFlowerFeaturesNorth(biomeBuilder, context);
+        addTreesNorthPlains(biomeBuilder, context);
+        spawnBuilder.addSpawn(MobCategory.WATER_AMBIENT, new MobSpawnSettings.SpawnerData(EntityType.SALMON, 1, 1, 5));
+        spawnBuilder.addSpawn(MobCategory.WATER_AMBIENT, new MobSpawnSettings.SpawnerData(EntityType.COD, 1, 1, 5));
+
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.TREES_TAIGA);
+
+
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true)
+                .downfall(0.8f)
+                .temperature(0.5f)
+                .generationSettings(biomeBuilder.build())
+                .mobSpawnSettings(spawnBuilder.build())
+                .specialEffects((new BiomeSpecialEffects.Builder())
+                        .waterColor(0x3d4ed1)
+                        .waterFogColor(0x0c113b)
+                        .skyColor(0xa7addb)
+                        .grassColorOverride(0x35a641)
+                        .foliageColorOverride(0x35a641)
+                        .fogColor(0xa7addb)
+                        .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
+                        .backgroundMusic(Musics.createGameMusic(ModSounds.WINTER_WIND)).build())
+                .build();
+    }
+
+    // Northern Waters
+    public static Biome northernwaters(BootstrapContext<Biome> context) {
+        // Create mob spawns builder
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+
+        // Add fish spawns
+        spawnBuilder.addSpawn(MobCategory.WATER_AMBIENT, new MobSpawnSettings.SpawnerData(EntityType.SALMON, 1, 1, 5));
+        spawnBuilder.addSpawn(MobCategory.WATER_AMBIENT, new MobSpawnSettings.SpawnerData(EntityType.COD, 1, 1, 5));
+
+        // Biome generation settings
+        BiomeGenerationSettings.Builder biomeBuilder =
+                new BiomeGenerationSettings.Builder(
+                        context.lookup(Registries.PLACED_FEATURE),
+                        context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true)
+                .downfall(0.8f)
+                .temperature(0.5f)
+                .generationSettings(biomeBuilder.build())
+                .mobSpawnSettings(spawnBuilder.build())
+                .specialEffects((new BiomeSpecialEffects.Builder())
+                        .waterColor(0x3d4ed1)
+                        .waterFogColor(0x0c113b)
+                        .skyColor(0xa7addb)
+                        .grassColorOverride(0x47a651)
+                        .foliageColorOverride(0x47a651)
+                        .fogColor(0xa7addb)
+                        .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
+                        .backgroundMusic(Musics.createGameMusic(ModSounds.WINTER_WIND))
+                        .build())
+                .build();
+    }
+
+
+
 }
 
