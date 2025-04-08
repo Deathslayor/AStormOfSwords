@@ -1,8 +1,10 @@
 package net.darkflameproduction.agotmod.datagen;
 
+import dev.tocraft.ctgen.util.Noise;
 import dev.tocraft.ctgen.worldgen.MapBasedChunkGenerator;
 import dev.tocraft.ctgen.worldgen.MapSettingsBuilder;
 import dev.tocraft.ctgen.xtend.CTRegistries;
+import dev.tocraft.ctgen.xtend.carver.NoiseCarver;
 import dev.tocraft.ctgen.zone.Zone;
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.minecraft.core.Holder;
@@ -40,6 +42,7 @@ public class ModDimensionProvider {
                 .setSpawnX(3500)
                 .setSpawnY(6000)
                 .setPixelsAreChunks(false)
+                .setCarver(new NoiseCarver(new Noise(List.of(new Noise.Octave(1, 1), new Noise.Octave(0.5f, 2)), 63, 47), 0.95))
                 .build())))));
     }
 

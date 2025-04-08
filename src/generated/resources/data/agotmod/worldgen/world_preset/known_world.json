@@ -6,6 +6,10 @@
         "type": "ctgen:map_based_chunk_generator",
         "settings": {
           "biome_map": "agotmod:known_world",
+          "carver": {
+            "type": "ctgen:noise_carver",
+            "threshold": 0.95
+          },
           "default_map_biome": "agotmod:deep_cold_ocean",
           "spawn_pixel_x": 3500,
           "spawn_pixel_y": 6000,
