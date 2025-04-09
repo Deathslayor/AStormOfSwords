@@ -84,14 +84,7 @@
   "spawners": {
     "ambient": [],
     "axolotls": [],
-    "creature": [
-      {
-        "type": "agotmod:mammoth",
-        "maxCount": 5,
-        "minCount": 3,
-        "weight": 2
-      }
-    ],
+    "creature": [],
     "misc": [],
     "monster": [],
     "underground_water_creature": [],

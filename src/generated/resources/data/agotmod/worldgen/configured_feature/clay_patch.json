@@ -11,10 +11,7 @@
       "fallback": {
         "type": "minecraft:simple_state_provider",
         "state": {
-          "Name": "minecraft:grass_block",
-          "Properties": {
-            "snowy": "false"
-          }
+          "Name": "minecraft:clay"
         }
       },
       "rules": []
@@ -23,12 +20,9 @@
       "type": "minecraft:matching_blocks",
       "blocks": [
         "minecraft:dirt",
-        "minecraft:clay",
         "minecraft:gravel",
-        "minecraft:sand",
-        "minecraft:podzol",
         "minecraft:mud",
-        "minecraft:stone"
+        "minecraft:sand"
       ]
     }
   }

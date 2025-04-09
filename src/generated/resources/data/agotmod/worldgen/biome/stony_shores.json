@@ -71,9 +71,9 @@
     [],
     [
       "minecraft:glow_lichen",
-      "agotmod:grass_patch",
       "minecraft:patch_large_fern",
       "minecraft:patch_grass_savanna",
+      "agotmod:grass_patch",
       "agotmod:forget_me_not",
       "agotmod:frostfire",
       "agotmod:liverwort",

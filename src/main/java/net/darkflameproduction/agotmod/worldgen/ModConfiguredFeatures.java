@@ -119,6 +119,9 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> WINTER_ROSE_BUSH_KEY = registerKey("winter_rose_bush");
     public static final ResourceKey<ConfiguredFeature<?, ?>> RED_ROSE_BUSH_KEY = registerKey("red_rose_bush");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GRASS_PATCH_KEY = registerKey("grass_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> CLAY_PATCH_KEY = registerKey("clay_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SEAGRASS_KEY = registerKey("seagrass");
+
 
 
 
@@ -915,12 +918,40 @@ public class ModConfiguredFeatures {
                                 Blocks.CLAY,
                                 Blocks.GRAVEL,
                                 Blocks.SAND,
+                                Blocks.PODZOL,
+                                Blocks.MUD,
                                 Blocks.STONE
                         ),  // Blocks that can be replaced (same as vanilla clay)
                         UniformInt.of(3, 6),  // Random radius between 2-3 blocks (same as vanilla)
                         2  // Height (same as vanilla)
                 )
         );
+
+        register(context, CLAY_PATCH_KEY, Feature.DISK,
+                new DiskConfiguration(
+                        RuleBasedBlockStateProvider.simple(Blocks.CLAY),  // The block to place (grass instead of clay)
+                        BlockPredicate.matchesBlocks(
+                                Blocks.DIRT,
+                                Blocks.GRAVEL,
+                                Blocks.MUD,
+                                Blocks.SAND
+                        ),  // Blocks that can be replaced (same as vanilla clay)
+                        UniformInt.of(3, 6),  // Random radius between 2-3 blocks (same as vanilla)
+                        2  // Height (same as vanilla)
+                )
+        );
+
+        register(context, SEAGRASS_KEY, Feature.FLOWER,
+                new RandomPatchConfiguration(
+                        64,  // tries
+                        6,   // xz spread
+                        2,   // y spread
+                        PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
+                                new SimpleBlockConfiguration(
+                                        BlockStateProvider.simple(Blocks.SEAGRASS)
+                                )
+                        )
+                ));
 
     }
 

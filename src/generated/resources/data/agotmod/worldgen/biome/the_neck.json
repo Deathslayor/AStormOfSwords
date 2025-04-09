@@ -74,9 +74,13 @@
       "minecraft:patch_grass_normal",
       "minecraft:patch_dead_bush",
       "minecraft:patch_waterlily",
+      "minecraft:kelp_cold",
       "minecraft:glow_lichen",
       "minecraft:patch_large_fern",
       "minecraft:patch_grass_savanna",
+      "agotmod:clay_patch",
+      "agotmod:seagrass",
+      "agotmod:grass_patch",
       "agotmod:forget_me_not",
       "agotmod:frostfire",
       "agotmod:liverwort",
@@ -100,7 +104,20 @@
     "misc": [],
     "monster": [],
     "underground_water_creature": [],
-    "water_ambient": [],
+    "water_ambient": [
+      {
+        "type": "minecraft:salmon",
+        "maxCount": 5,
+        "minCount": 1,
+        "weight": 1
+      },
+      {
+        "type": "minecraft:cod",
+        "maxCount": 5,
+        "minCount": 1,
+        "weight": 1
+      }
+    ],
     "water_creature": []
   },
   "temperature": 0.5

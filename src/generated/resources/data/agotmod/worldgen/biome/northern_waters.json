@@ -70,7 +70,9 @@
     ],
     [],
     [
-      "minecraft:glow_lichen"
+      "minecraft:glow_lichen",
+      "agotmod:clay_patch",
+      "agotmod:seagrass"
     ],
     [
       "minecraft:freeze_top_layer"

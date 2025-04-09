@@ -114,6 +114,8 @@ public class ModplacedFeatures {
     public static final ResourceKey<PlacedFeature> WINTER_ROSE_BUSH_KEY = registerKey("winter_rose_bush");
     public static final ResourceKey<PlacedFeature> RED_ROSE_BUSH_KEY = registerKey("red_rose_bush");
     public static final ResourceKey<PlacedFeature> GRASS_PATCH_PLACED_KEY = registerKey("grass_patch");
+    public static final ResourceKey<PlacedFeature> CLAY_PATCH_PLACED_KEY = registerKey("clay_patch");
+    public static final ResourceKey<PlacedFeature> SEAGRASS_KEY = registerKey("seagrass");
 
 
 
@@ -623,6 +625,31 @@ public class ModplacedFeatures {
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()
                 ));
+        register(context, CLAY_PATCH_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.CLAY_PATCH_KEY),
+                List.of(
+                        // Try placing clay 10 times per chunk — tweak this number as needed
+                        CountPlacement.of(10),
+
+                        // Spread attempts randomly in the chunk
+                        InSquarePlacement.spread(),
+
+                        // Allow full vertical generation, including underwater
+                        PlacementUtils.FULL_RANGE,
+
+                        // Only place in valid biomes (make sure rivers are included in biome modifiers)
+                        BiomeFilter.biome()
+                ));
+
+        register(context, SEAGRASS_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.SEAGRASS_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(2),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+
 
 
 

@@ -26,8 +26,7 @@
     [],
     [],
     [
-      "minecraft:amethyst_geode",
-      "minecraft:forest_rock"
+      "minecraft:amethyst_geode"
     ],
     [],
     [],
@@ -75,6 +74,7 @@
       "minecraft:glow_lichen",
       "minecraft:patch_large_fern",
       "minecraft:patch_grass_forest",
+      "agotmod:grass_patch",
       "agotmod:forget_me_not",
       "agotmod:frostfire",
       "agotmod:liverwort",
@@ -102,7 +102,7 @@
         "type": "minecraft:wolf",
         "maxCount": 4,
         "minCount": 4,
-        "weight": 2
+        "weight": 1
       }
     ],
     "misc": [],
