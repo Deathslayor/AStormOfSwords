@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_pine_wood_stripped": {
+    "has_cedar_wood_stripped": {
       "conditions": {
         "items": [
           {
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_pine_wood_stripped"
+      "has_cedar_wood_stripped"
     ]
   ],
   "rewards": {

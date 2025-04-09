@@ -14,9 +14,6 @@
           "spawn_pixel_x": 3500,
           "spawn_pixel_y": 6000,
           "zones": [
-            "agotmod:mangroves",
-            "agotmod:swamp",
-            "agotmod:savanna_plateu",
             "agotmod:the_wall",
             "agotmod:haunted_forest",
             "agotmod:frozen_river",
@@ -38,6 +35,9 @@
             "agotmod:rills",
             "agotmod:river",
             "agotmod:lake",
+            "agotmod:stony_shores",
+            "agotmod:the_neck",
+            "agotmod:the_neck_river",
             "agotmod:barrowlands"
           ]
         }

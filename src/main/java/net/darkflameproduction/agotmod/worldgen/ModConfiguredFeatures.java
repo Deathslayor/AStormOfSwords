@@ -8,7 +8,10 @@ import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LeavesBlock;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.*;
@@ -17,6 +20,7 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlac
 import net.minecraft.world.level.levelgen.feature.foliageplacers.CherryFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.SpruceFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.RuleBasedBlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.FancyTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
@@ -114,6 +118,8 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> DUSKY_ROSE_BUSH_KEY = registerKey("dusky_rose_bush");
     public static final ResourceKey<ConfiguredFeature<?, ?>> WINTER_ROSE_BUSH_KEY = registerKey("winter_rose_bush");
     public static final ResourceKey<ConfiguredFeature<?, ?>> RED_ROSE_BUSH_KEY = registerKey("red_rose_bush");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> GRASS_PATCH_KEY = registerKey("grass_patch");
+
 
 
 
@@ -285,12 +291,13 @@ public class ModConfiguredFeatures {
         //Forest Trees
 
         register(context, SYCAMORE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(ModBLocks.SYCAMORE_LOG.get()),  // Ironwood log instead of Weirwood log
-                new FancyTrunkPlacer(7, 2, 3),  // Mimicking Cherry tree trunk
+                BlockStateProvider.simple(ModBLocks.SYCAMORE_LOG.get()),
+                new FancyTrunkPlacer(7, 2, 3),
 
-                BlockStateProvider.simple(ModBLocks.SYCAMORE_LEAVES.get()),  // Ironwood leaves instead of Weirwood leaves
+                // Modified this line to make leaves persistent
+                BlockStateProvider.simple(ModBLocks.SYCAMORE_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
+
                 new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
-
                 new TwoLayersFeatureSize(1, 0, 2)).build());
 
 
@@ -298,35 +305,30 @@ public class ModConfiguredFeatures {
                 BlockStateProvider.simple(ModBLocks.WEIRWOOD_LOG.get()),
                 // Taller trunk with more branch variance to penetrate deeper into leaves
                 new FancyTrunkPlacer(9, 6, 6),
-                BlockStateProvider.simple(ModBLocks.WEIRWOOD_LEAVES.get()),
+                BlockStateProvider.simple(ModBLocks.WEIRWOOD_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
                 // Increased foliage height and offset to surround the trunk more
                 new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
-
                 new TwoLayersFeatureSize(1, 0, 2)).build());
 
         register(context, OAK2_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(Blocks.OAK_LOG),  // Use oak logs for the Oak tree
                 new FancyTrunkPlacer(7, 2, 3),  // Same trunk as Weirwood tree
-
-                BlockStateProvider.simple(Blocks.OAK_LEAVES),  // Use oak leaves for the Oak tree
+                BlockStateProvider.simple(Blocks.OAK_LEAVES.defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),  // Use oak leaves for the Oak tree
                 new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
-
                 new TwoLayersFeatureSize(1, 0, 2)).build());
 
         register(context, SENTINEL_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBLocks.SENTINEL_LOG.get()),  // Sentinel log
                 new StraightTrunkPlacer(12, 3, 3),  // Same trunk structure
-
-                BlockStateProvider.simple(ModBLocks.SENTINEL_LEAVES.get()),  // Sentinel leaves
+                BlockStateProvider.simple(ModBLocks.SENTINEL_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),  // Sentinel leaves
                 new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
-
                 new TwoLayersFeatureSize(1, 0, 1)
         ).build());
 
         register(context, PINE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBLocks.PINE_LOG.get()),
                 new StraightTrunkPlacer(7, 2, 2),
-                BlockStateProvider.simple(ModBLocks.PINE_LEAVES.get()),
+                BlockStateProvider.simple(ModBLocks.PINE_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
                 new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
                 new TwoLayersFeatureSize(1, 0, 1)
         ).build());
@@ -334,70 +336,56 @@ public class ModConfiguredFeatures {
         register(context, IRONWOOD_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBLocks.IRONWOOD_LOG.get()),  // Ironwood log instead of Weirwood log
                 new FancyTrunkPlacer(7, 2, 3),  // Mimicking Cherry tree trunk
-
-                BlockStateProvider.simple(ModBLocks.IRONWOOD_LEAVES.get()),  // Ironwood leaves instead of Weirwood leaves
+                BlockStateProvider.simple(ModBLocks.IRONWOOD_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),  // Ironwood leaves instead of Weirwood leaves
                 new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
-
                 new TwoLayersFeatureSize(1, 0, 2)).build());
 
         register(context, HAWTHORN_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBLocks.HAWTHORN_LOG.get()),  // Hawthorn log instead of Weirwood log
                 new FancyTrunkPlacer(7, 2, 3),  // Mimicking Cherry tree trunk
-
-                BlockStateProvider.simple(ModBLocks.HAWTHORN_LEAVES.get()),  // Hawthorn leaves instead of Weirwood leaves
+                BlockStateProvider.simple(ModBLocks.HAWTHORN_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),  // Hawthorn leaves instead of Weirwood leaves
                 new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
-
                 new TwoLayersFeatureSize(1, 0, 2)).build());
 
         register(context, CHESTNUT_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBLocks.CHESTNUT_LOG.get()),  // Chestnut log instead of Weirwood log
                 new FancyTrunkPlacer(7, 2, 3),  // Mimicking Cherry tree trunk
-
-                BlockStateProvider.simple(ModBLocks.CHESTNUT_LEAVES.get()),  // Chestnut leaves instead of Weirwood leaves
+                BlockStateProvider.simple(ModBLocks.CHESTNUT_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),  // Chestnut leaves instead of Weirwood leaves
                 new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
-
                 new TwoLayersFeatureSize(1, 0, 2)).build());
 
         register(context, CEDAR_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBLocks.CEDAR_LOG.get()),  // Cedar log instead of Weirwood log
                 new FancyTrunkPlacer(7, 2, 3),  // Mimicking Cherry tree trunk
-
-                BlockStateProvider.simple(ModBLocks.CEDAR_LEAVES.get()),  // Cedar leaves instead of Weirwood leaves
+                BlockStateProvider.simple(ModBLocks.CEDAR_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),  // Cedar leaves instead of Weirwood leaves
                 new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
-
                 new TwoLayersFeatureSize(1, 0, 2)).build());
 
         register(context, BEECH_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBLocks.BEECH_LOG.get()),  // Beech log instead of Weirwood log
                 new FancyTrunkPlacer(7, 2, 3),  // Mimicking Cherry tree trunk
-
-                BlockStateProvider.simple(ModBLocks.BEECH_LEAVES.get()),  // Beech leaves instead of Weirwood leaves
+                BlockStateProvider.simple(ModBLocks.BEECH_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),  // Beech leaves instead of Weirwood leaves
                 new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
-
                 new TwoLayersFeatureSize(1, 0, 2)).build());
 
         register(context, ASH_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBLocks.ASH_LOG.get()),  // Ash log instead of Weirwood log
                 new FancyTrunkPlacer(7, 2, 3),  // Mimicking Cherry tree trunk
-
-                BlockStateProvider.simple(ModBLocks.ASH_LEAVES.get()),  // Ash leaves instead of Weirwood leaves
+                BlockStateProvider.simple(ModBLocks.ASH_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),  // Ash leaves instead of Weirwood leaves
                 new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
-
                 new TwoLayersFeatureSize(1, 0, 2)).build());
 
         register(context, BLACKBARK_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBLocks.BLACKBARK_LOG.get()),  // Blackbark log
                 new FancyTrunkPlacer(7, 2, 3),  // Mimicking Cherry tree trunk
-
-                BlockStateProvider.simple(ModBLocks.BLACKBARK_LEAVES.get()),  // Beech leaves instead of Weirwood leaves
+                BlockStateProvider.simple(ModBLocks.BLACKBARK_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),  // Beech leaves instead of Weirwood leaves
                 new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
-
                 new TwoLayersFeatureSize(1, 0, 2)).build());
 
         register(context, ASPEN_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBLocks.ASPEN_LOG.get()),
                 new StraightTrunkPlacer(7, 2, 2),
-                BlockStateProvider.simple(ModBLocks.ASPEN_LEAVES.get()),
+                BlockStateProvider.simple(ModBLocks.ASPEN_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
                 new SpruceFoliagePlacer(ConstantInt.of(2), ConstantInt.of(2), ConstantInt.of(2)),
                 new TwoLayersFeatureSize(1, 1, 1)
         ).build());
@@ -405,108 +393,108 @@ public class ModConfiguredFeatures {
         register(context, ALDER_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBLocks.ALDER_LOG.get()),
                 new StraightTrunkPlacer(7, 2, 2),
-                BlockStateProvider.simple(ModBLocks.ALDER_LEAVES.get()),
+                BlockStateProvider.simple(ModBLocks.ALDER_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
                 new SpruceFoliagePlacer(ConstantInt.of(2), ConstantInt.of(3), ConstantInt.of(2)),
                 new TwoLayersFeatureSize(1, 1, 1)
         ).build());
 
-        //Rare Trees For Plains
+//Rare Trees For Plains
 
         register(context, SYCAMORE_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBLocks.SYCAMORE_LOG.get()),
                 new FancyTrunkPlacer(7, 2, 3),
-                BlockStateProvider.simple(ModBLocks.SYCAMORE_LEAVES.get()),
+                BlockStateProvider.simple(ModBLocks.SYCAMORE_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
                 new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
                 new TwoLayersFeatureSize(1, 0, 2)).build());
 
         register(context, WEIRWOOD_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBLocks.WEIRWOOD_LOG.get()),
                 new FancyTrunkPlacer(9, 6, 6),
-                BlockStateProvider.simple(ModBLocks.WEIRWOOD_LEAVES.get()),
+                BlockStateProvider.simple(ModBLocks.WEIRWOOD_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
                 new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
                 new TwoLayersFeatureSize(1, 0, 2)).build());
 
         register(context, OAK2_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(Blocks.OAK_LOG),
                 new FancyTrunkPlacer(7, 2, 3),
-                BlockStateProvider.simple(Blocks.OAK_LEAVES),
+                BlockStateProvider.simple(Blocks.OAK_LEAVES.defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
                 new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
                 new TwoLayersFeatureSize(1, 0, 2)).build());
 
         register(context, SENTINEL_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBLocks.SENTINEL_LOG.get()),
                 new StraightTrunkPlacer(12, 3, 3),
-                BlockStateProvider.simple(ModBLocks.SENTINEL_LEAVES.get()),
+                BlockStateProvider.simple(ModBLocks.SENTINEL_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
                 new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
                 new TwoLayersFeatureSize(1, 0, 1)).build());
 
         register(context, PINE_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBLocks.PINE_LOG.get()),
                 new StraightTrunkPlacer(7, 2, 2),
-                BlockStateProvider.simple(ModBLocks.PINE_LEAVES.get()),
+                BlockStateProvider.simple(ModBLocks.PINE_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
                 new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
                 new TwoLayersFeatureSize(1, 0, 1)).build());
 
         register(context, IRONWOOD_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBLocks.IRONWOOD_LOG.get()),
                 new FancyTrunkPlacer(7, 2, 3),
-                BlockStateProvider.simple(ModBLocks.IRONWOOD_LEAVES.get()),
+                BlockStateProvider.simple(ModBLocks.IRONWOOD_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
                 new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
                 new TwoLayersFeatureSize(1, 0, 2)).build());
 
         register(context, HAWTHORN_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBLocks.HAWTHORN_LOG.get()),
                 new FancyTrunkPlacer(7, 2, 3),
-                BlockStateProvider.simple(ModBLocks.HAWTHORN_LEAVES.get()),
+                BlockStateProvider.simple(ModBLocks.HAWTHORN_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
                 new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
                 new TwoLayersFeatureSize(1, 0, 2)).build());
 
         register(context, CHESTNUT_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBLocks.CHESTNUT_LOG.get()),
                 new FancyTrunkPlacer(7, 2, 3),
-                BlockStateProvider.simple(ModBLocks.CHESTNUT_LEAVES.get()),
+                BlockStateProvider.simple(ModBLocks.CHESTNUT_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
                 new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
                 new TwoLayersFeatureSize(1, 0, 2)).build());
 
         register(context, CEDAR_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBLocks.CEDAR_LOG.get()),
                 new FancyTrunkPlacer(7, 2, 3),
-                BlockStateProvider.simple(ModBLocks.CEDAR_LEAVES.get()),
+                BlockStateProvider.simple(ModBLocks.CEDAR_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
                 new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
                 new TwoLayersFeatureSize(1, 0, 2)).build());
 
         register(context, BEECH_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBLocks.BEECH_LOG.get()),
                 new FancyTrunkPlacer(7, 2, 3),
-                BlockStateProvider.simple(ModBLocks.BEECH_LEAVES.get()),
+                BlockStateProvider.simple(ModBLocks.BEECH_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
                 new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
                 new TwoLayersFeatureSize(1, 0, 2)).build());
 
         register(context, ASH_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBLocks.ASH_LOG.get()),
                 new FancyTrunkPlacer(7, 2, 3),
-                BlockStateProvider.simple(ModBLocks.ASH_LEAVES.get()),
+                BlockStateProvider.simple(ModBLocks.ASH_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
                 new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
                 new TwoLayersFeatureSize(1, 0, 2)).build());
 
         register(context, BLACKBARK_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBLocks.BLACKBARK_LOG.get()),
                 new FancyTrunkPlacer(7, 2, 3),
-                BlockStateProvider.simple(ModBLocks.BLACKBARK_LEAVES.get()),
+                BlockStateProvider.simple(ModBLocks.BLACKBARK_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
                 new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
                 new TwoLayersFeatureSize(1, 0, 2)).build());
 
         register(context, ASPEN_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBLocks.ASPEN_LOG.get()),
                 new StraightTrunkPlacer(7, 2, 2),
-                BlockStateProvider.simple(ModBLocks.ASPEN_LEAVES.get()),
+                BlockStateProvider.simple(ModBLocks.ASPEN_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
                 new SpruceFoliagePlacer(ConstantInt.of(2), ConstantInt.of(2), ConstantInt.of(2)),
                 new TwoLayersFeatureSize(1, 1, 1)).build());
 
         register(context, ALDER_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBLocks.ALDER_LOG.get()),
                 new StraightTrunkPlacer(7, 2, 2),
-                BlockStateProvider.simple(ModBLocks.ALDER_LEAVES.get()),
+                BlockStateProvider.simple(ModBLocks.ALDER_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
                 new SpruceFoliagePlacer(ConstantInt.of(2), ConstantInt.of(3), ConstantInt.of(2)),
                 new TwoLayersFeatureSize(1, 1, 1)).build());
 
@@ -919,7 +907,20 @@ public class ModConfiguredFeatures {
                         )
                 ));
 
-
+        register(context, GRASS_PATCH_KEY, Feature.DISK,
+                new DiskConfiguration(
+                        RuleBasedBlockStateProvider.simple(Blocks.GRASS_BLOCK),  // The block to place (grass instead of clay)
+                        BlockPredicate.matchesBlocks(
+                                Blocks.DIRT,
+                                Blocks.CLAY,
+                                Blocks.GRAVEL,
+                                Blocks.SAND,
+                                Blocks.STONE
+                        ),  // Blocks that can be replaced (same as vanilla clay)
+                        UniformInt.of(3, 6),  // Random radius between 2-3 blocks (same as vanilla)
+                        2  // Height (same as vanilla)
+                )
+        );
 
     }
 

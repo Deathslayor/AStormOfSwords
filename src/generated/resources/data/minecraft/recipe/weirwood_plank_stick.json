@@ -6,11 +6,10 @@
   },
   "pattern": [
     "B",
-    "B",
-    " "
+    "B"
   ],
   "result": {
-    "count": 1,
-    "id": "minecraft:stick"
+    "count": 4,
+    "id": "agotmod:weirwood_stick"
   }
 }

@@ -7,6 +7,6 @@
     "stone": "minecraft:packed_ice",
     "surface": "minecraft:snow_block"
   },
-  "pixel_weight": 16.0,
+  "pixel_weight": 100.0,
   "terrain_modifier": 0.0
 }

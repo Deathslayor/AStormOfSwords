@@ -113,6 +113,8 @@ public class ModplacedFeatures {
     public static final ResourceKey<PlacedFeature> DUSKY_ROSE_BUSH_KEY = registerKey("dusky_rose_bush");
     public static final ResourceKey<PlacedFeature> WINTER_ROSE_BUSH_KEY = registerKey("winter_rose_bush");
     public static final ResourceKey<PlacedFeature> RED_ROSE_BUSH_KEY = registerKey("red_rose_bush");
+    public static final ResourceKey<PlacedFeature> GRASS_PATCH_PLACED_KEY = registerKey("grass_patch");
+
 
 
 
@@ -125,12 +127,12 @@ public class ModplacedFeatures {
 
         // Register the placed feature for tin ore with specified configuration and modifiers
         register(context, TIN_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_TIN_ORE),
-                ModOrePlacement.commonOrePlacement(14,
+                ModOrePlacement.commonOrePlacement(10,
                         HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(80))));
 
         register(context, IRON_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_IRON_ORE),
-                ModOrePlacement.commonOrePlacement(9,
-                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(64))));
+                ModOrePlacement.commonOrePlacement(10,
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(150))));
 
         register(context, COAL_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_COAL_ORE),
                 ModOrePlacement.commonOrePlacement(17,
@@ -602,6 +604,25 @@ public class ModplacedFeatures {
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
+
+
+        register(context, GRASS_PATCH_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.GRASS_PATCH_KEY),
+                List.of(
+                        // Increase the count - this multiplies the number of attempts per chunk
+                        CountPlacement.of(4),  // Increased from 1 to 4
+
+                        // Remove rarity filter or set to 1 (guaranteed) to ensure placement always occurs
+                        // RarityFilter.onAverageOnceEvery(1), -- This line can be removed since "1" means every time
+
+                        // Optionally add noise-based distribution for more natural placement
+                        NoiseBasedCountPlacement.of(5, 10.0, 0.0),  // Base count: 5, additional noise-based count
+
+                        // Keep these the same
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()
+                ));
 
 
 

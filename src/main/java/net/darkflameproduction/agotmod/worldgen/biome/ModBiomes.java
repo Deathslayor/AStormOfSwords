@@ -50,6 +50,10 @@ public class ModBiomes {
             AGoTMod.id("rills"));
     public static final ResourceKey<Biome> NORTHERN_WATERS = ResourceKey.create(Registries.BIOME,
             AGoTMod.id("northern_waters"));
+    public static final ResourceKey<Biome> STONY_SHORES = ResourceKey.create(Registries.BIOME,
+            AGoTMod.id("stony_shores"));
+    public static final ResourceKey<Biome> THE_NECK = ResourceKey.create(Registries.BIOME,
+            AGoTMod.id("the_neck"));
 
     public static void boostrap(BootstrapContext<Biome> context) {
         context.register(LANDS_OF_ALWAYS_WINTER, alwayswinter(context));
@@ -66,6 +70,8 @@ public class ModBiomes {
         context.register(THE_NORTH, the_north(context));
         context.register(RILLS, rills(context));
         context.register(NORTHERN_WATERS, northernwaters(context));
+        context.register(STONY_SHORES, stonyshores(context));
+        context.register(THE_NECK, theneck(context));
     }
 
     public static void globalOverworldGeneration(BiomeGenerationSettings.Builder builder) {
@@ -638,7 +644,6 @@ public class ModBiomes {
         //BiomeDefaultFeatures.addForestFlowers(biomeBuilder);
         BiomeDefaultFeatures.addFerns(biomeBuilder);
         BiomeDefaultFeatures.addSavannaExtraGrass(biomeBuilder);
-        BiomeDefaultFeatures.addDefaultCarversAndLakes(biomeBuilder);
         addModOres(biomeBuilder, context);
         //BiomeDefaultFeatures.addExtraGold(biomeBuilder);
         addFlowerFeaturesNorth(biomeBuilder, context);
@@ -698,6 +703,81 @@ public class ModBiomes {
                         .grassColorOverride(0x47a651)
                         .foliageColorOverride(0x47a651)
                         .fogColor(0xa7addb)
+                        .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
+                        .backgroundMusic(Musics.createGameMusic(ModSounds.WINTER_WIND))
+                        .build())
+                .build();
+    }
+
+    // stonyshores
+    public static Biome stonyshores(BootstrapContext<Biome> context) {
+        // Create mob spawns builder
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+
+
+        // Biome generation settings
+        BiomeGenerationSettings.Builder biomeBuilder =
+                new BiomeGenerationSettings.Builder(
+                        context.lookup(Registries.PLACED_FEATURE),
+                        context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.GRASS_PATCH_PLACED_KEY);
+        BiomeDefaultFeatures.addFerns(biomeBuilder);
+        BiomeDefaultFeatures.addSavannaExtraGrass(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addFlowerFeaturesNorth(biomeBuilder, context);
+        addTreesNorthPlains(biomeBuilder, context);
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true)
+                .downfall(0.8f)
+                .temperature(0.5f)
+                .generationSettings(biomeBuilder.build())
+                .mobSpawnSettings(spawnBuilder.build())
+                .specialEffects((new BiomeSpecialEffects.Builder())
+                        .waterColor(0x3d4ed1)
+                        .waterFogColor(0x0c113b)
+                        .skyColor(0xa7addb)
+                        .grassColorOverride(0x47a651)
+                        .foliageColorOverride(0x47a651)
+                        .fogColor(0xa7addb)
+                        .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
+                        .backgroundMusic(Musics.createGameMusic(ModSounds.WINTER_WIND))
+                        .build())
+                .build();
+    }
+
+    // The Neck
+    public static Biome theneck(BootstrapContext<Biome> context) {
+        // Create mob spawns builder
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+
+
+        // Biome generation settings
+        BiomeGenerationSettings.Builder biomeBuilder =
+                new BiomeGenerationSettings.Builder(
+                        context.lookup(Registries.PLACED_FEATURE),
+                        context.lookup(Registries.CONFIGURED_CARVER));
+        BiomeDefaultFeatures.addMangroveSwampVegetation(biomeBuilder);
+        globalOverworldGeneration(biomeBuilder);
+        BiomeDefaultFeatures.addFerns(biomeBuilder);
+        BiomeDefaultFeatures.addSavannaExtraGrass(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addFlowerFeaturesNorth(biomeBuilder, context);
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true)
+                .downfall(0.8f)
+                .temperature(0.5f)
+                .generationSettings(biomeBuilder.build())
+                .mobSpawnSettings(spawnBuilder.build())
+                .specialEffects((new BiomeSpecialEffects.Builder())
+                        .waterColor(0x294018)
+                        .waterFogColor(0x1f1308)
+                        .skyColor(0x30523b)
+                        .grassColorOverride(0x27471f)
+                        .foliageColorOverride(0x27471f)
+                        .fogColor(0x638a6d)
                         .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
                         .backgroundMusic(Musics.createGameMusic(ModSounds.WINTER_WIND))
                         .build())

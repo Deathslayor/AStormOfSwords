@@ -6,8 +6,7 @@
   },
   "pattern": [
     "BB",
-    "BB",
-    "  "
+    "BB"
   ],
   "result": {
     "count": 1,

@@ -1,0 +1,11 @@
+{
+  "biome": "agotmod:the_neck",
+  "carver_modifier": 26.0,
+  "color": "#574c2f",
+  "height": -15,
+  "layers": {
+    "dirt": "minecraft:dirt",
+    "surface": "minecraft:dirt"
+  },
+  "pixel_weight": 40.0
+}

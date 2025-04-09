@@ -48,9 +48,6 @@ public class ModDimensionProvider {
 
     public static @Unmodifiable List<Holder<Zone>> getZones(@NotNull HolderGetter<Zone> ZoneRegistry) {
         return List.of(
-                ZoneRegistry.getOrThrow(ModZones.MANGOVES),
-                ZoneRegistry.getOrThrow(ModZones.SWAMP),
-                ZoneRegistry.getOrThrow(ModZones.SAVANNA_PLATEAU),
                 ZoneRegistry.getOrThrow(ModZones.THE_WALL),
                 ZoneRegistry.getOrThrow(ModZones.HAUNTED_FOREST),
                 ZoneRegistry.getOrThrow(ModZones.FROZEN_RIVER),
@@ -72,6 +69,9 @@ public class ModDimensionProvider {
                 ZoneRegistry.getOrThrow(ModZones.RILLS),
                 ZoneRegistry.getOrThrow(ModZones.NORTHERN_RIVER),
                 ZoneRegistry.getOrThrow(ModZones.NORTHERN_LAKE),
+                ZoneRegistry.getOrThrow(ModZones.STONY_SHORES),
+                ZoneRegistry.getOrThrow(ModZones.THE_NECK),
+                ZoneRegistry.getOrThrow(ModZones.THE_NECK_RIVER),
                 ZoneRegistry.getOrThrow(ModZones.BARROWLANDS)
         );
     }
