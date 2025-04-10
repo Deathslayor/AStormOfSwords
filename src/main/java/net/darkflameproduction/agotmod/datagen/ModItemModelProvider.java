@@ -481,6 +481,51 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleBlockItemBlockTexture(ModBLocks.BLOODBLOOM);
         simpleBlockItemBlockTexture(ModBLocks.BLACK_LOTUS);
 
+        // ---------------------------(STONE)--------------------------- //
+        wallItem(ModBLocks.SSTONE_1_WALL, ModBLocks.SSTONE_1_BLOCK);
+        evenSimplerBlockItem(ModBLocks.SSTONE_1_STAIRS);
+        evenSimplerBlockItem(ModBLocks.SSTONE_1_SLAB);
+        wallItem(ModBLocks.SSTONE_2_WALL, ModBLocks.SSTONE_2_BLOCK);
+        evenSimplerBlockItem(ModBLocks.SSTONE_2_STAIRS);
+        evenSimplerBlockItem(ModBLocks.SSTONE_2_SLAB);
+        wallItem(ModBLocks.SSTONE_3_WALL, ModBLocks.SSTONE_3_BLOCK);
+        evenSimplerBlockItem(ModBLocks.SSTONE_3_STAIRS);
+        evenSimplerBlockItem(ModBLocks.SSTONE_3_SLAB);
+        wallItem(ModBLocks.SSTONE_4_WALL, ModBLocks.SSTONE_4_BLOCK);
+        evenSimplerBlockItem(ModBLocks.SSTONE_4_STAIRS);
+        evenSimplerBlockItem(ModBLocks.SSTONE_4_SLAB);
+        wallItem(ModBLocks.SSTONE_5_WALL, ModBLocks.SSTONE_5_BLOCK);
+        evenSimplerBlockItem(ModBLocks.SSTONE_5_STAIRS);
+        evenSimplerBlockItem(ModBLocks.SSTONE_5_SLAB);
+        wallItem(ModBLocks.SSTONE_6_WALL, ModBLocks.SSTONE_6_BLOCK);
+        evenSimplerBlockItem(ModBLocks.SSTONE_6_STAIRS);
+        evenSimplerBlockItem(ModBLocks.SSTONE_6_SLAB);
+        wallItem(ModBLocks.SSTONE_7_WALL, ModBLocks.SSTONE_7_BLOCK);
+        evenSimplerBlockItem(ModBLocks.SSTONE_7_STAIRS);
+        evenSimplerBlockItem(ModBLocks.SSTONE_7_SLAB);
+        wallItem(ModBLocks.SSTONE_8_WALL, ModBLocks.SSTONE_8_BLOCK);
+        evenSimplerBlockItem(ModBLocks.SSTONE_8_STAIRS);
+        evenSimplerBlockItem(ModBLocks.SSTONE_8_SLAB);
+        wallItem(ModBLocks.SSTONE_9_WALL, ModBLocks.SSTONE_9_BLOCK);
+        evenSimplerBlockItem(ModBLocks.SSTONE_9_STAIRS);
+        evenSimplerBlockItem(ModBLocks.SSTONE_9_SLAB);
+        wallItem(ModBLocks.SSTONE_10_WALL, ModBLocks.SSTONE_10_BLOCK);
+        evenSimplerBlockItem(ModBLocks.SSTONE_10_STAIRS);
+        evenSimplerBlockItem(ModBLocks.SSTONE_10_SLAB);
+        wallItem(ModBLocks.SSTONE_11_WALL, ModBLocks.SSTONE_11_BLOCK);
+        evenSimplerBlockItem(ModBLocks.SSTONE_11_STAIRS);
+        evenSimplerBlockItem(ModBLocks.SSTONE_11_SLAB);
+        wallItem(ModBLocks.SSTONE_12_WALL, ModBLocks.SSTONE_12_BLOCK);
+        evenSimplerBlockItem(ModBLocks.SSTONE_12_STAIRS);
+        evenSimplerBlockItem(ModBLocks.SSTONE_12_SLAB);
+        wallItem(ModBLocks.SSTONE_13_WALL, ModBLocks.SSTONE_13_BLOCK);
+        evenSimplerBlockItem(ModBLocks.SSTONE_13_STAIRS);
+        evenSimplerBlockItem(ModBLocks.SSTONE_13_SLAB);
+        wallItem(ModBLocks.SSTONE_14_WALL, ModBLocks.SSTONE_14_BLOCK);
+        evenSimplerBlockItem(ModBLocks.SSTONE_14_STAIRS);
+        evenSimplerBlockItem(ModBLocks.SSTONE_14_SLAB);
+
+
 
         // ---------------------------(CRAFTING ITEMS)--------------------------- //
         // Register item models for crafting items

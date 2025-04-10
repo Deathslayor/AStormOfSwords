@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "agotmod:sstone_4",
+  "result": {
+    "count": 1,
+    "id": "agotmod:sstone_4_wall"
+  }
+}

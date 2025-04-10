@@ -750,6 +750,95 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 "cutout");
 
 
+        // ---------------------------(STONE BLOCKS)--------------------------- //
+
+
+
+        blockWithItem(ModBLocks.SSTONE_1_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.SSTONE_1_SLAB.get()),
+                blockTexture(ModBLocks.SSTONE_1_BLOCK.get()),
+                blockTexture(ModBLocks.SSTONE_1_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.SSTONE_1_STAIRS.get()), blockTexture(ModBLocks.SSTONE_1_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.SSTONE_1_WALL.get()), blockTexture(ModBLocks.SSTONE_1_BLOCK.get()));
+        blockWithItem(ModBLocks.SSTONE_2_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.SSTONE_2_SLAB.get()),
+                blockTexture(ModBLocks.SSTONE_2_BLOCK.get()),
+                blockTexture(ModBLocks.SSTONE_2_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.SSTONE_2_STAIRS.get()), blockTexture(ModBLocks.SSTONE_2_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.SSTONE_2_WALL.get()), blockTexture(ModBLocks.SSTONE_2_BLOCK.get()));
+        blockWithItem(ModBLocks.SSTONE_3_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.SSTONE_3_SLAB.get()),
+                blockTexture(ModBLocks.SSTONE_3_BLOCK.get()),
+                blockTexture(ModBLocks.SSTONE_3_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.SSTONE_3_STAIRS.get()), blockTexture(ModBLocks.SSTONE_3_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.SSTONE_3_WALL.get()), blockTexture(ModBLocks.SSTONE_3_BLOCK.get()));
+        blockWithItem(ModBLocks.SSTONE_4_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.SSTONE_4_SLAB.get()),
+                blockTexture(ModBLocks.SSTONE_4_BLOCK.get()),
+                blockTexture(ModBLocks.SSTONE_4_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.SSTONE_4_STAIRS.get()), blockTexture(ModBLocks.SSTONE_4_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.SSTONE_4_WALL.get()), blockTexture(ModBLocks.SSTONE_4_BLOCK.get()));
+        blockWithItem(ModBLocks.SSTONE_5_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.SSTONE_5_SLAB.get()),
+                blockTexture(ModBLocks.SSTONE_5_BLOCK.get()),
+                blockTexture(ModBLocks.SSTONE_5_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.SSTONE_5_STAIRS.get()), blockTexture(ModBLocks.SSTONE_5_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.SSTONE_5_WALL.get()), blockTexture(ModBLocks.SSTONE_5_BLOCK.get()));
+        blockWithItem(ModBLocks.SSTONE_6_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.SSTONE_6_SLAB.get()),
+                blockTexture(ModBLocks.SSTONE_6_BLOCK.get()),
+                blockTexture(ModBLocks.SSTONE_6_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.SSTONE_6_STAIRS.get()), blockTexture(ModBLocks.SSTONE_6_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.SSTONE_6_WALL.get()), blockTexture(ModBLocks.SSTONE_6_BLOCK.get()));
+        blockWithItem(ModBLocks.SSTONE_7_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.SSTONE_7_SLAB.get()),
+                blockTexture(ModBLocks.SSTONE_7_BLOCK.get()),
+                blockTexture(ModBLocks.SSTONE_7_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.SSTONE_7_STAIRS.get()), blockTexture(ModBLocks.SSTONE_7_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.SSTONE_7_WALL.get()), blockTexture(ModBLocks.SSTONE_7_BLOCK.get()));
+        blockWithItem(ModBLocks.SSTONE_8_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.SSTONE_8_SLAB.get()),
+                blockTexture(ModBLocks.SSTONE_8_BLOCK.get()),
+                blockTexture(ModBLocks.SSTONE_8_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.SSTONE_8_STAIRS.get()), blockTexture(ModBLocks.SSTONE_8_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.SSTONE_8_WALL.get()), blockTexture(ModBLocks.SSTONE_8_BLOCK.get()));
+        blockWithItem(ModBLocks.SSTONE_9_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.SSTONE_9_SLAB.get()),
+                blockTexture(ModBLocks.SSTONE_9_BLOCK.get()),
+                blockTexture(ModBLocks.SSTONE_9_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.SSTONE_9_STAIRS.get()), blockTexture(ModBLocks.SSTONE_9_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.SSTONE_9_WALL.get()), blockTexture(ModBLocks.SSTONE_9_BLOCK.get()));
+        blockWithItem(ModBLocks.SSTONE_10_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.SSTONE_10_SLAB.get()),
+                blockTexture(ModBLocks.SSTONE_10_BLOCK.get()),
+                blockTexture(ModBLocks.SSTONE_10_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.SSTONE_10_STAIRS.get()), blockTexture(ModBLocks.SSTONE_10_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.SSTONE_10_WALL.get()), blockTexture(ModBLocks.SSTONE_10_BLOCK.get()));
+        blockWithItem(ModBLocks.SSTONE_11_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.SSTONE_11_SLAB.get()),
+                blockTexture(ModBLocks.SSTONE_11_BLOCK.get()),
+                blockTexture(ModBLocks.SSTONE_11_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.SSTONE_11_STAIRS.get()), blockTexture(ModBLocks.SSTONE_11_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.SSTONE_11_WALL.get()), blockTexture(ModBLocks.SSTONE_11_BLOCK.get()));
+        blockWithItem(ModBLocks.SSTONE_12_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.SSTONE_12_SLAB.get()),
+                blockTexture(ModBLocks.SSTONE_12_BLOCK.get()),
+                blockTexture(ModBLocks.SSTONE_12_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.SSTONE_12_STAIRS.get()), blockTexture(ModBLocks.SSTONE_12_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.SSTONE_12_WALL.get()), blockTexture(ModBLocks.SSTONE_12_BLOCK.get()));
+        blockWithItem(ModBLocks.SSTONE_13_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.SSTONE_13_SLAB.get()),
+                blockTexture(ModBLocks.SSTONE_13_BLOCK.get()),
+                blockTexture(ModBLocks.SSTONE_13_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.SSTONE_13_STAIRS.get()), blockTexture(ModBLocks.SSTONE_13_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.SSTONE_13_WALL.get()), blockTexture(ModBLocks.SSTONE_13_BLOCK.get()));
+        blockWithItem(ModBLocks.SSTONE_14_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.SSTONE_14_SLAB.get()),
+                blockTexture(ModBLocks.SSTONE_14_BLOCK.get()),
+                blockTexture(ModBLocks.SSTONE_14_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.SSTONE_14_STAIRS.get()), blockTexture(ModBLocks.SSTONE_14_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.SSTONE_14_WALL.get()), blockTexture(ModBLocks.SSTONE_14_BLOCK.get()));
+
 
         // ---------------------------(FLOWERS)--------------------------- //
 

@@ -1,6 +1,23 @@
-// 1.21.3	2025-04-08T18:09:38.241594488	Tags for minecraft:item mod id agotmod
+// 1.21.3	2025-04-11T01:01:57.7936453	Tags for minecraft:item mod id agotmod
 eef23bfe9f45027b3b8670ec55cfa37f8a45a919 data/agotmod/tags/item/bronze_tool_materials.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/agotmod/tags/item/dragonglass_tool_materials.json
 ef380d32ef9f54efeffc7c1c7d9ccf13299c2588 data/agotmod/tags/item/steel_tool_materials.json
-f06893dcdba64711018fd0985e8fbb2d0b57c6ed data/minecraft/tags/item/logs_that_burn.json
+1c497fba17b6a9f9253a0830c209442e05caf4ef data/minecraft/tags/item/chest_armor.json
+0225864cdaf8cf25c242f3866129b380bb7734db data/minecraft/tags/item/flowers.json
+29ad99f68b61290cd1b5967658b94476f8481410 data/minecraft/tags/item/foot_armor.json
+cb733be41d71abc68eb6b02bc03a02b09175d0ee data/minecraft/tags/item/freeze_immune_wearables.json
+22d68ed3266c04f508a8a5afd9e4996411737e6f data/minecraft/tags/item/head_armor.json
+5d45d37142afe76feb91043bb09fed7d19eaa3ce data/minecraft/tags/item/leaves.json
+8de518102c8a348cff71dda1fd2069c7241f974e data/minecraft/tags/item/leg_armor.json
+416d8412eb0f409bc0482c7fd373195972bb02b1 data/minecraft/tags/item/logs_that_burn.json
+f97b1e916eb0172fd4258ed53ece2b161d78b9f7 data/minecraft/tags/item/meat.json
 e636a9617c8d2bcd1f59b705170957c4760a4fc2 data/minecraft/tags/item/planks.json
+52e3fffde91a2044b5a822930be9a79e7799ccbe data/minecraft/tags/item/stone_bricks.json
+d2e82dabcabbf94992eb9be49251312c6f8976e2 data/minecraft/tags/item/walls.json
+50e81fb65e674a354287b77faf12fa52d6e12889 data/minecraft/tags/item/wooden_buttons.json
+17523d3d33c6d5e0a8ca28441c959b4f8d65771f data/minecraft/tags/item/wooden_doors.json
+7849c1b6420cdce34d54ab1f9cbadb245c5e2574 data/minecraft/tags/item/wooden_fences.json
+c7b079263a9522fabf5140e5a568b4bc4234de44 data/minecraft/tags/item/wooden_pressure_plates.json
+21e84943d70b2c2c6f80d0d4ea07d31a097ee76d data/minecraft/tags/item/wooden_slabs.json
+b052220b2686ef1a32b17c9250dd6335113a4b09 data/minecraft/tags/item/wooden_stairs.json
+a344e85a9b83ddb4056ac88f5485aa9d03a5ff47 data/minecraft/tags/item/wooden_trapdoors.json

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sstone_9": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:sstone_9"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:sstone_9_wall_from_sstone_9_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_sstone_9"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:sstone_9_wall_from_sstone_9_block"
+    ]
+  }
+}

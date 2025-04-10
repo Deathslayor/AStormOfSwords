@@ -475,6 +475,64 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 block -> createDoorTable(ModBLocks.ALDER_DOOR.get()));
         this.add(ModBLocks.ALDER_SLAB.get(),
                 block -> createSlabItemTable(ModBLocks.ALDER_SLAB.get()));
+        // ---------------------------(STONE)--------------------------- //
+        this.dropSelf(ModBLocks.SSTONE_1_BLOCK.get());
+        this.dropSelf(ModBLocks.SSTONE_1_STAIRS.get());
+        this.dropSelf(ModBLocks.SSTONE_1_SLAB.get());
+        this.dropSelf(ModBLocks.SSTONE_1_WALL.get());
+        this.dropSelf(ModBLocks.SSTONE_2_BLOCK.get());
+        this.dropSelf(ModBLocks.SSTONE_2_STAIRS.get());
+        this.dropSelf(ModBLocks.SSTONE_2_SLAB.get());
+        this.dropSelf(ModBLocks.SSTONE_2_WALL.get());
+        this.dropSelf(ModBLocks.SSTONE_3_BLOCK.get());
+        this.dropSelf(ModBLocks.SSTONE_3_STAIRS.get());
+        this.dropSelf(ModBLocks.SSTONE_3_SLAB.get());
+        this.dropSelf(ModBLocks.SSTONE_3_WALL.get());
+        this.dropSelf(ModBLocks.SSTONE_4_BLOCK.get());
+        this.dropSelf(ModBLocks.SSTONE_4_STAIRS.get());
+        this.dropSelf(ModBLocks.SSTONE_4_SLAB.get());
+        this.dropSelf(ModBLocks.SSTONE_4_WALL.get());
+        this.dropSelf(ModBLocks.SSTONE_5_BLOCK.get());
+        this.dropSelf(ModBLocks.SSTONE_5_STAIRS.get());
+        this.dropSelf(ModBLocks.SSTONE_5_SLAB.get());
+        this.dropSelf(ModBLocks.SSTONE_5_WALL.get());
+        this.dropSelf(ModBLocks.SSTONE_6_BLOCK.get());
+        this.dropSelf(ModBLocks.SSTONE_6_STAIRS.get());
+        this.dropSelf(ModBLocks.SSTONE_6_SLAB.get());
+        this.dropSelf(ModBLocks.SSTONE_6_WALL.get());
+        this.dropSelf(ModBLocks.SSTONE_7_BLOCK.get());
+        this.dropSelf(ModBLocks.SSTONE_7_STAIRS.get());
+        this.dropSelf(ModBLocks.SSTONE_7_SLAB.get());
+        this.dropSelf(ModBLocks.SSTONE_7_WALL.get());
+        this.dropSelf(ModBLocks.SSTONE_8_BLOCK.get());
+        this.dropSelf(ModBLocks.SSTONE_8_STAIRS.get());
+        this.dropSelf(ModBLocks.SSTONE_8_SLAB.get());
+        this.dropSelf(ModBLocks.SSTONE_8_WALL.get());
+        this.dropSelf(ModBLocks.SSTONE_9_BLOCK.get());
+        this.dropSelf(ModBLocks.SSTONE_9_STAIRS.get());
+        this.dropSelf(ModBLocks.SSTONE_9_SLAB.get());
+        this.dropSelf(ModBLocks.SSTONE_9_WALL.get());
+        this.dropSelf(ModBLocks.SSTONE_10_BLOCK.get());
+        this.dropSelf(ModBLocks.SSTONE_10_STAIRS.get());
+        this.dropSelf(ModBLocks.SSTONE_10_SLAB.get());
+        this.dropSelf(ModBLocks.SSTONE_10_WALL.get());
+        this.dropSelf(ModBLocks.SSTONE_11_BLOCK.get());
+        this.dropSelf(ModBLocks.SSTONE_11_STAIRS.get());
+        this.dropSelf(ModBLocks.SSTONE_11_SLAB.get());
+        this.dropSelf(ModBLocks.SSTONE_11_WALL.get());
+        this.dropSelf(ModBLocks.SSTONE_12_BLOCK.get());
+        this.dropSelf(ModBLocks.SSTONE_12_STAIRS.get());
+        this.dropSelf(ModBLocks.SSTONE_12_SLAB.get());
+        this.dropSelf(ModBLocks.SSTONE_12_WALL.get());
+        this.dropSelf(ModBLocks.SSTONE_13_BLOCK.get());
+        this.dropSelf(ModBLocks.SSTONE_13_STAIRS.get());
+        this.dropSelf(ModBLocks.SSTONE_13_SLAB.get());
+        this.dropSelf(ModBLocks.SSTONE_13_WALL.get());
+        this.dropSelf(ModBLocks.SSTONE_14_BLOCK.get());
+        this.dropSelf(ModBLocks.SSTONE_14_STAIRS.get());
+        this.dropSelf(ModBLocks.SSTONE_14_SLAB.get());
+        this.dropSelf(ModBLocks.SSTONE_14_WALL.get());
+
 
         // ---------------------------(FLOWERS)--------------------------- //
         this.dropSelf(ModBLocks.WINTER_ROSE.get());
