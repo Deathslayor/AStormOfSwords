@@ -74,6 +74,9 @@
       "minecraft:glow_lichen",
       "minecraft:patch_large_fern",
       "minecraft:patch_grass_forest",
+      "agotmod:ironwood",
+      "agotmod:sentinel",
+      "agotmod:pine",
       "agotmod:grass_patch",
       "agotmod:forget_me_not",
       "agotmod:frostfire",
@@ -83,10 +86,7 @@
       "agotmod:red_rose_bush",
       "agotmod:thistle",
       "agotmod:thorn_bush",
-      "agotmod:winter_rose_bush",
-      "agotmod:ironwood",
-      "agotmod:sentinel",
-      "agotmod:pine"
+      "agotmod:winter_rose_bush"
     ],
     [
       "minecraft:freeze_top_layer"

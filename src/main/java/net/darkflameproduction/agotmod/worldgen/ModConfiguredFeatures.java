@@ -121,6 +121,8 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> GRASS_PATCH_KEY = registerKey("grass_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> CLAY_PATCH_KEY = registerKey("clay_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SEAGRASS_KEY = registerKey("seagrass");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> KELP_KEY = registerKey("kelp");
+
 
 
 
@@ -941,17 +943,10 @@ public class ModConfiguredFeatures {
                 )
         );
 
-        register(context, SEAGRASS_KEY, Feature.FLOWER,
-                new RandomPatchConfiguration(
-                        64,  // tries
-                        6,   // xz spread
-                        2,   // y spread
-                        PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
-                                new SimpleBlockConfiguration(
-                                        BlockStateProvider.simple(Blocks.SEAGRASS)
-                                )
-                        )
-                ));
+        register(context, SEAGRASS_KEY, Feature.SIMPLE_BLOCK,
+                new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.SEAGRASS)));
+
+        register(context, KELP_KEY, Feature.KELP, NoneFeatureConfiguration.INSTANCE);
 
     }
 

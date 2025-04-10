@@ -72,7 +72,8 @@
     [
       "minecraft:glow_lichen",
       "agotmod:clay_patch",
-      "agotmod:seagrass"
+      "agotmod:seagrass",
+      "agotmod:kelp"
     ],
     [
       "minecraft:freeze_top_layer"

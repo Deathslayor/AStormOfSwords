@@ -3,6 +3,7 @@ package net.darkflameproduction.agotmod.worldgen;
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.darkflameproduction.agotmod.worldgen.ore.ModOrePlacement;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -12,6 +13,7 @@ import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.LakeFeature;
@@ -116,6 +118,7 @@ public class ModplacedFeatures {
     public static final ResourceKey<PlacedFeature> GRASS_PATCH_PLACED_KEY = registerKey("grass_patch");
     public static final ResourceKey<PlacedFeature> CLAY_PATCH_PLACED_KEY = registerKey("clay_patch");
     public static final ResourceKey<PlacedFeature> SEAGRASS_KEY = registerKey("seagrass");
+    public static final ResourceKey<PlacedFeature> KELP_KEY = registerKey("kelp");
 
 
 
@@ -643,11 +646,36 @@ public class ModplacedFeatures {
 
         register(context, SEAGRASS_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.SEAGRASS_KEY),
-                List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(2),
+                List.of(
+                        CountPlacement.of(120),  // Increased from 20 to 120
+                        RarityFilter.onAverageOnceEvery(1),  // Added to ensure maximum frequency (every block)
                         InSquarePlacement.spread(),
-                        PlacementUtils.HEIGHTMAP,
-                        BiomeFilter.biome()));
+                        PlacementUtils.HEIGHTMAP_TOP_SOLID,
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(
+                                BlockPredicate.allOf(
+                                        BlockPredicate.matchesBlocks(BlockPos.ZERO, Blocks.WATER),
+                                        BlockPredicate.matchesBlocks(BlockPos.ZERO.below(),
+                                                Blocks.DIRT, Blocks.SAND, Blocks.GRAVEL, Blocks.CLAY, Blocks.MUD)
+                                )
+                        )
+                ));
+
+        register(context, KELP_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.KELP_KEY),
+                List.of(
+                        CountPlacement.of(80),  // High count for abundance
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_TOP_SOLID,
+                        BiomeFilter.biome(),
+                        BlockPredicateFilter.forPredicate(
+                                BlockPredicate.allOf(
+                                        BlockPredicate.matchesBlocks(BlockPos.ZERO, Blocks.WATER),
+                                        BlockPredicate.matchesBlocks(BlockPos.ZERO.below(),
+                                                Blocks.DIRT, Blocks.SAND, Blocks.GRAVEL, Blocks.CLAY, Blocks.MUD, Blocks.STONE)
+                                )
+                        )
+                ));
 
 
 

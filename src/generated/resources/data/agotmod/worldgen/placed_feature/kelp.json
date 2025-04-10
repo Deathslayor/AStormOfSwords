@@ -1,13 +1,9 @@
 {
-  "feature": "agotmod:seagrass",
+  "feature": "agotmod:kelp",
   "placement": [
     {
       "type": "minecraft:count",
-      "count": 120
-    },
-    {
-      "type": "minecraft:rarity_filter",
-      "chance": 1
+      "count": 80
     },
     {
       "type": "minecraft:in_square"
@@ -35,7 +31,8 @@
               "minecraft:sand",
               "minecraft:gravel",
               "minecraft:clay",
-              "minecraft:mud"
+              "minecraft:mud",
+              "minecraft:stone"
             ],
             "offset": [
               0,

@@ -74,22 +74,12 @@
       "minecraft:patch_grass_normal",
       "minecraft:patch_dead_bush",
       "minecraft:patch_waterlily",
-      "minecraft:kelp_cold",
       "minecraft:glow_lichen",
       "minecraft:patch_large_fern",
       "minecraft:patch_grass_savanna",
       "agotmod:clay_patch",
       "agotmod:seagrass",
-      "agotmod:grass_patch",
-      "agotmod:forget_me_not",
-      "agotmod:frostfire",
-      "agotmod:liverwort",
-      "agotmod:lungwort",
-      "agotmod:pennyroyal",
-      "agotmod:red_rose_bush",
-      "agotmod:thistle",
-      "agotmod:thorn_bush",
-      "agotmod:winter_rose_bush"
+      "agotmod:kelp"
     ],
     [
       "minecraft:freeze_top_layer"

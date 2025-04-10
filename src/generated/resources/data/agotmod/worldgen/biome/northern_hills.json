@@ -73,6 +73,14 @@
       "minecraft:glow_lichen",
       "minecraft:patch_large_fern",
       "minecraft:patch_tall_grass",
+      "agotmod:ash_rare",
+      "agotmod:chestnut_rare",
+      "agotmod:ironwood_rare",
+      "agotmod:sentinel_rare",
+      "agotmod:pine_rare",
+      "agotmod:oak_rare",
+      "agotmod:hawthorn_rare",
+      "agotmod:beech_rare",
       "agotmod:grass_patch",
       "agotmod:forget_me_not",
       "agotmod:frostfire",
@@ -82,15 +90,7 @@
       "agotmod:red_rose_bush",
       "agotmod:thistle",
       "agotmod:thorn_bush",
-      "agotmod:winter_rose_bush",
-      "agotmod:ash_rare",
-      "agotmod:chestnut_rare",
-      "agotmod:ironwood_rare",
-      "agotmod:sentinel_rare",
-      "agotmod:pine_rare",
-      "agotmod:oak_rare",
-      "agotmod:hawthorn_rare",
-      "agotmod:beech_rare"
+      "agotmod:winter_rose_bush"
     ],
     [
       "minecraft:freeze_top_layer"
