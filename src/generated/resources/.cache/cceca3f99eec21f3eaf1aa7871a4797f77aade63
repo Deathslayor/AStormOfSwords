@@ -1,4 +1,4 @@
-// 1.21.3	2025-04-11T12:09:51.1959237	Tags for minecraft:block mod id agotmod
+// 1.21.3	2025-04-11T14:25:39.9627326	Tags for minecraft:block mod id agotmod
 7ce4ba32d6429dbf27a7ccd68d70690dbe80eb19 data/agotmod/tags/block/incorrect_for_bronze_tool.json
 a249c46329a41538f49a564e1f14338aaf1be5a0 data/agotmod/tags/block/incorrect_for_steel_tool.json
 a5270b76c9036b19927822a14ea7db103ebf5a0d data/agotmod/tags/block/needs_bronze_tool.json
@@ -11,7 +11,8 @@ a2787d1e34eb959461d223ed2e8d1c065d9ed99e data/minecraft/tags/block/incorrect_for
 a2787d1e34eb959461d223ed2e8d1c065d9ed99e data/minecraft/tags/block/incorrect_for_stone_tool.json
 a2787d1e34eb959461d223ed2e8d1c065d9ed99e data/minecraft/tags/block/incorrect_for_wooden_tool.json
 197c7ee870487ad5faa9094cfe2f8a7a0c2f4cb2 data/minecraft/tags/block/logs_that_burn.json
-466b95259628d8689cd8925de478bf643ea23018 data/minecraft/tags/block/mineable/pickaxe.json
+7c5c7710bfa74b744c76274e3ef3899e4e1c112d data/minecraft/tags/block/mineable/pickaxe.json
+1c43f2b4ee3c5ddf4800c3cd5c008ad202e2f5c2 data/minecraft/tags/block/mineable/shovel.json
 add20b0e5782888ccfc35ca325ac5a1c2e39f150 data/minecraft/tags/block/needs_iron_tool.json
 b82b773844e20b6b4f7c748e4dc01d6ad19a7075 data/minecraft/tags/block/needs_stone_tool.json
 32459fcf10a6dbbc00ddfb8e7acd44be9de99b50 data/minecraft/tags/block/planks.json

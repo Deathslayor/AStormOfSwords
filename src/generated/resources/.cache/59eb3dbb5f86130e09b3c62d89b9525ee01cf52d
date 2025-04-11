@@ -1,4 +1,4 @@
-// 1.21.3	2025-04-11T12:09:51.1567396	Loot Tables
+// 1.21.3	2025-04-11T14:25:39.9131784	Loot Tables
 dcab3871310df0811beb8de47adc40c83d85986b data/agotmod/loot_table/blocks/alder_button.json
 81071778b6225f49c02483465d22441e05162a1b data/agotmod/loot_table/blocks/alder_door.json
 33ccfef8d939079aebfc7963299df0ced91481b5 data/agotmod/loot_table/blocks/alder_fence.json
@@ -229,6 +229,7 @@ aac866f98b55356387c7a66e3d02bd255d255c72 data/agotmod/loot_table/blocks/pine_wal
 73637dbe15604976b1bcf4c3abbe58e72d60f86e data/agotmod/loot_table/blocks/pine_wood.json
 037606565dd19fadac47322c57e9f7822fec8f35 data/agotmod/loot_table/blocks/pine_wood_stripped.json
 83c2e1f0eaaee236236c5b7ad8d40bacec649d49 data/agotmod/loot_table/blocks/poison_kisses.json
+cf2b0a30de1a2410cce47b9e425a86cc9287f5eb data/agotmod/loot_table/blocks/quagmire.json
 adec14191fc2e1c9815cbc799b6e49b4d4d53d1d data/agotmod/loot_table/blocks/raw_tin_block.json
 c1228c52faa1fc2439253f2f12da6628278cd41d data/agotmod/loot_table/blocks/red_rose_bush.json
 6c664a297bffbc4eb5ef2733a146af55dceddd57 data/agotmod/loot_table/blocks/rose.json

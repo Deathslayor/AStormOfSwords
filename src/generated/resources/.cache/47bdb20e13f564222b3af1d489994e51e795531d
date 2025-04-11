@@ -1,4 +1,4 @@
-// 1.21.3	2025-04-11T13:27:49.142566	Block States: agotmod
+// 1.21.3	2025-04-11T14:25:39.9316996	Block States: agotmod
 78b6cf02fa0f02bb58a5d7645020281ff8bc4c59 assets/agotmod/blockstates/alder_button.json
 4babc4c353cbdf68af13d112a9b9311de8af4fe1 assets/agotmod/blockstates/alder_door.json
 e817d04da7d05e8c00ce23999fdc528a05195c1d assets/agotmod/blockstates/alder_fence.json
@@ -229,6 +229,7 @@ e93c5880363afac5dbb222b2344c1bfbfa8e0711 assets/agotmod/blockstates/pine_trapdoo
 261581815db9b4f4a92074f36899e88595c0674f assets/agotmod/blockstates/pine_wood.json
 2e3defa1c8773aba6d0f519f672b034f4d672b96 assets/agotmod/blockstates/pine_wood_stripped.json
 14f7b176cf3c1f605a46ab37dc5d590bb7971203 assets/agotmod/blockstates/poison_kisses.json
+66d88da027fb2c4528a17c41122980f3c2776bb2 assets/agotmod/blockstates/quagmire.json
 ea129dcfa25e7356c84c9b15cca0aff400da7bc2 assets/agotmod/blockstates/raw_tin_block.json
 cf0a2e22e42dc5838ea9d0b8984752435e69a7a9 assets/agotmod/blockstates/red_rose_bush.json
 8fe0fa93fc513dda24db63d93ca3889144c0f3d2 assets/agotmod/blockstates/rose.json
@@ -935,6 +936,7 @@ cf83e00ab81795a282bec12235deeb78c4cdfa0f assets/agotmod/models/block/pine_wood_h
 269d60318b28da9610fbbe825cbaab90043acfc2 assets/agotmod/models/block/pine_wood_stripped.json
 99f73309fb3bd0055fd14b660c9bf1c517c8485a assets/agotmod/models/block/pine_wood_stripped_horizontal.json
 534b8e4f260291c1aabf3c8d012ec4957470587d assets/agotmod/models/block/poison_kisses.json
+f21f5a92b86cef7bfd4b1a6bd66f702ab8550d92 assets/agotmod/models/block/quagmire.json
 193e5608d79ea6af5ff436762f4f263aa431bbf7 assets/agotmod/models/block/raw_tin_block.json
 e8bfb33155c9371ae1c764bb961038c83c9129be assets/agotmod/models/block/red_rose_bush_bottom.json
 65f6eed21813a18424365ebd1af83337da98fdb9 assets/agotmod/models/block/red_rose_bush_top.json
@@ -1197,8 +1199,8 @@ b972781e26fd23cfd212d54f5740589e7d8738ac assets/agotmod/models/block/sstone_14_w
 9757ce287718fb041b5afb634b4d6cdd3b9623dc assets/agotmod/models/block/sstone_14_wall_side.json
 103e47880de874eb170e626b1599292b560a3aad assets/agotmod/models/block/sstone_14_wall_side_tall.json
 b0dad236d655457e0af674f39a8173e76d995291 assets/agotmod/models/block/sstone_16.json
-63385dcccf0a884fd5610cf2c72365ca25301784 assets/agotmod/models/block/sstone_16_slab.json
-24ecdb1ada585901cd9ad85153757bed1de3b279 assets/agotmod/models/block/sstone_16_slab_top.json
+c1e44afd523951e333193ae70b92391ec9b1d7f3 assets/agotmod/models/block/sstone_16_slab.json
+ad4fc1ae51c7b2e98f7f5a19b213e5e76e1fe3eb assets/agotmod/models/block/sstone_16_slab_top.json
 89cf8aba5a844dd7414982c34e42b6ca18e900cd assets/agotmod/models/block/sstone_16_stairs.json
 2ec6f67b01244099ac3ccde8ab34edfc58d1ac80 assets/agotmod/models/block/sstone_16_stairs_inner.json
 03afd1e6f6eeef0f42e1df42c6110c96fe1a4c45 assets/agotmod/models/block/sstone_16_stairs_outer.json
@@ -1565,6 +1567,7 @@ f0c5c47fd3a8a90a4ef8712bb79191868d0d2d9b assets/agotmod/models/item/pine_planks.
 da28caee992b13f085caf4039728f16d8153a460 assets/agotmod/models/item/pine_wood.json
 c493165e65c629972caefb079a3151ce2852579e assets/agotmod/models/item/pine_wood_stripped.json
 ff62d576bb5020a3abd9fdaed44c690447bbd288 assets/agotmod/models/item/poison_kisses.json
+60a9236bb452071a50ca3592fd194b285faca563 assets/agotmod/models/item/quagmire.json
 b267e3b0773e28316bbeef20c7569e016bfd68ac assets/agotmod/models/item/raw_tin_block.json
 14ecbc5f5be8696f5f42f7928e7e2f6b214aa393 assets/agotmod/models/item/red_rose_bush.json
 f205ce7a7d1846b1c105d5fd5ad93616e1a7f7d0 assets/agotmod/models/item/rose.json

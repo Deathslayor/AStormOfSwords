@@ -1,4 +1,4 @@
-// 1.21.3	2025-04-10T15:32:23.379567	Registries
+// 1.21.3	2025-04-11T16:32:12.0190848	Registries
 ffe3d912e363745b0043a61fc7b67f35a53f2228 data/agotmod/neoforge/biome_modifier/add_tin_ore.json
 2cd0b3508ddcea7e502f1cf50b1ab12343351354 data/agotmod/neoforge/biome_modifier/create_weirwood_tree.json
 3afcdacdb87e2deda10b1fe27c5811a14f392390 data/agotmod/neoforge/biome_modifier/spawn_mammoth.json
@@ -10,10 +10,10 @@ e79c2b7f6a36fb4cf5f2e87e14c9dcfc0a54b810 data/agotmod/worldgen/biome/ironwood.js
 2e9dbdfbe541cd76d154a1246250a16bd279bd5f data/agotmod/worldgen/biome/lands_of_always_winter.json
 0c48459d731fa07ac0bb9498e953b43ef31c6b81 data/agotmod/worldgen/biome/northern_hills.json
 bf9fec5885b9b10c5739dea6aab5ce42dfaa4833 data/agotmod/worldgen/biome/northern_mountains.json
-eac8cdeab72bc8fdc6581054adbffe4370015e3c data/agotmod/worldgen/biome/northern_waters.json
-aeb17b760aa634249724e2a9dc23373b36904298 data/agotmod/worldgen/biome/rills.json
+8f0764ad31998614756023b07e15a70dd06927fa data/agotmod/worldgen/biome/northern_waters.json
+a1b373bf90e1de625738c4b64dfe7f639eee4dde data/agotmod/worldgen/biome/rills.json
 5f0d47277611157915c4a368db97add7f333f832 data/agotmod/worldgen/biome/stony_shores.json
-1c8a5015c0299abadfc33ce5879c2c45ac04998e data/agotmod/worldgen/biome/the_neck.json
+8bb0ccb87351677cac2338d32f7e4f93478e076b data/agotmod/worldgen/biome/the_neck.json
 5f0d47277611157915c4a368db97add7f333f832 data/agotmod/worldgen/biome/the_north.json
 f19c1239c461fc3c63ca849830c6a11ff1501ad2 data/agotmod/worldgen/biome/valley_of_thenn.json
 f9c6ecbdc14a26014f9c7d74185406a7db68d041 data/agotmod/worldgen/biome/wolfswood.json
@@ -87,6 +87,7 @@ c8d567af06c4957cfcafc25f5a729425829aea2f data/agotmod/worldgen/configured_featur
 979c6d46a2ef4865ee9329ba73fd7ca2cf22db98 data/agotmod/worldgen/configured_feature/pine.json
 979c6d46a2ef4865ee9329ba73fd7ca2cf22db98 data/agotmod/worldgen/configured_feature/pine_rare.json
 9ff3fce0ab0e16137a8b00ede7f13621bd0c7eb4 data/agotmod/worldgen/configured_feature/poison_kisses.json
+efa7536e6111ab35ce726e9af97f7a7fe49fd945 data/agotmod/worldgen/configured_feature/quagmire.json
 e2397723a7845acc24c70a92888bf9bb3ad7c5e9 data/agotmod/worldgen/configured_feature/red_rose_bush.json
 e4a446c24dc29bd3f66b930e79c1d49ec3a3d28a data/agotmod/worldgen/configured_feature/ruby_ore.json
 dde4ec06dc22c0974d3a9015de98616d6b14cfc2 data/agotmod/worldgen/configured_feature/saffron_crocus.json
@@ -174,7 +175,7 @@ e734315b81044998e1626ec1d4e78305f5dcb44a data/agotmod/worldgen/placed_feature/go
 d65745d5331c5738ff47d955e1243ef3380b41a7 data/agotmod/worldgen/placed_feature/goldenrod.json
 6615527334c7053c906ec6da8b217f28ca7861be data/agotmod/worldgen/placed_feature/gold_ore_placed.json
 4c5b923a306729e03c186e683713d017b3a311bc data/agotmod/worldgen/placed_feature/gorse.json
-82d192be3affc57efe074bccac9abbe0323f8aa6 data/agotmod/worldgen/placed_feature/grass_patch.json
+bf1eaebd9f94b26f18d64ffcbcf4eada68e2b9c5 data/agotmod/worldgen/placed_feature/grass_patch.json
 44b357a2006b4f2e484f9c6ac2c1a98b8bcb8036 data/agotmod/worldgen/placed_feature/hawthorn.json
 a618be80b5b5b73d319fc32ead45aa943304d362 data/agotmod/worldgen/placed_feature/hawthorn_rare.json
 04dfd138006a9dec414ad95398bb4cb171578de4 data/agotmod/worldgen/placed_feature/ironwood.json
@@ -201,6 +202,7 @@ bdce82419942c4ffa2ca96b3ab4b37545d0e74a3 data/agotmod/worldgen/placed_feature/pe
 cbbdf1f85245bbd7f83c356f9bb8522f0016ec69 data/agotmod/worldgen/placed_feature/pine.json
 c46e11b4caf1e9dd11a8a33d95e82d4c1fc54cba data/agotmod/worldgen/placed_feature/pine_rare.json
 bd1e60459641033cfa9b20281d0cec18455578df data/agotmod/worldgen/placed_feature/poison_kisses.json
+26dba620d1cd75d7a8ce5f1886fb14f3b50d0874 data/agotmod/worldgen/placed_feature/quagmire.json
 af778d16bb06e25317a02766995f56af42c8f7bd data/agotmod/worldgen/placed_feature/red_rose_bush.json
 ae92401b18551904c7c6ef00ce5547fa84dff512 data/agotmod/worldgen/placed_feature/ruby_ore_placed.json
 17306ce31a09d0a00724c7cfda98b3e56ecd570a data/agotmod/worldgen/placed_feature/saffron_crocus.json

@@ -119,6 +119,8 @@ public class ModplacedFeatures {
     public static final ResourceKey<PlacedFeature> CLAY_PATCH_PLACED_KEY = registerKey("clay_patch");
     public static final ResourceKey<PlacedFeature> SEAGRASS_KEY = registerKey("seagrass");
     public static final ResourceKey<PlacedFeature> KELP_KEY = registerKey("kelp");
+    public static final ResourceKey<PlacedFeature> QUAGMIRE_PATCH_PLACED_KEY = registerKey("quagmire");
+
 
 
 
@@ -614,22 +616,33 @@ public class ModplacedFeatures {
         register(context, GRASS_PATCH_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.GRASS_PATCH_KEY),
                 List.of(
-                        // Increase the count - this multiplies the number of attempts per chunk
-                        CountPlacement.of(4),  // Increased from 1 to 4
-
-                        // Remove rarity filter or set to 1 (guaranteed) to ensure placement always occurs
-                        // RarityFilter.onAverageOnceEvery(1), -- This line can be removed since "1" means every time
-
-                        // Optionally add noise-based distribution for more natural placement
-                        NoiseBasedCountPlacement.of(5, 10.0, 0.0),  // Base count: 5, additional noise-based count
-
-                        // Keep these the same
+                        CountPlacement.of(4),
+                        NoiseBasedCountPlacement.of(5, 10.0, 0.0),
                         InSquarePlacement.spread(),
+                        // Ensures placement only at or above Y=64
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(65), VerticalAnchor.top()),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()
                 ));
+
         register(context, CLAY_PATCH_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.CLAY_PATCH_KEY),
+                List.of(
+                        // Try placing clay 10 times per chunk — tweak this number as needed
+                        CountPlacement.of(10),
+
+                        // Spread attempts randomly in the chunk
+                        InSquarePlacement.spread(),
+
+                        // Allow full vertical generation, including underwater
+                        PlacementUtils.FULL_RANGE,
+
+                        // Only place in valid biomes (make sure rivers are included in biome modifiers)
+                        BiomeFilter.biome()
+                ));
+
+        register(context, QUAGMIRE_PATCH_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.QUAGMIRE_PATCH_KEY),
                 List.of(
                         // Try placing clay 10 times per chunk — tweak this number as needed
                         CountPlacement.of(10),

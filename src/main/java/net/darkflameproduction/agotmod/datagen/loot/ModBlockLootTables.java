@@ -124,7 +124,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBLocks.TIN_BLOCK.get());
         this.dropSelf(ModBLocks.RAW_TIN_BLOCK.get());
         // ---------------------------(TIN)--------------------------- //
-
+        this.dropSelf(ModBLocks.QUAGMIRE.get());
         // ---------------------------(BRONZE)--------------------------- //
         // Add loot table for bronze block
         this.dropSelf(ModBLocks.BRONZE_BLOCK.get());

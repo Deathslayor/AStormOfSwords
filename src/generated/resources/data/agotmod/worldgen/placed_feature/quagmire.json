@@ -1,15 +1,9 @@
 {
-  "feature": "agotmod:grass_patch",
+  "feature": "agotmod:quagmire",
   "placement": [
     {
       "type": "minecraft:count",
-      "count": 4
-    },
-    {
-      "type": "minecraft:noise_based_count",
-      "noise_factor": 10.0,
-      "noise_offset": 0.0,
-      "noise_to_count_ratio": 5
+      "count": 10
     },
     {
       "type": "minecraft:in_square"
@@ -22,13 +16,9 @@
           "below_top": 0
         },
         "min_inclusive": {
-          "absolute": 65
+          "above_bottom": 0
         }
       }
-    },
-    {
-      "type": "minecraft:heightmap",
-      "heightmap": "MOTION_BLOCKING"
     },
     {
       "type": "minecraft:biome"

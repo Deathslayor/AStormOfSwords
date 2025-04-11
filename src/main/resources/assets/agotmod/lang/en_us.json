@@ -1,6 +1,6 @@
 {
 
-
+  "death.attack.died_by_quagmire": "%1$s was lost in the quagmire",
   "item.agotmod.coin" : "Coin",
   "item.agotmod.tin_ingot": "Tin Ingot",
   "item.agotmod.steel_ingot": "Steel Ingot",
@@ -299,6 +299,7 @@
   "block.agotmod.tourmaline_block": "Tourmaline Block",
   "block.agotmod.tourmaline_ore": "Tourmaline Ore",
   "block.agotmod.tourmaline_deepslate_ore": "Deepslate Tourmaline Ore",
+  "block.agotmod.quagmire": "Quagmire",
 
   "item.agotmod.mammoth_spawn_egg": "Mammoth Spawn Egg",
   "item.agotmod.bear_spawn_egg": "Bear Spawn Egg",

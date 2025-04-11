@@ -8,6 +8,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -119,6 +120,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         // ---------------------------(BRICKS)--------------------------- //
         // Register block states and models for brick-related blocks
+        blockWithItem(ModBLocks.QUAGMIRE);
         blockWithItem(ModBLocks.KINGS_LANDING_BRICK_LARGE);
         blockWithItem(ModBLocks.DARK_STONE_BRICK);
         blockWithItem(ModBLocks.STONE_BRICK_BUT_COOLER);
@@ -847,7 +849,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBLocks.SSTONE_16_BLOCK);
         slabBlock(((SlabBlock) ModBLocks.SSTONE_16_SLAB.get()),
                 blockTexture(ModBLocks.SSTONE_16_BLOCK.get()),
-                blockTexture(ModBLocks.SSTONE_17_BLOCK.get()));
+                blockTexture(ModBLocks.SSTONE_16_BLOCK.get()));
         stairsBlock(((StairBlock) ModBLocks.SSTONE_16_STAIRS.get()), blockTexture(ModBLocks.SSTONE_16_BLOCK.get()));
         wallBlock(((WallBlock) ModBLocks.SSTONE_16_WALL.get()), blockTexture(ModBLocks.SSTONE_16_BLOCK.get()));
 

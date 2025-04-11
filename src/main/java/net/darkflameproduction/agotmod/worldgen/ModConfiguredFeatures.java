@@ -122,6 +122,7 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> CLAY_PATCH_KEY = registerKey("clay_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SEAGRASS_KEY = registerKey("seagrass");
     public static final ResourceKey<ConfiguredFeature<?, ?>> KELP_KEY = registerKey("kelp");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> QUAGMIRE_PATCH_KEY = registerKey("quagmire");
 
 
 
@@ -940,6 +941,20 @@ public class ModConfiguredFeatures {
                         ),  // Blocks that can be replaced (same as vanilla clay)
                         UniformInt.of(3, 6),  // Random radius between 2-3 blocks (same as vanilla)
                         2  // Height (same as vanilla)
+                )
+        );
+
+        register(context, QUAGMIRE_PATCH_KEY, Feature.DISK,
+                new DiskConfiguration(
+                        RuleBasedBlockStateProvider.simple(ModBLocks.QUAGMIRE.get()),  // The block to place (grass instead of clay)
+                        BlockPredicate.matchesBlocks(
+                                Blocks.DIRT,
+                                Blocks.GRAVEL,
+                                Blocks.MUD,
+                                Blocks.SAND
+                        ),  // Blocks that can be replaced (same as vanilla clay)
+                        UniformInt.of(3, 6),  // Random radius between 2-3 blocks (same as vanilla)
+                        4  // Height (same as vanilla)
                 )
         );
 

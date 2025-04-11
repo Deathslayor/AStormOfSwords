@@ -8,17 +8,36 @@ import net.darkflameproduction.agotmod.block.custom.specialleaves.WeirwoodLeaves
 import net.darkflameproduction.agotmod.item.ModItems;
 import net.darkflameproduction.agotmod.worldgen.tree.ModTreeGrower;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.material.*;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.EntityCollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -29,19 +48,17 @@ import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraft.world.level.GrassColor;
 import net.minecraft.world.level.block.Blocks;
 
+import java.awt.*;
 import java.util.function.Supplier;
 
 import java.util.function.Function;
@@ -199,6 +216,132 @@ public class ModBLocks {
 
     // ROUNDED STONE BRICK
     public static final DeferredBlock<Block> STONE_BRICK_BUT_COOLER = registerBlock("stone_brick_but_cooler", Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICKS));
+
+    public static class QuagmireBlock extends Block implements SimpleWaterloggedBlock {
+        private static final VoxelShape FALLING_COLLISION_SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D);
+        private static final double SUFFOCATION_CHANCE = 0.9D;
+        private static final int DAMAGE_TICK_INTERVAL = 20;
+
+        // Add a waterlogged property
+        public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+
+        public QuagmireBlock(Properties properties) {
+            super(properties);
+            // Register the waterlogged property with a default value of false
+            this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, Boolean.FALSE));
+        }
+
+        @Override
+        protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+            builder.add(WATERLOGGED);
+        }
+
+        @Override
+        public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+            if (context instanceof EntityCollisionContext entityContext) {
+                Entity entity = entityContext.getEntity();
+                if (entity != null) {
+                    boolean hasQuagmireBelow = level.getBlockState(pos.below()).getBlock() instanceof QuagmireBlock;
+                    double entityY = entity.getY();
+                    double blockMiddleY = pos.getY() + 0.5D;
+                    boolean entityInLowerHalf = entityY < blockMiddleY;
+
+                    if (hasQuagmireBelow && entityInLowerHalf) {
+                        return Shapes.empty();
+                    }
+
+                    if (entity.fallDistance > 2.5F) {
+                        return FALLING_COLLISION_SHAPE;
+                    }
+
+                    boolean canEntityWalkOnQuagmire = entity instanceof LivingEntity &&
+                            ((LivingEntity) entity).getAttributeValue(Attributes.MOVEMENT_SPEED) > 0.1F;
+                    if (canEntityWalkOnQuagmire && !entity.isSteppingCarefully()) {
+                        return FALLING_COLLISION_SHAPE;
+                    }
+                }
+            }
+            return FALLING_COLLISION_SHAPE;
+        }
+
+        @Override
+        public VoxelShape getBlockSupportShape(BlockState state, BlockGetter level, BlockPos pos) {
+            return Shapes.empty();
+        }
+
+        @Override
+        public VoxelShape getVisualShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+            return Shapes.empty();
+        }
+
+        @Override
+        public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+            if (!(entity instanceof LivingEntity livingEntity)) return;
+
+            entity.makeStuckInBlock(state, new Vec3(0.8D, 0.5D, 0.8D));
+
+            double headY = entity.getY() + entity.getEyeHeight();
+            if (headY > pos.getY() && headY < pos.getY() + 1.0D) {
+                if (!level.isClientSide) {
+                    int tickCount = (int) (level.getGameTime() % DAMAGE_TICK_INTERVAL);
+
+                    if (tickCount == 0) {
+                        if (!livingEntity.hasEffect(MobEffects.WATER_BREATHING) &&
+                                !livingEntity.hasEffect(MobEffects.CONDUIT_POWER)) {
+
+                            if (level.random.nextDouble() < SUFFOCATION_CHANCE) {
+                                // Apply vanilla drowning damage
+                                livingEntity.hurt(level.damageSources().drown(), 2.0F);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Enhanced water resistance - prevent water from replacing this block
+        @Override
+        public boolean canBeReplaced(BlockState state, Fluid fluid) {
+            return false;
+        }
+
+        // Prevent block from being waterlogged
+        @Override
+        public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+            return true;
+        }
+
+        // Prevent water from flowing into or through this block
+
+
+        // Always maintain empty fluid state
+        @Override
+        public FluidState getFluidState(BlockState state) {
+            return Fluids.EMPTY.defaultFluidState();
+        }
+
+        // Block water propagation when placing the block
+        @Override
+        public BlockState getStateForPlacement(BlockPlaceContext context) {
+            return this.defaultBlockState().setValue(WATERLOGGED, Boolean.FALSE);
+        }
+
+        // Override for multiplayer compatibilit
+    }
+
+    // Register the block
+    public static final DeferredBlock<Block> QUAGMIRE = registerBlock("quagmire",
+            properties -> new QuagmireBlock(properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SNOW_BLOCK)
+                    .sound(SoundType.MUD)
+                    .friction(0.8F)
+                    .speedFactor(0.2F)
+                    .strength(6f)
+                    .noOcclusion()  // Important for proper rendering when sinking
+                    .isValidSpawn((state, level, pos, type) -> false)  // Prevent mob spawning
+                    .pushReaction(PushReaction.BLOCK));  // Prevent pistons from moving it
+
+
 
     // ---------------------------(BLOCKS)--------------------------- //
 
