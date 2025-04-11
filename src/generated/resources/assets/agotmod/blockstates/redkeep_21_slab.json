@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "agotmod:block/redkeep_21_slab"
+    },
+    "type=double": {
+      "model": "agotmod:block/redkeep_21"
+    },
+    "type=top": {
+      "model": "agotmod:block/redkeep_21_slab_top"
+    }
+  }
+}

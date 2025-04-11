@@ -556,10 +556,10 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBLocks.SSTONE_20_STAIRS.get());
         this.dropSelf(ModBLocks.SSTONE_20_SLAB.get());
         this.dropSelf(ModBLocks.SSTONE_20_WALL.get());
-        // this.dropSelf(ModBLocks.SSTONE_21_BLOCK.get());
-        //  this.dropSelf(ModBLocks.SSTONE_21_STAIRS.get());
-        // this.dropSelf(ModBLocks.SSTONE_21_SLAB.get());
-        //  this.dropSelf(ModBLocks.SSTONE_21_WALL.get());
+         this.dropSelf(ModBLocks.SSTONE_21_BLOCK.get());
+          this.dropSelf(ModBLocks.SSTONE_21_STAIRS.get());
+         this.dropSelf(ModBLocks.SSTONE_21_SLAB.get());
+         this.dropSelf(ModBLocks.SSTONE_21_WALL.get());
         this.dropSelf(ModBLocks.SSTONE_22_BLOCK.get());
         this.dropSelf(ModBLocks.SSTONE_22_STAIRS.get());
         this.dropSelf(ModBLocks.SSTONE_22_SLAB.get());
@@ -632,10 +632,10 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBLocks.RSANDSTONE_20_STAIRS.get());
         this.dropSelf(ModBLocks.RSANDSTONE_20_SLAB.get());
         this.dropSelf(ModBLocks.RSANDSTONE_20_WALL.get());
-// this.dropSelf(ModBLocks.RSANDSTONE_21_BLOCK.get());
-//  this.dropSelf(ModBLocks.RSANDSTONE_21_STAIRS.get());
-// this.dropSelf(ModBLocks.RSANDSTONE_21_SLAB.get());
-//  this.dropSelf(ModBLocks.RSANDSTONE_21_WALL.get());
+ this.dropSelf(ModBLocks.RSANDSTONE_21_BLOCK.get());
+  this.dropSelf(ModBLocks.RSANDSTONE_21_STAIRS.get());
+ this.dropSelf(ModBLocks.RSANDSTONE_21_SLAB.get());
+  this.dropSelf(ModBLocks.RSANDSTONE_21_WALL.get());
         this.dropSelf(ModBLocks.RSANDSTONE_22_BLOCK.get());
         this.dropSelf(ModBLocks.RSANDSTONE_22_STAIRS.get());
         this.dropSelf(ModBLocks.RSANDSTONE_22_SLAB.get());
@@ -645,6 +645,254 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBLocks.RSANDSTONE_23_SLAB.get());
         this.dropSelf(ModBLocks.RSANDSTONE_23_WALL.get());
 
+        this.dropSelf(ModBLocks.RSANDSTONE_24_BLOCK.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_24_STAIRS.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_24_SLAB.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_24_WALL.get());
+
+        this.dropSelf(ModBLocks.RSANDSTONE_25_BLOCK.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_25_STAIRS.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_25_SLAB.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_25_WALL.get());
+
+        this.dropSelf(ModBLocks.RSANDSTONE_26_BLOCK.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_26_STAIRS.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_26_SLAB.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_26_WALL.get());
+
+        this.dropSelf(ModBLocks.RSANDSTONE_27_BLOCK.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_27_STAIRS.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_27_SLAB.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_27_WALL.get());
+
+        this.dropSelf(ModBLocks.RSANDSTONE_28_BLOCK.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_28_STAIRS.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_28_SLAB.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_28_WALL.get());
+
+        this.dropSelf(ModBLocks.RSANDSTONE_29_BLOCK.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_29_STAIRS.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_29_SLAB.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_29_WALL.get());
+
+        this.dropSelf(ModBLocks.RSANDSTONE_30_BLOCK.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_30_STAIRS.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_30_SLAB.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_30_WALL.get());
+
+        this.dropSelf(ModBLocks.RSANDSTONE_31_BLOCK.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_31_STAIRS.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_31_SLAB.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_31_WALL.get());
+
+        this.dropSelf(ModBLocks.RSANDSTONE_32_BLOCK.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_32_STAIRS.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_32_SLAB.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_32_WALL.get());
+
+        this.dropSelf(ModBLocks.RSANDSTONE_33_BLOCK.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_33_STAIRS.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_33_SLAB.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_33_WALL.get());
+
+        this.dropSelf(ModBLocks.RSANDSTONE_34_BLOCK.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_34_STAIRS.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_34_SLAB.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_34_WALL.get());
+
+        this.dropSelf(ModBLocks.RSANDSTONE_35_BLOCK.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_35_STAIRS.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_35_SLAB.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_35_WALL.get());
+
+        this.dropSelf(ModBLocks.RSANDSTONE_36_BLOCK.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_36_STAIRS.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_36_SLAB.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_36_WALL.get());
+
+        this.dropSelf(ModBLocks.RSANDSTONE_37_BLOCK.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_37_STAIRS.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_37_SLAB.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_37_WALL.get());
+
+        this.dropSelf(ModBLocks.RSANDSTONE_38_BLOCK.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_38_STAIRS.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_38_SLAB.get());
+        this.dropSelf(ModBLocks.RSANDSTONE_38_WALL.get());
+
+
+        //redkeep
+        this.dropSelf(ModBLocks.REDKEEP_STONE_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_STONE_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_STONE_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_STONE_WALL.get());
+        this.dropSelf(ModBLocks.REDKEEP_1_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_1_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_1_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_1_WALL.get());
+        this.dropSelf(ModBLocks.REDKEEP_2_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_2_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_2_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_2_WALL.get());
+        this.dropSelf(ModBLocks.REDKEEP_3_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_3_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_3_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_3_WALL.get());
+        this.dropSelf(ModBLocks.REDKEEP_4_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_4_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_4_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_4_WALL.get());
+        this.dropSelf(ModBLocks.REDKEEP_5_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_5_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_5_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_5_WALL.get());
+        this.dropSelf(ModBLocks.REDKEEP_6_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_6_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_6_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_6_WALL.get());
+        this.dropSelf(ModBLocks.REDKEEP_7_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_7_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_7_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_7_WALL.get());
+        this.dropSelf(ModBLocks.REDKEEP_8_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_8_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_8_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_8_WALL.get());
+        this.dropSelf(ModBLocks.REDKEEP_9_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_9_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_9_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_9_WALL.get());
+        this.dropSelf(ModBLocks.REDKEEP_10_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_10_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_10_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_10_WALL.get());
+        this.dropSelf(ModBLocks.REDKEEP_11_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_11_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_11_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_11_WALL.get());
+        this.dropSelf(ModBLocks.REDKEEP_12_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_12_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_12_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_12_WALL.get());
+        this.dropSelf(ModBLocks.REDKEEP_13_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_13_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_13_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_13_WALL.get());
+        this.dropSelf(ModBLocks.REDKEEP_14_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_14_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_14_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_14_WALL.get());
+// this.dropSelf(ModBLocks.REDKEEP_15_BLOCK.get());
+// this.dropSelf(ModBLocks.REDKEEP_15_STAIRS.get());
+// this.dropSelf(ModBLocks.REDKEEP_15_SLAB.get());
+// this.dropSelf(ModBLocks.REDKEEP_15_WALL.get());
+        this.dropSelf(ModBLocks.REDKEEP_16_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_16_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_16_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_16_WALL.get());
+        this.dropSelf(ModBLocks.REDKEEP_17_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_17_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_17_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_17_WALL.get());
+        this.dropSelf(ModBLocks.REDKEEP_18_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_18_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_18_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_18_WALL.get());
+        this.dropSelf(ModBLocks.REDKEEP_19_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_19_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_19_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_19_WALL.get());
+        this.dropSelf(ModBLocks.REDKEEP_20_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_20_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_20_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_20_WALL.get());
+this.dropSelf(ModBLocks.REDKEEP_21_BLOCK.get());
+this.dropSelf(ModBLocks.REDKEEP_21_STAIRS.get());
+this.dropSelf(ModBLocks.REDKEEP_21_SLAB.get());
+this.dropSelf(ModBLocks.REDKEEP_21_WALL.get());
+        this.dropSelf(ModBLocks.REDKEEP_22_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_22_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_22_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_22_WALL.get());
+        this.dropSelf(ModBLocks.REDKEEP_23_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_23_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_23_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_23_WALL.get());
+
+        this.dropSelf(ModBLocks.REDKEEP_24_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_24_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_24_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_24_WALL.get());
+
+        this.dropSelf(ModBLocks.REDKEEP_25_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_25_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_25_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_25_WALL.get());
+
+        this.dropSelf(ModBLocks.REDKEEP_26_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_26_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_26_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_26_WALL.get());
+
+        this.dropSelf(ModBLocks.REDKEEP_27_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_27_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_27_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_27_WALL.get());
+
+        this.dropSelf(ModBLocks.REDKEEP_28_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_28_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_28_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_28_WALL.get());
+
+        this.dropSelf(ModBLocks.REDKEEP_29_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_29_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_29_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_29_WALL.get());
+
+        this.dropSelf(ModBLocks.REDKEEP_30_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_30_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_30_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_30_WALL.get());
+
+        this.dropSelf(ModBLocks.REDKEEP_31_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_31_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_31_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_31_WALL.get());
+
+        this.dropSelf(ModBLocks.REDKEEP_32_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_32_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_32_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_32_WALL.get());
+
+        this.dropSelf(ModBLocks.REDKEEP_33_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_33_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_33_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_33_WALL.get());
+
+        this.dropSelf(ModBLocks.REDKEEP_34_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_34_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_34_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_34_WALL.get());
+
+        this.dropSelf(ModBLocks.REDKEEP_35_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_35_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_35_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_35_WALL.get());
+
+        this.dropSelf(ModBLocks.REDKEEP_36_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_36_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_36_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_36_WALL.get());
+
+        this.dropSelf(ModBLocks.REDKEEP_37_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_37_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_37_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_37_WALL.get());
+
+        this.dropSelf(ModBLocks.REDKEEP_38_BLOCK.get());
+        this.dropSelf(ModBLocks.REDKEEP_38_STAIRS.get());
+        this.dropSelf(ModBLocks.REDKEEP_38_SLAB.get());
+        this.dropSelf(ModBLocks.REDKEEP_38_WALL.get());
 
 
 

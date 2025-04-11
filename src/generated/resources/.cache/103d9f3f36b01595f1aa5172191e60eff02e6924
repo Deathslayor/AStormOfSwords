@@ -1,13 +1,12 @@
-// 1.21.3	2025-04-11T16:32:12.0190848	Registries
+// 1.21.3	2025-04-12T00:32:53.3766801	Registries
 ffe3d912e363745b0043a61fc7b67f35a53f2228 data/agotmod/neoforge/biome_modifier/add_tin_ore.json
 2cd0b3508ddcea7e502f1cf50b1ab12343351354 data/agotmod/neoforge/biome_modifier/create_weirwood_tree.json
-3afcdacdb87e2deda10b1fe27c5811a14f392390 data/agotmod/neoforge/biome_modifier/spawn_mammoth.json
 5f0d47277611157915c4a368db97add7f333f832 data/agotmod/worldgen/biome/barrowlands.json
 99adf67d56a579fa67a950f4432c3eb5ddf63708 data/agotmod/worldgen/biome/frostfangs.json
 043ca817445132bbfca4e5d79fae6a0695534e9a data/agotmod/worldgen/biome/frostfang_foothills.json
 ae2750e9e51698641e298c8f531bc906efdabe82 data/agotmod/worldgen/biome/haunted_forest.json
 e79c2b7f6a36fb4cf5f2e87e14c9dcfc0a54b810 data/agotmod/worldgen/biome/ironwood.json
-2e9dbdfbe541cd76d154a1246250a16bd279bd5f data/agotmod/worldgen/biome/lands_of_always_winter.json
+45999f29e8778d070bbf5b3f6a20496e72669caa data/agotmod/worldgen/biome/lands_of_always_winter.json
 0c48459d731fa07ac0bb9498e953b43ef31c6b81 data/agotmod/worldgen/biome/northern_hills.json
 bf9fec5885b9b10c5739dea6aab5ce42dfaa4833 data/agotmod/worldgen/biome/northern_mountains.json
 8f0764ad31998614756023b07e15a70dd06927fa data/agotmod/worldgen/biome/northern_waters.json
@@ -87,7 +86,7 @@ c8d567af06c4957cfcafc25f5a729425829aea2f data/agotmod/worldgen/configured_featur
 979c6d46a2ef4865ee9329ba73fd7ca2cf22db98 data/agotmod/worldgen/configured_feature/pine.json
 979c6d46a2ef4865ee9329ba73fd7ca2cf22db98 data/agotmod/worldgen/configured_feature/pine_rare.json
 9ff3fce0ab0e16137a8b00ede7f13621bd0c7eb4 data/agotmod/worldgen/configured_feature/poison_kisses.json
-efa7536e6111ab35ce726e9af97f7a7fe49fd945 data/agotmod/worldgen/configured_feature/quagmire.json
+0710ca36ec7cd5f83ddf73f33b7c8e85bd5703ff data/agotmod/worldgen/configured_feature/quagmire.json
 e2397723a7845acc24c70a92888bf9bb3ad7c5e9 data/agotmod/worldgen/configured_feature/red_rose_bush.json
 e4a446c24dc29bd3f66b930e79c1d49ec3a3d28a data/agotmod/worldgen/configured_feature/ruby_ore.json
 dde4ec06dc22c0974d3a9015de98616d6b14cfc2 data/agotmod/worldgen/configured_feature/saffron_crocus.json

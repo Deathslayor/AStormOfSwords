@@ -30,7 +30,6 @@ import net.darkflameproduction.agotmod.armor.custom.thenn.ThennPlateArmorItem;
 import net.darkflameproduction.agotmod.armor.custom.wildling.WildlingChiefArmorItem;
 import net.darkflameproduction.agotmod.armor.custom.wildling.WildlingFurArmorItem;
 import net.darkflameproduction.agotmod.armor.custom.wildling.WildlingLeatherArmorItem;
-import net.darkflameproduction.agotmod.entity.ModEntities;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.neoforged.bus.api.IEventBus;
@@ -442,8 +441,6 @@ public class ModItems {
     // ---------------------------(ANIMAL SPAWN EGGS)--------------------------- //
 
 
-    public static final DeferredItem<Item> MAMMOTH_SPAWN_EGG = ITEMS.registerItem("mammoth_spawn_egg",
-            properties -> new SpawnEggItem(ModEntities.MAMMOTH.get(), 0x7e9680, 0xc5d1c5, properties));
 
     // ---------------------------(ANIMAL SPAWN EGGS)--------------------------- //
 

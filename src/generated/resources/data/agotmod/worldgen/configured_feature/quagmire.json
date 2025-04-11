@@ -25,6 +25,7 @@
         "minecraft:dirt",
         "minecraft:gravel",
         "minecraft:mud",
+        "minecraft:grass_block",
         "minecraft:sand"
       ]
     }

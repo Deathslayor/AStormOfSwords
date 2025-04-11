@@ -1,7 +1,6 @@
 package net.darkflameproduction.agotmod.worldgen;
 
 import net.darkflameproduction.agotmod.AGoTMod;
-import net.darkflameproduction.agotmod.entity.ModEntities;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -38,9 +37,6 @@ public class ModBiomeModifiers {
                 // Specify the generation step for the features (underground ores)
                 GenerationStep.Decoration.UNDERGROUND_ORES));
         //Spawns Mammoths
-        context.register(SPAWN_MAMMOTH, new BiomeModifiers.AddSpawnsBiomeModifier(
-                biomes.getOrThrow(Tags.Biomes.IS_COLD_OVERWORLD),
-                List.of(new MobSpawnSettings.SpawnerData(ModEntities.MAMMOTH.get(), 100, 3, 5))));
         context.register(CREATE_WEIRWOOD_TREE, new BiomeModifiers.AddFeaturesBiomeModifier(
                 biomes.getOrThrow(Tags.Biomes.IS_PLAINS),
                 HolderSet.direct(placedFeatures.getOrThrow(ModplacedFeatures.WEIRWOOD_KEY)),

@@ -1,4 +1,4 @@
-// 1.21.3	2025-04-11T12:09:51.1943048	Tags for minecraft:item mod id agotmod
+// 1.21.3	2025-04-12T00:32:53.379826	Tags for minecraft:item mod id agotmod
 eef23bfe9f45027b3b8670ec55cfa37f8a45a919 data/agotmod/tags/item/bronze_tool_materials.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/agotmod/tags/item/dragonglass_tool_materials.json
 ef380d32ef9f54efeffc7c1c7d9ccf13299c2588 data/agotmod/tags/item/steel_tool_materials.json
@@ -12,7 +12,7 @@ cb733be41d71abc68eb6b02bc03a02b09175d0ee data/minecraft/tags/item/freeze_immune_
 416d8412eb0f409bc0482c7fd373195972bb02b1 data/minecraft/tags/item/logs_that_burn.json
 f97b1e916eb0172fd4258ed53ece2b161d78b9f7 data/minecraft/tags/item/meat.json
 e636a9617c8d2bcd1f59b705170957c4760a4fc2 data/minecraft/tags/item/planks.json
-bd03a8dc6b9b50502a3c899ec42087c023ca55b3 data/minecraft/tags/item/stone_bricks.json
+87aa4fbe7f070bca8afd42afbe906f120a70600e data/minecraft/tags/item/stone_bricks.json
 d2e82dabcabbf94992eb9be49251312c6f8976e2 data/minecraft/tags/item/walls.json
 50e81fb65e674a354287b77faf12fa52d6e12889 data/minecraft/tags/item/wooden_buttons.json
 17523d3d33c6d5e0a8ca28441c959b4f8d65771f data/minecraft/tags/item/wooden_doors.json

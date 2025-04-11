@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "agotmod:rsandstone_27",
+  "result": {
+    "count": 1,
+    "id": "agotmod:rsandstone_27_stairs"
+  }
+}

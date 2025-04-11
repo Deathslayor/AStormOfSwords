@@ -25,11 +25,11 @@ public class ModCreativeAnimals {
             () -> CreativeModeTab.builder()
                     // Icon for the creative mode tab
                     .title(Component.translatable("creativetab.agot_tab_animals")) // Title for the creative mode tab
-                    .icon(() -> new ItemStack(ModItems.MAMMOTH_SPAWN_EGG.get())) // Icon for the creative mode tab
+                    .icon(() -> new ItemStack(ModItems.SAPPHIRE.get())) // Icon for the creative mode tab
                     .displayItems((pParameters, pOutput) -> {
 
                         /** SPAWN EGGS */
-                        pOutput.accept(ModItems.MAMMOTH_SPAWN_EGG.get());
+
 
                     })
                     .build());

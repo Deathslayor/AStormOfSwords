@@ -4,12 +4,12 @@ package net.darkflameproduction.agotmod.event;
 // Importing necessary classes from other packages
 
 import net.darkflameproduction.agotmod.AGoTMod;
-import net.darkflameproduction.agotmod.entity.client.MammothModel;
-import net.darkflameproduction.agotmod.entity.client.ModModelLayers;
 import net.darkflameproduction.agotmod.event.KeyMappings.KeyBindings;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import org.jetbrains.annotations.NotNull;
@@ -21,9 +21,19 @@ public class ModEventBusClientEvents {
     // Annotation indicating that this method should subscribe to the specified event
     @SubscribeEvent
     public static void registerLayer(EntityRenderersEvent.@NotNull RegisterLayerDefinitions event) {
-        // Registering a layer definition for a custom model (RhinoModel)
-        // The layer definition is associated with the RhinoModel's createBodyLayer method
-        event.registerLayerDefinition(ModModelLayers.MAMMOTH_LAYER, MammothModel::createBodyLayer);
+
+    }
+
+    @SubscribeEvent
+    public static void onClientSetup(FMLClientSetupEvent event) {
+        event.enqueueWork(() -> {
+
+            
+
+
+
+
+        });
     }
 
     //Registers Keys

@@ -4,8 +4,6 @@ package net.darkflameproduction.agotmod;
 // Importing necessary classes from other packages
 
 import net.darkflameproduction.agotmod.block.ModBLocks;
-import net.darkflameproduction.agotmod.entity.ModEntities;
-import net.darkflameproduction.agotmod.entity.client.MammothRenderer;
 import net.darkflameproduction.agotmod.item.ModItemProperties;
 import net.darkflameproduction.agotmod.item.ModItems;
 import net.darkflameproduction.agotmod.item.creativetabs.*;
@@ -73,7 +71,6 @@ public class AGoTMod {
         ModItems.register(modEventBus);
 
         // Adds custom Entities to the game
-        ModEntities.register(modEventBus);
 
         // Listen for common setup event
         modEventBus.addListener(this::commonSetup);
@@ -114,7 +111,6 @@ public class AGoTMod {
         @SubscribeEvent
         public static void onClientSetup(@NotNull FMLClientSetupEvent event) {
             // Register custom renderer for the Rhino entity
-            EntityRenderers.register(ModEntities.MAMMOTH.get(), MammothRenderer::new);
 
             event.enqueueWork(ModItemProperties::addCustomItemProperties);
         }

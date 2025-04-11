@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "agotmod:block/rsandstone_33_slab"
+    },
+    "type=double": {
+      "model": "agotmod:block/rsandstone_33"
+    },
+    "type=top": {
+      "model": "agotmod:block/rsandstone_33_slab_top"
+    }
+  }
+}

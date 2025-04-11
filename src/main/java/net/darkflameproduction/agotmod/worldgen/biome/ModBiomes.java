@@ -1,7 +1,6 @@
 package net.darkflameproduction.agotmod.worldgen.biome;
 
 import net.darkflameproduction.agotmod.AGoTMod;
-import net.darkflameproduction.agotmod.entity.ModEntities;
 import net.darkflameproduction.agotmod.sound.ModSounds;
 import net.darkflameproduction.agotmod.worldgen.ModplacedFeatures;
 import net.minecraft.core.registries.Registries;
@@ -204,7 +203,7 @@ public class ModBiomes {
     //Lands Of Always Winter
     public static Biome alwayswinter(BootstrapContext<Biome> context) {
         MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
-        spawnBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(ModEntities.MAMMOTH.get(), 2, 3, 5));
+
 
 
         //Add Mob Spawns Here

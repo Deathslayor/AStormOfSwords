@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_rsandstone_32": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:rsandstone_32"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:rsandstone_32_stairs_from_rsandstone_32_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_rsandstone_32"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:rsandstone_32_stairs_from_rsandstone_32_block"
+    ]
+  }
+}

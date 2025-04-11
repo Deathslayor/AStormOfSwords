@@ -11,8 +11,11 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 import org.jetbrains.annotations.NotNull;
+import net.minecraft.world.level.block.Block;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 // Class for generating data pack recipes
@@ -2830,41 +2833,41 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
 
 // Repeat for SSTONE_21
-        // SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.SMOOTH_STONE),
-        //               RecipeCategory.BUILDING_BLOCKS, ModBLocks.SSTONE_21_BLOCK.get())
-        //      .unlockedBy(getHasName(Blocks.SMOOTH_STONE), has(Blocks.SMOOTH_STONE))
-        //       .save(this.output);
+         SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.SMOOTH_STONE),
+                       RecipeCategory.BUILDING_BLOCKS, ModBLocks.SSTONE_21_BLOCK.get())
+             .unlockedBy(getHasName(Blocks.SMOOTH_STONE), has(Blocks.SMOOTH_STONE))
+               .save(this.output);
 
-        // SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.SMOOTH_STONE),
-                //               RecipeCategory.BUILDING_BLOCKS, ModBLocks.SSTONE_21_STAIRS.get())
-        //      .unlockedBy(getHasName(Blocks.SMOOTH_STONE), has(Blocks.SMOOTH_STONE))
-        //      .save(this.output);
+         SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.SMOOTH_STONE),
+                               RecipeCategory.BUILDING_BLOCKS, ModBLocks.SSTONE_21_STAIRS.get())
+              .unlockedBy(getHasName(Blocks.SMOOTH_STONE), has(Blocks.SMOOTH_STONE))
+             .save(this.output);
 
-        //  SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.SMOOTH_STONE),
-                //                RecipeCategory.BUILDING_BLOCKS, ModBLocks.SSTONE_21_SLAB.get(), 2)
-        //      .unlockedBy(getHasName(Blocks.SMOOTH_STONE), has(Blocks.SMOOTH_STONE))
-        //       .save(this.output);
+          SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.SMOOTH_STONE),
+                                RecipeCategory.BUILDING_BLOCKS, ModBLocks.SSTONE_21_SLAB.get(), 2)
+             .unlockedBy(getHasName(Blocks.SMOOTH_STONE), has(Blocks.SMOOTH_STONE))
+              .save(this.output);
 
-        //  SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.SMOOTH_STONE),
-                //                RecipeCategory.BUILDING_BLOCKS, ModBLocks.SSTONE_21_WALL.get())
-        //       .unlockedBy(getHasName(Blocks.SMOOTH_STONE), has(Blocks.SMOOTH_STONE))
-        //       .save(this.output);
+          SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.SMOOTH_STONE),
+                                RecipeCategory.BUILDING_BLOCKS, ModBLocks.SSTONE_21_WALL.get())
+               .unlockedBy(getHasName(Blocks.SMOOTH_STONE), has(Blocks.SMOOTH_STONE))
+               .save(this.output);
 
 // Optional: Additional stonecutter recipes from the base block
-        //   SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.SSTONE_21_BLOCK.get()),
-                //              RecipeCategory.BUILDING_BLOCKS, ModBLocks.SSTONE_21_STAIRS.get())
-        //       .unlockedBy(getHasName(ModBLocks.SSTONE_21_BLOCK.get()), has(ModBLocks.SSTONE_21_BLOCK.get()))
-        //        .save(this.output, "sstone_21_stairs_from_sstone_21_block");
+           SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.SSTONE_21_BLOCK.get()),
+                             RecipeCategory.BUILDING_BLOCKS, ModBLocks.SSTONE_21_STAIRS.get())
+              .unlockedBy(getHasName(ModBLocks.SSTONE_21_BLOCK.get()), has(ModBLocks.SSTONE_21_BLOCK.get()))
+                .save(this.output, "sstone_21_stairs_from_sstone_21_block");
 
-        // SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.SSTONE_21_BLOCK.get()),
-                //              RecipeCategory.BUILDING_BLOCKS, ModBLocks.SSTONE_21_SLAB.get(), 2)
-        //        .unlockedBy(getHasName(ModBLocks.SSTONE_21_BLOCK.get()), has(ModBLocks.SSTONE_21_BLOCK.get()))
-        //        .save(this.output, "sstone_21_slab_from_sstone_21_block");
+         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.SSTONE_21_BLOCK.get()),
+                              RecipeCategory.BUILDING_BLOCKS, ModBLocks.SSTONE_21_SLAB.get(), 2)
+               .unlockedBy(getHasName(ModBLocks.SSTONE_21_BLOCK.get()), has(ModBLocks.SSTONE_21_BLOCK.get()))
+                .save(this.output, "sstone_21_slab_from_sstone_21_block");
 
-        //   SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.SSTONE_21_BLOCK.get()),
-                //                 RecipeCategory.BUILDING_BLOCKS, ModBLocks.SSTONE_21_WALL.get())
-        //         .unlockedBy(getHasName(ModBLocks.SSTONE_21_BLOCK.get()), has(ModBLocks.SSTONE_21_BLOCK.get()))
-        //         .save(this.output, "sstone_21_wall_from_sstone_21_block");
+           SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.SSTONE_21_BLOCK.get()),
+                                RecipeCategory.BUILDING_BLOCKS, ModBLocks.SSTONE_21_WALL.get())
+                 .unlockedBy(getHasName(ModBLocks.SSTONE_21_BLOCK.get()), has(ModBLocks.SSTONE_21_BLOCK.get()))
+                 .save(this.output, "sstone_21_wall_from_sstone_21_block");
 
 
 // Repeat for SSTONE_22
@@ -3481,6 +3484,43 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .save(this.output, "rsandstone_20_wall_from_rsandstone_20_block");
 
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_21_BLOCK.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_21_STAIRS.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_21_SLAB.get(), 2)
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_21_WALL.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+// Optional: Additional stonecutter recipes from the base block
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_21_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_21_STAIRS.get())
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_21_BLOCK.get()), has(ModBLocks.RSANDSTONE_21_BLOCK.get()))
+                .save(this.output, "rsandstone_21_stairs_from_rsandstone_21_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_21_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_21_SLAB.get(), 2)
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_21_BLOCK.get()), has(ModBLocks.RSANDSTONE_21_BLOCK.get()))
+                .save(this.output, "rsandstone_21_slab_from_rsandstone_21_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_21_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_21_WALL.get())
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_21_BLOCK.get()), has(ModBLocks.RSANDSTONE_21_BLOCK.get()))
+                .save(this.output, "rsandstone_21_wall_from_rsandstone_21_block");
+
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
                         RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_22_BLOCK.get())
                 .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
                 .save(this.output);
@@ -3516,6 +3556,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy(getHasName(ModBLocks.RSANDSTONE_22_BLOCK.get()), has(ModBLocks.RSANDSTONE_22_BLOCK.get()))
                 .save(this.output, "rsandstone_22_wall_from_rsandstone_22_block");
 
+        // Version 23 (original)
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
                         RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_23_BLOCK.get())
                 .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
@@ -3552,6 +3593,603 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy(getHasName(ModBLocks.RSANDSTONE_23_BLOCK.get()), has(ModBLocks.RSANDSTONE_23_BLOCK.get()))
                 .save(this.output, "rsandstone_23_wall_from_rsandstone_23_block");
 
+// Version 24
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_24_BLOCK.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_24_STAIRS.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_24_SLAB.get(), 2)
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_24_WALL.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+// Optional: Additional stonecutter recipes from the base block
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_24_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_24_STAIRS.get())
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_24_BLOCK.get()), has(ModBLocks.RSANDSTONE_24_BLOCK.get()))
+                .save(this.output, "rsandstone_24_stairs_from_rsandstone_24_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_24_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_24_SLAB.get(), 2)
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_24_BLOCK.get()), has(ModBLocks.RSANDSTONE_24_BLOCK.get()))
+                .save(this.output, "rsandstone_24_slab_from_rsandstone_24_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_24_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_24_WALL.get())
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_24_BLOCK.get()), has(ModBLocks.RSANDSTONE_24_BLOCK.get()))
+                .save(this.output, "rsandstone_24_wall_from_rsandstone_24_block");
+
+// Version 25
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_25_BLOCK.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_25_STAIRS.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_25_SLAB.get(), 2)
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_25_WALL.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+// Optional: Additional stonecutter recipes from the base block
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_25_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_25_STAIRS.get())
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_25_BLOCK.get()), has(ModBLocks.RSANDSTONE_25_BLOCK.get()))
+                .save(this.output, "rsandstone_25_stairs_from_rsandstone_25_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_25_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_25_SLAB.get(), 2)
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_25_BLOCK.get()), has(ModBLocks.RSANDSTONE_25_BLOCK.get()))
+                .save(this.output, "rsandstone_25_slab_from_rsandstone_25_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_25_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_25_WALL.get())
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_25_BLOCK.get()), has(ModBLocks.RSANDSTONE_25_BLOCK.get()))
+                .save(this.output, "rsandstone_25_wall_from_rsandstone_25_block");
+
+// Version 26
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_26_BLOCK.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_26_STAIRS.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_26_SLAB.get(), 2)
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_26_WALL.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+// Optional: Additional stonecutter recipes from the base block
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_26_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_26_STAIRS.get())
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_26_BLOCK.get()), has(ModBLocks.RSANDSTONE_26_BLOCK.get()))
+                .save(this.output, "rsandstone_26_stairs_from_rsandstone_26_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_26_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_26_SLAB.get(), 2)
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_26_BLOCK.get()), has(ModBLocks.RSANDSTONE_26_BLOCK.get()))
+                .save(this.output, "rsandstone_26_slab_from_rsandstone_26_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_26_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_26_WALL.get())
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_26_BLOCK.get()), has(ModBLocks.RSANDSTONE_26_BLOCK.get()))
+                .save(this.output, "rsandstone_26_wall_from_rsandstone_26_block");
+
+// Version 27
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_27_BLOCK.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_27_STAIRS.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_27_SLAB.get(), 2)
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_27_WALL.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+// Optional: Additional stonecutter recipes from the base block
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_27_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_27_STAIRS.get())
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_27_BLOCK.get()), has(ModBLocks.RSANDSTONE_27_BLOCK.get()))
+                .save(this.output, "rsandstone_27_stairs_from_rsandstone_27_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_27_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_27_SLAB.get(), 2)
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_27_BLOCK.get()), has(ModBLocks.RSANDSTONE_27_BLOCK.get()))
+                .save(this.output, "rsandstone_27_slab_from_rsandstone_27_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_27_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_27_WALL.get())
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_27_BLOCK.get()), has(ModBLocks.RSANDSTONE_27_BLOCK.get()))
+                .save(this.output, "rsandstone_27_wall_from_rsandstone_27_block");
+
+// Version 28
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_28_BLOCK.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_28_STAIRS.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_28_SLAB.get(), 2)
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_28_WALL.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+// Optional: Additional stonecutter recipes from the base block
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_28_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_28_STAIRS.get())
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_28_BLOCK.get()), has(ModBLocks.RSANDSTONE_28_BLOCK.get()))
+                .save(this.output, "rsandstone_28_stairs_from_rsandstone_28_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_28_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_28_SLAB.get(), 2)
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_28_BLOCK.get()), has(ModBLocks.RSANDSTONE_28_BLOCK.get()))
+                .save(this.output, "rsandstone_28_slab_from_rsandstone_28_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_28_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_28_WALL.get())
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_28_BLOCK.get()), has(ModBLocks.RSANDSTONE_28_BLOCK.get()))
+                .save(this.output, "rsandstone_28_wall_from_rsandstone_28_block");
+
+// Version 29
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_29_BLOCK.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_29_STAIRS.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_29_SLAB.get(), 2)
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_29_WALL.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+// Optional: Additional stonecutter recipes from the base block
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_29_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_29_STAIRS.get())
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_29_BLOCK.get()), has(ModBLocks.RSANDSTONE_29_BLOCK.get()))
+                .save(this.output, "rsandstone_29_stairs_from_rsandstone_29_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_29_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_29_SLAB.get(), 2)
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_29_BLOCK.get()), has(ModBLocks.RSANDSTONE_29_BLOCK.get()))
+                .save(this.output, "rsandstone_29_slab_from_rsandstone_29_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_29_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_29_WALL.get())
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_29_BLOCK.get()), has(ModBLocks.RSANDSTONE_29_BLOCK.get()))
+                .save(this.output, "rsandstone_29_wall_from_rsandstone_29_block");
+
+// Version 30
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_30_BLOCK.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_30_STAIRS.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_30_SLAB.get(), 2)
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_30_WALL.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+// Optional: Additional stonecutter recipes from the base block
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_30_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_30_STAIRS.get())
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_30_BLOCK.get()), has(ModBLocks.RSANDSTONE_30_BLOCK.get()))
+                .save(this.output, "rsandstone_30_stairs_from_rsandstone_30_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_30_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_30_SLAB.get(), 2)
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_30_BLOCK.get()), has(ModBLocks.RSANDSTONE_30_BLOCK.get()))
+                .save(this.output, "rsandstone_30_slab_from_rsandstone_30_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_30_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_30_WALL.get())
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_30_BLOCK.get()), has(ModBLocks.RSANDSTONE_30_BLOCK.get()))
+                .save(this.output, "rsandstone_30_wall_from_rsandstone_30_block");
+
+// Version 31
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_31_BLOCK.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_31_STAIRS.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_31_SLAB.get(), 2)
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_31_WALL.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+// Optional: Additional stonecutter recipes from the base block
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_31_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_31_STAIRS.get())
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_31_BLOCK.get()), has(ModBLocks.RSANDSTONE_31_BLOCK.get()))
+                .save(this.output, "rsandstone_31_stairs_from_rsandstone_31_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_31_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_31_SLAB.get(), 2)
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_31_BLOCK.get()), has(ModBLocks.RSANDSTONE_31_BLOCK.get()))
+                .save(this.output, "rsandstone_31_slab_from_rsandstone_31_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_31_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_31_WALL.get())
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_31_BLOCK.get()), has(ModBLocks.RSANDSTONE_31_BLOCK.get()))
+                .save(this.output, "rsandstone_31_wall_from_rsandstone_31_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_32_BLOCK.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_32_STAIRS.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_32_SLAB.get(), 2)
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_32_WALL.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+// Optional: Additional stonecutter recipes from the base block
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_32_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_32_STAIRS.get())
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_32_BLOCK.get()), has(ModBLocks.RSANDSTONE_32_BLOCK.get()))
+                .save(this.output, "rsandstone_32_stairs_from_rsandstone_32_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_32_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_32_SLAB.get(), 2)
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_32_BLOCK.get()), has(ModBLocks.RSANDSTONE_32_BLOCK.get()))
+                .save(this.output, "rsandstone_32_slab_from_rsandstone_32_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_32_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_32_WALL.get())
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_32_BLOCK.get()), has(ModBLocks.RSANDSTONE_32_BLOCK.get()))
+                .save(this.output, "rsandstone_32_wall_from_rsandstone_32_block");
+
+
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_33_BLOCK.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_33_STAIRS.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_33_SLAB.get(), 2)
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_33_WALL.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+// Optional: Additional stonecutter recipes from the base block
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_33_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_33_STAIRS.get())
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_33_BLOCK.get()), has(ModBLocks.RSANDSTONE_33_BLOCK.get()))
+                .save(this.output, "rsandstone_33_stairs_from_rsandstone_33_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_33_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_33_SLAB.get(), 2)
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_33_BLOCK.get()), has(ModBLocks.RSANDSTONE_33_BLOCK.get()))
+                .save(this.output, "rsandstone_33_slab_from_rsandstone_33_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_33_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_33_WALL.get())
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_33_BLOCK.get()), has(ModBLocks.RSANDSTONE_33_BLOCK.get()))
+                .save(this.output, "rsandstone_33_wall_from_rsandstone_33_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_34_BLOCK.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_34_STAIRS.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_34_SLAB.get(), 2)
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_34_WALL.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+// Optional: Additional stonecutter recipes from the base block
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_34_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_34_STAIRS.get())
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_34_BLOCK.get()), has(ModBLocks.RSANDSTONE_34_BLOCK.get()))
+                .save(this.output, "rsandstone_34_stairs_from_rsandstone_34_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_34_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_34_SLAB.get(), 2)
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_34_BLOCK.get()), has(ModBLocks.RSANDSTONE_34_BLOCK.get()))
+                .save(this.output, "rsandstone_34_slab_from_rsandstone_34_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_34_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_34_WALL.get())
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_34_BLOCK.get()), has(ModBLocks.RSANDSTONE_34_BLOCK.get()))
+                .save(this.output, "rsandstone_34_wall_from_rsandstone_34_block");
+
+
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_35_BLOCK.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_35_STAIRS.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_35_SLAB.get(), 2)
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_35_WALL.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+// Optional: Additional stonecutter recipes from the base block
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_35_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_35_STAIRS.get())
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_35_BLOCK.get()), has(ModBLocks.RSANDSTONE_35_BLOCK.get()))
+                .save(this.output, "rsandstone_35_stairs_from_rsandstone_35_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_35_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_35_SLAB.get(), 2)
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_35_BLOCK.get()), has(ModBLocks.RSANDSTONE_35_BLOCK.get()))
+                .save(this.output, "rsandstone_35_slab_from_rsandstone_35_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_35_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_35_WALL.get())
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_35_BLOCK.get()), has(ModBLocks.RSANDSTONE_35_BLOCK.get()))
+                .save(this.output, "rsandstone_35_wall_from_rsandstone_35_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_36_BLOCK.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_36_STAIRS.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_36_SLAB.get(), 2)
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_36_WALL.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+// Optional: Additional stonecutter recipes from the base block
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_36_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_36_STAIRS.get())
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_36_BLOCK.get()), has(ModBLocks.RSANDSTONE_36_BLOCK.get()))
+                .save(this.output, "rsandstone_36_stairs_from_rsandstone_36_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_36_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_36_SLAB.get(), 2)
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_36_BLOCK.get()), has(ModBLocks.RSANDSTONE_36_BLOCK.get()))
+                .save(this.output, "rsandstone_36_slab_from_rsandstone_36_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_36_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_36_WALL.get())
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_36_BLOCK.get()), has(ModBLocks.RSANDSTONE_36_BLOCK.get()))
+                .save(this.output, "rsandstone_36_wall_from_rsandstone_36_block");
+
+
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_37_BLOCK.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_37_STAIRS.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_37_SLAB.get(), 2)
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_37_WALL.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+// Optional: Additional stonecutter recipes from the base block
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_37_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_37_STAIRS.get())
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_37_BLOCK.get()), has(ModBLocks.RSANDSTONE_37_BLOCK.get()))
+                .save(this.output, "rsandstone_37_stairs_from_rsandstone_37_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_37_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_37_SLAB.get(), 2)
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_37_BLOCK.get()), has(ModBLocks.RSANDSTONE_37_BLOCK.get()))
+                .save(this.output, "rsandstone_37_slab_from_rsandstone_37_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_37_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_37_WALL.get())
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_37_BLOCK.get()), has(ModBLocks.RSANDSTONE_37_BLOCK.get()))
+                .save(this.output, "rsandstone_37_wall_from_rsandstone_37_block");
+
+
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_38_BLOCK.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_38_STAIRS.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_38_SLAB.get(), 2)
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.RED_SANDSTONE),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_38_WALL.get())
+                .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                .save(this.output);
+
+// Optional: Additional stonecutter recipes from the base block
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_38_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_38_STAIRS.get())
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_38_BLOCK.get()), has(ModBLocks.RSANDSTONE_38_BLOCK.get()))
+                .save(this.output, "rsandstone_38_stairs_from_rsandstone_38_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_38_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_38_SLAB.get(), 2)
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_38_BLOCK.get()), has(ModBLocks.RSANDSTONE_38_BLOCK.get()))
+                .save(this.output, "rsandstone_38_slab_from_rsandstone_38_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.RSANDSTONE_38_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.RSANDSTONE_38_WALL.get())
+                .unlockedBy(getHasName(ModBLocks.RSANDSTONE_38_BLOCK.get()), has(ModBLocks.RSANDSTONE_38_BLOCK.get()))
+                .save(this.output, "rsandstone_38_wall_from_rsandstone_38_block");
+
+
+        //RED KEEP
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.REDKEEP_STONE_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.REDKEEP_STONE_BLOCK.get())
+                .unlockedBy(getHasName(Blocks.SMOOTH_STONE), has(ModBLocks.REDKEEP_STONE_BLOCK.get()))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.REDKEEP_STONE_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.REDKEEP_STONE_STAIRS.get())
+                .unlockedBy(getHasName(Blocks.SMOOTH_STONE), has(ModBLocks.REDKEEP_STONE_BLOCK.get()))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.REDKEEP_STONE_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.REDKEEP_STONE_SLAB.get(), 2)
+                .unlockedBy(getHasName(Blocks.SMOOTH_STONE), has(ModBLocks.REDKEEP_STONE_BLOCK.get()))
+                .save(this.output);
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.REDKEEP_STONE_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.REDKEEP_STONE_WALL.get())
+                .unlockedBy(getHasName(Blocks.SMOOTH_STONE), has(ModBLocks.REDKEEP_STONE_BLOCK.get()))
+                .save(this.output);
+
+// Optional: Additional stonecutter recipes from the base block
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.REDKEEP_STONE_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.REDKEEP_STONE_STAIRS.get())
+                .unlockedBy(getHasName(ModBLocks.REDKEEP_STONE_BLOCK.get()), has(ModBLocks.REDKEEP_STONE_BLOCK.get()))
+                .save(this.output, "redkeep_stone_stairs_from_redkeep_stone_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.REDKEEP_STONE_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.REDKEEP_STONE_SLAB.get(), 2)
+                .unlockedBy(getHasName(ModBLocks.REDKEEP_STONE_BLOCK.get()), has(ModBLocks.REDKEEP_STONE_BLOCK.get()))
+                .save(this.output, "redkeep_stone_slab_from_redkeep_stone_block");
+
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ModBLocks.REDKEEP_STONE_BLOCK.get()),
+                        RecipeCategory.BUILDING_BLOCKS, ModBLocks.REDKEEP_STONE_WALL.get())
+                .unlockedBy(getHasName(ModBLocks.REDKEEP_STONE_BLOCK.get()), has(ModBLocks.REDKEEP_STONE_BLOCK.get()))
+                .save(this.output, "redkeep_stone_wall_from_redkeep_stone_block");
+
+        // Define the blocks with their variants
+        // Define your block pattern numbers
 
 
 
@@ -3936,6 +4574,87 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
 
         // -------------------------------------------------(FOODS)------------------------------------------------- //
+
+    }
+
+    private void generateStonecutterRecipes() {
+        // Define your block pattern numbers
+        String[] patterns = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38"}; // Add all your pattern numbers
+
+        // Loop through each pattern
+        for (String pattern : patterns) {
+            // Based on your original code structure, use reflection to get the fields
+            try {
+                // Get the block field objects from ModBlocks class
+                java.lang.reflect.Field blockField = ModBLocks.class.getDeclaredField("REDKEEP_" + pattern + "_BLOCK");
+                java.lang.reflect.Field stairsField = ModBLocks.class.getDeclaredField("REDKEEP_" + pattern + "_STAIRS");
+                java.lang.reflect.Field slabField = ModBLocks.class.getDeclaredField("REDKEEP_" + pattern + "_SLAB");
+                java.lang.reflect.Field wallField = ModBLocks.class.getDeclaredField("REDKEEP_" + pattern + "_WALL");
+
+                // Get the supplier objects
+                var blockSupplier = blockField.get(null);
+                var stairsSupplier = stairsField.get(null);
+                var slabSupplier = slabField.get(null);
+                var wallSupplier = wallField.get(null);
+
+                // Now create the recipes using reflection
+                // From base stone to variants
+                SingleItemRecipeBuilder.stonecutting(Ingredient.of((ItemLike) invokeGet(blockSupplier)),
+                                RecipeCategory.BUILDING_BLOCKS, invokeGet(blockSupplier))
+                        .unlockedBy(getHasName(ModBLocks.REDKEEP_STONE_BLOCK.get()), has((ItemLike) ModBLocks.REDKEEP_STONE_BLOCK.get()))
+                        .save(this.output);
+
+                SingleItemRecipeBuilder.stonecutting(Ingredient.of((ItemLike) invokeGet(blockSupplier)),
+                                RecipeCategory.BUILDING_BLOCKS, invokeGet(stairsSupplier))
+                        .unlockedBy(getHasName(ModBLocks.REDKEEP_STONE_BLOCK.get()), has((ItemLike) ModBLocks.REDKEEP_STONE_BLOCK.get()))
+                        .save(this.output);
+
+                SingleItemRecipeBuilder.stonecutting(Ingredient.of((ItemLike) invokeGet(blockSupplier)),
+                                RecipeCategory.BUILDING_BLOCKS, invokeGet(slabSupplier), 2)
+                        .unlockedBy(getHasName(ModBLocks.REDKEEP_STONE_BLOCK.get()), has((ItemLike) ModBLocks.REDKEEP_STONE_BLOCK.get()))
+                        .save(this.output);
+
+                SingleItemRecipeBuilder.stonecutting(Ingredient.of((ItemLike) invokeGet(blockSupplier)),
+                                RecipeCategory.BUILDING_BLOCKS, invokeGet(wallSupplier))
+                        .unlockedBy(getHasName(ModBLocks.REDKEEP_STONE_BLOCK.get()), has((ItemLike) ModBLocks.REDKEEP_STONE_BLOCK.get()))
+                        .save(this.output);
+
+                // From pattern block to variants
+                SingleItemRecipeBuilder.stonecutting(Ingredient.of((ItemLike) invokeGet(blockSupplier)),
+                                RecipeCategory.BUILDING_BLOCKS, invokeGet(stairsSupplier))
+                        .unlockedBy(getHasName(invokeGet(blockSupplier)), has((ItemLike) invokeGet(blockSupplier)))
+                        .save(this.output, "redkeep_" + pattern + "_stairs_from_redkeep_" + pattern + "_block");
+
+                SingleItemRecipeBuilder.stonecutting(Ingredient.of((ItemLike) invokeGet(blockSupplier)),
+                                RecipeCategory.BUILDING_BLOCKS, invokeGet(slabSupplier), 2)
+                        .unlockedBy(getHasName(invokeGet(blockSupplier)), has((ItemLike) invokeGet(blockSupplier)))
+                        .save(this.output, "redkeep_" + pattern + "_slab_from_redkeep_" + pattern + "_block");
+
+                SingleItemRecipeBuilder.stonecutting(Ingredient.of((ItemLike) invokeGet(blockSupplier)),
+                                RecipeCategory.BUILDING_BLOCKS, invokeGet(wallSupplier))
+                        .unlockedBy(getHasName(invokeGet(blockSupplier)), has((ItemLike) invokeGet(blockSupplier)))
+                        .save(this.output, "redkeep_" + pattern + "_wall_from_redkeep_" + pattern + "_block");
+
+            } catch (Exception e) {
+                System.err.println("Error creating recipes for pattern " + pattern + ": " + e.getMessage());
+            }
+        }
+    }
+
+    // Helper method to invoke the get() method on supplier objects
+    @SuppressWarnings("unchecked")
+    private <T> T invokeGet(Object supplier) {
+        try {
+            java.lang.reflect.Method getMethod = supplier.getClass().getMethod("get");
+            return (T) getMethod.invoke(supplier);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to invoke get() method", e);
+        }
+    }
+
+
+
+    private void registerStoneRecipes() {
 
     }
 
