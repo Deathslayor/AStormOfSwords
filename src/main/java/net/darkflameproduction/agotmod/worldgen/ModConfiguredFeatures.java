@@ -951,6 +951,7 @@ public class ModConfiguredFeatures {
                                 Blocks.DIRT,
                                 Blocks.GRAVEL,
                                 Blocks.MUD,
+                                Blocks.GRASS_BLOCK,
                                 Blocks.SAND
                         ),  // Blocks that can be replaced (same as vanilla clay)
                         UniformInt.of(3, 6),  // Random radius between 2-3 blocks (same as vanilla)

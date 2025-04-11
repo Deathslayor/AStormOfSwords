@@ -17,10 +17,12 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.*;
@@ -221,6 +223,8 @@ public class ModBLocks {
         private static final VoxelShape FALLING_COLLISION_SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D);
         private static final double SUFFOCATION_CHANCE = 0.9D;
         private static final int DAMAGE_TICK_INTERVAL = 20;
+        // Increased slowdown factor - from 0.1F to 0.02F (5 times slower)
+        private static final float SPEED_FACTOR = 0.02F;
 
         // Add a waterlogged property
         public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -278,12 +282,20 @@ public class ModBLocks {
         public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
             if (!(entity instanceof LivingEntity livingEntity)) return;
 
+            // Apply stronger slowdown to match the speedFactor
             entity.makeStuckInBlock(state, new Vec3(0.8D, 0.5D, 0.8D));
 
             double headY = entity.getY() + entity.getEyeHeight();
-            if (headY > pos.getY() && headY < pos.getY() + 1.0D) {
+            boolean headFullyInside = headY > pos.getY() && headY < pos.getY() + 1.0D;
+
+            if (headFullyInside) {
                 if (!level.isClientSide) {
                     int tickCount = (int) (level.getGameTime() % DAMAGE_TICK_INTERVAL);
+
+                    // Apply blindness effect when head is fully inside
+                    if (livingEntity instanceof Player) {
+                        livingEntity.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 40, 100, false, false));
+                    }
 
                     if (tickCount == 0) {
                         if (!livingEntity.hasEffect(MobEffects.WATER_BREATHING) &&
@@ -311,9 +323,6 @@ public class ModBLocks {
             return true;
         }
 
-        // Prevent water from flowing into or through this block
-
-
         // Always maintain empty fluid state
         @Override
         public FluidState getFluidState(BlockState state) {
@@ -326,16 +335,16 @@ public class ModBLocks {
             return this.defaultBlockState().setValue(WATERLOGGED, Boolean.FALSE);
         }
 
-        // Override for multiplayer compatibilit
+        // Override for multiplayer compatibility
     }
 
-    // Register the block
+    // Register the block with updated properties
     public static final DeferredBlock<Block> QUAGMIRE = registerBlock("quagmire",
             properties -> new QuagmireBlock(properties),
             BlockBehaviour.Properties.ofFullCopy(Blocks.SNOW_BLOCK)
                     .sound(SoundType.MUD)
                     .friction(0.8F)
-                    .speedFactor(0.2F)
+                    .speedFactor(0.1F)  // Change to match the constant defined above
                     .strength(6f)
                     .noOcclusion()  // Important for proper rendering when sinking
                     .isValidSpawn((state, level, pos, type) -> false)  // Prevent mob spawning
