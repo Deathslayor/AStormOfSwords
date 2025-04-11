@@ -561,6 +561,235 @@
   "block.agotmod.alder_fence": "Alder Fence",
   "block.agotmod.alder_fence_gate": "Alder Fence Gate",
 
+  "block.agotmod.sstone_1": "Smooth Stone Variant 1 Block",
+  "block.agotmod.sstone_1_stairs": "Smooth Stone Variant 1 Stairs",
+  "block.agotmod.sstone_1_slab": "Smooth Stone Variant 1 Slab",
+  "block.agotmod.sstone_1_wall": "Smooth Stone Variant 1 Wall",
+
+  "block.agotmod.sstone_2": "Smooth Stone Variant 2 Block",
+  "block.agotmod.sstone_2_stairs": "Smooth Stone Variant 2 Stairs",
+  "block.agotmod.sstone_2_slab": "Smooth Stone Variant 2 Slab",
+  "block.agotmod.sstone_2_wall": "Smooth Stone Variant 2 Wall",
+
+  "block.agotmod.sstone_3": "Smooth Stone Variant 3 Block",
+  "block.agotmod.sstone_3_stairs": "Smooth Stone Variant 3 Stairs",
+  "block.agotmod.sstone_3_slab": "Smooth Stone Variant 3 Slab",
+  "block.agotmod.sstone_3_wall": "Smooth Stone Variant 3 Wall",
+
+  "block.agotmod.sstone_4": "Smooth Stone Variant 4 Block",
+  "block.agotmod.sstone_4_stairs": "Smooth Stone Variant 4 Stairs",
+  "block.agotmod.sstone_4_slab": "Smooth Stone Variant 4 Slab",
+  "block.agotmod.sstone_4_wall": "Smooth Stone Variant 4 Wall",
+
+  "block.agotmod.sstone_5": "Smooth Stone Variant 5 Block",
+  "block.agotmod.sstone_5_stairs": "Smooth Stone Variant 5 Stairs",
+  "block.agotmod.sstone_5_slab": "Smooth Stone Variant 5 Slab",
+  "block.agotmod.sstone_5_wall": "Smooth Stone Variant 5 Wall",
+
+  "block.agotmod.sstone_6": "Smooth Stone Variant 6 Block",
+  "block.agotmod.sstone_6_stairs": "Smooth Stone Variant 6 Stairs",
+  "block.agotmod.sstone_6_slab": "Smooth Stone Variant 6 Slab",
+  "block.agotmod.sstone_6_wall": "Smooth Stone Variant 6 Wall",
+
+  "block.agotmod.sstone_7": "Smooth Stone Variant 7 Block",
+  "block.agotmod.sstone_7_stairs": "Smooth Stone Variant 7 Stairs",
+  "block.agotmod.sstone_7_slab": "Smooth Stone Variant 7 Slab",
+  "block.agotmod.sstone_7_wall": "Smooth Stone Variant 7 Wall",
+
+  "block.agotmod.sstone_8": "Smooth Stone Variant 8 Block",
+  "block.agotmod.sstone_8_stairs": "Smooth Stone Variant 8 Stairs",
+  "block.agotmod.sstone_8_slab": "Smooth Stone Variant 8 Slab",
+  "block.agotmod.sstone_8_wall": "Smooth Stone Variant 8 Wall",
+
+  "block.agotmod.sstone_9": "Smooth Stone Variant 9 Block",
+  "block.agotmod.sstone_9_stairs": "Smooth Stone Variant 9 Stairs",
+  "block.agotmod.sstone_9_slab": "Smooth Stone Variant 9 Slab",
+  "block.agotmod.sstone_9_wall": "Smooth Stone Variant 9 Wall",
+
+  "block.agotmod.sstone_10": "Smooth Stone Variant 10 Block",
+  "block.agotmod.sstone_10_stairs": "Smooth Stone Variant 10 Stairs",
+  "block.agotmod.sstone_10_slab": "Smooth Stone Variant 10 Slab",
+  "block.agotmod.sstone_10_wall": "Smooth Stone Variant 10 Wall",
+
+  "block.agotmod.sstone_11": "Smooth Stone Variant 11 Block",
+  "block.agotmod.sstone_11_stairs": "Smooth Stone Variant 11 Stairs",
+  "block.agotmod.sstone_11_slab": "Smooth Stone Variant 11 Slab",
+  "block.agotmod.sstone_11_wall": "Smooth Stone Variant 11 Wall",
+
+  "block.agotmod.sstone_12": "Smooth Stone Variant 12 Block",
+  "block.agotmod.sstone_12_stairs": "Smooth Stone Variant 12 Stairs",
+  "block.agotmod.sstone_12_slab": "Smooth Stone Variant 12 Slab",
+  "block.agotmod.sstone_12_wall": "Smooth Stone Variant 12 Wall",
+
+  "block.agotmod.sstone_13": "Smooth Stone Variant 13 Block",
+  "block.agotmod.sstone_13_stairs": "Smooth Stone Variant 13 Stairs",
+  "block.agotmod.sstone_13_slab": "Smooth Stone Variant 13 Slab",
+  "block.agotmod.sstone_13_wall": "Smooth Stone Variant 13 Wall",
+
+  "block.agotmod.sstone_14": "Smooth Stone Variant 14 Block",
+  "block.agotmod.sstone_14_stairs": "Smooth Stone Variant 14 Stairs",
+  "block.agotmod.sstone_14_slab": "Smooth Stone Variant 14 Slab",
+  "block.agotmod.sstone_14_wall": "Smooth Stone Variant 14 Wall",
+
+  "block.agotmod.sstone_15": "Smooth Stone Variant 15 Block",
+  "block.agotmod.sstone_15_stairs": "Smooth Stone Variant 15 Stairs",
+  "block.agotmod.sstone_15_slab": "Smooth Stone Variant 15 Slab",
+  "block.agotmod.sstone_15_wall": "Smooth Stone Variant 15 Wall",
+
+
+  "block.agotmod.sstone_16": "Smooth Stone Variant 16 Block",
+  "block.agotmod.sstone_16_stairs": "Smooth Stone Variant 16 Stairs",
+  "block.agotmod.sstone_16_slab": "Smooth Stone Variant 16 Slab",
+  "block.agotmod.sstone_16_wall": "Smooth Stone Variant 16 Wall",
+
+  "block.agotmod.sstone_17": "Smooth Stone Variant 17 Block",
+  "block.agotmod.sstone_17_stairs": "Smooth Stone Variant 17 Stairs",
+  "block.agotmod.sstone_17_slab": "Smooth Stone Variant 17 Slab",
+  "block.agotmod.sstone_17_wall": "Smooth Stone Variant 17 Wall",
+
+  "block.agotmod.sstone_18": "Smooth Stone Variant 18 Block",
+  "block.agotmod.sstone_18_stairs": "Smooth Stone Variant 18 Stairs",
+  "block.agotmod.sstone_18_slab": "Smooth Stone Variant 18 Slab",
+  "block.agotmod.sstone_18_wall": "Smooth Stone Variant 18 Wall",
+
+  "block.agotmod.sstone_19": "Smooth Stone Variant 19 Block",
+  "block.agotmod.sstone_19_stairs": "Smooth Stone Variant 19 Stairs",
+  "block.agotmod.sstone_19_slab": "Smooth Stone Variant 19 Slab",
+  "block.agotmod.sstone_19_wall": "Smooth Stone Variant 19 Wall",
+
+  "block.agotmod.sstone_20": "Smooth Stone Variant 20 Block",
+  "block.agotmod.sstone_20_stairs": "Smooth Stone Variant 20 Stairs",
+  "block.agotmod.sstone_20_slab": "Smooth Stone Variant 20 Slab",
+  "block.agotmod.sstone_20_wall": "Smooth Stone Variant 20 Wall",
+
+  "block.agotmod.sstone_21": "Smooth Stone Variant 21 Block",
+  "block.agotmod.sstone_21_stairs": "Smooth Stone Variant 21 Stairs",
+  "block.agotmod.sstone_21_slab": "Smooth Stone Variant 21 Slab",
+  "block.agotmod.sstone_21_wall": "Smooth Stone Variant 21 Wall",
+
+  "block.agotmod.sstone_22": "Smooth Stone Variant 22 Block",
+  "block.agotmod.sstone_22_stairs": "Smooth Stone Variant 22 Stairs",
+  "block.agotmod.sstone_22_slab": "Smooth Stone Variant 22 Slab",
+  "block.agotmod.sstone_22_wall": "Smooth Stone Variant 22 Wall",
+
+  "block.agotmod.rsandstone_1": "Red Sandstone Variant 1 Block",
+  "block.agotmod.rsandstone_1_stairs": "Red Sandstone Variant 1 Stairs",
+  "block.agotmod.rsandstone_1_slab": "Red Sandstone Variant 1 Slab",
+  "block.agotmod.rsandstone_1_wall": "Red Sandstone Variant 1 Wall",
+
+  "block.agotmod.rsandstone_2": "Red Sandstone Variant 2 Block",
+  "block.agotmod.rsandstone_2_stairs": "Red Sandstone Variant 2 Stairs",
+  "block.agotmod.rsandstone_2_slab": "Red Sandstone Variant 2 Slab",
+  "block.agotmod.rsandstone_2_wall": "Red Sandstone Variant 2 Wall",
+
+  "block.agotmod.rsandstone_3": "Red Sandstone Variant 3 Block",
+  "block.agotmod.rsandstone_3_stairs": "Red Sandstone Variant 3 Stairs",
+  "block.agotmod.rsandstone_3_slab": "Red Sandstone Variant 3 Slab",
+  "block.agotmod.rsandstone_3_wall": "Red Sandstone Variant 3 Wall",
+
+  "block.agotmod.rsandstone_4": "Red Sandstone Variant 4 Block",
+  "block.agotmod.rsandstone_4_stairs": "Red Sandstone Variant 4 Stairs",
+  "block.agotmod.rsandstone_4_slab": "Red Sandstone Variant 4 Slab",
+  "block.agotmod.rsandstone_4_wall": "Red Sandstone Variant 4 Wall",
+
+  "block.agotmod.rsandstone_5": "Red Sandstone Variant 5 Block",
+  "block.agotmod.rsandstone_5_stairs": "Red Sandstone Variant 5 Stairs",
+  "block.agotmod.rsandstone_5_slab": "Red Sandstone Variant 5 Slab",
+  "block.agotmod.rsandstone_5_wall": "Red Sandstone Variant 5 Wall",
+
+  "block.agotmod.rsandstone_6": "Red Sandstone Variant 6 Block",
+  "block.agotmod.rsandstone_6_stairs": "Red Sandstone Variant 6 Stairs",
+  "block.agotmod.rsandstone_6_slab": "Red Sandstone Variant 6 Slab",
+  "block.agotmod.rsandstone_6_wall": "Red Sandstone Variant 6 Wall",
+
+  "block.agotmod.rsandstone_7": "Red Sandstone Variant 7 Block",
+  "block.agotmod.rsandstone_7_stairs": "Red Sandstone Variant 7 Stairs",
+  "block.agotmod.rsandstone_7_slab": "Red Sandstone Variant 7 Slab",
+  "block.agotmod.rsandstone_7_wall": "Red Sandstone Variant 7 Wall",
+
+  "block.agotmod.rsandstone_8": "Red Sandstone Variant 8 Block",
+  "block.agotmod.rsandstone_8_stairs": "Red Sandstone Variant 8 Stairs",
+  "block.agotmod.rsandstone_8_slab": "Red Sandstone Variant 8 Slab",
+  "block.agotmod.rsandstone_8_wall": "Red Sandstone Variant 8 Wall",
+
+  "block.agotmod.rsandstone_9": "Red Sandstone Variant 9 Block",
+  "block.agotmod.rsandstone_9_stairs": "Red Sandstone Variant 9 Stairs",
+  "block.agotmod.rsandstone_9_slab": "Red Sandstone Variant 9 Slab",
+  "block.agotmod.rsandstone_9_wall": "Red Sandstone Variant 9 Wall",
+
+  "block.agotmod.rsandstone_10": "Red Sandstone Variant 10 Block",
+  "block.agotmod.rsandstone_10_stairs": "Red Sandstone Variant 10 Stairs",
+  "block.agotmod.rsandstone_10_slab": "Red Sandstone Variant 10 Slab",
+  "block.agotmod.rsandstone_10_wall": "Red Sandstone Variant 10 Wall",
+
+  "block.agotmod.rsandstone_11": "Red Sandstone Variant 11 Block",
+  "block.agotmod.rsandstone_11_stairs": "Red Sandstone Variant 11 Stairs",
+  "block.agotmod.rsandstone_11_slab": "Red Sandstone Variant 11 Slab",
+  "block.agotmod.rsandstone_11_wall": "Red Sandstone Variant 11 Wall",
+
+  "block.agotmod.rsandstone_12": "Red Sandstone Variant 12 Block",
+  "block.agotmod.rsandstone_12_stairs": "Red Sandstone Variant 12 Stairs",
+  "block.agotmod.rsandstone_12_slab": "Red Sandstone Variant 12 Slab",
+  "block.agotmod.rsandstone_12_wall": "Red Sandstone Variant 12 Wall",
+
+  "block.agotmod.rsandstone_13": "Red Sandstone Variant 13 Block",
+  "block.agotmod.rsandstone_13_stairs": "Red Sandstone Variant 13 Stairs",
+  "block.agotmod.rsandstone_13_slab": "Red Sandstone Variant 13 Slab",
+  "block.agotmod.rsandstone_13_wall": "Red Sandstone Variant 13 Wall",
+
+  "block.agotmod.rsandstone_14": "Red Sandstone Variant 14 Block",
+  "block.agotmod.rsandstone_14_stairs": "Red Sandstone Variant 14 Stairs",
+  "block.agotmod.rsandstone_14_slab": "Red Sandstone Variant 14 Slab",
+  "block.agotmod.rsandstone_14_wall": "Red Sandstone Variant 14 Wall",
+
+  "block.agotmod.rsandstone_15": "Red Sandstone Variant 15 Block",
+  "block.agotmod.rsandstone_15_stairs": "Red Sandstone Variant 15 Stairs",
+  "block.agotmod.rsandstone_15_slab": "Red Sandstone Variant 15 Slab",
+  "block.agotmod.rsandstone_15_wall": "Red Sandstone Variant 15 Wall",
+
+  "block.agotmod.rsandstone_16": "Red Sandstone Variant 16 Block",
+  "block.agotmod.rsandstone_16_stairs": "Red Sandstone Variant 16 Stairs",
+  "block.agotmod.rsandstone_16_slab": "Red Sandstone Variant 16 Slab",
+  "block.agotmod.rsandstone_16_wall": "Red Sandstone Variant 16 Wall",
+
+  "block.agotmod.rsandstone_17": "Red Sandstone Variant 17 Block",
+  "block.agotmod.rsandstone_17_stairs": "Red Sandstone Variant 17 Stairs",
+  "block.agotmod.rsandstone_17_slab": "Red Sandstone Variant 17 Slab",
+  "block.agotmod.rsandstone_17_wall": "Red Sandstone Variant 17 Wall",
+
+  "block.agotmod.rsandstone_18": "Red Sandstone Variant 18 Block",
+  "block.agotmod.rsandstone_18_stairs": "Red Sandstone Variant 18 Stairs",
+  "block.agotmod.rsandstone_18_slab": "Red Sandstone Variant 18 Slab",
+  "block.agotmod.rsandstone_18_wall": "Red Sandstone Variant 18 Wall",
+
+  "block.agotmod.rsandstone_19": "Red Sandstone Variant 19 Block",
+  "block.agotmod.rsandstone_19_stairs": "Red Sandstone Variant 19 Stairs",
+  "block.agotmod.rsandstone_19_slab": "Red Sandstone Variant 19 Slab",
+  "block.agotmod.rsandstone_19_wall": "Red Sandstone Variant 19 Wall",
+
+  "block.agotmod.rsandstone_20": "Red Sandstone Variant 20 Block",
+  "block.agotmod.rsandstone_20_stairs": "Red Sandstone Variant 20 Stairs",
+  "block.agotmod.rsandstone_20_slab": "Red Sandstone Variant 20 Slab",
+  "block.agotmod.rsandstone_20_wall": "Red Sandstone Variant 20 Wall",
+
+  "block.agotmod.rsandstone_21": "Red Sandstone Variant 21 Block",
+  "block.agotmod.rsandstone_21_stairs": "Red Sandstone Variant 21 Stairs",
+  "block.agotmod.rsandstone_21_slab": "Red Sandstone Variant 21 Slab",
+  "block.agotmod.rsandstone_21_wall": "Red Sandstone Variant 21 Wall",
+
+  "block.agotmod.rsandstone_22": "Red Sandstone Variant 22 Block",
+  "block.agotmod.rsandstone_22_stairs": "Red Sandstone Variant 22 Stairs",
+  "block.agotmod.rsandstone_22_slab": "Red Sandstone Variant 22 Slab",
+  "block.agotmod.rsandstone_22_wall": "Red Sandstone Variant 22 Wall",
+
+  "block.agotmod.rsandstone_23": "Red Sandstone Variant 23 Block",
+  "block.agotmod.rsandstone_23_stairs": "Red Sandstone Variant 23 Stairs",
+  "block.agotmod.rsandstone_23_slab": "Red Sandstone Variant 23 Slab",
+  "block.agotmod.rsandstone_23_wall": "Red Sandstone Variant 23 Wall",
+
+
+
+
   "block.agotmod.winter_rose": "Winter Rose",
   "block.agotmod.wild_radish": "Wild Radish",
   "block.agotmod.white_rose": "White Rose",

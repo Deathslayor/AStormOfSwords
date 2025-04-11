@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sstone_16": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:sstone_16"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:sstone_16_slab_from_sstone_16_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_sstone_16"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:sstone_16_slab_from_sstone_16_block"
+    ]
+  }
+}
