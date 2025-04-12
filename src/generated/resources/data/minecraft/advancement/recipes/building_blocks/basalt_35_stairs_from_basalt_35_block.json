@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_basalt_35": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:basalt_35"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:basalt_35_stairs_from_basalt_35_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_basalt_35"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:basalt_35_stairs_from_basalt_35_block"
+    ]
+  }
+}

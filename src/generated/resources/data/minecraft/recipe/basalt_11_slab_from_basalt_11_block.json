@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "agotmod:basalt_11",
+  "result": {
+    "count": 2,
+    "id": "agotmod:basalt_11_slab"
+  }
+}

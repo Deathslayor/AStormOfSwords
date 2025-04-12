@@ -1248,6 +1248,192 @@
   "block.agotmod.stone_38_slab": "Stone Variant 38 Slab",
   "block.agotmod.stone_38_wall": "Stone Variant 38 Wall",
 
+  "block.agotmod.basalt_2": "Basalt Variant 2 Block",
+  "block.agotmod.basalt_2_stairs": "Basalt Variant 2 Stairs",
+  "block.agotmod.basalt_2_slab": "Basalt Variant 2 Slab",
+  "block.agotmod.basalt_2_wall": "Basalt Variant 2 Wall",
+
+  "block.agotmod.basalt_3": "Basalt Variant 3 Block",
+  "block.agotmod.basalt_3_stairs": "Basalt Variant 3 Stairs",
+  "block.agotmod.basalt_3_slab": "Basalt Variant 3 Slab",
+  "block.agotmod.basalt_3_wall": "Basalt Variant 3 Wall",
+
+  "block.agotmod.basalt_4": "Basalt Variant 4 Block",
+  "block.agotmod.basalt_4_stairs": "Basalt Variant 4 Stairs",
+  "block.agotmod.basalt_4_slab": "Basalt Variant 4 Slab",
+  "block.agotmod.basalt_4_wall": "Basalt Variant 4 Wall",
+
+  "block.agotmod.basalt_5": "Basalt Variant 5 Block",
+  "block.agotmod.basalt_5_stairs": "Basalt Variant 5 Stairs",
+  "block.agotmod.basalt_5_slab": "Basalt Variant 5 Slab",
+  "block.agotmod.basalt_5_wall": "Basalt Variant 5 Wall",
+
+  "block.agotmod.basalt_6": "Basalt Variant 6 Block",
+  "block.agotmod.basalt_6_stairs": "Basalt Variant 6 Stairs",
+  "block.agotmod.basalt_6_slab": "Basalt Variant 6 Slab",
+  "block.agotmod.basalt_6_wall": "Basalt Variant 6 Wall",
+
+  "block.agotmod.basalt_7": "Basalt Variant 7 Block",
+  "block.agotmod.basalt_7_stairs": "Basalt Variant 7 Stairs",
+  "block.agotmod.basalt_7_slab": "Basalt Variant 7 Slab",
+  "block.agotmod.basalt_7_wall": "Basalt Variant 7 Wall",
+
+  "block.agotmod.basalt_8": "Basalt Variant 8 Block",
+  "block.agotmod.basalt_8_stairs": "Basalt Variant 8 Stairs",
+  "block.agotmod.basalt_8_slab": "Basalt Variant 8 Slab",
+  "block.agotmod.basalt_8_wall": "Basalt Variant 8 Wall",
+
+  "block.agotmod.basalt_9": "Basalt Variant 9 Block",
+  "block.agotmod.basalt_9_stairs": "Basalt Variant 9 Stairs",
+  "block.agotmod.basalt_9_slab": "Basalt Variant 9 Slab",
+  "block.agotmod.basalt_9_wall": "Basalt Variant 9 Wall",
+
+  "block.agotmod.basalt_10": "Basalt Variant 10 Block",
+  "block.agotmod.basalt_10_stairs": "Basalt Variant 10 Stairs",
+  "block.agotmod.basalt_10_slab": "Basalt Variant 10 Slab",
+  "block.agotmod.basalt_10_wall": "Basalt Variant 10 Wall",
+
+  "block.agotmod.basalt_11": "Basalt Variant 11 Block",
+  "block.agotmod.basalt_11_stairs": "Basalt Variant 11 Stairs",
+  "block.agotmod.basalt_11_slab": "Basalt Variant 11 Slab",
+  "block.agotmod.basalt_11_wall": "Basalt Variant 11 Wall",
+
+  "block.agotmod.basalt_12": "Basalt Variant 12 Block",
+  "block.agotmod.basalt_12_stairs": "Basalt Variant 12 Stairs",
+  "block.agotmod.basalt_12_slab": "Basalt Variant 12 Slab",
+  "block.agotmod.basalt_12_wall": "Basalt Variant 12 Wall",
+
+  "block.agotmod.basalt_13": "Basalt Variant 13 Block",
+  "block.agotmod.basalt_13_stairs": "Basalt Variant 13 Stairs",
+  "block.agotmod.basalt_13_slab": "Basalt Variant 13 Slab",
+  "block.agotmod.basalt_13_wall": "Basalt Variant 13 Wall",
+
+  "block.agotmod.basalt_14": "Basalt Variant 14 Block",
+  "block.agotmod.basalt_14_stairs": "Basalt Variant 14 Stairs",
+  "block.agotmod.basalt_14_slab": "Basalt Variant 14 Slab",
+  "block.agotmod.basalt_14_wall": "Basalt Variant 14 Wall",
+
+  "block.agotmod.basalt_15": "Basalt Variant 15 Block",
+  "block.agotmod.basalt_15_stairs": "Basalt Variant 15 Stairs",
+  "block.agotmod.basalt_15_slab": "Basalt Variant 15 Slab",
+  "block.agotmod.basalt_15_wall": "Basalt Variant 15 Wall",
+
+  "block.agotmod.basalt_16": "Basalt Variant 16 Block",
+  "block.agotmod.basalt_16_stairs": "Basalt Variant 16 Stairs",
+  "block.agotmod.basalt_16_slab": "Basalt Variant 16 Slab",
+  "block.agotmod.basalt_16_wall": "Basalt Variant 16 Wall",
+
+  "block.agotmod.basalt_17": "Basalt Variant 17 Block",
+  "block.agotmod.basalt_17_stairs": "Basalt Variant 17 Stairs",
+  "block.agotmod.basalt_17_slab": "Basalt Variant 17 Slab",
+  "block.agotmod.basalt_17_wall": "Basalt Variant 17 Wall",
+
+  "block.agotmod.basalt_18": "Basalt Variant 18 Block",
+  "block.agotmod.basalt_18_stairs": "Basalt Variant 18 Stairs",
+  "block.agotmod.basalt_18_slab": "Basalt Variant 18 Slab",
+  "block.agotmod.basalt_18_wall": "Basalt Variant 18 Wall",
+
+  "block.agotmod.basalt_19": "Basalt Variant 19 Block",
+  "block.agotmod.basalt_19_stairs": "Basalt Variant 19 Stairs",
+  "block.agotmod.basalt_19_slab": "Basalt Variant 19 Slab",
+  "block.agotmod.basalt_19_wall": "Basalt Variant 19 Wall",
+
+  "block.agotmod.basalt_20": "Basalt Variant 20 Block",
+  "block.agotmod.basalt_20_stairs": "Basalt Variant 20 Stairs",
+  "block.agotmod.basalt_20_slab": "Basalt Variant 20 Slab",
+  "block.agotmod.basalt_20_wall": "Basalt Variant 20 Wall",
+
+  "block.agotmod.basalt_21": "Basalt Variant 21 Block",
+  "block.agotmod.basalt_21_stairs": "Basalt Variant 21 Stairs",
+  "block.agotmod.basalt_21_slab": "Basalt Variant 21 Slab",
+  "block.agotmod.basalt_21_wall": "Basalt Variant 21 Wall",
+
+  "block.agotmod.basalt_22": "Basalt Variant 22 Block",
+  "block.agotmod.basalt_22_stairs": "Basalt Variant 22 Stairs",
+  "block.agotmod.basalt_22_slab": "Basalt Variant 22 Slab",
+  "block.agotmod.basalt_22_wall": "Basalt Variant 22 Wall",
+
+  "block.agotmod.basalt_23": "Basalt Variant 23 Block",
+  "block.agotmod.basalt_23_stairs": "Basalt Variant 23 Stairs",
+  "block.agotmod.basalt_23_slab": "Basalt Variant 23 Slab",
+  "block.agotmod.basalt_23_wall": "Basalt Variant 23 Wall",
+
+  "block.agotmod.basalt_24": "Basalt Variant 24 Block",
+  "block.agotmod.basalt_24_stairs": "Basalt Variant 24 Stairs",
+  "block.agotmod.basalt_24_slab": "Basalt Variant 24 Slab",
+  "block.agotmod.basalt_24_wall": "Basalt Variant 24 Wall",
+
+  "block.agotmod.basalt_25": "Basalt Variant 25 Block",
+  "block.agotmod.basalt_25_stairs": "Basalt Variant 25 Stairs",
+  "block.agotmod.basalt_25_slab": "Basalt Variant 25 Slab",
+  "block.agotmod.basalt_25_wall": "Basalt Variant 25 Wall",
+
+  "block.agotmod.basalt_26": "Basalt Variant 26 Block",
+  "block.agotmod.basalt_26_stairs": "Basalt Variant 26 Stairs",
+  "block.agotmod.basalt_26_slab": "Basalt Variant 26 Slab",
+  "block.agotmod.basalt_26_wall": "Basalt Variant 26 Wall",
+
+  "block.agotmod.basalt_27": "Basalt Variant 27 Block",
+  "block.agotmod.basalt_27_stairs": "Basalt Variant 27 Stairs",
+  "block.agotmod.basalt_27_slab": "Basalt Variant 27 Slab",
+  "block.agotmod.basalt_27_wall": "Basalt Variant 27 Wall",
+
+  "block.agotmod.basalt_28": "Basalt Variant 28 Block",
+  "block.agotmod.basalt_28_stairs": "Basalt Variant 28 Stairs",
+  "block.agotmod.basalt_28_slab": "Basalt Variant 28 Slab",
+  "block.agotmod.basalt_28_wall": "Basalt Variant 28 Wall",
+
+  "block.agotmod.basalt_29": "Basalt Variant 29 Block",
+  "block.agotmod.basalt_29_stairs": "Basalt Variant 29 Stairs",
+  "block.agotmod.basalt_29_slab": "Basalt Variant 29 Slab",
+  "block.agotmod.basalt_29_wall": "Basalt Variant 29 Wall",
+
+  "block.agotmod.basalt_30": "Basalt Variant 30 Block",
+  "block.agotmod.basalt_30_stairs": "Basalt Variant 30 Stairs",
+  "block.agotmod.basalt_30_slab": "Basalt Variant 30 Slab",
+  "block.agotmod.basalt_30_wall": "Basalt Variant 30 Wall",
+
+  "block.agotmod.basalt_31": "Basalt Variant 31 Block",
+  "block.agotmod.basalt_31_stairs": "Basalt Variant 31 Stairs",
+  "block.agotmod.basalt_31_slab": "Basalt Variant 31 Slab",
+  "block.agotmod.basalt_31_wall": "Basalt Variant 31 Wall",
+
+  "block.agotmod.basalt_32": "Basalt Variant 32 Block",
+  "block.agotmod.basalt_32_stairs": "Basalt Variant 32 Stairs",
+  "block.agotmod.basalt_32_slab": "Basalt Variant 32 Slab",
+  "block.agotmod.basalt_32_wall": "Basalt Variant 32 Wall",
+
+  "block.agotmod.basalt_33": "Basalt Variant 33 Block",
+  "block.agotmod.basalt_33_stairs": "Basalt Variant 33 Stairs",
+  "block.agotmod.basalt_33_slab": "Basalt Variant 33 Slab",
+  "block.agotmod.basalt_33_wall": "Basalt Variant 33 Wall",
+
+  "block.agotmod.basalt_34": "Basalt Variant 34 Block",
+  "block.agotmod.basalt_34_stairs": "Basalt Variant 34 Stairs",
+  "block.agotmod.basalt_34_slab": "Basalt Variant 34 Slab",
+  "block.agotmod.basalt_34_wall": "Basalt Variant 34 Wall",
+
+  "block.agotmod.basalt_35": "Basalt Variant 35 Block",
+  "block.agotmod.basalt_35_stairs": "Basalt Variant 35 Stairs",
+  "block.agotmod.basalt_35_slab": "Basalt Variant 35 Slab",
+  "block.agotmod.basalt_35_wall": "Basalt Variant 35 Wall",
+
+  "block.agotmod.basalt_36": "Basalt Variant 36 Block",
+  "block.agotmod.basalt_36_stairs": "Basalt Variant 36 Stairs",
+  "block.agotmod.basalt_36_slab": "Basalt Variant 36 Slab",
+  "block.agotmod.basalt_36_wall": "Basalt Variant 36 Wall",
+
+  "block.agotmod.basalt_37": "Basalt Variant 37 Block",
+  "block.agotmod.basalt_37_stairs": "Basalt Variant 37 Stairs",
+  "block.agotmod.basalt_37_slab": "Basalt Variant 37 Slab",
+  "block.agotmod.basalt_37_wall": "Basalt Variant 37 Wall",
+
+  "block.agotmod.basalt_38": "Basalt Variant 38 Block",
+  "block.agotmod.basalt_38_stairs": "Basalt Variant 38 Stairs",
+  "block.agotmod.basalt_38_slab": "Basalt Variant 38 Slab",
+  "block.agotmod.basalt_38_wall": "Basalt Variant 38 Wall",
+
+
 
 
 

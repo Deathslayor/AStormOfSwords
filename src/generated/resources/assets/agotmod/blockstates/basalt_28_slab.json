@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "agotmod:block/basalt_28_slab"
+    },
+    "type=double": {
+      "model": "agotmod:block/basalt_28"
+    },
+    "type=top": {
+      "model": "agotmod:block/basalt_28_slab_top"
+    }
+  }
+}

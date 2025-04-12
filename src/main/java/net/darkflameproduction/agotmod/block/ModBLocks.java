@@ -2032,6 +2032,371 @@ public class ModBLocks {
     public static final DeferredBlock<Block> REDKEEP_38_WALL = registerBlock("redkeep_38_wall",
             WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
 
+
+    public static final DeferredBlock<Block> BASALT_2_BLOCK = registerBlock("basalt_2",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_2_STAIRS = registerBlock("basalt_2_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_2_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_2_SLAB = registerBlock("basalt_2_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_2_WALL = registerBlock("basalt_2_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_3_BLOCK = registerBlock("basalt_3",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_3_STAIRS = registerBlock("basalt_3_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_3_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_3_SLAB = registerBlock("basalt_3_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_3_WALL = registerBlock("basalt_3_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_4_BLOCK = registerBlock("basalt_4",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_4_STAIRS = registerBlock("basalt_4_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_4_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_4_SLAB = registerBlock("basalt_4_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_4_WALL = registerBlock("basalt_4_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_5_BLOCK = registerBlock("basalt_5",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_5_STAIRS = registerBlock("basalt_5_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_5_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_5_SLAB = registerBlock("basalt_5_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_5_WALL = registerBlock("basalt_5_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_6_BLOCK = registerBlock("basalt_6",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_6_STAIRS = registerBlock("basalt_6_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_6_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_6_SLAB = registerBlock("basalt_6_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_6_WALL = registerBlock("basalt_6_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_7_BLOCK = registerBlock("basalt_7",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_7_STAIRS = registerBlock("basalt_7_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_7_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_7_SLAB = registerBlock("basalt_7_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_7_WALL = registerBlock("basalt_7_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_8_BLOCK = registerBlock("basalt_8",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_8_STAIRS = registerBlock("basalt_8_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_8_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_8_SLAB = registerBlock("basalt_8_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_8_WALL = registerBlock("basalt_8_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_9_BLOCK = registerBlock("basalt_9",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_9_STAIRS = registerBlock("basalt_9_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_9_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_9_SLAB = registerBlock("basalt_9_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_9_WALL = registerBlock("basalt_9_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_10_BLOCK = registerBlock("basalt_10",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_10_STAIRS = registerBlock("basalt_10_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_10_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_10_SLAB = registerBlock("basalt_10_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_10_WALL = registerBlock("basalt_10_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_11_BLOCK = registerBlock("basalt_11",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_11_STAIRS = registerBlock("basalt_11_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_11_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_11_SLAB = registerBlock("basalt_11_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_11_WALL = registerBlock("basalt_11_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_12_BLOCK = registerBlock("basalt_12",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_12_STAIRS = registerBlock("basalt_12_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_12_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_12_SLAB = registerBlock("basalt_12_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_12_WALL = registerBlock("basalt_12_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_13_BLOCK = registerBlock("basalt_13",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_13_STAIRS = registerBlock("basalt_13_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_13_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_13_SLAB = registerBlock("basalt_13_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_13_WALL = registerBlock("basalt_13_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_14_BLOCK = registerBlock("basalt_14",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_14_STAIRS = registerBlock("basalt_14_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_14_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_14_SLAB = registerBlock("basalt_14_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_14_WALL = registerBlock("basalt_14_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    // public static final DeferredBlock<Block> BASALT_15_BLOCK = registerBlock("basalt_15",
+    //       Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    //public static final DeferredBlock<Block> BASALT_15_STAIRS = registerBlock("basalt_15_stairs",
+    //      properties -> new StairBlock(ModBLocks.BASALT_15_BLOCK.get().defaultBlockState(),
+    //            properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    //public static final DeferredBlock<Block> BASALT_15_SLAB = registerBlock("basalt_15_slab",
+    //      SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    //public static final DeferredBlock<Block> BASALT_15_WALL = registerBlock("basalt_15_wall",
+    //      WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_16_BLOCK = registerBlock("basalt_16",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_16_STAIRS = registerBlock("basalt_16_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_16_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_16_SLAB = registerBlock("basalt_16_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_16_WALL = registerBlock("basalt_16_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_17_BLOCK = registerBlock("basalt_17",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_17_STAIRS = registerBlock("basalt_17_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_17_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_17_SLAB = registerBlock("basalt_17_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_17_WALL = registerBlock("basalt_17_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_18_BLOCK = registerBlock("basalt_18",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_18_STAIRS = registerBlock("basalt_18_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_18_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_18_SLAB = registerBlock("basalt_18_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_18_WALL = registerBlock("basalt_18_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    // For 19
+    public static final DeferredBlock<Block> BASALT_19_BLOCK = registerBlock("basalt_19",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_19_STAIRS = registerBlock("basalt_19_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_19_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_19_SLAB = registerBlock("basalt_19_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_19_WALL = registerBlock("basalt_19_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+
+    // For 20
+    public static final DeferredBlock<Block> BASALT_20_BLOCK = registerBlock("basalt_20",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_20_STAIRS = registerBlock("basalt_20_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_20_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_20_SLAB = registerBlock("basalt_20_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_20_WALL = registerBlock("basalt_20_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+
+    // For 21
+    public static final DeferredBlock<Block> BASALT_21_BLOCK = registerBlock("basalt_21",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_21_STAIRS = registerBlock("basalt_21_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_21_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_21_SLAB = registerBlock("basalt_21_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_21_WALL = registerBlock("basalt_21_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+
+    // For 22
+    public static final DeferredBlock<Block> BASALT_22_BLOCK = registerBlock("basalt_22",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_22_STAIRS = registerBlock("basalt_22_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_22_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_22_SLAB = registerBlock("basalt_22_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_22_WALL = registerBlock("basalt_22_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_23_BLOCK = registerBlock("basalt_23",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_23_STAIRS = registerBlock("basalt_23_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_23_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_23_SLAB = registerBlock("basalt_23_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_23_WALL = registerBlock("basalt_23_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+
+    // BASALT 24
+    public static final DeferredBlock<Block> BASALT_24_BLOCK = registerBlock("basalt_24",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_24_STAIRS = registerBlock("basalt_24_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_24_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_24_SLAB = registerBlock("basalt_24_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_24_WALL = registerBlock("basalt_24_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+
+    // BASALT 25
+    public static final DeferredBlock<Block> BASALT_25_BLOCK = registerBlock("basalt_25",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_25_STAIRS = registerBlock("basalt_25_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_25_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_25_SLAB = registerBlock("basalt_25_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_25_WALL = registerBlock("basalt_25_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+
+    // BASALT 26
+    public static final DeferredBlock<Block> BASALT_26_BLOCK = registerBlock("basalt_26",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_26_STAIRS = registerBlock("basalt_26_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_26_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_26_SLAB = registerBlock("basalt_26_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_26_WALL = registerBlock("basalt_26_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+
+    // BASALT 27
+    public static final DeferredBlock<Block> BASALT_27_BLOCK = registerBlock("basalt_27",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_27_STAIRS = registerBlock("basalt_27_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_27_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_27_SLAB = registerBlock("basalt_27_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_27_WALL = registerBlock("basalt_27_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+
+    // BASALT 28
+    public static final DeferredBlock<Block> BASALT_28_BLOCK = registerBlock("basalt_28",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_28_STAIRS = registerBlock("basalt_28_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_28_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_28_SLAB = registerBlock("basalt_28_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_28_WALL = registerBlock("basalt_28_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+
+    // BASALT 29
+    public static final DeferredBlock<Block> BASALT_29_BLOCK = registerBlock("basalt_29",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_29_STAIRS = registerBlock("basalt_29_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_29_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_29_SLAB = registerBlock("basalt_29_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_29_WALL = registerBlock("basalt_29_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+
+    // BASALT 30
+    public static final DeferredBlock<Block> BASALT_30_BLOCK = registerBlock("basalt_30",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_30_STAIRS = registerBlock("basalt_30_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_30_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_30_SLAB = registerBlock("basalt_30_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_30_WALL = registerBlock("basalt_30_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+
+    public static final DeferredBlock<Block> BASALT_31_BLOCK = registerBlock("basalt_31",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_31_STAIRS = registerBlock("basalt_31_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_31_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_31_SLAB = registerBlock("basalt_31_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_31_WALL = registerBlock("basalt_31_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+
+    public static final DeferredBlock<Block> BASALT_32_BLOCK = registerBlock("basalt_32",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_32_STAIRS = registerBlock("basalt_32_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_32_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_32_SLAB = registerBlock("basalt_32_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_32_WALL = registerBlock("basalt_32_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+
+    public static final DeferredBlock<Block> BASALT_33_BLOCK = registerBlock("basalt_33",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_33_STAIRS = registerBlock("basalt_33_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_33_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_33_SLAB = registerBlock("basalt_33_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_33_WALL = registerBlock("basalt_33_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+
+    public static final DeferredBlock<Block> BASALT_34_BLOCK = registerBlock("basalt_34",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_34_STAIRS = registerBlock("basalt_34_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_34_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_34_SLAB = registerBlock("basalt_34_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_34_WALL = registerBlock("basalt_34_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+
+    public static final DeferredBlock<Block> BASALT_35_BLOCK = registerBlock("basalt_35",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_35_STAIRS = registerBlock("basalt_35_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_35_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_35_SLAB = registerBlock("basalt_35_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_35_WALL = registerBlock("basalt_35_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+
+    public static final DeferredBlock<Block> BASALT_36_BLOCK = registerBlock("basalt_36",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_36_STAIRS = registerBlock("basalt_36_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_36_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_36_SLAB = registerBlock("basalt_36_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_36_WALL = registerBlock("basalt_36_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+
+    public static final DeferredBlock<Block> BASALT_37_BLOCK = registerBlock("basalt_37",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_37_STAIRS = registerBlock("basalt_37_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_37_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_37_SLAB = registerBlock("basalt_37_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_37_WALL = registerBlock("basalt_37_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+
+    public static final DeferredBlock<Block> BASALT_38_BLOCK = registerBlock("basalt_38",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f));
+    public static final DeferredBlock<Block> BASALT_38_STAIRS = registerBlock("basalt_38_stairs",
+            properties -> new StairBlock(ModBLocks.BASALT_38_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_38_SLAB = registerBlock("basalt_38_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+    public static final DeferredBlock<Block> BASALT_38_WALL = registerBlock("basalt_38_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT));
+
+
     // ---------------------------(FLOWERS)--------------------------- //
     public static final DeferredBlock<Block> WINTER_ROSE = registerBlock("winter_rose",
             properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),

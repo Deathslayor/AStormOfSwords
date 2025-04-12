@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_basalt_26": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:basalt_26"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:basalt_26_wall_from_basalt_26_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_basalt_26"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:basalt_26_wall_from_basalt_26_block"
+    ]
+  }
+}
