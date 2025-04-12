@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_bricks_21": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:bricks_21"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:bricks_21_wall_from_bricks_21_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_bricks_21"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:bricks_21_wall_from_bricks_21_block"
+    ]
+  }
+}

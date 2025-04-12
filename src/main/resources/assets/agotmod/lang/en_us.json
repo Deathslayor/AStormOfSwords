@@ -1433,6 +1433,196 @@
   "block.agotmod.basalt_38_slab": "Basalt Variant 38 Slab",
   "block.agotmod.basalt_38_wall": "Basalt Variant 38 Wall",
 
+  "block.agotmod.bricks_1": "Bricks Variant 1 Block",
+  "block.agotmod.bricks_1_stairs": "Bricks Variant 1 Stairs",
+  "block.agotmod.bricks_1_slab": "Bricks Variant 1 Slab",
+  "block.agotmod.bricks_1_wall": "Bricks Variant 1 Wall",
+
+
+  "block.agotmod.bricks_2": "Bricks Variant 2 Block",
+  "block.agotmod.bricks_2_stairs": "Bricks Variant 2 Stairs",
+  "block.agotmod.bricks_2_slab": "Bricks Variant 2 Slab",
+  "block.agotmod.bricks_2_wall": "Bricks Variant 2 Wall",
+
+  "block.agotmod.bricks_3": "Bricks Variant 3 Block",
+  "block.agotmod.bricks_3_stairs": "Bricks Variant 3 Stairs",
+  "block.agotmod.bricks_3_slab": "Bricks Variant 3 Slab",
+  "block.agotmod.bricks_3_wall": "Bricks Variant 3 Wall",
+
+  "block.agotmod.bricks_4": "Bricks Variant 4 Block",
+  "block.agotmod.bricks_4_stairs": "Bricks Variant 4 Stairs",
+  "block.agotmod.bricks_4_slab": "Bricks Variant 4 Slab",
+  "block.agotmod.bricks_4_wall": "Bricks Variant 4 Wall",
+
+  "block.agotmod.bricks_5": "Bricks Variant 5 Block",
+  "block.agotmod.bricks_5_stairs": "Bricks Variant 5 Stairs",
+  "block.agotmod.bricks_5_slab": "Bricks Variant 5 Slab",
+  "block.agotmod.bricks_5_wall": "Bricks Variant 5 Wall",
+
+  "block.agotmod.bricks_6": "Bricks Variant 6 Block",
+  "block.agotmod.bricks_6_stairs": "Bricks Variant 6 Stairs",
+  "block.agotmod.bricks_6_slab": "Bricks Variant 6 Slab",
+  "block.agotmod.bricks_6_wall": "Bricks Variant 6 Wall",
+
+  "block.agotmod.bricks_7": "Bricks Variant 7 Block",
+  "block.agotmod.bricks_7_stairs": "Bricks Variant 7 Stairs",
+  "block.agotmod.bricks_7_slab": "Bricks Variant 7 Slab",
+  "block.agotmod.bricks_7_wall": "Bricks Variant 7 Wall",
+
+  "block.agotmod.bricks_8": "Bricks Variant 8 Block",
+  "block.agotmod.bricks_8_stairs": "Bricks Variant 8 Stairs",
+  "block.agotmod.bricks_8_slab": "Bricks Variant 8 Slab",
+  "block.agotmod.bricks_8_wall": "Bricks Variant 8 Wall",
+
+  "block.agotmod.bricks_9": "Bricks Variant 9 Block",
+  "block.agotmod.bricks_9_stairs": "Bricks Variant 9 Stairs",
+  "block.agotmod.bricks_9_slab": "Bricks Variant 9 Slab",
+  "block.agotmod.bricks_9_wall": "Bricks Variant 9 Wall",
+
+  "block.agotmod.bricks_10": "Bricks Variant 10 Block",
+  "block.agotmod.bricks_10_stairs": "Bricks Variant 10 Stairs",
+  "block.agotmod.bricks_10_slab": "Bricks Variant 10 Slab",
+  "block.agotmod.bricks_10_wall": "Bricks Variant 10 Wall",
+
+  "block.agotmod.bricks_11": "Bricks Variant 11 Block",
+  "block.agotmod.bricks_11_stairs": "Bricks Variant 11 Stairs",
+  "block.agotmod.bricks_11_slab": "Bricks Variant 11 Slab",
+  "block.agotmod.bricks_11_wall": "Bricks Variant 11 Wall",
+
+  "block.agotmod.bricks_12": "Bricks Variant 12 Block",
+  "block.agotmod.bricks_12_stairs": "Bricks Variant 12 Stairs",
+  "block.agotmod.bricks_12_slab": "Bricks Variant 12 Slab",
+  "block.agotmod.bricks_12_wall": "Bricks Variant 12 Wall",
+
+  "block.agotmod.bricks_13": "Bricks Variant 13 Block",
+  "block.agotmod.bricks_13_stairs": "Bricks Variant 13 Stairs",
+  "block.agotmod.bricks_13_slab": "Bricks Variant 13 Slab",
+  "block.agotmod.bricks_13_wall": "Bricks Variant 13 Wall",
+
+  "block.agotmod.bricks_14": "Bricks Variant 14 Block",
+  "block.agotmod.bricks_14_stairs": "Bricks Variant 14 Stairs",
+  "block.agotmod.bricks_14_slab": "Bricks Variant 14 Slab",
+  "block.agotmod.bricks_14_wall": "Bricks Variant 14 Wall",
+
+  "block.agotmod.bricks_15": "Bricks Variant 15 Block",
+  "block.agotmod.bricks_15_stairs": "Bricks Variant 15 Stairs",
+  "block.agotmod.bricks_15_slab": "Bricks Variant 15 Slab",
+  "block.agotmod.bricks_15_wall": "Bricks Variant 15 Wall",
+
+  "block.agotmod.bricks_16": "Bricks Variant 16 Block",
+  "block.agotmod.bricks_16_stairs": "Bricks Variant 16 Stairs",
+  "block.agotmod.bricks_16_slab": "Bricks Variant 16 Slab",
+  "block.agotmod.bricks_16_wall": "Bricks Variant 16 Wall",
+
+  "block.agotmod.bricks_17": "Bricks Variant 17 Block",
+  "block.agotmod.bricks_17_stairs": "Bricks Variant 17 Stairs",
+  "block.agotmod.bricks_17_slab": "Bricks Variant 17 Slab",
+  "block.agotmod.bricks_17_wall": "Bricks Variant 17 Wall",
+
+  "block.agotmod.bricks_18": "Bricks Variant 18 Block",
+  "block.agotmod.bricks_18_stairs": "Bricks Variant 18 Stairs",
+  "block.agotmod.bricks_18_slab": "Bricks Variant 18 Slab",
+  "block.agotmod.bricks_18_wall": "Bricks Variant 18 Wall",
+
+  "block.agotmod.bricks_19": "Bricks Variant 19 Block",
+  "block.agotmod.bricks_19_stairs": "Bricks Variant 19 Stairs",
+  "block.agotmod.bricks_19_slab": "Bricks Variant 19 Slab",
+  "block.agotmod.bricks_19_wall": "Bricks Variant 19 Wall",
+
+  "block.agotmod.bricks_20": "Bricks Variant 20 Block",
+  "block.agotmod.bricks_20_stairs": "Bricks Variant 20 Stairs",
+  "block.agotmod.bricks_20_slab": "Bricks Variant 20 Slab",
+  "block.agotmod.bricks_20_wall": "Bricks Variant 20 Wall",
+
+  "block.agotmod.bricks_21": "Bricks Variant 21 Block",
+  "block.agotmod.bricks_21_stairs": "Bricks Variant 21 Stairs",
+  "block.agotmod.bricks_21_slab": "Bricks Variant 21 Slab",
+  "block.agotmod.bricks_21_wall": "Bricks Variant 21 Wall",
+
+  "block.agotmod.bricks_22": "Bricks Variant 22 Block",
+  "block.agotmod.bricks_22_stairs": "Bricks Variant 22 Stairs",
+  "block.agotmod.bricks_22_slab": "Bricks Variant 22 Slab",
+  "block.agotmod.bricks_22_wall": "Bricks Variant 22 Wall",
+
+  "block.agotmod.bricks_23": "Bricks Variant 23 Block",
+  "block.agotmod.bricks_23_stairs": "Bricks Variant 23 Stairs",
+  "block.agotmod.bricks_23_slab": "Bricks Variant 23 Slab",
+  "block.agotmod.bricks_23_wall": "Bricks Variant 23 Wall",
+
+  "block.agotmod.bricks_24": "Bricks Variant 24 Block",
+  "block.agotmod.bricks_24_stairs": "Bricks Variant 24 Stairs",
+  "block.agotmod.bricks_24_slab": "Bricks Variant 24 Slab",
+  "block.agotmod.bricks_24_wall": "Bricks Variant 24 Wall",
+
+  "block.agotmod.bricks_25": "Bricks Variant 25 Block",
+  "block.agotmod.bricks_25_stairs": "Bricks Variant 25 Stairs",
+  "block.agotmod.bricks_25_slab": "Bricks Variant 25 Slab",
+  "block.agotmod.bricks_25_wall": "Bricks Variant 25 Wall",
+
+  "block.agotmod.bricks_26": "Bricks Variant 26 Block",
+  "block.agotmod.bricks_26_stairs": "Bricks Variant 26 Stairs",
+  "block.agotmod.bricks_26_slab": "Bricks Variant 26 Slab",
+  "block.agotmod.bricks_26_wall": "Bricks Variant 26 Wall",
+
+  "block.agotmod.bricks_27": "Bricks Variant 27 Block",
+  "block.agotmod.bricks_27_stairs": "Bricks Variant 27 Stairs",
+  "block.agotmod.bricks_27_slab": "Bricks Variant 27 Slab",
+  "block.agotmod.bricks_27_wall": "Bricks Variant 27 Wall",
+
+  "block.agotmod.bricks_28": "Bricks Variant 28 Block",
+  "block.agotmod.bricks_28_stairs": "Bricks Variant 28 Stairs",
+  "block.agotmod.bricks_28_slab": "Bricks Variant 28 Slab",
+  "block.agotmod.bricks_28_wall": "Bricks Variant 28 Wall",
+
+  "block.agotmod.bricks_29": "Bricks Variant 29 Block",
+  "block.agotmod.bricks_29_stairs": "Bricks Variant 29 Stairs",
+  "block.agotmod.bricks_29_slab": "Bricks Variant 29 Slab",
+  "block.agotmod.bricks_29_wall": "Bricks Variant 29 Wall",
+
+  "block.agotmod.bricks_30": "Bricks Variant 30 Block",
+  "block.agotmod.bricks_30_stairs": "Bricks Variant 30 Stairs",
+  "block.agotmod.bricks_30_slab": "Bricks Variant 30 Slab",
+  "block.agotmod.bricks_30_wall": "Bricks Variant 30 Wall",
+
+  "block.agotmod.bricks_31": "Bricks Variant 31 Block",
+  "block.agotmod.bricks_31_stairs": "Bricks Variant 31 Stairs",
+  "block.agotmod.bricks_31_slab": "Bricks Variant 31 Slab",
+  "block.agotmod.bricks_31_wall": "Bricks Variant 31 Wall",
+
+  "block.agotmod.bricks_32": "Bricks Variant 32 Block",
+  "block.agotmod.bricks_32_stairs": "Bricks Variant 32 Stairs",
+  "block.agotmod.bricks_32_slab": "Bricks Variant 32 Slab",
+  "block.agotmod.bricks_32_wall": "Bricks Variant 32 Wall",
+
+  "block.agotmod.bricks_33": "Bricks Variant 33 Block",
+  "block.agotmod.bricks_33_stairs": "Bricks Variant 33 Stairs",
+  "block.agotmod.bricks_33_slab": "Bricks Variant 33 Slab",
+  "block.agotmod.bricks_33_wall": "Bricks Variant 33 Wall",
+
+  "block.agotmod.bricks_34": "Bricks Variant 34 Block",
+  "block.agotmod.bricks_34_stairs": "Bricks Variant 34 Stairs",
+  "block.agotmod.bricks_34_slab": "Bricks Variant 34 Slab",
+  "block.agotmod.bricks_34_wall": "Bricks Variant 34 Wall",
+
+  "block.agotmod.bricks_35": "Bricks Variant 35 Block",
+  "block.agotmod.bricks_35_stairs": "Bricks Variant 35 Stairs",
+  "block.agotmod.bricks_35_slab": "Bricks Variant 35 Slab",
+  "block.agotmod.bricks_35_wall": "Bricks Variant 35 Wall",
+
+  "block.agotmod.bricks_36": "Bricks Variant 36 Block",
+  "block.agotmod.bricks_36_stairs": "Bricks Variant 36 Stairs",
+  "block.agotmod.bricks_36_slab": "Bricks Variant 36 Slab",
+  "block.agotmod.bricks_36_wall": "Bricks Variant 36 Wall",
+
+  "block.agotmod.bricks_37": "Bricks Variant 37 Block",
+  "block.agotmod.bricks_37_stairs": "Bricks Variant 37 Stairs",
+  "block.agotmod.bricks_37_slab": "Bricks Variant 37 Slab",
+  "block.agotmod.bricks_37_wall": "Bricks Variant 37 Wall",
+
+  "block.agotmod.bricks_38": "Bricks Variant 38 Block",
+  "block.agotmod.bricks_38_stairs": "Bricks Variant 38 Stairs",
+  "block.agotmod.bricks_38_slab": "Bricks Variant 38 Slab",
+  "block.agotmod.bricks_38_wall": "Bricks Variant 38 Wall",
 
 
 

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "agotmod:block/bricks_36_slab"
+    },
+    "type=double": {
+      "model": "agotmod:block/bricks_36"
+    },
+    "type=top": {
+      "model": "agotmod:block/bricks_36_slab_top"
+    }
+  }
+}

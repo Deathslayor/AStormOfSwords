@@ -823,6 +823,141 @@ evenSimplerBlockItem(ModBLocks.REDKEEP_21_SLAB);
         wallItem(ModBLocks.REDKEEP_38_WALL, ModBLocks.REDKEEP_38_BLOCK);
         evenSimplerBlockItem(ModBLocks.REDKEEP_38_STAIRS);
         evenSimplerBlockItem(ModBLocks.REDKEEP_38_SLAB);
+        wallItem(ModBLocks.BRICKS_1_WALL, ModBLocks.BRICKS_1_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_1_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_1_SLAB);
+        wallItem(ModBLocks.BRICKS_3_WALL, ModBLocks.BRICKS_3_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_3_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_3_SLAB);
+        wallItem(ModBLocks.BRICKS_4_WALL, ModBLocks.BRICKS_4_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_4_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_4_SLAB);
+        wallItem(ModBLocks.BRICKS_5_WALL, ModBLocks.BRICKS_5_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_5_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_5_SLAB);
+        wallItem(ModBLocks.BRICKS_6_WALL, ModBLocks.BRICKS_6_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_6_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_6_SLAB);
+        wallItem(ModBLocks.BRICKS_7_WALL, ModBLocks.BRICKS_7_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_7_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_7_SLAB);
+        wallItem(ModBLocks.BRICKS_8_WALL, ModBLocks.BRICKS_8_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_8_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_8_SLAB);
+        wallItem(ModBLocks.BRICKS_9_WALL, ModBLocks.BRICKS_9_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_9_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_9_SLAB);
+        wallItem(ModBLocks.BRICKS_10_WALL, ModBLocks.BRICKS_10_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_10_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_10_SLAB);
+        wallItem(ModBLocks.BRICKS_11_WALL, ModBLocks.BRICKS_11_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_11_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_11_SLAB);
+        wallItem(ModBLocks.BRICKS_12_WALL, ModBLocks.BRICKS_12_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_12_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_12_SLAB);
+        wallItem(ModBLocks.BRICKS_13_WALL, ModBLocks.BRICKS_13_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_13_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_13_SLAB);
+        wallItem(ModBLocks.BRICKS_14_WALL, ModBLocks.BRICKS_14_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_14_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_14_SLAB);
+// wallItem(ModBLocks.BRICKS_15_WALL, ModBLocks.BRICKS_15_BLOCK);
+// evenSimplerBlockItem(ModBLocks.BRICKS_15_STAIRS);
+// evenSimplerBlockItem(ModBLocks.BRICKS_15_SLAB);
+        wallItem(ModBLocks.BRICKS_16_WALL, ModBLocks.BRICKS_16_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_16_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_16_SLAB);
+        wallItem(ModBLocks.BRICKS_17_WALL, ModBLocks.BRICKS_17_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_17_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_17_SLAB);
+        wallItem(ModBLocks.BRICKS_18_WALL, ModBLocks.BRICKS_18_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_18_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_18_SLAB);
+// For 19
+        wallItem(ModBLocks.BRICKS_19_WALL, ModBLocks.BRICKS_19_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_19_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_19_SLAB);
+
+// For 20
+        wallItem(ModBLocks.BRICKS_20_WALL, ModBLocks.BRICKS_20_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_20_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_20_SLAB);
+
+// For 21
+        wallItem(ModBLocks.BRICKS_21_WALL, ModBLocks.BRICKS_21_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_21_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_21_SLAB);
+
+// For 22
+        wallItem(ModBLocks.BRICKS_22_WALL, ModBLocks.BRICKS_22_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_22_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_22_SLAB);
+        wallItem(ModBLocks.BRICKS_23_WALL, ModBLocks.BRICKS_23_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_23_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_23_SLAB);
+
+        wallItem(ModBLocks.BRICKS_24_WALL, ModBLocks.BRICKS_24_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_24_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_24_SLAB);
+
+        wallItem(ModBLocks.BRICKS_25_WALL, ModBLocks.BRICKS_25_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_25_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_25_SLAB);
+
+        wallItem(ModBLocks.BRICKS_26_WALL, ModBLocks.BRICKS_26_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_26_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_26_SLAB);
+
+        wallItem(ModBLocks.BRICKS_27_WALL, ModBLocks.BRICKS_27_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_27_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_27_SLAB);
+
+        wallItem(ModBLocks.BRICKS_28_WALL, ModBLocks.BRICKS_28_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_28_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_28_SLAB);
+
+        wallItem(ModBLocks.BRICKS_29_WALL, ModBLocks.BRICKS_29_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_29_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_29_SLAB);
+
+        wallItem(ModBLocks.BRICKS_30_WALL, ModBLocks.BRICKS_30_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_30_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_30_SLAB);
+
+        wallItem(ModBLocks.BRICKS_31_WALL, ModBLocks.BRICKS_31_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_31_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_31_SLAB);
+
+        wallItem(ModBLocks.BRICKS_32_WALL, ModBLocks.BRICKS_32_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_32_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_32_SLAB);
+
+        wallItem(ModBLocks.BRICKS_33_WALL, ModBLocks.BRICKS_33_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_33_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_33_SLAB);
+
+        wallItem(ModBLocks.BRICKS_34_WALL, ModBLocks.BRICKS_34_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_34_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_34_SLAB);
+
+        wallItem(ModBLocks.BRICKS_35_WALL, ModBLocks.BRICKS_35_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_35_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_35_SLAB);
+
+        wallItem(ModBLocks.BRICKS_36_WALL, ModBLocks.BRICKS_36_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_36_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_36_SLAB);
+
+        wallItem(ModBLocks.BRICKS_37_WALL, ModBLocks.BRICKS_37_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_37_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_37_SLAB);
+
+        wallItem(ModBLocks.BRICKS_38_WALL, ModBLocks.BRICKS_38_BLOCK);
+        evenSimplerBlockItem(ModBLocks.BRICKS_38_STAIRS);
+        evenSimplerBlockItem(ModBLocks.BRICKS_38_SLAB);
+
+
 
         wallItem(ModBLocks.STONE_1_WALL, ModBLocks.STONE_1_BLOCK);
         evenSimplerBlockItem(ModBLocks.STONE_1_STAIRS);

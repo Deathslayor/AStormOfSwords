@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_bricks_10": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:bricks_10"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:bricks_10_wall_from_bricks_10_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_bricks_10"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:bricks_10_wall_from_bricks_10_block"
+    ]
+  }
+}

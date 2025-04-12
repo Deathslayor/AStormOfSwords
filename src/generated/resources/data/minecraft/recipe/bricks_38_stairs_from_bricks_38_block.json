@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "agotmod:bricks_38",
+  "result": {
+    "count": 1,
+    "id": "agotmod:bricks_38_stairs"
+  }
+}

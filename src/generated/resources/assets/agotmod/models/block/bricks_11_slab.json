@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "agotmod:block/bricks_11",
+    "side": "agotmod:block/bricks_11",
+    "top": "agotmod:block/bricks_11"
+  }
+}
