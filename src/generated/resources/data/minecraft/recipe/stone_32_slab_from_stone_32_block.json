@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "agotmod:stone_32",
+  "result": {
+    "count": 2,
+    "id": "agotmod:stone_32_slab"
+  }
+}

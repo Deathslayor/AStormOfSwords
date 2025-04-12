@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_redkeep_35": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:redkeep_35"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:redkeep_35_slab_from_redkeep_35_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_redkeep_35"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:redkeep_35_slab_from_redkeep_35_block"
+    ]
+  }
+}

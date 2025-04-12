@@ -756,6 +756,350 @@ public class ModBLocks {
 
     // ---------------------------(STONE)--------------------------- //
 
+    public static final DeferredBlock<Block> STONE_1_BLOCK = registerBlock("stone_1",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_1_STAIRS = registerBlock("stone_1_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_1_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_1_SLAB = registerBlock("stone_1_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_1_WALL = registerBlock("stone_1_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+    public static final DeferredBlock<Block> STONE_2_BLOCK = registerBlock("stone_2",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_2_STAIRS = registerBlock("stone_2_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_2_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_2_SLAB = registerBlock("stone_2_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_2_WALL = registerBlock("stone_2_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+    public static final DeferredBlock<Block> STONE_3_BLOCK = registerBlock("stone_3",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_3_STAIRS = registerBlock("stone_3_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_3_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_3_SLAB = registerBlock("stone_3_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_3_WALL = registerBlock("stone_3_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+    public static final DeferredBlock<Block> STONE_4_BLOCK = registerBlock("stone_4",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_4_STAIRS = registerBlock("stone_4_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_4_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_4_SLAB = registerBlock("stone_4_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_4_WALL = registerBlock("stone_4_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+    public static final DeferredBlock<Block> STONE_6_BLOCK = registerBlock("stone_6",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_6_STAIRS = registerBlock("stone_6_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_6_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_6_SLAB = registerBlock("stone_6_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_6_WALL = registerBlock("stone_6_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+    public static final DeferredBlock<Block> STONE_7_BLOCK = registerBlock("stone_7",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_7_STAIRS = registerBlock("stone_7_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_7_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_7_SLAB = registerBlock("stone_7_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_7_WALL = registerBlock("stone_7_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+    public static final DeferredBlock<Block> STONE_8_BLOCK = registerBlock("stone_8",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_8_STAIRS = registerBlock("stone_8_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_8_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_8_SLAB = registerBlock("stone_8_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_8_WALL = registerBlock("stone_8_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+    public static final DeferredBlock<Block> STONE_9_BLOCK = registerBlock("stone_9",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_9_STAIRS = registerBlock("stone_9_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_9_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_9_SLAB = registerBlock("stone_9_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_9_WALL = registerBlock("stone_9_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+    public static final DeferredBlock<Block> STONE_10_BLOCK = registerBlock("stone_10",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_10_STAIRS = registerBlock("stone_10_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_10_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_10_SLAB = registerBlock("stone_10_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_10_WALL = registerBlock("stone_10_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+    public static final DeferredBlock<Block> STONE_11_BLOCK = registerBlock("stone_11",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_11_STAIRS = registerBlock("stone_11_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_11_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_11_SLAB = registerBlock("stone_11_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_11_WALL = registerBlock("stone_11_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+    public static final DeferredBlock<Block> STONE_12_BLOCK = registerBlock("stone_12",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_12_STAIRS = registerBlock("stone_12_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_12_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_12_SLAB = registerBlock("stone_12_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_12_WALL = registerBlock("stone_12_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+    public static final DeferredBlock<Block> STONE_13_BLOCK = registerBlock("stone_13",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_13_STAIRS = registerBlock("stone_13_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_13_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_13_SLAB = registerBlock("stone_13_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_13_WALL = registerBlock("stone_13_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+    public static final DeferredBlock<Block> STONE_14_BLOCK = registerBlock("stone_14",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_14_STAIRS = registerBlock("stone_14_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_14_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_14_SLAB = registerBlock("stone_14_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_14_WALL = registerBlock("stone_14_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+    // public static final DeferredBlock<Block> STONE_15_BLOCK = registerBlock("stone_15",
+    //       Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    //public static final DeferredBlock<Block> STONE_15_STAIRS = registerBlock("stone_15_stairs",
+    //      properties -> new StairBlock(ModBLocks.STONE_15_BLOCK.get().defaultBlockState(),
+    //            properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    //public static final DeferredBlock<Block> STONE_15_SLAB = registerBlock("stone_15_slab",
+    //      SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    //public static final DeferredBlock<Block> STONE_15_WALL = registerBlock("stone_15_wall",
+    //      WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+    public static final DeferredBlock<Block> STONE_16_BLOCK = registerBlock("stone_16",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_16_STAIRS = registerBlock("stone_16_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_16_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_16_SLAB = registerBlock("stone_16_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_16_WALL = registerBlock("stone_16_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+    public static final DeferredBlock<Block> STONE_17_BLOCK = registerBlock("stone_17",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_17_STAIRS = registerBlock("stone_17_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_17_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_17_SLAB = registerBlock("stone_17_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_17_WALL = registerBlock("stone_17_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+    public static final DeferredBlock<Block> STONE_18_BLOCK = registerBlock("stone_18",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_18_STAIRS = registerBlock("stone_18_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_18_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_18_SLAB = registerBlock("stone_18_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_18_WALL = registerBlock("stone_18_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+
+    // For 20
+    public static final DeferredBlock<Block> STONE_20_BLOCK = registerBlock("stone_20",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_20_STAIRS = registerBlock("stone_20_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_20_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_20_SLAB = registerBlock("stone_20_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_20_WALL = registerBlock("stone_20_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+
+    // For 21
+    public static final DeferredBlock<Block> STONE_21_BLOCK = registerBlock("stone_21",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_21_STAIRS = registerBlock("stone_21_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_21_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_21_SLAB = registerBlock("stone_21_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_21_WALL = registerBlock("stone_21_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+
+    // For 22
+    public static final DeferredBlock<Block> STONE_22_BLOCK = registerBlock("stone_22",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_22_STAIRS = registerBlock("stone_22_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_22_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_22_SLAB = registerBlock("stone_22_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_22_WALL = registerBlock("stone_22_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+
+    // STONE 24
+    public static final DeferredBlock<Block> STONE_24_BLOCK = registerBlock("stone_24",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_24_STAIRS = registerBlock("stone_24_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_24_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_24_SLAB = registerBlock("stone_24_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_24_WALL = registerBlock("stone_24_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+
+    // STONE 25
+    public static final DeferredBlock<Block> STONE_25_BLOCK = registerBlock("stone_25",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_25_STAIRS = registerBlock("stone_25_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_25_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_25_SLAB = registerBlock("stone_25_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_25_WALL = registerBlock("stone_25_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+
+    // STONE 26
+    public static final DeferredBlock<Block> STONE_26_BLOCK = registerBlock("stone_26",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_26_STAIRS = registerBlock("stone_26_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_26_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_26_SLAB = registerBlock("stone_26_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_26_WALL = registerBlock("stone_26_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+
+    // STONE 27
+    public static final DeferredBlock<Block> STONE_27_BLOCK = registerBlock("stone_27",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_27_STAIRS = registerBlock("stone_27_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_27_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_27_SLAB = registerBlock("stone_27_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_27_WALL = registerBlock("stone_27_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+
+    // STONE 28
+    public static final DeferredBlock<Block> STONE_28_BLOCK = registerBlock("stone_28",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_28_STAIRS = registerBlock("stone_28_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_28_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_28_SLAB = registerBlock("stone_28_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_28_WALL = registerBlock("stone_28_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+
+    // STONE 29
+    public static final DeferredBlock<Block> STONE_29_BLOCK = registerBlock("stone_29",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_29_STAIRS = registerBlock("stone_29_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_29_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_29_SLAB = registerBlock("stone_29_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_29_WALL = registerBlock("stone_29_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+
+    // STONE 30
+    public static final DeferredBlock<Block> STONE_30_BLOCK = registerBlock("stone_30",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_30_STAIRS = registerBlock("stone_30_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_30_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_30_SLAB = registerBlock("stone_30_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_30_WALL = registerBlock("stone_30_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+
+    public static final DeferredBlock<Block> STONE_31_BLOCK = registerBlock("stone_31",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_31_STAIRS = registerBlock("stone_31_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_31_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_31_SLAB = registerBlock("stone_31_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_31_WALL = registerBlock("stone_31_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+
+    public static final DeferredBlock<Block> STONE_32_BLOCK = registerBlock("stone_32",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_32_STAIRS = registerBlock("stone_32_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_32_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_32_SLAB = registerBlock("stone_32_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_32_WALL = registerBlock("stone_32_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+
+    public static final DeferredBlock<Block> STONE_33_BLOCK = registerBlock("stone_33",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_33_STAIRS = registerBlock("stone_33_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_33_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_33_SLAB = registerBlock("stone_33_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_33_WALL = registerBlock("stone_33_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+
+    public static final DeferredBlock<Block> STONE_34_BLOCK = registerBlock("stone_34",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_34_STAIRS = registerBlock("stone_34_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_34_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_34_SLAB = registerBlock("stone_34_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_34_WALL = registerBlock("stone_34_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+
+    public static final DeferredBlock<Block> STONE_35_BLOCK = registerBlock("stone_35",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_35_STAIRS = registerBlock("stone_35_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_35_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_35_SLAB = registerBlock("stone_35_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_35_WALL = registerBlock("stone_35_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+
+    public static final DeferredBlock<Block> STONE_36_BLOCK = registerBlock("stone_36",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_36_STAIRS = registerBlock("stone_36_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_36_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_36_SLAB = registerBlock("stone_36_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_36_WALL = registerBlock("stone_36_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+
+    public static final DeferredBlock<Block> STONE_37_BLOCK = registerBlock("stone_37",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_37_STAIRS = registerBlock("stone_37_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_37_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_37_SLAB = registerBlock("stone_37_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_37_WALL = registerBlock("stone_37_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+
+    public static final DeferredBlock<Block> STONE_38_BLOCK = registerBlock("stone_38",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
+    public static final DeferredBlock<Block> STONE_38_STAIRS = registerBlock("stone_38_stairs",
+            properties -> new StairBlock(ModBLocks.STONE_38_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS));
+    public static final DeferredBlock<Block> STONE_38_SLAB = registerBlock("stone_38_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB));
+    public static final DeferredBlock<Block> STONE_38_WALL = registerBlock("stone_38_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL));
+
     public static final DeferredBlock<Block> SSTONE_1_BLOCK = registerBlock("sstone_1",
             Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f));
     public static final DeferredBlock<Block> SSTONE_1_STAIRS = registerBlock("sstone_1_stairs",

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "agotmod:redkeep_31",
+  "result": {
+    "count": 1,
+    "id": "agotmod:redkeep_31_stairs"
+  }
+}

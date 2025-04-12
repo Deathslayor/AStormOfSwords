@@ -647,6 +647,164 @@ public class ModCreativeBuildingBlocks {
                         pOutput.accept(ModBLocks.REDKEEP_38_SLAB.get());
                         pOutput.accept(ModBLocks.REDKEEP_38_WALL.get());
 
+                        // Accepting REDKEEP block types with various item models (BLOCK, STAIRS, SLAB, WALL)
+                        pOutput.accept(ModBLocks.STONE_1_BLOCK.get());
+                        pOutput.accept(ModBLocks.STONE_1_STAIRS.get());
+                        pOutput.accept(ModBLocks.STONE_1_SLAB.get());
+                        pOutput.accept(ModBLocks.STONE_1_WALL.get());
+
+                        pOutput.accept(ModBLocks.STONE_2_BLOCK.get());
+                        pOutput.accept(ModBLocks.STONE_2_STAIRS.get());
+                        pOutput.accept(ModBLocks.STONE_2_SLAB.get());
+                        pOutput.accept(ModBLocks.STONE_2_WALL.get());
+
+                        pOutput.accept(ModBLocks.STONE_3_BLOCK.get());
+                        pOutput.accept(ModBLocks.STONE_3_STAIRS.get());
+                        pOutput.accept(ModBLocks.STONE_3_SLAB.get());
+                        pOutput.accept(ModBLocks.STONE_3_WALL.get());
+
+                        pOutput.accept(ModBLocks.STONE_4_BLOCK.get());
+                        pOutput.accept(ModBLocks.STONE_4_STAIRS.get());
+                        pOutput.accept(ModBLocks.STONE_4_SLAB.get());
+                        pOutput.accept(ModBLocks.STONE_4_WALL.get());
+
+                        pOutput.accept(ModBLocks.STONE_6_BLOCK.get());
+                        pOutput.accept(ModBLocks.STONE_6_STAIRS.get());
+                        pOutput.accept(ModBLocks.STONE_6_SLAB.get());
+                        pOutput.accept(ModBLocks.STONE_6_WALL.get());
+
+                        pOutput.accept(ModBLocks.STONE_7_BLOCK.get());
+                        pOutput.accept(ModBLocks.STONE_7_STAIRS.get());
+                        pOutput.accept(ModBLocks.STONE_7_SLAB.get());
+                        pOutput.accept(ModBLocks.STONE_7_WALL.get());
+
+                        pOutput.accept(ModBLocks.STONE_8_BLOCK.get());
+                        pOutput.accept(ModBLocks.STONE_8_STAIRS.get());
+                        pOutput.accept(ModBLocks.STONE_8_SLAB.get());
+                        pOutput.accept(ModBLocks.STONE_8_WALL.get());
+
+                        pOutput.accept(ModBLocks.STONE_9_BLOCK.get());
+                        pOutput.accept(ModBLocks.STONE_9_STAIRS.get());
+                        pOutput.accept(ModBLocks.STONE_9_SLAB.get());
+                        pOutput.accept(ModBLocks.STONE_9_WALL.get());
+
+                        pOutput.accept(ModBLocks.STONE_10_BLOCK.get());
+                        pOutput.accept(ModBLocks.STONE_10_STAIRS.get());
+                        pOutput.accept(ModBLocks.STONE_10_SLAB.get());
+                        pOutput.accept(ModBLocks.STONE_10_WALL.get());
+
+                        pOutput.accept(ModBLocks.STONE_11_BLOCK.get());
+                        pOutput.accept(ModBLocks.STONE_11_STAIRS.get());
+                        pOutput.accept(ModBLocks.STONE_11_SLAB.get());
+                        pOutput.accept(ModBLocks.STONE_11_WALL.get());
+
+                        pOutput.accept(ModBLocks.STONE_12_BLOCK.get());
+                        pOutput.accept(ModBLocks.STONE_12_STAIRS.get());
+                        pOutput.accept(ModBLocks.STONE_12_SLAB.get());
+                        pOutput.accept(ModBLocks.STONE_12_WALL.get());
+
+                        pOutput.accept(ModBLocks.STONE_13_BLOCK.get());
+                        pOutput.accept(ModBLocks.STONE_13_STAIRS.get());
+                        pOutput.accept(ModBLocks.STONE_13_SLAB.get());
+                        pOutput.accept(ModBLocks.STONE_13_WALL.get());
+
+                        pOutput.accept(ModBLocks.STONE_14_BLOCK.get());
+                        pOutput.accept(ModBLocks.STONE_14_STAIRS.get());
+                        pOutput.accept(ModBLocks.STONE_14_SLAB.get());
+                        pOutput.accept(ModBLocks.STONE_14_WALL.get());
+
+                        pOutput.accept(ModBLocks.STONE_20_BLOCK.get());
+                        pOutput.accept(ModBLocks.STONE_20_STAIRS.get());
+                        pOutput.accept(ModBLocks.STONE_20_SLAB.get());
+                        pOutput.accept(ModBLocks.STONE_20_WALL.get());
+
+                        pOutput.accept(ModBLocks.STONE_21_BLOCK.get());
+                        pOutput.accept(ModBLocks.STONE_21_STAIRS.get());
+                        pOutput.accept(ModBLocks.STONE_21_SLAB.get());
+                        pOutput.accept(ModBLocks.STONE_21_WALL.get());
+
+                        pOutput.accept(ModBLocks.STONE_22_BLOCK.get());
+                        pOutput.accept(ModBLocks.STONE_22_STAIRS.get());
+                        pOutput.accept(ModBLocks.STONE_22_SLAB.get());
+                        pOutput.accept(ModBLocks.STONE_22_WALL.get());
+
+                        pOutput.accept(ModBLocks.STONE_24_BLOCK.get());
+                        pOutput.accept(ModBLocks.STONE_24_STAIRS.get());
+                        pOutput.accept(ModBLocks.STONE_24_SLAB.get());
+                        pOutput.accept(ModBLocks.STONE_24_WALL.get());
+
+                        pOutput.accept(ModBLocks.STONE_25_BLOCK.get());
+                        pOutput.accept(ModBLocks.STONE_25_STAIRS.get());
+                        pOutput.accept(ModBLocks.STONE_25_SLAB.get());
+                        pOutput.accept(ModBLocks.STONE_25_WALL.get());
+
+                        pOutput.accept(ModBLocks.STONE_26_BLOCK.get());
+                        pOutput.accept(ModBLocks.STONE_26_STAIRS.get());
+                        pOutput.accept(ModBLocks.STONE_26_SLAB.get());
+                        pOutput.accept(ModBLocks.STONE_26_WALL.get());
+
+                        pOutput.accept(ModBLocks.STONE_27_BLOCK.get());
+                        pOutput.accept(ModBLocks.STONE_27_STAIRS.get());
+                        pOutput.accept(ModBLocks.STONE_27_SLAB.get());
+                        pOutput.accept(ModBLocks.STONE_27_WALL.get());
+
+                        pOutput.accept(ModBLocks.STONE_28_BLOCK.get());
+                        pOutput.accept(ModBLocks.STONE_28_STAIRS.get());
+                        pOutput.accept(ModBLocks.STONE_28_SLAB.get());
+                        pOutput.accept(ModBLocks.STONE_28_WALL.get());
+
+                        pOutput.accept(ModBLocks.STONE_29_BLOCK.get());
+                        pOutput.accept(ModBLocks.STONE_29_STAIRS.get());
+                        pOutput.accept(ModBLocks.STONE_29_SLAB.get());
+                        pOutput.accept(ModBLocks.STONE_29_WALL.get());
+
+                        pOutput.accept(ModBLocks.STONE_30_BLOCK.get());
+                        pOutput.accept(ModBLocks.STONE_30_STAIRS.get());
+                        pOutput.accept(ModBLocks.STONE_30_SLAB.get());
+                        pOutput.accept(ModBLocks.STONE_30_WALL.get());
+
+                        pOutput.accept(ModBLocks.STONE_31_BLOCK.get());
+                        pOutput.accept(ModBLocks.STONE_31_STAIRS.get());
+                        pOutput.accept(ModBLocks.STONE_31_SLAB.get());
+                        pOutput.accept(ModBLocks.STONE_31_WALL.get());
+
+                        pOutput.accept(ModBLocks.STONE_32_BLOCK.get());
+                        pOutput.accept(ModBLocks.STONE_32_STAIRS.get());
+                        pOutput.accept(ModBLocks.STONE_32_SLAB.get());
+                        pOutput.accept(ModBLocks.STONE_32_WALL.get());
+
+                        pOutput.accept(ModBLocks.STONE_33_BLOCK.get());
+                        pOutput.accept(ModBLocks.STONE_33_STAIRS.get());
+                        pOutput.accept(ModBLocks.STONE_33_SLAB.get());
+                        pOutput.accept(ModBLocks.STONE_33_WALL.get());
+
+                        pOutput.accept(ModBLocks.STONE_34_BLOCK.get());
+                        pOutput.accept(ModBLocks.STONE_34_STAIRS.get());
+                        pOutput.accept(ModBLocks.STONE_34_SLAB.get());
+                        pOutput.accept(ModBLocks.STONE_34_WALL.get());
+
+                        pOutput.accept(ModBLocks.STONE_35_BLOCK.get());
+                        pOutput.accept(ModBLocks.STONE_35_STAIRS.get());
+                        pOutput.accept(ModBLocks.STONE_35_SLAB.get());
+                        pOutput.accept(ModBLocks.STONE_35_WALL.get());
+
+                        pOutput.accept(ModBLocks.STONE_36_BLOCK.get());
+                        pOutput.accept(ModBLocks.STONE_36_STAIRS.get());
+                        pOutput.accept(ModBLocks.STONE_36_SLAB.get());
+                        pOutput.accept(ModBLocks.STONE_36_WALL.get());
+
+                        pOutput.accept(ModBLocks.STONE_37_BLOCK.get());
+                        pOutput.accept(ModBLocks.STONE_37_STAIRS.get());
+                        pOutput.accept(ModBLocks.STONE_37_SLAB.get());
+                        pOutput.accept(ModBLocks.STONE_37_WALL.get());
+
+                        pOutput.accept(ModBLocks.STONE_38_BLOCK.get());
+                        pOutput.accept(ModBLocks.STONE_38_STAIRS.get());
+                        pOutput.accept(ModBLocks.STONE_38_SLAB.get());
+                        pOutput.accept(ModBLocks.STONE_38_WALL.get());
+
+
+
 
 
 

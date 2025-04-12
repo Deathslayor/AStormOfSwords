@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_redkeep_26": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:redkeep_26"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:redkeep_26_stairs_from_redkeep_26_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_redkeep_26"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:redkeep_26_stairs_from_redkeep_26_block"
+    ]
+  }
+}

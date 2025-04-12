@@ -1058,6 +1058,197 @@
   "block.agotmod.redkeep_38_slab": "Red Keep Stone Variant 38 Slab",
   "block.agotmod.redkeep_38_wall": "Red Keep Stone Variant 38 Wall",
 
+  "block.agotmod.stone_1": "Stone Variant 1 Block",
+  "block.agotmod.stone_1_stairs": "Stone Variant 1 Stairs",
+  "block.agotmod.stone_1_slab": "Stone Variant 1 Slab",
+  "block.agotmod.stone_1_wall": "Stone Variant 1 Wall",
+
+  "block.agotmod.stone_2": "Stone Variant 2 Block",
+  "block.agotmod.stone_2_stairs": "Stone Variant 2 Stairs",
+  "block.agotmod.stone_2_slab": "Stone Variant 2 Slab",
+  "block.agotmod.stone_2_wall": "Stone Variant 2 Wall",
+
+  "block.agotmod.stone_3": "Stone Variant 3 Block",
+  "block.agotmod.stone_3_stairs": "Stone Variant 3 Stairs",
+  "block.agotmod.stone_3_slab": "Stone Variant 3 Slab",
+  "block.agotmod.stone_3_wall": "Stone Variant 3 Wall",
+
+  "block.agotmod.stone_4": "Stone Variant 4 Block",
+  "block.agotmod.stone_4_stairs": "Stone Variant 4 Stairs",
+  "block.agotmod.stone_4_slab": "Stone Variant 4 Slab",
+  "block.agotmod.stone_4_wall": "Stone Variant 4 Wall",
+
+  "block.agotmod.stone_5": "Stone Variant 5 Block",
+  "block.agotmod.stone_5_stairs": "Stone Variant 5 Stairs",
+  "block.agotmod.stone_5_slab": "Stone Variant 5 Slab",
+  "block.agotmod.stone_5_wall": "Stone Variant 5 Wall",
+
+  "block.agotmod.stone_6": "Stone Variant 6 Block",
+  "block.agotmod.stone_6_stairs": "Stone Variant 6 Stairs",
+  "block.agotmod.stone_6_slab": "Stone Variant 6 Slab",
+  "block.agotmod.stone_6_wall": "Stone Variant 6 Wall",
+
+  "block.agotmod.stone_7": "Stone Variant 7 Block",
+  "block.agotmod.stone_7_stairs": "Stone Variant 7 Stairs",
+  "block.agotmod.stone_7_slab": "Stone Variant 7 Slab",
+  "block.agotmod.stone_7_wall": "Stone Variant 7 Wall",
+
+  "block.agotmod.stone_8": "Stone Variant 8 Block",
+  "block.agotmod.stone_8_stairs": "Stone Variant 8 Stairs",
+  "block.agotmod.stone_8_slab": "Stone Variant 8 Slab",
+  "block.agotmod.stone_8_wall": "Stone Variant 8 Wall",
+
+  "block.agotmod.stone_9": "Stone Variant 9 Block",
+  "block.agotmod.stone_9_stairs": "Stone Variant 9 Stairs",
+  "block.agotmod.stone_9_slab": "Stone Variant 9 Slab",
+  "block.agotmod.stone_9_wall": "Stone Variant 9 Wall",
+
+  "block.agotmod.stone_10": "Stone Variant 10 Block",
+  "block.agotmod.stone_10_stairs": "Stone Variant 10 Stairs",
+  "block.agotmod.stone_10_slab": "Stone Variant 10 Slab",
+  "block.agotmod.stone_10_wall": "Stone Variant 10 Wall",
+
+  "block.agotmod.stone_11": "Stone Variant 11 Block",
+  "block.agotmod.stone_11_stairs": "Stone Variant 11 Stairs",
+  "block.agotmod.stone_11_slab": "Stone Variant 11 Slab",
+  "block.agotmod.stone_11_wall": "Stone Variant 11 Wall",
+
+  "block.agotmod.stone_12": "Stone Variant 12 Block",
+  "block.agotmod.stone_12_stairs": "Stone Variant 12 Stairs",
+  "block.agotmod.stone_12_slab": "Stone Variant 12 Slab",
+  "block.agotmod.stone_12_wall": "Stone Variant 12 Wall",
+
+  "block.agotmod.stone_13": "Stone Variant 13 Block",
+  "block.agotmod.stone_13_stairs": "Stone Variant 13 Stairs",
+  "block.agotmod.stone_13_slab": "Stone Variant 13 Slab",
+  "block.agotmod.stone_13_wall": "Stone Variant 13 Wall",
+
+  "block.agotmod.stone_14": "Stone Variant 14 Block",
+  "block.agotmod.stone_14_stairs": "Stone Variant 14 Stairs",
+  "block.agotmod.stone_14_slab": "Stone Variant 14 Slab",
+  "block.agotmod.stone_14_wall": "Stone Variant 14 Wall",
+
+  "block.agotmod.stone_15": "Stone Variant 15 Block",
+  "block.agotmod.stone_15_stairs": "Stone Variant 15 Stairs",
+  "block.agotmod.stone_15_slab": "Stone Variant 15 Slab",
+  "block.agotmod.stone_15_wall": "Stone Variant 15 Wall",
+
+  "block.agotmod.stone_16": "Stone Variant 16 Block",
+  "block.agotmod.stone_16_stairs": "Stone Variant 16 Stairs",
+  "block.agotmod.stone_16_slab": "Stone Variant 16 Slab",
+  "block.agotmod.stone_16_wall": "Stone Variant 16 Wall",
+
+  "block.agotmod.stone_17": "Stone Variant 17 Block",
+  "block.agotmod.stone_17_stairs": "Stone Variant 17 Stairs",
+  "block.agotmod.stone_17_slab": "Stone Variant 17 Slab",
+  "block.agotmod.stone_17_wall": "Stone Variant 17 Wall",
+
+  "block.agotmod.stone_18": "Stone Variant 18 Block",
+  "block.agotmod.stone_18_stairs": "Stone Variant 18 Stairs",
+  "block.agotmod.stone_18_slab": "Stone Variant 18 Slab",
+  "block.agotmod.stone_18_wall": "Stone Variant 18 Wall",
+
+  "block.agotmod.stone_19": "Stone Variant 19 Block",
+  "block.agotmod.stone_19_stairs": "Stone Variant 19 Stairs",
+  "block.agotmod.stone_19_slab": "Stone Variant 19 Slab",
+  "block.agotmod.stone_19_wall": "Stone Variant 19 Wall",
+
+  "block.agotmod.stone_20": "Stone Variant 20 Block",
+  "block.agotmod.stone_20_stairs": "Stone Variant 20 Stairs",
+  "block.agotmod.stone_20_slab": "Stone Variant 20 Slab",
+  "block.agotmod.stone_20_wall": "Stone Variant 20 Wall",
+
+  "block.agotmod.stone_21": "Stone Variant 21 Block",
+  "block.agotmod.stone_21_stairs": "Stone Variant 21 Stairs",
+  "block.agotmod.stone_21_slab": "Stone Variant 21 Slab",
+  "block.agotmod.stone_21_wall": "Stone Variant 21 Wall",
+
+  "block.agotmod.stone_22": "Stone Variant 22 Block",
+  "block.agotmod.stone_22_stairs": "Stone Variant 22 Stairs",
+  "block.agotmod.stone_22_slab": "Stone Variant 22 Slab",
+  "block.agotmod.stone_22_wall": "Stone Variant 22 Wall",
+
+  "block.agotmod.stone_23": "Stone Variant 23 Block",
+  "block.agotmod.stone_23_stairs": "Stone Variant 23 Stairs",
+  "block.agotmod.stone_23_slab": "Stone Variant 23 Slab",
+  "block.agotmod.stone_23_wall": "Stone Variant 23 Wall",
+
+  "block.agotmod.stone_24": "Stone Variant 24 Block",
+  "block.agotmod.stone_24_stairs": "Stone Variant 24 Stairs",
+  "block.agotmod.stone_24_slab": "Stone Variant 24 Slab",
+  "block.agotmod.stone_24_wall": "Stone Variant 24 Wall",
+
+  "block.agotmod.stone_25": "Stone Variant 25 Block",
+  "block.agotmod.stone_25_stairs": "Stone Variant 25 Stairs",
+  "block.agotmod.stone_25_slab": "Stone Variant 25 Slab",
+  "block.agotmod.stone_25_wall": "Stone Variant 25 Wall",
+
+  "block.agotmod.stone_26": "Stone Variant 26 Block",
+  "block.agotmod.stone_26_stairs": "Stone Variant 26 Stairs",
+  "block.agotmod.stone_26_slab": "Stone Variant 26 Slab",
+  "block.agotmod.stone_26_wall": "Stone Variant 26 Wall",
+
+  "block.agotmod.stone_27": "Stone Variant 27 Block",
+  "block.agotmod.stone_27_stairs": "Stone Variant 27 Stairs",
+  "block.agotmod.stone_27_slab": "Stone Variant 27 Slab",
+  "block.agotmod.stone_27_wall": "Stone Variant 27 Wall",
+
+  "block.agotmod.stone_28": "Stone Variant 28 Block",
+  "block.agotmod.stone_28_stairs": "Stone Variant 28 Stairs",
+  "block.agotmod.stone_28_slab": "Stone Variant 28 Slab",
+  "block.agotmod.stone_28_wall": "Stone Variant 28 Wall",
+
+  "block.agotmod.stone_29": "Stone Variant 29 Block",
+  "block.agotmod.stone_29_stairs": "Stone Variant 29 Stairs",
+  "block.agotmod.stone_29_slab": "Stone Variant 29 Slab",
+  "block.agotmod.stone_29_wall": "Stone Variant 29 Wall",
+
+  "block.agotmod.stone_30": "Stone Variant 30 Block",
+  "block.agotmod.stone_30_stairs": "Stone Variant 30 Stairs",
+  "block.agotmod.stone_30_slab": "Stone Variant 30 Slab",
+  "block.agotmod.stone_30_wall": "Stone Variant 30 Wall",
+
+  "block.agotmod.stone_31": "Stone Variant 31 Block",
+  "block.agotmod.stone_31_stairs": "Stone Variant 31 Stairs",
+  "block.agotmod.stone_31_slab": "Stone Variant 31 Slab",
+  "block.agotmod.stone_31_wall": "Stone Variant 31 Wall",
+
+  "block.agotmod.stone_32": "Stone Variant 32 Block",
+  "block.agotmod.stone_32_stairs": "Stone Variant 32 Stairs",
+  "block.agotmod.stone_32_slab": "Stone Variant 32 Slab",
+  "block.agotmod.stone_32_wall": "Stone Variant 32 Wall",
+
+  "block.agotmod.stone_33": "Stone Variant 33 Block",
+  "block.agotmod.stone_33_stairs": "Stone Variant 33 Stairs",
+  "block.agotmod.stone_33_slab": "Stone Variant 33 Slab",
+  "block.agotmod.stone_33_wall": "Stone Variant 33 Wall",
+
+  "block.agotmod.stone_34": "Stone Variant 34 Block",
+  "block.agotmod.stone_34_stairs": "Stone Variant 34 Stairs",
+  "block.agotmod.stone_34_slab": "Stone Variant 34 Slab",
+  "block.agotmod.stone_34_wall": "Stone Variant 34 Wall",
+
+  "block.agotmod.stone_35": "Stone Variant 35 Block",
+  "block.agotmod.stone_35_stairs": "Stone Variant 35 Stairs",
+  "block.agotmod.stone_35_slab": "Stone Variant 35 Slab",
+  "block.agotmod.stone_35_wall": "Stone Variant 35 Wall",
+
+  "block.agotmod.stone_36": "Stone Variant 36 Block",
+  "block.agotmod.stone_36_stairs": "Stone Variant 36 Stairs",
+  "block.agotmod.stone_36_slab": "Stone Variant 36 Slab",
+  "block.agotmod.stone_36_wall": "Stone Variant 36 Wall",
+
+  "block.agotmod.stone_37": "Stone Variant 37 Block",
+  "block.agotmod.stone_37_stairs": "Stone Variant 37 Stairs",
+  "block.agotmod.stone_37_slab": "Stone Variant 37 Slab",
+  "block.agotmod.stone_37_wall": "Stone Variant 37 Wall",
+
+  "block.agotmod.stone_38": "Stone Variant 38 Block",
+  "block.agotmod.stone_38_stairs": "Stone Variant 38 Stairs",
+  "block.agotmod.stone_38_slab": "Stone Variant 38 Slab",
+  "block.agotmod.stone_38_wall": "Stone Variant 38 Wall",
+
+
 
 
 
