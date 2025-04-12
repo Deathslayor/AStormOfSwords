@@ -1813,7 +1813,195 @@
   "block.agotmod.calcite_38_slab": "Calcite Stone Variant 38 Slab",
   "block.agotmod.calcite_38_wall": "Calcite Stone Variant 38 Wall",
 
+  "block.agotmod.cdeepslate_1": "Deepslate Variant 1 Block",
+  "block.agotmod.cdeepslate_1_stairs": "Deepslate Variant 1 Stairs",
+  "block.agotmod.cdeepslate_1_slab": "Deepslate Variant 1 Slab",
+  "block.agotmod.cdeepslate_1_wall": "Deepslate Variant 1 Wall",
 
+  "block.agotmod.cdeepslate_2": "Deepslate Variant 2 Block",
+  "block.agotmod.cdeepslate_2_stairs": "Deepslate Variant 2 Stairs",
+  "block.agotmod.cdeepslate_2_slab": "Deepslate Variant 2 Slab",
+  "block.agotmod.cdeepslate_2_wall": "Deepslate Variant 2 Wall",
+
+  "block.agotmod.cdeepslate_3": "Deepslate Variant 3 Block",
+  "block.agotmod.cdeepslate_3_stairs": "Deepslate Variant 3 Stairs",
+  "block.agotmod.cdeepslate_3_slab": "Deepslate Variant 3 Slab",
+  "block.agotmod.cdeepslate_3_wall": "Deepslate Variant 3 Wall",
+
+  "block.agotmod.cdeepslate_4": "Deepslate Variant 4 Block",
+  "block.agotmod.cdeepslate_4_stairs": "Deepslate Variant 4 Stairs",
+  "block.agotmod.cdeepslate_4_slab": "Deepslate Variant 4 Slab",
+  "block.agotmod.cdeepslate_4_wall": "Deepslate Variant 4 Wall",
+
+  "block.agotmod.cdeepslate_5": "Deepslate Variant 5 Block",
+  "block.agotmod.cdeepslate_5_stairs": "Deepslate Variant 5 Stairs",
+  "block.agotmod.cdeepslate_5_slab": "Deepslate Variant 5 Slab",
+  "block.agotmod.cdeepslate_5_wall": "Deepslate Variant 5 Wall",
+
+  "block.agotmod.cdeepslate_6": "Deepslate Variant 6 Block",
+  "block.agotmod.cdeepslate_6_stairs": "Deepslate Variant 6 Stairs",
+  "block.agotmod.cdeepslate_6_slab": "Deepslate Variant 6 Slab",
+  "block.agotmod.cdeepslate_6_wall": "Deepslate Variant 6 Wall",
+
+  "block.agotmod.cdeepslate_7": "Deepslate Variant 7 Block",
+  "block.agotmod.cdeepslate_7_stairs": "Deepslate Variant 7 Stairs",
+  "block.agotmod.cdeepslate_7_slab": "Deepslate Variant 7 Slab",
+  "block.agotmod.cdeepslate_7_wall": "Deepslate Variant 7 Wall",
+
+  "block.agotmod.cdeepslate_8": "Deepslate Variant 8 Block",
+  "block.agotmod.cdeepslate_8_stairs": "Deepslate Variant 8 Stairs",
+  "block.agotmod.cdeepslate_8_slab": "Deepslate Variant 8 Slab",
+  "block.agotmod.cdeepslate_8_wall": "Deepslate Variant 8 Wall",
+
+  "block.agotmod.cdeepslate_9": "Deepslate Variant 9 Block",
+  "block.agotmod.cdeepslate_9_stairs": "Deepslate Variant 9 Stairs",
+  "block.agotmod.cdeepslate_9_slab": "Deepslate Variant 9 Slab",
+  "block.agotmod.cdeepslate_9_wall": "Deepslate Variant 9 Wall",
+
+  "block.agotmod.cdeepslate_10": "Deepslate Variant 10 Block",
+  "block.agotmod.cdeepslate_10_stairs": "Deepslate Variant 10 Stairs",
+  "block.agotmod.cdeepslate_10_slab": "Deepslate Variant 10 Slab",
+  "block.agotmod.cdeepslate_10_wall": "Deepslate Variant 10 Wall",
+
+  "block.agotmod.cdeepslate_11": "Deepslate Variant 11 Block",
+  "block.agotmod.cdeepslate_11_stairs": "Deepslate Variant 11 Stairs",
+  "block.agotmod.cdeepslate_11_slab": "Deepslate Variant 11 Slab",
+  "block.agotmod.cdeepslate_11_wall": "Deepslate Variant 11 Wall",
+
+  "block.agotmod.cdeepslate_12": "Deepslate Variant 12 Block",
+  "block.agotmod.cdeepslate_12_stairs": "Deepslate Variant 12 Stairs",
+  "block.agotmod.cdeepslate_12_slab": "Deepslate Variant 12 Slab",
+  "block.agotmod.cdeepslate_12_wall": "Deepslate Variant 12 Wall",
+
+  "block.agotmod.cdeepslate_13": "Deepslate Variant 13 Block",
+  "block.agotmod.cdeepslate_13_stairs": "Deepslate Variant 13 Stairs",
+  "block.agotmod.cdeepslate_13_slab": "Deepslate Variant 13 Slab",
+  "block.agotmod.cdeepslate_13_wall": "Deepslate Variant 13 Wall",
+
+  "block.agotmod.cdeepslate_14": "Deepslate Variant 14 Block",
+  "block.agotmod.cdeepslate_14_stairs": "Deepslate Variant 14 Stairs",
+  "block.agotmod.cdeepslate_14_slab": "Deepslate Variant 14 Slab",
+  "block.agotmod.cdeepslate_14_wall": "Deepslate Variant 14 Wall",
+
+  "block.agotmod.cdeepslate_15": "Deepslate Variant 15 Block",
+  "block.agotmod.cdeepslate_15_stairs": "Deepslate Variant 15 Stairs",
+  "block.agotmod.cdeepslate_15_slab": "Deepslate Variant 15 Slab",
+  "block.agotmod.cdeepslate_15_wall": "Deepslate Variant 15 Wall",
+
+  "block.agotmod.cdeepslate_16": "Deepslate Variant 16 Block",
+  "block.agotmod.cdeepslate_16_stairs": "Deepslate Variant 16 Stairs",
+  "block.agotmod.cdeepslate_16_slab": "Deepslate Variant 16 Slab",
+  "block.agotmod.cdeepslate_16_wall": "Deepslate Variant 16 Wall",
+
+  "block.agotmod.cdeepslate_17": "Deepslate Variant 17 Block",
+  "block.agotmod.cdeepslate_17_stairs": "Deepslate Variant 17 Stairs",
+  "block.agotmod.cdeepslate_17_slab": "Deepslate Variant 17 Slab",
+  "block.agotmod.cdeepslate_17_wall": "Deepslate Variant 17 Wall",
+
+  "block.agotmod.cdeepslate_18": "Deepslate Variant 18 Block",
+  "block.agotmod.cdeepslate_18_stairs": "Deepslate Variant 18 Stairs",
+  "block.agotmod.cdeepslate_18_slab": "Deepslate Variant 18 Slab",
+  "block.agotmod.cdeepslate_18_wall": "Deepslate Variant 18 Wall",
+
+  "block.agotmod.cdeepslate_19": "Deepslate Variant 19 Block",
+  "block.agotmod.cdeepslate_19_stairs": "Deepslate Variant 19 Stairs",
+  "block.agotmod.cdeepslate_19_slab": "Deepslate Variant 19 Slab",
+  "block.agotmod.cdeepslate_19_wall": "Deepslate Variant 19 Wall",
+
+  "block.agotmod.cdeepslate_20": "Deepslate Variant 20 Block",
+  "block.agotmod.cdeepslate_20_stairs": "Deepslate Variant 20 Stairs",
+  "block.agotmod.cdeepslate_20_slab": "Deepslate Variant 20 Slab",
+  "block.agotmod.cdeepslate_20_wall": "Deepslate Variant 20 Wall",
+
+  "block.agotmod.cdeepslate_21": "Deepslate Variant 21 Block",
+  "block.agotmod.cdeepslate_21_stairs": "Deepslate Variant 21 Stairs",
+  "block.agotmod.cdeepslate_21_slab": "Deepslate Variant 21 Slab",
+  "block.agotmod.cdeepslate_21_wall": "Deepslate Variant 21 Wall",
+
+  "block.agotmod.cdeepslate_22": "Deepslate Variant 22 Block",
+  "block.agotmod.cdeepslate_22_stairs": "Deepslate Variant 22 Stairs",
+  "block.agotmod.cdeepslate_22_slab": "Deepslate Variant 22 Slab",
+  "block.agotmod.cdeepslate_22_wall": "Deepslate Variant 22 Wall",
+
+  "block.agotmod.cdeepslate_23": "Deepslate Variant 23 Block",
+  "block.agotmod.cdeepslate_23_stairs": "Deepslate Variant 23 Stairs",
+  "block.agotmod.cdeepslate_23_slab": "Deepslate Variant 23 Slab",
+  "block.agotmod.cdeepslate_23_wall": "Deepslate Variant 23 Wall",
+
+  "block.agotmod.cdeepslate_24": "Deepslate Variant 24 Block",
+  "block.agotmod.cdeepslate_24_stairs": "Deepslate Variant 24 Stairs",
+  "block.agotmod.cdeepslate_24_slab": "Deepslate Variant 24 Slab",
+  "block.agotmod.cdeepslate_24_wall": "Deepslate Variant 24 Wall",
+
+  "block.agotmod.cdeepslate_25": "Deepslate Variant 25 Block",
+  "block.agotmod.cdeepslate_25_stairs": "Deepslate Variant 25 Stairs",
+  "block.agotmod.cdeepslate_25_slab": "Deepslate Variant 25 Slab",
+  "block.agotmod.cdeepslate_25_wall": "Deepslate Variant 25 Wall",
+
+  "block.agotmod.cdeepslate_26": "Deepslate Variant 26 Block",
+  "block.agotmod.cdeepslate_26_stairs": "Deepslate Variant 26 Stairs",
+  "block.agotmod.cdeepslate_26_slab": "Deepslate Variant 26 Slab",
+  "block.agotmod.cdeepslate_26_wall": "Deepslate Variant 26 Wall",
+
+  "block.agotmod.cdeepslate_27": "Deepslate Variant 27 Block",
+  "block.agotmod.cdeepslate_27_stairs": "Deepslate Variant 27 Stairs",
+  "block.agotmod.cdeepslate_27_slab": "Deepslate Variant 27 Slab",
+  "block.agotmod.cdeepslate_27_wall": "Deepslate Variant 27 Wall",
+
+  "block.agotmod.cdeepslate_28": "Deepslate Variant 28 Block",
+  "block.agotmod.cdeepslate_28_stairs": "Deepslate Variant 28 Stairs",
+  "block.agotmod.cdeepslate_28_slab": "Deepslate Variant 28 Slab",
+  "block.agotmod.cdeepslate_28_wall": "Deepslate Variant 28 Wall",
+
+  "block.agotmod.cdeepslate_29": "Deepslate Variant 29 Block",
+  "block.agotmod.cdeepslate_29_stairs": "Deepslate Variant 29 Stairs",
+  "block.agotmod.cdeepslate_29_slab": "Deepslate Variant 29 Slab",
+  "block.agotmod.cdeepslate_29_wall": "Deepslate Variant 29 Wall",
+
+  "block.agotmod.cdeepslate_30": "Deepslate Variant 30 Block",
+  "block.agotmod.cdeepslate_30_stairs": "Deepslate Variant 30 Stairs",
+  "block.agotmod.cdeepslate_30_slab": "Deepslate Variant 30 Slab",
+  "block.agotmod.cdeepslate_30_wall": "Deepslate Variant 30 Wall",
+
+  "block.agotmod.cdeepslate_31": "Deepslate Variant 31 Block",
+  "block.agotmod.cdeepslate_31_stairs": "Deepslate Variant 31 Stairs",
+  "block.agotmod.cdeepslate_31_slab": "Deepslate Variant 31 Slab",
+  "block.agotmod.cdeepslate_31_wall": "Deepslate Variant 31 Wall",
+
+  "block.agotmod.cdeepslate_32": "Deepslate Variant 32 Block",
+  "block.agotmod.cdeepslate_32_stairs": "Deepslate Variant 32 Stairs",
+  "block.agotmod.cdeepslate_32_slab": "Deepslate Variant 32 Slab",
+  "block.agotmod.cdeepslate_32_wall": "Deepslate Variant 32 Wall",
+
+  "block.agotmod.cdeepslate_33": "Deepslate Variant 33 Block",
+  "block.agotmod.cdeepslate_33_stairs": "Deepslate Variant 33 Stairs",
+  "block.agotmod.cdeepslate_33_slab": "Deepslate Variant 33 Slab",
+  "block.agotmod.cdeepslate_33_wall": "Deepslate Variant 33 Wall",
+
+  "block.agotmod.cdeepslate_34": "Deepslate Variant 34 Block",
+  "block.agotmod.cdeepslate_34_stairs": "Deepslate Variant 34 Stairs",
+  "block.agotmod.cdeepslate_34_slab": "Deepslate Variant 34 Slab",
+  "block.agotmod.cdeepslate_34_wall": "Deepslate Variant 34 Wall",
+
+  "block.agotmod.cdeepslate_35": "Deepslate Variant 35 Block",
+  "block.agotmod.cdeepslate_35_stairs": "Deepslate Variant 35 Stairs",
+  "block.agotmod.cdeepslate_35_slab": "Deepslate Variant 35 Slab",
+  "block.agotmod.cdeepslate_35_wall": "Deepslate Variant 35 Wall",
+
+  "block.agotmod.cdeepslate_36": "Deepslate Variant 36 Block",
+  "block.agotmod.cdeepslate_36_stairs": "Deepslate Variant 36 Stairs",
+  "block.agotmod.cdeepslate_36_slab": "Deepslate Variant 36 Slab",
+  "block.agotmod.cdeepslate_36_wall": "Deepslate Variant 36 Wall",
+
+  "block.agotmod.cdeepslate_37": "Deepslate Variant 37 Block",
+  "block.agotmod.cdeepslate_37_stairs": "Deepslate Variant 37 Stairs",
+  "block.agotmod.cdeepslate_37_slab": "Deepslate Variant 37 Slab",
+  "block.agotmod.cdeepslate_37_wall": "Deepslate Variant 37 Wall",
+
+  "block.agotmod.cdeepslate_38": "Deepslate Variant 38 Block",
+  "block.agotmod.cdeepslate_38_stairs": "Deepslate Variant 38 Stairs",
+  "block.agotmod.cdeepslate_38_slab": "Deepslate Variant 38 Slab",
+  "block.agotmod.cdeepslate_38_wall": "Deepslate Variant 38 Wall",
 
 
 

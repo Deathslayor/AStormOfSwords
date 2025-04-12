@@ -2386,8 +2386,248 @@ public class ModBlockStateProvider extends BlockStateProvider {
         stairsBlock(((StairBlock) ModBLocks.CALCITE_38_STAIRS.get()), blockTexture(ModBLocks.CALCITE_38_BLOCK.get()));
         wallBlock(((WallBlock) ModBLocks.CALCITE_38_WALL.get()), blockTexture(ModBLocks.CALCITE_38_BLOCK.get()));
 
+        blockWithItem(ModBLocks.CDEEPSLATE_1_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_1_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_1_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_1_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_1_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_1_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_1_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_1_BLOCK.get()));
 
+        blockWithItem(ModBLocks.CDEEPSLATE_2_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_2_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_2_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_2_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_2_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_2_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_2_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_2_BLOCK.get()));
 
+        blockWithItem(ModBLocks.CDEEPSLATE_3_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_3_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_3_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_3_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_3_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_3_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_3_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_3_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CDEEPSLATE_5_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_5_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_5_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_5_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_5_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_5_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_5_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_5_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CDEEPSLATE_6_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_6_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_6_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_6_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_6_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_6_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_6_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_6_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CDEEPSLATE_7_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_7_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_7_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_7_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_7_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_7_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_7_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_7_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CDEEPSLATE_8_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_8_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_8_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_8_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_8_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_8_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_8_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_8_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CDEEPSLATE_9_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_9_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_9_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_9_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_9_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_9_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_9_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_9_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CDEEPSLATE_10_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_10_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_10_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_10_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_10_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_10_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_10_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_10_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CDEEPSLATE_11_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_11_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_11_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_11_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_11_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_11_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_11_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_11_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CDEEPSLATE_12_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_12_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_12_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_12_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_12_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_12_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_12_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_12_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CDEEPSLATE_13_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_13_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_13_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_13_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_13_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_13_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_13_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_13_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CDEEPSLATE_14_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_14_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_14_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_14_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_14_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_14_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_14_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_14_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CDEEPSLATE_16_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_16_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_16_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_16_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_16_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_16_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_16_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_16_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CDEEPSLATE_17_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_17_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_17_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_17_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_17_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_17_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_17_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_17_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CDEEPSLATE_18_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_18_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_18_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_18_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_18_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_18_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_18_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_18_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CDEEPSLATE_20_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_20_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_20_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_20_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_20_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_20_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_20_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_20_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CDEEPSLATE_21_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_21_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_21_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_21_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_21_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_21_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_21_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_21_BLOCK.get()));
+        blockWithItem(ModBLocks.CDEEPSLATE_22_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_22_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_22_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_22_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_22_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_22_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_22_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_22_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CDEEPSLATE_23_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_23_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_23_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_23_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_23_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_23_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_23_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_23_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CDEEPSLATE_24_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_24_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_24_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_24_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_24_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_24_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_24_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_24_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CDEEPSLATE_25_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_25_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_25_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_25_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_25_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_25_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_25_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_25_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CDEEPSLATE_26_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_26_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_26_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_26_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_26_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_26_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_26_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_26_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CDEEPSLATE_27_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_27_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_27_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_27_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_27_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_27_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_27_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_27_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CDEEPSLATE_28_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_28_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_28_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_28_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_28_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_28_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_28_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_28_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CDEEPSLATE_29_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_29_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_29_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_29_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_29_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_29_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_29_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_29_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CDEEPSLATE_30_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_30_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_30_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_30_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_30_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_30_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_30_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_30_BLOCK.get()));
+        blockWithItem(ModBLocks.CDEEPSLATE_31_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_31_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_31_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_31_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_31_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_31_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_31_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_31_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CDEEPSLATE_32_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_32_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_32_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_32_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_32_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_32_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_32_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_32_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CDEEPSLATE_33_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_33_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_33_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_33_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_33_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_33_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_33_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_33_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CDEEPSLATE_34_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_34_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_34_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_34_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_34_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_34_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_34_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_34_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CDEEPSLATE_35_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_35_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_35_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_35_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_35_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_35_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_35_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_35_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CDEEPSLATE_36_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_36_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_36_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_36_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_36_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_36_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_36_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_36_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CDEEPSLATE_37_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_37_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_37_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_37_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_37_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_37_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_37_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_37_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CDEEPSLATE_38_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CDEEPSLATE_38_SLAB.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_38_BLOCK.get()),
+                blockTexture(ModBLocks.CDEEPSLATE_38_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_38_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_38_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_38_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_38_BLOCK.get()));
 
 
         // ---------------------------(FLOWERS)--------------------------- //

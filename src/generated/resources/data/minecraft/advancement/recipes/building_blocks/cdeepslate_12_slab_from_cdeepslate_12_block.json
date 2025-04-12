@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cdeepslate_12": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:cdeepslate_12"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:cdeepslate_12_slab_from_cdeepslate_12_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_cdeepslate_12"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:cdeepslate_12_slab_from_cdeepslate_12_block"
+    ]
+  }
+}

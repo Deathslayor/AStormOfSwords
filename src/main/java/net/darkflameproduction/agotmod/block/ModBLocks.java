@@ -3134,6 +3134,350 @@ public class ModBLocks {
             WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
 
 
+    public static final DeferredBlock<Block> CDEEPSLATE_1_BLOCK = registerBlock("cdeepslate_1",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_1_STAIRS = registerBlock("cdeepslate_1_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_1_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_1_SLAB = registerBlock("cdeepslate_1_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_1_WALL = registerBlock("cdeepslate_1_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_2_BLOCK = registerBlock("cdeepslate_2",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_2_STAIRS = registerBlock("cdeepslate_2_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_2_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_2_SLAB = registerBlock("cdeepslate_2_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_2_WALL = registerBlock("cdeepslate_2_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_3_BLOCK = registerBlock("cdeepslate_3",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_3_STAIRS = registerBlock("cdeepslate_3_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_3_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_3_SLAB = registerBlock("cdeepslate_3_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_3_WALL = registerBlock("cdeepslate_3_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_5_BLOCK = registerBlock("cdeepslate_5",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_5_STAIRS = registerBlock("cdeepslate_5_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_5_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_5_SLAB = registerBlock("cdeepslate_5_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_5_WALL = registerBlock("cdeepslate_5_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_6_BLOCK = registerBlock("cdeepslate_6",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_6_STAIRS = registerBlock("cdeepslate_6_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_6_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_6_SLAB = registerBlock("cdeepslate_6_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_6_WALL = registerBlock("cdeepslate_6_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_7_BLOCK = registerBlock("cdeepslate_7",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_7_STAIRS = registerBlock("cdeepslate_7_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_7_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_7_SLAB = registerBlock("cdeepslate_7_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_7_WALL = registerBlock("cdeepslate_7_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_8_BLOCK = registerBlock("cdeepslate_8",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_8_STAIRS = registerBlock("cdeepslate_8_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_8_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_8_SLAB = registerBlock("cdeepslate_8_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_8_WALL = registerBlock("cdeepslate_8_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_9_BLOCK = registerBlock("cdeepslate_9",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_9_STAIRS = registerBlock("cdeepslate_9_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_9_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_9_SLAB = registerBlock("cdeepslate_9_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_9_WALL = registerBlock("cdeepslate_9_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_10_BLOCK = registerBlock("cdeepslate_10",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_10_STAIRS = registerBlock("cdeepslate_10_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_10_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_10_SLAB = registerBlock("cdeepslate_10_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_10_WALL = registerBlock("cdeepslate_10_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_11_BLOCK = registerBlock("cdeepslate_11",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_11_STAIRS = registerBlock("cdeepslate_11_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_11_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_11_SLAB = registerBlock("cdeepslate_11_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_11_WALL = registerBlock("cdeepslate_11_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_12_BLOCK = registerBlock("cdeepslate_12",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_12_STAIRS = registerBlock("cdeepslate_12_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_12_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_12_SLAB = registerBlock("cdeepslate_12_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_12_WALL = registerBlock("cdeepslate_12_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_13_BLOCK = registerBlock("cdeepslate_13",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_13_STAIRS = registerBlock("cdeepslate_13_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_13_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_13_SLAB = registerBlock("cdeepslate_13_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_13_WALL = registerBlock("cdeepslate_13_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_14_BLOCK = registerBlock("cdeepslate_14",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_14_STAIRS = registerBlock("cdeepslate_14_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_14_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_14_SLAB = registerBlock("cdeepslate_14_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_14_WALL = registerBlock("cdeepslate_14_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    // Number 15 is skipped as requested
+    public static final DeferredBlock<Block> CDEEPSLATE_16_BLOCK = registerBlock("cdeepslate_16",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_16_STAIRS = registerBlock("cdeepslate_16_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_16_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_16_SLAB = registerBlock("cdeepslate_16_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_16_WALL = registerBlock("cdeepslate_16_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_17_BLOCK = registerBlock("cdeepslate_17",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_17_STAIRS = registerBlock("cdeepslate_17_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_17_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_17_SLAB = registerBlock("cdeepslate_17_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_17_WALL = registerBlock("cdeepslate_17_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_18_BLOCK = registerBlock("cdeepslate_18",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_18_STAIRS = registerBlock("cdeepslate_18_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_18_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_18_SLAB = registerBlock("cdeepslate_18_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_18_WALL = registerBlock("cdeepslate_18_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    // Number 19 is skipped as requested
+
+    // For 20
+    public static final DeferredBlock<Block> CDEEPSLATE_20_BLOCK = registerBlock("cdeepslate_20",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_20_STAIRS = registerBlock("cdeepslate_20_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_20_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_20_SLAB = registerBlock("cdeepslate_20_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_20_WALL = registerBlock("cdeepslate_20_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+
+    // For 21
+    public static final DeferredBlock<Block> CDEEPSLATE_21_BLOCK = registerBlock("cdeepslate_21",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_21_STAIRS = registerBlock("cdeepslate_21_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_21_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_21_SLAB = registerBlock("cdeepslate_21_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_21_WALL = registerBlock("cdeepslate_21_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+
+    // For 22
+    public static final DeferredBlock<Block> CDEEPSLATE_22_BLOCK = registerBlock("cdeepslate_22",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_22_STAIRS = registerBlock("cdeepslate_22_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_22_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_22_SLAB = registerBlock("cdeepslate_22_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_22_WALL = registerBlock("cdeepslate_22_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_23_BLOCK = registerBlock("cdeepslate_23",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_23_STAIRS = registerBlock("cdeepslate_23_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_23_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_23_SLAB = registerBlock("cdeepslate_23_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_23_WALL = registerBlock("cdeepslate_23_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+
+    // CDEEPSLATE 24
+    public static final DeferredBlock<Block> CDEEPSLATE_24_BLOCK = registerBlock("cdeepslate_24",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_24_STAIRS = registerBlock("cdeepslate_24_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_24_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_24_SLAB = registerBlock("cdeepslate_24_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_24_WALL = registerBlock("cdeepslate_24_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+
+    // CDEEPSLATE 25
+    public static final DeferredBlock<Block> CDEEPSLATE_25_BLOCK = registerBlock("cdeepslate_25",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_25_STAIRS = registerBlock("cdeepslate_25_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_25_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_25_SLAB = registerBlock("cdeepslate_25_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_25_WALL = registerBlock("cdeepslate_25_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+
+    // CDEEPSLATE 26
+    public static final DeferredBlock<Block> CDEEPSLATE_26_BLOCK = registerBlock("cdeepslate_26",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_26_STAIRS = registerBlock("cdeepslate_26_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_26_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_26_SLAB = registerBlock("cdeepslate_26_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_26_WALL = registerBlock("cdeepslate_26_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+
+    // CDEEPSLATE 27
+    public static final DeferredBlock<Block> CDEEPSLATE_27_BLOCK = registerBlock("cdeepslate_27",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_27_STAIRS = registerBlock("cdeepslate_27_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_27_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_27_SLAB = registerBlock("cdeepslate_27_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_27_WALL = registerBlock("cdeepslate_27_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+
+    // CDEEPSLATE 28
+    public static final DeferredBlock<Block> CDEEPSLATE_28_BLOCK = registerBlock("cdeepslate_28",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_28_STAIRS = registerBlock("cdeepslate_28_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_28_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_28_SLAB = registerBlock("cdeepslate_28_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_28_WALL = registerBlock("cdeepslate_28_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+
+    public static final DeferredBlock<Block> CDEEPSLATE_29_BLOCK = registerBlock("cdeepslate_29",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_29_STAIRS = registerBlock("cdeepslate_29_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_29_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_29_SLAB = registerBlock("cdeepslate_29_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_29_WALL = registerBlock("cdeepslate_29_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+
+    public static final DeferredBlock<Block> CDEEPSLATE_30_BLOCK = registerBlock("cdeepslate_30",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_30_STAIRS = registerBlock("cdeepslate_30_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_30_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_30_SLAB = registerBlock("cdeepslate_30_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_30_WALL = registerBlock("cdeepslate_30_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+
+    public static final DeferredBlock<Block> CDEEPSLATE_31_BLOCK = registerBlock("cdeepslate_31",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_31_STAIRS = registerBlock("cdeepslate_31_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_31_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_31_SLAB = registerBlock("cdeepslate_31_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_31_WALL = registerBlock("cdeepslate_31_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+
+    public static final DeferredBlock<Block> CDEEPSLATE_32_BLOCK = registerBlock("cdeepslate_32",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_32_STAIRS = registerBlock("cdeepslate_32_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_32_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_32_SLAB = registerBlock("cdeepslate_32_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_32_WALL = registerBlock("cdeepslate_32_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+
+    public static final DeferredBlock<Block> CDEEPSLATE_33_BLOCK = registerBlock("cdeepslate_33",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_33_STAIRS = registerBlock("cdeepslate_33_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_33_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_33_SLAB = registerBlock("cdeepslate_33_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_33_WALL = registerBlock("cdeepslate_33_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+
+    public static final DeferredBlock<Block> CDEEPSLATE_34_BLOCK = registerBlock("cdeepslate_34",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_34_STAIRS = registerBlock("cdeepslate_34_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_34_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_34_SLAB = registerBlock("cdeepslate_34_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_34_WALL = registerBlock("cdeepslate_34_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+
+    public static final DeferredBlock<Block> CDEEPSLATE_35_BLOCK = registerBlock("cdeepslate_35",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_35_STAIRS = registerBlock("cdeepslate_35_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_35_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_35_SLAB = registerBlock("cdeepslate_35_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_35_WALL = registerBlock("cdeepslate_35_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+
+    public static final DeferredBlock<Block> CDEEPSLATE_36_BLOCK = registerBlock("cdeepslate_36",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_36_STAIRS = registerBlock("cdeepslate_36_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_36_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_36_SLAB = registerBlock("cdeepslate_36_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_36_WALL = registerBlock("cdeepslate_36_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+
+    public static final DeferredBlock<Block> CDEEPSLATE_37_BLOCK = registerBlock("cdeepslate_37",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_37_STAIRS = registerBlock("cdeepslate_37_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_37_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_37_SLAB = registerBlock("cdeepslate_37_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_37_WALL = registerBlock("cdeepslate_37_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+
+    public static final DeferredBlock<Block> CDEEPSLATE_38_BLOCK = registerBlock("cdeepslate_38",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f));
+    public static final DeferredBlock<Block> CDEEPSLATE_38_STAIRS = registerBlock("cdeepslate_38_stairs",
+            properties -> new StairBlock(ModBLocks.CDEEPSLATE_38_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_38_SLAB = registerBlock("cdeepslate_38_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+    public static final DeferredBlock<Block> CDEEPSLATE_38_WALL = registerBlock("cdeepslate_38_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
+
 
 
     // ---------------------------(FLOWERS)--------------------------- //
