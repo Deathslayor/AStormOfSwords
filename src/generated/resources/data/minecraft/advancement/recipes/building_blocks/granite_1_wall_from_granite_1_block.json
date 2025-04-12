@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_granite_1": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:granite_1"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:granite_1_wall_from_granite_1_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_granite_1"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:granite_1_wall_from_granite_1_block"
+    ]
+  }
+}

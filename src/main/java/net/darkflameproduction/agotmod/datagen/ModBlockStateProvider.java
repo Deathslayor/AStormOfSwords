@@ -2629,6 +2629,266 @@ public class ModBlockStateProvider extends BlockStateProvider {
         stairsBlock(((StairBlock) ModBLocks.CDEEPSLATE_38_STAIRS.get()), blockTexture(ModBLocks.CDEEPSLATE_38_BLOCK.get()));
         wallBlock(((WallBlock) ModBLocks.CDEEPSLATE_38_WALL.get()), blockTexture(ModBLocks.CDEEPSLATE_38_BLOCK.get()));
 
+        blockWithItem(ModBLocks.GRANITE_1_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_1_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_1_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_1_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_1_STAIRS.get()), blockTexture(ModBLocks.GRANITE_1_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_1_WALL.get()), blockTexture(ModBLocks.GRANITE_1_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_2_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_2_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_2_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_2_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_2_STAIRS.get()), blockTexture(ModBLocks.GRANITE_2_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_2_WALL.get()), blockTexture(ModBLocks.GRANITE_2_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_3_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_3_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_3_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_3_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_3_STAIRS.get()), blockTexture(ModBLocks.GRANITE_3_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_3_WALL.get()), blockTexture(ModBLocks.GRANITE_3_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_4_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_4_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_4_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_4_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_4_STAIRS.get()), blockTexture(ModBLocks.GRANITE_4_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_4_WALL.get()), blockTexture(ModBLocks.GRANITE_4_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_5_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_5_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_5_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_5_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_5_STAIRS.get()), blockTexture(ModBLocks.GRANITE_5_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_5_WALL.get()), blockTexture(ModBLocks.GRANITE_5_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_6_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_6_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_6_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_6_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_6_STAIRS.get()), blockTexture(ModBLocks.GRANITE_6_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_6_WALL.get()), blockTexture(ModBLocks.GRANITE_6_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_7_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_7_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_7_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_7_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_7_STAIRS.get()), blockTexture(ModBLocks.GRANITE_7_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_7_WALL.get()), blockTexture(ModBLocks.GRANITE_7_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_8_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_8_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_8_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_8_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_8_STAIRS.get()), blockTexture(ModBLocks.GRANITE_8_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_8_WALL.get()), blockTexture(ModBLocks.GRANITE_8_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_9_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_9_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_9_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_9_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_9_STAIRS.get()), blockTexture(ModBLocks.GRANITE_9_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_9_WALL.get()), blockTexture(ModBLocks.GRANITE_9_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_10_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_10_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_10_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_10_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_10_STAIRS.get()), blockTexture(ModBLocks.GRANITE_10_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_10_WALL.get()), blockTexture(ModBLocks.GRANITE_10_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_11_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_11_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_11_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_11_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_11_STAIRS.get()), blockTexture(ModBLocks.GRANITE_11_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_11_WALL.get()), blockTexture(ModBLocks.GRANITE_11_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_12_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_12_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_12_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_12_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_12_STAIRS.get()), blockTexture(ModBLocks.GRANITE_12_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_12_WALL.get()), blockTexture(ModBLocks.GRANITE_12_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_13_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_13_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_13_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_13_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_13_STAIRS.get()), blockTexture(ModBLocks.GRANITE_13_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_13_WALL.get()), blockTexture(ModBLocks.GRANITE_13_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_14_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_14_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_14_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_14_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_14_STAIRS.get()), blockTexture(ModBLocks.GRANITE_14_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_14_WALL.get()), blockTexture(ModBLocks.GRANITE_14_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_16_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_16_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_16_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_16_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_16_STAIRS.get()), blockTexture(ModBLocks.GRANITE_16_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_16_WALL.get()), blockTexture(ModBLocks.GRANITE_16_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_17_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_17_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_17_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_17_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_17_STAIRS.get()), blockTexture(ModBLocks.GRANITE_17_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_17_WALL.get()), blockTexture(ModBLocks.GRANITE_17_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_18_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_18_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_18_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_18_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_18_STAIRS.get()), blockTexture(ModBLocks.GRANITE_18_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_18_WALL.get()), blockTexture(ModBLocks.GRANITE_18_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_19_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_19_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_19_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_19_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_19_STAIRS.get()), blockTexture(ModBLocks.GRANITE_19_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_19_WALL.get()), blockTexture(ModBLocks.GRANITE_19_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_20_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_20_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_20_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_20_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_20_STAIRS.get()), blockTexture(ModBLocks.GRANITE_20_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_20_WALL.get()), blockTexture(ModBLocks.GRANITE_20_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_21_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_21_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_21_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_21_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_21_STAIRS.get()), blockTexture(ModBLocks.GRANITE_21_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_21_WALL.get()), blockTexture(ModBLocks.GRANITE_21_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_22_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_22_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_22_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_22_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_22_STAIRS.get()), blockTexture(ModBLocks.GRANITE_22_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_22_WALL.get()), blockTexture(ModBLocks.GRANITE_22_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_23_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_23_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_23_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_23_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_23_STAIRS.get()), blockTexture(ModBLocks.GRANITE_23_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_23_WALL.get()), blockTexture(ModBLocks.GRANITE_23_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_24_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_24_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_24_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_24_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_24_STAIRS.get()), blockTexture(ModBLocks.GRANITE_24_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_24_WALL.get()), blockTexture(ModBLocks.GRANITE_24_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_25_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_25_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_25_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_25_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_25_STAIRS.get()), blockTexture(ModBLocks.GRANITE_25_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_25_WALL.get()), blockTexture(ModBLocks.GRANITE_25_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_26_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_26_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_26_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_26_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_26_STAIRS.get()), blockTexture(ModBLocks.GRANITE_26_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_26_WALL.get()), blockTexture(ModBLocks.GRANITE_26_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_27_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_27_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_27_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_27_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_27_STAIRS.get()), blockTexture(ModBLocks.GRANITE_27_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_27_WALL.get()), blockTexture(ModBLocks.GRANITE_27_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_28_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_28_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_28_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_28_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_28_STAIRS.get()), blockTexture(ModBLocks.GRANITE_28_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_28_WALL.get()), blockTexture(ModBLocks.GRANITE_28_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_29_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_29_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_29_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_29_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_29_STAIRS.get()), blockTexture(ModBLocks.GRANITE_29_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_29_WALL.get()), blockTexture(ModBLocks.GRANITE_29_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_30_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_30_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_30_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_30_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_30_STAIRS.get()), blockTexture(ModBLocks.GRANITE_30_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_30_WALL.get()), blockTexture(ModBLocks.GRANITE_30_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_31_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_31_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_31_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_31_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_31_STAIRS.get()), blockTexture(ModBLocks.GRANITE_31_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_31_WALL.get()), blockTexture(ModBLocks.GRANITE_31_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_32_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_32_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_32_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_32_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_32_STAIRS.get()), blockTexture(ModBLocks.GRANITE_32_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_32_WALL.get()), blockTexture(ModBLocks.GRANITE_32_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_33_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_33_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_33_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_33_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_33_STAIRS.get()), blockTexture(ModBLocks.GRANITE_33_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_33_WALL.get()), blockTexture(ModBLocks.GRANITE_33_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_34_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_34_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_34_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_34_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_34_STAIRS.get()), blockTexture(ModBLocks.GRANITE_34_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_34_WALL.get()), blockTexture(ModBLocks.GRANITE_34_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_35_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_35_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_35_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_35_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_35_STAIRS.get()), blockTexture(ModBLocks.GRANITE_35_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_35_WALL.get()), blockTexture(ModBLocks.GRANITE_35_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_36_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_36_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_36_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_36_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_36_STAIRS.get()), blockTexture(ModBLocks.GRANITE_36_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_36_WALL.get()), blockTexture(ModBLocks.GRANITE_36_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_37_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_37_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_37_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_37_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_37_STAIRS.get()), blockTexture(ModBLocks.GRANITE_37_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_37_WALL.get()), blockTexture(ModBLocks.GRANITE_37_BLOCK.get()));
+
+        blockWithItem(ModBLocks.GRANITE_38_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.GRANITE_38_SLAB.get()),
+                blockTexture(ModBLocks.GRANITE_38_BLOCK.get()),
+                blockTexture(ModBLocks.GRANITE_38_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.GRANITE_38_STAIRS.get()), blockTexture(ModBLocks.GRANITE_38_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.GRANITE_38_WALL.get()), blockTexture(ModBLocks.GRANITE_38_BLOCK.get()));
+
+
 
         // ---------------------------(FLOWERS)--------------------------- //
 

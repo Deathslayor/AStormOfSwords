@@ -3478,6 +3478,378 @@ public class ModBLocks {
     public static final DeferredBlock<Block> CDEEPSLATE_38_WALL = registerBlock("cdeepslate_38_wall",
             WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE));
 
+    public static final DeferredBlock<Block> GRANITE_1_BLOCK = registerBlock("granite_1",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_1_STAIRS = registerBlock("granite_1_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_1_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_1_SLAB = registerBlock("granite_1_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_1_WALL = registerBlock("granite_1_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_2_BLOCK = registerBlock("granite_2",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_2_STAIRS = registerBlock("granite_2_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_2_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_2_SLAB = registerBlock("granite_2_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_2_WALL = registerBlock("granite_2_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_3_BLOCK = registerBlock("granite_3",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_3_STAIRS = registerBlock("granite_3_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_3_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_3_SLAB = registerBlock("granite_3_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_3_WALL = registerBlock("granite_3_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_4_BLOCK = registerBlock("granite_4",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_4_STAIRS = registerBlock("granite_4_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_4_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_4_SLAB = registerBlock("granite_4_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_4_WALL = registerBlock("granite_4_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_5_BLOCK = registerBlock("granite_5",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_5_STAIRS = registerBlock("granite_5_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_5_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_5_SLAB = registerBlock("granite_5_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_5_WALL = registerBlock("granite_5_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_6_BLOCK = registerBlock("granite_6",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_6_STAIRS = registerBlock("granite_6_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_6_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_6_SLAB = registerBlock("granite_6_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_6_WALL = registerBlock("granite_6_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_7_BLOCK = registerBlock("granite_7",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_7_STAIRS = registerBlock("granite_7_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_7_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_7_SLAB = registerBlock("granite_7_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_7_WALL = registerBlock("granite_7_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_8_BLOCK = registerBlock("granite_8",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_8_STAIRS = registerBlock("granite_8_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_8_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_8_SLAB = registerBlock("granite_8_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_8_WALL = registerBlock("granite_8_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_9_BLOCK = registerBlock("granite_9",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_9_STAIRS = registerBlock("granite_9_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_9_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_9_SLAB = registerBlock("granite_9_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_9_WALL = registerBlock("granite_9_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_10_BLOCK = registerBlock("granite_10",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_10_STAIRS = registerBlock("granite_10_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_10_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_10_SLAB = registerBlock("granite_10_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_10_WALL = registerBlock("granite_10_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_11_BLOCK = registerBlock("granite_11",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_11_STAIRS = registerBlock("granite_11_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_11_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_11_SLAB = registerBlock("granite_11_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_11_WALL = registerBlock("granite_11_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_12_BLOCK = registerBlock("granite_12",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_12_STAIRS = registerBlock("granite_12_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_12_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_12_SLAB = registerBlock("granite_12_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_12_WALL = registerBlock("granite_12_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_13_BLOCK = registerBlock("granite_13",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_13_STAIRS = registerBlock("granite_13_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_13_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_13_SLAB = registerBlock("granite_13_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_13_WALL = registerBlock("granite_13_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_14_BLOCK = registerBlock("granite_14",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_14_STAIRS = registerBlock("granite_14_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_14_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_14_SLAB = registerBlock("granite_14_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_14_WALL = registerBlock("granite_14_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    // public static final DeferredBlock<Block> GRANITE_15_BLOCK = registerBlock("granite_15",
+    //       Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    //public static final DeferredBlock<Block> GRANITE_15_STAIRS = registerBlock("granite_15_stairs",
+    //      properties -> new StairBlock(ModBLocks.GRANITE_15_BLOCK.get().defaultBlockState(),
+    //            properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    //public static final DeferredBlock<Block> GRANITE_15_SLAB = registerBlock("granite_15_slab",
+    //      SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    //public static final DeferredBlock<Block> GRANITE_15_WALL = registerBlock("granite_15_wall",
+    //      WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_16_BLOCK = registerBlock("granite_16",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_16_STAIRS = registerBlock("granite_16_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_16_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_16_SLAB = registerBlock("granite_16_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_16_WALL = registerBlock("granite_16_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_17_BLOCK = registerBlock("granite_17",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_17_STAIRS = registerBlock("granite_17_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_17_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_17_SLAB = registerBlock("granite_17_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_17_WALL = registerBlock("granite_17_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_18_BLOCK = registerBlock("granite_18",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_18_STAIRS = registerBlock("granite_18_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_18_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_18_SLAB = registerBlock("granite_18_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_18_WALL = registerBlock("granite_18_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    // For 19
+    public static final DeferredBlock<Block> GRANITE_19_BLOCK = registerBlock("granite_19",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_19_STAIRS = registerBlock("granite_19_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_19_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_19_SLAB = registerBlock("granite_19_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_19_WALL = registerBlock("granite_19_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+
+    // For 20
+    public static final DeferredBlock<Block> GRANITE_20_BLOCK = registerBlock("granite_20",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_20_STAIRS = registerBlock("granite_20_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_20_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_20_SLAB = registerBlock("granite_20_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_20_WALL = registerBlock("granite_20_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+
+    // For 21
+    public static final DeferredBlock<Block> GRANITE_21_BLOCK = registerBlock("granite_21",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_21_STAIRS = registerBlock("granite_21_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_21_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_21_SLAB = registerBlock("granite_21_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_21_WALL = registerBlock("granite_21_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+
+    // For 22
+    public static final DeferredBlock<Block> GRANITE_22_BLOCK = registerBlock("granite_22",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_22_STAIRS = registerBlock("granite_22_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_22_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_22_SLAB = registerBlock("granite_22_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_22_WALL = registerBlock("granite_22_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_23_BLOCK = registerBlock("granite_23",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_23_STAIRS = registerBlock("granite_23_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_23_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_23_SLAB = registerBlock("granite_23_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_23_WALL = registerBlock("granite_23_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+
+    // GRANITE 24
+    public static final DeferredBlock<Block> GRANITE_24_BLOCK = registerBlock("granite_24",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_24_STAIRS = registerBlock("granite_24_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_24_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_24_SLAB = registerBlock("granite_24_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_24_WALL = registerBlock("granite_24_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+
+    // GRANITE 25
+    public static final DeferredBlock<Block> GRANITE_25_BLOCK = registerBlock("granite_25",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_25_STAIRS = registerBlock("granite_25_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_25_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_25_SLAB = registerBlock("granite_25_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_25_WALL = registerBlock("granite_25_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+
+    // GRANITE 26
+    public static final DeferredBlock<Block> GRANITE_26_BLOCK = registerBlock("granite_26",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_26_STAIRS = registerBlock("granite_26_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_26_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_26_SLAB = registerBlock("granite_26_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_26_WALL = registerBlock("granite_26_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+
+    // GRANITE 27
+    public static final DeferredBlock<Block> GRANITE_27_BLOCK = registerBlock("granite_27",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_27_STAIRS = registerBlock("granite_27_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_27_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_27_SLAB = registerBlock("granite_27_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_27_WALL = registerBlock("granite_27_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+
+    // GRANITE 28
+    public static final DeferredBlock<Block> GRANITE_28_BLOCK = registerBlock("granite_28",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_28_STAIRS = registerBlock("granite_28_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_28_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_28_SLAB = registerBlock("granite_28_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_28_WALL = registerBlock("granite_28_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+
+    // GRANITE 29
+    public static final DeferredBlock<Block> GRANITE_29_BLOCK = registerBlock("granite_29",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_29_STAIRS = registerBlock("granite_29_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_29_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_29_SLAB = registerBlock("granite_29_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_29_WALL = registerBlock("granite_29_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+
+    // GRANITE 30
+    public static final DeferredBlock<Block> GRANITE_30_BLOCK = registerBlock("granite_30",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_30_STAIRS = registerBlock("granite_30_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_30_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_30_SLAB = registerBlock("granite_30_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_30_WALL = registerBlock("granite_30_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+
+    // GRANITE 31
+    public static final DeferredBlock<Block> GRANITE_31_BLOCK = registerBlock("granite_31",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_31_STAIRS = registerBlock("granite_31_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_31_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_31_SLAB = registerBlock("granite_31_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_31_WALL = registerBlock("granite_31_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+
+    public static final DeferredBlock<Block> GRANITE_32_BLOCK = registerBlock("granite_32",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_32_STAIRS = registerBlock("granite_32_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_32_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_32_SLAB = registerBlock("granite_32_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_32_WALL = registerBlock("granite_32_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+
+    public static final DeferredBlock<Block> GRANITE_33_BLOCK = registerBlock("granite_33",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_33_STAIRS = registerBlock("granite_33_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_33_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_33_SLAB = registerBlock("granite_33_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_33_WALL = registerBlock("granite_33_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+
+    public static final DeferredBlock<Block> GRANITE_34_BLOCK = registerBlock("granite_34",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_34_STAIRS = registerBlock("granite_34_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_34_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_34_SLAB = registerBlock("granite_34_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_34_WALL = registerBlock("granite_34_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+
+    public static final DeferredBlock<Block> GRANITE_35_BLOCK = registerBlock("granite_35",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_35_STAIRS = registerBlock("granite_35_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_35_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_35_SLAB = registerBlock("granite_35_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_35_WALL = registerBlock("granite_35_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+
+    public static final DeferredBlock<Block> GRANITE_36_BLOCK = registerBlock("granite_36",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_36_STAIRS = registerBlock("granite_36_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_36_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_36_SLAB = registerBlock("granite_36_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_36_WALL = registerBlock("granite_36_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+
+    public static final DeferredBlock<Block> GRANITE_37_BLOCK = registerBlock("granite_37",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_37_STAIRS = registerBlock("granite_37_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_37_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_37_SLAB = registerBlock("granite_37_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_37_WALL = registerBlock("granite_37_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+
+    public static final DeferredBlock<Block> GRANITE_38_BLOCK = registerBlock("granite_38",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f));
+    public static final DeferredBlock<Block> GRANITE_38_STAIRS = registerBlock("granite_38_stairs",
+            properties -> new StairBlock(ModBLocks.GRANITE_38_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_38_SLAB = registerBlock("granite_38_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
+    public static final DeferredBlock<Block> GRANITE_38_WALL = registerBlock("granite_38_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE));
 
 
     // ---------------------------(FLOWERS)--------------------------- //

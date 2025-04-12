@@ -1813,6 +1813,197 @@
   "block.agotmod.calcite_38_slab": "Calcite Stone Variant 38 Slab",
   "block.agotmod.calcite_38_wall": "Calcite Stone Variant 38 Wall",
 
+  "block.agotmod.granite_1": "Granite Variant 1 Block",
+  "block.agotmod.granite_1_stairs": "Granite Variant 1 Stairs",
+  "block.agotmod.granite_1_slab": "Granite Variant 1 Slab",
+  "block.agotmod.granite_1_wall": "Granite Variant 1 Wall",
+
+  "block.agotmod.granite_2": "Granite Variant 2 Block",
+  "block.agotmod.granite_2_stairs": "Granite Variant 2 Stairs",
+  "block.agotmod.granite_2_slab": "Granite Variant 2 Slab",
+  "block.agotmod.granite_2_wall": "Granite Variant 2 Wall",
+
+  "block.agotmod.granite_3": "Granite Variant 3 Block",
+  "block.agotmod.granite_3_stairs": "Granite Variant 3 Stairs",
+  "block.agotmod.granite_3_slab": "Granite Variant 3 Slab",
+  "block.agotmod.granite_3_wall": "Granite Variant 3 Wall",
+
+  "block.agotmod.granite_4": "Granite Variant 4 Block",
+  "block.agotmod.granite_4_stairs": "Granite Variant 4 Stairs",
+  "block.agotmod.granite_4_slab": "Granite Variant 4 Slab",
+  "block.agotmod.granite_4_wall": "Granite Variant 4 Wall",
+
+  "block.agotmod.granite_5": "Granite Variant 5 Block",
+  "block.agotmod.granite_5_stairs": "Granite Variant 5 Stairs",
+  "block.agotmod.granite_5_slab": "Granite Variant 5 Slab",
+  "block.agotmod.granite_5_wall": "Granite Variant 5 Wall",
+
+  "block.agotmod.granite_6": "Granite Variant 6 Block",
+  "block.agotmod.granite_6_stairs": "Granite Variant 6 Stairs",
+  "block.agotmod.granite_6_slab": "Granite Variant 6 Slab",
+  "block.agotmod.granite_6_wall": "Granite Variant 6 Wall",
+
+  "block.agotmod.granite_7": "Granite Variant 7 Block",
+  "block.agotmod.granite_7_stairs": "Granite Variant 7 Stairs",
+  "block.agotmod.granite_7_slab": "Granite Variant 7 Slab",
+  "block.agotmod.granite_7_wall": "Granite Variant 7 Wall",
+
+  "block.agotmod.granite_8": "Granite Variant 8 Block",
+  "block.agotmod.granite_8_stairs": "Granite Variant 8 Stairs",
+  "block.agotmod.granite_8_slab": "Granite Variant 8 Slab",
+  "block.agotmod.granite_8_wall": "Granite Variant 8 Wall",
+
+  "block.agotmod.granite_9": "Granite Variant 9 Block",
+  "block.agotmod.granite_9_stairs": "Granite Variant 9 Stairs",
+  "block.agotmod.granite_9_slab": "Granite Variant 9 Slab",
+  "block.agotmod.granite_9_wall": "Granite Variant 9 Wall",
+
+  "block.agotmod.granite_10": "Granite Variant 10 Block",
+  "block.agotmod.granite_10_stairs": "Granite Variant 10 Stairs",
+  "block.agotmod.granite_10_slab": "Granite Variant 10 Slab",
+  "block.agotmod.granite_10_wall": "Granite Variant 10 Wall",
+
+  "block.agotmod.granite_11": "Granite Variant 11 Block",
+  "block.agotmod.granite_11_stairs": "Granite Variant 11 Stairs",
+  "block.agotmod.granite_11_slab": "Granite Variant 11 Slab",
+  "block.agotmod.granite_11_wall": "Granite Variant 11 Wall",
+
+  "block.agotmod.granite_12": "Granite Variant 12 Block",
+  "block.agotmod.granite_12_stairs": "Granite Variant 12 Stairs",
+  "block.agotmod.granite_12_slab": "Granite Variant 12 Slab",
+  "block.agotmod.granite_12_wall": "Granite Variant 12 Wall",
+
+  "block.agotmod.granite_13": "Granite Variant 13 Block",
+  "block.agotmod.granite_13_stairs": "Granite Variant 13 Stairs",
+  "block.agotmod.granite_13_slab": "Granite Variant 13 Slab",
+  "block.agotmod.granite_13_wall": "Granite Variant 13 Wall",
+
+  "block.agotmod.granite_14": "Granite Variant 14 Block",
+  "block.agotmod.granite_14_stairs": "Granite Variant 14 Stairs",
+  "block.agotmod.granite_14_slab": "Granite Variant 14 Slab",
+  "block.agotmod.granite_14_wall": "Granite Variant 14 Wall",
+
+  "block.agotmod.granite_15": "Granite Variant 15 Block",
+  "block.agotmod.granite_15_stairs": "Granite Variant 15 Stairs",
+  "block.agotmod.granite_15_slab": "Granite Variant 15 Slab",
+  "block.agotmod.granite_15_wall": "Granite Variant 15 Wall",
+
+  "block.agotmod.granite_16": "Granite Variant 16 Block",
+  "block.agotmod.granite_16_stairs": "Granite Variant 16 Stairs",
+  "block.agotmod.granite_16_slab": "Granite Variant 16 Slab",
+  "block.agotmod.granite_16_wall": "Granite Variant 16 Wall",
+
+  "block.agotmod.granite_17": "Granite Variant 17 Block",
+  "block.agotmod.granite_17_stairs": "Granite Variant 17 Stairs",
+  "block.agotmod.granite_17_slab": "Granite Variant 17 Slab",
+  "block.agotmod.granite_17_wall": "Granite Variant 17 Wall",
+
+  "block.agotmod.granite_18": "Granite Variant 18 Block",
+  "block.agotmod.granite_18_stairs": "Granite Variant 18 Stairs",
+  "block.agotmod.granite_18_slab": "Granite Variant 18 Slab",
+  "block.agotmod.granite_18_wall": "Granite Variant 18 Wall",
+
+  "block.agotmod.granite_19": "Granite Variant 19 Block",
+  "block.agotmod.granite_19_stairs": "Granite Variant 19 Stairs",
+  "block.agotmod.granite_19_slab": "Granite Variant 19 Slab",
+  "block.agotmod.granite_19_wall": "Granite Variant 19 Wall",
+
+  "block.agotmod.granite_20": "Granite Variant 20 Block",
+  "block.agotmod.granite_20_stairs": "Granite Variant 20 Stairs",
+  "block.agotmod.granite_20_slab": "Granite Variant 20 Slab",
+  "block.agotmod.granite_20_wall": "Granite Variant 20 Wall",
+
+  "block.agotmod.granite_21": "Granite Variant 21 Block",
+  "block.agotmod.granite_21_stairs": "Granite Variant 21 Stairs",
+  "block.agotmod.granite_21_slab": "Granite Variant 21 Slab",
+  "block.agotmod.granite_21_wall": "Granite Variant 21 Wall",
+
+  "block.agotmod.granite_22": "Granite Variant 22 Block",
+  "block.agotmod.granite_22_stairs": "Granite Variant 22 Stairs",
+  "block.agotmod.granite_22_slab": "Granite Variant 22 Slab",
+  "block.agotmod.granite_22_wall": "Granite Variant 22 Wall",
+
+  "block.agotmod.granite_23": "Granite Variant 23 Block",
+  "block.agotmod.granite_23_stairs": "Granite Variant 23 Stairs",
+  "block.agotmod.granite_23_slab": "Granite Variant 23 Slab",
+  "block.agotmod.granite_23_wall": "Granite Variant 23 Wall",
+
+  "block.agotmod.granite_24": "Granite Variant 24 Block",
+  "block.agotmod.granite_24_stairs": "Granite Variant 24 Stairs",
+  "block.agotmod.granite_24_slab": "Granite Variant 24 Slab",
+  "block.agotmod.granite_24_wall": "Granite Variant 24 Wall",
+
+  "block.agotmod.granite_25": "Granite Variant 25 Block",
+  "block.agotmod.granite_25_stairs": "Granite Variant 25 Stairs",
+  "block.agotmod.granite_25_slab": "Granite Variant 25 Slab",
+  "block.agotmod.granite_25_wall": "Granite Variant 25 Wall",
+
+  "block.agotmod.granite_26": "Granite Variant 26 Block",
+  "block.agotmod.granite_26_stairs": "Granite Variant 26 Stairs",
+  "block.agotmod.granite_26_slab": "Granite Variant 26 Slab",
+  "block.agotmod.granite_26_wall": "Granite Variant 26 Wall",
+
+  "block.agotmod.granite_27": "Granite Variant 27 Block",
+  "block.agotmod.granite_27_stairs": "Granite Variant 27 Stairs",
+  "block.agotmod.granite_27_slab": "Granite Variant 27 Slab",
+  "block.agotmod.granite_27_wall": "Granite Variant 27 Wall",
+
+  "block.agotmod.granite_28": "Granite Variant 28 Block",
+  "block.agotmod.granite_28_stairs": "Granite Variant 28 Stairs",
+  "block.agotmod.granite_28_slab": "Granite Variant 28 Slab",
+  "block.agotmod.granite_28_wall": "Granite Variant 28 Wall",
+
+  "block.agotmod.granite_29": "Granite Variant 29 Block",
+  "block.agotmod.granite_29_stairs": "Granite Variant 29 Stairs",
+  "block.agotmod.granite_29_slab": "Granite Variant 29 Slab",
+  "block.agotmod.granite_29_wall": "Granite Variant 29 Wall",
+
+  "block.agotmod.granite_30": "Granite Variant 30 Block",
+  "block.agotmod.granite_30_stairs": "Granite Variant 30 Stairs",
+  "block.agotmod.granite_30_slab": "Granite Variant 30 Slab",
+  "block.agotmod.granite_30_wall": "Granite Variant 30 Wall",
+
+  "block.agotmod.granite_31": "Granite Variant 31 Block",
+  "block.agotmod.granite_31_stairs": "Granite Variant 31 Stairs",
+  "block.agotmod.granite_31_slab": "Granite Variant 31 Slab",
+  "block.agotmod.granite_31_wall": "Granite Variant 31 Wall",
+
+  "block.agotmod.granite_32": "Granite Variant 32 Block",
+  "block.agotmod.granite_32_stairs": "Granite Variant 32 Stairs",
+  "block.agotmod.granite_32_slab": "Granite Variant 32 Slab",
+  "block.agotmod.granite_32_wall": "Granite Variant 32 Wall",
+
+  "block.agotmod.granite_33": "Granite Variant 33 Block",
+  "block.agotmod.granite_33_stairs": "Granite Variant 33 Stairs",
+  "block.agotmod.granite_33_slab": "Granite Variant 33 Slab",
+  "block.agotmod.granite_33_wall": "Granite Variant 33 Wall",
+
+  "block.agotmod.granite_34": "Granite Variant 34 Block",
+  "block.agotmod.granite_34_stairs": "Granite Variant 34 Stairs",
+  "block.agotmod.granite_34_slab": "Granite Variant 34 Slab",
+  "block.agotmod.granite_34_wall": "Granite Variant 34 Wall",
+
+  "block.agotmod.granite_35": "Granite Variant 35 Block",
+  "block.agotmod.granite_35_stairs": "Granite Variant 35 Stairs",
+  "block.agotmod.granite_35_slab": "Granite Variant 35 Slab",
+  "block.agotmod.granite_35_wall": "Granite Variant 35 Wall",
+
+  "block.agotmod.granite_36": "Granite Variant 36 Block",
+  "block.agotmod.granite_36_stairs": "Granite Variant 36 Stairs",
+  "block.agotmod.granite_36_slab": "Granite Variant 36 Slab",
+  "block.agotmod.granite_36_wall": "Granite Variant 36 Wall",
+
+  "block.agotmod.granite_37": "Granite Variant 37 Block",
+  "block.agotmod.granite_37_stairs": "Granite Variant 37 Stairs",
+  "block.agotmod.granite_37_slab": "Granite Variant 37 Slab",
+  "block.agotmod.granite_37_wall": "Granite Variant 37 Wall",
+
+  "block.agotmod.granite_38": "Granite Variant 38 Block",
+  "block.agotmod.granite_38_stairs": "Granite Variant 38 Stairs",
+  "block.agotmod.granite_38_slab": "Granite Variant 38 Slab",
+  "block.agotmod.granite_38_wall": "Granite Variant 38 Wall",
+
+
   "block.agotmod.cdeepslate_1": "Deepslate Variant 1 Block",
   "block.agotmod.cdeepslate_1_stairs": "Deepslate Variant 1 Stairs",
   "block.agotmod.cdeepslate_1_slab": "Deepslate Variant 1 Slab",

@@ -592,6 +592,75 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 System.err.println("Error creating recipes for pattern " + pattern + ": " + e.getMessage());
             }
         }
+        for (String pattern : patterns) {
+            try {
+                // Get the block field objects from ModBlocks class
+                java.lang.reflect.Field blockField = ModBLocks.class.getDeclaredField("GRANITE_" + pattern + "_BLOCK");
+                java.lang.reflect.Field stairsField = ModBLocks.class.getDeclaredField("GRANITE_" + pattern + "_STAIRS");
+                java.lang.reflect.Field slabField = ModBLocks.class.getDeclaredField("GRANITE_" + pattern + "_SLAB");
+                java.lang.reflect.Field wallField = ModBLocks.class.getDeclaredField("GRANITE_" + pattern + "_WALL");
+
+                // Get the supplier objects
+                var blockSupplier = blockField.get(null);
+                var stairsSupplier = stairsField.get(null);
+                var slabSupplier = slabField.get(null);
+                var wallSupplier = wallField.get(null);
+
+                // Create recipes from the base granite block to each pattern's variants
+                SingleItemRecipeBuilder.stonecutting(
+                                Ingredient.of(Blocks.GRANITE),
+                                RecipeCategory.BUILDING_BLOCKS,
+                                (ItemLike)invokeGet(blockSupplier))
+                        .unlockedBy(getHasName(Blocks.GRANITE), has(Blocks.GRANITE))
+                        .save(this.output);
+
+                SingleItemRecipeBuilder.stonecutting(
+                                Ingredient.of(Blocks.GRANITE),
+                                RecipeCategory.BUILDING_BLOCKS,
+                                (ItemLike)invokeGet(stairsSupplier))
+                        .unlockedBy(getHasName(Blocks.GRANITE), has(Blocks.GRANITE))
+                        .save(this.output);
+
+                SingleItemRecipeBuilder.stonecutting(
+                                Ingredient.of(Blocks.GRANITE),
+                                RecipeCategory.BUILDING_BLOCKS,
+                                (ItemLike)invokeGet(slabSupplier), 2)
+                        .unlockedBy(getHasName(Blocks.GRANITE), has(Blocks.GRANITE))
+                        .save(this.output);
+
+                SingleItemRecipeBuilder.stonecutting(
+                                Ingredient.of(Blocks.GRANITE),
+                                RecipeCategory.BUILDING_BLOCKS,
+                                (ItemLike)invokeGet(wallSupplier))
+                        .unlockedBy(getHasName(Blocks.GRANITE), has(Blocks.GRANITE))
+                        .save(this.output);
+
+                // Create additional granitecutter recipes from each pattern's block to its variants
+                SingleItemRecipeBuilder.stonecutting(
+                                Ingredient.of((ItemLike)invokeGet(blockSupplier)),
+                                RecipeCategory.BUILDING_BLOCKS,
+                                (ItemLike)invokeGet(stairsSupplier))
+                        .unlockedBy(getHasName((ItemLike)invokeGet(blockSupplier)), has((ItemLike)invokeGet(blockSupplier)))
+                        .save(this.output, "granite_" + pattern + "_stairs_from_granite_" + pattern + "_block");
+
+                SingleItemRecipeBuilder.stonecutting(
+                                Ingredient.of((ItemLike)invokeGet(blockSupplier)),
+                                RecipeCategory.BUILDING_BLOCKS,
+                                (ItemLike)invokeGet(slabSupplier), 2)
+                        .unlockedBy(getHasName((ItemLike)invokeGet(blockSupplier)), has((ItemLike)invokeGet(blockSupplier)))
+                        .save(this.output, "granite_" + pattern + "_slab_from_granite_" + pattern + "_block");
+
+                SingleItemRecipeBuilder.stonecutting(
+                                Ingredient.of((ItemLike)invokeGet(blockSupplier)),
+                                RecipeCategory.BUILDING_BLOCKS,
+                                (ItemLike)invokeGet(wallSupplier))
+                        .unlockedBy(getHasName((ItemLike)invokeGet(blockSupplier)), has((ItemLike)invokeGet(blockSupplier)))
+                        .save(this.output, "granite_" + pattern + "_wall_from_granite_" + pattern + "_block");
+
+            } catch (Exception e) {
+                System.err.println("Error creating recipes for pattern " + pattern + ": " + e.getMessage());
+            }
+        }
 
     }
 

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_granite_24": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:granite_24"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:granite_24_stairs_from_granite_24_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_granite_24"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:granite_24_stairs_from_granite_24_block"
+    ]
+  }
+}
