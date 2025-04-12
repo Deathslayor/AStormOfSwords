@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_calcite_17": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:calcite_17"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:calcite_17_slab_from_calcite_17_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_calcite_17"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:calcite_17_slab_from_calcite_17_block"
+    ]
+  }
+}

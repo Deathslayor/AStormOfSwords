@@ -1623,6 +1623,195 @@
   "block.agotmod.bricks_38_stairs": "Bricks Variant 38 Stairs",
   "block.agotmod.bricks_38_slab": "Bricks Variant 38 Slab",
   "block.agotmod.bricks_38_wall": "Bricks Variant 38 Wall",
+  "block.agotmod.calcite_1": "Calcite Stone Variant 1 Block",
+  "block.agotmod.calcite_1_stairs": "Calcite Stone Variant 1 Stairs",
+  "block.agotmod.calcite_1_slab": "Calcite Stone Variant 1 Slab",
+  "block.agotmod.calcite_1_wall": "Calcite Stone Variant 1 Wall",
+
+  "block.agotmod.calcite_2": "Calcite Stone Variant 2 Block",
+  "block.agotmod.calcite_2_stairs": "Calcite Stone Variant 2 Stairs",
+  "block.agotmod.calcite_2_slab": "Calcite Stone Variant 2 Slab",
+  "block.agotmod.calcite_2_wall": "Calcite Stone Variant 2 Wall",
+
+  "block.agotmod.calcite_3": "Calcite Stone Variant 3 Block",
+  "block.agotmod.calcite_3_stairs": "Calcite Stone Variant 3 Stairs",
+  "block.agotmod.calcite_3_slab": "Calcite Stone Variant 3 Slab",
+  "block.agotmod.calcite_3_wall": "Calcite Stone Variant 3 Wall",
+
+  "block.agotmod.calcite_4": "Calcite Stone Variant 4 Block",
+  "block.agotmod.calcite_4_stairs": "Calcite Stone Variant 4 Stairs",
+  "block.agotmod.calcite_4_slab": "Calcite Stone Variant 4 Slab",
+  "block.agotmod.calcite_4_wall": "Calcite Stone Variant 4 Wall",
+
+  "block.agotmod.calcite_5": "Calcite Stone Variant 5 Block",
+  "block.agotmod.calcite_5_stairs": "Calcite Stone Variant 5 Stairs",
+  "block.agotmod.calcite_5_slab": "Calcite Stone Variant 5 Slab",
+  "block.agotmod.calcite_5_wall": "Calcite Stone Variant 5 Wall",
+
+  "block.agotmod.calcite_6": "Calcite Stone Variant 6 Block",
+  "block.agotmod.calcite_6_stairs": "Calcite Stone Variant 6 Stairs",
+  "block.agotmod.calcite_6_slab": "Calcite Stone Variant 6 Slab",
+  "block.agotmod.calcite_6_wall": "Calcite Stone Variant 6 Wall",
+
+  "block.agotmod.calcite_7": "Calcite Stone Variant 7 Block",
+  "block.agotmod.calcite_7_stairs": "Calcite Stone Variant 7 Stairs",
+  "block.agotmod.calcite_7_slab": "Calcite Stone Variant 7 Slab",
+  "block.agotmod.calcite_7_wall": "Calcite Stone Variant 7 Wall",
+
+  "block.agotmod.calcite_8": "Calcite Stone Variant 8 Block",
+  "block.agotmod.calcite_8_stairs": "Calcite Stone Variant 8 Stairs",
+  "block.agotmod.calcite_8_slab": "Calcite Stone Variant 8 Slab",
+  "block.agotmod.calcite_8_wall": "Calcite Stone Variant 8 Wall",
+
+  "block.agotmod.calcite_9": "Calcite Stone Variant 9 Block",
+  "block.agotmod.calcite_9_stairs": "Calcite Stone Variant 9 Stairs",
+  "block.agotmod.calcite_9_slab": "Calcite Stone Variant 9 Slab",
+  "block.agotmod.calcite_9_wall": "Calcite Stone Variant 9 Wall",
+
+  "block.agotmod.calcite_10": "Calcite Stone Variant 10 Block",
+  "block.agotmod.calcite_10_stairs": "Calcite Stone Variant 10 Stairs",
+  "block.agotmod.calcite_10_slab": "Calcite Stone Variant 10 Slab",
+  "block.agotmod.calcite_10_wall": "Calcite Stone Variant 10 Wall",
+
+  "block.agotmod.calcite_11": "Calcite Stone Variant 11 Block",
+  "block.agotmod.calcite_11_stairs": "Calcite Stone Variant 11 Stairs",
+  "block.agotmod.calcite_11_slab": "Calcite Stone Variant 11 Slab",
+  "block.agotmod.calcite_11_wall": "Calcite Stone Variant 11 Wall",
+
+  "block.agotmod.calcite_12": "Calcite Stone Variant 12 Block",
+  "block.agotmod.calcite_12_stairs": "Calcite Stone Variant 12 Stairs",
+  "block.agotmod.calcite_12_slab": "Calcite Stone Variant 12 Slab",
+  "block.agotmod.calcite_12_wall": "Calcite Stone Variant 12 Wall",
+
+  "block.agotmod.calcite_13": "Calcite Stone Variant 13 Block",
+  "block.agotmod.calcite_13_stairs": "Calcite Stone Variant 13 Stairs",
+  "block.agotmod.calcite_13_slab": "Calcite Stone Variant 13 Slab",
+  "block.agotmod.calcite_13_wall": "Calcite Stone Variant 13 Wall",
+
+  "block.agotmod.calcite_14": "Calcite Stone Variant 14 Block",
+  "block.agotmod.calcite_14_stairs": "Calcite Stone Variant 14 Stairs",
+  "block.agotmod.calcite_14_slab": "Calcite Stone Variant 14 Slab",
+  "block.agotmod.calcite_14_wall": "Calcite Stone Variant 14 Wall",
+
+  "block.agotmod.calcite_15": "Calcite Stone Variant 15 Block",
+  "block.agotmod.calcite_15_stairs": "Calcite Stone Variant 15 Stairs",
+  "block.agotmod.calcite_15_slab": "Calcite Stone Variant 15 Slab",
+  "block.agotmod.calcite_15_wall": "Calcite Stone Variant 15 Wall",
+
+  "block.agotmod.calcite_16": "Calcite Stone Variant 16 Block",
+  "block.agotmod.calcite_16_stairs": "Calcite Stone Variant 16 Stairs",
+  "block.agotmod.calcite_16_slab": "Calcite Stone Variant 16 Slab",
+  "block.agotmod.calcite_16_wall": "Calcite Stone Variant 16 Wall",
+
+  "block.agotmod.calcite_17": "Calcite Stone Variant 17 Block",
+  "block.agotmod.calcite_17_stairs": "Calcite Stone Variant 17 Stairs",
+  "block.agotmod.calcite_17_slab": "Calcite Stone Variant 17 Slab",
+  "block.agotmod.calcite_17_wall": "Calcite Stone Variant 17 Wall",
+
+  "block.agotmod.calcite_18": "Calcite Stone Variant 18 Block",
+  "block.agotmod.calcite_18_stairs": "Calcite Stone Variant 18 Stairs",
+  "block.agotmod.calcite_18_slab": "Calcite Stone Variant 18 Slab",
+  "block.agotmod.calcite_18_wall": "Calcite Stone Variant 18 Wall",
+
+  "block.agotmod.calcite_19": "Calcite Stone Variant 19 Block",
+  "block.agotmod.calcite_19_stairs": "Calcite Stone Variant 19 Stairs",
+  "block.agotmod.calcite_19_slab": "Calcite Stone Variant 19 Slab",
+  "block.agotmod.calcite_19_wall": "Calcite Stone Variant 19 Wall",
+
+  "block.agotmod.calcite_20": "Calcite Stone Variant 20 Block",
+  "block.agotmod.calcite_20_stairs": "Calcite Stone Variant 20 Stairs",
+  "block.agotmod.calcite_20_slab": "Calcite Stone Variant 20 Slab",
+  "block.agotmod.calcite_20_wall": "Calcite Stone Variant 20 Wall",
+
+  "block.agotmod.calcite_21": "Calcite Stone Variant 21 Block",
+  "block.agotmod.calcite_21_stairs": "Calcite Stone Variant 21 Stairs",
+  "block.agotmod.calcite_21_slab": "Calcite Stone Variant 21 Slab",
+  "block.agotmod.calcite_21_wall": "Calcite Stone Variant 21 Wall",
+
+  "block.agotmod.calcite_22": "Calcite Stone Variant 22 Block",
+  "block.agotmod.calcite_22_stairs": "Calcite Stone Variant 22 Stairs",
+  "block.agotmod.calcite_22_slab": "Calcite Stone Variant 22 Slab",
+  "block.agotmod.calcite_22_wall": "Calcite Stone Variant 22 Wall",
+
+  "block.agotmod.calcite_23": "Calcite Stone Variant 23 Block",
+  "block.agotmod.calcite_23_stairs": "Calcite Stone Variant 23 Stairs",
+  "block.agotmod.calcite_23_slab": "Calcite Stone Variant 23 Slab",
+  "block.agotmod.calcite_23_wall": "Calcite Stone Variant 23 Wall",
+
+  "block.agotmod.calcite_24": "Calcite Stone Variant 24 Block",
+  "block.agotmod.calcite_24_stairs": "Calcite Stone Variant 24 Stairs",
+  "block.agotmod.calcite_24_slab": "Calcite Stone Variant 24 Slab",
+  "block.agotmod.calcite_24_wall": "Calcite Stone Variant 24 Wall",
+
+  "block.agotmod.calcite_25": "Calcite Stone Variant 25 Block",
+  "block.agotmod.calcite_25_stairs": "Calcite Stone Variant 25 Stairs",
+  "block.agotmod.calcite_25_slab": "Calcite Stone Variant 25 Slab",
+  "block.agotmod.calcite_25_wall": "Calcite Stone Variant 25 Wall",
+
+  "block.agotmod.calcite_26": "Calcite Stone Variant 26 Block",
+  "block.agotmod.calcite_26_stairs": "Calcite Stone Variant 26 Stairs",
+  "block.agotmod.calcite_26_slab": "Calcite Stone Variant 26 Slab",
+  "block.agotmod.calcite_26_wall": "Calcite Stone Variant 26 Wall",
+
+  "block.agotmod.calcite_27": "Calcite Stone Variant 27 Block",
+  "block.agotmod.calcite_27_stairs": "Calcite Stone Variant 27 Stairs",
+  "block.agotmod.calcite_27_slab": "Calcite Stone Variant 27 Slab",
+  "block.agotmod.calcite_27_wall": "Calcite Stone Variant 27 Wall",
+
+  "block.agotmod.calcite_28": "Calcite Stone Variant 28 Block",
+  "block.agotmod.calcite_28_stairs": "Calcite Stone Variant 28 Stairs",
+  "block.agotmod.calcite_28_slab": "Calcite Stone Variant 28 Slab",
+  "block.agotmod.calcite_28_wall": "Calcite Stone Variant 28 Wall",
+
+  "block.agotmod.calcite_29": "Calcite Stone Variant 29 Block",
+  "block.agotmod.calcite_29_stairs": "Calcite Stone Variant 29 Stairs",
+  "block.agotmod.calcite_29_slab": "Calcite Stone Variant 29 Slab",
+  "block.agotmod.calcite_29_wall": "Calcite Stone Variant 29 Wall",
+
+  "block.agotmod.calcite_30": "Calcite Stone Variant 30 Block",
+  "block.agotmod.calcite_30_stairs": "Calcite Stone Variant 30 Stairs",
+  "block.agotmod.calcite_30_slab": "Calcite Stone Variant 30 Slab",
+  "block.agotmod.calcite_30_wall": "Calcite Stone Variant 30 Wall",
+
+  "block.agotmod.calcite_31": "Calcite Stone Variant 31 Block",
+  "block.agotmod.calcite_31_stairs": "Calcite Stone Variant 31 Stairs",
+  "block.agotmod.calcite_31_slab": "Calcite Stone Variant 31 Slab",
+  "block.agotmod.calcite_31_wall": "Calcite Stone Variant 31 Wall",
+
+  "block.agotmod.calcite_32": "Calcite Stone Variant 32 Block",
+  "block.agotmod.calcite_32_stairs": "Calcite Stone Variant 32 Stairs",
+  "block.agotmod.calcite_32_slab": "Calcite Stone Variant 32 Slab",
+  "block.agotmod.calcite_32_wall": "Calcite Stone Variant 32 Wall",
+
+  "block.agotmod.calcite_33": "Calcite Stone Variant 33 Block",
+  "block.agotmod.calcite_33_stairs": "Calcite Stone Variant 33 Stairs",
+  "block.agotmod.calcite_33_slab": "Calcite Stone Variant 33 Slab",
+  "block.agotmod.calcite_33_wall": "Calcite Stone Variant 33 Wall",
+
+  "block.agotmod.calcite_34": "Calcite Stone Variant 34 Block",
+  "block.agotmod.calcite_34_stairs": "Calcite Stone Variant 34 Stairs",
+  "block.agotmod.calcite_34_slab": "Calcite Stone Variant 34 Slab",
+  "block.agotmod.calcite_34_wall": "Calcite Stone Variant 34 Wall",
+
+  "block.agotmod.calcite_35": "Calcite Stone Variant 35 Block",
+  "block.agotmod.calcite_35_stairs": "Calcite Stone Variant 35 Stairs",
+  "block.agotmod.calcite_35_slab": "Calcite Stone Variant 35 Slab",
+  "block.agotmod.calcite_35_wall": "Calcite Stone Variant 35 Wall",
+
+  "block.agotmod.calcite_36": "Calcite Stone Variant 36 Block",
+  "block.agotmod.calcite_36_stairs": "Calcite Stone Variant 36 Stairs",
+  "block.agotmod.calcite_36_slab": "Calcite Stone Variant 36 Slab",
+  "block.agotmod.calcite_36_wall": "Calcite Stone Variant 36 Wall",
+
+  "block.agotmod.calcite_37": "Calcite Stone Variant 37 Block",
+  "block.agotmod.calcite_37_stairs": "Calcite Stone Variant 37 Stairs",
+  "block.agotmod.calcite_37_slab": "Calcite Stone Variant 37 Slab",
+  "block.agotmod.calcite_37_wall": "Calcite Stone Variant 37 Wall",
+
+  "block.agotmod.calcite_38": "Calcite Stone Variant 38 Block",
+  "block.agotmod.calcite_38_stairs": "Calcite Stone Variant 38 Stairs",
+  "block.agotmod.calcite_38_slab": "Calcite Stone Variant 38 Slab",
+  "block.agotmod.calcite_38_wall": "Calcite Stone Variant 38 Wall",
 
 
 

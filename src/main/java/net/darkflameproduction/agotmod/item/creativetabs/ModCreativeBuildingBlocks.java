@@ -1173,12 +1173,179 @@ public class ModCreativeBuildingBlocks {
                         pOutput.accept(ModBLocks.BRICKS_38_SLAB.get());
                         pOutput.accept(ModBLocks.BRICKS_38_WALL.get());
 
+                        pOutput.accept(ModBLocks.CALCITE_1_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_1_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_1_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_1_WALL.get());
+                        pOutput.accept(ModBLocks.CALCITE_2_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_2_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_2_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_2_WALL.get());
+                        pOutput.accept(ModBLocks.CALCITE_3_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_3_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_3_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_3_WALL.get());
+                        pOutput.accept(ModBLocks.CALCITE_4_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_4_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_4_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_4_WALL.get());
+                        pOutput.accept(ModBLocks.CALCITE_5_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_5_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_5_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_5_WALL.get());
+                        pOutput.accept(ModBLocks.CALCITE_6_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_6_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_6_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_6_WALL.get());
+                        pOutput.accept(ModBLocks.CALCITE_7_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_7_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_7_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_7_WALL.get());
+                        pOutput.accept(ModBLocks.CALCITE_8_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_8_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_8_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_8_WALL.get());
+                        pOutput.accept(ModBLocks.CALCITE_9_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_9_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_9_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_9_WALL.get());
+                        pOutput.accept(ModBLocks.CALCITE_10_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_10_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_10_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_10_WALL.get());
+                        pOutput.accept(ModBLocks.CALCITE_11_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_11_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_11_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_11_WALL.get());
+                        pOutput.accept(ModBLocks.CALCITE_12_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_12_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_12_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_12_WALL.get());
+                        pOutput.accept(ModBLocks.CALCITE_13_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_13_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_13_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_13_WALL.get());
+                        pOutput.accept(ModBLocks.CALCITE_14_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_14_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_14_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_14_WALL.get());
+// pOutput.accept(ModBLocks.CALCITE_15_BLOCK.get());
+// pOutput.accept(ModBLocks.CALCITE_15_STAIRS.get());
+// pOutput.accept(ModBLocks.CALCITE_15_SLAB.get());
+// pOutput.accept(ModBLocks.CALCITE_15_WALL.get());
+                        pOutput.accept(ModBLocks.CALCITE_16_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_16_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_16_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_16_WALL.get());
 
+                        pOutput.accept(ModBLocks.CALCITE_17_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_17_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_17_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_17_WALL.get());
 
+                        pOutput.accept(ModBLocks.CALCITE_18_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_18_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_18_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_18_WALL.get());
 
+                        pOutput.accept(ModBLocks.CALCITE_19_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_19_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_19_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_19_WALL.get());
+                        pOutput.accept(ModBLocks.CALCITE_20_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_20_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_20_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_20_WALL.get());
 
+                        pOutput.accept(ModBLocks.CALCITE_21_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_21_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_21_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_21_WALL.get());
 
+                        pOutput.accept(ModBLocks.CALCITE_22_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_22_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_22_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_22_WALL.get());
 
+                        pOutput.accept(ModBLocks.CALCITE_23_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_23_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_23_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_23_WALL.get());
+
+                        pOutput.accept(ModBLocks.CALCITE_24_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_24_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_24_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_24_WALL.get());
+
+                        pOutput.accept(ModBLocks.CALCITE_25_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_25_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_25_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_25_WALL.get());
+
+                        pOutput.accept(ModBLocks.CALCITE_26_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_26_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_26_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_26_WALL.get());
+
+                        pOutput.accept(ModBLocks.CALCITE_27_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_27_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_27_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_27_WALL.get());
+
+                        pOutput.accept(ModBLocks.CALCITE_28_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_28_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_28_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_28_WALL.get());
+
+                        pOutput.accept(ModBLocks.CALCITE_29_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_29_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_29_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_29_WALL.get());
+
+                        pOutput.accept(ModBLocks.CALCITE_30_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_30_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_30_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_30_WALL.get());
+
+                        pOutput.accept(ModBLocks.CALCITE_31_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_31_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_31_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_31_WALL.get());
+
+                        pOutput.accept(ModBLocks.CALCITE_32_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_32_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_32_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_32_WALL.get());
+
+                        pOutput.accept(ModBLocks.CALCITE_33_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_33_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_33_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_33_WALL.get());
+
+                        pOutput.accept(ModBLocks.CALCITE_34_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_34_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_34_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_34_WALL.get());
+
+                        pOutput.accept(ModBLocks.CALCITE_35_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_35_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_35_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_35_WALL.get());
+
+                        pOutput.accept(ModBLocks.CALCITE_36_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_36_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_36_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_36_WALL.get());
+
+                        pOutput.accept(ModBLocks.CALCITE_37_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_37_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_37_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_37_WALL.get());
+
+                        pOutput.accept(ModBLocks.CALCITE_38_BLOCK.get());
+                        pOutput.accept(ModBLocks.CALCITE_38_STAIRS.get());
+                        pOutput.accept(ModBLocks.CALCITE_38_SLAB.get());
+                        pOutput.accept(ModBLocks.CALCITE_38_WALL.get());
 
                         pOutput.accept(ModBLocks.QUAGMIRE.get());
                         /** INGOTS = Blocks */

@@ -2760,6 +2760,381 @@ public class ModBLocks {
             WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BRICK_WALL));
 
 
+    public static final DeferredBlock<Block> CALCITE_1_BLOCK = registerBlock("calcite_1",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_1_STAIRS = registerBlock("calcite_1_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_1_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_1_SLAB = registerBlock("calcite_1_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_1_WALL = registerBlock("calcite_1_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_2_BLOCK = registerBlock("calcite_2",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_2_STAIRS = registerBlock("calcite_2_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_2_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_2_SLAB = registerBlock("calcite_2_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_2_WALL = registerBlock("calcite_2_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_3_BLOCK = registerBlock("calcite_3",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_3_STAIRS = registerBlock("calcite_3_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_3_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_3_SLAB = registerBlock("calcite_3_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_3_WALL = registerBlock("calcite_3_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_4_BLOCK = registerBlock("calcite_4",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_4_STAIRS = registerBlock("calcite_4_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_4_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_4_SLAB = registerBlock("calcite_4_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_4_WALL = registerBlock("calcite_4_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_5_BLOCK = registerBlock("calcite_5",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_5_STAIRS = registerBlock("calcite_5_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_5_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_5_SLAB = registerBlock("calcite_5_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_5_WALL = registerBlock("calcite_5_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_6_BLOCK = registerBlock("calcite_6",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_6_STAIRS = registerBlock("calcite_6_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_6_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_6_SLAB = registerBlock("calcite_6_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_6_WALL = registerBlock("calcite_6_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_7_BLOCK = registerBlock("calcite_7",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_7_STAIRS = registerBlock("calcite_7_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_7_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_7_SLAB = registerBlock("calcite_7_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_7_WALL = registerBlock("calcite_7_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_8_BLOCK = registerBlock("calcite_8",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_8_STAIRS = registerBlock("calcite_8_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_8_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_8_SLAB = registerBlock("calcite_8_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_8_WALL = registerBlock("calcite_8_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_9_BLOCK = registerBlock("calcite_9",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_9_STAIRS = registerBlock("calcite_9_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_9_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_9_SLAB = registerBlock("calcite_9_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_9_WALL = registerBlock("calcite_9_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_10_BLOCK = registerBlock("calcite_10",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_10_STAIRS = registerBlock("calcite_10_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_10_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_10_SLAB = registerBlock("calcite_10_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_10_WALL = registerBlock("calcite_10_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_11_BLOCK = registerBlock("calcite_11",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_11_STAIRS = registerBlock("calcite_11_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_11_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_11_SLAB = registerBlock("calcite_11_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_11_WALL = registerBlock("calcite_11_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_12_BLOCK = registerBlock("calcite_12",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_12_STAIRS = registerBlock("calcite_12_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_12_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_12_SLAB = registerBlock("calcite_12_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_12_WALL = registerBlock("calcite_12_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_13_BLOCK = registerBlock("calcite_13",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_13_STAIRS = registerBlock("calcite_13_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_13_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_13_SLAB = registerBlock("calcite_13_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_13_WALL = registerBlock("calcite_13_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_14_BLOCK = registerBlock("calcite_14",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_14_STAIRS = registerBlock("calcite_14_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_14_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_14_SLAB = registerBlock("calcite_14_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_14_WALL = registerBlock("calcite_14_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    // public static final DeferredBlock<Block> CALCITE_15_BLOCK = registerBlock("calcite_15",
+    //       Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    //public static final DeferredBlock<Block> CALCITE_15_STAIRS = registerBlock("calcite_15_stairs",
+    //      properties -> new StairBlock(ModBLocks.CALCITE_15_BLOCK.get().defaultBlockState(),
+    //            properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    //public static final DeferredBlock<Block> CALCITE_15_SLAB = registerBlock("calcite_15_slab",
+    //      SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    //public static final DeferredBlock<Block> CALCITE_15_WALL = registerBlock("calcite_15_wall",
+    //      WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_16_BLOCK = registerBlock("calcite_16",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_16_STAIRS = registerBlock("calcite_16_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_16_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_16_SLAB = registerBlock("calcite_16_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_16_WALL = registerBlock("calcite_16_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_17_BLOCK = registerBlock("calcite_17",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_17_STAIRS = registerBlock("calcite_17_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_17_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_17_SLAB = registerBlock("calcite_17_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_17_WALL = registerBlock("calcite_17_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_18_BLOCK = registerBlock("calcite_18",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_18_STAIRS = registerBlock("calcite_18_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_18_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_18_SLAB = registerBlock("calcite_18_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_18_WALL = registerBlock("calcite_18_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    // For 19
+    public static final DeferredBlock<Block> CALCITE_19_BLOCK = registerBlock("calcite_19",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_19_STAIRS = registerBlock("calcite_19_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_19_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_19_SLAB = registerBlock("calcite_19_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_19_WALL = registerBlock("calcite_19_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+
+    // For 20
+    public static final DeferredBlock<Block> CALCITE_20_BLOCK = registerBlock("calcite_20",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_20_STAIRS = registerBlock("calcite_20_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_20_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_20_SLAB = registerBlock("calcite_20_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_20_WALL = registerBlock("calcite_20_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+
+    // For 21
+    public static final DeferredBlock<Block> CALCITE_21_BLOCK = registerBlock("calcite_21",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_21_STAIRS = registerBlock("calcite_21_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_21_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_21_SLAB = registerBlock("calcite_21_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_21_WALL = registerBlock("calcite_21_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+
+    // For 22
+    public static final DeferredBlock<Block> CALCITE_22_BLOCK = registerBlock("calcite_22",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_22_STAIRS = registerBlock("calcite_22_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_22_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_22_SLAB = registerBlock("calcite_22_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_22_WALL = registerBlock("calcite_22_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_23_BLOCK = registerBlock("calcite_23",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_23_STAIRS = registerBlock("calcite_23_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_23_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_23_SLAB = registerBlock("calcite_23_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_23_WALL = registerBlock("calcite_23_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+
+    // CALCITE 24
+    public static final DeferredBlock<Block> CALCITE_24_BLOCK = registerBlock("calcite_24",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_24_STAIRS = registerBlock("calcite_24_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_24_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_24_SLAB = registerBlock("calcite_24_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_24_WALL = registerBlock("calcite_24_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+
+    // CALCITE 25
+    public static final DeferredBlock<Block> CALCITE_25_BLOCK = registerBlock("calcite_25",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_25_STAIRS = registerBlock("calcite_25_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_25_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_25_SLAB = registerBlock("calcite_25_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_25_WALL = registerBlock("calcite_25_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+
+    // CALCITE 26
+    public static final DeferredBlock<Block> CALCITE_26_BLOCK = registerBlock("calcite_26",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_26_STAIRS = registerBlock("calcite_26_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_26_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_26_SLAB = registerBlock("calcite_26_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_26_WALL = registerBlock("calcite_26_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+
+    // CALCITE 27
+    public static final DeferredBlock<Block> CALCITE_27_BLOCK = registerBlock("calcite_27",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_27_STAIRS = registerBlock("calcite_27_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_27_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_27_SLAB = registerBlock("calcite_27_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_27_WALL = registerBlock("calcite_27_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+
+    // CALCITE 28
+    public static final DeferredBlock<Block> CALCITE_28_BLOCK = registerBlock("calcite_28",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_28_STAIRS = registerBlock("calcite_28_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_28_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_28_SLAB = registerBlock("calcite_28_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_28_WALL = registerBlock("calcite_28_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+
+    // CALCITE 29
+    public static final DeferredBlock<Block> CALCITE_29_BLOCK = registerBlock("calcite_29",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_29_STAIRS = registerBlock("calcite_29_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_29_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_29_SLAB = registerBlock("calcite_29_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_29_WALL = registerBlock("calcite_29_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+
+    // CALCITE 30
+    public static final DeferredBlock<Block> CALCITE_30_BLOCK = registerBlock("calcite_30",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_30_STAIRS = registerBlock("calcite_30_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_30_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_30_SLAB = registerBlock("calcite_30_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_30_WALL = registerBlock("calcite_30_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+
+    // CALCITE 31
+    public static final DeferredBlock<Block> CALCITE_31_BLOCK = registerBlock("calcite_31",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_31_STAIRS = registerBlock("calcite_31_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_31_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_31_SLAB = registerBlock("calcite_31_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_31_WALL = registerBlock("calcite_31_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+
+    public static final DeferredBlock<Block> CALCITE_32_BLOCK = registerBlock("calcite_32",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_32_STAIRS = registerBlock("calcite_32_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_32_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_32_SLAB = registerBlock("calcite_32_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_32_WALL = registerBlock("calcite_32_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+
+    public static final DeferredBlock<Block> CALCITE_33_BLOCK = registerBlock("calcite_33",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_33_STAIRS = registerBlock("calcite_33_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_33_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_33_SLAB = registerBlock("calcite_33_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_33_WALL = registerBlock("calcite_33_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+
+    public static final DeferredBlock<Block> CALCITE_34_BLOCK = registerBlock("calcite_34",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_34_STAIRS = registerBlock("calcite_34_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_34_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_34_SLAB = registerBlock("calcite_34_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_34_WALL = registerBlock("calcite_34_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+
+    public static final DeferredBlock<Block> CALCITE_35_BLOCK = registerBlock("calcite_35",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_35_STAIRS = registerBlock("calcite_35_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_35_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_35_SLAB = registerBlock("calcite_35_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_35_WALL = registerBlock("calcite_35_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+
+    public static final DeferredBlock<Block> CALCITE_36_BLOCK = registerBlock("calcite_36",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_36_STAIRS = registerBlock("calcite_36_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_36_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_36_SLAB = registerBlock("calcite_36_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_36_WALL = registerBlock("calcite_36_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+
+    public static final DeferredBlock<Block> CALCITE_37_BLOCK = registerBlock("calcite_37",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_37_STAIRS = registerBlock("calcite_37_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_37_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_37_SLAB = registerBlock("calcite_37_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_37_WALL = registerBlock("calcite_37_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+
+    public static final DeferredBlock<Block> CALCITE_38_BLOCK = registerBlock("calcite_38",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f));
+    public static final DeferredBlock<Block> CALCITE_38_STAIRS = registerBlock("calcite_38_stairs",
+            properties -> new StairBlock(ModBLocks.CALCITE_38_BLOCK.get().defaultBlockState(),
+                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_38_SLAB = registerBlock("calcite_38_slab",
+            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+    public static final DeferredBlock<Block> CALCITE_38_WALL = registerBlock("calcite_38_wall",
+            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE));
+
+
+
 
     // ---------------------------(FLOWERS)--------------------------- //
     public static final DeferredBlock<Block> WINTER_ROSE = registerBlock("winter_rose",

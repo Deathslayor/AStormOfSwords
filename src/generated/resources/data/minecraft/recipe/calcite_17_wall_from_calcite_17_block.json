@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "agotmod:calcite_17",
+  "result": {
+    "count": 1,
+    "id": "agotmod:calcite_17_wall"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "agotmod:calcite_29",
+  "result": {
+    "count": 1,
+    "id": "agotmod:calcite_29_stairs"
+  }
+}

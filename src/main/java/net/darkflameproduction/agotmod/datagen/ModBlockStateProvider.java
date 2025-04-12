@@ -2127,6 +2127,265 @@ public class ModBlockStateProvider extends BlockStateProvider {
         stairsBlock(((StairBlock) ModBLocks.BRICKS_38_STAIRS.get()), blockTexture(ModBLocks.BRICKS_38_BLOCK.get()));
         wallBlock(((WallBlock) ModBLocks.BRICKS_38_WALL.get()), blockTexture(ModBLocks.BRICKS_38_BLOCK.get()));
 
+        blockWithItem(ModBLocks.CALCITE_1_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_1_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_1_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_1_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_1_STAIRS.get()), blockTexture(ModBLocks.CALCITE_1_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_1_WALL.get()), blockTexture(ModBLocks.CALCITE_1_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_2_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_2_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_2_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_2_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_2_STAIRS.get()), blockTexture(ModBLocks.CALCITE_2_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_2_WALL.get()), blockTexture(ModBLocks.CALCITE_2_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_3_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_3_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_3_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_3_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_3_STAIRS.get()), blockTexture(ModBLocks.CALCITE_3_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_3_WALL.get()), blockTexture(ModBLocks.CALCITE_3_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_4_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_4_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_4_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_4_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_4_STAIRS.get()), blockTexture(ModBLocks.CALCITE_4_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_4_WALL.get()), blockTexture(ModBLocks.CALCITE_4_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_5_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_5_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_5_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_5_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_5_STAIRS.get()), blockTexture(ModBLocks.CALCITE_5_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_5_WALL.get()), blockTexture(ModBLocks.CALCITE_5_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_6_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_6_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_6_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_6_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_6_STAIRS.get()), blockTexture(ModBLocks.CALCITE_6_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_6_WALL.get()), blockTexture(ModBLocks.CALCITE_6_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_7_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_7_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_7_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_7_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_7_STAIRS.get()), blockTexture(ModBLocks.CALCITE_7_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_7_WALL.get()), blockTexture(ModBLocks.CALCITE_7_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_8_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_8_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_8_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_8_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_8_STAIRS.get()), blockTexture(ModBLocks.CALCITE_8_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_8_WALL.get()), blockTexture(ModBLocks.CALCITE_8_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_9_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_9_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_9_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_9_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_9_STAIRS.get()), blockTexture(ModBLocks.CALCITE_9_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_9_WALL.get()), blockTexture(ModBLocks.CALCITE_9_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_10_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_10_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_10_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_10_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_10_STAIRS.get()), blockTexture(ModBLocks.CALCITE_10_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_10_WALL.get()), blockTexture(ModBLocks.CALCITE_10_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_11_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_11_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_11_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_11_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_11_STAIRS.get()), blockTexture(ModBLocks.CALCITE_11_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_11_WALL.get()), blockTexture(ModBLocks.CALCITE_11_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_12_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_12_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_12_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_12_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_12_STAIRS.get()), blockTexture(ModBLocks.CALCITE_12_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_12_WALL.get()), blockTexture(ModBLocks.CALCITE_12_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_13_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_13_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_13_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_13_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_13_STAIRS.get()), blockTexture(ModBLocks.CALCITE_13_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_13_WALL.get()), blockTexture(ModBLocks.CALCITE_13_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_14_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_14_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_14_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_14_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_14_STAIRS.get()), blockTexture(ModBLocks.CALCITE_14_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_14_WALL.get()), blockTexture(ModBLocks.CALCITE_14_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_16_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_16_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_16_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_16_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_16_STAIRS.get()), blockTexture(ModBLocks.CALCITE_16_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_16_WALL.get()), blockTexture(ModBLocks.CALCITE_16_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_17_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_17_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_17_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_17_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_17_STAIRS.get()), blockTexture(ModBLocks.CALCITE_17_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_17_WALL.get()), blockTexture(ModBLocks.CALCITE_17_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_18_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_18_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_18_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_18_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_18_STAIRS.get()), blockTexture(ModBLocks.CALCITE_18_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_18_WALL.get()), blockTexture(ModBLocks.CALCITE_18_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_19_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_19_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_19_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_19_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_19_STAIRS.get()), blockTexture(ModBLocks.CALCITE_19_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_19_WALL.get()), blockTexture(ModBLocks.CALCITE_19_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_20_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_20_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_20_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_20_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_20_STAIRS.get()), blockTexture(ModBLocks.CALCITE_20_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_20_WALL.get()), blockTexture(ModBLocks.CALCITE_20_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_21_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_21_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_21_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_21_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_21_STAIRS.get()), blockTexture(ModBLocks.CALCITE_21_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_21_WALL.get()), blockTexture(ModBLocks.CALCITE_21_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_22_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_22_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_22_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_22_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_22_STAIRS.get()), blockTexture(ModBLocks.CALCITE_22_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_22_WALL.get()), blockTexture(ModBLocks.CALCITE_22_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_23_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_23_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_23_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_23_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_23_STAIRS.get()), blockTexture(ModBLocks.CALCITE_23_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_23_WALL.get()), blockTexture(ModBLocks.CALCITE_23_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_24_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_24_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_24_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_24_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_24_STAIRS.get()), blockTexture(ModBLocks.CALCITE_24_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_24_WALL.get()), blockTexture(ModBLocks.CALCITE_24_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_25_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_25_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_25_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_25_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_25_STAIRS.get()), blockTexture(ModBLocks.CALCITE_25_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_25_WALL.get()), blockTexture(ModBLocks.CALCITE_25_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_26_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_26_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_26_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_26_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_26_STAIRS.get()), blockTexture(ModBLocks.CALCITE_26_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_26_WALL.get()), blockTexture(ModBLocks.CALCITE_26_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_27_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_27_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_27_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_27_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_27_STAIRS.get()), blockTexture(ModBLocks.CALCITE_27_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_27_WALL.get()), blockTexture(ModBLocks.CALCITE_27_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_28_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_28_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_28_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_28_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_28_STAIRS.get()), blockTexture(ModBLocks.CALCITE_28_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_28_WALL.get()), blockTexture(ModBLocks.CALCITE_28_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_29_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_29_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_29_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_29_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_29_STAIRS.get()), blockTexture(ModBLocks.CALCITE_29_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_29_WALL.get()), blockTexture(ModBLocks.CALCITE_29_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_30_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_30_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_30_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_30_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_30_STAIRS.get()), blockTexture(ModBLocks.CALCITE_30_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_30_WALL.get()), blockTexture(ModBLocks.CALCITE_30_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_31_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_31_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_31_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_31_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_31_STAIRS.get()), blockTexture(ModBLocks.CALCITE_31_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_31_WALL.get()), blockTexture(ModBLocks.CALCITE_31_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_32_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_32_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_32_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_32_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_32_STAIRS.get()), blockTexture(ModBLocks.CALCITE_32_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_32_WALL.get()), blockTexture(ModBLocks.CALCITE_32_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_33_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_33_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_33_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_33_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_33_STAIRS.get()), blockTexture(ModBLocks.CALCITE_33_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_33_WALL.get()), blockTexture(ModBLocks.CALCITE_33_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_34_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_34_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_34_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_34_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_34_STAIRS.get()), blockTexture(ModBLocks.CALCITE_34_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_34_WALL.get()), blockTexture(ModBLocks.CALCITE_34_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_35_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_35_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_35_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_35_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_35_STAIRS.get()), blockTexture(ModBLocks.CALCITE_35_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_35_WALL.get()), blockTexture(ModBLocks.CALCITE_35_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_36_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_36_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_36_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_36_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_36_STAIRS.get()), blockTexture(ModBLocks.CALCITE_36_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_36_WALL.get()), blockTexture(ModBLocks.CALCITE_36_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_37_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_37_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_37_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_37_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_37_STAIRS.get()), blockTexture(ModBLocks.CALCITE_37_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_37_WALL.get()), blockTexture(ModBLocks.CALCITE_37_BLOCK.get()));
+
+        blockWithItem(ModBLocks.CALCITE_38_BLOCK);
+        slabBlock(((SlabBlock) ModBLocks.CALCITE_38_SLAB.get()),
+                blockTexture(ModBLocks.CALCITE_38_BLOCK.get()),
+                blockTexture(ModBLocks.CALCITE_38_BLOCK.get()));
+        stairsBlock(((StairBlock) ModBLocks.CALCITE_38_STAIRS.get()), blockTexture(ModBLocks.CALCITE_38_BLOCK.get()));
+        wallBlock(((WallBlock) ModBLocks.CALCITE_38_WALL.get()), blockTexture(ModBLocks.CALCITE_38_BLOCK.get()));
+
 
 
 

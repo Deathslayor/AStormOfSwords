@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_calcite_30": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:calcite_30"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:calcite_30_slab_from_calcite_30_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_calcite_30"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:calcite_30_slab_from_calcite_30_block"
+    ]
+  }
+}
