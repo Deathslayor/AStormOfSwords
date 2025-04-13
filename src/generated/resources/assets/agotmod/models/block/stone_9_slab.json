@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/slab",
   "textures": {
-    "bottom": "agotmod:block/stone_9",
-    "side": "agotmod:block/stone_9",
-    "top": "agotmod:block/stone_9"
+    "bottom": "agotmod:block/stone_9_block",
+    "side": "agotmod:block/stone_9_block",
+    "top": "agotmod:block/stone_9_block"
   }
 }

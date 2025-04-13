@@ -4,7 +4,7 @@
       "model": "agotmod:block/basalt_38_slab"
     },
     "type=double": {
-      "model": "agotmod:block/basalt_38"
+      "model": "agotmod:block/basalt_38_block"
     },
     "type=top": {
       "model": "agotmod:block/basalt_38_slab_top"

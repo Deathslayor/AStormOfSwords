@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/slab",
   "textures": {
-    "bottom": "agotmod:block/calcite_11",
-    "side": "agotmod:block/calcite_11",
-    "top": "agotmod:block/calcite_11"
+    "bottom": "agotmod:block/calcite_11_block",
+    "side": "agotmod:block/calcite_11_block",
+    "top": "agotmod:block/calcite_11_block"
   }
 }

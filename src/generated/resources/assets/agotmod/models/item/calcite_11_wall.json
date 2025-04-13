@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/wall_inventory",
   "textures": {
-    "wall": "agotmod:block/calcite_11"
+    "wall": "agotmod:block/calcite_11_block"
   }
 }

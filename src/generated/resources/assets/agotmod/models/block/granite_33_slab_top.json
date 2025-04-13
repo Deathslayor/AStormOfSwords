@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/slab_top",
   "textures": {
-    "bottom": "agotmod:block/granite_33",
-    "side": "agotmod:block/granite_33",
-    "top": "agotmod:block/granite_33"
+    "bottom": "agotmod:block/granite_33_block",
+    "side": "agotmod:block/granite_33_block",
+    "top": "agotmod:block/granite_33_block"
   }
 }

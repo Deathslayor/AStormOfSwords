@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_basalt_8": {
+    "has_basalt_8_block": {
       "conditions": {
         "items": [
           {
-            "items": "agotmod:basalt_8"
+            "items": "agotmod:basalt_8_block"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_basalt_8"
+      "has_basalt_8_block"
     ]
   ],
   "rewards": {

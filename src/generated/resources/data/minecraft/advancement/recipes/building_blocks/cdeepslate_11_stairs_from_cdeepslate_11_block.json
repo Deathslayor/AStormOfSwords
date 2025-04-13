@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_cdeepslate_11": {
+    "has_cdeepslate_11_block": {
       "conditions": {
         "items": [
           {
-            "items": "agotmod:cdeepslate_11"
+            "items": "agotmod:cdeepslate_11_block"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_cdeepslate_11"
+      "has_cdeepslate_11_block"
     ]
   ],
   "rewards": {

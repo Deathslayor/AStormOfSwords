@@ -1,6 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "agotmod:bricks_1",
+  "ingredient": "agotmod:bricks_1_block",
   "result": {
     "count": 1,
     "id": "agotmod:bricks_1_wall"

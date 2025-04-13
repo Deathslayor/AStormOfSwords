@@ -1,6 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "agotmod:cdeepslate_8",
+  "ingredient": "agotmod:cdeepslate_8_block",
   "result": {
     "count": 1,
     "id": "agotmod:cdeepslate_8_wall"

@@ -4,7 +4,7 @@
       "model": "agotmod:block/calcite_26_slab"
     },
     "type=double": {
-      "model": "agotmod:block/calcite_26"
+      "model": "agotmod:block/calcite_26_block"
     },
     "type=top": {
       "model": "agotmod:block/calcite_26_slab_top"

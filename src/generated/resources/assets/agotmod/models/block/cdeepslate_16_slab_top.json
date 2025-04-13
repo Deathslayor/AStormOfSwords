@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/slab_top",
   "textures": {
-    "bottom": "agotmod:block/cdeepslate_16",
-    "side": "agotmod:block/cdeepslate_16",
-    "top": "agotmod:block/cdeepslate_16"
+    "bottom": "agotmod:block/cdeepslate_16_block",
+    "side": "agotmod:block/cdeepslate_16_block",
+    "top": "agotmod:block/cdeepslate_16_block"
   }
 }

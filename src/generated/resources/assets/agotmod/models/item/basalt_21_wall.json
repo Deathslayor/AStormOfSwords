@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/wall_inventory",
   "textures": {
-    "wall": "agotmod:block/basalt_21"
+    "wall": "agotmod:block/basalt_21_block"
   }
 }

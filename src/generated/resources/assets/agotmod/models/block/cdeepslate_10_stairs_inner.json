@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/inner_stairs",
   "textures": {
-    "bottom": "agotmod:block/cdeepslate_10",
-    "side": "agotmod:block/cdeepslate_10",
-    "top": "agotmod:block/cdeepslate_10"
+    "bottom": "agotmod:block/cdeepslate_10_block",
+    "side": "agotmod:block/cdeepslate_10_block",
+    "top": "agotmod:block/cdeepslate_10_block"
   }
 }

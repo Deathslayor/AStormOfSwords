@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_rsandstone_20": {
+    "has_rsandstone_20_block": {
       "conditions": {
         "items": [
           {
-            "items": "agotmod:rsandstone_20"
+            "items": "agotmod:rsandstone_20_block"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_rsandstone_20"
+      "has_rsandstone_20_block"
     ]
   ],
   "rewards": {

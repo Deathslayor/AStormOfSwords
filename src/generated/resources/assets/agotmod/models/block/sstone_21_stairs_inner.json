@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/inner_stairs",
   "textures": {
-    "bottom": "agotmod:block/sstone_21",
-    "side": "agotmod:block/sstone_21",
-    "top": "agotmod:block/sstone_21"
+    "bottom": "agotmod:block/sstone_21_block",
+    "side": "agotmod:block/sstone_21_block",
+    "top": "agotmod:block/sstone_21_block"
   }
 }

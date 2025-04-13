@@ -1,6 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "agotmod:basalt_21",
+  "ingredient": "agotmod:basalt_21_block",
   "result": {
     "count": 1,
     "id": "agotmod:basalt_21_stairs"

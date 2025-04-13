@@ -4,7 +4,7 @@
       "model": "agotmod:block/sstone_12_slab"
     },
     "type=double": {
-      "model": "agotmod:block/sstone_12"
+      "model": "agotmod:block/sstone_12_block"
     },
     "type=top": {
       "model": "agotmod:block/sstone_12_slab_top"

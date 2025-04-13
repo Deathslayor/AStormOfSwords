@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/template_wall_side",
   "textures": {
-    "wall": "agotmod:block/redkeep_3"
+    "wall": "agotmod:block/redkeep_3_block"
   }
 }

@@ -1,6 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "agotmod:redkeep_36",
+  "ingredient": "agotmod:redkeep_36_block",
   "result": {
     "count": 1,
     "id": "agotmod:redkeep_36_wall"

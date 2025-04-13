@@ -38,12 +38,16 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 
+import static net.darkflameproduction.agotmod.block.ModBLocks.BLACKSTONE_VARIANTS;
+
 public class ModItemModelProvider extends ItemModelProvider {
     // Constructor for ModItemModelProvider
     public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         // Call the constructor of the superclass (ItemModelProvider)
         super(output, AGoTMod.MOD_ID, existingFileHelper);
     }
+
+
 
     // Method to register item models
     @Override
@@ -481,1108 +485,130 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleBlockItemBlockTexture(ModBLocks.BLACK_LOTUS);
 
         // ---------------------------(STONE)--------------------------- //
-        wallItem(ModBLocks.SSTONE_1_WALL, ModBLocks.SSTONE_1_BLOCK);
-        evenSimplerBlockItem(ModBLocks.SSTONE_1_STAIRS);
-        evenSimplerBlockItem(ModBLocks.SSTONE_1_SLAB);
-        wallItem(ModBLocks.SSTONE_2_WALL, ModBLocks.SSTONE_2_BLOCK);
-        evenSimplerBlockItem(ModBLocks.SSTONE_2_STAIRS);
-        evenSimplerBlockItem(ModBLocks.SSTONE_2_SLAB);
-        wallItem(ModBLocks.SSTONE_3_WALL, ModBLocks.SSTONE_3_BLOCK);
-        evenSimplerBlockItem(ModBLocks.SSTONE_3_STAIRS);
-        evenSimplerBlockItem(ModBLocks.SSTONE_3_SLAB);
-        wallItem(ModBLocks.SSTONE_4_WALL, ModBLocks.SSTONE_4_BLOCK);
-        evenSimplerBlockItem(ModBLocks.SSTONE_4_STAIRS);
-        evenSimplerBlockItem(ModBLocks.SSTONE_4_SLAB);
-        wallItem(ModBLocks.SSTONE_5_WALL, ModBLocks.SSTONE_5_BLOCK);
-        evenSimplerBlockItem(ModBLocks.SSTONE_5_STAIRS);
-        evenSimplerBlockItem(ModBLocks.SSTONE_5_SLAB);
-        wallItem(ModBLocks.SSTONE_6_WALL, ModBLocks.SSTONE_6_BLOCK);
-        evenSimplerBlockItem(ModBLocks.SSTONE_6_STAIRS);
-        evenSimplerBlockItem(ModBLocks.SSTONE_6_SLAB);
-        wallItem(ModBLocks.SSTONE_7_WALL, ModBLocks.SSTONE_7_BLOCK);
-        evenSimplerBlockItem(ModBLocks.SSTONE_7_STAIRS);
-        evenSimplerBlockItem(ModBLocks.SSTONE_7_SLAB);
-        wallItem(ModBLocks.SSTONE_8_WALL, ModBLocks.SSTONE_8_BLOCK);
-        evenSimplerBlockItem(ModBLocks.SSTONE_8_STAIRS);
-        evenSimplerBlockItem(ModBLocks.SSTONE_8_SLAB);
-        wallItem(ModBLocks.SSTONE_9_WALL, ModBLocks.SSTONE_9_BLOCK);
-        evenSimplerBlockItem(ModBLocks.SSTONE_9_STAIRS);
-        evenSimplerBlockItem(ModBLocks.SSTONE_9_SLAB);
-        wallItem(ModBLocks.SSTONE_10_WALL, ModBLocks.SSTONE_10_BLOCK);
-        evenSimplerBlockItem(ModBLocks.SSTONE_10_STAIRS);
-        evenSimplerBlockItem(ModBLocks.SSTONE_10_SLAB);
-        wallItem(ModBLocks.SSTONE_11_WALL, ModBLocks.SSTONE_11_BLOCK);
-        evenSimplerBlockItem(ModBLocks.SSTONE_11_STAIRS);
-        evenSimplerBlockItem(ModBLocks.SSTONE_11_SLAB);
-        wallItem(ModBLocks.SSTONE_12_WALL, ModBLocks.SSTONE_12_BLOCK);
-        evenSimplerBlockItem(ModBLocks.SSTONE_12_STAIRS);
-        evenSimplerBlockItem(ModBLocks.SSTONE_12_SLAB);
-        wallItem(ModBLocks.SSTONE_13_WALL, ModBLocks.SSTONE_13_BLOCK);
-        evenSimplerBlockItem(ModBLocks.SSTONE_13_STAIRS);
-        evenSimplerBlockItem(ModBLocks.SSTONE_13_SLAB);
-        wallItem(ModBLocks.SSTONE_14_WALL, ModBLocks.SSTONE_14_BLOCK);
-        evenSimplerBlockItem(ModBLocks.SSTONE_14_STAIRS);
-        evenSimplerBlockItem(ModBLocks.SSTONE_14_SLAB);
-        // wallItem(ModBLocks.SSTONE_15_WALL, ModBLocks.SSTONE_15_BLOCK);
-        //evenSimplerBlockItem(ModBLocks.SSTONE_15_STAIRS);
-        //evenSimplerBlockItem(ModBLocks.SSTONE_15_SLAB);
-        wallItem(ModBLocks.SSTONE_16_WALL, ModBLocks.SSTONE_16_BLOCK);
-        evenSimplerBlockItem(ModBLocks.SSTONE_16_STAIRS);
-        evenSimplerBlockItem(ModBLocks.SSTONE_16_SLAB);
-        wallItem(ModBLocks.SSTONE_17_WALL, ModBLocks.SSTONE_17_BLOCK);
-        evenSimplerBlockItem(ModBLocks.SSTONE_17_STAIRS);
-        evenSimplerBlockItem(ModBLocks.SSTONE_17_SLAB);
-        wallItem(ModBLocks.SSTONE_18_WALL, ModBLocks.SSTONE_18_BLOCK);
-        evenSimplerBlockItem(ModBLocks.SSTONE_18_STAIRS);
-        evenSimplerBlockItem(ModBLocks.SSTONE_18_SLAB);
-        // For 19
-        wallItem(ModBLocks.SSTONE_19_WALL, ModBLocks.SSTONE_19_BLOCK);
-        evenSimplerBlockItem(ModBLocks.SSTONE_19_STAIRS);
-        evenSimplerBlockItem(ModBLocks.SSTONE_19_SLAB);
-
-// For 20
-        wallItem(ModBLocks.SSTONE_20_WALL, ModBLocks.SSTONE_20_BLOCK);
-        evenSimplerBlockItem(ModBLocks.SSTONE_20_STAIRS);
-        evenSimplerBlockItem(ModBLocks.SSTONE_20_SLAB);
-
-// For 21
-             wallItem(ModBLocks.SSTONE_21_WALL, ModBLocks.SSTONE_21_BLOCK);
-            evenSimplerBlockItem(ModBLocks.SSTONE_21_STAIRS);
-            evenSimplerBlockItem(ModBLocks.SSTONE_21_SLAB);
-
-// For 22
-        wallItem(ModBLocks.SSTONE_22_WALL, ModBLocks.SSTONE_22_BLOCK);
-        evenSimplerBlockItem(ModBLocks.SSTONE_22_STAIRS);
-        evenSimplerBlockItem(ModBLocks.SSTONE_22_SLAB);
-
-        wallItem(ModBLocks.RSANDSTONE_1_WALL, ModBLocks.RSANDSTONE_1_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_1_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_1_SLAB);
-        wallItem(ModBLocks.RSANDSTONE_2_WALL, ModBLocks.RSANDSTONE_2_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_2_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_2_SLAB);
-        wallItem(ModBLocks.RSANDSTONE_3_WALL, ModBLocks.RSANDSTONE_3_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_3_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_3_SLAB);
-        wallItem(ModBLocks.RSANDSTONE_4_WALL, ModBLocks.RSANDSTONE_4_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_4_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_4_SLAB);
-        wallItem(ModBLocks.RSANDSTONE_5_WALL, ModBLocks.RSANDSTONE_5_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_5_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_5_SLAB);
-        wallItem(ModBLocks.RSANDSTONE_6_WALL, ModBLocks.RSANDSTONE_6_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_6_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_6_SLAB);
-        wallItem(ModBLocks.RSANDSTONE_7_WALL, ModBLocks.RSANDSTONE_7_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_7_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_7_SLAB);
-        wallItem(ModBLocks.RSANDSTONE_8_WALL, ModBLocks.RSANDSTONE_8_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_8_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_8_SLAB);
-        wallItem(ModBLocks.RSANDSTONE_9_WALL, ModBLocks.RSANDSTONE_9_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_9_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_9_SLAB);
-        wallItem(ModBLocks.RSANDSTONE_10_WALL, ModBLocks.RSANDSTONE_10_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_10_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_10_SLAB);
-        wallItem(ModBLocks.RSANDSTONE_11_WALL, ModBLocks.RSANDSTONE_11_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_11_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_11_SLAB);
-        wallItem(ModBLocks.RSANDSTONE_12_WALL, ModBLocks.RSANDSTONE_12_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_12_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_12_SLAB);
-        wallItem(ModBLocks.RSANDSTONE_13_WALL, ModBLocks.RSANDSTONE_13_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_13_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_13_SLAB);
-        wallItem(ModBLocks.RSANDSTONE_14_WALL, ModBLocks.RSANDSTONE_14_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_14_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_14_SLAB);
-// wallItem(ModBLocks.RSANDSTONE_15_WALL, ModBLocks.RSANDSTONE_15_BLOCK);
-// evenSimplerBlockItem(ModBLocks.RSANDSTONE_15_STAIRS);
-// evenSimplerBlockItem(ModBLocks.RSANDSTONE_15_SLAB);
-// For 19
-        wallItem(ModBLocks.RSANDSTONE_19_WALL, ModBLocks.RSANDSTONE_19_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_19_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_19_SLAB);
-
-// For 20
-        wallItem(ModBLocks.RSANDSTONE_20_WALL, ModBLocks.RSANDSTONE_20_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_20_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_20_SLAB);
-
-// For 21
-     wallItem(ModBLocks.RSANDSTONE_21_WALL, ModBLocks.RSANDSTONE_21_BLOCK);
-    evenSimplerBlockItem(ModBLocks.RSANDSTONE_21_STAIRS);
-    evenSimplerBlockItem(ModBLocks.RSANDSTONE_21_SLAB);
-
-// For 22
-        wallItem(ModBLocks.RSANDSTONE_22_WALL, ModBLocks.RSANDSTONE_22_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_22_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_22_SLAB);
-        wallItem(ModBLocks.RSANDSTONE_23_WALL, ModBLocks.RSANDSTONE_23_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_23_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_23_SLAB);
-
-        wallItem(ModBLocks.RSANDSTONE_24_WALL, ModBLocks.RSANDSTONE_24_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_24_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_24_SLAB);
-
-        wallItem(ModBLocks.RSANDSTONE_25_WALL, ModBLocks.RSANDSTONE_25_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_25_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_25_SLAB);
-
-        wallItem(ModBLocks.RSANDSTONE_26_WALL, ModBLocks.RSANDSTONE_26_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_26_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_26_SLAB);
-
-        wallItem(ModBLocks.RSANDSTONE_27_WALL, ModBLocks.RSANDSTONE_27_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_27_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_27_SLAB);
-
-        wallItem(ModBLocks.RSANDSTONE_28_WALL, ModBLocks.RSANDSTONE_28_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_28_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_28_SLAB);
-
-        wallItem(ModBLocks.RSANDSTONE_29_WALL, ModBLocks.RSANDSTONE_29_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_29_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_29_SLAB);
-
-        wallItem(ModBLocks.RSANDSTONE_30_WALL, ModBLocks.RSANDSTONE_30_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_30_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_30_SLAB);
-
-        wallItem(ModBLocks.RSANDSTONE_31_WALL, ModBLocks.RSANDSTONE_31_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_31_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_31_SLAB);
-
-        wallItem(ModBLocks.RSANDSTONE_32_WALL, ModBLocks.RSANDSTONE_32_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_32_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_32_SLAB);
-
-        wallItem(ModBLocks.RSANDSTONE_33_WALL, ModBLocks.RSANDSTONE_33_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_33_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_33_SLAB);
-
-        wallItem(ModBLocks.RSANDSTONE_34_WALL, ModBLocks.RSANDSTONE_34_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_34_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_34_SLAB);
-
-        wallItem(ModBLocks.RSANDSTONE_35_WALL, ModBLocks.RSANDSTONE_35_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_35_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_35_SLAB);
-
-        wallItem(ModBLocks.RSANDSTONE_36_WALL, ModBLocks.RSANDSTONE_36_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_36_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_36_SLAB);
-
-        wallItem(ModBLocks.RSANDSTONE_37_WALL, ModBLocks.RSANDSTONE_37_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_37_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_37_SLAB);
-
-        wallItem(ModBLocks.RSANDSTONE_38_WALL, ModBLocks.RSANDSTONE_38_BLOCK);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_38_STAIRS);
-        evenSimplerBlockItem(ModBLocks.RSANDSTONE_38_SLAB);
-
         //REDKEEP
         wallItem(ModBLocks.REDKEEP_STONE_WALL, ModBLocks.REDKEEP_STONE_BLOCK);
         evenSimplerBlockItem(ModBLocks.REDKEEP_STONE_STAIRS);
         evenSimplerBlockItem(ModBLocks.REDKEEP_STONE_SLAB);
-        wallItem(ModBLocks.REDKEEP_1_WALL, ModBLocks.REDKEEP_1_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_1_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_1_SLAB);
-        wallItem(ModBLocks.REDKEEP_2_WALL, ModBLocks.REDKEEP_2_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_2_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_2_SLAB);
-        wallItem(ModBLocks.REDKEEP_3_WALL, ModBLocks.REDKEEP_3_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_3_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_3_SLAB);
-        wallItem(ModBLocks.REDKEEP_4_WALL, ModBLocks.REDKEEP_4_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_4_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_4_SLAB);
-        wallItem(ModBLocks.REDKEEP_5_WALL, ModBLocks.REDKEEP_5_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_5_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_5_SLAB);
-        wallItem(ModBLocks.REDKEEP_6_WALL, ModBLocks.REDKEEP_6_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_6_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_6_SLAB);
-        wallItem(ModBLocks.REDKEEP_7_WALL, ModBLocks.REDKEEP_7_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_7_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_7_SLAB);
-        wallItem(ModBLocks.REDKEEP_8_WALL, ModBLocks.REDKEEP_8_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_8_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_8_SLAB);
-        wallItem(ModBLocks.REDKEEP_9_WALL, ModBLocks.REDKEEP_9_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_9_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_9_SLAB);
-        wallItem(ModBLocks.REDKEEP_10_WALL, ModBLocks.REDKEEP_10_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_10_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_10_SLAB);
-        wallItem(ModBLocks.REDKEEP_11_WALL, ModBLocks.REDKEEP_11_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_11_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_11_SLAB);
-        wallItem(ModBLocks.REDKEEP_12_WALL, ModBLocks.REDKEEP_12_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_12_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_12_SLAB);
-        wallItem(ModBLocks.REDKEEP_13_WALL, ModBLocks.REDKEEP_13_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_13_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_13_SLAB);
-        wallItem(ModBLocks.REDKEEP_14_WALL, ModBLocks.REDKEEP_14_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_14_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_14_SLAB);
-// wallItem(ModBLocks.REDKEEP_15_WALL, ModBLocks.REDKEEP_15_BLOCK);
-// evenSimplerBlockItem(ModBLocks.REDKEEP_15_STAIRS);
-// evenSimplerBlockItem(ModBLocks.REDKEEP_15_SLAB);
-        wallItem(ModBLocks.REDKEEP_16_WALL, ModBLocks.REDKEEP_16_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_16_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_16_SLAB);
-        wallItem(ModBLocks.REDKEEP_17_WALL, ModBLocks.REDKEEP_17_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_17_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_17_SLAB);
-        wallItem(ModBLocks.REDKEEP_18_WALL, ModBLocks.REDKEEP_18_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_18_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_18_SLAB);
-// For 19
-        wallItem(ModBLocks.REDKEEP_19_WALL, ModBLocks.REDKEEP_19_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_19_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_19_SLAB);
 
-// For 20
-        wallItem(ModBLocks.REDKEEP_20_WALL, ModBLocks.REDKEEP_20_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_20_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_20_SLAB);
 
-// For 21
-wallItem(ModBLocks.REDKEEP_21_WALL, ModBLocks.REDKEEP_21_BLOCK);
-evenSimplerBlockItem(ModBLocks.REDKEEP_21_STAIRS);
-evenSimplerBlockItem(ModBLocks.REDKEEP_21_SLAB);
-
-// For 22
-        wallItem(ModBLocks.REDKEEP_22_WALL, ModBLocks.REDKEEP_22_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_22_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_22_SLAB);
-        wallItem(ModBLocks.REDKEEP_23_WALL, ModBLocks.REDKEEP_23_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_23_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_23_SLAB);
-
-        wallItem(ModBLocks.REDKEEP_24_WALL, ModBLocks.REDKEEP_24_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_24_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_24_SLAB);
-
-        wallItem(ModBLocks.REDKEEP_25_WALL, ModBLocks.REDKEEP_25_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_25_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_25_SLAB);
-
-        wallItem(ModBLocks.REDKEEP_26_WALL, ModBLocks.REDKEEP_26_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_26_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_26_SLAB);
-
-        wallItem(ModBLocks.REDKEEP_27_WALL, ModBLocks.REDKEEP_27_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_27_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_27_SLAB);
-
-        wallItem(ModBLocks.REDKEEP_28_WALL, ModBLocks.REDKEEP_28_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_28_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_28_SLAB);
-
-        wallItem(ModBLocks.REDKEEP_29_WALL, ModBLocks.REDKEEP_29_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_29_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_29_SLAB);
-
-        wallItem(ModBLocks.REDKEEP_30_WALL, ModBLocks.REDKEEP_30_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_30_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_30_SLAB);
-
-        wallItem(ModBLocks.REDKEEP_31_WALL, ModBLocks.REDKEEP_31_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_31_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_31_SLAB);
-
-        wallItem(ModBLocks.REDKEEP_32_WALL, ModBLocks.REDKEEP_32_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_32_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_32_SLAB);
-
-        wallItem(ModBLocks.REDKEEP_33_WALL, ModBLocks.REDKEEP_33_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_33_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_33_SLAB);
-
-        wallItem(ModBLocks.REDKEEP_34_WALL, ModBLocks.REDKEEP_34_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_34_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_34_SLAB);
-
-        wallItem(ModBLocks.REDKEEP_35_WALL, ModBLocks.REDKEEP_35_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_35_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_35_SLAB);
-
-        wallItem(ModBLocks.REDKEEP_36_WALL, ModBLocks.REDKEEP_36_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_36_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_36_SLAB);
-
-        wallItem(ModBLocks.REDKEEP_37_WALL, ModBLocks.REDKEEP_37_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_37_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_37_SLAB);
-
-        wallItem(ModBLocks.REDKEEP_38_WALL, ModBLocks.REDKEEP_38_BLOCK);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_38_STAIRS);
-        evenSimplerBlockItem(ModBLocks.REDKEEP_38_SLAB);
-        wallItem(ModBLocks.BRICKS_1_WALL, ModBLocks.BRICKS_1_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_1_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_1_SLAB);
-        wallItem(ModBLocks.BRICKS_3_WALL, ModBLocks.BRICKS_3_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_3_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_3_SLAB);
-        wallItem(ModBLocks.BRICKS_4_WALL, ModBLocks.BRICKS_4_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_4_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_4_SLAB);
-        wallItem(ModBLocks.BRICKS_5_WALL, ModBLocks.BRICKS_5_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_5_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_5_SLAB);
-        wallItem(ModBLocks.BRICKS_6_WALL, ModBLocks.BRICKS_6_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_6_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_6_SLAB);
-        wallItem(ModBLocks.BRICKS_7_WALL, ModBLocks.BRICKS_7_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_7_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_7_SLAB);
-        wallItem(ModBLocks.BRICKS_8_WALL, ModBLocks.BRICKS_8_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_8_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_8_SLAB);
-        wallItem(ModBLocks.BRICKS_9_WALL, ModBLocks.BRICKS_9_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_9_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_9_SLAB);
-        wallItem(ModBLocks.BRICKS_10_WALL, ModBLocks.BRICKS_10_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_10_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_10_SLAB);
-        wallItem(ModBLocks.BRICKS_11_WALL, ModBLocks.BRICKS_11_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_11_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_11_SLAB);
-        wallItem(ModBLocks.BRICKS_12_WALL, ModBLocks.BRICKS_12_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_12_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_12_SLAB);
-        wallItem(ModBLocks.BRICKS_13_WALL, ModBLocks.BRICKS_13_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_13_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_13_SLAB);
-        wallItem(ModBLocks.BRICKS_14_WALL, ModBLocks.BRICKS_14_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_14_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_14_SLAB);
-// wallItem(ModBLocks.BRICKS_15_WALL, ModBLocks.BRICKS_15_BLOCK);
-// evenSimplerBlockItem(ModBLocks.BRICKS_15_STAIRS);
-// evenSimplerBlockItem(ModBLocks.BRICKS_15_SLAB);
-        wallItem(ModBLocks.BRICKS_16_WALL, ModBLocks.BRICKS_16_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_16_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_16_SLAB);
-        wallItem(ModBLocks.BRICKS_17_WALL, ModBLocks.BRICKS_17_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_17_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_17_SLAB);
-        wallItem(ModBLocks.BRICKS_18_WALL, ModBLocks.BRICKS_18_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_18_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_18_SLAB);
-// For 19
-        wallItem(ModBLocks.BRICKS_19_WALL, ModBLocks.BRICKS_19_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_19_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_19_SLAB);
-
-// For 20
-        wallItem(ModBLocks.BRICKS_20_WALL, ModBLocks.BRICKS_20_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_20_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_20_SLAB);
-
-// For 21
-        wallItem(ModBLocks.BRICKS_21_WALL, ModBLocks.BRICKS_21_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_21_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_21_SLAB);
-
-// For 22
-        wallItem(ModBLocks.BRICKS_22_WALL, ModBLocks.BRICKS_22_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_22_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_22_SLAB);
-        wallItem(ModBLocks.BRICKS_23_WALL, ModBLocks.BRICKS_23_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_23_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_23_SLAB);
-
-        wallItem(ModBLocks.BRICKS_24_WALL, ModBLocks.BRICKS_24_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_24_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_24_SLAB);
-
-        wallItem(ModBLocks.BRICKS_25_WALL, ModBLocks.BRICKS_25_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_25_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_25_SLAB);
-
-        wallItem(ModBLocks.BRICKS_26_WALL, ModBLocks.BRICKS_26_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_26_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_26_SLAB);
-
-        wallItem(ModBLocks.BRICKS_27_WALL, ModBLocks.BRICKS_27_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_27_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_27_SLAB);
-
-        wallItem(ModBLocks.BRICKS_28_WALL, ModBLocks.BRICKS_28_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_28_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_28_SLAB);
-
-        wallItem(ModBLocks.BRICKS_29_WALL, ModBLocks.BRICKS_29_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_29_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_29_SLAB);
-
-        wallItem(ModBLocks.BRICKS_30_WALL, ModBLocks.BRICKS_30_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_30_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_30_SLAB);
-
-        wallItem(ModBLocks.BRICKS_31_WALL, ModBLocks.BRICKS_31_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_31_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_31_SLAB);
-
-        wallItem(ModBLocks.BRICKS_32_WALL, ModBLocks.BRICKS_32_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_32_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_32_SLAB);
-
-        wallItem(ModBLocks.BRICKS_33_WALL, ModBLocks.BRICKS_33_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_33_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_33_SLAB);
-
-        wallItem(ModBLocks.BRICKS_34_WALL, ModBLocks.BRICKS_34_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_34_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_34_SLAB);
-
-        wallItem(ModBLocks.BRICKS_35_WALL, ModBLocks.BRICKS_35_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_35_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_35_SLAB);
-
-        wallItem(ModBLocks.BRICKS_36_WALL, ModBLocks.BRICKS_36_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_36_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_36_SLAB);
-
-        wallItem(ModBLocks.BRICKS_37_WALL, ModBLocks.BRICKS_37_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_37_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_37_SLAB);
-
-        wallItem(ModBLocks.BRICKS_38_WALL, ModBLocks.BRICKS_38_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BRICKS_38_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BRICKS_38_SLAB);
-
-
-
-        wallItem(ModBLocks.STONE_1_WALL, ModBLocks.STONE_1_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_1_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_1_SLAB);
-        wallItem(ModBLocks.STONE_2_WALL, ModBLocks.STONE_2_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_2_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_2_SLAB);
-        wallItem(ModBLocks.STONE_3_WALL, ModBLocks.STONE_3_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_3_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_3_SLAB);
-        wallItem(ModBLocks.STONE_4_WALL, ModBLocks.STONE_4_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_4_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_4_SLAB);
-        wallItem(ModBLocks.STONE_6_WALL, ModBLocks.STONE_6_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_6_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_6_SLAB);
-        wallItem(ModBLocks.STONE_7_WALL, ModBLocks.STONE_7_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_7_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_7_SLAB);
-        wallItem(ModBLocks.STONE_8_WALL, ModBLocks.STONE_8_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_8_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_8_SLAB);
-        wallItem(ModBLocks.STONE_9_WALL, ModBLocks.STONE_9_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_9_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_9_SLAB);
-        wallItem(ModBLocks.STONE_10_WALL, ModBLocks.STONE_10_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_10_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_10_SLAB);
-        wallItem(ModBLocks.STONE_11_WALL, ModBLocks.STONE_11_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_11_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_11_SLAB);
-        wallItem(ModBLocks.STONE_12_WALL, ModBLocks.STONE_12_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_12_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_12_SLAB);
-        wallItem(ModBLocks.STONE_13_WALL, ModBLocks.STONE_13_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_13_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_13_SLAB);
-        wallItem(ModBLocks.STONE_14_WALL, ModBLocks.STONE_14_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_14_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_14_SLAB);
-// wallItem(ModBLocks.STONE_15_WALL, ModBLocks.STONE_15_BLOCK);
-// evenSimplerBlockItem(ModBLocks.STONE_15_STAIRS);
-// evenSimplerBlockItem(ModBLocks.STONE_15_SLAB);
-        wallItem(ModBLocks.STONE_16_WALL, ModBLocks.STONE_16_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_16_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_16_SLAB);
-        wallItem(ModBLocks.STONE_17_WALL, ModBLocks.STONE_17_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_17_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_17_SLAB);
-        wallItem(ModBLocks.STONE_18_WALL, ModBLocks.STONE_18_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_18_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_18_SLAB);
-
-// For 20
-        wallItem(ModBLocks.STONE_20_WALL, ModBLocks.STONE_20_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_20_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_20_SLAB);
-
-// For 21
-        wallItem(ModBLocks.STONE_21_WALL, ModBLocks.STONE_21_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_21_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_21_SLAB);
-
-// For 22
-        wallItem(ModBLocks.STONE_22_WALL, ModBLocks.STONE_22_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_22_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_22_SLAB);
-
-        wallItem(ModBLocks.STONE_24_WALL, ModBLocks.STONE_24_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_24_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_24_SLAB);
-
-        wallItem(ModBLocks.STONE_25_WALL, ModBLocks.STONE_25_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_25_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_25_SLAB);
-
-        wallItem(ModBLocks.STONE_26_WALL, ModBLocks.STONE_26_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_26_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_26_SLAB);
-
-        wallItem(ModBLocks.STONE_27_WALL, ModBLocks.STONE_27_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_27_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_27_SLAB);
-
-        wallItem(ModBLocks.STONE_28_WALL, ModBLocks.STONE_28_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_28_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_28_SLAB);
-
-        wallItem(ModBLocks.STONE_29_WALL, ModBLocks.STONE_29_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_29_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_29_SLAB);
-
-        wallItem(ModBLocks.STONE_30_WALL, ModBLocks.STONE_30_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_30_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_30_SLAB);
-
-        wallItem(ModBLocks.STONE_31_WALL, ModBLocks.STONE_31_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_31_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_31_SLAB);
-
-        wallItem(ModBLocks.STONE_32_WALL, ModBLocks.STONE_32_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_32_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_32_SLAB);
-
-        wallItem(ModBLocks.STONE_33_WALL, ModBLocks.STONE_33_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_33_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_33_SLAB);
-
-        wallItem(ModBLocks.STONE_34_WALL, ModBLocks.STONE_34_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_34_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_34_SLAB);
-
-        wallItem(ModBLocks.STONE_35_WALL, ModBLocks.STONE_35_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_35_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_35_SLAB);
-
-        wallItem(ModBLocks.STONE_36_WALL, ModBLocks.STONE_36_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_36_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_36_SLAB);
-
-        wallItem(ModBLocks.STONE_37_WALL, ModBLocks.STONE_37_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_37_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_37_SLAB);
-
-        wallItem(ModBLocks.STONE_38_WALL, ModBLocks.STONE_38_BLOCK);
-        evenSimplerBlockItem(ModBLocks.STONE_38_STAIRS);
-        evenSimplerBlockItem(ModBLocks.STONE_38_SLAB);
-
-        wallItem(ModBLocks.BASALT_2_WALL, ModBLocks.BASALT_2_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_2_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_2_SLAB);
-        wallItem(ModBLocks.BASALT_3_WALL, ModBLocks.BASALT_3_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_3_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_3_SLAB);
-        wallItem(ModBLocks.BASALT_4_WALL, ModBLocks.BASALT_4_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_4_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_4_SLAB);
-        wallItem(ModBLocks.BASALT_5_WALL, ModBLocks.BASALT_5_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_5_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_5_SLAB);
-        wallItem(ModBLocks.BASALT_6_WALL, ModBLocks.BASALT_6_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_6_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_6_SLAB);
-        wallItem(ModBLocks.BASALT_7_WALL, ModBLocks.BASALT_7_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_7_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_7_SLAB);
-        wallItem(ModBLocks.BASALT_8_WALL, ModBLocks.BASALT_8_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_8_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_8_SLAB);
-        wallItem(ModBLocks.BASALT_9_WALL, ModBLocks.BASALT_9_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_9_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_9_SLAB);
-        wallItem(ModBLocks.BASALT_10_WALL, ModBLocks.BASALT_10_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_10_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_10_SLAB);
-        wallItem(ModBLocks.BASALT_11_WALL, ModBLocks.BASALT_11_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_11_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_11_SLAB);
-        wallItem(ModBLocks.BASALT_12_WALL, ModBLocks.BASALT_12_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_12_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_12_SLAB);
-        wallItem(ModBLocks.BASALT_13_WALL, ModBLocks.BASALT_13_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_13_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_13_SLAB);
-        wallItem(ModBLocks.BASALT_14_WALL, ModBLocks.BASALT_14_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_14_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_14_SLAB);
-// wallItem(ModBLocks.BASALT_15_WALL, ModBLocks.BASALT_15_BLOCK);
-// evenSimplerBlockItem(ModBLocks.BASALT_15_STAIRS);
-// evenSimplerBlockItem(ModBLocks.BASALT_15_SLAB);
-        wallItem(ModBLocks.BASALT_16_WALL, ModBLocks.BASALT_16_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_16_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_16_SLAB);
-        wallItem(ModBLocks.BASALT_17_WALL, ModBLocks.BASALT_17_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_17_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_17_SLAB);
-        wallItem(ModBLocks.BASALT_18_WALL, ModBLocks.BASALT_18_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_18_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_18_SLAB);
-// For 19
-        wallItem(ModBLocks.BASALT_19_WALL, ModBLocks.BASALT_19_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_19_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_19_SLAB);
-// For 20
-        wallItem(ModBLocks.BASALT_20_WALL, ModBLocks.BASALT_20_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_20_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_20_SLAB);
-// For 21
-        wallItem(ModBLocks.BASALT_21_WALL, ModBLocks.BASALT_21_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_21_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_21_SLAB);
-// For 22
-        wallItem(ModBLocks.BASALT_22_WALL, ModBLocks.BASALT_22_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_22_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_22_SLAB);
-        wallItem(ModBLocks.BASALT_23_WALL, ModBLocks.BASALT_23_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_23_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_23_SLAB);
-        wallItem(ModBLocks.BASALT_24_WALL, ModBLocks.BASALT_24_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_24_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_24_SLAB);
-        wallItem(ModBLocks.BASALT_25_WALL, ModBLocks.BASALT_25_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_25_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_25_SLAB);
-        wallItem(ModBLocks.BASALT_26_WALL, ModBLocks.BASALT_26_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_26_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_26_SLAB);
-        wallItem(ModBLocks.BASALT_27_WALL, ModBLocks.BASALT_27_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_27_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_27_SLAB);
-        wallItem(ModBLocks.BASALT_28_WALL, ModBLocks.BASALT_28_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_28_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_28_SLAB);
-        wallItem(ModBLocks.BASALT_29_WALL, ModBLocks.BASALT_29_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_29_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_29_SLAB);
-        wallItem(ModBLocks.BASALT_30_WALL, ModBLocks.BASALT_30_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_30_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_30_SLAB);
-        wallItem(ModBLocks.BASALT_31_WALL, ModBLocks.BASALT_31_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_31_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_31_SLAB);
-        wallItem(ModBLocks.BASALT_32_WALL, ModBLocks.BASALT_32_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_32_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_32_SLAB);
-        wallItem(ModBLocks.BASALT_33_WALL, ModBLocks.BASALT_33_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_33_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_33_SLAB);
-        wallItem(ModBLocks.BASALT_34_WALL, ModBLocks.BASALT_34_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_34_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_34_SLAB);
-        wallItem(ModBLocks.BASALT_35_WALL, ModBLocks.BASALT_35_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_35_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_35_SLAB);
-        wallItem(ModBLocks.BASALT_36_WALL, ModBLocks.BASALT_36_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_36_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_36_SLAB);
-        wallItem(ModBLocks.BASALT_37_WALL, ModBLocks.BASALT_37_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_37_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_37_SLAB);
-        wallItem(ModBLocks.BASALT_38_WALL, ModBLocks.BASALT_38_BLOCK);
-        evenSimplerBlockItem(ModBLocks.BASALT_38_STAIRS);
-        evenSimplerBlockItem(ModBLocks.BASALT_38_SLAB);
-        wallItem(ModBLocks.CALCITE_1_WALL, ModBLocks.CALCITE_1_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_1_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_1_SLAB);
-        wallItem(ModBLocks.CALCITE_2_WALL, ModBLocks.CALCITE_2_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_2_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_2_SLAB);
-        wallItem(ModBLocks.CALCITE_3_WALL, ModBLocks.CALCITE_3_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_3_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_3_SLAB);
-        wallItem(ModBLocks.CALCITE_4_WALL, ModBLocks.CALCITE_4_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_4_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_4_SLAB);
-        wallItem(ModBLocks.CALCITE_5_WALL, ModBLocks.CALCITE_5_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_5_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_5_SLAB);
-        wallItem(ModBLocks.CALCITE_6_WALL, ModBLocks.CALCITE_6_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_6_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_6_SLAB);
-        wallItem(ModBLocks.CALCITE_7_WALL, ModBLocks.CALCITE_7_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_7_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_7_SLAB);
-        wallItem(ModBLocks.CALCITE_8_WALL, ModBLocks.CALCITE_8_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_8_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_8_SLAB);
-        wallItem(ModBLocks.CALCITE_9_WALL, ModBLocks.CALCITE_9_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_9_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_9_SLAB);
-        wallItem(ModBLocks.CALCITE_10_WALL, ModBLocks.CALCITE_10_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_10_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_10_SLAB);
-        wallItem(ModBLocks.CALCITE_11_WALL, ModBLocks.CALCITE_11_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_11_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_11_SLAB);
-        wallItem(ModBLocks.CALCITE_12_WALL, ModBLocks.CALCITE_12_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_12_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_12_SLAB);
-        wallItem(ModBLocks.CALCITE_13_WALL, ModBLocks.CALCITE_13_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_13_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_13_SLAB);
-        wallItem(ModBLocks.CALCITE_14_WALL, ModBLocks.CALCITE_14_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_14_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_14_SLAB);
-// wallItem(ModBLocks.CALCITE_15_WALL, ModBLocks.CALCITE_15_BLOCK);
-// evenSimplerBlockItem(ModBLocks.CALCITE_15_STAIRS);
-// evenSimplerBlockItem(ModBLocks.CALCITE_15_SLAB);
-        wallItem(ModBLocks.CALCITE_16_WALL, ModBLocks.CALCITE_16_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_16_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_16_SLAB);
-        wallItem(ModBLocks.CALCITE_17_WALL, ModBLocks.CALCITE_17_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_17_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_17_SLAB);
-        wallItem(ModBLocks.CALCITE_18_WALL, ModBLocks.CALCITE_18_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_18_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_18_SLAB);
-// For 19
-        wallItem(ModBLocks.CALCITE_19_WALL, ModBLocks.CALCITE_19_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_19_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_19_SLAB);
-
-// For 20
-        wallItem(ModBLocks.CALCITE_20_WALL, ModBLocks.CALCITE_20_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_20_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_20_SLAB);
-
-// For 21
-        wallItem(ModBLocks.CALCITE_21_WALL, ModBLocks.CALCITE_21_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_21_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_21_SLAB);
-
-// For 22
-        wallItem(ModBLocks.CALCITE_22_WALL, ModBLocks.CALCITE_22_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_22_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_22_SLAB);
-        wallItem(ModBLocks.CALCITE_23_WALL, ModBLocks.CALCITE_23_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_23_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_23_SLAB);
-
-        wallItem(ModBLocks.CALCITE_24_WALL, ModBLocks.CALCITE_24_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_24_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_24_SLAB);
-
-        wallItem(ModBLocks.CALCITE_25_WALL, ModBLocks.CALCITE_25_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_25_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_25_SLAB);
-
-        wallItem(ModBLocks.CALCITE_26_WALL, ModBLocks.CALCITE_26_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_26_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_26_SLAB);
-
-        wallItem(ModBLocks.CALCITE_27_WALL, ModBLocks.CALCITE_27_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_27_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_27_SLAB);
-
-        wallItem(ModBLocks.CALCITE_28_WALL, ModBLocks.CALCITE_28_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_28_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_28_SLAB);
-
-        wallItem(ModBLocks.CALCITE_29_WALL, ModBLocks.CALCITE_29_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_29_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_29_SLAB);
-
-        wallItem(ModBLocks.CALCITE_30_WALL, ModBLocks.CALCITE_30_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_30_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_30_SLAB);
-
-        wallItem(ModBLocks.CALCITE_31_WALL, ModBLocks.CALCITE_31_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_31_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_31_SLAB);
-
-        wallItem(ModBLocks.CALCITE_32_WALL, ModBLocks.CALCITE_32_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_32_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_32_SLAB);
-
-        wallItem(ModBLocks.CALCITE_33_WALL, ModBLocks.CALCITE_33_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_33_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_33_SLAB);
-
-        wallItem(ModBLocks.CALCITE_34_WALL, ModBLocks.CALCITE_34_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_34_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_34_SLAB);
-
-        wallItem(ModBLocks.CALCITE_35_WALL, ModBLocks.CALCITE_35_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_35_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_35_SLAB);
-
-        wallItem(ModBLocks.CALCITE_36_WALL, ModBLocks.CALCITE_36_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_36_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_36_SLAB);
-
-        wallItem(ModBLocks.CALCITE_37_WALL, ModBLocks.CALCITE_37_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_37_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_37_SLAB);
-
-        wallItem(ModBLocks.CALCITE_38_WALL, ModBLocks.CALCITE_38_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CALCITE_38_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CALCITE_38_SLAB);
-
-        wallItem(ModBLocks.CDEEPSLATE_1_WALL, ModBLocks.CDEEPSLATE_1_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_1_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_1_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_2_WALL, ModBLocks.CDEEPSLATE_2_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_2_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_2_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_3_WALL, ModBLocks.CDEEPSLATE_3_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_3_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_3_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_5_WALL, ModBLocks.CDEEPSLATE_5_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_5_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_5_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_6_WALL, ModBLocks.CDEEPSLATE_6_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_6_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_6_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_7_WALL, ModBLocks.CDEEPSLATE_7_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_7_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_7_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_8_WALL, ModBLocks.CDEEPSLATE_8_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_8_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_8_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_9_WALL, ModBLocks.CDEEPSLATE_9_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_9_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_9_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_10_WALL, ModBLocks.CDEEPSLATE_10_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_10_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_10_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_11_WALL, ModBLocks.CDEEPSLATE_11_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_11_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_11_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_12_WALL, ModBLocks.CDEEPSLATE_12_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_12_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_12_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_13_WALL, ModBLocks.CDEEPSLATE_13_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_13_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_13_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_14_WALL, ModBLocks.CDEEPSLATE_14_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_14_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_14_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_16_WALL, ModBLocks.CDEEPSLATE_16_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_16_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_16_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_17_WALL, ModBLocks.CDEEPSLATE_17_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_17_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_17_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_18_WALL, ModBLocks.CDEEPSLATE_18_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_18_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_18_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_20_WALL, ModBLocks.CDEEPSLATE_20_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_20_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_20_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_21_WALL, ModBLocks.CDEEPSLATE_21_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_21_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_21_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_22_WALL, ModBLocks.CDEEPSLATE_22_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_22_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_22_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_23_WALL, ModBLocks.CDEEPSLATE_23_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_23_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_23_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_24_WALL, ModBLocks.CDEEPSLATE_24_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_24_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_24_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_25_WALL, ModBLocks.CDEEPSLATE_25_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_25_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_25_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_26_WALL, ModBLocks.CDEEPSLATE_26_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_26_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_26_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_27_WALL, ModBLocks.CDEEPSLATE_27_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_27_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_27_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_28_WALL, ModBLocks.CDEEPSLATE_28_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_28_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_28_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_29_WALL, ModBLocks.CDEEPSLATE_29_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_29_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_29_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_30_WALL, ModBLocks.CDEEPSLATE_30_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_30_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_30_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_31_WALL, ModBLocks.CDEEPSLATE_31_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_31_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_31_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_32_WALL, ModBLocks.CDEEPSLATE_32_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_32_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_32_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_33_WALL, ModBLocks.CDEEPSLATE_33_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_33_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_33_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_34_WALL, ModBLocks.CDEEPSLATE_34_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_34_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_34_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_35_WALL, ModBLocks.CDEEPSLATE_35_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_35_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_35_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_36_WALL, ModBLocks.CDEEPSLATE_36_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_36_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_36_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_37_WALL, ModBLocks.CDEEPSLATE_37_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_37_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_37_SLAB);
-        wallItem(ModBLocks.CDEEPSLATE_38_WALL, ModBLocks.CDEEPSLATE_38_BLOCK);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_38_STAIRS);
-        evenSimplerBlockItem(ModBLocks.CDEEPSLATE_38_SLAB);
-        wallItem(ModBLocks.GRANITE_1_WALL, ModBLocks.GRANITE_1_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_1_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_1_SLAB);
-        wallItem(ModBLocks.GRANITE_2_WALL, ModBLocks.GRANITE_2_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_2_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_2_SLAB);
-        wallItem(ModBLocks.GRANITE_3_WALL, ModBLocks.GRANITE_3_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_3_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_3_SLAB);
-        wallItem(ModBLocks.GRANITE_4_WALL, ModBLocks.GRANITE_4_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_4_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_4_SLAB);
-        wallItem(ModBLocks.GRANITE_5_WALL, ModBLocks.GRANITE_5_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_5_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_5_SLAB);
-        wallItem(ModBLocks.GRANITE_6_WALL, ModBLocks.GRANITE_6_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_6_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_6_SLAB);
-        wallItem(ModBLocks.GRANITE_7_WALL, ModBLocks.GRANITE_7_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_7_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_7_SLAB);
-        wallItem(ModBLocks.GRANITE_8_WALL, ModBLocks.GRANITE_8_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_8_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_8_SLAB);
-        wallItem(ModBLocks.GRANITE_9_WALL, ModBLocks.GRANITE_9_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_9_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_9_SLAB);
-        wallItem(ModBLocks.GRANITE_10_WALL, ModBLocks.GRANITE_10_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_10_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_10_SLAB);
-        wallItem(ModBLocks.GRANITE_11_WALL, ModBLocks.GRANITE_11_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_11_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_11_SLAB);
-        wallItem(ModBLocks.GRANITE_12_WALL, ModBLocks.GRANITE_12_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_12_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_12_SLAB);
-        wallItem(ModBLocks.GRANITE_13_WALL, ModBLocks.GRANITE_13_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_13_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_13_SLAB);
-        wallItem(ModBLocks.GRANITE_14_WALL, ModBLocks.GRANITE_14_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_14_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_14_SLAB);
-// wallItem(ModBLocks.GRANITE_15_WALL, ModBLocks.GRANITE_15_BLOCK);
-// evenSimplerBlockItem(ModBLocks.GRANITE_15_STAIRS);
-// evenSimplerBlockItem(ModBLocks.GRANITE_15_SLAB);
-        wallItem(ModBLocks.GRANITE_16_WALL, ModBLocks.GRANITE_16_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_16_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_16_SLAB);
-        wallItem(ModBLocks.GRANITE_17_WALL, ModBLocks.GRANITE_17_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_17_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_17_SLAB);
-        wallItem(ModBLocks.GRANITE_18_WALL, ModBLocks.GRANITE_18_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_18_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_18_SLAB);
-// For 19
-        wallItem(ModBLocks.GRANITE_19_WALL, ModBLocks.GRANITE_19_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_19_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_19_SLAB);
-
-// For 20
-        wallItem(ModBLocks.GRANITE_20_WALL, ModBLocks.GRANITE_20_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_20_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_20_SLAB);
-
-// For 21
-        wallItem(ModBLocks.GRANITE_21_WALL, ModBLocks.GRANITE_21_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_21_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_21_SLAB);
-
-// For 22
-        wallItem(ModBLocks.GRANITE_22_WALL, ModBLocks.GRANITE_22_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_22_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_22_SLAB);
-        wallItem(ModBLocks.GRANITE_23_WALL, ModBLocks.GRANITE_23_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_23_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_23_SLAB);
-
-        wallItem(ModBLocks.GRANITE_24_WALL, ModBLocks.GRANITE_24_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_24_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_24_SLAB);
-
-        wallItem(ModBLocks.GRANITE_25_WALL, ModBLocks.GRANITE_25_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_25_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_25_SLAB);
-
-        wallItem(ModBLocks.GRANITE_26_WALL, ModBLocks.GRANITE_26_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_26_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_26_SLAB);
-
-        wallItem(ModBLocks.GRANITE_27_WALL, ModBLocks.GRANITE_27_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_27_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_27_SLAB);
-
-        wallItem(ModBLocks.GRANITE_28_WALL, ModBLocks.GRANITE_28_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_28_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_28_SLAB);
-
-        wallItem(ModBLocks.GRANITE_29_WALL, ModBLocks.GRANITE_29_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_29_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_29_SLAB);
-
-        wallItem(ModBLocks.GRANITE_30_WALL, ModBLocks.GRANITE_30_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_30_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_30_SLAB);
-
-        wallItem(ModBLocks.GRANITE_31_WALL, ModBLocks.GRANITE_31_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_31_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_31_SLAB);
-
-        wallItem(ModBLocks.GRANITE_32_WALL, ModBLocks.GRANITE_32_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_32_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_32_SLAB);
-
-        wallItem(ModBLocks.GRANITE_33_WALL, ModBLocks.GRANITE_33_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_33_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_33_SLAB);
-
-        wallItem(ModBLocks.GRANITE_34_WALL, ModBLocks.GRANITE_34_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_34_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_34_SLAB);
-
-        wallItem(ModBLocks.GRANITE_35_WALL, ModBLocks.GRANITE_35_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_35_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_35_SLAB);
-
-        wallItem(ModBLocks.GRANITE_36_WALL, ModBLocks.GRANITE_36_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_36_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_36_SLAB);
-
-        wallItem(ModBLocks.GRANITE_37_WALL, ModBLocks.GRANITE_37_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_37_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_37_SLAB);
-
-        wallItem(ModBLocks.GRANITE_38_WALL, ModBLocks.GRANITE_38_BLOCK);
-        evenSimplerBlockItem(ModBLocks.GRANITE_38_STAIRS);
-        evenSimplerBlockItem(ModBLocks.GRANITE_38_SLAB);
-
-
-
-
+        for (int i = 1; i <= 38; i++) {
+            // Skip variants 15 and 22 as in your block registration
+            if (i == 15 || i == 22 || i == 31) continue;
+
+            ModBLocks.BlockSet blockSet = ModBLocks.BLACKSTONE_VARIANTS.get(i);
+            if (blockSet != null) {
+                wallItem(blockSet.wall(), blockSet.base());
+                evenSimplerBlockItem(blockSet.stairs());
+                evenSimplerBlockItem(blockSet.slab());
+            }
+        }
+        for (int i = 1; i <= 38; i++) {
+            // Skip variants 15 and 22 and 31 as in your block registration
+            if (i == 1 || i == 15) continue;
+
+            ModBLocks.BlockSet blockSet = ModBLocks.BASALT_VARIANTS.get(i);
+            if (blockSet != null) {
+                wallItem(blockSet.wall(), blockSet.base());
+                evenSimplerBlockItem(blockSet.stairs());
+                evenSimplerBlockItem(blockSet.slab());
+            }
+        }
+
+        for (int i = 1; i <= 38; i++) {
+            // Skip variants 15 and 22 and 31 as in your block registration
+            if (i == 2 || i == 15) continue;
+
+            ModBLocks.BlockSet blockSet = ModBLocks.BRICKS_VARIANTS.get(i);
+            if (blockSet != null) {
+                wallItem(blockSet.wall(), blockSet.base());
+                evenSimplerBlockItem(blockSet.stairs());
+                evenSimplerBlockItem(blockSet.slab());
+            }
+        }
+
+        for (int i = 1; i <= 38; i++) {
+            // Skip variants 15 and 22 and 31 as in your block registration
+            if (i == 15) continue;
+
+            ModBLocks.BlockSet blockSet = ModBLocks.CALCITE_VARIANTS.get(i);
+            if (blockSet != null) {
+                wallItem(blockSet.wall(), blockSet.base());
+                evenSimplerBlockItem(blockSet.stairs());
+                evenSimplerBlockItem(blockSet.slab());
+            }
+        }
+
+        for (int i = 1; i <= 38; i++) {
+            // Skip variants 15 and 22 and 31 as in your block registration
+            if (i == 4 || i == 15 || i == 19) continue;
+
+            ModBLocks.BlockSet blockSet = ModBLocks.CDEEPSLATE_VARIANTS.get(i);
+            if (blockSet != null) {
+                wallItem(blockSet.wall(), blockSet.base());
+                evenSimplerBlockItem(blockSet.stairs());
+                evenSimplerBlockItem(blockSet.slab());
+            }
+        }
+
+        for (int i = 1; i <= 38; i++) {
+            // Skip variants 15 and 22 and 31 as in your block registration
+            if (i == 15) continue;
+
+            ModBLocks.BlockSet blockSet = ModBLocks.GRANITE_VARIANTS.get(i);
+            if (blockSet != null) {
+                wallItem(blockSet.wall(), blockSet.base());
+                evenSimplerBlockItem(blockSet.stairs());
+                evenSimplerBlockItem(blockSet.slab());
+            }
+        }
+
+        for (int i = 1; i <= 38; i++) {
+            // Skip variants 15 and 22 and 31 as in your block registration
+            if (i == 15) continue;
+
+            ModBLocks.BlockSet blockSet = ModBLocks.REDKEEP_VARIANTS.get(i);
+            if (blockSet != null) {
+                wallItem(blockSet.wall(), blockSet.base());
+                evenSimplerBlockItem(blockSet.stairs());
+                evenSimplerBlockItem(blockSet.slab());
+            }
+        }
+
+        for (int i = 1; i <= 38; i++) {
+            // Skip variants 15 and 22 as in your block registration
+            if (i == 15 || i == 16 || i == 17 || i == 18) continue;
+
+            ModBLocks.BlockSet blockSet = ModBLocks.RSANDSTONE_VARIANTS.get(i);
+            if (blockSet != null) {
+                wallItem(blockSet.wall(), blockSet.base());
+                evenSimplerBlockItem(blockSet.stairs());
+                evenSimplerBlockItem(blockSet.slab());
+            }
+        }
+
+        for (int i = 1; i <= 38; i++) {
+            // Skip variants 15 and 22 as in your block registration
+            if (i == 5 || i == 15 || i == 19 || i == 23) continue;
+
+            ModBLocks.BlockSet blockSet = ModBLocks.STONE_VARIANTS.get(i);
+            if (blockSet != null) {
+                wallItem(blockSet.wall(), blockSet.base());
+                evenSimplerBlockItem(blockSet.stairs());
+                evenSimplerBlockItem(blockSet.slab());
+            }
+        }
+
+        for (int i = 1; i <= 38; i++) {
+            // Skip variants 15 and 23
+            if (i == 15 || i == 23) continue;
+
+            ModBLocks.BlockSet blockSet = ModBLocks.SSTONE_VARIANTS.get(i);
+            if (blockSet != null) {
+                wallItem(blockSet.wall(), blockSet.base());
+                evenSimplerBlockItem(blockSet.stairs());
+                evenSimplerBlockItem(blockSet.slab());
+            }
+        }
 
 
         // ---------------------------(CRAFTING ITEMS)--------------------------- //

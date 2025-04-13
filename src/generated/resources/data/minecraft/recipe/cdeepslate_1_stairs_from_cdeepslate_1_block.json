@@ -1,6 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "agotmod:cdeepslate_1",
+  "ingredient": "agotmod:cdeepslate_1_block",
   "result": {
     "count": 1,
     "id": "agotmod:cdeepslate_1_stairs"

@@ -1,6 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "agotmod:granite_11",
+  "ingredient": "agotmod:granite_11_block",
   "result": {
     "count": 1,
     "id": "agotmod:granite_11_wall"

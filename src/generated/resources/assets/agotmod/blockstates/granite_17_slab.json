@@ -4,7 +4,7 @@
       "model": "agotmod:block/granite_17_slab"
     },
     "type=double": {
-      "model": "agotmod:block/granite_17"
+      "model": "agotmod:block/granite_17_block"
     },
     "type=top": {
       "model": "agotmod:block/granite_17_slab_top"

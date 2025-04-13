@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/template_wall_side",
   "textures": {
-    "wall": "agotmod:block/bricks_20"
+    "wall": "agotmod:block/bricks_20_block"
   }
 }

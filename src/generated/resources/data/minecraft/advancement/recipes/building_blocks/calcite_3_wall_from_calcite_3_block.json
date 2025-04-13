@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_calcite_3": {
+    "has_calcite_3_block": {
       "conditions": {
         "items": [
           {
-            "items": "agotmod:calcite_3"
+            "items": "agotmod:calcite_3_block"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_calcite_3"
+      "has_calcite_3_block"
     ]
   ],
   "rewards": {

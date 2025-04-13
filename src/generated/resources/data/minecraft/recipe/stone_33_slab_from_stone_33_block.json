@@ -1,6 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "agotmod:stone_33",
+  "ingredient": "agotmod:stone_33_block",
   "result": {
     "count": 2,
     "id": "agotmod:stone_33_slab"

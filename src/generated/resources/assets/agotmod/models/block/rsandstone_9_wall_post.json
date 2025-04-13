@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/template_wall_post",
   "textures": {
-    "wall": "agotmod:block/rsandstone_9"
+    "wall": "agotmod:block/rsandstone_9_block"
   }
 }

@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_deepslate": {
+    "has_cobbled_deepslate": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:deepslate"
+            "items": "minecraft:cobbled_deepslate"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_deepslate"
+      "has_cobbled_deepslate"
     ]
   ],
   "rewards": {

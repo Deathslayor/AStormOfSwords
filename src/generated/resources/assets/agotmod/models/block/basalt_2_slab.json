@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/slab",
   "textures": {
-    "bottom": "agotmod:block/basalt_2",
-    "side": "agotmod:block/basalt_2",
-    "top": "agotmod:block/basalt_2"
+    "bottom": "agotmod:block/basalt_2_block",
+    "side": "agotmod:block/basalt_2_block",
+    "top": "agotmod:block/basalt_2_block"
   }
 }

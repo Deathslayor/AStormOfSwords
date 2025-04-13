@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/stairs",
   "textures": {
-    "bottom": "agotmod:block/rsandstone_36",
-    "side": "agotmod:block/rsandstone_36",
-    "top": "agotmod:block/rsandstone_36"
+    "bottom": "agotmod:block/rsandstone_36_block",
+    "side": "agotmod:block/rsandstone_36_block",
+    "top": "agotmod:block/rsandstone_36_block"
   }
 }

@@ -4,7 +4,7 @@
       "model": "agotmod:block/redkeep_4_slab"
     },
     "type=double": {
-      "model": "agotmod:block/redkeep_4"
+      "model": "agotmod:block/redkeep_4_block"
     },
     "type=top": {
       "model": "agotmod:block/redkeep_4_slab_top"

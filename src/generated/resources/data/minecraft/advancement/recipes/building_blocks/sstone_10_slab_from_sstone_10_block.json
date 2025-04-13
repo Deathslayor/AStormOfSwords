@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_sstone_10": {
+    "has_sstone_10_block": {
       "conditions": {
         "items": [
           {
-            "items": "agotmod:sstone_10"
+            "items": "agotmod:sstone_10_block"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_sstone_10"
+      "has_sstone_10_block"
     ]
   ],
   "rewards": {

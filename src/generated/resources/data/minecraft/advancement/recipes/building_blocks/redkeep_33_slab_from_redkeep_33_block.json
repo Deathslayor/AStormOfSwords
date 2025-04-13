@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_redkeep_33": {
+    "has_redkeep_33_block": {
       "conditions": {
         "items": [
           {
-            "items": "agotmod:redkeep_33"
+            "items": "agotmod:redkeep_33_block"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_redkeep_33"
+      "has_redkeep_33_block"
     ]
   ],
   "rewards": {

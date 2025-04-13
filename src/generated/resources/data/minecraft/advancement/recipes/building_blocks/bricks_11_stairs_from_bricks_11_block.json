@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_bricks_11": {
+    "has_bricks_11_block": {
       "conditions": {
         "items": [
           {
-            "items": "agotmod:bricks_11"
+            "items": "agotmod:bricks_11_block"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_bricks_11"
+      "has_bricks_11_block"
     ]
   ],
   "rewards": {

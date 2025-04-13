@@ -30,637 +30,676 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         String[] patterns = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38"}; // Add all your pattern numbers
 
         // Loop through each pattern
-        for (String pattern : patterns) {
-            // Based on your original code structure, use reflection to get the fields
-            try {
-                // Get the block field objects from ModBlocks class
-                java.lang.reflect.Field blockField = ModBLocks.class.getDeclaredField("REDKEEP_" + pattern + "_BLOCK");
-                java.lang.reflect.Field stairsField = ModBLocks.class.getDeclaredField("REDKEEP_" + pattern + "_STAIRS");
-                java.lang.reflect.Field slabField = ModBLocks.class.getDeclaredField("REDKEEP_" + pattern + "_SLAB");
-                java.lang.reflect.Field wallField = ModBLocks.class.getDeclaredField("REDKEEP_" + pattern + "_WALL");
+        for (int i = 1; i <= 38; i++) {
+            if (i == 15) continue;
 
-
-                // Get the supplier objects
-                var blockSupplier = blockField.get(null);
-                var stairsSupplier = stairsField.get(null);
-                var slabSupplier = slabField.get(null);
-                var wallSupplier = wallField.get(null);
-
-                // Create recipes from the base stone block to each pattern's variants
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(ModBLocks.REDKEEP_STONE_BLOCK.get()),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(blockSupplier))
-                        .unlockedBy(getHasName(ModBLocks.REDKEEP_STONE_BLOCK.get()), has(ModBLocks.REDKEEP_STONE_BLOCK.get()))
-                        .save(this.output);
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(ModBLocks.REDKEEP_STONE_BLOCK.get()),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(stairsSupplier))
-                        .unlockedBy(getHasName(ModBLocks.REDKEEP_STONE_BLOCK.get()), has(ModBLocks.REDKEEP_STONE_BLOCK.get()))
-                        .save(this.output);
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(ModBLocks.REDKEEP_STONE_BLOCK.get()),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(slabSupplier), 2)
-                        .unlockedBy(getHasName(ModBLocks.REDKEEP_STONE_BLOCK.get()), has(ModBLocks.REDKEEP_STONE_BLOCK.get()))
-                        .save(this.output);
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(ModBLocks.REDKEEP_STONE_BLOCK.get()),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(wallSupplier))
-                        .unlockedBy(getHasName(ModBLocks.REDKEEP_STONE_BLOCK.get()), has(ModBLocks.REDKEEP_STONE_BLOCK.get()))
-                        .save(this.output);
-
-                // Create additional stonecutter recipes from each pattern's block to its variants
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of((ItemLike)invokeGet(blockSupplier)),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(stairsSupplier))
-                        .unlockedBy(getHasName((ItemLike)invokeGet(blockSupplier)), has((ItemLike)invokeGet(blockSupplier)))
-                        .save(this.output, "redkeep_" + pattern + "_stairs_from_redkeep_" + pattern + "_block");
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of((ItemLike)invokeGet(blockSupplier)),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(slabSupplier), 2)
-                        .unlockedBy(getHasName((ItemLike)invokeGet(blockSupplier)), has((ItemLike)invokeGet(blockSupplier)))
-                        .save(this.output, "redkeep_" + pattern + "_slab_from_redkeep_" + pattern + "_block");
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of((ItemLike)invokeGet(blockSupplier)),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(wallSupplier))
-                        .unlockedBy(getHasName((ItemLike)invokeGet(blockSupplier)), has((ItemLike)invokeGet(blockSupplier)))
-                        .save(this.output, "redkeep_" + pattern + "_wall_from_redkeep_" + pattern + "_block");
-
-            } catch (Exception e) {
-                System.err.println("Error creating recipes for pattern " + pattern + ": " + e.getMessage());
+            ModBLocks.BlockSet set = ModBLocks.REDKEEP_VARIANTS.get(i); // Changed to REDKEEP_VARIANTS
+            if (set == null) {
+                System.err.println("BlockSet missing for pattern index " + i);
+                continue;
             }
+
+            ItemLike base = set.base().get().asItem();
+            ItemLike stairs = set.stairs().get().asItem();
+            ItemLike slab = set.slab().get().asItem();
+            ItemLike wall = set.wall().get().asItem();
+            String pattern = "redkeep_" + i; // Changed pattern prefix to redkeep
+
+            // From vanilla Granite to each variant
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(ModBLocks.REDKEEP_STONE_BLOCK.get()), // Changed to Blocks.GRANITE
+                            RecipeCategory.BUILDING_BLOCKS,
+                            base)
+                    .unlockedBy(getHasName(ModBLocks.REDKEEP_STONE_BLOCK.get()), has(ModBLocks.REDKEEP_STONE_BLOCK.get()))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(ModBLocks.REDKEEP_STONE_BLOCK.get()), // Changed to Blocks.GRANITE
+                            RecipeCategory.BUILDING_BLOCKS,
+                            stairs)
+                    .unlockedBy(getHasName(ModBLocks.REDKEEP_STONE_BLOCK.get()), has(ModBLocks.REDKEEP_STONE_BLOCK.get()))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(ModBLocks.REDKEEP_STONE_BLOCK.get()), // Changed to Blocks.GRANITE
+                            RecipeCategory.BUILDING_BLOCKS,
+                            slab, 2)
+                    .unlockedBy(getHasName(ModBLocks.REDKEEP_STONE_BLOCK.get()), has(ModBLocks.REDKEEP_STONE_BLOCK.get()))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(ModBLocks.REDKEEP_STONE_BLOCK.get()), // Changed to Blocks.GRANITE
+                            RecipeCategory.BUILDING_BLOCKS,
+                            wall)
+                    .unlockedBy(getHasName(ModBLocks.REDKEEP_STONE_BLOCK.get()), has(ModBLocks.REDKEEP_STONE_BLOCK.get()))
+                    .save(this.output);
+
+            // From variant block to its shaped versions
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            stairs)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_stairs_from_" + pattern + "_block");
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            slab, 2)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_slab_from_" + pattern + "_block");
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            wall)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_wall_from_" + pattern + "_block");
         }
-        for (String pattern : patterns) {
-            // Based on your original code structure, use reflection to get the fields
-            try {
-                // Get the block field objects from ModBlocks class
-                java.lang.reflect.Field blockField = ModBLocks.class.getDeclaredField("RSANDSTONE_" + pattern + "_BLOCK");
-                java.lang.reflect.Field stairsField = ModBLocks.class.getDeclaredField("RSANDSTONE_" + pattern + "_STAIRS");
-                java.lang.reflect.Field slabField = ModBLocks.class.getDeclaredField("RSANDSTONE_" + pattern + "_SLAB");
-                java.lang.reflect.Field wallField = ModBLocks.class.getDeclaredField("RSANDSTONE_" + pattern + "_WALL");
 
+        for (int i = 1; i <= 38; i++) {
+            if (i == 15 || i == 16 || i == 17 || i == 18) continue;
 
-                // Get the supplier objects
-                var blockSupplier = blockField.get(null);
-                var stairsSupplier = stairsField.get(null);
-                var slabSupplier = slabField.get(null);
-                var wallSupplier = wallField.get(null);
-
-                // Create recipes from the base stone block to each pattern's variants
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(Blocks.RED_SANDSTONE),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(blockSupplier))
-                        .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
-                        .save(this.output);
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(Blocks.RED_SANDSTONE),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(stairsSupplier))
-                        .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
-                        .save(this.output);
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(Blocks.RED_SANDSTONE),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(slabSupplier), 2)
-                        .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
-                        .save(this.output);
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(Blocks.RED_SANDSTONE),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(wallSupplier))
-                        .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
-                        .save(this.output);
-
-                // Create additional stonecutter recipes from each pattern's block to its variants
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of((ItemLike)invokeGet(blockSupplier)),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(stairsSupplier))
-                        .unlockedBy(getHasName((ItemLike)invokeGet(blockSupplier)), has((ItemLike)invokeGet(blockSupplier)))
-                        .save(this.output, "rsandstone_" + pattern + "_stairs_from_rsandstone_" + pattern + "_block");
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of((ItemLike)invokeGet(blockSupplier)),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(slabSupplier), 2)
-                        .unlockedBy(getHasName((ItemLike)invokeGet(blockSupplier)), has((ItemLike)invokeGet(blockSupplier)))
-                        .save(this.output, "rsandstone_" + pattern + "_slab_from_rsandstone_" + pattern + "_block");
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of((ItemLike)invokeGet(blockSupplier)),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(wallSupplier))
-                        .unlockedBy(getHasName((ItemLike)invokeGet(blockSupplier)), has((ItemLike)invokeGet(blockSupplier)))
-                        .save(this.output, "rsandstone_" + pattern + "_wall_from_rsandstone_" + pattern + "_block");
-
-            } catch (Exception e) {
-                System.err.println("Error creating recipes for pattern " + pattern + ": " + e.getMessage());
+            ModBLocks.BlockSet set = ModBLocks.RSANDSTONE_VARIANTS.get(i); // Changed to RSANDSTONE_VARIANTS
+            if (set == null) {
+                System.err.println("BlockSet missing for pattern index " + i);
+                continue;
             }
+
+            ItemLike base = set.base().get().asItem();
+            ItemLike stairs = set.stairs().get().asItem();
+            ItemLike slab = set.slab().get().asItem();
+            ItemLike wall = set.wall().get().asItem();
+            String pattern = "rsandstone_" + i; // Changed pattern prefix to rsandstone
+
+            // From vanilla Red Sandstone to each variant
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.RED_SANDSTONE), // Changed to RED_SANDSTONE
+                            RecipeCategory.BUILDING_BLOCKS,
+                            base)
+                    .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.RED_SANDSTONE),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            stairs)
+                    .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.RED_SANDSTONE),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            slab, 2)
+                    .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.RED_SANDSTONE),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            wall)
+                    .unlockedBy(getHasName(Blocks.RED_SANDSTONE), has(Blocks.RED_SANDSTONE))
+                    .save(this.output);
+
+            // From variant block to its shaped versions
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            stairs)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_stairs_from_" + pattern + "_block");
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            slab, 2)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_slab_from_" + pattern + "_block");
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            wall)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_wall_from_" + pattern + "_block");
         }
-        for (String pattern : patterns) {
-            // Based on your original code structure, use reflection to get the fields
-            try {
-                // Get the block field objects from ModBlocks class
-                java.lang.reflect.Field blockField = ModBLocks.class.getDeclaredField("SSTONE_" + pattern + "_BLOCK");
-                java.lang.reflect.Field stairsField = ModBLocks.class.getDeclaredField("SSTONE_" + pattern + "_STAIRS");
-                java.lang.reflect.Field slabField = ModBLocks.class.getDeclaredField("SSTONE_" + pattern + "_SLAB");
-                java.lang.reflect.Field wallField = ModBLocks.class.getDeclaredField("SSTONE_" + pattern + "_WALL");
 
-                // Get the supplier objects
-                var blockSupplier = blockField.get(null);
-                var stairsSupplier = stairsField.get(null);
-                var slabSupplier = slabField.get(null);
-                var wallSupplier = wallField.get(null);
+        for (int i = 1; i <= 38; i++) {
+            if (i == 15 || i == 16 || i == 17 || i == 18) continue;
 
-                // Create recipes from the base stone block to each pattern's variants
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(Blocks.SMOOTH_STONE),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(blockSupplier))
-                        .unlockedBy(getHasName(Blocks.SMOOTH_STONE), has(Blocks.SMOOTH_STONE))
-                        .save(this.output);
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(Blocks.SMOOTH_STONE),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(stairsSupplier))
-                        .unlockedBy(getHasName(Blocks.SMOOTH_STONE), has(Blocks.SMOOTH_STONE))
-                        .save(this.output);
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(Blocks.SMOOTH_STONE),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(slabSupplier), 2)
-                        .unlockedBy(getHasName(Blocks.SMOOTH_STONE), has(Blocks.SMOOTH_STONE))
-                        .save(this.output);
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(Blocks.SMOOTH_STONE),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(wallSupplier))
-                        .unlockedBy(getHasName(Blocks.SMOOTH_STONE), has(Blocks.SMOOTH_STONE))
-                        .save(this.output);
-
-                // Create additional stonecutter recipes from each pattern's block to its variants
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of((ItemLike)invokeGet(blockSupplier)),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(stairsSupplier))
-                        .unlockedBy(getHasName((ItemLike)invokeGet(blockSupplier)), has((ItemLike)invokeGet(blockSupplier)))
-                        .save(this.output, "sstone_" + pattern + "_stairs_from_sstone_" + pattern + "_block");
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of((ItemLike)invokeGet(blockSupplier)),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(slabSupplier), 2)
-                        .unlockedBy(getHasName((ItemLike)invokeGet(blockSupplier)), has((ItemLike)invokeGet(blockSupplier)))
-                        .save(this.output, "sstone_" + pattern + "_slab_from_sstone_" + pattern + "_block");
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of((ItemLike)invokeGet(blockSupplier)),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(wallSupplier))
-                        .unlockedBy(getHasName((ItemLike)invokeGet(blockSupplier)), has((ItemLike)invokeGet(blockSupplier)))
-                        .save(this.output, "sstone_" + pattern + "_wall_from_sstone_" + pattern + "_block");
-
-            } catch (Exception e) {
-                System.err.println("Error creating recipes for pattern " + pattern + ": " + e.getMessage());
+            ModBLocks.BlockSet set = ModBLocks.SSTONE_VARIANTS.get(i);
+            if (set == null) {
+                System.err.println("BlockSet missing for pattern index " + i);
+                continue;
             }
+
+            ItemLike base = set.base().get().asItem();
+            ItemLike stairs = set.stairs().get().asItem();
+            ItemLike slab = set.slab().get().asItem();
+            ItemLike wall = set.wall().get().asItem();
+            String pattern = "sstone_" + i;
+
+            // From vanilla Smooth Stone to each variant
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.SMOOTH_STONE),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            base)
+                    .unlockedBy(getHasName(Blocks.SMOOTH_STONE), has(Blocks.SMOOTH_STONE))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.SMOOTH_STONE),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            stairs)
+                    .unlockedBy(getHasName(Blocks.SMOOTH_STONE), has(Blocks.SMOOTH_STONE))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.SMOOTH_STONE),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            slab, 2)
+                    .unlockedBy(getHasName(Blocks.SMOOTH_STONE), has(Blocks.SMOOTH_STONE))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.SMOOTH_STONE),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            wall)
+                    .unlockedBy(getHasName(Blocks.SMOOTH_STONE), has(Blocks.SMOOTH_STONE))
+                    .save(this.output);
+
+            // From variant block to its shaped versions
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            stairs)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_stairs_from_" + pattern + "_block");
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            slab, 2)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_slab_from_" + pattern + "_block");
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            wall)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_wall_from_" + pattern + "_block");
         }
-        for (String pattern : patterns) {
-            // Based on your original code structure, use reflection to get the fields
-            try {
-                // Get the block field objects from ModBlocks class
-                java.lang.reflect.Field blockField = ModBLocks.class.getDeclaredField("STONE_" + pattern + "_BLOCK");
-                java.lang.reflect.Field stairsField = ModBLocks.class.getDeclaredField("STONE_" + pattern + "_STAIRS");
-                java.lang.reflect.Field slabField = ModBLocks.class.getDeclaredField("STONE_" + pattern + "_SLAB");
-                java.lang.reflect.Field wallField = ModBLocks.class.getDeclaredField("STONE_" + pattern + "_WALL");
 
-                // Get the supplier objects
-                var blockSupplier = blockField.get(null);
-                var stairsSupplier = stairsField.get(null);
-                var slabSupplier = slabField.get(null);
-                var wallSupplier = wallField.get(null);
+        for (int i = 1; i <= 38; i++) {
+            if (i == 5 || i == 15 || i == 19 || i == 23) continue;
 
-                // Create recipes from the base stone block to each pattern's variants
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(Blocks.STONE),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(blockSupplier))
-                        .unlockedBy(getHasName(Blocks.STONE), has(Blocks.STONE))
-                        .save(this.output);
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(Blocks.STONE),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(stairsSupplier))
-                        .unlockedBy(getHasName(Blocks.STONE), has(Blocks.STONE))
-                        .save(this.output);
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(Blocks.STONE),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(slabSupplier), 2)
-                        .unlockedBy(getHasName(Blocks.STONE), has(Blocks.STONE))
-                        .save(this.output);
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(Blocks.STONE),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(wallSupplier))
-                        .unlockedBy(getHasName(Blocks.STONE), has(Blocks.STONE))
-                        .save(this.output);
-
-                // Create additional stonecutter recipes from each pattern's block to its variants
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of((ItemLike)invokeGet(blockSupplier)),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(stairsSupplier))
-                        .unlockedBy(getHasName((ItemLike)invokeGet(blockSupplier)), has((ItemLike)invokeGet(blockSupplier)))
-                        .save(this.output, "stone_" + pattern + "_stairs_from_stone_" + pattern + "_block");
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of((ItemLike)invokeGet(blockSupplier)),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(slabSupplier), 2)
-                        .unlockedBy(getHasName((ItemLike)invokeGet(blockSupplier)), has((ItemLike)invokeGet(blockSupplier)))
-                        .save(this.output, "stone_" + pattern + "_slab_from_stone_" + pattern + "_block");
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of((ItemLike)invokeGet(blockSupplier)),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(wallSupplier))
-                        .unlockedBy(getHasName((ItemLike)invokeGet(blockSupplier)), has((ItemLike)invokeGet(blockSupplier)))
-                        .save(this.output, "stone_" + pattern + "_wall_from_stone_" + pattern + "_block");
-
-            } catch (Exception e) {
-                System.err.println("Error creating recipes for pattern " + pattern + ": " + e.getMessage());
+            ModBLocks.BlockSet set = ModBLocks.STONE_VARIANTS.get(i);
+            if (set == null) {
+                System.err.println("BlockSet missing for pattern index " + i);
+                continue;
             }
+
+            ItemLike base = set.base().get().asItem();
+            ItemLike stairs = set.stairs().get().asItem();
+            ItemLike slab = set.slab().get().asItem();
+            ItemLike wall = set.wall().get().asItem();
+            String pattern = "stone_" + i;
+
+            // From vanilla Stone to each variant
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.STONE),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            base)
+                    .unlockedBy(getHasName(Blocks.STONE), has(Blocks.STONE))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.STONE),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            stairs)
+                    .unlockedBy(getHasName(Blocks.STONE), has(Blocks.STONE))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.STONE),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            slab, 2)
+                    .unlockedBy(getHasName(Blocks.STONE), has(Blocks.STONE))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.STONE),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            wall)
+                    .unlockedBy(getHasName(Blocks.STONE), has(Blocks.STONE))
+                    .save(this.output);
+
+            // From variant block to its shaped versions
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            stairs)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_stairs_from_" + pattern + "_block");
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            slab, 2)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_slab_from_" + pattern + "_block");
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            wall)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_wall_from_" + pattern + "_block");
         }
-        for (String pattern : patterns) {
-            // Based on your original code structure, use reflection to get the fields
-            try {
-                // Get the block field objects from ModBlocks class
-                java.lang.reflect.Field blockField = ModBLocks.class.getDeclaredField("BASALT_" + pattern + "_BLOCK");
-                java.lang.reflect.Field stairsField = ModBLocks.class.getDeclaredField("BASALT_" + pattern + "_STAIRS");
-                java.lang.reflect.Field slabField = ModBLocks.class.getDeclaredField("BASALT_" + pattern + "_SLAB");
-                java.lang.reflect.Field wallField = ModBLocks.class.getDeclaredField("BASALT_" + pattern + "_WALL");
 
-                // Get the supplier objects
-                var blockSupplier = blockField.get(null);
-                var stairsSupplier = stairsField.get(null);
-                var slabSupplier = slabField.get(null);
-                var wallSupplier = wallField.get(null);
+        for (int i = 1; i <= 38; i++) {
+            if (i == 1 || i == 15) continue;
 
-                // Create recipes from the base stone block to each pattern's variants
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(Blocks.BASALT),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(blockSupplier))
-                        .unlockedBy(getHasName(Blocks.BASALT), has(Blocks.BASALT))
-                        .save(this.output);
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(Blocks.BASALT),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(stairsSupplier))
-                        .unlockedBy(getHasName(Blocks.BASALT), has(Blocks.BASALT))
-                        .save(this.output);
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(Blocks.BASALT),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(slabSupplier), 2)
-                        .unlockedBy(getHasName(Blocks.BASALT), has(Blocks.BASALT))
-                        .save(this.output);
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(Blocks.BASALT),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(wallSupplier))
-                        .unlockedBy(getHasName(Blocks.BASALT), has(Blocks.BASALT))
-                        .save(this.output);
-
-                // Create additional stonecutter recipes from each pattern's block to its variants
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of((ItemLike)invokeGet(blockSupplier)),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(stairsSupplier))
-                        .unlockedBy(getHasName((ItemLike)invokeGet(blockSupplier)), has((ItemLike)invokeGet(blockSupplier)))
-                        .save(this.output, "basalt_" + pattern + "_stairs_from_basalt_" + pattern + "_block");
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of((ItemLike)invokeGet(blockSupplier)),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(slabSupplier), 2)
-                        .unlockedBy(getHasName((ItemLike)invokeGet(blockSupplier)), has((ItemLike)invokeGet(blockSupplier)))
-                        .save(this.output, "basalt_" + pattern + "_slab_from_basalt_" + pattern + "_block");
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of((ItemLike)invokeGet(blockSupplier)),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(wallSupplier))
-                        .unlockedBy(getHasName((ItemLike)invokeGet(blockSupplier)), has((ItemLike)invokeGet(blockSupplier)))
-                        .save(this.output, "basalt_" + pattern + "_wall_from_basalt_" + pattern + "_block");
-
-            } catch (Exception e) {
-                System.err.println("Error creating recipes for pattern " + pattern + ": " + e.getMessage());
+            ModBLocks.BlockSet set = ModBLocks.BASALT_VARIANTS.get(i);
+            if (set == null) {
+                System.err.println("BlockSet missing for pattern index " + i);
+                continue;
             }
+
+            ItemLike base = set.base().get().asItem();
+            ItemLike stairs = set.stairs().get().asItem();
+            ItemLike slab = set.slab().get().asItem();
+            ItemLike wall = set.wall().get().asItem();
+            String pattern = "basalt_" + i;
+
+            // From vanilla Basalt to each variant
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.BASALT),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            base)
+                    .unlockedBy(getHasName(Blocks.BASALT), has(Blocks.BASALT))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.BASALT),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            stairs)
+                    .unlockedBy(getHasName(Blocks.BASALT), has(Blocks.BASALT))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.BASALT),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            slab, 2)
+                    .unlockedBy(getHasName(Blocks.BASALT), has(Blocks.BASALT))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.BASALT),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            wall)
+                    .unlockedBy(getHasName(Blocks.BASALT), has(Blocks.BASALT))
+                    .save(this.output);
+
+            // From variant block to its shaped versions
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            stairs)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_stairs_from_" + pattern + "_block");
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            slab, 2)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_slab_from_" + pattern + "_block");
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            wall)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_wall_from_" + pattern + "_block");
         }
-        for (String pattern : patterns) {
-            // Based on your original code structure, use reflection to get the fields
-            try {
-                // Get the block field objects from ModBlocks class
-                java.lang.reflect.Field blockField = ModBLocks.class.getDeclaredField("BRICKS_" + pattern + "_BLOCK");
-                java.lang.reflect.Field stairsField = ModBLocks.class.getDeclaredField("BRICKS_" + pattern + "_STAIRS");
-                java.lang.reflect.Field slabField = ModBLocks.class.getDeclaredField("BRICKS_" + pattern + "_SLAB");
-                java.lang.reflect.Field wallField = ModBLocks.class.getDeclaredField("BRICKS_" + pattern + "_WALL");
 
-                // Get the supplier objects
-                var blockSupplier = blockField.get(null);
-                var stairsSupplier = stairsField.get(null);
-                var slabSupplier = slabField.get(null);
-                var wallSupplier = wallField.get(null);
+        for (int i = 1; i <= 38; i++) {
+            if (i == 2 || i == 15) continue;
 
-                // Create recipes from the base stone block to each pattern's variants
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(Blocks.BRICKS),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(blockSupplier))
-                        .unlockedBy(getHasName(Blocks.BRICKS), has(Blocks.BRICKS))
-                        .save(this.output);
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(Blocks.BRICKS),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(stairsSupplier))
-                        .unlockedBy(getHasName(Blocks.BRICKS), has(Blocks.BRICKS))
-                        .save(this.output);
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(Blocks.BRICKS),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(slabSupplier), 2)
-                        .unlockedBy(getHasName(Blocks.BRICKS), has(Blocks.BRICKS))
-                        .save(this.output);
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(Blocks.BRICKS),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(wallSupplier))
-                        .unlockedBy(getHasName(Blocks.BRICKS), has(Blocks.BRICKS))
-                        .save(this.output);
-
-                // Create additional stonecutter recipes from each pattern's block to its variants
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of((ItemLike)invokeGet(blockSupplier)),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(stairsSupplier))
-                        .unlockedBy(getHasName((ItemLike)invokeGet(blockSupplier)), has((ItemLike)invokeGet(blockSupplier)))
-                        .save(this.output, "bricks_" + pattern + "_stairs_from_bricks_" + pattern + "_block");
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of((ItemLike)invokeGet(blockSupplier)),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(slabSupplier), 2)
-                        .unlockedBy(getHasName((ItemLike)invokeGet(blockSupplier)), has((ItemLike)invokeGet(blockSupplier)))
-                        .save(this.output, "bricks_" + pattern + "_slab_from_bricks_" + pattern + "_block");
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of((ItemLike)invokeGet(blockSupplier)),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(wallSupplier))
-                        .unlockedBy(getHasName((ItemLike)invokeGet(blockSupplier)), has((ItemLike)invokeGet(blockSupplier)))
-                        .save(this.output, "bricks_" + pattern + "_wall_from_bricks_" + pattern + "_block");
-
-            } catch (Exception e) {
-                System.err.println("Error creating recipes for pattern " + pattern + ": " + e.getMessage());
+            ModBLocks.BlockSet set = ModBLocks.BRICKS_VARIANTS.get(i); // Changed to BRICK_VARIANTS
+            if (set == null) {
+                System.err.println("BlockSet missing for pattern index " + i);
+                continue;
             }
+
+            ItemLike base = set.base().get().asItem();
+            ItemLike stairs = set.stairs().get().asItem();
+            ItemLike slab = set.slab().get().asItem();
+            ItemLike wall = set.wall().get().asItem();
+            String pattern = "bricks_" + i; // Changed pattern prefix to bricks
+
+            // From vanilla Bricks to each variant
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.BRICKS), // Changed to Blocks.BRICKS
+                            RecipeCategory.BUILDING_BLOCKS,
+                            base)
+                    .unlockedBy(getHasName(Blocks.BRICKS), has(Blocks.BRICKS))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.BRICKS), // Changed to Blocks.BRICKS
+                            RecipeCategory.BUILDING_BLOCKS,
+                            stairs)
+                    .unlockedBy(getHasName(Blocks.BRICKS), has(Blocks.BRICKS))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.BRICKS), // Changed to Blocks.BRICKS
+                            RecipeCategory.BUILDING_BLOCKS,
+                            slab, 2)
+                    .unlockedBy(getHasName(Blocks.BRICKS), has(Blocks.BRICKS))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.BRICKS), // Changed to Blocks.BRICKS
+                            RecipeCategory.BUILDING_BLOCKS,
+                            wall)
+                    .unlockedBy(getHasName(Blocks.BRICKS), has(Blocks.BRICKS))
+                    .save(this.output);
+
+            // From variant block to its shaped versions
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            stairs)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_stairs_from_" + pattern + "_block");
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            slab, 2)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_slab_from_" + pattern + "_block");
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            wall)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_wall_from_" + pattern + "_block");
         }
-        for (String pattern : patterns) {
-            // Based on your original code structure, use reflection to get the fields
-            try {
-                // Get the block field objects from ModBlocks class
-                java.lang.reflect.Field blockField = ModBLocks.class.getDeclaredField("CALCITE_" + pattern + "_BLOCK");
-                java.lang.reflect.Field stairsField = ModBLocks.class.getDeclaredField("CALCITE_" + pattern + "_STAIRS");
-                java.lang.reflect.Field slabField = ModBLocks.class.getDeclaredField("CALCITE_" + pattern + "_SLAB");
-                java.lang.reflect.Field wallField = ModBLocks.class.getDeclaredField("CALCITE_" + pattern + "_WALL");
 
-                // Get the supplier objects
-                var blockSupplier = blockField.get(null);
-                var stairsSupplier = stairsField.get(null);
-                var slabSupplier = slabField.get(null);
-                var wallSupplier = wallField.get(null);
+        for (int i = 1; i <= 38; i++) {
+            if (i == 15) continue;
 
-                // Create recipes from the base stone block to each pattern's variants
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(Blocks.CALCITE),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(blockSupplier))
-                        .unlockedBy(getHasName(Blocks.CALCITE), has(Blocks.CALCITE))
-                        .save(this.output);
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(Blocks.CALCITE),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(stairsSupplier))
-                        .unlockedBy(getHasName(Blocks.CALCITE), has(Blocks.CALCITE))
-                        .save(this.output);
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(Blocks.CALCITE),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(slabSupplier), 2)
-                        .unlockedBy(getHasName(Blocks.CALCITE), has(Blocks.CALCITE))
-                        .save(this.output);
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(Blocks.CALCITE),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(wallSupplier))
-                        .unlockedBy(getHasName(Blocks.CALCITE), has(Blocks.CALCITE))
-                        .save(this.output);
-
-                // Create additional stonecutter recipes from each pattern's block to its variants
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of((ItemLike)invokeGet(blockSupplier)),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(stairsSupplier))
-                        .unlockedBy(getHasName((ItemLike)invokeGet(blockSupplier)), has((ItemLike)invokeGet(blockSupplier)))
-                        .save(this.output, "calcite_" + pattern + "_stairs_from_calcite_" + pattern + "_block");
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of((ItemLike)invokeGet(blockSupplier)),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(slabSupplier), 2)
-                        .unlockedBy(getHasName((ItemLike)invokeGet(blockSupplier)), has((ItemLike)invokeGet(blockSupplier)))
-                        .save(this.output, "calcite_" + pattern + "_slab_from_calcite_" + pattern + "_block");
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of((ItemLike)invokeGet(blockSupplier)),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(wallSupplier))
-                        .unlockedBy(getHasName((ItemLike)invokeGet(blockSupplier)), has((ItemLike)invokeGet(blockSupplier)))
-                        .save(this.output, "calcite_" + pattern + "_wall_from_calcite_" + pattern + "_block");
-
-            } catch (Exception e) {
-                System.err.println("Error creating recipes for pattern " + pattern + ": " + e.getMessage());
+            ModBLocks.BlockSet set = ModBLocks.CALCITE_VARIANTS.get(i); // Changed to CALCITE_VARIANTS
+            if (set == null) {
+                System.err.println("BlockSet missing for pattern index " + i);
+                continue;
             }
+
+            ItemLike base = set.base().get().asItem();
+            ItemLike stairs = set.stairs().get().asItem();
+            ItemLike slab = set.slab().get().asItem();
+            ItemLike wall = set.wall().get().asItem();
+            String pattern = "calcite_" + i; // Changed pattern prefix to calcite
+
+            // From vanilla Calcite to each variant
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.CALCITE), // Changed to Blocks.CALCITE
+                            RecipeCategory.BUILDING_BLOCKS,
+                            base)
+                    .unlockedBy(getHasName(Blocks.CALCITE), has(Blocks.CALCITE))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.CALCITE), // Changed to Blocks.CALCITE
+                            RecipeCategory.BUILDING_BLOCKS,
+                            stairs)
+                    .unlockedBy(getHasName(Blocks.CALCITE), has(Blocks.CALCITE))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.CALCITE), // Changed to Blocks.CALCITE
+                            RecipeCategory.BUILDING_BLOCKS,
+                            slab, 2)
+                    .unlockedBy(getHasName(Blocks.CALCITE), has(Blocks.CALCITE))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.CALCITE), // Changed to Blocks.CALCITE
+                            RecipeCategory.BUILDING_BLOCKS,
+                            wall)
+                    .unlockedBy(getHasName(Blocks.CALCITE), has(Blocks.CALCITE))
+                    .save(this.output);
+
+            // From variant block to its shaped versions
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            stairs)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_stairs_from_" + pattern + "_block");
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            slab, 2)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_slab_from_" + pattern + "_block");
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            wall)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_wall_from_" + pattern + "_block");
         }
-        for (String pattern : patterns) {
-            // Based on your original code structure, use reflection to get the fields
-            try {
-                // Get the block field objects from ModBlocks class
-                java.lang.reflect.Field blockField = ModBLocks.class.getDeclaredField("CDEEPSLATE_" + pattern + "_BLOCK");
-                java.lang.reflect.Field stairsField = ModBLocks.class.getDeclaredField("CDEEPSLATE_" + pattern + "_STAIRS");
-                java.lang.reflect.Field slabField = ModBLocks.class.getDeclaredField("CDEEPSLATE_" + pattern + "_SLAB");
-                java.lang.reflect.Field wallField = ModBLocks.class.getDeclaredField("CDEEPSLATE_" + pattern + "_WALL");
 
-                // Get the supplier objects
-                var blockSupplier = blockField.get(null);
-                var stairsSupplier = stairsField.get(null);
-                var slabSupplier = slabField.get(null);
-                var wallSupplier = wallField.get(null);
+        for (int i = 1; i <= 38; i++) {
+            if (i == 4 || i == 15 || i == 19) continue;
 
-                // Create recipes from the base deepslate block to each pattern's variants
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(Blocks.DEEPSLATE),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(blockSupplier))
-                        .unlockedBy(getHasName(Blocks.DEEPSLATE), has(Blocks.DEEPSLATE))
-                        .save(this.output);
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(Blocks.DEEPSLATE),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(stairsSupplier))
-                        .unlockedBy(getHasName(Blocks.DEEPSLATE), has(Blocks.DEEPSLATE))
-                        .save(this.output);
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(Blocks.DEEPSLATE),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(slabSupplier), 2)
-                        .unlockedBy(getHasName(Blocks.DEEPSLATE), has(Blocks.DEEPSLATE))
-                        .save(this.output);
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(Blocks.DEEPSLATE),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(wallSupplier))
-                        .unlockedBy(getHasName(Blocks.DEEPSLATE), has(Blocks.DEEPSLATE))
-                        .save(this.output);
-
-                // Create additional stonecutter recipes from each pattern's block to its variants
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of((ItemLike)invokeGet(blockSupplier)),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(stairsSupplier))
-                        .unlockedBy(getHasName((ItemLike)invokeGet(blockSupplier)), has((ItemLike)invokeGet(blockSupplier)))
-                        .save(this.output, "cdeepslate_" + pattern + "_stairs_from_cdeepslate_" + pattern + "_block");
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of((ItemLike)invokeGet(blockSupplier)),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(slabSupplier), 2)
-                        .unlockedBy(getHasName((ItemLike)invokeGet(blockSupplier)), has((ItemLike)invokeGet(blockSupplier)))
-                        .save(this.output, "cdeepslate_" + pattern + "_slab_from_cdeepslate_" + pattern + "_block");
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of((ItemLike)invokeGet(blockSupplier)),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(wallSupplier))
-                        .unlockedBy(getHasName((ItemLike)invokeGet(blockSupplier)), has((ItemLike)invokeGet(blockSupplier)))
-                        .save(this.output, "cdeepslate_" + pattern + "_wall_from_cdeepslate_" + pattern + "_block");
-
-            } catch (Exception e) {
-                System.err.println("Error creating recipes for pattern " + pattern + ": " + e.getMessage());
+            ModBLocks.BlockSet set = ModBLocks.CDEEPSLATE_VARIANTS.get(i); // Changed to CDEEPSLATE_VARIANTS
+            if (set == null) {
+                System.err.println("BlockSet missing for pattern index " + i);
+                continue;
             }
+
+            ItemLike base = set.base().get().asItem();
+            ItemLike stairs = set.stairs().get().asItem();
+            ItemLike slab = set.slab().get().asItem();
+            ItemLike wall = set.wall().get().asItem();
+            String pattern = "cdeepslate_" + i; // Changed pattern prefix to cdeepslate
+
+            // From vanilla Cobbled Deepslate to each variant
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.COBBLED_DEEPSLATE), // Changed to COBBLED_DEEPSLATE
+                            RecipeCategory.BUILDING_BLOCKS,
+                            base)
+                    .unlockedBy(getHasName(Blocks.COBBLED_DEEPSLATE), has(Blocks.COBBLED_DEEPSLATE))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.COBBLED_DEEPSLATE),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            stairs)
+                    .unlockedBy(getHasName(Blocks.COBBLED_DEEPSLATE), has(Blocks.COBBLED_DEEPSLATE))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.COBBLED_DEEPSLATE),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            slab, 2)
+                    .unlockedBy(getHasName(Blocks.COBBLED_DEEPSLATE), has(Blocks.COBBLED_DEEPSLATE))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.COBBLED_DEEPSLATE),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            wall)
+                    .unlockedBy(getHasName(Blocks.COBBLED_DEEPSLATE), has(Blocks.COBBLED_DEEPSLATE))
+                    .save(this.output);
+
+            // From variant block to its shaped versions
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            stairs)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_stairs_from_" + pattern + "_block");
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            slab, 2)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_slab_from_" + pattern + "_block");
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            wall)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_wall_from_" + pattern + "_block");
         }
-        for (String pattern : patterns) {
-            try {
-                // Get the block field objects from ModBlocks class
-                java.lang.reflect.Field blockField = ModBLocks.class.getDeclaredField("GRANITE_" + pattern + "_BLOCK");
-                java.lang.reflect.Field stairsField = ModBLocks.class.getDeclaredField("GRANITE_" + pattern + "_STAIRS");
-                java.lang.reflect.Field slabField = ModBLocks.class.getDeclaredField("GRANITE_" + pattern + "_SLAB");
-                java.lang.reflect.Field wallField = ModBLocks.class.getDeclaredField("GRANITE_" + pattern + "_WALL");
 
-                // Get the supplier objects
-                var blockSupplier = blockField.get(null);
-                var stairsSupplier = stairsField.get(null);
-                var slabSupplier = slabField.get(null);
-                var wallSupplier = wallField.get(null);
+        for (int i = 1; i <= 38; i++) {
+            if (i == 15) continue;
 
-                // Create recipes from the base granite block to each pattern's variants
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(Blocks.GRANITE),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(blockSupplier))
-                        .unlockedBy(getHasName(Blocks.GRANITE), has(Blocks.GRANITE))
-                        .save(this.output);
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(Blocks.GRANITE),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(stairsSupplier))
-                        .unlockedBy(getHasName(Blocks.GRANITE), has(Blocks.GRANITE))
-                        .save(this.output);
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(Blocks.GRANITE),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(slabSupplier), 2)
-                        .unlockedBy(getHasName(Blocks.GRANITE), has(Blocks.GRANITE))
-                        .save(this.output);
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of(Blocks.GRANITE),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(wallSupplier))
-                        .unlockedBy(getHasName(Blocks.GRANITE), has(Blocks.GRANITE))
-                        .save(this.output);
-
-                // Create additional granitecutter recipes from each pattern's block to its variants
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of((ItemLike)invokeGet(blockSupplier)),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(stairsSupplier))
-                        .unlockedBy(getHasName((ItemLike)invokeGet(blockSupplier)), has((ItemLike)invokeGet(blockSupplier)))
-                        .save(this.output, "granite_" + pattern + "_stairs_from_granite_" + pattern + "_block");
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of((ItemLike)invokeGet(blockSupplier)),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(slabSupplier), 2)
-                        .unlockedBy(getHasName((ItemLike)invokeGet(blockSupplier)), has((ItemLike)invokeGet(blockSupplier)))
-                        .save(this.output, "granite_" + pattern + "_slab_from_granite_" + pattern + "_block");
-
-                SingleItemRecipeBuilder.stonecutting(
-                                Ingredient.of((ItemLike)invokeGet(blockSupplier)),
-                                RecipeCategory.BUILDING_BLOCKS,
-                                (ItemLike)invokeGet(wallSupplier))
-                        .unlockedBy(getHasName((ItemLike)invokeGet(blockSupplier)), has((ItemLike)invokeGet(blockSupplier)))
-                        .save(this.output, "granite_" + pattern + "_wall_from_granite_" + pattern + "_block");
-
-            } catch (Exception e) {
-                System.err.println("Error creating recipes for pattern " + pattern + ": " + e.getMessage());
+            ModBLocks.BlockSet set = ModBLocks.GRANITE_VARIANTS.get(i);
+            if (set == null) {
+                System.err.println("BlockSet missing for pattern index " + i);
+                continue;
             }
+
+            ItemLike base = set.base().get().asItem();
+            ItemLike stairs = set.stairs().get().asItem();
+            ItemLike slab = set.slab().get().asItem();
+            ItemLike wall = set.wall().get().asItem();
+            String pattern = "granite_" + i;
+
+            // From vanilla Granite to each variant
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.GRANITE),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            base)
+                    .unlockedBy(getHasName(Blocks.GRANITE), has(Blocks.GRANITE))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.GRANITE),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            stairs)
+                    .unlockedBy(getHasName(Blocks.GRANITE), has(Blocks.GRANITE))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.GRANITE),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            slab, 2)
+                    .unlockedBy(getHasName(Blocks.GRANITE), has(Blocks.GRANITE))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.GRANITE),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            wall)
+                    .unlockedBy(getHasName(Blocks.GRANITE), has(Blocks.GRANITE))
+                    .save(this.output);
+
+            // From variant block to its shaped versions
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            stairs)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_stairs_from_" + pattern + "_block");
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            slab, 2)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_slab_from_" + pattern + "_block");
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            wall)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_wall_from_" + pattern + "_block");
         }
+
+        for (int i = 1; i <= 38; i++) {
+            if (i == 15 || i == 22 || i == 31) continue;
+
+            ModBLocks.BlockSet set = ModBLocks.BLACKSTONE_VARIANTS.get(i);
+            if (set == null) {
+                System.err.println("BlockSet missing for pattern index " + i);
+                continue;
+            }
+
+            ItemLike base = set.base().get().asItem();
+            ItemLike stairs = set.stairs().get().asItem();
+            ItemLike slab = set.slab().get().asItem();
+            ItemLike wall = set.wall().get().asItem();
+            String pattern = "blackstone_" + i;
+
+            // From vanilla Blackstone to each variant
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.BLACKSTONE),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            base)
+                    .unlockedBy(getHasName(Blocks.BLACKSTONE), has(Blocks.BLACKSTONE))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.BLACKSTONE),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            stairs)
+                    .unlockedBy(getHasName(Blocks.BLACKSTONE), has(Blocks.BLACKSTONE))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.BLACKSTONE),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            slab, 2)
+                    .unlockedBy(getHasName(Blocks.BLACKSTONE), has(Blocks.BLACKSTONE))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.BLACKSTONE),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            wall)
+                    .unlockedBy(getHasName(Blocks.BLACKSTONE), has(Blocks.BLACKSTONE))
+                    .save(this.output);
+
+            // From variant block to its shaped versions
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            stairs)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_stairs_from_" + pattern + "_block");
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            slab, 2)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_slab_from_" + pattern + "_block");
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            wall)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_wall_from_" + pattern + "_block");
+        }
+
 
     }
 

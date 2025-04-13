@@ -1,6 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "agotmod:redkeep_24",
+  "ingredient": "agotmod:redkeep_24_block",
   "result": {
     "count": 2,
     "id": "agotmod:redkeep_24_slab"

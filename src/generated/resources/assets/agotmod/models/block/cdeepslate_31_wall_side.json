@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/template_wall_side",
   "textures": {
-    "wall": "agotmod:block/cdeepslate_31"
+    "wall": "agotmod:block/cdeepslate_31_block"
   }
 }

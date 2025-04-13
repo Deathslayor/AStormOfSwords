@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/stairs",
   "textures": {
-    "bottom": "agotmod:block/redkeep_22",
-    "side": "agotmod:block/redkeep_22",
-    "top": "agotmod:block/redkeep_22"
+    "bottom": "agotmod:block/redkeep_22_block",
+    "side": "agotmod:block/redkeep_22_block",
+    "top": "agotmod:block/redkeep_22_block"
   }
 }

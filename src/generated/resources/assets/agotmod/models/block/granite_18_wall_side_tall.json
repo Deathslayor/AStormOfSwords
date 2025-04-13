@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/template_wall_side_tall",
   "textures": {
-    "wall": "agotmod:block/granite_18"
+    "wall": "agotmod:block/granite_18_block"
   }
 }

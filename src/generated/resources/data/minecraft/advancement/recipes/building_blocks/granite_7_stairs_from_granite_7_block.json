@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_granite_7": {
+    "has_granite_7_block": {
       "conditions": {
         "items": [
           {
-            "items": "agotmod:granite_7"
+            "items": "agotmod:granite_7_block"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_granite_7"
+      "has_granite_7_block"
     ]
   ],
   "rewards": {

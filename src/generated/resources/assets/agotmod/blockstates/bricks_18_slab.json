@@ -4,7 +4,7 @@
       "model": "agotmod:block/bricks_18_slab"
     },
     "type=double": {
-      "model": "agotmod:block/bricks_18"
+      "model": "agotmod:block/bricks_18_block"
     },
     "type=top": {
       "model": "agotmod:block/bricks_18_slab_top"

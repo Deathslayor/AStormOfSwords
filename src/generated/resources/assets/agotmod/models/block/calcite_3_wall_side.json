@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/template_wall_side",
   "textures": {
-    "wall": "agotmod:block/calcite_3"
+    "wall": "agotmod:block/calcite_3_block"
   }
 }

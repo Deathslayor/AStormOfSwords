@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/wall_inventory",
   "textures": {
-    "wall": "agotmod:block/bricks_36"
+    "wall": "agotmod:block/bricks_36_block"
   }
 }

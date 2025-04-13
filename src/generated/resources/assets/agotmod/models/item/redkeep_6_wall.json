@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/wall_inventory",
   "textures": {
-    "wall": "agotmod:block/redkeep_6"
+    "wall": "agotmod:block/redkeep_6_block"
   }
 }

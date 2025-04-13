@@ -4,7 +4,7 @@
       "model": "agotmod:block/cdeepslate_33_slab"
     },
     "type=double": {
-      "model": "agotmod:block/cdeepslate_33"
+      "model": "agotmod:block/cdeepslate_33_block"
     },
     "type=top": {
       "model": "agotmod:block/cdeepslate_33_slab_top"

@@ -1,6 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "agotmod:sstone_21",
+  "ingredient": "agotmod:sstone_21_block",
   "result": {
     "count": 1,
     "id": "agotmod:sstone_21_stairs"

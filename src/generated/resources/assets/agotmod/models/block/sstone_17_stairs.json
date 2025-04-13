@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/stairs",
   "textures": {
-    "bottom": "agotmod:block/sstone_17",
-    "side": "agotmod:block/sstone_17",
-    "top": "agotmod:block/sstone_17"
+    "bottom": "agotmod:block/sstone_17_block",
+    "side": "agotmod:block/sstone_17_block",
+    "top": "agotmod:block/sstone_17_block"
   }
 }

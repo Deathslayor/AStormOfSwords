@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_stone_12": {
+    "has_stone_12_block": {
       "conditions": {
         "items": [
           {
-            "items": "agotmod:stone_12"
+            "items": "agotmod:stone_12_block"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_stone_12"
+      "has_stone_12_block"
     ]
   ],
   "rewards": {
