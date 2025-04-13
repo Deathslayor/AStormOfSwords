@@ -320,7 +320,7 @@ public class ModBLocks {
     }
 
     private static void registerCDeepslateVariants() {
-        BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f); // Replaced BLACKSTONE with CDEEPSLATE
+        BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f); // Replaced BLACKSTONE with CDEEPSLATE
 
         for (int i : VALID_CDEEPSLATE_INDICES) { // Changed to CDEEPSLATE_INDICES
             String baseName = "cdeepslate_" + i; // Changed to cdeepslate_
