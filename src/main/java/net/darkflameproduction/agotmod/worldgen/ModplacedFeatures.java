@@ -115,11 +115,16 @@ public class ModplacedFeatures {
     public static final ResourceKey<PlacedFeature> DUSKY_ROSE_BUSH_KEY = registerKey("dusky_rose_bush");
     public static final ResourceKey<PlacedFeature> WINTER_ROSE_BUSH_KEY = registerKey("winter_rose_bush");
     public static final ResourceKey<PlacedFeature> RED_ROSE_BUSH_KEY = registerKey("red_rose_bush");
-    public static final ResourceKey<PlacedFeature> GRASS_PATCH_PLACED_KEY = registerKey("grass_patch");
+    public static final ResourceKey<PlacedFeature> GRASS_BLOCK_PATCH_PLACED_KEY = registerKey("grass_block_patch");
     public static final ResourceKey<PlacedFeature> CLAY_PATCH_PLACED_KEY = registerKey("clay_patch");
     public static final ResourceKey<PlacedFeature> SEAGRASS_KEY = registerKey("seagrass");
     public static final ResourceKey<PlacedFeature> KELP_KEY = registerKey("kelp");
     public static final ResourceKey<PlacedFeature> QUAGMIRE_PATCH_PLACED_KEY = registerKey("quagmire");
+    public static final ResourceKey<PlacedFeature> FERN_KEY = registerKey("fern");
+    public static final ResourceKey<PlacedFeature> LARGE_FERN_KEY = registerKey("large_fern");
+    public static final ResourceKey<PlacedFeature> GRASS_KEY = registerKey("grass");
+    public static final ResourceKey<PlacedFeature> TALL_GRASS_KEY = registerKey("tall_grass");
+
 
 
 
@@ -612,9 +617,55 @@ public class ModplacedFeatures {
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
 
+        register(context, FERN_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.FERN_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(8),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
 
-        register(context, GRASS_PATCH_PLACED_KEY,
-                configuredFeatures.getOrThrow(ModConfiguredFeatures.GRASS_PATCH_KEY),
+        register(context, LARGE_FERN_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.LARGE_FERN_KEY),
+                List.of(CountPlacement.of(1),
+                        RarityFilter.onAverageOnceEvery(8),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()));
+
+        register(context, GRASS_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.GRASS_KEY),
+                List.of(
+                        // Increase base count significantly
+                        CountPlacement.of(20),
+                        // Reduce noise influence and increase density
+                        NoiseBasedCountPlacement.of(8, 0.5, 0.0), // Lower variance, higher minimum
+                        // Use tighter spacing
+                        InSquarePlacement.spread(),
+                        // Keep height range the same
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(65), VerticalAnchor.top()),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()
+                ));
+
+        register(context, TALL_GRASS_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.TALL_GRASS_KEY),
+                List.of(
+                        // Increase base count for tall grass
+                        CountPlacement.of(4),
+                        // More uniform distribution with less noise influence
+                        NoiseBasedCountPlacement.of(6, 0.3, 0.0),
+                        // Use tighter spacing
+                        InSquarePlacement.spread(),
+                        // Keep height range the same
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(65), VerticalAnchor.top()),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome()
+                ));
+
+
+        register(context, GRASS_BLOCK_PATCH_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.GRASS_BLOCK_PATCH_KEY),
                 List.of(
                         CountPlacement.of(4),
                         NoiseBasedCountPlacement.of(5, 10.0, 0.0),

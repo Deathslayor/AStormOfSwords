@@ -591,6 +591,39 @@ public class ModBlockLootTables extends BlockLootSubProvider {
             }
         }
 
+        for (int i = 1; i <= 38; i++) {
+            if (i == 15 || i == 35) continue;
+            ModBLocks.BlockSet set = ModBLocks.BONE_VARIANTS.get(i);
+            if (set != null) {
+                this.dropSelf(set.base().get());
+                this.dropSelf(set.stairs().get());
+                this.dropSelf(set.slab().get());
+                this.dropSelf(set.wall().get());
+            }
+        }
+
+        for (int i = 1; i <= 38; i++) {
+            if (i == 15) continue;
+            ModBLocks.BlockSet set = ModBLocks.DRIPSTONE_VARIANTS.get(i);
+            if (set != null) {
+                this.dropSelf(set.base().get());
+                this.dropSelf(set.stairs().get());
+                this.dropSelf(set.slab().get());
+                this.dropSelf(set.wall().get());
+            }
+        }
+
+        for (int i = 1; i <= 38; i++) {
+            if (i == 15) continue;
+            ModBLocks.BlockSet set = ModBLocks.PACKED_ICE_VARIANTS.get(i);
+            if (set != null) {
+                this.dropSelf(set.base().get());
+                this.dropSelf(set.stairs().get());
+                this.dropSelf(set.slab().get());
+                this.dropSelf(set.wall().get());
+            }
+        }
+
         // ---------------------------(FLOWERS)--------------------------- //
         this.dropSelf(ModBLocks.WINTER_ROSE.get());
         this.dropSelf(ModBLocks.WILD_RADISH.get());

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "agotmod:block/packed_ice_10_block"
+  }
+}

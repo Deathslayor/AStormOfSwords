@@ -367,6 +367,45 @@ public class ModCreativeBuildingBlocks {
                             }
                         }
 
+                        for (int i = 1; i <= 38; i++) {
+                            // Skip variants 15 and 22 as they're commented out in your original code
+                            if (i == 15 || i == 35) continue;
+
+                            ModBLocks.BlockSet blockSet = ModBLocks.BONE_VARIANTS.get(i);
+                            if (blockSet != null) {
+                                pOutput.accept(blockSet.base().get());
+                                pOutput.accept(blockSet.stairs().get());
+                                pOutput.accept(blockSet.slab().get());
+                                pOutput.accept(blockSet.wall().get());
+                            }
+                        }
+
+                        for (int i = 1; i <= 38; i++) {
+                            // Skip variants 15 and 22 as they're commented out in your original code
+                            if (i == 15) continue;
+
+                            ModBLocks.BlockSet blockSet = ModBLocks.DRIPSTONE_VARIANTS.get(i);
+                            if (blockSet != null) {
+                                pOutput.accept(blockSet.base().get());
+                                pOutput.accept(blockSet.stairs().get());
+                                pOutput.accept(blockSet.slab().get());
+                                pOutput.accept(blockSet.wall().get());
+                            }
+                        }
+
+                        for (int i = 1; i <= 38; i++) {
+                            // Skip variants 15 and 22 as they're commented out in your original code
+                            if (i == 15) continue;
+
+                            ModBLocks.BlockSet blockSet = ModBLocks.PACKED_ICE_VARIANTS.get(i);
+                            if (blockSet != null) {
+                                pOutput.accept(blockSet.base().get());
+                                pOutput.accept(blockSet.stairs().get());
+                                pOutput.accept(blockSet.slab().get());
+                                pOutput.accept(blockSet.wall().get());
+                            }
+                        }
+
                         pOutput.accept(ModBLocks.QUAGMIRE.get());
                         /** INGOTS = Blocks */
                         // TIN

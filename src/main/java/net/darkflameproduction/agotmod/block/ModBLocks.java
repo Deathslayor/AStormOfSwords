@@ -146,6 +146,27 @@ public class ModBLocks {
                     .collect(Collectors.toList())
     );
 
+    public static final List<Integer> VALID_BONE_INDICES = new ArrayList<>(
+            IntStream.rangeClosed(1, 38)
+                    .filter(i -> i != 15 && i != 35)
+                    .boxed()
+                    .collect(Collectors.toList())
+    );
+
+    public static final List<Integer> VALID_DRIPSTONE_INDICES = new ArrayList<>(
+            IntStream.rangeClosed(1, 38)
+                    .filter(i -> i != 15)
+                    .boxed()
+                    .collect(Collectors.toList())
+    );
+
+    public static final List<Integer> VALID_PACKED_ICE_INDICES = new ArrayList<>(
+            IntStream.rangeClosed(1, 38)
+                    .filter(i -> i != 15)
+                    .boxed()
+                    .collect(Collectors.toList())
+    );
+
 
     public static final Map<Integer, BlockSet> BLACKSTONE_VARIANTS = new HashMap<>();
     public static final Map<Integer, BlockSet> BASALT_VARIANTS = new HashMap<>();
@@ -157,7 +178,9 @@ public class ModBLocks {
     public static final Map<Integer, BlockSet> RSANDSTONE_VARIANTS = new HashMap<>();
     public static final Map<Integer, BlockSet> STONE_VARIANTS = new HashMap<>();
     public static final Map<Integer, BlockSet> SSTONE_VARIANTS = new HashMap<>();
-
+    public static final Map<Integer, BlockSet> BONE_VARIANTS = new HashMap<>();
+    public static final Map<Integer, BlockSet> DRIPSTONE_VARIANTS = new HashMap<>();
+    public static final Map<Integer, BlockSet> PACKED_ICE_VARIANTS = new HashMap<>();
 
     private static <T extends Block> @NotNull DeferredBlock<T> registerBlock(String name, Function<BlockBehaviour.Properties, T> block, BlockBehaviour.Properties properties) {
         DeferredBlock<T> toReturn = BLOCKS.registerBlock(name, block, properties);
@@ -466,7 +489,99 @@ public class ModBLocks {
                 System.err.println("⚠ Skipped sstone variant: sstone_" + i);
             }
         }
+
     }
+
+    private static void registerBoneVariants() {
+        BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(Blocks.BONE_BLOCK).strength(3f);
+
+        for (int i : VALID_BONE_INDICES) {
+            String baseName = "bone_" + i;
+
+            // Resource-safe lowercase names
+            String blockName = baseName + "_block";
+            String stairsName = baseName + "_stairs";
+            String slabName = baseName + "_slab";
+            String wallName = baseName + "_wall";
+
+            DeferredBlock<Block> base = registerBlock(blockName, Block::new, properties);
+            DeferredBlock<Block> stairs = registerBlock(stairsName, p -> new StairBlock(base.get().defaultBlockState(), p), properties);
+            DeferredBlock<Block> slab = registerBlock(slabName, SlabBlock::new, properties);
+            DeferredBlock<Block> wall = registerBlock(wallName, WallBlock::new, properties);
+
+            BONE_VARIANTS.put(i, new BlockSet(base, stairs, slab, wall));
+
+            System.out.println("✅ Registered: " + baseName);
+        }
+
+        // Optional sanity check
+        for (int i = 1; i <= 38; i++) {
+            if (!BONE_VARIANTS.containsKey(i)) {
+                System.err.println("⚠ Skipped bone variant: bone_" + i);
+            }
+        }
+    }
+
+    private static void registerDripstoneVariants() {
+        BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(Blocks.DRIPSTONE_BLOCK).strength(3f);
+
+        for (int i : VALID_DRIPSTONE_INDICES) {
+            String baseName = "dripstone_" + i;
+
+            // Resource-safe lowercase names
+            String blockName = baseName + "_block";
+            String stairsName = baseName + "_stairs";
+            String slabName = baseName + "_slab";
+            String wallName = baseName + "_wall";
+
+            DeferredBlock<Block> base = registerBlock(blockName, Block::new, properties);
+            DeferredBlock<Block> stairs = registerBlock(stairsName, p -> new StairBlock(base.get().defaultBlockState(), p), properties);
+            DeferredBlock<Block> slab = registerBlock(slabName, SlabBlock::new, properties);
+            DeferredBlock<Block> wall = registerBlock(wallName, WallBlock::new, properties);
+
+            DRIPSTONE_VARIANTS.put(i, new BlockSet(base, stairs, slab, wall));
+
+            System.out.println("✅ Registered: " + baseName);
+        }
+
+        // Optional sanity check
+        for (int i = 1; i <= 38; i++) {
+            if (!DRIPSTONE_VARIANTS.containsKey(i)) {
+                System.err.println("⚠ Skipped dripstone variant: dripstone_" + i);
+            }
+        }
+    }
+
+    private static void registerPackedIceVariants() {
+        BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(Blocks.PACKED_ICE).strength(3f);
+
+        for (int i : VALID_PACKED_ICE_INDICES) {
+            String baseName = "packed_ice_" + i;
+
+            // Resource-safe lowercase names
+            String blockName = baseName + "_block";
+            String stairsName = baseName + "_stairs";
+            String slabName = baseName + "_slab";
+            String wallName = baseName + "_wall";
+
+            DeferredBlock<Block> base = registerBlock(blockName, Block::new, properties);
+            DeferredBlock<Block> stairs = registerBlock(stairsName, p -> new StairBlock(base.get().defaultBlockState(), p), properties);
+            DeferredBlock<Block> slab = registerBlock(slabName, SlabBlock::new, properties);
+            DeferredBlock<Block> wall = registerBlock(wallName, WallBlock::new, properties);
+
+            PACKED_ICE_VARIANTS.put(i, new BlockSet(base, stairs, slab, wall));
+
+            System.out.println("✅ Registered: " + baseName);
+        }
+
+        // Optional sanity check
+        for (int i = 1; i <= 38; i++) {
+            if (!PACKED_ICE_VARIANTS.containsKey(i)) {
+                System.err.println("⚠ Skipped packed_ice variant: packed_ice_" + i);
+            }
+        }
+    }
+
 
 
 
@@ -489,6 +604,9 @@ public class ModBLocks {
         registerRsandstoneVariants();
         registerStoneVariants();
         registerSstoneVariants();
+        registerBoneVariants();
+        registerDripstoneVariants();
+        registerPackedIceVariants();
     }
 
 
@@ -1189,7 +1307,7 @@ public class ModBLocks {
 
     public static final DeferredBlock<Block> THORN_BUSH = registerBlock("thorn_bush",
             properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
-            BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY));
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH));
 
     public static final DeferredBlock<Block> THISTLE = registerBlock("thistle",
             properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),

@@ -72,8 +72,6 @@
     [],
     [
       "minecraft:glow_lichen",
-      "minecraft:patch_large_fern",
-      "minecraft:patch_grass_forest",
       "agotmod:ash",
       "agotmod:chestnut",
       "agotmod:ironwood",
@@ -83,7 +81,7 @@
       "agotmod:oak",
       "agotmod:hawthorn",
       "agotmod:beech",
-      "agotmod:grass_patch",
+      "agotmod:grass_block_patch",
       "agotmod:forget_me_not",
       "agotmod:frostfire",
       "agotmod:liverwort",
@@ -92,7 +90,11 @@
       "agotmod:red_rose_bush",
       "agotmod:thistle",
       "agotmod:thorn_bush",
-      "agotmod:winter_rose_bush"
+      "agotmod:winter_rose_bush",
+      "agotmod:fern",
+      "agotmod:large_fern",
+      "agotmod:grass",
+      "agotmod:tall_grass"
     ],
     [
       "minecraft:freeze_top_layer"

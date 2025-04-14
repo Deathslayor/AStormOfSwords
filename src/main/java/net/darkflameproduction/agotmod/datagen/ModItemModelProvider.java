@@ -610,6 +610,42 @@ public class ModItemModelProvider extends ItemModelProvider {
             }
         }
 
+        for (int i = 1; i <= 38; i++) {
+            // Skip variants 15 and 22 and 31 as in your block registration
+            if (i == 15 || i == 35) continue;
+
+            ModBLocks.BlockSet blockSet = ModBLocks.BONE_VARIANTS.get(i);
+            if (blockSet != null) {
+                wallItem(blockSet.wall(), blockSet.base());
+                evenSimplerBlockItem(blockSet.stairs());
+                evenSimplerBlockItem(blockSet.slab());
+            }
+        }
+
+        for (int i = 1; i <= 38; i++) {
+            // Skip variants 15 and 22 and 31 as in your block registration
+            if (i == 15) continue;
+
+            ModBLocks.BlockSet blockSet = ModBLocks.DRIPSTONE_VARIANTS.get(i);
+            if (blockSet != null) {
+                wallItem(blockSet.wall(), blockSet.base());
+                evenSimplerBlockItem(blockSet.stairs());
+                evenSimplerBlockItem(blockSet.slab());
+            }
+        }
+
+        for (int i = 1; i <= 38; i++) {
+            // Skip variants 15 and 22 and 31 as in your block registration
+            if (i == 15) continue;
+
+            ModBLocks.BlockSet blockSet = ModBLocks.PACKED_ICE_VARIANTS.get(i);
+            if (blockSet != null) {
+                wallItem(blockSet.wall(), blockSet.base());
+                evenSimplerBlockItem(blockSet.stairs());
+                evenSimplerBlockItem(blockSet.slab());
+            }
+        }
+
 
         // ---------------------------(CRAFTING ITEMS)--------------------------- //
         // Register item models for crafting items

@@ -2454,7 +2454,575 @@
   "block.agotmod.cdeepslate_38_slab": "Deepslate Variant 38 Slab",
   "block.agotmod.cdeepslate_38_wall": "Deepslate Variant 38 Wall",
 
+  "block.agotmod.bone_1_block": "Bone Variant 1 Block",
+  "block.agotmod.bone_1_stairs": "Bone Variant 1 Stairs",
+  "block.agotmod.bone_1_slab": "Bone Variant 1 Slab",
+  "block.agotmod.bone_1_wall": "Bone Variant 1 Wall",
 
+  "block.agotmod.bone_2_block": "Bone Variant 2 Block",
+  "block.agotmod.bone_2_stairs": "Bone Variant 2 Stairs",
+  "block.agotmod.bone_2_slab": "Bone Variant 2 Slab",
+  "block.agotmod.bone_2_wall": "Bone Variant 2 Wall",
+
+  "block.agotmod.bone_3_block": "Bone Variant 3 Block",
+  "block.agotmod.bone_3_stairs": "Bone Variant 3 Stairs",
+  "block.agotmod.bone_3_slab": "Bone Variant 3 Slab",
+  "block.agotmod.bone_3_wall": "Bone Variant 3 Wall",
+
+  "block.agotmod.bone_4_block": "Bone Variant 4 Block",
+  "block.agotmod.bone_4_stairs": "Bone Variant 4 Stairs",
+  "block.agotmod.bone_4_slab": "Bone Variant 4 Slab",
+  "block.agotmod.bone_4_wall": "Bone Variant 4 Wall",
+
+  "block.agotmod.bone_5_block": "Bone Variant 5 Block",
+  "block.agotmod.bone_5_stairs": "Bone Variant 5 Stairs",
+  "block.agotmod.bone_5_slab": "Bone Variant 5 Slab",
+  "block.agotmod.bone_5_wall": "Bone Variant 5 Wall",
+
+  "block.agotmod.bone_6_block": "Bone Variant 6 Block",
+  "block.agotmod.bone_6_stairs": "Bone Variant 6 Stairs",
+  "block.agotmod.bone_6_slab": "Bone Variant 6 Slab",
+  "block.agotmod.bone_6_wall": "Bone Variant 6 Wall",
+
+  "block.agotmod.bone_7_block": "Bone Variant 7 Block",
+  "block.agotmod.bone_7_stairs": "Bone Variant 7 Stairs",
+  "block.agotmod.bone_7_slab": "Bone Variant 7 Slab",
+  "block.agotmod.bone_7_wall": "Bone Variant 7 Wall",
+
+  "block.agotmod.bone_8_block": "Bone Variant 8 Block",
+  "block.agotmod.bone_8_stairs": "Bone Variant 8 Stairs",
+  "block.agotmod.bone_8_slab": "Bone Variant 8 Slab",
+  "block.agotmod.bone_8_wall": "Bone Variant 8 Wall",
+
+  "block.agotmod.bone_9_block": "Bone Variant 9 Block",
+  "block.agotmod.bone_9_stairs": "Bone Variant 9 Stairs",
+  "block.agotmod.bone_9_slab": "Bone Variant 9 Slab",
+  "block.agotmod.bone_9_wall": "Bone Variant 9 Wall",
+
+  "block.agotmod.bone_10_block": "Bone Variant 10 Block",
+  "block.agotmod.bone_10_stairs": "Bone Variant 10 Stairs",
+  "block.agotmod.bone_10_slab": "Bone Variant 10 Slab",
+  "block.agotmod.bone_10_wall": "Bone Variant 10 Wall",
+
+  "block.agotmod.bone_11_block": "Bone Variant 11 Block",
+  "block.agotmod.bone_11_stairs": "Bone Variant 11 Stairs",
+  "block.agotmod.bone_11_slab": "Bone Variant 11 Slab",
+  "block.agotmod.bone_11_wall": "Bone Variant 11 Wall",
+
+  "block.agotmod.bone_12_block": "Bone Variant 12 Block",
+  "block.agotmod.bone_12_stairs": "Bone Variant 12 Stairs",
+  "block.agotmod.bone_12_slab": "Bone Variant 12 Slab",
+  "block.agotmod.bone_12_wall": "Bone Variant 12 Wall",
+
+  "block.agotmod.bone_13_block": "Bone Variant 13 Block",
+  "block.agotmod.bone_13_stairs": "Bone Variant 13 Stairs",
+  "block.agotmod.bone_13_slab": "Bone Variant 13 Slab",
+  "block.agotmod.bone_13_wall": "Bone Variant 13 Wall",
+
+  "block.agotmod.bone_14_block": "Bone Variant 14 Block",
+  "block.agotmod.bone_14_stairs": "Bone Variant 14 Stairs",
+  "block.agotmod.bone_14_slab": "Bone Variant 14 Slab",
+  "block.agotmod.bone_14_wall": "Bone Variant 14 Wall",
+
+  "block.agotmod.bone_15_block": "Bone Variant 15 Block",
+  "block.agotmod.bone_15_stairs": "Bone Variant 15 Stairs",
+  "block.agotmod.bone_15_slab": "Bone Variant 15 Slab",
+  "block.agotmod.bone_15_wall": "Bone Variant 15 Wall",
+
+  "block.agotmod.bone_16_block": "Bone Variant 16 Block",
+  "block.agotmod.bone_16_stairs": "Bone Variant 16 Stairs",
+  "block.agotmod.bone_16_slab": "Bone Variant 16 Slab",
+  "block.agotmod.bone_16_wall": "Bone Variant 16 Wall",
+
+  "block.agotmod.bone_17_block": "Bone Variant 17 Block",
+  "block.agotmod.bone_17_stairs": "Bone Variant 17 Stairs",
+  "block.agotmod.bone_17_slab": "Bone Variant 17 Slab",
+  "block.agotmod.bone_17_wall": "Bone Variant 17 Wall",
+
+  "block.agotmod.bone_18_block": "Bone Variant 18 Block",
+  "block.agotmod.bone_18_stairs": "Bone Variant 18 Stairs",
+  "block.agotmod.bone_18_slab": "Bone Variant 18 Slab",
+  "block.agotmod.bone_18_wall": "Bone Variant 18 Wall",
+
+  "block.agotmod.bone_19_block": "Bone Variant 19 Block",
+  "block.agotmod.bone_19_stairs": "Bone Variant 19 Stairs",
+  "block.agotmod.bone_19_slab": "Bone Variant 19 Slab",
+  "block.agotmod.bone_19_wall": "Bone Variant 19 Wall",
+
+  "block.agotmod.bone_20_block": "Bone Variant 20 Block",
+  "block.agotmod.bone_20_stairs": "Bone Variant 20 Stairs",
+  "block.agotmod.bone_20_slab": "Bone Variant 20 Slab",
+  "block.agotmod.bone_20_wall": "Bone Variant 20 Wall",
+
+  "block.agotmod.bone_21_block": "Bone Variant 21 Block",
+  "block.agotmod.bone_21_stairs": "Bone Variant 21 Stairs",
+  "block.agotmod.bone_21_slab": "Bone Variant 21 Slab",
+  "block.agotmod.bone_21_wall": "Bone Variant 21 Wall",
+
+  "block.agotmod.bone_22_block": "Bone Variant 22 Block",
+  "block.agotmod.bone_22_stairs": "Bone Variant 22 Stairs",
+  "block.agotmod.bone_22_slab": "Bone Variant 22 Slab",
+  "block.agotmod.bone_22_wall": "Bone Variant 22 Wall",
+
+  "block.agotmod.bone_23_block": "Bone Variant 23 Block",
+  "block.agotmod.bone_23_stairs": "Bone Variant 23 Stairs",
+  "block.agotmod.bone_23_slab": "Bone Variant 23 Slab",
+  "block.agotmod.bone_23_wall": "Bone Variant 23 Wall",
+
+  "block.agotmod.bone_24_block": "Bone Variant 24 Block",
+  "block.agotmod.bone_24_stairs": "Bone Variant 24 Stairs",
+  "block.agotmod.bone_24_slab": "Bone Variant 24 Slab",
+  "block.agotmod.bone_24_wall": "Bone Variant 24 Wall",
+
+  "block.agotmod.bone_25_block": "Bone Variant 25 Block",
+  "block.agotmod.bone_25_stairs": "Bone Variant 25 Stairs",
+  "block.agotmod.bone_25_slab": "Bone Variant 25 Slab",
+  "block.agotmod.bone_25_wall": "Bone Variant 25 Wall",
+
+  "block.agotmod.bone_26_block": "Bone Variant 26 Block",
+  "block.agotmod.bone_26_stairs": "Bone Variant 26 Stairs",
+  "block.agotmod.bone_26_slab": "Bone Variant 26 Slab",
+  "block.agotmod.bone_26_wall": "Bone Variant 26 Wall",
+
+  "block.agotmod.bone_27_block": "Bone Variant 27 Block",
+  "block.agotmod.bone_27_stairs": "Bone Variant 27 Stairs",
+  "block.agotmod.bone_27_slab": "Bone Variant 27 Slab",
+  "block.agotmod.bone_27_wall": "Bone Variant 27 Wall",
+
+  "block.agotmod.bone_28_block": "Bone Variant 28 Block",
+  "block.agotmod.bone_28_stairs": "Bone Variant 28 Stairs",
+  "block.agotmod.bone_28_slab": "Bone Variant 28 Slab",
+  "block.agotmod.bone_28_wall": "Bone Variant 28 Wall",
+
+  "block.agotmod.bone_29_block": "Bone Variant 29 Block",
+  "block.agotmod.bone_29_stairs": "Bone Variant 29 Stairs",
+  "block.agotmod.bone_29_slab": "Bone Variant 29 Slab",
+  "block.agotmod.bone_29_wall": "Bone Variant 29 Wall",
+
+  "block.agotmod.bone_30_block": "Bone Variant 30 Block",
+  "block.agotmod.bone_30_stairs": "Bone Variant 30 Stairs",
+  "block.agotmod.bone_30_slab": "Bone Variant 30 Slab",
+  "block.agotmod.bone_30_wall": "Bone Variant 30 Wall",
+
+  "block.agotmod.bone_31_block": "Bone Variant 31 Block",
+  "block.agotmod.bone_31_stairs": "Bone Variant 31 Stairs",
+  "block.agotmod.bone_31_slab": "Bone Variant 31 Slab",
+  "block.agotmod.bone_31_wall": "Bone Variant 31 Wall",
+
+  "block.agotmod.bone_32_block": "Bone Variant 32 Block",
+  "block.agotmod.bone_32_stairs": "Bone Variant 32 Stairs",
+  "block.agotmod.bone_32_slab": "Bone Variant 32 Slab",
+  "block.agotmod.bone_32_wall": "Bone Variant 32 Wall",
+
+  "block.agotmod.bone_33_block": "Bone Variant 33 Block",
+  "block.agotmod.bone_33_stairs": "Bone Variant 33 Stairs",
+  "block.agotmod.bone_33_slab": "Bone Variant 33 Slab",
+  "block.agotmod.bone_33_wall": "Bone Variant 33 Wall",
+
+  "block.agotmod.bone_34_block": "Bone Variant 34 Block",
+  "block.agotmod.bone_34_stairs": "Bone Variant 34 Stairs",
+  "block.agotmod.bone_34_slab": "Bone Variant 34 Slab",
+  "block.agotmod.bone_34_wall": "Bone Variant 34 Wall",
+
+  "block.agotmod.bone_35_block": "Bone Variant 35 Block",
+  "block.agotmod.bone_35_stairs": "Bone Variant 35 Stairs",
+  "block.agotmod.bone_35_slab": "Bone Variant 35 Slab",
+  "block.agotmod.bone_35_wall": "Bone Variant 35 Wall",
+
+  "block.agotmod.bone_36_block": "Bone Variant 36 Block",
+  "block.agotmod.bone_36_stairs": "Bone Variant 36 Stairs",
+  "block.agotmod.bone_36_slab": "Bone Variant 36 Slab",
+  "block.agotmod.bone_36_wall": "Bone Variant 36 Wall",
+
+  "block.agotmod.bone_37_block": "Bone Variant 37 Block",
+  "block.agotmod.bone_37_stairs": "Bone Variant 37 Stairs",
+  "block.agotmod.bone_37_slab": "Bone Variant 37 Slab",
+  "block.agotmod.bone_37_wall": "Bone Variant 37 Wall",
+
+  "block.agotmod.bone_38_block": "Bone Variant 38 Block",
+  "block.agotmod.bone_38_stairs": "Bone Variant 38 Stairs",
+  "block.agotmod.bone_38_slab": "Bone Variant 38 Slab",
+  "block.agotmod.bone_38_wall": "Bone Variant 38 Wall",
+
+  "block.agotmod.dripstone_1_block": "Dripstone Variant 1 Block",
+  "block.agotmod.dripstone_1_stairs": "Dripstone Variant 1 Stairs",
+  "block.agotmod.dripstone_1_slab": "Dripstone Variant 1 Slab",
+  "block.agotmod.dripstone_1_wall": "Dripstone Variant 1 Wall",
+
+  "block.agotmod.dripstone_2_block": "Dripstone Variant 2 Block",
+  "block.agotmod.dripstone_2_stairs": "Dripstone Variant 2 Stairs",
+  "block.agotmod.dripstone_2_slab": "Dripstone Variant 2 Slab",
+  "block.agotmod.dripstone_2_wall": "Dripstone Variant 2 Wall",
+
+  "block.agotmod.dripstone_3_block": "Dripstone Variant 3 Block",
+  "block.agotmod.dripstone_3_stairs": "Dripstone Variant 3 Stairs",
+  "block.agotmod.dripstone_3_slab": "Dripstone Variant 3 Slab",
+  "block.agotmod.dripstone_3_wall": "Dripstone Variant 3 Wall",
+
+  "block.agotmod.dripstone_4_block": "Dripstone Variant 4 Block",
+  "block.agotmod.dripstone_4_stairs": "Dripstone Variant 4 Stairs",
+  "block.agotmod.dripstone_4_slab": "Dripstone Variant 4 Slab",
+  "block.agotmod.dripstone_4_wall": "Dripstone Variant 4 Wall",
+
+  "block.agotmod.dripstone_5_block": "Dripstone Variant 5 Block",
+  "block.agotmod.dripstone_5_stairs": "Dripstone Variant 5 Stairs",
+  "block.agotmod.dripstone_5_slab": "Dripstone Variant 5 Slab",
+  "block.agotmod.dripstone_5_wall": "Dripstone Variant 5 Wall",
+
+  "block.agotmod.dripstone_6_block": "Dripstone Variant 6 Block",
+  "block.agotmod.dripstone_6_stairs": "Dripstone Variant 6 Stairs",
+  "block.agotmod.dripstone_6_slab": "Dripstone Variant 6 Slab",
+  "block.agotmod.dripstone_6_wall": "Dripstone Variant 6 Wall",
+
+  "block.agotmod.dripstone_7_block": "Dripstone Variant 7 Block",
+  "block.agotmod.dripstone_7_stairs": "Dripstone Variant 7 Stairs",
+  "block.agotmod.dripstone_7_slab": "Dripstone Variant 7 Slab",
+  "block.agotmod.dripstone_7_wall": "Dripstone Variant 7 Wall",
+
+  "block.agotmod.dripstone_8_block": "Dripstone Variant 8 Block",
+  "block.agotmod.dripstone_8_stairs": "Dripstone Variant 8 Stairs",
+  "block.agotmod.dripstone_8_slab": "Dripstone Variant 8 Slab",
+  "block.agotmod.dripstone_8_wall": "Dripstone Variant 8 Wall",
+
+  "block.agotmod.dripstone_9_block": "Dripstone Variant 9 Block",
+  "block.agotmod.dripstone_9_stairs": "Dripstone Variant 9 Stairs",
+  "block.agotmod.dripstone_9_slab": "Dripstone Variant 9 Slab",
+  "block.agotmod.dripstone_9_wall": "Dripstone Variant 9 Wall",
+
+  "block.agotmod.dripstone_10_block": "Dripstone Variant 10 Block",
+  "block.agotmod.dripstone_10_stairs": "Dripstone Variant 10 Stairs",
+  "block.agotmod.dripstone_10_slab": "Dripstone Variant 10 Slab",
+  "block.agotmod.dripstone_10_wall": "Dripstone Variant 10 Wall",
+
+  "block.agotmod.dripstone_11_block": "Dripstone Variant 11 Block",
+  "block.agotmod.dripstone_11_stairs": "Dripstone Variant 11 Stairs",
+  "block.agotmod.dripstone_11_slab": "Dripstone Variant 11 Slab",
+  "block.agotmod.dripstone_11_wall": "Dripstone Variant 11 Wall",
+
+  "block.agotmod.dripstone_12_block": "Dripstone Variant 12 Block",
+  "block.agotmod.dripstone_12_stairs": "Dripstone Variant 12 Stairs",
+  "block.agotmod.dripstone_12_slab": "Dripstone Variant 12 Slab",
+  "block.agotmod.dripstone_12_wall": "Dripstone Variant 12 Wall",
+
+  "block.agotmod.dripstone_13_block": "Dripstone Variant 13 Block",
+  "block.agotmod.dripstone_13_stairs": "Dripstone Variant 13 Stairs",
+  "block.agotmod.dripstone_13_slab": "Dripstone Variant 13 Slab",
+  "block.agotmod.dripstone_13_wall": "Dripstone Variant 13 Wall",
+
+  "block.agotmod.dripstone_14_block": "Dripstone Variant 14 Block",
+  "block.agotmod.dripstone_14_stairs": "Dripstone Variant 14 Stairs",
+  "block.agotmod.dripstone_14_slab": "Dripstone Variant 14 Slab",
+  "block.agotmod.dripstone_14_wall": "Dripstone Variant 14 Wall",
+
+  "block.agotmod.dripstone_15_block": "Dripstone Variant 15 Block",
+  "block.agotmod.dripstone_15_stairs": "Dripstone Variant 15 Stairs",
+  "block.agotmod.dripstone_15_slab": "Dripstone Variant 15 Slab",
+  "block.agotmod.dripstone_15_wall": "Dripstone Variant 15 Wall",
+
+  "block.agotmod.dripstone_16_block": "Dripstone Variant 16 Block",
+  "block.agotmod.dripstone_16_stairs": "Dripstone Variant 16 Stairs",
+  "block.agotmod.dripstone_16_slab": "Dripstone Variant 16 Slab",
+  "block.agotmod.dripstone_16_wall": "Dripstone Variant 16 Wall",
+
+  "block.agotmod.dripstone_17_block": "Dripstone Variant 17 Block",
+  "block.agotmod.dripstone_17_stairs": "Dripstone Variant 17 Stairs",
+  "block.agotmod.dripstone_17_slab": "Dripstone Variant 17 Slab",
+  "block.agotmod.dripstone_17_wall": "Dripstone Variant 17 Wall",
+
+  "block.agotmod.dripstone_18_block": "Dripstone Variant 18 Block",
+  "block.agotmod.dripstone_18_stairs": "Dripstone Variant 18 Stairs",
+  "block.agotmod.dripstone_18_slab": "Dripstone Variant 18 Slab",
+  "block.agotmod.dripstone_18_wall": "Dripstone Variant 18 Wall",
+
+  "block.agotmod.dripstone_19_block": "Dripstone Variant 19 Block",
+  "block.agotmod.dripstone_19_stairs": "Dripstone Variant 19 Stairs",
+  "block.agotmod.dripstone_19_slab": "Dripstone Variant 19 Slab",
+  "block.agotmod.dripstone_19_wall": "Dripstone Variant 19 Wall",
+
+  "block.agotmod.dripstone_20_block": "Dripstone Variant 20 Block",
+  "block.agotmod.dripstone_20_stairs": "Dripstone Variant 20 Stairs",
+  "block.agotmod.dripstone_20_slab": "Dripstone Variant 20 Slab",
+  "block.agotmod.dripstone_20_wall": "Dripstone Variant 20 Wall",
+
+  "block.agotmod.dripstone_21_block": "Dripstone Variant 21 Block",
+  "block.agotmod.dripstone_21_stairs": "Dripstone Variant 21 Stairs",
+  "block.agotmod.dripstone_21_slab": "Dripstone Variant 21 Slab",
+  "block.agotmod.dripstone_21_wall": "Dripstone Variant 21 Wall",
+
+  "block.agotmod.dripstone_22_block": "Dripstone Variant 22 Block",
+  "block.agotmod.dripstone_22_stairs": "Dripstone Variant 22 Stairs",
+  "block.agotmod.dripstone_22_slab": "Dripstone Variant 22 Slab",
+  "block.agotmod.dripstone_22_wall": "Dripstone Variant 22 Wall",
+
+  "block.agotmod.dripstone_23_block": "Dripstone Variant 23 Block",
+  "block.agotmod.dripstone_23_stairs": "Dripstone Variant 23 Stairs",
+  "block.agotmod.dripstone_23_slab": "Dripstone Variant 23 Slab",
+  "block.agotmod.dripstone_23_wall": "Dripstone Variant 23 Wall",
+
+  "block.agotmod.dripstone_24_block": "Dripstone Variant 24 Block",
+  "block.agotmod.dripstone_24_stairs": "Dripstone Variant 24 Stairs",
+  "block.agotmod.dripstone_24_slab": "Dripstone Variant 24 Slab",
+  "block.agotmod.dripstone_24_wall": "Dripstone Variant 24 Wall",
+
+  "block.agotmod.dripstone_25_block": "Dripstone Variant 25 Block",
+  "block.agotmod.dripstone_25_stairs": "Dripstone Variant 25 Stairs",
+  "block.agotmod.dripstone_25_slab": "Dripstone Variant 25 Slab",
+  "block.agotmod.dripstone_25_wall": "Dripstone Variant 25 Wall",
+
+  "block.agotmod.dripstone_26_block": "Dripstone Variant 26 Block",
+  "block.agotmod.dripstone_26_stairs": "Dripstone Variant 26 Stairs",
+  "block.agotmod.dripstone_26_slab": "Dripstone Variant 26 Slab",
+  "block.agotmod.dripstone_26_wall": "Dripstone Variant 26 Wall",
+
+  "block.agotmod.dripstone_27_block": "Dripstone Variant 27 Block",
+  "block.agotmod.dripstone_27_stairs": "Dripstone Variant 27 Stairs",
+  "block.agotmod.dripstone_27_slab": "Dripstone Variant 27 Slab",
+  "block.agotmod.dripstone_27_wall": "Dripstone Variant 27 Wall",
+
+  "block.agotmod.dripstone_28_block": "Dripstone Variant 28 Block",
+  "block.agotmod.dripstone_28_stairs": "Dripstone Variant 28 Stairs",
+  "block.agotmod.dripstone_28_slab": "Dripstone Variant 28 Slab",
+  "block.agotmod.dripstone_28_wall": "Dripstone Variant 28 Wall",
+
+  "block.agotmod.dripstone_29_block": "Dripstone Variant 29 Block",
+  "block.agotmod.dripstone_29_stairs": "Dripstone Variant 29 Stairs",
+  "block.agotmod.dripstone_29_slab": "Dripstone Variant 29 Slab",
+  "block.agotmod.dripstone_29_wall": "Dripstone Variant 29 Wall",
+
+  "block.agotmod.dripstone_30_block": "Dripstone Variant 30 Block",
+  "block.agotmod.dripstone_30_stairs": "Dripstone Variant 30 Stairs",
+  "block.agotmod.dripstone_30_slab": "Dripstone Variant 30 Slab",
+  "block.agotmod.dripstone_30_wall": "Dripstone Variant 30 Wall",
+
+  "block.agotmod.dripstone_31_block": "Dripstone Variant 31 Block",
+  "block.agotmod.dripstone_31_stairs": "Dripstone Variant 31 Stairs",
+  "block.agotmod.dripstone_31_slab": "Dripstone Variant 31 Slab",
+  "block.agotmod.dripstone_31_wall": "Dripstone Variant 31 Wall",
+
+  "block.agotmod.dripstone_32_block": "Dripstone Variant 32 Block",
+  "block.agotmod.dripstone_32_stairs": "Dripstone Variant 32 Stairs",
+  "block.agotmod.dripstone_32_slab": "Dripstone Variant 32 Slab",
+  "block.agotmod.dripstone_32_wall": "Dripstone Variant 32 Wall",
+
+  "block.agotmod.dripstone_33_block": "Dripstone Variant 33 Block",
+  "block.agotmod.dripstone_33_stairs": "Dripstone Variant 33 Stairs",
+  "block.agotmod.dripstone_33_slab": "Dripstone Variant 33 Slab",
+  "block.agotmod.dripstone_33_wall": "Dripstone Variant 33 Wall",
+
+  "block.agotmod.dripstone_34_block": "Dripstone Variant 34 Block",
+  "block.agotmod.dripstone_34_stairs": "Dripstone Variant 34 Stairs",
+  "block.agotmod.dripstone_34_slab": "Dripstone Variant 34 Slab",
+  "block.agotmod.dripstone_34_wall": "Dripstone Variant 34 Wall",
+
+  "block.agotmod.dripstone_35_block": "Dripstone Variant 35 Block",
+  "block.agotmod.dripstone_35_stairs": "Dripstone Variant 35 Stairs",
+  "block.agotmod.dripstone_35_slab": "Dripstone Variant 35 Slab",
+  "block.agotmod.dripstone_35_wall": "Dripstone Variant 35 Wall",
+
+  "block.agotmod.dripstone_36_block": "Dripstone Variant 36 Block",
+  "block.agotmod.dripstone_36_stairs": "Dripstone Variant 36 Stairs",
+  "block.agotmod.dripstone_36_slab": "Dripstone Variant 36 Slab",
+  "block.agotmod.dripstone_36_wall": "Dripstone Variant 36 Wall",
+
+  "block.agotmod.dripstone_37_block": "Dripstone Variant 37 Block",
+  "block.agotmod.dripstone_37_stairs": "Dripstone Variant 37 Stairs",
+  "block.agotmod.dripstone_37_slab": "Dripstone Variant 37 Slab",
+  "block.agotmod.dripstone_37_wall": "Dripstone Variant 37 Wall",
+
+  "block.agotmod.dripstone_38_block": "Dripstone Variant 38 Block",
+  "block.agotmod.dripstone_38_stairs": "Dripstone Variant 38 Stairs",
+  "block.agotmod.dripstone_38_slab": "Dripstone Variant 38 Slab",
+  "block.agotmod.dripstone_38_wall": "Dripstone Variant 38 Wall",
+
+  "block.agotmod.packed_ice_1_block": "Packed Ice Variant 1 Block",
+  "block.agotmod.packed_ice_1_stairs": "Packed Ice Variant 1 Stairs",
+  "block.agotmod.packed_ice_1_slab": "Packed Ice Variant 1 Slab",
+  "block.agotmod.packed_ice_1_wall": "Packed Ice Variant 1 Wall",
+
+  "block.agotmod.packed_ice_2_block": "Packed Ice Variant 2 Block",
+  "block.agotmod.packed_ice_2_stairs": "Packed Ice Variant 2 Stairs",
+  "block.agotmod.packed_ice_2_slab": "Packed Ice Variant 2 Slab",
+  "block.agotmod.packed_ice_2_wall": "Packed Ice Variant 2 Wall",
+
+  "block.agotmod.packed_ice_3_block": "Packed Ice Variant 3 Block",
+  "block.agotmod.packed_ice_3_stairs": "Packed Ice Variant 3 Stairs",
+  "block.agotmod.packed_ice_3_slab": "Packed Ice Variant 3 Slab",
+  "block.agotmod.packed_ice_3_wall": "Packed Ice Variant 3 Wall",
+
+  "block.agotmod.packed_ice_4_block": "Packed Ice Variant 4 Block",
+  "block.agotmod.packed_ice_4_stairs": "Packed Ice Variant 4 Stairs",
+  "block.agotmod.packed_ice_4_slab": "Packed Ice Variant 4 Slab",
+  "block.agotmod.packed_ice_4_wall": "Packed Ice Variant 4 Wall",
+
+  "block.agotmod.packed_ice_5_block": "Packed Ice Variant 5 Block",
+  "block.agotmod.packed_ice_5_stairs": "Packed Ice Variant 5 Stairs",
+  "block.agotmod.packed_ice_5_slab": "Packed Ice Variant 5 Slab",
+  "block.agotmod.packed_ice_5_wall": "Packed Ice Variant 5 Wall",
+
+  "block.agotmod.packed_ice_6_block": "Packed Ice Variant 6 Block",
+  "block.agotmod.packed_ice_6_stairs": "Packed Ice Variant 6 Stairs",
+  "block.agotmod.packed_ice_6_slab": "Packed Ice Variant 6 Slab",
+  "block.agotmod.packed_ice_6_wall": "Packed Ice Variant 6 Wall",
+
+  "block.agotmod.packed_ice_7_block": "Packed Ice Variant 7 Block",
+  "block.agotmod.packed_ice_7_stairs": "Packed Ice Variant 7 Stairs",
+  "block.agotmod.packed_ice_7_slab": "Packed Ice Variant 7 Slab",
+  "block.agotmod.packed_ice_7_wall": "Packed Ice Variant 7 Wall",
+
+  "block.agotmod.packed_ice_8_block": "Packed Ice Variant 8 Block",
+  "block.agotmod.packed_ice_8_stairs": "Packed Ice Variant 8 Stairs",
+  "block.agotmod.packed_ice_8_slab": "Packed Ice Variant 8 Slab",
+  "block.agotmod.packed_ice_8_wall": "Packed Ice Variant 8 Wall",
+
+  "block.agotmod.packed_ice_9_block": "Packed Ice Variant 9 Block",
+  "block.agotmod.packed_ice_9_stairs": "Packed Ice Variant 9 Stairs",
+  "block.agotmod.packed_ice_9_slab": "Packed Ice Variant 9 Slab",
+  "block.agotmod.packed_ice_9_wall": "Packed Ice Variant 9 Wall",
+
+  "block.agotmod.packed_ice_10_block": "Packed Ice Variant 10 Block",
+  "block.agotmod.packed_ice_10_stairs": "Packed Ice Variant 10 Stairs",
+  "block.agotmod.packed_ice_10_slab": "Packed Ice Variant 10 Slab",
+  "block.agotmod.packed_ice_10_wall": "Packed Ice Variant 10 Wall",
+
+  "block.agotmod.packed_ice_11_block": "Packed Ice Variant 11 Block",
+  "block.agotmod.packed_ice_11_stairs": "Packed Ice Variant 11 Stairs",
+  "block.agotmod.packed_ice_11_slab": "Packed Ice Variant 11 Slab",
+  "block.agotmod.packed_ice_11_wall": "Packed Ice Variant 11 Wall",
+
+  "block.agotmod.packed_ice_12_block": "Packed Ice Variant 12 Block",
+  "block.agotmod.packed_ice_12_stairs": "Packed Ice Variant 12 Stairs",
+  "block.agotmod.packed_ice_12_slab": "Packed Ice Variant 12 Slab",
+  "block.agotmod.packed_ice_12_wall": "Packed Ice Variant 12 Wall",
+
+  "block.agotmod.packed_ice_13_block": "Packed Ice Variant 13 Block",
+  "block.agotmod.packed_ice_13_stairs": "Packed Ice Variant 13 Stairs",
+  "block.agotmod.packed_ice_13_slab": "Packed Ice Variant 13 Slab",
+  "block.agotmod.packed_ice_13_wall": "Packed Ice Variant 13 Wall",
+
+  "block.agotmod.packed_ice_14_block": "Packed Ice Variant 14 Block",
+  "block.agotmod.packed_ice_14_stairs": "Packed Ice Variant 14 Stairs",
+  "block.agotmod.packed_ice_14_slab": "Packed Ice Variant 14 Slab",
+  "block.agotmod.packed_ice_14_wall": "Packed Ice Variant 14 Wall",
+
+  "block.agotmod.packed_ice_15_block": "Packed Ice Variant 15 Block",
+  "block.agotmod.packed_ice_15_stairs": "Packed Ice Variant 15 Stairs",
+  "block.agotmod.packed_ice_15_slab": "Packed Ice Variant 15 Slab",
+  "block.agotmod.packed_ice_15_wall": "Packed Ice Variant 15 Wall",
+
+  "block.agotmod.packed_ice_16_block": "Packed Ice Variant 16 Block",
+  "block.agotmod.packed_ice_16_stairs": "Packed Ice Variant 16 Stairs",
+  "block.agotmod.packed_ice_16_slab": "Packed Ice Variant 16 Slab",
+  "block.agotmod.packed_ice_16_wall": "Packed Ice Variant 16 Wall",
+
+  "block.agotmod.packed_ice_17_block": "Packed Ice Variant 17 Block",
+  "block.agotmod.packed_ice_17_stairs": "Packed Ice Variant 17 Stairs",
+  "block.agotmod.packed_ice_17_slab": "Packed Ice Variant 17 Slab",
+  "block.agotmod.packed_ice_17_wall": "Packed Ice Variant 17 Wall",
+
+  "block.agotmod.packed_ice_18_block": "Packed Ice Variant 18 Block",
+  "block.agotmod.packed_ice_18_stairs": "Packed Ice Variant 18 Stairs",
+  "block.agotmod.packed_ice_18_slab": "Packed Ice Variant 18 Slab",
+  "block.agotmod.packed_ice_18_wall": "Packed Ice Variant 18 Wall",
+
+  "block.agotmod.packed_ice_19_block": "Packed Ice Variant 19 Block",
+  "block.agotmod.packed_ice_19_stairs": "Packed Ice Variant 19 Stairs",
+  "block.agotmod.packed_ice_19_slab": "Packed Ice Variant 19 Slab",
+  "block.agotmod.packed_ice_19_wall": "Packed Ice Variant 19 Wall",
+
+  "block.agotmod.packed_ice_20_block": "Packed Ice Variant 20 Block",
+  "block.agotmod.packed_ice_20_stairs": "Packed Ice Variant 20 Stairs",
+  "block.agotmod.packed_ice_20_slab": "Packed Ice Variant 20 Slab",
+  "block.agotmod.packed_ice_20_wall": "Packed Ice Variant 20 Wall",
+
+  "block.agotmod.packed_ice_21_block": "Packed Ice Variant 21 Block",
+  "block.agotmod.packed_ice_21_stairs": "Packed Ice Variant 21 Stairs",
+  "block.agotmod.packed_ice_21_slab": "Packed Ice Variant 21 Slab",
+  "block.agotmod.packed_ice_21_wall": "Packed Ice Variant 21 Wall",
+
+  "block.agotmod.packed_ice_22_block": "Packed Ice Variant 22 Block",
+  "block.agotmod.packed_ice_22_stairs": "Packed Ice Variant 22 Stairs",
+  "block.agotmod.packed_ice_22_slab": "Packed Ice Variant 22 Slab",
+  "block.agotmod.packed_ice_22_wall": "Packed Ice Variant 22 Wall",
+
+  "block.agotmod.packed_ice_23_block": "Packed Ice Variant 23 Block",
+  "block.agotmod.packed_ice_23_stairs": "Packed Ice Variant 23 Stairs",
+  "block.agotmod.packed_ice_23_slab": "Packed Ice Variant 23 Slab",
+  "block.agotmod.packed_ice_23_wall": "Packed Ice Variant 23 Wall",
+
+  "block.agotmod.packed_ice_24_block": "Packed Ice Variant 24 Block",
+  "block.agotmod.packed_ice_24_stairs": "Packed Ice Variant 24 Stairs",
+  "block.agotmod.packed_ice_24_slab": "Packed Ice Variant 24 Slab",
+  "block.agotmod.packed_ice_24_wall": "Packed Ice Variant 24 Wall",
+
+  "block.agotmod.packed_ice_25_block": "Packed Ice Variant 25 Block",
+  "block.agotmod.packed_ice_25_stairs": "Packed Ice Variant 25 Stairs",
+  "block.agotmod.packed_ice_25_slab": "Packed Ice Variant 25 Slab",
+  "block.agotmod.packed_ice_25_wall": "Packed Ice Variant 25 Wall",
+
+  "block.agotmod.packed_ice_26_block": "Packed Ice Variant 26 Block",
+  "block.agotmod.packed_ice_26_stairs": "Packed Ice Variant 26 Stairs",
+  "block.agotmod.packed_ice_26_slab": "Packed Ice Variant 26 Slab",
+  "block.agotmod.packed_ice_26_wall": "Packed Ice Variant 26 Wall",
+
+  "block.agotmod.packed_ice_27_block": "Packed Ice Variant 27 Block",
+  "block.agotmod.packed_ice_27_stairs": "Packed Ice Variant 27 Stairs",
+  "block.agotmod.packed_ice_27_slab": "Packed Ice Variant 27 Slab",
+  "block.agotmod.packed_ice_27_wall": "Packed Ice Variant 27 Wall",
+
+  "block.agotmod.packed_ice_28_block": "Packed Ice Variant 28 Block",
+  "block.agotmod.packed_ice_28_stairs": "Packed Ice Variant 28 Stairs",
+  "block.agotmod.packed_ice_28_slab": "Packed Ice Variant 28 Slab",
+  "block.agotmod.packed_ice_28_wall": "Packed Ice Variant 28 Wall",
+
+  "block.agotmod.packed_ice_29_block": "Packed Ice Variant 29 Block",
+  "block.agotmod.packed_ice_29_stairs": "Packed Ice Variant 29 Stairs",
+  "block.agotmod.packed_ice_29_slab": "Packed Ice Variant 29 Slab",
+  "block.agotmod.packed_ice_29_wall": "Packed Ice Variant 29 Wall",
+
+  "block.agotmod.packed_ice_30_block": "Packed Ice Variant 30 Block",
+  "block.agotmod.packed_ice_30_stairs": "Packed Ice Variant 30 Stairs",
+  "block.agotmod.packed_ice_30_slab": "Packed Ice Variant 30 Slab",
+  "block.agotmod.packed_ice_30_wall": "Packed Ice Variant 30 Wall",
+
+  "block.agotmod.packed_ice_31_block": "Packed Ice Variant 31 Block",
+  "block.agotmod.packed_ice_31_stairs": "Packed Ice Variant 31 Stairs",
+  "block.agotmod.packed_ice_31_slab": "Packed Ice Variant 31 Slab",
+  "block.agotmod.packed_ice_31_wall": "Packed Ice Variant 31 Wall",
+
+  "block.agotmod.packed_ice_32_block": "Packed Ice Variant 32 Block",
+  "block.agotmod.packed_ice_32_stairs": "Packed Ice Variant 32 Stairs",
+  "block.agotmod.packed_ice_32_slab": "Packed Ice Variant 32 Slab",
+  "block.agotmod.packed_ice_32_wall": "Packed Ice Variant 32 Wall",
+
+  "block.agotmod.packed_ice_33_block": "Packed Ice Variant 33 Block",
+  "block.agotmod.packed_ice_33_stairs": "Packed Ice Variant 33 Stairs",
+  "block.agotmod.packed_ice_33_slab": "Packed Ice Variant 33 Slab",
+  "block.agotmod.packed_ice_33_wall": "Packed Ice Variant 33 Wall",
+
+  "block.agotmod.packed_ice_34_block": "Packed Ice Variant 34 Block",
+  "block.agotmod.packed_ice_34_stairs": "Packed Ice Variant 34 Stairs",
+  "block.agotmod.packed_ice_34_slab": "Packed Ice Variant 34 Slab",
+  "block.agotmod.packed_ice_34_wall": "Packed Ice Variant 34 Wall",
+
+  "block.agotmod.packed_ice_35_block": "Packed Ice Variant 35 Block",
+  "block.agotmod.packed_ice_35_stairs": "Packed Ice Variant 35 Stairs",
+  "block.agotmod.packed_ice_35_slab": "Packed Ice Variant 35 Slab",
+  "block.agotmod.packed_ice_35_wall": "Packed Ice Variant 35 Wall",
+
+  "block.agotmod.packed_ice_36_block": "Packed Ice Variant 36 Block",
+  "block.agotmod.packed_ice_36_stairs": "Packed Ice Variant 36 Stairs",
+  "block.agotmod.packed_ice_36_slab": "Packed Ice Variant 36 Slab",
+  "block.agotmod.packed_ice_36_wall": "Packed Ice Variant 36 Wall",
+
+  "block.agotmod.packed_ice_37_block": "Packed Ice Variant 37 Block",
+  "block.agotmod.packed_ice_37_stairs": "Packed Ice Variant 37 Stairs",
+  "block.agotmod.packed_ice_37_slab": "Packed Ice Variant 37 Slab",
+  "block.agotmod.packed_ice_37_wall": "Packed Ice Variant 37 Wall",
+
+  "block.agotmod.packed_ice_38_block": "Packed Ice Variant 38 Block",
+  "block.agotmod.packed_ice_38_stairs": "Packed Ice Variant 38 Stairs",
+  "block.agotmod.packed_ice_38_slab": "Packed Ice Variant 38 Slab",
+  "block.agotmod.packed_ice_38_wall": "Packed Ice Variant 38 Wall",
 
 
   "block.agotmod.winter_rose": "Winter Rose",

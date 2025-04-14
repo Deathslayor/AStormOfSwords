@@ -118,11 +118,15 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> DUSKY_ROSE_BUSH_KEY = registerKey("dusky_rose_bush");
     public static final ResourceKey<ConfiguredFeature<?, ?>> WINTER_ROSE_BUSH_KEY = registerKey("winter_rose_bush");
     public static final ResourceKey<ConfiguredFeature<?, ?>> RED_ROSE_BUSH_KEY = registerKey("red_rose_bush");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> GRASS_PATCH_KEY = registerKey("grass_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> GRASS_BLOCK_PATCH_KEY = registerKey("grass_block_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> CLAY_PATCH_KEY = registerKey("clay_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SEAGRASS_KEY = registerKey("seagrass");
     public static final ResourceKey<ConfiguredFeature<?, ?>> KELP_KEY = registerKey("kelp");
     public static final ResourceKey<ConfiguredFeature<?, ?>> QUAGMIRE_PATCH_KEY = registerKey("quagmire");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FERN_KEY = registerKey("fern");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_FERN_KEY = registerKey("large_fern");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> GRASS_KEY = registerKey("grass");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TALL_GRASS_KEY = registerKey("tall_grass");
 
 
 
@@ -913,7 +917,55 @@ public class ModConfiguredFeatures {
                         )
                 ));
 
-        register(context, GRASS_PATCH_KEY, Feature.DISK,
+        register(context, LARGE_FERN_KEY, Feature.FLOWER,
+                new RandomPatchConfiguration(
+                        64,  // tries
+                        6,   // xz spread
+                        2,   // y spread
+                        PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
+                                new SimpleBlockConfiguration(
+                                        BlockStateProvider.simple(Blocks.LARGE_FERN)
+                                )
+                        )
+                ));
+
+        register(context, FERN_KEY, Feature.FLOWER,
+                new RandomPatchConfiguration(
+                        64,  // tries
+                        6,   // xz spread
+                        2,   // y spread
+                        PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
+                                new SimpleBlockConfiguration(
+                                        BlockStateProvider.simple(Blocks.FERN)
+                                )
+                        )
+                ));
+
+        register(context, GRASS_KEY, Feature.FLOWER,
+                new RandomPatchConfiguration(
+                        64,  // tries
+                        16,   // xz spread
+                        2,   // y spread
+                        PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
+                                new SimpleBlockConfiguration(
+                                        BlockStateProvider.simple(Blocks.SHORT_GRASS)
+                                )
+                        )
+                ));
+
+        register(context, TALL_GRASS_KEY, Feature.FLOWER,
+                new RandomPatchConfiguration(
+                        64,  // tries
+                        8,   // xz spread
+                        2,   // y spread
+                        PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
+                                new SimpleBlockConfiguration(
+                                        BlockStateProvider.simple(Blocks.TALL_GRASS)
+                                )
+                        )
+                ));
+
+        register(context, GRASS_BLOCK_PATCH_KEY, Feature.DISK,
                 new DiskConfiguration(
                         RuleBasedBlockStateProvider.simple(Blocks.GRASS_BLOCK),  // The block to place (grass instead of clay)
                         BlockPredicate.matchesBlocks(

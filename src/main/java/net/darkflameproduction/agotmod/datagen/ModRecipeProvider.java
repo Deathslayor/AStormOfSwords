@@ -700,6 +700,206 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                     .save(this.output, pattern + "_wall_from_" + pattern + "_block");
         }
 
+        for (int i = 1; i <= 38; i++) {
+            if (i == 15 || i == 35) continue;
+
+            ModBLocks.BlockSet set = ModBLocks.BONE_VARIANTS.get(i);
+            if (set == null) {
+                System.err.println("BlockSet missing for pattern index " + i);
+                continue;
+            }
+
+            ItemLike base = set.base().get().asItem();
+            ItemLike stairs = set.stairs().get().asItem();
+            ItemLike slab = set.slab().get().asItem();
+            ItemLike wall = set.wall().get().asItem();
+            String pattern = "bone_" + i;
+
+            // From vanilla Bone to each variant
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.BONE_BLOCK),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            base)
+                    .unlockedBy(getHasName(Blocks.BONE_BLOCK), has(Blocks.BONE_BLOCK))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.BONE_BLOCK),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            stairs)
+                    .unlockedBy(getHasName(Blocks.BONE_BLOCK), has(Blocks.BONE_BLOCK))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.BONE_BLOCK),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            slab, 2)
+                    .unlockedBy(getHasName(Blocks.BONE_BLOCK), has(Blocks.BONE_BLOCK))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.BONE_BLOCK),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            wall)
+                    .unlockedBy(getHasName(Blocks.BONE_BLOCK), has(Blocks.BONE_BLOCK))
+                    .save(this.output);
+
+            // From variant block to its shaped versions
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            stairs)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_stairs_from_" + pattern + "_block");
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            slab, 2)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_slab_from_" + pattern + "_block");
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            wall)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_wall_from_" + pattern + "_block");
+        }
+
+        for (int i = 1; i <= 38; i++) {
+            if (i == 15) continue;
+
+            ModBLocks.BlockSet set = ModBLocks.DRIPSTONE_VARIANTS.get(i);
+            if (set == null) {
+                System.err.println("BlockSet missing for pattern index " + i);
+                continue;
+            }
+
+            ItemLike base = set.base().get().asItem();
+            ItemLike stairs = set.stairs().get().asItem();
+            ItemLike slab = set.slab().get().asItem();
+            ItemLike wall = set.wall().get().asItem();
+            String pattern = "dripstone_" + i;
+
+            // From vanilla Dripstone to each variant
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.DRIPSTONE_BLOCK),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            base)
+                    .unlockedBy(getHasName(Blocks.DRIPSTONE_BLOCK), has(Blocks.DRIPSTONE_BLOCK))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.DRIPSTONE_BLOCK),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            stairs)
+                    .unlockedBy(getHasName(Blocks.DRIPSTONE_BLOCK), has(Blocks.DRIPSTONE_BLOCK))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.DRIPSTONE_BLOCK),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            slab, 2)
+                    .unlockedBy(getHasName(Blocks.DRIPSTONE_BLOCK), has(Blocks.DRIPSTONE_BLOCK))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.DRIPSTONE_BLOCK),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            wall)
+                    .unlockedBy(getHasName(Blocks.DRIPSTONE_BLOCK), has(Blocks.DRIPSTONE_BLOCK))
+                    .save(this.output);
+
+            // From variant block to its shaped versions
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            stairs)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_stairs_from_" + pattern + "_block");
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            slab, 2)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_slab_from_" + pattern + "_block");
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            wall)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_wall_from_" + pattern + "_block");
+        }
+        for (int i = 1; i <= 38; i++) {
+            if (i == 15) continue;
+
+            ModBLocks.BlockSet set = ModBLocks.PACKED_ICE_VARIANTS.get(i);
+            if (set == null) {
+                System.err.println("BlockSet missing for pattern index " + i);
+                continue;
+            }
+
+            ItemLike base = set.base().get().asItem();
+            ItemLike stairs = set.stairs().get().asItem();
+            ItemLike slab = set.slab().get().asItem();
+            ItemLike wall = set.wall().get().asItem();
+            String pattern = "packed_ice_" + i;
+
+            // From vanilla Packed Ice to each variant
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.PACKED_ICE),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            base)
+                    .unlockedBy(getHasName(Blocks.PACKED_ICE), has(Blocks.PACKED_ICE))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.PACKED_ICE),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            stairs)
+                    .unlockedBy(getHasName(Blocks.PACKED_ICE), has(Blocks.PACKED_ICE))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.PACKED_ICE),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            slab, 2)
+                    .unlockedBy(getHasName(Blocks.PACKED_ICE), has(Blocks.PACKED_ICE))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.PACKED_ICE),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            wall)
+                    .unlockedBy(getHasName(Blocks.PACKED_ICE), has(Blocks.PACKED_ICE))
+                    .save(this.output);
+
+            // From variant block to its shaped versions
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            stairs)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_stairs_from_" + pattern + "_block");
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            slab, 2)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_slab_from_" + pattern + "_block");
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            wall)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_wall_from_" + pattern + "_block");
+        }
+
 
     }
 
