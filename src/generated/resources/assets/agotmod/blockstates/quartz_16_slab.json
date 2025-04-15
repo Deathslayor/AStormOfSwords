@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "agotmod:block/quartz_16_slab"
+    },
+    "type=double": {
+      "model": "agotmod:block/quartz_16_block"
+    },
+    "type=top": {
+      "model": "agotmod:block/quartz_16_slab_top"
+    }
+  }
+}

@@ -636,6 +636,28 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         }
 
         for (int i = 1; i <= 38; i++) {
+            if (i == 14 || i == 15) continue;
+            ModBLocks.BlockSet set = ModBLocks.QUARTZ_VARIANTS.get(i);
+            if (set != null) {
+                this.dropSelf(set.base().get());
+                this.dropSelf(set.stairs().get());
+                this.dropSelf(set.slab().get());
+                this.dropSelf(set.wall().get());
+            }
+        }
+
+        for (int i = 1; i <= 38; i++) {
+            if (i == 15) continue;
+            ModBLocks.BlockSet set = ModBLocks.ANDESITE_VARIANTS.get(i);
+            if (set != null) {
+                this.dropSelf(set.base().get());
+                this.dropSelf(set.stairs().get());
+                this.dropSelf(set.slab().get());
+                this.dropSelf(set.wall().get());
+            }
+        }
+
+        for (int i = 1; i <= 38; i++) {
             if (i == 7 || i == 9 || i == 15) continue; // Skip BLACKSTONE_15 and BLACKSTONE_22
             ModBLocks.BlockSet set = ModBLocks.MUD_BRICK_VARIANTS.get(i);
             if (set != null) {

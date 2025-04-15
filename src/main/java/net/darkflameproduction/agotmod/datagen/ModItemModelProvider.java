@@ -575,6 +575,30 @@ public class ModItemModelProvider extends ItemModelProvider {
         }
 
         for (int i = 1; i <= 38; i++) {
+            // Skip variants 15 and 22 and 31 as in your block registration
+            if (i == 15) continue;
+
+            ModBLocks.BlockSet blockSet = ModBLocks.ANDESITE_VARIANTS.get(i);
+            if (blockSet != null) {
+                wallItem(blockSet.wall(), blockSet.base());
+                evenSimplerBlockItem(blockSet.stairs());
+                evenSimplerBlockItem(blockSet.slab());
+            }
+        }
+
+        for (int i = 1; i <= 38; i++) {
+            // Skip variants 15 and 22 and 31 as in your block registration
+            if (i == 14 || i == 15) continue;
+
+            ModBLocks.BlockSet blockSet = ModBLocks.QUARTZ_VARIANTS.get(i);
+            if (blockSet != null) {
+                wallItem(blockSet.wall(), blockSet.base());
+                evenSimplerBlockItem(blockSet.stairs());
+                evenSimplerBlockItem(blockSet.slab());
+            }
+        }
+
+        for (int i = 1; i <= 38; i++) {
             // Skip variants 15 and 22 as in your block registration
             if (i == 15 || i == 16 || i == 17 || i == 18) continue;
 

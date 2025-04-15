@@ -1112,6 +1112,31 @@ public class ModBlockStateProvider extends BlockStateProvider {
         for (int i = 1; i <= 38; i++) {
             if (i == 15) continue;
 
+            ModBLocks.BlockSet set = ModBLocks.ANDESITE_VARIANTS.get(i);
+            if (set == null) continue; // Skip if not registered (just to be safe)
+
+            blockWithItem(set.base());
+
+            slabBlock(
+                    (SlabBlock) set.slab().get(),
+                    blockTexture(set.base().get()),
+                    blockTexture(set.base().get())
+            );
+
+            stairsBlock(
+                    (StairBlock) set.stairs().get(),
+                    blockTexture(set.base().get())
+            );
+
+            wallBlock(
+                    (WallBlock) set.wall().get(),
+                    blockTexture(set.base().get())
+            );
+        }
+
+        for (int i = 1; i <= 38; i++) {
+            if (i == 15) continue;
+
             ModBLocks.BlockSet set = ModBLocks.PACKED_ICE_VARIANTS.get(i);
             if (set == null) continue; // Skip if not registered (just to be safe)
 
@@ -1134,7 +1159,30 @@ public class ModBlockStateProvider extends BlockStateProvider {
             );
         }
 
+        for (int i = 1; i <= 38; i++) {
+            if (i == 14 || i == 15) continue;
 
+            ModBLocks.BlockSet set = ModBLocks.QUARTZ_VARIANTS.get(i);
+            if (set == null) continue; // Skip if not registered (just to be safe)
+
+            blockWithItem(set.base());
+
+            slabBlock(
+                    (SlabBlock) set.slab().get(),
+                    blockTexture(set.base().get()),
+                    blockTexture(set.base().get())
+            );
+
+            stairsBlock(
+                    (StairBlock) set.stairs().get(),
+                    blockTexture(set.base().get())
+            );
+
+            wallBlock(
+                    (WallBlock) set.wall().get(),
+                    blockTexture(set.base().get())
+            );
+        }
 
 
 

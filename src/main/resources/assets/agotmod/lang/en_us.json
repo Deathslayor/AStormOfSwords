@@ -1128,6 +1128,196 @@
   "block.agotmod.sandstone_38_slab": "Sandstone Variant 38 Slab",
   "block.agotmod.sandstone_38_wall": "Sandstone Variant 38 Wall",
 
+  "block.agotmod.andesite_1_block": "Andesite Variant 1 Block",
+  "block.agotmod.andesite_1_stairs": "Andesite Variant 1 Stairs",
+  "block.agotmod.andesite_1_slab": "Andesite Variant 1 Slab",
+  "block.agotmod.andesite_1_wall": "Andesite Variant 1 Wall",
+
+  "block.agotmod.andesite_2_block": "Andesite Variant 2 Block",
+  "block.agotmod.andesite_2_stairs": "Andesite Variant 2 Stairs",
+  "block.agotmod.andesite_2_slab": "Andesite Variant 2 Slab",
+  "block.agotmod.andesite_2_wall": "Andesite Variant 2 Wall",
+
+  "block.agotmod.andesite_3_block": "Andesite Variant 3 Block",
+  "block.agotmod.andesite_3_stairs": "Andesite Variant 3 Stairs",
+  "block.agotmod.andesite_3_slab": "Andesite Variant 3 Slab",
+  "block.agotmod.andesite_3_wall": "Andesite Variant 3 Wall",
+
+  "block.agotmod.andesite_4_block": "Andesite Variant 4 Block",
+  "block.agotmod.andesite_4_stairs": "Andesite Variant 4 Stairs",
+  "block.agotmod.andesite_4_slab": "Andesite Variant 4 Slab",
+  "block.agotmod.andesite_4_wall": "Andesite Variant 4 Wall",
+
+  "block.agotmod.andesite_5_block": "Andesite Variant 5 Block",
+  "block.agotmod.andesite_5_stairs": "Andesite Variant 5 Stairs",
+  "block.agotmod.andesite_5_slab": "Andesite Variant 5 Slab",
+  "block.agotmod.andesite_5_wall": "Andesite Variant 5 Wall",
+
+  "block.agotmod.andesite_6_block": "Andesite Variant 6 Block",
+  "block.agotmod.andesite_6_stairs": "Andesite Variant 6 Stairs",
+  "block.agotmod.andesite_6_slab": "Andesite Variant 6 Slab",
+  "block.agotmod.andesite_6_wall": "Andesite Variant 6 Wall",
+
+  "block.agotmod.andesite_7_block": "Andesite Variant 7 Block",
+  "block.agotmod.andesite_7_stairs": "Andesite Variant 7 Stairs",
+  "block.agotmod.andesite_7_slab": "Andesite Variant 7 Slab",
+  "block.agotmod.andesite_7_wall": "Andesite Variant 7 Wall",
+
+  "block.agotmod.andesite_8_block": "Andesite Variant 8 Block",
+  "block.agotmod.andesite_8_stairs": "Andesite Variant 8 Stairs",
+  "block.agotmod.andesite_8_slab": "Andesite Variant 8 Slab",
+  "block.agotmod.andesite_8_wall": "Andesite Variant 8 Wall",
+
+  "block.agotmod.andesite_9_block": "Andesite Variant 9 Block",
+  "block.agotmod.andesite_9_stairs": "Andesite Variant 9 Stairs",
+  "block.agotmod.andesite_9_slab": "Andesite Variant 9 Slab",
+  "block.agotmod.andesite_9_wall": "Andesite Variant 9 Wall",
+
+  "block.agotmod.andesite_10_block": "Andesite Variant 10 Block",
+  "block.agotmod.andesite_10_stairs": "Andesite Variant 10 Stairs",
+  "block.agotmod.andesite_10_slab": "Andesite Variant 10 Slab",
+  "block.agotmod.andesite_10_wall": "Andesite Variant 10 Wall",
+
+  "block.agotmod.andesite_11_block": "Andesite Variant 11 Block",
+  "block.agotmod.andesite_11_stairs": "Andesite Variant 11 Stairs",
+  "block.agotmod.andesite_11_slab": "Andesite Variant 11 Slab",
+  "block.agotmod.andesite_11_wall": "Andesite Variant 11 Wall",
+
+  "block.agotmod.andesite_12_block": "Andesite Variant 12 Block",
+  "block.agotmod.andesite_12_stairs": "Andesite Variant 12 Stairs",
+  "block.agotmod.andesite_12_slab": "Andesite Variant 12 Slab",
+  "block.agotmod.andesite_12_wall": "Andesite Variant 12 Wall",
+
+  "block.agotmod.andesite_13_block": "Andesite Variant 13 Block",
+  "block.agotmod.andesite_13_stairs": "Andesite Variant 13 Stairs",
+  "block.agotmod.andesite_13_slab": "Andesite Variant 13 Slab",
+  "block.agotmod.andesite_13_wall": "Andesite Variant 13 Wall",
+
+  "block.agotmod.andesite_14_block": "Andesite Variant 14 Block",
+  "block.agotmod.andesite_14_stairs": "Andesite Variant 14 Stairs",
+  "block.agotmod.andesite_14_slab": "Andesite Variant 14 Slab",
+  "block.agotmod.andesite_14_wall": "Andesite Variant 14 Wall",
+
+  "block.agotmod.andesite_15_block": "Andesite Variant 15 Block",
+  "block.agotmod.andesite_15_stairs": "Andesite Variant 15 Stairs",
+  "block.agotmod.andesite_15_slab": "Andesite Variant 15 Slab",
+  "block.agotmod.andesite_15_wall": "Andesite Variant 15 Wall",
+
+  "block.agotmod.andesite_16_block": "Andesite Variant 16 Block",
+  "block.agotmod.andesite_16_stairs": "Andesite Variant 16 Stairs",
+  "block.agotmod.andesite_16_slab": "Andesite Variant 16 Slab",
+  "block.agotmod.andesite_16_wall": "Andesite Variant 16 Wall",
+
+  "block.agotmod.andesite_17_block": "Andesite Variant 17 Block",
+  "block.agotmod.andesite_17_stairs": "Andesite Variant 17 Stairs",
+  "block.agotmod.andesite_17_slab": "Andesite Variant 17 Slab",
+  "block.agotmod.andesite_17_wall": "Andesite Variant 17 Wall",
+
+  "block.agotmod.andesite_18_block": "Andesite Variant 18 Block",
+  "block.agotmod.andesite_18_stairs": "Andesite Variant 18 Stairs",
+  "block.agotmod.andesite_18_slab": "Andesite Variant 18 Slab",
+  "block.agotmod.andesite_18_wall": "Andesite Variant 18 Wall",
+
+  "block.agotmod.andesite_19_block": "Andesite Variant 19 Block",
+  "block.agotmod.andesite_19_stairs": "Andesite Variant 19 Stairs",
+  "block.agotmod.andesite_19_slab": "Andesite Variant 19 Slab",
+  "block.agotmod.andesite_19_wall": "Andesite Variant 19 Wall",
+
+  "block.agotmod.andesite_20_block": "Andesite Variant 20 Block",
+  "block.agotmod.andesite_20_stairs": "Andesite Variant 20 Stairs",
+  "block.agotmod.andesite_20_slab": "Andesite Variant 20 Slab",
+  "block.agotmod.andesite_20_wall": "Andesite Variant 20 Wall",
+
+  "block.agotmod.andesite_21_block": "Andesite Variant 21 Block",
+  "block.agotmod.andesite_21_stairs": "Andesite Variant 21 Stairs",
+  "block.agotmod.andesite_21_slab": "Andesite Variant 21 Slab",
+  "block.agotmod.andesite_21_wall": "Andesite Variant 21 Wall",
+
+  "block.agotmod.andesite_22_block": "Andesite Variant 22 Block",
+  "block.agotmod.andesite_22_stairs": "Andesite Variant 22 Stairs",
+  "block.agotmod.andesite_22_slab": "Andesite Variant 22 Slab",
+  "block.agotmod.andesite_22_wall": "Andesite Variant 22 Wall",
+
+  "block.agotmod.andesite_23_block": "Andesite Variant 23 Block",
+  "block.agotmod.andesite_23_stairs": "Andesite Variant 23 Stairs",
+  "block.agotmod.andesite_23_slab": "Andesite Variant 23 Slab",
+  "block.agotmod.andesite_23_wall": "Andesite Variant 23 Wall",
+
+  "block.agotmod.andesite_24_block": "Andesite Variant 24 Block",
+  "block.agotmod.andesite_24_stairs": "Andesite Variant 24 Stairs",
+  "block.agotmod.andesite_24_slab": "Andesite Variant 24 Slab",
+  "block.agotmod.andesite_24_wall": "Andesite Variant 24 Wall",
+
+  "block.agotmod.andesite_25_block": "Andesite Variant 25 Block",
+  "block.agotmod.andesite_25_stairs": "Andesite Variant 25 Stairs",
+  "block.agotmod.andesite_25_slab": "Andesite Variant 25 Slab",
+  "block.agotmod.andesite_25_wall": "Andesite Variant 25 Wall",
+
+  "block.agotmod.andesite_26_block": "Andesite Variant 26 Block",
+  "block.agotmod.andesite_26_stairs": "Andesite Variant 26 Stairs",
+  "block.agotmod.andesite_26_slab": "Andesite Variant 26 Slab",
+  "block.agotmod.andesite_26_wall": "Andesite Variant 26 Wall",
+
+  "block.agotmod.andesite_27_block": "Andesite Variant 27 Block",
+  "block.agotmod.andesite_27_stairs": "Andesite Variant 27 Stairs",
+  "block.agotmod.andesite_27_slab": "Andesite Variant 27 Slab",
+  "block.agotmod.andesite_27_wall": "Andesite Variant 27 Wall",
+
+  "block.agotmod.andesite_28_block": "Andesite Variant 28 Block",
+  "block.agotmod.andesite_28_stairs": "Andesite Variant 28 Stairs",
+  "block.agotmod.andesite_28_slab": "Andesite Variant 28 Slab",
+  "block.agotmod.andesite_28_wall": "Andesite Variant 28 Wall",
+
+  "block.agotmod.andesite_29_block": "Andesite Variant 29 Block",
+  "block.agotmod.andesite_29_stairs": "Andesite Variant 29 Stairs",
+  "block.agotmod.andesite_29_slab": "Andesite Variant 29 Slab",
+  "block.agotmod.andesite_29_wall": "Andesite Variant 29 Wall",
+
+  "block.agotmod.andesite_30_block": "Andesite Variant 30 Block",
+  "block.agotmod.andesite_30_stairs": "Andesite Variant 30 Stairs",
+  "block.agotmod.andesite_30_slab": "Andesite Variant 30 Slab",
+  "block.agotmod.andesite_30_wall": "Andesite Variant 30 Wall",
+
+  "block.agotmod.andesite_31_block": "Andesite Variant 31 Block",
+  "block.agotmod.andesite_31_stairs": "Andesite Variant 31 Stairs",
+  "block.agotmod.andesite_31_slab": "Andesite Variant 31 Slab",
+  "block.agotmod.andesite_31_wall": "Andesite Variant 31 Wall",
+
+  "block.agotmod.andesite_32_block": "Andesite Variant 32 Block",
+  "block.agotmod.andesite_32_stairs": "Andesite Variant 32 Stairs",
+  "block.agotmod.andesite_32_slab": "Andesite Variant 32 Slab",
+  "block.agotmod.andesite_32_wall": "Andesite Variant 32 Wall",
+
+  "block.agotmod.andesite_33_block": "Andesite Variant 33 Block",
+  "block.agotmod.andesite_33_stairs": "Andesite Variant 33 Stairs",
+  "block.agotmod.andesite_33_slab": "Andesite Variant 33 Slab",
+  "block.agotmod.andesite_33_wall": "Andesite Variant 33 Wall",
+
+  "block.agotmod.andesite_34_block": "Andesite Variant 34 Block",
+  "block.agotmod.andesite_34_stairs": "Andesite Variant 34 Stairs",
+  "block.agotmod.andesite_34_slab": "Andesite Variant 34 Slab",
+  "block.agotmod.andesite_34_wall": "Andesite Variant 34 Wall",
+
+  "block.agotmod.andesite_35_block": "Andesite Variant 35 Block",
+  "block.agotmod.andesite_35_stairs": "Andesite Variant 35 Stairs",
+  "block.agotmod.andesite_35_slab": "Andesite Variant 35 Slab",
+  "block.agotmod.andesite_35_wall": "Andesite Variant 35 Wall",
+
+  "block.agotmod.andesite_36_block": "Andesite Variant 36 Block",
+  "block.agotmod.andesite_36_stairs": "Andesite Variant 36 Stairs",
+  "block.agotmod.andesite_36_slab": "Andesite Variant 36 Slab",
+  "block.agotmod.andesite_36_wall": "Andesite Variant 36 Wall",
+
+  "block.agotmod.andesite_37_block": "Andesite Variant 37 Block",
+  "block.agotmod.andesite_37_stairs": "Andesite Variant 37 Stairs",
+  "block.agotmod.andesite_37_slab": "Andesite Variant 37 Slab",
+  "block.agotmod.andesite_37_wall": "Andesite Variant 37 Wall",
+
+  "block.agotmod.andesite_38_block": "Andesite Variant 38 Block",
+  "block.agotmod.andesite_38_stairs": "Andesite Variant 38 Stairs",
+  "block.agotmod.andesite_38_slab": "Andesite Variant 38 Slab",
+  "block.agotmod.andesite_38_wall": "Andesite Variant 38 Wall",
+
   "block.agotmod.mud_brick_1_block": "Mud Variant 1 Block",
   "block.agotmod.mud_brick_1_stairs": "Mud Variant 1 Stairs",
   "block.agotmod.mud_1_slab": "Mud Variant 1 Slab",
@@ -3404,6 +3594,195 @@
   "block.agotmod.packed_ice_38_slab": "Packed Ice Variant 38 Slab",
   "block.agotmod.packed_ice_38_wall": "Packed Ice Variant 38 Wall",
 
+  "block.agotmod.quartz_1_block": "Quartz Variant 1 Block",
+  "block.agotmod.quartz_1_stairs": "Quartz Variant 1 Stairs",
+  "block.agotmod.quartz_1_slab": "Quartz Variant 1 Slab",
+  "block.agotmod.quartz_1_wall": "Quartz Variant 1 Wall",
+
+  "block.agotmod.quartz_2_block": "Quartz Variant 2 Block",
+  "block.agotmod.quartz_2_stairs": "Quartz Variant 2 Stairs",
+  "block.agotmod.quartz_2_slab": "Quartz Variant 2 Slab",
+  "block.agotmod.quartz_2_wall": "Quartz Variant 2 Wall",
+
+  "block.agotmod.quartz_3_block": "Quartz Variant 3 Block",
+  "block.agotmod.quartz_3_stairs": "Quartz Variant 3 Stairs",
+  "block.agotmod.quartz_3_slab": "Quartz Variant 3 Slab",
+  "block.agotmod.quartz_3_wall": "Quartz Variant 3 Wall",
+
+  "block.agotmod.quartz_4_block": "Quartz Variant 4 Block",
+  "block.agotmod.quartz_4_stairs": "Quartz Variant 4 Stairs",
+  "block.agotmod.quartz_4_slab": "Quartz Variant 4 Slab",
+  "block.agotmod.quartz_4_wall": "Quartz Variant 4 Wall",
+
+  "block.agotmod.quartz_5_block": "Quartz Variant 5 Block",
+  "block.agotmod.quartz_5_stairs": "Quartz Variant 5 Stairs",
+  "block.agotmod.quartz_5_slab": "Quartz Variant 5 Slab",
+  "block.agotmod.quartz_5_wall": "Quartz Variant 5 Wall",
+
+  "block.agotmod.quartz_6_block": "Quartz Variant 6 Block",
+  "block.agotmod.quartz_6_stairs": "Quartz Variant 6 Stairs",
+  "block.agotmod.quartz_6_slab": "Quartz Variant 6 Slab",
+  "block.agotmod.quartz_6_wall": "Quartz Variant 6 Wall",
+
+  "block.agotmod.quartz_7_block": "Quartz Variant 7 Block",
+  "block.agotmod.quartz_7_stairs": "Quartz Variant 7 Stairs",
+  "block.agotmod.quartz_7_slab": "Quartz Variant 7 Slab",
+  "block.agotmod.quartz_7_wall": "Quartz Variant 7 Wall",
+
+  "block.agotmod.quartz_8_block": "Quartz Variant 8 Block",
+  "block.agotmod.quartz_8_stairs": "Quartz Variant 8 Stairs",
+  "block.agotmod.quartz_8_slab": "Quartz Variant 8 Slab",
+  "block.agotmod.quartz_8_wall": "Quartz Variant 8 Wall",
+
+  "block.agotmod.quartz_9_block": "Quartz Variant 9 Block",
+  "block.agotmod.quartz_9_stairs": "Quartz Variant 9 Stairs",
+  "block.agotmod.quartz_9_slab": "Quartz Variant 9 Slab",
+  "block.agotmod.quartz_9_wall": "Quartz Variant 9 Wall",
+
+  "block.agotmod.quartz_10_block": "Quartz Variant 10 Block",
+  "block.agotmod.quartz_10_stairs": "Quartz Variant 10 Stairs",
+  "block.agotmod.quartz_10_slab": "Quartz Variant 10 Slab",
+  "block.agotmod.quartz_10_wall": "Quartz Variant 10 Wall",
+
+  "block.agotmod.quartz_11_block": "Quartz Variant 11 Block",
+  "block.agotmod.quartz_11_stairs": "Quartz Variant 11 Stairs",
+  "block.agotmod.quartz_11_slab": "Quartz Variant 11 Slab",
+  "block.agotmod.quartz_11_wall": "Quartz Variant 11 Wall",
+
+  "block.agotmod.quartz_12_block": "Quartz Variant 12 Block",
+  "block.agotmod.quartz_12_stairs": "Quartz Variant 12 Stairs",
+  "block.agotmod.quartz_12_slab": "Quartz Variant 12 Slab",
+  "block.agotmod.quartz_12_wall": "Quartz Variant 12 Wall",
+
+  "block.agotmod.quartz_13_block": "Quartz Variant 13 Block",
+  "block.agotmod.quartz_13_stairs": "Quartz Variant 13 Stairs",
+  "block.agotmod.quartz_13_slab": "Quartz Variant 13 Slab",
+  "block.agotmod.quartz_13_wall": "Quartz Variant 13 Wall",
+
+  "block.agotmod.quartz_14_block": "Quartz Variant 14 Block",
+  "block.agotmod.quartz_14_stairs": "Quartz Variant 14 Stairs",
+  "block.agotmod.quartz_14_slab": "Quartz Variant 14 Slab",
+  "block.agotmod.quartz_14_wall": "Quartz Variant 14 Wall",
+
+  "block.agotmod.quartz_15_block": "Quartz Variant 15 Block",
+  "block.agotmod.quartz_15_stairs": "Quartz Variant 15 Stairs",
+  "block.agotmod.quartz_15_slab": "Quartz Variant 15 Slab",
+  "block.agotmod.quartz_15_wall": "Quartz Variant 15 Wall",
+
+  "block.agotmod.quartz_16_block": "Quartz Variant 16 Block",
+  "block.agotmod.quartz_16_stairs": "Quartz Variant 16 Stairs",
+  "block.agotmod.quartz_16_slab": "Quartz Variant 16 Slab",
+  "block.agotmod.quartz_16_wall": "Quartz Variant 16 Wall",
+
+  "block.agotmod.quartz_17_block": "Quartz Variant 17 Block",
+  "block.agotmod.quartz_17_stairs": "Quartz Variant 17 Stairs",
+  "block.agotmod.quartz_17_slab": "Quartz Variant 17 Slab",
+  "block.agotmod.quartz_17_wall": "Quartz Variant 17 Wall",
+
+  "block.agotmod.quartz_18_block": "Quartz Variant 18 Block",
+  "block.agotmod.quartz_18_stairs": "Quartz Variant 18 Stairs",
+  "block.agotmod.quartz_18_slab": "Quartz Variant 18 Slab",
+  "block.agotmod.quartz_18_wall": "Quartz Variant 18 Wall",
+
+  "block.agotmod.quartz_19_block": "Quartz Variant 19 Block",
+  "block.agotmod.quartz_19_stairs": "Quartz Variant 19 Stairs",
+  "block.agotmod.quartz_19_slab": "Quartz Variant 19 Slab",
+  "block.agotmod.quartz_19_wall": "Quartz Variant 19 Wall",
+
+  "block.agotmod.quartz_20_block": "Quartz Variant 20 Block",
+  "block.agotmod.quartz_20_stairs": "Quartz Variant 20 Stairs",
+  "block.agotmod.quartz_20_slab": "Quartz Variant 20 Slab",
+  "block.agotmod.quartz_20_wall": "Quartz Variant 20 Wall",
+
+  "block.agotmod.quartz_21_block": "Quartz Variant 21 Block",
+  "block.agotmod.quartz_21_stairs": "Quartz Variant 21 Stairs",
+  "block.agotmod.quartz_21_slab": "Quartz Variant 21 Slab",
+  "block.agotmod.quartz_21_wall": "Quartz Variant 21 Wall",
+
+  "block.agotmod.quartz_22_block": "Quartz Variant 22 Block",
+  "block.agotmod.quartz_22_stairs": "Quartz Variant 22 Stairs",
+  "block.agotmod.quartz_22_slab": "Quartz Variant 22 Slab",
+  "block.agotmod.quartz_22_wall": "Quartz Variant 22 Wall",
+
+  "block.agotmod.quartz_23_block": "Quartz Variant 23 Block",
+  "block.agotmod.quartz_23_stairs": "Quartz Variant 23 Stairs",
+  "block.agotmod.quartz_23_slab": "Quartz Variant 23 Slab",
+  "block.agotmod.quartz_23_wall": "Quartz Variant 23 Wall",
+
+  "block.agotmod.quartz_24_block": "Quartz Variant 24 Block",
+  "block.agotmod.quartz_24_stairs": "Quartz Variant 24 Stairs",
+  "block.agotmod.quartz_24_slab": "Quartz Variant 24 Slab",
+  "block.agotmod.quartz_24_wall": "Quartz Variant 24 Wall",
+
+  "block.agotmod.quartz_25_block": "Quartz Variant 25 Block",
+  "block.agotmod.quartz_25_stairs": "Quartz Variant 25 Stairs",
+  "block.agotmod.quartz_25_slab": "Quartz Variant 25 Slab",
+  "block.agotmod.quartz_25_wall": "Quartz Variant 25 Wall",
+
+  "block.agotmod.quartz_26_block": "Quartz Variant 26 Block",
+  "block.agotmod.quartz_26_stairs": "Quartz Variant 26 Stairs",
+  "block.agotmod.quartz_26_slab": "Quartz Variant 26 Slab",
+  "block.agotmod.quartz_26_wall": "Quartz Variant 26 Wall",
+
+  "block.agotmod.quartz_27_block": "Quartz Variant 27 Block",
+  "block.agotmod.quartz_27_stairs": "Quartz Variant 27 Stairs",
+  "block.agotmod.quartz_27_slab": "Quartz Variant 27 Slab",
+  "block.agotmod.quartz_27_wall": "Quartz Variant 27 Wall",
+
+  "block.agotmod.quartz_28_block": "Quartz Variant 28 Block",
+  "block.agotmod.quartz_28_stairs": "Quartz Variant 28 Stairs",
+  "block.agotmod.quartz_28_slab": "Quartz Variant 28 Slab",
+  "block.agotmod.quartz_28_wall": "Quartz Variant 28 Wall",
+
+  "block.agotmod.quartz_29_block": "Quartz Variant 29 Block",
+  "block.agotmod.quartz_29_stairs": "Quartz Variant 29 Stairs",
+  "block.agotmod.quartz_29_slab": "Quartz Variant 29 Slab",
+  "block.agotmod.quartz_29_wall": "Quartz Variant 29 Wall",
+
+  "block.agotmod.quartz_30_block": "Quartz Variant 30 Block",
+  "block.agotmod.quartz_30_stairs": "Quartz Variant 30 Stairs",
+  "block.agotmod.quartz_30_slab": "Quartz Variant 30 Slab",
+  "block.agotmod.quartz_30_wall": "Quartz Variant 30 Wall",
+
+  "block.agotmod.quartz_31_block": "Quartz Variant 31 Block",
+  "block.agotmod.quartz_31_stairs": "Quartz Variant 31 Stairs",
+  "block.agotmod.quartz_31_slab": "Quartz Variant 31 Slab",
+  "block.agotmod.quartz_31_wall": "Quartz Variant 31 Wall",
+
+  "block.agotmod.quartz_32_block": "Quartz Variant 32 Block",
+  "block.agotmod.quartz_32_stairs": "Quartz Variant 32 Stairs",
+  "block.agotmod.quartz_32_slab": "Quartz Variant 32 Slab",
+  "block.agotmod.quartz_32_wall": "Quartz Variant 32 Wall",
+
+  "block.agotmod.quartz_33_block": "Quartz Variant 33 Block",
+  "block.agotmod.quartz_33_stairs": "Quartz Variant 33 Stairs",
+  "block.agotmod.quartz_33_slab": "Quartz Variant 33 Slab",
+  "block.agotmod.quartz_33_wall": "Quartz Variant 33 Wall",
+
+  "block.agotmod.quartz_34_block": "Quartz Variant 34 Block",
+  "block.agotmod.quartz_34_stairs": "Quartz Variant 34 Stairs",
+  "block.agotmod.quartz_34_slab": "Quartz Variant 34 Slab",
+  "block.agotmod.quartz_34_wall": "Quartz Variant 34 Wall",
+
+  "block.agotmod.quartz_35_block": "Quartz Variant 35 Block",
+  "block.agotmod.quartz_35_stairs": "Quartz Variant 35 Stairs",
+  "block.agotmod.quartz_35_slab": "Quartz Variant 35 Slab",
+  "block.agotmod.quartz_35_wall": "Quartz Variant 35 Wall",
+
+  "block.agotmod.quartz_36_block": "Quartz Variant 36 Block",
+  "block.agotmod.quartz_36_stairs": "Quartz Variant 36 Stairs",
+  "block.agotmod.quartz_36_slab": "Quartz Variant 36 Slab",
+  "block.agotmod.quartz_36_wall": "Quartz Variant 36 Wall",
+
+  "block.agotmod.quartz_37_block": "Quartz Variant 37 Block",
+  "block.agotmod.quartz_37_stairs": "Quartz Variant 37 Stairs",
+  "block.agotmod.quartz_37_slab": "Quartz Variant 37 Slab",
+  "block.agotmod.quartz_37_wall": "Quartz Variant 37 Wall",
+
+  "block.agotmod.quartz_38_block": "Quartz Variant 38 Block",
+  "block.agotmod.quartz_38_stairs": "Quartz Variant 38 Stairs",
+  "block.agotmod.quartz_38_slab": "Quartz Variant 38 Slab",
+  "block.agotmod.quartz_38_wall": "Quartz Variant 38 Wall",
 
   "block.agotmod.winter_rose": "Winter Rose",
   "block.agotmod.wild_radish": "Wild Radish",

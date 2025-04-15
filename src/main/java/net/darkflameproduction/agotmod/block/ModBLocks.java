@@ -105,6 +105,13 @@ public class ModBLocks {
                     .collect(Collectors.toList())
     );
 
+    public static final List<Integer> VALID_QUARTZ_INDICES = new ArrayList<>(
+            IntStream.rangeClosed(1, 38)
+                    .filter(i -> i != 14 && i != 15)
+                    .boxed()
+                    .collect(Collectors.toList())
+    );
+
     public static final List<Integer> VALID_CDEEPSLATE_INDICES = new ArrayList<>(
             IntStream.rangeClosed(1, 38)
                     .filter(i -> i != 4 && i != 15 && i != 19)
@@ -113,6 +120,13 @@ public class ModBLocks {
     );
 
     public static final List<Integer> VALID_GRANITE_INDICES = new ArrayList<>(
+            IntStream.rangeClosed(1, 38)
+                    .filter(i -> i != 15)
+                    .boxed()
+                    .collect(Collectors.toList())
+    );
+
+    public static final List<Integer> VALID_ANDESITE_INDICES = new ArrayList<>(
             IntStream.rangeClosed(1, 38)
                     .filter(i -> i != 15)
                     .boxed()
@@ -197,6 +211,9 @@ public class ModBLocks {
     public static final Map<Integer, BlockSet> DRIPSTONE_VARIANTS = new HashMap<>();
     public static final Map<Integer, BlockSet> PACKED_ICE_VARIANTS = new HashMap<>();
     public static final Map<Integer, BlockSet> MUD_BRICK_VARIANTS = new HashMap<>();
+    public static final Map<Integer, BlockSet> ANDESITE_VARIANTS = new HashMap<>();
+    public static final Map<Integer, BlockSet> QUARTZ_VARIANTS = new HashMap<>();
+
 
     private static <T extends Block> @NotNull DeferredBlock<T> registerBlock(String name, Function<BlockBehaviour.Properties, T> block, BlockBehaviour.Properties properties) {
         DeferredBlock<T> toReturn = BLOCKS.registerBlock(name, block, properties);
@@ -237,6 +254,37 @@ public class ModBLocks {
             }
         }
     }
+    private static void registerQuartzVariants() {
+        BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(Blocks.QUARTZ_BLOCK).strength(3f);
+
+        for (int i : VALID_QUARTZ_INDICES) {
+            String baseName = "quartz_" + i;
+
+            // Resource-safe lowercase names
+            String blockName = baseName + "_block";
+            String stairsName = baseName + "_stairs";
+            String slabName = baseName + "_slab";
+            String wallName = baseName + "_wall";
+
+            DeferredBlock<Block> base = registerBlock(blockName, Block::new, properties);
+            DeferredBlock<Block> stairs = registerBlock(stairsName, p -> new StairBlock(base.get().defaultBlockState(), p), properties);
+            DeferredBlock<Block> slab = registerBlock(slabName, SlabBlock::new, properties);
+            DeferredBlock<Block> wall = registerBlock(wallName, WallBlock::new, properties);
+
+            QUARTZ_VARIANTS.put(i, new BlockSet(base, stairs, slab, wall));
+
+            System.out.println("✅ Registered: " + baseName);
+        }
+
+        // Optional sanity check
+        for (int i = 1; i <= 38; i++) {
+            if (!QUARTZ_VARIANTS.containsKey(i)) {
+                System.err.println("⚠ Skipped quartz variant: quartz_" + i);
+            }
+        }
+    }
+
+
 
     private static void registerStoneVariants() {
         BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f);
@@ -267,6 +315,37 @@ public class ModBLocks {
             }
         }
     }
+
+    private static void registerAndesiteVariants() {
+        BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(Blocks.ANDESITE).strength(3f);
+
+        for (int i : VALID_ANDESITE_INDICES) {
+            String baseName = "andesite_" + i;
+
+            // Resource-safe lowercase names
+            String blockName = baseName + "_block";
+            String stairsName = baseName + "_stairs";
+            String slabName = baseName + "_slab";
+            String wallName = baseName + "_wall";
+
+            DeferredBlock<Block> base = registerBlock(blockName, Block::new, properties);
+            DeferredBlock<Block> stairs = registerBlock(stairsName, p -> new StairBlock(base.get().defaultBlockState(), p), properties);
+            DeferredBlock<Block> slab = registerBlock(slabName, SlabBlock::new, properties);
+            DeferredBlock<Block> wall = registerBlock(wallName, WallBlock::new, properties);
+
+            ANDESITE_VARIANTS.put(i, new BlockSet(base, stairs, slab, wall));
+
+            System.out.println("✅ Registered: " + baseName);
+        }
+
+        // Optional sanity check
+        for (int i = 1; i <= 38; i++) {
+            if (!ANDESITE_VARIANTS.containsKey(i)) {
+                System.err.println("⚠ Skipped andesite variant: andesite_" + i);
+            }
+        }
+    }
+
 
 
     private static void registerBasaltVariants() {
@@ -686,6 +765,8 @@ public class ModBLocks {
         registerDripstoneVariants();
         registerPackedIceVariants();
         registerMudBrickVariants();
+        registerAndesiteVariants();
+        registerQuartzVariants();
     }
 
 

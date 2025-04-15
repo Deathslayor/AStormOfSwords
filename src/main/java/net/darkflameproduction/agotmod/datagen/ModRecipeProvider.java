@@ -770,6 +770,142 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         }
 
         for (int i = 1; i <= 38; i++) {
+            if (i == 15) continue;
+
+            ModBLocks.BlockSet set = ModBLocks.ANDESITE_VARIANTS.get(i);
+            if (set == null) {
+                System.err.println("BlockSet missing for pattern index " + i);
+                continue;
+            }
+
+            ItemLike base = set.base().get().asItem();
+            ItemLike stairs = set.stairs().get().asItem();
+            ItemLike slab = set.slab().get().asItem();
+            ItemLike wall = set.wall().get().asItem();
+            String pattern = "andesite_" + i;
+
+            // From vanilla Andesite to each variant
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.ANDESITE),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            base)
+                    .unlockedBy(getHasName(Blocks.ANDESITE), has(Blocks.ANDESITE))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.ANDESITE),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            stairs)
+                    .unlockedBy(getHasName(Blocks.ANDESITE), has(Blocks.ANDESITE))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.ANDESITE),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            slab, 2)
+                    .unlockedBy(getHasName(Blocks.ANDESITE), has(Blocks.ANDESITE))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.ANDESITE),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            wall)
+                    .unlockedBy(getHasName(Blocks.ANDESITE), has(Blocks.ANDESITE))
+                    .save(this.output);
+
+            // From variant block to its shaped versions
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            stairs)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_stairs_from_" + pattern + "_block");
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            slab, 2)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_slab_from_" + pattern + "_block");
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            wall)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_wall_from_" + pattern + "_block");
+        }
+
+        for (int i = 1; i <= 38; i++) {
+            if (i == 14 || i == 15) continue;
+
+            ModBLocks.BlockSet set = ModBLocks.QUARTZ_VARIANTS.get(i);
+            if (set == null) {
+                System.err.println("BlockSet missing for pattern index " + i);
+                continue;
+            }
+
+            ItemLike base = set.base().get().asItem();
+            ItemLike stairs = set.stairs().get().asItem();
+            ItemLike slab = set.slab().get().asItem();
+            ItemLike wall = set.wall().get().asItem();
+            String pattern = "quartz_" + i;
+
+            // From vanilla Quartz Block to each variant
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.QUARTZ_BLOCK),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            base)
+                    .unlockedBy(getHasName(Blocks.QUARTZ_BLOCK), has(Blocks.QUARTZ_BLOCK))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.QUARTZ_BLOCK),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            stairs)
+                    .unlockedBy(getHasName(Blocks.QUARTZ_BLOCK), has(Blocks.QUARTZ_BLOCK))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.QUARTZ_BLOCK),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            slab, 2)
+                    .unlockedBy(getHasName(Blocks.QUARTZ_BLOCK), has(Blocks.QUARTZ_BLOCK))
+                    .save(this.output);
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(Blocks.QUARTZ_BLOCK),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            wall)
+                    .unlockedBy(getHasName(Blocks.QUARTZ_BLOCK), has(Blocks.QUARTZ_BLOCK))
+                    .save(this.output);
+
+            // From variant block to its shaped versions
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            stairs)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_stairs_from_" + pattern + "_block");
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            slab, 2)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_slab_from_" + pattern + "_block");
+
+            SingleItemRecipeBuilder.stonecutting(
+                            Ingredient.of(base),
+                            RecipeCategory.BUILDING_BLOCKS,
+                            wall)
+                    .unlockedBy(getHasName(base), has(base))
+                    .save(this.output, pattern + "_wall_from_" + pattern + "_block");
+        }
+
+
+
+        for (int i = 1; i <= 38; i++) {
             if (i == 15 || i == 22 || i == 31) continue;
 
             ModBLocks.BlockSet set = ModBLocks.BLACKSTONE_VARIANTS.get(i);
