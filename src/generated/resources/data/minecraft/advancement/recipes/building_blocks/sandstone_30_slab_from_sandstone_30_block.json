@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sandstone_30_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:sandstone_30_block"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:sandstone_30_slab_from_sandstone_30_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_sandstone_30_block"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:sandstone_30_slab_from_sandstone_30_block"
+    ]
+  }
+}

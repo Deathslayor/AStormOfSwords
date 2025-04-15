@@ -570,6 +570,17 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         }
 
         for (int i = 1; i <= 38; i++) {
+            if (i == 15 || i == 16 || i == 17 || i == 18) continue; // Skip BLACKSTONE_15 and BLACKSTONE_22
+            ModBLocks.BlockSet set = ModBLocks.SANDSTONE_VARIANTS.get(i);
+            if (set != null) {
+                this.dropSelf(set.base().get());
+                this.dropSelf(set.stairs().get());
+                this.dropSelf(set.slab().get());
+                this.dropSelf(set.wall().get());
+            }
+        }
+
+        for (int i = 1; i <= 38; i++) {
             if (i == 5 || i == 15 || i == 19 || i == 23) continue; // Skip BLACKSTONE_15 and BLACKSTONE_22
             ModBLocks.BlockSet set = ModBLocks.STONE_VARIANTS.get(i);
             if (set != null) {
@@ -616,6 +627,17 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         for (int i = 1; i <= 38; i++) {
             if (i == 15) continue;
             ModBLocks.BlockSet set = ModBLocks.PACKED_ICE_VARIANTS.get(i);
+            if (set != null) {
+                this.dropSelf(set.base().get());
+                this.dropSelf(set.stairs().get());
+                this.dropSelf(set.slab().get());
+                this.dropSelf(set.wall().get());
+            }
+        }
+
+        for (int i = 1; i <= 38; i++) {
+            if (i == 7 || i == 9 || i == 15) continue; // Skip BLACKSTONE_15 and BLACKSTONE_22
+            ModBLocks.BlockSet set = ModBLocks.MUD_BRICK_VARIANTS.get(i);
             if (set != null) {
                 this.dropSelf(set.base().get());
                 this.dropSelf(set.stairs().get());

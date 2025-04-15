@@ -938,6 +938,386 @@
   "block.agotmod.rsandstone_38_slab": "Red Sandstone Variant 38 Slab",
   "block.agotmod.rsandstone_38_wall": "Red Sandstone Variant 38 Wall",
 
+  "block.agotmod.sandstone_1_block": "Sandstone Variant 1 Block",
+  "block.agotmod.sandstone_1_stairs": "Sandstone Variant 1 Stairs",
+  "block.agotmod.sandstone_1_slab": "Sandstone Variant 1 Slab",
+  "block.agotmod.sandstone_1_wall": "Sandstone Variant 1 Wall",
+
+  "block.agotmod.sandstone_2_block": "Sandstone Variant 2 Block",
+  "block.agotmod.sandstone_2_stairs": "Sandstone Variant 2 Stairs",
+  "block.agotmod.sandstone_2_slab": "Sandstone Variant 2 Slab",
+  "block.agotmod.sandstone_2_wall": "Sandstone Variant 2 Wall",
+
+  "block.agotmod.sandstone_3_block": "Sandstone Variant 3 Block",
+  "block.agotmod.sandstone_3_stairs": "Sandstone Variant 3 Stairs",
+  "block.agotmod.sandstone_3_slab": "Sandstone Variant 3 Slab",
+  "block.agotmod.sandstone_3_wall": "Sandstone Variant 3 Wall",
+
+  "block.agotmod.sandstone_4_block": "Sandstone Variant 4 Block",
+  "block.agotmod.sandstone_4_stairs": "Sandstone Variant 4 Stairs",
+  "block.agotmod.sandstone_4_slab": "Sandstone Variant 4 Slab",
+  "block.agotmod.sandstone_4_wall": "Sandstone Variant 4 Wall",
+
+  "block.agotmod.sandstone_5_block": "Sandstone Variant 5 Block",
+  "block.agotmod.sandstone_5_stairs": "Sandstone Variant 5 Stairs",
+  "block.agotmod.sandstone_5_slab": "Sandstone Variant 5 Slab",
+  "block.agotmod.sandstone_5_wall": "Sandstone Variant 5 Wall",
+
+  "block.agotmod.sandstone_6_block": "Sandstone Variant 6 Block",
+  "block.agotmod.sandstone_6_stairs": "Sandstone Variant 6 Stairs",
+  "block.agotmod.sandstone_6_slab": "Sandstone Variant 6 Slab",
+  "block.agotmod.sandstone_6_wall": "Sandstone Variant 6 Wall",
+
+  "block.agotmod.sandstone_7_block": "Sandstone Variant 7 Block",
+  "block.agotmod.sandstone_7_stairs": "Sandstone Variant 7 Stairs",
+  "block.agotmod.sandstone_7_slab": "Sandstone Variant 7 Slab",
+  "block.agotmod.sandstone_7_wall": "Sandstone Variant 7 Wall",
+
+  "block.agotmod.sandstone_8_block": "Sandstone Variant 8 Block",
+  "block.agotmod.sandstone_8_stairs": "Sandstone Variant 8 Stairs",
+  "block.agotmod.sandstone_8_slab": "Sandstone Variant 8 Slab",
+  "block.agotmod.sandstone_8_wall": "Sandstone Variant 8 Wall",
+
+  "block.agotmod.sandstone_9_block": "Sandstone Variant 9 Block",
+  "block.agotmod.sandstone_9_stairs": "Sandstone Variant 9 Stairs",
+  "block.agotmod.sandstone_9_slab": "Sandstone Variant 9 Slab",
+  "block.agotmod.sandstone_9_wall": "Sandstone Variant 9 Wall",
+
+  "block.agotmod.sandstone_10_block": "Sandstone Variant 10 Block",
+  "block.agotmod.sandstone_10_stairs": "Sandstone Variant 10 Stairs",
+  "block.agotmod.sandstone_10_slab": "Sandstone Variant 10 Slab",
+  "block.agotmod.sandstone_10_wall": "Sandstone Variant 10 Wall",
+
+  "block.agotmod.sandstone_11_block": "Sandstone Variant 11 Block",
+  "block.agotmod.sandstone_11_stairs": "Sandstone Variant 11 Stairs",
+  "block.agotmod.sandstone_11_slab": "Sandstone Variant 11 Slab",
+  "block.agotmod.sandstone_11_wall": "Sandstone Variant 11 Wall",
+
+  "block.agotmod.sandstone_12_block": "Sandstone Variant 12 Block",
+  "block.agotmod.sandstone_12_stairs": "Sandstone Variant 12 Stairs",
+  "block.agotmod.sandstone_12_slab": "Sandstone Variant 12 Slab",
+  "block.agotmod.sandstone_12_wall": "Sandstone Variant 12 Wall",
+
+  "block.agotmod.sandstone_13_block": "Sandstone Variant 13 Block",
+  "block.agotmod.sandstone_13_stairs": "Sandstone Variant 13 Stairs",
+  "block.agotmod.sandstone_13_slab": "Sandstone Variant 13 Slab",
+  "block.agotmod.sandstone_13_wall": "Sandstone Variant 13 Wall",
+
+  "block.agotmod.sandstone_14_block": "Sandstone Variant 14 Block",
+  "block.agotmod.sandstone_14_stairs": "Sandstone Variant 14 Stairs",
+  "block.agotmod.sandstone_14_slab": "Sandstone Variant 14 Slab",
+  "block.agotmod.sandstone_14_wall": "Sandstone Variant 14 Wall",
+
+  "block.agotmod.sandstone_15_block": "Sandstone Variant 15 Block",
+  "block.agotmod.sandstone_15_stairs": "Sandstone Variant 15 Stairs",
+  "block.agotmod.sandstone_15_slab": "Sandstone Variant 15 Slab",
+  "block.agotmod.sandstone_15_wall": "Sandstone Variant 15 Wall",
+
+  "block.agotmod.sandstone_16_block": "Sandstone Variant 16 Block",
+  "block.agotmod.sandstone_16_stairs": "Sandstone Variant 16 Stairs",
+  "block.agotmod.sandstone_16_slab": "Sandstone Variant 16 Slab",
+  "block.agotmod.sandstone_16_wall": "Sandstone Variant 16 Wall",
+
+  "block.agotmod.sandstone_17_block": "Sandstone Variant 17 Block",
+  "block.agotmod.sandstone_17_stairs": "Sandstone Variant 17 Stairs",
+  "block.agotmod.sandstone_17_slab": "Sandstone Variant 17 Slab",
+  "block.agotmod.sandstone_17_wall": "Sandstone Variant 17 Wall",
+
+  "block.agotmod.sandstone_18_block": "Sandstone Variant 18 Block",
+  "block.agotmod.sandstone_18_stairs": "Sandstone Variant 18 Stairs",
+  "block.agotmod.sandstone_18_slab": "Sandstone Variant 18 Slab",
+  "block.agotmod.sandstone_18_wall": "Sandstone Variant 18 Wall",
+
+  "block.agotmod.sandstone_19_block": "Sandstone Variant 19 Block",
+  "block.agotmod.sandstone_19_stairs": "Sandstone Variant 19 Stairs",
+  "block.agotmod.sandstone_19_slab": "Sandstone Variant 19 Slab",
+  "block.agotmod.sandstone_19_wall": "Sandstone Variant 19 Wall",
+
+  "block.agotmod.sandstone_20_block": "Sandstone Variant 20 Block",
+  "block.agotmod.sandstone_20_stairs": "Sandstone Variant 20 Stairs",
+  "block.agotmod.sandstone_20_slab": "Sandstone Variant 20 Slab",
+  "block.agotmod.sandstone_20_wall": "Sandstone Variant 20 Wall",
+
+  "block.agotmod.sandstone_21_block": "Sandstone Variant 21 Block",
+  "block.agotmod.sandstone_21_stairs": "Sandstone Variant 21 Stairs",
+  "block.agotmod.sandstone_21_slab": "Sandstone Variant 21 Slab",
+  "block.agotmod.sandstone_21_wall": "Sandstone Variant 21 Wall",
+
+  "block.agotmod.sandstone_22_block": "Sandstone Variant 22 Block",
+  "block.agotmod.sandstone_22_stairs": "Sandstone Variant 22 Stairs",
+  "block.agotmod.sandstone_22_slab": "Sandstone Variant 22 Slab",
+  "block.agotmod.sandstone_22_wall": "Sandstone Variant 22 Wall",
+
+  "block.agotmod.sandstone_23_block": "Sandstone Variant 23 Block",
+  "block.agotmod.sandstone_23_stairs": "Sandstone Variant 23 Stairs",
+  "block.agotmod.sandstone_23_slab": "Sandstone Variant 23 Slab",
+  "block.agotmod.sandstone_23_wall": "Sandstone Variant 23 Wall",
+
+  "block.agotmod.sandstone_24_block": "Sandstone Variant 24 Block",
+  "block.agotmod.sandstone_24_stairs": "Sandstone Variant 24 Stairs",
+  "block.agotmod.sandstone_24_slab": "Sandstone Variant 24 Slab",
+  "block.agotmod.sandstone_24_wall": "Sandstone Variant 24 Wall",
+
+  "block.agotmod.sandstone_25_block": "Sandstone Variant 25 Block",
+  "block.agotmod.sandstone_25_stairs": "Sandstone Variant 25 Stairs",
+  "block.agotmod.sandstone_25_slab": "Sandstone Variant 25 Slab",
+  "block.agotmod.sandstone_25_wall": "Sandstone Variant 25 Wall",
+
+  "block.agotmod.sandstone_26_block": "Sandstone Variant 26 Block",
+  "block.agotmod.sandstone_26_stairs": "Sandstone Variant 26 Stairs",
+  "block.agotmod.sandstone_26_slab": "Sandstone Variant 26 Slab",
+  "block.agotmod.sandstone_26_wall": "Sandstone Variant 26 Wall",
+
+  "block.agotmod.sandstone_27_block": "Sandstone Variant 27 Block",
+  "block.agotmod.sandstone_27_stairs": "Sandstone Variant 27 Stairs",
+  "block.agotmod.sandstone_27_slab": "Sandstone Variant 27 Slab",
+  "block.agotmod.sandstone_27_wall": "Sandstone Variant 27 Wall",
+
+  "block.agotmod.sandstone_28_block": "Sandstone Variant 28 Block",
+  "block.agotmod.sandstone_28_stairs": "Sandstone Variant 28 Stairs",
+  "block.agotmod.sandstone_28_slab": "Sandstone Variant 28 Slab",
+  "block.agotmod.sandstone_28_wall": "Sandstone Variant 28 Wall",
+
+  "block.agotmod.sandstone_29_block": "Sandstone Variant 29 Block",
+  "block.agotmod.sandstone_29_stairs": "Sandstone Variant 29 Stairs",
+  "block.agotmod.sandstone_29_slab": "Sandstone Variant 29 Slab",
+  "block.agotmod.sandstone_29_wall": "Sandstone Variant 29 Wall",
+
+  "block.agotmod.sandstone_30_block": "Sandstone Variant 30 Block",
+  "block.agotmod.sandstone_30_stairs": "Sandstone Variant 30 Stairs",
+  "block.agotmod.sandstone_30_slab": "Sandstone Variant 30 Slab",
+  "block.agotmod.sandstone_30_wall": "Sandstone Variant 30 Wall",
+
+  "block.agotmod.sandstone_31_block": "Sandstone Variant 31 Block",
+  "block.agotmod.sandstone_31_stairs": "Sandstone Variant 31 Stairs",
+  "block.agotmod.sandstone_31_slab": "Sandstone Variant 31 Slab",
+  "block.agotmod.sandstone_31_wall": "Sandstone Variant 31 Wall",
+
+  "block.agotmod.sandstone_32_block": "Sandstone Variant 32 Block",
+  "block.agotmod.sandstone_32_stairs": "Sandstone Variant 32 Stairs",
+  "block.agotmod.sandstone_32_slab": "Sandstone Variant 32 Slab",
+  "block.agotmod.sandstone_32_wall": "Sandstone Variant 32 Wall",
+
+  "block.agotmod.sandstone_33_block": "Sandstone Variant 33 Block",
+  "block.agotmod.sandstone_33_stairs": "Sandstone Variant 33 Stairs",
+  "block.agotmod.sandstone_33_slab": "Sandstone Variant 33 Slab",
+  "block.agotmod.sandstone_33_wall": "Sandstone Variant 33 Wall",
+
+  "block.agotmod.sandstone_34_block": "Sandstone Variant 34 Block",
+  "block.agotmod.sandstone_34_stairs": "Sandstone Variant 34 Stairs",
+  "block.agotmod.sandstone_34_slab": "Sandstone Variant 34 Slab",
+  "block.agotmod.sandstone_34_wall": "Sandstone Variant 34 Wall",
+
+  "block.agotmod.sandstone_35_block": "Sandstone Variant 35 Block",
+  "block.agotmod.sandstone_35_stairs": "Sandstone Variant 35 Stairs",
+  "block.agotmod.sandstone_35_slab": "Sandstone Variant 35 Slab",
+  "block.agotmod.sandstone_35_wall": "Sandstone Variant 35 Wall",
+
+  "block.agotmod.sandstone_36_block": "Sandstone Variant 36 Block",
+  "block.agotmod.sandstone_36_stairs": "Sandstone Variant 36 Stairs",
+  "block.agotmod.sandstone_36_slab": "Sandstone Variant 36 Slab",
+  "block.agotmod.sandstone_36_wall": "Sandstone Variant 36 Wall",
+
+  "block.agotmod.sandstone_37_block": "Sandstone Variant 37 Block",
+  "block.agotmod.sandstone_37_stairs": "Sandstone Variant 37 Stairs",
+  "block.agotmod.sandstone_37_slab": "Sandstone Variant 37 Slab",
+  "block.agotmod.sandstone_37_wall": "Sandstone Variant 37 Wall",
+
+  "block.agotmod.sandstone_38_block": "Sandstone Variant 38 Block",
+  "block.agotmod.sandstone_38_stairs": "Sandstone Variant 38 Stairs",
+  "block.agotmod.sandstone_38_slab": "Sandstone Variant 38 Slab",
+  "block.agotmod.sandstone_38_wall": "Sandstone Variant 38 Wall",
+
+  "block.agotmod.mud_brick_1_block": "Mud Variant 1 Block",
+  "block.agotmod.mud_brick_1_stairs": "Mud Variant 1 Stairs",
+  "block.agotmod.mud_1_slab": "Mud Variant 1 Slab",
+  "block.agotmod.mud_1_wall": "Mud Variant 1 Wall",
+
+  "block.agotmod.mud_brick_2_block": "Mud Variant 2 Block",
+  "block.agotmod.mud_brick_2_stairs": "Mud Variant 2 Stairs",
+  "block.agotmod.mud_2_slab": "Mud Variant 2 Slab",
+  "block.agotmod.mud_2_wall": "Mud Variant 2 Wall",
+
+  "block.agotmod.mud_brick_3_block": "Mud Variant 3 Block",
+  "block.agotmod.mud_brick_3_stairs": "Mud Variant 3 Stairs",
+  "block.agotmod.mud_brick_3_slab": "Mud Variant 3 Slab",
+  "block.agotmod.mud_brick_3_wall": "Mud Variant 3 Wall",
+
+  "block.agotmod.mud_brick_4_block": "Mud Variant 4 Block",
+  "block.agotmod.mud_brick_4_stairs": "Mud Variant 4 Stairs",
+  "block.agotmod.mud_brick_4_slab": "Mud Variant 4 Slab",
+  "block.agotmod.mud_brick_4_wall": "Mud Variant 4 Wall",
+
+  "block.agotmod.mud_brick_5_block": "Mud Variant 5 Block",
+  "block.agotmod.mud_brick_5_stairs": "Mud Variant 5 Stairs",
+  "block.agotmod.mud_brick_5_slab": "Mud Variant 5 Slab",
+  "block.agotmod.mud_brick_5_wall": "Mud Variant 5 Wall",
+
+  "block.agotmod.mud_brick_6_block": "Mud Variant 6 Block",
+  "block.agotmod.mud_brick_6_stairs": "Mud Variant 6 Stairs",
+  "block.agotmod.mud_brick_6_slab": "Mud Variant 6 Slab",
+  "block.agotmod.mud_brick_6_wall": "Mud Variant 6 Wall",
+
+  "block.agotmod.mud_brick_7_block": "Mud Variant 7 Block",
+  "block.agotmod.mud_brick_7_stairs": "Mud Variant 7 Stairs",
+  "block.agotmod.mud_brick_7_slab": "Mud Variant 7 Slab",
+  "block.agotmod.mud_brick_7_wall": "Mud Variant 7 Wall",
+
+  "block.agotmod.mud_brick_8_block": "Mud Variant 8 Block",
+  "block.agotmod.mud_brick_8_stairs": "Mud Variant 8 Stairs",
+  "block.agotmod.mud_brick_8_slab": "Mud Variant 8 Slab",
+  "block.agotmod.mud_brick_8_wall": "Mud Variant 8 Wall",
+
+  "block.agotmod.mud_brick_9_block": "Mud Variant 9 Block",
+  "block.agotmod.mud_brick_9_stairs": "Mud Variant 9 Stairs",
+  "block.agotmod.mud_brick_9_slab": "Mud Variant 9 Slab",
+  "block.agotmod.mud_brick_9_wall": "Mud Variant 9 Wall",
+
+  "block.agotmod.mud_brick_10_block": "Mud Variant 10 Block",
+  "block.agotmod.mud_brick_10_stairs": "Mud Variant 10 Stairs",
+  "block.agotmod.mud_brick_10_slab": "Mud Variant 10 Slab",
+  "block.agotmod.mud_brick_10_wall": "Mud Variant 10 Wall",
+
+  "block.agotmod.mud_brick_11_block": "Mud Variant 11 Block",
+  "block.agotmod.mud_brick_11_stairs": "Mud Variant 11 Stairs",
+  "block.agotmod.mud_brick_11_slab": "Mud Variant 11 Slab",
+  "block.agotmod.mud_brick_11_wall": "Mud Variant 11 Wall",
+
+  "block.agotmod.mud_brick_12_block": "Mud Variant 12 Block",
+  "block.agotmod.mud_brick_12_stairs": "Mud Variant 12 Stairs",
+  "block.agotmod.mud_brick_12_slab": "Mud Variant 12 Slab",
+  "block.agotmod.mud_brick_12_wall": "Mud Variant 12 Wall",
+
+  "block.agotmod.mud_brick_13_block": "Mud Variant 13 Block",
+  "block.agotmod.mud_brick_13_stairs": "Mud Variant 13 Stairs",
+  "block.agotmod.mud_brick_13_slab": "Mud Variant 13 Slab",
+  "block.agotmod.mud_brick_13_wall": "Mud Variant 13 Wall",
+
+  "block.agotmod.mud_brick_14_block": "Mud Variant 14 Block",
+  "block.agotmod.mud_brick_14_stairs": "Mud Variant 14 Stairs",
+  "block.agotmod.mud_brick_14_slab": "Mud Variant 14 Slab",
+  "block.agotmod.mud_brick_14_wall": "Mud Variant 14 Wall",
+
+  "block.agotmod.mud_brick_15_block": "Mud Variant 15 Block",
+  "block.agotmod.mud_brick_15_stairs": "Mud Variant 15 Stairs",
+  "block.agotmod.mud_brick_15_slab": "Mud Variant 15 Slab",
+  "block.agotmod.mud_brick_15_wall": "Mud Variant 15 Wall",
+
+  "block.agotmod.mud_brick_16_block": "Mud Variant 16 Block",
+  "block.agotmod.mud_brick_16_stairs": "Mud Variant 16 Stairs",
+  "block.agotmod.mud_brick_16_slab": "Mud Variant 16 Slab",
+  "block.agotmod.mud_brick_16_wall": "Mud Variant 16 Wall",
+
+  "block.agotmod.mud_brick_17_block": "Mud Variant 17 Block",
+  "block.agotmod.mud_brick_17_stairs": "Mud Variant 17 Stairs",
+  "block.agotmod.mud_brick_17_slab": "Mud Variant 17 Slab",
+  "block.agotmod.mud_brick_17_wall": "Mud Variant 17 Wall",
+
+  "block.agotmod.mud_brick_18_block": "Mud Variant 18 Block",
+  "block.agotmod.mud_brick_18_stairs": "Mud Variant 18 Stairs",
+  "block.agotmod.mud_brick_18_slab": "Mud Variant 18 Slab",
+  "block.agotmod.mud_brick_18_wall": "Mud Variant 18 Wall",
+
+  "block.agotmod.mud_brick_19_block": "Mud Variant 19 Block",
+  "block.agotmod.mud_brick_19_stairs": "Mud Variant 19 Stairs",
+  "block.agotmod.mud_brick_19_slab": "Mud Variant 19 Slab",
+  "block.agotmod.mud_brick_19_wall": "Mud Variant 19 Wall",
+
+  "block.agotmod.mud_brick_20_block": "Mud Variant 20 Block",
+  "block.agotmod.mud_brick_20_stairs": "Mud Variant 20 Stairs",
+  "block.agotmod.mud_brick_20_slab": "Mud Variant 20 Slab",
+  "block.agotmod.mud_brick_20_wall": "Mud Variant 20 Wall",
+
+  "block.agotmod.mud_brick_21_block": "Mud Variant 21 Block",
+  "block.agotmod.mud_brick_21_stairs": "Mud Variant 21 Stairs",
+  "block.agotmod.mud_brick_21_slab": "Mud Variant 21 Slab",
+  "block.agotmod.mud_brick_21_wall": "Mud Variant 21 Wall",
+
+  "block.agotmod.mud_brick_22_block": "Mud Variant 22 Block",
+  "block.agotmod.mud_brick_22_stairs": "Mud Variant 22 Stairs",
+  "block.agotmod.mud_brick_22_slab": "Mud Variant 22 Slab",
+  "block.agotmod.mud_brick_22_wall": "Mud Variant 22 Wall",
+
+  "block.agotmod.mud_brick_23_block": "Mud Variant 23 Block",
+  "block.agotmod.mud_brick_23_stairs": "Mud Variant 23 Stairs",
+  "block.agotmod.mud_brick_23_slab": "Mud Variant 23 Slab",
+  "block.agotmod.mud_brick_23_wall": "Mud Variant 23 Wall",
+
+  "block.agotmod.mud_brick_24_block": "Mud Variant 24 Block",
+  "block.agotmod.mud_brick_24_stairs": "Mud Variant 24 Stairs",
+  "block.agotmod.mud_brick_24_slab": "Mud Variant 24 Slab",
+  "block.agotmod.mud_brick_24_wall": "Mud Variant 24 Wall",
+
+  "block.agotmod.mud_brick_25_block": "Mud Variant 25 Block",
+  "block.agotmod.mud_brick_25_stairs": "Mud Variant 25 Stairs",
+  "block.agotmod.mud_brick_25_slab": "Mud Variant 25 Slab",
+  "block.agotmod.mud_brick_25_wall": "Mud Variant 25 Wall",
+
+  "block.agotmod.mud_brick_26_block": "Mud Variant 26 Block",
+  "block.agotmod.mud_brick_26_stairs": "Mud Variant 26 Stairs",
+  "block.agotmod.mud_brick_26_slab": "Mud Variant 26 Slab",
+  "block.agotmod.mud_brick_26_wall": "Mud Variant 26 Wall",
+
+  "block.agotmod.mud_brick_27_block": "Mud Variant 27 Block",
+  "block.agotmod.mud_brick_27_stairs": "Mud Variant 27 Stairs",
+  "block.agotmod.mud_brick_27_slab": "Mud Variant 27 Slab",
+  "block.agotmod.mud_brick_27_wall": "Mud Variant 27 Wall",
+
+  "block.agotmod.mud_brick_28_block": "Mud Variant 28 Block",
+  "block.agotmod.mud_brick_28_stairs": "Mud Variant 28 Stairs",
+  "block.agotmod.mud_brick_28_slab": "Mud Variant 28 Slab",
+  "block.agotmod.mud_brick_28_wall": "Mud Variant 28 Wall",
+
+  "block.agotmod.mud_brick_29_block": "Mud Variant 29 Block",
+  "block.agotmod.mud_brick_29_stairs": "Mud Variant 29 Stairs",
+  "block.agotmod.mud_brick_29_slab": "Mud Variant 29 Slab",
+  "block.agotmod.mud_brick_29_wall": "Mud Variant 29 Wall",
+
+  "block.agotmod.mud_brick_30_block": "Mud Variant 30 Block",
+  "block.agotmod.mud_brick_30_stairs": "Mud Variant 30 Stairs",
+  "block.agotmod.mud_brick_30_slab": "Mud Variant 30 Slab",
+  "block.agotmod.mud_brick_30_wall": "Mud Variant 30 Wall",
+
+  "block.agotmod.mud_brick_31_block": "Mud Variant 31 Block",
+  "block.agotmod.mud_brick_31_stairs": "Mud Variant 31 Stairs",
+  "block.agotmod.mud_brick_31_slab": "Mud Variant 31 Slab",
+  "block.agotmod.mud_brick_31_wall": "Mud Variant 31 Wall",
+
+  "block.agotmod.mud_brick_32_block": "Mud Variant 32 Block",
+  "block.agotmod.mud_brick_32_stairs": "Mud Variant 32 Stairs",
+  "block.agotmod.mud_brick_32_slab": "Mud Variant 32 Slab",
+  "block.agotmod.mud_brick_32_wall": "Mud Variant 32 Wall",
+
+  "block.agotmod.mud_brick_33_block": "Mud Variant 33 Block",
+  "block.agotmod.mud_brick_33_stairs": "Mud Variant 33 Stairs",
+  "block.agotmod.mud_brick_33_slab": "Mud Variant 33 Slab",
+  "block.agotmod.mud_brick_33_wall": "Mud Variant 33 Wall",
+
+  "block.agotmod.mud_brick_34_block": "Mud Variant 34 Block",
+  "block.agotmod.mud_brick_34_stairs": "Mud Variant 34 Stairs",
+  "block.agotmod.mud_brick_34_slab": "Mud Variant 34 Slab",
+  "block.agotmod.mud_brick_34_wall": "Mud Variant 34 Wall",
+
+  "block.agotmod.mud_brick_35_block": "Mud Variant 35 Block",
+  "block.agotmod.mud_brick_35_stairs": "Mud Variant 35 Stairs",
+  "block.agotmod.mud_brick_35_slab": "Mud Variant 35 Slab",
+  "block.agotmod.mud_brick_35_wall": "Mud Variant 35 Wall",
+
+  "block.agotmod.mud_brick_36_block": "Mud Variant 36 Block",
+  "block.agotmod.mud_brick_36_stairs": "Mud Variant 36 Stairs",
+  "block.agotmod.mud_brick_36_slab": "Mud Variant 36 Slab",
+  "block.agotmod.mud_brick_36_wall": "Mud Variant 36 Wall",
+
+  "block.agotmod.mud_brick_37_block": "Mud Variant 37 Block",
+  "block.agotmod.mud_brick_37_stairs": "Mud Variant 37 Stairs",
+  "block.agotmod.mud_brick_37_slab": "Mud Variant 37 Slab",
+  "block.agotmod.mud_brick_37_wall": "Mud Variant 37 Wall",
+
+  "block.agotmod.mud_brick_38_block": "Mud Variant 38 Block",
+  "block.agotmod.mud_brick_38_stairs": "Mud Variant 38 Stairs",
+  "block.agotmod.mud_brick_38_slab": "Mud Variant 38 Slab",
+  "block.agotmod.mud_brick_38_wall": "Mud Variant 38 Wall",
+
   "block.agotmod.redkeep_stone": "Red Keep Stone Block",
   "block.agotmod.redkeep_stone_stairs": "Red Keep Stone Stairs",
   "block.agotmod.redkeep_stone_slab": "Red Keep Stone Slab",

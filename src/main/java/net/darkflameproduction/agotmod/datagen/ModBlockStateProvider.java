@@ -985,9 +985,59 @@ public class ModBlockStateProvider extends BlockStateProvider {
         }
 
         for (int i = 1; i <= 38; i++) {
+            if (i == 15 || i == 16 || i == 17 || i == 18) continue;
+
+            ModBLocks.BlockSet set = ModBLocks.SANDSTONE_VARIANTS.get(i);
+            if (set == null) continue; // Skip if not registered (just to be safe)
+
+            blockWithItem(set.base());
+
+            slabBlock(
+                    (SlabBlock) set.slab().get(),
+                    blockTexture(set.base().get()),
+                    blockTexture(set.base().get())
+            );
+
+            stairsBlock(
+                    (StairBlock) set.stairs().get(),
+                    blockTexture(set.base().get())
+            );
+
+            wallBlock(
+                    (WallBlock) set.wall().get(),
+                    blockTexture(set.base().get())
+            );
+        }
+
+        for (int i = 1; i <= 38; i++) {
             if (i == 15 || i == 23) continue;
 
             ModBLocks.BlockSet set = ModBLocks.SSTONE_VARIANTS.get(i); // Changed to SSTONE_VARIANTS
+            if (set == null) continue; // Skip if not registered (just to be safe)
+
+            blockWithItem(set.base());
+
+            slabBlock(
+                    (SlabBlock) set.slab().get(),
+                    blockTexture(set.base().get()),
+                    blockTexture(set.base().get())
+            );
+
+            stairsBlock(
+                    (StairBlock) set.stairs().get(),
+                    blockTexture(set.base().get())
+            );
+
+            wallBlock(
+                    (WallBlock) set.wall().get(),
+                    blockTexture(set.base().get())
+            );
+        }
+
+        for (int i = 1; i <= 38; i++) {
+            if (i == 7 || i == 9 || i == 15) continue;
+
+            ModBLocks.BlockSet set = ModBLocks.MUD_BRICK_VARIANTS.get(i); // Changed to SSTONE_VARIANTS
             if (set == null) continue; // Skip if not registered (just to be safe)
 
             blockWithItem(set.base());

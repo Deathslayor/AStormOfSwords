@@ -259,6 +259,20 @@ public class ModCreativeBuildingBlocks {
                         }
 
                         for (int i = 1; i <= 38; i++) {
+                            // Skip variants 7, 9, and 15
+                            if (i == 7 || i == 9 || i == 15) continue;
+
+                            ModBLocks.BlockSet blockSet = ModBLocks.MUD_BRICK_VARIANTS.get(i);
+                            if (blockSet != null) {
+                                pOutput.accept(blockSet.base().get());
+                                pOutput.accept(blockSet.stairs().get());
+                                pOutput.accept(blockSet.slab().get());
+                                pOutput.accept(blockSet.wall().get());
+                            }
+                        }
+
+
+                        for (int i = 1; i <= 38; i++) {
                             // Skip variants 15 and 22 as they're commented out in your original code
                             if (i == 15 || i == 22 || i == 31) continue;
 
@@ -358,6 +372,19 @@ public class ModCreativeBuildingBlocks {
                             // Skip variants 15 and 22 as they're commented out in your original code
                             if (i == 15 || i == 16 || i == 17 || i == 18) continue;
 
+                            ModBLocks.BlockSet blockSet = ModBLocks.SANDSTONE_VARIANTS.get(i);
+                            if (blockSet != null) {
+                                pOutput.accept(blockSet.base().get());
+                                pOutput.accept(blockSet.stairs().get());
+                                pOutput.accept(blockSet.slab().get());
+                                pOutput.accept(blockSet.wall().get());
+                            }
+                        }
+
+                        for (int i = 1; i <= 38; i++) {
+                            // Skip variants 15 and 22 as they're commented out in your original code
+                            if (i == 15 || i == 16 || i == 17 || i == 18) continue;
+
                             ModBLocks.BlockSet blockSet = ModBLocks.RSANDSTONE_VARIANTS.get(i);
                             if (blockSet != null) {
                                 pOutput.accept(blockSet.base().get());
@@ -366,6 +393,8 @@ public class ModCreativeBuildingBlocks {
                                 pOutput.accept(blockSet.wall().get());
                             }
                         }
+
+
 
                         for (int i = 1; i <= 38; i++) {
                             // Skip variants 15 and 22 as they're commented out in your original code
