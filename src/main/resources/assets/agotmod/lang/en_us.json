@@ -3594,6 +3594,386 @@
   "block.agotmod.packed_ice_38_slab": "Packed Ice Variant 38 Slab",
   "block.agotmod.packed_ice_38_wall": "Packed Ice Variant 38 Wall",
 
+  "block.agotmod.diorite_1_block": "Diorite Variant 1 Block",
+  "block.agotmod.diorite_1_stairs": "Diorite Variant 1 Stairs",
+  "block.agotmod.diorite_1_slab": "Diorite Variant 1 Slab",
+  "block.agotmod.diorite_1_wall": "Diorite Variant 1 Wall",
+
+  "block.agotmod.diorite_2_block": "Diorite Variant 2 Block",
+  "block.agotmod.diorite_2_stairs": "Diorite Variant 2 Stairs",
+  "block.agotmod.diorite_2_slab": "Diorite Variant 2 Slab",
+  "block.agotmod.diorite_2_wall": "Diorite Variant 2 Wall",
+
+  "block.agotmod.diorite_3_block": "Diorite Variant 3 Block",
+  "block.agotmod.diorite_3_stairs": "Diorite Variant 3 Stairs",
+  "block.agotmod.diorite_3_slab": "Diorite Variant 3 Slab",
+  "block.agotmod.diorite_3_wall": "Diorite Variant 3 Wall",
+
+  "block.agotmod.diorite_4_block": "Diorite Variant 4 Block",
+  "block.agotmod.diorite_4_stairs": "Diorite Variant 4 Stairs",
+  "block.agotmod.diorite_4_slab": "Diorite Variant 4 Slab",
+  "block.agotmod.diorite_4_wall": "Diorite Variant 4 Wall",
+
+  "block.agotmod.diorite_5_block": "Diorite Variant 5 Block",
+  "block.agotmod.diorite_5_stairs": "Diorite Variant 5 Stairs",
+  "block.agotmod.diorite_5_slab": "Diorite Variant 5 Slab",
+  "block.agotmod.diorite_5_wall": "Diorite Variant 5 Wall",
+
+  "block.agotmod.diorite_6_block": "Diorite Variant 6 Block",
+  "block.agotmod.diorite_6_stairs": "Diorite Variant 6 Stairs",
+  "block.agotmod.diorite_6_slab": "Diorite Variant 6 Slab",
+  "block.agotmod.diorite_6_wall": "Diorite Variant 6 Wall",
+
+  "block.agotmod.diorite_7_block": "Diorite Variant 7 Block",
+  "block.agotmod.diorite_7_stairs": "Diorite Variant 7 Stairs",
+  "block.agotmod.diorite_7_slab": "Diorite Variant 7 Slab",
+  "block.agotmod.diorite_7_wall": "Diorite Variant 7 Wall",
+
+  "block.agotmod.diorite_8_block": "Diorite Variant 8 Block",
+  "block.agotmod.diorite_8_stairs": "Diorite Variant 8 Stairs",
+  "block.agotmod.diorite_8_slab": "Diorite Variant 8 Slab",
+  "block.agotmod.diorite_8_wall": "Diorite Variant 8 Wall",
+
+  "block.agotmod.diorite_9_block": "Diorite Variant 9 Block",
+  "block.agotmod.diorite_9_stairs": "Diorite Variant 9 Stairs",
+  "block.agotmod.diorite_9_slab": "Diorite Variant 9 Slab",
+  "block.agotmod.diorite_9_wall": "Diorite Variant 9 Wall",
+
+  "block.agotmod.diorite_10_block": "Diorite Variant 10 Block",
+  "block.agotmod.diorite_10_stairs": "Diorite Variant 10 Stairs",
+  "block.agotmod.diorite_10_slab": "Diorite Variant 10 Slab",
+  "block.agotmod.diorite_10_wall": "Diorite Variant 10 Wall",
+
+  "block.agotmod.diorite_11_block": "Diorite Variant 11 Block",
+  "block.agotmod.diorite_11_stairs": "Diorite Variant 11 Stairs",
+  "block.agotmod.diorite_11_slab": "Diorite Variant 11 Slab",
+  "block.agotmod.diorite_11_wall": "Diorite Variant 11 Wall",
+
+  "block.agotmod.diorite_12_block": "Diorite Variant 12 Block",
+  "block.agotmod.diorite_12_stairs": "Diorite Variant 12 Stairs",
+  "block.agotmod.diorite_12_slab": "Diorite Variant 12 Slab",
+  "block.agotmod.diorite_12_wall": "Diorite Variant 12 Wall",
+
+  "block.agotmod.diorite_13_block": "Diorite Variant 13 Block",
+  "block.agotmod.diorite_13_stairs": "Diorite Variant 13 Stairs",
+  "block.agotmod.diorite_13_slab": "Diorite Variant 13 Slab",
+  "block.agotmod.diorite_13_wall": "Diorite Variant 13 Wall",
+
+  "block.agotmod.diorite_14_block": "Diorite Variant 14 Block",
+  "block.agotmod.diorite_14_stairs": "Diorite Variant 14 Stairs",
+  "block.agotmod.diorite_14_slab": "Diorite Variant 14 Slab",
+  "block.agotmod.diorite_14_wall": "Diorite Variant 14 Wall",
+
+  "block.agotmod.diorite_15_block": "Diorite Variant 15 Block",
+  "block.agotmod.diorite_15_stairs": "Diorite Variant 15 Stairs",
+  "block.agotmod.diorite_15_slab": "Diorite Variant 15 Slab",
+  "block.agotmod.diorite_15_wall": "Diorite Variant 15 Wall",
+
+  "block.agotmod.diorite_16_block": "Diorite Variant 16 Block",
+  "block.agotmod.diorite_16_stairs": "Diorite Variant 16 Stairs",
+  "block.agotmod.diorite_16_slab": "Diorite Variant 16 Slab",
+  "block.agotmod.diorite_16_wall": "Diorite Variant 16 Wall",
+
+  "block.agotmod.diorite_17_block": "Diorite Variant 17 Block",
+  "block.agotmod.diorite_17_stairs": "Diorite Variant 17 Stairs",
+  "block.agotmod.diorite_17_slab": "Diorite Variant 17 Slab",
+  "block.agotmod.diorite_17_wall": "Diorite Variant 17 Wall",
+
+  "block.agotmod.diorite_18_block": "Diorite Variant 18 Block",
+  "block.agotmod.diorite_18_stairs": "Diorite Variant 18 Stairs",
+  "block.agotmod.diorite_18_slab": "Diorite Variant 18 Slab",
+  "block.agotmod.diorite_18_wall": "Diorite Variant 18 Wall",
+
+  "block.agotmod.diorite_19_block": "Diorite Variant 19 Block",
+  "block.agotmod.diorite_19_stairs": "Diorite Variant 19 Stairs",
+  "block.agotmod.diorite_19_slab": "Diorite Variant 19 Slab",
+  "block.agotmod.diorite_19_wall": "Diorite Variant 19 Wall",
+
+  "block.agotmod.diorite_20_block": "Diorite Variant 20 Block",
+  "block.agotmod.diorite_20_stairs": "Diorite Variant 20 Stairs",
+  "block.agotmod.diorite_20_slab": "Diorite Variant 20 Slab",
+  "block.agotmod.diorite_20_wall": "Diorite Variant 20 Wall",
+
+  "block.agotmod.diorite_21_block": "Diorite Variant 21 Block",
+  "block.agotmod.diorite_21_stairs": "Diorite Variant 21 Stairs",
+  "block.agotmod.diorite_21_slab": "Diorite Variant 21 Slab",
+  "block.agotmod.diorite_21_wall": "Diorite Variant 21 Wall",
+
+  "block.agotmod.diorite_22_block": "Diorite Variant 22 Block",
+  "block.agotmod.diorite_22_stairs": "Diorite Variant 22 Stairs",
+  "block.agotmod.diorite_22_slab": "Diorite Variant 22 Slab",
+  "block.agotmod.diorite_22_wall": "Diorite Variant 22 Wall",
+
+  "block.agotmod.diorite_23_block": "Diorite Variant 23 Block",
+  "block.agotmod.diorite_23_stairs": "Diorite Variant 23 Stairs",
+  "block.agotmod.diorite_23_slab": "Diorite Variant 23 Slab",
+  "block.agotmod.diorite_23_wall": "Diorite Variant 23 Wall",
+
+  "block.agotmod.diorite_24_block": "Diorite Variant 24 Block",
+  "block.agotmod.diorite_24_stairs": "Diorite Variant 24 Stairs",
+  "block.agotmod.diorite_24_slab": "Diorite Variant 24 Slab",
+  "block.agotmod.diorite_24_wall": "Diorite Variant 24 Wall",
+
+  "block.agotmod.diorite_25_block": "Diorite Variant 25 Block",
+  "block.agotmod.diorite_25_stairs": "Diorite Variant 25 Stairs",
+  "block.agotmod.diorite_25_slab": "Diorite Variant 25 Slab",
+  "block.agotmod.diorite_25_wall": "Diorite Variant 25 Wall",
+
+  "block.agotmod.diorite_26_block": "Diorite Variant 26 Block",
+  "block.agotmod.diorite_26_stairs": "Diorite Variant 26 Stairs",
+  "block.agotmod.diorite_26_slab": "Diorite Variant 26 Slab",
+  "block.agotmod.diorite_26_wall": "Diorite Variant 26 Wall",
+
+  "block.agotmod.diorite_27_block": "Diorite Variant 27 Block",
+  "block.agotmod.diorite_27_stairs": "Diorite Variant 27 Stairs",
+  "block.agotmod.diorite_27_slab": "Diorite Variant 27 Slab",
+  "block.agotmod.diorite_27_wall": "Diorite Variant 27 Wall",
+
+  "block.agotmod.diorite_28_block": "Diorite Variant 28 Block",
+  "block.agotmod.diorite_28_stairs": "Diorite Variant 28 Stairs",
+  "block.agotmod.diorite_28_slab": "Diorite Variant 28 Slab",
+  "block.agotmod.diorite_28_wall": "Diorite Variant 28 Wall",
+
+  "block.agotmod.diorite_29_block": "Diorite Variant 29 Block",
+  "block.agotmod.diorite_29_stairs": "Diorite Variant 29 Stairs",
+  "block.agotmod.diorite_29_slab": "Diorite Variant 29 Slab",
+  "block.agotmod.diorite_29_wall": "Diorite Variant 29 Wall",
+
+  "block.agotmod.diorite_30_block": "Diorite Variant 30 Block",
+  "block.agotmod.diorite_30_stairs": "Diorite Variant 30 Stairs",
+  "block.agotmod.diorite_30_slab": "Diorite Variant 30 Slab",
+  "block.agotmod.diorite_30_wall": "Diorite Variant 30 Wall",
+
+  "block.agotmod.diorite_31_block": "Diorite Variant 31 Block",
+  "block.agotmod.diorite_31_stairs": "Diorite Variant 31 Stairs",
+  "block.agotmod.diorite_31_slab": "Diorite Variant 31 Slab",
+  "block.agotmod.diorite_31_wall": "Diorite Variant 31 Wall",
+
+  "block.agotmod.diorite_32_block": "Diorite Variant 32 Block",
+  "block.agotmod.diorite_32_stairs": "Diorite Variant 32 Stairs",
+  "block.agotmod.diorite_32_slab": "Diorite Variant 32 Slab",
+  "block.agotmod.diorite_32_wall": "Diorite Variant 32 Wall",
+
+  "block.agotmod.diorite_33_block": "Diorite Variant 33 Block",
+  "block.agotmod.diorite_33_stairs": "Diorite Variant 33 Stairs",
+  "block.agotmod.diorite_33_slab": "Diorite Variant 33 Slab",
+  "block.agotmod.diorite_33_wall": "Diorite Variant 33 Wall",
+
+  "block.agotmod.diorite_34_block": "Diorite Variant 34 Block",
+  "block.agotmod.diorite_34_stairs": "Diorite Variant 34 Stairs",
+  "block.agotmod.diorite_34_slab": "Diorite Variant 34 Slab",
+  "block.agotmod.diorite_34_wall": "Diorite Variant 34 Wall",
+
+  "block.agotmod.diorite_35_block": "Diorite Variant 35 Block",
+  "block.agotmod.diorite_35_stairs": "Diorite Variant 35 Stairs",
+  "block.agotmod.diorite_35_slab": "Diorite Variant 35 Slab",
+  "block.agotmod.diorite_35_wall": "Diorite Variant 35 Wall",
+
+  "block.agotmod.diorite_36_block": "Diorite Variant 36 Block",
+  "block.agotmod.diorite_36_stairs": "Diorite Variant 36 Stairs",
+  "block.agotmod.diorite_36_slab": "Diorite Variant 36 Slab",
+  "block.agotmod.diorite_36_wall": "Diorite Variant 36 Wall",
+
+  "block.agotmod.diorite_37_block": "Diorite Variant 37 Block",
+  "block.agotmod.diorite_37_stairs": "Diorite Variant 37 Stairs",
+  "block.agotmod.diorite_37_slab": "Diorite Variant 37 Slab",
+  "block.agotmod.diorite_37_wall": "Diorite Variant 37 Wall",
+
+  "block.agotmod.diorite_38_block": "Diorite Variant 38 Block",
+  "block.agotmod.diorite_38_stairs": "Diorite Variant 38 Stairs",
+  "block.agotmod.diorite_38_slab": "Diorite Variant 38 Slab",
+  "block.agotmod.diorite_38_wall": "Diorite Variant 38 Wall",
+
+  "block.agotmod.tuff_brick_1_block": "Tuff Variant 1 Block",
+  "block.agotmod.tuff_brick_1_stairs": "Tuff Variant 1 Stairs",
+  "block.agotmod.tuff_brick_1_slab": "Tuff Variant 1 Slab",
+  "block.agotmod.tuff_brick_1_wall": "Tuff Variant 1 Wall",
+
+  "block.agotmod.tuff_brick_2_block": "Tuff Variant 2 Block",
+  "block.agotmod.tuff_brick_2_stairs": "Tuff Variant 2 Stairs",
+  "block.agotmod.tuff_brick_2_slab": "Tuff Variant 2 Slab",
+  "block.agotmod.tuff_brick_2_wall": "Tuff Variant 2 Wall",
+
+  "block.agotmod.tuff_brick_3_block": "Tuff Variant 3 Block",
+  "block.agotmod.tuff_brick_3_stairs": "Tuff Variant 3 Stairs",
+  "block.agotmod.tuff_brick_3_slab": "Tuff Variant 3 Slab",
+  "block.agotmod.tuff_brick_3_wall": "Tuff Variant 3 Wall",
+
+  "block.agotmod.tuff_brick_4_block": "Tuff Variant 4 Block",
+  "block.agotmod.tuff_brick_4_stairs": "Tuff Variant 4 Stairs",
+  "block.agotmod.tuff_brick_4_slab": "Tuff Variant 4 Slab",
+  "block.agotmod.tuff_brick_4_wall": "Tuff Variant 4 Wall",
+
+  "block.agotmod.tuff_brick_5_block": "Tuff Variant 5 Block",
+  "block.agotmod.tuff_brick_5_stairs": "Tuff Variant 5 Stairs",
+  "block.agotmod.tuff_brick_5_slab": "Tuff Variant 5 Slab",
+  "block.agotmod.tuff_brick_5_wall": "Tuff Variant 5 Wall",
+
+  "block.agotmod.tuff_brick_6_block": "Tuff Variant 6 Block",
+  "block.agotmod.tuff_brick_6_stairs": "Tuff Variant 6 Stairs",
+  "block.agotmod.tuff_brick_6_slab": "Tuff Variant 6 Slab",
+  "block.agotmod.tuff_brick_6_wall": "Tuff Variant 6 Wall",
+
+  "block.agotmod.tuff_brick_7_block": "Tuff Variant 7 Block",
+  "block.agotmod.tuff_brick_7_stairs": "Tuff Variant 7 Stairs",
+  "block.agotmod.tuff_brick_7_slab": "Tuff Variant 7 Slab",
+  "block.agotmod.tuff_brick_7_wall": "Tuff Variant 7 Wall",
+
+  "block.agotmod.tuff_brick_8_block": "Tuff Variant 8 Block",
+  "block.agotmod.tuff_brick_8_stairs": "Tuff Variant 8 Stairs",
+  "block.agotmod.tuff_brick_8_slab": "Tuff Variant 8 Slab",
+  "block.agotmod.tuff_brick_8_wall": "Tuff Variant 8 Wall",
+
+  "block.agotmod.tuff_brick_9_block": "Tuff Variant 9 Block",
+  "block.agotmod.tuff_brick_9_stairs": "Tuff Variant 9 Stairs",
+  "block.agotmod.tuff_brick_9_slab": "Tuff Variant 9 Slab",
+  "block.agotmod.tuff_brick_9_wall": "Tuff Variant 9 Wall",
+
+  "block.agotmod.tuff_brick_10_block": "Tuff Variant 10 Block",
+  "block.agotmod.tuff_brick_10_stairs": "Tuff Variant 10 Stairs",
+  "block.agotmod.tuff_brick_10_slab": "Tuff Variant 10 Slab",
+  "block.agotmod.tuff_brick_10_wall": "Tuff Variant 10 Wall",
+
+  "block.agotmod.tuff_brick_11_block": "Tuff Variant 11 Block",
+  "block.agotmod.tuff_brick_11_stairs": "Tuff Variant 11 Stairs",
+  "block.agotmod.tuff_brick_11_slab": "Tuff Variant 11 Slab",
+  "block.agotmod.tuff_brick_11_wall": "Tuff Variant 11 Wall",
+
+  "block.agotmod.tuff_brick_12_block": "Tuff Variant 12 Block",
+  "block.agotmod.tuff_brick_12_stairs": "Tuff Variant 12 Stairs",
+  "block.agotmod.tuff_brick_12_slab": "Tuff Variant 12 Slab",
+  "block.agotmod.tuff_brick_12_wall": "Tuff Variant 12 Wall",
+
+  "block.agotmod.tuff_brick_13_block": "Tuff Variant 13 Block",
+  "block.agotmod.tuff_brick_13_stairs": "Tuff Variant 13 Stairs",
+  "block.agotmod.tuff_brick_13_slab": "Tuff Variant 13 Slab",
+  "block.agotmod.tuff_brick_13_wall": "Tuff Variant 13 Wall",
+
+  "block.agotmod.tuff_brick_14_block": "Tuff Variant 14 Block",
+  "block.agotmod.tuff_brick_14_stairs": "Tuff Variant 14 Stairs",
+  "block.agotmod.tuff_brick_14_slab": "Tuff Variant 14 Slab",
+  "block.agotmod.tuff_brick_14_wall": "Tuff Variant 14 Wall",
+
+  "block.agotmod.tuff_brick_15_block": "Tuff Variant 15 Block",
+  "block.agotmod.tuff_brick_15_stairs": "Tuff Variant 15 Stairs",
+  "block.agotmod.tuff_brick_15_slab": "Tuff Variant 15 Slab",
+  "block.agotmod.tuff_brick_15_wall": "Tuff Variant 15 Wall",
+
+  "block.agotmod.tuff_brick_16_block": "Tuff Variant 16 Block",
+  "block.agotmod.tuff_brick_16_stairs": "Tuff Variant 16 Stairs",
+  "block.agotmod.tuff_brick_16_slab": "Tuff Variant 16 Slab",
+  "block.agotmod.tuff_brick_16_wall": "Tuff Variant 16 Wall",
+
+  "block.agotmod.tuff_brick_17_block": "Tuff Variant 17 Block",
+  "block.agotmod.tuff_brick_17_stairs": "Tuff Variant 17 Stairs",
+  "block.agotmod.tuff_brick_17_slab": "Tuff Variant 17 Slab",
+  "block.agotmod.tuff_brick_17_wall": "Tuff Variant 17 Wall",
+
+  "block.agotmod.tuff_brick_18_block": "Tuff Variant 18 Block",
+  "block.agotmod.tuff_brick_18_stairs": "Tuff Variant 18 Stairs",
+  "block.agotmod.tuff_brick_18_slab": "Tuff Variant 18 Slab",
+  "block.agotmod.tuff_brick_18_wall": "Tuff Variant 18 Wall",
+
+  "block.agotmod.tuff_brick_19_block": "Tuff Variant 19 Block",
+  "block.agotmod.tuff_brick_19_stairs": "Tuff Variant 19 Stairs",
+  "block.agotmod.tuff_brick_19_slab": "Tuff Variant 19 Slab",
+  "block.agotmod.tuff_brick_19_wall": "Tuff Variant 19 Wall",
+
+  "block.agotmod.tuff_brick_20_block": "Tuff Variant 20 Block",
+  "block.agotmod.tuff_brick_20_stairs": "Tuff Variant 20 Stairs",
+  "block.agotmod.tuff_brick_20_slab": "Tuff Variant 20 Slab",
+  "block.agotmod.tuff_brick_20_wall": "Tuff Variant 20 Wall",
+
+  "block.agotmod.tuff_brick_21_block": "Tuff Variant 21 Block",
+  "block.agotmod.tuff_brick_21_stairs": "Tuff Variant 21 Stairs",
+  "block.agotmod.tuff_brick_21_slab": "Tuff Variant 21 Slab",
+  "block.agotmod.tuff_brick_21_wall": "Tuff Variant 21 Wall",
+
+  "block.agotmod.tuff_brick_22_block": "Tuff Variant 22 Block",
+  "block.agotmod.tuff_brick_22_stairs": "Tuff Variant 22 Stairs",
+  "block.agotmod.tuff_brick_22_slab": "Tuff Variant 22 Slab",
+  "block.agotmod.tuff_brick_22_wall": "Tuff Variant 22 Wall",
+
+  "block.agotmod.tuff_brick_23_block": "Tuff Variant 23 Block",
+  "block.agotmod.tuff_brick_23_stairs": "Tuff Variant 23 Stairs",
+  "block.agotmod.tuff_brick_23_slab": "Tuff Variant 23 Slab",
+  "block.agotmod.tuff_brick_23_wall": "Tuff Variant 23 Wall",
+
+  "block.agotmod.tuff_brick_24_block": "Tuff Variant 24 Block",
+  "block.agotmod.tuff_brick_24_stairs": "Tuff Variant 24 Stairs",
+  "block.agotmod.tuff_brick_24_slab": "Tuff Variant 24 Slab",
+  "block.agotmod.tuff_brick_24_wall": "Tuff Variant 24 Wall",
+
+  "block.agotmod.tuff_brick_25_block": "Tuff Variant 25 Block",
+  "block.agotmod.tuff_brick_25_stairs": "Tuff Variant 25 Stairs",
+  "block.agotmod.tuff_brick_25_slab": "Tuff Variant 25 Slab",
+  "block.agotmod.tuff_brick_25_wall": "Tuff Variant 25 Wall",
+
+  "block.agotmod.tuff_brick_26_block": "Tuff Variant 26 Block",
+  "block.agotmod.tuff_brick_26_stairs": "Tuff Variant 26 Stairs",
+  "block.agotmod.tuff_brick_26_slab": "Tuff Variant 26 Slab",
+  "block.agotmod.tuff_brick_26_wall": "Tuff Variant 26 Wall",
+
+  "block.agotmod.tuff_brick_27_block": "Tuff Variant 27 Block",
+  "block.agotmod.tuff_brick_27_stairs": "Tuff Variant 27 Stairs",
+  "block.agotmod.tuff_brick_27_slab": "Tuff Variant 27 Slab",
+  "block.agotmod.tuff_brick_27_wall": "Tuff Variant 27 Wall",
+
+  "block.agotmod.tuff_brick_28_block": "Tuff Variant 28 Block",
+  "block.agotmod.tuff_brick_28_stairs": "Tuff Variant 28 Stairs",
+  "block.agotmod.tuff_brick_28_slab": "Tuff Variant 28 Slab",
+  "block.agotmod.tuff_brick_28_wall": "Tuff Variant 28 Wall",
+
+  "block.agotmod.tuff_brick_29_block": "Tuff Variant 29 Block",
+  "block.agotmod.tuff_brick_29_stairs": "Tuff Variant 29 Stairs",
+  "block.agotmod.tuff_brick_29_slab": "Tuff Variant 29 Slab",
+  "block.agotmod.tuff_brick_29_wall": "Tuff Variant 29 Wall",
+
+  "block.agotmod.tuff_brick_30_block": "Tuff Variant 30 Block",
+  "block.agotmod.tuff_brick_30_stairs": "Tuff Variant 30 Stairs",
+  "block.agotmod.tuff_brick_30_slab": "Tuff Variant 30 Slab",
+  "block.agotmod.tuff_brick_30_wall": "Tuff Variant 30 Wall",
+
+  "block.agotmod.tuff_brick_31_block": "Tuff Variant 31 Block",
+  "block.agotmod.tuff_brick_31_stairs": "Tuff Variant 31 Stairs",
+  "block.agotmod.tuff_brick_31_slab": "Tuff Variant 31 Slab",
+  "block.agotmod.tuff_brick_31_wall": "Tuff Variant 31 Wall",
+
+  "block.agotmod.tuff_brick_32_block": "Tuff Variant 32 Block",
+  "block.agotmod.tuff_brick_32_stairs": "Tuff Variant 32 Stairs",
+  "block.agotmod.tuff_brick_32_slab": "Tuff Variant 32 Slab",
+  "block.agotmod.tuff_brick_32_wall": "Tuff Variant 32 Wall",
+
+  "block.agotmod.tuff_brick_33_block": "Tuff Variant 33 Block",
+  "block.agotmod.tuff_brick_33_stairs": "Tuff Variant 33 Stairs",
+  "block.agotmod.tuff_brick_33_slab": "Tuff Variant 33 Slab",
+  "block.agotmod.tuff_brick_33_wall": "Tuff Variant 33 Wall",
+
+  "block.agotmod.tuff_brick_34_block": "Tuff Variant 34 Block",
+  "block.agotmod.tuff_brick_34_stairs": "Tuff Variant 34 Stairs",
+  "block.agotmod.tuff_brick_34_slab": "Tuff Variant 34 Slab",
+  "block.agotmod.tuff_brick_34_wall": "Tuff Variant 34 Wall",
+
+  "block.agotmod.tuff_brick_35_block": "Tuff Variant 35 Block",
+  "block.agotmod.tuff_brick_35_stairs": "Tuff Variant 35 Stairs",
+  "block.agotmod.tuff_brick_35_slab": "Tuff Variant 35 Slab",
+  "block.agotmod.tuff_brick_35_wall": "Tuff Variant 35 Wall",
+
+  "block.agotmod.tuff_brick_36_block": "Tuff Variant 36 Block",
+  "block.agotmod.tuff_brick_36_stairs": "Tuff Variant 36 Stairs",
+  "block.agotmod.tuff_brick_36_slab": "Tuff Variant 36 Slab",
+  "block.agotmod.tuff_brick_36_wall": "Tuff Variant 36 Wall",
+
+  "block.agotmod.tuff_brick_37_block": "Tuff Variant 37 Block",
+  "block.agotmod.tuff_brick_37_stairs": "Tuff Variant 37 Stairs",
+  "block.agotmod.tuff_brick_37_slab": "Tuff Variant 37 Slab",
+  "block.agotmod.tuff_brick_37_wall": "Tuff Variant 37 Wall",
+
+  "block.agotmod.tuff_brick_38_block": "Tuff Variant 38 Block",
+  "block.agotmod.tuff_brick_38_stairs": "Tuff Variant 38 Stairs",
+  "block.agotmod.tuff_brick_38_slab": "Tuff Variant 38 Slab",
+  "block.agotmod.tuff_brick_38_wall": "Tuff Variant 38 Wall",
+
   "block.agotmod.quartz_1_block": "Quartz Variant 1 Block",
   "block.agotmod.quartz_1_stairs": "Quartz Variant 1 Stairs",
   "block.agotmod.quartz_1_slab": "Quartz Variant 1 Slab",

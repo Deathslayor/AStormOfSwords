@@ -30,6 +30,7 @@ import net.darkflameproduction.agotmod.armor.custom.thenn.ThennPlateArmorItem;
 import net.darkflameproduction.agotmod.armor.custom.wildling.WildlingChiefArmorItem;
 import net.darkflameproduction.agotmod.armor.custom.wildling.WildlingFurArmorItem;
 import net.darkflameproduction.agotmod.armor.custom.wildling.WildlingLeatherArmorItem;
+import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.neoforged.bus.api.IEventBus;
@@ -562,7 +563,7 @@ public class ModItems {
     public static final DeferredItem<Item> COOKED_SAUSAGE = ITEMS.registerItem("cooked_sausage",
             properties -> new Item(properties.food(ModFoods.COOKED_BEAR_MEAT)));
     public static final DeferredItem<Item> RAW_WHITE_SAUSAGE = ITEMS.registerItem("raw_white_sausage",
-            properties -> new Item(properties.food(ModFoods.RAW_WHITE_SAUSAGE, ModConsumables.RAW_WHITE_SAUSAGE)));
+            properties -> new Item(properties.food(Foods.HONEY_BOTTLE, ModConsumables.RAW_WHITE_SAUSAGE)));
     public static final DeferredItem<Item> RAW_BLOOD_SAUSAGE = ITEMS.registerItem("raw_blood_sausage",
             properties -> new Item(properties.food(ModFoods.RAW_BLOOD_SAUSAGE, ModConsumables.RAW_BLOOD_SAUSAGE)));
     public static final DeferredItem<Item> RAW_SAUSAGE = ITEMS.registerItem("raw_sausage",

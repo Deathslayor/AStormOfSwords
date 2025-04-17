@@ -10,12 +10,7 @@ import net.darkflameproduction.agotmod.item.creativetabs.*;
 import net.darkflameproduction.agotmod.sound.ModSounds;
 import net.darkflameproduction.agotmod.villager.ModVillagers;
 import net.darkflameproduction.agotmod.worldgen.biome.ModTerrablender;
-import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.FlowerPotBlock;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -29,18 +24,17 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.tags.TagKey;
-
-import static net.darkflameproduction.agotmod.block.ModBLocks.WEIRWOOD_LOG;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(AGoTMod.MOD_ID)
 public class AGoTMod {
     // Define mod id in a common place for everything to reference
     public static final String MOD_ID = "agotmod";
+
+    // Add a logger for the mod
+    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     // Constructor for AGoTMod class
     public AGoTMod(IEventBus modEventBus) {
@@ -57,6 +51,8 @@ public class AGoTMod {
         ModCreativeAnimals.register(modEventBus);
         ModCreativeMagic.register(modEventBus);
         ModCreativeArchery.register(modEventBus);
+
+        // Register The Wall line generator
 
         // Adds Sounds to the game
         ModSounds.register(modEventBus);
@@ -83,6 +79,8 @@ public class AGoTMod {
 
         // Register Biomes
         ModTerrablender.registerBiomes();
+
+        LOGGER.info("AGOT Mod initialized");
     }
 
     // Common setup method

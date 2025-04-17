@@ -272,10 +272,10 @@ public class ModCreativeBuildingBlocks {
                         }
 
                         for (int i = 1; i <= 38; i++) {
-                            // Skip variants 7, 9, and 15
-                            if (i == 7 || i == 9 || i == 15) continue;
+                            // Skip variants 10, 15, 20, and 21
+                            if (i == 10 || i == 15 || i == 20 || i == 21) continue;
 
-                            ModBLocks.BlockSet blockSet = ModBLocks.MUD_BRICK_VARIANTS.get(i);
+                            ModBLocks.BlockSet blockSet = ModBLocks.TUFF_VARIANTS.get(i);
                             if (blockSet != null) {
                                 pOutput.accept(blockSet.base().get());
                                 pOutput.accept(blockSet.stairs().get());
@@ -284,12 +284,11 @@ public class ModCreativeBuildingBlocks {
                             }
                         }
 
-
                         for (int i = 1; i <= 38; i++) {
                             // Skip variants 15 and 22 as they're commented out in your original code
-                            if (i == 15 || i == 22 || i == 31) continue;
+                            if (i == 4 || i == 15 || i == 19) continue;
 
-                            ModBLocks.BlockSet blockSet = ModBLocks.BLACKSTONE_VARIANTS.get(i);
+                            ModBLocks.BlockSet blockSet = ModBLocks.CDEEPSLATE_VARIANTS.get(i);
                             if (blockSet != null) {
                                 pOutput.accept(blockSet.base().get());
                                 pOutput.accept(blockSet.stairs().get());
@@ -311,11 +310,27 @@ public class ModCreativeBuildingBlocks {
                             }
                         }
 
+
+
+
                         for (int i = 1; i <= 38; i++) {
                             // Skip variants 15 and 22 as they're commented out in your original code
-                            if (i == 4 || i == 15 || i == 19) continue;
+                            if (i == 15 || i == 22 || i == 31) continue;
 
-                            ModBLocks.BlockSet blockSet = ModBLocks.CDEEPSLATE_VARIANTS.get(i);
+                            ModBLocks.BlockSet blockSet = ModBLocks.BLACKSTONE_VARIANTS.get(i);
+                            if (blockSet != null) {
+                                pOutput.accept(blockSet.base().get());
+                                pOutput.accept(blockSet.stairs().get());
+                                pOutput.accept(blockSet.slab().get());
+                                pOutput.accept(blockSet.wall().get());
+                            }
+                        }
+
+                        for (int i = 1; i <= 38; i++) {
+                            // Skip variants 15 and 22 as they're commented out in your original code
+                            if (i == 15) continue;
+
+                            ModBLocks.BlockSet blockSet = ModBLocks.DIORITE_VARIANTS.get(i);
                             if (blockSet != null) {
                                 pOutput.accept(blockSet.base().get());
                                 pOutput.accept(blockSet.stairs().get());
@@ -342,6 +357,19 @@ public class ModCreativeBuildingBlocks {
                             if (i == 14 || i == 15) continue;
 
                             ModBLocks.BlockSet blockSet = ModBLocks.QUARTZ_VARIANTS.get(i);
+                            if (blockSet != null) {
+                                pOutput.accept(blockSet.base().get());
+                                pOutput.accept(blockSet.stairs().get());
+                                pOutput.accept(blockSet.slab().get());
+                                pOutput.accept(blockSet.wall().get());
+                            }
+                        }
+
+                        for (int i = 1; i <= 38; i++) {
+                            // Skip variants 15 and 22 as they're commented out in your original code
+                            if (i == 15 || i == 35) continue;
+
+                            ModBLocks.BlockSet blockSet = ModBLocks.BONE_VARIANTS.get(i);
                             if (blockSet != null) {
                                 pOutput.accept(blockSet.base().get());
                                 pOutput.accept(blockSet.stairs().get());
@@ -395,6 +423,19 @@ public class ModCreativeBuildingBlocks {
                         }
 
                         for (int i = 1; i <= 38; i++) {
+                            // Skip variants 7, 9, and 15
+                            if (i == 7 || i == 9 || i == 15) continue;
+
+                            ModBLocks.BlockSet blockSet = ModBLocks.MUD_BRICK_VARIANTS.get(i);
+                            if (blockSet != null) {
+                                pOutput.accept(blockSet.base().get());
+                                pOutput.accept(blockSet.stairs().get());
+                                pOutput.accept(blockSet.slab().get());
+                                pOutput.accept(blockSet.wall().get());
+                            }
+                        }
+
+                        for (int i = 1; i <= 38; i++) {
                             // Skip variants 15 and 22 as they're commented out in your original code
                             if (i == 15 || i == 16 || i == 17 || i == 18) continue;
 
@@ -412,21 +453,6 @@ public class ModCreativeBuildingBlocks {
                             if (i == 15 || i == 16 || i == 17 || i == 18) continue;
 
                             ModBLocks.BlockSet blockSet = ModBLocks.RSANDSTONE_VARIANTS.get(i);
-                            if (blockSet != null) {
-                                pOutput.accept(blockSet.base().get());
-                                pOutput.accept(blockSet.stairs().get());
-                                pOutput.accept(blockSet.slab().get());
-                                pOutput.accept(blockSet.wall().get());
-                            }
-                        }
-
-
-
-                        for (int i = 1; i <= 38; i++) {
-                            // Skip variants 15 and 22 as they're commented out in your original code
-                            if (i == 15 || i == 35) continue;
-
-                            ModBLocks.BlockSet blockSet = ModBLocks.BONE_VARIANTS.get(i);
                             if (blockSet != null) {
                                 pOutput.accept(blockSet.base().get());
                                 pOutput.accept(blockSet.stairs().get());

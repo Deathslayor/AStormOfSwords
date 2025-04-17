@@ -92,6 +92,12 @@ public class ModBLocks {
                     .boxed()
                     .collect(Collectors.toList())
     );
+    public static final List<Integer> VALID_TUFF_INDICES = new ArrayList<>(
+            IntStream.rangeClosed(1, 38)
+                    .filter(i -> i != 10 && i != 15 && i != 20 && i != 21)
+                    .boxed()
+                    .collect(Collectors.toList())
+    );
     public static final List<Integer> VALID_BRICKS_INDICES = new ArrayList<>(
             IntStream.rangeClosed(1, 38)
                     .filter(i -> i != 2 && i != 15)
@@ -99,6 +105,13 @@ public class ModBLocks {
                     .collect(Collectors.toList())
     );
     public static final List<Integer> VALID_CALCITE_INDICES = new ArrayList<>(
+            IntStream.rangeClosed(1, 38)
+                    .filter(i -> i != 15)
+                    .boxed()
+                    .collect(Collectors.toList())
+    );
+
+    public static final List<Integer> VALID_DIORITE_INDICES = new ArrayList<>(
             IntStream.rangeClosed(1, 38)
                     .filter(i -> i != 15)
                     .boxed()
@@ -213,6 +226,10 @@ public class ModBLocks {
     public static final Map<Integer, BlockSet> MUD_BRICK_VARIANTS = new HashMap<>();
     public static final Map<Integer, BlockSet> ANDESITE_VARIANTS = new HashMap<>();
     public static final Map<Integer, BlockSet> QUARTZ_VARIANTS = new HashMap<>();
+    public static final Map<Integer, BlockSet> DIORITE_VARIANTS = new HashMap<>();
+    public static final Map<Integer, BlockSet> TUFF_VARIANTS = new HashMap<>();
+
+
 
 
     private static <T extends Block> @NotNull DeferredBlock<T> registerBlock(String name, Function<BlockBehaviour.Properties, T> block, BlockBehaviour.Properties properties) {
@@ -254,6 +271,69 @@ public class ModBLocks {
             }
         }
     }
+
+    private static void registerTuffVariants() {
+        BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(Blocks.TUFF).strength(3f);
+
+        for (int i : VALID_TUFF_INDICES) {
+            String baseName = "tuff_brick_" + i;
+
+            // Resource-safe lowercase names
+            String blockName = baseName + "_block";
+            String stairsName = baseName + "_stairs";
+            String slabName = baseName + "_slab";
+            String wallName = baseName + "_wall";
+
+            DeferredBlock<Block> base = registerBlock(blockName, Block::new, properties);
+            DeferredBlock<Block> stairs = registerBlock(stairsName, p -> new StairBlock(base.get().defaultBlockState(), p), properties);
+            DeferredBlock<Block> slab = registerBlock(slabName, SlabBlock::new, properties);
+            DeferredBlock<Block> wall = registerBlock(wallName, WallBlock::new, properties);
+
+            TUFF_VARIANTS.put(i, new BlockSet(base, stairs, slab, wall));
+
+            System.out.println("✅ Registered: " + baseName);
+        }
+
+        // Optional sanity check
+        for (int i = 1; i <= 38; i++) {
+            if (!TUFF_VARIANTS.containsKey(i)) {
+                System.err.println("⚠ Skipped tuff variant: tuff_" + i);
+            }
+        }
+    }
+
+
+    private static void registerDioriteVariants() {
+        BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(Blocks.DIORITE).strength(3f);
+
+        for (int i : VALID_DIORITE_INDICES) {
+            String baseName = "diorite_" + i;
+
+            // Resource-safe lowercase names
+            String blockName = baseName + "_block";
+            String stairsName = baseName + "_stairs";
+            String slabName = baseName + "_slab";
+            String wallName = baseName + "_wall";
+
+            DeferredBlock<Block> base = registerBlock(blockName, Block::new, properties);
+            DeferredBlock<Block> stairs = registerBlock(stairsName, p -> new StairBlock(base.get().defaultBlockState(), p), properties);
+            DeferredBlock<Block> slab = registerBlock(slabName, SlabBlock::new, properties);
+            DeferredBlock<Block> wall = registerBlock(wallName, WallBlock::new, properties);
+
+            DIORITE_VARIANTS.put(i, new BlockSet(base, stairs, slab, wall));
+
+            System.out.println("✅ Registered: " + baseName);
+        }
+
+        // Optional sanity check
+        for (int i = 1; i <= 38; i++) {
+            if (!DIORITE_VARIANTS.containsKey(i)) {
+                System.err.println("⚠ Skipped diorite variant: diorite_" + i);
+            }
+        }
+    }
+
+
     private static void registerQuartzVariants() {
         BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(Blocks.QUARTZ_BLOCK).strength(3f);
 
@@ -767,6 +847,9 @@ public class ModBLocks {
         registerMudBrickVariants();
         registerAndesiteVariants();
         registerQuartzVariants();
+        registerDioriteVariants();
+        registerTuffVariants();
+
     }
 
 

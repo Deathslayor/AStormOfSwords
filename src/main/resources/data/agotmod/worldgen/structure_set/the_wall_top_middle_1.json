@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "agotmod:the_wall_top_middle_1",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 80,
+    "separation": 40,
+    "salt": 12345678
+  }
+}

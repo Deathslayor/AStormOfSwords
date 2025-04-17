@@ -636,11 +636,10 @@ public class ModplacedFeatures {
         register(context, GRASS_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.GRASS_KEY),
                 List.of(
-                        // Increase base count significantly
-                        CountPlacement.of(20),
-                        // Reduce noise influence and increase density
-                        NoiseBasedCountPlacement.of(8, 0.5, 0.0), // Lower variance, higher minimum
-                        // Use tighter spacing
+                        // Reduce base count by 50%
+                        CountPlacement.of(10),
+                        // Keep noise parameters similar but slightly reduced
+                        NoiseBasedCountPlacement.of(4, 0.5, 0.0),
                         InSquarePlacement.spread(),
                         // Keep height range the same
                         HeightRangePlacement.uniform(VerticalAnchor.absolute(65), VerticalAnchor.top()),
@@ -651,11 +650,10 @@ public class ModplacedFeatures {
         register(context, TALL_GRASS_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.TALL_GRASS_KEY),
                 List.of(
-                        // Increase base count for tall grass
-                        CountPlacement.of(4),
-                        // More uniform distribution with less noise influence
-                        NoiseBasedCountPlacement.of(6, 0.3, 0.0),
-                        // Use tighter spacing
+                        // Reduce base count by 50%
+                        CountPlacement.of(2),
+                        // Reduce noise count by 50%
+                        NoiseBasedCountPlacement.of(3, 0.3, 0.0),
                         InSquarePlacement.spread(),
                         // Keep height range the same
                         HeightRangePlacement.uniform(VerticalAnchor.absolute(65), VerticalAnchor.top()),

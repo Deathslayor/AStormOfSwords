@@ -837,6 +837,99 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         this.tag(BlockTags.WALLS).add(
                 IntStream.rangeClosed(1, 38)
                         .filter(i -> i != 15)
+                        .mapToObj(i -> ModBLocks.DIORITE_VARIANTS.get(i).wall().get())
+                        .toArray(Block[]::new)
+        );
+
+        this.tag(BlockTags.SLABS).add(
+                IntStream.rangeClosed(1, 38)
+                        .filter(i -> i != 15)
+                        .mapToObj(i -> ModBLocks.DIORITE_VARIANTS.get(i).slab().get())
+                        .toArray(Block[]::new)
+        );
+
+        this.tag(BlockTags.STAIRS).add(
+                IntStream.rangeClosed(1, 38)
+                        .filter(i -> i != 15)
+                        .mapToObj(i -> ModBLocks.DIORITE_VARIANTS.get(i).stairs().get())
+                        .toArray(Block[]::new)
+        );
+
+        this.tag(BlockTags.STONE_BRICKS).add(
+                IntStream.rangeClosed(1, 38)
+                        .filter(i -> i != 15)
+                        .mapToObj(i -> ModBLocks.DIORITE_VARIANTS.get(i).base().get())
+                        .toArray(Block[]::new)
+        );
+
+// Registering Base Blocks for NEEDS_STONE_TOOL
+        this.tag(BlockTags.NEEDS_STONE_TOOL).add(
+                IntStream.rangeClosed(1, 38)
+                        .filter(i -> i != 15)
+                        .mapToObj(i -> ModBLocks.DIORITE_VARIANTS.get(i).base().get())
+                        .toArray(Block[]::new)
+        );
+
+// Registering Stair Blocks for NEEDS_STONE_TOOL
+        this.tag(BlockTags.NEEDS_STONE_TOOL).add(
+                IntStream.rangeClosed(1, 38)
+                        .filter(i -> i != 15)
+                        .mapToObj(i -> ModBLocks.DIORITE_VARIANTS.get(i).stairs().get())
+                        .toArray(Block[]::new)
+        );
+
+// Registering Slab Blocks for NEEDS_STONE_TOOL
+        this.tag(BlockTags.NEEDS_STONE_TOOL).add(
+                IntStream.rangeClosed(1, 38)
+                        .filter(i -> i != 15)
+                        .mapToObj(i -> ModBLocks.DIORITE_VARIANTS.get(i).slab().get())
+                        .toArray(Block[]::new)
+        );
+
+// Registering Wall Blocks for NEEDS_STONE_TOOL
+        this.tag(BlockTags.NEEDS_STONE_TOOL).add(
+                IntStream.rangeClosed(1, 38)
+                        .filter(i -> i != 15)
+                        .mapToObj(i -> ModBLocks.DIORITE_VARIANTS.get(i).wall().get())
+                        .toArray(Block[]::new)
+        );
+
+// Registering Base Blocks for MINEABLE_WITH_PICKAXE
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
+                IntStream.rangeClosed(1, 38)
+                        .filter(i -> i != 15)
+                        .mapToObj(i -> ModBLocks.DIORITE_VARIANTS.get(i).base().get())
+                        .toArray(Block[]::new)
+        );
+
+// Registering Stair Blocks for MINEABLE_WITH_PICKAXE
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
+                IntStream.rangeClosed(1, 38)
+                        .filter(i -> i != 15)
+                        .mapToObj(i -> ModBLocks.DIORITE_VARIANTS.get(i).stairs().get())
+                        .toArray(Block[]::new)
+        );
+
+// Registering Slab Blocks for MINEABLE_WITH_PICKAXE
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
+                IntStream.rangeClosed(1, 38)
+                        .filter(i -> i != 15)
+                        .mapToObj(i -> ModBLocks.DIORITE_VARIANTS.get(i).slab().get())
+                        .toArray(Block[]::new)
+        );
+
+// Registering Wall Blocks for MINEABLE_WITH_PICKAXE
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
+                IntStream.rangeClosed(1, 38)
+                        .filter(i -> i != 15)
+                        .mapToObj(i -> ModBLocks.DIORITE_VARIANTS.get(i).wall().get())
+                        .toArray(Block[]::new)
+        );
+
+
+        this.tag(BlockTags.WALLS).add(
+                IntStream.rangeClosed(1, 38)
+                        .filter(i -> i != 15)
                         .mapToObj(i -> ModBLocks.GRANITE_VARIANTS.get(i).wall().get())
                         .toArray(Block[]::new)
         );
@@ -1109,6 +1202,99 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                         .mapToObj(i -> ModBLocks.ANDESITE_VARIANTS.get(i).wall().get())
                         .toArray(Block[]::new)
         );
+
+        this.tag(BlockTags.WALLS).add(
+                IntStream.rangeClosed(1, 38)
+                        .filter(i -> i != 10 && i != 15 && i != 20 && i != 21)
+                        .mapToObj(i -> ModBLocks.TUFF_VARIANTS.get(i).wall().get())
+                        .toArray(Block[]::new)
+        );
+
+        this.tag(BlockTags.SLABS).add(
+                IntStream.rangeClosed(1, 38)
+                        .filter(i -> i != 10 && i != 15 && i != 20 && i != 21)
+                        .mapToObj(i -> ModBLocks.TUFF_VARIANTS.get(i).slab().get())
+                        .toArray(Block[]::new)
+        );
+
+        this.tag(BlockTags.STAIRS).add(
+                IntStream.rangeClosed(1, 38)
+                        .filter(i -> i != 10 && i != 15 && i != 20 && i != 21)
+                        .mapToObj(i -> ModBLocks.TUFF_VARIANTS.get(i).stairs().get())
+                        .toArray(Block[]::new)
+        );
+
+        this.tag(BlockTags.STONE_BRICKS).add(
+                IntStream.rangeClosed(1, 38)
+                        .filter(i -> i != 10 && i != 15 && i != 20 && i != 21)
+                        .mapToObj(i -> ModBLocks.TUFF_VARIANTS.get(i).base().get())
+                        .toArray(Block[]::new)
+        );
+
+// Registering Base Blocks for NEEDS_STONE_TOOL
+        this.tag(BlockTags.NEEDS_STONE_TOOL).add(
+                IntStream.rangeClosed(1, 38)
+                        .filter(i -> i != 10 && i != 15 && i != 20 && i != 21)
+                        .mapToObj(i -> ModBLocks.TUFF_VARIANTS.get(i).base().get())
+                        .toArray(Block[]::new)
+        );
+
+// Registering Stair Blocks for NEEDS_STONE_TOOL
+        this.tag(BlockTags.NEEDS_STONE_TOOL).add(
+                IntStream.rangeClosed(1, 38)
+                        .filter(i -> i != 10 && i != 15 && i != 20 && i != 21)
+                        .mapToObj(i -> ModBLocks.TUFF_VARIANTS.get(i).stairs().get())
+                        .toArray(Block[]::new)
+        );
+
+// Registering Slab Blocks for NEEDS_STONE_TOOL
+        this.tag(BlockTags.NEEDS_STONE_TOOL).add(
+                IntStream.rangeClosed(1, 38)
+                        .filter(i -> i != 10 && i != 15 && i != 20 && i != 21)
+                        .mapToObj(i -> ModBLocks.TUFF_VARIANTS.get(i).slab().get())
+                        .toArray(Block[]::new)
+        );
+
+// Registering Wall Blocks for NEEDS_STONE_TOOL
+        this.tag(BlockTags.NEEDS_STONE_TOOL).add(
+                IntStream.rangeClosed(1, 38)
+                        .filter(i -> i != 10 && i != 15 && i != 20 && i != 21)
+                        .mapToObj(i -> ModBLocks.TUFF_VARIANTS.get(i).wall().get())
+                        .toArray(Block[]::new)
+        );
+
+// Registering Base Blocks for MINEABLE_WITH_PICKAXE
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
+                IntStream.rangeClosed(1, 38)
+                        .filter(i -> i != 10 && i != 15 && i != 20 && i != 21)
+                        .mapToObj(i -> ModBLocks.TUFF_VARIANTS.get(i).base().get())
+                        .toArray(Block[]::new)
+        );
+
+// Registering Stair Blocks for MINEABLE_WITH_PICKAXE
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
+                IntStream.rangeClosed(1, 38)
+                        .filter(i -> i != 10 && i != 15 && i != 20 && i != 21)
+                        .mapToObj(i -> ModBLocks.TUFF_VARIANTS.get(i).stairs().get())
+                        .toArray(Block[]::new)
+        );
+
+// Registering Slab Blocks for MINEABLE_WITH_PICKAXE
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
+                IntStream.rangeClosed(1, 38)
+                        .filter(i -> i != 10 && i != 15 && i != 20 && i != 21)
+                        .mapToObj(i -> ModBLocks.TUFF_VARIANTS.get(i).slab().get())
+                        .toArray(Block[]::new)
+        );
+
+// Registering Wall Blocks for MINEABLE_WITH_PICKAXE
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
+                IntStream.rangeClosed(1, 38)
+                        .filter(i -> i != 10 && i != 15 && i != 20 && i != 21)
+                        .mapToObj(i -> ModBLocks.TUFF_VARIANTS.get(i).wall().get())
+                        .toArray(Block[]::new)
+        );
+
 
         this.tag(BlockTags.WALLS).add(
                 IntStream.rangeClosed(1, 38)

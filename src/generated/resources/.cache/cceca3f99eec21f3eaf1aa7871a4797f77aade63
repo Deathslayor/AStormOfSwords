@@ -1,4 +1,4 @@
-// 1.21.3	2025-04-15T14:19:36.9301127	Tags for minecraft:block mod id agotmod
+// 1.21.3	2025-04-15T14:58:40.2187998	Tags for minecraft:block mod id agotmod
 7ce4ba32d6429dbf27a7ccd68d70690dbe80eb19 data/agotmod/tags/block/incorrect_for_bronze_tool.json
 a249c46329a41538f49a564e1f14338aaf1be5a0 data/agotmod/tags/block/incorrect_for_steel_tool.json
 a5270b76c9036b19927822a14ea7db103ebf5a0d data/agotmod/tags/block/needs_bronze_tool.json
@@ -11,12 +11,12 @@ a2787d1e34eb959461d223ed2e8d1c065d9ed99e data/minecraft/tags/block/incorrect_for
 a2787d1e34eb959461d223ed2e8d1c065d9ed99e data/minecraft/tags/block/incorrect_for_stone_tool.json
 a2787d1e34eb959461d223ed2e8d1c065d9ed99e data/minecraft/tags/block/incorrect_for_wooden_tool.json
 197c7ee870487ad5faa9094cfe2f8a7a0c2f4cb2 data/minecraft/tags/block/logs_that_burn.json
-888b9c8902c4e7df4640e7456aa075def246f052 data/minecraft/tags/block/mineable/pickaxe.json
+7f3ef6ce5557da1c81e1b3dd6ed6b665c1fd9a32 data/minecraft/tags/block/mineable/pickaxe.json
 1c43f2b4ee3c5ddf4800c3cd5c008ad202e2f5c2 data/minecraft/tags/block/mineable/shovel.json
 add20b0e5782888ccfc35ca325ac5a1c2e39f150 data/minecraft/tags/block/needs_iron_tool.json
-85da9419a9c47730a891878231bb44999dc36fa7 data/minecraft/tags/block/needs_stone_tool.json
+51ff5d7394d9c7aa6fac4887199461f1cdd0df85 data/minecraft/tags/block/needs_stone_tool.json
 32459fcf10a6dbbc00ddfb8e7acd44be9de99b50 data/minecraft/tags/block/planks.json
-ae8f3c9dd4dddc4bd105f3284ec776b016699166 data/minecraft/tags/block/slabs.json
-91064acce565de9ab293c954ec672f602a7b5050 data/minecraft/tags/block/stairs.json
-1c7fcdf9f9fb301429851b7e681ec56bfe9151ec data/minecraft/tags/block/stone_bricks.json
-02cb26f99965a5790e6c8f5c2342b07ce35153c2 data/minecraft/tags/block/walls.json
+1ff9aae6061fce587e990e4aaffc5c6155e12556 data/minecraft/tags/block/slabs.json
+55c4496ed7a443a0dd97358f456d9095f9b8a2ea data/minecraft/tags/block/stairs.json
+9b57baf4c55cd54660df395049570d9f2735b14b data/minecraft/tags/block/stone_bricks.json
+bb26c3475d97ac9bbf6c0958154f3ab62fd2d6e9 data/minecraft/tags/block/walls.json

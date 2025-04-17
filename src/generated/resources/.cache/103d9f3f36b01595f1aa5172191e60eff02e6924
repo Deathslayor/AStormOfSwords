@@ -1,4 +1,4 @@
-// 1.21.3	2025-04-14T21:29:12.6526197	Registries
+// 1.21.3	2025-04-16T12:12:27.9972749	Registries
 ffe3d912e363745b0043a61fc7b67f35a53f2228 data/agotmod/neoforge/biome_modifier/add_tin_ore.json
 2cd0b3508ddcea7e502f1cf50b1ab12343351354 data/agotmod/neoforge/biome_modifier/create_weirwood_tree.json
 5aa2b77732199476f156ea62152db7e48cd5fb2a data/agotmod/worldgen/biome/barrowlands.json
@@ -132,7 +132,7 @@ b72c3f981d050fd8e0e7afab26ee177855ab7254 data/agotmod/worldgen/map_based/zones/n
 7d2c9a6dce22b631607c33bd06cebf551b03550f data/agotmod/worldgen/map_based/zones/stony_shores.json
 86b9019e083d9688ca628ace58c59873cf07ba8f data/agotmod/worldgen/map_based/zones/the_neck.json
 021262827a7c5a720e2497850c6ce5e94612b1b3 data/agotmod/worldgen/map_based/zones/the_neck_river.json
-822753b5b96812289e4bd9c0b438ce19340ed223 data/agotmod/worldgen/map_based/zones/the_north.json
+4624417ab4d0e46d76b58b2f6b2370a81d3965d0 data/agotmod/worldgen/map_based/zones/the_north.json
 676044fffb224a8b721075d8621500ed394d7f59 data/agotmod/worldgen/map_based/zones/the_wall.json
 0b2bfa53b6adc404cdedbca7f355386883606464 data/agotmod/worldgen/map_based/zones/valley_of_thenn.json
 ad2ce13d7a9a30d1481f312ae9719413d1836702 data/agotmod/worldgen/map_based/zones/wolfswood.json
@@ -179,7 +179,7 @@ e734315b81044998e1626ec1d4e78305f5dcb44a data/agotmod/worldgen/placed_feature/go
 d65745d5331c5738ff47d955e1243ef3380b41a7 data/agotmod/worldgen/placed_feature/goldenrod.json
 6615527334c7053c906ec6da8b217f28ca7861be data/agotmod/worldgen/placed_feature/gold_ore_placed.json
 4c5b923a306729e03c186e683713d017b3a311bc data/agotmod/worldgen/placed_feature/gorse.json
-b6985503bcb8eab788256834c1838f387a62cd75 data/agotmod/worldgen/placed_feature/grass.json
+efdec9e3ece6d23d2c081ebe44453828633716cd data/agotmod/worldgen/placed_feature/grass.json
 4eab088f0a51acde6db94acc35101dc252425c89 data/agotmod/worldgen/placed_feature/grass_block_patch.json
 44b357a2006b4f2e484f9c6ac2c1a98b8bcb8036 data/agotmod/worldgen/placed_feature/hawthorn.json
 a618be80b5b5b73d319fc32ead45aa943304d362 data/agotmod/worldgen/placed_feature/hawthorn_rare.json
@@ -218,7 +218,7 @@ e619bae61f4c2c207c869ae60b957227f5610f49 data/agotmod/worldgen/placed_feature/se
 9e7bf3801e41892d4a52cb57d009312cf9a8d837 data/agotmod/worldgen/placed_feature/sentinel.json
 43910fe9ee2b66a33eb15a88848f6f24f1ba023f data/agotmod/worldgen/placed_feature/sentinel_rare.json
 43478d64653c3ff2bff18450226e727ef06e4c21 data/agotmod/worldgen/placed_feature/spiceflower.json
-7c269ed6582a62b55684fd37be6e3e07384466f7 data/agotmod/worldgen/placed_feature/tall_grass.json
+15074165d81eab210bed03ab8b945a3414945ec7 data/agotmod/worldgen/placed_feature/tall_grass.json
 e6c61108a3efde96fc8f04ddf22a03a44c77b681 data/agotmod/worldgen/placed_feature/tansy.json
 78463cc0d525c7368556331e9ba05ff8e3cb0872 data/agotmod/worldgen/placed_feature/thistle.json
 275cc96333eb75ada616088d5acc434c48494d65 data/agotmod/worldgen/placed_feature/thorn_bush.json
