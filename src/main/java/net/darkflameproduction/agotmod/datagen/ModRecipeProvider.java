@@ -5,7 +5,6 @@ import net.darkflameproduction.agotmod.item.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
@@ -1363,6 +1362,13 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('S', ModItems.BRONZE_INGOT.get())
                 .unlockedBy(getHasName(ModItems.BRONZE_INGOT.get()), has(ModItems.BRONZE_INGOT.get()))
                 .save(this.output);
+        this.shaped(RecipeCategory.MISC, ModItems.BRONZE_INGOT.get())
+                .pattern("SSS")
+                .pattern("SSS")
+                .pattern("SSS")
+                .define('S', ModItems.BRONZE_NUGGET.get())
+                .unlockedBy(getHasName(ModItems.BRONZE_NUGGET.get()), has(ModItems.BRONZE_NUGGET.get()))
+                .save(this.output, "bronze_from_nuggets");
         this.shapeless(RecipeCategory.MISC, ModItems.BRONZE_INGOT.get(), 9)
                 .requires(ModBLocks.BRONZE_BLOCK.get())
                 .unlockedBy(getHasName(ModBLocks.BRONZE_BLOCK.get()), has(ModBLocks.BRONZE_BLOCK.get()))
@@ -1395,6 +1401,10 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('B', ModItems.BRONZE_INGOT.get())
                 .unlockedBy(getHasName(ModItems.BRONZE_INGOT.get()), has(ModItems.BRONZE_INGOT.get()))
                 .save(this.output);
+        this.shapeless(RecipeCategory.MISC, ModItems.BRONZE_NUGGET.get(), 9)
+                .requires(ModItems.BRONZE_INGOT.get())
+                .unlockedBy(getHasName(ModItems.BRONZE_INGOT.get()), has(ModItems.BRONZE_INGOT.get()))
+                .save(this.output, "nuggets_from_bronze");
         this.shaped(RecipeCategory.TOOLS, ModItems.BRONZE_SHOVEL.get())
                 .pattern("B")
                 .pattern("S")
@@ -3772,7 +3782,124 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .save(this.output, "cooked_white_sausage_with_smoker");
 
 
-        // -------------------------------------------------(FOODS)------------------------------------------------- //
+        // -------------------------------------------------(INGREDIENTS)------------------------------------------------- //
+        this.shaped(RecipeCategory.MISC, ModItems.IRON_CHAIN_LINK.get())
+                .pattern(" H")
+                .pattern(" N")
+                .define('H', ModItems.HAMMER.get()) // Your custom hammer
+                .define('N', Items.IRON_NUGGET)          // Vanilla iron nugget
+                .unlockedBy(getHasName(Items.IRON_NUGGET), has(Items.IRON_NUGGET))
+                .save(this.output, "iron_chain_link_from_nugget_and_hammer");
+        this.shaped(RecipeCategory.MISC, ModItems.IRON_CHAIN.get())
+                .pattern(" L ")
+                .pattern("LHL")
+                .pattern(" L ")
+                .define('L', ModItems.IRON_CHAIN_LINK.get())
+                .define('H', ModItems.HAMMER.get())
+                .unlockedBy(getHasName(ModItems.IRON_CHAIN_LINK.get()), has(ModItems.IRON_CHAIN_LINK.get()))
+                .save(this.output, "iron_chain_from_links");
+        this.shaped(RecipeCategory.MISC, ModItems.BRONZE_CHAIN.get())
+                .pattern(" L ")
+                .pattern("LHL")
+                .pattern(" L ")
+                .define('L', ModItems.BRONZE_CHAIN_LINK.get())
+                .define('H', ModItems.HAMMER.get()) // if bronze uses iron hammer
+                .unlockedBy(getHasName(ModItems.BRONZE_CHAIN_LINK.get()), has(ModItems.BRONZE_CHAIN_LINK.get()))
+                .save(this.output, "bronze_chain_from_links");
+        this.shaped(RecipeCategory.MISC, ModItems.STEEL_CHAIN.get())
+                .pattern(" L ")
+                .pattern("LHL")
+                .pattern(" L ")
+                .define('L', ModItems.STEEL_CHAIN_LINK.get())
+                .define('H', ModItems.HAMMER.get())
+                .unlockedBy(getHasName(ModItems.STEEL_CHAIN_LINK.get()), has(ModItems.STEEL_CHAIN_LINK.get()))
+                .save(this.output, "steel_chain_from_links");
+        this.shaped(RecipeCategory.MISC, ModItems.BRONZE_CHAIN_LINK.get())
+                .pattern(" H")
+                .pattern("N ")
+                .define('H', ModItems.HAMMER.get())
+                .define('N', ModItems.BRONZE_INGOT.get()) // assuming you use ingots instead of nuggets
+                .unlockedBy(getHasName(ModItems.HAMMER.get()), has(ModItems.HAMMER.get()))
+                .save(this.output, "bronze_chain_link");
+        this.shaped(RecipeCategory.MISC, ModItems.STEEL_CHAIN_LINK.get())
+                .pattern(" H")
+                .pattern("N ")
+                .define('H', ModItems.HAMMER.get())
+                .define('N', ModItems.STEEL_NUGGET.get())
+                .unlockedBy(getHasName(ModItems.HAMMER.get()), has(ModItems.HAMMER.get()))
+                .save(this.output, "steel_chain_link");
+        this.shaped(RecipeCategory.MISC, ModItems.IRON_PLATE.get())
+                .pattern("HI")
+                .pattern(" I")
+                .define('H', ModItems.HAMMER.get())
+                .define('I', Items.IRON_INGOT) // vanilla iron ingot
+                .unlockedBy(getHasName(ModItems.HAMMER.get()), has(ModItems.HAMMER.get()))
+                .save(this.output, "iron_plate");
+        this.shaped(RecipeCategory.MISC, ModItems.BRONZE_PLATE.get())
+                .pattern("HB")
+                .pattern(" B")
+                .define('H', ModItems.HAMMER.get())
+                .define('B', ModItems.BRONZE_INGOT.get())
+                .unlockedBy(getHasName(ModItems.HAMMER.get()), has(ModItems.HAMMER.get()))
+                .save(this.output, "bronze_plate");
+        this.shaped(RecipeCategory.MISC, ModItems.STEEL_PLATE.get())
+                .pattern("HS")
+                .pattern(" S")
+                .define('H', ModItems.HAMMER.get())
+                .define('S', ModItems.STEEL_INGOT.get())
+                .unlockedBy(getHasName(ModItems.HAMMER.get()), has(ModItems.HAMMER.get()))
+                .save(this.output, "steel_plate");
+        this.shaped(RecipeCategory.MISC, ModItems.NOBLE_PLATE.get())
+                .pattern(" P ")
+                .pattern("PHP")
+                .pattern(" P ")
+                .define('H', ModItems.HAMMER.get())
+                .define('P', ModItems.STEEL_PLATE.get())
+                .unlockedBy(getHasName(ModItems.HAMMER.get()), has(ModItems.HAMMER.get()))
+                .save(this.output, "noble_plate");
+        this.shaped(RecipeCategory.MISC, ModItems.CLOTH.get())
+                .pattern("W")
+                .pattern("W")
+                .define('W', Items.WHITE_WOOL) // Vanilla white wool
+                .unlockedBy(getHasName(Items.WHITE_WOOL), has(Items.WHITE_WOOL))
+                .save(this.output, "cloth");
+        this.shaped(RecipeCategory.MISC, ModItems.STEEL_HELMET.get())
+                .pattern("XXX")
+                .pattern("X X")
+                .define('X', ModItems.STEEL_INGOT.get())
+                .unlockedBy(getHasName(ModItems.STEEL_INGOT.get()), has(ModItems.STEEL_INGOT.get()))
+                .save(this.output, "steel_helmet");
+        this.shaped(RecipeCategory.MISC, ModItems.STEEL_CHESTPLATE.get())
+                .pattern("X X")
+                .pattern("XXX")
+                .pattern("XXX")
+                .define('X', ModItems.STEEL_INGOT.get())
+                .unlockedBy(getHasName(ModItems.STEEL_INGOT.get()), has(ModItems.STEEL_INGOT.get()))
+                .save(this.output, "steel_chestplate");
+        this.shaped(RecipeCategory.MISC, ModItems.STEEL_LEGGINGS.get())
+                .pattern("XXX")
+                .pattern("X X")
+                .pattern("X X")
+                .define('X', ModItems.STEEL_INGOT.get())
+                .unlockedBy(getHasName(ModItems.STEEL_INGOT.get()), has(ModItems.STEEL_INGOT.get()))
+                .save(this.output, "steel_leggings");
+        this.shaped(RecipeCategory.MISC, ModItems.STEEL_BOOTS.get())
+                .pattern("X X")
+                .pattern("X X")
+                .define('X', ModItems.STEEL_INGOT.get())
+                .unlockedBy(getHasName(ModItems.STEEL_INGOT.get()), has(ModItems.STEEL_INGOT.get()))
+                .save(this.output, "steel_boots");
+        this.shaped(RecipeCategory.MISC, ModItems.UPGRADE_KIT_IRON.get())
+                .pattern(" C ")
+                .pattern("H B H")
+                .pattern(" P C P")
+                .define('H', ModItems.HAMMER.get())
+                .define('B', ModItems.BRONZE_CHAIN.get())  // Assuming 'B' is the item representing the Bundle.
+                .define('C', ModItems.CLOTH.get())
+                .define('P', ModItems.IRON_PLATE.get())
+                .unlockedBy(getHasName(ModItems.HAMMER.get()), has(ModItems.HAMMER.get()))
+                .save(this.output, "iron_upgrade_kit");
+
 
     }
 

@@ -388,6 +388,9 @@ public class ModItems {
     public static final DeferredItem<Item> BRONZE_INGOT = ITEMS.registerItem("bronze_ingot",
             Item::new);
 
+    public static final DeferredItem<Item> BRONZE_NUGGET = ITEMS.registerItem("bronze_nugget",
+            Item::new);
+
     // STEEL INGOT
     public static final DeferredItem<Item> STEEL_INGOT = ITEMS.registerItem("steel_ingot",
             Item::new);
@@ -610,6 +613,33 @@ public class ModItems {
             Item::new);
     public static final DeferredItem<Item> WEIRWOOD_STICK = ITEMS.registerItem("weirwood_stick",
             Item::new);
+    public static final DeferredItem<Item> BRONZE_CHAIN_LINK = ITEMS.registerItem("bronze_chain_link", Item::new);
+    public static final DeferredItem<Item> BRONZE_CHAIN = ITEMS.registerItem("bronze_chain", Item::new);
+    public static final DeferredItem<Item> BRONZE_PLATE = ITEMS.registerItem("bronze_plate", Item::new);
+    public static final DeferredItem<Item> CLOTH = ITEMS.registerItem("cloth", Item::new);
+    public static final DeferredItem<Item> IRON_CHAIN_LINK = ITEMS.registerItem("iron_chain_link", Item::new);
+    public static final DeferredItem<Item> IRON_CHAIN = ITEMS.registerItem("iron_chain", Item::new);
+    public static final DeferredItem<Item> IRON_PLATE = ITEMS.registerItem("iron_plate", Item::new);
+    public static final DeferredItem<Item> NOBLE_PLATE = ITEMS.registerItem("noble_plate", Item::new);
+    public static final DeferredItem<Item> SMITHING_SCROLL_2 = ITEMS.registerItem("smithing_scroll_2", Item::new);
+    public static final DeferredItem<Item> SMITHING_SCROLL_3 = ITEMS.registerItem("smithing_scroll_3", Item::new);
+    public static final DeferredItem<Item> SMITHING_SCROLL_4 = ITEMS.registerItem("smithing_scroll_4", Item::new);
+    public static final DeferredItem<Item> SMITHING_SCROLL_5 = ITEMS.registerItem("smithing_scroll_5", Item::new);
+    public static final DeferredItem<Item> STEEL_BOOTS = ITEMS.registerItem("steel_boots", Item::new);
+    public static final DeferredItem<Item> STEEL_CHAIN_LINK = ITEMS.registerItem("steel_chain_link", Item::new);
+    public static final DeferredItem<Item> STEEL_CHAIN = ITEMS.registerItem("steel_chain", Item::new);
+    public static final DeferredItem<Item> STEEL_CHESTPLATE = ITEMS.registerItem("steel_chestplate", Item::new);
+    public static final DeferredItem<Item> HAMMER = ITEMS.registerItem("hammer",
+            props -> new Item(props.craftRemainder(ModItems.HAMMER.get())));
+    public static final DeferredItem<Item> STEEL_HELMET = ITEMS.registerItem("steel_helmet", Item::new);
+    public static final DeferredItem<Item> STEEL_INGOT2 = ITEMS.registerItem("steel_ingot2", Item::new);
+    public static final DeferredItem<Item> STEEL_LEGGINGS = ITEMS.registerItem("steel_leggings", Item::new);
+    public static final DeferredItem<Item> STEEL_PLATE = ITEMS.registerItem("steel_plate", Item::new);
+    public static final DeferredItem<Item> UPGRADE_KIT_BRONZE = ITEMS.registerItem("upgrade_kit_bronze", Item::new);
+    public static final DeferredItem<Item> UPGRADE_KIT_IRON = ITEMS.registerItem("upgrade_kit_iron", Item::new);
+    public static final DeferredItem<Item> UPGRADE_KIT_NOBLE = ITEMS.registerItem("upgrade_kit_noble", Item::new);
+    public static final DeferredItem<Item> UPGRADE_KIT_STEEL = ITEMS.registerItem("upgrade_kit_steel", Item::new);
+
 
     // Tells the AGoTMod class to call the modded items into the game
     public static void register(IEventBus eventBus) {

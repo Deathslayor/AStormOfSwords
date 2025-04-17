@@ -33,11 +33,39 @@ public class ModCreativeIngredients {
                         pOutput.accept(ModItems.WEIRWOOD_STICK.get());
                         pOutput.accept(ModItems.BOAR_INTESTINES.get());
                         pOutput.accept(ModItems.BOAR_TUSK.get());
+                        pOutput.accept(ModItems.BRONZE_CHAIN_LINK.get());
+                        pOutput.accept(ModItems.BRONZE_CHAIN.get());
+                        pOutput.accept(ModItems.BRONZE_PLATE.get());
+                        pOutput.accept(ModItems.CLOTH.get());
+                        pOutput.accept(ModItems.IRON_CHAIN_LINK.get());
+                        pOutput.accept(ModItems.IRON_CHAIN.get());
+                        pOutput.accept(ModItems.IRON_PLATE.get());
+                        pOutput.accept(ModItems.NOBLE_PLATE.get());
+                        pOutput.accept(ModItems.SMITHING_SCROLL_2.get());
+                        pOutput.accept(ModItems.SMITHING_SCROLL_3.get());
+                        pOutput.accept(ModItems.SMITHING_SCROLL_4.get());
+                        pOutput.accept(ModItems.SMITHING_SCROLL_5.get());
+
+                        pOutput.accept(ModItems.STEEL_CHAIN_LINK.get());
+                        pOutput.accept(ModItems.STEEL_CHAIN.get());
+                        pOutput.accept(ModItems.STEEL_HELMET.get());
+                        pOutput.accept(ModItems.STEEL_CHESTPLATE.get());
+                        pOutput.accept(ModItems.STEEL_LEGGINGS.get());
+                        pOutput.accept(ModItems.STEEL_BOOTS.get());
+                        pOutput.accept(ModItems.HAMMER.get());
+                        pOutput.accept(ModItems.STEEL_INGOT2.get());
+                        pOutput.accept(ModItems.STEEL_PLATE.get());
+                        pOutput.accept(ModItems.UPGRADE_KIT_BRONZE.get());
+                        pOutput.accept(ModItems.UPGRADE_KIT_IRON.get());
+                        pOutput.accept(ModItems.UPGRADE_KIT_NOBLE.get());
+                        pOutput.accept(ModItems.UPGRADE_KIT_STEEL.get());
+
 
                         // INGOTS
                         pOutput.accept(ModItems.TIN_INGOT.get());
                         pOutput.accept(ModItems.RAW_TIN.get());
                         pOutput.accept(ModItems.BRONZE_INGOT.get());
+                        pOutput.accept(ModItems.BRONZE_NUGGET.get());
                         pOutput.accept(ModItems.STEEL_INGOT.get());
 
                         pOutput.accept(ModItems.YELLOW_DIAMOND.get());

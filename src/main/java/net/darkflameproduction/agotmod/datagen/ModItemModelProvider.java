@@ -187,6 +187,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.RAW_TIN);
         simpleItem(ModItems.TIN_INGOT);
         simpleItem(ModItems.BRONZE_INGOT);
+        simpleItem(ModItems.BRONZE_NUGGET);
         simpleItem(ModItems.STEEL_INGOT);
         simpleItem(ModItems.STEEL_NUGGET);
         simpleItem(ModItems.YELLOW_DIAMOND);
@@ -726,6 +727,32 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.BOAR_INTESTINES);
         simpleItem(ModItems.BOAR_TUSK);
         simpleItem(ModItems.WEIRWOOD_STICK);
+        simpleItem(ModItems.BRONZE_CHAIN_LINK);
+        simpleItem(ModItems.BRONZE_CHAIN);
+        simpleItem(ModItems.BRONZE_PLATE);
+        simpleItem(ModItems.CLOTH);
+        simpleItem(ModItems.IRON_CHAIN_LINK);
+        simpleItem(ModItems.IRON_CHAIN);
+        simpleItem(ModItems.HAMMER);
+        simpleItem(ModItems.IRON_PLATE);
+        simpleItem(ModItems.NOBLE_PLATE);
+        simpleItem(ModItems.SMITHING_SCROLL_2);
+        simpleItem(ModItems.SMITHING_SCROLL_3);
+        simpleItem(ModItems.SMITHING_SCROLL_4);
+        simpleItem(ModItems.SMITHING_SCROLL_5);
+        simpleItem(ModItems.STEEL_BOOTS);
+        simpleItem(ModItems.STEEL_CHAIN_LINK);
+        simpleItem(ModItems.STEEL_CHAIN);
+        simpleItem(ModItems.STEEL_CHESTPLATE);
+        simpleItem(ModItems.HAMMER);
+        simpleItem(ModItems.STEEL_HELMET);
+        simpleItem(ModItems.STEEL_INGOT2);
+        simpleItem(ModItems.STEEL_LEGGINGS);
+        simpleItem(ModItems.STEEL_PLATE);
+        simpleItem(ModItems.UPGRADE_KIT_BRONZE);
+        simpleItem(ModItems.UPGRADE_KIT_IRON);
+        simpleItem(ModItems.UPGRADE_KIT_NOBLE);
+        simpleItem(ModItems.UPGRADE_KIT_STEEL);
     }
 
     private @NotNull ItemModelBuilder saplingItem(@NotNull DeferredHolder<Block, Block> item) {
@@ -737,9 +764,8 @@ public class ModItemModelProvider extends ItemModelProvider {
     // Method to create a simple item model
     private @NotNull ItemModelBuilder simpleItem(DeferredHolder<Item, Item> item) {
         return withExistingParent(item.getId().getPath(),
-                modLoc(item.getId().getPath()))
-                .texture("layer0",
-                        modLoc("item/" + item.getId().getPath()));
+                mcLoc("item/generated")).texture("layer0",
+                modLoc("item/" + item.getId().getPath()));
     }
 
     // Method to create a simple Armor item model
