@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "H": "agotmod:hammer",
+    "I": "minecraft:iron_ingot"
+  },
+  "pattern": [
+    "HI ",
+    " I "
+  ],
+  "result": {
+    "count": 1,
+    "id": "agotmod:iron_plate"
+  }
+}

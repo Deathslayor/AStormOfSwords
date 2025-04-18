@@ -4,8 +4,10 @@ import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.darkflameproduction.agotmod.item.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.item.Items;
 import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.SmithingRecipe;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
@@ -3784,8 +3786,8 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
         // -------------------------------------------------(INGREDIENTS)------------------------------------------------- //
         this.shaped(RecipeCategory.MISC, ModItems.IRON_CHAIN_LINK.get())
-                .pattern(" H")
-                .pattern(" N")
+                .pattern(" H ")
+                .pattern(" N ")
                 .define('H', ModItems.HAMMER.get()) // Your custom hammer
                 .define('N', Items.IRON_NUGGET)          // Vanilla iron nugget
                 .unlockedBy(getHasName(Items.IRON_NUGGET), has(Items.IRON_NUGGET))
@@ -3815,36 +3817,36 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy(getHasName(ModItems.STEEL_CHAIN_LINK.get()), has(ModItems.STEEL_CHAIN_LINK.get()))
                 .save(this.output, "steel_chain_from_links");
         this.shaped(RecipeCategory.MISC, ModItems.BRONZE_CHAIN_LINK.get())
-                .pattern(" H")
-                .pattern("N ")
+                .pattern(" H ")
+                .pattern("N  ")
                 .define('H', ModItems.HAMMER.get())
                 .define('N', ModItems.BRONZE_INGOT.get()) // assuming you use ingots instead of nuggets
                 .unlockedBy(getHasName(ModItems.HAMMER.get()), has(ModItems.HAMMER.get()))
                 .save(this.output, "bronze_chain_link");
         this.shaped(RecipeCategory.MISC, ModItems.STEEL_CHAIN_LINK.get())
-                .pattern(" H")
-                .pattern("N ")
+                .pattern(" H ")
+                .pattern("N  ")
                 .define('H', ModItems.HAMMER.get())
                 .define('N', ModItems.STEEL_NUGGET.get())
                 .unlockedBy(getHasName(ModItems.HAMMER.get()), has(ModItems.HAMMER.get()))
                 .save(this.output, "steel_chain_link");
         this.shaped(RecipeCategory.MISC, ModItems.IRON_PLATE.get())
-                .pattern("HI")
-                .pattern(" I")
+                .pattern("HI ")
+                .pattern(" I ")
                 .define('H', ModItems.HAMMER.get())
                 .define('I', Items.IRON_INGOT) // vanilla iron ingot
                 .unlockedBy(getHasName(ModItems.HAMMER.get()), has(ModItems.HAMMER.get()))
                 .save(this.output, "iron_plate");
         this.shaped(RecipeCategory.MISC, ModItems.BRONZE_PLATE.get())
-                .pattern("HB")
-                .pattern(" B")
+                .pattern("HB ")
+                .pattern(" B ")
                 .define('H', ModItems.HAMMER.get())
                 .define('B', ModItems.BRONZE_INGOT.get())
                 .unlockedBy(getHasName(ModItems.HAMMER.get()), has(ModItems.HAMMER.get()))
                 .save(this.output, "bronze_plate");
         this.shaped(RecipeCategory.MISC, ModItems.STEEL_PLATE.get())
-                .pattern("HS")
-                .pattern(" S")
+                .pattern("HS ")
+                .pattern(" S ")
                 .define('H', ModItems.HAMMER.get())
                 .define('S', ModItems.STEEL_INGOT.get())
                 .unlockedBy(getHasName(ModItems.HAMMER.get()), has(ModItems.HAMMER.get()))
@@ -3890,15 +3892,579 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy(getHasName(ModItems.STEEL_INGOT.get()), has(ModItems.STEEL_INGOT.get()))
                 .save(this.output, "steel_boots");
         this.shaped(RecipeCategory.MISC, ModItems.UPGRADE_KIT_IRON.get())
-                .pattern(" C ")
-                .pattern("H B H")
-                .pattern(" P C P")
-                .define('H', ModItems.HAMMER.get())
-                .define('B', ModItems.BRONZE_CHAIN.get())  // Assuming 'B' is the item representing the Bundle.
-                .define('C', ModItems.CLOTH.get())
+                .pattern("PCP")
+                .pattern("CBC")
+                .pattern("IHI")
                 .define('P', ModItems.IRON_PLATE.get())
-                .unlockedBy(getHasName(ModItems.HAMMER.get()), has(ModItems.HAMMER.get()))
-                .save(this.output, "iron_upgrade_kit");
+                .define('C', ModItems.CLOTH.get())
+                .define('B', Items.BUNDLE)
+                .define('I', ModItems.IRON_CHAIN.get())
+                .define('H', ModItems.HAMMER.get())
+                .unlockedBy(getHasName(ModItems.IRON_PLATE.get()), has(ModItems.IRON_PLATE.get()))
+                .save(this.output, "upgrade_kit_iron");
+        this.shaped(RecipeCategory.MISC, ModItems.UPGRADE_KIT_BRONZE.get())
+                .pattern("PCP")
+                .pattern("CBC")
+                .pattern("IHI")
+                .define('P', ModItems.BRONZE_PLATE.get())
+                .define('C', ModItems.CLOTH.get())
+                .define('B', Items.BUNDLE)
+                .define('I', ModItems.BRONZE_CHAIN.get())
+                .define('H', ModItems.HAMMER.get())
+                .unlockedBy(getHasName(ModItems.BRONZE_PLATE.get()), has(ModItems.BRONZE_PLATE.get()))
+                .save(this.output, "upgrade_kit_bronze");
+        this.shaped(RecipeCategory.MISC, ModItems.UPGRADE_KIT_STEEL.get())
+                .pattern("PCP")
+                .pattern("CBC")
+                .pattern("IHI")
+                .define('P', ModItems.STEEL_PLATE.get())
+                .define('C', ModItems.CLOTH.get())
+                .define('B', Items.BUNDLE)
+                .define('I', ModItems.STEEL_CHAIN.get())
+                .define('H', ModItems.HAMMER.get())
+                .unlockedBy(getHasName(ModItems.STEEL_PLATE.get()), has(ModItems.STEEL_PLATE.get()))
+                .save(this.output, "upgrade_kit_steel");
+        this.shaped(RecipeCategory.MISC, ModItems.UPGRADE_KIT_NOBLE.get())
+                .pattern("PCP")
+                .pattern("CBC")
+                .pattern("IHI")
+                .define('P', ModItems.NOBLE_PLATE.get())
+                .define('C', ModItems.CLOTH.get())
+                .define('B', Items.BUNDLE)
+                .define('I', ModItems.STEEL_CHAIN.get())
+                .define('H', ModItems.HAMMER.get())
+                .unlockedBy(getHasName(ModItems.NOBLE_PLATE.get()), has(ModItems.NOBLE_PLATE.get()))
+                .save(this.output, "upgrade_kit_noble");
+
+        // Stark Levy Helmet
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_IRON.get()),
+                        Ingredient.of(ModItems.STEEL_HELMET.get()),
+                        Ingredient.of(ModItems.STARK_LEVY_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.STARK_LEVY_HELMET.get()
+                )
+                .unlocks("has_upgrade_kit_iron", has(ModItems.UPGRADE_KIT_IRON.get()))
+                .save(this.output, "stark_levy_helmet_smithing");
+
+// Stark Levy Chestplate
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_IRON.get()),
+                        Ingredient.of(ModItems.STEEL_CHESTPLATE.get()),
+                        Ingredient.of(ModItems.STARK_LEVY_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.STARK_LEVY_CHESTPLATE.get()
+                )
+                .unlocks("has_upgrade_kit_iron", has(ModItems.UPGRADE_KIT_IRON.get()))
+                .save(this.output, "stark_levy_chestplate_smithing");
+
+// Stark Levy Leggings
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_IRON.get()),
+                        Ingredient.of(ModItems.STEEL_LEGGINGS.get()),
+                        Ingredient.of(ModItems.STARK_LEVY_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.STARK_LEVY_LEGGINGS.get()
+                )
+                .unlocks("has_upgrade_kit_iron", has(ModItems.UPGRADE_KIT_IRON.get()))
+                .save(this.output, "stark_levy_leggings_smithing");
+
+// Stark Levy Boots
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_IRON.get()),
+                        Ingredient.of(ModItems.STEEL_BOOTS.get()),
+                        Ingredient.of(ModItems.STARK_LEVY_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.STARK_LEVY_BOOTS.get()
+                )
+                .unlocks("has_upgrade_kit_iron", has(ModItems.UPGRADE_KIT_IRON.get()))
+                .save(this.output, "stark_levy_boots_smithing");
+
+        // Stark Plate Helmet
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_STEEL.get()),
+                        Ingredient.of(ModItems.STARK_LEVY_HELMET.get()),
+                        Ingredient.of(ModItems.STARK_PLATE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.STARK_PLATE_HELMET.get()
+                )
+                .unlocks("has_upgrade_kit_steel", has(ModItems.UPGRADE_KIT_STEEL.get()))
+                .save(this.output, "stark_plate_helmet_smithing");
+
+// Stark Plate Chestplate
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_STEEL.get()),
+                        Ingredient.of(ModItems.STARK_LEVY_CHESTPLATE.get()),
+                        Ingredient.of(ModItems.STARK_PLATE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.STARK_PLATE_CHESTPLATE.get()
+                )
+                .unlocks("has_upgrade_kit_steel", has(ModItems.UPGRADE_KIT_STEEL.get()))
+                .save(this.output, "stark_plate_chestplate_smithing");
+
+// Stark Plate Leggings
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_STEEL.get()),
+                        Ingredient.of(ModItems.STARK_LEVY_LEGGINGS.get()),
+                        Ingredient.of(ModItems.STARK_PLATE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.STARK_PLATE_LEGGINGS.get()
+                )
+                .unlocks("has_upgrade_kit_steel", has(ModItems.UPGRADE_KIT_STEEL.get()))
+                .save(this.output, "stark_plate_leggings_smithing");
+
+// Stark Plate Boots
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_STEEL.get()),
+                        Ingredient.of(ModItems.STARK_LEVY_BOOTS.get()),
+                        Ingredient.of(ModItems.STARK_PLATE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.STARK_PLATE_BOOTS.get()
+                )
+                .unlocks("has_upgrade_kit_steel", has(ModItems.UPGRADE_KIT_STEEL.get()))
+                .save(this.output, "stark_plate_boots_smithing");
+
+        // Stark noble Helmet
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_NOBLE.get()),
+                        Ingredient.of(ModItems.STARK_PLATE_HELMET.get()),
+                        Ingredient.of(ModItems.STARK_NOBLE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.STARK_NOBLE_PLATE_HELMET.get()
+                )
+                .unlocks("has_upgrade_kit_noble", has(ModItems.UPGRADE_KIT_NOBLE.get()))
+                .save(this.output, "stark_noble_helmet_smithing");
+
+// Stark Plate Chestplate
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_NOBLE.get()),
+                        Ingredient.of(ModItems.STARK_PLATE_CHESTPLATE.get()),
+                        Ingredient.of(ModItems.STARK_NOBLE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.STARK_NOBLE_PLATE_CHESTPLATE.get()
+                )
+                .unlocks("has_upgrade_kit_noble", has(ModItems.UPGRADE_KIT_NOBLE.get()))
+                .save(this.output, "stark_noble_chestplate_smithing");
+
+// Stark Plate Leggings
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_NOBLE.get()),
+                        Ingredient.of(ModItems.STARK_PLATE_LEGGINGS.get()),
+                        Ingredient.of(ModItems.STARK_NOBLE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.STARK_NOBLE_PLATE_LEGGINGS.get()
+                )
+                .unlocks("has_upgrade_kit_noble", has(ModItems.UPGRADE_KIT_NOBLE.get()))
+                .save(this.output, "stark_noble_leggings_smithing");
+
+// Stark Plate Boots
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_NOBLE.get()),
+                        Ingredient.of(ModItems.STARK_PLATE_BOOTS.get()),
+                        Ingredient.of(ModItems.STARK_NOBLE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.STARK_NOBLE_PLATE_BOOTS.get()
+                )
+                .unlocks("has_upgrade_kit_noble", has(ModItems.UPGRADE_KIT_NOBLE.get()))
+                .save(this.output, "stark_noble_boots_smithing");
+
+// Bolten Levy Helmet
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_IRON.get()),
+                        Ingredient.of(ModItems.STEEL_HELMET.get()),
+                        Ingredient.of(ModItems.BOLTON_LEVY_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.BOLTEN_LEVY_HELMET.get()
+                )
+                .unlocks("has_upgrade_kit_iron", has(ModItems.UPGRADE_KIT_IRON.get()))
+                .save(this.output, "bolton_levy_helmet_smithing");
+
+// Bolten Levy Chestplate
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_IRON.get()),
+                        Ingredient.of(ModItems.STEEL_CHESTPLATE.get()),
+                        Ingredient.of(ModItems.BOLTON_LEVY_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.BOLTEN_LEVY_CHESTPLATE.get()
+                )
+                .unlocks("has_upgrade_kit_iron", has(ModItems.UPGRADE_KIT_IRON.get()))
+                .save(this.output, "bolton_levy_chestplate_smithing");
+
+// Bolten Levy Leggings
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_IRON.get()),
+                        Ingredient.of(ModItems.STEEL_LEGGINGS.get()),
+                        Ingredient.of(ModItems.BOLTON_LEVY_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.BOLTEN_LEVY_LEGGINGS.get()
+                )
+                .unlocks("has_upgrade_kit_iron", has(ModItems.UPGRADE_KIT_IRON.get()))
+                .save(this.output, "bolton_levy_leggings_smithing");
+
+// Bolten Levy Boots
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_IRON.get()),
+                        Ingredient.of(ModItems.STEEL_BOOTS.get()),
+                        Ingredient.of(ModItems.BOLTON_LEVY_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.BOLTEN_LEVY_BOOTS.get()
+                )
+                .unlocks("has_upgrade_kit_iron", has(ModItems.UPGRADE_KIT_IRON.get()))
+                .save(this.output, "bolton_levy_boots_smithing");
+
+// Bolten Plate Helmet
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_STEEL.get()),
+                        Ingredient.of(ModItems.BOLTEN_LEVY_HELMET.get()),
+                        Ingredient.of(ModItems.BOLTON_PLATE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.BOLTEN_PLATE_HELMET.get()
+                )
+                .unlocks("has_upgrade_kit_steel", has(ModItems.UPGRADE_KIT_STEEL.get()))
+                .save(this.output, "bolton_plate_helmet_smithing");
+
+// Bolten Plate Chestplate
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_STEEL.get()),
+                        Ingredient.of(ModItems.BOLTEN_LEVY_CHESTPLATE.get()),
+                        Ingredient.of(ModItems.BOLTON_PLATE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.BOLTEN_PLATE_CHESTPLATE.get()
+                )
+                .unlocks("has_upgrade_kit_steel", has(ModItems.UPGRADE_KIT_STEEL.get()))
+                .save(this.output, "bolton_plate_chestplate_smithing");
+
+// Bolten Plate Leggings
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_STEEL.get()),
+                        Ingredient.of(ModItems.BOLTEN_LEVY_LEGGINGS.get()),
+                        Ingredient.of(ModItems.BOLTON_PLATE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.BOLTEN_PLATE_LEGGINGS.get()
+                )
+                .unlocks("has_upgrade_kit_steel", has(ModItems.UPGRADE_KIT_STEEL.get()))
+                .save(this.output, "bolton_plate_leggings_smithing");
+
+// Bolten Plate Boots
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_STEEL.get()),
+                        Ingredient.of(ModItems.BOLTEN_LEVY_BOOTS.get()),
+                        Ingredient.of(ModItems.BOLTON_PLATE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.BOLTEN_PLATE_BOOTS.get()
+                )
+                .unlocks("has_upgrade_kit_steel", has(ModItems.UPGRADE_KIT_STEEL.get()))
+                .save(this.output, "bolton_plate_boots_smithing");
+
+// Bolten Noble Helmet
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_NOBLE.get()),
+                        Ingredient.of(ModItems.BOLTEN_PLATE_HELMET.get()),
+                        Ingredient.of(ModItems.BOLTON_NOBLE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.BOLTEN_NOBLE_HELMET.get()
+                )
+                .unlocks("has_upgrade_kit_noble", has(ModItems.UPGRADE_KIT_NOBLE.get()))
+                .save(this.output, "bolton_noble_helmet_smithing");
+
+// Bolten Noble Chestplate
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_NOBLE.get()),
+                        Ingredient.of(ModItems.BOLTEN_PLATE_CHESTPLATE.get()),
+                        Ingredient.of(ModItems.BOLTON_NOBLE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.BOLTEN_NOBLE_CHESTPLATE.get()
+                )
+                .unlocks("has_upgrade_kit_noble", has(ModItems.UPGRADE_KIT_NOBLE.get()))
+                .save(this.output, "bolton_noble_chestplate_smithing");
+
+// Bolten Noble Leggings
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_NOBLE.get()),
+                        Ingredient.of(ModItems.BOLTEN_PLATE_LEGGINGS.get()),
+                        Ingredient.of(ModItems.BOLTON_NOBLE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.BOLTEN_NOBLE_LEGGINGS.get()
+                )
+                .unlocks("has_upgrade_kit_noble", has(ModItems.UPGRADE_KIT_NOBLE.get()))
+                .save(this.output, "bolton_noble_leggings_smithing");
+
+// Bolten Noble Boots
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_NOBLE.get()),
+                        Ingredient.of(ModItems.BOLTEN_PLATE_BOOTS.get()),
+                        Ingredient.of(ModItems.BOLTON_NOBLE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.BOLTEN_NOBLE_BOOTS.get()
+                )
+                .unlocks("has_upgrade_kit_noble", has(ModItems.UPGRADE_KIT_NOBLE.get()))
+                .save(this.output, "bolton_noble_boots_smithing");
+
+        // Manderly Levy Helmet
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_IRON.get()),
+                        Ingredient.of(ModItems.STEEL_HELMET.get()),
+                        Ingredient.of(ModItems.MANDERLY_LEVY_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.MANDERLY_LEVY_HELMET.get()
+                )
+                .unlocks("has_upgrade_kit_iron", has(ModItems.UPGRADE_KIT_IRON.get()))
+                .save(this.output, "manderly_levy_helmet_smithing");
+
+// Manderly Levy Chestplate
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_IRON.get()),
+                        Ingredient.of(ModItems.STEEL_CHESTPLATE.get()),
+                        Ingredient.of(ModItems.MANDERLY_LEVY_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.MANDERLY_LEVY_CHESTPLATE.get()
+                )
+                .unlocks("has_upgrade_kit_iron", has(ModItems.UPGRADE_KIT_IRON.get()))
+                .save(this.output, "manderly_levy_chestplate_smithing");
+
+// Manderly Levy Leggings
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_IRON.get()),
+                        Ingredient.of(ModItems.STEEL_LEGGINGS.get()),
+                        Ingredient.of(ModItems.MANDERLY_LEVY_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.MANDERLY_LEVY_LEGGINGS.get()
+                )
+                .unlocks("has_upgrade_kit_iron", has(ModItems.UPGRADE_KIT_IRON.get()))
+                .save(this.output, "manderly_levy_leggings_smithing");
+
+// Manderly Levy Boots
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_IRON.get()),
+                        Ingredient.of(ModItems.STEEL_BOOTS.get()),
+                        Ingredient.of(ModItems.MANDERLY_LEVY_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.MANDERLY_LEVY_BOOTS.get()
+                )
+                .unlocks("has_upgrade_kit_iron", has(ModItems.UPGRADE_KIT_IRON.get()))
+                .save(this.output, "manderly_levy_boots_smithing");
+
+// Manderly Plate Helmet
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_STEEL.get()),
+                        Ingredient.of(ModItems.MANDERLY_LEVY_HELMET.get()),
+                        Ingredient.of(ModItems.MANDERLY_PLATE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.MANDERLY_PLATE_HELMET.get()
+                )
+                .unlocks("has_upgrade_kit_steel", has(ModItems.UPGRADE_KIT_STEEL.get()))
+                .save(this.output, "manderly_plate_helmet_smithing");
+
+// Manderly Plate Chestplate
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_STEEL.get()),
+                        Ingredient.of(ModItems.MANDERLY_LEVY_CHESTPLATE.get()),
+                        Ingredient.of(ModItems.MANDERLY_PLATE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.MANDERLY_PLATE_CHESTPLATE.get()
+                )
+                .unlocks("has_upgrade_kit_steel", has(ModItems.UPGRADE_KIT_STEEL.get()))
+                .save(this.output, "manderly_plate_chestplate_smithing");
+
+// Manderly Plate Leggings
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_STEEL.get()),
+                        Ingredient.of(ModItems.MANDERLY_LEVY_LEGGINGS.get()),
+                        Ingredient.of(ModItems.MANDERLY_PLATE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.MANDERLY_PLATE_LEGGINGS.get()
+                )
+                .unlocks("has_upgrade_kit_steel", has(ModItems.UPGRADE_KIT_STEEL.get()))
+                .save(this.output, "manderly_plate_leggings_smithing");
+
+// Manderly Plate Boots
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_STEEL.get()),
+                        Ingredient.of(ModItems.MANDERLY_LEVY_BOOTS.get()),
+                        Ingredient.of(ModItems.MANDERLY_PLATE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.MANDERLY_PLATE_BOOTS.get()
+                )
+                .unlocks("has_upgrade_kit_steel", has(ModItems.UPGRADE_KIT_STEEL.get()))
+                .save(this.output, "manderly_plate_boots_smithing");
+
+// Manderly Noble Helmet
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_NOBLE.get()),
+                        Ingredient.of(ModItems.MANDERLY_PLATE_HELMET.get()),
+                        Ingredient.of(ModItems.MANDERLY_NOBLE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.MANDERLY_NOBLE_HELMET.get()
+                )
+                .unlocks("has_upgrade_kit_noble", has(ModItems.UPGRADE_KIT_NOBLE.get()))
+                .save(this.output, "manderly_noble_helmet_smithing");
+
+// Manderly Noble Chestplate
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_NOBLE.get()),
+                        Ingredient.of(ModItems.MANDERLY_PLATE_CHESTPLATE.get()),
+                        Ingredient.of(ModItems.MANDERLY_NOBLE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.MANDERLY_NOBLE_CHESTPLATE.get()
+                )
+                .unlocks("has_upgrade_kit_noble", has(ModItems.UPGRADE_KIT_NOBLE.get()))
+                .save(this.output, "manderly_noble_chestplate_smithing");
+
+// Manderly Noble Leggings
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_NOBLE.get()),
+                        Ingredient.of(ModItems.MANDERLY_PLATE_LEGGINGS.get()),
+                        Ingredient.of(ModItems.MANDERLY_NOBLE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.MANDERLY_NOBLE_LEGGINGS.get()
+                )
+                .unlocks("has_upgrade_kit_noble", has(ModItems.UPGRADE_KIT_NOBLE.get()))
+                .save(this.output, "manderly_noble_leggings_smithing");
+
+// Manderly Noble Boots
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_NOBLE.get()),
+                        Ingredient.of(ModItems.MANDERLY_PLATE_BOOTS.get()),
+                        Ingredient.of(ModItems.MANDERLY_NOBLE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.MANDERLY_PLATE_BOOTS.get()
+                )
+                .unlocks("has_upgrade_kit_noble", has(ModItems.UPGRADE_KIT_NOBLE.get()))
+                .save(this.output, "manderly_noble_boots_smithing");
+
+        // Northern Mountain Clan Leather Helmet
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_IRON.get()),
+                        Ingredient.of(ModItems.MOUNTAIN_CLAN_LEVY_HELMET.get()),
+                        Ingredient.of(ModItems.NORTHERN_MOUNTAIN_CLAN_LEATHER_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.MOUNTAIN_CLAN_LEVY_HELMET.get()
+                )
+                .unlocks("has_upgrade_kit_iron", has(ModItems.UPGRADE_KIT_IRON.get()))
+                .save(this.output, "mountain_clan_leather_helmet_smithing");
+
+// Northern Mountain Clan Leather Chestplate
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_IRON.get()),
+                        Ingredient.of(ModItems.MOUNTAIN_CLAN_LEVY_CHESTPLATE.get()),
+                        Ingredient.of(ModItems.NORTHERN_MOUNTAIN_CLAN_LEATHER_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.MOUNTAIN_CLAN_LEVY_CHESTPLATE.get()
+                )
+                .unlocks("has_upgrade_kit_iron", has(ModItems.UPGRADE_KIT_IRON.get()))
+                .save(this.output, "mountain_clan_leather_chestplate_smithing");
+
+// Northern Mountain Clan Leather Leggings
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_IRON.get()),
+                        Ingredient.of(ModItems.MOUNTAIN_CLAN_LEVY_LEGGINGS.get()),
+                        Ingredient.of(ModItems.NORTHERN_MOUNTAIN_CLAN_LEATHER_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.MOUNTAIN_CLAN_LEVY_LEGGINGS.get()
+                )
+                .unlocks("has_upgrade_kit_iron", has(ModItems.UPGRADE_KIT_IRON.get()))
+                .save(this.output, "mountain_clan_leather_leggings_smithing");
+
+// Northern Mountain Clan Leather Boots
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_IRON.get()),
+                        Ingredient.of(ModItems.MOUNTAIN_CLAN_LEVY_BOOTS.get()),
+                        Ingredient.of(ModItems.NORTHERN_MOUNTAIN_CLAN_LEATHER_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.MOUNTAIN_CLAN_LEVY_BOOTS.get()
+                )
+                .unlocks("has_upgrade_kit_irons", has(ModItems.UPGRADE_KIT_IRON.get()))
+                .save(this.output, "mountain_clan_leather_boots_smithing");
+
+// Northern Mountain Clan Chain Helmet
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_STEEL.get()),
+                        Ingredient.of(ModItems.MOUNTAIN_CLAN_PLATE_HELMET.get()),
+                        Ingredient.of(ModItems.NORTHERN_MOUNTAIN_CLAN_CHAIN_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.MOUNTAIN_CLAN_PLATE_HELMET.get()
+                )
+                .unlocks("has_upgrade_kit_steel", has(ModItems.UPGRADE_KIT_STEEL.get()))
+                .save(this.output, "mountain_clan_chain_helmet_smithing");
+
+// Northern Mountain Clan Chain Chestplate
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_STEEL.get()),
+                        Ingredient.of(ModItems.MOUNTAIN_CLAN_PLATE_CHESTPLATE.get()),
+                        Ingredient.of(ModItems.NORTHERN_MOUNTAIN_CLAN_CHAIN_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.MOUNTAIN_CLAN_PLATE_CHESTPLATE.get()
+                )
+                .unlocks("has_upgrade_kit_steel", has(ModItems.UPGRADE_KIT_STEEL.get()))
+                .save(this.output, "mountain_clan_chain_chestplate_smithing");
+
+// Northern Mountain Clan Chain Leggings
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_STEEL.get()),
+                        Ingredient.of(ModItems.MOUNTAIN_CLAN_PLATE_LEGGINGS.get()),
+                        Ingredient.of(ModItems.NORTHERN_MOUNTAIN_CLAN_CHAIN_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.MOUNTAIN_CLAN_PLATE_LEGGINGS.get()
+                )
+                .unlocks("has_upgrade_kit_steel", has(ModItems.UPGRADE_KIT_STEEL.get()))
+                .save(this.output, "mountain_clan_chain_leggings_smithing");
+
+// Northern Mountain Clan Chain Boots
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_STEEL.get()),
+                        Ingredient.of(ModItems.MOUNTAIN_CLAN_PLATE_BOOTS.get()),
+                        Ingredient.of(ModItems.NORTHERN_MOUNTAIN_CLAN_CHAIN_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.MOUNTAIN_CLAN_PLATE_BOOTS.get()
+                )
+                .unlocks("has_upgrade_kit_steel", has(ModItems.UPGRADE_KIT_STEEL.get()))
+                .save(this.output, "mountain_clan_chain_boots_smithing");
+
+// Northern Mountain Clan Noble Helmet
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_NOBLE.get()),
+                        Ingredient.of(ModItems.MOUNTAIN_CLAN_CHIEF_HELMET.get()),
+                        Ingredient.of(ModItems.NORTHERN_MOUNTAIN_CLAN_NOBLE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.MOUNTAIN_CLAN_CHIEF_HELMET.get()
+                )
+                .unlocks("has_upgrade_kit_noble", has(ModItems.UPGRADE_KIT_NOBLE.get()))
+                .save(this.output, "mountain_clan_noble_helmet_smithing");
+
+// Northern Mountain Clan Noble Chestplate
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_NOBLE.get()),
+                        Ingredient.of(ModItems.MOUNTAIN_CLAN_CHIEF_CHESTPLATE.get()),
+                        Ingredient.of(ModItems.NORTHERN_MOUNTAIN_CLAN_NOBLE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.MOUNTAIN_CLAN_CHIEF_CHESTPLATE.get()
+                )
+                .unlocks("has_upgrade_kit_noble", has(ModItems.UPGRADE_KIT_NOBLE.get()))
+                .save(this.output, "mountain_clan_noble_chestplate_smithing");
+
+// Northern Mountain Clan Noble Leggings
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_NOBLE.get()),
+                        Ingredient.of(ModItems.MOUNTAIN_CLAN_CHIEF_LEGGINGS.get()),
+                        Ingredient.of(ModItems.NORTHERN_MOUNTAIN_CLAN_NOBLE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.MOUNTAIN_CLAN_CHIEF_LEGGINGS.get()
+                )
+                .unlocks("has_upgrade_kit_noble", has(ModItems.UPGRADE_KIT_NOBLE.get()))
+                .save(this.output, "mountain_clan_noble_leggings_smithing");
+
+// Northern Mountain Clan Noble Boots
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_NOBLE.get()),
+                        Ingredient.of(ModItems.MOUNTAIN_CLAN_CHIEF_BOOTS.get()),
+                        Ingredient.of(ModItems.NORTHERN_MOUNTAIN_CLAN_NOBLE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.MOUNTAIN_CLAN_CHIEF_BOOTS.get()
+                )
+                .unlocks("has_upgrade_kit_noble", has(ModItems.UPGRADE_KIT_NOBLE.get()))
+                .save(this.output, "mountain_clan_noble_boots_smithing");
+
+
 
 
     }

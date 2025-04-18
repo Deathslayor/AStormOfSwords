@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "agotmod:bolton_plate_smithing_scroll",
+  "base": "agotmod:bolton_levy_chestplate",
+  "result": {
+    "count": 1,
+    "id": "agotmod:bolton_plate_chestplate"
+  },
+  "template": "agotmod:upgrade_kit_steel"
+}

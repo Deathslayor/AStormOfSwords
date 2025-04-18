@@ -788,7 +788,7 @@ public class ModBLocks {
     }
 
     private static void registerMudBrickVariants() {
-        BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(Blocks.MUD).strength(3f);
+        BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(Blocks.MUD_BRICKS).strength(3f);
 
         for (int i : VALID_MUD_BRICK_INDICES) {
             String baseName = "mud_brick_" + i;

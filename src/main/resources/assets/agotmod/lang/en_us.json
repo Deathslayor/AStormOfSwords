@@ -212,15 +212,12 @@
   "item.agotmod.cloth": "Cloth",
   "item.agotmod.iron_chain_link": "Iron Chain Link",
   "item.agotmod.iron_chain": "Iron Chain",
-  "item.agotmod.iron_hammer": "Iron Hammer",
+  "item.agotmod.hammer": "Hammer",
   "item.agotmod.iron_plate": "Iron Plate",
   "item.agotmod.noble_plate": "Noble Plate",
-  "item.agotmod.smithing_scroll_2": "Smithing Scroll II",
-  "item.agotmod.smithing_scroll_3": "Smithing Scroll III",
-  "item.agotmod.smithing_scroll_4": "Smithing Scroll IV",
-  "item.agotmod.smithing_scroll_5": "Smithing Scroll V",
   "item.agotmod.steel_boots": "Steel Boots",
   "item.agotmod.steel_chain_link": "Steel Chain Link",
+  "item.agotmod.steel_chain": "Steel Chain",
   "item.agotmod.steel_chestplate": "Steel Chestplate",
   "item.agotmod.steel_hammer": "Steel Hammer",
   "item.agotmod.steel_helmet": "Steel Helmet",
@@ -231,6 +228,24 @@
   "item.agotmod.upgrade_kit_iron": "Iron Upgrade Kit",
   "item.agotmod.upgrade_kit_noble": "Noble Upgrade Kit",
   "item.agotmod.upgrade_kit_steel": "Steel Upgrade Kit",
+
+  "item.agotmod.stark_levy_smithing_scroll": "Stark Levy Smithing Scroll",
+  "item.agotmod.stark_plate_smithing_scroll": "Stark Plate Smithing Scroll",
+  "item.agotmod.stark_noble_smithing_scroll": "Stark Noble Smithing Scroll",
+
+  "item.agotmod.bolton_levy_smithing_scroll": "Bolton Levy Smithing Scroll",
+  "item.agotmod.bolton_plate_smithing_scroll": "Bolton Plate Smithing Scroll",
+  "item.agotmod.bolton_noble_smithing_scroll": "Bolton Noble Smithing Scroll",
+
+  "item.agotmod.manderly_levy_smithing_scroll": "Manderly Levy Smithing Scroll",
+  "item.agotmod.manderly_plate_smithing_scroll": "Manderly Plate Smithing Scroll",
+  "item.agotmod.manderly_noble_smithing_scroll": "Manderly Noble Smithing Scroll",
+
+  "item.agotmod.smithing_scroll": "Smithing Scroll I",
+  "item.agotmod.smithing_scroll_2": "Smithing Scroll II",
+  "item.agotmod.smithing_scroll_3": "Smithing Scroll III",
+  "item.agotmod.smithing_scroll_4": "Smithing Scroll IV",
+  "item.agotmod.smithing_scroll_5": "Smithing Scroll V",
 
 
   "item.agotmod.dragonglass_spear": "Dragonglass Spear",

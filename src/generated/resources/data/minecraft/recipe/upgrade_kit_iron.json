@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "minecraft:bundle",
+    "C": "agotmod:cloth",
+    "H": "agotmod:hammer",
+    "I": "agotmod:iron_chain",
+    "P": "agotmod:iron_plate"
+  },
+  "pattern": [
+    "PCP",
+    "CBC",
+    "IHI"
+  ],
+  "result": {
+    "count": 1,
+    "id": "agotmod:upgrade_kit_iron"
+  }
+}

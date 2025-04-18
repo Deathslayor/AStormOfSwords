@@ -41,10 +41,6 @@ public class ModCreativeIngredients {
                         pOutput.accept(ModItems.IRON_CHAIN.get());
                         pOutput.accept(ModItems.IRON_PLATE.get());
                         pOutput.accept(ModItems.NOBLE_PLATE.get());
-                        pOutput.accept(ModItems.SMITHING_SCROLL_2.get());
-                        pOutput.accept(ModItems.SMITHING_SCROLL_3.get());
-                        pOutput.accept(ModItems.SMITHING_SCROLL_4.get());
-                        pOutput.accept(ModItems.SMITHING_SCROLL_5.get());
 
                         pOutput.accept(ModItems.STEEL_CHAIN_LINK.get());
                         pOutput.accept(ModItems.STEEL_CHAIN.get());
@@ -53,12 +49,29 @@ public class ModCreativeIngredients {
                         pOutput.accept(ModItems.STEEL_LEGGINGS.get());
                         pOutput.accept(ModItems.STEEL_BOOTS.get());
                         pOutput.accept(ModItems.HAMMER.get());
-                        pOutput.accept(ModItems.STEEL_INGOT2.get());
                         pOutput.accept(ModItems.STEEL_PLATE.get());
                         pOutput.accept(ModItems.UPGRADE_KIT_BRONZE.get());
                         pOutput.accept(ModItems.UPGRADE_KIT_IRON.get());
                         pOutput.accept(ModItems.UPGRADE_KIT_NOBLE.get());
                         pOutput.accept(ModItems.UPGRADE_KIT_STEEL.get());
+
+                        pOutput.accept(ModItems.STARK_LEVY_SMITHING_SCROLL.get());
+                        pOutput.accept(ModItems.STARK_PLATE_SMITHING_SCROLL.get());
+                        pOutput.accept(ModItems.STARK_NOBLE_SMITHING_SCROLL.get());
+
+                        pOutput.accept(ModItems.BOLTON_LEVY_SMITHING_SCROLL.get());
+                        pOutput.accept(ModItems.BOLTON_PLATE_SMITHING_SCROLL.get());
+                        pOutput.accept(ModItems.BOLTON_NOBLE_SMITHING_SCROLL.get());
+
+                        pOutput.accept(ModItems.MANDERLY_LEVY_SMITHING_SCROLL.get());
+                        pOutput.accept(ModItems.MANDERLY_PLATE_SMITHING_SCROLL.get());
+                        pOutput.accept(ModItems.MANDERLY_NOBLE_SMITHING_SCROLL.get());
+
+                        pOutput.accept(ModItems.NORTHERN_MOUNTAIN_CLAN_LEATHER_SMITHING_SCROLL.get());
+                        pOutput.accept(ModItems.NORTHERN_MOUNTAIN_CLAN_CHAIN_SMITHING_SCROLL.get());
+                        pOutput.accept(ModItems.NORTHERN_MOUNTAIN_CLAN_NOBLE_SMITHING_SCROLL.get());
+
+
 
 
                         // INGOTS

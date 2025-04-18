@@ -621,24 +621,46 @@ public class ModItems {
     public static final DeferredItem<Item> IRON_CHAIN = ITEMS.registerItem("iron_chain", Item::new);
     public static final DeferredItem<Item> IRON_PLATE = ITEMS.registerItem("iron_plate", Item::new);
     public static final DeferredItem<Item> NOBLE_PLATE = ITEMS.registerItem("noble_plate", Item::new);
-    public static final DeferredItem<Item> SMITHING_SCROLL_2 = ITEMS.registerItem("smithing_scroll_2", Item::new);
-    public static final DeferredItem<Item> SMITHING_SCROLL_3 = ITEMS.registerItem("smithing_scroll_3", Item::new);
-    public static final DeferredItem<Item> SMITHING_SCROLL_4 = ITEMS.registerItem("smithing_scroll_4", Item::new);
-    public static final DeferredItem<Item> SMITHING_SCROLL_5 = ITEMS.registerItem("smithing_scroll_5", Item::new);
     public static final DeferredItem<Item> STEEL_BOOTS = ITEMS.registerItem("steel_boots", Item::new);
     public static final DeferredItem<Item> STEEL_CHAIN_LINK = ITEMS.registerItem("steel_chain_link", Item::new);
     public static final DeferredItem<Item> STEEL_CHAIN = ITEMS.registerItem("steel_chain", Item::new);
-    public static final DeferredItem<Item> STEEL_CHESTPLATE = ITEMS.registerItem("steel_chestplate", Item::new);
-    public static final DeferredItem<Item> HAMMER = ITEMS.registerItem("hammer",
-            props -> new Item(props.craftRemainder(ModItems.HAMMER.get())));
+    public static final DeferredItem<Item> HAMMER = ITEMS.registerItem("hammer", properties ->
+            new PickaxeItem(ModToolTiers.STEEL, 1, 1, properties) {
+                @Override
+                public ItemStack getCraftingRemainder(ItemStack stack) {
+                    return stack.copy();
+                }
+            }
+    );
     public static final DeferredItem<Item> STEEL_HELMET = ITEMS.registerItem("steel_helmet", Item::new);
-    public static final DeferredItem<Item> STEEL_INGOT2 = ITEMS.registerItem("steel_ingot2", Item::new);
     public static final DeferredItem<Item> STEEL_LEGGINGS = ITEMS.registerItem("steel_leggings", Item::new);
     public static final DeferredItem<Item> STEEL_PLATE = ITEMS.registerItem("steel_plate", Item::new);
+    public static final DeferredItem<Item> STEEL_CHESTPLATE = ITEMS.registerItem("steel_chestplate", Item::new);
     public static final DeferredItem<Item> UPGRADE_KIT_BRONZE = ITEMS.registerItem("upgrade_kit_bronze", Item::new);
     public static final DeferredItem<Item> UPGRADE_KIT_IRON = ITEMS.registerItem("upgrade_kit_iron", Item::new);
     public static final DeferredItem<Item> UPGRADE_KIT_NOBLE = ITEMS.registerItem("upgrade_kit_noble", Item::new);
     public static final DeferredItem<Item> UPGRADE_KIT_STEEL = ITEMS.registerItem("upgrade_kit_steel", Item::new);
+
+    public static final DeferredItem<Item> STARK_LEVY_SMITHING_SCROLL = ITEMS.registerItem("stark_levy_smithing_scroll", Item::new);
+    public static final DeferredItem<Item> STARK_PLATE_SMITHING_SCROLL = ITEMS.registerItem("stark_plate_smithing_scroll", Item::new);
+    public static final DeferredItem<Item> STARK_NOBLE_SMITHING_SCROLL = ITEMS.registerItem("stark_noble_smithing_scroll", Item::new);
+    public static final DeferredItem<Item> BOLTON_LEVY_SMITHING_SCROLL = ITEMS.registerItem("bolton_levy_smithing_scroll", Item::new);
+    public static final DeferredItem<Item> BOLTON_PLATE_SMITHING_SCROLL = ITEMS.registerItem("bolton_plate_smithing_scroll", Item::new);
+    public static final DeferredItem<Item> BOLTON_NOBLE_SMITHING_SCROLL = ITEMS.registerItem("bolton_noble_smithing_scroll", Item::new);
+    public static final DeferredItem<Item> MANDERLY_LEVY_SMITHING_SCROLL = ITEMS.registerItem("manderly_levy_smithing_scroll", Item::new);
+    public static final DeferredItem<Item> MANDERLY_PLATE_SMITHING_SCROLL = ITEMS.registerItem("manderly_plate_smithing_scroll", Item::new);
+    public static final DeferredItem<Item> MANDERLY_NOBLE_SMITHING_SCROLL = ITEMS.registerItem("manderly_noble_smithing_scroll", Item::new);
+    public static final DeferredItem<Item> NORTHERN_MOUNTAIN_CLAN_LEATHER_SMITHING_SCROLL = ITEMS.registerItem("northern_mountain_clan_leather_smithing_scroll", Item::new);
+    public static final DeferredItem<Item> NORTHERN_MOUNTAIN_CLAN_CHAIN_SMITHING_SCROLL = ITEMS.registerItem("northern_mountain_clan_chain_smithing_scroll", Item::new);
+    public static final DeferredItem<Item> NORTHERN_MOUNTAIN_CLAN_NOBLE_SMITHING_SCROLL = ITEMS.registerItem("northern_mountain_clan_noble_smithing_scroll", Item::new);
+
+
+
+    public static final DeferredItem<Item> SMITHING_SCROLL = ITEMS.registerItem("smithing_scroll", Item::new);
+    public static final DeferredItem<Item> SMITHING_SCROLL_2 = ITEMS.registerItem("smithing_scroll_2", Item::new);
+    public static final DeferredItem<Item> SMITHING_SCROLL_3 = ITEMS.registerItem("smithing_scroll_3", Item::new);
+    public static final DeferredItem<Item> SMITHING_SCROLL_4 = ITEMS.registerItem("smithing_scroll_4", Item::new);
+    public static final DeferredItem<Item> SMITHING_SCROLL_5 = ITEMS.registerItem("smithing_scroll_5", Item::new);
 
 
     // Tells the AGoTMod class to call the modded items into the game

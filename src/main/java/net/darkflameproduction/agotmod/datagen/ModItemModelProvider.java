@@ -736,6 +736,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.HAMMER);
         simpleItem(ModItems.IRON_PLATE);
         simpleItem(ModItems.NOBLE_PLATE);
+        simpleItem(ModItems.SMITHING_SCROLL);
         simpleItem(ModItems.SMITHING_SCROLL_2);
         simpleItem(ModItems.SMITHING_SCROLL_3);
         simpleItem(ModItems.SMITHING_SCROLL_4);
@@ -744,15 +745,31 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.STEEL_CHAIN_LINK);
         simpleItem(ModItems.STEEL_CHAIN);
         simpleItem(ModItems.STEEL_CHESTPLATE);
-        simpleItem(ModItems.HAMMER);
         simpleItem(ModItems.STEEL_HELMET);
-        simpleItem(ModItems.STEEL_INGOT2);
         simpleItem(ModItems.STEEL_LEGGINGS);
         simpleItem(ModItems.STEEL_PLATE);
         simpleItem(ModItems.UPGRADE_KIT_BRONZE);
         simpleItem(ModItems.UPGRADE_KIT_IRON);
         simpleItem(ModItems.UPGRADE_KIT_NOBLE);
         simpleItem(ModItems.UPGRADE_KIT_STEEL);
+
+        simpleItem(ModItems.STARK_LEVY_SMITHING_SCROLL);
+        simpleItem(ModItems.STARK_PLATE_SMITHING_SCROLL);
+        simpleItem(ModItems.STARK_NOBLE_SMITHING_SCROLL);
+
+        simpleItem(ModItems.BOLTON_LEVY_SMITHING_SCROLL);
+        simpleItem(ModItems.BOLTON_PLATE_SMITHING_SCROLL);
+        simpleItem(ModItems.BOLTON_NOBLE_SMITHING_SCROLL);
+
+        simpleItem(ModItems.MANDERLY_LEVY_SMITHING_SCROLL);
+        simpleItem(ModItems.MANDERLY_PLATE_SMITHING_SCROLL);
+        simpleItem(ModItems.MANDERLY_NOBLE_SMITHING_SCROLL);
+
+        simpleItem(ModItems.NORTHERN_MOUNTAIN_CLAN_LEATHER_SMITHING_SCROLL);
+        simpleItem(ModItems.NORTHERN_MOUNTAIN_CLAN_CHAIN_SMITHING_SCROLL);
+        simpleItem(ModItems.NORTHERN_MOUNTAIN_CLAN_NOBLE_SMITHING_SCROLL);
+
+
     }
 
     private @NotNull ItemModelBuilder saplingItem(@NotNull DeferredHolder<Block, Block> item) {

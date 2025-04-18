@@ -14,3 +14,4 @@ public class ModToolTiers {
     public static final ToolMaterial STEEL = new ToolMaterial(ModTags.Blocks.INCORRECT_FOR_STEEL_TOOL, 780, 6.0F, 2.0F, 14, ModTags.Items.STEEL_TOOL_MATERIALS);
     public static final ToolMaterial NOBLE = new ToolMaterial(ModTags.Blocks.INCORRECT_FOR_STEEL_TOOL, 4062, 7.0F, 4.0F, 18, ModTags.Items.STEEL_TOOL_MATERIALS);
 }
+
