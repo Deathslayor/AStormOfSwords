@@ -4,6 +4,8 @@ package net.darkflameproduction.agotmod.event;
 // Importing necessary classes from other packages
 
 import net.darkflameproduction.agotmod.AGoTMod;
+import net.darkflameproduction.agotmod.entity.ModEntities;
+import net.darkflameproduction.agotmod.entity.client.northofthewall.Mammoth_Entity_Renderer;
 import net.darkflameproduction.agotmod.event.KeyMappings.KeyBindings;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.neoforged.api.distmarker.Dist;
@@ -28,7 +30,8 @@ public class ModEventBusClientEvents {
     public static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
 
-            
+
+            EntityRenderers.register(ModEntities.MAMMOTH_ENTITY,Mammoth_Entity_Renderer::new);
 
 
 

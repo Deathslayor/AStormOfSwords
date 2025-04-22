@@ -4,7 +4,8 @@ package net.darkflameproduction.agotmod.event;
 // Importing necessary classes from other packages
 
 import net.darkflameproduction.agotmod.AGoTMod;
-
+import net.darkflameproduction.agotmod.entity.ModEntities;
+import net.darkflameproduction.agotmod.entity.custom.norththewall.Mammoth_Entity;
 import net.darkflameproduction.agotmod.magic.custom.PlayerManaProvider;
 import net.minecraft.world.entity.EntityType;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -19,7 +20,7 @@ public class ModEventBusEvents {
 
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
-
+        event.put(ModEntities.MAMMOTH_ENTITY.get(), Mammoth_Entity.createAttributes().build());
 
 
 

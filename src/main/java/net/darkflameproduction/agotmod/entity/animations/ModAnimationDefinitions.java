@@ -1,0 +1,40 @@
+package net.darkflameproduction.agotmod.entity.animations;
+
+import net.minecraft.client.animation.AnimationChannel;
+import net.minecraft.client.animation.AnimationDefinition;
+import net.minecraft.client.animation.Keyframe;
+import net.minecraft.client.animation.KeyframeAnimations;
+import net.minecraft.world.entity.LivingEntity;
+import software.bernie.geckolib.animatable.GeoAnimatable;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.RawAnimation;
+
+public class ModAnimationDefinitions {
+
+
+
+
+    public static final RawAnimation DIE = RawAnimation.begin().thenPlay("misc.die");
+    public static final RawAnimation SPAWN = RawAnimation.begin().thenPlay("misc.spawn");
+
+
+
+
+
+
+    public static <T extends LivingEntity & GeoAnimatable> AnimationController<T> ModdedDeathController(T animatable) {
+        return new AnimationController<>(animatable, "Die", 0, state -> state.getAnimatable().isDeadOrDying() ? state.setAndContinue(DIE) : PlayState.STOP);
+    }
+
+    public static <T extends LivingEntity & GeoAnimatable> AnimationController<T> ModdedSummonController(T animatable) {
+        return new AnimationController<>(animatable, "Spawn", 0, state -> {
+            if (animatable.tickCount < 100)
+                return state.setAndContinue(SPAWN);
+
+            state.getController().forceAnimationReset();
+
+            return PlayState.STOP;
+        });
+    }
+}
