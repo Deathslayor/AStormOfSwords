@@ -22,7 +22,7 @@ public class ModEntities {
                             .sized(1f, 2f)
                             .clientTrackingRange(64)
                             .build(ResourceKey.create(net.minecraft.core.registries.Registries.ENTITY_TYPE,
-                                     ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "mammoth"))));
+                                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "mammoth"))));
 
     // Registration method remains mostly the same
     public static void register(IEventBus eventBus) {

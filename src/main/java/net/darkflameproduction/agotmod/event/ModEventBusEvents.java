@@ -14,18 +14,14 @@ import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import org.jetbrains.annotations.NotNull;
 
-// Annotating the class as a subscriber to the Forge Mod Event Bus
+// Changed bus to Bus.MOD for NeoForge (same as Forge)
 @EventBusSubscriber(modid = AGoTMod.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class ModEventBusEvents {
 
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
+        // For NeoForge, we use .get() on the DeferredHolder
         event.put(ModEntities.MAMMOTH_ENTITY.get(), Mammoth_Entity.createAttributes().build());
-
-
-
-
-
     }
 
     @SubscribeEvent

@@ -716,7 +716,7 @@
 			}
 		},
 		"misc.die": {
-			"animation_length": 0.875,
+			"animation_length": 1,
 			"bones": {
 				"body": {
 					"rotation": {
@@ -951,9 +951,10 @@
 					}
 				},
 				"bone": {
-					"rotation": {
-						"vector": [0, 0, -90]
-					}
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": [0, 0, 0.01]
 				}
 			}
 		}

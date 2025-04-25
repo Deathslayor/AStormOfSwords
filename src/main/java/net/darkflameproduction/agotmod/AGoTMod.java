@@ -4,6 +4,7 @@ package net.darkflameproduction.agotmod;
 // Importing necessary classes from other packages
 
 import net.darkflameproduction.agotmod.block.ModBLocks;
+import net.darkflameproduction.agotmod.entity.ModEntities;
 import net.darkflameproduction.agotmod.item.ModItemProperties;
 import net.darkflameproduction.agotmod.item.ModItems;
 import net.darkflameproduction.agotmod.item.creativetabs.*;
@@ -79,6 +80,8 @@ public class AGoTMod {
 
         // Register Biomes
         ModTerrablender.registerBiomes();
+
+        ModEntities.register(modEventBus);
 
         LOGGER.info("AGOT Mod initialized");
     }
