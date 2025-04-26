@@ -4,9 +4,12 @@ package net.darkflameproduction.agotmod.event;
 // Importing necessary classes from other packages
 
 import net.darkflameproduction.agotmod.AGoTMod;
+import net.darkflameproduction.agotmod.entity.ModBlockEntities;
 import net.darkflameproduction.agotmod.entity.ModEntities;
 import net.darkflameproduction.agotmod.entity.client.northofthewall.Mammoth_Entity_Renderer;
 import net.darkflameproduction.agotmod.event.KeyMappings.KeyBindings;
+import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
+import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -48,5 +51,13 @@ public class ModEventBusClientEvents {
         event.register(KeyBindings.INSTANCE.OpenBasicMenu);
         event.register(KeyBindings.INSTANCE.OpenMap);
         event.register(KeyBindings.INSTANCE.SetWayPoint);
+
+    }
+
+    @SubscribeEvent
+    public static void registerBER(EntityRenderersEvent.RegisterRenderers event){
+        event.registerBlockEntityRenderer(ModBlockEntities.MOD_SIGN.get(), SignRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.MOD_HANGING_SIGN.get(), HangingSignRenderer::new);
+
     }
 }

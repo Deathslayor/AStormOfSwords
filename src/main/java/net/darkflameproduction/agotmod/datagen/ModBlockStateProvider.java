@@ -15,6 +15,7 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.minecraft.resources.ResourceLocation;
 
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 public class ModBlockStateProvider extends BlockStateProvider {
@@ -1957,17 +1958,205 @@ public class ModBlockStateProvider extends BlockStateProvider {
                         modLoc("block/" + ModBLocks.BLUE_ROSE_BUSH.getId().getPath() + "_top"))).addModel();
 
 
+        simpleBlockWithItem(ModBLocks.POTTED_WINTER_ROSE.get(),
+                models().withExistingParent(ModBLocks.POTTED_WINTER_ROSE.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.WINTER_ROSE.get())) // Make sure this texture is valid
+                        .renderType("cutout"));
 
+        simpleBlockWithItem(ModBLocks.POTTED_WILD_RADISH.get(),
+                models().withExistingParent(ModBLocks.POTTED_WILD_RADISH.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.WILD_RADISH.get()))
+                        .renderType("cutout"));
 
+        simpleBlockWithItem(ModBLocks.POTTED_WHITE_ROSE.get(),
+                models().withExistingParent(ModBLocks.POTTED_WHITE_ROSE.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.WHITE_ROSE.get()))
+                        .renderType("cutout"));
 
+        simpleBlockWithItem(ModBLocks.POTTED_THORN_BUSH.get(),
+                models().withExistingParent(ModBLocks.POTTED_THORN_BUSH.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.THORN_BUSH.get()))
+                        .renderType("cutout"));
 
+        simpleBlockWithItem(ModBLocks.POTTED_THISTLE.get(),
+                models().withExistingParent(ModBLocks.POTTED_THISTLE.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.THISTLE.get()))
+                        .renderType("cutout"));
 
-        //simpleBlockWithItem(ModBLocks.POTTED_WINTER_ROSE.get(), models().singleTexture("potted_winter_rose", new ResourceLocation.Serializer("flower_pot_cross"), "plant", blockTexture(ModBLocks.WINTER_ROSE.get())).renderType("cutout"));
+        simpleBlockWithItem(ModBLocks.POTTED_TANSY.get(),
+                models().withExistingParent(ModBLocks.POTTED_TANSY.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.TANSY.get()))
+                        .renderType("cutout"));
+
+        simpleBlockWithItem(ModBLocks.POTTED_SPICEFLOWER.get(),
+                models().withExistingParent(ModBLocks.POTTED_SPICEFLOWER.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.SPICEFLOWER.get()))
+                        .renderType("cutout"));
+
+        simpleBlockWithItem(ModBLocks.POTTED_SEDGE.get(),
+                models().withExistingParent(ModBLocks.POTTED_SEDGE.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.SEDGE.get()))
+                        .renderType("cutout"));
+
+        simpleBlockWithItem(ModBLocks.POTTED_SAFFRON_CROCUS.get(),
+                models().withExistingParent(ModBLocks.POTTED_SAFFRON_CROCUS.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.SAFFRON_CROCUS.get()))
+                        .renderType("cutout"));
+
+        simpleBlockWithItem(ModBLocks.POTTED_ROSE.get(),
+                models().withExistingParent(ModBLocks.POTTED_ROSE.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.ROSE.get()))
+                        .renderType("cutout"));
+
+        simpleBlockWithItem(ModBLocks.POTTED_POISON_KISSES.get(),
+                models().withExistingParent(ModBLocks.POTTED_POISON_KISSES.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.POISON_KISSES.get()))
+                        .renderType("cutout"));
+
+        simpleBlockWithItem(ModBLocks.POTTED_PENNYROYAL.get(),
+                models().withExistingParent(ModBLocks.POTTED_PENNYROYAL.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.PENNYROYAL.get()))
+                        .renderType("cutout"));
+
+        simpleBlockWithItem(ModBLocks.POTTED_OPIUM_POPPY.get(),
+                models().withExistingParent(ModBLocks.POTTED_OPIUM_POPPY.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.OPIUM_POPPY.get()))
+                        .renderType("cutout"));
+
+        simpleBlockWithItem(ModBLocks.POTTED_NIGHTSHADE.get(),
+                models().withExistingParent(ModBLocks.POTTED_NIGHTSHADE.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.NIGHTSHADE.get()))
+                        .renderType("cutout"));
+
+        simpleBlockWithItem(ModBLocks.POTTED_MOONBLOOM.get(),
+                models().withExistingParent(ModBLocks.POTTED_MOONBLOOM.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.MOONBLOOM.get()))
+                        .renderType("cutout"));
+
+        simpleBlockWithItem(ModBLocks.POTTED_LUNGWORT.get(),
+                models().withExistingParent(ModBLocks.POTTED_LUNGWORT.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.LUNGWORT.get()))
+                        .renderType("cutout"));
+
+        simpleBlockWithItem(ModBLocks.POTTED_LIVERWORT.get(),
+                models().withExistingParent(ModBLocks.POTTED_LIVERWORT.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.LIVERWORT.get()))
+                        .renderType("cutout"));
+
+        simpleBlockWithItem(ModBLocks.POTTED_LAVENDER.get(),
+                models().withExistingParent(ModBLocks.POTTED_LAVENDER.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.LAVENDER.get()))
+                        .renderType("cutout"));
+
+        simpleBlockWithItem(ModBLocks.POTTED_LADYS_LACE.get(),
+                models().withExistingParent(ModBLocks.POTTED_LADYS_LACE.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.LADYS_LACE.get()))
+                        .renderType("cutout"));
+
+        simpleBlockWithItem(ModBLocks.POTTED_GORSE.get(),
+                models().withExistingParent(ModBLocks.POTTED_GORSE.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.GORSE.get()))
+                        .renderType("cutout"));
+
+        simpleBlockWithItem(ModBLocks.POTTED_GOLDENROD.get(),
+                models().withExistingParent(ModBLocks.POTTED_GOLDENROD.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.GOLDENROD.get()))
+                        .renderType("cutout"));
+
+        simpleBlockWithItem(ModBLocks.POTTED_GOLDENCUP.get(),
+                models().withExistingParent(ModBLocks.POTTED_GOLDENCUP.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.GOLDENCUP.get()))
+                        .renderType("cutout"));
+
+        simpleBlockWithItem(ModBLocks.POTTED_GOATHEAD.get(),
+                models().withExistingParent(ModBLocks.POTTED_GOATHEAD.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.GOATHEAD.get()))
+                        .renderType("cutout"));
+
+        simpleBlockWithItem(ModBLocks.POTTED_GINGER.get(),
+                models().withExistingParent(ModBLocks.POTTED_GINGER.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.GINGER.get()))
+                        .renderType("cutout"));
+
+        simpleBlockWithItem(ModBLocks.POTTED_GILLYFLOWER.get(),
+                models().withExistingParent(ModBLocks.POTTED_GILLYFLOWER.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.GILLYFLOWER.get()))
+                        .renderType("cutout"));
+
+        simpleBlockWithItem(ModBLocks.POTTED_FROSTFIRE.get(),
+                models().withExistingParent(ModBLocks.POTTED_FROSTFIRE.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.FROSTFIRE.get()))
+                        .renderType("cutout"));
+
+        simpleBlockWithItem(ModBLocks.POTTED_FORGET_ME_NOT.get(),
+                models().withExistingParent(ModBLocks.POTTED_FORGET_ME_NOT.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.FORGET_ME_NOT.get()))
+                        .renderType("cutout"));
+
+        simpleBlockWithItem(ModBLocks.POTTED_EVENING_STAR.get(),
+                models().withExistingParent(ModBLocks.POTTED_EVENING_STAR.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.EVENING_STAR.get()))
+                        .renderType("cutout"));
+
+        simpleBlockWithItem(ModBLocks.POTTED_DUSKY_ROSE.get(),
+                models().withExistingParent(ModBLocks.POTTED_DUSKY_ROSE.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.DUSKY_ROSE.get()))
+                        .renderType("cutout"));
+
+        simpleBlockWithItem(ModBLocks.POTTED_DRAGONS_BREATH.get(),
+                models().withExistingParent(ModBLocks.POTTED_DRAGONS_BREATH.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.DRAGONS_BREATH.get()))
+                        .renderType("cutout"));
+
+        simpleBlockWithItem(ModBLocks.POTTED_COLDSNAP.get(),
+                models().withExistingParent(ModBLocks.POTTED_COLDSNAP.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.COLDSNAP.get()))
+                        .renderType("cutout"));
+
+        simpleBlockWithItem(ModBLocks.POTTED_BLUE_ROSE.get(),
+                models().withExistingParent(ModBLocks.POTTED_BLUE_ROSE.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.BLUE_ROSE.get()))
+                        .renderType("cutout"));
+
+        simpleBlockWithItem(ModBLocks.POTTED_BLOODBLOOM.get(),
+                models().withExistingParent(ModBLocks.POTTED_BLOODBLOOM.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.BLOODBLOOM.get()))
+                        .renderType("cutout"));
+
+        simpleBlockWithItem(ModBLocks.POTTED_BLACK_LOTUS.get(),
+                models().withExistingParent(ModBLocks.POTTED_BLACK_LOTUS.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.BLACK_LOTUS.get()))
+                        .renderType("cutout"));
+
+        // ---------------------(SIGNS)--------------------- //
+        signBlock(((StandingSignBlock) ModBLocks.WEIRWOOD_SIGN.get()), ((WallSignBlock) ModBLocks.WEIRWOOD_WALL_SIGN.get()),
+                blockTexture(ModBLocks.WEIRWOOD_PLANKS.get()));
+
+        hangingSignBlock(ModBLocks.WEIRWOOD_HANGING_SIGN.get(), ModBLocks.WEIRWOOD_WALL_HANGING_SIGN.get(), blockTexture(ModBLocks.WEIRWOOD_PLANKS.get()));
+
 
         // ---------------------(VILLAGER PROFESSIONS BLOCKS)--------------------- //
         // Register block states and models for villager profession-related blocks
         blockWithItem(ModBLocks.MINT_BLOCK);
         // ---------------------(VILLAGER PROFESSIONS BLOCKS)--------------------- //
+    }
+
+    public void hangingSignBlock(Block signBlock, Block wallSignBlock, ResourceLocation texture) {
+        ModelFile sign = models().sign(name(signBlock), texture);
+        hangingSignBlock(signBlock, wallSignBlock, sign);
+    }
+
+    public void hangingSignBlock(Block signBlock, Block wallSignBlock, ModelFile sign) {
+        simpleBlock(signBlock, sign);
+        simpleBlock(wallSignBlock, sign);
+    }
+
+    private String name(Block block) {
+        return key(block).getPath();
+    }
+
+    private ResourceLocation key(Block block) {
+        return BuiltInRegistries.BLOCK.getKey(block);
     }
 
     private void saplingBlock(@NotNull DeferredHolder<Block, Block> blockRegistryObject) {

@@ -1,4 +1,4 @@
-// 1.21.3	2025-04-15T14:58:40.2187998	Tags for minecraft:block mod id agotmod
+// 1.21.3	2025-04-26T16:18:10.8740916	Tags for minecraft:block mod id agotmod
 7ce4ba32d6429dbf27a7ccd68d70690dbe80eb19 data/agotmod/tags/block/incorrect_for_bronze_tool.json
 a249c46329a41538f49a564e1f14338aaf1be5a0 data/agotmod/tags/block/incorrect_for_steel_tool.json
 a5270b76c9036b19927822a14ea7db103ebf5a0d data/agotmod/tags/block/needs_bronze_tool.json
@@ -6,6 +6,7 @@ a5270b76c9036b19927822a14ea7db103ebf5a0d data/agotmod/tags/block/needs_bronze_to
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/agotmod/tags/block/needs_steel_tool.json
 a8a5125dbbf35c70716e4423deea1f713f55c21f data/minecraft/tags/block/fences.json
 228dd57aeaac3802043d100a72e53b187c3529ba data/minecraft/tags/block/fence_gates.json
+0225864cdaf8cf25c242f3866129b380bb7734db data/minecraft/tags/block/flowers.json
 a2787d1e34eb959461d223ed2e8d1c065d9ed99e data/minecraft/tags/block/incorrect_for_gold_tool.json
 a2787d1e34eb959461d223ed2e8d1c065d9ed99e data/minecraft/tags/block/incorrect_for_iron_tool.json
 a2787d1e34eb959461d223ed2e8d1c065d9ed99e data/minecraft/tags/block/incorrect_for_stone_tool.json
@@ -17,6 +18,8 @@ add20b0e5782888ccfc35ca325ac5a1c2e39f150 data/minecraft/tags/block/needs_iron_to
 51ff5d7394d9c7aa6fac4887199461f1cdd0df85 data/minecraft/tags/block/needs_stone_tool.json
 32459fcf10a6dbbc00ddfb8e7acd44be9de99b50 data/minecraft/tags/block/planks.json
 1ff9aae6061fce587e990e4aaffc5c6155e12556 data/minecraft/tags/block/slabs.json
+0e06587d0a77e00c367b678a69b5a5bf5023013c data/minecraft/tags/block/small_flowers.json
 55c4496ed7a443a0dd97358f456d9095f9b8a2ea data/minecraft/tags/block/stairs.json
 9b57baf4c55cd54660df395049570d9f2735b14b data/minecraft/tags/block/stone_bricks.json
+9c711b618a49ea337707210db7a33bb33f4348a2 data/minecraft/tags/block/tall_flowers.json
 bb26c3475d97ac9bbf6c0958154f3ab62fd2d6e9 data/minecraft/tags/block/walls.json

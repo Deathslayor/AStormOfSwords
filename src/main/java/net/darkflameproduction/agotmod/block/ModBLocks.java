@@ -1,11 +1,10 @@
 package net.darkflameproduction.agotmod.block;// Importing necessary classes from other packages
 
 import net.darkflameproduction.agotmod.AGoTMod;
-import net.darkflameproduction.agotmod.block.custom.ModFlammableLeaves;
-import net.darkflameproduction.agotmod.block.custom.ModFlammablePlanks;
-import net.darkflameproduction.agotmod.block.custom.ModFlammableRotatedPillarBlock;
+import net.darkflameproduction.agotmod.block.custom.*;
 import net.darkflameproduction.agotmod.block.custom.specialleaves.WeirwoodLeavesBlock;
 import net.darkflameproduction.agotmod.item.ModItems;
+import net.darkflameproduction.agotmod.util.ModWoodTypes;
 import net.darkflameproduction.agotmod.worldgen.tree.ModTreeGrower;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -1523,6 +1522,21 @@ public class ModBLocks {
     public static final DeferredBlock<Block> ALDER_TRAPDOOR = registerBlock("alder_trapdoor",
             properties -> new TrapDoorBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR));
 
+
+    // ---------------------------(SIGNS)--------------------------- //
+    public static final DeferredBlock<Block> WEIRWOOD_SIGN = registerBlock("weirwood_sign",
+            properties -> new ModStandingSignBlock(ModWoodTypes.WEIRWOOD, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SIGN));
+    public static final DeferredBlock<Block> WEIRWOOD_WALL_SIGN = registerBlock("weirwood_wall_sign",
+            properties -> new ModWallSignBlock(ModWoodTypes.WEIRWOOD, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_SIGN));
+    public static final DeferredBlock<Block> WEIRWOOD_HANGING_SIGN = registerBlock("weirwood_hanging_sign",
+            properties -> new ModHangingSignBlock(ModWoodTypes.WEIRWOOD, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_HANGING_SIGN));
+    public static final DeferredBlock<Block> WEIRWOOD_WALL_HANGING_SIGN = registerBlock("weirwood_wall_hanging_sign",
+            properties -> new ModWallHangingSignBlock(ModWoodTypes.WEIRWOOD, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_HANGING_SIGN));
+
     // ---------------------------(STONE)--------------------------- //
 
     public static final DeferredBlock<Block> REDKEEP_STONE_BLOCK = registerBlock("redkeep_stone",
@@ -1696,9 +1710,313 @@ public class ModBLocks {
 
 
     // ---------------------------(POTTED PLANTS)--------------------------- //
-    //public static final DeferredBlock<Block> POTTED_WINTER_ROSE = BLOCKS.register("potted_winter_rose",
-    //        properties -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT), ModBLocks.WINTER_ROSE,
-    //               BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()));
+
+    public static final DeferredBlock<Block> POTTED_WINTER_ROSE = registerBlock("potted_winter_rose",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> WINTER_ROSE.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_WILD_RADISH = registerBlock("potted_wild_radish",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> WILD_RADISH.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_WHITE_ROSE = registerBlock("potted_white_rose",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> WHITE_ROSE.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_THORN_BUSH = registerBlock("potted_thorn_bush",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> THORN_BUSH.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_THISTLE = registerBlock("potted_thistle",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> THISTLE.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_TANSY = registerBlock("potted_tansy",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> TANSY.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_SPICEFLOWER = registerBlock("potted_spiceflower",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> SPICEFLOWER.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_SEDGE = registerBlock("potted_sedge",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> SEDGE.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_SAFFRON_CROCUS = registerBlock("potted_saffron_crocus",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> SAFFRON_CROCUS.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_ROSE = registerBlock("potted_rose",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> ROSE.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_POISON_KISSES = registerBlock("potted_poison_kisses",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> POISON_KISSES.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_PENNYROYAL = registerBlock("potted_pennyroyal",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> PENNYROYAL.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_OPIUM_POPPY = registerBlock("potted_opium_poppy",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> OPIUM_POPPY.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_NIGHTSHADE = registerBlock("potted_nightshade",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> NIGHTSHADE.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_MOONBLOOM = registerBlock("potted_moonbloom",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> MOONBLOOM.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_LUNGWORT = registerBlock("potted_lungwort",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> LUNGWORT.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_LIVERWORT = registerBlock("potted_liverwort",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> LIVERWORT.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_LAVENDER = registerBlock("potted_lavender",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> LAVENDER.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_LADYS_LACE = registerBlock("potted_ladys_lace",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> LADYS_LACE.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_GORSE = registerBlock("potted_gorse",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> GORSE.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_GOLDENROD = registerBlock("potted_goldenrod",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> GOLDENROD.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_GOLDENCUP = registerBlock("potted_goldencup",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> GOLDENCUP.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_GOATHEAD = registerBlock("potted_goathead",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> GOATHEAD.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_GINGER = registerBlock("potted_ginger",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> GINGER.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_GILLYFLOWER = registerBlock("potted_gillyflower",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> GILLYFLOWER.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_FROSTFIRE = registerBlock("potted_frostfire",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> FROSTFIRE.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_FORGET_ME_NOT = registerBlock("potted_forget_me_not",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> FORGET_ME_NOT.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_EVENING_STAR = registerBlock("potted_evening_star",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> EVENING_STAR.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_DUSKY_ROSE = registerBlock("potted_dusky_rose",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> DUSKY_ROSE.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_DRAGONS_BREATH = registerBlock("potted_dragons_breath",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> DRAGONS_BREATH.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_COLDSNAP = registerBlock("potted_coldsnap",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> COLDSNAP.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_BLUE_ROSE = registerBlock("potted_blue_rose",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> BLUE_ROSE.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_BLOODBLOOM = registerBlock("potted_bloodbloom",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> BLOODBLOOM.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
+    public static final DeferredBlock<Block> POTTED_BLACK_LOTUS = registerBlock("potted_black_lotus",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> BLACK_LOTUS.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion()
+    );
+
 
     // Tells the AGoTMod class to call the modded blocks into the game
     public static void register(IEventBus eventBus) {

@@ -756,9 +756,51 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                                 .add(LootItem.lootTableItem(ModBLocks.ROSE.get()))));
 
         // ---------------------------(POTTED PLANTS)--------------------------- //
-        //this.add(ModBLocks.POTTED_WINTER_ROSE.get(), createPotFlowerItemTable(ModBLocks.WINTER_ROSE.get()));
+        this.add(ModBLocks.POTTED_WINTER_ROSE.get(), createPotFlowerItemTable(ModBLocks.WINTER_ROSE.get()));
+        this.add(ModBLocks.POTTED_WILD_RADISH.get(), createPotFlowerItemTable(ModBLocks.WILD_RADISH.get()));
+        this.add(ModBLocks.POTTED_WHITE_ROSE.get(), createPotFlowerItemTable(ModBLocks.WHITE_ROSE.get()));
+        this.add(ModBLocks.POTTED_THORN_BUSH.get(), createPotFlowerItemTable(ModBLocks.THORN_BUSH.get()));
+        this.add(ModBLocks.POTTED_THISTLE.get(), createPotFlowerItemTable(ModBLocks.THISTLE.get()));
+        this.add(ModBLocks.POTTED_TANSY.get(), createPotFlowerItemTable(ModBLocks.TANSY.get()));
+        this.add(ModBLocks.POTTED_SPICEFLOWER.get(), createPotFlowerItemTable(ModBLocks.SPICEFLOWER.get()));
+        this.add(ModBLocks.POTTED_SEDGE.get(), createPotFlowerItemTable(ModBLocks.SEDGE.get()));
+        this.add(ModBLocks.POTTED_SAFFRON_CROCUS.get(), createPotFlowerItemTable(ModBLocks.SAFFRON_CROCUS.get()));
+        this.add(ModBLocks.POTTED_ROSE.get(), createPotFlowerItemTable(ModBLocks.ROSE.get()));
+        this.add(ModBLocks.POTTED_POISON_KISSES.get(), createPotFlowerItemTable(ModBLocks.POISON_KISSES.get()));
+        this.add(ModBLocks.POTTED_PENNYROYAL.get(), createPotFlowerItemTable(ModBLocks.PENNYROYAL.get()));
+        this.add(ModBLocks.POTTED_OPIUM_POPPY.get(), createPotFlowerItemTable(ModBLocks.OPIUM_POPPY.get()));
+        this.add(ModBLocks.POTTED_NIGHTSHADE.get(), createPotFlowerItemTable(ModBLocks.NIGHTSHADE.get()));
+        this.add(ModBLocks.POTTED_MOONBLOOM.get(), createPotFlowerItemTable(ModBLocks.MOONBLOOM.get()));
+        this.add(ModBLocks.POTTED_LUNGWORT.get(), createPotFlowerItemTable(ModBLocks.LUNGWORT.get()));
+        this.add(ModBLocks.POTTED_LIVERWORT.get(), createPotFlowerItemTable(ModBLocks.LIVERWORT.get()));
+        this.add(ModBLocks.POTTED_LAVENDER.get(), createPotFlowerItemTable(ModBLocks.LAVENDER.get()));
+        this.add(ModBLocks.POTTED_LADYS_LACE.get(), createPotFlowerItemTable(ModBLocks.LADYS_LACE.get()));
+        this.add(ModBLocks.POTTED_GORSE.get(), createPotFlowerItemTable(ModBLocks.GORSE.get()));
+        this.add(ModBLocks.POTTED_GOLDENROD.get(), createPotFlowerItemTable(ModBLocks.GOLDENROD.get()));
+        this.add(ModBLocks.POTTED_GOLDENCUP.get(), createPotFlowerItemTable(ModBLocks.GOLDENCUP.get()));
+        this.add(ModBLocks.POTTED_GOATHEAD.get(), createPotFlowerItemTable(ModBLocks.GOATHEAD.get()));
+        this.add(ModBLocks.POTTED_GINGER.get(), createPotFlowerItemTable(ModBLocks.GINGER.get()));
+        this.add(ModBLocks.POTTED_GILLYFLOWER.get(), createPotFlowerItemTable(ModBLocks.GILLYFLOWER.get()));
+        this.add(ModBLocks.POTTED_FROSTFIRE.get(), createPotFlowerItemTable(ModBLocks.FROSTFIRE.get()));
+        this.add(ModBLocks.POTTED_FORGET_ME_NOT.get(), createPotFlowerItemTable(ModBLocks.FORGET_ME_NOT.get()));
+        this.add(ModBLocks.POTTED_EVENING_STAR.get(), createPotFlowerItemTable(ModBLocks.EVENING_STAR.get()));
+        this.add(ModBLocks.POTTED_DUSKY_ROSE.get(), createPotFlowerItemTable(ModBLocks.DUSKY_ROSE.get()));
+        this.add(ModBLocks.POTTED_DRAGONS_BREATH.get(), createPotFlowerItemTable(ModBLocks.DRAGONS_BREATH.get()));
+        this.add(ModBLocks.POTTED_COLDSNAP.get(), createPotFlowerItemTable(ModBLocks.COLDSNAP.get()));
+        this.add(ModBLocks.POTTED_BLUE_ROSE.get(), createPotFlowerItemTable(ModBLocks.BLUE_ROSE.get()));
+        this.add(ModBLocks.POTTED_BLOODBLOOM.get(), createPotFlowerItemTable(ModBLocks.BLOODBLOOM.get()));
+        this.add(ModBLocks.POTTED_BLACK_LOTUS.get(), createPotFlowerItemTable(ModBLocks.BLACK_LOTUS.get()));
 
-        /** // ---------------------------(NORMAL BLOCKS)--------------------------- // */
+        /** // ---------------------------(SIGNS)--------------------------- // */
+
+        this.add(ModBLocks.WEIRWOOD_SIGN.get(), block ->
+                createSingleItemTable(ModBLocks.WEIRWOOD_SIGN.get()));
+        this.add(ModBLocks.WEIRWOOD_WALL_SIGN.get(), block ->
+                createSingleItemTable(ModBLocks.WEIRWOOD_SIGN.get()));
+        this.add(ModBLocks.WEIRWOOD_HANGING_SIGN.get(), block ->
+                createSingleItemTable(ModBLocks.WEIRWOOD_HANGING_SIGN.get()));
+        this.add(ModBLocks.WEIRWOOD_WALL_HANGING_SIGN.get(), block ->
+                createSingleItemTable(ModBLocks.WEIRWOOD_HANGING_SIGN.get()));
     }
 
     @Override

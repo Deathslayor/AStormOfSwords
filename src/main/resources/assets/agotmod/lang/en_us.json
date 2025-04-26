@@ -603,6 +603,11 @@
   "block.agotmod.alder_fence": "Alder Fence",
   "block.agotmod.alder_fence_gate": "Alder Fence Gate",
 
+  "block.agotmod.weirwood_sign": "Weirwood Sign",
+  "block.agotmod.weirwood_hanging_sign": "Weirwood Hanging Sign",
+
+
+
   "block.agotmod.sstone_1_block": "Smooth Stone Variant 1 Block",
   "block.agotmod.sstone_1_stairs": "Smooth Stone Variant 1 Stairs",
   "block.agotmod.sstone_1_slab": "Smooth Stone Variant 1 Slab",

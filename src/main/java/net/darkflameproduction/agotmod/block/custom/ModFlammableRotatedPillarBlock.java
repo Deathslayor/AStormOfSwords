@@ -35,16 +35,55 @@ public class ModFlammableRotatedPillarBlock extends RotatedPillarBlock {
     @Override
     public @Nullable BlockState getToolModifiedState(@NotNull BlockState state, @NotNull UseOnContext context, @NotNull ItemAbility toolAction, boolean simulate) {
         if (context.getItemInHand().getItem() instanceof AxeItem) {
-            if (state.is(ModBLocks.SYCAMORE_LOG.get())) {
-                return ModBLocks.STRIPPED_SYCAMORE_LOG.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
-            }
-            if (state.is(ModBLocks.SYCAMORE_WOOD.get())) {
-                return ModBLocks.STRIPPED_SYCAMORE_WOOD.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
-            }
+            // Sycamore (still swapped!)
+            if (state.is(ModBLocks.SYCAMORE_LOG.get())) return ModBLocks.STRIPPED_SYCAMORE_WOOD.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            if (state.is(ModBLocks.SYCAMORE_WOOD.get())) return ModBLocks.STRIPPED_SYCAMORE_LOG.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+
+            // From here onwards: Normal behavior
+            if (state.is(ModBLocks.WEIRWOOD_LOG.get())) return ModBLocks.STRIPPED_WEIRWOOD_LOG.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            if (state.is(ModBLocks.WEIRWOOD_WOOD.get())) return ModBLocks.STRIPPED_WEIRWOOD_WOOD.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+
+            if (state.is(ModBLocks.SENTINEL_LOG.get())) return ModBLocks.STRIPPED_SENTINEL_LOG.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            if (state.is(ModBLocks.SENTINEL_WOOD.get())) return ModBLocks.STRIPPED_SENTINEL_WOOD.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+
+            if (state.is(ModBLocks.PINE_LOG.get())) return ModBLocks.STRIPPED_PINE_LOG.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            if (state.is(ModBLocks.PINE_WOOD.get())) return ModBLocks.STRIPPED_PINE_WOOD.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+
+            if (state.is(ModBLocks.IRONWOOD_LOG.get())) return ModBLocks.STRIPPED_IRONWOOD_LOG.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            if (state.is(ModBLocks.IRONWOOD_WOOD.get())) return ModBLocks.STRIPPED_IRONWOOD_WOOD.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+
+            if (state.is(ModBLocks.HAWTHORN_LOG.get())) return ModBLocks.STRIPPED_HAWTHORN_LOG.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            if (state.is(ModBLocks.HAWTHORN_WOOD.get())) return ModBLocks.STRIPPED_HAWTHORN_WOOD.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+
+            if (state.is(ModBLocks.CHESTNUT_LOG.get())) return ModBLocks.STRIPPED_CHESTNUT_LOG.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            if (state.is(ModBLocks.CHESTNUT_WOOD.get())) return ModBLocks.STRIPPED_CHESTNUT_WOOD.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+
+            if (state.is(ModBLocks.CEDAR_LOG.get())) return ModBLocks.STRIPPED_CEDAR_LOG.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            if (state.is(ModBLocks.CEDAR_WOOD.get())) return ModBLocks.STRIPPED_CEDAR_WOOD.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+
+            if (state.is(ModBLocks.BEECH_LOG.get())) return ModBLocks.STRIPPED_BEECH_LOG.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            if (state.is(ModBLocks.BEECH_WOOD.get())) return ModBLocks.STRIPPED_BEECH_WOOD.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+
+            if (state.is(ModBLocks.ASH_LOG.get())) return ModBLocks.STRIPPED_ASH_LOG.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            if (state.is(ModBLocks.ASH_WOOD.get())) return ModBLocks.STRIPPED_ASH_WOOD.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+
+            if (state.is(ModBLocks.BLACKBARK_LOG.get())) return ModBLocks.STRIPPED_BLACKBARK_LOG.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            if (state.is(ModBLocks.BLACKBARK_WOOD.get())) return ModBLocks.STRIPPED_BLACKBARK_WOOD.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+
+            if (state.is(ModBLocks.ASPEN_LOG.get())) return ModBLocks.STRIPPED_ASPEN_LOG.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            if (state.is(ModBLocks.ASPEN_WOOD.get())) return ModBLocks.STRIPPED_ASPEN_WOOD.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+
+            if (state.is(ModBLocks.ALDER_LOG.get())) return ModBLocks.STRIPPED_ALDER_LOG.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            if (state.is(ModBLocks.ALDER_WOOD.get())) return ModBLocks.STRIPPED_ALDER_WOOD.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
         }
 
         return super.getToolModifiedState(state, context, toolAction, simulate);
     }
+
+
+
+
+
 
 
 }

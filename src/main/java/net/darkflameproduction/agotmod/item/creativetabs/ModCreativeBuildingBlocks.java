@@ -43,6 +43,8 @@ public class ModCreativeBuildingBlocks {
                         pOutput.accept(ModBLocks.WEIRWOOD_WALL.get());
                         pOutput.accept(ModBLocks.WEIRWOOD_DOOR.get());
                         pOutput.accept(ModBLocks.WEIRWOOD_TRAPDOOR.get());
+                        pOutput.accept(ModBLocks.WEIRWOOD_SIGN.get());
+                        pOutput.accept(ModBLocks.WEIRWOOD_WALL_SIGN.get());
 
                         pOutput.accept(ModBLocks.SYCAMORE_LOG.get());
                         pOutput.accept(ModBLocks.STRIPPED_SYCAMORE_LOG.get());

@@ -769,6 +769,11 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.NORTHERN_MOUNTAIN_CLAN_CHAIN_SMITHING_SCROLL);
         simpleItem(ModItems.NORTHERN_MOUNTAIN_CLAN_NOBLE_SMITHING_SCROLL);
 
+        // ---------------------------(SIGNS)--------------------------- //
+        //simpleItem(ModItems.WEIRWOOD_SIGN);
+        //simpleItem(ModItems.WEIRWOOD_HANGING_SIGN);
+
+
 
     }
 

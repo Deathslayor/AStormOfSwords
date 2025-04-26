@@ -30,12 +30,16 @@ import net.darkflameproduction.agotmod.armor.custom.thenn.ThennPlateArmorItem;
 import net.darkflameproduction.agotmod.armor.custom.wildling.WildlingChiefArmorItem;
 import net.darkflameproduction.agotmod.armor.custom.wildling.WildlingFurArmorItem;
 import net.darkflameproduction.agotmod.armor.custom.wildling.WildlingLeatherArmorItem;
+import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.equipment.ArmorType;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.function.Supplier;
 
 // A utility class for creating and registering modded items
 public class ModItems {
@@ -661,6 +665,10 @@ public class ModItems {
     public static final DeferredItem<Item> SMITHING_SCROLL_3 = ITEMS.registerItem("smithing_scroll_3", Item::new);
     public static final DeferredItem<Item> SMITHING_SCROLL_4 = ITEMS.registerItem("smithing_scroll_4", Item::new);
     public static final DeferredItem<Item> SMITHING_SCROLL_5 = ITEMS.registerItem("smithing_scroll_5", Item::new);
+
+
+
+
 
 
     // Tells the AGoTMod class to call the modded items into the game
