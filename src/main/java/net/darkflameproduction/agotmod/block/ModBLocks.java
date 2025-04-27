@@ -1540,6 +1540,19 @@ public class ModBLocks {
     public static final DeferredBlock<Block> WEIRWOOD_WALL_HANGING_SIGN = registerBlock("weirwood_wall_hanging_sign",
             properties -> new ModWallHangingSignBlock(ModWoodTypes.WEIRWOOD, properties),
             BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_HANGING_SIGN), false);
+    public static final DeferredBlock<Block> PINE_SIGN = registerBlock("pine_sign",
+            properties -> new ModStandingSignBlock(ModWoodTypes.PINE, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SIGN), false);
+    public static final DeferredBlock<Block> PINE_WALL_SIGN = registerBlock("pine_wall_sign",
+            properties -> new ModWallSignBlock(ModWoodTypes.PINE, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_SIGN), false);
+    public static final DeferredBlock<Block> PINE_HANGING_SIGN = registerBlock("pine_hanging_sign",
+            properties -> new ModHangingSignBlock(ModWoodTypes.PINE, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_HANGING_SIGN), false);
+    public static final DeferredBlock<Block> PINE_WALL_HANGING_SIGN = registerBlock("pine_wall_hanging_sign",
+            properties -> new ModWallHangingSignBlock(ModWoodTypes.PINE, properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_HANGING_SIGN), false);
+
 
     // ---------------------------(STONE)--------------------------- //
 

@@ -1,4 +1,4 @@
-// 1.21.3	2025-04-27T14:38:38.9755035	Item Models: agotmod
+// 1.21.3	2025-04-27T22:49:01.8893918	Item Models: agotmod
 65c44e6f1f29781252c76032b90c20b3bc8f7b8a assets/agotmod/models/item/alder_button.json
 f0b6afe25a5640838c024d02c663e7c8f821ffd6 assets/agotmod/models/item/alder_door.json
 2af83e95998f18d674056268682572a94f141042 assets/agotmod/models/item/alder_fence.json
@@ -1556,8 +1556,10 @@ d63deb9f8be8eb2077bb6eeff595094bc538d93c assets/agotmod/models/item/pine_button.
 c3024834e27cc16be4b7daa12ffe05a7f192d207 assets/agotmod/models/item/pine_door.json
 3bedfb2139397954dfd8e62c31958797c89c7b6e assets/agotmod/models/item/pine_fence.json
 bdf557e2bfe5f2c7041182cf89a78235c759f055 assets/agotmod/models/item/pine_fence_gate.json
+a3bfeabc84140fe1113fa0726ee85808f5090659 assets/agotmod/models/item/pine_hanging_sign.json
 0dfd06d84289b1b3242769bc27cae85aaffd3724 assets/agotmod/models/item/pine_pressure_plate.json
 17e014423e0ee67ca257a96f5df0b11ff88b881d assets/agotmod/models/item/pine_sapling.json
+cbb11d78df9cd5cad4261498d58c5c748ae92430 assets/agotmod/models/item/pine_sign.json
 465768a703390e1c021cc3f96e9abec034c8a9c0 assets/agotmod/models/item/pine_slabs.json
 48f5e4f3f9abcf6cdf0760994f5d9b203f83e767 assets/agotmod/models/item/pine_stairs.json
 de7d449e292240a23268c96f2e246a8ba0cdcc3b assets/agotmod/models/item/pine_trapdoor.json

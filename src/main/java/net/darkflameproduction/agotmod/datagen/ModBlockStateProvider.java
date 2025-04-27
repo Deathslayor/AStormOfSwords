@@ -2133,6 +2133,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 blockTexture(ModBLocks.WEIRWOOD_PLANKS.get()));
 
         hangingSignBlock(ModBLocks.WEIRWOOD_HANGING_SIGN.get(), ModBLocks.WEIRWOOD_WALL_HANGING_SIGN.get(), blockTexture(ModBLocks.WEIRWOOD_PLANKS.get()));
+        signBlock(((StandingSignBlock) ModBLocks.PINE_SIGN.get()), ((WallSignBlock) ModBLocks.PINE_WALL_SIGN.get()),
+                blockTexture(ModBLocks.PINE_PLANKS.get()));
+
+        hangingSignBlock(ModBLocks.PINE_HANGING_SIGN.get(), ModBLocks.PINE_WALL_HANGING_SIGN.get(), blockTexture(ModBLocks.PINE_PLANKS.get()));
+
 
 
         // ---------------------(VILLAGER PROFESSIONS BLOCKS)--------------------- //

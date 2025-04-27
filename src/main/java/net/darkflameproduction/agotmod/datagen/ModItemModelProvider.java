@@ -772,8 +772,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         // ---------------------------(SIGNS)--------------------------- //
         simpleItem(ModItems.WEIRWOOD_SIGN);
         simpleItem(ModItems.WEIRWOOD_HANGING_SIGN);
-
-
+        simpleItem(ModItems.PINE_SIGN);
+        simpleItem(ModItems.PINE_HANGING_SIGN);
 
     }
 

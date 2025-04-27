@@ -17,5 +17,5 @@
       "rolls": 1.0
     }
   ],
-  "random_sequence": "minecraft:blocks/oak_sign"
+  "random_sequence": "agotmod:blocks/pine_sign"
 }

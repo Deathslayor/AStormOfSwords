@@ -91,6 +91,9 @@ public class ModCreativeBuildingBlocks {
                         pOutput.accept(ModBLocks.PINE_WALL.get());
                         pOutput.accept(ModBLocks.PINE_DOOR.get());
                         pOutput.accept(ModBLocks.PINE_TRAPDOOR.get());
+                        pOutput.accept(ModItems.PINE_SIGN.get());
+                        pOutput.accept(ModItems.PINE_HANGING_SIGN.get());
+
 
                         pOutput.accept(ModBLocks.IRONWOOD_LOG.get());
                         pOutput.accept(ModBLocks.STRIPPED_IRONWOOD_LOG.get());

@@ -801,6 +801,15 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 createSingleItemTable(ModBLocks.WEIRWOOD_HANGING_SIGN.get()));
         this.add(ModBLocks.WEIRWOOD_WALL_HANGING_SIGN.get(), block ->
                 createSingleItemTable(ModBLocks.WEIRWOOD_HANGING_SIGN.get()));
+        this.add(ModBLocks.PINE_SIGN.get(), block ->
+                createSingleItemTable(ModBLocks.PINE_SIGN.get()));
+        this.add(ModBLocks.PINE_WALL_SIGN.get(), block ->
+                createSingleItemTable(ModBLocks.PINE_SIGN.get()));
+        this.add(ModBLocks.PINE_HANGING_SIGN.get(), block ->
+                createSingleItemTable(ModBLocks.PINE_HANGING_SIGN.get()));
+        this.add(ModBLocks.PINE_WALL_HANGING_SIGN.get(), block ->
+                createSingleItemTable(ModBLocks.PINE_HANGING_SIGN.get()));
+
     }
 
     @Override

@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "agotmod:pine_sign"
+          "name": "agotmod:pine_hanging_sign"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "minecraft:blocks/oak_sign"
+  "random_sequence": "agotmod:blocks/pine_hanging_sign"
 }

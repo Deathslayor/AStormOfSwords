@@ -1,4 +1,4 @@
-// 1.21.3	2025-04-26T23:11:28.4331868	Loot Tables
+// 1.21.3	2025-04-27T22:49:01.9699868	Loot Tables
 dcab3871310df0811beb8de47adc40c83d85986b data/agotmod/loot_table/blocks/alder_button.json
 81071778b6225f49c02483465d22441e05162a1b data/agotmod/loot_table/blocks/alder_door.json
 33ccfef8d939079aebfc7963299df0ced91481b5 data/agotmod/loot_table/blocks/alder_fence.json
@@ -1956,12 +1956,14 @@ d0958b235a48cb490001de8397b8f6dda2a0f936 data/agotmod/loot_table/blocks/pine_but
 42a8d7660a4d4dbca70ce039f85aa12a5e135c0b data/agotmod/loot_table/blocks/pine_door.json
 67b2f2faeae5c80abd5ec72ff744accd511fef41 data/agotmod/loot_table/blocks/pine_fence.json
 e8584597e4c048cf77ba27bf385208e30392570b data/agotmod/loot_table/blocks/pine_fence_gate.json
+0c1ba49b4aa0b6339bce102404b29b3df071c492 data/agotmod/loot_table/blocks/pine_hanging_sign.json
 6977255aa731969ec863d122506841237691acf8 data/agotmod/loot_table/blocks/pine_leaves.json
 ea56a38aa1ac33085e32ae4057c98b362ffe02d1 data/agotmod/loot_table/blocks/pine_log.json
 7f8e20f14c1ac2f5c6225ed54ac435cc30228847 data/agotmod/loot_table/blocks/pine_log_stripped.json
 a78c1841fedd2f7a3fdbb58b48d3d142842effbc data/agotmod/loot_table/blocks/pine_planks.json
 94d61bc45b4157fd055b63c8c9cb89c48212500e data/agotmod/loot_table/blocks/pine_pressure_plate.json
 c3600767ac0d1af00c2e79bb14155fb46fe37659 data/agotmod/loot_table/blocks/pine_sapling.json
+ba9f3e63affa9e118e965151fab2d092f003f823 data/agotmod/loot_table/blocks/pine_sign.json
 0b4f9f9be77fa44e1f9820b6fbe2975017a7734d data/agotmod/loot_table/blocks/pine_slabs.json
 37472af524b5f2c931dc2438c2729f6cadeb11a2 data/agotmod/loot_table/blocks/pine_stairs.json
 4ab5bad8e52325a4d7065913570aecda996e9fb7 data/agotmod/loot_table/blocks/pine_trapdoor.json
@@ -3072,5 +3074,5 @@ c85f908dcae8864d580dbd5206c0850b7d0d9292 data/agotmod/loot_table/blocks/white_ro
 2a7ae40f5083c13e499d75fc9e4fde8e48048f5b data/agotmod/loot_table/blocks/winter_rose.json
 fc6eec34399fe176025a441121aa9ca0773c5422 data/agotmod/loot_table/blocks/winter_rose_bush.json
 015716c07825bc0adc2965c574b6894ea7f74e99 data/agotmod/loot_table/blocks/yellow_diamond_block.json
-e03fbd518c0f52db55bce71ee635381b4b6a79a7 data/minecraft/loot_table/blocks/oak_hanging_sign.json
-d4cd7720b949e5f938c85af1624352075a531564 data/minecraft/loot_table/blocks/oak_sign.json
+cbd21bd0e7487dabbcdafc5a3e75593d5a2b75b5 data/minecraft/loot_table/blocks/oak_hanging_sign.json
+e7bcb6e0432950199187a03870477a91f627b926 data/minecraft/loot_table/blocks/oak_sign.json

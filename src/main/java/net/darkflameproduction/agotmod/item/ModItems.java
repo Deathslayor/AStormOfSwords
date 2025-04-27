@@ -675,6 +675,15 @@ public class ModItems {
             properties -> new HangingSignItem(ModBLocks.WEIRWOOD_HANGING_SIGN.get(),
                     ModBLocks.WEIRWOOD_WALL_HANGING_SIGN.get(), properties.stacksTo(16)));
 
+    public static final DeferredItem<Item> PINE_SIGN = ITEMS.registerItem("pine_sign",
+            properties -> new SignItem(ModBLocks.PINE_SIGN.get(),
+                    ModBLocks.PINE_WALL_SIGN.get(), properties.stacksTo(16)));
+
+    public static final DeferredItem<Item> PINE_HANGING_SIGN = ITEMS.registerItem("pine_hanging_sign",
+            properties -> new HangingSignItem(ModBLocks.PINE_HANGING_SIGN.get(),
+                    ModBLocks.PINE_WALL_HANGING_SIGN.get(), properties.stacksTo(16)));
+
+
 
 
 

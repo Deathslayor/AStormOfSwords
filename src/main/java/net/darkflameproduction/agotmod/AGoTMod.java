@@ -153,6 +153,7 @@ public class AGoTMod {
         @SubscribeEvent
         public static void onClientSetup(@NotNull FMLClientSetupEvent event) {
             Sheets.addWoodType(ModWoodTypes.WEIRWOOD);
+            Sheets.addWoodType(ModWoodTypes.PINE);
             // Register custom renderer for the Rhino entity
 
             event.enqueueWork(ModItemProperties::addCustomItemProperties);
