@@ -793,22 +793,18 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
         /** // ---------------------------(SIGNS)--------------------------- // */
 
-        this.add(ModBLocks.WEIRWOOD_SIGN.get(), block ->
-                createSingleItemTable(ModBLocks.WEIRWOOD_SIGN.get()));
-        this.add(ModBLocks.WEIRWOOD_WALL_SIGN.get(), block ->
-                createSingleItemTable(ModBLocks.WEIRWOOD_SIGN.get()));
-        this.add(ModBLocks.WEIRWOOD_HANGING_SIGN.get(), block ->
-                createSingleItemTable(ModBLocks.WEIRWOOD_HANGING_SIGN.get()));
-        this.add(ModBLocks.WEIRWOOD_WALL_HANGING_SIGN.get(), block ->
-                createSingleItemTable(ModBLocks.WEIRWOOD_HANGING_SIGN.get()));
-        this.add(ModBLocks.PINE_SIGN.get(), block ->
-                createSingleItemTable(ModBLocks.PINE_SIGN.get()));
-        this.add(ModBLocks.PINE_WALL_SIGN.get(), block ->
-                createSingleItemTable(ModBLocks.PINE_SIGN.get()));
-        this.add(ModBLocks.PINE_HANGING_SIGN.get(), block ->
-                createSingleItemTable(ModBLocks.PINE_HANGING_SIGN.get()));
-        this.add(ModBLocks.PINE_WALL_HANGING_SIGN.get(), block ->
-                createSingleItemTable(ModBLocks.PINE_HANGING_SIGN.get()));
+        this.dropSelf(ModBLocks.WEIRWOOD_SIGN.get());
+        this.dropSelf(ModBLocks.WEIRWOOD_WALL_SIGN.get());
+        this.dropSelf(ModBLocks.WEIRWOOD_HANGING_SIGN.get());
+        this.dropSelf(ModBLocks.WEIRWOOD_WALL_HANGING_SIGN.get());
+
+        this.dropSelf(ModBLocks.PINE_SIGN.get());
+        this.dropSelf(ModBLocks.PINE_WALL_SIGN.get());
+        this.dropSelf(ModBLocks.PINE_HANGING_SIGN.get());
+        this.dropSelf(ModBLocks.PINE_WALL_HANGING_SIGN.get());
+
+
+
 
     }
 
