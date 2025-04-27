@@ -1,4 +1,4 @@
-// 1.21.3	2025-04-18T20:14:20.931744	Item Models: agotmod
+// 1.21.3	2025-04-27T14:38:38.9755035	Item Models: agotmod
 65c44e6f1f29781252c76032b90c20b3bc8f7b8a assets/agotmod/models/item/alder_button.json
 f0b6afe25a5640838c024d02c663e7c8f821ffd6 assets/agotmod/models/item/alder_door.json
 2af83e95998f18d674056268682572a94f141042 assets/agotmod/models/item/alder_fence.json
@@ -2409,8 +2409,10 @@ d45e93aa868593f19b0bfafdebc10c0cbc5255c9 assets/agotmod/models/item/upgrade_kit_
 0a93e64d3121d9caa5d5c3e1b007fe73dbc16d5c assets/agotmod/models/item/weirwood_door.json
 d23f53d0c0b6793fa0a361f823012598f2df16c3 assets/agotmod/models/item/weirwood_fence.json
 dc3772d65b3da635042834318fd3bafb469e981a assets/agotmod/models/item/weirwood_fence_gate.json
+156d6a9810ce389323a600665093f662a58a4979 assets/agotmod/models/item/weirwood_hanging_sign.json
 81c37a2678ccaabd8a4a978a4e3255a778feb57c assets/agotmod/models/item/weirwood_pressure_plate.json
 136d3d0a071bccad11ee1989941c8e9fdf870dea assets/agotmod/models/item/weirwood_sapling.json
+a67966ce6227859d0f8661f8992a33555f755595 assets/agotmod/models/item/weirwood_sign.json
 3ef8d0296a0f0d82631cab5d1f3a69e6f1865edb assets/agotmod/models/item/weirwood_slabs.json
 f5b85997626abad91c874aca84f399ce936f83bd assets/agotmod/models/item/weirwood_stairs.json
 bfb2f813a2c1e1d1f9d423b1706e0a8b8eb1f863 assets/agotmod/models/item/weirwood_stick.json

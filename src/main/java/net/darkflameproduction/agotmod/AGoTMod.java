@@ -4,6 +4,7 @@ package net.darkflameproduction.agotmod;
 // Importing necessary classes from other packages
 
 import net.darkflameproduction.agotmod.block.ModBLocks;
+import net.darkflameproduction.agotmod.entity.ModBlockEntities;
 import net.darkflameproduction.agotmod.entity.ModEntities;
 import net.darkflameproduction.agotmod.item.ModItemProperties;
 import net.darkflameproduction.agotmod.item.ModItems;
@@ -56,6 +57,8 @@ public class AGoTMod {
         ModCreativeAnimals.register(modEventBus);
         ModCreativeMagic.register(modEventBus);
         ModCreativeArchery.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
+
 
         // Register The Wall line generator
 

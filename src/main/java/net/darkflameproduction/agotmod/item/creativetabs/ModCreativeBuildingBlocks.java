@@ -5,6 +5,7 @@ package net.darkflameproduction.agotmod.item.creativetabs;
 
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.block.ModBLocks;
+import net.darkflameproduction.agotmod.item.ModItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -43,8 +44,8 @@ public class ModCreativeBuildingBlocks {
                         pOutput.accept(ModBLocks.WEIRWOOD_WALL.get());
                         pOutput.accept(ModBLocks.WEIRWOOD_DOOR.get());
                         pOutput.accept(ModBLocks.WEIRWOOD_TRAPDOOR.get());
-                        pOutput.accept(ModBLocks.WEIRWOOD_SIGN.get());
-                        pOutput.accept(ModBLocks.WEIRWOOD_WALL_SIGN.get());
+                        pOutput.accept(ModItems.WEIRWOOD_SIGN.get());
+                        pOutput.accept(ModItems.WEIRWOOD_HANGING_SIGN.get());
 
                         pOutput.accept(ModBLocks.SYCAMORE_LOG.get());
                         pOutput.accept(ModBLocks.STRIPPED_SYCAMORE_LOG.get());

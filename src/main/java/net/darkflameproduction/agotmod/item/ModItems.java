@@ -667,6 +667,13 @@ public class ModItems {
     public static final DeferredItem<Item> SMITHING_SCROLL_5 = ITEMS.registerItem("smithing_scroll_5", Item::new);
 
 
+    public static final DeferredItem<Item> WEIRWOOD_SIGN = ITEMS.registerItem("weirwood_sign",
+            properties -> new SignItem(ModBLocks.WEIRWOOD_SIGN.get(),
+                    ModBLocks.WEIRWOOD_WALL_SIGN.get(), properties.stacksTo(16)));
+
+    public static final DeferredItem<Item> WEIRWOOD_HANGING_SIGN = ITEMS.registerItem("weirwood_hanging_sign",
+            properties -> new HangingSignItem(ModBLocks.WEIRWOOD_HANGING_SIGN.get(),
+                    ModBLocks.WEIRWOOD_WALL_HANGING_SIGN.get(), properties.stacksTo(16)));
 
 
 
