@@ -2,20 +2,13 @@ package net.darkflameproduction.agotmod.block;// Importing necessary classes fro
 
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.block.custom.*;
+import net.darkflameproduction.agotmod.block.custom.BarleyCropBlock;
 import net.darkflameproduction.agotmod.block.custom.specialleaves.WeirwoodLeavesBlock;
 import net.darkflameproduction.agotmod.item.ModItems;
 import net.darkflameproduction.agotmod.util.ModWoodTypes;
 import net.darkflameproduction.agotmod.worldgen.tree.ModTreeGrower;
-import net.minecraft.core.Direction;
-import net.minecraft.core.Holder;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -31,9 +24,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.material.*;
-import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.EntityCollisionContext;
@@ -44,34 +35,19 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.NotNull;
-import net.minecraft.client.color.block.BlockColors;
-import net.minecraft.client.color.block.BlockColor;
-import net.minecraft.client.color.item.ItemColor;
-import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraft.world.level.block.Blocks;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Supplier;
 
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.List;
-import java.util.ArrayList;
-import java.util.stream.IntStream;
-import java.util.stream.Collectors;
 
 
 // ModBLocks class for registering custom blocks
@@ -1615,7 +1591,7 @@ public class ModBLocks {
             properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
             BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY), true);
 
-    public static final DeferredBlock<Block> OPIUM_POPPY = registerBlock("opium_poppy",
+    public static final DeferredBlock<Block> OPIUM_POPPY_WILD = registerBlock("opium_poppy_wild",
             properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
             BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY), true);
 
@@ -1826,10 +1802,10 @@ public class ModBLocks {
             ),
             BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion(), true);
 
-    public static final DeferredBlock<Block> POTTED_OPIUM_POPPY = registerBlock("potted_opium_poppy",
+    public static final DeferredBlock<Block> POTTED_OPIUM_POPPY_WILD = registerBlock("potted_opium_poppy_wild",
             properties -> new FlowerPotBlock(
                     () -> (FlowerPotBlock) Blocks.FLOWER_POT,
-                    () -> OPIUM_POPPY.get(),
+                    () -> OPIUM_POPPY_WILD.get(),
                     properties
             ),
             BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion(), true);
@@ -2003,6 +1979,42 @@ public class ModBLocks {
                     properties
             ),
             BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion(), true);
+
+    // ---------------------------(CROPS)--------------------------- //
+
+    public static final DeferredBlock<Block> HORSERADISH_CROP = registerBlock("horseradish_crop",
+            HorseradishCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
+    public static final DeferredBlock<Block> BARLEY_CROP = registerBlock("barley_crop",
+            BarleyCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.WHEAT), false);
+    public static final DeferredBlock<Block> GARLIC_CROP = registerBlock("garlic_crop",
+            GarlicCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
+
+    public static final DeferredBlock<Block> LEEK_CROP = registerBlock("leek_crop",
+            LeekCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
+
+    public static final DeferredBlock<Block> NEEP_CROP = registerBlock("neep_crop",
+            NeepCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
+
+    public static final DeferredBlock<Block> OAT_CROP = registerBlock("oat_crop",
+            OatCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.WHEAT), false);
+
+    public static final DeferredBlock<Block> PARSLEY_CROP = registerBlock("parsley_crop",
+            ParsleyCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
+
+    public static final DeferredBlock<Block> RED_ONION_CROP = registerBlock("red_onion_crop",
+            RedOnionCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
+
+    public static final DeferredBlock<Block> TURNIP_CROP = registerBlock("turnip_crop",
+            TurnipCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
+
+    public static final DeferredBlock<Block> WILD_ONION_CROP = registerBlock("wild_onion_crop",
+            WildOnionCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
+
+    public static final DeferredBlock<Block> ONION_CROP = registerBlock("onion_crop",
+            OnionCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
+
+    public static final DeferredBlock<Block> OPIUM_POPPY_CROP = registerBlock("opium_poppy_crop",
+            OpiumPoppyCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
 
 
 

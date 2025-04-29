@@ -607,6 +607,25 @@ public class ModItems {
             properties -> new Item(properties.food(ModFoods.COOKED_MAMMOTH_MEAT)));
     public static final DeferredItem<Item> RAW_MAMMOTH_MEAT = ITEMS.registerItem("raw_mammoth_meat",
             properties -> new Item(properties.food(ModFoods.RAW_MAMMOTH_MEAT, ModConsumables.RAW_MAMMOTH_MEAT)));
+    public static final DeferredItem<Item> HORSERADISH = ITEMS.registerItem("horseradish",
+            properties -> new Item(properties.food(ModFoods.HORSERADISH)));
+    public static final DeferredItem<Item> LEEK = ITEMS.registerItem("leek",
+            properties -> new Item(properties.food(ModFoods.LEEK)));
+    public static final DeferredItem<Item> NEEP = ITEMS.registerItem("neep",
+            properties -> new Item(properties.food(ModFoods.NEEP)));
+    public static final DeferredItem<Item> OAT = ITEMS.registerItem("oat",
+            properties -> new Item(properties.food(ModFoods.OAT)));
+    public static final DeferredItem<Item> PARSLEY = ITEMS.registerItem("parsley",
+            properties -> new Item(properties.food(ModFoods.PARSLEY)));
+    public static final DeferredItem<Item> RED_ONION = ITEMS.registerItem("red_onion",
+            properties -> new Item(properties.food(ModFoods.RED_ONION)));
+    public static final DeferredItem<Item> TURNIP = ITEMS.registerItem("turnip",
+            properties -> new Item(properties.food(ModFoods.TURNIP)));
+    public static final DeferredItem<Item> WILD_ONION = ITEMS.registerItem("wild_onion",
+            properties -> new Item(properties.food(ModFoods.WILD_ONION)));
+    public static final DeferredItem<Item> ONION = ITEMS.registerItem("onion",
+            properties -> new Item(properties.food(ModFoods.ONION)));
+    public static final DeferredItem<Item> BARLEY = ITEMS.registerItem("barley", Item::new);
 
     // ---------------------------(FOODS)--------------------------- //
 
@@ -682,6 +701,47 @@ public class ModItems {
     public static final DeferredItem<Item> PINE_HANGING_SIGN = ITEMS.registerItem("pine_hanging_sign",
             properties -> new HangingSignItem(ModBLocks.PINE_HANGING_SIGN.get(),
                     ModBLocks.PINE_WALL_HANGING_SIGN.get(), properties.stacksTo(16)));
+
+
+    // ---------------------------(SEEDS)--------------------------- //
+
+    public static final DeferredItem<Item> HORSERADISH_SEEDS = ITEMS.registerItem("horseradish_seeds",
+            properties -> new BlockItem(ModBLocks.HORSERADISH_CROP.get(), properties));
+
+    public static final DeferredItem<Item> BARLEY_SEEDS = ITEMS.registerItem("barley_seeds",
+            properties -> new BlockItem(ModBLocks.BARLEY_CROP.get(), properties));
+
+    public static final DeferredItem<Item> GARLIC = ITEMS.registerItem("garlic",
+            properties -> new BlockItem(ModBLocks.GARLIC_CROP.get(), properties));
+
+    public static final DeferredItem<Item> LEEK_SEEDS = ITEMS.registerItem("leek_seeds",
+            properties -> new BlockItem(ModBLocks.LEEK_CROP.get(), properties));
+
+    public static final DeferredItem<Item> NEEP_SEEDS = ITEMS.registerItem("neep_seeds",
+            properties -> new BlockItem(ModBLocks.NEEP_CROP.get(), properties));
+
+    public static final DeferredItem<Item> OAT_SEEDS = ITEMS.registerItem("oat_seeds",
+            properties -> new BlockItem(ModBLocks.OAT_CROP.get(), properties));
+
+    public static final DeferredItem<Item> PARSLEY_SEEDS = ITEMS.registerItem("parsley_seeds",
+            properties -> new BlockItem(ModBLocks.PARSLEY_CROP.get(), properties));
+
+    public static final DeferredItem<Item> RED_ONION_SEEDS = ITEMS.registerItem("red_onion_seeds",
+            properties -> new BlockItem(ModBLocks.RED_ONION_CROP.get(), properties));
+
+    public static final DeferredItem<Item> TURNIP_SEEDS = ITEMS.registerItem("turnip_seeds",
+            properties -> new BlockItem(ModBLocks.TURNIP_CROP.get(), properties));
+
+    public static final DeferredItem<Item> WILD_ONION_SEEDS = ITEMS.registerItem("wild_onion_seeds",
+            properties -> new BlockItem(ModBLocks.WILD_ONION_CROP.get(), properties));
+
+    public static final DeferredItem<Item> ONION_SEEDS = ITEMS.registerItem("onion_seeds",
+            properties -> new BlockItem(ModBLocks.ONION_CROP.get(), properties));
+
+    public static final DeferredItem<Item> OPIUM_POPPY_SEEDS = ITEMS.registerItem("opium_poppy_seeds",
+            properties -> new BlockItem(ModBLocks.OPIUM_POPPY_CROP.get(), properties));
+
+
 
 
 

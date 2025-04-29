@@ -92,7 +92,7 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> SAFFRON_CROCUS_KEY = registerKey("saffron_crocus");
     public static final ResourceKey<ConfiguredFeature<?, ?>> POISON_KISSES_KEY = registerKey("poison_kisses");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PENNYROYAL_KEY = registerKey("pennyroyal");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> OPIUM_POPPY_KEY = registerKey("opium_poppy");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OPIUM_POPPY_WILD_KEY = registerKey("opium_poppy_wild");
     public static final ResourceKey<ConfiguredFeature<?, ?>> NIGHTSHADE_KEY = registerKey("nightshade");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MOONBLOOM_KEY = registerKey("moonbloom");
     public static final ResourceKey<ConfiguredFeature<?, ?>> LUNGWORT_KEY = registerKey("lungwort");
@@ -605,14 +605,14 @@ public class ModConfiguredFeatures {
                         )
                 ));
 
-        register(context, OPIUM_POPPY_KEY, Feature.FLOWER,
+        register(context, OPIUM_POPPY_WILD_KEY, Feature.FLOWER,
                 new RandomPatchConfiguration(
                         64,  // tries
                         6,   // xz spread
                         2,   // y spread
                         PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
                                 new SimpleBlockConfiguration(
-                                        BlockStateProvider.simple(ModBLocks.OPIUM_POPPY.get())
+                                        BlockStateProvider.simple(ModBLocks.OPIUM_POPPY_WILD.get())
                                 )
                         )
                 ));

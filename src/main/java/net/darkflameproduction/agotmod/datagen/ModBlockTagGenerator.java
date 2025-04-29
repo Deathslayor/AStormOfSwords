@@ -234,6 +234,24 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBLocks.PINE_HANGING_SIGN.get())
                 .add(ModBLocks.PINE_WALL_HANGING_SIGN.get());
 
+        this.tag(BlockTags.CROPS)
+                .add(ModBLocks.BARLEY_CROP.get())
+                .add(ModBLocks.HORSERADISH_CROP.get())
+                .add(ModBLocks.GARLIC_CROP.get())
+                .add(ModBLocks.LEEK_CROP.get())
+                .add(ModBLocks.NEEP_CROP.get())
+                .add(ModBLocks.OAT_CROP.get())
+                .add(ModBLocks.PARSLEY_CROP.get())
+                .add(ModBLocks.RED_ONION_CROP.get())
+                .add(ModBLocks.TURNIP_CROP.get())
+                .add(ModBLocks.WILD_ONION_CROP.get())
+                .add(ModBLocks.ONION_CROP.get())
+                .add(ModBLocks.OPIUM_POPPY_CROP.get());
+
+
+
+
+
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
                 .add(ModBLocks.QUAGMIRE.get());
 
@@ -325,7 +343,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBLocks.SAFFRON_CROCUS.get())
                 .add(ModBLocks.POISON_KISSES.get())
                 .add(ModBLocks.PENNYROYAL.get())
-                .add(ModBLocks.OPIUM_POPPY.get())
+                .add(ModBLocks.OPIUM_POPPY_WILD.get())
                 .add(ModBLocks.NIGHTSHADE.get())
                 .add(ModBLocks.MOONBLOOM.get())
                 .add(ModBLocks.LUNGWORT.get())
@@ -366,7 +384,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBLocks.SAFFRON_CROCUS.get())
                 .add(ModBLocks.POISON_KISSES.get())
                 .add(ModBLocks.PENNYROYAL.get())
-                .add(ModBLocks.OPIUM_POPPY.get())
+                .add(ModBLocks.OPIUM_POPPY_WILD.get())
                 .add(ModBLocks.NIGHTSHADE.get())
                 .add(ModBLocks.MOONBLOOM.get())
                 .add(ModBLocks.LUNGWORT.get())

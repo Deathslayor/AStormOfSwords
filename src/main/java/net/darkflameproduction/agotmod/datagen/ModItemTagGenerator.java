@@ -7,6 +7,7 @@ import net.darkflameproduction.agotmod.util.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -289,7 +290,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModBLocks.SAFFRON_CROCUS.get().asItem())
                 .add(ModBLocks.POISON_KISSES.get().asItem())
                 .add(ModBLocks.PENNYROYAL.get().asItem())
-                .add(ModBLocks.OPIUM_POPPY.get().asItem())
+                .add(ModBLocks.OPIUM_POPPY_WILD.get().asItem())
                 .add(ModBLocks.NIGHTSHADE.get().asItem())
                 .add(ModBLocks.MOONBLOOM.get().asItem())
                 .add(ModBLocks.LUNGWORT.get().asItem())
@@ -341,6 +342,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModItems.COOKED_HORSE_MEAT.get().asItem())
                 .add(ModItems.RAW_MAMMOTH_MEAT.get().asItem())
                 .add(ModItems.COOKED_MAMMOTH_MEAT.get().asItem());
+
 
         this.tag(ItemTags.FREEZE_IMMUNE_WEARABLES)
                 // Wildling Fur

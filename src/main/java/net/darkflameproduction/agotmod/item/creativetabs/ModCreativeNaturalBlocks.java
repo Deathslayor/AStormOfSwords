@@ -5,6 +5,7 @@ package net.darkflameproduction.agotmod.item.creativetabs;
 
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.block.ModBLocks;
+import net.darkflameproduction.agotmod.item.ModItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -54,7 +55,7 @@ public class ModCreativeNaturalBlocks {
                 pOutput.accept(ModBLocks.SAFFRON_CROCUS.get());
                 pOutput.accept(ModBLocks.POISON_KISSES.get());
                 pOutput.accept(ModBLocks.PENNYROYAL.get());
-                pOutput.accept(ModBLocks.OPIUM_POPPY.get());
+                pOutput.accept(ModBLocks.OPIUM_POPPY_WILD.get());
                 pOutput.accept(ModBLocks.NIGHTSHADE.get());
                 pOutput.accept(ModBLocks.MOONBLOOM.get());
                 pOutput.accept(ModBLocks.LUNGWORT.get());
@@ -72,6 +73,8 @@ public class ModCreativeNaturalBlocks {
 
 // Miscellaneous
                 pOutput.accept(ModBLocks.GOATHEAD.get());
+
+
 
                 //Wood
                 pOutput.accept(ModBLocks.WEIRWOOD_LOG.get());
@@ -230,6 +233,8 @@ public class ModCreativeNaturalBlocks {
                 pOutput.accept(ModBLocks.TIGERS_EYE_DEEPSLATE_ORE.get());
                 pOutput.accept(ModBLocks.TOPAZ_ORE.get());
                 pOutput.accept(ModBLocks.TOPAZ_DEEPSLATE_ORE.get());
+
+
 
 
 

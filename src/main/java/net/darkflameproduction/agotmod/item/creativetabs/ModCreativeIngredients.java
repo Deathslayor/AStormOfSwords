@@ -33,6 +33,25 @@ public class ModCreativeIngredients {
                         pOutput.accept(ModItems.WEIRWOOD_STICK.get());
                         pOutput.accept(ModItems.BOAR_INTESTINES.get());
                         pOutput.accept(ModItems.BOAR_TUSK.get());
+
+                        //SEEDS
+                        pOutput.accept(ModItems.BARLEY.get());
+                        pOutput.accept(ModItems.OAT.get());
+                        pOutput.accept(ModItems.HORSERADISH_SEEDS.get());
+                        pOutput.accept(ModItems.BARLEY_SEEDS.get());
+                        pOutput.accept(ModItems.GARLIC.get());
+                        pOutput.accept(ModItems.LEEK_SEEDS.get());
+                        pOutput.accept(ModItems.NEEP_SEEDS.get());
+                        pOutput.accept(ModItems.OAT_SEEDS.get());
+                        pOutput.accept(ModItems.PARSLEY_SEEDS.get());
+                        pOutput.accept(ModItems.RED_ONION_SEEDS.get());
+                        pOutput.accept(ModItems.TURNIP_SEEDS.get());
+                        pOutput.accept(ModItems.WILD_ONION_SEEDS.get());
+                        pOutput.accept(ModItems.ONION_SEEDS.get());
+                        pOutput.accept(ModItems.OPIUM_POPPY_SEEDS.get());
+
+
+
                         pOutput.accept(ModItems.BRONZE_CHAIN_LINK.get());
                         pOutput.accept(ModItems.BRONZE_CHAIN.get());
                         pOutput.accept(ModItems.BRONZE_PLATE.get());
@@ -101,6 +120,12 @@ public class ModCreativeIngredients {
                         pOutput.accept(ModItems.TIGERS_EYE.get());
                         pOutput.accept(ModItems.TOPAZ.get());
                         pOutput.accept(ModItems.TOURMALINE.get());
+
+
+
+
+
+
 
 
                     })

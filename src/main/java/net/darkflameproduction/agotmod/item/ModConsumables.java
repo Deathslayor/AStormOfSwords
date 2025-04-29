@@ -67,4 +67,6 @@ public class ModConsumables {
             .onConsume(new ApplyStatusEffectsConsumeEffect(List.of(new MobEffectInstance(MobEffects.POISON, 60)), 0.9F))
             .onConsume(new ApplyStatusEffectsConsumeEffect(List.of(new MobEffectInstance(MobEffects.HUNGER, 60)), 0.2F))
             .build();
+
+
 }

@@ -3566,12 +3566,12 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy(getHasName(ModBLocks.PENNYROYAL.get()), has(ModBLocks.PENNYROYAL.get()))
                 .save(this.output, "penny_royal_to_purple_dye");
 
-        this.shaped(RecipeCategory.MISC, Items.MAGENTA_DYE) // Crafting 2 red dye from a single rose bush
+        this.shaped(RecipeCategory.MISC, ModItems.OPIUM_POPPY_SEEDS.get()) // Crafting 2 red dye from a single rose bush
                 .pattern("B")
                 .pattern(" ")
-                .define('B', ModBLocks.OPIUM_POPPY.get()) // Using your rose bush block
-                .unlockedBy(getHasName(ModBLocks.OPIUM_POPPY.get()), has(ModBLocks.OPIUM_POPPY.get()))
-                .save(this.output, "opium_poppy_to_magenta_dye");
+                .define('B', ModBLocks.OPIUM_POPPY_WILD.get()) // Using your rose bush block
+                .unlockedBy(getHasName(ModBLocks.OPIUM_POPPY_WILD.get()), has(ModBLocks.OPIUM_POPPY_WILD.get()))
+                .save(this.output, "opium_poppy_to_poppy_seed");
 
         this.shaped(RecipeCategory.MISC, Items.PURPLE_DYE) // Crafting 2 red dye from a single rose bush
                 .pattern("B")

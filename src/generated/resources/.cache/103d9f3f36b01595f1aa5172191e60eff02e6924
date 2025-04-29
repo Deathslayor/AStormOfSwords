@@ -1,4 +1,4 @@
-// 1.21.3	2025-04-16T12:12:27.9972749	Registries
+// 1.21.3	2025-04-29T22:44:59.8884486	Registries
 ffe3d912e363745b0043a61fc7b67f35a53f2228 data/agotmod/neoforge/biome_modifier/add_tin_ore.json
 2cd0b3508ddcea7e502f1cf50b1ab12343351354 data/agotmod/neoforge/biome_modifier/create_weirwood_tree.json
 5aa2b77732199476f156ea62152db7e48cd5fb2a data/agotmod/worldgen/biome/barrowlands.json
@@ -84,7 +84,7 @@ f2d23f7ead19804b00fa97dad324dbb32e42488f data/agotmod/worldgen/configured_featur
 6cd09cd77e22e6f1c458fd8fe52c495480a8a037 data/agotmod/worldgen/configured_feature/oak2_rare.json
 a7b434106b2ded3a1094a1679ab79438f0beb6a3 data/agotmod/worldgen/configured_feature/onyx_ore.json
 adc2e5b189b80b0195886c4a3f2d5bf87624905f data/agotmod/worldgen/configured_feature/opal_ore.json
-c8d567af06c4957cfcafc25f5a729425829aea2f data/agotmod/worldgen/configured_feature/opium_poppy.json
+59cc56b953e3db6dc787818f107f420e03193041 data/agotmod/worldgen/configured_feature/opium_poppy_wild.json
 2a4cda684de2d7b886eddb704aaa0820c1b1d170 data/agotmod/worldgen/configured_feature/pennyroyal.json
 979c6d46a2ef4865ee9329ba73fd7ca2cf22db98 data/agotmod/worldgen/configured_feature/pine.json
 979c6d46a2ef4865ee9329ba73fd7ca2cf22db98 data/agotmod/worldgen/configured_feature/pine_rare.json
@@ -203,7 +203,7 @@ e8712fe402275e3f2c876dd69af9b5b7ac15e42f data/agotmod/worldgen/placed_feature/mo
 821acb9ee9838bf0a7334c5b4ee5c4f44e5cee8a data/agotmod/worldgen/placed_feature/oak_rare.json
 764a17731c51d55147420ed0d81c2d3f05421ba8 data/agotmod/worldgen/placed_feature/onyx_ore_placed.json
 cd44e509704ebd567a606d7b77b1a5ca28544411 data/agotmod/worldgen/placed_feature/opal_ore_placed.json
-4bc6d3bc7abbd07edf1ac335199b9be5a4fc1465 data/agotmod/worldgen/placed_feature/opium_poppy.json
+fb5f2003b47538f93dda1e5ae02f9704803e0f6a data/agotmod/worldgen/placed_feature/opium_poppy_wild.json
 bdce82419942c4ffa2ca96b3ab4b37545d0e74a3 data/agotmod/worldgen/placed_feature/pennyroyal.json
 cbbdf1f85245bbd7f83c356f9bb8522f0016ec69 data/agotmod/worldgen/placed_feature/pine.json
 c46e11b4caf1e9dd11a8a33d95e82d4c1fc54cba data/agotmod/worldgen/placed_feature/pine_rare.json

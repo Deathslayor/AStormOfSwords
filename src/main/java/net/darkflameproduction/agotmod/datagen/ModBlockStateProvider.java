@@ -2,14 +2,18 @@ package net.darkflameproduction.agotmod.datagen;
 
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.block.ModBLocks;
+import net.darkflameproduction.agotmod.block.custom.HorseradishCropBlock;
 import net.minecraft.commands.arguments.ResourceLocationArgument;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
+import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -17,6 +21,9 @@ import net.minecraft.resources.ResourceLocation;
 
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import org.jetbrains.annotations.NotNull;
+
+import java.lang.reflect.Method;
+import java.util.function.Function;
 
 public class ModBlockStateProvider extends BlockStateProvider {
     // Constructor for ModBlockStateProvider
@@ -1237,7 +1244,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
         }
 
 
-
         // ---------------------------(FLOWERS)--------------------------- //
 
         // Register the block model
@@ -1449,20 +1455,20 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 .addModel();
 
 
-        models().withExistingParent("block/" + ModBLocks.OPIUM_POPPY.getId().getPath(),
+        models().withExistingParent("block/" + ModBLocks.OPIUM_POPPY_WILD.getId().getPath(),
                         mcLoc("block/cross"))
-                .texture("cross", modLoc("block/opium_poppy"))
+                .texture("cross", modLoc("block/opium_poppy_wild"))
                 .renderType("cutout");
 
-        models().withExistingParent("item/" + ModBLocks.OPIUM_POPPY.getId().getPath(),
+        models().withExistingParent("item/" + ModBLocks.OPIUM_POPPY_WILD.getId().getPath(),
                         mcLoc("item/generated"))
-                .texture("layer0", modLoc("block/opium_poppy"))
+                .texture("layer0", modLoc("block/opium_poppy_wild"))
                 .renderType("cutout");
 
-        getVariantBuilder(ModBLocks.OPIUM_POPPY.get())
+        getVariantBuilder(ModBLocks.OPIUM_POPPY_WILD.get())
                 .partialState()
                 .modelForState()
-                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.OPIUM_POPPY.getId().getPath())))
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.OPIUM_POPPY_WILD.getId().getPath())))
                 .addModel();
 
 
@@ -2018,9 +2024,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
                         .texture("plant", blockTexture(ModBLocks.PENNYROYAL.get()))
                         .renderType("cutout"));
 
-        simpleBlockWithItem(ModBLocks.POTTED_OPIUM_POPPY.get(),
-                models().withExistingParent(ModBLocks.POTTED_OPIUM_POPPY.getId().getPath(), mcLoc("block/flower_pot_cross"))
-                        .texture("plant", blockTexture(ModBLocks.OPIUM_POPPY.get()))
+        simpleBlockWithItem(ModBLocks.POTTED_OPIUM_POPPY_WILD.get(),
+                models().withExistingParent(ModBLocks.POTTED_OPIUM_POPPY_WILD.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.OPIUM_POPPY_WILD.get()))
                         .renderType("cutout"));
 
         simpleBlockWithItem(ModBLocks.POTTED_NIGHTSHADE.get(),
@@ -2133,18 +2139,64 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 blockTexture(ModBLocks.WEIRWOOD_PLANKS.get()));
 
         hangingSignBlock(ModBLocks.WEIRWOOD_HANGING_SIGN.get(), ModBLocks.WEIRWOOD_WALL_HANGING_SIGN.get(), blockTexture(ModBLocks.WEIRWOOD_PLANKS.get()));
+
         signBlock(((StandingSignBlock) ModBLocks.PINE_SIGN.get()), ((WallSignBlock) ModBLocks.PINE_WALL_SIGN.get()),
                 blockTexture(ModBLocks.PINE_PLANKS.get()));
 
         hangingSignBlock(ModBLocks.PINE_HANGING_SIGN.get(), ModBLocks.PINE_WALL_HANGING_SIGN.get(), blockTexture(ModBLocks.PINE_PLANKS.get()));
 
 
-
         // ---------------------(VILLAGER PROFESSIONS BLOCKS)--------------------- //
         // Register block states and models for villager profession-related blocks
         blockWithItem(ModBLocks.MINT_BLOCK);
-        // ---------------------(VILLAGER PROFESSIONS BLOCKS)--------------------- //
+        // ---------------------(CROPS)--------------------- //
+        makeCrop((CropBlock) ModBLocks.HORSERADISH_CROP.get(), "horseradish_crop_stage", "horseradish_crop_stage");
+        makeCrop((CropBlock) ModBLocks.BARLEY_CROP.get(), "barley_crop_stage", "barley_crop_stage");
+        makeCrop((CropBlock) ModBLocks.GARLIC_CROP.get(), "garlic_crop_stage", "garlic_crop_stage");
+        makeCrop((CropBlock) ModBLocks.LEEK_CROP.get(), "leek_crop_stage", "leek_crop_stage");
+        makeCrop((CropBlock) ModBLocks.NEEP_CROP.get(), "neep_crop_stage", "neep_crop_stage");
+        makeCrop((CropBlock) ModBLocks.OAT_CROP.get(), "oat_crop_stage", "oat_crop_stage");
+        makeCrop((CropBlock) ModBLocks.PARSLEY_CROP.get(), "parsley_crop_stage", "parsley_crop_stage");
+        makeCrop((CropBlock) ModBLocks.RED_ONION_CROP.get(), "red_onion_crop_stage", "red_onion_crop_stage");
+        makeCrop((CropBlock) ModBLocks.TURNIP_CROP.get(), "turnip_crop_stage", "turnip_crop_stage");
+        makeCrop((CropBlock) ModBLocks.WILD_ONION_CROP.get(), "wild_onion_crop_stage", "wild_onion_crop_stage");
+        makeCrop((CropBlock) ModBLocks.ONION_CROP.get(), "onion_crop_stage", "onion_crop_stage");
+        makeCrop((CropBlock) ModBLocks.OPIUM_POPPY_CROP.get(), "opium_poppy_crop_stage", "opium_poppy_crop_stage");
+
+
+
+
     }
+
+    public void makeCrop(CropBlock block, String modelName, String textureName) {
+        Function<BlockState, ConfiguredModel[]> function = state -> states(state, block, modelName, textureName);
+        getVariantBuilder(block).forAllStates(function);
+    }
+
+    private ConfiguredModel[] states(BlockState state, CropBlock block, String modelName, String textureName) {
+        ConfiguredModel[] models = new ConfiguredModel[1];
+
+        IntegerProperty ageProperty = getAgeProperty(block);
+
+        models[0] = new ConfiguredModel(
+                models().crop(
+                        modelName + state.getValue(ageProperty),
+                        ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "block/" + textureName + state.getValue(ageProperty))
+                ).renderType("cutout")
+        );
+
+        return models;
+    }
+    private IntegerProperty getAgeProperty(CropBlock block) {
+        try {
+            Method getAgePropertyMethod = block.getClass().getMethod("getAgeProperty");
+            return (IntegerProperty) getAgePropertyMethod.invoke(block);
+        } catch (Exception e) {
+            return CropBlock.AGE;
+        }
+    }
+
+
 
     public void hangingSignBlock(Block signBlock, Block wallSignBlock, ResourceLocation texture) {
         ModelFile sign = models().sign(name(signBlock), texture);

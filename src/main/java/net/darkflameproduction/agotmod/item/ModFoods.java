@@ -151,4 +151,50 @@ public class ModFoods {
             .nutrition(12) // Amount of hunger restored
             .saturationModifier(0.8F) // Saturation modifier
             .build();
+
+    // Food properties for horseradish
+    public static final FoodProperties HORSERADISH = new FoodProperties.Builder()
+            .nutrition(3) // Amount of hunger restored
+            .saturationModifier(0.3F) // Saturation modifier
+            .build();
+    public static final FoodProperties LEEK = new FoodProperties.Builder()
+            .nutrition(3)
+            .saturationModifier(0.3F)
+            .build();
+
+    public static final FoodProperties NEEP = new FoodProperties.Builder()
+            .nutrition(3)
+            .saturationModifier(0.3F)
+            .build();
+
+    public static final FoodProperties OAT = new FoodProperties.Builder()
+            .nutrition(3)
+            .saturationModifier(0.3F)
+            .build();
+
+    public static final FoodProperties PARSLEY = new FoodProperties.Builder()
+            .nutrition(3)
+            .saturationModifier(0.3F)
+            .build();
+
+    public static final FoodProperties RED_ONION = new FoodProperties.Builder()
+            .nutrition(3)
+            .saturationModifier(0.3F)
+            .build();
+
+    public static final FoodProperties TURNIP = new FoodProperties.Builder()
+            .nutrition(3)
+            .saturationModifier(0.3F)
+            .build();
+
+    public static final FoodProperties WILD_ONION = new FoodProperties.Builder()
+            .nutrition(3)
+            .saturationModifier(0.3F)
+            .build();
+
+    public static final FoodProperties ONION = new FoodProperties.Builder()
+            .nutrition(3)
+            .saturationModifier(0.3F)
+            .build();
+
 }

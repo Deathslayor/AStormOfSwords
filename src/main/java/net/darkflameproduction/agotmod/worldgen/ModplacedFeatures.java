@@ -90,7 +90,7 @@ public class ModplacedFeatures {
     public static final ResourceKey<PlacedFeature> SAFFRON_CROCUS_KEY = registerKey("saffron_crocus");
     public static final ResourceKey<PlacedFeature> POISON_KISSES_KEY = registerKey("poison_kisses");
     public static final ResourceKey<PlacedFeature> PENNYROYAL_KEY = registerKey("pennyroyal");
-    public static final ResourceKey<PlacedFeature> OPIUM_POPPY_KEY = registerKey("opium_poppy");
+    public static final ResourceKey<PlacedFeature> OPIUM_POPPY_WILD_KEY = registerKey("opium_poppy_wild");
     public static final ResourceKey<PlacedFeature> NIGHTSHADE_KEY = registerKey("nightshade");
     public static final ResourceKey<PlacedFeature> MOONBLOOM_KEY = registerKey("moonbloom");
     public static final ResourceKey<PlacedFeature> LUNGWORT_KEY = registerKey("lungwort");
@@ -417,8 +417,8 @@ public class ModplacedFeatures {
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
 
-        register(context, OPIUM_POPPY_KEY,
-                configuredFeatures.getOrThrow(ModConfiguredFeatures.OPIUM_POPPY_KEY),
+        register(context, OPIUM_POPPY_WILD_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.OPIUM_POPPY_WILD_KEY),
                 List.of(CountPlacement.of(1),
                         RarityFilter.onAverageOnceEvery(32),
                         InSquarePlacement.spread(),

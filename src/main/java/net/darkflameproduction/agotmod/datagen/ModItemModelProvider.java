@@ -303,6 +303,34 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.COOKED_SAUSAGE);
         simpleItem(ModItems.COOKED_BLOOD_SAUSAGE);
         simpleItem(ModItems.COOKED_WHITE_SAUSAGE);
+        simpleItem(ModItems.HORSERADISH);
+        simpleItem(ModItems.BARLEY);
+        simpleItem(ModItems.GARLIC);
+        simpleItem(ModItems.LEEK);
+        simpleItem(ModItems.NEEP);
+        simpleItem(ModItems.OAT);
+        simpleItem(ModItems.PARSLEY);
+        simpleItem(ModItems.RED_ONION);
+        simpleItem(ModItems.TURNIP);
+        simpleItem(ModItems.WILD_ONION);
+        simpleItem(ModItems.ONION);
+
+
+
+        // ---------------------------(SEEDS)--------------------------- //
+        simpleItem(ModItems.HORSERADISH_SEEDS);
+        simpleItem(ModItems.BARLEY_SEEDS);
+        simpleItem(ModItems.GARLIC);
+        simpleItem(ModItems.LEEK_SEEDS);
+        simpleItem(ModItems.NEEP_SEEDS);
+        simpleItem(ModItems.OAT_SEEDS);
+        simpleItem(ModItems.PARSLEY_SEEDS);
+        simpleItem(ModItems.RED_ONION_SEEDS);
+        simpleItem(ModItems.TURNIP_SEEDS);
+        simpleItem(ModItems.WILD_ONION_SEEDS);
+        simpleItem(ModItems.ONION_SEEDS);
+        simpleItem(ModItems.OPIUM_POPPY_SEEDS);
+
         // ---------------------------(SAPLINGS)--------------------------- //
         saplingItem(ModBLocks.WEIRWOOD_SAPLING);
         saplingItem(ModBLocks.SYCAMORE_SAPLING);
@@ -462,7 +490,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleBlockItemBlockTexture(ModBLocks.ROSE);
         simpleBlockItemBlockTexture(ModBLocks.POISON_KISSES);
         simpleBlockItemBlockTexture(ModBLocks.PENNYROYAL);
-        simpleBlockItemBlockTexture(ModBLocks.OPIUM_POPPY);
+        simpleBlockItemBlockTexture(ModBLocks.OPIUM_POPPY_WILD);
         simpleBlockItemBlockTexture(ModBLocks.NIGHTSHADE);
         simpleBlockItemBlockTexture(ModBLocks.MOONBLOOM);
         simpleBlockItemBlockTexture(ModBLocks.LUNGWORT);

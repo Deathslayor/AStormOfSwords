@@ -1,4 +1,4 @@
-// 1.21.3	2025-04-18T20:14:21.0045826	ASOS Recipes
+// 1.21.3	2025-04-29T22:44:59.6712056	ASOS Recipes
 822a5dc54b4509f28c5659a0e3c6c3f5cfd1834a data/agotmod/advancement/recipes/building_blocks/alder_slabs.json
 a169551e82dfb675b8952441658c421d625418b2 data/agotmod/advancement/recipes/building_blocks/alder_stairs.json
 94c1c0d08a3d2bf731769eec2d8159a466aa6163 data/agotmod/advancement/recipes/building_blocks/alder_wall.json
@@ -7959,7 +7959,7 @@ c293b9704303d7ce42fa89de869bf8487e001f74 data/minecraft/advancement/recipes/misc
 73738492e244598770d7adca031e34b399a2aa57 data/minecraft/advancement/recipes/misc/noble_plate.json
 2d53180ff5390dc3bc99d8ae49e59b24e91badc2 data/minecraft/advancement/recipes/misc/nuggets_from_bronze.json
 1968cb71ea187f6ceefa1d0dc277e022eb9db12e data/minecraft/advancement/recipes/misc/nuggets_from_steel.json
-b4ce9b361ad50bfa6a40bc0ba858bac53a9ce628 data/minecraft/advancement/recipes/misc/opium_poppy_to_magenta_dye.json
+ea60448d9fee665707ac577e92fc1899dbd881e0 data/minecraft/advancement/recipes/misc/opium_poppy_to_poppy_seed.json
 d16ef4d9f6ade1f5db1a55722410f52bceec30f8 data/minecraft/advancement/recipes/misc/penny_royal_to_purple_dye.json
 6c7d11f02e02db90c4f3b7013b8c83b8c677ccb7 data/minecraft/advancement/recipes/misc/pine_plank_craftingtable.json
 15512f5cfd20d27799d0e6de8dba4f02f8d72c74 data/minecraft/advancement/recipes/misc/pine_plank_stick.json
@@ -9411,7 +9411,7 @@ b22243a64da673cf8fe382d4e1cc2a7afbedee25 data/minecraft/recipe/mud_6_wall_from_m
 e965229cf95952ac64bea09b650404f3e875ef23 data/minecraft/recipe/noble_plate.json
 feee547f126471ce0ce5842e04af334c3cccb79e data/minecraft/recipe/nuggets_from_bronze.json
 49885d68d8a3cd0ea5f65d55075ec0fcf879d143 data/minecraft/recipe/nuggets_from_steel.json
-2e2ad1c7c790ce41acddcd856a596b74485f92ce data/minecraft/recipe/opium_poppy_to_magenta_dye.json
+038c3c1ba065c2d2eb3d47484e76cb70b2083be7 data/minecraft/recipe/opium_poppy_to_poppy_seed.json
 419598feba4da3469fe6e39c960925568c213bb0 data/minecraft/recipe/packed_ice_10_slab_from_packed_ice_10_block.json
 21cda45f86c7624b06f4fb7fe77d83fcb844ac37 data/minecraft/recipe/packed_ice_10_stairs_from_packed_ice_10_block.json
 81381caca80b19fa745c09fd4d1996c10d9118ca data/minecraft/recipe/packed_ice_10_wall_from_packed_ice_10_block.json

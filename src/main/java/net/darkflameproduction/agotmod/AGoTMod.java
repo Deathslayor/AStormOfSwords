@@ -109,7 +109,7 @@ public class AGoTMod {
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBLocks.ROSE.getId(), ModBLocks.POTTED_ROSE);
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBLocks.POISON_KISSES.getId(), ModBLocks.POTTED_POISON_KISSES);
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBLocks.PENNYROYAL.getId(), ModBLocks.POTTED_PENNYROYAL);
-            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBLocks.OPIUM_POPPY.getId(), ModBLocks.POTTED_OPIUM_POPPY);
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBLocks.OPIUM_POPPY_WILD.getId(), ModBLocks.POTTED_OPIUM_POPPY_WILD);
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBLocks.NIGHTSHADE.getId(), ModBLocks.POTTED_NIGHTSHADE);
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBLocks.MOONBLOOM.getId(), ModBLocks.POTTED_MOONBLOOM);
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBLocks.LUNGWORT.getId(), ModBLocks.POTTED_LUNGWORT);

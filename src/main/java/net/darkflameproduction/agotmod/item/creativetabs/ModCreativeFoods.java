@@ -52,6 +52,16 @@ public class ModCreativeFoods {
                         pOutput.accept(ModItems.COOKED_HORSE_MEAT.get());
                         pOutput.accept(ModItems.RAW_MAMMOTH_MEAT.get());
                         pOutput.accept(ModItems.COOKED_MAMMOTH_MEAT.get());
+                        pOutput.accept(ModItems.HORSERADISH.get());
+                        pOutput.accept(ModItems.GARLIC.get());
+                        pOutput.accept(ModItems.LEEK.get());
+                        pOutput.accept(ModItems.NEEP.get());
+                        pOutput.accept(ModItems.PARSLEY.get());
+                        pOutput.accept(ModItems.RED_ONION.get());
+                        pOutput.accept(ModItems.TURNIP.get());
+                        pOutput.accept(ModItems.WILD_ONION.get());
+                        pOutput.accept(ModItems.ONION.get());
+
                     })
                     .build());
 

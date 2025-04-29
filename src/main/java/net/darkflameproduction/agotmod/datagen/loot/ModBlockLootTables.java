@@ -1,6 +1,7 @@
 package net.darkflameproduction.agotmod.datagen.loot;
 
 import net.darkflameproduction.agotmod.block.ModBLocks;
+import net.darkflameproduction.agotmod.block.custom.*;
 import net.darkflameproduction.agotmod.item.ModItems;
 import net.minecraft.advancements.critereon.EnchantmentPredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
@@ -18,13 +19,17 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.AlternativesEntry;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.InvertedLootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
@@ -704,7 +709,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBLocks.ROSE.get());
         this.dropSelf(ModBLocks.POISON_KISSES.get());
         this.dropSelf(ModBLocks.PENNYROYAL.get());
-        this.dropSelf(ModBLocks.OPIUM_POPPY.get());
+        this.dropSelf(ModBLocks.OPIUM_POPPY_WILD.get());
         this.dropSelf(ModBLocks.NIGHTSHADE.get());
         this.dropSelf(ModBLocks.MOONBLOOM.get());
         this.dropSelf(ModBLocks.LUNGWORT.get());
@@ -768,7 +773,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(ModBLocks.POTTED_ROSE.get(), createPotFlowerItemTable(ModBLocks.ROSE.get()));
         this.add(ModBLocks.POTTED_POISON_KISSES.get(), createPotFlowerItemTable(ModBLocks.POISON_KISSES.get()));
         this.add(ModBLocks.POTTED_PENNYROYAL.get(), createPotFlowerItemTable(ModBLocks.PENNYROYAL.get()));
-        this.add(ModBLocks.POTTED_OPIUM_POPPY.get(), createPotFlowerItemTable(ModBLocks.OPIUM_POPPY.get()));
+        this.add(ModBLocks.POTTED_OPIUM_POPPY_WILD.get(), createPotFlowerItemTable(ModBLocks.OPIUM_POPPY_WILD.get()));
         this.add(ModBLocks.POTTED_NIGHTSHADE.get(), createPotFlowerItemTable(ModBLocks.NIGHTSHADE.get()));
         this.add(ModBLocks.POTTED_MOONBLOOM.get(), createPotFlowerItemTable(ModBLocks.MOONBLOOM.get()));
         this.add(ModBLocks.POTTED_LUNGWORT.get(), createPotFlowerItemTable(ModBLocks.LUNGWORT.get()));
@@ -793,15 +798,126 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
         /** // ---------------------------(SIGNS)--------------------------- // */
 
-        this.dropSelf(ModBLocks.WEIRWOOD_SIGN.get());
-        this.dropSelf(ModBLocks.WEIRWOOD_WALL_SIGN.get());
-        this.dropSelf(ModBLocks.WEIRWOOD_HANGING_SIGN.get());
-        this.dropSelf(ModBLocks.WEIRWOOD_WALL_HANGING_SIGN.get());
+        this.add(ModBLocks.WEIRWOOD_SIGN.get(),
+                createSingleItemTable(ModBLocks.WEIRWOOD_SIGN.get()));
+        this.add(ModBLocks.WEIRWOOD_WALL_SIGN.get(),
+                createSingleItemTable(ModBLocks.WEIRWOOD_SIGN.get()));
+        this.add(ModBLocks.WEIRWOOD_HANGING_SIGN.get(),
+                createSingleItemTable(ModBLocks.WEIRWOOD_HANGING_SIGN.get()));
+        this.add(ModBLocks.WEIRWOOD_WALL_HANGING_SIGN.get(),
+                createSingleItemTable(ModBLocks.WEIRWOOD_HANGING_SIGN.get()));
 
-        this.dropSelf(ModBLocks.PINE_SIGN.get());
-        this.dropSelf(ModBLocks.PINE_WALL_SIGN.get());
-        this.dropSelf(ModBLocks.PINE_HANGING_SIGN.get());
-        this.dropSelf(ModBLocks.PINE_WALL_HANGING_SIGN.get());
+        this.add(ModBLocks.PINE_SIGN.get(),
+                createSingleItemTable(ModBLocks.PINE_SIGN.get()));
+        this.add(ModBLocks.PINE_WALL_SIGN.get(),
+                createSingleItemTable(ModBLocks.PINE_SIGN.get()));
+        this.add(ModBLocks.PINE_HANGING_SIGN.get(),
+                createSingleItemTable(ModBLocks.PINE_HANGING_SIGN.get()));
+        this.add(ModBLocks.PINE_WALL_HANGING_SIGN.get(),
+                createSingleItemTable(ModBLocks.PINE_HANGING_SIGN.get()));
+
+        /** // ---------------------------(CROPS)--------------------------- // */
+
+        this.add(ModBLocks.HORSERADISH_CROP.get(), cropDrop(
+                ModBLocks.HORSERADISH_CROP.get(),
+                HorseradishCropBlock.AGE,
+                HorseradishCropBlock.MAX_AGE,
+                ModItems.HORSERADISH.get(), 0.0F, 3.0F,
+                ModItems.HORSERADISH_SEEDS.get()
+        ));
+
+        this.add(ModBLocks.BARLEY_CROP.get(), cropDrop(
+                ModBLocks.BARLEY_CROP.get(),
+                BarleyCropBlock.AGE,
+                BarleyCropBlock.MAX_AGE,
+                ModItems.BARLEY.get(), 1.0F, 1.0F,
+                ModItems.BARLEY_SEEDS.get()
+        ));
+
+        this.add(ModBLocks.GARLIC_CROP.get(), cropDrop(
+                ModBLocks.GARLIC_CROP.get(),
+                GarlicCropBlock.AGE,
+                GarlicCropBlock.MAX_AGE,
+                ModItems.GARLIC.get(), 0.0F, 3.0F,
+                ModItems.GARLIC.get()
+        ));
+
+        this.add(ModBLocks.LEEK_CROP.get(), cropDrop(
+                ModBLocks.LEEK_CROP.get(),
+                LeekCropBlock.AGE,
+                LeekCropBlock.MAX_AGE,
+                ModItems.LEEK.get(), 0.0F, 3.0F,
+                ModItems.LEEK_SEEDS.get()
+        ));
+
+        this.add(ModBLocks.NEEP_CROP.get(), cropDrop(
+                ModBLocks.NEEP_CROP.get(),
+                NeepCropBlock.AGE,
+                NeepCropBlock.MAX_AGE,
+                ModItems.NEEP.get(), 0.0F, 3.0F,
+                ModItems.NEEP_SEEDS.get()
+        ));
+
+        this.add(ModBLocks.OAT_CROP.get(), cropDrop(
+                ModBLocks.OAT_CROP.get(),
+                OatCropBlock.AGE,
+                OatCropBlock.MAX_AGE,
+                ModItems.OAT.get(), 1.0F, 1.0F,
+                ModItems.OAT_SEEDS.get()
+        ));
+
+        this.add(ModBLocks.PARSLEY_CROP.get(), cropDrop(
+                ModBLocks.PARSLEY_CROP.get(),
+                ParsleyCropBlock.AGE,
+                ParsleyCropBlock.MAX_AGE,
+                ModItems.PARSLEY.get(), 0.0F, 3.0F,
+                ModItems.PARSLEY_SEEDS.get()
+        ));
+
+        this.add(ModBLocks.RED_ONION_CROP.get(), cropDrop(
+                ModBLocks.RED_ONION_CROP.get(),
+                RedOnionCropBlock.AGE,
+                RedOnionCropBlock.MAX_AGE,
+                ModItems.RED_ONION.get(), 0.0F, 3.0F,
+                ModItems.RED_ONION_SEEDS.get()
+        ));
+
+        this.add(ModBLocks.TURNIP_CROP.get(), cropDrop(
+                ModBLocks.TURNIP_CROP.get(),
+                TurnipCropBlock.AGE,
+                TurnipCropBlock.MAX_AGE,
+                ModItems.TURNIP.get(), 0.0F, 3.0F,
+                ModItems.TURNIP_SEEDS.get()
+        ));
+
+        this.add(ModBLocks.WILD_ONION_CROP.get(), cropDrop(
+                ModBLocks.WILD_ONION_CROP.get(),
+                WildOnionCropBlock.AGE,
+                WildOnionCropBlock.MAX_AGE,
+                ModItems.WILD_ONION.get(), 0.0F, 3.0F,
+                ModItems.WILD_ONION_SEEDS.get()
+        ));
+
+        this.add(ModBLocks.ONION_CROP.get(), cropDrop(
+                ModBLocks.ONION_CROP.get(),
+                OnionCropBlock.AGE,
+                OnionCropBlock.MAX_AGE,
+                ModItems.ONION.get(), 0.0F, 3.0F,
+                ModItems.ONION_SEEDS.get()
+        ));
+
+        this.add(ModBLocks.OPIUM_POPPY_CROP.get(), cropDrop(
+                ModBLocks.OPIUM_POPPY_CROP.get(),
+                OpiumPoppyCropBlock.AGE,
+                OpiumPoppyCropBlock.MAX_AGE,
+                ModItems.OPIUM_POPPY_SEEDS.get(), 0.0F, 0.0F,
+                ModItems.OPIUM_POPPY_SEEDS.get()
+        ));
+
+
+
+
+
 
 
 
@@ -823,4 +939,34 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         // Create a loot table for ore drops with random count between 1 and 3
         return createSilkTouchDispatchTable(pBlock, this.applyExplosionDecay(pBlock, LootItem.lootTableItem(item).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))).apply(ApplyBonusCount.addOreBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE)))));
     }
+
+    protected LootTable.Builder cropDrop(Block cropBlock, IntegerProperty ageProperty, int maxAge, Item dropItem, float minDrop, float maxDrop, Item seedItem) {
+        LootItemCondition.Builder fullyGrown = LootItemBlockStatePropertyCondition.hasBlockStateProperties(cropBlock)
+                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(ageProperty, maxAge));
+
+        LootItemCondition.Builder notFullyGrown = InvertedLootItemCondition.invert(fullyGrown);
+
+        return LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                        .add(LootItem.lootTableItem(dropItem)
+                                .when(fullyGrown)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(minDrop, maxDrop)))
+                        )
+                )
+                .withPool(LootPool.lootPool()
+                        .add(LootItem.lootTableItem(seedItem)
+                                .when(fullyGrown)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F)))
+                        )
+                )
+                .withPool(LootPool.lootPool()
+                        .add(LootItem.lootTableItem(seedItem)
+                                .when(notFullyGrown)
+                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
+                        )
+                );
+    }
+
+
+
 }
