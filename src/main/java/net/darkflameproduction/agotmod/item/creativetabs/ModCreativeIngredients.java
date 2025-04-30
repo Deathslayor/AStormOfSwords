@@ -69,7 +69,6 @@ public class ModCreativeIngredients {
                         pOutput.accept(ModItems.RASPBERRY_SEEDS.get());
                         pOutput.accept(ModItems.SMOKEBERRY_SEEDS.get());
 
-
                         pOutput.accept(ModItems.BRONZE_CHAIN_LINK.get());
                         pOutput.accept(ModItems.BRONZE_CHAIN.get());
                         pOutput.accept(ModItems.BRONZE_PLATE.get());
