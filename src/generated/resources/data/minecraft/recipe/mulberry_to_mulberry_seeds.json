@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": "agotmod:mulberry"
+  },
+  "pattern": [
+    "S",
+    " "
+  ],
+  "result": {
+    "count": 1,
+    "id": "agotmod:mulberry_seeds"
+  }
+}

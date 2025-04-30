@@ -246,7 +246,21 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBLocks.TURNIP_CROP.get())
                 .add(ModBLocks.WILD_ONION_CROP.get())
                 .add(ModBLocks.ONION_CROP.get())
-                .add(ModBLocks.OPIUM_POPPY_CROP.get());
+                .add(ModBLocks.OPIUM_POPPY_CROP.get())
+                .add(ModBLocks.CABBAGE_CROP.get())
+                .add(ModBLocks.BEAN_CROP.get())
+                .add(ModBLocks.CHICKPEA_CROP.get())
+                .add(ModBLocks.CUCUMBER_CROP.get())
+                .add(ModBLocks.GREEN_BEAN_CROP.get())
+                .add(ModBLocks.SPINACH_CROP.get())
+                .add(ModBLocks.DRAGON_PEPPER_CROP.get())
+                .add(ModBLocks.PEPPER_CROP.get())
+                .add(ModBLocks.PEPPERCORN_CROP.get())
+                .add(ModBLocks.COTTON_CROP.get())
+                .add(ModBLocks.HEMP_CROP.get())
+
+        ;
+
 
 
 

@@ -2016,6 +2016,61 @@ public class ModBLocks {
     public static final DeferredBlock<Block> OPIUM_POPPY_CROP = registerBlock("opium_poppy_crop",
             OpiumPoppyCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
 
+    public static final DeferredBlock<Block> CABBAGE_CROP = registerBlock("cabbage_crop",
+            CabbageCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
+
+    public static final DeferredBlock<Block> BEAN_CROP = registerBlock("bean_crop",
+            BeanCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
+
+    public static final DeferredBlock<Block> CHICKPEA_CROP = registerBlock("chickpea_crop",
+            ChickpeaCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
+
+    public static final DeferredBlock<Block> CUCUMBER_CROP = registerBlock("cucumber_crop",
+            CucumberCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
+
+    public static final DeferredBlock<Block> GREEN_BEAN_CROP = registerBlock("green_bean_crop",
+            GreenBeanCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
+
+    public static final DeferredBlock<Block> SPINACH_CROP = registerBlock("spinach_crop",
+            SpinachCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
+
+    public static final DeferredBlock<Block> DRAGON_PEPPER_CROP = registerBlock("dragon_pepper_crop",
+            DragonPepperCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
+
+    public static final DeferredBlock<Block> PEPPER_CROP = registerBlock("pepper_crop",
+            PepperCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
+
+    public static final DeferredBlock<Block> PEPPERCORN_CROP = registerBlock("peppercorn_crop",
+            PeppercornCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
+
+    public static final DeferredBlock<Block> COTTON_CROP = registerBlock("cotton_crop",
+            CottonCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
+
+    public static final DeferredBlock<Block> HEMP_CROP = registerBlock("hemp_crop",
+            HempCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
+
+    // ---------------------------(BUSHES)--------------------------- //
+
+    public static final DeferredBlock<Block> STRAWBERRY_BUSH = registerBlock("strawberry_bush",
+            StrawberryBushBlock:: new, BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH), false);
+
+    public static final DeferredBlock<Block> BLACKBERRY_BUSH = registerBlock("blackberry_bush",
+            BlackberryBushBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH), false);
+
+    public static final DeferredBlock<Block> BLUEBERRY_BUSH = registerBlock("blueberry_bush",
+            BlueberryBushBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH), false);
+
+    public static final DeferredBlock<Block> MULBERRY_BUSH = registerBlock("mulberry_bush",
+            MulberryBushBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH), false);
+
+    public static final DeferredBlock<Block> RASPBERRY_BUSH = registerBlock("raspberry_bush",
+            RaspberryBushBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH), false);
+
+    public static final DeferredBlock<Block> SMOKEBERRY_BUSH = registerBlock("smokeberry_bush",
+            SmokeberryBushBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH), false);
+
+
+
 
 
     // Tells the AGoTMod class to call the modded blocks into the game

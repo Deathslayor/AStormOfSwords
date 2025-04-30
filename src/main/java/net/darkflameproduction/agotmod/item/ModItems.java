@@ -39,6 +39,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 // A utility class for creating and registering modded items
@@ -626,6 +627,37 @@ public class ModItems {
     public static final DeferredItem<Item> ONION = ITEMS.registerItem("onion",
             properties -> new Item(properties.food(ModFoods.ONION)));
     public static final DeferredItem<Item> BARLEY = ITEMS.registerItem("barley", Item::new);
+    public static final DeferredItem<Item> CABBAGE = ITEMS.registerItem("cabbage",
+            properties -> new Item(properties.food(ModFoods.CABBAGE)));
+    public static final DeferredItem<Item> BEAN = ITEMS.registerItem("bean",
+            properties -> new Item(properties.food(ModFoods.BEAN)));
+    public static final DeferredItem<Item> CHICKPEA = ITEMS.registerItem("chickpea",
+            properties -> new Item(properties.food(ModFoods.CHICKPEA)));
+    public static final DeferredItem<Item> CUCUMBER = ITEMS.registerItem("cucumber",
+            properties -> new Item(properties.food(ModFoods.CUCUMBER)));
+    public static final DeferredItem<Item> GREEN_BEAN = ITEMS.registerItem("green_bean",
+            properties -> new Item(properties.food(ModFoods.GREEN_BEAN)));
+    public static final DeferredItem<Item> SPINACH = ITEMS.registerItem("spinach",
+            properties -> new Item(properties.food(ModFoods.SPINACH)));
+    public static final DeferredItem<Item> STRAWBERRY = ITEMS.registerItem("strawberry",
+            properties -> new Item(properties.food(ModFoods.STRAWBERRY)));
+    public static final DeferredItem<Item> BLACKBERRY = ITEMS.registerItem("blackberry",
+            properties -> new Item(properties.food(ModFoods.BLACKBERRY)));
+    public static final DeferredItem<Item> BLUEBERRY = ITEMS.registerItem("blueberry",
+            properties -> new Item(properties.food(ModFoods.BLUEBERRY)));
+    public static final DeferredItem<Item> MULBERRY = ITEMS.registerItem("mulberry",
+            properties -> new Item(properties.food(ModFoods.MULBERRY)));
+    public static final DeferredItem<Item> RASPBERRY = ITEMS.registerItem("raspberry",
+            properties -> new Item(properties.food(ModFoods.RASPBERRY)));
+    public static final DeferredItem<Item> SMOKEBERRY = ITEMS.registerItem("smokeberry",
+            properties -> new Item(properties.food(ModFoods.SMOKEBERRY)));
+    public static final DeferredItem<Item> DRAGON_PEPPER = ITEMS.registerItem("dragon_pepper", Item::new);
+    public static final DeferredItem<Item> PEPPER = ITEMS.registerItem("pepper", Item::new);
+    public static final DeferredItem<Item> PEPPERCORN = ITEMS.registerItem("peppercorn", Item::new);
+    public static final DeferredItem<Item> COTTON = ITEMS.registerItem("cotton", Item::new);
+    public static final DeferredItem<Item> HEMP = ITEMS.registerItem("hemp", Item::new);
+
+
 
     // ---------------------------(FOODS)--------------------------- //
 
@@ -741,8 +773,55 @@ public class ModItems {
     public static final DeferredItem<Item> OPIUM_POPPY_SEEDS = ITEMS.registerItem("opium_poppy_seeds",
             properties -> new BlockItem(ModBLocks.OPIUM_POPPY_CROP.get(), properties));
 
+    public static final DeferredItem<Item> CABBAGE_SEEDS = ITEMS.registerItem("cabbage_seeds",
+            properties -> new BlockItem(ModBLocks.CABBAGE_CROP.get(), properties));
+    public static final DeferredItem<Item> BEAN_SEEDS = ITEMS.registerItem("bean_seeds",
+            properties -> new BlockItem(ModBLocks.BEAN_CROP.get(), properties));
 
+    public static final DeferredItem<Item> CHICKPEA_SEEDS = ITEMS.registerItem("chickpea_seeds",
+            properties -> new BlockItem(ModBLocks.CHICKPEA_CROP.get(), properties));
 
+    public static final DeferredItem<Item> CUCUMBER_SEEDS = ITEMS.registerItem("cucumber_seeds",
+            properties -> new BlockItem(ModBLocks.CUCUMBER_CROP.get(), properties));
+
+    public static final DeferredItem<Item> GREEN_BEAN_SEEDS = ITEMS.registerItem("green_bean_seeds",
+            properties -> new BlockItem(ModBLocks.GREEN_BEAN_CROP.get(), properties));
+
+    public static final DeferredItem<Item> SPINACH_SEEDS = ITEMS.registerItem("spinach_seeds",
+            properties -> new BlockItem(ModBLocks.SPINACH_CROP.get(), properties));
+
+    public static final DeferredItem<Item> DRAGON_PEPPER_SEEDS = ITEMS.registerItem("dragon_pepper_seeds",
+            properties -> new BlockItem(ModBLocks.DRAGON_PEPPER_CROP.get(), properties));
+
+    public static final DeferredItem<Item> PEPPER_SEEDS = ITEMS.registerItem("pepper_seeds",
+            properties -> new BlockItem(ModBLocks.PEPPER_CROP.get(), properties));
+
+    public static final DeferredItem<Item> PEPPERCORN_SEEDS = ITEMS.registerItem("peppercorn_seeds",
+            properties -> new BlockItem(ModBLocks.PEPPERCORN_CROP.get(), properties));
+
+    public static final DeferredItem<Item> COTTON_SEEDS = ITEMS.registerItem("cotton_seeds",
+            properties -> new BlockItem(ModBLocks.COTTON_CROP.get(), properties));
+
+    public static final DeferredItem<Item> HEMP_SEEDS = ITEMS.registerItem("hemp_seeds",
+            properties -> new BlockItem(ModBLocks.HEMP_CROP.get(), properties));
+
+    public static final DeferredItem<Item> STRAWBERRY_SEEDS = ITEMS.registerItem("strawberry_seeds",
+            properties -> new BlockItem(ModBLocks.STRAWBERRY_BUSH.get(), properties));
+
+    public static final DeferredItem<Item> BLACKBERRY_SEEDS = ITEMS.registerItem("blackberry_seeds",
+            properties -> new BlockItem(ModBLocks.BLACKBERRY_BUSH.get(), properties));
+
+    public static final DeferredItem<Item> BLUEBERRY_SEEDS = ITEMS.registerItem("blueberry_seeds",
+            properties -> new BlockItem(ModBLocks.BLUEBERRY_BUSH.get(), properties));
+
+    public static final DeferredItem<Item> MULBERRY_SEEDS = ITEMS.registerItem("mulberry_seeds",
+            properties -> new BlockItem(ModBLocks.MULBERRY_BUSH.get(), properties));
+
+    public static final DeferredItem<Item> RASPBERRY_SEEDS = ITEMS.registerItem("raspberry_seeds",
+            properties -> new BlockItem(ModBLocks.RASPBERRY_BUSH.get(), properties));
+
+    public static final DeferredItem<Item> SMOKEBERRY_SEEDS = ITEMS.registerItem("smokeberry_seeds",
+            properties -> new BlockItem(ModBLocks.SMOKEBERRY_BUSH.get(), properties));
 
 
 

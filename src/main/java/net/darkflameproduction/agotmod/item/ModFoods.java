@@ -197,4 +197,66 @@ public class ModFoods {
             .saturationModifier(0.3F)
             .build();
 
+    public static final FoodProperties CABBAGE = new FoodProperties.Builder()
+            .nutrition(3)
+            .saturationModifier(0.3F)
+            .build();
+
+    public static final FoodProperties BEAN = new FoodProperties.Builder()
+            .nutrition(3)
+            .saturationModifier(0.3F)
+            .build();
+
+    public static final FoodProperties CHICKPEA = new FoodProperties.Builder()
+            .nutrition(3)
+            .saturationModifier(0.3F)
+            .build();
+
+    public static final FoodProperties CUCUMBER = new FoodProperties.Builder()
+            .nutrition(3)
+            .saturationModifier(0.3F)
+            .build();
+
+    public static final FoodProperties GREEN_BEAN = new FoodProperties.Builder()
+            .nutrition(3)
+            .saturationModifier(0.3F)
+            .build();
+
+    public static final FoodProperties SPINACH = new FoodProperties.Builder()
+            .nutrition(3)
+            .saturationModifier(0.3F)
+            .build();
+
+    public static final FoodProperties STRAWBERRY = new FoodProperties.Builder()
+            .nutrition(2)
+            .saturationModifier(0.15F)
+            .build();
+
+    public static final FoodProperties BLACKBERRY = new FoodProperties.Builder()
+            .nutrition(2)
+            .saturationModifier(0.15F)
+            .build();
+
+    public static final FoodProperties BLUEBERRY = new FoodProperties.Builder()
+            .nutrition(2)
+            .saturationModifier(0.15F)
+            .build();
+
+    public static final FoodProperties MULBERRY = new FoodProperties.Builder()
+            .nutrition(2)
+            .saturationModifier(0.15F)
+            .build();
+
+    public static final FoodProperties RASPBERRY = new FoodProperties.Builder()
+            .nutrition(2)
+            .saturationModifier(0.15F)
+            .build();
+
+    public static final FoodProperties SMOKEBERRY = new FoodProperties.Builder()
+            .nutrition(2)
+            .saturationModifier(0.15F)
+            .build();
+
+
+
 }

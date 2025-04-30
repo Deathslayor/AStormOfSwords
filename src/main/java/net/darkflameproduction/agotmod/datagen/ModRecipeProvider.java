@@ -3715,6 +3715,50 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy(getHasName(ModBLocks.WILD_RADISH.get()), has(ModBLocks.WILD_RADISH.get()))
                 .save(this.output, "wild_radish_to_white_dye");
 
+        // -------------------------------------------------(FOODS)------------------------------------------------- //
+        this.shaped(RecipeCategory.MISC, ModItems.STRAWBERRY_SEEDS.get())
+                .pattern("S")
+                .pattern(" ")
+                .define('S', ModItems.STRAWBERRY.get())
+                .unlockedBy(getHasName(ModItems.STRAWBERRY.get()), has(ModItems.STRAWBERRY.get()))
+                .save(this.output, "strawberry_to_strawberry_seeds");
+
+        this.shaped(RecipeCategory.MISC, ModItems.BLACKBERRY_SEEDS.get())
+                .pattern("S")
+                .pattern(" ")
+                .define('S', ModItems.BLACKBERRY.get())
+                .unlockedBy(getHasName(ModItems.BLACKBERRY.get()), has(ModItems.BLACKBERRY.get()))
+                .save(this.output, "blackberry_to_blackberry_seeds");
+
+        this.shaped(RecipeCategory.MISC, ModItems.BLUEBERRY_SEEDS.get())
+                .pattern("S")
+                .pattern(" ")
+                .define('S', ModItems.BLUEBERRY.get())
+                .unlockedBy(getHasName(ModItems.BLUEBERRY.get()), has(ModItems.BLUEBERRY.get()))
+                .save(this.output, "blueberry_to_blueberry_seeds");
+
+        this.shaped(RecipeCategory.MISC, ModItems.MULBERRY_SEEDS.get())
+                .pattern("S")
+                .pattern(" ")
+                .define('S', ModItems.MULBERRY.get())
+                .unlockedBy(getHasName(ModItems.MULBERRY.get()), has(ModItems.MULBERRY.get()))
+                .save(this.output, "mulberry_to_mulberry_seeds");
+
+        this.shaped(RecipeCategory.MISC, ModItems.RASPBERRY_SEEDS.get())
+                .pattern("S")
+                .pattern(" ")
+                .define('S', ModItems.RASPBERRY.get())
+                .unlockedBy(getHasName(ModItems.RASPBERRY.get()), has(ModItems.RASPBERRY.get()))
+                .save(this.output, "raspberry_to_raspberry_seeds");
+
+        this.shaped(RecipeCategory.MISC, ModItems.SMOKEBERRY_SEEDS.get())
+                .pattern("S")
+                .pattern(" ")
+                .define('S', ModItems.SMOKEBERRY.get())
+                .unlockedBy(getHasName(ModItems.SMOKEBERRY.get()), has(ModItems.SMOKEBERRY.get()))
+                .save(this.output, "smokeberry_to_smokeberry_seeds");
+
+
 
         // -------------------------------------------------(FOODS)------------------------------------------------- //
         // Food smelting recipes Furnace

@@ -54,13 +54,34 @@ public class ModCreativeFoods {
                         pOutput.accept(ModItems.COOKED_MAMMOTH_MEAT.get());
                         pOutput.accept(ModItems.HORSERADISH.get());
                         pOutput.accept(ModItems.GARLIC.get());
+                        pOutput.accept(ModItems.ONION.get());
+                        pOutput.accept(ModItems.RED_ONION.get());
+                        pOutput.accept(ModItems.WILD_ONION.get());
                         pOutput.accept(ModItems.LEEK.get());
                         pOutput.accept(ModItems.NEEP.get());
-                        pOutput.accept(ModItems.PARSLEY.get());
-                        pOutput.accept(ModItems.RED_ONION.get());
                         pOutput.accept(ModItems.TURNIP.get());
-                        pOutput.accept(ModItems.WILD_ONION.get());
-                        pOutput.accept(ModItems.ONION.get());
+
+                        pOutput.accept(ModItems.PARSLEY.get());
+
+                        pOutput.accept(ModItems.BEAN.get());
+                        pOutput.accept(ModItems.GREEN_BEAN.get());
+                        pOutput.accept(ModItems.CHICKPEA.get());
+
+                        pOutput.accept(ModItems.CABBAGE.get());
+                        pOutput.accept(ModItems.SPINACH.get());
+                        pOutput.accept(ModItems.CUCUMBER.get());
+
+                        pOutput.accept(ModItems.DRAGON_PEPPER.get());
+                        pOutput.accept(ModItems.PEPPER.get());
+                        pOutput.accept(ModItems.PEPPERCORN.get());
+
+                        pOutput.accept(ModItems.STRAWBERRY.get());
+                        pOutput.accept(ModItems.BLACKBERRY.get());
+                        pOutput.accept(ModItems.BLUEBERRY.get());
+                        pOutput.accept(ModItems.MULBERRY.get());
+                        pOutput.accept(ModItems.RASPBERRY.get());
+                        pOutput.accept(ModItems.SMOKEBERRY.get());
+
 
                     })
                     .build());

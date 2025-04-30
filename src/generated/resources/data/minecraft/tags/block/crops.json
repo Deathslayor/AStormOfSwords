@@ -11,6 +11,17 @@
     "agotmod:turnip_crop",
     "agotmod:wild_onion_crop",
     "agotmod:onion_crop",
-    "agotmod:opium_poppy_crop"
+    "agotmod:opium_poppy_crop",
+    "agotmod:cabbage_crop",
+    "agotmod:bean_crop",
+    "agotmod:chickpea_crop",
+    "agotmod:cucumber_crop",
+    "agotmod:green_bean_crop",
+    "agotmod:spinach_crop",
+    "agotmod:dragon_pepper_crop",
+    "agotmod:pepper_crop",
+    "agotmod:peppercorn_crop",
+    "agotmod:cotton_crop",
+    "agotmod:hemp_crop"
   ]
 }

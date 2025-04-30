@@ -4,6 +4,7 @@ import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.darkflameproduction.agotmod.block.custom.HorseradishCropBlock;
 import net.minecraft.commands.arguments.ResourceLocationArgument;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -2162,10 +2163,42 @@ public class ModBlockStateProvider extends BlockStateProvider {
         makeCrop((CropBlock) ModBLocks.WILD_ONION_CROP.get(), "wild_onion_crop_stage", "wild_onion_crop_stage");
         makeCrop((CropBlock) ModBLocks.ONION_CROP.get(), "onion_crop_stage", "onion_crop_stage");
         makeCrop((CropBlock) ModBLocks.OPIUM_POPPY_CROP.get(), "opium_poppy_crop_stage", "opium_poppy_crop_stage");
+        makeTorchflowerStyleCrop((CropBlock) ModBLocks.CABBAGE_CROP.get(), "cabbage_crop_stage", "cabbage_crop_stage");
+        makeTorchflowerStyleCrop((CropBlock) ModBLocks.BEAN_CROP.get(), "bean_crop_stage", "bean_crop_stage");
+        makeTorchflowerStyleCrop((CropBlock) ModBLocks.CHICKPEA_CROP.get(), "chickpea_crop_stage", "chickpea_crop_stage");
+        makeTorchflowerStyleCrop((CropBlock) ModBLocks.CUCUMBER_CROP.get(), "cucumber_crop_stage", "cucumber_crop_stage");
+        makeTorchflowerStyleCrop((CropBlock) ModBLocks.GREEN_BEAN_CROP.get(), "green_bean_crop_stage", "green_bean_crop_stage");
+        makeTorchflowerStyleCrop((CropBlock) ModBLocks.SPINACH_CROP.get(), "spinach_crop_stage", "spinach_crop_stage");
+        makeTorchflowerStyleCrop((CropBlock) ModBLocks.DRAGON_PEPPER_CROP.get(), "dragon_pepper_crop_stage", "dragon_pepper_crop_stage");
+        makeTorchflowerStyleCrop((CropBlock) ModBLocks.PEPPER_CROP.get(), "pepper_crop_stage", "pepper_crop_stage");
+        makeTorchflowerStyleCrop((CropBlock) ModBLocks.PEPPERCORN_CROP.get(), "peppercorn_crop_stage", "peppercorn_crop_stage");
+        makeTorchflowerStyleCrop((CropBlock) ModBLocks.COTTON_CROP.get(), "cotton_crop_stage", "cotton_crop_stage");
+        makeTorchflowerStyleCrop((CropBlock) ModBLocks.HEMP_CROP.get(), "hemp_crop_stage", "hemp_crop_stage");
+        makeBush(((SweetBerryBushBlock) ModBLocks.STRAWBERRY_BUSH.get()), "strawberry_bush_stage", "strawberry_bush_stage");
+        makeBush(((SweetBerryBushBlock) ModBLocks.BLACKBERRY_BUSH.get()), "blackberry_bush_stage", "blackberry_bush_stage");
+        makeBush(((SweetBerryBushBlock) ModBLocks.BLUEBERRY_BUSH.get()), "blueberry_bush_stage", "blueberry_bush_stage");
+        makeBush(((SweetBerryBushBlock) ModBLocks.MULBERRY_BUSH.get()), "mulberry_bush_stage", "mulberry_bush_stage");
+        makeBush(((SweetBerryBushBlock) ModBLocks.RASPBERRY_BUSH.get()), "raspberry_bush_stage", "raspberry_bush_stage");
+        makeBush(((SweetBerryBushBlock) ModBLocks.SMOKEBERRY_BUSH.get()), "smokeberry_bush_stage", "smokeberry_bush_stage");
 
 
 
 
+    }
+
+    public void makeBush(SweetBerryBushBlock block, String modelName, String textureName) {
+        Function<BlockState, ConfiguredModel[]> function = state -> states(state, modelName, textureName);
+
+        getVariantBuilder(block).forAllStates(function);
+    }
+
+    private ConfiguredModel[] states(BlockState state, String modelName, String textureName) {
+        ConfiguredModel[] models = new ConfiguredModel[1];
+        int age = state.getValue(SweetBerryBushBlock.AGE);
+        models[0] = new ConfiguredModel(models().cross(modelName + age,
+                ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "block/" + textureName + age)).renderType("cutout"));
+
+        return models;
     }
 
     public void makeCrop(CropBlock block, String modelName, String textureName) {
@@ -2187,6 +2220,26 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         return models;
     }
+    public void makeTorchflowerStyleCrop(CropBlock block, String modelName, String textureName) {
+        Function<BlockState, ConfiguredModel[]> function = state -> torchflowerStyleStates(state, block, modelName, textureName);
+        getVariantBuilder(block).forAllStates(function);
+    }
+
+    private ConfiguredModel[] torchflowerStyleStates(BlockState state, CropBlock block, String modelName, String textureName) {
+        ConfiguredModel[] models = new ConfiguredModel[1];
+        IntegerProperty ageProperty = getAgeProperty(block);
+        int age = state.getValue(ageProperty);
+
+
+        models[0] = new ConfiguredModel(
+                models().withExistingParent(modelName + age, mcLoc("block/cross"))
+                        .texture("cross", modLoc("block/" + textureName + age))
+                        .renderType("cutout")
+        );
+
+        return models;
+    }
+
     private IntegerProperty getAgeProperty(CropBlock block) {
         try {
             Method getAgePropertyMethod = block.getClass().getMethod("getAgeProperty");

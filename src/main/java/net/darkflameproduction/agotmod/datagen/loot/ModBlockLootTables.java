@@ -18,6 +18,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.SweetBerryBushBlock;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -914,6 +915,141 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 ModItems.OPIUM_POPPY_SEEDS.get()
         ));
 
+        this.add(ModBLocks.CABBAGE_CROP.get(), cropDrop(
+                ModBLocks.CABBAGE_CROP.get(),
+                CabbageCropBlock.AGE,
+                CabbageCropBlock.MAX_AGE,
+                ModItems.CABBAGE.get(), 1.0F, 1.0F,
+                ModItems.CABBAGE_SEEDS.get()
+        ));
+
+        this.add(ModBLocks.BEAN_CROP.get(), cropDrop(
+                ModBLocks.BEAN_CROP.get(),
+                BeanCropBlock.AGE,
+                BeanCropBlock.MAX_AGE,
+                ModItems.BEAN.get(), 0.0F, 3.0F,
+                ModItems.BEAN_SEEDS.get()
+        ));
+
+        this.add(ModBLocks.CHICKPEA_CROP.get(), cropDrop(
+                ModBLocks.CHICKPEA_CROP.get(),
+                ChickpeaCropBlock.AGE,
+                ChickpeaCropBlock.MAX_AGE,
+                ModItems.CHICKPEA.get(), 0.0F, 3.0F,
+                ModItems.CHICKPEA_SEEDS.get()
+        ));
+
+        this.add(ModBLocks.CUCUMBER_CROP.get(), cropDrop(
+                ModBLocks.CUCUMBER_CROP.get(),
+                CucumberCropBlock.AGE,
+                CucumberCropBlock.MAX_AGE,
+                ModItems.CUCUMBER.get(), 0.0F, 3.0F,
+                ModItems.CUCUMBER_SEEDS.get()
+        ));
+
+        this.add(ModBLocks.GREEN_BEAN_CROP.get(), cropDrop(
+                ModBLocks.GREEN_BEAN_CROP.get(),
+                GreenBeanCropBlock.AGE,
+                GreenBeanCropBlock.MAX_AGE,
+                ModItems.GREEN_BEAN.get(), 0.0F, 3.0F,
+                ModItems.GREEN_BEAN_SEEDS.get()
+        ));
+
+        this.add(ModBLocks.SPINACH_CROP.get(), cropDrop(
+                ModBLocks.SPINACH_CROP.get(),
+                SpinachCropBlock.AGE,
+                SpinachCropBlock.MAX_AGE,
+                ModItems.SPINACH.get(), 0.0F, 3.0F,
+                ModItems.SPINACH_SEEDS.get()
+        ));
+
+        this.add(ModBLocks.DRAGON_PEPPER_CROP.get(), cropDrop(
+                ModBLocks.DRAGON_PEPPER_CROP.get(),
+                DragonPepperCropBlock.AGE,
+                DragonPepperCropBlock.MAX_AGE,
+                ModItems.DRAGON_PEPPER.get(), 0.0F, 3.0F,
+                ModItems.DRAGON_PEPPER_SEEDS.get()
+        ));
+
+        this.add(ModBLocks.PEPPER_CROP.get(), cropDrop(
+                ModBLocks.PEPPER_CROP.get(),
+                PepperCropBlock.AGE,
+                PepperCropBlock.MAX_AGE,
+                ModItems.PEPPER.get(), 0.0F, 3.0F,
+                ModItems.PEPPER_SEEDS.get()
+        ));
+
+        this.add(ModBLocks.PEPPERCORN_CROP.get(), cropDrop(
+                ModBLocks.PEPPERCORN_CROP.get(),
+                PeppercornCropBlock.AGE,
+                PeppercornCropBlock.MAX_AGE,
+                ModItems.PEPPERCORN.get(), 0.0F, 3.0F,
+                ModItems.PEPPERCORN_SEEDS.get()
+        ));
+
+        this.add(ModBLocks.COTTON_CROP.get(), cropDrop(
+                ModBLocks.COTTON_CROP.get(),
+                CottonCropBlock.AGE,
+                CottonCropBlock.MAX_AGE,
+                ModItems.COTTON.get(), 0.0F, 3.0F,
+                ModItems.COTTON_SEEDS.get()
+        ));
+
+        this.add(ModBLocks.HEMP_CROP.get(), cropDrop(
+                ModBLocks.HEMP_CROP.get(),
+                HempCropBlock.AGE,
+                HempCropBlock.MAX_AGE,
+                ModItems.HEMP.get(), 0.0F, 3.0F,
+                ModItems.HEMP_SEEDS.get()
+        ));
+
+        this.add(ModBLocks.STRAWBERRY_BUSH.get(), block ->
+                this.applyExplosionDecay(
+                        block, berryBushDrop(
+                                ModBLocks.STRAWBERRY_BUSH.get(),
+                                SweetBerryBushBlock.AGE,
+                                3,
+                                ModItems.STRAWBERRY.get())));
+        this.add(ModBLocks.BLACKBERRY_BUSH.get(), block ->
+                this.applyExplosionDecay(
+                        block, berryBushDrop(
+                                ModBLocks.BLACKBERRY_BUSH.get(),
+                                SweetBerryBushBlock.AGE,
+                                3,
+                                ModItems.BLACKBERRY.get())));
+
+        this.add(ModBLocks.BLUEBERRY_BUSH.get(), block ->
+                this.applyExplosionDecay(
+                        block, berryBushDrop(
+                                ModBLocks.BLUEBERRY_BUSH.get(),
+                                SweetBerryBushBlock.AGE,
+                                3,
+                                ModItems.BLUEBERRY.get())));
+
+        this.add(ModBLocks.MULBERRY_BUSH.get(), block ->
+                this.applyExplosionDecay(
+                        block, berryBushDrop(
+                                ModBLocks.MULBERRY_BUSH.get(),
+                                SweetBerryBushBlock.AGE,
+                                3,
+                                ModItems.MULBERRY.get())));
+
+        this.add(ModBLocks.RASPBERRY_BUSH.get(), block ->
+                this.applyExplosionDecay(
+                        block, berryBushDrop(
+                                ModBLocks.RASPBERRY_BUSH.get(),
+                                SweetBerryBushBlock.AGE,
+                                3,
+                                ModItems.RASPBERRY.get())));
+
+        this.add(ModBLocks.SMOKEBERRY_BUSH.get(), block ->
+                this.applyExplosionDecay(
+                        block, berryBushDrop(
+                                ModBLocks.SMOKEBERRY_BUSH.get(),
+                                SweetBerryBushBlock.AGE,
+                                3,
+                                ModItems.SMOKEBERRY.get())));
+
 
 
 
@@ -963,6 +1099,28 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                         .add(LootItem.lootTableItem(seedItem)
                                 .when(notFullyGrown)
                                 .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
+                        )
+                );
+    }
+
+    protected LootTable.Builder berryBushDrop(Block bushBlock, IntegerProperty ageProperty, int maxAge, Item berryItem) {
+        LootItemCondition.Builder maxAgeCondition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(bushBlock)
+                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(ageProperty, maxAge));
+
+        LootItemCondition.Builder mediumGrowthCondition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(bushBlock)
+                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(ageProperty, maxAge - 1));
+
+        return LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                        .when(maxAgeCondition)
+                        .add(LootItem.lootTableItem(berryItem)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F)))
+                        )
+                )
+                .withPool(LootPool.lootPool()
+                        .when(mediumGrowthCondition)
+                        .add(LootItem.lootTableItem(berryItem)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                         )
                 );
     }

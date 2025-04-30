@@ -314,8 +314,23 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.TURNIP);
         simpleItem(ModItems.WILD_ONION);
         simpleItem(ModItems.ONION);
-
-
+        simpleItem(ModItems.CABBAGE);
+        simpleItem(ModItems.BEAN);
+        simpleItem(ModItems.CHICKPEA);
+        simpleItem(ModItems.CUCUMBER);
+        simpleItem(ModItems.GREEN_BEAN);
+        simpleItem(ModItems.SPINACH);
+        simpleItem(ModItems.DRAGON_PEPPER);
+        simpleItem(ModItems.PEPPER);
+        simpleItem(ModItems.PEPPERCORN);
+        simpleItem(ModItems.COTTON);
+        simpleItem(ModItems.HEMP);
+        simpleItem(ModItems.STRAWBERRY);
+        simpleItem(ModItems.BLACKBERRY);
+        simpleItem(ModItems.BLUEBERRY);
+        simpleItem(ModItems.MULBERRY);
+        simpleItem(ModItems.RASPBERRY);
+        simpleItem(ModItems.SMOKEBERRY);
 
         // ---------------------------(SEEDS)--------------------------- //
         simpleItem(ModItems.HORSERADISH_SEEDS);
@@ -330,6 +345,24 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.WILD_ONION_SEEDS);
         simpleItem(ModItems.ONION_SEEDS);
         simpleItem(ModItems.OPIUM_POPPY_SEEDS);
+        simpleItem(ModItems.CABBAGE_SEEDS);
+        simpleItem(ModItems.BEAN_SEEDS);
+        simpleItem(ModItems.CHICKPEA_SEEDS);
+        simpleItem(ModItems.CUCUMBER_SEEDS);
+        simpleItem(ModItems.GREEN_BEAN_SEEDS);
+        simpleItem(ModItems.SPINACH_SEEDS);
+        simpleItem(ModItems.DRAGON_PEPPER_SEEDS);
+        simpleItem(ModItems.PEPPER_SEEDS);
+        simpleItem(ModItems.PEPPERCORN_SEEDS);
+        simpleItem(ModItems.COTTON_SEEDS);
+        simpleItem(ModItems.HEMP_SEEDS);
+        simpleItem(ModItems.STRAWBERRY_SEEDS);
+        simpleItem(ModItems.BLACKBERRY_SEEDS);
+        simpleItem(ModItems.BLUEBERRY_SEEDS);
+        simpleItem(ModItems.MULBERRY_SEEDS);
+        simpleItem(ModItems.RASPBERRY_SEEDS);
+        simpleItem(ModItems.SMOKEBERRY_SEEDS);
+
 
         // ---------------------------(SAPLINGS)--------------------------- //
         saplingItem(ModBLocks.WEIRWOOD_SAPLING);
