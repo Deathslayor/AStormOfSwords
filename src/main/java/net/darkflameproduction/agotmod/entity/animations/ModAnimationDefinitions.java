@@ -16,6 +16,7 @@ public class ModAnimationDefinitions {
 
 
     public static final RawAnimation DIE = RawAnimation.begin().thenPlay("misc.die");
+    public static final RawAnimation ATTACK = RawAnimation.begin().thenPlay("misc.attack");
     public static final RawAnimation SPAWN = RawAnimation.begin().thenPlay("misc.spawn");
 
 
@@ -37,4 +38,15 @@ public class ModAnimationDefinitions {
             return PlayState.STOP;
         });
     }
+
+    public static <T extends LivingEntity & GeoAnimatable> AnimationController<T> ModdedAttackController(T animatable) {
+        return new AnimationController<>(animatable, "Attack", 0, state -> {
+            if (state.getAnimatable().swinging) {
+                return state.setAndContinue(ATTACK);
+            }
+            state.getController().forceAnimationReset();
+            return PlayState.STOP;
+        });
+    }
+
 }

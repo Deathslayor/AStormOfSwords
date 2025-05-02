@@ -2049,6 +2049,14 @@ public class ModBLocks {
     public static final DeferredBlock<Block> HEMP_CROP = registerBlock("hemp_crop",
             HempCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
 
+    public static final DeferredBlock<Block> CORN_CROP = registerBlock("corn_crop",
+            CornCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH).noCollission().noOcclusion(), false);
+    public static final DeferredBlock<Block> CORN_CROP_MIDDLE = registerBlock("corn_crop_middle",
+            CornCropMiddleBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH).noCollission().noOcclusion(), false);
+    public static final DeferredBlock<Block> CORN_CROP_TOP = registerBlock("corn_crop_top",
+            CornCropTopBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH).noCollission().noOcclusion(), false);
+
+
     // ---------------------------(BUSHES)--------------------------- //
 
     public static final DeferredBlock<Block> STRAWBERRY_BUSH = registerBlock("strawberry_bush",

@@ -1010,6 +1010,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                                 SweetBerryBushBlock.AGE,
                                 3,
                                 ModItems.STRAWBERRY.get())));
+
         this.add(ModBLocks.BLACKBERRY_BUSH.get(), block ->
                 this.applyExplosionDecay(
                         block, berryBushDrop(
@@ -1049,6 +1050,31 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                                 SweetBerryBushBlock.AGE,
                                 3,
                                 ModItems.SMOKEBERRY.get())));
+
+        this.add(ModBLocks.CORN_CROP.get(), block ->
+                this.applyExplosionDecay(
+                        block, berryBushDrop(
+                                ModBLocks.CORN_CROP.get(),
+                                SweetBerryBushBlock.AGE,
+                                3,
+                                ModItems.CORN_SEEDS.get())));
+
+
+        this.add(ModBLocks.CORN_CROP_MIDDLE.get(), block ->
+                this.applyExplosionDecay(
+                        block, berryBushDrop(
+                                ModBLocks.CORN_CROP_MIDDLE.get(),
+                                SweetBerryBushBlock.AGE,
+                                3,
+                                ModItems.CORN_SEEDS.get())));
+
+        this.add(ModBLocks.CORN_CROP_TOP.get(), block ->
+                this.applyExplosionDecay(
+                        block, berryBushDrop(
+                                ModBLocks.CORN_CROP_TOP.get(),
+                                SweetBerryBushBlock.AGE,
+                                3,
+                                ModItems.CORN_SEEDS.get())));
 
 
 

@@ -257,6 +257,11 @@ public class ModFoods {
             .saturationModifier(0.15F)
             .build();
 
+    public static final FoodProperties CORN = new FoodProperties.Builder()
+            .nutrition(2)
+            .saturationModifier(0.15F)
+            .build();
+
 
 
 }

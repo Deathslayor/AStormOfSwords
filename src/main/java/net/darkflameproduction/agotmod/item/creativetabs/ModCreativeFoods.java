@@ -66,6 +66,8 @@ public class ModCreativeFoods {
                         pOutput.accept(ModItems.BEAN.get());
                         pOutput.accept(ModItems.GREEN_BEAN.get());
                         pOutput.accept(ModItems.CHICKPEA.get());
+                        pOutput.accept(ModItems.CORN.get());
+
 
                         pOutput.accept(ModItems.CABBAGE.get());
                         pOutput.accept(ModItems.SPINACH.get());

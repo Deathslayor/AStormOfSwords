@@ -22,6 +22,9 @@
     "agotmod:pepper_crop",
     "agotmod:peppercorn_crop",
     "agotmod:cotton_crop",
-    "agotmod:hemp_crop"
+    "agotmod:hemp_crop",
+    "agotmod:corn_crop",
+    "agotmod:corn_crop_middle",
+    "agotmod:corn_crop_top"
   ]
 }

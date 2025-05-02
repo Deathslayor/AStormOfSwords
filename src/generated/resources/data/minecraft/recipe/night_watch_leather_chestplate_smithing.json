@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "agotmod:nights_watch_leather_smithing_scroll",
+  "base": "agotmod:night_watch_ranger_chestplate",
+  "result": {
+    "count": 1,
+    "id": "agotmod:night_watch_leather_chestplate"
+  },
+  "template": "agotmod:upgrade_kit_steel"
+}

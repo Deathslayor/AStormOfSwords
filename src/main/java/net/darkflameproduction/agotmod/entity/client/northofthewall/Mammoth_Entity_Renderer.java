@@ -9,6 +9,9 @@ public class Mammoth_Entity_Renderer extends GeoEntityRenderer<Mammoth_Entity> {
 
     public Mammoth_Entity_Renderer(EntityRendererProvider.Context context) {
         super(context, new Mammoth_Entity_Model());
+        this.scaleWidth = 2.0f;
+        this.scaleHeight = 2.0f;
+
     }
 
     @Override

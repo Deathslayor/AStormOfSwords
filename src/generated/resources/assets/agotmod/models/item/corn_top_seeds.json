@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "agotmod:item/smithing_scroll_4"
+    "layer0": "agotmod:item/corn_top_seeds"
   }
 }

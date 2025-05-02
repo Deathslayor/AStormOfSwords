@@ -2180,6 +2180,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
         makeBush(((SweetBerryBushBlock) ModBLocks.MULBERRY_BUSH.get()), "mulberry_bush_stage", "mulberry_bush_stage");
         makeBush(((SweetBerryBushBlock) ModBLocks.RASPBERRY_BUSH.get()), "raspberry_bush_stage", "raspberry_bush_stage");
         makeBush(((SweetBerryBushBlock) ModBLocks.SMOKEBERRY_BUSH.get()), "smokeberry_bush_stage", "smokeberry_bush_stage");
+        makeBush(((SweetBerryBushBlock) ModBLocks.CORN_CROP.get()), "corn_bush_stage", "corn_bush_stage");
+        makeBush(((SweetBerryBushBlock) ModBLocks.CORN_CROP_MIDDLE.get()), "corn_middle_bush_stage", "corn_middle_bush_stage");
+        makeBush(((SweetBerryBushBlock) ModBLocks.CORN_CROP_TOP.get()), "corn_top_bush_stage", "corn_top_bush_stage");
+
+
 
 
 

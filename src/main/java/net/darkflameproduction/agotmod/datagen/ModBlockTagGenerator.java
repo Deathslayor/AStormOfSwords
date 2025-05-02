@@ -258,6 +258,12 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBLocks.PEPPERCORN_CROP.get())
                 .add(ModBLocks.COTTON_CROP.get())
                 .add(ModBLocks.HEMP_CROP.get())
+                .add(ModBLocks.CORN_CROP.get())
+                .add(ModBLocks.CORN_CROP_MIDDLE.get())
+                .add(ModBLocks.CORN_CROP_TOP.get())
+
+
+
 
         ;
 

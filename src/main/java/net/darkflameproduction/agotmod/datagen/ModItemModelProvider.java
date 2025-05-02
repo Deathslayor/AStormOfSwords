@@ -331,6 +331,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.MULBERRY);
         simpleItem(ModItems.RASPBERRY);
         simpleItem(ModItems.SMOKEBERRY);
+        simpleItem(ModItems.CORN);
+
 
         // ---------------------------(SEEDS)--------------------------- //
         simpleItem(ModItems.HORSERADISH_SEEDS);
@@ -362,6 +364,12 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.MULBERRY_SEEDS);
         simpleItem(ModItems.RASPBERRY_SEEDS);
         simpleItem(ModItems.SMOKEBERRY_SEEDS);
+        simpleItem(ModItems.CORN_SEEDS);
+        simpleItem(ModItems.CORN_MIDDLE_SEEDS);
+        simpleItem(ModItems.CORN_TOP_SEEDS);
+
+
+
 
 
         // ---------------------------(SAPLINGS)--------------------------- //
@@ -797,11 +805,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.HAMMER);
         simpleItem(ModItems.IRON_PLATE);
         simpleItem(ModItems.NOBLE_PLATE);
-        simpleItem(ModItems.SMITHING_SCROLL);
-        simpleItem(ModItems.SMITHING_SCROLL_2);
-        simpleItem(ModItems.SMITHING_SCROLL_3);
-        simpleItem(ModItems.SMITHING_SCROLL_4);
-        simpleItem(ModItems.SMITHING_SCROLL_5);
         simpleItem(ModItems.STEEL_BOOTS);
         simpleItem(ModItems.STEEL_CHAIN_LINK);
         simpleItem(ModItems.STEEL_CHAIN);
@@ -829,6 +832,24 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.NORTHERN_MOUNTAIN_CLAN_LEATHER_SMITHING_SCROLL);
         simpleItem(ModItems.NORTHERN_MOUNTAIN_CLAN_CHAIN_SMITHING_SCROLL);
         simpleItem(ModItems.NORTHERN_MOUNTAIN_CLAN_NOBLE_SMITHING_SCROLL);
+
+        simpleItem(ModItems.NIGHTS_WATCH_RANGER_SMITHING_SCROLL);
+        simpleItem(ModItems.NIGHTS_WATCH_LEATHER_SMITHING_SCROLL);
+        simpleItem(ModItems.NIGHTS_WATCH_ELITE_SMITHING_SCROLL);
+
+        simpleItem(ModItems.WILDLING_FUR_SMITHING_SCROLL);
+        simpleItem(ModItems.WILDLING_LEATHER_SMITHING_SCROLL);
+        simpleItem(ModItems.WILDLING_CHIEF_SMITHING_SCROLL);
+
+        simpleItem(ModItems.THENN_LEVY_SMITHING_SCROLL);
+        simpleItem(ModItems.THENN_PLATE_SMITHING_SCROLL);
+        simpleItem(ModItems.THENN_NOBLE_SMITHING_SCROLL);
+
+        simpleItem(ModItems.IRONBORN_LEVY_SMITHING_SCROLL);
+        simpleItem(ModItems.IRONBORN_PLATE_SMITHING_SCROLL);
+        simpleItem(ModItems.IRONBORN_NOBLE_SMITHING_SCROLL);
+
+
 
         // ---------------------------(SIGNS)--------------------------- //
         simpleItem(ModItems.WEIRWOOD_SIGN);

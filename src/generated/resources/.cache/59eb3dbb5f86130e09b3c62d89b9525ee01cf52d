@@ -1,4 +1,4 @@
-// 1.21.3	2025-04-30T21:51:13.6755317	Loot Tables
+// 1.21.3	2025-05-02T23:43:53.7724115	Loot Tables
 dcab3871310df0811beb8de47adc40c83d85986b data/agotmod/loot_table/blocks/alder_button.json
 81071778b6225f49c02483465d22441e05162a1b data/agotmod/loot_table/blocks/alder_door.json
 33ccfef8d939079aebfc7963299df0ced91481b5 data/agotmod/loot_table/blocks/alder_fence.json
@@ -1147,6 +1147,9 @@ cdd95c7f06a6a68a4526536ac20d7a8947650b11 data/agotmod/loot_table/blocks/chestnut
 8fddc4f140f014aa7626ac0df8934e858af48fdb data/agotmod/loot_table/blocks/chestnut_wood_stripped.json
 ea65a067410ef613b250e64729d04b8e57a09e8f data/agotmod/loot_table/blocks/chickpea_crop.json
 0ab743338326076de35ea05b53b0558c28e48c04 data/agotmod/loot_table/blocks/coldsnap.json
+bd9b9ef117a6bd8fb07ef5efa8ad3b2b1a8588ed data/agotmod/loot_table/blocks/corn_crop.json
+ebba2c5d80e827a656f3598e561c8ee6c73a2e87 data/agotmod/loot_table/blocks/corn_crop_middle.json
+be52ba5aa9b02752fa8a196cd34945e0f9bdca96 data/agotmod/loot_table/blocks/corn_crop_top.json
 b81b37c4b109224c97499077cc628f4c461d2985 data/agotmod/loot_table/blocks/cotton_crop.json
 addd0833b98cd9a725e2fed979b5cfd0d643c977 data/agotmod/loot_table/blocks/cucumber_crop.json
 97023fd16df62496a88fd37078519b6fb34b9d17 data/agotmod/loot_table/blocks/dark_stone_brick.json

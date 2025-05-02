@@ -36,7 +36,10 @@ import software.bernie.geckolib.util.GeckoLibUtil;
         public Mammoth_Entity(EntityType<? extends PathfinderMob> p_21683_, Level p_21684_) {
             super(p_21683_, p_21684_);
 
+
         }
+
+
 
 
 
@@ -71,29 +74,30 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
         @Nullable
         protected SoundEvent getAmbientSound() {
-            return SoundEvents.LIGHTNING_BOLT_THUNDER;
+            return SoundEvents.PIG_AMBIENT;
         }
 
 
         @Nullable
         protected SoundEvent getHurtSound(DamageSource pDamageSource) {
-            return SoundEvents.LIGHTNING_BOLT_IMPACT;
+            return SoundEvents.PIG_HURT;
         }
 
 
         @Nullable
         protected SoundEvent getDeathSound() {
-            return SoundEvents.LIGHTNING_BOLT_IMPACT;
+            return SoundEvents.PIG_DEATH;
         }
 
 
         @Override
         public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-            controllers.add(DefaultAnimations.genericWalkRunIdleController(this));
-            controllers.add(DefaultAnimations.genericAttackAnimation(this,DefaultAnimations.ATTACK_STRIKE));
-            controllers.add(ModAnimationDefinitions.ModdedSummonController(this));
-            controllers.add(ModAnimationDefinitions.ModdedDeathController(this));
+            controllers.add(ModAnimationDefinitions.ModdedAttackController(this))
+                    .add(ModAnimationDefinitions.ModdedDeathController(this))
+                    .add(ModAnimationDefinitions.ModdedSummonController(this))
+                    .add(DefaultAnimations.genericWalkRunIdleController(this));
         }
+
 
 
 
@@ -110,13 +114,11 @@ import software.bernie.geckolib.util.GeckoLibUtil;
             builder.define(DATA_SPRINTING, false);
         }
 
-        // Rest of your class remains the same, but here are other potential updates:
 
         @Override
         public void tick() {
             super.tick();
 
-            // Change from this.level to this.level()
             if (!this.level().isClientSide() && this.getTarget() != null) {
                 boolean isCloseToTarget = this.distanceToSqr(this.getTarget()) < 16.0D;
                 boolean shouldSprint = !isCloseToTarget;

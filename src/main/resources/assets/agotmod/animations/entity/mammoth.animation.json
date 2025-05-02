@@ -128,7 +128,7 @@
 				}
 			}
 		},
-		"move.walk": {
+		"misc.walk": {
 			"loop": true,
 			"animation_length": 3,
 			"bones": {
@@ -348,7 +348,7 @@
 				}
 			}
 		},
-		"move.run": {
+		"misc.run": {
 			"loop": true,
 			"animation_length": 0.6667,
 			"bones": {
@@ -559,7 +559,7 @@
 				}
 			}
 		},
-		"attack.strike": {
+		"misc.attack": {
 			"animation_length": 1.4167,
 			"bones": {
 				"body": {

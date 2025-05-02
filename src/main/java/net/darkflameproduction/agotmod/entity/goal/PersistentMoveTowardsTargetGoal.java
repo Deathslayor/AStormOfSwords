@@ -3,6 +3,7 @@ package net.darkflameproduction.agotmod.entity.goal;
 import net.darkflameproduction.agotmod.entity.custom.norththewall.Mammoth_Entity;
 import net.minecraft.world.entity.ai.goal.MoveTowardsTargetGoal;
 
+
 public class PersistentMoveTowardsTargetGoal extends MoveTowardsTargetGoal {
     private final Mammoth_Entity mammoth;
     
@@ -10,7 +11,7 @@ public class PersistentMoveTowardsTargetGoal extends MoveTowardsTargetGoal {
         super(mammoth, speedModifier, maxDistance);
         this.mammoth = mammoth;
     }
-    
+
     @Override
     public boolean canUse() {
         boolean canUse = super.canUse();

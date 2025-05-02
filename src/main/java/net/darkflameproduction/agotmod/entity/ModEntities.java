@@ -11,20 +11,17 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 public class ModEntities {
-    // Use the proper registry reference for NeoForge 1.21.3
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
             DeferredRegister.create(net.minecraft.core.registries.Registries.ENTITY_TYPE, AGoTMod.MOD_ID);
 
-    // Changed from RegistryObject to DeferredHolder for NeoForge 1.21.3
     public static final DeferredHolder<EntityType<?>, EntityType<Mammoth_Entity>> MAMMOTH_ENTITY =
             ENTITY_TYPES.register("mammoth",
                     () -> EntityType.Builder.of(Mammoth_Entity::new, MobCategory.MISC)
-                            .sized(1f, 2f)
+                            .sized(3.5f, 4f)
                             .clientTrackingRange(64)
                             .build(ResourceKey.create(net.minecraft.core.registries.Registries.ENTITY_TYPE,
                                     ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "mammoth"))));
 
-    // Registration method remains mostly the same
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);
     }

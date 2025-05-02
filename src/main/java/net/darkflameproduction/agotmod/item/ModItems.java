@@ -656,6 +656,8 @@ public class ModItems {
     public static final DeferredItem<Item> PEPPERCORN = ITEMS.registerItem("peppercorn", Item::new);
     public static final DeferredItem<Item> COTTON = ITEMS.registerItem("cotton", Item::new);
     public static final DeferredItem<Item> HEMP = ITEMS.registerItem("hemp", Item::new);
+    public static final DeferredItem<Item> CORN = ITEMS.registerItem("corn",
+            properties -> new Item(properties.food(ModFoods.CORN)));
 
 
 
@@ -708,14 +710,21 @@ public class ModItems {
     public static final DeferredItem<Item> NORTHERN_MOUNTAIN_CLAN_LEATHER_SMITHING_SCROLL = ITEMS.registerItem("northern_mountain_clan_leather_smithing_scroll", Item::new);
     public static final DeferredItem<Item> NORTHERN_MOUNTAIN_CLAN_CHAIN_SMITHING_SCROLL = ITEMS.registerItem("northern_mountain_clan_chain_smithing_scroll", Item::new);
     public static final DeferredItem<Item> NORTHERN_MOUNTAIN_CLAN_NOBLE_SMITHING_SCROLL = ITEMS.registerItem("northern_mountain_clan_noble_smithing_scroll", Item::new);
+    public static final DeferredItem<Item> NIGHTS_WATCH_RANGER_SMITHING_SCROLL = ITEMS.registerItem("nights_watch_ranger_smithing_scroll", Item::new);
+    public static final DeferredItem<Item> NIGHTS_WATCH_LEATHER_SMITHING_SCROLL = ITEMS.registerItem("nights_watch_leather_smithing_scroll", Item::new);
+    public static final DeferredItem<Item> NIGHTS_WATCH_ELITE_SMITHING_SCROLL = ITEMS.registerItem("nights_watch_elite_smithing_scroll", Item::new);
+    public static final DeferredItem<Item> WILDLING_FUR_SMITHING_SCROLL = ITEMS.registerItem("wildling_fur_smithing_scroll", Item::new);
+    public static final DeferredItem<Item> WILDLING_LEATHER_SMITHING_SCROLL = ITEMS.registerItem("wildling_leather_smithing_scroll", Item::new);
+    public static final DeferredItem<Item> WILDLING_CHIEF_SMITHING_SCROLL = ITEMS.registerItem("wildling_chief_smithing_scroll", Item::new);
+    public static final DeferredItem<Item> THENN_LEVY_SMITHING_SCROLL = ITEMS.registerItem("thenn_levy_smithing_scroll", Item::new);
+    public static final DeferredItem<Item> THENN_PLATE_SMITHING_SCROLL = ITEMS.registerItem("thenn_plate_smithing_scroll", Item::new);
+    public static final DeferredItem<Item> THENN_NOBLE_SMITHING_SCROLL = ITEMS.registerItem("thenn_noble_smithing_scroll", Item::new);
+    public static final DeferredItem<Item> IRONBORN_LEVY_SMITHING_SCROLL = ITEMS.registerItem("ironborn_levy_smithing_scroll", Item::new);
+    public static final DeferredItem<Item> IRONBORN_PLATE_SMITHING_SCROLL = ITEMS.registerItem("ironborn_plate_smithing_scroll", Item::new);
+    public static final DeferredItem<Item> IRONBORN_NOBLE_SMITHING_SCROLL = ITEMS.registerItem("ironborn_noble_smithing_scroll", Item::new);
 
 
 
-    public static final DeferredItem<Item> SMITHING_SCROLL = ITEMS.registerItem("smithing_scroll", Item::new);
-    public static final DeferredItem<Item> SMITHING_SCROLL_2 = ITEMS.registerItem("smithing_scroll_2", Item::new);
-    public static final DeferredItem<Item> SMITHING_SCROLL_3 = ITEMS.registerItem("smithing_scroll_3", Item::new);
-    public static final DeferredItem<Item> SMITHING_SCROLL_4 = ITEMS.registerItem("smithing_scroll_4", Item::new);
-    public static final DeferredItem<Item> SMITHING_SCROLL_5 = ITEMS.registerItem("smithing_scroll_5", Item::new);
 
 
     public static final DeferredItem<Item> WEIRWOOD_SIGN = ITEMS.registerItem("weirwood_sign",
@@ -822,6 +831,17 @@ public class ModItems {
 
     public static final DeferredItem<Item> SMOKEBERRY_SEEDS = ITEMS.registerItem("smokeberry_seeds",
             properties -> new BlockItem(ModBLocks.SMOKEBERRY_BUSH.get(), properties));
+
+    public static final DeferredItem<Item> CORN_SEEDS = ITEMS.registerItem("corn_seeds",
+            properties -> new BlockItem(ModBLocks.CORN_CROP.get(), properties));
+
+    public static final DeferredItem<Item> CORN_MIDDLE_SEEDS = ITEMS.registerItem("corn_middle_seeds",
+            properties -> new BlockItem(ModBLocks.CORN_CROP_MIDDLE.get(), properties));
+
+    public static final DeferredItem<Item> CORN_TOP_SEEDS = ITEMS.registerItem("corn_top_seeds",
+            properties -> new BlockItem(ModBLocks.CORN_CROP_TOP.get(), properties));
+
+
 
 
 
