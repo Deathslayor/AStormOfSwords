@@ -4031,6 +4031,20 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy(getHasName(ModItems.IVORY_SHARD.get()), has(ModItems.IVORY_SHARD.get()))
                 .save(this.output, "upgrade_kit_chief");
 
+        this.shaped(RecipeCategory.MISC, ModItems.CLOTH.get())
+                .pattern("AA")
+                .pattern("AA")
+                .define('A', ModItems.COTTON.get())
+                .unlockedBy(getHasName(ModItems.COTTON.get()), has(ModItems.COTTON.get()))
+                .save(this.output, "cloth_from_cotton");
+
+        this.shaped(RecipeCategory.MISC, Items.STRING)
+                .pattern("A")
+                .define('A', ModItems.COTTON.get())
+                .unlockedBy(getHasName(ModItems.COTTON.get()), has(ModItems.COTTON.get()))
+                .save(this.output, "string_from_cotton");
+
+
         // Stark Levy Helmet
         SmithingTransformRecipeBuilder.smithing(
                         Ingredient.of(ModItems.UPGRADE_KIT_IRON.get()),
