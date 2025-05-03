@@ -795,6 +795,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         // Register item models for crafting items
         simpleItem(ModItems.BOAR_INTESTINES);
         simpleItem(ModItems.BOAR_TUSK);
+        simpleItem(ModItems.IVORY);
+        simpleItem(ModItems.IVORY_SHARD);
+        simpleItem(ModItems.FUR);
+        simpleItem(ModItems.BOILED_LEATHER);
         simpleItem(ModItems.WEIRWOOD_STICK);
         simpleItem(ModItems.BRONZE_CHAIN_LINK);
         simpleItem(ModItems.BRONZE_CHAIN);
@@ -816,6 +820,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.UPGRADE_KIT_IRON);
         simpleItem(ModItems.UPGRADE_KIT_NOBLE);
         simpleItem(ModItems.UPGRADE_KIT_STEEL);
+        simpleItem(ModItems.UPGRADE_KIT_BRONZE_PLATE);
+        simpleItem(ModItems.UPGRADE_KIT_CHIEF);
+        simpleItem(ModItems.UPGRADE_KIT_FUR);
+        simpleItem(ModItems.UPGRADE_KIT_LEATHER);
 
         simpleItem(ModItems.STARK_LEVY_SMITHING_SCROLL);
         simpleItem(ModItems.STARK_PLATE_SMITHING_SCROLL);

@@ -3,9 +3,13 @@ package net.darkflameproduction.agotmod.block.custom;
 import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.darkflameproduction.agotmod.item.ModItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -14,6 +18,7 @@ import net.minecraft.world.level.block.SweetBerryBushBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 
 public class CornCropTopBlock extends SweetBerryBushBlock {
     public CornCropTopBlock(Properties properties) {
@@ -28,6 +33,25 @@ public class CornCropTopBlock extends SweetBerryBushBlock {
     @Override
     public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
         return new ItemStack(ModItems.CORN.get()) ;
+    }
+
+    @Override
+    protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+        if (entity instanceof LivingEntity && entity.getType() != EntityType.FOX && entity.getType() != EntityType.BEE) {
+            entity.makeStuckInBlock(state, new Vec3(0.8F, 0.75, 0.8F));
+            if (level instanceof ServerLevel serverlevel && state.getValue(AGE) != 0) {
+                Vec3 vec3 = entity.isControlledByClient() ? entity.getKnownMovement() : entity.oldPosition().subtract(entity.position());
+                if (vec3.horizontalDistanceSqr() > 0.0) {
+                    double d0 = Math.abs(vec3.x());
+                    double d1 = Math.abs(vec3.z());
+                    if (d0 >= 0.003F || d1 >= 0.003F) {
+                        entity.hurtServer(serverlevel, level.damageSources().sweetBerryBush(), 0F);
+                    }
+                }
+
+                return;
+            }
+        }
     }
 
     @Override

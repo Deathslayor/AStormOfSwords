@@ -33,6 +33,12 @@ public class ModCreativeIngredients {
                         pOutput.accept(ModItems.WEIRWOOD_STICK.get());
                         pOutput.accept(ModItems.BOAR_INTESTINES.get());
                         pOutput.accept(ModItems.BOAR_TUSK.get());
+                        pOutput.accept(ModItems.IVORY.get());
+                        pOutput.accept(ModItems.IVORY_SHARD.get());
+                        pOutput.accept(ModItems.BOILED_LEATHER.get());
+                        pOutput.accept(ModItems.FUR.get());
+
+
 
                         //SEEDS
                         pOutput.accept(ModItems.BARLEY.get());
@@ -70,27 +76,32 @@ public class ModCreativeIngredients {
                         pOutput.accept(ModItems.SMOKEBERRY_SEEDS.get());
                         pOutput.accept(ModItems.CORN_SEEDS.get());
 
+                        pOutput.accept(ModItems.CLOTH.get());
                         pOutput.accept(ModItems.BRONZE_CHAIN_LINK.get());
                         pOutput.accept(ModItems.BRONZE_CHAIN.get());
                         pOutput.accept(ModItems.BRONZE_PLATE.get());
-                        pOutput.accept(ModItems.CLOTH.get());
                         pOutput.accept(ModItems.IRON_CHAIN_LINK.get());
                         pOutput.accept(ModItems.IRON_CHAIN.get());
                         pOutput.accept(ModItems.IRON_PLATE.get());
-                        pOutput.accept(ModItems.NOBLE_PLATE.get());
 
                         pOutput.accept(ModItems.STEEL_CHAIN_LINK.get());
                         pOutput.accept(ModItems.STEEL_CHAIN.get());
+                        pOutput.accept(ModItems.STEEL_PLATE.get());
+                        pOutput.accept(ModItems.NOBLE_PLATE.get());
                         pOutput.accept(ModItems.STEEL_HELMET.get());
                         pOutput.accept(ModItems.STEEL_CHESTPLATE.get());
                         pOutput.accept(ModItems.STEEL_LEGGINGS.get());
                         pOutput.accept(ModItems.STEEL_BOOTS.get());
                         pOutput.accept(ModItems.HAMMER.get());
-                        pOutput.accept(ModItems.STEEL_PLATE.get());
+                        pOutput.accept(ModItems.UPGRADE_KIT_FUR.get());
+                        pOutput.accept(ModItems.UPGRADE_KIT_LEATHER.get());
+                        pOutput.accept(ModItems.UPGRADE_KIT_CHIEF.get());
                         pOutput.accept(ModItems.UPGRADE_KIT_BRONZE.get());
+                        pOutput.accept(ModItems.UPGRADE_KIT_BRONZE_PLATE.get());
                         pOutput.accept(ModItems.UPGRADE_KIT_IRON.get());
-                        pOutput.accept(ModItems.UPGRADE_KIT_NOBLE.get());
                         pOutput.accept(ModItems.UPGRADE_KIT_STEEL.get());
+                        pOutput.accept(ModItems.UPGRADE_KIT_NOBLE.get());
+
 
                         // INGOTS
                         pOutput.accept(ModItems.TIN_INGOT.get());

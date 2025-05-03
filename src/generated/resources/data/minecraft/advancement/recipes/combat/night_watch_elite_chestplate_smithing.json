@@ -7,11 +7,11 @@
       },
       "trigger": "minecraft:recipe_unlocked"
     },
-    "has_upgrade_kit_noble": {
+    "has_upgrade_kit_steel": {
       "conditions": {
         "items": [
           {
-            "items": "agotmod:upgrade_kit_noble"
+            "items": "agotmod:upgrade_kit_steel"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_upgrade_kit_noble"
+      "has_upgrade_kit_steel"
     ]
   ],
   "rewards": {

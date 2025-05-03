@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:ivory"
+  ],
+  "result": {
+    "count": 4,
+    "id": "agotmod:ivory_shard"
+  }
+}

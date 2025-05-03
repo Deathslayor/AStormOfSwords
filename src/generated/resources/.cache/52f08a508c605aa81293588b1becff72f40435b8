@@ -1,4 +1,4 @@
-// 1.21.3	2025-05-02T23:43:53.6794717	Item Models: agotmod
+// 1.21.3	2025-05-03T14:46:04.1026089	Item Models: agotmod
 65c44e6f1f29781252c76032b90c20b3bc8f7b8a assets/agotmod/models/item/alder_button.json
 f0b6afe25a5640838c024d02c663e7c8f821ffd6 assets/agotmod/models/item/alder_door.json
 2af83e95998f18d674056268682572a94f141042 assets/agotmod/models/item/alder_fence.json
@@ -392,6 +392,7 @@ fd6b61a26ea17a2bf93f27459df5d918063fcd21 assets/agotmod/models/item/blueberry_se
 c513177aab8e48441a34161d4401177963c337bd assets/agotmod/models/item/blue_rose.json
 e244337b4337933d0e2f14b69adea7cb8fc9f5f9 assets/agotmod/models/item/boar_intestines.json
 c0fc5f29d19af68aa1841d93ded63a6c91545b23 assets/agotmod/models/item/boar_tusk.json
+01f53ecbc17d83f9039b8e539e3241812f8fd05e assets/agotmod/models/item/boiled_leather.json
 616da0194702f3fa0750d8968f1740bf6a7b1ff2 assets/agotmod/models/item/bolton_levy_boots.json
 4ef217c518fc1f8e1f2286d9673594f3c83e5e40 assets/agotmod/models/item/bolton_levy_chestplate.json
 7acc01f521b863841d9cb7508d4cb5d2718d12c5 assets/agotmod/models/item/bolton_levy_helmet.json
@@ -1134,6 +1135,7 @@ d4386f960c14591309f1b08f25ccf42a84308af6 assets/agotmod/models/item/dusky_rose.j
 60765342f5b85803169c8412fec476fbdf26b1b3 assets/agotmod/models/item/evening_star.json
 aee022c80de37922bd0b4c1094143d401de58988 assets/agotmod/models/item/forget_me_not.json
 4e8bd8731baddae312a99721e9503fa0434d211a assets/agotmod/models/item/frostfire.json
+93aedef44d0f5412b40db07065cc07b762f9d512 assets/agotmod/models/item/fur.json
 083d37997fa7391a0a80b1c16f9e8e5198812d0d assets/agotmod/models/item/garlic.json
 2f44051f40dc12821c415993e3b1b7758654700a assets/agotmod/models/item/garnet.json
 8b7b76cec72772665d7aa49bb3573311d20e0374 assets/agotmod/models/item/gillyflower.json
@@ -1304,6 +1306,8 @@ c61c2a12850719d640ae0604bd0a445734b7320b assets/agotmod/models/item/iron_dagger.
 dd44e66e0df6e530109de36a3d30bf4745d39ed7 assets/agotmod/models/item/iron_pike.json
 1269f040c1927c1e585ac675da8a322d0ae6cad2 assets/agotmod/models/item/iron_plate.json
 76201fd545dfb4f9f490db6eb379665e368b511f assets/agotmod/models/item/iron_spear.json
+5c8dfa09a4220590a3fa386b4ad9534715a92761 assets/agotmod/models/item/ivory.json
+e87ab8217819fac9d96072133b9dff23040796ac assets/agotmod/models/item/ivory_shard.json
 1ab57e133a5bdfad5537d260d3392b09167b8a5a assets/agotmod/models/item/jade.json
 7c5d92efd578e1fcfbde48a888af64e87159a9da assets/agotmod/models/item/jasper.json
 7195c216bf9e2f79940b343d118e4e34960c5e57 assets/agotmod/models/item/ladys_lace.json
@@ -2466,7 +2470,11 @@ de83176ab13070ac82f0f2bd6edb2fb9ebbb0602 assets/agotmod/models/item/tuff_brick_8
 e0e0a96463e57a1e75b4bcb8373f7faf73cf59f6 assets/agotmod/models/item/turnip.json
 0449f0879550b37be333f6f13d2bd1a513075113 assets/agotmod/models/item/turnip_seeds.json
 30eb144022868ca314de870f1b6f42e6f2c00abe assets/agotmod/models/item/upgrade_kit_bronze.json
+def856bb8444dc4b0e77036cbfdc582fcaff310d assets/agotmod/models/item/upgrade_kit_bronze_plate.json
+fc70d4f4e5392d3a4f8211b73b58d885246d6955 assets/agotmod/models/item/upgrade_kit_chief.json
+5c9ad6a718bedcfa89f0f69f8f69a32a1c599e27 assets/agotmod/models/item/upgrade_kit_fur.json
 d45e93aa868593f19b0bfafdebc10c0cbc5255c9 assets/agotmod/models/item/upgrade_kit_iron.json
+5cb6d3922cdb36f779902ce1eeb679e62b242dcc assets/agotmod/models/item/upgrade_kit_leather.json
 1bba19299fd02b8ed7aaba8698b0cb48dc1bb235 assets/agotmod/models/item/upgrade_kit_noble.json
 701e9b1460820a1e2b6a5039f094dea65373bc8c assets/agotmod/models/item/upgrade_kit_steel.json
 0969f3064166cb958ca0e72d3c32afde6f85dc06 assets/agotmod/models/item/weirwood_button.json

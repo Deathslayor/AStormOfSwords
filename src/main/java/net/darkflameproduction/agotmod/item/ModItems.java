@@ -668,6 +668,14 @@ public class ModItems {
             Item::new);
     public static final DeferredItem<Item> BOAR_TUSK = ITEMS.registerItem("boar_tusk",
             Item::new);
+    public static final DeferredItem<Item> IVORY = ITEMS.registerItem("ivory",
+            Item::new);
+    public static final DeferredItem<Item> IVORY_SHARD = ITEMS.registerItem("ivory_shard",
+            Item::new);
+    public static final DeferredItem<Item> BOILED_LEATHER = ITEMS.registerItem("boiled_leather",
+            Item::new);
+    public static final DeferredItem<Item> FUR = ITEMS.registerItem("fur",
+            Item::new);
     public static final DeferredItem<Item> WEIRWOOD_STICK = ITEMS.registerItem("weirwood_stick",
             Item::new);
     public static final DeferredItem<Item> BRONZE_CHAIN_LINK = ITEMS.registerItem("bronze_chain_link", Item::new);
@@ -697,6 +705,10 @@ public class ModItems {
     public static final DeferredItem<Item> UPGRADE_KIT_IRON = ITEMS.registerItem("upgrade_kit_iron", Item::new);
     public static final DeferredItem<Item> UPGRADE_KIT_NOBLE = ITEMS.registerItem("upgrade_kit_noble", Item::new);
     public static final DeferredItem<Item> UPGRADE_KIT_STEEL = ITEMS.registerItem("upgrade_kit_steel", Item::new);
+    public static final DeferredItem<Item> UPGRADE_KIT_BRONZE_PLATE = ITEMS.registerItem("upgrade_kit_bronze_plate", Item::new);
+    public static final DeferredItem<Item> UPGRADE_KIT_CHIEF = ITEMS.registerItem("upgrade_kit_chief", Item::new);
+    public static final DeferredItem<Item> UPGRADE_KIT_FUR = ITEMS.registerItem("upgrade_kit_fur", Item::new);
+    public static final DeferredItem<Item> UPGRADE_KIT_LEATHER = ITEMS.registerItem("upgrade_kit_leather", Item::new);
 
     public static final DeferredItem<Item> STARK_LEVY_SMITHING_SCROLL = ITEMS.registerItem("stark_levy_smithing_scroll", Item::new);
     public static final DeferredItem<Item> STARK_PLATE_SMITHING_SCROLL = ITEMS.registerItem("stark_plate_smithing_scroll", Item::new);

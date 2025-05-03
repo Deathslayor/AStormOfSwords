@@ -7,11 +7,11 @@
       },
       "trigger": "minecraft:recipe_unlocked"
     },
-    "has_upgrade_kit_steel": {
+    "has_upgrade_kit_leather": {
       "conditions": {
         "items": [
           {
-            "items": "agotmod:upgrade_kit_steel"
+            "items": "agotmod:upgrade_kit_leather"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_upgrade_kit_steel"
+      "has_upgrade_kit_leather"
     ]
   ],
   "rewards": {

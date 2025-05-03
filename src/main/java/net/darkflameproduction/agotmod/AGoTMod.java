@@ -1,5 +1,10 @@
 // This code belongs to the package net.stormofsorts.agotmod
 package net.darkflameproduction.agotmod;
+// Add this import at the top of the file
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.fml.loading.FMLEnvironment;
+
+// Add this code inside the constructor or setup method of your mod class:
 
 // Importing necessary classes from other packages
 
@@ -17,7 +22,6 @@ import net.minecraft.client.renderer.Sheets;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
-import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;

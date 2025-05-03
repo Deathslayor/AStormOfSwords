@@ -3829,6 +3829,15 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
 
         // -------------------------------------------------(INGREDIENTS)------------------------------------------------- //
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(Items.LEATHER), RecipeCategory.MISC, ModItems.BOILED_LEATHER.get(), 0.35f, 200)
+                .unlockedBy(getHasName(Items.LEATHER), has(Items.LEATHER))
+                .save(this.output, "boiled_leather_from_smelting");
+
+        this.shapeless(RecipeCategory.MISC, ModItems.IVORY_SHARD.get(), 4)
+                .requires(ModItems.IVORY.get())
+                .unlockedBy(getHasName(ModItems.IVORY.get()), has(ModItems.IVORY.get()))
+                .save(this.output, "ivory_to_shards");
+
         this.shaped(RecipeCategory.MISC, ModItems.IRON_CHAIN_LINK.get())
                 .pattern(" H ")
                 .pattern(" N ")
@@ -3957,6 +3966,16 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('H', ModItems.HAMMER.get())
                 .unlockedBy(getHasName(ModItems.BRONZE_PLATE.get()), has(ModItems.BRONZE_PLATE.get()))
                 .save(this.output, "upgrade_kit_bronze");
+        this.shaped(RecipeCategory.MISC, ModItems.UPGRADE_KIT_BRONZE_PLATE.get())
+                .pattern("PPP")
+                .pattern("CBC")
+                .pattern("PHP")
+                .define('P', ModItems.BRONZE_PLATE.get())
+                .define('C', ModItems.CLOTH.get())
+                .define('B', Items.BUNDLE)
+                .define('H', ModItems.HAMMER.get())
+                .unlockedBy(getHasName(ModItems.BRONZE_PLATE.get()), has(ModItems.BRONZE_PLATE.get()))
+                .save(this.output, "upgrade_kit_bronze_plate");
         this.shaped(RecipeCategory.MISC, ModItems.UPGRADE_KIT_STEEL.get())
                 .pattern("PCP")
                 .pattern("CBC")
@@ -3979,6 +3998,38 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('H', ModItems.HAMMER.get())
                 .unlockedBy(getHasName(ModItems.NOBLE_PLATE.get()), has(ModItems.NOBLE_PLATE.get()))
                 .save(this.output, "upgrade_kit_noble");
+        this.shaped(RecipeCategory.MISC, ModItems.UPGRADE_KIT_FUR.get())
+                .pattern("PPP")
+                .pattern("CBC")
+                .pattern("PHP")
+                .define('P', ModItems.FUR.get())
+                .define('C', ModItems.CLOTH.get())
+                .define('B', Items.BUNDLE)
+                .define('H', ModItems.HAMMER.get())
+                .unlockedBy(getHasName(ModItems.FUR.get()), has(ModItems.FUR.get()))
+                .save(this.output, "upgrade_kit_fur");
+        this.shaped(RecipeCategory.MISC, ModItems.UPGRADE_KIT_LEATHER.get())
+                .pattern("PCP")
+                .pattern("CBC")
+                .pattern("IHI")
+                .define('P', ModItems.FUR.get())
+                .define('C', ModItems.BOILED_LEATHER.get())
+                .define('B', Items.BUNDLE)
+                .define('I', ModItems.BRONZE_CHAIN.get())
+                .define('H', ModItems.HAMMER.get())
+                .unlockedBy(getHasName(ModItems.BOILED_LEATHER.get()), has(ModItems.BOILED_LEATHER.get()))
+                .save(this.output, "upgrade_kit_leather");
+        this.shaped(RecipeCategory.MISC, ModItems.UPGRADE_KIT_CHIEF.get())
+                .pattern("PCP")
+                .pattern("CBC")
+                .pattern("IHI")
+                .define('P', ModItems.BOILED_LEATHER.get())
+                .define('C', ModItems.BOILED_LEATHER.get())
+                .define('B', Items.BUNDLE)
+                .define('I', ModItems.IVORY_SHARD.get())
+                .define('H', ModItems.HAMMER.get())
+                .unlockedBy(getHasName(ModItems.IVORY_SHARD.get()), has(ModItems.IVORY_SHARD.get()))
+                .save(this.output, "upgrade_kit_chief");
 
         // Stark Levy Helmet
         SmithingTransformRecipeBuilder.smithing(
@@ -4507,139 +4558,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 )
                 .unlocks("has_upgrade_kit_noble", has(ModItems.UPGRADE_KIT_NOBLE.get()))
                 .save(this.output, "mountain_clan_noble_boots_smithing");
-
-        // Night Watch Ranger Helmet
-        SmithingTransformRecipeBuilder.smithing(
-                        Ingredient.of(ModItems.UPGRADE_KIT_IRON.get()),
-                        Ingredient.of(ModItems.STEEL_HELMET.get()),
-                        Ingredient.of(ModItems.NIGHTS_WATCH_RANGER_SMITHING_SCROLL.get()),
-                        RecipeCategory.COMBAT,
-                        ModItems.NIGHT_WATCH_RANGER_HELMET.get()
-                )
-                .unlocks("has_upgrade_kit_iron", has(ModItems.UPGRADE_KIT_IRON.get()))
-                .save(this.output, "night_watch_ranger_helmet_smithing");
-
-// Night Watch Ranger Chestplate
-        SmithingTransformRecipeBuilder.smithing(
-                        Ingredient.of(ModItems.UPGRADE_KIT_IRON.get()),
-                        Ingredient.of(ModItems.STEEL_CHESTPLATE.get()),
-                        Ingredient.of(ModItems.NIGHTS_WATCH_RANGER_SMITHING_SCROLL.get()),
-                        RecipeCategory.COMBAT,
-                        ModItems.NIGHT_WATCH_RANGER_CHESTPLATE.get()
-                )
-                .unlocks("has_upgrade_kit_iron", has(ModItems.UPGRADE_KIT_IRON.get()))
-                .save(this.output, "night_watch_ranger_chestplate_smithing");
-
-// Night Watch Ranger Leggings
-        SmithingTransformRecipeBuilder.smithing(
-                        Ingredient.of(ModItems.UPGRADE_KIT_IRON.get()),
-                        Ingredient.of(ModItems.STEEL_LEGGINGS.get()),
-                        Ingredient.of(ModItems.NIGHTS_WATCH_RANGER_SMITHING_SCROLL.get()),
-                        RecipeCategory.COMBAT,
-                        ModItems.NIGHT_WATCH_RANGER_LEGGINGS.get()
-                )
-                .unlocks("has_upgrade_kit_iron", has(ModItems.UPGRADE_KIT_IRON.get()))
-                .save(this.output, "night_watch_ranger_leggings_smithing");
-
-// Night Watch Ranger Boots
-        SmithingTransformRecipeBuilder.smithing(
-                        Ingredient.of(ModItems.UPGRADE_KIT_IRON.get()),
-                        Ingredient.of(ModItems.STEEL_BOOTS.get()),
-                        Ingredient.of(ModItems.NIGHTS_WATCH_RANGER_SMITHING_SCROLL.get()),
-                        RecipeCategory.COMBAT,
-                        ModItems.NIGHT_WATCH_RANGER_BOOTS.get()
-                )
-                .unlocks("has_upgrade_kit_iron", has(ModItems.UPGRADE_KIT_IRON.get()))
-                .save(this.output, "night_watch_ranger_boots_smithing");
-
-// Night Watch Leather Helmet
-        SmithingTransformRecipeBuilder.smithing(
-                        Ingredient.of(ModItems.UPGRADE_KIT_STEEL.get()),
-                        Ingredient.of(ModItems.NIGHT_WATCH_RANGER_HELMET.get()),
-                        Ingredient.of(ModItems.NIGHTS_WATCH_LEATHER_SMITHING_SCROLL.get()),
-                        RecipeCategory.COMBAT,
-                        ModItems.NIGHT_WATCH_LEATHER_HELMET.get()
-                )
-                .unlocks("has_upgrade_kit_steel", has(ModItems.UPGRADE_KIT_STEEL.get()))
-                .save(this.output, "night_watch_leather_helmet_smithing");
-
-// Night Watch Leather Chestplate
-        SmithingTransformRecipeBuilder.smithing(
-                        Ingredient.of(ModItems.UPGRADE_KIT_STEEL.get()),
-                        Ingredient.of(ModItems.NIGHT_WATCH_RANGER_CHESTPLATE.get()),
-                        Ingredient.of(ModItems.NIGHTS_WATCH_LEATHER_SMITHING_SCROLL.get()),
-                        RecipeCategory.COMBAT,
-                        ModItems.NIGHT_WATCH_LEATHER_CHESTPLATE.get()
-                )
-                .unlocks("has_upgrade_kit_steel", has(ModItems.UPGRADE_KIT_STEEL.get()))
-                .save(this.output, "night_watch_leather_chestplate_smithing");
-
-// Night Watch Leather Leggings
-        SmithingTransformRecipeBuilder.smithing(
-                        Ingredient.of(ModItems.UPGRADE_KIT_STEEL.get()),
-                        Ingredient.of(ModItems.NIGHT_WATCH_RANGER_LEGGINGS.get()),
-                        Ingredient.of(ModItems.NIGHTS_WATCH_LEATHER_SMITHING_SCROLL.get()),
-                        RecipeCategory.COMBAT,
-                        ModItems.NIGHT_WATCH_LEATHER_LEGGINGS.get()
-                )
-                .unlocks("has_upgrade_kit_steel", has(ModItems.UPGRADE_KIT_STEEL.get()))
-                .save(this.output, "night_watch_leather_leggings_smithing");
-
-// Night Watch Leather Boots
-        SmithingTransformRecipeBuilder.smithing(
-                        Ingredient.of(ModItems.UPGRADE_KIT_STEEL.get()),
-                        Ingredient.of(ModItems.NIGHT_WATCH_RANGER_BOOTS.get()),
-                        Ingredient.of(ModItems.NIGHTS_WATCH_LEATHER_SMITHING_SCROLL.get()),
-                        RecipeCategory.COMBAT,
-                        ModItems.NIGHT_WATCH_LEATHER_BOOTS.get()
-                )
-                .unlocks("has_upgrade_kit_steel", has(ModItems.UPGRADE_KIT_STEEL.get()))
-                .save(this.output, "night_watch_leather_boots_smithing");
-
-// Night Watch Elite Helmet
-        SmithingTransformRecipeBuilder.smithing(
-                        Ingredient.of(ModItems.UPGRADE_KIT_NOBLE.get()),
-                        Ingredient.of(ModItems.NIGHT_WATCH_LEATHER_HELMET.get()),
-                        Ingredient.of(ModItems.NIGHTS_WATCH_ELITE_SMITHING_SCROLL.get()),
-                        RecipeCategory.COMBAT,
-                        ModItems.NIGHT_WATCH_ELITE_HELMET.get()
-                )
-                .unlocks("has_upgrade_kit_noble", has(ModItems.UPGRADE_KIT_NOBLE.get()))
-                .save(this.output, "night_watch_elite_helmet_smithing");
-
-// Night Watch Elite Chestplate
-        SmithingTransformRecipeBuilder.smithing(
-                        Ingredient.of(ModItems.UPGRADE_KIT_NOBLE.get()),
-                        Ingredient.of(ModItems.NIGHT_WATCH_LEATHER_CHESTPLATE.get()),
-                        Ingredient.of(ModItems.NIGHTS_WATCH_ELITE_SMITHING_SCROLL.get()),
-                        RecipeCategory.COMBAT,
-                        ModItems.NIGHT_WATCH_ELITE_CHESTPLATE.get()
-                )
-                .unlocks("has_upgrade_kit_noble", has(ModItems.UPGRADE_KIT_NOBLE.get()))
-                .save(this.output, "night_watch_elite_chestplate_smithing");
-
-// Night Watch Elite Leggings
-        SmithingTransformRecipeBuilder.smithing(
-                        Ingredient.of(ModItems.UPGRADE_KIT_NOBLE.get()),
-                        Ingredient.of(ModItems.NIGHT_WATCH_LEATHER_LEGGINGS.get()),
-                        Ingredient.of(ModItems.NIGHTS_WATCH_ELITE_SMITHING_SCROLL.get()),
-                        RecipeCategory.COMBAT,
-                        ModItems.NIGHT_WATCH_ELITE_LEGGINGS.get()
-                )
-                .unlocks("has_upgrade_kit_noble", has(ModItems.UPGRADE_KIT_NOBLE.get()))
-                .save(this.output, "night_watch_elite_leggings_smithing");
-
-// Night Watch Elite Boots
-        SmithingTransformRecipeBuilder.smithing(
-                        Ingredient.of(ModItems.UPGRADE_KIT_NOBLE.get()),
-                        Ingredient.of(ModItems.NIGHT_WATCH_LEATHER_BOOTS.get()),
-                        Ingredient.of(ModItems.NIGHTS_WATCH_ELITE_SMITHING_SCROLL.get()),
-                        RecipeCategory.COMBAT,
-                        ModItems.NIGHT_WATCH_ELITE_BOOTS.get()
-                )
-                .unlocks("has_upgrade_kit_noble", has(ModItems.UPGRADE_KIT_NOBLE.get()))
-                .save(this.output, "night_watch_elite_boots_smithing");
-
         // Ironborn Levy Helmet
         SmithingTransformRecipeBuilder.smithing(
                         Ingredient.of(ModItems.UPGRADE_KIT_IRON.get()),
@@ -4759,6 +4677,375 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                         ModItems.IRONBORN_NOBLE_BOOTS.get()
                 ).unlocks("has_upgrade_kit_noble", has(ModItems.UPGRADE_KIT_NOBLE.get()))
                 .save(this.output, "ironborn_noble_boots_smithing");
+
+        // NIGHT'S WATCH RANGER ARMOR - Base tier
+// Night's Watch Ranger Helmet
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_FUR.get()),
+                        Ingredient.of(Items.LEATHER_HELMET),
+                        Ingredient.of(ModItems.NIGHTS_WATCH_RANGER_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.NIGHT_WATCH_RANGER_HELMET.get()
+                ).unlocks("has_upgrade_kit_fur", has(ModItems.UPGRADE_KIT_FUR.get()))
+                .save(this.output, "night_watch_ranger_helmet_smithing");
+
+// Night's Watch Ranger Chestplate
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_FUR.get()),
+                        Ingredient.of(Items.LEATHER_CHESTPLATE),
+                        Ingredient.of(ModItems.NIGHTS_WATCH_RANGER_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.NIGHT_WATCH_RANGER_CHESTPLATE.get()
+                ).unlocks("has_upgrade_kit_fur", has(ModItems.UPGRADE_KIT_FUR.get()))
+                .save(this.output, "night_watch_ranger_chestplate_smithing");
+
+// Night's Watch Ranger Leggings
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_FUR.get()),
+                        Ingredient.of(Items.LEATHER_LEGGINGS),
+                        Ingredient.of(ModItems.NIGHTS_WATCH_RANGER_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.NIGHT_WATCH_RANGER_LEGGINGS.get()
+                ).unlocks("has_upgrade_kit_fur", has(ModItems.UPGRADE_KIT_FUR.get()))
+                .save(this.output, "night_watch_ranger_leggings_smithing");
+
+// Night's Watch Ranger Boots
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_FUR.get()),
+                        Ingredient.of(Items.LEATHER_BOOTS),
+                        Ingredient.of(ModItems.NIGHTS_WATCH_RANGER_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.NIGHT_WATCH_RANGER_BOOTS.get()
+                ).unlocks("has_upgrade_kit_fur", has(ModItems.UPGRADE_KIT_FUR.get()))
+                .save(this.output, "night_watch_ranger_boots_smithing");
+
+// NIGHT'S WATCH LEATHER ARMOR - Mid tier, upgraded from Ranger
+// Night's Watch Leather Helmet
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_LEATHER.get()),
+                        Ingredient.of(ModItems.NIGHT_WATCH_RANGER_HELMET.get()),
+                        Ingredient.of(ModItems.NIGHTS_WATCH_LEATHER_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.NIGHT_WATCH_LEATHER_HELMET.get()
+                ).unlocks("has_upgrade_kit_leather", has(ModItems.UPGRADE_KIT_LEATHER.get()))
+                .save(this.output, "night_watch_leather_helmet_smithing");
+
+// Night's Watch Leather Chestplate
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_LEATHER.get()),
+                        Ingredient.of(ModItems.NIGHT_WATCH_RANGER_CHESTPLATE.get()),
+                        Ingredient.of(ModItems.NIGHTS_WATCH_LEATHER_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.NIGHT_WATCH_LEATHER_CHESTPLATE.get()
+                ).unlocks("has_upgrade_kit_leather", has(ModItems.UPGRADE_KIT_LEATHER.get()))
+                .save(this.output, "night_watch_leather_chestplate_smithing");
+
+// Night's Watch Leather Leggings
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_LEATHER.get()),
+                        Ingredient.of(ModItems.NIGHT_WATCH_RANGER_LEGGINGS.get()),
+                        Ingredient.of(ModItems.NIGHTS_WATCH_LEATHER_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.NIGHT_WATCH_LEATHER_LEGGINGS.get()
+                ).unlocks("has_upgrade_kit_leather", has(ModItems.UPGRADE_KIT_LEATHER.get()))
+                .save(this.output, "night_watch_leather_leggings_smithing");
+
+// Night's Watch Leather Boots
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_LEATHER.get()),
+                        Ingredient.of(ModItems.NIGHT_WATCH_RANGER_BOOTS.get()),
+                        Ingredient.of(ModItems.NIGHTS_WATCH_LEATHER_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.NIGHT_WATCH_LEATHER_BOOTS.get()
+                ).unlocks("has_upgrade_kit_leather", has(ModItems.UPGRADE_KIT_LEATHER.get()))
+                .save(this.output, "night_watch_leather_boots_smithing");
+
+// NIGHT'S WATCH ELITE ARMOR - Top tier, upgraded from Leather
+// Night's Watch Elite Helmet
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_STEEL.get()),
+                        Ingredient.of(ModItems.NIGHT_WATCH_LEATHER_HELMET.get()),
+                        Ingredient.of(ModItems.NIGHTS_WATCH_ELITE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.NIGHT_WATCH_ELITE_HELMET.get()
+                ).unlocks("has_upgrade_kit_steel", has(ModItems.UPGRADE_KIT_STEEL.get()))
+                .save(this.output, "night_watch_elite_helmet_smithing");
+
+// Night's Watch Elite Chestplate
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_STEEL.get()),
+                        Ingredient.of(ModItems.NIGHT_WATCH_LEATHER_CHESTPLATE.get()),
+                        Ingredient.of(ModItems.NIGHTS_WATCH_ELITE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.NIGHT_WATCH_ELITE_CHESTPLATE.get()
+                ).unlocks("has_upgrade_kit_steel", has(ModItems.UPGRADE_KIT_STEEL.get()))
+                .save(this.output, "night_watch_elite_chestplate_smithing");
+
+// Night's Watch Elite Leggings
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_STEEL.get()),
+                        Ingredient.of(ModItems.NIGHT_WATCH_LEATHER_LEGGINGS.get()),
+                        Ingredient.of(ModItems.NIGHTS_WATCH_ELITE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.NIGHT_WATCH_ELITE_LEGGINGS.get()
+                ).unlocks("has_upgrade_kit_steel", has(ModItems.UPGRADE_KIT_STEEL.get()))
+                .save(this.output, "night_watch_elite_leggings_smithing");
+
+// Night's Watch Elite Boots
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_STEEL.get()),
+                        Ingredient.of(ModItems.NIGHT_WATCH_LEATHER_BOOTS.get()),
+                        Ingredient.of(ModItems.NIGHTS_WATCH_ELITE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.NIGHT_WATCH_ELITE_BOOTS.get()
+                ).unlocks("has_upgrade_kit_steel", has(ModItems.UPGRADE_KIT_STEEL.get()))
+                .save(this.output, "night_watch_elite_boots_smithing");
+
+// WILDLING FUR ARMOR - Base tier
+// Wildling Fur Helmet
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_FUR.get()),
+                        Ingredient.of(Items.LEATHER_HELMET),
+                        Ingredient.of(ModItems.WILDLING_FUR_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.WILDLING_FUR_HELMET.get()
+                ).unlocks("has_upgrade_kit_fur", has(ModItems.UPGRADE_KIT_FUR.get()))
+                .save(this.output, "wildling_fur_helmet_smithing");
+
+// Wildling Fur Chestplate
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_FUR.get()),
+                        Ingredient.of(Items.LEATHER_CHESTPLATE),
+                        Ingredient.of(ModItems.WILDLING_FUR_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.WILDLING_FUR_CHESTPLATE.get()
+                ).unlocks("has_upgrade_kit_fur", has(ModItems.UPGRADE_KIT_FUR.get()))
+                .save(this.output, "wildling_fur_chestplate_smithing");
+
+// Wildling Fur Leggings
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_FUR.get()),
+                        Ingredient.of(Items.LEATHER_LEGGINGS),
+                        Ingredient.of(ModItems.WILDLING_FUR_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.WILDLING_FUR_LEGGINGS.get()
+                ).unlocks("has_upgrade_kit_fur", has(ModItems.UPGRADE_KIT_FUR.get()))
+                .save(this.output, "wildling_fur_leggings_smithing");
+
+// Wildling Fur Boots
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_FUR.get()),
+                        Ingredient.of(Items.LEATHER_BOOTS),
+                        Ingredient.of(ModItems.WILDLING_FUR_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.WILDLING_FUR_BOOTS.get()
+                ).unlocks("has_upgrade_kit_fur", has(ModItems.UPGRADE_KIT_FUR.get()))
+                .save(this.output, "wildling_fur_boots_smithing");
+
+// WILDLING LEATHER ARMOR - Mid tier, upgraded from Fur
+// Wildling Leather Helmet
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_LEATHER.get()),
+                        Ingredient.of(ModItems.WILDLING_FUR_HELMET.get()),
+                        Ingredient.of(ModItems.WILDLING_LEATHER_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.WILDLING_LEATHER_HELMET.get()
+                ).unlocks("has_upgrade_kit_leather", has(ModItems.UPGRADE_KIT_LEATHER.get()))
+                .save(this.output, "wildling_leather_helmet_smithing");
+
+// Wildling Leather Chestplate
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_LEATHER.get()),
+                        Ingredient.of(ModItems.WILDLING_FUR_CHESTPLATE.get()),
+                        Ingredient.of(ModItems.WILDLING_LEATHER_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.WILDLING_LEATHER_CHESTPLATE.get()
+                ).unlocks("has_upgrade_kit_leather", has(ModItems.UPGRADE_KIT_LEATHER.get()))
+                .save(this.output, "wildling_leather_chestplate_smithing");
+
+// Wildling Leather Leggings
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_LEATHER.get()),
+                        Ingredient.of(ModItems.WILDLING_FUR_LEGGINGS.get()),
+                        Ingredient.of(ModItems.WILDLING_LEATHER_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.WILDLING_LEATHER_LEGGINGS.get()
+                ).unlocks("has_upgrade_kit_leather", has(ModItems.UPGRADE_KIT_LEATHER.get()))
+                .save(this.output, "wildling_leather_leggings_smithing");
+
+// Wildling Leather Boots
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_LEATHER.get()),
+                        Ingredient.of(ModItems.WILDLING_FUR_BOOTS.get()),
+                        Ingredient.of(ModItems.WILDLING_LEATHER_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.WILDLING_LEATHER_BOOTS.get()
+                ).unlocks("has_upgrade_kit_leather", has(ModItems.UPGRADE_KIT_LEATHER.get()))
+                .save(this.output, "wildling_leather_boots_smithing");
+
+// WILDLING CHIEF ARMOR - Top tier, upgraded from Leather
+// Wildling Chief Helmet
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_CHIEF.get()),
+                        Ingredient.of(ModItems.WILDLING_LEATHER_HELMET.get()),
+                        Ingredient.of(ModItems.WILDLING_CHIEF_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.WILDLING_CHIEF_HELMET.get()
+                ).unlocks("has_upgrade_kit_chief", has(ModItems.UPGRADE_KIT_CHIEF.get()))
+                .save(this.output, "wildling_chief_helmet_smithing");
+
+// Wildling Chief Chestplate
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_CHIEF.get()),
+                        Ingredient.of(ModItems.WILDLING_LEATHER_CHESTPLATE.get()),
+                        Ingredient.of(ModItems.WILDLING_CHIEF_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.WILDLING_CHIEF_CHESTPLATE.get()
+                ).unlocks("has_upgrade_kit_chief", has(ModItems.UPGRADE_KIT_CHIEF.get()))
+                .save(this.output, "wildling_chief_chestplate_smithing");
+
+// Wildling Chief Leggings
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_CHIEF.get()),
+                        Ingredient.of(ModItems.WILDLING_LEATHER_LEGGINGS.get()),
+                        Ingredient.of(ModItems.WILDLING_CHIEF_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.WILDLING_CHIEF_LEGGINGS.get()
+                ).unlocks("has_upgrade_kit_chief", has(ModItems.UPGRADE_KIT_CHIEF.get()))
+                .save(this.output, "wildling_chief_leggings_smithing");
+
+// Wildling Chief Boots
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_CHIEF.get()),
+                        Ingredient.of(ModItems.WILDLING_LEATHER_BOOTS.get()),
+                        Ingredient.of(ModItems.WILDLING_CHIEF_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.WILDLING_CHIEF_BOOTS.get()
+                ).unlocks("has_upgrade_kit_chief", has(ModItems.UPGRADE_KIT_CHIEF.get()))
+                .save(this.output, "wildling_chief_boots_smithing");
+
+// THENN LEVY ARMOR - Base tier
+// Thenn Levy Helmet
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_FUR.get()),
+                        Ingredient.of(Items.LEATHER_HELMET),
+                        Ingredient.of(ModItems.THENN_LEVY_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.THENN_LEVY_HELMET.get()
+                ).unlocks("has_upgrade_kit_fur", has(ModItems.UPGRADE_KIT_FUR.get()))
+                .save(this.output, "thenn_levy_helmet_smithing");
+
+// Thenn Levy Chestplate
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_FUR.get()),
+                        Ingredient.of(Items.LEATHER_CHESTPLATE),
+                        Ingredient.of(ModItems.THENN_LEVY_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.THENN_LEVY_CHESTPLATE.get()
+                ).unlocks("has_upgrade_kit_fur", has(ModItems.UPGRADE_KIT_FUR.get()))
+                .save(this.output, "thenn_levy_chestplate_smithing");
+
+// Thenn Levy Leggings
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_FUR.get()),
+                        Ingredient.of(Items.LEATHER_LEGGINGS),
+                        Ingredient.of(ModItems.THENN_LEVY_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.THENN_LEVY_LEGGINGS.get()
+                ).unlocks("has_upgrade_kit_fur", has(ModItems.UPGRADE_KIT_FUR.get()))
+                .save(this.output, "thenn_levy_leggings_smithing");
+
+// Thenn Levy Boots
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_FUR.get()),
+                        Ingredient.of(Items.LEATHER_BOOTS),
+                        Ingredient.of(ModItems.THENN_LEVY_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.THENN_LEVY_BOOTS.get()
+                ).unlocks("has_upgrade_kit_fur", has(ModItems.UPGRADE_KIT_FUR.get()))
+                .save(this.output, "thenn_levy_boots_smithing");
+
+// THENN PLATE/BRONZE ARMOR - Mid tier, upgraded from Levy
+// Thenn Plate Helmet
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_BRONZE.get()),
+                        Ingredient.of(ModItems.THENN_LEVY_HELMET.get()),
+                        Ingredient.of(ModItems.THENN_PLATE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.THENN_PLATE_HELMET.get()
+                ).unlocks("has_upgrade_kit_bronze", has(ModItems.UPGRADE_KIT_BRONZE.get()))
+                .save(this.output, "thenn_plate_helmet_smithing");
+
+// Thenn Plate Chestplate
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_BRONZE.get()),
+                        Ingredient.of(ModItems.THENN_LEVY_CHESTPLATE.get()),
+                        Ingredient.of(ModItems.THENN_PLATE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.THENN_PLATE_CHESTPLATE.get()
+                ).unlocks("has_upgrade_kit_bronze", has(ModItems.UPGRADE_KIT_BRONZE.get()))
+                .save(this.output, "thenn_plate_chestplate_smithing");
+
+// Thenn Plate Leggings
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_BRONZE.get()),
+                        Ingredient.of(ModItems.THENN_LEVY_LEGGINGS.get()),
+                        Ingredient.of(ModItems.THENN_PLATE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.THENN_PLATE_LEGGINGS.get()
+                ).unlocks("has_upgrade_kit_bronze", has(ModItems.UPGRADE_KIT_BRONZE.get()))
+                .save(this.output, "thenn_plate_leggings_smithing");
+
+// Thenn Plate Boots
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_BRONZE.get()),
+                        Ingredient.of(ModItems.THENN_LEVY_BOOTS.get()),
+                        Ingredient.of(ModItems.THENN_PLATE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.THENN_PLATE_BOOTS.get()
+                ).unlocks("has_upgrade_kit_bronze", has(ModItems.UPGRADE_KIT_BRONZE.get()))
+                .save(this.output, "thenn_plate_boots_smithing");
+
+// THENN NOBLE/CHIEF ARMOR - Top tier, upgraded from Plate
+// Thenn Noble Helmet
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_BRONZE_PLATE.get()),
+                        Ingredient.of(ModItems.THENN_PLATE_HELMET.get()),
+                        Ingredient.of(ModItems.THENN_NOBLE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.THENN_NOBLE_HELMET.get()
+                ).unlocks("has_upgrade_kit_bronze_plate", has(ModItems.UPGRADE_KIT_BRONZE_PLATE.get()))
+                .save(this.output, "thenn_noble_helmet_smithing");
+
+// Thenn Noble Chestplate
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_BRONZE_PLATE.get()),
+                        Ingredient.of(ModItems.THENN_PLATE_CHESTPLATE.get()),
+                        Ingredient.of(ModItems.THENN_NOBLE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.THENN_NOBLE_CHESTPLATE.get()
+                ).unlocks("has_upgrade_kit_bronze_plate", has(ModItems.UPGRADE_KIT_BRONZE_PLATE.get()))
+                .save(this.output, "thenn_noble_chestplate_smithing");
+
+// Thenn Noble Leggings
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_BRONZE_PLATE.get()),
+                        Ingredient.of(ModItems.THENN_PLATE_LEGGINGS.get()),
+                        Ingredient.of(ModItems.THENN_NOBLE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.THENN_NOBLE_LEGGINGS.get()
+                ).unlocks("has_upgrade_kit_bronze_plate", has(ModItems.UPGRADE_KIT_BRONZE_PLATE.get()))
+                .save(this.output, "thenn_noble_leggings_smithing");
+
+// Thenn Noble Boots
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(ModItems.UPGRADE_KIT_BRONZE_PLATE.get()),
+                        Ingredient.of(ModItems.THENN_PLATE_BOOTS.get()),
+                        Ingredient.of(ModItems.THENN_NOBLE_SMITHING_SCROLL.get()),
+                        RecipeCategory.COMBAT,
+                        ModItems.THENN_NOBLE_BOOTS.get()
+                ).unlocks("has_upgrade_kit_bronze_plate", has(ModItems.UPGRADE_KIT_BRONZE_PLATE.get()))
+                .save(this.output, "thenn_noble_boots_smithing");
 
 
 

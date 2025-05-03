@@ -7,11 +7,11 @@
       },
       "trigger": "minecraft:recipe_unlocked"
     },
-    "has_upgrade_kit_iron": {
+    "has_upgrade_kit_fur": {
       "conditions": {
         "items": [
           {
-            "items": "agotmod:upgrade_kit_iron"
+            "items": "agotmod:upgrade_kit_fur"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_upgrade_kit_iron"
+      "has_upgrade_kit_fur"
     ]
   ],
   "rewards": {
