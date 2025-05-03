@@ -732,6 +732,17 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBLocks.BLUE_ROSE.get());
         this.dropSelf(ModBLocks.BLOODBLOOM.get());
         this.dropSelf(ModBLocks.BLACK_LOTUS.get());
+        this.dropSelf(ModBLocks.GHOST_GRASS.get());
+        this.add(ModBLocks.GHOST_GRASS_MIDDLE.get(),
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1))
+                                .add(LootItem.lootTableItem(ModBLocks.GHOST_GRASS.get()))));
+        this.add(ModBLocks.GHOST_GRASS_TOP.get(),
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1))
+                                .add(LootItem.lootTableItem(ModBLocks.GHOST_GRASS.get()))));
         this.add(ModBLocks.WINTER_ROSE_BUSH.get(),
                 LootTable.lootTable()
                         .withPool(LootPool.lootPool()
@@ -1075,6 +1086,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                                 SweetBerryBushBlock.AGE,
                                 3,
                                 ModItems.CORN_SEEDS.get())));
+
+
 
 
 

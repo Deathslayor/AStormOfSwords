@@ -1,4 +1,4 @@
-// 1.21.3	2025-05-02T23:43:53.8236375	Block States: agotmod
+// 1.21.3	2025-05-03T12:28:45.7775018	Block States: agotmod
 78b6cf02fa0f02bb58a5d7645020281ff8bc4c59 assets/agotmod/blockstates/alder_button.json
 4babc4c353cbdf68af13d112a9b9311de8af4fe1 assets/agotmod/blockstates/alder_door.json
 e817d04da7d05e8c00ce23999fdc528a05195c1d assets/agotmod/blockstates/alder_fence.json
@@ -1463,6 +1463,9 @@ de40e17bdc61738a5af4365e734518fa6f712a66 assets/agotmod/blockstates/forget_me_no
 590a4daddc109a7665fc8e8b84dd80842196da1f assets/agotmod/blockstates/garnet_block.json
 5d51ea8b2b9c2c6b20ff5fcf1c813010b48c4a62 assets/agotmod/blockstates/garnet_deepslate_ore.json
 9ec14546f7decd4450d552a6739c089685aa7073 assets/agotmod/blockstates/garnet_ore.json
+9f83bf9d4a6db81bea987bc76afe871cd8e1cc16 assets/agotmod/blockstates/ghost_grass.json
+545dcb089fcd05cb0e2d7a29906b62e8115c1ec7 assets/agotmod/blockstates/ghost_grass_middle.json
+00375a422fb416d6f308c981fb956f5285dffd4f assets/agotmod/blockstates/ghost_grass_top.json
 4610acca3765fa05d04539d18f1ee111ae0c2987 assets/agotmod/blockstates/gillyflower.json
 bcb5fa16d2c6fb64ff41028848d71f65d5ab2eca assets/agotmod/blockstates/ginger.json
 a81320add6207a293c3e0891263d23a44d2f687c assets/agotmod/blockstates/goathead.json
@@ -6417,6 +6420,9 @@ f634afe208a4271a30445c789a7bc73fc97343c9 assets/agotmod/models/block/evening_sta
 cf846dd24542bfa4c966eeb14dc708ba8cd844eb assets/agotmod/models/block/garnet_block.json
 14bc4db4f419b85b4cb6105d5bb0ad771ea6300f assets/agotmod/models/block/garnet_deepslate_ore.json
 864940723782c9958eb081eba175098809081d7d assets/agotmod/models/block/garnet_ore.json
+8ba1722f2b35990caf24de32bcebdd1367037b49 assets/agotmod/models/block/ghost_grass.json
+7716dfc49d66b630286d1e4c196a9d136c7dd132 assets/agotmod/models/block/ghost_grass_middle.json
+7d4e22b176e740feb39636ad6c83623f25ac3b0d assets/agotmod/models/block/ghost_grass_top.json
 3a0e34ec4293d9eb45dc1600bd9a9c15797e721b assets/agotmod/models/block/gillyflower.json
 ba1ce116039f47d8b91eb0b73a77e858a252ebdb assets/agotmod/models/block/ginger.json
 48160c04829aef114e2fcabcd7a3a5a19c505cf2 assets/agotmod/models/block/goathead.json
@@ -10451,6 +10457,9 @@ bf726031b4a59f4dd0545298a83c5765baa719c6 assets/agotmod/models/item/dusky_rose.j
 bd2d2921b9caeec5a3a91ba8063137127518475c assets/agotmod/models/item/garnet_block.json
 8aa4712a8d6ddfe4c9e8c260f1248393df8e2d32 assets/agotmod/models/item/garnet_deepslate_ore.json
 9b3a2371f9bcbb50c0f112a8fd24c99f05d2198f assets/agotmod/models/item/garnet_ore.json
+91a82abd8c7ca9f41287645504731aa6ba3e142a assets/agotmod/models/item/ghost_grass.json
+b091e8a3a2b296b227c840a02c0ddc5db5004424 assets/agotmod/models/item/ghost_grass_middle.json
+c053e9fd70757d5a0e91a683f5aac2e8dc5d37f6 assets/agotmod/models/item/ghost_grass_top.json
 537925f6d3cb53268bbe061cebcc0f07fc15d228 assets/agotmod/models/item/gillyflower.json
 463871a3c75ed8d6acb90a3253828fa7223aa962 assets/agotmod/models/item/ginger.json
 73cdd415890525aa61677b00654d772b6bcee785 assets/agotmod/models/item/goathead.json

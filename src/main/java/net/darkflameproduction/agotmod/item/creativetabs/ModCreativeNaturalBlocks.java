@@ -73,6 +73,8 @@ public class ModCreativeNaturalBlocks {
 
 // Miscellaneous
                 pOutput.accept(ModBLocks.GOATHEAD.get());
+                pOutput.accept(ModBLocks.GHOST_GRASS.get());
+
 
 
 

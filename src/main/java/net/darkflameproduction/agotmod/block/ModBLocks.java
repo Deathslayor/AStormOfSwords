@@ -1069,7 +1069,9 @@ public class ModBLocks {
         // Prevent block from being waterlogged
         @Override
         public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-            return true;
+            BlockState belowState = level.getBlockState(pos.below());
+            return belowState.is(ModBLocks.GHOST_GRASS.get()) || 
+                   belowState.is(ModBLocks.GHOST_GRASS_MIDDLE.get());
         }
 
         // Always maintain empty fluid state
@@ -2055,6 +2057,14 @@ public class ModBLocks {
             CornCropMiddleBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH).noCollission().noOcclusion(), false);
     public static final DeferredBlock<Block> CORN_CROP_TOP = registerBlock("corn_crop_top",
             CornCropTopBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH).noCollission().noOcclusion(), false);
+    public static final DeferredBlock<Block> GHOST_GRASS = registerBlock("ghost_grass",
+            GhostGrassBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SUGAR_CANE).noOcclusion(), true);
+    
+    public static final DeferredBlock<Block> GHOST_GRASS_MIDDLE = registerBlock("ghost_grass_middle",
+            GhostGrassMiddleBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SUGAR_CANE).noOcclusion(), true);
+    
+    public static final DeferredBlock<Block> GHOST_GRASS_TOP = registerBlock("ghost_grass_top",
+            GhostGrassTopBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SUGAR_CANE).noOcclusion(), true);
 
 
     // ---------------------------(BUSHES)--------------------------- //

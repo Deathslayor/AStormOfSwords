@@ -1955,6 +1955,54 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 .texture("layer0", modLoc("block/blue_rose_bush_top"))
                 .renderType("cutout");
 
+        // Ghost Grass Bottom
+        models().withExistingParent("block/" + ModBLocks.GHOST_GRASS.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/ghost_grass_bottom"))
+                .renderType("cutout");
+        
+        models().withExistingParent("item/" + ModBLocks.GHOST_GRASS.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/ghost_grass_bottom"));
+        
+        getVariantBuilder(ModBLocks.GHOST_GRASS.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.GHOST_GRASS.getId().getPath())))
+                .addModel();
+        
+        // Ghost Grass Middle
+        models().withExistingParent("block/" + ModBLocks.GHOST_GRASS_MIDDLE.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/ghost_grass_middle"))
+                .renderType("cutout");
+        
+        models().withExistingParent("item/" + ModBLocks.GHOST_GRASS_MIDDLE.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/ghost_grass_middle"));
+        
+        getVariantBuilder(ModBLocks.GHOST_GRASS_MIDDLE.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.GHOST_GRASS_MIDDLE.getId().getPath())))
+                .addModel();
+        
+        // Ghost Grass Top
+        models().withExistingParent("block/" + ModBLocks.GHOST_GRASS_TOP.getId().getPath(),
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/ghost_grass_top"))
+                .renderType("cutout");
+        
+        models().withExistingParent("item/" + ModBLocks.GHOST_GRASS_TOP.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("block/ghost_grass_top"));
+        
+        getVariantBuilder(ModBLocks.GHOST_GRASS_TOP.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.GHOST_GRASS_TOP.getId().getPath())))
+                .addModel();
+
 // Now register the blockstate that references both models
         getVariantBuilder(ModBLocks.BLUE_ROSE_BUSH.get())
                 .partialState().with(TallFlowerBlock.HALF, DoubleBlockHalf.LOWER)
