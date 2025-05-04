@@ -2066,6 +2066,9 @@ public class ModBLocks {
     public static final DeferredBlock<Block> GHOST_GRASS_TOP = registerBlock("ghost_grass_top",
             GhostGrassTopBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SUGAR_CANE).noOcclusion(), true);
 
+    public static final DeferredBlock<Block> GHOST_GRASS_BLOCK = registerBlock("ghost_grass_block",
+            GhostGrassSourceBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.ROOTED_DIRT).noOcclusion(), true);
+
 
     // ---------------------------(BUSHES)--------------------------- //
 

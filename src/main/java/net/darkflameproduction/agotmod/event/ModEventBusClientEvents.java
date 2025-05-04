@@ -31,7 +31,6 @@ public class ModEventBusClientEvents {
 
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
-        // Entity Renderers
         EntityRenderers.register(ModEntities.MAMMOTH_ENTITY.get(), Mammoth_Entity_Renderer::new);
     }
 

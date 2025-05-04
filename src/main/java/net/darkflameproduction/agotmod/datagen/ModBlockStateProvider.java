@@ -25,7 +25,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Method;
 import java.util.function.Function;
-
 public class ModBlockStateProvider extends BlockStateProvider {
     // Constructor for ModBlockStateProvider
     public ModBlockStateProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
@@ -38,6 +37,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     protected void registerStatesAndModels() {
         // ---------------------------(TIN)--------------------------- //
         // Register block states and models for tin-related blocks
+        blockWithItem(ModBLocks.GHOST_GRASS_BLOCK);
         blockWithItem(ModBLocks.TIN_BLOCK);
         blockWithItem(ModBLocks.RAW_TIN_BLOCK);
         blockWithItem(ModBLocks.DEEPSLATE_TIN_ORE);
@@ -147,8 +147,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 AGoTMod.id("block/stripped_weirwood_log_top")); // top of the block
 
         axisBlock(((RotatedPillarBlock) ModBLocks.WEIRWOOD_FACE_LOG.get()),
-                blockTexture(ModBLocks.WEIRWOOD_LOG.get()), // side of the block
-                AGoTMod.id("block/weirwood_face")); // top of the block
+                blockTexture(ModBLocks.WEIRWOOD_LOG.get()),
+                AGoTMod.id("block/weirwood_face"));
 
         axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_WEIRWOOD_WOOD.get()),
                 blockTexture(ModBLocks.STRIPPED_WEIRWOOD_LOG.get()), // side of the block
@@ -2003,14 +2003,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.GHOST_GRASS_TOP.getId().getPath())))
                 .addModel();
 
-// Now register the blockstate that references both models
-        getVariantBuilder(ModBLocks.BLUE_ROSE_BUSH.get())
-                .partialState().with(TallFlowerBlock.HALF, DoubleBlockHalf.LOWER)
-                .modelForState().modelFile(models().getExistingFile(
-                        modLoc("block/" + ModBLocks.BLUE_ROSE_BUSH.getId().getPath() + "_bottom"))).addModel()
-                .partialState().with(TallFlowerBlock.HALF, DoubleBlockHalf.UPPER)
-                .modelForState().modelFile(models().getExistingFile(
-                        modLoc("block/" + ModBLocks.BLUE_ROSE_BUSH.getId().getPath() + "_top"))).addModel();
+
 
 
         simpleBlockWithItem(ModBLocks.POTTED_WINTER_ROSE.get(),

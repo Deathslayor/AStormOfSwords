@@ -1,6 +1,7 @@
 // This code belongs to the package net.stormofsorts.agotmod
 package net.darkflameproduction.agotmod;
 // Add this import at the top of the file
+import net.darkflameproduction.agotmod.client.ModArmorSkinRenderer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.loading.FMLEnvironment;
 
@@ -48,9 +49,7 @@ public class AGoTMod {
 
     // Constructor for AGoTMod class
     public AGoTMod(IEventBus modEventBus) {
-        // Register various mod features with the mod event bus
 
-        // Adds Creative Mod Tabs
         ModCreativeBuildingBlocks.register(modEventBus);
         ModCreativeNaturalBlocks.register(modEventBus);
         ModCreativeToolsUtilities.register(modEventBus);
@@ -62,7 +61,6 @@ public class AGoTMod {
         ModCreativeMagic.register(modEventBus);
         ModCreativeArchery.register(modEventBus);
         ModBlockEntities.register(modEventBus);
-
 
         // Register The Wall line generator
 

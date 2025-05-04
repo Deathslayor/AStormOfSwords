@@ -1,4 +1,4 @@
-// 1.21.3	2025-05-03T11:46:35.8894088	Loot Tables
+// 1.21.3	2025-05-04T23:16:13.5141896	Loot Tables
 dcab3871310df0811beb8de47adc40c83d85986b data/agotmod/loot_table/blocks/alder_button.json
 81071778b6225f49c02483465d22441e05162a1b data/agotmod/loot_table/blocks/alder_door.json
 33ccfef8d939079aebfc7963299df0ced91481b5 data/agotmod/loot_table/blocks/alder_fence.json
@@ -1463,9 +1463,10 @@ dda0547e510d5ea6b851ef2218218cb9fbd5b4d5 data/agotmod/loot_table/blocks/garlic_c
 b57ba248b9c885ed95978f4ffb27f9acaf33fb41 data/agotmod/loot_table/blocks/garnet_block.json
 1a246b45d826935f76539274b0f9795d381272ae data/agotmod/loot_table/blocks/garnet_deepslate_ore.json
 69fc80ca044399f11a6d9fce2539647a257544f2 data/agotmod/loot_table/blocks/garnet_ore.json
-b7a52ef63fb06984b902289e6a48aba3b54a4b7e data/agotmod/loot_table/blocks/ghost_grass.json
-0e1446da9c1163af25d24febbcb87fabf6ec3b84 data/agotmod/loot_table/blocks/ghost_grass_middle.json
-b7ace5c8a9cb6bf8fe48907cfc5cf665322c7de3 data/agotmod/loot_table/blocks/ghost_grass_top.json
+140f7c9c57161a0f0770488b98a6be90c8fe1d1f data/agotmod/loot_table/blocks/ghost_grass.json
+d902621c4e9cf1c46bfe026ff64c166d35249228 data/agotmod/loot_table/blocks/ghost_grass_block.json
+c1675b19357c712a1341356c998fea0a9ce8e58c data/agotmod/loot_table/blocks/ghost_grass_middle.json
+ff377ab95a95ce0d44b6dad264d3b6354026e82c data/agotmod/loot_table/blocks/ghost_grass_top.json
 d09af8b8849505d72a5590b09cfe9b97634ab55d data/agotmod/loot_table/blocks/gillyflower.json
 e1740d1925a3f166a69ce412ae86b6c022c604e3 data/agotmod/loot_table/blocks/ginger.json
 ecfe7e1e9b772650791b07864c31594bfa986e18 data/agotmod/loot_table/blocks/goathead.json

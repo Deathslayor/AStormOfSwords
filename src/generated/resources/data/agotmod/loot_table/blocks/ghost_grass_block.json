@@ -6,11 +6,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:wheat_seeds"
+          "name": "minecraft:dirt"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "agotmod:blocks/ghost_grass"
+  "random_sequence": "agotmod:blocks/ghost_grass_block"
 }

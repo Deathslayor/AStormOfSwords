@@ -8,6 +8,20 @@
           "biome_map": "agotmod:known_world",
           "carver": {
             "type": "ctgen:noise_carver",
+            "noise": {
+              "octaves": [
+                {
+                  "amplitude": 1.0,
+                  "frequency": 1.0
+                },
+                {
+                  "amplitude": 1.0,
+                  "frequency": 0.5
+                }
+              ],
+              "stretch": 63,
+              "stretch_y": 47
+            },
             "threshold": 0.95
           },
           "default_map_biome": "agotmod:deep_cold_ocean",

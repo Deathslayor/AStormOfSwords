@@ -17,6 +17,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.SweetBerryBushBlock;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
@@ -732,17 +733,26 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBLocks.BLUE_ROSE.get());
         this.dropSelf(ModBLocks.BLOODBLOOM.get());
         this.dropSelf(ModBLocks.BLACK_LOTUS.get());
-        this.dropSelf(ModBLocks.GHOST_GRASS.get());
+        this.add(ModBLocks.GHOST_GRASS_BLOCK.get(),
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1))
+                                .add(LootItem.lootTableItem(Blocks.DIRT))));
+        this.add(ModBLocks.GHOST_GRASS.get(),
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1))
+                                .add(LootItem.lootTableItem(Items.WHEAT_SEEDS))));
         this.add(ModBLocks.GHOST_GRASS_MIDDLE.get(),
                 LootTable.lootTable()
                         .withPool(LootPool.lootPool()
                                 .setRolls(ConstantValue.exactly(1))
-                                .add(LootItem.lootTableItem(ModBLocks.GHOST_GRASS.get()))));
+                                .add(LootItem.lootTableItem(Items.WHEAT_SEEDS))));
         this.add(ModBLocks.GHOST_GRASS_TOP.get(),
                 LootTable.lootTable()
                         .withPool(LootPool.lootPool()
                                 .setRolls(ConstantValue.exactly(1))
-                                .add(LootItem.lootTableItem(ModBLocks.GHOST_GRASS.get()))));
+                                .add(LootItem.lootTableItem(Items.WHEAT_SEEDS))));
         this.add(ModBLocks.WINTER_ROSE_BUSH.get(),
                 LootTable.lootTable()
                         .withPool(LootPool.lootPool()

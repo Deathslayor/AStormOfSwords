@@ -10,7 +10,8 @@
     "WorldPresetsMixin"
   ],
   "client": [
-    "client.CreateWorldScreenMixin"
+    "client.CreateWorldScreenMixin",
+    "client.PlayerRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

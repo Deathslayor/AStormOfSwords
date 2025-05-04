@@ -42,7 +42,7 @@ public class ModDimensionProvider {
                 .setSpawnX(3500)
                 .setSpawnY(6000)
                 .setPixelsAreChunks(false)
-                .setCarver(new NoiseCarver(new Noise(List.of(new Noise.Octave(1, 1), new Noise.Octave(0.5f, 2)), 63, 47), 0.95))
+                .setCarver(new NoiseCarver(new Noise(List.of(new Noise.Octave(1, 1), new Noise.Octave(0.5f, 1)), 63, 47), 0.95))
                 .build())))));
     }
 

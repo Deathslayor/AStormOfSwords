@@ -1,4 +1,4 @@
-// 1.21.3	2025-04-29T22:44:59.8884486	Registries
+// 1.21.3	2025-05-03T20:38:45.086607	Registries
 ffe3d912e363745b0043a61fc7b67f35a53f2228 data/agotmod/neoforge/biome_modifier/add_tin_ore.json
 2cd0b3508ddcea7e502f1cf50b1ab12343351354 data/agotmod/neoforge/biome_modifier/create_weirwood_tree.json
 5aa2b77732199476f156ea62152db7e48cd5fb2a data/agotmod/worldgen/biome/barrowlands.json
@@ -230,4 +230,4 @@ b335d392bbc3b1ab7cce1de84550316be97f75fd data/agotmod/worldgen/placed_feature/to
 d592fb3faba5bc88c8cbda25a209e06fc516ad82 data/agotmod/worldgen/placed_feature/weirwood_rare.json
 5f3afb8225c912a23db72b1bc84fed82c9d93541 data/agotmod/worldgen/placed_feature/white_rose_bush.json
 784eca64a8b0ed6accb61d605d13c96e88a36d37 data/agotmod/worldgen/placed_feature/winter_rose_bush.json
-335b419829ff54bc7c185411415796890517dd16 data/agotmod/worldgen/world_preset/known_world.json
+23da689bea3fbc1925929c1085d4af8593ceece5 data/agotmod/worldgen/world_preset/known_world.json
