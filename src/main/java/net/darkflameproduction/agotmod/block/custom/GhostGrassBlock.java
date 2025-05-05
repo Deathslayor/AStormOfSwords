@@ -51,30 +51,57 @@ public class GhostGrassBlock extends SweetBerryBushBlock {
         }
     }
 
-
-
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (!level.isAreaLoaded(pos, 1)) return;
 
         if (level.getRawBrightness(pos, 0) >= 9) {
-            if (random.nextInt(5) == 0) {
-                BlockPos abovePos = pos.above();
-                if (level.isEmptyBlock(abovePos)) {
-                    if (!level.getBlockState(pos.above(2)).is(ModBLocks.GHOST_GRASS_MIDDLE.get())) {
-                        level.setBlock(abovePos, ModBLocks.GHOST_GRASS_MIDDLE.get().defaultBlockState(), 2);
-                    }
-                }
+            BlockState aboveState = level.getBlockState(pos.above());
+            if (aboveState.isAir() || aboveState.is(BlockTags.FLOWERS) ||
+                    aboveState.is(Blocks.TALL_GRASS) || aboveState.is(Blocks.SHORT_GRASS)) {
+                level.setBlock(pos.above(), ModBLocks.GHOST_GRASS_MIDDLE.get().defaultBlockState(), 2);
             }
+
+            // Try to convert block below to ghost grass
+            BlockState belowState = level.getBlockState(pos.below());
+            if (belowState.is(BlockTags.DIRT)) {
+                    level.setBlock(pos.below(), ModBLocks.GHOST_GRASS_BLOCK.get().defaultBlockState(), 2);
+                }
+            
+if (random.nextInt(5) == 0) {
+    // Get only horizontal directions
+    Direction[] horizontalDirections = {
+        Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST
+    };
+    Direction randomDir = horizontalDirections[random.nextInt(horizontalDirections.length)];
+    BlockPos targetPos = pos.relative(randomDir);
+    
+    // Try placing at target level, one up, or one down
+    BlockPos[] possiblePositions = {
+        targetPos,
+        targetPos.above(),
+        targetPos.below()
+    };
+    
+    for (BlockPos tryPos : possiblePositions) {
+        BlockState tryState = level.getBlockState(tryPos);
+        BlockState belowTryState = level.getBlockState(tryPos.below());
+        
+        if (belowTryState.is(BlockTags.DIRT) &&
+                (tryState.isAir() || tryState.is(BlockTags.FLOWERS) ||
+                        tryState.is(Blocks.TALL_GRASS) || tryState.is(Blocks.SHORT_GRASS))) {
+            level.setBlock(tryPos, ModBLocks.GHOST_GRASS.get().defaultBlockState(), 2);
+            break; // Stop after successfully placing one block
         }
     }
-
-
-
-    @Override
-    public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        BlockState belowState = level.getBlockState(pos.below());
-        return belowState.is(ModBLocks.GHOST_GRASS_BLOCK.get()) || belowState.is(ModBLocks.GHOST_GRASS.get());
+}
+            }
+        }
+        
+        @Override
+        public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+            BlockState belowState = level.getBlockState(pos.below());
+            return belowState.is(BlockTags.DIRT) || belowState.is(ModBLocks.GHOST_GRASS_BLOCK.get());
     }
     public ItemStack getCloneItemStack(BlockGetter world, BlockPos pos, BlockState state) {
         return new ItemStack(Items.WHEAT_SEEDS);

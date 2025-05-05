@@ -2,7 +2,9 @@ package net.darkflameproduction.agotmod.datagen;
 
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.block.ModBLocks;
+import net.darkflameproduction.agotmod.block.custom.GhostGrassBlock;
 import net.darkflameproduction.agotmod.block.custom.HorseradishCropBlock;
+import net.darkflameproduction.agotmod.block.custom.WeirwoodFaceLogBlock;
 import net.minecraft.commands.arguments.ResourceLocationArgument;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -10,6 +12,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.neoforged.fml.common.Mod;
@@ -25,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Method;
 import java.util.function.Function;
+
 public class ModBlockStateProvider extends BlockStateProvider {
     // Constructor for ModBlockStateProvider
     public ModBlockStateProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
@@ -37,7 +41,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
     protected void registerStatesAndModels() {
         // ---------------------------(TIN)--------------------------- //
         // Register block states and models for tin-related blocks
-        blockWithItem(ModBLocks.GHOST_GRASS_BLOCK);
+        GhostGrassBlock(ModBLocks.GHOST_GRASS_BLOCK.get());
+        blockItem(ModBLocks.GHOST_GRASS_BLOCK);
         blockWithItem(ModBLocks.TIN_BLOCK);
         blockWithItem(ModBLocks.RAW_TIN_BLOCK);
         blockWithItem(ModBLocks.DEEPSLATE_TIN_ORE);
@@ -146,9 +151,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 blockTexture(ModBLocks.STRIPPED_WEIRWOOD_LOG.get()), // side of the block
                 AGoTMod.id("block/stripped_weirwood_log_top")); // top of the block
 
-        axisBlock(((RotatedPillarBlock) ModBLocks.WEIRWOOD_FACE_LOG.get()),
-                blockTexture(ModBLocks.WEIRWOOD_LOG.get()),
-                AGoTMod.id("block/weirwood_face"));
+        weirwoodFaceLogBlock(ModBLocks.WEIRWOOD_FACE_LOG.get());
 
         axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_WEIRWOOD_WOOD.get()),
                 blockTexture(ModBLocks.STRIPPED_WEIRWOOD_LOG.get()), // side of the block
@@ -2336,4 +2339,65 @@ public class ModBlockStateProvider extends BlockStateProvider {
         // Generate block states and models for a block with its corresponding item
         simpleBlockWithItem(blockRegistryObject.get(), cubeAll(blockRegistryObject.get()));
     }
+
+    private void weirwoodFaceLogBlock(Block block) {
+        ModelFile model = models().cube(name(block),
+                modLoc("block/weirwood_log_top"),     // bottom
+                modLoc("block/weirwood_log_top"),     // top
+                modLoc("block/weirwood_face"),        // north
+                modLoc("block/weirwood_log"),         // south
+                modLoc("block/weirwood_log"),         // west
+                modLoc("block/weirwood_log")          // east
+        ).texture("particle", modLoc("block/weirwood_log"));
+    
+        getVariantBuilder(block)
+                .forAllStates(state -> {
+                    Direction facing = state.getValue(CarvedPumpkinBlock.FACING);
+                    
+                    int rotationY = switch (facing) {
+                        case SOUTH -> 180;
+                        case WEST -> 270;
+                        case EAST -> 90;
+                        default -> 0;
+                    };
+    
+                    return ConfiguredModel.builder()
+                            .modelFile(model)
+                            .rotationY(rotationY)
+                            .build();
+                });
+    }
+
+    private void GhostGrassBlock(Block block) {
+        ModelFile model = models().cube(name(block),
+                modLoc("block/ghostgrass_block_bottom"),     // bottom
+                modLoc("block/ghost_grass_block"),     // top
+                modLoc("block/ghostgrass_block_side"),        // north
+                modLoc("block/ghostgrass_block_side"),         // south
+                modLoc("block/ghostgrass_block_side"),         // west
+                modLoc("block/ghostgrass_block_side")          // east
+        ).texture("particle", modLoc("block/ghostgrass_block_side"));
+
+    getVariantBuilder(block)
+                .forAllStates(state -> {
+        Direction facing = state.getValue(CarvedPumpkinBlock.FACING);
+
+        int rotationY = switch (facing) {
+            case SOUTH -> 180;
+            case WEST -> 270;
+            case EAST -> 90;
+            default -> 0;
+        };
+
+        return ConfiguredModel.builder()
+                .modelFile(model)
+                .rotationY(rotationY)
+                .build();
+    });
+}
+
+
+
+
+
 }

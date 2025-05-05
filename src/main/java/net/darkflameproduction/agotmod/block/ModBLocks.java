@@ -1108,7 +1108,8 @@ public class ModBLocks {
     // ---------------------------(TREE BLOCKS)--------------------------- //
     //Weirwood
     public static final DeferredBlock<Block> WEIRWOOD_LOG = registerBlock("weirwood_log", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG).strength(3f), true);
-    public static final DeferredBlock<Block> WEIRWOOD_FACE_LOG = registerBlock("weirwood_face_log", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG).strength(3f), true);
+    public static final DeferredBlock<Block> WEIRWOOD_FACE_LOG = registerBlock("weirwood_face_log",
+            WeirwoodFaceLogBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CARVED_PUMPKIN), true);
     public static final DeferredBlock<Block> WEIRWOOD_WOOD = registerBlock("weirwood_wood", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WOOD).strength(3f), true);
     public static final DeferredBlock<Block> STRIPPED_WEIRWOOD_LOG = registerBlock("stripped_weirwood_log", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_LOG).strength(3f), true);
     public static final DeferredBlock<Block> STRIPPED_WEIRWOOD_WOOD = registerBlock("stripped_weirwood_wood", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_WOOD).strength(3f), true);
@@ -2067,7 +2068,8 @@ public class ModBLocks {
             GhostGrassTopBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SUGAR_CANE).noOcclusion(), true);
 
     public static final DeferredBlock<Block> GHOST_GRASS_BLOCK = registerBlock("ghost_grass_block",
-            GhostGrassSourceBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.ROOTED_DIRT).noOcclusion(), true);
+            WeirwoodFaceLogBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CARVED_PUMPKIN).sound(SoundType.GRASS), true);
+
 
 
     // ---------------------------(BUSHES)--------------------------- //

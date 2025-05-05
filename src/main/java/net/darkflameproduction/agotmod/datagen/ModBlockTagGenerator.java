@@ -273,7 +273,9 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
 
 
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
-                .add(ModBLocks.QUAGMIRE.get());
+                .add(ModBLocks.QUAGMIRE.get(),
+                ModBLocks.GHOST_GRASS_BLOCK.get());
+
 
         // Add blocks that can be mined with a pickaxe to the MINEABLE_WITH_PICKAXE tag
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)

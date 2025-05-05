@@ -1,6 +1,12 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/cube",
   "textures": {
-    "all": "agotmod:block/ghost_grass_block"
+    "down": "agotmod:block/ghostgrass_block_bottom",
+    "east": "agotmod:block/ghostgrass_block_side",
+    "north": "agotmod:block/ghostgrass_block_side",
+    "particle": "agotmod:block/ghostgrass_block_side",
+    "south": "agotmod:block/ghostgrass_block_side",
+    "up": "agotmod:block/ghost_grass_block",
+    "west": "agotmod:block/ghostgrass_block_side"
   }
 }
