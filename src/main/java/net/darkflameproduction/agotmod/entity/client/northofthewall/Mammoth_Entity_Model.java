@@ -11,7 +11,7 @@ public class Mammoth_Entity_Model extends DefaultedEntityGeoModel<Mammoth_Entity
 
 
     public Mammoth_Entity_Model() {
-        super(ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "mammoth"),true);
+        super(ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "mammoth"),false);
     }
 
 

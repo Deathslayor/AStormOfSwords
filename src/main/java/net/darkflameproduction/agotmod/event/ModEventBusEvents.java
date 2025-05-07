@@ -22,6 +22,7 @@ public class ModEventBusEvents {
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         // For NeoForge, we use .get() on the DeferredHolder
         event.put(ModEntities.MAMMOTH_ENTITY.get(), Mammoth_Entity.createAttributes().build());
+        event.put(ModEntities.CROW_ENTITY.get(), Mammoth_Entity.createAttributes().build());
     }
 
     @SubscribeEvent

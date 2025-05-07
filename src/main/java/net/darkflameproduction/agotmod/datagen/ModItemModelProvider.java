@@ -57,6 +57,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.COIN);
         // ---------------------------(SPAWN EGGS)--------------------------- //
         spawnEggItem(ModItems.MAMMOTH_SPAWN_EGG);
+        spawnEggItem(ModItems.CROW_SPAWN_EGG);
+
 
 
 

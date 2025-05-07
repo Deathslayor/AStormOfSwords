@@ -2,13 +2,12 @@ package net.darkflameproduction.agotmod.entity.custom.norththewall;
 
 import net.darkflameproduction.agotmod.entity.animations.ModAnimationDefinitions;
 import net.darkflameproduction.agotmod.entity.goal.MammothAttackGoal;
-import net.darkflameproduction.agotmod.entity.goal.PersistentMoveTowardsTargetGoal;
+import net.darkflameproduction.agotmod.entity.goal.MammothPersistentMoveTowardsTargetGoal;
 import net.darkflameproduction.agotmod.sound.ModSounds;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,11 +16,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.fml.common.Mod;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
@@ -30,7 +27,6 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 
 public class Mammoth_Entity extends PathfinderMob implements GeoEntity {
-    private static final EntityDataAccessor<Integer> TEXTURE_VARIANT = SynchedEntityData.defineId(Mammoth_Entity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> DATA_SPRINTING = SynchedEntityData.defineId(Mammoth_Entity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> IS_ATTACKING = SynchedEntityData.defineId(Mammoth_Entity.class, EntityDataSerializers.BOOLEAN);
     private static final float SPRINT_SPEED_MULTIPLIER = 3F;
@@ -51,7 +47,7 @@ public class Mammoth_Entity extends PathfinderMob implements GeoEntity {
     protected void registerGoals() {
             this.goalSelector.addGoal(0, new FloatGoal(this));
             this.goalSelector.addGoal(1, new MammothAttackGoal(this));
-            this.goalSelector.addGoal(2, new PersistentMoveTowardsTargetGoal(this, 0.6D, 64.0F));
+            this.goalSelector.addGoal(2, new MammothPersistentMoveTowardsTargetGoal(this, 0.6D, 64.0F));
             this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 1.1D));
             this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 3f));
             this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));

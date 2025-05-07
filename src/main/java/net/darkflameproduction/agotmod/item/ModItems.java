@@ -865,6 +865,12 @@ public class ModItems {
                     0xfffac2,
                     properties));
 
+    public static final DeferredItem<Item> CROW_SPAWN_EGG = ITEMS.registerItem("crow_spawn_egg",
+            properties -> new SpawnEggItem(ModEntities.CROW_ENTITY.get(),
+                    0x0f0f0f,
+                    0x333333,
+                    properties));
+
 
 
 

@@ -6,6 +6,7 @@ package net.darkflameproduction.agotmod.event;
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.entity.ModBlockEntities;
 import net.darkflameproduction.agotmod.entity.ModEntities;
+import net.darkflameproduction.agotmod.entity.client.birds.Crow_Entity_Renderer;
 import net.darkflameproduction.agotmod.entity.client.northofthewall.Mammoth_Entity_Renderer;
 import net.darkflameproduction.agotmod.event.KeyMappings.KeyBindings;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
@@ -32,6 +33,8 @@ public class ModEventBusClientEvents {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
         EntityRenderers.register(ModEntities.MAMMOTH_ENTITY.get(), Mammoth_Entity_Renderer::new);
+        EntityRenderers.register(ModEntities.CROW_ENTITY.get(), Crow_Entity_Renderer::new);
+
     }
 
     //Registers Keys

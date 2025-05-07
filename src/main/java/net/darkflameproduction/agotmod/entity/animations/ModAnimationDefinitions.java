@@ -22,6 +22,8 @@ public class ModAnimationDefinitions {
     public static final RawAnimation WALK = RawAnimation.begin().thenPlay("misc.walk");
     public static final RawAnimation RUN = RawAnimation.begin().thenPlay("misc.run");
     public static final RawAnimation IDLE = RawAnimation.begin().thenPlay("misc.idle");
+    public static final RawAnimation FLY = RawAnimation.begin().thenPlay("misc.flying");
+
 
 
 

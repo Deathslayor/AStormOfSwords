@@ -1,9 +1,7 @@
 // This code belongs to the package net.stormofsorts.agotmod
 package net.darkflameproduction.agotmod;
 // Add this import at the top of the file
-import net.darkflameproduction.agotmod.client.ModArmorSkinRenderer;
 import net.neoforged.api.distmarker.Dist;
-import net.neoforged.fml.loading.FMLEnvironment;
 
 // Add this code inside the constructor or setup method of your mod class:
 
@@ -60,7 +58,6 @@ public class AGoTMod {
         ModCreativeMagic.register(modEventBus);
         ModCreativeArchery.register(modEventBus);
         ModBlockEntities.register(modEventBus);
-
         // Register The Wall line generator
 
         // Adds Sounds to the game
@@ -155,10 +152,10 @@ public class AGoTMod {
         public static void onClientSetup(@NotNull FMLClientSetupEvent event) {
             Sheets.addWoodType(ModWoodTypes.WEIRWOOD);
             Sheets.addWoodType(ModWoodTypes.PINE);
-            // Register custom renderer for the Rhino entity
 
             event.enqueueWork(ModItemProperties::addCustomItemProperties);
         }
+
     }
 
 

@@ -1,4 +1,4 @@
-// 1.21.3	2025-05-07T13:47:41.4413182	Item Models: agotmod
+// 1.21.3	2025-05-07T21:50:02.1780352	Item Models: agotmod
 65c44e6f1f29781252c76032b90c20b3bc8f7b8a assets/agotmod/models/item/alder_button.json
 f0b6afe25a5640838c024d02c663e7c8f821ffd6 assets/agotmod/models/item/alder_door.json
 2af83e95998f18d674056268682572a94f141042 assets/agotmod/models/item/alder_fence.json
@@ -902,6 +902,7 @@ eaee20f3fc05ff44ab992f73187fb0490f74dfe5 assets/agotmod/models/item/corn_seeds.j
 9a33685f103ef055a407b25e70c7f8b9096c2bbd assets/agotmod/models/item/corn_top_seeds.json
 3fce589226cff845caa324102b7b4eedd36dc0a8 assets/agotmod/models/item/cotton.json
 c2e4bf4507e1f3df50d2ba449f6789d7d210fd3c assets/agotmod/models/item/cotton_seeds.json
+fb2995a888c0f697aeabaef990be58fc45db1a0c assets/agotmod/models/item/crow_spawn_egg.json
 e2cde8602392efe1d659f375d972da4b3d65bf84 assets/agotmod/models/item/cucumber.json
 66c3d209795a0b90d15f104c5f5cce9e1851502a assets/agotmod/models/item/cucumber_seeds.json
 25c7626a0335644d62aab52e680f52e3ae20ea78 assets/agotmod/models/item/diorite_10_slab.json
