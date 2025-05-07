@@ -55,7 +55,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         // ---------------------------(COINS)--------------------------- //
         // Register the item model for the COIN
         simpleItem(ModItems.COIN);
-        // ---------------------------(COINS)--------------------------- //
+        // ---------------------------(SPAWN EGGS)--------------------------- //
+        spawnEggItem(ModItems.MAMMOTH_SPAWN_EGG);
+
+
 
         // ---------------------------(ARMOUR)--------------------------- //
         // Register item models for Armour
@@ -1076,6 +1079,13 @@ public class ModItemModelProvider extends ItemModelProvider {
     public void evenSimplerBlockItem(DeferredHolder<Block, Block> block) {
         this.withExistingParent(AGoTMod.MOD_ID + ":" + BuiltInRegistries.BLOCK.getKey(block.get()).getPath(),
                 modLoc("block/" + BuiltInRegistries.BLOCK.getKey(block.get()).getPath()));
+    }
+
+    private ItemModelBuilder spawnEggItem(DeferredHolder<Item, Item> item) {
+        return withExistingParent(item.getId().getPath(),
+                mcLoc("item/template_spawn_egg"))
+                .texture("layer0", modLoc("item/spawn_egg"))
+                .texture("layer1", modLoc("item/spawn_egg_overlay"));
     }
 
 }

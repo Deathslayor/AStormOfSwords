@@ -14,19 +14,15 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class ModBlockTagGenerator extends BlockTagsProvider {
-    // Constructor for ModBlockTagGenerator
     public ModBlockTagGenerator(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        // Call the constructor of the superclass (BlockTagsProvider)
         super(output, lookupProvider, AGoTMod.MOD_ID, existingFileHelper);
     }
 
     // Method to add custom tags to blocks
     @Override
     protected void addTags(HolderLookup.@NotNull Provider pProvider) {
-        // MAKES BLOCKS MINEABLE FILE LOCATION IN RESOURCES/DATA/MINECRAFT/TAGS/BLOCKS
 
         this.tag(BlockTags.MINEABLE_WITH_AXE)
                 .add(ModBLocks.WEIRWOOD_LOG.get())
@@ -277,7 +273,10 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 ModBLocks.GHOST_GRASS_BLOCK.get());
 
 
-        // Add blocks that can be mined with a pickaxe to the MINEABLE_WITH_PICKAXE tag
+        this.tag(BlockTags.DIRT)
+                .add(ModBLocks.QUAGMIRE.get());
+
+
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
                         .add(ModBLocks.TIN_ORE.get(),
                         ModBLocks.STONE_BRICK_BUT_COOLER.get(),

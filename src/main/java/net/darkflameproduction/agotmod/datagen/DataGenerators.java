@@ -37,6 +37,8 @@ public class DataGenerators {
         // Add a provider for generating mod loot tables
         generator.addProvider(event.includeServer(), ModLootTableProvider.create(packOutput, lookupProvider));
 
+
+
         // ADDS BLOCK STATES
         // Add a provider for generating mod block states (for rendering)
         generator.addProvider(event.includeClient(), new ModBlockStateProvider(packOutput, existingFileHelper));
@@ -55,6 +57,8 @@ public class DataGenerators {
         // Adds Villager Professions
         // Add a provider for generating mod villager profession tags
         generator.addProvider(event.includeServer(), new ModPoiTypeTagsProvider(packOutput, lookupProvider, existingFileHelper));
+
+
 
         // Add a provider for generating custom world generation features
         ModWorldGenProvider worldGenProvider = generator.addProvider(event.includeServer(), new ModWorldGenProvider(packOutput, lookupProvider));

@@ -2,19 +2,41 @@
   "mammoth_attack": {
     "subtitles": "sounds.agotmod:mammoth_attack",
     "sounds": [
-      "agotmod:mammoth_attack"
+      {
+        "name": "agotmod:mammoth_attack",
+        "attenuation_distance": 10,
+        "volume": 1.0
+      }
     ]
   },
-  "mammoth_damaged": {
-    "subtitles": "sounds.agotmod:mammoth_damaged",
+  "mammoth_hurt": {
+    "subtitles": "sounds.agotmod:elephant_hurt",
     "sounds": [
-      "agotmod:mammoth_damaged"
+      {
+        "name": "agotmod:elephant_hurt",
+        "attenuation_distance": 10,
+        "volume": 1.0
+      }
     ]
   },
-  "mammoth_idle": {
-    "subtitles": "sounds.agotmod:mammoth_idle",
+  "mammoth_ambient": {
+    "subtitles": "sounds.agotmod:elephant_ambient",
     "sounds": [
-      "agotmod:mammoth_idle"
+      {
+        "name": "agotmod:elephant_ambient",
+        "attenuation_distance": 10,
+        "volume": 0.8
+      }
+    ]
+  },
+  "mammoth_death": {
+    "subtitles": "sounds.agotmod:elephant_death",
+    "sounds": [
+      {
+        "name": "agotmod:elephant_death",
+        "attenuation_distance": 10,
+        "volume": 1.0
+      }
     ]
   },
   "winter_wind": {

@@ -31,6 +31,7 @@ import net.darkflameproduction.agotmod.armor.custom.wildling.WildlingChiefArmorI
 import net.darkflameproduction.agotmod.armor.custom.wildling.WildlingFurArmorItem;
 import net.darkflameproduction.agotmod.armor.custom.wildling.WildlingLeatherArmorItem;
 import net.darkflameproduction.agotmod.block.ModBLocks;
+import net.darkflameproduction.agotmod.entity.ModEntities;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.equipment.ArmorType;
@@ -853,6 +854,16 @@ public class ModItems {
     public static final DeferredItem<Item> CORN_TOP_SEEDS = ITEMS.registerItem("corn_top_seeds",
             properties -> new BlockItem(ModBLocks.CORN_CROP_TOP.get(), properties));
 
+
+
+
+    // ---------------------------(SPAWN EGGS)--------------------------- //
+
+    public static final DeferredItem<Item> MAMMOTH_SPAWN_EGG = ITEMS.registerItem("mammoth_spawn_egg",
+            properties -> new SpawnEggItem(ModEntities.MAMMOTH_ENTITY.get(),
+                    0x422a0d,
+                    0xfffac2,
+                    properties));
 
 
 

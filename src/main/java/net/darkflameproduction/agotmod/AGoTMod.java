@@ -49,7 +49,6 @@ public class AGoTMod {
 
     // Constructor for AGoTMod class
     public AGoTMod(IEventBus modEventBus) {
-
         ModCreativeBuildingBlocks.register(modEventBus);
         ModCreativeNaturalBlocks.register(modEventBus);
         ModCreativeToolsUtilities.register(modEventBus);

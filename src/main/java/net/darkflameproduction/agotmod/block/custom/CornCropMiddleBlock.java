@@ -55,18 +55,6 @@ public class CornCropMiddleBlock extends SweetBerryBushBlock {
     protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         if (entity instanceof LivingEntity && entity.getType() != EntityType.FOX && entity.getType() != EntityType.BEE) {
             entity.makeStuckInBlock(state, new Vec3(0.8F, 0.75, 0.8F));
-            if (level instanceof ServerLevel serverlevel && state.getValue(AGE) != 0) {
-                Vec3 vec3 = entity.isControlledByClient() ? entity.getKnownMovement() : entity.oldPosition().subtract(entity.position());
-                if (vec3.horizontalDistanceSqr() > 0.0) {
-                    double d0 = Math.abs(vec3.x());
-                    double d1 = Math.abs(vec3.z());
-                    if (d0 >= 0.003F || d1 >= 0.003F) {
-                        entity.hurtServer(serverlevel, level.damageSources().sweetBerryBush(), 0F);
-                    }
-                }
-
-                return;
-            }
         }
     }
 

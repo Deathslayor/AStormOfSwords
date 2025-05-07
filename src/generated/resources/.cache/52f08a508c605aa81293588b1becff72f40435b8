@@ -1,4 +1,4 @@
-// 1.21.3	2025-05-03T14:46:04.1026089	Item Models: agotmod
+// 1.21.3	2025-05-07T13:47:41.4413182	Item Models: agotmod
 65c44e6f1f29781252c76032b90c20b3bc8f7b8a assets/agotmod/models/item/alder_button.json
 f0b6afe25a5640838c024d02c663e7c8f821ffd6 assets/agotmod/models/item/alder_door.json
 2af83e95998f18d674056268682572a94f141042 assets/agotmod/models/item/alder_fence.json
@@ -1317,6 +1317,7 @@ e87ab8217819fac9d96072133b9dff23040796ac assets/agotmod/models/item/ivory_shard.
 a4e045afecb6b830a9b3e11fdc3910d2d33c2302 assets/agotmod/models/item/liverwort.json
 886c27da31d3860579f05aea6f7b15bfaf520aca assets/agotmod/models/item/lungwort.json
 475677e084b0bfaf5b039690f0633468e69012de assets/agotmod/models/item/malachite.json
+fb2995a888c0f697aeabaef990be58fc45db1a0c assets/agotmod/models/item/mammoth_spawn_egg.json
 5afee6286410ec276902a7e351abc7ca911827b5 assets/agotmod/models/item/manderly_levy_boots.json
 07fb85b17d9846ad8f8faa1debe8fe25e523a67d assets/agotmod/models/item/manderly_levy_chestplate.json
 5f65e88749b7437a9fc4b8d38ec0c82a9b20a522 assets/agotmod/models/item/manderly_levy_helmet.json
