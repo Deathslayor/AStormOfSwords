@@ -30,6 +30,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 
 public class Mammoth_Entity extends PathfinderMob implements GeoEntity {
+    private static final EntityDataAccessor<Integer> TEXTURE_VARIANT = SynchedEntityData.defineId(Mammoth_Entity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> DATA_SPRINTING = SynchedEntityData.defineId(Mammoth_Entity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> IS_ATTACKING = SynchedEntityData.defineId(Mammoth_Entity.class, EntityDataSerializers.BOOLEAN);
     private static final float SPRINT_SPEED_MULTIPLIER = 3F;
@@ -42,6 +43,9 @@ public class Mammoth_Entity extends PathfinderMob implements GeoEntity {
     public Mammoth_Entity(EntityType<? extends PathfinderMob> p_21683_, Level p_21684_) {
         super(p_21683_, p_21684_);
     }
+
+
+
 
     @Override
     protected void registerGoals() {
@@ -61,8 +65,10 @@ public class Mammoth_Entity extends PathfinderMob implements GeoEntity {
                 .add(Attributes.KNOCKBACK_RESISTANCE, 5f)
                 .add(Attributes.MOVEMENT_SPEED, 0.2F)
                 .add(Attributes.ATTACK_KNOCKBACK, 10f)
-                .add(Attributes.ATTACK_DAMAGE, 30f);
+                .add(Attributes.ATTACK_DAMAGE, 50f);
     }
+
+
 
 
     @Nullable
