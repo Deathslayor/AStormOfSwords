@@ -39,6 +39,36 @@
       }
     ]
   },
+  "crow_hurt": {
+    "subtitles": "sounds.agotmod:crow_hurt",
+    "sounds": [
+      {
+        "name": "agotmod:crow_hurt",
+        "attenuation_distance": 10,
+        "volume": 1.0
+      }
+    ]
+  },
+  "crow_ambient": {
+    "subtitles": "sounds.agotmod:crow_ambient",
+    "sounds": [
+      {
+        "name": "agotmod:crow_ambient",
+        "attenuation_distance": 10,
+        "volume": 0.8
+      }
+    ]
+  },
+  "crow_death": {
+    "subtitles": "sounds.agotmod:crow_death",
+    "sounds": [
+      {
+        "name": "agotmod:crow_death",
+        "attenuation_distance": 10,
+        "volume": 1.0
+      }
+    ]
+  },
   "winter_wind": {
     "subtitles": "sounds.agotmod:winter_wind",
     "sounds": [

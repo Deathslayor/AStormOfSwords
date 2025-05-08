@@ -20,6 +20,9 @@ public class ModSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> MAMMOTH_HURT = registerSoundEvents("mammoth_hurt");
     public static final DeferredHolder<SoundEvent, SoundEvent> MAMMOTH_AMBIENT = registerSoundEvents("mammoth_ambient");
     public static final DeferredHolder<SoundEvent, SoundEvent> MAMMOTH_DEATH = registerSoundEvents("mammoth_death");
+    public static final DeferredHolder<SoundEvent, SoundEvent> CROW_HURT = registerSoundEvents("crow_hurt");
+    public static final DeferredHolder<SoundEvent, SoundEvent> CROW_AMBIENT = registerSoundEvents("crow_ambient");
+    public static final DeferredHolder<SoundEvent, SoundEvent> CROW_DEATH = registerSoundEvents("crow_death");
     public static final DeferredHolder<SoundEvent, SoundEvent> WINTER_WIND = registerSoundEvents("winter_wind");
     public static final DeferredHolder<SoundEvent, SoundEvent> FOREST_WIND = registerSoundEvents("forest_wind");
 
