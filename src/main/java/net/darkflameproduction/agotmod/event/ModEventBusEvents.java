@@ -7,6 +7,7 @@ import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.entity.ModEntities;
 import net.darkflameproduction.agotmod.entity.custom.birds.Crow_Entity;
 import net.darkflameproduction.agotmod.entity.custom.norththewall.Mammoth_Entity;
+import net.darkflameproduction.agotmod.entity.custom.wolves.Direwolf_Entity;
 import net.darkflameproduction.agotmod.magic.custom.PlayerManaProvider;
 import net.minecraft.world.entity.EntityType;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -24,6 +25,8 @@ public class ModEventBusEvents {
         // For NeoForge, we use .get() on the DeferredHolder
         event.put(ModEntities.MAMMOTH_ENTITY.get(), Mammoth_Entity.createAttributes().build());
         event.put(ModEntities.CROW_ENTITY.get(), Crow_Entity.createAttributes().build());
+        event.put(ModEntities.DIREWOLF_ENTITY.get(), Direwolf_Entity.createAttributes().build());
+
     }
 
     @SubscribeEvent

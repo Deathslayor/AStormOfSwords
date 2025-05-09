@@ -871,6 +871,12 @@ public class ModItems {
                     0x333333,
                     properties));
 
+    public static final DeferredItem<Item> DIREWOLF_SPAWN_EGG = ITEMS.registerItem("direwolf_spawn_egg",
+            properties -> new SpawnEggItem(ModEntities.DIREWOLF_ENTITY.get(),
+                    0x575757,
+                    0x919191,
+                    properties));
+
 
 
 

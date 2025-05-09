@@ -1,4 +1,4 @@
-// 1.21.3	2025-05-07T21:50:02.1998071	Loot Tables
+// 1.21.3	2025-05-09T17:39:13.6937748	Loot Tables
 dcab3871310df0811beb8de47adc40c83d85986b data/agotmod/loot_table/blocks/alder_button.json
 81071778b6225f49c02483465d22441e05162a1b data/agotmod/loot_table/blocks/alder_door.json
 33ccfef8d939079aebfc7963299df0ced91481b5 data/agotmod/loot_table/blocks/alder_fence.json
@@ -3115,4 +3115,5 @@ c85f908dcae8864d580dbd5206c0850b7d0d9292 data/agotmod/loot_table/blocks/white_ro
 fc6eec34399fe176025a441121aa9ca0773c5422 data/agotmod/loot_table/blocks/winter_rose_bush.json
 015716c07825bc0adc2965c574b6894ea7f74e99 data/agotmod/loot_table/blocks/yellow_diamond_block.json
 ef5dbeeec6445a06c3dde89e46a8009b4eb8dddd data/agotmod/loot_table/entities/crow.json
+9af9935e7ffdba21f36588ae7bfac832e30a0171 data/agotmod/loot_table/entities/direwolf.json
 13ac30e53a3536a54a7ae487ca3e38bcbc9ac182 data/agotmod/loot_table/entities/mammoth.json

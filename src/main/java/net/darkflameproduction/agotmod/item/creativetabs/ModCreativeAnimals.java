@@ -29,6 +29,7 @@ public class ModCreativeAnimals {
                     .displayItems((pParameters, pOutput) -> {
 
                         pOutput.accept(ModItems.MAMMOTH_SPAWN_EGG.get());
+                        pOutput.accept(ModItems.DIREWOLF_SPAWN_EGG.get());
                         pOutput.accept(ModItems.CROW_SPAWN_EGG.get());
 
 

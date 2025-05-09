@@ -1,4 +1,4 @@
-// 1.21.3	2025-05-07T21:50:02.1780352	Item Models: agotmod
+// 1.21.3	2025-05-09T17:39:13.6140687	Item Models: agotmod
 65c44e6f1f29781252c76032b90c20b3bc8f7b8a assets/agotmod/models/item/alder_button.json
 f0b6afe25a5640838c024d02c663e7c8f821ffd6 assets/agotmod/models/item/alder_door.json
 2af83e95998f18d674056268682572a94f141042 assets/agotmod/models/item/alder_fence.json
@@ -1016,6 +1016,7 @@ e166381775eb078560c185b0683781153c4e1b3f assets/agotmod/models/item/diorite_8_wa
 3b2a39f4c2ac7eb50e7117547beb6d0d04c5b733 assets/agotmod/models/item/diorite_9_slab.json
 8ad4b9303439da33d03b851d49124e8ae69de06e assets/agotmod/models/item/diorite_9_stairs.json
 2657d4646b5a9f8ad950ab3a7bb9da16d13ff9a8 assets/agotmod/models/item/diorite_9_wall.json
+fb2995a888c0f697aeabaef990be58fc45db1a0c assets/agotmod/models/item/direwolf_spawn_egg.json
 f3da4334d14a678a1d6081b2b066a193066e9289 assets/agotmod/models/item/dragonglass_dagger.json
 1c1936c48fa7a81a71198455ab8fd0f34ba6b830 assets/agotmod/models/item/dragonglass_spear.json
 667a1fda033caaf961d7a122ff3a5323310162a2 assets/agotmod/models/item/dragons_breath.json

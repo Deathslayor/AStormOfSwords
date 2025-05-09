@@ -47,7 +47,7 @@ public class Mammoth_Entity extends PathfinderMob implements GeoEntity {
     protected void registerGoals() {
             this.goalSelector.addGoal(0, new FloatGoal(this));
             this.goalSelector.addGoal(1, new MammothAttackGoal(this));
-            this.goalSelector.addGoal(2, new MammothPersistentMoveTowardsTargetGoal(this, 0.6D, 64.0F));
+            this.goalSelector.addGoal(2, new MammothPersistentMoveTowardsTargetGoal(this, 0.6D));
             this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 1.1D));
             this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 3f));
             this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));

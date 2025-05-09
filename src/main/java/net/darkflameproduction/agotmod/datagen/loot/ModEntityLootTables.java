@@ -44,8 +44,7 @@ public class ModEntityLootTables extends EntityLootSubProvider {
                         .withPool(LootPool.lootPool()
                                 .setRolls(ConstantValue.exactly(1))
                                 .add(LootItem.lootTableItem(ModItems.FUR.get())
-                                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(8.0F, 32.0F)))
-        )));
+                                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(8.0F, 32.0F))))));
 
         this.add(ModEntities.CROW_ENTITY.get(),
                 LootTable.lootTable()
@@ -54,9 +53,12 @@ public class ModEntityLootTables extends EntityLootSubProvider {
                                 .add(LootItem.lootTableItem(Items.FEATHER)
                                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))));
 
-
-
-
+        this.add(ModEntities.DIREWOLF_ENTITY.get(),
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1))
+                                .add(LootItem.lootTableItem(Items.FEATHER)
+                                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))));
 
 
     }

@@ -466,10 +466,14 @@
 
   "item.agotmod.mammoth_spawn_egg": "Mammoth Spawn Egg",
   "item.agotmod.crow_spawn_egg": "Crow Spawn Egg",
+  "item.agotmod.direwolf_spawn_egg": "Direwolf Spawn Egg",
+
 
   "entity.minecraft.villager.agotmod.minter": "Minter",
   "entity.agotmod.mammoth": "Mammoth",
-  "entity.agotmod.bear": "Bear",
+  "entity.agotmod.crow": "Crow",
+  "entity.agotmod.direwolf": "Direwolf",
+
 
 
   "item.agotmod.blood_bottled.effect.empty": "Bottle Of Blood",

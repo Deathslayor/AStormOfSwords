@@ -3,6 +3,7 @@ package net.darkflameproduction.agotmod.entity;
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.entity.custom.birds.Crow_Entity;
 import net.darkflameproduction.agotmod.entity.custom.norththewall.Mammoth_Entity;
+import net.darkflameproduction.agotmod.entity.custom.wolves.Direwolf_Entity;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -21,7 +22,7 @@ public class ModEntities {
             ENTITY_TYPES.register("mammoth",
                     () -> EntityType.Builder.of(Mammoth_Entity::new, MobCategory.CREATURE)
                             .sized(3.5f, 4f)
-                            .clientTrackingRange(64)
+                            .clientTrackingRange(256)
                             .build(ResourceKey.create(net.minecraft.core.registries.Registries.ENTITY_TYPE,
                                     ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "mammoth"))));
 
@@ -29,9 +30,17 @@ public class ModEntities {
             ENTITY_TYPES.register("crow",
                     () -> EntityType.Builder.of(Crow_Entity::new, MobCategory.CREATURE)
                             .sized(0.4f, 0.6f)
-                            .clientTrackingRange(64)
+                            .clientTrackingRange(256)
                             .build(ResourceKey.create(net.minecraft.core.registries.Registries.ENTITY_TYPE,
                                     ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "crow"))));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<Direwolf_Entity>> DIREWOLF_ENTITY =
+            ENTITY_TYPES.register("direwolf",
+                    () -> EntityType.Builder.of(Direwolf_Entity::new, MobCategory.CREATURE)
+                            .sized(2f, 2f)
+                            .clientTrackingRange(256)
+                            .build(ResourceKey.create(net.minecraft.core.registries.Registries.ENTITY_TYPE,
+                                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "direwolf"))));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);
@@ -40,5 +49,7 @@ public class ModEntities {
     public static void onEntityAttributeCreation(EntityAttributeCreationEvent event) {
         event.put(MAMMOTH_ENTITY.get(), Mammoth_Entity.createAttributes().build());
         event.put(CROW_ENTITY.get(), Crow_Entity.createAttributes().build());
+        event.put(DIREWOLF_ENTITY.get(), Direwolf_Entity.createAttributes().build());
+
     }
 }
