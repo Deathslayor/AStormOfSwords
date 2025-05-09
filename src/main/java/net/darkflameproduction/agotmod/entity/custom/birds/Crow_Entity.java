@@ -20,6 +20,7 @@ import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.Vec3;
@@ -52,10 +53,10 @@ public class Crow_Entity extends PathfinderMob implements GeoEntity {
 
     public static AttributeSupplier.Builder createAttributes() {
         return PathfinderMob.createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 8f)
+                .add(Attributes.MAX_HEALTH, 10f)
                 .add(Attributes.FOLLOW_RANGE, 32D)
                 .add(Attributes.MOVEMENT_SPEED, 0.3F)
-                .add(Attributes.FLYING_SPEED, 1.5F);
+                .add(Attributes.FLYING_SPEED, 2F);
     }
 
     @Override
@@ -89,16 +90,12 @@ public class Crow_Entity extends PathfinderMob implements GeoEntity {
 
     @Override
     public boolean hurtServer(ServerLevel p_376275_, DamageSource p_376205_, float p_376647_) {
-        if (this.isInvulnerableTo(p_376275_, p_376205_)) {
-            return false;
-        } else {
-            if (this.isResting()) {
-                this.setResting(false);
-            }
-
-            return super.hurtServer(p_376275_, p_376205_, p_376647_);
+        if (this.isResting()) {
+            this.setResting(false);
         }
+        return super.hurtServer(p_376275_, p_376205_, p_376647_);
     }
+
 
     private boolean hasBoostedUp = false;
     private boolean isFlying = false;
@@ -118,10 +115,12 @@ public class Crow_Entity extends PathfinderMob implements GeoEntity {
         if (this.isResting()) {
             restingTicks++;
 
+            // If resting for the first time, assign a random duration
             if (restingDuration == 0) {
                 restingDuration = this.random.nextInt(900) + 100;
             }
 
+            // If resting duration is over or we decide to stop early, transition out of resting
             if (restingTicks >= restingDuration || this.random.nextInt(100) == 0) {
                 this.setResting(false);
                 restingTicks = 0;
@@ -137,11 +136,13 @@ public class Crow_Entity extends PathfinderMob implements GeoEntity {
                 return;
             }
 
+            // If resting, check if the block below is valid, else stop resting
             if (isValidRestingBlock(blockBelow)) {
                 if (this.random.nextInt(200) == 0) {
                     this.yHeadRot = this.random.nextInt(360);
                 }
 
+                // If resting too long and a player is nearby, transition out of resting
                 if (restingTicks > 600 && level.getNearestPlayer(RESTING_TARGETING, this) != null) {
                     this.setResting(false);
                     restingTicks = 0;
@@ -169,6 +170,7 @@ public class Crow_Entity extends PathfinderMob implements GeoEntity {
                 }
             }
         } else {
+            // Flying behavior when not resting
             if (!hasBoostedUp) {
                 targetY = this.getY() + (this.random.nextInt(11) + 10);
                 hasBoostedUp = true;
@@ -241,18 +243,29 @@ public class Crow_Entity extends PathfinderMob implements GeoEntity {
             }
         }
 
+        // Check if the crow has landed and can start resting
         if (!this.isResting() && this.onGround()) {
-            this.setResting(true);
-            restingTicks = 0;
-            isFlying = false;
+            BlockPos posBelow = this.blockPosition().below();
+            if (isValidRestingBlock(posBelow)) {
+                this.setResting(true);
+                restingTicks = 0;
+                isFlying = false;
+            }
         }
     }
+
 
     private boolean isValidRestingBlock(BlockPos pos) {
         BlockState state = this.level().getBlockState(pos);
         return state.isFaceSturdy(this.level(), pos, Direction.UP) ||
                 state.is(BlockTags.DIRT) ||
                 state.is(BlockTags.LEAVES) ||
+                state.is(Blocks.FARMLAND) ||
+                state.is(BlockTags.STONE_BRICKS) ||
+                state.is(BlockTags.STAIRS) ||
+                state.is(BlockTags.SLABS) ||
+                state.is(BlockTags.PLANKS) ||
+                state.is(BlockTags.LOGS) ||
                 state.isRedstoneConductor(this.level(), pos);
     }
 

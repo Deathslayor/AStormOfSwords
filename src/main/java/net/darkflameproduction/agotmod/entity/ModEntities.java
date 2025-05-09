@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.bus.api.IEventBus;
@@ -18,7 +19,7 @@ public class ModEntities {
 
     public static final DeferredHolder<EntityType<?>, EntityType<Mammoth_Entity>> MAMMOTH_ENTITY =
             ENTITY_TYPES.register("mammoth",
-                    () -> EntityType.Builder.of(Mammoth_Entity::new, MobCategory.MISC)
+                    () -> EntityType.Builder.of(Mammoth_Entity::new, MobCategory.CREATURE)
                             .sized(3.5f, 4f)
                             .clientTrackingRange(64)
                             .build(ResourceKey.create(net.minecraft.core.registries.Registries.ENTITY_TYPE,
@@ -26,7 +27,7 @@ public class ModEntities {
 
     public static final DeferredHolder<EntityType<?>, EntityType<Crow_Entity>> CROW_ENTITY =
             ENTITY_TYPES.register("crow",
-                    () -> EntityType.Builder.of(Crow_Entity::new, MobCategory.MISC)
+                    () -> EntityType.Builder.of(Crow_Entity::new, MobCategory.CREATURE)
                             .sized(0.4f, 0.6f)
                             .clientTrackingRange(64)
                             .build(ResourceKey.create(net.minecraft.core.registries.Registries.ENTITY_TYPE,
@@ -35,8 +36,9 @@ public class ModEntities {
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);
     }
+    @SubscribeEvent
     public static void onEntityAttributeCreation(EntityAttributeCreationEvent event) {
-        event.put(CROW_ENTITY.get(), Crow_Entity.createAttributes().build());
         event.put(MAMMOTH_ENTITY.get(), Mammoth_Entity.createAttributes().build());
+        event.put(CROW_ENTITY.get(), Crow_Entity.createAttributes().build());
     }
 }

@@ -54,7 +54,7 @@ public class Mammoth_Entity extends PathfinderMob implements GeoEntity {
             this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)).setAlertOthers());
         }
 
-    public static AttributeSupplier.Builder createAttributes() {
+        public static AttributeSupplier.Builder createAttributes() {
         return PathfinderMob.createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 450f)
                 .add(Attributes.FOLLOW_RANGE, 64D)

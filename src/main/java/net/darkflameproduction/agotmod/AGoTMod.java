@@ -55,6 +55,7 @@ public class AGoTMod {
         ModCreativeFoods.register(modEventBus);
         ModCreativeIngredients.register(modEventBus);
         ModCreativeAnimals.register(modEventBus);
+
         ModCreativeMagic.register(modEventBus);
         ModCreativeArchery.register(modEventBus);
         ModBlockEntities.register(modEventBus);
@@ -87,7 +88,6 @@ public class AGoTMod {
         ModTerrablender.registerBiomes();
 
         ModEntities.register(modEventBus);
-
         LOGGER.info("AGOT Mod initialized");
     }
 
