@@ -231,7 +231,7 @@ public class Mammoth_Entity extends PathfinderMob implements GeoEntity {
 
     @Override
     public int getCurrentSwingDuration() {
-        return 11;
+        return 30;
     }
 
     protected void updateSwingTime() {

@@ -10,7 +10,7 @@ import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class Crow_Entity_Renderer extends GeoEntityRenderer<Crow_Entity> {
     private static final ResourceLocation TEXTURE_BLACK = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/crow.png");
-    private static final ResourceLocation TEXTURE_WHITE = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/crow.png");
+    private static final ResourceLocation TEXTURE_WHITE = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/crow_albino.png");
 
     public Crow_Entity_Renderer(EntityRendererProvider.Context context) {
         super(context, new Crow_Entity_Model());
@@ -36,8 +36,5 @@ public class Crow_Entity_Renderer extends GeoEntityRenderer<Crow_Entity> {
         return 0.0F;
     }
 
-    @Override
-    public int getPackedOverlay(Crow_Entity animatable, float u, float partialTick) {
-        return OverlayTexture.NO_OVERLAY;
-    }
+
 }

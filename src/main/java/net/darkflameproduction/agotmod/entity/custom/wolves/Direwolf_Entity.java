@@ -52,8 +52,15 @@ public class Direwolf_Entity extends TamableAnimal implements GeoEntity {
     private static final EntityDataAccessor<Boolean> DATA_SPRINTING = SynchedEntityData.defineId(Direwolf_Entity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> IS_ATTACKING = SynchedEntityData.defineId(Direwolf_Entity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> SITTING = SynchedEntityData.defineId(Direwolf_Entity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> FOLLOWING_OWNER = SynchedEntityData.defineId(Direwolf_Entity.class, EntityDataSerializers.BOOLEAN);
 
+    // Modified speed constants
     private static final float SPRINT_SPEED_MULTIPLIER = 3F;
+    private static final float FOLLOW_OWNER_SPEED_MULTIPLIER = 2F; // Reduced from 3F to 1.5F
+    private static final float BASE_SPEED = 0.2F;
+    private static final float SPRINT_SPEED = BASE_SPEED * SPRINT_SPEED_MULTIPLIER;
+    private static final float FOLLOW_OWNER_SPEED = BASE_SPEED * FOLLOW_OWNER_SPEED_MULTIPLIER;
+
     private WrappedGoal activeMoveGoalWrapper;
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private int attackCooldown = 0;
@@ -70,8 +77,8 @@ public class Direwolf_Entity extends TamableAnimal implements GeoEntity {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new SitWhenOrderedToGoal(this));
         this.goalSelector.addGoal(2, new DirewolfAttackGoal(this));
-        // FIX: Remove the boolean parameter from FollowOwnerGoal constructor
-        this.goalSelector.addGoal(3, new FollowOwnerGoal(this, 1.0D, 10.0F, 2.0F));
+        // Use custom DirewolfFollowOwnerGoal that sets following flag
+        this.goalSelector.addGoal(3, new DirewolfFollowOwnerGoal(this, 1.0D, 10.0F, 2.0F));
         this.goalSelector.addGoal(4, new DirewolfPersistentMoveTowardsTargetGoal(this, 0.6D));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.1D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 3f));
@@ -85,12 +92,44 @@ public class Direwolf_Entity extends TamableAnimal implements GeoEntity {
         this.targetSelector.addGoal(6, new NonTameRandomTargetGoal<>(this, Turtle.class, false, Turtle.BABY_ON_LAND_SELECTOR));
     }
 
+    // Custom follow owner goal that controls sprinting behavior
+    class DirewolfFollowOwnerGoal extends FollowOwnerGoal {
+        private final Direwolf_Entity direwolf;
+
+        public DirewolfFollowOwnerGoal(Direwolf_Entity direwolf, double speed, float minDist, float maxDist) {
+            super(direwolf, speed, minDist, maxDist);
+            this.direwolf = direwolf;
+        }
+
+        @Override
+        public void start() {
+            super.start();
+            direwolf.setFollowingOwner(true);
+            direwolf.setSprinting(true);
+            direwolf.entityData.set(DATA_SPRINTING, true);
+            direwolf.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(FOLLOW_OWNER_SPEED); // Use reduced speed
+        }
+
+        @Override
+        public void stop() {
+            super.stop();
+            direwolf.setFollowingOwner(false);
+
+            // Don't stop sprinting if we have another reason to sprint
+            if (!direwolf.hasTarget() && !direwolf.isFollowingOwner()) {
+                direwolf.setSprinting(false);
+                direwolf.entityData.set(DATA_SPRINTING, false);
+                direwolf.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(BASE_SPEED);
+            }
+        }
+    }
+
     public static AttributeSupplier.Builder createAttributes() {
         return TamableAnimal.createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 120f)
                 .add(Attributes.FOLLOW_RANGE, 64D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.5f)
-                .add(Attributes.MOVEMENT_SPEED, 0.4F)
+                .add(Attributes.MOVEMENT_SPEED, BASE_SPEED)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.5f)
                 .add(Attributes.ATTACK_DAMAGE, 18f);
     }
@@ -142,6 +181,19 @@ public class Direwolf_Entity extends TamableAnimal implements GeoEntity {
         builder.define(DATA_SPRINTING, false);
         builder.define(IS_ATTACKING, false);
         builder.define(SITTING, false);
+        builder.define(FOLLOWING_OWNER, false);
+    }
+
+    public boolean isFollowingOwner() {
+        return this.entityData.get(FOLLOWING_OWNER);
+    }
+
+    public void setFollowingOwner(boolean following) {
+        this.entityData.set(FOLLOWING_OWNER, following);
+    }
+
+    public boolean hasTarget() {
+        return this.getTarget() != null;
     }
 
     public boolean canAttack() {
@@ -176,6 +228,14 @@ public class Direwolf_Entity extends TamableAnimal implements GeoEntity {
     @Override
     public void setOrderedToSit(boolean sitting) {
         this.entityData.set(SITTING, sitting);
+
+        // When sitting, we should never be sprinting or following
+        if (sitting) {
+            this.setFollowingOwner(false);
+            this.setSprinting(false);
+            this.entityData.set(DATA_SPRINTING, false);
+            this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(BASE_SPEED);
+        }
     }
 
     @Override
@@ -212,35 +272,58 @@ public class Direwolf_Entity extends TamableAnimal implements GeoEntity {
         }
 
         if (!this.level().isClientSide()) {
+            // Use slower speed when following owner
+            if (this.isFollowingOwner() && !this.isOrderedToSit() && !this.isSprinting()) {
+                this.setSprinting(true);
+                this.entityData.set(DATA_SPRINTING, true);
+                this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(FOLLOW_OWNER_SPEED);
+            }
+
+            // Sitting wolves should never sprint
             if (this.isOrderedToSit() && this.isSprinting()) {
                 this.setSprinting(false);
                 this.entityData.set(DATA_SPRINTING, false);
-                this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.4F);
+                this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(BASE_SPEED);
             }
 
+            // Don't sprint when attacking
             if (this.isAttacking()) {
                 if (this.isSprinting()) {
                     this.setSprinting(false);
                     this.entityData.set(DATA_SPRINTING, false);
-                    this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.4F);
+                    this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(BASE_SPEED);
                 }
             }
 
+            // Manage sprinting for attacking targets
             LivingEntity target = this.getTarget();
-            if (target != null && !this.isOrderedToSit()) {
+            if (target != null && !this.isOrderedToSit() && !this.isFollowingOwner()) {
                 boolean isCloseToTarget = this.distanceToSqr(target) < 16.0D;
                 if (isCloseToTarget && this.isSprinting()) {
                     this.setSprinting(false);
                     this.entityData.set(DATA_SPRINTING, false);
-                    this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.4F);
+                    this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(BASE_SPEED);
                 } else if (!isCloseToTarget && !this.isSprinting() && !this.isAttacking()) {
                     this.setSprinting(true);
                     this.entityData.set(DATA_SPRINTING, true);
-                    this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.4F * SPRINT_SPEED_MULTIPLIER);
+                    this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(SPRINT_SPEED);
                 }
-            } else {
-                if (this.getAttribute(Attributes.MOVEMENT_SPEED).getBaseValue() != 0.4F && !this.isSprinting()) {
-                    this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.4F);
+            } else if (!this.isFollowingOwner() && !this.hasTarget()) {
+                // Reset speed if not following, targeting, or already at base speed
+                if (this.getAttribute(Attributes.MOVEMENT_SPEED).getBaseValue() != BASE_SPEED && !this.isSprinting()) {
+                    this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(BASE_SPEED);
+                }
+            }
+
+            // Check if we're actually chasing our owner - if they're too far, activate follow mode
+            if (this.isTame() && !this.isOrderedToSit() && !this.isFollowingOwner() && !this.hasTarget()) {
+                LivingEntity owner = this.getOwner();
+                if (owner != null && this.distanceToSqr(owner) > 144.0D) { // 12 blocks squared
+                    this.setFollowingOwner(true);
+                    this.setSprinting(true);
+                    this.entityData.set(DATA_SPRINTING, true);
+                    this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(FOLLOW_OWNER_SPEED);
+                    this.navigation.moveTo(owner, 1.0D);
                 }
             }
         }
@@ -250,23 +333,30 @@ public class Direwolf_Entity extends TamableAnimal implements GeoEntity {
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
         tag.putBoolean("Sitting", this.isOrderedToSit());
+        tag.putBoolean("FollowingOwner", this.isFollowingOwner());
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
         this.setOrderedToSit(tag.getBoolean("Sitting"));
+        this.setFollowingOwner(tag.getBoolean("FollowingOwner"));
     }
 
     @Override
     public void setTarget(@Nullable LivingEntity target) {
         super.setTarget(target);
         if (!this.level().isClientSide()) {
-            boolean shouldSprint = target != null && !this.isOrderedToSit();
+            // When we get a target, stop following the owner
+            if (target != null) {
+                this.setFollowingOwner(false);
+            }
+
+            boolean shouldSprint = target != null && !this.isOrderedToSit() && !this.isFollowingOwner();
             if (shouldSprint != this.isSprinting()) {
                 this.setSprinting(shouldSprint);
                 this.entityData.set(DATA_SPRINTING, shouldSprint);
-                float speed = shouldSprint ? 0.4F * SPRINT_SPEED_MULTIPLIER : 0.4F;
+                float speed = shouldSprint ? SPRINT_SPEED : BASE_SPEED;
                 this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(speed);
             }
         }
@@ -287,7 +377,7 @@ public class Direwolf_Entity extends TamableAnimal implements GeoEntity {
 
     @Override
     public int getCurrentSwingDuration() {
-        return 11;
+        return 23;
     }
 
     protected void updateSwingTime() {

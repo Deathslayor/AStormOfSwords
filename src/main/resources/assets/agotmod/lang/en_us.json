@@ -474,7 +474,9 @@
   "entity.agotmod.crow": "Crow",
   "entity.agotmod.direwolf": "Direwolf",
 
-
+  "key.agotmod.open_custom_gui": "Open Custom GUI",
+  "key.categoriesmagic.agotmod": "A Game of Thrones Magic",
+  "screen.agotmod.custom_gui": "Custom GUI",
 
   "item.agotmod.blood_bottled.effect.empty": "Bottle Of Blood",
   "item.agotmod.blood_dagger": "Blood Dagger",

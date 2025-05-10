@@ -41,8 +41,5 @@ public class Mammoth_Entity_Renderer extends GeoEntityRenderer<Mammoth_Entity> {
         return 0.0F;
     }
 
-    @Override
-    public int getPackedOverlay(Mammoth_Entity animatable, float u, float partialTick) {
-        return OverlayTexture.NO_OVERLAY;
-    }
+
 }

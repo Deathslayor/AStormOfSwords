@@ -19,8 +19,8 @@ public class Direwolf_Entity_Renderer extends GeoEntityRenderer<Direwolf_Entity>
 
     public Direwolf_Entity_Renderer(EntityRendererProvider.Context context) {
         super(context, new Direwolf_Entity_Model());
-        this.scaleWidth = 0.8f;
-        this.scaleHeight = 0.8f;
+        this.scaleWidth = 0.7f;
+        this.scaleHeight = 0.7f;
         this.shadowRadius = 1f;
     }
 
@@ -49,8 +49,5 @@ public class Direwolf_Entity_Renderer extends GeoEntityRenderer<Direwolf_Entity>
         return 0.0F;
     }
 
-    @Override
-    public int getPackedOverlay(Direwolf_Entity animatable, float u, float partialTick) {
-        return OverlayTexture.NO_OVERLAY;
-    }
+
 }

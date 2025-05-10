@@ -1,6 +1,8 @@
 // This code belongs to the package net.stormofsorts.agotmod
 package net.darkflameproduction.agotmod;
 // Add this import at the top of the file
+import net.darkflameproduction.agotmod.client.ClientKeyInputEvents;
+import net.darkflameproduction.agotmod.event.KeyMappings.KeyBindings;
 import net.neoforged.api.distmarker.Dist;
 
 // Add this code inside the constructor or setup method of your mod class:
@@ -27,6 +29,8 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
@@ -84,11 +88,15 @@ public class AGoTMod {
         // Listen for creative mode tab build event
         modEventBus.addListener(this::addCreative);
 
-        // Register Biomes
         ModTerrablender.registerBiomes();
 
         ModEntities.register(modEventBus);
         LOGGER.info("AGOT Mod initialized");
+        NeoForge.EVENT_BUS.register(ClientKeyInputEvents.class);
+
+        if (FMLEnvironment.dist == Dist.CLIENT) {
+            NeoForge.EVENT_BUS.register(ClientKeyInputEvents.class);
+        }
     }
 
     // Common setup method

@@ -4,6 +4,8 @@ import com.mojang.blaze3d.platform.InputConstants;
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.minecraft.client.KeyMapping;
 import net.neoforged.neoforge.client.settings.KeyConflictContext;
+import net.neoforged.neoforge.common.util.Lazy;
+import org.lwjgl.glfw.GLFW;
 
 
 public final class KeyBindings {
@@ -15,103 +17,13 @@ public final class KeyBindings {
 
     public static final String CATEGORY = "key.categoriesmagic." + AGoTMod.MOD_ID;
 
-    public final KeyMapping UseSpellOne = new KeyMapping(
-            "key." + AGoTMod.MOD_ID + ".use_spell_one",
+    public final KeyMapping OpenCustomGUI = new KeyMapping(
+            "key." + AGoTMod.MOD_ID + ".open_custom_gui",
             KeyConflictContext.IN_GAME,
-            InputConstants.getKey(InputConstants.KEY_0, -1),
+            InputConstants.getKey(GLFW.GLFW_KEY_M, -1),  // 'M' key
             CATEGORY
-    );
-    public final KeyMapping UseSpellTwo = new KeyMapping(
-            "key." + AGoTMod.MOD_ID + ".use_spell_two",
-            KeyConflictContext.IN_GAME,
-            InputConstants.getKey(InputConstants.KEY_0, -1),
-            CATEGORY
-
-    );
-    public final KeyMapping UseSpellThree = new KeyMapping(
-            "key." + AGoTMod.MOD_ID + ".use_spell_three",
-            KeyConflictContext.IN_GAME,
-            InputConstants.getKey(InputConstants.KEY_0, -1),
-            CATEGORY
-
-    );
-    public final KeyMapping UseSpellFour = new KeyMapping(
-            "key." + AGoTMod.MOD_ID + ".use_spell_four",
-            KeyConflictContext.IN_GAME,
-            InputConstants.getKey(InputConstants.KEY_0, -1),
-            CATEGORY
-    );
-    public final KeyMapping UseSpellFive = new KeyMapping(
-            "key." + AGoTMod.MOD_ID + ".use_spell_five",
-            KeyConflictContext.IN_GAME,
-            InputConstants.getKey(InputConstants.KEY_0, -1),
-            CATEGORY
-
-    );
-    public final KeyMapping UseSpellSix = new KeyMapping(
-            "key." + AGoTMod.MOD_ID + ".use_spell_six",
-            KeyConflictContext.IN_GAME,
-            InputConstants.getKey(InputConstants.KEY_0, -1),
-            CATEGORY
-
-    );
-    public final KeyMapping UseSpellSeven = new KeyMapping(
-            "key." + AGoTMod.MOD_ID + ".use_spell_seven",
-            KeyConflictContext.IN_GAME,
-            InputConstants.getKey(InputConstants.KEY_0, -1),
-            CATEGORY
-    );
-    public final KeyMapping UseSpellEight = new KeyMapping(
-            "key." + AGoTMod.MOD_ID + ".use_spell_eight",
-            KeyConflictContext.IN_GAME,
-            InputConstants.getKey(InputConstants.KEY_0, -1),
-            CATEGORY
-
-    );
-    public final KeyMapping UseSpellNine = new KeyMapping(
-            "key." + AGoTMod.MOD_ID + ".use_spell_nine",
-            KeyConflictContext.IN_GAME,
-            InputConstants.getKey(InputConstants.KEY_0, -1),
-            CATEGORY
-
-    );
-    public final KeyMapping OpenMagicMenu = new KeyMapping(
-            "key." + AGoTMod.MOD_ID + ".open_magic_menu",
-            KeyConflictContext.IN_GAME,
-            InputConstants.getKey(InputConstants.KEY_0, -1),
-            CATEGORY
-
-    );
-    public final KeyMapping OpenBasicMenu = new KeyMapping(
-            "key." + AGoTMod.MOD_ID + ".open_basic_menu",
-            KeyConflictContext.IN_GAME,
-            InputConstants.getKey(InputConstants.KEY_0, -1),
-            CATEGORY
-
-    );
-    public final KeyMapping OpenMap = new KeyMapping(
-            "key." + AGoTMod.MOD_ID + ".open_map",
-            KeyConflictContext.IN_GAME,
-            InputConstants.getKey(InputConstants.KEY_0, -1),
-            CATEGORY
-
     );
 
-    public final KeyMapping SetWayPoint = new KeyMapping(
-            "key." + AGoTMod.MOD_ID + ".set_way_point",
-            KeyConflictContext.IN_GAME,
-            InputConstants.getKey(InputConstants.KEY_0, -1),
-            CATEGORY
-
-    );
-
-    public final KeyMapping ToggleMiniMap = new KeyMapping(
-            "key." + AGoTMod.MOD_ID + ".toggle_mini_map",
-            KeyConflictContext.IN_GAME,
-            InputConstants.getKey(InputConstants.KEY_0, -1),
-            CATEGORY
-
-    );
 
 
 }
