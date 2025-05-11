@@ -25,6 +25,8 @@ public class ModSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> CROW_DEATH = registerSoundEvents("crow_death");
     public static final DeferredHolder<SoundEvent, SoundEvent> WINTER_WIND = registerSoundEvents("winter_wind");
     public static final DeferredHolder<SoundEvent, SoundEvent> FOREST_WIND = registerSoundEvents("forest_wind");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BUTTON = registerSoundEvents("button");
+
 
     //Helper Method to register the sounds
     private static DeferredHolder<SoundEvent, SoundEvent> registerSoundEvents(String name) {

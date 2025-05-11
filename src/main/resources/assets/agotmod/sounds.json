@@ -75,6 +75,12 @@
       "agotmod:winter_wind"
     ]
   },
+  "button": {
+    "subtitles": "sounds.agotmod:button",
+    "sounds": [
+      "agotmod:button"
+    ]
+  },
   "forest_wind": {
     "subtitles": "sounds.agotmod:forest_wind",
     "sounds": [
