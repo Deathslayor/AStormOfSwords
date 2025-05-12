@@ -1,6 +1,7 @@
 package net.darkflameproduction.agotmod.gui;
 
 import net.darkflameproduction.agotmod.AGoTMod;
+import net.darkflameproduction.agotmod.sound.ModSounds;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -14,6 +15,34 @@ import net.minecraft.stats.StatsCounter;
 public class CustomGuiScreen extends Screen {
     private static final ResourceLocation BLUR_LOCATION =
             ResourceLocation.fromNamespaceAndPath("minecraft", "shaders/post/blur.json");
+
+    private static final ResourceLocation[] BUTTON_TEXTURES = {
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/stained_glass_red.png"),
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/stained_glass_orange.png"),
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/stained_glass_yellow.png"),
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/stained_glass_green.png"),
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/stained_glass_blue.png"),
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/stained_glass_purple.png"),
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/stained_glass_magenta.png")
+    };
+
+    private static final ResourceLocation[] BUTTON_TEXTURES_TRANSPARANT = {
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/stained_glass_red_transparant.png"),
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/stained_glass_orange_transparant.png"),
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/stained_glass_yellow_transparant.png"),
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/stained_glass_green_transparant.png"),
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/stained_glass_blue_transparant.png"),
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/stained_glass_purple_transparant.png"),
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/stained_glass_magenta_transparant.png")
+    };
+
+    // Border textures
+    private static final ResourceLocation PILLAR_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/pillar.png");
+    private static final ResourceLocation TOP_BORDER_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/bottom.png");
+    private static final ResourceLocation CORNER_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/corner.png");
 
     private static final int[] RAINBOW_COLORS = {
             0xFF990000,
@@ -46,8 +75,7 @@ public class CustomGuiScreen extends Screen {
 
     private static final int PARCHMENT_COLOR = 0xFFF5E7C1;
     private static final int BLACK_COLOR = 0xFF000000;
-    private static final float HOVER_BRIGHTNESS = 1.5f;
-    private static final net.minecraft.stats.Stat<ResourceLocation> DEATH_COUNT_STAT =
+    private static final Stat<ResourceLocation> DEATH_COUNT_STAT =
             Stats.CUSTOM.get(Stats.DEATHS);
     private static final Stat<ResourceLocation> KILLS_MOB_STAT =
             Stats.CUSTOM.get(Stats.MOB_KILLS);
@@ -98,6 +126,11 @@ public class CustomGuiScreen extends Screen {
     private int cachedJumps = 0;
     private double cachedTotalDistance = 0.0;
     private boolean statsLoaded = false;
+
+    private static final int PILLAR_BORDER_WIDTH = 6; // Reduced from 6 to 3
+    private static final int TOP_BORDER_HEIGHT = 6; // Reduced from 6 to 3
+    private static final int BOTTOM_BORDER_HEIGHT = 6; // Reduced from 6 to 3
+    private static final int CORNER_SIZE = 6; // Now exactly 2x the pillar width
 
     public CustomGuiScreen() {
         super(Component.translatable("screen.agotmod.custom_gui"));
@@ -193,9 +226,9 @@ public class CustomGuiScreen extends Screen {
         int green = (color >> 8) & 0xFF;
         int blue = color & 0xFF;
 
-        red = Math.min(255, (int) (red * factor));
-        green = Math.min(255, (int) (green * factor));
-        blue = Math.min(255, (int) (blue * factor));
+        red = Math.min(255, (int)(red * factor));
+        green = Math.min(255, (int)(green * factor));
+        blue = Math.min(255, (int)(blue * factor));
 
         return (alpha << 24) | (red << 16) | (green << 8) | blue;
     }
@@ -229,7 +262,7 @@ public class CustomGuiScreen extends Screen {
                 if (minecraft != null && minecraft.player != null) {
                     minecraft.getSoundManager().play(
                             net.minecraft.client.resources.sounds.SimpleSoundInstance.forUI(
-                                    SoundEvents.UI_BUTTON_CLICK, 1.0F
+                                    ModSounds.BUTTON, 1.0F
                             )
                     );
                 }
@@ -239,23 +272,19 @@ public class CustomGuiScreen extends Screen {
         }
 
         if (selectedSection == 3) {
-            // Calculate left menu area dimensions based on proportions
             int centerRectX = sideMargin;
             int centerRectY = topMargin + barHeight + 5;
             int centerRectWidth = width - (2 * sideMargin);
             int centerRectHeight = height - topMargin - barHeight - (height / 32);
 
-            // Calculate the same proportions as in render method for consistency
             int leftMenuX = centerRectX + centerRectWidth / 32;
             int leftMenuY = centerRectY + centerRectHeight / 8;
             int leftMenuWidth = centerRectWidth / 7;
             int leftMenuHeight = (int)(centerRectHeight * 0.75);
 
-            // Calculate button dimensions to match render method
             int buttonSpacing = centerRectHeight / 100;
             int submenuButtonHeight = (leftMenuHeight - ((STAT_SUBMENU_LABELS.length - 1) * buttonSpacing)) / STAT_SUBMENU_LABELS.length;
 
-            // Check each submenu button
             for (int i = 0; i < STAT_SUBMENU_LABELS.length; i++) {
                 int buttonY = leftMenuY + (i * (submenuButtonHeight + buttonSpacing));
 
@@ -267,7 +296,7 @@ public class CustomGuiScreen extends Screen {
                     if (minecraft != null && minecraft.player != null) {
                         minecraft.getSoundManager().play(
                                 net.minecraft.client.resources.sounds.SimpleSoundInstance.forUI(
-                                        SoundEvents.UI_BUTTON_CLICK, 1.0F
+                                        ModSounds.BUTTON, 1.0F
                                 )
                         );
                     }
@@ -303,7 +332,6 @@ public class CustomGuiScreen extends Screen {
         int sideMargin = width / 32;
         int availableWidth = width - (2 * sideMargin);
         int rectWidth = availableWidth / 7;
-        int borderThickness = barHeight / 8;
 
         for (int i = 0; i < 7; i++) {
             int startX = sideMargin + (i * rectWidth);
@@ -314,32 +342,31 @@ public class CustomGuiScreen extends Screen {
             boolean isHovered = isMouseOverRect(mouseX, mouseY, startX, topMargin, endX - startX, barHeight);
             boolean isSelected = (i == selectedSection);
 
-            int rectangleColor;
-            int borderColor;
+            int buttonWidth = endX - startX;
+            int buttonHeight = barHeight;
 
-            if (isSelected) {
-                rectangleColor = brightenColor(RAINBOW_COLORS[i], HOVER_BRIGHTNESS);
-                borderColor = PARCHMENT_COLOR;
-            } else if (isHovered) {
-                rectangleColor = brightenColor(RAINBOW_COLORS[i], HOVER_BRIGHTNESS);
-                borderColor = brightenColor(BLACK_COLOR, HOVER_BRIGHTNESS);
-            } else {
-                rectangleColor = RAINBOW_COLORS[i];
-                borderColor = BLACK_COLOR;
-            }
+            int u = 0;
+            int v = 0;
+            // Extra small texture dimensions for extremely zoomed-in appearance
+            int textureWidth = 32;  // Reduced for extreme zoom-in
+            int textureHeight = 32; // Reduced for extreme zoom-in
 
-            guiGraphics.fill(startX, topMargin, endX, topMargin + barHeight, rectangleColor);
-            guiGraphics.fill(startX, topMargin, endX, topMargin + borderThickness, borderColor);
-            guiGraphics.fill(startX, topMargin + barHeight - borderThickness, endX, topMargin + barHeight, borderColor);
-            guiGraphics.fill(startX, topMargin, startX + borderThickness, topMargin + barHeight, borderColor);
-            guiGraphics.fill(endX - borderThickness, topMargin, endX, topMargin + barHeight, borderColor);
+            // Use regular texture for normal state, transparent texture for hover/selected states
+            ResourceLocation buttonTexture = (isHovered || isSelected) ?
+                    BUTTON_TEXTURES_TRANSPARANT[i] : BUTTON_TEXTURES[i];
+
+            renderTexturedButton(guiGraphics, buttonTexture,
+                    startX, topMargin, buttonWidth, buttonHeight,
+                    u, v, textureWidth, textureHeight, true);
+
+            // White overlay for hover/selected states removed
 
             String text = SECTION_LABELS[i];
             int textWidth = font.width(text);
             int textX = startX + ((endX - startX) - textWidth) / 2;
             int textY = topMargin + (barHeight - font.lineHeight) / 2;
 
-            guiGraphics.drawString(font, text, textX, textY, PARCHMENT_COLOR);
+            guiGraphics.drawString(font, text, textX, textY, isSelected ? 0xFFFFFFFF : PARCHMENT_COLOR, true);
         }
 
         if (selectedSection >= 0 && selectedSection < RAINBOW_COLORS.length) {
@@ -348,24 +375,9 @@ public class CustomGuiScreen extends Screen {
             int centerRectHeight = height - topMargin - barHeight - (height / 32);
             int centerRectY = topMargin + barHeight + 5;
 
-            int centerColor = (RAINBOW_COLORS[selectedSection] & 0x00FFFFFF) | 0xB0000000;
-            guiGraphics.fill(centerRectX, centerRectY, centerRectX + centerRectWidth, centerRectY + centerRectHeight, centerColor);
-
-            int centerBorderThickness = centerRectHeight / 16;
-            int centerBorderColor = BLACK_COLOR;
-
-            guiGraphics.fill(centerRectX, centerRectY,
-                    centerRectX + centerRectWidth, centerRectY + centerBorderThickness,
-                    centerBorderColor);
-            guiGraphics.fill(centerRectX, centerRectY + centerRectHeight - centerBorderThickness,
-                    centerRectX + centerRectWidth, centerRectY + centerRectHeight,
-                    centerBorderColor);
-            guiGraphics.fill(centerRectX, centerRectY,
-                    centerRectX + centerBorderThickness, centerRectY + centerRectHeight,
-                    centerBorderColor);
-            guiGraphics.fill(centerRectX + centerRectWidth - centerBorderThickness, centerRectY,
-                    centerRectX + centerRectWidth, centerRectY + centerRectHeight,
-                    centerBorderColor);
+            renderTexturedButton(guiGraphics, BUTTON_TEXTURES_TRANSPARANT[selectedSection],
+                    centerRectX, centerRectY, centerRectWidth, centerRectHeight,
+                    0, 0, 256, 256, false);
 
             String sectionTitle = SECTION_LABELS[selectedSection];
             int titleWidth = (int) (font.width(sectionTitle) * 1.5f);
@@ -386,7 +398,7 @@ public class CustomGuiScreen extends Screen {
                     loadPlayerStats();
                 }
 
-                int leftMenuX = centerRectX + centerRectWidth / 32; // Changed from /16 to /32
+                int leftMenuX = centerRectX + centerRectWidth / 32;
                 int leftMenuY = centerRectY + centerRectHeight / 8;
                 int leftMenuWidth = centerRectWidth / 7;
                 int leftMenuHeight = (int)(centerRectHeight * 0.75);
@@ -406,63 +418,28 @@ public class CustomGuiScreen extends Screen {
                             leftMenuWidth, submenuButtonHeight);
                     boolean isSelected = (i == selectedStatsSubmenu);
 
-                    int buttonColor;
-                    int buttonBorderColor;
+                    // Draw base button texture based on state (hovered or selected)
+                    ResourceLocation submenuButtonTexture = (isHovered || isSelected) ?
+                            BUTTON_TEXTURES_TRANSPARANT[3] : BUTTON_TEXTURES[3];
 
-                    if (isSelected) {
-                        buttonColor = brightenColor(RAINBOW_COLORS[3], HOVER_BRIGHTNESS);
-                        buttonBorderColor = PARCHMENT_COLOR;
-                    } else if (isHovered) {
-                        buttonColor = brightenColor(RAINBOW_COLORS[3], 1.2f);
-                        buttonBorderColor = brightenColor(BLACK_COLOR, HOVER_BRIGHTNESS);
-                    } else {
-                        buttonColor = RAINBOW_COLORS[3];
-                        buttonBorderColor = BLACK_COLOR;
-                    }
+                    renderTexturedButton(guiGraphics, submenuButtonTexture,
+                            leftMenuX, buttonY, leftMenuWidth, submenuButtonHeight,
+                            0, 0, 32, 32, true);
 
-                    guiGraphics.fill(leftMenuX, buttonY,
-                            leftMenuX + leftMenuWidth, buttonY + submenuButtonHeight,
-                            buttonColor);
-
-                    int subBorderThickness = submenuButtonHeight / 8;
-                    guiGraphics.fill(leftMenuX, buttonY,
-                            leftMenuX + leftMenuWidth, buttonY + subBorderThickness,
-                            buttonBorderColor);
-                    guiGraphics.fill(leftMenuX, buttonY + submenuButtonHeight - subBorderThickness,
-                            leftMenuX + leftMenuWidth, buttonY + submenuButtonHeight,
-                            buttonBorderColor);
-                    guiGraphics.fill(leftMenuX, buttonY,
-                            leftMenuX + subBorderThickness, buttonY + submenuButtonHeight,
-                            buttonBorderColor);
-                    guiGraphics.fill(leftMenuX + leftMenuWidth - subBorderThickness, buttonY,
-                            leftMenuX + leftMenuWidth, buttonY + submenuButtonHeight,
-                            buttonBorderColor);
+                    // White overlay for hover/selected states removed
 
                     String buttonText = STAT_SUBMENU_LABELS[i];
                     int buttonTextWidth = font.width(buttonText);
                     int buttonTextX = leftMenuX + (leftMenuWidth - buttonTextWidth) / 2;
                     int buttonTextY = buttonY + (submenuButtonHeight - font.lineHeight) / 2;
 
-                    guiGraphics.drawString(font, buttonText, buttonTextX, buttonTextY, PARCHMENT_COLOR);
+                    guiGraphics.drawString(font, buttonText, buttonTextX, buttonTextY,
+                            isSelected ? 0xFFFFFFFF : PARCHMENT_COLOR);
                 }
 
-                // Draw the content area
-                int contentBgColor = (centerColor & 0x00FFFFFF) | 0xC0000000;
-                guiGraphics.fill(contentAreaX, contentAreaY, contentAreaX + contentAreaWidth, contentAreaY + contentAreaHeight, contentBgColor);
-
-                int contentBorderThickness = centerBorderThickness / 4;
-                guiGraphics.fill(contentAreaX, contentAreaY,
-                        contentAreaX + contentAreaWidth, contentAreaY + contentBorderThickness,
-                        centerBorderColor);
-                guiGraphics.fill(contentAreaX, contentAreaY + contentAreaHeight - contentBorderThickness,
-                        contentAreaX + contentAreaWidth, contentAreaY + contentAreaHeight,
-                        centerBorderColor);
-                guiGraphics.fill(contentAreaX, contentAreaY,
-                        contentAreaX + contentBorderThickness, contentAreaY + contentAreaHeight,
-                        centerBorderColor);
-                guiGraphics.fill(contentAreaX + contentAreaWidth - contentBorderThickness, contentAreaY,
-                        contentAreaX + contentAreaWidth, contentAreaY + contentAreaHeight,
-                        centerBorderColor);
+                renderTexturedButton(guiGraphics, BUTTON_TEXTURES_TRANSPARANT[selectedSection],
+                        contentAreaX, contentAreaY, contentAreaWidth, contentAreaHeight,
+                        0, 0, 64, 64, false);
 
                 int statsX = contentAreaX + centerRectWidth / 32;
                 int statsY = contentAreaY + centerRectHeight / 32;
@@ -513,6 +490,90 @@ public class CustomGuiScreen extends Screen {
                         break;
                 }
             }
+        }
+    }
+
+    private void renderTexturedButton(GuiGraphics guiGraphics, ResourceLocation texture,
+                                      int x, int y, int width, int height,
+                                      int u, int v, int textureWidth, int textureHeight,
+                                      boolean withPillarBorders) {
+        guiGraphics.flush();
+
+        // Draw the main stained glass texture with 90% opacity
+        com.mojang.blaze3d.systems.RenderSystem.enableBlend();
+        com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.9F); // 90% opacity
+
+        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                texture, x, y, u, v, width, height, textureWidth, textureHeight);
+
+        // Reset to full opacity for borders
+        com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+
+        if (withPillarBorders) {
+            // Draw left pillar border
+            guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                    PILLAR_TEXTURE, x, y, 0, 0, PILLAR_BORDER_WIDTH, height, 16, 64);
+
+            // Draw right pillar border
+            guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                    PILLAR_TEXTURE, x + width - PILLAR_BORDER_WIDTH, y, 0, 0, PILLAR_BORDER_WIDTH, height, 16, 64);
+
+            // Draw top border
+            guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                    TOP_BORDER_TEXTURE, x, y, 0, 0, width, TOP_BORDER_HEIGHT, 64, 16);
+
+            // Draw bottom border using same texture but tinting it differently to make it visible
+            float r = 0.8f; // Slightly darkened
+            float g = 0.8f;
+            float b = 0.8f;
+            com.mojang.blaze3d.systems.RenderSystem.setShaderColor(r, g, b, 1.0f);
+
+            guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                    TOP_BORDER_TEXTURE, x, y + height - BOTTOM_BORDER_HEIGHT, 0, 0, width, BOTTOM_BORDER_HEIGHT, 64, 16);
+
+            // Reset color before drawing corners
+            com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+
+            // Save the current matrix stack
+            com.mojang.blaze3d.vertex.PoseStack poseStack = guiGraphics.pose();
+
+            // Draw bottom-left corner - original orientation
+            poseStack.pushPose();
+            guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                    CORNER_TEXTURE,
+                    x, y + height - BOTTOM_BORDER_HEIGHT - 6,
+                    0, 0, 12, 12, 12, 12);
+            poseStack.popPose();
+
+            // Draw bottom-right corner - with rotation
+            poseStack.pushPose();
+            poseStack.translate(x + width - 6, y + height - BOTTOM_BORDER_HEIGHT, 0);
+            poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(270));
+            poseStack.translate(-6, -6, 0);
+            guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                    CORNER_TEXTURE,
+                    0, 0, 0, 0, 12, 12, 12, 12);
+            poseStack.popPose();
+
+            // Draw top-right corner - with rotation
+            poseStack.pushPose();
+            poseStack.translate(x + width - 6, y + 6, 0);
+            poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(180));
+            poseStack.translate(-6, -6, 0);
+            guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                    CORNER_TEXTURE,
+                    0, 0, 0, 0, 12, 12, 12, 12);
+            poseStack.popPose();
+
+            // Draw top-left corner - with rotation
+            poseStack.pushPose();
+            poseStack.translate(x + 6, y + 6, 0);
+            poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(90));
+            poseStack.translate(-6, -6, 0);
+            guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                    CORNER_TEXTURE,
+                    0, 0, 0, 0, 12, 12, 12, 12);
+            poseStack.popPose();
         }
     }
 
