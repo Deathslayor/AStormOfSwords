@@ -1,4 +1,3 @@
-
 package net.darkflameproduction.agotmod.gui;
 
 import net.darkflameproduction.agotmod.AGoTMod;
@@ -43,14 +42,14 @@ public class CustomGuiScreen extends Screen {
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/corner.png");
     private static final ResourceLocation STONE_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/background.png");
-    private static final ResourceLocation PAPER_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/paper.png");
-    private static final ResourceLocation PAPER_CORNER_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/papercorner.png");
     private static final ResourceLocation PAPER_SIDE_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/paperside.png");
     private static final ResourceLocation PAPER_SIDETOP_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/papersidetop.png");
+    private static final ResourceLocation PAPER_CORNER_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/papercorner.png");
+    private static final ResourceLocation PAPER_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/paper.png");
 
     private static final String[] SECTION_LABELS = {
             "Map", "Quests", "Skills", "Stats", "House", "Faction", "Guilds"
@@ -357,10 +356,10 @@ public class CustomGuiScreen extends Screen {
         int panelY = layout.contentY + layout.contentHeight / 16;
         int panelHeight = layout.contentHeight - (layout.contentHeight / 8);
 
-        renderStonePanel(guiGraphics, leftPanelX, panelY, panelWidth, panelHeight);
+        renderPaperPanel(guiGraphics, leftPanelX, panelY, panelWidth, panelHeight);
         drawSubmenuTitle(guiGraphics, "Combat Skills", leftPanelX, panelY);
 
-        renderStonePanel(guiGraphics, rightPanelX, panelY, panelWidth, panelHeight);
+        renderPaperPanel(guiGraphics, rightPanelX, panelY, panelWidth, panelHeight);
         drawSubmenuTitle(guiGraphics, "Crafting Skills", rightPanelX, panelY);
 
         int leftStatsX = leftPanelX + layout.contentWidth / 32;
@@ -546,6 +545,102 @@ public class CustomGuiScreen extends Screen {
         }
     }
 
+    private void renderTexturedPaperPanel(GuiGraphics guiGraphics, ResourceLocation texture,
+                                     int x, int y, int width, int height, boolean withBorders) {
+        guiGraphics.flush();
+
+        com.mojang.blaze3d.systems.RenderSystem.enableBlend();
+        com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.9F);
+
+        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                texture, x, y, 0, 0, width, height, 32, 32);
+
+        com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+
+        if (withBorders) {
+            drawPaperPanelBorders(guiGraphics, x, y, width, height);
+        }
+    }
+
+    private void renderPaperPanel(GuiGraphics guiGraphics, int x, int y, int width, int height) {
+        guiGraphics.flush();
+
+        com.mojang.blaze3d.systems.RenderSystem.enableBlend();
+        com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.9F);
+
+        int tileSize = 16;
+        for (int tileX = 0; tileX < width; tileX += tileSize) {
+            for (int tileY = 0; tileY < height; tileY += tileSize) {
+                int tileWidth = Math.min(tileSize, width - tileX);
+                int tileHeight = Math.min(tileSize, height - tileY);
+
+                guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                        PAPER_TEXTURE, x + tileX, y + tileY, 0, 0,
+                        tileWidth, tileHeight, tileSize, tileSize);
+            }
+        }
+
+        com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+
+        drawPaperPanelBorders(guiGraphics, x, y, width, height);
+    }
+
+    private void drawPaperPanelBorders(GuiGraphics guiGraphics, int x, int y, int width, int height) {
+        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                PAPER_SIDE_TEXTURE, x, y, 0, 0, BORDER_PILLAR_WIDTH, height, 16, 64);
+
+        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                PAPER_SIDE_TEXTURE, x + width - BORDER_PILLAR_WIDTH, y, 0, 0,
+                BORDER_PILLAR_WIDTH, height, 16, 64);
+
+        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                PAPER_SIDETOP_TEXTURE, x, y, 0, 0, width, BORDER_HEIGHT, 64, 16);
+
+        com.mojang.blaze3d.systems.RenderSystem.setShaderColor(0.8f, 0.8f, 0.8f, 1.0f);
+
+        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                PAPER_SIDETOP_TEXTURE, x, y + height - BORDER_HEIGHT, 0, 0,
+                width, BORDER_HEIGHT, 64, 16);
+
+        com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+
+        drawPaperCorners(guiGraphics, x, y, width, height);
+    }
+
+    private void drawPaperCorners(GuiGraphics guiGraphics, int x, int y, int width, int height) {
+        com.mojang.blaze3d.vertex.PoseStack poseStack = guiGraphics.pose();
+
+        poseStack.pushPose();
+        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                PAPER_CORNER_TEXTURE, x, y + height - BORDER_HEIGHT - CORNER_SIZE/2,
+                0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
+        poseStack.popPose();
+
+        poseStack.pushPose();
+        poseStack.translate(x + width - CORNER_SIZE/2, y + height - BORDER_HEIGHT, 0);
+        poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(270));
+        poseStack.translate(-CORNER_SIZE/2, -CORNER_SIZE/2, 0);
+        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                PAPER_CORNER_TEXTURE, 0, 0, 0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
+        poseStack.popPose();
+
+        poseStack.pushPose();
+        poseStack.translate(x + width - CORNER_SIZE/2, y + CORNER_SIZE/2, 0);
+        poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(180));
+        poseStack.translate(-CORNER_SIZE/2, -CORNER_SIZE/2, 0);
+        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                PAPER_CORNER_TEXTURE, 0, 0, 0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
+        poseStack.popPose();
+
+        poseStack.pushPose();
+        poseStack.translate(x + CORNER_SIZE/2, y + CORNER_SIZE/2, 0);
+        poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(90));
+        poseStack.translate(-CORNER_SIZE/2, -CORNER_SIZE/2, 0);
+        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                PAPER_CORNER_TEXTURE, 0, 0, 0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
+        poseStack.popPose();
+    }
+
     private void renderStonePanel(GuiGraphics guiGraphics, int x, int y, int width, int height) {
         guiGraphics.flush();
 
@@ -564,10 +659,14 @@ public class CustomGuiScreen extends Screen {
             }
         }
 
+
+
         com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
         drawPanelBorders(guiGraphics, x, y, width, height);
     }
+
+
 
     private void drawPanelBorders(GuiGraphics guiGraphics, int x, int y, int width, int height) {
         guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
