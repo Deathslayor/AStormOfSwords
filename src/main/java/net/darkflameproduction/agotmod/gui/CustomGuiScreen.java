@@ -1,3 +1,4 @@
+
 package net.darkflameproduction.agotmod.gui;
 
 import net.darkflameproduction.agotmod.AGoTMod;
@@ -41,7 +42,15 @@ public class CustomGuiScreen extends Screen {
     private static final ResourceLocation CORNER_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/corner.png");
     private static final ResourceLocation STONE_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/stone.png");
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/background.png");
+    private static final ResourceLocation PAPER_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/paper.png");
+    private static final ResourceLocation PAPER_CORNER_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/papercorner.png");
+    private static final ResourceLocation PAPER_SIDE_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/paperside.png");
+    private static final ResourceLocation PAPER_SIDETOP_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/papersidetop.png");
 
     private static final String[] SECTION_LABELS = {
             "Map", "Quests", "Skills", "Stats", "House", "Faction", "Guilds"
@@ -49,6 +58,14 @@ public class CustomGuiScreen extends Screen {
 
     private static final String[] STAT_SUBMENU_LABELS = {
             "General Stats", "Combat Stats", "Crime", "Magic", "Weapon Usage", "Tool Usage"
+    };
+
+    private static final String[] COMBAT_SKILLS = {
+            "Swordsmanship", "Archery", "Defense", "Dual-Wielding", "Battle Tactics"
+    };
+
+    private static final String[] CRAFTING_SKILLS = {
+            "Smithing", "Alchemy", "Enchanting", "Cooking", "Tailoring"
     };
 
     private static final int[] RAINBOW_COLORS = {
@@ -92,6 +109,9 @@ public class CustomGuiScreen extends Screen {
     private int selectedSection;
     private static int lastSelectedStatsSubmenu = 0;
     private int selectedStatsSubmenu;
+
+    private int[] combatSkillLevels = {45, 32, 27, 18, 15};
+    private int[] craftingSkillLevels = {39, 22, 31, 45, 17};
 
     private int cachedDeaths = 0;
     private int cachedMobKills = 0;
@@ -211,9 +231,8 @@ public class CustomGuiScreen extends Screen {
         }
 
         if (selectedSection == 3) {
-            // Match updated submenu dimensions in the mouseClicked method
             int submenuWidth = layout.contentWidth / 6;
-            int submenuStartX = layout.contentX + layout.contentWidth / 128;  // Moved much more to the left
+            int submenuStartX = layout.contentX + layout.contentWidth / 128;
             int submenuStartY = layout.contentY + layout.contentHeight / 16;
             int submenuHeight = layout.contentHeight - (layout.contentHeight / 8);
 
@@ -226,8 +245,7 @@ public class CustomGuiScreen extends Screen {
             for (int i = 0; i < STAT_SUBMENU_LABELS.length; i++) {
                 int buttonY = submenuStartYCentered + (i * (buttonHeight + buttonSpacing));
 
-                // Shift the hitbox to match the visual button position
-                int buttonRightOffset = 10; // Same as in render method
+                int buttonRightOffset = 10;
                 if (isMouseOverRect((int) mouseX, (int) mouseY, submenuStartX + buttonRightOffset, buttonY,
                         submenuWidth - buttonRightOffset, buttonHeight)) {
 
@@ -286,7 +304,10 @@ public class CustomGuiScreen extends Screen {
             drawSectionTitle(guiGraphics, SECTION_LABELS[selectedSection],
                     layout.contentX, layout.contentY, layout.contentWidth);
 
-            if (selectedSection == 3) {
+            if (selectedSection == 2) {
+                drawSkillsSection(guiGraphics, mouseX, mouseY, layout);
+            }
+            else if (selectedSection == 3) {
                 drawStatsSection(guiGraphics, mouseX, mouseY, layout);
             }
         }
@@ -322,31 +343,78 @@ public class CustomGuiScreen extends Screen {
         }
     }
 
+    private void drawSkillsSection(GuiGraphics guiGraphics, int mouseX, int mouseY, ScreenLayout layout) {
+        int panelGap = 4;
+
+        int panelWidth = (int)(layout.contentWidth * 0.48);
+
+        int totalWidth = (panelWidth * 2) + panelGap;
+        int startX = layout.contentX + ((layout.contentWidth - totalWidth) / 2);
+
+        int leftPanelX = startX;
+        int rightPanelX = leftPanelX + panelWidth + panelGap;
+
+        int panelY = layout.contentY + layout.contentHeight / 16;
+        int panelHeight = layout.contentHeight - (layout.contentHeight / 8);
+
+        renderStonePanel(guiGraphics, leftPanelX, panelY, panelWidth, panelHeight);
+        drawSubmenuTitle(guiGraphics, "Combat Skills", leftPanelX, panelY);
+
+        renderStonePanel(guiGraphics, rightPanelX, panelY, panelWidth, panelHeight);
+        drawSubmenuTitle(guiGraphics, "Crafting Skills", rightPanelX, panelY);
+
+        int leftStatsX = leftPanelX + layout.contentWidth / 32;
+        int statsY = panelY + layout.contentHeight / 12 + 20;
+        int lineSpacing = layout.contentHeight / 16;
+
+        for (int i = 0; i < COMBAT_SKILLS.length; i++) {
+            drawSkillStat(guiGraphics, COMBAT_SKILLS[i], combatSkillLevels[i],
+                    leftStatsX, statsY + (lineSpacing * i));
+        }
+
+        int rightStatsX = rightPanelX + layout.contentWidth / 32;
+
+        for (int i = 0; i < CRAFTING_SKILLS.length; i++) {
+            drawSkillStat(guiGraphics, CRAFTING_SKILLS[i], craftingSkillLevels[i],
+                    rightStatsX, statsY + (lineSpacing * i));
+        }
+    }
+
+    private void drawSkillStat(GuiGraphics guiGraphics, String skillName, int level, int x, int y) {
+        float percentage = level / 50.0f;
+        int maxBarWidth = 120;
+        int barWidth = (int)(maxBarWidth * percentage);
+        int barHeight = 8;
+
+        String text = skillName + ": " + level;
+        guiGraphics.drawString(font, text, x, y, PARCHMENT_COLOR);
+
+        guiGraphics.fill(x, y + font.lineHeight + 2, x + maxBarWidth, y + font.lineHeight + 2 + barHeight, 0xFF555555);
+
+        guiGraphics.fill(x, y + font.lineHeight + 2, x + barWidth, y + font.lineHeight + 2 + barHeight, RAINBOW_COLORS[2]);
+    }
+
     private void drawStatsSection(GuiGraphics guiGraphics, int mouseX, int mouseY, ScreenLayout layout) {
         if (!areStatsLoaded && minecraft != null) {
             loadPlayerStatistics();
         }
 
-        // Improved submenu layout
-        int submenuWidth = layout.contentWidth / 6;  // Narrower submenu
-        int submenuStartX = layout.contentX + layout.contentWidth / 128;  // Moved much more to the left
+        int submenuWidth = layout.contentWidth / 6;
+        int submenuStartX = layout.contentX + layout.contentWidth / 128;
         int submenuStartY = layout.contentY + layout.contentHeight / 16;
         int submenuHeight = layout.contentHeight - (layout.contentHeight / 8);
 
-        // Calculate proper button heights and spacing
         int buttonHeight = submenuHeight / 8;
         int buttonSpacing = submenuHeight / 24;
         int totalButtonsHeight = (buttonHeight * STAT_SUBMENU_LABELS.length) +
                 (buttonSpacing * (STAT_SUBMENU_LABELS.length - 1));
         int submenuStartYCentered = submenuStartY + (submenuHeight - totalButtonsHeight) / 2;
 
-        // Content area positioning - moved to right with proper spacing
         int contentStartX = submenuStartX + submenuWidth + layout.contentWidth / 32;
         int contentStartY = submenuStartY;
         int contentWidth = layout.contentWidth - submenuWidth - (layout.contentWidth / 16);
         int contentHeight = submenuHeight;
 
-        // Draw submenu buttons with adjusted right padding
         for (int i = 0; i < STAT_SUBMENU_LABELS.length; i++) {
             int buttonY = submenuStartYCentered + (i * (buttonHeight + buttonSpacing));
 
@@ -355,21 +423,18 @@ public class CustomGuiScreen extends Screen {
             boolean isSelected = (i == selectedStatsSubmenu);
 
             ResourceLocation buttonTexture = (isHovered || isSelected)
-                    ? STAINED_GLASS_TRANSPARENT_TEXTURES[3]  // Green transparent
-                    : STAINED_GLASS_TEXTURES[3];            // Green solid
+                    ? STAINED_GLASS_TRANSPARENT_TEXTURES[3]
+                    : STAINED_GLASS_TEXTURES[3];
 
-            // Shift the button itself slightly right while keeping overall submenu position
-            int buttonRightOffset = 10; // Pixels to shift right
+            int buttonRightOffset = 10;
             renderTexturedPanel(guiGraphics, buttonTexture, submenuStartX + buttonRightOffset, buttonY,
                     submenuWidth - buttonRightOffset, buttonHeight, true);
 
             String buttonText = STAT_SUBMENU_LABELS[i];
             int buttonTextWidth = font.width(buttonText);
 
-            // Added a small offset to move text to the right and ensure vertical centering
             int buttonTextX = submenuStartX + buttonRightOffset + ((submenuWidth - buttonRightOffset - buttonTextWidth) / 2);
 
-            // Calculate exact vertical center by getting the precise height of text vs button
             int textHeight = font.lineHeight;
             int buttonTextY = buttonY + (buttonHeight - textHeight) / 2;
 
@@ -377,7 +442,6 @@ public class CustomGuiScreen extends Screen {
                     isSelected ? 0xFFFFFFFF : PARCHMENT_COLOR);
         }
 
-        // Draw content panel with stats
         renderStonePanel(guiGraphics, contentStartX, contentStartY,
                 contentWidth, contentHeight);
 
@@ -429,7 +493,7 @@ public class CustomGuiScreen extends Screen {
     private void drawSectionTitle(GuiGraphics guiGraphics, String title, int x, int width, int y) {
         int titleWidth = (int) (font.width(title) * 1.5f);
         int titleX = x + (width - titleWidth) / 2;
-        int titleY = y + 12;  // Slightly higher to create more space below
+        int titleY = y + 12;
 
         float titleScale = 1.5f;
         guiGraphics.pose().pushPose();
@@ -443,7 +507,7 @@ public class CustomGuiScreen extends Screen {
 
     private void drawSubmenuTitle(GuiGraphics guiGraphics, String title, int x, int y) {
         float scale = 1.2f;
-        int titleY = y + 18;  // Better vertical positioning
+        int titleY = y + 18;
 
         guiGraphics.pose().pushPose();
         guiGraphics.pose().scale(scale, scale, 1.0f);
