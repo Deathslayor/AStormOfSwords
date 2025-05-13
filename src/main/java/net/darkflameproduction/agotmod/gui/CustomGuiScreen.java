@@ -6,17 +6,15 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
 import net.minecraft.stats.Stat;
 import net.minecraft.stats.StatsCounter;
-
 
 public class CustomGuiScreen extends Screen {
     private static final ResourceLocation BLUR_LOCATION =
             ResourceLocation.fromNamespaceAndPath("minecraft", "shaders/post/blur.json");
 
-    private static final ResourceLocation[] BUTTON_TEXTURES = {
+    private static final ResourceLocation[] STAINED_GLASS_TEXTURES = {
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/stained_glass_red.png"),
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/stained_glass_orange.png"),
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/stained_glass_yellow.png"),
@@ -26,7 +24,7 @@ public class CustomGuiScreen extends Screen {
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/stained_glass_magenta.png")
     };
 
-    private static final ResourceLocation[] BUTTON_TEXTURES_TRANSPARANT = {
+    private static final ResourceLocation[] STAINED_GLASS_TRANSPARENT_TEXTURES = {
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/stained_glass_red_transparant.png"),
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/stained_glass_orange_transparant.png"),
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/stained_glass_yellow_transparant.png"),
@@ -36,101 +34,71 @@ public class CustomGuiScreen extends Screen {
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/stained_glass_magenta_transparant.png")
     };
 
-    // Border textures
     private static final ResourceLocation PILLAR_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/pillar.png");
-    private static final ResourceLocation TOP_BORDER_TEXTURE =
+    private static final ResourceLocation BORDER_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/bottom.png");
     private static final ResourceLocation CORNER_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/corner.png");
-
-    private static final int[] RAINBOW_COLORS = {
-            0xFF990000,
-            0xFF994C00,
-            0xFF999900,
-            0xFF009900,
-            0xFF000099,
-            0xFF2D0050,
-            0xFF57007F
-    };
+    private static final ResourceLocation STONE_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/stone.png");
 
     private static final String[] SECTION_LABELS = {
-            "Map",
-            "Quests",
-            "Skills",
-            "Stats",
-            "House",
-            "Faction",
-            "Guilds"
+            "Map", "Quests", "Skills", "Stats", "House", "Faction", "Guilds"
     };
 
     private static final String[] STAT_SUBMENU_LABELS = {
-            "General Stats",
-            "Combat Stats",
-            "Crime",
-            "Magic",
-            "Weapon Usage",
-            "Tool Usage"
+            "General Stats", "Combat Stats", "Crime", "Magic", "Weapon Usage", "Tool Usage"
+    };
+
+    private static final int[] RAINBOW_COLORS = {
+            0xFF990000, 0xFF994C00, 0xFF999900, 0xFF009900,
+            0xFF000099, 0xFF2D0050, 0xFF57007F
     };
 
     private static final int PARCHMENT_COLOR = 0xFFF5E7C1;
     private static final int BLACK_COLOR = 0xFF000000;
-    private static final Stat<ResourceLocation> DEATH_COUNT_STAT =
-            Stats.CUSTOM.get(Stats.DEATHS);
-    private static final Stat<ResourceLocation> KILLS_MOB_STAT =
-            Stats.CUSTOM.get(Stats.MOB_KILLS);
-    private static final Stat<ResourceLocation> PLAYER_KILLS_STAT =
-            Stats.CUSTOM.get(Stats.PLAYER_KILLS);
-    private static final Stat<ResourceLocation> JUMP_STAT =
-            Stats.CUSTOM.get(Stats.JUMP);
-    private static final Stat<ResourceLocation> DISTANCE_CLIMB =
-            Stats.CUSTOM.get(Stats.CLIMB_ONE_CM);
-    private static final Stat<ResourceLocation> DISTANCE_CROUCH =
-            Stats.CUSTOM.get(Stats.CROUCH_ONE_CM);
-    private static final Stat<ResourceLocation> DISTANCE_FALL =
-            Stats.CUSTOM.get(Stats.FALL_ONE_CM);
-    private static final Stat<ResourceLocation> DISTANCE_FLY =
-            Stats.CUSTOM.get(Stats.FLY_ONE_CM);
-    private static final Stat<ResourceLocation> DISTANCE_SPRINT =
-            Stats.CUSTOM.get(Stats.SPRINT_ONE_CM);
-    private static final Stat<ResourceLocation> DISTANCE_SWIM =
-            Stats.CUSTOM.get(Stats.SWIM_ONE_CM);
-    private static final Stat<ResourceLocation> DISTANCE_WALK =
-            Stats.CUSTOM.get(Stats.WALK_ONE_CM);
-    private static final Stat<ResourceLocation> DISTANCE_WALK_ON_WATER =
-            Stats.CUSTOM.get(Stats.WALK_ON_WATER_ONE_CM);
-    private static final Stat<ResourceLocation> DISTANCE_WALK_UNDER_WATER =
-            Stats.CUSTOM.get(Stats.WALK_UNDER_WATER_ONE_CM);
-    private static final Stat<ResourceLocation> DISTANCE_BOAT =
-            Stats.CUSTOM.get(Stats.BOAT_ONE_CM);
-    private static final Stat<ResourceLocation> DISTANCE_AVIATE =
-            Stats.CUSTOM.get(Stats.AVIATE_ONE_CM);
-    private static final Stat<ResourceLocation> DISTANCE_HORSE =
-            Stats.CUSTOM.get(Stats.HORSE_ONE_CM);
-    private static final Stat<ResourceLocation> DISTANCE_MINECART =
-            Stats.CUSTOM.get(Stats.MINECART_ONE_CM);
-    private static final Stat<ResourceLocation> DISTANCE_PIG =
-            Stats.CUSTOM.get(Stats.PIG_ONE_CM);
-    private static final Stat<ResourceLocation> DISTANCE_STRIDER =
-            Stats.CUSTOM.get(Stats.STRIDER_ONE_CM);
 
-    private boolean usingShader = false;
-    private float lastHealth = 0;
+    private static final Stat<ResourceLocation> DEATH_COUNT_STAT = Stats.CUSTOM.get(Stats.DEATHS);
+    private static final Stat<ResourceLocation> KILLS_MOB_STAT = Stats.CUSTOM.get(Stats.MOB_KILLS);
+    private static final Stat<ResourceLocation> PLAYER_KILLS_STAT = Stats.CUSTOM.get(Stats.PLAYER_KILLS);
+    private static final Stat<ResourceLocation> JUMP_STAT = Stats.CUSTOM.get(Stats.JUMP);
+
+    private static final Stat<ResourceLocation>[] DISTANCE_STATS = new Stat[] {
+            Stats.CUSTOM.get(Stats.CLIMB_ONE_CM),
+            Stats.CUSTOM.get(Stats.CROUCH_ONE_CM),
+            Stats.CUSTOM.get(Stats.FALL_ONE_CM),
+            Stats.CUSTOM.get(Stats.FLY_ONE_CM),
+            Stats.CUSTOM.get(Stats.SPRINT_ONE_CM),
+            Stats.CUSTOM.get(Stats.SWIM_ONE_CM),
+            Stats.CUSTOM.get(Stats.WALK_ONE_CM),
+            Stats.CUSTOM.get(Stats.WALK_ON_WATER_ONE_CM),
+            Stats.CUSTOM.get(Stats.WALK_UNDER_WATER_ONE_CM),
+            Stats.CUSTOM.get(Stats.BOAT_ONE_CM),
+            Stats.CUSTOM.get(Stats.AVIATE_ONE_CM),
+            Stats.CUSTOM.get(Stats.HORSE_ONE_CM),
+            Stats.CUSTOM.get(Stats.MINECART_ONE_CM),
+            Stats.CUSTOM.get(Stats.PIG_ONE_CM),
+            Stats.CUSTOM.get(Stats.STRIDER_ONE_CM)
+    };
+
+    private static final int BORDER_PILLAR_WIDTH = 6;
+    private static final int BORDER_HEIGHT = 6;
+    private static final int CORNER_SIZE = 12;
+
+    private boolean isUsingShader = false;
+    private float lastPlayerHealth = 0;
     private static int lastSelectedSection = 2;
     private int selectedSection;
     private static int lastSelectedStatsSubmenu = 0;
     private int selectedStatsSubmenu;
-    private int cachedDeathCount = 0;
+
+    private int cachedDeaths = 0;
     private int cachedMobKills = 0;
     private int cachedPlayerKills = 0;
     private int cachedJumps = 0;
     private double cachedTotalDistance = 0.0;
-    private boolean statsLoaded = false;
-
-    private static final int PILLAR_BORDER_WIDTH = 6; // Reduced from 6 to 3
-    private static final int TOP_BORDER_HEIGHT = 6; // Reduced from 6 to 3
-    private static final int BOTTOM_BORDER_HEIGHT = 6; // Reduced from 6 to 3
-    private static final int CORNER_SIZE = 6; // Now exactly 2x the pillar width
+    private boolean areStatsLoaded = false;
 
     public CustomGuiScreen() {
         super(Component.translatable("screen.agotmod.custom_gui"));
@@ -141,172 +109,152 @@ public class CustomGuiScreen extends Screen {
     @Override
     protected void init() {
         super.init();
+
         if (minecraft != null && minecraft.player != null) {
-            lastHealth = minecraft.player.getHealth();
-            loadPlayerStats();
+            lastPlayerHealth = minecraft.player.getHealth();
+            loadPlayerStatistics();
         }
-        applyBlurShader();
+
+        applyBlurEffect();
     }
 
-    private void loadPlayerStats() {
-        if (minecraft != null && minecraft.player != null) {
-            StatsCounter stats = minecraft.player.getStats();
-            if (!statsLoaded) {
-                try {
-                    if (minecraft.getConnection() != null) {
-                        minecraft.getConnection().send(new net.minecraft.network.protocol.game.ServerboundClientCommandPacket(
-                                net.minecraft.network.protocol.game.ServerboundClientCommandPacket.Action.REQUEST_STATS));
-                        AGoTMod.LOGGER.info("Requested player statistics from server");
-                        updateCachedStats(stats);
-                        statsLoaded = true;
-                    }
-                } catch (Exception e) {
-                    AGoTMod.LOGGER.error("Failed to request stats from server: " + e.getMessage());
-                    updateCachedStats(stats);
-                }
-            } else {
-                updateCachedStats(stats);
-            }
+    private void loadPlayerStatistics() {
+        if (minecraft == null || minecraft.player == null) {
+            return;
         }
-    }
 
-    private void updateCachedStats(StatsCounter stats) {
-        if (stats != null) {
-            cachedDeathCount = stats.getValue(DEATH_COUNT_STAT);
-            cachedMobKills = stats.getValue(KILLS_MOB_STAT);
-            cachedPlayerKills = stats.getValue(PLAYER_KILLS_STAT);
-            cachedJumps = stats.getValue(JUMP_STAT);
+        StatsCounter playerStats = minecraft.player.getStats();
 
-            long totalDistanceCm = 0;
-            totalDistanceCm += stats.getValue(DISTANCE_CLIMB);
-            totalDistanceCm += stats.getValue(DISTANCE_CROUCH);
-            totalDistanceCm += stats.getValue(DISTANCE_FALL);
-            totalDistanceCm += stats.getValue(DISTANCE_FLY);
-            totalDistanceCm += stats.getValue(DISTANCE_SPRINT);
-            totalDistanceCm += stats.getValue(DISTANCE_SWIM);
-            totalDistanceCm += stats.getValue(DISTANCE_WALK);
-            totalDistanceCm += stats.getValue(DISTANCE_WALK_ON_WATER);
-            totalDistanceCm += stats.getValue(DISTANCE_WALK_UNDER_WATER);
-            totalDistanceCm += stats.getValue(DISTANCE_BOAT);
-            totalDistanceCm += stats.getValue(DISTANCE_AVIATE);
-            totalDistanceCm += stats.getValue(DISTANCE_HORSE);
-            totalDistanceCm += stats.getValue(DISTANCE_MINECART);
-            totalDistanceCm += stats.getValue(DISTANCE_PIG);
-            totalDistanceCm += stats.getValue(DISTANCE_STRIDER);
-
-            cachedTotalDistance = totalDistanceCm / 100000.0;
-        }
-    }
-
-    private void applyBlurShader() {
-        if (minecraft != null) {
+        if (!areStatsLoaded) {
             try {
-                if (minecraft.gameRenderer.getClass().getMethod("loadPostShader", ResourceLocation.class) != null) {
-                    minecraft.gameRenderer.getClass().getMethod("loadPostShader", ResourceLocation.class)
-                            .invoke(minecraft.gameRenderer, BLUR_LOCATION);
-                    usingShader = true;
+                if (minecraft.getConnection() != null) {
+                    minecraft.getConnection().send(new net.minecraft.network.protocol.game.ServerboundClientCommandPacket(
+                            net.minecraft.network.protocol.game.ServerboundClientCommandPacket.Action.REQUEST_STATS));
+                    AGoTMod.LOGGER.info("Requested player statistics from server");
+                    updateCachedStatistics(playerStats);
+                    areStatsLoaded = true;
                 }
-            } catch (Exception e1) {
-                try {
-                    if (minecraft.gameRenderer.getClass().getMethod("loadPostPass", ResourceLocation.class) != null) {
-                        minecraft.gameRenderer.getClass().getMethod("loadPostPass", ResourceLocation.class)
-                                .invoke(minecraft.gameRenderer, BLUR_LOCATION);
-                        usingShader = true;
-                    }
-                } catch (Exception e2) {
-                    AGoTMod.LOGGER.error("Could not apply blur shader: " + e2.getMessage());
-                }
+            } catch (Exception e) {
+                AGoTMod.LOGGER.error("Failed to request statistics from server: " + e.getMessage());
+                updateCachedStatistics(playerStats);
             }
+        } else {
+            updateCachedStatistics(playerStats);
         }
     }
 
-    private int brightenColor(int color, float factor) {
-        int alpha = (color >> 24) & 0xFF;
-        int red = (color >> 16) & 0xFF;
-        int green = (color >> 8) & 0xFF;
-        int blue = color & 0xFF;
+    private void updateCachedStatistics(StatsCounter stats) {
+        if (stats == null) {
+            return;
+        }
 
-        red = Math.min(255, (int)(red * factor));
-        green = Math.min(255, (int)(green * factor));
-        blue = Math.min(255, (int)(blue * factor));
+        cachedDeaths = stats.getValue(DEATH_COUNT_STAT);
+        cachedMobKills = stats.getValue(KILLS_MOB_STAT);
+        cachedPlayerKills = stats.getValue(PLAYER_KILLS_STAT);
+        cachedJumps = stats.getValue(JUMP_STAT);
 
-        return (alpha << 24) | (red << 16) | (green << 8) | blue;
+        long totalDistanceCentimeters = 0;
+        for (Stat<ResourceLocation> distanceStat : DISTANCE_STATS) {
+            totalDistanceCentimeters += stats.getValue(distanceStat);
+        }
+
+        cachedTotalDistance = totalDistanceCentimeters / 100000.0;
     }
 
-    private boolean isMouseOverRect(int mouseX, int mouseY, int x, int y, int width, int height) {
-        return mouseX >= x && mouseX < x + width && mouseY >= y && mouseY < y + height;
+    private void applyBlurEffect() {
+        if (minecraft == null) {
+            return;
+        }
+
+        try {
+            if (minecraft.gameRenderer.getClass().getMethod("loadPostShader", ResourceLocation.class) != null) {
+                minecraft.gameRenderer.getClass().getMethod("loadPostShader", ResourceLocation.class)
+                        .invoke(minecraft.gameRenderer, BLUR_LOCATION);
+                isUsingShader = true;
+            }
+        } catch (Exception e1) {
+            try {
+                if (minecraft.gameRenderer.getClass().getMethod("loadPostPass", ResourceLocation.class) != null) {
+                    minecraft.gameRenderer.getClass().getMethod("loadPostPass", ResourceLocation.class)
+                            .invoke(minecraft.gameRenderer, BLUR_LOCATION);
+                    isUsingShader = true;
+                }
+            } catch (Exception e2) {
+                AGoTMod.LOGGER.error("Failed to apply blur shader: " + e2.getMessage());
+            }
+        }
     }
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        int barHeight = height / 8;
-        int topMargin = height / 32;
-        int sideMargin = width / 32;
-        int availableWidth = width - (2 * sideMargin);
-        int rectWidth = availableWidth / 7;
+        ScreenLayout layout = new ScreenLayout(width, height);
 
-        for (int i = 0; i < 7; i++) {
-            int startX = sideMargin + (i * rectWidth);
-            int endX = sideMargin + ((i + 1) * rectWidth);
+        for (int i = 0; i < SECTION_LABELS.length; i++) {
+            int startX = layout.sideMargin + (i * layout.sectionButtonWidth);
+            int endX = (i == SECTION_LABELS.length - 1)
+                    ? width - layout.sideMargin
+                    : layout.sideMargin + ((i + 1) * layout.sectionButtonWidth);
 
-            if (i == 6) endX = width - sideMargin;
+            if (isMouseOverRect((int) mouseX, (int) mouseY, startX, layout.topMargin,
+                    endX - startX, layout.sectionButtonHeight)) {
 
-            if (isMouseOverRect((int) mouseX, (int) mouseY, startX, topMargin, endX - startX, barHeight)) {
                 selectedSection = i;
                 lastSelectedSection = i;
 
-                if (i == 3 && !statsLoaded && minecraft != null) {
-                    loadPlayerStats();
+                if (i == 3 && !areStatsLoaded && minecraft != null) {
+                    loadPlayerStatistics();
                 }
 
-                if (minecraft != null && minecraft.player != null) {
-                    minecraft.getSoundManager().play(
-                            net.minecraft.client.resources.sounds.SimpleSoundInstance.forUI(
-                                    ModSounds.BUTTON, 1.0F
-                            )
-                    );
-                }
-
+                playButtonSound();
                 return true;
             }
         }
 
         if (selectedSection == 3) {
-            int centerRectX = sideMargin;
-            int centerRectY = topMargin + barHeight + 5;
-            int centerRectWidth = width - (2 * sideMargin);
-            int centerRectHeight = height - topMargin - barHeight - (height / 32);
+            // Match updated submenu dimensions in the mouseClicked method
+            int submenuWidth = layout.contentWidth / 6;
+            int submenuStartX = layout.contentX + layout.contentWidth / 128;  // Moved much more to the left
+            int submenuStartY = layout.contentY + layout.contentHeight / 16;
+            int submenuHeight = layout.contentHeight - (layout.contentHeight / 8);
 
-            int leftMenuX = centerRectX + centerRectWidth / 32;
-            int leftMenuY = centerRectY + centerRectHeight / 8;
-            int leftMenuWidth = centerRectWidth / 7;
-            int leftMenuHeight = (int)(centerRectHeight * 0.75);
-
-            int buttonSpacing = centerRectHeight / 100;
-            int submenuButtonHeight = (leftMenuHeight - ((STAT_SUBMENU_LABELS.length - 1) * buttonSpacing)) / STAT_SUBMENU_LABELS.length;
+            int buttonHeight = submenuHeight / 8;
+            int buttonSpacing = submenuHeight / 24;
+            int totalButtonsHeight = (buttonHeight * STAT_SUBMENU_LABELS.length) +
+                    (buttonSpacing * (STAT_SUBMENU_LABELS.length - 1));
+            int submenuStartYCentered = submenuStartY + (submenuHeight - totalButtonsHeight) / 2;
 
             for (int i = 0; i < STAT_SUBMENU_LABELS.length; i++) {
-                int buttonY = leftMenuY + (i * (submenuButtonHeight + buttonSpacing));
+                int buttonY = submenuStartYCentered + (i * (buttonHeight + buttonSpacing));
 
-                if (isMouseOverRect((int) mouseX, (int) mouseY, leftMenuX, buttonY,
-                        leftMenuWidth, submenuButtonHeight)) {
+                // Shift the hitbox to match the visual button position
+                int buttonRightOffset = 10; // Same as in render method
+                if (isMouseOverRect((int) mouseX, (int) mouseY, submenuStartX + buttonRightOffset, buttonY,
+                        submenuWidth - buttonRightOffset, buttonHeight)) {
+
                     selectedStatsSubmenu = i;
                     lastSelectedStatsSubmenu = i;
 
-                    if (minecraft != null && minecraft.player != null) {
-                        minecraft.getSoundManager().play(
-                                net.minecraft.client.resources.sounds.SimpleSoundInstance.forUI(
-                                        ModSounds.BUTTON, 1.0F
-                                )
-                        );
-                    }
-
+                    playButtonSound();
                     return true;
                 }
             }
         }
 
         return super.mouseClicked(mouseX, mouseY, button);
+    }
+
+    private void playButtonSound() {
+        if (minecraft != null && minecraft.player != null) {
+            minecraft.getSoundManager().play(
+                    net.minecraft.client.resources.sounds.SimpleSoundInstance.forUI(
+                            ModSounds.BUTTON, 1.0F
+                    )
+            );
+        }
+    }
+
+    private boolean isMouseOverRect(int mouseX, int mouseY, int x, int y, int width, int height) {
+        return mouseX >= x && mouseX < x + width && mouseY >= y && mouseY < y + height;
     }
 
     @Override
@@ -316,265 +264,194 @@ public class CustomGuiScreen extends Screen {
         if (minecraft != null && minecraft.player != null) {
             float currentHealth = minecraft.player.getHealth();
 
-            if (currentHealth < lastHealth) {
+            if (currentHealth < lastPlayerHealth) {
                 AGoTMod.LOGGER.info("Player health decreased, closing GUI");
                 minecraft.setScreen(null);
                 return;
             }
 
-            lastHealth = currentHealth;
+            lastPlayerHealth = currentHealth;
         }
 
         guiGraphics.fill(0, 0, width, height, 0x40E6D8B7);
 
-        int barHeight = height / 8;
-        int topMargin = height / 32;
-        int sideMargin = width / 32;
-        int availableWidth = width - (2 * sideMargin);
-        int rectWidth = availableWidth / 7;
+        ScreenLayout layout = new ScreenLayout(width, height);
 
-        for (int i = 0; i < 7; i++) {
-            int startX = sideMargin + (i * rectWidth);
-            int endX = sideMargin + ((i + 1) * rectWidth);
-
-            if (i == 6) endX = width - sideMargin;
-
-            boolean isHovered = isMouseOverRect(mouseX, mouseY, startX, topMargin, endX - startX, barHeight);
-            boolean isSelected = (i == selectedSection);
-
-            int buttonWidth = endX - startX;
-            int buttonHeight = barHeight;
-
-            int u = 0;
-            int v = 0;
-            // Extra small texture dimensions for extremely zoomed-in appearance
-            int textureWidth = 32;  // Reduced for extreme zoom-in
-            int textureHeight = 32; // Reduced for extreme zoom-in
-
-            // Use regular texture for normal state, transparent texture for hover/selected states
-            ResourceLocation buttonTexture = (isHovered || isSelected) ?
-                    BUTTON_TEXTURES_TRANSPARANT[i] : BUTTON_TEXTURES[i];
-
-            renderTexturedButton(guiGraphics, buttonTexture,
-                    startX, topMargin, buttonWidth, buttonHeight,
-                    u, v, textureWidth, textureHeight, true);
-
-            // White overlay for hover/selected states removed
-
-            String text = SECTION_LABELS[i];
-            int textWidth = font.width(text);
-            int textX = startX + ((endX - startX) - textWidth) / 2;
-            int textY = topMargin + (barHeight - font.lineHeight) / 2;
-
-            guiGraphics.drawString(font, text, textX, textY, isSelected ? 0xFFFFFFFF : PARCHMENT_COLOR, true);
-        }
+        drawSectionButtons(guiGraphics, mouseX, mouseY, layout);
 
         if (selectedSection >= 0 && selectedSection < RAINBOW_COLORS.length) {
-            int centerRectX = sideMargin;
-            int centerRectWidth = width - (2 * sideMargin);
-            int centerRectHeight = height - topMargin - barHeight - (height / 32);
-            int centerRectY = topMargin + barHeight + 5;
+            renderStonePanel(guiGraphics, layout.contentX, layout.contentY,
+                    layout.contentWidth, layout.contentHeight);
 
-            renderTexturedButton(guiGraphics, BUTTON_TEXTURES_TRANSPARANT[selectedSection],
-                    centerRectX, centerRectY, centerRectWidth, centerRectHeight,
-                    0, 0, 256, 256, false);
-
-            String sectionTitle = SECTION_LABELS[selectedSection];
-            int titleWidth = (int) (font.width(sectionTitle) * 1.5f);
-            int titleX = centerRectX + (centerRectWidth - titleWidth) / 2;
-            int titleY = centerRectY + 10;
-
-            float titleScale = 1.5f;
-            guiGraphics.pose().pushPose();
-            guiGraphics.pose().scale(titleScale, titleScale, 1.0f);
-            guiGraphics.drawString(font, sectionTitle,
-                    (int) (titleX / titleScale),
-                    (int) (titleY / titleScale),
-                    PARCHMENT_COLOR);
-            guiGraphics.pose().popPose();
+            drawSectionTitle(guiGraphics, SECTION_LABELS[selectedSection],
+                    layout.contentX, layout.contentY, layout.contentWidth);
 
             if (selectedSection == 3) {
-                if (!statsLoaded && minecraft != null) {
-                    loadPlayerStats();
-                }
-
-                int leftMenuX = centerRectX + centerRectWidth / 32;
-                int leftMenuY = centerRectY + centerRectHeight / 8;
-                int leftMenuWidth = centerRectWidth / 7;
-                int leftMenuHeight = (int)(centerRectHeight * 0.75);
-
-                int contentAreaX = leftMenuX + leftMenuWidth + centerRectWidth / 64;
-                int contentAreaY = leftMenuY;
-                int contentAreaWidth = (int)(centerRectWidth * 0.75);
-                int contentAreaHeight = leftMenuHeight;
-
-                int buttonSpacing = centerRectHeight / 100;
-                int submenuButtonHeight = (leftMenuHeight - ((STAT_SUBMENU_LABELS.length - 1) * buttonSpacing)) / STAT_SUBMENU_LABELS.length;
-
-                for (int i = 0; i < STAT_SUBMENU_LABELS.length; i++) {
-                    int buttonY = leftMenuY + (i * (submenuButtonHeight + buttonSpacing));
-
-                    boolean isHovered = isMouseOverRect(mouseX, mouseY, leftMenuX, buttonY,
-                            leftMenuWidth, submenuButtonHeight);
-                    boolean isSelected = (i == selectedStatsSubmenu);
-
-                    // Draw base button texture based on state (hovered or selected)
-                    ResourceLocation submenuButtonTexture = (isHovered || isSelected) ?
-                            BUTTON_TEXTURES_TRANSPARANT[3] : BUTTON_TEXTURES[3];
-
-                    renderTexturedButton(guiGraphics, submenuButtonTexture,
-                            leftMenuX, buttonY, leftMenuWidth, submenuButtonHeight,
-                            0, 0, 32, 32, true);
-
-                    // White overlay for hover/selected states removed
-
-                    String buttonText = STAT_SUBMENU_LABELS[i];
-                    int buttonTextWidth = font.width(buttonText);
-                    int buttonTextX = leftMenuX + (leftMenuWidth - buttonTextWidth) / 2;
-                    int buttonTextY = buttonY + (submenuButtonHeight - font.lineHeight) / 2;
-
-                    guiGraphics.drawString(font, buttonText, buttonTextX, buttonTextY,
-                            isSelected ? 0xFFFFFFFF : PARCHMENT_COLOR);
-                }
-
-                renderTexturedButton(guiGraphics, BUTTON_TEXTURES_TRANSPARANT[selectedSection],
-                        contentAreaX, contentAreaY, contentAreaWidth, contentAreaHeight,
-                        0, 0, 64, 64, false);
-
-                int statsX = contentAreaX + centerRectWidth / 32;
-                int statsY = contentAreaY + centerRectHeight / 32;
-                int lineSpacing = centerRectHeight / 24;
-
-                String submenuTitle = STAT_SUBMENU_LABELS[selectedStatsSubmenu];
-                float subtitleScale = 1.2f;
-                guiGraphics.pose().pushPose();
-                guiGraphics.pose().scale(subtitleScale, subtitleScale, 1.0f);
-                guiGraphics.drawString(font, submenuTitle,
-                        (int) (statsX / subtitleScale),
-                        (int) (statsY / subtitleScale),
-                        PARCHMENT_COLOR);
-                guiGraphics.pose().popPose();
-
-                statsY += 30;
-
-                switch (selectedStatsSubmenu) {
-                    case 0:
-                        drawStat(guiGraphics, "Deaths", cachedDeathCount, statsX, statsY);
-                        drawStat(guiGraphics, "Jumps", cachedJumps, statsX, statsY + lineSpacing);
-                        drawDistanceStat(guiGraphics, "Distance Traveled", cachedTotalDistance, statsX, statsY + lineSpacing * 2);
-                        break;
-
-                    case 1:
-                        drawStat(guiGraphics, "Mob Kills", cachedMobKills, statsX, statsY);
-                        drawStat(guiGraphics, "Player Kills", cachedPlayerKills, statsX, statsY + lineSpacing);
-                        break;
-
-                    case 2:
-                        drawStat(guiGraphics, "Items Stolen", 0, statsX, statsY);
-                        drawStat(guiGraphics, "Bounty", 0, statsX, statsY + lineSpacing);
-                        break;
-
-                    case 3:
-                        drawStat(guiGraphics, "Spells Cast", 0, statsX, statsY);
-                        drawStat(guiGraphics, "Magic Level", 0, statsX, statsY + lineSpacing);
-                        break;
-
-                    case 4:
-                        drawStat(guiGraphics, "Sword Kills", 0, statsX, statsY);
-                        drawStat(guiGraphics, "Bow Kills", 0, statsX, statsY + lineSpacing);
-                        break;
-
-                    case 5:
-                        drawStat(guiGraphics, "Blocks Mined", 0, statsX, statsY);
-                        drawStat(guiGraphics, "Items Crafted", 0, statsX, statsY + lineSpacing);
-                        break;
-                }
+                drawStatsSection(guiGraphics, mouseX, mouseY, layout);
             }
         }
     }
 
-    private void renderTexturedButton(GuiGraphics guiGraphics, ResourceLocation texture,
-                                      int x, int y, int width, int height,
-                                      int u, int v, int textureWidth, int textureHeight,
-                                      boolean withPillarBorders) {
-        guiGraphics.flush();
+    private void drawSectionButtons(GuiGraphics guiGraphics, int mouseX, int mouseY, ScreenLayout layout) {
+        for (int i = 0; i < SECTION_LABELS.length; i++) {
+            int startX = layout.sideMargin + (i * layout.sectionButtonWidth);
+            int endX = (i == SECTION_LABELS.length - 1)
+                    ? width - layout.sideMargin
+                    : layout.sideMargin + ((i + 1) * layout.sectionButtonWidth);
 
-        // Draw the main stained glass texture with 90% opacity
-        com.mojang.blaze3d.systems.RenderSystem.enableBlend();
-        com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.9F); // 90% opacity
+            boolean isHovered = isMouseOverRect(mouseX, mouseY, startX, layout.topMargin,
+                    endX - startX, layout.sectionButtonHeight);
+            boolean isSelected = (i == selectedSection);
 
-        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
-                texture, x, y, u, v, width, height, textureWidth, textureHeight);
+            int buttonWidth = endX - startX;
 
-        // Reset to full opacity for borders
-        com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+            ResourceLocation texture = (isHovered || isSelected)
+                    ? STAINED_GLASS_TRANSPARENT_TEXTURES[i]
+                    : STAINED_GLASS_TEXTURES[i];
 
-        if (withPillarBorders) {
-            // Draw left pillar border
-            guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
-                    PILLAR_TEXTURE, x, y, 0, 0, PILLAR_BORDER_WIDTH, height, 16, 64);
+            renderTexturedPanel(guiGraphics, texture, startX, layout.topMargin,
+                    buttonWidth, layout.sectionButtonHeight, true);
 
-            // Draw right pillar border
-            guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
-                    PILLAR_TEXTURE, x + width - PILLAR_BORDER_WIDTH, y, 0, 0, PILLAR_BORDER_WIDTH, height, 16, 64);
+            String text = SECTION_LABELS[i];
+            int textWidth = font.width(text);
+            int textX = startX + (buttonWidth - textWidth) / 2;
+            int textY = layout.topMargin + (layout.sectionButtonHeight - font.lineHeight) / 2;
 
-            // Draw top border
-            guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
-                    TOP_BORDER_TEXTURE, x, y, 0, 0, width, TOP_BORDER_HEIGHT, 64, 16);
-
-            // Draw bottom border using same texture but tinting it differently to make it visible
-            float r = 0.8f; // Slightly darkened
-            float g = 0.8f;
-            float b = 0.8f;
-            com.mojang.blaze3d.systems.RenderSystem.setShaderColor(r, g, b, 1.0f);
-
-            guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
-                    TOP_BORDER_TEXTURE, x, y + height - BOTTOM_BORDER_HEIGHT, 0, 0, width, BOTTOM_BORDER_HEIGHT, 64, 16);
-
-            // Reset color before drawing corners
-            com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-
-            // Save the current matrix stack
-            com.mojang.blaze3d.vertex.PoseStack poseStack = guiGraphics.pose();
-
-            // Draw bottom-left corner - original orientation
-            poseStack.pushPose();
-            guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
-                    CORNER_TEXTURE,
-                    x, y + height - BOTTOM_BORDER_HEIGHT - 6,
-                    0, 0, 12, 12, 12, 12);
-            poseStack.popPose();
-
-            // Draw bottom-right corner - with rotation
-            poseStack.pushPose();
-            poseStack.translate(x + width - 6, y + height - BOTTOM_BORDER_HEIGHT, 0);
-            poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(270));
-            poseStack.translate(-6, -6, 0);
-            guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
-                    CORNER_TEXTURE,
-                    0, 0, 0, 0, 12, 12, 12, 12);
-            poseStack.popPose();
-
-            // Draw top-right corner - with rotation
-            poseStack.pushPose();
-            poseStack.translate(x + width - 6, y + 6, 0);
-            poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(180));
-            poseStack.translate(-6, -6, 0);
-            guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
-                    CORNER_TEXTURE,
-                    0, 0, 0, 0, 12, 12, 12, 12);
-            poseStack.popPose();
-
-            // Draw top-left corner - with rotation
-            poseStack.pushPose();
-            poseStack.translate(x + 6, y + 6, 0);
-            poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(90));
-            poseStack.translate(-6, -6, 0);
-            guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
-                    CORNER_TEXTURE,
-                    0, 0, 0, 0, 12, 12, 12, 12);
-            poseStack.popPose();
+            guiGraphics.drawString(font, text, textX, textY,
+                    isSelected ? 0xFFFFFFFF : PARCHMENT_COLOR, true);
         }
+    }
+
+    private void drawStatsSection(GuiGraphics guiGraphics, int mouseX, int mouseY, ScreenLayout layout) {
+        if (!areStatsLoaded && minecraft != null) {
+            loadPlayerStatistics();
+        }
+
+        // Improved submenu layout
+        int submenuWidth = layout.contentWidth / 6;  // Narrower submenu
+        int submenuStartX = layout.contentX + layout.contentWidth / 128;  // Moved much more to the left
+        int submenuStartY = layout.contentY + layout.contentHeight / 16;
+        int submenuHeight = layout.contentHeight - (layout.contentHeight / 8);
+
+        // Calculate proper button heights and spacing
+        int buttonHeight = submenuHeight / 8;
+        int buttonSpacing = submenuHeight / 24;
+        int totalButtonsHeight = (buttonHeight * STAT_SUBMENU_LABELS.length) +
+                (buttonSpacing * (STAT_SUBMENU_LABELS.length - 1));
+        int submenuStartYCentered = submenuStartY + (submenuHeight - totalButtonsHeight) / 2;
+
+        // Content area positioning - moved to right with proper spacing
+        int contentStartX = submenuStartX + submenuWidth + layout.contentWidth / 32;
+        int contentStartY = submenuStartY;
+        int contentWidth = layout.contentWidth - submenuWidth - (layout.contentWidth / 16);
+        int contentHeight = submenuHeight;
+
+        // Draw submenu buttons with adjusted right padding
+        for (int i = 0; i < STAT_SUBMENU_LABELS.length; i++) {
+            int buttonY = submenuStartYCentered + (i * (buttonHeight + buttonSpacing));
+
+            boolean isHovered = isMouseOverRect(mouseX, mouseY, submenuStartX, buttonY,
+                    submenuWidth, buttonHeight);
+            boolean isSelected = (i == selectedStatsSubmenu);
+
+            ResourceLocation buttonTexture = (isHovered || isSelected)
+                    ? STAINED_GLASS_TRANSPARENT_TEXTURES[3]  // Green transparent
+                    : STAINED_GLASS_TEXTURES[3];            // Green solid
+
+            // Shift the button itself slightly right while keeping overall submenu position
+            int buttonRightOffset = 10; // Pixels to shift right
+            renderTexturedPanel(guiGraphics, buttonTexture, submenuStartX + buttonRightOffset, buttonY,
+                    submenuWidth - buttonRightOffset, buttonHeight, true);
+
+            String buttonText = STAT_SUBMENU_LABELS[i];
+            int buttonTextWidth = font.width(buttonText);
+
+            // Added a small offset to move text to the right and ensure vertical centering
+            int buttonTextX = submenuStartX + buttonRightOffset + ((submenuWidth - buttonRightOffset - buttonTextWidth) / 2);
+
+            // Calculate exact vertical center by getting the precise height of text vs button
+            int textHeight = font.lineHeight;
+            int buttonTextY = buttonY + (buttonHeight - textHeight) / 2;
+
+            guiGraphics.drawString(font, buttonText, buttonTextX, buttonTextY,
+                    isSelected ? 0xFFFFFFFF : PARCHMENT_COLOR);
+        }
+
+        // Draw content panel with stats
+        renderStonePanel(guiGraphics, contentStartX, contentStartY,
+                contentWidth, contentHeight);
+
+        String submenuTitle = STAT_SUBMENU_LABELS[selectedStatsSubmenu];
+        drawSubmenuTitle(guiGraphics, submenuTitle, contentStartX, contentStartY);
+
+        int statsX = contentStartX + layout.contentWidth / 32;
+        int statsY = contentStartY + layout.contentHeight / 12 + 20;
+        int lineSpacing = layout.contentHeight / 16;
+
+        drawSubmenuContent(guiGraphics, statsX, statsY, lineSpacing);
+    }
+
+    private void drawSubmenuContent(GuiGraphics guiGraphics, int x, int y, int lineSpacing) {
+        switch (selectedStatsSubmenu) {
+            case 0:
+                drawStat(guiGraphics, "Deaths", cachedDeaths, x, y);
+                drawStat(guiGraphics, "Jumps", cachedJumps, x, y + lineSpacing);
+                drawDistanceStat(guiGraphics, "Distance Traveled", cachedTotalDistance, x, y + lineSpacing * 2);
+                break;
+
+            case 1:
+                drawStat(guiGraphics, "Mob Kills", cachedMobKills, x, y);
+                drawStat(guiGraphics, "Player Kills", cachedPlayerKills, x, y + lineSpacing);
+                break;
+
+            case 2:
+                drawStat(guiGraphics, "Items Stolen", 0, x, y);
+                drawStat(guiGraphics, "Bounty", 0, x, y + lineSpacing);
+                break;
+
+            case 3:
+                drawStat(guiGraphics, "Spells Cast", 0, x, y);
+                drawStat(guiGraphics, "Magic Level", 0, x, y + lineSpacing);
+                break;
+
+            case 4:
+                drawStat(guiGraphics, "Sword Kills", 0, x, y);
+                drawStat(guiGraphics, "Bow Kills", 0, x, y + lineSpacing);
+                break;
+
+            case 5:
+                drawStat(guiGraphics, "Blocks Mined", 0, x, y);
+                drawStat(guiGraphics, "Items Crafted", 0, x, y + lineSpacing);
+                break;
+        }
+    }
+
+    private void drawSectionTitle(GuiGraphics guiGraphics, String title, int x, int width, int y) {
+        int titleWidth = (int) (font.width(title) * 1.5f);
+        int titleX = x + (width - titleWidth) / 2;
+        int titleY = y + 12;  // Slightly higher to create more space below
+
+        float titleScale = 1.5f;
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().scale(titleScale, titleScale, 1.0f);
+        guiGraphics.drawString(font, title,
+                (int) (titleX / titleScale),
+                (int) (titleY / titleScale),
+                PARCHMENT_COLOR);
+        guiGraphics.pose().popPose();
+    }
+
+    private void drawSubmenuTitle(GuiGraphics guiGraphics, String title, int x, int y) {
+        float scale = 1.2f;
+        int titleY = y + 18;  // Better vertical positioning
+
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().scale(scale, scale, 1.0f);
+        guiGraphics.drawString(font, title,
+                (int) ((x + 20) / scale),
+                (int) (titleY / scale),
+                PARCHMENT_COLOR);
+        guiGraphics.pose().popPose();
     }
 
     private void drawStat(GuiGraphics guiGraphics, String label, int value, int x, int y) {
@@ -586,5 +463,126 @@ public class CustomGuiScreen extends Screen {
         String formattedDistance = String.format("%.2f", valueKm);
         String text = label + ": " + formattedDistance + " km";
         guiGraphics.drawString(font, text, x, y, PARCHMENT_COLOR);
+    }
+
+    private void renderTexturedPanel(GuiGraphics guiGraphics, ResourceLocation texture,
+                                     int x, int y, int width, int height, boolean withBorders) {
+        guiGraphics.flush();
+
+        com.mojang.blaze3d.systems.RenderSystem.enableBlend();
+        com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.9F);
+
+        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                texture, x, y, 0, 0, width, height, 32, 32);
+
+        com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+
+        if (withBorders) {
+            drawPanelBorders(guiGraphics, x, y, width, height);
+        }
+    }
+
+    private void renderStonePanel(GuiGraphics guiGraphics, int x, int y, int width, int height) {
+        guiGraphics.flush();
+
+        com.mojang.blaze3d.systems.RenderSystem.enableBlend();
+        com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.9F);
+
+        int tileSize = 16;
+        for (int tileX = 0; tileX < width; tileX += tileSize) {
+            for (int tileY = 0; tileY < height; tileY += tileSize) {
+                int tileWidth = Math.min(tileSize, width - tileX);
+                int tileHeight = Math.min(tileSize, height - tileY);
+
+                guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                        STONE_TEXTURE, x + tileX, y + tileY, 0, 0,
+                        tileWidth, tileHeight, tileSize, tileSize);
+            }
+        }
+
+        com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+
+        drawPanelBorders(guiGraphics, x, y, width, height);
+    }
+
+    private void drawPanelBorders(GuiGraphics guiGraphics, int x, int y, int width, int height) {
+        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                PILLAR_TEXTURE, x, y, 0, 0, BORDER_PILLAR_WIDTH, height, 16, 64);
+
+        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                PILLAR_TEXTURE, x + width - BORDER_PILLAR_WIDTH, y, 0, 0,
+                BORDER_PILLAR_WIDTH, height, 16, 64);
+
+        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                BORDER_TEXTURE, x, y, 0, 0, width, BORDER_HEIGHT, 64, 16);
+
+        com.mojang.blaze3d.systems.RenderSystem.setShaderColor(0.8f, 0.8f, 0.8f, 1.0f);
+
+        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                BORDER_TEXTURE, x, y + height - BORDER_HEIGHT, 0, 0,
+                width, BORDER_HEIGHT, 64, 16);
+
+        com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+
+        drawCorners(guiGraphics, x, y, width, height);
+    }
+
+    private void drawCorners(GuiGraphics guiGraphics, int x, int y, int width, int height) {
+        com.mojang.blaze3d.vertex.PoseStack poseStack = guiGraphics.pose();
+
+        poseStack.pushPose();
+        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                CORNER_TEXTURE, x, y + height - BORDER_HEIGHT - CORNER_SIZE/2,
+                0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
+        poseStack.popPose();
+
+        poseStack.pushPose();
+        poseStack.translate(x + width - CORNER_SIZE/2, y + height - BORDER_HEIGHT, 0);
+        poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(270));
+        poseStack.translate(-CORNER_SIZE/2, -CORNER_SIZE/2, 0);
+        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                CORNER_TEXTURE, 0, 0, 0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
+        poseStack.popPose();
+
+        poseStack.pushPose();
+        poseStack.translate(x + width - CORNER_SIZE/2, y + CORNER_SIZE/2, 0);
+        poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(180));
+        poseStack.translate(-CORNER_SIZE/2, -CORNER_SIZE/2, 0);
+        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                CORNER_TEXTURE, 0, 0, 0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
+        poseStack.popPose();
+
+        poseStack.pushPose();
+        poseStack.translate(x + CORNER_SIZE/2, y + CORNER_SIZE/2, 0);
+        poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(90));
+        poseStack.translate(-CORNER_SIZE/2, -CORNER_SIZE/2, 0);
+        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                CORNER_TEXTURE, 0, 0, 0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
+        poseStack.popPose();
+    }
+
+    private class ScreenLayout {
+        final int topMargin;
+        final int sideMargin;
+        final int sectionButtonWidth;
+        final int sectionButtonHeight;
+        final int contentX;
+        final int contentY;
+        final int contentWidth;
+        final int contentHeight;
+
+        ScreenLayout(int screenWidth, int screenHeight) {
+            topMargin = screenHeight / 32;
+            sideMargin = screenWidth / 32;
+            sectionButtonHeight = screenHeight / 8;
+
+            int availableWidth = screenWidth - (2 * sideMargin);
+            sectionButtonWidth = availableWidth / 7;
+
+            contentX = sideMargin;
+            contentY = topMargin + sectionButtonHeight + 5;
+            contentWidth = screenWidth - (2 * sideMargin);
+            contentHeight = screenHeight - topMargin - sectionButtonHeight - (screenHeight / 32);
+        }
     }
 }
