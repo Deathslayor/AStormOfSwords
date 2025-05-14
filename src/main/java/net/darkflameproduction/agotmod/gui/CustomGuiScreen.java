@@ -61,7 +61,7 @@ public class CustomGuiScreen extends Screen {
     };
 
     private static final String[] GENERAL_SKILLS = {
-            "Agility"
+            "Agility", "Strength"
     };
 
     private static final int[] RAINBOW_COLORS = {
@@ -70,9 +70,9 @@ public class CustomGuiScreen extends Screen {
     };
 
     private static final int PARCHMENT_COLOR = 0xFFF5E7C1;
-    private static final int BLACK_COLOR = 0xFF000000;
 
     private static final Stat<ResourceLocation> DAMAGE_DEALT_STAT = Stats.CUSTOM.get(Stats.DAMAGE_DEALT);
+    private static final Stat<ResourceLocation> DAMAGE_TAKEN_STAT = Stats.CUSTOM.get(Stats.DAMAGE_TAKEN);
     private static final Stat<ResourceLocation> DEATH_COUNT_STAT = Stats.CUSTOM.get(Stats.DEATHS);
     private static final Stat<ResourceLocation> KILLS_MOB_STAT = Stats.CUSTOM.get(Stats.MOB_KILLS);
     private static final Stat<ResourceLocation> PLAYER_KILLS_STAT = Stats.CUSTOM.get(Stats.PLAYER_KILLS);
@@ -102,6 +102,8 @@ public class CustomGuiScreen extends Screen {
 
     private static final double AGILITY_LEVEL_MULTIPLIER = 1.085;
     private static final int MAX_AGILITY_LEVEL = 100;
+    private static final double STRENGTH_LEVEL_MULTIPLIER = 1.06;
+    private static final int MAX_STRENGTH_LEVEL = 100;
 
     private boolean isUsingShader = false;
     private float lastPlayerHealth = 0;
@@ -115,6 +117,7 @@ public class CustomGuiScreen extends Screen {
 
     private int cachedDeaths = 0;
     private int cachedDamageDealt= 0;
+    private int cachedDamageTaken= 0;
     private int cachedMobKills = 0;
     private int cachedPlayerKills = 0;
     private int cachedJumps = 0;
@@ -124,6 +127,10 @@ public class CustomGuiScreen extends Screen {
     private int agilityLevel = 0;
     private double agilityProgress = 0.0;
     private double nextLevelDistance = 0.0;
+
+    private int strengthLevel = 0;
+    private double strengthProgress = 0.0;
+    private double nextStrengthLevelRequirement = 0.0;
 
     public CustomGuiScreen() {
         super(Component.translatable("screen.agotmod.custom_gui"));
@@ -210,6 +217,7 @@ public class CustomGuiScreen extends Screen {
 
         cachedDeaths = stats.getValue(DEATH_COUNT_STAT);
         cachedDamageDealt = stats.getValue(DAMAGE_DEALT_STAT);
+        cachedDamageTaken = stats.getValue(DAMAGE_TAKEN_STAT);
         cachedMobKills = stats.getValue(KILLS_MOB_STAT);
         cachedPlayerKills = stats.getValue(PLAYER_KILLS_STAT);
         cachedJumps = stats.getValue(JUMP_STAT);
@@ -221,6 +229,7 @@ public class CustomGuiScreen extends Screen {
 
         cachedTotalDistance = totalDistanceCentimeters / 100000.0;
         calculateAgilityLevel();
+        calculateStrengthLevel();
     }
 
     /**
@@ -257,6 +266,37 @@ public class CustomGuiScreen extends Screen {
         agilityLevel = MAX_AGILITY_LEVEL;
         agilityProgress = 1.0;
         nextLevelDistance = 0;
+    }
+
+    private void calculateStrengthLevel() {
+        if (cachedDamageDealt <= 0) {
+            strengthLevel = 0;
+            strengthProgress = 0;
+            nextStrengthLevelRequirement = 1000.0;
+            return;
+        }
+
+        double totalRequiredDamage = 0;
+        double currentLevelRequirement = 1000.0;
+
+        for (int level = 1; level <= MAX_STRENGTH_LEVEL; level++) {
+            totalRequiredDamage += currentLevelRequirement;
+
+            if (cachedDamageDealt < totalRequiredDamage) {
+                strengthLevel = level - 1;
+
+                double previousLevelDamage = totalRequiredDamage - currentLevelRequirement;
+                strengthProgress = (cachedDamageDealt - previousLevelDamage) / currentLevelRequirement;
+                nextStrengthLevelRequirement = currentLevelRequirement;
+                return;
+            }
+
+            currentLevelRequirement *= STRENGTH_LEVEL_MULTIPLIER;
+        }
+
+        strengthLevel = MAX_STRENGTH_LEVEL;
+        strengthProgress = 1.0;
+        nextStrengthLevelRequirement = 0;
     }
 
     private void applyBlurEffect() {
@@ -368,6 +408,7 @@ public class CustomGuiScreen extends Screen {
 
             lastPlayerHealth = currentHealth;
             updateCachedStatistics(minecraft.player.getStats());
+
         }
 
         guiGraphics.fill(0, 0, width, height, 0x40E6D8B7);
@@ -437,7 +478,6 @@ public class CustomGuiScreen extends Screen {
 
         renderPaperPanel(guiGraphics, leftPanelX, panelY, panelWidth, panelHeight);
 
-        // Center the title properly
         String leftTitle = "General Skills";
         int leftTitleWidth = font.width(leftTitle);
         int leftTitleX = leftPanelX + (panelWidth - leftTitleWidth) / 2;
@@ -455,17 +495,14 @@ public class CustomGuiScreen extends Screen {
 
         float scale = 0.9f;
 
-        // Center the column headers properly
         String col1Title = "Skill Level";
         String col2Title = "Progress Bar";
         String col3Title = "Progression";
 
-        // Calculate true center positions for each column
         int col1CenterX = leftPanelX + columnWidth / 2;
         int col2CenterX = leftPanelX + columnWidth + columnWidth / 2;
         int col3CenterX = leftPanelX + columnWidth * 2 + columnWidth / 2;
 
-        // Calculate the text widths and adjust positions for true centering
         int col1Width = (int)(font.width(col1Title) * scale);
         int col2Width = (int)(font.width(col2Title) * scale);
         int col3Width = (int)(font.width(col3Title) * scale);
@@ -474,7 +511,6 @@ public class CustomGuiScreen extends Screen {
         int col2X = col2CenterX - col2Width / 2;
         int col3X = col3CenterX - col3Width / 2;
 
-        // Draw the scaled and centered text
         guiGraphics.pose().pushPose();
         guiGraphics.pose().scale(scale, scale, 1.0f);
 
@@ -492,6 +528,7 @@ public class CustomGuiScreen extends Screen {
         int lineSpacing = layout.contentHeight / 18;
 
         drawAgilitySkill(guiGraphics, leftPanelX, statsY, columnWidth, scale);
+        drawStrengthSkill(guiGraphics, leftPanelX, statsY + lineSpacing, columnWidth, scale);
     }
 
     private void drawAgilitySkill(GuiGraphics guiGraphics, int x, int y, int columnWidth, float scale) {
@@ -501,7 +538,6 @@ public class CustomGuiScreen extends Screen {
         guiGraphics.pose().pushPose();
         guiGraphics.pose().scale(scale, scale, 1.0f);
 
-        // Center the skill level text in first column
         String levelText = "Agility: " + agilityLevel;
         int levelTextWidth = (int)(font.width(levelText) * scale);
         int col1CenterX = x + columnWidth / 2;
@@ -511,7 +547,6 @@ public class CustomGuiScreen extends Screen {
 
         guiGraphics.pose().popPose();
 
-        // Center the progress bar in the second column
         int barX = x + columnWidth + (columnWidth - maxBarWidth) / 2;
 
         int textCenterY = y + (int)((font.lineHeight * scale) / 2);
@@ -528,7 +563,6 @@ public class CustomGuiScreen extends Screen {
         guiGraphics.pose().pushPose();
         guiGraphics.pose().scale(scale, scale, 1.0f);
 
-        // Center the progression text in third column
         String progressText;
         if (agilityLevel < MAX_AGILITY_LEVEL) {
             progressText = String.format("%.1f/%.1f km",
@@ -543,6 +577,57 @@ public class CustomGuiScreen extends Screen {
         scaledX = (col3CenterX - progressTextWidth / (2 * scale)) / scale;
 
         int textColor = agilityLevel < MAX_AGILITY_LEVEL ? PARCHMENT_COLOR : 0xFF55FF55;
+        guiGraphics.drawString(font, progressText, (int)scaledX, (int)scaledY, textColor);
+
+        guiGraphics.pose().popPose();
+    }
+
+    private void drawStrengthSkill(GuiGraphics guiGraphics, int x, int y, int columnWidth, float scale) {
+        int barHeight = 6;
+        int maxBarWidth = columnWidth - 25;
+
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().scale(scale, scale, 1.0f);
+
+        String levelText = "Strength: " + strengthLevel;
+        int levelTextWidth = (int)(font.width(levelText) * scale);
+        int col1CenterX = x + columnWidth / 2;
+        float scaledX = (col1CenterX - levelTextWidth / (2 * scale)) / scale;
+        float scaledY = y / scale;
+        guiGraphics.drawString(font, levelText, (int)scaledX, (int)scaledY, PARCHMENT_COLOR);
+
+        guiGraphics.pose().popPose();
+
+        int barX = x + columnWidth + (columnWidth - maxBarWidth) / 2;
+
+        int textCenterY = y + (int)((font.lineHeight * scale) / 2);
+        guiGraphics.fill(barX, textCenterY - barHeight/2,
+                barX + maxBarWidth, textCenterY + barHeight/2,
+                0xFF555555);
+
+        int barWidth = (int) (maxBarWidth * strengthProgress);
+        int barColor = strengthLevel < MAX_STRENGTH_LEVEL ? RAINBOW_COLORS[0] : RAINBOW_COLORS[4];
+        guiGraphics.fill(barX, textCenterY - barHeight/2,
+                barX + barWidth, textCenterY + barHeight/2,
+                barColor);
+
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().scale(scale, scale, 1.0f);
+
+        String progressText;
+        if (strengthLevel < MAX_STRENGTH_LEVEL) {
+            progressText = String.format("%.0f/%.0f dmg",
+                    strengthProgress * nextStrengthLevelRequirement,
+                    nextStrengthLevelRequirement);
+        } else {
+            progressText = "Max Level";
+        }
+
+        int progressTextWidth = (int)(font.width(progressText) * scale);
+        int col3CenterX = x + columnWidth * 2 + columnWidth / 2;
+        scaledX = (col3CenterX - progressTextWidth / (2 * scale)) / scale;
+
+        int textColor = strengthLevel < MAX_STRENGTH_LEVEL ? PARCHMENT_COLOR : 0xFF55FF55;
         guiGraphics.drawString(font, progressText, (int)scaledX, (int)scaledY, textColor);
 
         guiGraphics.pose().popPose();
@@ -583,7 +668,6 @@ public class CustomGuiScreen extends Screen {
             String buttonText = STAT_SUBMENU_LABELS[i];
             int buttonTextWidth = font.width(buttonText);
 
-            // Center text properly in button
             int buttonTextX = submenuStartX + buttonRightOffset + ((submenuWidth - buttonRightOffset - buttonTextWidth) / 2);
 
             int textHeight = font.lineHeight;
@@ -598,7 +682,6 @@ public class CustomGuiScreen extends Screen {
 
         String submenuTitle = STAT_SUBMENU_LABELS[selectedStatsSubmenu];
 
-        // Center the submenu title
         int titleWidth = (int)(font.width(submenuTitle) * 1.2f);
         int titleX = contentStartX + (contentWidth - titleWidth) / 2;
         drawSubmenuTitle(guiGraphics, submenuTitle, titleX, contentStartY);
@@ -622,6 +705,8 @@ public class CustomGuiScreen extends Screen {
                 drawStat(guiGraphics, "Mob Kills", cachedMobKills, x, y, contentStartX, contentWidth);
                 drawStat(guiGraphics, "Player Kills", cachedPlayerKills, x, y + lineSpacing, contentStartX, contentWidth);
                 drawStat(guiGraphics,"Damage Dealt", cachedDamageDealt, x, y + lineSpacing * 2, contentStartX, contentWidth);
+                drawStat(guiGraphics,"Damage Taken", cachedDamageTaken, x, y + lineSpacing * 3, contentStartX, contentWidth);
+
                 break;
 
             case 2:
