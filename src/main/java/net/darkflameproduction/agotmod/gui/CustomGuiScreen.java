@@ -5,6 +5,7 @@ import net.darkflameproduction.agotmod.sound.ModSounds;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ServerboundClientCommandPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.Stats;
 import net.minecraft.stats.Stat;
@@ -59,12 +60,8 @@ public class CustomGuiScreen extends Screen {
             "General Stats", "Combat Stats", "Crime", "Magic", "Weapon Usage", "Tool Usage"
     };
 
-    private static final String[] COMBAT_SKILLS = {
-            "Swordsmanship", "Archery", "Defense", "Dual-Wielding", "Battle Tactics"
-    };
-
-    private static final String[] CRAFTING_SKILLS = {
-            "Smithing", "Alchemy", "Enchanting", "Cooking", "Tailoring"
+    private static final String[] GENERAL_SKILLS = {
+            "Agility"
     };
 
     private static final int[] RAINBOW_COLORS = {
@@ -75,12 +72,13 @@ public class CustomGuiScreen extends Screen {
     private static final int PARCHMENT_COLOR = 0xFFF5E7C1;
     private static final int BLACK_COLOR = 0xFF000000;
 
+    private static final Stat<ResourceLocation> DAMAGE_DEALT_STAT = Stats.CUSTOM.get(Stats.DAMAGE_DEALT);
     private static final Stat<ResourceLocation> DEATH_COUNT_STAT = Stats.CUSTOM.get(Stats.DEATHS);
     private static final Stat<ResourceLocation> KILLS_MOB_STAT = Stats.CUSTOM.get(Stats.MOB_KILLS);
     private static final Stat<ResourceLocation> PLAYER_KILLS_STAT = Stats.CUSTOM.get(Stats.PLAYER_KILLS);
     private static final Stat<ResourceLocation> JUMP_STAT = Stats.CUSTOM.get(Stats.JUMP);
 
-    private static final Stat<ResourceLocation>[] DISTANCE_STATS = new Stat[] {
+    private static final Stat<ResourceLocation>[] DISTANCE_STATS = new Stat[]{
             Stats.CUSTOM.get(Stats.CLIMB_ONE_CM),
             Stats.CUSTOM.get(Stats.CROUCH_ONE_CM),
             Stats.CUSTOM.get(Stats.FALL_ONE_CM),
@@ -102,22 +100,30 @@ public class CustomGuiScreen extends Screen {
     private static final int BORDER_HEIGHT = 6;
     private static final int CORNER_SIZE = 12;
 
+    private static final double AGILITY_LEVEL_MULTIPLIER = 1.085;
+    private static final int MAX_AGILITY_LEVEL = 100;
+
     private boolean isUsingShader = false;
     private float lastPlayerHealth = 0;
     private static int lastSelectedSection = 2;
     private int selectedSection;
     private static int lastSelectedStatsSubmenu = 0;
     private int selectedStatsSubmenu;
-
-    private int[] combatSkillLevels = {45, 32, 27, 18, 15};
-    private int[] craftingSkillLevels = {39, 22, 31, 45, 17};
+    private static final int STATS_UPDATE_INTERVAL = 100;
+    private int statsUpdateTimer = 0;
+    private boolean hasRequestedInitialStats = false;
 
     private int cachedDeaths = 0;
+    private int cachedDamageDealt= 0;
     private int cachedMobKills = 0;
     private int cachedPlayerKills = 0;
     private int cachedJumps = 0;
     private double cachedTotalDistance = 0.0;
     private boolean areStatsLoaded = false;
+
+    private int agilityLevel = 0;
+    private double agilityProgress = 0.0;
+    private double nextLevelDistance = 0.0;
 
     public CustomGuiScreen() {
         super(Component.translatable("screen.agotmod.custom_gui"));
@@ -131,10 +137,56 @@ public class CustomGuiScreen extends Screen {
 
         if (minecraft != null && minecraft.player != null) {
             lastPlayerHealth = minecraft.player.getHealth();
-            loadPlayerStatistics();
+            requestStatisticsFromServer();
         }
 
         applyBlurEffect();
+    }
+
+    /**
+     * This method gets called every tick while the GUI is open
+     */
+    @Override
+    public void tick() {
+        super.tick();
+
+        if (minecraft == null || minecraft.player == null) {
+            return;
+        }
+
+        if (!hasRequestedInitialStats) {
+            requestStatisticsFromServer();
+            hasRequestedInitialStats = true;
+            return;
+        }
+
+        statsUpdateTimer++;
+        if (statsUpdateTimer >= STATS_UPDATE_INTERVAL) {
+            requestStatisticsFromServer();
+            statsUpdateTimer = 0;
+        }
+    }
+
+    /**
+     * Forces a statistics update from the server
+     */
+    private void requestStatisticsFromServer() {
+        if (minecraft == null || minecraft.player == null || minecraft.getConnection() == null) {
+            return;
+        }
+
+        try {
+            minecraft.getConnection().send(new ServerboundClientCommandPacket(
+                    ServerboundClientCommandPacket.Action.REQUEST_STATS));
+
+            AGoTMod.LOGGER.info("Requested player statistics from server");
+
+            updateCachedStatistics(minecraft.player.getStats());
+            areStatsLoaded = true;
+        } catch (Exception e) {
+            AGoTMod.LOGGER.error("Failed to request statistics from server: " + e.getMessage());
+            updateCachedStatistics(minecraft.player.getStats());
+        }
     }
 
     private void loadPlayerStatistics() {
@@ -145,18 +197,7 @@ public class CustomGuiScreen extends Screen {
         StatsCounter playerStats = minecraft.player.getStats();
 
         if (!areStatsLoaded) {
-            try {
-                if (minecraft.getConnection() != null) {
-                    minecraft.getConnection().send(new net.minecraft.network.protocol.game.ServerboundClientCommandPacket(
-                            net.minecraft.network.protocol.game.ServerboundClientCommandPacket.Action.REQUEST_STATS));
-                    AGoTMod.LOGGER.info("Requested player statistics from server");
-                    updateCachedStatistics(playerStats);
-                    areStatsLoaded = true;
-                }
-            } catch (Exception e) {
-                AGoTMod.LOGGER.error("Failed to request statistics from server: " + e.getMessage());
-                updateCachedStatistics(playerStats);
-            }
+            requestStatisticsFromServer();
         } else {
             updateCachedStatistics(playerStats);
         }
@@ -168,6 +209,7 @@ public class CustomGuiScreen extends Screen {
         }
 
         cachedDeaths = stats.getValue(DEATH_COUNT_STAT);
+        cachedDamageDealt = stats.getValue(DAMAGE_DEALT_STAT);
         cachedMobKills = stats.getValue(KILLS_MOB_STAT);
         cachedPlayerKills = stats.getValue(PLAYER_KILLS_STAT);
         cachedJumps = stats.getValue(JUMP_STAT);
@@ -178,6 +220,43 @@ public class CustomGuiScreen extends Screen {
         }
 
         cachedTotalDistance = totalDistanceCentimeters / 100000.0;
+        calculateAgilityLevel();
+    }
+
+    /**
+     * Calculates the player's agility level based on total distance traveled
+     * Uses a progressive scale where each level requires increasing distance
+     * Level n requires level_n-1 * 1.085 km to reach
+     */
+    private void calculateAgilityLevel() {
+        if (cachedTotalDistance <= 0) {
+            agilityLevel = 0;
+            agilityProgress = 0;
+            nextLevelDistance = 1.0;
+            return;
+        }
+
+        double totalRequiredDistance = 0;
+        double currentLevelRequirement = 1.0;
+
+        for (int level = 1; level <= MAX_AGILITY_LEVEL; level++) {
+            totalRequiredDistance += currentLevelRequirement;
+
+            if (cachedTotalDistance < totalRequiredDistance) {
+                agilityLevel = level - 1;
+
+                double previousLevelDistance = totalRequiredDistance - currentLevelRequirement;
+                agilityProgress = (cachedTotalDistance - previousLevelDistance) / currentLevelRequirement;
+                nextLevelDistance = currentLevelRequirement;
+                return;
+            }
+
+            currentLevelRequirement *= AGILITY_LEVEL_MULTIPLIER;
+        }
+
+        agilityLevel = MAX_AGILITY_LEVEL;
+        agilityProgress = 1.0;
+        nextLevelDistance = 0;
     }
 
     private void applyBlurEffect() {
@@ -221,7 +300,7 @@ public class CustomGuiScreen extends Screen {
                 lastSelectedSection = i;
 
                 if (i == 3 && !areStatsLoaded && minecraft != null) {
-                    loadPlayerStatistics();
+                    requestStatisticsFromServer();
                 }
 
                 playButtonSound();
@@ -288,6 +367,7 @@ public class CustomGuiScreen extends Screen {
             }
 
             lastPlayerHealth = currentHealth;
+            updateCachedStatistics(minecraft.player.getStats());
         }
 
         guiGraphics.fill(0, 0, width, height, 0x40E6D8B7);
@@ -305,8 +385,7 @@ public class CustomGuiScreen extends Screen {
 
             if (selectedSection == 2) {
                 drawSkillsSection(guiGraphics, mouseX, mouseY, layout);
-            }
-            else if (selectedSection == 3) {
+            } else if (selectedSection == 3) {
                 drawStatsSection(guiGraphics, mouseX, mouseY, layout);
             }
         }
@@ -345,7 +424,7 @@ public class CustomGuiScreen extends Screen {
     private void drawSkillsSection(GuiGraphics guiGraphics, int mouseX, int mouseY, ScreenLayout layout) {
         int panelGap = 4;
 
-        int panelWidth = (int)(layout.contentWidth * 0.48);
+        int panelWidth = (int) (layout.contentWidth * 0.45);
 
         int totalWidth = (panelWidth * 2) + panelGap;
         int startX = layout.contentX + ((layout.contentWidth - totalWidth) / 2);
@@ -357,47 +436,119 @@ public class CustomGuiScreen extends Screen {
         int panelHeight = layout.contentHeight - (layout.contentHeight / 8);
 
         renderPaperPanel(guiGraphics, leftPanelX, panelY, panelWidth, panelHeight);
-        drawSubmenuTitle(guiGraphics, "Combat Skills", leftPanelX, panelY);
+
+        // Center the title properly
+        String leftTitle = "General Skills";
+        int leftTitleWidth = font.width(leftTitle);
+        int leftTitleX = leftPanelX + (panelWidth - leftTitleWidth) / 2;
+        drawSubmenuTitle(guiGraphics, leftTitle, leftTitleX, panelY);
 
         renderPaperPanel(guiGraphics, rightPanelX, panelY, panelWidth, panelHeight);
-        drawSubmenuTitle(guiGraphics, "Crafting Skills", rightPanelX, panelY);
 
-        int leftStatsX = leftPanelX + layout.contentWidth / 32;
-        int statsY = panelY + layout.contentHeight / 12 + 20;
-        int lineSpacing = layout.contentHeight / 16;
+        String rightTitle = "Specification Skills";
+        int rightTitleWidth = font.width(rightTitle);
+        int rightTitleX = rightPanelX + (panelWidth - rightTitleWidth) / 2;
+        drawSubmenuTitle(guiGraphics, rightTitle, rightTitleX, panelY);
 
-        for (int i = 0; i < COMBAT_SKILLS.length; i++) {
-            drawSkillStat(guiGraphics, COMBAT_SKILLS[i], combatSkillLevels[i],
-                    leftStatsX, statsY + (lineSpacing * i));
-        }
+        int columnWidth = panelWidth / 3;
+        int headerY = panelY + layout.contentHeight / 10 + 10;
 
-        int rightStatsX = rightPanelX + layout.contentWidth / 32;
+        float scale = 0.9f;
 
-        for (int i = 0; i < CRAFTING_SKILLS.length; i++) {
-            drawSkillStat(guiGraphics, CRAFTING_SKILLS[i], craftingSkillLevels[i],
-                    rightStatsX, statsY + (lineSpacing * i));
-        }
+        // Center the column headers properly
+        String col1Title = "Skill Level";
+        String col2Title = "Progress Bar";
+        String col3Title = "Progression";
+
+        // Calculate true center positions for each column
+        int col1CenterX = leftPanelX + columnWidth / 2;
+        int col2CenterX = leftPanelX + columnWidth + columnWidth / 2;
+        int col3CenterX = leftPanelX + columnWidth * 2 + columnWidth / 2;
+
+        // Calculate the text widths and adjust positions for true centering
+        int col1Width = (int)(font.width(col1Title) * scale);
+        int col2Width = (int)(font.width(col2Title) * scale);
+        int col3Width = (int)(font.width(col3Title) * scale);
+
+        int col1X = col1CenterX - col1Width / 2;
+        int col2X = col2CenterX - col2Width / 2;
+        int col3X = col3CenterX - col3Width / 2;
+
+        // Draw the scaled and centered text
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().scale(scale, scale, 1.0f);
+
+        guiGraphics.drawString(font, col1Title, (int)(col1X / scale), (int)(headerY / scale), PARCHMENT_COLOR);
+        guiGraphics.drawString(font, col2Title, (int)(col2X / scale), (int)(headerY / scale), PARCHMENT_COLOR);
+        guiGraphics.drawString(font, col3Title, (int)(col3X / scale), (int)(headerY / scale), PARCHMENT_COLOR);
+
+        guiGraphics.pose().popPose();
+
+        guiGraphics.fill(leftPanelX + 5, headerY + (int)(font.lineHeight * scale) + 2,
+                leftPanelX + panelWidth - 5, headerY + (int)(font.lineHeight * scale) + 3,
+                PARCHMENT_COLOR);
+
+        int statsY = headerY + (int)(font.lineHeight * scale) + 10;
+        int lineSpacing = layout.contentHeight / 18;
+
+        drawAgilitySkill(guiGraphics, leftPanelX, statsY, columnWidth, scale);
     }
 
-    private void drawSkillStat(GuiGraphics guiGraphics, String skillName, int level, int x, int y) {
-        float percentage = level / 50.0f;
-        int maxBarWidth = 120;
-        int barWidth = (int)(maxBarWidth * percentage);
-        int barHeight = 8;
+    private void drawAgilitySkill(GuiGraphics guiGraphics, int x, int y, int columnWidth, float scale) {
+        int barHeight = 6;
+        int maxBarWidth = columnWidth - 25;
 
-        String text = skillName + ": " + level;
-        guiGraphics.drawString(font, text, x, y, PARCHMENT_COLOR);
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().scale(scale, scale, 1.0f);
 
-        guiGraphics.fill(x, y + font.lineHeight + 2, x + maxBarWidth, y + font.lineHeight + 2 + barHeight, 0xFF555555);
+        // Center the skill level text in first column
+        String levelText = "Agility: " + agilityLevel;
+        int levelTextWidth = (int)(font.width(levelText) * scale);
+        int col1CenterX = x + columnWidth / 2;
+        float scaledX = (col1CenterX - levelTextWidth / (2 * scale)) / scale;
+        float scaledY = y / scale;
+        guiGraphics.drawString(font, levelText, (int)scaledX, (int)scaledY, PARCHMENT_COLOR);
 
-        guiGraphics.fill(x, y + font.lineHeight + 2, x + barWidth, y + font.lineHeight + 2 + barHeight, RAINBOW_COLORS[2]);
+        guiGraphics.pose().popPose();
+
+        // Center the progress bar in the second column
+        int barX = x + columnWidth + (columnWidth - maxBarWidth) / 2;
+
+        int textCenterY = y + (int)((font.lineHeight * scale) / 2);
+        guiGraphics.fill(barX, textCenterY - barHeight/2,
+                barX + maxBarWidth, textCenterY + barHeight/2,
+                0xFF555555);
+
+        int barWidth = (int) (maxBarWidth * agilityProgress);
+        int barColor = agilityLevel < MAX_AGILITY_LEVEL ? RAINBOW_COLORS[2] : RAINBOW_COLORS[4];
+        guiGraphics.fill(barX, textCenterY - barHeight/2,
+                barX + barWidth, textCenterY + barHeight/2,
+                barColor);
+
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().scale(scale, scale, 1.0f);
+
+        // Center the progression text in third column
+        String progressText;
+        if (agilityLevel < MAX_AGILITY_LEVEL) {
+            progressText = String.format("%.1f/%.1f km",
+                    agilityProgress * nextLevelDistance,
+                    nextLevelDistance);
+        } else {
+            progressText = "Max Level";
+        }
+
+        int progressTextWidth = (int)(font.width(progressText) * scale);
+        int col3CenterX = x + columnWidth * 2 + columnWidth / 2;
+        scaledX = (col3CenterX - progressTextWidth / (2 * scale)) / scale;
+
+        int textColor = agilityLevel < MAX_AGILITY_LEVEL ? PARCHMENT_COLOR : 0xFF55FF55;
+        guiGraphics.drawString(font, progressText, (int)scaledX, (int)scaledY, textColor);
+
+        guiGraphics.pose().popPose();
     }
 
     private void drawStatsSection(GuiGraphics guiGraphics, int mouseX, int mouseY, ScreenLayout layout) {
-        if (!areStatsLoaded && minecraft != null) {
-            loadPlayerStatistics();
-        }
-
         int submenuWidth = layout.contentWidth / 6;
         int submenuStartX = layout.contentX + layout.contentWidth / 128;
         int submenuStartY = layout.contentY + layout.contentHeight / 16;
@@ -432,6 +583,7 @@ public class CustomGuiScreen extends Screen {
             String buttonText = STAT_SUBMENU_LABELS[i];
             int buttonTextWidth = font.width(buttonText);
 
+            // Center text properly in button
             int buttonTextX = submenuStartX + buttonRightOffset + ((submenuWidth - buttonRightOffset - buttonTextWidth) / 2);
 
             int textHeight = font.lineHeight;
@@ -445,46 +597,51 @@ public class CustomGuiScreen extends Screen {
                 contentWidth, contentHeight);
 
         String submenuTitle = STAT_SUBMENU_LABELS[selectedStatsSubmenu];
-        drawSubmenuTitle(guiGraphics, submenuTitle, contentStartX, contentStartY);
 
-        int statsX = contentStartX + layout.contentWidth / 32;
+        // Center the submenu title
+        int titleWidth = (int)(font.width(submenuTitle) * 1.2f);
+        int titleX = contentStartX + (contentWidth - titleWidth) / 2;
+        drawSubmenuTitle(guiGraphics, submenuTitle, titleX, contentStartY);
+
+        int statsX = contentStartX + contentWidth / 10;
         int statsY = contentStartY + layout.contentHeight / 12 + 20;
         int lineSpacing = layout.contentHeight / 16;
 
-        drawSubmenuContent(guiGraphics, statsX, statsY, lineSpacing);
+        drawSubmenuContent(guiGraphics, statsX, statsY, lineSpacing, contentStartX, contentWidth);
     }
 
-    private void drawSubmenuContent(GuiGraphics guiGraphics, int x, int y, int lineSpacing) {
+    private void drawSubmenuContent(GuiGraphics guiGraphics, int x, int y, int lineSpacing, int contentStartX, int contentWidth) {
         switch (selectedStatsSubmenu) {
             case 0:
-                drawStat(guiGraphics, "Deaths", cachedDeaths, x, y);
-                drawStat(guiGraphics, "Jumps", cachedJumps, x, y + lineSpacing);
-                drawDistanceStat(guiGraphics, "Distance Traveled", cachedTotalDistance, x, y + lineSpacing * 2);
+                drawStat(guiGraphics, "Deaths", cachedDeaths, x, y, contentStartX, contentWidth);
+                drawStat(guiGraphics, "Jumps", cachedJumps, x, y + lineSpacing, contentStartX, contentWidth);
+                drawDistanceStat(guiGraphics, "Distance Traveled", cachedTotalDistance, x, y + lineSpacing * 2, contentStartX, contentWidth);
                 break;
 
             case 1:
-                drawStat(guiGraphics, "Mob Kills", cachedMobKills, x, y);
-                drawStat(guiGraphics, "Player Kills", cachedPlayerKills, x, y + lineSpacing);
+                drawStat(guiGraphics, "Mob Kills", cachedMobKills, x, y, contentStartX, contentWidth);
+                drawStat(guiGraphics, "Player Kills", cachedPlayerKills, x, y + lineSpacing, contentStartX, contentWidth);
+                drawStat(guiGraphics,"Damage Dealt", cachedDamageDealt, x, y + lineSpacing * 2, contentStartX, contentWidth);
                 break;
 
             case 2:
-                drawStat(guiGraphics, "Items Stolen", 0, x, y);
-                drawStat(guiGraphics, "Bounty", 0, x, y + lineSpacing);
+                drawStat(guiGraphics, "Items Stolen", 0, x, y, contentStartX, contentWidth);
+                drawStat(guiGraphics, "Bounty", 0, x, y + lineSpacing, contentStartX, contentWidth);
                 break;
 
             case 3:
-                drawStat(guiGraphics, "Spells Cast", 0, x, y);
-                drawStat(guiGraphics, "Magic Level", 0, x, y + lineSpacing);
+                drawStat(guiGraphics, "Spells Cast", 0, x, y, contentStartX, contentWidth);
+                drawStat(guiGraphics, "Magic Level", 0, x, y + lineSpacing, contentStartX, contentWidth);
                 break;
 
             case 4:
-                drawStat(guiGraphics, "Sword Kills", 0, x, y);
-                drawStat(guiGraphics, "Bow Kills", 0, x, y + lineSpacing);
+                drawStat(guiGraphics, "Sword Kills", 0, x, y, contentStartX, contentWidth);
+                drawStat(guiGraphics, "Bow Kills", 0, x, y + lineSpacing, contentStartX, contentWidth);
                 break;
 
             case 5:
-                drawStat(guiGraphics, "Blocks Mined", 0, x, y);
-                drawStat(guiGraphics, "Items Crafted", 0, x, y + lineSpacing);
+                drawStat(guiGraphics, "Blocks Mined", 0, x, y, contentStartX, contentWidth);
+                drawStat(guiGraphics, "Items Crafted", 0, x, y + lineSpacing, contentStartX, contentWidth);
                 break;
         }
     }
@@ -511,21 +668,25 @@ public class CustomGuiScreen extends Screen {
         guiGraphics.pose().pushPose();
         guiGraphics.pose().scale(scale, scale, 1.0f);
         guiGraphics.drawString(font, title,
-                (int) ((x + 20) / scale),
+                (int) (x / scale),
                 (int) (titleY / scale),
                 PARCHMENT_COLOR);
         guiGraphics.pose().popPose();
     }
 
-    private void drawStat(GuiGraphics guiGraphics, String label, int value, int x, int y) {
+    private void drawStat(GuiGraphics guiGraphics, String label, int value, int x, int y, int contentStartX, int contentWidth) {
         String text = label + ": " + value;
-        guiGraphics.drawString(font, text, x, y, PARCHMENT_COLOR);
+        int textWidth = font.width(text);
+        int centeredX = contentStartX + (contentWidth - textWidth) / 2;
+        guiGraphics.drawString(font, text, centeredX, y, PARCHMENT_COLOR);
     }
 
-    private void drawDistanceStat(GuiGraphics guiGraphics, String label, double valueKm, int x, int y) {
+    private void drawDistanceStat(GuiGraphics guiGraphics, String label, double valueKm, int x, int y, int contentStartX, int contentWidth) {
         String formattedDistance = String.format("%.2f", valueKm);
         String text = label + ": " + formattedDistance + " km";
-        guiGraphics.drawString(font, text, x, y, PARCHMENT_COLOR);
+        int textWidth = font.width(text);
+        int centeredX = contentStartX + (contentWidth - textWidth) / 2;
+        guiGraphics.drawString(font, text, centeredX, y, PARCHMENT_COLOR);
     }
 
     private void renderTexturedPanel(GuiGraphics guiGraphics, ResourceLocation texture,
@@ -545,23 +706,18 @@ public class CustomGuiScreen extends Screen {
         }
     }
 
-
-
     private void renderPaperPanel(GuiGraphics guiGraphics, int x, int y, int width, int height) {
         guiGraphics.flush();
 
-        // Define thicker border dimensions
         int borderPillarWidth = BORDER_PILLAR_WIDTH * 2;
         int borderHeight = BORDER_HEIGHT * 2;
         int cornerSize = CORNER_SIZE * 2;
 
-        // Calculate the inner panel dimensions - shrink the panel to fit inside borders
         int innerX = x + borderPillarWidth;
         int innerY = y + borderHeight;
         int innerWidth = width - (borderPillarWidth * 2);
         int innerHeight = height - (borderHeight * 2);
 
-        // Render the inner panel background
         com.mojang.blaze3d.systems.RenderSystem.enableBlend();
         com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.9F);
 
@@ -579,81 +735,73 @@ public class CustomGuiScreen extends Screen {
 
         com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
-        // Draw borders with rotation capability
         drawPaperPanelBorders(guiGraphics, x, y, width, height, borderPillarWidth, borderHeight, cornerSize);
     }
 
     private void drawPaperPanelBorders(GuiGraphics guiGraphics, int x, int y, int width, int height,
                                        int borderPillarWidth, int borderHeight, int cornerSize) {
-        // Draw left side border with rotation capability
         drawRotatableBorder(guiGraphics, PAPER_SIDE_TEXTURE,
                 x, y + cornerSize,
                 borderPillarWidth, height - (cornerSize * 2),
-                0); // Degrees of rotation - can be changed
+                0);
 
-        // Draw right side border with rotation capability
         drawRotatableBorder(guiGraphics, PAPER_SIDE_TEXTURE,
                 x + width - borderPillarWidth, y + cornerSize,
                 borderPillarWidth, height - (cornerSize * 2),
-                180); // Rotation by 180 degrees - can be changed
+                180);
 
-        // Draw top border with rotation capability
         drawRotatableBorder(guiGraphics, PAPER_SIDETOP_TEXTURE,
                 x + cornerSize, y,
                 width - (cornerSize * 2), borderHeight,
-                0); // Degrees of rotation - can be changed
+                0);
 
-        // Draw bottom border with rotation capability and darkened color
         com.mojang.blaze3d.systems.RenderSystem.setShaderColor(0.8f, 0.8f, 0.8f, 1.0f);
 
         drawRotatableBorder(guiGraphics, PAPER_SIDETOP_TEXTURE,
                 x + cornerSize, y + height - borderHeight,
                 width - (cornerSize * 2), borderHeight,
-                180); // Rotation by 180 degrees - can be changed
+                180);
 
         com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
 
-        // Draw corner pieces that fit perfectly in each corner
         drawPaperCorners(guiGraphics, x, y, width, height, cornerSize);
     }
 
     /**
      * Draws the corner pieces of the paper panel
+     *
      * @param guiGraphics The graphics context
-     * @param x The x position of the panel
-     * @param y The y position of the panel
-     * @param width The width of the panel
-     * @param height The height of the panel
-     * @param cornerSize The size of the corner pieces
+     * @param x           The x position of the panel
+     * @param y           The y position of the panel
+     * @param width       The width of the panel
+     * @param height      The height of the panel
+     * @param cornerSize  The size of the corner pieces
      */
     private void drawPaperCorners(GuiGraphics guiGraphics, int x, int y, int width, int height, int cornerSize) {
         com.mojang.blaze3d.vertex.PoseStack poseStack = guiGraphics.pose();
 
-        // Top-left corner - standard orientation (0 degrees)
         drawRotatableCorner(guiGraphics, PAPER_CORNER_TEXTURE,
                 x, y, cornerSize, cornerSize, 0);
 
-        // Top-right corner - rotate 90 degrees clockwise
         drawRotatableCorner(guiGraphics, PAPER_CORNER_TEXTURE,
                 x + width - cornerSize, y, cornerSize, cornerSize, 90);
 
-        // Bottom-right corner - rotate 180 degrees
         drawRotatableCorner(guiGraphics, PAPER_CORNER_TEXTURE,
                 x + width - cornerSize, y + height - cornerSize, cornerSize, cornerSize, 180);
 
-        // Bottom-left corner - rotate 270 degrees clockwise
         drawRotatableCorner(guiGraphics, PAPER_CORNER_TEXTURE,
                 x, y + height - cornerSize, cornerSize, cornerSize, 270);
     }
 
     /**
      * Draws a rotatable corner piece
-     * @param guiGraphics The graphics context
-     * @param texture The texture to use
-     * @param x The x position
-     * @param y The y position
-     * @param width The width
-     * @param height The height
+     *
+     * @param guiGraphics     The graphics context
+     * @param texture         The texture to use
+     * @param x               The x position
+     * @param y               The y position
+     * @param width           The width
+     * @param height          The height
      * @param rotationDegrees The rotation angle in degrees
      */
     private void drawRotatableCorner(GuiGraphics guiGraphics,
@@ -661,40 +809,34 @@ public class CustomGuiScreen extends Screen {
                                      int x, int y, int width, int height, float rotationDegrees) {
         com.mojang.blaze3d.vertex.PoseStack poseStack = guiGraphics.pose();
 
-        // Save current transformation state
         poseStack.pushPose();
 
         if (rotationDegrees != 0) {
-            // Move to the corner's center for rotation
             poseStack.translate(x + width / 2.0f, y + height / 2.0f, 0);
 
-            // Apply rotation
             poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(rotationDegrees));
 
-            // Move back to draw from the top-left corner
             poseStack.translate(-width / 2.0f, -height / 2.0f, 0);
 
-            // Draw the rotated corner
             guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
                     texture, 0, 0, 0, 0, width, height, 32, 32);
         } else {
-            // No rotation needed, draw directly
             guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
                     texture, x, y, 0, 0, width, height, 32, 32);
         }
 
-        // Restore transformation state
         poseStack.popPose();
     }
 
     /**
      * Draws a border with rotation capability
-     * @param guiGraphics The graphics context
-     * @param texture The texture to use
-     * @param x The x position
-     * @param y The y position
-     * @param width The width of the border
-     * @param height The height of the border
+     *
+     * @param guiGraphics     The graphics context
+     * @param texture         The texture to use
+     * @param x               The x position
+     * @param y               The y position
+     * @param width           The width of the border
+     * @param height          The height of the border
      * @param rotationDegrees The rotation angle in degrees
      */
     private void drawRotatableBorder(GuiGraphics guiGraphics,
@@ -702,42 +844,32 @@ public class CustomGuiScreen extends Screen {
                                      int x, int y, int width, int height, float rotationDegrees) {
         com.mojang.blaze3d.vertex.PoseStack poseStack = guiGraphics.pose();
 
-        // Save the current transformation state
         poseStack.pushPose();
 
-        // Calculate the center of the border for rotation
         float centerX = x + width / 2.0f;
         float centerY = y + height / 2.0f;
 
-        // Move to the center point for rotation
         poseStack.translate(centerX, centerY, 0);
 
-        // Apply rotation around the Z axis
         poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(rotationDegrees));
 
-        // Move back to draw from the corner, accounting for the dimensions
         poseStack.translate(-width / 2.0f, -height / 2.0f, 0);
 
-        // Determine texture size (32x32)
         int textureSize = 32;
 
-        // Draw with tiling to avoid stretching
         for (int tileX = 0; tileX < width; tileX += textureSize) {
             for (int tileY = 0; tileY < height; tileY += textureSize) {
                 int tileWidth = Math.min(textureSize, width - tileX);
                 int tileHeight = Math.min(textureSize, height - tileY);
 
-                // Skip if dimensions are invalid
                 if (tileWidth <= 0 || tileHeight <= 0) continue;
 
-                // Draw the tile
                 guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
                         texture, tileX, tileY, 0, 0,
                         tileWidth, tileHeight, textureSize, textureSize);
             }
         }
 
-        // Restore the transformation state
         poseStack.popPose();
     }
 
@@ -760,12 +892,10 @@ public class CustomGuiScreen extends Screen {
         }
 
 
-
         com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
         drawPanelBorders(guiGraphics, x, y, width, height);
     }
-
 
 
     private void drawPanelBorders(GuiGraphics guiGraphics, int x, int y, int width, int height) {
@@ -795,30 +925,30 @@ public class CustomGuiScreen extends Screen {
 
         poseStack.pushPose();
         guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
-                CORNER_TEXTURE, x, y + height - BORDER_HEIGHT - CORNER_SIZE/2,
+                CORNER_TEXTURE, x, y + height - BORDER_HEIGHT - CORNER_SIZE / 2,
                 0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
         poseStack.popPose();
 
         poseStack.pushPose();
-        poseStack.translate(x + width - CORNER_SIZE/2, y + height - BORDER_HEIGHT, 0);
+        poseStack.translate(x + width - CORNER_SIZE / 2, y + height - BORDER_HEIGHT, 0);
         poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(270));
-        poseStack.translate(-CORNER_SIZE/2, -CORNER_SIZE/2, 0);
+        poseStack.translate(-CORNER_SIZE / 2, -CORNER_SIZE / 2, 0);
         guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
                 CORNER_TEXTURE, 0, 0, 0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
         poseStack.popPose();
 
         poseStack.pushPose();
-        poseStack.translate(x + width - CORNER_SIZE/2, y + CORNER_SIZE/2, 0);
+        poseStack.translate(x + width - CORNER_SIZE / 2, y + CORNER_SIZE / 2, 0);
         poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(180));
-        poseStack.translate(-CORNER_SIZE/2, -CORNER_SIZE/2, 0);
+        poseStack.translate(-CORNER_SIZE / 2, -CORNER_SIZE / 2, 0);
         guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
                 CORNER_TEXTURE, 0, 0, 0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
         poseStack.popPose();
 
         poseStack.pushPose();
-        poseStack.translate(x + CORNER_SIZE/2, y + CORNER_SIZE/2, 0);
+        poseStack.translate(x + CORNER_SIZE / 2, y + CORNER_SIZE / 2, 0);
         poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(90));
-        poseStack.translate(-CORNER_SIZE/2, -CORNER_SIZE/2, 0);
+        poseStack.translate(-CORNER_SIZE / 2, -CORNER_SIZE / 2, 0);
         guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
                 CORNER_TEXTURE, 0, 0, 0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
         poseStack.popPose();
@@ -848,4 +978,6 @@ public class CustomGuiScreen extends Screen {
             contentHeight = screenHeight - topMargin - sectionButtonHeight - (screenHeight / 32);
         }
     }
+
+
 }
