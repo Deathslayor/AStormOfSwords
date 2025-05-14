@@ -441,7 +441,7 @@ public class CustomGuiScreen extends Screen {
                     isSelected ? 0xFFFFFFFF : PARCHMENT_COLOR);
         }
 
-        renderStonePanel(guiGraphics, contentStartX, contentStartY,
+        renderPaperPanel(guiGraphics, contentStartX, contentStartY,
                 contentWidth, contentHeight);
 
         String submenuTitle = STAT_SUBMENU_LABELS[selectedStatsSubmenu];
@@ -545,99 +545,199 @@ public class CustomGuiScreen extends Screen {
         }
     }
 
-    private void renderTexturedPaperPanel(GuiGraphics guiGraphics, ResourceLocation texture,
-                                     int x, int y, int width, int height, boolean withBorders) {
-        guiGraphics.flush();
 
-        com.mojang.blaze3d.systems.RenderSystem.enableBlend();
-        com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.9F);
-
-        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
-                texture, x, y, 0, 0, width, height, 32, 32);
-
-        com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-
-        if (withBorders) {
-            drawPaperPanelBorders(guiGraphics, x, y, width, height);
-        }
-    }
 
     private void renderPaperPanel(GuiGraphics guiGraphics, int x, int y, int width, int height) {
         guiGraphics.flush();
 
+        // Define thicker border dimensions
+        int borderPillarWidth = BORDER_PILLAR_WIDTH * 2;
+        int borderHeight = BORDER_HEIGHT * 2;
+        int cornerSize = CORNER_SIZE * 2;
+
+        // Calculate the inner panel dimensions - shrink the panel to fit inside borders
+        int innerX = x + borderPillarWidth;
+        int innerY = y + borderHeight;
+        int innerWidth = width - (borderPillarWidth * 2);
+        int innerHeight = height - (borderHeight * 2);
+
+        // Render the inner panel background
         com.mojang.blaze3d.systems.RenderSystem.enableBlend();
         com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.9F);
 
-        int tileSize = 16;
-        for (int tileX = 0; tileX < width; tileX += tileSize) {
-            for (int tileY = 0; tileY < height; tileY += tileSize) {
-                int tileWidth = Math.min(tileSize, width - tileX);
-                int tileHeight = Math.min(tileSize, height - tileY);
+        int tileSize = 32;
+        for (int tileX = 0; tileX < innerWidth; tileX += tileSize) {
+            for (int tileY = 0; tileY < innerHeight; tileY += tileSize) {
+                int tileWidth = Math.min(tileSize, innerWidth - tileX);
+                int tileHeight = Math.min(tileSize, innerHeight - tileY);
 
                 guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
-                        PAPER_TEXTURE, x + tileX, y + tileY, 0, 0,
+                        PAPER_TEXTURE, innerX + tileX, innerY + tileY, 0, 0,
                         tileWidth, tileHeight, tileSize, tileSize);
             }
         }
 
         com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
-        drawPaperPanelBorders(guiGraphics, x, y, width, height);
+        // Draw borders with rotation capability
+        drawPaperPanelBorders(guiGraphics, x, y, width, height, borderPillarWidth, borderHeight, cornerSize);
     }
 
-    private void drawPaperPanelBorders(GuiGraphics guiGraphics, int x, int y, int width, int height) {
-        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
-                PAPER_SIDE_TEXTURE, x, y, 0, 0, BORDER_PILLAR_WIDTH, height, 16, 64);
+    private void drawPaperPanelBorders(GuiGraphics guiGraphics, int x, int y, int width, int height,
+                                       int borderPillarWidth, int borderHeight, int cornerSize) {
+        // Draw left side border with rotation capability
+        drawRotatableBorder(guiGraphics, PAPER_SIDE_TEXTURE,
+                x, y + cornerSize,
+                borderPillarWidth, height - (cornerSize * 2),
+                0); // Degrees of rotation - can be changed
 
-        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
-                PAPER_SIDE_TEXTURE, x + width - BORDER_PILLAR_WIDTH, y, 0, 0,
-                BORDER_PILLAR_WIDTH, height, 16, 64);
+        // Draw right side border with rotation capability
+        drawRotatableBorder(guiGraphics, PAPER_SIDE_TEXTURE,
+                x + width - borderPillarWidth, y + cornerSize,
+                borderPillarWidth, height - (cornerSize * 2),
+                180); // Rotation by 180 degrees - can be changed
 
-        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
-                PAPER_SIDETOP_TEXTURE, x, y, 0, 0, width, BORDER_HEIGHT, 64, 16);
+        // Draw top border with rotation capability
+        drawRotatableBorder(guiGraphics, PAPER_SIDETOP_TEXTURE,
+                x + cornerSize, y,
+                width - (cornerSize * 2), borderHeight,
+                0); // Degrees of rotation - can be changed
 
+        // Draw bottom border with rotation capability and darkened color
         com.mojang.blaze3d.systems.RenderSystem.setShaderColor(0.8f, 0.8f, 0.8f, 1.0f);
 
-        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
-                PAPER_SIDETOP_TEXTURE, x, y + height - BORDER_HEIGHT, 0, 0,
-                width, BORDER_HEIGHT, 64, 16);
+        drawRotatableBorder(guiGraphics, PAPER_SIDETOP_TEXTURE,
+                x + cornerSize, y + height - borderHeight,
+                width - (cornerSize * 2), borderHeight,
+                180); // Rotation by 180 degrees - can be changed
 
         com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
 
-        drawPaperCorners(guiGraphics, x, y, width, height);
+        // Draw corner pieces that fit perfectly in each corner
+        drawPaperCorners(guiGraphics, x, y, width, height, cornerSize);
     }
 
-    private void drawPaperCorners(GuiGraphics guiGraphics, int x, int y, int width, int height) {
+    /**
+     * Draws the corner pieces of the paper panel
+     * @param guiGraphics The graphics context
+     * @param x The x position of the panel
+     * @param y The y position of the panel
+     * @param width The width of the panel
+     * @param height The height of the panel
+     * @param cornerSize The size of the corner pieces
+     */
+    private void drawPaperCorners(GuiGraphics guiGraphics, int x, int y, int width, int height, int cornerSize) {
         com.mojang.blaze3d.vertex.PoseStack poseStack = guiGraphics.pose();
 
-        poseStack.pushPose();
-        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
-                PAPER_CORNER_TEXTURE, x, y + height - BORDER_HEIGHT - CORNER_SIZE/2,
-                0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
-        poseStack.popPose();
+        // Top-left corner - standard orientation (0 degrees)
+        drawRotatableCorner(guiGraphics, PAPER_CORNER_TEXTURE,
+                x, y, cornerSize, cornerSize, 0);
 
-        poseStack.pushPose();
-        poseStack.translate(x + width - CORNER_SIZE/2, y + height - BORDER_HEIGHT, 0);
-        poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(270));
-        poseStack.translate(-CORNER_SIZE/2, -CORNER_SIZE/2, 0);
-        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
-                PAPER_CORNER_TEXTURE, 0, 0, 0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
-        poseStack.popPose();
+        // Top-right corner - rotate 90 degrees clockwise
+        drawRotatableCorner(guiGraphics, PAPER_CORNER_TEXTURE,
+                x + width - cornerSize, y, cornerSize, cornerSize, 90);
 
-        poseStack.pushPose();
-        poseStack.translate(x + width - CORNER_SIZE/2, y + CORNER_SIZE/2, 0);
-        poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(180));
-        poseStack.translate(-CORNER_SIZE/2, -CORNER_SIZE/2, 0);
-        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
-                PAPER_CORNER_TEXTURE, 0, 0, 0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
-        poseStack.popPose();
+        // Bottom-right corner - rotate 180 degrees
+        drawRotatableCorner(guiGraphics, PAPER_CORNER_TEXTURE,
+                x + width - cornerSize, y + height - cornerSize, cornerSize, cornerSize, 180);
 
+        // Bottom-left corner - rotate 270 degrees clockwise
+        drawRotatableCorner(guiGraphics, PAPER_CORNER_TEXTURE,
+                x, y + height - cornerSize, cornerSize, cornerSize, 270);
+    }
+
+    /**
+     * Draws a rotatable corner piece
+     * @param guiGraphics The graphics context
+     * @param texture The texture to use
+     * @param x The x position
+     * @param y The y position
+     * @param width The width
+     * @param height The height
+     * @param rotationDegrees The rotation angle in degrees
+     */
+    private void drawRotatableCorner(GuiGraphics guiGraphics,
+                                     net.minecraft.resources.ResourceLocation texture,
+                                     int x, int y, int width, int height, float rotationDegrees) {
+        com.mojang.blaze3d.vertex.PoseStack poseStack = guiGraphics.pose();
+
+        // Save current transformation state
         poseStack.pushPose();
-        poseStack.translate(x + CORNER_SIZE/2, y + CORNER_SIZE/2, 0);
-        poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(90));
-        poseStack.translate(-CORNER_SIZE/2, -CORNER_SIZE/2, 0);
-        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
-                PAPER_CORNER_TEXTURE, 0, 0, 0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
+
+        if (rotationDegrees != 0) {
+            // Move to the corner's center for rotation
+            poseStack.translate(x + width / 2.0f, y + height / 2.0f, 0);
+
+            // Apply rotation
+            poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(rotationDegrees));
+
+            // Move back to draw from the top-left corner
+            poseStack.translate(-width / 2.0f, -height / 2.0f, 0);
+
+            // Draw the rotated corner
+            guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                    texture, 0, 0, 0, 0, width, height, 32, 32);
+        } else {
+            // No rotation needed, draw directly
+            guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                    texture, x, y, 0, 0, width, height, 32, 32);
+        }
+
+        // Restore transformation state
+        poseStack.popPose();
+    }
+
+    /**
+     * Draws a border with rotation capability
+     * @param guiGraphics The graphics context
+     * @param texture The texture to use
+     * @param x The x position
+     * @param y The y position
+     * @param width The width of the border
+     * @param height The height of the border
+     * @param rotationDegrees The rotation angle in degrees
+     */
+    private void drawRotatableBorder(GuiGraphics guiGraphics,
+                                     net.minecraft.resources.ResourceLocation texture,
+                                     int x, int y, int width, int height, float rotationDegrees) {
+        com.mojang.blaze3d.vertex.PoseStack poseStack = guiGraphics.pose();
+
+        // Save the current transformation state
+        poseStack.pushPose();
+
+        // Calculate the center of the border for rotation
+        float centerX = x + width / 2.0f;
+        float centerY = y + height / 2.0f;
+
+        // Move to the center point for rotation
+        poseStack.translate(centerX, centerY, 0);
+
+        // Apply rotation around the Z axis
+        poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(rotationDegrees));
+
+        // Move back to draw from the corner, accounting for the dimensions
+        poseStack.translate(-width / 2.0f, -height / 2.0f, 0);
+
+        // Determine texture size (32x32)
+        int textureSize = 32;
+
+        // Draw with tiling to avoid stretching
+        for (int tileX = 0; tileX < width; tileX += textureSize) {
+            for (int tileY = 0; tileY < height; tileY += textureSize) {
+                int tileWidth = Math.min(textureSize, width - tileX);
+                int tileHeight = Math.min(textureSize, height - tileY);
+
+                // Skip if dimensions are invalid
+                if (tileWidth <= 0 || tileHeight <= 0) continue;
+
+                // Draw the tile
+                guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                        texture, tileX, tileY, 0, 0,
+                        tileWidth, tileHeight, textureSize, textureSize);
+            }
+        }
+
+        // Restore the transformation state
         poseStack.popPose();
     }
 
