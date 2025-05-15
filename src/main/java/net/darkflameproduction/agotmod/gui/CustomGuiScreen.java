@@ -1,6 +1,7 @@
 package net.darkflameproduction.agotmod.gui;
 
 import net.darkflameproduction.agotmod.AGoTMod;
+import net.darkflameproduction.agotmod.item.ModItems;
 import net.darkflameproduction.agotmod.sound.ModSounds;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
@@ -10,6 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.Stats;
 import net.minecraft.stats.Stat;
 import net.minecraft.stats.StatsCounter;
+import net.minecraft.world.item.Items;
 
 public class CustomGuiScreen extends Screen {
     private static final ResourceLocation BLUR_LOCATION =
@@ -61,7 +63,7 @@ public class CustomGuiScreen extends Screen {
     };
 
     private static final String[] GENERAL_SKILLS = {
-            "Agility", "Strength"
+            "Agility", "Strength", "Endurance"
     };
 
     private static final int[] RAINBOW_COLORS = {
@@ -96,6 +98,93 @@ public class CustomGuiScreen extends Screen {
             Stats.CUSTOM.get(Stats.STRIDER_ONE_CM)
     };
 
+    private static final Stat<ResourceLocation>[] WEAPON_STATS = new Stat[]{
+            Stats.ITEM_USED.get(Items.WOODEN_SWORD),
+            Stats.ITEM_USED.get(Items.STONE_SWORD),
+            Stats.ITEM_USED.get(Items.IRON_SWORD),
+            Stats.ITEM_USED.get(Items.GOLDEN_SWORD),
+            Stats.ITEM_USED.get(Items.DIAMOND_SWORD),
+            Stats.ITEM_USED.get(Items.NETHERITE_SWORD),
+            Stats.ITEM_USED.get(Items.BOW),
+            Stats.ITEM_USED.get(Items.CROSSBOW),
+            Stats.ITEM_USED.get(Items.TRIDENT),
+            Stats.ITEM_USED.get(ModItems.BRONZE_SWORD.get()),
+            Stats.ITEM_USED.get(ModItems.DRAGONGLASS_DAGGER.get()),
+            Stats.ITEM_USED.get(ModItems.DRAGONGLASS_SPEAR.get()),
+            Stats.ITEM_USED.get(ModItems.BRONZE_SPATHA.get()),
+            Stats.ITEM_USED.get(ModItems.BRONZE_SPEAR.get()),
+            Stats.ITEM_USED.get(ModItems.BRONZE_PIKE.get()),
+            Stats.ITEM_USED.get(ModItems.BRONZE_BATTLEAXE.get()),
+            Stats.ITEM_USED.get(ModItems.BRONZE_DAGGER.get()),
+            Stats.ITEM_USED.get(ModItems.IRON_BATTLEAXE.get()),
+            Stats.ITEM_USED.get(ModItems.IRON_LONGSWORD.get()),
+            Stats.ITEM_USED.get(ModItems.IRON_DAGGER.get()),
+            Stats.ITEM_USED.get(ModItems.IRON_MACE.get()),
+            Stats.ITEM_USED.get(ModItems.IRON_PIKE.get()),
+            Stats.ITEM_USED.get(ModItems.IRON_SPEAR.get()),
+            Stats.ITEM_USED.get(ModItems.STEEL_LONGSWORD.get()),
+            Stats.ITEM_USED.get(ModItems.STEEL_SPEAR.get()),
+            Stats.ITEM_USED.get(ModItems.STEEL_PIKE.get()),
+            Stats.ITEM_USED.get(ModItems.STEEL_MACE.get()),
+            Stats.ITEM_USED.get(ModItems.STEEL_DAGGER.get()),
+            Stats.ITEM_USED.get(ModItems.STEEL_BATTLEAXE.get()),
+            Stats.ITEM_USED.get(ModItems.STEEL_HALBERD.get()),
+            Stats.ITEM_USED.get(ModItems.NOBLE_LONGSWORD.get()),
+            Stats.ITEM_USED.get(ModItems.NOBLE_SPEAR.get()),
+            Stats.ITEM_USED.get(ModItems.NOBLE_PIKE.get()),
+            Stats.ITEM_USED.get(ModItems.NOBLE_MACE.get()),
+            Stats.ITEM_USED.get(ModItems.NOBLE_DAGGER.get()),
+            Stats.ITEM_USED.get(ModItems.NOBLE_BATTLEAXE.get()),
+            Stats.ITEM_USED.get(ModItems.NOBLE_HALBERD.get()),
+            Stats.ITEM_USED.get(ModItems.STEEL_BOW.get()),
+            Stats.ITEM_USED.get(ModItems.STEEL_SWORD.get()),
+
+
+    };
+
+    private static final String[] WEAPON_NAMES = new String[]{
+            "Wooden Sword",
+            "Stone Sword",
+            "Iron Sword",
+            "Golden Sword",
+            "Diamond Sword",
+            "Netherite Sword",
+            "Bow",
+            "Crossbow",
+            "Trident",
+            "Bronze Sword",
+            "Dragonglass Dagger",
+            "Dragonglass Spear",
+            "Bronze Spatha",
+            "Bronze Spear",
+            "Bronze Pike",
+            "Bronze Battleaxe",
+            "Bronze Dagger",
+            "Iron Battleaxe",
+            "Iron Longsword",
+            "Iron Dagger",
+            "Iron Mace",
+            "Iron Pike",
+            "Iron Spear",
+            "Steel Longsword",
+            "Steel Spear",
+            "Steel Pike",
+            "Steel Mace",
+            "Steel Dagger",
+            "Steel Battleaxe",
+            "Steel Halberd",
+            "Noble Longsword",
+            "Noble Spear",
+            "Noble Pike",
+            "Noble Mace",
+            "Noble Dagger",
+            "Noble Battleaxe",
+            "Noble Halberd",
+            "Steel Bow",
+            "Steel Sword"
+
+    };
+
     private static final int BORDER_PILLAR_WIDTH = 6;
     private static final int BORDER_HEIGHT = 6;
     private static final int CORNER_SIZE = 12;
@@ -104,6 +193,11 @@ public class CustomGuiScreen extends Screen {
     private static final int MAX_AGILITY_LEVEL = 100;
     private static final double STRENGTH_LEVEL_MULTIPLIER = 1.06;
     private static final int MAX_STRENGTH_LEVEL = 100;
+    private static final double ENDURANCE_LEVEL_MULTIPLIER = 1.08;
+    private static final int MAX_ENDURANCE_LEVEL = 100;
+    private static final double WEAPON_SKILL_MULTIPLIER = 1.04;
+    private static final int MAX_WEAPON_SKILL_LEVEL = 100;
+    private static final double WEAPON_SKILL_BASE_REQUIREMENT = 100.0;
 
     private boolean isUsingShader = false;
     private float lastPlayerHealth = 0;
@@ -114,6 +208,9 @@ public class CustomGuiScreen extends Screen {
     private static final int STATS_UPDATE_INTERVAL = 100;
     private int statsUpdateTimer = 0;
     private boolean hasRequestedInitialStats = false;
+    private int[] cachedWeaponUsages = new int[WEAPON_STATS.length];
+    private String favoriteWeapon = "None";
+    private int favoriteWeaponUses = 0;
 
     private int cachedDeaths = 0;
     private int cachedDamageDealt= 0;
@@ -132,10 +229,263 @@ public class CustomGuiScreen extends Screen {
     private double strengthProgress = 0.0;
     private double nextStrengthLevelRequirement = 0.0;
 
+    private int enduranceLevel = 0;
+    private double enduranceProgress = 0.0;
+    private double nextEnduranceLevelRequirement = 0.0;
+
+    private int oneHandedLevel = 0;
+    private double oneHandedProgress = 0.0;
+    private double nextOneHandedRequirement = 0.0;
+
+    private int twoHandedLevel = 0;
+    private double twoHandedProgress = 0.0;
+    private double nextTwoHandedRequirement = 0.0;
+
+    private int polearmLevel = 0;
+    private double polearmProgress = 0.0;
+    private double nextPolearmRequirement = 0.0;
+
+    private int shortBladeLevel = 0;
+    private double shortBladeProgress = 0.0;
+    private double nextShortBladeRequirement = 0.0;
+
+    private int rangedLevel = 0;
+    private double rangedProgress = 0.0;
+    private double nextRangedRequirement = 0.0;
+
+    private static final int[] ONE_HANDED_STATS_INDICES = {0, 1, 2, 3, 4, 5, 9, 12, 17, 18, 20, 23, 29, 30, 36, 38};
+    private static final int[] TWO_HANDED_STATS_INDICES = {18, 23, 30};
+    private static final int[] POLEARM_STATS_INDICES = {8, 11, 13, 14, 21, 22, 24, 25, 29, 31, 36, 37};
+    private static final int[] SHORT_BLADE_STATS_INDICES = {10, 16, 19, 27, 34};
+    private static final int[] RANGED_STATS_INDICES = {6, 7, 37};
+
+    private int getCategoryUsage(int[] indices) {
+        int total = 0;
+        for (int index : indices) {
+            if (index < cachedWeaponUsages.length) {
+                total += cachedWeaponUsages[index];
+            }
+        }
+        return total;
+    }
+
+    private int getOneHandedUsage() {
+        return getCategoryUsage(ONE_HANDED_STATS_INDICES);
+    }
+
+    private int getTwoHandedUsage() {
+        return getCategoryUsage(TWO_HANDED_STATS_INDICES);
+    }
+
+    private int getPolearmUsage() {
+        return getCategoryUsage(POLEARM_STATS_INDICES);
+    }
+
+    private int getShortBladeUsage() {
+        return getCategoryUsage(SHORT_BLADE_STATS_INDICES);
+    }
+
+    private int getRangedUsage() {
+        return getCategoryUsage(RANGED_STATS_INDICES);
+    }
+
     public CustomGuiScreen() {
         super(Component.translatable("screen.agotmod.custom_gui"));
         this.selectedSection = lastSelectedSection;
         this.selectedStatsSubmenu = lastSelectedStatsSubmenu;
+    }
+
+    private void calculateWeaponSkillLevels() {
+        calculateOneHandedLevel();
+        calculateTwoHandedLevel();
+        calculatePolearmLevel();
+        calculateShortBladeLevel();
+        calculateRangedLevel();
+    }
+
+    private void calculateOneHandedLevel() {
+        int usage = getOneHandedUsage();
+        if (usage <= 0) {
+            oneHandedLevel = 0;
+            oneHandedProgress = 0.0;
+            nextOneHandedRequirement = WEAPON_SKILL_BASE_REQUIREMENT;
+            return;
+        }
+
+        double totalRequired = 0;
+        double currentRequirement = WEAPON_SKILL_BASE_REQUIREMENT;
+
+        for (int level = 1; level <= MAX_WEAPON_SKILL_LEVEL; level++) {
+            totalRequired += currentRequirement;
+
+            if (usage < totalRequired) {
+                oneHandedLevel = level - 1;
+                double previousLevelRequirement = totalRequired - currentRequirement;
+                oneHandedProgress = (usage - previousLevelRequirement) / currentRequirement;
+                nextOneHandedRequirement = currentRequirement;
+                return;
+            }
+
+            currentRequirement *= WEAPON_SKILL_MULTIPLIER;
+        }
+
+        oneHandedLevel = MAX_WEAPON_SKILL_LEVEL;
+        oneHandedProgress = 1.0;
+        nextOneHandedRequirement = 0;
+    }
+
+    private void calculateTwoHandedLevel() {
+        int usage = getTwoHandedUsage();
+        if (usage <= 0) {
+            twoHandedLevel = 0;
+            twoHandedProgress = 0.0;
+            nextTwoHandedRequirement = WEAPON_SKILL_BASE_REQUIREMENT;
+            return;
+        }
+
+        double totalRequired = 0;
+        double currentRequirement = WEAPON_SKILL_BASE_REQUIREMENT;
+
+        for (int level = 1; level <= MAX_WEAPON_SKILL_LEVEL; level++) {
+            totalRequired += currentRequirement;
+
+            if (usage < totalRequired) {
+                twoHandedLevel = level - 1;
+                double previousLevelRequirement = totalRequired - currentRequirement;
+                twoHandedProgress = (usage - previousLevelRequirement) / currentRequirement;
+                nextTwoHandedRequirement = currentRequirement;
+                return;
+            }
+
+            currentRequirement *= WEAPON_SKILL_MULTIPLIER;
+        }
+
+        twoHandedLevel = MAX_WEAPON_SKILL_LEVEL;
+        twoHandedProgress = 1.0;
+        nextTwoHandedRequirement = 0;
+    }
+
+    private void calculatePolearmLevel() {
+        int usage = getPolearmUsage();
+        if (usage <= 0) {
+            polearmLevel = 0;
+            polearmProgress = 0.0;
+            nextPolearmRequirement = WEAPON_SKILL_BASE_REQUIREMENT;
+            return;
+        }
+
+        double totalRequired = 0;
+        double currentRequirement = WEAPON_SKILL_BASE_REQUIREMENT;
+
+        for (int level = 1; level <= MAX_WEAPON_SKILL_LEVEL; level++) {
+            totalRequired += currentRequirement;
+
+            if (usage < totalRequired) {
+                polearmLevel = level - 1;
+                double previousLevelRequirement = totalRequired - currentRequirement;
+                polearmProgress = (usage - previousLevelRequirement) / currentRequirement;
+                nextPolearmRequirement = currentRequirement;
+                return;
+            }
+
+            currentRequirement *= WEAPON_SKILL_MULTIPLIER;
+        }
+
+        polearmLevel = MAX_WEAPON_SKILL_LEVEL;
+        polearmProgress = 1.0;
+        nextPolearmRequirement = 0;
+    }
+
+    private void calculateShortBladeLevel() {
+        int usage = getShortBladeUsage();
+        if (usage <= 0) {
+            shortBladeLevel = 0;
+            shortBladeProgress = 0.0;
+            nextShortBladeRequirement = WEAPON_SKILL_BASE_REQUIREMENT;
+            return;
+        }
+
+        double totalRequired = 0;
+        double currentRequirement = WEAPON_SKILL_BASE_REQUIREMENT;
+
+        for (int level = 1; level <= MAX_WEAPON_SKILL_LEVEL; level++) {
+            totalRequired += currentRequirement;
+
+            if (usage < totalRequired) {
+                shortBladeLevel = level - 1;
+                double previousLevelRequirement = totalRequired - currentRequirement;
+                shortBladeProgress = (usage - previousLevelRequirement) / currentRequirement;
+                nextShortBladeRequirement = currentRequirement;
+                return;
+            }
+
+            currentRequirement *= WEAPON_SKILL_MULTIPLIER;
+        }
+
+        shortBladeLevel = MAX_WEAPON_SKILL_LEVEL;
+        shortBladeProgress = 1.0;
+        nextShortBladeRequirement = 0;
+    }
+
+    private void calculateRangedLevel() {
+        int usage = getRangedUsage();
+        if (usage <= 0) {
+            rangedLevel = 0;
+            rangedProgress = 0.0;
+            nextRangedRequirement = WEAPON_SKILL_BASE_REQUIREMENT;
+            return;
+        }
+
+        double totalRequired = 0;
+        double currentRequirement = WEAPON_SKILL_BASE_REQUIREMENT;
+
+        for (int level = 1; level <= MAX_WEAPON_SKILL_LEVEL; level++) {
+            totalRequired += currentRequirement;
+
+            if (usage < totalRequired) {
+                rangedLevel = level - 1;
+                double previousLevelRequirement = totalRequired - currentRequirement;
+                rangedProgress = (usage - previousLevelRequirement) / currentRequirement;
+                nextRangedRequirement = currentRequirement;
+                return;
+            }
+
+            currentRequirement *= WEAPON_SKILL_MULTIPLIER;
+        }
+
+        rangedLevel = MAX_WEAPON_SKILL_LEVEL;
+        rangedProgress = 1.0;
+        nextRangedRequirement = 0;
+    }
+
+    private interface SkillValueSetter {
+        void setValues(int[] values);
+    }
+
+    private void calculateSkillLevel(int usage, int maxLevel, double multiplier, double baseRequirement, SkillValueSetter setter) {
+        if (usage <= 0) {
+            setter.setValues(new int[]{0, 0, (int)baseRequirement});
+            return;
+        }
+
+        double totalRequired = 0;
+        double currentRequirement = baseRequirement;
+
+        for (int level = 1; level <= maxLevel; level++) {
+            totalRequired += currentRequirement;
+
+            if (usage < totalRequired) {
+                int levelValue = level - 1;
+                double previousLevelRequirement = totalRequired - currentRequirement;
+                double progressValue = (usage - previousLevelRequirement) / currentRequirement;
+                setter.setValues(new int[]{levelValue, (int)(progressValue * 100) / 100, (int)currentRequirement});
+                return;
+            }
+
+            currentRequirement *= multiplier;
+        }
+
+        setter.setValues(new int[]{maxLevel, 1, 0});
     }
 
     @Override
@@ -150,9 +500,7 @@ public class CustomGuiScreen extends Screen {
         applyBlurEffect();
     }
 
-    /**
-     * This method gets called every tick while the GUI is open
-     */
+
     @Override
     public void tick() {
         super.tick();
@@ -174,9 +522,6 @@ public class CustomGuiScreen extends Screen {
         }
     }
 
-    /**
-     * Forces a statistics update from the server
-     */
     private void requestStatisticsFromServer() {
         if (minecraft == null || minecraft.player == null || minecraft.getConnection() == null) {
             return;
@@ -230,13 +575,24 @@ public class CustomGuiScreen extends Screen {
         cachedTotalDistance = totalDistanceCentimeters / 100000.0;
         calculateAgilityLevel();
         calculateStrengthLevel();
+        calculateEnduranceLevel();
+
+        favoriteWeapon = "None";
+        favoriteWeaponUses = 0;
+
+        for (int i = 0; i < WEAPON_STATS.length; i++) {
+            int uses = stats.getValue(WEAPON_STATS[i]);
+            cachedWeaponUsages[i] = uses;
+
+            if (uses > favoriteWeaponUses) {
+                favoriteWeaponUses = uses;
+                favoriteWeapon = WEAPON_NAMES[i];
+            }
+        }
+        calculateWeaponSkillLevels();
     }
 
-    /**
-     * Calculates the player's agility level based on total distance traveled
-     * Uses a progressive scale where each level requires increasing distance
-     * Level n requires level_n-1 * 1.085 km to reach
-     */
+
     private void calculateAgilityLevel() {
         if (cachedTotalDistance <= 0) {
             agilityLevel = 0;
@@ -276,17 +632,19 @@ public class CustomGuiScreen extends Screen {
             return;
         }
 
+        double damageDealtDisplay = cachedDamageDealt / 10.0;
+
         double totalRequiredDamage = 0;
         double currentLevelRequirement = 1000.0;
 
         for (int level = 1; level <= MAX_STRENGTH_LEVEL; level++) {
             totalRequiredDamage += currentLevelRequirement;
 
-            if (cachedDamageDealt < totalRequiredDamage) {
+            if (damageDealtDisplay < totalRequiredDamage) {
                 strengthLevel = level - 1;
 
                 double previousLevelDamage = totalRequiredDamage - currentLevelRequirement;
-                strengthProgress = (cachedDamageDealt - previousLevelDamage) / currentLevelRequirement;
+                strengthProgress = (damageDealtDisplay - previousLevelDamage) / currentLevelRequirement;
                 nextStrengthLevelRequirement = currentLevelRequirement;
                 return;
             }
@@ -297,6 +655,39 @@ public class CustomGuiScreen extends Screen {
         strengthLevel = MAX_STRENGTH_LEVEL;
         strengthProgress = 1.0;
         nextStrengthLevelRequirement = 0;
+    }
+
+    private void calculateEnduranceLevel() {
+        if (cachedDamageTaken <= 0) {
+            enduranceLevel = 0;
+            enduranceProgress = 0;
+            nextEnduranceLevelRequirement = 100.0;
+            return;
+        }
+
+        double damageTakenDisplay = cachedDamageTaken / 10.0;
+
+        double totalRequiredDamage = 0;
+        double currentLevelRequirement = 100.0;
+
+        for (int level = 1; level <= MAX_ENDURANCE_LEVEL; level++) {
+            totalRequiredDamage += currentLevelRequirement;
+
+            if (damageTakenDisplay < totalRequiredDamage) {
+                enduranceLevel = level - 1;
+
+                double previousLevelDamage = totalRequiredDamage - currentLevelRequirement;
+                enduranceProgress = (damageTakenDisplay - previousLevelDamage) / currentLevelRequirement;
+                nextEnduranceLevelRequirement = currentLevelRequirement;
+                return;
+            }
+
+            currentLevelRequirement *= ENDURANCE_LEVEL_MULTIPLIER;
+        }
+
+        enduranceLevel = MAX_ENDURANCE_LEVEL;
+        enduranceProgress = 1.0;
+        nextEnduranceLevelRequirement = 0;
     }
 
     private void applyBlurEffect() {
@@ -499,6 +890,7 @@ public class CustomGuiScreen extends Screen {
         String col2Title = "Progress Bar";
         String col3Title = "Progression";
 
+        // Left panel header
         int col1CenterX = leftPanelX + columnWidth / 2;
         int col2CenterX = leftPanelX + columnWidth + columnWidth / 2;
         int col3CenterX = leftPanelX + columnWidth * 2 + columnWidth / 2;
@@ -529,6 +921,95 @@ public class CustomGuiScreen extends Screen {
 
         drawAgilitySkill(guiGraphics, leftPanelX, statsY, columnWidth, scale);
         drawStrengthSkill(guiGraphics, leftPanelX, statsY + lineSpacing, columnWidth, scale);
+        drawEnduranceSkill(guiGraphics, leftPanelX, statsY + lineSpacing * 2, columnWidth, scale);
+
+        // Right panel header
+        int rightCol1CenterX = rightPanelX + columnWidth / 2;
+        int rightCol2CenterX = rightPanelX + columnWidth + columnWidth / 2;
+        int rightCol3CenterX = rightPanelX + columnWidth * 2 + columnWidth / 2;
+
+        int rightCol1X = rightCol1CenterX - col1Width / 2;
+        int rightCol2X = rightCol2CenterX - col2Width / 2;
+        int rightCol3X = rightCol3CenterX - col3Width / 2;
+
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().scale(scale, scale, 1.0f);
+
+        guiGraphics.drawString(font, col1Title, (int)(rightCol1X / scale), (int)(headerY / scale), PARCHMENT_COLOR);
+        guiGraphics.drawString(font, col2Title, (int)(rightCol2X / scale), (int)(headerY / scale), PARCHMENT_COLOR);
+        guiGraphics.drawString(font, col3Title, (int)(rightCol3X / scale), (int)(headerY / scale), PARCHMENT_COLOR);
+
+        guiGraphics.pose().popPose();
+
+        guiGraphics.fill(rightPanelX + 5, headerY + (int)(font.lineHeight * scale) + 2,
+                rightPanelX + panelWidth - 5, headerY + (int)(font.lineHeight * scale) + 3,
+                PARCHMENT_COLOR);
+
+        int rightStatsY = statsY;
+
+        drawWeaponSkill(guiGraphics, "One Handed", oneHandedLevel, oneHandedProgress, nextOneHandedRequirement,
+                rightPanelX, rightStatsY, columnWidth, scale, RAINBOW_COLORS[0]);
+        drawWeaponSkill(guiGraphics, "Two Handed", twoHandedLevel, twoHandedProgress, nextTwoHandedRequirement,
+                rightPanelX, rightStatsY + lineSpacing, columnWidth, scale, RAINBOW_COLORS[0]);
+        drawWeaponSkill(guiGraphics, "Polearms", polearmLevel, polearmProgress, nextPolearmRequirement,
+                rightPanelX, rightStatsY + lineSpacing * 2, columnWidth, scale, RAINBOW_COLORS[0]);
+        drawWeaponSkill(guiGraphics, "Short Blade", shortBladeLevel, shortBladeProgress, nextShortBladeRequirement,
+                rightPanelX, rightStatsY + lineSpacing * 3, columnWidth, scale, RAINBOW_COLORS[0]);
+        drawWeaponSkill(guiGraphics, "Ranged", rangedLevel, rangedProgress, nextRangedRequirement,
+                rightPanelX, rightStatsY + lineSpacing * 4, columnWidth, scale, RAINBOW_COLORS[0]);
+    }
+
+    private void drawWeaponSkill(GuiGraphics guiGraphics, String skillName, int level, double progress,
+                                 double nextLevelRequirement, int x, int y, int columnWidth, float scale,
+                                 int color) {
+        int barHeight = 6;
+        int maxBarWidth = columnWidth - 25;
+
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().scale(scale, scale, 1.0f);
+
+        String levelText = skillName + ": " + level;
+        int levelTextWidth = (int)(font.width(levelText) * scale);
+        int col1CenterX = x + columnWidth / 2;
+        float scaledX = (col1CenterX - levelTextWidth / (2 * scale)) / scale;
+        float scaledY = y / scale;
+        guiGraphics.drawString(font, levelText, (int)scaledX, (int)scaledY, PARCHMENT_COLOR);
+
+        guiGraphics.pose().popPose();
+
+        int barX = x + columnWidth + (columnWidth - maxBarWidth) / 2;
+
+        int textCenterY = y + (int)((font.lineHeight * scale) / 2);
+        guiGraphics.fill(barX, textCenterY - barHeight/2,
+                barX + maxBarWidth, textCenterY + barHeight/2,
+                0xFF555555);
+
+        int barWidth = (int) (maxBarWidth * progress);
+        int barColor = level < MAX_WEAPON_SKILL_LEVEL ? color : RAINBOW_COLORS[4];
+        guiGraphics.fill(barX, textCenterY - barHeight/2,
+                barX + barWidth, textCenterY + barHeight/2,
+                barColor);
+
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().scale(scale, scale, 1.0f);
+
+        String progressText;
+        if (level < MAX_WEAPON_SKILL_LEVEL) {
+            progressText = String.format("%.0f/%.0f",
+                    progress * nextLevelRequirement,
+                    nextLevelRequirement);
+        } else {
+            progressText = "Max Level";
+        }
+
+        int progressTextWidth = (int)(font.width(progressText) * scale);
+        int col3CenterX = x + columnWidth * 2 + columnWidth / 2;
+        scaledX = (col3CenterX - progressTextWidth / (2 * scale)) / scale;
+
+        int textColor = level < MAX_WEAPON_SKILL_LEVEL ? PARCHMENT_COLOR : 0xFF55FF55;
+        guiGraphics.drawString(font, progressText, (int)scaledX, (int)scaledY, textColor);
+
+        guiGraphics.pose().popPose();
     }
 
     private void drawAgilitySkill(GuiGraphics guiGraphics, int x, int y, int columnWidth, float scale) {
@@ -555,7 +1036,7 @@ public class CustomGuiScreen extends Screen {
                 0xFF555555);
 
         int barWidth = (int) (maxBarWidth * agilityProgress);
-        int barColor = agilityLevel < MAX_AGILITY_LEVEL ? RAINBOW_COLORS[2] : RAINBOW_COLORS[4];
+        int barColor = agilityLevel < MAX_AGILITY_LEVEL ? RAINBOW_COLORS[0] : RAINBOW_COLORS[4];
         guiGraphics.fill(barX, textCenterY - barHeight/2,
                 barX + barWidth, textCenterY + barHeight/2,
                 barColor);
@@ -628,6 +1109,57 @@ public class CustomGuiScreen extends Screen {
         scaledX = (col3CenterX - progressTextWidth / (2 * scale)) / scale;
 
         int textColor = strengthLevel < MAX_STRENGTH_LEVEL ? PARCHMENT_COLOR : 0xFF55FF55;
+        guiGraphics.drawString(font, progressText, (int)scaledX, (int)scaledY, textColor);
+
+        guiGraphics.pose().popPose();
+    }
+
+    private void drawEnduranceSkill(GuiGraphics guiGraphics, int x, int y, int columnWidth, float scale) {
+        int barHeight = 6;
+        int maxBarWidth = columnWidth - 25;
+
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().scale(scale, scale, 1.0f);
+
+        String levelText = "Endurance: " + enduranceLevel;
+        int levelTextWidth = (int)(font.width(levelText) * scale);
+        int col1CenterX = x + columnWidth / 2;
+        float scaledX = (col1CenterX - levelTextWidth / (2 * scale)) / scale;
+        float scaledY = y / scale;
+        guiGraphics.drawString(font, levelText, (int)scaledX, (int)scaledY, PARCHMENT_COLOR);
+
+        guiGraphics.pose().popPose();
+
+        int barX = x + columnWidth + (columnWidth - maxBarWidth) / 2;
+
+        int textCenterY = y + (int)((font.lineHeight * scale) / 2);
+        guiGraphics.fill(barX, textCenterY - barHeight/2,
+                barX + maxBarWidth, textCenterY + barHeight/2,
+                0xFF555555);
+
+        int barWidth = (int) (maxBarWidth * enduranceProgress);
+        int barColor = enduranceLevel < MAX_ENDURANCE_LEVEL ? RAINBOW_COLORS[0] : RAINBOW_COLORS[4];
+        guiGraphics.fill(barX, textCenterY - barHeight/2,
+                barX + barWidth, textCenterY + barHeight/2,
+                barColor);
+
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().scale(scale, scale, 1.0f);
+
+        String progressText;
+        if (enduranceLevel < MAX_ENDURANCE_LEVEL) {
+            progressText = String.format("%.0f/%.0f dmg",
+                    enduranceProgress * nextEnduranceLevelRequirement,
+                    nextEnduranceLevelRequirement);
+        } else {
+            progressText = "Max Level";
+        }
+
+        int progressTextWidth = (int)(font.width(progressText) * scale);
+        int col3CenterX = x + columnWidth * 2 + columnWidth / 2;
+        scaledX = (col3CenterX - progressTextWidth / (2 * scale)) / scale;
+
+        int textColor = enduranceLevel < MAX_ENDURANCE_LEVEL ? PARCHMENT_COLOR : 0xFF55FF55;
         guiGraphics.drawString(font, progressText, (int)scaledX, (int)scaledY, textColor);
 
         guiGraphics.pose().popPose();
@@ -720,8 +1252,12 @@ public class CustomGuiScreen extends Screen {
                 break;
 
             case 4:
-                drawStat(guiGraphics, "Sword Kills", 0, x, y, contentStartX, contentWidth);
-                drawStat(guiGraphics, "Bow Kills", 0, x, y + lineSpacing, contentStartX, contentWidth);
+                drawStat(guiGraphics, "One Handed Usage", getOneHandedUsage(), x, y, contentStartX, contentWidth);
+                drawStat(guiGraphics, "Two Handed Usage", getTwoHandedUsage(), x, y + lineSpacing, contentStartX, contentWidth);
+                drawStat(guiGraphics, "Polearm Usage", getPolearmUsage(), x, y + lineSpacing * 2, contentStartX, contentWidth);
+                drawStat(guiGraphics, "Short Blade Usage", getShortBladeUsage(), x, y + lineSpacing * 3, contentStartX, contentWidth);
+                drawStat(guiGraphics, "Ranged Usage", getRangedUsage(), x, y + lineSpacing * 4, contentStartX, contentWidth);
+                drawFavoriteWeapon(guiGraphics, x, y + lineSpacing * 5, contentStartX, contentWidth);
                 break;
 
             case 5:
@@ -760,7 +1296,14 @@ public class CustomGuiScreen extends Screen {
     }
 
     private void drawStat(GuiGraphics guiGraphics, String label, int value, int x, int y, int contentStartX, int contentWidth) {
-        String text = label + ": " + value;
+        String text;
+        if (label.equals("Damage Dealt") || label.equals("Damage Taken")) {
+            double displayValue = value / 10.0;
+            text = label + ": " + String.format("%.0f", displayValue);
+        } else {
+            text = label + ": " + value;
+        }
+
         int textWidth = font.width(text);
         int centeredX = contentStartX + (contentWidth - textWidth) / 2;
         guiGraphics.drawString(font, text, centeredX, y, PARCHMENT_COLOR);
@@ -769,6 +1312,17 @@ public class CustomGuiScreen extends Screen {
     private void drawDistanceStat(GuiGraphics guiGraphics, String label, double valueKm, int x, int y, int contentStartX, int contentWidth) {
         String formattedDistance = String.format("%.2f", valueKm);
         String text = label + ": " + formattedDistance + " km";
+        int textWidth = font.width(text);
+        int centeredX = contentStartX + (contentWidth - textWidth) / 2;
+        guiGraphics.drawString(font, text, centeredX, y, PARCHMENT_COLOR);
+    }
+
+    private void drawFavoriteWeapon(GuiGraphics guiGraphics, int x, int y, int contentStartX, int contentWidth) {
+        String text = "Favourite Weapon: " + favoriteWeapon;
+        if (favoriteWeaponUses > 0) {
+            text += " (" + favoriteWeaponUses + " uses)";
+        }
+
         int textWidth = font.width(text);
         int centeredX = contentStartX + (contentWidth - textWidth) / 2;
         guiGraphics.drawString(font, text, centeredX, y, PARCHMENT_COLOR);
@@ -852,16 +1406,6 @@ public class CustomGuiScreen extends Screen {
         drawPaperCorners(guiGraphics, x, y, width, height, cornerSize);
     }
 
-    /**
-     * Draws the corner pieces of the paper panel
-     *
-     * @param guiGraphics The graphics context
-     * @param x           The x position of the panel
-     * @param y           The y position of the panel
-     * @param width       The width of the panel
-     * @param height      The height of the panel
-     * @param cornerSize  The size of the corner pieces
-     */
     private void drawPaperCorners(GuiGraphics guiGraphics, int x, int y, int width, int height, int cornerSize) {
         com.mojang.blaze3d.vertex.PoseStack poseStack = guiGraphics.pose();
 
@@ -878,17 +1422,7 @@ public class CustomGuiScreen extends Screen {
                 x, y + height - cornerSize, cornerSize, cornerSize, 270);
     }
 
-    /**
-     * Draws a rotatable corner piece
-     *
-     * @param guiGraphics     The graphics context
-     * @param texture         The texture to use
-     * @param x               The x position
-     * @param y               The y position
-     * @param width           The width
-     * @param height          The height
-     * @param rotationDegrees The rotation angle in degrees
-     */
+
     private void drawRotatableCorner(GuiGraphics guiGraphics,
                                      net.minecraft.resources.ResourceLocation texture,
                                      int x, int y, int width, int height, float rotationDegrees) {
@@ -913,17 +1447,7 @@ public class CustomGuiScreen extends Screen {
         poseStack.popPose();
     }
 
-    /**
-     * Draws a border with rotation capability
-     *
-     * @param guiGraphics     The graphics context
-     * @param texture         The texture to use
-     * @param x               The x position
-     * @param y               The y position
-     * @param width           The width of the border
-     * @param height          The height of the border
-     * @param rotationDegrees The rotation angle in degrees
-     */
+
     private void drawRotatableBorder(GuiGraphics guiGraphics,
                                      net.minecraft.resources.ResourceLocation texture,
                                      int x, int y, int width, int height, float rotationDegrees) {
