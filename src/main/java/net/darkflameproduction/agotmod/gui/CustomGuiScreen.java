@@ -5,6 +5,7 @@ import net.darkflameproduction.agotmod.item.ModItems;
 import net.darkflameproduction.agotmod.sound.ModSounds;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ServerboundClientCommandPacket;
 import net.minecraft.resources.ResourceLocation;
@@ -253,7 +254,7 @@ public class CustomGuiScreen extends Screen {
     private double rangedProgress = 0.0;
     private double nextRangedRequirement = 0.0;
 
-    private static final int[] ONE_HANDED_STATS_INDICES = {0, 1, 2, 3, 4, 5, 9, 12, 17, 18, 20, 23, 29, 30, 36, 38};
+    private static final int[] ONE_HANDED_STATS_INDICES = {0, 1, 2, 3, 4, 5, 9, 12, 15, 17, 18, 20, 23, 27, 28, 29, 30, 35, 36, 38};
     private static final int[] TWO_HANDED_STATS_INDICES = {18, 23, 30};
     private static final int[] POLEARM_STATS_INDICES = {8, 11, 13, 14, 21, 22, 24, 25, 29, 31, 36, 37};
     private static final int[] SHORT_BLADE_STATS_INDICES = {10, 16, 19, 27, 34};
@@ -520,6 +521,7 @@ public class CustomGuiScreen extends Screen {
             requestStatisticsFromServer();
             statsUpdateTimer = 0;
         }
+        updatePlayerSkillData();
     }
 
     private void requestStatisticsFromServer() {
@@ -778,6 +780,24 @@ public class CustomGuiScreen extends Screen {
                     )
             );
         }
+    }
+
+    private void updatePlayerSkillData() {
+        if (minecraft == null || minecraft.player == null) {
+            return;
+        }
+
+        // Store skill levels in player's persistent data
+        CompoundTag persistentData = minecraft.player.getPersistentData();
+        CompoundTag skillsTag = new CompoundTag();
+
+        skillsTag.putInt("one_handed_level", oneHandedLevel);
+        skillsTag.putInt("two_handed_level", twoHandedLevel);
+        skillsTag.putInt("polearm_level", polearmLevel);
+        skillsTag.putInt("short_blade_level", shortBladeLevel);
+        skillsTag.putInt("ranged_level", rangedLevel);
+
+        persistentData.put(AGoTMod.MOD_ID + ".skills", skillsTag);
     }
 
     private boolean isMouseOverRect(int mouseX, int mouseY, int x, int y, int width, int height) {

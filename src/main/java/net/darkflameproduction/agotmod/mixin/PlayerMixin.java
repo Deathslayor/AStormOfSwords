@@ -43,3 +43,4 @@ public abstract class PlayerMixin extends LivingEntity {
         return (super.isFreezing() || TemperatureHelper.isCold(TemperatureHelper.getTemperature(this.level(), this.blockPosition()))) && this.canFreeze();
     }
 }
+

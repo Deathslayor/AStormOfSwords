@@ -30,6 +30,7 @@ import net.darkflameproduction.agotmod.item.ModItems;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FlowerBlock;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
@@ -218,42 +219,190 @@ public class ModItemModelProvider extends ItemModelProvider {
         // ---------------------------(INGOTS)--------------------------- //
 
         // ---------------------------(Weapons)--------------------------- //
-        handheldItem(ModItems.DRAGONGLASS_SPEAR);
+        weaponItem(ModItems.DRAGONGLASS_SPEAR,
+                new float[]{0.0f, 2.0f, 1.0f},   // thirdpersonTranslation [x, y, z]
+                new float[]{2f, 2f, 1.0f},   // thirdpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 55.0f}, // thirdpersonRotation [x, y, z]
+                new float[]{0.0f, 3.0f, 0.0f},   // firstpersonTranslation [x, y, z]
+                new float[]{1.2f, 1.2f, 1.0f},   // firstpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 25.0f}  // firstpersonRotation [x, y, z]
+        );
         handheldItem(ModItems.DRAGONGLASS_DAGGER);
-        handheldItem(ModItems.BRONZE_SPATHA);
-        handheldItem(ModItems.BRONZE_SPEAR);
-        handheldItem(ModItems.BRONZE_PIKE);
+        weaponItem(ModItems.BRONZE_SPATHA,
+                new float[]{0.0f, 6.0f, 1.0f},   // thirdpersonTranslation [x, y, z]
+                new float[]{1.3f, 1.3f, 1.0f},   // thirdpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 55.0f}, // thirdpersonRotation [x, y, z]
+                new float[]{0.0f, 3.0f, 0.0f},   // firstpersonTranslation [x, y, z]
+                new float[]{1.2f, 1.2f, 1.0f},   // firstpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 25.0f}  // firstpersonRotation [x, y, z]
+        );
+        weaponItem(ModItems.BRONZE_SPEAR,
+                new float[]{0.0f, 2.0f, 1.0f},   // thirdpersonTranslation [x, y, z]
+                new float[]{2f, 2f, 1.0f},   // thirdpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 55.0f}, // thirdpersonRotation [x, y, z]
+                new float[]{0.0f, 3.0f, 0.0f},   // firstpersonTranslation [x, y, z]
+                new float[]{1.2f, 1.2f, 1.0f},   // firstpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 25.0f}  // firstpersonRotation [x, y, z]
+        );
+        weaponItem(ModItems.BRONZE_PIKE,
+                new float[]{0.0f, 2.0f, 1.0f},   // thirdpersonTranslation [x, y, z]
+                new float[]{3f, 3f, 1.0f},   // thirdpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 55.0f}, // thirdpersonRotation [x, y, z]
+                new float[]{0.0f, 3.0f, 0.0f},   // firstpersonTranslation [x, y, z]
+                new float[]{1.4f, 1.4f, 1.0f},   // firstpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 25.0f}  // firstpersonRotation [x, y, z]
+        );
         handheldItem(ModItems.BRONZE_DAGGER);
-        handheldItem(ModItems.BRONZE_BATTLEAXE);
-        handheldItem(ModItems.IRON_LONGSWORD);
-        handheldItem(ModItems.IRON_SPEAR);
-        handheldItem(ModItems.IRON_PIKE);
+        weaponItem(ModItems.BRONZE_BATTLEAXE,
+                new float[]{0.0f, 2.0f, 0.0f},   // thirdpersonTranslation [x, y, z]
+                new float[]{1.3f, 1.3f, 1.0f},   // thirdpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 55.0f}, // thirdpersonRotation [x, y, z]
+                new float[]{0.0f, 3.0f, 0.0f},   // firstpersonTranslation [x, y, z]
+                new float[]{1.2f, 1.2f, 1.0f},   // firstpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 25.0f}  // firstpersonRotation [x, y, z]
+        );
+        weaponItem(ModItems.IRON_LONGSWORD,
+                new float[]{0.0f, 6.0f, 1.0f},   // thirdpersonTranslation [x, y, z]
+                new float[]{1.3f, 1.3f, 1.0f},   // thirdpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 55.0f}, // thirdpersonRotation [x, y, z]
+                new float[]{0.0f, 3.0f, 0.0f},   // firstpersonTranslation [x, y, z]
+                new float[]{1.2f, 1.2f, 1.0f},   // firstpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 25.0f}  // firstpersonRotation [x, y, z]
+        );
+        weaponItem(ModItems.IRON_SPEAR,
+                new float[]{0.0f, 2.0f, 1.0f},   // thirdpersonTranslation [x, y, z]
+                new float[]{2f, 2f, 1.0f},   // thirdpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 55.0f}, // thirdpersonRotation [x, y, z]
+                new float[]{0.0f, 3.0f, 0.0f},   // firstpersonTranslation [x, y, z]
+                new float[]{1.2f, 1.2f, 1.0f},   // firstpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 25.0f}  // firstpersonRotation [x, y, z]
+        );
+        weaponItem(ModItems.IRON_PIKE,
+                new float[]{0.0f, 2.0f, 1.0f},   // thirdpersonTranslation [x, y, z]
+                new float[]{3f, 3f, 1.0f},   // thirdpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 55.0f}, // thirdpersonRotation [x, y, z]
+                new float[]{0.0f, 3.0f, 0.0f},   // firstpersonTranslation [x, y, z]
+                new float[]{1.4f, 1.4f, 1.0f},   // firstpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 25.0f}  // firstpersonRotation [x, y, z]
+        );
         handheldItem(ModItems.IRON_DAGGER);
-        handheldItem(ModItems.IRON_MACE);
-        handheldItem(ModItems.IRON_BATTLEAXE);
-        handheldItem(ModItems.STEEL_LONGSWORD);
-        handheldItem(ModItems.STEEL_SPEAR);
-        handheldItem(ModItems.STEEL_PIKE);
+        weaponItem(ModItems.IRON_MACE,
+                new float[]{0.0f, 2.0f, 0.0f},   // thirdpersonTranslation [x, y, z]
+                new float[]{1.3f, 1.3f, 1.0f},   // thirdpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 55.0f}, // thirdpersonRotation [x, y, z]
+                new float[]{0.0f, 3.0f, 0.0f},   // firstpersonTranslation [x, y, z]
+                new float[]{1.2f, 1.2f, 1.0f},   // firstpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 25.0f}  // firstpersonRotation [x, y, z]
+        );
+        weaponItem(ModItems.IRON_BATTLEAXE,
+                new float[]{0.0f, 2.0f, 0.0f},   // thirdpersonTranslation [x, y, z]
+                new float[]{1.3f, 1.3f, 1.0f},   // thirdpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 55.0f}, // thirdpersonRotation [x, y, z]
+                new float[]{0.0f, 3.0f, 0.0f},   // firstpersonTranslation [x, y, z]
+                new float[]{1.2f, 1.2f, 1.0f},   // firstpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 25.0f}  // firstpersonRotation [x, y, z]
+        );
+        weaponItem(ModItems.STEEL_LONGSWORD,
+                new float[]{0.0f, 6.0f, 1.0f},   // thirdpersonTranslation [x, y, z]
+                new float[]{1.3f, 1.3f, 1.0f},   // thirdpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 55.0f}, // thirdpersonRotation [x, y, z]
+                new float[]{0.0f, 3.0f, 0.0f},   // firstpersonTranslation [x, y, z]
+                new float[]{1.2f, 1.2f, 1.0f},   // firstpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 25.0f}  // firstpersonRotation [x, y, z]
+        );
+        weaponItem(ModItems.STEEL_SPEAR,
+                new float[]{0.0f, 2.0f, 1.0f},   // thirdpersonTranslation [x, y, z]
+                new float[]{2f, 2f, 1.0f},   // thirdpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 55.0f}, // thirdpersonRotation [x, y, z]
+                new float[]{0.0f, 3.0f, 0.0f},   // firstpersonTranslation [x, y, z]
+                new float[]{1.2f, 1.2f, 1.0f},   // firstpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 25.0f}  // firstpersonRotation [x, y, z]
+        );
+        weaponItem(ModItems.STEEL_PIKE,
+                new float[]{0.0f, 2.0f, 1.0f},   // thirdpersonTranslation [x, y, z]
+                new float[]{3f, 3f, 1.0f},   // thirdpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 55.0f}, // thirdpersonRotation [x, y, z]
+                new float[]{0.0f, 3.0f, 0.0f},   // firstpersonTranslation [x, y, z]
+                new float[]{1.4f, 1.4f, 1.0f},   // firstpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 25.0f}  // firstpersonRotation [x, y, z]
+        );
         handheldItem(ModItems.STEEL_DAGGER);
-        handheldItem(ModItems.STEEL_MACE);
-        handheldItem(ModItems.STEEL_BATTLEAXE);
-        handheldItem(ModItems.STEEL_HALBERD);
-        handheldItem(ModItems.NOBLE_LONGSWORD);
-        handheldItem(ModItems.NOBLE_SPEAR);
-        handheldItem(ModItems.NOBLE_PIKE);
+        weaponItem(ModItems.STEEL_MACE,
+                new float[]{0.0f, 2.0f, 0.0f},   // thirdpersonTranslation [x, y, z]
+                new float[]{1.3f, 1.3f, 1.0f},   // thirdpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 55.0f}, // thirdpersonRotation [x, y, z]
+                new float[]{0.0f, 3.0f, 0.0f},   // firstpersonTranslation [x, y, z]
+                new float[]{1.2f, 1.2f, 1.0f},   // firstpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 25.0f}  // firstpersonRotation [x, y, z]
+        );
+        weaponItem(ModItems.STEEL_BATTLEAXE,
+                new float[]{0.0f, 2.0f, 0.0f},   // thirdpersonTranslation [x, y, z]
+                new float[]{1.3f, 1.3f, 1.0f},   // thirdpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 55.0f}, // thirdpersonRotation [x, y, z]
+                new float[]{0.0f, 3.0f, 0.0f},   // firstpersonTranslation [x, y, z]
+                new float[]{1.2f, 1.2f, 1.0f},   // firstpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 25.0f}  // firstpersonRotation [x, y, z]
+        );
+        weaponItem(ModItems.STEEL_HALBERD,
+                new float[]{0.0f, 2.0f, 1.0f},   // thirdpersonTranslation [x, y, z]
+                new float[]{2f, 2f, 1.0f},   // thirdpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 55.0f}, // thirdpersonRotation [x, y, z]
+                new float[]{0.0f, 3.0f, 0.0f},   // firstpersonTranslation [x, y, z]
+                new float[]{1.2f, 1.2f, 1.0f},   // firstpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 25.0f}  // firstpersonRotation [x, y, z]
+        );
+        weaponItem(ModItems.NOBLE_LONGSWORD,
+                new float[]{0.0f, 6.0f, 1.0f},   // thirdpersonTranslation [x, y, z]
+                new float[]{1.3f, 1.3f, 1.0f},   // thirdpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 55.0f}, // thirdpersonRotation [x, y, z]
+                new float[]{0.0f, 3.0f, 0.0f},   // firstpersonTranslation [x, y, z]
+                new float[]{1.2f, 1.2f, 1.0f},   // firstpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 25.0f}  // firstpersonRotation [x, y, z]
+        );
+        weaponItem(ModItems.NOBLE_SPEAR,
+                new float[]{0.0f, 2.0f, 1.0f},   // thirdpersonTranslation [x, y, z]
+                new float[]{2f, 2f, 1.0f},   // thirdpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 55.0f}, // thirdpersonRotation [x, y, z]
+                new float[]{0.0f, 3.0f, 0.0f},   // firstpersonTranslation [x, y, z]
+                new float[]{1.2f, 1.2f, 1.0f},   // firstpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 25.0f}  // firstpersonRotation [x, y, z]
+        );
+        weaponItem(ModItems.NOBLE_PIKE,
+                new float[]{0.0f, 2.0f, 1.0f},   // thirdpersonTranslation [x, y, z]
+                new float[]{3f, 3f, 1.0f},   // thirdpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 55.0f}, // thirdpersonRotation [x, y, z]
+                new float[]{0.0f, 3.0f, 0.0f},   // firstpersonTranslation [x, y, z]
+                new float[]{1.4f, 1.4f, 1.0f},   // firstpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 25.0f}  // firstpersonRotation [x, y, z]
+        );
         handheldItem(ModItems.NOBLE_DAGGER);
-        handheldItem(ModItems.NOBLE_MACE);
-        handheldItem(ModItems.NOBLE_BATTLEAXE);
-        handheldItem(ModItems.NOBLE_HALBERD);
+        weaponItem(ModItems.NOBLE_MACE,
+                new float[]{0.0f, 2.0f, 0.0f},   // thirdpersonTranslation [x, y, z]
+                new float[]{1.3f, 1.3f, 1.0f},   // thirdpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 55.0f}, // thirdpersonRotation [x, y, z]
+                new float[]{0.0f, 3.0f, 0.0f},   // firstpersonTranslation [x, y, z]
+                new float[]{1.2f, 1.2f, 1.0f},   // firstpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 25.0f}  // firstpersonRotation [x, y, z]
+        );
+        weaponItem(ModItems.NOBLE_BATTLEAXE,
+                new float[]{0.0f, 2.0f, 0.0f},   // thirdpersonTranslation [x, y, z]
+                new float[]{1.3f, 1.3f, 1.0f},   // thirdpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 55.0f}, // thirdpersonRotation [x, y, z]
+                new float[]{0.0f, 3.0f, 0.0f},   // firstpersonTranslation [x, y, z]
+                new float[]{1.2f, 1.2f, 1.0f},   // firstpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 25.0f}  // firstpersonRotation [x, y, z]
+        );
+        weaponItem(ModItems.NOBLE_HALBERD,
+                new float[]{0.0f, 2.0f, 1.0f},   // thirdpersonTranslation [x, y, z]
+                new float[]{2f, 2f, 1.0f},   // thirdpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 55.0f}, // thirdpersonRotation [x, y, z]
+                new float[]{0.0f, 3.0f, 0.0f},   // firstpersonTranslation [x, y, z]
+                new float[]{1.2f, 1.2f, 1.0f},   // firstpersonScale [x, y, z]
+                new float[]{0.0f, 90.0f, 25.0f}  // firstpersonRotation [x, y, z]
+        );
 
-        // ---------------------------(Weapons)--------------------------- //
-
-        // ---------------------------(ANIMAL SPAWN EGGS)--------------------------- //
-        // Register item model for the Rhino Spawn Egg
-        // ---------------------------(ANIMAL SPAWN EGGS)--------------------------- //
 
         // ---------------------------(TOOLS)--------------------------- //
-        // Register item models for tools
         handheldItem(ModItems.BRONZE_AXE);
         handheldItem(ModItems.BRONZE_PICKAXE);
         handheldItem(ModItems.BRONZE_HOE);
@@ -265,14 +414,11 @@ public class ModItemModelProvider extends ItemModelProvider {
         handheldItem(ModItems.STEEL_SWORD);
         handheldItem(ModItems.STEEL_SHOVEL);
         handheldItem(ModItems.BLOOD_DAGGER);
-        // ---------------------------(TOOLS)--------------------------- //
 
-        // ---------------------------(TOOLS)--------------------------- //
+        // ---------------------------(MAGIC)--------------------------- //
         handheldItem(ModItems.BLOOD_BOTTLED);
-        // ---------------------------(TOOLS)--------------------------- //
 
-        // ---------------------------(FOODS)--------------------------- //
-        // Register item models for food items
+
 
 
         // ---------------------------(SAPLINGS)--------------------------- //
@@ -1043,6 +1189,48 @@ public class ModItemModelProvider extends ItemModelProvider {
         return withExistingParent(item.getId().getPath(),
                 mcLoc("item/handheld")).texture("layer0",
                 modLoc("item/" + item.getId().getPath()));
+    }
+
+
+
+    private ItemModelBuilder weaponItem(DeferredHolder<Item, Item> item,
+                                        float[] thirdpersonTranslation,
+                                        float[] thirdpersonScale,
+                                        float[] thirdpersonRotation,
+                                        float[] firstpersonTranslation,
+                                        float[] firstpersonScale,
+                                        float[] firstpersonRotation) {
+        return withExistingParent(item.getId().getPath(), mcLoc("item/handheld"))
+                .texture("layer0", modLoc("item/" + item.getId().getPath()))
+                .transforms()
+                .transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND)
+                .rotation(thirdpersonRotation[0], -Math.abs(thirdpersonRotation[1]), thirdpersonRotation[2])
+                .translation(thirdpersonTranslation[0], thirdpersonTranslation[1], thirdpersonTranslation[2])
+                .scale(thirdpersonScale[0], thirdpersonScale[1], thirdpersonScale[2])
+                .end()
+                .transform(ItemDisplayContext.THIRD_PERSON_LEFT_HAND)
+                .rotation(thirdpersonRotation[0], Math.abs(thirdpersonRotation[1]), -thirdpersonRotation[2])
+                .translation(thirdpersonTranslation[0], thirdpersonTranslation[1], thirdpersonTranslation[2])
+                .scale(thirdpersonScale[0], thirdpersonScale[1], thirdpersonScale[2])
+                .end()
+                .transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND)
+                .rotation(firstpersonRotation[0], -Math.abs(firstpersonRotation[1]), firstpersonRotation[2])
+                .translation(firstpersonTranslation[0], firstpersonTranslation[1], firstpersonTranslation[2])
+                .scale(firstpersonScale[0], firstpersonScale[1], firstpersonScale[2])
+                .end()
+                .transform(ItemDisplayContext.FIRST_PERSON_LEFT_HAND)
+                .rotation(firstpersonRotation[0], Math.abs(firstpersonRotation[1]), -firstpersonRotation[2])
+                .translation(firstpersonTranslation[0], firstpersonTranslation[1], firstpersonTranslation[2])
+                .scale(firstpersonScale[0], firstpersonScale[1], firstpersonScale[2])
+                .end()
+                .transform(ItemDisplayContext.GROUND)
+                .scale(1.0f, 1.0f, 1.0f)
+                .end()
+                .transform(ItemDisplayContext.GUI)
+                .rotation(0, 0, 0)
+                .scale(1.2f, 1.2f, 1.2f)
+                .end()
+                .end();
     }
 
     public void trapdoorItem(DeferredHolder<Block, Block> block) {

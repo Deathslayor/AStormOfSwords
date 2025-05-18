@@ -478,6 +478,14 @@
   "key.categoriesmagic.agotmod": "A Game of Thrones Magic",
   "screen.agotmod.custom_gui": "Custom GUI",
 
+  "tooltip.agotmod.level_requirement": "Requires %s Level %d",
+  "tooltip.agotmod.level_penalty": "Using without sufficient skill will prevent weapon recharge",
+  "message.agotmod.weapon_too_advanced": "This weapon is too difficult for your skill level!",
+
+  "tooltip.agotmod.reach_bonus": "Reach: %s blocks",
+  "tooltip.agotmod.reach_penalty": "Reach: %s blocks",
+
+
   "item.agotmod.blood_bottled.effect.empty": "Bottle Of Blood",
   "item.agotmod.blood_dagger": "Blood Dagger",
 

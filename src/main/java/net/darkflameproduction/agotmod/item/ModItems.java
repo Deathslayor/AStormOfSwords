@@ -456,8 +456,6 @@ public class ModItems {
 
     // ---------------------------(TOOLS)--------------------------- //
     // Bronze TOOLS
-    public static final DeferredItem<Item> BRONZE_SWORD = ITEMS.registerItem("bronze_sword",
-            properties -> new SwordItem(ModToolTiers.BRONZE, 5, -2.4F, properties));
     public static final DeferredItem<Item> BRONZE_PICKAXE = ITEMS.registerItem("bronze_pickaxe",
             properties -> new PickaxeItem(ModToolTiers.BRONZE, 0, 0, properties));
     public static final DeferredItem<Item> BRONZE_SHOVEL = ITEMS.registerItem("bronze_shovel",
@@ -467,71 +465,75 @@ public class ModItems {
     public static final DeferredItem<Item> BRONZE_HOE = ITEMS.registerItem("bronze_hoe",
             properties -> new HoeItem(ModToolTiers.BRONZE, 0, 0, properties));
 
-    //DRAGONGLASS WEAPONS
+    // DRAGONGLASS WEAPONS
     public static final DeferredItem<Item> DRAGONGLASS_SPEAR = ITEMS.registerItem("dragonglass_spear",
-            properties -> new SwordItem(ModToolTiers.DRAGONGLASS, 5, -2.2F, properties));
+            properties -> new LevelRequiredSwordItem(ModToolTiers.DRAGONGLASS, 5, -2.2F, properties, WeaponRequirements.POLEARM));
     public static final DeferredItem<Item> DRAGONGLASS_DAGGER = ITEMS.registerItem("dragonglass_dagger",
-            properties -> new SwordItem(ModToolTiers.DRAGONGLASS, 2, -1.5F, properties));
-    //BRONZE WEAPONS
+            properties -> new LevelRequiredSwordItem(ModToolTiers.DRAGONGLASS, 2, -1.5F, properties, WeaponRequirements.SHORT_BLADE));
+
+    // BRONZE WEAPONS
+    public static final DeferredItem<Item> BRONZE_SWORD = ITEMS.registerItem("bronze_sword",
+            properties -> new LevelRequiredSwordItem(ModToolTiers.BRONZE, 5, -2.4F, properties, WeaponRequirements.ONE_HANDED));
     public static final DeferredItem<Item> BRONZE_SPATHA = ITEMS.registerItem("bronze_spatha",
-            properties -> new SwordItem(ModToolTiers.BRONZE, 7, -2.6F, properties));
+            properties -> new LevelRequiredSwordItem(ModToolTiers.BRONZE, 7, -2.6F, properties, WeaponRequirements.ONE_HANDED));
     public static final DeferredItem<Item> BRONZE_SPEAR = ITEMS.registerItem("bronze_spear",
-            properties -> new SwordItem(ModToolTiers.BRONZE, 5, -2.2F, properties));
+            properties -> new LevelRequiredSwordItem(ModToolTiers.BRONZE, 5, -2.2F, properties, WeaponRequirements.POLEARM));
     public static final DeferredItem<Item> BRONZE_PIKE = ITEMS.registerItem("bronze_pike",
-            properties -> new SwordItem(ModToolTiers.BRONZE, 6, -3F, properties));
+            properties -> new LevelRequiredSwordItem(ModToolTiers.BRONZE, 6, -3F, properties, WeaponRequirements.LONG_POLEARM));
     public static final DeferredItem<Item> BRONZE_DAGGER = ITEMS.registerItem("bronze_dagger",
-            properties -> new SwordItem(ModToolTiers.BRONZE, 2, -1.5F, properties));
+            properties -> new LevelRequiredSwordItem(ModToolTiers.BRONZE, 2, -1.5F, properties, WeaponRequirements.SHORT_BLADE));
     public static final DeferredItem<Item> BRONZE_BATTLEAXE = ITEMS.registerItem("bronze_battleaxe",
-            properties -> new SwordItem(ModToolTiers.BRONZE, 8, -3F, properties));
+            properties -> new LevelRequiredSwordItem(ModToolTiers.BRONZE, 8, -3F, properties, WeaponRequirements.ONE_HANDED));
 
     // IRON WEAPONS
     public static final DeferredItem<Item> IRON_LONGSWORD = ITEMS.registerItem("iron_longsword",
-            properties -> new SwordItem(ToolMaterial.IRON, 9, -2.6F, properties));
+            properties -> new LevelRequiredSwordItem(ToolMaterial.IRON, 9, -2.6F, properties, WeaponRequirements.TWO_HANDED));
     public static final DeferredItem<Item> IRON_SPEAR = ITEMS.registerItem("iron_spear",
-            properties -> new SwordItem(ToolMaterial.IRON, 7, -2.2F, properties));
+            properties -> new LevelRequiredSwordItem(ToolMaterial.IRON, 7, -2.2F, properties, WeaponRequirements.POLEARM));
     public static final DeferredItem<Item> IRON_PIKE = ITEMS.registerItem("iron_pike",
-            properties -> new SwordItem(ToolMaterial.IRON, 8, -3F, properties));
+            properties -> new LevelRequiredSwordItem(ToolMaterial.IRON, 8, -3F, properties, WeaponRequirements.LONG_POLEARM));
     public static final DeferredItem<Item> IRON_MACE = ITEMS.registerItem("iron_mace",
-            properties -> new SwordItem(ToolMaterial.IRON, 7, -2.6F, properties));
+            properties -> new LevelRequiredSwordItem(ToolMaterial.IRON, 7, -2.6F, properties, WeaponRequirements.ONE_HANDED));
     public static final DeferredItem<Item> IRON_DAGGER = ITEMS.registerItem("iron_dagger",
-            properties -> new SwordItem(ToolMaterial.IRON, 4, -1.5F, properties));
+            properties -> new LevelRequiredSwordItem(ToolMaterial.IRON, 4, -1.5F, properties, WeaponRequirements.SHORT_BLADE));
     public static final DeferredItem<Item> IRON_BATTLEAXE = ITEMS.registerItem("iron_battleaxe",
-            properties -> new SwordItem(ToolMaterial.IRON, 10, -3F, properties));
+            properties -> new LevelRequiredSwordItem(ToolMaterial.IRON, 10, -3F, properties, WeaponRequirements.ONE_HANDED));
 
     // STEEL WEAPONS
+    public static final DeferredItem<Item> STEEL_SWORD = ITEMS.registerItem("steel_sword",
+            properties -> new LevelRequiredSwordItem(ModToolTiers.STEEL, 5, -2.4F, properties, WeaponRequirements.ONE_HANDED));
     public static final DeferredItem<Item> STEEL_LONGSWORD = ITEMS.registerItem("steel_longsword",
-            properties -> new SwordItem(ModToolTiers.STEEL, 7, -2.6F, properties));
+            properties -> new LevelRequiredSwordItem(ModToolTiers.STEEL, 7, -2.6F, properties, WeaponRequirements.TWO_HANDED));
     public static final DeferredItem<Item> STEEL_SPEAR = ITEMS.registerItem("steel_spear",
-            properties -> new SwordItem(ModToolTiers.STEEL, 5, -2.2F, properties));
+            properties -> new LevelRequiredSwordItem(ModToolTiers.STEEL, 5, -2.2F, properties, WeaponRequirements.POLEARM));
     public static final DeferredItem<Item> STEEL_PIKE = ITEMS.registerItem("steel_pike",
-            properties -> new SwordItem(ModToolTiers.STEEL, 6, -3F, properties));
+            properties -> new LevelRequiredSwordItem(ModToolTiers.STEEL, 6, -3F, properties, WeaponRequirements.LONG_POLEARM));
     public static final DeferredItem<Item> STEEL_MACE = ITEMS.registerItem("steel_mace",
-            properties -> new SwordItem(ModToolTiers.STEEL, 5, -2.6F, properties));
+            properties -> new LevelRequiredSwordItem(ModToolTiers.STEEL, 5, -2.6F, properties, WeaponRequirements.ONE_HANDED));
     public static final DeferredItem<Item> STEEL_DAGGER = ITEMS.registerItem("steel_dagger",
-            properties -> new SwordItem(ModToolTiers.STEEL, 2, -1.5F, properties));
+            properties -> new LevelRequiredSwordItem(ModToolTiers.STEEL, 2, -1.5F, properties, WeaponRequirements.SHORT_BLADE));
     public static final DeferredItem<Item> STEEL_BATTLEAXE = ITEMS.registerItem("steel_battleaxe",
-            properties -> new SwordItem(ModToolTiers.STEEL, 8, -3F, properties));
+            properties -> new LevelRequiredSwordItem(ModToolTiers.STEEL, 8, -3F, properties, WeaponRequirements.ONE_HANDED));
     public static final DeferredItem<Item> STEEL_HALBERD = ITEMS.registerItem("steel_halberd",
-            properties -> new SwordItem(ModToolTiers.STEEL, 9, -3.2F, properties));
+            properties -> new LevelRequiredSwordItem(ModToolTiers.STEEL, 9, -3.2F, properties, WeaponRequirements.POLEARM));
+
     // NOBLE WEAPONS
     public static final DeferredItem<Item> NOBLE_LONGSWORD = ITEMS.registerItem("noble_longsword",
-            properties -> new SwordItem(ModToolTiers.NOBLE, 7, -2.6F, properties));
+            properties -> new LevelRequiredSwordItem(ModToolTiers.NOBLE, 7, -2.6F, properties, WeaponRequirements.TWO_HANDED));
     public static final DeferredItem<Item> NOBLE_SPEAR = ITEMS.registerItem("noble_spear",
-            properties -> new SwordItem(ModToolTiers.NOBLE, 5, -2.2F, properties));
+            properties -> new LevelRequiredSwordItem(ModToolTiers.NOBLE, 5, -2.2F, properties, WeaponRequirements.POLEARM));
     public static final DeferredItem<Item> NOBLE_PIKE = ITEMS.registerItem("noble_pike",
-            properties -> new SwordItem(ModToolTiers.NOBLE, 6, -3F, properties));
+            properties -> new LevelRequiredSwordItem(ModToolTiers.NOBLE, 6, -3F, properties, WeaponRequirements.LONG_POLEARM));
     public static final DeferredItem<Item> NOBLE_MACE = ITEMS.registerItem("noble_mace",
-            properties -> new SwordItem(ModToolTiers.NOBLE, 5, -2.6F, properties));
+            properties -> new LevelRequiredSwordItem(ModToolTiers.NOBLE, 5, -2.6F, properties, WeaponRequirements.ONE_HANDED));
     public static final DeferredItem<Item> NOBLE_DAGGER = ITEMS.registerItem("noble_dagger",
-            properties -> new SwordItem(ModToolTiers.NOBLE, 2, -1.5F, properties));
+            properties -> new LevelRequiredSwordItem(ModToolTiers.NOBLE, 2, -1.5F, properties, WeaponRequirements.SHORT_BLADE));
     public static final DeferredItem<Item> NOBLE_BATTLEAXE = ITEMS.registerItem("noble_battleaxe",
-            properties -> new SwordItem(ModToolTiers.NOBLE, 8, -3F, properties));
+            properties -> new LevelRequiredSwordItem(ModToolTiers.NOBLE, 8, -3F, properties, WeaponRequirements.ONE_HANDED));
     public static final DeferredItem<Item> NOBLE_HALBERD = ITEMS.registerItem("noble_halberd",
-            properties -> new SwordItem(ModToolTiers.NOBLE, 9, -3.2F, properties));
+            properties -> new LevelRequiredSwordItem(ModToolTiers.NOBLE, 9, -3.2F, properties, WeaponRequirements.POLEARM));
 
     // Steel TOOLS
-    public static final DeferredItem<Item> STEEL_SWORD = ITEMS.registerItem("steel_sword",
-            properties -> new SwordItem(ModToolTiers.STEEL, 5, -2.4F, properties));
     public static final DeferredItem<Item> STEEL_PICKAXE = ITEMS.registerItem("steel_pickaxe",
             properties -> new PickaxeItem(ModToolTiers.STEEL, 1, 1, properties));
     public static final DeferredItem<Item> STEEL_SHOVEL = ITEMS.registerItem("steel_shovel",
