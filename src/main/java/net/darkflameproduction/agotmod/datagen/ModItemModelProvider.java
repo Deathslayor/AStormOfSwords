@@ -1012,8 +1012,42 @@ public class ModItemModelProvider extends ItemModelProvider {
         // ---------------------------(SIGNS)--------------------------- //
         simpleItem(ModItems.WEIRWOOD_SIGN);
         simpleItem(ModItems.WEIRWOOD_HANGING_SIGN);
+
         simpleItem(ModItems.PINE_SIGN);
         simpleItem(ModItems.PINE_HANGING_SIGN);
+
+        simpleItem(ModItems.ASH_SIGN);
+        simpleItem(ModItems.ASH_HANGING_SIGN);
+
+        simpleItem(ModItems.BEECH_SIGN);
+        simpleItem(ModItems.BEECH_HANGING_SIGN);
+
+        simpleItem(ModItems.CEDAR_SIGN);
+        simpleItem(ModItems.CEDAR_HANGING_SIGN);
+
+        simpleItem(ModItems.CHESTNUT_SIGN);
+        simpleItem(ModItems.CHESTNUT_HANGING_SIGN);
+
+        simpleItem(ModItems.HAWTHORN_SIGN);
+        simpleItem(ModItems.HAWTHORN_HANGING_SIGN);
+
+        simpleItem(ModItems.IRONWOOD_SIGN);
+        simpleItem(ModItems.IRONWOOD_HANGING_SIGN);
+
+        simpleItem(ModItems.SENTINEL_SIGN);
+        simpleItem(ModItems.SENTINEL_HANGING_SIGN);
+
+        simpleItem(ModItems.SYCAMORE_SIGN);
+        simpleItem(ModItems.SYCAMORE_HANGING_SIGN);
+
+        simpleItem(ModItems.BLACKBARK_SIGN);
+        simpleItem(ModItems.BLACKBARK_HANGING_SIGN);
+
+        simpleItem(ModItems.ASPEN_SIGN);
+        simpleItem(ModItems.ASPEN_HANGING_SIGN);
+
+        simpleItem(ModItems.ALDER_SIGN);
+        simpleItem(ModItems.ALDER_HANGING_SIGN);
 
     }
 

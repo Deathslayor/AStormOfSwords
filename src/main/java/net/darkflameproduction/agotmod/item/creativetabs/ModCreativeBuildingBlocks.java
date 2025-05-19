@@ -29,6 +29,7 @@ public class ModCreativeBuildingBlocks {
                     .displayItems((pParameters, pOutput) -> {
 
                         //Wood
+//Wood
                         pOutput.accept(ModBLocks.WEIRWOOD_LOG.get());
                         pOutput.accept(ModBLocks.STRIPPED_WEIRWOOD_LOG.get());
                         pOutput.accept(ModBLocks.WEIRWOOD_WOOD.get());
@@ -61,6 +62,8 @@ public class ModCreativeBuildingBlocks {
                         pOutput.accept(ModBLocks.SYCAMORE_WALL.get());
                         pOutput.accept(ModBLocks.SYCAMORE_DOOR.get());
                         pOutput.accept(ModBLocks.SYCAMORE_TRAPDOOR.get());
+                        pOutput.accept(ModItems.SYCAMORE_SIGN.get());
+                        pOutput.accept(ModItems.SYCAMORE_HANGING_SIGN.get());
 
                         pOutput.accept(ModBLocks.SENTINEL_LOG.get());
                         pOutput.accept(ModBLocks.STRIPPED_SENTINEL_LOG.get());
@@ -76,6 +79,8 @@ public class ModCreativeBuildingBlocks {
                         pOutput.accept(ModBLocks.SENTINEL_WALL.get());
                         pOutput.accept(ModBLocks.SENTINEL_DOOR.get());
                         pOutput.accept(ModBLocks.SENTINEL_TRAPDOOR.get());
+                        pOutput.accept(ModItems.SENTINEL_SIGN.get());
+                        pOutput.accept(ModItems.SENTINEL_HANGING_SIGN.get());
 
                         pOutput.accept(ModBLocks.PINE_LOG.get());
                         pOutput.accept(ModBLocks.STRIPPED_PINE_LOG.get());
@@ -94,7 +99,6 @@ public class ModCreativeBuildingBlocks {
                         pOutput.accept(ModItems.PINE_SIGN.get());
                         pOutput.accept(ModItems.PINE_HANGING_SIGN.get());
 
-
                         pOutput.accept(ModBLocks.IRONWOOD_LOG.get());
                         pOutput.accept(ModBLocks.STRIPPED_IRONWOOD_LOG.get());
                         pOutput.accept(ModBLocks.IRONWOOD_WOOD.get());
@@ -109,6 +113,8 @@ public class ModCreativeBuildingBlocks {
                         pOutput.accept(ModBLocks.IRONWOOD_WALL.get());
                         pOutput.accept(ModBLocks.IRONWOOD_DOOR.get());
                         pOutput.accept(ModBLocks.IRONWOOD_TRAPDOOR.get());
+                        pOutput.accept(ModItems.IRONWOOD_SIGN.get());
+                        pOutput.accept(ModItems.IRONWOOD_HANGING_SIGN.get());
 
                         pOutput.accept(ModBLocks.HAWTHORN_LOG.get());
                         pOutput.accept(ModBLocks.STRIPPED_HAWTHORN_LOG.get());
@@ -124,6 +130,8 @@ public class ModCreativeBuildingBlocks {
                         pOutput.accept(ModBLocks.HAWTHORN_WALL.get());
                         pOutput.accept(ModBLocks.HAWTHORN_DOOR.get());
                         pOutput.accept(ModBLocks.HAWTHORN_TRAPDOOR.get());
+                        pOutput.accept(ModItems.HAWTHORN_SIGN.get());
+                        pOutput.accept(ModItems.HAWTHORN_HANGING_SIGN.get());
 
                         pOutput.accept(ModBLocks.CHESTNUT_LOG.get());
                         pOutput.accept(ModBLocks.STRIPPED_CHESTNUT_LOG.get());
@@ -139,6 +147,8 @@ public class ModCreativeBuildingBlocks {
                         pOutput.accept(ModBLocks.CHESTNUT_WALL.get());
                         pOutput.accept(ModBLocks.CHESTNUT_DOOR.get());
                         pOutput.accept(ModBLocks.CHESTNUT_TRAPDOOR.get());
+                        pOutput.accept(ModItems.CHESTNUT_SIGN.get());
+                        pOutput.accept(ModItems.CHESTNUT_HANGING_SIGN.get());
 
                         pOutput.accept(ModBLocks.CEDAR_LOG.get());
                         pOutput.accept(ModBLocks.STRIPPED_CEDAR_LOG.get());
@@ -154,6 +164,8 @@ public class ModCreativeBuildingBlocks {
                         pOutput.accept(ModBLocks.CEDAR_WALL.get());
                         pOutput.accept(ModBLocks.CEDAR_DOOR.get());
                         pOutput.accept(ModBLocks.CEDAR_TRAPDOOR.get());
+                        pOutput.accept(ModItems.CEDAR_SIGN.get());
+                        pOutput.accept(ModItems.CEDAR_HANGING_SIGN.get());
 
                         pOutput.accept(ModBLocks.BEECH_LOG.get());
                         pOutput.accept(ModBLocks.STRIPPED_BEECH_LOG.get());
@@ -169,6 +181,8 @@ public class ModCreativeBuildingBlocks {
                         pOutput.accept(ModBLocks.BEECH_WALL.get());
                         pOutput.accept(ModBLocks.BEECH_DOOR.get());
                         pOutput.accept(ModBLocks.BEECH_TRAPDOOR.get());
+                        pOutput.accept(ModItems.BEECH_SIGN.get());
+                        pOutput.accept(ModItems.BEECH_HANGING_SIGN.get());
 
                         pOutput.accept(ModBLocks.ASH_LOG.get());
                         pOutput.accept(ModBLocks.STRIPPED_ASH_LOG.get());
@@ -184,6 +198,8 @@ public class ModCreativeBuildingBlocks {
                         pOutput.accept(ModBLocks.ASH_WALL.get());
                         pOutput.accept(ModBLocks.ASH_DOOR.get());
                         pOutput.accept(ModBLocks.ASH_TRAPDOOR.get());
+                        pOutput.accept(ModItems.ASH_SIGN.get());
+                        pOutput.accept(ModItems.ASH_HANGING_SIGN.get());
 
                         pOutput.accept(ModBLocks.BLACKBARK_LOG.get());
                         pOutput.accept(ModBLocks.STRIPPED_BLACKBARK_LOG.get());
@@ -199,7 +215,8 @@ public class ModCreativeBuildingBlocks {
                         pOutput.accept(ModBLocks.BLACKBARK_WALL.get());
                         pOutput.accept(ModBLocks.BLACKBARK_DOOR.get());
                         pOutput.accept(ModBLocks.BLACKBARK_TRAPDOOR.get());
-
+                        pOutput.accept(ModItems.BLACKBARK_SIGN.get());
+                        pOutput.accept(ModItems.BLACKBARK_HANGING_SIGN.get());
 
                         pOutput.accept(ModBLocks.ASPEN_LOG.get());
                         pOutput.accept(ModBLocks.STRIPPED_ASPEN_LOG.get());
@@ -215,7 +232,8 @@ public class ModCreativeBuildingBlocks {
                         pOutput.accept(ModBLocks.ASPEN_WALL.get());
                         pOutput.accept(ModBLocks.ASPEN_DOOR.get());
                         pOutput.accept(ModBLocks.ASPEN_TRAPDOOR.get());
-
+                        pOutput.accept(ModItems.ASPEN_SIGN.get());
+                        pOutput.accept(ModItems.ASPEN_HANGING_SIGN.get());
 
                         pOutput.accept(ModBLocks.ALDER_LOG.get());
                         pOutput.accept(ModBLocks.STRIPPED_ALDER_LOG.get());
@@ -231,6 +249,8 @@ public class ModCreativeBuildingBlocks {
                         pOutput.accept(ModBLocks.ALDER_WALL.get());
                         pOutput.accept(ModBLocks.ALDER_DOOR.get());
                         pOutput.accept(ModBLocks.ALDER_TRAPDOOR.get());
+                        pOutput.accept(ModItems.ALDER_SIGN.get());
+                        pOutput.accept(ModItems.ALDER_HANGING_SIGN.get());
 
                         // Bricks
                         pOutput.accept(ModBLocks.STONE_BRICK_BUT_COOLER.get());

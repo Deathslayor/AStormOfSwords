@@ -2190,6 +2190,72 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         hangingSignBlock(ModBLocks.PINE_HANGING_SIGN.get(), ModBLocks.PINE_WALL_HANGING_SIGN.get(), blockTexture(ModBLocks.PINE_PLANKS.get()));
 
+        // ASH
+        signBlock(((StandingSignBlock) ModBLocks.ASH_SIGN.get()), ((WallSignBlock) ModBLocks.ASH_WALL_SIGN.get()),
+                blockTexture(ModBLocks.ASH_PLANKS.get()));
+
+        hangingSignBlock(ModBLocks.ASH_HANGING_SIGN.get(), ModBLocks.ASH_WALL_HANGING_SIGN.get(), blockTexture(ModBLocks.ASH_PLANKS.get()));
+
+// BEECH
+        signBlock(((StandingSignBlock) ModBLocks.BEECH_SIGN.get()), ((WallSignBlock) ModBLocks.BEECH_WALL_SIGN.get()),
+                blockTexture(ModBLocks.BEECH_PLANKS.get()));
+
+        hangingSignBlock(ModBLocks.BEECH_HANGING_SIGN.get(), ModBLocks.BEECH_WALL_HANGING_SIGN.get(), blockTexture(ModBLocks.BEECH_PLANKS.get()));
+
+        // SYCAMORE
+        signBlock(((StandingSignBlock) ModBLocks.SYCAMORE_SIGN.get()), ((WallSignBlock) ModBLocks.SYCAMORE_WALL_SIGN.get()),
+                blockTexture(ModBLocks.SYCAMORE_PLANKS.get()));
+
+        hangingSignBlock(ModBLocks.SYCAMORE_HANGING_SIGN.get(), ModBLocks.SYCAMORE_WALL_HANGING_SIGN.get(), blockTexture(ModBLocks.SYCAMORE_PLANKS.get()));
+
+// BLACKBARK
+        signBlock(((StandingSignBlock) ModBLocks.BLACKBARK_SIGN.get()), ((WallSignBlock) ModBLocks.BLACKBARK_WALL_SIGN.get()),
+                blockTexture(ModBLocks.BLACKBARK_PLANKS.get()));
+
+        hangingSignBlock(ModBLocks.BLACKBARK_HANGING_SIGN.get(), ModBLocks.BLACKBARK_WALL_HANGING_SIGN.get(), blockTexture(ModBLocks.BLACKBARK_PLANKS.get()));
+
+// ASPEN
+        signBlock(((StandingSignBlock) ModBLocks.ASPEN_SIGN.get()), ((WallSignBlock) ModBLocks.ASPEN_WALL_SIGN.get()),
+                blockTexture(ModBLocks.ASPEN_PLANKS.get()));
+
+        hangingSignBlock(ModBLocks.ASPEN_HANGING_SIGN.get(), ModBLocks.ASPEN_WALL_HANGING_SIGN.get(), blockTexture(ModBLocks.ASPEN_PLANKS.get()));
+
+// ALDER
+        signBlock(((StandingSignBlock) ModBLocks.ALDER_SIGN.get()), ((WallSignBlock) ModBLocks.ALDER_WALL_SIGN.get()),
+                blockTexture(ModBLocks.ALDER_PLANKS.get()));
+
+        hangingSignBlock(ModBLocks.ALDER_HANGING_SIGN.get(), ModBLocks.ALDER_WALL_HANGING_SIGN.get(), blockTexture(ModBLocks.ALDER_PLANKS.get()));
+
+// CEDAR
+        signBlock(((StandingSignBlock) ModBLocks.CEDAR_SIGN.get()), ((WallSignBlock) ModBLocks.CEDAR_WALL_SIGN.get()),
+                blockTexture(ModBLocks.CEDAR_PLANKS.get()));
+
+        hangingSignBlock(ModBLocks.CEDAR_HANGING_SIGN.get(), ModBLocks.CEDAR_WALL_HANGING_SIGN.get(), blockTexture(ModBLocks.CEDAR_PLANKS.get()));
+
+// CHESTNUT
+        signBlock(((StandingSignBlock) ModBLocks.CHESTNUT_SIGN.get()), ((WallSignBlock) ModBLocks.CHESTNUT_WALL_SIGN.get()),
+                blockTexture(ModBLocks.CHESTNUT_PLANKS.get()));
+
+        hangingSignBlock(ModBLocks.CHESTNUT_HANGING_SIGN.get(), ModBLocks.CHESTNUT_WALL_HANGING_SIGN.get(), blockTexture(ModBLocks.CHESTNUT_PLANKS.get()));
+
+// HAWTHORN
+        signBlock(((StandingSignBlock) ModBLocks.HAWTHORN_SIGN.get()), ((WallSignBlock) ModBLocks.HAWTHORN_WALL_SIGN.get()),
+                blockTexture(ModBLocks.HAWTHORN_PLANKS.get()));
+
+        hangingSignBlock(ModBLocks.HAWTHORN_HANGING_SIGN.get(), ModBLocks.HAWTHORN_WALL_HANGING_SIGN.get(), blockTexture(ModBLocks.HAWTHORN_PLANKS.get()));
+
+// IRONWOOD
+        signBlock(((StandingSignBlock) ModBLocks.IRONWOOD_SIGN.get()), ((WallSignBlock) ModBLocks.IRONWOOD_WALL_SIGN.get()),
+                blockTexture(ModBLocks.IRONWOOD_PLANKS.get()));
+
+        hangingSignBlock(ModBLocks.IRONWOOD_HANGING_SIGN.get(), ModBLocks.IRONWOOD_WALL_HANGING_SIGN.get(), blockTexture(ModBLocks.IRONWOOD_PLANKS.get()));
+
+// SENTINEL
+        signBlock(((StandingSignBlock) ModBLocks.SENTINEL_SIGN.get()), ((WallSignBlock) ModBLocks.SENTINEL_WALL_SIGN.get()),
+                blockTexture(ModBLocks.SENTINEL_PLANKS.get()));
+
+        hangingSignBlock(ModBLocks.SENTINEL_HANGING_SIGN.get(), ModBLocks.SENTINEL_WALL_HANGING_SIGN.get(), blockTexture(ModBLocks.SENTINEL_PLANKS.get()));
+
 
         // ---------------------(VILLAGER PROFESSIONS BLOCKS)--------------------- //
         // Register block states and models for villager profession-related blocks

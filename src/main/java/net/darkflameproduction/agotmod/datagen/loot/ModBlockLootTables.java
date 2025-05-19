@@ -838,6 +838,105 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(ModBLocks.PINE_WALL_HANGING_SIGN.get(),
                 createSingleItemTable(ModBLocks.PINE_HANGING_SIGN.get()));
 
+        this.add(ModBLocks.ASH_SIGN.get(),
+                createSingleItemTable(ModBLocks.ASH_SIGN.get()));
+        this.add(ModBLocks.ASH_WALL_SIGN.get(),
+                createSingleItemTable(ModBLocks.ASH_SIGN.get()));
+        this.add(ModBLocks.ASH_HANGING_SIGN.get(),
+                createSingleItemTable(ModBLocks.ASH_HANGING_SIGN.get()));
+        this.add(ModBLocks.ASH_WALL_HANGING_SIGN.get(),
+                createSingleItemTable(ModBLocks.ASH_HANGING_SIGN.get()));
+
+        this.add(ModBLocks.BEECH_SIGN.get(),
+                createSingleItemTable(ModBLocks.BEECH_SIGN.get()));
+        this.add(ModBLocks.BEECH_WALL_SIGN.get(),
+                createSingleItemTable(ModBLocks.BEECH_SIGN.get()));
+        this.add(ModBLocks.BEECH_HANGING_SIGN.get(),
+                createSingleItemTable(ModBLocks.BEECH_HANGING_SIGN.get()));
+        this.add(ModBLocks.BEECH_WALL_HANGING_SIGN.get(),
+                createSingleItemTable(ModBLocks.BEECH_HANGING_SIGN.get()));
+
+        this.add(ModBLocks.CEDAR_SIGN.get(),
+                createSingleItemTable(ModBLocks.CEDAR_SIGN.get()));
+        this.add(ModBLocks.CEDAR_WALL_SIGN.get(),
+                createSingleItemTable(ModBLocks.CEDAR_SIGN.get()));
+        this.add(ModBLocks.CEDAR_HANGING_SIGN.get(),
+                createSingleItemTable(ModBLocks.CEDAR_HANGING_SIGN.get()));
+        this.add(ModBLocks.CEDAR_WALL_HANGING_SIGN.get(),
+                createSingleItemTable(ModBLocks.CEDAR_HANGING_SIGN.get()));
+
+        this.add(ModBLocks.CHESTNUT_SIGN.get(),
+                createSingleItemTable(ModBLocks.CHESTNUT_SIGN.get()));
+        this.add(ModBLocks.CHESTNUT_WALL_SIGN.get(),
+                createSingleItemTable(ModBLocks.CHESTNUT_SIGN.get()));
+        this.add(ModBLocks.CHESTNUT_HANGING_SIGN.get(),
+                createSingleItemTable(ModBLocks.CHESTNUT_HANGING_SIGN.get()));
+        this.add(ModBLocks.CHESTNUT_WALL_HANGING_SIGN.get(),
+                createSingleItemTable(ModBLocks.CHESTNUT_HANGING_SIGN.get()));
+
+        this.add(ModBLocks.HAWTHORN_SIGN.get(),
+                createSingleItemTable(ModBLocks.HAWTHORN_SIGN.get()));
+        this.add(ModBLocks.HAWTHORN_WALL_SIGN.get(),
+                createSingleItemTable(ModBLocks.HAWTHORN_SIGN.get()));
+        this.add(ModBLocks.HAWTHORN_HANGING_SIGN.get(),
+                createSingleItemTable(ModBLocks.HAWTHORN_HANGING_SIGN.get()));
+        this.add(ModBLocks.HAWTHORN_WALL_HANGING_SIGN.get(),
+                createSingleItemTable(ModBLocks.HAWTHORN_HANGING_SIGN.get()));
+
+        this.add(ModBLocks.SYCAMORE_SIGN.get(),
+                createSingleItemTable(ModBLocks.SYCAMORE_SIGN.get()));
+        this.add(ModBLocks.SYCAMORE_WALL_SIGN.get(),
+                createSingleItemTable(ModBLocks.SYCAMORE_SIGN.get()));
+        this.add(ModBLocks.SYCAMORE_HANGING_SIGN.get(),
+                createSingleItemTable(ModBLocks.SYCAMORE_HANGING_SIGN.get()));
+        this.add(ModBLocks.SYCAMORE_WALL_HANGING_SIGN.get(),
+                createSingleItemTable(ModBLocks.SYCAMORE_HANGING_SIGN.get()));
+
+        this.add(ModBLocks.BLACKBARK_SIGN.get(),
+                createSingleItemTable(ModBLocks.BLACKBARK_SIGN.get()));
+        this.add(ModBLocks.BLACKBARK_WALL_SIGN.get(),
+                createSingleItemTable(ModBLocks.BLACKBARK_SIGN.get()));
+        this.add(ModBLocks.BLACKBARK_HANGING_SIGN.get(),
+                createSingleItemTable(ModBLocks.BLACKBARK_HANGING_SIGN.get()));
+        this.add(ModBLocks.BLACKBARK_WALL_HANGING_SIGN.get(),
+                createSingleItemTable(ModBLocks.BLACKBARK_HANGING_SIGN.get()));
+
+        this.add(ModBLocks.ASPEN_SIGN.get(),
+                createSingleItemTable(ModBLocks.ASPEN_SIGN.get()));
+        this.add(ModBLocks.ASPEN_WALL_SIGN.get(),
+                createSingleItemTable(ModBLocks.ASPEN_SIGN.get()));
+        this.add(ModBLocks.ASPEN_HANGING_SIGN.get(),
+                createSingleItemTable(ModBLocks.ASPEN_HANGING_SIGN.get()));
+        this.add(ModBLocks.ASPEN_WALL_HANGING_SIGN.get(),
+                createSingleItemTable(ModBLocks.ASPEN_HANGING_SIGN.get()));
+
+        this.add(ModBLocks.ALDER_SIGN.get(),
+                createSingleItemTable(ModBLocks.ALDER_SIGN.get()));
+        this.add(ModBLocks.ALDER_WALL_SIGN.get(),
+                createSingleItemTable(ModBLocks.ALDER_SIGN.get()));
+        this.add(ModBLocks.ALDER_HANGING_SIGN.get(),
+                createSingleItemTable(ModBLocks.ALDER_HANGING_SIGN.get()));
+        this.add(ModBLocks.ALDER_WALL_HANGING_SIGN.get(),
+                createSingleItemTable(ModBLocks.ALDER_HANGING_SIGN.get()));
+
+        this.add(ModBLocks.IRONWOOD_SIGN.get(),
+                createSingleItemTable(ModBLocks.IRONWOOD_SIGN.get()));
+        this.add(ModBLocks.IRONWOOD_WALL_SIGN.get(),
+                createSingleItemTable(ModBLocks.IRONWOOD_SIGN.get()));
+        this.add(ModBLocks.IRONWOOD_HANGING_SIGN.get(),
+                createSingleItemTable(ModBLocks.IRONWOOD_HANGING_SIGN.get()));
+        this.add(ModBLocks.IRONWOOD_WALL_HANGING_SIGN.get(),
+                createSingleItemTable(ModBLocks.IRONWOOD_HANGING_SIGN.get()));
+
+        this.add(ModBLocks.SENTINEL_SIGN.get(),
+                createSingleItemTable(ModBLocks.SENTINEL_SIGN.get()));
+        this.add(ModBLocks.SENTINEL_WALL_SIGN.get(),
+                createSingleItemTable(ModBLocks.SENTINEL_SIGN.get()));
+        this.add(ModBLocks.SENTINEL_HANGING_SIGN.get(),
+                createSingleItemTable(ModBLocks.SENTINEL_HANGING_SIGN.get()));
+        this.add(ModBLocks.SENTINEL_WALL_HANGING_SIGN.get(),
+                createSingleItemTable(ModBLocks.SENTINEL_HANGING_SIGN.get()));
+
         /** // ---------------------------(CROPS)--------------------------- // */
 
         this.add(ModBLocks.HORSERADISH_CROP.get(), cropDrop(

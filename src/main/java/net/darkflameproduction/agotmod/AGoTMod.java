@@ -160,6 +160,18 @@ public class AGoTMod {
         public static void onClientSetup(@NotNull FMLClientSetupEvent event) {
             Sheets.addWoodType(ModWoodTypes.WEIRWOOD);
             Sheets.addWoodType(ModWoodTypes.PINE);
+            Sheets.addWoodType(ModWoodTypes.ASH);
+            Sheets.addWoodType(ModWoodTypes.BEECH);
+            Sheets.addWoodType(ModWoodTypes.CEDAR);
+            Sheets.addWoodType(ModWoodTypes.CHESTNUT);
+            Sheets.addWoodType(ModWoodTypes.FIR);
+            Sheets.addWoodType(ModWoodTypes.HAWTHORN);
+            Sheets.addWoodType(ModWoodTypes.IRONWOOD);
+            Sheets.addWoodType(ModWoodTypes.SENTINEL);
+            Sheets.addWoodType(ModWoodTypes.SYCAMORE);
+            Sheets.addWoodType(ModWoodTypes.BLACKBARK);
+            Sheets.addWoodType(ModWoodTypes.ASPEN);
+            Sheets.addWoodType(ModWoodTypes.ALDER);
 
             event.enqueueWork(ModItemProperties::addCustomItemProperties);
         }

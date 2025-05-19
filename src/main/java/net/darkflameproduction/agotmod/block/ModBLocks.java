@@ -1465,6 +1465,457 @@ public class ModBLocks {
                 .ignitedByLava(), 
             false);
 
+    // ASH
+    public static final DeferredBlock<Block> ASH_SIGN = registerBlock("ash_sign",
+            properties -> new ModStandingSignBlock(ModWoodTypes.ASH, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> ASH_WALL_SIGN = registerBlock("ash_wall_sign",
+            properties -> new ModWallSignBlock(ModWoodTypes.ASH, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> ASH_HANGING_SIGN = registerBlock("ash_hanging_sign",
+            properties -> new ModHangingSignBlock(ModWoodTypes.ASH, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> ASH_WALL_HANGING_SIGN = registerBlock("ash_wall_hanging_sign",
+            properties -> new ModWallHangingSignBlock(ModWoodTypes.ASH, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    // BEECH
+    public static final DeferredBlock<Block> BEECH_SIGN = registerBlock("beech_sign",
+            properties -> new ModStandingSignBlock(ModWoodTypes.BEECH, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> BEECH_WALL_SIGN = registerBlock("beech_wall_sign",
+            properties -> new ModWallSignBlock(ModWoodTypes.BEECH, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> BEECH_HANGING_SIGN = registerBlock("beech_hanging_sign",
+            properties -> new ModHangingSignBlock(ModWoodTypes.BEECH, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> BEECH_WALL_HANGING_SIGN = registerBlock("beech_wall_hanging_sign",
+            properties -> new ModWallHangingSignBlock(ModWoodTypes.BEECH, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    // CEDAR
+    public static final DeferredBlock<Block> CEDAR_SIGN = registerBlock("cedar_sign",
+            properties -> new ModStandingSignBlock(ModWoodTypes.CEDAR, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> CEDAR_WALL_SIGN = registerBlock("cedar_wall_sign",
+            properties -> new ModWallSignBlock(ModWoodTypes.CEDAR, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> CEDAR_HANGING_SIGN = registerBlock("cedar_hanging_sign",
+            properties -> new ModHangingSignBlock(ModWoodTypes.CEDAR, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> CEDAR_WALL_HANGING_SIGN = registerBlock("cedar_wall_hanging_sign",
+            properties -> new ModWallHangingSignBlock(ModWoodTypes.CEDAR, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    // CHESTNUT
+    public static final DeferredBlock<Block> CHESTNUT_SIGN = registerBlock("chestnut_sign",
+            properties -> new ModStandingSignBlock(ModWoodTypes.CHESTNUT, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> CHESTNUT_WALL_SIGN = registerBlock("chestnut_wall_sign",
+            properties -> new ModWallSignBlock(ModWoodTypes.CHESTNUT, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> CHESTNUT_HANGING_SIGN = registerBlock("chestnut_hanging_sign",
+            properties -> new ModHangingSignBlock(ModWoodTypes.CHESTNUT, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> CHESTNUT_WALL_HANGING_SIGN = registerBlock("chestnut_wall_hanging_sign",
+            properties -> new ModWallHangingSignBlock(ModWoodTypes.CHESTNUT, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    // HAWTHORN
+    public static final DeferredBlock<Block> HAWTHORN_SIGN = registerBlock("hawthorn_sign",
+            properties -> new ModStandingSignBlock(ModWoodTypes.HAWTHORN, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> HAWTHORN_WALL_SIGN = registerBlock("hawthorn_wall_sign",
+            properties -> new ModWallSignBlock(ModWoodTypes.HAWTHORN, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> HAWTHORN_HANGING_SIGN = registerBlock("hawthorn_hanging_sign",
+            properties -> new ModHangingSignBlock(ModWoodTypes.HAWTHORN, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> HAWTHORN_WALL_HANGING_SIGN = registerBlock("hawthorn_wall_hanging_sign",
+            properties -> new ModWallHangingSignBlock(ModWoodTypes.HAWTHORN, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    // IRONWOOD
+    public static final DeferredBlock<Block> IRONWOOD_SIGN = registerBlock("ironwood_sign",
+            properties -> new ModStandingSignBlock(ModWoodTypes.IRONWOOD, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> IRONWOOD_WALL_SIGN = registerBlock("ironwood_wall_sign",
+            properties -> new ModWallSignBlock(ModWoodTypes.IRONWOOD, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> IRONWOOD_HANGING_SIGN = registerBlock("ironwood_hanging_sign",
+            properties -> new ModHangingSignBlock(ModWoodTypes.IRONWOOD, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> IRONWOOD_WALL_HANGING_SIGN = registerBlock("ironwood_wall_hanging_sign",
+            properties -> new ModWallHangingSignBlock(ModWoodTypes.IRONWOOD, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    // SYCAMORE
+    public static final DeferredBlock<Block> SYCAMORE_SIGN = registerBlock("sycamore_sign",
+            properties -> new ModStandingSignBlock(ModWoodTypes.SYCAMORE, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> SYCAMORE_WALL_SIGN = registerBlock("sycamore_wall_sign",
+            properties -> new ModWallSignBlock(ModWoodTypes.SYCAMORE, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> SYCAMORE_HANGING_SIGN = registerBlock("sycamore_hanging_sign",
+            properties -> new ModHangingSignBlock(ModWoodTypes.SYCAMORE, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> SYCAMORE_WALL_HANGING_SIGN = registerBlock("sycamore_wall_hanging_sign",
+            properties -> new ModWallHangingSignBlock(ModWoodTypes.SYCAMORE, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    // BLACKBARK
+    public static final DeferredBlock<Block> BLACKBARK_SIGN = registerBlock("blackbark_sign",
+            properties -> new ModStandingSignBlock(ModWoodTypes.BLACKBARK, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> BLACKBARK_WALL_SIGN = registerBlock("blackbark_wall_sign",
+            properties -> new ModWallSignBlock(ModWoodTypes.BLACKBARK, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> BLACKBARK_HANGING_SIGN = registerBlock("blackbark_hanging_sign",
+            properties -> new ModHangingSignBlock(ModWoodTypes.BLACKBARK, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> BLACKBARK_WALL_HANGING_SIGN = registerBlock("blackbark_wall_hanging_sign",
+            properties -> new ModWallHangingSignBlock(ModWoodTypes.BLACKBARK, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    // ASPEN
+    public static final DeferredBlock<Block> ASPEN_SIGN = registerBlock("aspen_sign",
+            properties -> new ModStandingSignBlock(ModWoodTypes.ASPEN, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> ASPEN_WALL_SIGN = registerBlock("aspen_wall_sign",
+            properties -> new ModWallSignBlock(ModWoodTypes.ASPEN, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> ASPEN_HANGING_SIGN = registerBlock("aspen_hanging_sign",
+            properties -> new ModHangingSignBlock(ModWoodTypes.ASPEN, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> ASPEN_WALL_HANGING_SIGN = registerBlock("aspen_wall_hanging_sign",
+            properties -> new ModWallHangingSignBlock(ModWoodTypes.ASPEN, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    // ALDER
+    public static final DeferredBlock<Block> ALDER_SIGN = registerBlock("alder_sign",
+            properties -> new ModStandingSignBlock(ModWoodTypes.ALDER, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> ALDER_WALL_SIGN = registerBlock("alder_wall_sign",
+            properties -> new ModWallSignBlock(ModWoodTypes.ALDER, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> ALDER_HANGING_SIGN = registerBlock("alder_hanging_sign",
+            properties -> new ModHangingSignBlock(ModWoodTypes.ALDER, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> ALDER_WALL_HANGING_SIGN = registerBlock("alder_wall_hanging_sign",
+            properties -> new ModWallHangingSignBlock(ModWoodTypes.ALDER, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    // SENTINEL
+    public static final DeferredBlock<Block> SENTINEL_SIGN = registerBlock("sentinel_sign",
+            properties -> new ModStandingSignBlock(ModWoodTypes.SENTINEL, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> SENTINEL_WALL_SIGN = registerBlock("sentinel_wall_sign",
+            properties -> new ModWallSignBlock(ModWoodTypes.SENTINEL, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> SENTINEL_HANGING_SIGN = registerBlock("sentinel_hanging_sign",
+            properties -> new ModHangingSignBlock(ModWoodTypes.SENTINEL, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> SENTINEL_WALL_HANGING_SIGN = registerBlock("sentinel_wall_hanging_sign",
+            properties -> new ModWallHangingSignBlock(ModWoodTypes.SENTINEL, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
 
     // ---------------------------(STONE)--------------------------- //
 

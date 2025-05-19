@@ -228,7 +228,64 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBLocks.PINE_SIGN.get())
                 .add(ModBLocks.PINE_WALL_SIGN.get())
                 .add(ModBLocks.PINE_HANGING_SIGN.get())
-                .add(ModBLocks.PINE_WALL_HANGING_SIGN.get());
+                .add(ModBLocks.PINE_WALL_HANGING_SIGN.get())
+                .add(ModBLocks.ASH_SIGN.get())
+                .add(ModBLocks.ASH_WALL_SIGN.get())
+                .add(ModBLocks.ASH_HANGING_SIGN.get())
+                .add(ModBLocks.ASH_WALL_HANGING_SIGN.get())
+
+                .add(ModBLocks.BEECH_SIGN.get())
+                .add(ModBLocks.BEECH_WALL_SIGN.get())
+                .add(ModBLocks.BEECH_HANGING_SIGN.get())
+                .add(ModBLocks.BEECH_WALL_HANGING_SIGN.get())
+
+                .add(ModBLocks.CEDAR_SIGN.get())
+                .add(ModBLocks.CEDAR_WALL_SIGN.get())
+                .add(ModBLocks.CEDAR_HANGING_SIGN.get())
+                .add(ModBLocks.CEDAR_WALL_HANGING_SIGN.get())
+
+                .add(ModBLocks.CHESTNUT_SIGN.get())
+                .add(ModBLocks.CHESTNUT_WALL_SIGN.get())
+                .add(ModBLocks.CHESTNUT_HANGING_SIGN.get())
+                .add(ModBLocks.CHESTNUT_WALL_HANGING_SIGN.get())
+
+                .add(ModBLocks.SYCAMORE_SIGN.get())
+                .add(ModBLocks.SYCAMORE_WALL_SIGN.get())
+                .add(ModBLocks.SYCAMORE_HANGING_SIGN.get())
+                .add(ModBLocks.SYCAMORE_WALL_HANGING_SIGN.get())
+
+                .add(ModBLocks.BLACKBARK_SIGN.get())
+                .add(ModBLocks.BLACKBARK_WALL_SIGN.get())
+                .add(ModBLocks.BLACKBARK_HANGING_SIGN.get())
+                .add(ModBLocks.BLACKBARK_WALL_HANGING_SIGN.get())
+
+                .add(ModBLocks.ASPEN_SIGN.get())
+                .add(ModBLocks.ASPEN_WALL_SIGN.get())
+                .add(ModBLocks.ASPEN_HANGING_SIGN.get())
+                .add(ModBLocks.ASPEN_WALL_HANGING_SIGN.get())
+
+                .add(ModBLocks.ALDER_SIGN.get())
+                .add(ModBLocks.ALDER_WALL_SIGN.get())
+                .add(ModBLocks.ALDER_HANGING_SIGN.get())
+                .add(ModBLocks.ALDER_WALL_HANGING_SIGN.get())
+
+                .add(ModBLocks.HAWTHORN_SIGN.get())
+                .add(ModBLocks.HAWTHORN_WALL_SIGN.get())
+                .add(ModBLocks.HAWTHORN_HANGING_SIGN.get())
+                .add(ModBLocks.HAWTHORN_WALL_HANGING_SIGN.get())
+
+                .add(ModBLocks.IRONWOOD_SIGN.get())
+                .add(ModBLocks.IRONWOOD_WALL_SIGN.get())
+                .add(ModBLocks.IRONWOOD_HANGING_SIGN.get())
+                .add(ModBLocks.IRONWOOD_WALL_HANGING_SIGN.get())
+
+                .add(ModBLocks.SENTINEL_SIGN.get())
+                .add(ModBLocks.SENTINEL_WALL_SIGN.get())
+                .add(ModBLocks.SENTINEL_HANGING_SIGN.get())
+                .add(ModBLocks.SENTINEL_WALL_HANGING_SIGN.get())
+
+        ;
+
 
         this.tag(BlockTags.CROPS)
                 .add(ModBLocks.BARLEY_CROP.get())
