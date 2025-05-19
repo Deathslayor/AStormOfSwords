@@ -72,6 +72,7 @@ public class CustomGuiScreen extends Screen {
             0xFF000099, 0xFF2D0050, 0xFF57007F
     };
 
+    private static final int SUBMENU_TEXT_COLOR = 0xFF000000;
     private static final int PARCHMENT_COLOR = 0xFFF5E7C1;
 
     private static final Stat<ResourceLocation> DAMAGE_DEALT_STAT = Stats.CUSTOM.get(Stats.DAMAGE_DEALT);
@@ -869,12 +870,12 @@ public class CustomGuiScreen extends Screen {
             int textY = layout.topMargin + (layout.sectionButtonHeight - font.lineHeight) / 2;
 
             guiGraphics.drawString(font, text, textX, textY,
-                    isSelected ? 0xFFFFFFFF : PARCHMENT_COLOR, true);
+                    isSelected ? 0xFFFFFFFF : PARCHMENT_COLOR);
         }
     }
 
     private void drawSkillsSection(GuiGraphics guiGraphics, int mouseX, int mouseY, ScreenLayout layout) {
-        int panelGap = 4;
+        int panelGap = 2;
 
         int panelWidth = (int) (layout.contentWidth * 0.45);
 
@@ -901,289 +902,299 @@ public class CustomGuiScreen extends Screen {
         int rightTitleX = rightPanelX + (panelWidth - rightTitleWidth) / 2;
         drawSubmenuTitle(guiGraphics, rightTitle, rightTitleX, panelY);
 
-        int columnWidth = panelWidth / 3;
+        // Changed from 3 columns to 2 columns
+        int columnWidth = panelWidth / 2;
         int headerY = panelY + layout.contentHeight / 10 + 10;
 
         float scale = 0.9f;
 
         String col1Title = "Skill Level";
-        String col2Title = "Progress Bar";
-        String col3Title = "Progression";
+        String col2Title = "Progress";
 
         // Left panel header
         int col1CenterX = leftPanelX + columnWidth / 2;
         int col2CenterX = leftPanelX + columnWidth + columnWidth / 2;
-        int col3CenterX = leftPanelX + columnWidth * 2 + columnWidth / 2;
 
         int col1Width = (int)(font.width(col1Title) * scale);
         int col2Width = (int)(font.width(col2Title) * scale);
-        int col3Width = (int)(font.width(col3Title) * scale);
 
         int col1X = col1CenterX - col1Width / 2;
         int col2X = col2CenterX - col2Width / 2;
-        int col3X = col3CenterX - col3Width / 2;
 
         guiGraphics.pose().pushPose();
         guiGraphics.pose().scale(scale, scale, 1.0f);
 
-        guiGraphics.drawString(font, col1Title, (int)(col1X / scale), (int)(headerY / scale), PARCHMENT_COLOR);
-        guiGraphics.drawString(font, col2Title, (int)(col2X / scale), (int)(headerY / scale), PARCHMENT_COLOR);
-        guiGraphics.drawString(font, col3Title, (int)(col3X / scale), (int)(headerY / scale), PARCHMENT_COLOR);
+        guiGraphics.drawString(font, col1Title, (int)(col1X / scale), (int)(headerY / scale), SUBMENU_TEXT_COLOR, false);
+        guiGraphics.drawString(font, col2Title, (int)(col2X / scale), (int)(headerY / scale), SUBMENU_TEXT_COLOR, false);
 
         guiGraphics.pose().popPose();
 
-        guiGraphics.fill(leftPanelX + 5, headerY + (int)(font.lineHeight * scale) + 2,
-                leftPanelX + panelWidth - 5, headerY + (int)(font.lineHeight * scale) + 3,
-                PARCHMENT_COLOR);
+        guiGraphics.fill(
+                leftPanelX + panelWidth/10,  // Start 1/10 of the way in
+                headerY + (int)(font.lineHeight * scale) + 2,
+                leftPanelX + panelWidth - panelWidth/10,  // End 1/10 of the way from the right
+                headerY + (int)(font.lineHeight * scale) + 3,
+                SUBMENU_TEXT_COLOR
+        );
 
         int statsY = headerY + (int)(font.lineHeight * scale) + 10;
         int lineSpacing = layout.contentHeight / 18;
 
-        drawAgilitySkill(guiGraphics, leftPanelX, statsY, columnWidth, scale);
-        drawStrengthSkill(guiGraphics, leftPanelX, statsY + lineSpacing, columnWidth, scale);
-        drawEnduranceSkill(guiGraphics, leftPanelX, statsY + lineSpacing * 2, columnWidth, scale);
+        drawAgilitySkill2Col(guiGraphics, leftPanelX, statsY, columnWidth, scale);
+        drawStrengthSkill2Col(guiGraphics, leftPanelX, statsY + lineSpacing, columnWidth, scale);
+        drawEnduranceSkill2Col(guiGraphics, leftPanelX, statsY + lineSpacing * 2, columnWidth, scale);
 
         // Right panel header
         int rightCol1CenterX = rightPanelX + columnWidth / 2;
         int rightCol2CenterX = rightPanelX + columnWidth + columnWidth / 2;
-        int rightCol3CenterX = rightPanelX + columnWidth * 2 + columnWidth / 2;
 
         int rightCol1X = rightCol1CenterX - col1Width / 2;
         int rightCol2X = rightCol2CenterX - col2Width / 2;
-        int rightCol3X = rightCol3CenterX - col3Width / 2;
 
         guiGraphics.pose().pushPose();
         guiGraphics.pose().scale(scale, scale, 1.0f);
 
-        guiGraphics.drawString(font, col1Title, (int)(rightCol1X / scale), (int)(headerY / scale), PARCHMENT_COLOR);
-        guiGraphics.drawString(font, col2Title, (int)(rightCol2X / scale), (int)(headerY / scale), PARCHMENT_COLOR);
-        guiGraphics.drawString(font, col3Title, (int)(rightCol3X / scale), (int)(headerY / scale), PARCHMENT_COLOR);
+        guiGraphics.drawString(font, col1Title, (int)(rightCol1X / scale), (int)(headerY / scale), SUBMENU_TEXT_COLOR, false);
+        guiGraphics.drawString(font, col2Title, (int)(rightCol2X / scale), (int)(headerY / scale), SUBMENU_TEXT_COLOR, false);
 
         guiGraphics.pose().popPose();
 
-        guiGraphics.fill(rightPanelX + 5, headerY + (int)(font.lineHeight * scale) + 2,
-                rightPanelX + panelWidth - 5, headerY + (int)(font.lineHeight * scale) + 3,
-                PARCHMENT_COLOR);
+        guiGraphics.fill(
+                rightPanelX + panelWidth/10,  // Start 1/10 of the way in
+                headerY + (int)(font.lineHeight * scale) + 2,
+                rightPanelX + panelWidth - panelWidth/10,  // End 1/10 of the way from the right
+                headerY + (int)(font.lineHeight * scale) + 3,
+                SUBMENU_TEXT_COLOR
+        );
 
         int rightStatsY = statsY;
 
-        drawWeaponSkill(guiGraphics, "One Handed", oneHandedLevel, oneHandedProgress, nextOneHandedRequirement,
+        drawWeaponSkill2Col(guiGraphics, "One Handed", oneHandedLevel, oneHandedProgress, nextOneHandedRequirement,
                 rightPanelX, rightStatsY, columnWidth, scale, RAINBOW_COLORS[0]);
-        drawWeaponSkill(guiGraphics, "Two Handed", twoHandedLevel, twoHandedProgress, nextTwoHandedRequirement,
+        drawWeaponSkill2Col(guiGraphics, "Two Handed", twoHandedLevel, twoHandedProgress, nextTwoHandedRequirement,
                 rightPanelX, rightStatsY + lineSpacing, columnWidth, scale, RAINBOW_COLORS[0]);
-        drawWeaponSkill(guiGraphics, "Polearms", polearmLevel, polearmProgress, nextPolearmRequirement,
+        drawWeaponSkill2Col(guiGraphics, "Polearms", polearmLevel, polearmProgress, nextPolearmRequirement,
                 rightPanelX, rightStatsY + lineSpacing * 2, columnWidth, scale, RAINBOW_COLORS[0]);
-        drawWeaponSkill(guiGraphics, "Short Blade", shortBladeLevel, shortBladeProgress, nextShortBladeRequirement,
+        drawWeaponSkill2Col(guiGraphics, "Short Blade", shortBladeLevel, shortBladeProgress, nextShortBladeRequirement,
                 rightPanelX, rightStatsY + lineSpacing * 3, columnWidth, scale, RAINBOW_COLORS[0]);
-        drawWeaponSkill(guiGraphics, "Ranged", rangedLevel, rangedProgress, nextRangedRequirement,
+        drawWeaponSkill2Col(guiGraphics, "Ranged", rangedLevel, rangedProgress, nextRangedRequirement,
                 rightPanelX, rightStatsY + lineSpacing * 4, columnWidth, scale, RAINBOW_COLORS[0]);
     }
 
-    private void drawWeaponSkill(GuiGraphics guiGraphics, String skillName, int level, double progress,
-                                 double nextLevelRequirement, int x, int y, int columnWidth, float scale,
-                                 int color) {
+    private void drawWeaponSkill2Col(GuiGraphics guiGraphics, String skillName, int level, double progress,
+                                     double nextLevelRequirement, int x, int y, int columnWidth, float scale,
+                                     int color) {
         int barHeight = 6;
         int maxBarWidth = columnWidth - 25;
 
         guiGraphics.pose().pushPose();
         guiGraphics.pose().scale(scale, scale, 1.0f);
 
+        // First column - Skill name and level
         String levelText = skillName + ": " + level;
         int levelTextWidth = (int)(font.width(levelText) * scale);
         int col1CenterX = x + columnWidth / 2;
         float scaledX = (col1CenterX - levelTextWidth / (2 * scale)) / scale;
         float scaledY = y / scale;
-        guiGraphics.drawString(font, levelText, (int)scaledX, (int)scaledY, PARCHMENT_COLOR);
+        guiGraphics.drawString(font, levelText, (int)scaledX, (int)scaledY, SUBMENU_TEXT_COLOR, false);
 
         guiGraphics.pose().popPose();
 
-        int barX = x + columnWidth + (columnWidth - maxBarWidth) / 2;
+        // Second column - Progress bar with percentage
+        int barX = x + columnWidth + 10;
+        int barWidth = maxBarWidth - 20; // Leave room for percentage text
 
         int textCenterY = y + (int)((font.lineHeight * scale) / 2);
         guiGraphics.fill(barX, textCenterY - barHeight/2,
-                barX + maxBarWidth, textCenterY + barHeight/2,
+                barX + barWidth, textCenterY + barHeight/2,
                 0xFF555555);
 
-        int barWidth = (int) (maxBarWidth * progress);
+        int progressBarWidth = (int) (barWidth * progress);
         int barColor = level < MAX_WEAPON_SKILL_LEVEL ? color : RAINBOW_COLORS[4];
         guiGraphics.fill(barX, textCenterY - barHeight/2,
-                barX + barWidth, textCenterY + barHeight/2,
+                barX + progressBarWidth, textCenterY + barHeight/2,
                 barColor);
 
+        // Draw percentage or "Max Level" after the bar
         guiGraphics.pose().pushPose();
         guiGraphics.pose().scale(scale, scale, 1.0f);
 
         String progressText;
         if (level < MAX_WEAPON_SKILL_LEVEL) {
-            progressText = String.format("%.0f/%.0f",
-                    progress * nextLevelRequirement,
-                    nextLevelRequirement);
+            // Show percentage instead of raw values
+            progressText = String.format("%.0f%%", progress * 100);
         } else {
-            progressText = "Max Level";
+            progressText = "Max";
         }
 
         int progressTextWidth = (int)(font.width(progressText) * scale);
-        int col3CenterX = x + columnWidth * 2 + columnWidth / 2;
-        scaledX = (col3CenterX - progressTextWidth / (2 * scale)) / scale;
+        float percentX = (barX + barWidth + 5) / scale;
 
-        int textColor = level < MAX_WEAPON_SKILL_LEVEL ? PARCHMENT_COLOR : 0xFF55FF55;
-        guiGraphics.drawString(font, progressText, (int)scaledX, (int)scaledY, textColor);
+        int textColor = level < MAX_WEAPON_SKILL_LEVEL ? SUBMENU_TEXT_COLOR : 0xFF55FF55;
+        guiGraphics.drawString(font, progressText, (int)percentX, (int)scaledY, textColor, false);
 
         guiGraphics.pose().popPose();
     }
 
-    private void drawAgilitySkill(GuiGraphics guiGraphics, int x, int y, int columnWidth, float scale) {
+    private void drawAgilitySkill2Col(GuiGraphics guiGraphics, int x, int y, int columnWidth, float scale) {
         int barHeight = 6;
         int maxBarWidth = columnWidth - 25;
 
         guiGraphics.pose().pushPose();
         guiGraphics.pose().scale(scale, scale, 1.0f);
 
+        // First column - Skill name and level
         String levelText = "Agility: " + agilityLevel;
         int levelTextWidth = (int)(font.width(levelText) * scale);
         int col1CenterX = x + columnWidth / 2;
         float scaledX = (col1CenterX - levelTextWidth / (2 * scale)) / scale;
         float scaledY = y / scale;
-        guiGraphics.drawString(font, levelText, (int)scaledX, (int)scaledY, PARCHMENT_COLOR);
+        guiGraphics.drawString(font, levelText, (int)scaledX, (int)scaledY, SUBMENU_TEXT_COLOR, false);
 
         guiGraphics.pose().popPose();
 
-        int barX = x + columnWidth + (columnWidth - maxBarWidth) / 2;
+        // Second column - Progress bar with percentage
+        int barX = x + columnWidth + 10;
+        int barWidth = maxBarWidth - 20; // Leave room for percentage text
 
         int textCenterY = y + (int)((font.lineHeight * scale) / 2);
         guiGraphics.fill(barX, textCenterY - barHeight/2,
-                barX + maxBarWidth, textCenterY + barHeight/2,
+                barX + barWidth, textCenterY + barHeight/2,
                 0xFF555555);
 
-        int barWidth = (int) (maxBarWidth * agilityProgress);
+        int progressBarWidth = (int) (barWidth * agilityProgress);
         int barColor = agilityLevel < MAX_AGILITY_LEVEL ? RAINBOW_COLORS[0] : RAINBOW_COLORS[4];
         guiGraphics.fill(barX, textCenterY - barHeight/2,
-                barX + barWidth, textCenterY + barHeight/2,
+                barX + progressBarWidth, textCenterY + barHeight/2,
                 barColor);
 
+        // Draw percentage or "Max Level" after the bar
         guiGraphics.pose().pushPose();
         guiGraphics.pose().scale(scale, scale, 1.0f);
 
         String progressText;
         if (agilityLevel < MAX_AGILITY_LEVEL) {
-            progressText = String.format("%.1f/%.1f km",
-                    agilityProgress * nextLevelDistance,
-                    nextLevelDistance);
+            // Show percentage instead of raw values
+            progressText = String.format("%.0f%%", agilityProgress * 100);
         } else {
-            progressText = "Max Level";
+            progressText = "Max";
         }
 
         int progressTextWidth = (int)(font.width(progressText) * scale);
-        int col3CenterX = x + columnWidth * 2 + columnWidth / 2;
-        scaledX = (col3CenterX - progressTextWidth / (2 * scale)) / scale;
+        float percentX = (barX + barWidth + 5) / scale;
 
-        int textColor = agilityLevel < MAX_AGILITY_LEVEL ? PARCHMENT_COLOR : 0xFF55FF55;
-        guiGraphics.drawString(font, progressText, (int)scaledX, (int)scaledY, textColor);
+        int textColor = agilityLevel < MAX_AGILITY_LEVEL ? SUBMENU_TEXT_COLOR : 0xFF55FF55;
+        guiGraphics.drawString(font, progressText, (int)percentX, (int)scaledY, textColor, false);
 
         guiGraphics.pose().popPose();
     }
 
-    private void drawStrengthSkill(GuiGraphics guiGraphics, int x, int y, int columnWidth, float scale) {
+    private void drawStrengthSkill2Col(GuiGraphics guiGraphics, int x, int y, int columnWidth, float scale) {
         int barHeight = 6;
         int maxBarWidth = columnWidth - 25;
 
         guiGraphics.pose().pushPose();
         guiGraphics.pose().scale(scale, scale, 1.0f);
 
+        // First column - Skill name and level
         String levelText = "Strength: " + strengthLevel;
         int levelTextWidth = (int)(font.width(levelText) * scale);
         int col1CenterX = x + columnWidth / 2;
         float scaledX = (col1CenterX - levelTextWidth / (2 * scale)) / scale;
         float scaledY = y / scale;
-        guiGraphics.drawString(font, levelText, (int)scaledX, (int)scaledY, PARCHMENT_COLOR);
+        guiGraphics.drawString(font, levelText, (int)scaledX, (int)scaledY, SUBMENU_TEXT_COLOR, false);
 
         guiGraphics.pose().popPose();
 
-        int barX = x + columnWidth + (columnWidth - maxBarWidth) / 2;
+        // Second column - Progress bar with percentage
+        int barX = x + columnWidth + 10;
+        int barWidth = maxBarWidth - 20; // Leave room for percentage text
 
         int textCenterY = y + (int)((font.lineHeight * scale) / 2);
         guiGraphics.fill(barX, textCenterY - barHeight/2,
-                barX + maxBarWidth, textCenterY + barHeight/2,
+                barX + barWidth, textCenterY + barHeight/2,
                 0xFF555555);
 
-        int barWidth = (int) (maxBarWidth * strengthProgress);
+        int progressBarWidth = (int) (barWidth * strengthProgress);
         int barColor = strengthLevel < MAX_STRENGTH_LEVEL ? RAINBOW_COLORS[0] : RAINBOW_COLORS[4];
         guiGraphics.fill(barX, textCenterY - barHeight/2,
-                barX + barWidth, textCenterY + barHeight/2,
+                barX + progressBarWidth, textCenterY + barHeight/2,
                 barColor);
 
+        // Draw percentage or "Max Level" after the bar
         guiGraphics.pose().pushPose();
         guiGraphics.pose().scale(scale, scale, 1.0f);
 
         String progressText;
         if (strengthLevel < MAX_STRENGTH_LEVEL) {
-            progressText = String.format("%.0f/%.0f dmg",
-                    strengthProgress * nextStrengthLevelRequirement,
-                    nextStrengthLevelRequirement);
+            // Show percentage instead of raw values
+            progressText = String.format("%.0f%%", strengthProgress * 100);
         } else {
-            progressText = "Max Level";
+            progressText = "Max";
         }
 
         int progressTextWidth = (int)(font.width(progressText) * scale);
-        int col3CenterX = x + columnWidth * 2 + columnWidth / 2;
-        scaledX = (col3CenterX - progressTextWidth / (2 * scale)) / scale;
+        float percentX = (barX + barWidth + 5) / scale;
 
-        int textColor = strengthLevel < MAX_STRENGTH_LEVEL ? PARCHMENT_COLOR : 0xFF55FF55;
-        guiGraphics.drawString(font, progressText, (int)scaledX, (int)scaledY, textColor);
+        int textColor = strengthLevel < MAX_STRENGTH_LEVEL ? SUBMENU_TEXT_COLOR : 0xFF55FF55;
+        guiGraphics.drawString(font, progressText, (int)percentX, (int)scaledY, textColor, false);
 
         guiGraphics.pose().popPose();
     }
 
-    private void drawEnduranceSkill(GuiGraphics guiGraphics, int x, int y, int columnWidth, float scale) {
+    private void drawEnduranceSkill2Col(GuiGraphics guiGraphics, int x, int y, int columnWidth, float scale) {
         int barHeight = 6;
         int maxBarWidth = columnWidth - 25;
 
         guiGraphics.pose().pushPose();
         guiGraphics.pose().scale(scale, scale, 1.0f);
 
+        // First column - Skill name and level
         String levelText = "Endurance: " + enduranceLevel;
         int levelTextWidth = (int)(font.width(levelText) * scale);
         int col1CenterX = x + columnWidth / 2;
         float scaledX = (col1CenterX - levelTextWidth / (2 * scale)) / scale;
         float scaledY = y / scale;
-        guiGraphics.drawString(font, levelText, (int)scaledX, (int)scaledY, PARCHMENT_COLOR);
+        guiGraphics.drawString(font, levelText, (int)scaledX, (int)scaledY, SUBMENU_TEXT_COLOR, false);
 
         guiGraphics.pose().popPose();
 
-        int barX = x + columnWidth + (columnWidth - maxBarWidth) / 2;
+        // Second column - Progress bar with percentage
+        int barX = x + columnWidth + 10;
+        int barWidth = maxBarWidth - 20; // Leave room for percentage text
 
         int textCenterY = y + (int)((font.lineHeight * scale) / 2);
         guiGraphics.fill(barX, textCenterY - barHeight/2,
-                barX + maxBarWidth, textCenterY + barHeight/2,
+                barX + barWidth, textCenterY + barHeight/2,
                 0xFF555555);
 
-        int barWidth = (int) (maxBarWidth * enduranceProgress);
+        int progressBarWidth = (int) (barWidth * enduranceProgress);
         int barColor = enduranceLevel < MAX_ENDURANCE_LEVEL ? RAINBOW_COLORS[0] : RAINBOW_COLORS[4];
         guiGraphics.fill(barX, textCenterY - barHeight/2,
-                barX + barWidth, textCenterY + barHeight/2,
+                barX + progressBarWidth, textCenterY + barHeight/2,
                 barColor);
 
+        // Draw percentage or "Max Level" after the bar
         guiGraphics.pose().pushPose();
         guiGraphics.pose().scale(scale, scale, 1.0f);
 
         String progressText;
         if (enduranceLevel < MAX_ENDURANCE_LEVEL) {
-            progressText = String.format("%.0f/%.0f dmg",
-                    enduranceProgress * nextEnduranceLevelRequirement,
-                    nextEnduranceLevelRequirement);
+            // Show percentage instead of raw values
+            progressText = String.format("%.0f%%", enduranceProgress * 100);
         } else {
-            progressText = "Max Level";
+            progressText = "Max";
         }
 
         int progressTextWidth = (int)(font.width(progressText) * scale);
-        int col3CenterX = x + columnWidth * 2 + columnWidth / 2;
-        scaledX = (col3CenterX - progressTextWidth / (2 * scale)) / scale;
+        float percentX = (barX + barWidth + 5) / scale;
 
-        int textColor = enduranceLevel < MAX_ENDURANCE_LEVEL ? PARCHMENT_COLOR : 0xFF55FF55;
-        guiGraphics.drawString(font, progressText, (int)scaledX, (int)scaledY, textColor);
+        int textColor = enduranceLevel < MAX_ENDURANCE_LEVEL ? SUBMENU_TEXT_COLOR : 0xFF55FF55;
+        guiGraphics.drawString(font, progressText, (int)percentX, (int)scaledY, textColor, false);
 
         guiGraphics.pose().popPose();
     }
+
 
     private void drawStatsSection(GuiGraphics guiGraphics, int mouseX, int mouseY, ScreenLayout layout) {
         int submenuWidth = layout.contentWidth / 6;
@@ -1197,10 +1208,23 @@ public class CustomGuiScreen extends Screen {
                 (buttonSpacing * (STAT_SUBMENU_LABELS.length - 1));
         int submenuStartYCentered = submenuStartY + (submenuHeight - totalButtonsHeight) / 2;
 
-        int contentStartX = submenuStartX + submenuWidth + layout.contentWidth / 32;
-        int contentStartY = submenuStartY;
-        int contentWidth = layout.contentWidth - submenuWidth - (layout.contentWidth / 16);
-        int contentHeight = submenuHeight;
+        // Calculate original content dimensions
+        int originalContentStartX = submenuStartX + submenuWidth + layout.contentWidth / 32;
+        int originalContentStartY = submenuStartY;
+        int originalContentWidth = layout.contentWidth - submenuWidth - (layout.contentWidth / 16);
+        int originalContentHeight = submenuHeight;
+
+        // Calculate center points for scaling
+        int contentCenterX = originalContentStartX + originalContentWidth / 2;
+        int contentCenterY = originalContentStartY + originalContentHeight / 2;
+
+        // Apply 75% scaling
+        int contentWidth = (int)(originalContentWidth * 0.75);
+        int contentHeight = (int)(originalContentHeight * 0.75);
+
+        // Recalculate start positions to maintain centering
+        int contentStartX = contentCenterX - contentWidth / 2;
+        int contentStartY = contentCenterY - contentHeight / 2;
 
         for (int i = 0; i < STAT_SUBMENU_LABELS.length; i++) {
             int buttonY = submenuStartYCentered + (i * (buttonHeight + buttonSpacing));
@@ -1226,7 +1250,7 @@ public class CustomGuiScreen extends Screen {
             int buttonTextY = buttonY + (buttonHeight - textHeight) / 2;
 
             guiGraphics.drawString(font, buttonText, buttonTextX, buttonTextY,
-                    isSelected ? 0xFFFFFFFF : PARCHMENT_COLOR);
+                    isSelected ? 0xFFFFFFFF : SUBMENU_TEXT_COLOR, false); // Changed from PARCHMENT_COLOR to black
         }
 
         renderPaperPanel(guiGraphics, contentStartX, contentStartY,
@@ -1238,9 +1262,10 @@ public class CustomGuiScreen extends Screen {
         int titleX = contentStartX + (contentWidth - titleWidth) / 2;
         drawSubmenuTitle(guiGraphics, submenuTitle, titleX, contentStartY);
 
+        // Adjust stat positions proportionally to the new content size
         int statsX = contentStartX + contentWidth / 10;
-        int statsY = contentStartY + layout.contentHeight / 12 + 20;
-        int lineSpacing = layout.contentHeight / 16;
+        int statsY = contentStartY + (int)(layout.contentHeight / 12 * 0.75) + 15; // Adjusted for smaller size
+        int lineSpacing = (int)(layout.contentHeight / 16 * 0.75); // Scale line spacing
 
         drawSubmenuContent(guiGraphics, statsX, statsY, lineSpacing, contentStartX, contentWidth);
     }
@@ -1298,7 +1323,7 @@ public class CustomGuiScreen extends Screen {
         guiGraphics.drawString(font, title,
                 (int) (titleX / titleScale),
                 (int) (titleY / titleScale),
-                PARCHMENT_COLOR);
+                SUBMENU_TEXT_COLOR, false);
         guiGraphics.pose().popPose();
     }
 
@@ -1311,7 +1336,7 @@ public class CustomGuiScreen extends Screen {
         guiGraphics.drawString(font, title,
                 (int) (x / scale),
                 (int) (titleY / scale),
-                PARCHMENT_COLOR);
+                SUBMENU_TEXT_COLOR, false);
         guiGraphics.pose().popPose();
     }
 
@@ -1326,7 +1351,7 @@ public class CustomGuiScreen extends Screen {
 
         int textWidth = font.width(text);
         int centeredX = contentStartX + (contentWidth - textWidth) / 2;
-        guiGraphics.drawString(font, text, centeredX, y, PARCHMENT_COLOR);
+        guiGraphics.drawString(font, text, centeredX, y, SUBMENU_TEXT_COLOR, false); // Changed from PARCHMENT_COLOR
     }
 
     private void drawDistanceStat(GuiGraphics guiGraphics, String label, double valueKm, int x, int y, int contentStartX, int contentWidth) {
@@ -1334,7 +1359,7 @@ public class CustomGuiScreen extends Screen {
         String text = label + ": " + formattedDistance + " km";
         int textWidth = font.width(text);
         int centeredX = contentStartX + (contentWidth - textWidth) / 2;
-        guiGraphics.drawString(font, text, centeredX, y, PARCHMENT_COLOR);
+        guiGraphics.drawString(font, text, centeredX, y, SUBMENU_TEXT_COLOR, false); // Changed from PARCHMENT_COLOR
     }
 
     private void drawFavoriteWeapon(GuiGraphics guiGraphics, int x, int y, int contentStartX, int contentWidth) {
@@ -1345,7 +1370,7 @@ public class CustomGuiScreen extends Screen {
 
         int textWidth = font.width(text);
         int centeredX = contentStartX + (contentWidth - textWidth) / 2;
-        guiGraphics.drawString(font, text, centeredX, y, PARCHMENT_COLOR);
+        guiGraphics.drawString(font, text, centeredX, y, SUBMENU_TEXT_COLOR, false); // Changed from PARCHMENT_COLOR
     }
 
     private void renderTexturedPanel(GuiGraphics guiGraphics, ResourceLocation texture,
@@ -1380,7 +1405,7 @@ public class CustomGuiScreen extends Screen {
         com.mojang.blaze3d.systems.RenderSystem.enableBlend();
         com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.9F);
 
-        int tileSize = 32;
+        int tileSize = 256;
         for (int tileX = 0; tileX < innerWidth; tileX += tileSize) {
             for (int tileY = 0; tileY < innerHeight; tileY += tileSize) {
                 int tileWidth = Math.min(tileSize, innerWidth - tileX);
