@@ -164,7 +164,6 @@ public class AGoTMod {
             Sheets.addWoodType(ModWoodTypes.BEECH);
             Sheets.addWoodType(ModWoodTypes.CEDAR);
             Sheets.addWoodType(ModWoodTypes.CHESTNUT);
-            Sheets.addWoodType(ModWoodTypes.FIR);
             Sheets.addWoodType(ModWoodTypes.HAWTHORN);
             Sheets.addWoodType(ModWoodTypes.IRONWOOD);
             Sheets.addWoodType(ModWoodTypes.SENTINEL);

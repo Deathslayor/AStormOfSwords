@@ -1,6 +1,5 @@
 {
   "values": [
-    "agotmod:weirwood_planks",
     "agotmod:sycamore_planks",
     "agotmod:sentinel_planks",
     "agotmod:pine_planks",
@@ -12,6 +11,7 @@
     "agotmod:ash_planks",
     "agotmod:blackbark_planks",
     "agotmod:aspen_planks",
-    "agotmod:alder_planks"
+    "agotmod:alder_planks",
+    "agotmod:weirwood_planks"
   ]
 }

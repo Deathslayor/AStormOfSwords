@@ -1,6 +1,5 @@
 {
   "values": [
-    "agotmod:weirwood_fence",
     "agotmod:sycamore_fence",
     "agotmod:sentinel_fence",
     "agotmod:pine_fence",
@@ -12,6 +11,7 @@
     "agotmod:ash_fence",
     "agotmod:blackbark_fence",
     "agotmod:aspen_fence",
-    "agotmod:alder_fence"
+    "agotmod:alder_fence",
+    "agotmod:weirwood_fence"
   ]
 }

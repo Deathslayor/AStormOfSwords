@@ -1,6 +1,5 @@
 {
   "values": [
-    "agotmod:weirwood_wall",
     "agotmod:sycamore_wall",
     "agotmod:sentinel_wall",
     "agotmod:pine_wall",
@@ -13,6 +12,7 @@
     "agotmod:blackbark_wall",
     "agotmod:aspen_wall",
     "agotmod:alder_wall",
+    "agotmod:weirwood_wall",
     "agotmod:redkeep_stone_wall",
     "agotmod:blackstone_1_wall",
     "agotmod:blackstone_2_wall",

@@ -20,6 +20,7 @@ import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.minecraft.resources.ResourceLocation;
 
@@ -28,6 +29,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Method;
 import java.util.function.Function;
+
 
 public class ModBlockStateProvider extends BlockStateProvider {
     // Constructor for ModBlockStateProvider
@@ -192,576 +194,164 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 "cutout");
 
 
-        //Sycamore
-        logBlock((RotatedPillarBlock) ModBLocks.SYCAMORE_LOG.get());
-        axisBlock(((RotatedPillarBlock) ModBLocks.SYCAMORE_WOOD.get()),
-                blockTexture(ModBLocks.SYCAMORE_LOG.get()), // side of the block
-                blockTexture(ModBLocks.SYCAMORE_LOG.get())); // top of the block
-
-        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_SYCAMORE_WOOD.get()),
-                blockTexture(ModBLocks.STRIPPED_SYCAMORE_LOG.get()), // side of the block
-                AGoTMod.id("block/sycamore_log_top_stripped")); // top of the block
-
-        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_SYCAMORE_LOG.get()),
-                blockTexture(ModBLocks.STRIPPED_SYCAMORE_LOG.get()), // side of the block
-                blockTexture(ModBLocks.STRIPPED_SYCAMORE_LOG.get())); // top of the block
-
-        blockItem(ModBLocks.SYCAMORE_LOG);
-        blockItem(ModBLocks.STRIPPED_SYCAMORE_LOG);
-        blockItem(ModBLocks.SYCAMORE_WOOD);
-        blockItem(ModBLocks.STRIPPED_SYCAMORE_WOOD);
-
-        blockWithItem(ModBLocks.SYCAMORE_PLANKS);
-
-        leavesBlock(ModBLocks.SYCAMORE_LEAVES);
-        saplingBlock(ModBLocks.SYCAMORE_SAPLING);
-        stairsBlock(((StairBlock) ModBLocks.SYCAMORE_STAIRS.get()), blockTexture(ModBLocks.SYCAMORE_PLANKS.get()));
-
-        slabBlock(((SlabBlock) ModBLocks.SYCAMORE_SLAB.get()),
-                blockTexture(ModBLocks.SYCAMORE_PLANKS.get()),
-                blockTexture(ModBLocks.SYCAMORE_PLANKS.get()));
-
-        buttonBlock(((ButtonBlock) ModBLocks.SYCAMORE_BUTTON.get()), blockTexture(ModBLocks.SYCAMORE_PLANKS.get()));
-
-        pressurePlateBlock(((PressurePlateBlock) ModBLocks.SYCAMORE_PRESSURE_PLATE.get()), blockTexture(ModBLocks.SYCAMORE_PLANKS.get()));
-
-        fenceBlock(((FenceBlock) ModBLocks.SYCAMORE_FENCE.get()), blockTexture(ModBLocks.SYCAMORE_PLANKS.get()));
-        fenceGateBlock(((FenceGateBlock) ModBLocks.SYCAMORE_FENCE_GATE.get()), blockTexture(ModBLocks.SYCAMORE_PLANKS.get()));
-        wallBlock(((WallBlock) ModBLocks.SYCAMORE_WALL.get()), blockTexture(ModBLocks.SYCAMORE_PLANKS.get()));
-
-        doorBlockWithRenderType(((DoorBlock) ModBLocks.SYCAMORE_DOOR.get()),
-                modLoc("block/sycamore_door_bottom"),
-                modLoc("block/sycamore_door_top"),
-                "cutout");
-
-        trapdoorBlockWithRenderType(((TrapDoorBlock) ModBLocks.SYCAMORE_TRAPDOOR.get()),
-                modLoc("block/sycamore_trapdoor"),
-                true,
-                "cutout");
-
-        //Sentinel
-        logBlock((RotatedPillarBlock) ModBLocks.SENTINEL_LOG.get());
-        axisBlock(((RotatedPillarBlock) ModBLocks.SENTINEL_WOOD.get()),
-                blockTexture(ModBLocks.SENTINEL_LOG.get()), // side of the block
-                blockTexture(ModBLocks.SENTINEL_LOG.get())); // top of the block
-
-        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_SENTINEL_LOG.get()),
-                blockTexture(ModBLocks.STRIPPED_SENTINEL_LOG.get()), // side of the block
-                AGoTMod.id("block/sentinel_log_top_stripped")); // top of the block
-
-        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_SENTINEL_WOOD.get()),
-                blockTexture(ModBLocks.STRIPPED_SENTINEL_LOG.get()), // side of the block
-                blockTexture(ModBLocks.STRIPPED_SENTINEL_LOG.get())); // top of the block
-
-        blockItem(ModBLocks.SENTINEL_LOG);
-        blockItem(ModBLocks.STRIPPED_SENTINEL_LOG);
-        blockItem(ModBLocks.SENTINEL_WOOD);
-        blockItem(ModBLocks.STRIPPED_SENTINEL_WOOD);
-
-        blockWithItem(ModBLocks.SENTINEL_PLANKS);
-
-        leavesBlock(ModBLocks.SENTINEL_LEAVES);
-        saplingBlock(ModBLocks.SENTINEL_SAPLING);
-        stairsBlock(((StairBlock) ModBLocks.SENTINEL_STAIRS.get()), blockTexture(ModBLocks.SENTINEL_PLANKS.get()));
-
-        slabBlock(((SlabBlock) ModBLocks.SENTINEL_SLAB.get()),
-                blockTexture(ModBLocks.SENTINEL_PLANKS.get()),
-                blockTexture(ModBLocks.SENTINEL_PLANKS.get()));
-
-        buttonBlock(((ButtonBlock) ModBLocks.SENTINEL_BUTTON.get()), blockTexture(ModBLocks.SENTINEL_PLANKS.get()));
-
-        pressurePlateBlock(((PressurePlateBlock) ModBLocks.SENTINEL_PRESSURE_PLATE.get()), blockTexture(ModBLocks.SENTINEL_PLANKS.get()));
-
-        fenceBlock(((FenceBlock) ModBLocks.SENTINEL_FENCE.get()), blockTexture(ModBLocks.SENTINEL_PLANKS.get()));
-        fenceGateBlock(((FenceGateBlock) ModBLocks.SENTINEL_FENCE_GATE.get()), blockTexture(ModBLocks.SENTINEL_PLANKS.get()));
-        wallBlock(((WallBlock) ModBLocks.SENTINEL_WALL.get()), blockTexture(ModBLocks.SENTINEL_PLANKS.get()));
-
-        doorBlockWithRenderType(((DoorBlock) ModBLocks.SENTINEL_DOOR.get()),
-                modLoc("block/sentinel_door_bottom"),
-                modLoc("block/sentinel_door_top"),
-                "cutout");
-
-        trapdoorBlockWithRenderType(((TrapDoorBlock) ModBLocks.SENTINEL_TRAPDOOR.get()),
-                modLoc("block/sentinel_trapdoor"),
-                true,
-                "cutout");
-
-        //Pine
-        logBlock((RotatedPillarBlock) ModBLocks.PINE_LOG.get());
-        axisBlock(((RotatedPillarBlock) ModBLocks.PINE_WOOD.get()),
-                blockTexture(ModBLocks.PINE_LOG.get()), // side of the block
-                blockTexture(ModBLocks.PINE_LOG.get())); // top of the block
-
-        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_PINE_LOG.get()),
-                blockTexture(ModBLocks.STRIPPED_PINE_LOG.get()), // side of the block
-                AGoTMod.id("block/pine_log_top_stripped")); // top of the block
-
-        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_PINE_WOOD.get()),
-                blockTexture(ModBLocks.STRIPPED_PINE_LOG.get()), // side of the block
-                blockTexture(ModBLocks.STRIPPED_PINE_LOG.get())); // top of the block
-
-        blockItem(ModBLocks.PINE_LOG);
-        blockItem(ModBLocks.STRIPPED_PINE_LOG);
-        blockItem(ModBLocks.PINE_WOOD);
-        blockItem(ModBLocks.STRIPPED_PINE_WOOD);
-
-        blockWithItem(ModBLocks.PINE_PLANKS);
-
-        leavesBlock(ModBLocks.PINE_LEAVES);
-        saplingBlock(ModBLocks.PINE_SAPLING);
-        stairsBlock(((StairBlock) ModBLocks.PINE_STAIRS.get()), blockTexture(ModBLocks.PINE_PLANKS.get()));
-
-        slabBlock(((SlabBlock) ModBLocks.PINE_SLAB.get()),
-                blockTexture(ModBLocks.PINE_PLANKS.get()),
-                blockTexture(ModBLocks.PINE_PLANKS.get()));
-
-        buttonBlock(((ButtonBlock) ModBLocks.PINE_BUTTON.get()), blockTexture(ModBLocks.PINE_PLANKS.get()));
-
-        pressurePlateBlock(((PressurePlateBlock) ModBLocks.PINE_PRESSURE_PLATE.get()), blockTexture(ModBLocks.PINE_PLANKS.get()));
-
-        fenceBlock(((FenceBlock) ModBLocks.PINE_FENCE.get()), blockTexture(ModBLocks.PINE_PLANKS.get()));
-        fenceGateBlock(((FenceGateBlock) ModBLocks.PINE_FENCE_GATE.get()), blockTexture(ModBLocks.PINE_PLANKS.get()));
-        wallBlock(((WallBlock) ModBLocks.PINE_WALL.get()), blockTexture(ModBLocks.PINE_PLANKS.get()));
-
-        doorBlockWithRenderType(((DoorBlock) ModBLocks.PINE_DOOR.get()),
-                modLoc("block/pine_door_bottom"),
-                modLoc("block/pine_door_top"),
-                "cutout");
-
-        trapdoorBlockWithRenderType(((TrapDoorBlock) ModBLocks.PINE_TRAPDOOR.get()),
-                modLoc("block/pine_trapdoor"),
-                true,
-                "cutout");
-
-        //Ironwood
-        logBlock((RotatedPillarBlock) ModBLocks.IRONWOOD_LOG.get());
-        axisBlock(((RotatedPillarBlock) ModBLocks.IRONWOOD_WOOD.get()),
-                blockTexture(ModBLocks.IRONWOOD_LOG.get()), // side of the block
-                blockTexture(ModBLocks.IRONWOOD_LOG.get())); // top of the block
-
-        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_IRONWOOD_LOG.get()),
-                blockTexture(ModBLocks.STRIPPED_IRONWOOD_LOG.get()), // side of the block
-                AGoTMod.id("block/ironwood_log_top_stripped")); // top of the block
-
-        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_IRONWOOD_WOOD.get()),
-                blockTexture(ModBLocks.STRIPPED_IRONWOOD_LOG.get()), // side of the block
-                blockTexture(ModBLocks.STRIPPED_IRONWOOD_LOG.get())); // top of the block
-
-        blockItem(ModBLocks.IRONWOOD_LOG);
-        blockItem(ModBLocks.STRIPPED_IRONWOOD_LOG);
-        blockItem(ModBLocks.IRONWOOD_WOOD);
-        blockItem(ModBLocks.STRIPPED_IRONWOOD_WOOD);
-
-        blockWithItem(ModBLocks.IRONWOOD_PLANKS);
-
-        leavesBlock(ModBLocks.IRONWOOD_LEAVES);
-        saplingBlock(ModBLocks.IRONWOOD_SAPLING);
-        stairsBlock(((StairBlock) ModBLocks.IRONWOOD_STAIRS.get()), blockTexture(ModBLocks.IRONWOOD_PLANKS.get()));
-
-        slabBlock(((SlabBlock) ModBLocks.IRONWOOD_SLAB.get()),
-                blockTexture(ModBLocks.IRONWOOD_PLANKS.get()),
-                blockTexture(ModBLocks.IRONWOOD_PLANKS.get()));
-
-        buttonBlock(((ButtonBlock) ModBLocks.IRONWOOD_BUTTON.get()), blockTexture(ModBLocks.IRONWOOD_PLANKS.get()));
-
-        pressurePlateBlock(((PressurePlateBlock) ModBLocks.IRONWOOD_PRESSURE_PLATE.get()), blockTexture(ModBLocks.IRONWOOD_PLANKS.get()));
-
-        fenceBlock(((FenceBlock) ModBLocks.IRONWOOD_FENCE.get()), blockTexture(ModBLocks.IRONWOOD_PLANKS.get()));
-        fenceGateBlock(((FenceGateBlock) ModBLocks.IRONWOOD_FENCE_GATE.get()), blockTexture(ModBLocks.IRONWOOD_PLANKS.get()));
-        wallBlock(((WallBlock) ModBLocks.IRONWOOD_WALL.get()), blockTexture(ModBLocks.IRONWOOD_PLANKS.get()));
-
-        doorBlockWithRenderType(((DoorBlock) ModBLocks.IRONWOOD_DOOR.get()),
-                modLoc("block/ironwood_door_bottom"),
-                modLoc("block/ironwood_door_top"),
-                "cutout");
-
-        trapdoorBlockWithRenderType(((TrapDoorBlock) ModBLocks.IRONWOOD_TRAPDOOR.get()),
-                modLoc("block/ironwood_trapdoor"),
-                true,
-                "cutout");
-
-        //Hawthorn
-        logBlock((RotatedPillarBlock) ModBLocks.HAWTHORN_LOG.get());
-        axisBlock(((RotatedPillarBlock) ModBLocks.HAWTHORN_WOOD.get()),
-                blockTexture(ModBLocks.HAWTHORN_LOG.get()), // side of the block
-                blockTexture(ModBLocks.HAWTHORN_LOG.get())); // top of the block
-
-        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_HAWTHORN_LOG.get()),
-                blockTexture(ModBLocks.STRIPPED_HAWTHORN_LOG.get()), // side of the block
-                AGoTMod.id("block/hawthorn_log_top_stripped")); // top of the block
-
-        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_HAWTHORN_WOOD.get()),
-                blockTexture(ModBLocks.STRIPPED_HAWTHORN_LOG.get()), // side of the block
-                blockTexture(ModBLocks.STRIPPED_HAWTHORN_LOG.get())); // top of the block
-
-        blockItem(ModBLocks.HAWTHORN_LOG);
-        blockItem(ModBLocks.STRIPPED_HAWTHORN_LOG);
-        blockItem(ModBLocks.HAWTHORN_WOOD);
-        blockItem(ModBLocks.STRIPPED_HAWTHORN_WOOD);
-
-        blockWithItem(ModBLocks.HAWTHORN_PLANKS);
-
-        leavesBlock(ModBLocks.HAWTHORN_LEAVES);
-        saplingBlock(ModBLocks.HAWTHORN_SAPLING);
-        stairsBlock(((StairBlock) ModBLocks.HAWTHORN_STAIRS.get()), blockTexture(ModBLocks.HAWTHORN_PLANKS.get()));
-
-        slabBlock(((SlabBlock) ModBLocks.HAWTHORN_SLAB.get()),
-                blockTexture(ModBLocks.HAWTHORN_PLANKS.get()),
-                blockTexture(ModBLocks.HAWTHORN_PLANKS.get()));
-
-        buttonBlock(((ButtonBlock) ModBLocks.HAWTHORN_BUTTON.get()), blockTexture(ModBLocks.HAWTHORN_PLANKS.get()));
-
-        pressurePlateBlock(((PressurePlateBlock) ModBLocks.HAWTHORN_PRESSURE_PLATE.get()), blockTexture(ModBLocks.HAWTHORN_PLANKS.get()));
-
-        fenceBlock(((FenceBlock) ModBLocks.HAWTHORN_FENCE.get()), blockTexture(ModBLocks.HAWTHORN_PLANKS.get()));
-        fenceGateBlock(((FenceGateBlock) ModBLocks.HAWTHORN_FENCE_GATE.get()), blockTexture(ModBLocks.HAWTHORN_PLANKS.get()));
-        wallBlock(((WallBlock) ModBLocks.HAWTHORN_WALL.get()), blockTexture(ModBLocks.HAWTHORN_PLANKS.get()));
-
-        doorBlockWithRenderType(((DoorBlock) ModBLocks.HAWTHORN_DOOR.get()),
-                modLoc("block/hawthorn_door_bottom"),
-                modLoc("block/hawthorn_door_top"),
-                "cutout");
-
-        trapdoorBlockWithRenderType(((TrapDoorBlock) ModBLocks.HAWTHORN_TRAPDOOR.get()),
-                modLoc("block/hawthorn_trapdoor"),
-                true,
-                "cutout");
-
-
-        //Chestnut
-        logBlock((RotatedPillarBlock) ModBLocks.CHESTNUT_LOG.get());
-        axisBlock(((RotatedPillarBlock) ModBLocks.CHESTNUT_WOOD.get()),
-                blockTexture(ModBLocks.CHESTNUT_LOG.get()), // side of the block
-                blockTexture(ModBLocks.CHESTNUT_LOG.get())); // top of the block
-
-        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_CHESTNUT_LOG.get()),
-                blockTexture(ModBLocks.STRIPPED_CHESTNUT_LOG.get()), // side of the block
-                AGoTMod.id("block/chestnut_log_top_stripped")); // top of the block
-
-        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_CHESTNUT_WOOD.get()),
-                blockTexture(ModBLocks.STRIPPED_CHESTNUT_LOG.get()), // side of the block
-                blockTexture(ModBLocks.STRIPPED_CHESTNUT_LOG.get())); // top of the block
-
-        blockItem(ModBLocks.CHESTNUT_LOG);
-        blockItem(ModBLocks.STRIPPED_CHESTNUT_LOG);
-        blockItem(ModBLocks.CHESTNUT_WOOD);
-        blockItem(ModBLocks.STRIPPED_CHESTNUT_WOOD);
-
-        blockWithItem(ModBLocks.CHESTNUT_PLANKS);
-
-        leavesBlock(ModBLocks.CHESTNUT_LEAVES);
-        saplingBlock(ModBLocks.CHESTNUT_SAPLING);
-        stairsBlock(((StairBlock) ModBLocks.CHESTNUT_STAIRS.get()), blockTexture(ModBLocks.CHESTNUT_PLANKS.get()));
-
-        slabBlock(((SlabBlock) ModBLocks.CHESTNUT_SLAB.get()),
-                blockTexture(ModBLocks.CHESTNUT_PLANKS.get()),
-                blockTexture(ModBLocks.CHESTNUT_PLANKS.get()));
-
-        buttonBlock(((ButtonBlock) ModBLocks.CHESTNUT_BUTTON.get()), blockTexture(ModBLocks.CHESTNUT_PLANKS.get()));
-
-        pressurePlateBlock(((PressurePlateBlock) ModBLocks.CHESTNUT_PRESSURE_PLATE.get()), blockTexture(ModBLocks.CHESTNUT_PLANKS.get()));
-
-        fenceBlock(((FenceBlock) ModBLocks.CHESTNUT_FENCE.get()), blockTexture(ModBLocks.CHESTNUT_PLANKS.get()));
-        fenceGateBlock(((FenceGateBlock) ModBLocks.CHESTNUT_FENCE_GATE.get()), blockTexture(ModBLocks.CHESTNUT_PLANKS.get()));
-        wallBlock(((WallBlock) ModBLocks.CHESTNUT_WALL.get()), blockTexture(ModBLocks.CHESTNUT_PLANKS.get()));
-
-        doorBlockWithRenderType(((DoorBlock) ModBLocks.CHESTNUT_DOOR.get()),
-                modLoc("block/chestnut_door_bottom"),
-                modLoc("block/chestnut_door_top"),
-                "cutout");
-
-        trapdoorBlockWithRenderType(((TrapDoorBlock) ModBLocks.CHESTNUT_TRAPDOOR.get()),
-                modLoc("block/chestnut_trapdoor"),
-                true,
-                "cutout");
-
-
-        //Cedar
-        logBlock((RotatedPillarBlock) ModBLocks.CEDAR_LOG.get());
-        axisBlock(((RotatedPillarBlock) ModBLocks.CEDAR_WOOD.get()),
-                blockTexture(ModBLocks.CEDAR_LOG.get()), // side of the block
-                blockTexture(ModBLocks.CEDAR_LOG.get())); // top of the block
-
-        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_CEDAR_LOG.get()),
-                blockTexture(ModBLocks.STRIPPED_CEDAR_LOG.get()), // side of the block
-                AGoTMod.id("block/cedar_log_top_stripped")); // top of the block
-
-        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_CEDAR_WOOD.get()),
-                blockTexture(ModBLocks.STRIPPED_CEDAR_LOG.get()), // side of the block
-                blockTexture(ModBLocks.STRIPPED_CEDAR_LOG.get())); // top of the block
-
-        blockItem(ModBLocks.CEDAR_LOG);
-        blockItem(ModBLocks.STRIPPED_CEDAR_LOG);
-        blockItem(ModBLocks.CEDAR_WOOD);
-        blockItem(ModBLocks.STRIPPED_CEDAR_WOOD);
-
-        blockWithItem(ModBLocks.CEDAR_PLANKS);
-
-        leavesBlock(ModBLocks.CEDAR_LEAVES);
-        saplingBlock(ModBLocks.CEDAR_SAPLING);
-        stairsBlock(((StairBlock) ModBLocks.CEDAR_STAIRS.get()), blockTexture(ModBLocks.CEDAR_PLANKS.get()));
-
-        slabBlock(((SlabBlock) ModBLocks.CEDAR_SLAB.get()),
-                blockTexture(ModBLocks.CEDAR_PLANKS.get()),
-                blockTexture(ModBLocks.CEDAR_PLANKS.get()));
-
-        buttonBlock(((ButtonBlock) ModBLocks.CEDAR_BUTTON.get()), blockTexture(ModBLocks.CEDAR_PLANKS.get()));
-
-        pressurePlateBlock(((PressurePlateBlock) ModBLocks.CEDAR_PRESSURE_PLATE.get()), blockTexture(ModBLocks.CEDAR_PLANKS.get()));
-
-        fenceBlock(((FenceBlock) ModBLocks.CEDAR_FENCE.get()), blockTexture(ModBLocks.CEDAR_PLANKS.get()));
-        fenceGateBlock(((FenceGateBlock) ModBLocks.CEDAR_FENCE_GATE.get()), blockTexture(ModBLocks.CEDAR_PLANKS.get()));
-        wallBlock(((WallBlock) ModBLocks.CEDAR_WALL.get()), blockTexture(ModBLocks.CEDAR_PLANKS.get()));
-
-        doorBlockWithRenderType(((DoorBlock) ModBLocks.CEDAR_DOOR.get()),
-                modLoc("block/cedar_door_bottom"),
-                modLoc("block/cedar_door_top"),
-                "cutout");
-
-        trapdoorBlockWithRenderType(((TrapDoorBlock) ModBLocks.CEDAR_TRAPDOOR.get()),
-                modLoc("block/cedar_trapdoor"),
-                true,
-                "cutout");
-
-
-        //Beech
-        logBlock((RotatedPillarBlock) ModBLocks.BEECH_LOG.get());
-        axisBlock(((RotatedPillarBlock) ModBLocks.BEECH_WOOD.get()),
-                blockTexture(ModBLocks.BEECH_LOG.get()), // side of the block
-                blockTexture(ModBLocks.BEECH_LOG.get())); // top of the block
-
-        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_BEECH_LOG.get()),
-                blockTexture(ModBLocks.STRIPPED_BEECH_LOG.get()), // side of the block
-                AGoTMod.id("block/beech_log_top_stripped")); // top of the block
-
-        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_BEECH_WOOD.get()),
-                blockTexture(ModBLocks.STRIPPED_BEECH_LOG.get()), // side of the block
-                blockTexture(ModBLocks.STRIPPED_BEECH_LOG.get())); // top of the block
-
-        blockItem(ModBLocks.BEECH_LOG);
-        blockItem(ModBLocks.STRIPPED_BEECH_LOG);
-        blockItem(ModBLocks.BEECH_WOOD);
-        blockItem(ModBLocks.STRIPPED_BEECH_WOOD);
-
-        blockWithItem(ModBLocks.BEECH_PLANKS);
-
-        leavesBlock(ModBLocks.BEECH_LEAVES);
-        saplingBlock(ModBLocks.BEECH_SAPLING);
-        stairsBlock(((StairBlock) ModBLocks.BEECH_STAIRS.get()), blockTexture(ModBLocks.BEECH_PLANKS.get()));
-
-        slabBlock(((SlabBlock) ModBLocks.BEECH_SLAB.get()),
-                blockTexture(ModBLocks.BEECH_PLANKS.get()),
-                blockTexture(ModBLocks.BEECH_PLANKS.get()));
-
-        buttonBlock(((ButtonBlock) ModBLocks.BEECH_BUTTON.get()), blockTexture(ModBLocks.BEECH_PLANKS.get()));
-
-        pressurePlateBlock(((PressurePlateBlock) ModBLocks.BEECH_PRESSURE_PLATE.get()), blockTexture(ModBLocks.BEECH_PLANKS.get()));
-
-        fenceBlock(((FenceBlock) ModBLocks.BEECH_FENCE.get()), blockTexture(ModBLocks.BEECH_PLANKS.get()));
-        fenceGateBlock(((FenceGateBlock) ModBLocks.BEECH_FENCE_GATE.get()), blockTexture(ModBLocks.BEECH_PLANKS.get()));
-        wallBlock(((WallBlock) ModBLocks.BEECH_WALL.get()), blockTexture(ModBLocks.BEECH_PLANKS.get()));
-
-        doorBlockWithRenderType(((DoorBlock) ModBLocks.BEECH_DOOR.get()),
-                modLoc("block/beech_door_bottom"),
-                modLoc("block/beech_door_top"),
-                "cutout");
-
-        trapdoorBlockWithRenderType(((TrapDoorBlock) ModBLocks.BEECH_TRAPDOOR.get()),
-                modLoc("block/beech_trapdoor"),
-                true,
-                "cutout");
-
-
-        //Ash
-        logBlock((RotatedPillarBlock) ModBLocks.ASH_LOG.get());
-        axisBlock(((RotatedPillarBlock) ModBLocks.ASH_WOOD.get()),
-                blockTexture(ModBLocks.ASH_LOG.get()), // side of the block
-                blockTexture(ModBLocks.ASH_LOG.get())); // top of the block
-
-        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_ASH_LOG.get()),
-                blockTexture(ModBLocks.STRIPPED_ASH_LOG.get()), // side of the block
-                AGoTMod.id("block/ash_log_top_stripped")); // top of the block
-
-        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_ASH_WOOD.get()),
-                blockTexture(ModBLocks.STRIPPED_ASH_LOG.get()), // side of the block
-                blockTexture(ModBLocks.STRIPPED_ASH_LOG.get())); // top of the block
-
-        blockItem(ModBLocks.ASH_LOG);
-        blockItem(ModBLocks.STRIPPED_ASH_LOG);
-        blockItem(ModBLocks.ASH_WOOD);
-        blockItem(ModBLocks.STRIPPED_ASH_WOOD);
-
-        blockWithItem(ModBLocks.ASH_PLANKS);
-
-        leavesBlock(ModBLocks.ASH_LEAVES);
-        saplingBlock(ModBLocks.ASH_SAPLING);
-        stairsBlock(((StairBlock) ModBLocks.ASH_STAIRS.get()), blockTexture(ModBLocks.ASH_PLANKS.get()));
-
-        slabBlock(((SlabBlock) ModBLocks.ASH_SLAB.get()),
-                blockTexture(ModBLocks.ASH_PLANKS.get()),
-                blockTexture(ModBLocks.ASH_PLANKS.get()));
-
-        buttonBlock(((ButtonBlock) ModBLocks.ASH_BUTTON.get()), blockTexture(ModBLocks.ASH_PLANKS.get()));
-
-        pressurePlateBlock(((PressurePlateBlock) ModBLocks.ASH_PRESSURE_PLATE.get()), blockTexture(ModBLocks.ASH_PLANKS.get()));
-
-        fenceBlock(((FenceBlock) ModBLocks.ASH_FENCE.get()), blockTexture(ModBLocks.ASH_PLANKS.get()));
-        fenceGateBlock(((FenceGateBlock) ModBLocks.ASH_FENCE_GATE.get()), blockTexture(ModBLocks.ASH_PLANKS.get()));
-        wallBlock(((WallBlock) ModBLocks.ASH_WALL.get()), blockTexture(ModBLocks.ASH_PLANKS.get()));
-
-        doorBlockWithRenderType(((DoorBlock) ModBLocks.ASH_DOOR.get()),
-                modLoc("block/ash_door_bottom"),
-                modLoc("block/ash_door_top"),
-                "cutout");
-
-        trapdoorBlockWithRenderType(((TrapDoorBlock) ModBLocks.ASH_TRAPDOOR.get()),
-                modLoc("block/ash_trapdoor"),
-                true,
-                "cutout");
-
-
-        //Blackbark
-        logBlock((RotatedPillarBlock) ModBLocks.BLACKBARK_LOG.get());
-        axisBlock(((RotatedPillarBlock) ModBLocks.BLACKBARK_WOOD.get()),
-                blockTexture(ModBLocks.BLACKBARK_LOG.get()), // side of the block
-                blockTexture(ModBLocks.BLACKBARK_LOG.get())); // top of the block
-
-        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_BLACKBARK_LOG.get()),
-                blockTexture(ModBLocks.STRIPPED_BLACKBARK_LOG.get()), // side of the block
-                AGoTMod.id("block/blackbark_log_top_stripped")); // top of the block
-
-        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_BLACKBARK_WOOD.get()),
-                blockTexture(ModBLocks.STRIPPED_BLACKBARK_LOG.get()), // side of the block
-                blockTexture(ModBLocks.STRIPPED_BLACKBARK_LOG.get())); // top of the block
-
-        blockItem(ModBLocks.BLACKBARK_LOG);
-        blockItem(ModBLocks.STRIPPED_BLACKBARK_LOG);
-        blockItem(ModBLocks.BLACKBARK_WOOD);
-        blockItem(ModBLocks.STRIPPED_BLACKBARK_WOOD);
-
-        blockWithItem(ModBLocks.BLACKBARK_PLANKS);
-
-        leavesBlock(ModBLocks.BLACKBARK_LEAVES);
-        saplingBlock(ModBLocks.BLACKBARK_SAPLING);
-        stairsBlock(((StairBlock) ModBLocks.BLACKBARK_STAIRS.get()), blockTexture(ModBLocks.BLACKBARK_PLANKS.get()));
-
-        slabBlock(((SlabBlock) ModBLocks.BLACKBARK_SLAB.get()),
-                blockTexture(ModBLocks.BLACKBARK_PLANKS.get()),
-                blockTexture(ModBLocks.BLACKBARK_PLANKS.get()));
-
-        buttonBlock(((ButtonBlock) ModBLocks.BLACKBARK_BUTTON.get()), blockTexture(ModBLocks.BLACKBARK_PLANKS.get()));
-
-        pressurePlateBlock(((PressurePlateBlock) ModBLocks.BLACKBARK_PRESSURE_PLATE.get()), blockTexture(ModBLocks.BLACKBARK_PLANKS.get()));
-
-        fenceBlock(((FenceBlock) ModBLocks.BLACKBARK_FENCE.get()), blockTexture(ModBLocks.BLACKBARK_PLANKS.get()));
-        fenceGateBlock(((FenceGateBlock) ModBLocks.BLACKBARK_FENCE_GATE.get()), blockTexture(ModBLocks.BLACKBARK_PLANKS.get()));
-        wallBlock(((WallBlock) ModBLocks.BLACKBARK_WALL.get()), blockTexture(ModBLocks.BLACKBARK_PLANKS.get()));
-
-        doorBlockWithRenderType(((DoorBlock) ModBLocks.BLACKBARK_DOOR.get()),
-                modLoc("block/blackbark_door_bottom"),
-                modLoc("block/blackbark_door_top"),
-                "cutout");
-
-        trapdoorBlockWithRenderType(((TrapDoorBlock) ModBLocks.BLACKBARK_TRAPDOOR.get()),
-                modLoc("block/blackbark_trapdoor"),
-                true,
-                "cutout");
-
-
-        //Aspen
-        logBlock((RotatedPillarBlock) ModBLocks.ASPEN_LOG.get());
-        axisBlock(((RotatedPillarBlock) ModBLocks.ASPEN_WOOD.get()),
-                blockTexture(ModBLocks.ASPEN_LOG.get()), // side of the block
-                blockTexture(ModBLocks.ASPEN_LOG.get())); // top of the block
-
-        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_ASPEN_LOG.get()),
-                blockTexture(ModBLocks.STRIPPED_ASPEN_LOG.get()), // side of the block
-                AGoTMod.id("block/aspen_log_top_stripped")); // top of the block
-
-        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_ASPEN_WOOD.get()),
-                blockTexture(ModBLocks.STRIPPED_ASPEN_LOG.get()), // side of the block
-                blockTexture(ModBLocks.STRIPPED_ASPEN_LOG.get())); // top of the block
-
-        blockItem(ModBLocks.ASPEN_LOG);
-        blockItem(ModBLocks.STRIPPED_ASPEN_LOG);
-        blockItem(ModBLocks.ASPEN_WOOD);
-        blockItem(ModBLocks.STRIPPED_ASPEN_WOOD);
-
-        blockWithItem(ModBLocks.ASPEN_PLANKS);
-
-        leavesBlock(ModBLocks.ASPEN_LEAVES);
-        saplingBlock(ModBLocks.ASPEN_SAPLING);
-        stairsBlock(((StairBlock) ModBLocks.ASPEN_STAIRS.get()), blockTexture(ModBLocks.ASPEN_PLANKS.get()));
-
-        slabBlock(((SlabBlock) ModBLocks.ASPEN_SLAB.get()),
-                blockTexture(ModBLocks.ASPEN_PLANKS.get()),
-                blockTexture(ModBLocks.ASPEN_PLANKS.get()));
-
-        buttonBlock(((ButtonBlock) ModBLocks.ASPEN_BUTTON.get()), blockTexture(ModBLocks.ASPEN_PLANKS.get()));
-
-        pressurePlateBlock(((PressurePlateBlock) ModBLocks.ASPEN_PRESSURE_PLATE.get()), blockTexture(ModBLocks.ASPEN_PLANKS.get()));
-
-        fenceBlock(((FenceBlock) ModBLocks.ASPEN_FENCE.get()), blockTexture(ModBLocks.ASPEN_PLANKS.get()));
-        fenceGateBlock(((FenceGateBlock) ModBLocks.ASPEN_FENCE_GATE.get()), blockTexture(ModBLocks.ASPEN_PLANKS.get()));
-        wallBlock(((WallBlock) ModBLocks.ASPEN_WALL.get()), blockTexture(ModBLocks.ASPEN_PLANKS.get()));
-
-        doorBlockWithRenderType(((DoorBlock) ModBLocks.ASPEN_DOOR.get()),
-                modLoc("block/aspen_door_bottom"),
-                modLoc("block/aspen_door_top"),
-                "cutout");
-
-        trapdoorBlockWithRenderType(((TrapDoorBlock) ModBLocks.ASPEN_TRAPDOOR.get()),
-                modLoc("block/aspen_trapdoor"),
-                true,
-                "cutout");
-
-
-        //Alder
-        logBlock((RotatedPillarBlock) ModBLocks.ALDER_LOG.get());
-        axisBlock(((RotatedPillarBlock) ModBLocks.ALDER_WOOD.get()),
-                blockTexture(ModBLocks.ALDER_LOG.get()), // side of the block
-                blockTexture(ModBLocks.ALDER_LOG.get())); // top of the block
-
-        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_ALDER_LOG.get()),
-                blockTexture(ModBLocks.STRIPPED_ALDER_LOG.get()), // side of the block
-                AGoTMod.id("block/alder_log_top_stripped")); // top of the block
-
-        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_ALDER_WOOD.get()),
-                blockTexture(ModBLocks.STRIPPED_ALDER_LOG.get()), // side of the block
-                blockTexture(ModBLocks.STRIPPED_ALDER_LOG.get())); // top of the block
-
-        blockItem(ModBLocks.ALDER_LOG);
-        blockItem(ModBLocks.STRIPPED_ALDER_LOG);
-        blockItem(ModBLocks.ALDER_WOOD);
-        blockItem(ModBLocks.STRIPPED_ALDER_WOOD);
-
-        blockWithItem(ModBLocks.ALDER_PLANKS);
-
-        leavesBlock(ModBLocks.ALDER_LEAVES);
-        saplingBlock(ModBLocks.ALDER_SAPLING);
-        stairsBlock(((StairBlock) ModBLocks.ALDER_STAIRS.get()), blockTexture(ModBLocks.ALDER_PLANKS.get()));
-
-        slabBlock(((SlabBlock) ModBLocks.ALDER_SLAB.get()),
-                blockTexture(ModBLocks.ALDER_PLANKS.get()),
-                blockTexture(ModBLocks.ALDER_PLANKS.get()));
-
-        buttonBlock(((ButtonBlock) ModBLocks.ALDER_BUTTON.get()), blockTexture(ModBLocks.ALDER_PLANKS.get()));
-
-        pressurePlateBlock(((PressurePlateBlock) ModBLocks.ALDER_PRESSURE_PLATE.get()), blockTexture(ModBLocks.ALDER_PLANKS.get()));
-
-        fenceBlock(((FenceBlock) ModBLocks.ALDER_FENCE.get()), blockTexture(ModBLocks.ALDER_PLANKS.get()));
-        fenceGateBlock(((FenceGateBlock) ModBLocks.ALDER_FENCE_GATE.get()), blockTexture(ModBLocks.ALDER_PLANKS.get()));
-        wallBlock(((WallBlock) ModBLocks.ALDER_WALL.get()), blockTexture(ModBLocks.ALDER_PLANKS.get()));
-
-        doorBlockWithRenderType(((DoorBlock) ModBLocks.ALDER_DOOR.get()),
-                modLoc("block/alder_door_bottom"),
-                modLoc("block/alder_door_top"),
-                "cutout");
-
-        trapdoorBlockWithRenderType(((TrapDoorBlock) ModBLocks.ALDER_TRAPDOOR.get()),
-                modLoc("block/alder_trapdoor"),
-                true,
-                "cutout");
+        signBlock(((StandingSignBlock) ModBLocks.WEIRWOOD_SIGN.get()), ((WallSignBlock) ModBLocks.WEIRWOOD_WALL_SIGN.get()),
+                blockTexture(ModBLocks.WEIRWOOD_PLANKS.get()));
+
+        hangingSignBlock(ModBLocks.WEIRWOOD_HANGING_SIGN.get(), ModBLocks.WEIRWOOD_WALL_HANGING_SIGN.get(), blockTexture(ModBLocks.WEIRWOOD_PLANKS.get()));
+
+        // Define the wood types array
+        String[] woodTypes = {
+                "sycamore",
+                "pine",
+                "ash",
+                "beech",
+                "cedar",
+                "chestnut",
+                "hawthorn",
+                "ironwood",
+                "sentinel",
+                "blackbark",
+                "aspen",
+                "alder"
+        };
+
+// Loop through all wood types to register their models and textures
+        for (String woodType : woodTypes) {
+            // Get blocks from the maps in ModBLocks
+            DeferredBlock<Block> logBlock = ModBLocks.LOGS.get(woodType);
+            DeferredBlock<Block> woodBlock = ModBLocks.WOODS.get(woodType);
+            DeferredBlock<Block> strippedLogBlock = ModBLocks.STRIPPED_LOGS.get(woodType);
+            DeferredBlock<Block> strippedWoodBlock = ModBLocks.STRIPPED_WOODS.get(woodType);
+            DeferredBlock<Block> planksBlock = ModBLocks.PLANKS.get(woodType);
+            DeferredBlock<Block> leavesBlock = ModBLocks.LEAVES.get(woodType);
+            DeferredBlock<Block> saplingBlock = ModBLocks.SAPLINGS.get(woodType);
+            DeferredBlock<Block> stairsBlock = ModBLocks.STAIRS.get(woodType);
+            DeferredBlock<Block> slabBlock = ModBLocks.SLABS.get(woodType);
+            DeferredBlock<Block> buttonBlock = ModBLocks.BUTTONS.get(woodType);
+            DeferredBlock<Block> pressurePlateBlock = ModBLocks.PRESSURE_PLATES.get(woodType);
+            DeferredBlock<Block> fenceBlock = ModBLocks.FENCES.get(woodType);
+            DeferredBlock<Block> fenceGateBlock = ModBLocks.FENCE_GATES.get(woodType);
+            DeferredBlock<Block> wallBlock = ModBLocks.WALLS.get(woodType);
+            DeferredBlock<Block> doorBlock = ModBLocks.DOORS.get(woodType);
+            DeferredBlock<Block> trapdoorBlock = ModBLocks.TRAPDOORS.get(woodType);
+            DeferredBlock<Block> signBlock = ModBLocks.SIGNS.get(woodType);
+            DeferredBlock<Block> wallSignBlock = ModBLocks.WALL_SIGNS.get(woodType);
+            DeferredBlock<Block> hangingSignBlock = ModBLocks.HANGING_SIGNS.get(woodType);
+            DeferredBlock<Block> wallHangingSignBlock = ModBLocks.WALL_HANGING_SIGNS.get(woodType);
+
+            // Register sign blocks
+            signBlock(
+                    ((StandingSignBlock) signBlock.get()),
+                    ((WallSignBlock) wallSignBlock.get()),
+                    blockTexture(planksBlock.get())
+            );
+
+            hangingSignBlock(
+                    hangingSignBlock.get(),
+                    wallHangingSignBlock.get(),
+                    blockTexture(planksBlock.get())
+            );
+
+            // Register log and wood blocks
+            // Log block - side and top textures
+            axisBlock(
+                    ((RotatedPillarBlock) logBlock.get()),
+                    blockTexture(logBlock.get()),
+                    AGoTMod.id("block/" + woodType + "_log_top")
+            );
+
+            // Wood block - uses log side texture for all faces
+            axisBlock(
+                    ((RotatedPillarBlock) woodBlock.get()),
+                    blockTexture(logBlock.get()),
+                    blockTexture(logBlock.get())
+            );
+
+            // Stripped log - side and top textures
+            axisBlock(
+                    ((RotatedPillarBlock) strippedLogBlock.get()),
+                    blockTexture(strippedLogBlock.get()),
+                    AGoTMod.id("block/" + woodType + "_log_top_stripped")
+            );
+
+            // Stripped wood - uses stripped log side texture for all faces
+            axisBlock(
+                    ((RotatedPillarBlock) strippedWoodBlock.get()),
+                    blockTexture(strippedLogBlock.get()),
+                    blockTexture(strippedLogBlock.get())
+            );
+
+            // Register items for logs and wood
+            // Instead of using cubeAll which would apply the same texture to all faces
+            // we need to use models that respect the axis orientation for logs and wood
+            simpleBlockItem(logBlock.get(), models().getExistingFile(AGoTMod.id("block/" + woodType + "_log")));
+            simpleBlockItem(woodBlock.get(), models().getExistingFile(AGoTMod.id("block/" + woodType + "_wood")));
+            simpleBlockItem(strippedLogBlock.get(), models().getExistingFile(AGoTMod.id("block/" + woodType + "_log_stripped")));
+            simpleBlockItem(strippedWoodBlock.get(), models().getExistingFile(AGoTMod.id("block/" + woodType + "_wood_stripped")));
+
+            // Register planks and related blocks
+            simpleBlockWithItem(planksBlock.get(), cubeAll(planksBlock.get()));
+
+            simpleBlockWithItem(leavesBlock.get(),
+                    models().cubeAll(name(leavesBlock.get()), blockTexture(leavesBlock.get()))
+                            .renderType("cutout"));
+
+
+            // Sapling with cross rendering
+            simpleBlock(saplingBlock.get(),
+                    models().cross(name(saplingBlock.get()), blockTexture(saplingBlock.get()))
+                            .renderType("cutout"));
+
+            stairsBlock(
+                    ((StairBlock) stairsBlock.get()),
+                    blockTexture(planksBlock.get())
+            );
+
+            slabBlock(
+                    ((SlabBlock) slabBlock.get()),
+                    blockTexture(planksBlock.get()),
+                    blockTexture(planksBlock.get())
+            );
+
+            buttonBlock(
+                    ((ButtonBlock) buttonBlock.get()),
+                    blockTexture(planksBlock.get())
+            );
+
+            pressurePlateBlock(
+                    ((PressurePlateBlock) pressurePlateBlock.get()),
+                    blockTexture(planksBlock.get())
+            );
+
+            fenceBlock(
+                    ((FenceBlock) fenceBlock.get()),
+                    blockTexture(planksBlock.get())
+            );
+
+            fenceGateBlock(
+                    ((FenceGateBlock) fenceGateBlock.get()),
+                    blockTexture(planksBlock.get())
+            );
+
+            wallBlock(
+                    ((WallBlock) wallBlock.get()),
+                    blockTexture(planksBlock.get())
+            );
+
+            doorBlockWithRenderType(
+                    ((DoorBlock) doorBlock.get()),
+                    modLoc("block/" + woodType + "_door_bottom"),
+                    modLoc("block/" + woodType + "_door_top"),
+                    "cutout"
+            );
+
+            trapdoorBlockWithRenderType(
+                    ((TrapDoorBlock) trapdoorBlock.get()),
+                    modLoc("block/" + woodType + "_trapdoor"),
+                    true,
+                    "cutout"
+            );
+        }
 
 
         // ---------------------------(STONE BLOCKS)--------------------------- //
@@ -2180,81 +1770,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                         .renderType("cutout"));
 
         // ---------------------(SIGNS)--------------------- //
-        signBlock(((StandingSignBlock) ModBLocks.WEIRWOOD_SIGN.get()), ((WallSignBlock) ModBLocks.WEIRWOOD_WALL_SIGN.get()),
-                blockTexture(ModBLocks.WEIRWOOD_PLANKS.get()));
 
-        hangingSignBlock(ModBLocks.WEIRWOOD_HANGING_SIGN.get(), ModBLocks.WEIRWOOD_WALL_HANGING_SIGN.get(), blockTexture(ModBLocks.WEIRWOOD_PLANKS.get()));
-
-        signBlock(((StandingSignBlock) ModBLocks.PINE_SIGN.get()), ((WallSignBlock) ModBLocks.PINE_WALL_SIGN.get()),
-                blockTexture(ModBLocks.PINE_PLANKS.get()));
-
-        hangingSignBlock(ModBLocks.PINE_HANGING_SIGN.get(), ModBLocks.PINE_WALL_HANGING_SIGN.get(), blockTexture(ModBLocks.PINE_PLANKS.get()));
-
-        // ASH
-        signBlock(((StandingSignBlock) ModBLocks.ASH_SIGN.get()), ((WallSignBlock) ModBLocks.ASH_WALL_SIGN.get()),
-                blockTexture(ModBLocks.ASH_PLANKS.get()));
-
-        hangingSignBlock(ModBLocks.ASH_HANGING_SIGN.get(), ModBLocks.ASH_WALL_HANGING_SIGN.get(), blockTexture(ModBLocks.ASH_PLANKS.get()));
-
-// BEECH
-        signBlock(((StandingSignBlock) ModBLocks.BEECH_SIGN.get()), ((WallSignBlock) ModBLocks.BEECH_WALL_SIGN.get()),
-                blockTexture(ModBLocks.BEECH_PLANKS.get()));
-
-        hangingSignBlock(ModBLocks.BEECH_HANGING_SIGN.get(), ModBLocks.BEECH_WALL_HANGING_SIGN.get(), blockTexture(ModBLocks.BEECH_PLANKS.get()));
-
-        // SYCAMORE
-        signBlock(((StandingSignBlock) ModBLocks.SYCAMORE_SIGN.get()), ((WallSignBlock) ModBLocks.SYCAMORE_WALL_SIGN.get()),
-                blockTexture(ModBLocks.SYCAMORE_PLANKS.get()));
-
-        hangingSignBlock(ModBLocks.SYCAMORE_HANGING_SIGN.get(), ModBLocks.SYCAMORE_WALL_HANGING_SIGN.get(), blockTexture(ModBLocks.SYCAMORE_PLANKS.get()));
-
-// BLACKBARK
-        signBlock(((StandingSignBlock) ModBLocks.BLACKBARK_SIGN.get()), ((WallSignBlock) ModBLocks.BLACKBARK_WALL_SIGN.get()),
-                blockTexture(ModBLocks.BLACKBARK_PLANKS.get()));
-
-        hangingSignBlock(ModBLocks.BLACKBARK_HANGING_SIGN.get(), ModBLocks.BLACKBARK_WALL_HANGING_SIGN.get(), blockTexture(ModBLocks.BLACKBARK_PLANKS.get()));
-
-// ASPEN
-        signBlock(((StandingSignBlock) ModBLocks.ASPEN_SIGN.get()), ((WallSignBlock) ModBLocks.ASPEN_WALL_SIGN.get()),
-                blockTexture(ModBLocks.ASPEN_PLANKS.get()));
-
-        hangingSignBlock(ModBLocks.ASPEN_HANGING_SIGN.get(), ModBLocks.ASPEN_WALL_HANGING_SIGN.get(), blockTexture(ModBLocks.ASPEN_PLANKS.get()));
-
-// ALDER
-        signBlock(((StandingSignBlock) ModBLocks.ALDER_SIGN.get()), ((WallSignBlock) ModBLocks.ALDER_WALL_SIGN.get()),
-                blockTexture(ModBLocks.ALDER_PLANKS.get()));
-
-        hangingSignBlock(ModBLocks.ALDER_HANGING_SIGN.get(), ModBLocks.ALDER_WALL_HANGING_SIGN.get(), blockTexture(ModBLocks.ALDER_PLANKS.get()));
-
-// CEDAR
-        signBlock(((StandingSignBlock) ModBLocks.CEDAR_SIGN.get()), ((WallSignBlock) ModBLocks.CEDAR_WALL_SIGN.get()),
-                blockTexture(ModBLocks.CEDAR_PLANKS.get()));
-
-        hangingSignBlock(ModBLocks.CEDAR_HANGING_SIGN.get(), ModBLocks.CEDAR_WALL_HANGING_SIGN.get(), blockTexture(ModBLocks.CEDAR_PLANKS.get()));
-
-// CHESTNUT
-        signBlock(((StandingSignBlock) ModBLocks.CHESTNUT_SIGN.get()), ((WallSignBlock) ModBLocks.CHESTNUT_WALL_SIGN.get()),
-                blockTexture(ModBLocks.CHESTNUT_PLANKS.get()));
-
-        hangingSignBlock(ModBLocks.CHESTNUT_HANGING_SIGN.get(), ModBLocks.CHESTNUT_WALL_HANGING_SIGN.get(), blockTexture(ModBLocks.CHESTNUT_PLANKS.get()));
-
-// HAWTHORN
-        signBlock(((StandingSignBlock) ModBLocks.HAWTHORN_SIGN.get()), ((WallSignBlock) ModBLocks.HAWTHORN_WALL_SIGN.get()),
-                blockTexture(ModBLocks.HAWTHORN_PLANKS.get()));
-
-        hangingSignBlock(ModBLocks.HAWTHORN_HANGING_SIGN.get(), ModBLocks.HAWTHORN_WALL_HANGING_SIGN.get(), blockTexture(ModBLocks.HAWTHORN_PLANKS.get()));
-
-// IRONWOOD
-        signBlock(((StandingSignBlock) ModBLocks.IRONWOOD_SIGN.get()), ((WallSignBlock) ModBLocks.IRONWOOD_WALL_SIGN.get()),
-                blockTexture(ModBLocks.IRONWOOD_PLANKS.get()));
-
-        hangingSignBlock(ModBLocks.IRONWOOD_HANGING_SIGN.get(), ModBLocks.IRONWOOD_WALL_HANGING_SIGN.get(), blockTexture(ModBLocks.IRONWOOD_PLANKS.get()));
-
-// SENTINEL
-        signBlock(((StandingSignBlock) ModBLocks.SENTINEL_SIGN.get()), ((WallSignBlock) ModBLocks.SENTINEL_WALL_SIGN.get()),
-                blockTexture(ModBLocks.SENTINEL_PLANKS.get()));
-
-        hangingSignBlock(ModBLocks.SENTINEL_HANGING_SIGN.get(), ModBLocks.SENTINEL_WALL_HANGING_SIGN.get(), blockTexture(ModBLocks.SENTINEL_PLANKS.get()));
 
 
         // ---------------------(VILLAGER PROFESSIONS BLOCKS)--------------------- //

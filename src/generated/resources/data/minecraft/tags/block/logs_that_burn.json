@@ -1,9 +1,5 @@
 {
   "values": [
-    "agotmod:weirwood_log",
-    "agotmod:stripped_weirwood_log",
-    "agotmod:weirwood_wood",
-    "agotmod:stripped_weirwood_wood",
     "agotmod:sycamore_log",
     "agotmod:sycamore_log_stripped",
     "agotmod:sycamore_wood",
@@ -51,6 +47,10 @@
     "agotmod:alder_log",
     "agotmod:alder_log_stripped",
     "agotmod:alder_wood",
-    "agotmod:alder_wood_stripped"
+    "agotmod:alder_wood_stripped",
+    "agotmod:weirwood_log",
+    "agotmod:stripped_weirwood_log",
+    "agotmod:weirwood_wood",
+    "agotmod:stripped_weirwood_wood"
   ]
 }

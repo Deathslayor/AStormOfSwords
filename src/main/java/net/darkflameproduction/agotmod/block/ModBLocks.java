@@ -19,11 +19,13 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.*;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -40,6 +42,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -1005,383 +1008,258 @@ public class ModBLocks {
     public static final DeferredBlock<Block> WEIRWOOD_TRAPDOOR = registerBlock("weirwood_trapdoor", properties -> new TrapDoorBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR), true);
 
 
-    //Sycamore
-    public static final DeferredBlock<Block> SYCAMORE_LOG = registerBlock("sycamore_log", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG).strength(3f), true);
-    public static final DeferredBlock<Block> SYCAMORE_WOOD = registerBlock("sycamore_wood", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WOOD).strength(3f), true);
-    public static final DeferredBlock<Block> STRIPPED_SYCAMORE_LOG = registerBlock("sycamore_log_stripped", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_LOG).strength(3f), true);
-    public static final DeferredBlock<Block> STRIPPED_SYCAMORE_WOOD = registerBlock("sycamore_wood_stripped", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_WOOD).strength(3f), true);
-    public static final DeferredBlock<Block> SYCAMORE_PLANKS = registerBlock("sycamore_planks", ModFlammablePlanks::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS), true);
-    public static final DeferredBlock<Block> SYCAMORE_LEAVES = registerBlock("sycamore_leaves", ModFlammableLeaves::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES), true);
-    public static final DeferredBlock<Block> SYCAMORE_SAPLING = registerBlock("sycamore_sapling", properties -> new SaplingBlock(ModTreeGrower.SYSCAMORE, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING), true);
-    public static final DeferredBlock<Block> SYCAMORE_STAIRS = registerBlock("sycamore_stairs",
-            properties -> new StairBlock(ModBLocks.SYCAMORE_PLANKS.get().defaultBlockState(),
-                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> SYCAMORE_SLAB = registerBlock("sycamore_slabs",
-            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> SYCAMORE_BUTTON = registerBlock("sycamore_button",
-            properties -> new ButtonBlock(BlockSetType.OAK, 10, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> SYCAMORE_PRESSURE_PLATE = registerBlock("sycamore_pressure_plate",
-            properties -> new PressurePlateBlock(BlockSetType.OAK,
-                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> SYCAMORE_FENCE = registerBlock("sycamore_fence",
-            FenceBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> SYCAMORE_FENCE_GATE = registerBlock("sycamore_fence_gate",
-            properties -> new FenceGateBlock(properties,
-                    SoundEvents.FENCE_GATE_OPEN, SoundEvents.FENCE_GATE_CLOSE), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> SYCAMORE_WALL = registerBlock("sycamore_wall",
-            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> SYCAMORE_DOOR = registerBlock("sycamore_door",
-            properties -> new DoorBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR), true);
-    public static final DeferredBlock<Block> SYCAMORE_TRAPDOOR = registerBlock("sycamore_trapdoor",
-            properties -> new TrapDoorBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR), true);
+    public static final Map<String, DeferredBlock<Block>> LOGS = new HashMap<>();
+    public static final Map<String, DeferredBlock<Block>> WOODS = new HashMap<>();
+    public static final Map<String, DeferredBlock<Block>> STRIPPED_LOGS = new HashMap<>();
+    public static final Map<String, DeferredBlock<Block>> STRIPPED_WOODS = new HashMap<>();
+    public static final Map<String, DeferredBlock<Block>> PLANKS = new HashMap<>();
+    public static final Map<String, DeferredBlock<Block>> LEAVES = new HashMap<>();
+    public static final Map<String, DeferredBlock<Block>> SAPLINGS = new HashMap<>();
+    public static final Map<String, DeferredBlock<Block>> STAIRS = new HashMap<>();
+    public static final Map<String, DeferredBlock<Block>> SLABS = new HashMap<>();
+    public static final Map<String, DeferredBlock<Block>> BUTTONS = new HashMap<>();
+    public static final Map<String, DeferredBlock<Block>> PRESSURE_PLATES = new HashMap<>();
+    public static final Map<String, DeferredBlock<Block>> FENCES = new HashMap<>();
+    public static final Map<String, DeferredBlock<Block>> FENCE_GATES = new HashMap<>();
+    public static final Map<String, DeferredBlock<Block>> WALLS = new HashMap<>();
+    public static final Map<String, DeferredBlock<Block>> DOORS = new HashMap<>();
+    public static final Map<String, DeferredBlock<Block>> TRAPDOORS = new HashMap<>();
+    public static final Map<String, DeferredBlock<Block>> SIGNS = new HashMap<>();
+    public static final Map<String, DeferredBlock<Block>> WALL_SIGNS = new HashMap<>();
+    public static final Map<String, DeferredBlock<Block>> HANGING_SIGNS = new HashMap<>();
+    public static final Map<String, DeferredBlock<Block>> WALL_HANGING_SIGNS = new HashMap<>();
 
+    // Array of wood types (excluding weirwood)
+    private static final String[] WOOD_TYPES = {
+            "sycamore",
+            "pine",
+            "ash",
+            "beech",
+            "cedar",
+            "chestnut",
+            "hawthorn",
+            "ironwood",
+            "sentinel",
+            "blackbark",
+            "aspen",
+            "alder"
+    };
 
-    //Sentinel
-    public static final DeferredBlock<Block> SENTINEL_LOG = registerBlock("sentinel_log", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG).strength(3f), true);
-    public static final DeferredBlock<Block> SENTINEL_WOOD = registerBlock("sentinel_wood", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WOOD).strength(3f), true);
-    public static final DeferredBlock<Block> STRIPPED_SENTINEL_LOG = registerBlock("sentinel_log_stripped", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_LOG).strength(3f), true);
-    public static final DeferredBlock<Block> STRIPPED_SENTINEL_WOOD = registerBlock("sentinel_wood_stripped", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_WOOD).strength(3f), true);
-    public static final DeferredBlock<Block> SENTINEL_PLANKS = registerBlock("sentinel_planks", ModFlammablePlanks::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS), true);
-    public static final DeferredBlock<Block> SENTINEL_LEAVES = registerBlock("sentinel_leaves", ModFlammableLeaves::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES), true);
-    public static final DeferredBlock<Block> SENTINEL_SAPLING = registerBlock("sentinel_sapling", properties -> new SaplingBlock(ModTreeGrower.SENTINEL, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING), true);
-    public static final DeferredBlock<Block> SENTINEL_STAIRS = registerBlock("sentinel_stairs",
-            properties -> new StairBlock(ModBLocks.SENTINEL_PLANKS.get().defaultBlockState(),
-                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> SENTINEL_SLAB = registerBlock("sentinel_slabs",
-            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> SENTINEL_BUTTON = registerBlock("sentinel_button",
-            properties -> new ButtonBlock(BlockSetType.OAK, 10, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> SENTINEL_PRESSURE_PLATE = registerBlock("sentinel_pressure_plate",
-            properties -> new PressurePlateBlock(BlockSetType.OAK,
-                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> SENTINEL_FENCE = registerBlock("sentinel_fence",
-            FenceBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> SENTINEL_FENCE_GATE = registerBlock("sentinel_fence_gate",
-            properties -> new FenceGateBlock(properties,
-                    SoundEvents.FENCE_GATE_OPEN, SoundEvents.FENCE_GATE_CLOSE), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> SENTINEL_WALL = registerBlock("sentinel_wall",
-            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> SENTINEL_DOOR = registerBlock("sentinel_door",
-            properties -> new DoorBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR), true);
-    public static final DeferredBlock<Block> SENTINEL_TRAPDOOR = registerBlock("sentinel_trapdoor",
-            properties -> new TrapDoorBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR), true);
+    static {
+        // Generate all blocks for each wood type
+        for (String woodType : WOOD_TYPES) {
+            registerWoodBlocks(woodType);
+        }
+    }
 
+    private static void registerWoodBlocks(String woodType) {
+        // Register log and wood blocks
+        LOGS.put(woodType, registerBlock(woodType + "_log",
+                ModFlammableRotatedPillarBlock::new,
+                BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG).strength(3f),
+                true));
 
-    //Pine
-    public static final DeferredBlock<Block> PINE_LOG = registerBlock("pine_log", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_LOG).strength(3f), true);
-    public static final DeferredBlock<Block> PINE_WOOD = registerBlock("pine_wood", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_WOOD).strength(3f), true);
-    public static final DeferredBlock<Block> STRIPPED_PINE_LOG = registerBlock("pine_log_stripped", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_SPRUCE_LOG).strength(3f), true);
-    public static final DeferredBlock<Block> STRIPPED_PINE_WOOD = registerBlock("pine_wood_stripped", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_SPRUCE_WOOD).strength(3f), true);
-    public static final DeferredBlock<Block> PINE_PLANKS = registerBlock("pine_planks", ModFlammablePlanks::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_PLANKS), true);
-    public static final DeferredBlock<Block> PINE_LEAVES = registerBlock("pine_leaves", ModFlammableLeaves::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_LEAVES), true);
-    public static final DeferredBlock<Block> PINE_SAPLING = registerBlock("pine_sapling", properties -> new SaplingBlock(ModTreeGrower.PINE, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_SAPLING), true);
-    public static final DeferredBlock<Block> PINE_STAIRS = registerBlock("pine_stairs",
-            properties -> new StairBlock(ModBLocks.PINE_PLANKS.get().defaultBlockState(),
-                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_STAIRS), true);
-    public static final DeferredBlock<Block> PINE_SLAB = registerBlock("pine_slabs",
-            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_STAIRS), true);
-    public static final DeferredBlock<Block> PINE_BUTTON = registerBlock("pine_button",
-            properties -> new ButtonBlock(BlockSetType.SPRUCE, 10, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_STAIRS), true);
-    public static final DeferredBlock<Block> PINE_PRESSURE_PLATE = registerBlock("pine_pressure_plate",
-            properties -> new PressurePlateBlock(BlockSetType.SPRUCE,
-                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_STAIRS), true);
-    public static final DeferredBlock<Block> PINE_FENCE = registerBlock("pine_fence",
-            FenceBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_FENCE_GATE), true);
-    public static final DeferredBlock<Block> PINE_FENCE_GATE = registerBlock("pine_fence_gate",
-            properties -> new FenceGateBlock(properties,
-                    SoundEvents.FENCE_GATE_OPEN, SoundEvents.FENCE_GATE_CLOSE), BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_FENCE_GATE), true);
-    public static final DeferredBlock<Block> PINE_WALL = registerBlock("pine_wall",
-            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_FENCE_GATE), true);
-    public static final DeferredBlock<Block> PINE_DOOR = registerBlock("pine_door",
-            properties -> new DoorBlock(BlockSetType.SPRUCE, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_DOOR), true);
-    public static final DeferredBlock<Block> PINE_TRAPDOOR = registerBlock("pine_trapdoor",
-            properties -> new TrapDoorBlock(BlockSetType.SPRUCE, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_TRAPDOOR), true);
+        WOODS.put(woodType, registerBlock(woodType + "_wood",
+                ModFlammableRotatedPillarBlock::new,
+                BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WOOD).strength(3f),
+                true));
 
+        STRIPPED_LOGS.put(woodType, registerBlock(woodType + "_log_stripped",
+                ModFlammableRotatedPillarBlock::new,
+                BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_LOG).strength(3f),
+                true));
 
+        STRIPPED_WOODS.put(woodType, registerBlock(woodType + "_wood_stripped",
+                ModFlammableRotatedPillarBlock::new,
+                BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_WOOD).strength(3f),
+                true));
 
-    //ironwood
-    public static final DeferredBlock<Block> IRONWOOD_LOG = registerBlock("ironwood_log", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG).strength(3f), true);
-    public static final DeferredBlock<Block> IRONWOOD_WOOD = registerBlock("ironwood_wood", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WOOD).strength(3f), true);
-    public static final DeferredBlock<Block> STRIPPED_IRONWOOD_LOG = registerBlock("ironwood_log_stripped", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_LOG).strength(3f), true);
-    public static final DeferredBlock<Block> STRIPPED_IRONWOOD_WOOD = registerBlock("ironwood_wood_stripped", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_WOOD).strength(3f), true);
-    public static final DeferredBlock<Block> IRONWOOD_PLANKS = registerBlock("ironwood_planks", ModFlammablePlanks::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS), true);
-    public static final DeferredBlock<Block> IRONWOOD_LEAVES = registerBlock("ironwood_leaves", ModFlammableLeaves::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES), true);
-    public static final DeferredBlock<Block> IRONWOOD_SAPLING = registerBlock("ironwood_sapling", properties -> new SaplingBlock(ModTreeGrower.IRONWOOD, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING), true);
-    public static final DeferredBlock<Block> IRONWOOD_STAIRS = registerBlock("ironwood_stairs",
-            properties -> new StairBlock(ModBLocks.IRONWOOD_PLANKS.get().defaultBlockState(),
-                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> IRONWOOD_SLAB = registerBlock("ironwood_slabs",
-            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> IRONWOOD_BUTTON = registerBlock("ironwood_button",
-            properties -> new ButtonBlock(BlockSetType.OAK, 10, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> IRONWOOD_PRESSURE_PLATE = registerBlock("ironwood_pressure_plate",
-            properties -> new PressurePlateBlock(BlockSetType.OAK,
-                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> IRONWOOD_FENCE = registerBlock("ironwood_fence",
-            FenceBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> IRONWOOD_FENCE_GATE = registerBlock("ironwood_fence_gate",
-            properties -> new FenceGateBlock(properties,
-                    SoundEvents.FENCE_GATE_OPEN, SoundEvents.FENCE_GATE_CLOSE), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> IRONWOOD_WALL = registerBlock("ironwood_wall",
-            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> IRONWOOD_DOOR = registerBlock("ironwood_door",
-            properties -> new DoorBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR), true);
-    public static final DeferredBlock<Block> IRONWOOD_TRAPDOOR = registerBlock("ironwood_trapdoor",
-            properties -> new TrapDoorBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR), true);
+        // Register planks and related blocks
+        PLANKS.put(woodType, registerBlock(woodType + "_planks",
+                ModFlammablePlanks::new,
+                BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS),
+                true));
 
+        LEAVES.put(woodType, registerBlock(woodType + "_leaves",
+                ModFlammableLeaves::new,
+                BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES),
+                true));
 
-    //hawthorn
-    public static final DeferredBlock<Block> HAWTHORN_LOG = registerBlock("hawthorn_log", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG).strength(3f), true);
-    public static final DeferredBlock<Block> HAWTHORN_WOOD = registerBlock("hawthorn_wood", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WOOD).strength(3f), true);
-    public static final DeferredBlock<Block> STRIPPED_HAWTHORN_LOG = registerBlock("hawthorn_log_stripped", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_LOG).strength(3f), true);
-    public static final DeferredBlock<Block> STRIPPED_HAWTHORN_WOOD = registerBlock("hawthorn_wood_stripped", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_WOOD).strength(3f), true);
-    public static final DeferredBlock<Block> HAWTHORN_PLANKS = registerBlock("hawthorn_planks", ModFlammablePlanks::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS), true);
-    public static final DeferredBlock<Block> HAWTHORN_LEAVES = registerBlock("hawthorn_leaves", ModFlammableLeaves::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES), true);
-    public static final DeferredBlock<Block> HAWTHORN_SAPLING = registerBlock("hawthorn_sapling", properties -> new SaplingBlock(ModTreeGrower.HAWTHORN, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING), true);
-    public static final DeferredBlock<Block> HAWTHORN_STAIRS = registerBlock("hawthorn_stairs",
-            properties -> new StairBlock(ModBLocks.HAWTHORN_PLANKS.get().defaultBlockState(),
-                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> HAWTHORN_SLAB = registerBlock("hawthorn_slabs",
-            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> HAWTHORN_BUTTON = registerBlock("hawthorn_button",
-            properties -> new ButtonBlock(BlockSetType.OAK, 10, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> HAWTHORN_PRESSURE_PLATE = registerBlock("hawthorn_pressure_plate",
-            properties -> new PressurePlateBlock(BlockSetType.OAK,
-                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> HAWTHORN_FENCE = registerBlock("hawthorn_fence",
-            FenceBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> HAWTHORN_FENCE_GATE = registerBlock("hawthorn_fence_gate",
-            properties -> new FenceGateBlock(properties,
-                    SoundEvents.FENCE_GATE_OPEN, SoundEvents.FENCE_GATE_CLOSE), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> HAWTHORN_WALL = registerBlock("hawthorn_wall",
-            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> HAWTHORN_DOOR = registerBlock("hawthorn_door",
-            properties -> new DoorBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR), true);
-    public static final DeferredBlock<Block> HAWTHORN_TRAPDOOR = registerBlock("hawthorn_trapdoor",
-            properties -> new TrapDoorBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR), true);
+        // Get the appropriate tree grower for this wood type
+        TreeGrower treeGrower = getTreeGrowerForWoodType(woodType);
 
+        SAPLINGS.put(woodType, registerBlock(woodType + "_sapling",
+                properties -> new SaplingBlock(treeGrower, properties),
+                BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING),
+                true));
 
-    //chestnut
-    public static final DeferredBlock<Block> CHESTNUT_LOG = registerBlock("chestnut_log", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG).strength(3f), true);
-    public static final DeferredBlock<Block> CHESTNUT_WOOD = registerBlock("chestnut_wood", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WOOD).strength(3f), true);
-    public static final DeferredBlock<Block> STRIPPED_CHESTNUT_LOG = registerBlock("chestnut_log_stripped", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_LOG).strength(3f), true);
-    public static final DeferredBlock<Block> STRIPPED_CHESTNUT_WOOD = registerBlock("chestnut_wood_stripped", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_WOOD).strength(3f), true);
-    public static final DeferredBlock<Block> CHESTNUT_PLANKS = registerBlock("chestnut_planks", ModFlammablePlanks::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS), true);
-    public static final DeferredBlock<Block> CHESTNUT_LEAVES = registerBlock("chestnut_leaves", ModFlammableLeaves::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES), true);
-    public static final DeferredBlock<Block> CHESTNUT_SAPLING = registerBlock("chestnut_sapling", properties -> new SaplingBlock(ModTreeGrower.CHESTNUT, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING), true);
-    public static final DeferredBlock<Block> CHESTNUT_STAIRS = registerBlock("chestnut_stairs",
-            properties -> new StairBlock(ModBLocks.CHESTNUT_PLANKS.get().defaultBlockState(),
-                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> CHESTNUT_SLAB = registerBlock("chestnut_slabs",
-            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> CHESTNUT_BUTTON = registerBlock("chestnut_button",
-            properties -> new ButtonBlock(BlockSetType.OAK, 10, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> CHESTNUT_PRESSURE_PLATE = registerBlock("chestnut_pressure_plate",
-            properties -> new PressurePlateBlock(BlockSetType.OAK,
-                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> CHESTNUT_FENCE = registerBlock("chestnut_fence",
-            FenceBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> CHESTNUT_FENCE_GATE = registerBlock("chestnut_fence_gate",
-            properties -> new FenceGateBlock(properties,
-                    SoundEvents.FENCE_GATE_OPEN, SoundEvents.FENCE_GATE_CLOSE), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> CHESTNUT_WALL = registerBlock("chestnut_wall",
-            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> CHESTNUT_DOOR = registerBlock("chestnut_door",
-            properties -> new DoorBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR), true);
-    public static final DeferredBlock<Block> CHESTNUT_TRAPDOOR = registerBlock("chestnut_trapdoor",
-            properties -> new TrapDoorBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR), true);
+        // Register stairs, slabs, and other decorative blocks
+        STAIRS.put(woodType, registerBlock(woodType + "_stairs",
+                properties -> new StairBlock(PLANKS.get(woodType).get().defaultBlockState(), properties),
+                BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS),
+                true));
 
+        SLABS.put(woodType, registerBlock(woodType + "_slabs",
+                SlabBlock::new,
+                BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS),
+                true));
 
+        BUTTONS.put(woodType, registerBlock(woodType + "_button",
+                properties -> new ButtonBlock(BlockSetType.OAK, 10, properties),
+                BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS),
+                true));
 
-    //Cedar
-    public static final DeferredBlock<Block> CEDAR_LOG = registerBlock("cedar_log", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG).strength(3f), true);
-    public static final DeferredBlock<Block> CEDAR_WOOD = registerBlock("cedar_wood", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WOOD).strength(3f), true);
-    public static final DeferredBlock<Block> STRIPPED_CEDAR_LOG = registerBlock("cedar_log_stripped", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_LOG).strength(3f), true);
-    public static final DeferredBlock<Block> STRIPPED_CEDAR_WOOD = registerBlock("cedar_wood_stripped", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_WOOD).strength(3f), true);
-    public static final DeferredBlock<Block> CEDAR_PLANKS = registerBlock("cedar_planks", ModFlammablePlanks::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS), true);
-    public static final DeferredBlock<Block> CEDAR_LEAVES = registerBlock("cedar_leaves", ModFlammableLeaves::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES), true);
-    public static final DeferredBlock<Block> CEDAR_SAPLING = registerBlock("cedar_sapling", properties -> new SaplingBlock(ModTreeGrower.CEDAR, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING), true);
-    public static final DeferredBlock<Block> CEDAR_STAIRS = registerBlock("cedar_stairs",
-            properties -> new StairBlock(ModBLocks.CEDAR_PLANKS.get().defaultBlockState(),
-                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> CEDAR_SLAB = registerBlock("cedar_slabs",
-            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> CEDAR_BUTTON = registerBlock("cedar_button",
-            properties -> new ButtonBlock(BlockSetType.OAK, 10, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> CEDAR_PRESSURE_PLATE = registerBlock("cedar_pressure_plate",
-            properties -> new PressurePlateBlock(BlockSetType.OAK,
-                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> CEDAR_FENCE = registerBlock("cedar_fence",
-            FenceBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> CEDAR_FENCE_GATE = registerBlock("cedar_fence_gate",
-            properties -> new FenceGateBlock(properties,
-                    SoundEvents.FENCE_GATE_OPEN, SoundEvents.FENCE_GATE_CLOSE), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> CEDAR_WALL = registerBlock("cedar_wall",
-            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> CEDAR_DOOR = registerBlock("cedar_door",
-            properties -> new DoorBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR), true);
-    public static final DeferredBlock<Block> CEDAR_TRAPDOOR = registerBlock("cedar_trapdoor",
-            properties -> new TrapDoorBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR), true);
+        PRESSURE_PLATES.put(woodType, registerBlock(woodType + "_pressure_plate",
+                properties -> new PressurePlateBlock(BlockSetType.OAK, properties),
+                BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS),
+                true));
 
+        FENCES.put(woodType, registerBlock(woodType + "_fence",
+                FenceBlock::new,
+                BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE),
+                true));
 
+        FENCE_GATES.put(woodType, registerBlock(woodType + "_fence_gate",
+                properties -> new FenceGateBlock(properties, SoundEvents.FENCE_GATE_OPEN, SoundEvents.FENCE_GATE_CLOSE),
+                BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE),
+                true));
 
-    //Beech
-    public static final DeferredBlock<Block> BEECH_LOG = registerBlock("beech_log", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG).strength(3f), true);
-    public static final DeferredBlock<Block> BEECH_WOOD = registerBlock("beech_wood", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WOOD).strength(3f), true);
-    public static final DeferredBlock<Block> STRIPPED_BEECH_LOG = registerBlock("beech_log_stripped", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_LOG).strength(3f), true);
-    public static final DeferredBlock<Block> STRIPPED_BEECH_WOOD = registerBlock("beech_wood_stripped", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_WOOD).strength(3f), true);
-    public static final DeferredBlock<Block> BEECH_PLANKS = registerBlock("beech_planks", ModFlammablePlanks::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS), true);
-    public static final DeferredBlock<Block> BEECH_LEAVES = registerBlock("beech_leaves", ModFlammableLeaves::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES), true);
-    public static final DeferredBlock<Block> BEECH_SAPLING = registerBlock("beech_sapling", properties -> new SaplingBlock(ModTreeGrower.BEECH, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING), true);
-    public static final DeferredBlock<Block> BEECH_STAIRS = registerBlock("beech_stairs",
-            properties -> new StairBlock(ModBLocks.BEECH_PLANKS.get().defaultBlockState(),
-                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> BEECH_SLAB = registerBlock("beech_slabs",
-            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> BEECH_BUTTON = registerBlock("beech_button",
-            properties -> new ButtonBlock(BlockSetType.OAK, 10, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> BEECH_PRESSURE_PLATE = registerBlock("beech_pressure_plate",
-            properties -> new PressurePlateBlock(BlockSetType.OAK,
-                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> BEECH_FENCE = registerBlock("beech_fence",
-            FenceBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> BEECH_FENCE_GATE = registerBlock("beech_fence_gate",
-            properties -> new FenceGateBlock(properties,
-                    SoundEvents.FENCE_GATE_OPEN, SoundEvents.FENCE_GATE_CLOSE), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> BEECH_WALL = registerBlock("beech_wall",
-            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> BEECH_DOOR = registerBlock("beech_door",
-            properties -> new DoorBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR), true);
-    public static final DeferredBlock<Block> BEECH_TRAPDOOR = registerBlock("beech_trapdoor",
-            properties -> new TrapDoorBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR), true);
+        WALLS.put(woodType, registerBlock(woodType + "_wall",
+                WallBlock::new,
+                BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE),
+                true));
 
+        DOORS.put(woodType, registerBlock(woodType + "_door",
+                properties -> new DoorBlock(BlockSetType.OAK, properties),
+                BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR),
+                true));
 
+        TRAPDOORS.put(woodType, registerBlock(woodType + "_trapdoor",
+                properties -> new TrapDoorBlock(BlockSetType.OAK, properties),
+                BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR),
+                true));
 
-    //Ash
-    public static final DeferredBlock<Block> ASH_LOG = registerBlock("ash_log", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG).strength(3f), true);
-    public static final DeferredBlock<Block> ASH_WOOD = registerBlock("ash_wood", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WOOD).strength(3f), true);
-    public static final DeferredBlock<Block> STRIPPED_ASH_LOG = registerBlock("ash_log_stripped", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_LOG).strength(3f), true);
-    public static final DeferredBlock<Block> STRIPPED_ASH_WOOD = registerBlock("ash_wood_stripped", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_WOOD).strength(3f), true);
-    public static final DeferredBlock<Block> ASH_PLANKS = registerBlock("ash_planks", ModFlammablePlanks::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS), true);
-    public static final DeferredBlock<Block> ASH_LEAVES = registerBlock("ash_leaves", ModFlammableLeaves::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES), true);
-    public static final DeferredBlock<Block> ASH_SAPLING = registerBlock("ash_sapling", properties -> new SaplingBlock(ModTreeGrower.ASH, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING), true);
-    public static final DeferredBlock<Block> ASH_STAIRS = registerBlock("ash_stairs",
-            properties -> new StairBlock(ModBLocks.ASH_PLANKS.get().defaultBlockState(),
-                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> ASH_SLAB = registerBlock("ash_slabs",
-            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> ASH_BUTTON = registerBlock("ash_button",
-            properties -> new ButtonBlock(BlockSetType.OAK, 10, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> ASH_PRESSURE_PLATE = registerBlock("ash_pressure_plate",
-            properties -> new PressurePlateBlock(BlockSetType.OAK,
-                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> ASH_FENCE = registerBlock("ash_fence",
-            FenceBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> ASH_FENCE_GATE = registerBlock("ash_fence_gate",
-            properties -> new FenceGateBlock(properties,
-                    SoundEvents.FENCE_GATE_OPEN, SoundEvents.FENCE_GATE_CLOSE), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> ASH_WALL = registerBlock("ash_wall",
-            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> ASH_DOOR = registerBlock("ash_door",
-            properties -> new DoorBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR), true);
-    public static final DeferredBlock<Block> ASH_TRAPDOOR = registerBlock("ash_trapdoor",
-            properties -> new TrapDoorBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR), true);
+        // Get the appropriate WoodType for this wood type
+        WoodType woodTypeObj = getWoodTypeForWoodType(woodType);
 
+        // Register sign blocks
+        SIGNS.put(woodType, registerBlock(woodType + "_sign",
+                properties -> new ModStandingSignBlock(woodTypeObj, properties),
+                BlockBehaviour.Properties.of()
+                        .mapColor(MapColor.WOOD)
+                        .noCollission()
+                        .strength(1.0F)
+                        .sound(SoundType.WOOD)
+                        .ignitedByLava(),
+                false));
 
-    //Blackbark
-    public static final DeferredBlock<Block> BLACKBARK_LOG = registerBlock("blackbark_log", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG).strength(3f), true);
-    public static final DeferredBlock<Block> BLACKBARK_WOOD = registerBlock("blackbark_wood", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WOOD).strength(3f), true);
-    public static final DeferredBlock<Block> STRIPPED_BLACKBARK_LOG = registerBlock("blackbark_log_stripped", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_LOG).strength(3f), true);
-    public static final DeferredBlock<Block> STRIPPED_BLACKBARK_WOOD = registerBlock("blackbark_wood_stripped", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_WOOD).strength(3f), true);
-    public static final DeferredBlock<Block> BLACKBARK_PLANKS = registerBlock("blackbark_planks", ModFlammablePlanks::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS), true);
-    public static final DeferredBlock<Block> BLACKBARK_LEAVES = registerBlock("blackbark_leaves", ModFlammableLeaves::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES), true);
-    public static final DeferredBlock<Block> BLACKBARK_SAPLING = registerBlock("blackbark_sapling", properties -> new SaplingBlock(ModTreeGrower.BLACKBARK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING), true);
-    public static final DeferredBlock<Block> BLACKBARK_STAIRS = registerBlock("blackbark_stairs",
-            properties -> new StairBlock(ModBLocks.BLACKBARK_PLANKS.get().defaultBlockState(),
-                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> BLACKBARK_SLAB = registerBlock("blackbark_slabs",
-            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> BLACKBARK_BUTTON = registerBlock("blackbark_button",
-            properties -> new ButtonBlock(BlockSetType.OAK, 10, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> BLACKBARK_PRESSURE_PLATE = registerBlock("blackbark_pressure_plate",
-            properties -> new PressurePlateBlock(BlockSetType.OAK,
-                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> BLACKBARK_FENCE = registerBlock("blackbark_fence",
-            FenceBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> BLACKBARK_FENCE_GATE = registerBlock("blackbark_fence_gate",
-            properties -> new FenceGateBlock(properties,
-                    SoundEvents.FENCE_GATE_OPEN, SoundEvents.FENCE_GATE_CLOSE), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> BLACKBARK_WALL = registerBlock("blackbark_wall",
-            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> BLACKBARK_DOOR = registerBlock("blackbark_door",
-            properties -> new DoorBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR), true);
-    public static final DeferredBlock<Block> BLACKBARK_TRAPDOOR = registerBlock("blackbark_trapdoor",
-            properties -> new TrapDoorBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR), true);
+        WALL_SIGNS.put(woodType, registerBlock(woodType + "_wall_sign",
+                properties -> new ModWallSignBlock(woodTypeObj, properties),
+                BlockBehaviour.Properties.of()
+                        .mapColor(MapColor.WOOD)
+                        .noCollission()
+                        .strength(1.0F)
+                        .sound(SoundType.WOOD)
+                        .ignitedByLava(),
+                false));
 
+        HANGING_SIGNS.put(woodType, registerBlock(woodType + "_hanging_sign",
+                properties -> new ModHangingSignBlock(woodTypeObj, properties),
+                BlockBehaviour.Properties.of()
+                        .mapColor(MapColor.WOOD)
+                        .noCollission()
+                        .strength(1.0F)
+                        .sound(SoundType.WOOD)
+                        .ignitedByLava(),
+                false));
 
+        WALL_HANGING_SIGNS.put(woodType, registerBlock(woodType + "_wall_hanging_sign",
+                properties -> new ModWallHangingSignBlock(woodTypeObj, properties),
+                BlockBehaviour.Properties.of()
+                        .mapColor(MapColor.WOOD)
+                        .noCollission()
+                        .strength(1.0F)
+                        .sound(SoundType.WOOD)
+                        .ignitedByLava(),
+                false));
+    }
 
-    //Aspen
-    public static final DeferredBlock<Block> ASPEN_LOG = registerBlock("aspen_log", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG).strength(3f), true);
-    public static final DeferredBlock<Block> ASPEN_WOOD = registerBlock("aspen_wood", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WOOD).strength(3f), true);
-    public static final DeferredBlock<Block> STRIPPED_ASPEN_LOG = registerBlock("aspen_log_stripped", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_LOG).strength(3f), true);
-    public static final DeferredBlock<Block> STRIPPED_ASPEN_WOOD = registerBlock("aspen_wood_stripped", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_WOOD).strength(3f), true);
-    public static final DeferredBlock<Block> ASPEN_PLANKS = registerBlock("aspen_planks", ModFlammablePlanks::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS), true);
-    public static final DeferredBlock<Block> ASPEN_LEAVES = registerBlock("aspen_leaves", ModFlammableLeaves::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES), true);
-    public static final DeferredBlock<Block> ASPEN_SAPLING = registerBlock("aspen_sapling", properties -> new SaplingBlock(ModTreeGrower.ASPEN, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING), true);
-    public static final DeferredBlock<Block> ASPEN_STAIRS = registerBlock("aspen_stairs",
-            properties -> new StairBlock(ModBLocks.ASPEN_PLANKS.get().defaultBlockState(),
-                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> ASPEN_SLAB = registerBlock("aspen_slabs",
-            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> ASPEN_BUTTON = registerBlock("aspen_button",
-            properties -> new ButtonBlock(BlockSetType.OAK, 10, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> ASPEN_PRESSURE_PLATE = registerBlock("aspen_pressure_plate",
-            properties -> new PressurePlateBlock(BlockSetType.OAK,
-                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> ASPEN_FENCE = registerBlock("aspen_fence",
-            FenceBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> ASPEN_FENCE_GATE = registerBlock("aspen_fence_gate",
-            properties -> new FenceGateBlock(properties,
-                    SoundEvents.FENCE_GATE_OPEN, SoundEvents.FENCE_GATE_CLOSE), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> ASPEN_WALL = registerBlock("aspen_wall",
-            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> ASPEN_DOOR = registerBlock("aspen_door",
-            properties -> new DoorBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR), true);
-    public static final DeferredBlock<Block> ASPEN_TRAPDOOR = registerBlock("aspen_trapdoor",
-            properties -> new TrapDoorBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR), true);
+    // Helper method to get the appropriate TreeGrower for a wood type
+    private static TreeGrower getTreeGrowerForWoodType(String woodType) {
+        // This uses your existing ModTreeGrower static fields
+        switch (woodType) {
+            case "sycamore":
+                return ModTreeGrower.SYSCAMORE;
+            case "pine":
+                return ModTreeGrower.PINE;
+            case "ash":
+                return ModTreeGrower.ASH;
+            case "beech":
+                return ModTreeGrower.BEECH;
+            case "cedar":
+                return ModTreeGrower.CEDAR;
+            case "chestnut":
+                return ModTreeGrower.CHESTNUT;
+            case "hawthorn":
+                return ModTreeGrower.HAWTHORN;
+            case "ironwood":
+                return ModTreeGrower.IRONWOOD;
+            case "sentinel":
+                return ModTreeGrower.SENTINEL;
+            case "blackbark":
+                return ModTreeGrower.BLACKBARK;
+            case "aspen":
+                return ModTreeGrower.ASPEN;
+            case "alder":
+                return ModTreeGrower.ALDER;
+            default:
+                return ModTreeGrower.SYSCAMORE;
+        }
+    }
 
+    // Helper method to get the appropriate WoodType for a wood type
+    private static WoodType getWoodTypeForWoodType(String woodType) {
+        // Assuming ModWoodTypes contains WoodType objects
+        switch (woodType) {
+            case "sycamore":
+                return ModWoodTypes.SYCAMORE;
+            case "pine":
+                return ModWoodTypes.PINE;
+            case "ash":
+                return ModWoodTypes.ASH;
+            case "beech":
+                return ModWoodTypes.BEECH;
+            case "cedar":
+                return ModWoodTypes.CEDAR;
+            case "chestnut":
+                return ModWoodTypes.CHESTNUT;
+            case "hawthorn":
+                return ModWoodTypes.HAWTHORN;
+            case "ironwood":
+                return ModWoodTypes.IRONWOOD;
+            case "sentinel":
+                return ModWoodTypes.SENTINEL;
+            case "blackbark":
+                return ModWoodTypes.BLACKBARK;
+            case "aspen":
+                return ModWoodTypes.ASPEN;
+            case "alder":
+                return ModWoodTypes.ALDER;
+            default:
+                return ModWoodTypes.SYCAMORE;
+        }
+    }
 
-
-    //Alder
-    public static final DeferredBlock<Block> ALDER_LOG = registerBlock("alder_log", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG).strength(3f), true);
-    public static final DeferredBlock<Block> ALDER_WOOD = registerBlock("alder_wood", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WOOD).strength(3f), true);
-    public static final DeferredBlock<Block> STRIPPED_ALDER_LOG = registerBlock("alder_log_stripped", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_LOG).strength(3f), true);
-    public static final DeferredBlock<Block> STRIPPED_ALDER_WOOD = registerBlock("alder_wood_stripped", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_WOOD).strength(3f), true);
-    public static final DeferredBlock<Block> ALDER_PLANKS = registerBlock("alder_planks", ModFlammablePlanks::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS), true);
-    public static final DeferredBlock<Block> ALDER_LEAVES = registerBlock("alder_leaves", ModFlammableLeaves::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES), true);
-    public static final DeferredBlock<Block> ALDER_SAPLING = registerBlock("alder_sapling", properties -> new SaplingBlock(ModTreeGrower.ALDER, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING), true);
-    public static final DeferredBlock<Block> ALDER_STAIRS = registerBlock("alder_stairs",
-            properties -> new StairBlock(ModBLocks.ALDER_PLANKS.get().defaultBlockState(),
-                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> ALDER_SLAB = registerBlock("alder_slabs",
-            SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> ALDER_BUTTON = registerBlock("alder_button",
-            properties -> new ButtonBlock(BlockSetType.OAK, 10, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> ALDER_PRESSURE_PLATE = registerBlock("alder_pressure_plate",
-            properties -> new PressurePlateBlock(BlockSetType.OAK,
-                    properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
-    public static final DeferredBlock<Block> ALDER_FENCE = registerBlock("alder_fence",
-            FenceBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> ALDER_FENCE_GATE = registerBlock("alder_fence_gate",
-            properties -> new FenceGateBlock(properties,
-                    SoundEvents.FENCE_GATE_OPEN, SoundEvents.FENCE_GATE_CLOSE), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> ALDER_WALL = registerBlock("alder_wall",
-            WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
-    public static final DeferredBlock<Block> ALDER_DOOR = registerBlock("alder_door",
-            properties -> new DoorBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR), true);
-    public static final DeferredBlock<Block> ALDER_TRAPDOOR = registerBlock("alder_trapdoor",
-            properties -> new TrapDoorBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR), true);
-
+    // Add this method to your ModBLocks class
+    public static DeferredBlock<?> getField(String fieldName) {
+        try {
+            Field field = ModBLocks.class.getDeclaredField(fieldName);
+            field.setAccessible(true);
+            return (DeferredBlock<?>) field.get(null);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException("Failed to access field: " + fieldName, e);
+        }
+    }
 
 
     // ---------------------------(SIGNS)--------------------------- //
@@ -1392,9 +1270,9 @@ public class ModBLocks {
                 .noCollission()
                 .strength(1.0F)
                 .sound(SoundType.WOOD)
-                .ignitedByLava(), 
+                .ignitedByLava(),
             false);
-    
+
     public static final DeferredBlock<Block> WEIRWOOD_WALL_SIGN = registerBlock("weirwood_wall_sign",
             properties -> new ModWallSignBlock(ModWoodTypes.WEIRWOOD, properties),
             BlockBehaviour.Properties.of()
@@ -1402,9 +1280,9 @@ public class ModBLocks {
                     .noCollission()
                 .strength(1.0F)
                 .sound(SoundType.WOOD)
-                .ignitedByLava(), 
+                .ignitedByLava(),
             false);
-    
+
     public static final DeferredBlock<Block> WEIRWOOD_HANGING_SIGN = registerBlock("weirwood_hanging_sign",
             properties -> new ModHangingSignBlock(ModWoodTypes.WEIRWOOD, properties),
             BlockBehaviour.Properties.of()
@@ -1412,9 +1290,9 @@ public class ModBLocks {
                     .noCollission()
                 .strength(1.0F)
                 .sound(SoundType.WOOD)
-                .ignitedByLava(), 
+                .ignitedByLava(),
             false);
-    
+
     public static final DeferredBlock<Block> WEIRWOOD_WALL_HANGING_SIGN = registerBlock("weirwood_wall_hanging_sign",
             properties -> new ModWallHangingSignBlock(ModWoodTypes.WEIRWOOD, properties),
             BlockBehaviour.Properties.of()
@@ -1422,498 +1300,7 @@ public class ModBLocks {
                     .noCollission()
                 .strength(1.0F)
                 .sound(SoundType.WOOD)
-                .ignitedByLava(), 
-            false);
-    
-    public static final DeferredBlock<Block> PINE_SIGN = registerBlock("pine_sign",
-            properties -> new ModStandingSignBlock(ModWoodTypes.PINE, properties),
-            BlockBehaviour.Properties.of()
-                .mapColor(MapColor.WOOD)
-                    .noCollission()
-                .strength(1.0F)
-                .sound(SoundType.WOOD)
-                .ignitedByLava(), 
-            false);
-    
-    public static final DeferredBlock<Block> PINE_WALL_SIGN = registerBlock("pine_wall_sign",
-            properties -> new ModWallSignBlock(ModWoodTypes.PINE, properties),
-            BlockBehaviour.Properties.of()
-                .mapColor(MapColor.WOOD)
-                    .noCollission()
-                .strength(1.0F)
-                .sound(SoundType.WOOD)
-                .ignitedByLava(), 
-            false);
-    
-    public static final DeferredBlock<Block> PINE_HANGING_SIGN = registerBlock("pine_hanging_sign",
-            properties -> new ModHangingSignBlock(ModWoodTypes.PINE, properties),
-            BlockBehaviour.Properties.of()
-                .mapColor(MapColor.WOOD)
-                    .noCollission()
-                .strength(1.0F)
-                .sound(SoundType.WOOD)
-                .ignitedByLava(), 
-            false);
-    
-    public static final DeferredBlock<Block> PINE_WALL_HANGING_SIGN = registerBlock("pine_wall_hanging_sign",
-            properties -> new ModWallHangingSignBlock(ModWoodTypes.PINE, properties),
-            BlockBehaviour.Properties.of()
-                .mapColor(MapColor.WOOD)
-                    .noCollission()
-                .strength(1.0F)
-                .sound(SoundType.WOOD)
-                .ignitedByLava(), 
-            false);
-
-    // ASH
-    public static final DeferredBlock<Block> ASH_SIGN = registerBlock("ash_sign",
-            properties -> new ModStandingSignBlock(ModWoodTypes.ASH, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> ASH_WALL_SIGN = registerBlock("ash_wall_sign",
-            properties -> new ModWallSignBlock(ModWoodTypes.ASH, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> ASH_HANGING_SIGN = registerBlock("ash_hanging_sign",
-            properties -> new ModHangingSignBlock(ModWoodTypes.ASH, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> ASH_WALL_HANGING_SIGN = registerBlock("ash_wall_hanging_sign",
-            properties -> new ModWallHangingSignBlock(ModWoodTypes.ASH, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    // BEECH
-    public static final DeferredBlock<Block> BEECH_SIGN = registerBlock("beech_sign",
-            properties -> new ModStandingSignBlock(ModWoodTypes.BEECH, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> BEECH_WALL_SIGN = registerBlock("beech_wall_sign",
-            properties -> new ModWallSignBlock(ModWoodTypes.BEECH, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> BEECH_HANGING_SIGN = registerBlock("beech_hanging_sign",
-            properties -> new ModHangingSignBlock(ModWoodTypes.BEECH, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> BEECH_WALL_HANGING_SIGN = registerBlock("beech_wall_hanging_sign",
-            properties -> new ModWallHangingSignBlock(ModWoodTypes.BEECH, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    // CEDAR
-    public static final DeferredBlock<Block> CEDAR_SIGN = registerBlock("cedar_sign",
-            properties -> new ModStandingSignBlock(ModWoodTypes.CEDAR, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> CEDAR_WALL_SIGN = registerBlock("cedar_wall_sign",
-            properties -> new ModWallSignBlock(ModWoodTypes.CEDAR, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> CEDAR_HANGING_SIGN = registerBlock("cedar_hanging_sign",
-            properties -> new ModHangingSignBlock(ModWoodTypes.CEDAR, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> CEDAR_WALL_HANGING_SIGN = registerBlock("cedar_wall_hanging_sign",
-            properties -> new ModWallHangingSignBlock(ModWoodTypes.CEDAR, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    // CHESTNUT
-    public static final DeferredBlock<Block> CHESTNUT_SIGN = registerBlock("chestnut_sign",
-            properties -> new ModStandingSignBlock(ModWoodTypes.CHESTNUT, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> CHESTNUT_WALL_SIGN = registerBlock("chestnut_wall_sign",
-            properties -> new ModWallSignBlock(ModWoodTypes.CHESTNUT, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> CHESTNUT_HANGING_SIGN = registerBlock("chestnut_hanging_sign",
-            properties -> new ModHangingSignBlock(ModWoodTypes.CHESTNUT, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> CHESTNUT_WALL_HANGING_SIGN = registerBlock("chestnut_wall_hanging_sign",
-            properties -> new ModWallHangingSignBlock(ModWoodTypes.CHESTNUT, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    // HAWTHORN
-    public static final DeferredBlock<Block> HAWTHORN_SIGN = registerBlock("hawthorn_sign",
-            properties -> new ModStandingSignBlock(ModWoodTypes.HAWTHORN, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> HAWTHORN_WALL_SIGN = registerBlock("hawthorn_wall_sign",
-            properties -> new ModWallSignBlock(ModWoodTypes.HAWTHORN, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> HAWTHORN_HANGING_SIGN = registerBlock("hawthorn_hanging_sign",
-            properties -> new ModHangingSignBlock(ModWoodTypes.HAWTHORN, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> HAWTHORN_WALL_HANGING_SIGN = registerBlock("hawthorn_wall_hanging_sign",
-            properties -> new ModWallHangingSignBlock(ModWoodTypes.HAWTHORN, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    // IRONWOOD
-    public static final DeferredBlock<Block> IRONWOOD_SIGN = registerBlock("ironwood_sign",
-            properties -> new ModStandingSignBlock(ModWoodTypes.IRONWOOD, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> IRONWOOD_WALL_SIGN = registerBlock("ironwood_wall_sign",
-            properties -> new ModWallSignBlock(ModWoodTypes.IRONWOOD, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> IRONWOOD_HANGING_SIGN = registerBlock("ironwood_hanging_sign",
-            properties -> new ModHangingSignBlock(ModWoodTypes.IRONWOOD, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> IRONWOOD_WALL_HANGING_SIGN = registerBlock("ironwood_wall_hanging_sign",
-            properties -> new ModWallHangingSignBlock(ModWoodTypes.IRONWOOD, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    // SYCAMORE
-    public static final DeferredBlock<Block> SYCAMORE_SIGN = registerBlock("sycamore_sign",
-            properties -> new ModStandingSignBlock(ModWoodTypes.SYCAMORE, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> SYCAMORE_WALL_SIGN = registerBlock("sycamore_wall_sign",
-            properties -> new ModWallSignBlock(ModWoodTypes.SYCAMORE, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> SYCAMORE_HANGING_SIGN = registerBlock("sycamore_hanging_sign",
-            properties -> new ModHangingSignBlock(ModWoodTypes.SYCAMORE, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> SYCAMORE_WALL_HANGING_SIGN = registerBlock("sycamore_wall_hanging_sign",
-            properties -> new ModWallHangingSignBlock(ModWoodTypes.SYCAMORE, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    // BLACKBARK
-    public static final DeferredBlock<Block> BLACKBARK_SIGN = registerBlock("blackbark_sign",
-            properties -> new ModStandingSignBlock(ModWoodTypes.BLACKBARK, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> BLACKBARK_WALL_SIGN = registerBlock("blackbark_wall_sign",
-            properties -> new ModWallSignBlock(ModWoodTypes.BLACKBARK, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> BLACKBARK_HANGING_SIGN = registerBlock("blackbark_hanging_sign",
-            properties -> new ModHangingSignBlock(ModWoodTypes.BLACKBARK, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> BLACKBARK_WALL_HANGING_SIGN = registerBlock("blackbark_wall_hanging_sign",
-            properties -> new ModWallHangingSignBlock(ModWoodTypes.BLACKBARK, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    // ASPEN
-    public static final DeferredBlock<Block> ASPEN_SIGN = registerBlock("aspen_sign",
-            properties -> new ModStandingSignBlock(ModWoodTypes.ASPEN, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> ASPEN_WALL_SIGN = registerBlock("aspen_wall_sign",
-            properties -> new ModWallSignBlock(ModWoodTypes.ASPEN, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> ASPEN_HANGING_SIGN = registerBlock("aspen_hanging_sign",
-            properties -> new ModHangingSignBlock(ModWoodTypes.ASPEN, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> ASPEN_WALL_HANGING_SIGN = registerBlock("aspen_wall_hanging_sign",
-            properties -> new ModWallHangingSignBlock(ModWoodTypes.ASPEN, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    // ALDER
-    public static final DeferredBlock<Block> ALDER_SIGN = registerBlock("alder_sign",
-            properties -> new ModStandingSignBlock(ModWoodTypes.ALDER, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> ALDER_WALL_SIGN = registerBlock("alder_wall_sign",
-            properties -> new ModWallSignBlock(ModWoodTypes.ALDER, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> ALDER_HANGING_SIGN = registerBlock("alder_hanging_sign",
-            properties -> new ModHangingSignBlock(ModWoodTypes.ALDER, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> ALDER_WALL_HANGING_SIGN = registerBlock("alder_wall_hanging_sign",
-            properties -> new ModWallHangingSignBlock(ModWoodTypes.ALDER, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    // SENTINEL
-    public static final DeferredBlock<Block> SENTINEL_SIGN = registerBlock("sentinel_sign",
-            properties -> new ModStandingSignBlock(ModWoodTypes.SENTINEL, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> SENTINEL_WALL_SIGN = registerBlock("sentinel_wall_sign",
-            properties -> new ModWallSignBlock(ModWoodTypes.SENTINEL, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> SENTINEL_HANGING_SIGN = registerBlock("sentinel_hanging_sign",
-            properties -> new ModHangingSignBlock(ModWoodTypes.SENTINEL, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
-            false);
-
-    public static final DeferredBlock<Block> SENTINEL_WALL_HANGING_SIGN = registerBlock("sentinel_wall_hanging_sign",
-            properties -> new ModWallHangingSignBlock(ModWoodTypes.SENTINEL, properties),
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .noCollission()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava(),
+                .ignitedByLava(),
             false);
 
 

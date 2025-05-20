@@ -35,6 +35,9 @@
     "agotmod:blackbark_wall",
     "agotmod:aspen_fence",
     "agotmod:aspen_fence_gate",
-    "agotmod:aspen_wall"
+    "agotmod:aspen_wall",
+    "agotmod:alder_fence",
+    "agotmod:alder_fence_gate",
+    "agotmod:alder_wall"
   ]
 }

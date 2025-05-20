@@ -11,7 +11,6 @@ public class ModWoodTypes {
     public static final WoodType BEECH = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":beech", BlockSetType.OAK));
     public static final WoodType CEDAR = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":cedar", BlockSetType.OAK));
     public static final WoodType CHESTNUT = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":chestnut", BlockSetType.OAK));
-    public static final WoodType FIR = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":fir", BlockSetType.OAK));
     public static final WoodType HAWTHORN = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":hawthorn", BlockSetType.OAK));
     public static final WoodType IRONWOOD = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":ironwood", BlockSetType.OAK));
     public static final WoodType SENTINEL = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":sentinel", BlockSetType.OAK));

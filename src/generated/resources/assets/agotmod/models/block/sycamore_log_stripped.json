@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column",
   "textures": {
-    "end": "agotmod:block/sycamore_log_stripped",
+    "end": "agotmod:block/sycamore_log_top_stripped",
     "side": "agotmod:block/sycamore_log_stripped"
   }
 }

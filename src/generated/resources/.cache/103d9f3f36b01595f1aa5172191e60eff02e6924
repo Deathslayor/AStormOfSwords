@@ -1,4 +1,4 @@
-// 1.21.3	2025-05-03T20:38:45.086607	Registries
+// 1.21.3	2025-05-20T17:53:00.6312741	Registries
 ffe3d912e363745b0043a61fc7b67f35a53f2228 data/agotmod/neoforge/biome_modifier/add_tin_ore.json
 2cd0b3508ddcea7e502f1cf50b1ab12343351354 data/agotmod/neoforge/biome_modifier/create_weirwood_tree.json
 5aa2b77732199476f156ea62152db7e48cd5fb2a data/agotmod/worldgen/biome/barrowlands.json
@@ -218,6 +218,7 @@ e619bae61f4c2c207c869ae60b957227f5610f49 data/agotmod/worldgen/placed_feature/se
 9e7bf3801e41892d4a52cb57d009312cf9a8d837 data/agotmod/worldgen/placed_feature/sentinel.json
 43910fe9ee2b66a33eb15a88848f6f24f1ba023f data/agotmod/worldgen/placed_feature/sentinel_rare.json
 43478d64653c3ff2bff18450226e727ef06e4c21 data/agotmod/worldgen/placed_feature/spiceflower.json
+6387082af11b6579bd85e5a73d9d7401eb4ef117 data/agotmod/worldgen/placed_feature/sycamore.json
 15074165d81eab210bed03ab8b945a3414945ec7 data/agotmod/worldgen/placed_feature/tall_grass.json
 e6c61108a3efde96fc8f04ddf22a03a44c77b681 data/agotmod/worldgen/placed_feature/tansy.json
 78463cc0d525c7368556331e9ba05ff8e3cb0872 data/agotmod/worldgen/placed_feature/thistle.json

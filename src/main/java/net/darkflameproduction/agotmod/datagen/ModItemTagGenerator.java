@@ -5,12 +5,18 @@ import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.darkflameproduction.agotmod.item.ModItems;
 import net.darkflameproduction.agotmod.util.ModTags;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.data.tags.TagsProvider;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.registries.DeferredBlock;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -41,239 +47,113 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModBLocks.WEIRWOOD_WOOD.get().asItem())
                 .add(ModBLocks.STRIPPED_WEIRWOOD_WOOD.get().asItem())
                 .add(ModBLocks.WEIRWOOD_FACE_LOG.get().asItem())
-                //Sycamore
-                .add(ModBLocks.SYCAMORE_LOG.get().asItem())
-                .add(ModBLocks.STRIPPED_SYCAMORE_LOG.get().asItem())
-                .add(ModBLocks.SYCAMORE_WOOD.get().asItem())
-                .add(ModBLocks.STRIPPED_SYCAMORE_WOOD.get().asItem())
-                //Sentinel
-                .add(ModBLocks.STRIPPED_SENTINEL_WOOD.get().asItem())
-                .add(ModBLocks.SENTINEL_LOG.get().asItem())
-                .add(ModBLocks.STRIPPED_SENTINEL_LOG.get().asItem())
-                .add(ModBLocks.SENTINEL_WOOD.get().asItem())
-                //Pine
-                .add(ModBLocks.STRIPPED_PINE_WOOD.get().asItem())
-                .add(ModBLocks.PINE_LOG.get().asItem())
-                .add(ModBLocks.STRIPPED_PINE_LOG.get().asItem())
-                .add(ModBLocks.PINE_WOOD.get().asItem())
-                //Ironwood
-                .add(ModBLocks.STRIPPED_IRONWOOD_WOOD.get().asItem())
-                .add(ModBLocks.IRONWOOD_LOG.get().asItem())
-                .add(ModBLocks.STRIPPED_IRONWOOD_LOG.get().asItem())
-                .add(ModBLocks.IRONWOOD_WOOD.get().asItem())
-                //Hawthorn
-                .add(ModBLocks.STRIPPED_HAWTHORN_WOOD.get().asItem())
-                .add(ModBLocks.HAWTHORN_LOG.get().asItem())
-                .add(ModBLocks.STRIPPED_HAWTHORN_LOG.get().asItem())
-                .add(ModBLocks.HAWTHORN_WOOD.get().asItem())
-                //Chestnut
-                .add(ModBLocks.STRIPPED_CHESTNUT_WOOD.get().asItem())
-                .add(ModBLocks.CHESTNUT_LOG.get().asItem())
-                .add(ModBLocks.STRIPPED_CHESTNUT_LOG.get().asItem())
-                .add(ModBLocks.CHESTNUT_WOOD.get().asItem())
-                //Cedar
-                .add(ModBLocks.STRIPPED_CEDAR_WOOD.get().asItem())
-                .add(ModBLocks.CEDAR_LOG.get().asItem())
-                .add(ModBLocks.STRIPPED_CEDAR_LOG.get().asItem())
-                .add(ModBLocks.CEDAR_WOOD.get().asItem())
-                //beech
-                .add(ModBLocks.STRIPPED_BEECH_WOOD.get().asItem())
-                .add(ModBLocks.BEECH_LOG.get().asItem())
-                .add(ModBLocks.STRIPPED_BEECH_LOG.get().asItem())
-                .add(ModBLocks.BEECH_WOOD.get().asItem())
-                //ash
-                .add(ModBLocks.STRIPPED_ASH_WOOD.get().asItem())
-                .add(ModBLocks.ASH_LOG.get().asItem())
-                .add(ModBLocks.STRIPPED_ASH_LOG.get().asItem())
-                .add(ModBLocks.ASH_WOOD.get().asItem())
-                //Blackbark
-                .add(ModBLocks.STRIPPED_BLACKBARK_WOOD.get().asItem())
-                .add(ModBLocks.BLACKBARK_LOG.get().asItem())
-                .add(ModBLocks.STRIPPED_BLACKBARK_LOG.get().asItem())
-                .add(ModBLocks.BLACKBARK_WOOD.get().asItem())
-                //Aspen
-                .add(ModBLocks.STRIPPED_ASPEN_WOOD.get().asItem())
-                .add(ModBLocks.ASPEN_LOG.get().asItem())
-                .add(ModBLocks.STRIPPED_ASPEN_LOG.get().asItem())
-                .add(ModBLocks.ASPEN_WOOD.get().asItem())
-                //Aspen
-                .add(ModBLocks.STRIPPED_ALDER_WOOD.get().asItem())
-                .add(ModBLocks.ALDER_LOG.get().asItem())
-                .add(ModBLocks.STRIPPED_ALDER_LOG.get().asItem())
-                .add(ModBLocks.ALDER_WOOD.get().asItem())
-
-
-        ;
-
+                ;
         this.tag(ItemTags.PLANKS)
-                .add(ModBLocks.WEIRWOOD_PLANKS.get().asItem())
-                .add(ModBLocks.SYCAMORE_PLANKS.get().asItem())
-                .add(ModBLocks.SENTINEL_PLANKS.get().asItem())
-                .add(ModBLocks.PINE_PLANKS.get().asItem())
-                .add(ModBLocks.IRONWOOD_PLANKS.get().asItem())
-                .add(ModBLocks.HAWTHORN_PLANKS.get().asItem())
-                .add(ModBLocks.CHESTNUT_PLANKS.get().asItem())
-                .add(ModBLocks.CEDAR_PLANKS.get().asItem())
-                .add(ModBLocks.BEECH_PLANKS.get().asItem())
-                .add(ModBLocks.ASH_PLANKS.get().asItem())
-                .add(ModBLocks.BLACKBARK_PLANKS.get().asItem())
-                .add(ModBLocks.ASPEN_PLANKS.get().asItem());
+                .add(ModBLocks.WEIRWOOD_PLANKS.get().asItem());
 
-        // STAIRS
         this.tag(ItemTags.WOODEN_STAIRS)
-                .add(ModBLocks.WEIRWOOD_STAIRS.get().asItem())
-                .add(ModBLocks.SYCAMORE_STAIRS.get().asItem())
-                .add(ModBLocks.SENTINEL_STAIRS.get().asItem())
-                .add(ModBLocks.PINE_STAIRS.get().asItem())
-                .add(ModBLocks.IRONWOOD_STAIRS.get().asItem())
-                .add(ModBLocks.HAWTHORN_STAIRS.get().asItem())
-                .add(ModBLocks.CHESTNUT_STAIRS.get().asItem())
-                .add(ModBLocks.CEDAR_STAIRS.get().asItem())
-                .add(ModBLocks.BEECH_STAIRS.get().asItem())
-                .add(ModBLocks.ASH_STAIRS.get().asItem())
-                .add(ModBLocks.BLACKBARK_STAIRS.get().asItem())
-                .add(ModBLocks.ASPEN_STAIRS.get().asItem());
-
-// BUTTONS
+                .add(ModBLocks.WEIRWOOD_STAIRS.get().asItem());
         this.tag(ItemTags.WOODEN_BUTTONS)
-                .add(ModBLocks.WEIRWOOD_BUTTON.get().asItem())
-                .add(ModBLocks.SYCAMORE_BUTTON.get().asItem())
-                .add(ModBLocks.SENTINEL_BUTTON.get().asItem())
-                .add(ModBLocks.PINE_BUTTON.get().asItem())
-                .add(ModBLocks.IRONWOOD_BUTTON.get().asItem())
-                .add(ModBLocks.HAWTHORN_BUTTON.get().asItem())
-                .add(ModBLocks.CHESTNUT_BUTTON.get().asItem())
-                .add(ModBLocks.CEDAR_BUTTON.get().asItem())
-                .add(ModBLocks.BEECH_BUTTON.get().asItem())
-                .add(ModBLocks.ASH_BUTTON.get().asItem())
-                .add(ModBLocks.BLACKBARK_BUTTON.get().asItem())
-                .add(ModBLocks.ASPEN_BUTTON.get().asItem());
-
-// DOORS
+                .add(ModBLocks.WEIRWOOD_BUTTON.get().asItem());
         this.tag(ItemTags.WOODEN_DOORS)
-                .add(ModBLocks.WEIRWOOD_DOOR.get().asItem())
-                .add(ModBLocks.SYCAMORE_DOOR.get().asItem())
-                .add(ModBLocks.SENTINEL_DOOR.get().asItem())
-                .add(ModBLocks.PINE_DOOR.get().asItem())
-                .add(ModBLocks.IRONWOOD_DOOR.get().asItem())
-                .add(ModBLocks.HAWTHORN_DOOR.get().asItem())
-                .add(ModBLocks.CHESTNUT_DOOR.get().asItem())
-                .add(ModBLocks.CEDAR_DOOR.get().asItem())
-                .add(ModBLocks.BEECH_DOOR.get().asItem())
-                .add(ModBLocks.ASH_DOOR.get().asItem())
-                .add(ModBLocks.BLACKBARK_DOOR.get().asItem())
-                .add(ModBLocks.ASPEN_DOOR.get().asItem());
-
-// SLABS
-        this.tag(ItemTags.WOODEN_SLABS)
-                .add(ModBLocks.WEIRWOOD_SLAB.get().asItem())
-                .add(ModBLocks.SYCAMORE_SLAB.get().asItem())
-                .add(ModBLocks.SENTINEL_SLAB.get().asItem())
-                .add(ModBLocks.PINE_SLAB.get().asItem())
-                .add(ModBLocks.IRONWOOD_SLAB.get().asItem())
-                .add(ModBLocks.HAWTHORN_SLAB.get().asItem())
-                .add(ModBLocks.CHESTNUT_SLAB.get().asItem())
-                .add(ModBLocks.CEDAR_SLAB.get().asItem())
-                .add(ModBLocks.BEECH_SLAB.get().asItem())
-                .add(ModBLocks.ASH_SLAB.get().asItem())
-                .add(ModBLocks.BLACKBARK_SLAB.get().asItem())
-                .add(ModBLocks.ASPEN_SLAB.get().asItem());
-
-// PRESSURE PLATES
+                .add(ModBLocks.WEIRWOOD_DOOR.get().asItem());
         this.tag(ItemTags.WOODEN_PRESSURE_PLATES)
-                .add(ModBLocks.WEIRWOOD_PRESSURE_PLATE.get().asItem())
-                .add(ModBLocks.SYCAMORE_PRESSURE_PLATE.get().asItem())
-                .add(ModBLocks.SENTINEL_PRESSURE_PLATE.get().asItem())
-                .add(ModBLocks.PINE_PRESSURE_PLATE.get().asItem())
-                .add(ModBLocks.IRONWOOD_PRESSURE_PLATE.get().asItem())
-                .add(ModBLocks.HAWTHORN_PRESSURE_PLATE.get().asItem())
-                .add(ModBLocks.CHESTNUT_PRESSURE_PLATE.get().asItem())
-                .add(ModBLocks.CEDAR_PRESSURE_PLATE.get().asItem())
-                .add(ModBLocks.BEECH_PRESSURE_PLATE.get().asItem())
-                .add(ModBLocks.ASH_PRESSURE_PLATE.get().asItem())
-                .add(ModBLocks.BLACKBARK_PRESSURE_PLATE.get().asItem())
-                .add(ModBLocks.ASPEN_PRESSURE_PLATE.get().asItem());
-
-// FENCES
-        // FENCES, FENCE GATES, and WALLS
+                .add(ModBLocks.WEIRWOOD_PRESSURE_PLATE.get().asItem());
+        this.tag(ItemTags.WOODEN_SLABS)
+                .add(ModBLocks.WEIRWOOD_SLAB.get().asItem());
         this.tag(ItemTags.WOODEN_FENCES)
                 .add(ModBLocks.WEIRWOOD_FENCE.get().asItem())
                 .add(ModBLocks.WEIRWOOD_FENCE_GATE.get().asItem())
-                .add(ModBLocks.WEIRWOOD_WALL.get().asItem())
-
-                .add(ModBLocks.SYCAMORE_FENCE.get().asItem())
-                .add(ModBLocks.SYCAMORE_FENCE_GATE.get().asItem())
-                .add(ModBLocks.SYCAMORE_WALL.get().asItem())
-
-                .add(ModBLocks.SENTINEL_FENCE.get().asItem())
-                .add(ModBLocks.SENTINEL_FENCE_GATE.get().asItem())
-                .add(ModBLocks.SENTINEL_WALL.get().asItem())
-
-                .add(ModBLocks.PINE_FENCE.get().asItem())
-                .add(ModBLocks.PINE_FENCE_GATE.get().asItem())
-                .add(ModBLocks.PINE_WALL.get().asItem())
-
-                .add(ModBLocks.IRONWOOD_FENCE.get().asItem())
-                .add(ModBLocks.IRONWOOD_FENCE_GATE.get().asItem())
-                .add(ModBLocks.IRONWOOD_WALL.get().asItem())
-
-                .add(ModBLocks.HAWTHORN_FENCE.get().asItem())
-                .add(ModBLocks.HAWTHORN_FENCE_GATE.get().asItem())
-                .add(ModBLocks.HAWTHORN_WALL.get().asItem())
-
-                .add(ModBLocks.CHESTNUT_FENCE.get().asItem())
-                .add(ModBLocks.CHESTNUT_FENCE_GATE.get().asItem())
-                .add(ModBLocks.CHESTNUT_WALL.get().asItem())
-
-                .add(ModBLocks.CEDAR_FENCE.get().asItem())
-                .add(ModBLocks.CEDAR_FENCE_GATE.get().asItem())
-                .add(ModBLocks.CEDAR_WALL.get().asItem())
-
-                .add(ModBLocks.BEECH_FENCE.get().asItem())
-                .add(ModBLocks.BEECH_FENCE_GATE.get().asItem())
-                .add(ModBLocks.BEECH_WALL.get().asItem())
-
-                .add(ModBLocks.ASH_FENCE.get().asItem())
-                .add(ModBLocks.ASH_FENCE_GATE.get().asItem())
-                .add(ModBLocks.ASH_WALL.get().asItem())
-
-                .add(ModBLocks.BLACKBARK_FENCE.get().asItem())
-                .add(ModBLocks.BLACKBARK_FENCE_GATE.get().asItem())
-                .add(ModBLocks.BLACKBARK_WALL.get().asItem())
-
-                .add(ModBLocks.ASPEN_FENCE.get().asItem())
-                .add(ModBLocks.ASPEN_FENCE_GATE.get().asItem())
-                .add(ModBLocks.ASPEN_WALL.get().asItem());
-
-
-// TRAPDOORS
+                .add(ModBLocks.WEIRWOOD_WALL.get().asItem());
         this.tag(ItemTags.WOODEN_TRAPDOORS)
-                .add(ModBLocks.WEIRWOOD_TRAPDOOR.get().asItem())
-                .add(ModBLocks.SYCAMORE_TRAPDOOR.get().asItem())
-                .add(ModBLocks.SENTINEL_TRAPDOOR.get().asItem())
-                .add(ModBLocks.PINE_TRAPDOOR.get().asItem())
-                .add(ModBLocks.IRONWOOD_TRAPDOOR.get().asItem())
-                .add(ModBLocks.HAWTHORN_TRAPDOOR.get().asItem())
-                .add(ModBLocks.CHESTNUT_TRAPDOOR.get().asItem())
-                .add(ModBLocks.CEDAR_TRAPDOOR.get().asItem())
-                .add(ModBLocks.BEECH_TRAPDOOR.get().asItem())
-                .add(ModBLocks.ASH_TRAPDOOR.get().asItem())
-                .add(ModBLocks.BLACKBARK_TRAPDOOR.get().asItem())
-                .add(ModBLocks.ASPEN_TRAPDOOR.get().asItem());
-
+                .add(ModBLocks.WEIRWOOD_TRAPDOOR.get().asItem());
         this.tag(ItemTags.LEAVES)
-                .add(ModBLocks.WEIRWOOD_LEAVES.get().asItem())
-                .add(ModBLocks.SYCAMORE_LEAVES.get().asItem())
-                .add(ModBLocks.SENTINEL_LEAVES.get().asItem())
-                .add(ModBLocks.PINE_LEAVES.get().asItem())
-                .add(ModBLocks.IRONWOOD_LEAVES.get().asItem())
-                .add(ModBLocks.HAWTHORN_LEAVES.get().asItem())
-                .add(ModBLocks.CHESTNUT_LEAVES.get().asItem())
-                .add(ModBLocks.CEDAR_LEAVES.get().asItem())
-                .add(ModBLocks.BEECH_LEAVES.get().asItem())
-                .add(ModBLocks.ASH_LEAVES.get().asItem())
-                .add(ModBLocks.BLACKBARK_LEAVES.get().asItem())
-                .add(ModBLocks.ASPEN_LEAVES.get().asItem());
+                .add(ModBLocks.WEIRWOOD_LEAVES.get().asItem());
+
+        String[] woodTypes = {
+                "sycamore",
+                "sentinel",
+                "pine",
+                "ironwood",
+                "hawthorn",
+                "chestnut",
+                "cedar",
+                "beech",
+                "ash",
+                "blackbark",
+                "aspen",
+                "alder"
+        };
+
+// LOGS_THAT_BURN tag
+        TagsProvider.TagAppender<Item> logsThatBurnTag = this.tag(ItemTags.LOGS_THAT_BURN);
+        for (String woodType : woodTypes) {
+            addItemToTag(logsThatBurnTag, ModBLocks.LOGS.get(woodType));
+            addItemToTag(logsThatBurnTag, ModBLocks.STRIPPED_LOGS.get(woodType));
+            addItemToTag(logsThatBurnTag, ModBLocks.WOODS.get(woodType));
+            addItemToTag(logsThatBurnTag, ModBLocks.STRIPPED_WOODS.get(woodType));
+        }
+
+// PLANKS tag
+        TagsProvider.TagAppender<Item> planksTag = this.tag(ItemTags.PLANKS);
+        for (String woodType : woodTypes) {
+            addItemToTag(planksTag, ModBLocks.PLANKS.get(woodType));
+        }
+
+// WOODEN_STAIRS tag
+        TagsProvider.TagAppender<Item> stairsTag = this.tag(ItemTags.WOODEN_STAIRS);
+        for (String woodType : woodTypes) {
+            addItemToTag(stairsTag, ModBLocks.STAIRS.get(woodType));
+        }
+
+// WOODEN_BUTTONS tag
+        TagsProvider.TagAppender<Item> buttonsTag = this.tag(ItemTags.WOODEN_BUTTONS);
+        for (String woodType : woodTypes) {
+            addItemToTag(buttonsTag, ModBLocks.BUTTONS.get(woodType));
+        }
+
+// WOODEN_DOORS tag
+        TagsProvider.TagAppender<Item> doorsTag = this.tag(ItemTags.WOODEN_DOORS);
+        for (String woodType : woodTypes) {
+            addItemToTag(doorsTag, ModBLocks.DOORS.get(woodType));
+        }
+
+// WOODEN_SLABS tag
+        TagsProvider.TagAppender<Item> slabsTag = this.tag(ItemTags.WOODEN_SLABS);
+        for (String woodType : woodTypes) {
+            addItemToTag(slabsTag, ModBLocks.SLABS.get(woodType));
+        }
+
+// WOODEN_PRESSURE_PLATES tag
+        TagsProvider.TagAppender<Item> pressurePlatesTag = this.tag(ItemTags.WOODEN_PRESSURE_PLATES);
+        for (String woodType : woodTypes) {
+            addItemToTag(pressurePlatesTag, ModBLocks.PRESSURE_PLATES.get(woodType));
+        }
+
+// WOODEN_FENCES tag (including fences, fence gates, and walls)
+        TagsProvider.TagAppender<Item> fencesTag = this.tag(ItemTags.WOODEN_FENCES);
+        for (String woodType : woodTypes) {
+            addItemToTag(fencesTag, ModBLocks.FENCES.get(woodType));
+            addItemToTag(fencesTag, ModBLocks.FENCE_GATES.get(woodType));
+            addItemToTag(fencesTag, ModBLocks.WALLS.get(woodType));
+        }
+
+// WOODEN_TRAPDOORS tag
+        TagsProvider.TagAppender<Item> trapdoorsTag = this.tag(ItemTags.WOODEN_TRAPDOORS);
+        for (String woodType : woodTypes) {
+            addItemToTag(trapdoorsTag, ModBLocks.TRAPDOORS.get(woodType));
+        }
+
+// LEAVES tag
+        TagsProvider.TagAppender<Item> leavesTag = this.tag(ItemTags.LEAVES);
+        for (String woodType : woodTypes) {
+            if (ModBLocks.LEAVES.containsKey(woodType)) {
+                addItemToTag(leavesTag, ModBLocks.LEAVES.get(woodType));
+            }
+        }
+
+// Helper method to add a block's item form to an item tag
+
 
 
         this.tag(ItemTags.FLOWERS)
@@ -519,5 +399,11 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         this.tag(ModTags.Items.DRAGONGLASS_TOOL_MATERIALS);
         this.tag(ModTags.Items.BRONZE_TOOL_MATERIALS).add(ModItems.BRONZE_INGOT.get());
         this.tag(ModTags.Items.STEEL_TOOL_MATERIALS).add(ModItems.STEEL_INGOT.get());
+    }
+    private <T extends Block> void addItemToTag(TagsProvider.TagAppender<Item> tag, DeferredBlock<T> block) {
+        // Create a ResourceKey from the DeferredBlock for its item
+        ResourceLocation id = block.getId();
+        ResourceKey<Item> key = ResourceKey.create(Registries.ITEM, id);
+        tag.add(key);
     }
 }

@@ -199,289 +199,63 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(ModBLocks.WEIRWOOD_SLAB.get(),
                 block -> createSlabItemTable(ModBLocks.WEIRWOOD_SLAB.get()));
 
-        //Sycamore
-        this.dropSelf(ModBLocks.SYCAMORE_LOG.get());
-        this.dropSelf(ModBLocks.STRIPPED_SYCAMORE_LOG.get());
-        this.dropSelf(ModBLocks.SYCAMORE_WOOD.get());
-        this.dropSelf(ModBLocks.STRIPPED_SYCAMORE_WOOD.get());
-        this.dropSelf(ModBLocks.SYCAMORE_PLANKS.get());
-        this.dropSelf(ModBLocks.SYCAMORE_SAPLING.get());
+        // Define the wood types
+        String[] woodTypes = {
+                "sycamore",
+                "sentinel",
+                "pine",
+                "ironwood",
+                "hawthorn",
+                "chestnut",
+                "cedar",
+                "beech",
+                "ash",
+                "blackbark",
+                "aspen",
+                "alder"
+        };
 
-        this.add(ModBLocks.SYCAMORE_LEAVES.get(), block -> createLeavesDrops(block, ModBLocks.SYCAMORE_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+// Register loot tables for all wood blocks
+        for (String woodType : woodTypes) {
+            // Basic blocks that drop themselves
+            this.dropSelf(ModBLocks.LOGS.get(woodType).get());
+            this.dropSelf(ModBLocks.STRIPPED_LOGS.get(woodType).get());
+            this.dropSelf(ModBLocks.WOODS.get(woodType).get());
+            this.dropSelf(ModBLocks.STRIPPED_WOODS.get(woodType).get());
+            this.dropSelf(ModBLocks.PLANKS.get(woodType).get());
+            this.dropSelf(ModBLocks.SAPLINGS.get(woodType).get());
 
-        this.dropSelf(ModBLocks.SYCAMORE_FENCE.get());
-        this.dropSelf(ModBLocks.SYCAMORE_WALL.get());
-        this.dropSelf(ModBLocks.SYCAMORE_STAIRS.get());
-        this.dropSelf(ModBLocks.SYCAMORE_BUTTON.get());
-        this.dropSelf(ModBLocks.SYCAMORE_PRESSURE_PLATE.get());
-        this.dropSelf(ModBLocks.SYCAMORE_TRAPDOOR.get());
-        this.dropSelf(ModBLocks.SYCAMORE_FENCE_GATE.get());
+            // Leaves with sapling drops
+            this.add(ModBLocks.LEAVES.get(woodType).get(),
+                    block -> createLeavesDrops(block,
+                            ModBLocks.SAPLINGS.get(woodType).get(),
+                            NORMAL_LEAVES_SAPLING_CHANCES));
 
-        this.add(ModBLocks.SYCAMORE_DOOR.get(),
-                block -> createDoorTable(ModBLocks.SYCAMORE_DOOR.get()));
-        this.add(ModBLocks.SYCAMORE_SLAB.get(),
-                block -> createSlabItemTable(ModBLocks.SYCAMORE_SLAB.get()));
+            // More blocks that drop themselves
+            this.dropSelf(ModBLocks.FENCES.get(woodType).get());
+            this.dropSelf(ModBLocks.WALLS.get(woodType).get());
+            this.dropSelf(ModBLocks.STAIRS.get(woodType).get());
+            this.dropSelf(ModBLocks.BUTTONS.get(woodType).get());
+            this.dropSelf(ModBLocks.PRESSURE_PLATES.get(woodType).get());
+            this.dropSelf(ModBLocks.TRAPDOORS.get(woodType).get());
+            this.dropSelf(ModBLocks.FENCE_GATES.get(woodType).get());
 
-        //Sentinel
-        this.dropSelf(ModBLocks.SENTINEL_LOG.get());
-        this.dropSelf(ModBLocks.STRIPPED_SENTINEL_LOG.get());
-        this.dropSelf(ModBLocks.SENTINEL_WOOD.get());
-        this.dropSelf(ModBLocks.STRIPPED_SENTINEL_WOOD.get());
-        this.dropSelf(ModBLocks.SENTINEL_PLANKS.get());
-        this.dropSelf(ModBLocks.SENTINEL_SAPLING.get());
+            // Special drop handlers for doors and slabs
+            this.add(ModBLocks.DOORS.get(woodType).get(),
+                    block -> createDoorTable(ModBLocks.DOORS.get(woodType).get()));
+            this.add(ModBLocks.SLABS.get(woodType).get(),
+                    block -> createSlabItemTable(ModBLocks.SLABS.get(woodType).get()));
 
-        this.add(ModBLocks.SENTINEL_LEAVES.get(), block -> createLeavesDrops(block, ModBLocks.SENTINEL_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
-
-        this.dropSelf(ModBLocks.SENTINEL_FENCE.get());
-        this.dropSelf(ModBLocks.SENTINEL_WALL.get());
-        this.dropSelf(ModBLocks.SENTINEL_STAIRS.get());
-        this.dropSelf(ModBLocks.SENTINEL_BUTTON.get());
-        this.dropSelf(ModBLocks.SENTINEL_PRESSURE_PLATE.get());
-        this.dropSelf(ModBLocks.SENTINEL_TRAPDOOR.get());
-        this.dropSelf(ModBLocks.SENTINEL_FENCE_GATE.get());
-
-        this.add(ModBLocks.SENTINEL_DOOR.get(),
-                block -> createDoorTable(ModBLocks.SENTINEL_DOOR.get()));
-        this.add(ModBLocks.SENTINEL_SLAB.get(),
-                block -> createSlabItemTable(ModBLocks.SENTINEL_SLAB.get()));
-
-
-        //Pine
-        this.dropSelf(ModBLocks.PINE_LOG.get());
-        this.dropSelf(ModBLocks.STRIPPED_PINE_LOG.get());
-        this.dropSelf(ModBLocks.PINE_WOOD.get());
-        this.dropSelf(ModBLocks.STRIPPED_PINE_WOOD.get());
-        this.dropSelf(ModBLocks.PINE_PLANKS.get());
-        this.dropSelf(ModBLocks.PINE_SAPLING.get());
-
-        this.add(ModBLocks.PINE_LEAVES.get(), block -> createLeavesDrops(block, ModBLocks.PINE_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
-
-        this.dropSelf(ModBLocks.PINE_FENCE.get());
-        this.dropSelf(ModBLocks.PINE_WALL.get());
-        this.dropSelf(ModBLocks.PINE_STAIRS.get());
-        this.dropSelf(ModBLocks.PINE_BUTTON.get());
-        this.dropSelf(ModBLocks.PINE_PRESSURE_PLATE.get());
-        this.dropSelf(ModBLocks.PINE_TRAPDOOR.get());
-        this.dropSelf(ModBLocks.PINE_FENCE_GATE.get());
-
-        this.add(ModBLocks.PINE_DOOR.get(),
-                block -> createDoorTable(ModBLocks.PINE_DOOR.get()));
-        this.add(ModBLocks.PINE_SLAB.get(),
-                block -> createSlabItemTable(ModBLocks.PINE_SLAB.get()));
-
-        //Ironwood
-        this.dropSelf(ModBLocks.IRONWOOD_LOG.get());
-        this.dropSelf(ModBLocks.STRIPPED_IRONWOOD_LOG.get());
-        this.dropSelf(ModBLocks.IRONWOOD_WOOD.get());
-        this.dropSelf(ModBLocks.STRIPPED_IRONWOOD_WOOD.get());
-        this.dropSelf(ModBLocks.IRONWOOD_PLANKS.get());
-        this.dropSelf(ModBLocks.IRONWOOD_SAPLING.get());
-
-        this.add(ModBLocks.IRONWOOD_LEAVES.get(), block -> createLeavesDrops(block, ModBLocks.IRONWOOD_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
-
-        this.dropSelf(ModBLocks.IRONWOOD_FENCE.get());
-        this.dropSelf(ModBLocks.IRONWOOD_WALL.get());
-        this.dropSelf(ModBLocks.IRONWOOD_STAIRS.get());
-        this.dropSelf(ModBLocks.IRONWOOD_BUTTON.get());
-        this.dropSelf(ModBLocks.IRONWOOD_PRESSURE_PLATE.get());
-        this.dropSelf(ModBLocks.IRONWOOD_TRAPDOOR.get());
-        this.dropSelf(ModBLocks.IRONWOOD_FENCE_GATE.get());
-
-        this.add(ModBLocks.IRONWOOD_DOOR.get(),
-                block -> createDoorTable(ModBLocks.IRONWOOD_DOOR.get()));
-        this.add(ModBLocks.IRONWOOD_SLAB.get(),
-                block -> createSlabItemTable(ModBLocks.IRONWOOD_SLAB.get()));
-
-        //Hawthorn
-        this.dropSelf(ModBLocks.HAWTHORN_LOG.get());
-        this.dropSelf(ModBLocks.STRIPPED_HAWTHORN_LOG.get());
-        this.dropSelf(ModBLocks.HAWTHORN_WOOD.get());
-        this.dropSelf(ModBLocks.STRIPPED_HAWTHORN_WOOD.get());
-        this.dropSelf(ModBLocks.HAWTHORN_PLANKS.get());
-        this.dropSelf(ModBLocks.HAWTHORN_SAPLING.get());
-
-        this.add(ModBLocks.HAWTHORN_LEAVES.get(), block -> createLeavesDrops(block, ModBLocks.HAWTHORN_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
-
-        this.dropSelf(ModBLocks.HAWTHORN_FENCE.get());
-        this.dropSelf(ModBLocks.HAWTHORN_WALL.get());
-        this.dropSelf(ModBLocks.HAWTHORN_STAIRS.get());
-        this.dropSelf(ModBLocks.HAWTHORN_BUTTON.get());
-        this.dropSelf(ModBLocks.HAWTHORN_PRESSURE_PLATE.get());
-        this.dropSelf(ModBLocks.HAWTHORN_TRAPDOOR.get());
-        this.dropSelf(ModBLocks.HAWTHORN_FENCE_GATE.get());
-
-        this.add(ModBLocks.HAWTHORN_DOOR.get(),
-                block -> createDoorTable(ModBLocks.HAWTHORN_DOOR.get()));
-        this.add(ModBLocks.HAWTHORN_SLAB.get(),
-                block -> createSlabItemTable(ModBLocks.HAWTHORN_SLAB.get()));
-
-
-        //Chestnut
-        this.dropSelf(ModBLocks.CHESTNUT_LOG.get());
-        this.dropSelf(ModBLocks.STRIPPED_CHESTNUT_LOG.get());
-        this.dropSelf(ModBLocks.CHESTNUT_WOOD.get());
-        this.dropSelf(ModBLocks.STRIPPED_CHESTNUT_WOOD.get());
-        this.dropSelf(ModBLocks.CHESTNUT_PLANKS.get());
-        this.dropSelf(ModBLocks.CHESTNUT_SAPLING.get());
-
-        this.add(ModBLocks.CHESTNUT_LEAVES.get(), block -> createLeavesDrops(block, ModBLocks.CHESTNUT_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
-
-        this.dropSelf(ModBLocks.CHESTNUT_FENCE.get());
-        this.dropSelf(ModBLocks.CHESTNUT_WALL.get());
-        this.dropSelf(ModBLocks.CHESTNUT_STAIRS.get());
-        this.dropSelf(ModBLocks.CHESTNUT_BUTTON.get());
-        this.dropSelf(ModBLocks.CHESTNUT_PRESSURE_PLATE.get());
-        this.dropSelf(ModBLocks.CHESTNUT_TRAPDOOR.get());
-        this.dropSelf(ModBLocks.CHESTNUT_FENCE_GATE.get());
-
-        this.add(ModBLocks.CHESTNUT_DOOR.get(),
-                block -> createDoorTable(ModBLocks.CHESTNUT_DOOR.get()));
-        this.add(ModBLocks.CHESTNUT_SLAB.get(),
-                block -> createSlabItemTable(ModBLocks.CHESTNUT_SLAB.get()));
-
-
-        //Cedar
-        this.dropSelf(ModBLocks.CEDAR_LOG.get());
-        this.dropSelf(ModBLocks.STRIPPED_CEDAR_LOG.get());
-        this.dropSelf(ModBLocks.CEDAR_WOOD.get());
-        this.dropSelf(ModBLocks.STRIPPED_CEDAR_WOOD.get());
-        this.dropSelf(ModBLocks.CEDAR_PLANKS.get());
-        this.dropSelf(ModBLocks.CEDAR_SAPLING.get());
-
-        this.add(ModBLocks.CEDAR_LEAVES.get(), block -> createLeavesDrops(block, ModBLocks.CEDAR_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
-
-        this.dropSelf(ModBLocks.CEDAR_FENCE.get());
-        this.dropSelf(ModBLocks.CEDAR_WALL.get());
-        this.dropSelf(ModBLocks.CEDAR_STAIRS.get());
-        this.dropSelf(ModBLocks.CEDAR_BUTTON.get());
-        this.dropSelf(ModBLocks.CEDAR_PRESSURE_PLATE.get());
-        this.dropSelf(ModBLocks.CEDAR_TRAPDOOR.get());
-        this.dropSelf(ModBLocks.CEDAR_FENCE_GATE.get());
-
-        this.add(ModBLocks.CEDAR_DOOR.get(),
-                block -> createDoorTable(ModBLocks.CEDAR_DOOR.get()));
-        this.add(ModBLocks.CEDAR_SLAB.get(),
-                block -> createSlabItemTable(ModBLocks.CEDAR_SLAB.get()));
-
-
-        //Beech
-        this.dropSelf(ModBLocks.BEECH_LOG.get());
-        this.dropSelf(ModBLocks.STRIPPED_BEECH_LOG.get());
-        this.dropSelf(ModBLocks.BEECH_WOOD.get());
-        this.dropSelf(ModBLocks.STRIPPED_BEECH_WOOD.get());
-        this.dropSelf(ModBLocks.BEECH_PLANKS.get());
-        this.dropSelf(ModBLocks.BEECH_SAPLING.get());
-
-        this.add(ModBLocks.BEECH_LEAVES.get(), block -> createLeavesDrops(block, ModBLocks.BEECH_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
-
-        this.dropSelf(ModBLocks.BEECH_FENCE.get());
-        this.dropSelf(ModBLocks.BEECH_WALL.get());
-        this.dropSelf(ModBLocks.BEECH_STAIRS.get());
-        this.dropSelf(ModBLocks.BEECH_BUTTON.get());
-        this.dropSelf(ModBLocks.BEECH_PRESSURE_PLATE.get());
-        this.dropSelf(ModBLocks.BEECH_TRAPDOOR.get());
-        this.dropSelf(ModBLocks.BEECH_FENCE_GATE.get());
-
-        this.add(ModBLocks.BEECH_DOOR.get(),
-                block -> createDoorTable(ModBLocks.BEECH_DOOR.get()));
-        this.add(ModBLocks.BEECH_SLAB.get(),
-                block -> createSlabItemTable(ModBLocks.BEECH_SLAB.get()));
-
-
-        //Ash
-        this.dropSelf(ModBLocks.ASH_LOG.get());
-        this.dropSelf(ModBLocks.STRIPPED_ASH_LOG.get());
-        this.dropSelf(ModBLocks.ASH_WOOD.get());
-        this.dropSelf(ModBLocks.STRIPPED_ASH_WOOD.get());
-        this.dropSelf(ModBLocks.ASH_PLANKS.get());
-        this.dropSelf(ModBLocks.ASH_SAPLING.get());
-
-        this.add(ModBLocks.ASH_LEAVES.get(), block -> createLeavesDrops(block, ModBLocks.ASH_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
-
-        this.dropSelf(ModBLocks.ASH_FENCE.get());
-        this.dropSelf(ModBLocks.ASH_WALL.get());
-        this.dropSelf(ModBLocks.ASH_STAIRS.get());
-        this.dropSelf(ModBLocks.ASH_BUTTON.get());
-        this.dropSelf(ModBLocks.ASH_PRESSURE_PLATE.get());
-        this.dropSelf(ModBLocks.ASH_TRAPDOOR.get());
-        this.dropSelf(ModBLocks.ASH_FENCE_GATE.get());
-
-        this.add(ModBLocks.ASH_DOOR.get(),
-                block -> createDoorTable(ModBLocks.ASH_DOOR.get()));
-        this.add(ModBLocks.ASH_SLAB.get(),
-                block -> createSlabItemTable(ModBLocks.ASH_SLAB.get()));
-
-
-        //Blackbark
-        this.dropSelf(ModBLocks.BLACKBARK_LOG.get());
-        this.dropSelf(ModBLocks.STRIPPED_BLACKBARK_LOG.get());
-        this.dropSelf(ModBLocks.BLACKBARK_WOOD.get());
-        this.dropSelf(ModBLocks.STRIPPED_BLACKBARK_WOOD.get());
-        this.dropSelf(ModBLocks.BLACKBARK_PLANKS.get());
-        this.dropSelf(ModBLocks.BLACKBARK_SAPLING.get());
-
-        this.add(ModBLocks.BLACKBARK_LEAVES.get(), block -> createLeavesDrops(block, ModBLocks.BLACKBARK_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
-
-        this.dropSelf(ModBLocks.BLACKBARK_FENCE.get());
-        this.dropSelf(ModBLocks.BLACKBARK_WALL.get());
-        this.dropSelf(ModBLocks.BLACKBARK_STAIRS.get());
-        this.dropSelf(ModBLocks.BLACKBARK_BUTTON.get());
-        this.dropSelf(ModBLocks.BLACKBARK_PRESSURE_PLATE.get());
-        this.dropSelf(ModBLocks.BLACKBARK_TRAPDOOR.get());
-        this.dropSelf(ModBLocks.BLACKBARK_FENCE_GATE.get());
-
-        this.add(ModBLocks.BLACKBARK_DOOR.get(),
-                block -> createDoorTable(ModBLocks.BLACKBARK_DOOR.get()));
-        this.add(ModBLocks.BLACKBARK_SLAB.get(),
-                block -> createSlabItemTable(ModBLocks.BLACKBARK_SLAB.get()));
-
-
-        //Aspen
-        this.dropSelf(ModBLocks.ASPEN_LOG.get());
-        this.dropSelf(ModBLocks.STRIPPED_ASPEN_LOG.get());
-        this.dropSelf(ModBLocks.ASPEN_WOOD.get());
-        this.dropSelf(ModBLocks.STRIPPED_ASPEN_WOOD.get());
-        this.dropSelf(ModBLocks.ASPEN_PLANKS.get());
-        this.dropSelf(ModBLocks.ASPEN_SAPLING.get());
-
-        this.add(ModBLocks.ASPEN_LEAVES.get(), block -> createLeavesDrops(block, ModBLocks.ASPEN_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
-
-        this.dropSelf(ModBLocks.ASPEN_FENCE.get());
-        this.dropSelf(ModBLocks.ASPEN_WALL.get());
-        this.dropSelf(ModBLocks.ASPEN_STAIRS.get());
-        this.dropSelf(ModBLocks.ASPEN_BUTTON.get());
-        this.dropSelf(ModBLocks.ASPEN_PRESSURE_PLATE.get());
-        this.dropSelf(ModBLocks.ASPEN_TRAPDOOR.get());
-        this.dropSelf(ModBLocks.ASPEN_FENCE_GATE.get());
-
-        this.add(ModBLocks.ASPEN_DOOR.get(),
-                block -> createDoorTable(ModBLocks.ASPEN_DOOR.get()));
-        this.add(ModBLocks.ASPEN_SLAB.get(),
-                block -> createSlabItemTable(ModBLocks.ASPEN_SLAB.get()));
-
-
-        //Alder
-        this.dropSelf(ModBLocks.ALDER_LOG.get());
-        this.dropSelf(ModBLocks.STRIPPED_ALDER_LOG.get());
-        this.dropSelf(ModBLocks.ALDER_WOOD.get());
-        this.dropSelf(ModBLocks.STRIPPED_ALDER_WOOD.get());
-        this.dropSelf(ModBLocks.ALDER_PLANKS.get());
-        this.dropSelf(ModBLocks.ALDER_SAPLING.get());
-
-        this.add(ModBLocks.ALDER_LEAVES.get(), block -> createLeavesDrops(block, ModBLocks.ALDER_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
-
-        this.dropSelf(ModBLocks.ALDER_FENCE.get());
-        this.dropSelf(ModBLocks.ALDER_WALL.get());
-        this.dropSelf(ModBLocks.ALDER_STAIRS.get());
-        this.dropSelf(ModBLocks.ALDER_BUTTON.get());
-        this.dropSelf(ModBLocks.ALDER_PRESSURE_PLATE.get());
-        this.dropSelf(ModBLocks.ALDER_TRAPDOOR.get());
-        this.dropSelf(ModBLocks.ALDER_FENCE_GATE.get());
-
-        this.add(ModBLocks.ALDER_DOOR.get(),
-                block -> createDoorTable(ModBLocks.ALDER_DOOR.get()));
-        this.add(ModBLocks.ALDER_SLAB.get(),
-                block -> createSlabItemTable(ModBLocks.ALDER_SLAB.get()));
+            // Sign blocks
+            this.add(ModBLocks.SIGNS.get(woodType).get(),
+                    createSingleItemTable(ModBLocks.SIGNS.get(woodType).get()));
+            this.add(ModBLocks.WALL_SIGNS.get(woodType).get(),
+                    createSingleItemTable(ModBLocks.SIGNS.get(woodType).get()));
+            this.add(ModBLocks.HANGING_SIGNS.get(woodType).get(),
+                    createSingleItemTable(ModBLocks.HANGING_SIGNS.get(woodType).get()));
+            this.add(ModBLocks.WALL_HANGING_SIGNS.get(woodType).get(),
+                    createSingleItemTable(ModBLocks.HANGING_SIGNS.get(woodType).get()));
+        }
         // ---------------------------(STONE)--------------------------- //
         //redkeep
         this.dropSelf(ModBLocks.REDKEEP_STONE_BLOCK.get());
@@ -829,113 +603,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(ModBLocks.WEIRWOOD_WALL_HANGING_SIGN.get(),
                 createSingleItemTable(ModBLocks.WEIRWOOD_HANGING_SIGN.get()));
 
-        this.add(ModBLocks.PINE_SIGN.get(),
-                createSingleItemTable(ModBLocks.PINE_SIGN.get()));
-        this.add(ModBLocks.PINE_WALL_SIGN.get(),
-                createSingleItemTable(ModBLocks.PINE_SIGN.get()));
-        this.add(ModBLocks.PINE_HANGING_SIGN.get(),
-                createSingleItemTable(ModBLocks.PINE_HANGING_SIGN.get()));
-        this.add(ModBLocks.PINE_WALL_HANGING_SIGN.get(),
-                createSingleItemTable(ModBLocks.PINE_HANGING_SIGN.get()));
 
-        this.add(ModBLocks.ASH_SIGN.get(),
-                createSingleItemTable(ModBLocks.ASH_SIGN.get()));
-        this.add(ModBLocks.ASH_WALL_SIGN.get(),
-                createSingleItemTable(ModBLocks.ASH_SIGN.get()));
-        this.add(ModBLocks.ASH_HANGING_SIGN.get(),
-                createSingleItemTable(ModBLocks.ASH_HANGING_SIGN.get()));
-        this.add(ModBLocks.ASH_WALL_HANGING_SIGN.get(),
-                createSingleItemTable(ModBLocks.ASH_HANGING_SIGN.get()));
-
-        this.add(ModBLocks.BEECH_SIGN.get(),
-                createSingleItemTable(ModBLocks.BEECH_SIGN.get()));
-        this.add(ModBLocks.BEECH_WALL_SIGN.get(),
-                createSingleItemTable(ModBLocks.BEECH_SIGN.get()));
-        this.add(ModBLocks.BEECH_HANGING_SIGN.get(),
-                createSingleItemTable(ModBLocks.BEECH_HANGING_SIGN.get()));
-        this.add(ModBLocks.BEECH_WALL_HANGING_SIGN.get(),
-                createSingleItemTable(ModBLocks.BEECH_HANGING_SIGN.get()));
-
-        this.add(ModBLocks.CEDAR_SIGN.get(),
-                createSingleItemTable(ModBLocks.CEDAR_SIGN.get()));
-        this.add(ModBLocks.CEDAR_WALL_SIGN.get(),
-                createSingleItemTable(ModBLocks.CEDAR_SIGN.get()));
-        this.add(ModBLocks.CEDAR_HANGING_SIGN.get(),
-                createSingleItemTable(ModBLocks.CEDAR_HANGING_SIGN.get()));
-        this.add(ModBLocks.CEDAR_WALL_HANGING_SIGN.get(),
-                createSingleItemTable(ModBLocks.CEDAR_HANGING_SIGN.get()));
-
-        this.add(ModBLocks.CHESTNUT_SIGN.get(),
-                createSingleItemTable(ModBLocks.CHESTNUT_SIGN.get()));
-        this.add(ModBLocks.CHESTNUT_WALL_SIGN.get(),
-                createSingleItemTable(ModBLocks.CHESTNUT_SIGN.get()));
-        this.add(ModBLocks.CHESTNUT_HANGING_SIGN.get(),
-                createSingleItemTable(ModBLocks.CHESTNUT_HANGING_SIGN.get()));
-        this.add(ModBLocks.CHESTNUT_WALL_HANGING_SIGN.get(),
-                createSingleItemTable(ModBLocks.CHESTNUT_HANGING_SIGN.get()));
-
-        this.add(ModBLocks.HAWTHORN_SIGN.get(),
-                createSingleItemTable(ModBLocks.HAWTHORN_SIGN.get()));
-        this.add(ModBLocks.HAWTHORN_WALL_SIGN.get(),
-                createSingleItemTable(ModBLocks.HAWTHORN_SIGN.get()));
-        this.add(ModBLocks.HAWTHORN_HANGING_SIGN.get(),
-                createSingleItemTable(ModBLocks.HAWTHORN_HANGING_SIGN.get()));
-        this.add(ModBLocks.HAWTHORN_WALL_HANGING_SIGN.get(),
-                createSingleItemTable(ModBLocks.HAWTHORN_HANGING_SIGN.get()));
-
-        this.add(ModBLocks.SYCAMORE_SIGN.get(),
-                createSingleItemTable(ModBLocks.SYCAMORE_SIGN.get()));
-        this.add(ModBLocks.SYCAMORE_WALL_SIGN.get(),
-                createSingleItemTable(ModBLocks.SYCAMORE_SIGN.get()));
-        this.add(ModBLocks.SYCAMORE_HANGING_SIGN.get(),
-                createSingleItemTable(ModBLocks.SYCAMORE_HANGING_SIGN.get()));
-        this.add(ModBLocks.SYCAMORE_WALL_HANGING_SIGN.get(),
-                createSingleItemTable(ModBLocks.SYCAMORE_HANGING_SIGN.get()));
-
-        this.add(ModBLocks.BLACKBARK_SIGN.get(),
-                createSingleItemTable(ModBLocks.BLACKBARK_SIGN.get()));
-        this.add(ModBLocks.BLACKBARK_WALL_SIGN.get(),
-                createSingleItemTable(ModBLocks.BLACKBARK_SIGN.get()));
-        this.add(ModBLocks.BLACKBARK_HANGING_SIGN.get(),
-                createSingleItemTable(ModBLocks.BLACKBARK_HANGING_SIGN.get()));
-        this.add(ModBLocks.BLACKBARK_WALL_HANGING_SIGN.get(),
-                createSingleItemTable(ModBLocks.BLACKBARK_HANGING_SIGN.get()));
-
-        this.add(ModBLocks.ASPEN_SIGN.get(),
-                createSingleItemTable(ModBLocks.ASPEN_SIGN.get()));
-        this.add(ModBLocks.ASPEN_WALL_SIGN.get(),
-                createSingleItemTable(ModBLocks.ASPEN_SIGN.get()));
-        this.add(ModBLocks.ASPEN_HANGING_SIGN.get(),
-                createSingleItemTable(ModBLocks.ASPEN_HANGING_SIGN.get()));
-        this.add(ModBLocks.ASPEN_WALL_HANGING_SIGN.get(),
-                createSingleItemTable(ModBLocks.ASPEN_HANGING_SIGN.get()));
-
-        this.add(ModBLocks.ALDER_SIGN.get(),
-                createSingleItemTable(ModBLocks.ALDER_SIGN.get()));
-        this.add(ModBLocks.ALDER_WALL_SIGN.get(),
-                createSingleItemTable(ModBLocks.ALDER_SIGN.get()));
-        this.add(ModBLocks.ALDER_HANGING_SIGN.get(),
-                createSingleItemTable(ModBLocks.ALDER_HANGING_SIGN.get()));
-        this.add(ModBLocks.ALDER_WALL_HANGING_SIGN.get(),
-                createSingleItemTable(ModBLocks.ALDER_HANGING_SIGN.get()));
-
-        this.add(ModBLocks.IRONWOOD_SIGN.get(),
-                createSingleItemTable(ModBLocks.IRONWOOD_SIGN.get()));
-        this.add(ModBLocks.IRONWOOD_WALL_SIGN.get(),
-                createSingleItemTable(ModBLocks.IRONWOOD_SIGN.get()));
-        this.add(ModBLocks.IRONWOOD_HANGING_SIGN.get(),
-                createSingleItemTable(ModBLocks.IRONWOOD_HANGING_SIGN.get()));
-        this.add(ModBLocks.IRONWOOD_WALL_HANGING_SIGN.get(),
-                createSingleItemTable(ModBLocks.IRONWOOD_HANGING_SIGN.get()));
-
-        this.add(ModBLocks.SENTINEL_SIGN.get(),
-                createSingleItemTable(ModBLocks.SENTINEL_SIGN.get()));
-        this.add(ModBLocks.SENTINEL_WALL_SIGN.get(),
-                createSingleItemTable(ModBLocks.SENTINEL_SIGN.get()));
-        this.add(ModBLocks.SENTINEL_HANGING_SIGN.get(),
-                createSingleItemTable(ModBLocks.SENTINEL_HANGING_SIGN.get()));
-        this.add(ModBLocks.SENTINEL_WALL_HANGING_SIGN.get(),
-                createSingleItemTable(ModBLocks.SENTINEL_HANGING_SIGN.get()));
 
         /** // ---------------------------(CROPS)--------------------------- // */
 

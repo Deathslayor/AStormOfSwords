@@ -71,6 +71,7 @@ public class ModplacedFeatures {
     public static final ResourceKey<PlacedFeature> ALDER_KEY = registerKey("alder");
     public static final ResourceKey<PlacedFeature> WEIRWOOD_RARE_KEY = registerKey("weirwood_rare");
     public static final ResourceKey<PlacedFeature> OAK2_RARE_KEY = registerKey("oak_rare");
+    public static final ResourceKey<PlacedFeature> SYCAMORE_KEY = registerKey("sycamore");
     public static final ResourceKey<PlacedFeature> SENTINEL_RARE_KEY = registerKey("sentinel_rare");
     public static final ResourceKey<PlacedFeature> PINE_RARE_KEY = registerKey("pine_rare");
     public static final ResourceKey<PlacedFeature> IRONWOOD_RARE_KEY = registerKey("ironwood_rare");
@@ -249,53 +250,6 @@ public class ModplacedFeatures {
         register(context, OAK2_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OAK2_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
                         Blocks.OAK_SAPLING));
-
-
-        register(context, SENTINEL_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SENTINEL_KEY),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
-                        ModBLocks.SENTINEL_SAPLING.get()));
-
-        register(context, PINE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PINE_KEY),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
-                        ModBLocks.PINE_SAPLING.get()));
-
-        register(context, IRONWOOD_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.IRONWOOD_KEY),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
-                        ModBLocks.IRONWOOD_SAPLING.get()));
-
-        register(context, HAWTHORN_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.HAWTHORN_KEY),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
-                        ModBLocks.HAWTHORN_SAPLING.get()));
-
-        register(context, CHESTNUT_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.CHESTNUT_KEY),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
-                        ModBLocks.CHESTNUT_SAPLING.get()));
-
-        register(context, CEDAR_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.CEDAR_KEY),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
-                        ModBLocks.CEDAR_SAPLING.get()));
-
-        register(context, BEECH_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BEECH_KEY),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
-                        ModBLocks.BEECH_SAPLING.get()));
-
-        register(context, ASH_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ASH_KEY),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
-                        ModBLocks.ASH_SAPLING.get()));
-
-        register(context, BLACKBARK_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BLACKBARK_KEY),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
-                        ModBLocks.BLACKBARK_SAPLING.get()));
-
-        register(context, ASPEN_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ASPEN_KEY),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
-                        ModBLocks.ASPEN_SAPLING.get()));
-
-        register(context, ALDER_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ALDER_KEY),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
-                        ModBLocks.ALDER_SAPLING.get()));
-
-        //Rare Trees For plains
         register(context, WEIRWOOD_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.WEIRWOOD_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
                         ModBLocks.WEIRWOOD_SAPLING.get()));
@@ -304,49 +258,99 @@ public class ModplacedFeatures {
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
                         Blocks.OAK_SAPLING));
 
+        register(context, SYCAMORE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SYCAMORE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("sycamore").get()));
+
+
+        register(context, SENTINEL_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SENTINEL_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("sentinel").get()));
+
+        register(context, PINE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PINE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("pine").get()));
+
+        register(context, IRONWOOD_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.IRONWOOD_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("ironwood").get()));
+
+        register(context, HAWTHORN_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.HAWTHORN_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("hawthorn").get()));
+
+        register(context, CHESTNUT_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.CHESTNUT_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("chestnut").get()));
+
+        register(context, CEDAR_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.CEDAR_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("cedar").get()));
+
+        register(context, BEECH_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BEECH_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("beech").get()));
+
+        register(context, ASH_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ASH_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("ash").get()));
+
+        register(context, BLACKBARK_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BLACKBARK_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("blackbark").get()));
+
+        register(context, ASPEN_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ASPEN_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("aspen").get()));
+
+        register(context, ALDER_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ALDER_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("alder").get()));
+
+// Rare tree placements
         register(context, SENTINEL_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SENTINEL_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
-                        ModBLocks.SENTINEL_SAPLING.get()));
+                        ModBLocks.SAPLINGS.get("sentinel").get()));
 
         register(context, PINE_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PINE_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
-                        ModBLocks.PINE_SAPLING.get()));
+                        ModBLocks.SAPLINGS.get("pine").get()));
 
         register(context, IRONWOOD_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.IRONWOOD_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
-                        ModBLocks.IRONWOOD_SAPLING.get()));
+                        ModBLocks.SAPLINGS.get("ironwood").get()));
 
         register(context, HAWTHORN_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.HAWTHORN_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
-                        ModBLocks.HAWTHORN_SAPLING.get()));
+                        ModBLocks.SAPLINGS.get("hawthorn").get()));
 
         register(context, CHESTNUT_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.CHESTNUT_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
-                        ModBLocks.CHESTNUT_SAPLING.get()));
+                        ModBLocks.SAPLINGS.get("chestnut").get()));
 
         register(context, CEDAR_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.CEDAR_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
-                        ModBLocks.CEDAR_SAPLING.get()));
+                        ModBLocks.SAPLINGS.get("cedar").get()));
 
         register(context, BEECH_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BEECH_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
-                        ModBLocks.BEECH_SAPLING.get()));
+                        ModBLocks.SAPLINGS.get("beech").get()));
 
         register(context, ASH_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ASH_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
-                        ModBLocks.ASH_SAPLING.get()));
+                        ModBLocks.SAPLINGS.get("ash").get()));
 
         register(context, BLACKBARK_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BLACKBARK_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
-                        ModBLocks.BLACKBARK_SAPLING.get()));
+                        ModBLocks.SAPLINGS.get("blackbark").get()));
 
         register(context, ASPEN_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ASPEN_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
-                        ModBLocks.ASPEN_SAPLING.get()));
+                        ModBLocks.SAPLINGS.get("aspen").get()));
 
         register(context, ALDER_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ALDER_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
-                        ModBLocks.ALDER_SAPLING.get()));
+                        ModBLocks.SAPLINGS.get("alder").get()));
 
 
 

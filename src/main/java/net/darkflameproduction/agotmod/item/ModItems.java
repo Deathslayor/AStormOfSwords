@@ -37,9 +37,12 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -750,101 +753,51 @@ public class ModItems {
             properties -> new HangingSignItem(ModBLocks.WEIRWOOD_HANGING_SIGN.get(),
                     ModBLocks.WEIRWOOD_WALL_HANGING_SIGN.get(), properties.stacksTo(16)));
 
-    public static final DeferredItem<Item> PINE_SIGN = ITEMS.registerItem("pine_sign",
-            properties -> new SignItem(ModBLocks.PINE_SIGN.get(),
-                    ModBLocks.PINE_WALL_SIGN.get(), properties.stacksTo(16)));
+    // In your ModItems class
+    public static final Map<String, DeferredItem<Item>> SIGN_ITEMS = new HashMap<>();
+    public static final Map<String, DeferredItem<Item>> HANGING_SIGN_ITEMS = new HashMap<>();
 
-    public static final DeferredItem<Item> PINE_HANGING_SIGN = ITEMS.registerItem("pine_hanging_sign",
-            properties -> new HangingSignItem(ModBLocks.PINE_HANGING_SIGN.get(),
-                    ModBLocks.PINE_WALL_HANGING_SIGN.get(), properties.stacksTo(16)));
+    // Define the wood types array
+    private static final String[] WOOD_TYPES = {
+            "sycamore",
+            "sentinel",
+            "pine",
+            "ironwood",
+            "hawthorn",
+            "chestnut",
+            "cedar",
+            "beech",
+            "ash",
+            "blackbark",
+            "aspen",
+            "alder"
+    };
 
-    public static final DeferredItem<Item> ASH_SIGN = ITEMS.registerItem("ash_sign",
-            properties -> new SignItem(ModBLocks.ASH_SIGN.get(),
-                    ModBLocks.ASH_WALL_SIGN.get(), properties.stacksTo(16)));
+    // Static initialization block to register all wood signs
+    static {
+        // Register all wood signs using a loop
+        for (String woodType : WOOD_TYPES) {
+            // Regular signs
+            SIGN_ITEMS.put(woodType, ITEMS.registerItem(woodType + "_sign",
+                    properties -> new SignItem(
+                            ModBLocks.SIGNS.get(woodType).get(),
+                            ModBLocks.WALL_SIGNS.get(woodType).get(),
+                            properties.stacksTo(16)
+                    )
+            ));
 
-    public static final DeferredItem<Item> ASH_HANGING_SIGN = ITEMS.registerItem("ash_hanging_sign",
-            properties -> new HangingSignItem(ModBLocks.ASH_HANGING_SIGN.get(),
-                    ModBLocks.ASH_WALL_HANGING_SIGN.get(), properties.stacksTo(16)));
+            // Hanging signs
+            HANGING_SIGN_ITEMS.put(woodType, ITEMS.registerItem(woodType + "_hanging_sign",
+                    properties -> new HangingSignItem(
+                            ModBLocks.HANGING_SIGNS.get(woodType).get(),
+                            ModBLocks.WALL_HANGING_SIGNS.get(woodType).get(),
+                            properties.stacksTo(16)
+                    )
+            ));
+        }
+    }
 
-    public static final DeferredItem<Item> BEECH_SIGN = ITEMS.registerItem("beech_sign",
-            properties -> new SignItem(ModBLocks.BEECH_SIGN.get(),
-                    ModBLocks.BEECH_WALL_SIGN.get(), properties.stacksTo(16)));
-
-    public static final DeferredItem<Item> BEECH_HANGING_SIGN = ITEMS.registerItem("beech_hanging_sign",
-            properties -> new HangingSignItem(ModBLocks.BEECH_HANGING_SIGN.get(),
-                    ModBLocks.BEECH_WALL_HANGING_SIGN.get(), properties.stacksTo(16)));
-
-    public static final DeferredItem<Item> CEDAR_SIGN = ITEMS.registerItem("cedar_sign",
-            properties -> new SignItem(ModBLocks.CEDAR_SIGN.get(),
-                    ModBLocks.CEDAR_WALL_SIGN.get(), properties.stacksTo(16)));
-
-    public static final DeferredItem<Item> CEDAR_HANGING_SIGN = ITEMS.registerItem("cedar_hanging_sign",
-            properties -> new HangingSignItem(ModBLocks.CEDAR_HANGING_SIGN.get(),
-                    ModBLocks.CEDAR_WALL_HANGING_SIGN.get(), properties.stacksTo(16)));
-
-    public static final DeferredItem<Item> CHESTNUT_SIGN = ITEMS.registerItem("chestnut_sign",
-            properties -> new SignItem(ModBLocks.CHESTNUT_SIGN.get(),
-                    ModBLocks.CHESTNUT_WALL_SIGN.get(), properties.stacksTo(16)));
-
-    public static final DeferredItem<Item> CHESTNUT_HANGING_SIGN = ITEMS.registerItem("chestnut_hanging_sign",
-            properties -> new HangingSignItem(ModBLocks.CHESTNUT_HANGING_SIGN.get(),
-                    ModBLocks.CHESTNUT_WALL_HANGING_SIGN.get(), properties.stacksTo(16)));
-
-    public static final DeferredItem<Item> HAWTHORN_SIGN = ITEMS.registerItem("hawthorn_sign",
-            properties -> new SignItem(ModBLocks.HAWTHORN_SIGN.get(),
-                    ModBLocks.HAWTHORN_WALL_SIGN.get(), properties.stacksTo(16)));
-
-    public static final DeferredItem<Item> HAWTHORN_HANGING_SIGN = ITEMS.registerItem("hawthorn_hanging_sign",
-            properties -> new HangingSignItem(ModBLocks.HAWTHORN_HANGING_SIGN.get(),
-                    ModBLocks.HAWTHORN_WALL_HANGING_SIGN.get(), properties.stacksTo(16)));
-
-    public static final DeferredItem<Item> IRONWOOD_SIGN = ITEMS.registerItem("ironwood_sign",
-            properties -> new SignItem(ModBLocks.IRONWOOD_SIGN.get(),
-                    ModBLocks.IRONWOOD_WALL_SIGN.get(), properties.stacksTo(16)));
-
-    public static final DeferredItem<Item> IRONWOOD_HANGING_SIGN = ITEMS.registerItem("ironwood_hanging_sign",
-            properties -> new HangingSignItem(ModBLocks.IRONWOOD_HANGING_SIGN.get(),
-                    ModBLocks.IRONWOOD_WALL_HANGING_SIGN.get(), properties.stacksTo(16)));
-
-    public static final DeferredItem<Item> SENTINEL_SIGN = ITEMS.registerItem("sentinel_sign",
-            properties -> new SignItem(ModBLocks.SENTINEL_SIGN.get(),
-                    ModBLocks.SENTINEL_WALL_SIGN.get(), properties.stacksTo(16)));
-
-    public static final DeferredItem<Item> SENTINEL_HANGING_SIGN = ITEMS.registerItem("sentinel_hanging_sign",
-            properties -> new HangingSignItem(ModBLocks.SENTINEL_HANGING_SIGN.get(),
-                    ModBLocks.SENTINEL_WALL_HANGING_SIGN.get(), properties.stacksTo(16)));
-
-    public static final DeferredItem<Item> SYCAMORE_SIGN = ITEMS.registerItem("sycamore_sign",
-            properties -> new SignItem(ModBLocks.SYCAMORE_SIGN.get(),
-                    ModBLocks.SYCAMORE_WALL_SIGN.get(), properties.stacksTo(16)));
-
-    public static final DeferredItem<Item> SYCAMORE_HANGING_SIGN = ITEMS.registerItem("sycamore_hanging_sign",
-            properties -> new HangingSignItem(ModBLocks.SYCAMORE_HANGING_SIGN.get(),
-                    ModBLocks.SYCAMORE_WALL_HANGING_SIGN.get(), properties.stacksTo(16)));
-
-    public static final DeferredItem<Item> BLACKBARK_SIGN = ITEMS.registerItem("blackbark_sign",
-            properties -> new SignItem(ModBLocks.BLACKBARK_SIGN.get(),
-                    ModBLocks.BLACKBARK_WALL_SIGN.get(), properties.stacksTo(16)));
-
-    public static final DeferredItem<Item> BLACKBARK_HANGING_SIGN = ITEMS.registerItem("blackbark_hanging_sign",
-            properties -> new HangingSignItem(ModBLocks.BLACKBARK_HANGING_SIGN.get(),
-                    ModBLocks.BLACKBARK_WALL_HANGING_SIGN.get(), properties.stacksTo(16)));
-
-    public static final DeferredItem<Item> ASPEN_SIGN = ITEMS.registerItem("aspen_sign",
-            properties -> new SignItem(ModBLocks.ASPEN_SIGN.get(),
-                    ModBLocks.ASPEN_WALL_SIGN.get(), properties.stacksTo(16)));
-
-    public static final DeferredItem<Item> ASPEN_HANGING_SIGN = ITEMS.registerItem("aspen_hanging_sign",
-            properties -> new HangingSignItem(ModBLocks.ASPEN_HANGING_SIGN.get(),
-                    ModBLocks.ASPEN_WALL_HANGING_SIGN.get(), properties.stacksTo(16)));
-
-    public static final DeferredItem<Item> ALDER_SIGN = ITEMS.registerItem("alder_sign",
-            properties -> new SignItem(ModBLocks.ALDER_SIGN.get(),
-                    ModBLocks.ALDER_WALL_SIGN.get(), properties.stacksTo(16)));
-
-    public static final DeferredItem<Item> ALDER_HANGING_SIGN = ITEMS.registerItem("alder_hanging_sign",
-            properties -> new HangingSignItem(ModBLocks.ALDER_HANGING_SIGN.get(),
-                    ModBLocks.ALDER_WALL_HANGING_SIGN.get(), properties.stacksTo(16)));
+// No need for the getBlockField method anymore since we access maps directly
 
 
     // ---------------------------(SEEDS)--------------------------- //
