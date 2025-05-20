@@ -26,7 +26,7 @@ public class ClientKeyInputEvents {
             if (KeyBindings.INSTANCE.OpenCustomGUI.isDown()) {
                 if (!keyWasDown) {
                     AGoTMod.LOGGER.info("M key pressed - opening GUI");
-                    minecraft.setScreen(new CustomGuiScreen());
+                    minecraft.setScreen(new CustomGuiScreen(minecraft));
                 }
                 keyWasDown = true;
             } else {

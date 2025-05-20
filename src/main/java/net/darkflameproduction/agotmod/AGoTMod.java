@@ -1,8 +1,11 @@
 // This code belongs to the package net.stormofsorts.agotmod
 package net.darkflameproduction.agotmod;
 // Add this import at the top of the file
+import dev.tocraft.ctgen.impl.CTGClient;
 import net.darkflameproduction.agotmod.client.ClientKeyInputEvents;
+import net.darkflameproduction.agotmod.datagen.ModDimensionProvider;
 import net.darkflameproduction.agotmod.event.KeyMappings.KeyBindings;
+import net.darkflameproduction.agotmod.gui.CustomGuiScreen;
 import net.neoforged.api.distmarker.Dist;
 
 // Add this code inside the constructor or setup method of your mod class:
@@ -96,6 +99,7 @@ public class AGoTMod {
 
         if (FMLEnvironment.dist == Dist.CLIENT) {
             NeoForge.EVENT_BUS.register(ClientKeyInputEvents.class);
+            CTGClient.registerMenu(ModDimensionProvider.KNOWN_WORLD, CustomGuiScreen::new);
         }
     }
 

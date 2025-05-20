@@ -1,8 +1,12 @@
 package net.darkflameproduction.agotmod.gui;
 
+import dev.tocraft.ctgen.impl.CTGClient;
+import dev.tocraft.ctgen.impl.network.SyncMapPacket;
+import dev.tocraft.ctgen.impl.screen.widget.MapWidget;
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.item.ModItems;
 import net.darkflameproduction.agotmod.sound.ModSounds;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.nbt.CompoundTag;
@@ -255,6 +259,9 @@ public class CustomGuiScreen extends Screen {
     private double rangedProgress = 0.0;
     private double nextRangedRequirement = 0.0;
 
+    private final SyncMapPacket mapPacket;
+    private MapWidget mapWidget;
+
     private static final int[] ONE_HANDED_STATS_INDICES = {0, 1, 2, 3, 4, 5, 9, 12, 15, 17, 18, 20, 23, 27, 28, 29, 30, 35, 36, 38};
     private static final int[] TWO_HANDED_STATS_INDICES = {18, 23, 30};
     private static final int[] POLEARM_STATS_INDICES = {8, 11, 13, 14, 21, 22, 24, 25, 29, 31, 36, 37};
@@ -291,10 +298,16 @@ public class CustomGuiScreen extends Screen {
         return getCategoryUsage(RANGED_STATS_INDICES);
     }
 
-    public CustomGuiScreen() {
+    public CustomGuiScreen(Minecraft minecraft) {
+        this(minecraft, CTGClient.LAST_SYNC_MAP_PACKET.get());
+    }
+
+    public CustomGuiScreen(Minecraft minecraft, SyncMapPacket mapPacket) {
         super(Component.translatable("screen.agotmod.custom_gui"));
         this.selectedSection = lastSelectedSection;
         this.selectedStatsSubmenu = lastSelectedStatsSubmenu;
+        this.mapPacket = mapPacket;
+        this.mapWidget = MapWidget.ofPacket(minecraft, 0, 0, width, height, mapPacket);
     }
 
     private void calculateWeaponSkillLevels() {
@@ -719,6 +732,10 @@ public class CustomGuiScreen extends Screen {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        if (mapWidget != null && mapWidget.isActive() && mapWidget.mouseClicked(mouseX, mouseY, button)) {
+            return true;
+        }
+
         ScreenLayout layout = new ScreenLayout(width, height);
 
         for (int i = 0; i < SECTION_LABELS.length; i++) {
@@ -771,6 +788,28 @@ public class CustomGuiScreen extends Screen {
         }
 
         return super.mouseClicked(mouseX, mouseY, button);
+    }
+
+    @Override
+    public boolean mouseScrolled(double mouseX, double mouseY, double deltaX, double deltaY) {
+        if (mapWidget != null && selectedSection == 0 &&
+                mouseX >= mapWidget.getX() && mouseX < mapWidget.getX() + mapWidget.getWidth() &&
+                mouseY >= mapWidget.getY() && mouseY < mapWidget.getY() + mapWidget.getHeight()) {
+            return mapWidget.mouseScrolled(mouseX, mouseY, deltaX, deltaY);
+        } else {
+            return super.mouseScrolled(mouseX, mouseY, deltaX, deltaY);
+        }
+    }
+
+    @Override
+    public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
+        if (mapWidget != null && selectedSection == 0 &&
+                mouseX >= mapWidget.getX() && mouseX < mapWidget.getX() + mapWidget.getWidth() &&
+                mouseY >= mapWidget.getY() && mouseY < mapWidget.getY() + mapWidget.getHeight()) {
+            return mapWidget.mouseDragged(mouseX, mouseY, button, dragX, dragY);
+        } else {
+            return super.mouseDragged(mouseX, mouseY, button, dragX, dragY);
+        }
     }
 
     private void playButtonSound() {
@@ -836,10 +875,16 @@ public class CustomGuiScreen extends Screen {
             drawSectionTitle(guiGraphics, SECTION_LABELS[selectedSection],
                     layout.contentX, layout.contentY, layout.contentWidth);
 
-            if (selectedSection == 2) {
-                drawSkillsSection(guiGraphics, mouseX, mouseY, layout);
-            } else if (selectedSection == 3) {
-                drawStatsSection(guiGraphics, mouseX, mouseY, layout);
+            switch (selectedSection) {
+                case 0:
+                    drawMapSection(guiGraphics, mouseX, mouseY, layout, partialTick);
+                    break;
+                case 2:
+                    drawSkillsSection(guiGraphics, mouseX, mouseY, layout);
+                    break;
+                case 3:
+                    drawStatsSection(guiGraphics, mouseX, mouseY, layout);
+                    break;
             }
         }
     }
@@ -871,6 +916,21 @@ public class CustomGuiScreen extends Screen {
 
             guiGraphics.drawString(font, text, textX, textY,
                     isSelected ? 0xFFFFFFFF : PARCHMENT_COLOR);
+        }
+    }
+
+    private void drawMapSection(GuiGraphics guiGraphics, int mouseX, int mouseY, ScreenLayout layout, float partialTick) {
+        // FIXME: Map Dimensions
+        mapWidget.setX(layout.contentX);
+        mapWidget.setY(layout.contentY);
+        mapWidget.setHeight(layout.contentHeight);
+        mapWidget.setWidth(layout.contentWidth);
+        mapWidget.setMinZoom(mapWidget.defaultZoom());
+
+        // Render map
+        if (mapWidget != null && mapWidget.isActive() && mapWidget.getMapId() != null &&
+                minecraft.getResourceManager().getResource(mapWidget.getMapId()).isPresent()) {
+            mapWidget.render(guiGraphics, mouseX, mouseY, partialTick);
         }
     }
 
