@@ -212,6 +212,15 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 "sentinel",
                 "blackbark",
                 "aspen",
+                "black_cherry",
+                "black_olive",
+                "crabapple",
+                "olive",
+                "white_cherry",
+                "red_cherry",
+                "fir",
+                "willow",
+                "wormtree",
                 "alder"
         };
 

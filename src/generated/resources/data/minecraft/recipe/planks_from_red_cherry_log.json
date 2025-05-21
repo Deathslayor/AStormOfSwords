@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:red_cherry_log"
+  ],
+  "result": {
+    "count": 4,
+    "id": "agotmod:red_cherry_planks"
+  }
+}

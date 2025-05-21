@@ -19,16 +19,25 @@ public class ModCreativeNaturalBlocks {
     // Array of wood types for consistency
     private static final String[] WOOD_TYPES = {
             "sycamore",
-            "sentinel",
             "pine",
-            "ironwood",
-            "hawthorn",
-            "chestnut",
-            "cedar",
-            "beech",
             "ash",
+            "beech",
+            "cedar",
+            "chestnut",
+            "hawthorn",
+            "ironwood",
+            "sentinel",
             "blackbark",
             "aspen",
+            "black_cherry",
+            "black_olive",
+            "crabapple",
+            "olive",
+            "white_cherry",
+            "red_cherry",
+            "fir",
+            "willow",
+            "wormtree",
             "alder"
     };
 

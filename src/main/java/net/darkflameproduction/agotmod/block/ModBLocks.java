@@ -1042,6 +1042,15 @@ public class ModBLocks {
             "sentinel",
             "blackbark",
             "aspen",
+            "black_cherry",
+            "black_olive",
+            "crabapple",
+            "olive",
+            "white_cherry",
+            "red_cherry",
+            "fir",
+            "willow",
+            "wormtree",
             "alder"
     };
 
@@ -1210,6 +1219,24 @@ public class ModBLocks {
                 return ModTreeGrower.BLACKBARK;
             case "aspen":
                 return ModTreeGrower.ASPEN;
+            case "black_cherry":
+                return ModTreeGrower.BLACK_CHERRY;
+            case "black_olive":
+                return ModTreeGrower.BLACK_OLIVE;
+            case "crabapple":
+                return ModTreeGrower.CRABAPPLE;
+            case "olive":
+                return ModTreeGrower.OLIVE;
+            case "white_cherry":
+                return ModTreeGrower.WHITE_CHERRY;
+            case "red_cherry":
+                return ModTreeGrower.RED_CHERRY;
+            case "fir":
+                return ModTreeGrower.FIR;
+            case "willow":
+                return ModTreeGrower.WILLOW;
+            case "wormtree":
+                return ModTreeGrower.WORMTREE;
             case "alder":
                 return ModTreeGrower.ALDER;
             default:
@@ -1243,6 +1270,24 @@ public class ModBLocks {
                 return ModWoodTypes.BLACKBARK;
             case "aspen":
                 return ModWoodTypes.ASPEN;
+            case "black_cherry":
+                return ModWoodTypes.BLACK_CHERRY;
+            case "black_olive":
+                return ModWoodTypes.BLACK_OLIVE;
+            case "crabapple":
+                return ModWoodTypes.CRABAPPLE;
+            case "olive":
+                return ModWoodTypes.OLIVE;
+            case "white_cherry":
+                return ModWoodTypes.WHITE_CHERRY;
+            case "red_cherry":
+                return ModWoodTypes.RED_CHERRY;
+            case "fir":
+                return ModWoodTypes.FIR;
+            case "willow":
+                return ModWoodTypes.WILLOW;
+            case "wormtree":
+                return ModWoodTypes.WORMTREE;
             case "alder":
                 return ModWoodTypes.ALDER;
             default:

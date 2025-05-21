@@ -20,18 +20,26 @@ public class ModBlockEntities {
 
     // Define the wood types array (including weirwood)
     private static final String[] ALL_WOOD_TYPES = {
-            "weirwood",
             "sycamore",
-            "sentinel",
             "pine",
-            "ironwood",
-            "hawthorn",
-            "chestnut",
-            "cedar",
-            "beech",
             "ash",
+            "beech",
+            "cedar",
+            "chestnut",
+            "hawthorn",
+            "ironwood",
+            "sentinel",
             "blackbark",
             "aspen",
+            "black_cherry",
+            "black_olive",
+            "crabapple",
+            "olive",
+            "white_cherry",
+            "red_cherry",
+            "fir",
+            "willow",
+            "wormtree",
             "alder"
     };
 

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "agotmod:block/willow_log",
+    "side": "agotmod:block/willow_log"
+  }
+}

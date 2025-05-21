@@ -19,16 +19,25 @@ public class ModCreativeBuildingBlocks {
     // Array of wood types (for iterating through maps)
     private static final String[] WOOD_TYPES = {
             "sycamore",
-            "sentinel",
             "pine",
-            "ironwood",
-            "hawthorn",
-            "chestnut",
-            "cedar",
-            "beech",
             "ash",
+            "beech",
+            "cedar",
+            "chestnut",
+            "hawthorn",
+            "ironwood",
+            "sentinel",
             "blackbark",
             "aspen",
+            "black_cherry",
+            "black_olive",
+            "crabapple",
+            "olive",
+            "white_cherry",
+            "red_cherry",
+            "fir",
+            "willow",
+            "wormtree",
             "alder"
     };
 
@@ -105,7 +114,7 @@ public class ModCreativeBuildingBlocks {
                             }
                         }
 
-                        // Keep the rest of your code as is...
+// Smooth stone variants
                         for (int i = 1; i <= 38; i++) {
                             if (i == 15 || i == 23) continue;
 
@@ -118,8 +127,226 @@ public class ModCreativeBuildingBlocks {
                             }
                         }
 
-                        // Continue with all your other variant loops and blocks...
+// Blackstone variants
+                        for (int i = 1; i <= 38; i++) {
+                            if (i == 15 || i == 22 || i == 31) continue;
 
+                            ModBLocks.BlockSet blockSet = ModBLocks.BLACKSTONE_VARIANTS.get(i);
+                            if (blockSet != null) {
+                                pOutput.accept(blockSet.base().get());
+                                pOutput.accept(blockSet.stairs().get());
+                                pOutput.accept(blockSet.slab().get());
+                                pOutput.accept(blockSet.wall().get());
+                            }
+                        }
+
+// Basalt variants
+                        for (int i = 1; i <= 38; i++) {
+                            if (i == 1 || i == 15) continue;
+
+                            ModBLocks.BlockSet blockSet = ModBLocks.BASALT_VARIANTS.get(i);
+                            if (blockSet != null) {
+                                pOutput.accept(blockSet.base().get());
+                                pOutput.accept(blockSet.stairs().get());
+                                pOutput.accept(blockSet.slab().get());
+                                pOutput.accept(blockSet.wall().get());
+                            }
+                        }
+
+// Tuff variants
+                        for (int i = 1; i <= 38; i++) {
+                            if (i == 10 || i == 15 || i == 20 || i == 21) continue;
+
+                            ModBLocks.BlockSet blockSet = ModBLocks.TUFF_VARIANTS.get(i);
+                            if (blockSet != null) {
+                                pOutput.accept(blockSet.base().get());
+                                pOutput.accept(blockSet.stairs().get());
+                                pOutput.accept(blockSet.slab().get());
+                                pOutput.accept(blockSet.wall().get());
+                            }
+                        }
+
+// Bricks variants
+                        for (int i = 1; i <= 38; i++) {
+                            if (i == 2 || i == 15) continue;
+
+                            ModBLocks.BlockSet blockSet = ModBLocks.BRICKS_VARIANTS.get(i);
+                            if (blockSet != null) {
+                                pOutput.accept(blockSet.base().get());
+                                pOutput.accept(blockSet.stairs().get());
+                                pOutput.accept(blockSet.slab().get());
+                                pOutput.accept(blockSet.wall().get());
+                            }
+                        }
+
+// Calcite variants
+                        for (int i = 1; i <= 38; i++) {
+                            if (i == 15) continue;
+
+                            ModBLocks.BlockSet blockSet = ModBLocks.CALCITE_VARIANTS.get(i);
+                            if (blockSet != null) {
+                                pOutput.accept(blockSet.base().get());
+                                pOutput.accept(blockSet.stairs().get());
+                                pOutput.accept(blockSet.slab().get());
+                                pOutput.accept(blockSet.wall().get());
+                            }
+                        }
+
+// Diorite variants
+                        for (int i = 1; i <= 38; i++) {
+                            if (i == 15) continue;
+
+                            ModBLocks.BlockSet blockSet = ModBLocks.DIORITE_VARIANTS.get(i);
+                            if (blockSet != null) {
+                                pOutput.accept(blockSet.base().get());
+                                pOutput.accept(blockSet.stairs().get());
+                                pOutput.accept(blockSet.slab().get());
+                                pOutput.accept(blockSet.wall().get());
+                            }
+                        }
+
+// Quartz variants
+                        for (int i = 1; i <= 38; i++) {
+                            if (i == 14 || i == 15) continue;
+
+                            ModBLocks.BlockSet blockSet = ModBLocks.QUARTZ_VARIANTS.get(i);
+                            if (blockSet != null) {
+                                pOutput.accept(blockSet.base().get());
+                                pOutput.accept(blockSet.stairs().get());
+                                pOutput.accept(blockSet.slab().get());
+                                pOutput.accept(blockSet.wall().get());
+                            }
+                        }
+
+// Cobbled Deepslate variants
+                        for (int i = 1; i <= 38; i++) {
+                            if (i == 4 || i == 15 || i == 19) continue;
+
+                            ModBLocks.BlockSet blockSet = ModBLocks.CDEEPSLATE_VARIANTS.get(i);
+                            if (blockSet != null) {
+                                pOutput.accept(blockSet.base().get());
+                                pOutput.accept(blockSet.stairs().get());
+                                pOutput.accept(blockSet.slab().get());
+                                pOutput.accept(blockSet.wall().get());
+                            }
+                        }
+
+// Granite variants
+                        for (int i = 1; i <= 38; i++) {
+                            if (i == 15) continue;
+
+                            ModBLocks.BlockSet blockSet = ModBLocks.GRANITE_VARIANTS.get(i);
+                            if (blockSet != null) {
+                                pOutput.accept(blockSet.base().get());
+                                pOutput.accept(blockSet.stairs().get());
+                                pOutput.accept(blockSet.slab().get());
+                                pOutput.accept(blockSet.wall().get());
+                            }
+                        }
+
+// Andesite variants
+                        for (int i = 1; i <= 38; i++) {
+                            if (i == 15) continue;
+
+                            ModBLocks.BlockSet blockSet = ModBLocks.ANDESITE_VARIANTS.get(i);
+                            if (blockSet != null) {
+                                pOutput.accept(blockSet.base().get());
+                                pOutput.accept(blockSet.stairs().get());
+                                pOutput.accept(blockSet.slab().get());
+                                pOutput.accept(blockSet.wall().get());
+                            }
+                        }
+
+// Redkeep variants
+                        for (int i = 1; i <= 38; i++) {
+                            if (i == 15) continue;
+
+                            ModBLocks.BlockSet blockSet = ModBLocks.REDKEEP_VARIANTS.get(i);
+                            if (blockSet != null) {
+                                pOutput.accept(blockSet.base().get());
+                                pOutput.accept(blockSet.stairs().get());
+                                pOutput.accept(blockSet.slab().get());
+                                pOutput.accept(blockSet.wall().get());
+                            }
+                        }
+
+// Red Sandstone variants
+                        for (int i = 1; i <= 38; i++) {
+                            if (i == 15 || i == 16 || i == 17 || i == 18) continue;
+
+                            ModBLocks.BlockSet blockSet = ModBLocks.RSANDSTONE_VARIANTS.get(i);
+                            if (blockSet != null) {
+                                pOutput.accept(blockSet.base().get());
+                                pOutput.accept(blockSet.stairs().get());
+                                pOutput.accept(blockSet.slab().get());
+                                pOutput.accept(blockSet.wall().get());
+                            }
+                        }
+
+// Sandstone variants
+                        for (int i = 1; i <= 38; i++) {
+                            if (i == 15 || i == 16 || i == 17 || i == 18) continue;
+
+                            ModBLocks.BlockSet blockSet = ModBLocks.SANDSTONE_VARIANTS.get(i);
+                            if (blockSet != null) {
+                                pOutput.accept(blockSet.base().get());
+                                pOutput.accept(blockSet.stairs().get());
+                                pOutput.accept(blockSet.slab().get());
+                                pOutput.accept(blockSet.wall().get());
+                            }
+                        }
+
+// Bone variants
+                        for (int i = 1; i <= 38; i++) {
+                            if (i == 15 || i == 35) continue;
+
+                            ModBLocks.BlockSet blockSet = ModBLocks.BONE_VARIANTS.get(i);
+                            if (blockSet != null) {
+                                pOutput.accept(blockSet.base().get());
+                                pOutput.accept(blockSet.stairs().get());
+                                pOutput.accept(blockSet.slab().get());
+                                pOutput.accept(blockSet.wall().get());
+                            }
+                        }
+
+// Dripstone variants
+                        for (int i = 1; i <= 38; i++) {
+                            if (i == 15) continue;
+
+                            ModBLocks.BlockSet blockSet = ModBLocks.DRIPSTONE_VARIANTS.get(i);
+                            if (blockSet != null) {
+                                pOutput.accept(blockSet.base().get());
+                                pOutput.accept(blockSet.stairs().get());
+                                pOutput.accept(blockSet.slab().get());
+                                pOutput.accept(blockSet.wall().get());
+                            }
+                        }
+
+// Packed Ice variants
+                        for (int i = 1; i <= 38; i++) {
+                            if (i == 15) continue;
+
+                            ModBLocks.BlockSet blockSet = ModBLocks.PACKED_ICE_VARIANTS.get(i);
+                            if (blockSet != null) {
+                                pOutput.accept(blockSet.base().get());
+                                pOutput.accept(blockSet.stairs().get());
+                                pOutput.accept(blockSet.slab().get());
+                                pOutput.accept(blockSet.wall().get());
+                            }
+                        }
+
+// Mud Brick variants
+                        for (int i = 1; i <= 38; i++) {
+                            if (i == 7 || i == 9 || i == 15) continue;
+
+                            ModBLocks.BlockSet blockSet = ModBLocks.MUD_BRICK_VARIANTS.get(i);
+                            if (blockSet != null) {
+                                pOutput.accept(blockSet.base().get());
+                                pOutput.accept(blockSet.stairs().get());
+                                pOutput.accept(blockSet.slab().get());
+                                pOutput.accept(blockSet.wall().get());
+                            }
+                        }
                         // INGOTS = Blocks
                         pOutput.accept(ModBLocks.QUAGMIRE.get());
 

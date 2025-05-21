@@ -69,6 +69,15 @@ public class ModplacedFeatures {
     public static final ResourceKey<PlacedFeature> BLACKBARK_KEY = registerKey("blackbark");
     public static final ResourceKey<PlacedFeature> ASPEN_KEY = registerKey("aspen");
     public static final ResourceKey<PlacedFeature> ALDER_KEY = registerKey("alder");
+    public static final ResourceKey<PlacedFeature> BLACK_CHERRY_KEY = registerKey("black_cherry");
+    public static final ResourceKey<PlacedFeature> BLACK_OLIVE_KEY = registerKey("black_olive");
+    public static final ResourceKey<PlacedFeature> CRABAPPLE_KEY = registerKey("crabapple");
+    public static final ResourceKey<PlacedFeature> OLIVE_KEY = registerKey("olive");
+    public static final ResourceKey<PlacedFeature> WHITE_CHERRY_KEY = registerKey("white_cherry");
+    public static final ResourceKey<PlacedFeature> RED_CHERRY_KEY = registerKey("red_cherry");
+    public static final ResourceKey<PlacedFeature> FIR_KEY = registerKey("fir");
+    public static final ResourceKey<PlacedFeature> WILLOW_KEY = registerKey("willow");
+    public static final ResourceKey<PlacedFeature> WORMTREE_KEY = registerKey("wormtree");
     public static final ResourceKey<PlacedFeature> WEIRWOOD_RARE_KEY = registerKey("weirwood_rare");
     public static final ResourceKey<PlacedFeature> OAK2_RARE_KEY = registerKey("oak_rare");
     public static final ResourceKey<PlacedFeature> SYCAMORE_KEY = registerKey("sycamore");
@@ -83,6 +92,15 @@ public class ModplacedFeatures {
     public static final ResourceKey<PlacedFeature> BLACKBARK_RARE_KEY = registerKey("blackbark_rare");
     public static final ResourceKey<PlacedFeature> ASPEN_RARE_KEY = registerKey("aspen_rare");
     public static final ResourceKey<PlacedFeature> ALDER_RARE_KEY = registerKey("alder_rare");
+    public static final ResourceKey<PlacedFeature> BLACK_CHERRY_RARE_KEY = registerKey("black_cherry_rare");
+    public static final ResourceKey<PlacedFeature> BLACK_OLIVE_RARE_KEY = registerKey("black_olive_rare");
+    public static final ResourceKey<PlacedFeature> CRABAPPLE_RARE_KEY = registerKey("crabapple_rare");
+    public static final ResourceKey<PlacedFeature> OLIVE_RARE_KEY = registerKey("olive_rare");
+    public static final ResourceKey<PlacedFeature> WHITE_CHERRY_RARE_KEY = registerKey("white_cherry_rare");
+    public static final ResourceKey<PlacedFeature> RED_CHERRY_RARE_KEY = registerKey("red_cherry_rare");
+    public static final ResourceKey<PlacedFeature> FIR_RARE_KEY = registerKey("fir_rare");
+    public static final ResourceKey<PlacedFeature> WILLOW_RARE_KEY = registerKey("willow_rare");
+    public static final ResourceKey<PlacedFeature> WORMTREE_RARE_KEY = registerKey("wormtree_rare");
     public static final ResourceKey<PlacedFeature> THORN_BUSH_KEY = registerKey("thorn_bush");
     public static final ResourceKey<PlacedFeature> THISTLE_KEY = registerKey("thistle");
     public static final ResourceKey<PlacedFeature> TANSY_KEY = registerKey("tansy");
@@ -352,7 +370,79 @@ public class ModplacedFeatures {
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
                         ModBLocks.SAPLINGS.get("alder").get()));
 
+// Adding the regular tree placements for the new trees
+        register(context, BLACK_CHERRY_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BLACK_CHERRY_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("black_cherry").get()));
 
+        register(context, BLACK_OLIVE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BLACK_OLIVE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("black_olive").get()));
+
+        register(context, CRABAPPLE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.CRABAPPLE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("crabapple").get()));
+
+        register(context, OLIVE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OLIVE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("olive").get()));
+
+        register(context, WHITE_CHERRY_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.WHITE_CHERRY_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("white_cherry").get()));
+
+        register(context, RED_CHERRY_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.RED_CHERRY_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("red_cherry").get()));
+
+        register(context, FIR_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.FIR_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("fir").get()));
+
+        register(context, WILLOW_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.WILLOW_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("willow").get()));
+
+        register(context, WORMTREE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.WORMTREE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("wormtree").get()));
+
+// Adding the rare tree placements for the new trees
+        register(context, BLACK_CHERRY_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BLACK_CHERRY_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("black_cherry").get()));
+
+        register(context, BLACK_OLIVE_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BLACK_OLIVE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("black_olive").get()));
+
+        register(context, CRABAPPLE_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.CRABAPPLE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("crabapple").get()));
+
+        register(context, OLIVE_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OLIVE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("olive").get()));
+
+        register(context, WHITE_CHERRY_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.WHITE_CHERRY_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("white_cherry").get()));
+
+        register(context, RED_CHERRY_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.RED_CHERRY_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("red_cherry").get()));
+
+        register(context, FIR_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.FIR_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("fir").get()));
+
+        register(context, WILLOW_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.WILLOW_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("willow").get()));
+
+        register(context, WORMTREE_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.WORMTREE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("wormtree").get()));
 
 
 

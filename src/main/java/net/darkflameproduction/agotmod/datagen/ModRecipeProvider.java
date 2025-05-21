@@ -1886,16 +1886,25 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
         String[] woodTypes = {
                 "sycamore",
-                "sentinel",
                 "pine",
-                "ironwood",
-                "hawthorn",
-                "chestnut",
-                "cedar",
-                "beech",
                 "ash",
+                "beech",
+                "cedar",
+                "chestnut",
+                "hawthorn",
+                "ironwood",
+                "sentinel",
                 "blackbark",
                 "aspen",
+                "black_cherry",
+                "black_olive",
+                "crabapple",
+                "olive",
+                "white_cherry",
+                "red_cherry",
+                "fir",
+                "willow",
+                "wormtree",
                 "alder"
         };
 

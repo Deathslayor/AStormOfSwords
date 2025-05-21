@@ -175,6 +175,15 @@ public class AGoTMod {
             Sheets.addWoodType(ModWoodTypes.BLACKBARK);
             Sheets.addWoodType(ModWoodTypes.ASPEN);
             Sheets.addWoodType(ModWoodTypes.ALDER);
+            Sheets.addWoodType(ModWoodTypes.BLACK_CHERRY);
+            Sheets.addWoodType(ModWoodTypes.BLACK_OLIVE);
+            Sheets.addWoodType(ModWoodTypes.CRABAPPLE);
+            Sheets.addWoodType(ModWoodTypes.OLIVE);
+            Sheets.addWoodType(ModWoodTypes.WHITE_CHERRY);
+            Sheets.addWoodType(ModWoodTypes.RED_CHERRY);
+            Sheets.addWoodType(ModWoodTypes.FIR);
+            Sheets.addWoodType(ModWoodTypes.WILLOW);
+            Sheets.addWoodType(ModWoodTypes.WORMTREE);
 
             event.enqueueWork(ModItemProperties::addCustomItemProperties);
         }

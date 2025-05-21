@@ -15,10 +15,16 @@ public class ModWoodTypes {
     public static final WoodType IRONWOOD = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":ironwood", BlockSetType.OAK));
     public static final WoodType SENTINEL = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":sentinel", BlockSetType.OAK));
     public static final WoodType SYCAMORE = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":sycamore", BlockSetType.OAK));
-
     public static final WoodType BLACKBARK = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":blackbark", BlockSetType.OAK));
-
     public static final WoodType ASPEN = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":aspen", BlockSetType.OAK));
-
     public static final WoodType ALDER = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":alder", BlockSetType.OAK));
+    public static final WoodType BLACK_CHERRY = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":black_cherry", BlockSetType.OAK));
+    public static final WoodType BLACK_OLIVE = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":black_olive", BlockSetType.OAK));
+    public static final WoodType CRABAPPLE = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":crabapple", BlockSetType.OAK));
+    public static final WoodType OLIVE = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":olive", BlockSetType.OAK));
+    public static final WoodType WHITE_CHERRY = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":white_cherry", BlockSetType.OAK));
+    public static final WoodType RED_CHERRY = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":red_cherry", BlockSetType.OAK));
+    public static final WoodType FIR = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":fir", BlockSetType.OAK));
+    public static final WoodType WILLOW = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":willow", BlockSetType.OAK));
+    public static final WoodType WORMTREE = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":wormtree", BlockSetType.OAK));
 }

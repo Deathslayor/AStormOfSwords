@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "minecraft:chain",
+    "B": "agotmod:red_cherry_log_stripped"
+  },
+  "pattern": [
+    "# #",
+    "BBB",
+    "BBB"
+  ],
+  "result": {
+    "count": 6,
+    "id": "agotmod:red_cherry_hanging_sign"
+  }
+}
