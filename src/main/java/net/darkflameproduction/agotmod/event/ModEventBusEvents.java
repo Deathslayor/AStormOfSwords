@@ -7,6 +7,7 @@ import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.entity.ModEntities;
 import net.darkflameproduction.agotmod.entity.custom.birds.Crow_Entity;
 import net.darkflameproduction.agotmod.entity.custom.norththewall.Mammoth_Entity;
+import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
 import net.darkflameproduction.agotmod.entity.custom.wolves.Direwolf_Entity;
 import net.darkflameproduction.agotmod.magic.custom.PlayerManaProvider;
 import net.minecraft.world.entity.EntityType;
@@ -26,6 +27,7 @@ public class ModEventBusEvents {
         event.put(ModEntities.MAMMOTH_ENTITY.get(), Mammoth_Entity.createAttributes().build());
         event.put(ModEntities.CROW_ENTITY.get(), Crow_Entity.createAttributes().build());
         event.put(ModEntities.DIREWOLF_ENTITY.get(), Direwolf_Entity.createAttributes().build());
+        event.put(ModEntities.NORTHERN_PEASANT_ENTITY.get(), Northern_Peasant_Entity.createAttributes().build());
 
     }
 

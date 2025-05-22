@@ -10,7 +10,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.ItemAbility;
-import net.neoforged.neoforge.registries.DeferredBlock;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -43,60 +42,28 @@ public class ModFlammableRotatedPillarBlock extends RotatedPillarBlock {
             if (state.is(ModBLocks.WEIRWOOD_WOOD.get()))
                 return ModBLocks.STRIPPED_WEIRWOOD_WOOD.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
 
-            // Define the wood types array (including sycamore)
-            String[] woodTypes = {
-                    "sycamore",
-                    "sentinel",
-                    "pine",
-                    "ironwood",
-                    "hawthorn",
-                    "chestnut",
-                    "cedar",
-                    "beech",
-                    "ash",
-                    "blackbark",
-                    "aspen",
-                    "alder"
-            };
+            // Get the current block
+            Block currentBlock = state.getBlock();
 
-            // Process all wood types with a loop
-            for (String woodType : woodTypes) {
-                String upperWoodType = woodType.toUpperCase();
-
-                // Handle logs
-                Block logBlock = getBlockField(upperWoodType + "_LOG").get();
-                Block strippedLogBlock = getBlockField("STRIPPED_" + upperWoodType + "_LOG").get();
-                if (state.is(logBlock)) {
-                    return strippedLogBlock.defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            // Check if it's a log that needs to be stripped
+            for (String woodType : ModBLocks.LOGS.keySet()) {
+                if (ModBLocks.LOGS.get(woodType).get() == currentBlock) {
+                    // This is a log, return the corresponding stripped log
+                    Block strippedLog = ModBLocks.STRIPPED_LOGS.get(woodType).get();
+                    return strippedLog.defaultBlockState().setValue(AXIS, state.getValue(AXIS));
                 }
+            }
 
-                // Handle wood
-                Block woodBlock = getBlockField(upperWoodType + "_WOOD").get();
-                Block strippedWoodBlock = getBlockField("STRIPPED_" + upperWoodType + "_WOOD").get();
-                if (state.is(woodBlock)) {
-                    return strippedWoodBlock.defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            // Check if it's a wood block that needs to be stripped
+            for (String woodType : ModBLocks.WOODS.keySet()) {
+                if (ModBLocks.WOODS.get(woodType).get() == currentBlock) {
+                    // This is a wood block, return the corresponding stripped wood
+                    Block strippedWood = ModBLocks.STRIPPED_WOODS.get(woodType).get();
+                    return strippedWood.defaultBlockState().setValue(AXIS, state.getValue(AXIS));
                 }
             }
         }
 
         return super.getToolModifiedState(state, context, toolAction, simulate);
     }
-
-    // Helper method to get blocks from ModBLocks by field name
-    private static DeferredBlock<Block> getBlockField(String fieldName) {
-        try {
-            java.lang.reflect.Field field = ModBLocks.class.getDeclaredField(fieldName);
-            field.setAccessible(true);
-            return (DeferredBlock<Block>) field.get(null);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to access field: " + fieldName, e);
-        }
-    }
-
-
-
-
-
-
-
 }

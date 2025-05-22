@@ -13,6 +13,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.BannerPatternItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -94,6 +95,9 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 "alder"
         };
 
+
+
+
 // LOGS_THAT_BURN tag
         TagsProvider.TagAppender<Item> logsThatBurnTag = this.tag(ItemTags.LOGS_THAT_BURN);
         for (String woodType : woodTypes) {
@@ -162,7 +166,6 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         }
 
 // Helper method to add a block's item form to an item tag
-
 
 
         this.tag(ItemTags.FLOWERS)

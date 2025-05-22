@@ -4,7 +4,6 @@ package net.darkflameproduction.agotmod.item;
 // Importing necessary classes from other packages
 
 import net.darkflameproduction.agotmod.AGoTMod;
-import net.darkflameproduction.agotmod.armor.client.mountin_clan.MountainClanLevyArmorModel;
 import net.darkflameproduction.agotmod.armor.custom.ModArmorMaterials;
 import net.darkflameproduction.agotmod.armor.custom.bolten.BoltenLevyArmorItem;
 import net.darkflameproduction.agotmod.armor.custom.bolten.BoltenNobleArmorItem;
@@ -35,16 +34,12 @@ import net.darkflameproduction.agotmod.entity.ModEntities;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.equipment.ArmorType;
-import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Function;
-import java.util.function.Supplier;
 
 // A utility class for creating and registering modded items
 public class ModItems {
@@ -449,7 +444,9 @@ public class ModItems {
             Item::new);
 
 
-    // ---------------------------(INGOTS)--------------------------- //
+    // ---------------------------(BANNERS)--------------------------- //
+
+
 
     // ---------------------------(ANIMAL SPAWN EGGS)--------------------------- //
 
@@ -929,7 +926,11 @@ public class ModItems {
                     0x919191,
                     properties));
 
-
+    public static final DeferredItem<Item> NORTHERN_PEASANT_SPAWN_EGG = ITEMS.registerItem("northern_peasant_spawn_egg",
+            properties -> new SpawnEggItem(ModEntities.NORTHERN_PEASANT_ENTITY.get(),
+                    0x575757,
+                    0x333333,
+                    properties));
 
 
 

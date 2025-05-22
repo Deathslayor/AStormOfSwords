@@ -1,4 +1,4 @@
-// 1.21.3	2025-05-20T20:33:46.7574361	Item Models: agotmod
+// 1.21.3	2025-05-22T23:01:46.9306277	Item Models: agotmod
 65c44e6f1f29781252c76032b90c20b3bc8f7b8a assets/agotmod/models/item/alder_button.json
 f0b6afe25a5640838c024d02c663e7c8f821ffd6 assets/agotmod/models/item/alder_door.json
 2af83e95998f18d674056268682572a94f141042 assets/agotmod/models/item/alder_fence.json
@@ -1551,6 +1551,7 @@ f838413b5f45625ed9485300718c8da4e3bdf75c assets/agotmod/models/item/northern_mou
 18f180e3766451bfceb0b1b9f27e6c1f22ff2b98 assets/agotmod/models/item/northern_mountain_clan_noble_helmet.json
 f9aa1223c23df98c4339c38e5799061b9feab068 assets/agotmod/models/item/northern_mountain_clan_noble_leggings.json
 08d9bc43d778c31ca9c0b14f69c7c21ff27ecfc0 assets/agotmod/models/item/northern_mountain_clan_noble_smithing_scroll.json
+fb2995a888c0f697aeabaef990be58fc45db1a0c assets/agotmod/models/item/northern_peasant_spawn_egg.json
 48751852d6ae81a09b7395dd51da5dc0043b7908 assets/agotmod/models/item/oat.json
 65a1e101d52d598a40f5cf3853c3bfc838ac20a9 assets/agotmod/models/item/oat_seeds.json
 e2ec9d36da7e457a3d99480c228d577b93132200 assets/agotmod/models/item/olive_button.json

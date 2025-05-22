@@ -20,6 +20,7 @@ public class ModBlockEntities {
 
     // Define the wood types array (including weirwood)
     private static final String[] ALL_WOOD_TYPES = {
+            "weirwood",
             "sycamore",
             "pine",
             "ash",
@@ -70,7 +71,11 @@ public class ModBlockEntities {
                         signBlocksArray[12], signBlocksArray[13], signBlocksArray[14], signBlocksArray[15],
                         signBlocksArray[16], signBlocksArray[17], signBlocksArray[18], signBlocksArray[19],
                         signBlocksArray[20], signBlocksArray[21], signBlocksArray[22], signBlocksArray[23],
-                        signBlocksArray[24], signBlocksArray[25]);
+                        signBlocksArray[24], signBlocksArray[25], signBlocksArray[26], signBlocksArray[27],
+                        signBlocksArray[28], signBlocksArray[29], signBlocksArray[30], signBlocksArray[31],
+                        signBlocksArray[32], signBlocksArray[33], signBlocksArray[34], signBlocksArray[35],
+                        signBlocksArray[36], signBlocksArray[37], signBlocksArray[38], signBlocksArray[39],
+                        signBlocksArray[40], signBlocksArray[41], signBlocksArray[42], signBlocksArray[43]);
             });
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ModHangingSignBlockEntity>> MOD_HANGING_SIGN =
@@ -100,7 +105,11 @@ public class ModBlockEntities {
                         hangingSignBlocksArray[12], hangingSignBlocksArray[13], hangingSignBlocksArray[14], hangingSignBlocksArray[15],
                         hangingSignBlocksArray[16], hangingSignBlocksArray[17], hangingSignBlocksArray[18], hangingSignBlocksArray[19],
                         hangingSignBlocksArray[20], hangingSignBlocksArray[21], hangingSignBlocksArray[22], hangingSignBlocksArray[23],
-                        hangingSignBlocksArray[24], hangingSignBlocksArray[25]);
+                        hangingSignBlocksArray[24], hangingSignBlocksArray[25], hangingSignBlocksArray[26], hangingSignBlocksArray[27],
+                        hangingSignBlocksArray[28], hangingSignBlocksArray[29], hangingSignBlocksArray[30], hangingSignBlocksArray[31],
+                        hangingSignBlocksArray[32], hangingSignBlocksArray[33], hangingSignBlocksArray[34], hangingSignBlocksArray[35],
+                        hangingSignBlocksArray[36], hangingSignBlocksArray[37], hangingSignBlocksArray[38], hangingSignBlocksArray[39],
+                        hangingSignBlocksArray[40], hangingSignBlocksArray[41], hangingSignBlocksArray[42], hangingSignBlocksArray[43]);
             });
 
     public static void register(IEventBus eventBus) {

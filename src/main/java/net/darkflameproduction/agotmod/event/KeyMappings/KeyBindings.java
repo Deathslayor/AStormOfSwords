@@ -3,11 +3,13 @@ package net.darkflameproduction.agotmod.event.KeyMappings;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.minecraft.client.KeyMapping;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.settings.KeyConflictContext;
 import net.neoforged.neoforge.common.util.Lazy;
 import org.lwjgl.glfw.GLFW;
 
-
+@OnlyIn(Dist.CLIENT)
 public final class KeyBindings {
     //Creats keys And Defines Usages And Abilitys For Magic Etc
     public static final KeyBindings INSTANCE = new KeyBindings();

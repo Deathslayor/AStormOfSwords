@@ -29,6 +29,7 @@ import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.darkflameproduction.agotmod.item.ModItems;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.item.BannerPatternItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.level.block.Block;
@@ -37,6 +38,7 @@ import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredItem;
 import org.jetbrains.annotations.NotNull;
 
 import static net.darkflameproduction.agotmod.block.ModBLocks.BLACKSTONE_VARIANTS;
@@ -60,6 +62,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         spawnEggItem(ModItems.MAMMOTH_SPAWN_EGG);
         spawnEggItem(ModItems.CROW_SPAWN_EGG);
         spawnEggItem(ModItems.DIREWOLF_SPAWN_EGG);
+        spawnEggItem(ModItems.NORTHERN_PEASANT_SPAWN_EGG);
 
 
         // ---------------------------(ARMOUR)--------------------------- //
@@ -951,6 +954,12 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     // Method to create a simple item model
     private @NotNull ItemModelBuilder simpleItem(DeferredHolder<Item, Item> item) {
+        return withExistingParent(item.getId().getPath(),
+                mcLoc("item/generated")).texture("layer0",
+                modLoc("item/" + item.getId().getPath()));
+    }
+
+    private @NotNull ItemModelBuilder simpleBannerItem(DeferredItem<BannerPatternItem> item) {
         return withExistingParent(item.getId().getPath(),
                 mcLoc("item/generated")).texture("layer0",
                 modLoc("item/" + item.getId().getPath()));

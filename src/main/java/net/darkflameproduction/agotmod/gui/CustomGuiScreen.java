@@ -17,7 +17,13 @@ import net.minecraft.stats.Stats;
 import net.minecraft.stats.Stat;
 import net.minecraft.stats.StatsCounter;
 import net.minecraft.world.item.Items;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
+
+
+
+@OnlyIn(Dist.CLIENT)
 public class CustomGuiScreen extends Screen {
     private static final ResourceLocation BLUR_LOCATION =
             ResourceLocation.fromNamespaceAndPath("minecraft", "shaders/post/blur.json");
@@ -204,6 +210,11 @@ public class CustomGuiScreen extends Screen {
     private static final double WEAPON_SKILL_MULTIPLIER = 1.04;
     private static final int MAX_WEAPON_SKILL_LEVEL = 100;
     private static final double WEAPON_SKILL_BASE_REQUIREMENT = 100.0;
+    private double lastPlayerX = 0;
+    private double lastPlayerY = 0;
+    private double lastPlayerZ = 0;
+    private boolean hasInitializedPosition = false;
+    private static final double TELEPORT_THRESHOLD = 5.0;
 
     private boolean isUsingShader = false;
     private float lastPlayerHealth = 0;
@@ -510,11 +521,16 @@ public class CustomGuiScreen extends Screen {
         if (minecraft != null && minecraft.player != null) {
             lastPlayerHealth = minecraft.player.getHealth();
             requestStatisticsFromServer();
+
+            // Initialize position tracking
+            lastPlayerX = minecraft.player.getX();
+            lastPlayerY = minecraft.player.getY();
+            lastPlayerZ = minecraft.player.getZ();
+            hasInitializedPosition = true;
         }
 
         applyBlurEffect();
     }
-
 
     @Override
     public void tick() {
@@ -522,6 +538,27 @@ public class CustomGuiScreen extends Screen {
 
         if (minecraft == null || minecraft.player == null) {
             return;
+        }
+
+        if (hasInitializedPosition) {
+            double currentX = minecraft.player.getX();
+            double currentY = minecraft.player.getY();
+            double currentZ = minecraft.player.getZ();
+
+            double deltaX = currentX - lastPlayerX;
+            double deltaY = currentY - lastPlayerY;
+            double deltaZ = currentZ - lastPlayerZ;
+            double distanceMoved = Math.sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ);
+
+            if (distanceMoved > TELEPORT_THRESHOLD) {
+                AGoTMod.LOGGER.info("Player teleported, closing GUI");
+                minecraft.setScreen(null);
+                return;
+            }
+
+            lastPlayerX = currentX;
+            lastPlayerY = currentY;
+            lastPlayerZ = currentZ;
         }
 
         if (!hasRequestedInitialStats) {
@@ -920,18 +957,26 @@ public class CustomGuiScreen extends Screen {
     }
 
     private void drawMapSection(GuiGraphics guiGraphics, int mouseX, int mouseY, ScreenLayout layout, float partialTick) {
-        // FIXME: Map Dimensions
-        mapWidget.setX(layout.contentX);
-        mapWidget.setY(layout.contentY);
-        mapWidget.setHeight(layout.contentHeight);
-        mapWidget.setWidth(layout.contentWidth);
+        int borderPillarWidth = BORDER_PILLAR_WIDTH;
+        int borderHeight = BORDER_HEIGHT;
+        int cornerSize = CORNER_SIZE;
+
+        int innerX = layout.contentX + borderPillarWidth;
+        int innerY = layout.contentY + borderHeight;
+        int innerWidth = layout.contentWidth - (borderPillarWidth * 2);
+        int innerHeight = layout.contentHeight - (borderHeight * 2);
+
+        mapWidget.setX(innerX);
+        mapWidget.setY(innerY);
+        mapWidget.setWidth(innerWidth);
+        mapWidget.setHeight(innerHeight);
         mapWidget.setMinZoom(mapWidget.defaultZoom());
 
-        // Render map
         if (mapWidget != null && mapWidget.isActive() && mapWidget.getMapId() != null &&
                 minecraft.getResourceManager().getResource(mapWidget.getMapId()).isPresent()) {
             mapWidget.render(guiGraphics, mouseX, mouseY, partialTick);
         }
+        
     }
 
     private void drawSkillsSection(GuiGraphics guiGraphics, int mouseX, int mouseY, ScreenLayout layout) {
