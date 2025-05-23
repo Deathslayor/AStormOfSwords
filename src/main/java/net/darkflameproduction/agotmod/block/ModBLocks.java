@@ -1051,7 +1051,44 @@ public class ModBLocks {
             "fir",
             "willow",
             "wormtree",
-            "alder"
+            "alder",
+            "almond",
+            "apple",
+            "apricot",
+            "baobab",
+            "black_cottonwood",
+            "blackthorn",
+            "blood_orange",
+            "bloodwood",
+            "blue_mahoe",
+            "cottonwood",
+            "datepalm",
+            "ebony",
+            "fig",
+            "fireplum",
+            "goldenheart",
+            "lemon",
+            "lime",
+            "linden",
+            "mahogany",
+            "maple",
+            "myrrh",
+            "nightwood",
+            "nutmeg",
+            "orange",
+            "peach",
+            "pear",
+            "pecan",
+            "persimmon",
+            "pink_ivory",
+            "plum",
+            "pomegranate",
+            "purpleheart",
+            "redwood",
+            "sandalwood",
+            "sandbeggar",
+            "tigerwood",
+            "yew"
     };
 
     static {
@@ -1239,6 +1276,80 @@ public class ModBLocks {
                 return ModTreeGrower.WORMTREE;
             case "alder":
                 return ModTreeGrower.ALDER;
+            case "almond":
+                return ModTreeGrower.ALMOND;
+            case "apple":
+                return ModTreeGrower.APPLE;
+            case "apricot":
+                return ModTreeGrower.APRICOT;
+            case "baobab":
+                return ModTreeGrower.BAOBAB;
+            case "black_cottonwood":
+                return ModTreeGrower.BLACK_COTTONWOOD;
+            case "blackthorn":
+                return ModTreeGrower.BLACKTHORN;
+            case "blood_orange":
+                return ModTreeGrower.BLOOD_ORANGE;
+            case "bloodwood":
+                return ModTreeGrower.BLOODWOOD;
+            case "blue_mahoe":
+                return ModTreeGrower.BLUE_MAHOE;
+            case "cottonwood":
+                return ModTreeGrower.COTTONWOOD;
+            case "datepalm":
+                return ModTreeGrower.DATEPALM;
+            case "ebony":
+                return ModTreeGrower.EBONY;
+            case "fig":
+                return ModTreeGrower.FIG;
+            case "fireplum":
+                return ModTreeGrower.FIREPLUM;
+            case "goldenheart":
+                return ModTreeGrower.GOLDENHEART;
+            case "lemon":
+                return ModTreeGrower.LEMON;
+            case "lime":
+                return ModTreeGrower.LIME;
+            case "linden":
+                return ModTreeGrower.LINDEN;
+            case "mahogany":
+                return ModTreeGrower.MAHOGANY;
+            case "maple":
+                return ModTreeGrower.MAPLE;
+            case "myrrh":
+                return ModTreeGrower.MYRRH;
+            case "nightwood":
+                return ModTreeGrower.NIGHTWOOD;
+            case "nutmeg":
+                return ModTreeGrower.NUTMEG;
+            case "orange":
+                return ModTreeGrower.ORANGE;
+            case "peach":
+                return ModTreeGrower.PEACH;
+            case "pear":
+                return ModTreeGrower.PEAR;
+            case "pecan":
+                return ModTreeGrower.PECAN;
+            case "persimmon":
+                return ModTreeGrower.PERSIMMON;
+            case "pink_ivory":
+                return ModTreeGrower.PINK_IVORY;
+            case "plum":
+                return ModTreeGrower.PLUM;
+            case "pomegranate":
+                return ModTreeGrower.POMEGRANATE;
+            case "purpleheart":
+                return ModTreeGrower.PURPLEHEART;
+            case "redwood":
+                return ModTreeGrower.REDWOOD;
+            case "sandalwood":
+                return ModTreeGrower.SANDALWOOD;
+            case "sandbeggar":
+                return ModTreeGrower.SANDBEGGAR;
+            case "tigerwood":
+                return ModTreeGrower.TIGERWOOD;
+            case "yew":
+                return ModTreeGrower.YEW;
             default:
                 return ModTreeGrower.SYSCAMORE;
         }
@@ -1290,6 +1401,80 @@ public class ModBLocks {
                 return ModWoodTypes.WORMTREE;
             case "alder":
                 return ModWoodTypes.ALDER;
+            case "almond":
+                return ModWoodTypes.ALMOND;
+            case "apple":
+                return ModWoodTypes.APPLE;
+            case "apricot":
+                return ModWoodTypes.APRICOT;
+            case "baobab":
+                return ModWoodTypes.BAOBAB;
+            case "black_cottonwood":
+                return ModWoodTypes.BLACK_COTTONWOOD;
+            case "blackthorn":
+                return ModWoodTypes.BLACKTHORN;
+            case "blood_orange":
+                return ModWoodTypes.BLOOD_ORANGE;
+            case "bloodwood":
+                return ModWoodTypes.BLOODWOOD;
+            case "blue_mahoe":
+                return ModWoodTypes.BLUE_MAHOE;
+            case "cottonwood":
+                return ModWoodTypes.COTTONWOOD;
+            case "datepalm":
+                return ModWoodTypes.DATEPALM;
+            case "ebony":
+                return ModWoodTypes.EBONY;
+            case "fig":
+                return ModWoodTypes.FIG;
+            case "fireplum":
+                return ModWoodTypes.FIREPLUM;
+            case "goldenheart":
+                return ModWoodTypes.GOLDENHEART;
+            case "lemon":
+                return ModWoodTypes.LEMON;
+            case "lime":
+                return ModWoodTypes.LIME;
+            case "linden":
+                return ModWoodTypes.LINDEN;
+            case "mahogany":
+                return ModWoodTypes.MAHOGANY;
+            case "maple":
+                return ModWoodTypes.MAPLE;
+            case "myrrh":
+                return ModWoodTypes.MYRRH;
+            case "nightwood":
+                return ModWoodTypes.NIGHTWOOD;
+            case "nutmeg":
+                return ModWoodTypes.NUTMEG;
+            case "orange":
+                return ModWoodTypes.ORANGE;
+            case "peach":
+                return ModWoodTypes.PEACH;
+            case "pear":
+                return ModWoodTypes.PEAR;
+            case "pecan":
+                return ModWoodTypes.PECAN;
+            case "persimmon":
+                return ModWoodTypes.PERSIMMON;
+            case "pink_ivory":
+                return ModWoodTypes.PINK_IVORY;
+            case "plum":
+                return ModWoodTypes.PLUM;
+            case "pomegranate":
+                return ModWoodTypes.POMEGRANATE;
+            case "purpleheart":
+                return ModWoodTypes.PURPLEHEART;
+            case "redwood":
+                return ModWoodTypes.REDWOOD;
+            case "sandalwood":
+                return ModWoodTypes.SANDALWOOD;
+            case "sandbeggar":
+                return ModWoodTypes.SANDBEGGAR;
+            case "tigerwood":
+                return ModWoodTypes.TIGERWOOD;
+            case "yew":
+                return ModWoodTypes.YEW;
             default:
                 return ModWoodTypes.SYCAMORE;
         }

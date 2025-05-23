@@ -79,6 +79,43 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> FIR_KEY = registerKey("fir");
     public static final ResourceKey<ConfiguredFeature<?, ?>> WILLOW_KEY = registerKey("willow");
     public static final ResourceKey<ConfiguredFeature<?, ?>> WORMTREE_KEY = registerKey("wormtree");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ALMOND_KEY = registerKey("almond");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> APPLE_KEY = registerKey("apple");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> APRICOT_KEY = registerKey("apricot");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BAOBAB_KEY = registerKey("baobab");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BLACK_COTTONWOOD_KEY = registerKey("black_cottonwood");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BLACKTHORN_KEY = registerKey("blackthorn");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BLOOD_ORANGE_KEY = registerKey("blood_orange");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BLOODWOOD_KEY = registerKey("bloodwood");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BLUE_MAHOE_KEY = registerKey("blue_mahoe");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> COTTONWOOD_KEY = registerKey("cottonwood");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> DATEPALM_KEY = registerKey("datepalm");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> EBONY_KEY = registerKey("ebony");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FIG_KEY = registerKey("fig");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FIREPLUM_KEY = registerKey("fireplum");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> GOLDENHEART_KEY = registerKey("goldenheart");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> LEMON_KEY = registerKey("lemon");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> LIME_KEY = registerKey("lime");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> LINDEN_KEY = registerKey("linden");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MAHOGANY_KEY = registerKey("mahogany");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MAPLE_KEY = registerKey("maple");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MYRRH_KEY = registerKey("myrrh");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> NIGHTWOOD_KEY = registerKey("nightwood");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> NUTMEG_KEY = registerKey("nutmeg");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ORANGE_KEY = registerKey("orange");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PEACH_KEY = registerKey("peach");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PEAR_KEY = registerKey("pear");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PECAN_KEY = registerKey("pecan");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PERSIMMON_KEY = registerKey("persimmon");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PINK_IVORY_KEY = registerKey("pink_ivory");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PLUM_KEY = registerKey("plum");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> POMEGRANATE_KEY = registerKey("pomegranate");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PURPLEHEART_KEY = registerKey("purpleheart");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> REDWOOD_KEY = registerKey("redwood");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SANDALWOOD_KEY = registerKey("sandalwood");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SANDBEGGAR_KEY = registerKey("sandbeggar");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TIGERWOOD_KEY = registerKey("tigerwood");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> YEW_KEY = registerKey("yew");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SYCAMORE_RARE_KEY = registerKey("sycamore_rare");
     public static final ResourceKey<ConfiguredFeature<?, ?>> WEIRWOOD_RARE_KEY = registerKey("weirwood_rare");
     public static final ResourceKey<ConfiguredFeature<?, ?>> OAK2_RARE_KEY = registerKey("oak2_rare");
@@ -102,6 +139,43 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> FIR_RARE_KEY = registerKey("fir_rare");
     public static final ResourceKey<ConfiguredFeature<?, ?>> WILLOW_RARE_KEY = registerKey("willow_rare");
     public static final ResourceKey<ConfiguredFeature<?, ?>> WORMTREE_RARE_KEY = registerKey("wormtree_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ALMOND_RARE_KEY = registerKey("almond_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> APPLE_RARE_KEY = registerKey("apple_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> APRICOT_RARE_KEY = registerKey("apricot_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BAOBAB_RARE_KEY = registerKey("baobab_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BLACK_COTTONWOOD_RARE_KEY = registerKey("black_cottonwood_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BLACKTHORN_RARE_KEY = registerKey("blackthorn_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BLOOD_ORANGE_RARE_KEY = registerKey("blood_orange_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BLOODWOOD_RARE_KEY = registerKey("bloodwood_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BLUE_MAHOE_RARE_KEY = registerKey("blue_mahoe_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> COTTONWOOD_RARE_KEY = registerKey("cottonwood_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> DATEPALM_RARE_KEY = registerKey("datepalm_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> EBONY_RARE_KEY = registerKey("ebony_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FIG_RARE_KEY = registerKey("fig_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FIREPLUM_RARE_KEY = registerKey("fireplum_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> GOLDENHEART_RARE_KEY = registerKey("goldenheart_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> LEMON_RARE_KEY = registerKey("lemon_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> LIME_RARE_KEY = registerKey("lime_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> LINDEN_RARE_KEY = registerKey("linden_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MAHOGANY_RARE_KEY = registerKey("mahogany_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MAPLE_RARE_KEY = registerKey("maple_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MYRRH_RARE_KEY = registerKey("myrrh_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> NIGHTWOOD_RARE_KEY = registerKey("nightwood_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> NUTMEG_RARE_KEY = registerKey("nutmeg_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ORANGE_RARE_KEY = registerKey("orange_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PEACH_RARE_KEY = registerKey("peach_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PEAR_RARE_KEY = registerKey("pear_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PECAN_RARE_KEY = registerKey("pecan_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PERSIMMON_RARE_KEY = registerKey("persimmon_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PINK_IVORY_RARE_KEY = registerKey("pink_ivory_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PLUM_RARE_KEY = registerKey("plum_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> POMEGRANATE_RARE_KEY = registerKey("pomegranate_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PURPLEHEART_RARE_KEY = registerKey("purpleheart_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> REDWOOD_RARE_KEY = registerKey("redwood_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SANDALWOOD_RARE_KEY = registerKey("sandalwood_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SANDBEGGAR_RARE_KEY = registerKey("sandbeggar_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TIGERWOOD_RARE_KEY = registerKey("tigerwood_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> YEW_RARE_KEY = registerKey("yew_rare");
     public static final ResourceKey<ConfiguredFeature<?, ?>> THORN_BUSH_KEY = registerKey("thorn_bush");
     public static final ResourceKey<ConfiguredFeature<?, ?>> THISTLE_KEY = registerKey("thistle");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TANSY_KEY = registerKey("tansy");
@@ -729,6 +803,635 @@ public class ModConfiguredFeatures {
                         .setValue(LeavesBlock.PERSISTENT, true)),
                 new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(3), ConstantInt.of(5), 0.25f, 0.1f, 0.5f, 0.8f),
                 new TwoLayersFeatureSize(1, 0, 2)).build());
+
+        // ALMOND
+        register(context, ALMOND_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("almond").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("almond").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, ALMOND_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("almond").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("almond").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// APPLE
+        register(context, APPLE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("apple").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("apple").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, APPLE_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("apple").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("apple").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// APRICOT
+        register(context, APRICOT_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("apricot").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("apricot").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, APRICOT_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("apricot").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("apricot").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// BAOBAB
+        register(context, BAOBAB_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("baobab").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("baobab").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, BAOBAB_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("baobab").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("baobab").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// BLACK_COTTONWOOD
+        register(context, BLACK_COTTONWOOD_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("black_cottonwood").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("black_cottonwood").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, BLACK_COTTONWOOD_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("black_cottonwood").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("black_cottonwood").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// BLACKTHORN
+        register(context, BLACKTHORN_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("blackthorn").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("blackthorn").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, BLACKTHORN_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("blackthorn").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("blackthorn").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// BLOOD_ORANGE
+        register(context, BLOOD_ORANGE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("blood_orange").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("blood_orange").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, BLOOD_ORANGE_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("blood_orange").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("blood_orange").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// BLOODWOOD
+        register(context, BLOODWOOD_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("bloodwood").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("bloodwood").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, BLOODWOOD_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("bloodwood").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("bloodwood").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// BLUE_MAHOE
+        register(context, BLUE_MAHOE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("blue_mahoe").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("blue_mahoe").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, BLUE_MAHOE_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("blue_mahoe").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("blue_mahoe").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// COTTONWOOD
+        register(context, COTTONWOOD_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("cottonwood").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("cottonwood").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, COTTONWOOD_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("cottonwood").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("cottonwood").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// DATEPALM
+        register(context, DATEPALM_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("datepalm").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("datepalm").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, DATEPALM_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("datepalm").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("datepalm").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// EBONY
+        register(context, EBONY_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("ebony").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("ebony").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, EBONY_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("ebony").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("ebony").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// FIG
+        register(context, FIG_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("fig").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("fig").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, FIG_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("fig").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("fig").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// FIREPLUM
+        register(context, FIREPLUM_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("fireplum").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("fireplum").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, FIREPLUM_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("fireplum").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("fireplum").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// GOLDENHEART
+        register(context, GOLDENHEART_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("goldenheart").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("goldenheart").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, GOLDENHEART_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("goldenheart").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("goldenheart").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// LEMON
+        register(context, LEMON_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("lemon").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("lemon").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, LEMON_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("lemon").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("lemon").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// LIME
+        register(context, LIME_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("lime").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("lime").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, LIME_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("lime").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("lime").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// LINDEN
+        register(context, LINDEN_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("linden").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("linden").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, LINDEN_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("linden").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("linden").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// MAHOGANY
+        register(context, MAHOGANY_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("mahogany").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("mahogany").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, MAHOGANY_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("mahogany").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("mahogany").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// MAPLE
+        register(context, MAPLE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("maple").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("maple").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, MAPLE_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("maple").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("maple").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// MYRRH
+        register(context, MYRRH_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("myrrh").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("myrrh").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, MYRRH_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("myrrh").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("myrrh").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// NIGHTWOOD
+        register(context, NIGHTWOOD_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("nightwood").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("nightwood").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, NIGHTWOOD_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("nightwood").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("nightwood").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// NUTMEG
+        register(context, NUTMEG_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("nutmeg").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("nutmeg").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, NUTMEG_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("nutmeg").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("nutmeg").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// ORANGE
+        register(context, ORANGE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("orange").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("orange").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, ORANGE_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("orange").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("orange").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// PEACH
+        register(context, PEACH_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("peach").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("peach").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, PEACH_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("peach").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("peach").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// PEAR
+        register(context, PEAR_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("pear").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("pear").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, PEAR_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("pear").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("pear").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// PECAN
+        register(context, PECAN_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("pecan").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("pecan").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, PECAN_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("pecan").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("pecan").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// PERSIMMON
+        register(context, PERSIMMON_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("persimmon").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("persimmon").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, PERSIMMON_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("persimmon").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("persimmon").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// PINK_IVORY
+        register(context, PINK_IVORY_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("pink_ivory").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("pink_ivory").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, PINK_IVORY_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("pink_ivory").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("pink_ivory").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// PLUM
+        register(context, PLUM_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("plum").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("plum").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, PLUM_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("plum").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("plum").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// POMEGRANATE
+        register(context, POMEGRANATE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("pomegranate").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("pomegranate").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, POMEGRANATE_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("pomegranate").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("pomegranate").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// PURPLEHEART
+        register(context, PURPLEHEART_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("purpleheart").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("purpleheart").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, PURPLEHEART_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("purpleheart").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("purpleheart").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// REDWOOD
+        register(context, REDWOOD_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("redwood").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("redwood").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, REDWOOD_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("redwood").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("redwood").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// SANDALWOOD
+        register(context, SANDALWOOD_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("sandalwood").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("sandalwood").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, SANDALWOOD_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("sandalwood").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("sandalwood").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// SANDBEGGAR
+        register(context, SANDBEGGAR_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("sandbeggar").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("sandbeggar").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, SANDBEGGAR_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("sandbeggar").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("sandbeggar").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// TIGERWOOD
+        register(context, TIGERWOOD_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("tigerwood").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("tigerwood").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, TIGERWOOD_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("tigerwood").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("tigerwood").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+// YEW
+        register(context, YEW_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("yew").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("yew").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, YEW_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("yew").get()),
+                new StraightTrunkPlacer(10, 2, 3),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("yew").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
 
         register(context, THORN_BUSH_KEY, Feature.FLOWER,
                 new RandomPatchConfiguration(

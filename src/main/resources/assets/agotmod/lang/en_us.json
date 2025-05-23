@@ -517,7 +517,7 @@
   "block.minecraft.banner.yourmod.targaryen_banner.green": "Green Dragon Banner",
   "block.minecraft.banner.yourmod.targaryen_banner.red": "Red Dragon Banner",
   "block.minecraft.banner.yourmod.targaryen_banner.black": "Black Dragon Banner",
-
+  "entity.agotmod.northern_peasant.inventory": "%s's Inventory",
   "key.agotmod.open_magic_menu": "Open Magic Menu",
 
   "key.categories.agotmod": "Storm Of Swords Controlls",

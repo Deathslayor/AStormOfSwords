@@ -3,20 +3,36 @@ package net.darkflameproduction.agotmod.entity.custom.npc;
 import net.darkflameproduction.agotmod.entity.animations.ModAnimationDefinitions;
 import net.darkflameproduction.agotmod.sound.ModSounds;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
+import net.minecraft.world.entity.npc.InventoryCarrier;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ChestMenu;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.BedBlock;
@@ -30,22 +46,78 @@ import software.bernie.geckolib.animation.AnimationController;
 import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
+import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity {
+public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity, InventoryCarrier {
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     private static final EntityDataAccessor<Boolean> IS_SLEEPING = SynchedEntityData.defineId(Northern_Peasant_Entity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Long> LAST_SLEEP_TIME = SynchedEntityData.defineId(Northern_Peasant_Entity.class, EntityDataSerializers.LONG);
+    private static final EntityDataAccessor<ItemStack> DATA_ITEM_IN_MAIN_HAND =
+            SynchedEntityData.defineId(Northern_Peasant_Entity.class, EntityDataSerializers.ITEM_STACK);
+
+    private static final String[] FIRST_NAMES = {
+            "Alastair", "Angus", "Arran", "Blair", "Brody", "Callum", "Campbell", "Cameron", "Cormag", "Craig",
+            "Dougal", "Duncan", "Euan", "Ewan", "Fergus", "Finlay", "Fraser", "Gavin", "Gordon", "Graeme",
+            "Gregor", "Hamish", "Harris", "Hugh", "Iain", "Innes", "Jamie", "Keith", "Kenneth", "Kerr",
+            "Knox", "Lachlan", "Lennox", "Leslie", "Logan", "Malcolm", "Murray", "Neil", "Niall", "Ramsay",
+            "Robbie", "Ross", "Ruaridh", "Seamus", "Sholto", "Struan", "Tavish", "Torin", "Wallace", "Watt",
+            "Alec", "Archibald", "Baird", "Brodie", "Bruce", "Calum", "Conall", "Dalziel", "Donald", "Donnie",
+            "Drummond", "Duff", "Eachann", "Erskine", "Farquhar", "Farquharson", "Findlay", "Gilchrist", "Gillespie", "Grant",
+            "Hector", "Ivor", "Jock", "John", "Kennan", "Kyle", "Leith", "Lorne", "Magnus", "Mathew",
+            "Maxwell", "Menzies", "Munro", "Murdo", "Nairn", "Paton", "Quinn", "Ranald", "Roderick", "Ronald",
+            "Roy", "Shaw", "Sloan", "Stewart", "Tam", "Taran", "Torquil", "Uisdean", "Watson", "Wilson",
+            "Eddard", "Robb", "Brandon", "Rickon", "Benjen", "Torrhen", "Cregan", "Rickard", "Harrion", "Arnolf",
+            "Karlon", "Roose", "Ramsay", "Domeric", "Galbart", "Robett", "Mors", "Hother", "Jon", "Jeor", "Jorah",
+            "Rodrik", "Osric", "Dorren", "Theon", "Wyman", "Cley", "Howland", "Halys", "Leobald", "Donnel",
+            "Robin", "Ludd", "Gryff", "Gregor", "Asher", "Ethan", "Arthur", "Eddison", "Vayon", "Wendel",
+            "Jonos", "Jory", "Bowen", "Richard","Dickon", "Roger"
+    };
+
+    private static final String[] LAST_NAMES = {
+            "Ainsley", "Airey", "Archer", "Askew", "Atkinson", "Barker", "Barraclough", "Baxter", "Beadle", "Beckett",
+            "Bell", "Benson", "Birkett", "Blackburne", "Blake", "Blenkinsop", "Booth", "Bramley", "Briggs", "Brock",
+            "Brown", "Browne", "Bullock", "Butterworth", "Byers", "Calvert", "Carr", "Carter", "Charlton", "Clarke",
+            "Clayton", "Close", "Cocker", "Collier", "Cook", "Cooper", "Corbett", "Coulson", "Cowell", "Cowley",
+            "Craggs", "Craven", "Crompton", "Crook", "Cross", "Curry", "Dalton", "Dawson", "Dent", "Devine",
+            "Dickinson", "Dobson", "Dodds", "Donaldson", "Dunn", "Dyson", "Eddison", "Edgar", "Edson", "Elliott",
+            "English", "Etherington", "Fairhurst", "Fawcett", "Ferguson", "Fielding", "Firth", "Fleming", "Forster", "Fox",
+            "Frain", "Fraser", "Gibson", "Gill", "Godfrey", "Goodwin", "Graves", "Greenwood", "Gregson", "Grey",
+            "Grice", "Griffin", "Hall", "Hampson", "Handley", "Hardman", "Hargreaves", "Harker", "Harrison", "Hartley",
+            "Hawkins", "Hayes", "Hewitt", "Hodgson", "Holden", "Hollis", "Holmes", "Hooper", "Hope", "Horner",
+            "Houghton", "Howard", "Hudson", "Hughes", "Humphrey", "Hurst", "Ingham", "Jackson", "Jagger", "Jennings",
+            "Johnston", "Jordan", "Kay", "Kendrick", "Kenyon", "Kerr", "Knowles", "Lamb", "Lang", "Layton",
+            "Leach", "Lloyd", "Lofthouse", "Lord", "Lowes", "Lunn", "Maddison", "Maguire", "Marsden", "Martin",
+            "Mason", "Milburn", "Milner", "Moore", "Moss", "Muir", "Murray", "Naylor", "Nelson", "Neville",
+            "Nicholson", "Nixon", "Norton", "Ogden", "Oldham", "Orton", "Osborne", "Parkin", "Parr", "Pattinson",
+            "Ainsworth", "Archer", "Baxter", "Beadle", "Brewster", "Chapman", "Clark", "Clerk", "Carter", "Collier",
+            "Draper", "Fletcher", "Forester", "Gardener", "Glover", "Harper", "Hayward", "Heward", "Hodgson", "Joiner",
+            "Leathersmith", "Mercer", "Miller", "Palmer", "Parker", "Parsons", "Porter", "Roper", "Sawyer", "Sexton",
+            "Shepherd", "Spencer", "Steward", "Taylor", "Thatcher", "Turner", "Walker","Snow","Snow","Snow","Snow","Snow","Snow","Snow","Snow","Snow","Snow","Snow", "Waller", "Warner", "Watson",
+            "Weaver", "Webster", "Wheeler", "Wilkinson", "Wright", "Yeoman", "Yeats", "Young", "Bowyer", "Snow","Snow","Snow","Snow","Snow","Snow","Snow","Snow","Snow","Snow","Lipps", "Farrier"
+    };
 
     private static final int SLEEP_START_TIME = 12542;
     private static final int SLEEP_END_TIME = 23460;
     private BlockPos bedPos;
     private int bedSearchCooldown = 0;
+
+    // Eating and healing variables
+    private int eatingTime = 0;
+    private boolean isEating = false;
+    private int healCooldown = 0;
+    private static final int HEAL_COOLDOWN_TIME = 600; // 30 seconds cooldown between healing attempts
+    private static final int FOOD_CHECK_INTERVAL = 60; // Check for food every 3 seconds when damaged
+    private int foodCheckTimer = 0;
+
+    public static final int PEASANT_SLOT_OFFSET = 400;
+    private static final int PEASANT_INVENTORY_SIZE = 54;
+    private final SimpleContainer inventory = new SimpleContainer(PEASANT_INVENTORY_SIZE);
 
     private static final Map<BlockPos, UUID> bedReservations = new HashMap<>();
     private static final Map<UUID, Long> reservationTimestamps = new HashMap<>();
@@ -98,6 +170,245 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity 
         this.getNavigation().setRequiredPathLength(48.0F);
     }
 
+    /**
+     * Generates a random name for the peasant
+     */
+    private void generateRandomName(RandomSource random) {
+        String firstName = FIRST_NAMES[random.nextInt(FIRST_NAMES.length)];
+        String lastName = LAST_NAMES[random.nextInt(LAST_NAMES.length)];
+        String fullName = firstName + " " + lastName;
+
+        this.setCustomName(Component.literal(fullName));
+        this.setCustomNameVisible(false);
+    }
+
+    /**
+     * Controls when the name tag is visible - only when a player is directly looking at the entity
+     */
+    @Override
+    public boolean isCustomNameVisible() {
+        return this.hasCustomName() && this.shouldShowName();
+    }
+
+    /**
+     * Checks if a player is looking directly at this entity
+     */
+    @Override
+    public boolean shouldShowName() {
+        if (this.level().isClientSide) {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public SimpleContainer getInventory() {
+        return this.inventory;
+    }
+
+    @Override
+    public SlotAccess getSlot(int slot) {
+        int i = slot - PEASANT_SLOT_OFFSET;
+        return i >= 0 && i < this.inventory.getContainerSize() ? SlotAccess.forContainer(this.inventory, i) : super.getSlot(slot);
+    }
+
+    public boolean hasSpace() {
+        for (int i = 0; i < this.inventory.getContainerSize(); i++) {
+            if (this.inventory.getItem(i).isEmpty()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean addItem(ItemStack stack) {
+        if (stack.isEmpty()) return false;
+
+        for (int i = 0; i < this.inventory.getContainerSize(); i++) {
+            ItemStack existing = this.inventory.getItem(i);
+            if (!existing.isEmpty() && ItemStack.isSameItemSameComponents(existing, stack)) {
+                int maxStackSize = Math.min(existing.getMaxStackSize(), this.inventory.getMaxStackSize());
+                int canAdd = maxStackSize - existing.getCount();
+                if (canAdd > 0) {
+                    int toAdd = Math.min(canAdd, stack.getCount());
+                    existing.grow(toAdd);
+                    stack.shrink(toAdd);
+                    if (stack.isEmpty()) return true;
+                }
+            }
+        }
+
+        for (int i = 0; i < this.inventory.getContainerSize(); i++) {
+            if (this.inventory.getItem(i).isEmpty()) {
+                this.inventory.setItem(i, stack.copy());
+                stack.setCount(0);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public ItemStack removeItem(ItemStack stack) {
+        for (int i = 0; i < this.inventory.getContainerSize(); i++) {
+            ItemStack existing = this.inventory.getItem(i);
+            if (ItemStack.isSameItemSameComponents(existing, stack)) {
+                return this.inventory.removeItem(i, stack.getCount());
+            }
+        }
+        return ItemStack.EMPTY;
+    }
+
+    public boolean hasItem(ItemStack stack) {
+        for (int i = 0; i < this.inventory.getContainerSize(); i++) {
+            ItemStack existing = this.inventory.getItem(i);
+            if (ItemStack.isSameItemSameComponents(existing, stack) && existing.getCount() >= stack.getCount()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void dropAllItems() {
+        if (this.level() instanceof ServerLevel serverLevel) {
+            for (int i = 0; i < this.inventory.getContainerSize(); i++) {
+                ItemStack stack = this.inventory.getItem(i);
+                if (!stack.isEmpty()) {
+                    this.spawnAtLocation(serverLevel, stack);
+                    this.inventory.setItem(i, ItemStack.EMPTY);
+                }
+            }
+        }
+    }
+
+    // Item holding and eating methods
+    public ItemStack getItemInHand(InteractionHand hand) {
+        if (hand == InteractionHand.MAIN_HAND) {
+            return this.entityData.get(DATA_ITEM_IN_MAIN_HAND);
+        }
+        return ItemStack.EMPTY;
+    }
+
+    public void setItemInHand(InteractionHand hand, ItemStack stack) {
+        if (hand == InteractionHand.MAIN_HAND) {
+            this.entityData.set(DATA_ITEM_IN_MAIN_HAND, stack);
+        }
+    }
+
+    @Override
+    public Iterable<ItemStack> getArmorSlots() {
+        return Collections.emptyList(); // We don't have armor for peasants
+    }
+
+    @Override
+    public ItemStack getItemBySlot(EquipmentSlot slot) {
+        if (slot == EquipmentSlot.MAINHAND) {
+            return this.getItemInHand(InteractionHand.MAIN_HAND);
+        }
+        return ItemStack.EMPTY;
+    }
+
+    @Override
+    public void setItemSlot(EquipmentSlot slot, ItemStack stack) {
+        if (slot == EquipmentSlot.MAINHAND) {
+            this.setItemInHand(InteractionHand.MAIN_HAND, stack);
+        }
+    }
+
+    // Food and healing logic
+    private boolean needsHealing() {
+        return this.getHealth() < this.getMaxHealth() && this.healCooldown <= 0;
+    }
+
+    private boolean canEat() {
+        return !this.isEating && !this.isSleeping();
+    }
+
+    private boolean isFood(ItemStack stack) {
+        return stack.is(ItemTags.create(
+                ResourceLocation.fromNamespaceAndPath("minecraft", "meat")));
+    }
+
+    private ItemStack findFoodInInventory() {
+        for (int i = 0; i < this.inventory.getContainerSize(); i++) {
+            ItemStack stack = this.inventory.getItem(i);
+            if (isFood(stack)) {
+                return stack;
+            }
+        }
+        return ItemStack.EMPTY;
+    }
+
+    public void startEating(ItemStack foodStack) {
+        if (!this.isEating && isFood(foodStack)) {
+            this.isEating = true;
+            this.eatingTime = 0;
+            this.setItemInHand(InteractionHand.MAIN_HAND, foodStack.copy());
+            this.level().playSound(null, this.getX(), this.getY(), this.getZ(),
+                    SoundEvents.GENERIC_EAT, SoundSource.NEUTRAL,
+                    0.5F + 0.5F * this.getRandom().nextInt(2),
+                    (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.2F + 1.0F);
+        }
+    }
+
+    public void finishEating() {
+        if (this.isEating) {
+            ItemStack foodStack = this.getItemInHand(InteractionHand.MAIN_HAND);
+            if (isFood(foodStack)) {
+                this.heal(4.0F);
+                this.healCooldown = HEAL_COOLDOWN_TIME;
+
+                this.level().playSound(null, this.getX(), this.getY(), this.getZ(),
+                        SoundEvents.PLAYER_BURP, SoundSource.NEUTRAL,
+                        0.5F, this.getRandom().nextFloat() * 0.1F + 0.9F);
+
+                for (int i = 0; i < this.inventory.getContainerSize(); i++) {
+                    ItemStack stack = this.inventory.getItem(i);
+                    if (stack.getItem() == foodStack.getItem()) {
+                        stack.shrink(1);
+                        if (stack.isEmpty()) {
+                            this.inventory.setItem(i, ItemStack.EMPTY);
+                        }
+                        break;
+                    }
+                }
+            }
+
+            this.isEating = false;
+            this.eatingTime = 0;
+            this.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+        }
+    }
+
+    @Override
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        if (!this.level().isClientSide && hand == InteractionHand.MAIN_HAND) {
+            if (this.isSleeping()) {
+                return InteractionResult.PASS;
+            }
+
+            if (player instanceof ServerPlayer serverPlayer) {
+                openInventoryFor(serverPlayer);
+                return InteractionResult.SUCCESS;
+            }
+        }
+        return super.mobInteract(player, hand);
+    }
+
+    public void openInventoryFor(ServerPlayer player) {
+        player.openMenu(new SimpleMenuProvider(
+                (id, playerInventory, playerEntity) -> new ChestMenu(
+                        MenuType.GENERIC_9x6,
+                        id,
+                        playerInventory,
+                        this.inventory,
+                        6
+                ),
+                Component.translatable("entity.agotmod.northern_peasant.inventory", this.getDisplayName())
+        ));
+    }
+
     @Override
     public void aiStep() {
         if (!this.isSleeping()) {
@@ -144,6 +455,45 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity 
                 releaseBedReservation(this.getUUID());
             }
         }
+
+        // Handle healing and eating
+        if (!this.level().isClientSide) {
+            // Reduce heal cooldown
+            if (this.healCooldown > 0) {
+                this.healCooldown--;
+            }
+
+            // Check for food and eat if damaged
+            if (!this.isSleeping() && !this.isEating && this.needsHealing()) {
+                this.foodCheckTimer++;
+                if (this.foodCheckTimer >= FOOD_CHECK_INTERVAL) {
+                    this.foodCheckTimer = 0;
+
+                    ItemStack foodStack = this.findFoodInInventory();
+                    if (!foodStack.isEmpty() && this.canEat()) {
+                        this.startEating(foodStack);
+                    }
+                }
+            }
+
+            // Handle eating animation and timing
+            if (this.isEating) {
+                this.eatingTime++;
+
+                // Play eating sound every 4 ticks while eating
+                if (this.eatingTime % 4 == 0) {
+                    this.level().playSound(null, this.getX(), this.getY(), this.getZ(),
+                            SoundEvents.GENERIC_EAT, SoundSource.NEUTRAL,
+                            0.5F + 0.5F * this.getRandom().nextInt(2),
+                            (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.2F + 1.0F);
+                }
+
+                // Finish eating after 32 ticks (same as player)
+                if (this.eatingTime >= 32) {
+                    this.finishEating();
+                }
+            }
+        }
     }
 
     @Override
@@ -169,6 +519,7 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity 
         super.defineSynchedData(builder);
         builder.define(IS_SLEEPING, false);
         builder.define(LAST_SLEEP_TIME, 0L);
+        builder.define(DATA_ITEM_IN_MAIN_HAND, ItemStack.EMPTY);
     }
 
     @Override
@@ -176,6 +527,13 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity 
         super.addAdditionalSaveData(compound);
         compound.putBoolean("IsSleeping", this.isSleeping());
         compound.putLong("LastSleepTime", this.entityData.get(LAST_SLEEP_TIME));
+
+        this.writeInventoryToTag(compound, this.registryAccess());
+
+        if (this.hasCustomName()) {
+            compound.putString("CustomName", Component.Serializer.toJson(this.getCustomName(), this.registryAccess()));
+        }
+
         if (bedPos != null) {
             compound.putInt("BedX", bedPos.getX());
             compound.putInt("BedY", bedPos.getY());
@@ -188,6 +546,18 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity 
             compound.putInt("SleepingZ", sleepPos.getZ());
             compound.putBoolean("WasSleeping", true);
         }
+
+        // Save eating and healing data
+        compound.putInt("HealCooldown", this.healCooldown);
+        compound.putInt("FoodCheckTimer", this.foodCheckTimer);
+        compound.putBoolean("IsEating", this.isEating);
+        compound.putInt("EatingTime", this.eatingTime);
+
+        ItemStack mainHandItem = this.getItemInHand(InteractionHand.MAIN_HAND);
+        if (!mainHandItem.isEmpty()) {
+            // Fix 2: saveOptional() returns a Tag, so we store it directly
+            compound.put("MainHandItem", mainHandItem.saveOptional(this.registryAccess()));
+        }
     }
 
     @Override
@@ -195,6 +565,25 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity 
         super.readAdditionalSaveData(compound);
         this.entityData.set(IS_SLEEPING, compound.getBoolean("IsSleeping"));
         this.entityData.set(LAST_SLEEP_TIME, compound.getLong("LastSleepTime"));
+
+        this.readInventoryFromTag(compound, this.registryAccess());
+
+        if (compound.contains("CustomName")) {
+            try {
+                Component customName = Component.Serializer.fromJson(compound.getString("CustomName"), this.registryAccess());
+                if (customName != null) {
+                    this.setCustomName(customName);
+                    this.setCustomNameVisible(false);
+                }
+            } catch (Exception e) {
+                if (!this.level().isClientSide) {
+                    this.generateRandomName(this.level().getRandom());
+                }
+            }
+        } else if (!this.hasCustomName() && !this.level().isClientSide) {
+            this.generateRandomName(this.level().getRandom());
+        }
+
         if (compound.contains("BedX")) {
             bedPos = new BlockPos(compound.getInt("BedX"), compound.getInt("BedY"), compound.getInt("BedZ"));
         }
@@ -215,6 +604,18 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity 
                 }
             }
         }
+
+        // Load eating and healing data
+        this.healCooldown = compound.getInt("HealCooldown");
+        this.foodCheckTimer = compound.getInt("FoodCheckTimer");
+        this.isEating = compound.getBoolean("IsEating");
+        this.eatingTime = compound.getInt("EatingTime");
+
+        if (compound.contains("MainHandItem")) {
+            // Fix 3: Use parseOptional() with registry access instead of of()
+            ItemStack stack = ItemStack.parseOptional(this.registryAccess(), compound.getCompound("MainHandItem"));
+            this.setItemInHand(InteractionHand.MAIN_HAND, stack);
+        }
     }
 
     @Override
@@ -229,11 +630,21 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity 
             releaseBedReservation(this.getUUID());
         }
 
-        return super.hurtServer(level, source, amount);
+        boolean result = super.hurtServer(level, source, amount);
+
+        // Reset food check timer when damaged to check for food sooner
+        if (result && !this.isEating) {
+            this.foodCheckTimer = 0;
+        }
+
+        return result;
     }
 
     @Override
     public void remove(RemovalReason reason) {
+        if (!this.level().isClientSide && reason == RemovalReason.KILLED) {
+            this.dropAllItems();
+        }
         releaseBedReservation(this.getUUID());
         super.remove(reason);
     }
@@ -246,7 +657,7 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity 
     @Nullable
     @Override
     protected SoundEvent getAmbientSound() {
-        if (this.isSleeping()) {
+        if (this.isSleeping() || this.isEating) {
             return null;
         } else {
             return ModSounds.MAMMOTH_AMBIENT.get();
@@ -266,8 +677,12 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity 
     @Nullable
     @Override
     public SpawnGroupData finalizeSpawn(
-            ServerLevelAccessor p_35439_, net.minecraft.world.DifficultyInstance p_35440_, EntitySpawnReason p_363222_, @Nullable SpawnGroupData p_35442_
+            ServerLevelAccessor p_35439_, DifficultyInstance p_35440_, EntitySpawnReason p_363222_, @Nullable SpawnGroupData p_35442_
     ) {
+        if (!this.level().isClientSide) {
+            this.generateRandomName(p_35439_.getRandom());
+        }
+
         return super.finalizeSpawn(p_35439_, p_35440_, p_363222_, p_35442_);
     }
 
@@ -308,6 +723,13 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity 
         setBedPos(pos);
         this.getNavigation().stop();
         this.setDeltaMovement(0, 0, 0);
+
+        // Stop eating if we start sleeping
+        if (this.isEating) {
+            this.isEating = false;
+            this.eatingTime = 0;
+            this.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+        }
     }
 
     @Override
