@@ -15,6 +15,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.BannerPatternItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -72,27 +73,63 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModBLocks.WEIRWOOD_LEAVES.get().asItem());
 
         String[] woodTypes = {
-                "sycamore",
-                "pine",
+                "alder",
+                "almond",
+                "apple",
+                "apricot",
                 "ash",
+                "aspen",
+                "baobab",
                 "beech",
+                "black_cherry",
+                "black_cottonwood",
+                "black_olive",
+                "blackbark",
+                "blackthorn",
+                "blood_orange",
+                "bloodwood",
+                "blue_mahoe",
                 "cedar",
                 "chestnut",
+                "cottonwood",
+                "crabapple",
+                "datepalm",
+                "ebony",
+                "fig",
+                "fir",
+                "fireplum",
+                "goldenheart",
                 "hawthorn",
                 "ironwood",
-                "sentinel",
-                "blackbark",
-                "aspen",
-                "black_cherry",
-                "black_olive",
-                "crabapple",
+                "lemon",
+                "lime",
+                "linden",
+                "mahogany",
+                "maple",
+                "myrrh",
+                "nightwood",
+                "nutmeg",
                 "olive",
+                "orange",
+                "peach",
+                "pear",
+                "pecan",
+                "persimmon",
+                "pine",
+                "pink_ivory",
+                "plum",
+                "pomegranate",
+                "purpleheart",
+                "redwood",
+                "sandalwood",
+                "sandbeggar",
+                "sentinel",
+                "sycamore",
+                "tigerwood",
                 "white_cherry",
-                "red_cherry",
-                "fir",
                 "willow",
                 "wormtree",
-                "alder"
+                "yew"
         };
 
 
@@ -165,7 +202,6 @@ public class ModItemTagGenerator extends ItemTagsProvider {
             }
         }
 
-// Helper method to add a block's item form to an item tag
 
 
         this.tag(ItemTags.FLOWERS)
@@ -210,30 +246,97 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModBLocks.RED_ROSE_BUSH.get().asItem());
 
         this.tag(ItemTags.MEAT)
+                // Meats and sausages
                 .add(ModItems.RAW_BEAR_MEAT.get().asItem())
                 .add(ModItems.COOKED_BEAR_MEAT.get().asItem())
-                .add(ModItems.RAW_BLOOD_SAUSAGE.get().asItem())
-                .add(ModItems.COOKED_BLOOD_SAUSAGE.get().asItem())
-                .add(ModItems.RAW_WHITE_SAUSAGE.get().asItem())
                 .add(ModItems.COOKED_WHITE_SAUSAGE.get().asItem())
-                .add(ModItems.RAW_SAUSAGE.get().asItem())
+                .add(ModItems.COOKED_BLOOD_SAUSAGE.get().asItem())
                 .add(ModItems.COOKED_SAUSAGE.get().asItem())
+                .add(ModItems.RAW_WHITE_SAUSAGE.get().asItem())
+                .add(ModItems.RAW_BLOOD_SAUSAGE.get().asItem())
+                .add(ModItems.RAW_SAUSAGE.get().asItem())
                 .add(ModItems.COOKED_BACON.get().asItem())
                 .add(ModItems.RAW_BACON.get().asItem())
-                .add(ModItems.RAW_BOAR_VENISON.get().asItem())
                 .add(ModItems.COOKED_BOAR_VENISON.get().asItem())
-                .add(ModItems.RAW_CHICKEN_NUGGETS.get().asItem())
+                .add(ModItems.RAW_BOAR_VENISON.get().asItem())
                 .add(ModItems.COOKED_CHICKEN_NUGGETS.get().asItem())
-                .add(ModItems.RAW_DEER_VENISON.get().asItem())
+                .add(ModItems.RAW_CHICKEN_NUGGETS.get().asItem())
                 .add(ModItems.COOKED_DEER_VENISON.get().asItem())
-                .add(ModItems.RAW_GOAT_MEAT.get().asItem())
+                .add(ModItems.RAW_DEER_VENISON.get().asItem())
                 .add(ModItems.COOKED_GOAT_MEAT.get().asItem())
-                .add(ModItems.RAW_HARE_MEAT.get().asItem())
+                .add(ModItems.RAW_GOAT_MEAT.get().asItem())
                 .add(ModItems.COOKED_HARE_MEAT.get().asItem())
-                .add(ModItems.RAW_HORSE_MEAT.get().asItem())
+                .add(ModItems.RAW_HARE_MEAT.get().asItem())
                 .add(ModItems.COOKED_HORSE_MEAT.get().asItem())
+                .add(ModItems.RAW_HORSE_MEAT.get().asItem())
+                .add(ModItems.COOKED_MAMMOTH_MEAT.get().asItem())
                 .add(ModItems.RAW_MAMMOTH_MEAT.get().asItem())
-                .add(ModItems.COOKED_MAMMOTH_MEAT.get().asItem());
+
+                // Vegetables and herbs
+                .add(ModItems.HORSERADISH.get().asItem())
+                .add(ModItems.LEEK.get().asItem())
+                .add(ModItems.NEEP.get().asItem())
+                .add(ModItems.OAT.get().asItem())
+                .add(ModItems.PARSLEY.get().asItem())
+                .add(ModItems.RED_ONION.get().asItem())
+                .add(ModItems.TURNIP.get().asItem())
+                .add(ModItems.WILD_ONION.get().asItem())
+                .add(ModItems.ONION.get().asItem())
+                .add(ModItems.CABBAGE.get().asItem())
+                .add(ModItems.BEAN.get().asItem())
+                .add(ModItems.CHICKPEA.get().asItem())
+                .add(ModItems.CUCUMBER.get().asItem())
+                .add(ModItems.GREEN_BEAN.get().asItem())
+                .add(ModItems.SPINACH.get().asItem())
+
+                // Fruits and berries
+                .add(ModItems.STRAWBERRY.get().asItem())
+                .add(ModItems.BLACKBERRY.get().asItem())
+                .add(ModItems.BLUEBERRY.get().asItem())
+                .add(ModItems.MULBERRY.get().asItem())
+                .add(ModItems.RASPBERRY.get().asItem())
+                .add(ModItems.SMOKEBERRY.get().asItem())
+
+                //vanilla Food
+                .add(Items.APPLE.asItem())
+                .add(Items.GOLDEN_APPLE.asItem())
+                .add(Items.ENCHANTED_GOLDEN_APPLE.asItem())
+                .add(Items.MELON_SLICE.asItem())
+                .add(Items.SWEET_BERRIES.asItem())
+                .add(Items.GLOW_BERRIES.asItem())
+                .add(Items.CHORUS_FRUIT.asItem())
+                .add(Items.CARROT.asItem())
+                .add(Items.GOLDEN_CARROT.asItem())
+                .add(Items.POTATO.asItem())
+                .add(Items.BAKED_POTATO.asItem())
+                .add(Items.BEETROOT.asItem())
+                .add(Items.DRIED_KELP.asItem())
+                .add(Items.BEEF.asItem())
+                .add(Items.COOKED_BEEF.asItem())
+                .add(Items.PORKCHOP.asItem())
+                .add(Items.COOKED_PORKCHOP.asItem())
+                .add(Items.MUTTON.asItem())
+                .add(Items.COOKED_MUTTON.asItem())
+                .add(Items.CHICKEN.asItem())
+                .add(Items.COOKED_CHICKEN.asItem())
+                .add(Items.RABBIT.asItem())
+                .add(Items.COOKED_RABBIT.asItem())
+                .add(Items.COD.asItem())
+                .add(Items.COOKED_COD.asItem())
+                .add(Items.SALMON.asItem())
+                .add(Items.COOKED_SALMON.asItem())
+                .add(Items.BREAD.asItem())
+                .add(Items.COOKIE.asItem())
+                .add(Items.PUMPKIN_PIE.asItem())
+                .add(Items.MUSHROOM_STEW.asItem())
+                .add(Items.BEETROOT_SOUP.asItem())
+                .add(Items.SUSPICIOUS_STEW.asItem())
+
+                // Grains
+                .add(ModItems.CORN.get().asItem());
+
+
+
 
 
         this.tag(ItemTags.FREEZE_IMMUNE_WEARABLES)

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:goldenheart_wood_stripped"
+  ],
+  "result": {
+    "count": 4,
+    "id": "agotmod:goldenheart_planks"
+  }
+}

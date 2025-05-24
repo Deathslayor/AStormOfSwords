@@ -654,13 +654,14 @@ public class ModItems {
             properties -> new Item(properties.food(ModFoods.RASPBERRY)));
     public static final DeferredItem<Item> SMOKEBERRY = ITEMS.registerItem("smokeberry",
             properties -> new Item(properties.food(ModFoods.SMOKEBERRY)));
+    public static final DeferredItem<Item> CORN = ITEMS.registerItem("corn",
+            properties -> new Item(properties.food(ModFoods.CORN)));
     public static final DeferredItem<Item> DRAGON_PEPPER = ITEMS.registerItem("dragon_pepper", Item::new);
     public static final DeferredItem<Item> PEPPER = ITEMS.registerItem("pepper", Item::new);
     public static final DeferredItem<Item> PEPPERCORN = ITEMS.registerItem("peppercorn", Item::new);
     public static final DeferredItem<Item> COTTON = ITEMS.registerItem("cotton", Item::new);
     public static final DeferredItem<Item> HEMP = ITEMS.registerItem("hemp", Item::new);
-    public static final DeferredItem<Item> CORN = ITEMS.registerItem("corn",
-            properties -> new Item(properties.food(ModFoods.CORN)));
+
 
 
 
@@ -776,7 +777,44 @@ public class ModItems {
             "fir",
             "willow",
             "wormtree",
-            "alder"
+            "alder",
+            "almond",
+            "apple",
+            "apricot",
+            "baobab",
+            "black_cottonwood",
+            "blackthorn",
+            "blood_orange",
+            "bloodwood",
+            "blue_mahoe",
+            "cottonwood",
+            "datepalm",
+            "ebony",
+            "fig",
+            "fireplum",
+            "goldenheart",
+            "lemon",
+            "lime",
+            "linden",
+            "mahogany",
+            "maple",
+            "myrrh",
+            "nightwood",
+            "nutmeg",
+            "orange",
+            "peach",
+            "pear",
+            "pecan",
+            "persimmon",
+            "pink_ivory",
+            "plum",
+            "pomegranate",
+            "purpleheart",
+            "redwood",
+            "sandalwood",
+            "sandbeggar",
+            "tigerwood",
+            "yew"
     };
 
     // Static initialization block to register all wood signs

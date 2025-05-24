@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:fireplum_log",
+    "agotmod:fireplum_log",
+    "agotmod:fireplum_log",
+    "agotmod:fireplum_log"
+  ],
+  "result": {
+    "count": 3,
+    "id": "agotmod:fireplum_wood"
+  }
+}

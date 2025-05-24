@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:sandbeggar_log",
+    "agotmod:sandbeggar_log",
+    "agotmod:sandbeggar_log",
+    "agotmod:sandbeggar_log"
+  ],
+  "result": {
+    "count": 3,
+    "id": "agotmod:sandbeggar_wood"
+  }
+}

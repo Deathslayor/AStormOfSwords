@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:pomegranate_wood"
+  ],
+  "result": {
+    "count": 4,
+    "id": "agotmod:pomegranate_planks"
+  }
+}

@@ -18,9 +18,8 @@ public class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, AGoTMod.MOD_ID);
 
-    // Define the wood types array (including weirwood)
+    // Define the wood types array (excluding weirwood as it's handled separately)
     private static final String[] ALL_WOOD_TYPES = {
-            "weirwood",
             "sycamore",
             "pine",
             "ash",
@@ -41,28 +40,64 @@ public class ModBlockEntities {
             "fir",
             "willow",
             "wormtree",
-            "alder"
+            "alder",
+            "almond",
+            "apple",
+            "apricot",
+            "baobab",
+            "black_cottonwood",
+            "blackthorn",
+            "blood_orange",
+            "bloodwood",
+            "blue_mahoe",
+            "cottonwood",
+            "datepalm",
+            "ebony",
+            "fig",
+            "fireplum",
+            "goldenheart",
+            "lemon",
+            "lime",
+            "linden",
+            "mahogany",
+            "maple",
+            "myrrh",
+            "nightwood",
+            "nutmeg",
+            "orange",
+            "peach",
+            "pear",
+            "pecan",
+            "persimmon",
+            "pink_ivory",
+            "plum",
+            "pomegranate",
+            "purpleheart",
+            "redwood",
+            "sandalwood",
+            "sandbeggar",
+            "tigerwood",
+            "yew"
     };
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ModSignBlockEntity>> MOD_SIGN =
             BLOCK_ENTITIES.register("mod_sign", () -> {
                 List<Block> signBlocks = new ArrayList<>();
 
-                // Add all wood types' signs to the collection
-                for (String woodType : ALL_WOOD_TYPES) {
-                    signBlocks.add(woodType.equals("weirwood")
-                            ? ModBLocks.WEIRWOOD_SIGN.get()
-                            : ModBLocks.SIGNS.get(woodType).get());
+                // Add weirwood signs first
+                signBlocks.add(ModBLocks.WEIRWOOD_SIGN.get());
+                signBlocks.add(ModBLocks.WEIRWOOD_WALL_SIGN.get());
 
-                    signBlocks.add(woodType.equals("weirwood")
-                            ? ModBLocks.WEIRWOOD_WALL_SIGN.get()
-                            : ModBLocks.WALL_SIGNS.get(woodType).get());
+                // Add all other wood types' signs to the collection
+                for (String woodType : ALL_WOOD_TYPES) {
+                    signBlocks.add(ModBLocks.SIGNS.get(woodType).get());
+                    signBlocks.add(ModBLocks.WALL_SIGNS.get(woodType).get());
                 }
 
                 // Convert to array for varargs parameter
                 Block[] signBlocksArray = signBlocks.toArray(new Block[0]);
 
-                // Pass all blocks directly as varargs using array
+                // Pass all blocks directly as varargs using array - expanded for all 114 blocks (57 wood types * 2 sign types each)
                 return new BlockEntityType<>(
                         ModSignBlockEntity::new,
                         signBlocksArray[0], signBlocksArray[1], signBlocksArray[2], signBlocksArray[3],
@@ -75,28 +110,45 @@ public class ModBlockEntities {
                         signBlocksArray[28], signBlocksArray[29], signBlocksArray[30], signBlocksArray[31],
                         signBlocksArray[32], signBlocksArray[33], signBlocksArray[34], signBlocksArray[35],
                         signBlocksArray[36], signBlocksArray[37], signBlocksArray[38], signBlocksArray[39],
-                        signBlocksArray[40], signBlocksArray[41], signBlocksArray[42], signBlocksArray[43]);
+                        signBlocksArray[40], signBlocksArray[41], signBlocksArray[42], signBlocksArray[43],
+                        signBlocksArray[44], signBlocksArray[45], signBlocksArray[46], signBlocksArray[47],
+                        signBlocksArray[48], signBlocksArray[49], signBlocksArray[50], signBlocksArray[51],
+                        signBlocksArray[52], signBlocksArray[53], signBlocksArray[54], signBlocksArray[55],
+                        signBlocksArray[56], signBlocksArray[57], signBlocksArray[58], signBlocksArray[59],
+                        signBlocksArray[60], signBlocksArray[61], signBlocksArray[62], signBlocksArray[63],
+                        signBlocksArray[64], signBlocksArray[65], signBlocksArray[66], signBlocksArray[67],
+                        signBlocksArray[68], signBlocksArray[69], signBlocksArray[70], signBlocksArray[71],
+                        signBlocksArray[72], signBlocksArray[73], signBlocksArray[74], signBlocksArray[75],
+                        signBlocksArray[76], signBlocksArray[77], signBlocksArray[78], signBlocksArray[79],
+                        signBlocksArray[80], signBlocksArray[81], signBlocksArray[82], signBlocksArray[83],
+                        signBlocksArray[84], signBlocksArray[85], signBlocksArray[86], signBlocksArray[87],
+                        signBlocksArray[88], signBlocksArray[89], signBlocksArray[90], signBlocksArray[91],
+                        signBlocksArray[92], signBlocksArray[93], signBlocksArray[94], signBlocksArray[95],
+                        signBlocksArray[96], signBlocksArray[97], signBlocksArray[98], signBlocksArray[99],
+                        signBlocksArray[100], signBlocksArray[101], signBlocksArray[102], signBlocksArray[103],
+                        signBlocksArray[104], signBlocksArray[105], signBlocksArray[106], signBlocksArray[107],
+                        signBlocksArray[108], signBlocksArray[109], signBlocksArray[110], signBlocksArray[111],
+                        signBlocksArray[112], signBlocksArray[113]);
             });
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ModHangingSignBlockEntity>> MOD_HANGING_SIGN =
             BLOCK_ENTITIES.register("mod_hanging_sign", () -> {
                 List<Block> hangingSignBlocks = new ArrayList<>();
 
-                // Add all wood types' hanging signs to the collection
-                for (String woodType : ALL_WOOD_TYPES) {
-                    hangingSignBlocks.add(woodType.equals("weirwood")
-                            ? ModBLocks.WEIRWOOD_HANGING_SIGN.get()
-                            : ModBLocks.HANGING_SIGNS.get(woodType).get());
+                // Add weirwood hanging signs first
+                hangingSignBlocks.add(ModBLocks.WEIRWOOD_HANGING_SIGN.get());
+                hangingSignBlocks.add(ModBLocks.WEIRWOOD_WALL_HANGING_SIGN.get());
 
-                    hangingSignBlocks.add(woodType.equals("weirwood")
-                            ? ModBLocks.WEIRWOOD_WALL_HANGING_SIGN.get()
-                            : ModBLocks.WALL_HANGING_SIGNS.get(woodType).get());
+                // Add all other wood types' hanging signs to the collection
+                for (String woodType : ALL_WOOD_TYPES) {
+                    hangingSignBlocks.add(ModBLocks.HANGING_SIGNS.get(woodType).get());
+                    hangingSignBlocks.add(ModBLocks.WALL_HANGING_SIGNS.get(woodType).get());
                 }
 
                 // Convert to array for varargs parameter
                 Block[] hangingSignBlocksArray = hangingSignBlocks.toArray(new Block[0]);
 
-                // Pass all blocks directly as varargs using array
+                // Pass all blocks directly as varargs using array - expanded for all 114 blocks (57 wood types * 2 hanging sign types each)
                 return new BlockEntityType<>(
                         ModHangingSignBlockEntity::new,
                         hangingSignBlocksArray[0], hangingSignBlocksArray[1], hangingSignBlocksArray[2], hangingSignBlocksArray[3],
@@ -109,7 +161,25 @@ public class ModBlockEntities {
                         hangingSignBlocksArray[28], hangingSignBlocksArray[29], hangingSignBlocksArray[30], hangingSignBlocksArray[31],
                         hangingSignBlocksArray[32], hangingSignBlocksArray[33], hangingSignBlocksArray[34], hangingSignBlocksArray[35],
                         hangingSignBlocksArray[36], hangingSignBlocksArray[37], hangingSignBlocksArray[38], hangingSignBlocksArray[39],
-                        hangingSignBlocksArray[40], hangingSignBlocksArray[41], hangingSignBlocksArray[42], hangingSignBlocksArray[43]);
+                        hangingSignBlocksArray[40], hangingSignBlocksArray[41], hangingSignBlocksArray[42], hangingSignBlocksArray[43],
+                        hangingSignBlocksArray[44], hangingSignBlocksArray[45], hangingSignBlocksArray[46], hangingSignBlocksArray[47],
+                        hangingSignBlocksArray[48], hangingSignBlocksArray[49], hangingSignBlocksArray[50], hangingSignBlocksArray[51],
+                        hangingSignBlocksArray[52], hangingSignBlocksArray[53], hangingSignBlocksArray[54], hangingSignBlocksArray[55],
+                        hangingSignBlocksArray[56], hangingSignBlocksArray[57], hangingSignBlocksArray[58], hangingSignBlocksArray[59],
+                        hangingSignBlocksArray[60], hangingSignBlocksArray[61], hangingSignBlocksArray[62], hangingSignBlocksArray[63],
+                        hangingSignBlocksArray[64], hangingSignBlocksArray[65], hangingSignBlocksArray[66], hangingSignBlocksArray[67],
+                        hangingSignBlocksArray[68], hangingSignBlocksArray[69], hangingSignBlocksArray[70], hangingSignBlocksArray[71],
+                        hangingSignBlocksArray[72], hangingSignBlocksArray[73], hangingSignBlocksArray[74], hangingSignBlocksArray[75],
+                        hangingSignBlocksArray[76], hangingSignBlocksArray[77], hangingSignBlocksArray[78], hangingSignBlocksArray[79],
+                        hangingSignBlocksArray[80], hangingSignBlocksArray[81], hangingSignBlocksArray[82], hangingSignBlocksArray[83],
+                        hangingSignBlocksArray[84], hangingSignBlocksArray[85], hangingSignBlocksArray[86], hangingSignBlocksArray[87],
+                        hangingSignBlocksArray[88], hangingSignBlocksArray[89], hangingSignBlocksArray[90], hangingSignBlocksArray[91],
+                        hangingSignBlocksArray[92], hangingSignBlocksArray[93], hangingSignBlocksArray[94], hangingSignBlocksArray[95],
+                        hangingSignBlocksArray[96], hangingSignBlocksArray[97], hangingSignBlocksArray[98], hangingSignBlocksArray[99],
+                        hangingSignBlocksArray[100], hangingSignBlocksArray[101], hangingSignBlocksArray[102], hangingSignBlocksArray[103],
+                        hangingSignBlocksArray[104], hangingSignBlocksArray[105], hangingSignBlocksArray[106], hangingSignBlocksArray[107],
+                        hangingSignBlocksArray[108], hangingSignBlocksArray[109], hangingSignBlocksArray[110], hangingSignBlocksArray[111],
+                        hangingSignBlocksArray[112], hangingSignBlocksArray[113]);
             });
 
     public static void register(IEventBus eventBus) {

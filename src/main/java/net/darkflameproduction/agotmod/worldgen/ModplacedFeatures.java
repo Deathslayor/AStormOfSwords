@@ -518,6 +518,338 @@ public class ModplacedFeatures {
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
                         ModBLocks.SAPLINGS.get("wormtree").get()));
 
+// ALMOND
+        register(context, ALMOND_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ALMOND_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("almond").get()));
+
+        register(context, ALMOND_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ALMOND_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("almond").get()));
+
+// APPLE
+        register(context, APPLE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.APPLE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("apple").get()));
+
+        register(context, APPLE_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.APPLE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("apple").get()));
+
+// APRICOT
+        register(context, APRICOT_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.APRICOT_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("apricot").get()));
+
+        register(context, APRICOT_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.APRICOT_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("apricot").get()));
+
+// BAOBAB
+        register(context, BAOBAB_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BAOBAB_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("baobab").get()));
+
+        register(context, BAOBAB_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BAOBAB_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("baobab").get()));
+
+// BLACK_COTTONWOOD
+        register(context, BLACK_COTTONWOOD_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BLACK_COTTONWOOD_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("black_cottonwood").get()));
+
+        register(context, BLACK_COTTONWOOD_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BLACK_COTTONWOOD_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("black_cottonwood").get()));
+
+// BLACKTHORN
+        register(context, BLACKTHORN_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BLACKTHORN_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("blackthorn").get()));
+
+        register(context, BLACKTHORN_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BLACKTHORN_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("blackthorn").get()));
+
+// BLOOD_ORANGE
+        register(context, BLOOD_ORANGE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BLOOD_ORANGE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("blood_orange").get()));
+
+        register(context, BLOOD_ORANGE_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BLOOD_ORANGE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("blood_orange").get()));
+
+// BLOODWOOD
+        register(context, BLOODWOOD_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BLOODWOOD_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("bloodwood").get()));
+
+        register(context, BLOODWOOD_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BLOODWOOD_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("bloodwood").get()));
+
+// BLUE_MAHOE
+        register(context, BLUE_MAHOE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BLUE_MAHOE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("blue_mahoe").get()));
+
+        register(context, BLUE_MAHOE_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BLUE_MAHOE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("blue_mahoe").get()));
+
+// COTTONWOOD
+        register(context, COTTONWOOD_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.COTTONWOOD_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("cottonwood").get()));
+
+        register(context, COTTONWOOD_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.COTTONWOOD_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("cottonwood").get()));
+
+// DATEPALM
+        register(context, DATEPALM_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.DATEPALM_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("datepalm").get()));
+
+        register(context, DATEPALM_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.DATEPALM_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("datepalm").get()));
+
+// EBONY
+        register(context, EBONY_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.EBONY_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("ebony").get()));
+
+        register(context, EBONY_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.EBONY_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("ebony").get()));
+
+// FIG
+        register(context, FIG_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.FIG_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("fig").get()));
+
+        register(context, FIG_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.FIG_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("fig").get()));
+
+// FIREPLUM
+        register(context, FIREPLUM_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.FIREPLUM_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("fireplum").get()));
+
+        register(context, FIREPLUM_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.FIREPLUM_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("fireplum").get()));
+
+// GOLDENHEART
+        register(context, GOLDENHEART_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.GOLDENHEART_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("goldenheart").get()));
+
+        register(context, GOLDENHEART_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.GOLDENHEART_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("goldenheart").get()));
+
+// LEMON
+        register(context, LEMON_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.LEMON_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("lemon").get()));
+
+        register(context, LEMON_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.LEMON_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("lemon").get()));
+
+// LIME
+        register(context, LIME_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.LIME_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("lime").get()));
+
+        register(context, LIME_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.LIME_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("lime").get()));
+
+// LINDEN
+        register(context, LINDEN_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.LINDEN_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("linden").get()));
+
+        register(context, LINDEN_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.LINDEN_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("linden").get()));
+
+// MAHOGANY
+        register(context, MAHOGANY_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.MAHOGANY_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("mahogany").get()));
+
+        register(context, MAHOGANY_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.MAHOGANY_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("mahogany").get()));
+
+// MAPLE
+        register(context, MAPLE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.MAPLE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("maple").get()));
+
+        register(context, MAPLE_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.MAPLE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("maple").get()));
+
+// MYRRH
+        register(context, MYRRH_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.MYRRH_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("myrrh").get()));
+
+        register(context, MYRRH_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.MYRRH_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("myrrh").get()));
+
+// NIGHTWOOD
+        register(context, NIGHTWOOD_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.NIGHTWOOD_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("nightwood").get()));
+
+        register(context, NIGHTWOOD_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.NIGHTWOOD_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("nightwood").get()));
+
+// NUTMEG
+        register(context, NUTMEG_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.NUTMEG_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("nutmeg").get()));
+
+        register(context, NUTMEG_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.NUTMEG_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("nutmeg").get()));
+
+// ORANGE
+        register(context, ORANGE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ORANGE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("orange").get()));
+
+        register(context, ORANGE_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ORANGE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("orange").get()));
+
+// PEACH
+        register(context, PEACH_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PEACH_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("peach").get()));
+
+        register(context, PEACH_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PEACH_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("peach").get()));
+
+// PEAR
+        register(context, PEAR_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PEAR_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("pear").get()));
+
+        register(context, PEAR_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PEAR_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("pear").get()));
+
+// PECAN
+        register(context, PECAN_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PECAN_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("pecan").get()));
+
+        register(context, PECAN_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PECAN_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("pecan").get()));
+
+// PERSIMMON
+        register(context, PERSIMMON_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PERSIMMON_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("persimmon").get()));
+
+        register(context, PERSIMMON_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PERSIMMON_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("persimmon").get()));
+
+// PINK_IVORY
+        register(context, PINK_IVORY_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PINK_IVORY_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("pink_ivory").get()));
+
+        register(context, PINK_IVORY_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PINK_IVORY_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("pink_ivory").get()));
+
+// PLUM
+        register(context, PLUM_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PLUM_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("plum").get()));
+
+        register(context, PLUM_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PLUM_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("plum").get()));
+
+// POMEGRANATE
+        register(context, POMEGRANATE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.POMEGRANATE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("pomegranate").get()));
+
+        register(context, POMEGRANATE_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.POMEGRANATE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("pomegranate").get()));
+
+// PURPLEHEART
+        register(context, PURPLEHEART_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PURPLEHEART_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("purpleheart").get()));
+
+        register(context, PURPLEHEART_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PURPLEHEART_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("purpleheart").get()));
+
+// REDWOOD
+        register(context, REDWOOD_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.REDWOOD_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("redwood").get()));
+
+        register(context, REDWOOD_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.REDWOOD_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("redwood").get()));
+
+// SANDALWOOD
+        register(context, SANDALWOOD_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SANDALWOOD_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("sandalwood").get()));
+
+        register(context, SANDALWOOD_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SANDALWOOD_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("sandalwood").get()));
+
+// SANDBEGGAR
+        register(context, SANDBEGGAR_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SANDBEGGAR_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("sandbeggar").get()));
+
+        register(context, SANDBEGGAR_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SANDBEGGAR_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("sandbeggar").get()));
+
+// TIGERWOOD
+        register(context, TIGERWOOD_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.TIGERWOOD_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("tigerwood").get()));
+
+        register(context, TIGERWOOD_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.TIGERWOOD_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("tigerwood").get()));
+
+// YEW
+        register(context, YEW_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.YEW_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("yew").get()));
+
+        register(context, YEW_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.YEW_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("yew").get()));
 
 
 

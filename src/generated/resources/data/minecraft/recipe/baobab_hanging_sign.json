@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "minecraft:chain",
+    "B": "agotmod:baobab_log_stripped"
+  },
+  "pattern": [
+    "# #",
+    "BBB",
+    "BBB"
+  ],
+  "result": {
+    "count": 6,
+    "id": "agotmod:baobab_hanging_sign"
+  }
+}

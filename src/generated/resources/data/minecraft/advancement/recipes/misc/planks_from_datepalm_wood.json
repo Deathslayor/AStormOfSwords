@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_datepalm_wood": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:datepalm_wood"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:planks_from_datepalm_wood"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_datepalm_wood"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:planks_from_datepalm_wood"
+    ]
+  }
+}

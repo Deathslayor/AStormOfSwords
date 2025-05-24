@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:orange_wood_stripped"
+  ],
+  "result": {
+    "count": 4,
+    "id": "agotmod:orange_planks"
+  }
+}

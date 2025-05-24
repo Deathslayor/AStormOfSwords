@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "agotmod:block/fireplum_slabs"
+    },
+    "type=double": {
+      "model": "agotmod:block/fireplum_planks"
+    },
+    "type=top": {
+      "model": "agotmod:block/fireplum_slabs_top"
+    }
+  }
+}

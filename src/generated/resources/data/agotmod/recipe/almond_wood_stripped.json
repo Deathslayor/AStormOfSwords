@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:almond_log_stripped",
+    "agotmod:almond_log_stripped",
+    "agotmod:almond_log_stripped",
+    "agotmod:almond_log_stripped"
+  ],
+  "result": {
+    "count": 3,
+    "id": "agotmod:almond_wood_stripped"
+  }
+}

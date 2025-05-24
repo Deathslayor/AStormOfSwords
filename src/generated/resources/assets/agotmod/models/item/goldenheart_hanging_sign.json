@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "agotmod:item/goldenheart_hanging_sign"
+  }
+}

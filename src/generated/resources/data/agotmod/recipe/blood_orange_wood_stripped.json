@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:blood_orange_log_stripped",
+    "agotmod:blood_orange_log_stripped",
+    "agotmod:blood_orange_log_stripped",
+    "agotmod:blood_orange_log_stripped"
+  ],
+  "result": {
+    "count": 3,
+    "id": "agotmod:blood_orange_wood_stripped"
+  }
+}

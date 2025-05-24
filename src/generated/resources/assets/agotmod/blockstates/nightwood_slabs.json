@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "agotmod:block/nightwood_slabs"
+    },
+    "type=double": {
+      "model": "agotmod:block/nightwood_planks"
+    },
+    "type=top": {
+      "model": "agotmod:block/nightwood_slabs_top"
+    }
+  }
+}
