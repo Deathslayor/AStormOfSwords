@@ -1,0 +1,400 @@
+package net.darkflameproduction.agotmod.entity.custom.npc.system;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
+import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
+
+import java.util.*;
+
+public class FarmingSystem {
+    private final Northern_Peasant_Entity peasant;
+
+    // Simple farm management
+    private boolean hasFarm = false;
+    private long lastFarmlandConversion = -1;
+
+    // Work tracking
+    private boolean hasReturnedToJobBlockAfterFood = true;
+    private FarmState currentFarmState = FarmState.NEEDS_FARM_SETUP;
+
+    public enum FarmState {
+        NEEDS_FARM_SETUP,       // Need to set up farm area
+        RETURN_TO_JOB_BLOCK,    // Walk to job block each morning
+        CONVERTING_TO_FARMLAND, // Converting dirt/grass to farmland
+        PLANTING_CROPS,         // Planting seeds on farmland
+        HARVESTING_CROPS,       // Harvesting and replanting
+        PATROLLING             // All work done, just patrolling
+    }
+
+    public FarmingSystem(Northern_Peasant_Entity peasant) {
+        this.peasant = peasant;
+    }
+
+    public void tick() {
+        // Simple tick - no complex processing needed
+    }
+
+    // Simple farm setup - just mark that we have a job block
+    public boolean setupFarm() {
+        if (peasant.getJobBlockPos() == null) {
+            return false;
+        }
+
+        if (!hasFarm) {
+            hasFarm = true;
+            currentFarmState = FarmState.RETURN_TO_JOB_BLOCK;
+            return true;
+        }
+
+        return true;
+    }
+
+    // Direct farmland conversion - convert 15x15 area around job block at Y-1
+    public int convertToFarmland() {
+        if (!hasFarm || peasant.getJobBlockPos() == null) {
+            return 0;
+        }
+
+        // Check daily limit
+        long currentDay = peasant.level().getDayTime() / 24000;
+        long lastConversionDay = lastFarmlandConversion / 24000;
+
+        if (currentDay <= lastConversionDay && lastFarmlandConversion != -1) {
+            // Already converted today
+            currentFarmState = FarmState.PLANTING_CROPS;
+            return 0;
+        }
+
+        BlockPos jobBlock = peasant.getJobBlockPos();
+        int converted = 0;
+
+        // Convert 15x15 area centered on job block at Y-1 level
+        for (int x = -9; x <= 9; x++) {
+            for (int z = -9; z <= 9; z++) {
+                BlockPos targetPos = new BlockPos(
+                        jobBlock.getX() + x,
+                        jobBlock.getY() - 1,  // One level below job block
+                        jobBlock.getZ() + z
+                );
+
+                BlockState currentBlock = peasant.level().getBlockState(targetPos);
+
+                // Convert grass and dirt to farmland
+                if (currentBlock.getBlock() == net.minecraft.world.level.block.Blocks.GRASS_BLOCK ||
+                        currentBlock.getBlock() == net.minecraft.world.level.block.Blocks.DIRT) {
+
+                    peasant.level().setBlock(targetPos,
+                            net.minecraft.world.level.block.Blocks.FARMLAND.defaultBlockState(), 3);
+                    converted++;
+                }
+            }
+        }
+
+        // Update conversion time
+        lastFarmlandConversion = peasant.level().getDayTime();
+
+        // Move to next state if no conversion needed
+        if (converted == 0) {
+            currentFarmState = FarmState.PLANTING_CROPS;
+        }
+
+        return converted;
+    }
+
+    public int plantCrops() {
+        if (!hasFarm || peasant.getJobBlockPos() == null) {
+            return 0;
+        }
+
+        // Determine what crop to plant
+        net.minecraft.world.level.block.Block cropToPlant = determineCropType();
+        if (cropToPlant == null) {
+            return 0;
+        }
+
+        BlockPos jobBlock = peasant.getJobBlockPos();
+        int planted = 0;
+
+        // Plant crops on farmland in 15x15 area
+        for (int x = -9; x <= 9; x++) {
+            for (int z = -9; z <= 9; z++) {
+                BlockPos farmlandPos = new BlockPos(
+                        jobBlock.getX() + x,
+                        jobBlock.getY() - 1,  // Farmland level
+                        jobBlock.getZ() + z
+                );
+                BlockPos cropPos = farmlandPos.above(); // Crop position
+
+                BlockState groundState = peasant.level().getBlockState(farmlandPos);
+                BlockState aboveState = peasant.level().getBlockState(cropPos);
+
+                // Plant on farmland with empty space above
+                if (groundState.getBlock() == net.minecraft.world.level.block.Blocks.FARMLAND &&
+                        aboveState.isAir()) {
+
+                    peasant.level().setBlock(cropPos, cropToPlant.defaultBlockState(), 3);
+                    consumeSeedFromInventory(cropToPlant.asItem());
+                    planted++;
+                }
+            }
+        }
+
+        if (planted == 0) {
+            currentFarmState = FarmState.HARVESTING_CROPS;
+        }
+
+        return planted;
+    }
+
+    private net.minecraft.world.level.block.Block determineCropType() {
+        if (peasant.getJobBlockPos() == null) return null;
+
+        BlockPos jobBlock = peasant.getJobBlockPos();
+
+        // Check for existing crops in the area (starting from top-right corner)
+        for (int x = 9; x >= -9; x--) {
+            for (int z = 9; z >= -9; z--) {
+                BlockPos cropPos = new BlockPos(
+                        jobBlock.getX() + x,
+                        jobBlock.getY(), // Crop level (job block level)
+                        jobBlock.getZ() + z
+                );
+
+                BlockState state = peasant.level().getBlockState(cropPos);
+                if (state.getBlock() instanceof net.minecraft.world.level.block.CropBlock) {
+                    return state.getBlock();
+                }
+            }
+        }
+
+        // No existing crops, use most abundant seed
+        ItemStack mostAbundantSeed = getMostAbundantSeeds();
+        if (!mostAbundantSeed.isEmpty() &&
+                mostAbundantSeed.getItem() instanceof net.minecraft.world.item.BlockItem blockItem &&
+                blockItem.getBlock() instanceof net.minecraft.world.level.block.CropBlock) {
+            return blockItem.getBlock();
+        }
+
+        return null;
+    }
+
+    public BlockPos findNextHarvestPosition() {
+        if (!hasFarm || peasant.getJobBlockPos() == null) {
+            return null;
+        }
+
+        BlockPos jobBlock = peasant.getJobBlockPos();
+
+        // Look for mature crops in 15x15 area
+        for (int x = -9; x <= 9; x++) {
+            for (int z = -9; z <= 9; z++) {
+                BlockPos cropPos = new BlockPos(
+                        jobBlock.getX() + x,
+                        jobBlock.getY(), // Crop level (job block level)
+                        jobBlock.getZ() + z
+                );
+
+                BlockState cropState = peasant.level().getBlockState(cropPos);
+                if (isCropFullyGrown(cropState)) {
+                    return cropPos;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public void harvestAndReplant(BlockPos cropPos) {
+        BlockState cropState = peasant.level().getBlockState(cropPos);
+
+        if (peasant.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+            // Harvest drops
+            List<ItemStack> drops = net.minecraft.world.level.block.Block.getDrops(
+                    cropState, serverLevel, cropPos, null);
+
+            for (ItemStack drop : drops) {
+                peasant.getInventorySystem().addItem(drop);
+            }
+
+            // Replant with same crop type
+            if (cropState.getBlock() instanceof net.minecraft.world.level.block.CropBlock cropBlock) {
+                peasant.level().setBlock(cropPos, cropBlock.defaultBlockState(), 3);
+                consumeSeedFromInventory(cropBlock.asItem());
+            }
+        }
+    }
+
+    // New methods for harvesting-time maintenance
+    public int convertDirtGrassToFarmland() {
+        if (!hasFarm || peasant.getJobBlockPos() == null) {
+            return 0;
+        }
+
+        BlockPos jobBlock = peasant.getJobBlockPos();
+        int converted = 0;
+        int maxConversions = 5; // Limit conversions per call to avoid lag
+
+        // Convert dirt/grass to farmland in 15x15 area (no daily limit during harvesting)
+        for (int x = -9; x <= 9 && converted < maxConversions; x++) {
+            for (int z = -9; z <= 9 && converted < maxConversions; z++) {
+                BlockPos targetPos = new BlockPos(
+                        jobBlock.getX() + x,
+                        jobBlock.getY() - 1,  // One level below job block
+                        jobBlock.getZ() + z
+                );
+
+                BlockState currentBlock = peasant.level().getBlockState(targetPos);
+
+                // Convert grass and dirt to farmland
+                if (currentBlock.getBlock() == net.minecraft.world.level.block.Blocks.GRASS_BLOCK ||
+                        currentBlock.getBlock() == net.minecraft.world.level.block.Blocks.DIRT) {
+
+                    peasant.level().setBlock(targetPos,
+                            net.minecraft.world.level.block.Blocks.FARMLAND.defaultBlockState(), 3);
+                    converted++;
+                }
+            }
+        }
+
+        return converted;
+    }
+
+    public int plantSeedsOnEmptyFarmland() {
+        if (!hasFarm || peasant.getJobBlockPos() == null) {
+            return 0;
+        }
+
+        // Determine what crop to plant
+        net.minecraft.world.level.block.Block cropToPlant = determineCropType();
+        if (cropToPlant == null) {
+            return 0;
+        }
+
+        BlockPos jobBlock = peasant.getJobBlockPos();
+        int planted = 0;
+        int maxPlantings = 5; // Limit plantings per call to avoid lag
+
+        // Plant crops on empty farmland in 15x15 area
+        for (int x = -9; x <= 9 && planted < maxPlantings; x++) {
+            for (int z = -9; z <= 9 && planted < maxPlantings; z++) {
+                BlockPos farmlandPos = new BlockPos(
+                        jobBlock.getX() + x,
+                        jobBlock.getY() - 1,  // Farmland level
+                        jobBlock.getZ() + z
+                );
+                BlockPos cropPos = farmlandPos.above(); // Crop position
+
+                BlockState groundState = peasant.level().getBlockState(farmlandPos);
+                BlockState aboveState = peasant.level().getBlockState(cropPos);
+
+                // Plant on farmland with empty space above
+                if (groundState.getBlock() == net.minecraft.world.level.block.Blocks.FARMLAND &&
+                        aboveState.isAir()) {
+
+                    peasant.level().setBlock(cropPos, cropToPlant.defaultBlockState(), 3);
+                    consumeSeedFromInventory(cropToPlant.asItem());
+                    planted++;
+                }
+            }
+        }
+
+        return planted;
+    }
+    public boolean isAtJobBlock() {
+        if (peasant.getJobBlockPos() == null) {
+            return false;
+        }
+
+        BlockPos jobBlock = peasant.getJobBlockPos();
+        double distance = peasant.distanceToSqr(jobBlock.getX(), jobBlock.getY(), jobBlock.getZ());
+        return distance <= 4.0D; // Within 2 blocks of job block
+    }
+
+    // Get job block position for navigation
+    public BlockPos getJobBlockPosition() {
+        return peasant.getJobBlockPos();
+    }
+    private boolean isCropFullyGrown(BlockState state) {
+        if (state.getBlock() instanceof net.minecraft.world.level.block.CropBlock cropBlock) {
+            return cropBlock.isMaxAge(state);
+        }
+        return false;
+    }
+
+    private ItemStack getMostAbundantSeeds() {
+        Map<net.minecraft.world.item.Item, Integer> seedCounts = new HashMap<>();
+        var inventory = peasant.getInventorySystem().getInventory();
+
+        for (int i = 0; i < inventory.getContainerSize(); i++) {
+            ItemStack stack = inventory.getItem(i);
+            if (stack.getItem() instanceof net.minecraft.world.item.BlockItem blockItem &&
+                    blockItem.getBlock() instanceof net.minecraft.world.level.block.CropBlock) {
+                seedCounts.put(stack.getItem(),
+                        seedCounts.getOrDefault(stack.getItem(), 0) + stack.getCount());
+            }
+        }
+
+        if (seedCounts.isEmpty()) return ItemStack.EMPTY;
+
+        net.minecraft.world.item.Item mostAbundant = Collections.max(seedCounts.entrySet(),
+                Map.Entry.comparingByValue()).getKey();
+
+        for (int i = 0; i < inventory.getContainerSize(); i++) {
+            ItemStack stack = inventory.getItem(i);
+            if (stack.getItem() == mostAbundant) {
+                return stack;
+            }
+        }
+
+        return ItemStack.EMPTY;
+    }
+
+    private void consumeSeedFromInventory(net.minecraft.world.item.Item seedItem) {
+        var inventory = peasant.getInventorySystem().getInventory();
+        for (int i = 0; i < inventory.getContainerSize(); i++) {
+            ItemStack stack = inventory.getItem(i);
+            if (stack.getItem() == seedItem) {
+                stack.shrink(1);
+                if (stack.isEmpty()) {
+                    inventory.setItem(i, ItemStack.EMPTY);
+                }
+                break;
+            }
+        }
+    }
+
+    // Getters and setters
+    public FarmState getCurrentFarmState() { return currentFarmState; }
+    public void setCurrentFarmState(FarmState state) { this.currentFarmState = state; }
+
+    public boolean hasFarm() { return hasFarm; }
+
+    public boolean hasReturnedToJobBlockAfterFood() { return hasReturnedToJobBlockAfterFood; }
+    public void setHasReturnedToJobBlockAfterFood(boolean returned) {
+        this.hasReturnedToJobBlockAfterFood = returned;
+    }
+
+    // Save/Load methods
+    public void saveData(CompoundTag compound) {
+        compound.putBoolean("HasReturnedToJobBlockAfterFood", hasReturnedToJobBlockAfterFood);
+        compound.putBoolean("HasFarm", hasFarm);
+        compound.putLong("LastFarmlandConversion", lastFarmlandConversion);
+        compound.putString("CurrentFarmState", currentFarmState.name());
+    }
+
+    public void loadData(CompoundTag compound) {
+        hasReturnedToJobBlockAfterFood = compound.getBoolean("HasReturnedToJobBlockAfterFood");
+        hasFarm = compound.getBoolean("HasFarm");
+        lastFarmlandConversion = compound.getLong("LastFarmlandConversion");
+
+        try {
+            currentFarmState = FarmState.valueOf(compound.getString("CurrentFarmState"));
+        } catch (IllegalArgumentException e) {
+            currentFarmState = FarmState.NEEDS_FARM_SETUP;
+        }
+    }
+}

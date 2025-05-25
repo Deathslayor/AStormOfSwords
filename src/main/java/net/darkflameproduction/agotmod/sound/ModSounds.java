@@ -26,6 +26,15 @@ public class ModSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> WINTER_WIND = registerSoundEvents("winter_wind");
     public static final DeferredHolder<SoundEvent, SoundEvent> FOREST_WIND = registerSoundEvents("forest_wind");
     public static final DeferredHolder<SoundEvent, SoundEvent> BUTTON = registerSoundEvents("button");
+    public static final DeferredHolder<SoundEvent, SoundEvent> NPC_DEATH = registerSoundEvents("npc_death");
+    public static final DeferredHolder<SoundEvent, SoundEvent> NPC_HURT = registerSoundEvents("npc_hurt_1");
+    public static final DeferredHolder<SoundEvent, SoundEvent> NPC_COUGH = registerSoundEvents("npc_cough_1");
+    public static final DeferredHolder<SoundEvent, SoundEvent> NPC_CLEAR_THROAT_1 = registerSoundEvents("clearing_throat_1");
+    public static final DeferredHolder<SoundEvent, SoundEvent> NPC_CLEAR_THROAT_2 = registerSoundEvents("clearing_throat_2");
+    public static final DeferredHolder<SoundEvent, SoundEvent> NPC_CLEAR_THROAT_3 = registerSoundEvents("clearing_throat_3");
+    public static final DeferredHolder<SoundEvent, SoundEvent> NPC_CLEAR_THROAT_4 = registerSoundEvents("clearing_throat_4");
+
+
 
 
     //Helper Method to register the sounds

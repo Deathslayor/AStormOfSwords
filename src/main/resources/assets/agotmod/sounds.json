@@ -4,8 +4,8 @@
     "sounds": [
       {
         "name": "agotmod:mammoth_attack",
-        "attenuation_distance": 10,
-        "volume": 1.0
+        "attenuation_distance": 8,
+        "volume": 0.4
       }
     ]
   },
@@ -14,8 +14,8 @@
     "sounds": [
       {
         "name": "agotmod:elephant_hurt",
-        "attenuation_distance": 10,
-        "volume": 1.0
+        "attenuation_distance": 8,
+        "volume": 0.3
       }
     ]
   },
@@ -24,8 +24,8 @@
     "sounds": [
       {
         "name": "agotmod:elephant_ambient",
-        "attenuation_distance": 10,
-        "volume": 0.8
+        "attenuation_distance": 8,
+        "volume": 0.2
       }
     ]
   },
@@ -34,8 +34,8 @@
     "sounds": [
       {
         "name": "agotmod:elephant_death",
-        "attenuation_distance": 10,
-        "volume": 1.0
+        "attenuation_distance": 8,
+        "volume": 0.4
       }
     ]
   },
@@ -44,8 +44,8 @@
     "sounds": [
       {
         "name": "agotmod:crow_hurt",
-        "attenuation_distance": 10,
-        "volume": 1.0
+        "attenuation_distance": 6,
+        "volume": 0.25
       }
     ]
   },
@@ -54,8 +54,8 @@
     "sounds": [
       {
         "name": "agotmod:crow_ambient",
-        "attenuation_distance": 10,
-        "volume": 0.8
+        "attenuation_distance": 6,
+        "volume": 0.15
       }
     ]
   },
@@ -64,33 +64,93 @@
     "sounds": [
       {
         "name": "agotmod:crow_death",
-        "attenuation_distance": 10,
-        "volume": 1.0
+        "attenuation_distance": 6,
+        "volume": 0.25
       }
     ]
   },
   "winter_wind": {
+    "category": "ambient",
     "subtitles": "sounds.agotmod:winter_wind",
     "sounds": [
       "agotmod:winter_wind"
     ]
   },
   "button": {
+    "category": "block",
     "subtitles": "sounds.agotmod:button",
     "sounds": [
       "agotmod:button"
     ]
   },
   "forest_wind": {
+    "category": "ambient",
     "subtitles": "sounds.agotmod:forest_wind",
     "sounds": [
       "agotmod:forest_wind"
     ]
+  },
+  "npc_death": {
+    "sounds": [
+      {
+        "name": "agotmod:npc_death",
+        "attenuation_distance": 8,
+        "volume": 0.3
+      }
+    ]
+  },
+  "npc_hurt_1": {
+    "sounds": [
+      {
+        "name": "agotmod:npc_hurt_1",
+        "attenuation_distance": 8,
+        "volume": 0.25
+      }
+    ]
+  },
+  "npc_cough_1": {
+    "sounds": [
+      {
+        "name": "agotmod:npc_cough_1",
+        "attenuation_distance": 6,
+        "volume": 0.2
+      }
+    ]
+  },
+  "clearing_throat_1": {
+    "sounds": [
+      {
+        "name": "agotmod:clearing_throat_1",
+        "attenuation_distance": 6,
+        "volume": 0.2
+      }
+    ]
+  },
+  "clearing_throat_2": {
+    "sounds": [
+      {
+        "name": "agotmod:clearing_throat_2",
+        "attenuation_distance": 6,
+        "volume": 0.2
+      }
+    ]
+  },
+  "clearing_throat_3": {
+    "sounds": [
+      {
+        "name": "agotmod:clearing_throat_3",
+        "attenuation_distance": 6,
+        "volume": 0.2
+      }
+    ]
+  },
+  "clearing_throat_4": {
+    "sounds": [
+      {
+        "name": "agotmod:clearing_throat_4",
+        "attenuation_distance": 6,
+        "volume": 0.2
+      }
+    ]
   }
 }
-
-
-
-
-
-

@@ -66,8 +66,9 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
         super.renderRecursively(poseStack, animatable, bone, renderType, bufferSource, buffer,
                 isReRender, partialTick, packedLight, packedOverlay, color);
 
-        if ("right_arm".equals(bone.getName()) && animatable.isCurrentlyEating()) {
-            ItemStack eatingItem = animatable.getEatingItem();
+        // Fixed: Use the hunger system to check if eating and get the eating item
+        if ("right_arm".equals(bone.getName()) && animatable.getHungerSystem().isEating()) {
+            ItemStack eatingItem = animatable.getHungerSystem().getEatingItem();
             if (!eatingItem.isEmpty()) {
                 renderItemInBone(poseStack, eatingItem, packedLight, packedOverlay, bufferSource, animatable);
             }
@@ -77,7 +78,6 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
     private void renderItemInBone(PoseStack poseStack, ItemStack item, int packedLight, int packedOverlay,
                                   MultiBufferSource bufferSource, Northern_Peasant_Entity animatable) {
         poseStack.pushPose();
-
 
         poseStack.translate(0.1, 0.3, 0.1);
         poseStack.scale(0.4f, 0.4f, 0.4f);
