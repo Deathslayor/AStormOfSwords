@@ -118,7 +118,7 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.doorGoal = new OpenAndCloseDoorGoal(this);
         this.goalSelector.addGoal(1, doorGoal);
-
+        this.goalSelector.addGoal(1, new BarrelDropOffGoal(this));
         this.goalSelector.addGoal(2, new FindBedGoal(this));
         this.goalSelector.addGoal(3, new SleepGoal(this));
         this.goalSelector.addGoal(6, new CollectFoodGoal(this));

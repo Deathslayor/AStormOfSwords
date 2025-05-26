@@ -32,6 +32,7 @@ import java.util.List;
 public class ModConfiguredFeatures {
     // Define a ResourceKey for the configured feature of overworld tin ore
     public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_TIN_ORE = registerKey("tin_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_SILVER_ORE = registerKey("silver_ore");
     public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_IRON_ORE = registerKey("iron_ore");
     public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_COAL_ORE = registerKey("coal_ore");
     public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_COPPER_ORE = registerKey("copper_ore");
@@ -239,6 +240,11 @@ public class ModConfiguredFeatures {
                 OreConfiguration.target(deepslateReplaceables, ModBLocks.DEEPSLATE_TIN_ORE.get().defaultBlockState())
         );
 
+        List<OreConfiguration.TargetBlockState> overworldSilverOre = List.of(
+                OreConfiguration.target(stoneReplaceables, ModBLocks.SILVER_ORE.get().defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, ModBLocks.DEEPSLATE_SILVER_ORE.get().defaultBlockState())
+        );
+
         List<OreConfiguration.TargetBlockState> overworldIronOre = List.of(
                 OreConfiguration.target(stoneReplaceables, Blocks.IRON_ORE.defaultBlockState()),
                 OreConfiguration.target(deepslateReplaceables, Blocks.DEEPSLATE_IRON_ORE.defaultBlockState())
@@ -362,6 +368,7 @@ public class ModConfiguredFeatures {
 
         // Register the configured feature for overworld tin ore
         register(context, OVERWORLD_TIN_ORE, Feature.ORE, new OreConfiguration(overworldTinOre, 9));
+        register(context, OVERWORLD_SILVER_ORE, Feature.ORE, new OreConfiguration(overworldSilverOre, 6));
         register(context, OVERWORLD_IRON_ORE, Feature.ORE, new OreConfiguration(overworldIronOre, 9));
         register(context, OVERWORLD_COAL_ORE, Feature.ORE, new OreConfiguration(overworldCoalOre, 17));
         register(context, OVERWORLD_COPPER_ORE, Feature.ORE, new OreConfiguration(overworldCopperOre, 9));

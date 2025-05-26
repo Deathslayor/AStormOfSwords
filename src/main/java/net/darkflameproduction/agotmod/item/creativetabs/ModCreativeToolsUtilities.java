@@ -4,6 +4,7 @@ package net.darkflameproduction.agotmod.item.creativetabs;
 // Importing necessary classes from other packages
 
 import net.darkflameproduction.agotmod.AGoTMod;
+import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.darkflameproduction.agotmod.item.ModItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -36,6 +37,8 @@ public class ModCreativeToolsUtilities {
                         pOutput.accept(ModItems.STEEL_HOE.get());
                         pOutput.accept(ModItems.STEEL_PICKAXE.get());
                         pOutput.accept(ModItems.STEEL_SHOVEL.get());
+                        pOutput.accept(ModItems.FARMER_BARREL.get());
+
                     })
                     .build());
 

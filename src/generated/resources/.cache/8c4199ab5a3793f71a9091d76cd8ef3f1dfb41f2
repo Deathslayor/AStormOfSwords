@@ -1,4 +1,4 @@
-// 1.21.3	2025-05-24T14:21:22.1530607	Tags for minecraft:item mod id agotmod
+// 1.21.3	2025-05-26T20:02:23.2006352	Tags for minecraft:item mod id agotmod
 eef23bfe9f45027b3b8670ec55cfa37f8a45a919 data/agotmod/tags/item/bronze_tool_materials.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/agotmod/tags/item/dragonglass_tool_materials.json
 ef380d32ef9f54efeffc7c1c7d9ccf13299c2588 data/agotmod/tags/item/steel_tool_materials.json
@@ -10,7 +10,7 @@ cb733be41d71abc68eb6b02bc03a02b09175d0ee data/minecraft/tags/item/freeze_immune_
 fcc5812789a8e1524f77b0a7e22a22d073ef5c0d data/minecraft/tags/item/leaves.json
 8de518102c8a348cff71dda1fd2069c7241f974e data/minecraft/tags/item/leg_armor.json
 bc5611de8a6be7053e7c3a43907eb3e03896cdb9 data/minecraft/tags/item/logs_that_burn.json
-bfd12090b923fa00e4d0d8d919f3607c727fa42c data/minecraft/tags/item/meat.json
+d457c3ba9d677de4c18c40fa058a73a213f7b418 data/minecraft/tags/item/meat.json
 fe3405c1c8cc7d104d551da1fe7fa88c5cba85cd data/minecraft/tags/item/planks.json
 daa87a0184a45253353e0c48c5c66d8af3fabbff data/minecraft/tags/item/stone_bricks.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/minecraft/tags/item/walls.json

@@ -62,6 +62,9 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         // Add loot table for tin ores
         this.add(ModBLocks.DEEPSLATE_TIN_ORE.get(), block -> oreDropBetween2And5(registrylookup, ModBLocks.DEEPSLATE_TIN_ORE.get(), ModItems.RAW_TIN.get()));
         this.add(ModBLocks.TIN_ORE.get(), block -> oreDropBetween2And5(registrylookup, ModBLocks.TIN_ORE.get(), ModItems.RAW_TIN.get()));
+        this.add(ModBLocks.DEEPSLATE_SILVER_ORE.get(), block -> oreDropBetween2And5(registrylookup, ModBLocks.DEEPSLATE_SILVER_ORE.get(), ModItems.RAW_SILVER.get()));
+        this.add(ModBLocks.SILVER_ORE.get(), block -> oreDropBetween2And5(registrylookup, ModBLocks.SILVER_ORE.get(), ModItems.RAW_SILVER.get()));
+
         // ---------------------------(TIN)--------------------------- //
 
         // ---------------------------(GEMS)--------------------------- //
@@ -128,8 +131,12 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         /** // ---------------------------(NORMAL BLOCKS)--------------------------- // */
         // ---------------------------(TIN)--------------------------- //
         // Add loot tables for tin blocks
+
         this.dropSelf(ModBLocks.TIN_BLOCK.get());
         this.dropSelf(ModBLocks.RAW_TIN_BLOCK.get());
+        this.dropSelf(ModBLocks.SILVER_BLOCK.get());
+        this.dropSelf(ModBLocks.RAW_SILVER_BLOCK.get());
+
         // ---------------------------(TIN)--------------------------- //
         this.dropSelf(ModBLocks.QUAGMIRE.get());
         // ---------------------------(BRONZE)--------------------------- //
@@ -911,6 +918,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                                 ModItems.CORN_SEEDS.get())));
 
 
+        this.dropSelf(ModBLocks.FARMER_BARREL.get());
 
 
 

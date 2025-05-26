@@ -27,7 +27,14 @@ public class ModCreativeIngredients {
                     .title(Component.translatable("creativetab.agot_tab_ingredients")) // Title for the creative mode tab
                     .displayItems((pParameters, pOutput) -> {
                         /** Blocks */
-
+                        pOutput.accept(ModItems.GOLD_DRAGON.get());
+                        pOutput.accept(ModItems.SILVER_MOON.get());
+                        pOutput.accept(ModItems.SILVER_STAG.get());
+                        pOutput.accept(ModItems.COPPER_STAR.get());
+                        pOutput.accept(ModItems.COPPER_GROAT.get());
+                        pOutput.accept(ModItems.COPPER_HALFGROAT.get());
+                        pOutput.accept(ModItems.COPPER_PENNY.get());
+                        pOutput.accept(ModItems.COPPER_HALFPENNY.get());
                         /** Items */
                         //INGREDIENTS
                         pOutput.accept(ModItems.WEIRWOOD_STICK.get());
@@ -104,6 +111,9 @@ public class ModCreativeIngredients {
 
 
                         // INGOTS
+                        pOutput.accept(ModItems.SILVER_INGOT.get());
+                        pOutput.accept(ModItems.SILVER_NUGGET.get());
+                        pOutput.accept(ModItems.RAW_SILVER.get());
                         pOutput.accept(ModItems.TIN_INGOT.get());
                         pOutput.accept(ModItems.RAW_TIN.get());
                         pOutput.accept(ModItems.BRONZE_INGOT.get());

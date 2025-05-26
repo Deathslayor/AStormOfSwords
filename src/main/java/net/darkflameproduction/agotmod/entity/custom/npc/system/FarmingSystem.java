@@ -2,8 +2,7 @@ package net.darkflameproduction.agotmod.entity.custom.npc.system;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
@@ -35,7 +34,70 @@ public class FarmingSystem {
     }
 
     public void tick() {
-        // Simple tick - no complex processing needed
+        // Check if job block still exists - if not, lose job
+        if (peasant.hasJob() && peasant.getJobBlockPos() != null) {
+            BlockPos jobBlockPos = peasant.getJobBlockPos();
+            BlockState jobBlockState = peasant.level().getBlockState(jobBlockPos);
+
+            // Check if job block was destroyed
+            if (jobBlockState.getBlock() != net.minecraft.world.level.block.Blocks.COMPOSTER) {
+                // Job block destroyed, lose job
+                peasant.setJobType(JobSystem.JOB_NONE);
+                peasant.setJobBlockPos(null);
+                JobSystem.releaseJobBlockReservation(peasant.getUUID());
+
+                // Reset farming state
+                hasFarm = false;
+                currentFarmState = FarmState.NEEDS_FARM_SETUP;
+            }
+        }
+    }
+
+    // Check if farmer has excess items (used by BarrelDropOffGoal)
+    public boolean hasExcessItems() {
+        var inventory = peasant.getInventorySystem().getInventory();
+        int meatCount = 0;
+        int seedStackCount = 0;
+        int totalItems = 0;
+
+        for (int i = 0; i < inventory.getContainerSize(); i++) {
+            ItemStack stack = inventory.getItem(i);
+            if (!stack.isEmpty()) {
+                totalItems += stack.getCount();
+
+                if (stack.is(ItemTags.create(
+                        net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("minecraft", "meat")))) {
+                    meatCount += stack.getCount();
+                } else if (isSeed(stack)) {
+                    seedStackCount++;
+                }
+            }
+        }
+
+        // Calculate what should be kept
+        int allowedMeat = Math.min(meatCount, 20);
+        int allowedSeedStacks = Math.min(seedStackCount, 2);
+        int allowedSeedItems = 0;
+
+        // Count items in the allowed seed stacks
+        int seedStacksFound = 0;
+        for (int i = 0; i < inventory.getContainerSize() && seedStacksFound < allowedSeedStacks; i++) {
+            ItemStack stack = inventory.getItem(i);
+            if (!stack.isEmpty() && isSeed(stack)) {
+                allowedSeedItems += stack.getCount();
+                seedStacksFound++;
+            }
+        }
+
+        int allowedTotalItems = allowedMeat + allowedSeedItems;
+
+        // Has excess if total items exceed what we're allowed to keep
+        return totalItems > allowedTotalItems;
+    }
+
+    private boolean isSeed(ItemStack stack) {
+        return stack.getItem() instanceof net.minecraft.world.item.BlockItem blockItem &&
+                blockItem.getBlock() instanceof net.minecraft.world.level.block.CropBlock;
     }
 
     // Simple farm setup - just mark that we have a job block
@@ -136,10 +198,20 @@ public class FarmingSystem {
                 if (groundState.getBlock() == net.minecraft.world.level.block.Blocks.FARMLAND &&
                         aboveState.isAir()) {
 
-                    peasant.level().setBlock(cropPos, cropToPlant.defaultBlockState(), 3);
-                    consumeSeedFromInventory(cropToPlant.asItem());
-                    planted++;
+                    // CHECK IF WE HAVE THE SEED BEFORE PLANTING
+                    if (hasSeedInInventory(cropToPlant.asItem())) {
+                        peasant.level().setBlock(cropPos, cropToPlant.defaultBlockState(), 3);
+                        consumeSeedFromInventory(cropToPlant.asItem());
+                        planted++;
+                    } else {
+                        // No more seeds, stop planting
+                        break;
+                    }
                 }
+            }
+            // If we ran out of seeds, break out of the outer loop too
+            if (!hasSeedInInventory(cropToPlant.asItem())) {
+                break;
             }
         }
 
@@ -295,15 +367,37 @@ public class FarmingSystem {
                 if (groundState.getBlock() == net.minecraft.world.level.block.Blocks.FARMLAND &&
                         aboveState.isAir()) {
 
-                    peasant.level().setBlock(cropPos, cropToPlant.defaultBlockState(), 3);
-                    consumeSeedFromInventory(cropToPlant.asItem());
-                    planted++;
+                    // CHECK IF WE HAVE THE SEED BEFORE PLANTING
+                    if (hasSeedInInventory(cropToPlant.asItem())) {
+                        peasant.level().setBlock(cropPos, cropToPlant.defaultBlockState(), 3);
+                        consumeSeedFromInventory(cropToPlant.asItem());
+                        planted++;
+                    } else {
+                        // No more seeds, stop planting
+                        break;
+                    }
                 }
+            }
+            // If we ran out of seeds or hit the max planting limit, break out
+            if (!hasSeedInInventory(cropToPlant.asItem()) || planted >= maxPlantings) {
+                break;
             }
         }
 
         return planted;
     }
+
+    private boolean hasSeedInInventory(net.minecraft.world.item.Item seedItem) {
+        var inventory = peasant.getInventorySystem().getInventory();
+        for (int i = 0; i < inventory.getContainerSize(); i++) {
+            ItemStack stack = inventory.getItem(i);
+            if (stack.getItem() == seedItem && !stack.isEmpty()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean isAtJobBlock() {
         if (peasant.getJobBlockPos() == null) {
             return false;
@@ -318,6 +412,7 @@ public class FarmingSystem {
     public BlockPos getJobBlockPosition() {
         return peasant.getJobBlockPos();
     }
+
     private boolean isCropFullyGrown(BlockState state) {
         if (state.getBlock() instanceof net.minecraft.world.level.block.CropBlock cropBlock) {
             return cropBlock.isMaxAge(state);

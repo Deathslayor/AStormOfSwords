@@ -3,6 +3,7 @@ package net.darkflameproduction.agotmod.entity.custom.npc.system;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.block.state.BlockState;
 import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
 
 import java.util.HashMap;
@@ -27,7 +28,7 @@ public class JobSystem {
     private static final Map<UUID, Long> jobReservationTimestamps = new HashMap<>();
     private static final long JOB_RESERVATION_TIMEOUT = 12000; // 10 minutes
 
-    // NEW: Job warning broadcast timer
+    // Job warning broadcast timer
     private int warningBroadcastTimer = 0;
 
     public JobSystem(Northern_Peasant_Entity peasant) {
@@ -35,6 +36,15 @@ public class JobSystem {
     }
 
     public void tick() {
+        // CRITICAL: Check if job block still exists before doing anything else
+        if (hasJob() && getJobBlockPos() != null) {
+            if (!isJobBlockValid()) {
+                // Job block was destroyed, lose job immediately
+                loseJob();
+                return; // Don't continue with other job-related logic
+            }
+        }
+
         // Check if peasant should be at work area and force return if too far
         if (!peasant.level().isClientSide && shouldBeAtWorkArea() && isTooFarFromWork() && !peasant.isSleeping()) {
             // Cancel current navigation and head to work area
@@ -43,7 +53,7 @@ public class JobSystem {
             peasant.getNavigation().moveTo(workCenter.getX(), workCenter.getY(), workCenter.getZ(), 0.8D);
         }
 
-        // NEW: Broadcast job block warning every 40 ticks if we have a job
+        // Broadcast job block warning every 40 ticks if we have a job
         if (!peasant.level().isClientSide && hasJob() && getJobBlockPos() != null) {
             warningBroadcastTimer++;
             if (warningBroadcastTimer >= 40) {
@@ -59,6 +69,48 @@ public class JobSystem {
         }
     }
 
+    private boolean isJobBlockValid() {
+        BlockPos jobBlockPos = getJobBlockPos();
+        if (jobBlockPos == null) {
+            return false;
+        }
+
+        BlockState jobBlockState = peasant.level().getBlockState(jobBlockPos);
+
+        // Check based on job type
+        if (getJobType().equals(JOB_FARMER)) {
+            return jobBlockState.getBlock() == net.minecraft.world.level.block.Blocks.COMPOSTER;
+        }
+
+        // For unknown job types, assume invalid
+        return false;
+    }
+
+    private void loseJob() {
+        String oldJobType = getJobType();
+        BlockPos oldJobBlockPos = getJobBlockPos();
+
+        // Clear job data
+        setJobType(JOB_NONE);
+        setJobBlockPos(null);
+
+        // Release job block reservation
+        releaseJobBlockReservation(peasant.getUUID());
+
+        // Remove job warning
+        JobWarningSystem.removeJobBlockWarning(peasant.getUUID());
+
+        // Reset job-specific systems
+        if (oldJobType.equals(JOB_FARMER)) {
+            // Reset farming system
+            peasant.getFarmingSystem().setCurrentFarmState(
+                    peasant.getFarmingSystem().hasFarm() ?
+                            FarmingSystem.FarmState.NEEDS_FARM_SETUP :
+                            FarmingSystem.FarmState.NEEDS_FARM_SETUP
+            );
+        }
+    }
+
     public String getJobType() {
         return peasant.getEntityData().get(peasant.getJobTypeAccessor());
     }
@@ -71,7 +123,7 @@ public class JobSystem {
         if (!oldJob.equals(jobType)) {
             updateNameWithJob();
 
-            // NEW: If losing job, remove warning
+            // If losing job, remove warning
             if (jobType.isEmpty() && !oldJob.isEmpty()) {
                 JobWarningSystem.removeJobBlockWarning(peasant.getUUID());
             }
@@ -140,7 +192,7 @@ public class JobSystem {
 
     public void onRemove() {
         releaseJobBlockReservation(peasant.getUUID());
-        // NEW: Remove job block warning when NPC is removed
+        // Remove job block warning when NPC is removed
         JobWarningSystem.removeJobBlockWarning(peasant.getUUID());
     }
 

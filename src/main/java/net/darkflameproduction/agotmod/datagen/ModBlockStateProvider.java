@@ -2,6 +2,7 @@ package net.darkflameproduction.agotmod.datagen;
 
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.block.ModBLocks;
+import net.darkflameproduction.agotmod.block.custom.FarmerBarrelBlock;
 import net.darkflameproduction.agotmod.block.custom.GhostGrassBlock;
 import net.darkflameproduction.agotmod.block.custom.HorseradishCropBlock;
 import net.darkflameproduction.agotmod.block.custom.WeirwoodFaceLogBlock;
@@ -45,6 +46,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
         // Register block states and models for tin-related blocks
         GhostGrassBlock(ModBLocks.GHOST_GRASS_BLOCK.get());
         blockItem(ModBLocks.GHOST_GRASS_BLOCK);
+        blockWithItem(ModBLocks.SILVER_BLOCK);
+        blockWithItem(ModBLocks.RAW_SILVER_BLOCK);
+        blockWithItem(ModBLocks.DEEPSLATE_SILVER_ORE);
+        blockWithItem(ModBLocks.SILVER_ORE);
         blockWithItem(ModBLocks.TIN_BLOCK);
         blockWithItem(ModBLocks.RAW_TIN_BLOCK);
         blockWithItem(ModBLocks.DEEPSLATE_TIN_ORE);
@@ -1818,9 +1823,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
 
 
-        // ---------------------(VILLAGER PROFESSIONS BLOCKS)--------------------- //
-        // Register block states and models for villager profession-related blocks
-        blockWithItem(ModBLocks.MINT_BLOCK);
+        // ---------------------(Job Blocks)--------------------- //
+        farmerBarrelBlock(ModBLocks.FARMER_BARREL.get());
         // ---------------------(CROPS)--------------------- //
         makeCrop((CropBlock) ModBLocks.HORSERADISH_CROP.get(), "horseradish_crop_stage", "horseradish_crop_stage");
         makeCrop((CropBlock) ModBLocks.BARLEY_CROP.get(), "barley_crop_stage", "barley_crop_stage");
@@ -1991,6 +1995,39 @@ public class ModBlockStateProvider extends BlockStateProvider {
                     return ConfiguredModel.builder()
                             .modelFile(model)
                             .rotationY(rotationY)
+                            .build();
+                });
+    }
+
+    private void farmerBarrelBlock(Block block) {
+        ModelFile model = models().cube(name(block),
+                modLoc("block/farmer_barrel_bottom"),           // bottom
+                modLoc("block/farmer_barrel_top"),              // top
+                modLoc("block/farmer_barrel_side"),             // north
+                modLoc("block/farmer_barrel_side"),             // south
+                modLoc("block/farmer_barrel_side"),             // west
+                modLoc("block/farmer_barrel_side")              // east
+        ).texture("particle", modLoc("block/farmer_barrel_side"));
+
+        // Create open variant
+        ModelFile openModel = models().cube(name(block) + "_open",
+                modLoc("block/farmer_barrel_bottom"),           // bottom
+                modLoc("block/farmer_barrel_top_open"),         // top
+                modLoc("block/farmer_barrel_side"),             // north
+                modLoc("block/farmer_barrel_side"),             // south
+                modLoc("block/farmer_barrel_side"),             // west
+                modLoc("block/farmer_barrel_side")              // east
+        ).texture("particle", modLoc("block/farmer_barrel_side"));
+
+        getVariantBuilder(block)
+                .forAllStates(state -> {
+                    Direction facing = state.getValue(FarmerBarrelBlock.FACING);
+                    boolean open = state.getValue(FarmerBarrelBlock.OPEN);
+
+                    return ConfiguredModel.builder()
+                            .modelFile(open ? openModel : model)
+                            .rotationX(facing == Direction.DOWN ? 180 : facing.getAxis().isHorizontal() ? 0 : 0)
+                            .rotationY(facing.getAxis().isVertical() ? 0 : ((int) facing.toYRot()) % 360)
                             .build();
                 });
     }

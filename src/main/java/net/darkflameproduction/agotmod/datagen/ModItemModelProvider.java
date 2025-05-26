@@ -188,10 +188,22 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItemNightWatchElite(ModItems.NIGHT_WATCH_ELITE_LEGGINGS);
         simpleItemNightWatchElite(ModItems.NIGHT_WATCH_ELITE_BOOTS);
 
-        // ---------------------------(ARMOUR)--------------------------- //
+        // ---------------------------(COINS)--------------------------- //
+        simpleItem(ModItems.COPPER_STAR);
+        simpleItem(ModItems.COPPER_GROAT);
+        simpleItem(ModItems.COPPER_HALFPENNY);
+        simpleItem(ModItems.COPPER_PENNY);
+        simpleItem(ModItems.GOLD_DRAGON);
+        simpleItem(ModItems.SILVER_MOON);
+        simpleItem(ModItems.SILVER_STAG);
+        simpleItem(ModItems.COPPER_HALFGROAT);
+
 
         // ---------------------------(INGOTS)--------------------------- //
         // Register item models for ingots and nuggets
+        simpleItem(ModItems.RAW_SILVER);
+        simpleItem(ModItems.SILVER_INGOT);
+        simpleItem(ModItems.SILVER_NUGGET);
         simpleItem(ModItems.RAW_TIN);
         simpleItem(ModItems.TIN_INGOT);
         simpleItem(ModItems.BRONZE_INGOT);
@@ -520,7 +532,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.CORN_MIDDLE_SEEDS);
         simpleItem(ModItems.CORN_TOP_SEEDS);
 
+        // ---------------------------(JOBBLOCKS)--------------------------- //
 
+        simpleItem(ModItems.FARMER_BARREL);
 
 
 

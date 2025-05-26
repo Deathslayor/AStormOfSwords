@@ -276,7 +276,6 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModItems.HORSERADISH.get().asItem())
                 .add(ModItems.LEEK.get().asItem())
                 .add(ModItems.NEEP.get().asItem())
-                .add(ModItems.OAT.get().asItem())
                 .add(ModItems.PARSLEY.get().asItem())
                 .add(ModItems.RED_ONION.get().asItem())
                 .add(ModItems.TURNIP.get().asItem())

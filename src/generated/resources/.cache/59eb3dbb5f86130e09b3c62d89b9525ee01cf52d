@@ -1,4 +1,4 @@
-// 1.21.3	2025-05-24T12:12:13.3953752	Loot Tables
+// 1.21.3	2025-05-26T17:38:21.5199115	Loot Tables
 dcab3871310df0811beb8de47adc40c83d85986b data/agotmod/loot_table/blocks/alder_button.json
 81071778b6225f49c02483465d22441e05162a1b data/agotmod/loot_table/blocks/alder_door.json
 33ccfef8d939079aebfc7963299df0ced91481b5 data/agotmod/loot_table/blocks/alder_fence.json
@@ -1461,6 +1461,7 @@ c7dd23d1911d33910212c649577f0ff56695ebe5 data/agotmod/loot_table/blocks/datepalm
 222fd054184f20452733ff0dd82815cf000f3a88 data/agotmod/loot_table/blocks/datepalm_wall_sign.json
 bec1746e1974e39bac4db9d1483c364d5e458b5f data/agotmod/loot_table/blocks/datepalm_wood.json
 62c8e2f11dc86c5d791f83a9faa8836e465096b9 data/agotmod/loot_table/blocks/datepalm_wood_stripped.json
+acb8f8506fd18510cd8b859a6b4623a395ec2f06 data/agotmod/loot_table/blocks/deepslate_silver_ore.json
 455ef89ae6d341337d987ea3eaff6f058d687168 data/agotmod/loot_table/blocks/deepslate_tin_ore.json
 c6acb68fae83b7cce358281bae49c6b602938479 data/agotmod/loot_table/blocks/diamonds_deepslate_ore.json
 2766c60681a2a79277152243fde4f9c16d411386 data/agotmod/loot_table/blocks/diamonds_ore.json
@@ -1785,6 +1786,7 @@ f51163f54e83611aaedb4a9240b521a2a173c440 data/agotmod/loot_table/blocks/ebony_wa
 2e180cf392a6c7f52151e0d68d06eb073f113b81 data/agotmod/loot_table/blocks/ebony_wood.json
 e133482511fbf7bfb193209bb829dffd7440b3dd data/agotmod/loot_table/blocks/ebony_wood_stripped.json
 d1e488a48979be044321ad2c6d99917e44fb3bfe data/agotmod/loot_table/blocks/evening_star.json
+93e727071281b25bcc15e4d8c8bce89e5903154d data/agotmod/loot_table/blocks/farmer_barrel.json
 d4a207330cdaa59418abb6a85e8c51307952059a data/agotmod/loot_table/blocks/fig_button.json
 598d5282f7be3b89d933e217c3bf4706808bb081 data/agotmod/loot_table/blocks/fig_door.json
 2b825fa6afaa6161ea816d64d655afc1af5d2ae6 data/agotmod/loot_table/blocks/fig_fence.json
@@ -2958,6 +2960,7 @@ f5d9de0987d5cf4dbcfbf1a3b2b4c032481412cb data/agotmod/loot_table/blocks/quartz_8
 3c9a0acafe20355da87a13c61220f560aaaf1c83 data/agotmod/loot_table/blocks/quartz_9_stairs.json
 e14dc66c2062dc707413cd80703a67d2af8adbc6 data/agotmod/loot_table/blocks/quartz_9_wall.json
 526b39a7a939a8f3d1fbd2a3b6f41cd1f83a8368 data/agotmod/loot_table/blocks/raspberry_bush.json
+71a375f73a71fd0ee0d93e091974d12998fcd6fa data/agotmod/loot_table/blocks/raw_silver_block.json
 adec14191fc2e1c9815cbc799b6e49b4d4d53d1d data/agotmod/loot_table/blocks/raw_tin_block.json
 0eb48c063016ab5d182b36e057e26b3e0a3b668b data/agotmod/loot_table/blocks/redkeep_10_block.json
 0bfcca24d32c382dda097562b7dbc5913570cb66 data/agotmod/loot_table/blocks/redkeep_10_slab.json
@@ -3494,6 +3497,8 @@ a757cd96ea96fd3705f1e7fbd1876075ff0c2ede data/agotmod/loot_table/blocks/sentinel
 8f61db0e212e2f869f2f95edf8fc8bf7052d436e data/agotmod/loot_table/blocks/sentinel_wall_sign.json
 628b4f97d55b142fd62a1dd9ea1ad095591e1ed4 data/agotmod/loot_table/blocks/sentinel_wood.json
 2e5ca090e7618dad21cda71bdffa12ce2d5b1973 data/agotmod/loot_table/blocks/sentinel_wood_stripped.json
+97dec823ca406146555eed579e7a612f0c68a68e data/agotmod/loot_table/blocks/silver_block.json
+cf6ac3d6c3872c55ac28f10ade63cef5f2b42066 data/agotmod/loot_table/blocks/silver_ore.json
 8ef904391283fdb483d2f10233443ad7bb08c951 data/agotmod/loot_table/blocks/smokeberry_bush.json
 5c25a1123468ef0922dd8a6312e6f6d596afe353 data/agotmod/loot_table/blocks/spiceflower.json
 abeadabbd3c86d29dc37a9a8625a458954d774b1 data/agotmod/loot_table/blocks/spinach_crop.json

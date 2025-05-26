@@ -233,20 +233,4 @@ public class FindJobGoal extends Goal {
             }
         }
     }
-
-    private void sendChatMessage(String message) {
-        if (peasant.level().isClientSide || !peasant.hasCustomName()) {
-            return;
-        }
-
-        String npcName = peasant.getCustomName().getString();
-        String fullMessage = npcName + ": " + message;
-
-        // Send message to all players within 32 blocks
-        peasant.level().players().forEach(player -> {
-            if (player.distanceToSqr(peasant.getX(), peasant.getY(), peasant.getZ()) < 1024) {
-                player.displayClientMessage(Component.literal(fullMessage), false);
-            }
-        });
-    }
 }

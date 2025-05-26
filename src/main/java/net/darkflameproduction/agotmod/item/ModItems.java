@@ -379,10 +379,34 @@ public class ModItems {
 
     public static final DeferredItem<NightsWatchEliteArmorItem> NIGHT_WATCH_ELITE_BOOTS = ITEMS.registerItem("night_watch_elite_boots",
             properties -> new NightsWatchEliteArmorItem(ModArmorMaterials.CHIEF, ArmorType.BOOTS, properties));
-    // ---------------------------(ARMOUR)--------------------------- //
+    // ---------------------------(COINS)--------------------------- //
+    public static final DeferredItem<Item> COPPER_STAR = ITEMS.registerItem("copper_star",
+            Item::new);
+    public static final DeferredItem<Item> COPPER_GROAT = ITEMS.registerItem("copper_groat",
+            Item::new);
+    public static final DeferredItem<Item> COPPER_HALFPENNY = ITEMS.registerItem("copper_halfpenny",
+            Item::new);
+    public static final DeferredItem<Item> COPPER_PENNY = ITEMS.registerItem("copper_penny",
+            Item::new);
+    public static final DeferredItem<Item> GOLD_DRAGON = ITEMS.registerItem("gold_dragon",
+            Item::new);
+    public static final DeferredItem<Item> SILVER_MOON = ITEMS.registerItem("silver_moon",
+            Item::new);
+    public static final DeferredItem<Item> SILVER_STAG = ITEMS.registerItem("silver_stag",
+            Item::new);
+    public static final DeferredItem<Item> COPPER_HALFGROAT = ITEMS.registerItem("copper_halfgroat",
+            Item::new);
 
     // ---------------------------(INGOTS/NUGGETS)--------------------------- //
     // TIN INGOT
+    public static final DeferredItem<Item> SILVER_NUGGET = ITEMS.registerItem("silver_nugget",
+            Item::new);
+    public static final DeferredItem<Item> SILVER_INGOT = ITEMS.registerItem("silver_ingot",
+            Item::new);
+    // RAW TIN
+    public static final DeferredItem<Item> RAW_SILVER = ITEMS.registerItem("raw_silver",
+            Item::new);
+
     public static final DeferredItem<Item> TIN_INGOT = ITEMS.registerItem("tin_ingot",
             Item::new);
     // RAW TIN
@@ -448,11 +472,6 @@ public class ModItems {
 
 
 
-    // ---------------------------(ANIMAL SPAWN EGGS)--------------------------- //
-
-
-
-    // ---------------------------(ANIMAL SPAWN EGGS)--------------------------- //
 
     // ---------------------------(TOOLS)--------------------------- //
     // Bronze TOOLS
@@ -969,6 +988,10 @@ public class ModItems {
                     0x575757,
                     0x333333,
                     properties));
+
+
+    public static final DeferredItem<Item> FARMER_BARREL = ITEMS.registerItem("farmer_barrel_icon",
+            properties -> new BlockItem(ModBLocks.FARMER_BARREL.get(), properties));
 
 
 

@@ -1323,15 +1323,52 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 ModBLocks.TIN_ORE.get(),
                 ModBLocks.DEEPSLATE_TIN_ORE.get());
         generateStonecutterRecipes();
-        // -------------------------------------------------(TIN)------------------------------------------------- //
-        // ---------------------------(SMELTING)--------------------------- //
-        // Smelting recipes for tin
+
         oreSmelting(tinSmeltables, RecipeCategory.MISC, ModItems.TIN_INGOT.get(), 0.25f, 200, "tin");
         oreBlasting(tinSmeltables, RecipeCategory.MISC, ModItems.TIN_INGOT.get(), 0.25f, 100, "tin");
-        // ---------------------------(SMELTING)--------------------------- //
+        List<ItemLike> silverSmeltables = List.of(
+                ModItems.RAW_SILVER.get(),
+                ModBLocks.SILVER_ORE.get(),
+                ModBLocks.DEEPSLATE_SILVER_ORE.get());
+        oreSmelting(silverSmeltables, RecipeCategory.MISC, ModItems.SILVER_INGOT.get(), 0.25f, 200, "silver");
+        oreBlasting(silverSmeltables, RecipeCategory.MISC, ModItems.SILVER_INGOT.get(), 0.25f, 100, "silver");
+        this.shaped(RecipeCategory.MISC, ModItems.SILVER_INGOT.get())
+                .pattern("SSS")
+                .pattern("SSS")
+                .pattern("SSS")
+                .define('S', ModItems.SILVER_NUGGET.get())
+                .unlockedBy(getHasName(ModItems.SILVER_NUGGET.get()), has(ModItems.SILVER_NUGGET.get()))
+                .save(this.output, "silver_ingot_from_nuggets");
+        this.shapeless(RecipeCategory.MISC, ModItems.SILVER_NUGGET.get(), 9)
+                .requires(ModItems.SILVER_INGOT.get())
+                .unlockedBy(getHasName(ModItems.SILVER_INGOT.get()), has(ModItems.SILVER_INGOT.get()))
+                .save(this.output);
 
-        // ---------------------------(CRAFTING)--------------------------- //
-        // Crafting recipes for tin-related items
+        this.shaped(RecipeCategory.MISC, ModBLocks.SILVER_BLOCK.get())
+                .pattern("SSS")
+                .pattern("SSS")
+                .pattern("SSS")
+                .define('S', ModItems.SILVER_INGOT.get())
+                .unlockedBy(getHasName(ModItems.SILVER_INGOT.get()), has(ModItems.SILVER_INGOT.get()))
+                .save(this.output);
+        this.shapeless(RecipeCategory.MISC, ModItems.SILVER_INGOT.get(), 9)
+                .requires(ModBLocks.SILVER_BLOCK.get())
+                .unlockedBy(getHasName(ModBLocks.SILVER_BLOCK.get()), has(ModBLocks.SILVER_BLOCK.get()))
+                .save(this.output, "silver_ingot_from_block");
+
+        this.shaped(RecipeCategory.MISC, ModBLocks.RAW_SILVER_BLOCK.get())
+                .pattern("SSS")
+                .pattern("SSS")
+                .pattern("SSS")
+                .define('S', ModItems.RAW_SILVER.get())
+                .unlockedBy(getHasName(ModItems.RAW_SILVER.get()), has(ModItems.RAW_SILVER.get()))
+                .save(this.output);
+        this.shapeless(RecipeCategory.MISC, ModItems.RAW_SILVER.get(), 9)
+                .requires(ModBLocks.RAW_SILVER_BLOCK.get())
+                .unlockedBy(getHasName(ModBLocks.RAW_SILVER_BLOCK.get()), has(ModBLocks.RAW_SILVER_BLOCK.get()))
+                .save(this.output);
+
+
         this.shaped(RecipeCategory.MISC, ModBLocks.TIN_BLOCK.get())
                 .pattern("SSS")
                 .pattern("SSS")
@@ -1342,7 +1379,8 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         this.shapeless(RecipeCategory.MISC, ModItems.TIN_INGOT.get(), 9)
                 .requires(ModBLocks.TIN_BLOCK.get())
                 .unlockedBy(getHasName(ModBLocks.TIN_BLOCK.get()), has(ModBLocks.TIN_BLOCK.get()))
-                .save(this.output);
+                .save(this.output, "tin_ingot_from_block");
+
         this.shaped(RecipeCategory.MISC, ModBLocks.RAW_TIN_BLOCK.get())
                 .pattern("SSS")
                 .pattern("SSS")
@@ -1354,6 +1392,8 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .requires(ModBLocks.RAW_TIN_BLOCK.get())
                 .unlockedBy(getHasName(ModBLocks.RAW_TIN_BLOCK.get()), has(ModBLocks.RAW_TIN_BLOCK.get()))
                 .save(this.output);
+
+
         // ---------------------------(CRAFTING)--------------------------- //
         // -------------------------------------------------(TIN)------------------------------------------------- //
 

@@ -1,4 +1,4 @@
-// 1.21.3	2025-05-24T12:12:13.5133092	Registries
+// 1.21.3	2025-05-26T15:12:21.8192327	Registries
 ffe3d912e363745b0043a61fc7b67f35a53f2228 data/agotmod/neoforge/biome_modifier/add_tin_ore.json
 2cd0b3508ddcea7e502f1cf50b1ab12343351354 data/agotmod/neoforge/biome_modifier/create_weirwood_tree.json
 0f7983acb7574d388a015c385baa1ba57403f253 data/agotmod/worldgen/biome/barrowlands.json
@@ -180,6 +180,7 @@ c0994c8867f9a86962831738e17b1a71a2ddfd49 data/agotmod/worldgen/configured_featur
 dcdd643d7f25dbf347a3ad9a7e90485ad89980b7 data/agotmod/worldgen/configured_feature/sedge.json
 2470c7d0b9e163b2f33dad253177a3cdb65d18e0 data/agotmod/worldgen/configured_feature/sentinel.json
 2470c7d0b9e163b2f33dad253177a3cdb65d18e0 data/agotmod/worldgen/configured_feature/sentinel_rare.json
+54b6086bf9c5f4c69991cc5801d771ad5e4c4c55 data/agotmod/worldgen/configured_feature/silver_ore.json
 ee609a18e3ca715dea741c61310b921e368c5834 data/agotmod/worldgen/configured_feature/spiceflower.json
 862a8cd7fa43f9ecc5a2d380d6821c92fe022246 data/agotmod/worldgen/configured_feature/sycamore.json
 862a8cd7fa43f9ecc5a2d380d6821c92fe022246 data/agotmod/worldgen/configured_feature/sycamore_rare.json
@@ -391,6 +392,7 @@ e619bae61f4c2c207c869ae60b957227f5610f49 data/agotmod/worldgen/placed_feature/se
 8bf447831ffb4fac445094353d4ccb68c67cbfeb data/agotmod/worldgen/placed_feature/sedge.json
 9e7bf3801e41892d4a52cb57d009312cf9a8d837 data/agotmod/worldgen/placed_feature/sentinel.json
 43910fe9ee2b66a33eb15a88848f6f24f1ba023f data/agotmod/worldgen/placed_feature/sentinel_rare.json
+0893d7b4700e18e40f611432be3105ff9f3aff21 data/agotmod/worldgen/placed_feature/silver_ore_placed.json
 43478d64653c3ff2bff18450226e727ef06e4c21 data/agotmod/worldgen/placed_feature/spiceflower.json
 6387082af11b6579bd85e5a73d9d7401eb4ef117 data/agotmod/worldgen/placed_feature/sycamore.json
 15074165d81eab210bed03ab8b945a3414945ec7 data/agotmod/worldgen/placed_feature/tall_grass.json

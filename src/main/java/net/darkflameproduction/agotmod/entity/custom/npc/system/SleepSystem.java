@@ -202,12 +202,9 @@ public class SleepSystem {
     }
 
     public void setBedSearchCooldown(int cooldown) {
-        // CRITICAL FIX: Don't override cooldowns during sleep time if NPC has no bed
         if (peasant.shouldSleep() && !peasant.isSleeping() && peasant.getBedPos() == null) {
-            // If it's sleep time and NPC has no bed, use much shorter cooldowns
             this.bedSearchCooldown = Math.min(cooldown, 200); // Max 10 seconds
         } else if (peasant.shouldSleep() && !peasant.isSleeping() && !peasant.needsFoodCollection()) {
-            // During sleep time, limit cooldown to maximum 300 ticks (15 seconds)
             this.bedSearchCooldown = Math.min(cooldown, 300);
         } else {
             this.bedSearchCooldown = cooldown;
@@ -217,7 +214,6 @@ public class SleepSystem {
     public void onHurt() {
         if (isSleeping()) {
             stopSleeping();
-            // Don't clear bed position if it's their home bed
             if (bedPos != null && !bedPos.equals(peasant.getHomeSystem().getHomeBedPos())) {
                 bedPos = null;
             }
@@ -225,7 +221,6 @@ public class SleepSystem {
     }
 
     public void onRemove() {
-        // NEW: Remove home bed claims when NPC is removed
         SimpleBedWarningSystem.removeHomeBedClaim(peasant.getUUID());
     }
 
@@ -234,9 +229,7 @@ public class SleepSystem {
             peasant.setNeedsFoodCollection(true);
         }
 
-        // Reset farming state for new day - using the new simplified farming system
         if (peasant.getJobType().equals("farmer")) {
-            // Always start by returning to job block each morning
             peasant.getFarmingSystem().setCurrentFarmState(
                     peasant.getFarmingSystem().hasFarm() ?
                             FarmingSystem.FarmState.RETURN_TO_JOB_BLOCK :
@@ -245,7 +238,6 @@ public class SleepSystem {
         }
     }
 
-    // Static bed management methods - simplified without reservation system
     public static boolean isBedOccupied(Level level, BlockPos bedPos) {
         return level.getEntitiesOfClass(Northern_Peasant_Entity.class,
                         new net.minecraft.world.phys.AABB(bedPos).inflate(2.0))
@@ -264,7 +256,6 @@ public class SleepSystem {
             compound.putInt("BedZ", bedPos.getZ());
         }
 
-        // Enhanced sleeping state persistence
         if (isSleeping()) {
             compound.putBoolean("WasSleeping", true);
             if (peasant.getSleepingPos().isPresent()) {
@@ -273,7 +264,6 @@ public class SleepSystem {
                 compound.putInt("SleepingY", sleepPos.getY());
                 compound.putInt("SleepingZ", sleepPos.getZ());
             } else if (bedPos != null) {
-                // Fallback to bed position if sleeping pos not available
                 compound.putInt("SleepingX", bedPos.getX());
                 compound.putInt("SleepingY", bedPos.getY());
                 compound.putInt("SleepingZ", bedPos.getZ());
@@ -284,13 +274,12 @@ public class SleepSystem {
     public void loadData(CompoundTag compound) {
         peasant.getEntityData().set(peasant.getIsSleepingAccessor(), compound.getBoolean("IsSleeping"));
         peasant.getEntityData().set(peasant.getLastSleepTimeAccessor(), compound.getLong("LastSleepTime"));
-        bedSearchCooldown = compound.getInt("BedSearchCooldown"); // Load cooldown state
+        bedSearchCooldown = compound.getInt("BedSearchCooldown");
 
         if (compound.contains("BedX")) {
             bedPos = new BlockPos(compound.getInt("BedX"), compound.getInt("BedY"), compound.getInt("BedZ"));
         }
 
-        // Enhanced sleeping state restoration
         if (compound.getBoolean("WasSleeping") && compound.contains("SleepingX")) {
             BlockPos sleepPos = new BlockPos(
                     compound.getInt("SleepingX"),
@@ -301,18 +290,15 @@ public class SleepSystem {
 
             if (bedState.getBlock() instanceof BedBlock) {
                 if (shouldSleep()) {
-                    // Properly restore sleeping state
                     peasant.startSleeping(sleepPos);
                     setBedPos(sleepPos);
                 } else {
-                    // Should not be sleeping anymore, ensure proper wake up
                     peasant.getEntityData().set(peasant.getIsSleepingAccessor(), false);
                     if (peasant.getSleepingPos().isPresent()) {
                         peasant.stopSleeping(); // Ensure pose is cleared
                     }
                 }
             } else {
-                // Bed no longer exists, clear sleeping state
                 peasant.getEntityData().set(peasant.getIsSleepingAccessor(), false);
                 if (peasant.getSleepingPos().isPresent()) {
                     peasant.stopSleeping();

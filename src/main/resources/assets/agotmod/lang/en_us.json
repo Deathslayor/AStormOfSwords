@@ -1,6 +1,21 @@
 {
 
   "death.attack.died_by_quagmire": "%1$s was lost in the quagmire",
+  "item.agotmod.copper_star": "Copper Star",
+  "item.agotmod.copper_groat": "Copper Groat",
+  "item.agotmod.copper_halfpenny": "Copper Halfpenny",
+  "item.agotmod.copper_penny": "Copper Penny",
+  "item.agotmod.gold_dragon": "Gold Dragon",
+  "item.agotmod.silver_moon": "Silver Moon",
+  "item.agotmod.silver_stag": "Silver Stag",
+  "item.agotmod.copper_halfgroat": "Copper Halfgroat",
+  "item.agotmod.silver_nugget": "Silver Nugget",
+  "item.agotmod.silver_ingot": "Silver Ingot",
+  "item.agotmod.raw_silver": "Raw Silver",
+  "block.agotmod.silver_ore": "Silver Ore",
+  "block.agotmod.raw_silver_block": "Block of Raw Silver",
+  "block.agotmod.deepslate_silver_ore": "Deepslate Silver Ore",
+  "block.agotmod.silver_block": "Block of Silver",
   "item.agotmod.coin" : "Coin",
   "item.agotmod.tin_ingot": "Tin Ingot",
   "item.agotmod.steel_ingot": "Steel Ingot",
@@ -473,13 +488,11 @@
 
 
 
-  "entity.minecraft.villager.agotmod.minter": "Minter",
   "entity.agotmod.mammoth": "Mammoth",
   "entity.agotmod.crow": "Crow",
   "entity.agotmod.direwolf": "Direwolf",
 
   "key.agotmod.open_custom_gui": "Open Custom GUI",
-  "key.categoriesmagic.agotmod": "A Game of Thrones Magic",
   "screen.agotmod.custom_gui": "Custom GUI",
 
   "tooltip.agotmod.level_requirement": "Requires %s Level %d",
@@ -5189,17 +5202,14 @@
   "block.agotmod.winter_rose_bush": "Winter Rose Bush",
   "block.agotmod.red_rose_bush": "Rose Bush",
 
+  "item.agotmod.farmer_barrel_icon": "Farm Barrel",
+  "container.agotmod.farmer_barrel": "Farm Barrel",
 
 
 
   "creativetab.agot_tab": "ASoS Tab",
   "creativetab.agot_tab_handheld": "ASoS Handheld",
-  "creativetab.agot_tab_foods": "ASoS Foods",
-  "creativetab.agot_tab_armour": "ASoS Armour",
-  "creativetab.agot_tab_animals": "ASoS Animals",
   "creativetab.agot_tab_ingots": "ASoS Ingots",
-  "creativetab.agot_tab_building_blocks": "ASoS Building Blocks",
-  "creativetab.agot_tab_natural_blocks": "ASoS Natural Blocks",
   "creativetab.agot_tab_magic": "Magic",
 
 

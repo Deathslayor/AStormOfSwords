@@ -387,6 +387,10 @@ public class ModCreativeBuildingBlocks {
                         pOutput.accept(ModBLocks.QUAGMIRE.get());
 
                         // TIN
+                        pOutput.accept(ModBLocks.SILVER_ORE.get());
+                        pOutput.accept(ModBLocks.RAW_SILVER_BLOCK.get());
+                        pOutput.accept(ModBLocks.DEEPSLATE_SILVER_ORE.get());
+                        pOutput.accept(ModBLocks.SILVER_BLOCK.get());
                         pOutput.accept(ModBLocks.TIN_ORE.get());
                         pOutput.accept(ModBLocks.RAW_TIN_BLOCK.get());
                         pOutput.accept(ModBLocks.DEEPSLATE_TIN_ORE.get());

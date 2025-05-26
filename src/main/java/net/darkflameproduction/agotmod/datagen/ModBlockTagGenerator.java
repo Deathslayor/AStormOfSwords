@@ -285,7 +285,11 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                         ModBLocks.TOPAZ_DEEPSLATE_ORE.get(),
                         ModBLocks.TOURMALINE_ORE.get(),
                         ModBLocks.TOURMALINE_DEEPSLATE_ORE.get(),
-                        ModBLocks.KINGS_LANDING_BRICK_LARGE.get())
+                                ModBLocks.RAW_SILVER_BLOCK.get(),
+                                ModBLocks.SILVER_BLOCK.get(),
+                                ModBLocks.SILVER_ORE.get(),
+                                ModBLocks.DEEPSLATE_SILVER_ORE.get(),
+                                ModBLocks.KINGS_LANDING_BRICK_LARGE.get())
                 .add(ModBLocks.REDKEEP_STONE_BLOCK.get())
                 .add(ModBLocks.REDKEEP_STONE_STAIRS.get())
                 .add(ModBLocks.REDKEEP_STONE_SLAB.get())
@@ -293,6 +297,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         ;
 
         //FLOWERS
+
 
         this.tag(BlockTags.FLOWERS)
                 .add(ModBLocks.WINTER_ROSE.get())

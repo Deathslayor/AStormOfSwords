@@ -1,4 +1,4 @@
-// 1.21.3	2025-05-24T12:12:13.202384	Item Models: agotmod
+// 1.21.3	2025-05-26T17:34:13.293241	Item Models: agotmod
 65c44e6f1f29781252c76032b90c20b3bc8f7b8a assets/agotmod/models/item/alder_button.json
 f0b6afe25a5640838c024d02c663e7c8f821ffd6 assets/agotmod/models/item/alder_door.json
 2af83e95998f18d674056268682572a94f141042 assets/agotmod/models/item/alder_fence.json
@@ -1042,6 +1042,11 @@ de9b33892e3b006243a7d94c0d3e7f72e5ec3722 assets/agotmod/models/item/cooked_horse
 e9661a9addb4b5206a67b4c8f84f68627387c3d1 assets/agotmod/models/item/cooked_mammoth_meat.json
 46cc2db16d9afd4d6733bdf3b38ced09622356c1 assets/agotmod/models/item/cooked_sausage.json
 98c4d31107d3f80cddba537a9655759368609e3a assets/agotmod/models/item/cooked_white_sausage.json
+522b402ec034f45d1c32d6c19391f486a269716e assets/agotmod/models/item/copper_groat.json
+ae1d82d5339127ebff321473067c7494a8974e5b assets/agotmod/models/item/copper_halfgroat.json
+350075b80a8ec40d9cc1bcc5e20ea56b48de8cc1 assets/agotmod/models/item/copper_halfpenny.json
+fc1d141b7b7f200c7a8c5f499b1c492a9ff6bc3b assets/agotmod/models/item/copper_penny.json
+12e647e4c9c239bc59970d0d619c2c0e0e7af6c1 assets/agotmod/models/item/copper_star.json
 f38ebeb1ff27dc8907bb38e702b18d448ef04105 assets/agotmod/models/item/corn.json
 4d6440d597c66c55b9e1dc21d72eae15c195ee78 assets/agotmod/models/item/corn_middle_seeds.json
 eaee20f3fc05ff44ab992f73187fb0490f74dfe5 assets/agotmod/models/item/corn_seeds.json
@@ -1329,6 +1334,7 @@ dc4bc97ab574a28507c2caf2f67f6cc73b2d4c5a assets/agotmod/models/item/ebony_fence.
 00058daf073a3ad250af80bcce66d814a401d958 assets/agotmod/models/item/ebony_trapdoor.json
 f08e555f7883355cf9f720154b815e7a5277a016 assets/agotmod/models/item/ebony_wall.json
 60765342f5b85803169c8412fec476fbdf26b1b3 assets/agotmod/models/item/evening_star.json
+58eceaba97abc9e465fba274f99e12e48ae5c3fd assets/agotmod/models/item/farmer_barrel_icon.json
 671a2f4fc6b33180d91824d27ea336cc3bc62f67 assets/agotmod/models/item/fig_button.json
 0068b0b43aa984eedbfa42711c741d0939f28515 assets/agotmod/models/item/fig_door.json
 b40005306cfa093c6f979f558cf7466970175923 assets/agotmod/models/item/fig_fence.json
@@ -1387,6 +1393,7 @@ c191028974057f090a5d52e1689fb5de19da4f58 assets/agotmod/models/item/goldenheart_
 6ce98bfc4e1f718628a8faca7a0bbe0192da10c4 assets/agotmod/models/item/goldenheart_trapdoor.json
 37d64a23d58a4938c7c332bea73e96732024bb71 assets/agotmod/models/item/goldenheart_wall.json
 1994c7f2e5f675cbf3c0768c88a47240b5a11f04 assets/agotmod/models/item/goldenrod.json
+99484b0911da13da6dc4557acaec7057bf20d74e assets/agotmod/models/item/gold_dragon.json
 f640e15d9aa9703dcee334d402a6a83624257ed6 assets/agotmod/models/item/gorse.json
 40f50e0eefbfe9683f917b4f081b1d0383295a53 assets/agotmod/models/item/granite_10_slab.json
 1a4738954db0c136d7df9713220e69ea61b00cb5 assets/agotmod/models/item/granite_10_stairs.json
@@ -2208,6 +2215,7 @@ fcc14a75b07fe1f7cfd84622dfa121b475c50457 assets/agotmod/models/item/raw_goat_mea
 b18dbcea844bbcdd7b95493865b14955258d33d2 assets/agotmod/models/item/raw_horse_meat.json
 1a4d1a0282b68bb585f5f6118cc05cf616f77f21 assets/agotmod/models/item/raw_mammoth_meat.json
 37575b5c5af6022f9ba3c2a09e2b643a5bdbbad8 assets/agotmod/models/item/raw_sausage.json
+f83559d9476c5a31df1c88cd785acc377c6f29b2 assets/agotmod/models/item/raw_silver.json
 89aae95d8e71d6799881bccdf84d2fccba4caf9d assets/agotmod/models/item/raw_tin.json
 8150fc40f51d6fc505b520c7b43474041f5d811e assets/agotmod/models/item/raw_white_sausage.json
 fed1463956520f463769790421537843a6458520 assets/agotmod/models/item/redkeep_10_slab.json
@@ -2583,6 +2591,10 @@ b22d2ccaa689f0a145b8e03f546815905cdd45d3 assets/agotmod/models/item/sentinel_sig
 9596802d8b5f7bdca34a2c99f9a9ab14e54db96b assets/agotmod/models/item/sentinel_stairs.json
 b0c31034ee95cf406a0f300af3fb1060d5297e1b assets/agotmod/models/item/sentinel_trapdoor.json
 6239b1c06ab826a2c75b04c89cca9a6c1be5b83a assets/agotmod/models/item/sentinel_wall.json
+eeb443374b08e22d73b64f02a0f23e37f0c1ceba assets/agotmod/models/item/silver_ingot.json
+4074e496ca3fe4ffe9473ec04788872c41cc7944 assets/agotmod/models/item/silver_moon.json
+9e773021470d10dd37623cf6951fe0cf1eb4ccc8 assets/agotmod/models/item/silver_nugget.json
+f529bf4c292465fb57be4c6f3fe021d43dd817ac assets/agotmod/models/item/silver_stag.json
 ebca5545e43150bd40f267434f0913644cd66050 assets/agotmod/models/item/smokeberry.json
 6eeff32bd9e59882a60a3a444957fd4fb0a70990 assets/agotmod/models/item/smokeberry_seeds.json
 95ff8c3450b9da6193101b3c9d0f625d8a67f715 assets/agotmod/models/item/spiceflower.json
