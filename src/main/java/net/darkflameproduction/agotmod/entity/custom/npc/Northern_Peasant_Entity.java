@@ -245,6 +245,7 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
     public void remove(RemovalReason reason) {
         jobSystem.onRemove();
         sleepSystem.onRemove();
+        homeSystem.onRemove();
         if (!this.level().isClientSide && reason == RemovalReason.KILLED) {
             inventorySystem.dropAllItems();
         }

@@ -1,23 +1,22 @@
 package net.darkflameproduction.agotmod.entity.custom.npc.goals;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BedPart;
 import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.SleepSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.SimpleBedWarningSystem;
 
 import java.util.EnumSet;
+import java.util.Set;
 
 public class FindBedGoal extends Goal {
     private final Northern_Peasant_Entity peasant;
     private BlockPos targetBed;
     private int searchCooldown = 0;
     private int searchAttempts = 0;
-    private int ticksSinceLastMessage = 0;
-    private static final int MESSAGE_INTERVAL = 300; // Send messages every 15 seconds
     private static final int MAX_SEARCH_RADIUS = 64;
 
     public FindBedGoal(Northern_Peasant_Entity peasant) {
@@ -50,22 +49,19 @@ public class FindBedGoal extends Goal {
             }
         }
 
-        // Check home bed first
+        // Check home bed first (UNCHANGED)
         if (peasant.getHomeSystem().hasHomeBed()) {
             BlockPos homeBed = peasant.getHomeSystem().getHomeBedPos();
             BlockState bedState = peasant.level().getBlockState(homeBed);
 
             if (bedState.getBlock() instanceof BedBlock) {
                 if (SleepSystem.isBedOccupied(peasant.level(), homeBed)) {
-                    sendChatMessage("My bed is occupied! I need to find somewhere else to sleep.");
-                    // Don't set long cooldown, immediately look for alternative
                     searchCooldown = 40; // 2 seconds
                 } else {
                     double distanceToHomeBed = peasant.distanceToSqr(homeBed.getX(), homeBed.getY(), homeBed.getZ());
                     if (distanceToHomeBed > 4.0D) {
                         targetBed = homeBed;
                         peasant.setBedPos(homeBed);
-                        sendChatMessage("Time to head home to my bed for the night.");
                         return true;
                     } else {
                         peasant.setBedPos(homeBed);
@@ -75,29 +71,25 @@ public class FindBedGoal extends Goal {
             } else {
                 peasant.getHomeSystem().setHomeBedPos(null);
                 peasant.setBedPos(null);
-                sendChatMessage("My home bed has been destroyed! I need to find a new place to sleep.");
             }
         }
 
-        // Check current bed position
+        // Check current bed position (UNCHANGED)
         if (peasant.getBedPos() != null) {
             BlockState bedState = peasant.level().getBlockState(peasant.getBedPos());
             if (bedState.getBlock() instanceof BedBlock) {
                 if (SleepSystem.isBedOccupied(peasant.level(), peasant.getBedPos())) {
-                    sendChatMessage("Someone else is using my bed! Looking for another one...");
                     peasant.setBedPos(null);
                 } else {
                     double distanceToBed = peasant.distanceToSqr(peasant.getBedPos().getX(), peasant.getBedPos().getY(), peasant.getBedPos().getZ());
                     if (distanceToBed > 4.0D) {
                         targetBed = peasant.getBedPos();
-                        sendChatMessage("Walking to my bed for the night.");
                         return true;
                     } else {
                         return false; // Close enough, SleepGoal will handle it
                     }
                 }
             } else {
-                sendChatMessage("My bed is gone! Need to find a new one urgently.");
                 peasant.setBedPos(null);
             }
         }
@@ -112,19 +104,23 @@ public class FindBedGoal extends Goal {
         double closestDistance = Double.MAX_VALUE;
         boolean foundAnyBeds = false;
 
-        sendChatMessage("Searching for an available bed nearby...");
+        // Get claimed home beds to avoid
+        Set<BlockPos> claimedHomeBeds = SimpleBedWarningSystem.getHomeBedClaimsInRadius(
+                peasantPos, MAX_SEARCH_RADIUS, peasant.getUUID()
+        );
 
-        // Use a proper cubic search pattern - much more thorough
+        // MUCH FASTER: Simple expanding circle search instead of cubic
         for (int radius = 8; radius <= MAX_SEARCH_RADIUS; radius += 8) {
-            // Search in expanding cubic areas
-            for (int x = -radius; x <= radius; x++) {
-                for (int y = -8; y <= 8; y++) {
-                    for (int z = -radius; z <= radius; z++) {
-                        // Only check the outer shell of each radius to avoid re-checking inner areas
-                        if (radius > 8 && Math.abs(x) < radius - 8 && Math.abs(z) < radius - 8) {
-                            continue;
-                        }
+            // Check beds in a more efficient pattern - every 2nd block in each direction
+            for (int x = -radius; x <= radius; x += 2) {
+                for (int z = -radius; z <= radius; z += 2) {
+                    // Skip blocks that are too far (rough circle approximation)
+                    if (x * x + z * z > radius * radius) {
+                        continue;
+                    }
 
+                    // Check a few Y levels around the peasant's level
+                    for (int y = -4; y <= 4; y += 2) {
                         BlockPos checkPos = peasantPos.offset(x, y, z);
 
                         // Check if within home area
@@ -139,7 +135,12 @@ public class FindBedGoal extends Goal {
 
                             // Only consider head parts of beds
                             if (state.getValue(BedBlock.PART) == BedPart.HEAD) {
-                                // Check if bed is available
+                                // Skip if this bed is claimed as someone's home bed
+                                if (claimedHomeBeds.contains(checkPos)) {
+                                    continue;
+                                }
+
+                                // Check if bed is available (not occupied)
                                 if (!SleepSystem.isBedOccupied(peasant.level(), checkPos)) {
                                     double distance = peasantPos.distSqr(checkPos);
                                     if (distance < closestDistance) {
@@ -157,7 +158,6 @@ public class FindBedGoal extends Goal {
             if (closestBed != null) {
                 targetBed = closestBed;
                 searchAttempts = 0;
-                sendChatMessage("Found an empty bed! Heading there now.");
                 return true;
             }
         }
@@ -166,25 +166,17 @@ public class FindBedGoal extends Goal {
         searchAttempts++;
 
         if (foundAnyBeds) {
-            // Found beds but all occupied
+            // Found beds but all occupied or claimed
             if (peasant.shouldSleep()) {
-                sendChatMessage("All nearby beds are occupied... I'll keep looking soon.");
                 searchCooldown = 60 + (searchAttempts * 20); // 3-9 seconds during sleep time
             } else {
-                sendChatMessage("No available beds right now. I'll try again later.");
                 searchCooldown = 200 + (searchAttempts * 100); // 10-30 seconds normally
             }
         } else {
             // No beds found at all
             if (peasant.shouldSleep()) {
-                if (searchAttempts == 1) {
-                    sendChatMessage("I can't find any beds nearby! This is troubling...");
-                } else if (searchAttempts >= 3) {
-                    sendChatMessage("Still no beds available... I'm getting very tired.");
-                }
                 searchCooldown = 100 + (searchAttempts * 40); // 5-13 seconds during sleep time
             } else {
-                sendChatMessage("No beds found in the area.");
                 searchCooldown = 400 + (searchAttempts * 200); // 20-80 seconds normally
             }
 
@@ -216,13 +208,11 @@ public class FindBedGoal extends Goal {
         // Check if bed still exists and is available
         BlockState bedState = peasant.level().getBlockState(targetBed);
         if (!(bedState.getBlock() instanceof BedBlock)) {
-            sendChatMessage("The bed I was heading to has disappeared!");
             return false;
         }
 
         // Check if bed became occupied while we were walking to it
         if (SleepSystem.isBedOccupied(peasant.level(), targetBed)) {
-            sendChatMessage("Oh no! Someone else took the bed I was walking to!");
             return false;
         }
 
@@ -232,7 +222,6 @@ public class FindBedGoal extends Goal {
     @Override
     public void start() {
         if (targetBed != null) {
-            sendChatMessage("Walking to the bed I found.");
             peasant.getNavigation().moveTo(targetBed.getX() + 0.5, targetBed.getY(), targetBed.getZ() + 0.5, 0.7D);
         }
     }
@@ -245,9 +234,7 @@ public class FindBedGoal extends Goal {
                     bedState.getValue(BedBlock.PART) == BedPart.HEAD &&
                     !SleepSystem.isBedOccupied(peasant.level(), targetBed)) {
                 peasant.setBedPos(targetBed);
-                sendChatMessage("Perfect! This bed will do nicely for the night.");
             } else {
-                sendChatMessage("Darn, someone else got to the bed first!");
                 // Short cooldown to try again quickly
                 searchCooldown = peasant.shouldSleep() ? 20 : 40;
             }
@@ -262,21 +249,8 @@ public class FindBedGoal extends Goal {
             searchCooldown--;
         }
 
-        ticksSinceLastMessage++;
-
         if (targetBed != null) {
             peasant.getLookControl().setLookAt(targetBed.getX(), targetBed.getY(), targetBed.getZ());
-
-            // Send periodic messages while walking to bed
-            if (ticksSinceLastMessage >= MESSAGE_INTERVAL) {
-                double distance = peasant.distanceToSqr(targetBed.getX(), targetBed.getY(), targetBed.getZ());
-                if (distance > 64.0D) {
-                    sendChatMessage("This bed is quite far... but I really need to sleep.");
-                } else if (distance > 16.0D) {
-                    sendChatMessage("Almost at the bed now.");
-                }
-                ticksSinceLastMessage = 0;
-            }
 
             // Check if we reached the bed
             if (peasant.distanceToSqr(targetBed.getX(), targetBed.getY(), targetBed.getZ()) <= 4.0D) {
@@ -288,10 +262,8 @@ public class FindBedGoal extends Goal {
                     if (!SleepSystem.isBedOccupied(peasant.level(), targetBed)) {
                         peasant.setBedPos(targetBed);
                         peasant.getNavigation().stop();
-                        sendChatMessage("Finally reached the bed! Time to get some rest.");
                         return;
                     } else {
-                        sendChatMessage("Someone took the bed just as I got here!");
                         targetBed = null;
                         searchCooldown = 20; // Quick retry
                         return;
@@ -304,21 +276,5 @@ public class FindBedGoal extends Goal {
                 peasant.getNavigation().moveTo(targetBed.getX() + 0.5, targetBed.getY(), targetBed.getZ() + 0.5, 0.7D);
             }
         }
-    }
-
-    private void sendChatMessage(String message) {
-        if (peasant.level().isClientSide || !peasant.hasCustomName()) {
-            return;
-        }
-
-        String npcName = peasant.getCustomName().getString();
-        String fullMessage = npcName + ": " + message;
-
-        // Send message to all players within 32 blocks
-        peasant.level().players().forEach(player -> {
-            if (player.distanceToSqr(peasant.getX(), peasant.getY(), peasant.getZ()) < 1024) {
-                player.displayClientMessage(Component.literal(fullMessage), false);
-            }
-        });
     }
 }

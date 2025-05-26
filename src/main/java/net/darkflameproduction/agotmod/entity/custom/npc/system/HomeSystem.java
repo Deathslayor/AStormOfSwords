@@ -17,11 +17,25 @@ public class HomeSystem {
 
     private BlockPos homeBedPos; // The original bed that establishes home base
 
+    // NEW: Home bed broadcast timer
+    private int homeBedBroadcastTimer = 0;
+
     public HomeSystem(Northern_Peasant_Entity peasant) {
         this.peasant = peasant;
     }
 
     public void tick() {
+        // NEW: Broadcast home bed claim every 40 ticks if we have a home bed
+        if (!peasant.level().isClientSide && homeBedPos != null) {
+            homeBedBroadcastTimer++;
+            if (homeBedBroadcastTimer >= 40) {
+                SimpleBedWarningSystem.broadcastHomeBedClaim(peasant.getUUID(), homeBedPos);
+                homeBedBroadcastTimer = 0;
+            }
+        } else {
+            homeBedBroadcastTimer = 0;
+        }
+
         // Check if peasant is too far from home and force return
         if (!peasant.level().isClientSide && isTooFarFromHome() && !peasant.isSleeping()) {
             // Cancel current navigation and head back towards home
@@ -35,6 +49,8 @@ public class HomeSystem {
             BlockState homeBedState = peasant.level().getBlockState(homeBedPos);
             if (!(homeBedState.getBlock() instanceof BedBlock)) {
                 // Home bed is gone, clear it and allow them to establish a new home
+                // NEW: Remove home bed claim when destroyed
+                SimpleBedWarningSystem.removeHomeBedClaimForPosition(peasant.getUUID(), homeBedPos);
                 homeBedPos = null;
                 peasant.setBedPos(null);
             }
@@ -46,7 +62,16 @@ public class HomeSystem {
     }
 
     public void setHomeBedPos(BlockPos pos) {
+        // NEW: Handle home bed claim updates
+        if (homeBedPos != null) {
+            SimpleBedWarningSystem.removeHomeBedClaimForPosition(peasant.getUUID(), homeBedPos);
+        }
+
         this.homeBedPos = pos;
+
+        if (pos != null) {
+            SimpleBedWarningSystem.broadcastHomeBedClaim(peasant.getUUID(), pos);
+        }
     }
 
     public boolean hasHomeBed() {
@@ -81,10 +106,15 @@ public class HomeSystem {
 
     public void establishHomeBed(BlockPos bedPos) {
         if (homeBedPos == null && bedPos != null) {
-            setHomeBedPos(bedPos);
+            setHomeBedPos(bedPos); // This will handle the claim broadcast
             // Always prefer the home bed for sleeping
             peasant.setBedPos(bedPos);
         }
+    }
+
+    // NEW: Cleanup method for when NPC is removed
+    public void onRemove() {
+        SimpleBedWarningSystem.removeHomeBedClaim(peasant.getUUID());
     }
 
     public void saveData(CompoundTag compound) {
@@ -99,7 +129,8 @@ public class HomeSystem {
     public void loadData(CompoundTag compound) {
         // Load home bed position
         if (compound.contains("HomeBedX")) {
-            homeBedPos = new BlockPos(compound.getInt("HomeBedX"), compound.getInt("HomeBedY"), compound.getInt("HomeBedZ"));
+            BlockPos loadedHomeBed = new BlockPos(compound.getInt("HomeBedX"), compound.getInt("HomeBedY"), compound.getInt("HomeBedZ"));
+            setHomeBedPos(loadedHomeBed); // This will handle the claim broadcast
         }
     }
 }

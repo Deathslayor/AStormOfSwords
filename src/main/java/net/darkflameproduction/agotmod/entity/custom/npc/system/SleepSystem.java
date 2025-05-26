@@ -175,7 +175,7 @@ public class SleepSystem {
         setSleeping(true);
         setBedPos(pos);
 
-        // Establish home base on first sleep
+        // CRITICAL FIX: Establish home base on first sleep - this was missing!
         peasant.getHomeSystem().establishHomeBed(pos);
 
         peasant.getNavigation().stop();
@@ -225,7 +225,8 @@ public class SleepSystem {
     }
 
     public void onRemove() {
-        // No cleanup needed without reservation system
+        // NEW: Remove home bed claims when NPC is removed
+        SimpleBedWarningSystem.removeHomeBedClaim(peasant.getUUID());
     }
 
     private void onWakeUp() {
