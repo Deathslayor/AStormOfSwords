@@ -17,6 +17,40 @@ import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasant_Entity> {
 
+    // ========== PRESET COLOR ARRAYS ==========
+
+    private static final int[] EYES_COLORS = {
+            0xFF245014, 0xFF2d6618, 0xFF377a1e, 0xFF7a521e, 0xFF543b1b, 0xFF3e2a12,
+            0xFF201609, 0xFF0e263b, 0xFF21215c, 0xFF262793, 0xFF191bc0
+    };
+
+    private static final int[] HAIR_COLORS = {
+            0xFF715017, 0xFF644819, 0xFF55401b, 0xFF433215, 0xFF31240e, 0xFF231909,
+            0xFF2c1c02, 0xFF52270c, 0xFF69300c, 0xFF7a3d16, 0xFF6b2813, 0xFF551a08,
+            0xFF7e2a0f, 0xFF8f1e11, 0xFF671107, 0xFF675916, 0xFF7f6c14, 0xFFa78d10,
+            0xFFbb9f1d, 0xFF939393, 0xFF777777, 0xFFb63d08, 0xFFd5380d
+    };
+
+    private static final int[] SHIRT_COLORS = {
+            0xFFe7e7e7, 0xFFa9a39a, 0xFF988569, 0xFFae8f5f, 0xFFd79e46, 0xFFaf751d,
+            0xFFcbcda2, 0xFFa0a27b, 0xFF92b772, 0xFF6a8d4b, 0xFF507530, 0xFF5dc05c,
+            0xFF3d943d, 0xFF248124, 0xFF115210, 0xFF355d4f, 0xFF699d8b, 0xFF97cab8,
+            0xFF69687e, 0xFF7c78c3, 0xFF8b89b7, 0xFF232d8c, 0xFFc19c9c, 0xFF895656,
+            0xFF8a3d3d, 0xFF642222, 0xFF8b1717
+    };
+
+    private static final int[] PANTS_COLORS = {
+            0xFF331d0b, 0xFF43250c, 0xFF221206, 0xFF37210e, 0xFF2d1e12, 0xFF2e251d,
+            0xFF24201d, 0xFF291911, 0xFF391c0e, 0xFF1f0c03, 0xFF2a0e00, 0xFF370605,
+            0xFF270201, 0xFF451312
+    };
+
+    private static final int[] TUNIC_HOOD_COLORS = {
+            0xFF320808, 0xFF5f3010, 0xFF3e1f09, 0xFF271508, 0xFF1b110a, 0xFF231f1c,
+            0xFF423c1d, 0xFF393107, 0xFF133347, 0xFF071d2b, 0xFF050f15, 0xFF28390a,
+            0xFF0a392a, 0xFF15523f
+    };
+
     // ========== BODY TEXTURES ==========
     private static final int BODY_VARIANTS = 1;
     private static final ResourceLocation[] BODY_TEXTURES = new ResourceLocation[BODY_VARIANTS];
@@ -62,7 +96,7 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
     }
 
     // ========== HAIR TEXTURES ==========
-    private static final int HAIR_VARIANTS = 5; // Change this number as needed
+    private static final int HAIR_VARIANTS = 8; // Change this number as needed
     private static final ResourceLocation[] HAIR_TEXTURES = new ResourceLocation[HAIR_VARIANTS];
 
     static {
@@ -73,7 +107,7 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
     }
 
     // ========== BOOTS TEXTURES ==========
-    private static final int BOOTS_VARIANTS = 1; // Change this number as needed
+    private static final int BOOTS_VARIANTS = 2; // Change this number as needed
     private static final ResourceLocation[] BOOTS_TEXTURES = new ResourceLocation[BOOTS_VARIANTS];
 
     static {
@@ -84,13 +118,24 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
     }
 
     // ========== TUNIC TEXTURES ==========
-    private static final int TUNIC_VARIANTS = 1; // Change this number as needed
+    private static final int TUNIC_VARIANTS = 2; // Change this number as needed
     private static final ResourceLocation[] TUNIC_TEXTURES = new ResourceLocation[TUNIC_VARIANTS];
 
     static {
         for (int i = 1; i <= TUNIC_VARIANTS; i++) {
             TUNIC_TEXTURES[i - 1] = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID,
                     "textures/entity/northernpeasant/tunic" + i + ".png");
+        }
+    }
+
+    // ========== HOOD TEXTURES ==========
+    private static final int HOOD_VARIANTS = 3; // Change this number as needed
+    private static final ResourceLocation[] HOOD_TEXTURES = new ResourceLocation[HOOD_VARIANTS];
+
+    static {
+        for (int i = 1; i <= HOOD_VARIANTS; i++) {
+            HOOD_TEXTURES[i - 1] = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID,
+                    "textures/entity/northernpeasant/hood" + i + ".png");
         }
     }
 
@@ -126,21 +171,25 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
         int hairVariant = (int)((seed >>> 32) % HAIR_VARIANTS);
         int bootsVariant = (int)((seed >>> 40) % BOOTS_VARIANTS);
         int tunicVariant = (int)((seed >>> 48) % TUNIC_VARIANTS);
+        int hoodVariant = (int)((seed >>> 56) % HOOD_VARIANTS);
 
-        // Generate spawn egg style colors for specific layers
-        int legsColor = generateSpawnEggColor(animatable, 1);
-        int shirtColor = generateSpawnEggColor(animatable, 2);
-        int tunicColor = generateSpawnEggColor(animatable, 3);
+        // Generate preset colors for each layer
+        int eyesColor = getPresetColor(animatable, EYES_COLORS, 1);
+        int legsColor = getPresetColor(animatable, PANTS_COLORS, 2);
+        int shirtColor = getPresetColor(animatable, SHIRT_COLORS, 3);
+        int hairColor = getPresetColor(animatable, HAIR_COLORS, 4);
+        int tunicColor = getPresetColor(animatable, TUNIC_HOOD_COLORS, 5);
+        int hoodColor = getPresetColor(animatable, TUNIC_HOOD_COLORS, 6);
 
-        // Render layers in order: body, eyes, legs, shirt, hair, legs, boots, hair, tunic
+        // Render layers in order: body, eyes, legs, shirt, hair, legs, boots, hair, tunic, hood
 
         // Layer 1: Body (bottom layer) - no color overlay
         renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
                 packedLight, packedOverlay, 0xFFFFFFFF, BODY_TEXTURES[bodyVariant]);
 
-        // Layer 2: Eyes - no color overlay
+        // Layer 2: Eyes - with color overlay
         renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
-                packedLight, packedOverlay, 0xFFFFFFFF, EYES_TEXTURES[eyesVariant]);
+                packedLight, packedOverlay, eyesColor, EYES_TEXTURES[eyesVariant]);
 
         // Layer 3: Legs (first time) - with color overlay
         renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
@@ -150,9 +199,9 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
         renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
                 packedLight, packedOverlay, shirtColor, SHIRT_TEXTURES[shirtVariant]);
 
-        // Layer 5: Hair (first time) - no color overlay
+        // Layer 5: Hair (first time) - with color overlay
         renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
-                packedLight, packedOverlay, 0xFFFFFFFF, HAIR_TEXTURES[hairVariant]);
+                packedLight, packedOverlay, hairColor, HAIR_TEXTURES[hairVariant]);
 
         // Layer 6: Legs (second time) - with same color overlay
         renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
@@ -162,13 +211,17 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
         renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
                 packedLight, packedOverlay, 0xFFFFFFFF, BOOTS_TEXTURES[bootsVariant]);
 
-        // Layer 8: Hair (second time) - no color overlay
+        // Layer 8: Hair (second time) - with same color overlay
         renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
-                packedLight, packedOverlay, 0xFFFFFFFF, HAIR_TEXTURES[hairVariant]);
+                packedLight, packedOverlay, hairColor, HAIR_TEXTURES[hairVariant]);
 
-        // Layer 9: Tunic (top layer) - with color overlay
+        // Layer 9: Tunic - with color overlay
         renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
                 packedLight, packedOverlay, tunicColor, TUNIC_TEXTURES[tunicVariant]);
+
+        // Layer 10: Hood (top layer) - with color overlay
+        renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
+                packedLight, packedOverlay, hoodColor, HOOD_TEXTURES[hoodVariant]);
     }
 
     private void renderLayer(PoseStack poseStack, Northern_Peasant_Entity animatable, BakedGeoModel model,
@@ -182,16 +235,15 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
                 isReRender, partialTick, packedLight, packedOverlay, color);
     }
 
-    // ========== SPAWN EGG STYLE COLOR GENERATION ==========
+    // ========== PRESET COLOR SELECTION ==========
 
-    private int generateSpawnEggColor(Northern_Peasant_Entity entity, int colorIndex) {
-        // Use entity UUID to generate consistent colors like spawn eggs do
+    private int getPresetColor(Northern_Peasant_Entity entity, int[] colorArray, int colorIndex) {
+        // Use entity UUID to generate consistent color selection
         long bits = entity.getUUID().getLeastSignificantBits();
-        long seed = Math.abs(bits) + (colorIndex * 12345); // Different seed for each color
+        long seed = Math.abs(bits) + (colorIndex * 54321); // Different seed for each color type
 
-        // Generate random color values (like spawn egg colors)
-        int color = (int)(seed % 0xFFFFFF); // Random 24-bit color
-        return 0xFF000000 | color; // Add full alpha to make it opaque
+        int colorVariant = (int)(seed % colorArray.length);
+        return colorArray[colorVariant];
     }
 
     @Override
@@ -277,17 +329,35 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
         return TUNIC_TEXTURES[variant];
     }
 
+    public ResourceLocation getHoodTexture(Northern_Peasant_Entity entity) {
+        long bits = entity.getUUID().getLeastSignificantBits();
+        int variant = (int)((Math.abs(bits) >>> 56) % HOOD_VARIANTS);
+        return HOOD_TEXTURES[variant];
+    }
+
     // ========== COLOR UTILITY METHODS ==========
 
+    public int getEyesColor(Northern_Peasant_Entity entity) {
+        return getPresetColor(entity, EYES_COLORS, 1);
+    }
+
     public int getLegsColor(Northern_Peasant_Entity entity) {
-        return generateSpawnEggColor(entity, 1);
+        return getPresetColor(entity, PANTS_COLORS, 2);
     }
 
     public int getShirtColor(Northern_Peasant_Entity entity) {
-        return generateSpawnEggColor(entity, 2);
+        return getPresetColor(entity, SHIRT_COLORS, 3);
+    }
+
+    public int getHairColor(Northern_Peasant_Entity entity) {
+        return getPresetColor(entity, HAIR_COLORS, 4);
     }
 
     public int getTunicColor(Northern_Peasant_Entity entity) {
-        return generateSpawnEggColor(entity, 3);
+        return getPresetColor(entity, TUNIC_HOOD_COLORS, 5);
+    }
+
+    public int getHoodColor(Northern_Peasant_Entity entity) {
+        return getPresetColor(entity, TUNIC_HOOD_COLORS, 6);
     }
 }

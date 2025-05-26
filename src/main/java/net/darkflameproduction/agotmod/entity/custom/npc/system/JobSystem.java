@@ -15,6 +15,7 @@ public class JobSystem {
     private final Northern_Peasant_Entity peasant;
 
     // Job types
+    public static final String JOB_GROCER = "grocer";
     public static final String JOB_FARMER = "farmer";
     public static final String JOB_NONE = "";
 
@@ -22,6 +23,10 @@ public class JobSystem {
     private static final int FARMER_WORK_RADIUS_X = 40; // 80x80 area around job block
     private static final int FARMER_WORK_RADIUS_Z = 40;
     private static final int FARMER_WORK_RADIUS_Y = 16; // 32 block height around job block
+
+    private static final int GROCER_WORK_RADIUS_X = 32; // 64x64 area around job block
+    private static final int GROCER_WORK_RADIUS_Z = 32;
+    private static final int GROCER_WORK_RADIUS_Y = 16; // 32 block height around job block
 
     // Job block reservations - static maps to track which blocks are taken
     private static final Map<BlockPos, UUID> jobBlockReservations = new HashMap<>();
@@ -80,6 +85,8 @@ public class JobSystem {
         // Check based on job type
         if (getJobType().equals(JOB_FARMER)) {
             return jobBlockState.getBlock() == net.minecraft.world.level.block.Blocks.COMPOSTER;
+        } else if (getJobType().equals(JOB_GROCER)) {
+            return jobBlockState.getBlock() == net.minecraft.world.level.block.Blocks.BARREL;
         }
 
         // For unknown job types, assume invalid
@@ -108,6 +115,10 @@ public class JobSystem {
                             FarmingSystem.FarmState.NEEDS_FARM_SETUP :
                             FarmingSystem.FarmState.NEEDS_FARM_SETUP
             );
+        } else if (oldJobType.equals(JOB_GROCER)) {
+            // Reset grocer system if needed
+            // The grocer system doesn't need specific reset logic currently
+            // as it maintains its digital inventory even after job loss
         }
     }
 
@@ -155,6 +166,8 @@ public class JobSystem {
         // Different work radius based on job type
         if (getJobType().equals(JOB_FARMER)) {
             return deltaX <= FARMER_WORK_RADIUS_X && deltaZ <= FARMER_WORK_RADIUS_Z && deltaY <= FARMER_WORK_RADIUS_Y;
+        } else if (getJobType().equals(JOB_GROCER)) {
+            return deltaX <= GROCER_WORK_RADIUS_X && deltaZ <= GROCER_WORK_RADIUS_Z && deltaY <= GROCER_WORK_RADIUS_Y;
         }
 
         return true; // Default: no restrictions for unknown job types
@@ -162,8 +175,21 @@ public class JobSystem {
 
     public boolean shouldBeAtWorkArea() {
         // Should be at work area during day time (not sleeping) and have a job
-        return hasJob() && !peasant.shouldSleep() && !peasant.needsFoodCollection() &&
-                peasant.getFarmingSystem().hasReturnedToJobBlockAfterFood();
+        if (!hasJob() || peasant.shouldSleep() || peasant.needsFoodCollection()) {
+            return false;
+        }
+
+        // For farmers, they must have returned to job block after food collection
+        if (getJobType().equals(JOB_FARMER)) {
+            return peasant.getFarmingSystem().hasReturnedToJobBlockAfterFood();
+        }
+
+        // For grocers, they can work anytime during non-sleep hours
+        if (getJobType().equals(JOB_GROCER)) {
+            return true;
+        }
+
+        return false;
     }
 
     public boolean isTooFarFromWork() {
@@ -178,6 +204,8 @@ public class JobSystem {
         // Return to work if too far (based on job type)
         if (getJobType().equals(JOB_FARMER)) {
             return distanceSquared > ((FARMER_WORK_RADIUS_X + 10) * (FARMER_WORK_RADIUS_X + 10));
+        } else if (getJobType().equals(JOB_GROCER)) {
+            return distanceSquared > ((GROCER_WORK_RADIUS_X + 10) * (GROCER_WORK_RADIUS_X + 10));
         }
 
         return false;
@@ -204,12 +232,16 @@ public class JobSystem {
             // Remove existing job title if present
             if (currentName.startsWith("Farmer ")) {
                 baseName = currentName.substring(7); // Remove "Farmer "
+            } else if (currentName.startsWith("Grocer ")) {
+                baseName = currentName.substring(7); // Remove "Grocer "
             }
 
             // Add new job title
             String newName = baseName;
             if (getJobType().equals(JOB_FARMER)) {
                 newName = "Farmer " + baseName;
+            } else if (getJobType().equals(JOB_GROCER)) {
+                newName = "Grocer " + baseName;
             }
 
             peasant.setCustomName(Component.literal(newName));

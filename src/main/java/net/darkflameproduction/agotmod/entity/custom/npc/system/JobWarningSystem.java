@@ -1,4 +1,3 @@
-// 1. First, add this new JobWarningSystem class
 package net.darkflameproduction.agotmod.entity.custom.npc.system;
 
 import net.minecraft.core.BlockPos;

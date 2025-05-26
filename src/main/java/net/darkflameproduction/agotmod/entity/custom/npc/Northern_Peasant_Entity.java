@@ -3,6 +3,7 @@ package net.darkflameproduction.agotmod.entity.custom.npc;
 import net.darkflameproduction.agotmod.entity.animations.ModAnimationDefinitions;
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.*;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.*;
+import net.darkflameproduction.agotmod.network.OpenGrocerInventoryPacket;
 import net.darkflameproduction.agotmod.sound.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -77,6 +78,7 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
     private final HomeSystem homeSystem;
     private final JobSystem jobSystem;
     private final FarmingSystem farmingSystem;
+    private final GrocerSystem grocerSystem;
     private final TeleportSystem teleportSystem;
     private final NameSystem nameSystem;
     private static final Random RANDOM = new Random();
@@ -99,6 +101,7 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         this.homeSystem = new HomeSystem(this);
         this.jobSystem = new JobSystem(this);
         this.farmingSystem = new FarmingSystem(this);
+        this.grocerSystem = new GrocerSystem(this);
         this.teleportSystem = new TeleportSystem(this);
         this.nameSystem = new NameSystem(this);
     }
@@ -110,6 +113,7 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
     public HomeSystem getHomeSystem() { return homeSystem; }
     public JobSystem getJobSystem() { return jobSystem; }
     public FarmingSystem getFarmingSystem() { return farmingSystem; }
+    public GrocerSystem getGrocerSystem() { return grocerSystem; }
     public TeleportSystem getTeleportSystem() { return teleportSystem; }
     public NameSystem getNameSystem() { return nameSystem; }
 
@@ -125,6 +129,7 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         this.goalSelector.addGoal(7, new ReturnToJobBlockGoal(this));
         this.goalSelector.addGoal(8, new FindJobGoal(this));
         this.goalSelector.addGoal(9, new FarmingGoal(this));
+        this.goalSelector.addGoal(9, new GrocerCollectionGoal(this));
         this.goalSelector.addGoal(10, new RestrictedWanderGoal(this, 0.6D));
         this.goalSelector.addGoal(11, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(12, new RandomLookAroundGoal(this));
@@ -158,6 +163,7 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         homeSystem.saveData(compound);
         jobSystem.saveData(compound);
         farmingSystem.saveData(compound);
+        grocerSystem.saveData(compound);
         teleportSystem.saveData(compound);
         nameSystem.saveData(compound, this.registryAccess());
 
@@ -176,6 +182,7 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         homeSystem.loadData(compound);
         jobSystem.loadData(compound);
         farmingSystem.loadData(compound);
+        grocerSystem.loadData(compound);
         teleportSystem.loadData(compound);
         nameSystem.loadData(compound, this.registryAccess());
 
@@ -196,6 +203,7 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         homeSystem.tick();
         jobSystem.tick();
         farmingSystem.tick();
+        grocerSystem.tick();
         teleportSystem.tick();
     }
 
@@ -218,8 +226,21 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
             }
 
             if (player instanceof ServerPlayer serverPlayer) {
-                inventorySystem.openInventoryFor(serverPlayer);
-                return InteractionResult.SUCCESS;
+                // Check if this is a grocer
+                if (getJobType().equals(JobSystem.JOB_GROCER)) {
+                    // Send grocer inventory data to client
+                    List<GrocerSystem.GrocerInventoryEntry> entries = grocerSystem.getSortedInventoryEntries();
+                    String grocerName = this.getDisplayName().getString();
+
+                    OpenGrocerInventoryPacket packet = new OpenGrocerInventoryPacket(grocerName, entries);
+                    serverPlayer.connection.send(packet);
+
+                    return InteractionResult.SUCCESS;
+                } else {
+                    // Regular inventory for non-grocers
+                    inventorySystem.openInventoryFor(serverPlayer);
+                    return InteractionResult.SUCCESS;
+                }
             }
         }
         return super.mobInteract(player, hand);
@@ -246,6 +267,7 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         jobSystem.onRemove();
         sleepSystem.onRemove();
         homeSystem.onRemove();
+        grocerSystem.onRemove();
         if (!this.level().isClientSide && reason == RemovalReason.KILLED) {
             inventorySystem.dropAllItems();
         }

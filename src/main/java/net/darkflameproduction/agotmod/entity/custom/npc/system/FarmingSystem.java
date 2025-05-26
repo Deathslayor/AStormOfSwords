@@ -2,6 +2,8 @@ package net.darkflameproduction.agotmod.entity.custom.npc.system;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
@@ -151,6 +153,11 @@ public class FarmingSystem {
 
                     peasant.level().setBlock(targetPos,
                             net.minecraft.world.level.block.Blocks.FARMLAND.defaultBlockState(), 3);
+
+                    // Play grass breaking sound when converting to farmland
+                    peasant.level().playSound(null, targetPos, SoundEvents.GRASS_BREAK,
+                            SoundSource.BLOCKS, 0.8F, 1.0F);
+
                     converted++;
                 }
             }
@@ -201,6 +208,11 @@ public class FarmingSystem {
                     // CHECK IF WE HAVE THE SEED BEFORE PLANTING
                     if (hasSeedInInventory(cropToPlant.asItem())) {
                         peasant.level().setBlock(cropPos, cropToPlant.defaultBlockState(), 3);
+
+                        // Play grass breaking sound when planting crops
+                        peasant.level().playSound(null, cropPos, SoundEvents.GRASS_BREAK,
+                                SoundSource.BLOCKS, 0.6F, 1.2F);
+
                         consumeSeedFromInventory(cropToPlant.asItem());
                         planted++;
                     } else {
@@ -284,6 +296,10 @@ public class FarmingSystem {
         BlockState cropState = peasant.level().getBlockState(cropPos);
 
         if (peasant.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+            // Play grass breaking sound when harvesting crops
+            peasant.level().playSound(null, cropPos, SoundEvents.GRASS_BREAK,
+                    SoundSource.BLOCKS, 0.7F, 0.8F);
+
             // Harvest drops
             List<ItemStack> drops = net.minecraft.world.level.block.Block.getDrops(
                     cropState, serverLevel, cropPos, null);
@@ -295,6 +311,11 @@ public class FarmingSystem {
             // Replant with same crop type
             if (cropState.getBlock() instanceof net.minecraft.world.level.block.CropBlock cropBlock) {
                 peasant.level().setBlock(cropPos, cropBlock.defaultBlockState(), 3);
+
+                // Play grass breaking sound when replanting
+                peasant.level().playSound(null, cropPos, SoundEvents.GRASS_BREAK,
+                        SoundSource.BLOCKS, 0.5F, 1.3F);
+
                 consumeSeedFromInventory(cropBlock.asItem());
             }
         }
@@ -327,6 +348,11 @@ public class FarmingSystem {
 
                     peasant.level().setBlock(targetPos,
                             net.minecraft.world.level.block.Blocks.FARMLAND.defaultBlockState(), 3);
+
+                    // Play grass breaking sound when converting to farmland
+                    peasant.level().playSound(null, targetPos, SoundEvents.GRASS_BREAK,
+                            SoundSource.BLOCKS, 0.8F, 1.0F);
+
                     converted++;
                 }
             }
@@ -370,6 +396,11 @@ public class FarmingSystem {
                     // CHECK IF WE HAVE THE SEED BEFORE PLANTING
                     if (hasSeedInInventory(cropToPlant.asItem())) {
                         peasant.level().setBlock(cropPos, cropToPlant.defaultBlockState(), 3);
+
+                        // Play grass breaking sound when planting crops
+                        peasant.level().playSound(null, cropPos, SoundEvents.GRASS_BREAK,
+                                SoundSource.BLOCKS, 0.6F, 1.2F);
+
                         consumeSeedFromInventory(cropToPlant.asItem());
                         planted++;
                     } else {
