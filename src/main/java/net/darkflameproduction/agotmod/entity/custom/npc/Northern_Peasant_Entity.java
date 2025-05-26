@@ -119,20 +119,12 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         this.doorGoal = new OpenAndCloseDoorGoal(this);
         this.goalSelector.addGoal(1, doorGoal);
 
-        // CRITICAL FIX: Sleep goals get HIGHEST priority during sleep time
         this.goalSelector.addGoal(2, new FindBedGoal(this));
         this.goalSelector.addGoal(3, new SleepGoal(this));
-
-        // CRITICAL FIX: Food collection should not block sleep completely
-        // Make it lower priority than sleep-related goals
         this.goalSelector.addGoal(6, new CollectFoodGoal(this));
-
-        // Job-related goals even lower priority
         this.goalSelector.addGoal(7, new ReturnToJobBlockGoal(this));
         this.goalSelector.addGoal(8, new FindJobGoal(this));
         this.goalSelector.addGoal(9, new FarmingGoal(this));
-
-        // General movement goals
         this.goalSelector.addGoal(10, new RestrictedWanderGoal(this, 0.6D));
         this.goalSelector.addGoal(11, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(12, new RandomLookAroundGoal(this));

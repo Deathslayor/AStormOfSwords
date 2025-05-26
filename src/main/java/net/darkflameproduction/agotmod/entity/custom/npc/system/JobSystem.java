@@ -27,6 +27,9 @@ public class JobSystem {
     private static final Map<UUID, Long> jobReservationTimestamps = new HashMap<>();
     private static final long JOB_RESERVATION_TIMEOUT = 12000; // 10 minutes
 
+    // NEW: Job warning broadcast timer
+    private int warningBroadcastTimer = 0;
+
     public JobSystem(Northern_Peasant_Entity peasant) {
         this.peasant = peasant;
     }
@@ -38,6 +41,21 @@ public class JobSystem {
             peasant.getNavigation().stop();
             BlockPos workCenter = getWorkCenter();
             peasant.getNavigation().moveTo(workCenter.getX(), workCenter.getY(), workCenter.getZ(), 0.8D);
+        }
+
+        // NEW: Broadcast job block warning every 40 ticks if we have a job
+        if (!peasant.level().isClientSide && hasJob() && getJobBlockPos() != null) {
+            warningBroadcastTimer++;
+            if (warningBroadcastTimer >= 40) {
+                JobWarningSystem.broadcastJobBlockInUse(
+                        peasant.getUUID(),
+                        getJobType(),
+                        getJobBlockPos()
+                );
+                warningBroadcastTimer = 0;
+            }
+        } else {
+            warningBroadcastTimer = 0;
         }
     }
 
@@ -52,6 +70,11 @@ public class JobSystem {
         // Update name when job changes
         if (!oldJob.equals(jobType)) {
             updateNameWithJob();
+
+            // NEW: If losing job, remove warning
+            if (jobType.isEmpty() && !oldJob.isEmpty()) {
+                JobWarningSystem.removeJobBlockWarning(peasant.getUUID());
+            }
         }
     }
 
@@ -117,6 +140,8 @@ public class JobSystem {
 
     public void onRemove() {
         releaseJobBlockReservation(peasant.getUUID());
+        // NEW: Remove job block warning when NPC is removed
+        JobWarningSystem.removeJobBlockWarning(peasant.getUUID());
     }
 
     private void updateNameWithJob() {
