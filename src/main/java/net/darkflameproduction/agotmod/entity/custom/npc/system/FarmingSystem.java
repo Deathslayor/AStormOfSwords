@@ -36,6 +36,11 @@ public class FarmingSystem {
     }
 
     public void tick() {
+        // ONLY run farming system logic for farmers!
+        if (!peasant.getJobType().equals(JobSystem.JOB_FARMER)) {
+            return;
+        }
+
         // Check if job block still exists - if not, lose job
         if (peasant.hasJob() && peasant.getJobBlockPos() != null) {
             BlockPos jobBlockPos = peasant.getJobBlockPos();
@@ -55,7 +60,6 @@ public class FarmingSystem {
         }
     }
 
-    // Check if farmer has excess items (used by BarrelDropOffGoal)
     public boolean hasExcessItems() {
         var inventory = peasant.getInventorySystem().getInventory();
         int meatCount = 0;
@@ -493,7 +497,6 @@ public class FarmingSystem {
         }
     }
 
-    // Getters and setters
     public FarmState getCurrentFarmState() { return currentFarmState; }
     public void setCurrentFarmState(FarmState state) { this.currentFarmState = state; }
 
@@ -504,7 +507,6 @@ public class FarmingSystem {
         this.hasReturnedToJobBlockAfterFood = returned;
     }
 
-    // Save/Load methods
     public void saveData(CompoundTag compound) {
         compound.putBoolean("HasReturnedToJobBlockAfterFood", hasReturnedToJobBlockAfterFood);
         compound.putBoolean("HasFarm", hasFarm);

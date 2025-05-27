@@ -1,4 +1,4 @@
-package net.darkflameproduction.agotmod.client;
+package net.darkflameproduction.agotmod.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;

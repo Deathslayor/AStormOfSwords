@@ -17,8 +17,11 @@ import net.darkflameproduction.agotmod.sound.ModSounds;
 import net.darkflameproduction.agotmod.util.ModWoodTypes;
 import net.darkflameproduction.agotmod.villager.ModVillagers;
 import net.darkflameproduction.agotmod.worldgen.biome.ModTerrablender;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.Sheets;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.neoforged.bus.api.IEventBus;
@@ -30,6 +33,7 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
@@ -73,6 +77,7 @@ public class AGoTMod {
     @OnlyIn(Dist.CLIENT)
     private void registerClientEvents() {
         NeoForge.EVENT_BUS.register(ClientKeyInputEvents.class);
+        NeoForge.EVENT_BUS.register(ClientEventHandler.class);
         CTGClient.registerMenu(ModDimensionProvider.KNOWN_WORLD, CustomGuiScreen::new);
     }
 
@@ -120,6 +125,21 @@ public class AGoTMod {
 
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
+    }
+
+    // Client-side event handler for item count display
+    @OnlyIn(Dist.CLIENT)
+    public static class ClientEventHandler {
+        @SubscribeEvent
+        public static void onTooltipEvent(ItemTooltipEvent event) {
+            ItemStack stack = event.getItemStack();
+            if (!stack.isEmpty() && stack.getCount() > 64) {
+                // Make it very obvious when there are large stacks
+                event.getToolTip().add(1, Component.literal("━━━━━━━━━━━━━━━━━━━━").withStyle(ChatFormatting.GOLD));
+                event.getToolTip().add(2, Component.literal("⚡ LARGE STACK: " + stack.getCount() + " items").withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD));
+                event.getToolTip().add(3, Component.literal("━━━━━━━━━━━━━━━━━━━━").withStyle(ChatFormatting.GOLD));
+            }
+        }
     }
 
     @EventBusSubscriber(modid = MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)

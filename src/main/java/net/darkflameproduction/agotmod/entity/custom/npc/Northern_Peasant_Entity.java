@@ -3,30 +3,21 @@ package net.darkflameproduction.agotmod.entity.custom.npc;
 import net.darkflameproduction.agotmod.entity.animations.ModAnimationDefinitions;
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.*;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.*;
+import net.darkflameproduction.agotmod.gui.GrocerInventoryScreen;
 import net.darkflameproduction.agotmod.network.OpenGrocerInventoryPacket;
 import net.darkflameproduction.agotmod.sound.ModSounds;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -35,17 +26,9 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.npc.InventoryCarrier;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.ChestMenu;
-import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.block.BedBlock;
-import net.minecraft.world.level.block.ChestBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.ChestBlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BedPart;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
@@ -69,9 +52,13 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
     private static final EntityDataAccessor<Boolean> NEEDS_FOOD_COLLECTION = SynchedEntityData.defineId(Northern_Peasant_Entity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<String> JOB_TYPE = SynchedEntityData.defineId(Northern_Peasant_Entity.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<Optional<BlockPos>> JOB_BLOCK_POS = SynchedEntityData.defineId(Northern_Peasant_Entity.class, EntityDataSerializers.OPTIONAL_BLOCK_POS);
+    private static final EntityDataAccessor<Long> LAST_DAY_TRACKED = SynchedEntityData.defineId(Northern_Peasant_Entity.class, EntityDataSerializers.LONG);
 
     // Door goal reference for persistence
     private OpenAndCloseDoorGoal doorGoal;
+    // Grocer collection goal reference for persistence
+    private GrocerCollectionGoal grocerCollectionGoal;
+
     private final SleepSystem sleepSystem;
     private final HungerSystem hungerSystem;
     private final InventorySystem inventorySystem;
@@ -82,6 +69,9 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
     private final TeleportSystem teleportSystem;
     private final NameSystem nameSystem;
     private static final Random RANDOM = new Random();
+
+    // Daily reset tracking
+    private long lastDayTracked = -1;
 
     // Constants
     public static final int PEASANT_SLOT_OFFSET = 400;
@@ -117,6 +107,9 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
     public TeleportSystem getTeleportSystem() { return teleportSystem; }
     public NameSystem getNameSystem() { return nameSystem; }
 
+    // Getter for grocer collection goal
+    public GrocerCollectionGoal getGrocerCollectionGoal() { return grocerCollectionGoal; }
+
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
@@ -129,7 +122,11 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         this.goalSelector.addGoal(7, new ReturnToJobBlockGoal(this));
         this.goalSelector.addGoal(8, new FindJobGoal(this));
         this.goalSelector.addGoal(9, new FarmingGoal(this));
-        this.goalSelector.addGoal(9, new GrocerCollectionGoal(this));
+
+        // Store reference to grocer collection goal for persistence
+        this.grocerCollectionGoal = new GrocerCollectionGoal(this);
+        this.goalSelector.addGoal(9, grocerCollectionGoal);
+
         this.goalSelector.addGoal(10, new RestrictedWanderGoal(this, 0.6D));
         this.goalSelector.addGoal(11, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(12, new RandomLookAroundGoal(this));
@@ -152,11 +149,14 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         builder.define(NEEDS_FOOD_COLLECTION, false);
         builder.define(JOB_TYPE, JobSystem.JOB_NONE);
         builder.define(JOB_BLOCK_POS, Optional.empty());
+        builder.define(LAST_DAY_TRACKED, -1L);
     }
 
     @Override
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
+        compound.putLong("LastDayTracked", lastDayTracked);
+
         sleepSystem.saveData(compound);
         hungerSystem.saveData(compound);
         inventorySystem.saveData(compound, this.registryAccess());
@@ -167,6 +167,13 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         teleportSystem.saveData(compound);
         nameSystem.saveData(compound, this.registryAccess());
 
+        // Save grocer collection goal data
+        if (grocerCollectionGoal != null) {
+            CompoundTag grocerGoalTag = new CompoundTag();
+            grocerCollectionGoal.saveCollectionData(grocerGoalTag);
+            compound.put("GrocerCollectionGoal", grocerGoalTag);
+        }
+
         // Save door states
         if (doorGoal != null) {
             doorGoal.saveOpenedBlocks(compound);
@@ -176,6 +183,8 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
     @Override
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
+        lastDayTracked = compound.getLong("LastDayTracked");
+
         sleepSystem.loadData(compound);
         hungerSystem.loadData(compound);
         inventorySystem.loadData(compound, this.registryAccess());
@@ -185,6 +194,12 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         grocerSystem.loadData(compound);
         teleportSystem.loadData(compound);
         nameSystem.loadData(compound, this.registryAccess());
+
+        // Load grocer collection goal data
+        if (compound.contains("GrocerCollectionGoal") && grocerCollectionGoal != null) {
+            CompoundTag grocerGoalTag = compound.getCompound("GrocerCollectionGoal");
+            grocerCollectionGoal.loadCollectionData(grocerGoalTag);
+        }
 
         // Load door states - must be done after goals are registered
         if (doorGoal != null) {
@@ -196,6 +211,11 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
     public void tick() {
         super.tick();
 
+        // Check for new day and reset daily states
+        if (!this.level().isClientSide) {
+            checkForNewDay();
+        }
+
         // Update all systems
         sleepSystem.tick();
         hungerSystem.tick();
@@ -205,6 +225,26 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         farmingSystem.tick();
         grocerSystem.tick();
         teleportSystem.tick();
+    }
+
+    private void checkForNewDay() {
+        long currentDay = this.level().getDayTime() / 24000;
+
+        if (currentDay > lastDayTracked) {
+            System.out.println("DEBUG: " + this.getDisplayName().getString() + " - New day detected: " + lastDayTracked + " -> " + currentDay);
+
+            // Reset daily states for grocer collection goal
+            if (grocerCollectionGoal != null && getJobType().equals(JobSystem.JOB_GROCER)) {
+                grocerCollectionGoal.resetDailyStateAfterSleep();
+                System.out.println("DEBUG: " + this.getDisplayName().getString() + " - Reset grocer collection goal daily state");
+            }
+
+            // Update synched data
+            this.getEntityData().set(LAST_DAY_TRACKED, currentDay);
+            lastDayTracked = currentDay;
+
+            System.out.println("DEBUG: " + this.getDisplayName().getString() + " - Daily reset completed for day " + currentDay);
+        }
     }
 
     @Override
@@ -220,27 +260,38 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
 
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
-        if (!this.level().isClientSide && hand == InteractionHand.MAIN_HAND) {
+        if (hand == InteractionHand.MAIN_HAND) {
             if (sleepSystem.isSleeping()) {
                 return InteractionResult.PASS;
             }
 
-            if (player instanceof ServerPlayer serverPlayer) {
-                // Check if this is a grocer
-                if (getJobType().equals(JobSystem.JOB_GROCER)) {
-                    // Send grocer inventory data to client
+            // Check if this is a grocer
+            if (getJobType().equals(JobSystem.JOB_GROCER)) {
+                if (!this.level().isClientSide) {
+                    // Server side - send grocer inventory data to client
+                    if (player instanceof ServerPlayer serverPlayer) {
+                        List<GrocerSystem.GrocerInventoryEntry> entries = grocerSystem.getSortedInventoryEntries();
+                        String grocerName = this.getDisplayName().getString();
+
+                        OpenGrocerInventoryPacket packet = new OpenGrocerInventoryPacket(grocerName, entries);
+                        serverPlayer.connection.send(packet);
+                    }
+                } else {
+                    // Client side - open the GUI directly (this will be triggered by the packet)
                     List<GrocerSystem.GrocerInventoryEntry> entries = grocerSystem.getSortedInventoryEntries();
                     String grocerName = this.getDisplayName().getString();
 
-                    OpenGrocerInventoryPacket packet = new OpenGrocerInventoryPacket(grocerName, entries);
-                    serverPlayer.connection.send(packet);
-
-                    return InteractionResult.SUCCESS;
-                } else {
-                    // Regular inventory for non-grocers
-                    inventorySystem.openInventoryFor(serverPlayer);
-                    return InteractionResult.SUCCESS;
+                    net.minecraft.client.Minecraft.getInstance().setScreen(
+                            new GrocerInventoryScreen(entries, grocerName)
+                    );
                 }
+                return InteractionResult.SUCCESS;
+            } else {
+                // Regular inventory for non-grocers
+                if (!this.level().isClientSide && player instanceof ServerPlayer serverPlayer) {
+                    inventorySystem.openInventoryFor(serverPlayer);
+                }
+                return InteractionResult.SUCCESS;
             }
         }
         return super.mobInteract(player, hand);
@@ -311,6 +362,9 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
     ) {
         if (!this.level().isClientSide) {
             nameSystem.generateRandomName(p_35439_.getRandom());
+            // Initialize day tracking
+            lastDayTracked = this.level().getDayTime() / 24000;
+            this.getEntityData().set(LAST_DAY_TRACKED, lastDayTracked);
         }
         return super.finalizeSpawn(p_35439_, p_35440_, p_363222_, p_35442_);
     }
@@ -386,6 +440,7 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
     public EntityDataAccessor<Boolean> getNeedsFoodCollectionAccessor() { return NEEDS_FOOD_COLLECTION; }
     public EntityDataAccessor<String> getJobTypeAccessor() { return JOB_TYPE; }
     public EntityDataAccessor<Optional<BlockPos>> getJobBlockPosAccessor() { return JOB_BLOCK_POS; }
+    public EntityDataAccessor<Long> getLastDayTrackedAccessor() { return LAST_DAY_TRACKED; }
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {

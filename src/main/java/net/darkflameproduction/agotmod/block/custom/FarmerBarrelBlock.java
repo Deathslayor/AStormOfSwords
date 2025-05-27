@@ -9,11 +9,14 @@ import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.WorldlyContainerHolder;
 import net.minecraft.world.entity.monster.piglin.PiglinAi;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
@@ -28,43 +31,61 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 
-public class FarmerBarrelBlock extends BaseEntityBlock {
+public class FarmerBarrelBlock extends BaseEntityBlock implements WorldlyContainerHolder {
     public static final MapCodec<FarmerBarrelBlock> CODEC = simpleCodec(FarmerBarrelBlock::new);
     public static final EnumProperty<Direction> FACING = BlockStateProperties.FACING;
     public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
+
+    public FarmerBarrelBlock(BlockBehaviour.Properties properties) {
+        super(properties);
+        this.registerDefaultState(
+                this.stateDefinition.any()
+                        .setValue(FACING, Direction.NORTH)
+                        .setValue(OPEN, Boolean.FALSE)
+        );
+    }
 
     @Override
     public MapCodec<FarmerBarrelBlock> codec() {
         return CODEC;
     }
 
-    public FarmerBarrelBlock(BlockBehaviour.Properties properties) {
-        super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(OPEN, Boolean.valueOf(false)));
+    @Override
+    public WorldlyContainer getContainer(BlockState state, LevelAccessor level, BlockPos pos) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        return blockEntity instanceof FarmerBarrelBlockEntity ? (FarmerBarrelBlockEntity) blockEntity : null;
     }
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        if (level instanceof ServerLevel serverlevel && level.getBlockEntity(pos) instanceof FarmerBarrelBlockEntity farmerbarrelblockentity) {
-            player.openMenu(farmerbarrelblockentity);
-            player.awardStat(Stats.OPEN_BARREL);
-            PiglinAi.angerNearbyPiglins(serverlevel, player, true);
+        if (level instanceof ServerLevel serverLevel) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof FarmerBarrelBlockEntity barrelEntity) {
+                player.openMenu(barrelEntity);
+                player.awardStat(Stats.OPEN_BARREL);
+                PiglinAi.angerNearbyPiglins(serverLevel, player, true);
+            }
         }
-
         return InteractionResult.SUCCESS;
     }
 
     @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
-        Containers.dropContentsOnDestroy(state, newState, level, pos);
+        if (!state.is(newState.getBlock())) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof FarmerBarrelBlockEntity) {
+                Containers.dropContents(level, pos, (FarmerBarrelBlockEntity) blockEntity);
+                level.updateNeighbourForOutputSignal(pos, this);
+            }
+        }
         super.onRemove(state, level, pos, newState, isMoving);
     }
 
     @Override
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        BlockEntity blockentity = level.getBlockEntity(pos);
-        if (blockentity instanceof FarmerBarrelBlockEntity) {
-            ((FarmerBarrelBlockEntity)blockentity).recheckOpen();
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof FarmerBarrelBlockEntity barrelEntity) {
+            barrelEntity.recheckOpen();
         }
     }
 

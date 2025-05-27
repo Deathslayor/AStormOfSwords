@@ -2,7 +2,7 @@ package net.darkflameproduction.agotmod.network;
 
 import net.minecraft.client.Minecraft;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
-import net.darkflameproduction.agotmod.client.GrocerInventoryScreen;
+import net.darkflameproduction.agotmod.gui.GrocerInventoryScreen;
 
 public class ClientPacketHandler {
 

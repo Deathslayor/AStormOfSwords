@@ -1,5 +1,6 @@
 package net.darkflameproduction.agotmod.entity.custom.npc.system;
 
+import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -26,8 +27,8 @@ public class GrocerSystem {
     private GrocerState currentState = GrocerState.WAITING_FOR_COLLECTION_TIME;
 
     // Constants
-    private static final int COLLECTION_TIME = 1100; // Game time when collection happens
-    private static final int COLLECTION_RADIUS = 64; // Radius to search for farm barrels
+    private static final int COLLECTION_TIME = 4000; // Game time when collection happens
+    private static final int COLLECTION_RADIUS = 48; // 96x96 area (48 blocks in each direction)
     private static final int MAX_BARRELS_PER_DAY = 10; // Maximum barrels to collect from per day
 
     public enum GrocerState {
@@ -45,9 +46,16 @@ public class GrocerSystem {
             return;
         }
 
-        // Only run grocer logic if this NPC is a grocer
-        if (!peasant.getJobType().equals(JobSystem.JOB_GROCER)) {
+        // Only run grocer logic if this NPC is a grocer AND has a valid job block
+        if (!peasant.getJobType().equals(JobSystem.JOB_GROCER) ||
+                peasant.getJobBlockPos() == null) {
             return;
+        }
+
+        // Verify the job block still exists
+        BlockPos jobBlockPos = peasant.getJobBlockPos();
+        if (peasant.level().getBlockState(jobBlockPos).getBlock() != net.minecraft.world.level.block.Blocks.BARREL) {
+            return; // Job block is gone, let JobSystem handle job loss
         }
 
         long currentTime = peasant.level().getDayTime() % 24000;
@@ -67,6 +75,8 @@ public class GrocerSystem {
             }
         }
     }
+
+
 
     private void startCollection() {
         currentState = GrocerState.COLLECTING_FROM_BARRELS;
@@ -96,9 +106,9 @@ public class GrocerSystem {
         List<BlockPos> farmBarrels = new ArrayList<>();
         BlockPos grocerPos = peasant.blockPosition();
 
-        // Search in a cubic area around the grocer
+        // Search in a area around the grocer using the COLLECTION_RADIUS constant
         for (int x = -COLLECTION_RADIUS; x <= COLLECTION_RADIUS; x++) {
-            for (int y = -16; y <= 16; y++) { // Reasonable Y range
+            for (int y = -16; y <= 16; y++) { // Keep reasonable Y range
                 for (int z = -COLLECTION_RADIUS; z <= COLLECTION_RADIUS; z++) {
                     BlockPos checkPos = grocerPos.offset(x, y, z);
 
@@ -107,9 +117,9 @@ public class GrocerSystem {
                         continue;
                     }
 
-                    // Check if it's a barrel
+                    // Check if it's a FARMER_BARREL (your modded barrel)
                     if (peasant.level().getBlockState(checkPos).getBlock() ==
-                            net.minecraft.world.level.block.Blocks.BARREL) {
+                            ModBLocks.FARMER_BARREL.get()) {
                         farmBarrels.add(checkPos);
                     }
                 }
@@ -122,31 +132,36 @@ public class GrocerSystem {
     private void collectFromBarrel(BlockPos barrelPos) {
         BlockEntity blockEntity = peasant.level().getBlockEntity(barrelPos);
 
-        if (!(blockEntity instanceof BarrelBlockEntity barrel)) {
+        if (!(blockEntity instanceof net.minecraft.world.Container container)) {
             return;
         }
 
-        // Collect all items from the barrel
-        for (int slot = 0; slot < barrel.getContainerSize(); slot++) {
-            ItemStack stack = barrel.getItem(slot);
+        for (int slot = 0; slot < container.getContainerSize(); slot++) {
+            ItemStack stack = container.getItem(slot);
 
             if (!stack.isEmpty()) {
-                // Add to digital inventory
                 addToDigitalInventory(stack);
 
-                // Remove from barrel
-                barrel.setItem(slot, ItemStack.EMPTY);
+                container.setItem(slot, ItemStack.EMPTY);
             }
         }
 
-        // Mark the barrel as changed
-        barrel.setChanged();
+        if (blockEntity instanceof net.minecraft.world.level.block.entity.BaseContainerBlockEntity baseContainer) {
+            baseContainer.setChanged();
+        } else {
+            blockEntity.setChanged();
+        }
     }
 
-    private void addToDigitalInventory(ItemStack stack) {
+    // Add this public method to your GrocerSystem class
+
+    public void addToDigitalInventory(ItemStack stack) {
         String itemKey = getItemKey(stack.getItem());
         int currentAmount = digitalInventory.getOrDefault(itemKey, 0);
         digitalInventory.put(itemKey, currentAmount + stack.getCount());
+
+        System.out.println("DEBUG: Added " + stack.getCount() + " " +
+                stack.getHoverName().getString() + " to digital inventory");
     }
 
     private String getItemKey(Item item) {

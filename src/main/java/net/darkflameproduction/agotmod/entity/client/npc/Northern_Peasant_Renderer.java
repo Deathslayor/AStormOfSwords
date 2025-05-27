@@ -52,7 +52,7 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
     };
 
     // ========== BODY TEXTURES ==========
-    private static final int BODY_VARIANTS = 1;
+    private static final int BODY_VARIANTS = 6;
     private static final ResourceLocation[] BODY_TEXTURES = new ResourceLocation[BODY_VARIANTS];
 
     static {
@@ -96,7 +96,7 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
     }
 
     // ========== HAIR TEXTURES ==========
-    private static final int HAIR_VARIANTS = 8; // Change this number as needed
+    private static final int HAIR_VARIANTS = 24; // Change this number as needed
     private static final ResourceLocation[] HAIR_TEXTURES = new ResourceLocation[HAIR_VARIANTS];
 
     static {
@@ -118,7 +118,7 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
     }
 
     // ========== TUNIC TEXTURES ==========
-    private static final int TUNIC_VARIANTS = 2; // Change this number as needed
+    private static final int TUNIC_VARIANTS = 4; // Change this number as needed
     private static final ResourceLocation[] TUNIC_TEXTURES = new ResourceLocation[TUNIC_VARIANTS];
 
     static {

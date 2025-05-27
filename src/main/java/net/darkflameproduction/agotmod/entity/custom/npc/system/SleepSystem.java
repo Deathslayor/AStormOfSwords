@@ -236,6 +236,14 @@ public class SleepSystem {
                             FarmingSystem.FarmState.NEEDS_FARM_SETUP
             );
         }
+
+        // FIXED: Reset grocer collection state when waking up
+        if (peasant.getJobType().equals(JobSystem.JOB_GROCER)) {
+            // Use the grocer collection goal reference from the peasant
+            if (peasant.getGrocerCollectionGoal() != null) {
+                peasant.getGrocerCollectionGoal().resetDailyStateAfterSleep();
+            }
+        }
     }
 
     public static boolean isBedOccupied(Level level, BlockPos bedPos) {

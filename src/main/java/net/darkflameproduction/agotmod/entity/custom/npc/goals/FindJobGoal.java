@@ -218,7 +218,6 @@ public class FindJobGoal extends Goal {
 
         // Reduce search cooldown faster if we're unemployed and it's work hours
         if (searchCooldown > 0 && !peasant.hasJob() && !peasant.shouldSleep()) {
-            // Don't just decrement in canUse(), also decrement here for unemployed NPCs
             if (searchCooldown > 1) {
                 searchCooldown--; // Double decrement for unemployed NPCs during work hours
             }
@@ -236,22 +235,36 @@ public class FindJobGoal extends Goal {
                 // Close enough to attempt claiming the job block
                 hasTriedThisBlock = true;
 
+                System.out.println("DEBUG: " + peasant.getDisplayName().getString() +
+                        " attempting to claim " + targetJobType + " job at " + targetJobBlock);
+
                 // Final check for warnings before claiming
                 if (JobWarningSystem.isJobBlockWarned(targetJobBlock, peasant.getUUID())) {
-                    // Short cooldown since we need to find alternative quickly
+                    System.out.println("DEBUG: Job block is warned, aborting claim");
                     searchCooldown = 60; // 3 seconds
                     return;
                 }
 
                 // Attempt to reserve using traditional system
-                if (JobSystem.reserveJobBlock(targetJobBlock, peasant.getUUID())) {
+                boolean reservationSuccess = JobSystem.reserveJobBlock(targetJobBlock, peasant.getUUID());
+                System.out.println("DEBUG: Reservation attempt result: " + reservationSuccess);
+
+                if (reservationSuccess) {
+                    System.out.println("DEBUG: Setting job type to: " + targetJobType);
+                    System.out.println("DEBUG: Current job before: " + peasant.getJobType());
+
                     // Set the appropriate job type based on what we found
                     if (targetJobType != null) {
                         peasant.setJobType(targetJobType);
                         peasant.setJobBlockPos(targetJobBlock);
+
+                        System.out.println("DEBUG: Current job after: " + peasant.getJobType());
+                        System.out.println("DEBUG: Job block pos after: " + peasant.getJobBlockPos());
+
                         searchAttempts = 0; // Reset attempts on successful job acquisition
                         // Successfully got job, goal will end naturally
                     } else {
+                        System.out.println("DEBUG: targetJobType was null, using fallback");
                         // Fallback - shouldn't happen but handle gracefully
                         BlockState state = peasant.level().getBlockState(targetJobBlock);
                         if (state.getBlock() == net.minecraft.world.level.block.Blocks.COMPOSTER) {
@@ -263,6 +276,7 @@ public class FindJobGoal extends Goal {
                         searchAttempts = 0;
                     }
                 } else {
+                    System.out.println("DEBUG: Failed to reserve job block (someone else got it)");
                     // Failed to get job (someone else got it), stop trying this block
                     searchCooldown = 40; // 2 second cooldown to find alternative quickly
                     // Goal will end and set a cooldown
