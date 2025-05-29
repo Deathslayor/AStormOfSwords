@@ -1,4 +1,3 @@
-// 1. Create the packet class
 package net.darkflameproduction.agotmod.network;
 
 import net.minecraft.network.FriendlyByteBuf;

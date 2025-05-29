@@ -12,10 +12,12 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.JobSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.GrocerSystem;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Map;
 
 public class GrocerCollectionGoal extends Goal {
     private final Northern_Peasant_Entity peasant;
@@ -223,41 +225,6 @@ public class GrocerCollectionGoal extends Goal {
         return false;
     }
 
-    private void returnToJobBlock() {
-        BlockPos jobBlock = peasant.getJobBlockPos();
-        if (jobBlock != null) {
-            double distanceToJobBlock = peasant.distanceToSqr(jobBlock.getX(), jobBlock.getY(), jobBlock.getZ());
-
-            System.out.println("DEBUG: " + peasant.getDisplayName().getString() +
-                    " returning to job block after collection (distance: " + Math.sqrt(distanceToJobBlock) + ")");
-
-            // Only start return navigation if not already close to job block
-            if (distanceToJobBlock > 4.0D) {
-                // Force high priority navigation back to job block
-                peasant.getNavigation().stop(); // Clear any existing navigation
-                boolean success = peasant.getNavigation().moveTo(
-                        jobBlock.getX() + 0.5,
-                        jobBlock.getY(),
-                        jobBlock.getZ() + 0.5,
-                        0.8D // Higher speed for return trip
-                );
-
-                System.out.println("DEBUG: Navigation to job block started: " + success);
-
-                // Send chat message about returning (only once)
-                if (!peasant.level().isClientSide && success) {
-                    peasant.level().getServer().getPlayerList().broadcastSystemMessage(
-                            Component.literal("<" + peasant.getDisplayName().getString() + "> " +
-                                    "Time to return to my post. Collection duty complete!"),
-                            false
-                    );
-                }
-            } else {
-                System.out.println("DEBUG: " + peasant.getDisplayName().getString() + " already at job block");
-            }
-        }
-    }
-
     private boolean barrelHasItems(BlockPos barrelPos) {
         BlockEntity blockEntity = peasant.level().getBlockEntity(barrelPos);
         if (blockEntity instanceof net.minecraft.world.Container container) {
@@ -450,7 +417,6 @@ public class GrocerCollectionGoal extends Goal {
         BlockEntity blockEntity = peasant.level().getBlockEntity(targetFarmerBarrel);
         if (!(blockEntity instanceof net.minecraft.world.Container container)) {
             System.out.println("DEBUG: Barrel at " + targetFarmerBarrel + " is not a container");
-            // Clear target and try to find next barrel
             searchedBarrels.add(targetFarmerBarrel);
             targetFarmerBarrel = null;
             return;
@@ -460,8 +426,24 @@ public class GrocerCollectionGoal extends Goal {
                 " collecting from farmer barrel " + (barrelsCollectedToday + 1) + "/" + MAX_BARRELS_PER_DAY +
                 " at " + targetFarmerBarrel);
 
+        // ENHANCED DEBUG: Check current digital inventory BEFORE collection
+        Map<String, Integer> inventoryBefore = peasant.getGrocerSystem().getDigitalInventory();
+        System.out.println("DEBUG: Digital inventory BEFORE collection has " + inventoryBefore.size() + " different items");
+        for (Map.Entry<String, Integer> entry : inventoryBefore.entrySet()) {
+            System.out.println("  BEFORE: " + entry.getKey() + " = " + entry.getValue());
+        }
+
         boolean foundItems = false;
         int itemsCollected = 0;
+
+        // ENHANCED DEBUG: Check what's in the barrel before collection
+        System.out.println("DEBUG: Barrel contents before collection:");
+        for (int slot = 0; slot < container.getContainerSize(); slot++) {
+            ItemStack stack = container.getItem(slot);
+            if (!stack.isEmpty()) {
+                System.out.println("DEBUG: Slot " + slot + ": " + stack.getHoverName().getString() + " x" + stack.getCount());
+            }
+        }
 
         // Collect all items from the barrel
         for (int slot = 0; slot < container.getContainerSize(); slot++) {
@@ -469,14 +451,34 @@ public class GrocerCollectionGoal extends Goal {
 
             if (!stack.isEmpty()) {
                 foundItems = true;
-
-                // Add to grocer's digital inventory
-                peasant.getGrocerSystem().addToDigitalInventory(stack);
                 itemsCollected += stack.getCount();
+
+                System.out.println("DEBUG: About to add to digital inventory: " + stack.getHoverName().getString() + " x" + stack.getCount());
+                System.out.println("DEBUG: Item resource location: " + net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(stack.getItem()));
+
+                // CRITICAL: Make sure we're calling the grocer system method
+                peasant.getGrocerSystem().addToDigitalInventory(stack);
+
+                System.out.println("DEBUG: Successfully called addToDigitalInventory()");
 
                 // Remove from barrel
                 container.setItem(slot, ItemStack.EMPTY);
             }
+        }
+
+        // ENHANCED DEBUG: Check digital inventory AFTER collection
+        Map<String, Integer> inventoryAfter = peasant.getGrocerSystem().getDigitalInventory();
+        System.out.println("DEBUG: Digital inventory AFTER collection has " + inventoryAfter.size() + " different items");
+        for (Map.Entry<String, Integer> entry : inventoryAfter.entrySet()) {
+            System.out.println("  AFTER: " + entry.getKey() + " = " + entry.getValue());
+        }
+
+        // ENHANCED DEBUG: Test getSortedInventoryEntries() right after collection
+        List<GrocerSystem.GrocerInventoryEntry> testEntries =
+                peasant.getGrocerSystem().getSortedInventoryEntries();
+        System.out.println("DEBUG: getSortedInventoryEntries() immediately after collection returns " + testEntries.size() + " entries");
+        for (GrocerSystem.GrocerInventoryEntry entry : testEntries) {
+            System.out.println("  ENTRY: " + entry.displayName + " x" + entry.amount);
         }
 
         // Mark barrel as changed
@@ -486,11 +488,11 @@ public class GrocerCollectionGoal extends Goal {
             blockEntity.setChanged();
         }
 
-        System.out.println("DEBUG: Collected " + itemsCollected + " items from farmer barrel");
+        System.out.println("DEBUG: Collection complete. Found items: " + foundItems + ", Total items: " + itemsCollected);
 
         // Mark this barrel as searched and increment counter
         searchedBarrels.add(targetFarmerBarrel);
-        targetFarmerBarrel = null; // Clear current target
+        targetFarmerBarrel = null;
         barrelsCollectedToday++;
 
         // Send IN-GAME CHAT MESSAGE about collection progress
@@ -502,7 +504,6 @@ public class GrocerCollectionGoal extends Goal {
                 message = "Barrel " + barrelsCollectedToday + " of " + MAX_BARRELS_PER_DAY + " - Empty. The farmers must be busy elsewhere.";
             }
 
-            // Send as actual chat message from the NPC
             peasant.level().getServer().getPlayerList().broadcastSystemMessage(
                     Component.literal("<" + peasant.getDisplayName().getString() + "> " + message),
                     false
@@ -517,11 +518,10 @@ public class GrocerCollectionGoal extends Goal {
         if (barrelsCollectedToday >= MAX_BARRELS_PER_DAY) {
             System.out.println("DEBUG: " + peasant.getDisplayName().getString() +
                     " reached daily barrel limit (" + MAX_BARRELS_PER_DAY + "), collection complete for today");
-            hasCollectedToday = true; // CRITICAL: Mark as collected today
+            hasCollectedToday = true;
             searchedBarrels.clear();
             searchAttempts = 0;
 
-            // Send completion chat message
             if (!peasant.level().isClientSide) {
                 peasant.level().getServer().getPlayerList().broadcastSystemMessage(
                         Component.literal("<" + peasant.getDisplayName().getString() + "> " +
@@ -529,12 +529,10 @@ public class GrocerCollectionGoal extends Goal {
                         false
                 );
             }
-            // Goal will end naturally due to canContinueToUse() returning false
         } else {
             System.out.println("DEBUG: " + peasant.getDisplayName().getString() +
                     " collected from " + barrelsCollectedToday + "/" + MAX_BARRELS_PER_DAY +
                     " barrels, will search for next barrel");
-            // Target is already cleared, tick() will find the next barrel
         }
     }
 

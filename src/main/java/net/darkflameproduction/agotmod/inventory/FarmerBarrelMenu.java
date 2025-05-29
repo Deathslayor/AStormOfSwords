@@ -1,5 +1,6 @@
 package net.darkflameproduction.agotmod.inventory;
 
+import net.darkflameproduction.agotmod.block.custom.FarmerBarrelBlockEntity;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -41,7 +42,9 @@ public class FarmerBarrelMenu extends AbstractContainerMenu {
                 int slotIndex = col + row * 9;
                 int slotX = startX + col * 18;
                 int slotY = startY + row * 18;
-                this.addSlot(new BarrelSlot(container, slotIndex, slotX, slotY));
+
+                // Use regular vanilla slots
+                this.addSlot(new Slot(container, slotIndex, slotX, slotY));
             }
         }
     }
@@ -133,29 +136,5 @@ public class FarmerBarrelMenu extends AbstractContainerMenu {
 
     public Container getContainer() {
         return this.container;
-    }
-
-    // Custom slot class for barrel that allows 999 stack size
-    public static class BarrelSlot extends Slot {
-        private static final int MAX_STACK_SIZE = 999;
-
-        public BarrelSlot(Container container, int slot, int x, int y) {
-            super(container, slot, x, y);
-        }
-
-        @Override
-        public int getMaxStackSize() {
-            return MAX_STACK_SIZE;
-        }
-
-        @Override
-        public int getMaxStackSize(ItemStack stack) {
-            return MAX_STACK_SIZE;
-        }
-
-        @Override
-        public boolean mayPlace(ItemStack stack) {
-            return this.container.canPlaceItem(this.getSlotIndex(), stack);
-        }
     }
 }

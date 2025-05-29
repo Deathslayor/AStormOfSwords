@@ -4,6 +4,8 @@ import dev.tocraft.ctgen.impl.CTGClient;
 import net.darkflameproduction.agotmod.client.ClientKeyInputEvents;
 import net.darkflameproduction.agotmod.datagen.ModDimensionProvider;
 import net.darkflameproduction.agotmod.gui.CustomGuiScreen;
+import net.darkflameproduction.agotmod.network.ClientPacketHandler;
+import net.darkflameproduction.agotmod.network.OpenGrocerInventoryPacket;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
@@ -35,6 +37,8 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -64,6 +68,7 @@ public class AGoTMod {
 
         modEventBus.addListener(this::commonSetup);
         NeoForge.EVENT_BUS.register(this);
+        modEventBus.addListener(this::registerPayloads); // ADD THIS LINE
         modEventBus.addListener(this::addCreative);
         ModTerrablender.registerBiomes();
         ModEntities.register(modEventBus);
@@ -72,7 +77,20 @@ public class AGoTMod {
         if (FMLEnvironment.dist == Dist.CLIENT) {
             registerClientEvents();
         }
+
+
     }
+    public void registerPayloads(RegisterPayloadHandlersEvent event) {
+        final PayloadRegistrar registrar = event.registrar("1");
+
+        // Register the packet to be sent from server to client
+        registrar.playToClient(
+                OpenGrocerInventoryPacket.TYPE,
+                OpenGrocerInventoryPacket.STREAM_CODEC,
+                ClientPacketHandler::handleOpenGrocerInventory
+        );
+    }
+
 
     @OnlyIn(Dist.CLIENT)
     private void registerClientEvents() {
@@ -141,6 +159,8 @@ public class AGoTMod {
             }
         }
     }
+
+
 
     @EventBusSubscriber(modid = MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
@@ -214,4 +234,6 @@ public class AGoTMod {
     public static @NotNull ResourceLocation id(String path) {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }
+
+
 }
