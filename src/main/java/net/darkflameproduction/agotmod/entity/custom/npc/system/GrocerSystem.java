@@ -26,7 +26,8 @@ public class GrocerSystem {
     // Constants
     private static final int COLLECTION_TIME = 4000; // Game time when collection happens
     private static final int COLLECTION_RADIUS = 48; // 96x96 area (48 blocks in each direction)
-    private static final int MAX_BARRELS_PER_DAY = 10; // Maximum barrels to collect from per day
+    private static final int MAX_BARRELS_PER_DAY = 10;
+    public static final int MAX_ITEMS_PER_TYPE = 10000;// Maximum barrels to collect from per day
 
     public enum GrocerState {
         WAITING_FOR_COLLECTION_TIME,
@@ -161,16 +162,20 @@ public class GrocerSystem {
 
         String itemKey = getItemKey(stack.getItem());
         int currentAmount = digitalInventory.getOrDefault(itemKey, 0);
-        int newAmount = currentAmount + stack.getCount();
+
+        // Calculate how many we can actually add (enforce 10k limit)
+        int spaceRemaining = MAX_ITEMS_PER_TYPE - currentAmount;
+
+        if (spaceRemaining <= 0) {
+            return; // Already at limit, can't add any
+        }
+
+        // Only add what fits within the limit
+        int actualAmountAdded = Math.min(stack.getCount(), spaceRemaining);
+        int newAmount = currentAmount + actualAmountAdded;
 
         if (newAmount > 0) {
             digitalInventory.put(itemKey, newAmount);
-
-            // Only log significant additions to reduce spam
-            if (stack.getCount() >= 16) {
-                System.out.println("DEBUG: Added " + stack.getCount() + " " +
-                        stack.getHoverName().getString() + " to digital inventory. Total: " + newAmount);
-            }
         }
     }
 

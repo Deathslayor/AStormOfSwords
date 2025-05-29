@@ -10,11 +10,14 @@ import net.darkflameproduction.agotmod.entity.custom.npc.system.GrocerSystem;
 import net.darkflameproduction.agotmod.sound.ModSounds;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import org.lwjgl.glfw.GLFW;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 @OnlyIn(Dist.CLIENT)
 public class GrocerInventoryScreen extends Screen {
@@ -121,10 +124,146 @@ public class GrocerInventoryScreen extends Screen {
         ALLOWED_ITEMS_PRICING.put("agotmod:garlic", 5);
     }
 
+    private void drawTransactionMenu(GuiGraphics guiGraphics, int panelX, int panelY, int panelWidth, int panelHeight) {
+        // Draw separator line below title
+        guiGraphics.fill(panelX + panelWidth/8, panelY + 35,
+                panelX + panelWidth - panelWidth/8, panelY + 36,
+                SUBMENU_TEXT_COLOR);
+
+        // Transaction menu content starts below the separator
+        int contentStartY = panelY + 60;
+
+        // Scale down everything except the title
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().scale(0.5f, 0.5f, 1.0f);
+
+        if (selectedEntryIndices.isEmpty()) {
+            // Show instruction text when nothing is selected (scaled)
+            String instructionText = "Select items";
+            String instructionText2 = "from the left";
+            String instructionText3 = "to trade";
+
+            int text1Width = (int)(font.width(instructionText) * 0.5f);
+            int text2Width = (int)(font.width(instructionText2) * 0.5f);
+            int text3Width = (int)(font.width(instructionText3) * 0.5f);
+
+            int text1X = (panelX + (panelWidth - text1Width) / 2) * 2;
+            int text2X = (panelX + (panelWidth - text2Width) / 2) * 2;
+            int text3X = (panelX + (panelWidth - text3Width) / 2) * 2;
+
+            int textY = (contentStartY + (panelHeight - 60) / 2 - font.lineHeight) * 2;
+
+            guiGraphics.drawString(font, instructionText, text1X, textY, SUBMENU_TEXT_COLOR, false);
+            textY += (font.lineHeight + 4) * 2;
+            guiGraphics.drawString(font, instructionText2, text2X, textY, SUBMENU_TEXT_COLOR, false);
+            textY += (font.lineHeight + 4) * 2;
+            guiGraphics.drawString(font, instructionText3, text3X, textY, SUBMENU_TEXT_COLOR, false);
+        } else {
+            // Show selected items with transaction controls (scaled)
+            drawTransactionItems(guiGraphics, panelX * 2, contentStartY * 2, panelWidth * 2, (panelHeight - 60) * 2);
+        }
+
+        guiGraphics.pose().popPose();
+    }
+
+    private void drawTransactionItems(GuiGraphics guiGraphics, int panelX, int startY, int panelWidth, int availableHeight) {
+        int itemY = startY;
+        int itemHeight = 16 * 2; // Reduced and scaled
+        int margin = 6 * 2; // Reduced margin for tighter spacing
+
+        // Move content much closer to center
+        int contentWidth = panelWidth - (margin * 8); // Much more margin on sides
+        int centeredX = panelX + (margin * 4); // Start much further from edge
+
+        for (Integer entryIndex : selectedEntryIndices) {
+            if (entryIndex >= inventoryEntries.size()) continue;
+
+            GrocerSystem.GrocerInventoryEntry entry = inventoryEntries.get(entryIndex);
+            int transactionAmount = transactionAmounts.getOrDefault(entry.itemKey, 0);
+
+            // Check if we have space for this item
+            if (itemY + itemHeight > startY + availableHeight - 32) {
+                guiGraphics.drawString(font, "...", centeredX, itemY, SUBMENU_TEXT_COLOR, false);
+                break;
+            }
+
+            // Draw item icon 50% larger (1.5x scale)
+            net.minecraft.resources.ResourceLocation itemLocation = net.minecraft.resources.ResourceLocation.tryParse(entry.itemKey);
+            if (itemLocation != null) {
+                net.minecraft.world.item.Item item = net.minecraft.core.registries.BuiltInRegistries.ITEM.getValue(itemLocation);
+                if (item != null && item != net.minecraft.world.item.Items.AIR) {
+                    net.minecraft.world.item.ItemStack itemStack = new net.minecraft.world.item.ItemStack(item);
+
+                    // Scale up icon by 1.5x (50% larger)
+                    guiGraphics.pose().pushPose();
+                    guiGraphics.pose().scale(1.5f, 1.5f, 1.0f);
+                    guiGraphics.renderItem(itemStack, (int)(centeredX / 1.5f), (int)((itemY + 2) / 1.5f));
+                    guiGraphics.pose().popPose();
+                }
+            }
+
+            // Draw transaction amount (moved right to account for larger icon)
+            String amountText = String.valueOf(transactionAmount);
+            int amountX = centeredX + 40; // More space for larger icon
+            guiGraphics.drawString(font, amountText, amountX, itemY + 8, SUBMENU_TEXT_COLOR, false);
+
+            // Draw 6 buttons: -64, -10, -, +, +10, +64
+            int buttonSize = 20; // Smaller buttons to fit 6
+            int totalButtonWidth = buttonSize * 6; // No spacing between buttons
+            int buttonsStartX = centeredX + contentWidth - totalButtonWidth + 20; // Move 20px more to the right
+            int buttonY = itemY + 2;
+
+            // -64 button
+            drawTransactionButton(guiGraphics, buttonsStartX, buttonY, buttonSize, "-64", entry.itemKey, false);
+
+            // -10 button
+            drawTransactionButton(guiGraphics, buttonsStartX + buttonSize, buttonY, buttonSize, "-10", entry.itemKey, false);
+
+            // - button
+            drawTransactionButton(guiGraphics, buttonsStartX + (buttonSize * 2), buttonY, buttonSize, "-", entry.itemKey, false);
+
+            // + button
+            drawTransactionButton(guiGraphics, buttonsStartX + (buttonSize * 3), buttonY, buttonSize, "+", entry.itemKey, true);
+
+            // +10 button
+            drawTransactionButton(guiGraphics, buttonsStartX + (buttonSize * 4), buttonY, buttonSize, "+10", entry.itemKey, true);
+
+            // +64 button
+            drawTransactionButton(guiGraphics, buttonsStartX + (buttonSize * 5), buttonY, buttonSize, "+64", entry.itemKey, true);
+
+            itemY += itemHeight;
+        }
+    }
+
+    private void drawTransactionButton(GuiGraphics guiGraphics, int x, int y, int size, String text, String itemKey, boolean isPlus) {
+        // Button background
+        guiGraphics.fill(x, y, x + size, y + size, 0xFF888888);
+
+        // Button border (scaled)
+        guiGraphics.fill(x, y, x + size, y + 2, 0xFFCCCCCC); // Top
+        guiGraphics.fill(x, y, x + 2, y + size, 0xFFCCCCCC); // Left
+        guiGraphics.fill(x + size - 2, y, x + size, y + size, 0xFF444444); // Right
+        guiGraphics.fill(x, y + size - 2, x + size, y + size, 0xFF444444); // Bottom
+
+        // Button text (smaller scale for multi-character buttons)
+        float textScale = text.length() > 1 ? 0.6f : 1.0f;
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().scale(textScale, textScale, 1.0f);
+
+        int textWidth = (int)(font.width(text) * textScale);
+        int textX = (int)((x + (size - textWidth) / 2) / textScale);
+        int textY = (int)((y + (size - (font.lineHeight * textScale)) / 2) / textScale);
+        guiGraphics.drawString(font, text, textX, textY, 0xFFFFFFFF, false);
+
+        guiGraphics.pose().popPose();
+    }
+
     // Data that will be updated from server
     private List<GrocerSystem.GrocerInventoryEntry> inventoryEntries;
     private final String grocerName;
     private boolean dataLoaded = false;
+    private Set<Integer> selectedEntryIndices = new HashSet<>();
+    private Map<String, Integer> transactionAmounts = new HashMap<>();
 
     // Tooltip state tracking
     private net.darkflameproduction.agotmod.entity.custom.npc.system.GrocerSystem.GrocerInventoryEntry currentTooltipEntry = null;
@@ -214,7 +353,8 @@ public class GrocerInventoryScreen extends Screen {
 
             currentInstance.inventoryEntries = filteredEntries;
             currentInstance.dataLoaded = true;
-            currentInstance.scrollOffset = 0; // Reset scroll when data updates
+            currentInstance.scrollOffset = 0;
+            currentInstance.selectedEntryIndices.clear();
         } else {
             System.out.println("DEBUG: No matching screen instance found for grocer: " + grocerName);
         }
@@ -245,6 +385,7 @@ public class GrocerInventoryScreen extends Screen {
         // Clear current instance when closing
         if (currentInstance == this) {
             currentInstance = null;
+            transactionAmounts.clear();
         }
     }
 
@@ -295,6 +436,177 @@ public class GrocerInventoryScreen extends Screen {
         return super.keyPressed(keyCode, scanCode, modifiers);
     }
 
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        if (button == 0 && dataLoaded) { // Left click only
+            // Check if click is within the left panel (inventory area)
+            ScreenLayout layout = getOrCreateLayout();
+            int panelSpacing = 10;
+            int leftPanelWidth = (layout.contentWidth * 2) / 3 - (panelSpacing / 2);
+            int leftPanelX = layout.contentX;
+            int leftPanelY = layout.contentY;
+
+            if (mouseX >= leftPanelX && mouseX < leftPanelX + leftPanelWidth &&
+                    mouseY >= leftPanelY && mouseY < leftPanelY + layout.contentHeight) {
+
+                int clickedEntryIndex = getClickedEntryIndex((int)mouseX, (int)mouseY, leftPanelX, leftPanelY, leftPanelWidth, layout.contentHeight);
+                if (clickedEntryIndex >= 0) {
+                    toggleEntrySelection(clickedEntryIndex);
+                    playButtonSound();
+                    return true;
+                }
+            }
+
+            // Check if click is within the right panel (transaction area)
+            int rightPanelX = layout.contentX + leftPanelWidth + panelSpacing;
+            int rightPanelY = layout.contentY;
+            int rightPanelWidth = layout.contentWidth / 3 - (panelSpacing / 2);
+
+            if (mouseX >= rightPanelX && mouseX < rightPanelX + rightPanelWidth &&
+                    mouseY >= rightPanelY && mouseY < rightPanelY + layout.contentHeight) {
+
+                if (handleTransactionClick((int)mouseX, (int)mouseY, rightPanelX, rightPanelY + 60, rightPanelWidth, 0)) {
+                    return true;
+                }
+            }
+        }
+        return super.mouseClicked(mouseX, mouseY, button);
+    }
+
+    private boolean handleTransactionClick(int mouseX, int mouseY, int panelX, int startY, int panelWidth, int modifiers) {
+        // Convert to scaled coordinates
+        int scaledMouseX = mouseX * 2;
+        int scaledMouseY = mouseY * 2;
+        int scaledPanelX = panelX * 2;
+        int scaledStartY = startY * 2;
+        int scaledPanelWidth = panelWidth * 2;
+
+        int itemY = scaledStartY;
+        int itemHeight = 16 * 2;
+        int margin = 6 * 2;
+
+        // Move content much closer to center
+        int contentWidth = scaledPanelWidth - (margin * 8);
+        int centeredX = scaledPanelX + (margin * 4);
+
+        for (Integer entryIndex : selectedEntryIndices) {
+            if (entryIndex >= inventoryEntries.size()) continue;
+
+            GrocerSystem.GrocerInventoryEntry entry = inventoryEntries.get(entryIndex);
+
+            // Check if click is within this item's area
+            if (scaledMouseY >= itemY && scaledMouseY < itemY + itemHeight) {
+                int buttonSize = 20;
+                int totalButtonWidth = buttonSize * 6; // No spacing
+                int buttonsStartX = centeredX + contentWidth - totalButtonWidth + 20; // Move 20px more to the right
+                int buttonY = itemY + 2;
+
+                // Check each button
+                for (int i = 0; i < 6; i++) {
+                    int buttonX = buttonsStartX + (i * buttonSize); // No spacing between buttons
+
+                    if (scaledMouseX >= buttonX && scaledMouseX < buttonX + buttonSize &&
+                            scaledMouseY >= buttonY && scaledMouseY < buttonY + buttonSize) {
+
+                        // Determine button action based on index
+                        switch (i) {
+                            case 0: // -64
+                                adjustTransactionAmount(entry.itemKey, entry.amount, false, 64);
+                                break;
+                            case 1: // -10
+                                adjustTransactionAmount(entry.itemKey, entry.amount, false, 10);
+                                break;
+                            case 2: // -
+                                adjustTransactionAmount(entry.itemKey, entry.amount, false, 1);
+                                break;
+                            case 3: // +
+                                adjustTransactionAmount(entry.itemKey, entry.amount, true, 1);
+                                break;
+                            case 4: // +10
+                                adjustTransactionAmount(entry.itemKey, entry.amount, true, 10);
+                                break;
+                            case 5: // +64
+                                adjustTransactionAmount(entry.itemKey, entry.amount, true, 64);
+                                break;
+                        }
+
+                        playButtonSound();
+                        return true;
+                    }
+                }
+            }
+
+            itemY += itemHeight;
+        }
+        return false;
+    }
+
+    private void adjustTransactionAmount(String itemKey, int maxAmount, boolean increase, int changeAmount) {
+        int currentAmount = transactionAmounts.getOrDefault(itemKey, 0);
+        int newAmount;
+
+        if (increase) {
+            newAmount = Math.min(currentAmount + changeAmount, maxAmount);
+        } else {
+            newAmount = Math.max(currentAmount - changeAmount, 0);
+        }
+
+        transactionAmounts.put(itemKey, newAmount);
+    }
+
+    private int getClickedEntryIndex(int mouseX, int mouseY, int panelX, int panelY, int panelWidth, int panelHeight) {
+        int startY = panelY + 60;
+        int availableWidth = panelWidth - (GRID_MARGIN * 2);
+        int itemsPerRow = calculateItemsPerRow(availableWidth);
+        int availableHeight = panelHeight - 80;
+        int maxRowsThatFit = availableHeight / (ITEM_SLOT_SIZE + ITEM_SPACING);
+        int actualVisibleRows = Math.min(VISIBLE_ROWS, Math.max(1, maxRowsThatFit));
+        int totalGridWidth = (itemsPerRow * ITEM_SLOT_SIZE) + ((itemsPerRow - 1) * ITEM_SPACING);
+        int gridStartX = panelX + (panelWidth - totalGridWidth) / 2;
+        int startIndex = scrollOffset * itemsPerRow;
+        int endIndex = Math.min(startIndex + (actualVisibleRows * itemsPerRow), inventoryEntries.size());
+
+        for (int i = startIndex; i < endIndex; i++) {
+            int relativeIndex = i - startIndex;
+            int gridX = relativeIndex % itemsPerRow;
+            int gridY = relativeIndex / itemsPerRow;
+            if (gridY >= actualVisibleRows) break;
+            int slotX = gridStartX + (gridX * (ITEM_SLOT_SIZE + ITEM_SPACING));
+            int slotY = startY + (gridY * (ITEM_SLOT_SIZE + ITEM_SPACING));
+            if (mouseX >= slotX && mouseX < slotX + ITEM_SLOT_SIZE &&
+                    mouseY >= slotY && mouseY < slotY + ITEM_SLOT_SIZE) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private void toggleEntrySelection(int entryIndex) {
+        if (selectedEntryIndices.contains(entryIndex)) {
+            selectedEntryIndices.remove(entryIndex);
+            if (entryIndex < inventoryEntries.size()) {
+                String itemKey = inventoryEntries.get(entryIndex).itemKey;
+                transactionAmounts.remove(itemKey);
+            }
+        } else {
+            selectedEntryIndices.add(entryIndex);
+            if (entryIndex < inventoryEntries.size()) {
+                String itemKey = inventoryEntries.get(entryIndex).itemKey;
+                transactionAmounts.put(itemKey, 0);
+            }
+        }
+    }
+
+    private void playButtonSound() {
+        if (minecraft != null && minecraft.player != null) {
+            minecraft.getSoundManager().play(
+                    net.minecraft.client.resources.sounds.SimpleSoundInstance.forUI(
+                            ModSounds.PAGE, 1.0F
+                    )
+            );
+        }
+    }
+
     private void scrollUp() {
         if (scrollOffset > 0) {
             scrollOffset--;
@@ -327,36 +639,53 @@ public class GrocerInventoryScreen extends Screen {
         // Render background matching your custom GUI
         guiGraphics.fill(0, 0, width, height, 0x40E6D8B7);
 
-        // Use cached layout - now for the main paper panel
+        // Use cached layout - now for the main container
         ScreenLayout layout = getOrCreateLayout();
 
-        // Render paper panel as the main menu (full size)
-        renderPaperPanel(guiGraphics, layout.contentX, layout.contentY, layout.contentWidth, layout.contentHeight);
+        // Calculate panel dimensions for horizontal split
+        int panelSpacing = 10; // Space between panels
+        int leftPanelWidth = (layout.contentWidth * 2) / 3 - (panelSpacing / 2); // 2/3 width
+        int rightPanelWidth = layout.contentWidth / 3 - (panelSpacing / 2); // 1/3 width
 
-        // Draw title
-        drawSectionTitle(guiGraphics, "Grocer Inventory - " + grocerName,
-                layout.contentX, layout.contentY, layout.contentWidth);
+        // Left panel (Item Menu) - 2/3 of screen
+        int leftPanelX = layout.contentX;
+        int leftPanelY = layout.contentY;
+        renderPaperPanel(guiGraphics, leftPanelX, leftPanelY, leftPanelWidth, layout.contentHeight);
 
-        // Draw inventory entries or loading message directly in the main paper panel
+        // Right panel (Transaction Menu) - 1/3 of screen
+        int rightPanelX = layout.contentX + leftPanelWidth + panelSpacing;
+        int rightPanelY = layout.contentY;
+        renderPaperPanel(guiGraphics, rightPanelX, rightPanelY, rightPanelWidth, layout.contentHeight);
+
+        // Draw titles for both panels
+        drawSectionTitle(guiGraphics, grocerName,
+                leftPanelX, leftPanelY, leftPanelWidth);
+        drawSectionTitle(guiGraphics, "Transaction",
+                rightPanelX, rightPanelY, rightPanelWidth);
+
+        // Draw content in left panel (Item Menu)
         if (!dataLoaded) {
-            drawLoadingMessage(guiGraphics, layout.contentX, layout.contentY, layout.contentWidth, layout.contentHeight);
+            drawLoadingMessage(guiGraphics, leftPanelX, leftPanelY, leftPanelWidth, layout.contentHeight);
         } else {
-            drawInventoryEntries(guiGraphics, layout.contentX, layout.contentY, layout.contentWidth, layout.contentHeight, mouseX, mouseY);
+            drawInventoryEntries(guiGraphics, leftPanelX, leftPanelY, leftPanelWidth, layout.contentHeight, mouseX, mouseY);
 
             // Draw scroll indicator if needed
-            int availableWidth = layout.contentWidth - (GRID_MARGIN * 2);
+            int availableWidth = leftPanelWidth - (GRID_MARGIN * 2);
             int itemsPerRow = calculateItemsPerRow(availableWidth);
-            int availableHeight = layout.contentHeight - 80; // Reduced reserved space
+            int availableHeight = layout.contentHeight - 80;
             int maxRowsThatFit = availableHeight / (ITEM_SLOT_SIZE + ITEM_SPACING);
             int actualVisibleRows = Math.min(VISIBLE_ROWS, Math.max(1, maxRowsThatFit));
             int totalRows = (int) Math.ceil((double) inventoryEntries.size() / itemsPerRow);
             if (totalRows > actualVisibleRows) {
-                drawScrollIndicator(guiGraphics, layout.contentX, layout.contentY, layout.contentWidth, layout.contentHeight);
+                drawScrollIndicator(guiGraphics, leftPanelX, leftPanelY, leftPanelWidth, layout.contentHeight);
             }
         }
 
-        // Draw help text at bottom of main panel
-        drawHelpText(guiGraphics, layout.contentX, layout.contentY, layout.contentWidth, layout.contentHeight);
+        // Draw content in right panel (Transaction Menu)
+        drawTransactionMenu(guiGraphics, rightPanelX, rightPanelY, rightPanelWidth, layout.contentHeight);
+
+        // Draw help text at bottom of left panel only
+        drawHelpText(guiGraphics, leftPanelX, leftPanelY, leftPanelWidth, layout.contentHeight);
 
         // Draw tooltip LAST so it appears on top of everything else
         if (currentTooltipEntry != null && tooltipPositioned) {
@@ -387,13 +716,7 @@ public class GrocerInventoryScreen extends Screen {
             return;
         }
 
-        int startY = panelY + 60; // Leave space for title
-
-        // Draw header
-        String headerText = "Items Collected:";
-        int headerWidth = font.width(headerText);
-        int headerX = panelX + (panelWidth - headerWidth) / 2;
-        guiGraphics.drawString(font, headerText, headerX, startY - 35, SUBMENU_TEXT_COLOR, false);
+        int startY = panelY + 60; // Leave space for title and separator
 
         // Draw separator line
         guiGraphics.fill(panelX + panelWidth/8, startY - 25,
@@ -404,9 +727,9 @@ public class GrocerInventoryScreen extends Screen {
         int availableWidth = panelWidth - (GRID_MARGIN * 2); // Remove margins from both sides
         int itemsPerRow = calculateItemsPerRow(availableWidth);
 
-        // Calculate available height for items (reserve less space for header and help text)
-        int reservedTopSpace = 50; // Reduced space for header and separator
-        int reservedBottomSpace = 30; // Reduced space for help text
+        // Calculate available height for items (reserve space for separator and help text)
+        int reservedTopSpace = 50; // Space for title and separator
+        int reservedBottomSpace = 30; // Space for help text
         int availableHeight = panelHeight - reservedTopSpace - reservedBottomSpace;
 
         // Calculate maximum rows that can fit within bounds
@@ -456,8 +779,8 @@ public class GrocerInventoryScreen extends Screen {
             int iconSlotSize = 18;
             int iconSlotX = slotX + (ITEM_SLOT_SIZE - iconSlotSize) / 2;
             int iconSlotY = slotY + 2;
-            drawItemSlotBackground(guiGraphics, iconSlotX, iconSlotY, iconSlotSize, iconSlotSize);
-
+            boolean isSelected = selectedEntryIndices.contains(i);
+            drawItemSlotBackground(guiGraphics, iconSlotX, iconSlotY, iconSlotSize, iconSlotSize, isSelected);
             // Get the actual item for rendering
             net.minecraft.resources.ResourceLocation itemLocation = net.minecraft.resources.ResourceLocation.tryParse(entry.itemKey);
             if (itemLocation != null) {
@@ -697,15 +1020,20 @@ public class GrocerInventoryScreen extends Screen {
         return lines;
     }
 
-    private void drawItemSlotBackground(GuiGraphics guiGraphics, int x, int y, int width, int height) {
-        // Draw slot background (slightly darker)
-        guiGraphics.fill(x, y, x + width, y + height, 0x40000000);
-
-        // Draw slot border (lighter)
-        guiGraphics.fill(x, y, x + width, y + 1, 0x80FFFFFF); // Top
-        guiGraphics.fill(x, y, x + 1, y + height, 0x80FFFFFF); // Left
-        guiGraphics.fill(x + width - 1, y, x + width, y + height, 0x60000000); // Right
-        guiGraphics.fill(x, y + height - 1, x + width, y + height, 0x60000000); // Bottom
+    private void drawItemSlotBackground(GuiGraphics guiGraphics, int x, int y, int width, int height, boolean isSelected) {        // Draw slot background (slightly darker)
+        if (isSelected) {
+            guiGraphics.fill(x, y, x + width, y + height, 0x80FFFFFF); // Semi-transparent white background
+            guiGraphics.fill(x, y, x + width, y + 1, 0xFFFFFFFF); // Bright white border - top
+            guiGraphics.fill(x, y, x + 1, y + height, 0xFFFFFFFF); // Bright white border - left
+            guiGraphics.fill(x + width - 1, y, x + width, y + height, 0xFFFFFFFF); // Bright white border - right
+            guiGraphics.fill(x, y + height - 1, x + width, y + height, 0xFFFFFFFF); // Bright white border - bottom
+        } else {
+            guiGraphics.fill(x, y, x + width, y + height, 0x40000000);
+            guiGraphics.fill(x, y, x + width, y + 1, 0x80FFFFFF);
+            guiGraphics.fill(x, y, x + 1, y + height, 0x80FFFFFF);
+            guiGraphics.fill(x + width - 1, y, x + width, y + height, 0x60000000);
+            guiGraphics.fill(x, y + height - 1, x + width, y + height, 0x60000000);
+        }
     }
 
     private void drawScrollIndicator(GuiGraphics guiGraphics, int panelX, int panelY, int panelWidth, int panelHeight) {
@@ -769,16 +1097,6 @@ public class GrocerInventoryScreen extends Screen {
                 0xFF666666, false);
 
         guiGraphics.pose().popPose();
-
-        // Draw total count (only if data is loaded)
-        if (dataLoaded) {
-            String totalText = "Total different items: " + inventoryEntries.size();
-            int totalWidth = font.width(totalText);
-            int totalX = panelX + (panelWidth - totalWidth) / 2;
-            int totalY = helpY - 20;
-
-            guiGraphics.drawString(font, totalText, totalX, totalY, SUBMENU_TEXT_COLOR, false);
-        }
     }
 
     private String formatNumber(int number) {

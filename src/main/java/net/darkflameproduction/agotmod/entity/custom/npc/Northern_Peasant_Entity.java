@@ -231,19 +231,14 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         long currentDay = this.level().getDayTime() / 24000;
 
         if (currentDay > lastDayTracked) {
-            System.out.println("DEBUG: " + this.getDisplayName().getString() + " - New day detected: " + lastDayTracked + " -> " + currentDay);
-
             // Reset daily states for grocer collection goal
             if (grocerCollectionGoal != null && getJobType().equals(JobSystem.JOB_GROCER)) {
                 grocerCollectionGoal.resetDailyStateAfterSleep();
-                System.out.println("DEBUG: " + this.getDisplayName().getString() + " - Reset grocer collection goal daily state");
             }
 
             // Update synched data
             this.getEntityData().set(LAST_DAY_TRACKED, currentDay);
             lastDayTracked = currentDay;
-
-            System.out.println("DEBUG: " + this.getDisplayName().getString() + " - Daily reset completed for day " + currentDay);
         }
     }
 
@@ -267,11 +262,8 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
 
             // Check if this is a grocer
             if (getJobType().equals(JobSystem.JOB_GROCER)) {
-                System.out.println("DEBUG: Player interacting with grocer: " + this.getDisplayName().getString());
-
                 if (!this.level().isClientSide) {
                     // Server side - send grocer inventory data to client
-                    System.out.println("DEBUG: Server-side grocer interaction");
                     if (player instanceof ServerPlayer serverPlayer) {
                         // Refresh inventory to ensure clean data (removes 0-quantity items)
                         grocerSystem.refreshInventoryDisplay();
@@ -280,19 +272,14 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
                         List<GrocerSystem.GrocerInventoryEntry> entries = grocerSystem.getSortedInventoryEntries();
                         String grocerName = this.getDisplayName().getString();
 
-                        System.out.println("DEBUG: Sending packet with " + entries.size() + " entries to client");
-
                         // Send packet to client to open GUI and populate data
                         OpenGrocerInventoryPacket packet = new OpenGrocerInventoryPacket(grocerName, entries);
                         serverPlayer.connection.send(packet);
-
-                        System.out.println("DEBUG: Grocer inventory packet sent successfully");
                     }
                     return InteractionResult.SUCCESS;
                 } else {
                     // Client side - just acknowledge the interaction
                     // The GUI will be opened when the packet is received
-                    System.out.println("DEBUG: Client-side grocer interaction - waiting for server data");
                     return InteractionResult.SUCCESS;
                 }
             } else {

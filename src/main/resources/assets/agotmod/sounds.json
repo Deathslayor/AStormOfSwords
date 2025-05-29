@@ -83,6 +83,13 @@
       "agotmod:button"
     ]
   },
+  "page": {
+    "category": "block",
+    "subtitles": "sounds.agotmod:page",
+    "sounds": [
+      "agotmod:page"
+    ]
+  },
   "forest_wind": {
     "category": "ambient",
     "subtitles": "sounds.agotmod:forest_wind",

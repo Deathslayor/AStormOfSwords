@@ -16,19 +16,15 @@ public class ClientPacketHandler {
                 String grocerName = packet.grocerName();
                 java.util.List<net.darkflameproduction.agotmod.entity.custom.npc.system.GrocerSystem.GrocerInventoryEntry> inventoryEntries = packet.entries();
 
-                System.out.println("DEBUG: Client received grocer inventory packet for: " + grocerName);
-                System.out.println("DEBUG: Packet contains " + inventoryEntries.size() + " entries");
 
                 // Check if there's already a grocer screen open for this grocer
                 GrocerInventoryScreen currentScreen = GrocerInventoryScreen.getCurrentInstance();
 
                 if (currentScreen != null && mc.screen == currentScreen) {
                     // Update existing screen with new data
-                    System.out.println("DEBUG: Updating existing grocer screen");
                     GrocerInventoryScreen.updateInventoryData(grocerName, inventoryEntries);
                 } else {
                     // Open new screen and populate with data
-                    System.out.println("DEBUG: Opening new grocer inventory screen");
                     GrocerInventoryScreen newScreen = new GrocerInventoryScreen(grocerName);
                     mc.setScreen(newScreen);
 
