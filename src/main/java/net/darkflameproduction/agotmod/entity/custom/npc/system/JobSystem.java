@@ -44,9 +44,6 @@ public class JobSystem {
         // CRITICAL: Check if job block still exists before doing anything else
         if (hasJob() && getJobBlockPos() != null) {
             if (!isJobBlockValid()) {
-                System.out.println("DEBUG: " + peasant.getDisplayName().getString() +
-                        " losing job due to invalid job block at " + getJobBlockPos() +
-                        " (job type: " + getJobType() + ")");
                 // Job block was destroyed, lose job immediately
                 loseJob();
                 return; // Don't continue with other job-related logic
@@ -55,8 +52,6 @@ public class JobSystem {
 
         // Check if peasant should be at work area and force return if too far
         if (!peasant.level().isClientSide && shouldBeAtWorkArea() && isTooFarFromWork() && !peasant.isSleeping()) {
-            System.out.println("DEBUG: " + peasant.getDisplayName().getString() +
-                    " is too far from work area, forcing return");
             // Cancel current navigation and head to work area
             peasant.getNavigation().stop();
             BlockPos workCenter = getWorkCenter();
@@ -67,8 +62,6 @@ public class JobSystem {
         if (!peasant.level().isClientSide && hasJob() && getJobBlockPos() != null) {
             warningBroadcastTimer++;
             if (warningBroadcastTimer >= 40) {
-                System.out.println("DEBUG: " + peasant.getDisplayName().getString() +
-                        " broadcasting job warning for " + getJobType() + " at " + getJobBlockPos());
                 JobWarningSystem.broadcastJobBlockInUse(
                         peasant.getUUID(),
                         getJobType(),
@@ -104,9 +97,6 @@ public class JobSystem {
         String oldJobType = getJobType();
         BlockPos oldJobBlockPos = getJobBlockPos();
 
-        System.out.println("DEBUG: " + peasant.getDisplayName().getString() +
-                " loseJob() called - losing " + oldJobType + " job at " + oldJobBlockPos);
-
         // Clear job data
         setJobType(JOB_NONE);
         setJobBlockPos(null);
@@ -119,7 +109,6 @@ public class JobSystem {
 
         // Reset job-specific systems
         if (oldJobType.equals(JOB_FARMER)) {
-            System.out.println("DEBUG: Resetting farmer system");
             // Reset farming system
             peasant.getFarmingSystem().setCurrentFarmState(
                     peasant.getFarmingSystem().hasFarm() ?
@@ -127,13 +116,10 @@ public class JobSystem {
                             FarmingSystem.FarmState.NEEDS_FARM_SETUP
             );
         } else if (oldJobType.equals(JOB_GROCER)) {
-            System.out.println("DEBUG: Resetting grocer system");
             // Reset grocer system if needed
             // The grocer system doesn't need specific reset logic currently
             // as it maintains its digital inventory even after job loss
         }
-
-        System.out.println("DEBUG: Job loss complete for " + peasant.getDisplayName().getString());
     }
 
     public String getJobType() {
@@ -142,18 +128,6 @@ public class JobSystem {
 
     public void setJobType(String jobType) {
         String oldJob = getJobType();
-
-        // Add stack trace for job loss
-        if (!jobType.isEmpty() && oldJob.isEmpty()) {
-            System.out.println("DEBUG: " + peasant.getDisplayName().getString() +
-                    " GAINING job: '" + oldJob + "' -> '" + jobType + "'");
-        } else if (jobType.isEmpty() && !oldJob.isEmpty()) {
-            System.out.println("DEBUG: " + peasant.getDisplayName().getString() +
-                    " LOSING job: '" + oldJob + "' -> '" + jobType + "'");
-            System.out.println("DEBUG: Stack trace for job loss:");
-            Thread.dumpStack(); // This will show us what called setJobType("")
-        }
-
         peasant.getEntityData().set(peasant.getJobTypeAccessor(), jobType);
 
         // Update name when job changes

@@ -1,8 +1,13 @@
 package net.darkflameproduction.agotmod.network;
 
 import net.darkflameproduction.agotmod.gui.GrocerInventoryScreen;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.GrocerSystem;
 import net.minecraft.client.Minecraft;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.network.chat.Component;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
+
+import java.util.Map;
 
 public class ClientPacketHandler {
 

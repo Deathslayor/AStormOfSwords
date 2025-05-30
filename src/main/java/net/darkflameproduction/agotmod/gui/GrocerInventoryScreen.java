@@ -1,6 +1,7 @@
 package net.darkflameproduction.agotmod.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.darkflameproduction.agotmod.network.FinishTransactionPacket;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -47,6 +48,9 @@ public class GrocerInventoryScreen extends Screen {
     private static final int BORDER_PILLAR_WIDTH = 6;
     private static final int BORDER_HEIGHT = 6;
     private static final int CORNER_SIZE = 12;
+
+    private int totalItems = 0;
+    private int totalPrice = 0;
 
     // Item pricing map - only items in this map can be stored by the grocer
     private static final Map<String, Integer> ALLOWED_ITEMS_PRICING = new HashMap<>();
@@ -130,9 +134,15 @@ public class GrocerInventoryScreen extends Screen {
                 panelX + panelWidth - panelWidth/8, panelY + 36,
                 SUBMENU_TEXT_COLOR);
 
+        // Calculate totals first
+        calculateTotals();
+
         // Transaction menu content starts below the separator
-        int contentStartY = panelY + 60;
-        int availableHeight = panelHeight - 60; // Height available for content
+        int contentStartY = panelY + 45;
+
+        // Reserve space for bottom section (totals + button)
+        int bottomSectionHeight = 80; // Space for totals and button
+        int availableHeight = panelHeight - 45 - bottomSectionHeight; // Height available for items
 
         // Scale down everything except the title
         guiGraphics.pose().pushPose();
@@ -152,7 +162,7 @@ public class GrocerInventoryScreen extends Screen {
             int text2X = (panelX + (panelWidth - text2Width) / 2) * 2;
             int text3X = (panelX + (panelWidth - text3Width) / 2) * 2;
 
-            int textY = (contentStartY + (panelHeight - 60) / 2 - font.lineHeight) * 2;
+            int textY = (contentStartY + availableHeight / 2 - font.lineHeight) * 2;
 
             guiGraphics.drawString(font, instructionText, text1X, textY, SUBMENU_TEXT_COLOR, false);
             textY += (font.lineHeight + 4) * 2;
@@ -170,6 +180,78 @@ public class GrocerInventoryScreen extends Screen {
         }
 
         guiGraphics.pose().popPose();
+
+        // Draw bottom section (not scaled)
+        drawBottomSection(guiGraphics, panelX, panelY + panelHeight - bottomSectionHeight, panelWidth, bottomSectionHeight);
+    }
+
+    private void finishTransaction() {
+        if (totalItems <= 0) return;
+
+        // Create a map of items to subtract from inventory
+        Map<String, Integer> itemsToSubtract = new HashMap<>();
+        for (Map.Entry<String, Integer> entry : transactionAmounts.entrySet()) {
+            int amount = entry.getValue();
+            if (amount > 0) {
+                itemsToSubtract.put(entry.getKey(), amount);
+            }
+        }
+
+        // Send packet to server to update grocer inventory
+        FinishTransactionPacket packet = new FinishTransactionPacket(grocerName, itemsToSubtract);
+        net.neoforged.neoforge.network.PacketDistributor.sendToServer(packet);
+
+        System.out.println("DEBUG: Sent transaction packet for " + grocerName);
+        System.out.println("DEBUG: Items to subtract: " + itemsToSubtract);
+
+        // Close the screen
+        this.onClose();
+    }
+
+    private void drawBottomSection(GuiGraphics guiGraphics, int panelX, int panelY, int panelWidth, int panelHeight) {
+        // Draw separator line above bottom section
+        guiGraphics.fill(panelX + panelWidth/8, panelY,
+                panelX + panelWidth - panelWidth/8, panelY + 1,
+                SUBMENU_TEXT_COLOR);
+
+        // Draw totals
+        String totalItemsText = "Total items: " + totalItems;
+        String totalPriceText = "Total Price: " + totalPrice + " coins";
+
+        int textY = panelY + 15;
+        int textX = panelX + 10;
+
+        // Draw totals text
+        guiGraphics.drawString(font, totalItemsText, textX, textY, SUBMENU_TEXT_COLOR, false);
+        textY += font.lineHeight + 5;
+        guiGraphics.drawString(font, totalPriceText, textX, textY, SUBMENU_TEXT_COLOR, false);
+
+        // Draw "Finish Transaction" button
+        int buttonWidth = 120;
+        int buttonHeight = 20;
+        int buttonX = panelX + (panelWidth - buttonWidth) / 2;
+        int buttonY = panelY + panelHeight - buttonHeight - 10;
+
+        // Button background
+        boolean isHovered = false; // We'll implement hover detection
+        int buttonColor = isHovered ? 0xFF666666 : 0xFF888888;
+        guiGraphics.fill(buttonX, buttonY, buttonX + buttonWidth, buttonY + buttonHeight, buttonColor);
+
+        // Button border
+        guiGraphics.fill(buttonX, buttonY, buttonX + buttonWidth, buttonY + 1, 0xFFCCCCCC); // Top
+        guiGraphics.fill(buttonX, buttonY, buttonX + 1, buttonY + buttonHeight, 0xFFCCCCCC); // Left
+        guiGraphics.fill(buttonX + buttonWidth - 1, buttonY, buttonX + buttonWidth, buttonY + buttonHeight, 0xFF444444); // Right
+        guiGraphics.fill(buttonX, buttonY + buttonHeight - 1, buttonX + buttonWidth, buttonY + buttonHeight, 0xFF444444); // Bottom
+
+        // Button text
+        String buttonText = "Finish Transaction";
+        int textWidth = font.width(buttonText);
+        int buttonTextX = buttonX + (buttonWidth - textWidth) / 2;
+        int buttonTextY = buttonY + (buttonHeight - font.lineHeight) / 2;
+
+        boolean hasItems = totalItems > 0;
+        int textColor = hasItems ? 0xFFFFFFFF : 0xFF666666;
+        guiGraphics.drawString(font, buttonText, buttonTextX, buttonTextY, textColor, false);
     }
 
     private void drawTransactionItems(GuiGraphics guiGraphics, int panelX, int startY, int panelWidth, int availableHeight) {
@@ -427,18 +509,24 @@ public class GrocerInventoryScreen extends Screen {
                 }
             }
         }
-        // Check if mouse is in right panel (transaction)
+        // Check if mouse is in right panel (transaction) - but only in the scrollable area
         else if (mouseX >= rightPanelX && mouseX < rightPanelX + rightPanelWidth &&
                 mouseY >= layout.contentY && mouseY < layout.contentY + layout.contentHeight) {
 
-            int availableHeight = layout.contentHeight - 60;
-            if (needsTransactionScroll(availableHeight * 2)) {
-                if (scrollY > 0) {
-                    transactionScrollUp();
-                    return true;
-                } else if (scrollY < 0) {
-                    transactionScrollDown();
-                    return true;
+            // Check if mouse is in the scrollable items area (not the bottom section)
+            int bottomSectionHeight = 80;
+            int bottomSectionY = layout.contentY + layout.contentHeight - bottomSectionHeight;
+
+            if (mouseY < bottomSectionY) {
+                int availableHeight = layout.contentHeight - 45 - bottomSectionHeight;
+                if (needsTransactionScroll(availableHeight * 2)) {
+                    if (scrollY > 0) {
+                        transactionScrollUp();
+                        return true;
+                    } else if (scrollY < 0) {
+                        transactionScrollDown();
+                        return true;
+                    }
                 }
             }
         }
@@ -488,8 +576,30 @@ public class GrocerInventoryScreen extends Screen {
             if (mouseX >= rightPanelX && mouseX < rightPanelX + rightPanelWidth &&
                     mouseY >= rightPanelY && mouseY < rightPanelY + layout.contentHeight) {
 
-                if (handleTransactionClick((int)mouseX, (int)mouseY, rightPanelX, rightPanelY + 60, rightPanelWidth, layout.contentHeight - 60))
-                {                    return true;
+                // Check if clicking in the bottom section (finish transaction button)
+                int bottomSectionHeight = 80;
+                int bottomSectionY = rightPanelY + layout.contentHeight - bottomSectionHeight;
+
+                if (mouseY >= bottomSectionY) {
+                    // Click is in bottom section, check if it's the button
+                    int buttonWidth = 120;
+                    int buttonHeight = 20;
+                    int buttonX = rightPanelX + (rightPanelWidth - buttonWidth) / 2;
+                    int buttonY = bottomSectionY + bottomSectionHeight - buttonHeight - 10;
+
+                    if (mouseX >= buttonX && mouseX < buttonX + buttonWidth &&
+                            mouseY >= buttonY && mouseY < buttonY + buttonHeight && totalItems > 0) {
+
+                        finishTransaction();
+                        playButtonSound();
+                        return true;
+                    }
+                } else {
+                    // Click is in items section
+                    int availableHeight = layout.contentHeight - 45 - bottomSectionHeight;
+                    if (handleTransactionClick((int)mouseX, (int)mouseY, rightPanelX, rightPanelY + 45, rightPanelWidth, availableHeight)) {
+                        return true;
+                    }
                 }
             }
         }
@@ -514,7 +624,8 @@ public class GrocerInventoryScreen extends Screen {
         if (selectedEntryIndices.isEmpty()) return;
 
         ScreenLayout layout = getOrCreateLayout();
-        int availableHeight = layout.contentHeight - 60;
+        int bottomSectionHeight = 80;
+        int availableHeight = layout.contentHeight - 45 - bottomSectionHeight;
         int scaledAvailableHeight = availableHeight * 2;
 
         int itemHeight = 16 * 2;
@@ -1447,6 +1558,23 @@ public class GrocerInventoryScreen extends Screen {
         guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
                 CORNER_TEXTURE, 0, 0, 0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
         poseStack.popPose();
+    }
+
+    private void calculateTotals() {
+        int totalItems = 0;
+        int totalPrice = 0;
+
+        for (Map.Entry<String, Integer> entry : transactionAmounts.entrySet()) {
+            int amount = entry.getValue();
+            if (amount > 0) {
+                totalItems += amount;
+                int itemPrice = getItemPrice(entry.getKey());
+                totalPrice += itemPrice * amount;
+            }
+        }
+
+        this.totalItems = totalItems;
+        this.totalPrice = totalPrice;
     }
 
     // Override to disable background blur

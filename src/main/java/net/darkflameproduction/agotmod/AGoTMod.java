@@ -49,6 +49,7 @@ import org.slf4j.LoggerFactory;
 public class AGoTMod {
     public static final String MOD_ID = "agotmod";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+
     public AGoTMod(IEventBus modEventBus) {
         ModCreativeBuildingBlocks.register(modEventBus);
         ModCreativeNaturalBlocks.register(modEventBus);
@@ -68,7 +69,7 @@ public class AGoTMod {
 
         modEventBus.addListener(this::commonSetup);
         NeoForge.EVENT_BUS.register(this);
-        modEventBus.addListener(this::registerPayloads); // ADD THIS LINE
+        // REMOVE THIS LINE: modEventBus.addListener(this::registerPayloads);
         modEventBus.addListener(this::addCreative);
         ModTerrablender.registerBiomes();
         ModEntities.register(modEventBus);
@@ -77,9 +78,10 @@ public class AGoTMod {
         if (FMLEnvironment.dist == Dist.CLIENT) {
             registerClientEvents();
         }
-
-
     }
+
+    // REMOVE THIS ENTIRE METHOD - ModNetworking.java handles packet registration
+    /*
     public void registerPayloads(RegisterPayloadHandlersEvent event) {
         final PayloadRegistrar registrar = event.registrar("1");
 
@@ -90,7 +92,7 @@ public class AGoTMod {
                 ClientPacketHandler::handleOpenGrocerInventory
         );
     }
-
+    */
 
     @OnlyIn(Dist.CLIENT)
     private void registerClientEvents() {
@@ -159,8 +161,6 @@ public class AGoTMod {
             }
         }
     }
-
-
 
     @EventBusSubscriber(modid = MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
@@ -234,6 +234,4 @@ public class AGoTMod {
     public static @NotNull ResourceLocation id(String path) {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }
-
-
 }
