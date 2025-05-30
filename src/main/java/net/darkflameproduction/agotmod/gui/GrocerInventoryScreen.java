@@ -132,6 +132,7 @@ public class GrocerInventoryScreen extends Screen {
 
         // Transaction menu content starts below the separator
         int contentStartY = panelY + 60;
+        int availableHeight = panelHeight - 60; // Height available for content
 
         // Scale down everything except the title
         guiGraphics.pose().pushPose();
@@ -160,32 +161,39 @@ public class GrocerInventoryScreen extends Screen {
             guiGraphics.drawString(font, instructionText3, text3X, textY, SUBMENU_TEXT_COLOR, false);
         } else {
             // Show selected items with transaction controls (scaled)
-            drawTransactionItems(guiGraphics, panelX * 2, contentStartY * 2, panelWidth * 2, (panelHeight - 60) * 2);
+            drawTransactionItems(guiGraphics, panelX * 2, contentStartY * 2, panelWidth * 2, availableHeight * 2);
+
+            // Draw scroll indicator if needed
+            if (needsTransactionScroll(availableHeight * 2)) {
+                drawTransactionScrollIndicator(guiGraphics, panelX * 2, contentStartY * 2, panelWidth * 2, availableHeight * 2);
+            }
         }
 
         guiGraphics.pose().popPose();
     }
 
     private void drawTransactionItems(GuiGraphics guiGraphics, int panelX, int startY, int panelWidth, int availableHeight) {
+        int itemHeight = 16 * 2;
+        int margin = 6 * 2;
+        int contentWidth = panelWidth - (margin * 8);
+        int centeredX = panelX + (margin * 4);
+
+        // Calculate which items to show based on transaction scroll
+        int maxVisibleItems = Math.max(1, (availableHeight - 32) / itemHeight);
+        List<Integer> sortedIndices = new ArrayList<>(selectedEntryIndices);
+        sortedIndices.sort(Integer::compareTo);
+
+        int startIndex = transactionScrollOffset;
+        int endIndex = Math.min(startIndex + maxVisibleItems, sortedIndices.size());
+
         int itemY = startY;
-        int itemHeight = 16 * 2; // Reduced and scaled
-        int margin = 6 * 2; // Reduced margin for tighter spacing
 
-        // Move content much closer to center
-        int contentWidth = panelWidth - (margin * 8); // Much more margin on sides
-        int centeredX = panelX + (margin * 4); // Start much further from edge
-
-        for (Integer entryIndex : selectedEntryIndices) {
+        for (int i = startIndex; i < endIndex; i++) {
+            Integer entryIndex = sortedIndices.get(i);
             if (entryIndex >= inventoryEntries.size()) continue;
 
             GrocerSystem.GrocerInventoryEntry entry = inventoryEntries.get(entryIndex);
             int transactionAmount = transactionAmounts.getOrDefault(entry.itemKey, 0);
-
-            // Check if we have space for this item
-            if (itemY + itemHeight > startY + availableHeight - 32) {
-                guiGraphics.drawString(font, "...", centeredX, itemY, SUBMENU_TEXT_COLOR, false);
-                break;
-            }
 
             // Draw item icon 50% larger (1.5x scale)
             net.minecraft.resources.ResourceLocation itemLocation = net.minecraft.resources.ResourceLocation.tryParse(entry.itemKey);
@@ -194,7 +202,6 @@ public class GrocerInventoryScreen extends Screen {
                 if (item != null && item != net.minecraft.world.item.Items.AIR) {
                     net.minecraft.world.item.ItemStack itemStack = new net.minecraft.world.item.ItemStack(item);
 
-                    // Scale up icon by 1.5x (50% larger)
                     guiGraphics.pose().pushPose();
                     guiGraphics.pose().scale(1.5f, 1.5f, 1.0f);
                     guiGraphics.renderItem(itemStack, (int)(centeredX / 1.5f), (int)((itemY + 2) / 1.5f));
@@ -202,33 +209,22 @@ public class GrocerInventoryScreen extends Screen {
                 }
             }
 
-            // Draw transaction amount (moved right to account for larger icon)
+            // Draw transaction amount
             String amountText = String.valueOf(transactionAmount);
-            int amountX = centeredX + 40; // More space for larger icon
+            int amountX = centeredX + 40;
             guiGraphics.drawString(font, amountText, amountX, itemY + 8, SUBMENU_TEXT_COLOR, false);
 
-            // Draw 6 buttons: -64, -10, -, +, +10, +64
-            int buttonSize = 20; // Smaller buttons to fit 6
-            int totalButtonWidth = buttonSize * 6; // No spacing between buttons
-            int buttonsStartX = centeredX + contentWidth - totalButtonWidth + 20; // Move 20px more to the right
+            // Draw buttons
+            int buttonSize = 20;
+            int totalButtonWidth = buttonSize * 6;
+            int buttonsStartX = centeredX + contentWidth - totalButtonWidth + 20;
             int buttonY = itemY + 2;
 
-            // -64 button
             drawTransactionButton(guiGraphics, buttonsStartX, buttonY, buttonSize, "-64", entry.itemKey, false);
-
-            // -10 button
             drawTransactionButton(guiGraphics, buttonsStartX + buttonSize, buttonY, buttonSize, "-10", entry.itemKey, false);
-
-            // - button
             drawTransactionButton(guiGraphics, buttonsStartX + (buttonSize * 2), buttonY, buttonSize, "-", entry.itemKey, false);
-
-            // + button
             drawTransactionButton(guiGraphics, buttonsStartX + (buttonSize * 3), buttonY, buttonSize, "+", entry.itemKey, true);
-
-            // +10 button
             drawTransactionButton(guiGraphics, buttonsStartX + (buttonSize * 4), buttonY, buttonSize, "+10", entry.itemKey, true);
-
-            // +64 button
             drawTransactionButton(guiGraphics, buttonsStartX + (buttonSize * 5), buttonY, buttonSize, "+64", entry.itemKey, true);
 
             itemY += itemHeight;
@@ -276,7 +272,8 @@ public class GrocerInventoryScreen extends Screen {
     private static final int VISIBLE_ROWS = 4; // Number of visible rows
     private static final int ITEM_SLOT_SIZE = 32; // Smaller size since we only show icon + amount
     private static final int ITEM_SPACING = 4; // Closer spacing between items
-    private static final int GRID_MARGIN = 16; // Margin from submenu edges
+    private static final int GRID_MARGIN = 16;
+    private int transactionScrollOffset = 0; // Add this with your other scroll variables// Margin from submenu edges
 
     // Performance optimization - cached layout
     private ScreenLayout cachedLayout;
@@ -354,6 +351,7 @@ public class GrocerInventoryScreen extends Screen {
             currentInstance.inventoryEntries = filteredEntries;
             currentInstance.dataLoaded = true;
             currentInstance.scrollOffset = 0;
+            currentInstance.transactionScrollOffset = 0; // Reset transaction scroll too
             currentInstance.selectedEntryIndices.clear();
         } else {
             System.out.println("DEBUG: No matching screen instance found for grocer: " + grocerName);
@@ -399,27 +397,52 @@ public class GrocerInventoryScreen extends Screen {
 
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
-        // Calculate items per row based on current paper width
         ScreenLayout layout = getOrCreateLayout();
-        int paperWidth = layout.contentWidth - 40; // Account for paper margins
-        int itemsPerRow = calculateItemsPerRow(paperWidth);
+        int panelSpacing = 10;
+        int leftPanelWidth = (layout.contentWidth * 2) / 3 - (panelSpacing / 2);
+        int rightPanelWidth = layout.contentWidth / 3 - (panelSpacing / 2);
 
-        // Calculate actual visible rows based on available space
-        int availableHeight = layout.contentHeight - 80; // Reduced reserved space
-        int maxRowsThatFit = availableHeight / (ITEM_SLOT_SIZE + ITEM_SPACING);
-        int actualVisibleRows = Math.min(VISIBLE_ROWS, Math.max(1, maxRowsThatFit));
+        int leftPanelX = layout.contentX;
+        int rightPanelX = layout.contentX + leftPanelWidth + panelSpacing;
 
-        int totalRows = (int) Math.ceil((double) inventoryEntries.size() / itemsPerRow);
+        // Check if mouse is in left panel (inventory)
+        if (mouseX >= leftPanelX && mouseX < leftPanelX + leftPanelWidth &&
+                mouseY >= layout.contentY && mouseY < layout.contentY + layout.contentHeight) {
 
-        if (totalRows > actualVisibleRows) {
-            if (scrollY > 0) {
-                scrollUp();
-                return true;
-            } else if (scrollY < 0) {
-                scrollDown();
-                return true;
+            // Existing inventory scroll logic
+            int paperWidth = layout.contentWidth - 40;
+            int itemsPerRow = calculateItemsPerRow(paperWidth);
+            int availableHeight = layout.contentHeight - 80;
+            int maxRowsThatFit = availableHeight / (ITEM_SLOT_SIZE + ITEM_SPACING);
+            int actualVisibleRows = Math.min(VISIBLE_ROWS, Math.max(1, maxRowsThatFit));
+            int totalRows = (int) Math.ceil((double) inventoryEntries.size() / itemsPerRow);
+
+            if (totalRows > actualVisibleRows) {
+                if (scrollY > 0) {
+                    scrollUp();
+                    return true;
+                } else if (scrollY < 0) {
+                    scrollDown();
+                    return true;
+                }
             }
         }
+        // Check if mouse is in right panel (transaction)
+        else if (mouseX >= rightPanelX && mouseX < rightPanelX + rightPanelWidth &&
+                mouseY >= layout.contentY && mouseY < layout.contentY + layout.contentHeight) {
+
+            int availableHeight = layout.contentHeight - 60;
+            if (needsTransactionScroll(availableHeight * 2)) {
+                if (scrollY > 0) {
+                    transactionScrollUp();
+                    return true;
+                } else if (scrollY < 0) {
+                    transactionScrollDown();
+                    return true;
+                }
+            }
+        }
+
         return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
     }
 
@@ -465,15 +488,132 @@ public class GrocerInventoryScreen extends Screen {
             if (mouseX >= rightPanelX && mouseX < rightPanelX + rightPanelWidth &&
                     mouseY >= rightPanelY && mouseY < rightPanelY + layout.contentHeight) {
 
-                if (handleTransactionClick((int)mouseX, (int)mouseY, rightPanelX, rightPanelY + 60, rightPanelWidth, 0)) {
-                    return true;
+                if (handleTransactionClick((int)mouseX, (int)mouseY, rightPanelX, rightPanelY + 60, rightPanelWidth, layout.contentHeight - 60))
+                {                    return true;
                 }
             }
         }
         return super.mouseClicked(mouseX, mouseY, button);
     }
 
-    private boolean handleTransactionClick(int mouseX, int mouseY, int panelX, int startY, int panelWidth, int modifiers) {
+    private boolean needsTransactionScroll(int availableHeight) {
+        if (selectedEntryIndices.isEmpty()) return false;
+
+        int itemHeight = 16 * 2;
+        int maxVisibleItems = Math.max(1, (availableHeight - 32) / itemHeight);
+        return selectedEntryIndices.size() > maxVisibleItems;
+    }
+
+    private void transactionScrollUp() {
+        if (transactionScrollOffset > 0) {
+            transactionScrollOffset--;
+        }
+    }
+
+    private void transactionScrollDown() {
+        if (selectedEntryIndices.isEmpty()) return;
+
+        ScreenLayout layout = getOrCreateLayout();
+        int availableHeight = layout.contentHeight - 60;
+        int scaledAvailableHeight = availableHeight * 2;
+
+        int itemHeight = 16 * 2;
+        int maxVisibleItems = Math.max(1, (scaledAvailableHeight - 32) / itemHeight);
+        int maxScroll = Math.max(0, selectedEntryIndices.size() - maxVisibleItems);
+
+        if (transactionScrollOffset < maxScroll) {
+            transactionScrollOffset++;
+        }
+    }
+
+    private void drawTransactionScrollIndicator(GuiGraphics guiGraphics, int panelX, int startY, int panelWidth, int availableHeight) {
+        int itemHeight = 16 * 2;
+        int maxVisibleItems = Math.max(1, (availableHeight - 32) / itemHeight);
+        int totalItems = selectedEntryIndices.size();
+
+        if (totalItems <= maxVisibleItems) return;
+
+        int scrollBarX = panelX + panelWidth - 20; // Exactly between -16 and -24
+        int scrollBarY = startY + 20;
+        int scrollBarHeight = availableHeight - 60;
+        int scrollBarWidth = 16;
+
+        // Draw scroll bar background
+        guiGraphics.fill(scrollBarX, scrollBarY,
+                scrollBarX + scrollBarWidth, scrollBarY + scrollBarHeight,
+                0xFF555555);
+
+        // Calculate scroll thumb
+        int thumbHeight = Math.max(40, (maxVisibleItems * scrollBarHeight) / totalItems);
+        int maxScroll = Math.max(1, totalItems - maxVisibleItems);
+        int thumbY = scrollBarY + (transactionScrollOffset * (scrollBarHeight - thumbHeight)) / maxScroll;
+
+        // Draw scroll thumb
+        guiGraphics.fill(scrollBarX, thumbY,
+                scrollBarX + scrollBarWidth, thumbY + thumbHeight,
+                0xFFC6C6C6);
+
+        // Draw scroll arrows
+        String upArrow = "↑";
+        String downArrow = "↓";
+        int arrowX = scrollBarX + (scrollBarWidth - font.width(upArrow)) / 2;
+
+        int upColor = transactionScrollOffset > 0 ? SUBMENU_TEXT_COLOR : 0xFF666666;
+        guiGraphics.drawString(font, upArrow, arrowX, scrollBarY - 30, upColor, false);
+
+        int downColor = transactionScrollOffset < maxScroll ? SUBMENU_TEXT_COLOR : 0xFF666666;
+        guiGraphics.drawString(font, downArrow, arrowX, scrollBarY + scrollBarHeight + 10, downColor, false);
+    }
+
+    private boolean handleTransactionClick(int mouseX, int mouseY, int panelX, int startY, int panelWidth, int availableHeight) {
+        // Get which transaction item was clicked (similar to getClickedEntryIndex for inventory)
+        int clickedTransactionIndex = getClickedTransactionIndex(mouseX, mouseY, panelX, startY, panelWidth, availableHeight);
+
+        if (clickedTransactionIndex >= 0) {
+            // Get the actual entry
+            List<Integer> sortedIndices = new ArrayList<>(selectedEntryIndices);
+            sortedIndices.sort(Integer::compareTo);
+
+            if (clickedTransactionIndex < sortedIndices.size()) {
+                Integer entryIndex = sortedIndices.get(clickedTransactionIndex);
+                if (entryIndex < inventoryEntries.size()) {
+                    GrocerSystem.GrocerInventoryEntry entry = inventoryEntries.get(entryIndex);
+
+                    // Now check which button within that item was clicked
+                    return checkTransactionButtons(mouseX, mouseY, panelX, startY, panelWidth, availableHeight, clickedTransactionIndex, entry);
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private int getClickedTransactionIndex(int mouseX, int mouseY, int panelX, int startY, int panelWidth, int availableHeight) {
+        int scaledMouseY = mouseY * 2;
+        int scaledStartY = startY * 2;
+        int scaledAvailableHeight = availableHeight * 2;
+
+        int itemHeight = 16 * 2;
+        int maxVisibleItems = Math.max(1, (scaledAvailableHeight - 32) / itemHeight);
+
+        // Calculate which visible item was clicked
+        int relativeIndex = (scaledMouseY - scaledStartY) / itemHeight;
+
+        if (relativeIndex >= 0 && relativeIndex < maxVisibleItems) {
+            int actualIndex = transactionScrollOffset + relativeIndex;
+            // Check against the sorted list size, not selectedEntryIndices.size()
+            List<Integer> sortedIndices = new ArrayList<>(selectedEntryIndices);
+            sortedIndices.sort(Integer::compareTo);
+
+            if (actualIndex < sortedIndices.size()) {
+                return actualIndex;
+            }
+        }
+
+        return -1;
+    }
+
+    private boolean checkTransactionButtons(int mouseX, int mouseY, int panelX, int startY, int panelWidth, int availableHeight, int transactionIndex, GrocerSystem.GrocerInventoryEntry entry) {
         // Convert to scaled coordinates
         int scaledMouseX = mouseX * 2;
         int scaledMouseY = mouseY * 2;
@@ -481,63 +621,42 @@ public class GrocerInventoryScreen extends Screen {
         int scaledStartY = startY * 2;
         int scaledPanelWidth = panelWidth * 2;
 
-        int itemY = scaledStartY;
         int itemHeight = 16 * 2;
         int margin = 6 * 2;
 
-        // Move content much closer to center
+        // Calculate this specific item's Y position based on its visible position
+        int visibleIndex = transactionIndex - transactionScrollOffset;
+        int itemY = scaledStartY + (visibleIndex * itemHeight);
+
         int contentWidth = scaledPanelWidth - (margin * 8);
         int centeredX = scaledPanelX + (margin * 4);
 
-        for (Integer entryIndex : selectedEntryIndices) {
-            if (entryIndex >= inventoryEntries.size()) continue;
+        int buttonSize = 20;
+        int totalButtonWidth = buttonSize * 6;
+        int buttonsStartX = centeredX + contentWidth - totalButtonWidth + 20;
+        int buttonY = itemY + 2;
 
-            GrocerSystem.GrocerInventoryEntry entry = inventoryEntries.get(entryIndex);
+        // Check each button
+        for (int j = 0; j < 6; j++) {
+            int buttonX = buttonsStartX + (j * buttonSize);
 
-            // Check if click is within this item's area
-            if (scaledMouseY >= itemY && scaledMouseY < itemY + itemHeight) {
-                int buttonSize = 20;
-                int totalButtonWidth = buttonSize * 6; // No spacing
-                int buttonsStartX = centeredX + contentWidth - totalButtonWidth + 20; // Move 20px more to the right
-                int buttonY = itemY + 2;
+            if (scaledMouseX >= buttonX && scaledMouseX < buttonX + buttonSize &&
+                    scaledMouseY >= buttonY && scaledMouseY < buttonY + buttonSize) {
 
-                // Check each button
-                for (int i = 0; i < 6; i++) {
-                    int buttonX = buttonsStartX + (i * buttonSize); // No spacing between buttons
-
-                    if (scaledMouseX >= buttonX && scaledMouseX < buttonX + buttonSize &&
-                            scaledMouseY >= buttonY && scaledMouseY < buttonY + buttonSize) {
-
-                        // Determine button action based on index
-                        switch (i) {
-                            case 0: // -64
-                                adjustTransactionAmount(entry.itemKey, entry.amount, false, 64);
-                                break;
-                            case 1: // -10
-                                adjustTransactionAmount(entry.itemKey, entry.amount, false, 10);
-                                break;
-                            case 2: // -
-                                adjustTransactionAmount(entry.itemKey, entry.amount, false, 1);
-                                break;
-                            case 3: // +
-                                adjustTransactionAmount(entry.itemKey, entry.amount, true, 1);
-                                break;
-                            case 4: // +10
-                                adjustTransactionAmount(entry.itemKey, entry.amount, true, 10);
-                                break;
-                            case 5: // +64
-                                adjustTransactionAmount(entry.itemKey, entry.amount, true, 64);
-                                break;
-                        }
-
-                        playButtonSound();
-                        return true;
-                    }
+                switch (j) {
+                    case 0: adjustTransactionAmount(entry.itemKey, entry.amount, false, 64); break;
+                    case 1: adjustTransactionAmount(entry.itemKey, entry.amount, false, 10); break;
+                    case 2: adjustTransactionAmount(entry.itemKey, entry.amount, false, 1); break;
+                    case 3: adjustTransactionAmount(entry.itemKey, entry.amount, true, 1); break;
+                    case 4: adjustTransactionAmount(entry.itemKey, entry.amount, true, 10); break;
+                    case 5: adjustTransactionAmount(entry.itemKey, entry.amount, true, 64); break;
                 }
-            }
 
-            itemY += itemHeight;
+                playButtonSound();
+                return true;
+            }
         }
+
         return false;
     }
 
@@ -595,6 +714,7 @@ public class GrocerInventoryScreen extends Screen {
                 transactionAmounts.put(itemKey, 0);
             }
         }
+        transactionScrollOffset = 0;
     }
 
     private void playButtonSound() {
@@ -1046,7 +1166,7 @@ public class GrocerInventoryScreen extends Screen {
             return; // No need for scroll indicator
         }
 
-        int scrollBarX = panelX + panelWidth - 25;
+        int scrollBarX = panelX + panelWidth - 10; // Exactly between -8 and -12
         int scrollBarY = panelY + 80;
         int scrollBarHeight = panelHeight - 140;
         int scrollBarWidth = 8;
