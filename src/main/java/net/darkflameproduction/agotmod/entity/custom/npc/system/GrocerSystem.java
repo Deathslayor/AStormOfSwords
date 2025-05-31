@@ -18,6 +18,9 @@ public class GrocerSystem {
     // Digital inventory counter - maps item resource location to count
     private final Map<String, Integer> digitalInventory = new HashMap<>();
 
+    // NEW: Grocer balance tracking
+    private long grocerBalance = 0; // Balance in halfpennies
+
     // Collection tracking
     private long lastCollectionDay = -1;
     private boolean hasCollectedToday = false;
@@ -152,7 +155,7 @@ public class GrocerSystem {
         }
     }
 
-    // Add items to digital inventory with automatic cleanup
+    // Add items to digital inventory with automatic cleanup and balance tracking
     public void addToDigitalInventory(ItemStack stack) {
         if (stack.isEmpty()) {
             return;
@@ -174,7 +177,38 @@ public class GrocerSystem {
 
         if (newAmount > 0) {
             digitalInventory.put(itemKey, newAmount);
+
+            // NEW: Add 10% of item value to grocer's balance
+            if (actualAmountAdded > 0) {
+                addToGrocerBalance(itemKey, actualAmountAdded);
+            }
         }
+    }
+
+    // NEW: Method to add money to grocer's balance based on collected items
+    private void addToGrocerBalance(String itemKey, int amount) {
+        // Import the pricing from GrocerInventoryScreen
+        int itemBuyPrice = net.darkflameproduction.agotmod.gui.GrocerInventoryScreen.getItemPrice(itemKey);
+
+        if (itemBuyPrice > 0) {
+            // Add 10% of the buy value to grocer's balance
+            long valueToAdd = (long) Math.ceil((itemBuyPrice * amount) * 0.1);
+            grocerBalance += valueToAdd;
+        }
+    }
+
+    // NEW: Getter for grocer balance
+    public long getGrocerBalance() {
+        return grocerBalance;
+    }
+
+    // NEW: Method to deduct from grocer balance (for future use)
+    public boolean deductFromGrocerBalance(long amount) {
+        if (grocerBalance >= amount) {
+            grocerBalance -= amount;
+            return true;
+        }
+        return false;
     }
 
     private String getItemKey(Item item) {
@@ -334,6 +368,9 @@ public class GrocerSystem {
         compound.putBoolean("HasCollectedToday", hasCollectedToday);
         compound.putString("CurrentState", currentState.name());
 
+        // NEW: Save grocer balance
+        compound.putLong("GrocerBalance", grocerBalance);
+
         // Clean up before saving to avoid saving empty entries
         cleanupZeroQuantityItems();
 
@@ -348,6 +385,11 @@ public class GrocerSystem {
         compound.put("DigitalInventory", inventoryTag);
     }
 
+    // Add this method to GrocerSystem class
+    public void addCoinsToBalance(long amount) {
+        grocerBalance += amount;
+    }
+
     // Load method with cleanup after loading
     public void loadData(CompoundTag compound) {
         lastCollectionDay = compound.getLong("LastCollectionDay");
@@ -358,6 +400,9 @@ public class GrocerSystem {
         } catch (IllegalArgumentException e) {
             currentState = GrocerState.WAITING_FOR_COLLECTION_TIME;
         }
+
+        // NEW: Load grocer balance
+        grocerBalance = compound.getLong("GrocerBalance");
 
         // Load digital inventory
         digitalInventory.clear();

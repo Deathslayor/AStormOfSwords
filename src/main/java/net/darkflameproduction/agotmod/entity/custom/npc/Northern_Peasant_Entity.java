@@ -78,6 +78,9 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
     private static final int PEASANT_INVENTORY_SIZE = 54;
     private final SimpleContainer inventory = new SimpleContainer(PEASANT_INVENTORY_SIZE);
 
+    // Coin balance constant for compatibility
+    private static final String COIN_BALANCE_KEY = "agotmod.coin_balance";
+
     public Northern_Peasant_Entity(EntityType<? extends Northern_Peasant_Entity> entityType, Level level) {
         super(entityType, level);
         ((GroundPathNavigation)this.getNavigation()).setCanOpenDoors(true);
@@ -272,9 +275,17 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
                         List<GrocerSystem.GrocerInventoryEntry> entries = grocerSystem.getSortedInventoryEntries();
                         String grocerName = this.getDisplayName().getString();
 
-                        // Send packet to client to open GUI and populate data
-                        OpenGrocerInventoryPacket packet = new OpenGrocerInventoryPacket(grocerName, entries);
+                        // Get grocer balance
+                        long grocerBalance = grocerSystem.getGrocerBalance();
+
+                        // NEW: Get player's current balance from their persistent data
+                        long playerBalance = serverPlayer.getPersistentData().getLong(COIN_BALANCE_KEY);
+
+                        // Send packet to client to open GUI with both balances
+                        OpenGrocerInventoryPacket packet = new OpenGrocerInventoryPacket(grocerName, entries, grocerBalance, playerBalance);
                         serverPlayer.connection.send(packet);
+
+                        System.out.println("DEBUG: Sent grocer inventory packet - Grocer balance: " + grocerBalance + ", Player balance: " + playerBalance);
                     }
                     return InteractionResult.SUCCESS;
                 } else {

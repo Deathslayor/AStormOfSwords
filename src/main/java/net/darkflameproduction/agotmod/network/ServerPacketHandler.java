@@ -1,6 +1,7 @@
 package net.darkflameproduction.agotmod.network;
 
 import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
+import net.darkflameproduction.agotmod.gui.GrocerInventoryScreen;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -12,11 +13,14 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.util.Map;
 
 public class ServerPacketHandler {
+
+    private static final String COIN_BALANCE_KEY = "agotmod.coin_balance";
 
     public static void handleFinishTransaction(FinishTransactionPacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
@@ -37,11 +41,33 @@ public class ServerPacketHandler {
             }
 
             if (targetGrocer != null) {
+                // Calculate total cost
+                long totalCost = calculateTotalCost(packet.itemsToSubtract());
+
+                // Check if player has enough money
+                long playerBalance = getPlayerBalance(player);
+
+                if (playerBalance < totalCost) {
+                    player.sendSystemMessage(Component.literal("Insufficient funds! You need " + totalCost + " coins but only have " + playerBalance + "."));
+                    System.out.println("DEBUG: Transaction failed - insufficient funds. Needed: " + totalCost + ", Has: " + playerBalance);
+                    return;
+                }
+
                 boolean success = processTransactionAndSpawnItems(targetGrocer, packet.itemsToSubtract(), player, level);
 
                 if (success) {
-                    player.sendSystemMessage(Component.literal("Transaction completed successfully! Items dropped at your location."));
-                    System.out.println("DEBUG: Transaction completed for " + packet.grocerName() + " - items spawned at player location");
+                    // Deduct money from player
+                    deductPlayerBalance(player, totalCost);
+
+                    // Add money to grocer
+                    targetGrocer.getGrocerSystem().addCoinsToBalance(totalCost);
+
+                    // Send updated balance to player
+                    long newPlayerBalance = getPlayerBalance(player);
+                    PacketDistributor.sendToPlayer(player, new CoinBalancePacket(newPlayerBalance));
+
+                    player.sendSystemMessage(Component.literal("Transaction completed! Spent " + totalCost + " coins. Remaining balance: " + newPlayerBalance));
+                    System.out.println("DEBUG: Transaction completed for " + packet.grocerName() + " - Cost: " + totalCost + ", Player balance: " + newPlayerBalance);
                 } else {
                     player.sendSystemMessage(Component.literal("Transaction failed - insufficient items!"));
                     System.out.println("DEBUG: Transaction failed for " + packet.grocerName());
@@ -51,6 +77,28 @@ public class ServerPacketHandler {
                 System.out.println("DEBUG: Grocer not found: " + packet.grocerName());
             }
         });
+    }
+
+    private static long calculateTotalCost(Map<String, Integer> itemsToSubtract) {
+        long totalCost = 0;
+        for (Map.Entry<String, Integer> entry : itemsToSubtract.entrySet()) {
+            int amount = entry.getValue();
+            if (amount > 0) {
+                int itemPrice = GrocerInventoryScreen.getItemPrice(entry.getKey());
+                totalCost += (long) itemPrice * amount;
+            }
+        }
+        return totalCost;
+    }
+
+    private static long getPlayerBalance(ServerPlayer player) {
+        return player.getPersistentData().getLong(COIN_BALANCE_KEY);
+    }
+
+    private static void deductPlayerBalance(ServerPlayer player, long amount) {
+        long currentBalance = getPlayerBalance(player);
+        long newBalance = Math.max(0, currentBalance - amount);
+        player.getPersistentData().putLong(COIN_BALANCE_KEY, newBalance);
     }
 
     private static boolean processTransactionAndSpawnItems(Northern_Peasant_Entity grocer, Map<String, Integer> itemsToSubtract, ServerPlayer player, ServerLevel level) {

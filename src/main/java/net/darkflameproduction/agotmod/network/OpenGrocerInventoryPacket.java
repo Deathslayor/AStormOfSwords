@@ -9,7 +9,7 @@ import net.darkflameproduction.agotmod.entity.custom.npc.system.GrocerSystem;
 import java.util.ArrayList;
 import java.util.List;
 
-public record OpenGrocerInventoryPacket(String grocerName, List<GrocerSystem.GrocerInventoryEntry> entries) implements CustomPacketPayload {
+public record OpenGrocerInventoryPacket(String grocerName, List<GrocerSystem.GrocerInventoryEntry> entries, long grocerBalance, long playerBalance) implements CustomPacketPayload {
 
     public static final CustomPacketPayload.Type<OpenGrocerInventoryPacket> TYPE =
             new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath("agotmod", "open_grocer_inventory"));
@@ -21,6 +21,8 @@ public record OpenGrocerInventoryPacket(String grocerName, List<GrocerSystem.Gro
 
     public static void write(FriendlyByteBuf buf, OpenGrocerInventoryPacket packet) {
         buf.writeUtf(packet.grocerName);
+        buf.writeLong(packet.grocerBalance); // Write grocer balance
+        buf.writeLong(packet.playerBalance); // NEW: Write player balance
         buf.writeInt(packet.entries.size());
 
         for (GrocerSystem.GrocerInventoryEntry entry : packet.entries) {
@@ -32,6 +34,8 @@ public record OpenGrocerInventoryPacket(String grocerName, List<GrocerSystem.Gro
 
     public static OpenGrocerInventoryPacket read(FriendlyByteBuf buf) {
         String grocerName = buf.readUtf();
+        long grocerBalance = buf.readLong(); // Read grocer balance
+        long playerBalance = buf.readLong(); // NEW: Read player balance
         int size = buf.readInt();
         List<GrocerSystem.GrocerInventoryEntry> entries = new ArrayList<>();
 
@@ -42,7 +46,7 @@ public record OpenGrocerInventoryPacket(String grocerName, List<GrocerSystem.Gro
             entries.add(new GrocerSystem.GrocerInventoryEntry(displayName, amount, itemKey));
         }
 
-        return new OpenGrocerInventoryPacket(grocerName, entries);
+        return new OpenGrocerInventoryPacket(grocerName, entries, grocerBalance, playerBalance);
     }
 
     @Override
