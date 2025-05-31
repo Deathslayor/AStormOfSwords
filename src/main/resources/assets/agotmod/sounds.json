@@ -77,7 +77,7 @@
     ]
   },
   "button": {
-    "category": "block",
+    "category": "item",
     "subtitles": "sounds.agotmod:button",
     "sounds": [
       "agotmod:button"
@@ -88,6 +88,13 @@
     "subtitles": "sounds.agotmod:page",
     "sounds": [
       "agotmod:page"
+    ]
+  },
+  "money": {
+    "category": "block",
+    "subtitles": "sounds.agotmod:money",
+    "sounds": [
+      "agotmod:money"
     ]
   },
   "forest_wind": {

@@ -201,8 +201,6 @@ public class GrocerInventoryScreen extends Screen {
         FinishTransactionPacket packet = new FinishTransactionPacket(grocerName, itemsToSubtract);
         net.neoforged.neoforge.network.PacketDistributor.sendToServer(packet);
 
-        System.out.println("DEBUG: Sent transaction packet for " + grocerName);
-        System.out.println("DEBUG: Items to subtract: " + itemsToSubtract);
 
         // Close the screen
         this.onClose();
@@ -371,8 +369,6 @@ public class GrocerInventoryScreen extends Screen {
 
         // Set as current instance for packet handling
         currentInstance = this;
-
-        System.out.println("DEBUG: Created GrocerInventoryScreen for " + grocerName + " (client-side)");
     }
 
     // Method to check if an item is allowed to be stored by the grocer
@@ -418,15 +414,12 @@ public class GrocerInventoryScreen extends Screen {
     // Static method for packet handler to update inventory data
     public static void updateInventoryData(String grocerName, List<GrocerSystem.GrocerInventoryEntry> entries) {
         if (currentInstance != null && currentInstance.grocerName.equals(grocerName)) {
-            System.out.println("DEBUG: Updating inventory data with " + entries.size() + " entries");
-
             // Filter entries to only include allowed items
             List<GrocerSystem.GrocerInventoryEntry> filteredEntries = new ArrayList<>();
             for (GrocerSystem.GrocerInventoryEntry entry : entries) {
                 if (isItemAllowed(entry.itemKey)) {
                     filteredEntries.add(entry);
                 } else {
-                    System.out.println("DEBUG: Filtered out disallowed item: " + entry.itemKey);
                 }
             }
 
@@ -436,7 +429,6 @@ public class GrocerInventoryScreen extends Screen {
             currentInstance.transactionScrollOffset = 0; // Reset transaction scroll too
             currentInstance.selectedEntryIndices.clear();
         } else {
-            System.out.println("DEBUG: No matching screen instance found for grocer: " + grocerName);
         }
     }
 

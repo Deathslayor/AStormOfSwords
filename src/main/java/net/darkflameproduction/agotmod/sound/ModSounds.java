@@ -27,6 +27,7 @@ public class ModSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> FOREST_WIND = registerSoundEvents("forest_wind");
     public static final DeferredHolder<SoundEvent, SoundEvent> BUTTON = registerSoundEvents("button");
     public static final DeferredHolder<SoundEvent, SoundEvent> PAGE = registerSoundEvents("page");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MONEY = registerSoundEvents("money");
     public static final DeferredHolder<SoundEvent, SoundEvent> NPC_DEATH = registerSoundEvents("npc_death");
     public static final DeferredHolder<SoundEvent, SoundEvent> NPC_HURT = registerSoundEvents("npc_hurt_1");
     public static final DeferredHolder<SoundEvent, SoundEvent> NPC_COUGH = registerSoundEvents("npc_cough_1");

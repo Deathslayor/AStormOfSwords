@@ -31,6 +31,7 @@ import net.darkflameproduction.agotmod.armor.custom.wildling.WildlingFurArmorIte
 import net.darkflameproduction.agotmod.armor.custom.wildling.WildlingLeatherArmorItem;
 import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.darkflameproduction.agotmod.entity.ModEntities;
+import net.darkflameproduction.agotmod.item.custom.CoinItem;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.equipment.ArmorType;
@@ -380,22 +381,31 @@ public class ModItems {
     public static final DeferredItem<NightsWatchEliteArmorItem> NIGHT_WATCH_ELITE_BOOTS = ITEMS.registerItem("night_watch_elite_boots",
             properties -> new NightsWatchEliteArmorItem(ModArmorMaterials.CHIEF, ArmorType.BOOTS, properties));
     // ---------------------------(COINS)--------------------------- //
-    public static final DeferredItem<Item> COPPER_STAR = ITEMS.registerItem("copper_star",
-            Item::new);
-    public static final DeferredItem<Item> COPPER_GROAT = ITEMS.registerItem("copper_groat",
-            Item::new);
-    public static final DeferredItem<Item> COPPER_HALFPENNY = ITEMS.registerItem("copper_halfpenny",
-            Item::new);
-    public static final DeferredItem<Item> COPPER_PENNY = ITEMS.registerItem("copper_penny",
-            Item::new);
     public static final DeferredItem<Item> GOLD_DRAGON = ITEMS.registerItem("gold_dragon",
-            Item::new);
+            properties -> new CoinItem(properties, 23520L)); // 1 dragon = 23520 halfpennies
+
+    // Silver coins
     public static final DeferredItem<Item> SILVER_MOON = ITEMS.registerItem("silver_moon",
-            Item::new);
+            properties -> new CoinItem(properties, 784L)); // 1 moon = 784 halfpennies
+
     public static final DeferredItem<Item> SILVER_STAG = ITEMS.registerItem("silver_stag",
-            Item::new);
+            properties -> new CoinItem(properties, 112L)); // 1 stag = 112 halfpennies
+
+    // Copper coins
+    public static final DeferredItem<Item> COPPER_STAR = ITEMS.registerItem("copper_star",
+            properties -> new CoinItem(properties, 16L)); // 1 star = 16 halfpennies
+
+    public static final DeferredItem<Item> COPPER_GROAT = ITEMS.registerItem("copper_groat",
+            properties -> new CoinItem(properties, 8L)); // 1 groat = 8 halfpennies
+
     public static final DeferredItem<Item> COPPER_HALFGROAT = ITEMS.registerItem("copper_halfgroat",
-            Item::new);
+            properties -> new CoinItem(properties, 4L)); // 1 halfgroat = 4 halfpennies
+
+    public static final DeferredItem<Item> COPPER_PENNY = ITEMS.registerItem("copper_penny",
+            properties -> new CoinItem(properties, 2L)); // 1 penny = 2 halfpennies
+
+    public static final DeferredItem<Item> COPPER_HALFPENNY = ITEMS.registerItem("copper_halfpenny",
+            properties -> new CoinItem(properties, 1L));
 
     // ---------------------------(INGOTS/NUGGETS)--------------------------- //
     // TIN INGOT

@@ -19,6 +19,13 @@ public class ModNetworking {
                 ClientPacketHandler::handleOpenGrocerInventory
         );
 
+        // Register coin balance packet (server -> client)
+        registrar.playToClient(
+                CoinBalancePacket.TYPE,
+                CoinBalancePacket.STREAM_CODEC,
+                ClientCoinHandler::handleCoinBalanceUpdate
+        );
+
         // Register server-bound packets (client -> server)
         registrar.playToServer(
                 FinishTransactionPacket.TYPE,

@@ -2,6 +2,7 @@ package net.darkflameproduction.agotmod;
 
 import dev.tocraft.ctgen.impl.CTGClient;
 import net.darkflameproduction.agotmod.client.ClientKeyInputEvents;
+import net.darkflameproduction.agotmod.client.ModAttachments;
 import net.darkflameproduction.agotmod.datagen.ModDimensionProvider;
 import net.darkflameproduction.agotmod.gui.CustomGuiScreen;
 import net.darkflameproduction.agotmod.network.ClientPacketHandler;
@@ -74,7 +75,7 @@ public class AGoTMod {
         ModTerrablender.registerBiomes();
         ModEntities.register(modEventBus);
         LOGGER.info("AGOT Mod initialized");
-
+        ModAttachments.ATTACHMENT_TYPES.register(modEventBus); // Add this line
         if (FMLEnvironment.dist == Dist.CLIENT) {
             registerClientEvents();
         }

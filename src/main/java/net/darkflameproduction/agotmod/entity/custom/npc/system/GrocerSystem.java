@@ -135,13 +135,11 @@ public class GrocerSystem {
             return;
         }
 
-        System.out.println("DEBUG: Collecting from barrel at " + barrelPos);
 
         for (int slot = 0; slot < container.getContainerSize(); slot++) {
             ItemStack stack = container.getItem(slot);
 
             if (!stack.isEmpty()) {
-                System.out.println("DEBUG: Found item: " + stack.getHoverName().getString() + " x" + stack.getCount());
                 addToDigitalInventory(stack);
                 container.setItem(slot, ItemStack.EMPTY);
             }
@@ -234,30 +232,25 @@ public class GrocerSystem {
         }
     }
 
-    // Test method for debugging
     public void testDigitalInventory() {
-        System.out.println("DEBUG: Testing digital inventory for " + peasant.getDisplayName().getString());
 
         // Add some test items
         ItemStack testItem1 = new ItemStack(net.minecraft.world.item.Items.WHEAT, 64);
         ItemStack testItem2 = new ItemStack(net.minecraft.world.item.Items.CARROT, 32);
         ItemStack testItem3 = new ItemStack(net.minecraft.world.item.Items.POTATO, 16);
 
-        System.out.println("DEBUG: Adding test items to digital inventory...");
         addToDigitalInventory(testItem1);
         addToDigitalInventory(testItem2);
         addToDigitalInventory(testItem3);
 
         // Check if items were added
         Map<String, Integer> inventory = getDigitalInventory();
-        System.out.println("DEBUG: Digital inventory now has " + inventory.size() + " different items:");
         for (Map.Entry<String, Integer> entry : inventory.entrySet()) {
             System.out.println("  " + entry.getKey() + ": " + entry.getValue());
         }
 
         // Test the sorted entries method
         List<GrocerInventoryEntry> entries = getSortedInventoryEntries();
-        System.out.println("DEBUG: getSortedInventoryEntries() returns " + entries.size() + " entries:");
         for (GrocerInventoryEntry entry : entries) {
             System.out.println("  " + entry.displayName + " x" + entry.amount);
         }
@@ -271,10 +264,8 @@ public class GrocerSystem {
             if (newAmount <= 0) {
                 // Remove the item completely if quantity becomes 0 or negative
                 digitalInventory.remove(itemKey);
-                System.out.println("DEBUG: Removed " + itemKey + " from inventory (quantity reached 0)");
             } else {
                 digitalInventory.put(itemKey, newAmount);
-                System.out.println("DEBUG: Reduced " + itemKey + " quantity to " + newAmount);
             }
             return true;
         }
@@ -286,10 +277,8 @@ public class GrocerSystem {
         if (amount <= 0) {
             // Remove the item if setting to 0 or negative
             digitalInventory.remove(itemKey);
-            System.out.println("DEBUG: Removed " + itemKey + " from inventory (set to " + amount + ")");
         } else {
             digitalInventory.put(itemKey, amount);
-            System.out.println("DEBUG: Set " + itemKey + " quantity to " + amount);
         }
     }
 
@@ -303,8 +292,6 @@ public class GrocerSystem {
         // Clean up items with 0 or negative quantities
         cleanupZeroQuantityItems();
 
-        System.out.println("DEBUG: Refreshing inventory display for " + peasant.getDisplayName().getString());
-        System.out.println("DEBUG: Current inventory has " + digitalInventory.size() + " different item types");
     }
 
     // Removes items with 0 or negative quantities from the digital inventory
@@ -314,7 +301,6 @@ public class GrocerSystem {
         int finalSize = digitalInventory.size();
 
         if (finalSize < initialSize) {
-            System.out.println("DEBUG: Cleaned up " + (initialSize - finalSize) + " empty item entries from inventory");
         }
     }
 
@@ -353,12 +339,10 @@ public class GrocerSystem {
 
         // Save digital inventory
         CompoundTag inventoryTag = new CompoundTag();
-        System.out.println("DEBUG: Saving digital inventory with " + digitalInventory.size() + " entries");
         for (Map.Entry<String, Integer> entry : digitalInventory.entrySet()) {
             // Only save entries with positive quantities (double safety check)
             if (entry.getValue() > 0) {
                 inventoryTag.putInt(entry.getKey(), entry.getValue());
-                System.out.println("DEBUG: Saved: " + entry.getKey() + " = " + entry.getValue());
             }
         }
         compound.put("DigitalInventory", inventoryTag);
@@ -379,24 +363,19 @@ public class GrocerSystem {
         digitalInventory.clear();
         if (compound.contains("DigitalInventory")) {
             CompoundTag inventoryTag = compound.getCompound("DigitalInventory");
-            System.out.println("DEBUG: Loading digital inventory with " + inventoryTag.getAllKeys().size() + " entries");
             for (String key : inventoryTag.getAllKeys()) {
                 int value = inventoryTag.getInt(key);
                 // Only load entries with positive quantities
                 if (value > 0) {
                     digitalInventory.put(key, value);
-                    System.out.println("DEBUG: Loaded: " + key + " = " + value);
                 } else {
-                    System.out.println("DEBUG: Skipped loading " + key + " with invalid quantity: " + value);
                 }
             }
         } else {
-            System.out.println("DEBUG: No digital inventory data found in save");
         }
 
         // Cleanup any potential issues after loading
         cleanupZeroQuantityItems();
 
-        System.out.println("DEBUG: Final loaded inventory size: " + digitalInventory.size());
     }
 }
