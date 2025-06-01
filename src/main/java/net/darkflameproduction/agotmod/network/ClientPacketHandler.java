@@ -5,10 +5,13 @@ import net.darkflameproduction.agotmod.entity.custom.npc.system.GrocerSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.network.chat.Component;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.util.Map;
 
+@OnlyIn(Dist.CLIENT) // ADD THIS ANNOTATION - This is the key fix!
 public class ClientPacketHandler {
 
     public static void handleCoinBalance(CoinBalancePacket packet, IPayloadContext context) {
