@@ -225,6 +225,8 @@ public class SleepSystem {
     }
 
     private void onWakeUp() {
+        System.out.println("DEBUG [" + peasant.getDisplayName().getString() + "] onWakeUp() called in SleepSystem");
+
         if (!peasant.getHungerSystem().hasEnoughFood()) {
             peasant.setNeedsFoodCollection(true);
         }
@@ -239,10 +241,15 @@ public class SleepSystem {
 
         // FIXED: Reset grocer collection state when waking up
         if (peasant.getJobType().equals(JobSystem.JOB_GROCER)) {
-            // Use the grocer collection goal reference from the peasant
+            // Reset both goal and system state
             if (peasant.getGrocerCollectionGoal() != null) {
                 peasant.getGrocerCollectionGoal().resetDailyStateAfterSleep();
+                System.out.println("  - Goal daily state reset");
             }
+
+            // SYNCHRONIZED: Also reset grocer system state
+            peasant.getGrocerSystem().onWakeUp();
+            System.out.println("  - Grocer system state reset");
         }
     }
 

@@ -62,98 +62,87 @@ public class GrocerSystem {
         long currentTime = peasant.level().getDayTime() % 24000;
         long currentDay = peasant.level().getDayTime() / 24000;
 
+        // DEBUG: Add detailed day tracking
+        if (peasant.tickCount % 100 == 0) { // Every 5 seconds
+            System.out.println("DEBUG [" + peasant.getDisplayName().getString() + "] Day Tracking:");
+            System.out.println("  - Full DayTime: " + peasant.level().getDayTime());
+            System.out.println("  - Current Day: " + currentDay);
+            System.out.println("  - Last Collection Day: " + lastCollectionDay);
+            System.out.println("  - Should Reset: " + (currentDay > lastCollectionDay));
+        }
+
         // Reset daily collection status
         if (currentDay > lastCollectionDay) {
+            System.out.println("DEBUG [" + peasant.getDisplayName().getString() + "] NEW DAY RESET in GrocerSystem");
+            System.out.println("  - Old state: " + currentState + ", hasCollected: " + hasCollectedToday);
+
             hasCollectedToday = false;
             currentState = GrocerState.WAITING_FOR_COLLECTION_TIME;
             lastCollectionDay = currentDay;
-        }
 
-        // Check if it's collection time and we haven't collected today
-        if (currentTime >= COLLECTION_TIME && !hasCollectedToday) {
-            if (currentState == GrocerState.WAITING_FOR_COLLECTION_TIME) {
-                startCollection();
+            System.out.println("  - New state: " + currentState + ", hasCollected: " + hasCollectedToday);
+
+            // SYNCHRONIZED: Also reset the goal's daily state
+            if (peasant.getGrocerCollectionGoal() != null) {
+                peasant.getGrocerCollectionGoal().resetDailyStateAfterSleep();
+                System.out.println("  - Goal daily state also reset");
             }
         }
-    }
 
-    private void startCollection() {
-        currentState = GrocerState.COLLECTING_FROM_BARRELS;
+        // SYNCHRONIZED: State machine that works with the goal
+        switch (currentState) {
+            case WAITING_FOR_COLLECTION_TIME:
+                // Wait until collection time
+                if (currentTime >= COLLECTION_TIME && !hasCollectedToday) {
+                    currentState = GrocerState.COLLECTING_FROM_BARRELS;
+                    // Don't auto-collect here - let the goal handle it
+                }
+                break;
 
-        // Find all farm barrels within radius
-        List<BlockPos> farmBarrels = findFarmBarrels();
+            case COLLECTING_FROM_BARRELS:
+                // Goal is handling the collection, just monitor
+                // If goal has collected enough or we're done, transition to complete
+                if (hasCollectedToday) {
+                    currentState = GrocerState.COLLECTION_COMPLETE;
+                }
 
-        if (farmBarrels.isEmpty()) {
-            currentState = GrocerState.COLLECTION_COMPLETE;
-            hasCollectedToday = true;
-            return;
-        }
+                // FIXED: If we're not in collection time anymore and goal isn't running,
+                // it means the goal finished without finding barrels
+                if (currentTime < COLLECTION_TIME && peasant.getGrocerCollectionGoal() != null) {
+                    boolean goalRunning = peasant.goalSelector.getAvailableGoals().stream().anyMatch(goal ->
+                            goal.isRunning() && goal.getGoal() instanceof net.darkflameproduction.agotmod.entity.custom.npc.goals.GrocerCollectionGoal);
 
-        // Limit to maximum barrels per day
-        int barrelsToCollect = Math.min(farmBarrels.size(), MAX_BARRELS_PER_DAY);
-
-        // Collect from barrels
-        for (int i = 0; i < barrelsToCollect; i++) {
-            collectFromBarrel(farmBarrels.get(i));
-        }
-
-        // Clean up inventory after collection
-        cleanupZeroQuantityItems();
-
-        currentState = GrocerState.COLLECTION_COMPLETE;
-        hasCollectedToday = true;
-    }
-
-    private List<BlockPos> findFarmBarrels() {
-        List<BlockPos> farmBarrels = new ArrayList<>();
-        BlockPos grocerPos = peasant.blockPosition();
-
-        // Search in a area around the grocer using the COLLECTION_RADIUS constant
-        for (int x = -COLLECTION_RADIUS; x <= COLLECTION_RADIUS; x++) {
-            for (int y = -16; y <= 16; y++) { // Keep reasonable Y range
-                for (int z = -COLLECTION_RADIUS; z <= COLLECTION_RADIUS; z++) {
-                    BlockPos checkPos = grocerPos.offset(x, y, z);
-
-                    // Check if it's within the grocer's home area
-                    if (!peasant.isWithinHomeArea(checkPos)) {
-                        continue;
-                    }
-
-                    // Check if it's a FARMER_BARREL (your modded barrel)
-                    if (peasant.level().getBlockState(checkPos).getBlock() ==
-                            ModBLocks.FARMER_BARREL.get()) {
-                        farmBarrels.add(checkPos);
+                    if (!goalRunning) {
+                        // Goal stopped running and we're past collection time - must be done
+                        hasCollectedToday = true;
+                        currentState = GrocerState.COLLECTION_COMPLETE;
                     }
                 }
-            }
-        }
 
-        return farmBarrels;
-    }
+                // ADDITIONAL SAFETY: If it's been too long in collecting state, force completion
+                // This prevents grocers from getting permanently stuck
+                long timeSinceCollectionStart = currentTime - COLLECTION_TIME;
+                if (timeSinceCollectionStart > 6000) { // 5 minutes after collection time
+                    hasCollectedToday = true;
+                    currentState = GrocerState.COLLECTION_COMPLETE;
+                }
+                break;
 
-    private void collectFromBarrel(BlockPos barrelPos) {
-        BlockEntity blockEntity = peasant.level().getBlockEntity(barrelPos);
-
-        if (!(blockEntity instanceof net.minecraft.world.Container container)) {
-            return;
-        }
-
-
-        for (int slot = 0; slot < container.getContainerSize(); slot++) {
-            ItemStack stack = container.getItem(slot);
-
-            if (!stack.isEmpty()) {
-                addToDigitalInventory(stack);
-                container.setItem(slot, ItemStack.EMPTY);
-            }
-        }
-
-        if (blockEntity instanceof net.minecraft.world.level.block.entity.BaseContainerBlockEntity baseContainer) {
-            baseContainer.setChanged();
-        } else {
-            blockEntity.setChanged();
+            case COLLECTION_COMPLETE:
+                // Stay complete until next day
+                break;
         }
     }
+
+    // SYNCHRONIZED: Method for goal to call when it finishes collecting
+    public void markCollectionComplete() {
+        hasCollectedToday = true;
+        currentState = GrocerState.COLLECTION_COMPLETE;
+    }
+
+    // REMOVED: startCollection() - now handled by goal
+    // REMOVED: findFarmBarrels() - now handled by goal
+    // REMOVED: collectFromBarrel() - now handled by goal
 
     // Add items to digital inventory with automatic cleanup and balance tracking
     public void addToDigitalInventory(ItemStack stack) {
@@ -354,6 +343,23 @@ public class GrocerSystem {
     public GrocerState getCurrentState() { return currentState; }
     public boolean hasCollectedToday() { return hasCollectedToday; }
     public long getLastCollectionDay() { return lastCollectionDay; }
+
+    // SYNCHRONIZED: Method for sleep system to call when NPC wakes up
+    public void onWakeUp() {
+        long currentDay = peasant.level().getDayTime() / 24000;
+
+        System.out.println("DEBUG [" + peasant.getDisplayName().getString() + "] onWakeUp() called in GrocerSystem");
+        System.out.println("  - Current Day: " + currentDay);
+        System.out.println("  - Last Collection Day: " + lastCollectionDay);
+        System.out.println("  - Old state: " + currentState + ", hasCollected: " + hasCollectedToday);
+
+        // Force reset regardless of day calculation, since wake up = new day
+        hasCollectedToday = false;
+        currentState = GrocerState.WAITING_FOR_COLLECTION_TIME;
+        lastCollectionDay = currentDay;
+
+        System.out.println("  - New state: " + currentState + ", hasCollected: " + hasCollectedToday);
+    }
 
     // Called when NPC is removed from world
     public void onRemove() {

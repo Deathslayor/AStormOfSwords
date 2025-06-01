@@ -24,9 +24,14 @@ public class JobSystem {
     private static final int FARMER_WORK_RADIUS_Z = 40;
     private static final int FARMER_WORK_RADIUS_Y = 16;
 
-    private static final int GROCER_WORK_RADIUS_X = 128;
-    private static final int GROCER_WORK_RADIUS_Z = 128;
-    private static final int GROCER_WORK_RADIUS_Y = 32;
+    // Grocer work area constants - now split into collection and idle areas
+    private static final int GROCER_COLLECTION_RADIUS_X = 128;
+    private static final int GROCER_COLLECTION_RADIUS_Z = 128;
+    private static final int GROCER_COLLECTION_RADIUS_Y = 32;
+
+    private static final int GROCER_IDLE_RADIUS_X = 5;
+    private static final int GROCER_IDLE_RADIUS_Z = 5;
+    private static final int GROCER_IDLE_RADIUS_Y = 16;
 
     // Job block reservations - static maps to track which blocks are taken
     private static final Map<BlockPos, UUID> jobBlockReservations = new HashMap<>();
@@ -153,6 +158,101 @@ public class JobSystem {
         peasant.getEntityData().set(peasant.getJobBlockPosAccessor(), Optional.ofNullable(pos));
     }
 
+    // NEW: Method to check if grocer is currently collecting
+    private boolean isGrocerCurrentlyCollecting() {
+        if (!getJobType().equals(JOB_GROCER)) {
+            return false;
+        }
+
+        // DEBUG: Add extensive logging every 10 seconds
+        if (peasant.tickCount % 200 == 0) {
+            String peasantName = peasant.getDisplayName().getString();
+            GrocerSystem.GrocerState grocerState = peasant.getGrocerSystem().getCurrentState();
+            boolean hasCollectedToday = peasant.getGrocerSystem().hasCollectedToday();
+            long currentTime = peasant.level().getDayTime() % 24000;
+            boolean isCollectionTime = currentTime >= 4000;
+
+            boolean goalCanUse = false;
+            boolean goalCanContinue = false;
+            int barrelsVisited = 0;
+            int searchAttempts = 0;
+
+            if (peasant.getGrocerCollectionGoal() != null) {
+                goalCanUse = peasant.getGrocerCollectionGoal().canUse();
+                goalCanContinue = peasant.getGrocerCollectionGoal().canContinueToUse();
+                barrelsVisited = peasant.getGrocerCollectionGoal().getBarrelsCollectedToday();
+                searchAttempts = peasant.getGrocerCollectionGoal().getSearchAttempts();
+            }
+
+            System.out.println("DEBUG [" + peasantName + "] Grocer Collection Status:");
+            System.out.println("  - Grocer State: " + grocerState);
+            System.out.println("  - Has Collected Today: " + hasCollectedToday);
+            System.out.println("  - Current Time: " + currentTime + " (Collection Time: " + isCollectionTime + ")");
+            System.out.println("  - Goal canUse: " + goalCanUse);
+            System.out.println("  - Goal canContinue: " + goalCanContinue);
+            System.out.println("  - Barrels Visited: " + barrelsVisited + "/10");
+            System.out.println("  - Search Attempts: " + searchAttempts + "/3");
+
+            // STRICT: Only allow collection during proper conditions
+            // 1. Must be actively collecting according to grocer system
+            if (grocerState == GrocerSystem.GrocerState.COLLECTING_FROM_BARRELS) {
+                System.out.println("  - RESULT: TRUE (Grocer State = COLLECTING)");
+                return true;
+            }
+
+            // 2. Must be collection time AND haven't collected today AND goal wants to start
+            if (isCollectionTime && !hasCollectedToday && goalCanUse) {
+                System.out.println("  - RESULT: TRUE (Valid collection start conditions)");
+                return true;
+            }
+
+            // If they've finished collecting for the day, they should be idle
+            if (hasCollectedToday) {
+                System.out.println("  - RESULT: FALSE (Already collected today)");
+                return false;
+            }
+
+            // If it's not collection time yet, they should be idle
+            if (!isCollectionTime) {
+                System.out.println("  - RESULT: FALSE (Not collection time yet)");
+                return false;
+            }
+
+            System.out.println("  - RESULT: FALSE (Default - not collecting)");
+            return false;
+        } else {
+            // Non-debug execution (same logic without logging)
+            GrocerSystem.GrocerState grocerState = peasant.getGrocerSystem().getCurrentState();
+            boolean hasCollectedToday = peasant.getGrocerSystem().hasCollectedToday();
+            long currentTime = peasant.level().getDayTime() % 24000;
+            boolean isCollectionTime = currentTime >= 4000;
+
+            boolean goalCanUse = false;
+            if (peasant.getGrocerCollectionGoal() != null) {
+                goalCanUse = peasant.getGrocerCollectionGoal().canUse();
+            }
+
+            // Same logic as debug version
+            if (grocerState == GrocerSystem.GrocerState.COLLECTING_FROM_BARRELS) {
+                return true;
+            }
+
+            if (isCollectionTime && !hasCollectedToday && goalCanUse) {
+                return true;
+            }
+
+            if (hasCollectedToday) {
+                return false;
+            }
+
+            if (!isCollectionTime) {
+                return false;
+            }
+
+            return false;
+        }
+    }
+
     public boolean isWithinWorkArea(BlockPos pos) {
         if (!hasJob() || getJobBlockPos() == null) {
             return true; // No job or job block, can go anywhere within home area
@@ -167,7 +267,14 @@ public class JobSystem {
         if (getJobType().equals(JOB_FARMER)) {
             return deltaX <= FARMER_WORK_RADIUS_X && deltaZ <= FARMER_WORK_RADIUS_Z && deltaY <= FARMER_WORK_RADIUS_Y;
         } else if (getJobType().equals(JOB_GROCER)) {
-            return deltaX <= GROCER_WORK_RADIUS_X && deltaZ <= GROCER_WORK_RADIUS_Z && deltaY <= GROCER_WORK_RADIUS_Y;
+            // NEW: Dynamic work area for grocers based on collection status
+            if (isGrocerCurrentlyCollecting()) {
+                // Large area when collecting
+                return deltaX <= GROCER_COLLECTION_RADIUS_X && deltaZ <= GROCER_COLLECTION_RADIUS_Z && deltaY <= GROCER_COLLECTION_RADIUS_Y;
+            } else {
+                // Small area when idle
+                return deltaX <= GROCER_IDLE_RADIUS_X && deltaZ <= GROCER_IDLE_RADIUS_Z && deltaY <= GROCER_IDLE_RADIUS_Y;
+            }
         }
 
         return true; // Default: no restrictions for unknown job types
@@ -201,11 +308,16 @@ public class JobSystem {
         BlockPos currentPos = peasant.blockPosition();
         double distanceSquared = jobBlockPos.distSqr(currentPos);
 
-        // Return to work if too far (based on job type)
+        // Return to work if too far (based on job type and collection status)
         if (getJobType().equals(JOB_FARMER)) {
             return distanceSquared > ((FARMER_WORK_RADIUS_X + 10) * (FARMER_WORK_RADIUS_X + 10));
         } else if (getJobType().equals(JOB_GROCER)) {
-            return distanceSquared > ((GROCER_WORK_RADIUS_X + 10) * (GROCER_WORK_RADIUS_X + 10));
+            // NEW: Dynamic distance check for grocers
+            if (isGrocerCurrentlyCollecting()) {
+                return distanceSquared > ((GROCER_COLLECTION_RADIUS_X + 10) * (GROCER_COLLECTION_RADIUS_X + 10));
+            } else {
+                return distanceSquared > ((GROCER_IDLE_RADIUS_X + 10) * (GROCER_IDLE_RADIUS_X + 10));
+            }
         }
 
         return false;
