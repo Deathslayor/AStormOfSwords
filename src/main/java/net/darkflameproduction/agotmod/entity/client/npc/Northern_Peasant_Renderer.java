@@ -8,6 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.ZombieRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
@@ -283,81 +284,5 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
         );
 
         poseStack.popPose();
-    }
-
-    // ========== UTILITY METHODS FOR DEBUGGING ==========
-
-    public ResourceLocation getBodyTexture(Northern_Peasant_Entity entity) {
-        long bits = entity.getUUID().getLeastSignificantBits();
-        int variant = (int)(Math.abs(bits) % BODY_VARIANTS);
-        return BODY_TEXTURES[variant];
-    }
-
-    public ResourceLocation getEyesTexture(Northern_Peasant_Entity entity) {
-        long bits = entity.getUUID().getLeastSignificantBits();
-        int variant = (int)((Math.abs(bits) >>> 8) % EYES_VARIANTS);
-        return EYES_TEXTURES[variant];
-    }
-
-    public ResourceLocation getLegsTexture(Northern_Peasant_Entity entity) {
-        long bits = entity.getUUID().getLeastSignificantBits();
-        int variant = (int)((Math.abs(bits) >>> 16) % LEGS_VARIANTS);
-        return LEGS_TEXTURES[variant];
-    }
-
-    public ResourceLocation getShirtTexture(Northern_Peasant_Entity entity) {
-        long bits = entity.getUUID().getLeastSignificantBits();
-        int variant = (int)((Math.abs(bits) >>> 24) % SHIRT_VARIANTS);
-        return SHIRT_TEXTURES[variant];
-    }
-
-    public ResourceLocation getHairTexture(Northern_Peasant_Entity entity) {
-        long bits = entity.getUUID().getLeastSignificantBits();
-        int variant = (int)((Math.abs(bits) >>> 32) % HAIR_VARIANTS);
-        return HAIR_TEXTURES[variant];
-    }
-
-    public ResourceLocation getBootsTexture(Northern_Peasant_Entity entity) {
-        long bits = entity.getUUID().getLeastSignificantBits();
-        int variant = (int)((Math.abs(bits) >>> 40) % BOOTS_VARIANTS);
-        return BOOTS_TEXTURES[variant];
-    }
-
-    public ResourceLocation getTunicTexture(Northern_Peasant_Entity entity) {
-        long bits = entity.getUUID().getLeastSignificantBits();
-        int variant = (int)((Math.abs(bits) >>> 48) % TUNIC_VARIANTS);
-        return TUNIC_TEXTURES[variant];
-    }
-
-    public ResourceLocation getHoodTexture(Northern_Peasant_Entity entity) {
-        long bits = entity.getUUID().getLeastSignificantBits();
-        int variant = (int)((Math.abs(bits) >>> 56) % HOOD_VARIANTS);
-        return HOOD_TEXTURES[variant];
-    }
-
-    // ========== COLOR UTILITY METHODS ==========
-
-    public int getEyesColor(Northern_Peasant_Entity entity) {
-        return getPresetColor(entity, EYES_COLORS, 1);
-    }
-
-    public int getLegsColor(Northern_Peasant_Entity entity) {
-        return getPresetColor(entity, PANTS_COLORS, 2);
-    }
-
-    public int getShirtColor(Northern_Peasant_Entity entity) {
-        return getPresetColor(entity, SHIRT_COLORS, 3);
-    }
-
-    public int getHairColor(Northern_Peasant_Entity entity) {
-        return getPresetColor(entity, HAIR_COLORS, 4);
-    }
-
-    public int getTunicColor(Northern_Peasant_Entity entity) {
-        return getPresetColor(entity, TUNIC_HOOD_COLORS, 5);
-    }
-
-    public int getHoodColor(Northern_Peasant_Entity entity) {
-        return getPresetColor(entity, TUNIC_HOOD_COLORS, 6);
     }
 }
