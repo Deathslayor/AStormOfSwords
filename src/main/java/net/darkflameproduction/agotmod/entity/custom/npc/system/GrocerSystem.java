@@ -177,7 +177,7 @@ public class GrocerSystem {
     // NEW: Method to add money to grocer's balance based on collected items
     private void addToGrocerBalance(String itemKey, int amount) {
         // Import the pricing from GrocerInventoryScreen
-        int itemBuyPrice = net.darkflameproduction.agotmod.gui.GrocerInventoryScreen.getItemPrice(itemKey);
+        int itemBuyPrice = net.darkflameproduction.agotmod.util.ItemPricing.getItemPrice(itemKey);
 
         if (itemBuyPrice > 0) {
             // Add 10% of the buy value to grocer's balance

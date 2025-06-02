@@ -51,18 +51,6 @@ public record FinishTransactionPacket(String grocerName, Map<String, Integer> it
         return itemsToSubtract;
     }
 
-    // In your FinishTransactionPacket class, add this method to calculate total cost:
-    public int calculateTotalCost() {
-        int totalCost = 0;
-        for (Map.Entry<String, Integer> entry : itemsToSubtract.entrySet()) {
-            int amount = entry.getValue();
-            if (amount > 0) {
-                int itemPrice = net.darkflameproduction.agotmod.gui.GrocerInventoryScreen.getItemPrice(entry.getKey());
-                totalCost += itemPrice * amount;
-            }
-        }
-        return totalCost;
-    }
 
     @Override
     public Type<? extends CustomPacketPayload> type() {

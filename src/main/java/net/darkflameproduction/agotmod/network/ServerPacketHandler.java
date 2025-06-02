@@ -84,7 +84,7 @@ public class ServerPacketHandler {
         for (Map.Entry<String, Integer> entry : itemsToSubtract.entrySet()) {
             int amount = entry.getValue();
             if (amount > 0) {
-                int itemPrice = GrocerInventoryScreen.getItemPrice(entry.getKey());
+                int itemPrice = net.darkflameproduction.agotmod.util.ItemPricing.getItemSellPrice(entry.getKey());
                 totalCost += (long) itemPrice * amount;
             }
         }
