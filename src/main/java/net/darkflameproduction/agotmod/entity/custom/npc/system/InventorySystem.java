@@ -372,31 +372,31 @@ public class InventorySystem {
         // Save regular inventory
         peasant.writeInventoryToTag(compound, registryAccess);
 
-        // Save hand items (like LivingEntity does)
-        ListTag handItemsList = new ListTag();
+        // Save hand items in custom format
+        ListTag customHandItemsList = new ListTag();
         for (int i = 0; i < handItems.size(); i++) {
             CompoundTag itemTag = new CompoundTag();
             itemTag.putByte("Slot", (byte) i);
             if (!handItems.get(i).isEmpty()) {
                 handItems.get(i).save(registryAccess, itemTag);
             }
-            handItemsList.add(itemTag);
+            customHandItemsList.add(itemTag);
         }
-        compound.put("HandItems", handItemsList);
+        compound.put("CustomHandItems", customHandItemsList);
 
-        // Save armor items (like LivingEntity does)
-        ListTag armorItemsList = new ListTag();
+        // Save armor items in custom format
+        ListTag customArmorItemsList = new ListTag();
         for (int i = 0; i < armorItems.size(); i++) {
             CompoundTag itemTag = new CompoundTag();
             itemTag.putByte("Slot", (byte) i);
             if (!armorItems.get(i).isEmpty()) {
                 armorItems.get(i).save(registryAccess, itemTag);
             }
-            armorItemsList.add(itemTag);
+            customArmorItemsList.add(itemTag);
         }
-        compound.put("ArmorItems", armorItemsList);
+        compound.put("CustomArmorItems", customArmorItemsList);
 
-        // ALSO save in vanilla format for compatibility
+        // ALSO save in vanilla format for compatibility with /summon commands
         ListTag vanillaArmorItems = new ListTag();
         for (int i = 0; i < armorItems.size(); i++) {
             CompoundTag itemTag = new CompoundTag();
@@ -422,14 +422,26 @@ public class InventorySystem {
         // Load regular inventory
         peasant.readInventoryFromTag(compound, registryAccess);
 
-        // FIRST: Try to load from vanilla ArmorItems/HandItems (for compatibility with /summon commands)
+        // Load from vanilla ArmorItems/HandItems (for compatibility with /summon commands)
         handleVanillaArmorItems(compound, registryAccess);
         handleVanillaHandItems(compound, registryAccess);
 
-        // THEN: Load from custom format (will override vanilla if both exist)
-        // Load hand items (custom format)
-        if (compound.contains("HandItems", 9)) {
-            ListTag handItemsList = compound.getList("HandItems", 10);
+        // Load from custom format ONLY if vanilla format doesn't exist
+        // This prevents double-loading the same armor items
+        if (!compound.contains("ArmorItems", 9) && compound.contains("CustomArmorItems", 9)) {
+            ListTag armorItemsList = compound.getList("CustomArmorItems", 10);
+            for (int i = 0; i < armorItemsList.size(); i++) {
+                CompoundTag itemTag = armorItemsList.getCompound(i);
+                int slot = itemTag.getByte("Slot") & 255;
+                if (slot >= 0 && slot < armorItems.size()) {
+                    armorItems.set(slot, ItemStack.parseOptional(registryAccess, itemTag));
+                }
+            }
+        }
+
+        // Load from custom hand items ONLY if vanilla format doesn't exist
+        if (!compound.contains("HandItems", 9) && compound.contains("CustomHandItems", 9)) {
+            ListTag handItemsList = compound.getList("CustomHandItems", 10);
             for (int i = 0; i < handItemsList.size(); i++) {
                 CompoundTag itemTag = handItemsList.getCompound(i);
                 int slot = itemTag.getByte("Slot") & 255;
@@ -440,18 +452,6 @@ public class InventorySystem {
                     if (slot == MAINHAND_SLOT) {
                         peasant.getEntityData().set(peasant.getMainHandItemAccessor(), handStack);
                     }
-                }
-            }
-        }
-
-        // Load armor items (custom format)
-        if (compound.contains("ArmorItems", 9)) {
-            ListTag armorItemsList = compound.getList("ArmorItems", 10);
-            for (int i = 0; i < armorItemsList.size(); i++) {
-                CompoundTag itemTag = armorItemsList.getCompound(i);
-                int slot = itemTag.getByte("Slot") & 255;
-                if (slot >= 0 && slot < armorItems.size()) {
-                    armorItems.set(slot, ItemStack.parseOptional(registryAccess, itemTag));
                 }
             }
         }

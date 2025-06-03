@@ -21,6 +21,15 @@ import software.bernie.geckolib.renderer.layer.ItemArmorGeoLayer;
 
 public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasant_Entity> {
 
+    // Pre-define our bone names for easy and consistent reference later - MATCH YOUR GEOMETRY EXACTLY
+    private static final String LEFT_BOOT = "armor_left_boot";
+    private static final String RIGHT_BOOT = "armor_right_boot";
+    private static final String LEFT_ARMOR_LEG = "armor_left_leg";
+    private static final String RIGHT_ARMOR_LEG = "armor_right_leg";
+    private static final String CHESTPLATE = "armor_body";
+    private static final String RIGHT_SLEEVE = "armor_right_arm";
+    private static final String LEFT_SLEEVE = "armor_left_arm";
+    private static final String HELMET = "armor_head";
 
     private static final int[] EYES_COLORS = {
             0xFF245014, 0xFF2d6618, 0xFF377a1e, 0xFF7a521e, 0xFF543b1b, 0xFF3e2a12,
@@ -54,85 +63,67 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
             0xFF0a392a, 0xFF15523f
     };
 
+    // Texture variant constants
     private static final int BODY_VARIANTS = 6;
+    private static final int EYES_VARIANTS = 1;
+    private static final int LEGS_VARIANTS = 1;
+    private static final int SHIRT_VARIANTS = 1;
+    private static final int HAIR_VARIANTS = 24;
+    private static final int BOOTS_VARIANTS = 2;
+    private static final int TUNIC_VARIANTS = 4;
+    private static final int HOOD_VARIANTS = 3;
+
+    // Texture arrays
     private static final ResourceLocation[] BODY_TEXTURES = new ResourceLocation[BODY_VARIANTS];
+    private static final ResourceLocation[] EYES_TEXTURES = new ResourceLocation[EYES_VARIANTS];
+    private static final ResourceLocation[] LEGS_TEXTURES = new ResourceLocation[LEGS_VARIANTS];
+    private static final ResourceLocation[] SHIRT_TEXTURES = new ResourceLocation[SHIRT_VARIANTS];
+    private static final ResourceLocation[] HAIR_TEXTURES = new ResourceLocation[HAIR_VARIANTS];
+    private static final ResourceLocation[] BOOTS_TEXTURES = new ResourceLocation[BOOTS_VARIANTS];
+    private static final ResourceLocation[] TUNIC_TEXTURES = new ResourceLocation[TUNIC_VARIANTS];
+    private static final ResourceLocation[] HOOD_TEXTURES = new ResourceLocation[HOOD_VARIANTS];
 
     static {
+        // Initialize texture arrays
         for (int i = 1; i <= BODY_VARIANTS; i++) {
             BODY_TEXTURES[i - 1] = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID,
                     "textures/entity/northernpeasant/body" + i + ".png");
         }
-    }
-
-    private static final int EYES_VARIANTS = 1;
-    private static final ResourceLocation[] EYES_TEXTURES = new ResourceLocation[EYES_VARIANTS];
-
-    static {
         for (int i = 1; i <= EYES_VARIANTS; i++) {
             EYES_TEXTURES[i - 1] = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID,
                     "textures/entity/northernpeasant/eyes" + i + ".png");
         }
-    }
-
-    private static final int LEGS_VARIANTS = 1;
-    private static final ResourceLocation[] LEGS_TEXTURES = new ResourceLocation[LEGS_VARIANTS];
-
-    static {
         for (int i = 1; i <= LEGS_VARIANTS; i++) {
             LEGS_TEXTURES[i - 1] = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID,
                     "textures/entity/northernpeasant/legs" + i + ".png");
         }
-    }
-
-    private static final int SHIRT_VARIANTS = 1;
-    private static final ResourceLocation[] SHIRT_TEXTURES = new ResourceLocation[SHIRT_VARIANTS];
-
-    static {
         for (int i = 1; i <= SHIRT_VARIANTS; i++) {
             SHIRT_TEXTURES[i - 1] = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID,
                     "textures/entity/northernpeasant/shirt" + i + ".png");
         }
-    }
-
-    private static final int HAIR_VARIANTS = 24;
-    private static final ResourceLocation[] HAIR_TEXTURES = new ResourceLocation[HAIR_VARIANTS];
-
-    static {
         for (int i = 1; i <= HAIR_VARIANTS; i++) {
             HAIR_TEXTURES[i - 1] = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID,
                     "textures/entity/northernpeasant/hair" + i + ".png");
         }
-    }
-
-    private static final int BOOTS_VARIANTS = 2;
-    private static final ResourceLocation[] BOOTS_TEXTURES = new ResourceLocation[BOOTS_VARIANTS];
-
-    static {
         for (int i = 1; i <= BOOTS_VARIANTS; i++) {
             BOOTS_TEXTURES[i - 1] = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID,
                     "textures/entity/northernpeasant/boots" + i + ".png");
         }
-    }
-
-    private static final int TUNIC_VARIANTS = 4;
-    private static final ResourceLocation[] TUNIC_TEXTURES = new ResourceLocation[TUNIC_VARIANTS];
-
-    static {
         for (int i = 1; i <= TUNIC_VARIANTS; i++) {
             TUNIC_TEXTURES[i - 1] = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID,
                     "textures/entity/northernpeasant/tunic" + i + ".png");
         }
-    }
-
-    private static final int HOOD_VARIANTS = 3;
-    private static final ResourceLocation[] HOOD_TEXTURES = new ResourceLocation[HOOD_VARIANTS];
-
-    static {
         for (int i = 1; i <= HOOD_VARIANTS; i++) {
             HOOD_TEXTURES[i - 1] = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID,
                     "textures/entity/northernpeasant/hood" + i + ".png");
         }
     }
+
+    // Add instance variables for armor items like in Gremlin example
+    protected ItemStack helmetItem;
+    protected ItemStack chestplateItem;
+    protected ItemStack leggingsItem;
+    protected ItemStack bootsItem;
 
     public Northern_Peasant_Renderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new Northern_Peasant_Model());
@@ -140,111 +131,55 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
         this.scaleHeight = 0.95f;
         this.shadowRadius = 0.5f;
 
+        // Add some armor rendering - back to basic approach
         addRenderLayer(new ItemArmorGeoLayer<>(this) {
             @Nullable
             @Override
             protected ItemStack getArmorItemForBone(GeoBone bone, Northern_Peasant_Entity animatable) {
-                String boneName = bone.getName();
-
-                if ("armor_head".equals(boneName) || "armorHead".equals(boneName)) {
-                    ItemStack helmet = animatable.getItemBySlot(EquipmentSlot.HEAD);
-                    return helmet.isEmpty() ? null : helmet;
-                }
-
-                if ("armor_body".equals(boneName) || "armorBody".equals(boneName) ||
-                        "armor_right_arm".equals(boneName) || "armorRightArm".equals(boneName) ||
-                        "armor_left_arm".equals(boneName) || "armorLeftArm".equals(boneName)) {
-                    ItemStack chestplate = animatable.getItemBySlot(EquipmentSlot.CHEST);
-                    return chestplate.isEmpty() ? null : chestplate;
-                }
-
-                if ("armor_right_leg".equals(boneName) || "armorRightLeg".equals(boneName) ||
-                        "armor_left_leg".equals(boneName) || "armorLeftLeg".equals(boneName)) {
-                    ItemStack leggings = animatable.getItemBySlot(EquipmentSlot.LEGS);
-                    return leggings.isEmpty() ? null : leggings;
-                }
-
-                if ("armor_right_boot".equals(boneName) || "armorRightBoot".equals(boneName) ||
-                        "armor_left_boot".equals(boneName) || "armorLeftBoot".equals(boneName)) {
-                    ItemStack boots = animatable.getItemBySlot(EquipmentSlot.FEET);
-                    return boots.isEmpty() ? null : boots;
-                }
-
-                return null;
+                // Use our instance variables like Gremlin uses mainHandItem/offhandItem
+                return switch (bone.getName()) {
+                    case LEFT_BOOT, RIGHT_BOOT -> Northern_Peasant_Renderer.this.bootsItem;
+                    case LEFT_ARMOR_LEG, RIGHT_ARMOR_LEG -> Northern_Peasant_Renderer.this.leggingsItem;
+                    case CHESTPLATE, RIGHT_SLEEVE, LEFT_SLEEVE -> Northern_Peasant_Renderer.this.chestplateItem;
+                    case HELMET -> Northern_Peasant_Renderer.this.helmetItem;
+                    default -> null;
+                };
             }
 
+            // Return the equipment slot relevant to the bone we're using
             @NotNull
             @Override
             protected EquipmentSlot getEquipmentSlotForBone(GeoBone bone, ItemStack stack, Northern_Peasant_Entity animatable) {
-                String boneName = bone.getName();
-
-                if ("armor_right_boot".equals(boneName) || "armorRightBoot".equals(boneName) ||
-                        "armor_left_boot".equals(boneName) || "armorLeftBoot".equals(boneName)) {
-                    return EquipmentSlot.FEET;
-                }
-
-                if ("armor_right_leg".equals(boneName) || "armorRightLeg".equals(boneName) ||
-                        "armor_left_leg".equals(boneName) || "armorLeftLeg".equals(boneName)) {
-                    return EquipmentSlot.LEGS;
-                }
-
-                if ("armor_right_arm".equals(boneName) || "armorRightArm".equals(boneName)) {
-                    return !animatable.isLeftHanded() ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
-                }
-
-                if ("armor_left_arm".equals(boneName) || "armorLeftArm".equals(boneName)) {
-                    return animatable.isLeftHanded() ? EquipmentSlot.OFFHAND : EquipmentSlot.MAINHAND;
-                }
-
-                if ("armor_body".equals(boneName) || "armorBody".equals(boneName)) {
-                    return EquipmentSlot.CHEST;
-                }
-
-                if ("armor_head".equals(boneName) || "armorHead".equals(boneName)) {
-                    return EquipmentSlot.HEAD;
-                }
-
-                return super.getEquipmentSlotForBone(bone, stack, animatable);
+                return switch (bone.getName()) {
+                    case LEFT_BOOT, RIGHT_BOOT -> EquipmentSlot.FEET;
+                    case LEFT_ARMOR_LEG, RIGHT_ARMOR_LEG -> EquipmentSlot.LEGS;
+                    case RIGHT_SLEEVE, LEFT_SLEEVE -> EquipmentSlot.CHEST;
+                    case CHESTPLATE -> EquipmentSlot.CHEST;
+                    case HELMET -> EquipmentSlot.HEAD;
+                    default -> super.getEquipmentSlotForBone(bone, stack, animatable);
+                };
             }
 
+            // Return the ModelPart responsible for the armor pieces we want to render
             @NotNull
             @Override
             protected ModelPart getModelPartForBone(GeoBone bone, EquipmentSlot slot, ItemStack stack, Northern_Peasant_Entity animatable, HumanoidModel<?> baseModel) {
-                String boneName = bone.getName();
-
-                if ("armor_left_boot".equals(boneName) || "armorLeftBoot".equals(boneName) ||
-                        "armor_left_leg".equals(boneName) || "armorLeftLeg".equals(boneName)) {
-                    return baseModel.leftLeg;
-                }
-
-                if ("armor_right_boot".equals(boneName) || "armorRightBoot".equals(boneName) ||
-                        "armor_right_leg".equals(boneName) || "armorRightLeg".equals(boneName)) {
-                    return baseModel.rightLeg;
-                }
-
-                if ("armor_right_arm".equals(boneName) || "armorRightArm".equals(boneName)) {
-                    return baseModel.rightArm;
-                }
-
-                if ("armor_left_arm".equals(boneName) || "armorLeftArm".equals(boneName)) {
-                    return baseModel.leftArm;
-                }
-
-                if ("armor_body".equals(boneName) || "armorBody".equals(boneName)) {
-                    return baseModel.body;
-                }
-
-                if ("armor_head".equals(boneName) || "armorHead".equals(boneName)) {
-                    return baseModel.head;
-                }
-
-                return super.getModelPartForBone(bone, slot, stack, animatable, baseModel);
+                return switch (bone.getName()) {
+                    case LEFT_BOOT, LEFT_ARMOR_LEG -> baseModel.leftLeg;
+                    case RIGHT_BOOT, RIGHT_ARMOR_LEG -> baseModel.rightLeg;
+                    case RIGHT_SLEEVE -> baseModel.rightArm;
+                    case LEFT_SLEEVE -> baseModel.leftArm;
+                    case CHESTPLATE -> baseModel.body;
+                    case HELMET -> baseModel.head;
+                    default -> super.getModelPartForBone(bone, slot, stack, animatable, baseModel);
+                };
             }
         });
     }
 
     @Override
     public ResourceLocation getTextureLocation(Northern_Peasant_Entity entity) {
+        // Use body texture as the main texture
         long bits = entity.getUUID().getLeastSignificantBits();
         int bodyVariant = (int)(Math.abs(bits) % BODY_VARIANTS);
         return BODY_TEXTURES[bodyVariant];
@@ -253,6 +188,12 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
     @Override
     public void preRender(PoseStack poseStack, Northern_Peasant_Entity animatable, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, int colour) {
         super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, colour);
+
+        // Set armor items like Gremlin sets hand items
+        this.helmetItem = animatable.getItemBySlot(EquipmentSlot.HEAD);
+        this.chestplateItem = animatable.getItemBySlot(EquipmentSlot.CHEST);
+        this.leggingsItem = animatable.getItemBySlot(EquipmentSlot.LEGS);
+        this.bootsItem = animatable.getItemBySlot(EquipmentSlot.FEET);
     }
 
     @Override
@@ -260,15 +201,14 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
                                RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer,
                                boolean isReRender, float partialTick, int packedLight, int packedOverlay, int color) {
 
-        boolean hasCustomHelmet = isCustomGeckoLibArmor(animatable.getItemBySlot(EquipmentSlot.HEAD));
-        boolean hasCustomChestplate = isCustomGeckoLibArmor(animatable.getItemBySlot(EquipmentSlot.CHEST));
-        boolean hasCustomLeggings = isCustomGeckoLibArmor(animatable.getItemBySlot(EquipmentSlot.LEGS));
-        boolean hasCustomBoots = isCustomGeckoLibArmor(animatable.getItemBySlot(EquipmentSlot.FEET));
+        // First, render the base entity using the main texture (body)
+        super.actuallyRender(poseStack, animatable, model, renderType, bufferSource, buffer,
+                isReRender, partialTick, packedLight, packedOverlay, color);
 
+        // Generate variants and colors
         long bits = animatable.getUUID().getLeastSignificantBits();
         long seed = Math.abs(bits);
 
-        int bodyVariant = (int)(seed % BODY_VARIANTS);
         int eyesVariant = (int)((seed >>> 8) % EYES_VARIANTS);
         int legsVariant = (int)((seed >>> 16) % LEGS_VARIANTS);
         int shirtVariant = (int)((seed >>> 24) % SHIRT_VARIANTS);
@@ -284,57 +224,41 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
         int tunicColor = getPresetColor(animatable, TUNIC_HOOD_COLORS, 5);
         int hoodColor = getPresetColor(animatable, TUNIC_HOOD_COLORS, 6);
 
-
-        renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
-                packedLight, packedOverlay, 0xFFFFFFFF, BODY_TEXTURES[bodyVariant]);
-
-        renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
+        // Render additional texture layers (eyes always visible)
+        renderTextureLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
                 packedLight, packedOverlay, eyesColor, EYES_TEXTURES[eyesVariant]);
 
-        if (!hasCustomLeggings) {
-            renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
+        // Only render default clothing if no armor is equipped in that slot
+        if (animatable.getItemBySlot(EquipmentSlot.LEGS).isEmpty()) {
+            renderTextureLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
                     packedLight, packedOverlay, legsColor, LEGS_TEXTURES[legsVariant]);
         }
 
-        if (!hasCustomChestplate) {
-            renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
+        if (animatable.getItemBySlot(EquipmentSlot.CHEST).isEmpty()) {
+            renderTextureLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
                     packedLight, packedOverlay, shirtColor, SHIRT_TEXTURES[shirtVariant]);
-        }
 
-        if (!hasCustomHelmet) {
-            renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
-                    packedLight, packedOverlay, hairColor, HAIR_TEXTURES[hairVariant]);
-        }
-
-        if (!hasCustomLeggings) {
-            renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
-                    packedLight, packedOverlay, legsColor, LEGS_TEXTURES[legsVariant]);
-        }
-
-        if (!hasCustomBoots) {
-            renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
-                    packedLight, packedOverlay, 0xFFFFFFFF, BOOTS_TEXTURES[bootsVariant]);
-        }
-
-        if (!hasCustomHelmet) {
-            renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
-                    packedLight, packedOverlay, hairColor, HAIR_TEXTURES[hairVariant]);
-        }
-
-        if (!hasCustomChestplate) {
-            renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
+            renderTextureLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
                     packedLight, packedOverlay, tunicColor, TUNIC_TEXTURES[tunicVariant]);
         }
 
-        if (!hasCustomHelmet) {
-            renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
+        if (animatable.getItemBySlot(EquipmentSlot.HEAD).isEmpty()) {
+            renderTextureLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
+                    packedLight, packedOverlay, hairColor, HAIR_TEXTURES[hairVariant]);
+
+            renderTextureLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
                     packedLight, packedOverlay, hoodColor, HOOD_TEXTURES[hoodVariant]);
+        }
+
+        if (animatable.getItemBySlot(EquipmentSlot.FEET).isEmpty()) {
+            renderTextureLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
+                    packedLight, packedOverlay, 0xFFFFFFFF, BOOTS_TEXTURES[bootsVariant]);
         }
     }
 
-    private void renderLayer(PoseStack poseStack, Northern_Peasant_Entity animatable, BakedGeoModel model,
-                             MultiBufferSource bufferSource, boolean isReRender, float partialTick,
-                             int packedLight, int packedOverlay, int color, ResourceLocation texture) {
+    private void renderTextureLayer(PoseStack poseStack, Northern_Peasant_Entity animatable, BakedGeoModel model,
+                                    MultiBufferSource bufferSource, boolean isReRender, float partialTick,
+                                    int packedLight, int packedOverlay, int color, ResourceLocation texture) {
 
         RenderType layerRenderType = RenderType.entityCutoutNoCull(texture);
         VertexConsumer layerBuffer = bufferSource.getBuffer(layerRenderType);
@@ -348,11 +272,5 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
         long seed = Math.abs(bits) + (colorIndex * 54321);
         int colorVariant = (int)(seed % colorArray.length);
         return colorArray[colorVariant];
-    }
-
-
-    private boolean isCustomGeckoLibArmor(ItemStack stack) {
-        if (stack.isEmpty()) return false;
-        return stack.getItem() instanceof software.bernie.geckolib.animatable.GeoItem;
     }
 }
