@@ -183,6 +183,9 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         }
     }
 
+    // Add this method to your Northern_Peasant_Entity class
+// This ensures vanilla ArmorItems and HandItems NBT are properly handled
+
     @Override
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
@@ -190,7 +193,9 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
 
         sleepSystem.loadData(compound);
         hungerSystem.loadData(compound);
+
         inventorySystem.loadData(compound, this.registryAccess());
+
         homeSystem.loadData(compound);
         jobSystem.loadData(compound);
         farmingSystem.loadData(compound);
@@ -425,6 +430,8 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         super.startSleeping(pos);
         sleepSystem.startSleeping(pos);
     }
+
+
 
     @Override
     public void stopSleeping() {

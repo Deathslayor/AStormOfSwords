@@ -4,21 +4,23 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
-import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.ZombieRenderer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.cache.object.GeoBone;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
+import software.bernie.geckolib.renderer.layer.ItemArmorGeoLayer;
 
 public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasant_Entity> {
 
-    // ========== PRESET COLOR ARRAYS ==========
 
     private static final int[] EYES_COLORS = {
             0xFF245014, 0xFF2d6618, 0xFF377a1e, 0xFF7a521e, 0xFF543b1b, 0xFF3e2a12,
@@ -52,7 +54,6 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
             0xFF0a392a, 0xFF15523f
     };
 
-    // ========== BODY TEXTURES ==========
     private static final int BODY_VARIANTS = 6;
     private static final ResourceLocation[] BODY_TEXTURES = new ResourceLocation[BODY_VARIANTS];
 
@@ -63,8 +64,7 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
         }
     }
 
-    // ========== EYES TEXTURES ==========
-    private static final int EYES_VARIANTS = 1; // Change this number as needed
+    private static final int EYES_VARIANTS = 1;
     private static final ResourceLocation[] EYES_TEXTURES = new ResourceLocation[EYES_VARIANTS];
 
     static {
@@ -74,8 +74,7 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
         }
     }
 
-    // ========== LEGS TEXTURES ==========
-    private static final int LEGS_VARIANTS = 1; // Change this number as needed
+    private static final int LEGS_VARIANTS = 1;
     private static final ResourceLocation[] LEGS_TEXTURES = new ResourceLocation[LEGS_VARIANTS];
 
     static {
@@ -85,8 +84,7 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
         }
     }
 
-    // ========== SHIRT TEXTURES ==========
-    private static final int SHIRT_VARIANTS = 1; // Change this number as needed
+    private static final int SHIRT_VARIANTS = 1;
     private static final ResourceLocation[] SHIRT_TEXTURES = new ResourceLocation[SHIRT_VARIANTS];
 
     static {
@@ -96,8 +94,7 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
         }
     }
 
-    // ========== HAIR TEXTURES ==========
-    private static final int HAIR_VARIANTS = 24; // Change this number as needed
+    private static final int HAIR_VARIANTS = 24;
     private static final ResourceLocation[] HAIR_TEXTURES = new ResourceLocation[HAIR_VARIANTS];
 
     static {
@@ -107,8 +104,7 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
         }
     }
 
-    // ========== BOOTS TEXTURES ==========
-    private static final int BOOTS_VARIANTS = 2; // Change this number as needed
+    private static final int BOOTS_VARIANTS = 2;
     private static final ResourceLocation[] BOOTS_TEXTURES = new ResourceLocation[BOOTS_VARIANTS];
 
     static {
@@ -118,8 +114,7 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
         }
     }
 
-    // ========== TUNIC TEXTURES ==========
-    private static final int TUNIC_VARIANTS = 4; // Change this number as needed
+    private static final int TUNIC_VARIANTS = 4;
     private static final ResourceLocation[] TUNIC_TEXTURES = new ResourceLocation[TUNIC_VARIANTS];
 
     static {
@@ -129,8 +124,7 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
         }
     }
 
-    // ========== HOOD TEXTURES ==========
-    private static final int HOOD_VARIANTS = 3; // Change this number as needed
+    private static final int HOOD_VARIANTS = 3;
     private static final ResourceLocation[] HOOD_TEXTURES = new ResourceLocation[HOOD_VARIANTS];
 
     static {
@@ -145,14 +139,120 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
         this.scaleWidth = 0.95f;
         this.scaleHeight = 0.95f;
         this.shadowRadius = 0.5f;
+
+        addRenderLayer(new ItemArmorGeoLayer<>(this) {
+            @Nullable
+            @Override
+            protected ItemStack getArmorItemForBone(GeoBone bone, Northern_Peasant_Entity animatable) {
+                String boneName = bone.getName();
+
+                if ("armor_head".equals(boneName) || "armorHead".equals(boneName)) {
+                    ItemStack helmet = animatable.getItemBySlot(EquipmentSlot.HEAD);
+                    return helmet.isEmpty() ? null : helmet;
+                }
+
+                if ("armor_body".equals(boneName) || "armorBody".equals(boneName) ||
+                        "armor_right_arm".equals(boneName) || "armorRightArm".equals(boneName) ||
+                        "armor_left_arm".equals(boneName) || "armorLeftArm".equals(boneName)) {
+                    ItemStack chestplate = animatable.getItemBySlot(EquipmentSlot.CHEST);
+                    return chestplate.isEmpty() ? null : chestplate;
+                }
+
+                if ("armor_right_leg".equals(boneName) || "armorRightLeg".equals(boneName) ||
+                        "armor_left_leg".equals(boneName) || "armorLeftLeg".equals(boneName)) {
+                    ItemStack leggings = animatable.getItemBySlot(EquipmentSlot.LEGS);
+                    return leggings.isEmpty() ? null : leggings;
+                }
+
+                if ("armor_right_boot".equals(boneName) || "armorRightBoot".equals(boneName) ||
+                        "armor_left_boot".equals(boneName) || "armorLeftBoot".equals(boneName)) {
+                    ItemStack boots = animatable.getItemBySlot(EquipmentSlot.FEET);
+                    return boots.isEmpty() ? null : boots;
+                }
+
+                return null;
+            }
+
+            @NotNull
+            @Override
+            protected EquipmentSlot getEquipmentSlotForBone(GeoBone bone, ItemStack stack, Northern_Peasant_Entity animatable) {
+                String boneName = bone.getName();
+
+                if ("armor_right_boot".equals(boneName) || "armorRightBoot".equals(boneName) ||
+                        "armor_left_boot".equals(boneName) || "armorLeftBoot".equals(boneName)) {
+                    return EquipmentSlot.FEET;
+                }
+
+                if ("armor_right_leg".equals(boneName) || "armorRightLeg".equals(boneName) ||
+                        "armor_left_leg".equals(boneName) || "armorLeftLeg".equals(boneName)) {
+                    return EquipmentSlot.LEGS;
+                }
+
+                if ("armor_right_arm".equals(boneName) || "armorRightArm".equals(boneName)) {
+                    return !animatable.isLeftHanded() ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
+                }
+
+                if ("armor_left_arm".equals(boneName) || "armorLeftArm".equals(boneName)) {
+                    return animatable.isLeftHanded() ? EquipmentSlot.OFFHAND : EquipmentSlot.MAINHAND;
+                }
+
+                if ("armor_body".equals(boneName) || "armorBody".equals(boneName)) {
+                    return EquipmentSlot.CHEST;
+                }
+
+                if ("armor_head".equals(boneName) || "armorHead".equals(boneName)) {
+                    return EquipmentSlot.HEAD;
+                }
+
+                return super.getEquipmentSlotForBone(bone, stack, animatable);
+            }
+
+            @NotNull
+            @Override
+            protected ModelPart getModelPartForBone(GeoBone bone, EquipmentSlot slot, ItemStack stack, Northern_Peasant_Entity animatable, HumanoidModel<?> baseModel) {
+                String boneName = bone.getName();
+
+                if ("armor_left_boot".equals(boneName) || "armorLeftBoot".equals(boneName) ||
+                        "armor_left_leg".equals(boneName) || "armorLeftLeg".equals(boneName)) {
+                    return baseModel.leftLeg;
+                }
+
+                if ("armor_right_boot".equals(boneName) || "armorRightBoot".equals(boneName) ||
+                        "armor_right_leg".equals(boneName) || "armorRightLeg".equals(boneName)) {
+                    return baseModel.rightLeg;
+                }
+
+                if ("armor_right_arm".equals(boneName) || "armorRightArm".equals(boneName)) {
+                    return baseModel.rightArm;
+                }
+
+                if ("armor_left_arm".equals(boneName) || "armorLeftArm".equals(boneName)) {
+                    return baseModel.leftArm;
+                }
+
+                if ("armor_body".equals(boneName) || "armorBody".equals(boneName)) {
+                    return baseModel.body;
+                }
+
+                if ("armor_head".equals(boneName) || "armorHead".equals(boneName)) {
+                    return baseModel.head;
+                }
+
+                return super.getModelPartForBone(bone, slot, stack, animatable, baseModel);
+            }
+        });
     }
 
     @Override
     public ResourceLocation getTextureLocation(Northern_Peasant_Entity entity) {
-        // Return the base body texture (will be overridden by layered rendering)
         long bits = entity.getUUID().getLeastSignificantBits();
         int bodyVariant = (int)(Math.abs(bits) % BODY_VARIANTS);
         return BODY_TEXTURES[bodyVariant];
+    }
+
+    @Override
+    public void preRender(PoseStack poseStack, Northern_Peasant_Entity animatable, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, int colour) {
+        super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, colour);
     }
 
     @Override
@@ -160,11 +260,14 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
                                RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer,
                                boolean isReRender, float partialTick, int packedLight, int packedOverlay, int color) {
 
-        // Generate different variants for each layer using UUID
+        boolean hasCustomHelmet = isCustomGeckoLibArmor(animatable.getItemBySlot(EquipmentSlot.HEAD));
+        boolean hasCustomChestplate = isCustomGeckoLibArmor(animatable.getItemBySlot(EquipmentSlot.CHEST));
+        boolean hasCustomLeggings = isCustomGeckoLibArmor(animatable.getItemBySlot(EquipmentSlot.LEGS));
+        boolean hasCustomBoots = isCustomGeckoLibArmor(animatable.getItemBySlot(EquipmentSlot.FEET));
+
         long bits = animatable.getUUID().getLeastSignificantBits();
         long seed = Math.abs(bits);
 
-        // Calculate variants for each layer independently
         int bodyVariant = (int)(seed % BODY_VARIANTS);
         int eyesVariant = (int)((seed >>> 8) % EYES_VARIANTS);
         int legsVariant = (int)((seed >>> 16) % LEGS_VARIANTS);
@@ -174,7 +277,6 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
         int tunicVariant = (int)((seed >>> 48) % TUNIC_VARIANTS);
         int hoodVariant = (int)((seed >>> 56) % HOOD_VARIANTS);
 
-        // Generate preset colors for each layer
         int eyesColor = getPresetColor(animatable, EYES_COLORS, 1);
         int legsColor = getPresetColor(animatable, PANTS_COLORS, 2);
         int shirtColor = getPresetColor(animatable, SHIRT_COLORS, 3);
@@ -182,47 +284,52 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
         int tunicColor = getPresetColor(animatable, TUNIC_HOOD_COLORS, 5);
         int hoodColor = getPresetColor(animatable, TUNIC_HOOD_COLORS, 6);
 
-        // Render layers in order: body, eyes, legs, shirt, hair, legs, boots, hair, tunic, hood
 
-        // Layer 1: Body (bottom layer) - no color overlay
         renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
                 packedLight, packedOverlay, 0xFFFFFFFF, BODY_TEXTURES[bodyVariant]);
 
-        // Layer 2: Eyes - with color overlay
         renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
                 packedLight, packedOverlay, eyesColor, EYES_TEXTURES[eyesVariant]);
 
-        // Layer 3: Legs (first time) - with color overlay
-        renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
-                packedLight, packedOverlay, legsColor, LEGS_TEXTURES[legsVariant]);
+        if (!hasCustomLeggings) {
+            renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
+                    packedLight, packedOverlay, legsColor, LEGS_TEXTURES[legsVariant]);
+        }
 
-        // Layer 4: Shirt - with color overlay
-        renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
-                packedLight, packedOverlay, shirtColor, SHIRT_TEXTURES[shirtVariant]);
+        if (!hasCustomChestplate) {
+            renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
+                    packedLight, packedOverlay, shirtColor, SHIRT_TEXTURES[shirtVariant]);
+        }
 
-        // Layer 5: Hair (first time) - with color overlay
-        renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
-                packedLight, packedOverlay, hairColor, HAIR_TEXTURES[hairVariant]);
+        if (!hasCustomHelmet) {
+            renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
+                    packedLight, packedOverlay, hairColor, HAIR_TEXTURES[hairVariant]);
+        }
 
-        // Layer 6: Legs (second time) - with same color overlay
-        renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
-                packedLight, packedOverlay, legsColor, LEGS_TEXTURES[legsVariant]);
+        if (!hasCustomLeggings) {
+            renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
+                    packedLight, packedOverlay, legsColor, LEGS_TEXTURES[legsVariant]);
+        }
 
-        // Layer 7: Boots - no color overlay
-        renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
-                packedLight, packedOverlay, 0xFFFFFFFF, BOOTS_TEXTURES[bootsVariant]);
+        if (!hasCustomBoots) {
+            renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
+                    packedLight, packedOverlay, 0xFFFFFFFF, BOOTS_TEXTURES[bootsVariant]);
+        }
 
-        // Layer 8: Hair (second time) - with same color overlay
-        renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
-                packedLight, packedOverlay, hairColor, HAIR_TEXTURES[hairVariant]);
+        if (!hasCustomHelmet) {
+            renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
+                    packedLight, packedOverlay, hairColor, HAIR_TEXTURES[hairVariant]);
+        }
 
-        // Layer 9: Tunic - with color overlay
-        renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
-                packedLight, packedOverlay, tunicColor, TUNIC_TEXTURES[tunicVariant]);
+        if (!hasCustomChestplate) {
+            renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
+                    packedLight, packedOverlay, tunicColor, TUNIC_TEXTURES[tunicVariant]);
+        }
 
-        // Layer 10: Hood (top layer) - with color overlay
-        renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
-                packedLight, packedOverlay, hoodColor, HOOD_TEXTURES[hoodVariant]);
+        if (!hasCustomHelmet) {
+            renderLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
+                    packedLight, packedOverlay, hoodColor, HOOD_TEXTURES[hoodVariant]);
+        }
     }
 
     private void renderLayer(PoseStack poseStack, Northern_Peasant_Entity animatable, BakedGeoModel model,
@@ -236,53 +343,16 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
                 isReRender, partialTick, packedLight, packedOverlay, color);
     }
 
-    // ========== PRESET COLOR SELECTION ==========
-
     private int getPresetColor(Northern_Peasant_Entity entity, int[] colorArray, int colorIndex) {
-        // Use entity UUID to generate consistent color selection
         long bits = entity.getUUID().getLeastSignificantBits();
-        long seed = Math.abs(bits) + (colorIndex * 54321); // Different seed for each color type
-
+        long seed = Math.abs(bits) + (colorIndex * 54321);
         int colorVariant = (int)(seed % colorArray.length);
         return colorArray[colorVariant];
     }
 
-    @Override
-    public void renderRecursively(PoseStack poseStack, Northern_Peasant_Entity animatable, GeoBone bone,
-                                  RenderType renderType, MultiBufferSource bufferSource,
-                                  VertexConsumer buffer, boolean isReRender, float partialTick,
-                                  int packedLight, int packedOverlay, int color) {
 
-        super.renderRecursively(poseStack, animatable, bone, renderType, bufferSource, buffer,
-                isReRender, partialTick, packedLight, packedOverlay, color);
-
-        // Handle item rendering in right arm
-        if ("right_arm".equals(bone.getName()) && animatable.getHungerSystem().isEating()) {
-            ItemStack eatingItem = animatable.getHungerSystem().getEatingItem();
-            if (!eatingItem.isEmpty()) {
-                renderItemInBone(poseStack, eatingItem, packedLight, packedOverlay, bufferSource, animatable);
-            }
-        }
-    }
-
-    private void renderItemInBone(PoseStack poseStack, ItemStack item, int packedLight, int packedOverlay,
-                                  MultiBufferSource bufferSource, Northern_Peasant_Entity animatable) {
-        poseStack.pushPose();
-
-        poseStack.translate(0.1, 0.3, 0.1);
-        poseStack.scale(0.4f, 0.4f, 0.4f);
-
-        Minecraft.getInstance().getItemRenderer().renderStatic(
-                item,
-                ItemDisplayContext.THIRD_PERSON_RIGHT_HAND,
-                packedLight,
-                packedOverlay,
-                poseStack,
-                bufferSource,
-                animatable.level(),
-                (int) animatable.getX() + (int) animatable.getY() + (int) animatable.getZ()
-        );
-
-        poseStack.popPose();
+    private boolean isCustomGeckoLibArmor(ItemStack stack) {
+        if (stack.isEmpty()) return false;
+        return stack.getItem() instanceof software.bernie.geckolib.animatable.GeoItem;
     }
 }
