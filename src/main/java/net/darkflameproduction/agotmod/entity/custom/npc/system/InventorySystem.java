@@ -3,7 +3,6 @@ package net.darkflameproduction.agotmod.entity.custom.npc.system;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -12,10 +11,10 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.SlotAccess;
-import net.minecraft.world.inventory.ChestMenu;
-import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ArmorItem;
 import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
+import net.darkflameproduction.agotmod.inventory.NPCInventoryMenu;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,10 +22,6 @@ import java.util.List;
 public class InventorySystem {
     private final Northern_Peasant_Entity peasant;
     private final SimpleContainer inventory;
-
-    // Player-like equipment storage (like LivingEntity)
-    private final NonNullList<ItemStack> handItems = NonNullList.withSize(2, ItemStack.EMPTY); // [mainhand, offhand]
-    private final NonNullList<ItemStack> armorItems = NonNullList.withSize(4, ItemStack.EMPTY); // [feet, legs, chest, head]
 
     // Equipment slot indices (matching Minecraft's conventions)
     private static final int MAINHAND_SLOT = 0;
@@ -43,7 +38,239 @@ public class InventorySystem {
 
     public void tick() {
         // Sync main hand item with entity data for animations
-        peasant.getEntityData().set(peasant.getMainHandItemAccessor(), handItems.get(MAINHAND_SLOT));
+        peasant.getEntityData().set(peasant.getMainHandItemAccessor(), peasant.getMainHandItem());
+
+        // Automatically equip best armor/weapons every few ticks
+        if (peasant.tickCount % 20 == 0) { // Check every second (20 ticks)
+            autoEquipBestArmor();
+        }
+
+        // Mark dirty periodically to ensure saves
+        if (peasant.tickCount % 100 == 0) { // Every 5 seconds
+            markDirty();
+        }
+    }
+
+    /**
+     * Mark the inventory as dirty to trigger saving
+     */
+    public void markDirty() {
+        inventory.setChanged();
+        // Sync equipment data immediately
+        peasant.getEntityData().set(peasant.getMainHandItemAccessor(), peasant.getMainHandItem());
+    }
+
+    /**
+     * Automatically equips any armor available in the inventory using native equipment system
+     */
+    public void autoEquipBestArmor() {
+        // Check each armor slot and equip any armor if slot is empty
+        autoEquipArmorForSlot(EquipmentSlot.HEAD);
+        autoEquipArmorForSlot(EquipmentSlot.CHEST);
+        autoEquipArmorForSlot(EquipmentSlot.LEGS);
+        autoEquipArmorForSlot(EquipmentSlot.FEET);
+
+        // Also check for weapons and shields to auto-equip
+        autoEquipWeaponsAndShields();
+    }
+
+    /**
+     * Equips the first armor found for a specific slot from the inventory using native system
+     */
+    private void autoEquipArmorForSlot(EquipmentSlot slot) {
+        // Use the entity's native equipment system
+        ItemStack currentArmor = peasant.getItemBySlot(slot);
+
+        // Only equip if the slot is currently empty
+        if (currentArmor.isEmpty()) {
+            int armorSlotIndex = findFirstArmorSlotInInventory(slot);
+
+            if (armorSlotIndex != -1) {
+                // Get the armor from the inventory
+                ItemStack armorToEquip = inventory.getItem(armorSlotIndex).copy();
+
+                // Remove the armor from that specific inventory slot
+                inventory.setItem(armorSlotIndex, ItemStack.EMPTY);
+
+                // Equip the armor using native system - this automatically handles NBT saving
+                peasant.setItemSlot(slot, armorToEquip);
+
+                // Sync entity data
+                if (slot == EquipmentSlot.MAINHAND) {
+                    peasant.getEntityData().set(peasant.getMainHandItemAccessor(), armorToEquip);
+                }
+            }
+        }
+    }
+
+    /**
+     * Finds the inventory slot index of the first armor piece for a specific equipment slot
+     */
+    private int findFirstArmorSlotInInventory(EquipmentSlot targetSlot) {
+        for (int i = 0; i < inventory.getContainerSize(); i++) {
+            ItemStack stack = inventory.getItem(i);
+            if (!stack.isEmpty() && stack.getItem() instanceof ArmorItem armorItem) {
+                EquipmentSlot armorSlot = null;
+
+                try {
+                    armorSlot = armorItem.getEquipmentSlot(stack);
+                } catch (Exception e) {
+                    // Fallback to string matching
+                    armorSlot = getEquipmentSlotFromItemName(stack);
+                }
+
+                if (armorSlot == null) {
+                    armorSlot = getEquipmentSlotFromItemName(stack);
+                }
+
+                if (armorSlot == targetSlot) {
+                    return i;
+                }
+            }
+        }
+
+        return -1;
+    }
+
+    /**
+     * Helper method for equipment slot detection by item name
+     */
+    private EquipmentSlot getEquipmentSlotFromItemName(ItemStack stack) {
+        String itemName = stack.getItem().toString().toLowerCase();
+        if (itemName.contains("helmet") || itemName.contains("cap") || itemName.contains("crown")) {
+            return EquipmentSlot.HEAD;
+        } else if (itemName.contains("chestplate") || itemName.contains("tunic") || itemName.contains("shirt")) {
+            return EquipmentSlot.CHEST;
+        } else if (itemName.contains("leggings") || itemName.contains("pants") || itemName.contains("legs")) {
+            return EquipmentSlot.LEGS;
+        } else if (itemName.contains("boots") || itemName.contains("shoes") || itemName.contains("feet")) {
+            return EquipmentSlot.FEET;
+        }
+        return null;
+    }
+
+    /**
+     * Auto-equips weapons and shields from inventory using native system
+     */
+    private void autoEquipWeaponsAndShields() {
+        // Check main hand - equip weapons if empty
+        ItemStack currentMainHand = peasant.getItemBySlot(EquipmentSlot.MAINHAND);
+        if (currentMainHand.isEmpty()) {
+            int weaponSlotIndex = findFirstWeaponInInventory();
+            if (weaponSlotIndex != -1) {
+                ItemStack weaponToEquip = inventory.getItem(weaponSlotIndex).copy();
+
+                // Remove from inventory and equip using native system
+                inventory.setItem(weaponSlotIndex, ItemStack.EMPTY);
+                peasant.setItemSlot(EquipmentSlot.MAINHAND, weaponToEquip);
+                peasant.getEntityData().set(peasant.getMainHandItemAccessor(), weaponToEquip);
+            }
+        }
+
+        // Check offhand - equip shields if empty
+        ItemStack currentOffHand = peasant.getItemBySlot(EquipmentSlot.OFFHAND);
+        if (currentOffHand.isEmpty()) {
+            int shieldSlotIndex = findFirstShieldInInventory();
+            if (shieldSlotIndex != -1) {
+                ItemStack shieldToEquip = inventory.getItem(shieldSlotIndex).copy();
+
+                // Remove from inventory and equip using native system
+                inventory.setItem(shieldSlotIndex, ItemStack.EMPTY);
+                peasant.setItemSlot(EquipmentSlot.OFFHAND, shieldToEquip);
+            }
+        }
+    }
+
+    private int findFirstWeaponInInventory() {
+        for (int i = 0; i < inventory.getContainerSize(); i++) {
+            ItemStack stack = inventory.getItem(i);
+            if (!stack.isEmpty() && isWeapon(stack)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private int findFirstShieldInInventory() {
+        for (int i = 0; i < inventory.getContainerSize(); i++) {
+            ItemStack stack = inventory.getItem(i);
+            if (!stack.isEmpty() && stack.getItem() instanceof net.minecraft.world.item.ShieldItem) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private boolean isWeapon(ItemStack stack) {
+        // Check vanilla weapon types
+        if (stack.getItem() instanceof net.minecraft.world.item.SwordItem ||
+                stack.getItem() instanceof net.minecraft.world.item.AxeItem ||
+                stack.getItem() instanceof net.minecraft.world.item.PickaxeItem ||
+                stack.getItem() instanceof net.minecraft.world.item.ShovelItem ||
+                stack.getItem() instanceof net.minecraft.world.item.HoeItem ||
+                stack.getItem() instanceof net.minecraft.world.item.BowItem ||
+                stack.getItem() instanceof net.minecraft.world.item.CrossbowItem ||
+                stack.getItem() instanceof net.minecraft.world.item.TridentItem) {
+            return true;
+        }
+
+        // Check for your custom LevelRequiredSwordItem weapons
+        try {
+            // Use reflection to check if it's a LevelRequiredSwordItem without directly importing it
+            Class<?> levelRequiredSwordItemClass = Class.forName("net.darkflameproduction.agotmod.item.custom.LevelRequiredSwordItem");
+            if (levelRequiredSwordItemClass.isInstance(stack.getItem())) {
+                return true;
+            }
+        } catch (ClassNotFoundException e) {
+            // If the class doesn't exist, fall back to individual item checks
+        }
+
+        // Fallback: Check specific items if class check fails
+        return stack.getItem() == net.darkflameproduction.agotmod.item.ModItems.DRAGONGLASS_SPEAR.get() ||
+                stack.getItem() == net.darkflameproduction.agotmod.item.ModItems.DRAGONGLASS_DAGGER.get() ||
+                stack.getItem() == net.darkflameproduction.agotmod.item.ModItems.BRONZE_SWORD.get() ||
+                stack.getItem() == net.darkflameproduction.agotmod.item.ModItems.BRONZE_SPATHA.get() ||
+                stack.getItem() == net.darkflameproduction.agotmod.item.ModItems.BRONZE_SPEAR.get() ||
+                stack.getItem() == net.darkflameproduction.agotmod.item.ModItems.BRONZE_PIKE.get() ||
+                stack.getItem() == net.darkflameproduction.agotmod.item.ModItems.BRONZE_DAGGER.get() ||
+                stack.getItem() == net.darkflameproduction.agotmod.item.ModItems.BRONZE_BATTLEAXE.get() ||
+                stack.getItem() == net.darkflameproduction.agotmod.item.ModItems.IRON_LONGSWORD.get() ||
+                stack.getItem() == net.darkflameproduction.agotmod.item.ModItems.IRON_SPEAR.get() ||
+                stack.getItem() == net.darkflameproduction.agotmod.item.ModItems.IRON_PIKE.get() ||
+                stack.getItem() == net.darkflameproduction.agotmod.item.ModItems.IRON_MACE.get() ||
+                stack.getItem() == net.darkflameproduction.agotmod.item.ModItems.IRON_DAGGER.get() ||
+                stack.getItem() == net.darkflameproduction.agotmod.item.ModItems.IRON_BATTLEAXE.get() ||
+                stack.getItem() == net.darkflameproduction.agotmod.item.ModItems.STEEL_SWORD.get() ||
+                stack.getItem() == net.darkflameproduction.agotmod.item.ModItems.STEEL_LONGSWORD.get() ||
+                stack.getItem() == net.darkflameproduction.agotmod.item.ModItems.STEEL_SPEAR.get() ||
+                stack.getItem() == net.darkflameproduction.agotmod.item.ModItems.STEEL_PIKE.get() ||
+                stack.getItem() == net.darkflameproduction.agotmod.item.ModItems.STEEL_MACE.get() ||
+                stack.getItem() == net.darkflameproduction.agotmod.item.ModItems.STEEL_DAGGER.get() ||
+                stack.getItem() == net.darkflameproduction.agotmod.item.ModItems.STEEL_BATTLEAXE.get() ||
+                stack.getItem() == net.darkflameproduction.agotmod.item.ModItems.STEEL_HALBERD.get() ||
+                stack.getItem() == net.darkflameproduction.agotmod.item.ModItems.NOBLE_LONGSWORD.get() ||
+                stack.getItem() == net.darkflameproduction.agotmod.item.ModItems.NOBLE_SPEAR.get() ||
+                stack.getItem() == net.darkflameproduction.agotmod.item.ModItems.NOBLE_PIKE.get() ||
+                stack.getItem() == net.darkflameproduction.agotmod.item.ModItems.NOBLE_MACE.get() ||
+                stack.getItem() == net.darkflameproduction.agotmod.item.ModItems.NOBLE_DAGGER.get() ||
+                stack.getItem() == net.darkflameproduction.agotmod.item.ModItems.NOBLE_BATTLEAXE.get() ||
+                stack.getItem() == net.darkflameproduction.agotmod.item.ModItems.NOBLE_HALBERD.get() ||
+                stack.getItem() == net.darkflameproduction.agotmod.item.ModItems.STEEL_BOW.get();
+    }
+
+    /**
+     * Forces an immediate check and equipping of any available armor, weapons, and shields
+     */
+    public void forceArmorUpdate() {
+        autoEquipBestArmor();
+    }
+
+    /**
+     * Public method to force equipment check - can be called externally
+     */
+    public void forceEquipmentCheck() {
+        autoEquipBestArmor();
+        markDirty();
     }
 
     public SimpleContainer getInventory() {
@@ -79,7 +306,11 @@ public class InventorySystem {
                     int toAdd = Math.min(canAdd, stack.getCount());
                     existing.grow(toAdd);
                     stack.shrink(toAdd);
-                    if (stack.isEmpty()) return true;
+                    if (stack.isEmpty()) {
+                        forceArmorUpdate();
+                        markDirty();
+                        return true;
+                    }
                 }
             }
         }
@@ -87,8 +318,12 @@ public class InventorySystem {
         // Try to place in empty slots
         for (int i = 0; i < inventory.getContainerSize(); i++) {
             if (inventory.getItem(i).isEmpty()) {
-                inventory.setItem(i, stack.copy());
+                ItemStack stackToPlace = stack.copy();
+                inventory.setItem(i, stackToPlace);
                 stack.setCount(0);
+
+                forceArmorUpdate();
+                markDirty();
                 return true;
             }
         }
@@ -127,336 +362,166 @@ public class InventorySystem {
                 }
             }
 
-            // Drop hand items
-            for (int i = 0; i < handItems.size(); i++) {
-                ItemStack stack = handItems.get(i);
+            // Drop equipped items using native system
+            for (EquipmentSlot slot : EquipmentSlot.values()) {
+                ItemStack stack = peasant.getItemBySlot(slot);
                 if (!stack.isEmpty()) {
                     peasant.spawnAtLocation(serverLevel, stack);
-                    handItems.set(i, ItemStack.EMPTY);
-                }
-            }
-
-            // Drop armor items
-            for (int i = 0; i < armorItems.size(); i++) {
-                ItemStack stack = armorItems.get(i);
-                if (!stack.isEmpty()) {
-                    peasant.spawnAtLocation(serverLevel, stack);
-                    armorItems.set(i, ItemStack.EMPTY);
+                    peasant.setItemSlot(slot, ItemStack.EMPTY);
                 }
             }
         }
     }
 
-    // ========== HAND ITEM HANDLING ==========
+    // ========== DELEGATION TO NATIVE EQUIPMENT SYSTEM ==========
 
     public ItemStack getItemInHand(InteractionHand hand) {
-        return hand == InteractionHand.MAIN_HAND ? handItems.get(MAINHAND_SLOT) : handItems.get(OFFHAND_SLOT);
+        return hand == InteractionHand.MAIN_HAND ?
+                peasant.getItemBySlot(EquipmentSlot.MAINHAND) :
+                peasant.getItemBySlot(EquipmentSlot.OFFHAND);
     }
 
     public void setItemInHand(InteractionHand hand, ItemStack stack) {
         if (hand == InteractionHand.MAIN_HAND) {
-            handItems.set(MAINHAND_SLOT, stack);
+            peasant.setItemSlot(EquipmentSlot.MAINHAND, stack);
             peasant.getEntityData().set(peasant.getMainHandItemAccessor(), stack);
         } else {
-            handItems.set(OFFHAND_SLOT, stack);
+            peasant.setItemSlot(EquipmentSlot.OFFHAND, stack);
         }
     }
 
     public ItemStack getMainHandItem() {
-        return handItems.get(MAINHAND_SLOT);
+        return peasant.getItemBySlot(EquipmentSlot.MAINHAND);
     }
 
     public ItemStack getOffhandItem() {
-        return handItems.get(OFFHAND_SLOT);
+        return peasant.getItemBySlot(EquipmentSlot.OFFHAND);
     }
 
-    // ========== ARMOR HANDLING ==========
-
     public Iterable<ItemStack> getArmorSlots() {
-        return armorItems;
+        return peasant.getArmorSlots();
     }
 
     public ItemStack getItemBySlot(EquipmentSlot slot) {
-        return switch (slot) {
-            case MAINHAND -> handItems.get(MAINHAND_SLOT);
-            case OFFHAND -> handItems.get(OFFHAND_SLOT);
-            case HEAD -> armorItems.get(HEAD_SLOT);
-            case CHEST -> armorItems.get(CHEST_SLOT);
-            case LEGS -> armorItems.get(LEGS_SLOT);
-            case FEET -> armorItems.get(FEET_SLOT);
-            case BODY -> ItemStack.EMPTY; // Body slot is not used for standard armor
-        };
+        return peasant.getItemBySlot(slot);
     }
 
     public void setItemSlot(EquipmentSlot slot, ItemStack stack) {
-        switch (slot) {
-            case MAINHAND -> {
-                handItems.set(MAINHAND_SLOT, stack);
-                peasant.getEntityData().set(peasant.getMainHandItemAccessor(), stack);
-            }
-            case OFFHAND -> handItems.set(OFFHAND_SLOT, stack);
-            case HEAD -> armorItems.set(HEAD_SLOT, stack);
-            case CHEST -> armorItems.set(CHEST_SLOT, stack);
-            case LEGS -> armorItems.set(LEGS_SLOT, stack);
-            case FEET -> armorItems.set(FEET_SLOT, stack);
-            case BODY -> { } // Body slot is not used for standard armor
+        peasant.setItemSlot(slot, stack);
+        if (slot == EquipmentSlot.MAINHAND) {
+            peasant.getEntityData().set(peasant.getMainHandItemAccessor(), stack);
         }
     }
 
     // ========== EQUIPMENT UTILITY METHODS ==========
 
-    /**
-     * Automatically equip an item to the appropriate slot if possible
-     */
     public boolean autoEquipItem(ItemStack stack) {
         if (stack.isEmpty()) return false;
 
         EquipmentSlot preferredSlot = getPreferredSlotForItem(stack);
         if (preferredSlot != null) {
-            ItemStack currentItem = getItemBySlot(preferredSlot);
+            ItemStack currentItem = peasant.getItemBySlot(preferredSlot);
             if (currentItem.isEmpty()) {
-                setItemSlot(preferredSlot, stack.copy());
+                peasant.setItemSlot(preferredSlot, stack.copy());
+                if (preferredSlot == EquipmentSlot.MAINHAND) {
+                    peasant.getEntityData().set(peasant.getMainHandItemAccessor(), stack);
+                }
                 return true;
             }
         }
         return false;
     }
 
-    /**
-     * Get the preferred equipment slot for an item
-     */
     private EquipmentSlot getPreferredSlotForItem(ItemStack stack) {
         if (stack.isEmpty()) return null;
 
-        // Determine slot based on item type
         if (stack.getItem() instanceof net.minecraft.world.item.ArmorItem armorItem) {
             return armorItem.getEquipmentSlot(stack);
         } else if (stack.getItem() instanceof net.minecraft.world.item.ShieldItem) {
             return EquipmentSlot.OFFHAND;
-        } else if (stack.getItem() instanceof net.minecraft.world.item.SwordItem ||
-                stack.getItem() instanceof net.minecraft.world.item.AxeItem ||
-                stack.getItem() instanceof net.minecraft.world.item.PickaxeItem ||
-                stack.getItem() instanceof net.minecraft.world.item.ShovelItem ||
-                stack.getItem() instanceof net.minecraft.world.item.HoeItem ||
-                stack.getItem() instanceof net.minecraft.world.item.BowItem ||
-                stack.getItem() instanceof net.minecraft.world.item.CrossbowItem ||
-                stack.getItem() instanceof net.minecraft.world.item.TridentItem) {
+        } else if (isWeapon(stack)) {
             return EquipmentSlot.MAINHAND;
         }
 
-        // Default to main hand for other items
         return EquipmentSlot.MAINHAND;
     }
 
-    /**
-     * Check if entity is wearing a full armor set
-     */
     public boolean hasFullArmor() {
-        return !armorItems.get(HEAD_SLOT).isEmpty() &&
-                !armorItems.get(CHEST_SLOT).isEmpty() &&
-                !armorItems.get(LEGS_SLOT).isEmpty() &&
-                !armorItems.get(FEET_SLOT).isEmpty();
+        return !peasant.getItemBySlot(EquipmentSlot.HEAD).isEmpty() &&
+                !peasant.getItemBySlot(EquipmentSlot.CHEST).isEmpty() &&
+                !peasant.getItemBySlot(EquipmentSlot.LEGS).isEmpty() &&
+                !peasant.getItemBySlot(EquipmentSlot.FEET).isEmpty();
     }
 
-    /**
-     * Get all equipped items (armor + held items)
-     */
     public List<ItemStack> getAllEquippedItems() {
         return Arrays.asList(
-                handItems.get(MAINHAND_SLOT),
-                handItems.get(OFFHAND_SLOT),
-                armorItems.get(HEAD_SLOT),
-                armorItems.get(CHEST_SLOT),
-                armorItems.get(LEGS_SLOT),
-                armorItems.get(FEET_SLOT)
+                peasant.getItemBySlot(EquipmentSlot.MAINHAND),
+                peasant.getItemBySlot(EquipmentSlot.OFFHAND),
+                peasant.getItemBySlot(EquipmentSlot.HEAD),
+                peasant.getItemBySlot(EquipmentSlot.CHEST),
+                peasant.getItemBySlot(EquipmentSlot.LEGS),
+                peasant.getItemBySlot(EquipmentSlot.FEET)
         );
     }
 
-    /**
-     * Remove and return an equipped item from a specific slot
-     */
     public ItemStack unequipItem(EquipmentSlot slot) {
-        ItemStack item = getItemBySlot(slot);
+        ItemStack item = peasant.getItemBySlot(slot);
         if (!item.isEmpty()) {
-            setItemSlot(slot, ItemStack.EMPTY);
+            peasant.setItemSlot(slot, ItemStack.EMPTY);
+            if (slot == EquipmentSlot.MAINHAND) {
+                peasant.getEntityData().set(peasant.getMainHandItemAccessor(), ItemStack.EMPTY);
+            }
             return item;
         }
         return ItemStack.EMPTY;
     }
 
-    /**
-     * Get all hand items (like LivingEntity.getHandSlots())
-     */
     public Iterable<ItemStack> getHandSlots() {
-        return handItems;
-    }
-
-    /**
-     * Get the armor items collection (like LivingEntity.getArmorSlots())
-     */
-    public NonNullList<ItemStack> getArmorItems() {
-        return armorItems;
-    }
-
-    /**
-     * Get the hand items collection (like LivingEntity.getHandSlots())
-     */
-    public NonNullList<ItemStack> getHandItems() {
-        return handItems;
-    }
-
-    // ========== VANILLA ARMOR NBT INTEGRATION ==========
-
-    /**
-     * Handle vanilla ArmorItems NBT tag when loading entity data
-     * This ensures compatibility with /summon commands that include ArmorItems
-     */
-    public void handleVanillaArmorItems(CompoundTag compound, HolderLookup.Provider registryAccess) {
-        if (compound.contains("ArmorItems", 9)) {
-            ListTag armorItemsList = compound.getList("ArmorItems", 10);
-
-            // ArmorItems NBT order: [feet, legs, chest, head]
-            for (int i = 0; i < armorItemsList.size() && i < 4; i++) {
-                CompoundTag itemTag = armorItemsList.getCompound(i);
-                if (!itemTag.isEmpty()) {
-                    ItemStack armorStack = ItemStack.parseOptional(registryAccess, itemTag);
-                    if (!armorStack.isEmpty()) {
-                        armorItems.set(i, armorStack);
-                    }
-                }
-            }
-        }
-    }
-
-    /**
-     * Handle vanilla HandItems NBT tag when loading entity data
-     * This ensures compatibility with /summon commands that include HandItems
-     */
-    public void handleVanillaHandItems(CompoundTag compound, HolderLookup.Provider registryAccess) {
-        if (compound.contains("HandItems", 9)) {
-            ListTag handItemsList = compound.getList("HandItems", 10);
-
-            // HandItems NBT order: [mainhand, offhand]
-            for (int i = 0; i < handItemsList.size() && i < 2; i++) {
-                CompoundTag itemTag = handItemsList.getCompound(i);
-                if (!itemTag.isEmpty()) {
-                    ItemStack handStack = ItemStack.parseOptional(registryAccess, itemTag);
-                    if (!handStack.isEmpty()) {
-                        handItems.set(i, handStack);
-                        // Update entity data for main hand
-                        if (i == MAINHAND_SLOT) {
-                            peasant.getEntityData().set(peasant.getMainHandItemAccessor(), handStack);
-                        }
-                    }
-                }
-            }
-        }
+        return Arrays.asList(
+                peasant.getItemBySlot(EquipmentSlot.MAINHAND),
+                peasant.getItemBySlot(EquipmentSlot.OFFHAND)
+        );
     }
 
     // ========== GUI AND PERSISTENCE ==========
 
     public void openInventoryFor(ServerPlayer player) {
         player.openMenu(new SimpleMenuProvider(
-                (id, playerInventory, playerEntity) -> new ChestMenu(
-                        MenuType.GENERIC_9x6,
+                (id, playerInventory, playerEntity) -> new NPCInventoryMenu(
                         id,
                         playerInventory,
-                        inventory,
-                        6
+                        peasant
                 ),
                 Component.translatable("entity.agotmod.northern_peasant.inventory", peasant.getDisplayName())
-        ));
+        ), buf -> buf.writeInt(peasant.getId()));
     }
 
+    // ========== SIMPLE NBT SAVE/LOAD - INVENTORY ONLY ==========
+
+    /**
+     * Save only the regular inventory - equipment is handled by native system
+     */
     public void saveData(CompoundTag compound, HolderLookup.Provider registryAccess) {
-        // Save regular inventory
+        // Only save the regular inventory - equipment is automatically saved by Minecraft's native system
         peasant.writeInventoryToTag(compound, registryAccess);
 
-        // Save hand items in custom format
-        ListTag customHandItemsList = new ListTag();
-        for (int i = 0; i < handItems.size(); i++) {
-            CompoundTag itemTag = new CompoundTag();
-            itemTag.putByte("Slot", (byte) i);
-            if (!handItems.get(i).isEmpty()) {
-                handItems.get(i).save(registryAccess, itemTag);
-            }
-            customHandItemsList.add(itemTag);
-        }
-        compound.put("CustomHandItems", customHandItemsList);
-
-        // Save armor items in custom format
-        ListTag customArmorItemsList = new ListTag();
-        for (int i = 0; i < armorItems.size(); i++) {
-            CompoundTag itemTag = new CompoundTag();
-            itemTag.putByte("Slot", (byte) i);
-            if (!armorItems.get(i).isEmpty()) {
-                armorItems.get(i).save(registryAccess, itemTag);
-            }
-            customArmorItemsList.add(itemTag);
-        }
-        compound.put("CustomArmorItems", customArmorItemsList);
-
-        // ALSO save in vanilla format for compatibility with /summon commands
-        ListTag vanillaArmorItems = new ListTag();
-        for (int i = 0; i < armorItems.size(); i++) {
-            CompoundTag itemTag = new CompoundTag();
-            if (!armorItems.get(i).isEmpty()) {
-                armorItems.get(i).save(registryAccess, itemTag);
-            }
-            vanillaArmorItems.add(itemTag);
-        }
-        compound.put("ArmorItems", vanillaArmorItems);
-
-        ListTag vanillaHandItems = new ListTag();
-        for (int i = 0; i < handItems.size(); i++) {
-            CompoundTag itemTag = new CompoundTag();
-            if (!handItems.get(i).isEmpty()) {
-                handItems.get(i).save(registryAccess, itemTag);
-            }
-            vanillaHandItems.add(itemTag);
-        }
-        compound.put("HandItems", vanillaHandItems);
+        // Add a marker that we've saved
+        compound.putBoolean("InventorySystemSaved", true);
     }
 
+    /**
+     * Load only the regular inventory - equipment is handled by native system
+     */
     public void loadData(CompoundTag compound, HolderLookup.Provider registryAccess) {
-        // Load regular inventory
+        // Only load the regular inventory - equipment is automatically loaded by Minecraft's native system
         peasant.readInventoryFromTag(compound, registryAccess);
 
-        // Load from vanilla ArmorItems/HandItems (for compatibility with /summon commands)
-        handleVanillaArmorItems(compound, registryAccess);
-        handleVanillaHandItems(compound, registryAccess);
+        // Sync main hand with entity data after loading
+        peasant.getEntityData().set(peasant.getMainHandItemAccessor(), peasant.getMainHandItem());
 
-        // Load from custom format ONLY if vanilla format doesn't exist
-        // This prevents double-loading the same armor items
-        if (!compound.contains("ArmorItems", 9) && compound.contains("CustomArmorItems", 9)) {
-            ListTag armorItemsList = compound.getList("CustomArmorItems", 10);
-            for (int i = 0; i < armorItemsList.size(); i++) {
-                CompoundTag itemTag = armorItemsList.getCompound(i);
-                int slot = itemTag.getByte("Slot") & 255;
-                if (slot >= 0 && slot < armorItems.size()) {
-                    armorItems.set(slot, ItemStack.parseOptional(registryAccess, itemTag));
-                }
-            }
+        // Debug verification
+        if (compound.contains("InventorySystemSaved")) {
+            System.out.println("InventorySystem: Loaded inventory for " + peasant.getDisplayName().getString());
         }
-
-        // Load from custom hand items ONLY if vanilla format doesn't exist
-        if (!compound.contains("HandItems", 9) && compound.contains("CustomHandItems", 9)) {
-            ListTag handItemsList = compound.getList("CustomHandItems", 10);
-            for (int i = 0; i < handItemsList.size(); i++) {
-                CompoundTag itemTag = handItemsList.getCompound(i);
-                int slot = itemTag.getByte("Slot") & 255;
-                if (slot >= 0 && slot < handItems.size()) {
-                    ItemStack handStack = ItemStack.parseOptional(registryAccess, itemTag);
-                    handItems.set(slot, handStack);
-                    // Update entity data for main hand
-                    if (slot == MAINHAND_SLOT) {
-                        peasant.getEntityData().set(peasant.getMainHandItemAccessor(), handStack);
-                    }
-                }
-            }
-        }
-
-        // Sync main hand item with entity data after loading
-        peasant.getEntityData().set(peasant.getMainHandItemAccessor(), handItems.get(MAINHAND_SLOT));
     }
 }

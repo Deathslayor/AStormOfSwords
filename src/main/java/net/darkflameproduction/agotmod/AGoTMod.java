@@ -5,6 +5,7 @@ import net.darkflameproduction.agotmod.client.ClientKeyInputEvents;
 import net.darkflameproduction.agotmod.client.ModAttachments;
 import net.darkflameproduction.agotmod.datagen.ModDimensionProvider;
 import net.darkflameproduction.agotmod.gui.CustomGuiScreen;
+import net.darkflameproduction.agotmod.init.ModMenuTypes;
 import net.darkflameproduction.agotmod.network.ClientPacketHandler;
 import net.darkflameproduction.agotmod.network.OpenGrocerInventoryPacket;
 import net.neoforged.api.distmarker.Dist;
@@ -21,6 +22,7 @@ import net.darkflameproduction.agotmod.util.ModWoodTypes;
 import net.darkflameproduction.agotmod.villager.ModVillagers;
 import net.darkflameproduction.agotmod.worldgen.biome.ModTerrablender;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -67,7 +69,7 @@ public class AGoTMod {
         ModVillagers.register(modEventBus);
         ModBLocks.register(modEventBus);
         ModItems.register(modEventBus);
-
+        ModMenuTypes.register(modEventBus);
         modEventBus.addListener(this::commonSetup);
         NeoForge.EVENT_BUS.register(this);
         // REMOVE THIS LINE: modEventBus.addListener(this::registerPayloads);
@@ -226,7 +228,16 @@ public class AGoTMod {
             Sheets.addWoodType(ModWoodTypes.SANDBEGGAR);
             Sheets.addWoodType(ModWoodTypes.TIGERWOOD);
             Sheets.addWoodType(ModWoodTypes.YEW);
+
             event.enqueueWork(ModItemProperties::addCustomItemProperties);
+        }
+
+        @SubscribeEvent
+        public static void registerScreens(net.neoforged.neoforge.client.event.RegisterMenuScreensEvent event) {
+            event.register(
+                    ModMenuTypes.NPC_INVENTORY_MENU.get(),
+                    net.darkflameproduction.agotmod.inventory.NPCInventoryScreen::new
+            );
         }
     }
 

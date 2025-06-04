@@ -2,6 +2,7 @@ package net.darkflameproduction.agotmod.entity.client.npc;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
 import net.minecraft.client.model.HumanoidModel;
@@ -11,17 +12,22 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ShieldItem;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.cache.object.GeoBone;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
+import software.bernie.geckolib.renderer.layer.BlockAndItemGeoLayer;
 import software.bernie.geckolib.renderer.layer.ItemArmorGeoLayer;
 
 public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasant_Entity> {
 
     // Pre-define our bone names for easy and consistent reference later - MATCH YOUR GEOMETRY EXACTLY
+    private static final String LEFT_HAND = "left_hand";
+    private static final String RIGHT_HAND = "right_hand";
     private static final String LEFT_BOOT = "armor_left_boot";
     private static final String RIGHT_BOOT = "armor_right_boot";
     private static final String LEFT_ARMOR_LEG = "armor_left_leg";
@@ -119,11 +125,15 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
         }
     }
 
-    // Add instance variables for armor items like in Gremlin example
+    // Add instance variables for armor items
     protected ItemStack helmetItem;
     protected ItemStack chestplateItem;
     protected ItemStack leggingsItem;
     protected ItemStack bootsItem;
+
+    // Add instance variables for held items
+    protected ItemStack mainHandItem;
+    protected ItemStack offhandItem;
 
     public Northern_Peasant_Renderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new Northern_Peasant_Model());
@@ -131,12 +141,11 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
         this.scaleHeight = 0.95f;
         this.shadowRadius = 0.5f;
 
-        // Add some armor rendering - back to basic approach
+        // Add armor rendering layer
         addRenderLayer(new ItemArmorGeoLayer<>(this) {
             @Nullable
             @Override
             protected ItemStack getArmorItemForBone(GeoBone bone, Northern_Peasant_Entity animatable) {
-                // Use our instance variables like Gremlin uses mainHandItem/offhandItem
                 return switch (bone.getName()) {
                     case LEFT_BOOT, RIGHT_BOOT -> Northern_Peasant_Renderer.this.bootsItem;
                     case LEFT_ARMOR_LEG, RIGHT_ARMOR_LEG -> Northern_Peasant_Renderer.this.leggingsItem;
@@ -146,7 +155,6 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
                 };
             }
 
-            // Return the equipment slot relevant to the bone we're using
             @NotNull
             @Override
             protected EquipmentSlot getEquipmentSlotForBone(GeoBone bone, ItemStack stack, Northern_Peasant_Entity animatable) {
@@ -160,7 +168,6 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
                 };
             }
 
-            // Return the ModelPart responsible for the armor pieces we want to render
             @NotNull
             @Override
             protected ModelPart getModelPartForBone(GeoBone bone, EquipmentSlot slot, ItemStack stack, Northern_Peasant_Entity animatable, HumanoidModel<?> baseModel) {
@@ -173,6 +180,56 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
                     case HELMET -> baseModel.head;
                     default -> super.getModelPartForBone(bone, slot, stack, animatable, baseModel);
                 };
+            }
+        });
+
+        // Add held item rendering layer
+        addRenderLayer(new BlockAndItemGeoLayer<>(this) {
+            @Nullable
+            @Override
+            protected ItemStack getStackForBone(GeoBone bone, Northern_Peasant_Entity animatable) {
+                return switch (bone.getName()) {
+                    case LEFT_HAND -> Northern_Peasant_Renderer.this.offhandItem;
+                    case RIGHT_HAND -> Northern_Peasant_Renderer.this.mainHandItem;
+                    default -> null;
+                };
+            }
+
+            @Override
+            protected ItemDisplayContext getTransformTypeForStack(GeoBone bone, ItemStack stack, Northern_Peasant_Entity animatable) {
+                return switch (bone.getName()) {
+                    case LEFT_HAND -> ItemDisplayContext.THIRD_PERSON_LEFT_HAND;
+                    case RIGHT_HAND -> ItemDisplayContext.THIRD_PERSON_RIGHT_HAND;
+                    default -> ItemDisplayContext.NONE;
+                };
+            }
+
+            @Override
+            protected void renderStackForBone(PoseStack poseStack, GeoBone bone, ItemStack stack, Northern_Peasant_Entity animatable,
+                                              MultiBufferSource bufferSource, float partialTick, int packedLight, int packedOverlay) {
+                if (stack == Northern_Peasant_Renderer.this.mainHandItem) {
+                    // Main hand item transformations (right hand)
+                    poseStack.mulPose(Axis.XP.rotationDegrees(-70f)); // X-axis rotation
+                    poseStack.mulPose(Axis.YP.rotationDegrees(0f));   // Y-axis rotation
+                    poseStack.mulPose(Axis.ZP.rotationDegrees(0f));   // Z-axis rotation
+
+                    if (stack.getItem() instanceof ShieldItem) {
+                        poseStack.translate(0, 0.2, 0.25);
+                    }
+                }
+                else if (stack == Northern_Peasant_Renderer.this.offhandItem) {
+                    // Offhand item transformations (left hand) - Full rotation control
+                    poseStack.mulPose(Axis.XP.rotationDegrees(-90f));   // X-axis rotation
+                    poseStack.mulPose(Axis.YP.rotationDegrees(0f));   // Y-axis rotation
+                    poseStack.mulPose(Axis.ZP.rotationDegrees(0f));   // Z-axis rotation
+
+                    if (stack.getItem() instanceof ShieldItem) {
+                        poseStack.translate(0, 0.2, 1.3);
+                        poseStack.mulPose(Axis.YP.rotationDegrees(180));
+                    }
+                }
+
+                super.renderStackForBone(poseStack, bone, stack, animatable, bufferSource, partialTick, packedLight, packedOverlay);
             }
         });
     }
@@ -189,11 +246,13 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
     public void preRender(PoseStack poseStack, Northern_Peasant_Entity animatable, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, int colour) {
         super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, colour);
 
-        // Set armor items like Gremlin sets hand items
+        // Set items for armor and held item layers
         this.helmetItem = animatable.getItemBySlot(EquipmentSlot.HEAD);
         this.chestplateItem = animatable.getItemBySlot(EquipmentSlot.CHEST);
         this.leggingsItem = animatable.getItemBySlot(EquipmentSlot.LEGS);
         this.bootsItem = animatable.getItemBySlot(EquipmentSlot.FEET);
+        this.mainHandItem = animatable.getItemBySlot(EquipmentSlot.MAINHAND);
+        this.offhandItem = animatable.getItemBySlot(EquipmentSlot.OFFHAND);
     }
 
     @Override
@@ -224,16 +283,22 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
         int tunicColor = getPresetColor(animatable, TUNIC_HOOD_COLORS, 5);
         int hoodColor = getPresetColor(animatable, TUNIC_HOOD_COLORS, 6);
 
-        // Render additional texture layers (eyes always visible)
+        // ALWAYS render eyes - they should show through armor
         renderTextureLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
                 packedLight, packedOverlay, eyesColor, EYES_TEXTURES[eyesVariant]);
 
-        // Only render default clothing if no armor is equipped in that slot
+        // ALWAYS render hair - it should show under/around helmets
+        renderTextureLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
+                packedLight, packedOverlay, hairColor, HAIR_TEXTURES[hairVariant]);
+
+        // Render clothing layers - these represent the NPC's natural clothing, not armor replacements
+        // Legs (pants) - render unless wearing leg armor that completely covers them
         if (animatable.getItemBySlot(EquipmentSlot.LEGS).isEmpty()) {
             renderTextureLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
                     packedLight, packedOverlay, legsColor, LEGS_TEXTURES[legsVariant]);
         }
 
+        // Shirt and tunic - render unless wearing chest armor that completely covers them
         if (animatable.getItemBySlot(EquipmentSlot.CHEST).isEmpty()) {
             renderTextureLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
                     packedLight, packedOverlay, shirtColor, SHIRT_TEXTURES[shirtVariant]);
@@ -242,14 +307,13 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
                     packedLight, packedOverlay, tunicColor, TUNIC_TEXTURES[tunicVariant]);
         }
 
+        // Hood - render unless wearing head armor that completely covers it
         if (animatable.getItemBySlot(EquipmentSlot.HEAD).isEmpty()) {
-            renderTextureLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
-                    packedLight, packedOverlay, hairColor, HAIR_TEXTURES[hairVariant]);
-
             renderTextureLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
                     packedLight, packedOverlay, hoodColor, HOOD_TEXTURES[hoodVariant]);
         }
 
+        // Default boots - only render if not wearing foot armor
         if (animatable.getItemBySlot(EquipmentSlot.FEET).isEmpty()) {
             renderTextureLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
                     packedLight, packedOverlay, 0xFFFFFFFF, BOOTS_TEXTURES[bootsVariant]);

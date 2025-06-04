@@ -59,6 +59,10 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
     // Grocer collection goal reference for persistence
     private GrocerCollectionGoal grocerCollectionGoal;
 
+    // Player interaction tracking
+    private Player currentInteractingPlayer = null;
+    private int interactionCooldown = 0;
+
     private final SleepSystem sleepSystem;
     private final HungerSystem hungerSystem;
     private final InventorySystem inventorySystem;
@@ -113,6 +117,26 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
     // Getter for grocer collection goal
     public GrocerCollectionGoal getGrocerCollectionGoal() { return grocerCollectionGoal; }
 
+    // Player interaction methods
+    public void setInteractingPlayer(Player player) {
+        this.currentInteractingPlayer = player;
+        this.interactionCooldown = 20; // 1 second buffer
+    }
+
+    public void clearInteractingPlayer() {
+        this.currentInteractingPlayer = null;
+        this.interactionCooldown = 20; // 1 second buffer before resuming normal AI
+    }
+
+    public boolean isInteractingWithPlayer() {
+        return this.currentInteractingPlayer != null && this.currentInteractingPlayer.isAlive()
+                && this.distanceToSqr(this.currentInteractingPlayer) <= 64.0D; // 8 block range
+    }
+
+    public Player getCurrentInteractingPlayer() {
+        return this.currentInteractingPlayer;
+    }
+
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
@@ -160,15 +184,18 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         super.addAdditionalSaveData(compound);
         compound.putLong("LastDayTracked", lastDayTracked);
 
+        // Save all systems data (excluding equipment - handled by native system)
         sleepSystem.saveData(compound);
         hungerSystem.saveData(compound);
-        inventorySystem.saveData(compound, this.registryAccess());
         homeSystem.saveData(compound);
         jobSystem.saveData(compound);
         farmingSystem.saveData(compound);
         grocerSystem.saveData(compound);
         teleportSystem.saveData(compound);
         nameSystem.saveData(compound, this.registryAccess());
+
+        // Save inventory system data (only regular inventory, not equipment)
+        inventorySystem.saveData(compound, this.registryAccess());
 
         // Save grocer collection goal data
         if (grocerCollectionGoal != null) {
@@ -181,27 +208,27 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         if (doorGoal != null) {
             doorGoal.saveOpenedBlocks(compound);
         }
-    }
 
-    // Add this method to your Northern_Peasant_Entity class
-// This ensures vanilla ArmorItems and HandItems NBT are properly handled
+        // Equipment is automatically saved by Minecraft's native system via super.addAdditionalSaveData()
+    }
 
     @Override
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
         lastDayTracked = compound.getLong("LastDayTracked");
 
+        // Load all systems data (excluding equipment - handled by native system)
         sleepSystem.loadData(compound);
         hungerSystem.loadData(compound);
-
-        inventorySystem.loadData(compound, this.registryAccess());
-
         homeSystem.loadData(compound);
         jobSystem.loadData(compound);
         farmingSystem.loadData(compound);
         grocerSystem.loadData(compound);
         teleportSystem.loadData(compound);
         nameSystem.loadData(compound, this.registryAccess());
+
+        // Load inventory system data (only regular inventory, not equipment)
+        inventorySystem.loadData(compound, this.registryAccess());
 
         // Load grocer collection goal data
         if (compound.contains("GrocerCollectionGoal") && grocerCollectionGoal != null) {
@@ -213,11 +240,27 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         if (doorGoal != null) {
             doorGoal.loadOpenedBlocks(compound);
         }
+
+        // Equipment is automatically loaded by Minecraft's native system via super.readAdditionalSaveData()
+        // Sync main hand with entity data after everything is loaded
+        this.getEntityData().set(DATA_ITEM_IN_MAIN_HAND, this.getMainHandItem());
     }
 
     @Override
     public void tick() {
         super.tick();
+
+        // Handle interaction cooldown
+        if (interactionCooldown > 0) {
+            interactionCooldown--;
+        }
+
+        // Check if current interacting player is still valid
+        if (currentInteractingPlayer != null) {
+            if (!currentInteractingPlayer.isAlive() || this.distanceToSqr(currentInteractingPlayer) > 64.0D) {
+                clearInteractingPlayer();
+            }
+        }
 
         // Check for new day and reset daily states
         if (!this.level().isClientSide) {
@@ -252,6 +295,21 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
 
     @Override
     public void aiStep() {
+        // Freeze movement if interacting with player or during cooldown, but still allow looking
+        if (isInteractingWithPlayer() || interactionCooldown > 0) {
+            // Stop all movement
+            this.setDeltaMovement(0, this.getDeltaMovement().y, 0);
+            this.getNavigation().stop();
+
+            // Force the NPC to look at the interacting player
+            if (currentInteractingPlayer != null) {
+                this.getLookControl().setLookAt(currentInteractingPlayer, 10.0F, 10.0F);
+            }
+
+            // Don't call super.aiStep() to prevent normal AI from running
+            return;
+        }
+
         if (!sleepSystem.isSleeping()) {
             super.aiStep();
         } else {
@@ -268,6 +326,9 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
                 return InteractionResult.PASS;
             }
 
+            // Set the interacting player
+            setInteractingPlayer(player);
+
             // Check if this is a grocer
             if (getJobType().equals(JobSystem.JOB_GROCER)) {
                 if (!this.level().isClientSide) {
@@ -283,14 +344,12 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
                         // Get grocer balance
                         long grocerBalance = grocerSystem.getGrocerBalance();
 
-                        // NEW: Get player's current balance from their persistent data
+                        // Get player's current balance from their persistent data
                         long playerBalance = serverPlayer.getPersistentData().getLong(COIN_BALANCE_KEY);
 
                         // Send packet to client to open GUI with both balances
                         OpenGrocerInventoryPacket packet = new OpenGrocerInventoryPacket(grocerName, entries, grocerBalance, playerBalance);
                         serverPlayer.connection.send(packet);
-
-                        System.out.println("DEBUG: Sent grocer inventory packet - Grocer balance: " + grocerBalance + ", Player balance: " + playerBalance);
                     }
                     return InteractionResult.SUCCESS;
                 } else {
@@ -320,6 +379,8 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         if (result) {
             sleepSystem.onHurt();
             hungerSystem.onHurt();
+            // Clear interaction when hurt
+            clearInteractingPlayer();
         }
 
         return result;
@@ -411,18 +472,30 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
     @Override
     public SlotAccess getSlot(int slot) { return inventorySystem.getSlot(slot); }
 
-    // Item handling delegates
+    // Item handling delegates - use native equipment system
     @Override
-    public ItemStack getMainHandItem() { return inventorySystem.getMainHandItem(); }
+    public ItemStack getMainHandItem() {
+        return super.getMainHandItem(); // Use native system
+    }
 
     @Override
-    public Iterable<ItemStack> getArmorSlots() { return inventorySystem.getArmorSlots(); }
+    public Iterable<ItemStack> getArmorSlots() {
+        return super.getArmorSlots(); // Use native system
+    }
 
     @Override
-    public ItemStack getItemBySlot(EquipmentSlot slot) { return inventorySystem.getItemBySlot(slot); }
+    public ItemStack getItemBySlot(EquipmentSlot slot) {
+        return super.getItemBySlot(slot); // Use native system
+    }
 
     @Override
-    public void setItemSlot(EquipmentSlot slot, ItemStack stack) { inventorySystem.setItemSlot(slot, stack); }
+    public void setItemSlot(EquipmentSlot slot, ItemStack stack) {
+        super.setItemSlot(slot, stack); // Use native system
+        // Sync main hand with entity data for animations
+        if (slot == EquipmentSlot.MAINHAND) {
+            this.getEntityData().set(DATA_ITEM_IN_MAIN_HAND, stack);
+        }
+    }
 
     // Sleep delegates
     @Override
@@ -430,8 +503,6 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         super.startSleeping(pos);
         sleepSystem.startSleeping(pos);
     }
-
-
 
     @Override
     public void stopSleeping() {
