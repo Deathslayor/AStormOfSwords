@@ -45,7 +45,6 @@ public class GrocerCollectionGoal extends Goal {
         availableBarrels.clear();
         targetBarrel = null;
         lastDayTime = peasant.level().getDayTime();
-        System.out.println("DEBUG [" + peasant.getDisplayName().getString() + "] Daily state reset in GrocerCollectionGoal");
     }
 
     private void checkAndResetForNewDay() {
@@ -62,12 +61,6 @@ public class GrocerCollectionGoal extends Goal {
                 (currentDayTime < lastDayTime - 1000); // Allow for small time fluctuations
 
         if (shouldReset) {
-            System.out.println("DEBUG [" + peasant.getDisplayName().getString() + "] Day change detected:");
-            System.out.println("  - Last day time: " + lastDayTime + " (day " + lastDay + ")");
-            System.out.println("  - Current day time: " + currentDayTime + " (day " + currentDay + ")");
-            System.out.println("  - Reason: " + (lastDayTime == -1 ? "First init" :
-                    currentDay > lastDay ? "New day" : "Time rollback"));
-
             resetDailyStateAfterSleep();
         }
 
@@ -151,8 +144,6 @@ public class GrocerCollectionGoal extends Goal {
                 return Double.compare(dist1, dist2);
             });
         }
-
-        System.out.println("DEBUG [" + peasant.getDisplayName().getString() + "] Found " + availableBarrels.size() + " barrels with items");
     }
 
     private boolean findNextBarrel() {
@@ -222,7 +213,6 @@ public class GrocerCollectionGoal extends Goal {
 
     @Override
     public void start() {
-        System.out.println("DEBUG [" + peasant.getDisplayName().getString() + "] Starting collection goal");
         if (targetBarrel != null) {
             peasant.getNavigation().moveTo(targetBarrel.getX() + 0.5, targetBarrel.getY(), targetBarrel.getZ() + 0.5, 0.7D);
         }
@@ -230,8 +220,6 @@ public class GrocerCollectionGoal extends Goal {
 
     @Override
     public void stop() {
-        System.out.println("DEBUG [" + peasant.getDisplayName().getString() + "] Stopping collection goal - Barrels collected: " + barrelsCollectedToday);
-
         if (targetBarrel != null) {
             searchedBarrels.add(targetBarrel);
         }
@@ -305,8 +293,6 @@ public class GrocerCollectionGoal extends Goal {
         barrelsCollectedToday++;
         searchedBarrels.add(targetBarrel);
         targetBarrel = null;
-
-        System.out.println("DEBUG [" + peasant.getDisplayName().getString() + "] Collected from barrel. Total: " + barrelsCollectedToday + "/" + MAX_BARRELS_PER_DAY);
 
         // Check if we've reached the limit
         if (barrelsCollectedToday >= MAX_BARRELS_PER_DAY) {

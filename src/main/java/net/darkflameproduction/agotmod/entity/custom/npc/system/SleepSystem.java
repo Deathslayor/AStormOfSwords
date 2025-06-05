@@ -12,7 +12,7 @@ import java.util.*;
 public class SleepSystem {
     private final Northern_Peasant_Entity peasant;
 
-    // Sleep timing constants
+    // Sleep timing constants for regular NPCs
     private static final int SLEEP_START_TIME = 12542;
     private static final int SLEEP_END_TIME = 23460;
 
@@ -146,7 +146,13 @@ public class SleepSystem {
         }
     }
 
+    /**
+     * Determines if this NPC should sleep - guards override this in the main entity
+     * This method only handles regular NPCs (non-guards)
+     */
     public boolean shouldSleep() {
+        // Guards use their own sleep schedule handled by GuardSystem
+        // This method is overridden in Northern_Peasant_Entity for guards
         long dayTime = peasant.level().getDayTime() % 24000;
         return dayTime >= SLEEP_START_TIME && dayTime <= SLEEP_END_TIME;
     }
@@ -225,13 +231,11 @@ public class SleepSystem {
     }
 
     private void onWakeUp() {
-        System.out.println("DEBUG [" + peasant.getDisplayName().getString() + "] onWakeUp() called in SleepSystem");
-
         if (!peasant.getHungerSystem().hasEnoughFood()) {
             peasant.setNeedsFoodCollection(true);
         }
 
-        if (peasant.getJobType().equals("farmer")) {
+        if (peasant.getJobType().equals(JobSystem.JOB_FARMER)) {
             peasant.getFarmingSystem().setCurrentFarmState(
                     peasant.getFarmingSystem().hasFarm() ?
                             FarmingSystem.FarmState.RETURN_TO_JOB_BLOCK :
@@ -244,13 +248,14 @@ public class SleepSystem {
             // Reset both goal and system state
             if (peasant.getGrocerCollectionGoal() != null) {
                 peasant.getGrocerCollectionGoal().resetDailyStateAfterSleep();
-                System.out.println("  - Goal daily state reset");
             }
 
             // SYNCHRONIZED: Also reset grocer system state
             peasant.getGrocerSystem().onWakeUp();
-            System.out.println("  - Grocer system state reset");
         }
+
+        // Handle guard wake up - no special actions needed currently
+        // Guards will automatically start their patrol/duty cycle
     }
 
     public static boolean isBedOccupied(Level level, BlockPos bedPos) {

@@ -3,6 +3,8 @@ package net.darkflameproduction.agotmod.entity.custom.npc.system;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.state.BlockState;
 import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
 
@@ -17,6 +19,7 @@ public class JobSystem {
     // Job types
     public static final String JOB_GROCER = "grocer";
     public static final String JOB_FARMER = "farmer";
+    public static final String JOB_GUARD = "guard";
     public static final String JOB_NONE = "";
 
     // Work area system constants
@@ -32,6 +35,11 @@ public class JobSystem {
     private static final int GROCER_IDLE_RADIUS_X = 5;
     private static final int GROCER_IDLE_RADIUS_Z = 5;
     private static final int GROCER_IDLE_RADIUS_Y = 16;
+
+    // Guard work area constants
+    private static final int GUARD_WORK_RADIUS_X = 96;
+    private static final int GUARD_WORK_RADIUS_Z = 96;
+    private static final int GUARD_WORK_RADIUS_Y = 32;
 
     // Job block reservations - static maps to track which blocks are taken
     private static final Map<BlockPos, UUID> jobBlockReservations = new HashMap<>();
@@ -92,6 +100,8 @@ public class JobSystem {
             return jobBlockState.getBlock() == net.minecraft.world.level.block.Blocks.COMPOSTER;
         } else if (getJobType().equals(JOB_GROCER)) {
             return jobBlockState.getBlock() == net.minecraft.world.level.block.Blocks.BARREL;
+        } else if (getJobType().equals(JOB_GUARD)) {
+            return jobBlockState.getBlock() == net.minecraft.world.level.block.Blocks.ANVIL;
         }
 
         // For unknown job types, assume invalid
@@ -124,6 +134,38 @@ public class JobSystem {
             // Reset grocer system if needed
             // The grocer system doesn't need specific reset logic currently
             // as it maintains its digital inventory even after job loss
+        } else if (oldJobType.equals(JOB_GUARD)) {
+            // Clean up guard system
+            peasant.getGuardSystem().onRemove();
+        }
+    }
+
+    /**
+     * Called when a peasant successfully claims a job block
+     * This should be called from wherever the job assignment logic happens
+     */
+    public void onJobBlockClaimed(BlockPos jobBlockPos, String newJobType) {
+        // Set the job data
+        setJobType(newJobType, false); // Don't give equipment yet
+        setJobBlockPos(jobBlockPos);
+
+        // Reserve the job block
+        reserveJobBlock(jobBlockPos, peasant.getUUID());
+
+        // Trigger the interact animation
+        triggerInteractAnimation();
+
+        // Give job equipment after animation is triggered
+        giveJobEquipment("", newJobType);
+    }
+
+    /**
+     * Triggers the interact animation for the peasant
+     */
+    private void triggerInteractAnimation() {
+        // Only trigger on server side
+        if (!peasant.level().isClientSide) {
+            peasant.triggerInteractAnimation();
         }
     }
 
@@ -132,6 +174,10 @@ public class JobSystem {
     }
 
     public void setJobType(String jobType) {
+        setJobType(jobType, true); // Call with equipment giving enabled by default
+    }
+
+    public void setJobType(String jobType, boolean giveEquipment) {
         String oldJob = getJobType();
         peasant.getEntityData().set(peasant.getJobTypeAccessor(), jobType);
 
@@ -139,10 +185,158 @@ public class JobSystem {
         if (!oldJob.equals(jobType)) {
             updateNameWithJob();
 
+            // Give job-specific equipment when getting a new job (if enabled)
+            if (giveEquipment) {
+                giveJobEquipment(oldJob, jobType);
+            }
+
             // If losing job, remove warning
             if (jobType.isEmpty() && !oldJob.isEmpty()) {
                 JobWarningSystem.removeJobBlockWarning(peasant.getUUID());
             }
+        }
+    }
+
+    /**
+     * Gives appropriate equipment when an NPC gets a new job
+     */
+    private void giveJobEquipment(String oldJob, String newJob) {
+        // Only give equipment on server side
+        if (peasant.level().isClientSide) {
+            return;
+        }
+
+        // Give equipment based on new job
+        if (newJob.equals(JOB_FARMER)) {
+            giveIronHoe();
+        }
+        // Guards no longer get automatic equipment
+        // else if (newJob.equals(JOB_GUARD)) {
+        //     giveGuardEquipment();
+        // }
+        // Could add equipment for other jobs here in the future
+    }
+
+    /**
+     * Gives the farmer an iron hoe if they don't already have one
+     */
+    private void giveIronHoe() {
+        // Check if they already have a hoe equipped or in inventory
+        if (hasHoe()) {
+            return; // Already has a hoe, don't give another
+        }
+
+        ItemStack ironHoe = new ItemStack(Items.IRON_HOE);
+
+        // Try to add to inventory first
+        if (peasant.getInventorySystem().addItem(ironHoe)) {
+            // Successfully added to inventory, auto-equip will handle equipping it
+            peasant.getInventorySystem().forceEquipmentCheck();
+        } else {
+            // Inventory full, try to equip directly to main hand if it's empty
+            if (peasant.getInventorySystem().getMainHandItem().isEmpty()) {
+                peasant.getInventorySystem().setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, ironHoe);
+            } else {
+                // Main hand occupied and inventory full, drop the hoe near the peasant
+                if (peasant.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+                    peasant.spawnAtLocation(serverLevel, ironHoe);
+                }
+            }
+        }
+    }
+
+    /**
+     * Gives guards equipment (sword and basic armor)
+     */
+    private void giveGuardEquipment() {
+        // Give guards a sword if they don't have one
+        if (!hasWeapon()) {
+            ItemStack ironSword = new ItemStack(Items.IRON_SWORD);
+
+            // Try to add to inventory first
+            if (peasant.getInventorySystem().addItem(ironSword)) {
+                // Successfully added to inventory, auto-equip will handle equipping it
+                peasant.getInventorySystem().forceEquipmentCheck();
+            } else {
+                // Inventory full, try to equip directly to main hand if it's empty
+                if (peasant.getInventorySystem().getMainHandItem().isEmpty()) {
+                    peasant.getInventorySystem().setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, ironSword);
+                } else {
+                    // Main hand occupied and inventory full, drop the sword near the peasant
+                    if (peasant.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+                        peasant.spawnAtLocation(serverLevel, ironSword);
+                    }
+                }
+            }
+        }
+
+        // Give basic armor if they don't have any
+        giveBasicArmor();
+    }
+
+    /**
+     * Checks if the peasant already has a hoe (equipped or in inventory)
+     */
+    private boolean hasHoe() {
+        // Check equipped items
+        if (peasant.getInventorySystem().getMainHandItem().getItem() instanceof net.minecraft.world.item.HoeItem ||
+                peasant.getInventorySystem().getOffhandItem().getItem() instanceof net.minecraft.world.item.HoeItem) {
+            return true;
+        }
+
+        // Check inventory
+        var inventory = peasant.getInventorySystem().getInventory();
+        for (int i = 0; i < inventory.getContainerSize(); i++) {
+            ItemStack stack = inventory.getItem(i);
+            if (stack.getItem() instanceof net.minecraft.world.item.HoeItem) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Checks if the peasant already has a weapon (equipped or in inventory)
+     */
+    private boolean hasWeapon() {
+        // Check equipped items
+        if (peasant.getInventorySystem().getMainHandItem().getItem() instanceof net.minecraft.world.item.SwordItem ||
+                peasant.getInventorySystem().getMainHandItem().getItem() instanceof net.minecraft.world.item.AxeItem) {
+            return true;
+        }
+
+        // Check inventory
+        var inventory = peasant.getInventorySystem().getInventory();
+        for (int i = 0; i < inventory.getContainerSize(); i++) {
+            ItemStack stack = inventory.getItem(i);
+            if (stack.getItem() instanceof net.minecraft.world.item.SwordItem ||
+                    stack.getItem() instanceof net.minecraft.world.item.AxeItem) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Gives basic leather armor to guards
+     */
+    private void giveBasicArmor() {
+        // Give leather armor if no armor equipped
+        if (peasant.getItemBySlot(net.minecraft.world.entity.EquipmentSlot.CHEST).isEmpty()) {
+            peasant.setItemSlot(net.minecraft.world.entity.EquipmentSlot.CHEST,
+                    new ItemStack(Items.LEATHER_CHESTPLATE));
+        }
+
+        if (peasant.getItemBySlot(net.minecraft.world.entity.EquipmentSlot.LEGS).isEmpty()) {
+            peasant.setItemSlot(net.minecraft.world.entity.EquipmentSlot.LEGS,
+                    new ItemStack(Items.LEATHER_LEGGINGS));
+        }
+
+        if (peasant.getItemBySlot(net.minecraft.world.entity.EquipmentSlot.FEET).isEmpty()) {
+            peasant.setItemSlot(net.minecraft.world.entity.EquipmentSlot.FEET,
+                    new ItemStack(Items.LEATHER_BOOTS));
         }
     }
 
@@ -158,99 +352,44 @@ public class JobSystem {
         peasant.getEntityData().set(peasant.getJobBlockPosAccessor(), Optional.ofNullable(pos));
     }
 
-    // NEW: Method to check if grocer is currently collecting
+    // Method to check if grocer is currently collecting
     private boolean isGrocerCurrentlyCollecting() {
         if (!getJobType().equals(JOB_GROCER)) {
             return false;
         }
 
-        // DEBUG: Add extensive logging every 10 seconds
-        if (peasant.tickCount % 200 == 0) {
-            String peasantName = peasant.getDisplayName().getString();
-            GrocerSystem.GrocerState grocerState = peasant.getGrocerSystem().getCurrentState();
-            boolean hasCollectedToday = peasant.getGrocerSystem().hasCollectedToday();
-            long currentTime = peasant.level().getDayTime() % 24000;
-            boolean isCollectionTime = currentTime >= 4000;
+        GrocerSystem.GrocerState grocerState = peasant.getGrocerSystem().getCurrentState();
+        boolean hasCollectedToday = peasant.getGrocerSystem().hasCollectedToday();
+        long currentTime = peasant.level().getDayTime() % 24000;
+        boolean isCollectionTime = currentTime >= 4000;
 
-            boolean goalCanUse = false;
-            boolean goalCanContinue = false;
-            int barrelsVisited = 0;
-            int searchAttempts = 0;
+        boolean goalCanUse = false;
+        if (peasant.getGrocerCollectionGoal() != null) {
+            goalCanUse = peasant.getGrocerCollectionGoal().canUse();
+        }
 
-            if (peasant.getGrocerCollectionGoal() != null) {
-                goalCanUse = peasant.getGrocerCollectionGoal().canUse();
-                goalCanContinue = peasant.getGrocerCollectionGoal().canContinueToUse();
-                barrelsVisited = peasant.getGrocerCollectionGoal().getBarrelsCollectedToday();
-                searchAttempts = peasant.getGrocerCollectionGoal().getSearchAttempts();
-            }
+        // Only allow collection during proper conditions
+        // 1. Must be actively collecting according to grocer system
+        if (grocerState == GrocerSystem.GrocerState.COLLECTING_FROM_BARRELS) {
+            return true;
+        }
 
-            System.out.println("DEBUG [" + peasantName + "] Grocer Collection Status:");
-            System.out.println("  - Grocer State: " + grocerState);
-            System.out.println("  - Has Collected Today: " + hasCollectedToday);
-            System.out.println("  - Current Time: " + currentTime + " (Collection Time: " + isCollectionTime + ")");
-            System.out.println("  - Goal canUse: " + goalCanUse);
-            System.out.println("  - Goal canContinue: " + goalCanContinue);
-            System.out.println("  - Barrels Visited: " + barrelsVisited + "/10");
-            System.out.println("  - Search Attempts: " + searchAttempts + "/3");
+        // 2. Must be collection time AND haven't collected today AND goal wants to start
+        if (isCollectionTime && !hasCollectedToday && goalCanUse) {
+            return true;
+        }
 
-            // STRICT: Only allow collection during proper conditions
-            // 1. Must be actively collecting according to grocer system
-            if (grocerState == GrocerSystem.GrocerState.COLLECTING_FROM_BARRELS) {
-                System.out.println("  - RESULT: TRUE (Grocer State = COLLECTING)");
-                return true;
-            }
-
-            // 2. Must be collection time AND haven't collected today AND goal wants to start
-            if (isCollectionTime && !hasCollectedToday && goalCanUse) {
-                System.out.println("  - RESULT: TRUE (Valid collection start conditions)");
-                return true;
-            }
-
-            // If they've finished collecting for the day, they should be idle
-            if (hasCollectedToday) {
-                System.out.println("  - RESULT: FALSE (Already collected today)");
-                return false;
-            }
-
-            // If it's not collection time yet, they should be idle
-            if (!isCollectionTime) {
-                System.out.println("  - RESULT: FALSE (Not collection time yet)");
-                return false;
-            }
-
-            System.out.println("  - RESULT: FALSE (Default - not collecting)");
-            return false;
-        } else {
-            // Non-debug execution (same logic without logging)
-            GrocerSystem.GrocerState grocerState = peasant.getGrocerSystem().getCurrentState();
-            boolean hasCollectedToday = peasant.getGrocerSystem().hasCollectedToday();
-            long currentTime = peasant.level().getDayTime() % 24000;
-            boolean isCollectionTime = currentTime >= 4000;
-
-            boolean goalCanUse = false;
-            if (peasant.getGrocerCollectionGoal() != null) {
-                goalCanUse = peasant.getGrocerCollectionGoal().canUse();
-            }
-
-            // Same logic as debug version
-            if (grocerState == GrocerSystem.GrocerState.COLLECTING_FROM_BARRELS) {
-                return true;
-            }
-
-            if (isCollectionTime && !hasCollectedToday && goalCanUse) {
-                return true;
-            }
-
-            if (hasCollectedToday) {
-                return false;
-            }
-
-            if (!isCollectionTime) {
-                return false;
-            }
-
+        // If they've finished collecting for the day, they should be idle
+        if (hasCollectedToday) {
             return false;
         }
+
+        // If it's not collection time yet, they should be idle
+        if (!isCollectionTime) {
+            return false;
+        }
+
+        return false;
     }
 
     public boolean isWithinWorkArea(BlockPos pos) {
@@ -267,7 +406,7 @@ public class JobSystem {
         if (getJobType().equals(JOB_FARMER)) {
             return deltaX <= FARMER_WORK_RADIUS_X && deltaZ <= FARMER_WORK_RADIUS_Z && deltaY <= FARMER_WORK_RADIUS_Y;
         } else if (getJobType().equals(JOB_GROCER)) {
-            // NEW: Dynamic work area for grocers based on collection status
+            // Dynamic work area for grocers based on collection status
             if (isGrocerCurrentlyCollecting()) {
                 // Large area when collecting
                 return deltaX <= GROCER_COLLECTION_RADIUS_X && deltaZ <= GROCER_COLLECTION_RADIUS_Z && deltaY <= GROCER_COLLECTION_RADIUS_Y;
@@ -275,14 +414,27 @@ public class JobSystem {
                 // Small area when idle
                 return deltaX <= GROCER_IDLE_RADIUS_X && deltaZ <= GROCER_IDLE_RADIUS_Z && deltaY <= GROCER_IDLE_RADIUS_Y;
             }
+        } else if (getJobType().equals(JOB_GUARD)) {
+            // Guards have large patrol areas
+            return deltaX <= GUARD_WORK_RADIUS_X && deltaZ <= GUARD_WORK_RADIUS_Z && deltaY <= GUARD_WORK_RADIUS_Y;
         }
 
         return true; // Default: no restrictions for unknown job types
     }
 
     public boolean shouldBeAtWorkArea() {
-        // Should be at work area during day time (not sleeping) and have a job
-        if (!hasJob() || peasant.shouldSleep() || peasant.needsFoodCollection()) {
+        // Should be at work area during duty time
+        if (!hasJob()) {
+            return false;
+        }
+
+        if (getJobType().equals(JOB_GUARD)) {
+            // Guards use their own sleep system
+            return !peasant.getGuardSystem().shouldSleep() && !peasant.needsFoodCollection();
+        }
+
+        // For other jobs, use normal logic
+        if (peasant.shouldSleep() || peasant.needsFoodCollection()) {
             return false;
         }
 
@@ -300,24 +452,35 @@ public class JobSystem {
     }
 
     public boolean isTooFarFromWork() {
-        if (!hasJob() || getJobBlockPos() == null || peasant.shouldSleep()) {
+        if (!hasJob() || getJobBlockPos() == null) {
             return false; // Not working hours or no job
+        }
+
+        if (getJobType().equals(JOB_GUARD)) {
+            // Guards use their own sleep system
+            if (peasant.getGuardSystem().shouldSleep()) {
+                return false;
+            }
+        } else if (peasant.shouldSleep()) {
+            return false;
         }
 
         BlockPos jobBlockPos = getJobBlockPos();
         BlockPos currentPos = peasant.blockPosition();
         double distanceSquared = jobBlockPos.distSqr(currentPos);
 
-        // Return to work if too far (based on job type and collection status)
+        // Return to work if too far (based on job type)
         if (getJobType().equals(JOB_FARMER)) {
             return distanceSquared > ((FARMER_WORK_RADIUS_X + 10) * (FARMER_WORK_RADIUS_X + 10));
         } else if (getJobType().equals(JOB_GROCER)) {
-            // NEW: Dynamic distance check for grocers
+            // Dynamic distance check for grocers
             if (isGrocerCurrentlyCollecting()) {
                 return distanceSquared > ((GROCER_COLLECTION_RADIUS_X + 10) * (GROCER_COLLECTION_RADIUS_X + 10));
             } else {
                 return distanceSquared > ((GROCER_IDLE_RADIUS_X + 10) * (GROCER_IDLE_RADIUS_X + 10));
             }
+        } else if (getJobType().equals(JOB_GUARD)) {
+            return distanceSquared > ((GUARD_WORK_RADIUS_X + 10) * (GUARD_WORK_RADIUS_X + 10));
         }
 
         return false;
@@ -346,6 +509,8 @@ public class JobSystem {
                 baseName = currentName.substring(7); // Remove "Farmer "
             } else if (currentName.startsWith("Grocer ")) {
                 baseName = currentName.substring(7); // Remove "Grocer "
+            } else if (currentName.startsWith("Guard ")) {
+                baseName = currentName.substring(6); // Remove "Guard "
             }
 
             // Add new job title
@@ -354,6 +519,8 @@ public class JobSystem {
                 newName = "Farmer " + baseName;
             } else if (getJobType().equals(JOB_GROCER)) {
                 newName = "Grocer " + baseName;
+            } else if (getJobType().equals(JOB_GUARD)) {
+                newName = "Guard " + baseName;
             }
 
             peasant.setCustomName(Component.literal(newName));

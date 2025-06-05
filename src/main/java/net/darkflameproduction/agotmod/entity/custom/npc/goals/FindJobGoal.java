@@ -113,6 +113,25 @@ public class FindJobGoal extends Goal {
                                 }
                             }
                         }
+                        // Check for armor stand (guard job block)
+                        else if (state.getBlock() == net.minecraft.world.level.block.Blocks.ANVIL) {
+                            foundAnyJobBlocks = true;
+
+                            // Skip if this job block is warned as being in use
+                            if (warnedJobBlocks.contains(checkPos)) {
+                                continue;
+                            }
+
+                            // Check traditional reservation system
+                            if (!JobSystem.isJobBlockReserved(checkPos, peasant.getUUID())) {
+                                double distance = peasantPos.distSqr(checkPos);
+                                if (distance < closestDistance) {
+                                    closestDistance = distance;
+                                    closestJobBlock = checkPos;
+                                    closestJobType = JobSystem.JOB_GUARD;
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -175,6 +194,9 @@ public class FindJobGoal extends Goal {
             } else if (targetJobType.equals(JobSystem.JOB_GROCER) &&
                     state.getBlock() != net.minecraft.world.level.block.Blocks.BARREL) {
                 return false;
+            } else if (targetJobType.equals(JobSystem.JOB_GUARD) &&
+                    !(state.getBlock() == net.minecraft.world.level.block.Blocks.ANVIL)) {
+                return false;
             }
         }
 
@@ -235,48 +257,37 @@ public class FindJobGoal extends Goal {
                 // Close enough to attempt claiming the job block
                 hasTriedThisBlock = true;
 
-                System.out.println("DEBUG: " + peasant.getDisplayName().getString() +
-                        " attempting to claim " + targetJobType + " job at " + targetJobBlock);
-
                 // Final check for warnings before claiming
                 if (JobWarningSystem.isJobBlockWarned(targetJobBlock, peasant.getUUID())) {
-                    System.out.println("DEBUG: Job block is warned, aborting claim");
                     searchCooldown = 60; // 3 seconds
                     return;
                 }
 
                 // Attempt to reserve using traditional system
                 boolean reservationSuccess = JobSystem.reserveJobBlock(targetJobBlock, peasant.getUUID());
-                System.out.println("DEBUG: Reservation attempt result: " + reservationSuccess);
 
                 if (reservationSuccess) {
-                    System.out.println("DEBUG: Setting job type to: " + targetJobType);
-                    System.out.println("DEBUG: Current job before: " + peasant.getJobType());
-
                     // Set the appropriate job type based on what we found
                     if (targetJobType != null) {
                         peasant.setJobType(targetJobType);
                         peasant.setJobBlockPos(targetJobBlock);
 
-                        System.out.println("DEBUG: Current job after: " + peasant.getJobType());
-                        System.out.println("DEBUG: Job block pos after: " + peasant.getJobBlockPos());
-
                         searchAttempts = 0; // Reset attempts on successful job acquisition
                         // Successfully got job, goal will end naturally
                     } else {
-                        System.out.println("DEBUG: targetJobType was null, using fallback");
                         // Fallback - shouldn't happen but handle gracefully
                         BlockState state = peasant.level().getBlockState(targetJobBlock);
                         if (state.getBlock() == net.minecraft.world.level.block.Blocks.COMPOSTER) {
                             peasant.setJobType(JobSystem.JOB_FARMER);
                         } else if (state.getBlock() == net.minecraft.world.level.block.Blocks.BARREL) {
                             peasant.setJobType(JobSystem.JOB_GROCER);
+                        } else if (state.getBlock() == net.minecraft.world.level.block.Blocks.ANVIL) {
+                            peasant.setJobType(JobSystem.JOB_GUARD);
                         }
                         peasant.setJobBlockPos(targetJobBlock);
                         searchAttempts = 0;
                     }
                 } else {
-                    System.out.println("DEBUG: Failed to reserve job block (someone else got it)");
                     // Failed to get job (someone else got it), stop trying this block
                     searchCooldown = 40; // 2 second cooldown to find alternative quickly
                     // Goal will end and set a cooldown

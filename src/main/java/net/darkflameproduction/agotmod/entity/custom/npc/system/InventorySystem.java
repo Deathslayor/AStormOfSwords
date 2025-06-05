@@ -518,10 +518,5 @@ public class InventorySystem {
 
         // Sync main hand with entity data after loading
         peasant.getEntityData().set(peasant.getMainHandItemAccessor(), peasant.getMainHandItem());
-
-        // Debug verification
-        if (compound.contains("InventorySystemSaved")) {
-            System.out.println("InventorySystem: Loaded inventory for " + peasant.getDisplayName().getString());
-        }
     }
 }

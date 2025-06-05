@@ -213,8 +213,7 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
                     poseStack.mulPose(Axis.YP.rotationDegrees(0f));   // Y-axis rotation
                     poseStack.mulPose(Axis.ZP.rotationDegrees(0f));   // Z-axis rotation
 
-                    // Apply translation to ANY item in main hand (not just shields)
-                    poseStack.translate(0, 0.25, 0);
+                    poseStack.translate(0, 0.25, -0.05);
                 }
                 else if (stack == Northern_Peasant_Renderer.this.offhandItem) {
                     // Offhand item transformations (left hand) - Full rotation control

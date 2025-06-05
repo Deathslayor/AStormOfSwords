@@ -23,12 +23,14 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.npc.InventoryCarrier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
@@ -53,6 +55,8 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
     private static final EntityDataAccessor<String> JOB_TYPE = SynchedEntityData.defineId(Northern_Peasant_Entity.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<Optional<BlockPos>> JOB_BLOCK_POS = SynchedEntityData.defineId(Northern_Peasant_Entity.class, EntityDataSerializers.OPTIONAL_BLOCK_POS);
     private static final EntityDataAccessor<Long> LAST_DAY_TRACKED = SynchedEntityData.defineId(Northern_Peasant_Entity.class, EntityDataSerializers.LONG);
+    private static final EntityDataAccessor<Boolean> IS_INTERACTING = SynchedEntityData.defineId(Northern_Peasant_Entity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> IS_ATTACKING = SynchedEntityData.defineId(Northern_Peasant_Entity.class, EntityDataSerializers.BOOLEAN);
 
     // Door goal reference for persistence
     private OpenAndCloseDoorGoal doorGoal;
@@ -63,6 +67,7 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
     private Player currentInteractingPlayer = null;
     private int interactionCooldown = 0;
 
+    // All NPC systems
     private final SleepSystem sleepSystem;
     private final HungerSystem hungerSystem;
     private final InventorySystem inventorySystem;
@@ -72,10 +77,15 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
     private final GrocerSystem grocerSystem;
     private final TeleportSystem teleportSystem;
     private final NameSystem nameSystem;
+    private final GuardSystem guardSystem; // Added guard system
     private static final Random RANDOM = new Random();
 
     // Daily reset tracking
     private long lastDayTracked = -1;
+
+    // Animation tracking
+    private int interactAnimationTimer = 0;
+    private static final int INTERACT_ANIMATION_DURATION = 8; // Animation lasts 8 ticks (0.375 seconds * 20 ticks)
 
     // Constants
     public static final int PEASANT_SLOT_OFFSET = 400;
@@ -91,7 +101,7 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         this.getNavigation().setCanFloat(true);
         this.getNavigation().setRequiredPathLength(48.0F);
 
-        // Initialize systems
+        // Initialize all systems
         this.sleepSystem = new SleepSystem(this);
         this.hungerSystem = new HungerSystem(this);
         this.inventorySystem = new InventorySystem(this, inventory);
@@ -101,9 +111,10 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         this.grocerSystem = new GrocerSystem(this);
         this.teleportSystem = new TeleportSystem(this);
         this.nameSystem = new NameSystem(this);
+        this.guardSystem = new GuardSystem(this); // Initialize guard system
     }
 
-    // Getters for systems
+    // Getters for all systems
     public SleepSystem getSleepSystem() { return sleepSystem; }
     public HungerSystem getHungerSystem() { return hungerSystem; }
     public InventorySystem getInventorySystem() { return inventorySystem; }
@@ -113,6 +124,7 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
     public GrocerSystem getGrocerSystem() { return grocerSystem; }
     public TeleportSystem getTeleportSystem() { return teleportSystem; }
     public NameSystem getNameSystem() { return nameSystem; }
+    public GuardSystem getGuardSystem() { return guardSystem; } // Added guard system getter
 
     // Getter for grocer collection goal
     public GrocerCollectionGoal getGrocerCollectionGoal() { return grocerCollectionGoal; }
@@ -137,33 +149,88 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         return this.currentInteractingPlayer;
     }
 
+    /**
+     * Triggers the interact animation - stops movement and plays animation
+     */
+    public void triggerInteractAnimation() {
+        if (!this.level().isClientSide) {
+            // Stop current navigation
+            this.getNavigation().stop();
+            // Set animation timer
+            interactAnimationTimer = INTERACT_ANIMATION_DURATION;
+            // Set the synced data flag
+            this.getEntityData().set(IS_INTERACTING, true);
+        }
+    }
+
+    /**
+     * Returns true if currently playing interact animation
+     */
+    public boolean isPlayingInteractAnimation() {
+        return interactAnimationTimer > 0 || this.getEntityData().get(IS_INTERACTING);
+    }
+
+    // Combat methods
+    public void setIsAttacking(boolean attacking) {
+        this.entityData.set(IS_ATTACKING, attacking);
+    }
+
+    public boolean isAttacking() {
+        return this.entityData.get(IS_ATTACKING);
+    }
+
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
+
+        // Combat goals - guards get priority for their combat goal
+        this.goalSelector.addGoal(1, new GuardCombatGoal(this)); // Guard combat has highest priority
+        this.goalSelector.addGoal(2, new PeasantDefenseGoal(this)); // Regular defense moved down to priority 2
+
         this.doorGoal = new OpenAndCloseDoorGoal(this);
-        this.goalSelector.addGoal(1, doorGoal);
-        this.goalSelector.addGoal(1, new BarrelDropOffGoal(this));
-        this.goalSelector.addGoal(2, new FindBedGoal(this));
-        this.goalSelector.addGoal(3, new SleepGoal(this));
-        this.goalSelector.addGoal(6, new CollectFoodGoal(this));
-        this.goalSelector.addGoal(7, new ReturnToJobBlockGoal(this));
-        this.goalSelector.addGoal(8, new FindJobGoal(this));
-        this.goalSelector.addGoal(9, new FarmingGoal(this));
+        this.goalSelector.addGoal(3, doorGoal); // Adjusted priority
+        this.goalSelector.addGoal(3, new BarrelDropOffGoal(this));
+        this.goalSelector.addGoal(4, new FindBedGoal(this));
+        this.goalSelector.addGoal(5, new SleepGoal(this)); // Adjusted priority
+        this.goalSelector.addGoal(7, new CollectFoodGoal(this));
+        this.goalSelector.addGoal(8, new ReturnToJobBlockGoal(this));
+        this.goalSelector.addGoal(9, new FindJobGoal(this));
+        this.goalSelector.addGoal(10, new FarmingGoal(this));
 
-        // Store reference to grocer collection goal for persistence
         this.grocerCollectionGoal = new GrocerCollectionGoal(this);
-        this.goalSelector.addGoal(9, grocerCollectionGoal);
+        this.goalSelector.addGoal(10, grocerCollectionGoal);
 
-        this.goalSelector.addGoal(10, new RestrictedWanderGoal(this, 0.6D));
-        this.goalSelector.addGoal(11, new LookAtPlayerGoal(this, Player.class, 8.0F));
-        this.goalSelector.addGoal(12, new RandomLookAroundGoal(this));
+        // Add guard patrol goal
+        this.goalSelector.addGoal(11, new GuardPatrolGoal(this)); // Guard patrol goal
+
+        this.goalSelector.addGoal(12, new RestrictedWanderGoal(this, 0.6D)); // Adjusted priority
+        this.goalSelector.addGoal(13, new LookAtPlayerGoal(this, Player.class, 8.0F)); // Adjusted priority
+        this.goalSelector.addGoal(14, new RandomLookAroundGoal(this)); // Adjusted priority
+
+        // Target selection goals
+        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
     }
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MOVEMENT_SPEED, 0.5)
-                .add(Attributes.MAX_HEALTH, 20.0)
-                .add(Attributes.FOLLOW_RANGE, 48.0);
+                .add(Attributes.MAX_HEALTH, 40.0)
+                .add(Attributes.FOLLOW_RANGE, 48.0)
+                .add(Attributes.ATTACK_DAMAGE, 4.0);
+    }
+
+    @Override
+    public boolean canAttack(LivingEntity target) {
+        // Guards can attack monsters freely
+        if (getJobType().equals(JobSystem.JOB_GUARD) && target instanceof net.minecraft.world.entity.monster.Monster) {
+            return true;
+        }
+
+        // Don't attack players unless they attacked us first
+        if (target instanceof Player) {
+            return this.getLastHurtByMob() == target;
+        }
+        return super.canAttack(target);
     }
 
     @Override
@@ -177,12 +244,16 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         builder.define(JOB_TYPE, JobSystem.JOB_NONE);
         builder.define(JOB_BLOCK_POS, Optional.empty());
         builder.define(LAST_DAY_TRACKED, -1L);
+        builder.define(IS_INTERACTING, false);
+        builder.define(IS_ATTACKING, false);
     }
 
     @Override
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         compound.putLong("LastDayTracked", lastDayTracked);
+        compound.putInt("InteractAnimationTimer", interactAnimationTimer);
+        compound.putBoolean("IsAttacking", this.isAttacking());
 
         // Save all systems data (excluding equipment - handled by native system)
         sleepSystem.saveData(compound);
@@ -193,6 +264,7 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         grocerSystem.saveData(compound);
         teleportSystem.saveData(compound);
         nameSystem.saveData(compound, this.registryAccess());
+        guardSystem.saveData(compound); // Save guard system data
 
         // Save inventory system data (only regular inventory, not equipment)
         inventorySystem.saveData(compound, this.registryAccess());
@@ -216,6 +288,12 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
         lastDayTracked = compound.getLong("LastDayTracked");
+        interactAnimationTimer = compound.getInt("InteractAnimationTimer");
+
+        // Load attack state
+        if (compound.contains("IsAttacking")) {
+            this.setIsAttacking(compound.getBoolean("IsAttacking"));
+        }
 
         // Load all systems data (excluding equipment - handled by native system)
         sleepSystem.loadData(compound);
@@ -226,6 +304,7 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         grocerSystem.loadData(compound);
         teleportSystem.loadData(compound);
         nameSystem.loadData(compound, this.registryAccess());
+        guardSystem.loadData(compound); // Load guard system data
 
         // Load inventory system data (only regular inventory, not equipment)
         inventorySystem.loadData(compound, this.registryAccess());
@@ -255,6 +334,15 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
             interactionCooldown--;
         }
 
+        // Handle interact animation timer
+        if (interactAnimationTimer > 0) {
+            interactAnimationTimer--;
+            // Clear the synced flag when timer expires
+            if (interactAnimationTimer <= 0 && !this.level().isClientSide) {
+                this.getEntityData().set(IS_INTERACTING, false);
+            }
+        }
+
         // Check if current interacting player is still valid
         if (currentInteractingPlayer != null) {
             if (!currentInteractingPlayer.isAlive() || this.distanceToSqr(currentInteractingPlayer) > 64.0D) {
@@ -267,7 +355,7 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
             checkForNewDay();
         }
 
-        // Update all systems
+        // Update all systems including guard system
         sleepSystem.tick();
         hungerSystem.tick();
         inventorySystem.tick();
@@ -276,6 +364,7 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         farmingSystem.tick();
         grocerSystem.tick();
         teleportSystem.tick();
+        guardSystem.tick(); // Update guard system
     }
 
     private void checkForNewDay() {
@@ -295,13 +384,13 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
 
     @Override
     public void aiStep() {
-        // Freeze movement if interacting with player or during cooldown, but still allow looking
-        if (isInteractingWithPlayer() || interactionCooldown > 0) {
+        // Freeze movement if interacting with player, during cooldown, OR playing interact animation (but NOT during attacks)
+        if (isInteractingWithPlayer() || interactionCooldown > 0 || isPlayingInteractAnimation()) {
             // Stop all movement
             this.setDeltaMovement(0, this.getDeltaMovement().y, 0);
             this.getNavigation().stop();
 
-            // Force the NPC to look at the interacting player
+            // Force the NPC to look at the interacting player (if any)
             if (currentInteractingPlayer != null) {
                 this.getLookControl().setLookAt(currentInteractingPlayer, 10.0F, 10.0F);
             }
@@ -358,7 +447,7 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
                     return InteractionResult.SUCCESS;
                 }
             } else {
-                // Regular inventory for non-grocers
+                // Regular inventory for non-grocers (including guards)
                 if (!this.level().isClientSide && player instanceof ServerPlayer serverPlayer) {
                     inventorySystem.openInventoryFor(serverPlayer);
                 }
@@ -392,9 +481,13 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         sleepSystem.onRemove();
         homeSystem.onRemove();
         grocerSystem.onRemove();
-        if (!this.level().isClientSide && reason == RemovalReason.KILLED) {
-            inventorySystem.dropAllItems();
-        }
+        guardSystem.onRemove(); // Clean up guard system
+
+        // Don't drop items when killed - comment out the inventory drop
+        // if (!this.level().isClientSide && reason == RemovalReason.KILLED) {
+        //     inventorySystem.dropAllItems();
+        // }
+
         super.remove(reason);
     }
 
@@ -442,8 +535,15 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         return super.finalizeSpawn(p_35439_, p_35440_, p_363222_, p_35442_);
     }
 
-    // Delegate methods to systems
-    public boolean shouldSleep() { return sleepSystem.shouldSleep(); }
+    // Delegate methods to systems - modified shouldSleep for guards
+    public boolean shouldSleep() {
+        // Guards use their own sleep system
+        if (getJobType().equals(JobSystem.JOB_GUARD)) {
+            return guardSystem.shouldSleep();
+        }
+        return sleepSystem.shouldSleep();
+    }
+
     public boolean isSleeping() { return sleepSystem.isSleeping(); }
     public void setSleeping(boolean sleeping) { sleepSystem.setSleeping(sleeping); }
     public BlockPos getBedPos() { return sleepSystem.getBedPos(); }
@@ -529,8 +629,20 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "movement", 0, state -> {
-            if (sleepSystem.isSleeping()) {
+        // Main animation controller - handles movement, interact, and attack animations
+        controllers.add(new AnimationController<>(this, "main", 0, state -> {
+            boolean isInteracting = state.getAnimatable().getEntityData().get(IS_INTERACTING);
+            boolean isAttacking = state.getAnimatable().getEntityData().get(IS_ATTACKING);
+
+            // Priority: Attack (while moving) > Interact > Movement
+            if (isAttacking) {
+                // Show attack animation regardless of movement state
+                return state.setAndContinue(ModAnimationDefinitions.ATTACK);
+            } else if (isInteracting) {
+                return state.setAndContinue(ModAnimationDefinitions.INTERRACT);
+            }
+            // Otherwise show movement animations
+            else if (sleepSystem.isSleeping()) {
                 state.setAnimation(ModAnimationDefinitions.IDLE);
             } else if (state.isMoving()) {
                 state.setAnimation(ModAnimationDefinitions.WALK);
@@ -539,6 +651,8 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
             }
             return PlayState.CONTINUE;
         }));
+
+        // Death controller
         controllers.add(ModAnimationDefinitions.ModdedDeathController(this));
     }
 

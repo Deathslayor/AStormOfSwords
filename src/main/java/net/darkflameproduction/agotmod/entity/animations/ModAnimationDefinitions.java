@@ -13,9 +13,6 @@ import software.bernie.geckolib.animation.RawAnimation;
 
 public class ModAnimationDefinitions {
 
-
-
-
     public static final RawAnimation DIE = RawAnimation.begin().thenPlay("misc.die");
     public static final RawAnimation ATTACK = RawAnimation.begin().thenPlay("misc.attack");
     public static final RawAnimation SPAWN = RawAnimation.begin().thenPlay("misc.spawn");
@@ -24,18 +21,11 @@ public class ModAnimationDefinitions {
     public static final RawAnimation IDLE = RawAnimation.begin().thenPlay("misc.idle");
     public static final RawAnimation FLY = RawAnimation.begin().thenPlay("misc.flying");
     public static final RawAnimation SIT = RawAnimation.begin().thenPlay("misc.sit");
-
-
-
-
-
-
-
+    public static final RawAnimation INTERRACT = RawAnimation.begin().thenPlay("misc.interract");
 
     public static <T extends LivingEntity & GeoAnimatable> AnimationController<T> ModdedDeathController(T animatable) {
         return new AnimationController<>(animatable, "Die", 0, state -> state.getAnimatable().isDeadOrDying() ? state.setAndContinue(DIE) : PlayState.STOP);
     }
-
 
     public static <T extends LivingEntity & GeoAnimatable> AnimationController<T> ModdedSummonController(T animatable) {
         return new AnimationController<>(animatable, "Spawn", 0, state -> {
@@ -57,7 +47,4 @@ public class ModAnimationDefinitions {
             return PlayState.STOP;
         });
     }
-
-
-
 }

@@ -22,6 +22,8 @@ public class FarmingSystem {
     private boolean hasReturnedToJobBlockAfterFood = true;
     private FarmState currentFarmState = FarmState.NEEDS_FARM_SETUP;
 
+    // Animation cooldown tracking - REMOVED for immediate animations
+
     public enum FarmState {
         NEEDS_FARM_SETUP,       // Need to set up farm area
         RETURN_TO_JOB_BLOCK,    // Walk to job block each morning
@@ -41,6 +43,8 @@ public class FarmingSystem {
             return;
         }
 
+        // Update animation cooldown - REMOVED for immediate animations
+
         // Check if job block still exists - if not, lose job
         if (peasant.hasJob() && peasant.getJobBlockPos() != null) {
             BlockPos jobBlockPos = peasant.getJobBlockPos();
@@ -57,6 +61,16 @@ public class FarmingSystem {
                 hasFarm = false;
                 currentFarmState = FarmState.NEEDS_FARM_SETUP;
             }
+        }
+    }
+
+    /**
+     * Triggers interact animation - stops movement and plays animation
+     */
+    private void triggerInteractAnimation() {
+        if (!peasant.level().isClientSide) {
+            System.out.println("DEBUG: FarmingSystem calling triggerInteractAnimation");
+            peasant.triggerInteractAnimation();
         }
     }
 
@@ -115,6 +129,9 @@ public class FarmingSystem {
         if (!hasFarm) {
             hasFarm = true;
             currentFarmState = FarmState.RETURN_TO_JOB_BLOCK;
+
+            // Trigger interact animation when setting up farm
+            triggerInteractAnimation();
             return true;
         }
 
@@ -139,6 +156,7 @@ public class FarmingSystem {
 
         BlockPos jobBlock = peasant.getJobBlockPos();
         int converted = 0;
+        boolean triggeredAnimation = false;
 
         // Convert 15x15 area centered on job block at Y-1 level
         for (int x = -9; x <= 9; x++) {
@@ -154,6 +172,12 @@ public class FarmingSystem {
                 // Convert grass and dirt to farmland
                 if (currentBlock.getBlock() == net.minecraft.world.level.block.Blocks.GRASS_BLOCK ||
                         currentBlock.getBlock() == net.minecraft.world.level.block.Blocks.DIRT) {
+
+                    // Trigger interact animation for first conversion
+                    if (!triggeredAnimation) {
+                        triggerInteractAnimation();
+                        triggeredAnimation = true;
+                    }
 
                     peasant.level().setBlock(targetPos,
                             net.minecraft.world.level.block.Blocks.FARMLAND.defaultBlockState(), 3);
@@ -191,6 +215,7 @@ public class FarmingSystem {
 
         BlockPos jobBlock = peasant.getJobBlockPos();
         int planted = 0;
+        boolean triggeredAnimation = false;
 
         // Plant crops on farmland in 15x15 area
         for (int x = -9; x <= 9; x++) {
@@ -211,6 +236,12 @@ public class FarmingSystem {
 
                     // CHECK IF WE HAVE THE SEED BEFORE PLANTING
                     if (hasSeedInInventory(cropToPlant.asItem())) {
+                        // Trigger interact animation for first planting
+                        if (!triggeredAnimation) {
+                            triggerInteractAnimation();
+                            triggeredAnimation = true;
+                        }
+
                         peasant.level().setBlock(cropPos, cropToPlant.defaultBlockState(), 3);
 
                         // Play grass breaking sound when planting crops
@@ -299,6 +330,9 @@ public class FarmingSystem {
     public void harvestAndReplant(BlockPos cropPos) {
         BlockState cropState = peasant.level().getBlockState(cropPos);
 
+        // Trigger interact animation for harvesting
+        triggerInteractAnimation();
+
         if (peasant.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
             // Play grass breaking sound when harvesting crops
             peasant.level().playSound(null, cropPos, SoundEvents.GRASS_BREAK,
@@ -323,6 +357,29 @@ public class FarmingSystem {
                 consumeSeedFromInventory(cropBlock.asItem());
             }
         }
+
+        // After harvesting, do maintenance work in the area
+        performMaintenanceWork();
+    }
+
+    /**
+     * Performs maintenance work after harvesting - converts dirt to farmland and plants seeds
+     */
+    public void performMaintenanceWork() {
+        if (!hasFarm || peasant.getJobBlockPos() == null) {
+            return;
+        }
+
+        // Convert up to 3 dirt/grass blocks to farmland
+        int conversionsPerformed = convertDirtGrassToFarmland();
+
+        // Plant seeds on up to 3 empty farmland blocks
+        int plantingsPerformed = plantSeedsOnEmptyFarmland();
+
+        // If we did any work, trigger interact animation
+        if (conversionsPerformed > 0 || plantingsPerformed > 0) {
+            triggerInteractAnimation();
+        }
     }
 
     // New methods for harvesting-time maintenance
@@ -333,9 +390,10 @@ public class FarmingSystem {
 
         BlockPos jobBlock = peasant.getJobBlockPos();
         int converted = 0;
-        int maxConversions = 5; // Limit conversions per call to avoid lag
+        int maxConversions = 3; // Limit conversions per call for gradual work
+        boolean triggeredAnimation = false;
 
-        // Convert dirt/grass to farmland in 15x15 area (no daily limit during harvesting)
+        // Convert dirt/grass to farmland in 19x19 area (no daily limit during harvesting)
         for (int x = -9; x <= 9 && converted < maxConversions; x++) {
             for (int z = -9; z <= 9 && converted < maxConversions; z++) {
                 BlockPos targetPos = new BlockPos(
@@ -378,9 +436,9 @@ public class FarmingSystem {
 
         BlockPos jobBlock = peasant.getJobBlockPos();
         int planted = 0;
-        int maxPlantings = 5; // Limit plantings per call to avoid lag
+        int maxPlantings = 3; // Limit plantings per call for gradual work
 
-        // Plant crops on empty farmland in 15x15 area
+        // Plant crops on empty farmland in 19x19 area
         for (int x = -9; x <= 9 && planted < maxPlantings; x++) {
             for (int z = -9; z <= 9 && planted < maxPlantings; z++) {
                 BlockPos farmlandPos = new BlockPos(

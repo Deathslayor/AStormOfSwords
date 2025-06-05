@@ -5,6 +5,7 @@ import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.JobSystem;
 
 import java.util.EnumSet;
 
@@ -18,7 +19,19 @@ public class SleepGoal extends Goal {
 
     @Override
     public boolean canUse() {
-        if (!peasant.shouldSleep() || peasant.isSleeping() || peasant.needsFoodCollection()) {
+        // DEBUG: Add some logging to see what's happening
+        boolean shouldSleep = peasant.shouldSleep();
+        boolean isSleeping = peasant.isSleeping();
+        boolean needsFood = peasant.needsFoodCollection();
+        boolean isGuard = peasant.getJobType().equals(JobSystem.JOB_GUARD);
+
+        // Log for debugging (remove this in production)
+        if (isGuard && !peasant.level().isClientSide) {
+            long dayTime = peasant.level().getDayTime() % 24000;
+        }
+
+        // Use the peasant's shouldSleep() method which handles guard schedules properly
+        if (!shouldSleep || isSleeping || needsFood) {
             return false;
         }
 
@@ -37,7 +50,13 @@ public class SleepGoal extends Goal {
 
                 // Only start sleeping if we're close enough to the bed
                 double distanceToBed = peasant.distanceToSqr(homeBed.getX(), homeBed.getY(), homeBed.getZ());
-                return distanceToBed <= 4.0D; // Only sleep if within 2 blocks
+                boolean canSleep = distanceToBed <= 4.0D;
+
+                // More debug logging
+                if (isGuard && !peasant.level().isClientSide) {
+                }
+
+                return canSleep; // Only sleep if within 2 blocks
             }
         }
 
@@ -46,7 +65,17 @@ public class SleepGoal extends Goal {
                 !peasant.getSleepSystem().isBedOccupied(peasant.level(), peasant.getBedPos())) {
 
             double distanceToBed = peasant.distanceToSqr(peasant.getBedPos().getX(), peasant.getBedPos().getY(), peasant.getBedPos().getZ());
-            return distanceToBed <= 4.0D; // Only sleep if within 2 blocks
+            boolean canSleep = distanceToBed <= 4.0D;
+
+            // More debug logging
+            if (isGuard && !peasant.level().isClientSide) {
+            }
+
+            return canSleep; // Only sleep if within 2 blocks
+        }
+
+        // Debug: No valid bed found
+        if (isGuard && !peasant.level().isClientSide) {
         }
 
         return false;
@@ -54,6 +83,7 @@ public class SleepGoal extends Goal {
 
     @Override
     public boolean canContinueToUse() {
+        // Use the peasant's shouldSleep() method which handles guard schedules properly
         if (!peasant.shouldSleep()) {
             return false;
         }
@@ -73,6 +103,9 @@ public class SleepGoal extends Goal {
             // Only start sleeping if we're actually close to the bed
             double distanceToBed = peasant.distanceToSqr(bedPos.getX(), bedPos.getY(), bedPos.getZ());
             if (distanceToBed <= 4.0D) {
+                // Debug logging
+                if (peasant.getJobType().equals(JobSystem.JOB_GUARD) && !peasant.level().isClientSide) {
+                }
                 peasant.startSleeping(bedPos);
             }
         }

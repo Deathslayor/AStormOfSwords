@@ -110,10 +110,10 @@ public class FarmingGoal extends Goal {
                 handleCropPlanting();
                 break;
             case HARVESTING_CROPS:
-                handleHarvesting();
+                handleHarvestingWithMaintenance();
                 break;
             case PATROLLING:
-                handlePatrolling();
+                handlePatrollingWithMaintenance();
                 break;
         }
     }
@@ -161,7 +161,7 @@ public class FarmingGoal extends Goal {
         }
     }
 
-    private void handleHarvesting() {
+    private void handleHarvestingWithMaintenance() {
         // Look for crops to harvest every 1 second
         if (workTimer % 20 == 0) {
             BlockPos harvestPos = peasant.getFarmingSystem().findNextHarvestPosition();
@@ -169,9 +169,18 @@ public class FarmingGoal extends Goal {
             if (harvestPos != null) {
                 currentWorkTarget = harvestPos;
             } else {
-                // No crops to harvest, switch to patrolling
-                if (workTimer % 200 == 0) { // Every 10 seconds
-                    peasant.getFarmingSystem().setCurrentFarmState(FarmState.PATROLLING);
+                // No crops to harvest, but stay in harvesting mode and do maintenance
+                currentWorkTarget = null;
+
+                // Perform maintenance work every 3 seconds when no crops to harvest
+                if (workTimer % 60 == 0) {
+                    int conversions = peasant.getFarmingSystem().convertDirtGrassToFarmland();
+                    int plantings = peasant.getFarmingSystem().plantSeedsOnEmptyFarmland();
+
+                    // If no maintenance work was done, switch to patrolling
+                    if (conversions == 0 && plantings == 0) {
+                        peasant.getFarmingSystem().setCurrentFarmState(FarmState.PATROLLING);
+                    }
                 }
             }
         }
@@ -182,7 +191,7 @@ public class FarmingGoal extends Goal {
                     currentWorkTarget.getY(), currentWorkTarget.getZ());
 
             if (distance <= 9.0D) { // Within 3 blocks
-                // Close enough to harvest
+                // Close enough to harvest (this will also trigger maintenance work)
                 peasant.getFarmingSystem().harvestAndReplant(currentWorkTarget);
                 currentWorkTarget = null;
 
@@ -201,29 +210,22 @@ public class FarmingGoal extends Goal {
         }
     }
 
-    private void handlePatrolling() {
-        // Check for new work every 5 seconds
-        if (workTimer % 100 == 0) {
-            // Check if there are crops to harvest (higher priority)
+    private void handlePatrollingWithMaintenance() {
+        // Check for new work every 3 seconds
+        if (workTimer % 60 == 0) {
+            // Check if there are crops to harvest (highest priority)
             BlockPos harvestPos = peasant.getFarmingSystem().findNextHarvestPosition();
             if (harvestPos != null) {
                 peasant.getFarmingSystem().setCurrentFarmState(FarmState.HARVESTING_CROPS);
                 return;
             }
 
-            // Check if farmland conversion is needed
-            int converted = peasant.getFarmingSystem().convertToFarmland();
-            if (converted > 0) {
-                peasant.getFarmingSystem().setCurrentFarmState(FarmState.CONVERTING_TO_FARMLAND);
-                return;
-            }
+            // Do maintenance work - convert dirt and plant seeds
+            int conversions = peasant.getFarmingSystem().convertDirtGrassToFarmland();
+            int plantings = peasant.getFarmingSystem().plantSeedsOnEmptyFarmland();
 
-            // Check if planting is needed
-            int planted = peasant.getFarmingSystem().plantCrops();
-            if (planted > 0) {
-                peasant.getFarmingSystem().setCurrentFarmState(FarmState.PLANTING_CROPS);
-                return;
-            }
+            // If we did work, stay in patrolling mode for gradual farm expansion
+            // If no work was done, just continue patrolling
         }
 
         // Wander around the farm area occasionally
