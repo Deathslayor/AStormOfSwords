@@ -213,9 +213,8 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
                     poseStack.mulPose(Axis.YP.rotationDegrees(0f));   // Y-axis rotation
                     poseStack.mulPose(Axis.ZP.rotationDegrees(0f));   // Z-axis rotation
 
-                    if (stack.getItem() instanceof ShieldItem) {
-                        poseStack.translate(0, 0.2, 0.25);
-                    }
+                    // Apply translation to ANY item in main hand (not just shields)
+                    poseStack.translate(0, 0.25, 0);
                 }
                 else if (stack == Northern_Peasant_Renderer.this.offhandItem) {
                     // Offhand item transformations (left hand) - Full rotation control
@@ -223,6 +222,7 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
                     poseStack.mulPose(Axis.YP.rotationDegrees(0f));   // Y-axis rotation
                     poseStack.mulPose(Axis.ZP.rotationDegrees(0f));   // Z-axis rotation
 
+                    // Apply special positioning for shields in offhand
                     if (stack.getItem() instanceof ShieldItem) {
                         poseStack.translate(0, 0.2, 1.3);
                         poseStack.mulPose(Axis.YP.rotationDegrees(180));
@@ -287,9 +287,11 @@ public class Northern_Peasant_Renderer extends GeoEntityRenderer<Northern_Peasan
         renderTextureLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
                 packedLight, packedOverlay, eyesColor, EYES_TEXTURES[eyesVariant]);
 
-        // ALWAYS render hair - it should show under/around helmets
-        renderTextureLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
-                packedLight, packedOverlay, hairColor, HAIR_TEXTURES[hairVariant]);
+        // Render hair - only if not wearing head armor
+        if (animatable.getItemBySlot(EquipmentSlot.HEAD).isEmpty()) {
+            renderTextureLayer(poseStack, animatable, model, bufferSource, isReRender, partialTick,
+                    packedLight, packedOverlay, hairColor, HAIR_TEXTURES[hairVariant]);
+        }
 
         // Render clothing layers - these represent the NPC's natural clothing, not armor replacements
         // Legs (pants) - render unless wearing leg armor that completely covers them
