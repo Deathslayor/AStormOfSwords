@@ -1,4 +1,4 @@
-// 1.21.3	2025-05-26T17:18:04.1656883	Block States: agotmod
+// 1.21.3	2025-06-06T14:53:34.411731	Block States: agotmod
 78b6cf02fa0f02bb58a5d7645020281ff8bc4c59 assets/agotmod/blockstates/alder_button.json
 4babc4c353cbdf68af13d112a9b9311de8af4fe1 assets/agotmod/blockstates/alder_door.json
 e817d04da7d05e8c00ce23999fdc528a05195c1d assets/agotmod/blockstates/alder_fence.json
@@ -3817,6 +3817,7 @@ b0e37173a467540ec12519849acfa1ff3bc74071 assets/agotmod/blockstates/topaz_deepsl
 e29ccbf30b1eaf281a96f8514b393c4f2b07ab9c assets/agotmod/blockstates/topaz_ore.json
 5ebf92bcb7c37e5e2dd004f0e9018b9c8fb6248e assets/agotmod/blockstates/tourmaline_deepslate_ore.json
 d17e4b2ae8a44ffc4cd1defe468a39a7ef0fdc6a assets/agotmod/blockstates/tourmaline_ore.json
+493c6be17f1f9a678b6ed6d4c179873b5648e4ec assets/agotmod/blockstates/town_hall.json
 9e3aed55c4c3cefa5b720ba3e3102d942be49c4c assets/agotmod/blockstates/transparent_diamond_block.json
 ea095a3f907d345ca211d93eb42e63947c1fd151 assets/agotmod/blockstates/tuff_brick_11_block.json
 087547605dec72f3611e1dc2a5c9af9cedf81c19 assets/agotmod/blockstates/tuff_brick_11_slab.json
@@ -12389,6 +12390,7 @@ bc5d05e51847984ee35db36c85a8921704c408fe assets/agotmod/models/block/topaz_block
 4e476cc1986eca5fc69983aabe5df76f61a6a747 assets/agotmod/models/block/topaz_ore.json
 de5a622e5072c3efaed16af69a1dfea734b7fb51 assets/agotmod/models/block/tourmaline_deepslate_ore.json
 1941f33a5783cbbcdeacd57c671da317417d98e0 assets/agotmod/models/block/tourmaline_ore.json
+186920979e57b19466f2597b091a42569773a779 assets/agotmod/models/block/town_hall.json
 1a85cc043395a457cdc2c21da6694930a4ad70c4 assets/agotmod/models/block/transparent_diamond_block.json
 3c334dd1ef756f20f9d3d7b1532518e050e61ceb assets/agotmod/models/block/tuff_brick_11_block.json
 47ec5c60376284abd9e38bfd6cceaddf504a197a assets/agotmod/models/block/tuff_brick_11_slab.json
@@ -14024,6 +14026,7 @@ f9ff3ab82f01047adab3cec76d089758e4073cf5 assets/agotmod/models/item/topaz_deepsl
 e3d847f726793104556948794f05945ef3de17ce assets/agotmod/models/item/topaz_ore.json
 f548fb0e0df74336748a050f1c01f676076febd4 assets/agotmod/models/item/tourmaline_deepslate_ore.json
 af4b99c9c7d44f7f063554365fc31a6daa6b9f04 assets/agotmod/models/item/tourmaline_ore.json
+dc78f2542365749a1465f8f33a09a2d0f4d313d0 assets/agotmod/models/item/town_hall.json
 73bf49f1802f7649a92f9275b5a16df06a71689b assets/agotmod/models/item/transparent_diamond_block.json
 82b008b2f5e9592c799ed83ffb529fe9bdf143e1 assets/agotmod/models/item/tuff_brick_11_block.json
 9d8ed1b26f4d6ba7146f721516687feb920d799e assets/agotmod/models/item/tuff_brick_12_block.json

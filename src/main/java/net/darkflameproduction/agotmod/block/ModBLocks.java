@@ -2099,6 +2099,12 @@ public class ModBLocks {
     // ---------------------------(JOBBLOCKS)--------------------------- //
 
 
+    public static final DeferredBlock<Block> TOWN_HALL = registerBlock("town_hall",
+            TownHallBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f),
+            false);
+
+
     public static final DeferredBlock<Block> FARMER_BARREL = registerBlock("farmer_barrel",
             FarmerBarrelBlock::new,
             BlockBehaviour.Properties.of()

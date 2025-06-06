@@ -535,6 +535,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         // ---------------------------(JOBBLOCKS)--------------------------- //
 
         simpleItem(ModItems.FARMER_BARREL);
+        simpleItem(ModItems.TOWN_HALL);
 
 
 

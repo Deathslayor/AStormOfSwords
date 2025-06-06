@@ -919,6 +919,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
 
         this.dropSelf(ModBLocks.FARMER_BARREL.get());
+        this.dropSelf(ModBLocks.TOWN_HALL.get());
 
 
 

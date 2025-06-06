@@ -1,4 +1,4 @@
-// 1.21.3	2025-05-26T17:38:21.5199115	Loot Tables
+// 1.21.3	2025-06-06T14:53:34.3461946	Loot Tables
 dcab3871310df0811beb8de47adc40c83d85986b data/agotmod/loot_table/blocks/alder_button.json
 81071778b6225f49c02483465d22441e05162a1b data/agotmod/loot_table/blocks/alder_door.json
 33ccfef8d939079aebfc7963299df0ced91481b5 data/agotmod/loot_table/blocks/alder_fence.json
@@ -3839,6 +3839,7 @@ c84301bdb6deaecfd801c86ac282eb7e94031e79 data/agotmod/loot_table/blocks/topaz_bl
 c71f71aed9aad536c0a6ffde3c489682c47456a5 data/agotmod/loot_table/blocks/topaz_ore.json
 ec7303e5c45794b6eae1da5d99d962eb97432cab data/agotmod/loot_table/blocks/tourmaline_deepslate_ore.json
 0c1fbc5995cae9239846abf9d6f4e1c561416c2d data/agotmod/loot_table/blocks/tourmaline_ore.json
+34954d086099e2c04dcb11470dbe6cb6a58cf091 data/agotmod/loot_table/blocks/town_hall.json
 826c29a919a799368ebffc49101cd50292827a69 data/agotmod/loot_table/blocks/transparent_diamond_block.json
 afd216faae73115b73548a9a7999402489c45b89 data/agotmod/loot_table/blocks/tuff_brick_11_block.json
 983c15cf6de75cc54d0668e4fd774163cc0c827d data/agotmod/loot_table/blocks/tuff_brick_11_slab.json

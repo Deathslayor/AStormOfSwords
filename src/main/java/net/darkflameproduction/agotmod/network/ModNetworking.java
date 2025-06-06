@@ -26,13 +26,46 @@ public class ModNetworking {
                 }
         );
 
+        // Register Town Hall menu packet (server -> client)
+        registrar.playToClient(
+                OpenTownHallMenuPacket.TYPE,
+                OpenTownHallMenuPacket.STREAM_CODEC,
+                (packet, context) -> {
+                    context.enqueueWork(() -> {
+                        ClientPacketHandler.handleOpenTownHallMenu(packet, context);
+                    });
+                }
+        );
+
+        // Register Town Hall data packet (server -> client)
+        registrar.playToClient(
+                TownHallDataPacket.TYPE,
+                TownHallDataPacket.STREAM_CODEC,
+                (packet, context) -> {
+                    context.enqueueWork(() -> {
+                        ClientPacketHandler.handleTownHallData(packet, context);
+                    });
+                }
+        );
+
+        // Register Town Hall register packet (server -> client)
+        registrar.playToClient(
+                TownHallRegisterPacket.TYPE,
+                TownHallRegisterPacket.STREAM_CODEC,
+                (packet, context) -> {
+                    context.enqueueWork(() -> {
+                        ClientPacketHandler.handleTownHallRegister(packet, context);
+                    });
+                }
+        );
+
         // Register coin balance packet (server -> client)
         registrar.playToClient(
                 CoinBalancePacket.TYPE,
                 CoinBalancePacket.STREAM_CODEC,
                 (packet, context) -> {
                     context.enqueueWork(() -> {
-                        ClientCoinHandler.handleCoinBalanceUpdate(packet, context);
+                        ClientPacketHandler.handleCoinBalance(packet, context);
                     });
                 }
         );
@@ -43,6 +76,13 @@ public class ModNetworking {
                 FinishTransactionPacket.TYPE,
                 FinishTransactionPacket.STREAM_CODEC,
                 ServerPacketHandler::handleFinishTransaction
+        );
+
+        // Register the new town name update packet (client -> server)
+        registrar.playToServer(
+                UpdateTownNamePacket.TYPE,
+                UpdateTownNamePacket.STREAM_CODEC,
+                ServerPacketHandler::handleUpdateTownName
         );
     }
 }

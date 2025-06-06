@@ -1,4 +1,4 @@
-// 1.21.3	2025-05-26T17:34:13.293241	Item Models: agotmod
+// 1.21.3	2025-06-06T14:53:34.2433091	Item Models: agotmod
 65c44e6f1f29781252c76032b90c20b3bc8f7b8a assets/agotmod/models/item/alder_button.json
 f0b6afe25a5640838c024d02c663e7c8f821ffd6 assets/agotmod/models/item/alder_door.json
 2af83e95998f18d674056268682572a94f141042 assets/agotmod/models/item/alder_fence.json
@@ -2894,6 +2894,7 @@ e6d88924aae1bddc1b272324d33fde5533a82236 assets/agotmod/models/item/tigerwood_fe
 ac94d794235ba519b056e33a28d1507d2c073db5 assets/agotmod/models/item/tin_ingot.json
 15a3cc0b6b3fb89f85dd78544ddb93ebbc693d03 assets/agotmod/models/item/topaz.json
 7e69a11e9b4b8216b990facb42e1051062487c6c assets/agotmod/models/item/tourmaline.json
+141b2efd6e8c9905c8024e7229fe72ab4d538eaa assets/agotmod/models/item/town_hall.json
 7078df9a6d984ca6a2c85ce47e2c38c10216a650 assets/agotmod/models/item/transparent_diamond.json
 cf6b241cef3b8f575c4d8a7680ee9852bd3deea9 assets/agotmod/models/item/tuff_brick_11_slab.json
 713d56b005e8a434a2e25d6b24add86aed6af5d5 assets/agotmod/models/item/tuff_brick_11_stairs.json

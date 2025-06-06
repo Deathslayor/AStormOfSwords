@@ -3,6 +3,7 @@ package net.darkflameproduction.agotmod.entity;
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.darkflameproduction.agotmod.block.custom.FarmerBarrelBlockEntity;
+import net.darkflameproduction.agotmod.block.custom.TownHallBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
@@ -24,6 +25,12 @@ public class ModBlockEntities {
                     new BlockEntityType<>(
                             FarmerBarrelBlockEntity::new,
                             ModBLocks.FARMER_BARREL.get()));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TownHallBlockEntity>> TOWN_HALL =
+            BLOCK_ENTITIES.register("town_hall", () ->
+                    new BlockEntityType<>(
+                            TownHallBlockEntity::new,
+                            ModBLocks.TOWN_HALL.get()));
 
     // Define the wood types array (excluding weirwood as it's handled separately)
     private static final String[] ALL_WOOD_TYPES = {

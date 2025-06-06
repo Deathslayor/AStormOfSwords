@@ -1824,7 +1824,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
 
         // ---------------------(Job Blocks)--------------------- //
+        blockWithItem(ModBLocks.TOWN_HALL);
         farmerBarrelBlock(ModBLocks.FARMER_BARREL.get());
+
         // ---------------------(CROPS)--------------------- //
         makeCrop((CropBlock) ModBLocks.HORSERADISH_CROP.get(), "horseradish_crop_stage", "horseradish_crop_stage");
         makeCrop((CropBlock) ModBLocks.BARLEY_CROP.get(), "barley_crop_stage", "barley_crop_stage");

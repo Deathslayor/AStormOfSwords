@@ -1003,6 +1003,8 @@ public class ModItems {
     public static final DeferredItem<Item> FARMER_BARREL = ITEMS.registerItem("farmer_barrel_icon",
             properties -> new BlockItem(ModBLocks.FARMER_BARREL.get(), properties));
 
+    public static final DeferredItem<Item> TOWN_HALL = ITEMS.registerItem("town_hall",
+            properties -> new BlockItem(ModBLocks.TOWN_HALL.get(), properties));
 
 
     // Tells the AGoTMod class to call the modded items into the game

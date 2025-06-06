@@ -1,7 +1,9 @@
 package net.darkflameproduction.agotmod.network;
 
+import net.darkflameproduction.agotmod.block.custom.TownHallBlockEntity;
 import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
 import net.darkflameproduction.agotmod.gui.GrocerInventoryScreen;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -12,6 +14,8 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
@@ -75,6 +79,60 @@ public class ServerPacketHandler {
             } else {
                 player.sendSystemMessage(Component.literal("Grocer not found!"));
                 System.out.println("DEBUG: Grocer not found: " + packet.grocerName());
+            }
+        });
+    }
+
+    public static void handleUpdateTownName(UpdateTownNamePacket packet, IPayloadContext context) {
+        context.enqueueWork(() -> {
+            // Get the player who sent the packet
+            if (context.player() instanceof ServerPlayer serverPlayer) {
+                Level level = serverPlayer.level();
+                BlockPos pos = packet.pos();
+                String newName = packet.newName();
+
+                // Validate the block position and get the block entity
+                if (level.isLoaded(pos)) {
+                    BlockEntity blockEntity = level.getBlockEntity(pos);
+
+                    if (blockEntity instanceof TownHallBlockEntity townHallBE) {
+                        // Check if player is close enough to modify the town name (within 64 blocks)
+                        double distance = serverPlayer.distanceToSqr(pos.getX(), pos.getY(), pos.getZ());
+                        if (distance <= 64 * 64) {
+
+                            // Validate and sanitize the town name
+                            String sanitizedName = sanitizeTownName(newName);
+
+                            // Update the town name
+                            String oldName = townHallBE.getTownName();
+                            townHallBE.setTownName(sanitizedName);
+
+                            System.out.println("DEBUG: Player " + serverPlayer.getName().getString() +
+                                    " renamed town at " + pos + " from '" + oldName + "' to '" + sanitizedName + "'");
+
+                            // Send updated data to all nearby players
+                            level.players().forEach(player -> {
+                                if (player instanceof ServerPlayer nearbyPlayer) {
+                                    double playerDistance = nearbyPlayer.distanceToSqr(pos.getX(), pos.getY(), pos.getZ());
+                                    if (playerDistance < 64 * 64) { // Within 64 blocks for GUI updates
+                                        PacketDistributor.sendToPlayer(nearbyPlayer,
+                                                new TownHallDataPacket(pos, townHallBE.getBedCount(),
+                                                        townHallBE.getCitizenCount(), townHallBE.getCurrentScanRadius(),
+                                                        townHallBE.getTownName()));
+                                    }
+                                }
+                            });
+
+                        } else {
+                            System.out.println("DEBUG: Player " + serverPlayer.getName().getString() +
+                                    " tried to rename town at " + pos + " but was too far away (distance: " + Math.sqrt(distance) + ")");
+                        }
+                    } else {
+                        System.out.println("DEBUG: Block at " + pos + " is not a Town Hall block entity");
+                    }
+                } else {
+                    System.out.println("DEBUG: Block position " + pos + " is not loaded");
+                }
             }
         });
     }
@@ -194,5 +252,31 @@ public class ServerPacketHandler {
         level.addFreshEntity(itemEntity);
 
         System.out.println("DEBUG: Spawned ItemEntity with " + stack.getCount() + " " + stack.getItem().getDescriptionId() + " (" + (index + 1) + "/" + total + ")");
+    }
+
+    /**
+     * Sanitize and validate the town name
+     */
+    private static String sanitizeTownName(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            return "Unnamed Town";
+        }
+
+        // Trim whitespace and limit length
+        String sanitized = input.trim();
+        if (sanitized.length() > 32) {
+            sanitized = sanitized.substring(0, 32);
+        }
+
+        // Remove any potentially problematic characters (optional - adjust as needed)
+        // Keep letters, numbers, spaces, and common punctuation
+        sanitized = sanitized.replaceAll("[^\\p{L}\\p{N}\\s\\-'.,!]", "");
+
+        // Ensure it's not empty after sanitization
+        if (sanitized.trim().isEmpty()) {
+            return "Unnamed Town";
+        }
+
+        return sanitized.trim();
     }
 }

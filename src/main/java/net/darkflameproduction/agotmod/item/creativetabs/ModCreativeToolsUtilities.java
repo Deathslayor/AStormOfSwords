@@ -38,6 +38,7 @@ public class ModCreativeToolsUtilities {
                         pOutput.accept(ModItems.STEEL_PICKAXE.get());
                         pOutput.accept(ModItems.STEEL_SHOVEL.get());
                         pOutput.accept(ModItems.FARMER_BARREL.get());
+                        pOutput.accept(ModItems.TOWN_HALL.get());
 
                     })
                     .build());

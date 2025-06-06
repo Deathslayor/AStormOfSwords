@@ -315,7 +315,6 @@ public class InventorySystem {
             }
         }
 
-        // Try to place in empty slots
         for (int i = 0; i < inventory.getContainerSize(); i++) {
             if (inventory.getItem(i).isEmpty()) {
                 ItemStack stackToPlace = stack.copy();
@@ -373,7 +372,6 @@ public class InventorySystem {
         }
     }
 
-    // ========== DELEGATION TO NATIVE EQUIPMENT SYSTEM ==========
 
     public ItemStack getItemInHand(InteractionHand hand) {
         return hand == InteractionHand.MAIN_HAND ?
@@ -413,7 +411,6 @@ public class InventorySystem {
         }
     }
 
-    // ========== EQUIPMENT UTILITY METHODS ==========
 
     public boolean autoEquipItem(ItemStack stack) {
         if (stack.isEmpty()) return false;
@@ -483,7 +480,6 @@ public class InventorySystem {
         );
     }
 
-    // ========== GUI AND PERSISTENCE ==========
 
     public void openInventoryFor(ServerPlayer player) {
         player.openMenu(new SimpleMenuProvider(
@@ -496,27 +492,18 @@ public class InventorySystem {
         ), buf -> buf.writeInt(peasant.getId()));
     }
 
-    // ========== SIMPLE NBT SAVE/LOAD - INVENTORY ONLY ==========
 
-    /**
-     * Save only the regular inventory - equipment is handled by native system
-     */
+
     public void saveData(CompoundTag compound, HolderLookup.Provider registryAccess) {
-        // Only save the regular inventory - equipment is automatically saved by Minecraft's native system
         peasant.writeInventoryToTag(compound, registryAccess);
 
-        // Add a marker that we've saved
         compound.putBoolean("InventorySystemSaved", true);
     }
 
-    /**
-     * Load only the regular inventory - equipment is handled by native system
-     */
+
     public void loadData(CompoundTag compound, HolderLookup.Provider registryAccess) {
-        // Only load the regular inventory - equipment is automatically loaded by Minecraft's native system
         peasant.readInventoryFromTag(compound, registryAccess);
 
-        // Sync main hand with entity data after loading
         peasant.getEntityData().set(peasant.getMainHandItemAccessor(), peasant.getMainHandItem());
     }
 }
