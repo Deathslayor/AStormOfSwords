@@ -1,7 +1,6 @@
 package net.darkflameproduction.agotmod.entity.custom.npc.system;
 
 import net.minecraft.core.BlockPos;
-import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;

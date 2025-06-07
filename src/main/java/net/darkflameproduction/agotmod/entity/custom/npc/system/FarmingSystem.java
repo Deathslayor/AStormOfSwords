@@ -1,5 +1,6 @@
 package net.darkflameproduction.agotmod.entity.custom.npc.system;
 
+import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
@@ -7,12 +8,11 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
 
 import java.util.*;
 
 public class FarmingSystem {
-    private final Northern_Peasant_Entity peasant;
+    private final Peasant_Entity peasant;
 
     // Simple farm management
     private boolean hasFarm = false;
@@ -21,8 +21,6 @@ public class FarmingSystem {
     // Work tracking
     private boolean hasReturnedToJobBlockAfterFood = true;
     private FarmState currentFarmState = FarmState.NEEDS_FARM_SETUP;
-
-    // Animation cooldown tracking - REMOVED for immediate animations
 
     public enum FarmState {
         NEEDS_FARM_SETUP,       // Need to set up farm area
@@ -33,7 +31,7 @@ public class FarmingSystem {
         PATROLLING             // All work done, just patrolling
     }
 
-    public FarmingSystem(Northern_Peasant_Entity peasant) {
+    public FarmingSystem(Peasant_Entity peasant) {
         this.peasant = peasant;
     }
 
@@ -42,8 +40,6 @@ public class FarmingSystem {
         if (!peasant.getJobType().equals(JobSystem.JOB_FARMER)) {
             return;
         }
-
-        // Update animation cooldown - REMOVED for immediate animations
 
         // Check if job block still exists - if not, lose job
         if (peasant.hasJob() && peasant.getJobBlockPos() != null) {
@@ -376,10 +372,7 @@ public class FarmingSystem {
         // Plant seeds on up to 3 empty farmland blocks
         int plantingsPerformed = plantSeedsOnEmptyFarmland();
 
-        // If we did any work, trigger interact animation
-        if (conversionsPerformed > 0 || plantingsPerformed > 0) {
-            triggerInteractAnimation();
-        }
+        // Animation is triggered within the individual methods if work is done
     }
 
     // New methods for harvesting-time maintenance
@@ -407,6 +400,12 @@ public class FarmingSystem {
                 // Convert grass and dirt to farmland
                 if (currentBlock.getBlock() == net.minecraft.world.level.block.Blocks.GRASS_BLOCK ||
                         currentBlock.getBlock() == net.minecraft.world.level.block.Blocks.DIRT) {
+
+                    // Trigger interact animation for first conversion
+                    if (!triggeredAnimation) {
+                        triggerInteractAnimation();
+                        triggeredAnimation = true;
+                    }
 
                     peasant.level().setBlock(targetPos,
                             net.minecraft.world.level.block.Blocks.FARMLAND.defaultBlockState(), 3);
@@ -437,6 +436,7 @@ public class FarmingSystem {
         BlockPos jobBlock = peasant.getJobBlockPos();
         int planted = 0;
         int maxPlantings = 3; // Limit plantings per call for gradual work
+        boolean triggeredAnimation = false;
 
         // Plant crops on empty farmland in 19x19 area
         for (int x = -9; x <= 9 && planted < maxPlantings; x++) {
@@ -457,6 +457,12 @@ public class FarmingSystem {
 
                     // CHECK IF WE HAVE THE SEED BEFORE PLANTING
                     if (hasSeedInInventory(cropToPlant.asItem())) {
+                        // Trigger interact animation for first planting
+                        if (!triggeredAnimation) {
+                            triggerInteractAnimation();
+                            triggeredAnimation = true;
+                        }
+
                         peasant.level().setBlock(cropPos, cropToPlant.defaultBlockState(), 3);
 
                         // Play grass breaking sound when planting crops

@@ -7,16 +7,19 @@ import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
+import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.JobSystem;
 import net.darkflameproduction.agotmod.block.ModBLocks;
+import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 
 public class BarrelDropOffGoal extends Goal {
-    private final Northern_Peasant_Entity peasant;
+    private final Peasant_Entity peasant;
     private BlockPos targetBarrel;
     private int searchAttempts = 0;
     private List<BlockPos> searchedBarrels = new ArrayList<>();
@@ -24,7 +27,84 @@ public class BarrelDropOffGoal extends Goal {
     private static final int MEAT_TO_KEEP = 20;
     private boolean hasScannedToday = false;
 
-    public BarrelDropOffGoal(Northern_Peasant_Entity peasant) {
+    // Set of allowed items that can be dropped off
+    private static final Set<String> ALLOWED_ITEMS = new HashSet<>();
+
+    static {
+        // Vanilla items
+        ALLOWED_ITEMS.add("minecraft:wheat");
+        ALLOWED_ITEMS.add("minecraft:wheat_seeds");
+        ALLOWED_ITEMS.add("minecraft:pumpkin");
+        ALLOWED_ITEMS.add("minecraft:pumpkin_seeds");
+        ALLOWED_ITEMS.add("minecraft:melon_slice");
+        ALLOWED_ITEMS.add("minecraft:melon_seeds");
+        ALLOWED_ITEMS.add("minecraft:beetroot");
+        ALLOWED_ITEMS.add("minecraft:beetroot_seeds");
+
+        // Custom mod items
+        ALLOWED_ITEMS.add("agotmod:horseradish");
+        ALLOWED_ITEMS.add("agotmod:horseradish_seeds");
+        ALLOWED_ITEMS.add("agotmod:onion");
+        ALLOWED_ITEMS.add("agotmod:onion_seeds");
+        ALLOWED_ITEMS.add("agotmod:red_onion");
+        ALLOWED_ITEMS.add("agotmod:red_onion_seeds");
+        ALLOWED_ITEMS.add("agotmod:wild_onion");
+        ALLOWED_ITEMS.add("agotmod:wild_onion_seeds");
+        ALLOWED_ITEMS.add("agotmod:leek");
+        ALLOWED_ITEMS.add("agotmod:leek_seeds");
+        ALLOWED_ITEMS.add("agotmod:neep");
+        ALLOWED_ITEMS.add("agotmod:neep_seeds");
+        ALLOWED_ITEMS.add("agotmod:turnip");
+        ALLOWED_ITEMS.add("agotmod:turnip_seeds");
+        ALLOWED_ITEMS.add("agotmod:parsley");
+        ALLOWED_ITEMS.add("agotmod:parsley_seeds");
+        ALLOWED_ITEMS.add("agotmod:bean");
+        ALLOWED_ITEMS.add("agotmod:bean_seeds");
+        ALLOWED_ITEMS.add("agotmod:green_bean");
+        ALLOWED_ITEMS.add("agotmod:green_bean_seeds");
+        ALLOWED_ITEMS.add("agotmod:chickpea");
+        ALLOWED_ITEMS.add("agotmod:chickpea_seeds");
+        ALLOWED_ITEMS.add("agotmod:cabbage");
+        ALLOWED_ITEMS.add("agotmod:cabbage_seeds");
+        ALLOWED_ITEMS.add("agotmod:spinach");
+        ALLOWED_ITEMS.add("agotmod:spinach_seeds");
+        ALLOWED_ITEMS.add("agotmod:cucumber");
+        ALLOWED_ITEMS.add("agotmod:cucumber_seeds");
+        ALLOWED_ITEMS.add("agotmod:dragon_pepper");
+        ALLOWED_ITEMS.add("agotmod:dragon_pepper_seeds");
+        ALLOWED_ITEMS.add("agotmod:pepper");
+        ALLOWED_ITEMS.add("agotmod:pepper_seeds");
+        ALLOWED_ITEMS.add("agotmod:peppercorn");
+        ALLOWED_ITEMS.add("agotmod:peppercorn_seeds");
+        ALLOWED_ITEMS.add("agotmod:barley");
+        ALLOWED_ITEMS.add("agotmod:barley_seeds");
+        ALLOWED_ITEMS.add("agotmod:oat");
+        ALLOWED_ITEMS.add("agotmod:oat_seeds");
+        ALLOWED_ITEMS.add("agotmod:opium_poppy_seeds");
+        ALLOWED_ITEMS.add("agotmod:cotton");
+        ALLOWED_ITEMS.add("agotmod:cotton_seeds");
+        ALLOWED_ITEMS.add("agotmod:hemp");
+        ALLOWED_ITEMS.add("agotmod:hemp_seeds");
+
+        // Berries
+        ALLOWED_ITEMS.add("agotmod:strawberry");
+        ALLOWED_ITEMS.add("agotmod:strawberry_seeds");
+        ALLOWED_ITEMS.add("agotmod:blackberry");
+        ALLOWED_ITEMS.add("agotmod:blackberry_seeds");
+        ALLOWED_ITEMS.add("agotmod:blueberry");
+        ALLOWED_ITEMS.add("agotmod:blueberry_seeds");
+        ALLOWED_ITEMS.add("agotmod:mulberry");
+        ALLOWED_ITEMS.add("agotmod:mulberry_seeds");
+        ALLOWED_ITEMS.add("agotmod:raspberry");
+        ALLOWED_ITEMS.add("agotmod:raspberry_seeds");
+        ALLOWED_ITEMS.add("agotmod:smokeberry");
+        ALLOWED_ITEMS.add("agotmod:smokeberry_seeds");
+
+        // Other
+        ALLOWED_ITEMS.add("agotmod:garlic");
+    }
+
+    public BarrelDropOffGoal(Peasant_Entity peasant) {
         this.peasant = peasant;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
     }
@@ -270,13 +350,19 @@ public class BarrelDropOffGoal extends Goal {
         }
     }
 
+    // Helper method to check if an item is allowed to be dropped off
+    private boolean isAllowedItem(ItemStack stack) {
+        ResourceLocation itemId = net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(stack.getItem());
+        return ALLOWED_ITEMS.contains(itemId.toString());
+    }
+
     private void tryDropOffItems() {
         var blockEntity = peasant.level().getBlockEntity(targetBarrel);
         if (blockEntity instanceof Container barrelInventory) {
             var peasantInventory = peasant.getInventorySystem().getInventory();
             boolean droppedSomething = false;
 
-            // First pass: Keep exactly 20 meat items, drop excess meat
+            // First pass: Keep exactly 20 meat items, drop excess meat (only if allowed)
             int meatToKeep = MEAT_TO_KEEP;
             for (int i = 0; i < peasantInventory.getContainerSize(); i++) {
                 ItemStack stack = peasantInventory.getItem(i);
@@ -288,25 +374,30 @@ public class BarrelDropOffGoal extends Goal {
                         meatToKeep -= keepAmount;
 
                         if (stack.getCount() > keepAmount) {
-                            // Split stack - keep some, drop excess
+                            // Split stack - keep some, drop excess (only if allowed)
                             ItemStack excess = stack.copy();
                             excess.setCount(stack.getCount() - keepAmount);
                             stack.setCount(keepAmount);
 
-                            // Try to add excess to barrel
-                            if (addToBarrel(barrelInventory, excess)) {
+                            // Only drop if item is in allowed list
+                            if (isAllowedItem(excess) && addToBarrel(barrelInventory, excess)) {
                                 droppedSomething = true;
                             } else {
-                                // Barrel full, restore original stack
+                                // Either not allowed or barrel full, restore original stack
                                 stack.setCount(stack.getCount() + excess.getCount());
-                                break;
+                                if (!isAllowedItem(excess)) {
+                                    break; // Don't try other barrels for disallowed items
+                                }
                             }
                         }
                     } else {
-                        // Already have 20 meat, drop all of this stack
-                        if (addToBarrel(barrelInventory, stack.copy())) {
+                        // Already have 20 meat, drop all of this stack (only if allowed)
+                        if (isAllowedItem(stack) && addToBarrel(barrelInventory, stack.copy())) {
                             peasantInventory.setItem(i, ItemStack.EMPTY);
                             droppedSomething = true;
+                        } else if (!isAllowedItem(stack)) {
+                            // Item not allowed, keep it (don't delete)
+                            continue;
                         } else {
                             // Barrel full
                             break;
@@ -315,7 +406,7 @@ public class BarrelDropOffGoal extends Goal {
                 }
             }
 
-            // Second pass: Keep exactly 2 stacks of seeds, drop excess seeds
+            // Second pass: Keep exactly 2 stacks of seeds, drop excess seeds (only if allowed)
             int seedStacksToKeep = 2;
             for (int i = 0; i < peasantInventory.getContainerSize(); i++) {
                 ItemStack stack = peasantInventory.getItem(i);
@@ -325,10 +416,13 @@ public class BarrelDropOffGoal extends Goal {
                         seedStacksToKeep--;
                         // Keep this entire stack
                     } else {
-                        // Already have 2 seed stacks, drop this one
-                        if (addToBarrel(barrelInventory, stack.copy())) {
+                        // Already have 2 seed stacks, drop this one (only if allowed)
+                        if (isAllowedItem(stack) && addToBarrel(barrelInventory, stack.copy())) {
                             peasantInventory.setItem(i, ItemStack.EMPTY);
                             droppedSomething = true;
+                        } else if (!isAllowedItem(stack)) {
+                            // Item not allowed, keep it (don't delete)
+                            continue;
                         } else {
                             // Barrel full
                             break;
@@ -337,16 +431,20 @@ public class BarrelDropOffGoal extends Goal {
                 }
             }
 
-            // Third pass: Drop all other items (non-meat, non-seed)
+            // Third pass: Drop all other items (non-meat, non-seed) only if they're allowed
             for (int i = 0; i < peasantInventory.getContainerSize(); i++) {
                 ItemStack stack = peasantInventory.getItem(i);
                 if (!stack.isEmpty() && !stack.is(ItemTags.create(
                         net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("minecraft", "meat")))
                         && !isSeed(stack)) {
 
-                    if (addToBarrel(barrelInventory, stack.copy())) {
+                    // Only drop if item is in allowed list
+                    if (isAllowedItem(stack) && addToBarrel(barrelInventory, stack.copy())) {
                         peasantInventory.setItem(i, ItemStack.EMPTY);
                         droppedSomething = true;
+                    } else if (!isAllowedItem(stack)) {
+                        // Item not allowed, keep it (don't delete)
+                        continue;
                     } else {
                         // Barrel full
                         break;
@@ -400,7 +498,7 @@ public class BarrelDropOffGoal extends Goal {
     private void deleteExcessItems() {
         var peasantInventory = peasant.getInventorySystem().getInventory();
 
-        // First pass: Keep exactly 20 meat items, delete excess meat
+        // First pass: Keep exactly 20 meat items, delete excess meat (only if allowed)
         int meatToKeep = MEAT_TO_KEEP;
         for (int i = 0; i < peasantInventory.getContainerSize(); i++) {
             ItemStack stack = peasantInventory.getItem(i);
@@ -412,17 +510,23 @@ public class BarrelDropOffGoal extends Goal {
                     meatToKeep -= keepAmount;
 
                     if (stack.getCount() > keepAmount) {
-                        // Keep some, delete excess
-                        stack.setCount(keepAmount);
+                        // Keep some, delete excess (only if it would be allowed to drop)
+                        if (isAllowedItem(stack)) {
+                            stack.setCount(keepAmount);
+                        }
+                        // If not allowed, keep the full stack
                     }
                 } else {
-                    // Already have 20 meat, delete all of this stack
-                    peasantInventory.setItem(i, ItemStack.EMPTY);
+                    // Already have 20 meat, delete all of this stack (only if allowed)
+                    if (isAllowedItem(stack)) {
+                        peasantInventory.setItem(i, ItemStack.EMPTY);
+                    }
+                    // If not allowed, keep the stack
                 }
             }
         }
 
-        // Second pass: Keep exactly 2 stacks of seeds, delete excess seeds
+        // Second pass: Keep exactly 2 stacks of seeds, delete excess seeds (only if allowed)
         int seedStacksToKeep = 2;
         for (int i = 0; i < peasantInventory.getContainerSize(); i++) {
             ItemStack stack = peasantInventory.getItem(i);
@@ -432,19 +536,27 @@ public class BarrelDropOffGoal extends Goal {
                     seedStacksToKeep--;
                     // Keep this entire stack
                 } else {
-                    // Already have 2 seed stacks, delete this one
-                    peasantInventory.setItem(i, ItemStack.EMPTY);
+                    // Already have 2 seed stacks, delete this one (only if allowed)
+                    if (isAllowedItem(stack)) {
+                        peasantInventory.setItem(i, ItemStack.EMPTY);
+                    }
+                    // If not allowed, keep the stack
                 }
             }
         }
 
-        // Third pass: Delete all other items (non-meat, non-seed)
+        // Third pass: Delete all other items (non-meat, non-seed) only if they're allowed
         for (int i = 0; i < peasantInventory.getContainerSize(); i++) {
             ItemStack stack = peasantInventory.getItem(i);
             if (!stack.isEmpty() && !stack.is(ItemTags.create(
                     net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("minecraft", "meat")))
                     && !isSeed(stack)) {
-                peasantInventory.setItem(i, ItemStack.EMPTY);
+
+                // Only delete if item is in allowed list
+                if (isAllowedItem(stack)) {
+                    peasantInventory.setItem(i, ItemStack.EMPTY);
+                }
+                // If not allowed, keep the item
             }
         }
     }

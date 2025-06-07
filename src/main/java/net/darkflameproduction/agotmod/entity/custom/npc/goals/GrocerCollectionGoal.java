@@ -1,6 +1,7 @@
 package net.darkflameproduction.agotmod.entity.custom.npc.goals;
 
 import net.darkflameproduction.agotmod.block.ModBLocks;
+import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -9,7 +10,6 @@ import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.JobSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.GrocerSystem;
 
@@ -18,7 +18,7 @@ import java.util.EnumSet;
 import java.util.List;
 
 public class GrocerCollectionGoal extends Goal {
-    private final Northern_Peasant_Entity peasant;
+    private final Peasant_Entity peasant;
     private BlockPos targetBarrel;
     private int searchAttempts = 0;
     private List<BlockPos> searchedBarrels = new ArrayList<>();
@@ -32,7 +32,7 @@ public class GrocerCollectionGoal extends Goal {
     private static final int MAX_BARRELS_PER_DAY = 10;
     private static final int SCAN_RADIUS = 48; // 96x96 area (48 blocks in each direction)
 
-    public GrocerCollectionGoal(Northern_Peasant_Entity peasant) {
+    public GrocerCollectionGoal(Peasant_Entity peasant) {
         this.peasant = peasant;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
     }

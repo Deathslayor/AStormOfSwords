@@ -2,14 +2,14 @@ package net.darkflameproduction.agotmod.entity.custom.npc.goals;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.ai.goal.Goal;
-import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
+import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 
 import java.util.EnumSet;
 
 public class ReturnToJobBlockGoal extends Goal {
-    private final Northern_Peasant_Entity peasant;
+    private final Peasant_Entity peasant;
 
-    public ReturnToJobBlockGoal(Northern_Peasant_Entity peasant) {
+    public ReturnToJobBlockGoal(Peasant_Entity peasant) {
         this.peasant = peasant;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE));
     }

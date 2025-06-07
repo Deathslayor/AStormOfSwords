@@ -1,5 +1,6 @@
 package net.darkflameproduction.agotmod.entity.custom.npc.system;
 
+import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -7,10 +8,9 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
-import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
 
 public class HungerSystem {
-    private final Northern_Peasant_Entity peasant;
+    private final Peasant_Entity peasant;
 
     // Hunger system constants
     public static final int MAX_HUNGER = 20;
@@ -32,7 +32,7 @@ public class HungerSystem {
     private ItemStack previousMainHandItem = ItemStack.EMPTY;
     private int foodInventorySlot = -1; // Track which slot the food came from
 
-    public HungerSystem(Northern_Peasant_Entity peasant) {
+    public HungerSystem(Peasant_Entity peasant) {
         this.peasant = peasant;
     }
 

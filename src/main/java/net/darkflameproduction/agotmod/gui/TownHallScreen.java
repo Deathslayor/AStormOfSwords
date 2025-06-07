@@ -28,18 +28,10 @@ public class TownHallScreen extends Screen {
     private static final int BORDER_HEIGHT = 6;
     private static final int CORNER_SIZE = 12;
 
-    // Dynamic radius constants for display calculations
-    private static final int BASE_RADIUS = 16;
-    private static final int FIRST_TIER_CITIZENS = 10;
-    private static final int FIRST_TIER_EXPANSION = 5;
-    private static final int SECOND_TIER_CITIZENS = 20;
-    private static final int SECOND_TIER_EXPANSION = 1;
-    private static final int THIRD_TIER_EXPANSION = 5;
-
     private final BlockPos townHallPos;
     private int bedCount = 0;
     private int citizenCount = 0;
-    private int currentRadius = BASE_RADIUS; // Store the actual radius from server
+    private int currentRadius = 16; // Store the actual radius from server
     private String townName = "Unnamed Town"; // Store the town name
     private static TownHallScreen currentInstance = null;
 
@@ -57,8 +49,8 @@ public class TownHallScreen extends Screen {
         super.init();
 
         // Calculate panel dimensions for positioning
-        int panelWidth = Math.min(450, width - 40);
-        int panelHeight = Math.min(350, height - 40);
+        int panelWidth = Math.min(350, width - 40);
+        int panelHeight = Math.min(250, height - 40);
         int panelX = (width - panelWidth) / 2;
         int panelY = (height - panelHeight) / 2;
 
@@ -125,8 +117,7 @@ public class TownHallScreen extends Screen {
         if (currentInstance != null) {
             currentInstance.bedCount = bedCount;
             currentInstance.citizenCount = citizenCount;
-            // Calculate radius if not provided
-            currentInstance.currentRadius = currentInstance.calculateRadius(citizenCount);
+            // Keep existing radius if not provided
         }
     }
 
@@ -135,67 +126,37 @@ public class TownHallScreen extends Screen {
     }
 
     /**
-     * Calculate radius based on citizen count (matches TownHallBlockEntity logic)
-     */
-    private int calculateRadius(int citizens) {
-        if (citizens <= FIRST_TIER_CITIZENS) {
-            // First 10 citizens: base + (citizens * 5)
-            return BASE_RADIUS + (citizens * FIRST_TIER_EXPANSION);
-        } else if (citizens <= SECOND_TIER_CITIZENS) {
-            // Citizens 11-20: base + (10 * 5) + ((citizens - 10) * 1)
-            int firstTierBonus = FIRST_TIER_CITIZENS * FIRST_TIER_EXPANSION;
-            int secondTierBonus = (citizens - FIRST_TIER_CITIZENS) * SECOND_TIER_EXPANSION;
-            return BASE_RADIUS + firstTierBonus + secondTierBonus;
-        } else {
-            // Citizens 21+: base + (10 * 5) + (10 * 1) + ((citizens - 20) / 5)
-            int firstTierBonus = FIRST_TIER_CITIZENS * FIRST_TIER_EXPANSION;
-            int secondTierBonus = (SECOND_TIER_CITIZENS - FIRST_TIER_CITIZENS) * SECOND_TIER_EXPANSION;
-            int thirdTierBonus = (citizens - SECOND_TIER_CITIZENS) / THIRD_TIER_EXPANSION;
-            return BASE_RADIUS + firstTierBonus + secondTierBonus + thirdTierBonus;
-        }
-    }
-
-    /**
      * Get the town size category for display
      */
     private String getTownSizeCategory() {
-        if (citizenCount <= 5) {
+        if (citizenCount < 5) {
+            return "Small Hovel";
+        } else if (citizenCount < 10) {
+            return "Farmstead";
+        } else if (citizenCount < 30) {
+            return "Small Settlement";
+        } else if (citizenCount < 50) {
+            return "Small Village";
+        } else if (citizenCount < 100) {
+            return "Village";
+        } else if (citizenCount < 150) {
+            return "Large Village";
+        } else if (citizenCount < 200) {
             return "Small Town";
-        } else if (citizenCount <= 15) {
-            return "Medium Town";
-        } else if (citizenCount <= 25) {
+        } else if (citizenCount < 400) {
+            return "Town";
+        } else if (citizenCount < 1000) {
             return "Large Town";
-        } else {
+        } else if (citizenCount < 1500) {
+            return "Small City";
+        } else if (citizenCount < 5000) {
+            return "City";
+        } else if (citizenCount < 10000) {
+            return "Relevant City";
+        } else if (citizenCount < 15000) {
             return "Major City";
-        }
-    }
-
-    /**
-     * Calculate radius for next citizen milestone
-     */
-    private String getNextMilestoneInfo() {
-        if (citizenCount < FIRST_TIER_CITIZENS) {
-            int nextMilestone = citizenCount + 1;
-            int nextRadius = calculateRadius(nextMilestone);
-            return "Next citizen: +" + FIRST_TIER_EXPANSION + " blocks (radius " + nextRadius + ")";
-        } else if (citizenCount < SECOND_TIER_CITIZENS) {
-            int nextMilestone = citizenCount + 1;
-            int nextRadius = calculateRadius(nextMilestone);
-            return "Next citizen: +" + SECOND_TIER_EXPANSION + " block (radius " + nextRadius + ")";
         } else {
-            // For citizens 21+, show when the next radius increase will happen
-            int citizensInThirdTier = citizenCount - SECOND_TIER_CITIZENS;
-            int citizensUntilNext = THIRD_TIER_EXPANSION - (citizensInThirdTier % THIRD_TIER_EXPANSION);
-            if (citizensUntilNext == THIRD_TIER_EXPANSION) citizensUntilNext = 0; // Already at milestone
-
-            if (citizensUntilNext == 0) {
-                int nextMilestone = citizenCount + THIRD_TIER_EXPANSION;
-                int nextRadius = calculateRadius(nextMilestone);
-                return "Next radius increase: +" + THIRD_TIER_EXPANSION + " citizens (radius " + nextRadius + ")";
-            } else {
-                int nextRadius = calculateRadius(citizenCount + citizensUntilNext);
-                return "Next radius increase: +" + citizensUntilNext + " citizens (radius " + nextRadius + ")";
-            }
+            return "Trade Capital";
         }
     }
 
@@ -204,9 +165,9 @@ public class TownHallScreen extends Screen {
         // Render background
         guiGraphics.fill(0, 0, width, height, 0x40E6D8B7);
 
-        // Calculate panel dimensions
-        int panelWidth = Math.min(450, width - 40); // Slightly wider for more info
-        int panelHeight = Math.min(350, height - 40); // Slightly taller for more info
+        // Calculate panel dimensions (smaller since we have less content)
+        int panelWidth = Math.min(350, width - 40);
+        int panelHeight = Math.min(250, height - 40);
         int panelX = (width - panelWidth) / 2;
         int panelY = (height - panelHeight) / 2;
 
@@ -247,7 +208,6 @@ public class TownHallScreen extends Screen {
             net.minecraft.client.Minecraft.getInstance().getConnection().send(
                     new net.darkflameproduction.agotmod.network.UpdateTownNamePacket(townHallPos, newName)
             );
-            System.out.println("DEBUG: Sent town name update: '" + newName + "' for position " + townHallPos);
         }
     }
 
@@ -262,66 +222,43 @@ public class TownHallScreen extends Screen {
     }
 
     private void drawContent(GuiGraphics guiGraphics, int x, int y, int width, int height) {
-        // Town Hall information with dynamic radius details
+        // Simplified town information - only beds, population, and radius
         String[] townInfo = {
                 "Town Statistics",
                 "",
                 "Total Beds: " + bedCount,
                 "Citizens: " + citizenCount,
-                "Current Radius: " + currentRadius + " blocks",
-                "",
-                "Radius Breakdown:",
-                "• Base radius: " + BASE_RADIUS + " blocks",
-                citizenCount <= FIRST_TIER_CITIZENS ?
-                        "• Citizens bonus: " + citizenCount + " × " + FIRST_TIER_EXPANSION + " = " + (citizenCount * FIRST_TIER_EXPANSION) + " blocks" :
-                        "• First 10 citizens: 10 × " + FIRST_TIER_EXPANSION + " = " + (FIRST_TIER_CITIZENS * FIRST_TIER_EXPANSION) + " blocks",
-                citizenCount > FIRST_TIER_CITIZENS && citizenCount <= SECOND_TIER_CITIZENS ?
-                        "• Citizens 11-20: " + (citizenCount - FIRST_TIER_CITIZENS) + " × " + SECOND_TIER_EXPANSION + " = " + ((citizenCount - FIRST_TIER_CITIZENS) * SECOND_TIER_EXPANSION) + " blocks" :
-                        citizenCount > SECOND_TIER_CITIZENS ? "• Citizens 11-20: 10 × " + SECOND_TIER_EXPANSION + " = " + ((SECOND_TIER_CITIZENS - FIRST_TIER_CITIZENS) * SECOND_TIER_EXPANSION) + " blocks" : "",
-                citizenCount > SECOND_TIER_CITIZENS ?
-                        "• Citizens 21+: " + (citizenCount - SECOND_TIER_CITIZENS) + " ÷ " + THIRD_TIER_EXPANSION + " = " + ((citizenCount - SECOND_TIER_CITIZENS) / THIRD_TIER_EXPANSION) + " blocks" : "",
-                "",
-                "Growth Information:",
-                getNextMilestoneInfo(),
-                "",
-                "Scan Details:",
-                "Scan height: ±64 blocks",
-                "Daily scan at: 10000 game time"
+                "Current Radius: " + currentRadius + " blocks"
         };
 
-        int textY = y + 10;
+        int textY = y + 30; // More centered since we have less content
         for (String info : townInfo) {
             if (info.isEmpty()) {
                 textY += font.lineHeight / 2; // Smaller gap for empty lines
                 continue;
             }
 
-            int textX = x + 20;
+            int textX = x + (width - font.width(info)) / 2; // Center the text
 
             // Different colors for different types of info
             int color = TEXT_COLOR;
             if (info.startsWith("Total Beds") || info.startsWith("Citizens") || info.startsWith("Current Radius")) {
                 color = 0xFF2E7D32; // Dark green for main stats
-            } else if (info.startsWith("• Base radius") || info.startsWith("• Citizens bonus") || info.startsWith("• First 10") || info.startsWith("• Additional")) {
-                color = 0xFF1976D2; // Blue for radius breakdown
-            } else if (info.startsWith("Next citizen")) {
-                color = 0xFF9C27B0; // Purple for growth info
-            } else if (info.startsWith("Scan")) {
-                color = 0xFF666666; // Gray for scan info
-            } else if (info.equals("Town Statistics") || info.equals("Radius Breakdown:") || info.equals("Growth Information:") || info.equals("Scan Details:")) {
+            } else if (info.equals("Town Statistics")) {
                 // Scale the header text
-                float scale = 1.1f;
+                float scale = 1.2f;
                 guiGraphics.pose().pushPose();
                 guiGraphics.pose().scale(scale, scale, 1.0f);
-                int headerColor = info.equals("Town Statistics") ? 0xFF1A237E : 0xFF424242; // Dark blue for main header, dark gray for sub-headers
-                guiGraphics.drawString(font, info, (int)(textX / scale), (int)(textY / scale), headerColor, false);
+                int headerColor = 0xFF1A237E; // Dark blue for main header
+                int scaledX = (int)((x + (width - font.width(info) * scale) / 2) / scale);
+                guiGraphics.drawString(font, info, scaledX, (int)(textY / scale), headerColor, false);
                 guiGraphics.pose().popPose();
-                textY += (int)(font.lineHeight * scale) + 3;
+                textY += (int)(font.lineHeight * scale) + 5;
                 continue;
             }
 
             guiGraphics.drawString(font, info, textX, textY, color, false);
-            textY += font.lineHeight + 2;
+            textY += font.lineHeight + 4;
         }
     }
 

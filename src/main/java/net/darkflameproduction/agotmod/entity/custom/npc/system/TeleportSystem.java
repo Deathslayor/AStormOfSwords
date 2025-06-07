@@ -5,10 +5,10 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.block.state.BlockState;
-import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
+import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 
 public class TeleportSystem {
-    private final Northern_Peasant_Entity peasant;
+    private final Peasant_Entity peasant;
 
     // Teleportation constants
     private static final int STUCK_THRESHOLD = 600; // 30 seconds of being stuck
@@ -19,7 +19,7 @@ public class TeleportSystem {
     private BlockPos lastPosition = null;
     private int teleportCooldown = 0;
 
-    public TeleportSystem(Northern_Peasant_Entity peasant) {
+    public TeleportSystem(Peasant_Entity peasant) {
         this.peasant = peasant;
     }
 

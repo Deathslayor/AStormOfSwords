@@ -484,7 +484,7 @@
   "item.agotmod.mammoth_spawn_egg": "Mammoth Spawn Egg",
   "item.agotmod.crow_spawn_egg": "Crow Spawn Egg",
   "item.agotmod.direwolf_spawn_egg": "Direwolf Spawn Egg",
-  "item.agotmod.northern_peasant_spawn_egg": "Northern Peasant Spawn Egg",
+  "item.agotmod.peasant_spawn_egg": "Peasant Spawn Egg",
 
 
 
@@ -534,7 +534,7 @@
   "block.minecraft.banner.yourmod.targaryen_banner.green": "Green Dragon Banner",
   "block.minecraft.banner.yourmod.targaryen_banner.red": "Red Dragon Banner",
   "block.minecraft.banner.yourmod.targaryen_banner.black": "Black Dragon Banner",
-  "entity.agotmod.northern_peasant.inventory": "%s's Inventory",
+  "entity.agotmod.peasant.inventory": "%s's Inventory",
   "key.agotmod.open_magic_menu": "Open Magic Menu",
 
   "key.categories.agotmod": "Storm Of Swords Controlls",

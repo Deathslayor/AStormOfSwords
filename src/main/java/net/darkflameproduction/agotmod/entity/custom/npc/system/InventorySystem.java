@@ -1,7 +1,7 @@
 package net.darkflameproduction.agotmod.entity.custom.npc.system;
 
+import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -13,14 +13,13 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ArmorItem;
-import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
 import net.darkflameproduction.agotmod.inventory.NPCInventoryMenu;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class InventorySystem {
-    private final Northern_Peasant_Entity peasant;
+    private final Peasant_Entity peasant;
     private final SimpleContainer inventory;
 
     // Equipment slot indices (matching Minecraft's conventions)
@@ -31,7 +30,7 @@ public class InventorySystem {
     private static final int CHEST_SLOT = 2;
     private static final int HEAD_SLOT = 3;
 
-    public InventorySystem(Northern_Peasant_Entity peasant, SimpleContainer inventory) {
+    public InventorySystem(Peasant_Entity peasant, SimpleContainer inventory) {
         this.peasant = peasant;
         this.inventory = inventory;
     }
@@ -278,7 +277,7 @@ public class InventorySystem {
     }
 
     public SlotAccess getSlot(int slot) {
-        int i = slot - Northern_Peasant_Entity.PEASANT_SLOT_OFFSET;
+        int i = slot - Peasant_Entity.PEASANT_SLOT_OFFSET;
         return i >= 0 && i < inventory.getContainerSize() ?
                 SlotAccess.forContainer(inventory, i) :
                 SlotAccess.NULL;

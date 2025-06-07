@@ -1,13 +1,13 @@
 package net.darkflameproduction.agotmod.entity.custom.npc.system;
 
+import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.RandomSource;
-import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
 
 public class NameSystem {
-    private final Northern_Peasant_Entity peasant;
+    private final Peasant_Entity peasant;
 
     private static final String[] FIRST_NAMES = {
             "Alastair", "Angus", "Arran", "Blair", "Brody", "Callum", "Campbell", "Cameron", "Cormag", "Craig",
@@ -36,6 +36,76 @@ public class NameSystem {
             "Shadd", "Sherrit", "Skinner", "Skittrick", "Slate", "Steelshanks", "Theodan", "Theo", "Therry", "Timotty",
             "Tomard", "TomToo", "Torghen", "Torren", "Turnip", "Varly", "Warrick", "Wayn", "Will", "Willam",
             "Wyl", "Wylis", "Wynton", "Yellow"
+    };
+
+    private static final String[] CHILD_MALE_FIRST_NAMES = {
+            // Northern English/Game of Thrones male child names
+            "Alyn", "Artos", "Bran", "Ben", "Benjen", "Brandon", "Collin", "Dickon", "Duncan", "Edric",
+            "Eddard", "Elric", "Gareth", "Gendry", "Harwin", "Hodor", "Joffrey", "Jon", "Jojen", "Jory",
+            "Lommy", "Luwin", "Maester", "Mikken", "Ned", "Olyvar", "Owen", "Podrick", "Rickon", "Robb",
+            "Robin", "Rodrik", "Samwell", "Tommen", "Waymar", "Will", "Willem", "Wyl",
+
+            // Additional Northern child names
+            "Aedan", "Aldric", "Ansel", "Aron", "Baelor", "Bennet", "Beric", "Brynden", "Calon", "Cley",
+            "Daemon", "Dareon", "Desmond", "Donal", "Donnel", "Drogo", "Edwyn", "Eldon", "Ellard", "Elyas",
+            "Emmon", "Ethan", "Franklyn", "Garse", "Garrett", "Gorold", "Gulian", "Harys", "Helman", "Hobber",
+            "Hoster", "Humfrey", "Janos", "Jaremy", "Jasper", "Jeffory", "Jeren", "Kevan", "Lancel", "Loras",
+            "Lucas", "Lyonel", "Marq", "Martyn", "Meryn", "Myles", "Norbert", "Osmund", "Perwyn", "Quentyn",
+            "Renly", "Rhaegar", "Rickard", "Roderick", "Ronnel", "Royland", "Ryon", "Steffon", "Stevron", "Terrance",
+            "Theon", "Theo", "Torrhen", "Tristan", "Tytos", "Ulmer", "Viserys", "Walder", "Walton", "Wendel"
+    };
+
+    private static final String[] CHILD_FEMALE_FIRST_NAMES = {
+            // Northern English/Game of Thrones female child names
+            "Arya", "Bessa", "Beth", "Bran", "Cat", "Cersei", "Daisy", "Dany", "Elia", "Gilly",
+            "Joy", "Lyanna", "Mya", "Myrcella", "Nan", "Nymeria", "Penny", "Roslin", "Sansa", "Shireen",
+            "Talla", "Ygritte", "Ysilla",
+
+            // Additional Northern child names
+            "Alla", "Alarra", "Alerie", "Alys", "Amerei", "Arwyn", "Ashara", "Betha", "Brienne", "Catelyn",
+            "Delena", "Denyse", "Dyanna", "Elinor", "Ellyn", "Ermesande", "Falena", "Genna", "Gwyneth", "Hanna",
+            "Helena", "Janei", "Jayne", "Jocelyn", "Karla", "Lanna", "Leyla", "Lollys", "Lynesse", "Malora",
+            "Mariah", "Marissa", "Meredyth", "Minisa", "Morya", "Mylenda", "Naerys", "Pia", "Rhaella", "Rhonda",
+            "Roslyn", "Selyse", "Sybelle", "Taena", "Tanda", "Tya", "Tyanna", "Victaria", "Walda", "Wynafrei",
+
+            // Cute/diminutive versions
+            "Ally", "Annie", "Barbie", "Betsy", "Bonnie", "Cate", "Dolly", "Effie", "Ellie", "Emmy",
+            "Faye", "Georgie", "Gracie", "Hattie", "Izzy", "Josie", "Katie", "Lettie", "Maggie", "Millie",
+            "Molly", "Nettie", "Ollie", "Polly", "Rosie", "Sally", "Susie", "Tilly", "Winnie", "Zoe"
+    };
+    private static final String[] FEMALE_FIRST_NAMES = {
+            // Northern English/Game of Thrones female names
+            "Alys", "Alarra", "Alysane", "Alysanne", "Arra", "Aregelle", "Arrana", "Arsa", "Arya",
+            "Barba", "Barbrey", "Bessa", "Beth", "Bethany", "Dacey", "Danny", "Donella", "Erena",
+            "Gilliane", "Jeyne", "Jessamyn", "Jez", "Jonelle", "Jorelle", "Jyana", "Kyra", "Lyanne",
+            "Lysara", "Lysa", "Lyanna", "Lyessa", "Lyra", "Maege", "Maisie", "Margaret", "Mara",
+            "Marna", "Meera", "Meliana", "Myriame", "Palla", "Sara", "Sybelle", "Wylla", "Wynafryd",
+
+            // Additional Northern English female names
+            "Aelred", "Aelswith", "Ailith", "Aldith", "Alviva", "Annis", "Avice", "Beatrix", "Bertha",
+            "Blanche", "Branwen", "Brenna", "Brigid", "Bryony", "Celia", "Cerys", "Clarice", "Constance",
+            "Cordelia", "Cressida", "Deirdre", "Delwyn", "Dervla", "Dorcas", "Edith", "Edwina", "Elinor",
+            "Elspeth", "Emmeline", "Enid", "Etheldreda", "Euphemia", "Evangeline", "Felicity", "Fenella",
+            "Fiona", "Freya", "Garnet", "Georgiana", "Gilda", "Giselle", "Godiva", "Greta", "Gwendolyn",
+            "Gwyneth", "Hazel", "Heather", "Helene", "Hilda", "Honor", "Imogen", "Iona", "Iris", "Isabel",
+            "Isolde", "Ivy", "Jacinta", "Jade", "Jemima", "Jocelyn", "Judith", "Juliana", "Kendra", "Kerensa",
+            "Lavinia", "Leona", "Lettice", "Lillian", "Linnet", "Lorelei", "Lucinda", "Lydia", "Mabel",
+            "Madeline", "Marigold", "Marlowe", "Mathilda", "Maude", "Maxine", "Mercy", "Millicent", "Miranda",
+            "Moira", "Morgana", "Morwenna", "Myfanwy", "Nerys", "Niamh", "Nicola", "Nora", "Octavia",
+            "Olive", "Ophelia", "Orla", "Pandora", "Patience", "Penelope", "Perdita", "Petra", "Philippa",
+            "Poppy", "Portia", "Primrose", "Prudence", "Raven", "Rhiannon", "Rosalind", "Rowena", "Ruby",
+            "Sabrina", "Seraphina", "Serena", "Seren", "Siobhan", "Sorcha", "Stella", "Tabitha", "Tamsin",
+            "Tessa", "Theodora", "Thomasina", "Thora", "Tilda", "Tullia", "Una", "Ursula", "Valeria",
+            "Venetia", "Vera", "Veronica", "Victoria", "Violet", "Vivienne", "Willa", "Willow", "Winifred",
+            "Xara", "Yolanda", "Yvette", "Yvonne", "Zelda", "Zephyr", "Zinnia", "Zora",
+
+            // Additional Northern/Celtic variants
+            "Aileas", "Aileen", "Aine", "Bronwen", "Caoimhe", "Catelyn", "Ciara", "Davina", "Delyth",
+            "Effie", "Eilidh", "Eirlys", "Eleri", "Elen", "Ffion", "Gladys", "Gwen", "Gwenllian",
+            "Hafwen", "Heledd", "Hestia", "Idris", "Ifan", "Iona", "Ishbel", "Kenna", "Kirsty",
+            "Lorna", "Mairi", "Megan", "Morag", "Morven", "Moyra", "Muirenn", "Nessa", "Nesta",
+            "Olwen", "Paisley", "Peigi", "Rhona", "Shona", "Sine", "Skye", "Sorcha", "Tegan",
+            "Thea", "Ulrika", "Vaila", "Vivian", "Wenna", "Ysabel", "Zara"
     };
 
     private static final String[] LAST_NAMES = {
@@ -68,15 +138,23 @@ public class NameSystem {
             "Snow", "Snow", "Snow", "Snow", "Snow", "Snow", "Snow", "Snow", "Snow", "Snow", "Snow"
     };
 
-    public NameSystem(Northern_Peasant_Entity peasant) {
+    public NameSystem(Peasant_Entity peasant) {
         this.peasant = peasant;
     }
 
     /**
-     * Generates a random name for the peasant
+     * Generates a random name for the peasant based on their gender
      */
     public void generateRandomName(RandomSource random) {
-        String firstName = FIRST_NAMES[random.nextInt(FIRST_NAMES.length)];
+        String firstName;
+
+        // Use gender-appropriate first names
+        if (peasant.isFemale()) {
+            firstName = FEMALE_FIRST_NAMES[random.nextInt(FEMALE_FIRST_NAMES.length)];
+        } else {
+            firstName = FIRST_NAMES[random.nextInt(FIRST_NAMES.length)];
+        }
+
         String lastName = LAST_NAMES[random.nextInt(LAST_NAMES.length)];
         String fullName = firstName + " " + lastName;
 

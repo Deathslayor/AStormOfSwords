@@ -1,19 +1,17 @@
 package net.darkflameproduction.agotmod.entity.custom.npc.system;
 
-import net.darkflameproduction.agotmod.block.ModBLocks;
+import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
 
 import java.util.*;
 
 public class GrocerSystem {
-    private final Northern_Peasant_Entity peasant;
+    private final Peasant_Entity peasant;
 
     // Digital inventory counter - maps item resource location to count
     private final Map<String, Integer> digitalInventory = new HashMap<>();
@@ -38,7 +36,7 @@ public class GrocerSystem {
         COLLECTION_COMPLETE
     }
 
-    public GrocerSystem(Northern_Peasant_Entity peasant) {
+    public GrocerSystem(Peasant_Entity peasant) {
         this.peasant = peasant;
     }
 

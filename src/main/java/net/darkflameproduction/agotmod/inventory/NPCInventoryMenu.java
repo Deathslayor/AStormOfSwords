@@ -1,19 +1,16 @@
 package net.darkflameproduction.agotmod.inventory;
 
+import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.InventorySystem;
 
 public class NPCInventoryMenu extends AbstractContainerMenu {
-    private final Northern_Peasant_Entity npc;
+    private final Peasant_Entity npc;
     private final InventorySystem inventorySystem;
     private final SimpleContainer npcInventory;
 
@@ -28,7 +25,7 @@ public class NPCInventoryMenu extends AbstractContainerMenu {
     private static final int LEGS_SLOT = 4;
     private static final int FEET_SLOT = 5;
 
-    public NPCInventoryMenu(int containerId, Inventory playerInventory, Northern_Peasant_Entity npc) {
+    public NPCInventoryMenu(int containerId, Inventory playerInventory, Peasant_Entity npc) {
         // Use our custom menu type - you'll need to register this properly
         super(net.darkflameproduction.agotmod.init.ModMenuTypes.NPC_INVENTORY_MENU.get(), containerId);
         this.npc = npc;

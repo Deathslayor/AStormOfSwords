@@ -4,34 +4,34 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
+import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.JobSystem;
 
 import java.util.EnumSet;
 
 public class SleepGoal extends Goal {
-    private final Northern_Peasant_Entity peasant;
+    private final Peasant_Entity peasant;
 
-    public SleepGoal(Northern_Peasant_Entity peasant) {
+    public SleepGoal(Peasant_Entity peasant) {
         this.peasant = peasant;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK, Goal.Flag.JUMP));
     }
 
     @Override
     public boolean canUse() {
-        // DEBUG: Add some logging to see what's happening
         boolean shouldSleep = peasant.shouldSleep();
         boolean isSleeping = peasant.isSleeping();
         boolean needsFood = peasant.needsFoodCollection();
         boolean isGuard = peasant.getJobType().equals(JobSystem.JOB_GUARD);
 
-        // Log for debugging (remove this in production)
-        if (isGuard && !peasant.level().isClientSide) {
-            long dayTime = peasant.level().getDayTime() % 24000;
+        // Must be sleep time and not already sleeping
+        if (!shouldSleep || isSleeping) {
+            return false;
         }
 
-        // Use the peasant's shouldSleep() method which handles guard schedules properly
-        if (!shouldSleep || isSleeping || needsFood) {
+        // For guards: sleep takes priority over food collection during sleep time
+        // For regular NPCs: don't sleep if they need food
+        if (needsFood && !isGuard) {
             return false;
         }
 
@@ -50,13 +50,7 @@ public class SleepGoal extends Goal {
 
                 // Only start sleeping if we're close enough to the bed
                 double distanceToBed = peasant.distanceToSqr(homeBed.getX(), homeBed.getY(), homeBed.getZ());
-                boolean canSleep = distanceToBed <= 4.0D;
-
-                // More debug logging
-                if (isGuard && !peasant.level().isClientSide) {
-                }
-
-                return canSleep; // Only sleep if within 2 blocks
+                return distanceToBed <= 4.0D; // Must be within 2 blocks
             }
         }
 
@@ -65,34 +59,37 @@ public class SleepGoal extends Goal {
                 !peasant.getSleepSystem().isBedOccupied(peasant.level(), peasant.getBedPos())) {
 
             double distanceToBed = peasant.distanceToSqr(peasant.getBedPos().getX(), peasant.getBedPos().getY(), peasant.getBedPos().getZ());
-            boolean canSleep = distanceToBed <= 4.0D;
-
-            // More debug logging
-            if (isGuard && !peasant.level().isClientSide) {
-            }
-
-            return canSleep; // Only sleep if within 2 blocks
+            return distanceToBed <= 4.0D; // Must be within 2 blocks
         }
 
-        // Debug: No valid bed found
-        if (isGuard && !peasant.level().isClientSide) {
-        }
-
+        // No valid bed found or not close enough
         return false;
     }
 
     @Override
     public boolean canContinueToUse() {
-        // Use the peasant's shouldSleep() method which handles guard schedules properly
-        if (!peasant.shouldSleep()) {
+        boolean shouldSleep = peasant.shouldSleep();
+        boolean isGuard = peasant.getJobType().equals(JobSystem.JOB_GUARD);
+
+        // Must still be sleep time
+        if (!shouldSleep) {
             return false;
         }
+
+        // For guards: continue sleeping even if they need food - sleep is priority during sleep time
+        // For regular NPCs: stop sleeping if they need food and are actively eating
+        if (!isGuard && peasant.getHungerSystem().isEating()) {
+            return false;
+        }
+
+        // Check if bed still exists and is valid
         if (peasant.getBedPos() != null) {
             BlockState bedState = peasant.level().getBlockState(peasant.getBedPos());
             if (!(bedState.getBlock() instanceof BedBlock)) {
                 return false;
             }
         }
+
         return peasant.isSleeping();
     }
 
@@ -103,9 +100,7 @@ public class SleepGoal extends Goal {
             // Only start sleeping if we're actually close to the bed
             double distanceToBed = peasant.distanceToSqr(bedPos.getX(), bedPos.getY(), bedPos.getZ());
             if (distanceToBed <= 4.0D) {
-                // Debug logging
-                if (peasant.getJobType().equals(JobSystem.JOB_GUARD) && !peasant.level().isClientSide) {
-                }
+                // Use our custom startSleeping method which handles guard time restrictions
                 peasant.startSleeping(bedPos);
             }
         }

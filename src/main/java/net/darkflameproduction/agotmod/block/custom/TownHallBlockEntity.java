@@ -113,30 +113,22 @@ public class TownHallBlockEntity extends BlockEntity {
         int scanRadius = getCurrentScanRadius();
         int newCitizenCount = 0;
 
-        // Debug: Print current scan info
-        System.out.println("Town Hall: Starting citizen scan at position " + this.getBlockPos());
-        System.out.println("Town Hall: Using stable scan radius = " + scanRadius + ", height = " + getCurrentScanHeight());
-        System.out.println("Town Hall: Previous citizen count = " + citizenCount);
+
 
         // Get all home bed claims within our current scan radius
         Set<BlockPos> homeBedClaims = SimpleBedWarningSystem.getHomeBedClaimsInRadius(
                 this.getBlockPos(), scanRadius, null); // null excludeUUID to get all claims
 
-        System.out.println("Town Hall: Found " + homeBedClaims.size() + " total bed claims in radius");
 
         // Count beds that are actually within our scan area using the stable radius
         for (BlockPos claimedBedPos : homeBedClaims) {
-            System.out.println("Town Hall: Checking bed claim at " + claimedBedPos);
 
             if (isWithinStableScanArea(claimedBedPos, scanRadius)) {
                 newCitizenCount++;
-                System.out.println("Town Hall: ✓ Counting citizen bed at " + claimedBedPos + " (Total: " + newCitizenCount + ")");
             } else {
-                System.out.println("Town Hall: ✗ Bed at " + claimedBedPos + " is outside scan area");
             }
         }
 
-        System.out.println("Town Hall: Scan complete. Previous count: " + citizenCount + ", New count: " + newCitizenCount);
 
         // Only update if the count actually changed
         if (newCitizenCount != citizenCount) {
@@ -147,13 +139,10 @@ public class TownHallBlockEntity extends BlockEntity {
             citizenCount = newCitizenCount;
 
             int newRadius = getCurrentScanRadius();
-            System.out.println("Town Hall: Citizen count changed from " + oldCount + " to " + citizenCount);
-            System.out.println("Town Hall: Radius changed from " + oldRadius + " to " + newRadius);
+
 
             sendDataToClients(level);
             setChanged();
-        } else {
-            System.out.println("Town Hall: Citizen count unchanged at " + citizenCount);
         }
     }
 
@@ -228,8 +217,6 @@ public class TownHallBlockEntity extends BlockEntity {
         minY = Math.max(minY, level.dimensionType().minY());
         maxY = Math.min(maxY, level.dimensionType().minY() + level.dimensionType().height() - 1);
 
-        System.out.println("Town Hall: Performing bed scan with radius " + currentRadius + " and height " + currentHeight);
-        System.out.println("Town Hall: Scan area from (" + minX + "," + minY + "," + minZ + ") to (" + maxX + "," + maxY + "," + maxZ + ")");
 
         // Scan the area for beds - only count HEAD blocks to avoid double counting
         for (int x = minX; x <= maxX; x++) {
@@ -254,7 +241,6 @@ public class TownHallBlockEntity extends BlockEntity {
         }
 
         this.bedCount = bedCount;
-        System.out.println("Town Hall bed scan complete. Found " + bedCount + " beds and " + citizenCount + " citizens in radius " + currentRadius + ".");
 
         // Send update packet to any players who have the GUI open AND debug renderer updates
         sendDataToClients(level);

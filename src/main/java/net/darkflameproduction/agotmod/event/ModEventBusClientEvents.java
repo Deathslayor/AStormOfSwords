@@ -9,10 +9,8 @@ import net.darkflameproduction.agotmod.entity.ModEntities;
 import net.darkflameproduction.agotmod.entity.client.birds.Crow_Entity_Renderer;
 import net.darkflameproduction.agotmod.entity.client.northofthewall.Mammoth_Entity_Renderer;
 import net.darkflameproduction.agotmod.entity.client.wolves.Direwolf_Entity_Renderer;
-import net.darkflameproduction.agotmod.entity.client.npc.Northern_Peasant_Renderer; // Add this import
-import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
+import net.darkflameproduction.agotmod.entity.client.npc.Peasant_Renderer; // Add this import
 import net.darkflameproduction.agotmod.event.KeyMappings.KeyBindings;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -22,7 +20,6 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.client.event.InputEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import org.jetbrains.annotations.NotNull;
 
@@ -42,7 +39,7 @@ public class ModEventBusClientEvents {
         EntityRenderers.register(ModEntities.CROW_ENTITY.get(), Crow_Entity_Renderer::new);
         EntityRenderers.register(ModEntities.DIREWOLF_ENTITY.get(), Direwolf_Entity_Renderer::new);
         // Fixed: Use the proper renderer instead of the entity constructor
-        EntityRenderers.register(ModEntities.NORTHERN_PEASANT_ENTITY.get(), Northern_Peasant_Renderer::new);
+        EntityRenderers.register(ModEntities.PEASANT_ENTITY.get(), Peasant_Renderer::new);
     }
 
     @OnlyIn(Dist.CLIENT)

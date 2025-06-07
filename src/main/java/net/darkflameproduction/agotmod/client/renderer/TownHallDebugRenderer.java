@@ -100,17 +100,14 @@ public class TownHallDebugRenderer {
         if (!townHallDataMap.containsKey(pos)) {
             TownHallData defaultData = new TownHallData(16, 0, 0);
             townHallDataMap.put(pos, defaultData);
-            System.out.println("DEBUG: Added NEW Town Hall at " + pos + " with default radius 16");
             saveTownHallData(); // Save immediately when new town hall is added
         } else {
-            System.out.println("DEBUG: Town Hall at " + pos + " already exists, keeping existing data");
         }
     }
 
     public static void removeTownHall(BlockPos pos) {
         townHallDataMap.remove(pos);
         pendingUpdates.remove(pos); // Also remove from pending updates
-        System.out.println("DEBUG: Removed Town Hall at " + pos);
         saveTownHallData(); // Save immediately when town hall is removed
     }
 
@@ -126,11 +123,9 @@ public class TownHallDebugRenderer {
             // Store in pending updates with timestamp
             pendingUpdates.put(pos, newData);
 
-            System.out.println("DEBUG: ACCEPTED Town Hall update at " + pos + " - Beds: " + bedCount +
-                    ", Citizens: " + citizenCount + ", Radius: " + currentRadius + " (time: " + currentTime + ")");
+
         } else {
-            System.out.println("DEBUG: REJECTED outdated Town Hall update at " + pos + " - Current time: " + currentTime +
-                    ", Existing time: " + existingData.timestamp);
+
         }
     }
 
@@ -157,11 +152,9 @@ public class TownHallDebugRenderer {
 
                     townHallDataMap.put(pos, newData);
                     dataChanged = true;
-                    System.out.println("DEBUG: APPLIED Town Hall update at " + pos + " - New radius: " + newData.radius +
-                            " (replaced radius: " + (oldData != null ? oldData.radius : "none") + ")");
+
                 } else if (oldData != null && newData.timestamp < oldData.timestamp) {
-                    System.out.println("DEBUG: SKIPPED older update at " + pos + " - New time: " + newData.timestamp +
-                            ", Current time: " + oldData.timestamp);
+
                 }
             }
             pendingUpdates.clear();
@@ -193,10 +186,8 @@ public class TownHallDebugRenderer {
                 gson.toJson(serializableData, writer);
             }
 
-            System.out.println("DEBUG: Saved " + townHallDataMap.size() + " Town Hall entries to " + SAVE_FILE);
 
         } catch (IOException e) {
-            System.err.println("DEBUG: Failed to save Town Hall data: " + e.getMessage());
         }
     }
 
@@ -209,7 +200,6 @@ public class TownHallDebugRenderer {
             Path saveFile = gameDir.resolve(SAVE_FILE);
 
             if (!Files.exists(saveFile)) {
-                System.out.println("DEBUG: No Town Hall save file found, starting fresh");
                 return;
             }
 
@@ -225,13 +215,11 @@ public class TownHallDebugRenderer {
                         townHallDataMap.put(data.getBlockPos(), data.getTownHallData());
                     }
 
-                    System.out.println("DEBUG: Loaded " + townHallDataMap.size() + " Town Hall entries from " + SAVE_FILE);
                 }
             }
 
         } catch (Exception e) {
-            System.err.println("DEBUG: Failed to load Town Hall data: " + e.getMessage());
-            System.err.println("DEBUG: Starting with empty Town Hall data");
+
         }
     }
 
@@ -248,7 +236,6 @@ public class TownHallDebugRenderer {
     @SubscribeEvent
     public static void onWorldLoad(LevelEvent.Load event) {
         if (event.getLevel().isClientSide()) {
-            System.out.println("DEBUG: World loaded on client, loading Town Hall debug data");
             loadTownHallData();
         }
     }
@@ -259,7 +246,6 @@ public class TownHallDebugRenderer {
     @SubscribeEvent
     public static void onWorldUnload(LevelEvent.Unload event) {
         if (event.getLevel().isClientSide()) {
-            System.out.println("DEBUG: World unloading on client, saving Town Hall debug data");
             saveTownHallData();
         }
     }

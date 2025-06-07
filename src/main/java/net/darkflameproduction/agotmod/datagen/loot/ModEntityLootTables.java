@@ -60,7 +60,7 @@ public class ModEntityLootTables extends EntityLootSubProvider {
                                 .add(LootItem.lootTableItem(Items.FEATHER)
                                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))));
 
-        this.add(ModEntities.NORTHERN_PEASANT_ENTITY.get(),
+        this.add(ModEntities.PEASANT_ENTITY.get(),
                 LootTable.lootTable()
                         .withPool(LootPool.lootPool()
                                 .setRolls(ConstantValue.exactly(1))

@@ -1,5 +1,6 @@
 package net.darkflameproduction.agotmod.init;
 
+import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.inventory.MenuType;
 import net.neoforged.bus.api.IEventBus;
@@ -19,7 +20,7 @@ public class ModMenuTypes {
                     IMenuTypeExtension.create((windowId, inv, data) -> {
                         // The data should contain the NPC entity ID
                         int entityId = data.readInt();
-                        if (inv.player.level().getEntity(entityId) instanceof net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity npc) {
+                        if (inv.player.level().getEntity(entityId) instanceof Peasant_Entity npc) {
                             return new NPCInventoryMenu(windowId, inv, npc);
                         }
                         return null;

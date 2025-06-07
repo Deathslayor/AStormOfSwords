@@ -1,10 +1,9 @@
 package net.darkflameproduction.agotmod.entity.custom.npc.goals;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.block.state.BlockState;
-import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
+import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.JobSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.JobWarningSystem;
 
@@ -12,7 +11,7 @@ import java.util.EnumSet;
 import java.util.Set;
 
 public class FindJobGoal extends Goal {
-    private final Northern_Peasant_Entity peasant;
+    private final Peasant_Entity peasant;
     private BlockPos targetJobBlock;
     private String targetJobType = null;
     private int searchCooldown = 0;
@@ -22,7 +21,7 @@ public class FindJobGoal extends Goal {
     private static final int MESSAGE_INTERVAL = 600; // Send messages every 30 seconds
     private static final int MAX_SEARCH_ATTEMPTS = 10; // Reset attempts after this many failures
 
-    public FindJobGoal(Northern_Peasant_Entity peasant) {
+    public FindJobGoal(Peasant_Entity peasant) {
         this.peasant = peasant;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE));
     }

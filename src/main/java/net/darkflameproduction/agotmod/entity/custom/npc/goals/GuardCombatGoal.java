@@ -1,11 +1,11 @@
 package net.darkflameproduction.agotmod.entity.custom.npc.goals;
 
+import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.monster.Monster;
-import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.JobSystem;
 
 import java.util.EnumSet;
@@ -15,7 +15,7 @@ import java.util.EnumSet;
  * Similar to PeasantDefenseGoal but specifically for guards hunting monsters
  */
 public class GuardCombatGoal extends Goal {
-    private final Northern_Peasant_Entity guard;
+    private final Peasant_Entity guard;
     private LivingEntity target;
     private int attackCooldown = 0;
     private int attackProgress = 0;
@@ -25,7 +25,7 @@ public class GuardCombatGoal extends Goal {
     private static final double CHASE_RANGE = 20.0D; // Range to chase monsters (longer than peasant defense)
     private boolean hasDealtDamage = false;
 
-    public GuardCombatGoal(Northern_Peasant_Entity guard) {
+    public GuardCombatGoal(Peasant_Entity guard) {
         this.guard = guard;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
     }

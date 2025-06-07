@@ -1,12 +1,12 @@
 package net.darkflameproduction.agotmod.entity.custom.npc.goals;
 
+import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.block.state.BlockState;
-import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -14,11 +14,11 @@ import java.util.List;
 import java.util.Set;
 
 public class OpenAndCloseDoorGoal extends Goal {
-    private final Northern_Peasant_Entity peasant;
+    private final Peasant_Entity peasant;
     private final List<BlockPos> openableBlocks = new ArrayList<>();
     private final Set<BlockPos> openedBlocks = new HashSet<>();
 
-    public OpenAndCloseDoorGoal(Northern_Peasant_Entity peasant) {
+    public OpenAndCloseDoorGoal(Peasant_Entity peasant) {
         this.peasant = peasant;
     }
 

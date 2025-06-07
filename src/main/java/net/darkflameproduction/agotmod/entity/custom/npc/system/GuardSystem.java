@@ -4,13 +4,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.LivingEntity;
-import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
+import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class GuardSystem {
-    private final Northern_Peasant_Entity peasant;
+    private final Peasant_Entity peasant;
 
     // Guard shift types
     public enum GuardShift {
@@ -79,7 +79,7 @@ public class GuardSystem {
     private static final int TARGET_SCAN_INTERVAL = 20; // Scan for targets every second
     private static final int COMBAT_RANGE = 16; // Range to detect and chase monsters
 
-    public GuardSystem(Northern_Peasant_Entity peasant) {
+    public GuardSystem(Peasant_Entity peasant) {
         this.peasant = peasant;
     }
 

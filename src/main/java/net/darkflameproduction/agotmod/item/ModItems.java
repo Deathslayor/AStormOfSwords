@@ -993,8 +993,8 @@ public class ModItems {
                     0x919191,
                     properties));
 
-    public static final DeferredItem<Item> NORTHERN_PEASANT_SPAWN_EGG = ITEMS.registerItem("northern_peasant_spawn_egg",
-            properties -> new SpawnEggItem(ModEntities.NORTHERN_PEASANT_ENTITY.get(),
+    public static final DeferredItem<Item> PEASANT_SPAWN_EGG = ITEMS.registerItem("peasant_spawn_egg",
+            properties -> new SpawnEggItem(ModEntities.PEASANT_ENTITY.get(),
                     0x575757,
                     0x333333,
                     properties));

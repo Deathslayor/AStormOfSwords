@@ -1,8 +1,8 @@
 package net.darkflameproduction.agotmod.entity.custom.npc.goals;
 
+import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.ai.goal.Goal;
-import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.JobSystem;
 
 import java.util.EnumSet;
@@ -11,12 +11,12 @@ import java.util.EnumSet;
  * Goal that handles guard patrol behavior when not in combat
  */
 public class GuardPatrolGoal extends Goal {
-    private final Northern_Peasant_Entity peasant;
+    private final Peasant_Entity peasant;
     private BlockPos patrolTarget;
     private int stuckTimer = 0;
     private static final int MAX_STUCK_TIME = 100; // 5 seconds before giving up on a patrol point
 
-    public GuardPatrolGoal(Northern_Peasant_Entity peasant) {
+    public GuardPatrolGoal(Peasant_Entity peasant) {
         this.peasant = peasant;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE));
     }

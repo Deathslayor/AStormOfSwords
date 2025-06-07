@@ -1,8 +1,7 @@
 package net.darkflameproduction.agotmod.network;
 
 import net.darkflameproduction.agotmod.block.custom.TownHallBlockEntity;
-import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
-import net.darkflameproduction.agotmod.gui.GrocerInventoryScreen;
+import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -32,10 +31,10 @@ public class ServerPacketHandler {
             ServerLevel level = player.serverLevel();
 
             // Find the grocer by name in the current level
-            Northern_Peasant_Entity targetGrocer = null;
+            Peasant_Entity targetGrocer = null;
 
             for (Entity entity : level.getAllEntities()) {
-                if (entity instanceof Northern_Peasant_Entity peasant) {
+                if (entity instanceof Peasant_Entity peasant) {
                     if (peasant.getDisplayName().getString().equals(packet.grocerName()) &&
                             peasant.getJobType().equals("grocer")) {
                         targetGrocer = peasant;
@@ -159,7 +158,7 @@ public class ServerPacketHandler {
         player.getPersistentData().putLong(COIN_BALANCE_KEY, newBalance);
     }
 
-    private static boolean processTransactionAndSpawnItems(Northern_Peasant_Entity grocer, Map<String, Integer> itemsToSubtract, ServerPlayer player, ServerLevel level) {
+    private static boolean processTransactionAndSpawnItems(Peasant_Entity grocer, Map<String, Integer> itemsToSubtract, ServerPlayer player, ServerLevel level) {
         // Verify all items are available first
         for (Map.Entry<String, Integer> entry : itemsToSubtract.entrySet()) {
             String itemKey = entry.getKey();
@@ -251,12 +250,7 @@ public class ServerPacketHandler {
         // Spawn the entity in the world
         level.addFreshEntity(itemEntity);
 
-        System.out.println("DEBUG: Spawned ItemEntity with " + stack.getCount() + " " + stack.getItem().getDescriptionId() + " (" + (index + 1) + "/" + total + ")");
     }
-
-    /**
-     * Sanitize and validate the town name
-     */
     private static String sanitizeTownName(String input) {
         if (input == null || input.trim().isEmpty()) {
             return "Unnamed Town";

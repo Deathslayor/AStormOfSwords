@@ -1,25 +1,25 @@
 package net.darkflameproduction.agotmod.entity.custom.npc.goals;
 
+import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
 public class CollectFoodGoal extends Goal {
-    private final Northern_Peasant_Entity peasant;
+    private final Peasant_Entity peasant;
     private BlockPos targetChest;
     private int searchAttempts = 0;
     private List<BlockPos> searchedChests = new ArrayList<>();
     private static final int MIN_FOOD_COUNT = 15;
 
-    public CollectFoodGoal(Northern_Peasant_Entity peasant) {
+    public CollectFoodGoal(Peasant_Entity peasant) {
         this.peasant = peasant;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
     }

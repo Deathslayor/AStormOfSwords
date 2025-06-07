@@ -1,6 +1,6 @@
 package net.darkflameproduction.agotmod.entity.custom.npc.goals;
 
-import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
+import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -12,7 +12,7 @@ import java.util.EnumSet;
  * Peasants will defend themselves when attacked and fight aggressively while moving
  */
 public class PeasantDefenseGoal extends Goal {
-    private final Northern_Peasant_Entity peasant;
+    private final Peasant_Entity peasant;
     private LivingEntity target;
     private int attackCooldown = 0;
     private int attackProgress = 0;
@@ -22,7 +22,7 @@ public class PeasantDefenseGoal extends Goal {
     private static final double CHASE_RANGE = 12.0D; // Range to chase targets
     private boolean hasDealtDamage = false;
 
-    public PeasantDefenseGoal(Northern_Peasant_Entity peasant) {
+    public PeasantDefenseGoal(Peasant_Entity peasant) {
         this.peasant = peasant;
         this.setFlags(EnumSet.of(Goal.Flag.LOOK));
     }

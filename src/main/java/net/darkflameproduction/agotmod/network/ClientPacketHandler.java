@@ -28,7 +28,6 @@ public class ClientPacketHandler {
                 // Always update the grocer GUI if it's open, and log the update
                 GrocerInventoryScreen.updatePlayerBalance(packet.balance());
 
-                System.out.println("DEBUG: ClientPacketHandler updated coin balance to: " + packet.balance());
             }
         });
     }
@@ -37,11 +36,9 @@ public class ClientPacketHandler {
         context.enqueueWork(() -> {
             if (packet.register()) {
                 TownHallDebugRenderer.addTownHall(packet.pos());
-                System.out.println("DEBUG: Registered Town Hall at " + packet.pos() + " with debug renderer");
             } else {
                 TownHallDebugRenderer.removeTownHall(packet.pos());
                 TownTracker.removeTown(packet.pos()); // Also remove from tracker
-                System.out.println("DEBUG: Unregistered Town Hall at " + packet.pos() + " from debug renderer and tracker");
             }
         });
     }
@@ -51,7 +48,6 @@ public class ClientPacketHandler {
             Minecraft mc = Minecraft.getInstance();
             TownHallScreen screen = new TownHallScreen(packet.pos());
             mc.setScreen(screen);
-            System.out.println("DEBUG: Opened Town Hall GUI for position " + packet.pos());
         });
     }
 
@@ -73,12 +69,6 @@ public class ClientPacketHandler {
             // Update the town tracker with both name and population data
             // Use citizenCount as population since that's what represents actual residents
             TownTracker.updateTownData(pos, townName, citizenCount);
-
-            System.out.println("DEBUG: Updated Town Hall data for " + pos + ":");
-            System.out.println("  - Name: '" + townName + "'");
-            System.out.println("  - Beds: " + bedCount);
-            System.out.println("  - Citizens: " + citizenCount + " (population)");
-            System.out.println("  - Radius: " + currentRadius + " blocks");
         });
     }
 
@@ -94,8 +84,6 @@ public class ClientPacketHandler {
                 long grocerBalance = packet.grocerBalance();
                 long playerBalance = packet.playerBalance();
 
-                System.out.println("DEBUG: Opening grocer inventory for: " + grocerName + " with " + inventoryEntries.size() + " items");
-                System.out.println("DEBUG: Grocer balance: " + grocerBalance + ", Player balance: " + playerBalance);
 
                 // Update player's persistent data with the balance from server
                 mc.player.getPersistentData().putLong("agotmod.coin_balance", playerBalance);
@@ -107,7 +95,6 @@ public class ClientPacketHandler {
                     // Update existing screen with new data
                     GrocerInventoryScreen.updateInventoryData(grocerName, inventoryEntries, grocerBalance);
                     GrocerInventoryScreen.updatePlayerBalance(playerBalance);
-                    System.out.println("DEBUG: Updated existing grocer screen with player balance: " + playerBalance);
                 } else {
                     // Open new screen and populate with data
                     GrocerInventoryScreen newScreen = new GrocerInventoryScreen(grocerName);
@@ -116,7 +103,6 @@ public class ClientPacketHandler {
                     // Update with data immediately after opening
                     GrocerInventoryScreen.updateInventoryData(grocerName, inventoryEntries, grocerBalance);
                     GrocerInventoryScreen.updatePlayerBalance(playerBalance);
-                    System.out.println("DEBUG: Opened new grocer screen with player balance: " + playerBalance);
                 }
             }
         });

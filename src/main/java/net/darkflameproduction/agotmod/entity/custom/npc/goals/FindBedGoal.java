@@ -5,7 +5,7 @@ import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BedPart;
-import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
+import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.SleepSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.SimpleBedWarningSystem;
 
@@ -13,13 +13,13 @@ import java.util.EnumSet;
 import java.util.Set;
 
 public class FindBedGoal extends Goal {
-    private final Northern_Peasant_Entity peasant;
+    private final Peasant_Entity peasant;
     private BlockPos targetBed;
     private int searchCooldown = 0;
     private int searchAttempts = 0;
     private static final int MAX_SEARCH_RADIUS = 64;
 
-    public FindBedGoal(Northern_Peasant_Entity peasant) {
+    public FindBedGoal(Peasant_Entity peasant) {
         this.peasant = peasant;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE));
     }

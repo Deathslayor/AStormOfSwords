@@ -59,7 +59,7 @@
 				}
 			}
 		},
-		"misc.farm": {
+		"misc.interract": {
 			"animation_length": 0.375,
 			"bones": {
 				"right_arm": {

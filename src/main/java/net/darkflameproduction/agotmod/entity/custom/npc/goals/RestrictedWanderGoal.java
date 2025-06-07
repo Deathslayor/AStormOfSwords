@@ -1,14 +1,14 @@
 package net.darkflameproduction.agotmod.entity.custom.npc.goals;
 
+import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
-import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
 import org.jetbrains.annotations.Nullable;
 
 public class RestrictedWanderGoal extends WaterAvoidingRandomStrollGoal {
-    private final Northern_Peasant_Entity peasant;
+    private final Peasant_Entity peasant;
 
-    public RestrictedWanderGoal(Northern_Peasant_Entity peasant, double speedModifier) {
+    public RestrictedWanderGoal(Peasant_Entity peasant, double speedModifier) {
         super(peasant, speedModifier);
         this.peasant = peasant;
     }

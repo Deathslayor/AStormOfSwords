@@ -1,19 +1,19 @@
 package net.darkflameproduction.agotmod.entity.custom.npc.goals;
 
+import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.ai.goal.Goal;
-import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.JobSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.FarmingSystem.FarmState;
 
 import java.util.*;
 
 public class FarmingGoal extends Goal {
-    private final Northern_Peasant_Entity peasant;
+    private final Peasant_Entity peasant;
     private int workTimer = 0;
     private BlockPos currentWorkTarget = null;
 
-    public FarmingGoal(Northern_Peasant_Entity peasant) {
+    public FarmingGoal(Peasant_Entity peasant) {
         this.peasant = peasant;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
     }
@@ -119,8 +119,18 @@ public class FarmingGoal extends Goal {
     }
 
     private void handleFarmSetup() {
-        if (workTimer % 100 == 0) { // Every 5 seconds
-            peasant.getFarmingSystem().setupFarm();
+        // Move to job block first if not there
+        if (!peasant.getFarmingSystem().isAtJobBlock()) {
+            BlockPos jobBlock = peasant.getFarmingSystem().getJobBlockPosition();
+            if (jobBlock != null && !peasant.getNavigation().isInProgress()) {
+                peasant.getNavigation().moveTo(jobBlock.getX() + 0.5,
+                        jobBlock.getY(), jobBlock.getZ() + 0.5, 0.6D);
+            }
+        } else {
+            // At job block, can set up farm
+            if (workTimer % 100 == 0) { // Every 5 seconds
+                peasant.getFarmingSystem().setupFarm();
+            }
         }
     }
 
@@ -142,21 +152,41 @@ public class FarmingGoal extends Goal {
     }
 
     private void handleFarmlandConversion() {
-        if (workTimer % 200 == 0) { // Every 10 seconds
-            int converted = peasant.getFarmingSystem().convertToFarmland();
+        // Move to job block area first if not there
+        if (!peasant.getFarmingSystem().isAtJobBlock()) {
+            BlockPos jobBlock = peasant.getFarmingSystem().getJobBlockPosition();
+            if (jobBlock != null && !peasant.getNavigation().isInProgress()) {
+                peasant.getNavigation().moveTo(jobBlock.getX() + 0.5,
+                        jobBlock.getY(), jobBlock.getZ() + 0.5, 0.6D);
+            }
+        } else {
+            // At job block area, can convert farmland
+            if (workTimer % 200 == 0) { // Every 10 seconds
+                int converted = peasant.getFarmingSystem().convertToFarmland();
 
-            if (converted == 0) {
-                peasant.getFarmingSystem().setCurrentFarmState(FarmState.PLANTING_CROPS);
+                if (converted == 0) {
+                    peasant.getFarmingSystem().setCurrentFarmState(FarmState.PLANTING_CROPS);
+                }
             }
         }
     }
 
     private void handleCropPlanting() {
-        if (workTimer % 200 == 0) { // Every 10 seconds
-            int planted = peasant.getFarmingSystem().plantCrops();
+        // Move to job block area first if not there
+        if (!peasant.getFarmingSystem().isAtJobBlock()) {
+            BlockPos jobBlock = peasant.getFarmingSystem().getJobBlockPosition();
+            if (jobBlock != null && !peasant.getNavigation().isInProgress()) {
+                peasant.getNavigation().moveTo(jobBlock.getX() + 0.5,
+                        jobBlock.getY(), jobBlock.getZ() + 0.5, 0.6D);
+            }
+        } else {
+            // At job block area, can plant crops
+            if (workTimer % 200 == 0) { // Every 10 seconds
+                int planted = peasant.getFarmingSystem().plantCrops();
 
-            if (planted == 0) {
-                peasant.getFarmingSystem().setCurrentFarmState(FarmState.HARVESTING_CROPS);
+                if (planted == 0) {
+                    peasant.getFarmingSystem().setCurrentFarmState(FarmState.HARVESTING_CROPS);
+                }
             }
         }
     }
@@ -174,12 +204,22 @@ public class FarmingGoal extends Goal {
 
                 // Perform maintenance work every 3 seconds when no crops to harvest
                 if (workTimer % 60 == 0) {
-                    int conversions = peasant.getFarmingSystem().convertDirtGrassToFarmland();
-                    int plantings = peasant.getFarmingSystem().plantSeedsOnEmptyFarmland();
+                    // Only do maintenance if we're in the farm area
+                    if (peasant.getFarmingSystem().isAtJobBlock()) {
+                        int conversions = peasant.getFarmingSystem().convertDirtGrassToFarmland();
+                        int plantings = peasant.getFarmingSystem().plantSeedsOnEmptyFarmland();
 
-                    // If no maintenance work was done, switch to patrolling
-                    if (conversions == 0 && plantings == 0) {
-                        peasant.getFarmingSystem().setCurrentFarmState(FarmState.PATROLLING);
+                        // If no maintenance work was done, switch to patrolling
+                        if (conversions == 0 && plantings == 0) {
+                            peasant.getFarmingSystem().setCurrentFarmState(FarmState.PATROLLING);
+                        }
+                    } else {
+                        // Move back to job block area for maintenance
+                        BlockPos jobBlock = peasant.getFarmingSystem().getJobBlockPosition();
+                        if (jobBlock != null && !peasant.getNavigation().isInProgress()) {
+                            peasant.getNavigation().moveTo(jobBlock.getX() + 0.5,
+                                    jobBlock.getY(), jobBlock.getZ() + 0.5, 0.6D);
+                        }
                     }
                 }
             }
@@ -220,12 +260,14 @@ public class FarmingGoal extends Goal {
                 return;
             }
 
-            // Do maintenance work - convert dirt and plant seeds
-            int conversions = peasant.getFarmingSystem().convertDirtGrassToFarmland();
-            int plantings = peasant.getFarmingSystem().plantSeedsOnEmptyFarmland();
+            // Do maintenance work - convert dirt and plant seeds (only if in farm area)
+            if (peasant.getFarmingSystem().isAtJobBlock()) {
+                int conversions = peasant.getFarmingSystem().convertDirtGrassToFarmland();
+                int plantings = peasant.getFarmingSystem().plantSeedsOnEmptyFarmland();
 
-            // If we did work, stay in patrolling mode for gradual farm expansion
-            // If no work was done, just continue patrolling
+                // If we did work, stay in patrolling mode for gradual farm expansion
+                // If no work was done, just continue patrolling
+            }
         }
 
         // Wander around the farm area occasionally

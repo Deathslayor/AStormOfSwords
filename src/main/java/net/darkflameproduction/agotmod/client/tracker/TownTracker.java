@@ -86,7 +86,6 @@ public class TownTracker {
 
         // Debug: Log player position and towns being checked
         if (tickCounter % 40 == 0) { // Every 2 seconds
-            System.out.println("DEBUG: Player at " + playerPos + ", checking " + townData.size() + " towns");
         }
 
         for (Map.Entry<BlockPos, TownHallDebugRenderer.TownHallData> entry : townData.entrySet()) {
@@ -99,7 +98,6 @@ public class TownTracker {
 
                 // Debug: Log when player is detected in town
                 if (tickCounter % 40 == 0) {
-                    System.out.println("DEBUG: Player detected in town: " + townNameInside + " at " + townHallPos + " (radius: " + data.radius + ")");
                 }
                 break; // Player can only be in one town at a time (first one found)
             }
@@ -120,32 +118,23 @@ public class TownTracker {
 
         // Debug: Log town status changes
         if (townChanged) {
-            System.out.println("DEBUG: Town status changed - WasInTown: " + wasInTown + ", IsInTown: " + isInTown);
-            System.out.println("DEBUG: Previous town: " + (currentTownPos != null ? currentTownPos + " (" + currentTownName + ")" : "none"));
-            System.out.println("DEBUG: Current town: " + (townInside != null ? townInside + " (" + townNameInside + ")" : "none"));
+
         }
 
         if (townChanged) {
             if (wasInTown && !isInTown) {
                 // Player left a town - always show exit message immediately
-                System.out.println("DEBUG: TRIGGERING EXIT MESSAGE for: " + currentTownName);
                 TownNotificationOverlay.showExitMessage(currentTownName);
-                System.out.println("DEBUG: Player left town: " + currentTownName + " at " + currentTownPos);
             }
 
             if (!wasInTown && isInTown) {
                 // Player entered a town from outside - show entry message with population
                 int population = townPopulations.getOrDefault(townInside, 0);
-                System.out.println("DEBUG: TRIGGERING ENTRY MESSAGE for: " + townNameInside + " (Population: " + population + ")");
                 TownNotificationOverlay.showEntryMessage(townNameInside, population);
-                System.out.println("DEBUG: Player entered town: " + townNameInside + " at " + townInside);
             }
 
             if (wasInTown && isInTown && townChanged) {
-                // Player moved from one town directly to another - show both messages with delay
-                System.out.println("DEBUG: TRIGGERING TOWN-TO-TOWN MESSAGES: " + currentTownName + " -> " + townNameInside);
                 TownNotificationOverlay.showExitMessage(currentTownName);
-                System.out.println("DEBUG: Player left town: " + currentTownName + " at " + currentTownPos);
 
                 // Schedule entry message after a delay with population
                 int population = townPopulations.getOrDefault(townInside, 0);
@@ -168,7 +157,6 @@ public class TownTracker {
                 Thread.sleep(1000); // 1 second delay
                 if (!TownNotificationOverlay.isShowingMessage()) {
                     TownNotificationOverlay.showEntryMessage(townName, population);
-                    System.out.println("DEBUG: Player entered town (delayed): " + townName + " (Population: " + population + ")");
                 }
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
@@ -195,9 +183,6 @@ public class TownTracker {
 
         // Debug boundary checking occasionally
         if (tickCounter % 100 == 0 && (dx <= radius + 5 && dz <= radius + 5)) { // Log when close to boundary
-            System.out.println("DEBUG: Boundary check - Player: " + playerPos + ", TownHall: " + townHallPos);
-            System.out.println("DEBUG: Distance - dx: " + dx + ", dy: " + dy + ", dz: " + dz + " (radius: " + radius + ", height: " + SCAN_HEIGHT + ")");
-            System.out.println("DEBUG: Result: " + (inTown ? "INSIDE" : "OUTSIDE") + " town");
         }
 
         return inTown;
@@ -211,7 +196,6 @@ public class TownTracker {
 
         // Debug: Log if no town data is available
         if (data.isEmpty() && tickCounter % 100 == 0) {
-            System.out.println("DEBUG: No town hall data available from debug renderer");
         }
 
         return data;
@@ -229,7 +213,6 @@ public class TownTracker {
             saveTownNames();
         }
 
-        System.out.println("DEBUG: Updated town name for " + pos + " to '" + name + "'");
     }
 
     /**
@@ -244,7 +227,6 @@ public class TownTracker {
             saveTownNames(); // Save both names and populations
         }
 
-        System.out.println("DEBUG: Updated town population for " + pos + " to " + population);
     }
 
     /**
@@ -262,7 +244,6 @@ public class TownTracker {
             saveTownNames();
         }
 
-        System.out.println("DEBUG: Updated town data for " + pos + " - Name: '" + name + "', Population: " + population);
     }
 
     /**
@@ -280,23 +261,17 @@ public class TownTracker {
         }
     }
 
-    /**
-     * Get the name of the town the player is currently in (if any)
-     */
+
     public static String getCurrentTownName() {
         return currentTownName;
     }
 
-    /**
-     * Check if player is currently in any town
-     */
+
     public static boolean isInTown() {
         return currentTownPos != null;
     }
 
-    /**
-     * Save town names and populations to file
-     */
+
     private static void saveTownNames() {
         try {
             Path gameDir = Paths.get(".");
@@ -317,10 +292,8 @@ public class TownTracker {
                 gson.toJson(serializableData, writer);
             }
 
-            System.out.println("DEBUG: Saved " + townNames.size() + " town entries (names and populations) to " + TOWN_NAMES_FILE);
 
         } catch (IOException e) {
-            System.err.println("DEBUG: Failed to save town names: " + e.getMessage());
         }
     }
 
@@ -333,7 +306,6 @@ public class TownTracker {
             Path saveFile = gameDir.resolve(TOWN_NAMES_FILE);
 
             if (!Files.exists(saveFile)) {
-                System.out.println("DEBUG: No town names save file found, starting fresh");
                 return;
             }
 
@@ -351,13 +323,11 @@ public class TownTracker {
                         townPopulations.put(data.getBlockPos(), data.population);
                     }
 
-                    System.out.println("DEBUG: Loaded " + townNames.size() + " town entries (names and populations) from " + TOWN_NAMES_FILE);
                 }
             }
 
         } catch (Exception e) {
-            System.err.println("DEBUG: Failed to load town names: " + e.getMessage());
-            System.err.println("DEBUG: Starting with empty town names");
+
         }
     }
 
@@ -367,7 +337,6 @@ public class TownTracker {
     @SubscribeEvent
     public static void onWorldLoad(LevelEvent.Load event) {
         if (event.getLevel().isClientSide()) {
-            System.out.println("DEBUG: World loaded on client, loading town names");
             loadTownNames();
         }
     }
@@ -378,7 +347,6 @@ public class TownTracker {
     @SubscribeEvent
     public static void onWorldUnload(LevelEvent.Unload event) {
         if (event.getLevel().isClientSide()) {
-            System.out.println("DEBUG: World unloading on client, saving town names");
             saveTownNames();
         }
     }

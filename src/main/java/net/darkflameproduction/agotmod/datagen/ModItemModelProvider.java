@@ -62,7 +62,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         spawnEggItem(ModItems.MAMMOTH_SPAWN_EGG);
         spawnEggItem(ModItems.CROW_SPAWN_EGG);
         spawnEggItem(ModItems.DIREWOLF_SPAWN_EGG);
-        spawnEggItem(ModItems.NORTHERN_PEASANT_SPAWN_EGG);
+        spawnEggItem(ModItems.PEASANT_SPAWN_EGG);
 
 
         // ---------------------------(ARMOUR)--------------------------- //

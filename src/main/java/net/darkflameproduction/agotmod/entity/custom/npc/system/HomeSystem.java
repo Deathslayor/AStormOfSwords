@@ -1,13 +1,13 @@
 package net.darkflameproduction.agotmod.entity.custom.npc.system;
 
+import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
 
 public class HomeSystem {
-    private final Northern_Peasant_Entity peasant;
+    private final Peasant_Entity peasant;
 
     // Home base system constants
     private static final int HOME_RADIUS_X = 60; // 120x120 area (60 blocks from center)
@@ -20,7 +20,7 @@ public class HomeSystem {
     // NEW: Home bed broadcast timer
     private int homeBedBroadcastTimer = 0;
 
-    public HomeSystem(Northern_Peasant_Entity peasant) {
+    public HomeSystem(Peasant_Entity peasant) {
         this.peasant = peasant;
     }
 

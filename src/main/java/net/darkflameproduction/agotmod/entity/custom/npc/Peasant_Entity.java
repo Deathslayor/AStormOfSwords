@@ -3,7 +3,6 @@ package net.darkflameproduction.agotmod.entity.custom.npc;
 import net.darkflameproduction.agotmod.entity.animations.ModAnimationDefinitions;
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.*;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.*;
-import net.darkflameproduction.agotmod.gui.GrocerInventoryScreen;
 import net.darkflameproduction.agotmod.network.OpenGrocerInventoryPacket;
 import net.darkflameproduction.agotmod.sound.ModSounds;
 import net.minecraft.core.BlockPos;
@@ -41,22 +40,37 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.*;
 
-public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity, InventoryCarrier {
+public class Peasant_Entity extends PathfinderMob implements GeoEntity, InventoryCarrier {
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
+    // Gender constants
+    public static final String GENDER_MALE = "male";
+    public static final String GENDER_FEMALE = "female";
+
+    // Age constants
+    public static final String AGE_ADULT = "adult";
+    public static final String AGE_CHILD = "child";
+
+    // Aging constants
+    private static final int AVERAGE_AGING_TICKS = 240000; // Average time for child to become adult
+    private static final int AGING_VARIANCE = 48000; // +/- variance (20% of average)
+
     // Entity data accessors
-    private static final EntityDataAccessor<Boolean> IS_SLEEPING = SynchedEntityData.defineId(Northern_Peasant_Entity.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Long> LAST_SLEEP_TIME = SynchedEntityData.defineId(Northern_Peasant_Entity.class, EntityDataSerializers.LONG);
+    private static final EntityDataAccessor<Boolean> IS_SLEEPING = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Long> LAST_SLEEP_TIME = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.LONG);
     private static final EntityDataAccessor<ItemStack> DATA_ITEM_IN_MAIN_HAND =
-            SynchedEntityData.defineId(Northern_Peasant_Entity.class, EntityDataSerializers.ITEM_STACK);
-    private static final EntityDataAccessor<Integer> HUNGER_LEVEL = SynchedEntityData.defineId(Northern_Peasant_Entity.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Boolean> NEEDS_FOOD_COLLECTION = SynchedEntityData.defineId(Northern_Peasant_Entity.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<String> JOB_TYPE = SynchedEntityData.defineId(Northern_Peasant_Entity.class, EntityDataSerializers.STRING);
-    private static final EntityDataAccessor<Optional<BlockPos>> JOB_BLOCK_POS = SynchedEntityData.defineId(Northern_Peasant_Entity.class, EntityDataSerializers.OPTIONAL_BLOCK_POS);
-    private static final EntityDataAccessor<Long> LAST_DAY_TRACKED = SynchedEntityData.defineId(Northern_Peasant_Entity.class, EntityDataSerializers.LONG);
-    private static final EntityDataAccessor<Boolean> IS_INTERACTING = SynchedEntityData.defineId(Northern_Peasant_Entity.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Boolean> IS_ATTACKING = SynchedEntityData.defineId(Northern_Peasant_Entity.class, EntityDataSerializers.BOOLEAN);
+            SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.ITEM_STACK);
+    private static final EntityDataAccessor<Integer> HUNGER_LEVEL = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Boolean> NEEDS_FOOD_COLLECTION = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<String> JOB_TYPE = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.STRING);
+    private static final EntityDataAccessor<Optional<BlockPos>> JOB_BLOCK_POS = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.OPTIONAL_BLOCK_POS);
+    private static final EntityDataAccessor<Long> LAST_DAY_TRACKED = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.LONG);
+    private static final EntityDataAccessor<Boolean> IS_INTERACTING = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> IS_ATTACKING = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<String> GENDER = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.STRING);
+    private static final EntityDataAccessor<String> AGE = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.STRING);
+    private static final EntityDataAccessor<Integer> AGING_TIMER = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.INT);
 
     // Door goal reference for persistence
     private OpenAndCloseDoorGoal doorGoal;
@@ -77,7 +91,7 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
     private final GrocerSystem grocerSystem;
     private final TeleportSystem teleportSystem;
     private final NameSystem nameSystem;
-    private final GuardSystem guardSystem; // Added guard system
+    private final GuardSystem guardSystem;
     private static final Random RANDOM = new Random();
 
     // Daily reset tracking
@@ -95,7 +109,7 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
     // Coin balance constant for compatibility
     private static final String COIN_BALANCE_KEY = "agotmod.coin_balance";
 
-    public Northern_Peasant_Entity(EntityType<? extends Northern_Peasant_Entity> entityType, Level level) {
+    public Peasant_Entity(EntityType<? extends Peasant_Entity> entityType, Level level) {
         super(entityType, level);
         ((GroundPathNavigation)this.getNavigation()).setCanOpenDoors(true);
         this.getNavigation().setCanFloat(true);
@@ -111,7 +125,7 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         this.grocerSystem = new GrocerSystem(this);
         this.teleportSystem = new TeleportSystem(this);
         this.nameSystem = new NameSystem(this);
-        this.guardSystem = new GuardSystem(this); // Initialize guard system
+        this.guardSystem = new GuardSystem(this);
     }
 
     // Getters for all systems
@@ -124,10 +138,74 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
     public GrocerSystem getGrocerSystem() { return grocerSystem; }
     public TeleportSystem getTeleportSystem() { return teleportSystem; }
     public NameSystem getNameSystem() { return nameSystem; }
-    public GuardSystem getGuardSystem() { return guardSystem; } // Added guard system getter
+    public GuardSystem getGuardSystem() { return guardSystem; }
 
     // Getter for grocer collection goal
     public GrocerCollectionGoal getGrocerCollectionGoal() { return grocerCollectionGoal; }
+
+    // Gender methods
+    public String getGender() {
+        return this.entityData.get(GENDER);
+    }
+
+    public void setGender(String gender) {
+        this.entityData.set(GENDER, gender);
+    }
+
+    public boolean isMale() {
+        return GENDER_MALE.equals(getGender());
+    }
+
+    public boolean isFemale() {
+        return GENDER_FEMALE.equals(getGender());
+    }
+
+    // Age methods
+    public String getAge() {
+        return this.entityData.get(AGE);
+    }
+
+    public void setAge(String age) {
+        this.entityData.set(AGE, age);
+    }
+
+    public boolean isAdult() {
+        return AGE_ADULT.equals(getAge());
+    }
+
+    public boolean isChild() {
+        return AGE_CHILD.equals(getAge());
+    }
+
+    // Aging methods
+    public int getAgingTimer() {
+        return this.entityData.get(AGING_TIMER);
+    }
+
+    public void setAgingTimer(int timer) {
+        this.entityData.set(AGING_TIMER, timer);
+    }
+
+    /**
+     * Ages the child to an adult, preserving all data except model/textures
+     */
+    public void ageToAdult() {
+        if (!isChild()) return;
+
+        // Change age to adult
+        setAge(AGE_ADULT);
+
+        // Reset aging timer
+        setAgingTimer(0);
+
+        // Re-register goals to include adult-only goals
+        this.goalSelector.removeAllGoals(goal -> true);
+        this.targetSelector.removeAllGoals(goal -> true);
+        this.registerGoals();
+
+        // Note: Names, memories, inventory, gender, and all other data are preserved automatically
+        // Only the model and textures will change through the renderer/model system
+    }
 
     // Player interaction methods
     public void setInteractingPlayer(Player player) {
@@ -183,32 +261,45 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
 
-        // Combat goals - guards get priority for their combat goal
-        this.goalSelector.addGoal(1, new GuardCombatGoal(this)); // Guard combat has highest priority
-        this.goalSelector.addGoal(2, new PeasantDefenseGoal(this)); // Regular defense moved down to priority 2
+        // Combat goals - only for adults
+        if (isAdult()) {
+            this.goalSelector.addGoal(1, new GuardCombatGoal(this)); // Guard combat has highest priority
+            this.goalSelector.addGoal(2, new PeasantDefenseGoal(this)); // Regular defense moved down to priority 2
+        }
 
         this.doorGoal = new OpenAndCloseDoorGoal(this);
         this.goalSelector.addGoal(3, doorGoal); // Adjusted priority
-        this.goalSelector.addGoal(3, new BarrelDropOffGoal(this));
+
+        // Barrel drop off goal - only for adults
+        if (isAdult()) {
+            this.goalSelector.addGoal(3, new BarrelDropOffGoal(this));
+        }
+
         this.goalSelector.addGoal(4, new FindBedGoal(this));
         this.goalSelector.addGoal(5, new SleepGoal(this)); // Adjusted priority
         this.goalSelector.addGoal(7, new CollectFoodGoal(this));
-        this.goalSelector.addGoal(8, new ReturnToJobBlockGoal(this));
-        this.goalSelector.addGoal(9, new FindJobGoal(this));
-        this.goalSelector.addGoal(10, new FarmingGoal(this));
 
-        this.grocerCollectionGoal = new GrocerCollectionGoal(this);
-        this.goalSelector.addGoal(10, grocerCollectionGoal);
+        // Job-related goals - only for adults
+        if (isAdult()) {
+            this.goalSelector.addGoal(8, new ReturnToJobBlockGoal(this));
+            this.goalSelector.addGoal(9, new FindJobGoal(this));
+            this.goalSelector.addGoal(10, new FarmingGoal(this));
 
-        // Add guard patrol goal
-        this.goalSelector.addGoal(11, new GuardPatrolGoal(this)); // Guard patrol goal
+            this.grocerCollectionGoal = new GrocerCollectionGoal(this);
+            this.goalSelector.addGoal(10, grocerCollectionGoal);
+
+            // Add guard patrol goal
+            this.goalSelector.addGoal(11, new GuardPatrolGoal(this)); // Guard patrol goal
+        }
 
         this.goalSelector.addGoal(12, new RestrictedWanderGoal(this, 0.6D)); // Adjusted priority
         this.goalSelector.addGoal(13, new LookAtPlayerGoal(this, Player.class, 8.0F)); // Adjusted priority
         this.goalSelector.addGoal(14, new RandomLookAroundGoal(this)); // Adjusted priority
 
-        // Target selection goals
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+        // Target selection goals - only for adults
+        if (isAdult()) {
+            this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+        }
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -221,6 +312,11 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
 
     @Override
     public boolean canAttack(LivingEntity target) {
+        // Children cannot attack anyone
+        if (isChild()) {
+            return false;
+        }
+
         // Guards can attack monsters freely
         if (getJobType().equals(JobSystem.JOB_GUARD) && target instanceof net.minecraft.world.entity.monster.Monster) {
             return true;
@@ -246,6 +342,9 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         builder.define(LAST_DAY_TRACKED, -1L);
         builder.define(IS_INTERACTING, false);
         builder.define(IS_ATTACKING, false);
+        builder.define(GENDER, GENDER_MALE); // Default to male
+        builder.define(AGE, AGE_ADULT); // Default to adult
+        builder.define(AGING_TIMER, 0); // Default aging timer
     }
 
     @Override
@@ -254,6 +353,9 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         compound.putLong("LastDayTracked", lastDayTracked);
         compound.putInt("InteractAnimationTimer", interactAnimationTimer);
         compound.putBoolean("IsAttacking", this.isAttacking());
+        compound.putString("Gender", this.getGender());
+        compound.putString("Age", this.getAge());
+        compound.putInt("AgingTimer", this.getAgingTimer());
 
         // Save all systems data (excluding equipment - handled by native system)
         sleepSystem.saveData(compound);
@@ -293,6 +395,21 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         // Load attack state
         if (compound.contains("IsAttacking")) {
             this.setIsAttacking(compound.getBoolean("IsAttacking"));
+        }
+
+        // Load gender
+        if (compound.contains("Gender")) {
+            this.setGender(compound.getString("Gender"));
+        }
+
+        // Load age
+        if (compound.contains("Age")) {
+            this.setAge(compound.getString("Age"));
+        }
+
+        // Load aging timer
+        if (compound.contains("AgingTimer")) {
+            this.setAgingTimer(compound.getInt("AgingTimer"));
         }
 
         // Load all systems data (excluding equipment - handled by native system)
@@ -365,6 +482,18 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
         grocerSystem.tick();
         teleportSystem.tick();
         guardSystem.tick(); // Update guard system
+
+        // Handle aging for children
+        if (!this.level().isClientSide && isChild()) {
+            int currentTimer = getAgingTimer();
+            currentTimer++;
+            setAgingTimer(currentTimer);
+
+            // Check if child should age to adult
+            if (currentTimer >= getAgingTarget()) {
+                ageToAdult();
+            }
+        }
     }
 
     private void checkForNewDay() {
@@ -527,6 +656,26 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
             ServerLevelAccessor p_35439_, DifficultyInstance p_35440_, EntitySpawnReason p_363222_, @Nullable SpawnGroupData p_35442_
     ) {
         if (!this.level().isClientSide) {
+            // Randomly assign gender (50/50 split)
+            String gender = p_35439_.getRandom().nextBoolean() ? GENDER_FEMALE : GENDER_MALE;
+            this.setGender(gender);
+
+            // Randomly assign age (80% adult, 20% child)
+            String age = p_35439_.getRandom().nextFloat() < 0.8f ? AGE_ADULT : AGE_CHILD;
+            this.setAge(age);
+
+            // Set aging timer for children (randomized around average)
+            if (age.equals(AGE_CHILD)) {
+                int agingTime = AVERAGE_AGING_TICKS +
+                        (p_35439_.getRandom().nextInt(AGING_VARIANCE * 2) - AGING_VARIANCE);
+                // Store the target aging time (we'll count up to this)
+                this.setAgingTimer(0); // Start at 0, will count up
+                // Store the target in NBT for persistence
+                this.getPersistentData().putInt("AgingTarget", agingTime);
+            } else {
+                this.setAgingTimer(0);
+            }
+
             nameSystem.generateRandomName(p_35439_.getRandom());
             // Initialize day tracking
             lastDayTracked = this.level().getDayTime() / 24000;
@@ -555,9 +704,29 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
     public boolean needsFoodCollection() { return hungerSystem.needsFoodCollection(); }
     public void setNeedsFoodCollection(boolean needs) { hungerSystem.setNeedsFoodCollection(needs); }
 
-    public String getJobType() { return jobSystem.getJobType(); }
-    public void setJobType(String jobType) { jobSystem.setJobType(jobType); }
-    public boolean hasJob() { return jobSystem.hasJob(); }
+    public String getJobType() {
+        // Children cannot have jobs
+        if (isChild()) {
+            return JobSystem.JOB_NONE;
+        }
+        return jobSystem.getJobType();
+    }
+
+    public void setJobType(String jobType) {
+        // Children cannot have jobs
+        if (isChild()) {
+            return;
+        }
+        jobSystem.setJobType(jobType);
+    }
+
+    public boolean hasJob() {
+        // Children cannot have jobs
+        if (isChild()) {
+            return false;
+        }
+        return jobSystem.hasJob();
+    }
     public BlockPos getJobBlockPos() { return jobSystem.getJobBlockPos(); }
     public void setJobBlockPos(BlockPos pos) { jobSystem.setJobBlockPos(pos); }
 
@@ -600,8 +769,29 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
     // Sleep delegates
     @Override
     public void startSleeping(BlockPos pos) {
-        super.startSleeping(pos);
-        sleepSystem.startSleeping(pos);
+        // For guards, bypass vanilla time restrictions during their designated sleep time
+        if (getJobType().equals(JobSystem.JOB_GUARD) && guardSystem.shouldSleep()) {
+            // Manually set sleeping state without calling super (which has time restrictions)
+            this.setSleepingPos(pos);
+            this.setPos(pos.getX() + 0.5, pos.getY() + 0.0625, pos.getZ() + 0.5);
+            this.setDeltaMovement(Vec3.ZERO);
+            this.hasImpulse = true;
+
+            // Set our custom sleep system state
+            sleepSystem.setSleeping(true);
+            sleepSystem.setBedPos(pos);
+
+            // Establish home bed if this is their first sleep
+            homeSystem.establishHomeBed(pos);
+
+            // Stop eating and navigation
+            hungerSystem.stopEating();
+            this.getNavigation().stop();
+        } else {
+            // For regular NPCs, use vanilla behavior (which includes time restrictions)
+            super.startSleeping(pos);
+            sleepSystem.startSleeping(pos);
+        }
     }
 
     @Override
@@ -626,6 +816,16 @@ public class Northern_Peasant_Entity extends PathfinderMob implements GeoEntity,
     public EntityDataAccessor<String> getJobTypeAccessor() { return JOB_TYPE; }
     public EntityDataAccessor<Optional<BlockPos>> getJobBlockPosAccessor() { return JOB_BLOCK_POS; }
     public EntityDataAccessor<Long> getLastDayTrackedAccessor() { return LAST_DAY_TRACKED; }
+    public EntityDataAccessor<String> getGenderAccessor() { return GENDER; }
+    public EntityDataAccessor<String> getAgeAccessor() { return AGE; }
+    public EntityDataAccessor<Integer> getAgingTimerAccessor() { return AGING_TIMER; }
+
+    /**
+     * Gets the aging target for this child (stored in persistent data)
+     */
+    private int getAgingTarget() {
+        return this.getPersistentData().getInt("AgingTarget");
+    }
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {

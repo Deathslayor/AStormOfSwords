@@ -1,12 +1,12 @@
 package net.darkflameproduction.agotmod.entity.custom.npc.system;
 
+import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.state.BlockState;
-import net.darkflameproduction.agotmod.entity.custom.npc.Northern_Peasant_Entity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +14,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class JobSystem {
-    private final Northern_Peasant_Entity peasant;
+    private final Peasant_Entity peasant;
 
     // Job types
     public static final String JOB_GROCER = "grocer";
@@ -49,7 +49,7 @@ public class JobSystem {
     // Job warning broadcast timer
     private int warningBroadcastTimer = 0;
 
-    public JobSystem(Northern_Peasant_Entity peasant) {
+    public JobSystem(Peasant_Entity peasant) {
         this.peasant = peasant;
     }
 
