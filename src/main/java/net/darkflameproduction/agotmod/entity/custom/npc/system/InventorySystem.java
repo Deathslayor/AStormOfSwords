@@ -487,7 +487,7 @@ public class InventorySystem {
                         playerInventory,
                         peasant
                 ),
-                Component.translatable("entity.agotmod.northern_peasant.inventory", peasant.getDisplayName())
+                Component.translatable("entity.agotmod.peasant.inventory", peasant.getDisplayName())
         ), buf -> buf.writeInt(peasant.getId()));
     }
 

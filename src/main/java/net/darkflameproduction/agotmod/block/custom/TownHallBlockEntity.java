@@ -3,21 +3,30 @@ package net.darkflameproduction.agotmod.block.custom;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.darkflameproduction.agotmod.entity.ModBlockEntities;
+import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
+import net.darkflameproduction.agotmod.entity.ModEntities;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.SimpleBedWarningSystem;
 
-import java.util.Set;
+import java.util.*;
 
 public class TownHallBlockEntity extends BlockEntity {
 
     private static final int SCAN_TIME = 10000; // Time of day to perform scan
+    private static final int CHILD_SPAWN_TIME = 18000; // Time of day to spawn children (midnight)
     private static final int SCAN_HEIGHT = 64; // Vertical radius (up and down)
     private static final int REGISTER_INTERVAL = 100; // Ticks between registration updates (5 seconds)
     private static final int CITIZEN_CHECK_INTERVAL = 200; // Check for citizens every 10 seconds
+    private static final double CHILD_SPAWN_CHANCE = 0.05; // 5% chance per unclaimed bed
+    private static final double FAMILY_NAME_CHANCE = 0.8; // 80% chance to inherit family name
 
     // Dynamic radius constants
     private static final int BASE_RADIUS = 16; // Starting radius
@@ -31,9 +40,13 @@ public class TownHallBlockEntity extends BlockEntity {
     private int citizenCount = 0;
     private String townName = "Unnamed Town"; // Default town name
     private long lastScanDay = -1;
+    private long lastChildSpawnDay = -1; // Track last day children were spawned
     private boolean hasScannedToday = false;
     private int ticksSinceLastRegister = 0;
     private int ticksSinceLastCitizenCheck = 0;
+
+    // Cache for citizen last names (refreshed during citizen checks)
+    private List<String> citizenLastNames = new ArrayList<>();
 
     public TownHallBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.TOWN_HALL.get(), pos, blockState);
@@ -41,22 +54,15 @@ public class TownHallBlockEntity extends BlockEntity {
 
     /**
      * Calculates the current scan radius based on citizen count
-     * Tier 1 (0-10 citizens): base + (citizens * 5)
-     * Tier 2 (11-20 citizens): base + (10 * 5) + ((citizens - 10) * 1)
-     * Tier 3 (21+ citizens): base + (10 * 5) + (10 * 1) + ((citizens - 20) / 5)
-     * @return the radius in blocks
      */
     public int getCurrentScanRadius() {
         if (citizenCount <= FIRST_TIER_CITIZENS) {
-            // First 10 citizens: base + (citizens * 5)
             return BASE_RADIUS + (citizenCount * FIRST_TIER_EXPANSION);
         } else if (citizenCount <= SECOND_TIER_CITIZENS) {
-            // Citizens 11-20: base + (10 * 5) + ((citizens - 10) * 1)
             int firstTierBonus = FIRST_TIER_CITIZENS * FIRST_TIER_EXPANSION;
             int secondTierBonus = (citizenCount - FIRST_TIER_CITIZENS) * SECOND_TIER_EXPANSION;
             return BASE_RADIUS + firstTierBonus + secondTierBonus;
         } else {
-            // Citizens 21+: base + (10 * 5) + (10 * 1) + ((citizens - 20) / 5)
             int firstTierBonus = FIRST_TIER_CITIZENS * FIRST_TIER_EXPANSION; // 10 * 5 = 50
             int secondTierBonus = (SECOND_TIER_CITIZENS - FIRST_TIER_CITIZENS) * SECOND_TIER_EXPANSION; // 10 * 1 = 10
             int thirdTierBonus = (citizenCount - SECOND_TIER_CITIZENS) / THIRD_TIER_EXPANSION; // Every 5 citizens = 1 block
@@ -66,7 +72,6 @@ public class TownHallBlockEntity extends BlockEntity {
 
     /**
      * Gets the current scan height (unchanged)
-     * @return the scan height in blocks
      */
     public int getCurrentScanHeight() {
         return SCAN_HEIGHT;
@@ -85,6 +90,13 @@ public class TownHallBlockEntity extends BlockEntity {
             blockEntity.performBedScan(level);
             blockEntity.lastScanDay = currentDay;
             blockEntity.hasScannedToday = true;
+            blockEntity.setChanged();
+        }
+
+        // Check if it's time to spawn children (midnight) and we haven't spawned today
+        if (currentTime >= CHILD_SPAWN_TIME && blockEntity.lastChildSpawnDay != currentDay) {
+            blockEntity.attemptChildSpawning((ServerLevel) level);
+            blockEntity.lastChildSpawnDay = currentDay;
             blockEntity.setChanged();
         }
 
@@ -108,87 +120,223 @@ public class TownHallBlockEntity extends BlockEntity {
         }
     }
 
-    private void updateCitizenRegistry(Level level) {
-        // Store the current radius at the start of the scan to keep it stable
-        int scanRadius = getCurrentScanRadius();
-        int newCitizenCount = 0;
+    /**
+     * Attempts to spawn children on unclaimed beds at midnight
+     */
+    private void attemptChildSpawning(ServerLevel level) {
+        if (citizenCount == 0) return; // No point spawning if no existing citizens
 
+        // Get all beds in town and claimed beds
+        List<BlockPos> allBeds = getAllBedsInTown(level);
+        Set<BlockPos> claimedBeds = SimpleBedWarningSystem.getHomeBedClaimsInRadius(
+                this.getBlockPos(), getCurrentScanRadius(), null);
 
-
-        // Get all home bed claims within our current scan radius
-        Set<BlockPos> homeBedClaims = SimpleBedWarningSystem.getHomeBedClaimsInRadius(
-                this.getBlockPos(), scanRadius, null); // null excludeUUID to get all claims
-
-
-        // Count beds that are actually within our scan area using the stable radius
-        for (BlockPos claimedBedPos : homeBedClaims) {
-
-            if (isWithinStableScanArea(claimedBedPos, scanRadius)) {
-                newCitizenCount++;
-            } else {
+        // Find unclaimed beds
+        List<BlockPos> unclaimedBeds = new ArrayList<>();
+        for (BlockPos bedPos : allBeds) {
+            if (!claimedBeds.contains(bedPos)) {
+                unclaimedBeds.add(bedPos);
             }
         }
 
+        if (unclaimedBeds.isEmpty()) return;
+
+        // For each unclaimed bed, roll for child spawning
+        RandomSource random = level.getRandom();
+        for (BlockPos bedPos : unclaimedBeds) {
+            if (random.nextDouble() < CHILD_SPAWN_CHANCE) {
+                spawnChildAtBed(level, bedPos, random);
+            }
+        }
+    }
+
+    /**
+     * Gets all bed positions within the town
+     */
+    private List<BlockPos> getAllBedsInTown(Level level) {
+        List<BlockPos> beds = new ArrayList<>();
+        int currentRadius = getCurrentScanRadius();
+        int currentHeight = getCurrentScanHeight();
+
+        BlockPos centerPos = this.getBlockPos();
+        int minX = centerPos.getX() - currentRadius;
+        int maxX = centerPos.getX() + currentRadius;
+        int minY = centerPos.getY() - currentHeight;
+        int maxY = centerPos.getY() + currentHeight;
+        int minZ = centerPos.getZ() - currentRadius;
+        int maxZ = centerPos.getZ() + currentRadius;
+
+        // Ensure Y bounds are within world limits
+        minY = Math.max(minY, level.dimensionType().minY());
+        maxY = Math.min(maxY, level.dimensionType().minY() + level.dimensionType().height() - 1);
+
+        // Scan for bed heads
+        for (int x = minX; x <= maxX; x++) {
+            for (int y = minY; y <= maxY; y++) {
+                for (int z = minZ; z <= maxZ; z++) {
+                    BlockPos scanPos = new BlockPos(x, y, z);
+
+                    if (level.isLoaded(scanPos)) {
+                        BlockState blockState = level.getBlockState(scanPos);
+
+                        if (blockState.getBlock() instanceof BedBlock) {
+                            if (blockState.getValue(BedBlock.PART) == net.minecraft.world.level.block.state.properties.BedPart.HEAD) {
+                                beds.add(scanPos);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return beds;
+    }
+
+    /**
+     * Spawns a child NPC at the specified bed
+     */
+    private void spawnChildAtBed(ServerLevel level, BlockPos bedPos, RandomSource random) {
+        // Create the child peasant
+        Peasant_Entity child = ModEntities.PEASANT_ENTITY.get().create(level, EntitySpawnReason.SPAWNER);
+        if (child == null) return;
+
+        // Set position at the bed
+        child.setPos(bedPos.getX() + 0.5, bedPos.getY() + 1.0, bedPos.getZ() + 0.5);
+
+        // Set as child
+        child.setAge(Peasant_Entity.AGE_CHILD);
+
+        // Random gender
+        String gender = random.nextBoolean() ? Peasant_Entity.GENDER_MALE : Peasant_Entity.GENDER_FEMALE;
+        child.setGender(gender);
+
+        // Set aging timer for child
+        int agingTime = 240000 + (random.nextInt(96000) - 48000); // Average ± variance
+        child.setAgingTimer(0);
+        child.getPersistentData().putInt("AgingTarget", agingTime);
+
+        // Generate name with potential family connection
+        generateChildName(child, random);
+
+        // Set the bed as their home and register it with the warning system
+        child.getHomeSystem().establishHomeBed(bedPos);
+
+        // Register the bed claim with the warning system (including the child's name)
+        String childName = child.hasCustomName() ? child.getCustomName().getString() : "Unnamed Child";
+        SimpleBedWarningSystem.broadcastHomeBedClaim(child.getUUID(), bedPos, childName, level);
+
+        // Finalize spawn
+        level.addFreshEntity(child);
+    }
+
+    /**
+     * Generates a name for the child, with 80% chance of using existing family name
+     */
+    private void generateChildName(Peasant_Entity child, RandomSource random) {
+        // Get fresh list of citizen names from the bed warning system
+        Map<UUID, String> citizenNamesMap = SimpleBedWarningSystem.getCitizenNamesInRadius(
+                this.getBlockPos(), getCurrentScanRadius());
+
+        // Extract last names from the citizen names
+        List<String> availableLastNames = new ArrayList<>();
+        for (String fullName : citizenNamesMap.values()) {
+            if (fullName != null && !fullName.isEmpty() && !fullName.equals("Unknown")) {
+                String lastName = extractLastName(fullName);
+                if (!lastName.isEmpty() && !lastName.equals("Snow")) {
+                    availableLastNames.add(lastName);
+                }
+            }
+        }
+
+        // First generate a random name using the NameSystem to get a proper first name
+        child.getNameSystem().generateRandomName(random);
+        String originalName = child.getDisplayName().getString();
+        String firstName = extractFirstName(originalName);
+
+        String lastName;
+
+        // 80% chance to use existing family name, 20% chance for new name
+        if (!availableLastNames.isEmpty() && random.nextDouble() < FAMILY_NAME_CHANCE) {
+            lastName = availableLastNames.get(random.nextInt(availableLastNames.size()));
+        } else {
+            // Use the last name from the generated name
+            lastName = extractLastName(originalName);
+        }
+
+        // Combine the NameSystem-generated first name with the chosen last name
+        String fullName = firstName + " " + lastName;
+
+        child.setCustomName(Component.literal(fullName));
+        child.setCustomNameVisible(false);
+    }
+
+    /**
+     * Extracts first name from full name string
+     */
+    private String extractFirstName(String fullName) {
+        if (fullName == null || fullName.isEmpty()) return "Jon";
+
+        String[] parts = fullName.split(" ");
+        return parts[0]; // First part is always the first name
+    }
+
+    /**
+     * Extracts last name from full name string
+     */
+    private String extractLastName(String fullName) {
+        if (fullName == null || fullName.isEmpty()) return "Snow";
+
+        String[] parts = fullName.split(" ");
+        if (parts.length > 1) {
+            return parts[parts.length - 1];
+        }
+        return "Snow";
+    }
+
+    /**
+     * Updated citizen registry using the enhanced SimpleBedWarningSystem
+     */
+    private void updateCitizenRegistry(Level level) {
+        int scanRadius = getCurrentScanRadius();
+
+        // Get claimed beds and citizen names efficiently
+        Set<BlockPos> homeBedClaims = SimpleBedWarningSystem.getHomeBedClaimsInRadius(
+                this.getBlockPos(), scanRadius, null);
+
+        // Get all citizen names from the warning system for caching
+        Map<UUID, String> citizenNamesMap = SimpleBedWarningSystem.getCitizenNamesInRadius(
+                this.getBlockPos(), scanRadius);
+
+        // Extract and cache last names for display purposes
+        citizenLastNames.clear();
+        for (String fullName : citizenNamesMap.values()) {
+            if (fullName != null && !fullName.isEmpty() && !fullName.equals("Unknown")) {
+                String lastName = extractLastName(fullName);
+                if (!lastName.isEmpty() && !lastName.equals("Snow")) {
+                    citizenLastNames.add(lastName);
+                }
+            }
+        }
+
+        // Count citizens within our stable scan area
+        int newCitizenCount = 0;
+        for (BlockPos claimedBedPos : homeBedClaims) {
+            if (isWithinStableScanArea(claimedBedPos, scanRadius)) {
+                newCitizenCount++;
+            }
+        }
 
         // Only update if the count actually changed
         if (newCitizenCount != citizenCount) {
-            int oldCount = citizenCount;
-            int oldRadius = getCurrentScanRadius();
-
-            // Update citizen count
             citizenCount = newCitizenCount;
-
-            int newRadius = getCurrentScanRadius();
-
-
             sendDataToClients(level);
             setChanged();
         }
     }
 
     /**
-     * Helper method to check if a bed is within a specific radius (used during scanning)
-     */
-    private boolean isWithinMaxScanArea(BlockPos bedPos, int maxRadius) {
-        BlockPos townHallPos = this.getBlockPos();
-        int currentHeight = getCurrentScanHeight();
-
-        int dx = Math.abs(bedPos.getX() - townHallPos.getX());
-        int dy = Math.abs(bedPos.getY() - townHallPos.getY());
-        int dz = Math.abs(bedPos.getZ() - townHallPos.getZ());
-
-        return dx <= maxRadius && dy <= currentHeight && dz <= maxRadius;
-    }
-
-    /**
      * Helper method to check if a bed is within a specific radius
      */
-    private boolean isWithinSpecificScanArea(BlockPos bedPos, int specificRadius) {
-        BlockPos townHallPos = this.getBlockPos();
-        int currentHeight = getCurrentScanHeight();
-
-        int dx = Math.abs(bedPos.getX() - townHallPos.getX());
-        int dy = Math.abs(bedPos.getY() - townHallPos.getY());
-        int dz = Math.abs(bedPos.getZ() - townHallPos.getZ());
-
-        return dx <= specificRadius && dy <= currentHeight && dz <= specificRadius;
-    }
-
-    /**
-     * Calculate radius for a given citizen count (separate from current state)
-     */
-    private int calculateRadiusForCitizenCount(int citizens) {
-        if (citizens <= FIRST_TIER_CITIZENS) {
-            // First 10 citizens: base + (citizens * 5)
-            return BASE_RADIUS + (citizens * FIRST_TIER_EXPANSION);
-        } else {
-            // After first 10: base + (10 * 5) + ((citizens - 10) * 1)
-            int firstTierBonus = FIRST_TIER_CITIZENS * FIRST_TIER_EXPANSION;
-            int secondTierBonus = (citizens - FIRST_TIER_CITIZENS) * SECOND_TIER_EXPANSION;
-            return BASE_RADIUS + firstTierBonus + secondTierBonus;
-        }
-    }
-
     private boolean isWithinStableScanArea(BlockPos bedPos, int stableRadius) {
         BlockPos townHallPos = this.getBlockPos();
         int currentHeight = getCurrentScanHeight();
@@ -216,7 +364,6 @@ public class TownHallBlockEntity extends BlockEntity {
         // Ensure Y bounds are within world limits
         minY = Math.max(minY, level.dimensionType().minY());
         maxY = Math.min(maxY, level.dimensionType().minY() + level.dimensionType().height() - 1);
-
 
         // Scan the area for beds - only count HEAD blocks to avoid double counting
         for (int x = minX; x <= maxX; x++) {
@@ -354,9 +501,18 @@ public class TownHallBlockEntity extends BlockEntity {
         tag.putInt("CitizenCount", citizenCount);
         tag.putString("TownName", townName);
         tag.putLong("LastScanDay", lastScanDay);
+        tag.putLong("LastChildSpawnDay", lastChildSpawnDay); // Save child spawn day
         tag.putBoolean("HasScannedToday", hasScannedToday);
         tag.putInt("TicksSinceLastRegister", ticksSinceLastRegister);
         tag.putInt("TicksSinceLastCitizenCheck", ticksSinceLastCitizenCheck);
+
+        // Save citizen last names
+        if (!citizenLastNames.isEmpty()) {
+            tag.putInt("CitizenLastNamesCount", citizenLastNames.size());
+            for (int i = 0; i < citizenLastNames.size(); i++) {
+                tag.putString("CitizenLastName_" + i, citizenLastNames.get(i));
+            }
+        }
     }
 
     @Override
@@ -366,11 +522,24 @@ public class TownHallBlockEntity extends BlockEntity {
         citizenCount = tag.getInt("CitizenCount");
         townName = tag.getString("TownName");
         if (townName.isEmpty()) {
-            townName = "Unnamed Town"; // Fallback for old saves
+            townName = "Unnamed Town";
         }
         lastScanDay = tag.getLong("LastScanDay");
+        lastChildSpawnDay = tag.getLong("LastChildSpawnDay"); // Load child spawn day
         hasScannedToday = tag.getBoolean("HasScannedToday");
         ticksSinceLastRegister = tag.getInt("TicksSinceLastRegister");
         ticksSinceLastCitizenCheck = tag.getInt("TicksSinceLastCitizenCheck");
+
+        // Load citizen last names
+        citizenLastNames.clear();
+        if (tag.contains("CitizenLastNamesCount")) {
+            int count = tag.getInt("CitizenLastNamesCount");
+            for (int i = 0; i < count; i++) {
+                String lastName = tag.getString("CitizenLastName_" + i);
+                if (!lastName.isEmpty()) {
+                    citizenLastNames.add(lastName);
+                }
+            }
+        }
     }
 }

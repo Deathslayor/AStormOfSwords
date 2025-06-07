@@ -94,19 +94,19 @@ public class Peasant_Renderer extends GeoEntityRenderer<Peasant_Entity> {
     private static final int CHILD_MALE_EYES_VARIANTS = 1; // eyes_child1.png
     private static final int CHILD_MALE_LEGS_VARIANTS = 1; // legs_child1.png
     private static final int CHILD_MALE_SHIRT_VARIANTS = 1; // shirt_child1.png
-    private static final int CHILD_MALE_HAIR_VARIANTS = 24; // hair_child1.png through hair_child24.png
-    private static final int CHILD_MALE_BOOTS_VARIANTS = 2; // boots_child1.png, boots_child2.png
-    private static final int CHILD_MALE_TUNIC_VARIANTS = 4; // tunic_child1.png through tunic_child4.png
-    private static final int CHILD_MALE_HOOD_VARIANTS = 3; // hood_child1.png through hood_child3.png
+    private static final int CHILD_MALE_HAIR_VARIANTS = 1; // hair_child1.png through hair_child24.png
+    private static final int CHILD_MALE_BOOTS_VARIANTS = 1; // boots_child1.png, boots_child2.png
+    private static final int CHILD_MALE_TUNIC_VARIANTS = 1; // tunic_child1.png through tunic_child4.png
+    private static final int CHILD_MALE_HOOD_VARIANTS = 1; // hood_child1.png through hood_child3.png
 
     private static final int CHILD_FEMALE_BODY_VARIANTS = 1; // body_woman_child1.png through body_woman_child6.png
     private static final int CHILD_FEMALE_EYES_VARIANTS = 1; // eyes_woman_child1.png
     private static final int CHILD_FEMALE_LEGS_VARIANTS = 1; // legs_woman_child1.png
     private static final int CHILD_FEMALE_SHIRT_VARIANTS = 1; // shirt_woman_child1.png
-    private static final int CHILD_FEMALE_HAIR_VARIANTS = 24; // hair_woman_child1.png through hair_woman_child24.png
-    private static final int CHILD_FEMALE_BOOTS_VARIANTS = 2; // boots_woman_child1.png, boots_woman_child2.png
-    private static final int CHILD_FEMALE_TUNIC_VARIANTS = 4; // tunic_woman_child1.png through tunic_woman_child4.png
-    private static final int CHILD_FEMALE_HOOD_VARIANTS = 3; // hood_woman_child1.png through hood_woman_child3.png
+    private static final int CHILD_FEMALE_HAIR_VARIANTS = 1; // hair_woman_child1.png through hair_woman_child24.png
+    private static final int CHILD_FEMALE_BOOTS_VARIANTS = 1; // boots_woman_child1.png, boots_woman_child2.png
+    private static final int CHILD_FEMALE_TUNIC_VARIANTS = 1; // tunic_woman_child1.png through tunic_woman_child4.png
+    private static final int CHILD_FEMALE_HOOD_VARIANTS = 1; // hood_woman_child1.png through hood_woman_child3.png
 
     // Male texture arrays
     private static final ResourceLocation[] BODY_TEXTURES = new ResourceLocation[BODY_VARIANTS];

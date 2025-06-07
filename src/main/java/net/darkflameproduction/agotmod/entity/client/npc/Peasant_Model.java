@@ -34,15 +34,12 @@ public class Peasant_Model extends GeoModel<Peasant_Entity> {
         // Return appropriate model based on age and gender
         if (animatable.isChild()) {
             selectedModel = CHILD_MODEL;
-            System.out.println("DEBUG - Using CHILD_MODEL: " + selectedModel.toString());
         } else {
             // Adults use gender-specific models
             if (animatable.isFemale()) {
                 selectedModel = FEMALE_ADULT_MODEL;
-                System.out.println("DEBUG - Using FEMALE_ADULT_MODEL: " + selectedModel.toString());
             } else {
                 selectedModel = MALE_ADULT_MODEL;
-                System.out.println("DEBUG - Using MALE_ADULT_MODEL: " + selectedModel.toString());
             }
         }
 
@@ -77,10 +74,8 @@ public class Peasant_Model extends GeoModel<Peasant_Entity> {
     public ResourceLocation getAnimationResource(Peasant_Entity animatable) {
         // Use different animations based on age
         if (animatable.isChild()) {
-            System.out.println("DEBUG - Using CHILD_ANIMATIONS");
             return CHILD_ANIMATIONS;
         } else {
-            System.out.println("DEBUG - Using ADULT_ANIMATIONS");
             return ADULT_ANIMATIONS;
         }
     }
