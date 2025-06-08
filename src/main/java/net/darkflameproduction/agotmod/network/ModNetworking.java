@@ -84,5 +84,84 @@ public class ModNetworking {
                 UpdateTownNamePacket.STREAM_CODEC,
                 ServerPacketHandler::handleUpdateTownName
         );
+
+        // Register the save house name packet (client -> server)
+        registrar.playToServer(
+                SaveHouseNamePacket.TYPE,
+                SaveHouseNamePacket.STREAM_CODEC,
+                SaveHouseNamePacket::handle
+        );
+
+        // Register request house name packet (client -> server)
+        registrar.playToServer(
+                RequestHouseNamePacket.TYPE,
+                RequestHouseNamePacket.STREAM_CODEC,
+                RequestHouseNamePacket::handle
+        );
+
+// Register sync house name packet (server -> client)
+        registrar.playToClient(
+                SyncHouseNamePacket.TYPE,
+                SyncHouseNamePacket.STREAM_CODEC,
+                (packet, context) -> {
+                    context.enqueueWork(() -> {
+                        ClientPacketHandler.handleSyncHouseName(packet, context);
+                    });
+                }
+        );
+
+        // Register claim town hall packet (client -> server)
+        registrar.playToServer(
+                ClaimTownHallPacket.TYPE,
+                ClaimTownHallPacket.STREAM_CODEC,
+                ServerPacketHandler::handleClaimTownHall
+        );
+
+        // Add to ModNetworking register method:
+
+// Register request owned towns packet (client -> server)
+        registrar.playToServer(
+                RequestOwnedTownsPacket.TYPE,
+                RequestOwnedTownsPacket.STREAM_CODEC,
+                ServerPacketHandler::handleRequestOwnedTowns
+        );
+
+// Register sync owned towns packet (server -> client)
+        registrar.playToClient(
+                SyncOwnedTownsPacket.TYPE,
+                SyncOwnedTownsPacket.STREAM_CODEC,
+                (packet, context) -> {
+                    context.enqueueWork(() -> {
+                        ClientPacketHandler.handleSyncOwnedTowns(packet, context);
+                    });
+                }
+        );
+
+        registrar.playToServer(
+                CheckHouseNamePacket.TYPE,
+                CheckHouseNamePacket.STREAM_CODEC,
+                ServerPacketHandler::handleCheckHouseName
+        );
+
+// Register house name validation packet (server -> client)
+        registrar.playToClient(
+                HouseNameValidationPacket.TYPE,
+                HouseNameValidationPacket.STREAM_CODEC,
+                (packet, context) -> {
+                    context.enqueueWork(() -> {
+                        ClientPacketHandler.handleHouseNameValidation(packet, context);
+                    });
+                }
+        );
+
+
+
+
+
+
+
+
     }
+
+
 }

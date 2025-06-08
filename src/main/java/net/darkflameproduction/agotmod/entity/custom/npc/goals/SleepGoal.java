@@ -29,9 +29,9 @@ public class SleepGoal extends Goal {
             return false;
         }
 
-        // For guards: sleep takes priority over food collection during sleep time
-        // For regular NPCs: don't sleep if they need food
-        if (needsFood && !isGuard) {
+        // FIXED: More lenient food check - allow sleeping even if hungry during sleep time
+        // Only prevent sleep if actively eating
+        if (needsFood && peasant.getHungerSystem().isEating()) {
             return false;
         }
 
@@ -48,9 +48,13 @@ public class SleepGoal extends Goal {
                     peasant.setBedPos(homeBed);
                 }
 
-                // Only start sleeping if we're close enough to the bed
-                double distanceToBed = peasant.distanceToSqr(homeBed.getX(), homeBed.getY(), homeBed.getZ());
-                return distanceToBed <= 4.0D; // Must be within 2 blocks
+                // FIXED: More lenient distance check and measure to bed center
+                double distanceToBed = peasant.distanceToSqr(
+                        homeBed.getX() + 0.5,
+                        homeBed.getY() + 0.5,
+                        homeBed.getZ() + 0.5
+                );
+                return distanceToBed <= 9.0D; // Within 3 blocks (was 2 blocks)
             }
         }
 
@@ -58,8 +62,14 @@ public class SleepGoal extends Goal {
         if (peasant.getBedPos() != null &&
                 !peasant.getSleepSystem().isBedOccupied(peasant.level(), peasant.getBedPos())) {
 
-            double distanceToBed = peasant.distanceToSqr(peasant.getBedPos().getX(), peasant.getBedPos().getY(), peasant.getBedPos().getZ());
-            return distanceToBed <= 4.0D; // Must be within 2 blocks
+            // FIXED: More lenient distance check and measure to bed center
+            BlockPos bedPos = peasant.getBedPos();
+            double distanceToBed = peasant.distanceToSqr(
+                    bedPos.getX() + 0.5,
+                    bedPos.getY() + 0.5,
+                    bedPos.getZ() + 0.5
+            );
+            return distanceToBed <= 9.0D; // Within 3 blocks (was 2 blocks)
         }
 
         // No valid bed found or not close enough
@@ -76,8 +86,7 @@ public class SleepGoal extends Goal {
             return false;
         }
 
-        // For guards: continue sleeping even if they need food - sleep is priority during sleep time
-        // For regular NPCs: stop sleeping if they need food and are actively eating
+        // FIXED: Only stop sleeping for non-guards if they're actively eating, not just hungry
         if (!isGuard && peasant.getHungerSystem().isEating()) {
             return false;
         }
@@ -97,10 +106,41 @@ public class SleepGoal extends Goal {
     public void start() {
         BlockPos bedPos = peasant.getBedPos();
         if (bedPos != null) {
-            // Only start sleeping if we're actually close to the bed
-            double distanceToBed = peasant.distanceToSqr(bedPos.getX(), bedPos.getY(), bedPos.getZ());
-            if (distanceToBed <= 4.0D) {
-                // Use our custom startSleeping method which handles guard time restrictions
+            // FIXED: More lenient distance check for starting sleep
+            double distanceToBed = peasant.distanceToSqr(
+                    bedPos.getX() + 0.5,
+                    bedPos.getY() + 0.5,
+                    bedPos.getZ() + 0.5
+            );
+
+            // If close enough, start sleeping immediately
+            if (distanceToBed <= 9.0D) { // Within 3 blocks
+                peasant.startSleeping(bedPos);
+            } else {
+                // If not close enough, move closer first
+                peasant.getNavigation().moveTo(
+                        bedPos.getX() + 0.5,
+                        bedPos.getY(),
+                        bedPos.getZ() + 0.5,
+                        1.0
+                );
+            }
+        }
+    }
+
+    @Override
+    public void tick() {
+        // ADDED: Continuously try to start sleeping if we're close enough but not sleeping yet
+        if (!peasant.isSleeping() && peasant.getBedPos() != null) {
+            BlockPos bedPos = peasant.getBedPos();
+            double distanceToBed = peasant.distanceToSqr(
+                    bedPos.getX() + 0.5,
+                    bedPos.getY() + 0.5,
+                    bedPos.getZ() + 0.5
+            );
+
+            // If we're close enough and not moving, try to sleep
+            if (distanceToBed <= 9.0D && !peasant.getNavigation().isInProgress()) {
                 peasant.startSleeping(bedPos);
             }
         }

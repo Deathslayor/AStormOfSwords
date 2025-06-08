@@ -1,6 +1,7 @@
 package net.darkflameproduction.agotmod.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.darkflameproduction.agotmod.network.ClaimTownHallPacket;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -35,6 +36,10 @@ public class TownHallScreen extends Screen {
     private String townName = "Unnamed Town"; // Store the town name
     private static TownHallScreen currentInstance = null;
 
+    private boolean isClaimed = false;
+    private String claimedByHouse = "";
+    private net.minecraft.client.gui.components.Button claimButton;
+
     // Text input field for town name
     private net.minecraft.client.gui.components.EditBox townNameInput;
 
@@ -50,7 +55,7 @@ public class TownHallScreen extends Screen {
 
         // Calculate panel dimensions for positioning
         int panelWidth = Math.min(350, width - 40);
-        int panelHeight = Math.min(250, height - 40);
+        int panelHeight = Math.min(300, height - 40); // Increased height for claim button
         int panelX = (width - panelWidth) / 2;
         int panelY = (height - panelHeight) / 2;
 
@@ -58,15 +63,15 @@ public class TownHallScreen extends Screen {
         int inputWidth = 200;
         int inputHeight = 20;
         int inputX = panelX + (panelWidth - inputWidth) / 2;
-        int inputY = panelY + panelHeight - 50; // Position near bottom of panel
+        int inputY = panelY + panelHeight - 80; // Moved up to make room for claim button
 
         townNameInput = new net.minecraft.client.gui.components.EditBox(
                 font, inputX, inputY, inputWidth, inputHeight,
                 net.minecraft.network.chat.Component.literal("Town Name")
         );
 
-        townNameInput.setMaxLength(32); // Limit to 32 characters
-        townNameInput.setValue(townName); // Set current town name
+        townNameInput.setMaxLength(32);
+        townNameInput.setValue(townName);
         townNameInput.setCanLoseFocus(true);
 
         // Add save button next to the input field
@@ -78,6 +83,26 @@ public class TownHallScreen extends Screen {
                 net.minecraft.network.chat.Component.literal("Save"),
                 button -> saveTownName()
         ).pos(buttonX, inputY).size(buttonWidth, inputHeight).build());
+
+        // Add claim button (only visible if not claimed)
+        int claimButtonWidth = 100;
+        int claimButtonX = panelX + (panelWidth - claimButtonWidth) / 2;
+        int claimButtonY = panelY + panelHeight - 50;
+
+        claimButton = net.minecraft.client.gui.components.Button.builder(
+                net.minecraft.network.chat.Component.literal("Claim Town"),
+                button -> claimTown()
+        ).pos(claimButtonX, claimButtonY).size(claimButtonWidth, inputHeight).build();
+
+        claimButton.visible = !isClaimed;
+        addRenderableWidget(claimButton);
+    }
+
+    private void claimTown() {
+        // Send packet to server to claim the town hall
+        net.minecraft.client.Minecraft.getInstance().getConnection().send(
+                new ClaimTownHallPacket(townHallPos)
+        );
     }
 
     @Override
@@ -89,35 +114,24 @@ public class TownHallScreen extends Screen {
     }
 
     // Static method for packet handler to update data with radius and town name
-    public static void updateTownHallData(int bedCount, int citizenCount, int radius, String townName) {
+    public static void updateTownHallData(int bedCount, int citizenCount, int radius, String townName, boolean isClaimed, String claimedByHouse) {
         if (currentInstance != null) {
             currentInstance.bedCount = bedCount;
             currentInstance.citizenCount = citizenCount;
             currentInstance.currentRadius = radius;
             currentInstance.townName = townName;
+            currentInstance.isClaimed = isClaimed;
+            currentInstance.claimedByHouse = claimedByHouse;
+
             // Update the input field if it exists
             if (currentInstance.townNameInput != null) {
                 currentInstance.townNameInput.setValue(townName);
             }
-        }
-    }
 
-    // Backwards compatibility method for old packet handlers
-    public static void updateTownHallData(int bedCount, int citizenCount, int radius) {
-        if (currentInstance != null) {
-            currentInstance.bedCount = bedCount;
-            currentInstance.citizenCount = citizenCount;
-            currentInstance.currentRadius = radius;
-            // Don't update town name for backwards compatibility
-        }
-    }
-
-    // Backwards compatibility method for old packet handlers
-    public static void updateTownHallData(int bedCount, int citizenCount) {
-        if (currentInstance != null) {
-            currentInstance.bedCount = bedCount;
-            currentInstance.citizenCount = citizenCount;
-            // Keep existing radius if not provided
+            // Update claim button visibility
+            if (currentInstance.claimButton != null) {
+                currentInstance.claimButton.visible = !isClaimed;
+            }
         }
     }
 
@@ -198,9 +212,6 @@ public class TownHallScreen extends Screen {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
     }
 
-    /**
-     * Save the town name when the save button is clicked
-     */
     private void saveTownName() {
         String newName = townNameInput.getValue().trim();
         if (!newName.equals(townName)) {
@@ -222,34 +233,44 @@ public class TownHallScreen extends Screen {
     }
 
     private void drawContent(GuiGraphics guiGraphics, int x, int y, int width, int height) {
-        // Simplified town information - only beds, population, and radius
-        String[] townInfo = {
-                "Town Statistics",
-                "",
-                "Total Beds: " + bedCount,
-                "Citizens: " + citizenCount,
-                "Current Radius: " + currentRadius + " blocks"
-        };
+        // Town information with ownership
+        java.util.List<String> townInfo = new java.util.ArrayList<>();
+        townInfo.add("Town Statistics");
+        townInfo.add("");
 
-        int textY = y + 30; // More centered since we have less content
+        if (isClaimed) {
+            townInfo.add("Owned by: " + claimedByHouse);
+            townInfo.add("");
+        } else {
+            townInfo.add("Unclaimed Territory");
+            townInfo.add("");
+        }
+
+        townInfo.add("Total Beds: " + bedCount);
+        townInfo.add("Citizens: " + citizenCount);
+        townInfo.add("Current Radius: " + currentRadius + " blocks");
+
+        int textY = y + 20;
         for (String info : townInfo) {
             if (info.isEmpty()) {
-                textY += font.lineHeight / 2; // Smaller gap for empty lines
+                textY += font.lineHeight / 2;
                 continue;
             }
 
-            int textX = x + (width - font.width(info)) / 2; // Center the text
-
-            // Different colors for different types of info
+            int textX = x + (width - font.width(info)) / 2;
             int color = TEXT_COLOR;
+
             if (info.startsWith("Total Beds") || info.startsWith("Citizens") || info.startsWith("Current Radius")) {
                 color = 0xFF2E7D32; // Dark green for main stats
+            } else if (info.startsWith("Owned by:")) {
+                color = 0xFF1565C0; // Blue for ownership
+            } else if (info.equals("Unclaimed Territory")) {
+                color = 0xFFD32F2F; // Red for unclaimed
             } else if (info.equals("Town Statistics")) {
-                // Scale the header text
                 float scale = 1.2f;
                 guiGraphics.pose().pushPose();
                 guiGraphics.pose().scale(scale, scale, 1.0f);
-                int headerColor = 0xFF1A237E; // Dark blue for main header
+                int headerColor = 0xFF1A237E;
                 int scaledX = (int)((x + (width - font.width(info) * scale) / 2) / scale);
                 guiGraphics.drawString(font, info, scaledX, (int)(textY / scale), headerColor, false);
                 guiGraphics.pose().popPose();

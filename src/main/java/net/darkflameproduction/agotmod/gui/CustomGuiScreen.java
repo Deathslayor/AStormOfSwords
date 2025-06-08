@@ -5,6 +5,7 @@ import dev.tocraft.ctgen.impl.network.SyncMapPacket;
 import dev.tocraft.ctgen.impl.screen.widget.MapWidget;
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.item.ModItems;
+import net.darkflameproduction.agotmod.network.*;
 import net.darkflameproduction.agotmod.sound.ModSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -279,6 +280,17 @@ public class CustomGuiScreen extends Screen {
     private static final int[] SHORT_BLADE_STATS_INDICES = {10, 16, 19, 27, 34};
     private static final int[] RANGED_STATS_INDICES = {6, 7, 37};
 
+    private String houseName = "";
+    private boolean isEditingHouseName = false;
+    private net.minecraft.client.gui.components.EditBox houseNameEditBox;
+    private net.minecraft.client.gui.components.Button saveHouseButton;
+    private net.minecraft.client.gui.components.Button editHouseButton;
+    private static java.util.List<SyncOwnedTownsPacket.TownInfo> ownedTowns = new java.util.ArrayList<>();
+    private boolean hasRequestedTowns = false;
+    private boolean isValidatingHouseName = false;
+    private static CustomGuiScreen currentInstance = null;
+
+
     private int getCategoryUsage(int[] indices) {
         int total = 0;
         for (int index : indices) {
@@ -319,6 +331,15 @@ public class CustomGuiScreen extends Screen {
         this.selectedStatsSubmenu = lastSelectedStatsSubmenu;
         this.mapPacket = mapPacket;
         this.mapWidget = MapWidget.ofPacket(minecraft, 0, 0, width, height, mapPacket);
+        currentInstance = this; // Track current instance
+    }
+
+    @Override
+    public void onClose() {
+        super.onClose();
+        if (currentInstance == this) {
+            currentInstance = null;
+        }
     }
 
     private void calculateWeaponSkillLevels() {
@@ -518,6 +539,11 @@ public class CustomGuiScreen extends Screen {
     protected void init() {
         super.init();
 
+        currentInstance = this; // Ensure current instance is set
+
+        // Reset the towns request flag when GUI is opened
+        hasRequestedTowns = false;
+
         if (minecraft != null && minecraft.player != null) {
             lastPlayerHealth = minecraft.player.getHealth();
             requestStatisticsFromServer();
@@ -527,6 +553,23 @@ public class CustomGuiScreen extends Screen {
             lastPlayerY = minecraft.player.getY();
             lastPlayerZ = minecraft.player.getZ();
             hasInitializedPosition = true;
+
+            // Load house name from player data
+            loadHouseNameFromPlayerData();
+        }
+
+        // Clear any existing house widgets when reopening
+        if (houseNameEditBox != null) {
+            removeWidget(houseNameEditBox);
+            houseNameEditBox = null;
+        }
+        if (saveHouseButton != null) {
+            removeWidget(saveHouseButton);
+            saveHouseButton = null;
+        }
+        if (editHouseButton != null) {
+            removeWidget(editHouseButton);
+            editHouseButton = null;
         }
 
         applyBlurEffect();
@@ -875,6 +918,11 @@ public class CustomGuiScreen extends Screen {
         skillsTag.putInt("ranged_level", rangedLevel);
 
         persistentData.put(AGoTMod.MOD_ID + ".skills", skillsTag);
+
+        // Also save house name here
+        CompoundTag houseTag = new CompoundTag();
+        houseTag.putString("house_name", houseName);
+        persistentData.put(AGoTMod.MOD_ID + ".house", houseTag);
     }
 
     private boolean isMouseOverRect(int mouseX, int mouseY, int x, int y, int width, int height) {
@@ -921,6 +969,9 @@ public class CustomGuiScreen extends Screen {
                     break;
                 case 3:
                     drawStatsSection(guiGraphics, mouseX, mouseY, layout);
+                    break;
+                case 4:
+                    drawHouseSection(guiGraphics, mouseX, mouseY, layout);
                     break;
             }
         }
@@ -1735,6 +1786,245 @@ public class CustomGuiScreen extends Screen {
             contentY = topMargin + sectionButtonHeight + 5;
             contentWidth = screenWidth - (2 * sideMargin);
             contentHeight = screenHeight - topMargin - sectionButtonHeight - (screenHeight / 32);
+        }
+    }
+
+    //House Mechanics
+
+    private void drawHouseSection(GuiGraphics guiGraphics, int mouseX, int mouseY, ScreenLayout layout) {
+        int contentStartX = layout.contentX + layout.contentWidth / 8;
+        int contentStartY = layout.contentY + layout.contentHeight / 16;
+        int contentWidth = layout.contentWidth - (layout.contentWidth / 4);
+        int contentHeight = layout.contentHeight - (layout.contentHeight / 8);
+
+        renderPaperPanel(guiGraphics, contentStartX, contentStartY, contentWidth, contentHeight);
+
+        // Request owned towns data if we haven't already and we have a house name
+        if (!hasRequestedTowns && !houseName.isEmpty()) {
+            net.neoforged.neoforge.network.PacketDistributor.sendToServer(new RequestOwnedTownsPacket());
+            hasRequestedTowns = true;
+        }
+
+        if (houseName.isEmpty() || isEditingHouseName) {
+            // Draw instruction text
+            String instructionText = houseName.isEmpty() ? "Enter your noble house name:" : "Edit your house name:";
+            guiGraphics.drawString(font, instructionText, contentStartX + 20, contentStartY + 40, SUBMENU_TEXT_COLOR, false);
+
+            // Show input field and save button
+            if (houseNameEditBox == null) {
+                houseNameEditBox = new net.minecraft.client.gui.components.EditBox(
+                        font, contentStartX + 20, contentStartY + 60, contentWidth - 140, 20,
+                        Component.literal("House Name")
+                );
+                houseNameEditBox.setMaxLength(30);
+                houseNameEditBox.setValue(houseName);
+                addWidget(houseNameEditBox);
+            }
+
+            if (saveHouseButton == null) {
+                saveHouseButton = net.minecraft.client.gui.components.Button.builder(
+                        Component.literal("Save"),
+                        button -> {
+                            if (!houseNameEditBox.getValue().trim().isEmpty()) {
+                                houseName = houseNameEditBox.getValue().trim();
+                                isEditingHouseName = false;
+                                removeWidget(houseNameEditBox);
+                                removeWidget(saveHouseButton);
+                                houseNameEditBox = null;
+                                saveHouseButton = null;
+                                // Save to player data
+                                saveHouseNameToPlayerData();
+                                // Request towns data for the new house
+                                hasRequestedTowns = false;
+                                playButtonSound();
+                            }
+                        }
+                ).bounds(contentStartX + contentWidth - 100, contentStartY + 60, 60, 20).build();
+                addWidget(saveHouseButton);
+            }
+
+            // Render the widgets on top of everything
+            if (houseNameEditBox != null) {
+                houseNameEditBox.render(guiGraphics, mouseX, mouseY, 0);
+            }
+            if (saveHouseButton != null) {
+                saveHouseButton.render(guiGraphics, mouseX, mouseY, 0);
+            }
+
+        } else {
+            // Show house name and edit button
+            String houseTitle = "House " + houseName;
+            int titleWidth = (int)(font.width(houseTitle) * 1.3f);
+            int titleX = contentStartX + (contentWidth - titleWidth) / 2;
+
+            guiGraphics.pose().pushPose();
+            guiGraphics.pose().scale(1.3f, 1.3f, 1.0f);
+            guiGraphics.drawString(font, houseTitle, (int)(titleX / 1.3f), (int)((contentStartY + 30) / 1.3f), SUBMENU_TEXT_COLOR, false);
+            guiGraphics.pose().popPose();
+
+            if (editHouseButton == null) {
+                editHouseButton = net.minecraft.client.gui.components.Button.builder(
+                        Component.literal("Edit"),
+                        button -> {
+                            isEditingHouseName = true;
+                            removeWidget(editHouseButton);
+                            editHouseButton = null;
+                            playButtonSound();
+                        }
+                ).bounds(contentStartX + contentWidth - 60, contentStartY + 20, 40, 20).build();
+                addWidget(editHouseButton);
+            }
+
+            // Draw owned towns section
+            drawOwnedTownsSection(guiGraphics, contentStartX, contentStartY + 70, contentWidth, contentHeight - 90);
+
+            // Render the edit button on top
+            if (editHouseButton != null) {
+                editHouseButton.render(guiGraphics, mouseX, mouseY, 0);
+            }
+        }
+    }
+
+    private void drawOwnedTownsSection(GuiGraphics guiGraphics, int x, int y, int width, int height) {
+        // Draw section title
+        String sectionTitle = "Owned Towns";
+        int titleWidth = (int)(font.width(sectionTitle) * 1.1f);
+        int titleX = x + (width - titleWidth) / 2;
+
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().scale(1.1f, 1.1f, 1.0f);
+        guiGraphics.drawString(font, sectionTitle, (int)(titleX / 1.1f), (int)(y / 1.1f), SUBMENU_TEXT_COLOR, false);
+        guiGraphics.pose().popPose();
+
+        // Draw separator line
+        guiGraphics.fill(x + width/8, y + (int)(font.lineHeight * 1.1f) + 5,
+                x + width - width/8, y + (int)(font.lineHeight * 1.1f) + 6,
+                SUBMENU_TEXT_COLOR);
+
+        int listStartY = y + (int)(font.lineHeight * 1.1f) + 15;
+
+        if (ownedTowns.isEmpty()) {
+            // Show "No towns owned" message
+            String noTownsText = "No towns claimed";
+            int textWidth = font.width(noTownsText);
+            int textX = x + (width - textWidth) / 2;
+            guiGraphics.drawString(font, noTownsText, textX, listStartY + 20, 0xFF666666, false);
+        } else {
+            // Draw towns list
+            int currentY = listStartY;
+            int lineHeight = font.lineHeight + 4;
+
+            for (SyncOwnedTownsPacket.TownInfo town : ownedTowns) {
+                if (currentY + lineHeight > y + height) break; // Don't draw beyond bounds
+
+                String townText = town.townName() + " - Population: " + town.population();
+                int textWidth = font.width(townText);
+                int textX = x + (width - textWidth) / 2;
+
+                // Color coding based on population
+                int textColor = SUBMENU_TEXT_COLOR;
+                if (town.population() >= 100) {
+                    textColor = 0xFF2E7D32; // Dark green for large towns
+                } else if (town.population() >= 50) {
+                    textColor = 0xFF1565C0; // Blue for medium towns
+                } else if (town.population() >= 20) {
+                    textColor = 0xFF6A4C93; // Purple for small towns
+                }
+
+                guiGraphics.drawString(font, townText, textX, currentY, textColor, false);
+                currentY += lineHeight;
+            }
+
+            // Show total if multiple towns
+            if (ownedTowns.size() > 1) {
+                int totalPopulation = ownedTowns.stream().mapToInt(SyncOwnedTownsPacket.TownInfo::population).sum();
+                String totalText = "Total Population: " + totalPopulation;
+                int textWidth = font.width(totalText);
+                int textX = x + (width - textWidth) / 2;
+
+                guiGraphics.fill(x + width/6, currentY + 5, x + width - width/6, currentY + 6, SUBMENU_TEXT_COLOR);
+
+                guiGraphics.pose().pushPose();
+                guiGraphics.pose().scale(0.9f, 0.9f, 1.0f);
+                guiGraphics.drawString(font, totalText, (int)(textX / 0.9f), (int)((currentY + 10) / 0.9f), 0xFF1A237E, false);
+                guiGraphics.pose().popPose();
+            }
+        }
+    }
+
+    private void saveHouseNameToPlayerData() {
+        if (minecraft == null || minecraft.player == null || isValidatingHouseName) {
+            return;
+        }
+
+        String newHouseName = houseName.trim();
+        if (newHouseName.isEmpty()) {
+            return;
+        }
+
+        // Get current house name to check if it's actually changing
+        String currentHouseName = "";
+        CompoundTag persistentData = minecraft.player.getPersistentData();
+        if (persistentData.contains(AGoTMod.MOD_ID + ".house")) {
+            CompoundTag houseTag = persistentData.getCompound(AGoTMod.MOD_ID + ".house");
+            if (houseTag.contains("house_name")) {
+                currentHouseName = houseTag.getString("house_name");
+            }
+        }
+
+        // If the name hasn't changed, just save it locally
+        if (newHouseName.equals(currentHouseName)) {
+            CompoundTag houseTag = new CompoundTag();
+            houseTag.putString("house_name", newHouseName);
+            persistentData.put(AGoTMod.MOD_ID + ".house", houseTag);
+            net.neoforged.neoforge.network.PacketDistributor.sendToServer(new SaveHouseNamePacket(newHouseName));
+            return;
+        }
+
+        // First validate the house name if it's actually changing
+        isValidatingHouseName = true;
+        net.neoforged.neoforge.network.PacketDistributor.sendToServer(new CheckHouseNamePacket(newHouseName));
+
+        // Save locally for immediate UI update (will be corrected if validation fails)
+        CompoundTag houseTag = new CompoundTag();
+        houseTag.putString("house_name", newHouseName);
+        persistentData.put(AGoTMod.MOD_ID + ".house", houseTag);
+
+        // Send to server for persistence (this will be validated server-side)
+        net.neoforged.neoforge.network.PacketDistributor.sendToServer(new SaveHouseNamePacket(newHouseName));
+    }
+
+    private void loadHouseNameFromPlayerData() {
+        // Request house name from server
+        net.neoforged.neoforge.network.PacketDistributor.sendToServer(new RequestHouseNamePacket());
+
+        // Use the synced name if available
+        houseName = syncedHouseName;
+    }
+
+    // Add this static variable at the top with other fields
+    private static String syncedHouseName = "";
+
+    // Add this static method
+    public static void setSyncedHouseName(String name) {
+        syncedHouseName = name;
+    }
+
+    public static void setOwnedTowns(java.util.List<SyncOwnedTownsPacket.TownInfo> towns) {
+        ownedTowns = new java.util.ArrayList<>(towns);
+    }
+
+    // Update the static method in CustomGuiScreen
+    public static void handleHouseNameValidation(boolean isAvailable, String message) {
+        if (currentInstance != null) {
+            currentInstance.isValidatingHouseName = false;
+            if (!isAvailable) {
+                // Show error message to player using displayClientMessage instead
+                if (net.minecraft.client.Minecraft.getInstance().player != null) {
+                    net.minecraft.client.Minecraft.getInstance().player.displayClientMessage(
+                            net.minecraft.network.chat.Component.literal(message), false);
+                }
+            }
         }
     }
 

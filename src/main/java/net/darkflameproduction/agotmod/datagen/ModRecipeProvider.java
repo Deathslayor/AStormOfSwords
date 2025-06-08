@@ -2,6 +2,7 @@ package net.darkflameproduction.agotmod.datagen;
 
 import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.darkflameproduction.agotmod.item.ModItems;
+import net.darkflameproduction.agotmod.item.custom.BannerPatterns;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -3649,9 +3650,26 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .save(this.output, "thenn_noble_boots_smithing");
 
 
+        // ===== BANNERS =====
+
+
+        this.shaped(RecipeCategory.DECORATIONS, Items.RED_BANNER) // Or create a custom banner item
+                .pattern("ABA")
+                .pattern("ACA")
+                .pattern("ABA")
+                .define('A', Items.RED_WOOL)
+                .define('B', Items.BLACK_DYE)
+                .define('C', BannerPatterns.TARGARYEN_BANNER_PATTERN.get())
+                .unlockedBy("has_targaryen_pattern", has(BannerPatterns.TARGARYEN_BANNER_PATTERN.get()))
+                .save(this.output, "targaryen_decorated_banner");
+
+
 
 
     }
+
+
+
 
 
 
@@ -3851,6 +3869,10 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('#', Items.CHAIN)
                 .unlockedBy(getHasName(strippedLogBlock), has(strippedLogBlock))
                 .save(this.output, woodType + "_hanging_sign");
+
+
+
+
     }
 
     // Helper method for the criteria

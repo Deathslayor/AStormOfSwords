@@ -1,7 +1,8 @@
-// 1.21.3	2025-05-26T20:02:23.2006352	Tags for minecraft:item mod id agotmod
+// 1.21.3	2025-06-08T12:00:02.962825	Tags for minecraft:item mod id agotmod
 eef23bfe9f45027b3b8670ec55cfa37f8a45a919 data/agotmod/tags/item/bronze_tool_materials.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/agotmod/tags/item/dragonglass_tool_materials.json
 ef380d32ef9f54efeffc7c1c7d9ccf13299c2588 data/agotmod/tags/item/steel_tool_materials.json
+ccaa5ea118f5f98977a2930eae09d9dfdb9d50c8 data/minecraft/tags/item/banners.json
 1c497fba17b6a9f9253a0830c209442e05caf4ef data/minecraft/tags/item/chest_armor.json
 a962d2c3a6128522b3dd5dd0ab313afa04aa70bc data/minecraft/tags/item/flowers.json
 29ad99f68b61290cd1b5967658b94476f8481410 data/minecraft/tags/item/foot_armor.json

@@ -5,6 +5,7 @@ package net.darkflameproduction.agotmod.item.creativetabs;
 
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.item.ModItems;
+import net.darkflameproduction.agotmod.item.custom.BannerPatterns;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -35,6 +36,10 @@ public class ModCreativeIngredients {
                         pOutput.accept(ModItems.COPPER_HALFGROAT.get());
                         pOutput.accept(ModItems.COPPER_PENNY.get());
                         pOutput.accept(ModItems.COPPER_HALFPENNY.get());
+
+                        /** Banner Patterns */
+                        pOutput.accept(BannerPatterns.TARGARYEN_BANNER_PATTERN.get());
+
                         /** Items */
                         //INGREDIENTS
                         pOutput.accept(ModItems.WEIRWOOD_STICK.get());

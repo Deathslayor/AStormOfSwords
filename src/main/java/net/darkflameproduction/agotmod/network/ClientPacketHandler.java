@@ -1,6 +1,8 @@
 package net.darkflameproduction.agotmod.network;
 
 import net.darkflameproduction.agotmod.client.renderer.TownHallDebugRenderer;
+import net.darkflameproduction.agotmod.client.town.ClientTownAreaManager;
+import net.darkflameproduction.agotmod.gui.CustomGuiScreen;
 import net.darkflameproduction.agotmod.gui.GrocerInventoryScreen;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.GrocerSystem;
 import net.darkflameproduction.agotmod.gui.TownHallScreen;
@@ -36,9 +38,12 @@ public class ClientPacketHandler {
         context.enqueueWork(() -> {
             if (packet.register()) {
                 TownHallDebugRenderer.addTownHall(packet.pos());
+                // Don't add to ClientTownAreaManager here - wait for TownHallDataPacket with full info
             } else {
                 TownHallDebugRenderer.removeTownHall(packet.pos());
-                TownTracker.removeTown(packet.pos()); // Also remove from tracker
+                TownTracker.removeTown(packet.pos());
+                // NEW: Remove from client-side town area manager
+                ClientTownAreaManager.removeTownArea(packet.pos());
             }
         });
     }
@@ -51,6 +56,13 @@ public class ClientPacketHandler {
         });
     }
 
+    public static void handleHouseNameValidation(HouseNameValidationPacket packet, IPayloadContext context) {
+        context.enqueueWork(() -> {
+            CustomGuiScreen.handleHouseNameValidation(packet.isAvailable(), packet.message());
+        });
+    }
+
+    // Add this method to ClientPacketHandler
     public static void handleTownHallData(TownHallDataPacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
             // Extract packet data
@@ -59,16 +71,29 @@ public class ClientPacketHandler {
             int citizenCount = packet.citizenCount();
             int currentRadius = packet.currentRadius();
             String townName = packet.townName();
+            boolean isClaimed = packet.isClaimed();
+            String claimedByHouse = packet.claimedByHouse();
 
             // Update the Town Hall screen if it's open
-            TownHallScreen.updateTownHallData(bedCount, citizenCount, currentRadius, townName);
+            TownHallScreen.updateTownHallData(bedCount, citizenCount, currentRadius, townName, isClaimed, claimedByHouse);
 
             // Update the debug renderer with radius and visual data
             TownHallDebugRenderer.updateTownHallData(pos, bedCount, citizenCount, currentRadius);
 
             // Update the town tracker with both name and population data
-            // Use citizenCount as population since that's what represents actual residents
             TownTracker.updateTownData(pos, townName, citizenCount);
+
+            // NEW: Update the client-side town area manager
+            ClientTownAreaManager.updateTownArea(pos, townName, isClaimed, claimedByHouse, citizenCount, currentRadius);
+        });
+    }
+
+
+
+    public static void handleSyncOwnedTowns(SyncOwnedTownsPacket packet, IPayloadContext context) {
+        context.enqueueWork(() -> {
+            // Store the owned towns data in the CustomGuiScreen
+            CustomGuiScreen.setOwnedTowns(packet.towns());
         });
     }
 
@@ -105,6 +130,13 @@ public class ClientPacketHandler {
                     GrocerInventoryScreen.updatePlayerBalance(playerBalance);
                 }
             }
+        });
+    }
+
+    public static void handleSyncHouseName(SyncHouseNamePacket packet, IPayloadContext context) {
+        context.enqueueWork(() -> {
+            // Store the synced house name in a static variable for the GUI to access
+            CustomGuiScreen.setSyncedHouseName(packet.houseName());
         });
     }
 }

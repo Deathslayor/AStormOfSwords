@@ -1,4 +1,4 @@
-// 1.21.3	2025-05-26T15:12:21.6293785	ASOS Recipes
+// 1.21.3	2025-06-08T12:20:10.9171154	ASOS Recipes
 822a5dc54b4509f28c5659a0e3c6c3f5cfd1834a data/agotmod/advancement/recipes/building_blocks/alder_slabs.json
 a169551e82dfb675b8952441658c421d625418b2 data/agotmod/advancement/recipes/building_blocks/alder_stairs.json
 94c1c0d08a3d2bf731769eec2d8159a466aa6163 data/agotmod/advancement/recipes/building_blocks/alder_wall.json
@@ -9039,6 +9039,7 @@ dbcdd124b48145085ad7a92e9a36c88e226a531d data/minecraft/advancement/recipes/deco
 45ac8034eec4dccbc2e10a2bcf9c73c6dcea8ae7 data/minecraft/advancement/recipes/decorations/sentinel_sign.json
 9f2dbbaf22ab08878e722aa516708e5f66db6861 data/minecraft/advancement/recipes/decorations/sycamore_hanging_sign.json
 a4c77fd79e9008b531c163f7a7433245844b1c30 data/minecraft/advancement/recipes/decorations/sycamore_sign.json
+5ca0f0c6cdcc4b589e088b7b633a6fb10a8dacd2 data/minecraft/advancement/recipes/decorations/targaryen_decorated_banner.json
 525c5e0631d188e68eeb010510918fe5f7af2416 data/minecraft/advancement/recipes/decorations/tigerwood_hanging_sign.json
 b11d358cb7ea0d47531880f5b903f77edb30bec9 data/minecraft/advancement/recipes/decorations/tigerwood_sign.json
 698bbf3424a9b9e441287783f934146e5c83cf0f data/minecraft/advancement/recipes/decorations/white_cherry_hanging_sign.json
@@ -12516,6 +12517,7 @@ b15365d2332751422f93133e7cc903db3fb7fade data/minecraft/recipe/sycamore_plank_cr
 ab0a41b85d801a3651cd5f2b3f22e937c4bcd64f data/minecraft/recipe/sycamore_plank_stick.json
 22494e73b0b481e55950b33f1e86aa51433cd09c data/minecraft/recipe/sycamore_sign.json
 27123bcdc584e8100ab04ae51bdbc567ad00e5c9 data/minecraft/recipe/tansy_to_yellow_dye.json
+e561db7019696a132c54ddcc889f8a984709071f data/minecraft/recipe/targaryen_decorated_banner.json
 6504fa969e5a6ff7bd0d352e176bb4bbf9b281d5 data/minecraft/recipe/thenn_levy_boots_smithing.json
 f92dca8b816625c3aa3dc11b1a48f7e54ee8c3b1 data/minecraft/recipe/thenn_levy_chestplate_smithing.json
 f16f13b4f94da7bfcd01d8ab7da6d1c2a7103c54 data/minecraft/recipe/thenn_levy_helmet_smithing.json

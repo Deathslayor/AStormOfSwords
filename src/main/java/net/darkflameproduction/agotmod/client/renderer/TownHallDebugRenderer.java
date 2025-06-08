@@ -9,7 +9,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -32,7 +31,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @EventBusSubscriber(modid = AGoTMod.MOD_ID, bus = EventBusSubscriber.Bus.GAME, value = Dist.CLIENT)
 public class TownHallDebugRenderer {
 
-    private static final int SCAN_HEIGHT = 64; // This remains constant
+    private static final int SCAN_HEIGHT = 384; // Updated height
     private static final String SAVE_FILE = "townhall_debug_data.json";
 
     // Thread-safe map to store Town Hall positions with their current radius
@@ -101,7 +100,6 @@ public class TownHallDebugRenderer {
             TownHallData defaultData = new TownHallData(16, 0, 0);
             townHallDataMap.put(pos, defaultData);
             saveTownHallData(); // Save immediately when new town hall is added
-        } else {
         }
     }
 
@@ -119,13 +117,8 @@ public class TownHallDebugRenderer {
         // Only accept updates that are newer than existing data or if no data exists
         if (existingData == null || currentTime > existingData.timestamp) {
             TownHallData newData = new TownHallData(currentRadius, citizenCount, bedCount, currentTime);
-
             // Store in pending updates with timestamp
             pendingUpdates.put(pos, newData);
-
-
-        } else {
-
         }
     }
 
@@ -152,9 +145,6 @@ public class TownHallDebugRenderer {
 
                     townHallDataMap.put(pos, newData);
                     dataChanged = true;
-
-                } else if (oldData != null && newData.timestamp < oldData.timestamp) {
-
                 }
             }
             pendingUpdates.clear();
@@ -186,8 +176,8 @@ public class TownHallDebugRenderer {
                 gson.toJson(serializableData, writer);
             }
 
-
         } catch (IOException e) {
+            // Failed to save data
         }
     }
 
@@ -214,18 +204,14 @@ public class TownHallDebugRenderer {
                     for (SerializableTownHallData data : serializableData.values()) {
                         townHallDataMap.put(data.getBlockPos(), data.getTownHallData());
                     }
-
                 }
             }
 
         } catch (Exception e) {
-
+            // Failed to load data
         }
     }
 
-    /**
-     * Event handler for when a world loads - restore saved data
-     */
     /**
      * Get a copy of the current town hall data map (for external access)
      */
@@ -315,9 +301,6 @@ public class TownHallDebugRenderer {
         double minZ = -currentRadius;
         double maxZ = currentRadius + 1;
 
-        // Create the bounding box
-        AABB bounds = new AABB(minX, minY, minZ, maxX, maxY, maxZ);
-
         // Check if player is inside the scan area
         Minecraft mc = Minecraft.getInstance();
         boolean isInside = false;
@@ -334,63 +317,83 @@ public class TownHallDebugRenderer {
         // Use debug quad renderer which handles visibility better
         VertexConsumer consumer = bufferSource.getBuffer(RenderType.debugQuads());
 
-        // Color coding based on town size:
-        // Small towns (0-5 citizens): Green
-        // Medium towns (6-15 citizens): Yellow
-        // Large towns (16+ citizens): Blue
-        // Always red if player is outside
+        // Simple green/red coloring based on player position
         float red, green, blue;
         if (isInside) {
-            if (data.citizenCount <= 5) {
-                // Small town - Green
-                red = 0.0f; green = 1.0f; blue = 0.0f;
-            } else if (data.citizenCount <= 15) {
-                // Medium town - Yellow
-                red = 1.0f; green = 1.0f; blue = 0.0f;
-            } else {
-                // Large town - Blue
-                red = 0.0f; green = 0.5f; blue = 1.0f;
-            }
+            // Inside - Green
+            red = 0.0f; green = 1.0f; blue = 0.0f;
         } else {
             // Outside - Red
             red = 1.0f; green = 0.0f; blue = 0.0f;
         }
 
-        // Render wireframe with dynamic color
-        renderAABBWireframe(poseStack, consumer, bounds, red, green, blue, 0.8f);
+        // Render grid pattern instead of wireframe
+        renderGridBounds(poseStack, consumer, minX, maxX, minY, maxY, minZ, maxZ, red, green, blue, 0.8f);
 
         poseStack.popPose();
     }
 
-    private static void renderAABBWireframe(PoseStack poseStack, VertexConsumer consumer, AABB aabb,
-                                            float red, float green, float blue, float alpha) {
+    private static void renderGridBounds(PoseStack poseStack, VertexConsumer consumer,
+                                         double minX, double maxX, double minY, double maxY, double minZ, double maxZ,
+                                         float red, float green, float blue, float alpha) {
 
-        float minX = (float) aabb.minX;
-        float minY = (float) aabb.minY;
-        float minZ = (float) aabb.minZ;
-        float maxX = (float) aabb.maxX;
-        float maxY = (float) aabb.maxY;
-        float maxZ = (float) aabb.maxZ;
+        float lineWidth = 0.04f;
+        int gridSpacing = 16; // Grid lines every 16 blocks
 
-        float lineWidth = 0.04f; // Double the thickness (was 0.02f)
+        // Render horizontal grid lines on bottom face
+        for (double x = Math.ceil(minX / gridSpacing) * gridSpacing; x <= maxX; x += gridSpacing) {
+            addQuadLine(poseStack, consumer, (float)x, (float)minY, (float)minZ, (float)x, (float)minY, (float)maxZ, lineWidth, red, green, blue, alpha);
+        }
+        for (double z = Math.ceil(minZ / gridSpacing) * gridSpacing; z <= maxZ; z += gridSpacing) {
+            addQuadLine(poseStack, consumer, (float)minX, (float)minY, (float)z, (float)maxX, (float)minY, (float)z, lineWidth, red, green, blue, alpha);
+        }
 
-        // Bottom edges - extend slightly past corners to ensure connection
-        addQuadLine(poseStack, consumer, minX - lineWidth, minY, minZ, maxX + lineWidth, minY, minZ, lineWidth, red, green, blue, alpha);
-        addQuadLine(poseStack, consumer, maxX, minY, minZ - lineWidth, maxX, minY, maxZ + lineWidth, lineWidth, red, green, blue, alpha);
-        addQuadLine(poseStack, consumer, maxX + lineWidth, minY, maxZ, minX - lineWidth, minY, maxZ, lineWidth, red, green, blue, alpha);
-        addQuadLine(poseStack, consumer, minX, minY, maxZ + lineWidth, minX, minY, minZ - lineWidth, lineWidth, red, green, blue, alpha);
+        // Render horizontal grid lines on top face
+        for (double x = Math.ceil(minX / gridSpacing) * gridSpacing; x <= maxX; x += gridSpacing) {
+            addQuadLine(poseStack, consumer, (float)x, (float)maxY, (float)minZ, (float)x, (float)maxY, (float)maxZ, lineWidth, red, green, blue, alpha);
+        }
+        for (double z = Math.ceil(minZ / gridSpacing) * gridSpacing; z <= maxZ; z += gridSpacing) {
+            addQuadLine(poseStack, consumer, (float)minX, (float)maxY, (float)z, (float)maxX, (float)maxY, (float)z, lineWidth, red, green, blue, alpha);
+        }
 
-        // Top edges - extend slightly past corners to ensure connection
-        addQuadLine(poseStack, consumer, minX - lineWidth, maxY, minZ, maxX + lineWidth, maxY, minZ, lineWidth, red, green, blue, alpha);
-        addQuadLine(poseStack, consumer, maxX, maxY, minZ - lineWidth, maxX, maxY, maxZ + lineWidth, lineWidth, red, green, blue, alpha);
-        addQuadLine(poseStack, consumer, maxX + lineWidth, maxY, maxZ, minX - lineWidth, maxY, maxZ, lineWidth, red, green, blue, alpha);
-        addQuadLine(poseStack, consumer, minX, maxY, maxZ + lineWidth, minX, maxY, minZ - lineWidth, lineWidth, red, green, blue, alpha);
+        // Render vertical grid lines on X faces
+        for (double y = Math.ceil(minY / gridSpacing) * gridSpacing; y <= maxY; y += gridSpacing) {
+            addQuadLine(poseStack, consumer, (float)minX, (float)y, (float)minZ, (float)minX, (float)y, (float)maxZ, lineWidth, red, green, blue, alpha);
+            addQuadLine(poseStack, consumer, (float)maxX, (float)y, (float)minZ, (float)maxX, (float)y, (float)maxZ, lineWidth, red, green, blue, alpha);
+        }
+        for (double z = Math.ceil(minZ / gridSpacing) * gridSpacing; z <= maxZ; z += gridSpacing) {
+            addQuadLine(poseStack, consumer, (float)minX, (float)minY, (float)z, (float)minX, (float)maxY, (float)z, lineWidth, red, green, blue, alpha);
+            addQuadLine(poseStack, consumer, (float)maxX, (float)minY, (float)z, (float)maxX, (float)maxY, (float)z, lineWidth, red, green, blue, alpha);
+        }
 
-        // Vertical edges - extend slightly past corners to ensure connection
-        addQuadLine(poseStack, consumer, minX, minY - lineWidth, minZ, minX, maxY + lineWidth, minZ, lineWidth, red, green, blue, alpha);
-        addQuadLine(poseStack, consumer, maxX, minY - lineWidth, minZ, maxX, maxY + lineWidth, minZ, lineWidth, red, green, blue, alpha);
-        addQuadLine(poseStack, consumer, maxX, minY - lineWidth, maxZ, maxX, maxY + lineWidth, maxZ, lineWidth, red, green, blue, alpha);
-        addQuadLine(poseStack, consumer, minX, minY - lineWidth, maxZ, minX, maxY + lineWidth, maxZ, lineWidth, red, green, blue, alpha);
+        // Render vertical grid lines on Z faces
+        for (double y = Math.ceil(minY / gridSpacing) * gridSpacing; y <= maxY; y += gridSpacing) {
+            addQuadLine(poseStack, consumer, (float)minX, (float)y, (float)minZ, (float)maxX, (float)y, (float)minZ, lineWidth, red, green, blue, alpha);
+            addQuadLine(poseStack, consumer, (float)minX, (float)y, (float)maxZ, (float)maxX, (float)y, (float)maxZ, lineWidth, red, green, blue, alpha);
+        }
+        for (double x = Math.ceil(minX / gridSpacing) * gridSpacing; x <= maxX; x += gridSpacing) {
+            addQuadLine(poseStack, consumer, (float)x, (float)minY, (float)minZ, (float)x, (float)maxY, (float)minZ, lineWidth, red, green, blue, alpha);
+            addQuadLine(poseStack, consumer, (float)x, (float)minY, (float)maxZ, (float)x, (float)maxY, (float)maxZ, lineWidth, red, green, blue, alpha);
+        }
+
+        // Render boundary edges to clearly define the area
+        // Bottom boundary
+        addQuadLine(poseStack, consumer, (float)minX, (float)minY, (float)minZ, (float)maxX, (float)minY, (float)minZ, lineWidth * 2, red, green, blue, alpha);
+        addQuadLine(poseStack, consumer, (float)maxX, (float)minY, (float)minZ, (float)maxX, (float)minY, (float)maxZ, lineWidth * 2, red, green, blue, alpha);
+        addQuadLine(poseStack, consumer, (float)maxX, (float)minY, (float)maxZ, (float)minX, (float)minY, (float)maxZ, lineWidth * 2, red, green, blue, alpha);
+        addQuadLine(poseStack, consumer, (float)minX, (float)minY, (float)maxZ, (float)minX, (float)minY, (float)minZ, lineWidth * 2, red, green, blue, alpha);
+
+        // Top boundary
+        addQuadLine(poseStack, consumer, (float)minX, (float)maxY, (float)minZ, (float)maxX, (float)maxY, (float)minZ, lineWidth * 2, red, green, blue, alpha);
+        addQuadLine(poseStack, consumer, (float)maxX, (float)maxY, (float)minZ, (float)maxX, (float)maxY, (float)maxZ, lineWidth * 2, red, green, blue, alpha);
+        addQuadLine(poseStack, consumer, (float)maxX, (float)maxY, (float)maxZ, (float)minX, (float)maxY, (float)maxZ, lineWidth * 2, red, green, blue, alpha);
+        addQuadLine(poseStack, consumer, (float)minX, (float)maxY, (float)maxZ, (float)minX, (float)maxY, (float)minZ, lineWidth * 2, red, green, blue, alpha);
+
+        // Vertical boundary edges
+        addQuadLine(poseStack, consumer, (float)minX, (float)minY, (float)minZ, (float)minX, (float)maxY, (float)minZ, lineWidth * 2, red, green, blue, alpha);
+        addQuadLine(poseStack, consumer, (float)maxX, (float)minY, (float)minZ, (float)maxX, (float)maxY, (float)minZ, lineWidth * 2, red, green, blue, alpha);
+        addQuadLine(poseStack, consumer, (float)maxX, (float)minY, (float)maxZ, (float)maxX, (float)maxY, (float)maxZ, lineWidth * 2, red, green, blue, alpha);
+        addQuadLine(poseStack, consumer, (float)minX, (float)minY, (float)maxZ, (float)minX, (float)maxY, (float)maxZ, lineWidth * 2, red, green, blue, alpha);
     }
 
     private static void addQuadLine(PoseStack poseStack, VertexConsumer consumer,

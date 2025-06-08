@@ -21,6 +21,7 @@ import net.darkflameproduction.agotmod.AGoTMod;
 public class TownNotificationOverlay {
 
     private static String currentMessage = "";
+    private static String currentOwnership = "";
     private static String currentPopulation = "";
     private static long messageStartTime = 0;
     private static final long DISPLAY_DURATION = 5000; // 5 seconds in milliseconds
@@ -34,20 +35,49 @@ public class TownNotificationOverlay {
     }
 
     /**
-     * Show a town entry message with population
+     * Show a town entry message with house ownership and population
      */
-    public static void showEntryMessage(String townName, int population) {
+    /**
+     * Show a town entry message with house ownership and population
+     */
+    public static void showEntryMessage(String townName, String houseName, int population) {
+        // Add stack trace to see what's calling this
+        System.out.println("DEBUG: TownNotificationOverlay.showEntryMessage called:");
+        System.out.println("  - townName: '" + townName + "'");
+        System.out.println("  - houseName: '" + houseName + "'");
+        System.out.println("  - population: " + population);
+        System.out.println("  Called from:");
+
+        StackTraceElement[] stack = Thread.currentThread().getStackTrace();
+        for (int i = 1; i <= Math.min(5, stack.length - 1); i++) {
+            System.out.println("    " + stack[i].getClassName() + "." + stack[i].getMethodName() + ":" + stack[i].getLineNumber());
+        }
+
         currentMessage = "You Have Entered " + townName;
+        if (houseName != null && !houseName.trim().isEmpty()) {
+            currentOwnership = "Owned By House " + houseName;
+            System.out.println("DEBUG: Set ownership to: '" + currentOwnership + "'");
+        } else {
+            currentOwnership = "Unclaimed Territory";
+            System.out.println("DEBUG: Set ownership to unclaimed (houseName was: '" + houseName + "')");
+        }
         currentPopulation = "Population: " + population;
         messageStartTime = System.currentTimeMillis();
-        System.out.println("DEBUG: Showing town entry message: " + currentMessage + " (" + currentPopulation + ")");
+        System.out.println("DEBUG: Showing town entry message: " + currentMessage + " | " + currentOwnership + " | " + currentPopulation);
+    }
+
+    /**
+     * Show a town entry message with population (backwards compatibility)
+     */
+    public static void showEntryMessage(String townName, int population) {
+        showEntryMessage(townName, null, population);
     }
 
     /**
      * Show a town entry message without population (backwards compatibility)
      */
     public static void showEntryMessage(String townName) {
-        showEntryMessage(townName, 0);
+        showEntryMessage(townName, null, 0);
     }
 
     /**
@@ -55,6 +85,7 @@ public class TownNotificationOverlay {
      */
     public static void showExitMessage(String townName) {
         currentMessage = "You Have Left " + townName;
+        currentOwnership = ""; // No ownership for exit messages
         currentPopulation = ""; // No population for exit messages
         messageStartTime = System.currentTimeMillis();
         System.out.println("DEBUG: Showing town exit message: " + currentMessage);
@@ -65,6 +96,7 @@ public class TownNotificationOverlay {
      */
     public static void clearMessage() {
         currentMessage = "";
+        currentOwnership = "";
         currentPopulation = "";
         messageStartTime = 0;
     }
@@ -106,6 +138,7 @@ public class TownNotificationOverlay {
         // If alpha is essentially 0, clear the message to prevent flicker
         if (alpha <= 0.01f) {
             currentMessage = "";
+            currentOwnership = "";
             currentPopulation = "";
             return;
         }
@@ -113,6 +146,7 @@ public class TownNotificationOverlay {
         // Check if message should still be displayed (with a small buffer)
         if (elapsed >= DISPLAY_DURATION + 50) { // Add 50ms buffer
             currentMessage = "";
+            currentOwnership = "";
             currentPopulation = "";
             return;
         }
@@ -126,15 +160,22 @@ public class TownNotificationOverlay {
 
         // Create the text components
         Component messageComponent = Component.literal(currentMessage);
+        Component ownershipComponent = currentOwnership.isEmpty() ? null : Component.literal(currentOwnership);
         Component populationComponent = currentPopulation.isEmpty() ? null : Component.literal(currentPopulation);
         Font font = mc.font;
 
         // Calculate text dimensions
         int messageWidth = font.width(messageComponent);
+        int ownershipWidth = ownershipComponent != null ? font.width(ownershipComponent) : 0;
         int populationWidth = populationComponent != null ? font.width(populationComponent) : 0;
-        int maxWidth = Math.max(messageWidth, populationWidth);
+        int maxWidth = Math.max(messageWidth, Math.max(ownershipWidth, populationWidth));
         int textHeight = font.lineHeight;
-        int totalHeight = populationComponent != null ? textHeight * 2 + 2 : textHeight; // 2px spacing between lines
+
+        // Calculate total height based on how many lines we have
+        int lineCount = 1; // Always have the main message
+        if (ownershipComponent != null) lineCount++;
+        if (populationComponent != null) lineCount++;
+        int totalHeight = (textHeight * lineCount) + ((lineCount - 1) * 2); // 2px spacing between lines
 
         // Position at top center of screen
         int x = (screenWidth - maxWidth) / 2;
@@ -175,18 +216,36 @@ public class TownNotificationOverlay {
 
         // Draw the main message (centered)
         int messageX = (screenWidth - messageWidth) / 2;
-        guiGraphics.drawString(font, messageComponent, messageX, y, textColor, false);
+        int currentY = y;
+        guiGraphics.drawString(font, messageComponent, messageX, currentY, textColor, false);
+        currentY += textHeight + 2; // Move to next line with 2px spacing
 
-        // Draw the population text if present (centered, below main message)
+        // Draw the ownership text if present (centered)
+        if (ownershipComponent != null) {
+            int ownershipX = (screenWidth - ownershipWidth) / 2;
+
+            // Different color for ownership - blue for owned, red for unclaimed
+            int ownershipAlpha = Math.max(0, Math.min(255, (int) (255 * alpha)));
+            int ownershipColor;
+            if (currentOwnership.equals("Unclaimed Territory")) {
+                ownershipColor = (ownershipAlpha << 24) | 0xFF6666; // Light red for unclaimed
+            } else {
+                ownershipColor = (ownershipAlpha << 24) | 0x66AAFF; // Light blue for owned
+            }
+
+            guiGraphics.drawString(font, ownershipComponent, ownershipX, currentY, ownershipColor, false);
+            currentY += textHeight + 2; // Move to next line with 2px spacing
+        }
+
+        // Draw the population text if present (centered)
         if (populationComponent != null) {
             int populationX = (screenWidth - populationWidth) / 2;
-            int populationY = y + textHeight + 2; // 2px spacing
 
-            // Population text in slightly smaller alpha for visual hierarchy
-            int populationAlpha = Math.max(0, Math.min(255, (int) (200 * alpha))); // Slightly dimmer
-            int populationColor = (populationAlpha << 24) | 0xFFFFFF;
+            // Population text in green
+            int populationAlpha = Math.max(0, Math.min(255, (int) (255 * alpha)));
+            int populationColor = (populationAlpha << 24) | 0x66FF66; // Light green for population
 
-            guiGraphics.drawString(font, populationComponent, populationX, populationY, populationColor, false);
+            guiGraphics.drawString(font, populationComponent, populationX, currentY, populationColor, false);
         }
 
         // Disable blending

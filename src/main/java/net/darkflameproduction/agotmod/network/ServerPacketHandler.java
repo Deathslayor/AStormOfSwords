@@ -1,9 +1,11 @@
 package net.darkflameproduction.agotmod.network;
 
+import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.block.custom.TownHallBlockEntity;
 import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -52,7 +54,6 @@ public class ServerPacketHandler {
 
                 if (playerBalance < totalCost) {
                     player.sendSystemMessage(Component.literal("Insufficient funds! You need " + totalCost + " coins but only have " + playerBalance + "."));
-                    System.out.println("DEBUG: Transaction failed - insufficient funds. Needed: " + totalCost + ", Has: " + playerBalance);
                     return;
                 }
 
@@ -70,16 +71,156 @@ public class ServerPacketHandler {
                     PacketDistributor.sendToPlayer(player, new CoinBalancePacket(newPlayerBalance));
 
                     player.sendSystemMessage(Component.literal("Transaction completed! Spent " + totalCost + " coins. Remaining balance: " + newPlayerBalance));
-                    System.out.println("DEBUG: Transaction completed for " + packet.grocerName() + " - Cost: " + totalCost + ", Player balance: " + newPlayerBalance);
                 } else {
                     player.sendSystemMessage(Component.literal("Transaction failed - insufficient items!"));
-                    System.out.println("DEBUG: Transaction failed for " + packet.grocerName());
                 }
             } else {
                 player.sendSystemMessage(Component.literal("Grocer not found!"));
-                System.out.println("DEBUG: Grocer not found: " + packet.grocerName());
             }
         });
+    }
+
+    public static void handleRequestOwnedTowns(RequestOwnedTownsPacket packet, IPayloadContext context) {
+        context.enqueueWork(() -> {
+            if (context.player() instanceof ServerPlayer serverPlayer) {
+                // Find all town halls claimed by this player's UUID
+                java.util.List<SyncOwnedTownsPacket.TownInfo> ownedTowns = new java.util.ArrayList<>();
+                ServerLevel level = serverPlayer.serverLevel();
+
+                // Search within the player's view distance for claimed town halls
+                int viewDistance = level.getServer().getPlayerList().getViewDistance();
+                net.minecraft.world.level.ChunkPos playerChunkPos = new net.minecraft.world.level.ChunkPos(serverPlayer.blockPosition());
+
+                for (int chunkX = playerChunkPos.x - viewDistance; chunkX <= playerChunkPos.x + viewDistance; chunkX++) {
+                    for (int chunkZ = playerChunkPos.z - viewDistance; chunkZ <= playerChunkPos.z + viewDistance; chunkZ++) {
+                        // Only check loaded chunks
+                        if (level.getChunkSource().hasChunk(chunkX, chunkZ)) {
+                            net.minecraft.world.level.chunk.LevelChunk chunk = level.getChunk(chunkX, chunkZ);
+
+                            // Check all block entities in this chunk
+                            for (net.minecraft.world.level.block.entity.BlockEntity blockEntity : chunk.getBlockEntities().values()) {
+                                if (blockEntity instanceof TownHallBlockEntity townHall) {
+                                    if (townHall.isClaimed() && serverPlayer.getUUID().equals(townHall.getClaimedByPlayerUUID())) {
+                                        ownedTowns.add(new SyncOwnedTownsPacket.TownInfo(
+                                                townHall.getTownName(),
+                                                townHall.getCitizenCount()
+                                        ));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // Sort by population (largest first)
+                ownedTowns.sort((a, b) -> Integer.compare(b.population(), a.population()));
+
+                // Send the data to the client
+                PacketDistributor.sendToPlayer(serverPlayer, new SyncOwnedTownsPacket(ownedTowns));
+            }
+        });
+    }
+
+    // Add this method to ServerPacketHandler
+    public static void handleCheckHouseName(CheckHouseNamePacket packet, IPayloadContext context) {
+        context.enqueueWork(() -> {
+            if (context.player() instanceof ServerPlayer serverPlayer) {
+                String proposedName = packet.proposedHouseName().trim();
+
+                // Get the player's current house name
+                String currentHouseName = getPlayerHouseName(serverPlayer);
+
+                // If they're trying to set the same name they already have, allow it
+                if (proposedName.equals(currentHouseName)) {
+                    PacketDistributor.sendToPlayer(serverPlayer,
+                            new HouseNameValidationPacket(true, "House name unchanged"));
+                    return;
+                }
+
+                // Check if the proposed name is already taken by another player
+                boolean isAvailable = isHouseNameAvailable(proposedName, serverPlayer);
+
+                String message;
+                if (isAvailable) {
+                    message = "House name is available";
+                } else {
+                    message = "House name '" + proposedName + "' is already taken by another player";
+                }
+
+                PacketDistributor.sendToPlayer(serverPlayer,
+                        new HouseNameValidationPacket(isAvailable, message));
+            }
+        });
+    }
+
+    // Updated isHouseNameAvailable method
+    public static boolean isHouseNameAvailable(String houseName, ServerPlayer requestingPlayer) {
+        if (houseName == null || houseName.trim().isEmpty()) {
+            return false;
+        }
+
+        String trimmedName = houseName.trim();
+
+        // Check all online players
+        for (ServerPlayer player : requestingPlayer.getServer().getPlayerList().getPlayers()) {
+            if (player.equals(requestingPlayer)) {
+                continue; // Skip the requesting player
+            }
+
+            String playerHouseName = getPlayerHouseName(player);
+            if (trimmedName.equalsIgnoreCase(playerHouseName)) {
+                return false; // Name is taken
+            }
+        }
+
+        // Check offline players by scanning saved player data
+        try {
+            java.nio.file.Path worldPath = requestingPlayer.getServer().getWorldPath(net.minecraft.world.level.storage.LevelResource.ROOT);
+            java.nio.file.Path playersDir = worldPath.resolve("playerdata");
+
+            if (java.nio.file.Files.exists(playersDir) && java.nio.file.Files.isDirectory(playersDir)) {
+                try (java.util.stream.Stream<java.nio.file.Path> playerFiles = java.nio.file.Files.list(playersDir)) {
+                    for (java.nio.file.Path playerFile : playerFiles.collect(java.util.stream.Collectors.toList())) {
+                        if (playerFile.toString().endsWith(".dat")) {
+                            try {
+                                String fileName = playerFile.getFileName().toString().replace(".dat", "");
+                                java.util.UUID playerUUID = java.util.UUID.fromString(fileName);
+
+                                // Skip the requesting player
+                                if (playerUUID.equals(requestingPlayer.getUUID())) {
+                                    continue;
+                                }
+
+                                // Load the player's NBT data
+                                net.minecraft.nbt.CompoundTag playerData = net.minecraft.nbt.NbtIo.readCompressed(
+                                        playerFile, net.minecraft.nbt.NbtAccounter.unlimitedHeap());
+
+                                if (playerData.contains(AGoTMod.MOD_ID + ".house")) {
+                                    net.minecraft.nbt.CompoundTag houseTag = playerData.getCompound(AGoTMod.MOD_ID + ".house");
+                                    if (houseTag.contains("house_name")) {
+                                        String savedHouseName = houseTag.getString("house_name");
+                                        if (trimmedName.equalsIgnoreCase(savedHouseName)) {
+                                            return false; // Name is taken by offline player
+                                        }
+                                    }
+                                }
+
+                            } catch (IllegalArgumentException e) {
+                                // Skip files that don't have valid UUID names
+                                continue;
+                            } catch (Exception e) {
+                                // Skip files that can't be processed
+                                continue;
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            // Error checking offline players - continue with online check result
+        }
+
+        return true; // Name is available
     }
 
     public static void handleUpdateTownName(UpdateTownNamePacket packet, IPayloadContext context) {
@@ -106,9 +247,6 @@ public class ServerPacketHandler {
                             String oldName = townHallBE.getTownName();
                             townHallBE.setTownName(sanitizedName);
 
-                            System.out.println("DEBUG: Player " + serverPlayer.getName().getString() +
-                                    " renamed town at " + pos + " from '" + oldName + "' to '" + sanitizedName + "'");
-
                             // Send updated data to all nearby players
                             level.players().forEach(player -> {
                                 if (player instanceof ServerPlayer nearbyPlayer) {
@@ -117,23 +255,94 @@ public class ServerPacketHandler {
                                         PacketDistributor.sendToPlayer(nearbyPlayer,
                                                 new TownHallDataPacket(pos, townHallBE.getBedCount(),
                                                         townHallBE.getCitizenCount(), townHallBE.getCurrentScanRadius(),
-                                                        townHallBE.getTownName()));
+                                                        townHallBE.getTownName(), townHallBE.isClaimed(), townHallBE.getClaimedByHouse()));
                                     }
                                 }
                             });
 
                         } else {
-                            System.out.println("DEBUG: Player " + serverPlayer.getName().getString() +
-                                    " tried to rename town at " + pos + " but was too far away (distance: " + Math.sqrt(distance) + ")");
+                            serverPlayer.sendSystemMessage(Component.literal("You must be closer to the town hall to rename it."));
                         }
                     } else {
-                        System.out.println("DEBUG: Block at " + pos + " is not a Town Hall block entity");
+                        serverPlayer.sendSystemMessage(Component.literal("Block is not a Town Hall."));
                     }
                 } else {
-                    System.out.println("DEBUG: Block position " + pos + " is not loaded");
+                    serverPlayer.sendSystemMessage(Component.literal("Location is not loaded."));
                 }
             }
         });
+    }
+
+    public static void handleClaimTownHall(ClaimTownHallPacket packet, IPayloadContext context) {
+        context.enqueueWork(() -> {
+            if (context.player() instanceof ServerPlayer serverPlayer) {
+                Level level = serverPlayer.level();
+                BlockPos pos = packet.pos();
+
+                // Validate the block position and get the block entity
+                if (level.isLoaded(pos)) {
+                    BlockEntity blockEntity = level.getBlockEntity(pos);
+
+                    if (blockEntity instanceof TownHallBlockEntity townHallBE) {
+                        // Check if player is close enough to claim (within 16 blocks)
+                        double distance = serverPlayer.distanceToSqr(pos.getX(), pos.getY(), pos.getZ());
+                        if (distance <= 16 * 16) {
+
+                            // Check if town hall is already claimed
+                            if (townHallBE.isClaimed()) {
+                                serverPlayer.sendSystemMessage(Component.literal("This town is already claimed by " + townHallBE.getClaimedByHouse()));
+                                return;
+                            }
+
+                            // Get player's house name
+                            String playerHouseName = getPlayerHouseName(serverPlayer);
+                            if (playerHouseName.isEmpty()) {
+                                serverPlayer.sendSystemMessage(Component.literal("You must set your house name before claiming a town!"));
+                                return;
+                            }
+
+                            // Attempt to claim the town hall with player UUID
+                            boolean success = townHallBE.claimTownHall(playerHouseName, serverPlayer.getUUID());
+                            if (success) {
+                                serverPlayer.sendSystemMessage(Component.literal("Successfully claimed " + townHallBE.getTownName() + " for House " + playerHouseName + "!"));
+
+                                // Send updated data to all nearby players
+                                level.players().forEach(player -> {
+                                    if (player instanceof ServerPlayer nearbyPlayer) {
+                                        double playerDistance = nearbyPlayer.distanceToSqr(pos.getX(), pos.getY(), pos.getZ());
+                                        if (playerDistance < 64 * 64) { // Within 64 blocks for GUI updates
+                                            PacketDistributor.sendToPlayer(nearbyPlayer,
+                                                    new TownHallDataPacket(pos, townHallBE.getBedCount(),
+                                                            townHallBE.getCitizenCount(), townHallBE.getCurrentScanRadius(),
+                                                            townHallBE.getTownName(), townHallBE.isClaimed(), townHallBE.getClaimedByHouse()));
+                                        }
+                                    }
+                                });
+
+                                System.out.println("DEBUG: Player " + serverPlayer.getName().getString() +
+                                        " claimed town '" + townHallBE.getTownName() + "' at " + pos + " for House " + playerHouseName);
+                            } else {
+                                serverPlayer.sendSystemMessage(Component.literal("Failed to claim town hall."));
+                            }
+
+                        } else {
+                            serverPlayer.sendSystemMessage(Component.literal("You must be closer to the town hall to claim it."));
+                        }
+                    } else {
+                        serverPlayer.sendSystemMessage(Component.literal("Block is not a Town Hall."));
+                    }
+                } else {
+                    serverPlayer.sendSystemMessage(Component.literal("Location is not loaded."));
+                }
+            }
+        });
+    }
+
+    private static String getPlayerHouseName(ServerPlayer player) {
+        if (player.getPersistentData().contains("agotmod.house")) {
+            return player.getPersistentData().getCompound("agotmod.house").getString("house_name");
+        }
+        return "";
     }
 
     private static long calculateTotalCost(Map<String, Integer> itemsToSubtract) {
@@ -165,7 +374,6 @@ public class ServerPacketHandler {
             int requestedAmount = entry.getValue();
 
             if (!grocer.getGrocerSystem().hasDigitalItem(itemKey, requestedAmount)) {
-                System.out.println("DEBUG: Insufficient " + itemKey + " (requested: " + requestedAmount + ")");
                 return false;
             }
         }
@@ -189,13 +397,11 @@ public class ServerPacketHandler {
         // Get the item from the registry
         ResourceLocation itemLocation = ResourceLocation.tryParse(itemKey);
         if (itemLocation == null) {
-            System.out.println("DEBUG: Invalid item key: " + itemKey);
             return;
         }
 
         Item item = BuiltInRegistries.ITEM.getValue(itemLocation);
         if (item == null || item == Items.AIR) {
-            System.out.println("DEBUG: Item not found or is air: " + itemKey);
             return;
         }
 
@@ -209,8 +415,6 @@ public class ServerPacketHandler {
         int maxStackSize = item.getDefaultMaxStackSize();
         int fullStacks = amount / maxStackSize;
         int remainder = amount % maxStackSize;
-
-        System.out.println("DEBUG: Spawning " + amount + " of " + itemKey + " at player location (" + x + ", " + y + ", " + z + ")");
 
         // Spawn full stacks
         for (int i = 0; i < fullStacks; i++) {

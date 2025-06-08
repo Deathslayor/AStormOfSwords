@@ -6,6 +6,7 @@ import net.darkflameproduction.agotmod.client.ModAttachments;
 import net.darkflameproduction.agotmod.datagen.ModDimensionProvider;
 import net.darkflameproduction.agotmod.gui.CustomGuiScreen;
 import net.darkflameproduction.agotmod.init.ModMenuTypes;
+import net.darkflameproduction.agotmod.item.custom.BannerPatterns;
 import net.darkflameproduction.agotmod.network.ClientPacketHandler;
 import net.darkflameproduction.agotmod.network.OpenGrocerInventoryPacket;
 import net.neoforged.api.distmarker.Dist;
@@ -70,6 +71,10 @@ public class AGoTMod {
         ModBLocks.register(modEventBus);
         ModItems.register(modEventBus);
         ModMenuTypes.register(modEventBus);
+
+        // Register banner patterns
+        BannerPatterns.register(modEventBus);
+
         modEventBus.addListener(this::commonSetup);
         NeoForge.EVENT_BUS.register(this);
         // REMOVE THIS LINE: modEventBus.addListener(this::registerPayloads);

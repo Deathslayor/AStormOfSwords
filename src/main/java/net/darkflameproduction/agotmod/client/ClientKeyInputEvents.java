@@ -17,29 +17,15 @@ public class ClientKeyInputEvents {
     public static void onKeyInput(InputEvent.Key event) {
         Minecraft minecraft = Minecraft.getInstance();
 
-        // Only process if no other screen is open and the player exists
         if (minecraft.screen == null && minecraft.player != null) {
-            // Log the current key state for debugging
-            AGoTMod.LOGGER.debug("OpenCustomGUI isDown: {}", KeyBindings.INSTANCE.OpenCustomGUI.isDown());
-
-            // Method 1: Using isDown with press detection
             if (KeyBindings.INSTANCE.OpenCustomGUI.isDown()) {
                 if (!keyWasDown) {
-                    AGoTMod.LOGGER.info("M key pressed - opening GUI");
                     minecraft.setScreen(new CustomGuiScreen(minecraft));
                 }
                 keyWasDown = true;
             } else {
                 keyWasDown = false;
             }
-
-            // Method 2: Using consumeClick (alternative approach)
-            /*
-            if (KeyBindings.INSTANCE.OpenCustomGUI.consumeClick()) {
-                AGoTMod.LOGGER.info("M key clicked - opening GUI");
-                minecraft.setScreen(new CustomGuiScreen());
-            }
-            */
         }
     }
 }

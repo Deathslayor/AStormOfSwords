@@ -36,14 +36,16 @@ public class TownHallBlock extends Block implements EntityBlock {
                     PacketDistributor.sendToPlayer(serverPlayer,
                             new OpenTownHallMenuPacket(pos));
 
-                    // Send current data to the player with dynamic radius and town name
+                    // Send current data to the player with dynamic radius, town name, and claim info
                     PacketDistributor.sendToPlayer(serverPlayer,
                             new net.darkflameproduction.agotmod.network.TownHallDataPacket(
                                     pos,
                                     townHallBE.getBedCount(),
                                     townHallBE.getCitizenCount(),
                                     townHallBE.getCurrentScanRadius(),
-                                    townHallBE.getTownName() // Added the town name parameter
+                                    townHallBE.getTownName(),
+                                    townHallBE.isClaimed(),
+                                    townHallBE.getClaimedByHouse()
                             ));
                 }
             }

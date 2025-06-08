@@ -27,6 +27,7 @@ import net.darkflameproduction.agotmod.armor.custom.night_watch.NightsWatchLeath
 import net.darkflameproduction.agotmod.armor.custom.night_watch.NightsWatchEliteArmorItem;
 import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.darkflameproduction.agotmod.item.ModItems;
+import net.darkflameproduction.agotmod.item.custom.BannerPatterns;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.BannerPatternItem;
@@ -994,6 +995,12 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.WEIRWOOD_HANGING_SIGN);
 
 
+        // ---------------------------(BANNERS)--------------------------- //
+
+        bannerPatternItem(BannerPatterns.TARGARYEN_BANNER_PATTERN);
+
+
+
 
     }
 
@@ -1261,6 +1268,11 @@ public class ModItemModelProvider extends ItemModelProvider {
                 mcLoc("item/template_spawn_egg"))
                 .texture("layer0", modLoc("item/spawn_egg"))
                 .texture("layer1", modLoc("item/spawn_egg_overlay"));
+    }
+    private @NotNull ItemModelBuilder bannerPatternItem(DeferredHolder<Item, BannerPatternItem> item) {
+        return withExistingParent(item.getId().getPath(),
+                mcLoc("item/generated")).texture("layer0",
+                modLoc("item/" + item.getId().getPath())); // Uses your custom texture
     }
 
 }

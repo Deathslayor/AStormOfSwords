@@ -3,6 +3,7 @@ package net.darkflameproduction.agotmod.datagen;
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.darkflameproduction.agotmod.item.ModItems;
+import net.darkflameproduction.agotmod.item.custom.BannerPatterns;
 import net.darkflameproduction.agotmod.util.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -334,6 +335,11 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 // Grains
                 .add(ModItems.CORN.get().asItem());
 
+
+        this.tag(ItemTags.BANNERS)
+                .add(BannerPatterns.TARGARYEN_BANNER_PATTERN.get())
+
+                ;
 
 
 

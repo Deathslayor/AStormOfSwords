@@ -3,7 +3,6 @@ package net.darkflameproduction.agotmod.client.tracker;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import net.darkflameproduction.agotmod.client.overlay.TownNotificationOverlay;
 import net.darkflameproduction.agotmod.client.renderer.TownHallDebugRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -84,10 +83,6 @@ public class TownTracker {
         // Get town hall data from the debug renderer
         Map<BlockPos, TownHallDebugRenderer.TownHallData> townData = getTownHallData();
 
-        // Debug: Log player position and towns being checked
-        if (tickCounter % 40 == 0) { // Every 2 seconds
-        }
-
         for (Map.Entry<BlockPos, TownHallDebugRenderer.TownHallData> entry : townData.entrySet()) {
             BlockPos townHallPos = entry.getKey();
             TownHallDebugRenderer.TownHallData data = entry.getValue();
@@ -95,10 +90,6 @@ public class TownTracker {
             if (isPlayerInTown(playerPos, townHallPos, data.radius)) {
                 townInside = townHallPos;
                 townNameInside = townNames.getOrDefault(townHallPos, "Unknown Town");
-
-                // Debug: Log when player is detected in town
-                if (tickCounter % 40 == 0) {
-                }
                 break; // Player can only be in one town at a time (first one found)
             }
         }
@@ -116,59 +107,21 @@ public class TownTracker {
             townChanged = true;
         }
 
-        // Debug: Log town status changes
         if (townChanged) {
-
-        }
-
-        if (townChanged) {
-            if (wasInTown && !isInTown) {
-                // Player left a town - always show exit message immediately
-                TownNotificationOverlay.showExitMessage(currentTownName);
-            }
-
-            if (!wasInTown && isInTown) {
-                // Player entered a town from outside - show entry message with population
-                int population = townPopulations.getOrDefault(townInside, 0);
-                TownNotificationOverlay.showEntryMessage(townNameInside, population);
-            }
-
-            if (wasInTown && isInTown && townChanged) {
-                TownNotificationOverlay.showExitMessage(currentTownName);
-
-                // Schedule entry message after a delay with population
-                int population = townPopulations.getOrDefault(townInside, 0);
-                scheduleDelayedEntryMessage(townNameInside, population);
-            }
-
-            // Update current town status
+            // Update current town status but don't show notifications
+            // The ClientTownAreaManager handles notifications now
             currentTownPos = townInside;
             currentTownName = townNameInside;
-        }
-    }
 
-    /**
-     * Schedule an entry message after a delay to avoid overlapping with exit messages
-     */
-    private static void scheduleDelayedEntryMessage(String townName, int population) {
-        // Use a simple timer to delay the entry message
-        new Thread(() -> {
-            try {
-                Thread.sleep(1000); // 1 second delay
-                if (!TownNotificationOverlay.isShowingMessage()) {
-                    TownNotificationOverlay.showEntryMessage(townName, population);
-                }
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
+            // Optional: Log town changes for debugging
+            if (wasInTown && !isInTown) {
+                System.out.println("DEBUG: TownTracker - Player left town: " + currentTownName);
+            } else if (!wasInTown && isInTown) {
+                System.out.println("DEBUG: TownTracker - Player entered town: " + townNameInside);
+            } else if (wasInTown && isInTown && townChanged) {
+                System.out.println("DEBUG: TownTracker - Player moved from " + currentTownName + " to " + townNameInside);
             }
-        }).start();
-    }
-
-    /**
-     * Schedule an entry message after a delay (backwards compatibility)
-     */
-    private static void scheduleDelayedEntryMessage(String townName) {
-        scheduleDelayedEntryMessage(townName, 0);
+        }
     }
 
     /**
@@ -179,26 +132,14 @@ public class TownTracker {
         int dy = Math.abs(playerPos.getY() - townHallPos.getY());
         int dz = Math.abs(playerPos.getZ() - townHallPos.getZ());
 
-        boolean inTown = dx <= radius && dy <= SCAN_HEIGHT && dz <= radius;
-
-        // Debug boundary checking occasionally
-        if (tickCounter % 100 == 0 && (dx <= radius + 5 && dz <= radius + 5)) { // Log when close to boundary
-        }
-
-        return inTown;
+        return dx <= radius && dy <= SCAN_HEIGHT && dz <= radius;
     }
 
     /**
      * Get town hall data from the debug renderer
      */
     private static Map<BlockPos, TownHallDebugRenderer.TownHallData> getTownHallData() {
-        Map<BlockPos, TownHallDebugRenderer.TownHallData> data = TownHallDebugRenderer.getTownHallDataMap();
-
-        // Debug: Log if no town data is available
-        if (data.isEmpty() && tickCounter % 100 == 0) {
-        }
-
-        return data;
+        return TownHallDebugRenderer.getTownHallDataMap();
     }
 
     /**
@@ -212,7 +153,6 @@ public class TownTracker {
         if (!name.equals(oldName)) {
             saveTownNames();
         }
-
     }
 
     /**
@@ -226,7 +166,6 @@ public class TownTracker {
         if (oldPopulation == null || !oldPopulation.equals(population)) {
             saveTownNames(); // Save both names and populations
         }
-
     }
 
     /**
@@ -243,7 +182,6 @@ public class TownTracker {
         if (!name.equals(oldName) || oldPopulation == null || !oldPopulation.equals(population)) {
             saveTownNames();
         }
-
     }
 
     /**
@@ -261,17 +199,23 @@ public class TownTracker {
         }
     }
 
-
+    /**
+     * Get the current town name (for external access)
+     */
     public static String getCurrentTownName() {
         return currentTownName;
     }
 
-
+    /**
+     * Check if player is currently in a town (for external access)
+     */
     public static boolean isInTown() {
         return currentTownPos != null;
     }
 
-
+    /**
+     * Save town names and populations to file
+     */
     private static void saveTownNames() {
         try {
             Path gameDir = Paths.get(".");
@@ -292,8 +236,10 @@ public class TownTracker {
                 gson.toJson(serializableData, writer);
             }
 
+            System.out.println("DEBUG: TownTracker saved " + townNames.size() + " towns to file");
 
         } catch (IOException e) {
+            System.err.println("ERROR: TownTracker failed to save town data: " + e.getMessage());
         }
     }
 
@@ -306,6 +252,7 @@ public class TownTracker {
             Path saveFile = gameDir.resolve(TOWN_NAMES_FILE);
 
             if (!Files.exists(saveFile)) {
+                System.out.println("DEBUG: TownTracker - No saved town names file found");
                 return;
             }
 
@@ -323,11 +270,12 @@ public class TownTracker {
                         townPopulations.put(data.getBlockPos(), data.population);
                     }
 
+                    System.out.println("DEBUG: TownTracker loaded " + townNames.size() + " towns from file");
                 }
             }
 
         } catch (Exception e) {
-
+            System.err.println("ERROR: TownTracker failed to load town data: " + e.getMessage());
         }
     }
 
@@ -338,6 +286,9 @@ public class TownTracker {
     public static void onWorldLoad(LevelEvent.Load event) {
         if (event.getLevel().isClientSide()) {
             loadTownNames();
+            // Reset current state
+            currentTownPos = null;
+            currentTownName = "";
         }
     }
 
@@ -348,6 +299,9 @@ public class TownTracker {
     public static void onWorldUnload(LevelEvent.Unload event) {
         if (event.getLevel().isClientSide()) {
             saveTownNames();
+            // Reset state
+            currentTownPos = null;
+            currentTownName = "";
         }
     }
 }

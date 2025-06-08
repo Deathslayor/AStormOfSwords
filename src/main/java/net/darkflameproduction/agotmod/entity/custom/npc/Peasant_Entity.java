@@ -53,8 +53,8 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     public static final String AGE_CHILD = "child";
 
     // Aging constants
-    private static final int AVERAGE_AGING_TICKS = 240000; // Average time for child to become adult
-    private static final int AGING_VARIANCE = 48000; // +/- variance (20% of average)
+    private static final int AVERAGE_AGING_TICKS = 72000; // Average time for child to become adult
+    private static final int AGING_VARIANCE = 24000; // +/- variance (20% of average)
 
     // Entity data accessors
     private static final EntityDataAccessor<Boolean> IS_SLEEPING = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.BOOLEAN);

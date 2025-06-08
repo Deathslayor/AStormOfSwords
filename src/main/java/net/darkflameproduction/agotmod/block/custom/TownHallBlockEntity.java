@@ -3,26 +3,32 @@ package net.darkflameproduction.agotmod.block.custom;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtIo;
+import net.minecraft.nbt.NbtAccounter;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.LevelResource;
 import net.darkflameproduction.agotmod.entity.ModBlockEntities;
 import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.darkflameproduction.agotmod.entity.ModEntities;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.SimpleBedWarningSystem;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 public class TownHallBlockEntity extends BlockEntity {
 
     private static final int SCAN_TIME = 10000; // Time of day to perform scan
     private static final int CHILD_SPAWN_TIME = 18000; // Time of day to spawn children (midnight)
-    private static final int SCAN_HEIGHT = 64; // Vertical radius (up and down)
+    private static final int SCAN_HEIGHT = 384; // Vertical radius (up and down)
     private static final int REGISTER_INTERVAL = 100; // Ticks between registration updates (5 seconds)
     private static final int CITIZEN_CHECK_INTERVAL = 200; // Check for citizens every 10 seconds
     private static final double CHILD_SPAWN_CHANCE = 0.05; // 5% chance per unclaimed bed
@@ -44,6 +50,10 @@ public class TownHallBlockEntity extends BlockEntity {
     private boolean hasScannedToday = false;
     private int ticksSinceLastRegister = 0;
     private int ticksSinceLastCitizenCheck = 0;
+
+    // Updated fields for dynamic house name system
+    private boolean isClaimed = false;
+    private UUID claimedByPlayerUUID = null; // NEW: Track which player claimed it
 
     // Cache for citizen last names (refreshed during citizen checks)
     private List<String> citizenLastNames = new ArrayList<>();
@@ -75,6 +85,88 @@ public class TownHallBlockEntity extends BlockEntity {
      */
     public int getCurrentScanHeight() {
         return SCAN_HEIGHT;
+    }
+
+    public boolean isClaimed() {
+        return isClaimed;
+    }
+
+    // Updated getClaimedByHouse to be dynamic
+    public String getClaimedByHouse() {
+        if (!isClaimed || claimedByPlayerUUID == null) {
+            return "";
+        }
+
+        // Get the current house name of the claiming player
+        if (level != null && level.getServer() != null) {
+            ServerPlayer player = level.getServer().getPlayerList().getPlayer(claimedByPlayerUUID);
+            if (player != null) {
+                // Player is online - get their current house name
+                return getPlayerHouseName(player);
+            } else {
+                // Player is offline - load their data from file
+                return getOfflinePlayerHouseName(claimedByPlayerUUID);
+            }
+        }
+
+        return ""; // Fallback
+    }
+
+    // Add getter for player UUID
+    public UUID getClaimedByPlayerUUID() {
+        return claimedByPlayerUUID;
+    }
+
+    // Updated claimTownHall method
+    public boolean claimTownHall(String houseName, UUID playerUUID) {
+        if (!isClaimed && houseName != null && !houseName.trim().isEmpty() && playerUUID != null) {
+            this.claimedByPlayerUUID = playerUUID;
+            this.isClaimed = true;
+            setChanged();
+
+            // Send updated data to nearby players
+            if (level != null) {
+                sendDataToClients(level);
+            }
+
+            return true;
+        }
+        return false;
+    }
+
+    // Helper method to get house name from online player
+    private String getPlayerHouseName(ServerPlayer player) {
+        if (player.getPersistentData().contains("agotmod.house")) {
+            CompoundTag houseTag = player.getPersistentData().getCompound("agotmod.house");
+            if (houseTag.contains("house_name")) {
+                return houseTag.getString("house_name");
+            }
+        }
+        return "";
+    }
+
+    // Helper method to get house name from offline player
+    private String getOfflinePlayerHouseName(UUID playerUUID) {
+        try {
+            Path worldPath = level.getServer().getWorldPath(LevelResource.ROOT);
+            Path playerFile = worldPath.resolve("playerdata").resolve(playerUUID.toString() + ".dat");
+
+            if (Files.exists(playerFile)) {
+                CompoundTag playerData = NbtIo.readCompressed(
+                        playerFile, NbtAccounter.unlimitedHeap());
+
+                if (playerData.contains("agotmod.house")) {
+                    CompoundTag houseTag = playerData.getCompound("agotmod.house");
+                    if (houseTag.contains("house_name")) {
+                        return houseTag.getString("house_name");
+                    }
+                }
+            }
+        } catch (Exception e) {
+            // Failed to load offline player house name - return empty string
+        }
+
+        return "";
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, TownHallBlockEntity blockEntity) {
@@ -399,7 +491,7 @@ public class TownHallBlockEntity extends BlockEntity {
         int renderDistance = level.getServer().getPlayerList().getViewDistance() * 16; // Convert chunks to blocks
 
         level.players().forEach(player -> {
-            if (player instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
+            if (player instanceof ServerPlayer serverPlayer) {
                 double distance = serverPlayer.distanceToSqr(this.worldPosition.getX(), this.worldPosition.getY(), this.worldPosition.getZ());
                 if (distance < renderDistance * renderDistance) {
                     net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
@@ -412,11 +504,11 @@ public class TownHallBlockEntity extends BlockEntity {
     private void sendDataToClients(Level level) {
         // Send data packet to all nearby players for GUI updates (close range)
         level.players().forEach(player -> {
-            if (player instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
+            if (player instanceof ServerPlayer serverPlayer) {
                 double distance = serverPlayer.distanceToSqr(this.worldPosition.getX(), this.worldPosition.getY(), this.worldPosition.getZ());
                 if (distance < 64 * 64) { // Within 64 blocks for GUI
                     net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
-                            new net.darkflameproduction.agotmod.network.TownHallDataPacket(this.worldPosition, this.bedCount, this.citizenCount, getCurrentScanRadius(), this.townName));
+                            new net.darkflameproduction.agotmod.network.TownHallDataPacket(this.worldPosition, this.bedCount, this.citizenCount, getCurrentScanRadius(), this.townName, this.isClaimed, this.getClaimedByHouse()));
                 }
             }
         });
@@ -430,11 +522,11 @@ public class TownHallBlockEntity extends BlockEntity {
         int renderDistance = level.getServer().getPlayerList().getViewDistance() * 16; // Convert chunks to blocks
 
         level.players().forEach(player -> {
-            if (player instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
+            if (player instanceof ServerPlayer serverPlayer) {
                 double distance = serverPlayer.distanceToSqr(this.worldPosition.getX(), this.worldPosition.getY(), this.worldPosition.getZ());
                 if (distance < renderDistance * renderDistance) { // Within render distance
                     net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
-                            new net.darkflameproduction.agotmod.network.TownHallDataPacket(this.worldPosition, this.bedCount, this.citizenCount, getCurrentScanRadius(), this.townName));
+                            new net.darkflameproduction.agotmod.network.TownHallDataPacket(this.worldPosition, this.bedCount, this.citizenCount, getCurrentScanRadius(), this.townName, this.isClaimed, this.getClaimedByHouse()));
                 }
             }
         });
@@ -482,7 +574,7 @@ public class TownHallBlockEntity extends BlockEntity {
         if (!level.isClientSide()) {
             // Unregister this Town Hall from clients
             level.players().forEach(player -> {
-                if (player instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
+                if (player instanceof ServerPlayer serverPlayer) {
                     int renderDistance = level.getServer().getPlayerList().getViewDistance() * 16;
                     double distance = serverPlayer.distanceToSqr(this.worldPosition.getX(), this.worldPosition.getY(), this.worldPosition.getZ());
                     if (distance < renderDistance * renderDistance) {
@@ -494,14 +586,20 @@ public class TownHallBlockEntity extends BlockEntity {
         }
     }
 
+    // Updated saveAdditional method
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
         tag.putInt("BedCount", bedCount);
         tag.putInt("CitizenCount", citizenCount);
         tag.putString("TownName", townName);
+        // Don't save claimedByHouse anymore - it's dynamic
+        tag.putBoolean("IsClaimed", isClaimed);
+        if (claimedByPlayerUUID != null) {
+            tag.putUUID("ClaimedByPlayerUUID", claimedByPlayerUUID);
+        }
         tag.putLong("LastScanDay", lastScanDay);
-        tag.putLong("LastChildSpawnDay", lastChildSpawnDay); // Save child spawn day
+        tag.putLong("LastChildSpawnDay", lastChildSpawnDay);
         tag.putBoolean("HasScannedToday", hasScannedToday);
         tag.putInt("TicksSinceLastRegister", ticksSinceLastRegister);
         tag.putInt("TicksSinceLastCitizenCheck", ticksSinceLastCitizenCheck);
@@ -515,6 +613,7 @@ public class TownHallBlockEntity extends BlockEntity {
         }
     }
 
+    // Updated loadAdditional method
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
@@ -524,8 +623,13 @@ public class TownHallBlockEntity extends BlockEntity {
         if (townName.isEmpty()) {
             townName = "Unnamed Town";
         }
+        // Don't load claimedByHouse anymore - it's dynamic
+        isClaimed = tag.getBoolean("IsClaimed");
+        if (tag.hasUUID("ClaimedByPlayerUUID")) {
+            claimedByPlayerUUID = tag.getUUID("ClaimedByPlayerUUID");
+        }
         lastScanDay = tag.getLong("LastScanDay");
-        lastChildSpawnDay = tag.getLong("LastChildSpawnDay"); // Load child spawn day
+        lastChildSpawnDay = tag.getLong("LastChildSpawnDay");
         hasScannedToday = tag.getBoolean("HasScannedToday");
         ticksSinceLastRegister = tag.getInt("TicksSinceLastRegister");
         ticksSinceLastCitizenCheck = tag.getInt("TicksSinceLastCitizenCheck");

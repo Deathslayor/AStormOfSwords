@@ -1,4 +1,4 @@
-// 1.21.3	2025-06-07T14:48:09.5834028	Item Models: agotmod
+// 1.21.3	2025-06-08T12:20:10.8638614	Item Models: agotmod
 65c44e6f1f29781252c76032b90c20b3bc8f7b8a assets/agotmod/models/item/alder_button.json
 f0b6afe25a5640838c024d02c663e7c8f821ffd6 assets/agotmod/models/item/alder_door.json
 2af83e95998f18d674056268682572a94f141042 assets/agotmod/models/item/alder_fence.json
@@ -2861,6 +2861,7 @@ e6940e329cff65b551353ea17c4fcb415e003286 assets/agotmod/models/item/sycamore_sta
 ca2147f7a39e89335afcccd37d42b9b53e10c565 assets/agotmod/models/item/sycamore_trapdoor.json
 b9927c8bd59aad6b8f82bf06dc963e586c4fb699 assets/agotmod/models/item/sycamore_wall.json
 460f4a5075ad48b5d849e0b2d733f2347e49919b assets/agotmod/models/item/tansy.json
+39774e26cdf2c23e2c62657d723d5cbc9129708c assets/agotmod/models/item/targaryen_banner_pattern.json
 0130f60445f256d7b5aefe7bb958e0e36b8be32e assets/agotmod/models/item/thenn_bronze_boots.json
 acdae4e4f2a95767939e607cc986a5e9784ba5ed assets/agotmod/models/item/thenn_bronze_chestplate.json
 926bcbb016917140462e8a41bc85db48315d0615 assets/agotmod/models/item/thenn_bronze_helmet.json
