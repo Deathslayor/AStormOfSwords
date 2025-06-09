@@ -10,6 +10,7 @@ import net.darkflameproduction.agotmod.sound.ModSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.blockentity.BannerRenderer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ServerboundClientCommandPacket;
@@ -17,11 +18,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.Stats;
 import net.minecraft.stats.Stat;
 import net.minecraft.stats.StatsCounter;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-
+import java.util.Map;
 
 
 @OnlyIn(Dist.CLIENT)
@@ -289,6 +291,43 @@ public class CustomGuiScreen extends Screen {
     private boolean hasRequestedTowns = false;
     private boolean isValidatingHouseName = false;
     private static CustomGuiScreen currentInstance = null;
+
+    private static String syncedHouseName = "";
+    private static CompoundTag syncedHouseBanner = null;
+
+
+    private static final ResourceLocation BANNER_BASE_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner_base.png");
+
+    // Banner pattern texture locations - these should match your pattern names
+    private static final Map<String, ResourceLocation> BANNER_PATTERN_TEXTURES = createBannerPatternMap();
+
+    private static Map<String, ResourceLocation> createBannerPatternMap() {
+        Map<String, ResourceLocation> map = new java.util.HashMap<>();
+        map.put("base", ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner_base.png"));
+        // Add your custom patterns here based on your texture files
+        map.put("targaryen", ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/targaryen.png"));
+        map.put("stripe_bottom", ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/stripe_bottom.png"));
+        map.put("stripe_top", ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/stripe_top.png"));
+        map.put("stripe_left", ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/stripe_left.png"));
+        map.put("stripe_right", ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/stripe_right.png"));
+        map.put("stripe_center", ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/stripe_center.png"));
+        map.put("stripe_middle", ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/stripe_middle.png"));
+        map.put("cross", ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/cross.png"));
+        map.put("straight_cross", ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/straight_cross.png"));
+        map.put("diagonal_left", ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/diagonal_left.png"));
+        map.put("diagonal_right", ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/diagonal_right.png"));
+        map.put("half_vertical", ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/half_vertical.png"));
+        map.put("half_horizontal", ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/half_horizontal.png"));
+        map.put("half_vertical_right", ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/half_vertical_right.png"));
+        map.put("half_horizontal_bottom", ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/half_horizontal_bottom.png"));
+        map.put("circle", ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/circle.png"));
+        map.put("border", ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/border.png"));
+        map.put("triangle_top", ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/triangle_top.png"));
+        map.put("triangle_bottom", ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/triangle_bottom.png"));
+        return java.util.Collections.unmodifiableMap(map);
+    }
+
 
 
     private int getCategoryUsage(int[] indices) {
@@ -1027,7 +1066,7 @@ public class CustomGuiScreen extends Screen {
                 minecraft.getResourceManager().getResource(mapWidget.getMapId()).isPresent()) {
             mapWidget.render(guiGraphics, mouseX, mouseY, partialTick);
         }
-        
+
     }
 
     private void drawSkillsSection(GuiGraphics guiGraphics, int mouseX, int mouseY, ScreenLayout layout) {
@@ -1792,9 +1831,10 @@ public class CustomGuiScreen extends Screen {
     //House Mechanics
 
     private void drawHouseSection(GuiGraphics guiGraphics, int mouseX, int mouseY, ScreenLayout layout) {
-        int contentStartX = layout.contentX + layout.contentWidth / 8;
+        // Make paper panel larger - extend more towards left and right edges
+        int contentStartX = layout.contentX + layout.contentWidth / 20;  // Much smaller left margin
         int contentStartY = layout.contentY + layout.contentHeight / 16;
-        int contentWidth = layout.contentWidth - (layout.contentWidth / 4);
+        int contentWidth = layout.contentWidth - (layout.contentWidth / 10);  // Much wider panel
         int contentHeight = layout.contentHeight - (layout.contentHeight / 8);
 
         renderPaperPanel(guiGraphics, contentStartX, contentStartY, contentWidth, contentHeight);
@@ -1832,9 +1872,7 @@ public class CustomGuiScreen extends Screen {
                                 removeWidget(saveHouseButton);
                                 houseNameEditBox = null;
                                 saveHouseButton = null;
-                                // Save to player data
                                 saveHouseNameToPlayerData();
-                                // Request towns data for the new house
                                 hasRequestedTowns = false;
                                 playButtonSound();
                             }
@@ -1843,7 +1881,7 @@ public class CustomGuiScreen extends Screen {
                 addWidget(saveHouseButton);
             }
 
-            // Render the widgets on top of everything
+            // Render the widgets
             if (houseNameEditBox != null) {
                 houseNameEditBox.render(guiGraphics, mouseX, mouseY, 0);
             }
@@ -1871,17 +1909,220 @@ public class CustomGuiScreen extends Screen {
                             editHouseButton = null;
                             playButtonSound();
                         }
-                ).bounds(contentStartX + contentWidth - 60, contentStartY + 20, 40, 20).build();
+                ).bounds(contentStartX + contentWidth - 50, contentStartY + 20, 30, 16).build();  // Smaller: 30x16 instead of 40x20
                 addWidget(editHouseButton);
             }
 
-            // Draw owned towns section
-            drawOwnedTownsSection(guiGraphics, contentStartX, contentStartY + 70, contentWidth, contentHeight - 90);
+            // Draw owned towns section - 80% of horizontal area, positioned directly under house name
+            int townsSectionWidth = (int)(contentWidth * 0.8);
+            int townsSectionX = contentStartX + (contentWidth - townsSectionWidth) / 2;  // Center horizontally
+            int houseNameBottomY = contentStartY + 30 + (int)(font.lineHeight * 1.3f);  // Bottom of scaled house name
+            drawOwnedTownsSection(guiGraphics, townsSectionX, houseNameBottomY + 10, townsSectionWidth, contentHeight - (houseNameBottomY + 10 - contentStartY));
 
-            // Render the edit button on top
+            // Render the edit button
             if (editHouseButton != null) {
                 editHouseButton.render(guiGraphics, mouseX, mouseY, 0);
             }
+        }
+
+        // Draw house banners ABOVE everything - positioned inside the panel on left and right sides
+        if (!houseName.isEmpty() && !isEditingHouseName) {
+            // Calculate vertical center of the paper panel
+            int bannerY = contentStartY + (contentHeight - 120) / 2;  // 120 is banner height, center it vertically
+
+            // Left banner - positioned inside the left side of the paper panel
+            drawHouseBanner(guiGraphics, contentStartX + 20, bannerY);
+
+            // Right banner - positioned inside the right side of the paper panel
+            drawHouseBanner(guiGraphics, contentStartX + contentWidth - 80, bannerY);
+        }
+    }
+
+
+    private void drawHouseBanner(GuiGraphics guiGraphics, int x, int y) {
+        if (syncedHouseBanner == null) {
+            AGoTMod.LOGGER.info("Banner rendering: syncedHouseBanner is null");
+            drawNoBannerPlaceholder(guiGraphics, x, y);
+            return;
+        }
+
+        try {
+            AGoTMod.LOGGER.info("Banner rendering: Starting banner render process");
+
+            // Create ItemStack from saved NBT data
+            ItemStack bannerStack = ItemStack.parseOptional(minecraft.level.registryAccess(), syncedHouseBanner);
+
+            if (bannerStack.isEmpty() || !(bannerStack.getItem() instanceof net.minecraft.world.item.BannerItem)) {
+                AGoTMod.LOGGER.error("Banner rendering: Invalid banner stack - isEmpty: {}, isCorrectType: {}",
+                        bannerStack.isEmpty(), bannerStack.getItem() instanceof net.minecraft.world.item.BannerItem);
+                drawErrorBannerPlaceholder(guiGraphics, x, y, "Invalid Banner");
+                return;
+            }
+
+            // Get banner data for rendering
+            net.minecraft.world.item.BannerItem bannerItem = (net.minecraft.world.item.BannerItem) bannerStack.getItem();
+            net.minecraft.world.item.DyeColor baseColor = bannerItem.getColor();
+
+            AGoTMod.LOGGER.info("Banner rendering: Base banner color: {}", baseColor);
+
+            // Get patterns from the banner
+            net.minecraft.world.level.block.entity.BannerPatternLayers patterns =
+                    bannerStack.get(net.minecraft.core.component.DataComponents.BANNER_PATTERNS);
+
+            if (patterns == null) {
+                AGoTMod.LOGGER.info("Banner rendering: No patterns found (patterns is null)");
+            } else {
+                AGoTMod.LOGGER.info("Banner rendering: Found {} pattern layers", patterns.layers().size());
+                for (int i = 0; i < patterns.layers().size(); i++) {
+                    var layer = patterns.layers().get(i);
+                    AGoTMod.LOGGER.info("Banner rendering: Layer {}: pattern '{}' with color '{}'",
+                            i, layer.pattern().value().assetId(), layer.color());
+                }
+            }
+
+            // Set up rendering area - 3x larger
+            int bannerWidth = 60;
+            int bannerHeight = 120;
+
+            // Enable blending for proper layer compositing
+            com.mojang.blaze3d.systems.RenderSystem.enableBlend();
+            com.mojang.blaze3d.systems.RenderSystem.defaultBlendFunc();
+
+            // Save pose state
+            guiGraphics.pose().pushPose();
+
+            // Layer 1: Draw base banner texture with base color
+            AGoTMod.LOGGER.info("Banner rendering: Drawing base layer with color {}", baseColor);
+            drawTextureLayer(guiGraphics, x, y, bannerWidth, bannerHeight, BANNER_BASE_TEXTURE, baseColor);
+
+            // Layer 2+: Apply ALL pattern layers if present (infinite support)
+            if (patterns != null && !patterns.layers().isEmpty()) {
+                AGoTMod.LOGGER.info("Banner rendering: Starting to render {} pattern layers", patterns.layers().size());
+                int layerIndex = 0;
+                for (net.minecraft.world.level.block.entity.BannerPatternLayers.Layer layer : patterns.layers()) {
+                    AGoTMod.LOGGER.info("Banner rendering: Rendering pattern layer {}: {} with color {}",
+                            layerIndex, layer.pattern().value().assetId(), layer.color());
+                    drawPatternLayer(guiGraphics, x, y, bannerWidth, bannerHeight, layer);
+                    layerIndex++;
+                }
+                AGoTMod.LOGGER.info("Banner rendering: Finished rendering all {} pattern layers", layerIndex);
+            } else {
+                AGoTMod.LOGGER.info("Banner rendering: No pattern layers to render");
+            }
+
+            // Restore pose state
+            guiGraphics.pose().popPose();
+
+            // Reset render system state
+            com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+            com.mojang.blaze3d.systems.RenderSystem.disableBlend();
+
+            AGoTMod.LOGGER.info("Banner rendering: Banner rendering completed successfully");
+
+        } catch (Exception e) {
+            AGoTMod.LOGGER.error("Banner rendering: Error rendering house banner", e);
+            drawErrorBannerPlaceholder(guiGraphics, x, y, "Render Error");
+        }
+    }
+
+    // Draw any texture layer with proper Minecraft-style color tinting (like spawn eggs)
+    private void drawTextureLayer(GuiGraphics guiGraphics, int x, int y, int width, int height,
+                                  ResourceLocation texture, net.minecraft.world.item.DyeColor color) {
+
+        AGoTMod.LOGGER.info("Banner rendering: Drawing texture layer - texture: {}, color: {}", texture, color);
+
+        // Get the color value for tinting
+        int colorValue = color.getTextureDiffuseColor();
+
+        AGoTMod.LOGGER.info("Banner rendering: Using color value: 0x{}", Integer.toHexString(colorValue));
+
+        // Reset shader color to white first
+        com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+
+        // Draw the texture layer with proper color tinting using the color parameter
+        // Sample 20x40 area (moved 1 pixel right) but display it at 60x120 size (3x scale)
+        guiGraphics.blit(
+                net.minecraft.client.renderer.RenderType::guiTextured,
+                texture,
+                x, y,                    // destination position
+                1.0f, 0.0f,              // source UV start (moved 1 pixel right)
+                width, height,           // destination size (60x120)
+                20, 40,                  // source texture area (keep original 20x40 sampling)
+                64, 64,                  // source texture size (64x64)
+                colorValue               // This applies the color tint like spawn eggs!
+        );
+
+        AGoTMod.LOGGER.info("Banner rendering: Texture layer drawn with color tinting");
+    }
+
+    // Draw a single pattern layer - supports infinite layers
+    private void drawPatternLayer(GuiGraphics guiGraphics, int x, int y, int width, int height,
+                                  net.minecraft.world.level.block.entity.BannerPatternLayers.Layer layer) {
+
+        // Get pattern resource location
+        net.minecraft.resources.ResourceLocation patternId = layer.pattern().value().assetId();
+        String patternName = patternId.getPath();
+
+        AGoTMod.LOGGER.info("Banner rendering: Pattern layer - patternId: {}, patternName: {}", patternId, patternName);
+
+        // Get the texture for this pattern
+        ResourceLocation patternTexture = BANNER_PATTERN_TEXTURES.get(patternName);
+        if (patternTexture == null) {
+            // Fallback to vanilla patterns if custom pattern not found
+            patternTexture = ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/" + patternName + ".png");
+            AGoTMod.LOGGER.info("Banner rendering: Pattern texture not found in map, using fallback: {}", patternTexture);
+        } else {
+            AGoTMod.LOGGER.info("Banner rendering: Found pattern texture in map: {}", patternTexture);
+        }
+
+        // Draw this pattern layer with its specific color using the same method as base
+        drawTextureLayer(guiGraphics, x, y, width, height, patternTexture, layer.color());
+    }
+
+    // Draw placeholder when no banner is set
+    private void drawNoBannerPlaceholder(GuiGraphics guiGraphics, int x, int y) {
+        int width = 60;  // Scaled up to 3x
+        int height = 120; // Scaled up to 3x
+
+        // Draw placeholder background with banner-like appearance
+        guiGraphics.fill(x, y, x + width, y + height, 0xFF8B4513); // Brown color
+        guiGraphics.fill(x + 1, y + 1, x + width - 1, y + height - 1, 0xFFD2B48C); // Tan color
+
+        // Draw "No Banner" text
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().scale(0.4f, 0.4f, 1.0f);
+
+        String line1 = "No";
+        String line2 = "Banner";
+
+        int textX1 = (int)((x + width/2 - font.width(line1)/5) / 0.4f);
+        int textX2 = (int)((x + width/2 - font.width(line2)/5) / 0.4f);
+        int textY1 = (int)((y + height/2 - 6) / 0.4f);
+        int textY2 = (int)((y + height/2 + 2) / 0.4f);
+
+        guiGraphics.drawString(font, line1, textX1, textY1, 0xFF8B0000, false);
+        guiGraphics.drawString(font, line2, textX2, textY2, 0xFF8B0000, false);
+
+        guiGraphics.pose().popPose();
+    }
+
+    // Draw error placeholder when banner rendering fails
+    private void drawErrorBannerPlaceholder(GuiGraphics guiGraphics, int x, int y, String errorText) {
+        int width = 60;  // Scaled up to 3x
+        int height = 120; // Scaled up to 3x
+
+        // Draw error background
+        guiGraphics.fill(x, y, x + width, y + height, 0xFF8B0000); // Dark red
+        guiGraphics.fill(x + 1, y + 1, x + width - 1, y + height - 1, 0xFFFF4500); // Orange red
+
+        // Draw error indicator (X pattern) - scaled up to 3x
+        guiGraphics.fill(x + 9, y + 15, x + 15, y + height - 15, 0xFFFFFFFF);
+        guiGraphics.fill(x + width - 15, y + 15, x + width - 9, y + height - 15, 0xFFFFFFFF);
+
+        // Draw diagonal lines for X - scaled up to 3x
+        for (int i = 0; i < 42; i++) {
+            guiGraphics.fill(x + 9 + i, y + 15 + i, x + 12 + i, y + 18 + i, 0xFFFFFFFF);
+            guiGraphics.fill(x + width - 12 - i, y + 15 + i, x + width - 9 - i, y + 18 + i, 0xFFFFFFFF);
         }
     }
 
@@ -1998,16 +2239,22 @@ public class CustomGuiScreen extends Screen {
         // Request house name from server
         net.neoforged.neoforge.network.PacketDistributor.sendToServer(new RequestHouseNamePacket());
 
+        // Request house banner from server
+        net.neoforged.neoforge.network.PacketDistributor.sendToServer(new RequestHouseBannerPacket());
+
         // Use the synced name if available
         houseName = syncedHouseName;
     }
 
     // Add this static variable at the top with other fields
-    private static String syncedHouseName = "";
 
     // Add this static method
     public static void setSyncedHouseName(String name) {
         syncedHouseName = name;
+    }
+
+    public static void setSyncedHouseBanner(CompoundTag bannerData) {
+        syncedHouseBanner = bannerData;
     }
 
     public static void setOwnedTowns(java.util.List<SyncOwnedTownsPacket.TownInfo> towns) {
@@ -2027,6 +2274,8 @@ public class CustomGuiScreen extends Screen {
             }
         }
     }
+
+
 
 
 }

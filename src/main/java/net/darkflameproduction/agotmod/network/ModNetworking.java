@@ -99,7 +99,7 @@ public class ModNetworking {
                 RequestHouseNamePacket::handle
         );
 
-// Register sync house name packet (server -> client)
+        // Register sync house name packet (server -> client)
         registrar.playToClient(
                 SyncHouseNamePacket.TYPE,
                 SyncHouseNamePacket.STREAM_CODEC,
@@ -117,16 +117,14 @@ public class ModNetworking {
                 ServerPacketHandler::handleClaimTownHall
         );
 
-        // Add to ModNetworking register method:
-
-// Register request owned towns packet (client -> server)
+        // Register request owned towns packet (client -> server)
         registrar.playToServer(
                 RequestOwnedTownsPacket.TYPE,
                 RequestOwnedTownsPacket.STREAM_CODEC,
                 ServerPacketHandler::handleRequestOwnedTowns
         );
 
-// Register sync owned towns packet (server -> client)
+        // Register sync owned towns packet (server -> client)
         registrar.playToClient(
                 SyncOwnedTownsPacket.TYPE,
                 SyncOwnedTownsPacket.STREAM_CODEC,
@@ -143,7 +141,7 @@ public class ModNetworking {
                 ServerPacketHandler::handleCheckHouseName
         );
 
-// Register house name validation packet (server -> client)
+        // Register house name validation packet (server -> client)
         registrar.playToClient(
                 HouseNameValidationPacket.TYPE,
                 HouseNameValidationPacket.STREAM_CODEC,
@@ -154,13 +152,23 @@ public class ModNetworking {
                 }
         );
 
+        // Register request house banner packet (client -> server)
+        registrar.playToServer(
+                RequestHouseBannerPacket.TYPE,
+                RequestHouseBannerPacket.STREAM_CODEC,
+                RequestHouseBannerPacket::handle
+        );
 
-
-
-
-
-
-
+        // Register sync house banner packet (server -> client)
+        registrar.playToClient(
+                SyncHouseBannerPacket.TYPE,
+                SyncHouseBannerPacket.STREAM_CODEC,
+                (packet, context) -> {
+                    context.enqueueWork(() -> {
+                        ClientPacketHandler.handleSyncHouseBanner(packet, context);
+                    });
+                }
+        );
     }
 
 

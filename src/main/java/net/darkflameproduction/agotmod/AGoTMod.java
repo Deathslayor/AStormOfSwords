@@ -3,6 +3,7 @@ package net.darkflameproduction.agotmod;
 import dev.tocraft.ctgen.impl.CTGClient;
 import net.darkflameproduction.agotmod.client.ClientKeyInputEvents;
 import net.darkflameproduction.agotmod.client.ModAttachments;
+import net.darkflameproduction.agotmod.command.SetHouseBannerCommand;
 import net.darkflameproduction.agotmod.datagen.ModDimensionProvider;
 import net.darkflameproduction.agotmod.gui.CustomGuiScreen;
 import net.darkflameproduction.agotmod.init.ModMenuTypes;
@@ -39,6 +40,7 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
@@ -77,30 +79,16 @@ public class AGoTMod {
 
         modEventBus.addListener(this::commonSetup);
         NeoForge.EVENT_BUS.register(this);
-        // REMOVE THIS LINE: modEventBus.addListener(this::registerPayloads);
         modEventBus.addListener(this::addCreative);
         ModTerrablender.registerBiomes();
         ModEntities.register(modEventBus);
         LOGGER.info("AGOT Mod initialized");
-        ModAttachments.ATTACHMENT_TYPES.register(modEventBus); // Add this line
+        ModAttachments.ATTACHMENT_TYPES.register(modEventBus);
+
         if (FMLEnvironment.dist == Dist.CLIENT) {
             registerClientEvents();
         }
     }
-
-    // REMOVE THIS ENTIRE METHOD - ModNetworking.java handles packet registration
-    /*
-    public void registerPayloads(RegisterPayloadHandlersEvent event) {
-        final PayloadRegistrar registrar = event.registrar("1");
-
-        // Register the packet to be sent from server to client
-        registrar.playToClient(
-                OpenGrocerInventoryPacket.TYPE,
-                OpenGrocerInventoryPacket.STREAM_CODEC,
-                ClientPacketHandler::handleOpenGrocerInventory
-        );
-    }
-    */
 
     @OnlyIn(Dist.CLIENT)
     private void registerClientEvents() {
@@ -153,6 +141,12 @@ public class AGoTMod {
 
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
+    }
+
+    @SubscribeEvent
+    public void onRegisterCommands(RegisterCommandsEvent event) {
+        SetHouseBannerCommand.register(event.getDispatcher());
+        LOGGER.info("Registered SetHouseBannerCommand");
     }
 
     // Client-side event handler for item count display

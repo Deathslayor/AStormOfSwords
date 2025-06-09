@@ -139,4 +139,11 @@ public class ClientPacketHandler {
             CustomGuiScreen.setSyncedHouseName(packet.houseName());
         });
     }
+
+    public static void handleSyncHouseBanner(SyncHouseBannerPacket packet, IPayloadContext context) {
+        context.enqueueWork(() -> {
+            // Store the synced house banner in the GUI
+            CustomGuiScreen.setSyncedHouseBanner(packet.bannerData());
+        });
+    }
 }
