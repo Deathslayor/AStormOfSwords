@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "agotmod:block/black_cherry_log",
-    "side": "agotmod:block/black_cherry_log"
-  }
-}

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "agotmod:block/blackbark_planks",
-    "side": "agotmod:block/blackbark_planks",
-    "top": "agotmod:block/blackbark_planks"
-  }
-}

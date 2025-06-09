@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "agotmod:block/quartz_35_block",
-    "side": "agotmod:block/quartz_35_block",
-    "top": "agotmod:block/quartz_35_block"
-  }
-}

@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "agotmod:block/blackstone_14_block"
-  }
-}

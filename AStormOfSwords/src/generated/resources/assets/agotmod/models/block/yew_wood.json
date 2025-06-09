@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "agotmod:block/yew_log",
-    "side": "agotmod:block/yew_log"
-  }
-}

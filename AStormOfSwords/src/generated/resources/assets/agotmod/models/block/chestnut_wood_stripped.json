@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "agotmod:block/chestnut_log_stripped",
-    "side": "agotmod:block/chestnut_log_stripped"
-  }
-}

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "agotmod:block/cdeepslate_1_block",
-    "side": "agotmod:block/cdeepslate_1_block",
-    "top": "agotmod:block/cdeepslate_1_block"
-  }
-}

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "agotmod:block/baobab_planks",
-    "side": "agotmod:block/baobab_planks",
-    "top": "agotmod:block/baobab_planks"
-  }
-}

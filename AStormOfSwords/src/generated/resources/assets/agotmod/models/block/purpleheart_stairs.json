@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "agotmod:block/purpleheart_planks",
-    "side": "agotmod:block/purpleheart_planks",
-    "top": "agotmod:block/purpleheart_planks"
-  }
-}

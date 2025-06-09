@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "agotmod:block/packed_ice_27_block",
-    "side": "agotmod:block/packed_ice_27_block",
-    "top": "agotmod:block/packed_ice_27_block"
-  }
-}

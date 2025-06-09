@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "agotmod:block/packed_ice_34_block",
-    "side": "agotmod:block/packed_ice_34_block",
-    "top": "agotmod:block/packed_ice_34_block"
-  }
-}

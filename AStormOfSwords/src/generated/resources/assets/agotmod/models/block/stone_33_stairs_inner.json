@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "agotmod:block/stone_33_block",
-    "side": "agotmod:block/stone_33_block",
-    "top": "agotmod:block/stone_33_block"
-  }
-}

@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "agotmod:tuff_brick_7_block",
-  "result": {
-    "count": 1,
-    "id": "agotmod:tuff_brick_7_stairs"
-  }
-}

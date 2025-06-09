@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "agotmod:dripstone_33_block",
-  "result": {
-    "count": 2,
-    "id": "agotmod:dripstone_33_slab"
-  }
-}

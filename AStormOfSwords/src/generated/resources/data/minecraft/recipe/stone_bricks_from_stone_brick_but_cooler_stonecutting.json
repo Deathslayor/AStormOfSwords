@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "agotmod:stone_brick_but_cooler",
-  "result": {
-    "count": 1,
-    "id": "minecraft:stone_bricks"
-  }
-}

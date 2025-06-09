@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "agotmod:packed_ice_34_block",
-  "result": {
-    "count": 1,
-    "id": "agotmod:packed_ice_34_wall"
-  }
-}

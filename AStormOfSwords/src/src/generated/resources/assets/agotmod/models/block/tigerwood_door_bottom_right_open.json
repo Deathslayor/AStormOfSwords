@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/door_bottom_right_open",
-  "render_type": "minecraft:cutout",
-  "textures": {
-    "bottom": "agotmod:block/tigerwood_door_bottom",
-    "top": "agotmod:block/tigerwood_door_top"
-  }
-}

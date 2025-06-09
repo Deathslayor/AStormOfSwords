@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "agotmod:block/apricot_planks",
-    "side": "agotmod:block/apricot_planks",
-    "top": "agotmod:block/apricot_planks"
-  }
-}

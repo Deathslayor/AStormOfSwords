@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "agotmod:block/redkeep_24_block",
-    "side": "agotmod:block/redkeep_24_block",
-    "top": "agotmod:block/redkeep_24_block"
-  }
-}

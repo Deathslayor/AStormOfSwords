@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "agotmod:block/blue_mahoe_planks",
-    "side": "agotmod:block/blue_mahoe_planks",
-    "top": "agotmod:block/blue_mahoe_planks"
-  }
-}

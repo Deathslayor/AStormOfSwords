@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "agotmod:block/white_cherry_planks",
-    "side": "agotmod:block/white_cherry_planks",
-    "top": "agotmod:block/white_cherry_planks"
-  }
-}

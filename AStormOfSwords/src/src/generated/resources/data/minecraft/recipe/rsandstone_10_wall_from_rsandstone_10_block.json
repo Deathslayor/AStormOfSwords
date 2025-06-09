@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "agotmod:rsandstone_10_block",
-  "result": {
-    "count": 1,
-    "id": "agotmod:rsandstone_10_wall"
-  }
-}

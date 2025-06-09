@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "agotmod:block/hawthorn_planks",
-    "side": "agotmod:block/hawthorn_planks",
-    "top": "agotmod:block/hawthorn_planks"
-  }
-}

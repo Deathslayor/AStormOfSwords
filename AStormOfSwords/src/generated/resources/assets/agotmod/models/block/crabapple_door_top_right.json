@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/door_top_right",
-  "render_type": "minecraft:cutout",
-  "textures": {
-    "bottom": "agotmod:block/crabapple_door_bottom",
-    "top": "agotmod:block/crabapple_door_top"
-  }
-}

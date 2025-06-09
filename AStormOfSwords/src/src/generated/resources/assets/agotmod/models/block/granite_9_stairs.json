@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "agotmod:block/granite_9_block",
-    "side": "agotmod:block/granite_9_block",
-    "top": "agotmod:block/granite_9_block"
-  }
-}

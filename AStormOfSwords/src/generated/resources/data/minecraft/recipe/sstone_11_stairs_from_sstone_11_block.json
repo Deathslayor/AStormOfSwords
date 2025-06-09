@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "agotmod:sstone_11_block",
-  "result": {
-    "count": 1,
-    "id": "agotmod:sstone_11_stairs"
-  }
-}

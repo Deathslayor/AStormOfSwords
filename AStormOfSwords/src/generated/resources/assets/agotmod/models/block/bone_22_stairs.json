@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "agotmod:block/bone_22_block",
-    "side": "agotmod:block/bone_22_block",
-    "top": "agotmod:block/bone_22_block"
-  }
-}

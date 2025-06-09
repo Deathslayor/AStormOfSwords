@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "agotmod:diorite_3_block",
-  "result": {
-    "count": 1,
-    "id": "agotmod:diorite_3_stairs"
-  }
-}

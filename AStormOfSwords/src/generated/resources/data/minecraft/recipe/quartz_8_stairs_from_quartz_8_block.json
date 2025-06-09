@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "agotmod:quartz_8_block",
-  "result": {
-    "count": 1,
-    "id": "agotmod:quartz_8_stairs"
-  }
-}

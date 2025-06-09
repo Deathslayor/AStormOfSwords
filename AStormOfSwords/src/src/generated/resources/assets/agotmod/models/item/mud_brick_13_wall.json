@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/wall_inventory",
-  "textures": {
-    "wall": "agotmod:block/mud_brick_13_block"
-  }
-}

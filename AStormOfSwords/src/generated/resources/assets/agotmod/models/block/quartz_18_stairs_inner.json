@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "agotmod:block/quartz_18_block",
-    "side": "agotmod:block/quartz_18_block",
-    "top": "agotmod:block/quartz_18_block"
-  }
-}

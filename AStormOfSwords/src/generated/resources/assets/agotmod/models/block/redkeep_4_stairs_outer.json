@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "bottom": "agotmod:block/redkeep_4_block",
-    "side": "agotmod:block/redkeep_4_block",
-    "top": "agotmod:block/redkeep_4_block"
-  }
-}

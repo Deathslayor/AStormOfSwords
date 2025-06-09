@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "minecraft:mud",
-  "result": {
-    "count": 1,
-    "id": "agotmod:mud_brick_34_wall"
-  }
-}

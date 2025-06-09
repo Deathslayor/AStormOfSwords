@@ -1,9 +1,0 @@
-{
-  "biome": "agotmod:ironwood",
-  "color": "#263b26",
-  "height": 3,
-  "layers": {
-    "surface": "minecraft:podzol"
-  },
-  "terrain_modifier": 6.0
-}

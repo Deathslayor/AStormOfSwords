@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "bottom": "agotmod:block/cdeepslate_11_block",
-    "side": "agotmod:block/cdeepslate_11_block",
-    "top": "agotmod:block/cdeepslate_11_block"
-  }
-}

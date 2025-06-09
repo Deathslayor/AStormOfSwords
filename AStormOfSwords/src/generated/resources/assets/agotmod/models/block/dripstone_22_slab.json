@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "agotmod:block/dripstone_22_block",
-    "side": "agotmod:block/dripstone_22_block",
-    "top": "agotmod:block/dripstone_22_block"
-  }
-}

@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "agotmod:block/cottonwood_log_top_stripped",
-    "side": "agotmod:block/cottonwood_log_stripped"
-  }
-}

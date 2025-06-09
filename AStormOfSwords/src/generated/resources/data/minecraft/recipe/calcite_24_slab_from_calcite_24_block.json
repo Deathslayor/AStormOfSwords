@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "agotmod:calcite_24_block",
-  "result": {
-    "count": 2,
-    "id": "agotmod:calcite_24_slab"
-  }
-}

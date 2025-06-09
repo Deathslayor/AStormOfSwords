@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "agotmod:granite_9_block",
-  "result": {
-    "count": 2,
-    "id": "agotmod:granite_9_slab"
-  }
-}

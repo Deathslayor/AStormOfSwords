@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "agotmod:block/datepalm_log",
-    "side": "agotmod:block/datepalm_log"
-  }
-}
