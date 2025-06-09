@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "B": "agotmod:weirwood_planks"
+  },
+  "pattern": [
+    "BB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "agotmod:weirwood_pressure_plate"
+  }
+}

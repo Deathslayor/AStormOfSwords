@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "agotmod:manderly_levy_smithing_scroll",
+  "base": "agotmod:steel_chestplate",
+  "result": {
+    "count": 1,
+    "id": "agotmod:manderly_levy_chestplate"
+  },
+  "template": "agotmod:upgrade_kit_iron"
+}

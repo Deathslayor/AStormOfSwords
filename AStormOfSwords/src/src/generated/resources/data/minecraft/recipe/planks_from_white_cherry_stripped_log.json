@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:white_cherry_log_stripped"
+  ],
+  "result": {
+    "count": 4,
+    "id": "agotmod:white_cherry_planks"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "agotmod:block/weirwood_log_top",
+    "east": "agotmod:block/weirwood_log",
+    "north": "agotmod:block/weirwood_face",
+    "particle": "agotmod:block/weirwood_log",
+    "south": "agotmod:block/weirwood_log",
+    "up": "agotmod:block/weirwood_log_top",
+    "west": "agotmod:block/weirwood_log"
+  }
+}

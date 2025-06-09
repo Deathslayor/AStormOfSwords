@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "agotmod:dripstone_24_block",
+  "result": {
+    "count": 1,
+    "id": "agotmod:dripstone_24_wall"
+  }
+}

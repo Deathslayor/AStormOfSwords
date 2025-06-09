@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "agotmod:block/tuff_brick_18_block"
+  }
+}

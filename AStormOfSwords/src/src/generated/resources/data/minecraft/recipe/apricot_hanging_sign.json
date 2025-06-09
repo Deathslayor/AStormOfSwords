@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "minecraft:chain",
+    "B": "agotmod:apricot_log_stripped"
+  },
+  "pattern": [
+    "# #",
+    "BBB",
+    "BBB"
+  ],
+  "result": {
+    "count": 6,
+    "id": "agotmod:apricot_hanging_sign"
+  }
+}

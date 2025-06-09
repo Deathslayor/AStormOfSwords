@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_goldenheart_wood": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:goldenheart_wood"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:smelt_goldenheart_wood_to_charcoal"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_goldenheart_wood"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:smelt_goldenheart_wood_to_charcoal"
+    ]
+  }
+}

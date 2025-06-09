@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:pomegranate_log_stripped",
+    "agotmod:pomegranate_log_stripped",
+    "agotmod:pomegranate_log_stripped",
+    "agotmod:pomegranate_log_stripped"
+  ],
+  "result": {
+    "count": 3,
+    "id": "agotmod:pomegranate_wood_stripped"
+  }
+}

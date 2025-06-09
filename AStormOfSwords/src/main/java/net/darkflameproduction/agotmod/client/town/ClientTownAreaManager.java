@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import net.darkflameproduction.agotmod.client.overlay.TownNotificationOverlay;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -105,16 +106,30 @@ public class ClientTownAreaManager {
     /**
      * Update town data from server packet
      */
-    public static void updateTownArea(BlockPos pos, String townName, boolean isClaimed, String claimedByHouse, int population, int radius) {
-        TownAreaData newData = new TownAreaData(townName, isClaimed, claimedByHouse, population, radius);
+    public static void updateTownArea(BlockPos pos, String townName, boolean isClaimed,
+                                      String claimedByHouse, int citizenCount, int currentRadius,
+                                      CompoundTag claimedByHouseBanner) {
+
+        // Update the town area data map
+        TownAreaData newData = new TownAreaData(townName, isClaimed, claimedByHouse, citizenCount, currentRadius);
         townAreas.put(pos, newData);
 
+        // Show town entry notification (you can decide when this should be triggered more precisely)
+        if (isClaimed) {
+            TownNotificationOverlay.showEntryMessage(townName, claimedByHouse, citizenCount, claimedByHouseBanner);
+        } else {
+            TownNotificationOverlay.showExitMessage(townName);
+        }
+
+        // Debug logging
         System.out.println("DEBUG: ClientTownAreaManager updated town: " + townName +
                 " at " + pos + ", claimed: " + isClaimed + ", house: " + claimedByHouse +
-                ", population: " + population + ", radius: " + radius);
+                ", population: " + citizenCount + ", radius: " + currentRadius);
 
+        // Save changes
         saveTownData();
     }
+
 
     /**
      * Remove town area

@@ -1,5 +1,6 @@
 package net.darkflameproduction.agotmod.block.custom;
 
+import net.darkflameproduction.agotmod.network.TownHallDataPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -38,14 +39,15 @@ public class TownHallBlock extends Block implements EntityBlock {
 
                     // Send current data to the player with dynamic radius, town name, and claim info
                     PacketDistributor.sendToPlayer(serverPlayer,
-                            new net.darkflameproduction.agotmod.network.TownHallDataPacket(
+                            new TownHallDataPacket(
                                     pos,
                                     townHallBE.getBedCount(),
                                     townHallBE.getCitizenCount(),
                                     townHallBE.getCurrentScanRadius(),
                                     townHallBE.getTownName(),
                                     townHallBE.isClaimed(),
-                                    townHallBE.getClaimedByHouse()
+                                    townHallBE.getClaimedByHouse(),
+                                    townHallBE.getClaimedByHouseBanner()  // NEW: Add banner
                             ));
                 }
             }

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_blackbark_log": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:blackbark_log"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:smelt_blackbark_log_to_charcoal"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_blackbark_log"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:smelt_blackbark_log_to_charcoal"
+    ]
+  }
+}

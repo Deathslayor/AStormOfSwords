@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "minecraft:stick",
+    "B": "agotmod:blackbark_planks"
+  },
+  "pattern": [
+    "#B#",
+    "#B#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "agotmod:blackbark_fence_gate"
+  }
+}

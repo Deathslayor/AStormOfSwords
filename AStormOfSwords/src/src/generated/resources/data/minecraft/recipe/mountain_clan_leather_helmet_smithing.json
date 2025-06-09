@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "agotmod:northern_mountain_clan_leather_smithing_scroll",
+  "base": "agotmod:northern_mountain_clan_leather_helmet",
+  "result": {
+    "count": 1,
+    "id": "agotmod:northern_mountain_clan_leather_helmet"
+  },
+  "template": "agotmod:upgrade_kit_iron"
+}

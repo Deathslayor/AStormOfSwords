@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "B": "agotmod:pomegranate_planks"
+  },
+  "pattern": [
+    "B"
+  ],
+  "result": {
+    "count": 1,
+    "id": "agotmod:pomegranate_button"
+  }
+}

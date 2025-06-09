@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "agotmod:northern_mountain_clan_noble_smithing_scroll",
+  "base": "agotmod:ironborn_plate_boots",
+  "result": {
+    "count": 1,
+    "id": "agotmod:ironborn_noble_boots"
+  },
+  "template": "agotmod:upgrade_kit_noble"
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "agotmod:wildling_chief_smithing_scroll",
+  "base": "agotmod:wildling_leather_helmet",
+  "result": {
+    "count": 1,
+    "id": "agotmod:wildling_chief_helmet"
+  },
+  "template": "agotmod:upgrade_kit_chief"
+}

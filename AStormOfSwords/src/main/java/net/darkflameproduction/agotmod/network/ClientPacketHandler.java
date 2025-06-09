@@ -9,6 +9,7 @@ import net.darkflameproduction.agotmod.gui.TownHallScreen;
 import net.darkflameproduction.agotmod.client.tracker.TownTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.network.chat.Component;
 import net.neoforged.api.distmarker.Dist;
@@ -65,7 +66,7 @@ public class ClientPacketHandler {
     // Add this method to ClientPacketHandler
     public static void handleTownHallData(TownHallDataPacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
-            // Extract packet data
+            // Extract packet data including banner
             BlockPos pos = packet.pos();
             int bedCount = packet.bedCount();
             int citizenCount = packet.citizenCount();
@@ -73,6 +74,7 @@ public class ClientPacketHandler {
             String townName = packet.townName();
             boolean isClaimed = packet.isClaimed();
             String claimedByHouse = packet.claimedByHouse();
+            CompoundTag claimedByHouseBanner = packet.claimedByHouseBanner();
 
             // Update the Town Hall screen if it's open
             TownHallScreen.updateTownHallData(bedCount, citizenCount, currentRadius, townName, isClaimed, claimedByHouse);
@@ -83,8 +85,8 @@ public class ClientPacketHandler {
             // Update the town tracker with both name and population data
             TownTracker.updateTownData(pos, townName, citizenCount);
 
-            // NEW: Update the client-side town area manager
-            ClientTownAreaManager.updateTownArea(pos, townName, isClaimed, claimedByHouse, citizenCount, currentRadius);
+            // NEW: Update the client-side town area manager with banner data
+            ClientTownAreaManager.updateTownArea(pos, townName, isClaimed, claimedByHouse, citizenCount, currentRadius, claimedByHouseBanner);
         });
     }
 

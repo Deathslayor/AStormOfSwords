@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "agotmod:block/pink_ivory_slabs"
+    },
+    "type=double": {
+      "model": "agotmod:block/pink_ivory_planks"
+    },
+    "type=top": {
+      "model": "agotmod:block/pink_ivory_slabs_top"
+    }
+  }
+}
