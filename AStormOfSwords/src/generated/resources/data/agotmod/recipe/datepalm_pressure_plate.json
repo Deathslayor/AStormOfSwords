@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "B": "agotmod:datepalm_planks"
+  },
+  "pattern": [
+    "BB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "agotmod:datepalm_pressure_plate"
+  }
+}

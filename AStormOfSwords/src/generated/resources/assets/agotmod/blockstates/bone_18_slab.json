@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "agotmod:block/bone_18_slab"
+    },
+    "type=double": {
+      "model": "agotmod:block/bone_18_block"
+    },
+    "type=top": {
+      "model": "agotmod:block/bone_18_slab_top"
+    }
+  }
+}

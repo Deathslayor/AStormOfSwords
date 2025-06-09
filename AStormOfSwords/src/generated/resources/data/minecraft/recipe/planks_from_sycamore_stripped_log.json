@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:sycamore_log_stripped"
+  ],
+  "result": {
+    "count": 4,
+    "id": "agotmod:sycamore_planks"
+  }
+}

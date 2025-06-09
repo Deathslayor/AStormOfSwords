@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:tigerwood_wood"
+  ],
+  "result": {
+    "count": 4,
+    "id": "agotmod:tigerwood_planks"
+  }
+}

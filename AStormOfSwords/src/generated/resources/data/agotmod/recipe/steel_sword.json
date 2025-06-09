@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": "agotmod:steel_ingot",
+    "S": "minecraft:stick"
+  },
+  "pattern": [
+    "B",
+    "B",
+    "S"
+  ],
+  "result": {
+    "count": 1,
+    "id": "agotmod:steel_sword"
+  }
+}

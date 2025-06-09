@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:blue_mahoe_log_stripped",
+    "agotmod:blue_mahoe_log_stripped",
+    "agotmod:blue_mahoe_log_stripped",
+    "agotmod:blue_mahoe_log_stripped"
+  ],
+  "result": {
+    "count": 3,
+    "id": "agotmod:blue_mahoe_wood_stripped"
+  }
+}

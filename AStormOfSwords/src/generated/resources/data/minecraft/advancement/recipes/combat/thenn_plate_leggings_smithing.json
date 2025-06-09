@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:thenn_plate_leggings_smithing"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_upgrade_kit_bronze": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:upgrade_kit_bronze"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_upgrade_kit_bronze"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:thenn_plate_leggings_smithing"
+    ]
+  }
+}

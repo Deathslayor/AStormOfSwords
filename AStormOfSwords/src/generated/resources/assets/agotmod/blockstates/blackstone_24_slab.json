@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "agotmod:block/blackstone_24_slab"
+    },
+    "type=double": {
+      "model": "agotmod:block/blackstone_24_block"
+    },
+    "type=top": {
+      "model": "agotmod:block/blackstone_24_slab_top"
+    }
+  }
+}

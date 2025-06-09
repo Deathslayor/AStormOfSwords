@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "minecraft:stick",
+    "B": "agotmod:beech_planks"
+  },
+  "pattern": [
+    "#B#",
+    "#B#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "agotmod:beech_fence_gate"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "minecraft:stick",
+    "B": "agotmod:apricot_planks"
+  },
+  "pattern": [
+    "#B#",
+    "#B#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "agotmod:apricot_fence_gate"
+  }
+}

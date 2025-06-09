@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "agotmod:block/ash_slabs"
+    },
+    "type=double": {
+      "model": "agotmod:block/ash_planks"
+    },
+    "type=top": {
+      "model": "agotmod:block/ash_slabs_top"
+    }
+  }
+}

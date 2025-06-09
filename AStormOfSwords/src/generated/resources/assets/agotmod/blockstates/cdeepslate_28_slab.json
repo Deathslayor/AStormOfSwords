@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "agotmod:block/cdeepslate_28_slab"
+    },
+    "type=double": {
+      "model": "agotmod:block/cdeepslate_28_block"
+    },
+    "type=top": {
+      "model": "agotmod:block/cdeepslate_28_slab_top"
+    }
+  }
+}

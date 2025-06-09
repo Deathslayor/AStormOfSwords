@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sandbeggar_planks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:sandbeggar_planks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "agotmod:sandbeggar_stairs"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_sandbeggar_planks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "agotmod:sandbeggar_stairs"
+    ]
+  }
+}

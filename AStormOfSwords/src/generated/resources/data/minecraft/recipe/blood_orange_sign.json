@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "minecraft:stick",
+    "B": "agotmod:blood_orange_planks"
+  },
+  "pattern": [
+    "BBB",
+    "BBB",
+    " # "
+  ],
+  "result": {
+    "count": 3,
+    "id": "agotmod:blood_orange_sign"
+  }
+}

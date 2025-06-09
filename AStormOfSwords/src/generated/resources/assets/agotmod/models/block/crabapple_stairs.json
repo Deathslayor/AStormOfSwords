@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "agotmod:block/crabapple_planks",
+    "side": "agotmod:block/crabapple_planks",
+    "top": "agotmod:block/crabapple_planks"
+  }
+}

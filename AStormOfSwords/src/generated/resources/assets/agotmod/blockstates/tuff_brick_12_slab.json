@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "agotmod:block/tuff_brick_12_slab"
+    },
+    "type=double": {
+      "model": "agotmod:block/tuff_brick_12_block"
+    },
+    "type=top": {
+      "model": "agotmod:block/tuff_brick_12_slab_top"
+    }
+  }
+}

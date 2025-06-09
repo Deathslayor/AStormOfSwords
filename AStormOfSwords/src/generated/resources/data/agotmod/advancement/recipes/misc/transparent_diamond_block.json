@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "agotmod:transparent_diamond_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_transparent_diamond": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:transparent_diamond"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_transparent_diamond"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "agotmod:transparent_diamond_block"
+    ]
+  }
+}

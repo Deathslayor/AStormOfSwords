@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_goathead": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:goathead"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:goathead_to_yellow_dye"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_goathead"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:goathead_to_yellow_dye"
+    ]
+  }
+}

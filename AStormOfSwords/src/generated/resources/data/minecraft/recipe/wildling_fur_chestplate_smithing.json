@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "agotmod:wildling_fur_smithing_scroll",
+  "base": "minecraft:leather_chestplate",
+  "result": {
+    "count": 1,
+    "id": "agotmod:wildling_fur_chestplate"
+  },
+  "template": "agotmod:upgrade_kit_fur"
+}

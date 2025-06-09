@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:tin_ingot",
+    "minecraft:copper_ingot"
+  ],
+  "result": {
+    "count": 1,
+    "id": "agotmod:bronze_ingot"
+  }
+}

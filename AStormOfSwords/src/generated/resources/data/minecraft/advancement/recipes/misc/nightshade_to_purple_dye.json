@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_nightshade": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:nightshade"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:nightshade_to_purple_dye"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_nightshade"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:nightshade_to_purple_dye"
+    ]
+  }
+}

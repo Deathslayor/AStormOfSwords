@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "agotmod:white_cherry_wood"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_white_cherry_log": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:white_cherry_log"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_white_cherry_log"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "agotmod:white_cherry_wood"
+    ]
+  }
+}

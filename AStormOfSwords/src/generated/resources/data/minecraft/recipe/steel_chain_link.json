@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "H": "agotmod:hammer",
+    "N": "agotmod:steel_nugget"
+  },
+  "pattern": [
+    " H ",
+    "N  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "agotmod:steel_chain_link"
+  }
+}

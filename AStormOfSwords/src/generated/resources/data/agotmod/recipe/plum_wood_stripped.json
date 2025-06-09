@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:plum_log_stripped",
+    "agotmod:plum_log_stripped",
+    "agotmod:plum_log_stripped",
+    "agotmod:plum_log_stripped"
+  ],
+  "result": {
+    "count": 3,
+    "id": "agotmod:plum_wood_stripped"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "values": [
+    "#agotmod:needs_steel_tool",
+    "#agotmod:needs_dragonglass_tool",
+    "#minecraft:needs_iron_tool",
+    "#minecraft:needs_diamond_tool"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:pine_wood"
+  ],
+  "result": {
+    "count": 4,
+    "id": "agotmod:pine_planks"
+  }
+}

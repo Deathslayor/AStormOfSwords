@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_bricks_19_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:bricks_19_block"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:bricks_19_slab_from_bricks_19_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_bricks_19_block"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:bricks_19_slab_from_bricks_19_block"
+    ]
+  }
+}

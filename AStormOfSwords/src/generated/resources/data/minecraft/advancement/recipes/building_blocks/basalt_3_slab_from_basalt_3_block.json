@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_basalt_3_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:basalt_3_block"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:basalt_3_slab_from_basalt_3_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_basalt_3_block"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:basalt_3_slab_from_basalt_3_block"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:black_olive_log"
+  ],
+  "result": {
+    "count": 4,
+    "id": "agotmod:black_olive_planks"
+  }
+}

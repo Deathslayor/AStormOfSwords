@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "agotmod:northern_mountain_clan_leather_smithing_scroll",
+  "base": "agotmod:steel_leggings",
+  "result": {
+    "count": 1,
+    "id": "agotmod:ironborn_levy_leggings"
+  },
+  "template": "agotmod:upgrade_kit_iron"
+}
