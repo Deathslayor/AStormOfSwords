@@ -20,23 +20,42 @@ public class BannerPatterns {
     public static final DeferredRegister<BannerPattern> BANNER_PATTERNS =
             DeferredRegister.create(Registries.BANNER_PATTERN, AGoTMod.MOD_ID);
 
-    // Define the tag key as a static constant for consistency
+    // Define tag keys as static constants for consistency
     public static final TagKey<BannerPattern> TARGARYEN_PATTERN_TAG = TagKey.create(
             Registries.BANNER_PATTERN,
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/targaryen"));
 
-    // Register the banner pattern for runtime
+    public static final TagKey<BannerPattern> STARK_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/stark"));
+
+    // Register banner patterns for runtime
     public static final DeferredHolder<BannerPattern, BannerPattern> TARGARYEN_PATTERN =
             BANNER_PATTERNS.register("targaryen", () -> new BannerPattern(
                     ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "targaryen"),
                     "targaryen"));
 
-    // Register the banner pattern item using the static tag reference
+    public static final DeferredHolder<BannerPattern, BannerPattern> STARK_PATTERN =
+            BANNER_PATTERNS.register("stark", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "stark"),
+                    "stark"));
+
+    // Register banner pattern items using the static tag references
     public static final DeferredHolder<Item, BannerPatternItem> TARGARYEN_BANNER_PATTERN =
             BANNER_PATTERN_ITEMS.register("targaryen_banner_pattern", () -> {
                 net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
                         Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "targaryen_banner_pattern"));
                 return new BannerPatternItem(TARGARYEN_PATTERN_TAG, new Item.Properties()
+                        .setId(itemKey)
+                        .stacksTo(1)
+                        .rarity(Rarity.EPIC));
+            });
+
+    public static final DeferredHolder<Item, BannerPatternItem> STARK_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("stark_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "stark_banner_pattern"));
+                return new BannerPatternItem(STARK_PATTERN_TAG, new Item.Properties()
                         .setId(itemKey)
                         .stacksTo(1)
                         .rarity(Rarity.EPIC));

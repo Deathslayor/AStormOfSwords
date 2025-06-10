@@ -26,12 +26,13 @@ public class ModBannerPatternProvider extends TagsProvider<BannerPattern> {
 
         // Create the banner pattern tags for linking items to patterns
         createBannerPatternTag("targaryen");
+        createBannerPatternTag("stark");
 
-        System.out.println("DEBUG: Added targaryen banner pattern tag");
+        System.out.println("DEBUG: Added targaryen and stark banner pattern tags");
 
         // Add more banner patterns here as you create them
-        // createBannerPatternTag("stark");
         // createBannerPatternTag("lannister");
+        // createBannerPatternTag("baratheon");
         // etc.
     }
 

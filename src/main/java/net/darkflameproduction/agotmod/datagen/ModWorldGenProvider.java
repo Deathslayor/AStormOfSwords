@@ -26,6 +26,9 @@ public class ModWorldGenProvider extends DatapackBuiltinEntriesProvider {
     public static final ResourceKey<BannerPattern> TARGARYEN = ResourceKey.create(Registries.BANNER_PATTERN,
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "targaryen"));
 
+    public static final ResourceKey<BannerPattern> STARK = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "stark"));
+
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
             .add(CTRegistries.ZONES_KEY, ModZones::bootstrap)
             .add(Registries.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap)
@@ -41,5 +44,6 @@ public class ModWorldGenProvider extends DatapackBuiltinEntriesProvider {
 
     private static void bootstrapBannerPatterns(BootstrapContext<BannerPattern> context) {
         context.register(TARGARYEN, new BannerPattern(TARGARYEN.location(), "targaryen"));
+        context.register(STARK, new BannerPattern(STARK.location(), "stark"));
     }
 }

@@ -39,6 +39,8 @@ public class ModCreativeIngredients {
 
                         /** Banner Patterns */
                         pOutput.accept(BannerPatterns.TARGARYEN_BANNER_PATTERN.get());
+                        pOutput.accept(BannerPatterns.STARK_BANNER_PATTERN.get());
+
 
                         /** Items */
                         //INGREDIENTS

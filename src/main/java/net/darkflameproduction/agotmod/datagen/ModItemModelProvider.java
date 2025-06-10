@@ -998,6 +998,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         // ---------------------------(BANNERS)--------------------------- //
 
         bannerPatternItem(BannerPatterns.TARGARYEN_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.STARK_BANNER_PATTERN);
+
 
 
 

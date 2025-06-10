@@ -1,4 +1,4 @@
-// 1.21.3	2025-06-08T12:20:10.8638614	Item Models: agotmod
+// 1.21.3	2025-06-10T16:36:17.5377622	Item Models: agotmod
 65c44e6f1f29781252c76032b90c20b3bc8f7b8a assets/agotmod/models/item/alder_button.json
 f0b6afe25a5640838c024d02c663e7c8f821ffd6 assets/agotmod/models/item/alder_door.json
 2af83e95998f18d674056268682572a94f141042 assets/agotmod/models/item/alder_fence.json
@@ -2708,6 +2708,7 @@ dd517aaf7f19e28d0512d52781d86bfc45005456 assets/agotmod/models/item/sstone_8_sta
 e1b2e58557eda1ef5858829d8954126a9291964b assets/agotmod/models/item/sstone_9_slab.json
 b6259b140b4e92c0fa7198a63c0dac4f07fa6e72 assets/agotmod/models/item/sstone_9_stairs.json
 549de902386ac99fd4fc00bfd1bbd318bbbb930e assets/agotmod/models/item/sstone_9_wall.json
+58ac5807ba9b022cb1bf801391f5838cd6492e30 assets/agotmod/models/item/stark_banner_pattern.json
 e6d20cb665c0e1f3786ee3104db6f9237539d615 assets/agotmod/models/item/stark_levy_boots.json
 6561b2e4478fd134d42770813f5841d134fa5581 assets/agotmod/models/item/stark_levy_chestplate.json
 429aa0ace0d15b538173c412bfe983845f46bde3 assets/agotmod/models/item/stark_levy_helmet.json

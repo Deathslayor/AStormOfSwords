@@ -19,6 +19,9 @@ public class ModBannerPatternRegistryProvider extends DatapackBuiltinEntriesProv
     public static final ResourceKey<BannerPattern> TARGARYEN = ResourceKey.create(Registries.BANNER_PATTERN,
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "targaryen"));
 
+    public static final ResourceKey<BannerPattern> STARK = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "stark"));
+
     public ModBannerPatternRegistryProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, createBuilder(), Set.of(AGoTMod.MOD_ID));
     }
@@ -30,5 +33,6 @@ public class ModBannerPatternRegistryProvider extends DatapackBuiltinEntriesProv
 
     private static void bootstrap(BootstrapContext<BannerPattern> context) {
         context.register(TARGARYEN, new BannerPattern(TARGARYEN.location(), "targaryen"));
+        context.register(STARK, new BannerPattern(STARK.location(), "stark"));
     }
 }
