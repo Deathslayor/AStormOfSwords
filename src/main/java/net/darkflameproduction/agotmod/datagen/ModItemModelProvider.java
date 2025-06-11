@@ -997,8 +997,33 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         // ---------------------------(BANNERS)--------------------------- //
 
-        bannerPatternItem(BannerPatterns.TARGARYEN_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.ARRYN_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.BAELISH_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.BARATHEON_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.BLACKWOOD_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.BOLTON_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.BRACKEN_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.CLEGANE_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.DAYNE_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.FREY_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.GREYJOY_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.HARLAW_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.HIGHTOWER_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.KARSTARK_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.LANNISTER_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.MANDERLY_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.MORMONT_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.REDWYNE_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.REED_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.REYNE_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.ROYCE_BANNER_PATTERN);
         bannerPatternItem(BannerPatterns.STARK_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.TARGARYEN_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.TARLY_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.TULLY_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.TYRELL_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.UMBER_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.VELARYON_BANNER_PATTERN);
 
 
 
@@ -1274,7 +1299,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     private @NotNull ItemModelBuilder bannerPatternItem(DeferredHolder<Item, BannerPatternItem> item) {
         return withExistingParent(item.getId().getPath(),
                 mcLoc("item/generated")).texture("layer0",
-                modLoc("item/" + item.getId().getPath())); // Uses your custom texture
+                modLoc("item/targaryen_banner_pattern")); // Always uses targaryen texture
     }
 
 }

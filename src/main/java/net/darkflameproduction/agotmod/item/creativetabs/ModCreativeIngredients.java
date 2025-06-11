@@ -38,8 +38,33 @@ public class ModCreativeIngredients {
                         pOutput.accept(ModItems.COPPER_HALFPENNY.get());
 
                         /** Banner Patterns */
-                        pOutput.accept(BannerPatterns.TARGARYEN_BANNER_PATTERN.get());
+                        pOutput.accept(BannerPatterns.ARRYN_BANNER_PATTERN.get());
+                        pOutput.accept(BannerPatterns.BAELISH_BANNER_PATTERN.get());
+                        pOutput.accept(BannerPatterns.BARATHEON_BANNER_PATTERN.get());
+                        pOutput.accept(BannerPatterns.BLACKWOOD_BANNER_PATTERN.get());
+                        pOutput.accept(BannerPatterns.BOLTON_BANNER_PATTERN.get());
+                        pOutput.accept(BannerPatterns.BRACKEN_BANNER_PATTERN.get());
+                        pOutput.accept(BannerPatterns.CLEGANE_BANNER_PATTERN.get());
+                        pOutput.accept(BannerPatterns.DAYNE_BANNER_PATTERN.get());
+                        pOutput.accept(BannerPatterns.FREY_BANNER_PATTERN.get());
+                        pOutput.accept(BannerPatterns.GREYJOY_BANNER_PATTERN.get());
+                        pOutput.accept(BannerPatterns.HARLAW_BANNER_PATTERN.get());
+                        pOutput.accept(BannerPatterns.HIGHTOWER_BANNER_PATTERN.get());
+                        pOutput.accept(BannerPatterns.KARSTARK_BANNER_PATTERN.get());
+                        pOutput.accept(BannerPatterns.LANNISTER_BANNER_PATTERN.get());
+                        pOutput.accept(BannerPatterns.MANDERLY_BANNER_PATTERN.get());
+                        pOutput.accept(BannerPatterns.MORMONT_BANNER_PATTERN.get());
+                        pOutput.accept(BannerPatterns.REDWYNE_BANNER_PATTERN.get());
+                        pOutput.accept(BannerPatterns.REED_BANNER_PATTERN.get());
+                        pOutput.accept(BannerPatterns.REYNE_BANNER_PATTERN.get());
+                        pOutput.accept(BannerPatterns.ROYCE_BANNER_PATTERN.get());
                         pOutput.accept(BannerPatterns.STARK_BANNER_PATTERN.get());
+                        pOutput.accept(BannerPatterns.TARGARYEN_BANNER_PATTERN.get());
+                        pOutput.accept(BannerPatterns.TARLY_BANNER_PATTERN.get());
+                        pOutput.accept(BannerPatterns.TULLY_BANNER_PATTERN.get());
+                        pOutput.accept(BannerPatterns.TYRELL_BANNER_PATTERN.get());
+                        pOutput.accept(BannerPatterns.UMBER_BANNER_PATTERN.get());
+                        pOutput.accept(BannerPatterns.VELARYON_BANNER_PATTERN.get());
 
 
                         /** Items */

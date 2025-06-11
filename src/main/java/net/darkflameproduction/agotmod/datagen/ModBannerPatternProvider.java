@@ -24,16 +24,36 @@ public class ModBannerPatternProvider extends TagsProvider<BannerPattern> {
     protected void addTags(HolderLookup.@NotNull Provider provider) {
         System.out.println("DEBUG: Adding banner pattern tags");
 
-        // Create the banner pattern tags for linking items to patterns
-        createBannerPatternTag("targaryen");
+        // Create banner pattern tags for all Game of Thrones houses
+        createBannerPatternTag("arryn");
+        createBannerPatternTag("baelish");
+        createBannerPatternTag("baratheon");
+        createBannerPatternTag("blackwood");
+        createBannerPatternTag("bolton");
+        createBannerPatternTag("bracken");
+        createBannerPatternTag("clegane");
+        createBannerPatternTag("dayne");
+        createBannerPatternTag("frey");
+        createBannerPatternTag("greyjoy");
+        createBannerPatternTag("harlaw");
+        createBannerPatternTag("hightower");
+        createBannerPatternTag("karstark");
+        createBannerPatternTag("lannister");
+        createBannerPatternTag("manderly");
+        createBannerPatternTag("mormont");
+        createBannerPatternTag("redwyne");
+        createBannerPatternTag("reed");
+        createBannerPatternTag("reyne");
+        createBannerPatternTag("royce");
         createBannerPatternTag("stark");
+        createBannerPatternTag("targaryen");
+        createBannerPatternTag("tarly");
+        createBannerPatternTag("tully");
+        createBannerPatternTag("tyrell");
+        createBannerPatternTag("umber");
+        createBannerPatternTag("velaryon");
 
-        System.out.println("DEBUG: Added targaryen and stark banner pattern tags");
-
-        // Add more banner patterns here as you create them
-        // createBannerPatternTag("lannister");
-        // createBannerPatternTag("baratheon");
-        // etc.
+        System.out.println("DEBUG: Added all Game of Thrones house banner pattern tags");
     }
 
     private void createBannerPatternTag(String patternName) {

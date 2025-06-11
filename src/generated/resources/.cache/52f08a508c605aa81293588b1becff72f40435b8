@@ -1,4 +1,4 @@
-// 1.21.3	2025-06-10T16:36:17.5377622	Item Models: agotmod
+// 1.21.3	2025-06-12T00:03:53.3437365	Item Models: agotmod
 65c44e6f1f29781252c76032b90c20b3bc8f7b8a assets/agotmod/models/item/alder_button.json
 f0b6afe25a5640838c024d02c663e7c8f821ffd6 assets/agotmod/models/item/alder_door.json
 2af83e95998f18d674056268682572a94f141042 assets/agotmod/models/item/alder_fence.json
@@ -160,6 +160,7 @@ e9a7a5a15766f88c72405efda8a886df5fac73eb assets/agotmod/models/item/apricot_fenc
 319c04dbe23f23256ddb3be6947bfc006a56f7ca assets/agotmod/models/item/apricot_stairs.json
 9362e485cb88a38fc3a6ecf49de895ea6c4dc749 assets/agotmod/models/item/apricot_trapdoor.json
 95b1686375f2d9fa2519589861ebd1d57d7523c3 assets/agotmod/models/item/apricot_wall.json
+39774e26cdf2c23e2c62657d723d5cbc9129708c assets/agotmod/models/item/arryn_banner_pattern.json
 5436cdb043a230654aa9aaed3a2a526c91ef4c27 assets/agotmod/models/item/ash_button.json
 e8cc2f57129c9f904c60b1165fa535e42a5f3bea assets/agotmod/models/item/ash_door.json
 e22e2a55a695b629df66c2d3f4741fefb034b76c assets/agotmod/models/item/ash_fence.json
@@ -184,6 +185,7 @@ a4960420ff48470b2f0248f1949d988b134fdf1b assets/agotmod/models/item/aspen_slabs.
 651e08a3b8f691372c28397d538d8dbd315647ed assets/agotmod/models/item/aspen_stairs.json
 13ea2ead616a6b9ebafd9645593b6bb11a481693 assets/agotmod/models/item/aspen_trapdoor.json
 dc1c774c17c0235458674b66227d123f77e58165 assets/agotmod/models/item/aspen_wall.json
+39774e26cdf2c23e2c62657d723d5cbc9129708c assets/agotmod/models/item/baelish_banner_pattern.json
 ee547519c3f94f6450f722efa28fb87d325a8dde assets/agotmod/models/item/baobab_button.json
 a6fa9e1ce29526d7c00d319706b6824987e5bccd assets/agotmod/models/item/baobab_door.json
 a68166c2fd6a7aba5907a9bf8d4b2f2a7b08dda2 assets/agotmod/models/item/baobab_fence.json
@@ -196,6 +198,7 @@ a68166c2fd6a7aba5907a9bf8d4b2f2a7b08dda2 assets/agotmod/models/item/baobab_fence
 6ea6f7ee68b36a578a84f0db4bbf1d2319ba17ca assets/agotmod/models/item/baobab_stairs.json
 fda42e727a431ced07a015fbb442721a5f770215 assets/agotmod/models/item/baobab_trapdoor.json
 8cbb547b34b3acd8765848fe101285a3758952a1 assets/agotmod/models/item/baobab_wall.json
+39774e26cdf2c23e2c62657d723d5cbc9129708c assets/agotmod/models/item/baratheon_banner_pattern.json
 307feccbbb165c12755425edcfb8d7353ee5cd73 assets/agotmod/models/item/barley.json
 ad86ee908fadd91265a8855c98e48258afbda2b0 assets/agotmod/models/item/barley_seeds.json
 84229d5b0971c7dc5d145e49a0d4971303820d88 assets/agotmod/models/item/basalt_10_slab.json
@@ -451,6 +454,7 @@ f10d039cee4930a83dcbca62239f397c9358aef6 assets/agotmod/models/item/blackthorn_s
 89a4f94f5527e6586beb28311ff3ebe8a385d8f9 assets/agotmod/models/item/blackthorn_stairs.json
 1dcccdccb460ee3e5ac7e52086387e2e53d404f2 assets/agotmod/models/item/blackthorn_trapdoor.json
 ee3c8f15527f327b1a73d8f00309335212bcb0e1 assets/agotmod/models/item/blackthorn_wall.json
+39774e26cdf2c23e2c62657d723d5cbc9129708c assets/agotmod/models/item/blackwood_banner_pattern.json
 87f301a90359451db570d330fe6af9bf3614d98e assets/agotmod/models/item/black_cherry_button.json
 f9df416cb398d1b76591b74e454014766a23b2df assets/agotmod/models/item/black_cherry_door.json
 20d36b145367837fdc632e4115c8ead0a9e77ed2 assets/agotmod/models/item/black_cherry_fence.json
@@ -535,6 +539,7 @@ c513177aab8e48441a34161d4401177963c337bd assets/agotmod/models/item/blue_rose.js
 e244337b4337933d0e2f14b69adea7cb8fc9f5f9 assets/agotmod/models/item/boar_intestines.json
 c0fc5f29d19af68aa1841d93ded63a6c91545b23 assets/agotmod/models/item/boar_tusk.json
 01f53ecbc17d83f9039b8e539e3241812f8fd05e assets/agotmod/models/item/boiled_leather.json
+39774e26cdf2c23e2c62657d723d5cbc9129708c assets/agotmod/models/item/bolton_banner_pattern.json
 616da0194702f3fa0750d8968f1740bf6a7b1ff2 assets/agotmod/models/item/bolton_levy_boots.json
 4ef217c518fc1f8e1f2286d9673594f3c83e5e40 assets/agotmod/models/item/bolton_levy_chestplate.json
 7acc01f521b863841d9cb7508d4cb5d2718d12c5 assets/agotmod/models/item/bolton_levy_helmet.json
@@ -658,6 +663,7 @@ f283c80c06c1ab87b2d78e0e70d46900bf207e1c assets/agotmod/models/item/bone_7_wall.
 d09b68646770a781763382d4946a7316c3740e28 assets/agotmod/models/item/bone_9_slab.json
 b420c9f43b8aff2cccc6211b3a4be8500a8c9e71 assets/agotmod/models/item/bone_9_stairs.json
 a8a4a09175a39757104e6e7be01799f2ce759dba assets/agotmod/models/item/bone_9_wall.json
+39774e26cdf2c23e2c62657d723d5cbc9129708c assets/agotmod/models/item/bracken_banner_pattern.json
 49563d34fcfd53aef62cfdb926e3a360d8dafa0b assets/agotmod/models/item/bricks_10_slab.json
 46fb71fdbaade4dbfe603cb89befae03d23687eb assets/agotmod/models/item/bricks_10_stairs.json
 9df4873d3eeb063221e182b8afdc33a22436982f assets/agotmod/models/item/bricks_10_wall.json
@@ -1027,6 +1033,7 @@ df4161db43710379489d343075af014de042deef assets/agotmod/models/item/chestnut_pre
 2e64485fe4e04f4b622776776ef84593e5a85051 assets/agotmod/models/item/chestnut_wall.json
 672a3550f2ce40a06cf670d7df90df16ca95388d assets/agotmod/models/item/chickpea.json
 1a60fd707b83d410230eb24bbf85032783796e65 assets/agotmod/models/item/chickpea_seeds.json
+39774e26cdf2c23e2c62657d723d5cbc9129708c assets/agotmod/models/item/clegane_banner_pattern.json
 fe35b4aa7ebbaf72ebd84d54dc93c1df689765b0 assets/agotmod/models/item/cloth.json
 99be54266ebbd987964806c50e0851cdd348f364 assets/agotmod/models/item/coin.json
 18aeae086fb26eb8162df90279366d0778e12b5c assets/agotmod/models/item/coldsnap.json
@@ -1092,6 +1099,7 @@ c8c60c8a42a749bbc67c143e4cacfcc396af9e7e assets/agotmod/models/item/datepalm_fen
 3968bedadba9425c2e177c26afd156795bd223ea assets/agotmod/models/item/datepalm_stairs.json
 4b681168ad9f24f054a6350982e9d94b86d98fd7 assets/agotmod/models/item/datepalm_trapdoor.json
 35847af4858f82dc20b1754338cd5b172d633b48 assets/agotmod/models/item/datepalm_wall.json
+39774e26cdf2c23e2c62657d723d5cbc9129708c assets/agotmod/models/item/dayne_banner_pattern.json
 25c7626a0335644d62aab52e680f52e3ae20ea78 assets/agotmod/models/item/diorite_10_slab.json
 d754f09220462cb9ba537dc3cb91a7697577669c assets/agotmod/models/item/diorite_10_stairs.json
 e07b54e34f929453b758816ac860da57180e4928 assets/agotmod/models/item/diorite_10_wall.json
@@ -1372,6 +1380,7 @@ eaa911d0fe4fdedaa893be1260e2924d650443f9 assets/agotmod/models/item/fir_slabs.js
 15d7d638abd706decf7e2e8c956e811655574bb7 assets/agotmod/models/item/fir_trapdoor.json
 0d75ebd1408c57bc42c0616bbc1bfc810f8c1bd6 assets/agotmod/models/item/fir_wall.json
 aee022c80de37922bd0b4c1094143d401de58988 assets/agotmod/models/item/forget_me_not.json
+39774e26cdf2c23e2c62657d723d5cbc9129708c assets/agotmod/models/item/frey_banner_pattern.json
 4e8bd8731baddae312a99721e9503fa0434d211a assets/agotmod/models/item/frostfire.json
 93aedef44d0f5412b40db07065cc07b762f9d512 assets/agotmod/models/item/fur.json
 083d37997fa7391a0a80b1c16f9e8e5198812d0d assets/agotmod/models/item/garlic.json
@@ -1508,7 +1517,9 @@ cfa6b95aac3338d900ab595c97fe531d2f35691c assets/agotmod/models/item/granite_7_st
 6db7c9c925a361caeaf4c489bd82926a1c56bfe6 assets/agotmod/models/item/granite_9_wall.json
 aa02427bede5944e872484399cea81203c6816f0 assets/agotmod/models/item/green_bean.json
 3e60f3a4a6589a2b581e259da9ecd87cfc638a24 assets/agotmod/models/item/green_bean_seeds.json
+39774e26cdf2c23e2c62657d723d5cbc9129708c assets/agotmod/models/item/greyjoy_banner_pattern.json
 22e16b7421013395dde03fcffec0c2ba0ab5abdf assets/agotmod/models/item/hammer.json
+39774e26cdf2c23e2c62657d723d5cbc9129708c assets/agotmod/models/item/harlaw_banner_pattern.json
 5a2ea726dba5ed010cb678fb00f2c575fd087afa assets/agotmod/models/item/hawthorn_button.json
 e0bfdf3cdbba8ff0c65b7aefac5cc8bbc9676238 assets/agotmod/models/item/hawthorn_door.json
 41b447dc591e4d9b71b3ad5ae36c7b98b1ff6337 assets/agotmod/models/item/hawthorn_fence.json
@@ -1523,6 +1534,7 @@ eb3d9e4331167d0e5b3b62027955e3419da30f83 assets/agotmod/models/item/hawthorn_sta
 b4238ebf9dbc88b507b7e90cbef9f7a28369d225 assets/agotmod/models/item/hawthorn_wall.json
 736ee16827e11b41ab3c6050ba47f5060c3de145 assets/agotmod/models/item/hemp.json
 6d55b99fca6c536a27155b8456af868d6e6428c2 assets/agotmod/models/item/hemp_seeds.json
+39774e26cdf2c23e2c62657d723d5cbc9129708c assets/agotmod/models/item/hightower_banner_pattern.json
 b0b77fb941e95e3f3ee3c4eb75a1623cb04ed962 assets/agotmod/models/item/horseradish.json
 5100a9bfe590d309db30fd109c5339b61a5fb186 assets/agotmod/models/item/horseradish_seeds.json
 2087dd7c42d730654901d6426f93d6fe2c448237 assets/agotmod/models/item/ironborn_levy_boots.json
@@ -1565,7 +1577,9 @@ cc253b7be781d8490b5fab0174e0e2f1b79500da assets/agotmod/models/item/iron_spear.j
 e87ab8217819fac9d96072133b9dff23040796ac assets/agotmod/models/item/ivory_shard.json
 1ab57e133a5bdfad5537d260d3392b09167b8a5a assets/agotmod/models/item/jade.json
 7c5d92efd578e1fcfbde48a888af64e87159a9da assets/agotmod/models/item/jasper.json
+39774e26cdf2c23e2c62657d723d5cbc9129708c assets/agotmod/models/item/karstark_banner_pattern.json
 7195c216bf9e2f79940b343d118e4e34960c5e57 assets/agotmod/models/item/ladys_lace.json
+39774e26cdf2c23e2c62657d723d5cbc9129708c assets/agotmod/models/item/lannister_banner_pattern.json
 4830d7d2ec2a47318ad9cf73820ae47dd3d33caf assets/agotmod/models/item/lavender.json
 36386815e40fa03230f34958a616799b03a29268 assets/agotmod/models/item/leek.json
 670276c66845a7aa7a35e415bab9da1233f869b5 assets/agotmod/models/item/leek_seeds.json
@@ -1621,6 +1635,7 @@ e33be042ad7b0421e37fdf2542c0ad314af77cc5 assets/agotmod/models/item/mahogany_tra
 6ea52c34fe3773bc9dcc1796113106055e6313a6 assets/agotmod/models/item/mahogany_wall.json
 475677e084b0bfaf5b039690f0633468e69012de assets/agotmod/models/item/malachite.json
 fb2995a888c0f697aeabaef990be58fc45db1a0c assets/agotmod/models/item/mammoth_spawn_egg.json
+39774e26cdf2c23e2c62657d723d5cbc9129708c assets/agotmod/models/item/manderly_banner_pattern.json
 5afee6286410ec276902a7e351abc7ca911827b5 assets/agotmod/models/item/manderly_levy_boots.json
 07fb85b17d9846ad8f8faa1debe8fe25e523a67d assets/agotmod/models/item/manderly_levy_chestplate.json
 5f65e88749b7437a9fc4b8d38ec0c82a9b20a522 assets/agotmod/models/item/manderly_levy_helmet.json
@@ -1650,6 +1665,7 @@ be27db764731035039f823a21ea68d39866d072e assets/agotmod/models/item/maple_stairs
 7e84d6e5923a4355b7d96ad8c1fa67bd503909e0 assets/agotmod/models/item/maple_wall.json
 4f85871ab029ae49ce71349653c4aa85caa107bf assets/agotmod/models/item/moonbloom.json
 a65ed69a22b13b2ae37a10e526e1d920ddfc4d59 assets/agotmod/models/item/moonstone.json
+39774e26cdf2c23e2c62657d723d5cbc9129708c assets/agotmod/models/item/mormont_banner_pattern.json
 7f2b76133633d3188a5b7e69a9243305371ce31a assets/agotmod/models/item/mud_brick_10_slab.json
 06987590165df6c807a605cc8bb5ecd975fec367 assets/agotmod/models/item/mud_brick_10_stairs.json
 ba837e51be8d7dd4201328d57bfadd98f3ddea4d assets/agotmod/models/item/mud_brick_10_wall.json
@@ -2344,9 +2360,13 @@ f2594b9d344eeef76aaeaa41280d1b3e68d817f9 assets/agotmod/models/item/redwood_slab
 5ae6cb7bba5ec7397fadcf8b82a436119f13fc23 assets/agotmod/models/item/redwood_stairs.json
 c97e6fcb99c84ca5c5618d5d4f09e7e873206a18 assets/agotmod/models/item/redwood_trapdoor.json
 5e27a0d88f50fd6f557001941099a11c73f889b1 assets/agotmod/models/item/redwood_wall.json
+39774e26cdf2c23e2c62657d723d5cbc9129708c assets/agotmod/models/item/redwyne_banner_pattern.json
 d0e7b673c33fb29a359f357a635ef5d8eb6f6178 assets/agotmod/models/item/red_onion.json
 f4b8f07abe49b7559ac48c200e09c1188a4f79d5 assets/agotmod/models/item/red_onion_seeds.json
+39774e26cdf2c23e2c62657d723d5cbc9129708c assets/agotmod/models/item/reed_banner_pattern.json
+39774e26cdf2c23e2c62657d723d5cbc9129708c assets/agotmod/models/item/reyne_banner_pattern.json
 6629b9624923c7e62c15946e39002039eb2fca62 assets/agotmod/models/item/rose.json
+39774e26cdf2c23e2c62657d723d5cbc9129708c assets/agotmod/models/item/royce_banner_pattern.json
 75b0b5d11ee92a6a9d3f8f799d44b1ccdb49cc2f assets/agotmod/models/item/rsandstone_10_slab.json
 8c538db29c1a53f73d5c19a4b456b4325f724144 assets/agotmod/models/item/rsandstone_10_stairs.json
 3cccc4dbfff246f64f8f62649c00cc62d23dd426 assets/agotmod/models/item/rsandstone_10_wall.json
@@ -2708,7 +2728,7 @@ dd517aaf7f19e28d0512d52781d86bfc45005456 assets/agotmod/models/item/sstone_8_sta
 e1b2e58557eda1ef5858829d8954126a9291964b assets/agotmod/models/item/sstone_9_slab.json
 b6259b140b4e92c0fa7198a63c0dac4f07fa6e72 assets/agotmod/models/item/sstone_9_stairs.json
 549de902386ac99fd4fc00bfd1bbd318bbbb930e assets/agotmod/models/item/sstone_9_wall.json
-58ac5807ba9b022cb1bf801391f5838cd6492e30 assets/agotmod/models/item/stark_banner_pattern.json
+39774e26cdf2c23e2c62657d723d5cbc9129708c assets/agotmod/models/item/stark_banner_pattern.json
 e6d20cb665c0e1f3786ee3104db6f9237539d615 assets/agotmod/models/item/stark_levy_boots.json
 6561b2e4478fd134d42770813f5841d134fa5581 assets/agotmod/models/item/stark_levy_chestplate.json
 429aa0ace0d15b538173c412bfe983845f46bde3 assets/agotmod/models/item/stark_levy_helmet.json
@@ -2863,6 +2883,7 @@ ca2147f7a39e89335afcccd37d42b9b53e10c565 assets/agotmod/models/item/sycamore_tra
 b9927c8bd59aad6b8f82bf06dc963e586c4fb699 assets/agotmod/models/item/sycamore_wall.json
 460f4a5075ad48b5d849e0b2d733f2347e49919b assets/agotmod/models/item/tansy.json
 39774e26cdf2c23e2c62657d723d5cbc9129708c assets/agotmod/models/item/targaryen_banner_pattern.json
+39774e26cdf2c23e2c62657d723d5cbc9129708c assets/agotmod/models/item/tarly_banner_pattern.json
 0130f60445f256d7b5aefe7bb958e0e36b8be32e assets/agotmod/models/item/thenn_bronze_boots.json
 acdae4e4f2a95767939e607cc986a5e9784ba5ed assets/agotmod/models/item/thenn_bronze_chestplate.json
 926bcbb016917140462e8a41bc85db48315d0615 assets/agotmod/models/item/thenn_bronze_helmet.json
@@ -3000,8 +3021,11 @@ de83176ab13070ac82f0f2bd6edb2fb9ebbb0602 assets/agotmod/models/item/tuff_brick_8
 898571efb24178f5b67f9d490fb18f23983070f2 assets/agotmod/models/item/tuff_brick_9_slab.json
 3d5a2247930cacf8f7c089bb192a3f857166a5d8 assets/agotmod/models/item/tuff_brick_9_stairs.json
 690b38e5f28d0ac150c0c41ce3e35388a92e531e assets/agotmod/models/item/tuff_brick_9_wall.json
+39774e26cdf2c23e2c62657d723d5cbc9129708c assets/agotmod/models/item/tully_banner_pattern.json
 e0e0a96463e57a1e75b4bcb8373f7faf73cf59f6 assets/agotmod/models/item/turnip.json
 0449f0879550b37be333f6f13d2bd1a513075113 assets/agotmod/models/item/turnip_seeds.json
+39774e26cdf2c23e2c62657d723d5cbc9129708c assets/agotmod/models/item/tyrell_banner_pattern.json
+39774e26cdf2c23e2c62657d723d5cbc9129708c assets/agotmod/models/item/umber_banner_pattern.json
 30eb144022868ca314de870f1b6f42e6f2c00abe assets/agotmod/models/item/upgrade_kit_bronze.json
 def856bb8444dc4b0e77036cbfdc582fcaff310d assets/agotmod/models/item/upgrade_kit_bronze_plate.json
 fc70d4f4e5392d3a4f8211b73b58d885246d6955 assets/agotmod/models/item/upgrade_kit_chief.json
@@ -3010,6 +3034,7 @@ d45e93aa868593f19b0bfafdebc10c0cbc5255c9 assets/agotmod/models/item/upgrade_kit_
 5cb6d3922cdb36f779902ce1eeb679e62b242dcc assets/agotmod/models/item/upgrade_kit_leather.json
 1bba19299fd02b8ed7aaba8698b0cb48dc1bb235 assets/agotmod/models/item/upgrade_kit_noble.json
 701e9b1460820a1e2b6a5039f094dea65373bc8c assets/agotmod/models/item/upgrade_kit_steel.json
+39774e26cdf2c23e2c62657d723d5cbc9129708c assets/agotmod/models/item/velaryon_banner_pattern.json
 0969f3064166cb958ca0e72d3c32afde6f85dc06 assets/agotmod/models/item/weirwood_button.json
 0a93e64d3121d9caa5d5c3e1b007fe73dbc16d5c assets/agotmod/models/item/weirwood_door.json
 d23f53d0c0b6793fa0a361f823012598f2df16c3 assets/agotmod/models/item/weirwood_fence.json

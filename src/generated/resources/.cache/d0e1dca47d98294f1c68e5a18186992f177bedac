@@ -1,3 +1,28 @@
-// 1.21.3	2025-06-10T16:36:17.6139332	Tags for minecraft:banner_pattern mod id agotmod
+// 1.21.3	2025-06-12T00:03:53.4212316	Tags for minecraft:banner_pattern mod id agotmod
+bb54a625a6759d4aaef0e5c7f54fcdb4c31b6e25 data/agotmod/tags/banner_pattern/pattern_item/arryn.json
+463a13f99f336988ee351101830775bd7b1af604 data/agotmod/tags/banner_pattern/pattern_item/baelish.json
+1dba4dac1fac4e540a12a2b232b2aab850898696 data/agotmod/tags/banner_pattern/pattern_item/baratheon.json
+a6cfcdd60c47cd6dcf63562bd881d998c49f6210 data/agotmod/tags/banner_pattern/pattern_item/blackwood.json
+9c5e302058caaf1781f93a0da4a0648ee1cd045a data/agotmod/tags/banner_pattern/pattern_item/bolton.json
+47071141ee4f695e9d3913f4219c6ddfb6813b25 data/agotmod/tags/banner_pattern/pattern_item/bracken.json
+7602721dcc7df9e404a61b56ec8e4ceba21102fa data/agotmod/tags/banner_pattern/pattern_item/clegane.json
+94d634a5fd7017a09b25599bae13f903d5dd6b40 data/agotmod/tags/banner_pattern/pattern_item/dayne.json
+d9591585335e327d3bf240ce6f50f18204d7f5aa data/agotmod/tags/banner_pattern/pattern_item/frey.json
+20eca359fe42fe4c6c48404a35fbcf0559468e13 data/agotmod/tags/banner_pattern/pattern_item/greyjoy.json
+5718fe38ed06795165586a2033a0303ab56f38b4 data/agotmod/tags/banner_pattern/pattern_item/harlaw.json
+91792fc5e8da0e48e3d4ef7c384a36e144885875 data/agotmod/tags/banner_pattern/pattern_item/hightower.json
+f4e77fa30e33e92d4fa442cdf154b289dc560a28 data/agotmod/tags/banner_pattern/pattern_item/karstark.json
+f071dec2df89985616c0e0fc3682e86b7f4a02df data/agotmod/tags/banner_pattern/pattern_item/lannister.json
+cce04703dd754e56e24a7039da09611563ebea47 data/agotmod/tags/banner_pattern/pattern_item/manderly.json
+ea3e2cf438e276bbb476f420279011936c2034a7 data/agotmod/tags/banner_pattern/pattern_item/mormont.json
+11c25b1e1fc3587134e0a3e1cd1ab73c311c24e4 data/agotmod/tags/banner_pattern/pattern_item/redwyne.json
+3274d14e9b6591f92ab50230c816f4c3bd933743 data/agotmod/tags/banner_pattern/pattern_item/reed.json
+b95859621a08814f2bee19c28432b50b43fd9146 data/agotmod/tags/banner_pattern/pattern_item/reyne.json
+2eda0eba6f65008e0d741b14cb1a65ed817cc421 data/agotmod/tags/banner_pattern/pattern_item/royce.json
 3130327ccee02665ba77269ce5b464e173aa9475 data/agotmod/tags/banner_pattern/pattern_item/stark.json
 6b6c2e96a455b3065fd46740ac3081a0c0a5b996 data/agotmod/tags/banner_pattern/pattern_item/targaryen.json
+6bd1d0167c74749f592483af55728a09357fb28a data/agotmod/tags/banner_pattern/pattern_item/tarly.json
+3322f78e1b65fa37042a3e8a57949792664b6366 data/agotmod/tags/banner_pattern/pattern_item/tully.json
+4db08c06e8072a430b85031dc85afd8db138ee67 data/agotmod/tags/banner_pattern/pattern_item/tyrell.json
+4d78ef4e5494d165ff130fb165c0dd0124e8d8e4 data/agotmod/tags/banner_pattern/pattern_item/umber.json
+fd8cafe192deca08ccbb7b7091dfb211ba9ec31d data/agotmod/tags/banner_pattern/pattern_item/velaryon.json
