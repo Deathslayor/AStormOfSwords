@@ -18,7 +18,7 @@ import net.minecraft.world.level.storage.LevelResource;
 import net.darkflameproduction.agotmod.entity.ModBlockEntities;
 import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.darkflameproduction.agotmod.entity.ModEntities;
-import net.darkflameproduction.agotmod.entity.custom.npc.system.SimpleBedWarningSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.sleep.SimpleBedWarningSystem;
 
 import java.nio.file.Files;
 import java.nio.file.Path;

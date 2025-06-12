@@ -1,4 +1,4 @@
-// 1.21.3	2025-06-12T00:03:53.3437365	Item Models: agotmod
+// 1.21.3	2025-06-12T15:48:34.5872636	Item Models: agotmod
 65c44e6f1f29781252c76032b90c20b3bc8f7b8a assets/agotmod/models/item/alder_button.json
 f0b6afe25a5640838c024d02c663e7c8f821ffd6 assets/agotmod/models/item/alder_door.json
 2af83e95998f18d674056268682572a94f141042 assets/agotmod/models/item/alder_fence.json
@@ -1663,6 +1663,7 @@ f0d6e0e0a3a0491ef22c9fa7733b23a40c4c6c11 assets/agotmod/models/item/maple_slabs.
 be27db764731035039f823a21ea68d39866d072e assets/agotmod/models/item/maple_stairs.json
 3e8043c53ed1c25278c6b8d5d23a073cba3a89b7 assets/agotmod/models/item/maple_trapdoor.json
 7e84d6e5923a4355b7d96ad8c1fa67bd503909e0 assets/agotmod/models/item/maple_wall.json
+9fc731672e55fd7a719a520c7a4eb710f5b159d9 assets/agotmod/models/item/miner_barrel_icon.json
 4f85871ab029ae49ce71349653c4aa85caa107bf assets/agotmod/models/item/moonbloom.json
 a65ed69a22b13b2ae37a10e526e1d920ddfc4d59 assets/agotmod/models/item/moonstone.json
 39774e26cdf2c23e2c62657d723d5cbc9129708c assets/agotmod/models/item/mormont_banner_pattern.json

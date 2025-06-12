@@ -8,11 +8,10 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.darkflameproduction.agotmod.AGoTMod;
-import net.darkflameproduction.agotmod.entity.custom.npc.system.GrocerSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.grocer.GrocerSystem;
 import net.darkflameproduction.agotmod.sound.ModSounds;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import org.lwjgl.glfw.GLFW;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -345,7 +344,7 @@ public class GrocerInventoryScreen extends Screen {
     private Map<String, Integer> transactionAmounts = new HashMap<>();
 
     // Tooltip state tracking
-    private net.darkflameproduction.agotmod.entity.custom.npc.system.GrocerSystem.GrocerInventoryEntry currentTooltipEntry = null;
+    private GrocerSystem.GrocerInventoryEntry currentTooltipEntry = null;
     private int tooltipX = 0;
     private int tooltipY = 0;
     private boolean tooltipPositioned = false;
@@ -982,11 +981,11 @@ public class GrocerInventoryScreen extends Screen {
         int endIndex = Math.min(startIndex + (actualVisibleRows * itemsPerRow), inventoryEntries.size());
 
         // Variable to track hovered item for tooltip
-        net.darkflameproduction.agotmod.entity.custom.npc.system.GrocerSystem.GrocerInventoryEntry hoveredEntry = null;
+        GrocerSystem.GrocerInventoryEntry hoveredEntry = null;
 
         // Draw items in dynamic grid format (only within bounds)
         for (int i = startIndex; i < endIndex; i++) {
-            net.darkflameproduction.agotmod.entity.custom.npc.system.GrocerSystem.GrocerInventoryEntry entry = inventoryEntries.get(i);
+            GrocerSystem.GrocerInventoryEntry entry = inventoryEntries.get(i);
 
             // Calculate grid position
             int relativeIndex = i - startIndex;
@@ -1063,7 +1062,7 @@ public class GrocerInventoryScreen extends Screen {
     }
 
     // Calculate and save tooltip position (called once per tooltip)
-    private void calculateTooltipPosition(net.darkflameproduction.agotmod.entity.custom.npc.system.GrocerSystem.GrocerInventoryEntry entry, int mouseX, int mouseY) {
+    private void calculateTooltipPosition(GrocerSystem.GrocerInventoryEntry entry, int mouseX, int mouseY) {
         String itemName = entry.displayName;
         String amountText = "Amount: " + entry.amount; // Use full number, not formatted
 
@@ -1105,7 +1104,7 @@ public class GrocerInventoryScreen extends Screen {
     }
 
     // Draw tooltip using saved position (doesn't take mouse coordinates)
-    private void drawItemTooltip(GuiGraphics guiGraphics, net.darkflameproduction.agotmod.entity.custom.npc.system.GrocerSystem.GrocerInventoryEntry entry) {
+    private void drawItemTooltip(GuiGraphics guiGraphics, GrocerSystem.GrocerInventoryEntry entry) {
         String itemName = entry.displayName;
         String amountText = "Amount: " + entry.amount; // Use full number, not formatted
 

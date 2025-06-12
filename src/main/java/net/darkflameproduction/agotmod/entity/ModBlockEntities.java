@@ -2,7 +2,7 @@ package net.darkflameproduction.agotmod.entity;
 
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.block.ModBLocks;
-import net.darkflameproduction.agotmod.block.custom.FarmerBarrelBlockEntity;
+import net.darkflameproduction.agotmod.block.custom.JobBarrelBlockEntity;
 import net.darkflameproduction.agotmod.block.custom.TownHallBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -20,11 +20,19 @@ public class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, AGoTMod.MOD_ID);
 
-    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<FarmerBarrelBlockEntity>> FARMER_BARREL =
-            BLOCK_ENTITIES.register("farmer_barrel", () ->
-                    new BlockEntityType<>(
-                            FarmerBarrelBlockEntity::new,
-                            ModBLocks.FARMER_BARREL.get()));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<JobBarrelBlockEntity>> JOB_BARREL =
+            BLOCK_ENTITIES.register("job_barrel", () -> {
+                List<Block> barrelBlocks = new ArrayList<>();
+
+                // Add all job barrel blocks
+                barrelBlocks.add(ModBLocks.FARMER_BARREL.get());
+                barrelBlocks.add(ModBLocks.MINER_BARREL.get());
+                Block[] barrelBlocksArray = barrelBlocks.toArray(new Block[0]);
+
+                return new BlockEntityType<>(
+                        JobBarrelBlockEntity::new,
+                        barrelBlocksArray);
+            });
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TownHallBlockEntity>> TOWN_HALL =
             BLOCK_ENTITIES.register("town_hall", () ->

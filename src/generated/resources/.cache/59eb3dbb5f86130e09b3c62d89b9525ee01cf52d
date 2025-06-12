@@ -1,4 +1,4 @@
-// 1.21.3	2025-06-07T14:48:09.6163332	Loot Tables
+// 1.21.3	2025-06-12T15:48:34.6871329	Loot Tables
 dcab3871310df0811beb8de47adc40c83d85986b data/agotmod/loot_table/blocks/alder_button.json
 81071778b6225f49c02483465d22441e05162a1b data/agotmod/loot_table/blocks/alder_door.json
 33ccfef8d939079aebfc7963299df0ced91481b5 data/agotmod/loot_table/blocks/alder_fence.json
@@ -2189,6 +2189,7 @@ b156bcafe217b2d2884ccef755d1d93aefdd60d1 data/agotmod/loot_table/blocks/maple_wa
 ef69f60098ba9041e85609649dda5ed9653877be data/agotmod/loot_table/blocks/maple_wall_sign.json
 87420e10cf264182a46fcd435e22292abd19698f data/agotmod/loot_table/blocks/maple_wood.json
 d9268fe9e2b1d806d2cdef83aeeb2b4833fc9b35 data/agotmod/loot_table/blocks/maple_wood_stripped.json
+710249bf4804f1153cf954153569be394a836f74 data/agotmod/loot_table/blocks/miner_barrel.json
 d9cc32ba7c3d5cfe36a868ec93f899ee39ff32b0 data/agotmod/loot_table/blocks/mint_block.json
 9c04a7a611fe3a58ce680a89f2c8fdb2e2d61a6a data/agotmod/loot_table/blocks/moonbloom.json
 69683af07cfc3d4de8405136385c59b9dd2ad767 data/agotmod/loot_table/blocks/moonstone_block.json

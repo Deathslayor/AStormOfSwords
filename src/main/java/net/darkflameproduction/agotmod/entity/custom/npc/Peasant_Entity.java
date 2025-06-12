@@ -1,8 +1,25 @@
 package net.darkflameproduction.agotmod.entity.custom.npc;
 
 import net.darkflameproduction.agotmod.entity.animations.ModAnimationDefinitions;
-import net.darkflameproduction.agotmod.entity.custom.npc.goals.*;
-import net.darkflameproduction.agotmod.entity.custom.npc.system.*;
+import net.darkflameproduction.agotmod.entity.custom.npc.goals.behaviour.*;
+import net.darkflameproduction.agotmod.entity.custom.npc.goals.farmer.BarrelDropOffGoal;
+import net.darkflameproduction.agotmod.entity.custom.npc.goals.farmer.FarmingGoal;
+import net.darkflameproduction.agotmod.entity.custom.npc.goals.grocer.GrocerCollectionGoal;
+import net.darkflameproduction.agotmod.entity.custom.npc.goals.guard.GuardCombatGoal;
+import net.darkflameproduction.agotmod.entity.custom.npc.goals.guard.GuardPatrolGoal;
+import net.darkflameproduction.agotmod.entity.custom.npc.goals.inventory.CollectFoodGoal;
+import net.darkflameproduction.agotmod.entity.custom.npc.goals.sleep.FindBedGoal;
+import net.darkflameproduction.agotmod.entity.custom.npc.goals.sleep.SleepGoal;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.NameSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.farmer.FarmingSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.grocer.GrocerSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.guard.GuardSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.inventory.HungerSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.inventory.InventorySystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.sleep.HomeSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.sleep.SleepSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.sleep.TeleportSystem;
 import net.darkflameproduction.agotmod.network.OpenGrocerInventoryPacket;
 import net.darkflameproduction.agotmod.sound.ModSounds;
 import net.minecraft.core.BlockPos;
@@ -59,8 +76,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     // Entity data accessors
     private static final EntityDataAccessor<Boolean> IS_SLEEPING = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Long> LAST_SLEEP_TIME = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.LONG);
-    private static final EntityDataAccessor<ItemStack> DATA_ITEM_IN_MAIN_HAND =
-            SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.ITEM_STACK);
+    private static final EntityDataAccessor<ItemStack> DATA_ITEM_IN_MAIN_HAND = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.ITEM_STACK);
     private static final EntityDataAccessor<Integer> HUNGER_LEVEL = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> NEEDS_FOOD_COLLECTION = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<String> JOB_TYPE = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.STRING);

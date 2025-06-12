@@ -92,7 +92,6 @@ public class ModWorldGenProvider extends DatapackBuiltinEntriesProvider {
     }
 
     private static void bootstrapBannerPatterns(BootstrapContext<BannerPattern> context) {
-        // Register all Game of Thrones house banner patterns
         context.register(ARRYN, new BannerPattern(ARRYN.location(), "arryn"));
         context.register(BAELISH, new BannerPattern(BAELISH.location(), "baelish"));
         context.register(BARATHEON, new BannerPattern(BARATHEON.location(), "baratheon"));

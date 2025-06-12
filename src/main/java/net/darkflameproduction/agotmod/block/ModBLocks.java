@@ -2106,7 +2106,17 @@ public class ModBLocks {
 
 
     public static final DeferredBlock<Block> FARMER_BARREL = registerBlock("farmer_barrel",
-            FarmerBarrelBlock::new,
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> MINER_BARREL = registerBlock("miner_barrel",
+            JobBarrelBlock::new,
             BlockBehaviour.Properties.of()
                     .mapColor(MapColor.WOOD)
                     .instrument(NoteBlockInstrument.BASS)

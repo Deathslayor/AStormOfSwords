@@ -2,7 +2,6 @@ package net.darkflameproduction.agotmod.datagen;
 
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.block.ModBLocks;
-import net.darkflameproduction.agotmod.block.custom.FarmerBarrelBlock;
 import net.darkflameproduction.agotmod.block.custom.GhostGrassBlock;
 import net.darkflameproduction.agotmod.block.custom.HorseradishCropBlock;
 import net.darkflameproduction.agotmod.block.custom.WeirwoodFaceLogBlock;
@@ -1825,7 +1824,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         // ---------------------(Job Blocks)--------------------- //
         blockWithItem(ModBLocks.TOWN_HALL);
-        farmerBarrelBlock(ModBLocks.FARMER_BARREL.get());
+        jobBarrelBlock(ModBLocks.FARMER_BARREL.get());
+        jobBarrelBlock(ModBLocks.MINER_BARREL.get());
+
 
         // ---------------------(CROPS)--------------------- //
         makeCrop((CropBlock) ModBLocks.HORSERADISH_CROP.get(), "horseradish_crop_stage", "horseradish_crop_stage");
@@ -2001,30 +2002,33 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 });
     }
 
-    private void farmerBarrelBlock(Block block) {
-        ModelFile model = models().cube(name(block),
-                modLoc("block/farmer_barrel_bottom"),           // bottom
-                modLoc("block/farmer_barrel_top"),              // top
-                modLoc("block/farmer_barrel_side"),             // north
-                modLoc("block/farmer_barrel_side"),             // south
-                modLoc("block/farmer_barrel_side"),             // west
-                modLoc("block/farmer_barrel_side")              // east
-        ).texture("particle", modLoc("block/farmer_barrel_side"));
+    private void jobBarrelBlock(Block block) {
+        String blockName = name(block);
+        String jobType = blockName.replace("_barrel", ""); // Extracts job type from block name
+
+        ModelFile model = models().cube(blockName,
+                modLoc("block/barrel_bottom"),                           // bottom
+                modLoc("block/barrel_top"),                              // top
+                modLoc("block/barrel_" + jobType),                       // north
+                modLoc("block/barrel_" + jobType),                       // south
+                modLoc("block/barrel_" + jobType),                       // west
+                modLoc("block/barrel_" + jobType)                        // east
+        ).texture("particle", modLoc("block/barrel_" + jobType));
 
         // Create open variant
-        ModelFile openModel = models().cube(name(block) + "_open",
-                modLoc("block/farmer_barrel_bottom"),           // bottom
-                modLoc("block/farmer_barrel_top_open"),         // top
-                modLoc("block/farmer_barrel_side"),             // north
-                modLoc("block/farmer_barrel_side"),             // south
-                modLoc("block/farmer_barrel_side"),             // west
-                modLoc("block/farmer_barrel_side")              // east
-        ).texture("particle", modLoc("block/farmer_barrel_side"));
+        ModelFile openModel = models().cube(blockName + "_open",
+                modLoc("block/barrel_bottom"),                           // bottom
+                modLoc("block/barrel_top_open"),                         // top
+                modLoc("block/barrel_" + jobType),                       // north
+                modLoc("block/barrel_" + jobType),                       // south
+                modLoc("block/barrel_" + jobType),                       // west
+                modLoc("block/barrel_" + jobType)                        // east
+        ).texture("particle", modLoc("block/barrel_" + jobType));
 
         getVariantBuilder(block)
                 .forAllStates(state -> {
-                    Direction facing = state.getValue(FarmerBarrelBlock.FACING);
-                    boolean open = state.getValue(FarmerBarrelBlock.OPEN);
+                    Direction facing = state.getValue(BlockStateProperties.FACING); // or HORIZONTAL_FACING
+                    boolean open = state.getValue(BlockStateProperties.OPEN);
 
                     return ConfiguredModel.builder()
                             .modelFile(open ? openModel : model)

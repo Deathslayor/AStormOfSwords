@@ -7,7 +7,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.SimpleContainer;
-import net.darkflameproduction.agotmod.entity.custom.npc.system.InventorySystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.inventory.InventorySystem;
 
 public class NPCInventoryMenu extends AbstractContainerMenu {
     private final Peasant_Entity npc;

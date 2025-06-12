@@ -120,11 +120,93 @@ public class ClientTownAreaManager {
      * Remove town area
      */
     public static void removeTownArea(BlockPos pos) {
-        TownAreaData removed = townAreas.remove(pos);
+        TownAreaData removed = townAreas.get(pos);
+
         if (removed != null) {
+            // Check if the player is currently in this town that's being deleted
+            if (pos.equals(currentTownPos)) {
+                // Player is in the town being deleted - show exit message
+                TownNotificationOverlay.showExitMessage(removed.townName);
+                System.out.println("DEBUG: Player was in deleted town " + removed.townName + ", showing exit message");
+
+                // Clear current town status
+                currentTownPos = null;
+                currentTownName = null;
+            }
+
+            // Remove the town from our data
+            townAreas.remove(pos);
             System.out.println("DEBUG: ClientTownAreaManager removed town: " + removed.townName + " at " + pos);
             saveTownData();
+        } else {
+            System.out.println("DEBUG: Attempted to remove town at " + pos + " but it wasn't found in ClientTownAreaManager");
         }
+    }
+
+    /**
+     * Force clear current town status (useful for debugging or cleanup)
+     */
+    public static void clearCurrentTownStatus() {
+        if (currentTownPos != null && currentTownName != null) {
+            TownNotificationOverlay.showExitMessage(currentTownName);
+            System.out.println("DEBUG: Force clearing current town status: " + currentTownName);
+        }
+
+        currentTownPos = null;
+        currentTownName = null;
+        TownNotificationOverlay.clearMessage();
+    }
+
+    /**
+     * Check if a specific town position exists in our data
+     */
+    public static boolean hasTownAt(BlockPos pos) {
+        return townAreas.containsKey(pos);
+    }
+
+    /**
+     * Get town data for a specific position
+     */
+    public static TownAreaData getTownDataAt(BlockPos pos) {
+        return townAreas.get(pos);
+    }
+
+    /**
+     * Validate current player status against known towns (for debugging)
+     */
+    public static void validatePlayerStatus() {
+        Minecraft mc = Minecraft.getInstance();
+        Player player = mc.player;
+
+        if (player == null) return;
+
+        BlockPos playerPos = player.blockPosition();
+
+        // Check if current town position is still valid
+        if (currentTownPos != null) {
+            TownAreaData currentTownData = townAreas.get(currentTownPos);
+
+            if (currentTownData == null) {
+                // Current town no longer exists
+                System.out.println("DEBUG: Current town " + currentTownName + " no longer exists, clearing status");
+                TownNotificationOverlay.showExitMessage(currentTownName != null ? currentTownName : "Unknown Town");
+                currentTownPos = null;
+                currentTownName = null;
+            } else if (!isPlayerInTownArea(playerPos, currentTownPos, currentTownData.radius)) {
+                // Player is no longer in the current town area
+                System.out.println("DEBUG: Player no longer in current town " + currentTownName + ", clearing status");
+                TownNotificationOverlay.showExitMessage(currentTownName);
+                currentTownPos = null;
+                currentTownName = null;
+            }
+        }
+    }
+
+    /**
+     * Get all town areas (for debugging)
+     */
+    public static Map<BlockPos, TownAreaData> getAllTownAreas() {
+        return new HashMap<>(townAreas);
     }
 
     /**
@@ -135,6 +217,12 @@ public class ClientTownAreaManager {
         tickCounter++;
         if (tickCounter >= CHECK_INTERVAL) {
             tickCounter = 0;
+
+            // Every 5 seconds, run a validation check
+            if ((tickCounter / CHECK_INTERVAL) % 5 == 0) {
+                validatePlayerStatus();
+            }
+
             checkPlayerTownStatus();
         }
     }

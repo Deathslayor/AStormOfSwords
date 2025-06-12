@@ -1,4 +1,4 @@
-// 1.21.3	2025-06-06T14:53:34.411731	Block States: agotmod
+// 1.21.3	2025-06-12T15:48:34.7320163	Block States: agotmod
 78b6cf02fa0f02bb58a5d7645020281ff8bc4c59 assets/agotmod/blockstates/alder_button.json
 4babc4c353cbdf68af13d112a9b9311de8af4fe1 assets/agotmod/blockstates/alder_door.json
 e817d04da7d05e8c00ce23999fdc528a05195c1d assets/agotmod/blockstates/alder_fence.json
@@ -2188,6 +2188,7 @@ df604fdd8f5433ccca39519ad0d8c7c0eb6a7426 assets/agotmod/blockstates/maple_trapdo
 f87741feeeed981da6145aa9ac1952495a3c254e assets/agotmod/blockstates/maple_wall_sign.json
 4bb5b1e12aa184e8678f35e4ae8389bfb666e890 assets/agotmod/blockstates/maple_wood.json
 7d707ce45053b2190d76d91f348f02e5a15b2081 assets/agotmod/blockstates/maple_wood_stripped.json
+66164eb21cd7fa5b5eca9398d4b6b6ef73c0a498 assets/agotmod/blockstates/miner_barrel.json
 a3b0b40ed0dae333e5fda9b59af84af8dff0af9c assets/agotmod/blockstates/moonbloom.json
 2a366ae4c03836545fbedf0afb9ce256a14c0a54 assets/agotmod/blockstates/moonstone_block.json
 8d5422807390205e45424ad3c325501f35e7ac9f assets/agotmod/blockstates/moonstone_deepslate_ore.json
@@ -8005,8 +8006,8 @@ cb6adb797bd0d3c11bbb4ba5fe34be1c02156a8a assets/agotmod/models/block/ebony_wall_
 75c52ee54818796a704a84efd9cb4cd2b3f0381b assets/agotmod/models/block/ebony_wood_stripped.json
 5966d1ec985393b258d882a2544dd324502fa6b0 assets/agotmod/models/block/ebony_wood_stripped_horizontal.json
 f634afe208a4271a30445c789a7bc73fc97343c9 assets/agotmod/models/block/evening_star.json
-2f7861473f5ffa61418d67387836abd953d0ca96 assets/agotmod/models/block/farmer_barrel.json
-6f78490adc2e0ae37c78682d08c97ae7e4bd5f99 assets/agotmod/models/block/farmer_barrel_open.json
+0e9cf61680c7f3a335c5c1dc93692f77c25fdda4 assets/agotmod/models/block/farmer_barrel.json
+35fe0ab77ae15429a76bfc32392bafcf3883eba2 assets/agotmod/models/block/farmer_barrel_open.json
 5a8bdee4ce6c49c1c4b32e1bf9e8b5bfff3406f0 assets/agotmod/models/block/fig_button.json
 09ca3a7e86619b861152be53237c4921985901e1 assets/agotmod/models/block/fig_button_pressed.json
 54b040cc85ce7439677c5d070c3c59856277d5ca assets/agotmod/models/block/fig_door_bottom_left.json
@@ -8851,6 +8852,8 @@ cdea5996e788a8a2e7b93f413f63beee50d85b56 assets/agotmod/models/block/maple_wood.
 cb4e6b41e9fe66d9e1aea96fa9e6af0a0811c032 assets/agotmod/models/block/maple_wood_horizontal.json
 8641b715b8e33b53f46de86c0588c588be05c360 assets/agotmod/models/block/maple_wood_stripped.json
 8412505dece74cdc1fce080f425704529c4fe58f assets/agotmod/models/block/maple_wood_stripped_horizontal.json
+4d88ca783d4887cb7c11ac9ddf95ebbf4746398f assets/agotmod/models/block/miner_barrel.json
+d27c86f4a34310414e0735800054e37b3fd57354 assets/agotmod/models/block/miner_barrel_open.json
 4cd0679b40e6c24e7a0366dfbb524b4e3a438172 assets/agotmod/models/block/moonbloom.json
 af123020e23ffed1c81b1cdb8879c20a6b00858a assets/agotmod/models/block/moonstone_block.json
 9abc65fb6e6b4a873a74caf3643bd4cde730b382 assets/agotmod/models/block/moonstone_deepslate_ore.json

@@ -4,18 +4,14 @@ import net.darkflameproduction.agotmod.client.renderer.TownHallDebugRenderer;
 import net.darkflameproduction.agotmod.client.town.ClientTownAreaManager;
 import net.darkflameproduction.agotmod.gui.CustomGuiScreen;
 import net.darkflameproduction.agotmod.gui.GrocerInventoryScreen;
-import net.darkflameproduction.agotmod.entity.custom.npc.system.GrocerSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.grocer.GrocerSystem;
 import net.darkflameproduction.agotmod.gui.TownHallScreen;
 import net.darkflameproduction.agotmod.client.tracker.TownTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.network.chat.Component;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
-
-import java.util.Map;
 
 @OnlyIn(Dist.CLIENT)
 public class ClientPacketHandler {
