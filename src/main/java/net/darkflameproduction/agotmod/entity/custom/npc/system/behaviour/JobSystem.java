@@ -152,9 +152,7 @@ public class JobSystem {
         } else if (oldJobType.equals(JOB_MINER)) {
             // Reset miner system
             peasant.getMinerSystem().setCurrentMinerState(
-                    peasant.getMinerSystem().hasMine() ?
-                            MinerSystem.MinerState.NEEDS_MINE_SETUP :
-                            MinerSystem.MinerState.NEEDS_MINE_SETUP
+                    MinerSystem.MinerState.NEEDS_MINE_SETUP
             );
         }
     }
@@ -505,8 +503,8 @@ public class JobSystem {
             // Guards have large patrol areas
             return deltaX <= GUARD_WORK_RADIUS_X && deltaZ <= GUARD_WORK_RADIUS_Z && deltaY <= GUARD_WORK_RADIUS_Y;
         } else if (getJobType().equals(JOB_MINER)) {
-            // Miners have medium work areas with large Y radius for underground work
-            return deltaX <= MINER_WORK_RADIUS_X && deltaZ <= MINER_WORK_RADIUS_Z && deltaY <= MINER_WORK_RADIUS_Y;
+            // Miners have unlimited work area while mining
+            return true;
         }
 
         return true; // Default: no restrictions for unknown job types
@@ -577,7 +575,8 @@ public class JobSystem {
         } else if (getJobType().equals(JOB_GUARD)) {
             return distanceSquared > ((GUARD_WORK_RADIUS_X + 10) * (GUARD_WORK_RADIUS_X + 10));
         } else if (getJobType().equals(JOB_MINER)) {
-            return distanceSquared > ((MINER_WORK_RADIUS_X + 10) * (MINER_WORK_RADIUS_X + 10));
+            // Miners can go anywhere while actively mining - no distance restrictions
+            return false;
         }
 
         return false;

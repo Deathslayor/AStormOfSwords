@@ -285,40 +285,40 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
 
         // Combat goals - only for adults
         if (isAdult()) {
-            this.goalSelector.addGoal(1, new GuardCombatGoal(this)); // Guard combat has highest priority
-            this.goalSelector.addGoal(2, new PeasantDefenseGoal(this)); // Regular defense moved down to priority 2
+            this.goalSelector.addGoal(1, new GuardCombatGoal(this));
+            this.goalSelector.addGoal(2, new PeasantDefenseGoal(this));
         }
 
         this.doorGoal = new OpenAndCloseDoorGoal(this);
-        this.goalSelector.addGoal(3, doorGoal); // Adjusted priority
+        this.goalSelector.addGoal(3, doorGoal);
 
         // Barrel drop off goals - only for adults
         if (isAdult()) {
-            this.goalSelector.addGoal(3, new FarmerBarrelDropOffGoal(this));
-            this.goalSelector.addGoal(3, new MinerBarrelDropOffGoal(this));
+            this.goalSelector.addGoal(4, new FarmerBarrelDropOffGoal(this));
+            this.goalSelector.addGoal(4, new MinerBarrelDropOffGoal(this));
         }
 
-        this.goalSelector.addGoal(4, new FindBedGoal(this));
-        this.goalSelector.addGoal(5, new SleepGoal(this)); // Adjusted priority
+        this.goalSelector.addGoal(5, new FindBedGoal(this));
+        this.goalSelector.addGoal(6, new SleepGoal(this));
         this.goalSelector.addGoal(7, new CollectFoodGoal(this));
 
         // Job-related goals - only for adults
         if (isAdult()) {
-            this.goalSelector.addGoal(8, new ReturnToJobBlockGoal(this));
-            this.goalSelector.addGoal(9, new FindJobGoal(this));
-            this.goalSelector.addGoal(10, new FarmingGoal(this));
-            this.goalSelector.addGoal(10, new MinerGoal(this));
+            // FIXED: MinerGoal now has priority 8 (higher than other work goals)
+            this.goalSelector.addGoal(8, new MinerGoal(this));
+            this.goalSelector.addGoal(9, new ReturnToJobBlockGoal(this));
+            this.goalSelector.addGoal(10, new FindJobGoal(this));
+            this.goalSelector.addGoal(11, new FarmingGoal(this));
 
             this.grocerCollectionGoal = new GrocerCollectionGoal(this);
-            this.goalSelector.addGoal(10, grocerCollectionGoal);
+            this.goalSelector.addGoal(12, grocerCollectionGoal);
 
-            // Add guard patrol goal
-            this.goalSelector.addGoal(11, new GuardPatrolGoal(this)); // Guard patrol goal
+            this.goalSelector.addGoal(13, new GuardPatrolGoal(this));
         }
 
-        this.goalSelector.addGoal(12, new RestrictedWanderGoal(this, 0.6D)); // Adjusted priority
-        this.goalSelector.addGoal(13, new LookAtPlayerGoal(this, Player.class, 8.0F)); // Adjusted priority
-        this.goalSelector.addGoal(14, new RandomLookAroundGoal(this)); // Adjusted priority
+        this.goalSelector.addGoal(14, new RestrictedWanderGoal(this, 0.6D));
+        this.goalSelector.addGoal(15, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        this.goalSelector.addGoal(16, new RandomLookAroundGoal(this));
 
         // Target selection goals - only for adults
         if (isAdult()) {

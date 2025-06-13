@@ -1,5 +1,6 @@
 package net.darkflameproduction.agotmod.entity.custom.npc.goals.behaviour;
 
+import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
@@ -19,10 +20,19 @@ public class ReturnToJobBlockGoal extends Goal {
         // Only active if peasant has a job, finished collecting food, but hasn't returned to job block yet
         boolean shouldReturn = peasant.hasJob() &&
                 !peasant.needsFoodCollection() &&
-                !peasant.getFarmingSystem().hasReturnedToJobBlockAfterFood() &&
                 !peasant.isSleeping() &&
                 !peasant.getHungerSystem().isEating() &&
                 peasant.getJobBlockPos() != null;
+
+        // Only apply return-to-job-block logic to farmers
+        if (peasant.getJobType().equals(JobSystem.JOB_FARMER)) {
+            shouldReturn = shouldReturn && !peasant.getFarmingSystem().hasReturnedToJobBlockAfterFood();
+        } else if (peasant.getJobType().equals(JobSystem.JOB_MINER)) {
+            shouldReturn = shouldReturn && !peasant.getMinerSystem().hasReturnedToJobBlockAfterFood();
+        } else {
+            // Other job types don't need to return to job block after food
+            return false;
+        }
 
         // DEBUG: Add logging for this goal
         if (!peasant.level().isClientSide && peasant.tickCount % 100 == 0 && shouldReturn) {
@@ -41,7 +51,11 @@ public class ReturnToJobBlockGoal extends Goal {
                         System.out.println("DEBUG RETURN TO JOB BLOCK GOAL [" + peasant.getDisplayName().getString() + "]: " +
                                 "Already at job block (distance=" + Math.sqrt(distance) + "), marking as returned immediately");
                     }
-                    peasant.getFarmingSystem().setHasReturnedToJobBlockAfterFood(true);
+                    if (peasant.getJobType().equals(JobSystem.JOB_FARMER)) {
+                        peasant.getFarmingSystem().setHasReturnedToJobBlockAfterFood(true);
+                    } else if (peasant.getJobType().equals(JobSystem.JOB_MINER)) {
+                        peasant.getMinerSystem().setHasReturnedToJobBlockAfterFood(true);
+                    }
                     return false; // Don't activate the goal since we're already there
                 }
             }
@@ -85,7 +99,13 @@ public class ReturnToJobBlockGoal extends Goal {
             System.out.println("DEBUG RETURN TO JOB BLOCK GOAL [" + peasant.getDisplayName().getString() + "]: " +
                     "Goal stopped, marking as returned to job block");
         }
-        peasant.getFarmingSystem().setHasReturnedToJobBlockAfterFood(true);
+
+        if (peasant.getJobType().equals(JobSystem.JOB_FARMER)) {
+            peasant.getFarmingSystem().setHasReturnedToJobBlockAfterFood(true);
+        } else if (peasant.getJobType().equals(JobSystem.JOB_MINER)) {
+            peasant.getMinerSystem().setHasReturnedToJobBlockAfterFood(true);
+        }
+
         peasant.getNavigation().stop();
     }
 
@@ -101,7 +121,12 @@ public class ReturnToJobBlockGoal extends Goal {
                     System.out.println("DEBUG RETURN TO JOB BLOCK GOAL [" + peasant.getDisplayName().getString() + "]: " +
                             "Reached job block (distance=" + Math.sqrt(distance) + "), marking as returned");
                 }
-                peasant.getFarmingSystem().setHasReturnedToJobBlockAfterFood(true);
+
+                if (peasant.getJobType().equals(JobSystem.JOB_FARMER)) {
+                    peasant.getFarmingSystem().setHasReturnedToJobBlockAfterFood(true);
+                } else if (peasant.getJobType().equals(JobSystem.JOB_MINER)) {
+                    peasant.getMinerSystem().setHasReturnedToJobBlockAfterFood(true);
+                }
                 return;
             }
 

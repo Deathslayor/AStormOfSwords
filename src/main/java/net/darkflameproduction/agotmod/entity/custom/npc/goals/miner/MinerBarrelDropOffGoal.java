@@ -64,10 +64,92 @@ public class MinerBarrelDropOffGoal extends Goal {
         ALLOWED_ITEMS.add("minecraft:diorite");
         ALLOWED_ITEMS.add("minecraft:andesite");
 
-        // TODO: Add custom mod ores when they exist
-        // ALLOWED_ITEMS.add("agotmod:tin_ore");
-        // ALLOWED_ITEMS.add("agotmod:silver_ore");
-        // etc.
+        // Custom mod ores and gems
+        ALLOWED_ITEMS.add("agotmod:silver_ore");
+        ALLOWED_ITEMS.add("agotmod:raw_silver_block");
+        ALLOWED_ITEMS.add("agotmod:deepslate_silver_ore");
+        ALLOWED_ITEMS.add("agotmod:silver_block");
+
+        ALLOWED_ITEMS.add("agotmod:tin_ore");
+        ALLOWED_ITEMS.add("agotmod:raw_tin_block");
+        ALLOWED_ITEMS.add("agotmod:deepslate_tin_ore");
+        ALLOWED_ITEMS.add("agotmod:tin_block");
+        ALLOWED_ITEMS.add("agotmod:bronze_block");
+
+        // Gemstones and precious blocks
+        ALLOWED_ITEMS.add("agotmod:yellow_diamond_block");
+        ALLOWED_ITEMS.add("agotmod:transparent_diamond_block");
+        ALLOWED_ITEMS.add("agotmod:black_diamond_block");
+
+        ALLOWED_ITEMS.add("agotmod:amber_block");
+        ALLOWED_ITEMS.add("agotmod:amber_ore");
+        ALLOWED_ITEMS.add("agotmod:amber_deepslate_ore");
+
+        ALLOWED_ITEMS.add("agotmod:amethyst_block");
+        ALLOWED_ITEMS.add("agotmod:amethyst_ore");
+        ALLOWED_ITEMS.add("agotmod:amethyst_deepslate_ore");
+
+        ALLOWED_ITEMS.add("agotmod:bloodstone_block");
+        ALLOWED_ITEMS.add("agotmod:bloodstone_ore");
+        ALLOWED_ITEMS.add("agotmod:bloodstone_deepslate_ore");
+
+        ALLOWED_ITEMS.add("agotmod:carnelian_block");
+        ALLOWED_ITEMS.add("agotmod:carnelian_ore");
+        ALLOWED_ITEMS.add("agotmod:carnelian_deepslate_ore");
+
+        ALLOWED_ITEMS.add("agotmod:chalcedony_block");
+        ALLOWED_ITEMS.add("agotmod:chalcedony_ore");
+        ALLOWED_ITEMS.add("agotmod:chalcedony_deepslate_ore");
+
+        ALLOWED_ITEMS.add("agotmod:diamonds_ore");
+        ALLOWED_ITEMS.add("agotmod:diamonds_deepslate_ore");
+
+        ALLOWED_ITEMS.add("agotmod:garnet_block");
+        ALLOWED_ITEMS.add("agotmod:garnet_ore");
+        ALLOWED_ITEMS.add("agotmod:garnet_deepslate_ore");
+
+        ALLOWED_ITEMS.add("agotmod:jade_block");
+        ALLOWED_ITEMS.add("agotmod:jade_ore");
+        ALLOWED_ITEMS.add("agotmod:jade_deepslate_ore");
+
+        ALLOWED_ITEMS.add("agotmod:jasper_block");
+        ALLOWED_ITEMS.add("agotmod:jasper_ore");
+        ALLOWED_ITEMS.add("agotmod:jasper_deepslate_ore");
+
+        ALLOWED_ITEMS.add("agotmod:malachite_block");
+        ALLOWED_ITEMS.add("agotmod:malachite_ore");
+        ALLOWED_ITEMS.add("agotmod:malachite_deepslate_ore");
+
+        ALLOWED_ITEMS.add("agotmod:moonstone_block");
+        ALLOWED_ITEMS.add("agotmod:moonstone_ore");
+        ALLOWED_ITEMS.add("agotmod:moonstone_deepslate_ore");
+
+        ALLOWED_ITEMS.add("agotmod:onyx_block");
+        ALLOWED_ITEMS.add("agotmod:onyx_ore");
+        ALLOWED_ITEMS.add("agotmod:onyx_deepslate_ore");
+
+        ALLOWED_ITEMS.add("agotmod:opal_block");
+        ALLOWED_ITEMS.add("agotmod:opal_ore");
+        ALLOWED_ITEMS.add("agotmod:opal_deepslate_ore");
+
+        ALLOWED_ITEMS.add("agotmod:ruby_block");
+        ALLOWED_ITEMS.add("agotmod:ruby_ore");
+        ALLOWED_ITEMS.add("agotmod:ruby_deepslate_ore");
+
+        ALLOWED_ITEMS.add("agotmod:sapphire_block");
+        ALLOWED_ITEMS.add("agotmod:sapphire_ore");
+        ALLOWED_ITEMS.add("agotmod:sapphire_deepslate_ore");
+
+        ALLOWED_ITEMS.add("agotmod:tigers_eye_block");
+        ALLOWED_ITEMS.add("agotmod:tigers_eye_ore");
+        ALLOWED_ITEMS.add("agotmod:tigers_eye_deepslate_ore");
+
+        ALLOWED_ITEMS.add("agotmod:topaz_block");
+        ALLOWED_ITEMS.add("agotmod:topaz_ore");
+        ALLOWED_ITEMS.add("agotmod:topaz_deepslate_ore");
+
+        ALLOWED_ITEMS.add("agotmod:tourmaline_ore");
+        ALLOWED_ITEMS.add("agotmod:tourmaline_deepslate_ore");
     }
 
     /**
