@@ -1,6 +1,7 @@
 package net.darkflameproduction.agotmod.entity.custom.npc.system.guard;
 
 import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem;
+import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.monster.Monster;
@@ -78,7 +79,7 @@ public class GuardSystem {
     private LivingEntity currentTarget = null;
     private int targetScanCooldown = 0;
     private static final int TARGET_SCAN_INTERVAL = 20; // Scan for targets every second
-    private static final int COMBAT_RANGE = 16; // Range to detect and chase monsters
+    private static final int COMBAT_RANGE = 48; // Range to detect and chase monsters
 
     public GuardSystem(Peasant_Entity peasant) {
         this.peasant = peasant;
@@ -95,9 +96,9 @@ public class GuardSystem {
             return;
         }
 
-        // Verify the job block still exists (armor stand)
+        // CHANGED: Verify the job block still exists (guard_barrel instead of anvil)
         BlockPos jobBlockPos = peasant.getJobBlockPos();
-        if (!(peasant.level().getBlockState(jobBlockPos).getBlock() == net.minecraft.world.level.block.Blocks.ANVIL)) {
+        if (!peasant.level().getBlockState(jobBlockPos).is(ModBLocks.GUARD_BARREL.get())) {
             return; // Job block is gone, let JobSystem handle job loss
         }
 

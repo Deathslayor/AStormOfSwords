@@ -58,23 +58,35 @@ public class JobBarrelBlock extends BaseEntityBlock implements WorldlyContainerH
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        if (level instanceof ServerLevel serverLevel) {
-            BlockEntity blockEntity = level.getBlockEntity(pos);
-            if (blockEntity instanceof JobBarrelBlockEntity barrelEntity) {
-                player.openMenu(barrelEntity);
-                player.awardStat(Stats.OPEN_BARREL);
+        if (level.isClientSide) {
+            return InteractionResult.SUCCESS;
+        }
+
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof JobBarrelBlockEntity barrelEntity) {
+            player.openMenu(barrelEntity);
+            player.awardStat(Stats.OPEN_BARREL);
+
+            // Only anger piglins in the nether or if they're nearby
+            if (level instanceof ServerLevel serverLevel) {
                 PiglinAi.angerNearbyPiglins(serverLevel, player, true);
             }
+
+            return InteractionResult.CONSUME;
         }
-        return InteractionResult.SUCCESS;
+
+        return InteractionResult.PASS;
     }
 
     @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         if (!state.is(newState.getBlock())) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
-            if (blockEntity instanceof JobBarrelBlockEntity) {
-                Containers.dropContents(level, pos, (JobBarrelBlockEntity) blockEntity);
+            if (blockEntity instanceof JobBarrelBlockEntity barrelEntity) {
+                if (level instanceof ServerLevel) {
+                    Containers.dropContents(level, pos, barrelEntity);
+                }
+                // Update neighbors for potential redstone contraptions
                 level.updateNeighbourForOutputSignal(pos, this);
             }
         }
@@ -128,5 +140,28 @@ public class JobBarrelBlock extends BaseEntityBlock implements WorldlyContainerH
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         return this.defaultBlockState().setValue(FACING, context.getNearestLookingDirection().getOpposite());
+    }
+
+    /**
+     * Returns whether this barrel block can be opened by automation
+     */
+    public boolean canBeAutomated() {
+        return true;
+    }
+
+    /**
+     * Returns whether this barrel should drop its contents when broken
+     */
+    public boolean shouldDropContents() {
+        return true;
+    }
+
+    /**
+     * Custom method to handle special job-specific behavior if needed
+     * Can be overridden by specific job barrel implementations
+     */
+    protected void onJobBarrelInteraction(JobBarrelBlockEntity barrelEntity, Player player, Level level) {
+        // Default implementation does nothing
+        // Subclasses can override for job-specific behavior
     }
 }

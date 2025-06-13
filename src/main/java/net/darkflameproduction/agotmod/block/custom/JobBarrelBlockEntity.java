@@ -25,11 +25,55 @@ import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.wrapper.InvWrapper;
 
 import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class JobBarrelBlockEntity extends BlockEntity implements WorldlyContainer, net.minecraft.world.MenuProvider {
     private static final int CONTAINER_SIZE = 54; // Double chest size (6 rows x 9 columns)
     private NonNullList<ItemStack> items = NonNullList.withSize(CONTAINER_SIZE, ItemStack.EMPTY);
     private String jobType;
+
+    // Map for job type lookup - handles all job types including compound names
+    private static final Map<String, String> JOB_TYPE_MAP = new HashMap<>();
+    static {
+        JOB_TYPE_MAP.put("alehouse_barrel", "alehouse");
+        JOB_TYPE_MAP.put("armorsmith_barrel", "armorsmith");
+        JOB_TYPE_MAP.put("baker_barrel", "baker");
+        JOB_TYPE_MAP.put("banker_barrel", "banker");
+        JOB_TYPE_MAP.put("bard_barrel", "bard");
+        JOB_TYPE_MAP.put("builder_barrel", "builder");
+        JOB_TYPE_MAP.put("butcher_barrel", "butcher");
+        JOB_TYPE_MAP.put("caravan_master_barrel", "caravan_master");
+        JOB_TYPE_MAP.put("cattle_herder_barrel", "cattle_herder");
+        JOB_TYPE_MAP.put("charcoal_burner_barrel", "charcoal_burner");
+        JOB_TYPE_MAP.put("chicken_breeder_barrel", "chicken_breeder");
+        JOB_TYPE_MAP.put("farmer_barrel", "farmer");
+        JOB_TYPE_MAP.put("goat_herder_barrel", "goat_herder");
+        JOB_TYPE_MAP.put("grocer_barrel", "grocer");
+        JOB_TYPE_MAP.put("guard_barrel", "guard");
+        JOB_TYPE_MAP.put("herbalist_barrel", "herbalist");
+        JOB_TYPE_MAP.put("horse_breeder_barrel", "horse_breeder");
+        JOB_TYPE_MAP.put("hunter_barrel", "hunter");
+        JOB_TYPE_MAP.put("innkeeper_barrel", "innkeeper");
+        JOB_TYPE_MAP.put("jeweler_barrel", "jeweler");
+        JOB_TYPE_MAP.put("lumberjack_barrel", "lumberjack");
+        JOB_TYPE_MAP.put("maester_barrel", "maester");
+        JOB_TYPE_MAP.put("miner_barrel", "miner");
+        JOB_TYPE_MAP.put("pig_breeder_barrel", "pig_breeder");
+        JOB_TYPE_MAP.put("pyromancer_barrel", "pyromancer");
+        JOB_TYPE_MAP.put("quarry_barrel", "quarry");
+        JOB_TYPE_MAP.put("scribe_barrel", "scribe");
+        JOB_TYPE_MAP.put("septon_barrel", "septon");
+        JOB_TYPE_MAP.put("sheep_herder_barrel", "sheep_herder");
+        JOB_TYPE_MAP.put("shipwright_barrel", "shipwright");
+        JOB_TYPE_MAP.put("slaver_barrel", "slaver");
+        JOB_TYPE_MAP.put("smelter_barrel", "smelter");
+        JOB_TYPE_MAP.put("stonemason_barrel", "stonemason");
+        JOB_TYPE_MAP.put("swordsmith_barrel", "swordsmith");
+        JOB_TYPE_MAP.put("tailor_barrel", "tailor");
+        JOB_TYPE_MAP.put("tanner_barrel", "tanner");
+        JOB_TYPE_MAP.put("trader_barrel", "trader");
+    }
 
     // Simple wrapper for capability system
     private final IItemHandler itemHandler = new InvWrapper(this);
@@ -63,26 +107,45 @@ public class JobBarrelBlockEntity extends BlockEntity implements WorldlyContaine
 
     public JobBarrelBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.JOB_BARREL.get(), pos, blockState);
-        // Extract job type from block name
+        this.jobType = extractJobType(blockState);
+    }
+
+    /**
+     * Extracts the job type from the block state using the job type map
+     */
+    private String extractJobType(BlockState blockState) {
         String blockName = blockState.getBlock().getDescriptionId();
-        if (blockName.contains("farmer")) {
-            this.jobType = "farmer";
-        } else if (blockName.contains("miner")) {
-            this.jobType = "miner";
-        } else {
-            // Extract from block name pattern like "block.modid.jobtype_barrel"
-            String[] parts = blockName.split("\\.");
-            if (parts.length > 0) {
-                String lastPart = parts[parts.length - 1];
-                this.jobType = lastPart.replace("_barrel", "");
-            } else {
-                this.jobType = "unknown";
+
+        // Extract the last part of the block name (after the last dot)
+        String[] parts = blockName.split("\\.");
+        if (parts.length > 0) {
+            String blockIdentifier = parts[parts.length - 1];
+
+            // Look up the job type in our map
+            String jobType = JOB_TYPE_MAP.get(blockIdentifier);
+            if (jobType != null) {
+                return jobType;
+            }
+
+            // Fallback: try to extract from the identifier by removing "_barrel"
+            if (blockIdentifier.endsWith("_barrel")) {
+                return blockIdentifier.replace("_barrel", "");
             }
         }
+
+        // Ultimate fallback
+        return "unknown";
     }
 
     public String getJobType() {
         return jobType;
+    }
+
+    /**
+     * Gets a display-friendly version of the job type
+     */
+    public String getDisplayJobType() {
+        return jobType.replace("_", " ");
     }
 
     // Basic inventory implementation
@@ -153,13 +216,32 @@ public class JobBarrelBlockEntity extends BlockEntity implements WorldlyContaine
         super.loadAdditional(tag, registries);
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
         ContainerHelper.loadAllItems(tag, this.items, registries);
-        // Note: jobType is set in constructor, but we could load it from NBT if needed
+
+        // Load job type from NBT if available, otherwise extract from block state
+        if (tag.contains("JobType")) {
+            this.jobType = tag.getString("JobType");
+        } else {
+            this.jobType = extractJobType(this.getBlockState());
+        }
     }
 
     // Menu provider
     @Override
     public Component getDisplayName() {
-        return Component.translatable("container.agotmod." + jobType + "_barrel");
+        String displayName = getDisplayJobType();
+        // Capitalize first letter of each word
+        String[] words = displayName.split(" ");
+        StringBuilder capitalizedName = new StringBuilder();
+        for (int i = 0; i < words.length; i++) {
+            if (i > 0) capitalizedName.append(" ");
+            if (words[i].length() > 0) {
+                capitalizedName.append(Character.toUpperCase(words[i].charAt(0)));
+                if (words[i].length() > 1) {
+                    capitalizedName.append(words[i].substring(1));
+                }
+            }
+        }
+        return Component.translatable("container.agotmod." + jobType + "_barrel", capitalizedName.toString());
     }
 
     @Override

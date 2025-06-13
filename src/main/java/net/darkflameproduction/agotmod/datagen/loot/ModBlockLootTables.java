@@ -918,9 +918,47 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                                 ModItems.CORN_SEEDS.get())));
 
 
-        this.dropSelf(ModBLocks.FARMER_BARREL.get());
-        this.dropSelf(ModBLocks.MINER_BARREL.get());
+// Town Hall (existing)
         this.dropSelf(ModBLocks.TOWN_HALL.get());
+
+// All Job Barrel Loot Drops
+        this.dropSelf(ModBLocks.ALEHOUSE_BARREL.get());
+        this.dropSelf(ModBLocks.ARMORSMITH_BARREL.get());
+        this.dropSelf(ModBLocks.BAKER_BARREL.get());
+        this.dropSelf(ModBLocks.BANKER_BARREL.get());
+        this.dropSelf(ModBLocks.BARD_BARREL.get());
+        this.dropSelf(ModBLocks.BUILDER_BARREL.get());
+        this.dropSelf(ModBLocks.BUTCHER_BARREL.get());
+        this.dropSelf(ModBLocks.CARAVAN_MASTER_BARREL.get());
+        this.dropSelf(ModBLocks.CATTLE_HERDER_BARREL.get());
+        this.dropSelf(ModBLocks.CHARCOAL_BURNER_BARREL.get());
+        this.dropSelf(ModBLocks.CHICKEN_BREEDER_BARREL.get());
+        this.dropSelf(ModBLocks.FARMER_BARREL.get());
+        this.dropSelf(ModBLocks.GOAT_HERDER_BARREL.get());
+        this.dropSelf(ModBLocks.GROCER_BARREL.get());
+        this.dropSelf(ModBLocks.GUARD_BARREL.get());
+        this.dropSelf(ModBLocks.HERBALIST_BARREL.get());
+        this.dropSelf(ModBLocks.HORSE_BREEDER_BARREL.get());
+        this.dropSelf(ModBLocks.HUNTER_BARREL.get());
+        this.dropSelf(ModBLocks.INNKEEPER_BARREL.get());
+        this.dropSelf(ModBLocks.JEWELER_BARREL.get());
+        this.dropSelf(ModBLocks.LUMBERJACK_BARREL.get());
+        this.dropSelf(ModBLocks.MAESTER_BARREL.get());
+        this.dropSelf(ModBLocks.MINER_BARREL.get());
+        this.dropSelf(ModBLocks.PIG_BREEDER_BARREL.get());
+        this.dropSelf(ModBLocks.PYROMANCER_BARREL.get());
+        this.dropSelf(ModBLocks.QUARRY_BARREL.get());
+        this.dropSelf(ModBLocks.SCRIBE_BARREL.get());
+        this.dropSelf(ModBLocks.SEPTON_BARREL.get());
+        this.dropSelf(ModBLocks.SHEEP_HERDER_BARREL.get());
+        this.dropSelf(ModBLocks.SHIPWRIGHT_BARREL.get());
+        this.dropSelf(ModBLocks.SLAVER_BARREL.get());
+        this.dropSelf(ModBLocks.SMELTER_BARREL.get());
+        this.dropSelf(ModBLocks.STONEMASON_BARREL.get());
+        this.dropSelf(ModBLocks.SWORDSMITH_BARREL.get());
+        this.dropSelf(ModBLocks.TAILOR_BARREL.get());
+        this.dropSelf(ModBLocks.TANNER_BARREL.get());
+        this.dropSelf(ModBLocks.TRADER_BARREL.get());
 
 
 

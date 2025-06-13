@@ -1000,14 +1000,121 @@ public class ModItems {
                     properties));
 
 
+    // Town Hall (existing)
+    public static final DeferredItem<Item> TOWN_HALL = ITEMS.registerItem("town_hall",
+            properties -> new BlockItem(ModBLocks.TOWN_HALL.get(), properties));
+
+    // All Job Barrel Item Registrations
+    public static final DeferredItem<Item> ALEHOUSE_BARREL = ITEMS.registerItem("alehouse_barrel_icon",
+            properties -> new BlockItem(ModBLocks.ALEHOUSE_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> ARMORSMITH_BARREL = ITEMS.registerItem("armorsmith_barrel_icon",
+            properties -> new BlockItem(ModBLocks.ARMORSMITH_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> BAKER_BARREL = ITEMS.registerItem("baker_barrel_icon",
+            properties -> new BlockItem(ModBLocks.BAKER_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> BANKER_BARREL = ITEMS.registerItem("banker_barrel_icon",
+            properties -> new BlockItem(ModBLocks.BANKER_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> BARD_BARREL = ITEMS.registerItem("bard_barrel_icon",
+            properties -> new BlockItem(ModBLocks.BARD_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> BUILDER_BARREL = ITEMS.registerItem("builder_barrel_icon",
+            properties -> new BlockItem(ModBLocks.BUILDER_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> BUTCHER_BARREL = ITEMS.registerItem("butcher_barrel_icon",
+            properties -> new BlockItem(ModBLocks.BUTCHER_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> CARAVAN_MASTER_BARREL = ITEMS.registerItem("caravan_master_barrel_icon",
+            properties -> new BlockItem(ModBLocks.CARAVAN_MASTER_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> CATTLE_HERDER_BARREL = ITEMS.registerItem("cattle_herder_barrel_icon",
+            properties -> new BlockItem(ModBLocks.CATTLE_HERDER_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> CHARCOAL_BURNER_BARREL = ITEMS.registerItem("charcoal_burner_barrel_icon",
+            properties -> new BlockItem(ModBLocks.CHARCOAL_BURNER_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> CHICKEN_BREEDER_BARREL = ITEMS.registerItem("chicken_breeder_barrel_icon",
+            properties -> new BlockItem(ModBLocks.CHICKEN_BREEDER_BARREL.get(), properties));
+
     public static final DeferredItem<Item> FARMER_BARREL = ITEMS.registerItem("farmer_barrel_icon",
             properties -> new BlockItem(ModBLocks.FARMER_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> GOAT_HERDER_BARREL = ITEMS.registerItem("goat_herder_barrel_icon",
+            properties -> new BlockItem(ModBLocks.GOAT_HERDER_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> GROCER_BARREL = ITEMS.registerItem("grocer_barrel_icon",
+            properties -> new BlockItem(ModBLocks.GROCER_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> GUARD_BARREL = ITEMS.registerItem("guard_barrel_icon",
+            properties -> new BlockItem(ModBLocks.GUARD_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> HERBALIST_BARREL = ITEMS.registerItem("herbalist_barrel_icon",
+            properties -> new BlockItem(ModBLocks.HERBALIST_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> HORSE_BREEDER_BARREL = ITEMS.registerItem("horse_breeder_barrel_icon",
+            properties -> new BlockItem(ModBLocks.HORSE_BREEDER_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> HUNTER_BARREL = ITEMS.registerItem("hunter_barrel_icon",
+            properties -> new BlockItem(ModBLocks.HUNTER_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> INNKEEPER_BARREL = ITEMS.registerItem("innkeeper_barrel_icon",
+            properties -> new BlockItem(ModBLocks.INNKEEPER_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> JEWELER_BARREL = ITEMS.registerItem("jeweler_barrel_icon",
+            properties -> new BlockItem(ModBLocks.JEWELER_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> LUMBERJACK_BARREL = ITEMS.registerItem("lumberjack_barrel_icon",
+            properties -> new BlockItem(ModBLocks.LUMBERJACK_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> MAESTER_BARREL = ITEMS.registerItem("maester_barrel_icon",
+            properties -> new BlockItem(ModBLocks.MAESTER_BARREL.get(), properties));
 
     public static final DeferredItem<Item> MINER_BARREL = ITEMS.registerItem("miner_barrel_icon",
             properties -> new BlockItem(ModBLocks.MINER_BARREL.get(), properties));
 
-    public static final DeferredItem<Item> TOWN_HALL = ITEMS.registerItem("town_hall",
-            properties -> new BlockItem(ModBLocks.TOWN_HALL.get(), properties));
+    public static final DeferredItem<Item> PIG_BREEDER_BARREL = ITEMS.registerItem("pig_breeder_barrel_icon",
+            properties -> new BlockItem(ModBLocks.PIG_BREEDER_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> PYROMANCER_BARREL = ITEMS.registerItem("pyromancer_barrel_icon",
+            properties -> new BlockItem(ModBLocks.PYROMANCER_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> QUARRY_BARREL = ITEMS.registerItem("quarry_barrel_icon",
+            properties -> new BlockItem(ModBLocks.QUARRY_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> SCRIBE_BARREL = ITEMS.registerItem("scribe_barrel_icon",
+            properties -> new BlockItem(ModBLocks.SCRIBE_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> SEPTON_BARREL = ITEMS.registerItem("septon_barrel_icon",
+            properties -> new BlockItem(ModBLocks.SEPTON_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> SHEEP_HERDER_BARREL = ITEMS.registerItem("sheep_herder_barrel_icon",
+            properties -> new BlockItem(ModBLocks.SHEEP_HERDER_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> SHIPWRIGHT_BARREL = ITEMS.registerItem("shipwright_barrel_icon",
+            properties -> new BlockItem(ModBLocks.SHIPWRIGHT_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> SLAVER_BARREL = ITEMS.registerItem("slaver_barrel_icon",
+            properties -> new BlockItem(ModBLocks.SLAVER_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> SMELTER_BARREL = ITEMS.registerItem("smelter_barrel_icon",
+            properties -> new BlockItem(ModBLocks.SMELTER_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> STONEMASON_BARREL = ITEMS.registerItem("stonemason_barrel_icon",
+            properties -> new BlockItem(ModBLocks.STONEMASON_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> SWORDSMITH_BARREL = ITEMS.registerItem("swordsmith_barrel_icon",
+            properties -> new BlockItem(ModBLocks.SWORDSMITH_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> TAILOR_BARREL = ITEMS.registerItem("tailor_barrel_icon",
+            properties -> new BlockItem(ModBLocks.TAILOR_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> TANNER_BARREL = ITEMS.registerItem("tanner_barrel_icon",
+            properties -> new BlockItem(ModBLocks.TANNER_BARREL.get(), properties));
+
+    public static final DeferredItem<Item> TRADER_BARREL = ITEMS.registerItem("trader_barrel_icon",
+            properties -> new BlockItem(ModBLocks.TRADER_BARREL.get(), properties));
 
 
     // Tells the AGoTMod class to call the modded items into the game

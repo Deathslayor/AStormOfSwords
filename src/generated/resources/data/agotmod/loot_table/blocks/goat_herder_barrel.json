@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "agotmod:goat_herder_barrel_icon"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "agotmod:blocks/goat_herder_barrel"
+}

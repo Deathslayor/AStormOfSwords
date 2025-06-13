@@ -25,8 +25,44 @@ public class ModBlockEntities {
                 List<Block> barrelBlocks = new ArrayList<>();
 
                 // Add all job barrel blocks
+                barrelBlocks.add(ModBLocks.ALEHOUSE_BARREL.get());
+                barrelBlocks.add(ModBLocks.ARMORSMITH_BARREL.get());
+                barrelBlocks.add(ModBLocks.BAKER_BARREL.get());
+                barrelBlocks.add(ModBLocks.BANKER_BARREL.get());
+                barrelBlocks.add(ModBLocks.BARD_BARREL.get());
+                barrelBlocks.add(ModBLocks.BUILDER_BARREL.get());
+                barrelBlocks.add(ModBLocks.BUTCHER_BARREL.get());
+                barrelBlocks.add(ModBLocks.CARAVAN_MASTER_BARREL.get());
+                barrelBlocks.add(ModBLocks.CATTLE_HERDER_BARREL.get());
+                barrelBlocks.add(ModBLocks.CHARCOAL_BURNER_BARREL.get());
+                barrelBlocks.add(ModBLocks.CHICKEN_BREEDER_BARREL.get());
                 barrelBlocks.add(ModBLocks.FARMER_BARREL.get());
+                barrelBlocks.add(ModBLocks.GOAT_HERDER_BARREL.get());
+                barrelBlocks.add(ModBLocks.GROCER_BARREL.get());
+                barrelBlocks.add(ModBLocks.GUARD_BARREL.get());
+                barrelBlocks.add(ModBLocks.HERBALIST_BARREL.get());
+                barrelBlocks.add(ModBLocks.HORSE_BREEDER_BARREL.get());
+                barrelBlocks.add(ModBLocks.HUNTER_BARREL.get());
+                barrelBlocks.add(ModBLocks.INNKEEPER_BARREL.get());
+                barrelBlocks.add(ModBLocks.JEWELER_BARREL.get());
+                barrelBlocks.add(ModBLocks.LUMBERJACK_BARREL.get());
+                barrelBlocks.add(ModBLocks.MAESTER_BARREL.get());
                 barrelBlocks.add(ModBLocks.MINER_BARREL.get());
+                barrelBlocks.add(ModBLocks.PIG_BREEDER_BARREL.get());
+                barrelBlocks.add(ModBLocks.PYROMANCER_BARREL.get());
+                barrelBlocks.add(ModBLocks.QUARRY_BARREL.get());
+                barrelBlocks.add(ModBLocks.SCRIBE_BARREL.get());
+                barrelBlocks.add(ModBLocks.SEPTON_BARREL.get());
+                barrelBlocks.add(ModBLocks.SHEEP_HERDER_BARREL.get());
+                barrelBlocks.add(ModBLocks.SHIPWRIGHT_BARREL.get());
+                barrelBlocks.add(ModBLocks.SLAVER_BARREL.get());
+                barrelBlocks.add(ModBLocks.SMELTER_BARREL.get());
+                barrelBlocks.add(ModBLocks.STONEMASON_BARREL.get());
+                barrelBlocks.add(ModBLocks.SWORDSMITH_BARREL.get());
+                barrelBlocks.add(ModBLocks.TAILOR_BARREL.get());
+                barrelBlocks.add(ModBLocks.TANNER_BARREL.get());
+                barrelBlocks.add(ModBLocks.TRADER_BARREL.get());
+
                 Block[] barrelBlocksArray = barrelBlocks.toArray(new Block[0]);
 
                 return new BlockEntityType<>(

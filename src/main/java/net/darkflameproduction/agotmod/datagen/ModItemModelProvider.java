@@ -535,10 +535,47 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         // ---------------------------(JOBBLOCKS)--------------------------- //
 
-        simpleItem(ModItems.FARMER_BARREL);
-        simpleItem(ModItems.MINER_BARREL);
-
+// Town Hall (existing)
         simpleItem(ModItems.TOWN_HALL);
+
+// All Job Barrel Item Model Generation
+        simpleItem(ModItems.ALEHOUSE_BARREL);
+        simpleItem(ModItems.ARMORSMITH_BARREL);
+        simpleItem(ModItems.BAKER_BARREL);
+        simpleItem(ModItems.BANKER_BARREL);
+        simpleItem(ModItems.BARD_BARREL);
+        simpleItem(ModItems.BUILDER_BARREL);
+        simpleItem(ModItems.BUTCHER_BARREL);
+        simpleItem(ModItems.CARAVAN_MASTER_BARREL);
+        simpleItem(ModItems.CATTLE_HERDER_BARREL);
+        simpleItem(ModItems.CHARCOAL_BURNER_BARREL);
+        simpleItem(ModItems.CHICKEN_BREEDER_BARREL);
+        simpleItem(ModItems.FARMER_BARREL);
+        simpleItem(ModItems.GOAT_HERDER_BARREL);
+        simpleItem(ModItems.GROCER_BARREL);
+        simpleItem(ModItems.GUARD_BARREL);
+        simpleItem(ModItems.HERBALIST_BARREL);
+        simpleItem(ModItems.HORSE_BREEDER_BARREL);
+        simpleItem(ModItems.HUNTER_BARREL);
+        simpleItem(ModItems.INNKEEPER_BARREL);
+        simpleItem(ModItems.JEWELER_BARREL);
+        simpleItem(ModItems.LUMBERJACK_BARREL);
+        simpleItem(ModItems.MAESTER_BARREL);
+        simpleItem(ModItems.MINER_BARREL);
+        simpleItem(ModItems.PIG_BREEDER_BARREL);
+        simpleItem(ModItems.PYROMANCER_BARREL);
+        simpleItem(ModItems.QUARRY_BARREL);
+        simpleItem(ModItems.SCRIBE_BARREL);
+        simpleItem(ModItems.SEPTON_BARREL);
+        simpleItem(ModItems.SHEEP_HERDER_BARREL);
+        simpleItem(ModItems.SHIPWRIGHT_BARREL);
+        simpleItem(ModItems.SLAVER_BARREL);
+        simpleItem(ModItems.SMELTER_BARREL);
+        simpleItem(ModItems.STONEMASON_BARREL);
+        simpleItem(ModItems.SWORDSMITH_BARREL);
+        simpleItem(ModItems.TAILOR_BARREL);
+        simpleItem(ModItems.TANNER_BARREL);
+        simpleItem(ModItems.TRADER_BARREL);
 
 
 

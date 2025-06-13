@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "agotmod:block/barrel_bottom",
+    "east": "agotmod:block/barrel_builder",
+    "north": "agotmod:block/barrel_builder",
+    "particle": "agotmod:block/barrel_builder",
+    "south": "agotmod:block/barrel_builder",
+    "up": "agotmod:block/barrel_top",
+    "west": "agotmod:block/barrel_builder"
+  }
+}

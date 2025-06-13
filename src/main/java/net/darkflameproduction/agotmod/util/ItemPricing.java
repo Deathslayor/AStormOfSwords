@@ -22,6 +22,9 @@ public class ItemPricing {
         ALLOWED_ITEMS_PRICING.put("minecraft:melon_seeds", 6);
         ALLOWED_ITEMS_PRICING.put("minecraft:beetroot", 8);
         ALLOWED_ITEMS_PRICING.put("minecraft:beetroot_seeds", 31);
+        ALLOWED_ITEMS_PRICING.put("minecraft:carrot", 3);
+        ALLOWED_ITEMS_PRICING.put("minecraft:potato", 4);
+        ALLOWED_ITEMS_PRICING.put("minecraft:poisonous_potato", 1);
 
         // Custom mod items
         ALLOWED_ITEMS_PRICING.put("agotmod:horseradish", 7);

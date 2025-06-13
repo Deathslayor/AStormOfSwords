@@ -75,7 +75,7 @@ public class FindJobGoal extends Goal {
 
                         BlockState state = peasant.level().getBlockState(checkPos);
 
-                        // Check for farmer barrel (farmer job block) - CHANGED FROM COMPOSTER
+                        // Check for farmer barrel (farmer job block)
                         if (state.is(ModBLocks.FARMER_BARREL.get())) {
                             foundAnyJobBlocks = true;
 
@@ -94,8 +94,8 @@ public class FindJobGoal extends Goal {
                                 }
                             }
                         }
-                        // Check for barrel (grocer job block)
-                        else if (state.getBlock() == net.minecraft.world.level.block.Blocks.BARREL) {
+                        // Check for grocer_barrel (grocer job block)
+                        else if (state.is(ModBLocks.GROCER_BARREL.get())) {
                             foundAnyJobBlocks = true;
 
                             // Skip if this job block is warned as being in use
@@ -113,8 +113,8 @@ public class FindJobGoal extends Goal {
                                 }
                             }
                         }
-                        // Check for anvil (guard job block)
-                        else if (state.getBlock() == net.minecraft.world.level.block.Blocks.ANVIL) {
+                        // Check for guard_barrel (guard job block)
+                        else if (state.is(ModBLocks.GUARD_BARREL.get())) {
                             foundAnyJobBlocks = true;
 
                             // Skip if this job block is warned as being in use
@@ -129,6 +129,25 @@ public class FindJobGoal extends Goal {
                                     closestDistance = distance;
                                     closestJobBlock = checkPos;
                                     closestJobType = JobSystem.JOB_GUARD;
+                                }
+                            }
+                        }
+                        // Check for miner_barrel (miner job block)
+                        else if (state.is(ModBLocks.MINER_BARREL.get())) {
+                            foundAnyJobBlocks = true;
+
+                            // Skip if this job block is warned as being in use
+                            if (warnedJobBlocks.contains(checkPos)) {
+                                continue;
+                            }
+
+                            // Check traditional reservation system
+                            if (!JobSystem.isJobBlockReserved(checkPos, peasant.getUUID())) {
+                                double distance = peasantPos.distSqr(checkPos);
+                                if (distance < closestDistance) {
+                                    closestDistance = distance;
+                                    closestJobBlock = checkPos;
+                                    closestJobType = JobSystem.JOB_MINER;
                                 }
                             }
                         }
@@ -189,13 +208,16 @@ public class FindJobGoal extends Goal {
         // Check if the job block still exists and matches our target type
         if (targetJobType != null) {
             if (targetJobType.equals(JobSystem.JOB_FARMER) &&
-                    !state.is(ModBLocks.FARMER_BARREL.get())) { // CHANGED FROM COMPOSTER
+                    !state.is(ModBLocks.FARMER_BARREL.get())) {
                 return false;
             } else if (targetJobType.equals(JobSystem.JOB_GROCER) &&
-                    state.getBlock() != net.minecraft.world.level.block.Blocks.BARREL) {
+                    !state.is(ModBLocks.GROCER_BARREL.get())) {
                 return false;
             } else if (targetJobType.equals(JobSystem.JOB_GUARD) &&
-                    !(state.getBlock() == net.minecraft.world.level.block.Blocks.ANVIL)) {
+                    !state.is(ModBLocks.GUARD_BARREL.get())) {
+                return false;
+            } else if (targetJobType.equals(JobSystem.JOB_MINER) &&
+                    !state.is(ModBLocks.MINER_BARREL.get())) {
                 return false;
             }
         }
@@ -277,12 +299,14 @@ public class FindJobGoal extends Goal {
                     } else {
                         // Fallback - shouldn't happen but handle gracefully
                         BlockState state = peasant.level().getBlockState(targetJobBlock);
-                        if (state.is(ModBLocks.FARMER_BARREL.get())) { // CHANGED FROM COMPOSTER
+                        if (state.is(ModBLocks.FARMER_BARREL.get())) {
                             peasant.setJobType(JobSystem.JOB_FARMER);
-                        } else if (state.getBlock() == net.minecraft.world.level.block.Blocks.BARREL) {
+                        } else if (state.is(ModBLocks.GROCER_BARREL.get())) {
                             peasant.setJobType(JobSystem.JOB_GROCER);
-                        } else if (state.getBlock() == net.minecraft.world.level.block.Blocks.ANVIL) {
+                        } else if (state.is(ModBLocks.GUARD_BARREL.get())) {
                             peasant.setJobType(JobSystem.JOB_GUARD);
+                        } else if (state.is(ModBLocks.MINER_BARREL.get())) {
+                            peasant.setJobType(JobSystem.JOB_MINER);
                         }
                         peasant.setJobBlockPos(targetJobBlock);
                         searchAttempts = 0;

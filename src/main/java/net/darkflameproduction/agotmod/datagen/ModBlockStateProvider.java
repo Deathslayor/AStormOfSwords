@@ -1824,8 +1824,43 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         // ---------------------(Job Blocks)--------------------- //
         blockWithItem(ModBLocks.TOWN_HALL);
+        jobBarrelBlock(ModBLocks.ALEHOUSE_BARREL.get());
+        jobBarrelBlock(ModBLocks.ARMORSMITH_BARREL.get());
+        jobBarrelBlock(ModBLocks.BAKER_BARREL.get());
+        jobBarrelBlock(ModBLocks.BANKER_BARREL.get());
+        jobBarrelBlock(ModBLocks.BARD_BARREL.get());
+        jobBarrelBlock(ModBLocks.BUILDER_BARREL.get());
+        jobBarrelBlock(ModBLocks.BUTCHER_BARREL.get());
+        jobBarrelBlock(ModBLocks.CARAVAN_MASTER_BARREL.get());
+        jobBarrelBlock(ModBLocks.CATTLE_HERDER_BARREL.get());
+        jobBarrelBlock(ModBLocks.CHARCOAL_BURNER_BARREL.get());
+        jobBarrelBlock(ModBLocks.CHICKEN_BREEDER_BARREL.get());
         jobBarrelBlock(ModBLocks.FARMER_BARREL.get());
+        jobBarrelBlock(ModBLocks.GOAT_HERDER_BARREL.get());
+        jobBarrelBlock(ModBLocks.GROCER_BARREL.get());
+        jobBarrelBlock(ModBLocks.GUARD_BARREL.get());
+        jobBarrelBlock(ModBLocks.HERBALIST_BARREL.get());
+        jobBarrelBlock(ModBLocks.HORSE_BREEDER_BARREL.get());
+        jobBarrelBlock(ModBLocks.HUNTER_BARREL.get());
+        jobBarrelBlock(ModBLocks.INNKEEPER_BARREL.get());
+        jobBarrelBlock(ModBLocks.JEWELER_BARREL.get());
+        jobBarrelBlock(ModBLocks.LUMBERJACK_BARREL.get());
+        jobBarrelBlock(ModBLocks.MAESTER_BARREL.get());
         jobBarrelBlock(ModBLocks.MINER_BARREL.get());
+        jobBarrelBlock(ModBLocks.PIG_BREEDER_BARREL.get());
+        jobBarrelBlock(ModBLocks.PYROMANCER_BARREL.get());
+        jobBarrelBlock(ModBLocks.QUARRY_BARREL.get());
+        jobBarrelBlock(ModBLocks.SCRIBE_BARREL.get());
+        jobBarrelBlock(ModBLocks.SEPTON_BARREL.get());
+        jobBarrelBlock(ModBLocks.SHEEP_HERDER_BARREL.get());
+        jobBarrelBlock(ModBLocks.SHIPWRIGHT_BARREL.get());
+        jobBarrelBlock(ModBLocks.SLAVER_BARREL.get());
+        jobBarrelBlock(ModBLocks.SMELTER_BARREL.get());
+        jobBarrelBlock(ModBLocks.STONEMASON_BARREL.get());
+        jobBarrelBlock(ModBLocks.SWORDSMITH_BARREL.get());
+        jobBarrelBlock(ModBLocks.TAILOR_BARREL.get());
+        jobBarrelBlock(ModBLocks.TANNER_BARREL.get());
+        jobBarrelBlock(ModBLocks.TRADER_BARREL.get());
 
 
         // ---------------------(CROPS)--------------------- //

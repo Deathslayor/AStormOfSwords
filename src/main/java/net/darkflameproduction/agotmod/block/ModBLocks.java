@@ -2099,11 +2099,122 @@ public class ModBLocks {
     // ---------------------------(JOBBLOCKS)--------------------------- //
 
 
+    // Town Hall (existing)
     public static final DeferredBlock<Block> TOWN_HALL = registerBlock("town_hall",
             TownHallBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f),
             false);
 
+    // All Job Barrel Blocks
+    public static final DeferredBlock<Block> ALEHOUSE_BARREL = registerBlock("alehouse_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> ARMORSMITH_BARREL = registerBlock("armorsmith_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> BAKER_BARREL = registerBlock("baker_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> BANKER_BARREL = registerBlock("banker_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> BARD_BARREL = registerBlock("bard_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> BUILDER_BARREL = registerBlock("builder_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> BUTCHER_BARREL = registerBlock("butcher_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> CARAVAN_MASTER_BARREL = registerBlock("caravan_master_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> CATTLE_HERDER_BARREL = registerBlock("cattle_herder_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> CHARCOAL_BURNER_BARREL = registerBlock("charcoal_burner_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> CHICKEN_BREEDER_BARREL = registerBlock("chicken_breeder_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
 
     public static final DeferredBlock<Block> FARMER_BARREL = registerBlock("farmer_barrel",
             JobBarrelBlock::new,
@@ -2115,7 +2226,247 @@ public class ModBLocks {
                     .ignitedByLava(),
             false);
 
+    public static final DeferredBlock<Block> GOAT_HERDER_BARREL = registerBlock("goat_herder_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> GROCER_BARREL = registerBlock("grocer_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> GUARD_BARREL = registerBlock("guard_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> HERBALIST_BARREL = registerBlock("herbalist_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> HORSE_BREEDER_BARREL = registerBlock("horse_breeder_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> HUNTER_BARREL = registerBlock("hunter_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> INNKEEPER_BARREL = registerBlock("innkeeper_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> JEWELER_BARREL = registerBlock("jeweler_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> LUMBERJACK_BARREL = registerBlock("lumberjack_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> MAESTER_BARREL = registerBlock("maester_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
     public static final DeferredBlock<Block> MINER_BARREL = registerBlock("miner_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> PIG_BREEDER_BARREL = registerBlock("pig_breeder_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> PYROMANCER_BARREL = registerBlock("pyromancer_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> QUARRY_BARREL = registerBlock("quarry_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> SCRIBE_BARREL = registerBlock("scribe_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> SEPTON_BARREL = registerBlock("septon_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> SHEEP_HERDER_BARREL = registerBlock("sheep_herder_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> SHIPWRIGHT_BARREL = registerBlock("shipwright_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> SLAVER_BARREL = registerBlock("slaver_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> SMELTER_BARREL = registerBlock("smelter_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> STONEMASON_BARREL = registerBlock("stonemason_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> SWORDSMITH_BARREL = registerBlock("swordsmith_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> TAILOR_BARREL = registerBlock("tailor_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> TANNER_BARREL = registerBlock("tanner_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> TRADER_BARREL = registerBlock("trader_barrel",
             JobBarrelBlock::new,
             BlockBehaviour.Properties.of()
                     .mapColor(MapColor.WOOD)

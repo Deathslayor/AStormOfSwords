@@ -3,6 +3,7 @@ package net.darkflameproduction.agotmod.entity.custom.npc.system.grocer;
 import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.grocer.GrocerCollectionGoal;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem;
+import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -53,9 +54,9 @@ public class GrocerSystem {
             return;
         }
 
-        // Verify the job block still exists
+        // Verify the job block still exists - CHANGED: Now checks for grocer_barrel
         BlockPos jobBlockPos = peasant.getJobBlockPos();
-        if (peasant.level().getBlockState(jobBlockPos).getBlock() != net.minecraft.world.level.block.Blocks.BARREL) {
+        if (!peasant.level().getBlockState(jobBlockPos).is(ModBLocks.GROCER_BARREL.get())) {
             return; // Job block is gone, let JobSystem handle job loss
         }
 

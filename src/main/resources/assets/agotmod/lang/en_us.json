@@ -5221,8 +5221,119 @@
   "block.agotmod.winter_rose_bush": "Winter Rose Bush",
   "block.agotmod.red_rose_bush": "Rose Bush",
 
+  "item.agotmod.town_hall": "Town Hall",
+  "container.agotmod.town_hall": "Town Hall",
+
+  "item.agotmod.alehouse_barrel_icon": "Alehouse Barrel",
+  "container.agotmod.alehouse_barrel": "Alehouse Barrel",
+
+  "item.agotmod.armorsmith_barrel_icon": "Armorsmith Barrel",
+  "container.agotmod.armorsmith_barrel": "Armorsmith Barrel",
+
+  "item.agotmod.baker_barrel_icon": "Baker Barrel",
+  "container.agotmod.baker_barrel": "Baker Barrel",
+
+  "item.agotmod.banker_barrel_icon": "Banker Barrel",
+  "container.agotmod.banker_barrel": "Banker Barrel",
+
+  "item.agotmod.bard_barrel_icon": "Bard Barrel",
+  "container.agotmod.bard_barrel": "Bard Barrel",
+
+  "item.agotmod.builder_barrel_icon": "Builder Barrel",
+  "container.agotmod.builder_barrel": "Builder Barrel",
+
+  "item.agotmod.butcher_barrel_icon": "Butcher Barrel",
+  "container.agotmod.butcher_barrel": "Butcher Barrel",
+
+  "item.agotmod.caravan_master_barrel_icon": "Caravan Master Barrel",
+  "container.agotmod.caravan_master_barrel": "Caravan Master Barrel",
+
+  "item.agotmod.cattle_herder_barrel_icon": "Cattle Herder Barrel",
+  "container.agotmod.cattle_herder_barrel": "Cattle Herder Barrel",
+
+  "item.agotmod.charcoal_burner_barrel_icon": "Charcoal Burner Barrel",
+  "container.agotmod.charcoal_burner_barrel": "Charcoal Burner Barrel",
+
+  "item.agotmod.chicken_breeder_barrel_icon": "Chicken Breeder Barrel",
+  "container.agotmod.chicken_breeder_barrel": "Chicken Breeder Barrel",
+
   "item.agotmod.farmer_barrel_icon": "Farm Barrel",
   "container.agotmod.farmer_barrel": "Farm Barrel",
+
+  "item.agotmod.goat_herder_barrel_icon": "Goat Herder Barrel",
+  "container.agotmod.goat_herder_barrel": "Goat Herder Barrel",
+
+  "item.agotmod.grocer_barrel_icon": "Grocer Barrel",
+  "container.agotmod.grocer_barrel": "Grocer Barrel",
+
+  "item.agotmod.guard_barrel_icon": "Guard Barrel",
+  "container.agotmod.guard_barrel": "Guard Barrel",
+
+  "item.agotmod.herbalist_barrel_icon": "Herbalist Barrel",
+  "container.agotmod.herbalist_barrel": "Herbalist Barrel",
+
+  "item.agotmod.horse_breeder_barrel_icon": "Horse Breeder Barrel",
+  "container.agotmod.horse_breeder_barrel": "Horse Breeder Barrel",
+
+  "item.agotmod.hunter_barrel_icon": "Hunter Barrel",
+  "container.agotmod.hunter_barrel": "Hunter Barrel",
+
+  "item.agotmod.innkeeper_barrel_icon": "Innkeeper Barrel",
+  "container.agotmod.innkeeper_barrel": "Innkeeper Barrel",
+
+  "item.agotmod.jeweler_barrel_icon": "Jeweler Barrel",
+  "container.agotmod.jeweler_barrel": "Jeweler Barrel",
+
+  "item.agotmod.lumberjack_barrel_icon": "Lumberjack Barrel",
+  "container.agotmod.lumberjack_barrel": "Lumberjack Barrel",
+
+  "item.agotmod.maester_barrel_icon": "Maester Barrel",
+  "container.agotmod.maester_barrel": "Maester Barrel",
+
+  "item.agotmod.miner_barrel_icon": "Miner Barrel",
+  "container.agotmod.miner_barrel": "Miner Barrel",
+
+  "item.agotmod.pig_breeder_barrel_icon": "Pig Breeder Barrel",
+  "container.agotmod.pig_breeder_barrel": "Pig Breeder Barrel",
+
+  "item.agotmod.pyromancer_barrel_icon": "Pyromancer Barrel",
+  "container.agotmod.pyromancer_barrel": "Pyromancer Barrel",
+
+  "item.agotmod.quarry_barrel_icon": "Quarry Barrel",
+  "container.agotmod.quarry_barrel": "Quarry Barrel",
+
+  "item.agotmod.scribe_barrel_icon": "Scribe Barrel",
+  "container.agotmod.scribe_barrel": "Scribe Barrel",
+
+  "item.agotmod.septon_barrel_icon": "Septon Barrel",
+  "container.agotmod.septon_barrel": "Septon Barrel",
+
+  "item.agotmod.sheep_herder_barrel_icon": "Sheep Herder Barrel",
+  "container.agotmod.sheep_herder_barrel": "Sheep Herder Barrel",
+
+  "item.agotmod.shipwright_barrel_icon": "Shipwright Barrel",
+  "container.agotmod.shipwright_barrel": "Shipwright Barrel",
+
+  "item.agotmod.slaver_barrel_icon": "Slaver Barrel",
+  "container.agotmod.slaver_barrel": "Slaver Barrel",
+
+  "item.agotmod.smelter_barrel_icon": "Smelter Barrel",
+  "container.agotmod.smelter_barrel": "Smelter Barrel",
+
+  "item.agotmod.stonemason_barrel_icon": "Stonemason Barrel",
+  "container.agotmod.stonemason_barrel": "Stonemason Barrel",
+
+  "item.agotmod.swordsmith_barrel_icon": "Swordsmith Barrel",
+  "container.agotmod.swordsmith_barrel": "Swordsmith Barrel",
+
+  "item.agotmod.tailor_barrel_icon": "Tailor Barrel",
+  "container.agotmod.tailor_barrel": "Tailor Barrel",
+
+  "item.agotmod.tanner_barrel_icon": "Tanner Barrel",
+  "container.agotmod.tanner_barrel": "Tanner Barrel",
+
+  "item.agotmod.trader_barrel_icon": "Trader Barrel",
+  "container.agotmod.trader_barrel": "Trader Barrel",
 
 
 

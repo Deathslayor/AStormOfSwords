@@ -2,7 +2,7 @@ package net.darkflameproduction.agotmod.entity.custom.npc;
 
 import net.darkflameproduction.agotmod.entity.animations.ModAnimationDefinitions;
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.behaviour.*;
-import net.darkflameproduction.agotmod.entity.custom.npc.goals.farmer.BarrelDropOffGoal;
+import net.darkflameproduction.agotmod.entity.custom.npc.goals.farmer.FarmerBarrelDropOffGoal;
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.farmer.FarmingGoal;
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.grocer.GrocerCollectionGoal;
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.guard.GuardCombatGoal;
@@ -10,11 +10,14 @@ import net.darkflameproduction.agotmod.entity.custom.npc.goals.guard.GuardPatrol
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.inventory.CollectFoodGoal;
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.sleep.FindBedGoal;
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.sleep.SleepGoal;
+import net.darkflameproduction.agotmod.entity.custom.npc.goals.miner.MinerGoal;
+import net.darkflameproduction.agotmod.entity.custom.npc.goals.miner.MinerBarrelDropOffGoal;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.NameSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.farmer.FarmingSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.grocer.GrocerSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.guard.GuardSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.miner.MinerSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.inventory.HungerSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.inventory.InventorySystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.sleep.HomeSystem;
@@ -108,6 +111,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     private final TeleportSystem teleportSystem;
     private final NameSystem nameSystem;
     private final GuardSystem guardSystem;
+    private final MinerSystem minerSystem;
     private static final Random RANDOM = new Random();
 
     // Daily reset tracking
@@ -142,6 +146,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         this.teleportSystem = new TeleportSystem(this);
         this.nameSystem = new NameSystem(this);
         this.guardSystem = new GuardSystem(this);
+        this.minerSystem = new MinerSystem(this);
     }
 
     // Getters for all systems
@@ -155,6 +160,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     public TeleportSystem getTeleportSystem() { return teleportSystem; }
     public NameSystem getNameSystem() { return nameSystem; }
     public GuardSystem getGuardSystem() { return guardSystem; }
+    public MinerSystem getMinerSystem() { return minerSystem; }
 
     // Getter for grocer collection goal
     public GrocerCollectionGoal getGrocerCollectionGoal() { return grocerCollectionGoal; }
@@ -286,9 +292,10 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         this.doorGoal = new OpenAndCloseDoorGoal(this);
         this.goalSelector.addGoal(3, doorGoal); // Adjusted priority
 
-        // Barrel drop off goal - only for adults
+        // Barrel drop off goals - only for adults
         if (isAdult()) {
-            this.goalSelector.addGoal(3, new BarrelDropOffGoal(this));
+            this.goalSelector.addGoal(3, new FarmerBarrelDropOffGoal(this));
+            this.goalSelector.addGoal(3, new MinerBarrelDropOffGoal(this));
         }
 
         this.goalSelector.addGoal(4, new FindBedGoal(this));
@@ -300,6 +307,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
             this.goalSelector.addGoal(8, new ReturnToJobBlockGoal(this));
             this.goalSelector.addGoal(9, new FindJobGoal(this));
             this.goalSelector.addGoal(10, new FarmingGoal(this));
+            this.goalSelector.addGoal(10, new MinerGoal(this));
 
             this.grocerCollectionGoal = new GrocerCollectionGoal(this);
             this.goalSelector.addGoal(10, grocerCollectionGoal);
@@ -383,6 +391,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         teleportSystem.saveData(compound);
         nameSystem.saveData(compound, this.registryAccess());
         guardSystem.saveData(compound); // Save guard system data
+        minerSystem.saveData(compound); // Save miner system data
 
         // Save inventory system data (only regular inventory, not equipment)
         inventorySystem.saveData(compound, this.registryAccess());
@@ -438,6 +447,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         teleportSystem.loadData(compound);
         nameSystem.loadData(compound, this.registryAccess());
         guardSystem.loadData(compound); // Load guard system data
+        minerSystem.loadData(compound); // Load miner system data
 
         // Load inventory system data (only regular inventory, not equipment)
         inventorySystem.loadData(compound, this.registryAccess());
@@ -488,7 +498,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
             checkForNewDay();
         }
 
-        // Update all systems including guard system
+        // Update all systems including guard and miner systems
         sleepSystem.tick();
         hungerSystem.tick();
         inventorySystem.tick();
@@ -498,6 +508,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         grocerSystem.tick();
         teleportSystem.tick();
         guardSystem.tick(); // Update guard system
+        minerSystem.tick(); // Update miner system
 
         // Handle aging for children
         if (!this.level().isClientSide && isChild()) {
@@ -592,7 +603,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                     return InteractionResult.SUCCESS;
                 }
             } else {
-                // Regular inventory for non-grocers (including guards)
+                // Regular inventory for non-grocers (including guards and miners)
                 if (!this.level().isClientSide && player instanceof ServerPlayer serverPlayer) {
                     inventorySystem.openInventoryFor(serverPlayer);
                 }
@@ -627,6 +638,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         homeSystem.onRemove();
         grocerSystem.onRemove();
         guardSystem.onRemove(); // Clean up guard system
+        // No special cleanup needed for miner system currently
 
         // Don't drop items when killed - comment out the inventory drop
         // if (!this.level().isClientSide && reason == RemovalReason.KILLED) {

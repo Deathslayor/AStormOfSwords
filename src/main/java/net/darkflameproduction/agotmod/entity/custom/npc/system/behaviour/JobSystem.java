@@ -3,6 +3,7 @@ package net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour;
 import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.farmer.FarmingSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.grocer.GrocerSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.miner.MinerSystem;
 import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -23,6 +24,7 @@ public class JobSystem {
     public static final String JOB_GROCER = "grocer";
     public static final String JOB_FARMER = "farmer";
     public static final String JOB_GUARD = "guard";
+    public static final String JOB_MINER = "miner";
     public static final String JOB_NONE = "";
 
     // Work area system constants
@@ -43,6 +45,11 @@ public class JobSystem {
     private static final int GUARD_WORK_RADIUS_X = 96;
     private static final int GUARD_WORK_RADIUS_Z = 96;
     private static final int GUARD_WORK_RADIUS_Y = 32;
+
+    // Miner work area constants
+    private static final int MINER_WORK_RADIUS_X = 64;
+    private static final int MINER_WORK_RADIUS_Z = 64;
+    private static final int MINER_WORK_RADIUS_Y = 48; // Larger Y radius for underground mining
 
     // Job block reservations - static maps to track which blocks are taken
     private static final Map<BlockPos, UUID> jobBlockReservations = new HashMap<>();
@@ -100,11 +107,13 @@ public class JobSystem {
 
         // Check based on job type
         if (getJobType().equals(JOB_FARMER)) {
-            return jobBlockState.is(ModBLocks.FARMER_BARREL.get()); // CHANGED FROM COMPOSTER
+            return jobBlockState.is(ModBLocks.FARMER_BARREL.get());
         } else if (getJobType().equals(JOB_GROCER)) {
-            return jobBlockState.getBlock() == net.minecraft.world.level.block.Blocks.BARREL;
+            return jobBlockState.is(ModBLocks.GROCER_BARREL.get());
         } else if (getJobType().equals(JOB_GUARD)) {
-            return jobBlockState.getBlock() == net.minecraft.world.level.block.Blocks.ANVIL;
+            return jobBlockState.is(ModBLocks.GUARD_BARREL.get());
+        } else if (getJobType().equals(JOB_MINER)) {
+            return jobBlockState.is(ModBLocks.MINER_BARREL.get());
         }
 
         // For unknown job types, assume invalid
@@ -140,6 +149,13 @@ public class JobSystem {
         } else if (oldJobType.equals(JOB_GUARD)) {
             // Clean up guard system
             peasant.getGuardSystem().onRemove();
+        } else if (oldJobType.equals(JOB_MINER)) {
+            // Reset miner system
+            peasant.getMinerSystem().setCurrentMinerState(
+                    peasant.getMinerSystem().hasMine() ?
+                            MinerSystem.MinerState.NEEDS_MINE_SETUP :
+                            MinerSystem.MinerState.NEEDS_MINE_SETUP
+            );
         }
     }
 
@@ -212,6 +228,8 @@ public class JobSystem {
         // Give equipment based on new job
         if (newJob.equals(JOB_FARMER)) {
             giveIronHoe();
+        } else if (newJob.equals(JOB_MINER)) {
+            giveMinerEquipment();
         }
         // Guards no longer get automatic equipment
         // else if (newJob.equals(JOB_GUARD)) {
@@ -246,6 +264,35 @@ public class JobSystem {
                 }
             }
         }
+    }
+
+    /**
+     * Gives miners equipment (pickaxe and torches)
+     */
+    private void giveMinerEquipment() {
+        // Give miners a pickaxe if they don't have one
+        if (!hasPickaxe()) {
+            ItemStack ironPickaxe = new ItemStack(Items.IRON_PICKAXE);
+
+            // Try to add to inventory first
+            if (peasant.getInventorySystem().addItem(ironPickaxe)) {
+                // Successfully added to inventory, auto-equip will handle equipping it
+                peasant.getInventorySystem().forceEquipmentCheck();
+            } else {
+                // Inventory full, try to equip directly to main hand if it's empty
+                if (peasant.getInventorySystem().getMainHandItem().isEmpty()) {
+                    peasant.getInventorySystem().setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, ironPickaxe);
+                } else {
+                    // Main hand occupied and inventory full, drop the pickaxe near the peasant
+                    if (peasant.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+                        peasant.spawnAtLocation(serverLevel, ironPickaxe);
+                    }
+                }
+            }
+        }
+
+        // Give some torches for mining
+        giveTorches();
     }
 
     /**
@@ -297,6 +344,43 @@ public class JobSystem {
         }
 
         return false;
+    }
+
+    /**
+     * Checks if the peasant already has a pickaxe (equipped or in inventory)
+     */
+    private boolean hasPickaxe() {
+        // Check equipped items
+        if (peasant.getInventorySystem().getMainHandItem().getItem() instanceof net.minecraft.world.item.PickaxeItem ||
+                peasant.getInventorySystem().getOffhandItem().getItem() instanceof net.minecraft.world.item.PickaxeItem) {
+            return true;
+        }
+
+        // Check inventory
+        var inventory = peasant.getInventorySystem().getInventory();
+        for (int i = 0; i < inventory.getContainerSize(); i++) {
+            ItemStack stack = inventory.getItem(i);
+            if (stack.getItem() instanceof net.minecraft.world.item.PickaxeItem) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Gives torches to miners for underground work
+     */
+    private void giveTorches() {
+        ItemStack torches = new ItemStack(Items.TORCH, 32); // Give 32 torches
+
+        // Try to add to inventory
+        if (!peasant.getInventorySystem().addItem(torches)) {
+            // Inventory full, drop torches near the peasant
+            if (peasant.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+                peasant.spawnAtLocation(serverLevel, torches);
+            }
+        }
     }
 
     /**
@@ -420,6 +504,9 @@ public class JobSystem {
         } else if (getJobType().equals(JOB_GUARD)) {
             // Guards have large patrol areas
             return deltaX <= GUARD_WORK_RADIUS_X && deltaZ <= GUARD_WORK_RADIUS_Z && deltaY <= GUARD_WORK_RADIUS_Y;
+        } else if (getJobType().equals(JOB_MINER)) {
+            // Miners have medium work areas with large Y radius for underground work
+            return deltaX <= MINER_WORK_RADIUS_X && deltaZ <= MINER_WORK_RADIUS_Z && deltaY <= MINER_WORK_RADIUS_Y;
         }
 
         return true; // Default: no restrictions for unknown job types
@@ -448,6 +535,11 @@ public class JobSystem {
 
         // For grocers, they can work anytime during non-sleep hours
         if (getJobType().equals(JOB_GROCER)) {
+            return true;
+        }
+
+        // For miners, they can work anytime during non-sleep hours
+        if (getJobType().equals(JOB_MINER)) {
             return true;
         }
 
@@ -484,6 +576,8 @@ public class JobSystem {
             }
         } else if (getJobType().equals(JOB_GUARD)) {
             return distanceSquared > ((GUARD_WORK_RADIUS_X + 10) * (GUARD_WORK_RADIUS_X + 10));
+        } else if (getJobType().equals(JOB_MINER)) {
+            return distanceSquared > ((MINER_WORK_RADIUS_X + 10) * (MINER_WORK_RADIUS_X + 10));
         }
 
         return false;
@@ -514,6 +608,8 @@ public class JobSystem {
                 baseName = currentName.substring(7); // Remove "Grocer "
             } else if (currentName.startsWith("Guard ")) {
                 baseName = currentName.substring(6); // Remove "Guard "
+            } else if (currentName.startsWith("Miner ")) {
+                baseName = currentName.substring(6); // Remove "Miner "
             }
 
             // Add new job title
@@ -524,6 +620,8 @@ public class JobSystem {
                 newName = "Grocer " + baseName;
             } else if (getJobType().equals(JOB_GUARD)) {
                 newName = "Guard " + baseName;
+            } else if (getJobType().equals(JOB_MINER)) {
+                newName = "Miner " + baseName;
             }
 
             peasant.setCustomName(Component.literal(newName));

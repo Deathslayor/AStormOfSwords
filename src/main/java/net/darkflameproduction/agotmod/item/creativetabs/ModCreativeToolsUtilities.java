@@ -37,9 +37,47 @@ public class ModCreativeToolsUtilities {
                         pOutput.accept(ModItems.STEEL_HOE.get());
                         pOutput.accept(ModItems.STEEL_PICKAXE.get());
                         pOutput.accept(ModItems.STEEL_SHOVEL.get());
-                        pOutput.accept(ModItems.FARMER_BARREL.get());
-                        pOutput.accept(ModItems.MINER_BARREL.get());
+// Town Hall (existing)
                         pOutput.accept(ModItems.TOWN_HALL.get());
+
+// All Job Barrel Creative Tab Entries
+                        pOutput.accept(ModItems.ALEHOUSE_BARREL.get());
+                        pOutput.accept(ModItems.ARMORSMITH_BARREL.get());
+                        pOutput.accept(ModItems.BAKER_BARREL.get());
+                        pOutput.accept(ModItems.BANKER_BARREL.get());
+                        pOutput.accept(ModItems.BARD_BARREL.get());
+                        pOutput.accept(ModItems.BUILDER_BARREL.get());
+                        pOutput.accept(ModItems.BUTCHER_BARREL.get());
+                        pOutput.accept(ModItems.CARAVAN_MASTER_BARREL.get());
+                        pOutput.accept(ModItems.CATTLE_HERDER_BARREL.get());
+                        pOutput.accept(ModItems.CHARCOAL_BURNER_BARREL.get());
+                        pOutput.accept(ModItems.CHICKEN_BREEDER_BARREL.get());
+                        pOutput.accept(ModItems.FARMER_BARREL.get());
+                        pOutput.accept(ModItems.GOAT_HERDER_BARREL.get());
+                        pOutput.accept(ModItems.GROCER_BARREL.get());
+                        pOutput.accept(ModItems.GUARD_BARREL.get());
+                        pOutput.accept(ModItems.HERBALIST_BARREL.get());
+                        pOutput.accept(ModItems.HORSE_BREEDER_BARREL.get());
+                        pOutput.accept(ModItems.HUNTER_BARREL.get());
+                        pOutput.accept(ModItems.INNKEEPER_BARREL.get());
+                        pOutput.accept(ModItems.JEWELER_BARREL.get());
+                        pOutput.accept(ModItems.LUMBERJACK_BARREL.get());
+                        pOutput.accept(ModItems.MAESTER_BARREL.get());
+                        pOutput.accept(ModItems.MINER_BARREL.get());
+                        pOutput.accept(ModItems.PIG_BREEDER_BARREL.get());
+                        pOutput.accept(ModItems.PYROMANCER_BARREL.get());
+                        pOutput.accept(ModItems.QUARRY_BARREL.get());
+                        pOutput.accept(ModItems.SCRIBE_BARREL.get());
+                        pOutput.accept(ModItems.SEPTON_BARREL.get());
+                        pOutput.accept(ModItems.SHEEP_HERDER_BARREL.get());
+                        pOutput.accept(ModItems.SHIPWRIGHT_BARREL.get());
+                        pOutput.accept(ModItems.SLAVER_BARREL.get());
+                        pOutput.accept(ModItems.SMELTER_BARREL.get());
+                        pOutput.accept(ModItems.STONEMASON_BARREL.get());
+                        pOutput.accept(ModItems.SWORDSMITH_BARREL.get());
+                        pOutput.accept(ModItems.TAILOR_BARREL.get());
+                        pOutput.accept(ModItems.TANNER_BARREL.get());
+                        pOutput.accept(ModItems.TRADER_BARREL.get());
 
                     })
                     .build());

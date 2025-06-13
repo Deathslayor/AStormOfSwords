@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "agotmod:block/barrel_bottom",
+    "east": "agotmod:block/barrel_hunter",
+    "north": "agotmod:block/barrel_hunter",
+    "particle": "agotmod:block/barrel_hunter",
+    "south": "agotmod:block/barrel_hunter",
+    "up": "agotmod:block/barrel_top_open",
+    "west": "agotmod:block/barrel_hunter"
+  }
+}
