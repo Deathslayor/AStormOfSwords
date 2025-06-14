@@ -113,17 +113,11 @@ public class MinerGoal extends Goal {
 
         MinerState currentState = peasant.getMinerSystem().getCurrentMinerState();
 
-        // Debug state every 5 seconds
+        // Debug every 5 seconds
         if (!peasant.level().isClientSide && workTimer % 100 == 0) {
             System.out.println("=== MINER GOAL TICK [" + peasant.getName().getString() + "] ===");
             System.out.println("  State: " + currentState + ", Timer: " + workTimer);
             System.out.println("  Position: " + peasant.blockPosition());
-            System.out.println("  Navigation active: " + peasant.getNavigation().isInProgress());
-            if (currentWorkTarget != null) {
-                System.out.println("  Current target: " + currentWorkTarget);
-                double dist = Math.sqrt(peasant.distanceToSqr(currentWorkTarget.getX() + 0.5, currentWorkTarget.getY(), currentWorkTarget.getZ() + 0.5));
-                System.out.println("  Distance to target: " + String.format("%.2f", dist));
-            }
         }
 
         switch (currentState) {
@@ -136,13 +130,74 @@ public class MinerGoal extends Goal {
             case SETTING_UP_MINE:
                 handleMineSetupWork();
                 break;
+            case SELECTING_TUNNEL:
+                handleTunnelSelection();
+                break;
+            case WALKING_TO_TUNNEL:
+                handleWalkingToTunnel();
+                break;
             case MINING:
-                handleMining();
+                handleSimpleMining();
                 break;
             case PATROLLING:
                 handlePatrolling();
                 break;
         }
+    }
+
+    private void handleTunnelSelection() {
+        // Select today's tunnel and move to walking state
+        if (workTimer % 20 == 0) { // Every second
+            if (!peasant.level().isClientSide) {
+                System.out.println("  Selecting today's tunnel...");
+            }
+            peasant.getMinerSystem().selectTodaysTunnel();
+        }
+    }
+
+    private void handleWalkingToTunnel() {
+        BlockPos tunnelEntrance = peasant.getMinerSystem().getSelectedTunnelEntrance();
+
+        if (tunnelEntrance == null) {
+            peasant.getMinerSystem().setCurrentMinerState(MinerState.SELECTING_TUNNEL);
+            return;
+        }
+
+        // FIXED: Start mining immediately without reaching the entrance
+        if (!peasant.level().isClientSide) {
+            System.out.println("  Starting remote mining without navigation to entrance");
+        }
+        peasant.getMinerSystem().setCurrentMinerState(MinerState.MINING);
+    }
+
+    private void handleSimpleMining() {
+        BlockPos miningPosition = peasant.getMinerSystem().getCurrentMiningPosition();
+
+        if (miningPosition == null) {
+            if (!peasant.level().isClientSide) {
+                System.out.println("  No mining position, returning to tunnel selection");
+            }
+            peasant.getMinerSystem().setCurrentMinerState(MinerState.SELECTING_TUNNEL);
+            return;
+        }
+
+        // FIXED: Remote mining - no navigation needed, mine every 2 seconds regardless of position
+        if (workTimer % 40 == 0) {
+            if (!peasant.level().isClientSide) {
+                System.out.println("  Performing remote mining at: " + miningPosition);
+                System.out.println("  Miner location: " + peasant.blockPosition());
+                double distance = Math.sqrt(peasant.distanceToSqr(miningPosition.getX(), miningPosition.getY(), miningPosition.getZ()));
+                System.out.println("  Distance to mining site: " + String.format("%.1f", distance) + " blocks (remote mining)");
+            }
+            peasant.getMinerSystem().performSimpleMining();
+        }
+
+        // Look toward mining area (visual only - makes it look like they're concentrating on the work)
+        peasant.getLookControl().setLookAt(
+                miningPosition.getX() + 0.5,
+                miningPosition.getY() + 0.5,
+                miningPosition.getZ() + 0.5
+        );
     }
 
     private void handleMineSetup() {
@@ -215,79 +270,9 @@ public class MinerGoal extends Goal {
         }
     }
 
-    private void handleMining() {
-        // Get the current mining target from the MinerSystem
-        BlockPos miningTarget = peasant.getMinerSystem().getCurrentMiningTarget();
+    // In MinerGoal.java - handleMining() method
 
-        if (miningTarget == null) {
-            // Safety check - if stuck without target for too long, reset
-            if (workTimer > 200) { // If no target for 10 seconds (200 ticks)
-                if (!peasant.level().isClientSide) {
-                    System.out.println("=== MINING TARGET TIMEOUT [" + peasant.getName().getString() + "] ===");
-                    System.out.println("  No mining target for " + workTimer + " ticks, resetting mining state");
-                }
-                peasant.getMinerSystem().resetMiningState();
-                workTimer = 0;
-                return;
-            }
 
-            // Stay near job block area and let MinerSystem select a target
-            if (!peasant.getMinerSystem().isAtJobBlock()) {
-                BlockPos jobBlock = peasant.getMinerSystem().getJobBlockPosition();
-                if (jobBlock != null && !peasant.getNavigation().isInProgress()) {
-                    if (!peasant.level().isClientSide) {
-                        System.out.println("  No mining target, returning to job block area: " + jobBlock);
-                    }
-                    peasant.getNavigation().moveTo(jobBlock.getX() + 0.5, jobBlock.getY(), jobBlock.getZ() + 0.5, 0.6D);
-                }
-            }
-            return;
-        }
-
-        // Reset timer when we have a target
-        workTimer = 0;
-
-        // CHECK: Are we still navigating to the tunnel entrance?
-        if (!peasant.getMinerSystem().hasReachedCurrentEntrance()) {
-            // Still need to reach the tunnel entrance - navigate there first
-            if (!peasant.getNavigation().isInProgress() || !isSameTarget(miningTarget)) {
-                currentWorkTarget = miningTarget;
-
-                if (!peasant.level().isClientSide) {
-                    double dist = Math.sqrt(peasant.distanceToSqr(miningTarget.getX() + 0.5, miningTarget.getY(), miningTarget.getZ() + 0.5));
-                    System.out.println("  Navigating to tunnel entrance: " + miningTarget + " (distance: " + String.format("%.2f", dist) + ")");
-                    System.out.println("  This is ENTRANCE navigation, not mining yet");
-                }
-
-                peasant.getNavigation().moveTo(miningTarget.getX() + 0.5, miningTarget.getY(), miningTarget.getZ() + 0.5, 0.6D);
-            }
-        } else {
-            // We've reached the tunnel entrance - now start actual mining
-            // Check if we need to advance from entrance to first mining position
-            if (miningTarget.equals(peasant.getMinerSystem().getCurrentHallwayStart())) {
-                if (!peasant.level().isClientSide) {
-                    System.out.println("  At tunnel entrance, advancing to first mining position");
-                }
-                peasant.getMinerSystem().advanceFromEntranceToMining();
-                return; // Wait for next tick with new target
-            }
-
-            // Normal mining navigation
-            if (!peasant.getNavigation().isInProgress() || !isSameTarget(miningTarget)) {
-                currentWorkTarget = miningTarget;
-
-                if (!peasant.level().isClientSide) {
-                    double dist = Math.sqrt(peasant.distanceToSqr(miningTarget.getX() + 0.5, miningTarget.getY(), miningTarget.getZ() + 0.5));
-                    System.out.println("  Mining navigation to: " + miningTarget + " (distance: " + String.format("%.2f", dist) + ")");
-                }
-
-                peasant.getNavigation().moveTo(miningTarget.getX() + 0.5, miningTarget.getY(), miningTarget.getZ() + 0.5, 0.6D);
-            }
-        }
-
-        // Always look at the mining target while navigating
-        peasant.getLookControl().setLookAt(miningTarget.getX() + 0.5, miningTarget.getY() + 1, miningTarget.getZ() + 0.5);
-    }
 
     private void handlePatrolling() {
         // Wander around the mine area occasionally
@@ -317,11 +302,6 @@ public class MinerGoal extends Goal {
         }
     }
 
-
-    private boolean isSameTarget(BlockPos target) {
-        return currentWorkTarget != null && currentWorkTarget.equals(target);
-    }
-
     /**
      * Checks if a position is valid for patrolling (not a hole or wall)
      */
@@ -338,12 +318,5 @@ public class MinerGoal extends Goal {
         }
 
         return true;
-    }
-
-    /**
-     * Gets the current mining target from the MinerSystem
-     */
-    public BlockPos getCurrentMiningTarget() {
-        return peasant.getMinerSystem().getCurrentMiningTarget();
     }
 }

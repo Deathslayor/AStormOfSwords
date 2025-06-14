@@ -4,8 +4,10 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.tags.ItemTags;
 import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem;
 import net.darkflameproduction.agotmod.block.ModBLocks;
@@ -20,136 +22,46 @@ public class MinerBarrelDropOffGoal extends Goal {
     private BlockPos targetBarrel;
     private long lastDropOffDay = -1; // Track which day we last dropped off
 
-    // Set of allowed items that can be dropped off (mining-related items)
-    private static final Set<String> ALLOWED_ITEMS = new HashSet<>();
+    // Set of disallowed items that cannot be dropped off (blacklist approach)
+    private static final Set<String> DISALLOWED_ITEMS = new HashSet<>();
 
     static {
-        // Vanilla ores and materials
-        ALLOWED_ITEMS.add("minecraft:coal");
-        ALLOWED_ITEMS.add("minecraft:iron_ore");
-        ALLOWED_ITEMS.add("minecraft:deepslate_iron_ore");
-        ALLOWED_ITEMS.add("minecraft:gold_ore");
-        ALLOWED_ITEMS.add("minecraft:deepslate_gold_ore");
-        ALLOWED_ITEMS.add("minecraft:diamond_ore");
-        ALLOWED_ITEMS.add("minecraft:deepslate_diamond_ore");
-        ALLOWED_ITEMS.add("minecraft:emerald_ore");
-        ALLOWED_ITEMS.add("minecraft:deepslate_emerald_ore");
-        ALLOWED_ITEMS.add("minecraft:lapis_ore");
-        ALLOWED_ITEMS.add("minecraft:deepslate_lapis_ore");
-        ALLOWED_ITEMS.add("minecraft:redstone_ore");
-        ALLOWED_ITEMS.add("minecraft:deepslate_redstone_ore");
-        ALLOWED_ITEMS.add("minecraft:copper_ore");
-        ALLOWED_ITEMS.add("minecraft:deepslate_copper_ore");
+        // Torches - miners need these for mining
+        DISALLOWED_ITEMS.add("minecraft:torch");
+        DISALLOWED_ITEMS.add("minecraft:soul_torch");
+        DISALLOWED_ITEMS.add("minecraft:redstone_torch");
+        DISALLOWED_ITEMS.add("minecraft:wall_torch");
+        DISALLOWED_ITEMS.add("minecraft:soul_wall_torch");
+        DISALLOWED_ITEMS.add("minecraft:redstone_wall_torch");
 
-        // Raw materials
-        ALLOWED_ITEMS.add("minecraft:raw_iron");
-        ALLOWED_ITEMS.add("minecraft:raw_gold");
-        ALLOWED_ITEMS.add("minecraft:raw_copper");
+        // Pickaxes - miners need these for their job
+        DISALLOWED_ITEMS.add("minecraft:wooden_pickaxe");
+        DISALLOWED_ITEMS.add("minecraft:stone_pickaxe");
+        DISALLOWED_ITEMS.add("minecraft:iron_pickaxe");
+        DISALLOWED_ITEMS.add("minecraft:golden_pickaxe");
+        DISALLOWED_ITEMS.add("minecraft:diamond_pickaxe");
+        DISALLOWED_ITEMS.add("minecraft:netherite_pickaxe");
 
-        // Ingots and gems
-        ALLOWED_ITEMS.add("minecraft:iron_ingot");
-        ALLOWED_ITEMS.add("minecraft:gold_ingot");
-        ALLOWED_ITEMS.add("minecraft:copper_ingot");
-        ALLOWED_ITEMS.add("minecraft:diamond");
-        ALLOWED_ITEMS.add("minecraft:emerald");
-        ALLOWED_ITEMS.add("minecraft:lapis_lazuli");
-        ALLOWED_ITEMS.add("minecraft:redstone");
+        // Add any custom mod pickaxes
+        DISALLOWED_ITEMS.add("agotmod:bronze_pickaxe");
+        DISALLOWED_ITEMS.add("agotmod:steel_pickaxe");
 
-        // Stone and building materials
-        ALLOWED_ITEMS.add("minecraft:stone");
-        ALLOWED_ITEMS.add("minecraft:cobblestone");
-        ALLOWED_ITEMS.add("minecraft:deepslate");
-        ALLOWED_ITEMS.add("minecraft:cobbled_deepslate");
-        ALLOWED_ITEMS.add("minecraft:granite");
-        ALLOWED_ITEMS.add("minecraft:diorite");
-        ALLOWED_ITEMS.add("minecraft:andesite");
-
-        // Custom mod ores and gems
-        ALLOWED_ITEMS.add("agotmod:silver_ore");
-        ALLOWED_ITEMS.add("agotmod:raw_silver_block");
-        ALLOWED_ITEMS.add("agotmod:deepslate_silver_ore");
-        ALLOWED_ITEMS.add("agotmod:silver_block");
-
-        ALLOWED_ITEMS.add("agotmod:tin_ore");
-        ALLOWED_ITEMS.add("agotmod:raw_tin_block");
-        ALLOWED_ITEMS.add("agotmod:deepslate_tin_ore");
-        ALLOWED_ITEMS.add("agotmod:tin_block");
-        ALLOWED_ITEMS.add("agotmod:bronze_block");
-
-        // Gemstones and precious blocks
-        ALLOWED_ITEMS.add("agotmod:yellow_diamond_block");
-        ALLOWED_ITEMS.add("agotmod:transparent_diamond_block");
-        ALLOWED_ITEMS.add("agotmod:black_diamond_block");
-
-        ALLOWED_ITEMS.add("agotmod:amber_block");
-        ALLOWED_ITEMS.add("agotmod:amber_ore");
-        ALLOWED_ITEMS.add("agotmod:amber_deepslate_ore");
-
-        ALLOWED_ITEMS.add("agotmod:amethyst_block");
-        ALLOWED_ITEMS.add("agotmod:amethyst_ore");
-        ALLOWED_ITEMS.add("agotmod:amethyst_deepslate_ore");
-
-        ALLOWED_ITEMS.add("agotmod:bloodstone_block");
-        ALLOWED_ITEMS.add("agotmod:bloodstone_ore");
-        ALLOWED_ITEMS.add("agotmod:bloodstone_deepslate_ore");
-
-        ALLOWED_ITEMS.add("agotmod:carnelian_block");
-        ALLOWED_ITEMS.add("agotmod:carnelian_ore");
-        ALLOWED_ITEMS.add("agotmod:carnelian_deepslate_ore");
-
-        ALLOWED_ITEMS.add("agotmod:chalcedony_block");
-        ALLOWED_ITEMS.add("agotmod:chalcedony_ore");
-        ALLOWED_ITEMS.add("agotmod:chalcedony_deepslate_ore");
-
-        ALLOWED_ITEMS.add("agotmod:diamonds_ore");
-        ALLOWED_ITEMS.add("agotmod:diamonds_deepslate_ore");
-
-        ALLOWED_ITEMS.add("agotmod:garnet_block");
-        ALLOWED_ITEMS.add("agotmod:garnet_ore");
-        ALLOWED_ITEMS.add("agotmod:garnet_deepslate_ore");
-
-        ALLOWED_ITEMS.add("agotmod:jade_block");
-        ALLOWED_ITEMS.add("agotmod:jade_ore");
-        ALLOWED_ITEMS.add("agotmod:jade_deepslate_ore");
-
-        ALLOWED_ITEMS.add("agotmod:jasper_block");
-        ALLOWED_ITEMS.add("agotmod:jasper_ore");
-        ALLOWED_ITEMS.add("agotmod:jasper_deepslate_ore");
-
-        ALLOWED_ITEMS.add("agotmod:malachite_block");
-        ALLOWED_ITEMS.add("agotmod:malachite_ore");
-        ALLOWED_ITEMS.add("agotmod:malachite_deepslate_ore");
-
-        ALLOWED_ITEMS.add("agotmod:moonstone_block");
-        ALLOWED_ITEMS.add("agotmod:moonstone_ore");
-        ALLOWED_ITEMS.add("agotmod:moonstone_deepslate_ore");
-
-        ALLOWED_ITEMS.add("agotmod:onyx_block");
-        ALLOWED_ITEMS.add("agotmod:onyx_ore");
-        ALLOWED_ITEMS.add("agotmod:onyx_deepslate_ore");
-
-        ALLOWED_ITEMS.add("agotmod:opal_block");
-        ALLOWED_ITEMS.add("agotmod:opal_ore");
-        ALLOWED_ITEMS.add("agotmod:opal_deepslate_ore");
-
-        ALLOWED_ITEMS.add("agotmod:ruby_block");
-        ALLOWED_ITEMS.add("agotmod:ruby_ore");
-        ALLOWED_ITEMS.add("agotmod:ruby_deepslate_ore");
-
-        ALLOWED_ITEMS.add("agotmod:sapphire_block");
-        ALLOWED_ITEMS.add("agotmod:sapphire_ore");
-        ALLOWED_ITEMS.add("agotmod:sapphire_deepslate_ore");
-
-        ALLOWED_ITEMS.add("agotmod:tigers_eye_block");
-        ALLOWED_ITEMS.add("agotmod:tigers_eye_ore");
-        ALLOWED_ITEMS.add("agotmod:tigers_eye_deepslate_ore");
-
-        ALLOWED_ITEMS.add("agotmod:topaz_block");
-        ALLOWED_ITEMS.add("agotmod:topaz_ore");
-        ALLOWED_ITEMS.add("agotmod:topaz_deepslate_ore");
-
-        ALLOWED_ITEMS.add("agotmod:tourmaline_ore");
-        ALLOWED_ITEMS.add("agotmod:tourmaline_deepslate_ore");
+        // Food items that miners should keep for themselves
+        // Note: We'll also check the meat tag, but add some explicit ones for safety
+        DISALLOWED_ITEMS.add("minecraft:bread");
+        DISALLOWED_ITEMS.add("minecraft:apple");
+        DISALLOWED_ITEMS.add("minecraft:golden_apple");
+        DISALLOWED_ITEMS.add("minecraft:enchanted_golden_apple");
+        DISALLOWED_ITEMS.add("minecraft:potato");
+        DISALLOWED_ITEMS.add("minecraft:baked_potato");
+        DISALLOWED_ITEMS.add("minecraft:carrot");
+        DISALLOWED_ITEMS.add("minecraft:golden_carrot");
+        DISALLOWED_ITEMS.add("minecraft:wheat");
+        DISALLOWED_ITEMS.add("minecraft:beetroot");
+        DISALLOWED_ITEMS.add("minecraft:beetroot_soup");
+        DISALLOWED_ITEMS.add("minecraft:mushroom_stew");
+        DISALLOWED_ITEMS.add("minecraft:rabbit_stew");
+        DISALLOWED_ITEMS.add("minecraft:suspicious_stew");
     }
 
     /**
@@ -185,7 +97,7 @@ public class MinerBarrelDropOffGoal extends Goal {
             System.out.println("Eating: " + peasant.getHungerSystem().isEating());
             System.out.println("DayTime: " + dayTime + " (end of work day: " + (dayTime >= 12000 && dayTime <= 13000) + ")");
             System.out.println("CurrentDay: " + currentDay + ", LastDropOffDay: " + lastDropOffDay);
-            System.out.println("HasAllowedItems: " + hasAllowedItems());
+            System.out.println("HasDroppableItems: " + hasDroppableItems());
             if (peasant.getJobBlockPos() != null) {
                 BlockState barrelState = peasant.level().getBlockState(peasant.getJobBlockPos());
                 System.out.println("BarrelBlock: " + barrelState.getBlock() + " (is miner barrel: " + barrelState.is(ModBLocks.MINER_BARREL.get()) + ")");
@@ -247,10 +159,10 @@ public class MinerBarrelDropOffGoal extends Goal {
             return false;
         }
 
-        // Check if we have any allowed items to drop off
-        if (!hasAllowedItems()) {
+        // Check if we have any droppable items
+        if (!hasDroppableItems()) {
             if (!peasant.level().isClientSide) {
-                System.out.println("DEBUG MINER BARREL DROP OFF [" + peasant.getDisplayName().getString() + "]: No allowed items to drop off");
+                System.out.println("DEBUG MINER BARREL DROP OFF [" + peasant.getDisplayName().getString() + "]: No droppable items");
                 logInventoryContents(); // Log what they actually have
             }
             // DON'T mark as completed - let them try again later if they get items
@@ -360,7 +272,7 @@ public class MinerBarrelDropOffGoal extends Goal {
     }
 
     /**
-     * Performs the actual drop-off of all allowed items
+     * Performs the actual drop-off of all droppable items
      */
     private void performDropOff() {
         BlockEntity blockEntity = peasant.level().getBlockEntity(targetBarrel);
@@ -379,11 +291,11 @@ public class MinerBarrelDropOffGoal extends Goal {
             System.out.println("DEBUG MINER BARREL DROP OFF [" + peasant.getDisplayName().getString() + "]: Performing drop off...");
         }
 
-        // Go through peasant inventory and drop off all allowed items
+        // Go through peasant inventory and drop off all droppable items
         for (int i = 0; i < peasantInventory.getContainerSize(); i++) {
             ItemStack stack = peasantInventory.getItem(i);
 
-            if (!stack.isEmpty() && isAllowedItem(stack)) {
+            if (!stack.isEmpty() && isDroppableItem(stack)) {
                 // Try to add this stack to the barrel
                 ItemStack remaining = addToBarrel(barrelInventory, stack.copy());
 
@@ -456,14 +368,14 @@ public class MinerBarrelDropOffGoal extends Goal {
     }
 
     /**
-     * Checks if the peasant has any allowed items in inventory
+     * Checks if the peasant has any droppable items in inventory
      */
-    private boolean hasAllowedItems() {
+    private boolean hasDroppableItems() {
         var inventory = peasant.getInventorySystem().getInventory();
 
         for (int i = 0; i < inventory.getContainerSize(); i++) {
             ItemStack stack = inventory.getItem(i);
-            if (!stack.isEmpty() && isAllowedItem(stack)) {
+            if (!stack.isEmpty() && isDroppableItem(stack)) {
                 return true;
             }
         }
@@ -472,11 +384,28 @@ public class MinerBarrelDropOffGoal extends Goal {
     }
 
     /**
-     * Checks if an item is on the allowed list
+     * Checks if an item can be dropped off (not on the blacklist)
+     * Uses a blacklist approach - items are droppable unless specifically excluded
      */
-    private boolean isAllowedItem(ItemStack stack) {
+    private boolean isDroppableItem(ItemStack stack) {
+        // Check if it's a pickaxe (using instanceof for safety)
+        if (stack.getItem() instanceof PickaxeItem) {
+            return false;
+        }
+
+        // Check if it's tagged as meat
+        if (stack.is(ItemTags.MEAT)) {
+            return false;
+        }
+
+        // Check if it's in our explicit blacklist
         ResourceLocation itemId = net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(stack.getItem());
-        return ALLOWED_ITEMS.contains(itemId.toString());
+        if (DISALLOWED_ITEMS.contains(itemId.toString())) {
+            return false;
+        }
+
+        // If it passes all checks, it's droppable
+        return true;
     }
 
     /**
@@ -487,24 +416,29 @@ public class MinerBarrelDropOffGoal extends Goal {
         System.out.println("=== MINER INVENTORY CONTENTS [" + peasant.getDisplayName().getString() + "] ===");
 
         int totalItems = 0;
-        int allowedItems = 0;
+        int droppableItems = 0;
 
         for (int i = 0; i < inventory.getContainerSize(); i++) {
             ItemStack stack = inventory.getItem(i);
             if (!stack.isEmpty()) {
                 totalItems += stack.getCount();
                 ResourceLocation itemId = net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(stack.getItem());
-                boolean allowed = ALLOWED_ITEMS.contains(itemId.toString());
-                if (allowed) allowedItems += stack.getCount();
+                boolean droppable = isDroppableItem(stack);
+                if (droppable) droppableItems += stack.getCount();
 
-                System.out.println("Slot " + i + ": " + stack.getCount() + "x " + itemId + " (allowed: " + allowed + ")");
+                String reason = "";
+                if (!droppable) {
+                    if (stack.getItem() instanceof PickaxeItem) reason = " (pickaxe)";
+                    else if (stack.is(ItemTags.MEAT)) reason = " (meat)";
+                    else if (DISALLOWED_ITEMS.contains(itemId.toString())) reason = " (blacklisted)";
+                }
+
+                System.out.println("Slot " + i + ": " + stack.getCount() + "x " + itemId + " (droppable: " + droppable + ")" + reason);
             }
         }
 
-        System.out.println("Total items: " + totalItems + ", Allowed items: " + allowedItems);
-
-        // Also log a few sample allowed items for comparison
-        System.out.println("Sample allowed items: minecraft:coal, minecraft:iron_ore, minecraft:diamond, minecraft:cobblestone");
+        System.out.println("Total items: " + totalItems + ", Droppable items: " + droppableItems);
+        System.out.println("Items that WON'T be dropped: pickaxes, torches, meat items, and specific blacklisted items");
         System.out.println("===============================================");
     }
 }

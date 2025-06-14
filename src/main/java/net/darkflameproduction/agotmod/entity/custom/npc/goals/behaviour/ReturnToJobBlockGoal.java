@@ -24,17 +24,19 @@ public class ReturnToJobBlockGoal extends Goal {
                 !peasant.getHungerSystem().isEating() &&
                 peasant.getJobBlockPos() != null;
 
-        // Only apply return-to-job-block logic to farmers
+        // Only apply return-to-job-block logic to farmers (miners handle their own state management)
         if (peasant.getJobType().equals(JobSystem.JOB_FARMER)) {
             shouldReturn = shouldReturn && !peasant.getFarmingSystem().hasReturnedToJobBlockAfterFood();
         } else if (peasant.getJobType().equals(JobSystem.JOB_MINER)) {
-            shouldReturn = shouldReturn && !peasant.getMinerSystem().hasReturnedToJobBlockAfterFood();
+            // REMOVED: Miners no longer use this goal - they handle their own navigation
+            // The MinerGoal manages all miner movement including returning to job block
+            return false;
         } else {
             // Other job types don't need to return to job block after food
             return false;
         }
 
-        // DEBUG: Add logging for this goal
+        // DEBUG: Add logging for this goal (only for farmers now)
         if (!peasant.level().isClientSide && peasant.tickCount % 100 == 0 && shouldReturn) {
             System.out.println("DEBUG RETURN TO JOB BLOCK GOAL [" + peasant.getDisplayName().getString() + "]: " +
                     "canUse=true, checking if already at job block");
@@ -51,10 +53,9 @@ public class ReturnToJobBlockGoal extends Goal {
                         System.out.println("DEBUG RETURN TO JOB BLOCK GOAL [" + peasant.getDisplayName().getString() + "]: " +
                                 "Already at job block (distance=" + Math.sqrt(distance) + "), marking as returned immediately");
                     }
+                    // Only handle farmers (miners don't use this system anymore)
                     if (peasant.getJobType().equals(JobSystem.JOB_FARMER)) {
                         peasant.getFarmingSystem().setHasReturnedToJobBlockAfterFood(true);
-                    } else if (peasant.getJobType().equals(JobSystem.JOB_MINER)) {
-                        peasant.getMinerSystem().setHasReturnedToJobBlockAfterFood(true);
                     }
                     return false; // Don't activate the goal since we're already there
                 }
@@ -67,6 +68,11 @@ public class ReturnToJobBlockGoal extends Goal {
     @Override
     public boolean canContinueToUse() {
         if (peasant.isSleeping() || peasant.getHungerSystem().isEating() || peasant.needsFoodCollection()) {
+            return false;
+        }
+
+        // Don't continue for miners (they handle their own navigation)
+        if (peasant.getJobType().equals(JobSystem.JOB_MINER)) {
             return false;
         }
 
@@ -94,16 +100,15 @@ public class ReturnToJobBlockGoal extends Goal {
 
     @Override
     public void stop() {
-        // Mark that we've returned to job block
+        // Mark that we've returned to job block (only for farmers)
         if (!peasant.level().isClientSide) {
             System.out.println("DEBUG RETURN TO JOB BLOCK GOAL [" + peasant.getDisplayName().getString() + "]: " +
                     "Goal stopped, marking as returned to job block");
         }
 
+        // Only handle farmers (miners don't use this system anymore)
         if (peasant.getJobType().equals(JobSystem.JOB_FARMER)) {
             peasant.getFarmingSystem().setHasReturnedToJobBlockAfterFood(true);
-        } else if (peasant.getJobType().equals(JobSystem.JOB_MINER)) {
-            peasant.getMinerSystem().setHasReturnedToJobBlockAfterFood(true);
         }
 
         peasant.getNavigation().stop();
@@ -116,16 +121,15 @@ public class ReturnToJobBlockGoal extends Goal {
             double distance = peasant.distanceToSqr(jobBlockPos.getX(), jobBlockPos.getY(), jobBlockPos.getZ());
 
             if (distance <= 4.0D) {
-                // Close enough, mark as returned
+                // Close enough, mark as returned (only for farmers)
                 if (!peasant.level().isClientSide) {
                     System.out.println("DEBUG RETURN TO JOB BLOCK GOAL [" + peasant.getDisplayName().getString() + "]: " +
                             "Reached job block (distance=" + Math.sqrt(distance) + "), marking as returned");
                 }
 
+                // Only handle farmers (miners don't use this system anymore)
                 if (peasant.getJobType().equals(JobSystem.JOB_FARMER)) {
                     peasant.getFarmingSystem().setHasReturnedToJobBlockAfterFood(true);
-                } else if (peasant.getJobType().equals(JobSystem.JOB_MINER)) {
-                    peasant.getMinerSystem().setHasReturnedToJobBlockAfterFood(true);
                 }
                 return;
             }

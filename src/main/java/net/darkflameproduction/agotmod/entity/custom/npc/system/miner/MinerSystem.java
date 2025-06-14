@@ -22,18 +22,21 @@ public class MinerSystem {
     private final Peasant_Entity peasant;
 
     // Work tracking
-    private boolean hasReturnedToJobBlockAfterFood = true;
     private MinerState currentMinerState = MinerState.NEEDS_MINE_SETUP;
 
-    // Mining tracking
-    private BlockPos currentMiningTarget = null;
-    private BlockPos currentHallwayStart = null;
-    private Direction currentHallwayDirection = null;
-    private int currentHallwayLength = 0;
-    private int currentHallwayIndex = 0;
-    private long lastMiningTime = 0;
-    private static final int MINING_INTERVAL_TICKS = 40; // 2 seconds (20 ticks per second)
-    private static final int MAX_HALLWAY_LENGTH = 128;
+
+    private int currentTunnelIndex = 0;           // Which tunnel (0-39, cycling)
+    private int currentTunnelProgress = 0;        // How far we've mined in current tunnel
+    private BlockPos selectedTunnelEntrance = null;  // Today's tunnel entrance
+    private Direction miningDirection = null;     // Direction to mine from entrance
+    private BlockPos currentMiningPosition = null;   // Exact block we're mining
+    private int blocksMineToday = 0;             // Daily mining counter
+    private int torchCounter = 0;                // For torch placement every 8 blocks
+
+    // Constants
+    private static final int MAX_TUNNEL_LENGTH = 128;
+    private static final int TORCH_INTERVAL = 8;
+    private static final int MAX_BLOCKS_PER_DAY = 512;
 
     // Allowed mining items
     private static final Set<String> ALLOWED_ITEMS = new HashSet<>();
@@ -60,6 +63,8 @@ public class MinerSystem {
         ALLOWED_ITEMS.add("minecraft:raw_iron");
         ALLOWED_ITEMS.add("minecraft:raw_gold");
         ALLOWED_ITEMS.add("minecraft:raw_copper");
+        ALLOWED_ITEMS.add("minecraft:gravel");
+
 
         // Ingots and gems
         ALLOWED_ITEMS.add("minecraft:iron_ingot");
@@ -70,14 +75,6 @@ public class MinerSystem {
         ALLOWED_ITEMS.add("minecraft:lapis_lazuli");
         ALLOWED_ITEMS.add("minecraft:redstone");
 
-        // Stone and building materials
-        ALLOWED_ITEMS.add("minecraft:stone");
-        ALLOWED_ITEMS.add("minecraft:cobblestone");
-        ALLOWED_ITEMS.add("minecraft:deepslate");
-        ALLOWED_ITEMS.add("minecraft:cobbled_deepslate");
-        ALLOWED_ITEMS.add("minecraft:granite");
-        ALLOWED_ITEMS.add("minecraft:diorite");
-        ALLOWED_ITEMS.add("minecraft:andesite");
 
         // Custom mod ores and gems
         ALLOWED_ITEMS.add("agotmod:silver_ore");
@@ -168,11 +165,13 @@ public class MinerSystem {
     }
 
     public enum MinerState {
-        NEEDS_MINE_SETUP,       // Need to set up mine area
-        RETURN_TO_JOB_BLOCK,    // Walk to job block each morning
-        SETTING_UP_MINE,        // Setting up mine shafts and infrastructure
-        MINING,                 // Actively mining ores and materials
-        PATROLLING              // All work done, just patrolling
+        NEEDS_MINE_SETUP,    // Add this back
+        RETURN_TO_JOB_BLOCK, // Add this back
+        SETTING_UP_MINE,     // Add this back
+        SELECTING_TUNNEL,
+        WALKING_TO_TUNNEL,
+        MINING,
+        PATROLLING          // Add this back
     }
 
     public MinerSystem(Peasant_Entity peasant) {
@@ -198,13 +197,128 @@ public class MinerSystem {
                 JobSystem.releaseJobBlockReservation(peasant.getUUID());
 
                 // Reset mining state
-                currentMinerState = MinerState.NEEDS_MINE_SETUP;
+                currentMinerState = MinerState.SELECTING_TUNNEL;
+                resetDailyMining();
             }
         }
 
-        // Handle mining activities
-        if (currentMinerState == MinerState.MINING) {
-            handleMiningActivities();
+        // Reset daily progress if new day
+        checkAndResetDailyProgress();
+    }
+
+    private void resetDailyMining() {
+        blocksMineToday = 0;
+        torchCounter = 0;
+        selectedTunnelEntrance = null;
+        currentMiningPosition = null;
+        miningDirection = null;
+
+        // Reset tunnel progress for the current tunnel (start over each day)
+        currentTunnelProgress = 0;  // Add this line
+
+        // Move to tunnel selection state
+        if (currentMinerState == MinerState.MINING || currentMinerState == MinerState.WALKING_TO_TUNNEL) {
+            currentMinerState = MinerState.SELECTING_TUNNEL;
+        }
+    }
+
+    // Add this method to MinerSystem
+    public BlockPos getCurrentMiningTarget() {
+        return currentMiningPosition;  // Same as getCurrentMiningPosition()
+    }
+
+    public void selectTodaysTunnel() {
+        List<BlockPos> entrances = getAllTunnelEntrances();
+        if (entrances.isEmpty()) {
+            currentMinerState = MinerState.PATROLLING;
+            return;
+        }
+
+        // FIXED: Clear any old mining data from the previous system
+        clearOldMiningData();
+
+        // Cycle through tunnels
+        if (currentTunnelIndex >= entrances.size()) {
+            currentTunnelIndex = 0;
+        }
+
+        selectedTunnelEntrance = entrances.get(currentTunnelIndex);
+        calculateMiningDirection();
+
+        // Start mining 3 blocks inside the tunnel entrance
+        BlockPos tunnelStart = selectedTunnelEntrance.relative(miningDirection, 3);
+        currentMiningPosition = tunnelStart;
+
+        if (!peasant.level().isClientSide) {
+            System.out.println("=== TUNNEL SELECTED [" + peasant.getName().getString() + "] ===");
+            System.out.println("  Tunnel #" + currentTunnelIndex + " entrance: " + selectedTunnelEntrance);
+            System.out.println("  Mining direction: " + miningDirection);
+            System.out.println("  Starting position (3 blocks inside): " + currentMiningPosition);
+        }
+
+        currentMinerState = MinerState.WALKING_TO_TUNNEL;
+    }
+
+    private void clearOldMiningData() {
+        // Clear any persistent data that might contain old mining targets
+        peasant.getPersistentData().remove("CurrentMiningTarget");
+        peasant.getPersistentData().remove("CurrentHallwayStart");
+        peasant.getPersistentData().remove("CurrentHallwayDirection");
+
+        // Stop any current navigation
+        peasant.getNavigation().stop();
+
+        if (!peasant.level().isClientSide) {
+            System.out.println("  Cleared old mining data for: " + peasant.getName().getString());
+        }
+    }
+
+
+    private void calculateMiningDirection() {
+        if (selectedTunnelEntrance == null || peasant.getJobBlockPos() == null) {
+            return;
+        }
+
+        BlockPos center = peasant.getJobBlockPos();
+        int deltaX = selectedTunnelEntrance.getX() - center.getX();
+        int deltaZ = selectedTunnelEntrance.getZ() - center.getZ();
+
+        // Determine direction based on which wall the entrance is on
+        if (Math.abs(deltaZ) > Math.abs(deltaX)) {
+            // North or South wall
+            if (deltaZ < 0) {
+                miningDirection = Direction.NORTH; // Mine further north
+            } else {
+                miningDirection = Direction.SOUTH; // Mine further south
+            }
+        } else {
+            // East or West wall
+            if (deltaX < 0) {
+                miningDirection = Direction.WEST; // Mine further west
+            } else {
+                miningDirection = Direction.EAST; // Mine further east
+            }
+        }
+    }
+
+    private void checkAndResetDailyProgress() {
+        // Check if new day started
+        long currentDay = peasant.level().getDayTime() / 24000;
+        long lastDay = peasant.getPersistentData().getLong("LastMiningDay");
+
+        if (currentDay > lastDay) {
+            // New day - advance to next tunnel
+            currentTunnelIndex++;  // Add this line
+
+            // Reset daily progress
+            resetDailyMining();
+            peasant.getPersistentData().putLong("LastMiningDay", currentDay);
+
+            if (!peasant.level().isClientSide) {
+                System.out.println("=== NEW MINING DAY [" + peasant.getName().getString() + "] ===");
+                System.out.println("  Advanced to tunnel #" + currentTunnelIndex);  // Update message
+                System.out.println("  Reset daily progress, will select new tunnel");
+            }
         }
     }
 
@@ -240,15 +354,201 @@ public class MinerSystem {
         // Trigger interact animation when setting up mine
         triggerInteractAnimation();
 
-        // Move to next state after setup
-        currentMinerState = MinerState.MINING;
+        // FIXED: Move to tunnel selection after setup (not directly to mining)
+        currentMinerState = MinerState.SELECTING_TUNNEL;
+
+        if (!peasant.level().isClientSide) {
+            System.out.println("=== MINE SETUP COMPLETE [" + peasant.getName().getString() + "] ===");
+            System.out.println("  Mine structure built successfully");
+            System.out.println("  Transitioning to tunnel selection state");
+        }
 
         return 1; // Return that work was done
     }
 
+    public void performSimpleMining() {
+        if (currentMiningPosition == null || miningDirection == null) {
+            if (!peasant.level().isClientSide) {
+                System.out.println("  ERROR: Missing mining position or direction");
+                System.out.println("  Position: " + currentMiningPosition + ", Direction: " + miningDirection);
+            }
+            return;
+        }
+
+        // Check daily mining limit first
+        if (blocksMineToday >= MAX_BLOCKS_PER_DAY) {
+            if (!peasant.level().isClientSide) {
+                System.out.println("  Daily mining limit reached (" + MAX_BLOCKS_PER_DAY + " blocks)");
+                System.out.println("  Stopping mining for today");
+            }
+            return;
+        }
+
+        // FIXED: Check shorter tunnel length limit
+        if (currentTunnelProgress >= MAX_TUNNEL_LENGTH) {
+            if (!peasant.level().isClientSide) {
+                System.out.println("  Tunnel #" + currentTunnelIndex + " completed at " + MAX_TUNNEL_LENGTH + " blocks");
+                System.out.println("  Will advance to next tunnel tomorrow");
+            }
+            return;
+        }
+
+        if (!peasant.level().isClientSide) {
+            System.out.println("=== PERFORMING REMOTE MINING [" + peasant.getName().getString() + "] ===");
+            System.out.println("  Position: " + currentMiningPosition);
+            System.out.println("  Tunnel #" + currentTunnelIndex + " - Progress: " + currentTunnelProgress + "/" + MAX_TUNNEL_LENGTH);
+            System.out.println("  Daily progress: " + blocksMineToday + "/" + MAX_BLOCKS_PER_DAY + " blocks");
+            System.out.println("  Mining direction: " + miningDirection);
+            System.out.println("  Miner location: " + peasant.blockPosition());
+
+            // Log warnings when approaching limits
+            if (currentTunnelProgress >= MAX_TUNNEL_LENGTH - 5) {
+                System.out.println("  WARNING: Approaching tunnel length limit (" + (MAX_TUNNEL_LENGTH - currentTunnelProgress) + " blocks remaining)");
+            }
+            if (blocksMineToday >= MAX_BLOCKS_PER_DAY - 5) {
+                System.out.println("  WARNING: Approaching daily mining limit (" + (MAX_BLOCKS_PER_DAY - blocksMineToday) + " blocks remaining)");
+            }
+        }
+
+        // Mine the 2-high hallway at current position
+        mineHallwayBlocks(currentMiningPosition);
+
+        // FIXED: Mine valuable ores in large 15x15x5 area around current position
+        mineOresInLargeArea(currentMiningPosition);
+
+        // Place torch if needed (every 8 blocks)
+        if (torchCounter % TORCH_INTERVAL == 0) {
+            placeTorch(currentMiningPosition);
+            if (!peasant.level().isClientSide) {
+                System.out.println("  Placed torch at position " + currentMiningPosition);
+            }
+        }
+
+        // Trigger mining animation (visual only)
+        peasant.triggerInteractAnimation();
+
+        // Update all progress counters
+        currentTunnelProgress++;
+        blocksMineToday++;
+        torchCounter++;
+
+        // Calculate next mining position (advance one block in mining direction)
+        BlockPos nextPosition = currentMiningPosition.relative(miningDirection);
+        currentMiningPosition = nextPosition;
+
+        if (!peasant.level().isClientSide) {
+            System.out.println("  Remote mining complete at this position");
+            System.out.println("  Updated progress - Tunnel: " + currentTunnelProgress + ", Daily: " + blocksMineToday);
+            System.out.println("  Next mining position: " + currentMiningPosition);
+        }
+    }
+
+    private void mineOresInLargeArea(BlockPos center) {
+        if (!peasant.level().isClientSide) {
+            System.out.println("    Scanning large 15x15x10 area for ores around " + center);
+        }
+
+        int oresFound = 0;
+        int oresMined = 0;
+
+        // FIXED: Exact coverage - 4 blocks in each direction from hallway
+        for (int x = -7; x <= 7; x++) {     // 15 blocks wide
+            for (int z = -7; z <= 7; z++) { // 15 blocks deep
+                for (int y = -4; y <= 5; y++) { // 10 blocks high: 4 below hallway, hallway (2 blocks), 4 above hallway
+                    BlockPos checkPos = center.offset(x, y, z);
+                    BlockState blockState = peasant.level().getBlockState(checkPos);
+
+                    // Skip the center hallway blocks (they're handled by mineHallwayBlocks)
+                    if (x == 0 && z == 0 && (y == 0 || y == 1)) {
+                        continue;
+                    }
+
+                    if (isTrueOre(blockState)) {
+                        oresFound++;
+                        mineBlock(checkPos);
+                        oresMined++;
+
+                        if (!peasant.level().isClientSide) {
+                            System.out.println("      Remote mined ore: " + getBlockRegistryName(blockState) +
+                                    " at " + checkPos + " (offset: x" + x + ",y" + y + ",z" + z + ")");
+                        }
+                    }
+                }
+            }
+        }
+
+        if (!peasant.level().isClientSide && oresFound > 0) {
+            System.out.println("    Large area ore scan complete: " + oresMined + "/" + oresFound + " ores mined");
+            System.out.println("    Coverage: 15x15x10 (" + (15*15*10) + " blocks checked)");
+            System.out.println("    Y levels: " + (center.getY() - 4) + " to " + (center.getY() + 5) + " (10 blocks high)");
+        }
+    }
+
+
+    private void mineHallwayBlocks(BlockPos pos) {
+        if (!peasant.level().isClientSide) {
+            System.out.println("    Mining 1x2 hallway at " + pos);
+        }
+
+        // Mine bottom block
+        mineBlock(pos);
+        // Mine top block
+        mineBlock(pos.above());
+        // Ensure floor below
+        ensureFloor(pos.below());
+    }
+
+
+    private void mineBlock(BlockPos pos) {
+        BlockState blockState = peasant.level().getBlockState(pos);
+
+        if (blockState.isAir()) {
+            return;
+        }
+
+        // FIXED: No distance check - mine from anywhere (remote mining)
+        List<ItemStack> drops = getBlockDrops(blockState, pos);
+        peasant.level().setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
+
+        if (!peasant.level().isClientSide) {
+            System.out.println("      Remote mined: " + getBlockRegistryName(blockState) + " at " + pos);
+        }
+
+        // Add drops to inventory
+        for (ItemStack drop : drops) {
+            if (!drop.isEmpty()) {
+                boolean added = peasant.getInventorySystem().addItem(drop);
+                if (!added && peasant.level() instanceof ServerLevel serverLevel) {
+                    // Drop on ground if inventory full
+                    peasant.spawnAtLocation(serverLevel, drop);
+                }
+            }
+        }
+    }
+
+
+    private void ensureFloor(BlockPos pos) {
+        if (peasant.level().getBlockState(pos).isAir()) {
+            peasant.level().setBlock(pos, Blocks.COBBLESTONE.defaultBlockState(), 3);
+            if (!peasant.level().isClientSide) {
+                System.out.println("      Placed floor block at " + pos);
+            }
+        }
+    }
+
+    private void placeTorch(BlockPos pos) {
+        BlockPos torchPos = pos.above(2); // Place torch on ceiling
+        if (peasant.level().getBlockState(torchPos).isAir()) {
+            peasant.level().setBlock(torchPos, Blocks.TORCH.defaultBlockState(), 3);
+        }
+    }
+
+
+
     private void buildSchematicMine(BlockPos center) {
         // First remove nearby lava and water
         removeLavaAndWater(center);
+        cleanMineArea(center);  // Renamed from removeLavaAndWater()
 
         // Build the exact structure from the schematic
         buildExactSchematicStructure(center);
@@ -283,36 +583,60 @@ public class MinerSystem {
         }
     }
 
-    private void clearExactAirPositions(BlockPos center) {
-        // Clear blocks based on the complete schematic pattern
-        // The schematic shows air blocks in specific patterns throughout the mine
+    private void cleanMineArea(BlockPos center) {
+        // Remove lava and water within 8 blocks outside the 9x9 mine area
+        // AND convert gravel and sand to stone for structural stability
+        // Mine area is 9x9 (from -4 to +4), so we check from -12 to +12 (8 blocks outside)
+        // And check the full depth of the mine plus some extra
 
-        // Method 1: Clear the main mine shaft areas where most air should be
-        // Based on analyzing the schematic, the air forms the main mining areas
+        int gravelConverted = 0;
+        int sandConverted = 0;
+        int lavaRemoved = 0;
+        int waterRemoved = 0;
 
-        // Clear the central spiral shaft area
-        for (int y = 35; y >= 0; y--) { // Full depth of schematic
-            int worldY = center.getY() + (y - 35);
-
-            // Clear different sized areas based on depth to match schematic pattern
-            int clearRadius = getClearRadiusForLevel(y);
-
-            for (int x = 4 - clearRadius; x <= 4 + clearRadius; x++) {
-                for (int z = 4 - clearRadius; z <= 4 + clearRadius; z++) {
-                    // Skip the job block position
-                    if (y == 35 && x == 4 && z == 4) continue;
-
-                    // Skip positions that should have cobblestone or stairs
-                    if (shouldHaveCobblestone(x, y, z) || shouldHaveStairs(x, y, z)) continue;
-
-                    BlockPos worldPos = new BlockPos(
-                            center.getX() + (x - 4),
-                            worldY,
-                            center.getZ() + (z - 4)
+        for (int x = -12; x <= 12; x++) {
+            for (int z = -12; z <= 12; z++) {
+                for (int y = 5; y >= -40; y--) { // Check above and below mine area
+                    BlockPos checkPos = new BlockPos(
+                            center.getX() + x,
+                            center.getY() + y,
+                            center.getZ() + z
                     );
-                    peasant.level().setBlock(worldPos, Blocks.AIR.defaultBlockState(), 3);
+
+                    BlockState blockState = peasant.level().getBlockState(checkPos);
+
+                    // Remove lava by replacing with air
+                    if (blockState.is(Blocks.LAVA)) {
+                        peasant.level().setBlock(checkPos, Blocks.AIR.defaultBlockState(), 3);
+                        lavaRemoved++;
+                    }
+                    // Remove water by replacing with air
+                    else if (blockState.is(Blocks.WATER)) {
+                        peasant.level().setBlock(checkPos, Blocks.AIR.defaultBlockState(), 3);
+                        waterRemoved++;
+                    }
+                    // Convert gravel to stone for structural stability
+                    else if (blockState.is(Blocks.GRAVEL)) {
+                        peasant.level().setBlock(checkPos, Blocks.STONE.defaultBlockState(), 3);
+                        gravelConverted++;
+                    }
+                    // NEW: Convert sand to stone for structural stability
+                    else if (blockState.is(Blocks.SAND) || blockState.is(Blocks.RED_SAND)) {
+                        peasant.level().setBlock(checkPos, Blocks.STONE.defaultBlockState(), 3);
+                        sandConverted++;
+                    }
                 }
             }
+        }
+
+        // Log the cleanup results
+        if (!peasant.level().isClientSide && (lavaRemoved > 0 || waterRemoved > 0 || gravelConverted > 0 || sandConverted > 0)) {
+            System.out.println("=== MINE AREA CLEANUP COMPLETE [" + peasant.getName().getString() + "] ===");
+            System.out.println("  Lava blocks removed: " + lavaRemoved);
+            System.out.println("  Water blocks removed: " + waterRemoved);
+            System.out.println("  Gravel converted to stone: " + gravelConverted);
+            System.out.println("  Sand converted to stone: " + sandConverted);
+            System.out.println("  Total blocks processed: " + (lavaRemoved + waterRemoved + gravelConverted + sandConverted));
         }
     }
 
@@ -360,17 +684,51 @@ public class MinerSystem {
     }
 
     private void buildExactSchematicStructure(BlockPos center) {
-        // Build the exact blocks from the schematic data
-        // Convert schematic coordinates to world coordinates: [center.x + (x-4), center.y + (y-35), center.z + (z-4)]
-
-        // Place cobblestone platforms (state 1) and clear above them
         buildCobblestoneBlocks(center);
-
-        // Place stair blocks (states 8, 10, 11, 12) and clear above them
         buildStairBlocks(center);
-
-        // Build the large 19x19 platform at the bottom
         buildBottomPlatform(center);
+
+        // NEW: Pre-clear tunnel starts to avoid positioning conflicts
+        int platformY = center.getY() - 36;
+        preClearTunnelStarts(center, platformY);
+    }
+
+    private void preClearTunnelStarts(BlockPos center, int platformY) {
+        List<BlockPos> entrances = getAllTunnelEntrances();
+
+        for (BlockPos entrance : entrances) {
+            // Use the same logic as calculateMiningDirection() but inline
+            int deltaX = entrance.getX() - center.getX();
+            int deltaZ = entrance.getZ() - center.getZ();
+
+            Direction direction;
+            if (Math.abs(deltaZ) > Math.abs(deltaX)) {
+                // North or South wall
+                if (deltaZ < 0) {
+                    direction = Direction.NORTH;
+                } else {
+                    direction = Direction.SOUTH;
+                }
+            } else {
+                // East or West wall
+                if (deltaX < 0) {
+                    direction = Direction.WEST;
+                } else {
+                    direction = Direction.EAST;
+                }
+            }
+
+            // Clear first 5 blocks of each tunnel (2 blocks high)
+            for (int i = 1; i <= 5; i++) {
+                BlockPos clearPos = entrance.relative(direction, i);
+                peasant.level().setBlock(clearPos, Blocks.AIR.defaultBlockState(), 3);
+                peasant.level().setBlock(clearPos.above(), Blocks.AIR.defaultBlockState(), 3);
+            }
+
+            if (!peasant.level().isClientSide) {
+                System.out.println("  Pre-cleared tunnel start: " + entrance + " direction: " + direction);
+            }
+        }
     }
 
     private void clearAboveBlock(BlockPos blockPos) {
@@ -653,398 +1011,73 @@ public class MinerSystem {
         peasant.level().setBlock(torchPos, wallTorch, 3);
     }
 
-    /**
-     * Handles all mining activities including hallway excavation and ore collection
-     */
-    /**
-     * Handles all mining activities including hallway excavation and ore collection
-     */
-    // ==================== MinerSystem.java - REWRITTEN METHODS ONLY ====================
 
-    /**
-     * Handles all mining activities including hallway excavation and ore collection
-     * COMPLETELY REWRITTEN with better distance handling and debugging
-     */
-    private void handleMiningActivities() {
-        // Check if enough time has passed since last mining action (2 seconds)
-        long currentTime = peasant.level().getGameTime();
-        if (currentTime - lastMiningTime < MINING_INTERVAL_TICKS) {
-            return; // Wait for mining cooldown
-        }
 
-        // Debug current state
-        if (!peasant.level().isClientSide) {
-            System.out.println("=== MINING ACTIVITY TICK [" + peasant.getName().getString() + "] ===");
-            System.out.println("  Current target: " + currentMiningTarget);
-            System.out.println("  Hallway index: " + currentHallwayIndex);
-            System.out.println("  Hallway length: " + currentHallwayLength + "/" + MAX_HALLWAY_LENGTH);
-            System.out.println("  Miner state: " + currentMinerState);
-            System.out.println("  Peasant position: " + peasant.blockPosition());
-        }
 
-        // If no current target, find the next hallway to work on
-        if (currentMiningTarget == null) {
-            if (!peasant.level().isClientSide) {
-                System.out.println("  No current target, selecting next hallway");
-            }
-            selectNextHallway();
-            return; // Wait for next tick to start mining
-        }
 
-        // Calculate distance to target
-        double distanceToTarget = peasant.distanceToSqr(
-                currentMiningTarget.getX() + 0.5,
-                currentMiningTarget.getY(),
-                currentMiningTarget.getZ() + 0.5
-        );
-        double actualDistance = Math.sqrt(distanceToTarget);
 
-        if (!peasant.level().isClientSide) {
-            System.out.println("  Target: " + currentMiningTarget);
-            System.out.println("  Distance: " + String.format("%.2f", actualDistance) + " blocks");
-            System.out.println("  Within range: " + (distanceToTarget <= 12.25D)); // 3.5 blocks
-        }
 
-        // Perform mining if close enough (3.5 blocks)
-        if (distanceToTarget <= 12.25D) { // 3.5 blocks
-            if (!peasant.level().isClientSide) {
-                System.out.println("  PERFORMING MINING ACTION");
-            }
-            performMining();
-            lastMiningTime = currentTime;
-        } else {
-            if (!peasant.level().isClientSide) {
-                System.out.println("  Waiting for peasant to get closer to target");
-            }
-            // The MinerGoal will handle navigation to the target
-        }
-    }
-
-    private void selectNextHallway() {
+    private List<BlockPos> getAllTunnelEntrances() {
         if (peasant.getJobBlockPos() == null) {
-            if (!peasant.level().isClientSide) {
-                System.out.println("  ERROR: No job block position, cannot select hallway");
-            }
-            return;
+            return new ArrayList<>();
         }
 
         BlockPos center = peasant.getJobBlockPos();
-        int platformY = center.getY() + (-1 - 35); // Platform level
+        int platformY = center.getY() - 36; // Platform level
+        int entranceY = platformY + 1; // 1 block above platform
 
-        // Get all tunnel entrance positions
-        List<BlockPos> tunnelEntrances = getAllTunnelEntrances(center, platformY);
-
-        if (!peasant.level().isClientSide) {
-            System.out.println("=== HALLWAY SELECTION [" + peasant.getName().getString() + "] ===");
-            System.out.println("  Mine center: " + center);
-            System.out.println("  Platform Y: " + platformY);
-            System.out.println("  Current hallway index: " + currentHallwayIndex);
-            System.out.println("  Total tunnel entrances: " + tunnelEntrances.size());
-            System.out.println("  Available entrances: " + tunnelEntrances);
-        }
-
-        // Safety check for empty tunnels
-        if (tunnelEntrances.isEmpty()) {
-            if (!peasant.level().isClientSide) {
-                System.out.println("  ERROR: No tunnel entrances found! Cannot mine.");
-            }
-            currentMinerState = MinerState.PATROLLING;
-            return;
-        }
-
-        // Handle infinite mining - cycle through all entrances repeatedly
-        if (currentHallwayIndex >= tunnelEntrances.size()) {
-            if (!peasant.level().isClientSide) {
-                System.out.println("  Completed all " + tunnelEntrances.size() + " tunnels, cycling back to start");
-            }
-            currentHallwayIndex = 0; // Reset to beginning for infinite mining
-            // If you want finite mining instead, uncomment these lines:
-            // currentMinerState = MinerState.PATROLLING;
-            // return;
-        }
-
-        // Get the current tunnel entrance to work on
-        BlockPos tunnelEntrance = tunnelEntrances.get(currentHallwayIndex);
-
-        if (!peasant.level().isClientSide) {
-            System.out.println("  Selected tunnel entrance #" + currentHallwayIndex + ": " + tunnelEntrance);
-        }
-
-        startNewHallway(tunnelEntrance);
-    }
-
-    public BlockPos getCurrentHallwayStart() {
-        return currentHallwayStart;
-    }
-
-    private List<BlockPos> getAllTunnelEntrances(BlockPos center, int platformY) {
         List<BlockPos> entrances = new ArrayList<>();
 
-        if (!peasant.level().isClientSide) {
-            System.out.println("=== CALCULATING TUNNEL ENTRANCES ===");
-            System.out.println("  Mine center (job block): " + center + " (Y=" + center.getY() + ")");
-            System.out.println("  Platform Y level: " + platformY + " (should be " + (center.getY() - 36) + ")");
-            System.out.println("  Entrance Y level: " + (platformY + 1) + " (1 block above platform)");
-        }
-
-        // All entrances are at platformY + 1 (1 block above the platform floor)
-        int entranceY = platformY + 1;
-
-        // North wall entrances (every other block from x=-9 to x=9)
+        // North wall entrances
         for (int x = -9; x <= 9; x += 2) {
-            BlockPos entrance = new BlockPos(center.getX() + x, entranceY, center.getZ() - 10);
-            entrances.add(entrance);
-            if (!peasant.level().isClientSide) {
-                System.out.println("    North wall entrance: " + entrance);
-            }
+            entrances.add(new BlockPos(center.getX() + x, entranceY, center.getZ() - 10));
         }
-
-        // South wall entrances (every other block from x=-9 to x=9)
+        // South wall entrances
         for (int x = -9; x <= 9; x += 2) {
-            BlockPos entrance = new BlockPos(center.getX() + x, entranceY, center.getZ() + 10);
-            entrances.add(entrance);
-            if (!peasant.level().isClientSide) {
-                System.out.println("    South wall entrance: " + entrance);
-            }
+            entrances.add(new BlockPos(center.getX() + x, entranceY, center.getZ() + 10));
         }
-
-        // East wall entrances (every other block from z=-9 to z=9)
+        // East wall entrances
         for (int z = -9; z <= 9; z += 2) {
-            BlockPos entrance = new BlockPos(center.getX() + 10, entranceY, center.getZ() + z);
-            entrances.add(entrance);
-            if (!peasant.level().isClientSide) {
-                System.out.println("    East wall entrance: " + entrance);
-            }
+            entrances.add(new BlockPos(center.getX() + 10, entranceY, center.getZ() + z));
         }
-
-        // West wall entrances (every other block from z=-9 to z=9)
+        // West wall entrances
         for (int z = -9; z <= 9; z += 2) {
-            BlockPos entrance = new BlockPos(center.getX() - 10, entranceY, center.getZ() + z);
-            entrances.add(entrance);
-            if (!peasant.level().isClientSide) {
-                System.out.println("    West wall entrance: " + entrance);
-            }
-        }
-
-        if (!peasant.level().isClientSide) {
-            System.out.println("  Total entrances created: " + entrances.size());
-            System.out.println("  All entrances at Y=" + entranceY + " (underground level)");
+            entrances.add(new BlockPos(center.getX() - 10, entranceY, center.getZ() + z));
         }
 
         return entrances;
     }
 
-    private void startNewHallway(BlockPos entrance) {
-        if (!peasant.level().isClientSide) {
-            System.out.println("=== STARTING NEW HALLWAY [" + peasant.getName().getString() + "] ===");
-            System.out.println("  Target entrance position: " + entrance);
-            System.out.println("  Current peasant position: " + peasant.blockPosition());
 
-            // Calculate the vertical distance
-            int verticalDistance = peasant.blockPosition().getY() - entrance.getY();
-            System.out.println("  Vertical distance to entrance: " + verticalDistance + " blocks");
-
-            if (verticalDistance > 30) {
-                System.out.println("  WARNING: Peasant is " + verticalDistance + " blocks above entrance!");
-                System.out.println("  Peasant needs to navigate DOWN into the mine!");
-            }
-        }
-
-        // Reset hallway tracking
-        currentHallwayStart = entrance;
-        currentHallwayLength = 0;
-
-        // Determine mining direction based on entrance position relative to center
-        BlockPos center = peasant.getJobBlockPos();
-        int deltaX = entrance.getX() - center.getX();
-        int deltaZ = entrance.getZ() - center.getZ();
-
-        if (!peasant.level().isClientSide) {
-            System.out.println("  Center position: " + center);
-            System.out.println("  Delta from center - X: " + deltaX + ", Z: " + deltaZ);
-        }
-
-        // Determine direction based on which wall the entrance is on
-        if (Math.abs(deltaZ) > Math.abs(deltaX)) {
-            // North or South wall
-            if (deltaZ < 0) {
-                currentHallwayDirection = Direction.NORTH; // Mine further north (away from center)
-            } else {
-                currentHallwayDirection = Direction.SOUTH; // Mine further south (away from center)
-            }
-        } else {
-            // East or West wall
-            if (deltaX < 0) {
-                currentHallwayDirection = Direction.WEST; // Mine further west (away from center)
-            } else {
-                currentHallwayDirection = Direction.EAST; // Mine further east (away from center)
-            }
-        }
-
-        // IMPORTANT: Set the mining target to the ENTRANCE ITSELF first
-        // The peasant needs to reach the entrance before mining outward
-        currentMiningTarget = entrance;
-
-        if (!peasant.level().isClientSide) {
-            System.out.println("  Mining direction (outward from entrance): " + currentHallwayDirection);
-            System.out.println("  First mining target: " + currentMiningTarget + " (the entrance itself)");
-            System.out.println("  After reaching entrance, will mine " + currentHallwayDirection);
-        }
-
-        // The MinerGoal will handle navigation to the entrance
-        // Once the peasant reaches the entrance, mining will proceed outward
-    }
-
-    private void performMining() {
-        if (currentMiningTarget == null) {
-            if (!peasant.level().isClientSide) {
-                System.out.println("  ERROR: performMining called with null target");
-            }
-            return;
-        }
-
-        if (!peasant.level().isClientSide) {
-            System.out.println("=== PERFORMING MINING [" + peasant.getName().getString() + "] ===");
-            System.out.println("  Mining target: " + currentMiningTarget);
-            System.out.println("  Hallway progress: " + currentHallwayLength + "/" + MAX_HALLWAY_LENGTH);
-            System.out.println("  Direction: " + currentHallwayDirection);
-            System.out.println("  Hallway index: " + currentHallwayIndex);
-        }
-
-        // Step 1: Clear the exact 1x2 hallway blocks and collect their drops
-        clearAndMineHallwayBlocks(currentMiningTarget);
-
-        // Step 2: Mine valuable ores in 5x5 radius (but not stone types)
-        mineNearbyOresSelectively(currentMiningTarget);
-
-        // Step 3: Ensure there's a floor to walk on
-        ensureFloorBlock(currentMiningTarget);
-
-        // Step 4: Trigger visual mining animation
-        triggerInteractAnimation();
-
-        // Step 5: Advance to next position in hallway
-        currentHallwayLength++;
-
-        if (!peasant.level().isClientSide) {
-            System.out.println("  Mined position " + currentMiningTarget);
-            System.out.println("  Hallway progress now: " + currentHallwayLength + "/" + MAX_HALLWAY_LENGTH);
-        }
-
-        // Step 6: Check if hallway is complete
-        if (currentHallwayLength >= MAX_HALLWAY_LENGTH) {
-            // Current hallway complete - move to next tunnel
-            if (!peasant.level().isClientSide) {
-                System.out.println("  HALLWAY #" + currentHallwayIndex + " COMPLETE! Moving to next tunnel.");
-            }
-
-            currentHallwayIndex++;
-            currentMiningTarget = null;
-            currentHallwayStart = null;
-            currentHallwayDirection = null;
-            currentHallwayLength = 0;
-
-            if (!peasant.level().isClientSide) {
-                System.out.println("  Advanced to hallway index: " + currentHallwayIndex);
-                System.out.println("  Next target will be selected on next tick");
-            }
-        } else {
-            // Continue current hallway - advance target position
-            BlockPos nextTarget = currentMiningTarget.relative(currentHallwayDirection);
-            currentMiningTarget = nextTarget;
-
-            if (!peasant.level().isClientSide) {
-                System.out.println("  Continuing hallway, next target: " + nextTarget);
-            }
-        }
-    }
-
-    private void mineNearbyOresSelectively(BlockPos center) {
-        if (!peasant.level().isClientSide) {
-            System.out.println("    Scanning 5x5 area for ores around " + center);
-        }
-
-        int oresFound = 0;
-        int oresMined = 0;
-
-        // Check in a 5x5 horizontal area around the hallway (2 blocks in each direction)
-        // Only check the 2 vertical levels of the hallway (not above or below)
-        for (int x = -2; x <= 2; x++) {
-            for (int z = -2; z <= 2; z++) {
-                // Skip the center blocks (they're handled by clearAndMineHallwayBlocks)
-                if (x == 0 && z == 0) continue;
-
-                // Check both levels of the hallway
-                BlockPos[] checkPositions = {
-                        center.offset(x, 0, z),        // Bottom level of hallway
-                        center.offset(x, 1, z)         // Top level of hallway
-                };
-
-                for (BlockPos checkPos : checkPositions) {
-                    // Verify peasant can reach this position
-                    double distanceToBlock = peasant.distanceToSqr(
-                            checkPos.getX() + 0.5,
-                            checkPos.getY(),
-                            checkPos.getZ() + 0.5
-                    );
-
-                    // Must be within 4 blocks to mine
-                    if (distanceToBlock > 16.0D) {
-                        continue;
-                    }
-
-                    BlockState blockState = peasant.level().getBlockState(checkPos);
-
-                    // Only mine if this block is a TRUE ore (not stone types)
-                    if (isTrueOre(blockState)) {
-                        oresFound++;
-                        if (!peasant.level().isClientSide) {
-                            System.out.println("      Found ore: " + getBlockRegistryName(blockState) + " at " + checkPos);
-                        }
-                        mineSpecificBlock(checkPos);
-                        oresMined++;
-                    }
-                }
-            }
-        }
-
-        if (!peasant.level().isClientSide && oresFound > 0) {
-            System.out.println("    Ore scan complete: " + oresMined + "/" + oresFound + " ores mined");
-        }
-    }
 
     private boolean isTrueOre(BlockState blockState) {
         String blockId = getBlockRegistryName(blockState);
 
-        // Explicitly exclude regular stone types that shouldn't be considered "ores"
+        // Explicitly exclude stone types that should NOT be mined as ores
         Set<String> STONE_TYPES = Set.of(
                 "minecraft:stone", "minecraft:cobblestone", "minecraft:deepslate",
                 "minecraft:cobbled_deepslate", "minecraft:granite", "minecraft:diorite",
                 "minecraft:andesite", "minecraft:tuff", "minecraft:calcite",
-                "minecraft:dirt", "minecraft:grass_block", "minecraft:gravel"
+                "minecraft:dirt", "minecraft:grass_block",
+                "minecraft:sand", "minecraft:sandstone", "minecraft:red_sandstone"
         );
 
+        // If it's a stone type, it's NOT an ore
         if (STONE_TYPES.contains(blockId)) {
             return false;
         }
 
-        // Define actual valuable ores and materials
+        // Define ONLY actual valuable ores and materials
         Set<String> TRUE_ORES = Set.of(
                 // Vanilla ores
-                "minecraft:coal_ore", "minecraft:deepslate_coal_ore",
+                "minecraft:coal_ore", "minecraft:deepslate_coal_ore", "minecraft:gravel",
                 "minecraft:iron_ore", "minecraft:deepslate_iron_ore",
                 "minecraft:gold_ore", "minecraft:deepslate_gold_ore",
                 "minecraft:diamond_ore", "minecraft:deepslate_diamond_ore",
                 "minecraft:emerald_ore", "minecraft:deepslate_emerald_ore",
                 "minecraft:lapis_ore", "minecraft:deepslate_lapis_ore",
                 "minecraft:redstone_ore", "minecraft:deepslate_redstone_ore",
-                "minecraft:copper_ore", "minecraft:deepslate_copper_ore",
-
-                // Raw materials and processed items
-                "minecraft:raw_iron", "minecraft:raw_gold", "minecraft:raw_copper",
-                "minecraft:iron_ingot", "minecraft:gold_ingot", "minecraft:copper_ingot",
-                "minecraft:diamond", "minecraft:emerald", "minecraft:lapis_lazuli",
-                "minecraft:redstone", "minecraft:coal"
+                "minecraft:copper_ore", "minecraft:deepslate_copper_ore "
         );
 
         // Check vanilla ores first
@@ -1052,41 +1085,26 @@ public class MinerSystem {
             return true;
         }
 
-        // Check custom mod ores (anything with agotmod namespace that contains "ore" or valuable keywords)
+        // Check custom mod ores (anything with agotmod namespace that contains "ore")
+        if (blockId.startsWith("agotmod:") && blockId.contains("_ore")) {
+            return true;
+        }
+
+        // Check for valuable mod blocks (gems, precious metals)
         if (blockId.startsWith("agotmod:")) {
-            return blockId.contains("_ore") ||
-                    blockId.contains("_block") && !blockId.contains("stone") ||
-                    blockId.contains("silver") || blockId.contains("tin") || blockId.contains("bronze") ||
-                    blockId.contains("amber") || blockId.contains("ruby") || blockId.contains("sapphire") ||
-                    blockId.contains("garnet") || blockId.contains("jade") || blockId.contains("topaz") ||
-                    blockId.contains("diamond") && !blockId.equals("agotmod:diamond_block");
+            return blockId.contains("silver") || blockId.contains("tin") ||
+                    blockId.contains("amber") || blockId.contains("ruby") ||
+                    blockId.contains("sapphire") || blockId.contains("garnet") ||
+                    blockId.contains("jade") || blockId.contains("topaz") ||
+                    blockId.contains("emerald") || blockId.contains("diamond") ||
+                    (blockId.contains("_block") && !blockId.contains("stone"));
         }
 
         return false;
     }
 
-    public void resetMiningState() {
-        if (!peasant.level().isClientSide) {
-            System.out.println("=== RESETTING MINING STATE [" + peasant.getName().getString() + "] ===");
-            System.out.println("  Previous state - Target: " + currentMiningTarget + ", Index: " + currentHallwayIndex + ", Length: " + currentHallwayLength);
-        }
 
-        // Clear current mining operation but preserve progress
-        currentMiningTarget = null;
-        currentHallwayStart = null;
-        currentHallwayDirection = null;
-        currentHallwayLength = 0;
-        // Keep currentHallwayIndex - don't lose overall progress
 
-        // Ensure we're in mining state
-        if (currentMinerState == MinerState.PATROLLING) {
-            currentMinerState = MinerState.MINING;
-        }
-
-        if (!peasant.level().isClientSide) {
-            System.out.println("  Reset complete, will select new hallway on next tick");
-        }
-    }
 
 
     /**
@@ -1094,28 +1112,21 @@ public class MinerSystem {
      */
     private List<ItemStack> getBlockDrops(BlockState blockState, BlockPos blockPos) {
         List<ItemStack> drops = new ArrayList<>();
-
-        // Get the block's loot table drops
         try {
-            // Use the block's built-in drop logic
             List<ItemStack> blockDrops = Block.getDrops(blockState, (ServerLevel) peasant.level(), blockPos, null);
             drops.addAll(blockDrops);
         } catch (Exception e) {
-            // Fallback: create a basic drop based on the block type
             ItemStack basicDrop = new ItemStack(blockState.getBlock().asItem(), 1);
             if (!basicDrop.isEmpty()) {
                 drops.add(basicDrop);
             }
         }
-
-        // If no drops were generated, create a basic drop
         if (drops.isEmpty()) {
             ItemStack basicDrop = new ItemStack(blockState.getBlock().asItem(), 1);
             if (!basicDrop.isEmpty()) {
                 drops.add(basicDrop);
             }
         }
-
         return drops;
     }
 
@@ -1139,15 +1150,13 @@ public class MinerSystem {
      */
     private String getBlockRegistryName(BlockState blockState) {
         try {
-            // Try to get the proper registry name
             var registryName = net.minecraft.core.registries.BuiltInRegistries.BLOCK.getKey(blockState.getBlock());
             if (registryName != null) {
                 return registryName.toString();
             }
         } catch (Exception e) {
-            // Fallback to description ID
+            // Fallback
         }
-
         return blockState.getBlock().getDescriptionId();
     }
 
@@ -1163,152 +1172,6 @@ public class MinerSystem {
                                 blockName.contains("silver") || blockName.contains("tin") ||
                                 blockName.contains("amber") || blockName.contains("ruby") ||
                                 blockName.contains("sapphire") || blockName.contains("garnet"));
-    }
-
-    /**
-     * Clears blocks to create a 2-high hallway
-     */
-    private void clearAndMineHallwayBlocks(BlockPos pos) {
-        if (!peasant.level().isClientSide) {
-            System.out.println("    Clearing 1x2 hallway at " + pos);
-        }
-
-        // Mine the main block (bottom of hallway)
-        BlockState bottomBlock = peasant.level().getBlockState(pos);
-        if (!bottomBlock.isAir()) {
-            if (!peasant.level().isClientSide) {
-                System.out.println("      Mining bottom block: " + getBlockRegistryName(bottomBlock));
-            }
-            mineSpecificBlock(pos);
-        }
-
-        // Mine the block above (top of hallway)
-        BlockPos topPos = pos.above();
-        BlockState topBlock = peasant.level().getBlockState(topPos);
-        if (!topBlock.isAir()) {
-            if (!peasant.level().isClientSide) {
-                System.out.println("      Mining top block: " + getBlockRegistryName(topBlock));
-            }
-            mineSpecificBlock(topPos);
-        }
-    }
-
-
-    private void mineSpecificBlock(BlockPos blockPos) {
-        BlockState blockState = peasant.level().getBlockState(blockPos);
-
-        // Skip if already air
-        if (blockState.isAir()) {
-            return;
-        }
-
-        // Verify distance one more time
-        double distanceToBlock = peasant.distanceToSqr(
-                blockPos.getX() + 0.5,
-                blockPos.getY(),
-                blockPos.getZ() + 0.5
-        );
-
-        if (distanceToBlock > 16.0D) { // More than 4 blocks away
-            if (!peasant.level().isClientSide) {
-                System.out.println("      Skipping block " + blockPos + " - too far (distance: " + Math.sqrt(distanceToBlock) + ")");
-            }
-            return;
-        }
-
-        // Get the drops from the block before breaking it
-        List<ItemStack> drops = getBlockDrops(blockState, blockPos);
-        String blockName = getBlockRegistryName(blockState);
-
-        // Remove the block from the world
-        peasant.level().setBlock(blockPos, Blocks.AIR.defaultBlockState(), 3);
-
-        if (!peasant.level().isClientSide) {
-            System.out.println("      Mined: " + blockName + " at " + blockPos + " -> " + drops.size() + " drops");
-        }
-
-        // Add drops to peasant's inventory
-        int itemsAdded = 0;
-        int itemsDropped = 0;
-
-        for (ItemStack drop : drops) {
-            if (!drop.isEmpty()) {
-                boolean added = peasant.getInventorySystem().addItem(drop);
-
-                if (added) {
-                    itemsAdded++;
-                } else {
-                    // Inventory full - drop on ground
-                    if (peasant.level() instanceof ServerLevel serverLevel) {
-                        peasant.spawnAtLocation(serverLevel, drop);
-                        itemsDropped++;
-                    }
-                }
-            }
-        }
-
-        if (!peasant.level().isClientSide && (itemsAdded > 0 || itemsDropped > 0)) {
-            System.out.println("        Items: " + itemsAdded + " to inventory, " + itemsDropped + " dropped on ground");
-        }
-    }
-
-
-    public void advanceFromEntranceToMining() {
-        if (currentHallwayStart == null || currentHallwayDirection == null) {
-            if (!peasant.level().isClientSide) {
-                System.out.println("  ERROR: Cannot advance from entrance - missing start or direction");
-            }
-            return;
-        }
-
-        // Move target from entrance to first mining position (one block in mining direction)
-        BlockPos firstMiningPos = currentHallwayStart.relative(currentHallwayDirection);
-        currentMiningTarget = firstMiningPos;
-
-        if (!peasant.level().isClientSide) {
-            System.out.println("=== ADVANCING FROM ENTRANCE TO MINING [" + peasant.getName().getString() + "] ===");
-            System.out.println("  Entrance: " + currentHallwayStart);
-            System.out.println("  First mining position: " + firstMiningPos);
-            System.out.println("  Direction: " + currentHallwayDirection);
-        }
-    }
-
-
-
-    public boolean hasReachedCurrentEntrance() {
-        if (currentHallwayStart == null) {
-            return false;
-        }
-
-        // Check if peasant is close to the tunnel entrance
-        double distanceToEntrance = peasant.distanceToSqr(
-                currentHallwayStart.getX() + 0.5,
-                currentHallwayStart.getY(),
-                currentHallwayStart.getZ() + 0.5
-        );
-
-        boolean atEntrance = distanceToEntrance <= 4.0D; // Within 2 blocks
-
-        if (!peasant.level().isClientSide && atEntrance) {
-            System.out.println("  Peasant has reached tunnel entrance: " + currentHallwayStart);
-        }
-
-        return atEntrance;
-    }
-
-
-
-    private void ensureFloorBlock(BlockPos pos) {
-        BlockPos floorPos = pos.below();
-        BlockState floorState = peasant.level().getBlockState(floorPos);
-
-        // If there's air below, place cobblestone
-        if (floorState.isAir()) {
-            peasant.level().setBlock(floorPos, Blocks.COBBLESTONE.defaultBlockState(), 3);
-            if (!peasant.level().isClientSide) {
-                System.out.println("      Placed floor block at " + floorPos);
-            }
-        }
     }
 
     /**
@@ -1334,9 +1197,7 @@ public class MinerSystem {
         return peasant.getJobBlockPos();
     }
 
-    public BlockPos getCurrentMiningTarget() {
-        return currentMiningTarget;
-    }
+
 
     public MinerState getCurrentMinerState() {
         return currentMinerState;
@@ -1346,68 +1207,109 @@ public class MinerSystem {
         this.currentMinerState = state;
     }
 
-    public boolean hasReturnedToJobBlockAfterFood() {
-        return hasReturnedToJobBlockAfterFood;
-    }
 
-    public void setHasReturnedToJobBlockAfterFood(boolean returned) {
-        this.hasReturnedToJobBlockAfterFood = returned;
-    }
+
 
     public void saveData(CompoundTag compound) {
-        compound.putBoolean("HasReturnedToJobBlockAfterFood", hasReturnedToJobBlockAfterFood);
         compound.putString("CurrentMinerState", currentMinerState.name());
-        compound.putInt("CurrentHallwayIndex", currentHallwayIndex);
-        compound.putInt("CurrentHallwayLength", currentHallwayLength);
-        compound.putLong("LastMiningTime", lastMiningTime);
+        compound.putInt("CurrentTunnelIndex", currentTunnelIndex);
+        compound.putInt("CurrentTunnelProgress", currentTunnelProgress);
+        compound.putInt("BlocksMinedToday", blocksMineToday);
+        compound.putInt("TorchCounter", torchCounter);
 
-        if (currentMiningTarget != null) {
-            compound.putIntArray("CurrentMiningTarget", new int[]{
-                    currentMiningTarget.getX(), currentMiningTarget.getY(), currentMiningTarget.getZ()
+        if (selectedTunnelEntrance != null) {
+            compound.putIntArray("SelectedTunnelEntrance", new int[]{
+                    selectedTunnelEntrance.getX(), selectedTunnelEntrance.getY(), selectedTunnelEntrance.getZ()
             });
         }
 
-        if (currentHallwayStart != null) {
-            compound.putIntArray("CurrentHallwayStart", new int[]{
-                    currentHallwayStart.getX(), currentHallwayStart.getY(), currentHallwayStart.getZ()
+        if (currentMiningPosition != null) {
+            compound.putIntArray("CurrentMiningPosition", new int[]{
+                    currentMiningPosition.getX(), currentMiningPosition.getY(), currentMiningPosition.getZ()
             });
         }
 
-        if (currentHallwayDirection != null) {
-            compound.putString("CurrentHallwayDirection", currentHallwayDirection.name());
+        if (miningDirection != null) {
+            compound.putString("MiningDirection", miningDirection.name());
         }
+    }
+
+    public BlockPos getSelectedTunnelEntrance() {
+        return selectedTunnelEntrance;
+    }
+
+    public BlockPos getCurrentMiningPosition() {
+        return currentMiningPosition;
+    }
+
+    public boolean hasReachedTunnelEntrance() {
+        if (selectedTunnelEntrance == null) {
+            return false;
+        }
+
+        double distance = peasant.distanceToSqr(
+                selectedTunnelEntrance.getX() + 0.5,
+                selectedTunnelEntrance.getY(),
+                selectedTunnelEntrance.getZ() + 0.5
+        );
+
+        return distance <= 4.0D; // Within 2 blocks
+    }
+
+    public boolean canMineAtCurrentPosition() {
+        if (currentMiningPosition == null) {
+            return false;
+        }
+
+        double distance = peasant.distanceToSqr(
+                currentMiningPosition.getX() + 0.5,
+                currentMiningPosition.getY(),
+                currentMiningPosition.getZ() + 0.5
+        );
+
+        double yDifference = Math.abs(peasant.getY() - currentMiningPosition.getY());
+
+        if (!peasant.level().isClientSide) {
+            double actualDistance = Math.sqrt(distance);
+            System.out.println("  DISTANCE CHECK: " + String.format("%.2f", actualDistance) +
+                    " blocks (max: 1.5), Y diff: " + String.format("%.2f", yDifference));
+        }
+
+        // FIXED: Much stricter distance - must be within 1.5 blocks AND correct Y level
+        return distance <= 2.25D && yDifference <= 0.5; // 1.5 blocks max, Y within 0.5
     }
 
     public void loadData(CompoundTag compound) {
-        hasReturnedToJobBlockAfterFood = compound.getBoolean("HasReturnedToJobBlockAfterFood");
-        currentHallwayIndex = compound.getInt("CurrentHallwayIndex");
-        currentHallwayLength = compound.getInt("CurrentHallwayLength");
-        lastMiningTime = compound.getLong("LastMiningTime");
+        currentTunnelIndex = compound.getInt("CurrentTunnelIndex");
+        currentTunnelProgress = compound.getInt("CurrentTunnelProgress");
+        blocksMineToday = compound.getInt("BlocksMinedToday");
+        torchCounter = compound.getInt("TorchCounter");
 
         try {
             currentMinerState = MinerState.valueOf(compound.getString("CurrentMinerState"));
         } catch (IllegalArgumentException e) {
-            currentMinerState = MinerState.NEEDS_MINE_SETUP;
+            currentMinerState = MinerState.SELECTING_TUNNEL;
         }
 
-        if (compound.contains("CurrentMiningTarget")) {
-            int[] targetPos = compound.getIntArray("CurrentMiningTarget");
-            if (targetPos.length == 3) {
-                currentMiningTarget = new BlockPos(targetPos[0], targetPos[1], targetPos[2]);
-            }
-        }
-        if (compound.contains("CurrentHallwayStart")) {
-            int[] startPos = compound.getIntArray("CurrentHallwayStart");
-            if (startPos.length == 3) {
-                currentHallwayStart = new BlockPos(startPos[0], startPos[1], startPos[2]);
+        if (compound.contains("SelectedTunnelEntrance")) {
+            int[] pos = compound.getIntArray("SelectedTunnelEntrance");
+            if (pos.length == 3) {
+                selectedTunnelEntrance = new BlockPos(pos[0], pos[1], pos[2]);
             }
         }
 
-        if (compound.contains("CurrentHallwayDirection")) {
+        if (compound.contains("CurrentMiningPosition")) {
+            int[] pos = compound.getIntArray("CurrentMiningPosition");
+            if (pos.length == 3) {
+                currentMiningPosition = new BlockPos(pos[0], pos[1], pos[2]);
+            }
+        }
+
+        if (compound.contains("MiningDirection")) {
             try {
-                currentHallwayDirection = Direction.valueOf(compound.getString("CurrentHallwayDirection"));
+                miningDirection = Direction.valueOf(compound.getString("MiningDirection"));
             } catch (IllegalArgumentException e) {
-                currentHallwayDirection = null;
+                miningDirection = null;
             }
         }
     }
