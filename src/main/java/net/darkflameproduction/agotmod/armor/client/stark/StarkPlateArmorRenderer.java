@@ -1,14 +1,23 @@
 package net.darkflameproduction.agotmod.armor.client.stark;// Importing necessary classes from other packages
 
-import net.darkflameproduction.agotmod.armor.custom.stark.StarkPlateArmorItem;
-import software.bernie.geckolib.renderer.GeoArmorRenderer;
+import net.darkflameproduction.agotmod.armor.client.ASOSArmorModel;
+import net.darkflameproduction.agotmod.armor.client.ASOSArmorRenderer;
+import net.darkflameproduction.agotmod.item.ModItems;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
+import net.minecraft.world.item.Item;
+import software.bernie.geckolib.renderer.base.GeoRenderState;
+
+import java.util.List;
 
 // Stark1ArmorRenderer class extending GeoArmorRenderer for Stark1ArmorItem
-public class StarkPlateArmorRenderer extends GeoArmorRenderer<StarkPlateArmorItem> {
+public class StarkPlateArmorRenderer<R extends HumanoidRenderState & GeoRenderState> extends ASOSArmorRenderer<R> {
 
-    // Constructor for Stark1ArmorRenderer
     public StarkPlateArmorRenderer() {
-        // Call the constructor of the superclass (GeoArmorRenderer) with a new instance of Stark1ArmorModel
-        super(new StarkPlateArmorModel());
+        super(new ASOSArmorModel("stark_plate"));
+    }
+
+    @Override
+    protected List<Item> fullArmorSet() {
+        return List.of(ModItems.STARK_PLATE_HELMET.asItem(), ModItems.STARK_PLATE_CHESTPLATE.asItem(), ModItems.STARK_PLATE_LEGGINGS.asItem(), ModItems.STARK_PLATE_BOOTS.asItem());
     }
 }

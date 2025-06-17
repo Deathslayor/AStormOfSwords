@@ -1,14 +1,22 @@
 package net.darkflameproduction.agotmod.armor.client.bolten;
 
-import net.darkflameproduction.agotmod.armor.custom.bolten.BoltenPlateArmorItem;
-import software.bernie.geckolib.renderer.GeoArmorRenderer;
+import net.darkflameproduction.agotmod.armor.client.ASOSArmorModel;
+import net.darkflameproduction.agotmod.armor.client.ASOSArmorRenderer;
+import net.darkflameproduction.agotmod.item.ModItems;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
+import net.minecraft.world.item.Item;
+import software.bernie.geckolib.renderer.base.GeoRenderState;
 
-// Stark1ArmorRenderer class extending GeoArmorRenderer for Stark1ArmorItem
-public class BoltenPlateArmorRenderer extends GeoArmorRenderer<BoltenPlateArmorItem> {
+import java.util.List;
 
-    // Constructor for Stark1ArmorRenderer
+public class BoltenPlateArmorRenderer<R extends HumanoidRenderState & GeoRenderState> extends ASOSArmorRenderer<R> {
+
     public BoltenPlateArmorRenderer() {
-        // Call the constructor of the superclass (GeoArmorRenderer) with a new instance of Stark1ArmorModel
-        super(new BoltenPlateArmorModel());
+        super(new ASOSArmorModel("bolten_plate"));
+    }
+
+    @Override
+    protected List<Item> fullArmorSet() {
+        return List.of(ModItems.BOLTEN_PLATE_HELMET.asItem(), ModItems.BOLTEN_PLATE_CHESTPLATE.asItem(), ModItems.BOLTEN_PLATE_LEGGINGS.asItem(), ModItems.BOLTEN_PLATE_BOOTS.asItem());
     }
 }

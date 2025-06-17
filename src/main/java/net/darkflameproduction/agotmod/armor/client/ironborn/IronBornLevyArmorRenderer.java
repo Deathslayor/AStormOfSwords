@@ -1,14 +1,22 @@
 package net.darkflameproduction.agotmod.armor.client.ironborn;// Importing necessary classes from other packages
 
-import net.darkflameproduction.agotmod.armor.custom.ironborn.IronBornLevyArmorItem;
-import software.bernie.geckolib.renderer.GeoArmorRenderer;
+import net.darkflameproduction.agotmod.armor.client.ASOSArmorModel;
+import net.darkflameproduction.agotmod.armor.client.ASOSArmorRenderer;
+import net.darkflameproduction.agotmod.item.ModItems;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
+import net.minecraft.world.item.Item;
+import software.bernie.geckolib.renderer.base.GeoRenderState;
 
-// Stark1ArmorRenderer class extending GeoArmorRenderer for Stark1ArmorItem
-public class IronBornLevyArmorRenderer extends GeoArmorRenderer<IronBornLevyArmorItem> {
+import java.util.List;
 
-    // Constructor for Stark1ArmorRenderer
+public class IronBornLevyArmorRenderer<R extends HumanoidRenderState & GeoRenderState> extends ASOSArmorRenderer<R> {
+
     public IronBornLevyArmorRenderer() {
-        // Call the constructor of the superclass (GeoArmorRenderer) with a new instance of Stark1ArmorModel
-        super(new IronBornLevyArmorModel());
+        super(new ASOSArmorModel("ironborn_levy"));
+    }
+
+    @Override
+    protected List<Item> fullArmorSet() {
+        return List.of(ModItems.IRONBORN_LEVY_HELMET.asItem(), ModItems.IRONBORN_LEVY_CHESTPLATE.asItem(), ModItems.IRONBORN_LEVY_LEGGINGS.asItem(), ModItems.IRONBORN_LEVY_BOOTS.asItem());
     }
 }

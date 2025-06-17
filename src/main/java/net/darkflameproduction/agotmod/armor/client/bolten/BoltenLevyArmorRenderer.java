@@ -1,14 +1,22 @@
 package net.darkflameproduction.agotmod.armor.client.bolten;
 
-import net.darkflameproduction.agotmod.armor.custom.bolten.BoltenLevyArmorItem;
-import software.bernie.geckolib.renderer.GeoArmorRenderer;
+import net.darkflameproduction.agotmod.armor.client.ASOSArmorModel;
+import net.darkflameproduction.agotmod.armor.client.ASOSArmorRenderer;
+import net.darkflameproduction.agotmod.item.ModItems;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
+import net.minecraft.world.item.Item;
+import software.bernie.geckolib.renderer.base.GeoRenderState;
 
-// Stark1ArmorRenderer class extending GeoArmorRenderer for Stark1ArmorItem
-public class BoltenLevyArmorRenderer extends GeoArmorRenderer<BoltenLevyArmorItem> {
+import java.util.List;
 
-    // Constructor for Stark1ArmorRenderer
+public class BoltenLevyArmorRenderer<R extends HumanoidRenderState & GeoRenderState> extends ASOSArmorRenderer<R> {
+
     public BoltenLevyArmorRenderer() {
-        // Call the constructor of the superclass (GeoArmorRenderer) with a new instance of Stark1ArmorModel
-        super(new BoltenLevyArmorModel());
+        super(new ASOSArmorModel("bolten_levy"));
+    }
+
+    @Override
+    protected List<Item> fullArmorSet() {
+        return List.of(ModItems.BOLTEN_LEVY_HELMET.asItem(), ModItems.BOLTEN_LEVY_CHESTPLATE.asItem(), ModItems.BOLTEN_LEVY_LEGGINGS.asItem(), ModItems.BOLTEN_LEVY_BOOTS.asItem());
     }
 }

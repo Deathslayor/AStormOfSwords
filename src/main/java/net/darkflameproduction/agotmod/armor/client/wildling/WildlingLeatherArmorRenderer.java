@@ -1,15 +1,23 @@
 package net.darkflameproduction.agotmod.armor.client.wildling;// Importing necessary classes from other packages
 
-import net.darkflameproduction.agotmod.armor.custom.stark.StarkPlateArmorItem;
-import net.darkflameproduction.agotmod.armor.custom.wildling.WildlingLeatherArmorItem;
-import software.bernie.geckolib.renderer.GeoArmorRenderer;
+import net.darkflameproduction.agotmod.armor.client.ASOSArmorModel;
+import net.darkflameproduction.agotmod.armor.client.ASOSArmorRenderer;
+import net.darkflameproduction.agotmod.item.ModItems;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
+import net.minecraft.world.item.Item;
+import software.bernie.geckolib.renderer.base.GeoRenderState;
+
+import java.util.List;
 
 // Stark1ArmorRenderer class extending GeoArmorRenderer for Stark1ArmorItem
-public class WildlingLeatherArmorRenderer extends GeoArmorRenderer<WildlingLeatherArmorItem> {
+public class WildlingLeatherArmorRenderer<R extends HumanoidRenderState & GeoRenderState> extends ASOSArmorRenderer<R> {
 
-    // Constructor for Stark1ArmorRenderer
     public WildlingLeatherArmorRenderer() {
-        // Call the constructor of the superclass (GeoArmorRenderer) with a new instance of Stark1ArmorModel
-        super(new WildlingLeatherArmorModel());
+        super(new ASOSArmorModel("wildling_leather"));
+    }
+
+    @Override
+    protected List<Item> fullArmorSet() {
+        return List.of(ModItems.WILDLING_LEATHER_HELMET.asItem(), ModItems.WILDLING_LEATHER_CHESTPLATE.asItem(), ModItems.WILDLING_LEATHER_LEGGINGS.asItem(), ModItems.WILDLING_LEATHER_BOOTS.asItem());
     }
 }

@@ -1,15 +1,22 @@
 package net.darkflameproduction.agotmod.armor.client.ironborn;// Importing necessary classes from other packages
 
-import net.darkflameproduction.agotmod.armor.custom.ironborn.IronBornPlateArmorItem;
-import net.darkflameproduction.agotmod.armor.custom.stark.StarkLevyArmorItem;
-import software.bernie.geckolib.renderer.GeoArmorRenderer;
+import net.darkflameproduction.agotmod.armor.client.ASOSArmorModel;
+import net.darkflameproduction.agotmod.armor.client.ASOSArmorRenderer;
+import net.darkflameproduction.agotmod.item.ModItems;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
+import net.minecraft.world.item.Item;
+import software.bernie.geckolib.renderer.base.GeoRenderState;
 
-// Stark1ArmorRenderer class extending GeoArmorRenderer for Stark1ArmorItem
-public class IronBornPlateArmorRenderer extends GeoArmorRenderer<IronBornPlateArmorItem> {
+import java.util.List;
 
-    // Constructor for Stark1ArmorRenderer
+public class IronBornPlateArmorRenderer<R extends HumanoidRenderState & GeoRenderState> extends ASOSArmorRenderer<R> {
+
     public IronBornPlateArmorRenderer() {
-        // Call the constructor of the superclass (GeoArmorRenderer) with a new instance of Stark1ArmorModel
-        super(new IronBornPlateArmorModel());
+        super(new ASOSArmorModel("ironborn_plate"));
+    }
+
+    @Override
+    protected List<Item> fullArmorSet() {
+        return List.of(ModItems.IRONBORN_PLATE_HELMET.asItem(), ModItems.IRONBORN_PLATE_CHESTPLATE.asItem(), ModItems.IRONBORN_PLATE_LEGGINGS.asItem(), ModItems.IRONBORN_PLATE_BOOTS.asItem());
     }
 }

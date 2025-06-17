@@ -1,15 +1,23 @@
 package net.darkflameproduction.agotmod.armor.client.thenn;// Importing necessary classes from other packages
 
-import net.darkflameproduction.agotmod.armor.custom.stark.StarkPlateArmorItem;
-import net.darkflameproduction.agotmod.armor.custom.thenn.ThennPlateArmorItem;
-import software.bernie.geckolib.renderer.GeoArmorRenderer;
+import net.darkflameproduction.agotmod.armor.client.ASOSArmorModel;
+import net.darkflameproduction.agotmod.armor.client.ASOSArmorRenderer;
+import net.darkflameproduction.agotmod.item.ModItems;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
+import net.minecraft.world.item.Item;
+import software.bernie.geckolib.renderer.base.GeoRenderState;
+
+import java.util.List;
 
 // Stark1ArmorRenderer class extending GeoArmorRenderer for Stark1ArmorItem
-public class ThennPlateArmorRenderer extends GeoArmorRenderer<ThennPlateArmorItem> {
+public class ThennPlateArmorRenderer<R extends HumanoidRenderState & GeoRenderState> extends ASOSArmorRenderer<R> {
 
-    // Constructor for Stark1ArmorRenderer
     public ThennPlateArmorRenderer() {
-        // Call the constructor of the superclass (GeoArmorRenderer) with a new instance of Stark1ArmorModel
-        super(new ThennPlateArmorModel());
+        super(new ASOSArmorModel("thenn_plate"));
+    }
+
+    @Override
+    protected List<Item> fullArmorSet() {
+        return List.of(ModItems.THENN_PLATE_HELMET.asItem(), ModItems.THENN_PLATE_CHESTPLATE.asItem(), ModItems.THENN_PLATE_LEGGINGS.asItem(), ModItems.THENN_PLATE_BOOTS.asItem());
     }
 }
