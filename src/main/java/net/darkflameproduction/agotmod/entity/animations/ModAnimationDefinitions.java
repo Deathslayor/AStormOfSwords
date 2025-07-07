@@ -1,13 +1,6 @@
 package net.darkflameproduction.agotmod.entity.animations;
 
-import net.minecraft.client.animation.AnimationChannel;
-import net.minecraft.client.animation.AnimationDefinition;
-import net.minecraft.client.animation.Keyframe;
-import net.minecraft.client.animation.KeyframeAnimations;
-import net.minecraft.world.entity.LivingEntity;
-import software.bernie.geckolib.animatable.GeoAnimatable;
-import software.bernie.geckolib.animation.Animation;
-import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animatable.processing.AnimationController;
 import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.animation.RawAnimation;
 
@@ -23,28 +16,39 @@ public class ModAnimationDefinitions {
     public static final RawAnimation SIT = RawAnimation.begin().thenPlay("misc.sit");
     public static final RawAnimation INTERRACT = RawAnimation.begin().thenPlay("misc.interract");
 
-    public static <T extends LivingEntity & GeoAnimatable> AnimationController<T> ModdedDeathController(T animatable) {
-        return new AnimationController<>(animatable, "Die", 0, state -> state.getAnimatable().isDeadOrDying() ? state.setAndContinue(DIE) : PlayState.STOP);
+    public static AnimationController<?> ModdedDeathController() {
+        return new AnimationController<>("Die", 0, animationTest -> animationTest.setAndContinue(DIE));
     }
 
-    public static <T extends LivingEntity & GeoAnimatable> AnimationController<T> ModdedSummonController(T animatable) {
-        return new AnimationController<>(animatable, "Spawn", 0, state -> {
-            if (animatable.tickCount < 100)
-                return state.setAndContinue(SPAWN);
-
-            state.getController().forceAnimationReset();
-
-            return PlayState.STOP;
-        });
+    public static AnimationController<?> ModdedSummonController() {
+        return new AnimationController<>("Spawn", 0, animationTest -> animationTest.setAndContinue(SPAWN));
     }
 
-    public static <T extends LivingEntity & GeoAnimatable> AnimationController<T> ModdedAttackController(T animatable) {
-        return new AnimationController<>(animatable, "Attack", 0, state -> {
-            if (state.getAnimatable().swinging) {
-                return state.setAndContinue(ATTACK);
-            }
-            state.getController().forceAnimationReset();
-            return PlayState.STOP;
-        });
+    public static AnimationController<?> ModdedAttackController() {
+        return new AnimationController<>("Attack", 0, animationTest -> animationTest.setAndContinue(ATTACK));
+    }
+
+    public static AnimationController<?> ModdedWalkController() {
+        return new AnimationController<>("Walk", 5, animationTest -> animationTest.setAndContinue(WALK));
+    }
+
+    public static AnimationController<?> ModdedRunController() {
+        return new AnimationController<>("Run", 5, animationTest -> animationTest.setAndContinue(RUN));
+    }
+
+    public static AnimationController<?> ModdedIdleController() {
+        return new AnimationController<>("Idle", 5, animationTest -> animationTest.setAndContinue(IDLE));
+    }
+
+    public static AnimationController<?> ModdedFlyController() {
+        return new AnimationController<>("Fly", 5, animationTest -> animationTest.setAndContinue(FLY));
+    }
+
+    public static AnimationController<?> ModdedSitController() {
+        return new AnimationController<>("Sit", 0, animationTest -> animationTest.setAndContinue(SIT));
+    }
+
+    public static AnimationController<?> ModdedInterractController() {
+        return new AnimationController<>("Interract", 0, animationTest -> animationTest.setAndContinue(INTERRACT));
     }
 }
