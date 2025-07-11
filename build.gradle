@@ -76,7 +76,7 @@ dependencies {
     // GeckoLib
     jarJar(implementation "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:[${geckolib_version},)")
     // CTGen
-    jarJar(implementation("dev.tocraft:ctgen-neoforge:[${minecraft_version}-${ctgen_version},)"))
+    jarJar(implementation("dev.tocraft:ctgen-neoforge:[${ctgen_version},)"))
     jarJar(implementation "com.github.glitchfiend:TerraBlender-neoforge:${minecraft_version}-${terrablender_version}")
 }
 
