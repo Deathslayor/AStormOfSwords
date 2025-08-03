@@ -1,5 +1,8 @@
 package net.darkflameproduction.agotmod.block.custom;
 
+import net.darkflameproduction.agotmod.block.ModBLocks;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobWarningSystem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -9,6 +12,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BedBlock;
@@ -42,6 +46,16 @@ public class TownHallBlockEntity extends BlockEntity {
     private static final int SECOND_TIER_EXPANSION = 1; // 1 block per citizen for citizens 11-20
     private static final int THIRD_TIER_EXPANSION = 5; // 5 citizens required per 1 block after 20
 
+    private static final int JOB_ASSIGNMENT_INTERVAL = 80; // 4 seconds (assign one job every 4 seconds)
+    private static final int JOBLESS_UPDATE_INTERVAL = 120; // 6 seconds (update jobless queue)
+    private static final int JOB_CLEANUP_INTERVAL = 400;
+    private int ticksSinceLastJobAssignment = 0;
+    private int ticksSinceLastJoblessUpdate = 0;
+    private int ticksSinceLastJobCleanup = 0;//
+    private boolean shouldSendDataUpdate = false;
+    private int availableJobCount = 0;
+    private int assignedJobCount = 0;
+
     private int bedCount = 0;
     private int citizenCount = 0;
     private String townName = "Unnamed Town"; // Default town name
@@ -57,6 +71,26 @@ public class TownHallBlockEntity extends BlockEntity {
 
     // Cache for citizen last names (refreshed during citizen checks)
     private List<String> citizenLastNames = new ArrayList<>();
+
+    public int getAvailableJobCount() {
+        return availableJobCount;
+    }
+    public int getAssignedJobCount() {
+        return assignedJobCount;
+    }
+    public int getTotalJobCount() {
+        return availableJobs.size();
+    }
+    public int getJoblessCount() {
+        return joblessQueue.size();
+    }
+    public List<CitizenInfo> getRegisteredCitizens() {
+        return new ArrayList<>(registeredCitizens.values());
+    }
+    public List<JobBlockInfo> getAvailableJobs() {
+        return new ArrayList<>(availableJobs.values());
+    }
+
 
     public TownHallBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.TOWN_HALL.get(), pos, blockState);
@@ -169,22 +203,184 @@ public class TownHallBlockEntity extends BlockEntity {
         return "";
     }
 
+    private final Map<UUID, CitizenInfo> registeredCitizens = new HashMap<>();
+    private final Map<BlockPos, JobBlockInfo> availableJobs = new HashMap<>();
+    private final Queue<UUID> joblessQueue = new LinkedList<>();
+
+    public static class CitizenInfo {
+        public final UUID npcUUID;
+        public final BlockPos homeBedPos;
+        public String currentJob;
+        public String npcName;
+        public long lastSeen;
+
+        public CitizenInfo(UUID npcUUID, BlockPos homeBedPos, String npcName) {
+            this.npcUUID = npcUUID;
+            this.homeBedPos = homeBedPos;
+            this.npcName = npcName;
+            this.currentJob = JobSystem.JOB_NONE;
+            this.lastSeen = System.currentTimeMillis();
+        }
+    }
+
+    public static class JobBlockInfo {
+        public final BlockPos jobBlockPos;
+        public final String jobType;
+        public boolean isOccupied;
+        public UUID assignedNPC;
+
+        public JobBlockInfo(BlockPos pos, String type) {
+            this.jobBlockPos = pos;
+            this.jobType = type;
+            this.isOccupied = false;
+            this.assignedNPC = null;
+        }
+    }
+
+    // Add to TownHallBlockEntity
+    private void performJobBlockScan(Level level) {
+        availableJobs.clear();
+        int currentRadius = getCurrentScanRadius();
+        int currentHeight = getCurrentScanHeight();
+
+        BlockPos centerPos = this.getBlockPos();
+        int minX = centerPos.getX() - currentRadius;
+        int maxX = centerPos.getX() + currentRadius;
+        int minY = centerPos.getY() - currentHeight;
+        int maxY = centerPos.getY() + currentHeight;
+        int minZ = centerPos.getZ() - currentRadius;
+        int maxZ = centerPos.getZ() + currentRadius;
+
+        // Ensure Y bounds are within world limits
+        minY = Math.max(minY, level.dimensionType().minY());
+        maxY = Math.min(maxY, level.dimensionType().minY() + level.dimensionType().height() - 1);
+
+        // Scan for job blocks
+        for (int x = minX; x <= maxX; x++) {
+            for (int y = minY; y <= maxY; y++) {
+                for (int z = minZ; z <= maxZ; z++) {
+                    BlockPos scanPos = new BlockPos(x, y, z);
+
+                    if (level.isLoaded(scanPos)) {
+                        BlockState state = level.getBlockState(scanPos);
+                        String jobType = getJobTypeFromBlock(state);
+
+                        if (!jobType.equals(JobSystem.JOB_NONE)) {
+                            JobBlockInfo jobInfo = new JobBlockInfo(scanPos, jobType);
+
+                            // Check if occupied via warning system
+                            if (JobWarningSystem.isJobBlockWarned(scanPos, null)) {
+                                JobWarningSystem.JobBlockWarning warning =
+                                        JobWarningSystem.getWarningInfo(scanPos);
+                                if (warning != null) {
+                                    jobInfo.isOccupied = true;
+                                    jobInfo.assignedNPC = warning.npcUUID;
+                                }
+                            }
+
+                            availableJobs.put(scanPos, jobInfo);
+                        }
+                    }
+                }
+            }
+        }
+
+        // Update job counts
+        availableJobCount = (int) availableJobs.values().stream().filter(job -> !job.isOccupied).count();
+        assignedJobCount = (int) availableJobs.values().stream().filter(job -> job.isOccupied).count();
+        shouldSendDataUpdate = true;
+    }
+
+    private String getJobTypeFromBlock(BlockState state) {
+        if (state.is(ModBLocks.FARMER_BARREL.get())) return JobSystem.JOB_FARMER;
+        if (state.is(ModBLocks.GROCER_BARREL.get())) return JobSystem.JOB_GROCER;
+        if (state.is(ModBLocks.GUARD_BARREL.get())) return JobSystem.JOB_GUARD;
+        if (state.is(ModBLocks.MINER_BARREL.get())) return JobSystem.JOB_MINER;
+        return JobSystem.JOB_NONE;
+    }
+
+
+    // Add to TownHallBlockEntity
+    private void processJobAssignments(ServerLevel level) {
+        // Update citizen registry from bed warning system
+        updateCitizenRegistryFromBeds();
+
+        // Find unemployed citizens
+        updateJoblessQueue();
+
+        // Assign jobs to unemployed citizens
+        assignJobsToUnemployed(level);
+    }
+
+    private void assignJobsToUnemployed(ServerLevel level) {
+        if (joblessQueue.isEmpty()) return;
+
+        // Find available jobs
+        List<JobBlockInfo> availableJobsList = availableJobs.values().stream()
+                .filter(job -> !job.isOccupied)
+                .toList();
+
+        if (availableJobsList.isEmpty()) return;
+
+        // Assign one job per tick to prevent lag
+        UUID unemployedNPC = joblessQueue.poll();
+        if (unemployedNPC != null) {
+            CitizenInfo citizen = registeredCitizens.get(unemployedNPC);
+            if (citizen != null && citizen.currentJob.equals(JobSystem.JOB_NONE)) {
+
+                // Find closest available job
+                JobBlockInfo closestJob = findClosestJob(citizen.homeBedPos, availableJobsList);
+                if (closestJob != null) {
+                    assignJobToNPC(level, unemployedNPC, closestJob);
+                }
+            }
+        }
+    }
+
+    private void assignJobToNPC(ServerLevel level, UUID npcUUID, JobBlockInfo jobInfo) {
+        // Find the NPC entity
+        Entity entity = level.getEntity(npcUUID);
+        if (entity instanceof Peasant_Entity peasant && peasant.isAdult()) {
+            // Send job assignment packet to NPC
+            peasant.setJobType(jobInfo.jobType);
+            peasant.setJobBlockPos(jobInfo.jobBlockPos);
+
+            // Update our records
+            CitizenInfo citizen = registeredCitizens.get(npcUUID);
+            if (citizen != null) {
+                citizen.currentJob = jobInfo.jobType;
+            }
+
+            jobInfo.isOccupied = true;
+            jobInfo.assignedNPC = npcUUID;
+
+            // The NPC will handle broadcasting the warning when it starts working
+        }
+    }
+
     public static void tick(Level level, BlockPos pos, BlockState state, TownHallBlockEntity blockEntity) {
         if (level.isClientSide()) return;
 
         long currentTime = level.getDayTime() % 24000;
         long currentDay = level.getDayTime() / 24000;
 
+        // ===== DAILY SCANNING OPERATIONS =====
         // Check if it's time to scan (time = 10000) and we haven't scanned today
         if (currentTime >= SCAN_TIME &&
                 (blockEntity.lastScanDay != currentDay || !blockEntity.hasScannedToday)) {
 
+            // Perform bed scan (existing functionality)
             blockEntity.performBedScan(level);
+
+            // NEW: Perform job block scan
+            blockEntity.performJobBlockScan(level);
+
             blockEntity.lastScanDay = currentDay;
             blockEntity.hasScannedToday = true;
             blockEntity.setChanged();
         }
 
+        // ===== CHILD SPAWNING =====
         // Check if it's time to spawn children (midnight) and we haven't spawned today
         if (currentTime >= CHILD_SPAWN_TIME && blockEntity.lastChildSpawnDay != currentDay) {
             blockEntity.attemptChildSpawning((ServerLevel) level);
@@ -197,18 +393,205 @@ public class TownHallBlockEntity extends BlockEntity {
             blockEntity.hasScannedToday = false;
         }
 
-        // Periodically register with nearby players (every 5 seconds)
+        // ===== CITIZEN MANAGEMENT =====
+        // Update citizen registry from bed warning system (every 10 seconds)
+        blockEntity.ticksSinceLastCitizenCheck++;
+        if (blockEntity.ticksSinceLastCitizenCheck >= CITIZEN_CHECK_INTERVAL) {
+            blockEntity.updateCitizenRegistry(level);
+            blockEntity.updateCitizenRegistryFromBeds(); // NEW: Sync with bed claims
+            blockEntity.ticksSinceLastCitizenCheck = 0;
+        }
+
+        // ===== JOB MANAGEMENT SYSTEM =====
+        // Process job assignments (every 4 seconds to prevent lag)
+        blockEntity.ticksSinceLastJobAssignment++;
+        if (blockEntity.ticksSinceLastJobAssignment >= JOB_ASSIGNMENT_INTERVAL) {
+            blockEntity.processJobAssignments((ServerLevel) level);
+            blockEntity.ticksSinceLastJobAssignment = 0;
+        }
+
+        // Update jobless queue (every 6 seconds)
+        blockEntity.ticksSinceLastJoblessUpdate++;
+        if (blockEntity.ticksSinceLastJoblessUpdate >= JOBLESS_UPDATE_INTERVAL) {
+            blockEntity.updateJoblessQueue();
+            blockEntity.ticksSinceLastJoblessUpdate = 0;
+        }
+
+        // Clean up stale job assignments (every 20 seconds)
+        blockEntity.ticksSinceLastJobCleanup++;
+        if (blockEntity.ticksSinceLastJobCleanup >= JOB_CLEANUP_INTERVAL) {
+            blockEntity.cleanupStaleJobAssignments((ServerLevel) level);
+            blockEntity.ticksSinceLastJobCleanup = 0;
+        }
+
+        // ===== NETWORKING =====
+        // Register with nearby players (every 5 seconds)
         blockEntity.ticksSinceLastRegister++;
         if (blockEntity.ticksSinceLastRegister >= REGISTER_INTERVAL) {
             blockEntity.registerWithNearbyPlayers();
             blockEntity.ticksSinceLastRegister = 0;
         }
 
-        // Periodically check for new/removed citizens (every 10 seconds)
-        blockEntity.ticksSinceLastCitizenCheck++;
-        if (blockEntity.ticksSinceLastCitizenCheck >= CITIZEN_CHECK_INTERVAL) {
-            blockEntity.updateCitizenRegistry(level);
-            blockEntity.ticksSinceLastCitizenCheck = 0;
+        // Send data updates when citizen or job counts change
+        if (blockEntity.shouldSendDataUpdate) {
+            blockEntity.sendDataToClients(level);
+            blockEntity.shouldSendDataUpdate = false;
+        }
+    }
+
+    private void updateCitizenRegistryFromBeds() {
+        int scanRadius = getCurrentScanRadius();
+
+        // Get all home bed claims in the area
+        Set<BlockPos> homeBedClaims = SimpleBedWarningSystem.getHomeBedClaimsInRadius(
+                this.getBlockPos(), scanRadius, null);
+
+        // Get citizen names from the bed warning system
+        Map<UUID, String> citizenNamesMap = SimpleBedWarningSystem.getCitizenNamesInRadius(
+                this.getBlockPos(), scanRadius);
+
+        // Track which citizens we found this update
+        Set<UUID> foundCitizens = new HashSet<>();
+
+        // Process each home bed claim
+        for (BlockPos bedPos : homeBedClaims) {
+            SimpleBedWarningSystem.HomeBedClaim claim =
+                    SimpleBedWarningSystem.getClaimForPosition(bedPos);
+
+            if (claim != null && !claim.isExpired()) {
+                UUID npcUUID = claim.npcUUID;
+                foundCitizens.add(npcUUID);
+
+                // Get current name from the map
+                String npcName = citizenNamesMap.getOrDefault(npcUUID, claim.getCurrentName());
+
+                // Determine if NPC is adult by checking if they have a job or trying to find them
+                boolean isAdult = true; // Default assumption
+                if (claim.level != null && !claim.level.isClientSide()) {
+                    Entity entity = ((ServerLevel) claim.level).getEntity(npcUUID);
+                    if (entity instanceof Peasant_Entity peasant) {
+                        isAdult = peasant.isAdult();
+                    }
+                }
+
+                if (registeredCitizens.containsKey(npcUUID)) {
+                    // Update existing citizen info
+                    CitizenInfo citizen = registeredCitizens.get(npcUUID);
+                    citizen.npcName = npcName;
+                    citizen.lastSeen = System.currentTimeMillis();
+
+                    // Update their job status if we can find the entity
+                    if (claim.level != null && !claim.level.isClientSide()) {
+                        Entity entity = ((ServerLevel) claim.level).getEntity(npcUUID);
+                        if (entity instanceof Peasant_Entity peasant) {
+                            citizen.currentJob = peasant.getJobType();
+                        }
+                    }
+                } else {
+                    // Register new citizen
+                    CitizenInfo newCitizen = new CitizenInfo(npcUUID, bedPos, npcName);
+
+                    // Get their current job if we can find the entity
+                    if (claim.level != null && !claim.level.isClientSide()) {
+                        Entity entity = ((ServerLevel) claim.level).getEntity(npcUUID);
+                        if (entity instanceof Peasant_Entity peasant) {
+                            newCitizen.currentJob = peasant.getJobType();
+                        }
+                    }
+
+                    registeredCitizens.put(npcUUID, newCitizen);
+                    shouldSendDataUpdate = true;
+                }
+            }
+        }
+
+        // Remove citizens who no longer have bed claims (they moved or were removed)
+        registeredCitizens.entrySet().removeIf(entry -> {
+            if (!foundCitizens.contains(entry.getKey()) &&
+                    System.currentTimeMillis() - entry.getValue().lastSeen > 300000) { // 5 minutes
+                shouldSendDataUpdate = true;
+                return true;
+            }
+            return false;
+        });
+    }
+
+    /**
+     * Updates the queue of jobless citizens
+     */
+    private void updateJoblessQueue() {
+        joblessQueue.clear();
+
+        for (CitizenInfo citizen : registeredCitizens.values()) {
+            // Only adults can have jobs
+            if (citizen.currentJob.equals(JobSystem.JOB_NONE)) {
+                // Double-check by looking up the entity if possible
+                if (level != null && !level.isClientSide()) {
+                    Entity entity = ((ServerLevel) level).getEntity(citizen.npcUUID);
+                    if (entity instanceof Peasant_Entity peasant && peasant.isAdult()) {
+                        joblessQueue.offer(citizen.npcUUID);
+                    }
+                } else {
+                    // Fallback if we can't find the entity
+                    joblessQueue.offer(citizen.npcUUID);
+                }
+            }
+        }
+    }
+
+    /**
+     * Finds the closest job to a given position
+     */
+    private JobBlockInfo findClosestJob(BlockPos homeBedPos, List<JobBlockInfo> availableJobs) {
+        if (availableJobs.isEmpty()) return null;
+
+        JobBlockInfo closest = null;
+        double closestDistance = Double.MAX_VALUE;
+
+        for (JobBlockInfo job : availableJobs) {
+            double distance = homeBedPos.distSqr(job.jobBlockPos);
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closest = job;
+            }
+        }
+
+        return closest;
+    }
+
+    /**
+     * Cleans up stale job assignments
+     */
+    private void cleanupStaleJobAssignments(ServerLevel level) {
+        boolean hasChanges = false;
+
+        for (JobBlockInfo job : availableJobs.values()) {
+            if (job.isOccupied && job.assignedNPC != null) {
+                // Check if the NPC still exists and has this job
+                Entity entity = level.getEntity(job.assignedNPC);
+                if (!(entity instanceof Peasant_Entity peasant) ||
+                        !peasant.getJobBlockPos().equals(job.jobBlockPos) ||
+                        !peasant.getJobType().equals(job.jobType)) {
+
+                    // NPC is gone or has different job, clear the assignment
+                    job.isOccupied = false;
+                    job.assignedNPC = null;
+                    hasChanges = true;
+
+                    // Update citizen record if they exist
+                    CitizenInfo citizen = registeredCitizens.get(job.assignedNPC);
+                    if (citizen != null) {
+                        citizen.currentJob = JobSystem.JOB_NONE;
+                    }
+                }
+            }
+        }
+
+        if (hasChanges) {
+            // Recalculate job counts
+            availableJobCount = (int) availableJobs.values().stream().filter(job -> !job.isOccupied).count();
+            assignedJobCount = (int) availableJobs.values().stream().filter(job -> job.isOccupied).count();
+            shouldSendDataUpdate = true;
         }
     }
 
@@ -429,15 +812,43 @@ public class TownHallBlockEntity extends BlockEntity {
     /**
      * Helper method to check if a bed is within a specific radius
      */
-    private boolean isWithinStableScanArea(BlockPos bedPos, int stableRadius) {
+    public boolean isWithinStableScanArea(BlockPos pos, int radius) {
         BlockPos townHallPos = this.getBlockPos();
         int currentHeight = getCurrentScanHeight();
 
-        int dx = Math.abs(bedPos.getX() - townHallPos.getX());
-        int dy = Math.abs(bedPos.getY() - townHallPos.getY());
-        int dz = Math.abs(bedPos.getZ() - townHallPos.getZ());
+        int dx = Math.abs(pos.getX() - townHallPos.getX());
+        int dy = Math.abs(pos.getY() - townHallPos.getY());
+        int dz = Math.abs(pos.getZ() - townHallPos.getZ());
 
-        return dx <= stableRadius && dy <= currentHeight && dz <= stableRadius;
+        return dx <= radius && dy <= currentHeight && dz <= radius;
+    }
+
+    public void triggerJobAssignment() {
+        if (level != null && !level.isClientSide()) {
+            processJobAssignments((ServerLevel) level);
+        }
+    }
+
+    public String getDebugInfo() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("=== TOWN HALL DEBUG INFO ===\n");
+        sb.append("Town: ").append(townName).append("\n");
+        sb.append("Citizens: ").append(citizenCount).append("\n");
+        sb.append("Beds: ").append(bedCount).append("\n");
+        sb.append("Scan Radius: ").append(getCurrentScanRadius()).append("\n");
+        sb.append("Jobs - Total: ").append(getTotalJobCount())
+                .append(", Available: ").append(availableJobCount)
+                .append(", Assigned: ").append(assignedJobCount).append("\n");
+        sb.append("Jobless Citizens: ").append(getJoblessCount()).append("\n");
+        sb.append("Registered Citizens: ").append(registeredCitizens.size()).append("\n");
+
+        if (isClaimed) {
+            sb.append("Claimed by: ").append(getClaimedByHouse()).append("\n");
+        } else {
+            sb.append("Unclaimed\n");
+        }
+
+        return sb.toString();
     }
 
     private void performBedScan(Level level) {
@@ -508,7 +919,19 @@ public class TownHallBlockEntity extends BlockEntity {
                 double distance = serverPlayer.distanceToSqr(this.worldPosition.getX(), this.worldPosition.getY(), this.worldPosition.getZ());
                 if (distance < 64 * 64) { // Within 64 blocks for GUI
                     net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
-                            new net.darkflameproduction.agotmod.network.TownHallDataPacket(this.worldPosition, this.bedCount, this.citizenCount, getCurrentScanRadius(), this.townName, this.isClaimed, this.getClaimedByHouse()));
+                            new net.darkflameproduction.agotmod.network.TownHallDataPacket(
+                                    this.worldPosition,
+                                    this.bedCount,
+                                    this.citizenCount,
+                                    getCurrentScanRadius(),
+                                    this.townName,
+                                    this.isClaimed,
+                                    this.getClaimedByHouse(),
+                                    this.getAvailableJobCount(),      // NEW
+                                    this.getAssignedJobCount(),       // NEW
+                                    this.getTotalJobCount(),          // NEW
+                                    this.getJoblessCount()            // NEW
+                            ));
                 }
             }
         });
@@ -526,7 +949,19 @@ public class TownHallBlockEntity extends BlockEntity {
                 double distance = serverPlayer.distanceToSqr(this.worldPosition.getX(), this.worldPosition.getY(), this.worldPosition.getZ());
                 if (distance < renderDistance * renderDistance) { // Within render distance
                     net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
-                            new net.darkflameproduction.agotmod.network.TownHallDataPacket(this.worldPosition, this.bedCount, this.citizenCount, getCurrentScanRadius(), this.townName, this.isClaimed, this.getClaimedByHouse()));
+                            new net.darkflameproduction.agotmod.network.TownHallDataPacket(
+                                    this.worldPosition,
+                                    this.bedCount,
+                                    this.citizenCount,
+                                    getCurrentScanRadius(),
+                                    this.townName,
+                                    this.isClaimed,
+                                    this.getClaimedByHouse(),
+                                    this.getAvailableJobCount(),      // NEW
+                                    this.getAssignedJobCount(),       // NEW
+                                    this.getTotalJobCount(),          // NEW
+                                    this.getJoblessCount()            // NEW
+                            ));
                 }
             }
         });
@@ -586,30 +1021,80 @@ public class TownHallBlockEntity extends BlockEntity {
         }
     }
 
-    // Updated saveAdditional method
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
+
+        // ===== BASIC TOWN DATA =====
         tag.putInt("BedCount", bedCount);
         tag.putInt("CitizenCount", citizenCount);
         tag.putString("TownName", townName);
-        // Don't save claimedByHouse anymore - it's dynamic
+
+        // ===== TOWN CLAIMING DATA =====
         tag.putBoolean("IsClaimed", isClaimed);
         if (claimedByPlayerUUID != null) {
             tag.putUUID("ClaimedByPlayerUUID", claimedByPlayerUUID);
         }
+
+        // ===== TIMING AND STATE DATA =====
         tag.putLong("LastScanDay", lastScanDay);
         tag.putLong("LastChildSpawnDay", lastChildSpawnDay);
         tag.putBoolean("HasScannedToday", hasScannedToday);
+
+        // ===== TICK COUNTERS =====
         tag.putInt("TicksSinceLastRegister", ticksSinceLastRegister);
         tag.putInt("TicksSinceLastCitizenCheck", ticksSinceLastCitizenCheck);
+        tag.putInt("TicksSinceLastJobAssignment", ticksSinceLastJobAssignment);
+        tag.putInt("TicksSinceLastJoblessUpdate", ticksSinceLastJoblessUpdate);
+        tag.putInt("TicksSinceLastJobCleanup", ticksSinceLastJobCleanup);
 
-        // Save citizen last names
+        // ===== JOB MANAGEMENT DATA =====
+        tag.putInt("AvailableJobCount", availableJobCount);
+        tag.putInt("AssignedJobCount", assignedJobCount);
+        tag.putBoolean("ShouldSendDataUpdate", shouldSendDataUpdate);
+
+        // ===== CITIZEN LAST NAMES CACHE =====
         if (!citizenLastNames.isEmpty()) {
             tag.putInt("CitizenLastNamesCount", citizenLastNames.size());
             for (int i = 0; i < citizenLastNames.size(); i++) {
                 tag.putString("CitizenLastName_" + i, citizenLastNames.get(i));
             }
+        }
+
+        // ===== REGISTERED CITIZENS =====
+        tag.putInt("RegisteredCitizensCount", registeredCitizens.size());
+        int citizenIndex = 0;
+        for (CitizenInfo citizen : registeredCitizens.values()) {
+            CompoundTag citizenTag = new CompoundTag();
+            citizenTag.putUUID("UUID", citizen.npcUUID);
+            citizenTag.putLong("HomeBedPos", citizen.homeBedPos.asLong());
+            citizenTag.putString("Name", citizen.npcName != null ? citizen.npcName : "");
+            citizenTag.putString("Job", citizen.currentJob != null ? citizen.currentJob : JobSystem.JOB_NONE);
+            citizenTag.putLong("LastSeen", citizen.lastSeen);
+            tag.put("Citizen_" + citizenIndex, citizenTag);
+            citizenIndex++;
+        }
+
+        // ===== AVAILABLE JOBS =====
+        tag.putInt("AvailableJobsCount", availableJobs.size());
+        int jobIndex = 0;
+        for (JobBlockInfo job : availableJobs.values()) {
+            CompoundTag jobTag = new CompoundTag();
+            jobTag.putLong("JobBlockPos", job.jobBlockPos.asLong());
+            jobTag.putString("JobType", job.jobType);
+            jobTag.putBoolean("IsOccupied", job.isOccupied);
+            if (job.assignedNPC != null) {
+                jobTag.putUUID("AssignedNPC", job.assignedNPC);
+            }
+            tag.put("Job_" + jobIndex, jobTag);
+            jobIndex++;
+        }
+
+        // ===== JOBLESS QUEUE =====
+        List<UUID> joblessUUIDs = new ArrayList<>(joblessQueue);
+        tag.putInt("JoblessQueueCount", joblessUUIDs.size());
+        for (int i = 0; i < joblessUUIDs.size(); i++) {
+            tag.putUUID("JoblessUUID_" + i, joblessUUIDs.get(i));
         }
     }
 
@@ -617,24 +1102,41 @@ public class TownHallBlockEntity extends BlockEntity {
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
+
+        // ===== BASIC TOWN DATA =====
         bedCount = tag.getInt("BedCount");
         citizenCount = tag.getInt("CitizenCount");
         townName = tag.getString("TownName");
         if (townName.isEmpty()) {
             townName = "Unnamed Town";
         }
-        // Don't load claimedByHouse anymore - it's dynamic
+
+        // ===== TOWN CLAIMING DATA =====
         isClaimed = tag.getBoolean("IsClaimed");
         if (tag.hasUUID("ClaimedByPlayerUUID")) {
             claimedByPlayerUUID = tag.getUUID("ClaimedByPlayerUUID");
+        } else {
+            claimedByPlayerUUID = null;
         }
+
+        // ===== TIMING AND STATE DATA =====
         lastScanDay = tag.getLong("LastScanDay");
         lastChildSpawnDay = tag.getLong("LastChildSpawnDay");
         hasScannedToday = tag.getBoolean("HasScannedToday");
+
+        // ===== TICK COUNTERS =====
         ticksSinceLastRegister = tag.getInt("TicksSinceLastRegister");
         ticksSinceLastCitizenCheck = tag.getInt("TicksSinceLastCitizenCheck");
+        ticksSinceLastJobAssignment = tag.getInt("TicksSinceLastJobAssignment");
+        ticksSinceLastJoblessUpdate = tag.getInt("TicksSinceLastJoblessUpdate");
+        ticksSinceLastJobCleanup = tag.getInt("TicksSinceLastJobCleanup");
 
-        // Load citizen last names
+        // ===== JOB MANAGEMENT DATA =====
+        availableJobCount = tag.getInt("AvailableJobCount");
+        assignedJobCount = tag.getInt("AssignedJobCount");
+        shouldSendDataUpdate = tag.getBoolean("ShouldSendDataUpdate");
+
+        // ===== CITIZEN LAST NAMES CACHE =====
         citizenLastNames.clear();
         if (tag.contains("CitizenLastNamesCount")) {
             int count = tag.getInt("CitizenLastNamesCount");
@@ -643,6 +1145,103 @@ public class TownHallBlockEntity extends BlockEntity {
                 if (!lastName.isEmpty()) {
                     citizenLastNames.add(lastName);
                 }
+            }
+        }
+
+        // ===== REGISTERED CITIZENS =====
+        registeredCitizens.clear();
+        if (tag.contains("RegisteredCitizensCount")) {
+            int count = tag.getInt("RegisteredCitizensCount");
+            for (int i = 0; i < count; i++) {
+                if (tag.contains("Citizen_" + i)) {
+                    CompoundTag citizenTag = tag.getCompound("Citizen_" + i);
+                    try {
+                        UUID uuid = citizenTag.getUUID("UUID");
+                        BlockPos bedPos = BlockPos.of(citizenTag.getLong("HomeBedPos"));
+                        String name = citizenTag.getString("Name");
+                        String job = citizenTag.contains("Job") ? citizenTag.getString("Job") : JobSystem.JOB_NONE;
+                        long lastSeen = citizenTag.contains("LastSeen") ? citizenTag.getLong("LastSeen") : System.currentTimeMillis();
+
+                        CitizenInfo citizen = new CitizenInfo(uuid, bedPos, name.isEmpty() ? "Unknown" : name);
+                        citizen.currentJob = job;
+                        citizen.lastSeen = lastSeen;
+                        registeredCitizens.put(uuid, citizen);
+                    } catch (Exception e) {
+                        // Skip corrupted citizen data
+                        System.err.println("Failed to load citizen data at index " + i + ": " + e.getMessage());
+                    }
+                }
+            }
+        }
+
+        // ===== AVAILABLE JOBS =====
+        availableJobs.clear();
+        if (tag.contains("AvailableJobsCount")) {
+            int count = tag.getInt("AvailableJobsCount");
+            for (int i = 0; i < count; i++) {
+                if (tag.contains("Job_" + i)) {
+                    CompoundTag jobTag = tag.getCompound("Job_" + i);
+                    try {
+                        BlockPos jobPos = BlockPos.of(jobTag.getLong("JobBlockPos"));
+                        String jobType = jobTag.getString("JobType");
+                        boolean isOccupied = jobTag.getBoolean("IsOccupied");
+
+                        JobBlockInfo job = new JobBlockInfo(jobPos, jobType);
+                        job.isOccupied = isOccupied;
+
+                        if (jobTag.hasUUID("AssignedNPC")) {
+                            job.assignedNPC = jobTag.getUUID("AssignedNPC");
+                        }
+
+                        availableJobs.put(jobPos, job);
+                    } catch (Exception e) {
+                        // Skip corrupted job data
+                        System.err.println("Failed to load job data at index " + i + ": " + e.getMessage());
+                    }
+                }
+            }
+        }
+
+        // ===== JOBLESS QUEUE =====
+        joblessQueue.clear();
+        if (tag.contains("JoblessQueueCount")) {
+            int count = tag.getInt("JoblessQueueCount");
+            for (int i = 0; i < count; i++) {
+                if (tag.hasUUID("JoblessUUID_" + i)) {
+                    try {
+                        UUID joblessUUID = tag.getUUID("JoblessUUID_" + i);
+                        joblessQueue.offer(joblessUUID);
+                    } catch (Exception e) {
+                        // Skip corrupted UUID data
+                        System.err.println("Failed to load jobless UUID at index " + i + ": " + e.getMessage());
+                    }
+                }
+            }
+        }
+
+        // ===== DATA VALIDATION AND CLEANUP =====
+        // Validate job counts after loading
+        if (availableJobs.size() > 0) {
+            long actualAvailableCount = availableJobs.values().stream().filter(job -> !job.isOccupied).count();
+            long actualAssignedCount = availableJobs.values().stream().filter(job -> job.isOccupied).count();
+
+            // Update counts if they don't match (corruption recovery)
+            if (actualAvailableCount != availableJobCount || actualAssignedCount != assignedJobCount) {
+                availableJobCount = (int) actualAvailableCount;
+                assignedJobCount = (int) actualAssignedCount;
+                shouldSendDataUpdate = true;
+            }
+        }
+
+        // Remove jobless queue entries that don't have corresponding citizen records
+        joblessQueue.removeIf(uuid -> !registeredCitizens.containsKey(uuid));
+
+        // Ensure data consistency - remove citizens with jobs that aren't tracked as jobless
+        for (UUID uuid : joblessQueue) {
+            CitizenInfo citizen = registeredCitizens.get(uuid);
+            if (citizen != null && !citizen.currentJob.equals(JobSystem.JOB_NONE)) {
+                // This citizen has a job but is in jobless queue - remove from queue
+                joblessQueue.remove(uuid);
             }
         }
     }

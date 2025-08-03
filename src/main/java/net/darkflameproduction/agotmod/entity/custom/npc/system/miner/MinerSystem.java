@@ -34,7 +34,7 @@ public class MinerSystem {
     private int torchCounter = 0;                // For torch placement every 8 blocks
 
     // Constants
-    private static final int MAX_TUNNEL_LENGTH = 128;
+    private static final int MAX_TUNNEL_LENGTH = 256;
     private static final int TORCH_INTERVAL = 8;
     private static final int MAX_BLOCKS_PER_DAY = 512;
 
@@ -537,7 +537,7 @@ public class MinerSystem {
     }
 
     private void placeTorch(BlockPos pos) {
-        BlockPos torchPos = pos.above(2); // Place torch on ceiling
+        BlockPos torchPos = pos.above(0); // Place torch on ceiling
         if (peasant.level().getBlockState(torchPos).isAir()) {
             peasant.level().setBlock(torchPos, Blocks.TORCH.defaultBlockState(), 3);
         }

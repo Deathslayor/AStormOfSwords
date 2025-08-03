@@ -1,5 +1,6 @@
 package net.darkflameproduction.agotmod.entity.custom.npc;
 
+import net.darkflameproduction.agotmod.block.custom.TownHallBlockEntity;
 import net.darkflameproduction.agotmod.entity.animations.ModAnimationDefinitions;
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.behaviour.*;
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.farmer.FarmerBarrelDropOffGoal;
@@ -49,6 +50,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -90,6 +92,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     private static final EntityDataAccessor<String> GENDER = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<String> AGE = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<Integer> AGING_TIMER = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Optional<BlockPos>> TOWN_HALL_POS = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.OPTIONAL_BLOCK_POS);
 
     // Door goal reference for persistence
     private OpenAndCloseDoorGoal doorGoal;
@@ -229,6 +232,32 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         // Only the model and textures will change through the renderer/model system
     }
 
+
+
+    // ===== TOWN HALL REGISTRATION METHODS =====
+    public void registerWithTownHall(BlockPos townHallPos) {
+        this.entityData.set(TOWN_HALL_POS, Optional.of(townHallPos));
+    }
+
+    public Optional<BlockPos> getTownHallPos() {
+        return this.entityData.get(TOWN_HALL_POS);
+    }
+
+    public boolean isRegisteredToTownHall() {
+        return getTownHallPos().isPresent();
+    }
+
+    public boolean isRegisteredToTownHall(BlockPos townHallPos) {
+        Optional<BlockPos> myTownHall = getTownHallPos();
+        return myTownHall.isPresent() && myTownHall.get().equals(townHallPos);
+    }
+
+    public void unregisterFromTownHall() {
+        this.entityData.set(TOWN_HALL_POS, Optional.empty());
+    }
+
+
+
     // Player interaction methods
     public void setInteractingPlayer(Player player) {
         this.currentInteractingPlayer = player;
@@ -304,10 +333,9 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
 
         // Job-related goals - only for adults
         if (isAdult()) {
-            // FIXED: MinerGoal now has priority 8 (higher than other work goals)
             this.goalSelector.addGoal(8, new MinerGoal(this));
             this.goalSelector.addGoal(9, new ReturnToJobBlockGoal(this));
-            this.goalSelector.addGoal(10, new FindJobGoal(this));
+            // REMOVED: FindJobGoal - jobs are now assigned by Town Hall
             this.goalSelector.addGoal(11, new FarmingGoal(this));
 
             this.grocerCollectionGoal = new GrocerCollectionGoal(this);
@@ -323,6 +351,44 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         // Target selection goals - only for adults
         if (isAdult()) {
             this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+        }
+    }
+
+    public void findAndRegisterWithNearestTownHall() {
+        if (!isRegisteredToTownHall() && !level().isClientSide()) {
+            // Search for town halls within a reasonable distance (128 blocks)
+            BlockPos myPos = this.blockPosition();
+            int searchRadius = 128;
+
+            BlockPos nearestTownHall = null;
+            double nearestDistance = Double.MAX_VALUE;
+
+            // Search in chunks to be more efficient
+            for (int x = -searchRadius; x <= searchRadius; x += 16) {
+                for (int y = -64; y <= 64; y += 16) {
+                    for (int z = -searchRadius; z <= searchRadius; z += 16) {
+                        BlockPos checkPos = myPos.offset(x, y, z);
+
+                        if (level().isLoaded(checkPos)) {
+                            BlockEntity blockEntity = level().getBlockEntity(checkPos);
+                            if (blockEntity instanceof TownHallBlockEntity townHall) {
+                                // Check if this NPC is within the town hall's scan radius
+                                if (townHall.isWithinStableScanArea(myPos, townHall.getCurrentScanRadius())) {
+                                    double distance = myPos.distSqr(checkPos);
+                                    if (distance < nearestDistance) {
+                                        nearestDistance = distance;
+                                        nearestTownHall = checkPos;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (nearestTownHall != null) {
+                registerWithTownHall(nearestTownHall);
+            }
         }
     }
 
@@ -369,6 +435,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         builder.define(GENDER, GENDER_MALE); // Default to male
         builder.define(AGE, AGE_ADULT); // Default to adult
         builder.define(AGING_TIMER, 0); // Default aging timer
+        builder.define(TOWN_HALL_POS, Optional.empty()); // NEW: Town hall registration
     }
 
     @Override
@@ -381,6 +448,12 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         compound.putString("Age", this.getAge());
         compound.putInt("AgingTimer", this.getAgingTimer());
 
+        // Save town hall registration
+        Optional<BlockPos> townHallPos = getTownHallPos();
+        if (townHallPos.isPresent()) {
+            compound.putLong("TownHallPos", townHallPos.get().asLong());
+        }
+
         // Save all systems data (excluding equipment - handled by native system)
         sleepSystem.saveData(compound);
         hungerSystem.saveData(compound);
@@ -390,8 +463,8 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         grocerSystem.saveData(compound);
         teleportSystem.saveData(compound);
         nameSystem.saveData(compound, this.registryAccess());
-        guardSystem.saveData(compound); // Save guard system data
-        minerSystem.saveData(compound); // Save miner system data
+        guardSystem.saveData(compound);
+        minerSystem.saveData(compound);
 
         // Save inventory system data (only regular inventory, not equipment)
         inventorySystem.saveData(compound, this.registryAccess());
@@ -410,6 +483,8 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
 
         // Equipment is automatically saved by Minecraft's native system via super.addAdditionalSaveData()
     }
+
+
 
     @Override
     public void readAdditionalSaveData(CompoundTag compound) {
@@ -437,6 +512,12 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
             this.setAgingTimer(compound.getInt("AgingTimer"));
         }
 
+        // Load town hall registration
+        if (compound.contains("TownHallPos")) {
+            BlockPos townHallPos = BlockPos.of(compound.getLong("TownHallPos"));
+            registerWithTownHall(townHallPos);
+        }
+
         // Load all systems data (excluding equipment - handled by native system)
         sleepSystem.loadData(compound);
         hungerSystem.loadData(compound);
@@ -446,8 +527,8 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         grocerSystem.loadData(compound);
         teleportSystem.loadData(compound);
         nameSystem.loadData(compound, this.registryAccess());
-        guardSystem.loadData(compound); // Load guard system data
-        minerSystem.loadData(compound); // Load miner system data
+        guardSystem.loadData(compound);
+        minerSystem.loadData(compound);
 
         // Load inventory system data (only regular inventory, not equipment)
         inventorySystem.loadData(compound, this.registryAccess());
@@ -498,6 +579,16 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
             checkForNewDay();
         }
 
+        // NEW: Check for town hall registration periodically (every 10 seconds for unregistered NPCs)
+        if (!this.level().isClientSide() && !isRegisteredToTownHall() && tickCount % 200 == 0) {
+            findAndRegisterWithNearestTownHall();
+        }
+
+        // NEW: Validate town hall registration periodically (every 30 seconds for registered NPCs)
+        if (!this.level().isClientSide() && isRegisteredToTownHall() && tickCount % 600 == 0) {
+            validateTownHallRegistration();
+        }
+
         // Update all systems including guard and miner systems
         sleepSystem.tick();
         hungerSystem.tick();
@@ -507,8 +598,8 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         farmingSystem.tick();
         grocerSystem.tick();
         teleportSystem.tick();
-        guardSystem.tick(); // Update guard system
-        minerSystem.tick(); // Update miner system
+        guardSystem.tick();
+        minerSystem.tick();
 
         // Handle aging for children
         if (!this.level().isClientSide && isChild()) {
@@ -521,6 +612,28 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                 ageToAdult();
             }
         }
+    }
+
+    private void validateTownHallRegistration() {
+        Optional<BlockPos> townHallPos = getTownHallPos();
+        if (townHallPos.isPresent()) {
+            BlockEntity blockEntity = level().getBlockEntity(townHallPos.get());
+            if (!(blockEntity instanceof TownHallBlockEntity townHall)) {
+                // Town hall no longer exists, unregister
+                unregisterFromTownHall();
+            } else {
+                // Check if we're still within the town hall's radius
+                if (!townHall.isWithinStableScanArea(this.blockPosition(), townHall.getCurrentScanRadius())) {
+                    // Outside town hall's radius, unregister and look for a new one
+                    unregisterFromTownHall();
+                    findAndRegisterWithNearestTownHall();
+                }
+            }
+        }
+    }
+
+    private int getAgingTarget() {
+        return this.getPersistentData().getInt("AgingTarget");
     }
 
     private void checkForNewDay() {
@@ -582,8 +695,8 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                         // Refresh inventory to ensure clean data (removes 0-quantity items)
                         grocerSystem.refreshInventoryDisplay();
 
-                        // Get current inventory data
-                        List<GrocerSystem.GrocerInventoryEntry> entries = grocerSystem.getSortedInventoryEntries();
+                        // Get current grocer inventory data
+                        List<GrocerSystem.GrocerInventoryEntry> grocerEntries = grocerSystem.getSortedInventoryEntries();
                         String grocerName = this.getDisplayName().getString();
 
                         // Get grocer balance
@@ -592,8 +705,55 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                         // Get player's current balance from their persistent data
                         long playerBalance = serverPlayer.getPersistentData().getLong(COIN_BALANCE_KEY);
 
-                        // Send packet to client to open GUI with both balances
-                        OpenGrocerInventoryPacket packet = new OpenGrocerInventoryPacket(grocerName, entries, grocerBalance, playerBalance);
+                        // NEW: Scan player's inventory for sellable items (items on the grocer whitelist)
+                        List<OpenGrocerInventoryPacket.PlayerInventoryEntry> playerEntries = new ArrayList<>();
+                        net.minecraft.world.Container playerInventory = serverPlayer.getInventory();
+
+                        for (int slot = 0; slot < playerInventory.getContainerSize(); slot++) {
+                            ItemStack stack = playerInventory.getItem(slot);
+                            if (!stack.isEmpty()) {
+                                // Get the item key
+                                net.minecraft.resources.ResourceLocation itemLocation = net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(stack.getItem());
+                                if (itemLocation != null) {
+                                    String itemKey = itemLocation.toString();
+
+                                    // Check if this item is allowed to be sold to grocers
+                                    if (net.darkflameproduction.agotmod.util.ItemPricing.isItemAllowed(itemKey)) {
+                                        String displayName = stack.getHoverName().getString();
+                                        int amount = stack.getCount();
+
+                                        // Check if we already have this item in our list (combine stacks)
+                                        boolean found = false;
+                                        for (int i = 0; i < playerEntries.size(); i++) {
+                                            OpenGrocerInventoryPacket.PlayerInventoryEntry existing = playerEntries.get(i);
+                                            if (existing.itemKey.equals(itemKey)) {
+                                                // Combine with existing entry (we'll use the first slot found for the slot reference)
+                                                playerEntries.set(i, new OpenGrocerInventoryPacket.PlayerInventoryEntry(
+                                                        existing.displayName,
+                                                        existing.amount + amount,
+                                                        existing.itemKey,
+                                                        existing.slot // Keep the first slot as reference
+                                                ));
+                                                found = true;
+                                                break;
+                                            }
+                                        }
+
+                                        if (!found) {
+                                            // Add new entry
+                                            playerEntries.add(new OpenGrocerInventoryPacket.PlayerInventoryEntry(
+                                                    displayName, amount, itemKey, slot
+                                            ));
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        // Send packet to client to open GUI with both grocer and player inventories and both balances
+                        OpenGrocerInventoryPacket packet = new OpenGrocerInventoryPacket(
+                                grocerName, grocerEntries, playerEntries, grocerBalance, playerBalance
+                        );
                         serverPlayer.connection.send(packet);
                     }
                     return InteractionResult.SUCCESS;
@@ -633,11 +793,17 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
 
     @Override
     public void remove(RemovalReason reason) {
+        // Clean up town hall registration
+        if (isRegisteredToTownHall()) {
+            unregisterFromTownHall();
+        }
+
+        // Clean up all systems
         jobSystem.onRemove();
         sleepSystem.onRemove();
         homeSystem.onRemove();
         grocerSystem.onRemove();
-        guardSystem.onRemove(); // Clean up guard system
+        guardSystem.onRemove();
         // No special cleanup needed for miner system currently
 
         // Don't drop items when killed - comment out the inventory drop
@@ -851,9 +1017,6 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     /**
      * Gets the aging target for this child (stored in persistent data)
      */
-    private int getAgingTarget() {
-        return this.getPersistentData().getInt("AgingTarget");
-    }
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {

@@ -40,6 +40,12 @@ public class TownHallScreen extends Screen {
     private String claimedByHouse = "";
     private net.minecraft.client.gui.components.Button claimButton;
 
+    // NEW: Job management data
+    private int availableJobCount = 0;
+    private int assignedJobCount = 0;
+    private int totalJobCount = 0;
+    private int joblessCount = 0;
+
     // Text input field for town name
     private net.minecraft.client.gui.components.EditBox townNameInput;
 
@@ -53,9 +59,9 @@ public class TownHallScreen extends Screen {
     protected void init() {
         super.init();
 
-        // Calculate panel dimensions for positioning
-        int panelWidth = Math.min(350, width - 40);
-        int panelHeight = Math.min(300, height - 40); // Increased height for claim button
+        // Calculate panel dimensions for positioning (increased for job data)
+        int panelWidth = Math.min(400, width - 40); // Increased width
+        int panelHeight = Math.min(350, height - 40); // Increased height for job info
         int panelX = (width - panelWidth) / 2;
         int panelY = (height - panelHeight) / 2;
 
@@ -113,8 +119,11 @@ public class TownHallScreen extends Screen {
         }
     }
 
-    // Static method for packet handler to update data with radius and town name
-    public static void updateTownHallData(int bedCount, int citizenCount, int radius, String townName, boolean isClaimed, String claimedByHouse) {
+    // UPDATED: Static method for packet handler to update data with job management
+    public static void updateTownHallData(int bedCount, int citizenCount, int radius, String townName,
+                                          boolean isClaimed, String claimedByHouse,
+                                          int availableJobCount, int assignedJobCount,
+                                          int totalJobCount, int joblessCount) {
         if (currentInstance != null) {
             currentInstance.bedCount = bedCount;
             currentInstance.citizenCount = citizenCount;
@@ -122,6 +131,12 @@ public class TownHallScreen extends Screen {
             currentInstance.townName = townName;
             currentInstance.isClaimed = isClaimed;
             currentInstance.claimedByHouse = claimedByHouse;
+
+            // NEW: Update job management data
+            currentInstance.availableJobCount = availableJobCount;
+            currentInstance.assignedJobCount = assignedJobCount;
+            currentInstance.totalJobCount = totalJobCount;
+            currentInstance.joblessCount = joblessCount;
 
             // Update the input field if it exists
             if (currentInstance.townNameInput != null) {
@@ -133,6 +148,12 @@ public class TownHallScreen extends Screen {
                 currentInstance.claimButton.visible = !isClaimed;
             }
         }
+    }
+
+    // BACKWARDS COMPATIBILITY: Static method for packet handler without job data
+    public static void updateTownHallData(int bedCount, int citizenCount, int radius, String townName,
+                                          boolean isClaimed, String claimedByHouse) {
+        updateTownHallData(bedCount, citizenCount, radius, townName, isClaimed, claimedByHouse, 0, 0, 0, 0);
     }
 
     public static TownHallScreen getCurrentInstance() {
@@ -174,14 +195,56 @@ public class TownHallScreen extends Screen {
         }
     }
 
+    /**
+     * NEW: Get job market status for display
+     */
+    private String getJobMarketStatus() {
+        if (totalJobCount == 0) {
+            return "No Jobs Available";
+        }
+
+        if (joblessCount == 0 && availableJobCount == 0) {
+            return "Full Employment";
+        }
+
+        if (joblessCount > 0 && availableJobCount > 0) {
+            return "Jobs Available";
+        }
+
+        if (joblessCount > 0 && availableJobCount == 0) {
+            return "Job Shortage";
+        }
+
+        if (joblessCount == 0 && availableJobCount > 0) {
+            return "Labor Shortage";
+        }
+
+        return "Stable";
+    }
+
+    /**
+     * NEW: Get job market status color
+     */
+    private int getJobMarketStatusColor() {
+        String status = getJobMarketStatus();
+        return switch (status) {
+            case "Full Employment", "Stable" -> 0xFF2E7D32; // Green
+            case "Jobs Available" -> 0xFF1565C0; // Blue
+            case "Job Shortage" -> 0xFFFF8F00; // Orange
+            case "Labor Shortage" -> 0xFFD32F2F; // Red
+            case "No Jobs Available" -> 0xFF424242; // Gray
+            default -> TEXT_COLOR;
+        };
+    }
+
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         // Render background
         guiGraphics.fill(0, 0, width, height, 0x40E6D8B7);
 
-        // Calculate panel dimensions (smaller since we have less content)
-        int panelWidth = Math.min(350, width - 40);
-        int panelHeight = Math.min(250, height - 40);
+        // Calculate panel dimensions (increased for job data)
+        int panelWidth = Math.min(400, width - 40);
+        int panelHeight = Math.min(350, height - 40);
         int panelX = (width - panelWidth) / 2;
         int panelY = (height - panelHeight) / 2;
 
@@ -201,12 +264,12 @@ public class TownHallScreen extends Screen {
                 TEXT_COLOR);
 
         // Content area starts here
-        drawContent(guiGraphics, panelX, panelY + 50, panelWidth, panelHeight - 70);
+        drawContent(guiGraphics, panelX, panelY + 50, panelWidth, panelHeight - 120); // Adjusted for larger content
 
         // Draw instruction text above input field
         String instructionText = "Town Name:";
         int instructionX = panelX + 20;
-        int instructionY = panelY + panelHeight - 70;
+        int instructionY = panelY + panelHeight - 100; // Adjusted position
         guiGraphics.drawString(font, instructionText, instructionX, instructionY, TEXT_COLOR, false);
 
         super.render(guiGraphics, mouseX, mouseY, partialTick);
@@ -250,6 +313,21 @@ public class TownHallScreen extends Screen {
         townInfo.add("Citizens: " + citizenCount);
         townInfo.add("Current Radius: " + currentRadius + " blocks");
 
+        // NEW: Add job management section
+        townInfo.add("");
+        townInfo.add("=== EMPLOYMENT ===");
+        townInfo.add("Total Jobs: " + totalJobCount);
+        townInfo.add("Available: " + availableJobCount);
+        townInfo.add("Occupied: " + assignedJobCount);
+        townInfo.add("Unemployed: " + joblessCount);
+        townInfo.add("Status: " + getJobMarketStatus());
+
+        // NEW: Add employment rate if there are jobs
+        if (totalJobCount > 0) {
+            int employmentRate = (assignedJobCount * 100) / totalJobCount;
+            townInfo.add("Job Utilization: " + employmentRate + "%");
+        }
+
         int textY = y + 20;
         for (String info : townInfo) {
             if (info.isEmpty()) {
@@ -276,6 +354,28 @@ public class TownHallScreen extends Screen {
                 guiGraphics.pose().popPose();
                 textY += (int)(font.lineHeight * scale) + 5;
                 continue;
+            }
+            // NEW: Job management colors
+            else if (info.equals("=== EMPLOYMENT ===")) {
+                float scale = 1.1f;
+                guiGraphics.pose().pushPose();
+                guiGraphics.pose().scale(scale, scale, 1.0f);
+                int headerColor = 0xFF4A148C; // Purple for employment header
+                int scaledX = (int)((x + (width - font.width(info) * scale) / 2) / scale);
+                guiGraphics.drawString(font, info, scaledX, (int)(textY / scale), headerColor, false);
+                guiGraphics.pose().popPose();
+                textY += (int)(font.lineHeight * scale) + 3;
+                continue;
+            } else if (info.startsWith("Total Jobs") || info.startsWith("Job Utilization")) {
+                color = 0xFF2E7D32; // Green for job stats
+            } else if (info.startsWith("Available")) {
+                color = availableJobCount > 0 ? 0xFF388E3C : 0xFF757575; // Green if available, gray if none
+            } else if (info.startsWith("Occupied")) {
+                color = assignedJobCount > 0 ? 0xFF1976D2 : 0xFF757575; // Blue if occupied, gray if none
+            } else if (info.startsWith("Unemployed")) {
+                color = joblessCount > 0 ? 0xFFD32F2F : 0xFF2E7D32; // Red if unemployed, green if none
+            } else if (info.startsWith("Status:")) {
+                color = getJobMarketStatusColor();
             }
 
             guiGraphics.drawString(font, info, textX, textY, color, false);
