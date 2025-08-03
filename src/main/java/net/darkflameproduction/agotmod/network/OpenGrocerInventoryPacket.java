@@ -9,7 +9,28 @@ import net.darkflameproduction.agotmod.entity.custom.npc.system.grocer.GrocerSys
 import java.util.ArrayList;
 import java.util.List;
 
-public record OpenGrocerInventoryPacket(String grocerName, List<GrocerSystem.GrocerInventoryEntry> entries, long grocerBalance, long playerBalance) implements CustomPacketPayload {
+public record OpenGrocerInventoryPacket(
+        String grocerName,
+        List<GrocerSystem.GrocerInventoryEntry> grocerEntries,
+        List<PlayerInventoryEntry> playerEntries,  // NEW: Player inventory for selling
+        long grocerBalance,
+        long playerBalance
+) implements CustomPacketPayload {
+
+    // NEW: Player inventory entry class
+    public static class PlayerInventoryEntry {
+        public final String displayName;
+        public final int amount;
+        public final String itemKey;
+        public final int slot; // Track which inventory slot this is from
+
+        public PlayerInventoryEntry(String displayName, int amount, String itemKey, int slot) {
+            this.displayName = displayName;
+            this.amount = amount;
+            this.itemKey = itemKey;
+            this.slot = slot;
+        }
+    }
 
     public static final CustomPacketPayload.Type<OpenGrocerInventoryPacket> TYPE =
             new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath("agotmod", "open_grocer_inventory"));
@@ -21,32 +42,54 @@ public record OpenGrocerInventoryPacket(String grocerName, List<GrocerSystem.Gro
 
     public static void write(FriendlyByteBuf buf, OpenGrocerInventoryPacket packet) {
         buf.writeUtf(packet.grocerName);
-        buf.writeLong(packet.grocerBalance); // Write grocer balance
-        buf.writeLong(packet.playerBalance); // NEW: Write player balance
-        buf.writeInt(packet.entries.size());
+        buf.writeLong(packet.grocerBalance);
+        buf.writeLong(packet.playerBalance);
 
-        for (GrocerSystem.GrocerInventoryEntry entry : packet.entries) {
+        // Write grocer entries
+        buf.writeInt(packet.grocerEntries.size());
+        for (GrocerSystem.GrocerInventoryEntry entry : packet.grocerEntries) {
             buf.writeUtf(entry.displayName);
             buf.writeInt(entry.amount);
             buf.writeUtf(entry.itemKey);
+        }
+
+        // NEW: Write player entries
+        buf.writeInt(packet.playerEntries.size());
+        for (PlayerInventoryEntry entry : packet.playerEntries) {
+            buf.writeUtf(entry.displayName);
+            buf.writeInt(entry.amount);
+            buf.writeUtf(entry.itemKey);
+            buf.writeInt(entry.slot);
         }
     }
 
     public static OpenGrocerInventoryPacket read(FriendlyByteBuf buf) {
         String grocerName = buf.readUtf();
-        long grocerBalance = buf.readLong(); // Read grocer balance
-        long playerBalance = buf.readLong(); // NEW: Read player balance
-        int size = buf.readInt();
-        List<GrocerSystem.GrocerInventoryEntry> entries = new ArrayList<>();
+        long grocerBalance = buf.readLong();
+        long playerBalance = buf.readLong();
 
-        for (int i = 0; i < size; i++) {
+        // Read grocer entries
+        int grocerSize = buf.readInt();
+        List<GrocerSystem.GrocerInventoryEntry> grocerEntries = new ArrayList<>();
+        for (int i = 0; i < grocerSize; i++) {
             String displayName = buf.readUtf();
             int amount = buf.readInt();
             String itemKey = buf.readUtf();
-            entries.add(new GrocerSystem.GrocerInventoryEntry(displayName, amount, itemKey));
+            grocerEntries.add(new GrocerSystem.GrocerInventoryEntry(displayName, amount, itemKey));
         }
 
-        return new OpenGrocerInventoryPacket(grocerName, entries, grocerBalance, playerBalance);
+        // NEW: Read player entries
+        int playerSize = buf.readInt();
+        List<PlayerInventoryEntry> playerEntries = new ArrayList<>();
+        for (int i = 0; i < playerSize; i++) {
+            String displayName = buf.readUtf();
+            int amount = buf.readInt();
+            String itemKey = buf.readUtf();
+            int slot = buf.readInt();
+            playerEntries.add(new PlayerInventoryEntry(displayName, amount, itemKey, slot));
+        }
+
+        return new OpenGrocerInventoryPacket(grocerName, grocerEntries, playerEntries, grocerBalance, playerBalance);
     }
 
     @Override

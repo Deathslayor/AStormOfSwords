@@ -1,4 +1,4 @@
-// 1.21.3	2025-06-12T00:12:02.9803108	Registries
+// 1.21.3	2025-08-03T16:17:50.963544	Registries
 04959ff97a94a491f8a432926d521f167e9531be data/agotmod/banner_pattern/arryn.json
 e17fd35d2836802979bf988c2a96a06599d04697 data/agotmod/banner_pattern/baelish.json
 e19718623618fa07d759962c4e924b518ca9ca5f data/agotmod/banner_pattern/baratheon.json
@@ -304,7 +304,7 @@ c1f714eb69890c1d7915e44fef85074256fb196d data/agotmod/worldgen/placed_feature/ce
 a7bcb32773f8f2858d7cbc92798bd7692841d16d data/agotmod/worldgen/placed_feature/clay_patch.json
 0e488f2087feb54754a5f8f60bf138bc164180cd data/agotmod/worldgen/placed_feature/coal_ore_placed.json
 217d61358265630d3171ff17f437a6807d3a07e4 data/agotmod/worldgen/placed_feature/coldsnap.json
-64e6a8441fceb66b4e6b1f391b51b92054cf038d data/agotmod/worldgen/placed_feature/copper_ore_placed.json
+4da9221e1781a6d315acb57cf6ee8c116544d1e6 data/agotmod/worldgen/placed_feature/copper_ore_placed.json
 f27b5677a213114fb979722c7800fbe8cac2f114 data/agotmod/worldgen/placed_feature/cottonwood.json
 e754df84b2dd5126328bba482556165976ab4efb data/agotmod/worldgen/placed_feature/cottonwood_rare.json
 59ac44ccc2af65fe4bb9a4b3ee27d87841439635 data/agotmod/worldgen/placed_feature/crabapple.json
@@ -343,7 +343,7 @@ efdec9e3ece6d23d2c081ebe44453828633716cd data/agotmod/worldgen/placed_feature/gr
 a618be80b5b5b73d319fc32ead45aa943304d362 data/agotmod/worldgen/placed_feature/hawthorn_rare.json
 04dfd138006a9dec414ad95398bb4cb171578de4 data/agotmod/worldgen/placed_feature/ironwood.json
 73cb58ffd9682b6a5faa92bed23d38864385af2a data/agotmod/worldgen/placed_feature/ironwood_rare.json
-8617975166a939b4bbd3e8c33b2a91632842ad3c data/agotmod/worldgen/placed_feature/iron_ore_placed.json
+cdf0dce9a085c2c522574a55f77c126a6c17d6a7 data/agotmod/worldgen/placed_feature/iron_ore_placed.json
 75ac4f8d89c7b01f685160d547f003d79c4ac2ce data/agotmod/worldgen/placed_feature/jade_ore_placed.json
 fd97d5b523de757277e28520481b18feabe84d35 data/agotmod/worldgen/placed_feature/jasper_ore_placed.json
 339290659289b3e98700dcbf677d4251acba01f5 data/agotmod/worldgen/placed_feature/kelp.json
@@ -429,7 +429,7 @@ e6c61108a3efde96fc8f04ddf22a03a44c77b681 data/agotmod/worldgen/placed_feature/ta
 e22fe8f4a70e8034ea47bdffb9e4e7d1376816d7 data/agotmod/worldgen/placed_feature/tigers_eye_ore_placed.json
 cfd0631d78855f20863431b2fb7a55a4ce98d8a5 data/agotmod/worldgen/placed_feature/tigerwood.json
 a160351a8874fc5c12942409e8c2544da0dd323f data/agotmod/worldgen/placed_feature/tigerwood_rare.json
-c1070e6718a909c65b0f5833613294e4f08f1205 data/agotmod/worldgen/placed_feature/tin_ore_placed.json
+a05d0ee9d79575c6afea0d3c3c1df951c568e294 data/agotmod/worldgen/placed_feature/tin_ore_placed.json
 5a43763ebe1e2bd9a0b45c7ce84687a5a347bfb4 data/agotmod/worldgen/placed_feature/topaz_ore_placed.json
 b335d392bbc3b1ab7cce1de84550316be97f75fd data/agotmod/worldgen/placed_feature/tourmaline_ore_placed.json
 9dae1e269ebe83e946cbd785b286362c8327f171 data/agotmod/worldgen/placed_feature/weirwood.json

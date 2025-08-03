@@ -46,38 +46,85 @@ public class ServerPacketHandler {
             }
 
             if (targetGrocer != null) {
-                // Calculate total cost
-                long totalCost = calculateTotalCost(packet.itemsToSubtract());
-
-                // Check if player has enough money
-                long playerBalance = getPlayerBalance(player);
-
-                if (playerBalance < totalCost) {
-                    player.sendSystemMessage(Component.literal("Insufficient funds! You need " + totalCost + " coins but only have " + playerBalance + "."));
-                    return;
-                }
-
-                boolean success = processTransactionAndSpawnItems(targetGrocer, packet.itemsToSubtract(), player, level);
-
-                if (success) {
-                    // Deduct money from player
-                    deductPlayerBalance(player, totalCost);
-
-                    // Add money to grocer
-                    targetGrocer.getGrocerSystem().addCoinsToBalance(totalCost);
-
-                    // Send updated balance to player
-                    long newPlayerBalance = getPlayerBalance(player);
-                    PacketDistributor.sendToPlayer(player, new CoinBalancePacket(newPlayerBalance));
-
-                    player.sendSystemMessage(Component.literal("Transaction completed! Spent " + totalCost + " coins. Remaining balance: " + newPlayerBalance));
-                } else {
-                    player.sendSystemMessage(Component.literal("Transaction failed - insufficient items!"));
+                if (packet.isBuyTransaction()) {
+                    handleBuyTransaction(packet, player, targetGrocer, level);
+                } else if (packet.isSellTransaction()) {
+                    handleSellTransaction(packet, player, targetGrocer, level);
                 }
             } else {
                 player.sendSystemMessage(Component.literal("Grocer not found!"));
             }
         });
+    }
+
+    private static void handleBuyTransaction(FinishTransactionPacket packet, ServerPlayer player, Peasant_Entity grocer, ServerLevel level) {
+        // Calculate total cost using buy prices
+        long totalCost = calculateBuyTotalCost(packet.getItemAmounts());
+
+        // Check if player has enough money
+        long playerBalance = getPlayerBalance(player);
+
+        if (playerBalance < totalCost) {
+            player.sendSystemMessage(Component.literal("Insufficient funds! You need " + totalCost + " coins but only have " + playerBalance + "."));
+            return;
+        }
+
+        // Process the buying transaction
+        boolean success = processBuyTransactionAndSpawnItems(grocer, packet.getItemAmounts(), player, level);
+
+        if (success) {
+            // Deduct money from player
+            deductPlayerBalance(player, totalCost);
+
+            // Add money to grocer
+            grocer.getGrocerSystem().addCoinsToBalance(totalCost);
+
+            // Send updated balance to player
+            long newPlayerBalance = getPlayerBalance(player);
+            PacketDistributor.sendToPlayer(player, new CoinBalancePacket(newPlayerBalance));
+
+            player.sendSystemMessage(Component.literal("Purchase completed! Spent " + totalCost + " coins. Remaining balance: " + newPlayerBalance));
+        } else {
+            player.sendSystemMessage(Component.literal("Transaction failed - insufficient items!"));
+        }
+    }
+
+    private static void handleSellTransaction(FinishTransactionPacket packet, ServerPlayer player, Peasant_Entity grocer, ServerLevel level) {
+        // Calculate total earnings using sell prices
+        long totalEarnings = calculateSellTotalEarnings(packet.getItemAmounts());
+
+        // Check if grocer has enough money
+        long grocerBalance = grocer.getGrocerSystem().getGrocerBalance();
+
+        if (grocerBalance < totalEarnings) {
+            player.sendSystemMessage(Component.literal("Grocer has insufficient funds! They have " + grocerBalance + " coins but need " + totalEarnings + "."));
+            return;
+        }
+
+        // Verify player has all the items they want to sell
+        if (!verifyPlayerHasItems(player, packet.getItemAmounts(), packet.getPlayerSlots())) {
+            player.sendSystemMessage(Component.literal("You don't have enough of the selected items to sell!"));
+            return;
+        }
+
+        // Process the selling transaction
+        boolean success = processSellTransaction(grocer, packet.getItemAmounts(), packet.getPlayerSlots(), player);
+
+        if (success) {
+            // Add money to player
+            addPlayerBalance(player, totalEarnings);
+
+            // Deduct money from grocer
+            grocer.getGrocerSystem().deductFromGrocerBalance(totalEarnings);
+
+            // Send updated balance to player
+            long newPlayerBalance = getPlayerBalance(player);
+            PacketDistributor.sendToPlayer(player, new CoinBalancePacket(newPlayerBalance));
+
+            player.sendSystemMessage(Component.literal("Sale completed! Earned " + totalEarnings + " coins. New balance: " + newPlayerBalance));
+        } else {
+            player.sendSystemMessage(Component.literal("Transaction failed!"));
+        }
     }
 
     public static void handleRequestOwnedTowns(RequestOwnedTownsPacket packet, IPayloadContext context) {
@@ -253,9 +300,19 @@ public class ServerPacketHandler {
                                     double playerDistance = nearbyPlayer.distanceToSqr(pos.getX(), pos.getY(), pos.getZ());
                                     if (playerDistance < 64 * 64) { // Within 64 blocks for GUI updates
                                         PacketDistributor.sendToPlayer(nearbyPlayer,
-                                                new TownHallDataPacket(pos, townHallBE.getBedCount(),
-                                                        townHallBE.getCitizenCount(), townHallBE.getCurrentScanRadius(),
-                                                        townHallBE.getTownName(), townHallBE.isClaimed(), townHallBE.getClaimedByHouse()));
+                                                new TownHallDataPacket(
+                                                        pos,
+                                                        townHallBE.getBedCount(),
+                                                        townHallBE.getCitizenCount(),
+                                                        townHallBE.getCurrentScanRadius(),
+                                                        townHallBE.getTownName(),
+                                                        townHallBE.isClaimed(),
+                                                        townHallBE.getClaimedByHouse(),
+                                                        townHallBE.getAvailableJobCount(),      // NEW
+                                                        townHallBE.getAssignedJobCount(),       // NEW
+                                                        townHallBE.getTotalJobCount(),          // NEW
+                                                        townHallBE.getJoblessCount()            // NEW
+                                                ));
                                     }
                                 }
                             });
@@ -312,9 +369,19 @@ public class ServerPacketHandler {
                                         double playerDistance = nearbyPlayer.distanceToSqr(pos.getX(), pos.getY(), pos.getZ());
                                         if (playerDistance < 64 * 64) { // Within 64 blocks for GUI updates
                                             PacketDistributor.sendToPlayer(nearbyPlayer,
-                                                    new TownHallDataPacket(pos, townHallBE.getBedCount(),
-                                                            townHallBE.getCitizenCount(), townHallBE.getCurrentScanRadius(),
-                                                            townHallBE.getTownName(), townHallBE.isClaimed(), townHallBE.getClaimedByHouse()));
+                                                    new TownHallDataPacket(
+                                                            pos,
+                                                            townHallBE.getBedCount(),
+                                                            townHallBE.getCitizenCount(),
+                                                            townHallBE.getCurrentScanRadius(),
+                                                            townHallBE.getTownName(),
+                                                            townHallBE.isClaimed(),
+                                                            townHallBE.getClaimedByHouse(),
+                                                            townHallBE.getAvailableJobCount(),      // NEW
+                                                            townHallBE.getAssignedJobCount(),       // NEW
+                                                            townHallBE.getTotalJobCount(),          // NEW
+                                                            townHallBE.getJoblessCount()            // NEW
+                                                    ));
                                         }
                                     }
                                 });
@@ -345,16 +412,113 @@ public class ServerPacketHandler {
         return "";
     }
 
-    private static long calculateTotalCost(Map<String, Integer> itemsToSubtract) {
+    private static long calculateBuyTotalCost(Map<String, Integer> itemAmounts) {
         long totalCost = 0;
-        for (Map.Entry<String, Integer> entry : itemsToSubtract.entrySet()) {
+        for (Map.Entry<String, Integer> entry : itemAmounts.entrySet()) {
             int amount = entry.getValue();
             if (amount > 0) {
-                int itemPrice = net.darkflameproduction.agotmod.util.ItemPricing.getItemSellPrice(entry.getKey());
+                int itemPrice = net.darkflameproduction.agotmod.util.ItemPricing.getItemPrice(entry.getKey());
                 totalCost += (long) itemPrice * amount;
             }
         }
         return totalCost;
+    }
+
+    private static long calculateSellTotalEarnings(Map<String, Integer> itemAmounts) {
+        long totalEarnings = 0;
+        for (Map.Entry<String, Integer> entry : itemAmounts.entrySet()) {
+            int amount = entry.getValue();
+            if (amount > 0) {
+                int itemPrice = net.darkflameproduction.agotmod.util.ItemPricing.getItemSellPrice(entry.getKey());
+                totalEarnings += (long) itemPrice * amount;
+            }
+        }
+        return totalEarnings;
+    }
+
+    private static boolean verifyPlayerHasItems(ServerPlayer player, Map<String, Integer> itemAmounts, Map<String, Integer> playerSlots) {
+        for (Map.Entry<String, Integer> entry : itemAmounts.entrySet()) {
+            String itemKey = entry.getKey();
+            int requiredAmount = entry.getValue();
+
+            if (requiredAmount <= 0) continue;
+
+            // Count how many of this item the player has
+            int playerHasAmount = 0;
+
+            // Check all inventory slots for this item
+            for (int slot = 0; slot < player.getInventory().getContainerSize(); slot++) {
+                ItemStack stack = player.getInventory().getItem(slot);
+                if (!stack.isEmpty()) {
+                    ResourceLocation itemLocation = BuiltInRegistries.ITEM.getKey(stack.getItem());
+                    if (itemLocation != null && itemLocation.toString().equals(itemKey)) {
+                        playerHasAmount += stack.getCount();
+                    }
+                }
+            }
+
+            if (playerHasAmount < requiredAmount) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean processSellTransaction(Peasant_Entity grocer, Map<String, Integer> itemAmounts, Map<String, Integer> playerSlots, ServerPlayer player) {
+        // Remove items from player inventory and add to grocer's digital inventory
+        for (Map.Entry<String, Integer> entry : itemAmounts.entrySet()) {
+            String itemKey = entry.getKey();
+            int amountToSell = entry.getValue();
+
+            if (amountToSell <= 0) continue;
+
+            // Remove items from player's inventory
+            int remainingToRemove = amountToSell;
+
+            for (int slot = 0; slot < player.getInventory().getContainerSize() && remainingToRemove > 0; slot++) {
+                ItemStack stack = player.getInventory().getItem(slot);
+                if (!stack.isEmpty()) {
+                    ResourceLocation itemLocation = BuiltInRegistries.ITEM.getKey(stack.getItem());
+                    if (itemLocation != null && itemLocation.toString().equals(itemKey)) {
+                        int toRemoveFromThisStack = Math.min(remainingToRemove, stack.getCount());
+
+                        // Create a stack of the items being sold to add to grocer
+                        ItemStack soldStack = new ItemStack(stack.getItem(), toRemoveFromThisStack);
+
+                        // Add to grocer's digital inventory
+                        grocer.getGrocerSystem().addToDigitalInventory(soldStack);
+
+                        // Remove from player's inventory
+                        stack.shrink(toRemoveFromThisStack);
+                        player.getInventory().setItem(slot, stack.isEmpty() ? ItemStack.EMPTY : stack);
+
+                        remainingToRemove -= toRemoveFromThisStack;
+                    }
+                }
+            }
+
+            if (remainingToRemove > 0) {
+                // This shouldn't happen if verification was done correctly
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private static void addPlayerBalance(ServerPlayer player, long amount) {
+        long currentBalance = getPlayerBalance(player);
+        long newBalance = currentBalance + amount;
+        player.getPersistentData().putLong(COIN_BALANCE_KEY, newBalance);
+    }
+
+    private static long calculateTotalCost(Map<String, Integer> itemsToSubtract) {
+        return calculateBuyTotalCost(itemsToSubtract); // Delegate to the new method
+    }
+
+    // Keep existing processBuyTransactionAndSpawnItems method (rename the old one)
+    private static boolean processBuyTransactionAndSpawnItems(Peasant_Entity grocer, Map<String, Integer> itemsToSubtract, ServerPlayer player, ServerLevel level) {
+        return processTransactionAndSpawnItems(grocer, itemsToSubtract, player, level);
     }
 
     private static long getPlayerBalance(ServerPlayer player) {

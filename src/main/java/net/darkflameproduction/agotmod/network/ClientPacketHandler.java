@@ -58,10 +58,10 @@ public class ClientPacketHandler {
         });
     }
 
-    // Add this method to ClientPacketHandler
+    // UPDATED: Handle TownHallData with job management
     public static void handleTownHallData(TownHallDataPacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
-            // Extract packet data
+            // Extract packet data including new job management fields
             BlockPos pos = packet.pos();
             int bedCount = packet.bedCount();
             int citizenCount = packet.citizenCount();
@@ -70,8 +70,25 @@ public class ClientPacketHandler {
             boolean isClaimed = packet.isClaimed();
             String claimedByHouse = packet.claimedByHouse();
 
-            // Update the Town Hall screen if it's open
-            TownHallScreen.updateTownHallData(bedCount, citizenCount, currentRadius, townName, isClaimed, claimedByHouse);
+            // NEW: Extract job management data
+            int availableJobCount = packet.availableJobCount();
+            int assignedJobCount = packet.assignedJobCount();
+            int totalJobCount = packet.totalJobCount();
+            int joblessCount = packet.joblessCount();
+
+            // Update the Town Hall screen if it's open with all data including job management
+            TownHallScreen.updateTownHallData(
+                    bedCount,
+                    citizenCount,
+                    currentRadius,
+                    townName,
+                    isClaimed,
+                    claimedByHouse,
+                    availableJobCount,    // NEW
+                    assignedJobCount,     // NEW
+                    totalJobCount,        // NEW
+                    joblessCount          // NEW
+            );
 
             // Update the debug renderer with radius and visual data
             TownHallDebugRenderer.updateTownHallData(pos, bedCount, citizenCount, currentRadius);
@@ -79,12 +96,10 @@ public class ClientPacketHandler {
             // Update the town tracker with both name and population data
             TownTracker.updateTownData(pos, townName, citizenCount);
 
-            // NEW: Update the client-side town area manager
+            // Update the client-side town area manager
             ClientTownAreaManager.updateTownArea(pos, townName, isClaimed, claimedByHouse, citizenCount, currentRadius);
         });
     }
-
-
 
     public static void handleSyncOwnedTowns(SyncOwnedTownsPacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
@@ -101,10 +116,10 @@ public class ClientPacketHandler {
             if (mc.player != null) {
                 // Access packet data using record accessor methods
                 String grocerName = packet.grocerName();
-                java.util.List<GrocerSystem.GrocerInventoryEntry> inventoryEntries = packet.entries();
+                java.util.List<GrocerSystem.GrocerInventoryEntry> grocerEntries = packet.grocerEntries();
+                java.util.List<OpenGrocerInventoryPacket.PlayerInventoryEntry> playerEntries = packet.playerEntries(); // NEW
                 long grocerBalance = packet.grocerBalance();
                 long playerBalance = packet.playerBalance();
-
 
                 // Update player's persistent data with the balance from server
                 mc.player.getPersistentData().putLong("agotmod.coin_balance", playerBalance);
@@ -113,16 +128,16 @@ public class ClientPacketHandler {
                 GrocerInventoryScreen currentScreen = GrocerInventoryScreen.getCurrentInstance();
 
                 if (currentScreen != null && mc.screen == currentScreen) {
-                    // Update existing screen with new data
-                    GrocerInventoryScreen.updateInventoryData(grocerName, inventoryEntries, grocerBalance);
+                    // Update existing screen with new data (both grocer and player inventory)
+                    GrocerInventoryScreen.updateInventoryData(grocerName, grocerEntries, playerEntries, grocerBalance);
                     GrocerInventoryScreen.updatePlayerBalance(playerBalance);
                 } else {
                     // Open new screen and populate with data
                     GrocerInventoryScreen newScreen = new GrocerInventoryScreen(grocerName);
                     mc.setScreen(newScreen);
 
-                    // Update with data immediately after opening
-                    GrocerInventoryScreen.updateInventoryData(grocerName, inventoryEntries, grocerBalance);
+                    // Update with data immediately after opening (both grocer and player inventory)
+                    GrocerInventoryScreen.updateInventoryData(grocerName, grocerEntries, playerEntries, grocerBalance);
                     GrocerInventoryScreen.updatePlayerBalance(playerBalance);
                 }
             }

@@ -90,13 +90,13 @@ public class Peasant_Renderer extends GeoEntityRenderer<Peasant_Entity> {
     private static final int FEMALE_HOOD_VARIANTS = 1; // hood_woman3.png (but numbered as 3)
 
     // Child texture variant constants
-    private static final int CHILD_MALE_BODY_VARIANTS = 1; // body_child1.png through body_child6.png
+    private static final int CHILD_MALE_BODY_VARIANTS = 3; // body_child1.png through body_child6.png
     private static final int CHILD_MALE_EYES_VARIANTS = 1; // eyes_child1.png
     private static final int CHILD_MALE_LEGS_VARIANTS = 1; // legs_child1.png
     private static final int CHILD_MALE_SHIRT_VARIANTS = 1; // shirt_child1.png
-    private static final int CHILD_MALE_HAIR_VARIANTS = 1; // hair_child1.png through hair_child24.png
-    private static final int CHILD_MALE_BOOTS_VARIANTS = 1; // boots_child1.png, boots_child2.png
-    private static final int CHILD_MALE_TUNIC_VARIANTS = 1; // tunic_child1.png through tunic_child4.png
+    private static final int CHILD_MALE_HAIR_VARIANTS = 7; // hair_child1.png through hair_child24.png
+    private static final int CHILD_MALE_BOOTS_VARIANTS = 2; // boots_child1.png, boots_child2.png
+    private static final int CHILD_MALE_TUNIC_VARIANTS = 4; // tunic_child1.png through tunic_child4.png
     private static final int CHILD_MALE_HOOD_VARIANTS = 1; // hood_child1.png through hood_child3.png
 
     private static final int CHILD_FEMALE_BODY_VARIANTS = 1; // body_woman_child1.png through body_woman_child6.png
