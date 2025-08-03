@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "agotmod:redkeep_19_block",
+  "result": {
+    "count": 1,
+    "id": "agotmod:redkeep_19_wall"
+  }
+}

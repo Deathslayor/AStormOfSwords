@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "agotmod:block/dripstone_1_slab"
+    },
+    "type=double": {
+      "model": "agotmod:block/dripstone_1_block"
+    },
+    "type=top": {
+      "model": "agotmod:block/dripstone_1_slab_top"
+    }
+  }
+}

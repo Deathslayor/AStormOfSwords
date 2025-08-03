@@ -1,0 +1,17 @@
+{
+  "name": "agotmod:the_wall_top_middle_3/bottom_top_pool_4",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "agotmod:the_wall_bottom_top_4",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      },
+      "weight": 100
+    }
+  ]
+}
+
+

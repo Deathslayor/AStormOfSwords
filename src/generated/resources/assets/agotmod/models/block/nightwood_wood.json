@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "agotmod:block/nightwood_log",
+    "side": "agotmod:block/nightwood_log"
+  }
+}

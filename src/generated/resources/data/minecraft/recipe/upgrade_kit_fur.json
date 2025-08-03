@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "minecraft:bundle",
+    "C": "agotmod:cloth",
+    "H": "agotmod:hammer",
+    "P": "agotmod:fur"
+  },
+  "pattern": [
+    "PPP",
+    "CBC",
+    "PHP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "agotmod:upgrade_kit_fur"
+  }
+}

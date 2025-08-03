@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "agotmod:block/goldenheart_log",
+    "side": "agotmod:block/goldenheart_log"
+  }
+}

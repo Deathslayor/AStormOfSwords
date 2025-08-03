@@ -1,0 +1,24 @@
+// 1.21.3	2025-06-08T12:00:02.962825	Tags for minecraft:item mod id agotmod
+eef23bfe9f45027b3b8670ec55cfa37f8a45a919 data/agotmod/tags/item/bronze_tool_materials.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/agotmod/tags/item/dragonglass_tool_materials.json
+ef380d32ef9f54efeffc7c1c7d9ccf13299c2588 data/agotmod/tags/item/steel_tool_materials.json
+ccaa5ea118f5f98977a2930eae09d9dfdb9d50c8 data/minecraft/tags/item/banners.json
+1c497fba17b6a9f9253a0830c209442e05caf4ef data/minecraft/tags/item/chest_armor.json
+a962d2c3a6128522b3dd5dd0ab313afa04aa70bc data/minecraft/tags/item/flowers.json
+29ad99f68b61290cd1b5967658b94476f8481410 data/minecraft/tags/item/foot_armor.json
+cb733be41d71abc68eb6b02bc03a02b09175d0ee data/minecraft/tags/item/freeze_immune_wearables.json
+22d68ed3266c04f508a8a5afd9e4996411737e6f data/minecraft/tags/item/head_armor.json
+fcc5812789a8e1524f77b0a7e22a22d073ef5c0d data/minecraft/tags/item/leaves.json
+8de518102c8a348cff71dda1fd2069c7241f974e data/minecraft/tags/item/leg_armor.json
+bc5611de8a6be7053e7c3a43907eb3e03896cdb9 data/minecraft/tags/item/logs_that_burn.json
+d457c3ba9d677de4c18c40fa058a73a213f7b418 data/minecraft/tags/item/meat.json
+fe3405c1c8cc7d104d551da1fe7fa88c5cba85cd data/minecraft/tags/item/planks.json
+daa87a0184a45253353e0c48c5c66d8af3fabbff data/minecraft/tags/item/stone_bricks.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/minecraft/tags/item/walls.json
+536fe34ff6f1c2e88a5498213e9f8912abc90cb4 data/minecraft/tags/item/wooden_buttons.json
+2e1d258ca218b5d97ee5feaee2c6a4b2d52eae95 data/minecraft/tags/item/wooden_doors.json
+133b4830c91949581cd59cc69b38f81e62f6228f data/minecraft/tags/item/wooden_fences.json
+63fa5ba4f59b01d8e228370a6f8ba65dbba92168 data/minecraft/tags/item/wooden_pressure_plates.json
+30b91d5776c21d856e267926fae359d4b791ae41 data/minecraft/tags/item/wooden_slabs.json
+dfc04a92ba13b929b81c3a86463627cc4cff3fc7 data/minecraft/tags/item/wooden_stairs.json
+938cbb1cd2c60f88e96e272bf94106c0c0e8e96b data/minecraft/tags/item/wooden_trapdoors.json

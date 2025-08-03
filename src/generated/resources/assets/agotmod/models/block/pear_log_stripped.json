@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "agotmod:block/pear_log_top_stripped",
+    "side": "agotmod:block/pear_log_stripped"
+  }
+}

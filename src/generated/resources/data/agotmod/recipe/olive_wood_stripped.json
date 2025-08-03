@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:olive_log_stripped",
+    "agotmod:olive_log_stripped",
+    "agotmod:olive_log_stripped",
+    "agotmod:olive_log_stripped"
+  ],
+  "result": {
+    "count": 3,
+    "id": "agotmod:olive_wood_stripped"
+  }
+}

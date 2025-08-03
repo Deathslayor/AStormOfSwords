@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:nightwood_log",
+    "agotmod:nightwood_log",
+    "agotmod:nightwood_log",
+    "agotmod:nightwood_log"
+  ],
+  "result": {
+    "count": 3,
+    "id": "agotmod:nightwood_wood"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:ebony_log",
+    "agotmod:ebony_log",
+    "agotmod:ebony_log",
+    "agotmod:ebony_log"
+  ],
+  "result": {
+    "count": 3,
+    "id": "agotmod:ebony_wood"
+  }
+}

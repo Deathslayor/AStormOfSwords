@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "agotmod:block/blackthorn_log_stripped",
+    "side": "agotmod:block/blackthorn_log_stripped"
+  }
+}

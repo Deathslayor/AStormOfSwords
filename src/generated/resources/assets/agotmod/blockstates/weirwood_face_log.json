@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "agotmod:block/weirwood_face_log",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "agotmod:block/weirwood_face_log"
+    },
+    "facing=south": {
+      "model": "agotmod:block/weirwood_face_log",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "agotmod:block/weirwood_face_log",
+      "y": 270
+    }
+  }
+}

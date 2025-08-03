@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.15,
+  "ingredient": "agotmod:blackthorn_wood_stripped",
+  "result": {
+    "count": 1,
+    "id": "minecraft:charcoal"
+  }
+}

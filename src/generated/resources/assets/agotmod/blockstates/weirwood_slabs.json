@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "agotmod:block/weirwood_slabs"
+    },
+    "type=double": {
+      "model": "agotmod:block/weirwood_planks"
+    },
+    "type=top": {
+      "model": "agotmod:block/weirwood_slabs_top"
+    }
+  }
+}

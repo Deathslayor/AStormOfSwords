@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "agotmod:block/tigerwood_log",
+    "side": "agotmod:block/tigerwood_log"
+  }
+}

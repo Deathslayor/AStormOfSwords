@@ -1,0 +1,33 @@
+{
+  "name": "agotmod:northern_farm/northern_farm_left_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "agotmod:northern_farm_cow_ranch",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      },
+      "weight": 40
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "agotmod:northern_farm_pig_ranch",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      },
+      "weight": 30
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "agotmod:northern_farm_sheep_ranch",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      },
+      "weight": 30
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "agotmod:block/blackthorn_slabs"
+    },
+    "type=double": {
+      "model": "agotmod:block/blackthorn_planks"
+    },
+    "type=top": {
+      "model": "agotmod:block/blackthorn_slabs_top"
+    }
+  }
+}

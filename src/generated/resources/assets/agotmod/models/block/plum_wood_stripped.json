@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "agotmod:block/plum_log_stripped",
+    "side": "agotmod:block/plum_log_stripped"
+  }
+}

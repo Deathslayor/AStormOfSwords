@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "agotmod:rsandstone_32_block",
+  "result": {
+    "count": 2,
+    "id": "agotmod:rsandstone_32_slab"
+  }
+}

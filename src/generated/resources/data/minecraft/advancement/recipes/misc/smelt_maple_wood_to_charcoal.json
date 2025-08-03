@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_maple_wood": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:maple_wood"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:smelt_maple_wood_to_charcoal"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_maple_wood"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:smelt_maple_wood_to_charcoal"
+    ]
+  }
+}

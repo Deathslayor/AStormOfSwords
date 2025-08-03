@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.15,
+  "ingredient": "agotmod:stripped_weirwood_log",
+  "result": {
+    "count": 1,
+    "id": "minecraft:charcoal"
+  }
+}

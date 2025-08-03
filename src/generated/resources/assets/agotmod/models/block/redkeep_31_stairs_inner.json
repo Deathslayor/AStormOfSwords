@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "agotmod:block/redkeep_31_block",
+    "side": "agotmod:block/redkeep_31_block",
+    "top": "agotmod:block/redkeep_31_block"
+  }
+}

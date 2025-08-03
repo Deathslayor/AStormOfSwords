@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:peach_wood"
+  ],
+  "result": {
+    "count": 4,
+    "id": "agotmod:peach_planks"
+  }
+}

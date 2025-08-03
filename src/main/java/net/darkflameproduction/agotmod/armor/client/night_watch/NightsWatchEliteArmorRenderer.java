@@ -1,0 +1,15 @@
+package net.darkflameproduction.agotmod.armor.client.night_watch;// Importing necessary classes from other packages
+
+import net.darkflameproduction.agotmod.armor.custom.night_watch.NightsWatchEliteArmorItem;
+import net.darkflameproduction.agotmod.armor.custom.stark.StarkLevyArmorItem;
+import software.bernie.geckolib.renderer.GeoArmorRenderer;
+
+// Stark1ArmorRenderer class extending GeoArmorRenderer for Stark1ArmorItem
+public class NightsWatchEliteArmorRenderer extends GeoArmorRenderer<NightsWatchEliteArmorItem> {
+
+    // Constructor for Stark1ArmorRenderer
+    public NightsWatchEliteArmorRenderer() {
+        // Call the constructor of the superclass (GeoArmorRenderer) with a new instance of Stark1ArmorModel
+        super(new NightsWatchEliteArmorModel());
+    }
+}

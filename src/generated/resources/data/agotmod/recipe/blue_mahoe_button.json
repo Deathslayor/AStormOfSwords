@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "B": "agotmod:blue_mahoe_planks"
+  },
+  "pattern": [
+    "B"
+  ],
+  "result": {
+    "count": 1,
+    "id": "agotmod:blue_mahoe_button"
+  }
+}

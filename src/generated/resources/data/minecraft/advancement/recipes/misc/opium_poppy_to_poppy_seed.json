@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_opium_poppy_wild": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:opium_poppy_wild"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:opium_poppy_to_poppy_seed"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_opium_poppy_wild"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:opium_poppy_to_poppy_seed"
+    ]
+  }
+}

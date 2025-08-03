@@ -1,0 +1,10 @@
+{
+  "biome": "agotmod:northern_waters",
+  "carver_modifier": 26.0,
+  "color": "#0053d9",
+  "height": -20,
+  "layers": {
+    "surface": "minecraft:sand"
+  },
+  "pixel_weight": 3.0
+}

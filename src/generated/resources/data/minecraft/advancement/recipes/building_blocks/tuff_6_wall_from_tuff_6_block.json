@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:tuff_6_wall_from_tuff_6_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_tuff_brick_6_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:tuff_brick_6_block"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_tuff_brick_6_block"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:tuff_6_wall_from_tuff_6_block"
+    ]
+  }
+}

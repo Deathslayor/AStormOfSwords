@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "agotmod:manderly_noble_smithing_scroll",
+  "base": "agotmod:manderly_plate_leggings",
+  "result": {
+    "count": 1,
+    "id": "agotmod:manderly_noble_leggings"
+  },
+  "template": "agotmod:upgrade_kit_noble"
+}

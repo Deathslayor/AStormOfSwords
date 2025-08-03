@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sandstone_12_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:sandstone_12_block"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:sandstone_12_slab_from_sandstone_12_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_sandstone_12_block"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:sandstone_12_slab_from_sandstone_12_block"
+    ]
+  }
+}

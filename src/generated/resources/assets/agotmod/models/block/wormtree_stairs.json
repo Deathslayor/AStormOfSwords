@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "agotmod:block/wormtree_planks",
+    "side": "agotmod:block/wormtree_planks",
+    "top": "agotmod:block/wormtree_planks"
+  }
+}

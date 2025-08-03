@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_mulberry": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:mulberry"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:mulberry_to_mulberry_seeds"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_mulberry"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:mulberry_to_mulberry_seeds"
+    ]
+  }
+}

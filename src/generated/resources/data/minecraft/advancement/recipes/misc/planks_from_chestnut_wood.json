@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_chestnut_wood": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:chestnut_wood"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:planks_from_chestnut_wood"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_chestnut_wood"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:planks_from_chestnut_wood"
+    ]
+  }
+}

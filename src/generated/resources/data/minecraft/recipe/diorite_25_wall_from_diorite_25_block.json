@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "agotmod:diorite_25_block",
+  "result": {
+    "count": 1,
+    "id": "agotmod:diorite_25_wall"
+  }
+}

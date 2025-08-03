@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:stripped_weirwood_wood"
+  ],
+  "result": {
+    "count": 4,
+    "id": "agotmod:weirwood_planks"
+  }
+}

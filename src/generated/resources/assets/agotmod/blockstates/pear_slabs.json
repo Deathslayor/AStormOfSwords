@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "agotmod:block/pear_slabs"
+    },
+    "type=double": {
+      "model": "agotmod:block/pear_planks"
+    },
+    "type=top": {
+      "model": "agotmod:block/pear_slabs_top"
+    }
+  }
+}

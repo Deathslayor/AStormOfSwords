@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "agotmod:item/nights_watch_elite_smithing_scroll"
+  }
+}

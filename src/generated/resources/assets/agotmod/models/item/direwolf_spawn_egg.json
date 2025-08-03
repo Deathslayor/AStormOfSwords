@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/template_spawn_egg",
+  "textures": {
+    "layer0": "agotmod:item/spawn_egg",
+    "layer1": "agotmod:item/spawn_egg_overlay"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "agotmod:thenn_noble_smithing_scroll",
+  "base": "agotmod:thenn_bronze_helmet",
+  "result": {
+    "count": 1,
+    "id": "agotmod:thenn_chief_helmet"
+  },
+  "template": "agotmod:upgrade_kit_bronze_plate"
+}

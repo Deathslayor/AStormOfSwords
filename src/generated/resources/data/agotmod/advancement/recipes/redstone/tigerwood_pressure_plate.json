@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "agotmod:tigerwood_pressure_plate"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_tigerwood_planks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:tigerwood_planks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_tigerwood_planks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "agotmod:tigerwood_pressure_plate"
+    ]
+  }
+}

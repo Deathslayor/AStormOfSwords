@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:blackthorn_wood_stripped"
+  ],
+  "result": {
+    "count": 4,
+    "id": "agotmod:blackthorn_planks"
+  }
+}

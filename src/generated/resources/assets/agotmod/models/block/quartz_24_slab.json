@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "agotmod:block/quartz_24_block",
+    "side": "agotmod:block/quartz_24_block",
+    "top": "agotmod:block/quartz_24_block"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "W": "minecraft:white_wool"
+  },
+  "pattern": [
+    "W",
+    "W"
+  ],
+  "result": {
+    "count": 1,
+    "id": "agotmod:cloth"
+  }
+}

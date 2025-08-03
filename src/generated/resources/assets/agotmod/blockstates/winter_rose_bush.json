@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "agotmod:block/winter_rose_bush_bottom"
+    },
+    "half=upper": {
+      "model": "agotmod:block/winter_rose_bush_top"
+    }
+  }
+}
