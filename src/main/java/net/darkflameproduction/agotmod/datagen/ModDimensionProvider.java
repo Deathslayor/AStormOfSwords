@@ -1,10 +1,9 @@
 package net.darkflameproduction.agotmod.datagen;
 
-import dev.tocraft.ctgen.util.Noise;
 import dev.tocraft.ctgen.worldgen.MapBasedChunkGenerator;
 import dev.tocraft.ctgen.worldgen.MapSettingsBuilder;
+import dev.tocraft.ctgen.worldgen.noise.CTGenNoiseSettings;
 import dev.tocraft.ctgen.xtend.CTRegistries;
-import dev.tocraft.ctgen.xtend.carver.NoiseCarver;
 import dev.tocraft.ctgen.zone.Zone;
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.minecraft.core.Holder;
@@ -16,6 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.dimension.LevelStem;
+import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
 import net.minecraft.world.level.levelgen.presets.WorldPreset;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Unmodifiable;
@@ -36,13 +36,12 @@ public class ModDimensionProvider {
         HolderGetter<DimensionType> dimTypeRegistry = context.lookup(Registries.DIMENSION_TYPE);
         HolderGetter<Zone> zoneRegistry = context.lookup(CTRegistries.ZONES_KEY);
         context.register(KNOWN_WORLD_PRESET, new WorldPreset(Map.of(LevelStem.OVERWORLD, new LevelStem(dimTypeRegistry.getOrThrow(BuiltinDimensionTypes.OVERWORLD), MapBasedChunkGenerator.of(new MapSettingsBuilder()
-                .setBiomeMapId(KNOWN_WORLD)
+                .setMapId(KNOWN_WORLD)
                 .setZones(getZones(zoneRegistry))
                 .setDefaultBiome(zoneRegistry.getOrThrow(ModZones.DEEP_COLD_OCEAN))
                 .setSpawnX(3500)
                 .setSpawnY(6000)
-                .setPixelsAreChunks(false)
-                .setCarver(new NoiseCarver(new Noise(List.of(new Noise.Octave(1, 1), new Noise.Octave(0.5f, 1)), 63, 47), 0.95))
+                .setNoiseGenSettings(context.lookup(Registries.NOISE_SETTINGS).getOrThrow(CTGenNoiseSettings.OVERWORLD))
                 .build())))));
     }
 

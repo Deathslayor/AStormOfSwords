@@ -41,14 +41,14 @@ public class DataGenerators {
         generator.addProvider(event.includeServer(), new ModBannerPatternProvider(packOutput, lookupProvider, existingFileHelper));
 
         // World Generation (includes banner patterns now)
-        ModWorldGenProvider worldGenProvider = generator.addProvider(event.includeServer(), new ModWorldGenProvider(packOutput, lookupProvider));
+       ModWorldGenProvider worldGenProvider = generator.addProvider(event.includeServer(), new ModWorldGenProvider(packOutput, lookupProvider));
 
         // Client-side data generation
         generator.addProvider(event.includeClient(), new ModBlockStateProvider(packOutput, existingFileHelper));
         generator.addProvider(event.includeClient(), new ModItemModelProvider(packOutput, existingFileHelper));
 
         // Map Provider (for CTGen integration)
-        generator.addProvider(true, new MapProvider(ModDimensionProvider.getOriginalMapImage(), ModDimensionProvider.KNOWN_WORLD,
+        generator.addProvider(event.includeServer(), new MapProvider(ModDimensionProvider.getOriginalMapImage(), ModDimensionProvider.KNOWN_WORLD,
                 worldGenProvider.getRegistryProvider().thenComposeAsync(provider -> {
                     List<Zone> Zones = ModDimensionProvider.getZones(provider.lookupOrThrow(CTRegistries.ZONES_KEY)).stream().map(Holder::value).toList();
                     return CompletableFuture.completedFuture(Zones);

@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AStormOfSwords.main.iml" filepath="$PROJECT_DIR$/.idea/modules/AStormOfSwords.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AStormOfSwords.test.iml" filepath="$PROJECT_DIR$/.idea/modules/AStormOfSwords.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/git.main.iml" filepath="$PROJECT_DIR$/.idea/modules/git.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/git.test.iml" filepath="$PROJECT_DIR$/.idea/modules/git.test.iml" />
     </modules>

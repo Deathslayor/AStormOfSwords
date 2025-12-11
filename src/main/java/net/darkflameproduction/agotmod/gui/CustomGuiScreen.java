@@ -1092,8 +1092,8 @@ public class CustomGuiScreen extends Screen {
         mapWidget.setHeight(innerHeight);
         mapWidget.setMinZoom(mapWidget.defaultZoom());
 
-        if (mapWidget != null && mapWidget.isActive() && mapWidget.getMapId() != null &&
-                minecraft.getResourceManager().getResource(mapWidget.getMapId()).isPresent()) {
+        if (mapWidget != null && mapWidget.isActive() && mapWidget.getMapTexId() != null &&
+                minecraft.getResourceManager().getResource(mapWidget.getMapTexId()).isPresent()) {
             mapWidget.render(guiGraphics, mouseX, mouseY, partialTick);
         }
 

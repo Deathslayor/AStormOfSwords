@@ -1,8 +1,4 @@
 {
   "biome": "agotmod:haunted_forest",
-  "color": "#828c82",
-  "height": 5,
-  "layers": {
-    "surface": "minecraft:podzol"
-  }
+  "color": "#828c82"
 }
