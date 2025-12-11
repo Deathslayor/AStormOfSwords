@@ -3,7 +3,7 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '[7.0.170,)'
+    id 'net.neoforged.gradle.userdev' version '[7.0.170,7.1)'// userdev 7.1 seems to be broken rn
 }
 
 version = mod_version
