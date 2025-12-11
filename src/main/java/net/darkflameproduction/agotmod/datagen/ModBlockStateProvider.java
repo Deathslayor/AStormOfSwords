@@ -2,29 +2,22 @@ package net.darkflameproduction.agotmod.datagen;
 
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.block.ModBLocks;
-import net.darkflameproduction.agotmod.block.custom.GhostGrassBlock;
-import net.darkflameproduction.agotmod.block.custom.HorseradishCropBlock;
-import net.darkflameproduction.agotmod.block.custom.WeirwoodFaceLogBlock;
-import net.minecraft.commands.arguments.ResourceLocationArgument;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
-import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
-import net.neoforged.neoforge.client.model.generators.ModelFile;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProviderType;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
-import net.minecraft.resources.ResourceLocation;
 
-import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Method;
@@ -32,11 +25,6 @@ import java.util.function.Function;
 
 
 public class ModBlockStateProvider extends BlockStateProvider {
-    // Constructor for ModBlockStateProvider
-    public ModBlockStateProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
-        // Call the constructor of the superclass (BlockStateProvider)
-        super(output, AGoTMod.MOD_ID, existingFileHelper);
-    }
 
     // Method to register block states and models
     @Override
@@ -2102,7 +2090,13 @@ public class ModBlockStateProvider extends BlockStateProvider {
 }
 
 
+    @Override
+    protected BlockStateProviderType<?> type() {
+        return null;
+    }
 
-
-
+    @Override
+    public BlockState getState(RandomSource random, BlockPos pos) {
+        return null;
+    }
 }

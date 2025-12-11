@@ -24,7 +24,6 @@ public class DataGenerators {
     public static void gatherData(@NotNull GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
-        ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
         // Server-side data generation
@@ -33,7 +32,7 @@ public class DataGenerators {
 
         // Block and Item Tags (order matters - blocks first, then items)
         ModBlockTagGenerator blockTagGenerator = generator.addProvider(event.includeServer(),
-                new ModBlockTagGenerator(packOutput, lookupProvider, existingFileHelper));
+                new ModBlockTagGenerator(packOutput, lookupProvider));
         generator.addProvider(event.includeServer(), new ModItemTagGenerator(packOutput, lookupProvider, blockTagGenerator.contentsGetter(), existingFileHelper));
 
         // POI and Banner Pattern Tags

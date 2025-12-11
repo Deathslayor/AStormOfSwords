@@ -5,28 +5,27 @@ import com.google.common.collect.Multimap;
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.util.ModAttributes;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.ChatFormatting;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.item.component.TooltipDisplay;
 
-import java.util.List;
+import java.util.function.Consumer;
 
-public class LevelRequiredSwordItem extends SwordItem {
+public class LevelRequiredSwordItem extends Item {
     private final String weaponType;
     private final Multimap<Attribute, AttributeModifier> defaultModifiers;
 
     // Constructor for ToolMaterial
-    public LevelRequiredSwordItem(net.minecraft.world.item.ToolMaterial material, int attackDamage, float attackSpeed, Item.Properties properties, String weaponType) {
-        super(material, attackDamage, attackSpeed, properties);
+    public LevelRequiredSwordItem(Item.Properties properties, String weaponType) {
+        super(properties);
+        //super(material, attackDamage, attackSpeed, properties);
         this.weaponType = weaponType;
 
         // Create a builder based on the parent's default modifiers
@@ -35,25 +34,14 @@ public class LevelRequiredSwordItem extends SwordItem {
         // Add the parent's attribute modifiers for an empty ItemStack
 
         // Add our custom reach modifier if needed
-        double reachModifier = 0.0;
-
-        switch (weaponType) {
-            case WeaponRequirements.SHORT_BLADE:
-                reachModifier = ModAttributes.SHORT_BLADE_REACH;
-                break;
-            case WeaponRequirements.ONE_HANDED:
-                reachModifier = ModAttributes.ONE_HANDED_REACH;
-                break;
-            case WeaponRequirements.TWO_HANDED:
-                reachModifier = ModAttributes.TWO_HANDED_REACH;
-                break;
-            case WeaponRequirements.POLEARM:
-                reachModifier = ModAttributes.POLEARM_REACH;
-                break;
-            case WeaponRequirements.LONG_POLEARM:
-                reachModifier = ModAttributes.LONG_POLEARM_REACH;
-                break;
-        }
+        double reachModifier = switch (weaponType) {
+            case WeaponRequirements.SHORT_BLADE -> ModAttributes.SHORT_BLADE_REACH;
+            case WeaponRequirements.ONE_HANDED -> ModAttributes.ONE_HANDED_REACH;
+            case WeaponRequirements.TWO_HANDED -> ModAttributes.TWO_HANDED_REACH;
+            case WeaponRequirements.POLEARM -> ModAttributes.POLEARM_REACH;
+            case WeaponRequirements.LONG_POLEARM -> ModAttributes.LONG_POLEARM_REACH;
+            default -> 0.0;
+        };
 
         // Only add modifier if it's not zero
         if (reachModifier != 0.0) {
@@ -73,21 +61,16 @@ public class LevelRequiredSwordItem extends SwordItem {
     }
 
 
-    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(ItemStack stack) {
-        return this.defaultModifiers;
-    }
-
-    // The correct signature for appendHoverText in 1.21.3
     @Override
-    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
+        super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);
 
         // Add weapon requirements tooltip
-        WeaponRequirements.appendTooltip(stack, context, tooltipComponents, tooltipFlag);
+        WeaponRequirements.appendTooltip(stack, context, tooltipAdder, flag);
     }
 
     @Override
-    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+    public void hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (attacker instanceof Player player && !WeaponRequirements.meetsRequirement(player, stack)) {
             // Notify player when using a weapon beyond their skill level
             player.displayClientMessage(
@@ -98,26 +81,19 @@ public class LevelRequiredSwordItem extends SwordItem {
 
         // Call the parent method
         super.hurtEnemy(stack, target, attacker);
-        return true;
     }
 
     /**
      * Gets a readable skill name from a category
      */
     private String getSkillNameFromCategory(String category) {
-        switch (category) {
-            case WeaponRequirements.ONE_HANDED:
-                return "One-Handed";
-            case WeaponRequirements.TWO_HANDED:
-                return "Two-Handed";
-            case WeaponRequirements.POLEARM:
-                return "Polearm";
-            case WeaponRequirements.SHORT_BLADE:
-                return "Short Blade";
-            case WeaponRequirements.RANGED:
-                return "Ranged";
-            default:
-                return "Unknown";
-        }
+        return switch (category) {
+            case WeaponRequirements.ONE_HANDED -> "One-Handed";
+            case WeaponRequirements.TWO_HANDED -> "Two-Handed";
+            case WeaponRequirements.POLEARM -> "Polearm";
+            case WeaponRequirements.SHORT_BLADE -> "Short Blade";
+            case WeaponRequirements.RANGED -> "Ranged";
+            default -> "Unknown";
+        };
     }
 }

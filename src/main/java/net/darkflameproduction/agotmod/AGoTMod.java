@@ -8,15 +8,12 @@ import net.darkflameproduction.agotmod.datagen.ModDimensionProvider;
 import net.darkflameproduction.agotmod.gui.CustomGuiScreen;
 import net.darkflameproduction.agotmod.init.ModMenuTypes;
 import net.darkflameproduction.agotmod.item.custom.BannerPatterns;
-import net.darkflameproduction.agotmod.network.ClientPacketHandler;
-import net.darkflameproduction.agotmod.network.OpenGrocerInventoryPacket;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.darkflameproduction.agotmod.entity.ModBlockEntities;
 import net.darkflameproduction.agotmod.entity.ModEntities;
-import net.darkflameproduction.agotmod.item.ModItemProperties;
 import net.darkflameproduction.agotmod.item.ModItems;
 import net.darkflameproduction.agotmod.item.creativetabs.*;
 import net.darkflameproduction.agotmod.sound.ModSounds;
@@ -24,7 +21,6 @@ import net.darkflameproduction.agotmod.util.ModWoodTypes;
 import net.darkflameproduction.agotmod.villager.ModVillagers;
 import net.darkflameproduction.agotmod.worldgen.biome.ModTerrablender;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -43,8 +39,6 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
-import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
-import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -227,8 +221,6 @@ public class AGoTMod {
             Sheets.addWoodType(ModWoodTypes.SANDBEGGAR);
             Sheets.addWoodType(ModWoodTypes.TIGERWOOD);
             Sheets.addWoodType(ModWoodTypes.YEW);
-
-            event.enqueueWork(ModItemProperties::addCustomItemProperties);
         }
 
         @SubscribeEvent

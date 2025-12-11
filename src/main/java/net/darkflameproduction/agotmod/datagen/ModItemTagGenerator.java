@@ -12,24 +12,19 @@ import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.BannerPatternItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
 public class ModItemTagGenerator extends ItemTagsProvider {
-    // Constructor for ModItemTagGenerator
-    public ModItemTagGenerator(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> pLookupProvider, CompletableFuture<TagLookup<Block>> pBlockTags, @Nullable ExistingFileHelper existingFileHelper) {
-        // Call the constructor of the superclass (ItemTagsProvider)
-        super(pOutput, pLookupProvider, pBlockTags, AGoTMod.MOD_ID, existingFileHelper);
+
+    public ModItemTagGenerator(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagsProvider.TagLookup<Item>> parentProvider, CompletableFuture<TagLookup<Block>> blockTags) {
+        super(output, lookupProvider, parentProvider, blockTags, AGoTMod.MOD_ID);
     }
 
     // Method to add tags to items
@@ -337,9 +332,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
 
 
         this.tag(ItemTags.BANNERS)
-                .add(BannerPatterns.TARGARYEN_BANNER_PATTERN.get())
-
-                ;
+                .add(BannerPatterns.TARGARYEN_BANNER_PATTERN.get());
 
 
 

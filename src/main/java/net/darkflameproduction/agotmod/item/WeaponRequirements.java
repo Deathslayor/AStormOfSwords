@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.function.Consumer;
 
 public class WeaponRequirements {
     public static final String ONE_HANDED = "one_handed";
@@ -106,7 +107,7 @@ public class WeaponRequirements {
         }
     }
 
-    public static void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag flag) {
+    public static void appendTooltip(ItemStack stack, Item.TooltipContext context, Consumer<Component> tooltipComponents, TooltipFlag flag) {
         String category = getWeaponCategory(stack);
 
         if (category.isEmpty()) {
@@ -117,9 +118,9 @@ public class WeaponRequirements {
 
         if (requiredLevel > 0) {
             String skillName = getSkillNameFromCategory(category);
-            tooltipComponents.add(Component.translatable("tooltip.agotmod.level_requirement", skillName, requiredLevel)
+            tooltipComponents.accept(Component.translatable("tooltip.agotmod.level_requirement", skillName, requiredLevel)
                     .withStyle(ChatFormatting.RED));
-            tooltipComponents.add(Component.translatable("tooltip.agotmod.level_penalty")
+            tooltipComponents.accept(Component.translatable("tooltip.agotmod.level_penalty")
                     .withStyle(ChatFormatting.DARK_RED));
         }
 
