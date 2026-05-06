@@ -1,0 +1,48 @@
+{
+  "variants": {
+    "facing=down,open=false": {
+      "model": "agotmod:block/builder_barrel",
+      "x": 180
+    },
+    "facing=down,open=true": {
+      "model": "agotmod:block/builder_barrel_open",
+      "x": 180
+    },
+    "facing=east,open=false": {
+      "model": "agotmod:block/builder_barrel",
+      "y": 270
+    },
+    "facing=east,open=true": {
+      "model": "agotmod:block/builder_barrel_open",
+      "y": 270
+    },
+    "facing=north,open=false": {
+      "model": "agotmod:block/builder_barrel",
+      "y": 180
+    },
+    "facing=north,open=true": {
+      "model": "agotmod:block/builder_barrel_open",
+      "y": 180
+    },
+    "facing=south,open=false": {
+      "model": "agotmod:block/builder_barrel"
+    },
+    "facing=south,open=true": {
+      "model": "agotmod:block/builder_barrel_open"
+    },
+    "facing=up,open=false": {
+      "model": "agotmod:block/builder_barrel"
+    },
+    "facing=up,open=true": {
+      "model": "agotmod:block/builder_barrel_open"
+    },
+    "facing=west,open=false": {
+      "model": "agotmod:block/builder_barrel",
+      "y": 90
+    },
+    "facing=west,open=true": {
+      "model": "agotmod:block/builder_barrel_open",
+      "y": 90
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "agotmod:block/podzol_slab"
+    },
+    "type=double": {
+      "model": "agotmod:block/podzol_slab_double"
+    },
+    "type=top": {
+      "model": "agotmod:block/podzol_slab_top"
+    }
+  }
+}

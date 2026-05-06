@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "agotmod:ringfort_1",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 1642138943,
+    "spacing": 120,
+    "separation": 20,
+    "type": "minecraft:random_spread"
+  }
+}

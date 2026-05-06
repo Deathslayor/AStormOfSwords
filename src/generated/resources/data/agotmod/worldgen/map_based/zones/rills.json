@@ -1,0 +1,9 @@
+{
+  "biome": "agotmod:rills",
+  "color": "#3d5133",
+  "height": 1,
+  "layers": {
+    "surface": "minecraft:mud"
+  },
+  "terrain_modifier": 12.0
+}

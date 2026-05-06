@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_ivory": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:ivory"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:ivory_to_shards"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_ivory"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:ivory_to_shards"
+    ]
+  }
+}

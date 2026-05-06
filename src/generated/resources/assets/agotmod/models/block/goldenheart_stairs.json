@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "agotmod:block/goldenheart_planks",
+    "side": "agotmod:block/goldenheart_planks",
+    "top": "agotmod:block/goldenheart_planks"
+  }
+}

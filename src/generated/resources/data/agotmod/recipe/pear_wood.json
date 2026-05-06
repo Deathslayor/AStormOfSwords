@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:pear_log",
+    "agotmod:pear_log",
+    "agotmod:pear_log",
+    "agotmod:pear_log"
+  ],
+  "result": {
+    "count": 3,
+    "id": "agotmod:pear_wood"
+  }
+}

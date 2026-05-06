@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_myrrh_wood": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:myrrh_wood"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:smelt_myrrh_wood_to_charcoal"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_myrrh_wood"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:smelt_myrrh_wood_to_charcoal"
+    ]
+  }
+}

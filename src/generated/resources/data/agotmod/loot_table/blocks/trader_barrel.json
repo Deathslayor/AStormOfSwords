@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "agotmod:trader_barrel_icon"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "agotmod:blocks/trader_barrel"
+}

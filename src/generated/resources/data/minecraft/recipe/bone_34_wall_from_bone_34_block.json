@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "agotmod:bone_34_block",
+  "result": {
+    "count": 1,
+    "id": "agotmod:bone_34_wall"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "agotmod:block/almond_slabs"
+    },
+    "type=double": {
+      "model": "agotmod:block/almond_planks"
+    },
+    "type=top": {
+      "model": "agotmod:block/almond_slabs_top"
+    }
+  }
+}

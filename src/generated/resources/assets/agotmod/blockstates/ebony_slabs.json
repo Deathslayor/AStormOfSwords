@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "agotmod:block/ebony_slabs"
+    },
+    "type=double": {
+      "model": "agotmod:block/ebony_planks"
+    },
+    "type=top": {
+      "model": "agotmod:block/ebony_slabs_top"
+    }
+  }
+}

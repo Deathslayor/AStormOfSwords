@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "agotmod:wormtree_wood"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_wormtree_log": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:wormtree_log"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_wormtree_log"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "agotmod:wormtree_wood"
+    ]
+  }
+}

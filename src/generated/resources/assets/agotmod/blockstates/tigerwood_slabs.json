@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "agotmod:block/tigerwood_slabs"
+    },
+    "type=double": {
+      "model": "agotmod:block/tigerwood_planks"
+    },
+    "type=top": {
+      "model": "agotmod:block/tigerwood_slabs_top"
+    }
+  }
+}

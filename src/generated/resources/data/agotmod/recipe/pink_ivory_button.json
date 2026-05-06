@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "B": "agotmod:pink_ivory_planks"
+  },
+  "pattern": [
+    "B"
+  ],
+  "result": {
+    "count": 1,
+    "id": "agotmod:pink_ivory_button"
+  }
+}

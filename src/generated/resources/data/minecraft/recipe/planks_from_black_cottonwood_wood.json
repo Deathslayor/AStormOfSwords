@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:black_cottonwood_wood"
+  ],
+  "result": {
+    "count": 4,
+    "id": "agotmod:black_cottonwood_planks"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "biome": "agotmod:wolfswood_clearing",
+  "color": "#487a48",
+  "height": 3,
+  "layers": {
+    "surface": "minecraft:podzol"
+  },
+  "terrain_modifier": 6.0
+}

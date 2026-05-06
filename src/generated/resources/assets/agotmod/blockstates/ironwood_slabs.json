@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "agotmod:block/ironwood_slabs"
+    },
+    "type=double": {
+      "model": "agotmod:block/ironwood_planks"
+    },
+    "type=top": {
+      "model": "agotmod:block/ironwood_slabs_top"
+    }
+  }
+}

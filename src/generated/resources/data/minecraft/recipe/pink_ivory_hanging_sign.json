@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "minecraft:chain",
+    "B": "agotmod:pink_ivory_log_stripped"
+  },
+  "pattern": [
+    "# #",
+    "BBB",
+    "BBB"
+  ],
+  "result": {
+    "count": 6,
+    "id": "agotmod:pink_ivory_hanging_sign"
+  }
+}

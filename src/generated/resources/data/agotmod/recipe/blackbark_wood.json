@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:blackbark_log",
+    "agotmod:blackbark_log",
+    "agotmod:blackbark_log",
+    "agotmod:blackbark_log"
+  ],
+  "result": {
+    "count": 3,
+    "id": "agotmod:blackbark_wood"
+  }
+}

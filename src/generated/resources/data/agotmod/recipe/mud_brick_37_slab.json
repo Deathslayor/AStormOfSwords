@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:mud",
+  "result": {
+    "count": 2,
+    "id": "agotmod:mud_brick_37_slab"
+  }
+}

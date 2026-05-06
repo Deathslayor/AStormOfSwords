@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "agotmod:item/northern_mountain_clan_leather_boots"
+  }
+}

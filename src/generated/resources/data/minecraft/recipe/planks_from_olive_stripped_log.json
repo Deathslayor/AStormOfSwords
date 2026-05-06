@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:olive_log_stripped"
+  ],
+  "result": {
+    "count": 4,
+    "id": "agotmod:olive_planks"
+  }
+}

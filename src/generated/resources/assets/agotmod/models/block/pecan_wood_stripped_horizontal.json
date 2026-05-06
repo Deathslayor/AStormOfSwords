@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "agotmod:block/pecan_log_stripped",
+    "side": "agotmod:block/pecan_log_stripped"
+  }
+}

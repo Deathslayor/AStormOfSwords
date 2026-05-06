@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "agotmod:whitehb_castle_keep_3",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 512947382,
+    "spacing": 120,
+    "separation": 20,
+    "type": "minecraft:random_spread"
+  }
+}

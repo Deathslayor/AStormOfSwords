@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:aspen_log",
+    "agotmod:aspen_log",
+    "agotmod:aspen_log",
+    "agotmod:aspen_log"
+  ],
+  "result": {
+    "count": 3,
+    "id": "agotmod:aspen_wood"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "biome": "agotmod:northern_mountains",
+  "color": "#828282",
+  "height": 100,
+  "layers": {
+    "dirt": "minecraft:calcite",
+    "stone": "minecraft:stone",
+    "surface": "minecraft:snow"
+  },
+  "terrain_modifier": 80.0
+}

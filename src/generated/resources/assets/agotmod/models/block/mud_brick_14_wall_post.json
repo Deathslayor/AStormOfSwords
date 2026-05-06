@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_wall_post",
+  "textures": {
+    "wall": "agotmod:block/mud_brick_14_block"
+  }
+}

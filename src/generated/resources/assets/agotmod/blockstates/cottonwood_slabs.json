@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "agotmod:block/cottonwood_slabs"
+    },
+    "type=double": {
+      "model": "agotmod:block/cottonwood_planks"
+    },
+    "type=top": {
+      "model": "agotmod:block/cottonwood_slabs_top"
+    }
+  }
+}

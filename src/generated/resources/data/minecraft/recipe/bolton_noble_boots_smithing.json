@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "agotmod:bolton_noble_smithing_scroll",
+  "base": "agotmod:bolton_plate_boots",
+  "result": {
+    "count": 1,
+    "id": "agotmod:bolton_noble_boots"
+  },
+  "template": "agotmod:upgrade_kit_noble"
+}

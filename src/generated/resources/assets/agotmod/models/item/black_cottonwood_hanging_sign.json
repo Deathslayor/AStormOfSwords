@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "agotmod:item/black_cottonwood_hanging_sign"
+  }
+}

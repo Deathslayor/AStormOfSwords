@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "agotmod:block/pomegranate_slabs"
+    },
+    "type=double": {
+      "model": "agotmod:block/pomegranate_planks"
+    },
+    "type=top": {
+      "model": "agotmod:block/pomegranate_slabs_top"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_hawthorn_planks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:hawthorn_planks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "agotmod:hawthorn_fence_gate"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_hawthorn_planks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "agotmod:hawthorn_fence_gate"
+    ]
+  }
+}

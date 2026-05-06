@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "agotmod:block/barrel_bottom",
+    "east": "agotmod:block/barrel_chicken_breeder",
+    "north": "agotmod:block/barrel_chicken_breeder",
+    "particle": "agotmod:block/barrel_chicken_breeder",
+    "south": "agotmod:block/barrel_chicken_breeder",
+    "up": "agotmod:block/barrel_top",
+    "west": "agotmod:block/barrel_chicken_breeder"
+  }
+}

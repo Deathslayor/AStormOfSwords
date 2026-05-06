@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "agotmod:block/dirt_path_slab"
+    },
+    "type=double": {
+      "model": "agotmod:block/dirt_path_slab_double"
+    },
+    "type=top": {
+      "model": "agotmod:block/dirt_path_slab_top"
+    }
+  }
+}

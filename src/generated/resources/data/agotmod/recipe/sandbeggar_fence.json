@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "minecraft:stick",
+    "B": "agotmod:sandbeggar_planks"
+  },
+  "pattern": [
+    "B#B",
+    "B#B"
+  ],
+  "result": {
+    "count": 3,
+    "id": "agotmod:sandbeggar_fence"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "H": "agotmod:hammer",
+    "N": "agotmod:bronze_ingot"
+  },
+  "pattern": [
+    " H ",
+    "N  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "agotmod:bronze_chain_link"
+  }
+}

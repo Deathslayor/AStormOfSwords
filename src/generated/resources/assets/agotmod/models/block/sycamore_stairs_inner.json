@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "agotmod:block/sycamore_planks",
+    "side": "agotmod:block/sycamore_planks",
+    "top": "agotmod:block/sycamore_planks"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "agotmod:block/barrel_bottom",
+    "east": "agotmod:block/barrel_caravan_master",
+    "north": "agotmod:block/barrel_caravan_master",
+    "particle": "agotmod:block/barrel_caravan_master",
+    "south": "agotmod:block/barrel_caravan_master",
+    "up": "agotmod:block/barrel_top_open",
+    "west": "agotmod:block/barrel_caravan_master"
+  }
+}

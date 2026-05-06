@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "agotmod:wildling_leather_smithing_scroll",
+  "base": "agotmod:wildling_fur_boots",
+  "result": {
+    "count": 1,
+    "id": "agotmod:wildling_leather_boots"
+  },
+  "template": "agotmod:upgrade_kit_leather"
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_orange_log": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:orange_log"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:smelt_orange_log_to_charcoal"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_orange_log"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:smelt_orange_log_to_charcoal"
+    ]
+  }
+}

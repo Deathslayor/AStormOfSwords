@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:apple_wood"
+  ],
+  "result": {
+    "count": 4,
+    "id": "agotmod:apple_planks"
+  }
+}

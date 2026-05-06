@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:yellow_diamond_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "agotmod:yellow_diamond"
+  }
+}

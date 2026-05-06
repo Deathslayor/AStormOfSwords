@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "agotmod:stark_plate_smithing_scroll",
+  "base": "agotmod:stark_levy_boots",
+  "result": {
+    "count": 1,
+    "id": "agotmod:stark_plate_boots"
+  },
+  "template": "agotmod:upgrade_kit_steel"
+}

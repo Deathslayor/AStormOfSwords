@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:blackbark_wood_stripped"
+  ],
+  "result": {
+    "count": 4,
+    "id": "agotmod:blackbark_planks"
+  }
+}

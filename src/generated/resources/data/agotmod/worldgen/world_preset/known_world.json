@@ -1,0 +1,61 @@
+{
+  "dimensions": {
+    "minecraft:overworld": {
+      "type": "minecraft:overworld",
+      "generator": {
+        "type": "ctgen:map_based_chunk_generator",
+        "settings": {
+          "biome_map": "agotmod:known_world",
+          "carver": {
+            "type": "ctgen:noise_carver",
+            "noise": {
+              "octaves": [
+                {
+                  "amplitude": 1.0,
+                  "frequency": 1.0
+                },
+                {
+                  "amplitude": 1.0,
+                  "frequency": 0.5
+                }
+              ],
+              "stretch": 63,
+              "stretch_y": 47
+            },
+            "threshold": 0.95
+          },
+          "default_map_biome": "agotmod:deep_cold_ocean",
+          "spawn_pixel_x": 3500,
+          "spawn_pixel_y": 6000,
+          "zones": [
+            "agotmod:the_wall",
+            "agotmod:haunted_forest",
+            "agotmod:frozen_river",
+            "agotmod:frozen_lake",
+            "agotmod:cold_ocean",
+            "agotmod:deep_cold_ocean",
+            "agotmod:basalt_deltas",
+            "agotmod:frostfang_foothills",
+            "agotmod:frostfangs",
+            "agotmod:valley_of_thenn",
+            "agotmod:lands_of_always_winter",
+            "agotmod:wolfswood",
+            "agotmod:wolfswood_clearing",
+            "agotmod:ironwood",
+            "agotmod:northern_hills",
+            "agotmod:northern_mountains",
+            "agotmod:the_north",
+            "agotmod:the_north",
+            "agotmod:rills",
+            "agotmod:river",
+            "agotmod:lake",
+            "agotmod:stony_shores",
+            "agotmod:the_neck",
+            "agotmod:the_neck_river",
+            "agotmod:barrowlands"
+          ]
+        }
+      }
+    }
+  }
+}

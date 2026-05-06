@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_goldencup": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:goldencup"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:goldencup_to_yellow_dye"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_goldencup"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:goldencup_to_yellow_dye"
+    ]
+  }
+}

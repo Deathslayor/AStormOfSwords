@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:apple_log_stripped",
+    "agotmod:apple_log_stripped",
+    "agotmod:apple_log_stripped",
+    "agotmod:apple_log_stripped"
+  ],
+  "result": {
+    "count": 3,
+    "id": "agotmod:apple_wood_stripped"
+  }
+}

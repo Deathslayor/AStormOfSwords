@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "minecraft:bundle",
+    "C": "agotmod:boiled_leather",
+    "H": "agotmod:hammer",
+    "I": "agotmod:ivory_shard",
+    "P": "agotmod:boiled_leather"
+  },
+  "pattern": [
+    "PCP",
+    "CBC",
+    "IHI"
+  ],
+  "result": {
+    "count": 1,
+    "id": "agotmod:upgrade_kit_chief"
+  }
+}

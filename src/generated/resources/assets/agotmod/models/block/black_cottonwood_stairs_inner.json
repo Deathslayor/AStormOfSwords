@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "agotmod:block/black_cottonwood_planks",
+    "side": "agotmod:block/black_cottonwood_planks",
+    "top": "agotmod:block/black_cottonwood_planks"
+  }
+}
