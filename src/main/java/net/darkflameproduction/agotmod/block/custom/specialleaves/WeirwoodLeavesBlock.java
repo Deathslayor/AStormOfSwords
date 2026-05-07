@@ -1,18 +1,14 @@
 package net.darkflameproduction.agotmod.block.custom.specialleaves;
 
-import net.darkflameproduction.agotmod.block.ModBLocks;
+import net.darkflameproduction.agotmod.particle.ModParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.BlockParticleOption;
-import net.minecraft.core.particles.DustParticleOptions;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
-import org.joml.Vector3f;
 
 public class WeirwoodLeavesBlock extends LeavesBlock {
 
@@ -50,11 +46,10 @@ public class WeirwoodLeavesBlock extends LeavesBlock {
                 double y = pos.getY();
                 double z = pos.getZ() + 0.5;
 
-                // Using CHERRY_LEAVES particle type but with red tint
                 level.addParticle(
-                        ParticleTypes.CHERRY_LEAVES, // Use Cherry Leaves particle type
-                        x, y, z,  // Position of the particle
-                        0.0D, -0.03D, 0.0D // Motion (falling effect)
+                        ModParticles.WEIRWOOD_LEAVES.get(),
+                        x, y, z,
+                        0.0D, 0.0D, 0.0D
                 );
             }
         }

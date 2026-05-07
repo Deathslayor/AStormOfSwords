@@ -9,6 +9,7 @@ import net.darkflameproduction.agotmod.init.ModMenuTypes;
 import net.darkflameproduction.agotmod.item.custom.BannerPatterns;
 import net.darkflameproduction.agotmod.network.ClientPacketHandler;
 import net.darkflameproduction.agotmod.network.OpenGrocerInventoryPacket;
+import net.darkflameproduction.agotmod.particle.ModParticles;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
@@ -38,6 +39,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
@@ -69,6 +71,7 @@ public class AGoTMod {
         ModCreativeArchery.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModSounds.register(modEventBus);
+        ModParticles.register(modEventBus);
         ModVillagers.register(modEventBus);
         ModBLocks.register(modEventBus);
         ModItems.register(modEventBus);
@@ -251,6 +254,14 @@ public class AGoTMod {
                     },
                     ModBLocks.GRASS_BLOCK_STAIRS.get(),
                     ModBLocks.GRASS_BLOCK_SLAB.get()
+            );
+        }
+
+        @SubscribeEvent
+        public static void registerParticleProviders(RegisterParticleProvidersEvent event) {
+            event.registerSpriteSet(
+                    ModParticles.WEIRWOOD_LEAVES.get(),
+                    net.darkflameproduction.agotmod.client.particle.WeirwoodLeavesParticle.Provider::new
             );
         }
     }

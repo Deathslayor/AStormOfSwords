@@ -3,3 +3,20 @@
 # are changed when only line endings change.
 src/generated/**/.cache/cache text eol=lf
 src/generated/**/*.json text eol=lf
+
+# Keep source and resource text files normalized as LF across platforms.
+*.java text eol=lf
+*.json text eol=lf
+*.gradle text eol=lf
+*.properties text eol=lf
+*.toml text eol=lf
+*.xml text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.mcmeta text eol=lf
+*.md text eol=lf
+
+# Keep Windows-native scripts in CRLF format.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
