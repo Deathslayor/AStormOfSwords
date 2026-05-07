@@ -2,8 +2,8 @@ package net.darkflameproduction.agotmod.gui;
 
 import dev.tocraft.ctgen.impl.CTGClient;
 import dev.tocraft.ctgen.impl.network.SyncMapPacket;
-import dev.tocraft.ctgen.impl.screen.widget.MapWidget;
 import net.darkflameproduction.agotmod.AGoTMod;
+import net.darkflameproduction.agotmod.gui.widget.AGoTMapWidget;
 import net.darkflameproduction.agotmod.item.ModItems;
 import net.darkflameproduction.agotmod.network.*;
 import net.darkflameproduction.agotmod.sound.ModSounds;
@@ -274,7 +274,7 @@ public class CustomGuiScreen extends Screen {
     private double nextRangedRequirement = 0.0;
 
     private final SyncMapPacket mapPacket;
-    private MapWidget mapWidget;
+    private AGoTMapWidget mapWidget;
 
     private static final int[] ONE_HANDED_STATS_INDICES = {0, 1, 2, 3, 4, 5, 9, 12, 15, 17, 18, 20, 23, 27, 28, 29, 30, 35, 36, 38};
     private static final int[] TWO_HANDED_STATS_INDICES = {18, 23, 30};
@@ -399,7 +399,7 @@ public class CustomGuiScreen extends Screen {
         this.selectedSection = lastSelectedSection;
         this.selectedStatsSubmenu = lastSelectedStatsSubmenu;
         this.mapPacket = mapPacket;
-        this.mapWidget = MapWidget.ofPacket(minecraft, 0, 0, width, height, mapPacket);
+        this.mapWidget = AGoTMapWidget.ofPacket(minecraft, 0, 0, width, height, mapPacket);
         currentInstance = this; // Track current instance
     }
 
@@ -630,7 +630,7 @@ public class CustomGuiScreen extends Screen {
         int innerY = layout.contentY + BORDER_HEIGHT;
         int innerWidth = layout.contentWidth - (BORDER_PILLAR_WIDTH * 2);
         int innerHeight = layout.contentHeight - (BORDER_HEIGHT * 2);
-        mapWidget = MapWidget.ofPacket(minecraft, innerX, innerY, innerWidth, innerHeight, mapPacket);
+        mapWidget = AGoTMapWidget.ofPacket(minecraft, innerX, innerY, innerWidth, innerHeight, mapPacket);
         if (mapWidget != null) {
             mapWidget.setMinZoom(mapWidget.defaultZoom());
         }

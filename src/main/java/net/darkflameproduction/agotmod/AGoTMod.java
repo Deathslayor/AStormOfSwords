@@ -21,6 +21,7 @@ import net.darkflameproduction.agotmod.item.ModItems;
 import net.darkflameproduction.agotmod.item.creativetabs.*;
 import net.darkflameproduction.agotmod.sound.ModSounds;
 import net.darkflameproduction.agotmod.util.ModWoodTypes;
+import net.darkflameproduction.agotmod.villager.ModVillagerTrades;
 import net.darkflameproduction.agotmod.villager.ModVillagers;
 import net.darkflameproduction.agotmod.worldgen.biome.ModTerrablender;
 import net.minecraft.ChatFormatting;
@@ -79,6 +80,7 @@ public class AGoTMod {
 
         modEventBus.addListener(this::commonSetup);
         NeoForge.EVENT_BUS.register(this);
+        NeoForge.EVENT_BUS.addListener(ModVillagerTrades::onVillagerInteract);
         modEventBus.addListener(this::addCreative);
         ModTerrablender.registerBiomes();
         ModEntities.register(modEventBus);
