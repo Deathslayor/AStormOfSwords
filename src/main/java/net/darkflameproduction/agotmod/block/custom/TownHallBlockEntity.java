@@ -4,6 +4,7 @@ import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.animalherder.AnimalHerderCollectionTicketSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobWarningSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.blacksmith.BlacksmithInventoryTicketSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.butcher.ButcherInventoryTicketSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.farmer.FarmerDepositTicketSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.grocer.GrocerInventoryTicketSystem;
@@ -48,6 +49,7 @@ public class TownHallBlockEntity extends BlockEntity implements
         ButcherInventoryTicketSystem.TicketListener,
         TannerInventoryTicketSystem.TicketListener,
         TailorInventoryTicketSystem.TicketListener,
+        BlacksmithInventoryTicketSystem.TicketListener,
         FarmerDepositTicketSystem.DepositListener,
         FoodCollectionTicketSystem.FoodCollectionListener,
         SmelterCollectionTicketSystem.SmelterCollectionListener,
@@ -317,6 +319,7 @@ public class TownHallBlockEntity extends BlockEntity implements
         if (state.is(ModBLocks.BUTCHER_BARREL.get()))         return JobSystem.JOB_BUTCHER;
         if (state.is(ModBLocks.TANNER_BARREL.get()))          return JobSystem.JOB_TANNER;
         if (state.is(ModBLocks.TAILOR_BARREL.get()))          return JobSystem.JOB_TAILOR;
+        if (state.is(ModBLocks.BLACKSMITH_BARREL.get()))      return JobSystem.JOB_BLACKSMITH;
         if (state.is(ModBLocks.GUARD_BARREL.get()))           return JobSystem.JOB_GUARD;
         if (state.is(ModBLocks.MINER_BARREL.get()))           return JobSystem.JOB_MINER;
         if (state.is(ModBLocks.SMELTER_BARREL.get()))         return JobSystem.JOB_SMELTER;
@@ -325,6 +328,18 @@ public class TownHallBlockEntity extends BlockEntity implements
         if (state.is(ModBLocks.PIG_BREEDER_BARREL.get()))     return JobSystem.JOB_PIG_BREEDER;
         if (state.is(ModBLocks.SHEEP_HERDER_BARREL.get()))    return JobSystem.JOB_SHEEP_HERDER;
         return JobSystem.JOB_NONE;
+    }
+
+    @Override
+    public void onBlacksmithRequestPosted(BlacksmithInventoryTicketSystem.InventoryRequestTicket ticket) {
+        BlacksmithInventoryTicketSystem.postResponse(
+                ticket.blacksmithUUID,
+                ticket.playerUUID,
+                townInventory,
+                townBalance,
+                this.getBlockPos()
+        );
+        BlacksmithInventoryTicketSystem.consumeRequest(ticket.blacksmithUUID);
     }
 
     @Override
@@ -345,7 +360,6 @@ public class TownHallBlockEntity extends BlockEntity implements
         int flowersToTake = 64;
         int taken = 0;
 
-        // Collect up to 64 flowers total from any flower in inventory
         List<String> allFlowerKeys = new ArrayList<>();
         // Mod flowers
         allFlowerKeys.add("agotmod:winter_rose"); allFlowerKeys.add("agotmod:wild_radish");
@@ -379,6 +393,7 @@ public class TownHallBlockEntity extends BlockEntity implements
         allFlowerKeys.add("minecraft:lilac");     allFlowerKeys.add("minecraft:rose_bush");
         allFlowerKeys.add("minecraft:peony");
 
+        // Pull up to 64 flowers total
         for (String flowerKey : allFlowerKeys) {
             if (taken >= flowersToTake) break;
             long available = townInventory.getOrDefault(flowerKey, 0L);
@@ -395,8 +410,13 @@ public class TownHallBlockEntity extends BlockEntity implements
             taken += toTake;
         }
 
-        // Also pull cotton, string, leather for textile crafting
-        for (String matKey : new String[]{"agotmod:cotton", "minecraft:string", "minecraft:leather"}) {
+        // Pull up to 64 of each textile material
+        for (String matKey : new String[]{
+                "agotmod:cotton",
+                "minecraft:string",
+                "minecraft:white_wool",
+                "minecraft:leather"
+        }) {
             long available = townInventory.getOrDefault(matKey, 0L);
             if (available <= 0) continue;
             int toTake = (int) Math.min(64, available);
@@ -1296,6 +1316,7 @@ public class TownHallBlockEntity extends BlockEntity implements
             ButcherInventoryTicketSystem.registerListener(this);
             TannerInventoryTicketSystem.registerListener(this);
             TailorInventoryTicketSystem.registerListener(this);
+            BlacksmithInventoryTicketSystem.registerListener(this);
             FarmerDepositTicketSystem.registerListener(this);
             FoodCollectionTicketSystem.registerListener(this);
             SmelterCollectionTicketSystem.registerListener(this);
@@ -1390,6 +1411,7 @@ public class TownHallBlockEntity extends BlockEntity implements
         ButcherInventoryTicketSystem.unregisterListener(this);
         TannerInventoryTicketSystem.unregisterListener(this);
         TailorInventoryTicketSystem.unregisterListener(this);
+        BlacksmithInventoryTicketSystem.unregisterListener(this);
         FarmerDepositTicketSystem.unregisterListener(this);
         SmelterCollectionTicketSystem.unregisterListener(this);
         FoodCollectionTicketSystem.unregisterListener(this);

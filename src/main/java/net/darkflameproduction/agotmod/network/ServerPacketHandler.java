@@ -37,10 +37,11 @@ public class ServerPacketHandler {
             for (Entity entity : level.getAllEntities()) {
                 if (entity instanceof Peasant_Entity peasant &&
                         peasant.getDisplayName().getString().equals(packet.grocerName()) &&
-                        (peasant.getJobType().equals(JobSystem.JOB_GROCER) ||
-                                peasant.getJobType().equals(JobSystem.JOB_BUTCHER) ||
-                                peasant.getJobType().equals(JobSystem.JOB_TANNER) ||
-                                peasant.getJobType().equals(JobSystem.JOB_TAILOR))) {
+                        (peasant.getJobType().equals(JobSystem.JOB_GROCER)     ||
+                                peasant.getJobType().equals(JobSystem.JOB_BUTCHER)    ||
+                                peasant.getJobType().equals(JobSystem.JOB_TANNER)     ||
+                                peasant.getJobType().equals(JobSystem.JOB_TAILOR)     ||
+                                peasant.getJobType().equals(JobSystem.JOB_BLACKSMITH))) {
                     targetNpc = peasant;
                     break;
                 }
@@ -512,6 +513,9 @@ public class ServerPacketHandler {
                                 peasant.getUUID(), serverPlayer.getUUID(), peasant.blockPosition());
                     } else if (peasant.getJobType().equals(JobSystem.JOB_TAILOR)) {
                         net.darkflameproduction.agotmod.entity.custom.npc.system.tailor.TailorInventoryTicketSystem.postRequest(
+                                peasant.getUUID(), serverPlayer.getUUID(), peasant.blockPosition());
+                    } else if (peasant.getJobType().equals(JobSystem.JOB_BLACKSMITH)) {
+                        net.darkflameproduction.agotmod.entity.custom.npc.system.blacksmith.BlacksmithInventoryTicketSystem.postRequest(
                                 peasant.getUUID(), serverPlayer.getUUID(), peasant.blockPosition());
                     }
                 }

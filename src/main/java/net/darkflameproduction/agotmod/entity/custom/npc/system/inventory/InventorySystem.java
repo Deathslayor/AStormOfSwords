@@ -36,16 +36,13 @@ public class InventorySystem {
     }
 
     public void tick() {
-        // Sync main hand item with entity data for animations
         peasant.getEntityData().set(peasant.getMainHandItemAccessor(), peasant.getMainHandItem());
 
-        // Automatically equip best armor/weapons every few ticks
-        if (peasant.tickCount % 20 == 0) { // Check every second (20 ticks)
-            autoEquipBestArmor();
+        if (peasant.tickCount % 20 == 0) {
+            autoEquipWeaponsAndShields();
         }
 
-        // Mark dirty periodically to ensure saves
-        if (peasant.tickCount % 100 == 0) { // Every 5 seconds
+        if (peasant.tickCount % 100 == 0) {
             markDirty();
         }
     }
@@ -295,7 +292,6 @@ public class InventorySystem {
     public boolean addItem(ItemStack stack) {
         if (stack.isEmpty()) return false;
 
-        // Try to merge with existing stacks first
         for (int i = 0; i < inventory.getContainerSize(); i++) {
             ItemStack existing = inventory.getItem(i);
             if (!existing.isEmpty() && ItemStack.isSameItemSameComponents(existing, stack)) {
@@ -306,7 +302,6 @@ public class InventorySystem {
                     existing.grow(toAdd);
                     stack.shrink(toAdd);
                     if (stack.isEmpty()) {
-                        forceArmorUpdate();
                         markDirty();
                         return true;
                     }
@@ -316,11 +311,8 @@ public class InventorySystem {
 
         for (int i = 0; i < inventory.getContainerSize(); i++) {
             if (inventory.getItem(i).isEmpty()) {
-                ItemStack stackToPlace = stack.copy();
-                inventory.setItem(i, stackToPlace);
+                inventory.setItem(i, stack.copy());
                 stack.setCount(0);
-
-                forceArmorUpdate();
                 markDirty();
                 return true;
             }

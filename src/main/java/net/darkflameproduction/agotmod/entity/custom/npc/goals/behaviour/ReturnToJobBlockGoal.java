@@ -20,7 +20,10 @@ public class ReturnToJobBlockGoal extends Goal {
         String job = peasant.getJobType();
         return job.equals(JobSystem.JOB_FARMER)
                 || job.equals(JobSystem.JOB_GROCER)
-                || job.equals(JobSystem.JOB_BUTCHER);
+                || job.equals(JobSystem.JOB_BUTCHER)
+                || job.equals(JobSystem.JOB_TANNER)
+                || job.equals(JobSystem.JOB_TAILOR)
+                || job.equals(JobSystem.JOB_BLACKSMITH);
     }
 
     @Override

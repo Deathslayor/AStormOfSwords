@@ -33,6 +33,7 @@ public class JobSystem {
     public static final String JOB_BUTCHER = "butcher";
     public static final String JOB_TANNER = "tanner";
     public static final String JOB_TAILOR = "tailor";
+    public static final String JOB_BLACKSMITH = "blacksmith";
     public static final String JOB_NONE            = "";
 
     // Work area system constants
@@ -78,6 +79,10 @@ public class JobSystem {
     private static final int TAILOR_IDLE_RADIUS_X = 5;
     private static final int TAILOR_IDLE_RADIUS_Z = 5;
     private static final int TAILOR_IDLE_RADIUS_Y = 16;
+
+    private static final int BLACKSMITH_IDLE_RADIUS_X = 5;
+    private static final int BLACKSMITH_IDLE_RADIUS_Z = 5;
+    private static final int BLACKSMITH_IDLE_RADIUS_Y = 16;
 
     // Job block reservations - static maps to track which blocks are taken
     private static final Map<BlockPos, UUID> jobBlockReservations = new HashMap<>();
@@ -131,6 +136,7 @@ public class JobSystem {
         if (getJobType().equals(JOB_BUTCHER))         return jobBlockState.is(ModBLocks.BUTCHER_BARREL.get());
         if (getJobType().equals(JOB_TANNER))          return jobBlockState.is(ModBLocks.TANNER_BARREL.get());
         if (getJobType().equals(JOB_TAILOR))          return jobBlockState.is(ModBLocks.TAILOR_BARREL.get());
+        if (getJobType().equals(JOB_BLACKSMITH))      return jobBlockState.is(ModBLocks.BLACKSMITH_BARREL.get());
         if (getJobType().equals(JOB_GUARD))           return jobBlockState.is(ModBLocks.GUARD_BARREL.get());
         if (getJobType().equals(JOB_MINER))           return jobBlockState.is(ModBLocks.MINER_BARREL.get());
         if (getJobType().equals(JOB_SMELTER))         return jobBlockState.is(ModBLocks.SMELTER_BARREL.get());
@@ -447,15 +453,10 @@ public class JobSystem {
                 return deltaX <= GROCER_IDLE_RADIUS_X && deltaZ <= GROCER_IDLE_RADIUS_Z && deltaY <= GROCER_IDLE_RADIUS_Y;
             }
         }
-        if (getJobType().equals(JOB_BUTCHER)) {
-            return deltaX <= BUTCHER_IDLE_RADIUS_X && deltaZ <= BUTCHER_IDLE_RADIUS_Z && deltaY <= BUTCHER_IDLE_RADIUS_Y;
-        }
-        if (getJobType().equals(JOB_TANNER)) {
-            return deltaX <= TANNER_IDLE_RADIUS_X && deltaZ <= TANNER_IDLE_RADIUS_Z && deltaY <= TANNER_IDLE_RADIUS_Y;
-        }
-        if (getJobType().equals(JOB_TAILOR)) {
-            return deltaX <= TAILOR_IDLE_RADIUS_X && deltaZ <= TAILOR_IDLE_RADIUS_Z && deltaY <= TAILOR_IDLE_RADIUS_Y;
-        }
+        if (getJobType().equals(JOB_BUTCHER))    return deltaX <= BUTCHER_IDLE_RADIUS_X    && deltaZ <= BUTCHER_IDLE_RADIUS_Z    && deltaY <= BUTCHER_IDLE_RADIUS_Y;
+        if (getJobType().equals(JOB_TANNER))     return deltaX <= TANNER_IDLE_RADIUS_X     && deltaZ <= TANNER_IDLE_RADIUS_Z     && deltaY <= TANNER_IDLE_RADIUS_Y;
+        if (getJobType().equals(JOB_TAILOR))     return deltaX <= TAILOR_IDLE_RADIUS_X     && deltaZ <= TAILOR_IDLE_RADIUS_Z     && deltaY <= TAILOR_IDLE_RADIUS_Y;
+        if (getJobType().equals(JOB_BLACKSMITH)) return deltaX <= BLACKSMITH_IDLE_RADIUS_X && deltaZ <= BLACKSMITH_IDLE_RADIUS_Z && deltaY <= BLACKSMITH_IDLE_RADIUS_Y;
         if (getJobType().equals(JOB_GUARD)) {
             return deltaX <= GUARD_WORK_RADIUS_X && deltaZ <= GUARD_WORK_RADIUS_Z && deltaY <= GUARD_WORK_RADIUS_Y;
         }
@@ -482,13 +483,14 @@ public class JobSystem {
 
         if (peasant.shouldSleep() || peasant.needsFoodCollection()) return false;
 
-        if (getJobType().equals(JOB_FARMER))  return peasant.getFarmingSystem().hasReturnedToJobBlockAfterFood();
-        if (getJobType().equals(JOB_GROCER))  return true;
-        if (getJobType().equals(JOB_BUTCHER)) return true;
-        if (getJobType().equals(JOB_TANNER))  return true;
-        if (getJobType().equals(JOB_TAILOR))  return true;
-        if (getJobType().equals(JOB_MINER))   return true;
-        if (getJobType().equals(JOB_SMELTER)) return true;
+        if (getJobType().equals(JOB_FARMER))     return peasant.getFarmingSystem().hasReturnedToJobBlockAfterFood();
+        if (getJobType().equals(JOB_GROCER))     return true;
+        if (getJobType().equals(JOB_BUTCHER))    return true;
+        if (getJobType().equals(JOB_TANNER))     return true;
+        if (getJobType().equals(JOB_TAILOR))     return true;
+        if (getJobType().equals(JOB_BLACKSMITH)) return true;
+        if (getJobType().equals(JOB_MINER))      return true;
+        if (getJobType().equals(JOB_SMELTER))    return true;
         if (getJobType().equals(JOB_CATTLE_HERDER)
                 || getJobType().equals(JOB_CHICKEN_BREEDER)
                 || getJobType().equals(JOB_PIG_BREEDER)
@@ -520,31 +522,28 @@ public class JobSystem {
                 return distanceSquared > ((GROCER_IDLE_RADIUS_X + 10) * (GROCER_IDLE_RADIUS_X + 10));
             }
         }
-        if (getJobType().equals(JOB_BUTCHER)) {
+        if (getJobType().equals(JOB_BUTCHER))
             return distanceSquared > ((BUTCHER_IDLE_RADIUS_X + 10) * (BUTCHER_IDLE_RADIUS_X + 10));
-        }
-        if (getJobType().equals(JOB_TANNER)) {
+        if (getJobType().equals(JOB_TANNER))
             return distanceSquared > ((TANNER_IDLE_RADIUS_X + 10) * (TANNER_IDLE_RADIUS_X + 10));
-        }
-        if (getJobType().equals(JOB_TAILOR)) {
+        if (getJobType().equals(JOB_TAILOR))
             return distanceSquared > ((TAILOR_IDLE_RADIUS_X + 10) * (TAILOR_IDLE_RADIUS_X + 10));
-        }
-        if (getJobType().equals(JOB_GUARD)) {
+        if (getJobType().equals(JOB_BLACKSMITH))
+            return distanceSquared > ((BLACKSMITH_IDLE_RADIUS_X + 10) * (BLACKSMITH_IDLE_RADIUS_X + 10));
+        if (getJobType().equals(JOB_GUARD))
             return distanceSquared > ((GUARD_WORK_RADIUS_X + 10) * (GUARD_WORK_RADIUS_X + 10));
-        }
         if (getJobType().equals(JOB_MINER)) return false;
-        if (getJobType().equals(JOB_SMELTER)) {
+        if (getJobType().equals(JOB_SMELTER))
             return distanceSquared > ((SMELTER_WORK_RADIUS_X + 10) * (SMELTER_WORK_RADIUS_X + 10));
-        }
         if (getJobType().equals(JOB_CATTLE_HERDER)
                 || getJobType().equals(JOB_CHICKEN_BREEDER)
                 || getJobType().equals(JOB_PIG_BREEDER)
-                || getJobType().equals(JOB_SHEEP_HERDER)) {
+                || getJobType().equals(JOB_SHEEP_HERDER))
             return distanceSquared > ((ANIMAL_HERDER_WORK_RADIUS_X + 10) * (ANIMAL_HERDER_WORK_RADIUS_X + 10));
-        }
 
         return false;
     }
+
     public BlockPos getWorkCenter() {
         if (hasJob() && getJobBlockPos() != null) {
             return getJobBlockPos();
@@ -568,6 +567,7 @@ public class JobSystem {
             else if (currentName.startsWith("Butcher "))         baseName = currentName.substring(8);
             else if (currentName.startsWith("Tanner "))          baseName = currentName.substring(7);
             else if (currentName.startsWith("Tailor "))          baseName = currentName.substring(7);
+            else if (currentName.startsWith("Blacksmith "))      baseName = currentName.substring(11);
             else if (currentName.startsWith("Guard "))           baseName = currentName.substring(6);
             else if (currentName.startsWith("Miner "))           baseName = currentName.substring(6);
             else if (currentName.startsWith("Smelter "))         baseName = currentName.substring(8);
@@ -582,6 +582,7 @@ public class JobSystem {
             else if (getJobType().equals(JOB_BUTCHER))         newName = "Butcher "         + baseName;
             else if (getJobType().equals(JOB_TANNER))          newName = "Tanner "          + baseName;
             else if (getJobType().equals(JOB_TAILOR))          newName = "Tailor "          + baseName;
+            else if (getJobType().equals(JOB_BLACKSMITH))      newName = "Blacksmith "      + baseName;
             else if (getJobType().equals(JOB_GUARD))           newName = "Guard "           + baseName;
             else if (getJobType().equals(JOB_MINER))           newName = "Miner "           + baseName;
             else if (getJobType().equals(JOB_SMELTER))         newName = "Smelter "         + baseName;

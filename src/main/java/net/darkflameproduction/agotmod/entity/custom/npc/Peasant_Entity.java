@@ -702,6 +702,30 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
             }
         }
 
+        if (!this.level().isClientSide && getJobType().equals(JobSystem.JOB_BLACKSMITH)) {
+            if (net.darkflameproduction.agotmod.entity.custom.npc.system.blacksmith.BlacksmithInventoryTicketSystem.hasPendingResponse(this.getUUID())) {
+                net.darkflameproduction.agotmod.entity.custom.npc.system.blacksmith.BlacksmithInventoryTicketSystem.InventoryResponseTicket response =
+                        net.darkflameproduction.agotmod.entity.custom.npc.system.blacksmith.BlacksmithInventoryTicketSystem.consumeResponse(this.getUUID());
+
+                if (response != null && this.level() instanceof ServerLevel serverLevel) {
+                    this.registerWithTownHall(response.townHallPos);
+                    net.minecraft.server.level.ServerPlayer serverPlayer =
+                            serverLevel.getServer().getPlayerList().getPlayer(response.playerUUID);
+
+                    if (serverPlayer != null) {
+                        List<GrocerSystem.GrocerInventoryEntry> entries = buildFilteredEntries(
+                                response.items, net.darkflameproduction.agotmod.util.ItemPricing::isBlacksmithItem);
+                        List<OpenGrocerInventoryPacket.PlayerInventoryEntry> playerEntries =
+                                buildPlayerEntries(serverPlayer, net.darkflameproduction.agotmod.util.ItemPricing::isBlacksmithItem);
+                        long playerBalance = serverPlayer.getPersistentData().getLong(COIN_BALANCE_KEY);
+                        net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
+                                new OpenGrocerInventoryPacket(this.getDisplayName().getString(),
+                                        entries, playerEntries, response.townBalance, playerBalance));
+                    }
+                }
+            }
+        }
+
         if (!this.level().isClientSide && isChild()) {
             int currentTimer = getAgingTimer();
             currentTimer++;

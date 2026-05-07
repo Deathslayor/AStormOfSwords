@@ -3,6 +3,7 @@ package net.darkflameproduction.agotmod.entity.custom.npc.goals.tanner;
 import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.tanner.TannerCollectionTicketSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.tanner.TannerSystem;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.item.ItemStack;
 
@@ -26,10 +27,17 @@ public class CollectTannerMaterialsGoal extends Goal {
         if (!peasant.getJobType().equals(JobSystem.JOB_TANNER)) return false;
         if (peasant.isSleeping() || peasant.getHungerSystem().isEating()) return false;
         if (peasant.needsFoodCollection()) return false;
+        if (peasant.shouldSleep()) return false;
 
         long currentDay = peasant.level().getDayTime() / 24000;
         if (peasant.getTannerSystem().getLastCollectionDay() == currentDay) return false;
-        if (TannerCollectionTicketSystem.hasPendingRequest(peasant.getUUID())) return false;
+
+        // Clear stuck pending requests
+        if (TannerCollectionTicketSystem.hasPendingRequest(peasant.getUUID())
+                && !TannerCollectionTicketSystem.hasPendingResponse(peasant.getUUID())) {
+            TannerCollectionTicketSystem.consumeRequest(peasant.getUUID());
+        }
+
         if (TannerCollectionTicketSystem.hasPendingResponse(peasant.getUUID())) return true;
 
         long dayTime = peasant.level().getDayTime() % 24000;
@@ -41,6 +49,7 @@ public class CollectTannerMaterialsGoal extends Goal {
         if (itemsReceived) return false;
         if (waitTicks >= MAX_WAIT_TICKS) return false;
         if (peasant.isSleeping() || peasant.getHungerSystem().isEating()) return false;
+        if (peasant.shouldSleep()) return false;
         return true;
     }
 
@@ -55,6 +64,10 @@ public class CollectTannerMaterialsGoal extends Goal {
             return;
         }
 
+        if (!peasant.isRegisteredToTownHall()) {
+            peasant.findAndRegisterWithNearestTownHall();
+        }
+
         long currentDay = peasant.level().getDayTime() / 24000;
         TannerCollectionTicketSystem.postRequest(
                 peasant.getUUID(), currentDay, peasant.blockPosition());
@@ -65,6 +78,11 @@ public class CollectTannerMaterialsGoal extends Goal {
     public void tick() {
         if (!ticketPosted) return;
         waitTicks++;
+
+        if (waitTicks >= MAX_WAIT_TICKS) {
+            TannerCollectionTicketSystem.consumeRequest(peasant.getUUID());
+            return;
+        }
 
         if (TannerCollectionTicketSystem.hasPendingResponse(peasant.getUUID())) {
             TannerCollectionTicketSystem.TannerResponse response =
@@ -94,8 +112,7 @@ public class CollectTannerMaterialsGoal extends Goal {
             itemsReceived = true;
             long currentDay = peasant.level().getDayTime() / 24000;
             peasant.getTannerSystem().setLastCollectionDay(currentDay);
-            peasant.getTannerSystem().setCurrentState(
-                    net.darkflameproduction.agotmod.entity.custom.npc.system.tanner.TannerSystem.TannerState.WORKING);
+            peasant.getTannerSystem().setCurrentState(TannerSystem.TannerState.WORKING);
         }
     }
 

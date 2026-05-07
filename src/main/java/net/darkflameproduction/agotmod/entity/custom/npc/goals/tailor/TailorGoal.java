@@ -21,77 +21,89 @@ public class TailorGoal extends Goal {
 
     private static final int TICKS_PER_CRAFT = 16;
 
-    // Flower → Dye mapping
+    private static final net.minecraft.world.item.Item[] ARMOR_PIECES = {
+            Items.LEATHER_HELMET,
+            Items.LEATHER_CHESTPLATE,
+            Items.LEATHER_LEGGINGS,
+            Items.LEATHER_BOOTS
+    };
+
+    private static final int[] ARMOR_COSTS = { 5, 8, 7, 4 };
+
     private static final Map<String, String> FLOWER_TO_DYE = new LinkedHashMap<>();
     static {
         // Red dye
-        FLOWER_TO_DYE.put("agotmod:rose",           "minecraft:red_dye");
-        FLOWER_TO_DYE.put("agotmod:dusky_rose",     "minecraft:red_dye");
-        FLOWER_TO_DYE.put("agotmod:ginger",         "minecraft:red_dye");
-        FLOWER_TO_DYE.put("agotmod:frostfire",      "minecraft:red_dye");
-        FLOWER_TO_DYE.put("agotmod:dragons_breath", "minecraft:red_dye");
-        FLOWER_TO_DYE.put("agotmod:bloodbloom",     "minecraft:red_dye");
-        FLOWER_TO_DYE.put("agotmod:red_rose_bush",  "minecraft:red_dye");
-        FLOWER_TO_DYE.put("minecraft:poppy",         "minecraft:red_dye");
-        FLOWER_TO_DYE.put("minecraft:red_tulip",     "minecraft:red_dye");
+        FLOWER_TO_DYE.put("agotmod:rose",            "minecraft:red_dye");
+        FLOWER_TO_DYE.put("agotmod:dusky_rose",      "minecraft:red_dye");
+        FLOWER_TO_DYE.put("agotmod:ginger",          "minecraft:red_dye");
+        FLOWER_TO_DYE.put("agotmod:frostfire",       "minecraft:red_dye");
+        FLOWER_TO_DYE.put("agotmod:dragons_breath",  "minecraft:red_dye");
+        FLOWER_TO_DYE.put("agotmod:bloodbloom",      "minecraft:red_dye");
+        FLOWER_TO_DYE.put("agotmod:red_rose_bush",   "minecraft:red_dye");
+        FLOWER_TO_DYE.put("minecraft:poppy",          "minecraft:red_dye");
+        FLOWER_TO_DYE.put("minecraft:red_tulip",      "minecraft:red_dye");
         // Blue dye
-        FLOWER_TO_DYE.put("agotmod:blue_rose",      "minecraft:blue_dye");
-        FLOWER_TO_DYE.put("agotmod:moonbloom",      "minecraft:blue_dye");
-        FLOWER_TO_DYE.put("agotmod:blue_rose_bush", "minecraft:blue_dye");
-        FLOWER_TO_DYE.put("minecraft:cornflower",    "minecraft:blue_dye");
-        FLOWER_TO_DYE.put("minecraft:blue_orchid",   "minecraft:blue_dye");
+        FLOWER_TO_DYE.put("agotmod:blue_rose",       "minecraft:blue_dye");
+        FLOWER_TO_DYE.put("agotmod:moonbloom",       "minecraft:blue_dye");
+        FLOWER_TO_DYE.put("agotmod:blue_rose_bush",  "minecraft:blue_dye");
+        FLOWER_TO_DYE.put("minecraft:cornflower",     "minecraft:blue_dye");
+        FLOWER_TO_DYE.put("minecraft:blue_orchid",    "minecraft:blue_dye");
         // White dye
-        FLOWER_TO_DYE.put("agotmod:white_rose",     "minecraft:white_dye");
-        FLOWER_TO_DYE.put("agotmod:ladys_lace",     "minecraft:white_dye");
-        FLOWER_TO_DYE.put("agotmod:wild_radish",    "minecraft:white_dye");
-        FLOWER_TO_DYE.put("agotmod:white_rose_bush","minecraft:white_dye");
-        FLOWER_TO_DYE.put("minecraft:lily_of_the_valley","minecraft:white_dye");
-        FLOWER_TO_DYE.put("minecraft:oxeye_daisy",  "minecraft:white_dye");
-        FLOWER_TO_DYE.put("minecraft:white_tulip",  "minecraft:white_dye");
+        FLOWER_TO_DYE.put("agotmod:white_rose",      "minecraft:white_dye");
+        FLOWER_TO_DYE.put("agotmod:ladys_lace",      "minecraft:white_dye");
+        FLOWER_TO_DYE.put("agotmod:wild_radish",     "minecraft:white_dye");
+        FLOWER_TO_DYE.put("agotmod:white_rose_bush", "minecraft:white_dye");
+        FLOWER_TO_DYE.put("minecraft:lily_of_the_valley", "minecraft:white_dye");
+        FLOWER_TO_DYE.put("minecraft:oxeye_daisy",   "minecraft:white_dye");
+        FLOWER_TO_DYE.put("minecraft:white_tulip",   "minecraft:white_dye");
         // Light blue dye
-        FLOWER_TO_DYE.put("agotmod:winter_rose",        "minecraft:light_blue_dye");
-        FLOWER_TO_DYE.put("agotmod:forget_me_not",      "minecraft:light_blue_dye");
-        FLOWER_TO_DYE.put("agotmod:coldsnap",           "minecraft:light_blue_dye");
-        FLOWER_TO_DYE.put("agotmod:winter_rose_bush",   "minecraft:light_blue_dye");
-        FLOWER_TO_DYE.put("minecraft:azure_bluet",      "minecraft:light_blue_dye");
+        FLOWER_TO_DYE.put("agotmod:winter_rose",       "minecraft:light_blue_dye");
+        FLOWER_TO_DYE.put("agotmod:forget_me_not",     "minecraft:light_blue_dye");
+        FLOWER_TO_DYE.put("agotmod:coldsnap",          "minecraft:light_blue_dye");
+        FLOWER_TO_DYE.put("agotmod:winter_rose_bush",  "minecraft:light_blue_dye");
+        FLOWER_TO_DYE.put("minecraft:azure_bluet",     "minecraft:light_blue_dye");
         // Magenta dye
-        FLOWER_TO_DYE.put("agotmod:thistle",        "minecraft:magenta_dye");
-        FLOWER_TO_DYE.put("agotmod:saffron_crocus", "minecraft:magenta_dye");
-        FLOWER_TO_DYE.put("agotmod:lungwort",       "minecraft:magenta_dye");
-        FLOWER_TO_DYE.put("minecraft:allium",        "minecraft:magenta_dye");
+        FLOWER_TO_DYE.put("agotmod:thistle",         "minecraft:magenta_dye");
+        FLOWER_TO_DYE.put("agotmod:saffron_crocus",  "minecraft:magenta_dye");
+        FLOWER_TO_DYE.put("agotmod:lungwort",        "minecraft:magenta_dye");
+        FLOWER_TO_DYE.put("minecraft:allium",         "minecraft:magenta_dye");
+        FLOWER_TO_DYE.put("minecraft:lilac",          "minecraft:magenta_dye");
         // Yellow dye
-        FLOWER_TO_DYE.put("agotmod:tansy",          "minecraft:yellow_dye");
-        FLOWER_TO_DYE.put("agotmod:sedge",          "minecraft:yellow_dye");
-        FLOWER_TO_DYE.put("agotmod:gorse",          "minecraft:yellow_dye");
-        FLOWER_TO_DYE.put("agotmod:goldenrod",      "minecraft:yellow_dye");
-        FLOWER_TO_DYE.put("agotmod:goldencup",      "minecraft:yellow_dye");
-        FLOWER_TO_DYE.put("agotmod:goathead",       "minecraft:yellow_dye");
-        FLOWER_TO_DYE.put("agotmod:evening_star",   "minecraft:yellow_dye");
-        FLOWER_TO_DYE.put("minecraft:dandelion",     "minecraft:yellow_dye");
-        FLOWER_TO_DYE.put("minecraft:sunflower",     "minecraft:yellow_dye");
+        FLOWER_TO_DYE.put("agotmod:tansy",           "minecraft:yellow_dye");
+        FLOWER_TO_DYE.put("agotmod:sedge",           "minecraft:yellow_dye");
+        FLOWER_TO_DYE.put("agotmod:gorse",           "minecraft:yellow_dye");
+        FLOWER_TO_DYE.put("agotmod:goldenrod",       "minecraft:yellow_dye");
+        FLOWER_TO_DYE.put("agotmod:goldencup",       "minecraft:yellow_dye");
+        FLOWER_TO_DYE.put("agotmod:goathead",        "minecraft:yellow_dye");
+        FLOWER_TO_DYE.put("agotmod:evening_star",    "minecraft:yellow_dye");
+        FLOWER_TO_DYE.put("minecraft:dandelion",      "minecraft:yellow_dye");
+        FLOWER_TO_DYE.put("minecraft:sunflower",      "minecraft:yellow_dye");
         // Orange dye
-        FLOWER_TO_DYE.put("agotmod:spiceflower",    "minecraft:orange_dye");
-        FLOWER_TO_DYE.put("minecraft:orange_tulip",  "minecraft:orange_dye");
+        FLOWER_TO_DYE.put("agotmod:spiceflower",     "minecraft:orange_dye");
+        FLOWER_TO_DYE.put("minecraft:orange_tulip",   "minecraft:orange_dye");
         // Purple dye
-        FLOWER_TO_DYE.put("agotmod:poison_kisses",  "minecraft:purple_dye");
-        FLOWER_TO_DYE.put("agotmod:pennyroyal",     "minecraft:purple_dye");
-        FLOWER_TO_DYE.put("agotmod:nightshade",     "minecraft:purple_dye");
-        FLOWER_TO_DYE.put("agotmod:lavender",       "minecraft:purple_dye");
+        FLOWER_TO_DYE.put("agotmod:poison_kisses",   "minecraft:purple_dye");
+        FLOWER_TO_DYE.put("agotmod:pennyroyal",      "minecraft:purple_dye");
+        FLOWER_TO_DYE.put("agotmod:nightshade",      "minecraft:purple_dye");
+        FLOWER_TO_DYE.put("agotmod:lavender",        "minecraft:purple_dye");
         // Pink dye
-        FLOWER_TO_DYE.put("agotmod:liverwort",      "minecraft:pink_dye");
-        FLOWER_TO_DYE.put("agotmod:gillyflower",    "minecraft:pink_dye");
-        FLOWER_TO_DYE.put("minecraft:pink_tulip",    "minecraft:pink_dye");
-        FLOWER_TO_DYE.put("minecraft:peony",         "minecraft:pink_dye");
+        FLOWER_TO_DYE.put("agotmod:liverwort",       "minecraft:pink_dye");
+        FLOWER_TO_DYE.put("agotmod:gillyflower",     "minecraft:pink_dye");
+        FLOWER_TO_DYE.put("minecraft:pink_tulip",     "minecraft:pink_dye");
+        FLOWER_TO_DYE.put("minecraft:peony",          "minecraft:pink_dye");
         // Black dye
-        FLOWER_TO_DYE.put("agotmod:black_lotus",    "minecraft:black_dye");
-        FLOWER_TO_DYE.put("minecraft:wither_rose",   "minecraft:black_dye");
+        FLOWER_TO_DYE.put("agotmod:black_lotus",     "minecraft:black_dye");
+        FLOWER_TO_DYE.put("minecraft:wither_rose",    "minecraft:black_dye");
         // Other vanilla
-        FLOWER_TO_DYE.put("minecraft:lilac",         "minecraft:magenta_dye");
-        FLOWER_TO_DYE.put("minecraft:rose_bush",     "minecraft:red_dye");
+        FLOWER_TO_DYE.put("minecraft:rose_bush",      "minecraft:red_dye");
     }
 
     private final Peasant_Entity peasant;
-    private int craftTick = 0;
+    private int craftTick        = 0;
+    private long lastArmorDay    = -1;
+    private boolean madeArmorToday = false;
+    // Chosen at start of each day: 0=helmet,1=chestplate,2=leggings,3=boots
+    private int todaysArmorIndex = 0;
 
     public TailorGoal(Peasant_Entity peasant) {
         this.peasant = peasant;
@@ -130,18 +142,17 @@ public class TailorGoal extends Goal {
     }
 
     private boolean hasAnythingToCraft() {
-        // Has flowers to turn into dye
         for (String flowerKey : FLOWER_TO_DYE.keySet()) {
             if (hasItemInInventory(flowerKey, 1)) return true;
         }
-        // Has string to turn into wool
-        if (hasItemInInventory("minecraft:string", 4)) return true;
-        // Has wool to turn into cloth
-        if (hasItemInInventory("minecraft:white_wool", 2)) return true;
-        // Has leather to craft armor
-        if (hasItemInInventory("minecraft:leather", 7)) return true;
-        // Has cotton to turn into string
         if (hasItemInInventory("agotmod:cotton", 1)) return true;
+        if (hasItemInInventory("minecraft:string", 4)) return true;
+        if (hasItemInInventory("minecraft:white_wool", 2)) return true;
+        // Armor only counts if we haven't made one today
+        if (!madeArmorToday) {
+            int cost = ARMOR_COSTS[todaysArmorIndex];
+            if (hasItemInInventory("minecraft:leather", cost)) return true;
+        }
         return false;
     }
 
@@ -149,6 +160,15 @@ public class TailorGoal extends Goal {
     public void start() {
         craftTick = 0;
         peasant.getTailorSystem().setCurrentState(TailorSystem.TailorState.WORKING);
+
+        // Pick today's armor piece if it's a new day
+        long currentDay = peasant.level().getDayTime() / 24000;
+        if (lastArmorDay != currentDay) {
+            lastArmorDay    = currentDay;
+            madeArmorToday  = false;
+            todaysArmorIndex = peasant.level().getRandom().nextInt(ARMOR_PIECES.length);
+        }
+
         BlockPos jobBlock = peasant.getJobBlockPos();
         if (jobBlock != null) {
             peasant.getNavigation().moveTo(
@@ -168,6 +188,14 @@ public class TailorGoal extends Goal {
 
         BlockPos jobBlock = peasant.getJobBlockPos();
         if (jobBlock == null) return;
+
+        // Re-check day rollover inside tick too
+        long currentDay = peasant.level().getDayTime() / 24000;
+        if (lastArmorDay != currentDay) {
+            lastArmorDay    = currentDay;
+            madeArmorToday  = false;
+            todaysArmorIndex = peasant.level().getRandom().nextInt(ARMOR_PIECES.length);
+        }
 
         double dist = peasant.distanceToSqr(
                 jobBlock.getX() + 0.5, jobBlock.getY(), jobBlock.getZ() + 0.5);
@@ -218,46 +246,23 @@ public class TailorGoal extends Goal {
 
         // Step 4: Flowers → Dye (1 flower = 1 dye)
         for (Map.Entry<String, String> entry : FLOWER_TO_DYE.entrySet()) {
-            String flowerKey = entry.getKey();
-            String dyeKey    = entry.getValue();
-            if (hasItemInInventory(flowerKey, 1)) {
-                removeItemFromInventory(flowerKey, 1);
-                spawnItem(dyeKey, 1);
+            if (hasItemInInventory(entry.getKey(), 1)) {
+                removeItemFromInventory(entry.getKey(), 1);
+                spawnItem(entry.getValue(), 1);
                 peasant.triggerInteractAnimation();
                 return;
             }
         }
 
-        // Step 5: Leather armor crafting
-        // Helmet: 5 leather
-        if (hasItemInInventory("minecraft:leather", 5) &&
-                !hasItemInInventory("minecraft:leather_helmet", 1)) {
-            removeItemFromInventory("minecraft:leather", 5);
-            addItemToInventory(new ItemStack(Items.LEATHER_HELMET, 1));
-            peasant.triggerInteractAnimation();
-            return;
-        }
-        // Chestplate: 8 leather
-        if (hasItemInInventory("minecraft:leather", 8) &&
-                !hasItemInInventory("minecraft:leather_chestplate", 1)) {
-            removeItemFromInventory("minecraft:leather", 8);
-            addItemToInventory(new ItemStack(Items.LEATHER_CHESTPLATE, 1));
-            peasant.triggerInteractAnimation();
-            return;
-        }
-        // Leggings: 7 leather
-        if (hasItemInInventory("minecraft:leather", 7) &&
-                !hasItemInInventory("minecraft:leather_leggings", 1)) {
-            removeItemFromInventory("minecraft:leather", 7);
-            addItemToInventory(new ItemStack(Items.LEATHER_LEGGINGS, 1));
-            peasant.triggerInteractAnimation();
-            return;
-        }
-        // Boots: 4 leather
-        if (hasItemInInventory("minecraft:leather", 4)) {
-            removeItemFromInventory("minecraft:leather", 4);
-            addItemToInventory(new ItemStack(Items.LEATHER_BOOTS, 1));
-            peasant.triggerInteractAnimation();
+        // Step 5: One random armor piece per day
+        if (!madeArmorToday) {
+            int cost = ARMOR_COSTS[todaysArmorIndex];
+            if (hasItemInInventory("minecraft:leather", cost)) {
+                removeItemFromInventory("minecraft:leather", cost);
+                addItemToInventory(new ItemStack(ARMOR_PIECES[todaysArmorIndex], 1));
+                madeArmorToday = true;
+                peasant.triggerInteractAnimation();
+            }
         }
     }
 

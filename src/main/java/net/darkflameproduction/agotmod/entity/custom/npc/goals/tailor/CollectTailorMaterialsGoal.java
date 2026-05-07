@@ -27,10 +27,17 @@ public class CollectTailorMaterialsGoal extends Goal {
         if (!peasant.getJobType().equals(JobSystem.JOB_TAILOR)) return false;
         if (peasant.isSleeping() || peasant.getHungerSystem().isEating()) return false;
         if (peasant.needsFoodCollection()) return false;
+        if (peasant.shouldSleep()) return false;
 
         long currentDay = peasant.level().getDayTime() / 24000;
         if (peasant.getTailorSystem().getLastCollectionDay() == currentDay) return false;
-        if (TailorCollectionTicketSystem.hasPendingRequest(peasant.getUUID())) return false;
+
+        // If there's a stuck pending request from a previous attempt, clear it
+        if (TailorCollectionTicketSystem.hasPendingRequest(peasant.getUUID())
+                && !TailorCollectionTicketSystem.hasPendingResponse(peasant.getUUID())) {
+            TailorCollectionTicketSystem.consumeRequest(peasant.getUUID());
+        }
+
         if (TailorCollectionTicketSystem.hasPendingResponse(peasant.getUUID())) return true;
 
         long dayTime = peasant.level().getDayTime() % 24000;
@@ -41,7 +48,9 @@ public class CollectTailorMaterialsGoal extends Goal {
     public boolean canContinueToUse() {
         if (itemsReceived) return false;
         if (waitTicks >= MAX_WAIT_TICKS) return false;
-        return !peasant.isSleeping() && !peasant.getHungerSystem().isEating();
+        if (peasant.isSleeping() || peasant.getHungerSystem().isEating()) return false;
+        if (peasant.shouldSleep()) return false;
+        return true;
     }
 
     @Override
@@ -55,8 +64,14 @@ public class CollectTailorMaterialsGoal extends Goal {
             return;
         }
 
+        // Make sure peasant is registered with a town hall before posting
+        if (!peasant.isRegisteredToTownHall()) {
+            peasant.findAndRegisterWithNearestTownHall();
+        }
+
         long currentDay = peasant.level().getDayTime() / 24000;
-        TailorCollectionTicketSystem.postRequest(peasant.getUUID(), currentDay, peasant.blockPosition());
+        TailorCollectionTicketSystem.postRequest(
+                peasant.getUUID(), currentDay, peasant.blockPosition());
         ticketPosted = true;
     }
 
@@ -64,6 +79,12 @@ public class CollectTailorMaterialsGoal extends Goal {
     public void tick() {
         if (!ticketPosted) return;
         waitTicks++;
+
+        // If we've waited too long with no response, clear the stuck request
+        if (waitTicks >= MAX_WAIT_TICKS) {
+            TailorCollectionTicketSystem.consumeRequest(peasant.getUUID());
+            return;
+        }
 
         if (TailorCollectionTicketSystem.hasPendingResponse(peasant.getUUID())) {
             TailorCollectionTicketSystem.TailorResponse response =
