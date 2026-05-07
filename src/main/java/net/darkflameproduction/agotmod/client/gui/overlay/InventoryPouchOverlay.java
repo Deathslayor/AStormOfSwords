@@ -2,7 +2,6 @@ package net.darkflameproduction.agotmod.client.gui.overlay;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.darkflameproduction.agotmod.AGoTMod;
-import net.darkflameproduction.agotmod.network.ClientCoinHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
@@ -24,6 +23,7 @@ import java.util.List;
 @OnlyIn(Dist.CLIENT)
 @EventBusSubscriber(modid = AGoTMod.MOD_ID, value = Dist.CLIENT)
 public class InventoryPouchOverlay {
+    private static final String COIN_BALANCE_KEY = "agotmod.coin_balance";
     private static boolean isRecipeBookOpen = false;
     private static final String CONFIG_FILE = "config/agotmod_recipe_book_state.txt";
 
@@ -135,11 +135,13 @@ public class InventoryPouchOverlay {
     }
 
     private static void renderBundleTooltip(GuiGraphics guiGraphics, int bundleIconX, int bundleIconY, int mouseX, int mouseY) {
-        // Get actual player balance from client handler
-        long totalCoins = ClientCoinHandler.getClientCoinBalance();
+        Minecraft minecraft = Minecraft.getInstance();
+        if (minecraft.player == null) {
+            return;
+        }
 
-        // Debug logging - always log to see if tooltip is being rendered
-        AGoTMod.LOGGER.info("Rendering tooltip - Client balance: {}", totalCoins);
+        // Read the same synced client balance used by the trade screens.
+        long totalCoins = minecraft.player.getPersistentData().getLong(COIN_BALANCE_KEY);
 
         // Create tooltip lines
         List<String> tooltipLines = new ArrayList<>();
@@ -202,7 +204,6 @@ public class InventoryPouchOverlay {
         int tooltipY = bundleIconY;
 
         // Calculate tooltip dimensions
-        Minecraft minecraft = Minecraft.getInstance();
         int maxTextWidth = 0;
         for (String line : tooltipLines) {
             maxTextWidth = Math.max(maxTextWidth, minecraft.font.width(line));
