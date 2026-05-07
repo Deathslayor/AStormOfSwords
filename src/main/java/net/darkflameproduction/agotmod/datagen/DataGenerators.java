@@ -46,12 +46,5 @@ public class DataGenerators {
         // Client-side data generation
         generator.addProvider(event.includeClient(), new ModBlockStateProvider(packOutput, existingFileHelper));
         generator.addProvider(event.includeClient(), new ModItemModelProvider(packOutput, existingFileHelper));
-
-        // Map Provider (for CTGen integration)
-        generator.addProvider(true, new MapProvider(ModDimensionProvider.getOriginalMapImage(), ModDimensionProvider.KNOWN_WORLD,
-                worldGenProvider.getRegistryProvider().thenComposeAsync(provider -> {
-                    List<Zone> Zones = ModDimensionProvider.getZones(provider.lookupOrThrow(CTRegistries.ZONES_KEY)).stream().map(Holder::value).toList();
-                    return CompletableFuture.completedFuture(Zones);
-                }), packOutput));
     }
 }

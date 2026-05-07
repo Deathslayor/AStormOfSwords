@@ -1,5 +1,6 @@
 package net.darkflameproduction.agotmod.gui.widget;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.tocraft.ctgen.impl.network.SyncMapPacket;
 import net.minecraft.client.Minecraft;
@@ -21,7 +22,6 @@ public class AGoTMapWidget extends AbstractWidget {
 
     private final Minecraft minecraft;
     private final ResourceLocation mapId;
-    private final boolean pixelsAreChunks;
     private final int pixelOffsetX;
     private final int pixelOffsetY;
     private final int mapWidth;
@@ -42,43 +42,40 @@ public class AGoTMapWidget extends AbstractWidget {
     @Nullable
     public static AGoTMapWidget ofPacket(Minecraft minecraft, int x, int y, int width, int height, @NotNull SyncMapPacket packet) {
         ResourceLocation packetMapId = packet.getMapId();
-        if (packetMapId == null) {
-            return null;
-        }
+        if (packetMapId == null) return null;
 
         return new AGoTMapWidget(
-                minecraft,
-                x,
-                y,
-                width,
-                height,
+                minecraft, x, y, width, height,
                 ResourceLocation.fromNamespaceAndPath(packetMapId.getNamespace(), "textures/gui/" + packetMapId.getPath() + ".png"),
-                packet.isPixelsAreChunks(),
-                packet.getXOffset(),
-                packet.getYOffset(),
-                packet.getMapWidth(),
-                packet.getMapHeight()
+                packet.getXOffset(), packet.getYOffset(),
+                packet.getMapWidth(), packet.getMapHeight()
         );
     }
 
-    public AGoTMapWidget(Minecraft minecraft, int x, int y, int width, int height, ResourceLocation mapId, boolean pixelsAreChunks, int xOffset, int yOffset, int mapWidth, int mapHeight) {
-        this(minecraft, x, y, width, height, mapId, pixelsAreChunks, xOffset, yOffset, mapWidth, mapHeight, defaultZoom(width, height, mapWidth, mapHeight), true, true);
+    public AGoTMapWidget(Minecraft minecraft, int x, int y, int width, int height,
+                         ResourceLocation mapId,
+                         int xOffset, int yOffset, int mapWidth, int mapHeight) {
+        this(minecraft, x, y, width, height, mapId,
+                xOffset, yOffset, mapWidth, mapHeight,
+                defaultZoom(width, height, mapWidth, mapHeight), true, true);
     }
 
-    public AGoTMapWidget(Minecraft minecraft, int x, int y, int width, int height, ResourceLocation mapId, boolean pixelsAreChunks, int xOffset, int yOffset, int mapWidth, int mapHeight, float minZoom, boolean showCursorPos, boolean showPlayer) {
+    public AGoTMapWidget(Minecraft minecraft, int x, int y, int width, int height,
+                         ResourceLocation mapId,
+                         int xOffset, int yOffset, int mapWidth, int mapHeight,
+                         float minZoom, boolean showCursorPos, boolean showPlayer) {
         super(x, y, width, height, Component.literal("Map Widget"));
-        this.minecraft = minecraft;
-        this.pixelOffsetX = xOffset;
-        this.pixelOffsetY = yOffset;
-        this.mapWidth = mapWidth;
-        this.mapHeight = mapHeight;
-        this.ratio = (double) mapWidth / mapHeight;
-        this.mapId = mapId;
-        this.pixelsAreChunks = pixelsAreChunks;
-        this.minZoom = minZoom;
-        this.zoom = minZoom;
+        this.minecraft     = minecraft;
+        this.pixelOffsetX  = xOffset;
+        this.pixelOffsetY  = yOffset;
+        this.mapWidth      = mapWidth;
+        this.mapHeight     = mapHeight;
+        this.ratio         = (double) mapWidth / mapHeight;
+        this.mapId         = mapId;
+        this.minZoom       = minZoom;
+        this.zoom          = minZoom;
         this.showCursorPos = showCursorPos;
-        this.showPlayer = showPlayer;
+        this.showPlayer    = showPlayer;
 
         updateZoomedWidth();
         updateZoomedHeight();
@@ -130,21 +127,18 @@ public class AGoTMapWidget extends AbstractWidget {
     }
 
     public void resetTextureOffsets() {
-        int playerX;
-        int playerY;
+        int playerX, playerY;
         if (minecraft.player != null) {
             BlockPos blockPos = minecraft.player.blockPosition();
-            int scaleShift = pixelsAreChunks ? 4 : 2;
-            int pixelX = (blockPos.getX() >> scaleShift) + pixelOffsetX;
-            int pixelY = (blockPos.getZ() >> scaleShift) + pixelOffsetY;
-            playerX = (int) ((double) pixelX / mapWidth * zoomedWidth);
+            int pixelX = (blockPos.getX() >> 2) + pixelOffsetX;
+            int pixelY = (blockPos.getZ() >> 2) + pixelOffsetY;
+            playerX = (int) ((double) pixelX / mapWidth  * zoomedWidth);
             playerY = (int) ((double) pixelY / mapHeight * zoomedHeight);
         } else {
-            playerX = zoomedWidth / 2;
+            playerX = zoomedWidth  / 2;
             playerY = zoomedHeight / 2;
         }
-
-        setTextureOffsetX(playerX - width / 2.0);
+        setTextureOffsetX(playerX - width  / 2.0);
         setTextureOffsetY(playerY - height / 2.0);
     }
 
@@ -207,52 +201,58 @@ public class AGoTMapWidget extends AbstractWidget {
 
     @Override
     protected void renderWidget(@NotNull GuiGraphics context, int mouseX, int mouseY, float delta) {
-        if (minecraft == null || minecraft.player == null) {
-            return;
-        }
+        if (minecraft == null || minecraft.player == null) return;
 
         updateZoomedWidth();
         updateZoomedHeight();
 
-        context.enableScissor(getX(), getY(), getX() + width, getY() + height);
-        context.blit(RenderType::guiTextured, mapId, getTextureX(), getTextureY(), 0, 0, zoomedWidth, zoomedHeight, zoomedWidth, zoomedHeight);
+        context.flush();
+        final double scaleFactor = minecraft.getWindow().getGuiScale();
+        RenderSystem.enableScissor(
+                (int) (getX() * scaleFactor),
+                (int) (getY() * scaleFactor),
+                (int) (width  * scaleFactor),
+                (int) (height * scaleFactor)
+        );
+
+        context.blit(RenderType::guiTextured, mapId,
+                getTextureX(), getTextureY(), 0, 0,
+                zoomedWidth, zoomedHeight, zoomedWidth, zoomedHeight);
 
         if (showPlayer) {
             BlockPos blockPos = minecraft.player.blockPosition();
-            int scaleShift = pixelsAreChunks ? 4 : 2;
-            int pixelX = (blockPos.getX() >> scaleShift) + pixelOffsetX;
-            int pixelY = (blockPos.getZ() >> scaleShift) + pixelOffsetY;
-            int playerX = (int) (getTextureX() + (double) pixelX / mapWidth * zoomedWidth);
+            int pixelX = (blockPos.getX() >> 2) + pixelOffsetX;
+            int pixelY = (blockPos.getZ() >> 2) + pixelOffsetY;
+            int playerX = (int) (getTextureX() + (double) pixelX / mapWidth  * zoomedWidth);
             int playerY = (int) (getTextureY() + (double) pixelY / mapHeight * zoomedHeight);
 
             playerX = Mth.clamp(playerX, getTextureX() + 4, getTextureX() - 4 + zoomedWidth);
             playerY = Mth.clamp(playerY, getTextureY() + 4, getTextureY() - 4 + zoomedHeight);
 
             ResourceLocation skin = minecraft.player.getSkin().texture();
-            context.blit(RenderType::guiTextured, skin, playerX - 4, playerY - 4, 8.0f, 8, 8, 8, 8, 8, 64, 64);
+            context.blit(RenderType::guiTextured, skin, playerX - 4, playerY - 4, 8.0f,  8, 8, 8, 8, 8, 64, 64);
             context.blit(RenderType::guiTextured, skin, playerX - 4, playerY - 4, 40.0f, 8, 8, 8, 8, 8, 64, 64);
         }
 
         if (isHovered && showCursorPos) {
             int mousePixelX = mousePixelX(mouseX);
             int mousePixelY = mousePixelY(mouseY);
-            Component text = Component.translatable("ctgen.screen.mouse_pos", Component.translatable("ctgen.coordinates", mousePixelX, mousePixelY));
-            int textWidth = minecraft.font.width(text);
+            Component textPos = Component.translatable("ctgen.screen.mouse_pos",
+                    Component.translatable("ctgen.coordinates", mousePixelX, mousePixelY));
+            int posWidth = minecraft.font.width(textPos);
 
             PoseStack pose = context.pose();
             pose.pushPose();
             pose.scale(0.75f, 0.75f, 1.0f);
-            context.drawString(
-                    minecraft.font,
-                    text,
-                    (int) (getX() / 0.75f + width / 1.5f - (float) textWidth / 2),
+            context.drawString(minecraft.font, textPos,
+                    (int) (getX() / 0.75f + width / 1.5f - (float) posWidth / 2),
                     (int) ((getY() + (height - (float) height / 8)) / 0.75f),
-                    0xFFFFFF
-            );
+                    0xFFFFFF);
             pose.popPose();
         }
 
-        context.disableScissor();
+        context.flush();
+        RenderSystem.disableScissor();
     }
 
     @Override

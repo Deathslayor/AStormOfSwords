@@ -1,0 +1,149 @@
+{
+  "dimensions": {
+    "minecraft:overworld": {
+      "type": "minecraft:overworld",
+      "generator": {
+        "type": "ctgen:map_based_chunk_generator",
+        "settings": {
+          "map_id": "agotmod:known_world",
+          "default_map_biome": {
+            "biome": "minecraft:deep_cold_ocean",
+            "color": "#002355",
+            "terrain_modifier": 33.0
+          },
+          "noise_gen_settings": "ctgen:overworld",
+          "zones": [
+            {
+              "biome": "minecraft:frozen_peaks",
+              "color": "#ffffff",
+              "terrain_modifier": 0.0,
+              "pixel_weight": 100.0
+            },
+            {
+              "biome": "agotmod:haunted_forest",
+              "color": "#828c82"
+            },
+            {
+              "biome": "minecraft:frozen_river",
+              "color": "#5791f0",
+              "pixel_weight": 40.0
+            },
+            {
+              "biome": "minecraft:frozen_ocean",
+              "color": "#4e7ecc",
+              "pixel_weight": 3.0
+            },
+            {
+              "biome": "minecraft:cold_ocean",
+              "color": "#002a67",
+              "terrain_modifier": 16.0
+            },
+            {
+              "biome": "minecraft:deep_cold_ocean",
+              "color": "#002355",
+              "terrain_modifier": 33.0
+            },
+            {
+              "biome": "minecraft:basalt_deltas",
+              "color": "#000000",
+              "terrain_modifier": 20.0,
+              "pixel_weight": 1.5
+            },
+            {
+              "biome": "agotmod:frostfang_foothills",
+              "color": "#c0c0c0",
+              "terrain_modifier": 20.0,
+              "pixel_weight": 1.5
+            },
+            {
+              "biome": "agotmod:frostfangs",
+              "color": "#aeaeae",
+              "terrain_modifier": 80.0
+            },
+            {
+              "biome": "agotmod:valley_of_thenn",
+              "color": "#6b8f6b"
+            },
+            {
+              "biome": "agotmod:lands_of_always_winter",
+              "color": "#d9d9d9",
+              "terrain_modifier": 6.0,
+              "pixel_weight": 1.5
+            },
+            {
+              "biome": "agotmod:wolfswood",
+              "color": "#2b462b",
+              "terrain_modifier": 6.0
+            },
+            {
+              "biome": "agotmod:wolfswood_clearing",
+              "color": "#487a48",
+              "terrain_modifier": 6.0
+            },
+            {
+              "biome": "agotmod:ironwood",
+              "color": "#263b26",
+              "terrain_modifier": 6.0
+            },
+            {
+              "biome": "agotmod:northern_hills",
+              "color": "#979797",
+              "terrain_modifier": 40.0,
+              "pixel_weight": 1.5
+            },
+            {
+              "biome": "agotmod:northern_mountains",
+              "color": "#828282",
+              "terrain_modifier": 80.0
+            },
+            {
+              "biome": "agotmod:the_north",
+              "color": "#395f39",
+              "terrain_modifier": 3.0
+            },
+            {
+              "biome": "agotmod:the_north",
+              "color": "#395f39",
+              "terrain_modifier": 3.0
+            },
+            {
+              "biome": "agotmod:rills",
+              "color": "#3d5133",
+              "terrain_modifier": 12.0
+            },
+            {
+              "biome": "agotmod:northern_waters",
+              "color": "#0162ff",
+              "pixel_weight": 40.0
+            },
+            {
+              "biome": "agotmod:northern_waters",
+              "color": "#0053d9",
+              "pixel_weight": 3.0
+            },
+            {
+              "biome": "agotmod:stony_shores",
+              "color": "#506250",
+              "terrain_modifier": 6.0
+            },
+            {
+              "biome": "agotmod:the_neck",
+              "color": "#223322",
+              "terrain_modifier": 8.0
+            },
+            {
+              "biome": "agotmod:the_neck",
+              "color": "#574c2f",
+              "pixel_weight": 40.0
+            },
+            {
+              "biome": "agotmod:barrowlands",
+              "color": "#627b40",
+              "terrain_modifier": 20.0
+            }
+          ]
+        }
+      }
+    }
+  }
+}

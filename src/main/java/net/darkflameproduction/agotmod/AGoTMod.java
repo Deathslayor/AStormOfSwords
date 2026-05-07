@@ -4,7 +4,6 @@ import dev.tocraft.ctgen.impl.CTGClient;
 import net.darkflameproduction.agotmod.client.ClientKeyInputEvents;
 import net.darkflameproduction.agotmod.client.ModAttachments;
 import net.darkflameproduction.agotmod.command.SetHouseBannerCommand;
-import net.darkflameproduction.agotmod.datagen.ModDimensionProvider;
 import net.darkflameproduction.agotmod.gui.CustomGuiScreen;
 import net.darkflameproduction.agotmod.init.ModMenuTypes;
 import net.darkflameproduction.agotmod.item.custom.BannerPatterns;
@@ -96,7 +95,6 @@ public class AGoTMod {
     private void registerClientEvents() {
         NeoForge.EVENT_BUS.register(ClientKeyInputEvents.class);
         NeoForge.EVENT_BUS.register(ClientEventHandler.class);
-        CTGClient.registerMenu(ModDimensionProvider.KNOWN_WORLD, CustomGuiScreen::new);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

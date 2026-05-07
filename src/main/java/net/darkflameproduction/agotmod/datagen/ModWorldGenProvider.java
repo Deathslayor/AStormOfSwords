@@ -79,11 +79,9 @@ public class ModWorldGenProvider extends DatapackBuiltinEntriesProvider {
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "velaryon"));
 
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
-            .add(CTRegistries.ZONES_KEY, ModZones::bootstrap)
             .add(Registries.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap)
             .add(Registries.PLACED_FEATURE, ModplacedFeatures::bootstrap)
             .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomeModifiers::bootstrap)
-            .add(Registries.WORLD_PRESET, ModDimensionProvider::bootstrap)
             .add(Registries.BIOME, ModBiomes::boostrap)
             .add(Registries.BANNER_PATTERN, ModWorldGenProvider::bootstrapBannerPatterns);
 

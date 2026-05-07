@@ -1,4 +1,4 @@
-// 1.21.3	2025-08-03T16:17:50.963544	Registries
+// 1.21.3	2026-05-07T15:10:19.4550999	Registries
 04959ff97a94a491f8a432926d521f167e9531be data/agotmod/banner_pattern/arryn.json
 e17fd35d2836802979bf988c2a96a06599d04697 data/agotmod/banner_pattern/baelish.json
 e19718623618fa07d759962c4e924b518ca9ca5f data/agotmod/banner_pattern/baratheon.json
@@ -233,30 +233,6 @@ fb4e8c1d4f88427055c9efe6b52001609f274895 data/agotmod/worldgen/configured_featur
 21d7602e214229de5525e0c62cff0412183d9e78 data/agotmod/worldgen/configured_feature/wormtree_rare.json
 01a27e01cda364f76053e4790c9a6a4203f8ec9e data/agotmod/worldgen/configured_feature/yew.json
 01a27e01cda364f76053e4790c9a6a4203f8ec9e data/agotmod/worldgen/configured_feature/yew_rare.json
-2683f198492c35a7b0c42f35154150c866dbb06d data/agotmod/worldgen/map_based/zones/barrowlands.json
-f9f5c6ecf40e76233c999c5d5f0c76cd98a03dda data/agotmod/worldgen/map_based/zones/basalt_deltas.json
-9ebdc779123067faf8c9141019331922c2d56fa7 data/agotmod/worldgen/map_based/zones/cold_ocean.json
-f1c0d7f03e5d33868dc422e823bf350523699852 data/agotmod/worldgen/map_based/zones/deep_cold_ocean.json
-13845faed001e9b8b59c6d0d1514ab721f548542 data/agotmod/worldgen/map_based/zones/frostfangs.json
-c587cb28829fe0c5c9be346a349c8d149ba1f097 data/agotmod/worldgen/map_based/zones/frostfang_foothills.json
-7e4477583efb49a9ee6fcb344282ed1cefbc6c43 data/agotmod/worldgen/map_based/zones/frozen_lake.json
-45cc627431cccf995678b13175a02a90d0078b16 data/agotmod/worldgen/map_based/zones/frozen_river.json
-32af276aa915f4a6481b436966536591f02fbc82 data/agotmod/worldgen/map_based/zones/haunted_forest.json
-fe231414f39ef57ae47dfd5e40dc60f2a59c1218 data/agotmod/worldgen/map_based/zones/ironwood.json
-2e9d6c259b01ccee52b632afe5eac70f3816775d data/agotmod/worldgen/map_based/zones/lake.json
-22e5b5e9385a4cbb4897636ad2e8c2aa8f2b2be7 data/agotmod/worldgen/map_based/zones/lands_of_always_winter.json
-b72c3f981d050fd8e0e7afab26ee177855ab7254 data/agotmod/worldgen/map_based/zones/northern_hills.json
-773036d6c8bd6d76ea0dc8c71d711fbc87212917 data/agotmod/worldgen/map_based/zones/northern_mountains.json
-78b3a8b794b8b206d3eb8bdccebb27e407e28a83 data/agotmod/worldgen/map_based/zones/rills.json
-7f7a5223746c257ee1e3d1cf844a9b43989240ba data/agotmod/worldgen/map_based/zones/river.json
-7d2c9a6dce22b631607c33bd06cebf551b03550f data/agotmod/worldgen/map_based/zones/stony_shores.json
-86b9019e083d9688ca628ace58c59873cf07ba8f data/agotmod/worldgen/map_based/zones/the_neck.json
-021262827a7c5a720e2497850c6ce5e94612b1b3 data/agotmod/worldgen/map_based/zones/the_neck_river.json
-4624417ab4d0e46d76b58b2f6b2370a81d3965d0 data/agotmod/worldgen/map_based/zones/the_north.json
-676044fffb224a8b721075d8621500ed394d7f59 data/agotmod/worldgen/map_based/zones/the_wall.json
-0b2bfa53b6adc404cdedbca7f355386883606464 data/agotmod/worldgen/map_based/zones/valley_of_thenn.json
-ad2ce13d7a9a30d1481f312ae9719413d1836702 data/agotmod/worldgen/map_based/zones/wolfswood.json
-81f9243dba0bf34ebe35ad5c5fbaee4b453af58e data/agotmod/worldgen/map_based/zones/wolfswood_clearing.json
 b64c0b72b488bade1bed77a66abdd88f870634d0 data/agotmod/worldgen/placed_feature/alder.json
 109d047496de76b2cc9fe4f0e4cc212665dd300c data/agotmod/worldgen/placed_feature/alder_rare.json
 3e9f7b365f0ad547d27adc5cdc9752e5470315b8 data/agotmod/worldgen/placed_feature/almond.json
@@ -444,4 +420,3 @@ f7a5c79f915579659a978e33eb90bbad8ec81940 data/agotmod/worldgen/placed_feature/wh
 cdeea34fe2c668be1629c31f446a228b18e56309 data/agotmod/worldgen/placed_feature/wormtree_rare.json
 d1cd1b9e99017a1928c7ffa06df477bdfef16139 data/agotmod/worldgen/placed_feature/yew.json
 eae54cd425d21d4ab61b5866b4d995ef4b48fc1a data/agotmod/worldgen/placed_feature/yew_rare.json
-23da689bea3fbc1925929c1085d4af8593ceece5 data/agotmod/worldgen/world_preset/known_world.json
