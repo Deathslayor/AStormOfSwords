@@ -1,8 +1,10 @@
 package net.darkflameproduction.agotmod.gui.widget;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
+import dev.tocraft.ctgen.data.MapOverlayTextLoader;
 import dev.tocraft.ctgen.impl.network.SyncMapPacket;
+import dev.tocraft.ctgen.impl.screen.MapText;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -16,11 +18,15 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AGoTMapWidget extends AbstractWidget {
     private static final float ZOOM_FACTOR = 1.1F;
     private static final int MOVE_SPEED = 10;
 
     private final Minecraft minecraft;
+    private final ResourceLocation mapTextureId;
     private final ResourceLocation mapId;
     private final int pixelOffsetX;
     private final int pixelOffsetY;
@@ -38,32 +44,39 @@ public class AGoTMapWidget extends AbstractWidget {
 
     private boolean showCursorPos;
     private boolean showPlayer;
+    private boolean showTexts;
+    private final List<MapText> textOverlays = new ArrayList<>();
 
     @Nullable
     public static AGoTMapWidget ofPacket(Minecraft minecraft, int x, int y, int width, int height, @NotNull SyncMapPacket packet) {
         ResourceLocation packetMapId = packet.getMapId();
-        if (packetMapId == null) return null;
+        if (packetMapId == null) {
+            return null;
+        }
 
         return new AGoTMapWidget(
                 minecraft, x, y, width, height,
                 ResourceLocation.fromNamespaceAndPath(packetMapId.getNamespace(), "textures/gui/" + packetMapId.getPath() + ".png"),
+                packetMapId,
                 packet.getXOffset(), packet.getYOffset(),
                 packet.getMapWidth(), packet.getMapHeight()
         );
     }
 
     public AGoTMapWidget(Minecraft minecraft, int x, int y, int width, int height,
+                         ResourceLocation mapTextureId,
                          ResourceLocation mapId,
                          int xOffset, int yOffset, int mapWidth, int mapHeight) {
-        this(minecraft, x, y, width, height, mapId,
+        this(minecraft, x, y, width, height, mapTextureId, mapId,
                 xOffset, yOffset, mapWidth, mapHeight,
-                defaultZoom(width, height, mapWidth, mapHeight), true, true);
+                defaultZoom(width, height, mapWidth, mapHeight), true, true, true);
     }
 
     public AGoTMapWidget(Minecraft minecraft, int x, int y, int width, int height,
+                         ResourceLocation mapTextureId,
                          ResourceLocation mapId,
                          int xOffset, int yOffset, int mapWidth, int mapHeight,
-                         float minZoom, boolean showCursorPos, boolean showPlayer) {
+                         float minZoom, boolean showCursorPos, boolean showPlayer, boolean showTexts) {
         super(x, y, width, height, Component.literal("Map Widget"));
         this.minecraft     = minecraft;
         this.pixelOffsetX  = xOffset;
@@ -71,11 +84,14 @@ public class AGoTMapWidget extends AbstractWidget {
         this.mapWidth      = mapWidth;
         this.mapHeight     = mapHeight;
         this.ratio         = (double) mapWidth / mapHeight;
+        this.mapTextureId  = mapTextureId;
         this.mapId         = mapId;
         this.minZoom       = minZoom;
         this.zoom          = minZoom;
         this.showCursorPos = showCursorPos;
         this.showPlayer    = showPlayer;
+        this.showTexts     = showTexts;
+        this.textOverlays.addAll(MapOverlayTextLoader.ENTRIES.getOrDefault(mapId, List.of()));
 
         updateZoomedWidth();
         updateZoomedHeight();
@@ -118,8 +134,22 @@ public class AGoTMapWidget extends AbstractWidget {
         updateZoomedWidth();
     }
 
+    @Override
+    public void setX(int x) {
+        super.setX(x);
+    }
+
+    @Override
+    public void setY(int y) {
+        super.setY(y);
+    }
+
     public ResourceLocation getMapId() {
         return mapId;
+    }
+
+    public ResourceLocation getMapTextureId() {
+        return mapTextureId;
     }
 
     public double getRatio() {
@@ -176,19 +206,27 @@ public class AGoTMapWidget extends AbstractWidget {
         return zoom;
     }
 
+    public double getReadableZoom() {
+        return zoom * mapWidth / width;
+    }
+
     private void updateZoomedWidth() {
         zoomedWidth = (int) (mapWidth * zoom);
-        clampTextureOffsets();
+        if (minZoom >= defaultZoom()) {
+            textureOffsetX = Mth.clamp(textureOffsetX, 0, Math.max(0, zoomedWidth - width));
+        }
     }
 
     private void updateZoomedHeight() {
         zoomedHeight = (int) (mapHeight * zoom);
-        clampTextureOffsets();
+        if (minZoom >= defaultZoom()) {
+            textureOffsetY = Mth.clamp(textureOffsetY, 0, Math.max(0, zoomedHeight - height));
+        }
     }
 
     private void clampTextureOffsets() {
-        textureOffsetX = Mth.clamp(textureOffsetX, 0, Math.max(0, zoomedWidth - width));
-        textureOffsetY = Mth.clamp(textureOffsetY, 0, Math.max(0, zoomedHeight - height));
+        updateZoomedWidth();
+        updateZoomedHeight();
     }
 
     public void setShowCursorPos(boolean showCursorPos) {
@@ -199,6 +237,10 @@ public class AGoTMapWidget extends AbstractWidget {
         this.showPlayer = showPlayer;
     }
 
+    public void setShowTexts(boolean showTexts) {
+        this.showTexts = showTexts;
+    }
+
     @Override
     protected void renderWidget(@NotNull GuiGraphics context, int mouseX, int mouseY, float delta) {
         if (minecraft == null || minecraft.player == null) return;
@@ -206,16 +248,9 @@ public class AGoTMapWidget extends AbstractWidget {
         updateZoomedWidth();
         updateZoomedHeight();
 
-        context.flush();
-        final double scaleFactor = minecraft.getWindow().getGuiScale();
-        RenderSystem.enableScissor(
-                (int) (getX() * scaleFactor),
-                (int) (getY() * scaleFactor),
-                (int) (width  * scaleFactor),
-                (int) (height * scaleFactor)
-        );
+        context.enableScissor(getX(), getY(), getX() + width, getY() + height);
 
-        context.blit(RenderType::guiTextured, mapId,
+        context.blit(RenderType::guiTextured, mapTextureId,
                 getTextureX(), getTextureY(), 0, 0,
                 zoomedWidth, zoomedHeight, zoomedWidth, zoomedHeight);
 
@@ -251,8 +286,31 @@ public class AGoTMapWidget extends AbstractWidget {
             pose.popPose();
         }
 
-        context.flush();
-        RenderSystem.disableScissor();
+        if (showTexts) {
+            double readableZoom = getReadableZoom();
+            for (MapText overlay : textOverlays) {
+                if (readableZoom <= overlay.minZoom()) {
+                    continue;
+                }
+                if (overlay.maxZoom() != -1.0F && readableZoom >= overlay.maxZoom()) {
+                    continue;
+                }
+
+                int textX = getTextureX() + (int) (overlay.x() * zoom);
+                int textY = getTextureY() + (int) (overlay.y() * zoom);
+
+                PoseStack textPose = context.pose();
+                textPose.pushPose();
+                textPose.translate(textX, textY, 0.0F);
+                textPose.mulPose(Axis.ZP.rotationDegrees(overlay.rotation()));
+                float textScale = (float) zoom * overlay.size();
+                textPose.scale(textScale, textScale, 1.0F);
+                context.drawString(minecraft.font, overlay.text(), 0, 0, 0xFFFFFF);
+                textPose.popPose();
+            }
+        }
+
+        context.disableScissor();
     }
 
     @Override

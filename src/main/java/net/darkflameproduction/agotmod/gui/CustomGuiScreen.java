@@ -1085,8 +1085,8 @@ public class CustomGuiScreen extends Screen {
     }
 
     private void drawMapSection(GuiGraphics guiGraphics, int mouseX, int mouseY, ScreenLayout layout, float partialTick) {
-        if (mapWidget != null && mapWidget.isActive() && mapWidget.getMapId() != null &&
-                minecraft.getResourceManager().getResource(mapWidget.getMapId()).isPresent()) {
+        if (mapWidget != null && mapWidget.isActive() && mapWidget.getMapTextureId() != null &&
+                minecraft.getResourceManager().getResource(mapWidget.getMapTextureId()).isPresent()) {
             mapWidget.render(guiGraphics, mouseX, mouseY, partialTick);
         }
     }
