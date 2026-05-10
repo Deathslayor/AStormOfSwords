@@ -1026,6 +1026,38 @@ public class ModBLocks {
     public static final DeferredBlock<Block> WEIRWOOD_DOOR = registerBlock("weirwood_door", properties -> new DoorBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR), true);
     public static final DeferredBlock<Block> WEIRWOOD_TRAPDOOR = registerBlock("weirwood_trapdoor", properties -> new TrapDoorBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR), true);
 
+    // Rotten Wood
+    public static final DeferredBlock<Block> ROTTEN_LOG = registerBlock("rotten_log", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG).strength(3f), true);
+    public static final DeferredBlock<Block> ROTTEN_WOOD = registerBlock("rotten_wood", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WOOD).strength(3f), true);
+    public static final DeferredBlock<Block> STRIPPED_ROTTEN_LOG = registerBlock("stripped_rotten_log", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_LOG).strength(3f), true);
+    public static final DeferredBlock<Block> STRIPPED_ROTTEN_WOOD = registerBlock("stripped_rotten_wood", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_WOOD).strength(3f), true);
+    public static final DeferredBlock<Block> ROTTEN_PLANKS = registerBlock("rotten_planks", ModFlammablePlanks::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS), true);
+    public static final DeferredBlock<Block> ROTTEN_STAIRS = registerBlock("rotten_stairs", properties -> new StairBlock(ModBLocks.ROTTEN_PLANKS.get().defaultBlockState(), properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
+    public static final DeferredBlock<Block> ROTTEN_SLAB = registerBlock("rotten_slab", SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
+    public static final DeferredBlock<Block> ROTTEN_BUTTON = registerBlock("rotten_button", properties -> new ButtonBlock(BlockSetType.OAK, 10, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
+    public static final DeferredBlock<Block> ROTTEN_PRESSURE_PLATE = registerBlock("rotten_pressure_plate", properties -> new PressurePlateBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
+    public static final DeferredBlock<Block> ROTTEN_FENCE = registerBlock("rotten_fence", FenceBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
+    public static final DeferredBlock<Block> ROTTEN_FENCE_GATE = registerBlock("rotten_fence_gate", properties -> new FenceGateBlock(properties, SoundEvents.FENCE_GATE_OPEN, SoundEvents.FENCE_GATE_CLOSE), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
+    public static final DeferredBlock<Block> ROTTEN_WALL = registerBlock("rotten_wall", WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
+    public static final DeferredBlock<Block> ROTTEN_DOOR = registerBlock("rotten_door", properties -> new DoorBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR), true);
+    public static final DeferredBlock<Block> ROTTEN_TRAPDOOR = registerBlock("rotten_trapdoor", properties -> new TrapDoorBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR), true);
+
+    // Charred Wood
+    public static final DeferredBlock<Block> CHARRED_LOG = registerBlock("charred_log", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG).strength(3f), true);
+    public static final DeferredBlock<Block> CHARRED_WOOD = registerBlock("charred_wood", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WOOD).strength(3f), true);
+    public static final DeferredBlock<Block> STRIPPED_CHARRED_LOG = registerBlock("stripped_charred_log", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_LOG).strength(3f), true);
+    public static final DeferredBlock<Block> STRIPPED_CHARRED_WOOD = registerBlock("stripped_charred_wood", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_WOOD).strength(3f), true);
+    public static final DeferredBlock<Block> CHARRED_PLANKS = registerBlock("charred_planks", ModFlammablePlanks::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS), true);
+    public static final DeferredBlock<Block> CHARRED_STAIRS = registerBlock("charred_stairs", properties -> new StairBlock(ModBLocks.CHARRED_PLANKS.get().defaultBlockState(), properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
+    public static final DeferredBlock<Block> CHARRED_SLAB = registerBlock("charred_slab", SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
+    public static final DeferredBlock<Block> CHARRED_BUTTON = registerBlock("charred_button", properties -> new ButtonBlock(BlockSetType.OAK, 10, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
+    public static final DeferredBlock<Block> CHARRED_PRESSURE_PLATE = registerBlock("charred_pressure_plate", properties -> new PressurePlateBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS), true);
+    public static final DeferredBlock<Block> CHARRED_FENCE = registerBlock("charred_fence", FenceBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
+    public static final DeferredBlock<Block> CHARRED_FENCE_GATE = registerBlock("charred_fence_gate", properties -> new FenceGateBlock(properties, SoundEvents.FENCE_GATE_OPEN, SoundEvents.FENCE_GATE_CLOSE), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
+    public static final DeferredBlock<Block> CHARRED_WALL = registerBlock("charred_wall", WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
+    public static final DeferredBlock<Block> CHARRED_DOOR = registerBlock("charred_door", properties -> new DoorBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR), true);
+    public static final DeferredBlock<Block> CHARRED_TRAPDOOR = registerBlock("charred_trapdoor", properties -> new TrapDoorBlock(BlockSetType.OAK, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR), true);
+
     public static final DeferredBlock<Block> OAK_WALL = registerBlock("oak_wall", WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), true);
     public static final DeferredBlock<Block> SPRUCE_WALL = registerBlock("spruce_wall", WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_FENCE_GATE), true);
     public static final DeferredBlock<Block> BIRCH_WALL = registerBlock("birch_wall", WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_FENCE_GATE), true);
@@ -1561,6 +1593,88 @@ public class ModBLocks {
                 .strength(1.0F)
                 .sound(SoundType.WOOD)
                 .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> ROTTEN_SIGN = registerBlock("rotten_sign",
+            properties -> new ModStandingSignBlock(ModWoodTypes.ROTTEN, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> ROTTEN_WALL_SIGN = registerBlock("rotten_wall_sign",
+            properties -> new ModWallSignBlock(ModWoodTypes.ROTTEN, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> ROTTEN_HANGING_SIGN = registerBlock("rotten_hanging_sign",
+            properties -> new ModHangingSignBlock(ModWoodTypes.ROTTEN, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> ROTTEN_WALL_HANGING_SIGN = registerBlock("rotten_wall_hanging_sign",
+            properties -> new ModWallHangingSignBlock(ModWoodTypes.ROTTEN, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+
+    // Charred
+    public static final DeferredBlock<Block> CHARRED_SIGN = registerBlock("charred_sign",
+            properties -> new ModStandingSignBlock(ModWoodTypes.CHARRED, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> CHARRED_WALL_SIGN = registerBlock("charred_wall_sign",
+            properties -> new ModWallSignBlock(ModWoodTypes.CHARRED, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> CHARRED_HANGING_SIGN = registerBlock("charred_hanging_sign",
+            properties -> new ModHangingSignBlock(ModWoodTypes.CHARRED, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> CHARRED_WALL_HANGING_SIGN = registerBlock("charred_wall_hanging_sign",
+            properties -> new ModWallHangingSignBlock(ModWoodTypes.CHARRED, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .noCollission()
+                    .strength(1.0F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
             false);
 
 

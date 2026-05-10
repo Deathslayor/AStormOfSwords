@@ -234,6 +234,46 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(ModBLocks.WEIRWOOD_SLAB.get(),
                 block -> createSlabItemTable(ModBLocks.WEIRWOOD_SLAB.get()));
 
+        //Rotten
+        this.dropSelf(ModBLocks.ROTTEN_LOG.get());
+        this.dropSelf(ModBLocks.STRIPPED_ROTTEN_LOG.get());
+        this.dropSelf(ModBLocks.ROTTEN_WOOD.get());
+        this.dropSelf(ModBLocks.STRIPPED_ROTTEN_WOOD.get());
+        this.dropSelf(ModBLocks.ROTTEN_PLANKS.get());
+
+        this.dropSelf(ModBLocks.ROTTEN_FENCE.get());
+        this.dropSelf(ModBLocks.ROTTEN_WALL.get());
+        this.dropSelf(ModBLocks.ROTTEN_STAIRS.get());
+        this.dropSelf(ModBLocks.ROTTEN_BUTTON.get());
+        this.dropSelf(ModBLocks.ROTTEN_PRESSURE_PLATE.get());
+        this.dropSelf(ModBLocks.ROTTEN_TRAPDOOR.get());
+        this.dropSelf(ModBLocks.ROTTEN_FENCE_GATE.get());
+
+        this.add(ModBLocks.ROTTEN_DOOR.get(),
+                block -> createDoorTable(ModBLocks.ROTTEN_DOOR.get()));
+        this.add(ModBLocks.ROTTEN_SLAB.get(),
+                block -> createSlabItemTable(ModBLocks.ROTTEN_SLAB.get()));
+
+//Charred
+        this.dropSelf(ModBLocks.CHARRED_LOG.get());
+        this.dropSelf(ModBLocks.STRIPPED_CHARRED_LOG.get());
+        this.dropSelf(ModBLocks.CHARRED_WOOD.get());
+        this.dropSelf(ModBLocks.STRIPPED_CHARRED_WOOD.get());
+        this.dropSelf(ModBLocks.CHARRED_PLANKS.get());
+
+        this.dropSelf(ModBLocks.CHARRED_FENCE.get());
+        this.dropSelf(ModBLocks.CHARRED_WALL.get());
+        this.dropSelf(ModBLocks.CHARRED_STAIRS.get());
+        this.dropSelf(ModBLocks.CHARRED_BUTTON.get());
+        this.dropSelf(ModBLocks.CHARRED_PRESSURE_PLATE.get());
+        this.dropSelf(ModBLocks.CHARRED_TRAPDOOR.get());
+        this.dropSelf(ModBLocks.CHARRED_FENCE_GATE.get());
+
+        this.add(ModBLocks.CHARRED_DOOR.get(),
+                block -> createDoorTable(ModBLocks.CHARRED_DOOR.get()));
+        this.add(ModBLocks.CHARRED_SLAB.get(),
+                block -> createSlabItemTable(ModBLocks.CHARRED_SLAB.get()));
+
         // Define the wood types
         String[] woodTypes = {
                 "sycamore",
@@ -684,6 +724,25 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(ModBLocks.WEIRWOOD_WALL_HANGING_SIGN.get(),
                 createSingleItemTable(ModBLocks.WEIRWOOD_HANGING_SIGN.get()));
 
+        //Rotten
+        this.add(ModBLocks.ROTTEN_SIGN.get(),
+                createSingleItemTable(ModBLocks.ROTTEN_SIGN.get()));
+        this.add(ModBLocks.ROTTEN_WALL_SIGN.get(),
+                createSingleItemTable(ModBLocks.ROTTEN_SIGN.get()));
+        this.add(ModBLocks.ROTTEN_HANGING_SIGN.get(),
+                createSingleItemTable(ModBLocks.ROTTEN_HANGING_SIGN.get()));
+        this.add(ModBLocks.ROTTEN_WALL_HANGING_SIGN.get(),
+                createSingleItemTable(ModBLocks.ROTTEN_HANGING_SIGN.get()));
+
+//Charred
+        this.add(ModBLocks.CHARRED_SIGN.get(),
+                createSingleItemTable(ModBLocks.CHARRED_SIGN.get()));
+        this.add(ModBLocks.CHARRED_WALL_SIGN.get(),
+                createSingleItemTable(ModBLocks.CHARRED_SIGN.get()));
+        this.add(ModBLocks.CHARRED_HANGING_SIGN.get(),
+                createSingleItemTable(ModBLocks.CHARRED_HANGING_SIGN.get()));
+        this.add(ModBLocks.CHARRED_WALL_HANGING_SIGN.get(),
+                createSingleItemTable(ModBLocks.CHARRED_HANGING_SIGN.get()));
 
 
         /** // ---------------------------(CROPS)--------------------------- // */

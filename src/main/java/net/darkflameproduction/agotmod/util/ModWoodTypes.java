@@ -6,6 +6,8 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 
 public class ModWoodTypes {
     public static final WoodType WEIRWOOD = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":weirwood", BlockSetType.OAK));
+    public static final WoodType ROTTEN = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":rotten", BlockSetType.OAK));
+    public static final WoodType CHARRED = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":charred", BlockSetType.OAK));
     public static final WoodType PINE = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":pine", BlockSetType.OAK));
     public static final WoodType ASH = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":ash", BlockSetType.OAK));
     public static final WoodType BEECH = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":beech", BlockSetType.OAK));

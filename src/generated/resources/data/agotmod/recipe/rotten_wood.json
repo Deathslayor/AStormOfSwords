@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:rotten_log",
+    "agotmod:rotten_log",
+    "agotmod:rotten_log",
+    "agotmod:rotten_log"
+  ],
+  "result": {
+    "count": 3,
+    "id": "agotmod:rotten_wood"
+  }
+}

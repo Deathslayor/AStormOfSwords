@@ -1,4 +1,4 @@
-// 1.21.3	2026-05-05T16:25:09.5005109	Item Models: agotmod
+// 1.21.3	2026-05-10T18:21:50.2168111	Item Models: agotmod
 d23bad2732be6d574dc634d409c491e136021638 assets/agotmod/models/item/acacia_wall.json
 65c44e6f1f29781252c76032b90c20b3bc8f7b8a assets/agotmod/models/item/alder_button.json
 f0b6afe25a5640838c024d02c663e7c8f821ffd6 assets/agotmod/models/item/alder_door.json
@@ -1057,6 +1057,17 @@ c23a39cc0b7bf2e5b59e068f76b127abc7bc7ff1 assets/agotmod/models/item/cedar_saplin
 65208604890615107b628d3270bf43fe8c165ba0 assets/agotmod/models/item/cedar_wall.json
 96a4330a4535ba6e27233e95572728f2c2f85e8e assets/agotmod/models/item/chalcedony.json
 7bcdd0bc6040e6c157cab5d6138baf260aac4950 assets/agotmod/models/item/charcoal_burner_barrel_icon.json
+23f56afad534860323ecb1667b01daf7617b2c42 assets/agotmod/models/item/charred_button.json
+39c48e03ce33b5d7566f14f194b6c9453ec9a62c assets/agotmod/models/item/charred_door.json
+6cd1739179bc0fa5225a82ec9b2129f26f025406 assets/agotmod/models/item/charred_fence.json
+ed67210e47492fa7105a91e4e739756e103472a9 assets/agotmod/models/item/charred_fence_gate.json
+5a2748ab33a2faaf9624537aac04c5b5b6549fb3 assets/agotmod/models/item/charred_hanging_sign.json
+0ff4cb0601085ea3d832abfa324fccf288003da4 assets/agotmod/models/item/charred_pressure_plate.json
+d2d6ec64f4bc529d7ddd4fc6ec4aaadb84c86fc5 assets/agotmod/models/item/charred_sign.json
+0cc82870be503265fe203cb387e3ecd8d1ac3397 assets/agotmod/models/item/charred_slab.json
+7b80081f66b0e9deb3030aac3ed26dc4084693ad assets/agotmod/models/item/charred_stairs.json
+1c64800dff030cbe9b6aa9de9c74b9de5ea34885 assets/agotmod/models/item/charred_trapdoor.json
+72b120f7de4d0a80d1871c93f63a4ce059e1cd78 assets/agotmod/models/item/charred_wall.json
 898d52ff3c2d13aa871c36664f4d170391f8b40d assets/agotmod/models/item/cheese.json
 494b1bb0107c3ad3165ee4b7cdb9c42a87f57735 assets/agotmod/models/item/cherry.json
 d1e349a1992c016119471f4861b28a8b0a83ade3 assets/agotmod/models/item/cherry_wall.json
@@ -2585,6 +2596,17 @@ f4b8f07abe49b7559ac48c200e09c1188a4f79d5 assets/agotmod/models/item/red_onion_se
 296f8267dd438880b41ed706974cf9a8b99e44aa assets/agotmod/models/item/roasted_ribs.json
 e495a1560f36d0e99e86401cb8697bd7f288d721 assets/agotmod/models/item/roast_boar.json
 6629b9624923c7e62c15946e39002039eb2fca62 assets/agotmod/models/item/rose.json
+8117cfa662e42add798c22c869c4d1747d08ab57 assets/agotmod/models/item/rotten_button.json
+1331081bad50397393367bac8fb134f9c7cf2f36 assets/agotmod/models/item/rotten_door.json
+d5612ec03d5686519ea2437c3fb22ae7d442092b assets/agotmod/models/item/rotten_fence.json
+328d0a26ced1adb3c1128f2c152d3e977ce22dfb assets/agotmod/models/item/rotten_fence_gate.json
+e9f9ade883151bf2e403c11ccc24e6d07babf69a assets/agotmod/models/item/rotten_hanging_sign.json
+6ee755470b8460133d71fdfbe5b5dd4b64b30c4e assets/agotmod/models/item/rotten_pressure_plate.json
+7792311178c37211fb790e33a9e953dfb0391413 assets/agotmod/models/item/rotten_sign.json
+382ffeb3cccedebe1338d19b78e9903ba81864a9 assets/agotmod/models/item/rotten_slab.json
+f4004148333b85fec8a579a26a56cadfb670fa6b assets/agotmod/models/item/rotten_stairs.json
+f5e625f6e26f4e82635e82f6b8d4ef69ec3af4a0 assets/agotmod/models/item/rotten_trapdoor.json
+828221a6d35812ed1d5a73bafc6aeebead1bfa48 assets/agotmod/models/item/rotten_wall.json
 39774e26cdf2c23e2c62657d723d5cbc9129708c assets/agotmod/models/item/royce_banner_pattern.json
 75b0b5d11ee92a6a9d3f8f799d44b1ccdb49cc2f assets/agotmod/models/item/rsandstone_10_slab.json
 8c538db29c1a53f73d5c19a4b456b4325f724144 assets/agotmod/models/item/rsandstone_10_stairs.json

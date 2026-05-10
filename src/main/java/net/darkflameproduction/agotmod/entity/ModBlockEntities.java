@@ -143,20 +143,26 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("mod_sign", () -> {
                 List<Block> signBlocks = new ArrayList<>();
 
-                // Add weirwood signs first
+                // Weirwood
                 signBlocks.add(ModBLocks.WEIRWOOD_SIGN.get());
                 signBlocks.add(ModBLocks.WEIRWOOD_WALL_SIGN.get());
 
-                // Add all other wood types' signs to the collection
+                // Rotten
+                signBlocks.add(ModBLocks.ROTTEN_SIGN.get());
+                signBlocks.add(ModBLocks.ROTTEN_WALL_SIGN.get());
+
+                // Charred
+                signBlocks.add(ModBLocks.CHARRED_SIGN.get());
+                signBlocks.add(ModBLocks.CHARRED_WALL_SIGN.get());
+
+                // Other wood types
                 for (String woodType : ALL_WOOD_TYPES) {
                     signBlocks.add(ModBLocks.SIGNS.get(woodType).get());
                     signBlocks.add(ModBLocks.WALL_SIGNS.get(woodType).get());
                 }
 
-                // Convert to array for varargs parameter
                 Block[] signBlocksArray = signBlocks.toArray(new Block[0]);
 
-                // Pass all blocks directly as varargs using array - expanded for all 114 blocks (57 wood types * 2 sign types each)
                 return new BlockEntityType<>(
                         ModSignBlockEntity::new,
                         signBlocksArray[0], signBlocksArray[1], signBlocksArray[2], signBlocksArray[3],
@@ -187,27 +193,34 @@ public class ModBlockEntities {
                         signBlocksArray[100], signBlocksArray[101], signBlocksArray[102], signBlocksArray[103],
                         signBlocksArray[104], signBlocksArray[105], signBlocksArray[106], signBlocksArray[107],
                         signBlocksArray[108], signBlocksArray[109], signBlocksArray[110], signBlocksArray[111],
-                        signBlocksArray[112], signBlocksArray[113]);
+                        signBlocksArray[112], signBlocksArray[113]
+                );
             });
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ModHangingSignBlockEntity>> MOD_HANGING_SIGN =
             BLOCK_ENTITIES.register("mod_hanging_sign", () -> {
                 List<Block> hangingSignBlocks = new ArrayList<>();
 
-                // Add weirwood hanging signs first
+                // Weirwood
                 hangingSignBlocks.add(ModBLocks.WEIRWOOD_HANGING_SIGN.get());
                 hangingSignBlocks.add(ModBLocks.WEIRWOOD_WALL_HANGING_SIGN.get());
 
-                // Add all other wood types' hanging signs to the collection
+                // Rotten
+                hangingSignBlocks.add(ModBLocks.ROTTEN_HANGING_SIGN.get());
+                hangingSignBlocks.add(ModBLocks.ROTTEN_WALL_HANGING_SIGN.get());
+
+                // Charred
+                hangingSignBlocks.add(ModBLocks.CHARRED_HANGING_SIGN.get());
+                hangingSignBlocks.add(ModBLocks.CHARRED_WALL_HANGING_SIGN.get());
+
+                // Other wood types
                 for (String woodType : ALL_WOOD_TYPES) {
                     hangingSignBlocks.add(ModBLocks.HANGING_SIGNS.get(woodType).get());
                     hangingSignBlocks.add(ModBLocks.WALL_HANGING_SIGNS.get(woodType).get());
                 }
 
-                // Convert to array for varargs parameter
                 Block[] hangingSignBlocksArray = hangingSignBlocks.toArray(new Block[0]);
 
-                // Pass all blocks directly as varargs using array - expanded for all 114 blocks (57 wood types * 2 hanging sign types each)
                 return new BlockEntityType<>(
                         ModHangingSignBlockEntity::new,
                         hangingSignBlocksArray[0], hangingSignBlocksArray[1], hangingSignBlocksArray[2], hangingSignBlocksArray[3],
@@ -238,7 +251,8 @@ public class ModBlockEntities {
                         hangingSignBlocksArray[100], hangingSignBlocksArray[101], hangingSignBlocksArray[102], hangingSignBlocksArray[103],
                         hangingSignBlocksArray[104], hangingSignBlocksArray[105], hangingSignBlocksArray[106], hangingSignBlocksArray[107],
                         hangingSignBlocksArray[108], hangingSignBlocksArray[109], hangingSignBlocksArray[110], hangingSignBlocksArray[111],
-                        hangingSignBlocksArray[112], hangingSignBlocksArray[113]);
+                        hangingSignBlocksArray[112], hangingSignBlocksArray[113]
+                );
             });
 
     public static void register(IEventBus eventBus) {

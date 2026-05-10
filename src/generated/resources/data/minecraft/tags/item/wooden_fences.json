@@ -1,8 +1,14 @@
 {
   "values": [
     "agotmod:weirwood_fence",
+    "agotmod:rotten_fence",
+    "agotmod:charred_fence",
     "agotmod:weirwood_fence_gate",
+    "agotmod:rotten_fence_gate",
+    "agotmod:charred_fence_gate",
     "agotmod:weirwood_wall",
+    "agotmod:rotten_wall",
+    "agotmod:charred_wall",
     "agotmod:oak_wall",
     "agotmod:spruce_wall",
     "agotmod:birch_wall",

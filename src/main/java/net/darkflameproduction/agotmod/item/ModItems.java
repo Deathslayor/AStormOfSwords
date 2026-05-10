@@ -1216,6 +1216,23 @@ public class ModItems {
             properties -> new HangingSignItem(ModBLocks.WEIRWOOD_HANGING_SIGN.get(),
                     ModBLocks.WEIRWOOD_WALL_HANGING_SIGN.get(), properties.stacksTo(16)));
 
+    public static final DeferredItem<Item> ROTTEN_SIGN = ITEMS.registerItem("rotten_sign",
+            properties -> new SignItem(ModBLocks.ROTTEN_SIGN.get(),
+                    ModBLocks.ROTTEN_WALL_SIGN.get(), properties.stacksTo(16)));
+
+    public static final DeferredItem<Item> ROTTEN_HANGING_SIGN = ITEMS.registerItem("rotten_hanging_sign",
+            properties -> new HangingSignItem(ModBLocks.ROTTEN_HANGING_SIGN.get(),
+                    ModBLocks.ROTTEN_WALL_HANGING_SIGN.get(), properties.stacksTo(16)));
+
+
+    public static final DeferredItem<Item> CHARRED_SIGN = ITEMS.registerItem("charred_sign",
+            properties -> new SignItem(ModBLocks.CHARRED_SIGN.get(),
+                    ModBLocks.CHARRED_WALL_SIGN.get(), properties.stacksTo(16)));
+
+    public static final DeferredItem<Item> CHARRED_HANGING_SIGN = ITEMS.registerItem("charred_hanging_sign",
+            properties -> new HangingSignItem(ModBLocks.CHARRED_HANGING_SIGN.get(),
+                    ModBLocks.CHARRED_WALL_HANGING_SIGN.get(), properties.stacksTo(16)));
+
     // In your ModItems class
     public static final Map<String, DeferredItem<Item>> SIGN_ITEMS = new HashMap<>();
     public static final Map<String, DeferredItem<Item>> HANGING_SIGN_ITEMS = new HashMap<>();

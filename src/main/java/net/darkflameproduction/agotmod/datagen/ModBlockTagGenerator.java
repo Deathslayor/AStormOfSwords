@@ -170,6 +170,15 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBLocks.WEIRWOOD_WALL_SIGN.get())
                 .add(ModBLocks.WEIRWOOD_HANGING_SIGN.get())
                 .add(ModBLocks.WEIRWOOD_WALL_HANGING_SIGN.get())
+                .add(ModBLocks.ROTTEN_SIGN.get())
+                .add(ModBLocks.ROTTEN_WALL_SIGN.get())
+                .add(ModBLocks.ROTTEN_HANGING_SIGN.get())
+                .add(ModBLocks.ROTTEN_WALL_HANGING_SIGN.get())
+
+                .add(ModBLocks.CHARRED_SIGN.get())
+                .add(ModBLocks.CHARRED_WALL_SIGN.get())
+                .add(ModBLocks.CHARRED_HANGING_SIGN.get())
+                .add(ModBLocks.CHARRED_WALL_HANGING_SIGN.get())
                 .add(ModBLocks.OAK_WALL.get())
                 .add(ModBLocks.SPRUCE_WALL.get())
                 .add(ModBLocks.BIRCH_WALL.get())
@@ -181,6 +190,35 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBLocks.BAMBOO_WALL.get())
                 .add(ModBLocks.CRIMSON_WALL.get())
                 .add(ModBLocks.WARPED_WALL.get())
+                .add(ModBLocks.ROTTEN_LOG.get())
+                .add(ModBLocks.ROTTEN_WOOD.get())
+                .add(ModBLocks.STRIPPED_ROTTEN_LOG.get())
+                .add(ModBLocks.STRIPPED_ROTTEN_WOOD.get())
+                .add(ModBLocks.ROTTEN_PLANKS.get())
+                .add(ModBLocks.ROTTEN_STAIRS.get())
+                .add(ModBLocks.ROTTEN_SLAB.get())
+                .add(ModBLocks.ROTTEN_BUTTON.get())
+                .add(ModBLocks.ROTTEN_PRESSURE_PLATE.get())
+                .add(ModBLocks.ROTTEN_FENCE.get())
+                .add(ModBLocks.ROTTEN_FENCE_GATE.get())
+                .add(ModBLocks.ROTTEN_WALL.get())
+                .add(ModBLocks.ROTTEN_DOOR.get())
+                .add(ModBLocks.ROTTEN_TRAPDOOR.get())
+
+                .add(ModBLocks.CHARRED_LOG.get())
+                .add(ModBLocks.CHARRED_WOOD.get())
+                .add(ModBLocks.STRIPPED_CHARRED_LOG.get())
+                .add(ModBLocks.STRIPPED_CHARRED_WOOD.get())
+                .add(ModBLocks.CHARRED_PLANKS.get())
+                .add(ModBLocks.CHARRED_STAIRS.get())
+                .add(ModBLocks.CHARRED_SLAB.get())
+                .add(ModBLocks.CHARRED_BUTTON.get())
+                .add(ModBLocks.CHARRED_PRESSURE_PLATE.get())
+                .add(ModBLocks.CHARRED_FENCE.get())
+                .add(ModBLocks.CHARRED_FENCE_GATE.get())
+                .add(ModBLocks.CHARRED_WALL.get())
+                .add(ModBLocks.CHARRED_DOOR.get())
+                .add(ModBLocks.CHARRED_TRAPDOOR.get())
         ;
 
 
@@ -486,18 +524,34 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBLocks.WINTER_ROSE_BUSH.get())
                 .add(ModBLocks.RED_ROSE_BUSH.get());
 
-        //Weirwood
         this.tag(BlockTags.LOGS_THAT_BURN)
                 .add(ModBLocks.WEIRWOOD_LOG.get())
                 .add(ModBLocks.STRIPPED_WEIRWOOD_LOG.get())
                 .add(ModBLocks.WEIRWOOD_WOOD.get())
-                .add(ModBLocks.STRIPPED_WEIRWOOD_WOOD.get());
+                .add(ModBLocks.STRIPPED_WEIRWOOD_WOOD.get())
+                .add(ModBLocks.ROTTEN_LOG.get())
+                .add(ModBLocks.STRIPPED_ROTTEN_LOG.get())
+                .add(ModBLocks.ROTTEN_WOOD.get())
+                .add(ModBLocks.STRIPPED_ROTTEN_WOOD.get())
+                .add(ModBLocks.CHARRED_LOG.get())
+                .add(ModBLocks.STRIPPED_CHARRED_LOG.get())
+                .add(ModBLocks.CHARRED_WOOD.get())
+                .add(ModBLocks.STRIPPED_CHARRED_WOOD.get());
+
         this.tag(BlockTags.FENCES)
-                .add(ModBLocks.WEIRWOOD_FENCE.get());
+                .add(ModBLocks.WEIRWOOD_FENCE.get())
+                .add(ModBLocks.ROTTEN_FENCE.get())
+                .add(ModBLocks.CHARRED_FENCE.get());
+
         this.tag(BlockTags.FENCE_GATES)
-                .add(ModBLocks.WEIRWOOD_FENCE_GATE.get());
+                .add(ModBLocks.WEIRWOOD_FENCE_GATE.get())
+                .add(ModBLocks.ROTTEN_FENCE_GATE.get())
+                .add(ModBLocks.CHARRED_FENCE_GATE.get());
+
         this.tag(BlockTags.WALLS)
                 .add(ModBLocks.WEIRWOOD_WALL.get())
+                .add(ModBLocks.ROTTEN_WALL.get())
+                .add(ModBLocks.CHARRED_WALL.get())
                 .add(ModBLocks.OAK_WALL.get())
                 .add(ModBLocks.SPRUCE_WALL.get())
                 .add(ModBLocks.BIRCH_WALL.get())
@@ -510,9 +564,10 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBLocks.CRIMSON_WALL.get())
                 .add(ModBLocks.WARPED_WALL.get());
 
-
         this.tag(BlockTags.PLANKS)
-                .add(ModBLocks.WEIRWOOD_PLANKS.get());
+                .add(ModBLocks.WEIRWOOD_PLANKS.get())
+                .add(ModBLocks.ROTTEN_PLANKS.get())
+                .add(ModBLocks.CHARRED_PLANKS.get());
 
 
 

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_stripped_charred_log": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:stripped_charred_log"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "agotmod:stripped_charred_wood"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_stripped_charred_log"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "agotmod:stripped_charred_wood"
+    ]
+  }
+}

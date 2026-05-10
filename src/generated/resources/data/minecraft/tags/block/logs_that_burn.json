@@ -231,6 +231,14 @@
     "agotmod:weirwood_log",
     "agotmod:stripped_weirwood_log",
     "agotmod:weirwood_wood",
-    "agotmod:stripped_weirwood_wood"
+    "agotmod:stripped_weirwood_wood",
+    "agotmod:rotten_log",
+    "agotmod:stripped_rotten_log",
+    "agotmod:rotten_wood",
+    "agotmod:stripped_rotten_wood",
+    "agotmod:charred_log",
+    "agotmod:stripped_charred_log",
+    "agotmod:charred_wood",
+    "agotmod:stripped_charred_wood"
   ]
 }

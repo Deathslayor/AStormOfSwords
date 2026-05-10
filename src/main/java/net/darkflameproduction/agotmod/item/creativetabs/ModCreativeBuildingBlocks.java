@@ -130,6 +130,39 @@ public class ModCreativeBuildingBlocks {
                         pOutput.accept(ModBLocks.WEIRWOOD_TRAPDOOR.get());
                         pOutput.accept(ModItems.WEIRWOOD_SIGN.get());
                         pOutput.accept(ModItems.WEIRWOOD_HANGING_SIGN.get());
+                        pOutput.accept(ModBLocks.ROTTEN_LOG.get());
+                        pOutput.accept(ModBLocks.STRIPPED_ROTTEN_LOG.get());
+                        pOutput.accept(ModBLocks.ROTTEN_WOOD.get());
+                        pOutput.accept(ModBLocks.STRIPPED_ROTTEN_WOOD.get());
+                        pOutput.accept(ModBLocks.ROTTEN_PLANKS.get());
+                        pOutput.accept(ModBLocks.ROTTEN_STAIRS.get());
+                        pOutput.accept(ModBLocks.ROTTEN_SLAB.get());
+                        pOutput.accept(ModBLocks.ROTTEN_BUTTON.get());
+                        pOutput.accept(ModBLocks.ROTTEN_PRESSURE_PLATE.get());
+                        pOutput.accept(ModBLocks.ROTTEN_FENCE.get());
+                        pOutput.accept(ModBLocks.ROTTEN_FENCE_GATE.get());
+                        pOutput.accept(ModBLocks.ROTTEN_WALL.get());
+                        pOutput.accept(ModBLocks.ROTTEN_DOOR.get());
+                        pOutput.accept(ModBLocks.ROTTEN_TRAPDOOR.get());
+                        pOutput.accept(ModItems.ROTTEN_SIGN.get());
+                        pOutput.accept(ModItems.ROTTEN_HANGING_SIGN.get());
+
+                        pOutput.accept(ModBLocks.CHARRED_LOG.get());
+                        pOutput.accept(ModBLocks.STRIPPED_CHARRED_LOG.get());
+                        pOutput.accept(ModBLocks.CHARRED_WOOD.get());
+                        pOutput.accept(ModBLocks.STRIPPED_CHARRED_WOOD.get());
+                        pOutput.accept(ModBLocks.CHARRED_PLANKS.get());
+                        pOutput.accept(ModBLocks.CHARRED_STAIRS.get());
+                        pOutput.accept(ModBLocks.CHARRED_SLAB.get());
+                        pOutput.accept(ModBLocks.CHARRED_BUTTON.get());
+                        pOutput.accept(ModBLocks.CHARRED_PRESSURE_PLATE.get());
+                        pOutput.accept(ModBLocks.CHARRED_FENCE.get());
+                        pOutput.accept(ModBLocks.CHARRED_FENCE_GATE.get());
+                        pOutput.accept(ModBLocks.CHARRED_WALL.get());
+                        pOutput.accept(ModBLocks.CHARRED_DOOR.get());
+                        pOutput.accept(ModBLocks.CHARRED_TRAPDOOR.get());
+                        pOutput.accept(ModItems.CHARRED_SIGN.get());
+                        pOutput.accept(ModItems.CHARRED_HANGING_SIGN.get());
 
 
                         // Handle all other wood types with map-based access

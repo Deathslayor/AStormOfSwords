@@ -1990,6 +1990,242 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy(getHasName(ModBLocks.WEIRWOOD_PLANKS.get()), has(ModBLocks.WEIRWOOD_PLANKS.get()))
                 .save(this.output);
 
+        // Wood conversions
+
+// Rotten
+        this.shapeless(RecipeCategory.MISC, ModBLocks.ROTTEN_WOOD.get(), 3)
+                .requires(ModBLocks.ROTTEN_LOG.get(), 4)
+                .unlockedBy(getHasName(ModBLocks.ROTTEN_LOG.get()), has(ModBLocks.ROTTEN_LOG.get()))
+                .save(this.output);
+
+        this.shapeless(RecipeCategory.MISC, ModBLocks.STRIPPED_ROTTEN_WOOD.get(), 3)
+                .requires(ModBLocks.STRIPPED_ROTTEN_LOG.get(), 4)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_ROTTEN_LOG.get()), has(ModBLocks.STRIPPED_ROTTEN_LOG.get()))
+                .save(this.output);
+
+// Charred
+        this.shapeless(RecipeCategory.MISC, ModBLocks.CHARRED_WOOD.get(), 3)
+                .requires(ModBLocks.CHARRED_LOG.get(), 4)
+                .unlockedBy(getHasName(ModBLocks.CHARRED_LOG.get()), has(ModBLocks.CHARRED_LOG.get()))
+                .save(this.output);
+
+        this.shapeless(RecipeCategory.MISC, ModBLocks.STRIPPED_CHARRED_WOOD.get(), 3)
+                .requires(ModBLocks.STRIPPED_CHARRED_LOG.get(), 4)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_CHARRED_LOG.get()), has(ModBLocks.STRIPPED_CHARRED_LOG.get()))
+                .save(this.output);
+
+
+// Planks
+
+        this.shapeless(RecipeCategory.MISC, ModBLocks.ROTTEN_PLANKS.get(), 4)
+                .requires(ModBLocks.ROTTEN_LOG.get())
+                .unlockedBy(getHasName(ModBLocks.ROTTEN_LOG.get()), has(ModBLocks.ROTTEN_LOG.get()))
+                .save(this.output, "planks_from_rotten_log");
+
+        this.shapeless(RecipeCategory.MISC, ModBLocks.ROTTEN_PLANKS.get(), 4)
+                .requires(ModBLocks.STRIPPED_ROTTEN_LOG.get())
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_ROTTEN_LOG.get()), has(ModBLocks.STRIPPED_ROTTEN_LOG.get()))
+                .save(this.output, "planks_from_rotten_stripped_log");
+
+        this.shapeless(RecipeCategory.MISC, ModBLocks.ROTTEN_PLANKS.get(), 4)
+                .requires(ModBLocks.ROTTEN_WOOD.get())
+                .unlockedBy(getHasName(ModBLocks.ROTTEN_WOOD.get()), has(ModBLocks.ROTTEN_WOOD.get()))
+                .save(this.output, "planks_from_rotten_wood");
+
+        this.shapeless(RecipeCategory.MISC, ModBLocks.ROTTEN_PLANKS.get(), 4)
+                .requires(ModBLocks.STRIPPED_ROTTEN_WOOD.get())
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_ROTTEN_WOOD.get()), has(ModBLocks.STRIPPED_ROTTEN_WOOD.get()))
+                .save(this.output, "planks_from_rotten_stripped_wood");
+
+        this.shapeless(RecipeCategory.MISC, ModBLocks.CHARRED_PLANKS.get(), 4)
+                .requires(ModBLocks.CHARRED_LOG.get())
+                .unlockedBy(getHasName(ModBLocks.CHARRED_LOG.get()), has(ModBLocks.CHARRED_LOG.get()))
+                .save(this.output, "planks_from_charred_log");
+
+        this.shapeless(RecipeCategory.MISC, ModBLocks.CHARRED_PLANKS.get(), 4)
+                .requires(ModBLocks.STRIPPED_CHARRED_LOG.get())
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_CHARRED_LOG.get()), has(ModBLocks.STRIPPED_CHARRED_LOG.get()))
+                .save(this.output, "planks_from_charred_stripped_log");
+
+        this.shapeless(RecipeCategory.MISC, ModBLocks.CHARRED_PLANKS.get(), 4)
+                .requires(ModBLocks.CHARRED_WOOD.get())
+                .unlockedBy(getHasName(ModBLocks.CHARRED_WOOD.get()), has(ModBLocks.CHARRED_WOOD.get()))
+                .save(this.output, "planks_from_charred_wood");
+
+        this.shapeless(RecipeCategory.MISC, ModBLocks.CHARRED_PLANKS.get(), 4)
+                .requires(ModBLocks.STRIPPED_CHARRED_WOOD.get())
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_CHARRED_WOOD.get()), has(ModBLocks.STRIPPED_CHARRED_WOOD.get()))
+                .save(this.output, "planks_from_charred_stripped_wood");
+
+
+// Smelting to charcoal
+
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBLocks.ROTTEN_LOG.get()), RecipeCategory.MISC, Items.CHARCOAL, 0.15F, 200)
+                .unlockedBy(getHasName(ModBLocks.ROTTEN_LOG.get()), has(ModBLocks.ROTTEN_LOG.get()))
+                .save(this.output, "smelt_rotten_log_to_charcoal");
+
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBLocks.STRIPPED_ROTTEN_LOG.get()), RecipeCategory.MISC, Items.CHARCOAL, 0.15F, 200)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_ROTTEN_LOG.get()), has(ModBLocks.STRIPPED_ROTTEN_LOG.get()))
+                .save(this.output, "smelt_stripped_rotten_log_to_charcoal");
+
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBLocks.ROTTEN_WOOD.get()), RecipeCategory.MISC, Items.CHARCOAL, 0.15F, 200)
+                .unlockedBy(getHasName(ModBLocks.ROTTEN_WOOD.get()), has(ModBLocks.ROTTEN_WOOD.get()))
+                .save(this.output, "smelt_rotten_wood_to_charcoal");
+
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBLocks.STRIPPED_ROTTEN_WOOD.get()), RecipeCategory.MISC, Items.CHARCOAL, 0.15F, 200)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_ROTTEN_WOOD.get()), has(ModBLocks.STRIPPED_ROTTEN_WOOD.get()))
+                .save(this.output, "smelt_stripped_rotten_wood_to_charcoal");
+
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBLocks.CHARRED_LOG.get()), RecipeCategory.MISC, Items.CHARCOAL, 0.15F, 200)
+                .unlockedBy(getHasName(ModBLocks.CHARRED_LOG.get()), has(ModBLocks.CHARRED_LOG.get()))
+                .save(this.output, "smelt_charred_log_to_charcoal");
+
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBLocks.STRIPPED_CHARRED_LOG.get()), RecipeCategory.MISC, Items.CHARCOAL, 0.15F, 200)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_CHARRED_LOG.get()), has(ModBLocks.STRIPPED_CHARRED_LOG.get()))
+                .save(this.output, "smelt_stripped_charred_log_to_charcoal");
+
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBLocks.CHARRED_WOOD.get()), RecipeCategory.MISC, Items.CHARCOAL, 0.15F, 200)
+                .unlockedBy(getHasName(ModBLocks.CHARRED_WOOD.get()), has(ModBLocks.CHARRED_WOOD.get()))
+                .save(this.output, "smelt_charred_wood_to_charcoal");
+
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBLocks.STRIPPED_CHARRED_WOOD.get()), RecipeCategory.MISC, Items.CHARCOAL, 0.15F, 200)
+                .unlockedBy(getHasName(ModBLocks.STRIPPED_CHARRED_WOOD.get()), has(ModBLocks.STRIPPED_CHARRED_WOOD.get()))
+                .save(this.output, "smelt_stripped_charred_wood_to_charcoal");
+
+
+// Wood family blocks
+
+// Rotten
+        this.shaped(RecipeCategory.BUILDING_BLOCKS, ModBLocks.ROTTEN_STAIRS.get(), 4)
+                .pattern("B  ")
+                .pattern("BB ")
+                .pattern("BBB")
+                .define('B', ModBLocks.ROTTEN_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.ROTTEN_PLANKS.get()), has(ModBLocks.ROTTEN_PLANKS.get()))
+                .save(this.output);
+
+        this.shaped(RecipeCategory.BUILDING_BLOCKS, ModBLocks.ROTTEN_SLAB.get(), 6)
+                .pattern("BBB")
+                .define('B', ModBLocks.ROTTEN_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.ROTTEN_PLANKS.get()), has(ModBLocks.ROTTEN_PLANKS.get()))
+                .save(this.output);
+
+        this.shaped(RecipeCategory.REDSTONE, ModBLocks.ROTTEN_BUTTON.get())
+                .pattern("B")
+                .define('B', ModBLocks.ROTTEN_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.ROTTEN_PLANKS.get()), has(ModBLocks.ROTTEN_PLANKS.get()))
+                .save(this.output);
+
+        this.shaped(RecipeCategory.REDSTONE, ModBLocks.ROTTEN_PRESSURE_PLATE.get())
+                .pattern("BB")
+                .define('B', ModBLocks.ROTTEN_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.ROTTEN_PLANKS.get()), has(ModBLocks.ROTTEN_PLANKS.get()))
+                .save(this.output);
+
+        this.shaped(RecipeCategory.REDSTONE, ModBLocks.ROTTEN_DOOR.get(), 3)
+                .pattern("BB")
+                .pattern("BB")
+                .pattern("BB")
+                .define('B', ModBLocks.ROTTEN_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.ROTTEN_PLANKS.get()), has(ModBLocks.ROTTEN_PLANKS.get()))
+                .save(this.output);
+
+        this.shaped(RecipeCategory.REDSTONE, ModBLocks.ROTTEN_TRAPDOOR.get(), 2)
+                .pattern("BBB")
+                .pattern("BBB")
+                .define('B', ModBLocks.ROTTEN_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.ROTTEN_PLANKS.get()), has(ModBLocks.ROTTEN_PLANKS.get()))
+                .save(this.output);
+
+        this.shaped(RecipeCategory.DECORATIONS, ModBLocks.ROTTEN_FENCE.get(), 3)
+                .pattern("B#B")
+                .pattern("B#B")
+                .define('B', ModBLocks.ROTTEN_PLANKS.get())
+                .define('#', Items.STICK) // assuming shared stick
+                .unlockedBy(getHasName(ModBLocks.ROTTEN_PLANKS.get()), has(ModBLocks.ROTTEN_PLANKS.get()))
+                .save(this.output);
+
+        this.shaped(RecipeCategory.DECORATIONS, ModBLocks.ROTTEN_FENCE_GATE.get())
+                .pattern("#B#")
+                .pattern("#B#")
+                .define('B', ModBLocks.ROTTEN_PLANKS.get())
+                .define('#', Items.STICK)
+                .unlockedBy(getHasName(ModBLocks.ROTTEN_PLANKS.get()), has(ModBLocks.ROTTEN_PLANKS.get()))
+                .save(this.output);
+
+        this.shaped(RecipeCategory.BUILDING_BLOCKS, ModBLocks.ROTTEN_WALL.get(), 6)
+                .pattern("BBB")
+                .pattern("BBB")
+                .define('B', ModBLocks.ROTTEN_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.ROTTEN_PLANKS.get()), has(ModBLocks.ROTTEN_PLANKS.get()))
+                .save(this.output);
+
+
+// Charred
+        this.shaped(RecipeCategory.BUILDING_BLOCKS, ModBLocks.CHARRED_STAIRS.get(), 4)
+                .pattern("B  ")
+                .pattern("BB ")
+                .pattern("BBB")
+                .define('B', ModBLocks.CHARRED_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.CHARRED_PLANKS.get()), has(ModBLocks.CHARRED_PLANKS.get()))
+                .save(this.output);
+
+        this.shaped(RecipeCategory.BUILDING_BLOCKS, ModBLocks.CHARRED_SLAB.get(), 6)
+                .pattern("BBB")
+                .define('B', ModBLocks.CHARRED_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.CHARRED_PLANKS.get()), has(ModBLocks.CHARRED_PLANKS.get()))
+                .save(this.output);
+
+        this.shaped(RecipeCategory.REDSTONE, ModBLocks.CHARRED_BUTTON.get())
+                .pattern("B")
+                .define('B', ModBLocks.CHARRED_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.CHARRED_PLANKS.get()), has(ModBLocks.CHARRED_PLANKS.get()))
+                .save(this.output);
+
+        this.shaped(RecipeCategory.REDSTONE, ModBLocks.CHARRED_PRESSURE_PLATE.get())
+                .pattern("BB")
+                .define('B', ModBLocks.CHARRED_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.CHARRED_PLANKS.get()), has(ModBLocks.CHARRED_PLANKS.get()))
+                .save(this.output);
+
+        this.shaped(RecipeCategory.REDSTONE, ModBLocks.CHARRED_DOOR.get(), 3)
+                .pattern("BB")
+                .pattern("BB")
+                .pattern("BB")
+                .define('B', ModBLocks.CHARRED_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.CHARRED_PLANKS.get()), has(ModBLocks.CHARRED_PLANKS.get()))
+                .save(this.output);
+
+        this.shaped(RecipeCategory.REDSTONE, ModBLocks.CHARRED_TRAPDOOR.get(), 2)
+                .pattern("BBB")
+                .pattern("BBB")
+                .define('B', ModBLocks.CHARRED_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.CHARRED_PLANKS.get()), has(ModBLocks.CHARRED_PLANKS.get()))
+                .save(this.output);
+
+        this.shaped(RecipeCategory.DECORATIONS, ModBLocks.CHARRED_FENCE.get(), 3)
+                .pattern("B#B")
+                .pattern("B#B")
+                .define('B', ModBLocks.CHARRED_PLANKS.get())
+                .define('#', Items.STICK)
+                .unlockedBy(getHasName(ModBLocks.CHARRED_PLANKS.get()), has(ModBLocks.CHARRED_PLANKS.get()))
+                .save(this.output);
+
+        this.shaped(RecipeCategory.DECORATIONS, ModBLocks.CHARRED_FENCE_GATE.get())
+                .pattern("#B#")
+                .pattern("#B#")
+                .define('B', ModBLocks.CHARRED_PLANKS.get())
+                .define('#', Items.STICK)
+                .unlockedBy(getHasName(ModBLocks.CHARRED_PLANKS.get()), has(ModBLocks.CHARRED_PLANKS.get()))
+                .save(this.output);
+
+        this.shaped(RecipeCategory.BUILDING_BLOCKS, ModBLocks.CHARRED_WALL.get(), 6)
+                .pattern("BBB")
+                .pattern("BBB")
+                .define('B', ModBLocks.CHARRED_PLANKS.get())
+                .unlockedBy(getHasName(ModBLocks.CHARRED_PLANKS.get()), has(ModBLocks.CHARRED_PLANKS.get()))
+                .save(this.output);
+
         this.shaped(RecipeCategory.BUILDING_BLOCKS, ModBLocks.OAK_WALL.get(), 6)
                 .pattern("BBB")
                 .pattern("BBB")

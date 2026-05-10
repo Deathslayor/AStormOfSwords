@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "agotmod:block/charred_slab"
+    },
+    "type=double": {
+      "model": "agotmod:block/charred_planks"
+    },
+    "type=top": {
+      "model": "agotmod:block/charred_slab_top"
+    }
+  }
+}

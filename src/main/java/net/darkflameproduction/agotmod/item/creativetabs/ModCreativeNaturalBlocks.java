@@ -143,6 +143,17 @@ public class ModCreativeNaturalBlocks {
                                 pOutput.accept(ModBLocks.WEIRWOOD_PLANKS.get());
                                 pOutput.accept(ModBLocks.WEIRWOOD_LEAVES.get());
                                 pOutput.accept(ModBLocks.WEIRWOOD_SAPLING.get());
+                                pOutput.accept(ModBLocks.ROTTEN_LOG.get());
+                                pOutput.accept(ModBLocks.STRIPPED_ROTTEN_LOG.get());
+                                pOutput.accept(ModBLocks.ROTTEN_WOOD.get());
+                                pOutput.accept(ModBLocks.STRIPPED_ROTTEN_WOOD.get());
+                                pOutput.accept(ModBLocks.ROTTEN_PLANKS.get());
+
+                                pOutput.accept(ModBLocks.CHARRED_LOG.get());
+                                pOutput.accept(ModBLocks.STRIPPED_CHARRED_LOG.get());
+                                pOutput.accept(ModBLocks.CHARRED_WOOD.get());
+                                pOutput.accept(ModBLocks.STRIPPED_CHARRED_WOOD.get());
+                                pOutput.accept(ModBLocks.CHARRED_PLANKS.get());
 
                                 // All other wood types using maps
                                 for (String woodType : WOOD_TYPES) {

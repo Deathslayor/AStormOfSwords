@@ -958,6 +958,25 @@ public class ModItemModelProvider extends ItemModelProvider {
         vanillaWallItem(ModBLocks.BAMBOO_WALL, Blocks.BAMBOO_PLANKS);
         vanillaWallItem(ModBLocks.CRIMSON_WALL, Blocks.CRIMSON_PLANKS);
         vanillaWallItem(ModBLocks.WARPED_WALL, Blocks.WARPED_PLANKS);
+        simpleBlockItem(ModBLocks.ROTTEN_DOOR);
+        fenceItem(ModBLocks.ROTTEN_FENCE, ModBLocks.ROTTEN_PLANKS);
+        buttonItem(ModBLocks.ROTTEN_BUTTON, ModBLocks.ROTTEN_PLANKS);
+        wallItem(ModBLocks.ROTTEN_WALL, ModBLocks.ROTTEN_PLANKS);
+        evenSimplerBlockItem(ModBLocks.ROTTEN_STAIRS);
+        evenSimplerBlockItem(ModBLocks.ROTTEN_SLAB);
+        evenSimplerBlockItem(ModBLocks.ROTTEN_PRESSURE_PLATE);
+        evenSimplerBlockItem(ModBLocks.ROTTEN_FENCE_GATE);
+        trapdoorItem(ModBLocks.ROTTEN_TRAPDOOR);
+
+        simpleBlockItem(ModBLocks.CHARRED_DOOR);
+        fenceItem(ModBLocks.CHARRED_FENCE, ModBLocks.CHARRED_PLANKS);
+        buttonItem(ModBLocks.CHARRED_BUTTON, ModBLocks.CHARRED_PLANKS);
+        wallItem(ModBLocks.CHARRED_WALL, ModBLocks.CHARRED_PLANKS);
+        evenSimplerBlockItem(ModBLocks.CHARRED_STAIRS);
+        evenSimplerBlockItem(ModBLocks.CHARRED_SLAB);
+        evenSimplerBlockItem(ModBLocks.CHARRED_PRESSURE_PLATE);
+        evenSimplerBlockItem(ModBLocks.CHARRED_FENCE_GATE);
+        trapdoorItem(ModBLocks.CHARRED_TRAPDOOR);
         //Sycamore
 
 
@@ -1305,6 +1324,11 @@ public class ModItemModelProvider extends ItemModelProvider {
         // ---------------------------(SIGNS)--------------------------- //
         simpleItem(ModItems.WEIRWOOD_SIGN);
         simpleItem(ModItems.WEIRWOOD_HANGING_SIGN);
+        simpleItem(ModItems.ROTTEN_SIGN);
+        simpleItem(ModItems.ROTTEN_HANGING_SIGN);
+
+        simpleItem(ModItems.CHARRED_SIGN);
+        simpleItem(ModItems.CHARRED_HANGING_SIGN);
 
 
         // ---------------------------(BANNERS)--------------------------- //

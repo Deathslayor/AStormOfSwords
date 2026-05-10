@@ -172,6 +172,8 @@ public class AGoTMod {
         @SubscribeEvent
         public static void onClientSetup(@NotNull FMLClientSetupEvent event) {
             Sheets.addWoodType(ModWoodTypes.WEIRWOOD);
+            Sheets.addWoodType(ModWoodTypes.CHARRED);
+            Sheets.addWoodType(ModWoodTypes.ROTTEN);
             Sheets.addWoodType(ModWoodTypes.PINE);
             Sheets.addWoodType(ModWoodTypes.ASH);
             Sheets.addWoodType(ModWoodTypes.BEECH);

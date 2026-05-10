@@ -57,6 +57,8 @@
     "agotmod:willow_fence_gate",
     "agotmod:wormtree_fence_gate",
     "agotmod:yew_fence_gate",
-    "agotmod:weirwood_fence_gate"
+    "agotmod:weirwood_fence_gate",
+    "agotmod:rotten_fence_gate",
+    "agotmod:charred_fence_gate"
   ]
 }

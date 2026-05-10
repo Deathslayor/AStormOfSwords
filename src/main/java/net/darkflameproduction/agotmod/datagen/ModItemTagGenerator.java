@@ -50,24 +50,60 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModBLocks.WEIRWOOD_WOOD.get().asItem())
                 .add(ModBLocks.STRIPPED_WEIRWOOD_WOOD.get().asItem())
                 .add(ModBLocks.WEIRWOOD_FACE_LOG.get().asItem())
-                ;
+
+                //Rotten
+                .add(ModBLocks.ROTTEN_LOG.get().asItem())
+                .add(ModBLocks.STRIPPED_ROTTEN_LOG.get().asItem())
+                .add(ModBLocks.ROTTEN_WOOD.get().asItem())
+                .add(ModBLocks.STRIPPED_ROTTEN_WOOD.get().asItem())
+
+                //Charred
+                .add(ModBLocks.CHARRED_LOG.get().asItem())
+                .add(ModBLocks.STRIPPED_CHARRED_LOG.get().asItem())
+                .add(ModBLocks.CHARRED_WOOD.get().asItem())
+                .add(ModBLocks.STRIPPED_CHARRED_WOOD.get().asItem())
+        ;
+
         this.tag(ItemTags.PLANKS)
-                .add(ModBLocks.WEIRWOOD_PLANKS.get().asItem());
+                .add(ModBLocks.WEIRWOOD_PLANKS.get().asItem())
+                .add(ModBLocks.ROTTEN_PLANKS.get().asItem())
+                .add(ModBLocks.CHARRED_PLANKS.get().asItem());
 
         this.tag(ItemTags.WOODEN_STAIRS)
-                .add(ModBLocks.WEIRWOOD_STAIRS.get().asItem());
+                .add(ModBLocks.WEIRWOOD_STAIRS.get().asItem())
+                .add(ModBLocks.ROTTEN_STAIRS.get().asItem())
+                .add(ModBLocks.CHARRED_STAIRS.get().asItem());
+
         this.tag(ItemTags.WOODEN_BUTTONS)
-                .add(ModBLocks.WEIRWOOD_BUTTON.get().asItem());
+                .add(ModBLocks.WEIRWOOD_BUTTON.get().asItem())
+                .add(ModBLocks.ROTTEN_BUTTON.get().asItem())
+                .add(ModBLocks.CHARRED_BUTTON.get().asItem());
+
         this.tag(ItemTags.WOODEN_DOORS)
-                .add(ModBLocks.WEIRWOOD_DOOR.get().asItem());
+                .add(ModBLocks.WEIRWOOD_DOOR.get().asItem())
+                .add(ModBLocks.ROTTEN_DOOR.get().asItem())
+                .add(ModBLocks.CHARRED_DOOR.get().asItem());
+
         this.tag(ItemTags.WOODEN_PRESSURE_PLATES)
-                .add(ModBLocks.WEIRWOOD_PRESSURE_PLATE.get().asItem());
+                .add(ModBLocks.WEIRWOOD_PRESSURE_PLATE.get().asItem())
+                .add(ModBLocks.ROTTEN_PRESSURE_PLATE.get().asItem())
+                .add(ModBLocks.CHARRED_PRESSURE_PLATE.get().asItem());
+
         this.tag(ItemTags.WOODEN_SLABS)
-                .add(ModBLocks.WEIRWOOD_SLAB.get().asItem());
+                .add(ModBLocks.WEIRWOOD_SLAB.get().asItem())
+                .add(ModBLocks.ROTTEN_SLAB.get().asItem())
+                .add(ModBLocks.CHARRED_SLAB.get().asItem());
+
         this.tag(ItemTags.WOODEN_FENCES)
                 .add(ModBLocks.WEIRWOOD_FENCE.get().asItem())
+                .add(ModBLocks.ROTTEN_FENCE.get().asItem())
+                .add(ModBLocks.CHARRED_FENCE.get().asItem())
                 .add(ModBLocks.WEIRWOOD_FENCE_GATE.get().asItem())
+                .add(ModBLocks.ROTTEN_FENCE_GATE.get().asItem())
+                .add(ModBLocks.CHARRED_FENCE_GATE.get().asItem())
                 .add(ModBLocks.WEIRWOOD_WALL.get().asItem())
+                .add(ModBLocks.ROTTEN_WALL.get().asItem())
+                .add(ModBLocks.CHARRED_WALL.get().asItem())
                 .add(ModBLocks.OAK_WALL.get().asItem())
                 .add(ModBLocks.SPRUCE_WALL.get().asItem())
                 .add(ModBLocks.BIRCH_WALL.get().asItem())
@@ -78,10 +114,12 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModBLocks.CHERRY_WALL.get().asItem())
                 .add(ModBLocks.BAMBOO_WALL.get().asItem())
                 .add(ModBLocks.CRIMSON_WALL.get().asItem())
-                .add(ModBLocks.WARPED_WALL.get().asItem())
-        ;
+                .add(ModBLocks.WARPED_WALL.get().asItem());
+
         this.tag(ItemTags.WOODEN_TRAPDOORS)
-                .add(ModBLocks.WEIRWOOD_TRAPDOOR.get().asItem());
+                .add(ModBLocks.WEIRWOOD_TRAPDOOR.get().asItem())
+                .add(ModBLocks.ROTTEN_TRAPDOOR.get().asItem())
+                .add(ModBLocks.CHARRED_TRAPDOOR.get().asItem());
         this.tag(ItemTags.LEAVES)
                 .add(ModBLocks.WEIRWOOD_LEAVES.get().asItem());
 

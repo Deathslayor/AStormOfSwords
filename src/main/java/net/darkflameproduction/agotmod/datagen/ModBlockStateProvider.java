@@ -254,6 +254,133 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         hangingSignBlock(ModBLocks.WEIRWOOD_HANGING_SIGN.get(), ModBLocks.WEIRWOOD_WALL_HANGING_SIGN.get(), blockTexture(ModBLocks.WEIRWOOD_PLANKS.get()));
 
+        //Rotten
+        signBlock(((StandingSignBlock) ModBLocks.ROTTEN_SIGN.get()),
+                ((WallSignBlock) ModBLocks.ROTTEN_WALL_SIGN.get()),
+                blockTexture(ModBLocks.ROTTEN_PLANKS.get()));
+
+        hangingSignBlock(ModBLocks.ROTTEN_HANGING_SIGN.get(),
+                ModBLocks.ROTTEN_WALL_HANGING_SIGN.get(),
+                blockTexture(ModBLocks.ROTTEN_PLANKS.get()));
+
+//Charred
+        signBlock(((StandingSignBlock) ModBLocks.CHARRED_SIGN.get()),
+                ((WallSignBlock) ModBLocks.CHARRED_WALL_SIGN.get()),
+                blockTexture(ModBLocks.CHARRED_PLANKS.get()));
+
+        hangingSignBlock(ModBLocks.CHARRED_HANGING_SIGN.get(),
+                ModBLocks.CHARRED_WALL_HANGING_SIGN.get(),
+                blockTexture(ModBLocks.CHARRED_PLANKS.get()));
+
+        //Rotten
+        logBlock((RotatedPillarBlock) ModBLocks.ROTTEN_LOG.get());
+
+        axisBlock(((RotatedPillarBlock) ModBLocks.ROTTEN_WOOD.get()),
+                blockTexture(ModBLocks.ROTTEN_LOG.get()),
+                blockTexture(ModBLocks.ROTTEN_LOG.get()));
+
+        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_ROTTEN_LOG.get()),
+                blockTexture(ModBLocks.STRIPPED_ROTTEN_LOG.get()),
+                AGoTMod.id("block/stripped_rotten_log_top"));
+
+        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_ROTTEN_WOOD.get()),
+                blockTexture(ModBLocks.STRIPPED_ROTTEN_LOG.get()),
+                blockTexture(ModBLocks.STRIPPED_ROTTEN_LOG.get()));
+
+        blockItem(ModBLocks.ROTTEN_LOG);
+        blockItem(ModBLocks.STRIPPED_ROTTEN_LOG);
+        blockItem(ModBLocks.ROTTEN_WOOD);
+        blockItem(ModBLocks.STRIPPED_ROTTEN_WOOD);
+
+        blockWithItem(ModBLocks.ROTTEN_PLANKS);
+
+        stairsBlock(((StairBlock) ModBLocks.ROTTEN_STAIRS.get()),
+                blockTexture(ModBLocks.ROTTEN_PLANKS.get()));
+
+        slabBlock(((SlabBlock) ModBLocks.ROTTEN_SLAB.get()),
+                blockTexture(ModBLocks.ROTTEN_PLANKS.get()),
+                blockTexture(ModBLocks.ROTTEN_PLANKS.get()));
+
+        buttonBlock(((ButtonBlock) ModBLocks.ROTTEN_BUTTON.get()),
+                blockTexture(ModBLocks.ROTTEN_PLANKS.get()));
+
+        pressurePlateBlock(((PressurePlateBlock) ModBLocks.ROTTEN_PRESSURE_PLATE.get()),
+                blockTexture(ModBLocks.ROTTEN_PLANKS.get()));
+
+        fenceBlock(((FenceBlock) ModBLocks.ROTTEN_FENCE.get()),
+                blockTexture(ModBLocks.ROTTEN_PLANKS.get()));
+
+        fenceGateBlock(((FenceGateBlock) ModBLocks.ROTTEN_FENCE_GATE.get()),
+                blockTexture(ModBLocks.ROTTEN_PLANKS.get()));
+
+        wallBlock(((WallBlock) ModBLocks.ROTTEN_WALL.get()),
+                blockTexture(ModBLocks.ROTTEN_PLANKS.get()));
+
+        doorBlockWithRenderType(((DoorBlock) ModBLocks.ROTTEN_DOOR.get()),
+                modLoc("block/rotten_door_bottom"),
+                modLoc("block/rotten_door_top"),
+                "cutout");
+
+        trapdoorBlockWithRenderType(((TrapDoorBlock) ModBLocks.ROTTEN_TRAPDOOR.get()),
+                modLoc("block/rotten_trapdoor"),
+                true,
+                "cutout");
+
+
+//Charred
+        logBlock((RotatedPillarBlock) ModBLocks.CHARRED_LOG.get());
+
+        axisBlock(((RotatedPillarBlock) ModBLocks.CHARRED_WOOD.get()),
+                blockTexture(ModBLocks.CHARRED_LOG.get()),
+                blockTexture(ModBLocks.CHARRED_LOG.get()));
+
+        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_CHARRED_LOG.get()),
+                blockTexture(ModBLocks.STRIPPED_CHARRED_LOG.get()),
+                AGoTMod.id("block/stripped_charred_log_top"));
+
+        axisBlock(((RotatedPillarBlock) ModBLocks.STRIPPED_CHARRED_WOOD.get()),
+                blockTexture(ModBLocks.STRIPPED_CHARRED_LOG.get()),
+                blockTexture(ModBLocks.STRIPPED_CHARRED_LOG.get()));
+
+        blockItem(ModBLocks.CHARRED_LOG);
+        blockItem(ModBLocks.STRIPPED_CHARRED_LOG);
+        blockItem(ModBLocks.CHARRED_WOOD);
+        blockItem(ModBLocks.STRIPPED_CHARRED_WOOD);
+
+        blockWithItem(ModBLocks.CHARRED_PLANKS);
+
+        stairsBlock(((StairBlock) ModBLocks.CHARRED_STAIRS.get()),
+                blockTexture(ModBLocks.CHARRED_PLANKS.get()));
+
+        slabBlock(((SlabBlock) ModBLocks.CHARRED_SLAB.get()),
+                blockTexture(ModBLocks.CHARRED_PLANKS.get()),
+                blockTexture(ModBLocks.CHARRED_PLANKS.get()));
+
+        buttonBlock(((ButtonBlock) ModBLocks.CHARRED_BUTTON.get()),
+                blockTexture(ModBLocks.CHARRED_PLANKS.get()));
+
+        pressurePlateBlock(((PressurePlateBlock) ModBLocks.CHARRED_PRESSURE_PLATE.get()),
+                blockTexture(ModBLocks.CHARRED_PLANKS.get()));
+
+        fenceBlock(((FenceBlock) ModBLocks.CHARRED_FENCE.get()),
+                blockTexture(ModBLocks.CHARRED_PLANKS.get()));
+
+        fenceGateBlock(((FenceGateBlock) ModBLocks.CHARRED_FENCE_GATE.get()),
+                blockTexture(ModBLocks.CHARRED_PLANKS.get()));
+
+        wallBlock(((WallBlock) ModBLocks.CHARRED_WALL.get()),
+                blockTexture(ModBLocks.CHARRED_PLANKS.get()));
+
+        doorBlockWithRenderType(((DoorBlock) ModBLocks.CHARRED_DOOR.get()),
+                modLoc("block/charred_door_bottom"),
+                modLoc("block/charred_door_top"),
+                "cutout");
+
+        trapdoorBlockWithRenderType(((TrapDoorBlock) ModBLocks.CHARRED_TRAPDOOR.get()),
+                modLoc("block/charred_trapdoor"),
+                true,
+                "cutout");
+
         wallBlock(((WallBlock) ModBLocks.OAK_WALL.get()), blockTexture(Blocks.OAK_PLANKS));
         wallBlock(((WallBlock) ModBLocks.SPRUCE_WALL.get()), blockTexture(Blocks.SPRUCE_PLANKS));
         wallBlock(((WallBlock) ModBLocks.BIRCH_WALL.get()), blockTexture(Blocks.BIRCH_PLANKS));
