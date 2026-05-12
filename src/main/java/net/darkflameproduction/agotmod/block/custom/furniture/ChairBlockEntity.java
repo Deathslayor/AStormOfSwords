@@ -30,7 +30,8 @@ public class ChairBlockEntity extends BlockEntity implements GeoBlockEntity {
     }
 
     public int getRotationY() {
-        BlockState state = getBlockState();
+        if (level == null) return 0;
+        BlockState state = level.getBlockState(worldPosition);
         if (!(state.getBlock() instanceof ChairBlock)) return 0;
         return switch (state.getValue(ChairBlock.FACING)) {
             case NORTH -> 0;
@@ -39,6 +40,12 @@ public class ChairBlockEntity extends BlockEntity implements GeoBlockEntity {
             case WEST  -> 270;
             default    -> 0;
         };
+    }
+
+    @Override
+    public void setBlockState(BlockState state) {
+        super.setBlockState(state);
+        this.requestModelDataUpdate();
     }
 
     @Override

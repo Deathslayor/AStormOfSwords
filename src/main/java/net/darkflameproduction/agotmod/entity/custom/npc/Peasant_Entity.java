@@ -931,20 +931,20 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         return false;
     }
 
-    @Nullable
-    @Override
-    protected SoundEvent getAmbientSound() {
+    //@Nullable
+    //@Override
+    //protected SoundEvent getAmbientSound() {
         // List of your throat clearing and cough sounds
-        SoundEvent[] ambientSounds = new SoundEvent[] {
-                ModSounds.NPC_COUGH.get(),
-                ModSounds.NPC_CLEAR_THROAT_1.get(),
-                ModSounds.NPC_CLEAR_THROAT_2.get(),
-                ModSounds.NPC_CLEAR_THROAT_3.get(),
-                ModSounds.NPC_CLEAR_THROAT_4.get()
-        };
+    // SoundEvent[] ambientSounds = new SoundEvent[] {
+    //           ModSounds.NPC_COUGH.get(),
+    //           ModSounds.NPC_CLEAR_THROAT_1.get(),
+    //           ModSounds.NPC_CLEAR_THROAT_2.get(),
+    //           ModSounds.NPC_CLEAR_THROAT_3.get(),
+    //            ModSounds.NPC_CLEAR_THROAT_4.get()
+    //   };
         // Randomly pick one to play
-        return ambientSounds[RANDOM.nextInt(ambientSounds.length)];
-    }
+    //   return ambientSounds[RANDOM.nextInt(ambientSounds.length)];
+    //}
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSource) {

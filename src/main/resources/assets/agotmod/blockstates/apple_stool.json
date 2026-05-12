@@ -1,8 +1,8 @@
 {
   "variants": {
-    "facing=north": { "model": "agotmod:block/apple_stool" },
-    "facing=east":  { "model": "agotmod:block/apple_stool" },
-    "facing=south": { "model": "agotmod:block/apple_stool" },
-    "facing=west":  { "model": "agotmod:block/apple_stool" }
+    "facing=north": { "model": "agotmod:block/apple_stool", "y": 0   },
+    "facing=east":  { "model": "agotmod:block/apple_stool", "y": 90  },
+    "facing=south": { "model": "agotmod:block/apple_stool", "y": 180 },
+    "facing=west":  { "model": "agotmod:block/apple_stool", "y": 270 }
   }
 }

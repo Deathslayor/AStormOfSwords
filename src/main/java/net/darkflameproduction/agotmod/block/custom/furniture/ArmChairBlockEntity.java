@@ -30,7 +30,8 @@ public class ArmChairBlockEntity extends BlockEntity implements GeoBlockEntity {
     }
 
     public int getRotationY() {
-        BlockState state = getBlockState();
+        if (level == null) return 0;
+        BlockState state = level.getBlockState(worldPosition);
         if (!(state.getBlock() instanceof ArmChairBlock)) return 0;
         return switch (state.getValue(ArmChairBlock.FACING)) {
             case NORTH -> 0;
@@ -40,6 +41,14 @@ public class ArmChairBlockEntity extends BlockEntity implements GeoBlockEntity {
             default    -> 0;
         };
     }
+
+    @Override
+    public void setBlockState(BlockState state) {
+        super.setBlockState(state);
+        this.requestModelDataUpdate();
+    }
+
+
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {}

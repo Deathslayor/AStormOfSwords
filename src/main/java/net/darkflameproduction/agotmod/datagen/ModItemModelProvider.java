@@ -821,6 +821,304 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.TANNER_BARREL);
         simpleItem(ModItems.TRADER_BARREL);
 
+        // ---------------------------(FURNITURE)--------------------------- //
+        // Tables
+        furnitureItem(ModItems.OAK_TABLE);
+        furnitureItem(ModItems.DARK_OAK_TABLE);
+        furnitureItem(ModItems.SPRUCE_TABLE);
+        furnitureItem(ModItems.BIRCH_TABLE);
+        furnitureItem(ModItems.JUNGLE_TABLE);
+        furnitureItem(ModItems.ACACIA_TABLE);
+        furnitureItem(ModItems.MANGROVE_TABLE);
+        furnitureItem(ModItems.CHERRY_TABLE);
+        furnitureItem(ModItems.BAMBOO_TABLE);
+        furnitureItem(ModItems.CRIMSON_TABLE);
+        furnitureItem(ModItems.WARPED_TABLE);
+        furnitureItem(ModItems.WEIRWOOD_TABLE);
+        furnitureItem(ModItems.CHARRED_TABLE);
+        furnitureItem(ModItems.ROTTEN_TABLE);
+        furnitureItem(ModItems.PINE_TABLE);
+        furnitureItem(ModItems.ASH_TABLE);
+        furnitureItem(ModItems.BEECH_TABLE);
+        furnitureItem(ModItems.CEDAR_TABLE);
+        furnitureItem(ModItems.CHESTNUT_TABLE);
+        furnitureItem(ModItems.HAWTHORN_TABLE);
+        furnitureItem(ModItems.IRONWOOD_TABLE);
+        furnitureItem(ModItems.SENTINEL_TABLE);
+        furnitureItem(ModItems.SYCAMORE_TABLE);
+        furnitureItem(ModItems.BLACKBARK_TABLE);
+        furnitureItem(ModItems.ASPEN_TABLE);
+        furnitureItem(ModItems.ALDER_TABLE);
+        furnitureItem(ModItems.BLACK_CHERRY_TABLE);
+        furnitureItem(ModItems.BLACK_OLIVE_TABLE);
+        furnitureItem(ModItems.CRABAPPLE_TABLE);
+        furnitureItem(ModItems.OLIVE_TABLE);
+        furnitureItem(ModItems.WHITE_CHERRY_TABLE);
+        furnitureItem(ModItems.RED_CHERRY_TABLE);
+        furnitureItem(ModItems.FIR_TABLE);
+        furnitureItem(ModItems.WILLOW_TABLE);
+        furnitureItem(ModItems.WORMTREE_TABLE);
+        furnitureItem(ModItems.ALMOND_TABLE);
+        furnitureItem(ModItems.APPLE_TABLE);
+        furnitureItem(ModItems.APRICOT_TABLE);
+        furnitureItem(ModItems.BAOBAB_TABLE);
+        furnitureItem(ModItems.BLACK_COTTONWOOD_TABLE);
+        furnitureItem(ModItems.BLACKTHORN_TABLE);
+        furnitureItem(ModItems.BLOOD_ORANGE_TABLE);
+        furnitureItem(ModItems.BLOODWOOD_TABLE);
+        furnitureItem(ModItems.BLUE_MAHOE_TABLE);
+        furnitureItem(ModItems.COTTONWOOD_TABLE);
+        furnitureItem(ModItems.DATEPALM_TABLE);
+        furnitureItem(ModItems.EBONY_TABLE);
+        furnitureItem(ModItems.FIG_TABLE);
+        furnitureItem(ModItems.FIREPLUM_TABLE);
+        furnitureItem(ModItems.GOLDENHEART_TABLE);
+        furnitureItem(ModItems.LEMON_TABLE);
+        furnitureItem(ModItems.LIME_TABLE);
+        furnitureItem(ModItems.LINDEN_TABLE);
+        furnitureItem(ModItems.MAHOGANY_TABLE);
+        furnitureItem(ModItems.MAPLE_TABLE);
+        furnitureItem(ModItems.MYRRH_TABLE);
+        furnitureItem(ModItems.NIGHTWOOD_TABLE);
+        furnitureItem(ModItems.NUTMEG_TABLE);
+        furnitureItem(ModItems.ORANGE_TABLE);
+        furnitureItem(ModItems.PEACH_TABLE);
+        furnitureItem(ModItems.PEAR_TABLE);
+        furnitureItem(ModItems.PECAN_TABLE);
+        furnitureItem(ModItems.PERSIMMON_TABLE);
+        furnitureItem(ModItems.PINK_IVORY_TABLE);
+        furnitureItem(ModItems.PLUM_TABLE);
+        furnitureItem(ModItems.POMEGRANATE_TABLE);
+        furnitureItem(ModItems.PURPLEHEART_TABLE);
+        furnitureItem(ModItems.REDWOOD_TABLE);
+        furnitureItem(ModItems.SANDALWOOD_TABLE);
+        furnitureItem(ModItems.SANDBEGGAR_TABLE);
+        furnitureItem(ModItems.TIGERWOOD_TABLE);
+        furnitureItem(ModItems.YEW_TABLE);
+
+// Stools
+        furnitureItem(ModItems.DARK_OAK_STOOL);
+        furnitureItem(ModItems.OAK_STOOL);
+        furnitureItem(ModItems.SPRUCE_STOOL);
+        furnitureItem(ModItems.BIRCH_STOOL);
+        furnitureItem(ModItems.JUNGLE_STOOL);
+        furnitureItem(ModItems.ACACIA_STOOL);
+        furnitureItem(ModItems.MANGROVE_STOOL);
+        furnitureItem(ModItems.CHERRY_STOOL);
+        furnitureItem(ModItems.BAMBOO_STOOL);
+        furnitureItem(ModItems.CRIMSON_STOOL);
+        furnitureItem(ModItems.WARPED_STOOL);
+        furnitureItem(ModItems.WEIRWOOD_STOOL);
+        furnitureItem(ModItems.CHARRED_STOOL);
+        furnitureItem(ModItems.ROTTEN_STOOL);
+        furnitureItem(ModItems.PINE_STOOL);
+        furnitureItem(ModItems.ASH_STOOL);
+        furnitureItem(ModItems.BEECH_STOOL);
+        furnitureItem(ModItems.CEDAR_STOOL);
+        furnitureItem(ModItems.CHESTNUT_STOOL);
+        furnitureItem(ModItems.HAWTHORN_STOOL);
+        furnitureItem(ModItems.IRONWOOD_STOOL);
+        furnitureItem(ModItems.SENTINEL_STOOL);
+        furnitureItem(ModItems.SYCAMORE_STOOL);
+        furnitureItem(ModItems.BLACKBARK_STOOL);
+        furnitureItem(ModItems.ASPEN_STOOL);
+        furnitureItem(ModItems.ALDER_STOOL);
+        furnitureItem(ModItems.BLACK_CHERRY_STOOL);
+        furnitureItem(ModItems.BLACK_OLIVE_STOOL);
+        furnitureItem(ModItems.CRABAPPLE_STOOL);
+        furnitureItem(ModItems.OLIVE_STOOL);
+        furnitureItem(ModItems.WHITE_CHERRY_STOOL);
+        furnitureItem(ModItems.RED_CHERRY_STOOL);
+        furnitureItem(ModItems.FIR_STOOL);
+        furnitureItem(ModItems.WILLOW_STOOL);
+        furnitureItem(ModItems.WORMTREE_STOOL);
+        furnitureItem(ModItems.ALMOND_STOOL);
+        furnitureItem(ModItems.APPLE_STOOL);
+        furnitureItem(ModItems.APRICOT_STOOL);
+        furnitureItem(ModItems.BAOBAB_STOOL);
+        furnitureItem(ModItems.BLACK_COTTONWOOD_STOOL);
+        furnitureItem(ModItems.BLACKTHORN_STOOL);
+        furnitureItem(ModItems.BLOOD_ORANGE_STOOL);
+        furnitureItem(ModItems.BLOODWOOD_STOOL);
+        furnitureItem(ModItems.BLUE_MAHOE_STOOL);
+        furnitureItem(ModItems.COTTONWOOD_STOOL);
+        furnitureItem(ModItems.DATEPALM_STOOL);
+        furnitureItem(ModItems.EBONY_STOOL);
+        furnitureItem(ModItems.FIG_STOOL);
+        furnitureItem(ModItems.FIREPLUM_STOOL);
+        furnitureItem(ModItems.GOLDENHEART_STOOL);
+        furnitureItem(ModItems.LEMON_STOOL);
+        furnitureItem(ModItems.LIME_STOOL);
+        furnitureItem(ModItems.LINDEN_STOOL);
+        furnitureItem(ModItems.MAHOGANY_STOOL);
+        furnitureItem(ModItems.MAPLE_STOOL);
+        furnitureItem(ModItems.MYRRH_STOOL);
+        furnitureItem(ModItems.NIGHTWOOD_STOOL);
+        furnitureItem(ModItems.NUTMEG_STOOL);
+        furnitureItem(ModItems.ORANGE_STOOL);
+        furnitureItem(ModItems.PEACH_STOOL);
+        furnitureItem(ModItems.PEAR_STOOL);
+        furnitureItem(ModItems.PECAN_STOOL);
+        furnitureItem(ModItems.PERSIMMON_STOOL);
+        furnitureItem(ModItems.PINK_IVORY_STOOL);
+        furnitureItem(ModItems.PLUM_STOOL);
+        furnitureItem(ModItems.POMEGRANATE_STOOL);
+        furnitureItem(ModItems.PURPLEHEART_STOOL);
+        furnitureItem(ModItems.REDWOOD_STOOL);
+        furnitureItem(ModItems.SANDALWOOD_STOOL);
+        furnitureItem(ModItems.SANDBEGGAR_STOOL);
+        furnitureItem(ModItems.TIGERWOOD_STOOL);
+        furnitureItem(ModItems.YEW_STOOL);
+
+// Chairs
+        furnitureItem(ModItems.DARK_OAK_CHAIR);
+        furnitureItem(ModItems.OAK_CHAIR);
+        furnitureItem(ModItems.SPRUCE_CHAIR);
+        furnitureItem(ModItems.BIRCH_CHAIR);
+        furnitureItem(ModItems.JUNGLE_CHAIR);
+        furnitureItem(ModItems.ACACIA_CHAIR);
+        furnitureItem(ModItems.MANGROVE_CHAIR);
+        furnitureItem(ModItems.CHERRY_CHAIR);
+        furnitureItem(ModItems.BAMBOO_CHAIR);
+        furnitureItem(ModItems.CRIMSON_CHAIR);
+        furnitureItem(ModItems.WARPED_CHAIR);
+        furnitureItem(ModItems.WEIRWOOD_CHAIR);
+        furnitureItem(ModItems.CHARRED_CHAIR);
+        furnitureItem(ModItems.ROTTEN_CHAIR);
+        furnitureItem(ModItems.PINE_CHAIR);
+        furnitureItem(ModItems.ASH_CHAIR);
+        furnitureItem(ModItems.BEECH_CHAIR);
+        furnitureItem(ModItems.CEDAR_CHAIR);
+        furnitureItem(ModItems.CHESTNUT_CHAIR);
+        furnitureItem(ModItems.HAWTHORN_CHAIR);
+        furnitureItem(ModItems.IRONWOOD_CHAIR);
+        furnitureItem(ModItems.SENTINEL_CHAIR);
+        furnitureItem(ModItems.SYCAMORE_CHAIR);
+        furnitureItem(ModItems.BLACKBARK_CHAIR);
+        furnitureItem(ModItems.ASPEN_CHAIR);
+        furnitureItem(ModItems.ALDER_CHAIR);
+        furnitureItem(ModItems.BLACK_CHERRY_CHAIR);
+        furnitureItem(ModItems.BLACK_OLIVE_CHAIR);
+        furnitureItem(ModItems.CRABAPPLE_CHAIR);
+        furnitureItem(ModItems.OLIVE_CHAIR);
+        furnitureItem(ModItems.WHITE_CHERRY_CHAIR);
+        furnitureItem(ModItems.RED_CHERRY_CHAIR);
+        furnitureItem(ModItems.FIR_CHAIR);
+        furnitureItem(ModItems.WILLOW_CHAIR);
+        furnitureItem(ModItems.WORMTREE_CHAIR);
+        furnitureItem(ModItems.ALMOND_CHAIR);
+        furnitureItem(ModItems.APPLE_CHAIR);
+        furnitureItem(ModItems.APRICOT_CHAIR);
+        furnitureItem(ModItems.BAOBAB_CHAIR);
+        furnitureItem(ModItems.BLACK_COTTONWOOD_CHAIR);
+        furnitureItem(ModItems.BLACKTHORN_CHAIR);
+        furnitureItem(ModItems.BLOOD_ORANGE_CHAIR);
+        furnitureItem(ModItems.BLOODWOOD_CHAIR);
+        furnitureItem(ModItems.BLUE_MAHOE_CHAIR);
+        furnitureItem(ModItems.COTTONWOOD_CHAIR);
+        furnitureItem(ModItems.DATEPALM_CHAIR);
+        furnitureItem(ModItems.EBONY_CHAIR);
+        furnitureItem(ModItems.FIG_CHAIR);
+        furnitureItem(ModItems.FIREPLUM_CHAIR);
+        furnitureItem(ModItems.GOLDENHEART_CHAIR);
+        furnitureItem(ModItems.LEMON_CHAIR);
+        furnitureItem(ModItems.LIME_CHAIR);
+        furnitureItem(ModItems.LINDEN_CHAIR);
+        furnitureItem(ModItems.MAHOGANY_CHAIR);
+        furnitureItem(ModItems.MAPLE_CHAIR);
+        furnitureItem(ModItems.MYRRH_CHAIR);
+        furnitureItem(ModItems.NIGHTWOOD_CHAIR);
+        furnitureItem(ModItems.NUTMEG_CHAIR);
+        furnitureItem(ModItems.ORANGE_CHAIR);
+        furnitureItem(ModItems.PEACH_CHAIR);
+        furnitureItem(ModItems.PEAR_CHAIR);
+        furnitureItem(ModItems.PECAN_CHAIR);
+        furnitureItem(ModItems.PERSIMMON_CHAIR);
+        furnitureItem(ModItems.PINK_IVORY_CHAIR);
+        furnitureItem(ModItems.PLUM_CHAIR);
+        furnitureItem(ModItems.POMEGRANATE_CHAIR);
+        furnitureItem(ModItems.PURPLEHEART_CHAIR);
+        furnitureItem(ModItems.REDWOOD_CHAIR);
+        furnitureItem(ModItems.SANDALWOOD_CHAIR);
+        furnitureItem(ModItems.SANDBEGGAR_CHAIR);
+        furnitureItem(ModItems.TIGERWOOD_CHAIR);
+        furnitureItem(ModItems.YEW_CHAIR);
+
+// Arm Chairs
+        furnitureItem(ModItems.DARK_OAK_ARM_CHAIR);
+        furnitureItem(ModItems.OAK_ARM_CHAIR);
+        furnitureItem(ModItems.SPRUCE_ARM_CHAIR);
+        furnitureItem(ModItems.BIRCH_ARM_CHAIR);
+        furnitureItem(ModItems.JUNGLE_ARM_CHAIR);
+        furnitureItem(ModItems.ACACIA_ARM_CHAIR);
+        furnitureItem(ModItems.MANGROVE_ARM_CHAIR);
+        furnitureItem(ModItems.CHERRY_ARM_CHAIR);
+        furnitureItem(ModItems.BAMBOO_ARM_CHAIR);
+        furnitureItem(ModItems.CRIMSON_ARM_CHAIR);
+        furnitureItem(ModItems.WARPED_ARM_CHAIR);
+        furnitureItem(ModItems.WEIRWOOD_ARM_CHAIR);
+        furnitureItem(ModItems.CHARRED_ARM_CHAIR);
+        furnitureItem(ModItems.ROTTEN_ARM_CHAIR);
+        furnitureItem(ModItems.PINE_ARM_CHAIR);
+        furnitureItem(ModItems.ASH_ARM_CHAIR);
+        furnitureItem(ModItems.BEECH_ARM_CHAIR);
+        furnitureItem(ModItems.CEDAR_ARM_CHAIR);
+        furnitureItem(ModItems.CHESTNUT_ARM_CHAIR);
+        furnitureItem(ModItems.HAWTHORN_ARM_CHAIR);
+        furnitureItem(ModItems.IRONWOOD_ARM_CHAIR);
+        furnitureItem(ModItems.SENTINEL_ARM_CHAIR);
+        furnitureItem(ModItems.SYCAMORE_ARM_CHAIR);
+        furnitureItem(ModItems.BLACKBARK_ARM_CHAIR);
+        furnitureItem(ModItems.ASPEN_ARM_CHAIR);
+        furnitureItem(ModItems.ALDER_ARM_CHAIR);
+        furnitureItem(ModItems.BLACK_CHERRY_ARM_CHAIR);
+        furnitureItem(ModItems.BLACK_OLIVE_ARM_CHAIR);
+        furnitureItem(ModItems.CRABAPPLE_ARM_CHAIR);
+        furnitureItem(ModItems.OLIVE_ARM_CHAIR);
+        furnitureItem(ModItems.WHITE_CHERRY_ARM_CHAIR);
+        furnitureItem(ModItems.RED_CHERRY_ARM_CHAIR);
+        furnitureItem(ModItems.FIR_ARM_CHAIR);
+        furnitureItem(ModItems.WILLOW_ARM_CHAIR);
+        furnitureItem(ModItems.WORMTREE_ARM_CHAIR);
+        furnitureItem(ModItems.ALMOND_ARM_CHAIR);
+        furnitureItem(ModItems.APPLE_ARM_CHAIR);
+        furnitureItem(ModItems.APRICOT_ARM_CHAIR);
+        furnitureItem(ModItems.BAOBAB_ARM_CHAIR);
+        furnitureItem(ModItems.BLACK_COTTONWOOD_ARM_CHAIR);
+        furnitureItem(ModItems.BLACKTHORN_ARM_CHAIR);
+        furnitureItem(ModItems.BLOOD_ORANGE_ARM_CHAIR);
+        furnitureItem(ModItems.BLOODWOOD_ARM_CHAIR);
+        furnitureItem(ModItems.BLUE_MAHOE_ARM_CHAIR);
+        furnitureItem(ModItems.COTTONWOOD_ARM_CHAIR);
+        furnitureItem(ModItems.DATEPALM_ARM_CHAIR);
+        furnitureItem(ModItems.EBONY_ARM_CHAIR);
+        furnitureItem(ModItems.FIG_ARM_CHAIR);
+        furnitureItem(ModItems.FIREPLUM_ARM_CHAIR);
+        furnitureItem(ModItems.GOLDENHEART_ARM_CHAIR);
+        furnitureItem(ModItems.LEMON_ARM_CHAIR);
+        furnitureItem(ModItems.LIME_ARM_CHAIR);
+        furnitureItem(ModItems.LINDEN_ARM_CHAIR);
+        furnitureItem(ModItems.MAHOGANY_ARM_CHAIR);
+        furnitureItem(ModItems.MAPLE_ARM_CHAIR);
+        furnitureItem(ModItems.MYRRH_ARM_CHAIR);
+        furnitureItem(ModItems.NIGHTWOOD_ARM_CHAIR);
+        furnitureItem(ModItems.NUTMEG_ARM_CHAIR);
+        furnitureItem(ModItems.ORANGE_ARM_CHAIR);
+        furnitureItem(ModItems.PEACH_ARM_CHAIR);
+        furnitureItem(ModItems.PEAR_ARM_CHAIR);
+        furnitureItem(ModItems.PECAN_ARM_CHAIR);
+        furnitureItem(ModItems.PERSIMMON_ARM_CHAIR);
+        furnitureItem(ModItems.PINK_IVORY_ARM_CHAIR);
+        furnitureItem(ModItems.PLUM_ARM_CHAIR);
+        furnitureItem(ModItems.POMEGRANATE_ARM_CHAIR);
+        furnitureItem(ModItems.PURPLEHEART_ARM_CHAIR);
+        furnitureItem(ModItems.REDWOOD_ARM_CHAIR);
+        furnitureItem(ModItems.SANDALWOOD_ARM_CHAIR);
+        furnitureItem(ModItems.SANDBEGGAR_ARM_CHAIR);
+        furnitureItem(ModItems.TIGERWOOD_ARM_CHAIR);
+        furnitureItem(ModItems.YEW_ARM_CHAIR);
+
+
 
 
         // ---------------------------(SAPLINGS)--------------------------- //
@@ -1671,6 +1969,29 @@ public class ModItemModelProvider extends ItemModelProvider {
         }
     }
 
+    public void furnitureItem(DeferredHolder<Item, Item> item) {
+        String itemPath = BuiltInRegistries.ITEM.getKey(item.get()).getPath();
+
+        String texturePath;
+
+        if (itemPath.endsWith("_table")) {
+            texturePath = "item/" + itemPath + "_icon";
+        } else if (itemPath.endsWith("_stool")) {
+            String woodType = itemPath.replace("_stool", "");
+            texturePath = "item/" + woodType + "_chair1_icon";
+        } else if (itemPath.endsWith("_arm_chair")) {
+            String woodType = itemPath.replace("_arm_chair", "");
+            texturePath = "item/" + woodType + "_chair3_icon";
+        } else if (itemPath.endsWith("_chair")) {
+            String woodType = itemPath.replace("_chair", "");
+            texturePath = "item/" + woodType + "_chair2_icon";
+        } else {
+            throw new IllegalArgumentException("Unknown furniture item type: " + itemPath);
+        }
+
+        this.withExistingParent(itemPath, mcLoc("item/generated"))
+                .texture("layer0", modLoc(texturePath));
+    }
 
 
     private ItemModelBuilder spawnEggItem(DeferredHolder<Item, Item> item) {

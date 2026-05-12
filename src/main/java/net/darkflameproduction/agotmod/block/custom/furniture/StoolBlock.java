@@ -8,8 +8,10 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -69,7 +71,15 @@ public class StoolBlock extends Block implements EntityBlock {
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         return this.defaultBlockState().setValue(FACING,
-                context.getHorizontalDirection().getOpposite());
+                context.getHorizontalDirection());
+    }
+
+    @Override
+    public BlockState getAppearance(BlockState state, BlockAndTintGetter level, BlockPos pos,
+                                    Direction side, @Nullable BlockState queryState,
+                                    @Nullable BlockPos queryPos) {
+        // Return planks appearance so particles and sounds work correctly
+        return Blocks.OAK_PLANKS.defaultBlockState();
     }
 
     @Override

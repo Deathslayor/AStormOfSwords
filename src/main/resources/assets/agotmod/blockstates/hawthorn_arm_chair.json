@@ -1,8 +1,8 @@
 {
   "variants": {
-    "facing=north": { "model": "agotmod:block/hawthorn_arm_chair" },
-    "facing=east":  { "model": "agotmod:block/hawthorn_arm_chair" },
-    "facing=south": { "model": "agotmod:block/hawthorn_arm_chair" },
-    "facing=west":  { "model": "agotmod:block/hawthorn_arm_chair" }
+    "facing=north": { "model": "agotmod:block/hawthorn_arm_chair", "y": 0   },
+    "facing=east":  { "model": "agotmod:block/hawthorn_arm_chair", "y": 90  },
+    "facing=south": { "model": "agotmod:block/hawthorn_arm_chair", "y": 180 },
+    "facing=west":  { "model": "agotmod:block/hawthorn_arm_chair", "y": 270 }
   }
 }

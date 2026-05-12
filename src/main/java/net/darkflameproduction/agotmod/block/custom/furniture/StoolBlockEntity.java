@@ -1,7 +1,9 @@
 package net.darkflameproduction.agotmod.block.custom.furniture;
 
+import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.entity.ModBlockEntities;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -22,15 +24,16 @@ public class StoolBlockEntity extends BlockEntity implements GeoBlockEntity {
 
     public ResourceLocation getTextureLocation() {
         Block block = getBlockState().getBlock();
-        String key = BuiltInRegistries.BLOCK.getKey(block).getPath(); // e.g. "acacia_stool"
-        String woodType = key.replace("_stool", "");                  // e.g. "acacia"
-        String textureName = "chair3" + woodType;                     // e.g. "chair3acacia"
+        String key = BuiltInRegistries.BLOCK.getKey(block).getPath();
+        String woodType = key.replace("_stool", "");
+        String textureName = "chair3" + woodType;
         return ResourceLocation.fromNamespaceAndPath("agotmod",
                 "textures/block/chair/" + textureName + ".png");
     }
 
     public int getRotationY() {
-        BlockState state = getBlockState();
+        if (level == null) return 0;
+        BlockState state = level.getBlockState(worldPosition);
         if (!(state.getBlock() instanceof StoolBlock)) return 0;
         return switch (state.getValue(StoolBlock.FACING)) {
             case NORTH -> 0;
@@ -39,6 +42,12 @@ public class StoolBlockEntity extends BlockEntity implements GeoBlockEntity {
             case WEST  -> 270;
             default    -> 0;
         };
+    }
+
+    @Override
+    public void setBlockState(BlockState state) {
+        super.setBlockState(state);
+        this.requestModelDataUpdate();
     }
 
     @Override
