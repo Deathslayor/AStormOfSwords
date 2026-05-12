@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "agotmod:block/baobab_stool" },
+    "facing=east":  { "model": "agotmod:block/baobab_stool" },
+    "facing=south": { "model": "agotmod:block/baobab_stool" },
+    "facing=west":  { "model": "agotmod:block/baobab_stool" }
+  }
+}

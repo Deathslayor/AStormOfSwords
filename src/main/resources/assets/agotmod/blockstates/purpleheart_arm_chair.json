@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "agotmod:block/purpleheart_arm_chair" },
+    "facing=east":  { "model": "agotmod:block/purpleheart_arm_chair" },
+    "facing=south": { "model": "agotmod:block/purpleheart_arm_chair" },
+    "facing=west":  { "model": "agotmod:block/purpleheart_arm_chair" }
+  }
+}

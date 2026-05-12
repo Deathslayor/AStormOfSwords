@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "agotmod:block/aspen_stool" },
+    "facing=east":  { "model": "agotmod:block/aspen_stool" },
+    "facing=south": { "model": "agotmod:block/aspen_stool" },
+    "facing=west":  { "model": "agotmod:block/aspen_stool" }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "agotmod:block/pink_ivory_stool" },
+    "facing=east":  { "model": "agotmod:block/pink_ivory_stool" },
+    "facing=south": { "model": "agotmod:block/pink_ivory_stool" },
+    "facing=west":  { "model": "agotmod:block/pink_ivory_stool" }
+  }
+}

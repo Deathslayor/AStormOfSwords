@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "agotmod:block/goldenheart_chair" },
+    "facing=east":  { "model": "agotmod:block/goldenheart_chair" },
+    "facing=south": { "model": "agotmod:block/goldenheart_chair" },
+    "facing=west":  { "model": "agotmod:block/goldenheart_chair" }
+  }
+}

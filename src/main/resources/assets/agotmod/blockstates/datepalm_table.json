@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "north=false,south=false,east=false,west=false": { "model": "agotmod:block/datepalm_table" },
+    "north=true,south=false,east=false,west=false":  { "model": "agotmod:block/datepalm_table" },
+    "north=false,south=true,east=false,west=false":  { "model": "agotmod:block/datepalm_table" },
+    "north=false,south=false,east=true,west=false":  { "model": "agotmod:block/datepalm_table" },
+    "north=false,south=false,east=false,west=true":  { "model": "agotmod:block/datepalm_table" },
+    "north=true,south=true,east=false,west=false":   { "model": "agotmod:block/datepalm_table" },
+    "north=false,south=false,east=true,west=true":   { "model": "agotmod:block/datepalm_table" },
+    "north=true,south=false,east=true,west=false":   { "model": "agotmod:block/datepalm_table" },
+    "north=true,south=false,east=false,west=true":   { "model": "agotmod:block/datepalm_table" },
+    "north=false,south=true,east=true,west=false":   { "model": "agotmod:block/datepalm_table" },
+    "north=false,south=true,east=false,west=true":   { "model": "agotmod:block/datepalm_table" },
+    "north=true,south=true,east=true,west=false":    { "model": "agotmod:block/datepalm_table" },
+    "north=true,south=true,east=false,west=true":    { "model": "agotmod:block/datepalm_table" },
+    "north=true,south=false,east=true,west=true":    { "model": "agotmod:block/datepalm_table" },
+    "north=false,south=true,east=true,west=true":    { "model": "agotmod:block/datepalm_table" },
+    "north=true,south=true,east=true,west=true":     { "model": "agotmod:block/datepalm_table" }
+  }
+}

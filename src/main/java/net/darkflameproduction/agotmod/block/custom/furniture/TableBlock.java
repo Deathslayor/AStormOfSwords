@@ -15,6 +15,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class TableBlock extends Block implements EntityBlock {
@@ -31,6 +34,28 @@ public class TableBlock extends Block implements EntityBlock {
                 .setValue(SOUTH, false)
                 .setValue(EAST,  false)
                 .setValue(WEST,  false));
+    }
+
+    @Override
+    public boolean propagatesSkylightDown(BlockState state) {
+        return true;
+    }
+
+    @Override
+    protected boolean isPathfindable(BlockState state, PathComputationType type) {
+        return false;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public VoxelShape getOcclusionShape(BlockState state) {
+        return Shapes.empty();
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public boolean skipRendering(BlockState state, BlockState adjacentState, Direction direction) {
+        return false;
     }
 
     @Override

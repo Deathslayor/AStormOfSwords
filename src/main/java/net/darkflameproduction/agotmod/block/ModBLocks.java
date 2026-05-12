@@ -3,6 +3,9 @@ package net.darkflameproduction.agotmod.block;// Importing necessary classes fro
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.block.custom.*;
 import net.darkflameproduction.agotmod.block.custom.BarleyCropBlock;
+import net.darkflameproduction.agotmod.block.custom.furniture.ArmChairBlock;
+import net.darkflameproduction.agotmod.block.custom.furniture.ChairBlock;
+import net.darkflameproduction.agotmod.block.custom.furniture.StoolBlock;
 import net.darkflameproduction.agotmod.block.custom.furniture.TableBlock;
 import net.darkflameproduction.agotmod.block.custom.specialleaves.WeirwoodLeavesBlock;
 import net.darkflameproduction.agotmod.item.ModItems;
@@ -2239,10 +2242,449 @@ public class ModBLocks {
             SmokeberryBushBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH), false);
 
     // ---------------------------(FURNITURE)--------------------------- //
+    // VANILLA
+// ── TABLES ────────────────────────────────────────────────────────────────
+
+    public static final DeferredBlock<Block> OAK_TABLE = registerBlock("oak_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
     public static final DeferredBlock<Block> DARK_OAK_TABLE = registerBlock("dark_oak_table",
-            TableBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_PLANKS).strength(2f).noOcclusion(),
-            false);
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> SPRUCE_TABLE = registerBlock("spruce_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BIRCH_TABLE = registerBlock("birch_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> JUNGLE_TABLE = registerBlock("jungle_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ACACIA_TABLE = registerBlock("acacia_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> MANGROVE_TABLE = registerBlock("mangrove_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> CHERRY_TABLE = registerBlock("cherry_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BAMBOO_TABLE = registerBlock("bamboo_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BAMBOO_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> CRIMSON_TABLE = registerBlock("crimson_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CRIMSON_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> WARPED_TABLE = registerBlock("warped_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.WARPED_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> WEIRWOOD_TABLE = registerBlock("weirwood_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> CHARRED_TABLE = registerBlock("charred_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ROTTEN_TABLE = registerBlock("rotten_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PINE_TABLE = registerBlock("pine_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ASH_TABLE = registerBlock("ash_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BEECH_TABLE = registerBlock("beech_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> CEDAR_TABLE = registerBlock("cedar_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> CHESTNUT_TABLE = registerBlock("chestnut_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> HAWTHORN_TABLE = registerBlock("hawthorn_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> IRONWOOD_TABLE = registerBlock("ironwood_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> SENTINEL_TABLE = registerBlock("sentinel_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> SYCAMORE_TABLE = registerBlock("sycamore_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLACKBARK_TABLE = registerBlock("blackbark_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ASPEN_TABLE = registerBlock("aspen_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ALDER_TABLE = registerBlock("alder_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLACK_CHERRY_TABLE = registerBlock("black_cherry_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLACK_OLIVE_TABLE = registerBlock("black_olive_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> CRABAPPLE_TABLE = registerBlock("crabapple_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> OLIVE_TABLE = registerBlock("olive_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> WHITE_CHERRY_TABLE = registerBlock("white_cherry_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> RED_CHERRY_TABLE = registerBlock("red_cherry_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> FIR_TABLE = registerBlock("fir_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> WILLOW_TABLE = registerBlock("willow_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> WORMTREE_TABLE = registerBlock("wormtree_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ALMOND_TABLE = registerBlock("almond_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> APPLE_TABLE = registerBlock("apple_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> APRICOT_TABLE = registerBlock("apricot_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BAOBAB_TABLE = registerBlock("baobab_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLACK_COTTONWOOD_TABLE = registerBlock("black_cottonwood_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLACKTHORN_TABLE = registerBlock("blackthorn_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLOOD_ORANGE_TABLE = registerBlock("blood_orange_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLOODWOOD_TABLE = registerBlock("bloodwood_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLUE_MAHOE_TABLE = registerBlock("blue_mahoe_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> COTTONWOOD_TABLE = registerBlock("cottonwood_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> DATEPALM_TABLE = registerBlock("datepalm_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> EBONY_TABLE = registerBlock("ebony_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> FIG_TABLE = registerBlock("fig_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> FIREPLUM_TABLE = registerBlock("fireplum_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> GOLDENHEART_TABLE = registerBlock("goldenheart_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> LEMON_TABLE = registerBlock("lemon_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> LIME_TABLE = registerBlock("lime_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> LINDEN_TABLE = registerBlock("linden_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> MAHOGANY_TABLE = registerBlock("mahogany_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> MAPLE_TABLE = registerBlock("maple_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> MYRRH_TABLE = registerBlock("myrrh_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> NIGHTWOOD_TABLE = registerBlock("nightwood_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> NUTMEG_TABLE = registerBlock("nutmeg_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ORANGE_TABLE = registerBlock("orange_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PEACH_TABLE = registerBlock("peach_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PEAR_TABLE = registerBlock("pear_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PECAN_TABLE = registerBlock("pecan_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PERSIMMON_TABLE = registerBlock("persimmon_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PINK_IVORY_TABLE = registerBlock("pink_ivory_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PLUM_TABLE = registerBlock("plum_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> POMEGRANATE_TABLE = registerBlock("pomegranate_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PURPLEHEART_TABLE = registerBlock("purpleheart_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> REDWOOD_TABLE = registerBlock("redwood_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> SANDALWOOD_TABLE = registerBlock("sandalwood_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> SANDBEGGAR_TABLE = registerBlock("sandbeggar_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> TIGERWOOD_TABLE = registerBlock("tigerwood_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> YEW_TABLE = registerBlock("yew_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+
+// ── STOOLS ────────────────────────────────────────────────────────────────
+
+    public static final DeferredBlock<Block> DARK_OAK_STOOL = registerBlock("dark_oak_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> OAK_STOOL = registerBlock("oak_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> SPRUCE_STOOL = registerBlock("spruce_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BIRCH_STOOL = registerBlock("birch_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> JUNGLE_STOOL = registerBlock("jungle_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ACACIA_STOOL = registerBlock("acacia_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> MANGROVE_STOOL = registerBlock("mangrove_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> CHERRY_STOOL = registerBlock("cherry_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BAMBOO_STOOL = registerBlock("bamboo_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BAMBOO_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> CRIMSON_STOOL = registerBlock("crimson_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CRIMSON_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> WARPED_STOOL = registerBlock("warped_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.WARPED_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> WEIRWOOD_STOOL = registerBlock("weirwood_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> CHARRED_STOOL = registerBlock("charred_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ROTTEN_STOOL = registerBlock("rotten_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PINE_STOOL = registerBlock("pine_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ASH_STOOL = registerBlock("ash_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BEECH_STOOL = registerBlock("beech_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> CEDAR_STOOL = registerBlock("cedar_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> CHESTNUT_STOOL = registerBlock("chestnut_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> HAWTHORN_STOOL = registerBlock("hawthorn_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> IRONWOOD_STOOL = registerBlock("ironwood_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> SENTINEL_STOOL = registerBlock("sentinel_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> SYCAMORE_STOOL = registerBlock("sycamore_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLACKBARK_STOOL = registerBlock("blackbark_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ASPEN_STOOL = registerBlock("aspen_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ALDER_STOOL = registerBlock("alder_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLACK_CHERRY_STOOL = registerBlock("black_cherry_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLACK_OLIVE_STOOL = registerBlock("black_olive_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> CRABAPPLE_STOOL = registerBlock("crabapple_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> OLIVE_STOOL = registerBlock("olive_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> WHITE_CHERRY_STOOL = registerBlock("white_cherry_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> RED_CHERRY_STOOL = registerBlock("red_cherry_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> FIR_STOOL = registerBlock("fir_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> WILLOW_STOOL = registerBlock("willow_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> WORMTREE_STOOL = registerBlock("wormtree_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ALMOND_STOOL = registerBlock("almond_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> APPLE_STOOL = registerBlock("apple_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> APRICOT_STOOL = registerBlock("apricot_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BAOBAB_STOOL = registerBlock("baobab_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLACK_COTTONWOOD_STOOL = registerBlock("black_cottonwood_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLACKTHORN_STOOL = registerBlock("blackthorn_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLOOD_ORANGE_STOOL = registerBlock("blood_orange_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLOODWOOD_STOOL = registerBlock("bloodwood_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLUE_MAHOE_STOOL = registerBlock("blue_mahoe_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> COTTONWOOD_STOOL = registerBlock("cottonwood_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> DATEPALM_STOOL = registerBlock("datepalm_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> EBONY_STOOL = registerBlock("ebony_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> FIG_STOOL = registerBlock("fig_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> FIREPLUM_STOOL = registerBlock("fireplum_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> GOLDENHEART_STOOL = registerBlock("goldenheart_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> LEMON_STOOL = registerBlock("lemon_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> LIME_STOOL = registerBlock("lime_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> LINDEN_STOOL = registerBlock("linden_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> MAHOGANY_STOOL = registerBlock("mahogany_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> MAPLE_STOOL = registerBlock("maple_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> MYRRH_STOOL = registerBlock("myrrh_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> NIGHTWOOD_STOOL = registerBlock("nightwood_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> NUTMEG_STOOL = registerBlock("nutmeg_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ORANGE_STOOL = registerBlock("orange_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PEACH_STOOL = registerBlock("peach_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PEAR_STOOL = registerBlock("pear_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PECAN_STOOL = registerBlock("pecan_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PERSIMMON_STOOL = registerBlock("persimmon_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PINK_IVORY_STOOL = registerBlock("pink_ivory_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PLUM_STOOL = registerBlock("plum_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> POMEGRANATE_STOOL = registerBlock("pomegranate_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PURPLEHEART_STOOL = registerBlock("purpleheart_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> REDWOOD_STOOL = registerBlock("redwood_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> SANDALWOOD_STOOL = registerBlock("sandalwood_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> SANDBEGGAR_STOOL = registerBlock("sandbeggar_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> TIGERWOOD_STOOL = registerBlock("tigerwood_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> YEW_STOOL = registerBlock("yew_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+
+    public static final DeferredBlock<Block> DARK_OAK_CHAIR = registerBlock("dark_oak_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> OAK_CHAIR = registerBlock("oak_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> SPRUCE_CHAIR = registerBlock("spruce_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BIRCH_CHAIR = registerBlock("birch_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> JUNGLE_CHAIR = registerBlock("jungle_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_PLANKS).strength(2f).noOcclusion().isSuffocating((s, l, p) -> false).isViewBlocking((s, l, p) -> false), false);
+    public static final DeferredBlock<Block> ACACIA_CHAIR = registerBlock("acacia_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> MANGROVE_CHAIR = registerBlock("mangrove_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> CHERRY_CHAIR = registerBlock("cherry_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BAMBOO_CHAIR = registerBlock("bamboo_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BAMBOO_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> CRIMSON_CHAIR = registerBlock("crimson_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CRIMSON_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> WARPED_CHAIR = registerBlock("warped_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.WARPED_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+
+    // MOD
+    public static final DeferredBlock<Block> WEIRWOOD_CHAIR = registerBlock("weirwood_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> CHARRED_CHAIR = registerBlock("charred_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ROTTEN_CHAIR = registerBlock("rotten_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PINE_CHAIR = registerBlock("pine_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ASH_CHAIR = registerBlock("ash_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BEECH_CHAIR = registerBlock("beech_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> CEDAR_CHAIR = registerBlock("cedar_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> CHESTNUT_CHAIR = registerBlock("chestnut_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> HAWTHORN_CHAIR = registerBlock("hawthorn_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> IRONWOOD_CHAIR = registerBlock("ironwood_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> SENTINEL_CHAIR = registerBlock("sentinel_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> SYCAMORE_CHAIR = registerBlock("sycamore_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLACKBARK_CHAIR = registerBlock("blackbark_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ASPEN_CHAIR = registerBlock("aspen_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ALDER_CHAIR = registerBlock("alder_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLACK_CHERRY_CHAIR = registerBlock("black_cherry_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLACK_OLIVE_CHAIR = registerBlock("black_olive_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> CRABAPPLE_CHAIR = registerBlock("crabapple_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> OLIVE_CHAIR = registerBlock("olive_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> WHITE_CHERRY_CHAIR = registerBlock("white_cherry_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> RED_CHERRY_CHAIR = registerBlock("red_cherry_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> FIR_CHAIR = registerBlock("fir_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> WILLOW_CHAIR = registerBlock("willow_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> WORMTREE_CHAIR = registerBlock("wormtree_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ALMOND_CHAIR = registerBlock("almond_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> APPLE_CHAIR = registerBlock("apple_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> APRICOT_CHAIR = registerBlock("apricot_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BAOBAB_CHAIR = registerBlock("baobab_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLACK_COTTONWOOD_CHAIR = registerBlock("black_cottonwood_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLACKTHORN_CHAIR = registerBlock("blackthorn_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLOOD_ORANGE_CHAIR = registerBlock("blood_orange_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLOODWOOD_CHAIR = registerBlock("bloodwood_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLUE_MAHOE_CHAIR = registerBlock("blue_mahoe_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> COTTONWOOD_CHAIR = registerBlock("cottonwood_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> DATEPALM_CHAIR = registerBlock("datepalm_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> EBONY_CHAIR = registerBlock("ebony_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> FIG_CHAIR = registerBlock("fig_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> FIREPLUM_CHAIR = registerBlock("fireplum_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> GOLDENHEART_CHAIR = registerBlock("goldenheart_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> LEMON_CHAIR = registerBlock("lemon_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> LIME_CHAIR = registerBlock("lime_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> LINDEN_CHAIR = registerBlock("linden_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> MAHOGANY_CHAIR = registerBlock("mahogany_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> MAPLE_CHAIR = registerBlock("maple_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> MYRRH_CHAIR = registerBlock("myrrh_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> NIGHTWOOD_CHAIR = registerBlock("nightwood_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> NUTMEG_CHAIR = registerBlock("nutmeg_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ORANGE_CHAIR = registerBlock("orange_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PEACH_CHAIR = registerBlock("peach_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PEAR_CHAIR = registerBlock("pear_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PECAN_CHAIR = registerBlock("pecan_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PERSIMMON_CHAIR = registerBlock("persimmon_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PINK_IVORY_CHAIR = registerBlock("pink_ivory_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PLUM_CHAIR = registerBlock("plum_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> POMEGRANATE_CHAIR = registerBlock("pomegranate_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PURPLEHEART_CHAIR = registerBlock("purpleheart_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> REDWOOD_CHAIR = registerBlock("redwood_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> SANDALWOOD_CHAIR = registerBlock("sandalwood_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> SANDBEGGAR_CHAIR = registerBlock("sandbeggar_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> TIGERWOOD_CHAIR = registerBlock("tigerwood_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> YEW_CHAIR = registerBlock("yew_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+
+    // ── 1b. ModBLocks.java — ARM CHAIRS ───────────────────────────────────────
+    public static final DeferredBlock<Block> DARK_OAK_ARM_CHAIR = registerBlock("dark_oak_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> OAK_ARM_CHAIR = registerBlock("oak_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> SPRUCE_ARM_CHAIR = registerBlock("spruce_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BIRCH_ARM_CHAIR = registerBlock("birch_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> JUNGLE_ARM_CHAIR = registerBlock("jungle_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ACACIA_ARM_CHAIR = registerBlock("acacia_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> MANGROVE_ARM_CHAIR = registerBlock("mangrove_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_PLANKS).strength(2f).noOcclusion().isSuffocating((s, l, p) -> false).isViewBlocking((s, l, p) -> false), false);
+    public static final DeferredBlock<Block> CHERRY_ARM_CHAIR = registerBlock("cherry_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BAMBOO_ARM_CHAIR = registerBlock("bamboo_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BAMBOO_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> CRIMSON_ARM_CHAIR = registerBlock("crimson_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CRIMSON_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> WARPED_ARM_CHAIR = registerBlock("warped_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.WARPED_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> WEIRWOOD_ARM_CHAIR = registerBlock("weirwood_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> CHARRED_ARM_CHAIR = registerBlock("charred_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ROTTEN_ARM_CHAIR = registerBlock("rotten_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PINE_ARM_CHAIR = registerBlock("pine_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ASH_ARM_CHAIR = registerBlock("ash_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BEECH_ARM_CHAIR = registerBlock("beech_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> CEDAR_ARM_CHAIR = registerBlock("cedar_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> CHESTNUT_ARM_CHAIR = registerBlock("chestnut_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> HAWTHORN_ARM_CHAIR = registerBlock("hawthorn_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> IRONWOOD_ARM_CHAIR = registerBlock("ironwood_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> SENTINEL_ARM_CHAIR = registerBlock("sentinel_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> SYCAMORE_ARM_CHAIR = registerBlock("sycamore_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLACKBARK_ARM_CHAIR = registerBlock("blackbark_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ASPEN_ARM_CHAIR = registerBlock("aspen_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ALDER_ARM_CHAIR = registerBlock("alder_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLACK_CHERRY_ARM_CHAIR = registerBlock("black_cherry_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLACK_OLIVE_ARM_CHAIR = registerBlock("black_olive_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> CRABAPPLE_ARM_CHAIR = registerBlock("crabapple_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> OLIVE_ARM_CHAIR = registerBlock("olive_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> WHITE_CHERRY_ARM_CHAIR = registerBlock("white_cherry_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> RED_CHERRY_ARM_CHAIR = registerBlock("red_cherry_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> FIR_ARM_CHAIR = registerBlock("fir_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> WILLOW_ARM_CHAIR = registerBlock("willow_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> WORMTREE_ARM_CHAIR = registerBlock("wormtree_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ALMOND_ARM_CHAIR = registerBlock("almond_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> APPLE_ARM_CHAIR = registerBlock("apple_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> APRICOT_ARM_CHAIR = registerBlock("apricot_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BAOBAB_ARM_CHAIR = registerBlock("baobab_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLACK_COTTONWOOD_ARM_CHAIR = registerBlock("black_cottonwood_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLACKTHORN_ARM_CHAIR = registerBlock("blackthorn_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLOOD_ORANGE_ARM_CHAIR = registerBlock("blood_orange_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLOODWOOD_ARM_CHAIR = registerBlock("bloodwood_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLUE_MAHOE_ARM_CHAIR = registerBlock("blue_mahoe_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> COTTONWOOD_ARM_CHAIR = registerBlock("cottonwood_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> DATEPALM_ARM_CHAIR = registerBlock("datepalm_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> EBONY_ARM_CHAIR = registerBlock("ebony_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> FIG_ARM_CHAIR = registerBlock("fig_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> FIREPLUM_ARM_CHAIR = registerBlock("fireplum_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> GOLDENHEART_ARM_CHAIR = registerBlock("goldenheart_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> LEMON_ARM_CHAIR = registerBlock("lemon_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> LIME_ARM_CHAIR = registerBlock("lime_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> LINDEN_ARM_CHAIR = registerBlock("linden_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> MAHOGANY_ARM_CHAIR = registerBlock("mahogany_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> MAPLE_ARM_CHAIR = registerBlock("maple_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> MYRRH_ARM_CHAIR = registerBlock("myrrh_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> NIGHTWOOD_ARM_CHAIR = registerBlock("nightwood_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> NUTMEG_ARM_CHAIR = registerBlock("nutmeg_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ORANGE_ARM_CHAIR = registerBlock("orange_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PEACH_ARM_CHAIR = registerBlock("peach_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PEAR_ARM_CHAIR = registerBlock("pear_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PECAN_ARM_CHAIR = registerBlock("pecan_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PERSIMMON_ARM_CHAIR = registerBlock("persimmon_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PINK_IVORY_ARM_CHAIR = registerBlock("pink_ivory_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PLUM_ARM_CHAIR = registerBlock("plum_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> POMEGRANATE_ARM_CHAIR = registerBlock("pomegranate_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PURPLEHEART_ARM_CHAIR = registerBlock("purpleheart_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> REDWOOD_ARM_CHAIR = registerBlock("redwood_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> SANDALWOOD_ARM_CHAIR = registerBlock("sandalwood_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> SANDBEGGAR_ARM_CHAIR = registerBlock("sandbeggar_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> TIGERWOOD_ARM_CHAIR = registerBlock("tigerwood_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> YEW_ARM_CHAIR = registerBlock("yew_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
 
 
     // ---------------------------(JOBBLOCKS)--------------------------- //

@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "agotmod:block/sentinel_arm_chair" },
+    "facing=east":  { "model": "agotmod:block/sentinel_arm_chair" },
+    "facing=south": { "model": "agotmod:block/sentinel_arm_chair" },
+    "facing=west":  { "model": "agotmod:block/sentinel_arm_chair" }
+  }
+}

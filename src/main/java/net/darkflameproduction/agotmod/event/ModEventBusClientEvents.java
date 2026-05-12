@@ -4,6 +4,9 @@ package net.darkflameproduction.agotmod.event;
 // Importing necessary classes from other packages
 
 import net.darkflameproduction.agotmod.AGoTMod;
+import net.darkflameproduction.agotmod.block.custom.furniture.ArmChairBlockEntityRenderer;
+import net.darkflameproduction.agotmod.block.custom.furniture.ChairBlockEntityRenderer;
+import net.darkflameproduction.agotmod.block.custom.furniture.StoolBlockEntityRenderer;
 import net.darkflameproduction.agotmod.block.custom.furniture.TableBlockEntityRenderer;
 import net.darkflameproduction.agotmod.entity.ModBlockEntities;
 import net.darkflameproduction.agotmod.entity.ModEntities;
@@ -41,6 +44,9 @@ public class ModEventBusClientEvents {
         EntityRenderers.register(ModEntities.DIREWOLF_ENTITY.get(), Direwolf_Entity_Renderer::new);
         // Fixed: Use the proper renderer instead of the entity constructor
         EntityRenderers.register(ModEntities.PEASANT_ENTITY.get(), Peasant_Renderer::new);
+        EntityRenderers.register(ModEntities.SEAT_ENTITY.get(),
+                ctx -> new net.minecraft.client.renderer.entity.NoopRenderer<>(ctx));
+
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -54,5 +60,8 @@ public class ModEventBusClientEvents {
         event.registerBlockEntityRenderer(ModBlockEntities.MOD_SIGN.get(), SignRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.MOD_HANGING_SIGN.get(), HangingSignRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.TABLE.get(), TableBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.STOOL.get(), StoolBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.CHAIR.get(), ChairBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.ARM_CHAIR.get(), ArmChairBlockEntityRenderer::new);
     }
 }

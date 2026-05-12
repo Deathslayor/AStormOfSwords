@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "agotmod:block/sycamore_stool" },
+    "facing=east":  { "model": "agotmod:block/sycamore_stool" },
+    "facing=south": { "model": "agotmod:block/sycamore_stool" },
+    "facing=west":  { "model": "agotmod:block/sycamore_stool" }
+  }
+}

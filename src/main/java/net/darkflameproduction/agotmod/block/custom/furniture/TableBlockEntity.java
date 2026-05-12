@@ -3,6 +3,7 @@ package net.darkflameproduction.agotmod.block.custom.furniture;
 import net.darkflameproduction.agotmod.entity.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
@@ -19,8 +20,13 @@ public class TableBlockEntity extends BlockEntity implements GeoBlockEntity {
     }
 
     public ResourceLocation getTextureLocation() {
+        Block block = getBlockState().getBlock();
+        String key = net.minecraft.core.registries.BuiltInRegistries.BLOCK
+                .getKey(block).getPath(); // e.g. "dark_oak_table"
+        String woodType = key.replace("_table", ""); // "dark_oak"
+        String textureName = "table_" + woodType;    // "table_dark_oak"
         return ResourceLocation.fromNamespaceAndPath("agotmod",
-                "textures/block/table/dark_oak_table.png");
+                "textures/block/table/" + textureName + ".png");
     }
 
     public TableModelInfo getModelInfo() {

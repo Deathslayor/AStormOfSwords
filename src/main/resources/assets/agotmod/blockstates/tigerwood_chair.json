@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "agotmod:block/tigerwood_chair" },
+    "facing=east":  { "model": "agotmod:block/tigerwood_chair" },
+    "facing=south": { "model": "agotmod:block/tigerwood_chair" },
+    "facing=west":  { "model": "agotmod:block/tigerwood_chair" }
+  }
+}

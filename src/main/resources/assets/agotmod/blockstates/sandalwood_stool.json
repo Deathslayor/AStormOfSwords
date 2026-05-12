@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "agotmod:block/sandalwood_stool" },
+    "facing=east":  { "model": "agotmod:block/sandalwood_stool" },
+    "facing=south": { "model": "agotmod:block/sandalwood_stool" },
+    "facing=west":  { "model": "agotmod:block/sandalwood_stool" }
+  }
+}

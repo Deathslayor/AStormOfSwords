@@ -1,6 +1,7 @@
 package net.darkflameproduction.agotmod.entity;
 
 import net.darkflameproduction.agotmod.AGoTMod;
+import net.darkflameproduction.agotmod.entity.custom.SeatEntity;
 import net.darkflameproduction.agotmod.entity.custom.birds.Crow_Entity;
 import net.darkflameproduction.agotmod.entity.custom.norththewall.Mammoth_Entity;
 import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
@@ -54,6 +55,17 @@ public class ModEntities {
                             .clientTrackingRange(10)
                             .build(ResourceKey.create(net.minecraft.core.registries.Registries.ENTITY_TYPE,
                                     ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "peasant"))));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<SeatEntity>> SEAT_ENTITY =
+            ENTITY_TYPES.register("seat",
+                    () -> EntityType.Builder.of(
+                                    (EntityType<SeatEntity> entityType, Level level) ->
+                                            new SeatEntity(entityType, level),
+                                    MobCategory.MISC)
+                            .sized(0.001f, 0.001f)
+                            .clientTrackingRange(10)
+                            .build(ResourceKey.create(net.minecraft.core.registries.Registries.ENTITY_TYPE,
+                                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "seat"))));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

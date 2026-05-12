@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "agotmod:block/white_cherry_chair" },
+    "facing=east":  { "model": "agotmod:block/white_cherry_chair" },
+    "facing=south": { "model": "agotmod:block/white_cherry_chair" },
+    "facing=west":  { "model": "agotmod:block/white_cherry_chair" }
+  }
+}

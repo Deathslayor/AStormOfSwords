@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "agotmod:block/almond_chair" },
+    "facing=east":  { "model": "agotmod:block/almond_chair" },
+    "facing=south": { "model": "agotmod:block/almond_chair" },
+    "facing=west":  { "model": "agotmod:block/almond_chair" }
+  }
+}

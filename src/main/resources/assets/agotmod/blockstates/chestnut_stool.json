@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "agotmod:block/chestnut_stool" },
+    "facing=east":  { "model": "agotmod:block/chestnut_stool" },
+    "facing=south": { "model": "agotmod:block/chestnut_stool" },
+    "facing=west":  { "model": "agotmod:block/chestnut_stool" }
+  }
+}
