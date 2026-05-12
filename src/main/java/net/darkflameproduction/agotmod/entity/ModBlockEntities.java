@@ -4,6 +4,7 @@ import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.darkflameproduction.agotmod.block.custom.JobBarrelBlockEntity;
 import net.darkflameproduction.agotmod.block.custom.TownHallBlockEntity;
+import net.darkflameproduction.agotmod.block.custom.furniture.TableBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
@@ -20,6 +21,13 @@ public class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, AGoTMod.MOD_ID);
 
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TableBlockEntity>> TABLE =
+            BLOCK_ENTITIES.register("table", () ->
+                    new BlockEntityType<>(
+                            TableBlockEntity::new,
+                            ModBLocks.DARK_OAK_TABLE.get()
+                    ));
+
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<JobBarrelBlockEntity>> JOB_BARREL =
             BLOCK_ENTITIES.register("job_barrel", () -> {
                 List<Block> barrelBlocks = new ArrayList<>();
@@ -34,6 +42,7 @@ public class ModBlockEntities {
                 barrelBlocks.add(ModBLocks.BUILDER_BARREL.get());
                 barrelBlocks.add(ModBLocks.BUTCHER_BARREL.get());
                 barrelBlocks.add(ModBLocks.CARAVAN_MASTER_BARREL.get());
+                barrelBlocks.add(ModBLocks.CARPENTER_BARREL.get());
                 barrelBlocks.add(ModBLocks.CATTLE_HERDER_BARREL.get());
                 barrelBlocks.add(ModBLocks.CHARCOAL_BURNER_BARREL.get());
                 barrelBlocks.add(ModBLocks.CHICKEN_BREEDER_BARREL.get());

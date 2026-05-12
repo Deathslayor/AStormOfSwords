@@ -1458,6 +1458,9 @@ public class ModItems {
     public static final DeferredItem<Item> ALEHOUSE_BARREL = ITEMS.registerItem("alehouse_barrel_icon",
             properties -> new BlockItem(ModBLocks.ALEHOUSE_BARREL.get(), properties));
 
+    public static final DeferredItem<Item> CARPENTER_BARREL = ITEMS.registerItem("carpenter_barrel_icon",
+            properties -> new BlockItem(ModBLocks.CARPENTER_BARREL.get(), properties));
+
     public static final DeferredItem<Item> ARMORSMITH_BARREL = ITEMS.registerItem("armorsmith_barrel_icon",
             properties -> new BlockItem(ModBLocks.ARMORSMITH_BARREL.get(), properties));
 
@@ -1568,6 +1571,10 @@ public class ModItems {
 
     public static final DeferredItem<Item> TRADER_BARREL = ITEMS.registerItem("trader_barrel_icon",
             properties -> new BlockItem(ModBLocks.TRADER_BARREL.get(), properties));
+
+    //Furniture
+    public static final DeferredItem<Item> DARK_OAK_TABLE = ITEMS.registerItem("dark_oak_table",
+            properties -> new BlockItem(ModBLocks.DARK_OAK_TABLE.get(), properties));
 
 
     // Tells the AGoTMod class to call the modded items into the game

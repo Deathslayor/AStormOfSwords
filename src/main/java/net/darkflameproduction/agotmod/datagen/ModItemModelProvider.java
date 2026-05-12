@@ -790,6 +790,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.BUILDER_BARREL);
         simpleItem(ModItems.BUTCHER_BARREL);
         simpleItem(ModItems.CARAVAN_MASTER_BARREL);
+        simpleItem(ModItems.CARPENTER_BARREL);
         simpleItem(ModItems.CATTLE_HERDER_BARREL);
         simpleItem(ModItems.CHARCOAL_BURNER_BARREL);
         simpleItem(ModItems.CHICKEN_BREEDER_BARREL);

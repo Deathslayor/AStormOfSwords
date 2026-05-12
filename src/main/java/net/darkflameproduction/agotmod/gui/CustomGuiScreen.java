@@ -391,16 +391,29 @@ public class CustomGuiScreen extends Screen {
     }
 
     public CustomGuiScreen(Minecraft minecraft) {
-        this(minecraft, CTGClient.LAST_SYNC_MAP_PACKET.get());
+        this(minecraft, isMapPacketValid(CTGClient.LAST_SYNC_MAP_PACKET.get())
+                ? CTGClient.LAST_SYNC_MAP_PACKET.get()
+                : null);
     }
 
+    private static boolean isMapPacketValid(SyncMapPacket packet) {
+        if (packet == null) return false;
+        if (packet.getMapId() == null) return false;
+        if (packet.getMapWidth() <= 0 || packet.getMapHeight() <= 0) return false;
+        return true;
+    }
     public CustomGuiScreen(Minecraft minecraft, SyncMapPacket mapPacket) {
         super(Component.translatable("screen.agotmod.custom_gui"));
         this.selectedSection = lastSelectedSection;
         this.selectedStatsSubmenu = lastSelectedStatsSubmenu;
         this.mapPacket = mapPacket;
-        this.mapWidget = AGoTMapWidget.ofPacket(minecraft, 0, 0, width, height, mapPacket);
-        currentInstance = this; // Track current instance
+        this.mapWidget = null;
+        currentInstance = this;
+
+        if (mapPacket == null && this.selectedSection == 0) {
+            this.selectedSection = 2;
+            lastSelectedSection  = 2;
+        }
     }
 
     @Override
@@ -609,7 +622,6 @@ public class CustomGuiScreen extends Screen {
         super.init();
 
         currentInstance = this;
-
         hasRequestedTowns = false;
 
         if (minecraft != null && minecraft.player != null) {
@@ -624,30 +636,24 @@ public class CustomGuiScreen extends Screen {
             loadHouseNameFromPlayerData();
         }
 
-        // Initialize map widget with correct dimensions
         ScreenLayout layout = new ScreenLayout(width, height);
-        int innerX = layout.contentX + BORDER_PILLAR_WIDTH;
-        int innerY = layout.contentY + BORDER_HEIGHT;
-        int innerWidth = layout.contentWidth - (BORDER_PILLAR_WIDTH * 2);
+        int innerX      = layout.contentX + BORDER_PILLAR_WIDTH;
+        int innerY      = layout.contentY + BORDER_HEIGHT;
+        int innerWidth  = layout.contentWidth  - (BORDER_PILLAR_WIDTH * 2);
         int innerHeight = layout.contentHeight - (BORDER_HEIGHT * 2);
-        mapWidget = AGoTMapWidget.ofPacket(minecraft, innerX, innerY, innerWidth, innerHeight, mapPacket);
-        if (mapWidget != null) {
-            mapWidget.setMinZoom(mapWidget.defaultZoom());
+
+        if (mapPacket != null) {
+            mapWidget = AGoTMapWidget.ofPacket(minecraft, innerX, innerY, innerWidth, innerHeight, mapPacket);
+            if (mapWidget != null) {
+                mapWidget.setMinZoom(mapWidget.defaultZoom());
+            }
+        } else {
+            mapWidget = null;
         }
 
-        // Clear any existing house widgets when reopening
-        if (houseNameEditBox != null) {
-            removeWidget(houseNameEditBox);
-            houseNameEditBox = null;
-        }
-        if (saveHouseButton != null) {
-            removeWidget(saveHouseButton);
-            saveHouseButton = null;
-        }
-        if (editHouseButton != null) {
-            removeWidget(editHouseButton);
-            editHouseButton = null;
-        }
+        if (houseNameEditBox != null) { removeWidget(houseNameEditBox); houseNameEditBox = null; }
+        if (saveHouseButton  != null) { removeWidget(saveHouseButton);  saveHouseButton  = null; }
+        if (editHouseButton  != null) { removeWidget(editHouseButton);  editHouseButton  = null; }
 
         applyBlurEffect();
     }
@@ -1057,11 +1063,12 @@ public class CustomGuiScreen extends Screen {
     private void drawSectionButtons(GuiGraphics guiGraphics, int mouseX, int mouseY, ScreenLayout layout) {
         for (int i = 0; i < SECTION_LABELS.length; i++) {
             int startX = layout.sideMargin + (i * layout.sectionButtonWidth);
-            int endX = (i == SECTION_LABELS.length - 1)
+            int endX   = (i == SECTION_LABELS.length - 1)
                     ? width - layout.sideMargin
                     : layout.sideMargin + ((i + 1) * layout.sectionButtonWidth);
 
-            boolean isHovered = isMouseOverRect(mouseX, mouseY, startX, layout.topMargin,
+            boolean mapTabUnavailable = (i == 0 && mapPacket == null);
+            boolean isHovered  = !mapTabUnavailable && isMouseOverRect(mouseX, mouseY, startX, layout.topMargin,
                     endX - startX, layout.sectionButtonHeight);
             boolean isSelected = (i == selectedSection);
 
@@ -1074,18 +1081,40 @@ public class CustomGuiScreen extends Screen {
             renderTexturedPanel(guiGraphics, texture, startX, layout.topMargin,
                     buttonWidth, layout.sectionButtonHeight, true);
 
-            String text = SECTION_LABELS[i];
-            int textWidth = font.width(text);
-            int textX = startX + (buttonWidth - textWidth) / 2;
-            int textY = layout.topMargin + (layout.sectionButtonHeight - font.lineHeight) / 2;
+            String text     = SECTION_LABELS[i];
+            int textWidth   = font.width(text);
+            int textX       = startX + (buttonWidth - textWidth) / 2;
+            int textY       = layout.topMargin + (layout.sectionButtonHeight - font.lineHeight) / 2;
 
-            guiGraphics.drawString(font, text, textX, textY,
-                    isSelected ? 0xFFFFFFFF : PARCHMENT_COLOR);
+            int textColor = mapTabUnavailable ? 0xFF666666 : (isSelected ? 0xFFFFFFFF : PARCHMENT_COLOR);
+            guiGraphics.drawString(font, text, textX, textY, textColor);
+
+            if (mapTabUnavailable) {
+                String unavailableText = "(unavailable)";
+                int subTextWidth = font.width(unavailableText);
+                int subTextX = startX + (buttonWidth - subTextWidth) / 2;
+                guiGraphics.pose().pushPose();
+                guiGraphics.pose().scale(0.7f, 0.7f, 1.0f);
+                guiGraphics.drawString(font, unavailableText,
+                        (int)(subTextX / 0.7f),
+                        (int)((textY + font.lineHeight + 1) / 0.7f),
+                        0xFF444444);
+                guiGraphics.pose().popPose();
+            }
         }
     }
 
     private void drawMapSection(GuiGraphics guiGraphics, int mouseX, int mouseY, ScreenLayout layout, float partialTick) {
-        if (mapWidget != null && mapWidget.isActive() && mapWidget.getMapTextureId() != null &&
+        if (mapPacket == null || mapWidget == null) {
+            String msg = "Map not available in this world type.";
+            int textWidth = font.width(msg);
+            int textX = layout.contentX + (layout.contentWidth - textWidth) / 2;
+            int textY = layout.contentY + layout.contentHeight / 2 - font.lineHeight / 2;
+            guiGraphics.drawString(font, msg, textX, textY, 0xFF888888);
+            return;
+        }
+
+        if (mapWidget.isActive() && mapWidget.getMapTextureId() != null &&
                 minecraft.getResourceManager().getResource(mapWidget.getMapTextureId()).isPresent()) {
             mapWidget.render(guiGraphics, mouseX, mouseY, partialTick);
         }

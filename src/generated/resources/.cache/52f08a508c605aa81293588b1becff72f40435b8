@@ -1,4 +1,4 @@
-// 1.21.3	2026-05-10T18:21:50.2168111	Item Models: agotmod
+// 1.21.3	2026-05-12T13:03:34.5743738	Item Models: agotmod
 d23bad2732be6d574dc634d409c491e136021638 assets/agotmod/models/item/acacia_wall.json
 65c44e6f1f29781252c76032b90c20b3bc8f7b8a assets/agotmod/models/item/alder_button.json
 f0b6afe25a5640838c024d02c663e7c8f821ffd6 assets/agotmod/models/item/alder_door.json
@@ -937,6 +937,7 @@ ec41955ee9ab9c7886160b189d31a43ce1556624 assets/agotmod/models/item/calcite_9_sl
 d88193669df0bcd7be09017ac624395b66323dd9 assets/agotmod/models/item/caravan_master_barrel_icon.json
 73cb681e6e86056e57b950b1b0561ad3e9013855 assets/agotmod/models/item/cardamom.json
 fa9639c1847398a12a0a223559f6c29dc0cd2069 assets/agotmod/models/item/carnelian.json
+89a7374c9c9caeb09a5a565bcd594f9a7888bacf assets/agotmod/models/item/carpenter_barrel_icon.json
 a135990ba5f0cf4f717991f31b51662cebb96580 assets/agotmod/models/item/cattle_herder_barrel_icon.json
 aacda99691b219f541976613fd585212ab95b0b9 assets/agotmod/models/item/cdeepslate_10_slab.json
 59ca0fa747ff0c24d0c9899fe922cb0539449ccf assets/agotmod/models/item/cdeepslate_10_stairs.json

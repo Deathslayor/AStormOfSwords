@@ -1,4 +1,4 @@
-// 1.21.3	2026-05-10T18:21:50.3830402	Block States: agotmod
+// 1.21.3	2026-05-12T12:59:14.3288817	Block States: agotmod
 69b31e30ac1a8b1abd0b3ba9309ae37f01857a47 assets/agotmod/blockstates/acacia_wall.json
 78b6cf02fa0f02bb58a5d7645020281ff8bc4c59 assets/agotmod/blockstates/alder_button.json
 4babc4c353cbdf68af13d112a9b9311de8af4fe1 assets/agotmod/blockstates/alder_door.json
@@ -1221,6 +1221,7 @@ fbbe71877c2333646071a8dc450aafba5da0e7f2 assets/agotmod/blockstates/calcite_9_sl
 aa0c058e1c4deafcff5daef7183d16c3a91442f0 assets/agotmod/blockstates/carnelian_block.json
 448951a25d5eb0223db390182b0ca361301fe6db assets/agotmod/blockstates/carnelian_deepslate_ore.json
 564de3af2213f78538ab8f2ff4da575c479511db assets/agotmod/blockstates/carnelian_ore.json
+3d9257d5446250468248fead2c5d02f1046fb547 assets/agotmod/blockstates/carpenter_barrel.json
 fe08ff933902d70a487c77739ed51aa9dd463437 assets/agotmod/blockstates/cattle_herder_barrel.json
 75773f181804ae607c4672ec20709b057cf13d3b assets/agotmod/blockstates/cdeepslate_10_block.json
 b8768003d6028966bcbd651e54895dd58c1d06cd assets/agotmod/blockstates/cdeepslate_10_slab.json
@@ -7070,6 +7071,8 @@ e6fc3eff0e5ed3c7fd51de15d78bd40e3e565e19 assets/agotmod/models/block/calcite_9_w
 54df7e7d9203e17a5594f570e7eee9f5df496a0b assets/agotmod/models/block/carnelian_block.json
 6cf889424e6ab244a96de0d7758f0014a96dfb97 assets/agotmod/models/block/carnelian_deepslate_ore.json
 b29de758edb1adc11c10c2836a8be445f191ed1c assets/agotmod/models/block/carnelian_ore.json
+b66e03313ecb5bb4561c65c6136277536c1dbcf8 assets/agotmod/models/block/carpenter_barrel.json
+fdad1a82440aad44166f41fbf9d5588df33e5273 assets/agotmod/models/block/carpenter_barrel_open.json
 a2b8b6d79abcd87f45826e9b7e9017e747164e8a assets/agotmod/models/block/cattle_herder_barrel.json
 008218a98d4fd56aef7b270d71a6f223704d674c assets/agotmod/models/block/cattle_herder_barrel_open.json
 17779f298514dfeae736b97e2898aae4e1a093c4 assets/agotmod/models/block/cdeepslate_10_block.json

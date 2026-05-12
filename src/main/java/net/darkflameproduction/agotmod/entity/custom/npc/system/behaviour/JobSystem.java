@@ -3,6 +3,7 @@ package net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour;
 import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.farmer.FarmingSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.grocer.GrocerSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.lumberjack.LumberjackSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.miner.MinerSystem;
 import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.minecraft.core.BlockPos;
@@ -34,6 +35,7 @@ public class JobSystem {
     public static final String JOB_TANNER = "tanner";
     public static final String JOB_TAILOR = "tailor";
     public static final String JOB_BLACKSMITH = "blacksmith";
+    public static final String JOB_LUMBERJACK = "lumberjack";
     public static final String JOB_NONE            = "";
 
     // Work area system constants
@@ -83,6 +85,10 @@ public class JobSystem {
     private static final int BLACKSMITH_IDLE_RADIUS_X = 5;
     private static final int BLACKSMITH_IDLE_RADIUS_Z = 5;
     private static final int BLACKSMITH_IDLE_RADIUS_Y = 16;
+
+    private static final int LUMBERJACK_WORK_RADIUS_X = 96;
+    private static final int LUMBERJACK_WORK_RADIUS_Z = 96;
+    private static final int LUMBERJACK_WORK_RADIUS_Y = 32;
 
     // Job block reservations - static maps to track which blocks are taken
     private static final Map<BlockPos, UUID> jobBlockReservations = new HashMap<>();
@@ -144,6 +150,7 @@ public class JobSystem {
         if (getJobType().equals(JOB_CHICKEN_BREEDER)) return jobBlockState.is(ModBLocks.CHICKEN_BREEDER_BARREL.get());
         if (getJobType().equals(JOB_PIG_BREEDER))     return jobBlockState.is(ModBLocks.PIG_BREEDER_BARREL.get());
         if (getJobType().equals(JOB_SHEEP_HERDER))    return jobBlockState.is(ModBLocks.SHEEP_HERDER_BARREL.get());
+        if (getJobType().equals(JOB_LUMBERJACK)) return jobBlockState.is(ModBLocks.LUMBERJACK_BARREL.get());
 
         return false;
     }
@@ -176,7 +183,11 @@ public class JobSystem {
                 || oldJobType.equals(JOB_PIG_BREEDER)
                 || oldJobType.equals(JOB_SHEEP_HERDER)) {
             peasant.getAnimalHerderSystem().setBreedingItemCount(0);
+        } else if (oldJobType.equals(JOB_LUMBERJACK)) {
+            peasant.getLumberjackSystem().setCurrentState(LumberjackSystem.LumberjackState.GOING_TO_JOB_BLOCK);
         }
+
+
     }
 
     public String getJobType() {
@@ -211,22 +222,15 @@ public class JobSystem {
      * Gives appropriate equipment when an NPC gets a new job
      */
     private void giveJobEquipment(String oldJob, String newJob) {
-        // Only give equipment on server side
-        if (peasant.level().isClientSide) {
-            return;
-        }
+        if (peasant.level().isClientSide) return;
 
-        // Give equipment based on new job
         if (newJob.equals(JOB_FARMER)) {
             giveIronHoe();
         } else if (newJob.equals(JOB_MINER)) {
             giveMinerEquipment();
+        } else if (newJob.equals(JOB_LUMBERJACK)) {
+            giveLumberjackEquipment();
         }
-        // Guards no longer get automatic equipment
-        // else if (newJob.equals(JOB_GUARD)) {
-        //     giveGuardEquipment();
-        // }
-        // Could add equipment for other jobs here in the future
     }
 
     /**
@@ -255,6 +259,40 @@ public class JobSystem {
                 }
             }
         }
+    }
+
+    private void giveLumberjackEquipment() {
+        if (hasAxe()) return;
+
+        ItemStack ironAxe = new ItemStack(Items.IRON_AXE);
+
+        if (peasant.getInventorySystem().addItem(ironAxe)) {
+            peasant.getInventorySystem().forceEquipmentCheck();
+        } else {
+            if (peasant.getInventorySystem().getMainHandItem().isEmpty()) {
+                peasant.getInventorySystem().setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, ironAxe);
+            } else {
+                if (peasant.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+                    peasant.spawnAtLocation(serverLevel, ironAxe);
+                }
+            }
+        }
+    }
+
+    private boolean hasAxe() {
+        if (peasant.getInventorySystem().getMainHandItem().getItem() instanceof net.minecraft.world.item.AxeItem ||
+                peasant.getInventorySystem().getOffhandItem().getItem() instanceof net.minecraft.world.item.AxeItem) {
+            return true;
+        }
+
+        var inventory = peasant.getInventorySystem().getInventory();
+        for (int i = 0; i < inventory.getContainerSize(); i++) {
+            ItemStack stack = inventory.getItem(i);
+            if (stack.getItem() instanceof net.minecraft.world.item.AxeItem) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -470,6 +508,8 @@ public class JobSystem {
                 || getJobType().equals(JOB_SHEEP_HERDER)) {
             return deltaX <= ANIMAL_HERDER_WORK_RADIUS_X && deltaZ <= ANIMAL_HERDER_WORK_RADIUS_Z && deltaY <= ANIMAL_HERDER_WORK_RADIUS_Y;
         }
+        if (getJobType().equals(JOB_LUMBERJACK))
+            return deltaX <= LUMBERJACK_WORK_RADIUS_X && deltaZ <= LUMBERJACK_WORK_RADIUS_Z && deltaY <= LUMBERJACK_WORK_RADIUS_Y;
 
         return true;
     }
@@ -495,6 +535,7 @@ public class JobSystem {
                 || getJobType().equals(JOB_CHICKEN_BREEDER)
                 || getJobType().equals(JOB_PIG_BREEDER)
                 || getJobType().equals(JOB_SHEEP_HERDER)) return true;
+        if (getJobType().equals(JOB_LUMBERJACK)) return true;
 
         return false;
     }
@@ -540,6 +581,8 @@ public class JobSystem {
                 || getJobType().equals(JOB_PIG_BREEDER)
                 || getJobType().equals(JOB_SHEEP_HERDER))
             return distanceSquared > ((ANIMAL_HERDER_WORK_RADIUS_X + 10) * (ANIMAL_HERDER_WORK_RADIUS_X + 10));
+        if (getJobType().equals(JOB_LUMBERJACK))
+            return distanceSquared > ((LUMBERJACK_WORK_RADIUS_X + 10) * (LUMBERJACK_WORK_RADIUS_X + 10));
 
         return false;
     }
@@ -575,6 +618,7 @@ public class JobSystem {
             else if (currentName.startsWith("Chicken Breeder ")) baseName = currentName.substring(16);
             else if (currentName.startsWith("Pig Breeder "))     baseName = currentName.substring(12);
             else if (currentName.startsWith("Sheep Herder "))    baseName = currentName.substring(13);
+            else if (currentName.startsWith("Lumberjack ")) baseName = currentName.substring(11);
 
             String newName = baseName;
             if      (getJobType().equals(JOB_FARMER))          newName = "Farmer "          + baseName;
@@ -590,6 +634,8 @@ public class JobSystem {
             else if (getJobType().equals(JOB_CHICKEN_BREEDER)) newName = "Chicken Breeder " + baseName;
             else if (getJobType().equals(JOB_PIG_BREEDER))     newName = "Pig Breeder "     + baseName;
             else if (getJobType().equals(JOB_SHEEP_HERDER))    newName = "Sheep Herder "    + baseName;
+            else if (getJobType().equals(JOB_LUMBERJACK)) newName = "Lumberjack " + baseName;
+
 
             peasant.setCustomName(Component.literal(newName));
         }

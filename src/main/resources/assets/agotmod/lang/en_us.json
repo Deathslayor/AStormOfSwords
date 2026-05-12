@@ -828,12 +828,12 @@
   "item.agotmod.weirwood_hanging_sign": "Weirwood Hanging Sign",
 
   "block.agotmod.rotten_log": "Rotten Log",
-  "block.agotmod.rotten_stripped_log": "Stripped Rotten Log",
   "block.agotmod.rotten_wood": "Rotten Wood",
-  "block.agotmod.rotten_stripped_wood": "Stripped Rotten Wood",
+  "block.agotmod.stripped_rotten_log": "Stripped Rotten Log",
+  "block.agotmod.stripped_rotten_wood": "Stripped Rotten Wood",
   "block.agotmod.rotten_planks": "Rotten Planks",
   "block.agotmod.rotten_stairs": "Rotten Stairs",
-  "block.agotmod.rotten_slabs": "Rotten Slab",
+  "block.agotmod.rotten_slab": "Rotten Slab",
   "block.agotmod.rotten_button": "Rotten Button",
   "block.agotmod.rotten_door": "Rotten Door",
   "block.agotmod.rotten_trapdoor": "Rotten Trapdoor",
@@ -845,14 +845,13 @@
   "item.agotmod.rotten_sign": "Rotten Sign",
   "item.agotmod.rotten_hanging_sign": "Rotten Hanging Sign",
 
-
   "block.agotmod.charred_log": "Charred Log",
-  "block.agotmod.charred_stripped_log": "Stripped Charred Log",
   "block.agotmod.charred_wood": "Charred Wood",
-  "block.agotmod.charred_stripped_wood": "Stripped Charred Wood",
+  "block.agotmod.stripped_charred_log": "Stripped Charred Log",
+  "block.agotmod.stripped_charred_wood": "Stripped Charred Wood",
   "block.agotmod.charred_planks": "Charred Planks",
   "block.agotmod.charred_stairs": "Charred Stairs",
-  "block.agotmod.charred_slabs": "Charred Slab",
+  "block.agotmod.charred_slab": "Charred Slab",
   "block.agotmod.charred_button": "Charred Button",
   "block.agotmod.charred_door": "Charred Door",
   "block.agotmod.charred_trapdoor": "Charred Trapdoor",
@@ -4792,6 +4791,9 @@
 
   "item.agotmod.caravan_master_barrel_icon": "Caravan Master Barrel",
   "container.agotmod.caravan_master_barrel": "Caravan Master Barrel",
+
+  "item.agotmod.carpenter_barrel_icon": "Carpenter Barrel",
+  "container.agotmod.carpenter_barrel": "Carpenter Barrel",
 
   "item.agotmod.cattle_herder_barrel_icon": "Cattle Herder Barrel",
   "container.agotmod.cattle_herder_barrel": "Cattle Herder Barrel",

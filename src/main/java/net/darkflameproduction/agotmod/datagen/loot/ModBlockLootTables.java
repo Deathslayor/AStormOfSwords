@@ -1018,6 +1018,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBLocks.BUILDER_BARREL.get());
         this.dropSelf(ModBLocks.BUTCHER_BARREL.get());
         this.dropSelf(ModBLocks.CARAVAN_MASTER_BARREL.get());
+        this.dropSelf(ModBLocks.CARPENTER_BARREL.get());
         this.dropSelf(ModBLocks.CATTLE_HERDER_BARREL.get());
         this.dropSelf(ModBLocks.CHARCOAL_BURNER_BARREL.get());
         this.dropSelf(ModBLocks.CHICKEN_BREEDER_BARREL.get());
@@ -1047,6 +1048,10 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBLocks.TAILOR_BARREL.get());
         this.dropSelf(ModBLocks.TANNER_BARREL.get());
         this.dropSelf(ModBLocks.TRADER_BARREL.get());
+
+
+        this.dropSelf(ModBLocks.DARK_OAK_TABLE.get());
+
 
 
 

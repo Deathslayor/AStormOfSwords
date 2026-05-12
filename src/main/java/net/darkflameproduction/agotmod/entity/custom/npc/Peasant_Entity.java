@@ -64,6 +64,8 @@ import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.animation.AnimationController;
 import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.lumberjack.LumberjackSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.goals.lumberjack.LumberjackGoal;
 
 import java.util.*;
 
@@ -124,6 +126,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     private final net.darkflameproduction.agotmod.entity.custom.npc.system.butcher.ButcherSystem butcherSystem;
     private final net.darkflameproduction.agotmod.entity.custom.npc.system.tanner.TannerSystem tannerSystem;
     private final net.darkflameproduction.agotmod.entity.custom.npc.system.tailor.TailorSystem tailorSystem;
+    private final LumberjackSystem lumberjackSystem;
 
     // Daily reset tracking
     private long lastDayTracked = -1;
@@ -162,6 +165,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         this.minerSystem        = new MinerSystem(this);
         this.smelterSystem      = new SmelterSystem();
         this.animalHerderSystem = new net.darkflameproduction.agotmod.entity.custom.npc.system.animalherder.AnimalHerderSystem();
+        this.lumberjackSystem   = new LumberjackSystem(this);
     }
 
     // Getters for all systems
@@ -181,6 +185,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     public net.darkflameproduction.agotmod.entity.custom.npc.system.butcher.ButcherSystem getButcherSystem() { return butcherSystem; }
     public net.darkflameproduction.agotmod.entity.custom.npc.system.tanner.TannerSystem getTannerSystem()   { return tannerSystem; }
     public net.darkflameproduction.agotmod.entity.custom.npc.system.tailor.TailorSystem getTailorSystem()   { return tailorSystem; }
+    public LumberjackSystem getLumberjackSystem() { return lumberjackSystem; }
 
 
 
@@ -343,10 +348,12 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
             this.goalSelector.addGoal(4, new net.darkflameproduction.agotmod.entity.custom.npc.goals.animalherder.AnimalHerderDepositGoal(this));
             this.goalSelector.addGoal(4, new net.darkflameproduction.agotmod.entity.custom.npc.goals.tanner.TannerBarrelDropOffGoal(this));
             this.goalSelector.addGoal(4, new net.darkflameproduction.agotmod.entity.custom.npc.goals.tailor.TailorBarrelDropOffGoal(this));
+            this.goalSelector.addGoal(4, new net.darkflameproduction.agotmod.entity.custom.npc.goals.lumberjack.LumberjackDepositGoal(this));
         }
 
         this.goalSelector.addGoal(5, new FindBedGoal(this));
         this.goalSelector.addGoal(6, new SleepGoal(this));
+        this.goalSelector.addGoal(6, new LumberjackGoal(this));
         this.goalSelector.addGoal(7, new CollectFoodGoal(this));
 
         if (isAdult()) {
@@ -371,6 +378,10 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         if (isAdult()) {
             this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         }
+    }
+
+    public void setIsInteracting(boolean interacting) {
+        this.getEntityData().set(IS_INTERACTING, interacting);
     }
 
 
@@ -517,6 +528,10 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         animalHerderSystem.saveData(compound);
         inventorySystem.saveData(compound, this.registryAccess());
 
+        CompoundTag lumberjackTag = new CompoundTag();
+        lumberjackSystem.save(lumberjackTag);
+        compound.put("LumberjackSystem", lumberjackTag);
+
         if (doorGoal != null) {
             doorGoal.saveOpenedBlocks(compound);
         }
@@ -555,6 +570,10 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         smelterSystem.loadData(compound);
         animalHerderSystem.loadData(compound);
         inventorySystem.loadData(compound, this.registryAccess());
+
+        if (compound.contains("LumberjackSystem")) {
+            lumberjackSystem.load(compound.getCompound("LumberjackSystem"));
+        }
 
         if (doorGoal != null) {
             doorGoal.loadOpenedBlocks(compound);

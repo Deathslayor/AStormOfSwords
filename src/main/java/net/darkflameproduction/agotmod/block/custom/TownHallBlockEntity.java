@@ -9,6 +9,7 @@ import net.darkflameproduction.agotmod.entity.custom.npc.system.butcher.ButcherI
 import net.darkflameproduction.agotmod.entity.custom.npc.system.farmer.FarmerDepositTicketSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.grocer.GrocerInventoryTicketSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.inventory.FoodCollectionTicketSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.lumberjack.LumberjackDepositTicketSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.smelter.SmelterCollectionTicketSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.tailor.TailorCollectionTicketSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.tailor.TailorInventoryTicketSystem;
@@ -55,7 +56,7 @@ public class TownHallBlockEntity extends BlockEntity implements
         SmelterCollectionTicketSystem.SmelterCollectionListener,
         AnimalHerderCollectionTicketSystem.AnimalHerderCollectionListener,
         TannerCollectionTicketSystem.TannerCollectionListener,
-        TailorCollectionTicketSystem.TailorCollectionListener {
+        TailorCollectionTicketSystem.TailorCollectionListener, LumberjackDepositTicketSystem.DepositListener {
 
     private static final int SCAN_TIME = 10000; // Time of day to perform scan
     private static final int CHILD_SPAWN_TIME = 18000; // Time of day to spawn children (midnight)
@@ -327,7 +328,16 @@ public class TownHallBlockEntity extends BlockEntity implements
         if (state.is(ModBLocks.CHICKEN_BREEDER_BARREL.get())) return JobSystem.JOB_CHICKEN_BREEDER;
         if (state.is(ModBLocks.PIG_BREEDER_BARREL.get()))     return JobSystem.JOB_PIG_BREEDER;
         if (state.is(ModBLocks.SHEEP_HERDER_BARREL.get()))    return JobSystem.JOB_SHEEP_HERDER;
+        if (state.is(ModBLocks.LUMBERJACK_BARREL.get()))      return JobSystem.JOB_LUMBERJACK;
         return JobSystem.JOB_NONE;
+    }
+
+    @Override
+    public void onLumberjackDepositPosted(LumberjackDepositTicketSystem.DepositTicket ticket) {
+        ticket.items.forEach((key, amount) ->
+                townInventory.merge(key, amount, Long::sum));
+        LumberjackDepositTicketSystem.consumeDeposit(ticket.lumberjackUUID);
+        setChanged();
     }
 
     @Override
@@ -641,6 +651,7 @@ public class TownHallBlockEntity extends BlockEntity implements
             AnimalHerderCollectionTicketSystem.cleanupStaleTickets(currentDay);
             TannerCollectionTicketSystem.cleanupStaleTickets(currentDay);
             TailorCollectionTicketSystem.cleanupStaleTickets(currentDay);
+            LumberjackDepositTicketSystem.cleanupStaleTickets(currentDay);
 
             blockEntity.lastScanDay     = currentDay;
             blockEntity.hasScannedToday = true;
@@ -1323,6 +1334,7 @@ public class TownHallBlockEntity extends BlockEntity implements
             AnimalHerderCollectionTicketSystem.registerListener(this);
             TannerCollectionTicketSystem.registerListener(this);
             TailorCollectionTicketSystem.registerListener(this);
+            LumberjackDepositTicketSystem.registerListener(this);
         }
     }
 
@@ -1418,6 +1430,7 @@ public class TownHallBlockEntity extends BlockEntity implements
         AnimalHerderCollectionTicketSystem.unregisterListener(this);
         TannerCollectionTicketSystem.unregisterListener(this);
         TailorCollectionTicketSystem.unregisterListener(this);
+        LumberjackDepositTicketSystem.unregisterListener(this);
         if (!level.isClientSide()) {
             level.players().forEach(player -> {
                 if (player instanceof ServerPlayer serverPlayer) {

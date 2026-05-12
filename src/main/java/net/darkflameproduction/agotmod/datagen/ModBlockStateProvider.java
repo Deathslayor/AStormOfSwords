@@ -1570,6 +1570,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         jobBarrelBlock(ModBLocks.BUILDER_BARREL.get());
         jobBarrelBlock(ModBLocks.BUTCHER_BARREL.get());
         jobBarrelBlock(ModBLocks.CARAVAN_MASTER_BARREL.get());
+        jobBarrelBlock(ModBLocks.CARPENTER_BARREL.get());
         jobBarrelBlock(ModBLocks.CATTLE_HERDER_BARREL.get());
         jobBarrelBlock(ModBLocks.CHARCOAL_BURNER_BARREL.get());
         jobBarrelBlock(ModBLocks.CHICKEN_BREEDER_BARREL.get());

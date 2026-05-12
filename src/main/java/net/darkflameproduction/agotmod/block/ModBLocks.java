@@ -3,6 +3,7 @@ package net.darkflameproduction.agotmod.block;// Importing necessary classes fro
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.block.custom.*;
 import net.darkflameproduction.agotmod.block.custom.BarleyCropBlock;
+import net.darkflameproduction.agotmod.block.custom.furniture.TableBlock;
 import net.darkflameproduction.agotmod.block.custom.specialleaves.WeirwoodLeavesBlock;
 import net.darkflameproduction.agotmod.item.ModItems;
 import net.darkflameproduction.agotmod.util.ModWoodTypes;
@@ -2237,6 +2238,12 @@ public class ModBLocks {
     public static final DeferredBlock<Block> SMOKEBERRY_BUSH = registerBlock("smokeberry_bush",
             SmokeberryBushBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH), false);
 
+    // ---------------------------(FURNITURE)--------------------------- //
+    public static final DeferredBlock<Block> DARK_OAK_TABLE = registerBlock("dark_oak_table",
+            TableBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_PLANKS).strength(2f).noOcclusion(),
+            false);
+
 
     // ---------------------------(JOBBLOCKS)--------------------------- //
 
@@ -2249,6 +2256,16 @@ public class ModBLocks {
 
     // All Job Barrel Blocks
     public static final DeferredBlock<Block> ALEHOUSE_BARREL = registerBlock("alehouse_barrel",
+            JobBarrelBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            false);
+
+    public static final DeferredBlock<Block> CARPENTER_BARREL = registerBlock("carpenter_barrel",
             JobBarrelBlock::new,
             BlockBehaviour.Properties.of()
                     .mapColor(MapColor.WOOD)

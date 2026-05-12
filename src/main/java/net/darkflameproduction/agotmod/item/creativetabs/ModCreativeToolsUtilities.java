@@ -50,6 +50,7 @@ public class ModCreativeToolsUtilities {
                         pOutput.accept(ModItems.BUILDER_BARREL.get());
                         pOutput.accept(ModItems.BUTCHER_BARREL.get());
                         pOutput.accept(ModItems.CARAVAN_MASTER_BARREL.get());
+                        pOutput.accept(ModItems.CARPENTER_BARREL.get());
                         pOutput.accept(ModItems.CATTLE_HERDER_BARREL.get());
                         pOutput.accept(ModItems.CHARCOAL_BURNER_BARREL.get());
                         pOutput.accept(ModItems.CHICKEN_BREEDER_BARREL.get());
@@ -79,7 +80,7 @@ public class ModCreativeToolsUtilities {
                         pOutput.accept(ModItems.TAILOR_BARREL.get());
                         pOutput.accept(ModItems.TANNER_BARREL.get());
                         pOutput.accept(ModItems.TRADER_BARREL.get());
-
+                        pOutput.accept(ModItems.DARK_OAK_TABLE.get());
                     })
                     .build());
 
