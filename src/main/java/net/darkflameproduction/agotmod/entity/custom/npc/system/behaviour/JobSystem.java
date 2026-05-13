@@ -1,6 +1,7 @@
 package net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour;
 
 import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.charcoalburner.CharcoalBurnerSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.farmer.FarmingSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.grocer.GrocerSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.lumberjack.LumberjackSystem;
@@ -36,6 +37,7 @@ public class JobSystem {
     public static final String JOB_TAILOR = "tailor";
     public static final String JOB_BLACKSMITH = "blacksmith";
     public static final String JOB_LUMBERJACK = "lumberjack";
+    public static final String JOB_CHARCOAL_BURNER = "charcoal_burner";
     public static final String JOB_NONE            = "";
 
     // Work area system constants
@@ -89,6 +91,10 @@ public class JobSystem {
     private static final int LUMBERJACK_WORK_RADIUS_X = 96;
     private static final int LUMBERJACK_WORK_RADIUS_Z = 96;
     private static final int LUMBERJACK_WORK_RADIUS_Y = 32;
+
+    private static final int CHARCOAL_BURNER_WORK_RADIUS_X = 8;
+    private static final int CHARCOAL_BURNER_WORK_RADIUS_Z = 8;
+    private static final int CHARCOAL_BURNER_WORK_RADIUS_Y = 16;
 
     // Job block reservations - static maps to track which blocks are taken
     private static final Map<BlockPos, UUID> jobBlockReservations = new HashMap<>();
@@ -151,6 +157,8 @@ public class JobSystem {
         if (getJobType().equals(JOB_PIG_BREEDER))     return jobBlockState.is(ModBLocks.PIG_BREEDER_BARREL.get());
         if (getJobType().equals(JOB_SHEEP_HERDER))    return jobBlockState.is(ModBLocks.SHEEP_HERDER_BARREL.get());
         if (getJobType().equals(JOB_LUMBERJACK)) return jobBlockState.is(ModBLocks.LUMBERJACK_BARREL.get());
+        if (getJobType().equals(JOB_CHARCOAL_BURNER)) return jobBlockState.is(ModBLocks.CHARCOAL_BURNER_BARREL.get());
+
 
         return false;
     }
@@ -178,7 +186,10 @@ public class JobSystem {
         } else if (oldJobType.equals(JOB_SMELTER)) {
             peasant.getSmelterSystem().setCurrentState(
                     net.darkflameproduction.agotmod.entity.custom.npc.system.smelter.SmelterSystem.SmelterState.GOING_TO_JOB_BLOCK);
-        } else if (oldJobType.equals(JOB_CATTLE_HERDER)
+        } else if (oldJobType.equals(JOB_CHARCOAL_BURNER)) {
+            peasant.getCharcoalBurnerSystem().setCurrentState(
+                    CharcoalBurnerSystem.CharcoalBurnerState.GOING_TO_JOB_BLOCK);
+        } else if (oldJobType.equals(JOB_CATTLE_HERDER)   // <-- needs else if, not standalone else if
                 || oldJobType.equals(JOB_CHICKEN_BREEDER)
                 || oldJobType.equals(JOB_PIG_BREEDER)
                 || oldJobType.equals(JOB_SHEEP_HERDER)) {
@@ -511,7 +522,12 @@ public class JobSystem {
         if (getJobType().equals(JOB_LUMBERJACK))
             return deltaX <= LUMBERJACK_WORK_RADIUS_X && deltaZ <= LUMBERJACK_WORK_RADIUS_Z && deltaY <= LUMBERJACK_WORK_RADIUS_Y;
 
+        if (getJobType().equals(JOB_CHARCOAL_BURNER)) {
+            return deltaX <= CHARCOAL_BURNER_WORK_RADIUS_X && deltaZ <= CHARCOAL_BURNER_WORK_RADIUS_Z && deltaY <= CHARCOAL_BURNER_WORK_RADIUS_Y;
+        }
+
         return true;
+
     }
 
     public boolean shouldBeAtWorkArea() {
@@ -536,6 +552,7 @@ public class JobSystem {
                 || getJobType().equals(JOB_PIG_BREEDER)
                 || getJobType().equals(JOB_SHEEP_HERDER)) return true;
         if (getJobType().equals(JOB_LUMBERJACK)) return true;
+        if (getJobType().equals(JOB_CHARCOAL_BURNER)) return true;
 
         return false;
     }
@@ -583,6 +600,8 @@ public class JobSystem {
             return distanceSquared > ((ANIMAL_HERDER_WORK_RADIUS_X + 10) * (ANIMAL_HERDER_WORK_RADIUS_X + 10));
         if (getJobType().equals(JOB_LUMBERJACK))
             return distanceSquared > ((LUMBERJACK_WORK_RADIUS_X + 10) * (LUMBERJACK_WORK_RADIUS_X + 10));
+        if (getJobType().equals(JOB_CHARCOAL_BURNER))
+            return distanceSquared > ((CHARCOAL_BURNER_WORK_RADIUS_X + 10) * (CHARCOAL_BURNER_WORK_RADIUS_X + 10));
 
         return false;
     }
@@ -614,6 +633,7 @@ public class JobSystem {
             else if (currentName.startsWith("Guard "))           baseName = currentName.substring(6);
             else if (currentName.startsWith("Miner "))           baseName = currentName.substring(6);
             else if (currentName.startsWith("Smelter "))         baseName = currentName.substring(8);
+            else if (currentName.startsWith("Charcoal Burner ")) baseName = currentName.substring(16);
             else if (currentName.startsWith("Cattle Herder "))   baseName = currentName.substring(14);
             else if (currentName.startsWith("Chicken Breeder ")) baseName = currentName.substring(16);
             else if (currentName.startsWith("Pig Breeder "))     baseName = currentName.substring(12);
@@ -630,6 +650,7 @@ public class JobSystem {
             else if (getJobType().equals(JOB_GUARD))           newName = "Guard "           + baseName;
             else if (getJobType().equals(JOB_MINER))           newName = "Miner "           + baseName;
             else if (getJobType().equals(JOB_SMELTER))         newName = "Smelter "         + baseName;
+            else if (getJobType().equals(JOB_CHARCOAL_BURNER))         newName = "Charcoal Burner "         + baseName;
             else if (getJobType().equals(JOB_CATTLE_HERDER))   newName = "Cattle Herder "   + baseName;
             else if (getJobType().equals(JOB_CHICKEN_BREEDER)) newName = "Chicken Breeder " + baseName;
             else if (getJobType().equals(JOB_PIG_BREEDER))     newName = "Pig Breeder "     + baseName;

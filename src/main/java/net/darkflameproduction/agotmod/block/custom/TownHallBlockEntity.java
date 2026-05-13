@@ -6,6 +6,7 @@ import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSys
 import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobWarningSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.blacksmith.BlacksmithInventoryTicketSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.butcher.ButcherInventoryTicketSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.charcoalburner.CharcoalBurnerCollectionTicketSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.farmer.FarmerDepositTicketSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.grocer.GrocerInventoryTicketSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.inventory.FoodCollectionTicketSystem;
@@ -56,7 +57,8 @@ public class TownHallBlockEntity extends BlockEntity implements
         SmelterCollectionTicketSystem.SmelterCollectionListener,
         AnimalHerderCollectionTicketSystem.AnimalHerderCollectionListener,
         TannerCollectionTicketSystem.TannerCollectionListener,
-        TailorCollectionTicketSystem.TailorCollectionListener, LumberjackDepositTicketSystem.DepositListener {
+        TailorCollectionTicketSystem.TailorCollectionListener, LumberjackDepositTicketSystem.DepositListener,
+        CharcoalBurnerCollectionTicketSystem.CharcoalBurnerCollectionListener{
 
     private static final int SCAN_TIME = 10000; // Time of day to perform scan
     private static final int CHILD_SPAWN_TIME = 18000; // Time of day to spawn children (midnight)
@@ -329,6 +331,8 @@ public class TownHallBlockEntity extends BlockEntity implements
         if (state.is(ModBLocks.PIG_BREEDER_BARREL.get()))     return JobSystem.JOB_PIG_BREEDER;
         if (state.is(ModBLocks.SHEEP_HERDER_BARREL.get()))    return JobSystem.JOB_SHEEP_HERDER;
         if (state.is(ModBLocks.LUMBERJACK_BARREL.get()))      return JobSystem.JOB_LUMBERJACK;
+        if (state.is(ModBLocks.CHARCOAL_BURNER_BARREL.get()))         return JobSystem.JOB_CHARCOAL_BURNER;
+
         return JobSystem.JOB_NONE;
     }
 
@@ -505,6 +509,43 @@ public class TownHallBlockEntity extends BlockEntity implements
     }
 
     @Override
+    public void onCharcoalBurnerRequestPosted(CharcoalBurnerCollectionTicketSystem.CharcoalBurnerRequestTicket ticket) {
+        int logsNeeded = ticket.logsNeeded;
+        List<ItemStack> toGive = new ArrayList<>();
+        int remaining = logsNeeded;
+
+        // Pull logs from town inventory — any item ending in _log, _wood, _stem, _hyphae
+        // except charred variants
+        List<String> logKeys = townInventory.keySet().stream()
+                .filter(key -> {
+                    String path = key.contains(":") ? key.split(":")[1] : key;
+                    if (path.startsWith("charred")) return false; // skip charred logs
+                    return path.endsWith("_log") || path.endsWith("_wood")
+                            || path.endsWith("_stem") || path.endsWith("_hyphae");
+                })
+                .toList();
+
+        for (String logKey : logKeys) {
+            if (remaining <= 0) break;
+            long available = townInventory.getOrDefault(logKey, 0L);
+            if (available <= 0) continue;
+            int toTake = (int) Math.min(remaining, available);
+            removeFromTownInventory(logKey, toTake);
+            ResourceLocation loc = ResourceLocation.tryParse(logKey);
+            if (loc != null) {
+                net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.getValue(loc);
+                if (item != null && item != Items.AIR) toGive.add(new ItemStack(item, toTake));
+            }
+            remaining -= toTake;
+        }
+
+        CharcoalBurnerCollectionTicketSystem.postResponse(ticket.charcoalBurnerUUID, toGive);
+        setChanged();
+    }
+
+
+
+    @Override
     public void onSmelterRequestPosted(SmelterCollectionTicketSystem.SmelterRequestTicket ticket) {
         int coalNeeded = ticket.coalNeeded;
         List<ItemStack> toGive = new ArrayList<>();
@@ -652,6 +693,8 @@ public class TownHallBlockEntity extends BlockEntity implements
             TannerCollectionTicketSystem.cleanupStaleTickets(currentDay);
             TailorCollectionTicketSystem.cleanupStaleTickets(currentDay);
             LumberjackDepositTicketSystem.cleanupStaleTickets(currentDay);
+            CharcoalBurnerCollectionTicketSystem.cleanupStaleTickets(currentDay);
+
 
             blockEntity.lastScanDay     = currentDay;
             blockEntity.hasScannedToday = true;
@@ -1335,6 +1378,8 @@ public class TownHallBlockEntity extends BlockEntity implements
             TannerCollectionTicketSystem.registerListener(this);
             TailorCollectionTicketSystem.registerListener(this);
             LumberjackDepositTicketSystem.registerListener(this);
+            CharcoalBurnerCollectionTicketSystem.registerListener(this);
+
         }
     }
 
@@ -1431,6 +1476,8 @@ public class TownHallBlockEntity extends BlockEntity implements
         TannerCollectionTicketSystem.unregisterListener(this);
         TailorCollectionTicketSystem.unregisterListener(this);
         LumberjackDepositTicketSystem.unregisterListener(this);
+        CharcoalBurnerCollectionTicketSystem.unregisterListener(this);
+
         if (!level.isClientSide()) {
             level.players().forEach(player -> {
                 if (player instanceof ServerPlayer serverPlayer) {

@@ -3,6 +3,9 @@ package net.darkflameproduction.agotmod.entity.custom.npc;
 import net.darkflameproduction.agotmod.block.custom.TownHallBlockEntity;
 import net.darkflameproduction.agotmod.entity.animations.ModAnimationDefinitions;
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.behaviour.*;
+import net.darkflameproduction.agotmod.entity.custom.npc.goals.charcoalburner.CharcoalBurnerBarrelDropOffGoal;
+import net.darkflameproduction.agotmod.entity.custom.npc.goals.charcoalburner.CharcoalBurnerGoal;
+import net.darkflameproduction.agotmod.entity.custom.npc.goals.charcoalburner.CollectCharcoalBurnerMaterialsGoal;
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.farmer.FarmerBarrelDropOffGoal;
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.farmer.FarmingGoal;
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.guard.GuardCombatGoal;
@@ -17,6 +20,7 @@ import net.darkflameproduction.agotmod.entity.custom.npc.goals.smelter.SmelterBa
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.smelter.SmelterGoal;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.NameSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.charcoalburner.CharcoalBurnerSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.farmer.FarmingSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.grocer.GrocerInventoryTicketSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.grocer.GrocerSystem;
@@ -127,13 +131,14 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     private final net.darkflameproduction.agotmod.entity.custom.npc.system.tanner.TannerSystem tannerSystem;
     private final net.darkflameproduction.agotmod.entity.custom.npc.system.tailor.TailorSystem tailorSystem;
     private final LumberjackSystem lumberjackSystem;
+    private final CharcoalBurnerSystem charcoalBurnerSystem;
 
     // Daily reset tracking
     private long lastDayTracked = -1;
 
     // Animation tracking
     private int interactAnimationTimer = 0;
-    private static final int INTERACT_ANIMATION_DURATION = 8; // Animation lasts 8 ticks (0.375 seconds * 20 ticks)
+    private static final int INTERACT_ANIMATION_DURATION = 8;
 
     // Constants
     public static final int PEASANT_SLOT_OFFSET = 400;
@@ -149,23 +154,24 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         this.getNavigation().setCanFloat(true);
         this.getNavigation().setRequiredPathLength(48.0F);
 
-        this.sleepSystem        = new SleepSystem(this);
-        this.hungerSystem       = new HungerSystem(this);
-        this.inventorySystem    = new InventorySystem(this, inventory);
-        this.homeSystem         = new HomeSystem(this);
-        this.jobSystem          = new JobSystem(this);
-        this.farmingSystem      = new FarmingSystem(this);
-        this.grocerSystem       = new GrocerSystem(this);
-        this.butcherSystem      = new net.darkflameproduction.agotmod.entity.custom.npc.system.butcher.ButcherSystem(this);
-        this.tannerSystem       = new net.darkflameproduction.agotmod.entity.custom.npc.system.tanner.TannerSystem();
-        this.tailorSystem       = new net.darkflameproduction.agotmod.entity.custom.npc.system.tailor.TailorSystem();
-        this.teleportSystem     = new TeleportSystem(this);
-        this.nameSystem         = new NameSystem(this);
-        this.guardSystem        = new GuardSystem(this);
-        this.minerSystem        = new MinerSystem(this);
-        this.smelterSystem      = new SmelterSystem();
-        this.animalHerderSystem = new net.darkflameproduction.agotmod.entity.custom.npc.system.animalherder.AnimalHerderSystem();
-        this.lumberjackSystem   = new LumberjackSystem(this);
+        this.sleepSystem          = new SleepSystem(this);
+        this.hungerSystem         = new HungerSystem(this);
+        this.inventorySystem      = new InventorySystem(this, inventory);
+        this.homeSystem           = new HomeSystem(this);
+        this.jobSystem            = new JobSystem(this);
+        this.farmingSystem        = new FarmingSystem(this);
+        this.grocerSystem         = new GrocerSystem(this);
+        this.butcherSystem        = new net.darkflameproduction.agotmod.entity.custom.npc.system.butcher.ButcherSystem(this);
+        this.tannerSystem         = new net.darkflameproduction.agotmod.entity.custom.npc.system.tanner.TannerSystem();
+        this.tailorSystem         = new net.darkflameproduction.agotmod.entity.custom.npc.system.tailor.TailorSystem();
+        this.teleportSystem       = new TeleportSystem(this);
+        this.nameSystem           = new NameSystem(this);
+        this.guardSystem          = new GuardSystem(this);
+        this.minerSystem          = new MinerSystem(this);
+        this.smelterSystem        = new SmelterSystem();
+        this.animalHerderSystem   = new net.darkflameproduction.agotmod.entity.custom.npc.system.animalherder.AnimalHerderSystem();
+        this.lumberjackSystem     = new LumberjackSystem(this);
+        this.charcoalBurnerSystem = new CharcoalBurnerSystem();
     }
 
     // Getters for all systems
@@ -186,7 +192,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     public net.darkflameproduction.agotmod.entity.custom.npc.system.tanner.TannerSystem getTannerSystem()   { return tannerSystem; }
     public net.darkflameproduction.agotmod.entity.custom.npc.system.tailor.TailorSystem getTailorSystem()   { return tailorSystem; }
     public LumberjackSystem getLumberjackSystem() { return lumberjackSystem; }
-
+    public CharcoalBurnerSystem getCharcoalBurnerSystem() { return charcoalBurnerSystem; }
 
 
     // Gender methods
@@ -349,6 +355,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
             this.goalSelector.addGoal(4, new net.darkflameproduction.agotmod.entity.custom.npc.goals.tanner.TannerBarrelDropOffGoal(this));
             this.goalSelector.addGoal(4, new net.darkflameproduction.agotmod.entity.custom.npc.goals.tailor.TailorBarrelDropOffGoal(this));
             this.goalSelector.addGoal(4, new net.darkflameproduction.agotmod.entity.custom.npc.goals.lumberjack.LumberjackDepositGoal(this));
+            this.goalSelector.addGoal(4, new CharcoalBurnerBarrelDropOffGoal(this));
         }
 
         this.goalSelector.addGoal(5, new FindBedGoal(this));
@@ -361,6 +368,8 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
             this.goalSelector.addGoal(7, new net.darkflameproduction.agotmod.entity.custom.npc.goals.animalherder.CollectBreedingItemGoal(this));
             this.goalSelector.addGoal(7, new net.darkflameproduction.agotmod.entity.custom.npc.goals.tanner.CollectTannerMaterialsGoal(this));
             this.goalSelector.addGoal(7, new net.darkflameproduction.agotmod.entity.custom.npc.goals.tailor.CollectTailorMaterialsGoal(this));
+            this.goalSelector.addGoal(7, new CollectCharcoalBurnerMaterialsGoal(this));
+            this.goalSelector.addGoal(8, new CharcoalBurnerGoal(this));
             this.goalSelector.addGoal(8, new SmelterGoal(this));
             this.goalSelector.addGoal(8, new MinerGoal(this));
             this.goalSelector.addGoal(8, new net.darkflameproduction.agotmod.entity.custom.npc.goals.animalherder.AnimalHerderGoal(this));
@@ -532,6 +541,11 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         lumberjackSystem.save(lumberjackTag);
         compound.put("LumberjackSystem", lumberjackTag);
 
+        charcoalBurnerSystem.saveData(compound);
+
+
+
+
         if (doorGoal != null) {
             doorGoal.saveOpenedBlocks(compound);
         }
@@ -570,6 +584,8 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         smelterSystem.loadData(compound);
         animalHerderSystem.loadData(compound);
         inventorySystem.loadData(compound, this.registryAccess());
+        charcoalBurnerSystem.loadData(compound);
+
 
         if (compound.contains("LumberjackSystem")) {
             lumberjackSystem.load(compound.getCompound("LumberjackSystem"));
