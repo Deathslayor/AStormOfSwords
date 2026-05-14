@@ -1171,6 +1171,7 @@ public class ModItems {
     public static final DeferredItem<Item> BRONZE_CHAIN = ITEMS.registerItem("bronze_chain", Item::new);
     public static final DeferredItem<Item> BRONZE_PLATE = ITEMS.registerItem("bronze_plate", Item::new);
     public static final DeferredItem<Item> CLOTH = ITEMS.registerItem("cloth", Item::new);
+    public static final DeferredItem<Item> NAIL = ITEMS.registerItem("nail", Item::new);
     public static final DeferredItem<Item> IRON_CHAIN_LINK = ITEMS.registerItem("iron_chain_link", Item::new);
     public static final DeferredItem<Item> IRON_CHAIN = ITEMS.registerItem("iron_chain", Item::new);
     public static final DeferredItem<Item> IRON_PLATE = ITEMS.registerItem("iron_plate", Item::new);

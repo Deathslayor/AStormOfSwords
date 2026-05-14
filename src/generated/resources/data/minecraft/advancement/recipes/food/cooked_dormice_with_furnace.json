@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_dormice": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:raw_dormice"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:cooked_dormice_with_furnace"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_dormice"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:cooked_dormice_with_furnace"
+    ]
+  }
+}

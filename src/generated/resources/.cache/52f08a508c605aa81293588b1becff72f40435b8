@@ -1,4 +1,4 @@
-// 1.21.3	2026-05-14T11:19:09.820607	Item Models: agotmod
+// 1.21.3	2026-05-14T14:41:17.9855615	Item Models: agotmod
 86b3bc001a8c3e96b638adacef2b383fc88b3224 assets/agotmod/models/item/acacia_arm_chair.json
 caa0341d904c99eda5466b0ee72a08927339e8cd assets/agotmod/models/item/acacia_chair.json
 137c592a4f98dd55f02148642ba7f0beff49f584 assets/agotmod/models/item/acacia_stool.json
@@ -2135,6 +2135,7 @@ ab42187d40e5a0588b2d146c7bcb3f76ff0c9370 assets/agotmod/models/item/mud_stairs.j
 73fd0017f233841be5f983de61710c57de46004e assets/agotmod/models/item/myrrh_trapdoor.json
 f6096a0466a84c5b9df52b4ea3ef4590ad11e954 assets/agotmod/models/item/myrrh_wall.json
 df9d34ed2fdf3213d076e29dec7a5d7654dd8f0a assets/agotmod/models/item/nahsa.json
+0d64781a839436560196a3bf9911e34cee31c1f5 assets/agotmod/models/item/nail.json
 e5b79cc71dde91171f67ae8cd7a6f3a2abbdc57a assets/agotmod/models/item/neep.json
 6eac7334afc6ffebcc1f9460aa8c998c9179bbf2 assets/agotmod/models/item/neep_seeds.json
 6571653925efd789aaa9a215184de9dfb8322ae4 assets/agotmod/models/item/nettle_tea.json

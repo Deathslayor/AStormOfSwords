@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_clam": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:raw_clam"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:cooked_clam_with_furnace"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_clam"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:cooked_clam_with_furnace"
+    ]
+  }
+}

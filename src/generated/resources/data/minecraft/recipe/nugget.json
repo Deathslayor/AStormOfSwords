@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "O": "minecraft:iron_nugget"
+  },
+  "pattern": [
+    "O"
+  ],
+  "result": {
+    "count": 1,
+    "id": "agotmod:nail"
+  }
+}

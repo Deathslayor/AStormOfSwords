@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "agotmod:barley"
+  },
+  "pattern": [
+    "BBB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "agotmod:barley_bread"
+  }
+}

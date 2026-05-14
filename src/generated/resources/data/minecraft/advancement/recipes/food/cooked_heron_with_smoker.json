@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_heron": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:raw_heron"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:cooked_heron_with_smoker"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_heron"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:cooked_heron_with_smoker"
+    ]
+  }
+}

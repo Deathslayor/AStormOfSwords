@@ -1578,6 +1578,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.BRONZE_CHAIN);
         simpleItem(ModItems.BRONZE_PLATE);
         simpleItem(ModItems.CLOTH);
+        simpleItem(ModItems.NAIL);
         simpleItem(ModItems.IRON_CHAIN_LINK);
         simpleItem(ModItems.IRON_CHAIN);
         simpleItem(ModItems.HAMMER);

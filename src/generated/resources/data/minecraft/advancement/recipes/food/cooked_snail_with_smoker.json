@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_snail": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:raw_snail"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:cooked_snail_with_smoker"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_snail"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:cooked_snail_with_smoker"
+    ]
+  }
+}

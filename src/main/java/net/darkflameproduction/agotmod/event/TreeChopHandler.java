@@ -28,7 +28,9 @@ public class TreeChopHandler {
 
     @SubscribeEvent
     public static void onBreakSpeed(PlayerEvent.BreakSpeed event) {
+        if (event.getEntity().isCreative()) return;
         if (event.getEntity().isCrouching()) return;
+
 
         BlockState state = event.getState();
         if (!isLog(state)) return;
@@ -52,6 +54,7 @@ public class TreeChopHandler {
     public static void onBlockBreak(BlockEvent.BreakEvent event) {
         if (!(event.getLevel() instanceof ServerLevel level)) return;
         if (!(event.getPlayer() instanceof ServerPlayer player)) return;
+        if (player.isCreative()) return;
         if (player.isCrouching()) return;
 
         ItemStack tool = player.getMainHandItem();

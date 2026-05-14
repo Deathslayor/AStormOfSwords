@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "W": [
+      "minecraft:wheat",
+      "agotmod:barley",
+      "agotmod:oat"
+    ]
+  },
+  "pattern": [
+    "WWW"
+  ],
+  "result": {
+    "count": 1,
+    "id": "agotmod:black_bread"
+  }
+}

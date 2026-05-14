@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "O": "agotmod:oat"
+  },
+  "pattern": [
+    "OOO"
+  ],
+  "result": {
+    "count": 1,
+    "id": "agotmod:hard_bread"
+  }
+}

@@ -7,7 +7,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
 
 import java.util.EnumSet;
@@ -15,14 +14,11 @@ import java.util.List;
 
 public class LumberjackGoal extends Goal {
 
-    private static final int    COLLECT_RADIUS = 12;
-    private static final double PICKUP_DIST_SQ = 2.5;
-    private static final int    SWING_DURATION = 8;
-    private static final int    COLLECT_TIMEOUT = 200; // 10 seconds max collecting
+    private static final int SWING_DURATION = 8;
 
     private final Peasant_Entity peasant;
-    private int swingProgress   = 0;
-    private int collectTimer    = 0;
+    private int swingProgress = 0;
+    private int collectTimer  = 0;
 
     public LumberjackGoal(Peasant_Entity peasant) {
         this.peasant = peasant;
@@ -56,7 +52,9 @@ public class LumberjackGoal extends Goal {
         peasant.getNavigation().stop();
         swingProgress = 0;
         collectTimer  = 0;
-        getSystem().setCurrentState(LumberjackSystem.LumberjackState.GOING_TO_JOB_BLOCK);
+        if (!peasant.getHungerSystem().isEating() && !peasant.isSleeping()) {
+            getSystem().setCurrentState(LumberjackSystem.LumberjackState.GOING_TO_JOB_BLOCK);
+        }
     }
 
     @Override
@@ -93,20 +91,21 @@ public class LumberjackGoal extends Goal {
     }
 
     private void navigateToTree() {
-        BlockPos tree = getSystem().getTargetTreePos();
-        if (tree == null) return;
+        LumberjackSystem system = getSystem();
 
-        double dx = peasant.getX() - (tree.getX() + 0.5);
-        double dz = peasant.getZ() - (tree.getZ() + 0.5);
-        double horizontalDistSq = dx * dx + dz * dz;
+        // Prefer the ground-level approach position; fall back to tree pos XZ
+        BlockPos dest = system.getApproachPos();
+        if (dest == null) dest = system.getTargetTreePos();
+        if (dest == null) return;
 
-        if (horizontalDistSq > 25) {
-            // Navigate to the X/Z of the tree but at the peasant's own Y
-            // so pathfinding stays on the ground
+        double dx = peasant.getX() - (dest.getX() + 0.5);
+        double dz = peasant.getZ() - (dest.getZ() + 0.5);
+
+        if (dx * dx + dz * dz > 2) {
             peasant.getNavigation().moveTo(
-                    tree.getX() + 0.5,
-                    peasant.getY(),
-                    tree.getZ() + 0.5,
+                    dest.getX() + 0.5,
+                    dest.getY(),
+                    dest.getZ() + 0.5,
                     0.6);
         }
     }
@@ -119,10 +118,9 @@ public class LumberjackGoal extends Goal {
         BlockPos tree = getSystem().getTargetTreePos();
         if (tree != null) {
             peasant.getLookControl().setLookAt(
-                    tree.getX() + 0.5, tree.getY() + 1.0, tree.getZ() + 0.5);
+                    tree.getX() + 0.5, tree.getY() + 0.5, tree.getZ() + 0.5);
         }
 
-        // Swing animation cycles like the miner
         swingProgress++;
         if (swingProgress >= SWING_DURATION) {
             peasant.triggerInteractAnimation();
@@ -130,23 +128,20 @@ public class LumberjackGoal extends Goal {
         }
     }
 
-    // ── Collecting — mirrors AnimalHerderGoal.pickUpNearbyItems pattern ───────
+    // ── Collecting ────────────────────────────────────────────────────────────
 
     private void handleCollecting() {
         if (!(peasant.level() instanceof ServerLevel level)) return;
 
         collectTimer++;
-
-        // Check every 20 ticks like the animal herder
         if (collectTimer % 20 != 0) return;
 
-        // Search around the chopped tree position, or peasant if no tree pos
         BlockPos center = getSystem().getTargetTreePos();
         if (center == null) center = peasant.blockPosition();
 
         AABB searchArea = new AABB(
-                center.getX() - 10, center.getY() - 10, center.getZ() - 10,
-                center.getX() + 10, center.getY() + 10, center.getZ() + 10
+                center.getX() - 20, center.getY() - 10, center.getZ() - 20,
+                center.getX() + 20, center.getY() + 20, center.getZ() + 20
         );
 
         List<ItemEntity> nearbyItems = level.getEntitiesOfClass(
@@ -154,14 +149,13 @@ public class LumberjackGoal extends Goal {
                 item -> !item.getItem().isEmpty()
         );
 
-        // Pick up ALL items at once — no navigation needed
         for (ItemEntity item : nearbyItems) {
             peasant.getInventorySystem().addItem(item.getItem().copy());
             item.discard();
         }
 
-        // Move to replanting regardless — items are all collected
-        if (collectTimer > 40 || nearbyItems.isEmpty()) {
+        // After first collection pass or timeout, move on
+        if (collectTimer >= 40) {
             collectTimer = 0;
             getSystem().setCurrentState(LumberjackSystem.LumberjackState.REPLANTING);
         }

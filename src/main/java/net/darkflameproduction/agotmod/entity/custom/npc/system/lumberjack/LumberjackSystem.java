@@ -26,30 +26,26 @@ public class LumberjackSystem {
         DEPOSITING
     }
 
-    private static final int  SEARCH_RADIUS = 96;
-    private static final int  MAX_LOGS      = 256;
-    private static final int  MAX_LEAVES    = 2048;
-    private static final int  CHOP_TICKS    = 30;
-    private int stuckTimer = 0;
-    private static final int MAX_STATE_TICKS = 600; // 30 seconds max per state
+    private static final int SEARCH_RADIUS  = 96;
+    private static final int MAX_LOGS       = 256;
+    private static final int MAX_LEAVES     = 2048;
+    private static final int CHOP_TICKS     = 30;
+    private static final int MAX_STATE_TICKS = 6000;
 
     private final Peasant_Entity peasant;
     private LumberjackState currentState = LumberjackState.GOING_TO_JOB_BLOCK;
 
-    // Current tree
-    private BlockPos      targetTreePos = null;
-    private Set<BlockPos> treeLogs      = new LinkedHashSet<>();
-    private Set<BlockPos> treeLeaves    = new LinkedHashSet<>();
-    private BlockPos      stumpPos      = null;
-    private Block         stumpLogType  = null;
+    private BlockPos      targetTreePos  = null; // the log above ground we target
+    private BlockPos      approachPos    = null; // ground-level position adjacent to stump to walk to
+    private Set<BlockPos> treeLogs       = new LinkedHashSet<>();
+    private Set<BlockPos> treeLeaves     = new LinkedHashSet<>();
+    private BlockPos      stumpPos       = null;
+    private Block         stumpLogType   = null;
     private BlockPos      lastChoppedPos = null;
 
-    // Chopping progress
     private int     chopTicksElapsed = 0;
-    private boolean choppingDone     = false;
-
-    // Idle search timer
-    private int idleSearchTimer = 0;
+    private int     stuckTimer       = 0;
+    private int     idleSearchTimer  = 0;
 
     public LumberjackSystem(Peasant_Entity peasant) {
         this.peasant = peasant;
@@ -96,10 +92,91 @@ public class LumberjackSystem {
         idleSearchTimer = 0;
 
         BlockPos tree = findNearestTree(level);
-        if (tree != null) {
-            if (lastChoppedPos != null && tree.distSqr(lastChoppedPos) < 9) return;
-            targetTreePos = tree;
-            setCurrentState(LumberjackState.GOING_TO_TREE);
+        if (tree == null) return;
+        if (lastChoppedPos != null && tree.distSqr(lastChoppedPos) < 9) return;
+
+        targetTreePos = tree;
+        // approachPos is the ground-level block adjacent to the stump
+        approachPos = findApproachPos(level, tree);
+        setCurrentState(LumberjackState.GOING_TO_TREE);
+    }
+
+    private void tickGoingToTree(ServerLevel level) {
+        if (targetTreePos == null) {
+            setCurrentState(LumberjackState.IDLING);
+            return;
+        }
+
+        // Use approachPos if we have it, otherwise fall back to targetTreePos XZ
+        BlockPos dest = approachPos != null ? approachPos : targetTreePos;
+
+        double dx = peasant.getX() - (dest.getX() + 0.5);
+        double dz = peasant.getZ() - (dest.getZ() + 0.5);
+        double distSq = dx * dx + dz * dz;
+
+        // Close enough to start chopping — within 3 blocks horizontal of approach pos
+        if (distSq < 9) {
+            BlockState state = level.getBlockState(targetTreePos);
+            if (!isLog(state)) {
+                targetTreePos = null;
+                approachPos   = null;
+                setCurrentState(LumberjackState.IDLING);
+                return;
+            }
+
+            treeLogs.clear();
+            treeLeaves.clear();
+            floodFillLogs(level, targetTreePos, state.getBlock(), treeLogs);
+            floodFillLeaves(level, treeLogs, state.getBlock(), treeLeaves);
+
+            stumpPos     = findLowestLog(treeLogs);
+            stumpLogType = state.getBlock();
+
+            chopTicksElapsed = 0;
+            setCurrentState(LumberjackState.CHOPPING);
+            return;
+        }
+
+        // Navigation stalled — give up on this tree
+        if (peasant.getNavigation().isDone() && distSq > 9) {
+            targetTreePos = null;
+            approachPos   = null;
+            setCurrentState(LumberjackState.IDLING);
+        }
+    }
+
+    private void tickChopping(ServerLevel level) {
+        if (treeLogs.isEmpty()) {
+            setCurrentState(LumberjackState.COLLECTING);
+            return;
+        }
+
+        chopTicksElapsed++;
+
+        if (targetTreePos != null) {
+            double dx = targetTreePos.getX() - peasant.getX();
+            double dz = targetTreePos.getZ() - peasant.getZ();
+            peasant.setYRot((float)(Math.atan2(dz, dx) * (180.0 / Math.PI)) - 90.0F);
+        }
+
+        if (chopTicksElapsed >= treeLogs.size() * CHOP_TICKS) {
+            for (BlockPos logPos : new ArrayList<>(treeLogs)) {
+                BlockState logState = level.getBlockState(logPos);
+                if (!isLog(logState)) continue;
+                Block.dropResources(logState, level, logPos, null, peasant, ItemStack.EMPTY);
+                level.removeBlock(logPos, false);
+            }
+
+            for (BlockPos leafPos : new ArrayList<>(treeLeaves)) {
+                BlockState leafState = level.getBlockState(leafPos);
+                if (!isLeaf(leafState)) continue;
+                Block.dropResources(leafState, level, leafPos, null, peasant, ItemStack.EMPTY);
+                level.removeBlock(leafPos, false);
+            }
+
+            treeLogs.clear();
+            treeLeaves.clear();
+            setCurrentState(LumberjackState.COLLECTING);
         }
     }
 
@@ -136,81 +213,6 @@ public class LumberjackSystem {
         resetTree();
         idleSearchTimer = 90;
         setCurrentState(LumberjackState.IDLING);
-    }
-
-
-    private void tickGoingToTree(ServerLevel level) {
-        if (targetTreePos == null) {
-            setCurrentState(LumberjackState.IDLING);
-            return;
-        }
-
-        double dx = peasant.getX() - (targetTreePos.getX() + 0.5);
-        double dz = peasant.getZ() - (targetTreePos.getZ() + 0.5);
-        double horizontalDistSq = dx * dx + dz * dz;
-
-        if (horizontalDistSq < 25) {
-            BlockState state = level.getBlockState(targetTreePos);
-            if (!isLog(state)) {
-                targetTreePos = null;
-                setCurrentState(LumberjackState.IDLING);
-                return;
-            }
-
-            treeLogs.clear();
-            treeLeaves.clear();
-            floodFillLogs(level, targetTreePos, state.getBlock(), treeLogs);
-            floodFillLeaves(level, treeLogs, state.getBlock(), treeLeaves);
-
-            stumpPos     = findLowestLog(treeLogs);
-            stumpLogType = state.getBlock();
-
-            chopTicksElapsed = 0;
-            choppingDone     = false;
-            setCurrentState(LumberjackState.CHOPPING);
-            return;
-        }
-
-        if (peasant.getNavigation().isDone() && horizontalDistSq > 25) {
-            targetTreePos = null;
-            setCurrentState(LumberjackState.IDLING);
-        }
-    }
-
-    private void tickChopping(ServerLevel level) {
-        if (treeLogs.isEmpty()) {
-            setCurrentState(LumberjackState.COLLECTING);
-            return;
-        }
-
-        chopTicksElapsed++;
-
-        if (targetTreePos != null) {
-            double dx = targetTreePos.getX() - peasant.getX();
-            double dz = targetTreePos.getZ() - peasant.getZ();
-            peasant.setYRot((float)(Math.atan2(dz, dx) * (180.0 / Math.PI)) - 90.0F);
-        }
-
-        if (chopTicksElapsed >= treeLogs.size() * CHOP_TICKS) {
-            for (BlockPos logPos : treeLogs) {
-                BlockState logState = level.getBlockState(logPos);
-                if (!isLog(logState)) continue;
-                Block.dropResources(logState, level, logPos, null, peasant, ItemStack.EMPTY);
-                level.removeBlock(logPos, false);
-            }
-
-            for (BlockPos leafPos : treeLeaves) {
-                BlockState leafState = level.getBlockState(leafPos);
-                if (!isLeaf(leafState)) continue;
-                Block.dropResources(leafState, level, leafPos, null, peasant, ItemStack.EMPTY);
-                level.removeBlock(leafPos, false);
-            }
-
-            treeLogs.clear();
-            treeLeaves.clear();
-            choppingDone = true;
-            setCurrentState(LumberjackState.COLLECTING);
-        }
     }
 
     // ── Tree finding ──────────────────────────────────────────────────────────
@@ -257,18 +259,39 @@ public class LumberjackSystem {
         return nearest;
     }
 
+    /**
+     * Finds a walkable ground-level position adjacent to the stump so the
+     * lumberjack walks to a reachable spot rather than straight at the log.
+     */
+    private BlockPos findApproachPos(ServerLevel level, BlockPos treeTarget) {
+        // The stump is one below treeTarget
+        BlockPos stump = treeTarget.below();
+
+        // Try the 4 cardinal neighbours of the stump at ground level
+        for (BlockPos nb : List.of(
+                stump.north(), stump.south(), stump.east(), stump.west())) {
+            // Check the block and the one above are both passable
+            BlockState nbState    = level.getBlockState(nb);
+            BlockState nbAbove    = level.getBlockState(nb.above());
+            BlockState nbBelow    = level.getBlockState(nb.below());
+            if (!nbState.isAir() && !nbState.canBeReplaced()) continue;
+            if (!nbAbove.isAir() && !nbAbove.canBeReplaced()) continue;
+            if (nbBelow.isAir()) continue; // no ground below
+            return nb;
+        }
+
+        // Fallback: just use stump XZ at peasant Y
+        return new BlockPos(stump.getX(), (int) peasant.getY(), stump.getZ());
+    }
+
     private BlockPos findConnectedLog(ServerLevel level, BlockPos leafPos) {
         BlockState leafState = level.getBlockState(leafPos);
-
-        // Extract wood type from leaf name to match log type
         String leafKey = BuiltInRegistries.BLOCK.getKey(leafState.getBlock()).getPath();
-        // e.g. "oak_leaves" -> "oak"
         String woodType = leafKey.replace("_leaves", "");
 
         for (BlockPos nb : getAllNeighbours(leafPos)) {
             BlockState state = level.getBlockState(nb);
             if (!isLog(state)) continue;
-            // Make sure the log type matches the leaf type
             String logKey = BuiltInRegistries.BLOCK.getKey(state.getBlock()).getPath();
             if (logKey.contains(woodType)) return nb;
         }
@@ -276,7 +299,6 @@ public class LumberjackSystem {
     }
 
     private BlockPos findTreeBase(ServerLevel level, BlockPos startLog, Block logType) {
-        // Flood fill all connected logs
         Set<BlockPos>   logs  = new HashSet<>();
         Queue<BlockPos> queue = new ArrayDeque<>();
         queue.add(startLog);
@@ -293,7 +315,6 @@ public class LumberjackSystem {
             }
         }
 
-        // Find the lowest log that has a ground block directly below it
         BlockPos base = null;
         for (BlockPos logPos : logs) {
             BlockState below = level.getBlockState(logPos.below());
@@ -311,9 +332,6 @@ public class LumberjackSystem {
 
         return base;
     }
-
-
-
 
     // ── Flood fills ───────────────────────────────────────────────────────────
 
@@ -337,7 +355,6 @@ public class LumberjackSystem {
 
     private static void floodFillLeaves(ServerLevel level, Set<BlockPos> logs,
                                         Block logType, Set<BlockPos> leaves) {
-        // Collect all nearby foreign logs of the same type (not part of our tree)
         Set<BlockPos> foreignLogs = new HashSet<>();
         for (BlockPos logPos : logs) {
             for (int x = -12; x <= 12; x++) {
@@ -346,10 +363,8 @@ public class LumberjackSystem {
                         BlockPos candidate = logPos.offset(x, y, z);
                         if (logs.contains(candidate)) continue;
                         if (foreignLogs.contains(candidate)) continue;
-                        BlockState s = level.getBlockState(candidate);
-                        if (s.getBlock() == logType) {
+                        if (level.getBlockState(candidate).getBlock() == logType)
                             foreignLogs.add(candidate);
-                        }
                     }
                 }
             }
@@ -357,7 +372,6 @@ public class LumberjackSystem {
 
         Queue<BlockPos> queue = new ArrayDeque<>();
 
-        // Seed from logs
         for (BlockPos logPos : logs) {
             for (BlockPos nb : getAllNeighbours(logPos)) {
                 if (logs.contains(nb) || leaves.contains(nb)) continue;
@@ -369,7 +383,6 @@ public class LumberjackSystem {
             }
         }
 
-        // Spread through connected leaves
         while (!queue.isEmpty() && leaves.size() < MAX_LEAVES) {
             BlockPos current        = queue.poll();
             double   closestLogDist = Double.MAX_VALUE;
@@ -377,7 +390,7 @@ public class LumberjackSystem {
                 double d = current.distSqr(logPos);
                 if (d < closestLogDist) closestLogDist = d;
             }
-            if (closestLogDist > 100) continue; // 10 blocks from nearest own log
+            if (closestLogDist > 100) continue;
 
             for (BlockPos nb : getAllNeighbours(current)) {
                 if (logs.contains(nb) || leaves.contains(nb)) continue;
@@ -394,22 +407,9 @@ public class LumberjackSystem {
                                                 Set<BlockPos> ownLogs,
                                                 Set<BlockPos> foreignLogs) {
         if (foreignLogs.isEmpty()) return false;
-
-        double closestOwn     = Double.MAX_VALUE;
-        double closestForeign = Double.MAX_VALUE;
-
-        for (BlockPos own : ownLogs) {
-            double d = pos.distSqr(own);
-            if (d < closestOwn) closestOwn = d;
-        }
-
-        for (BlockPos foreign : foreignLogs) {
-            double d = pos.distSqr(foreign);
-            if (d < closestForeign) closestForeign = d;
-        }
-
-        // Leaf belongs to the other tree if it's closer to a foreign log
-        // Small bias toward own tree (0.9) so boundary leaves lean toward staying
+        double closestOwn = Double.MAX_VALUE, closestForeign = Double.MAX_VALUE;
+        for (BlockPos own : ownLogs) { double d = pos.distSqr(own); if (d < closestOwn) closestOwn = d; }
+        for (BlockPos f : foreignLogs) { double d = pos.distSqr(f); if (d < closestForeign) closestForeign = d; }
         return closestForeign < closestOwn * 0.9;
     }
 
@@ -465,60 +465,46 @@ public class LumberjackSystem {
 
     private void resetTree() {
         targetTreePos    = null;
+        approachPos      = null;
         treeLogs.clear();
         treeLeaves.clear();
         stumpPos         = null;
         stumpLogType     = null;
         chopTicksElapsed = 0;
-        choppingDone     = false;
         idleSearchTimer  = 0;
     }
 
     // ── Getters / Setters ─────────────────────────────────────────────────────
 
-    public LumberjackState getCurrentState()               { return currentState; }
+    public LumberjackState getCurrentState()           { return currentState; }
     public void setCurrentState(LumberjackState state) {
-        if (this.currentState != state) {
-            this.stuckTimer = 0;
-        }
+        if (this.currentState != state) this.stuckTimer = 0;
         this.currentState = state;
     }
-    public boolean isChopping()                            { return currentState == LumberjackState.CHOPPING; }
-    public BlockPos getTargetTreePos()                     { return targetTreePos; }
-
-    private boolean isWithinRange() {
-        if (targetTreePos == null) return false;
-        double dx = peasant.getX() - (targetTreePos.getX() + 0.5);
-        double dz = peasant.getZ() - (targetTreePos.getZ() + 0.5);
-        return dx * dx + dz * dz < 9;
-    }
+    public BlockPos getTargetTreePos()                 { return targetTreePos; }
+    public BlockPos getApproachPos()                   { return approachPos; }
 
     // ── Save / Load ───────────────────────────────────────────────────────────
 
     public void save(CompoundTag tag) {
         tag.putString("LumberjackState", currentState.name());
-        if (targetTreePos != null) {
-            tag.putLong("TargetTreePos", targetTreePos.asLong());
-        }
+        if (targetTreePos != null) tag.putLong("TargetTreePos", targetTreePos.asLong());
+        if (approachPos   != null) tag.putLong("ApproachPos",   approachPos.asLong());
     }
 
     public void load(CompoundTag tag) {
         if (tag.contains("LumberjackState")) {
             try {
                 LumberjackState loaded = LumberjackState.valueOf(tag.getString("LumberjackState"));
-                if (loaded == LumberjackState.CHOPPING
+                currentState = (loaded == LumberjackState.CHOPPING
                         || loaded == LumberjackState.GOING_TO_TREE
-                        || loaded == LumberjackState.COLLECTING) {
-                    currentState = LumberjackState.IDLING;
-                } else {
-                    currentState = loaded;
-                }
+                        || loaded == LumberjackState.COLLECTING)
+                        ? LumberjackState.IDLING : loaded;
             } catch (IllegalArgumentException e) {
                 currentState = LumberjackState.GOING_TO_JOB_BLOCK;
             }
         }
-        if (tag.contains("TargetTreePos")) {
-            targetTreePos = BlockPos.of(tag.getLong("TargetTreePos"));
-        }
+        if (tag.contains("TargetTreePos")) targetTreePos = BlockPos.of(tag.getLong("TargetTreePos"));
+        if (tag.contains("ApproachPos"))   approachPos   = BlockPos.of(tag.getLong("ApproachPos"));
     }
 }
