@@ -29,78 +29,77 @@ public class ModCreativeFoods {
 
 
                         // ── Meats & Sausages ────────────────────────────────────────
+                        pOutput.accept(ModItems.RAW_AUROCHS.get());
+                        pOutput.accept(ModItems.COOKED_AUROCHS.get());
                         pOutput.accept(ModItems.RAW_BEAR_MEAT.get());
                         pOutput.accept(ModItems.COOKED_BEAR_MEAT.get());
-                        pOutput.accept(ModItems.RAW_SAUSAGE.get());
-                        pOutput.accept(ModItems.COOKED_SAUSAGE.get());
-                        pOutput.accept(ModItems.RAW_BLOOD_SAUSAGE.get());
-                        pOutput.accept(ModItems.COOKED_BLOOD_SAUSAGE.get());
-                        pOutput.accept(ModItems.RAW_WHITE_SAUSAGE.get());
-                        pOutput.accept(ModItems.COOKED_WHITE_SAUSAGE.get());
-                        pOutput.accept(ModItems.RAW_BACON.get());
-                        pOutput.accept(ModItems.COOKED_BACON.get());
                         pOutput.accept(ModItems.RAW_BOAR_VENISON.get());
                         pOutput.accept(ModItems.COOKED_BOAR_VENISON.get());
-                        pOutput.accept(ModItems.RAW_CHICKEN_NUGGETS.get());
-                        pOutput.accept(ModItems.COOKED_CHICKEN_NUGGETS.get());
                         pOutput.accept(ModItems.RAW_DEER_VENISON.get());
                         pOutput.accept(ModItems.COOKED_DEER_VENISON.get());
+                        pOutput.accept(ModItems.RAW_DOG.get());
+                        pOutput.accept(ModItems.COOKED_DOG.get());
+                        pOutput.accept(ModItems.RAW_DORMICE.get());
+                        pOutput.accept(ModItems.COOKED_DORMICE.get());
+                        pOutput.accept(ModItems.RAW_FROG.get());
+                        pOutput.accept(ModItems.COOKED_FROG.get());
                         pOutput.accept(ModItems.RAW_GOAT_MEAT.get());
                         pOutput.accept(ModItems.COOKED_GOAT_MEAT.get());
                         pOutput.accept(ModItems.RAW_HARE_MEAT.get());
                         pOutput.accept(ModItems.COOKED_HARE_MEAT.get());
                         pOutput.accept(ModItems.RAW_HORSE_MEAT.get());
                         pOutput.accept(ModItems.COOKED_HORSE_MEAT.get());
-                        pOutput.accept(ModItems.RAW_MAMMOTH_MEAT.get());
-                        pOutput.accept(ModItems.COOKED_MAMMOTH_MEAT.get());
-                        pOutput.accept(ModItems.RAW_AUROCHS.get());
-                        pOutput.accept(ModItems.COOKED_AUROCHS.get());
-                        pOutput.accept(ModItems.RAW_VENISON.get());
-                        pOutput.accept(ModItems.COOKED_VENISON.get());
                         pOutput.accept(ModItems.RAW_LAMB.get());
                         pOutput.accept(ModItems.COOKED_LAMB.get());
-                        pOutput.accept(ModItems.RAW_PORK.get());
-                        pOutput.accept(ModItems.COOKED_PORK.get());
-                        pOutput.accept(ModItems.SUCKLING_PIG.get());
-                        pOutput.accept(ModItems.RAW_DOG.get());
-                        pOutput.accept(ModItems.COOKED_DOG.get());
-                        pOutput.accept(ModItems.RAW_SNAKE.get());
-                        pOutput.accept(ModItems.COOKED_SNAKE.get());
-                        pOutput.accept(ModItems.RAW_FROG.get());
-                        pOutput.accept(ModItems.COOKED_FROG.get());
-                        pOutput.accept(ModItems.RAW_SQUIRREL.get());
-                        pOutput.accept(ModItems.COOKED_SQUIRREL.get());
+                        pOutput.accept(ModItems.RAW_LOCUSTS.get());
+                        pOutput.accept(ModItems.COOKED_LOCUSTS.get());
+                        pOutput.accept(ModItems.RAW_MAMMOTH_MEAT.get());
+                        pOutput.accept(ModItems.COOKED_MAMMOTH_MEAT.get());
+                        pOutput.accept(ModItems.RAW_MAN_FLESH.get());
+                        pOutput.accept(ModItems.COOKED_MAN_FLESH.get());
                         pOutput.accept(ModItems.RAW_RAT.get());
                         pOutput.accept(ModItems.COOKED_RAT.get());
-                        pOutput.accept(ModItems.DORMICE.get());
-                        pOutput.accept(ModItems.SNAILS.get());
-                        pOutput.accept(ModItems.LOCUSTS.get());
-                        pOutput.accept(ModItems.HONEYED_LOCUSTS.get());
-                        pOutput.accept(ModItems.STALLION_HEART.get());
-                        pOutput.accept(ModItems.KIDNEYS.get());
-                        pOutput.accept(ModItems.LIVER.get());
-                        pOutput.accept(ModItems.GOOSE_LIVER.get());
-                        pOutput.accept(ModItems.SWEETBREADS.get());
-                        pOutput.accept(ModItems.JELLIED_CALVES_BRAINS.get());
-                        pOutput.accept(ModItems.ROASTED_RIBS.get());
-                        pOutput.accept(ModItems.PEPPERED_BOAR.get());
-                        pOutput.accept(ModItems.ROAST_BOAR.get());
-                        pOutput.accept(ModItems.BLACK_SAUSAGE.get());
-                        pOutput.accept(ModItems.SALT_MUTTON.get());
-                        pOutput.accept(ModItems.BOILED_MUTTON.get());
-                        pOutput.accept(ModItems.MUTTON_CHOP.get());
-                        pOutput.accept(ModItems.MUTTON_STEW.get());
-                        pOutput.accept(ModItems.SPICED_MUTTON.get());
-                        pOutput.accept(ModItems.SALT_BEEF.get());
-                        pOutput.accept(ModItems.BEEF_AND_BARLEY_STEW.get());
+                        pOutput.accept(ModItems.RAW_SNAKE.get());
+                        pOutput.accept(ModItems.COOKED_SNAKE.get());
+                        pOutput.accept(ModItems.RAW_SNAIL.get());
+                        pOutput.accept(ModItems.COOKED_SNAIL.get());
+                        pOutput.accept(ModItems.RAW_SQUIRREL.get());
+                        pOutput.accept(ModItems.COOKED_SQUIRREL.get());
+                        pOutput.accept(ModItems.RAW_SUCKLING_PIG.get());
+                        pOutput.accept(ModItems.COOKED_SUCKLING_PIG.get());
+
+// ── Offal & Organ Meats ──────────────────────────────────────
+                        pOutput.accept(ModItems.RAW_BACON.get());
+                        pOutput.accept(ModItems.COOKED_BACON.get());
+                        pOutput.accept(ModItems.RAW_PIG_KIDNEYS.get());
+                        pOutput.accept(ModItems.COOKED_PIG_KIDNEYS.get());
+                        pOutput.accept(ModItems.RAW_PIG_LIVER.get());
+                        pOutput.accept(ModItems.COOKED_PIG_LIVER.get());
+                        pOutput.accept(ModItems.RAW_PIG_RIBS.get());
+                        pOutput.accept(ModItems.COOKED_PIG_RIBS.get());
+                        pOutput.accept(ModItems.RAW_GOOSE_LIVER.get());
+                        pOutput.accept(ModItems.COOKED_GOOSE_LIVER.get());
+                        pOutput.accept(ModItems.RAW_CALF_PANCREAS.get());
+                        pOutput.accept(ModItems.COOKED_CALF_PANCREAS.get());
+                        pOutput.accept(ModItems.HORSE_HEART.get());
+                        pOutput.accept(ModItems.JELLIED_CALVES_BRAIN.get());
+                        pOutput.accept(ModItems.MINCED_MEAT.get());
+                        pOutput.accept(ModItems.PIG_INTESTINES.get());
+                        pOutput.accept(ModItems.CALF_BRAIN.get());
+
+// ── Sausages ─────────────────────────────────────────────────
+                        pOutput.accept(ModItems.RAW_SAUSAGE.get());
+                        pOutput.accept(ModItems.COOKED_SAUSAGE.get());
+                        pOutput.accept(ModItems.RAW_BLOOD_SAUSAGE.get());
+                        pOutput.accept(ModItems.COOKED_BLOOD_SAUSAGE.get());
+                        pOutput.accept(ModItems.RAW_WHITE_SAUSAGE.get());
+                        pOutput.accept(ModItems.COOKED_WHITE_SAUSAGE.get());
 
 // ── Fowl ────────────────────────────────────────────────────
                         pOutput.accept(ModItems.RAW_PIGEON.get());
                         pOutput.accept(ModItems.COOKED_PIGEON.get());
                         pOutput.accept(ModItems.RAW_DUCK.get());
                         pOutput.accept(ModItems.COOKED_DUCK.get());
-                        pOutput.accept(ModItems.RAW_CAPON.get());
-                        pOutput.accept(ModItems.COOKED_CAPON.get());
                         pOutput.accept(ModItems.RAW_GOOSE.get());
                         pOutput.accept(ModItems.COOKED_GOOSE.get());
                         pOutput.accept(ModItems.RAW_GULL.get());
@@ -117,13 +116,13 @@ public class ModCreativeFoods {
                         pOutput.accept(ModItems.COOKED_QUAIL.get());
                         pOutput.accept(ModItems.RAW_SWAN.get());
                         pOutput.accept(ModItems.COOKED_SWAN.get());
-                        pOutput.accept(ModItems.SQUAB.get());
+                        pOutput.accept(ModItems.RAW_CHICKEN_NUGGETS.get());
+                        pOutput.accept(ModItems.COOKED_CHICKEN_NUGGETS.get());
 
 // ── Fish & Seafood ──────────────────────────────────────────
                         pOutput.accept(ModItems.RAW_HERRING.get());
                         pOutput.accept(ModItems.COOKED_HERRING.get());
                         pOutput.accept(ModItems.PICKLED_HERRING.get());
-                        pOutput.accept(ModItems.SALT_COD.get());
                         pOutput.accept(ModItems.RAW_TROUT.get());
                         pOutput.accept(ModItems.COOKED_TROUT.get());
                         pOutput.accept(ModItems.RAW_EEL.get());
@@ -144,9 +143,23 @@ public class ModCreativeFoods {
                         pOutput.accept(ModItems.COOKED_CRAB.get());
                         pOutput.accept(ModItems.RAW_LOBSTER.get());
                         pOutput.accept(ModItems.COOKED_LOBSTER.get());
-                        pOutput.accept(ModItems.CLAMS.get());
-                        pOutput.accept(ModItems.MUSSELS.get());
-                        pOutput.accept(ModItems.WINKLES.get());
+                        pOutput.accept(ModItems.RAW_CLAM.get());
+                        pOutput.accept(ModItems.COOKED_CLAM.get());
+                        pOutput.accept(ModItems.RAW_MUSSELS.get());
+                        pOutput.accept(ModItems.COOKED_MUSSELS.get());
+                        pOutput.accept(ModItems.RAW_WINKLES.get());
+                        pOutput.accept(ModItems.COOKED_WINKLES.get());
+
+// ── Prepared & Preserved ────────────────────────────────────
+                        pOutput.accept(ModItems.HONEYED_LOCUSTS.get());
+                        pOutput.accept(ModItems.BEEF_AND_BARLEY_STEW.get());
+                        pOutput.accept(ModItems.BEEF_STEW.get());
+                        pOutput.accept(ModItems.MUTTON_STEW.get());
+                        pOutput.accept(ModItems.SISTERS_STEW.get());
+                        pOutput.accept(ModItems.BOWL_OF_BROWN.get());
+                        pOutput.accept(ModItems.BREWIS.get());
+                        pOutput.accept(ModItems.JERKY.get());
+                        pOutput.accept(ModItems.HAM.get());
 
 // ── Baked Goods & Prepared Dishes ───────────────────────────
                         pOutput.accept(ModItems.BISCUITS.get());

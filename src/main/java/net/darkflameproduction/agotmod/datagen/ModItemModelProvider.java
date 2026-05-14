@@ -439,81 +439,11 @@ public class ModItemModelProvider extends ItemModelProvider {
 
 
 
-        // ---------------------------(SAPLINGS)--------------------------- //
-        // ---------------------------(FOODS)--------------------------- //
-// ── Meats & Sausages ────────────────────────────────────────
-        simpleItem(ModItems.RAW_BEAR_MEAT);
-        simpleItem(ModItems.COOKED_BEAR_MEAT);
-        simpleItem(ModItems.RAW_SAUSAGE);
-        simpleItem(ModItems.COOKED_SAUSAGE);
-        simpleItem(ModItems.RAW_BLOOD_SAUSAGE);
-        simpleItem(ModItems.COOKED_BLOOD_SAUSAGE);
-        simpleItem(ModItems.RAW_WHITE_SAUSAGE);
-        simpleItem(ModItems.COOKED_WHITE_SAUSAGE);
-        simpleItem(ModItems.RAW_BACON);
-        simpleItem(ModItems.COOKED_BACON);
-        simpleItem(ModItems.RAW_BOAR_VENISON);
-        simpleItem(ModItems.COOKED_BOAR_VENISON);
-        simpleItem(ModItems.RAW_CHICKEN_NUGGETS);
-        simpleItem(ModItems.COOKED_CHICKEN_NUGGETS);
-        simpleItem(ModItems.RAW_DEER_VENISON);
-        simpleItem(ModItems.COOKED_DEER_VENISON);
-        simpleItem(ModItems.RAW_GOAT_MEAT);
-        simpleItem(ModItems.COOKED_GOAT_MEAT);
-        simpleItem(ModItems.RAW_HARE_MEAT);
-        simpleItem(ModItems.COOKED_HARE_MEAT);
-        simpleItem(ModItems.RAW_HORSE_MEAT);
-        simpleItem(ModItems.COOKED_HORSE_MEAT);
-        simpleItem(ModItems.RAW_MAMMOTH_MEAT);
-        simpleItem(ModItems.COOKED_MAMMOTH_MEAT);
-        simpleItem(ModItems.RAW_AUROCHS);
-        simpleItem(ModItems.COOKED_AUROCHS);
-        simpleItem(ModItems.RAW_VENISON);
-        simpleItem(ModItems.COOKED_VENISON);
-        simpleItem(ModItems.RAW_LAMB);
-        simpleItem(ModItems.COOKED_LAMB);
-        simpleItem(ModItems.RAW_PORK);
-        simpleItem(ModItems.COOKED_PORK);
-        simpleItem(ModItems.SUCKLING_PIG);
-        simpleItem(ModItems.RAW_DOG);
-        simpleItem(ModItems.COOKED_DOG);
-        simpleItem(ModItems.RAW_SNAKE);
-        simpleItem(ModItems.COOKED_SNAKE);
-        simpleItem(ModItems.RAW_FROG);
-        simpleItem(ModItems.COOKED_FROG);
-        simpleItem(ModItems.RAW_SQUIRREL);
-        simpleItem(ModItems.COOKED_SQUIRREL);
-        simpleItem(ModItems.RAW_RAT);
-        simpleItem(ModItems.COOKED_RAT);
-        simpleItem(ModItems.DORMICE);
-        simpleItem(ModItems.SNAILS);
-        simpleItem(ModItems.LOCUSTS);
-        simpleItem(ModItems.HONEYED_LOCUSTS);
-        simpleItem(ModItems.STALLION_HEART);
-        simpleItem(ModItems.KIDNEYS);
-        simpleItem(ModItems.LIVER);
-        simpleItem(ModItems.GOOSE_LIVER);
-        simpleItem(ModItems.SWEETBREADS);
-        simpleItem(ModItems.JELLIED_CALVES_BRAINS);
-        simpleItem(ModItems.ROASTED_RIBS);
-        simpleItem(ModItems.PEPPERED_BOAR);
-        simpleItem(ModItems.ROAST_BOAR);
-        simpleItem(ModItems.BLACK_SAUSAGE);
-        simpleItem(ModItems.SALT_MUTTON);
-        simpleItem(ModItems.BOILED_MUTTON);
-        simpleItem(ModItems.MUTTON_CHOP);
-        simpleItem(ModItems.MUTTON_STEW);
-        simpleItem(ModItems.SPICED_MUTTON);
-        simpleItem(ModItems.SALT_BEEF);
-        simpleItem(ModItems.BEEF_AND_BARLEY_STEW);
-
-// ── Fowl ────────────────────────────────────────────────────
+// ── Fowl ─────────────────────────────────────────────────────────────────
         simpleItem(ModItems.RAW_PIGEON);
         simpleItem(ModItems.COOKED_PIGEON);
         simpleItem(ModItems.RAW_DUCK);
         simpleItem(ModItems.COOKED_DUCK);
-        simpleItem(ModItems.RAW_CAPON);
-        simpleItem(ModItems.COOKED_CAPON);
         simpleItem(ModItems.RAW_GOOSE);
         simpleItem(ModItems.COOKED_GOOSE);
         simpleItem(ModItems.RAW_GULL);
@@ -530,13 +460,81 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.COOKED_QUAIL);
         simpleItem(ModItems.RAW_SWAN);
         simpleItem(ModItems.COOKED_SWAN);
-        simpleItem(ModItems.SQUAB);
+        simpleItem(ModItems.RAW_CHICKEN_NUGGETS);
+        simpleItem(ModItems.COOKED_CHICKEN_NUGGETS);
 
-// ── Fish & Seafood ──────────────────────────────────────────
+// ── Meats ─────────────────────────────────────────────────────────────────
+        simpleItem(ModItems.RAW_AUROCHS);
+        simpleItem(ModItems.COOKED_AUROCHS);
+        simpleItem(ModItems.RAW_BEAR_MEAT);
+        simpleItem(ModItems.COOKED_BEAR_MEAT);
+        simpleItem(ModItems.RAW_BOAR_VENISON);
+        simpleItem(ModItems.COOKED_BOAR_VENISON);
+        simpleItem(ModItems.RAW_DEER_VENISON);
+        simpleItem(ModItems.COOKED_DEER_VENISON);
+        simpleItem(ModItems.RAW_DOG);
+        simpleItem(ModItems.COOKED_DOG);
+        simpleItem(ModItems.RAW_DORMICE);
+        simpleItem(ModItems.COOKED_DORMICE);
+        simpleItem(ModItems.RAW_FROG);
+        simpleItem(ModItems.COOKED_FROG);
+        simpleItem(ModItems.RAW_GOAT_MEAT);
+        simpleItem(ModItems.COOKED_GOAT_MEAT);
+        simpleItem(ModItems.RAW_HARE_MEAT);
+        simpleItem(ModItems.COOKED_HARE_MEAT);
+        simpleItem(ModItems.RAW_HORSE_MEAT);
+        simpleItem(ModItems.COOKED_HORSE_MEAT);
+        simpleItem(ModItems.RAW_LAMB);
+        simpleItem(ModItems.COOKED_LAMB);
+        simpleItem(ModItems.RAW_LOCUSTS);
+        simpleItem(ModItems.COOKED_LOCUSTS);
+        simpleItem(ModItems.RAW_MAMMOTH_MEAT);
+        simpleItem(ModItems.COOKED_MAMMOTH_MEAT);
+        simpleItem(ModItems.RAW_MAN_FLESH);
+        simpleItem(ModItems.COOKED_MAN_FLESH);
+        simpleItem(ModItems.RAW_RAT);
+        simpleItem(ModItems.COOKED_RAT);
+        simpleItem(ModItems.RAW_SNAKE);
+        simpleItem(ModItems.COOKED_SNAKE);
+        simpleItem(ModItems.RAW_SNAIL);
+        simpleItem(ModItems.COOKED_SNAIL);
+        simpleItem(ModItems.RAW_SQUIRREL);
+        simpleItem(ModItems.COOKED_SQUIRREL);
+        simpleItem(ModItems.RAW_SUCKLING_PIG);
+        simpleItem(ModItems.COOKED_SUCKLING_PIG);
+
+// ── Offal & Organ Meats ───────────────────────────────────────────────────
+        simpleItem(ModItems.RAW_BACON);
+        simpleItem(ModItems.COOKED_BACON);
+        simpleItem(ModItems.RAW_PIG_KIDNEYS);
+        simpleItem(ModItems.COOKED_PIG_KIDNEYS);
+        simpleItem(ModItems.RAW_PIG_LIVER);
+        simpleItem(ModItems.COOKED_PIG_LIVER);
+        simpleItem(ModItems.RAW_PIG_RIBS);
+        simpleItem(ModItems.COOKED_PIG_RIBS);
+        simpleItem(ModItems.RAW_GOOSE_LIVER);
+        simpleItem(ModItems.COOKED_GOOSE_LIVER);
+        simpleItem(ModItems.RAW_CALF_PANCREAS);
+        simpleItem(ModItems.COOKED_CALF_PANCREAS);
+        simpleItem(ModItems.HORSE_HEART);
+        simpleItem(ModItems.JELLIED_CALVES_BRAIN);
+
+// ── Sausages ─────────────────────────────────────────────────────────────
+        simpleItem(ModItems.RAW_SAUSAGE);
+        simpleItem(ModItems.COOKED_SAUSAGE);
+        simpleItem(ModItems.RAW_BLOOD_SAUSAGE);
+        simpleItem(ModItems.COOKED_BLOOD_SAUSAGE);
+        simpleItem(ModItems.RAW_WHITE_SAUSAGE);
+        simpleItem(ModItems.COOKED_WHITE_SAUSAGE);
+
+// ── Other Ingredient Meats ────────────────────────────────────────────────
+        simpleItem(ModItems.MINCED_MEAT);
+        simpleItem(ModItems.PIG_INTESTINES);
+        simpleItem(ModItems.CALF_BRAIN);
+
+// ── Fish & Seafood ────────────────────────────────────────────────────────
         simpleItem(ModItems.RAW_HERRING);
         simpleItem(ModItems.COOKED_HERRING);
-        simpleItem(ModItems.PICKLED_HERRING);
-        simpleItem(ModItems.SALT_COD);
         simpleItem(ModItems.RAW_TROUT);
         simpleItem(ModItems.COOKED_TROUT);
         simpleItem(ModItems.RAW_EEL);
@@ -557,9 +555,24 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.COOKED_CRAB);
         simpleItem(ModItems.RAW_LOBSTER);
         simpleItem(ModItems.COOKED_LOBSTER);
-        simpleItem(ModItems.CLAMS);
-        simpleItem(ModItems.MUSSELS);
-        simpleItem(ModItems.WINKLES);
+        simpleItem(ModItems.RAW_CLAM);
+        simpleItem(ModItems.COOKED_CLAM);
+        simpleItem(ModItems.RAW_MUSSELS);
+        simpleItem(ModItems.COOKED_MUSSELS);
+        simpleItem(ModItems.RAW_WINKLES);
+        simpleItem(ModItems.COOKED_WINKLES);
+
+// ── Prepared & Preserved ─────────────────────────────────────────────────
+        simpleItem(ModItems.PICKLED_HERRING);
+        simpleItem(ModItems.HONEYED_LOCUSTS);
+        simpleItem(ModItems.BEEF_AND_BARLEY_STEW);
+        simpleItem(ModItems.BEEF_STEW);
+        simpleItem(ModItems.MUTTON_STEW);
+        simpleItem(ModItems.SISTERS_STEW);
+        simpleItem(ModItems.BOWL_OF_BROWN);
+        simpleItem(ModItems.BREWIS);
+        simpleItem(ModItems.JERKY);
+        simpleItem(ModItems.HAM);
 
 // ── Baked Goods & Prepared Dishes ───────────────────────────
         simpleItem(ModItems.BISCUITS);

@@ -8,149 +8,6 @@ import net.minecraft.world.food.FoodProperties;
 // A utility class for defining custom food properties
 public class ModFoods {
 
-    // Food properties for raw bear meat
-    public static final FoodProperties RAW_BEAR_MEAT = new FoodProperties.Builder()
-            .nutrition(4) // Amount of hunger restored
-            .saturationModifier(0.3F) // Saturation modifier
-            .build();
-
-    // Food properties for cooked bear meat
-    public static final FoodProperties COOKED_BEAR_MEAT = new FoodProperties.Builder()
-            .nutrition(12) // Amount of hunger restored
-            .saturationModifier(0.8F) // Saturation modifier
-            .build();
-
-    // Food properties for raw white sausage
-    public static final FoodProperties RAW_WHITE_SAUSAGE = new FoodProperties.Builder()
-            .nutrition(2) // Amount of hunger restored
-            .saturationModifier(0.1F) // Saturation modifier
-            .build();
-
-    // Food properties for raw blood sausage
-    public static final FoodProperties RAW_BLOOD_SAUSAGE = new FoodProperties.Builder()
-            .nutrition(2) // Amount of hunger restored
-            .saturationModifier(0.1F) // Saturation modifier
-            .build();
-
-    // Food properties for raw sausage
-    public static final FoodProperties RAW_SAUSAGE = new FoodProperties.Builder()
-            .nutrition(2) // Amount of hunger restored
-            .saturationModifier(0.1F) // Saturation modifier
-            .build();
-
-    // Food properties for cooked white sausage
-    public static final FoodProperties COOKED_WHITE_SAUSAGE = new FoodProperties.Builder()
-            .nutrition(10) // Amount of hunger restored
-            .saturationModifier(0.8F) // Saturation modifier
-            .build();
-
-    // Food properties for cooked blood sausage
-    public static final FoodProperties COOKED_BLOOD_SAUSAGE = new FoodProperties.Builder()
-            .nutrition(10) // Amount of hunger restored
-            .saturationModifier(0.8F) // Saturation modifier
-            .build();
-
-    // Food properties for cooked sausage
-    public static final FoodProperties COOKED_SAUSAGE = new FoodProperties.Builder()
-            .nutrition(10) // Amount of hunger restored
-            .saturationModifier(0.8F) // Saturation modifier
-            .build();
-
-    // Food properties for raw bacon
-    public static final FoodProperties RAW_BACON = new FoodProperties.Builder()
-            .nutrition(1) // Amount of hunger restored
-            .saturationModifier(0.3F) // Saturation modifier
-            .build();
-
-    // Food properties for cooked bacon
-    public static final FoodProperties COOKED_BACON = new FoodProperties.Builder()
-            .nutrition(6) // Amount of hunger restored
-            .saturationModifier(0.8F) // Saturation modifier
-            .build();
-
-    // Food properties for raw boar venison
-    public static final FoodProperties RAW_BOAR_VENISON = new FoodProperties.Builder()
-            .nutrition(3) // Amount of hunger restored
-            .saturationModifier(0.3F) // Saturation modifier
-            .build();
-
-    // Food properties for cooked boar venison
-    public static final FoodProperties COOKED_BOAR_VENISON = new FoodProperties.Builder()
-            .nutrition(9) // Amount of hunger restored
-            .saturationModifier(0.8F) // Saturation modifier
-            .build();
-
-    // Food properties for raw chicken nuggets
-    public static final FoodProperties RAW_CHICKEN_NUGGETS = new FoodProperties.Builder()
-            .nutrition(1) // Amount of hunger restored
-            .saturationModifier(0.3F) // Saturation modifier
-            .build();
-
-    // Food properties for cooked chicken nuggets
-    public static final FoodProperties COOKED_CHICKEN_NUGGETS = new FoodProperties.Builder()
-            .nutrition(4) // Amount of hunger restored
-            .saturationModifier(0.8F) // Saturation modifier
-            .build();
-
-    // Food properties for raw deer venison
-    public static final FoodProperties RAW_DEER_VENISON = new FoodProperties.Builder()
-            .nutrition(2) // Amount of hunger restored
-            .saturationModifier(0.3F) // Saturation modifier
-            .build();
-
-    // Food properties for cooked deer venison
-    public static final FoodProperties COOKED_DEER_VENISON = new FoodProperties.Builder()
-            .nutrition(8) // Amount of hunger restored
-            .saturationModifier(0.8F) // Saturation modifier
-            .build();
-
-    // Food properties for raw goat meat
-    public static final FoodProperties RAW_GOAT_MEAT = new FoodProperties.Builder()
-            .nutrition(2) // Amount of hunger restored
-            .saturationModifier(0.3F) // Saturation modifier
-            .build();
-
-    // Food properties for cooked goat meat
-    public static final FoodProperties COOKED_GOAT_MEAT = new FoodProperties.Builder()
-            .nutrition(7) // Amount of hunger restored
-            .saturationModifier(0.8F) // Saturation modifier
-            .build();
-
-    // Food properties for raw hare meat
-    public static final FoodProperties RAW_HARE_MEAT = new FoodProperties.Builder()
-            .nutrition(2) // Amount of hunger restored
-            .saturationModifier(0.3F) // Saturation modifier
-            .build();
-
-    // Food properties for cooked hare meat
-    public static final FoodProperties COOKED_HARE_MEAT = new FoodProperties.Builder()
-            .nutrition(6) // Amount of hunger restored
-            .saturationModifier(0.8F) // Saturation modifier
-            .build();
-
-    // Food properties for raw horse meat
-    public static final FoodProperties RAW_HORSE_MEAT = new FoodProperties.Builder()
-            .nutrition(2) // Amount of hunger restored
-            .saturationModifier(0.3F) // Saturation modifier
-            .build();
-
-    // Food properties for cooked horse meat
-    public static final FoodProperties COOKED_HORSE_MEAT = new FoodProperties.Builder()
-            .nutrition(8) // Amount of hunger restored
-            .saturationModifier(0.8F) // Saturation modifier
-            .build();
-
-    // Food properties for raw mammoth meat
-    public static final FoodProperties RAW_MAMMOTH_MEAT = new FoodProperties.Builder()
-            .nutrition(4) // Amount of hunger restored
-            .saturationModifier(0.3F) // Saturation modifier
-            .build();
-
-    // Food properties for cooked mammoth meat
-    public static final FoodProperties COOKED_MAMMOTH_MEAT = new FoodProperties.Builder()
-            .nutrition(12) // Amount of hunger restored
-            .saturationModifier(0.8F) // Saturation modifier
-            .build();
 
     // Food properties for horseradish
     public static final FoodProperties HORSERADISH = new FoodProperties.Builder()
@@ -267,6 +124,7 @@ public class ModFoods {
 // ============================================================
 
     // ── FOWL ────────────────────────────────────────────────────
+// ── FOWL ─────────────────────────────────────────────────────────────────
     public static final FoodProperties RAW_PIGEON = new FoodProperties.Builder()
             .nutrition(1).saturationModifier(0.3F).build();
     public static final FoodProperties COOKED_PIGEON = new FoodProperties.Builder()
@@ -274,10 +132,6 @@ public class ModFoods {
     public static final FoodProperties RAW_DUCK = new FoodProperties.Builder()
             .nutrition(2).saturationModifier(0.3F).build();
     public static final FoodProperties COOKED_DUCK = new FoodProperties.Builder()
-            .nutrition(7).saturationModifier(0.8F).build();
-    public static final FoodProperties RAW_CAPON = new FoodProperties.Builder()
-            .nutrition(2).saturationModifier(0.3F).build();
-    public static final FoodProperties COOKED_CAPON = new FoodProperties.Builder()
             .nutrition(7).saturationModifier(0.8F).build();
     public static final FoodProperties RAW_GOOSE = new FoodProperties.Builder()
             .nutrition(3).saturationModifier(0.3F).build();
@@ -311,100 +165,145 @@ public class ModFoods {
             .nutrition(3).saturationModifier(0.3F).build();
     public static final FoodProperties COOKED_SWAN = new FoodProperties.Builder()
             .nutrition(8).saturationModifier(0.8F).build();
-    public static final FoodProperties SQUAB = new FoodProperties.Builder()
-            .nutrition(3).saturationModifier(0.7F).build();
+    public static final FoodProperties RAW_CHICKEN_NUGGETS = new FoodProperties.Builder()
+            .nutrition(2).saturationModifier(0.3F).build();
+    public static final FoodProperties COOKED_CHICKEN_NUGGETS = new FoodProperties.Builder()
+            .nutrition(6).saturationModifier(0.7F).build();
 
-    // ── MEATS ───────────────────────────────────────────────────
+    public static final FoodProperties RAW_SAUSAGE = new FoodProperties.Builder()
+            .nutrition(2).saturationModifier(0.3F).build();
+    public static final FoodProperties COOKED_SAUSAGE = new FoodProperties.Builder()
+            .nutrition(6).saturationModifier(0.7F).build();
+    public static final FoodProperties RAW_BLOOD_SAUSAGE = new FoodProperties.Builder()
+            .nutrition(2).saturationModifier(0.3F).build();
+    public static final FoodProperties COOKED_BLOOD_SAUSAGE = new FoodProperties.Builder()
+            .nutrition(6).saturationModifier(0.7F).build();
+    public static final FoodProperties RAW_WHITE_SAUSAGE = new FoodProperties.Builder()
+            .nutrition(2).saturationModifier(0.3F).build();
+    public static final FoodProperties COOKED_WHITE_SAUSAGE = new FoodProperties.Builder()
+            .nutrition(6).saturationModifier(0.7F).build();
+
+    // ── MEATS ─────────────────────────────────────────────────────────────────
     public static final FoodProperties RAW_AUROCHS = new FoodProperties.Builder()
             .nutrition(4).saturationModifier(0.3F).build();
     public static final FoodProperties COOKED_AUROCHS = new FoodProperties.Builder()
             .nutrition(12).saturationModifier(0.8F).build();
-    public static final FoodProperties RAW_VENISON = new FoodProperties.Builder()
-            .nutrition(2).saturationModifier(0.3F).build();
-    public static final FoodProperties COOKED_VENISON = new FoodProperties.Builder()
-            .nutrition(8).saturationModifier(0.8F).build();
-    public static final FoodProperties RAW_LAMB = new FoodProperties.Builder()
-            .nutrition(2).saturationModifier(0.3F).build();
-    public static final FoodProperties COOKED_LAMB = new FoodProperties.Builder()
-            .nutrition(7).saturationModifier(0.8F).build();
-    public static final FoodProperties RAW_PORK = new FoodProperties.Builder()
+    public static final FoodProperties RAW_BEAR_MEAT = new FoodProperties.Builder()
+            .nutrition(4).saturationModifier(0.3F).build();
+    public static final FoodProperties COOKED_BEAR_MEAT = new FoodProperties.Builder()
+            .nutrition(10).saturationModifier(0.8F).build();
+    public static final FoodProperties RAW_BOAR_VENISON = new FoodProperties.Builder()
             .nutrition(3).saturationModifier(0.3F).build();
-    public static final FoodProperties COOKED_PORK = new FoodProperties.Builder()
-            .nutrition(8).saturationModifier(0.8F).build();
-    public static final FoodProperties SUCKLING_PIG = new FoodProperties.Builder()
-            .nutrition(10).saturationModifier(0.9F).build();
+    public static final FoodProperties COOKED_BOAR_VENISON = new FoodProperties.Builder()
+            .nutrition(9).saturationModifier(0.8F).build();
+    public static final FoodProperties RAW_DEER_VENISON = new FoodProperties.Builder()
+            .nutrition(3).saturationModifier(0.3F).build();
+    public static final FoodProperties COOKED_DEER_VENISON = new FoodProperties.Builder()
+            .nutrition(9).saturationModifier(0.8F).build();
     public static final FoodProperties RAW_DOG = new FoodProperties.Builder()
             .nutrition(2).saturationModifier(0.3F).build();
     public static final FoodProperties COOKED_DOG = new FoodProperties.Builder()
             .nutrition(6).saturationModifier(0.7F).build();
-    public static final FoodProperties RAW_SNAKE = new FoodProperties.Builder()
-            .nutrition(2).saturationModifier(0.3F).build();
-    public static final FoodProperties COOKED_SNAKE = new FoodProperties.Builder()
-            .nutrition(5).saturationModifier(0.6F).build();
+    public static final FoodProperties RAW_DORMICE = new FoodProperties.Builder()
+            .nutrition(1).saturationModifier(0.1F).build();
+    public static final FoodProperties COOKED_DORMICE = new FoodProperties.Builder()
+            .nutrition(2).saturationModifier(0.6F).build();
     public static final FoodProperties RAW_FROG = new FoodProperties.Builder()
             .nutrition(1).saturationModifier(0.2F).build();
     public static final FoodProperties COOKED_FROG = new FoodProperties.Builder()
             .nutrition(4).saturationModifier(0.6F).build();
-    public static final FoodProperties RAW_SQUIRREL = new FoodProperties.Builder()
-            .nutrition(1).saturationModifier(0.2F).build();
-    public static final FoodProperties COOKED_SQUIRREL = new FoodProperties.Builder()
-            .nutrition(4).saturationModifier(0.6F).build();
+    public static final FoodProperties RAW_GOAT_MEAT = new FoodProperties.Builder()
+            .nutrition(2).saturationModifier(0.3F).build();
+    public static final FoodProperties COOKED_GOAT_MEAT = new FoodProperties.Builder()
+            .nutrition(7).saturationModifier(0.8F).build();
+    public static final FoodProperties RAW_HARE_MEAT = new FoodProperties.Builder()
+            .nutrition(2).saturationModifier(0.3F).build();
+    public static final FoodProperties COOKED_HARE_MEAT = new FoodProperties.Builder()
+            .nutrition(6).saturationModifier(0.7F).build();
+    public static final FoodProperties RAW_HORSE_MEAT = new FoodProperties.Builder()
+            .nutrition(3).saturationModifier(0.3F).build();
+    public static final FoodProperties COOKED_HORSE_MEAT = new FoodProperties.Builder()
+            .nutrition(9).saturationModifier(0.8F).build();
+    public static final FoodProperties RAW_LAMB = new FoodProperties.Builder()
+            .nutrition(2).saturationModifier(0.3F).build();
+    public static final FoodProperties COOKED_LAMB = new FoodProperties.Builder()
+            .nutrition(7).saturationModifier(0.8F).build();
+    public static final FoodProperties RAW_LOCUSTS = new FoodProperties.Builder()
+            .nutrition(1).saturationModifier(0.1F).build();
+    public static final FoodProperties COOKED_LOCUSTS = new FoodProperties.Builder()
+            .nutrition(2).saturationModifier(0.4F).build();
+    public static final FoodProperties RAW_MAMMOTH_MEAT = new FoodProperties.Builder()
+            .nutrition(5).saturationModifier(0.3F).build();
+    public static final FoodProperties COOKED_MAMMOTH_MEAT = new FoodProperties.Builder()
+            .nutrition(14).saturationModifier(0.9F).build();
+    public static final FoodProperties RAW_MAN_FLESH = new FoodProperties.Builder()
+            .nutrition(3).saturationModifier(0.3F).build();
+    public static final FoodProperties COOKED_MAN_FLESH = new FoodProperties.Builder()
+            .nutrition(8).saturationModifier(0.8F).build();
     public static final FoodProperties RAW_RAT = new FoodProperties.Builder()
             .nutrition(1).saturationModifier(0.1F).build();
     public static final FoodProperties COOKED_RAT = new FoodProperties.Builder()
             .nutrition(3).saturationModifier(0.5F).build();
-    public static final FoodProperties DORMICE = new FoodProperties.Builder()
-            .nutrition(2).saturationModifier(0.6F).build();
-    public static final FoodProperties SNAILS = new FoodProperties.Builder()
-            .nutrition(2).saturationModifier(0.4F).build();
-    public static final FoodProperties LOCUSTS = new FoodProperties.Builder()
-            .nutrition(1).saturationModifier(0.2F).build();
-    public static final FoodProperties HONEYED_LOCUSTS = new FoodProperties.Builder()
-            .nutrition(3).saturationModifier(0.5F).build();
-    public static final FoodProperties STALLION_HEART = new FoodProperties.Builder()
-            .nutrition(6).saturationModifier(0.5F).build();
-    public static final FoodProperties KIDNEYS = new FoodProperties.Builder()
-            .nutrition(4).saturationModifier(0.5F).build();
-    public static final FoodProperties LIVER = new FoodProperties.Builder()
-            .nutrition(4).saturationModifier(0.5F).build();
-    public static final FoodProperties GOOSE_LIVER = new FoodProperties.Builder()
-            .nutrition(5).saturationModifier(0.7F).build();
-    public static final FoodProperties SWEETBREADS = new FoodProperties.Builder()
-            .nutrition(4).saturationModifier(0.6F).build();
-    public static final FoodProperties JELLIED_CALVES_BRAINS = new FoodProperties.Builder()
-            .nutrition(3).saturationModifier(0.5F).build();
-    public static final FoodProperties ROASTED_RIBS = new FoodProperties.Builder()
-            .nutrition(8).saturationModifier(0.8F).build();
-    public static final FoodProperties PEPPERED_BOAR = new FoodProperties.Builder()
-            .nutrition(8).saturationModifier(0.8F).build();
-    public static final FoodProperties ROAST_BOAR = new FoodProperties.Builder()
-            .nutrition(10).saturationModifier(0.9F).build();
-    public static final FoodProperties BLACK_SAUSAGE = new FoodProperties.Builder()
-            .nutrition(6).saturationModifier(0.7F).build();
-    public static final FoodProperties SALT_MUTTON = new FoodProperties.Builder()
+    public static final FoodProperties RAW_SNAKE = new FoodProperties.Builder()
+            .nutrition(2).saturationModifier(0.3F).build();
+    public static final FoodProperties COOKED_SNAKE = new FoodProperties.Builder()
             .nutrition(5).saturationModifier(0.6F).build();
-    public static final FoodProperties BOILED_MUTTON = new FoodProperties.Builder()
-            .nutrition(6).saturationModifier(0.7F).build();
-    public static final FoodProperties MUTTON_CHOP = new FoodProperties.Builder()
-            .nutrition(7).saturationModifier(0.8F).build();
-    public static final FoodProperties MUTTON_STEW = new FoodProperties.Builder()
-            .nutrition(8).saturationModifier(0.8F).build();
-    public static final FoodProperties SPICED_MUTTON = new FoodProperties.Builder()
-            .nutrition(7).saturationModifier(0.8F).build();
-    public static final FoodProperties SALT_BEEF = new FoodProperties.Builder()
-            .nutrition(6).saturationModifier(0.7F).build();
-    public static final FoodProperties BEEF_AND_BARLEY_STEW = new FoodProperties.Builder()
-            .nutrition(9).saturationModifier(0.8F).build();
+    public static final FoodProperties RAW_SNAIL = new FoodProperties.Builder()
+            .nutrition(1).saturationModifier(0.1F).build();
+    public static final FoodProperties COOKED_SNAIL = new FoodProperties.Builder()
+            .nutrition(2).saturationModifier(0.4F).build();
+    public static final FoodProperties RAW_SQUIRREL = new FoodProperties.Builder()
+            .nutrition(1).saturationModifier(0.2F).build();
+    public static final FoodProperties COOKED_SQUIRREL = new FoodProperties.Builder()
+            .nutrition(4).saturationModifier(0.6F).build();
+    public static final FoodProperties RAW_SUCKLING_PIG = new FoodProperties.Builder()
+            .nutrition(2).saturationModifier(0.3F).build();
+    public static final FoodProperties COOKED_SUCKLING_PIG = new FoodProperties.Builder()
+            .nutrition(10).saturationModifier(0.9F).build();
 
-    // ── FISH & SEAFOOD ──────────────────────────────────────────
+    // ── OFFAL & ORGAN MEATS ───────────────────────────────────────────────────
+    public static final FoodProperties RAW_BACON = new FoodProperties.Builder()
+            .nutrition(2).saturationModifier(0.3F).build();
+    public static final FoodProperties COOKED_BACON = new FoodProperties.Builder()
+            .nutrition(6).saturationModifier(0.7F).build();
+    public static final FoodProperties RAW_PIG_KIDNEYS = new FoodProperties.Builder()
+            .nutrition(4).saturationModifier(0.2F).build();
+    public static final FoodProperties COOKED_PIG_KIDNEYS = new FoodProperties.Builder()
+            .nutrition(4).saturationModifier(0.5F).build();
+    public static final FoodProperties RAW_PIG_LIVER = new FoodProperties.Builder()
+            .nutrition(4).saturationModifier(0.2F).build();
+    public static final FoodProperties COOKED_PIG_LIVER = new FoodProperties.Builder()
+            .nutrition(4).saturationModifier(0.2F).build();
+    public static final FoodProperties RAW_PIG_RIBS = new FoodProperties.Builder()
+            .nutrition(3).saturationModifier(0.3F).build();
+    public static final FoodProperties COOKED_PIG_RIBS = new FoodProperties.Builder()
+            .nutrition(8).saturationModifier(0.8F).build();
+    public static final FoodProperties RAW_GOOSE_LIVER = new FoodProperties.Builder()
+            .nutrition(4).saturationModifier(0.2F).build();
+    public static final FoodProperties COOKED_GOOSE_LIVER = new FoodProperties.Builder()
+            .nutrition(5).saturationModifier(0.5F).build();
+    public static final FoodProperties RAW_CALF_PANCREAS = new FoodProperties.Builder()
+            .nutrition(3).saturationModifier(0.2F).build();
+    public static final FoodProperties COOKED_CALF_PANCREAS = new FoodProperties.Builder()
+            .nutrition(4).saturationModifier(0.6F).build();
+    public static final FoodProperties HORSE_HEART = new FoodProperties.Builder()
+            .nutrition(6).saturationModifier(0.5F).build();
+    public static final FoodProperties JELLIED_CALVES_BRAIN = new FoodProperties.Builder()
+            .nutrition(3).saturationModifier(0.5F).build();
+
+    // ── OTHER INGREDIENT MEATS ────────────────────────────────────────────────
+    public static final FoodProperties MINCED_MEAT = new FoodProperties.Builder()
+            .nutrition(2).saturationModifier(0.2F).build();
+    public static final FoodProperties PIG_INTESTINES = new FoodProperties.Builder()
+            .nutrition(1).saturationModifier(0.1F).build();
+    public static final FoodProperties CALF_BRAIN = new FoodProperties.Builder()
+            .nutrition(2).saturationModifier(0.3F).build();
+
+    // ── FISH & SEAFOOD ────────────────────────────────────────────────────────
     public static final FoodProperties RAW_HERRING = new FoodProperties.Builder()
             .nutrition(2).saturationModifier(0.1F).build();
     public static final FoodProperties COOKED_HERRING = new FoodProperties.Builder()
             .nutrition(5).saturationModifier(0.6F).build();
-    public static final FoodProperties PICKLED_HERRING = new FoodProperties.Builder()
-            .nutrition(4).saturationModifier(0.5F).build();
-    public static final FoodProperties SALT_COD = new FoodProperties.Builder()
-            .nutrition(4).saturationModifier(0.5F).build();
     public static final FoodProperties RAW_TROUT = new FoodProperties.Builder()
             .nutrition(2).saturationModifier(0.1F).build();
     public static final FoodProperties COOKED_TROUT = new FoodProperties.Builder()
@@ -445,18 +344,44 @@ public class ModFoods {
             .nutrition(3).saturationModifier(0.1F).build();
     public static final FoodProperties COOKED_LOBSTER = new FoodProperties.Builder()
             .nutrition(8).saturationModifier(0.8F).build();
-    public static final FoodProperties CLAMS = new FoodProperties.Builder()
+    public static final FoodProperties RAW_CLAM = new FoodProperties.Builder()
+            .nutrition(1).saturationModifier(0.1F).build();
+    public static final FoodProperties COOKED_CLAM = new FoodProperties.Builder()
+            .nutrition(3).saturationModifier(0.4F).build();
+    public static final FoodProperties RAW_MUSSELS = new FoodProperties.Builder()
             .nutrition(2).saturationModifier(0.3F).build();
-    public static final FoodProperties MUSSELS = new FoodProperties.Builder()
-            .nutrition(2).saturationModifier(0.3F).build();
-    public static final FoodProperties WINKLES = new FoodProperties.Builder()
+    public static final FoodProperties COOKED_MUSSELS = new FoodProperties.Builder()
+            .nutrition(3).saturationModifier(0.5F).build();
+    public static final FoodProperties RAW_WINKLES = new FoodProperties.Builder()
             .nutrition(1).saturationModifier(0.3F).build();
+    public static final FoodProperties COOKED_WINKLES = new FoodProperties.Builder()
+            .nutrition(2).saturationModifier(0.4F).build();
+
+    // ── PREPARED & PRESERVED ─────────────────────────────────────────────────
+    public static final FoodProperties PICKLED_HERRING = new FoodProperties.Builder()
+            .nutrition(4).saturationModifier(0.5F).build();
+    public static final FoodProperties HONEYED_LOCUSTS = new FoodProperties.Builder()
+            .nutrition(3).saturationModifier(0.5F).build();
+    public static final FoodProperties BEEF_AND_BARLEY_STEW = new FoodProperties.Builder()
+            .nutrition(9).saturationModifier(0.8F).build();
+    public static final FoodProperties BEEF_STEW = new FoodProperties.Builder()
+            .nutrition(8).saturationModifier(0.8F).build();
+    public static final FoodProperties MUTTON_STEW = new FoodProperties.Builder()
+            .nutrition(8).saturationModifier(0.8F).build();
+    public static final FoodProperties SISTERS_STEW = new FoodProperties.Builder()
+            .nutrition(7).saturationModifier(0.7F).build();
+    public static final FoodProperties BOWL_OF_BROWN = new FoodProperties.Builder()
+            .nutrition(5).saturationModifier(0.5F).build();
+    public static final FoodProperties BREWIS = new FoodProperties.Builder()
+            .nutrition(4).saturationModifier(0.4F).build();
+    public static final FoodProperties JERKY = new FoodProperties.Builder()
+            .nutrition(5).saturationModifier(0.6F).build();
+    public static final FoodProperties HAM = new FoodProperties.Builder()
+            .nutrition(7).saturationModifier(0.7F).build();
 
     // ── BAKED GOODS & PREPARED DISHES ───────────────────────────
     public static final FoodProperties BISCUITS = new FoodProperties.Builder()
             .nutrition(3).saturationModifier(0.4F).build();
-    public static final FoodProperties BOWL_OF_BROWN = new FoodProperties.Builder()
-            .nutrition(4).saturationModifier(0.3F).build();
     public static final FoodProperties BARLEY_BREAD = new FoodProperties.Builder()
             .nutrition(4).saturationModifier(0.5F).build();
     public static final FoodProperties BLACK_BREAD = new FoodProperties.Builder()
@@ -501,8 +426,6 @@ public class ModFoods {
             .nutrition(4).saturationModifier(0.5F).build();
     public static final FoodProperties BERRY_TARTS = new FoodProperties.Builder()
             .nutrition(4).saturationModifier(0.5F).build();
-    public static final FoodProperties SISTERS_STEW = new FoodProperties.Builder()
-            .nutrition(7).saturationModifier(0.7F).build();
     public static final FoodProperties PEA_SOUP = new FoodProperties.Builder()
             .nutrition(5).saturationModifier(0.5F).build();
 

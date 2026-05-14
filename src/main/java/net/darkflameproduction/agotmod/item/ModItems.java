@@ -592,54 +592,7 @@ public class ModItems {
 
 
     // ---------------------------(FOODS)--------------------------- //
-    public static final DeferredItem<Item> RAW_BEAR_MEAT = ITEMS.registerItem("raw_bear_meat",
-            properties -> new Item(properties.food(ModFoods.RAW_BEAR_MEAT, ModConsumables.RAW_BEAR_MEAT)));
-    public static final DeferredItem<Item> COOKED_BEAR_MEAT = ITEMS.registerItem("cooked_bear_meat",
-            properties -> new Item(properties.food(ModFoods.COOKED_BEAR_MEAT)));
-    public static final DeferredItem<Item> COOKED_WHITE_SAUSAGE = ITEMS.registerItem("cooked_white_sausage",
-            properties -> new Item(properties.food(ModFoods.COOKED_BEAR_MEAT)));
-    public static final DeferredItem<Item> COOKED_BLOOD_SAUSAGE = ITEMS.registerItem("cooked_blood_sausage",
-            properties -> new Item(properties.food(ModFoods.COOKED_BEAR_MEAT)));
-    public static final DeferredItem<Item> COOKED_SAUSAGE = ITEMS.registerItem("cooked_sausage",
-            properties -> new Item(properties.food(ModFoods.COOKED_BEAR_MEAT)));
-    public static final DeferredItem<Item> RAW_WHITE_SAUSAGE = ITEMS.registerItem("raw_white_sausage",
-            properties -> new Item(properties.food(Foods.HONEY_BOTTLE, ModConsumables.RAW_WHITE_SAUSAGE)));
-    public static final DeferredItem<Item> RAW_BLOOD_SAUSAGE = ITEMS.registerItem("raw_blood_sausage",
-            properties -> new Item(properties.food(ModFoods.RAW_BLOOD_SAUSAGE, ModConsumables.RAW_BLOOD_SAUSAGE)));
-    public static final DeferredItem<Item> RAW_SAUSAGE = ITEMS.registerItem("raw_sausage",
-            properties -> new Item(properties.food(ModFoods.RAW_SAUSAGE, ModConsumables.RAW_SAUSAGE)));
-    public static final DeferredItem<Item> COOKED_BACON = ITEMS.registerItem("cooked_bacon",
-            properties -> new Item(properties.food(ModFoods.COOKED_BACON)));
-    public static final DeferredItem<Item> RAW_BACON = ITEMS.registerItem("raw_bacon",
-            properties -> new Item(properties.food(ModFoods.RAW_BACON, ModConsumables.RAW_BACON)));
-    public static final DeferredItem<Item> COOKED_BOAR_VENISON = ITEMS.registerItem("cooked_boar_venison",
-            properties -> new Item(properties.food(ModFoods.COOKED_BOAR_VENISON)));
-    public static final DeferredItem<Item> RAW_BOAR_VENISON = ITEMS.registerItem("raw_boar_venison",
-            properties -> new Item(properties.food(ModFoods.RAW_BOAR_VENISON, ModConsumables.RAW_BOAR_VENISON)));
-    public static final DeferredItem<Item> COOKED_CHICKEN_NUGGETS = ITEMS.registerItem("cooked_chicken_nuggets",
-            properties -> new Item(properties.food(ModFoods.COOKED_CHICKEN_NUGGETS)));
-    public static final DeferredItem<Item> RAW_CHICKEN_NUGGETS = ITEMS.registerItem("raw_chicken_nuggets",
-            properties -> new Item(properties.food(ModFoods.RAW_CHICKEN_NUGGETS, ModConsumables.RAW_CHICKEN_NUGGETS)));
-    public static final DeferredItem<Item> COOKED_DEER_VENISON = ITEMS.registerItem("cooked_deer_venison",
-            properties -> new Item(properties.food(ModFoods.COOKED_DEER_VENISON)));
-    public static final DeferredItem<Item> RAW_DEER_VENISON = ITEMS.registerItem("raw_deer_venison",
-            properties -> new Item(properties.food(ModFoods.RAW_DEER_VENISON, ModConsumables.RAW_DEER_VENISON)));
-    public static final DeferredItem<Item> COOKED_GOAT_MEAT = ITEMS.registerItem("cooked_goat_meat",
-            properties -> new Item(properties.food(ModFoods.COOKED_GOAT_MEAT)));
-    public static final DeferredItem<Item> RAW_GOAT_MEAT = ITEMS.registerItem("raw_goat_meat",
-            properties -> new Item(properties.food(ModFoods.RAW_GOAT_MEAT, ModConsumables.RAW_GOAT_MEAT)));
-    public static final DeferredItem<Item> COOKED_HARE_MEAT = ITEMS.registerItem("cooked_hare_meat",
-            properties -> new Item(properties.food(ModFoods.COOKED_HARE_MEAT)));
-    public static final DeferredItem<Item> RAW_HARE_MEAT = ITEMS.registerItem("raw_hare_meat",
-            properties -> new Item(properties.food(ModFoods.RAW_HARE_MEAT, ModConsumables.RAW_HARE_MEAT)));
-    public static final DeferredItem<Item> COOKED_HORSE_MEAT = ITEMS.registerItem("cooked_horse_meat",
-            properties -> new Item(properties.food(ModFoods.COOKED_HORSE_MEAT)));
-    public static final DeferredItem<Item> RAW_HORSE_MEAT = ITEMS.registerItem("raw_horse_meat",
-            properties -> new Item(properties.food(ModFoods.RAW_HORSE_MEAT, ModConsumables.RAW_HORSE_MEAT)));
-    public static final DeferredItem<Item> COOKED_MAMMOTH_MEAT = ITEMS.registerItem("cooked_mammoth_meat",
-            properties -> new Item(properties.food(ModFoods.COOKED_MAMMOTH_MEAT)));
-    public static final DeferredItem<Item> RAW_MAMMOTH_MEAT = ITEMS.registerItem("raw_mammoth_meat",
-            properties -> new Item(properties.food(ModFoods.RAW_MAMMOTH_MEAT, ModConsumables.RAW_MAMMOTH_MEAT)));
+
     public static final DeferredItem<Item> HORSERADISH = ITEMS.registerItem("horseradish",
             properties -> new Item(properties.food(ModFoods.HORSERADISH)));
     public static final DeferredItem<Item> LEEK = ITEMS.registerItem("leek",
@@ -692,6 +645,7 @@ public class ModItems {
     public static final DeferredItem<Item> HEMP = ITEMS.registerItem("hemp", Item::new);
 
     // ── FOWL ────────────────────────────────────────────────────
+// ── FOWL ─────────────────────────────────────────────────────────────────
     public static final DeferredItem<Item> RAW_PIGEON = ITEMS.registerItem("raw_pigeon",
             properties -> new Item(properties.food(ModFoods.RAW_PIGEON, ModConsumables.RAW_FOWL)));
     public static final DeferredItem<Item> COOKED_PIGEON = ITEMS.registerItem("cooked_pigeon",
@@ -700,10 +654,6 @@ public class ModItems {
             properties -> new Item(properties.food(ModFoods.RAW_DUCK, ModConsumables.RAW_FOWL)));
     public static final DeferredItem<Item> COOKED_DUCK = ITEMS.registerItem("cooked_duck",
             properties -> new Item(properties.food(ModFoods.COOKED_DUCK)));
-    public static final DeferredItem<Item> RAW_CAPON = ITEMS.registerItem("raw_capon",
-            properties -> new Item(properties.food(ModFoods.RAW_CAPON, ModConsumables.RAW_FOWL)));
-    public static final DeferredItem<Item> COOKED_CAPON = ITEMS.registerItem("cooked_capon",
-            properties -> new Item(properties.food(ModFoods.COOKED_CAPON)));
     public static final DeferredItem<Item> RAW_GOOSE = ITEMS.registerItem("raw_goose",
             properties -> new Item(properties.food(ModFoods.RAW_GOOSE, ModConsumables.RAW_FOWL)));
     public static final DeferredItem<Item> COOKED_GOOSE = ITEMS.registerItem("cooked_goose",
@@ -736,100 +686,146 @@ public class ModItems {
             properties -> new Item(properties.food(ModFoods.RAW_SWAN, ModConsumables.RAW_FOWL)));
     public static final DeferredItem<Item> COOKED_SWAN = ITEMS.registerItem("cooked_swan",
             properties -> new Item(properties.food(ModFoods.COOKED_SWAN)));
-    public static final DeferredItem<Item> SQUAB = ITEMS.registerItem("squab",
-            properties -> new Item(properties.food(ModFoods.SQUAB)));
+    public static final DeferredItem<Item> RAW_CHICKEN_NUGGETS = ITEMS.registerItem("raw_chicken_nuggets",
+            properties -> new Item(properties.food(ModFoods.RAW_CHICKEN_NUGGETS, ModConsumables.RAW_FOWL)));
+    public static final DeferredItem<Item> COOKED_CHICKEN_NUGGETS = ITEMS.registerItem("cooked_chicken_nuggets",
+            properties -> new Item(properties.food(ModFoods.COOKED_CHICKEN_NUGGETS)));
 
-    // ── MEATS ───────────────────────────────────────────────────
+    // ── MEATS ────────────────────────────────────────────────────────────────
     public static final DeferredItem<Item> RAW_AUROCHS = ITEMS.registerItem("raw_aurochs",
             properties -> new Item(properties.food(ModFoods.RAW_AUROCHS, ModConsumables.RAW_MEAT)));
     public static final DeferredItem<Item> COOKED_AUROCHS = ITEMS.registerItem("cooked_aurochs",
             properties -> new Item(properties.food(ModFoods.COOKED_AUROCHS)));
-    public static final DeferredItem<Item> RAW_VENISON = ITEMS.registerItem("raw_venison",
-            properties -> new Item(properties.food(ModFoods.RAW_VENISON, ModConsumables.RAW_MEAT)));
-    public static final DeferredItem<Item> COOKED_VENISON = ITEMS.registerItem("cooked_venison",
-            properties -> new Item(properties.food(ModFoods.COOKED_VENISON)));
-    public static final DeferredItem<Item> RAW_LAMB = ITEMS.registerItem("raw_lamb",
-            properties -> new Item(properties.food(ModFoods.RAW_LAMB, ModConsumables.RAW_MEAT)));
-    public static final DeferredItem<Item> COOKED_LAMB = ITEMS.registerItem("cooked_lamb",
-            properties -> new Item(properties.food(ModFoods.COOKED_LAMB)));
-    public static final DeferredItem<Item> RAW_PORK = ITEMS.registerItem("raw_pork",
-            properties -> new Item(properties.food(ModFoods.RAW_PORK, ModConsumables.RAW_MEAT)));
-    public static final DeferredItem<Item> COOKED_PORK = ITEMS.registerItem("cooked_pork",
-            properties -> new Item(properties.food(ModFoods.COOKED_PORK)));
-    public static final DeferredItem<Item> SUCKLING_PIG = ITEMS.registerItem("suckling_pig",
-            properties -> new Item(properties.food(ModFoods.SUCKLING_PIG)));
+    public static final DeferredItem<Item> RAW_BEAR_MEAT = ITEMS.registerItem("raw_bear_meat",
+            properties -> new Item(properties.food(ModFoods.RAW_BEAR_MEAT, ModConsumables.RAW_MEAT)));
+    public static final DeferredItem<Item> COOKED_BEAR_MEAT = ITEMS.registerItem("cooked_bear_meat",
+            properties -> new Item(properties.food(ModFoods.COOKED_BEAR_MEAT)));
+    public static final DeferredItem<Item> RAW_BOAR_VENISON = ITEMS.registerItem("raw_boar_venison",
+            properties -> new Item(properties.food(ModFoods.RAW_BOAR_VENISON, ModConsumables.RAW_MEAT)));
+    public static final DeferredItem<Item> COOKED_BOAR_VENISON = ITEMS.registerItem("cooked_boar_venison",
+            properties -> new Item(properties.food(ModFoods.COOKED_BOAR_VENISON)));
+    public static final DeferredItem<Item> RAW_DEER_VENISON = ITEMS.registerItem("raw_deer_venison",
+            properties -> new Item(properties.food(ModFoods.RAW_DEER_VENISON, ModConsumables.RAW_MEAT)));
+    public static final DeferredItem<Item> COOKED_DEER_VENISON = ITEMS.registerItem("cooked_deer_venison",
+            properties -> new Item(properties.food(ModFoods.COOKED_DEER_VENISON)));
     public static final DeferredItem<Item> RAW_DOG = ITEMS.registerItem("raw_dog",
             properties -> new Item(properties.food(ModFoods.RAW_DOG, ModConsumables.RAW_MEAT)));
     public static final DeferredItem<Item> COOKED_DOG = ITEMS.registerItem("cooked_dog",
             properties -> new Item(properties.food(ModFoods.COOKED_DOG)));
-    public static final DeferredItem<Item> RAW_SNAKE = ITEMS.registerItem("raw_snake",
-            properties -> new Item(properties.food(ModFoods.RAW_SNAKE, ModConsumables.RAW_MEAT)));
-    public static final DeferredItem<Item> COOKED_SNAKE = ITEMS.registerItem("cooked_snake",
-            properties -> new Item(properties.food(ModFoods.COOKED_SNAKE)));
+    public static final DeferredItem<Item> RAW_DORMICE = ITEMS.registerItem("raw_dormice",
+            properties -> new Item(properties.food(ModFoods.RAW_DORMICE, ModConsumables.RAW_MEAT)));
+    public static final DeferredItem<Item> COOKED_DORMICE = ITEMS.registerItem("cooked_dormice",
+            properties -> new Item(properties.food(ModFoods.COOKED_DORMICE)));
     public static final DeferredItem<Item> RAW_FROG = ITEMS.registerItem("raw_frog",
             properties -> new Item(properties.food(ModFoods.RAW_FROG, ModConsumables.RAW_MEAT)));
     public static final DeferredItem<Item> COOKED_FROG = ITEMS.registerItem("cooked_frog",
             properties -> new Item(properties.food(ModFoods.COOKED_FROG)));
-    public static final DeferredItem<Item> RAW_SQUIRREL = ITEMS.registerItem("raw_squirrel",
-            properties -> new Item(properties.food(ModFoods.RAW_SQUIRREL, ModConsumables.RAW_MEAT)));
-    public static final DeferredItem<Item> COOKED_SQUIRREL = ITEMS.registerItem("cooked_squirrel",
-            properties -> new Item(properties.food(ModFoods.COOKED_SQUIRREL)));
+    public static final DeferredItem<Item> RAW_GOAT_MEAT = ITEMS.registerItem("raw_goat_meat",
+            properties -> new Item(properties.food(ModFoods.RAW_GOAT_MEAT, ModConsumables.RAW_MEAT)));
+    public static final DeferredItem<Item> COOKED_GOAT_MEAT = ITEMS.registerItem("cooked_goat_meat",
+            properties -> new Item(properties.food(ModFoods.COOKED_GOAT_MEAT)));
+    public static final DeferredItem<Item> RAW_HARE_MEAT = ITEMS.registerItem("raw_hare_meat",
+            properties -> new Item(properties.food(ModFoods.RAW_HARE_MEAT, ModConsumables.RAW_MEAT)));
+    public static final DeferredItem<Item> COOKED_HARE_MEAT = ITEMS.registerItem("cooked_hare_meat",
+            properties -> new Item(properties.food(ModFoods.COOKED_HARE_MEAT)));
+    public static final DeferredItem<Item> RAW_HORSE_MEAT = ITEMS.registerItem("raw_horse_meat",
+            properties -> new Item(properties.food(ModFoods.RAW_HORSE_MEAT, ModConsumables.RAW_MEAT)));
+    public static final DeferredItem<Item> COOKED_HORSE_MEAT = ITEMS.registerItem("cooked_horse_meat",
+            properties -> new Item(properties.food(ModFoods.COOKED_HORSE_MEAT)));
+    public static final DeferredItem<Item> RAW_LAMB = ITEMS.registerItem("raw_lamb",
+            properties -> new Item(properties.food(ModFoods.RAW_LAMB, ModConsumables.RAW_MEAT)));
+    public static final DeferredItem<Item> COOKED_LAMB = ITEMS.registerItem("cooked_lamb",
+            properties -> new Item(properties.food(ModFoods.COOKED_LAMB)));
+    public static final DeferredItem<Item> RAW_LOCUSTS = ITEMS.registerItem("raw_locusts",
+            properties -> new Item(properties.food(ModFoods.RAW_LOCUSTS)));
+    public static final DeferredItem<Item> COOKED_LOCUSTS = ITEMS.registerItem("cooked_locusts",
+            properties -> new Item(properties.food(ModFoods.COOKED_LOCUSTS)));
+    public static final DeferredItem<Item> RAW_MAMMOTH_MEAT = ITEMS.registerItem("raw_mammoth_meat",
+            properties -> new Item(properties.food(ModFoods.RAW_MAMMOTH_MEAT, ModConsumables.RAW_MEAT)));
+    public static final DeferredItem<Item> COOKED_MAMMOTH_MEAT = ITEMS.registerItem("cooked_mammoth_meat",
+            properties -> new Item(properties.food(ModFoods.COOKED_MAMMOTH_MEAT)));
+    public static final DeferredItem<Item> RAW_MAN_FLESH = ITEMS.registerItem("raw_man_flesh",
+            properties -> new Item(properties.food(ModFoods.RAW_MAN_FLESH, ModConsumables.RAW_MEAT)));
+    public static final DeferredItem<Item> COOKED_MAN_FLESH = ITEMS.registerItem("cooked_man_flesh",
+            properties -> new Item(properties.food(ModFoods.COOKED_MAN_FLESH)));
     public static final DeferredItem<Item> RAW_RAT = ITEMS.registerItem("raw_rat",
             properties -> new Item(properties.food(ModFoods.RAW_RAT, ModConsumables.RAW_MEAT)));
     public static final DeferredItem<Item> COOKED_RAT = ITEMS.registerItem("cooked_rat",
             properties -> new Item(properties.food(ModFoods.COOKED_RAT)));
-    public static final DeferredItem<Item> DORMICE = ITEMS.registerItem("dormice",
-            properties -> new Item(properties.food(ModFoods.DORMICE)));
-    public static final DeferredItem<Item> SNAILS = ITEMS.registerItem("snails",
-            properties -> new Item(properties.food(ModFoods.SNAILS)));
-    public static final DeferredItem<Item> LOCUSTS = ITEMS.registerItem("locusts",
-            properties -> new Item(properties.food(ModFoods.LOCUSTS)));
-    public static final DeferredItem<Item> HONEYED_LOCUSTS = ITEMS.registerItem("honeyed_locusts",
-            properties -> new Item(properties.food(ModFoods.HONEYED_LOCUSTS)));
-    public static final DeferredItem<Item> STALLION_HEART = ITEMS.registerItem("stallion_heart",
-            properties -> new Item(properties.food(ModFoods.STALLION_HEART)));
-    public static final DeferredItem<Item> KIDNEYS = ITEMS.registerItem("kidneys",
-            properties -> new Item(properties.food(ModFoods.KIDNEYS)));
-    public static final DeferredItem<Item> LIVER = ITEMS.registerItem("liver",
-            properties -> new Item(properties.food(ModFoods.LIVER)));
-    public static final DeferredItem<Item> GOOSE_LIVER = ITEMS.registerItem("goose_liver",
-            properties -> new Item(properties.food(ModFoods.GOOSE_LIVER)));
-    public static final DeferredItem<Item> SWEETBREADS = ITEMS.registerItem("sweetbreads",
-            properties -> new Item(properties.food(ModFoods.SWEETBREADS)));
-    public static final DeferredItem<Item> JELLIED_CALVES_BRAINS = ITEMS.registerItem("jellied_calves_brains",
-            properties -> new Item(properties.food(ModFoods.JELLIED_CALVES_BRAINS)));
-    public static final DeferredItem<Item> ROASTED_RIBS = ITEMS.registerItem("roasted_ribs",
-            properties -> new Item(properties.food(ModFoods.ROASTED_RIBS)));
-    public static final DeferredItem<Item> PEPPERED_BOAR = ITEMS.registerItem("peppered_boar",
-            properties -> new Item(properties.food(ModFoods.PEPPERED_BOAR)));
-    public static final DeferredItem<Item> ROAST_BOAR = ITEMS.registerItem("roast_boar",
-            properties -> new Item(properties.food(ModFoods.ROAST_BOAR)));
-    public static final DeferredItem<Item> BLACK_SAUSAGE = ITEMS.registerItem("black_sausage",
-            properties -> new Item(properties.food(ModFoods.BLACK_SAUSAGE)));
-    public static final DeferredItem<Item> SALT_MUTTON = ITEMS.registerItem("salt_mutton",
-            properties -> new Item(properties.food(ModFoods.SALT_MUTTON)));
-    public static final DeferredItem<Item> BOILED_MUTTON = ITEMS.registerItem("boiled_mutton",
-            properties -> new Item(properties.food(ModFoods.BOILED_MUTTON)));
-    public static final DeferredItem<Item> MUTTON_CHOP = ITEMS.registerItem("mutton_chop",
-            properties -> new Item(properties.food(ModFoods.MUTTON_CHOP)));
-    public static final DeferredItem<Item> MUTTON_STEW = ITEMS.registerItem("mutton_stew",
-            properties -> new Item(properties.food(ModFoods.MUTTON_STEW)));
-    public static final DeferredItem<Item> SPICED_MUTTON = ITEMS.registerItem("spiced_mutton",
-            properties -> new Item(properties.food(ModFoods.SPICED_MUTTON)));
-    public static final DeferredItem<Item> SALT_BEEF = ITEMS.registerItem("salt_beef",
-            properties -> new Item(properties.food(ModFoods.SALT_BEEF)));
-    public static final DeferredItem<Item> BEEF_AND_BARLEY_STEW = ITEMS.registerItem("beef_and_barley_stew",
-            properties -> new Item(properties.food(ModFoods.BEEF_AND_BARLEY_STEW)));
+    public static final DeferredItem<Item> RAW_SNAKE = ITEMS.registerItem("raw_snake",
+            properties -> new Item(properties.food(ModFoods.RAW_SNAKE, ModConsumables.RAW_MEAT)));
+    public static final DeferredItem<Item> COOKED_SNAKE = ITEMS.registerItem("cooked_snake",
+            properties -> new Item(properties.food(ModFoods.COOKED_SNAKE)));
+    public static final DeferredItem<Item> RAW_SNAIL = ITEMS.registerItem("raw_snail",
+            properties -> new Item(properties.food(ModFoods.RAW_SNAIL, ModConsumables.RAW_MEAT)));
+    public static final DeferredItem<Item> COOKED_SNAIL = ITEMS.registerItem("cooked_snail",
+            properties -> new Item(properties.food(ModFoods.COOKED_SNAIL)));
+    public static final DeferredItem<Item> RAW_SQUIRREL = ITEMS.registerItem("raw_squirrel",
+            properties -> new Item(properties.food(ModFoods.RAW_SQUIRREL, ModConsumables.RAW_MEAT)));
+    public static final DeferredItem<Item> COOKED_SQUIRREL = ITEMS.registerItem("cooked_squirrel",
+            properties -> new Item(properties.food(ModFoods.COOKED_SQUIRREL)));
+    public static final DeferredItem<Item> RAW_SUCKLING_PIG = ITEMS.registerItem("raw_suckling_pig",
+            properties -> new Item(properties.food(ModFoods.RAW_SUCKLING_PIG, ModConsumables.RAW_MEAT)));
+    public static final DeferredItem<Item> COOKED_SUCKLING_PIG = ITEMS.registerItem("cooked_suckling_pig",
+            properties -> new Item(properties.food(ModFoods.COOKED_SUCKLING_PIG)));
 
-    // ── FISH & SEAFOOD ──────────────────────────────────────────
+    // ── OFFAL & ORGAN MEATS ───────────────────────────────────────────────────
+    public static final DeferredItem<Item> RAW_BACON = ITEMS.registerItem("raw_bacon",
+            properties -> new Item(properties.food(ModFoods.RAW_BACON, ModConsumables.RAW_MEAT)));
+    public static final DeferredItem<Item> COOKED_BACON = ITEMS.registerItem("cooked_bacon",
+            properties -> new Item(properties.food(ModFoods.COOKED_BACON)));
+    public static final DeferredItem<Item> RAW_PIG_KIDNEYS = ITEMS.registerItem("raw_pig_kidneys",
+            properties -> new Item(properties.food(ModFoods.RAW_PIG_KIDNEYS, ModConsumables.RAW_MEAT)));
+    public static final DeferredItem<Item> COOKED_PIG_KIDNEYS = ITEMS.registerItem("cooked_pig_kidneys",
+            properties -> new Item(properties.food(ModFoods.COOKED_PIG_KIDNEYS)));
+    public static final DeferredItem<Item> RAW_PIG_LIVER = ITEMS.registerItem("raw_pig_liver",
+            properties -> new Item(properties.food(ModFoods.RAW_PIG_LIVER, ModConsumables.RAW_MEAT)));
+    public static final DeferredItem<Item> COOKED_PIG_LIVER = ITEMS.registerItem("cooked_pig_liver",
+            properties -> new Item(properties.food(ModFoods.COOKED_PIG_LIVER)));
+    public static final DeferredItem<Item> RAW_PIG_RIBS = ITEMS.registerItem("raw_pig_ribs",
+            properties -> new Item(properties.food(ModFoods.RAW_PIG_RIBS, ModConsumables.RAW_MEAT)));
+    public static final DeferredItem<Item> COOKED_PIG_RIBS = ITEMS.registerItem("cooked_pig_ribs",
+            properties -> new Item(properties.food(ModFoods.COOKED_PIG_RIBS)));
+    public static final DeferredItem<Item> RAW_GOOSE_LIVER = ITEMS.registerItem("raw_goose_liver",
+            properties -> new Item(properties.food(ModFoods.RAW_GOOSE_LIVER, ModConsumables.RAW_MEAT)));
+    public static final DeferredItem<Item> COOKED_GOOSE_LIVER = ITEMS.registerItem("cooked_goose_liver",
+            properties -> new Item(properties.food(ModFoods.COOKED_GOOSE_LIVER)));
+    public static final DeferredItem<Item> RAW_CALF_PANCREAS = ITEMS.registerItem("raw_calf_pancreas",
+            properties -> new Item(properties.food(ModFoods.RAW_CALF_PANCREAS, ModConsumables.RAW_MEAT)));
+    public static final DeferredItem<Item> COOKED_CALF_PANCREAS = ITEMS.registerItem("cooked_calf_pancreas",
+            properties -> new Item(properties.food(ModFoods.COOKED_CALF_PANCREAS)));
+    public static final DeferredItem<Item> HORSE_HEART = ITEMS.registerItem("horse_heart",
+            properties -> new Item(properties.food(ModFoods.HORSE_HEART)));
+    public static final DeferredItem<Item> JELLIED_CALVES_BRAIN = ITEMS.registerItem("jellied_calves_brain",
+            properties -> new Item(properties.food(ModFoods.JELLIED_CALVES_BRAIN)));
+
+    // ── SAUSAGES ─────────────────────────────────────────────────────────────
+    public static final DeferredItem<Item> RAW_SAUSAGE = ITEMS.registerItem("raw_sausage",
+            properties -> new Item(properties.food(ModFoods.RAW_SAUSAGE, ModConsumables.RAW_MEAT)));
+    public static final DeferredItem<Item> COOKED_SAUSAGE = ITEMS.registerItem("cooked_sausage",
+            properties -> new Item(properties.food(ModFoods.COOKED_SAUSAGE)));
+    public static final DeferredItem<Item> RAW_BLOOD_SAUSAGE = ITEMS.registerItem("raw_blood_sausage",
+            properties -> new Item(properties.food(ModFoods.RAW_BLOOD_SAUSAGE, ModConsumables.RAW_MEAT)));
+    public static final DeferredItem<Item> COOKED_BLOOD_SAUSAGE = ITEMS.registerItem("cooked_blood_sausage",
+            properties -> new Item(properties.food(ModFoods.COOKED_BLOOD_SAUSAGE)));
+    public static final DeferredItem<Item> RAW_WHITE_SAUSAGE = ITEMS.registerItem("raw_white_sausage",
+            properties -> new Item(properties.food(ModFoods.RAW_WHITE_SAUSAGE, ModConsumables.RAW_MEAT)));
+    public static final DeferredItem<Item> COOKED_WHITE_SAUSAGE = ITEMS.registerItem("cooked_white_sausage",
+            properties -> new Item(properties.food(ModFoods.COOKED_WHITE_SAUSAGE)));
+
+    // ── OTHER INGREDIENT MEATS ────────────────────────────────────────────────
+    public static final DeferredItem<Item> MINCED_MEAT = ITEMS.registerItem("minced_meat",
+            properties -> new Item(properties.food(ModFoods.MINCED_MEAT)));
+    public static final DeferredItem<Item> PIG_INTESTINES = ITEMS.registerItem("pig_intestines",
+            properties -> new Item(properties.food(ModFoods.PIG_INTESTINES)));
+    public static final DeferredItem<Item> CALF_BRAIN = ITEMS.registerItem("calf_brain",
+            properties -> new Item(properties.food(ModFoods.CALF_BRAIN)));
+
+    // ── FISH & SEAFOOD ────────────────────────────────────────────────────────
     public static final DeferredItem<Item> RAW_HERRING = ITEMS.registerItem("raw_herring",
             properties -> new Item(properties.food(ModFoods.RAW_HERRING, ModConsumables.RAW_FISH)));
     public static final DeferredItem<Item> COOKED_HERRING = ITEMS.registerItem("cooked_herring",
             properties -> new Item(properties.food(ModFoods.COOKED_HERRING)));
-    public static final DeferredItem<Item> PICKLED_HERRING = ITEMS.registerItem("pickled_herring",
-            properties -> new Item(properties.food(ModFoods.PICKLED_HERRING)));
-    public static final DeferredItem<Item> SALT_COD = ITEMS.registerItem("salt_cod",
-            properties -> new Item(properties.food(ModFoods.SALT_COD)));
     public static final DeferredItem<Item> RAW_TROUT = ITEMS.registerItem("raw_trout",
             properties -> new Item(properties.food(ModFoods.RAW_TROUT, ModConsumables.RAW_FISH)));
     public static final DeferredItem<Item> COOKED_TROUT = ITEMS.registerItem("cooked_trout",
@@ -870,18 +866,44 @@ public class ModItems {
             properties -> new Item(properties.food(ModFoods.RAW_LOBSTER, ModConsumables.RAW_FISH)));
     public static final DeferredItem<Item> COOKED_LOBSTER = ITEMS.registerItem("cooked_lobster",
             properties -> new Item(properties.food(ModFoods.COOKED_LOBSTER)));
-    public static final DeferredItem<Item> CLAMS = ITEMS.registerItem("clams",
-            properties -> new Item(properties.food(ModFoods.CLAMS)));
-    public static final DeferredItem<Item> MUSSELS = ITEMS.registerItem("mussels",
-            properties -> new Item(properties.food(ModFoods.MUSSELS)));
-    public static final DeferredItem<Item> WINKLES = ITEMS.registerItem("winkles",
-            properties -> new Item(properties.food(ModFoods.WINKLES)));
+    public static final DeferredItem<Item> RAW_CLAM = ITEMS.registerItem("raw_clam",
+            properties -> new Item(properties.food(ModFoods.RAW_CLAM, ModConsumables.RAW_FISH)));
+    public static final DeferredItem<Item> COOKED_CLAM = ITEMS.registerItem("cooked_clam",
+            properties -> new Item(properties.food(ModFoods.COOKED_CLAM)));
+    public static final DeferredItem<Item> RAW_MUSSELS = ITEMS.registerItem("raw_mussels",
+            properties -> new Item(properties.food(ModFoods.RAW_MUSSELS, ModConsumables.RAW_FISH)));
+    public static final DeferredItem<Item> COOKED_MUSSELS = ITEMS.registerItem("cooked_mussels",
+            properties -> new Item(properties.food(ModFoods.COOKED_MUSSELS)));
+    public static final DeferredItem<Item> RAW_WINKLES = ITEMS.registerItem("raw_winkles",
+            properties -> new Item(properties.food(ModFoods.RAW_WINKLES, ModConsumables.RAW_FISH)));
+    public static final DeferredItem<Item> COOKED_WINKLES = ITEMS.registerItem("cooked_winkles",
+            properties -> new Item(properties.food(ModFoods.COOKED_WINKLES)));
+
+    // ── PREPARED & PRESERVED ─────────────────────────────────────────────────
+    public static final DeferredItem<Item> PICKLED_HERRING = ITEMS.registerItem("pickled_herring",
+            properties -> new Item(properties.food(ModFoods.PICKLED_HERRING)));
+    public static final DeferredItem<Item> HONEYED_LOCUSTS = ITEMS.registerItem("honeyed_locusts",
+            properties -> new Item(properties.food(ModFoods.HONEYED_LOCUSTS)));
+    public static final DeferredItem<Item> BEEF_AND_BARLEY_STEW = ITEMS.registerItem("beef_and_barley_stew",
+            properties -> new Item(properties.food(ModFoods.BEEF_AND_BARLEY_STEW)));
+    public static final DeferredItem<Item> BEEF_STEW = ITEMS.registerItem("beef_stew",
+            properties -> new Item(properties.food(ModFoods.BEEF_STEW)));
+    public static final DeferredItem<Item> MUTTON_STEW = ITEMS.registerItem("mutton_stew",
+            properties -> new Item(properties.food(ModFoods.MUTTON_STEW)));
+    public static final DeferredItem<Item> SISTERS_STEW = ITEMS.registerItem("sisters_stew",
+            properties -> new Item(properties.food(ModFoods.SISTERS_STEW)));
+    public static final DeferredItem<Item> BOWL_OF_BROWN = ITEMS.registerItem("bowl_of_brown",
+            properties -> new Item(properties.food(ModFoods.BOWL_OF_BROWN)));
+    public static final DeferredItem<Item> BREWIS = ITEMS.registerItem("brewis",
+            properties -> new Item(properties.food(ModFoods.BREWIS)));
+    public static final DeferredItem<Item> JERKY = ITEMS.registerItem("jerky",
+            properties -> new Item(properties.food(ModFoods.JERKY)));
+    public static final DeferredItem<Item> HAM = ITEMS.registerItem("ham",
+            properties -> new Item(properties.food(ModFoods.HAM)));
 
     // ── BAKED GOODS & PREPARED DISHES ───────────────────────────
     public static final DeferredItem<Item> BISCUITS = ITEMS.registerItem("biscuits",
             properties -> new Item(properties.food(ModFoods.BISCUITS)));
-    public static final DeferredItem<Item> BOWL_OF_BROWN = ITEMS.registerItem("bowl_of_brown",
-            properties -> new Item(properties.food(ModFoods.BOWL_OF_BROWN)));
     public static final DeferredItem<Item> BARLEY_BREAD = ITEMS.registerItem("barley_bread",
             properties -> new Item(properties.food(ModFoods.BARLEY_BREAD)));
     public static final DeferredItem<Item> BLACK_BREAD = ITEMS.registerItem("black_bread",
@@ -926,8 +948,6 @@ public class ModItems {
             properties -> new Item(properties.food(ModFoods.APPLE_TART)));
     public static final DeferredItem<Item> BERRY_TARTS = ITEMS.registerItem("berry_tarts",
             properties -> new Item(properties.food(ModFoods.BERRY_TARTS)));
-    public static final DeferredItem<Item> SISTERS_STEW = ITEMS.registerItem("sisters_stew",
-            properties -> new Item(properties.food(ModFoods.SISTERS_STEW)));
     public static final DeferredItem<Item> PEA_SOUP = ITEMS.registerItem("pea_soup",
             properties -> new Item(properties.food(ModFoods.PEA_SOUP)));
 

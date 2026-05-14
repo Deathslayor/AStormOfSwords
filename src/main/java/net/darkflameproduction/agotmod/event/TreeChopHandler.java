@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.MapColor;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.level.BlockEvent;
@@ -51,18 +52,32 @@ public class TreeChopHandler {
         if (!(event.getPlayer() instanceof ServerPlayer player)) return;
         if (player.isCrouching()) return;
 
+        ItemStack tool = player.getMainHandItem();
+        if (!isValidTool(tool)) return;
+
         BlockState state = level.getBlockState(event.getPos());
         if (!isLog(state)) return;
 
-        if (!hasMatchingLeavesNearby(level, event.getPos(), state.getBlock())) return;
-
+        // Flood fill all connected logs
         Set<BlockPos> logs = new LinkedHashSet<>();
         floodFillLogs(level, event.getPos(), state.getBlock(), logs);
 
         if (logs.size() <= 1) return;
 
+        // Validate: every log must not touch invalid solid blocks
+        if (!isValidTree(level, logs, state.getBlock())) return;
+
+        // Validate: base logs (touching dirt/grass) must all connect to each other
+        if (!baseLogsConnected(level, logs, state.getBlock())) return;
+
+        // Validate: tree must have leaves
+        if (!hasMatchingLeavesNearby(level, logs, state.getBlock())) return;
+
         Set<BlockPos> leaves = new LinkedHashSet<>();
         floodFillLeaves(level, logs, state.getBlock(), leaves);
+
+        // Must have at least a few leaves to be a real tree
+        if (leaves.size() < 3) return;
 
         // Remove source block — vanilla handles it
         logs.remove(event.getPos());
@@ -87,6 +102,90 @@ public class TreeChopHandler {
         damageTool(player, player.getMainHandItem(), logsBroken);
     }
 
+    // ── Tree validation ───────────────────────────────────────────────────────
+
+    /**
+     * Returns false if any log in the tree touches a solid block that is not:
+     * - another log of the same type
+     * - a leaf block
+     * - dirt, grass, podzol, rooted dirt, moss block, or similar ground blocks
+     * - air / non-solid blocks
+     */
+    private static boolean isValidTree(ServerLevel level, Set<BlockPos> logs, Block logType) {
+        for (BlockPos logPos : logs) {
+            for (BlockPos nb : getFaceNeighbours(logPos)) {
+                if (logs.contains(nb)) continue;
+                BlockState nbState = level.getBlockState(nb);
+                if (nbState.isAir()) continue;
+                if (isLeaf(nbState)) continue;
+                if (isGround(nbState)) continue;
+                if (nbState.getBlock() == logType) continue;
+                // It's a solid block that doesn't belong — not a natural tree
+                if (nbState.isSolidRender()) return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Finds all base logs (those touching ground blocks below them),
+     * then checks they are all connected to each other horizontally/vertically
+     * within the log set.
+     */
+    private static boolean baseLogsConnected(ServerLevel level, Set<BlockPos> logs, Block logType) {
+        Set<BlockPos> baseLogs = new HashSet<>();
+        for (BlockPos logPos : logs) {
+            BlockState below = level.getBlockState(logPos.below());
+            if (isGround(below)) {
+                baseLogs.add(logPos);
+            }
+        }
+
+        // No base logs touching ground — not a natural tree
+        if (baseLogs.isEmpty()) return false;
+
+        // If only one base log, it's trivially connected
+        if (baseLogs.size() == 1) return true;
+
+        // BFS through the log set to check all base logs are reachable from the first
+        BlockPos start = baseLogs.iterator().next();
+        Set<BlockPos> reachable = new HashSet<>();
+        Queue<BlockPos> queue = new ArrayDeque<>();
+        queue.add(start);
+        reachable.add(start);
+
+        while (!queue.isEmpty()) {
+            BlockPos current = queue.poll();
+            for (BlockPos nb : getFaceNeighbours(current)) {
+                if (reachable.contains(nb)) continue;
+                if (!logs.contains(nb)) continue;
+                reachable.add(nb);
+                queue.add(nb);
+            }
+        }
+
+        // All base logs must be reachable
+        return reachable.containsAll(baseLogs);
+    }
+
+    /**
+     * Returns true if there are matching leaves near any log in the set.
+     */
+    private static boolean hasMatchingLeavesNearby(ServerLevel level,
+                                                   Set<BlockPos> logs, Block logType) {
+        for (BlockPos logPos : logs) {
+            for (int x = -8; x <= 8; x++) {
+                for (int y = -2; y <= 8; y++) {
+                    for (int z = -8; z <= 8; z++) {
+                        BlockState state = level.getBlockState(logPos.offset(x, y, z));
+                        if (isLeafMatchingLog(state, logType)) return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     // ── Log flood fill ────────────────────────────────────────────────────────
 
     private static void floodFillLogs(ServerLevel level, BlockPos start,
@@ -97,7 +196,6 @@ public class TreeChopHandler {
 
         while (!queue.isEmpty() && logs.size() < MAX_LOGS) {
             BlockPos current = queue.poll();
-            // Use all 26 neighbours so diagonal logs are included
             for (BlockPos neighbour : getAllNeighbours(current)) {
                 if (logs.contains(neighbour)) continue;
                 if (level.getBlockState(neighbour).getBlock() == logType) {
@@ -108,11 +206,10 @@ public class TreeChopHandler {
         }
     }
 
-    // ── Leaf flood fill — spreads through adjacent leaves from log positions ──
+    // ── Leaf flood fill ───────────────────────────────────────────────────────
 
     private static void floodFillLeaves(ServerLevel level, Set<BlockPos> logs,
                                         Block logType, Set<BlockPos> leaves) {
-        // Collect all nearby foreign logs of the same type (not part of our tree)
         Set<BlockPos> foreignLogs = new HashSet<>();
         for (BlockPos logPos : logs) {
             for (int x = -12; x <= 12; x++) {
@@ -121,8 +218,7 @@ public class TreeChopHandler {
                         BlockPos candidate = logPos.offset(x, y, z);
                         if (logs.contains(candidate)) continue;
                         if (foreignLogs.contains(candidate)) continue;
-                        BlockState s = level.getBlockState(candidate);
-                        if (s.getBlock() == logType) {
+                        if (level.getBlockState(candidate).getBlock() == logType) {
                             foreignLogs.add(candidate);
                         }
                     }
@@ -146,13 +242,13 @@ public class TreeChopHandler {
 
         // Spread through connected leaves
         while (!queue.isEmpty() && leaves.size() < MAX_LEAVES) {
-            BlockPos current        = queue.poll();
-            double   closestLogDist = Double.MAX_VALUE;
+            BlockPos current = queue.poll();
+            double closestLogDist = Double.MAX_VALUE;
             for (BlockPos logPos : logs) {
                 double d = current.distSqr(logPos);
                 if (d < closestLogDist) closestLogDist = d;
             }
-            if (closestLogDist > 100) continue; // 10 blocks from nearest own log
+            if (closestLogDist > 100) continue;
 
             for (BlockPos nb : getAllNeighbours(current)) {
                 if (logs.contains(nb) || leaves.contains(nb)) continue;
@@ -169,65 +265,21 @@ public class TreeChopHandler {
                                                 Set<BlockPos> ownLogs,
                                                 Set<BlockPos> foreignLogs) {
         if (foreignLogs.isEmpty()) return false;
-
-        double closestOwn     = Double.MAX_VALUE;
+        double closestOwn = Double.MAX_VALUE;
         double closestForeign = Double.MAX_VALUE;
-
         for (BlockPos own : ownLogs) {
             double d = pos.distSqr(own);
             if (d < closestOwn) closestOwn = d;
         }
-
         for (BlockPos foreign : foreignLogs) {
             double d = pos.distSqr(foreign);
             if (d < closestForeign) closestForeign = d;
         }
-
-        // Leaf belongs to the other tree if it's closer to a foreign log
-        // Small bias toward own tree (0.9) so boundary leaves lean toward staying
         return closestForeign < closestOwn * 0.9;
-    }
-
-    // ── Leaf presence check ───────────────────────────────────────────────────
-
-    private static boolean hasMatchingLeavesNearby(ServerLevel level,
-                                                   BlockPos logPos, Block logType) {
-        // First collect all connected logs, then check for leaves near any of them
-        // This handles thick trunk trees where the broken log may be far from leaves
-        Set<BlockPos> nearbyLogs = new HashSet<>();
-        Queue<BlockPos> queue = new ArrayDeque<>();
-        queue.add(logPos);
-        nearbyLogs.add(logPos);
-
-        // Quick scan of connected logs capped at 32
-        while (!queue.isEmpty() && nearbyLogs.size() < 32) {
-            BlockPos current = queue.poll();
-            for (BlockPos neighbour : getAllNeighbours(current)) {
-                if (nearbyLogs.contains(neighbour)) continue;
-                if (level.getBlockState(neighbour).getBlock() == logType) {
-                    nearbyLogs.add(neighbour);
-                    queue.add(neighbour);
-                }
-            }
-        }
-
-        // Check for leaves within 8 blocks of any connected log
-        for (BlockPos nearLog : nearbyLogs) {
-            for (int x = -8; x <= 8; x++) {
-                for (int y = -2; y <= 8; y++) {
-                    for (int z = -8; z <= 8; z++) {
-                        BlockState state = level.getBlockState(nearLog.offset(x, y, z));
-                        if (isLeafMatchingLog(state, logType)) return true;
-                    }
-                }
-            }
-        }
-        return false;
     }
 
     // ── Neighbour helpers ─────────────────────────────────────────────────────
 
-    // 6 face neighbours only — for log connectivity
     private static List<BlockPos> getFaceNeighbours(BlockPos pos) {
         return List.of(
                 pos.east(), pos.west(),
@@ -236,7 +288,6 @@ public class TreeChopHandler {
         );
     }
 
-    // 26 neighbours (all directions including diagonals) — for leaf spreading
     private static List<BlockPos> getAllNeighbours(BlockPos pos) {
         List<BlockPos> result = new ArrayList<>(26);
         for (int x = -1; x <= 1; x++) {
@@ -278,17 +329,18 @@ public class TreeChopHandler {
         return Math.max(1.0f, (float) logCount);
     }
 
-
     // ── Tool helpers ──────────────────────────────────────────────────────────
 
     private static boolean isValidTool(ItemStack stack) {
-        return true; // any item or fist triggers the chop
+        if (stack.isEmpty()) return false;
+        String key = BuiltInRegistries.ITEM.getKey(stack.getItem()).getPath();
+        return key.endsWith("_axe") || key.equals("axe");
     }
 
     private static void damageTool(ServerPlayer player, ItemStack tool, int logCount) {
-        if (tool.isEmpty()) return; // fist
+        if (tool.isEmpty()) return;
         String key = BuiltInRegistries.ITEM.getKey(tool.getItem()).getPath();
-        if (!key.endsWith("_axe") && !key.equals("axe")) return; // non-axe items take no damage
+        if (!key.endsWith("_axe") && !key.equals("axe")) return;
         int damage = Math.max(1, logCount);
         tool.hurtAndBreak(damage, player, EquipmentSlot.MAINHAND);
     }
@@ -314,11 +366,32 @@ public class TreeChopHandler {
         if (!isLeaf(state)) return false;
         String logKey  = BuiltInRegistries.BLOCK.getKey(logType).getPath();
         String leafKey = BuiltInRegistries.BLOCK.getKey(state.getBlock()).getPath();
-        // e.g. "oak_log" -> "oak", then check "oak_leaves" contains "oak"
         String woodType = logKey.replace("_log", "")
                 .replace("_wood", "")
                 .replace("_stem", "")
                 .replace("_hyphae", "");
         return leafKey.contains(woodType);
+    }
+
+    /**
+     * Ground blocks that a tree naturally grows on.
+     */
+    private static boolean isGround(BlockState state) {
+        Block block = state.getBlock();
+        String key = BuiltInRegistries.BLOCK.getKey(block).getPath();
+        return key.equals("dirt")
+                || key.equals("grass_block")
+                || key.equals("podzol")
+                || key.equals("rooted_dirt")
+                || key.equals("moss_block")
+                || key.equals("mud")
+                || key.equals("mycelium")
+                || key.equals("coarse_dirt")
+                || key.equals("dirt_path")
+                || key.equals("farmland")
+                || key.equals("sand")
+                || key.equals("red_sand")
+                || key.equals("gravel")
+                || key.startsWith("agotmod:");  // any mod soil block
     }
 }
