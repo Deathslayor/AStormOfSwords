@@ -11,7 +11,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.level.BlockEvent;
@@ -26,6 +25,7 @@ public class TreeChopHandler {
     private static final int MAX_LEAVES = 1024;
 
     // ── Break speed modifier ──────────────────────────────────────────────────
+
     @SubscribeEvent
     public static void onBreakSpeed(PlayerEvent.BreakSpeed event) {
         if (event.getEntity().isCrouching()) return;
@@ -46,6 +46,8 @@ public class TreeChopHandler {
         event.setNewSpeed(event.getOriginalSpeed() / multiplier);
     }
 
+    // ── Block break ───────────────────────────────────────────────────────────
+
     @SubscribeEvent
     public static void onBlockBreak(BlockEvent.BreakEvent event) {
         if (!(event.getLevel() instanceof ServerLevel level)) return;
@@ -64,11 +66,8 @@ public class TreeChopHandler {
 
         if (logs.size() <= 1) return;
 
-        // Validate: every log must not touch invalid solid blocks
-        if (!isValidTree(level, logs, state.getBlock())) return;
-
-        // Validate: base logs (touching dirt/grass) must all connect to each other
-        if (!baseLogsConnected(level, logs, state.getBlock())) return;
+        // Validate: no non-stripped log was directly placed by a player
+        if (!isValidTree(level, logs)) return;
 
         // Validate: tree must have leaves
         if (!hasMatchingLeavesNearby(level, logs, state.getBlock())) return;
@@ -76,7 +75,6 @@ public class TreeChopHandler {
         Set<BlockPos> leaves = new LinkedHashSet<>();
         floodFillLeaves(level, logs, state.getBlock(), leaves);
 
-        // Must have at least a few leaves to be a real tree
         if (leaves.size() < 3) return;
 
         // Remove source block — vanilla handles it
@@ -105,72 +103,20 @@ public class TreeChopHandler {
     // ── Tree validation ───────────────────────────────────────────────────────
 
     /**
-     * Returns false if any log in the tree touches a solid block that is not:
-     * - another log of the same type
-     * - a leaf block
-     * - dirt, grass, podzol, rooted dirt, moss block, or similar ground blocks
-     * - air / non-solid blocks
+     * Tree is valid if no log was directly placed by a player.
+     * Stripped logs are always allowed — player only modified an existing tree.
      */
-    private static boolean isValidTree(ServerLevel level, Set<BlockPos> logs, Block logType) {
+    private static boolean isValidTree(ServerLevel level, Set<BlockPos> logs) {
         for (BlockPos logPos : logs) {
-            for (BlockPos nb : getFaceNeighbours(logPos)) {
-                if (logs.contains(nb)) continue;
-                BlockState nbState = level.getBlockState(nb);
-                if (nbState.isAir()) continue;
-                if (isLeaf(nbState)) continue;
-                if (isGround(nbState)) continue;
-                if (nbState.getBlock() == logType) continue;
-                // It's a solid block that doesn't belong — not a natural tree
-                if (nbState.isSolidRender()) return false;
+            if (PlayerPlacedBlockTracker.isPlayerPlaced(level, logPos)) {
+                BlockState state = level.getBlockState(logPos);
+                String key = BuiltInRegistries.BLOCK.getKey(state.getBlock()).getPath();
+                if (!key.startsWith("stripped_")) return false;
             }
         }
         return true;
     }
 
-    /**
-     * Finds all base logs (those touching ground blocks below them),
-     * then checks they are all connected to each other horizontally/vertically
-     * within the log set.
-     */
-    private static boolean baseLogsConnected(ServerLevel level, Set<BlockPos> logs, Block logType) {
-        Set<BlockPos> baseLogs = new HashSet<>();
-        for (BlockPos logPos : logs) {
-            BlockState below = level.getBlockState(logPos.below());
-            if (isGround(below)) {
-                baseLogs.add(logPos);
-            }
-        }
-
-        // No base logs touching ground — not a natural tree
-        if (baseLogs.isEmpty()) return false;
-
-        // If only one base log, it's trivially connected
-        if (baseLogs.size() == 1) return true;
-
-        // BFS through the log set to check all base logs are reachable from the first
-        BlockPos start = baseLogs.iterator().next();
-        Set<BlockPos> reachable = new HashSet<>();
-        Queue<BlockPos> queue = new ArrayDeque<>();
-        queue.add(start);
-        reachable.add(start);
-
-        while (!queue.isEmpty()) {
-            BlockPos current = queue.poll();
-            for (BlockPos nb : getFaceNeighbours(current)) {
-                if (reachable.contains(nb)) continue;
-                if (!logs.contains(nb)) continue;
-                reachable.add(nb);
-                queue.add(nb);
-            }
-        }
-
-        // All base logs must be reachable
-        return reachable.containsAll(baseLogs);
-    }
-
-    /**
-     * Returns true if there are matching leaves near any log in the set.
-     */
     private static boolean hasMatchingLeavesNearby(ServerLevel level,
                                                    Set<BlockPos> logs, Block logType) {
         for (BlockPos logPos : logs) {
@@ -198,10 +144,14 @@ public class TreeChopHandler {
             BlockPos current = queue.poll();
             for (BlockPos neighbour : getAllNeighbours(current)) {
                 if (logs.contains(neighbour)) continue;
-                if (level.getBlockState(neighbour).getBlock() == logType) {
-                    logs.add(neighbour);
-                    queue.add(neighbour);
-                }
+                BlockState ns = level.getBlockState(neighbour);
+                if (!isSameTreeLog(ns, logType)) continue;
+                // Skip player-placed logs unless they are stripped
+                String key = BuiltInRegistries.BLOCK.getKey(ns.getBlock()).getPath();
+                boolean isStripped = key.startsWith("stripped_");
+                if (!isStripped && PlayerPlacedBlockTracker.isPlayerPlaced(level, neighbour)) continue;
+                logs.add(neighbour);
+                queue.add(neighbour);
             }
         }
     }
@@ -218,9 +168,8 @@ public class TreeChopHandler {
                         BlockPos candidate = logPos.offset(x, y, z);
                         if (logs.contains(candidate)) continue;
                         if (foreignLogs.contains(candidate)) continue;
-                        if (level.getBlockState(candidate).getBlock() == logType) {
-                            foreignLogs.add(candidate);
-                        }
+                        BlockState s = level.getBlockState(candidate);
+                        if (isSameTreeLog(s, logType)) foreignLogs.add(candidate);
                     }
                 }
             }
@@ -228,10 +177,10 @@ public class TreeChopHandler {
 
         Queue<BlockPos> queue = new ArrayDeque<>();
 
-        // Seed from logs
         for (BlockPos logPos : logs) {
             for (BlockPos nb : getAllNeighbours(logPos)) {
                 if (logs.contains(nb) || leaves.contains(nb)) continue;
+                if (PlayerPlacedBlockTracker.isPlayerPlaced(level, nb)) continue;
                 BlockState ns = level.getBlockState(nb);
                 if (!isLeafMatchingLog(ns, logType)) continue;
                 if (isCloserToForeignLog(nb, logs, foreignLogs)) continue;
@@ -240,7 +189,6 @@ public class TreeChopHandler {
             }
         }
 
-        // Spread through connected leaves
         while (!queue.isEmpty() && leaves.size() < MAX_LEAVES) {
             BlockPos current = queue.poll();
             double closestLogDist = Double.MAX_VALUE;
@@ -252,6 +200,7 @@ public class TreeChopHandler {
 
             for (BlockPos nb : getAllNeighbours(current)) {
                 if (logs.contains(nb) || leaves.contains(nb)) continue;
+                if (PlayerPlacedBlockTracker.isPlayerPlaced(level, nb)) continue;
                 BlockState ns = level.getBlockState(nb);
                 if (!isLeafMatchingLog(ns, logType)) continue;
                 if (isCloserToForeignLog(nb, logs, foreignLogs)) continue;
@@ -265,7 +214,7 @@ public class TreeChopHandler {
                                                 Set<BlockPos> ownLogs,
                                                 Set<BlockPos> foreignLogs) {
         if (foreignLogs.isEmpty()) return false;
-        double closestOwn = Double.MAX_VALUE;
+        double closestOwn     = Double.MAX_VALUE;
         double closestForeign = Double.MAX_VALUE;
         for (BlockPos own : ownLogs) {
             double d = pos.distSqr(own);
@@ -314,7 +263,8 @@ public class TreeChopHandler {
             BlockPos current = queue.poll();
             for (BlockPos neighbour : getFaceNeighbours(current)) {
                 if (visited.contains(neighbour)) continue;
-                if (level.getBlockState(neighbour).getBlock() == logType) {
+                BlockState ns = level.getBlockState(neighbour);
+                if (isSameTreeLog(ns, logType)) {
                     visited.add(neighbour);
                     queue.add(neighbour);
                 }
@@ -352,7 +302,28 @@ public class TreeChopHandler {
         if (!(block instanceof RotatedPillarBlock)) return false;
         String key = BuiltInRegistries.BLOCK.getKey(block).getPath();
         return key.endsWith("_log") || key.endsWith("_wood")
-                || key.endsWith("_stem") || key.endsWith("_hyphae");
+                || key.endsWith("_stem") || key.endsWith("_hyphae")
+                || key.startsWith("stripped_");
+    }
+
+    private static boolean isSameTreeLog(BlockState state, Block logType) {
+        Block block = state.getBlock();
+        if (!(block instanceof RotatedPillarBlock)) return false;
+        String key     = BuiltInRegistries.BLOCK.getKey(block).getPath();
+        String typeKey = BuiltInRegistries.BLOCK.getKey(logType).getPath();
+        String thisWood = normaliseLogKey(key);
+        String typeWood = normaliseLogKey(typeKey);
+        if (thisWood == null || typeWood == null) return false;
+        return thisWood.equals(typeWood);
+    }
+
+    private static String normaliseLogKey(String key) {
+        String k = key.replace("stripped_", "");
+        if (k.endsWith("_log"))    return k.replace("_log", "");
+        if (k.endsWith("_wood"))   return k.replace("_wood", "");
+        if (k.endsWith("_stem"))   return k.replace("_stem", "");
+        if (k.endsWith("_hyphae")) return k.replace("_hyphae", "");
+        return null;
     }
 
     private static boolean isLeaf(BlockState state) {
@@ -366,32 +337,8 @@ public class TreeChopHandler {
         if (!isLeaf(state)) return false;
         String logKey  = BuiltInRegistries.BLOCK.getKey(logType).getPath();
         String leafKey = BuiltInRegistries.BLOCK.getKey(state.getBlock()).getPath();
-        String woodType = logKey.replace("_log", "")
-                .replace("_wood", "")
-                .replace("_stem", "")
-                .replace("_hyphae", "");
+        String woodType = normaliseLogKey(logKey);
+        if (woodType == null) return false;
         return leafKey.contains(woodType);
-    }
-
-    /**
-     * Ground blocks that a tree naturally grows on.
-     */
-    private static boolean isGround(BlockState state) {
-        Block block = state.getBlock();
-        String key = BuiltInRegistries.BLOCK.getKey(block).getPath();
-        return key.equals("dirt")
-                || key.equals("grass_block")
-                || key.equals("podzol")
-                || key.equals("rooted_dirt")
-                || key.equals("moss_block")
-                || key.equals("mud")
-                || key.equals("mycelium")
-                || key.equals("coarse_dirt")
-                || key.equals("dirt_path")
-                || key.equals("farmland")
-                || key.equals("sand")
-                || key.equals("red_sand")
-                || key.equals("gravel")
-                || key.startsWith("agotmod:");  // any mod soil block
     }
 }
