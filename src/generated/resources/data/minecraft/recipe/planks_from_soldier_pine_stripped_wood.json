@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:soldier_pine_wood_stripped"
+  ],
+  "result": {
+    "count": 4,
+    "id": "agotmod:soldier_pine_planks"
+  }
+}

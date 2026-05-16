@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "B": "agotmod:blue_soldier_pine_planks"
+  },
+  "pattern": [
+    "BB",
+    "BB",
+    "BB"
+  ],
+  "result": {
+    "count": 3,
+    "id": "agotmod:blue_soldier_pine_door"
+  }
+}

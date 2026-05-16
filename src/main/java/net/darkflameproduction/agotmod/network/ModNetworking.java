@@ -201,6 +201,12 @@ public class ModNetworking {
                     });
                 }
         );
+
+        registrar.playToServer(
+                SetTownHallCulturePacket.TYPE,
+                SetTownHallCulturePacket.STREAM_CODEC,
+                SetTownHallCulturePacket::handle
+        );
     }
 
 

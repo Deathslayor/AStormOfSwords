@@ -240,6 +240,14 @@
     "agotmod:yew_log",
     "agotmod:yew_log_stripped",
     "agotmod:yew_wood",
-    "agotmod:yew_wood_stripped"
+    "agotmod:yew_wood_stripped",
+    "agotmod:blue_soldier_pine_log",
+    "agotmod:blue_soldier_pine_log_stripped",
+    "agotmod:blue_soldier_pine_wood",
+    "agotmod:blue_soldier_pine_wood_stripped",
+    "agotmod:soldier_pine_log",
+    "agotmod:soldier_pine_log_stripped",
+    "agotmod:soldier_pine_wood",
+    "agotmod:soldier_pine_wood_stripped"
   ]
 }

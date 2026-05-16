@@ -365,7 +365,8 @@ public class ServerPacketHandler {
                             townHall.getJoblessCount(),
                             townHall.getTownBalance(),
                             townHall.getTownIncome(),
-                            new java.util.HashMap<>(townHall.getTownInventory())
+                            new java.util.HashMap<>(townHall.getTownInventory()),
+                            townHall.getCulture().name()
                     ));
                 }
             }

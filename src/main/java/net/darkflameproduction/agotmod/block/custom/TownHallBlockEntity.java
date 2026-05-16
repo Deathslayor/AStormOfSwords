@@ -7,6 +7,8 @@ import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobWar
 import net.darkflameproduction.agotmod.entity.custom.npc.system.blacksmith.BlacksmithInventoryTicketSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.butcher.ButcherInventoryTicketSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.charcoalburner.CharcoalBurnerCollectionTicketSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.culture.Culture;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.culture.TownCultureZone;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.farmer.FarmerDepositTicketSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.grocer.GrocerInventoryTicketSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.inventory.FoodCollectionTicketSystem;
@@ -124,6 +126,25 @@ public class TownHallBlockEntity extends BlockEntity implements
     }
     public List<JobBlockInfo> getAvailableJobs() {
         return new ArrayList<>(availableJobs.values());
+    }
+
+    private Culture culture = Culture.NONE;
+
+    public Culture getCulture() { return culture; }
+
+    public void setCulture(Culture culture) {
+        if (this.culture != Culture.NONE) return; // cannot change once set
+        this.culture = culture;
+        setChanged();
+        if (level instanceof ServerLevel sl) {
+            net.darkflameproduction.agotmod.entity.custom.npc.system.culture.TownCultureZone.registerZone(
+                    this.worldPosition,
+                    getCurrentScanRadius(),
+                    culture,
+                    sl.dimension()
+            );
+        }
+        if (level != null) sendDataToClients(level);
     }
 
 
@@ -771,34 +792,34 @@ public class TownHallBlockEntity extends BlockEntity implements
 
             String npcName = citizenNamesMap.getOrDefault(npcUUID, claim.getCurrentName());
 
-            // Try to find the entity and register it with this town hall
             Peasant_Entity foundPeasant = null;
             if (claim.level != null && !claim.level.isClientSide()) {
                 Entity entity = ((ServerLevel) claim.level).getEntity(npcUUID);
                 if (entity instanceof Peasant_Entity peasant) {
                     foundPeasant = peasant;
                     peasant.registerWithTownHall(this.getBlockPos());
+
+                    // Post culture ticket if town has a culture and peasant doesn't yet
+                    if (!peasant.getCultureSystem().hasCulture() && culture != Culture.NONE) {
+                        net.darkflameproduction.agotmod.entity.custom.npc.system.culture.CultureTicketSystem
+                                .postTicket(peasant.getUUID(), culture, this.getBlockPos());
+                    }
                 }
             }
 
             if (registeredCitizens.containsKey(npcUUID)) {
                 CitizenInfo citizen = registeredCitizens.get(npcUUID);
-                citizen.npcName = npcName;
+                citizen.npcName  = npcName;
                 citizen.lastSeen = System.currentTimeMillis();
-                if (foundPeasant != null) {
-                    citizen.currentJob = foundPeasant.getJobType();
-                }
+                if (foundPeasant != null) citizen.currentJob = foundPeasant.getJobType();
             } else {
                 CitizenInfo newCitizen = new CitizenInfo(npcUUID, bedPos, npcName);
-                if (foundPeasant != null) {
-                    newCitizen.currentJob = foundPeasant.getJobType();
-                }
+                if (foundPeasant != null) newCitizen.currentJob = foundPeasant.getJobType();
                 registeredCitizens.put(npcUUID, newCitizen);
                 shouldSendDataUpdate = true;
             }
         }
 
-        // Remove citizens who no longer have bed claims for more than 5 minutes
         registeredCitizens.entrySet().removeIf(entry -> {
             if (!foundCitizens.contains(entry.getKey()) &&
                     System.currentTimeMillis() - entry.getValue().lastSeen > 300000) {
@@ -1017,43 +1038,31 @@ public class TownHallBlockEntity extends BlockEntity implements
         }
     }
 
-    /**
-     * Spawns a child NPC at the specified bed
-     */
     private void spawnChildAtBed(ServerLevel level, BlockPos bedPos, RandomSource random) {
-        // Create the child peasant
         Peasant_Entity child = ModEntities.PEASANT_ENTITY.get().create(level, EntitySpawnReason.SPAWNER);
         if (child == null) return;
 
-        // Set position at the bed
         child.setPos(bedPos.getX() + 0.5, bedPos.getY() + 1.0, bedPos.getZ() + 0.5);
-
-        // Set as child
         child.setAge(Peasant_Entity.AGE_CHILD);
 
-        // Random gender
+        // Gender must be set before addFreshEntity so TownCultureZone rolls the right variants
         String gender = random.nextBoolean() ? Peasant_Entity.GENDER_MALE : Peasant_Entity.GENDER_FEMALE;
         child.setGender(gender);
 
-        // Set aging timer for child
-        int agingTime = 240000 + (random.nextInt(96000) - 48000); // Average ± variance
+        int agingTime = 240000 + (random.nextInt(96000) - 48000);
         child.setAgingTimer(0);
         child.getPersistentData().putInt("AgingTarget", agingTime);
 
-        // Generate name with potential family connection
         generateChildName(child, random);
 
-        // Set the bed as their home and register it with the warning system
         child.getHomeSystem().establishHomeBed(bedPos);
 
-        // Register the bed claim with the warning system (including the child's name)
         String childName = child.hasCustomName() ? child.getCustomName().getString() : "Unnamed Child";
         SimpleBedWarningSystem.broadcastHomeBedClaim(child.getUUID(), bedPos, childName, level);
 
-        // Finalize spawn
+        // TownCultureZone.onEntityJoinLevel fires here and assigns culture + re-rolls name
         level.addFreshEntity(child);
     }
-
     /**
      * Generates a name for the child, with 80% chance of using existing family name
      */
@@ -1151,6 +1160,16 @@ public class TownHallBlockEntity extends BlockEntity implements
             citizenCount = newCitizenCount;
             sendDataToClients(level);
             setChanged();
+
+            // Re-register zone with updated radius as town grows
+            if (culture != Culture.NONE && level instanceof ServerLevel sl) {
+                net.darkflameproduction.agotmod.entity.custom.npc.system.culture.TownCultureZone.registerZone(
+                        this.worldPosition,
+                        getCurrentScanRadius(),
+                        culture,
+                        sl.dimension()
+                );
+            }
         }
     }
 
@@ -1267,7 +1286,8 @@ public class TownHallBlockEntity extends BlockEntity implements
                                     this.getJoblessCount(),
                                     this.townBalance,
                                     this.townIncome,
-                                    new java.util.HashMap<>(this.townInventory)
+                                    new java.util.HashMap<>(this.townInventory),
+                                    this.culture.name()
                             ));
                 }
             }
@@ -1295,7 +1315,8 @@ public class TownHallBlockEntity extends BlockEntity implements
                                     this.getJoblessCount(),
                                     this.townBalance,
                                     this.townIncome,
-                                    new java.util.HashMap<>(this.townInventory)  // <-- add this
+                                    new java.util.HashMap<>(this.townInventory),
+                                    this.culture.name()
                             ));
                 }
             }
@@ -1327,7 +1348,8 @@ public class TownHallBlockEntity extends BlockEntity implements
                                     this.getJoblessCount(),
                                     this.townBalance,
                                     this.townIncome,
-                                    new java.util.HashMap<>(this.townInventory)
+                                    new java.util.HashMap<>(this.townInventory),
+                                    this.culture.name()
                             ));
                 }
             }
@@ -1380,6 +1402,15 @@ public class TownHallBlockEntity extends BlockEntity implements
             LumberjackDepositTicketSystem.registerListener(this);
             CharcoalBurnerCollectionTicketSystem.registerListener(this);
 
+            // Re-register culture zone so spawns inside this town get the right culture
+            if (culture != Culture.NONE && level instanceof ServerLevel sl) {
+                net.darkflameproduction.agotmod.entity.custom.npc.system.culture.TownCultureZone.registerZone(
+                        this.worldPosition,
+                        getCurrentScanRadius(),
+                        culture,
+                        sl.dimension()
+                );
+            }
         }
     }
 
@@ -1478,6 +1509,13 @@ public class TownHallBlockEntity extends BlockEntity implements
         LumberjackDepositTicketSystem.unregisterListener(this);
         CharcoalBurnerCollectionTicketSystem.unregisterListener(this);
 
+        // Unregister culture zone so spawns are no longer affected
+        if (level instanceof ServerLevel sl) {
+            net.darkflameproduction.agotmod.entity.custom.npc.system.culture.TownCultureZone.removeZone(
+                    this.worldPosition, sl.dimension()
+            );
+        }
+
         if (!level.isClientSide()) {
             level.players().forEach(player -> {
                 if (player instanceof ServerPlayer serverPlayer) {
@@ -1563,41 +1601,34 @@ public class TownHallBlockEntity extends BlockEntity implements
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
 
-        // ===== BASIC TOWN DATA =====
         tag.putInt("BedCount", bedCount);
         tag.putInt("CitizenCount", citizenCount);
         tag.putString("TownName", townName);
 
-        // ===== TOWN CLAIMING DATA =====
         tag.putBoolean("IsClaimed", isClaimed);
-        if (claimedByPlayerUUID != null) {
-            tag.putUUID("ClaimedByPlayerUUID", claimedByPlayerUUID);
-        }
+        if (claimedByPlayerUUID != null) tag.putUUID("ClaimedByPlayerUUID", claimedByPlayerUUID);
 
-        // ===== TIMING AND STATE DATA =====
+        tag.putString("Culture", culture.name());
+
         tag.putLong("LastScanDay", lastScanDay);
         tag.putLong("LastChildSpawnDay", lastChildSpawnDay);
         tag.putBoolean("HasScannedToday", hasScannedToday);
 
-        // ===== TICK COUNTERS =====
         tag.putInt("TicksSinceLastRegister", ticksSinceLastRegister);
         tag.putInt("TicksSinceLastCitizenCheck", ticksSinceLastCitizenCheck);
         tag.putInt("TicksSinceLastJobAssignment", ticksSinceLastJobAssignment);
         tag.putInt("TicksSinceLastJoblessUpdate", ticksSinceLastJoblessUpdate);
         tag.putInt("TicksSinceLastJobCleanup", ticksSinceLastJobCleanup);
 
-        // ===== JOB MANAGEMENT DATA =====
         tag.putInt("AvailableJobCount", availableJobCount);
         tag.putInt("AssignedJobCount", assignedJobCount);
         tag.putBoolean("ShouldSendDataUpdate", shouldSendDataUpdate);
 
-        // ===== CITIZEN LAST NAMES CACHE =====
         tag.putInt("CitizenLastNamesCount", citizenLastNames.size());
         for (int i = 0; i < citizenLastNames.size(); i++) {
             tag.putString("CitizenLastName_" + i, citizenLastNames.get(i));
         }
 
-        // ===== REGISTERED CITIZENS =====
         tag.putInt("RegisteredCitizensCount", registeredCitizens.size());
         int citizenIndex = 0;
         for (CitizenInfo citizen : registeredCitizens.values()) {
@@ -1611,7 +1642,6 @@ public class TownHallBlockEntity extends BlockEntity implements
             citizenIndex++;
         }
 
-        // ===== AVAILABLE JOBS =====
         tag.putInt("AvailableJobsCount", availableJobs.size());
         int jobIndex = 0;
         for (JobBlockInfo job : availableJobs.values()) {
@@ -1619,31 +1649,24 @@ public class TownHallBlockEntity extends BlockEntity implements
             jobTag.putLong("JobBlockPos", job.jobBlockPos.asLong());
             jobTag.putString("JobType", job.jobType);
             jobTag.putBoolean("IsOccupied", job.isOccupied);
-            if (job.assignedNPC != null) {
-                jobTag.putUUID("AssignedNPC", job.assignedNPC);
-            }
+            if (job.assignedNPC != null) jobTag.putUUID("AssignedNPC", job.assignedNPC);
             tag.put("Job_" + jobIndex, jobTag);
             jobIndex++;
         }
 
-        // ===== JOBLESS QUEUE =====
         List<UUID> joblessUUIDs = new ArrayList<>(joblessQueue);
         tag.putInt("JoblessQueueCount", joblessUUIDs.size());
         for (int i = 0; i < joblessUUIDs.size(); i++) {
             tag.putUUID("JoblessUUID_" + i, joblessUUIDs.get(i));
         }
 
-        // ===== TOWN HALL SHARED INVENTORY =====
         cleanupTownInventory();
         CompoundTag townInventoryTag = new CompoundTag();
         for (Map.Entry<String, Long> entry : townInventory.entrySet()) {
-            if (entry.getValue() > 0) {
-                townInventoryTag.putLong(entry.getKey(), entry.getValue());
-            }
+            if (entry.getValue() > 0) townInventoryTag.putLong(entry.getKey(), entry.getValue());
         }
         tag.put("TownInventory", townInventoryTag);
 
-        // ===== TOWN BALANCE =====
         tag.putLong("TownBalance", townBalance);
         tag.putLong("TownIncome", townIncome);
     }
@@ -1652,34 +1675,33 @@ public class TownHallBlockEntity extends BlockEntity implements
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
 
-        // ===== BASIC TOWN DATA =====
-        bedCount = tag.getInt("BedCount");
+        bedCount     = tag.getInt("BedCount");
         citizenCount = tag.getInt("CitizenCount");
-        townName = tag.getString("TownName");
+        townName     = tag.getString("TownName");
         if (townName.isEmpty()) townName = "Unnamed Town";
 
-        // ===== TOWN CLAIMING DATA =====
-        isClaimed = tag.getBoolean("IsClaimed");
+        isClaimed           = tag.getBoolean("IsClaimed");
         claimedByPlayerUUID = tag.hasUUID("ClaimedByPlayerUUID") ? tag.getUUID("ClaimedByPlayerUUID") : null;
 
-        // ===== TIMING AND STATE DATA =====
-        lastScanDay = tag.getLong("LastScanDay");
-        lastChildSpawnDay = tag.getLong("LastChildSpawnDay");
-        hasScannedToday = tag.getBoolean("HasScannedToday");
+        if (tag.contains("Culture")) {
+            try { culture = Culture.valueOf(tag.getString("Culture")); }
+            catch (IllegalArgumentException e) { culture = Culture.NONE; }
+        }
 
-        // ===== TICK COUNTERS =====
-        ticksSinceLastRegister = tag.getInt("TicksSinceLastRegister");
-        ticksSinceLastCitizenCheck = tag.getInt("TicksSinceLastCitizenCheck");
+        lastScanDay      = tag.getLong("LastScanDay");
+        lastChildSpawnDay = tag.getLong("LastChildSpawnDay");
+        hasScannedToday  = tag.getBoolean("HasScannedToday");
+
+        ticksSinceLastRegister      = tag.getInt("TicksSinceLastRegister");
+        ticksSinceLastCitizenCheck  = tag.getInt("TicksSinceLastCitizenCheck");
         ticksSinceLastJobAssignment = tag.getInt("TicksSinceLastJobAssignment");
         ticksSinceLastJoblessUpdate = tag.getInt("TicksSinceLastJoblessUpdate");
-        ticksSinceLastJobCleanup = tag.getInt("TicksSinceLastJobCleanup");
+        ticksSinceLastJobCleanup    = tag.getInt("TicksSinceLastJobCleanup");
 
-        // ===== JOB MANAGEMENT DATA =====
-        availableJobCount = tag.getInt("AvailableJobCount");
-        assignedJobCount = tag.getInt("AssignedJobCount");
+        availableJobCount  = tag.getInt("AvailableJobCount");
+        assignedJobCount   = tag.getInt("AssignedJobCount");
         shouldSendDataUpdate = tag.getBoolean("ShouldSendDataUpdate");
 
-        // ===== CITIZEN LAST NAMES CACHE =====
         citizenLastNames.clear();
         int lastNameCount = tag.getInt("CitizenLastNamesCount");
         for (int i = 0; i < lastNameCount; i++) {
@@ -1687,83 +1709,71 @@ public class TownHallBlockEntity extends BlockEntity implements
             if (!lastName.isEmpty()) citizenLastNames.add(lastName);
         }
 
-        // ===== REGISTERED CITIZENS =====
         registeredCitizens.clear();
         int citizenCount = tag.getInt("RegisteredCitizensCount");
         for (int i = 0; i < citizenCount; i++) {
             if (!tag.contains("Citizen_" + i)) continue;
             try {
                 CompoundTag citizenTag = tag.getCompound("Citizen_" + i);
-                UUID uuid = citizenTag.getUUID("UUID");
+                UUID uuid       = citizenTag.getUUID("UUID");
                 BlockPos bedPos = BlockPos.of(citizenTag.getLong("HomeBedPos"));
-                String name = citizenTag.getString("Name");
-                String job = citizenTag.contains("Job") ? citizenTag.getString("Job") : JobSystem.JOB_NONE;
-                long lastSeen = citizenTag.contains("LastSeen") ? citizenTag.getLong("LastSeen") : System.currentTimeMillis();
-
+                String name     = citizenTag.getString("Name");
+                String job      = citizenTag.contains("Job") ? citizenTag.getString("Job") : JobSystem.JOB_NONE;
+                long lastSeen   = citizenTag.contains("LastSeen") ? citizenTag.getLong("LastSeen") : System.currentTimeMillis();
                 CitizenInfo citizen = new CitizenInfo(uuid, bedPos, name.isEmpty() ? "Unknown" : name);
                 citizen.currentJob = job;
-                citizen.lastSeen = lastSeen;
+                citizen.lastSeen   = lastSeen;
                 registeredCitizens.put(uuid, citizen);
             } catch (Exception e) {
                 System.err.println("Failed to load citizen data at index " + i + ": " + e.getMessage());
             }
         }
 
-        // ===== AVAILABLE JOBS =====
         availableJobs.clear();
         int jobCount = tag.getInt("AvailableJobsCount");
         for (int i = 0; i < jobCount; i++) {
             if (!tag.contains("Job_" + i)) continue;
             try {
-                CompoundTag jobTag = tag.getCompound("Job_" + i);
-                BlockPos jobPos = BlockPos.of(jobTag.getLong("JobBlockPos"));
-                String jobType = jobTag.getString("JobType");
-                boolean isOccupied = jobTag.getBoolean("IsOccupied");
-
-                JobBlockInfo job = new JobBlockInfo(jobPos, jobType);
-                job.isOccupied = isOccupied;
+                CompoundTag jobTag  = tag.getCompound("Job_" + i);
+                BlockPos jobPos     = BlockPos.of(jobTag.getLong("JobBlockPos"));
+                String jobType      = jobTag.getString("JobType");
+                boolean isOccupied  = jobTag.getBoolean("IsOccupied");
+                JobBlockInfo job    = new JobBlockInfo(jobPos, jobType);
+                job.isOccupied      = isOccupied;
                 if (jobTag.hasUUID("AssignedNPC")) job.assignedNPC = jobTag.getUUID("AssignedNPC");
-
                 availableJobs.put(jobPos, job);
             } catch (Exception e) {
                 System.err.println("Failed to load job data at index " + i + ": " + e.getMessage());
             }
         }
 
-        // ===== JOBLESS QUEUE =====
         joblessQueue.clear();
         int joblessCount = tag.getInt("JoblessQueueCount");
         for (int i = 0; i < joblessCount; i++) {
             if (!tag.hasUUID("JoblessUUID_" + i)) continue;
-            try {
-                joblessQueue.offer(tag.getUUID("JoblessUUID_" + i));
-            } catch (Exception e) {
-                System.err.println("Failed to load jobless UUID at index " + i + ": " + e.getMessage());
-            }
+            try { joblessQueue.offer(tag.getUUID("JoblessUUID_" + i)); }
+            catch (Exception e) { System.err.println("Failed to load jobless UUID at index " + i); }
         }
 
-        // ===== TOWN HALL SHARED INVENTORY =====
         townInventory.clear();
         if (tag.contains("TownInventory")) {
-            CompoundTag townInventoryTag = tag.getCompound("TownInventory");
-            for (String key : townInventoryTag.getAllKeys()) {
-                long value = townInventoryTag.getLong(key);
+            CompoundTag inv = tag.getCompound("TownInventory");
+            for (String key : inv.getAllKeys()) {
+                long value = inv.getLong(key);
                 if (value > 0) townInventory.put(key, value);
             }
         }
         cleanupTownInventory();
 
-        // ===== TOWN BALANCE =====
         townBalance = tag.getLong("TownBalance");
-        townIncome = tag.getLong("TownIncome");
+        townIncome  = tag.getLong("TownIncome");
 
-        // ===== DATA VALIDATION =====
         if (!availableJobs.isEmpty()) {
             long actualAvailable = availableJobs.values().stream().filter(j -> !j.isOccupied).count();
-            long actualAssigned = availableJobs.values().stream().filter(j -> j.isOccupied).count();
+            long actualAssigned  = availableJobs.values().stream().filter(j ->  j.isOccupied).count();
             if (actualAvailable != availableJobCount || actualAssigned != assignedJobCount) {
                 availableJobCount = (int) actualAvailable;
-                assignedJobCount = (int) actualAssigned;
+                assignedJobCount  = (int) actualAssigned;
                 shouldSendDataUpdate = true;
             }
         }

@@ -76,13 +76,13 @@ public class FarmingSystem {
         int planted = 0;
         boolean triggeredAnimation = false;
 
-        for (int x = -9; x <= 9; x++) {
-            for (int z = -9; z <= 9; z++) {
+        for (int x = -18; x <= 18; x++) {
+            for (int z = -18; z <= 18; z++) {
                 BlockPos farmlandPos = new BlockPos(jobBlock.getX() + x, jobBlock.getY() - 1, jobBlock.getZ() + z);
                 BlockPos cropPos = farmlandPos.above();
 
                 BlockState groundState = peasant.level().getBlockState(farmlandPos);
-                BlockState aboveState  = peasant.level().getBlockState(cropPos);
+                BlockState aboveState = peasant.level().getBlockState(cropPos);
 
                 if (groundState.getBlock() == net.minecraft.world.level.block.Blocks.FARMLAND && aboveState.isAir()) {
                     if (hasSeedInInventory(cropToPlant.asItem())) {
@@ -90,6 +90,7 @@ public class FarmingSystem {
                             triggerInteractAnimation();
                             triggeredAnimation = true;
                         }
+
                         peasant.level().setBlock(cropPos, cropToPlant.defaultBlockState(), 3);
                         peasant.level().playSound(null, cropPos, SoundEvents.GRASS_BREAK, SoundSource.BLOCKS, 0.6F, 1.2F);
                         consumeSeedFromInventory(cropToPlant.asItem());
@@ -99,10 +100,13 @@ public class FarmingSystem {
                     }
                 }
             }
+
             if (!hasSeedInInventory(cropToPlant.asItem())) break;
         }
 
-        if (planted == 0) currentFarmState = FarmState.HARVESTING_CROPS;
+        if (planted == 0) {
+            currentFarmState = FarmState.HARVESTING_CROPS;
+        }
 
         return planted;
     }
@@ -118,13 +122,13 @@ public class FarmingSystem {
         int maxPlantings = 3;
         boolean triggeredAnimation = false;
 
-        for (int x = -9; x <= 9 && planted < maxPlantings; x++) {
-            for (int z = -9; z <= 9 && planted < maxPlantings; z++) {
+        for (int x = -18; x <= 18 && planted < maxPlantings; x++) {
+            for (int z = -18; z <= 18 && planted < maxPlantings; z++) {
                 BlockPos farmlandPos = new BlockPos(jobBlock.getX() + x, jobBlock.getY() - 1, jobBlock.getZ() + z);
                 BlockPos cropPos = farmlandPos.above();
 
                 BlockState groundState = peasant.level().getBlockState(farmlandPos);
-                BlockState aboveState  = peasant.level().getBlockState(cropPos);
+                BlockState aboveState = peasant.level().getBlockState(cropPos);
 
                 if (groundState.getBlock() == net.minecraft.world.level.block.Blocks.FARMLAND && aboveState.isAir()) {
                     if (hasSeedInInventory(cropToPlant.asItem())) {
@@ -132,6 +136,7 @@ public class FarmingSystem {
                             triggerInteractAnimation();
                             triggeredAnimation = true;
                         }
+
                         peasant.level().setBlock(cropPos, cropToPlant.defaultBlockState(), 3);
                         peasant.level().playSound(null, cropPos, SoundEvents.GRASS_BREAK, SoundSource.BLOCKS, 0.6F, 1.2F);
                         consumeSeedFromInventory(cropToPlant.asItem());
@@ -141,6 +146,7 @@ public class FarmingSystem {
                     }
                 }
             }
+
             if (!hasSeedInInventory(cropToPlant.asItem()) || planted >= maxPlantings) break;
         }
 
@@ -152,11 +158,14 @@ public class FarmingSystem {
 
         BlockPos jobBlock = peasant.getJobBlockPos();
 
-        for (int x = -9; x <= 9; x++) {
-            for (int z = -9; z <= 9; z++) {
+        for (int x = -18; x <= 18; x++) {
+            for (int z = -18; z <= 18; z++) {
                 BlockPos cropPos = new BlockPos(jobBlock.getX() + x, jobBlock.getY(), jobBlock.getZ() + z);
                 BlockState cropState = peasant.level().getBlockState(cropPos);
-                if (isCropFullyGrown(cropState)) return cropPos;
+
+                if (isCropFullyGrown(cropState)) {
+                    return cropPos;
+                }
             }
         }
 
@@ -188,10 +197,11 @@ public class FarmingSystem {
 
         BlockPos jobBlock = peasant.getJobBlockPos();
 
-        for (int x = 9; x >= -9; x--) {
-            for (int z = 9; z >= -9; z--) {
+        for (int x = 18; x >= -18; x--) {
+            for (int z = 18; z >= -18; z--) {
                 BlockPos cropPos = new BlockPos(jobBlock.getX() + x, jobBlock.getY(), jobBlock.getZ() + z);
                 BlockState state = peasant.level().getBlockState(cropPos);
+
                 if (state.getBlock() instanceof net.minecraft.world.level.block.CropBlock) {
                     return state.getBlock();
                 }
@@ -199,6 +209,7 @@ public class FarmingSystem {
         }
 
         ItemStack mostAbundantSeed = getMostAbundantSeeds();
+
         if (!mostAbundantSeed.isEmpty() &&
                 mostAbundantSeed.getItem() instanceof net.minecraft.world.item.BlockItem blockItem &&
                 blockItem.getBlock() instanceof net.minecraft.world.level.block.CropBlock) {

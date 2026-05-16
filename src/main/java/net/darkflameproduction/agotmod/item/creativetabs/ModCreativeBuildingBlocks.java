@@ -74,7 +74,9 @@ public class ModCreativeBuildingBlocks {
             "white_cherry",
             "willow",
             "wormtree",
-            "yew"
+            "yew",
+            "blue_soldier_pine",
+            "soldier_pine"
     };
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AGOT_TAB_BUILDING_BLOCKS = CREATIVE_MODE_TAB.register("agot_tab_building_blocks",
@@ -99,6 +101,12 @@ public class ModCreativeBuildingBlocks {
                         pOutput.accept(ModBLocks.GRASS_BLOCK_SLAB.get());
                         pOutput.accept(ModBLocks.DIRT_PATH_STAIRS.get());
                         pOutput.accept(ModBLocks.DIRT_PATH_SLAB.get());
+
+                        pOutput.accept(ModBLocks.THATCH_BLOCK.get());
+                        pOutput.accept(ModBLocks.THATCH_STAIRS.get());
+                        pOutput.accept(ModBLocks.THATCH_SLAB.get());
+                        pOutput.accept(ModBLocks.HEARTH_BLOCK.get());
+
 
                         //Wood
                         pOutput.accept(ModBLocks.OAK_WALL.get());

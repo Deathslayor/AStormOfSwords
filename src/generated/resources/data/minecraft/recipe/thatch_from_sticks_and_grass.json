@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "O": [
+      "minecraft:stick",
+      "minecraft:short_grass"
+    ]
+  },
+  "pattern": [
+    " OOO ",
+    " OOO ",
+    " OOO "
+  ],
+  "result": {
+    "count": 1,
+    "id": "agotmod:thatch_block"
+  }
+}

@@ -180,7 +180,9 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 "white_cherry",
                 "willow",
                 "wormtree",
-                "yew"
+                "yew",
+                "blue_soldier_pine",
+                "soldier_pine"
         };
 
 
@@ -785,6 +787,15 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModBLocks.REDKEEP_STONE_WALL.get().asItem())
         ;
 
+        this.tag(ItemTags.SLABS)
+                .add(ModBLocks.THATCH_SLAB.get().asItem().asItem());
+        this.tag(ItemTags.STAIRS)
+                .add(ModBLocks.THATCH_STAIRS.get().asItem().asItem());
+        this.tag(ItemTags.LEAVES)
+                .add(ModBLocks.THATCH_BLOCK.get().asItem().asItem());
+
+        this.tag(ItemTags.DIRT)
+                .add(ModBLocks.PEAT.get().asItem().asItem());
 
 
 

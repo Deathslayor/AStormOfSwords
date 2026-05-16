@@ -62,6 +62,8 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> OAK2_KEY = registerKey("oak2");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SENTINEL_KEY = registerKey("sentinel");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PINE_KEY = registerKey("pine");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SOLDIER_PINE_KEY = registerKey("soldier_pine");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BLUE_SOLDIER_PINE_KEY = registerKey("blue_soldier_pine");
     public static final ResourceKey<ConfiguredFeature<?, ?>> IRONWOOD_KEY = registerKey("ironwood");
     public static final ResourceKey<ConfiguredFeature<?, ?>> HAWTHORN_KEY = registerKey("hawthorn");
     public static final ResourceKey<ConfiguredFeature<?, ?>> CHESTNUT_KEY = registerKey("chestnut");
@@ -122,6 +124,8 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> OAK2_RARE_KEY = registerKey("oak2_rare");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SENTINEL_RARE_KEY = registerKey("sentinel_rare");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PINE_RARE_KEY = registerKey("pine_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SOLDIER_PINE_RARE_KEY = registerKey("soldier_pine_rare");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BLUE_SOLDIER_PINE_RARE_KEY = registerKey("blue_soldier_pine_rare");
     public static final ResourceKey<ConfiguredFeature<?, ?>> IRONWOOD_RARE_KEY = registerKey("ironwood_rare");
     public static final ResourceKey<ConfiguredFeature<?, ?>> HAWTHORN_RARE_KEY = registerKey("hawthorn_rare");
     public static final ResourceKey<ConfiguredFeature<?, ?>> CHESTNUT_RARE_KEY = registerKey("chestnut_rare");
@@ -457,6 +461,24 @@ public class ModConfiguredFeatures {
                 new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
                 new TwoLayersFeatureSize(1, 0, 1)).build());
 
+        // Pine tree
+        register(context, SOLDIER_PINE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("soldier_pine").get()),
+                new StraightTrunkPlacer(7, 2, 2),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("soldier_pine").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        // Pine tree
+        register(context, BLUE_SOLDIER_PINE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("blue_soldier_pine").get()),
+                new StraightTrunkPlacer(7, 2, 2),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("blue_soldier_pine").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
 // Ironwood tree
         register(context, IRONWOOD_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBLocks.LOGS.get("ironwood").get()),
@@ -563,6 +585,22 @@ public class ModConfiguredFeatures {
                 BlockStateProvider.simple(ModBLocks.LOGS.get("pine").get()),
                 new StraightTrunkPlacer(7, 2, 2),
                 BlockStateProvider.simple(ModBLocks.LEAVES.get("pine").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, SOLDIER_PINE_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("soldier_pine").get()),
+                new StraightTrunkPlacer(7, 2, 2),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("soldier_pine").get().defaultBlockState()
+                        .setValue(LeavesBlock.PERSISTENT, true)),
+                new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
+                new TwoLayersFeatureSize(1, 0, 1)).build());
+
+        register(context, BLUE_SOLDIER_PINE_RARE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBLocks.LOGS.get("blue_soldier_pine").get()),
+                new StraightTrunkPlacer(7, 2, 2),
+                BlockStateProvider.simple(ModBLocks.LEAVES.get("blue_soldier_pine").get().defaultBlockState()
                         .setValue(LeavesBlock.PERSISTENT, true)),
                 new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(3)),
                 new TwoLayersFeatureSize(1, 0, 1)).build());

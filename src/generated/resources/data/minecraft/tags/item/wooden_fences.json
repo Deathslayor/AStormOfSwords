@@ -190,6 +190,12 @@
     "agotmod:wormtree_wall",
     "agotmod:yew_fence",
     "agotmod:yew_fence_gate",
-    "agotmod:yew_wall"
+    "agotmod:yew_wall",
+    "agotmod:blue_soldier_pine_fence",
+    "agotmod:blue_soldier_pine_fence_gate",
+    "agotmod:blue_soldier_pine_wall",
+    "agotmod:soldier_pine_fence",
+    "agotmod:soldier_pine_fence_gate",
+    "agotmod:soldier_pine_wall"
   ]
 }

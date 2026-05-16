@@ -199,6 +199,14 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBLocks.DIRT_PATH_STAIRS.get());
         this.add(ModBLocks.DIRT_PATH_SLAB.get(), createSlabItemTable(ModBLocks.DIRT_PATH_SLAB.get()));
 
+        this.dropSelf(ModBLocks.THATCH_BLOCK.get());
+        this.dropSelf(ModBLocks.THATCH_STAIRS.get());
+        this.add(ModBLocks.THATCH_SLAB.get(), createSlabItemTable(ModBLocks.THATCH_SLAB.get()));
+
+        this.dropSelf(ModBLocks.PEAT.get());
+        this.dropSelf(ModBLocks.HEARTH_BLOCK.get());
+
+
         // ---------------------------(TREES)--------------------------- //
         //Weirwood
         this.dropSelf(ModBLocks.WEIRWOOD_LOG.get());
@@ -334,7 +342,9 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 "sandalwood",
                 "sandbeggar",
                 "tigerwood",
-                "yew"
+                "yew",
+                "blue_soldier_pine",
+                "soldier_pine"
         };
 
 // Register loot tables for all wood blocks
@@ -1066,6 +1076,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBLocks.CHARRED_TABLE.get());
         this.dropSelf(ModBLocks.ROTTEN_TABLE.get());
         this.dropSelf(ModBLocks.PINE_TABLE.get());
+        this.dropSelf(ModBLocks.SOLDIER_PINE_TABLE.get());
+        this.dropSelf(ModBLocks.BLUE_SOLDIER_PINE_TABLE.get());
         this.dropSelf(ModBLocks.ASH_TABLE.get());
         this.dropSelf(ModBLocks.BEECH_TABLE.get());
         this.dropSelf(ModBLocks.CEDAR_TABLE.get());
@@ -1140,6 +1152,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBLocks.CHARRED_CHAIR.get());
         this.dropSelf(ModBLocks.ROTTEN_CHAIR.get());
         this.dropSelf(ModBLocks.PINE_CHAIR.get());
+        this.dropSelf(ModBLocks.SOLDIER_PINE_CHAIR.get());
+        this.dropSelf(ModBLocks.BLUE_SOLDIER_PINE_CHAIR.get());
         this.dropSelf(ModBLocks.ASH_CHAIR.get());
         this.dropSelf(ModBLocks.BEECH_CHAIR.get());
         this.dropSelf(ModBLocks.CEDAR_CHAIR.get());
@@ -1214,6 +1228,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBLocks.CHARRED_ARM_CHAIR.get());
         this.dropSelf(ModBLocks.ROTTEN_ARM_CHAIR.get());
         this.dropSelf(ModBLocks.PINE_ARM_CHAIR.get());
+        this.dropSelf(ModBLocks.SOLDIER_PINE_ARM_CHAIR.get());
+        this.dropSelf(ModBLocks.BLUE_SOLDIER_PINE_ARM_CHAIR.get());
         this.dropSelf(ModBLocks.ASH_ARM_CHAIR.get());
         this.dropSelf(ModBLocks.BEECH_ARM_CHAIR.get());
         this.dropSelf(ModBLocks.CEDAR_ARM_CHAIR.get());
@@ -1288,6 +1304,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBLocks.CHARRED_STOOL.get());
         this.dropSelf(ModBLocks.ROTTEN_STOOL.get());
         this.dropSelf(ModBLocks.PINE_STOOL.get());
+        this.dropSelf(ModBLocks.SOLDIER_PINE_STOOL.get());
+        this.dropSelf(ModBLocks.BLUE_SOLDIER_PINE_STOOL.get());
         this.dropSelf(ModBLocks.ASH_STOOL.get());
         this.dropSelf(ModBLocks.BEECH_STOOL.get());
         this.dropSelf(ModBLocks.CEDAR_STOOL.get());

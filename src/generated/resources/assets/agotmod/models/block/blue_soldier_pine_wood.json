@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "agotmod:block/blue_soldier_pine_log",
+    "side": "agotmod:block/blue_soldier_pine_log"
+  }
+}

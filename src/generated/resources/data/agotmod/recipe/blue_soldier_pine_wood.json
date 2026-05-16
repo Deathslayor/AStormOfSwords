@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "agotmod:blue_soldier_pine_log",
+    "agotmod:blue_soldier_pine_log",
+    "agotmod:blue_soldier_pine_log",
+    "agotmod:blue_soldier_pine_log"
+  ],
+  "result": {
+    "count": 3,
+    "id": "agotmod:blue_soldier_pine_wood"
+  }
+}

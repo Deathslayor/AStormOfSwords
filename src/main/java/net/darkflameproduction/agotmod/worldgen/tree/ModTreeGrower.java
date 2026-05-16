@@ -65,4 +65,7 @@ public class ModTreeGrower {
     public static final TreeGrower SANDBEGGAR = new TreeGrower("sandbeggar", Optional.empty(), Optional.of(ModConfiguredFeatures.SANDBEGGAR_KEY), Optional.empty());
     public static final TreeGrower TIGERWOOD = new TreeGrower("tigerwood", Optional.empty(), Optional.of(ModConfiguredFeatures.TIGERWOOD_KEY), Optional.empty());
     public static final TreeGrower YEW = new TreeGrower("yew", Optional.empty(), Optional.of(ModConfiguredFeatures.YEW_KEY), Optional.empty());
+    public static final TreeGrower SOLDIER_PINE = new TreeGrower("soldier_pine", Optional.empty(), Optional.of(ModConfiguredFeatures.SOLDIER_PINE_KEY), Optional.empty());
+    public static final TreeGrower BLUE_SOLDIER_PINE = new TreeGrower("blue_soldier_pine", Optional.empty(), Optional.of(ModConfiguredFeatures.BLUE_SOLDIER_PINE_KEY), Optional.empty());
+
 }

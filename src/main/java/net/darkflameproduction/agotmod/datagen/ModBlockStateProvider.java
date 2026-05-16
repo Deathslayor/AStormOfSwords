@@ -197,6 +197,79 @@ public class ModBlockStateProvider extends BlockStateProvider {
         ModelFile grassStairsOuter = models().stairsOuter("grass_block_stairs_outer", mcLoc("block/grass_block_side"), mcLoc("block/dirt"), mcLoc("block/grass_block_top"));
         stairsBlock(((StairBlock) ModBLocks.GRASS_BLOCK_STAIRS.get()), grassStairs, grassStairsInner, grassStairsOuter);
 
+        blockWithItem(ModBLocks.PEAT);
+
+
+        // THATCH BLOCK (RotatedPillarBlock)
+        axisBlock(
+                ((RotatedPillarBlock) ModBLocks.THATCH_BLOCK.get()),
+                modLoc("block/thatch_block_side"),
+                modLoc("block/thatch_block_top")
+        );
+        simpleBlockItem(ModBLocks.THATCH_BLOCK.get(), models().getExistingFile(AGoTMod.id("block/thatch_block")));
+
+// THATCH SLAB
+        ModelFile thatchSlab = models().slab(
+                "thatch_slab",
+                modLoc("block/thatch_block_top"),
+                modLoc("block/thatch_block_side"),
+                modLoc("block/thatch_block_side")
+        );
+
+        ModelFile thatchSlabTop = models().slabTop(
+                "thatch_slab_top",
+                modLoc("block/thatch_block_top"),
+                modLoc("block/thatch_block_side"),
+                modLoc("block/thatch_block_side")
+        );
+
+        ModelFile thatchSlabDouble = models().cubeBottomTop(
+                "thatch_slab_double",
+                modLoc("block/thatch_block_top"),
+                modLoc("block/thatch_block_side"),
+                modLoc("block/thatch_block_side")
+        );
+
+        slabBlock(
+                ((SlabBlock) ModBLocks.THATCH_SLAB.get()),
+                thatchSlab,
+                thatchSlabTop,
+                thatchSlabDouble
+        );
+
+// THATCH STAIRS
+        ModelFile thatchStairs = models().stairs(
+                "thatch_stairs",
+                modLoc("block/thatch_block_top"),
+                modLoc("block/thatch_block_side"),
+                modLoc("block/thatch_block_side")
+        );
+
+        ModelFile thatchStairsInner = models().stairsInner(
+                "thatch_stairs_inner",
+                modLoc("block/thatch_block_top"),
+                modLoc("block/thatch_block_side"),
+                modLoc("block/thatch_block_side")
+        );
+
+        ModelFile thatchStairsOuter = models().stairsOuter(
+                "thatch_stairs_outer",
+                modLoc("block/thatch_block_top"),
+                modLoc("block/thatch_block_side"),
+                modLoc("block/thatch_block_side")
+        );
+
+        stairsBlock(
+                ((StairBlock) ModBLocks.THATCH_STAIRS.get()),
+                thatchStairs,
+                thatchStairsInner,
+                thatchStairsOuter
+        );
+
+        blockWithItem(ModBLocks.HEARTH_BLOCK);
+
+
+
         // ---------------------------(TREES)--------------------------- //
         //Weirwood
         logBlock((RotatedPillarBlock) ModBLocks.WEIRWOOD_LOG.get());
@@ -451,7 +524,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 "white_cherry",
                 "willow",
                 "wormtree",
-                "yew"
+                "yew",
+                "blue_soldier_pine",
+                "soldier_pine"
         };
 
 // Loop through all wood types to register their models and textures

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "agotmod:block/thatch_block_side",
+    "side": "agotmod:block/thatch_block_top",
+    "top": "agotmod:block/thatch_block_side"
+  }
+}

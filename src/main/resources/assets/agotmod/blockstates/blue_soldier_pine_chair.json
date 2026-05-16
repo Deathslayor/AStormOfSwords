@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "agotmod:block/blue_soldier_pine_chair", "y": 0   },
+    "facing=east":  { "model": "agotmod:block/blue_soldier_pine_chair", "y": 90  },
+    "facing=south": { "model": "agotmod:block/blue_soldier_pine_chair", "y": 180 },
+    "facing=west":  { "model": "agotmod:block/blue_soldier_pine_chair", "y": 270 }
+  }
+}

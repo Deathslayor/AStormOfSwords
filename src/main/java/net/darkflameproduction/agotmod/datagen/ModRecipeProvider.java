@@ -1859,6 +1859,37 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy(getHasName(Blocks.DIRT_PATH), has(Blocks.DIRT_PATH))
                 .save(this.output);
 
+
+        this.shaped(RecipeCategory.BUILDING_BLOCKS, ModBLocks.THATCH_BLOCK.get())
+                .pattern(" OOO ")
+                .pattern(" OOO ")
+                .pattern(" OOO ")
+                .define('O', Ingredient.of(Items.STICK, Items.SHORT_GRASS)) // Your custom hammer
+                .unlockedBy(getHasName(Items.STICK), has(Items.STICK))
+                .save(this.output, "thatch_from_sticks_and_grass");
+
+        this.shaped(RecipeCategory.BUILDING_BLOCKS, ModBLocks.THATCH_STAIRS.get(), 4)
+                .pattern("B  ")
+                .pattern("BB ")
+                .pattern("BBB")
+                .define('B', ModBLocks.THATCH_STAIRS.get())
+                .unlockedBy(getHasName(ModBLocks.THATCH_BLOCK), has(ModBLocks.THATCH_BLOCK))
+                .save(this.output);
+
+        this.shaped(RecipeCategory.BUILDING_BLOCKS, ModBLocks.THATCH_SLAB.get(), 6)
+                .pattern("BBB")
+                .define('B', ModBLocks.THATCH_SLAB.get())
+                .unlockedBy(getHasName(ModBLocks.THATCH_BLOCK), has(ModBLocks.THATCH_SLAB))
+                .save(this.output);
+
+        this.shaped(RecipeCategory.BUILDING_BLOCKS, ModBLocks.HEARTH_BLOCK.get(), 4)
+                .pattern("BB")
+                .pattern("OO")
+                .define('B', Items.CHARCOAL)
+                .define('O', ModBLocks.PEAT.get())
+                .unlockedBy(getHasName(ModBLocks.PEAT), has(ModBLocks.PEAT))
+                .save(this.output);
+
         // -------------------------------------------------(WOOD)------------------------------------------------- //
 
 // Weirwood Crafting Recipes
@@ -2364,7 +2395,9 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 "white_cherry",
                 "willow",
                 "wormtree",
-                "yew"
+                "yew",
+                "blue_soldier_pine",
+                "soldier_pine"
         };
 
         // Generate recipes for all wood types

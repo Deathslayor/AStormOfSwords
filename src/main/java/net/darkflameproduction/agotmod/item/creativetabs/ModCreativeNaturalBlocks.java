@@ -74,7 +74,9 @@ public class ModCreativeNaturalBlocks {
             "white_cherry",
             "willow",
             "wormtree",
-            "yew"
+            "yew",
+            "soldier_pine",
+            "blue_soldier_pine"
     };
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AGOT_TAB_NATURAL_BLOCKS =
@@ -193,6 +195,11 @@ public class ModCreativeNaturalBlocks {
                                 }
 
                                 //Blocks
+                                pOutput.accept(ModBLocks.THATCH_BLOCK.get());
+                                pOutput.accept(ModBLocks.THATCH_STAIRS.get());
+                                pOutput.accept(ModBLocks.THATCH_SLAB.get());
+
+                                pOutput.accept(ModBLocks.DIRT_SLAB.get());
                                 pOutput.accept(ModBLocks.DIRT_STAIRS.get());
                                 pOutput.accept(ModBLocks.DIRT_SLAB.get());
 
@@ -208,6 +215,8 @@ public class ModCreativeNaturalBlocks {
                                 pOutput.accept(ModBLocks.GRASS_BLOCK_SLAB.get());
                                 pOutput.accept(ModBLocks.DIRT_PATH_STAIRS.get());
                                 pOutput.accept(ModBLocks.DIRT_PATH_SLAB.get());
+
+                                pOutput.accept(ModBLocks.PEAT.get());
 
                                 // Ores
                                 pOutput.accept(ModBLocks.SILVER_ORE.get());

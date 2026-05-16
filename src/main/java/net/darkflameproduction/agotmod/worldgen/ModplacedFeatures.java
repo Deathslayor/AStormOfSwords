@@ -61,6 +61,8 @@ public class ModplacedFeatures {
     public static final ResourceKey<PlacedFeature> OAK2_KEY = registerKey("oak");
     public static final ResourceKey<PlacedFeature> SENTINEL_KEY = registerKey("sentinel");
     public static final ResourceKey<PlacedFeature> PINE_KEY = registerKey("pine");
+    public static final ResourceKey<PlacedFeature> SOLDIER_PINE_KEY = registerKey("soldier_pine");
+    public static final ResourceKey<PlacedFeature> BLUE_SOLDIER_PINE_KEY = registerKey("blue_soldier_pine");
     public static final ResourceKey<PlacedFeature> IRONWOOD_KEY = registerKey("ironwood");
     public static final ResourceKey<PlacedFeature> HAWTHORN_KEY = registerKey("hawthorn");
     public static final ResourceKey<PlacedFeature> CHESTNUT_KEY = registerKey("chestnut");
@@ -121,6 +123,8 @@ public class ModplacedFeatures {
     public static final ResourceKey<PlacedFeature> SYCAMORE_KEY = registerKey("sycamore");
     public static final ResourceKey<PlacedFeature> SENTINEL_RARE_KEY = registerKey("sentinel_rare");
     public static final ResourceKey<PlacedFeature> PINE_RARE_KEY = registerKey("pine_rare");
+    public static final ResourceKey<PlacedFeature> SOLDIER_PINE_RARE_KEY = registerKey("soldier_pine_rare");
+    public static final ResourceKey<PlacedFeature> BLUE_SOLDIER_PINE_RARE_KEY = registerKey("blue_soldier_pine_rare");
     public static final ResourceKey<PlacedFeature> IRONWOOD_RARE_KEY = registerKey("ironwood_rare");
     public static final ResourceKey<PlacedFeature> HAWTHORN_RARE_KEY = registerKey("hawthorn_rare");
     public static final ResourceKey<PlacedFeature> CHESTNUT_RARE_KEY = registerKey("chestnut_rare");
@@ -367,6 +371,14 @@ public class ModplacedFeatures {
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
                         ModBLocks.SAPLINGS.get("pine").get()));
 
+        register(context, SOLDIER_PINE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SOLDIER_PINE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("soldier_pine").get()));
+
+        register(context, BLUE_SOLDIER_PINE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BLUE_SOLDIER_PINE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBLocks.SAPLINGS.get("blue_soldier_pine").get()));
+
         register(context, IRONWOOD_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.IRONWOOD_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
                         ModBLocks.SAPLINGS.get("ironwood").get()));
@@ -411,6 +423,14 @@ public class ModplacedFeatures {
         register(context, PINE_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PINE_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
                         ModBLocks.SAPLINGS.get("pine").get()));
+
+        register(context, SOLDIER_PINE_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SOLDIER_PINE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("soldier_pine").get()));
+
+        register(context, BLUE_SOLDIER_PINE_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BLUE_SOLDIER_PINE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBLocks.SAPLINGS.get("blue_soldier_pine").get()));
 
         register(context, IRONWOOD_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.IRONWOOD_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),

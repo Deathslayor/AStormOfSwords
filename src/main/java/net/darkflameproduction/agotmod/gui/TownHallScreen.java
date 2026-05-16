@@ -1,6 +1,7 @@
 package net.darkflameproduction.agotmod.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.culture.Culture;
 import net.darkflameproduction.agotmod.network.ClaimTownHallPacket;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
@@ -42,6 +43,9 @@ public class TownHallScreen extends Screen {
     private static final int ROW_HEIGHT = 14;
 
     private final BlockPos townHallPos;
+
+    private Culture townCulture = Culture.NONE;
+    private net.minecraft.client.gui.components.Button chooseCultureButton = null;
 
     // Town data
     private int    bedCount       = 0;
@@ -118,10 +122,10 @@ public class TownHallScreen extends Screen {
         int pw = getPanelWidth();
         int ph = getPanelHeight();
 
-        // --- Tab buttons just below the header divider ---
-        int tabY    = py + 60;
-        int tabW    = 100;
-        int tabGap  = 4;
+        // ── Tab buttons ───────────────────────────────────────────────────────
+        int tabY       = py + 60;
+        int tabW       = 100;
+        int tabGap     = 4;
         int tabsStartX = px + (pw - (tabW * 2 + tabGap)) / 2;
 
         tabOverviewButton = net.minecraft.client.gui.components.Button.builder(
@@ -136,7 +140,7 @@ public class TownHallScreen extends Screen {
         ).pos(tabsStartX + tabW + tabGap, tabY).size(tabW, 16).build();
         addRenderableWidget(tabInventoryButton);
 
-        // --- Rename button ---
+        // ── Rename button ─────────────────────────────────────────────────────
         int renameBtnX = px + pw - 90;
         int renameBtnY = py + 15;
 
@@ -147,7 +151,7 @@ public class TownHallScreen extends Screen {
         renameButton.visible = !renameModeActive;
         addRenderableWidget(renameButton);
 
-        // --- Name input + confirm ---
+        // ── Name input + confirm ──────────────────────────────────────────────
         int inputWidth = 180;
         int inputX     = px + pw / 2 - inputWidth / 2;
         int inputY     = py + 13;
@@ -169,7 +173,7 @@ public class TownHallScreen extends Screen {
         confirmRenameButton.visible = renameModeActive;
         addRenderableWidget(confirmRenameButton);
 
-        // --- Claim button ---
+        // ── Claim button ──────────────────────────────────────────────────────
         int claimBtnWidth = 120;
         int claimBtnX     = px + (pw - claimBtnWidth) / 2;
         int claimBtnY     = py + ph - 40;
@@ -181,17 +185,29 @@ public class TownHallScreen extends Screen {
         claimButton.visible = !isClaimed;
         addRenderableWidget(claimButton);
 
+        // ── Choose Culture button (only when claimed by this player, no culture yet) ──
+        int cultureBtnWidth = 140;
+        int cultureBtnX     = px + (pw - cultureBtnWidth) / 2;
+        int cultureBtnY     = claimBtnY - 28;
+
+        chooseCultureButton = net.minecraft.client.gui.components.Button.builder(
+                Component.literal("Choose Culture"),
+                btn -> net.minecraft.client.Minecraft.getInstance().setScreen(
+                        new CultureSelectionScreen(townHallPos, this))
+        ).pos(cultureBtnX, cultureBtnY).size(cultureBtnWidth, 20).build();
+        chooseCultureButton.visible = isClaimed && townCulture == Culture.NONE && activeTab == 0;
+        addRenderableWidget(chooseCultureButton);
+
         updateTabButtonStates();
     }
 
     private void switchTab(int tab) {
         activeTab = tab;
         inventoryScrollOffset = 0;
-        // Claim button only on overview tab
-        if (claimButton != null) claimButton.visible = !isClaimed && activeTab == 0;
+        if (claimButton       != null) claimButton.visible        = !isClaimed && activeTab == 0;
+        if (chooseCultureButton != null) chooseCultureButton.visible = isClaimed && townCulture == Culture.NONE && activeTab == 0;
         updateTabButtonStates();
     }
-
     private void updateTabButtonStates() {
         // Visually distinguish active tab — active tab is not active (looks pressed)
         if (tabOverviewButton  != null) tabOverviewButton.active  = (activeTab != 0);
@@ -237,9 +253,10 @@ public class TownHallScreen extends Screen {
     public static void updateTownHallData(BlockPos packetPos, int bedCount, int citizenCount, int radius,
                                           String townName, boolean isClaimed, String claimedByHouse,
                                           int availableJobCount, int assignedJobCount,
-                                          int totalJobCount, int joblessCount) {
+                                          int totalJobCount, int joblessCount,
+                                          String cultureName) {
         if (currentInstance == null) return;
-        if (!packetPos.equals(currentInstance.townHallPos)) return; // wrong town hall
+        if (!packetPos.equals(currentInstance.townHallPos)) return;
         currentInstance.bedCount          = bedCount;
         currentInstance.citizenCount      = citizenCount;
         currentInstance.currentRadius     = radius;
@@ -250,8 +267,16 @@ public class TownHallScreen extends Screen {
         currentInstance.assignedJobCount  = assignedJobCount;
         currentInstance.totalJobCount     = totalJobCount;
         currentInstance.joblessCount      = joblessCount;
+        try {
+            currentInstance.townCulture = Culture.valueOf(cultureName);
+        } catch (IllegalArgumentException e) {
+            currentInstance.townCulture = Culture.NONE;
+        }
         if (currentInstance.claimButton != null)
             currentInstance.claimButton.visible = !isClaimed && currentInstance.activeTab == 0;
+        if (currentInstance.chooseCultureButton != null)
+            currentInstance.chooseCultureButton.visible =
+                    isClaimed && currentInstance.townCulture == Culture.NONE && currentInstance.activeTab == 0;
         if (!currentInstance.renameModeActive && currentInstance.townNameInput != null)
             currentInstance.townNameInput.setValue(townName);
     }
@@ -358,6 +383,7 @@ public class TownHallScreen extends Screen {
         int y = getContentStartY();
         int w = getColWidth();
 
+        // ── Town Info ─────────────────────────────────────────────────────────
         drawSectionHeader(g, "Town Info", x, y, w, COLOR_HEADER);
         y += 20;
 
@@ -367,10 +393,24 @@ public class TownHallScreen extends Screen {
             drawLabelValue(g, "Status", "Unclaimed", x, y, COLOR_RED);
         }
         y += 16;
-        drawLabelValue(g, "Radius",   currentRadius + " blocks", x, y, COLOR_GREEN); y += 16;
-        drawLabelValue(g, "Beds",     String.valueOf(bedCount),   x, y, COLOR_GREEN); y += 16;
-        drawLabelValue(g, "Citizens", String.valueOf(citizenCount), x, y, COLOR_GREEN); y += 28;
+        drawLabelValue(g, "Radius",   currentRadius + " blocks",    x, y, COLOR_GREEN); y += 16;
+        drawLabelValue(g, "Beds",     String.valueOf(bedCount),      x, y, COLOR_GREEN); y += 16;
+        drawLabelValue(g, "Citizens", String.valueOf(citizenCount),  x, y, COLOR_GREEN); y += 20;
 
+        // ── Culture ───────────────────────────────────────────────────────────
+        drawSectionHeader(g, "Culture", x, y, w, COLOR_HEADER);
+        y += 20;
+
+        if (townCulture != Culture.NONE) {
+            drawLabelValue(g, "Culture", townCulture.displayName,        x, y, COLOR_PURPLE); y += 16;
+            drawLabelValue(g, "Group",   townCulture.group.displayName,  x, y, COLOR_BLUE);   y += 20;
+        } else if (isClaimed) {
+            drawLabelValue(g, "Culture", "Not yet chosen", x, y, COLOR_ORANGE); y += 20;
+        } else {
+            drawLabelValue(g, "Culture", "Claim town first", x, y, COLOR_GRAY); y += 20;
+        }
+
+        // ── Finances ──────────────────────────────────────────────────────────
         drawSectionHeader(g, "Finances", x, y, w, COLOR_HEADER);
         y += 20;
 
@@ -383,10 +423,11 @@ public class TownHallScreen extends Screen {
         int y = getContentStartY();
         int w = getColWidth();
 
+        // ── Employment ────────────────────────────────────────────────────────
         drawSectionHeader(g, "Employment", x, y, w, COLOR_PURPLE);
         y += 20;
 
-        drawLabelValue(g, "Total Jobs",  String.valueOf(totalJobCount),     x, y, TEXT_COLOR); y += 16;
+        drawLabelValue(g, "Total Jobs",  String.valueOf(totalJobCount),    x, y, TEXT_COLOR); y += 16;
         drawLabelValue(g, "Occupied",    String.valueOf(assignedJobCount),  x, y, assignedJobCount  > 0 ? COLOR_BLUE  : COLOR_GRAY); y += 16;
         drawLabelValue(g, "Available",   String.valueOf(availableJobCount), x, y, availableJobCount > 0 ? COLOR_GREEN : COLOR_GRAY); y += 16;
         drawLabelValue(g, "Unemployed",  String.valueOf(joblessCount),      x, y, joblessCount      > 0 ? COLOR_RED   : COLOR_GREEN); y += 16;
@@ -399,10 +440,10 @@ public class TownHallScreen extends Screen {
         }
 
         y += 12;
-        String status     = getJobMarketStatus();
-        int statusColor   = getJobMarketStatusColor();
-        int badgeW        = font.width(status) + 12;
-        int badgeX        = x + (w - badgeW) / 2;
+        String status   = getJobMarketStatus();
+        int statusColor = getJobMarketStatusColor();
+        int badgeW      = font.width(status) + 12;
+        int badgeX      = x + (w - badgeW) / 2;
         g.fill(badgeX, y, badgeX + badgeW, y + font.lineHeight + 6, statusColor & 0x40FFFFFF | 0x30000000);
         g.fill(badgeX, y, badgeX + badgeW, y + 1, statusColor);
         g.fill(badgeX, y + font.lineHeight + 5, badgeX + badgeW, y + font.lineHeight + 6, statusColor);

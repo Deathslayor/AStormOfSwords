@@ -1010,6 +1010,14 @@ public class ModBLocks {
     public static final DeferredBlock<Block> DIRT_PATH_STAIRS = registerBlock("dirt_path_stairs", properties -> new StairBlock(Blocks.DIRT_PATH.defaultBlockState(), properties), BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT_PATH), true);
     public static final DeferredBlock<Block> DIRT_PATH_SLAB = registerBlock("dirt_path_slab", SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT_PATH), true);
 
+    public static final DeferredBlock<Block> PEAT = registerBlock("peat", ModFlammablePlanks::new, BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT), true);
+    public static final DeferredBlock<Block> HEARTH_BLOCK = registerBlock("hearth_block", Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.MAGMA_BLOCK), true);
+
+
+    public static final DeferredBlock<Block> THATCH_BLOCK = registerBlock("thatch_block", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.HAY_BLOCK).strength(3f), true);
+    public static final DeferredBlock<Block> THATCH_STAIRS = registerBlock("thatch_stairs", properties -> new StairBlock(ModBLocks.THATCH_BLOCK.get().defaultBlockState(), properties), BlockBehaviour.Properties.ofFullCopy(Blocks.HAY_BLOCK), true);
+    public static final DeferredBlock<Block> THATCH_SLAB = registerBlock("thatch_slabs", SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.HAY_BLOCK), true);
+
     // ---------------------------(TREE BLOCKS)--------------------------- //
     //Weirwood
     public static final DeferredBlock<Block> WEIRWOOD_LOG = registerBlock("weirwood_log", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG).strength(3f), true);
@@ -1154,7 +1162,10 @@ public class ModBLocks {
             "sandalwood",
             "sandbeggar",
             "tigerwood",
-            "yew"
+            "yew",
+            "blue_soldier_pine",
+            "soldier_pine"
+
     };
 
     static {
@@ -1416,6 +1427,10 @@ public class ModBLocks {
                 return ModTreeGrower.TIGERWOOD;
             case "yew":
                 return ModTreeGrower.YEW;
+            case "soldier_pine":
+                return ModTreeGrower.SOLDIER_PINE;
+            case "blue_soldier_pine":
+                return ModTreeGrower.BLUE_SOLDIER_PINE;
             default:
                 return ModTreeGrower.SYSCAMORE;
         }
@@ -1541,6 +1556,10 @@ public class ModBLocks {
                 return ModWoodTypes.TIGERWOOD;
             case "yew":
                 return ModWoodTypes.YEW;
+            case "soldier_pine":
+                return ModWoodTypes.SOLDIER_PINE;
+            case "blue_soldier_pine":
+                return ModWoodTypes.BLUE_SOLDIER_PINE;
             default:
                 return ModWoodTypes.SYCAMORE;
         }
@@ -2389,7 +2408,10 @@ public class ModBLocks {
             TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
     public static final DeferredBlock<Block> YEW_TABLE = registerBlock("yew_table",
             TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
-
+    public static final DeferredBlock<Block> SOLDIER_PINE_TABLE = registerBlock("soldier_pine_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLUE_SOLDIER_PINE_TABLE = registerBlock("blue_soldier_pine_table",
+            TableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
 // ── STOOLS ────────────────────────────────────────────────────────────────
 
     public static final DeferredBlock<Block> DARK_OAK_STOOL = registerBlock("dark_oak_stool",
@@ -2536,6 +2558,10 @@ public class ModBLocks {
             StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
     public static final DeferredBlock<Block> YEW_STOOL = registerBlock("yew_stool",
             StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> SOLDIER_PINE_STOOL = registerBlock("soldier_pine_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLUE_SOLDIER_PINE_STOOL = registerBlock("blue_soldier_pine_stool",
+            StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
 
     public static final DeferredBlock<Block> DARK_OAK_CHAIR = registerBlock("dark_oak_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
     public static final DeferredBlock<Block> OAK_CHAIR = registerBlock("oak_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
@@ -2611,6 +2637,9 @@ public class ModBLocks {
     public static final DeferredBlock<Block> SANDBEGGAR_CHAIR = registerBlock("sandbeggar_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
     public static final DeferredBlock<Block> TIGERWOOD_CHAIR = registerBlock("tigerwood_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
     public static final DeferredBlock<Block> YEW_CHAIR = registerBlock("yew_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> SOLDIER_PINE_CHAIR = registerBlock("soldier_pine_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLUE_SOLDIER_PINE_CHAIR = registerBlock("blue_soldier_pine_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+
 
     // ── 1b. ModBLocks.java — ARM CHAIRS ───────────────────────────────────────
     public static final DeferredBlock<Block> DARK_OAK_ARM_CHAIR = registerBlock("dark_oak_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
@@ -2685,6 +2714,8 @@ public class ModBLocks {
     public static final DeferredBlock<Block> SANDBEGGAR_ARM_CHAIR = registerBlock("sandbeggar_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
     public static final DeferredBlock<Block> TIGERWOOD_ARM_CHAIR = registerBlock("tigerwood_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
     public static final DeferredBlock<Block> YEW_ARM_CHAIR = registerBlock("yew_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> SOLDIER_PINE_ARM_CHAIR = registerBlock("soldier_pine_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLUE_SOLDIER_PINE_ARM_CHAIR = registerBlock("blue_soldier_pine_arm_chair", ArmChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
 
 
     // ---------------------------(JOBBLOCKS)--------------------------- //
@@ -3086,6 +3117,7 @@ public class ModBLocks {
                     .sound(SoundType.WOOD)
                     .ignitedByLava(),
             false);
+
 
     // Tells the AGoTMod class to call the modded blocks into the game
     public static void register(IEventBus eventBus) {

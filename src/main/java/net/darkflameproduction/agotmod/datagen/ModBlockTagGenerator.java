@@ -86,7 +86,9 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 "white_cherry",
                 "willow",
                 "wormtree",
-                "yew"
+                "yew",
+                "blue_soldier_pine",
+                "soldier_pine"
         };
 
 // Start building the mineable with axe tag
@@ -148,6 +150,12 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
 
 
     // Helper method to add a DeferredBlock to a tag
+        this.tag(BlockTags.MINEABLE_WITH_HOE)
+                .add(ModBLocks.THATCH_BLOCK.get())
+                .add(ModBLocks.THATCH_SLAB.get())
+                .add(ModBLocks.THATCH_STAIRS.get());
+
+
 
 
         this.tag(BlockTags.MINEABLE_WITH_AXE)
@@ -274,7 +282,9 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                         ModBLocks.GRASS_BLOCK_STAIRS.get(),
                         ModBLocks.GRASS_BLOCK_SLAB.get(),
                         ModBLocks.DIRT_PATH_STAIRS.get(),
-                        ModBLocks.DIRT_PATH_SLAB.get());
+                        ModBLocks.DIRT_PATH_SLAB.get(),
+                        ModBLocks.PEAT.get());
+
 
         this.tag(BlockTags.DIRT)
                 .add(ModBLocks.QUAGMIRE.get(),
@@ -435,6 +445,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBLocks.REDKEEP_STONE_STAIRS.get())
                 .add(ModBLocks.REDKEEP_STONE_SLAB.get())
                 .add(ModBLocks.REDKEEP_STONE_WALL.get())
+                .add(ModBLocks.HEARTH_BLOCK.get())
+
         ;
 
         //FLOWERS

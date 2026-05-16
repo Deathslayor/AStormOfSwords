@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "B": "minecraft:charcoal",
+    "O": "agotmod:peat"
+  },
+  "pattern": [
+    "BB",
+    "OO"
+  ],
+  "result": {
+    "count": 4,
+    "id": "agotmod:hearth_block"
+  }
+}

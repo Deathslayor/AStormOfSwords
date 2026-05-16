@@ -232,6 +232,9 @@ public class AGoTMod {
             Sheets.addWoodType(ModWoodTypes.SANDBEGGAR);
             Sheets.addWoodType(ModWoodTypes.TIGERWOOD);
             Sheets.addWoodType(ModWoodTypes.YEW);
+            Sheets.addWoodType(ModWoodTypes.SOLDIER_PINE);
+            Sheets.addWoodType(ModWoodTypes.BLUE_SOLDIER_PINE);
+
 
             event.enqueueWork(ModItemProperties::addCustomItemProperties);
         }

@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -98,8 +99,10 @@ public class ModBlockEntities {
                     ModBLocks.SANDALWOOD_TABLE.get(),
                     ModBLocks.SANDBEGGAR_TABLE.get(),
                     ModBLocks.TIGERWOOD_TABLE.get(),
-                    ModBLocks.YEW_TABLE.get()
-            ));
+                    ModBLocks.YEW_TABLE.get(),
+                    ModBLocks.SOLDIER_PINE_TABLE.get(),
+                    ModBLocks.BLUE_SOLDIER_PINE_TABLE.get()
+                    ));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<StoolBlockEntity>> STOOL =
             BLOCK_ENTITIES.register("stool", () -> new BlockEntityType<>(
@@ -139,7 +142,9 @@ public class ModBlockEntities {
                     ModBLocks.PLUM_STOOL.get(), ModBLocks.POMEGRANATE_STOOL.get(),
                     ModBLocks.PURPLEHEART_STOOL.get(), ModBLocks.REDWOOD_STOOL.get(),
                     ModBLocks.SANDALWOOD_STOOL.get(), ModBLocks.SANDBEGGAR_STOOL.get(),
-                    ModBLocks.TIGERWOOD_STOOL.get(), ModBLocks.YEW_STOOL.get()
+                    ModBLocks.TIGERWOOD_STOOL.get(), ModBLocks.YEW_STOOL.get(),
+                    ModBLocks.SOLDIER_PINE_STOOL.get(),
+                    ModBLocks.BLUE_SOLDIER_PINE_STOOL.get()
             ));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ChairBlockEntity>> CHAIR =
@@ -169,7 +174,8 @@ public class ModBlockEntities {
                     ModBLocks.PINK_IVORY_CHAIR.get(), ModBLocks.PLUM_CHAIR.get(),
                     ModBLocks.POMEGRANATE_CHAIR.get(), ModBLocks.PURPLEHEART_CHAIR.get(),
                     ModBLocks.REDWOOD_CHAIR.get(), ModBLocks.SANDALWOOD_CHAIR.get(),
-                    ModBLocks.SANDBEGGAR_CHAIR.get(), ModBLocks.TIGERWOOD_CHAIR.get(), ModBLocks.YEW_CHAIR.get()
+                    ModBLocks.SANDBEGGAR_CHAIR.get(), ModBLocks.TIGERWOOD_CHAIR.get(), ModBLocks.YEW_CHAIR.get(),
+                    ModBLocks.SOLDIER_PINE_CHAIR.get(), ModBLocks.BLUE_SOLDIER_PINE_CHAIR.get()
             ));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ArmChairBlockEntity>> ARM_CHAIR =
@@ -199,7 +205,8 @@ public class ModBlockEntities {
                     ModBLocks.PINK_IVORY_ARM_CHAIR.get(), ModBLocks.PLUM_ARM_CHAIR.get(),
                     ModBLocks.POMEGRANATE_ARM_CHAIR.get(), ModBLocks.PURPLEHEART_ARM_CHAIR.get(),
                     ModBLocks.REDWOOD_ARM_CHAIR.get(), ModBLocks.SANDALWOOD_ARM_CHAIR.get(),
-                    ModBLocks.SANDBEGGAR_ARM_CHAIR.get(), ModBLocks.TIGERWOOD_ARM_CHAIR.get(), ModBLocks.YEW_ARM_CHAIR.get()
+                    ModBLocks.SANDBEGGAR_ARM_CHAIR.get(), ModBLocks.TIGERWOOD_ARM_CHAIR.get(), ModBLocks.YEW_ARM_CHAIR.get(),
+                    ModBLocks.SOLDIER_PINE_ARM_CHAIR.get(), ModBLocks.BLUE_SOLDIER_PINE_ARM_CHAIR.get()
             ));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<JobBarrelBlockEntity>> JOB_BARREL =
@@ -319,123 +326,54 @@ public class ModBlockEntities {
             "sandalwood",
             "sandbeggar",
             "tigerwood",
-            "yew"
+            "yew",
+            "soldier_pine",
+            "blue_soldier_pine"
+
     };
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ModSignBlockEntity>> MOD_SIGN =
             BLOCK_ENTITIES.register("mod_sign", () -> {
                 List<Block> signBlocks = new ArrayList<>();
 
-                // Weirwood
                 signBlocks.add(ModBLocks.WEIRWOOD_SIGN.get());
                 signBlocks.add(ModBLocks.WEIRWOOD_WALL_SIGN.get());
-
-                // Rotten
                 signBlocks.add(ModBLocks.ROTTEN_SIGN.get());
                 signBlocks.add(ModBLocks.ROTTEN_WALL_SIGN.get());
-
-                // Charred
                 signBlocks.add(ModBLocks.CHARRED_SIGN.get());
                 signBlocks.add(ModBLocks.CHARRED_WALL_SIGN.get());
 
-                // Other wood types
                 for (String woodType : ALL_WOOD_TYPES) {
                     signBlocks.add(ModBLocks.SIGNS.get(woodType).get());
                     signBlocks.add(ModBLocks.WALL_SIGNS.get(woodType).get());
                 }
 
+                Block first = signBlocks.get(0);
+                Block[] rest = signBlocks.subList(1, signBlocks.size()).toArray(new Block[0]);
                 Block[] signBlocksArray = signBlocks.toArray(new Block[0]);
-
-                return new BlockEntityType<>(
-                        ModSignBlockEntity::new,
-                        signBlocksArray[0], signBlocksArray[1], signBlocksArray[2], signBlocksArray[3],
-                        signBlocksArray[4], signBlocksArray[5], signBlocksArray[6], signBlocksArray[7],
-                        signBlocksArray[8], signBlocksArray[9], signBlocksArray[10], signBlocksArray[11],
-                        signBlocksArray[12], signBlocksArray[13], signBlocksArray[14], signBlocksArray[15],
-                        signBlocksArray[16], signBlocksArray[17], signBlocksArray[18], signBlocksArray[19],
-                        signBlocksArray[20], signBlocksArray[21], signBlocksArray[22], signBlocksArray[23],
-                        signBlocksArray[24], signBlocksArray[25], signBlocksArray[26], signBlocksArray[27],
-                        signBlocksArray[28], signBlocksArray[29], signBlocksArray[30], signBlocksArray[31],
-                        signBlocksArray[32], signBlocksArray[33], signBlocksArray[34], signBlocksArray[35],
-                        signBlocksArray[36], signBlocksArray[37], signBlocksArray[38], signBlocksArray[39],
-                        signBlocksArray[40], signBlocksArray[41], signBlocksArray[42], signBlocksArray[43],
-                        signBlocksArray[44], signBlocksArray[45], signBlocksArray[46], signBlocksArray[47],
-                        signBlocksArray[48], signBlocksArray[49], signBlocksArray[50], signBlocksArray[51],
-                        signBlocksArray[52], signBlocksArray[53], signBlocksArray[54], signBlocksArray[55],
-                        signBlocksArray[56], signBlocksArray[57], signBlocksArray[58], signBlocksArray[59],
-                        signBlocksArray[60], signBlocksArray[61], signBlocksArray[62], signBlocksArray[63],
-                        signBlocksArray[64], signBlocksArray[65], signBlocksArray[66], signBlocksArray[67],
-                        signBlocksArray[68], signBlocksArray[69], signBlocksArray[70], signBlocksArray[71],
-                        signBlocksArray[72], signBlocksArray[73], signBlocksArray[74], signBlocksArray[75],
-                        signBlocksArray[76], signBlocksArray[77], signBlocksArray[78], signBlocksArray[79],
-                        signBlocksArray[80], signBlocksArray[81], signBlocksArray[82], signBlocksArray[83],
-                        signBlocksArray[84], signBlocksArray[85], signBlocksArray[86], signBlocksArray[87],
-                        signBlocksArray[88], signBlocksArray[89], signBlocksArray[90], signBlocksArray[91],
-                        signBlocksArray[92], signBlocksArray[93], signBlocksArray[94], signBlocksArray[95],
-                        signBlocksArray[96], signBlocksArray[97], signBlocksArray[98], signBlocksArray[99],
-                        signBlocksArray[100], signBlocksArray[101], signBlocksArray[102], signBlocksArray[103],
-                        signBlocksArray[104], signBlocksArray[105], signBlocksArray[106], signBlocksArray[107],
-                        signBlocksArray[108], signBlocksArray[109], signBlocksArray[110], signBlocksArray[111],
-                        signBlocksArray[112], signBlocksArray[113]
-                );
+                return new BlockEntityType<ModSignBlockEntity>(ModSignBlockEntity::new, signBlocksArray);
             });
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ModHangingSignBlockEntity>> MOD_HANGING_SIGN =
             BLOCK_ENTITIES.register("mod_hanging_sign", () -> {
                 List<Block> hangingSignBlocks = new ArrayList<>();
 
-                // Weirwood
                 hangingSignBlocks.add(ModBLocks.WEIRWOOD_HANGING_SIGN.get());
                 hangingSignBlocks.add(ModBLocks.WEIRWOOD_WALL_HANGING_SIGN.get());
-
-                // Rotten
                 hangingSignBlocks.add(ModBLocks.ROTTEN_HANGING_SIGN.get());
                 hangingSignBlocks.add(ModBLocks.ROTTEN_WALL_HANGING_SIGN.get());
-
-                // Charred
                 hangingSignBlocks.add(ModBLocks.CHARRED_HANGING_SIGN.get());
                 hangingSignBlocks.add(ModBLocks.CHARRED_WALL_HANGING_SIGN.get());
 
-                // Other wood types
                 for (String woodType : ALL_WOOD_TYPES) {
                     hangingSignBlocks.add(ModBLocks.HANGING_SIGNS.get(woodType).get());
                     hangingSignBlocks.add(ModBLocks.WALL_HANGING_SIGNS.get(woodType).get());
                 }
 
+                Block first = hangingSignBlocks.get(0);
+                Block[] rest = hangingSignBlocks.subList(1, hangingSignBlocks.size()).toArray(new Block[0]);
                 Block[] hangingSignBlocksArray = hangingSignBlocks.toArray(new Block[0]);
-
-                return new BlockEntityType<>(
-                        ModHangingSignBlockEntity::new,
-                        hangingSignBlocksArray[0], hangingSignBlocksArray[1], hangingSignBlocksArray[2], hangingSignBlocksArray[3],
-                        hangingSignBlocksArray[4], hangingSignBlocksArray[5], hangingSignBlocksArray[6], hangingSignBlocksArray[7],
-                        hangingSignBlocksArray[8], hangingSignBlocksArray[9], hangingSignBlocksArray[10], hangingSignBlocksArray[11],
-                        hangingSignBlocksArray[12], hangingSignBlocksArray[13], hangingSignBlocksArray[14], hangingSignBlocksArray[15],
-                        hangingSignBlocksArray[16], hangingSignBlocksArray[17], hangingSignBlocksArray[18], hangingSignBlocksArray[19],
-                        hangingSignBlocksArray[20], hangingSignBlocksArray[21], hangingSignBlocksArray[22], hangingSignBlocksArray[23],
-                        hangingSignBlocksArray[24], hangingSignBlocksArray[25], hangingSignBlocksArray[26], hangingSignBlocksArray[27],
-                        hangingSignBlocksArray[28], hangingSignBlocksArray[29], hangingSignBlocksArray[30], hangingSignBlocksArray[31],
-                        hangingSignBlocksArray[32], hangingSignBlocksArray[33], hangingSignBlocksArray[34], hangingSignBlocksArray[35],
-                        hangingSignBlocksArray[36], hangingSignBlocksArray[37], hangingSignBlocksArray[38], hangingSignBlocksArray[39],
-                        hangingSignBlocksArray[40], hangingSignBlocksArray[41], hangingSignBlocksArray[42], hangingSignBlocksArray[43],
-                        hangingSignBlocksArray[44], hangingSignBlocksArray[45], hangingSignBlocksArray[46], hangingSignBlocksArray[47],
-                        hangingSignBlocksArray[48], hangingSignBlocksArray[49], hangingSignBlocksArray[50], hangingSignBlocksArray[51],
-                        hangingSignBlocksArray[52], hangingSignBlocksArray[53], hangingSignBlocksArray[54], hangingSignBlocksArray[55],
-                        hangingSignBlocksArray[56], hangingSignBlocksArray[57], hangingSignBlocksArray[58], hangingSignBlocksArray[59],
-                        hangingSignBlocksArray[60], hangingSignBlocksArray[61], hangingSignBlocksArray[62], hangingSignBlocksArray[63],
-                        hangingSignBlocksArray[64], hangingSignBlocksArray[65], hangingSignBlocksArray[66], hangingSignBlocksArray[67],
-                        hangingSignBlocksArray[68], hangingSignBlocksArray[69], hangingSignBlocksArray[70], hangingSignBlocksArray[71],
-                        hangingSignBlocksArray[72], hangingSignBlocksArray[73], hangingSignBlocksArray[74], hangingSignBlocksArray[75],
-                        hangingSignBlocksArray[76], hangingSignBlocksArray[77], hangingSignBlocksArray[78], hangingSignBlocksArray[79],
-                        hangingSignBlocksArray[80], hangingSignBlocksArray[81], hangingSignBlocksArray[82], hangingSignBlocksArray[83],
-                        hangingSignBlocksArray[84], hangingSignBlocksArray[85], hangingSignBlocksArray[86], hangingSignBlocksArray[87],
-                        hangingSignBlocksArray[88], hangingSignBlocksArray[89], hangingSignBlocksArray[90], hangingSignBlocksArray[91],
-                        hangingSignBlocksArray[92], hangingSignBlocksArray[93], hangingSignBlocksArray[94], hangingSignBlocksArray[95],
-                        hangingSignBlocksArray[96], hangingSignBlocksArray[97], hangingSignBlocksArray[98], hangingSignBlocksArray[99],
-                        hangingSignBlocksArray[100], hangingSignBlocksArray[101], hangingSignBlocksArray[102], hangingSignBlocksArray[103],
-                        hangingSignBlocksArray[104], hangingSignBlocksArray[105], hangingSignBlocksArray[106], hangingSignBlocksArray[107],
-                        hangingSignBlocksArray[108], hangingSignBlocksArray[109], hangingSignBlocksArray[110], hangingSignBlocksArray[111],
-                        hangingSignBlocksArray[112], hangingSignBlocksArray[113]
-                );
+                return new BlockEntityType<ModHangingSignBlockEntity>(ModHangingSignBlockEntity::new, hangingSignBlocksArray);
             });
 
     public static void register(IEventBus eventBus) {

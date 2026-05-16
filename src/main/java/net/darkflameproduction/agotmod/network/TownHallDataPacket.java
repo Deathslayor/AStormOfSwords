@@ -24,7 +24,8 @@ public record TownHallDataPacket(
         int joblessCount,
         long townBalance,
         long townIncome,
-        Map<String, Long> townInventory
+        Map<String, Long> townInventory,
+        String culture
 ) implements CustomPacketPayload {
 
     public static final Type<TownHallDataPacket> TYPE = new Type<>(
@@ -55,6 +56,7 @@ public record TownHallDataPacket(
             buf.writeUtf(entry.getKey());
             buf.writeLong(entry.getValue());
         }
+        buf.writeUtf(packet.culture);
     }
 
     private static TownHallDataPacket decode(FriendlyByteBuf buf) {
@@ -74,16 +76,15 @@ public record TownHallDataPacket(
         int inventorySize     = buf.readVarInt();
         Map<String, Long> townInventory = new HashMap<>();
         for (int i = 0; i < inventorySize; i++) {
-            String key  = buf.readUtf();
-            long   val  = buf.readLong();
-            townInventory.put(key, val);
+            townInventory.put(buf.readUtf(), buf.readLong());
         }
+        String culture = buf.readUtf();
 
         return new TownHallDataPacket(
                 pos, bedCount, citizenCount, currentRadius,
                 townName, isClaimed, claimedByHouse,
                 availableJobCount, assignedJobCount, totalJobCount, joblessCount,
-                townBalance, townIncome, townInventory
+                townBalance, townIncome, townInventory, culture
         );
     }
 

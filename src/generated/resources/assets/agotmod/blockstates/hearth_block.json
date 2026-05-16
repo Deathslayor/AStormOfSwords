@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "agotmod:block/hearth_block"
+    }
+  }
+}

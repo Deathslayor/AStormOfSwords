@@ -67,7 +67,8 @@ public class ClientPacketHandler {
                     packet.availableJobCount(),
                     packet.assignedJobCount(),
                     packet.totalJobCount(),
-                    packet.joblessCount()
+                    packet.joblessCount(),
+                    packet.culture()
             );
 
             TownHallScreen.updateFinances(pos, packet.townBalance(), packet.townIncome());

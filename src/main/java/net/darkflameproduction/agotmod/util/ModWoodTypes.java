@@ -66,4 +66,8 @@ public class ModWoodTypes {
     public static final WoodType SANDBEGGAR = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":sandbeggar", BlockSetType.OAK));
     public static final WoodType TIGERWOOD = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":tigerwood", BlockSetType.OAK));
     public static final WoodType YEW = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":yew", BlockSetType.OAK));
+    public static final WoodType SOLDIER_PINE = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":soldier_pine", BlockSetType.OAK));
+    public static final WoodType BLUE_SOLDIER_PINE = WoodType.register(new WoodType(AGoTMod.MOD_ID + ":blue_soldier_pine", BlockSetType.OAK));
+
+
 }

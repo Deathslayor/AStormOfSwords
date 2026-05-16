@@ -8,7 +8,8 @@
     "ServerPropertiesMixin",
     "ServerPropertiesMixin$WorldGenPropertiesMixin",
     "WorldPresetsMixin",
-    "PlayerAttackSpeedMixin"
+    "PlayerAttackSpeedMixin",
+    "MixinCampfireBlock"
   ],
   "client": [
     "client.CreateWorldScreenMixin",

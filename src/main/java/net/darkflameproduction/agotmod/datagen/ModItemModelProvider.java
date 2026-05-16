@@ -908,6 +908,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         furnitureItem(ModItems.SANDBEGGAR_TABLE);
         furnitureItem(ModItems.TIGERWOOD_TABLE);
         furnitureItem(ModItems.YEW_TABLE);
+        furnitureItem(ModItems.SOLDIER_PINE_TABLE);
+        furnitureItem(ModItems.BLUE_SOLDIER_PINE_TABLE);
+
+
 
 // Stools
         furnitureItem(ModItems.DARK_OAK_STOOL);
@@ -982,6 +986,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         furnitureItem(ModItems.SANDBEGGAR_STOOL);
         furnitureItem(ModItems.TIGERWOOD_STOOL);
         furnitureItem(ModItems.YEW_STOOL);
+        furnitureItem(ModItems.SOLDIER_PINE_STOOL);
+        furnitureItem(ModItems.BLUE_SOLDIER_PINE_STOOL);
+
+
 
 // Chairs
         furnitureItem(ModItems.DARK_OAK_CHAIR);
@@ -1056,6 +1064,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         furnitureItem(ModItems.SANDBEGGAR_CHAIR);
         furnitureItem(ModItems.TIGERWOOD_CHAIR);
         furnitureItem(ModItems.YEW_CHAIR);
+        furnitureItem(ModItems.SOLDIER_PINE_STOOL);
+        furnitureItem(ModItems.BLUE_SOLDIER_PINE_STOOL);
 
 // Arm Chairs
         furnitureItem(ModItems.DARK_OAK_ARM_CHAIR);
@@ -1130,6 +1140,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         furnitureItem(ModItems.SANDBEGGAR_ARM_CHAIR);
         furnitureItem(ModItems.TIGERWOOD_ARM_CHAIR);
         furnitureItem(ModItems.YEW_ARM_CHAIR);
+        furnitureItem(ModItems.SOLDIER_PINE_ARM_CHAIR);
+        furnitureItem(ModItems.BLUE_SOLDIER_PINE_ARM_CHAIR);
+
 
 
 
@@ -1193,7 +1206,9 @@ public class ModItemModelProvider extends ItemModelProvider {
                 "white_cherry",
                 "willow",
                 "wormtree",
-                "yew"
+                "yew",
+                "blue_soldier_pine",
+                "soldier_pine"
         };
 
 // First register all saplings in one loop
@@ -1247,6 +1262,12 @@ public class ModItemModelProvider extends ItemModelProvider {
         evenSimplerBlockItemVanillaMultiTexture(ModBLocks.DIRT_PATH_STAIRS, "dirt_path_top", "dirt_path_side", "dirt", true, false, true);
         evenSimplerBlockItemVanillaMultiTexture(ModBLocks.DIRT_PATH_SLAB,   "dirt_path_top", "dirt_path_side", "dirt", true, false, true);
 
+
+        evenSimplerBlockItemVanillaMultiTexture(ModBLocks.THATCH_SLAB,         "thatch_block_side",       "thatch_block_top",       "thatch_block_side", false, false, false);
+        evenSimplerBlockItemVanillaMultiTexture(ModBLocks.THATCH_STAIRS,         "thatch_block_side",       "thatch_block_top",       "thatch_block_side", false, false, false);
+
+
+
         // ---------------------------(WOODBLOCKS)--------------------------- //
         //Weirwood
         saplingItem(ModBLocks.WEIRWOOD_SAPLING);
@@ -1289,7 +1310,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         evenSimplerBlockItem(ModBLocks.CHARRED_PRESSURE_PLATE);
         evenSimplerBlockItem(ModBLocks.CHARRED_FENCE_GATE);
         trapdoorItem(ModBLocks.CHARRED_TRAPDOOR);
-        //Sycamore
 
 
         // ---------------------------(FLOWERS)--------------------------- //

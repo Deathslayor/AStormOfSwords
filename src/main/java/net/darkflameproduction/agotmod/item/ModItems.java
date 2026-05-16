@@ -1317,7 +1317,9 @@ public class ModItems {
             "sandalwood",
             "sandbeggar",
             "tigerwood",
-            "yew"
+            "yew",
+            "blue_soldier_pine",
+            "soldier_pine"
     };
 
     // Static initialization block to register all wood signs
@@ -1668,6 +1670,9 @@ public class ModItems {
     public static final DeferredItem<Item> SANDBEGGAR_TABLE = ITEMS.registerItem("sandbeggar_table", p -> new BlockItem(ModBLocks.SANDBEGGAR_TABLE.get(), p));
     public static final DeferredItem<Item> TIGERWOOD_TABLE = ITEMS.registerItem("tigerwood_table", p -> new BlockItem(ModBLocks.TIGERWOOD_TABLE.get(), p));
     public static final DeferredItem<Item> YEW_TABLE = ITEMS.registerItem("yew_table", p -> new BlockItem(ModBLocks.YEW_TABLE.get(), p));
+    public static final DeferredItem<Item> SOLDIER_PINE_TABLE = ITEMS.registerItem("soldier_pine_table", p -> new BlockItem(ModBLocks.SOLDIER_PINE_TABLE.get(), p));
+    public static final DeferredItem<Item> BLUE_SOLDIER_PINE_TABLE = ITEMS.registerItem("blue_soldier_pine_table", p -> new BlockItem(ModBLocks.BLUE_SOLDIER_PINE_TABLE.get(), p));
+
 
     public static final DeferredItem<Item> DARK_OAK_STOOL = ITEMS.registerItem("dark_oak_stool", p -> new BlockItem(ModBLocks.DARK_OAK_STOOL.get(), p));
     public static final DeferredItem<Item> OAK_STOOL = ITEMS.registerItem("oak_stool", p -> new BlockItem(ModBLocks.OAK_STOOL.get(), p));
@@ -1741,6 +1746,10 @@ public class ModItems {
     public static final DeferredItem<Item> SANDBEGGAR_STOOL = ITEMS.registerItem("sandbeggar_stool", p -> new BlockItem(ModBLocks.SANDBEGGAR_STOOL.get(), p));
     public static final DeferredItem<Item> TIGERWOOD_STOOL = ITEMS.registerItem("tigerwood_stool", p -> new BlockItem(ModBLocks.TIGERWOOD_STOOL.get(), p));
     public static final DeferredItem<Item> YEW_STOOL = ITEMS.registerItem("yew_stool", p -> new BlockItem(ModBLocks.YEW_STOOL.get(), p));
+    public static final DeferredItem<Item> SOLDIER_PINE_STOOL = ITEMS.registerItem("soldier_pine_stool", p -> new BlockItem(ModBLocks.SOLDIER_PINE_STOOL.get(), p));
+    public static final DeferredItem<Item> BLUE_SOLDIER_PINE_STOOL = ITEMS.registerItem("blue_soldier_pine_stool", p -> new BlockItem(ModBLocks.BLUE_SOLDIER_PINE_STOOL.get(), p));
+
+
 
     public static final DeferredItem<Item> DARK_OAK_CHAIR = ITEMS.registerItem("dark_oak_chair", p -> new BlockItem(ModBLocks.DARK_OAK_CHAIR.get(), p));
     public static final DeferredItem<Item> OAK_CHAIR = ITEMS.registerItem("oak_chair", p -> new BlockItem(ModBLocks.OAK_CHAIR.get(), p));
@@ -1814,6 +1823,8 @@ public class ModItems {
     public static final DeferredItem<Item> SANDBEGGAR_CHAIR = ITEMS.registerItem("sandbeggar_chair", p -> new BlockItem(ModBLocks.SANDBEGGAR_CHAIR.get(), p));
     public static final DeferredItem<Item> TIGERWOOD_CHAIR = ITEMS.registerItem("tigerwood_chair", p -> new BlockItem(ModBLocks.TIGERWOOD_CHAIR.get(), p));
     public static final DeferredItem<Item> YEW_CHAIR = ITEMS.registerItem("yew_chair", p -> new BlockItem(ModBLocks.YEW_CHAIR.get(), p));
+    public static final DeferredItem<Item> SOLDIER_PINE_CHAIR = ITEMS.registerItem("soldier_pine_chair", p -> new BlockItem(ModBLocks.SOLDIER_PINE_CHAIR.get(), p));
+    public static final DeferredItem<Item> BLUE_SOLDIER_PINE_CHAIR = ITEMS.registerItem("blue_soldier_pine_chair", p -> new BlockItem(ModBLocks.BLUE_SOLDIER_PINE_CHAIR.get(), p));
 
     // ── 2b. ModItems.java — ARM CHAIRS ────────────────────────────────────────
     public static final DeferredItem<Item> DARK_OAK_ARM_CHAIR = ITEMS.registerItem("dark_oak_arm_chair", p -> new BlockItem(ModBLocks.DARK_OAK_ARM_CHAIR.get(), p));
@@ -1888,6 +1899,8 @@ public class ModItems {
     public static final DeferredItem<Item> SANDBEGGAR_ARM_CHAIR = ITEMS.registerItem("sandbeggar_arm_chair", p -> new BlockItem(ModBLocks.SANDBEGGAR_ARM_CHAIR.get(), p));
     public static final DeferredItem<Item> TIGERWOOD_ARM_CHAIR = ITEMS.registerItem("tigerwood_arm_chair", p -> new BlockItem(ModBLocks.TIGERWOOD_ARM_CHAIR.get(), p));
     public static final DeferredItem<Item> YEW_ARM_CHAIR = ITEMS.registerItem("yew_arm_chair", p -> new BlockItem(ModBLocks.YEW_ARM_CHAIR.get(), p));
+    public static final DeferredItem<Item> SOLDIER_PINE_ARM_CHAIR = ITEMS.registerItem("soldier_pine_arm_chair", p -> new BlockItem(ModBLocks.SOLDIER_PINE_ARM_CHAIR.get(), p));
+    public static final DeferredItem<Item> BLUE_SOLDIER_PINE_ARM_CHAIR = ITEMS.registerItem("blue_soldier_pine_arm_chair", p -> new BlockItem(ModBLocks.BLUE_SOLDIER_PINE_ARM_CHAIR.get(), p));
 
 
     // Tells the AGoTMod class to call the modded items into the game

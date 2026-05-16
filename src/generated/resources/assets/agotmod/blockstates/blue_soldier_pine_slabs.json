@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "agotmod:block/blue_soldier_pine_slabs"
+    },
+    "type=double": {
+      "model": "agotmod:block/blue_soldier_pine_planks"
+    },
+    "type=top": {
+      "model": "agotmod:block/blue_soldier_pine_slabs_top"
+    }
+  }
+}

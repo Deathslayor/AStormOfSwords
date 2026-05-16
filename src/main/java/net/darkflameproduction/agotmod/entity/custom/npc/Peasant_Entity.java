@@ -21,6 +21,8 @@ import net.darkflameproduction.agotmod.entity.custom.npc.goals.smelter.SmelterGo
 import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.NameSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.charcoalburner.CharcoalBurnerSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.culture.CultureSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.culture.CultureTicketSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.farmer.FarmingSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.grocer.GrocerInventoryTicketSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.grocer.GrocerSystem;
@@ -105,6 +107,23 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     private static final EntityDataAccessor<Integer> AGING_TIMER = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Optional<BlockPos>> TOWN_HALL_POS = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.OPTIONAL_BLOCK_POS);
 
+    private static final EntityDataAccessor<String>  CULTURE        = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.STRING);
+    private static final EntityDataAccessor<Integer> CULTURE_BODY   = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> CULTURE_EYES   = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> CULTURE_LEGS   = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> CULTURE_SHIRT  = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> CULTURE_HAIR   = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> CULTURE_BOOTS  = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> CULTURE_TUNIC  = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> CULTURE_HOOD   = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> CULTURE_EYES_C = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> CULTURE_HAIR_C = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> CULTURE_SHIRT_C= SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> CULTURE_PANTS_C= SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> CULTURE_TUNIC_C= SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> CULTURE_HOOD_C = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.INT);
+
+
     // Door goal reference for persistence
     private OpenAndCloseDoorGoal doorGoal;
 
@@ -132,6 +151,10 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     private final net.darkflameproduction.agotmod.entity.custom.npc.system.tailor.TailorSystem tailorSystem;
     private final LumberjackSystem lumberjackSystem;
     private final CharcoalBurnerSystem charcoalBurnerSystem;
+
+
+    private final CultureSystem cultureSystem = new CultureSystem();
+    public CultureSystem getCultureSystem() { return cultureSystem; }
 
     // Daily reset tracking
     private long lastDayTracked = -1;
@@ -237,6 +260,22 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     public void setAgingTimer(int timer) {
         this.entityData.set(AGING_TIMER, timer);
     }
+
+    public String  getSyncedCulture()     { return this.entityData.get(CULTURE); }
+    public int     getSyncedBody()        { return this.entityData.get(CULTURE_BODY); }
+    public int     getSyncedEyes()        { return this.entityData.get(CULTURE_EYES); }
+    public int     getSyncedLegs()        { return this.entityData.get(CULTURE_LEGS); }
+    public int     getSyncedShirt()       { return this.entityData.get(CULTURE_SHIRT); }
+    public int     getSyncedHair()        { return this.entityData.get(CULTURE_HAIR); }
+    public int     getSyncedBoots()       { return this.entityData.get(CULTURE_BOOTS); }
+    public int     getSyncedTunic()       { return this.entityData.get(CULTURE_TUNIC); }
+    public int     getSyncedHood()        { return this.entityData.get(CULTURE_HOOD); }
+    public int     getSyncedEyesColor()   { return this.entityData.get(CULTURE_EYES_C); }
+    public int     getSyncedHairColor()   { return this.entityData.get(CULTURE_HAIR_C); }
+    public int     getSyncedShirtColor()  { return this.entityData.get(CULTURE_SHIRT_C); }
+    public int     getSyncedPantsColor()  { return this.entityData.get(CULTURE_PANTS_C); }
+    public int     getSyncedTunicColor()  { return this.entityData.get(CULTURE_TUNIC_C); }
+    public int     getSyncedHoodColor()   { return this.entityData.get(CULTURE_HOOD_C); }
 
     /**
      * Ages the child to an adult, preserving all data except model/textures
@@ -503,6 +542,40 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         builder.define(AGE, AGE_ADULT); // Default to adult
         builder.define(AGING_TIMER, 0); // Default aging timer
         builder.define(TOWN_HALL_POS, Optional.empty()); // NEW: Town hall registration
+        builder.define(CULTURE,         "NONE");
+        builder.define(CULTURE_BODY,    0);
+        builder.define(CULTURE_EYES,    0);
+        builder.define(CULTURE_LEGS,    0);
+        builder.define(CULTURE_SHIRT,   0);
+        builder.define(CULTURE_HAIR,    0);
+        builder.define(CULTURE_BOOTS,   0);
+        builder.define(CULTURE_TUNIC,   0);
+        builder.define(CULTURE_HOOD,    0);
+        builder.define(CULTURE_EYES_C,  0);
+        builder.define(CULTURE_HAIR_C,  0);
+        builder.define(CULTURE_SHIRT_C, 0);
+        builder.define(CULTURE_PANTS_C, 0);
+        builder.define(CULTURE_TUNIC_C, 0);
+        builder.define(CULTURE_HOOD_C,  0);
+    }
+
+    public void syncCultureToClients() {
+        net.darkflameproduction.agotmod.entity.custom.npc.system.culture.CultureSystem cs = cultureSystem;
+        this.entityData.set(CULTURE,         cs.getCulture().name());
+        this.entityData.set(CULTURE_BODY,    cs.getBodyVariant());
+        this.entityData.set(CULTURE_EYES,    cs.getEyesVariant());
+        this.entityData.set(CULTURE_LEGS,    cs.getLegsVariant());
+        this.entityData.set(CULTURE_SHIRT,   cs.getShirtVariant());
+        this.entityData.set(CULTURE_HAIR,    cs.getHairVariant());
+        this.entityData.set(CULTURE_BOOTS,   cs.getBootsVariant());
+        this.entityData.set(CULTURE_TUNIC,   cs.getTunicVariant());
+        this.entityData.set(CULTURE_HOOD,    cs.getHoodVariant());
+        this.entityData.set(CULTURE_EYES_C,  cs.getEyesColorIdx());
+        this.entityData.set(CULTURE_HAIR_C,  cs.getHairColorIdx());
+        this.entityData.set(CULTURE_SHIRT_C, cs.getShirtColorIdx());
+        this.entityData.set(CULTURE_PANTS_C, cs.getPantsColorIdx());
+        this.entityData.set(CULTURE_TUNIC_C, cs.getTunicColorIdx());
+        this.entityData.set(CULTURE_HOOD_C,  cs.getHoodColorIdx());
     }
 
     @Override
@@ -542,6 +615,8 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         compound.put("LumberjackSystem", lumberjackTag);
 
         charcoalBurnerSystem.saveData(compound);
+        cultureSystem.saveData(compound);
+
 
 
 
@@ -585,6 +660,8 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         animalHerderSystem.loadData(compound);
         inventorySystem.loadData(compound, this.registryAccess());
         charcoalBurnerSystem.loadData(compound);
+        cultureSystem.loadData(compound);
+
 
 
         if (compound.contains("LumberjackSystem")) {
@@ -627,6 +704,24 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
             if (isRegisteredToTownHall() && this.tickCount % 400 == 0) {
                 validateTownHallRegistration();
             }
+
+            // ── Culture assignment ─────────────────────────────────────────────
+            if (!cultureSystem.hasCulture()
+                    && net.darkflameproduction.agotmod.entity.custom.npc.system.culture.CultureTicketSystem
+                    .hasPendingTicket(this.getUUID())) {
+                net.darkflameproduction.agotmod.entity.custom.npc.system.culture.CultureTicketSystem.CultureTicket ticket =
+                        net.darkflameproduction.agotmod.entity.custom.npc.system.culture.CultureTicketSystem
+                                .consumeTicket(this.getUUID());
+                if (ticket != null) {
+                    cultureSystem.assignCulture(
+                            ticket.culture,
+                            this.level().getRandom(),
+                            isFemale(),
+                            isChild()
+                    );
+                    nameSystem.generateRandomName(this.level().getRandom());
+                }
+            }
         }
 
         sleepSystem.tick();
@@ -645,12 +740,10 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
             if (GrocerInventoryTicketSystem.hasPendingResponse(this.getUUID())) {
                 GrocerInventoryTicketSystem.InventoryResponseTicket response =
                         GrocerInventoryTicketSystem.consumeResponse(this.getUUID());
-
                 if (response != null && this.level() instanceof ServerLevel serverLevel) {
                     this.registerWithTownHall(response.townHallPos);
                     net.minecraft.server.level.ServerPlayer serverPlayer =
                             serverLevel.getServer().getPlayerList().getPlayer(response.playerUUID);
-
                     if (serverPlayer != null) {
                         List<GrocerSystem.GrocerInventoryEntry> entries = buildFilteredEntries(
                                 response.items, net.darkflameproduction.agotmod.util.ItemPricing::isGrocerItem);
@@ -669,12 +762,10 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
             if (net.darkflameproduction.agotmod.entity.custom.npc.system.butcher.ButcherInventoryTicketSystem.hasPendingResponse(this.getUUID())) {
                 net.darkflameproduction.agotmod.entity.custom.npc.system.butcher.ButcherInventoryTicketSystem.InventoryResponseTicket response =
                         net.darkflameproduction.agotmod.entity.custom.npc.system.butcher.ButcherInventoryTicketSystem.consumeResponse(this.getUUID());
-
                 if (response != null && this.level() instanceof ServerLevel serverLevel) {
                     this.registerWithTownHall(response.townHallPos);
                     net.minecraft.server.level.ServerPlayer serverPlayer =
                             serverLevel.getServer().getPlayerList().getPlayer(response.playerUUID);
-
                     if (serverPlayer != null) {
                         List<GrocerSystem.GrocerInventoryEntry> entries = buildFilteredEntries(
                                 response.items, net.darkflameproduction.agotmod.util.ItemPricing::isButcherItem);
@@ -693,12 +784,10 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
             if (net.darkflameproduction.agotmod.entity.custom.npc.system.tanner.TannerInventoryTicketSystem.hasPendingResponse(this.getUUID())) {
                 net.darkflameproduction.agotmod.entity.custom.npc.system.tanner.TannerInventoryTicketSystem.InventoryResponseTicket response =
                         net.darkflameproduction.agotmod.entity.custom.npc.system.tanner.TannerInventoryTicketSystem.consumeResponse(this.getUUID());
-
                 if (response != null && this.level() instanceof ServerLevel serverLevel) {
                     this.registerWithTownHall(response.townHallPos);
                     net.minecraft.server.level.ServerPlayer serverPlayer =
                             serverLevel.getServer().getPlayerList().getPlayer(response.playerUUID);
-
                     if (serverPlayer != null) {
                         List<GrocerSystem.GrocerInventoryEntry> entries = buildFilteredEntries(
                                 response.items, net.darkflameproduction.agotmod.util.ItemPricing::isTannerItem);
@@ -717,12 +806,10 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
             if (net.darkflameproduction.agotmod.entity.custom.npc.system.tailor.TailorInventoryTicketSystem.hasPendingResponse(this.getUUID())) {
                 net.darkflameproduction.agotmod.entity.custom.npc.system.tailor.TailorInventoryTicketSystem.InventoryResponseTicket response =
                         net.darkflameproduction.agotmod.entity.custom.npc.system.tailor.TailorInventoryTicketSystem.consumeResponse(this.getUUID());
-
                 if (response != null && this.level() instanceof ServerLevel serverLevel) {
                     this.registerWithTownHall(response.townHallPos);
                     net.minecraft.server.level.ServerPlayer serverPlayer =
                             serverLevel.getServer().getPlayerList().getPlayer(response.playerUUID);
-
                     if (serverPlayer != null) {
                         List<GrocerSystem.GrocerInventoryEntry> entries = buildFilteredEntries(
                                 response.items, net.darkflameproduction.agotmod.util.ItemPricing::isTailorItem);
@@ -741,12 +828,10 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
             if (net.darkflameproduction.agotmod.entity.custom.npc.system.blacksmith.BlacksmithInventoryTicketSystem.hasPendingResponse(this.getUUID())) {
                 net.darkflameproduction.agotmod.entity.custom.npc.system.blacksmith.BlacksmithInventoryTicketSystem.InventoryResponseTicket response =
                         net.darkflameproduction.agotmod.entity.custom.npc.system.blacksmith.BlacksmithInventoryTicketSystem.consumeResponse(this.getUUID());
-
                 if (response != null && this.level() instanceof ServerLevel serverLevel) {
                     this.registerWithTownHall(response.townHallPos);
                     net.minecraft.server.level.ServerPlayer serverPlayer =
                             serverLevel.getServer().getPlayerList().getPlayer(response.playerUUID);
-
                     if (serverPlayer != null) {
                         List<GrocerSystem.GrocerInventoryEntry> entries = buildFilteredEntries(
                                 response.items, net.darkflameproduction.agotmod.util.ItemPricing::isBlacksmithItem);
@@ -978,28 +1063,25 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
             ServerLevelAccessor p_35439_, DifficultyInstance p_35440_, EntitySpawnReason p_363222_, @Nullable SpawnGroupData p_35442_
     ) {
         if (!this.level().isClientSide) {
-            // Randomly assign gender (50/50 split)
             String gender = p_35439_.getRandom().nextBoolean() ? GENDER_FEMALE : GENDER_MALE;
             this.setGender(gender);
 
-            // Randomly assign age (80% adult, 20% child)
             String age = p_35439_.getRandom().nextFloat() < 0.8f ? AGE_ADULT : AGE_CHILD;
             this.setAge(age);
 
-            // Set aging timer for children (randomized around average)
             if (age.equals(AGE_CHILD)) {
                 int agingTime = AVERAGE_AGING_TICKS +
                         (p_35439_.getRandom().nextInt(AGING_VARIANCE * 2) - AGING_VARIANCE);
-                // Store the target aging time (we'll count up to this)
-                this.setAgingTimer(0); // Start at 0, will count up
-                // Store the target in NBT for persistence
+                this.setAgingTimer(0);
                 this.getPersistentData().putInt("AgingTarget", agingTime);
             } else {
                 this.setAgingTimer(0);
             }
 
-            nameSystem.generateRandomName(p_35439_.getRandom());
-            // Initialize day tracking
+            // Culture and name are assigned by TownCultureZone.onEntityJoinLevel
+            // which fires when this entity is added to the level. generateRandomName
+            // is called there too, so we don't call it here to avoid double-rolling.
+
             lastDayTracked = this.level().getDayTime() / 24000;
             this.getEntityData().set(LAST_DAY_TRACKED, lastDayTracked);
         }

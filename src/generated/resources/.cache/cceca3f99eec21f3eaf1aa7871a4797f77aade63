@@ -1,4 +1,4 @@
-// 1.21.3	2026-05-10T18:21:50.4838985	Tags for minecraft:block mod id agotmod
+// 1.21.3	2026-05-16T15:10:08.8037923	Tags for minecraft:block mod id agotmod
 7ce4ba32d6429dbf27a7ccd68d70690dbe80eb19 data/agotmod/tags/block/incorrect_for_bronze_tool.json
 a249c46329a41538f49a564e1f14338aaf1be5a0 data/agotmod/tags/block/incorrect_for_steel_tool.json
 a5270b76c9036b19927822a14ea7db103ebf5a0d data/agotmod/tags/block/needs_bronze_tool.json
@@ -6,24 +6,25 @@ a5270b76c9036b19927822a14ea7db103ebf5a0d data/agotmod/tags/block/needs_bronze_to
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/agotmod/tags/block/needs_steel_tool.json
 7697a2db0694279c840d415a6dc0c503cf99679d data/minecraft/tags/block/crops.json
 aa239540a540fded2eb052462a8c6ac88fd2f51b data/minecraft/tags/block/dirt.json
-7d45c9a8158ba100f7fcebac130814f6c4deb995 data/minecraft/tags/block/fences.json
-07dfd4547b8b87f2d5924398edbceba560d2defe data/minecraft/tags/block/fence_gates.json
+7fd219ca9712234345cf4658f7c9a3cf52034783 data/minecraft/tags/block/fences.json
+55b4e09946db167425800b49d7d9d17ba8e73d1c data/minecraft/tags/block/fence_gates.json
 a962d2c3a6128522b3dd5dd0ab313afa04aa70bc data/minecraft/tags/block/flowers.json
 a2787d1e34eb959461d223ed2e8d1c065d9ed99e data/minecraft/tags/block/incorrect_for_gold_tool.json
 a2787d1e34eb959461d223ed2e8d1c065d9ed99e data/minecraft/tags/block/incorrect_for_iron_tool.json
 a2787d1e34eb959461d223ed2e8d1c065d9ed99e data/minecraft/tags/block/incorrect_for_stone_tool.json
 a2787d1e34eb959461d223ed2e8d1c065d9ed99e data/minecraft/tags/block/incorrect_for_wooden_tool.json
-59a7357b7b107befcaa11e828f59dd8e212ed339 data/minecraft/tags/block/logs_that_burn.json
-d9514f85a59fbc953a9f41249dbddbcdd9ba8c51 data/minecraft/tags/block/mineable/axe.json
-e7b9914fdfde6962f593d86b782e3c762c113241 data/minecraft/tags/block/mineable/pickaxe.json
-051cf5240e36d65fdcca3b144f1ebeabae256ce2 data/minecraft/tags/block/mineable/shovel.json
+be37ff673c59752331fbb415c6625a2dbc2ae48e data/minecraft/tags/block/logs_that_burn.json
+a5fbe1eeec8ae8a84f50a50bdc7b1937110eaa81 data/minecraft/tags/block/mineable/axe.json
+ce681cbe2b839614141b6a5ee92dcfd8acf55434 data/minecraft/tags/block/mineable/hoe.json
+364e4e50f8e90d85d62e6cf2cee8f0a3b9d4c163 data/minecraft/tags/block/mineable/pickaxe.json
+aec17cd704d1b095ff06303c63da62036cf1470f data/minecraft/tags/block/mineable/shovel.json
 add20b0e5782888ccfc35ca325ac5a1c2e39f150 data/minecraft/tags/block/needs_iron_tool.json
 51ff5d7394d9c7aa6fac4887199461f1cdd0df85 data/minecraft/tags/block/needs_stone_tool.json
-3a0c83cf71e449201612b2ab85846f3a12e87b9c data/minecraft/tags/block/planks.json
+4cecfe831671da23c4af596903021c7dfcb5d864 data/minecraft/tags/block/planks.json
 335c4071f67c760e813937686f95bf950de2710d data/minecraft/tags/block/slabs.json
 0f26816713c71edcf44d088a874e6feaf9e8ea67 data/minecraft/tags/block/small_flowers.json
 b33f52aed211f4a2ffcdd7aa77d2f7a5b1a2100e data/minecraft/tags/block/stairs.json
 9b57baf4c55cd54660df395049570d9f2735b14b data/minecraft/tags/block/stone_bricks.json
 cb8e1d20ca7cd40223ff3aff872feef5aacdf15d data/minecraft/tags/block/stone_ore_replaceables.json
 9c711b618a49ea337707210db7a33bb33f4348a2 data/minecraft/tags/block/tall_flowers.json
-3e5b3790ac647bea34d60e5c98629b0ccf5a05ef data/minecraft/tags/block/walls.json
+a275858cb7e0080fe4f874ad84b87796c9458ada data/minecraft/tags/block/walls.json
