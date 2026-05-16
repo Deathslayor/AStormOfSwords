@@ -95,6 +95,8 @@ public class ModCreativeToolsUtilities {
                         pOutput.accept(ModItems.CHARRED_TABLE.get());
                         pOutput.accept(ModItems.ROTTEN_TABLE.get());
                         pOutput.accept(ModItems.PINE_TABLE.get());
+                        pOutput.accept(ModItems.SOLDIER_PINE_TABLE.get());
+                        pOutput.accept(ModItems.BLUE_SOLDIER_PINE_TABLE.get());
                         pOutput.accept(ModItems.ASH_TABLE.get());
                         pOutput.accept(ModItems.BEECH_TABLE.get());
                         pOutput.accept(ModItems.CEDAR_TABLE.get());
@@ -169,6 +171,8 @@ public class ModCreativeToolsUtilities {
                         pOutput.accept(ModItems.CHARRED_CHAIR.get());
                         pOutput.accept(ModItems.ROTTEN_CHAIR.get());
                         pOutput.accept(ModItems.PINE_CHAIR.get());
+                        pOutput.accept(ModItems.SOLDIER_PINE_CHAIR.get());
+                        pOutput.accept(ModItems.BLUE_SOLDIER_PINE_CHAIR.get());
                         pOutput.accept(ModItems.ASH_CHAIR.get());
                         pOutput.accept(ModItems.BEECH_CHAIR.get());
                         pOutput.accept(ModItems.CEDAR_CHAIR.get());
@@ -243,6 +247,8 @@ public class ModCreativeToolsUtilities {
                         pOutput.accept(ModItems.CHARRED_ARM_CHAIR.get());
                         pOutput.accept(ModItems.ROTTEN_ARM_CHAIR.get());
                         pOutput.accept(ModItems.PINE_ARM_CHAIR.get());
+                        pOutput.accept(ModItems.SOLDIER_PINE_ARM_CHAIR.get());
+                        pOutput.accept(ModItems.BLUE_SOLDIER_PINE_ARM_CHAIR.get());
                         pOutput.accept(ModItems.ASH_ARM_CHAIR.get());
                         pOutput.accept(ModItems.BEECH_ARM_CHAIR.get());
                         pOutput.accept(ModItems.CEDAR_ARM_CHAIR.get());
@@ -317,6 +323,8 @@ public class ModCreativeToolsUtilities {
                         pOutput.accept(ModItems.CHARRED_STOOL.get());
                         pOutput.accept(ModItems.ROTTEN_STOOL.get());
                         pOutput.accept(ModItems.PINE_STOOL.get());
+                        pOutput.accept(ModItems.SOLDIER_PINE_STOOL.get());
+                        pOutput.accept(ModItems.BLUE_SOLDIER_PINE_STOOL.get());
                         pOutput.accept(ModItems.ASH_STOOL.get());
                         pOutput.accept(ModItems.BEECH_STOOL.get());
                         pOutput.accept(ModItems.CEDAR_STOOL.get());

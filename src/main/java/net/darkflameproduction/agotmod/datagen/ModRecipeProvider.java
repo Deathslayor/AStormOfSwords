@@ -1,11 +1,13 @@
 package net.darkflameproduction.agotmod.datagen;
 
+import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.darkflameproduction.agotmod.item.ModItems;
 import net.darkflameproduction.agotmod.item.custom.BannerPatterns;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.data.recipes.*;
@@ -17,10 +19,7 @@ import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 import org.jetbrains.annotations.NotNull;
 import net.minecraft.world.level.block.Block;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
 // Class for generating data pack recipes
@@ -3107,6 +3106,167 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy(getHasName(ModItems.RAW_WINKLES.get()), has(ModItems.RAW_WINKLES.get()))
                 .save(this.output, "cooked_winkles_with_smoker");
 
+        // ── Campfire ─────────────────────────────────────────────────────────
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_AUROCHS.get()), RecipeCategory.FOOD, ModItems.COOKED_AUROCHS.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_AUROCHS.get()), has(ModItems.RAW_AUROCHS.get()))
+                .save(this.output, "cooked_aurochs_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_BEAR_MEAT.get()), RecipeCategory.FOOD, ModItems.COOKED_BEAR_MEAT.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_BEAR_MEAT.get()), has(ModItems.RAW_BEAR_MEAT.get()))
+                .save(this.output, "cooked_bear_meat_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_BOAR_VENISON.get()), RecipeCategory.FOOD, ModItems.COOKED_BOAR_VENISON.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_BOAR_VENISON.get()), has(ModItems.RAW_BOAR_VENISON.get()))
+                .save(this.output, "cooked_boar_venison_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_DEER_VENISON.get()), RecipeCategory.FOOD, ModItems.COOKED_DEER_VENISON.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_DEER_VENISON.get()), has(ModItems.RAW_DEER_VENISON.get()))
+                .save(this.output, "cooked_deer_venison_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_DOG.get()), RecipeCategory.FOOD, ModItems.COOKED_DOG.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_DOG.get()), has(ModItems.RAW_DOG.get()))
+                .save(this.output, "cooked_dog_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_DORMICE.get()), RecipeCategory.FOOD, ModItems.COOKED_DORMICE.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_DORMICE.get()), has(ModItems.RAW_DORMICE.get()))
+                .save(this.output, "cooked_dormice_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_FROG.get()), RecipeCategory.FOOD, ModItems.COOKED_FROG.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_FROG.get()), has(ModItems.RAW_FROG.get()))
+                .save(this.output, "cooked_frog_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_GOAT_MEAT.get()), RecipeCategory.FOOD, ModItems.COOKED_GOAT_MEAT.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_GOAT_MEAT.get()), has(ModItems.RAW_GOAT_MEAT.get()))
+                .save(this.output, "cooked_goat_meat_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_HARE_MEAT.get()), RecipeCategory.FOOD, ModItems.COOKED_HARE_MEAT.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_HARE_MEAT.get()), has(ModItems.RAW_HARE_MEAT.get()))
+                .save(this.output, "cooked_hare_meat_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_HORSE_MEAT.get()), RecipeCategory.FOOD, ModItems.COOKED_HORSE_MEAT.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_HORSE_MEAT.get()), has(ModItems.RAW_HORSE_MEAT.get()))
+                .save(this.output, "cooked_horse_meat_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_LAMB.get()), RecipeCategory.FOOD, ModItems.COOKED_LAMB.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_LAMB.get()), has(ModItems.RAW_LAMB.get()))
+                .save(this.output, "cooked_lamb_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_LOCUSTS.get()), RecipeCategory.FOOD, ModItems.COOKED_LOCUSTS.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_LOCUSTS.get()), has(ModItems.RAW_LOCUSTS.get()))
+                .save(this.output, "cooked_locusts_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_MAMMOTH_MEAT.get()), RecipeCategory.FOOD, ModItems.COOKED_MAMMOTH_MEAT.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_MAMMOTH_MEAT.get()), has(ModItems.RAW_MAMMOTH_MEAT.get()))
+                .save(this.output, "cooked_mammoth_meat_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_MAN_FLESH.get()), RecipeCategory.FOOD, ModItems.COOKED_MAN_FLESH.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_MAN_FLESH.get()), has(ModItems.RAW_MAN_FLESH.get()))
+                .save(this.output, "cooked_man_flesh_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_RAT.get()), RecipeCategory.FOOD, ModItems.COOKED_RAT.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_RAT.get()), has(ModItems.RAW_RAT.get()))
+                .save(this.output, "cooked_rat_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_SNAKE.get()), RecipeCategory.FOOD, ModItems.COOKED_SNAKE.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_SNAKE.get()), has(ModItems.RAW_SNAKE.get()))
+                .save(this.output, "cooked_snake_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_SNAIL.get()), RecipeCategory.FOOD, ModItems.COOKED_SNAIL.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_SNAIL.get()), has(ModItems.RAW_SNAIL.get()))
+                .save(this.output, "cooked_snail_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_SQUIRREL.get()), RecipeCategory.FOOD, ModItems.COOKED_SQUIRREL.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_SQUIRREL.get()), has(ModItems.RAW_SQUIRREL.get()))
+                .save(this.output, "cooked_squirrel_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_SUCKLING_PIG.get()), RecipeCategory.FOOD, ModItems.COOKED_SUCKLING_PIG.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_SUCKLING_PIG.get()), has(ModItems.RAW_SUCKLING_PIG.get()))
+                .save(this.output, "cooked_suckling_pig_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_BACON.get()), RecipeCategory.FOOD, ModItems.COOKED_BACON.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_BACON.get()), has(ModItems.RAW_BACON.get()))
+                .save(this.output, "cooked_bacon_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_PIG_KIDNEYS.get()), RecipeCategory.FOOD, ModItems.COOKED_PIG_KIDNEYS.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_PIG_KIDNEYS.get()), has(ModItems.RAW_PIG_KIDNEYS.get()))
+                .save(this.output, "cooked_pig_kidneys_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_PIG_LIVER.get()), RecipeCategory.FOOD, ModItems.COOKED_PIG_LIVER.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_PIG_LIVER.get()), has(ModItems.RAW_PIG_LIVER.get()))
+                .save(this.output, "cooked_pig_liver_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_PIG_RIBS.get()), RecipeCategory.FOOD, ModItems.COOKED_PIG_RIBS.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_PIG_RIBS.get()), has(ModItems.RAW_PIG_RIBS.get()))
+                .save(this.output, "cooked_pig_ribs_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_GOOSE_LIVER.get()), RecipeCategory.FOOD, ModItems.COOKED_GOOSE_LIVER.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_GOOSE_LIVER.get()), has(ModItems.RAW_GOOSE_LIVER.get()))
+                .save(this.output, "cooked_goose_liver_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_CALF_PANCREAS.get()), RecipeCategory.FOOD, ModItems.COOKED_CALF_PANCREAS.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_CALF_PANCREAS.get()), has(ModItems.RAW_CALF_PANCREAS.get()))
+                .save(this.output, "cooked_calf_pancreas_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_SAUSAGE.get()), RecipeCategory.FOOD, ModItems.COOKED_SAUSAGE.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_SAUSAGE.get()), has(ModItems.RAW_SAUSAGE.get()))
+                .save(this.output, "cooked_sausage_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_BLOOD_SAUSAGE.get()), RecipeCategory.FOOD, ModItems.COOKED_BLOOD_SAUSAGE.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_BLOOD_SAUSAGE.get()), has(ModItems.RAW_BLOOD_SAUSAGE.get()))
+                .save(this.output, "cooked_blood_sausage_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_WHITE_SAUSAGE.get()), RecipeCategory.FOOD, ModItems.COOKED_WHITE_SAUSAGE.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_WHITE_SAUSAGE.get()), has(ModItems.RAW_WHITE_SAUSAGE.get()))
+                .save(this.output, "cooked_white_sausage_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_PIGEON.get()), RecipeCategory.FOOD, ModItems.COOKED_PIGEON.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_PIGEON.get()), has(ModItems.RAW_PIGEON.get()))
+                .save(this.output, "cooked_pigeon_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_DUCK.get()), RecipeCategory.FOOD, ModItems.COOKED_DUCK.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_DUCK.get()), has(ModItems.RAW_DUCK.get()))
+                .save(this.output, "cooked_duck_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_GOOSE.get()), RecipeCategory.FOOD, ModItems.COOKED_GOOSE.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_GOOSE.get()), has(ModItems.RAW_GOOSE.get()))
+                .save(this.output, "cooked_goose_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_GULL.get()), RecipeCategory.FOOD, ModItems.COOKED_GULL.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_GULL.get()), has(ModItems.RAW_GULL.get()))
+                .save(this.output, "cooked_gull_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_HERON.get()), RecipeCategory.FOOD, ModItems.COOKED_HERON.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_HERON.get()), has(ModItems.RAW_HERON.get()))
+                .save(this.output, "cooked_heron_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_LARK.get()), RecipeCategory.FOOD, ModItems.COOKED_LARK.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_LARK.get()), has(ModItems.RAW_LARK.get()))
+                .save(this.output, "cooked_lark_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_PARTRIDGE.get()), RecipeCategory.FOOD, ModItems.COOKED_PARTRIDGE.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_PARTRIDGE.get()), has(ModItems.RAW_PARTRIDGE.get()))
+                .save(this.output, "cooked_partridge_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_PEACOCK.get()), RecipeCategory.FOOD, ModItems.COOKED_PEACOCK.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_PEACOCK.get()), has(ModItems.RAW_PEACOCK.get()))
+                .save(this.output, "cooked_peacock_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_QUAIL.get()), RecipeCategory.FOOD, ModItems.COOKED_QUAIL.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_QUAIL.get()), has(ModItems.RAW_QUAIL.get()))
+                .save(this.output, "cooked_quail_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_SWAN.get()), RecipeCategory.FOOD, ModItems.COOKED_SWAN.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_SWAN.get()), has(ModItems.RAW_SWAN.get()))
+                .save(this.output, "cooked_swan_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_CHICKEN_NUGGETS.get()), RecipeCategory.FOOD, ModItems.COOKED_CHICKEN_NUGGETS.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_CHICKEN_NUGGETS.get()), has(ModItems.RAW_CHICKEN_NUGGETS.get()))
+                .save(this.output, "cooked_chicken_nuggets_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_HERRING.get()), RecipeCategory.FOOD, ModItems.COOKED_HERRING.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_HERRING.get()), has(ModItems.RAW_HERRING.get()))
+                .save(this.output, "cooked_herring_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_TROUT.get()), RecipeCategory.FOOD, ModItems.COOKED_TROUT.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_TROUT.get()), has(ModItems.RAW_TROUT.get()))
+                .save(this.output, "cooked_trout_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_EEL.get()), RecipeCategory.FOOD, ModItems.COOKED_EEL.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_EEL.get()), has(ModItems.RAW_EEL.get()))
+                .save(this.output, "cooked_eel_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_LAMPREY.get()), RecipeCategory.FOOD, ModItems.COOKED_LAMPREY.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_LAMPREY.get()), has(ModItems.RAW_LAMPREY.get()))
+                .save(this.output, "cooked_lamprey_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_PIKE.get()), RecipeCategory.FOOD, ModItems.COOKED_PIKE.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_PIKE.get()), has(ModItems.RAW_PIKE.get()))
+                .save(this.output, "cooked_pike_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_SARDINE.get()), RecipeCategory.FOOD, ModItems.COOKED_SARDINE.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_SARDINE.get()), has(ModItems.RAW_SARDINE.get()))
+                .save(this.output, "cooked_sardine_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_MONKFISH.get()), RecipeCategory.FOOD, ModItems.COOKED_MONKFISH.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_MONKFISH.get()), has(ModItems.RAW_MONKFISH.get()))
+                .save(this.output, "cooked_monkfish_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_OCTOPUS.get()), RecipeCategory.FOOD, ModItems.COOKED_OCTOPUS.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_OCTOPUS.get()), has(ModItems.RAW_OCTOPUS.get()))
+                .save(this.output, "cooked_octopus_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_WHITEFISH.get()), RecipeCategory.FOOD, ModItems.COOKED_WHITEFISH.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_WHITEFISH.get()), has(ModItems.RAW_WHITEFISH.get()))
+                .save(this.output, "cooked_whitefish_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_CRAB.get()), RecipeCategory.FOOD, ModItems.COOKED_CRAB.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_CRAB.get()), has(ModItems.RAW_CRAB.get()))
+                .save(this.output, "cooked_crab_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_LOBSTER.get()), RecipeCategory.FOOD, ModItems.COOKED_LOBSTER.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_LOBSTER.get()), has(ModItems.RAW_LOBSTER.get()))
+                .save(this.output, "cooked_lobster_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_CLAM.get()), RecipeCategory.FOOD, ModItems.COOKED_CLAM.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_CLAM.get()), has(ModItems.RAW_CLAM.get()))
+                .save(this.output, "cooked_clam_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_MUSSELS.get()), RecipeCategory.FOOD, ModItems.COOKED_MUSSELS.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_MUSSELS.get()), has(ModItems.RAW_MUSSELS.get()))
+                .save(this.output, "cooked_mussels_with_campfire");
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_WINKLES.get()), RecipeCategory.FOOD, ModItems.COOKED_WINKLES.get(), 0.35f, 600)
+                .unlockedBy(getHasName(ModItems.RAW_WINKLES.get()), has(ModItems.RAW_WINKLES.get()))
+                .save(this.output, "cooked_winkles_with_campfire");
+
         this.shaped(RecipeCategory.FOOD, ModItems.BARLEY_BREAD.get())
                 .pattern("BBB")
                 .define('B', ModItems.BARLEY.get())
@@ -3130,6 +3290,94 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('O', Items.IRON_NUGGET)
                 .unlockedBy(getHasName(Items.IRON_NUGGET), has(Items.IRON_NUGGET))
                 .save(this.output, "nugget");
+
+        // -------------------------------------------------(FURNITURE)------------------------------------------------- //
+
+// ── Vanilla wood furniture ────────────────────────────────────────────────
+
+        record WoodEntry(String name, Object planks, Object stick) {}
+
+        List<WoodEntry> allWoods = new ArrayList<>();
+
+// Vanilla
+        allWoods.add(new WoodEntry("oak",      Blocks.OAK_PLANKS,      Items.STICK));
+        allWoods.add(new WoodEntry("spruce",   Blocks.SPRUCE_PLANKS,   Items.STICK));
+        allWoods.add(new WoodEntry("birch",    Blocks.BIRCH_PLANKS,    Items.STICK));
+        allWoods.add(new WoodEntry("jungle",   Blocks.JUNGLE_PLANKS,   Items.STICK));
+        allWoods.add(new WoodEntry("acacia",   Blocks.ACACIA_PLANKS,   Items.STICK));
+        allWoods.add(new WoodEntry("dark_oak", Blocks.DARK_OAK_PLANKS, Items.STICK));
+        allWoods.add(new WoodEntry("mangrove", Blocks.MANGROVE_PLANKS, Items.STICK));
+        allWoods.add(new WoodEntry("cherry",   Blocks.CHERRY_PLANKS,   Items.STICK));
+        allWoods.add(new WoodEntry("bamboo",   Blocks.BAMBOO_PLANKS,   Items.STICK));
+        allWoods.add(new WoodEntry("crimson",  Blocks.CRIMSON_PLANKS,  Items.STICK));
+        allWoods.add(new WoodEntry("warped",   Blocks.WARPED_PLANKS,   Items.STICK));
+
+// Modded map-based woods
+        for (String woodType : ModBLocks.WOOD_TYPES) {
+            allWoods.add(new WoodEntry(woodType,
+                    ModBLocks.PLANKS.get(woodType).get(),
+                    Items.STICK));
+        }
+
+// Special woods
+        allWoods.add(new WoodEntry("weirwood", ModBLocks.WEIRWOOD_PLANKS.get(), ModItems.WEIRWOOD_STICK.get()));
+        allWoods.add(new WoodEntry("charred",  ModBLocks.CHARRED_PLANKS.get(),  Items.STICK));
+        allWoods.add(new WoodEntry("rotten",   ModBLocks.ROTTEN_PLANKS.get(),   Items.STICK));
+
+// Generate all furniture recipes
+        for (WoodEntry wood : allWoods) {
+            String n = wood.name();
+            ItemLike planks = (ItemLike) wood.planks();
+            ItemLike stick  = (ItemLike) wood.stick();
+
+            ItemLike stoolItem    = BuiltInRegistries.ITEM.getValue(ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, n + "_stool"));
+            ItemLike chairItem    = BuiltInRegistries.ITEM.getValue(ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, n + "_chair"));
+            ItemLike armChairItem = BuiltInRegistries.ITEM.getValue(ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, n + "_arm_chair"));
+            ItemLike tableItem    = BuiltInRegistries.ITEM.getValue(ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, n + "_table"));
+
+            // Stool
+            this.shaped(RecipeCategory.MISC, stoolItem)
+                    .pattern("OO")
+                    .pattern("AA")
+                    .pattern("BB")
+                    .define('O', ModItems.NAIL.get())
+                    .define('A', planks)
+                    .define('B', stick)
+                    .unlockedBy(getHasName(planks), has(planks))
+                    .save(this.output, n + "_stool");
+
+            // Chair
+            this.shaped(RecipeCategory.MISC, chairItem)
+                    .pattern("AO")
+                    .pattern("AO")
+                    .pattern("B ")
+                    .define('O', ModItems.NAIL.get())
+                    .define('A', stick)
+                    .define('B', stoolItem)
+                    .unlockedBy(getHasName(planks), has(stoolItem))
+                    .save(this.output, n + "_chair");
+
+            // Arm chair
+            this.shaped(RecipeCategory.MISC, armChairItem)
+                    .pattern("O O")
+                    .pattern("ABA")
+                    .define('O', ModItems.NAIL.get())
+                    .define('A', stick)
+                    .define('B', chairItem)
+                    .unlockedBy(getHasName(planks), has(chairItem))
+                    .save(this.output, n + "_arm_chair");
+
+            // Table
+            this.shaped(RecipeCategory.MISC, tableItem)
+                    .pattern("O O")
+                    .pattern("BBB")
+                    .pattern("A A")
+                    .define('O', ModItems.NAIL.get())
+                    .define('A', stick)
+                    .define('B', planks)
+                    .unlockedBy(getHasName(planks), has(planks))
+                    .save(this.output, n + "_table");
+        }
 
 
         // -------------------------------------------------(INGREDIENTS)------------------------------------------------- //

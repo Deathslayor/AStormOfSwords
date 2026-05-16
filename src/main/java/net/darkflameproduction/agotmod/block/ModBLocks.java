@@ -1102,9 +1102,10 @@ public class ModBLocks {
     public static final Map<String, DeferredBlock<Block>> WALL_SIGNS = new HashMap<>();
     public static final Map<String, DeferredBlock<Block>> HANGING_SIGNS = new HashMap<>();
     public static final Map<String, DeferredBlock<Block>> WALL_HANGING_SIGNS = new HashMap<>();
+    public static final Map<String, DeferredBlock<Block>> POTTED_SAPLINGS = new HashMap<>();
 
     // Array of wood types (excluding weirwood)
-    private static final String[] WOOD_TYPES = {
+    public static final String[] WOOD_TYPES = {
             "sycamore",
             "pine",
             "ash",
@@ -1176,6 +1177,17 @@ public class ModBLocks {
     }
 
     private static void registerWoodBlocks(String woodType) {
+
+        POTTED_SAPLINGS.put(woodType, registerBlock("potted_" + woodType + "_sapling",
+                properties -> new FlowerPotBlock(
+                        () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                        () -> SAPLINGS.get(woodType).get(),
+                        properties
+                ),
+                BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_OAK_SAPLING).noOcclusion(),
+                false));
+
+
         // Register log and wood blocks
         LOGS.put(woodType, registerBlock(woodType + "_log",
                 ModFlammableRotatedPillarBlock::new,
@@ -1714,6 +1726,16 @@ public class ModBLocks {
             WallBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL), true);
 
     // ---------------------------(FLOWERS)--------------------------- //
+
+    public static final DeferredBlock<Block> POTTED_WEIRWOOD_SAPLING = registerBlock("potted_weirwood_sapling",
+            properties -> new FlowerPotBlock(
+                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    () -> WEIRWOOD_SAPLING.get(),
+                    properties
+            ),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_OAK_SAPLING).noOcclusion(),
+            false);
+
     public static final DeferredBlock<Block> WINTER_ROSE = registerBlock("winter_rose",
             properties -> new FlowerBlock(MobEffects.SATURATION, 0, properties),
             BlockBehaviour.Properties.ofFullCopy(Blocks.POPPY), true);
@@ -1884,6 +1906,7 @@ public class ModBLocks {
                     properties
             ),
             BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY).noOcclusion(), true);
+
 
     public static final DeferredBlock<Block> POTTED_WILD_RADISH = registerBlock("potted_wild_radish",
             properties -> new FlowerPotBlock(

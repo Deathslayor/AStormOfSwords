@@ -466,6 +466,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
         wallBlock(((WallBlock) ModBLocks.CRIMSON_WALL.get()), blockTexture(Blocks.CRIMSON_PLANKS));
         wallBlock(((WallBlock) ModBLocks.WARPED_WALL.get()), blockTexture(Blocks.WARPED_PLANKS));
 
+        // Weirwood separately:
+        simpleBlockWithItem(ModBLocks.POTTED_WEIRWOOD_SAPLING.get(),
+                models().withExistingParent(ModBLocks.POTTED_WEIRWOOD_SAPLING.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                        .texture("plant", blockTexture(ModBLocks.WEIRWOOD_SAPLING.get()))
+                        .renderType("cutout"));
+
         // Define the wood types array
         String[] woodTypes = {
                 "alder",
@@ -552,6 +558,15 @@ public class ModBlockStateProvider extends BlockStateProvider {
             DeferredBlock<Block> wallSignBlock = ModBLocks.WALL_SIGNS.get(woodType);
             DeferredBlock<Block> hangingSignBlock = ModBLocks.HANGING_SIGNS.get(woodType);
             DeferredBlock<Block> wallHangingSignBlock = ModBLocks.WALL_HANGING_SIGNS.get(woodType);
+
+            // Inside your wood type loop, after the existing block model registrations:
+            DeferredBlock<Block> pottedSaplingBlock = ModBLocks.POTTED_SAPLINGS.get(woodType);
+            simpleBlockWithItem(pottedSaplingBlock.get(),
+                    models().withExistingParent(pottedSaplingBlock.getId().getPath(), mcLoc("block/flower_pot_cross"))
+                            .texture("plant", blockTexture(saplingBlock.get()))
+                            .renderType("cutout"));
+
+
 
             // Register sign blocks
             signBlock(

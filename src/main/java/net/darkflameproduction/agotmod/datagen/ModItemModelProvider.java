@@ -1064,8 +1064,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         furnitureItem(ModItems.SANDBEGGAR_CHAIR);
         furnitureItem(ModItems.TIGERWOOD_CHAIR);
         furnitureItem(ModItems.YEW_CHAIR);
-        furnitureItem(ModItems.SOLDIER_PINE_STOOL);
-        furnitureItem(ModItems.BLUE_SOLDIER_PINE_STOOL);
+        furnitureItem(ModItems.SOLDIER_PINE_CHAIR);
+        furnitureItem(ModItems.BLUE_SOLDIER_PINE_CHAIR);
 
 // Arm Chairs
         furnitureItem(ModItems.DARK_OAK_ARM_CHAIR);

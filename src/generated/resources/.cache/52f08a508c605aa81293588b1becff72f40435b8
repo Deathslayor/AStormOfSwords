@@ -1,4 +1,4 @@
-// 1.21.3	2026-05-16T15:10:08.5649215	Item Models: agotmod
+// 1.21.3	2026-05-16T20:04:32.0297053	Item Models: agotmod
 86b3bc001a8c3e96b638adacef2b383fc88b3224 assets/agotmod/models/item/acacia_arm_chair.json
 caa0341d904c99eda5466b0ee72a08927339e8cd assets/agotmod/models/item/acacia_chair.json
 137c592a4f98dd55f02148642ba7f0beff49f584 assets/agotmod/models/item/acacia_stool.json
@@ -644,6 +644,7 @@ bf0fb46c869457aff9b96f9ef68c94a997b5c446 assets/agotmod/models/item/blue_mahoe_h
 c513177aab8e48441a34161d4401177963c337bd assets/agotmod/models/item/blue_rose.json
 a4055fdbf181a1913c4e80b4b8008bb6fb383bff assets/agotmod/models/item/blue_soldier_pine_arm_chair.json
 fe0514a19dd79cab26d0fc620c870305fc368045 assets/agotmod/models/item/blue_soldier_pine_button.json
+8d8de287c7ae075cc0ff8915c1f5bb9213592770 assets/agotmod/models/item/blue_soldier_pine_chair.json
 d736f86c3baa5c243239bb35522d9f87d6736fe3 assets/agotmod/models/item/blue_soldier_pine_door.json
 6b3bdeb1dd645611a7a23d1449027fffb9d47cca assets/agotmod/models/item/blue_soldier_pine_fence.json
 28c1f5b3eee7d8b0568dec581cde5f8880197a17 assets/agotmod/models/item/blue_soldier_pine_fence_gate.json
@@ -3158,6 +3159,7 @@ ebca5545e43150bd40f267434f0913644cd66050 assets/agotmod/models/item/smokeberry.j
 6eeff32bd9e59882a60a3a444957fd4fb0a70990 assets/agotmod/models/item/smokeberry_seeds.json
 0efefc0accc7b4952ad76d372cee78da2d0d7405 assets/agotmod/models/item/soldier_pine_arm_chair.json
 b0379a47b96bf339594d7b09c0116e10c15f63ec assets/agotmod/models/item/soldier_pine_button.json
+9db5a72584a4b0c714246863df472c33f1dfd0f4 assets/agotmod/models/item/soldier_pine_chair.json
 32e9217004ddbf7915dfffd986ffced32c1fb770 assets/agotmod/models/item/soldier_pine_door.json
 6b3bcbc60a9ae5c07c368d3ce73de66df8741204 assets/agotmod/models/item/soldier_pine_fence.json
 3722f9cdc25a64cebab8db7db9e2ec73eb5f3e3e assets/agotmod/models/item/soldier_pine_fence_gate.json

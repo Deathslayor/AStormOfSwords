@@ -136,6 +136,18 @@ public class AGoTMod {
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBLocks.BLUE_ROSE.getId(), ModBLocks.POTTED_BLUE_ROSE);
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBLocks.BLOODBLOOM.getId(), ModBLocks.POTTED_BLOODBLOOM);
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBLocks.BLACK_LOTUS.getId(), ModBLocks.POTTED_BLACK_LOTUS);
+
+// Weirwood
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBLocks.WEIRWOOD_SAPLING.getId(), ModBLocks.POTTED_WEIRWOOD_SAPLING);
+
+// All map-based wood types
+            for (String woodType : ModBLocks.WOOD_TYPES) {
+                ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(
+                        ModBLocks.SAPLINGS.get(woodType).getId(),
+                        ModBLocks.POTTED_SAPLINGS.get(woodType)
+                );
+            }
+
         });
     }
 

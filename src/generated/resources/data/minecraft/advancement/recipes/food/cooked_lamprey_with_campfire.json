@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_lamprey": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:raw_lamprey"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:cooked_lamprey_with_campfire"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_lamprey"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:cooked_lamprey_with_campfire"
+    ]
+  }
+}

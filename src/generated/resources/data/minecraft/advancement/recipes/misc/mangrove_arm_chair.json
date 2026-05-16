@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_mangrove_planks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:mangrove_chair"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:mangrove_arm_chair"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_mangrove_planks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:mangrove_arm_chair"
+    ]
+  }
+}

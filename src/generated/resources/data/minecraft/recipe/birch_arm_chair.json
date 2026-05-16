@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "minecraft:stick",
+    "B": "agotmod:birch_chair",
+    "O": "agotmod:nail"
+  },
+  "pattern": [
+    "O O",
+    "ABA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "agotmod:birch_arm_chair"
+  }
+}

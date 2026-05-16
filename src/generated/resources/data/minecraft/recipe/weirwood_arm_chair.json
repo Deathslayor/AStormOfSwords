@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "agotmod:weirwood_stick",
+    "B": "agotmod:weirwood_chair",
+    "O": "agotmod:nail"
+  },
+  "pattern": [
+    "O O",
+    "ABA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "agotmod:weirwood_arm_chair"
+  }
+}

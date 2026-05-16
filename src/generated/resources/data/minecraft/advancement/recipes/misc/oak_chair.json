@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_oak_planks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:oak_stool"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:oak_chair"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_oak_planks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:oak_chair"
+    ]
+  }
+}

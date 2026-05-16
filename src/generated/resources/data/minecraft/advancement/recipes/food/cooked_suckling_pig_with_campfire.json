@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_suckling_pig": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:raw_suckling_pig"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:cooked_suckling_pig_with_campfire"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_suckling_pig"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:cooked_suckling_pig_with_campfire"
+    ]
+  }
+}

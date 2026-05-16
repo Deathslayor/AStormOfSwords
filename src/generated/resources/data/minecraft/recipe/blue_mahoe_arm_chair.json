@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "minecraft:stick",
+    "B": "agotmod:blue_mahoe_chair",
+    "O": "agotmod:nail"
+  },
+  "pattern": [
+    "O O",
+    "ABA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "agotmod:blue_mahoe_arm_chair"
+  }
+}

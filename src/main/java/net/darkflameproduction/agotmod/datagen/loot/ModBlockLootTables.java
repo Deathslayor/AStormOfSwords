@@ -283,6 +283,9 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(ModBLocks.CHARRED_SLAB.get(),
                 block -> createSlabItemTable(ModBLocks.CHARRED_SLAB.get()));
 
+        this.add(ModBLocks.POTTED_WEIRWOOD_SAPLING.get(),
+                createPotFlowerItemTable(ModBLocks.WEIRWOOD_SAPLING.get()));
+
         // Define the wood types
         String[] woodTypes = {
                 "sycamore",
@@ -371,7 +374,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
             this.dropSelf(ModBLocks.PRESSURE_PLATES.get(woodType).get());
             this.dropSelf(ModBLocks.TRAPDOORS.get(woodType).get());
             this.dropSelf(ModBLocks.FENCE_GATES.get(woodType).get());
-
+            this.add(ModBLocks.POTTED_SAPLINGS.get(woodType).get(),
+                    createPotFlowerItemTable(ModBLocks.SAPLINGS.get(woodType).get()));
             // Special drop handlers for doors and slabs
             this.add(ModBLocks.DOORS.get(woodType).get(),
                     block -> createDoorTable(ModBLocks.DOORS.get(woodType).get()));

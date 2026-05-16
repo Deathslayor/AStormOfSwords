@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "minecraft:stick",
+    "B": "agotmod:orange_chair",
+    "O": "agotmod:nail"
+  },
+  "pattern": [
+    "O O",
+    "ABA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "agotmod:orange_arm_chair"
+  }
+}

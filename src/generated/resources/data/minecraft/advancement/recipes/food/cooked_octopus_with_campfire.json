@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_octopus": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:raw_octopus"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:cooked_octopus_with_campfire"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_octopus"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:cooked_octopus_with_campfire"
+    ]
+  }
+}

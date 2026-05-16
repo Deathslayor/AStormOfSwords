@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "minecraft:stick",
+    "B": "agotmod:blue_soldier_pine_stool",
+    "O": "agotmod:nail"
+  },
+  "pattern": [
+    "AO",
+    "AO",
+    "B "
+  ],
+  "result": {
+    "count": 1,
+    "id": "agotmod:blue_soldier_pine_chair"
+  }
+}

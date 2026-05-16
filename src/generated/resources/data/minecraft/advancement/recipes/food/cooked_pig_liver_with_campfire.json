@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_pig_liver": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:raw_pig_liver"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:cooked_pig_liver_with_campfire"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_pig_liver"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:cooked_pig_liver_with_campfire"
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_blue_soldier_pine_planks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:blue_soldier_pine_chair"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:blue_soldier_pine_arm_chair"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_blue_soldier_pine_planks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:blue_soldier_pine_arm_chair"
+    ]
+  }
+}

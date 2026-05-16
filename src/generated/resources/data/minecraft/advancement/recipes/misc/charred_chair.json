@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_charred_planks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "agotmod:charred_stool"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:charred_chair"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_charred_planks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:charred_chair"
+    ]
+  }
+}

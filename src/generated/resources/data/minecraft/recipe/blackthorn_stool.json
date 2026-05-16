@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "agotmod:blackthorn_planks",
+    "B": "minecraft:stick",
+    "O": "agotmod:nail"
+  },
+  "pattern": [
+    "OO",
+    "AA",
+    "BB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "agotmod:blackthorn_stool"
+  }
+}
