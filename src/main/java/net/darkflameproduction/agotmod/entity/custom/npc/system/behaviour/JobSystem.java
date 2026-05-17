@@ -1,6 +1,7 @@
 package net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour;
 
 import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.carpenter.CarpenterSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.charcoalburner.CharcoalBurnerSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.farmer.FarmingSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.lumberjack.LumberjackSystem;
@@ -36,6 +37,8 @@ public class JobSystem {
     public static final String JOB_BLACKSMITH      = "blacksmith";
     public static final String JOB_LUMBERJACK      = "lumberjack";
     public static final String JOB_CHARCOAL_BURNER = "charcoal_burner";
+    public static final String JOB_CARPENTER       = "carpenter";
+    public static final String JOB_TRADER = "trader";
     public static final String JOB_NONE            = "";
 
     // Work area constants
@@ -78,6 +81,12 @@ public class JobSystem {
     private static final int CHARCOAL_BURNER_WORK_RADIUS_X = 8;
     private static final int CHARCOAL_BURNER_WORK_RADIUS_Z = 8;
     private static final int CHARCOAL_BURNER_WORK_RADIUS_Y = 16;
+    private static final int CARPENTER_IDLE_RADIUS_X       = 5;
+    private static final int CARPENTER_IDLE_RADIUS_Z       = 5;
+    private static final int CARPENTER_IDLE_RADIUS_Y       = 16;
+    private static final int TRADER_IDLE_RADIUS_X = 5;
+    private static final int TRADER_IDLE_RADIUS_Z = 5;
+    private static final int TRADER_IDLE_RADIUS_Y = 16;
 
     // Job block reservations
     private static final Map<BlockPos, UUID> jobBlockReservations    = new HashMap<>();
@@ -138,6 +147,8 @@ public class JobSystem {
         if (getJobType().equals(JOB_SHEEP_HERDER))    return jobBlockState.is(ModBLocks.SHEEP_HERDER_BARREL.get());
         if (getJobType().equals(JOB_LUMBERJACK))      return jobBlockState.is(ModBLocks.LUMBERJACK_BARREL.get());
         if (getJobType().equals(JOB_CHARCOAL_BURNER)) return jobBlockState.is(ModBLocks.CHARCOAL_BURNER_BARREL.get());
+        if (getJobType().equals(JOB_CARPENTER))       return jobBlockState.is(ModBLocks.CARPENTER_BARREL.get());
+        if (getJobType().equals(JOB_TRADER)) return jobBlockState.is(ModBLocks.TRADER_BARREL.get());
         return false;
     }
 
@@ -169,11 +180,17 @@ public class JobSystem {
         } else if (oldJobType.equals(JOB_CHARCOAL_BURNER)) {
             peasant.getCharcoalBurnerSystem().setCurrentState(
                     CharcoalBurnerSystem.CharcoalBurnerState.GOING_TO_JOB_BLOCK);
+        } else if (oldJobType.equals(JOB_CARPENTER)) {
+            peasant.getCarpenterSystem().setCurrentState(
+                    CarpenterSystem.CarpenterState.GOING_TO_JOB_BLOCK);
         } else if (oldJobType.equals(JOB_CATTLE_HERDER)
                 || oldJobType.equals(JOB_CHICKEN_BREEDER)
                 || oldJobType.equals(JOB_PIG_BREEDER)
                 || oldJobType.equals(JOB_SHEEP_HERDER)) {
             peasant.getAnimalHerderSystem().setBreedingItemCount(0);
+        } else if (oldJobType.equals(JOB_TRADER)) {
+            peasant.getTraderSystem().setCurrentState(
+                    net.darkflameproduction.agotmod.entity.custom.npc.system.trader.TraderSystem.TraderState.GOING_TO_JOB_BLOCK);
         } else if (oldJobType.equals(JOB_LUMBERJACK)) {
             peasant.getLumberjackSystem().setCurrentState(LumberjackSystem.LumberjackState.GOING_TO_JOB_BLOCK);
         }
@@ -194,7 +211,6 @@ public class JobSystem {
         peasant.getEntityData().set(peasant.getJobTypeAccessor(), jobType);
 
         if (!oldJob.equals(jobType)) {
-            // Update name via NameSystem
             if (jobType.isEmpty()) {
                 peasant.getNameSystem().onJobLost();
             } else {
@@ -217,7 +233,8 @@ public class JobSystem {
         if (peasant.level().isClientSide) return;
         if (newJob.equals(JOB_FARMER))      giveIronHoe();
         else if (newJob.equals(JOB_MINER))  giveMinerEquipment();
-        else if (newJob.equals(JOB_LUMBERJACK)) giveLumberjackEquipment();
+        else if (newJob.equals(JOB_LUMBERJACK))  giveLumberjackEquipment();
+        else if (newJob.equals(JOB_CARPENTER))   giveCarpenterEquipment();
     }
 
     private void giveIronHoe() {
@@ -233,6 +250,18 @@ public class JobSystem {
     }
 
     private void giveLumberjackEquipment() {
+        if (hasAxe()) return;
+        ItemStack ironAxe = new ItemStack(Items.IRON_AXE);
+        if (peasant.getInventorySystem().addItem(ironAxe)) {
+            peasant.getInventorySystem().forceEquipmentCheck();
+        } else if (peasant.getInventorySystem().getMainHandItem().isEmpty()) {
+            peasant.getInventorySystem().setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, ironAxe);
+        } else if (peasant.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+            peasant.spawnAtLocation(serverLevel, ironAxe);
+        }
+    }
+
+    private void giveCarpenterEquipment() {
         if (hasAxe()) return;
         ItemStack ironAxe = new ItemStack(Items.IRON_AXE);
         if (peasant.getInventorySystem().addItem(ironAxe)) {
@@ -330,6 +359,7 @@ public class JobSystem {
         if (getJobType().equals(JOB_TANNER))     return deltaX <= TANNER_IDLE_RADIUS_X     && deltaZ <= TANNER_IDLE_RADIUS_Z     && deltaY <= TANNER_IDLE_RADIUS_Y;
         if (getJobType().equals(JOB_TAILOR))     return deltaX <= TAILOR_IDLE_RADIUS_X     && deltaZ <= TAILOR_IDLE_RADIUS_Z     && deltaY <= TAILOR_IDLE_RADIUS_Y;
         if (getJobType().equals(JOB_BLACKSMITH)) return deltaX <= BLACKSMITH_IDLE_RADIUS_X && deltaZ <= BLACKSMITH_IDLE_RADIUS_Z && deltaY <= BLACKSMITH_IDLE_RADIUS_Y;
+        if (getJobType().equals(JOB_CARPENTER))  return deltaX <= CARPENTER_IDLE_RADIUS_X  && deltaZ <= CARPENTER_IDLE_RADIUS_Z  && deltaY <= CARPENTER_IDLE_RADIUS_Y;
         if (getJobType().equals(JOB_GUARD))
             return deltaX <= GUARD_WORK_RADIUS_X && deltaZ <= GUARD_WORK_RADIUS_Z && deltaY <= GUARD_WORK_RADIUS_Y;
         if (getJobType().equals(JOB_MINER)) return true;
@@ -344,6 +374,8 @@ public class JobSystem {
             return deltaX <= LUMBERJACK_WORK_RADIUS_X && deltaZ <= LUMBERJACK_WORK_RADIUS_Z && deltaY <= LUMBERJACK_WORK_RADIUS_Y;
         if (getJobType().equals(JOB_CHARCOAL_BURNER))
             return deltaX <= CHARCOAL_BURNER_WORK_RADIUS_X && deltaZ <= CHARCOAL_BURNER_WORK_RADIUS_Z && deltaY <= CHARCOAL_BURNER_WORK_RADIUS_Y;
+        if (getJobType().equals(JOB_TRADER))
+            return deltaX <= TRADER_IDLE_RADIUS_X && deltaZ <= TRADER_IDLE_RADIUS_Z && deltaY <= TRADER_IDLE_RADIUS_Y;
         return true;
     }
 
@@ -352,20 +384,23 @@ public class JobSystem {
         if (getJobType().equals(JOB_GUARD))
             return !peasant.getGuardSystem().shouldSleep() && !peasant.needsFoodCollection();
         if (peasant.shouldSleep() || peasant.needsFoodCollection()) return false;
-        if (getJobType().equals(JOB_FARMER))     return peasant.getFarmingSystem().hasReturnedToJobBlockAfterFood();
-        if (getJobType().equals(JOB_GROCER))     return true;
-        if (getJobType().equals(JOB_BUTCHER))    return true;
-        if (getJobType().equals(JOB_TANNER))     return true;
-        if (getJobType().equals(JOB_TAILOR))     return true;
-        if (getJobType().equals(JOB_BLACKSMITH)) return true;
-        if (getJobType().equals(JOB_MINER))      return true;
-        if (getJobType().equals(JOB_SMELTER))    return true;
+        if (getJobType().equals(JOB_FARMER))      return peasant.getFarmingSystem().hasReturnedToJobBlockAfterFood();
+        if (getJobType().equals(JOB_GROCER))      return true;
+        if (getJobType().equals(JOB_BUTCHER))     return true;
+        if (getJobType().equals(JOB_TANNER))      return true;
+        if (getJobType().equals(JOB_TAILOR))      return true;
+        if (getJobType().equals(JOB_BLACKSMITH))  return true;
+        if (getJobType().equals(JOB_CARPENTER))   return true;
+        if (getJobType().equals(JOB_MINER))       return true;
+        if (getJobType().equals(JOB_SMELTER))     return true;
         if (getJobType().equals(JOB_CATTLE_HERDER)
                 || getJobType().equals(JOB_CHICKEN_BREEDER)
                 || getJobType().equals(JOB_PIG_BREEDER)
                 || getJobType().equals(JOB_SHEEP_HERDER)) return true;
         if (getJobType().equals(JOB_LUMBERJACK))      return true;
         if (getJobType().equals(JOB_CHARCOAL_BURNER)) return true;
+        if (getJobType().equals(JOB_TRADER)) return true;
+
         return false;
     }
 
@@ -395,6 +430,10 @@ public class JobSystem {
             return distanceSquared > ((TAILOR_IDLE_RADIUS_X + 10) * (TAILOR_IDLE_RADIUS_X + 10));
         if (getJobType().equals(JOB_BLACKSMITH))
             return distanceSquared > ((BLACKSMITH_IDLE_RADIUS_X + 10) * (BLACKSMITH_IDLE_RADIUS_X + 10));
+        if (getJobType().equals(JOB_CARPENTER))
+            return distanceSquared > ((CARPENTER_IDLE_RADIUS_X + 10) * (CARPENTER_IDLE_RADIUS_X + 10));
+        if (getJobType().equals(JOB_TRADER))
+            return distanceSquared > ((TRADER_IDLE_RADIUS_X + 10) * (TRADER_IDLE_RADIUS_X + 10));
         if (getJobType().equals(JOB_GUARD))
             return distanceSquared > ((GUARD_WORK_RADIUS_X + 10) * (GUARD_WORK_RADIUS_X + 10));
         if (getJobType().equals(JOB_MINER)) return false;

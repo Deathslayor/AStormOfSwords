@@ -133,6 +133,14 @@ public class NameSystem {
     private static final String[] CHICKEN_NAMES    = { "Fowler", "Hatcher", "Poulter", "Eggler", "Chicker", "Feather" };
     private static final String[] PIG_NAMES        = { "Hogg", "Swynford", "Porker", "Pigg", "Swineherd", "Bacon" };
     private static final String[] SHEEP_NAMES      = { "Shepherd", "Shepard", "Woolman", "Shearer", "Fleece", "Lambe", "Sherman" };
+    private static final String[] TRADER_NAMES = {
+            "Merchant", "Trader", "Chapman", "Peddler", "Monger", "Hawker",
+            "Vendor", "Huckster", "Trafficker", "Cheapman", "Dealman"
+    };
+    private static final String[] CARPENTER_NAMES = {
+            "Carpenter", "Wright", "Woodwright", "Joiner", "Cooper", "Sawyer",
+            "Timberman", "Wainwright", "Cartwright", "Wheelwright"
+    };
 
     // ── Instance state ────────────────────────────────────────────────────────
 
@@ -225,6 +233,8 @@ public class NameSystem {
             case net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem.JOB_CHICKEN_BREEDER -> CHICKEN_NAMES;
             case net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem.JOB_PIG_BREEDER     -> PIG_NAMES;
             case net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem.JOB_SHEEP_HERDER    -> SHEEP_NAMES;
+            case net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem.JOB_CARPENTER       -> CARPENTER_NAMES;
+            case net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem.JOB_TRADER          -> TRADER_NAMES;
             default -> new String[]{};
         };
         if (pool.length == 0) return "";

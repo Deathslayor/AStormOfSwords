@@ -33,15 +33,20 @@ public class ServerPacketHandler {
             ServerPlayer player = (ServerPlayer) context.player();
             ServerLevel level = player.serverLevel();
 
+            // Find the NPC: must match the name AND be a trader-type job
             Peasant_Entity targetNpc = null;
             for (Entity entity : level.getAllEntities()) {
-                if (entity instanceof Peasant_Entity peasant &&
-                        peasant.getDisplayName().getString().equals(packet.grocerName()) &&
-                        (peasant.getJobType().equals(JobSystem.JOB_GROCER)     ||
-                                peasant.getJobType().equals(JobSystem.JOB_BUTCHER)    ||
-                                peasant.getJobType().equals(JobSystem.JOB_TANNER)     ||
-                                peasant.getJobType().equals(JobSystem.JOB_TAILOR)     ||
-                                peasant.getJobType().equals(JobSystem.JOB_BLACKSMITH))) {
+                if (!(entity instanceof Peasant_Entity peasant)) continue;
+                String job = peasant.getJobType();
+                boolean isTradeJob =
+                        job.equals(JobSystem.JOB_GROCER)    ||
+                                job.equals(JobSystem.JOB_BUTCHER)   ||
+                                job.equals(JobSystem.JOB_TANNER)    ||
+                                job.equals(JobSystem.JOB_TAILOR)    ||
+                                job.equals(JobSystem.JOB_BLACKSMITH)||
+                                job.equals(JobSystem.JOB_CARPENTER) ||
+                                job.equals(JobSystem.JOB_TRADER);
+                if (isTradeJob && peasant.getDisplayName().getString().equals(packet.grocerName())) {
                     targetNpc = peasant;
                     break;
                 }
@@ -58,10 +63,11 @@ public class ServerPacketHandler {
                 return;
             }
 
+            String jobType = targetNpc.getJobType();
             if (packet.isBuyTransaction()) {
-                handleBuyTransaction(packet, player, targetNpc, townHall, level);
+                handleBuyTransaction(packet, player, targetNpc, townHall, level, jobType);
             } else if (packet.isSellTransaction()) {
-                handleSellTransaction(packet, player, targetNpc, townHall, level);
+                handleSellTransaction(packet, player, targetNpc, townHall, level, jobType);
             }
         });
     }
@@ -82,8 +88,8 @@ public class ServerPacketHandler {
 
     private static void handleBuyTransaction(FinishTransactionPacket packet, ServerPlayer player,
                                              Peasant_Entity grocer, TownHallBlockEntity townHall,
-                                             ServerLevel level) {
-        long totalCost = calculateBuyTotalCost(packet.getItemAmounts());
+                                             ServerLevel level, String jobType) {
+        long totalCost = calculateBuyTotalCost(packet.getItemAmounts(), jobType);
         long playerBalance = getPlayerBalance(player);
 
         if (playerBalance < totalCost) {
@@ -92,7 +98,6 @@ public class ServerPacketHandler {
             return;
         }
 
-        // Verify town hall has all requested items
         for (Map.Entry<String, Integer> entry : packet.getItemAmounts().entrySet()) {
             if (!townHall.hasTownInventoryItem(entry.getKey(), entry.getValue())) {
                 player.sendSystemMessage(Component.literal("Transaction failed - insufficient items in town supply!"));
@@ -100,13 +105,11 @@ public class ServerPacketHandler {
             }
         }
 
-        // Remove items from town hall and spawn at player
         for (Map.Entry<String, Integer> entry : packet.getItemAmounts().entrySet()) {
             townHall.removeFromTownInventory(entry.getKey(), entry.getValue());
             spawnItemsAtPlayer(entry.getKey(), entry.getValue(), player, level);
         }
 
-        // Deduct from player, add to town hall
         deductPlayerBalance(player, totalCost);
         townHall.addToTownBalance(totalCost);
         long taxAmount = (long) Math.floor(totalCost * 0.2);
@@ -123,8 +126,8 @@ public class ServerPacketHandler {
 
     private static void handleSellTransaction(FinishTransactionPacket packet, ServerPlayer player,
                                               Peasant_Entity grocer, TownHallBlockEntity townHall,
-                                              ServerLevel level) {
-        long totalEarnings = calculateSellTotalEarnings(packet.getItemAmounts());
+                                              ServerLevel level, String jobType) {
+        long totalEarnings = calculateSellTotalEarnings(packet.getItemAmounts(), jobType);
         long townBalance = townHall.getTownBalance();
 
         if (townBalance < totalEarnings) {
@@ -138,7 +141,6 @@ public class ServerPacketHandler {
             return;
         }
 
-        // Remove items from player and add to town hall inventory
         boolean success = processSellTransaction(townHall, packet.getItemAmounts(), player);
 
         if (success) {
@@ -380,21 +382,27 @@ public class ServerPacketHandler {
         return "";
     }
 
-    private static long calculateBuyTotalCost(Map<String, Integer> itemAmounts) {
+    private static long calculateBuyTotalCost(Map<String, Integer> itemAmounts, String jobType) {
         long totalCost = 0;
         for (Map.Entry<String, Integer> entry : itemAmounts.entrySet()) {
             if (entry.getValue() > 0) {
-                totalCost += (long) net.darkflameproduction.agotmod.util.ItemPricing.getItemPrice(entry.getKey()) * entry.getValue();
+                int price = jobType.equals(JobSystem.JOB_TRADER)
+                        ? net.darkflameproduction.agotmod.util.ItemPricing.getTraderSellPrice(entry.getKey())
+                        : net.darkflameproduction.agotmod.util.ItemPricing.getItemPrice(entry.getKey());
+                totalCost += (long) price * entry.getValue();
             }
         }
         return totalCost;
     }
 
-    private static long calculateSellTotalEarnings(Map<String, Integer> itemAmounts) {
+    private static long calculateSellTotalEarnings(Map<String, Integer> itemAmounts, String jobType) {
         long totalEarnings = 0;
         for (Map.Entry<String, Integer> entry : itemAmounts.entrySet()) {
             if (entry.getValue() > 0) {
-                totalEarnings += (long) net.darkflameproduction.agotmod.util.ItemPricing.getItemSellPrice(entry.getKey()) * entry.getValue();
+                int price = jobType.equals(JobSystem.JOB_TRADER)
+                        ? net.darkflameproduction.agotmod.util.ItemPricing.getTraderBuyPrice(entry.getKey())
+                        : net.darkflameproduction.agotmod.util.ItemPricing.getItemSellPrice(entry.getKey());
+                totalEarnings += (long) price * entry.getValue();
             }
         }
         return totalEarnings;
@@ -503,21 +511,28 @@ public class ServerPacketHandler {
                 Entity entity = level.getEntity(packet.npcUUID());
                 if (entity instanceof Peasant_Entity peasant) {
                     peasant.setInteractingPlayer(serverPlayer);
-                    if (peasant.getJobType().equals(JobSystem.JOB_GROCER)) {
-                        net.darkflameproduction.agotmod.entity.custom.npc.system.grocer.GrocerInventoryTicketSystem.postRequest(
-                                peasant.getUUID(), serverPlayer.getUUID(), peasant.blockPosition());
-                    } else if (peasant.getJobType().equals(JobSystem.JOB_BUTCHER)) {
-                        net.darkflameproduction.agotmod.entity.custom.npc.system.butcher.ButcherInventoryTicketSystem.postRequest(
-                                peasant.getUUID(), serverPlayer.getUUID(), peasant.blockPosition());
-                    } else if (peasant.getJobType().equals(JobSystem.JOB_TANNER)) {
-                        net.darkflameproduction.agotmod.entity.custom.npc.system.tanner.TannerInventoryTicketSystem.postRequest(
-                                peasant.getUUID(), serverPlayer.getUUID(), peasant.blockPosition());
-                    } else if (peasant.getJobType().equals(JobSystem.JOB_TAILOR)) {
-                        net.darkflameproduction.agotmod.entity.custom.npc.system.tailor.TailorInventoryTicketSystem.postRequest(
-                                peasant.getUUID(), serverPlayer.getUUID(), peasant.blockPosition());
-                    } else if (peasant.getJobType().equals(JobSystem.JOB_BLACKSMITH)) {
-                        net.darkflameproduction.agotmod.entity.custom.npc.system.blacksmith.BlacksmithInventoryTicketSystem.postRequest(
-                                peasant.getUUID(), serverPlayer.getUUID(), peasant.blockPosition());
+                    switch (peasant.getJobType()) {
+                        case JobSystem.JOB_GROCER ->
+                                net.darkflameproduction.agotmod.entity.custom.npc.system.grocer.GrocerInventoryTicketSystem.postRequest(
+                                        peasant.getUUID(), serverPlayer.getUUID(), peasant.blockPosition());
+                        case JobSystem.JOB_BUTCHER ->
+                                net.darkflameproduction.agotmod.entity.custom.npc.system.butcher.ButcherInventoryTicketSystem.postRequest(
+                                        peasant.getUUID(), serverPlayer.getUUID(), peasant.blockPosition());
+                        case JobSystem.JOB_TANNER ->
+                                net.darkflameproduction.agotmod.entity.custom.npc.system.tanner.TannerInventoryTicketSystem.postRequest(
+                                        peasant.getUUID(), serverPlayer.getUUID(), peasant.blockPosition());
+                        case JobSystem.JOB_TAILOR ->
+                                net.darkflameproduction.agotmod.entity.custom.npc.system.tailor.TailorInventoryTicketSystem.postRequest(
+                                        peasant.getUUID(), serverPlayer.getUUID(), peasant.blockPosition());
+                        case JobSystem.JOB_BLACKSMITH ->
+                                net.darkflameproduction.agotmod.entity.custom.npc.system.blacksmith.BlacksmithInventoryTicketSystem.postRequest(
+                                        peasant.getUUID(), serverPlayer.getUUID(), peasant.blockPosition());
+                        case JobSystem.JOB_CARPENTER ->
+                                net.darkflameproduction.agotmod.entity.custom.npc.system.carpenter.CarpenterInventoryTicketSystem.postRequest(
+                                        peasant.getUUID(), serverPlayer.getUUID(), peasant.blockPosition());
+                        case JobSystem.JOB_TRADER ->
+                                net.darkflameproduction.agotmod.entity.custom.npc.system.trader.TraderInventoryTicketSystem.postRequest(
+                                        peasant.getUUID(), serverPlayer.getUUID(), peasant.blockPosition());
                     }
                 }
             }

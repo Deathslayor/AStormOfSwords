@@ -54,6 +54,9 @@ public class GrocerInventoryScreen extends Screen {
     private int totalPrice = 0;
     private long playerBalance = 0;
 
+    private float buyMultiplier  = 1.0f;
+    private float sellMultiplier = 0.5f;
+
     // NEW: Grocer balance
     private long grocerBalance = 0;
 
@@ -478,12 +481,12 @@ public class GrocerInventoryScreen extends Screen {
         return ItemPricing.getItemSellPrice(itemKey);
     }
 
-    // Static method for packet handler to update inventory data
-    // Static method for packet handler to update inventory data with balance
     public static void updateInventoryData(String grocerName,
                                            List<GrocerSystem.GrocerInventoryEntry> grocerEntries,
                                            List<OpenGrocerInventoryPacket.PlayerInventoryEntry> playerEntries,
-                                           long grocerBalance) {
+                                           long grocerBalance,
+                                           float buyMultiplier,
+                                           float sellMultiplier) {
         if (currentInstance != null && currentInstance.grocerName.equals(grocerName)) {
             List<GrocerSystem.GrocerInventoryEntry> filteredGrocerEntries = new ArrayList<>();
             for (GrocerSystem.GrocerInventoryEntry entry : grocerEntries) {
@@ -492,12 +495,13 @@ public class GrocerInventoryScreen extends Screen {
                 }
             }
 
-            currentInstance.grocerEntries = filteredGrocerEntries;
-            currentInstance.playerEntries = playerEntries;
-            currentInstance.grocerBalance = grocerBalance;
-            currentInstance.dataLoaded = true;
+            currentInstance.grocerEntries    = filteredGrocerEntries;
+            currentInstance.playerEntries    = playerEntries;
+            currentInstance.grocerBalance    = grocerBalance;
+            currentInstance.buyMultiplier    = buyMultiplier;
+            currentInstance.sellMultiplier   = sellMultiplier;
+            currentInstance.dataLoaded       = true;
 
-            // Preserve valid selections — only remove indices that no longer exist
             Set<Integer> validIndices = new HashSet<>();
             for (Integer idx : currentInstance.selectedEntryIndices) {
                 List<?> current = currentInstance.getCurrentInventoryEntries();
@@ -507,7 +511,6 @@ public class GrocerInventoryScreen extends Screen {
             }
             currentInstance.selectedEntryIndices = validIndices;
 
-            // Remove transaction amounts for items no longer available
             currentInstance.transactionAmounts.entrySet().removeIf(e -> {
                 List<?> current = currentInstance.getCurrentInventoryEntries();
                 for (Object entry : current) {
@@ -1166,96 +1169,79 @@ public class GrocerInventoryScreen extends Screen {
     // Calculate and save tooltip position (called once per tooltip)
     private void calculateTooltipPosition(Object entry, int mouseX, int mouseY) {
         String itemName = getDisplayNameFromEntry(entry);
-        String itemKey = getItemKeyFromEntry(entry);
-        long amount = getAmountFromEntry(entry);
+        String itemKey  = getItemKeyFromEntry(entry);
+        long amount     = getAmountFromEntry(entry);
 
         String amountText = "Amount: " + amount;
 
-        // Get item prices
-        int buyPrice = getItemPrice(itemKey);
-        int sellPrice = getItemSellPrice(itemKey);
+        int buyPrice  = (int) Math.ceil(ItemPricing.getItemPrice(itemKey) * buyMultiplier);
+        int sellPrice = (int) Math.ceil(ItemPricing.getItemPrice(itemKey) * sellMultiplier);
         long totalValue = (long) buyPrice * amount;
 
-        String buyText = "Buy Price: " + buyPrice + " coins";
-        String sellText = "Sell Price: " + sellPrice + " coins";
+        String buyText   = "Buy Price: " + buyPrice + " coins";
+        String sellText  = "Sell Price: " + sellPrice + " coins";
         String valueText = "Total Value: " + formatNumber((int) Math.min(totalValue, Integer.MAX_VALUE)) + " coins";
 
-        // Calculate tooltip dimensions (5 lines)
-        int nameWidth = font.width(itemName);
+        int nameWidth  = font.width(itemName);
         int amountWidth = font.width(amountText);
-        int buyWidth = font.width(buyText);
-        int sellWidth = font.width(sellText);
+        int buyWidth   = font.width(buyText);
+        int sellWidth  = font.width(sellText);
         int valueWidth = font.width(valueText);
-        int tooltipWidth = Math.max(Math.max(Math.max(nameWidth, amountWidth), Math.max(buyWidth, sellWidth)), valueWidth) + 16;
+        int tooltipWidth  = Math.max(Math.max(Math.max(nameWidth, amountWidth), Math.max(buyWidth, sellWidth)), valueWidth) + 16;
         int tooltipHeight = font.lineHeight * 5 + 18;
 
-        // Position tooltip
         tooltipX = mouseX;
         tooltipY = mouseY;
 
-        // Adjust if tooltip would go off screen
-        if (tooltipX + tooltipWidth > width - 5) {
-            tooltipX = width - tooltipWidth - 5;
-        }
-        if (tooltipY + tooltipHeight > height - 5) {
-            tooltipY = height - tooltipHeight - 5;
-        }
+        if (tooltipX + tooltipWidth > width - 5)   tooltipX = width - tooltipWidth - 5;
+        if (tooltipY + tooltipHeight > height - 5)  tooltipY = height - tooltipHeight - 5;
         if (tooltipX < 5) tooltipX = 5;
         if (tooltipY < 5) tooltipY = 5;
     }
 
-    // Draw tooltip using saved position (doesn't take mouse coordinates)
     private void drawItemTooltip(GuiGraphics guiGraphics, Object entry) {
         String itemName = getDisplayNameFromEntry(entry);
-        String itemKey = getItemKeyFromEntry(entry);
-        long amount = getAmountFromEntry(entry);
+        String itemKey  = getItemKeyFromEntry(entry);
+        long amount     = getAmountFromEntry(entry);
 
         String amountText = "Amount: " + amount;
 
-        // Get item prices
-        int buyPrice = getItemPrice(itemKey);
-        int sellPrice = getItemSellPrice(itemKey);
+        int buyPrice  = (int) Math.ceil(ItemPricing.getItemPrice(itemKey) * buyMultiplier);
+        int sellPrice = (int) Math.ceil(ItemPricing.getItemPrice(itemKey) * sellMultiplier);
         long totalValue = (long) buyPrice * amount;
 
-        String buyText = "Buy Price: " + buyPrice + " coins";
-        String sellText = "Sell Price: " + sellPrice + " coins";
+        String buyText   = "Buy Price: " + buyPrice + " coins";
+        String sellText  = "Sell Price: " + sellPrice + " coins";
         String valueText = "Total Value: " + formatNumber((int) Math.min(totalValue, Integer.MAX_VALUE)) + " coins";
 
-        // Calculate tooltip dimensions
-        int nameWidth = font.width(itemName);
+        int nameWidth   = font.width(itemName);
         int amountWidth = font.width(amountText);
-        int buyWidth = font.width(buyText);
-        int sellWidth = font.width(sellText);
-        int valueWidth = font.width(valueText);
-        int tooltipWidth = Math.max(Math.max(Math.max(nameWidth, amountWidth), Math.max(buyWidth, sellWidth)), valueWidth) + 16;
+        int buyWidth    = font.width(buyText);
+        int sellWidth   = font.width(sellText);
+        int valueWidth  = font.width(valueText);
+        int tooltipWidth  = Math.max(Math.max(Math.max(nameWidth, amountWidth), Math.max(buyWidth, sellWidth)), valueWidth) + 16;
         int tooltipHeight = font.lineHeight * 5 + 18;
 
-        // Push pose to render tooltip at higher Z-level
         guiGraphics.pose().pushPose();
         guiGraphics.pose().translate(0, 0, 300);
 
-        // Draw tooltip background
         guiGraphics.fill(tooltipX, tooltipY, tooltipX + tooltipWidth, tooltipY + tooltipHeight, 0xE0000000);
-
-        // Draw tooltip border
         guiGraphics.fill(tooltipX, tooltipY, tooltipX + tooltipWidth, tooltipY + 1, 0xFF555555);
         guiGraphics.fill(tooltipX, tooltipY, tooltipX + 1, tooltipY + tooltipHeight, 0xFF555555);
         guiGraphics.fill(tooltipX + tooltipWidth - 1, tooltipY, tooltipX + tooltipWidth, tooltipY + tooltipHeight, 0xFF555555);
         guiGraphics.fill(tooltipX, tooltipY + tooltipHeight - 1, tooltipX + tooltipWidth, tooltipY + tooltipHeight, 0xFF555555);
 
-        // Draw text
         int textY = tooltipY + 8;
-        guiGraphics.drawString(font, itemName, tooltipX + 8, textY, 0xFFFFFF, false);
+        guiGraphics.drawString(font, itemName,    tooltipX + 8, textY, 0xFFFFFF, false);
         textY += font.lineHeight;
-        guiGraphics.drawString(font, amountText, tooltipX + 8, textY, 0xFF4CAF50, false);
+        guiGraphics.drawString(font, amountText,  tooltipX + 8, textY, 0xFF4CAF50, false);
         textY += font.lineHeight;
-        guiGraphics.drawString(font, buyText, tooltipX + 8, textY, 0xFFFFD700, false);
+        guiGraphics.drawString(font, buyText,     tooltipX + 8, textY, 0xFFFFD700, false);
         textY += font.lineHeight;
-        guiGraphics.drawString(font, sellText, tooltipX + 8, textY, 0xFF00CED1, false);
+        guiGraphics.drawString(font, sellText,    tooltipX + 8, textY, 0xFF00CED1, false);
         textY += font.lineHeight;
-        guiGraphics.drawString(font, valueText, tooltipX + 8, textY, 0xFFFFD700, false);
+        guiGraphics.drawString(font, valueText,   tooltipX + 8, textY, 0xFFFFD700, false);
 
-        // Pop pose to restore normal Z-level
         guiGraphics.pose().popPose();
     }
 
@@ -1646,15 +1632,9 @@ public class GrocerInventoryScreen extends Screen {
             int amount = entry.getValue();
             if (amount > 0) {
                 totalItems += amount;
-
-                // Use appropriate pricing based on mode
-                int itemPrice;
-                if (currentMode == TradeMode.BUY) {
-                    itemPrice = ItemPricing.getItemPrice(entry.getKey());
-                } else {
-                    itemPrice = ItemPricing.getItemSellPrice(entry.getKey());
-                }
-                totalPrice += itemPrice * amount;
+                int basePrice = ItemPricing.getItemPrice(entry.getKey());
+                float multiplier = currentMode == TradeMode.BUY ? buyMultiplier : sellMultiplier;
+                totalPrice += (int) Math.ceil(basePrice * multiplier) * amount;
             }
         }
     }

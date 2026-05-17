@@ -18,6 +18,8 @@ import net.darkflameproduction.agotmod.entity.custom.npc.system.tailor.TailorCol
 import net.darkflameproduction.agotmod.entity.custom.npc.system.tailor.TailorInventoryTicketSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.tanner.TannerCollectionTicketSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.tanner.TannerInventoryTicketSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.carpenter.CarpenterCollectionTicketSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.carpenter.CarpenterInventoryTicketSystem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -59,8 +61,12 @@ public class TownHallBlockEntity extends BlockEntity implements
         SmelterCollectionTicketSystem.SmelterCollectionListener,
         AnimalHerderCollectionTicketSystem.AnimalHerderCollectionListener,
         TannerCollectionTicketSystem.TannerCollectionListener,
-        TailorCollectionTicketSystem.TailorCollectionListener, LumberjackDepositTicketSystem.DepositListener,
-        CharcoalBurnerCollectionTicketSystem.CharcoalBurnerCollectionListener{
+        TailorCollectionTicketSystem.TailorCollectionListener,
+        LumberjackDepositTicketSystem.DepositListener,
+        CharcoalBurnerCollectionTicketSystem.CharcoalBurnerCollectionListener,
+        CarpenterCollectionTicketSystem.CarpenterCollectionListener,
+        CarpenterInventoryTicketSystem.TicketListener,
+        net.darkflameproduction.agotmod.entity.custom.npc.system.trader.TraderInventoryTicketSystem.TicketListener {
 
     private static final int SCAN_TIME = 10000; // Time of day to perform scan
     private static final int CHILD_SPAWN_TIME = 18000; // Time of day to spawn children (midnight)
@@ -352,8 +358,9 @@ public class TownHallBlockEntity extends BlockEntity implements
         if (state.is(ModBLocks.PIG_BREEDER_BARREL.get()))     return JobSystem.JOB_PIG_BREEDER;
         if (state.is(ModBLocks.SHEEP_HERDER_BARREL.get()))    return JobSystem.JOB_SHEEP_HERDER;
         if (state.is(ModBLocks.LUMBERJACK_BARREL.get()))      return JobSystem.JOB_LUMBERJACK;
-        if (state.is(ModBLocks.CHARCOAL_BURNER_BARREL.get()))         return JobSystem.JOB_CHARCOAL_BURNER;
-
+        if (state.is(ModBLocks.CHARCOAL_BURNER_BARREL.get())) return JobSystem.JOB_CHARCOAL_BURNER;
+        if (state.is(ModBLocks.CARPENTER_BARREL.get()))       return JobSystem.JOB_CARPENTER;
+        if (state.is(ModBLocks.TRADER_BARREL.get()))          return JobSystem.JOB_TRADER;
         return JobSystem.JOB_NONE;
     }
 
@@ -363,6 +370,19 @@ public class TownHallBlockEntity extends BlockEntity implements
                 townInventory.merge(key, amount, Long::sum));
         LumberjackDepositTicketSystem.consumeDeposit(ticket.lumberjackUUID);
         setChanged();
+    }
+
+    @Override
+    public void onTraderRequestPosted(
+            net.darkflameproduction.agotmod.entity.custom.npc.system.trader.TraderInventoryTicketSystem.InventoryRequestTicket ticket) {
+        net.darkflameproduction.agotmod.entity.custom.npc.system.trader.TraderInventoryTicketSystem.postResponse(
+                ticket.traderUUID,
+                ticket.playerUUID,
+                townInventory,
+                townBalance,
+                this.getBlockPos()
+        );
+        net.darkflameproduction.agotmod.entity.custom.npc.system.trader.TraderInventoryTicketSystem.consumeRequest(ticket.traderUUID);
     }
 
     @Override
@@ -387,6 +407,79 @@ public class TownHallBlockEntity extends BlockEntity implements
                 this.getBlockPos()
         );
         TailorInventoryTicketSystem.consumeRequest(ticket.tailorUUID);
+    }
+
+    @Override
+    public void onCarpenterCollectionRequestPosted(CarpenterCollectionTicketSystem.CarpenterRequest request) {
+        List<ItemStack> toGive = new ArrayList<>();
+
+        // Pull logs — any item ending in _log, _wood, _stem, _hyphae (skip charred)
+        int logsNeeded = net.darkflameproduction.agotmod.entity.custom.npc.system.carpenter.CarpenterSystem.LOGS_PER_CYCLE;
+        int logsRemaining = logsNeeded;
+
+        List<String> logKeys = townInventory.keySet().stream()
+                .filter(key -> {
+                    String path = key.contains(":") ? key.split(":")[1] : key;
+                    if (path.startsWith("charred")) return false;
+                    return path.endsWith("_log") || path.endsWith("_wood")
+                            || path.endsWith("_stem") || path.endsWith("_hyphae");
+                })
+                .toList();
+
+        for (String logKey : logKeys) {
+            if (logsRemaining <= 0) break;
+            long available = townInventory.getOrDefault(logKey, 0L);
+            if (available <= 0) continue;
+            int toTake = (int) Math.min(logsRemaining, available);
+            removeFromTownInventory(logKey, toTake);
+            ResourceLocation loc = ResourceLocation.tryParse(logKey);
+            if (loc != null) {
+                net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.getValue(loc);
+                if (item != null && item != Items.AIR) toGive.add(new ItemStack(item, toTake));
+            }
+            logsRemaining -= toTake;
+        }
+
+        // Pull nails
+        int nailsNeeded = net.darkflameproduction.agotmod.entity.custom.npc.system.carpenter.CarpenterSystem.NAILS_PER_CYCLE;
+        long nailsAvailable = townInventory.getOrDefault("agotmod:nail", 0L);
+        if (nailsAvailable > 0) {
+            int toTake = (int) Math.min(nailsNeeded, nailsAvailable);
+            removeFromTownInventory("agotmod:nail", toTake);
+            ResourceLocation loc = ResourceLocation.tryParse("agotmod:nail");
+            if (loc != null) {
+                net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.getValue(loc);
+                if (item != null && item != Items.AIR) toGive.add(new ItemStack(item, toTake));
+            }
+        }
+
+        // Pull sticks
+        int sticksNeeded = net.darkflameproduction.agotmod.entity.custom.npc.system.carpenter.CarpenterSystem.STICKS_PER_CYCLE;
+        long sticksAvailable = townInventory.getOrDefault("minecraft:stick", 0L);
+        if (sticksAvailable > 0) {
+            int toTake = (int) Math.min(sticksNeeded, sticksAvailable);
+            removeFromTownInventory("minecraft:stick", toTake);
+            ResourceLocation loc = ResourceLocation.tryParse("minecraft:stick");
+            if (loc != null) {
+                net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.getValue(loc);
+                if (item != null && item != Items.AIR) toGive.add(new ItemStack(item, toTake));
+            }
+        }
+
+        CarpenterCollectionTicketSystem.postResponse(request.carpenterUUID, toGive);
+        setChanged();
+    }
+
+    @Override
+    public void onCarpenterRequestPosted(CarpenterInventoryTicketSystem.InventoryRequestTicket ticket) {
+        CarpenterInventoryTicketSystem.postResponse(
+                ticket.carpenterUUID,
+                ticket.playerUUID,
+                townInventory,
+                townBalance,
+                this.getBlockPos()
+        );
+        CarpenterInventoryTicketSystem.consumeRequest(ticket.carpenterUUID);
     }
 
     @Override
@@ -715,6 +808,8 @@ public class TownHallBlockEntity extends BlockEntity implements
             TailorCollectionTicketSystem.cleanupStaleTickets(currentDay);
             LumberjackDepositTicketSystem.cleanupStaleTickets(currentDay);
             CharcoalBurnerCollectionTicketSystem.cleanupStaleTickets(currentDay);
+            CarpenterCollectionTicketSystem.cleanupStaleTickets(currentDay);
+
 
 
             blockEntity.lastScanDay     = currentDay;
@@ -1401,15 +1496,13 @@ public class TownHallBlockEntity extends BlockEntity implements
             TailorCollectionTicketSystem.registerListener(this);
             LumberjackDepositTicketSystem.registerListener(this);
             CharcoalBurnerCollectionTicketSystem.registerListener(this);
+            CarpenterCollectionTicketSystem.registerListener(this);
+            CarpenterInventoryTicketSystem.registerListener(this);
+            net.darkflameproduction.agotmod.entity.custom.npc.system.trader.TraderInventoryTicketSystem.registerListener(this);
 
-            // Re-register culture zone so spawns inside this town get the right culture
             if (culture != Culture.NONE && level instanceof ServerLevel sl) {
                 net.darkflameproduction.agotmod.entity.custom.npc.system.culture.TownCultureZone.registerZone(
-                        this.worldPosition,
-                        getCurrentScanRadius(),
-                        culture,
-                        sl.dimension()
-                );
+                        this.worldPosition, getCurrentScanRadius(), culture, sl.dimension());
             }
         }
     }
@@ -1508,12 +1601,13 @@ public class TownHallBlockEntity extends BlockEntity implements
         TailorCollectionTicketSystem.unregisterListener(this);
         LumberjackDepositTicketSystem.unregisterListener(this);
         CharcoalBurnerCollectionTicketSystem.unregisterListener(this);
+        CarpenterCollectionTicketSystem.unregisterListener(this);
+        CarpenterInventoryTicketSystem.unregisterListener(this);
+        net.darkflameproduction.agotmod.entity.custom.npc.system.trader.TraderInventoryTicketSystem.unregisterListener(this);
 
-        // Unregister culture zone so spawns are no longer affected
         if (level instanceof ServerLevel sl) {
             net.darkflameproduction.agotmod.entity.custom.npc.system.culture.TownCultureZone.removeZone(
-                    this.worldPosition, sl.dimension()
-            );
+                    this.worldPosition, sl.dimension());
         }
 
         if (!level.isClientSide()) {

@@ -6,6 +6,7 @@ import net.darkflameproduction.agotmod.client.town.ClientTownAreaManager;
 import net.darkflameproduction.agotmod.gui.CustomGuiScreen;
 import net.darkflameproduction.agotmod.gui.GrocerInventoryScreen;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.grocer.GrocerSystem;
+import net.darkflameproduction.agotmod.gui.HouseData;
 import net.darkflameproduction.agotmod.gui.TownHallScreen;
 import net.darkflameproduction.agotmod.client.tracker.TownTracker;
 import net.minecraft.client.Minecraft;
@@ -92,23 +93,27 @@ public class ClientPacketHandler {
         context.enqueueWork(() -> {
             Minecraft mc = Minecraft.getInstance();
             if (mc.player != null) {
-                String grocerName  = packet.grocerName();
+                String grocerName    = packet.grocerName();
                 java.util.List<GrocerSystem.GrocerInventoryEntry> grocerEntries = packet.grocerEntries();
                 java.util.List<OpenGrocerInventoryPacket.PlayerInventoryEntry> playerEntries = packet.playerEntries();
-                long grocerBalance = packet.grocerBalance();
-                long playerBalance = packet.playerBalance();
+                long grocerBalance   = packet.grocerBalance();
+                long playerBalance   = packet.playerBalance();
+                float buyMultiplier  = packet.buyMultiplier();
+                float sellMultiplier = packet.sellMultiplier();
 
                 mc.player.getPersistentData().putLong("agotmod.coin_balance", playerBalance);
 
                 GrocerInventoryScreen currentScreen = GrocerInventoryScreen.getCurrentInstance();
 
                 if (currentScreen != null && mc.screen == currentScreen) {
-                    GrocerInventoryScreen.updateInventoryData(grocerName, grocerEntries, playerEntries, grocerBalance);
+                    GrocerInventoryScreen.updateInventoryData(grocerName, grocerEntries, playerEntries,
+                            grocerBalance, buyMultiplier, sellMultiplier);
                     GrocerInventoryScreen.updatePlayerBalance(playerBalance);
                 } else {
                     GrocerInventoryScreen newScreen = new GrocerInventoryScreen(grocerName);
                     mc.setScreen(newScreen);
-                    GrocerInventoryScreen.updateInventoryData(grocerName, grocerEntries, playerEntries, grocerBalance);
+                    GrocerInventoryScreen.updateInventoryData(grocerName, grocerEntries, playerEntries,
+                            grocerBalance, buyMultiplier, sellMultiplier);
                     GrocerInventoryScreen.updatePlayerBalance(playerBalance);
                 }
             }
@@ -133,6 +138,18 @@ public class ClientPacketHandler {
             Minecraft mc = Minecraft.getInstance();
             mc.setScreen(new net.darkflameproduction.agotmod.client.gui.NpcConversationScreen(
                     packet.npcUUID(), packet.jobType(), packet.npcName()));
+        });
+    }
+
+    public static void handleSyncHouseInvite(SyncHouseInvitePacket packet, IPayloadContext context) {
+        context.enqueueWork(() -> {
+            HouseData.setPendingInvite(packet.houseName(), packet.inviterName());
+        });
+    }
+
+    public static void handleSyncHouseMembers(SyncHouseMembersPacket packet, IPayloadContext context) {
+        context.enqueueWork(() -> {
+            HouseData.setHouseMembers(packet.memberNames());
         });
     }
 }

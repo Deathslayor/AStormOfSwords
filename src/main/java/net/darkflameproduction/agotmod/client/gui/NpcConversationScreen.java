@@ -49,7 +49,10 @@ public class NpcConversationScreen extends Screen {
                 || jobType.equals(JobSystem.JOB_BUTCHER)
                 || jobType.equals(JobSystem.JOB_TANNER)
                 || jobType.equals(JobSystem.JOB_TAILOR)
-                || jobType.equals(JobSystem.JOB_BLACKSMITH);
+                || jobType.equals(JobSystem.JOB_BLACKSMITH)
+                || jobType.equals(JobSystem.JOB_TRADER)
+                || jobType.equals(JobSystem.JOB_CARPENTER);
+
     }
 
     @Override

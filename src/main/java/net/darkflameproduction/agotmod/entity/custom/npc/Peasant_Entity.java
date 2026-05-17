@@ -3,6 +3,9 @@ package net.darkflameproduction.agotmod.entity.custom.npc;
 import net.darkflameproduction.agotmod.block.custom.TownHallBlockEntity;
 import net.darkflameproduction.agotmod.entity.animations.ModAnimationDefinitions;
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.behaviour.*;
+import net.darkflameproduction.agotmod.entity.custom.npc.goals.carpenter.CarpenterBarrelDropOffGoal;
+import net.darkflameproduction.agotmod.entity.custom.npc.goals.carpenter.CarpenterGoal;
+import net.darkflameproduction.agotmod.entity.custom.npc.goals.carpenter.CollectCarpenterMaterialsGoal;
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.charcoalburner.CharcoalBurnerBarrelDropOffGoal;
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.charcoalburner.CharcoalBurnerGoal;
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.charcoalburner.CollectCharcoalBurnerMaterialsGoal;
@@ -20,6 +23,8 @@ import net.darkflameproduction.agotmod.entity.custom.npc.goals.smelter.SmelterBa
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.smelter.SmelterGoal;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.NameSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.carpenter.CarpenterInventoryTicketSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.carpenter.CarpenterSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.charcoalburner.CharcoalBurnerSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.culture.CultureSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.culture.CultureTicketSystem;
@@ -72,6 +77,8 @@ import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.lumberjack.LumberjackSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.lumberjack.LumberjackGoal;
+import net.darkflameproduction.agotmod.entity.custom.npc.goals.trader.TraderGoal;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.trader.TraderSystem;
 
 import java.util.*;
 
@@ -151,6 +158,8 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     private final net.darkflameproduction.agotmod.entity.custom.npc.system.tailor.TailorSystem tailorSystem;
     private final LumberjackSystem lumberjackSystem;
     private final CharcoalBurnerSystem charcoalBurnerSystem;
+    private final CarpenterSystem carpenterSystem;
+    private final TraderSystem traderSystem;
 
 
     private final CultureSystem cultureSystem = new CultureSystem();
@@ -195,6 +204,10 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         this.animalHerderSystem   = new net.darkflameproduction.agotmod.entity.custom.npc.system.animalherder.AnimalHerderSystem();
         this.lumberjackSystem     = new LumberjackSystem(this);
         this.charcoalBurnerSystem = new CharcoalBurnerSystem();
+        this.carpenterSystem      = new CarpenterSystem();
+        this.traderSystem         = new TraderSystem();
+
+
     }
 
     // Getters for all systems
@@ -216,6 +229,9 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     public net.darkflameproduction.agotmod.entity.custom.npc.system.tailor.TailorSystem getTailorSystem()   { return tailorSystem; }
     public LumberjackSystem getLumberjackSystem() { return lumberjackSystem; }
     public CharcoalBurnerSystem getCharcoalBurnerSystem() { return charcoalBurnerSystem; }
+    public CarpenterSystem getCarpenterSystem() { return carpenterSystem; }
+    public TraderSystem getTraderSystem() { return traderSystem; }
+
 
 
     // Gender methods
@@ -296,6 +312,14 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
 
         // Note: Names, memories, inventory, gender, and all other data are preserved automatically
         // Only the model and textures will change through the renderer/model system
+    }
+
+    private float getBuyMultiplier() {
+        return getJobType().equals(JobSystem.JOB_TRADER) ? 1.25f : 1.0f;
+    }
+
+    private float getSellMultiplier() {
+        return getJobType().equals(JobSystem.JOB_TRADER) ? 0.375f : 0.5f;
     }
 
 
@@ -394,7 +418,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
             this.goalSelector.addGoal(4, new net.darkflameproduction.agotmod.entity.custom.npc.goals.tanner.TannerBarrelDropOffGoal(this));
             this.goalSelector.addGoal(4, new net.darkflameproduction.agotmod.entity.custom.npc.goals.tailor.TailorBarrelDropOffGoal(this));
             this.goalSelector.addGoal(4, new net.darkflameproduction.agotmod.entity.custom.npc.goals.lumberjack.LumberjackDepositGoal(this));
-            this.goalSelector.addGoal(4, new CharcoalBurnerBarrelDropOffGoal(this));
+            this.goalSelector.addGoal(4, new CarpenterBarrelDropOffGoal(this));
         }
 
         this.goalSelector.addGoal(5, new FindBedGoal(this));
@@ -408,12 +432,15 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
             this.goalSelector.addGoal(7, new net.darkflameproduction.agotmod.entity.custom.npc.goals.tanner.CollectTannerMaterialsGoal(this));
             this.goalSelector.addGoal(7, new net.darkflameproduction.agotmod.entity.custom.npc.goals.tailor.CollectTailorMaterialsGoal(this));
             this.goalSelector.addGoal(7, new CollectCharcoalBurnerMaterialsGoal(this));
+            this.goalSelector.addGoal(7, new CollectCarpenterMaterialsGoal(this));
             this.goalSelector.addGoal(8, new CharcoalBurnerGoal(this));
             this.goalSelector.addGoal(8, new SmelterGoal(this));
             this.goalSelector.addGoal(8, new MinerGoal(this));
             this.goalSelector.addGoal(8, new net.darkflameproduction.agotmod.entity.custom.npc.goals.animalherder.AnimalHerderGoal(this));
             this.goalSelector.addGoal(8, new net.darkflameproduction.agotmod.entity.custom.npc.goals.tanner.TannerGoal(this));
             this.goalSelector.addGoal(8, new net.darkflameproduction.agotmod.entity.custom.npc.goals.tailor.TailorGoal(this));
+            this.goalSelector.addGoal(8, new TraderGoal(this));
+            this.goalSelector.addGoal(8, new CarpenterGoal(this));
             this.goalSelector.addGoal(9, new ReturnToJobBlockGoal(this));
             this.goalSelector.addGoal(11, new FarmingGoal(this));
             this.goalSelector.addGoal(13, new GuardPatrolGoal(this));
@@ -615,6 +642,8 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         compound.put("LumberjackSystem", lumberjackTag);
 
         charcoalBurnerSystem.saveData(compound);
+        carpenterSystem.saveData(compound);
+        traderSystem.saveData(compound);
         cultureSystem.saveData(compound);
 
 
@@ -660,6 +689,8 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         animalHerderSystem.loadData(compound);
         inventorySystem.loadData(compound, this.registryAccess());
         charcoalBurnerSystem.loadData(compound);
+        carpenterSystem.loadData(compound);
+        traderSystem.loadData(compound);
         cultureSystem.loadData(compound);
 
 
@@ -674,6 +705,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
 
         this.getEntityData().set(DATA_ITEM_IN_MAIN_HAND, this.getMainHandItem());
     }
+
 
     @Override
     public void tick() {
@@ -705,7 +737,6 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                 validateTownHallRegistration();
             }
 
-            // ── Culture assignment ─────────────────────────────────────────────
             if (!cultureSystem.hasCulture()
                     && net.darkflameproduction.agotmod.entity.custom.npc.system.culture.CultureTicketSystem
                     .hasPendingTicket(this.getUUID())) {
@@ -742,8 +773,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                         GrocerInventoryTicketSystem.consumeResponse(this.getUUID());
                 if (response != null && this.level() instanceof ServerLevel serverLevel) {
                     this.registerWithTownHall(response.townHallPos);
-                    net.minecraft.server.level.ServerPlayer serverPlayer =
-                            serverLevel.getServer().getPlayerList().getPlayer(response.playerUUID);
+                    ServerPlayer serverPlayer = serverLevel.getServer().getPlayerList().getPlayer(response.playerUUID);
                     if (serverPlayer != null) {
                         List<GrocerSystem.GrocerInventoryEntry> entries = buildFilteredEntries(
                                 response.items, net.darkflameproduction.agotmod.util.ItemPricing::isGrocerItem);
@@ -752,7 +782,8 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                         long playerBalance = serverPlayer.getPersistentData().getLong(COIN_BALANCE_KEY);
                         net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
                                 new OpenGrocerInventoryPacket(this.getDisplayName().getString(),
-                                        entries, playerEntries, response.townBalance, playerBalance));
+                                        entries, playerEntries, response.townBalance, playerBalance,
+                                        getBuyMultiplier(), getSellMultiplier()));
                     }
                 }
             }
@@ -764,8 +795,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                         net.darkflameproduction.agotmod.entity.custom.npc.system.butcher.ButcherInventoryTicketSystem.consumeResponse(this.getUUID());
                 if (response != null && this.level() instanceof ServerLevel serverLevel) {
                     this.registerWithTownHall(response.townHallPos);
-                    net.minecraft.server.level.ServerPlayer serverPlayer =
-                            serverLevel.getServer().getPlayerList().getPlayer(response.playerUUID);
+                    ServerPlayer serverPlayer = serverLevel.getServer().getPlayerList().getPlayer(response.playerUUID);
                     if (serverPlayer != null) {
                         List<GrocerSystem.GrocerInventoryEntry> entries = buildFilteredEntries(
                                 response.items, net.darkflameproduction.agotmod.util.ItemPricing::isButcherItem);
@@ -774,7 +804,8 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                         long playerBalance = serverPlayer.getPersistentData().getLong(COIN_BALANCE_KEY);
                         net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
                                 new OpenGrocerInventoryPacket(this.getDisplayName().getString(),
-                                        entries, playerEntries, response.townBalance, playerBalance));
+                                        entries, playerEntries, response.townBalance, playerBalance,
+                                        getBuyMultiplier(), getSellMultiplier()));
                     }
                 }
             }
@@ -786,8 +817,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                         net.darkflameproduction.agotmod.entity.custom.npc.system.tanner.TannerInventoryTicketSystem.consumeResponse(this.getUUID());
                 if (response != null && this.level() instanceof ServerLevel serverLevel) {
                     this.registerWithTownHall(response.townHallPos);
-                    net.minecraft.server.level.ServerPlayer serverPlayer =
-                            serverLevel.getServer().getPlayerList().getPlayer(response.playerUUID);
+                    ServerPlayer serverPlayer = serverLevel.getServer().getPlayerList().getPlayer(response.playerUUID);
                     if (serverPlayer != null) {
                         List<GrocerSystem.GrocerInventoryEntry> entries = buildFilteredEntries(
                                 response.items, net.darkflameproduction.agotmod.util.ItemPricing::isTannerItem);
@@ -796,7 +826,8 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                         long playerBalance = serverPlayer.getPersistentData().getLong(COIN_BALANCE_KEY);
                         net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
                                 new OpenGrocerInventoryPacket(this.getDisplayName().getString(),
-                                        entries, playerEntries, response.townBalance, playerBalance));
+                                        entries, playerEntries, response.townBalance, playerBalance,
+                                        getBuyMultiplier(), getSellMultiplier()));
                     }
                 }
             }
@@ -808,8 +839,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                         net.darkflameproduction.agotmod.entity.custom.npc.system.tailor.TailorInventoryTicketSystem.consumeResponse(this.getUUID());
                 if (response != null && this.level() instanceof ServerLevel serverLevel) {
                     this.registerWithTownHall(response.townHallPos);
-                    net.minecraft.server.level.ServerPlayer serverPlayer =
-                            serverLevel.getServer().getPlayerList().getPlayer(response.playerUUID);
+                    ServerPlayer serverPlayer = serverLevel.getServer().getPlayerList().getPlayer(response.playerUUID);
                     if (serverPlayer != null) {
                         List<GrocerSystem.GrocerInventoryEntry> entries = buildFilteredEntries(
                                 response.items, net.darkflameproduction.agotmod.util.ItemPricing::isTailorItem);
@@ -818,7 +848,8 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                         long playerBalance = serverPlayer.getPersistentData().getLong(COIN_BALANCE_KEY);
                         net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
                                 new OpenGrocerInventoryPacket(this.getDisplayName().getString(),
-                                        entries, playerEntries, response.townBalance, playerBalance));
+                                        entries, playerEntries, response.townBalance, playerBalance,
+                                        getBuyMultiplier(), getSellMultiplier()));
                     }
                 }
             }
@@ -830,8 +861,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                         net.darkflameproduction.agotmod.entity.custom.npc.system.blacksmith.BlacksmithInventoryTicketSystem.consumeResponse(this.getUUID());
                 if (response != null && this.level() instanceof ServerLevel serverLevel) {
                     this.registerWithTownHall(response.townHallPos);
-                    net.minecraft.server.level.ServerPlayer serverPlayer =
-                            serverLevel.getServer().getPlayerList().getPlayer(response.playerUUID);
+                    ServerPlayer serverPlayer = serverLevel.getServer().getPlayerList().getPlayer(response.playerUUID);
                     if (serverPlayer != null) {
                         List<GrocerSystem.GrocerInventoryEntry> entries = buildFilteredEntries(
                                 response.items, net.darkflameproduction.agotmod.util.ItemPricing::isBlacksmithItem);
@@ -840,7 +870,52 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                         long playerBalance = serverPlayer.getPersistentData().getLong(COIN_BALANCE_KEY);
                         net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
                                 new OpenGrocerInventoryPacket(this.getDisplayName().getString(),
-                                        entries, playerEntries, response.townBalance, playerBalance));
+                                        entries, playerEntries, response.townBalance, playerBalance,
+                                        getBuyMultiplier(), getSellMultiplier()));
+                    }
+                }
+            }
+        }
+
+        if (!this.level().isClientSide && getJobType().equals(JobSystem.JOB_CARPENTER)) {
+            if (CarpenterInventoryTicketSystem.hasPendingResponse(this.getUUID())) {
+                CarpenterInventoryTicketSystem.InventoryResponseTicket response =
+                        CarpenterInventoryTicketSystem.consumeResponse(this.getUUID());
+                if (response != null && this.level() instanceof ServerLevel serverLevel) {
+                    this.registerWithTownHall(response.townHallPos);
+                    ServerPlayer serverPlayer = serverLevel.getServer().getPlayerList().getPlayer(response.playerUUID);
+                    if (serverPlayer != null) {
+                        List<GrocerSystem.GrocerInventoryEntry> entries = buildFilteredEntries(
+                                response.items, net.darkflameproduction.agotmod.util.ItemPricing::isCarpenterItem);
+                        List<OpenGrocerInventoryPacket.PlayerInventoryEntry> playerEntries =
+                                buildPlayerEntries(serverPlayer, net.darkflameproduction.agotmod.util.ItemPricing::isCarpenterItem);
+                        long playerBalance = serverPlayer.getPersistentData().getLong(COIN_BALANCE_KEY);
+                        net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
+                                new OpenGrocerInventoryPacket(this.getDisplayName().getString(),
+                                        entries, playerEntries, response.townBalance, playerBalance,
+                                        getBuyMultiplier(), getSellMultiplier()));
+                    }
+                }
+            }
+        }
+
+        if (!this.level().isClientSide && getJobType().equals(JobSystem.JOB_TRADER)) {
+            if (net.darkflameproduction.agotmod.entity.custom.npc.system.trader.TraderInventoryTicketSystem.hasPendingResponse(this.getUUID())) {
+                net.darkflameproduction.agotmod.entity.custom.npc.system.trader.TraderInventoryTicketSystem.InventoryResponseTicket response =
+                        net.darkflameproduction.agotmod.entity.custom.npc.system.trader.TraderInventoryTicketSystem.consumeResponse(this.getUUID());
+                if (response != null && this.level() instanceof ServerLevel serverLevel) {
+                    this.registerWithTownHall(response.townHallPos);
+                    ServerPlayer serverPlayer = serverLevel.getServer().getPlayerList().getPlayer(response.playerUUID);
+                    if (serverPlayer != null) {
+                        List<GrocerSystem.GrocerInventoryEntry> entries = buildFilteredEntries(
+                                response.items, net.darkflameproduction.agotmod.util.ItemPricing::isTraderItem);
+                        List<OpenGrocerInventoryPacket.PlayerInventoryEntry> playerEntries =
+                                buildPlayerEntries(serverPlayer, net.darkflameproduction.agotmod.util.ItemPricing::isTraderItem);
+                        long playerBalance = serverPlayer.getPersistentData().getLong(COIN_BALANCE_KEY);
+                        net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
+                                new OpenGrocerInventoryPacket(this.getDisplayName().getString(),
+                                        entries, playerEntries, response.townBalance, playerBalance,
+                                        getBuyMultiplier(), getSellMultiplier()));
                     }
                 }
             }

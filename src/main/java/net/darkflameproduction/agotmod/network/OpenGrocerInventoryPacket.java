@@ -14,7 +14,9 @@ public record OpenGrocerInventoryPacket(
         List<GrocerSystem.GrocerInventoryEntry> grocerEntries,
         List<PlayerInventoryEntry> playerEntries,
         long grocerBalance,
-        long playerBalance
+        long playerBalance,
+        float buyMultiplier,
+        float sellMultiplier
 ) implements CustomPacketPayload {
 
     public static class PlayerInventoryEntry {
@@ -25,9 +27,9 @@ public record OpenGrocerInventoryPacket(
 
         public PlayerInventoryEntry(String displayName, int amount, String itemKey, int slot) {
             this.displayName = displayName;
-            this.amount = amount;
-            this.itemKey = itemKey;
-            this.slot = slot;
+            this.amount      = amount;
+            this.itemKey     = itemKey;
+            this.slot        = slot;
         }
     }
 
@@ -43,16 +45,16 @@ public record OpenGrocerInventoryPacket(
         buf.writeUtf(packet.grocerName);
         buf.writeLong(packet.grocerBalance);
         buf.writeLong(packet.playerBalance);
+        buf.writeFloat(packet.buyMultiplier);
+        buf.writeFloat(packet.sellMultiplier);
 
-        // Write grocer entries
         buf.writeInt(packet.grocerEntries.size());
         for (GrocerSystem.GrocerInventoryEntry entry : packet.grocerEntries) {
             buf.writeUtf(entry.displayName);
-            buf.writeLong(entry.amount); // changed from writeInt to writeLong
+            buf.writeLong(entry.amount);
             buf.writeUtf(entry.itemKey);
         }
 
-        // Write player entries
         buf.writeInt(packet.playerEntries.size());
         for (PlayerInventoryEntry entry : packet.playerEntries) {
             buf.writeUtf(entry.displayName);
@@ -63,32 +65,33 @@ public record OpenGrocerInventoryPacket(
     }
 
     public static OpenGrocerInventoryPacket read(FriendlyByteBuf buf) {
-        String grocerName = buf.readUtf();
-        long grocerBalance = buf.readLong();
-        long playerBalance = buf.readLong();
+        String grocerName    = buf.readUtf();
+        long grocerBalance   = buf.readLong();
+        long playerBalance   = buf.readLong();
+        float buyMultiplier  = buf.readFloat();
+        float sellMultiplier = buf.readFloat();
 
-        // Read grocer entries
         int grocerSize = buf.readInt();
         List<GrocerSystem.GrocerInventoryEntry> grocerEntries = new ArrayList<>();
         for (int i = 0; i < grocerSize; i++) {
             String displayName = buf.readUtf();
-            long amount = buf.readLong(); // changed from readInt to readLong
-            String itemKey = buf.readUtf();
+            long amount        = buf.readLong();
+            String itemKey     = buf.readUtf();
             grocerEntries.add(new GrocerSystem.GrocerInventoryEntry(displayName, amount, itemKey));
         }
 
-        // Read player entries
         int playerSize = buf.readInt();
         List<PlayerInventoryEntry> playerEntries = new ArrayList<>();
         for (int i = 0; i < playerSize; i++) {
             String displayName = buf.readUtf();
-            int amount = buf.readInt();
-            String itemKey = buf.readUtf();
-            int slot = buf.readInt();
+            int amount         = buf.readInt();
+            String itemKey     = buf.readUtf();
+            int slot           = buf.readInt();
             playerEntries.add(new PlayerInventoryEntry(displayName, amount, itemKey, slot));
         }
 
-        return new OpenGrocerInventoryPacket(grocerName, grocerEntries, playerEntries, grocerBalance, playerBalance);
+        return new OpenGrocerInventoryPacket(grocerName, grocerEntries, playerEntries,
+                grocerBalance, playerBalance, buyMultiplier, sellMultiplier);
     }
 
     @Override
