@@ -241,41 +241,55 @@ public class ServerPacketHandler {
 
     public static boolean isHouseNameAvailable(String houseName, ServerPlayer requestingPlayer) {
         if (houseName == null || houseName.trim().isEmpty()) return false;
+        String trimmed = houseName.trim();
 
-        String trimmedName = houseName.trim();
-
+        // Online players — use live persistent data
         for (ServerPlayer player : requestingPlayer.getServer().getPlayerList().getPlayers()) {
-            if (player.equals(requestingPlayer)) continue;
-            if (trimmedName.equalsIgnoreCase(getPlayerHouseName(player))) return false;
+            if (player.getUUID().equals(requestingPlayer.getUUID())) continue;
+            if (trimmed.equalsIgnoreCase(getPlayerHouseName(player))) return false;
         }
 
+        // Offline players — scan .dat files
         try {
-            java.nio.file.Path worldPath = requestingPlayer.getServer().getWorldPath(net.minecraft.world.level.storage.LevelResource.ROOT);
-            java.nio.file.Path playersDir = worldPath.resolve("playerdata");
+            java.nio.file.Path playersDir = requestingPlayer.getServer()
+                    .getWorldPath(net.minecraft.world.level.storage.LevelResource.ROOT)
+                    .resolve("playerdata");
 
             if (java.nio.file.Files.exists(playersDir) && java.nio.file.Files.isDirectory(playersDir)) {
-                try (java.util.stream.Stream<java.nio.file.Path> playerFiles = java.nio.file.Files.list(playersDir)) {
-                    for (java.nio.file.Path playerFile : playerFiles.collect(java.util.stream.Collectors.toList())) {
-                        if (!playerFile.toString().endsWith(".dat")) continue;
-                        try {
-                            java.util.UUID playerUUID = java.util.UUID.fromString(
-                                    playerFile.getFileName().toString().replace(".dat", ""));
-                            if (playerUUID.equals(requestingPlayer.getUUID())) continue;
+                for (java.nio.file.Path file : java.nio.file.Files.list(playersDir)
+                        .collect(java.util.stream.Collectors.toList())) {
+                    if (!file.toString().endsWith(".dat")) continue;
+                    try {
+                        java.util.UUID uuid = java.util.UUID.fromString(
+                                file.getFileName().toString().replace(".dat", ""));
+                        if (uuid.equals(requestingPlayer.getUUID())) continue;
 
-                            net.minecraft.nbt.CompoundTag playerData = net.minecraft.nbt.NbtIo.readCompressed(
-                                    playerFile, net.minecraft.nbt.NbtAccounter.unlimitedHeap());
+                        net.minecraft.nbt.CompoundTag root = net.minecraft.nbt.NbtIo.readCompressed(
+                                file, net.minecraft.nbt.NbtAccounter.unlimitedHeap());
 
-                            if (playerData.contains(AGoTMod.MOD_ID + ".house")) {
-                                String savedName = playerData.getCompound(AGoTMod.MOD_ID + ".house").getString("house_name");
-                                if (trimmedName.equalsIgnoreCase(savedName)) return false;
-                            }
-                        } catch (Exception ignored) {}
-                    }
+                        String savedHouse = readHouseNameFromDat(root);
+                        if (trimmed.equalsIgnoreCase(savedHouse)) return false;
+                    } catch (Exception ignored) {}
                 }
             }
         } catch (Exception ignored) {}
 
         return true;
+    }
+
+    private static String readHouseNameFromDat(net.minecraft.nbt.CompoundTag root) {
+        // Primary path: root -> "ForgeCaps" -> "agotmod.house" -> "house_name"
+        if (root.contains("ForgeCaps")) {
+            net.minecraft.nbt.CompoundTag forgeCaps = root.getCompound("ForgeCaps");
+            if (forgeCaps.contains(AGoTMod.MOD_ID + ".house")) {
+                return forgeCaps.getCompound(AGoTMod.MOD_ID + ".house").getString("house_name");
+            }
+        }
+        // Fallback: root -> "agotmod.house" -> "house_name" (older saves)
+        if (root.contains(AGoTMod.MOD_ID + ".house")) {
+            return root.getCompound(AGoTMod.MOD_ID + ".house").getString("house_name");
+        }
+        return "";
     }
 
     public static void handleUpdateTownName(UpdateTownNamePacket packet, IPayloadContext context) {

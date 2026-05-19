@@ -148,8 +148,10 @@ public class ClientPacketHandler {
     }
 
     public static void handleSyncHouseMembers(SyncHouseMembersPacket packet, IPayloadContext context) {
-        context.enqueueWork(() -> {
-            HouseData.setHouseMembers(packet.memberNames());
-        });
+        context.enqueueWork(() -> HouseData.setHouseMembers(packet.members()));
+    }
+
+    public static void handleSyncHouseRole(SyncHouseRolePacket packet, IPayloadContext context) {
+        context.enqueueWork(() -> HouseData.setIsFounder(packet.isFounder()));
     }
 }

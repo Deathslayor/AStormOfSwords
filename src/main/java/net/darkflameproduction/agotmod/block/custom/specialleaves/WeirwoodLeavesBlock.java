@@ -35,12 +35,10 @@ public class WeirwoodLeavesBlock extends LeavesBlock {
     public void animateTick(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull RandomSource random) {
         super.animateTick(state, level, pos, random);
 
-        // Chance of particle spawning
         if (random.nextInt(10) == 0) {
             BlockPos below = pos.below();
             BlockState belowState = level.getBlockState(below);
 
-            // Check if there's space to spawn particle
             if (!isFaceFull(belowState.getCollisionShape(level, below), Direction.UP)) {
                 double x = pos.getX() + 0.5;
                 double y = pos.getY();
@@ -55,4 +53,3 @@ public class WeirwoodLeavesBlock extends LeavesBlock {
         }
     }
 }
-

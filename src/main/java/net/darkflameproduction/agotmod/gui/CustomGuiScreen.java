@@ -21,6 +21,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.Collections;
 import java.util.Map;
+import java.util.UUID;
 
 @OnlyIn(Dist.CLIENT)
 public class CustomGuiScreen extends Screen {
@@ -79,9 +80,16 @@ public class CustomGuiScreen extends Screen {
     private static final int    STATS_UPDATE_INTERVAL = 100;
     private static final double TELEPORT_THRESHOLD    = 5.0;
 
-    private int selectedHouseTab = 0; // 0 = Towns, 1 = Members
+    private int selectedHouseTab = 0;
     private net.minecraft.client.gui.components.EditBox inviteEditBox;
-    private net.minecraft.client.gui.components.Button  inviteButton;
+    private net.minecraft.client.gui.components.Button  inviteButton;   // "Invite" button on Members tab
+    private net.minecraft.client.gui.components.Button  closeInviteButton; // "Back" button on Invite tab
+    private net.minecraft.client.gui.components.Button setBannerButton;
+    private net.minecraft.client.gui.components.Button leaveButton;
+    private boolean showingLeaveConfirm = false;
+    private UUID kickTargetUUID      = null;   // non-null when kick confirm is showing
+    private String  kickTargetUsername  = "";
+
 
     // ── Banner pattern map ────────────────────────────────────────────────────
 
@@ -245,6 +253,7 @@ public class CustomGuiScreen extends Screen {
         if (houseNameEditBox != null) { removeWidget(houseNameEditBox); houseNameEditBox = null; }
         if (saveHouseButton  != null) { removeWidget(saveHouseButton);  saveHouseButton  = null; }
         if (editHouseButton  != null) { removeWidget(editHouseButton);  editHouseButton  = null; }
+        if (setBannerButton != null) { removeWidget(setBannerButton); setBannerButton = null; }
 
         applyBlurEffect();
     }
@@ -320,51 +329,42 @@ public class CustomGuiScreen extends Screen {
 
         ScreenLayout layout = new ScreenLayout(width, height);
 
+        // ── Section tab bar ───────────────────────────────────────────────────────
         for (int i = 0; i < SECTION_LABELS.length; i++) {
-            // Map tab is unclickable when no map data is available
             if (i == 0 && mapPacket == null) continue;
 
             int startX = layout.sideMargin + (i * layout.sectionButtonWidth);
-            int endX = (i == SECTION_LABELS.length - 1)
+            int endX   = (i == SECTION_LABELS.length - 1)
                     ? width - layout.sideMargin
                     : layout.sideMargin + ((i + 1) * layout.sectionButtonWidth);
 
-            if (isMouseOverRect((int) mouseX, (int) mouseY,
-                    startX, layout.topMargin,
+            if (isMouseOverRect((int)mouseX, (int)mouseY, startX, layout.topMargin,
                     endX - startX, layout.sectionButtonHeight)) {
-
-                selectedSection = i;
+                selectedSection     = i;
                 lastSelectedSection = i;
-
-                if (i == 3 && !skills.areStatsLoaded && minecraft != null) {
-                    requestStats();
-                }
-
+                if (i == 3 && !skills.areStatsLoaded && minecraft != null) requestStats();
                 playButtonSound();
                 return true;
             }
         }
 
-        // Stats submenu
+        // ── Stats submenu ─────────────────────────────────────────────────────────
         if (selectedSection == 3) {
-            int submenuWidth = layout.contentWidth / 6;
-            int submenuStartX = layout.contentX + layout.contentWidth / 128;
-            int submenuStartY = layout.contentY + layout.contentHeight / 16;
-            int submenuHeight = layout.contentHeight - (layout.contentHeight / 8);
-            int buttonHeight = submenuHeight / 8;
-            int buttonSpacing = submenuHeight / 24;
-            int totalBH = (buttonHeight * STAT_SUBMENU_LABELS.length)
+            int submenuWidth   = layout.contentWidth / 6;
+            int submenuStartX  = layout.contentX + layout.contentWidth / 128;
+            int submenuStartY  = layout.contentY + layout.contentHeight / 16;
+            int submenuHeight  = layout.contentHeight - (layout.contentHeight / 8);
+            int buttonHeight   = submenuHeight / 8;
+            int buttonSpacing  = submenuHeight / 24;
+            int totalBH        = (buttonHeight * STAT_SUBMENU_LABELS.length)
                     + (buttonSpacing * (STAT_SUBMENU_LABELS.length - 1));
             int submenuStartYC = submenuStartY + (submenuHeight - totalBH) / 2;
 
             for (int i = 0; i < STAT_SUBMENU_LABELS.length; i++) {
                 int buttonY = submenuStartYC + (i * (buttonHeight + buttonSpacing));
-
-                if (isMouseOverRect((int) mouseX, (int) mouseY,
-                        submenuStartX + 10, buttonY,
-                        submenuWidth - 10, buttonHeight)) {
-
-                    selectedStatsSubmenu = i;
+                if (isMouseOverRect((int)mouseX, (int)mouseY,
+                        submenuStartX + 10, buttonY, submenuWidth - 10, buttonHeight)) {
+                    selectedStatsSubmenu     = i;
                     lastSelectedStatsSubmenu = i;
                     playButtonSound();
                     return true;
@@ -372,85 +372,171 @@ public class CustomGuiScreen extends Screen {
             }
         }
 
-        // House section
+        // ── House section ─────────────────────────────────────────────────────────
         if (selectedSection == 4) {
-            ScreenLayout layout4 = new ScreenLayout(width, height);
+            int cX = layout.contentX + layout.contentWidth / 20;
+            int cY = layout.contentY + layout.contentHeight / 16;
+            int cW = layout.contentWidth  - (layout.contentWidth  / 10);
+            int cH = layout.contentHeight - (layout.contentHeight / 8);
 
-            int cX4 = layout4.contentX + layout4.contentWidth / 20;
-            int cY4 = layout4.contentY + layout4.contentHeight / 16;
-            int cW4 = layout4.contentWidth - (layout4.contentWidth / 10);
-            int cH4 = layout4.contentHeight - (layout4.contentHeight / 8);
+            int tabY      = cY + 44;
+            int tabH      = 18;
+            int tabW      = 80;
+            int tabGap    = 4;
+            int tabsStart = cX + (cW - (tabW * 2 + tabGap)) / 2;
+            int contentY  = tabY + tabH + 8;
+            int contentH  = cY + cH - contentY - 10;
 
-            // Tab clicks — only when player has a house
+            // ── Player has a house ────────────────────────────────────────────────
             if (!house.houseName.isEmpty() && !house.isEditingHouseName) {
-                int tabY4 = cY4 + 44;
-                int tabH4 = 18;
-                int tabW4 = 80;
-                int tabsStartX4 = cX4 + (cW4 - tabW4 * 2 - 4) / 2;
 
-                // Members tab
-                if (isMouseOverRect((int) mouseX, (int) mouseY,
-                        tabsStartX4, tabY4, tabW4, tabH4)) {
+                // ── Members tab: confirmation dialogs eat all clicks first ────────
+                if (selectedHouseTab == 1) {
+                    if (showingLeaveConfirm || kickTargetUUID != null) {
+                        int dialogW = 200, dialogH = 70;
+                        int dialogX = cX + (cW - dialogW) / 2;
+                        int dialogY = contentY + (contentH - dialogH) / 2;
+                        int btnW    = 60, btnH = 18;
+                        int yesX    = dialogX + dialogW / 2 - btnW - 6;
+                        int noX     = dialogX + dialogW / 2 + 6;
+                        int btnY    = dialogY + dialogH - btnH - 8;
 
-                    if (selectedHouseTab != 0) {
-                        selectedHouseTab = 0;
-
-                        removeWidget(inviteEditBox);
-                        inviteEditBox = null;
-
-                        removeWidget(inviteButton);
-                        inviteButton = null;
-
-                        playButtonSound();
+                        if (isMouseOverRect((int)mouseX, (int)mouseY, yesX, btnY, btnW, btnH)) {
+                            if (showingLeaveConfirm) {
+                                net.neoforged.neoforge.network.PacketDistributor.sendToServer(
+                                        new net.darkflameproduction.agotmod.network.LeaveHousePacket());
+                                showingLeaveConfirm = false;
+                                house.houseName = "";
+                                removeWidgetIfPresent(leaveButton, () -> leaveButton = null);
+                            } else {
+                                net.neoforged.neoforge.network.PacketDistributor.sendToServer(
+                                        new net.darkflameproduction.agotmod.network.KickHouseMemberPacket(kickTargetUUID));
+                                kickTargetUUID     = null;
+                                kickTargetUsername = "";
+                            }
+                            playButtonSound();
+                            return true;
+                        }
+                        if (isMouseOverRect((int)mouseX, (int)mouseY, noX, btnY, btnW, btnH)) {
+                            showingLeaveConfirm = false;
+                            kickTargetUUID      = null;
+                            kickTargetUsername  = "";
+                            playButtonSound();
+                            return true;
+                        }
+                        return true; // eat all other clicks while dialog is open
                     }
 
+                    // ── Red X kick buttons (founder only) ─────────────────────────
+                    if (HouseData.isFounder()) {
+                        java.util.List<HouseData.MemberEntry> members = HouseData.getHouseMembers();
+                        int safeLeft = cX + 90;
+                        int safeRight = cX + cW - 90;
+                        int safeW    = safeRight - safeLeft;
+                        int faceSize = 16;
+                        int rowH     = faceSize + 6;
+                        int listY    = contentY + 10;
+
+                        for (int i = 0; i < members.size(); i++) {
+                            HouseData.MemberEntry entry = members.get(i);
+                            boolean isSelf = minecraft.player != null
+                                    && minecraft.player.getUUID().equals(entry.uuid);
+                            if (isSelf) continue;
+
+                            int rowY = listY + (i * rowH);
+                            if (rowY + rowH > contentY + contentH - 10) break;
+
+                            int nameW    = font.width(entry.username);
+                            int rowW     = faceSize + 6 + nameW;
+                            int rowX     = safeLeft + (safeW - rowW) / 2;
+                            int xBtnSize = 12;
+                            int xBtnX   = rowX + faceSize + 6 + nameW + 6;
+                            int xBtnY   = rowY + (faceSize - xBtnSize) / 2;
+
+                            if (isMouseOverRect((int)mouseX, (int)mouseY, xBtnX, xBtnY, xBtnSize, xBtnSize)) {
+                                kickTargetUUID     = entry.uuid;
+                                kickTargetUsername = entry.username;
+                                playButtonSound();
+                                return true;
+                            }
+                        }
+                    }
+                }
+
+                // ── Tab bar clicks ────────────────────────────────────────────────
+
+                // Towns tab
+                if (isMouseOverRect((int)mouseX, (int)mouseY, tabsStart, tabY, tabW, tabH)) {
+                    if (selectedHouseTab != 0) {
+                        removeWidgetIfPresent(inviteEditBox,     () -> inviteEditBox     = null);
+                        removeWidgetIfPresent(closeInviteButton, () -> closeInviteButton = null);
+                        removeWidgetIfPresent(inviteButton,      () -> inviteButton      = null);
+                        removeWidgetIfPresent(leaveButton,       () -> leaveButton       = null);
+                        showingLeaveConfirm = false;
+                        kickTargetUUID      = null;
+                        kickTargetUsername  = "";
+                        selectedHouseTab = 0;
+                        playButtonSound();
+                    }
                     return true;
                 }
 
-                // Settings tab
-                if (isMouseOverRect((int) mouseX, (int) mouseY,
-                        tabsStartX4 + tabW4 + 4, tabY4,
-                        tabW4, tabH4)) {
-
+                // Members tab
+                if (isMouseOverRect((int)mouseX, (int)mouseY, tabsStart + tabW + tabGap, tabY, tabW, tabH)) {
                     if (selectedHouseTab != 1) {
+                        removeWidgetIfPresent(inviteEditBox,     () -> inviteEditBox     = null);
+                        removeWidgetIfPresent(closeInviteButton, () -> closeInviteButton = null);
+                        removeWidgetIfPresent(editHouseButton,   () -> editHouseButton   = null);
+                        removeWidgetIfPresent(setBannerButton,   () -> setBannerButton   = null);
                         selectedHouseTab = 1;
                         playButtonSound();
                     }
-
                     return true;
+                }
+
+                // ── Invite tab: Send button (drawn manually) ──────────────────────
+                if (selectedHouseTab == 2) {
+                    int centerX = cX + cW / 2;
+                    int midY    = contentY + contentH / 2 - 20;
+                    int boxW    = (int)(cW * 0.45f);
+                    int boxX    = centerX - boxW / 2 - 30;
+                    int btnW    = 55;
+                    int btnX    = boxX + boxW + 6;
+                    int btnY    = midY + 2;
+
+                    if (isMouseOverRect((int)mouseX, (int)mouseY, btnX, btnY, btnW, 18)) {
+                        if (inviteEditBox != null) {
+                            String target = inviteEditBox.getValue().trim();
+                            if (!target.isEmpty()) {
+                                net.neoforged.neoforge.network.PacketDistributor.sendToServer(
+                                        new net.darkflameproduction.agotmod.network.SendHouseInvitePacket(target));
+                                inviteEditBox.setValue("");
+                                playButtonSound();
+                            }
+                        }
+                        return true;
+                    }
                 }
             }
 
-            // Invite panel accept/decline clicks
+            // ── No house, pending invite: accept / decline ────────────────────────
             if (house.houseName.isEmpty() && HouseData.hasPendingInvite()) {
-                int centerX4 = cX4 + cW4 / 2;
-                int centerY4 = cY4 + cH4 / 2;
+                int centerX = cX + cW / 2;
+                int centerY = cY + cH / 2;
+                int btnW    = 80, btnH = 20;
+                int acceptX = centerX - btnW - 10;
+                int rejectX = centerX + 10;
+                int btnY    = centerY + 20;
 
-                int btnW4 = 80;
-                int btnH4 = 20;
-
-                int acceptX4 = centerX4 - btnW4 - 10;
-                int rejectX4 = centerX4 + 10;
-                int btnY4 = centerY4 + 20;
-
-                // Accept invite
-                if (isMouseOverRect((int) mouseX, (int) mouseY,
-                        acceptX4, btnY4, btnW4, btnH4)) {
-
+                if (isMouseOverRect((int)mouseX, (int)mouseY, acceptX, btnY, btnW, btnH)) {
                     net.neoforged.neoforge.network.PacketDistributor.sendToServer(
                             new net.darkflameproduction.agotmod.network.RespondHouseInvitePacket(true));
-
                     playButtonSound();
                     return true;
                 }
-
-                // Reject invite
-                if (isMouseOverRect((int) mouseX, (int) mouseY,
-                        rejectX4, btnY4, btnW4, btnH4)) {
-
+                if (isMouseOverRect((int)mouseX, (int)mouseY, rejectX, btnY, btnW, btnH)) {
                     net.neoforged.neoforge.network.PacketDistributor.sendToServer(
                             new net.darkflameproduction.agotmod.network.RespondHouseInvitePacket(false));
-
                     playButtonSound();
                     return true;
                 }
@@ -765,26 +851,26 @@ public class CustomGuiScreen extends Screen {
 
         renderPaperPanel(g, cX, cY, cW, cH);
 
-        // ── Case 1: player has no house and has a pending invite ──────────────
+        // Case 1: no house, pending invite
         if (house.houseName.isEmpty() && HouseData.hasPendingInvite()) {
             drawInvitePanel(g, mouseX, mouseY, cX, cY, cW, cH);
             return;
         }
 
-        // ── Case 2: player has no house and no invite ─────────────────────────
+        // Case 2: no house / editing
         if (house.houseName.isEmpty() || house.isEditingHouseName) {
             drawHouseCreationPanel(g, mouseX, mouseY, cX, cY, cW, cH);
             return;
         }
 
-        // ── Case 3: player has a house ────────────────────────────────────────
-
-        // Request towns if not yet done
+        // Case 3: has a house
         if (!house.hasRequestedTowns) {
             net.neoforged.neoforge.network.PacketDistributor.sendToServer(
                     new net.darkflameproduction.agotmod.network.RequestOwnedTownsPacket());
             house.hasRequestedTowns = true;
         }
+
+        boolean founder = HouseData.isFounder();
 
         // House title
         String houseTitle = "House " + house.houseName;
@@ -795,51 +881,145 @@ public class CustomGuiScreen extends Screen {
         g.drawString(font, houseTitle, (int)(titleX / 1.3f), (int)((cY + 18) / 1.3f), SUBMENU_TEXT_COLOR, false);
         g.pose().popPose();
 
-        // Edit button
-        if (editHouseButton == null) {
-            editHouseButton = net.minecraft.client.gui.components.Button.builder(
-                    net.minecraft.network.chat.Component.literal("Edit"), button -> {
-                        house.isEditingHouseName = true;
-                        removeWidget(editHouseButton); editHouseButton = null;
-                        removeWidget(inviteButton);    inviteButton    = null;
-                        removeWidget(inviteEditBox);   inviteEditBox   = null;
-                        playButtonSound();
-                    }).bounds(cX + cW - 52, cY + 14, 32, 16).build();
-            addWidget(editHouseButton);
-        }
-        if (editHouseButton != null) editHouseButton.render(g, mouseX, mouseY, 0);
-
-        // Banners — left and right inside panel
+        // Banners
         int bannerY = cY + (cH - 120) / 2;
         drawHouseBanner(g, cX + 20, bannerY);
         drawHouseBanner(g, cX + cW - 80, bannerY);
 
-        // ── Tabs ──────────────────────────────────────────────────────────────
-        int tabY        = cY + 44;
-        int tabH        = 18;
-        int tabW        = 80;
-        int tabsStartX  = cX + (cW - tabW * 2 - 4) / 2;
-        int townsTabX   = tabsStartX;
-        int membersTabX = tabsStartX + tabW + 4;
+        // ── Corner button ─────────────────────────────────────────────────────────
+        // Founder + Towns tab  → Edit
+        // Founder + Members tab → Invite
+        // Founder + Invite tab  → Back
+        // Member  + any tab     → no corner button
+        int cornerBtnX = cX + cW - 60;
+        int cornerBtnY = cY + 14;
+        int cornerBtnW = 44;
+        int cornerBtnH = 16;
 
-        drawTab(g, mouseX, mouseY, townsTabX,   tabY, tabW, tabH, "Towns",   selectedHouseTab == 0);
-        drawTab(g, mouseX, mouseY, membersTabX, tabY, tabW, tabH, "Members", selectedHouseTab == 1);
+        if (founder) {
+            if (selectedHouseTab == 0) {
+                removeWidgetIfPresent(inviteButton,      () -> inviteButton      = null);
+                removeWidgetIfPresent(closeInviteButton, () -> closeInviteButton = null);
+                if (editHouseButton == null) {
+                    editHouseButton = net.minecraft.client.gui.components.Button.builder(
+                            net.minecraft.network.chat.Component.literal("Edit"), btn -> {
+                                house.isEditingHouseName = true;
+                                removeWidget(editHouseButton); editHouseButton = null;
+                                playButtonSound();
+                            }).bounds(cornerBtnX, cornerBtnY, cornerBtnW, cornerBtnH).build();
+                    addWidget(editHouseButton);
+                }
+                editHouseButton.render(g, mouseX, mouseY, 0);
 
-        // Separator under tabs
+            } else if (selectedHouseTab == 1) {
+                removeWidgetIfPresent(editHouseButton,   () -> editHouseButton   = null);
+                removeWidgetIfPresent(closeInviteButton, () -> closeInviteButton = null);
+                if (inviteButton == null) {
+                    inviteButton = net.minecraft.client.gui.components.Button.builder(
+                            net.minecraft.network.chat.Component.literal("Invite"), btn -> {
+                                selectedHouseTab = 2;
+                                removeWidget(inviteButton); inviteButton = null;
+                                playButtonSound();
+                            }).bounds(cornerBtnX, cornerBtnY, cornerBtnW, cornerBtnH).build();
+                    addWidget(inviteButton);
+                }
+                inviteButton.render(g, mouseX, mouseY, 0);
+
+            } else {
+                // Tab 2: Back
+                removeWidgetIfPresent(editHouseButton, () -> editHouseButton = null);
+                removeWidgetIfPresent(inviteButton,    () -> inviteButton    = null);
+                if (closeInviteButton == null) {
+                    closeInviteButton = net.minecraft.client.gui.components.Button.builder(
+                            net.minecraft.network.chat.Component.literal("< Back"), btn -> {
+                                selectedHouseTab = 1;
+                                removeWidget(closeInviteButton); closeInviteButton = null;
+                                removeWidget(inviteEditBox);     inviteEditBox     = null;
+                                playButtonSound();
+                            }).bounds(cornerBtnX, cornerBtnY, cornerBtnW, cornerBtnH).build();
+                    addWidget(closeInviteButton);
+                }
+                closeInviteButton.render(g, mouseX, mouseY, 0);
+            }
+        } else {
+            // Member — remove all founder corner buttons
+            removeWidgetIfPresent(editHouseButton,   () -> editHouseButton   = null);
+            removeWidgetIfPresent(inviteButton,      () -> inviteButton      = null);
+            removeWidgetIfPresent(closeInviteButton, () -> closeInviteButton = null);
+        }
+
+        // ── Two visible tabs: Towns | Members ─────────────────────────────────────
+        int tabY      = cY + 44;
+        int tabH      = 18;
+        int tabW      = 80;
+        int tabGap    = 4;
+        int tabsStart = cX + (cW - (tabW * 2 + tabGap)) / 2;
+
+        drawTab(g, mouseX, mouseY, tabsStart,                  tabY, tabW, tabH, "Towns",   selectedHouseTab == 0);
+        drawTab(g, mouseX, mouseY, tabsStart + tabW + tabGap,  tabY, tabW, tabH, "Members", selectedHouseTab >= 1);
+
         g.fill(cX + cW / 10, tabY + tabH + 2, cX + cW - cW / 10, tabY + tabH + 3, SUBMENU_TEXT_COLOR);
 
         int contentY = tabY + tabH + 8;
         int contentH = cY + cH - contentY - 10;
-        int townsW   = (int)(cW * 0.6);
-        int townsX   = cX + (cW - townsW) / 2;
 
-        if (selectedHouseTab == 0) {
-            // Towns tab — existing content
-            drawOwnedTownsSection(g, townsX, contentY, townsW, contentH);
-        } else {
-            // Members tab
-            drawMembersTab(g, mouseX, mouseY, cX, contentY, cW, contentH);
+        switch (selectedHouseTab) {
+            case 0 -> {
+                int townsW = (int)(cW * 0.6);
+                int townsX = cX + (cW - townsW) / 2;
+                drawOwnedTownsSection(g, townsX, contentY, townsW, contentH);
+            }
+            case 1 -> drawMembersTab(g, mouseX, mouseY, cX, contentY, cW, contentH);
+            case 2 -> drawInviteTab(g, mouseX, mouseY, cX, contentY, cW, contentH);
         }
+    }
+
+    private void removeWidgetIfPresent(net.minecraft.client.gui.components.events.GuiEventListener widget,
+                                       Runnable nullify) {
+        if (widget != null) {
+            removeWidget(widget);
+            nullify.run();
+        }
+    }
+
+    private void drawInviteTab(GuiGraphics g, int mouseX, int mouseY,
+                               int cX, int contentY, int cW, int contentH) {
+        int centerX = cX + cW / 2;
+        int midY    = contentY + contentH / 2 - 20;
+
+        String label = "Invite a player to your house:";
+        g.drawString(font, label,
+                centerX - font.width(label) / 2,
+                midY - 14, SUBMENU_TEXT_COLOR, false);
+
+        int boxW = (int)(cW * 0.45f);
+        int boxX = centerX - boxW / 2 - 30;
+        int boxY = midY + 2;
+        int btnW = 55;
+        int btnX = boxX + boxW + 6;
+
+        if (inviteEditBox == null) {
+            inviteEditBox = new net.minecraft.client.gui.components.EditBox(
+                    font, boxX, boxY, boxW, 18,
+                    net.minecraft.network.chat.Component.literal("Player name"));
+            inviteEditBox.setMaxLength(40);
+            inviteEditBox.setHint(net.minecraft.network.chat.Component.literal("Player name..."));
+            addWidget(inviteEditBox);
+        }
+        if (inviteEditBox != null) inviteEditBox.render(g, mouseX, mouseY, 0);
+
+        // Send button — separate from the corner button
+        int sendBtnY = boxY;
+        g.fill(btnX, sendBtnY, btnX + btnW, sendBtnY + 18, 0xFF888888);
+        g.fill(btnX, sendBtnY, btnX + btnW, sendBtnY + 1, 0xFFCCCCCC);
+        g.fill(btnX, sendBtnY, btnX + 1, sendBtnY + 18, 0xFFCCCCCC);
+        g.fill(btnX + btnW - 1, sendBtnY, btnX + btnW, sendBtnY + 18, 0xFF444444);
+        g.fill(btnX, sendBtnY + 17, btnX + btnW, sendBtnY + 18, 0xFF444444);
+        String sendLabel = "Send";
+        g.drawString(font, sendLabel,
+                btnX + (btnW - font.width(sendLabel)) / 2,
+                sendBtnY + (18 - font.lineHeight) / 2,
+                0xFFFFFFFF, false);
     }
 
     private void drawInvitePanel(GuiGraphics g, int mouseX, int mouseY,
@@ -882,51 +1062,164 @@ public class CustomGuiScreen extends Screen {
 
     private void drawMembersTab(GuiGraphics g, int mouseX, int mouseY,
                                 int cX, int contentY, int cW, int contentH) {
-        java.util.List<String> members = HouseData.getHouseMembers();
+        java.util.List<HouseData.MemberEntry> members = HouseData.getHouseMembers();
+        boolean founder = HouseData.isFounder();
 
-        // Member list
-        int listX = cX + cW / 8;
-        int listY = contentY + 5;
-        int lh    = font.lineHeight + 4;
+        // ── Confirmation dialogs drawn over everything ────────────────────────────
+        if (showingLeaveConfirm) {
+            drawConfirmDialog(g, mouseX, mouseY, cX, contentY, cW, contentH,
+                    "Are you sure you want to leave this house?");
+            return;
+        }
+        if (kickTargetUUID != null) {
+            drawConfirmDialog(g, mouseX, mouseY, cX, contentY, cW, contentH,
+                    "Are you sure you want to kick " + kickTargetUsername + "?");
+            return;
+        }
+
+        // ── Leave button — members only, in the corner button position ────────────
+        // Founder never sees it. Member sees it instead of Invite/Edit.
+        if (!founder) {
+            int leaveBtnX = cX + cW - 60;
+            int leaveBtnY = (contentY - 18) - 30; // same Y as corner buttons
+            if (leaveButton == null) {
+                leaveButton = net.minecraft.client.gui.components.Button.builder(
+                        net.minecraft.network.chat.Component.literal("Leave"), btn -> {
+                            showingLeaveConfirm = true;
+                            playButtonSound();
+                        }).bounds(leaveBtnX, leaveBtnY, 44, 16).build();
+                addWidget(leaveButton);
+            }
+            leaveButton.render(g, mouseX, mouseY, 0);
+        } else {
+            removeWidgetIfPresent(leaveButton, () -> leaveButton = null);
+        }
+
+        // ── Member list ───────────────────────────────────────────────────────────
+        int safeLeft  = cX + 90;
+        int safeRight = cX + cW - 90;
+        int safeW     = safeRight - safeLeft;
+        int faceSize  = 16;
+        int rowH      = faceSize + 6;
+        int listY     = contentY + 10;
 
         if (members.isEmpty()) {
-            String empty = "No members online";
-            g.drawString(font, empty, cX + (cW - font.width(empty)) / 2, listY + 10, 0xFF666666, false);
-        } else {
-            for (int i = 0; i < members.size(); i++) {
-                if (listY + (i * lh) > contentY + contentH - 40) break;
-                g.drawString(font, "• " + members.get(i), listX, listY + (i * lh), SUBMENU_TEXT_COLOR, false);
+            String empty = "No members found";
+            g.drawString(font, empty,
+                    safeLeft + (safeW - font.width(empty)) / 2,
+                    listY + 10, 0xFF666666, false);
+            return;
+        }
+
+        for (int i = 0; i < members.size(); i++) {
+            int rowY = listY + (i * rowH);
+            if (rowY + rowH > contentY + contentH - 10) break;
+
+            HouseData.MemberEntry entry = members.get(i);
+            boolean isSelf = minecraft.player != null
+                    && minecraft.player.getUUID().equals(entry.uuid);
+
+            int nameW = font.width(entry.username);
+            int rowW  = faceSize + 6 + nameW;
+            int rowX  = safeLeft + (safeW - rowW) / 2;
+
+            // Resolve skin
+            net.minecraft.resources.ResourceLocation skinTex = null;
+            if (minecraft.level != null) {
+                for (net.minecraft.client.player.AbstractClientPlayer p : minecraft.level.players()) {
+                    if (p.getUUID().equals(entry.uuid)) {
+                        skinTex = p.getSkin().texture();
+                        entry.skinTexture = skinTex;
+                        break;
+                    }
+                }
+            }
+            if (skinTex == null && entry.skinTexture != null) skinTex = entry.skinTexture;
+            if (skinTex == null && minecraft.getSkinManager() != null) {
+                com.mojang.authlib.GameProfile profile =
+                        new com.mojang.authlib.GameProfile(entry.uuid, entry.username);
+                minecraft.getSkinManager().getOrLoad(profile).thenAccept(skins -> {
+                    net.minecraft.resources.ResourceLocation r = skins.texture();
+                    if (r != null) entry.skinTexture = r;
+                });
+            }
+
+            if (skinTex != null) {
+                g.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                        skinTex, rowX, rowY, 8.0f, 8.0f, faceSize, faceSize, 8, 8, 64, 64);
+                g.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                        skinTex, rowX, rowY, 40.0f, 8.0f, faceSize, faceSize, 8, 8, 64, 64);
+            } else {
+                g.fill(rowX, rowY, rowX + faceSize, rowY + faceSize, 0xFF888888);
+                g.fill(rowX + 1, rowY + 1, rowX + faceSize - 1, rowY + faceSize - 1, 0xFFAAAAAA);
+            }
+
+            int nameColor = isSelf ? 0xFF4CAF50 : SUBMENU_TEXT_COLOR;
+            g.drawString(font, entry.username,
+                    rowX + faceSize + 6,
+                    rowY + (faceSize - font.lineHeight) / 2,
+                    nameColor, false);
+
+            // Red X — founder only, not on self
+            if (founder && !isSelf) {
+                int xBtnSize = 12;
+                int xBtnX    = rowX + faceSize + 6 + nameW + 6;
+                int xBtnY    = rowY + (faceSize - xBtnSize) / 2;
+                g.fill(xBtnX, xBtnY, xBtnX + xBtnSize, xBtnY + xBtnSize, 0xFFAA0000);
+                g.fill(xBtnX, xBtnY, xBtnX + xBtnSize, xBtnY + 1,        0xFFCC4444);
+                g.fill(xBtnX, xBtnY, xBtnX + 1,        xBtnY + xBtnSize, 0xFFCC4444);
+                g.fill(xBtnX + xBtnSize - 1, xBtnY, xBtnX + xBtnSize, xBtnY + xBtnSize, 0xFF660000);
+                g.fill(xBtnX, xBtnY + xBtnSize - 1, xBtnX + xBtnSize, xBtnY + xBtnSize, 0xFF660000);
+                g.pose().pushPose();
+                g.pose().scale(0.7f, 0.7f, 1.0f);
+                g.drawString(font, "X",
+                        (int)((xBtnX + (xBtnSize - (int)(font.width("X") * 0.7f)) / 2) / 0.7f),
+                        (int)((xBtnY + (xBtnSize - (int)(font.lineHeight * 0.7f)) / 2) / 0.7f),
+                        0xFFFFFFFF, false);
+                g.pose().popPose();
             }
         }
-
-        // Invite section at bottom
-        int inviteAreaY = contentY + contentH - 30;
-        g.fill(cX + cW / 10, inviteAreaY - 5, cX + cW - cW / 10, inviteAreaY - 4, SUBMENU_TEXT_COLOR);
-
-        if (inviteEditBox == null) {
-            inviteEditBox = new net.minecraft.client.gui.components.EditBox(
-                    font, cX + cW / 8, inviteAreaY, (int)(cW * 0.55f), 18,
-                    net.minecraft.network.chat.Component.literal("Player name"));
-            inviteEditBox.setMaxLength(40);
-            inviteEditBox.setHint(net.minecraft.network.chat.Component.literal("Enter player name..."));
-            addWidget(inviteEditBox);
-        }
-        if (inviteButton == null) {
-            inviteButton = net.minecraft.client.gui.components.Button.builder(
-                    net.minecraft.network.chat.Component.literal("Invite"), button -> {
-                        String target = inviteEditBox.getValue().trim();
-                        if (!target.isEmpty()) {
-                            net.neoforged.neoforge.network.PacketDistributor.sendToServer(
-                                    new net.darkflameproduction.agotmod.network.SendHouseInvitePacket(target));
-                            inviteEditBox.setValue("");
-                            playButtonSound();
-                        }
-                    }).bounds(cX + cW - cW / 8 - 55, inviteAreaY, 55, 18).build();
-            addWidget(inviteButton);
-        }
-        if (inviteEditBox != null) inviteEditBox.render(g, mouseX, mouseY, 0);
-        if (inviteButton  != null) inviteButton.render(g, mouseX, mouseY, 0);
     }
+
+    private void drawConfirmDialog(GuiGraphics g, int mouseX, int mouseY,
+                                   int cX, int contentY, int cW, int contentH,
+                                   String question) {
+        // Dim background
+        g.fill(cX, contentY, cX + cW, contentY + contentH, 0xA0000000);
+
+        int dialogW = 200;
+        int dialogH = 70;
+        int dialogX = cX + (cW - dialogW) / 2;
+        int dialogY = contentY + (contentH - dialogH) / 2;
+
+        // Dialog box
+        g.fill(dialogX, dialogY, dialogX + dialogW, dialogY + dialogH, 0xFF2A2A2A);
+        g.fill(dialogX, dialogY, dialogX + dialogW, dialogY + 1, 0xFF888888);
+        g.fill(dialogX, dialogY, dialogX + 1, dialogY + dialogH, 0xFF888888);
+        g.fill(dialogX + dialogW - 1, dialogY, dialogX + dialogW, dialogY + dialogH, 0xFF444444);
+        g.fill(dialogX, dialogY + dialogH - 1, dialogX + dialogW, dialogY + dialogH, 0xFF444444);
+
+        // Question text — wrap if needed
+        int textX = dialogX + 10;
+        int textY = dialogY + 10;
+        g.pose().pushPose();
+        g.pose().scale(0.85f, 0.85f, 1.0f);
+        g.drawString(font, question,
+                (int)(textX / 0.85f), (int)(textY / 0.85f), 0xFFFFFFFF, false);
+        g.pose().popPose();
+
+        // Yes / No buttons
+        int btnW = 60, btnH = 18;
+        int yesX = dialogX + dialogW / 2 - btnW - 6;
+        int noX  = dialogX + dialogW / 2 + 6;
+        int btnY = dialogY + dialogH - btnH - 8;
+
+        drawSimpleButton(g, yesX, btnY, btnW, btnH, "Yes", 0xFF2E7D32);
+        drawSimpleButton(g, noX,  btnY, btnW, btnH, "No",  0xFF8B0000);
+    }
+
+
+
 
     private void drawTab(GuiGraphics g, int mouseX, int mouseY,
                          int x, int y, int w, int h, String label, boolean selected) {
@@ -1034,37 +1327,96 @@ public class CustomGuiScreen extends Screen {
     private void drawOwnedTownsSection(GuiGraphics g, int x, int y, int w, int h) {
         String title = "Owned Towns";
         int tw = (int)(font.width(title) * 1.1f);
+
+        // Title
         g.pose().pushPose();
         g.pose().scale(1.1f, 1.1f, 1.0f);
-        g.drawString(font, title, (int)((x + (w - tw) / 2) / 1.1f), (int)(y / 1.1f), SUBMENU_TEXT_COLOR, false);
+        g.drawString(
+                font,
+                title,
+                (int)((x + (w - tw) / 2) / 1.1f),
+                (int)(y / 1.1f),
+                SUBMENU_TEXT_COLOR,
+                false
+        );
         g.pose().popPose();
-        g.fill(x + w/8, y + (int)(font.lineHeight * 1.1f) + 5, x + w - w/8, y + (int)(font.lineHeight * 1.1f) + 6, SUBMENU_TEXT_COLOR);
 
-        int listY = y + (int)(font.lineHeight * 1.1f) + 15;
+        // Separator line
+        int separatorY = y + (int)(font.lineHeight * 1.1f) + 5;
+        g.fill(
+                x + w / 8,
+                separatorY,
+                x + w - w / 8,
+                separatorY + 1,
+                SUBMENU_TEXT_COLOR
+        );
+
+        int listY = separatorY + 10;
         java.util.List<SyncOwnedTownsPacket.TownInfo> towns = HouseData.getOwnedTowns();
 
         if (towns.isEmpty()) {
             String empty = "No towns claimed";
-            g.drawString(font, empty, x + (w - font.width(empty)) / 2, listY + 20, 0xFF666666, false);
-        } else {
-            int curY = listY;
-            int lh   = font.lineHeight + 4;
-            for (SyncOwnedTownsPacket.TownInfo town : towns) {
-                if (curY + lh > y + h) break;
-                String text = town.townName() + " - Population: " + town.population();
-                int color = town.population() >= 100 ? 0xFF2E7D32 : town.population() >= 50 ? 0xFF1565C0 : town.population() >= 20 ? 0xFF6A4C93 : SUBMENU_TEXT_COLOR;
-                g.drawString(font, text, x + (w - font.width(text)) / 2, curY, color, false);
-                curY += lh;
-            }
-            if (towns.size() > 1) {
-                int total = towns.stream().mapToInt(SyncOwnedTownsPacket.TownInfo::population).sum();
-                String totalText = "Total Population: " + total;
-                g.fill(x + w/6, curY + 5, x + w - w/6, curY + 6, SUBMENU_TEXT_COLOR);
-                g.pose().pushPose();
-                g.pose().scale(0.9f, 0.9f, 1.0f);
-                g.drawString(font, totalText, (int)((x + (w - font.width(totalText)) / 2) / 0.9f), (int)((curY + 10) / 0.9f), 0xFF1A237E, false);
-                g.pose().popPose();
-            }
+            g.drawString(
+                    font,
+                    empty,
+                    x + (w - font.width(empty)) / 2,
+                    listY + 20,
+                    0xFF666666,
+                    false
+            );
+            return;
+        }
+
+        int curY = listY;
+        int lineHeight = font.lineHeight + 4;
+
+        for (SyncOwnedTownsPacket.TownInfo town : towns) {
+            // Prevent drawing into button area
+            if (curY + lineHeight > y + h - 20) break;
+
+            String text = town.townName() + " - Population: " + town.population();
+
+            int color =
+                    town.population() >= 100 ? 0xFF2E7D32 :
+                            town.population() >= 50 ? 0xFF1565C0 :
+                                    town.population() >= 20 ? 0xFF6A4C93 :
+                                            SUBMENU_TEXT_COLOR;
+
+            g.drawString(
+                    font,
+                    text,
+                    x + (w - font.width(text)) / 2,
+                    curY,
+                    color,
+                    false
+            );
+
+            curY += lineHeight;
+        }
+        // Total population footer
+        if (towns.size() > 1 && curY + 18 < y + h) {
+            int total = towns.stream()
+                    .mapToInt(SyncOwnedTownsPacket.TownInfo::population)
+                    .sum();
+            String totalText = "Total Population: " + total;
+            g.fill(
+                    x + w / 6,
+                    curY + 5,
+                    x + w - w / 6,
+                    curY + 6,
+                    SUBMENU_TEXT_COLOR
+            );
+            g.pose().pushPose();
+            g.pose().scale(0.9f, 0.9f, 1.0f);
+            g.drawString(
+                    font,
+                    totalText,
+                    (int)((x + (w - font.width(totalText)) / 2) / 0.9f),
+                    (int)((curY + 10) / 0.9f),
+                    0xFF1A237E,
+                    false
+            );
+            g.pose().popPose();
         }
     }
 

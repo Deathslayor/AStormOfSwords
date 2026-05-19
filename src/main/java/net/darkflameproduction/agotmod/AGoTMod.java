@@ -3,6 +3,7 @@ package net.darkflameproduction.agotmod;
 import dev.tocraft.ctgen.impl.CTGClient;
 import net.darkflameproduction.agotmod.client.ClientKeyInputEvents;
 import net.darkflameproduction.agotmod.client.ModAttachments;
+import net.darkflameproduction.agotmod.client.particle.WeirwoodLeavesParticle;
 import net.darkflameproduction.agotmod.command.SetHouseBannerCommand;
 import net.darkflameproduction.agotmod.gui.CustomGuiScreen;
 import net.darkflameproduction.agotmod.init.ModMenuTypes;
@@ -278,7 +279,7 @@ public class AGoTMod {
         public static void registerParticleProviders(RegisterParticleProvidersEvent event) {
             event.registerSpriteSet(
                     ModParticles.WEIRWOOD_LEAVES.get(),
-                    net.darkflameproduction.agotmod.client.particle.WeirwoodLeavesParticle.Provider::new
+                    WeirwoodLeavesParticle.Provider::new
             );
         }
     }

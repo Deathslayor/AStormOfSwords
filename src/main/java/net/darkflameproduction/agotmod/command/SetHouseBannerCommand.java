@@ -1,10 +1,10 @@
-
-// Updated SetHouseBannerCommand.java
 package net.darkflameproduction.agotmod.command;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import net.darkflameproduction.agotmod.AGoTMod;
+import net.darkflameproduction.agotmod.data.HouseSavedData;
+import net.darkflameproduction.agotmod.network.ServerHouseHandler;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.nbt.CompoundTag;
@@ -13,6 +13,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.BannerItem;
 import net.minecraft.world.item.ItemStack;
+
+import java.util.UUID;
 
 public class SetHouseBannerCommand {
 
@@ -29,55 +31,43 @@ public class SetHouseBannerCommand {
             return 0;
         }
 
+        UUID houseUUID = ServerHouseHandler.getPlayerHouseUUID(player);
+        if (houseUUID == null) {
+            player.sendSystemMessage(Component.literal(
+                    "You must set a house name before you can set a house banner!"));
+            return 0;
+        }
+
+        // Only the founder can set the banner
+        UUID founderUUID = HouseSavedData.get(player.getServer()).getFounderUUID(houseUUID);
+        if (!player.getUUID().equals(founderUUID)) {
+            player.sendSystemMessage(Component.literal(
+                    "Only the head of the house can set the house banner!"));
+            return 0;
+        }
+
         ItemStack heldItem = player.getMainHandItem();
-
-        // Check if player is holding a banner
         if (!(heldItem.getItem() instanceof BannerItem)) {
-            player.sendSystemMessage(Component.literal("You must be holding a banner to set it as your house banner!"));
+            player.sendSystemMessage(Component.literal(
+                    "You must be holding a banner to set it as your house banner!"));
             return 0;
         }
 
-        // Check if player has a house name
-        CompoundTag persistentData = player.getPersistentData();
-        String houseName = "";
-        if (persistentData.contains(AGoTMod.MOD_ID + ".house")) {
-            CompoundTag houseTag = persistentData.getCompound(AGoTMod.MOD_ID + ".house");
-            if (houseTag.contains("house_name")) {
-                houseName = houseTag.getString("house_name");
-            }
-        }
-
-        if (houseName.isEmpty()) {
-            player.sendSystemMessage(Component.literal("You must set a house name before you can set a house banner!"));
-            return 0;
-        }
-
-        // Save banner data using the proper method
         Tag bannerTagRaw = heldItem.saveOptional(player.registryAccess());
         CompoundTag bannerTag;
-
-        if (bannerTagRaw instanceof CompoundTag) {
-            bannerTag = (CompoundTag) bannerTagRaw;
+        if (bannerTagRaw instanceof CompoundTag ct) {
+            bannerTag = ct;
         } else {
-            // Fallback to the old method if saveOptional doesn't return CompoundTag
             bannerTag = new CompoundTag();
             heldItem.save(player.registryAccess(), bannerTag);
         }
 
-        // Debug logging
-        AGoTMod.LOGGER.info("Saving banner for player {}: {}", player.getName().getString(), bannerTag.toString());
+        AGoTMod.LOGGER.info("Saving banner for house UUID {}: {}", houseUUID, bannerTag);
 
-        // Save banner data to UUID-based storage instead of house
-        String playerUUID = player.getUUID().toString();
-        CompoundTag bannerStorage = new CompoundTag();
-        bannerStorage.put("house_banner", bannerTag);
-        persistentData.put(AGoTMod.MOD_ID + ".player_banner_" + playerUUID, bannerStorage);
-
-        player.sendSystemMessage(Component.literal("House banner set successfully for House " + houseName + "!"));
-
-        AGoTMod.LOGGER.info("Player {} (UUID: {}) set house banner for House {}",
-                player.getName().getString(), playerUUID, houseName);
-
+        ServerHouseHandler.saveBannerForHouse(player.getServer(), houseUUID, bannerTag);
+        player.sendSystemMessage(Component.literal(
+                "House banner set successfully for House "
+                        + ServerHouseHandler.getOnlinePlayerHouseName(player) + "!"));
         return 1;
     }
 }
