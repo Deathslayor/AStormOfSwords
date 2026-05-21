@@ -3,6 +3,10 @@ package net.darkflameproduction.agotmod.block;// Importing necessary classes fro
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.block.custom.*;
 import net.darkflameproduction.agotmod.block.custom.BarleyCropBlock;
+import net.darkflameproduction.agotmod.block.custom.barrel.BarrelDummyBlock;
+import net.darkflameproduction.agotmod.block.custom.barrel.BarrelLargeBlock;
+import net.darkflameproduction.agotmod.block.custom.barrel.BarrelMediumBlock;
+import net.darkflameproduction.agotmod.block.custom.barrel.BarrelSmallBlock;
 import net.darkflameproduction.agotmod.block.custom.furniture.ArmChairBlock;
 import net.darkflameproduction.agotmod.block.custom.furniture.ChairBlock;
 import net.darkflameproduction.agotmod.block.custom.furniture.StoolBlock;
@@ -1011,8 +1015,8 @@ public class ModBLocks {
     public static final DeferredBlock<Block> DIRT_PATH_SLAB = registerBlock("dirt_path_slab", SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT_PATH), true);
 
     public static final DeferredBlock<Block> PEAT = registerBlock("peat", ModFlammablePlanks::new, BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT), true);
-    public static final DeferredBlock<Block> HEARTH_BLOCK = registerBlock("hearth_block", Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.MAGMA_BLOCK), true);
-
+    public static final DeferredBlock<Block> HEARTH_BLOCK = registerBlock("hearth_block",
+            HearthBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.MAGMA_BLOCK), true);
 
     public static final DeferredBlock<Block> THATCH_BLOCK = registerBlock("thatch_block", ModFlammableRotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.HAY_BLOCK).strength(3f), true);
     public static final DeferredBlock<Block> THATCH_STAIRS = registerBlock("thatch_stairs", properties -> new StairBlock(ModBLocks.THATCH_BLOCK.get().defaultBlockState(), properties), BlockBehaviour.Properties.ofFullCopy(Blocks.HAY_BLOCK), true);
@@ -2585,6 +2589,34 @@ public class ModBLocks {
             StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
     public static final DeferredBlock<Block> BLUE_SOLDIER_PINE_STOOL = registerBlock("blue_soldier_pine_stool",
             StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+
+    public static final DeferredBlock<Block> BARREL_LARGE = registerBlock("barrel_large",
+            BarrelLargeBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion()
+                    .isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+
+    public static final DeferredBlock<Block> BARREL_MEDIUM = registerBlock("barrel_medium",
+            BarrelMediumBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion()
+                    .isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+
+    public static final DeferredBlock<Block> BARREL_SMALL = registerBlock("barrel_small",
+            BarrelSmallBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion()
+                    .isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+
+    // Invisible dummy block — no item, no loot table needed
+    public static final DeferredBlock<Block> BARREL_DUMMY = registerBlock("barrel_dummy",
+            BarrelDummyBlock::new,
+            BlockBehaviour.Properties.of()
+                    .strength(-1.0f, 3600000.0f)  // unbreakable in survival, like barrier
+                    .noOcclusion()
+                    .noCollission()                 // no collision so it doesn't interfere
+                    .isSuffocating((s,l,p) -> false)
+                    .isViewBlocking((s,l,p) -> false),
+            false);
+
+
 
     public static final DeferredBlock<Block> DARK_OAK_CHAIR = registerBlock("dark_oak_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
     public static final DeferredBlock<Block> OAK_CHAIR = registerBlock("oak_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);

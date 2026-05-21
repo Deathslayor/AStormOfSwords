@@ -453,7 +453,7 @@ public class TownHallScreen extends Screen {
     private void drawFooter(GuiGraphics g, int px, int py, int pw, int ph) {
         g.fill(px + pw / 8, py + ph - 50, px + pw - pw / 8, py + ph - 49, 0x80000000);
         String hint = isClaimed
-                ? "Claimed by House " + claimedByHouse
+                ? "Claimed by " + claimedByHouse
                 : "Right-click to claim this town as your own";
         int hintColor = isClaimed ? COLOR_BLUE : COLOR_GRAY;
         int hintW = font.width(hint);

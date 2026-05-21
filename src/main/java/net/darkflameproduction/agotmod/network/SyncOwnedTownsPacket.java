@@ -10,9 +10,9 @@ import net.minecraft.resources.ResourceLocation;
 import java.util.List;
 
 public record SyncOwnedTownsPacket(List<TownInfo> towns) implements CustomPacketPayload {
+
     public static final Type<SyncOwnedTownsPacket> TYPE = new Type<>(
-            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "sync_owned_towns")
-    );
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "sync_owned_towns"));
 
     public static final StreamCodec<FriendlyByteBuf, SyncOwnedTownsPacket> STREAM_CODEC = StreamCodec.composite(
             TownInfo.STREAM_CODEC.apply(ByteBufCodecs.list()),
@@ -21,16 +21,18 @@ public record SyncOwnedTownsPacket(List<TownInfo> towns) implements CustomPacket
     );
 
     @Override
-    public Type<? extends CustomPacketPayload> type() {
-        return TYPE;
-    }
+    public Type<? extends CustomPacketPayload> type() { return TYPE; }
 
-    public record TownInfo(String townName, int population) {
+    /**
+     * townName    — display name of the town
+     * population  — citizen count
+     * ownerString — "PlayerName of House HouseName" or just "PlayerName"
+     */
+    public record TownInfo(String townName, int population, String ownerString) {
         public static final StreamCodec<FriendlyByteBuf, TownInfo> STREAM_CODEC = StreamCodec.composite(
-                ByteBufCodecs.STRING_UTF8,
-                TownInfo::townName,
-                ByteBufCodecs.VAR_INT,
-                TownInfo::population,
+                ByteBufCodecs.STRING_UTF8, TownInfo::townName,
+                ByteBufCodecs.VAR_INT,     TownInfo::population,
+                ByteBufCodecs.STRING_UTF8, TownInfo::ownerString,
                 TownInfo::new
         );
     }

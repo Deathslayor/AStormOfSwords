@@ -1,6 +1,8 @@
 package net.darkflameproduction.agotmod.client.town;
 
 import net.darkflameproduction.agotmod.client.overlay.TownNotificationOverlay;
+import net.darkflameproduction.agotmod.network.EnterTownPacket;
+import net.darkflameproduction.agotmod.network.LeaveTownPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
@@ -20,30 +22,31 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ClientTownAreaManager {
 
     private static final int CHECK_INTERVAL = 20;
-    private static final int SCAN_HEIGHT = 64;
+    private static final int SCAN_HEIGHT    = 64;
 
     private static final Map<BlockPos, TownAreaData> townAreas = new ConcurrentHashMap<>();
 
-    private static BlockPos currentTownPos = null;
-    private static String currentTownName = null;
-    private static int tickCounter = 0;
+    private static BlockPos currentTownPos  = null;
+    private static String   currentTownName = null;
+    private static int      tickCounter     = 0;
 
-    private static BlockPos pendingEntryTownPos = null;
+    private static BlockPos     pendingEntryTownPos  = null;
     private static TownAreaData pendingEntryTownData = null;
 
     public static class TownAreaData {
-        public final String townName;
+        public final String  townName;
         public final boolean isClaimed;
-        public final String claimedByHouse;
-        public final int population;
-        public final int radius;
+        public final String  claimedByHouse;
+        public final int     population;
+        public final int     radius;
 
-        public TownAreaData(String townName, boolean isClaimed, String claimedByHouse, int population, int radius) {
-            this.townName = townName;
-            this.isClaimed = isClaimed;
+        public TownAreaData(String townName, boolean isClaimed, String claimedByHouse,
+                            int population, int radius) {
+            this.townName      = townName;
+            this.isClaimed     = isClaimed;
             this.claimedByHouse = claimedByHouse;
-            this.population = population;
-            this.radius = radius;
+            this.population    = population;
+            this.radius        = radius;
         }
     }
 
@@ -57,12 +60,13 @@ public class ClientTownAreaManager {
         TownAreaData removed = townAreas.remove(pos);
         if (removed != null && pos.equals(currentTownPos)) {
             TownNotificationOverlay.showExitMessage(removed.townName);
-            currentTownPos = null;
+            sendLeaveTownPacket();
+            currentTownPos  = null;
             currentTownName = null;
         }
     }
 
-    public static boolean hasTownAt(BlockPos pos) { return townAreas.containsKey(pos); }
+    public static boolean      hasTownAt(BlockPos pos)    { return townAreas.containsKey(pos); }
     public static TownAreaData getTownDataAt(BlockPos pos) { return townAreas.get(pos); }
     public static Map<BlockPos, TownAreaData> getAllTownAreas() { return new HashMap<>(townAreas); }
 
@@ -87,45 +91,64 @@ public class ClientTownAreaManager {
         Player player = mc.player;
         if (player == null) return;
 
-        BlockPos playerPos = player.blockPosition();
+        BlockPos playerPos    = player.blockPosition();
         BlockPos foundTownPos = null;
         TownAreaData foundTownData = null;
 
         for (Map.Entry<BlockPos, TownAreaData> entry : townAreas.entrySet()) {
             if (isPlayerInTownArea(playerPos, entry.getKey(), entry.getValue().radius)) {
-                foundTownPos = entry.getKey();
+                foundTownPos  = entry.getKey();
                 foundTownData = entry.getValue();
                 break;
             }
         }
 
         if (foundTownPos != null && !foundTownPos.equals(currentTownPos)) {
+            // Leaving old town (if any)
             if (currentTownPos != null) {
                 TownAreaData oldData = townAreas.get(currentTownPos);
                 TownNotificationOverlay.showExitMessage(oldData != null ? oldData.townName : currentTownName);
+                sendLeaveTownPacket();
+
                 pendingEntryTownPos  = foundTownPos;
                 pendingEntryTownData = foundTownData;
                 currentTownPos  = foundTownPos;
                 currentTownName = foundTownData.townName;
                 return;
             }
-            String houseName = foundTownData.isClaimed ? foundTownData.claimedByHouse : null;
-            TownNotificationOverlay.showEntryMessage(foundTownData.townName, houseName, foundTownData.population);
+
+            // Entering new town
+            String ownerDisplay = foundTownData.isClaimed ? foundTownData.claimedByHouse : null;
+            TownNotificationOverlay.showEntryMessage(foundTownData.townName, ownerDisplay, foundTownData.population);
+            sendEnterTownPacket(foundTownData);
             currentTownPos  = foundTownPos;
             currentTownName = foundTownData.townName;
 
         } else if (foundTownPos == null && currentTownPos != null) {
+            // Left all towns
             TownNotificationOverlay.showExitMessage(currentTownName);
+            sendLeaveTownPacket();
             currentTownPos  = null;
             currentTownName = null;
         }
 
+        // Deferred entry after town-to-town transition
         if (pendingEntryTownPos != null && pendingEntryTownData != null) {
-            String houseName = pendingEntryTownData.isClaimed ? pendingEntryTownData.claimedByHouse : null;
-            TownNotificationOverlay.showEntryMessage(pendingEntryTownData.townName, houseName, pendingEntryTownData.population);
+            String ownerDisplay = pendingEntryTownData.isClaimed ? pendingEntryTownData.claimedByHouse : null;
+            TownNotificationOverlay.showEntryMessage(pendingEntryTownData.townName, ownerDisplay, pendingEntryTownData.population);
+            sendEnterTownPacket(pendingEntryTownData);
             pendingEntryTownPos  = null;
             pendingEntryTownData = null;
         }
+    }
+
+    private static void sendEnterTownPacket(TownAreaData data) {
+        net.neoforged.neoforge.network.PacketDistributor.sendToServer(
+                new EnterTownPacket(data.isClaimed, data.claimedByHouse != null ? data.claimedByHouse : ""));
+    }
+
+    private static void sendLeaveTownPacket() {
+        net.neoforged.neoforge.network.PacketDistributor.sendToServer(new LeaveTownPacket());
     }
 
     private static boolean isPlayerInTownArea(BlockPos playerPos, BlockPos townHallPos, int radius) {

@@ -82,11 +82,11 @@ public class TownNotificationOverlay {
                 (guiGraphics, deltaTracker) -> renderTownNotification(guiGraphics, deltaTracker));
     }
 
-    public static void showEntryMessage(String townName, String houseName, int population) {
+    public static void showEntryMessage(String townName, String ownerString, int population) {
         currentMessage    = "You Have Entered " + townName;
-        currentHouseName  = houseName != null ? houseName.toLowerCase().trim() : "";
-        currentOwnership  = (houseName != null && !houseName.trim().isEmpty())
-                ? "Owned By House " + houseName : "Unclaimed Territory";
+        currentHouseName  = ownerString != null ? ownerString.toLowerCase().trim() : "";
+        currentOwnership  = (ownerString != null && !ownerString.trim().isEmpty())
+                ? "Owned By " + ownerString : "Unclaimed Territory";
         currentPopulation = "Population: " + population;
         messageStartTime  = System.currentTimeMillis();
     }

@@ -185,5 +185,16 @@ public class ModNetworking {
                 (packet, context) -> context.enqueueWork(() ->
                         HouseData.setIsFounder(packet.isFounder()))
         );
+
+        registrar.playToServer(
+                EnterTownPacket.TYPE,
+                EnterTownPacket.STREAM_CODEC,
+                EnterTownPacket::handle
+        );
+        registrar.playToServer(
+                LeaveTownPacket.TYPE,
+                LeaveTownPacket.STREAM_CODEC,
+                LeaveTownPacket::handle
+        );
     }
 }

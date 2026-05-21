@@ -1749,7 +1749,9 @@ public class ModItems {
     public static final DeferredItem<Item> SOLDIER_PINE_STOOL = ITEMS.registerItem("soldier_pine_stool", p -> new BlockItem(ModBLocks.SOLDIER_PINE_STOOL.get(), p));
     public static final DeferredItem<Item> BLUE_SOLDIER_PINE_STOOL = ITEMS.registerItem("blue_soldier_pine_stool", p -> new BlockItem(ModBLocks.BLUE_SOLDIER_PINE_STOOL.get(), p));
 
-
+    public static final DeferredItem<Item> BARREL_LARGE  = ITEMS.registerItem("barrel_large",  p -> new BlockItem(ModBLocks.BARREL_LARGE.get(),  p));
+    public static final DeferredItem<Item> BARREL_MEDIUM = ITEMS.registerItem("barrel_medium", p -> new BlockItem(ModBLocks.BARREL_MEDIUM.get(), p));
+    public static final DeferredItem<Item> BARREL_SMALL  = ITEMS.registerItem("barrel_small",  p -> new BlockItem(ModBLocks.BARREL_SMALL.get(),  p));
 
     public static final DeferredItem<Item> DARK_OAK_CHAIR = ITEMS.registerItem("dark_oak_chair", p -> new BlockItem(ModBLocks.DARK_OAK_CHAIR.get(), p));
     public static final DeferredItem<Item> OAK_CHAIR = ITEMS.registerItem("oak_chair", p -> new BlockItem(ModBLocks.OAK_CHAIR.get(), p));

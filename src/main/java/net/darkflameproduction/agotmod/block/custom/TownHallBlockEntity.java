@@ -187,25 +187,59 @@ public class TownHallBlockEntity extends BlockEntity implements
         return isClaimed;
     }
 
-    // Updated getClaimedByHouse to be dynamic
     public String getClaimedByHouse() {
-        if (!isClaimed || claimedByPlayerUUID == null) {
-            return "";
-        }
+        if (!isClaimed || claimedByPlayerUUID == null) return "";
 
-        // Get the current house name of the claiming player
         if (level != null && level.getServer() != null) {
             ServerPlayer player = level.getServer().getPlayerList().getPlayer(claimedByPlayerUUID);
             if (player != null) {
-                // Player is online - get their current house name
-                return getPlayerHouseName(player);
+                return buildOwnerString(player.getGameProfile().getName(), getPlayerHouseName(player));
             } else {
-                // Player is offline - load their data from file
-                return getOfflinePlayerHouseName(claimedByPlayerUUID);
+                String[] data = getOfflinePlayerNameAndHouse(claimedByPlayerUUID);
+                return buildOwnerString(data[0], data[1]);
             }
         }
+        return "";
+    }
 
-        return ""; // Fallback
+    private String[] getOfflinePlayerNameAndHouse(UUID playerUUID) {
+        try {
+            Path worldPath  = level.getServer().getWorldPath(LevelResource.ROOT);
+            Path playerFile = worldPath.resolve("playerdata").resolve(playerUUID + ".dat");
+
+            if (Files.exists(playerFile)) {
+                CompoundTag playerData = NbtIo.readCompressed(playerFile, NbtAccounter.unlimitedHeap());
+
+                CompoundTag houseTag = null;
+                if (playerData.contains("ForgeCaps")) {
+                    CompoundTag caps = playerData.getCompound("ForgeCaps");
+                    if (caps.contains("agotmod.house")) houseTag = caps.getCompound("agotmod.house");
+                }
+                if (houseTag == null && playerData.contains("agotmod.house")) {
+                    houseTag = playerData.getCompound("agotmod.house");
+                }
+
+                String houseName = "";
+                if (houseTag != null && houseTag.contains("house_name")) {
+                    houseName = houseTag.getString("house_name");
+                }
+
+                String username = playerUUID.toString();
+                if (level.getServer().getProfileCache() != null) {
+                    com.mojang.authlib.GameProfile profile =
+                            level.getServer().getProfileCache().get(playerUUID).orElse(null);
+                    if (profile != null && profile.getName() != null) username = profile.getName();
+                }
+
+                return new String[]{ username, houseName };
+            }
+        } catch (Exception ignored) {}
+        return new String[]{ playerUUID.toString(), "" };
+    }
+
+    private String buildOwnerString(String playerName, String houseName) {
+        if (houseName == null || houseName.isEmpty()) return playerName;
+        return playerName + " of House " + houseName;
     }
 
     // Add getter for player UUID
@@ -213,18 +247,26 @@ public class TownHallBlockEntity extends BlockEntity implements
         return claimedByPlayerUUID;
     }
 
-    // Updated claimTownHall method
     public boolean claimTownHall(String houseName, UUID playerUUID) {
         if (!isClaimed && houseName != null && !houseName.trim().isEmpty() && playerUUID != null) {
             this.claimedByPlayerUUID = playerUUID;
             this.isClaimed = true;
             setChanged();
 
-            // Send updated data to nearby players
-            if (level != null) {
-                sendDataToClients(level);
+            if (level instanceof ServerLevel sl) {
+                // Resolve house UUID — may be null if player has no house yet
+                ServerPlayer claimingPlayer = sl.getServer().getPlayerList().getPlayer(playerUUID);
+                UUID houseUUID = claimingPlayer != null
+                        ? net.darkflameproduction.agotmod.network.ServerHouseHandler
+                        .getPlayerHouseUUID(claimingPlayer)
+                        : resolveHouseUUIDFromPlayer(sl, playerUUID);
+
+                // Register with houseUUID (null = unclaimed protection still applies)
+                net.darkflameproduction.agotmod.entity.custom.npc.system.protection.TownProtectionZone
+                        .registerZone(this.worldPosition, getCurrentScanRadius(), houseUUID, sl.dimension());
             }
 
+            if (level != null) sendDataToClients(level);
             return true;
         }
         return false;
@@ -1498,13 +1540,56 @@ public class TownHallBlockEntity extends BlockEntity implements
             CharcoalBurnerCollectionTicketSystem.registerListener(this);
             CarpenterCollectionTicketSystem.registerListener(this);
             CarpenterInventoryTicketSystem.registerListener(this);
-            net.darkflameproduction.agotmod.entity.custom.npc.system.trader.TraderInventoryTicketSystem.registerListener(this);
+            net.darkflameproduction.agotmod.entity.custom.npc.system.trader.TraderInventoryTicketSystem
+                    .registerListener(this);
 
-            if (culture != Culture.NONE && level instanceof ServerLevel sl) {
-                net.darkflameproduction.agotmod.entity.custom.npc.system.culture.TownCultureZone.registerZone(
-                        this.worldPosition, getCurrentScanRadius(), culture, sl.dimension());
+            if (level instanceof ServerLevel sl) {
+                if (culture != Culture.NONE) {
+                    net.darkflameproduction.agotmod.entity.custom.npc.system.culture.TownCultureZone
+                            .registerZone(this.worldPosition, getCurrentScanRadius(), culture, sl.dimension());
+                }
+
+                // Always register a protection zone.
+                // Unclaimed towns pass null so nobody except OPs can grief.
+                // Claimed towns pass the owning house UUID.
+                UUID houseUUID = null;
+                if (isClaimed && claimedByPlayerUUID != null) {
+                    houseUUID = resolveHouseUUIDFromPlayer(sl, claimedByPlayerUUID);
+                }
+                net.darkflameproduction.agotmod.entity.custom.npc.system.protection.TownProtectionZone
+                        .registerZone(this.worldPosition, getCurrentScanRadius(), houseUUID, sl.dimension());
             }
         }
+    }
+
+    private UUID resolveHouseUUIDFromPlayer(ServerLevel serverLevel, UUID playerUUID) {
+        ServerPlayer player = serverLevel.getServer().getPlayerList().getPlayer(playerUUID);
+        if (player != null) {
+            return net.darkflameproduction.agotmod.network.ServerHouseHandler.getPlayerHouseUUID(player);
+        }
+
+        try {
+            Path playerFile = serverLevel.getServer()
+                    .getWorldPath(LevelResource.ROOT)
+                    .resolve("playerdata").resolve(playerUUID + ".dat");
+
+            if (Files.exists(playerFile)) {
+                CompoundTag root = NbtIo.readCompressed(playerFile, NbtAccounter.unlimitedHeap());
+
+                CompoundTag houseTag = null;
+                if (root.contains("ForgeCaps")) {
+                    CompoundTag caps = root.getCompound("ForgeCaps");
+                    if (caps.contains("agotmod.house")) houseTag = caps.getCompound("agotmod.house");
+                }
+                if (houseTag == null && root.contains("agotmod.house")) {
+                    houseTag = root.getCompound("agotmod.house");
+                }
+                if (houseTag != null && houseTag.contains("house_uuid")) {
+                    return UUID.fromString(houseTag.getString("house_uuid"));
+                }
+            }
+        } catch (Exception ignored) {}
+        return null;
     }
 
     @Override
@@ -1603,11 +1688,14 @@ public class TownHallBlockEntity extends BlockEntity implements
         CharcoalBurnerCollectionTicketSystem.unregisterListener(this);
         CarpenterCollectionTicketSystem.unregisterListener(this);
         CarpenterInventoryTicketSystem.unregisterListener(this);
-        net.darkflameproduction.agotmod.entity.custom.npc.system.trader.TraderInventoryTicketSystem.unregisterListener(this);
+        net.darkflameproduction.agotmod.entity.custom.npc.system.trader.TraderInventoryTicketSystem
+                .unregisterListener(this);
 
         if (level instanceof ServerLevel sl) {
-            net.darkflameproduction.agotmod.entity.custom.npc.system.culture.TownCultureZone.removeZone(
-                    this.worldPosition, sl.dimension());
+            net.darkflameproduction.agotmod.entity.custom.npc.system.culture.TownCultureZone
+                    .removeZone(this.worldPosition, sl.dimension());
+            net.darkflameproduction.agotmod.entity.custom.npc.system.protection.TownProtectionZone
+                    .removeZone(this.worldPosition, sl.dimension());
         }
 
         if (!level.isClientSide()) {

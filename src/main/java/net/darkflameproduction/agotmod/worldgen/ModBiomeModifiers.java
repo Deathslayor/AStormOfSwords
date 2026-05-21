@@ -36,11 +36,6 @@ public class ModBiomeModifiers {
                 HolderSet.direct(placedFeatures.getOrThrow(ModplacedFeatures.TIN_ORE_PLACED_KEY)),
                 // Specify the generation step for the features (underground ores)
                 GenerationStep.Decoration.UNDERGROUND_ORES));
-        //Spawns Mammoths
-        context.register(CREATE_WEIRWOOD_TREE, new BiomeModifiers.AddFeaturesBiomeModifier(
-                biomes.getOrThrow(Tags.Biomes.IS_PLAINS),
-                HolderSet.direct(placedFeatures.getOrThrow(ModplacedFeatures.WEIRWOOD_KEY)),
-                GenerationStep.Decoration.VEGETAL_DECORATION));
     }
 
     // Helper method to register a ResourceKey for a biome modifier

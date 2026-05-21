@@ -1,4 +1,4 @@
-// 1.21.3	2026-05-16T15:10:08.8017794	Registries
+// 1.21.3	2026-05-19T22:06:46.8548763	Registries
 04959ff97a94a491f8a432926d521f167e9531be data/agotmod/banner_pattern/arryn.json
 e17fd35d2836802979bf988c2a96a06599d04697 data/agotmod/banner_pattern/baelish.json
 e19718623618fa07d759962c4e924b518ca9ca5f data/agotmod/banner_pattern/baratheon.json
@@ -27,7 +27,6 @@ c1383735d8c56ed08120143864ee3ba53ee95e25 data/agotmod/banner_pattern/royce.json
 0f16e15f67fd4a068e09fbe64a47f01019c38c6d data/agotmod/banner_pattern/umber.json
 835e6517ef63d9c923420dac19e536eb3cdadb28 data/agotmod/banner_pattern/velaryon.json
 ffe3d912e363745b0043a61fc7b67f35a53f2228 data/agotmod/neoforge/biome_modifier/add_tin_ore.json
-2cd0b3508ddcea7e502f1cf50b1ab12343351354 data/agotmod/neoforge/biome_modifier/create_weirwood_tree.json
 576010ebb2bb6dc4cf95495e0cf13a86721230ca data/agotmod/worldgen/biome/barrowlands.json
 e059527acc572c0ea48b5dad2abc593e94d8629b data/agotmod/worldgen/biome/frostfangs.json
 04ec8767c3dc82c202e5447d5c973c20ef3e03bb data/agotmod/worldgen/biome/frostfang_foothills.json
@@ -225,8 +224,8 @@ c20fb30f769338c55cb63b102ccb5a1e0aedd181 data/agotmod/worldgen/configured_featur
 c0a5a6ceeb75142cc2c5ef90230647f3b7ff6eaf data/agotmod/worldgen/configured_feature/tin_ore.json
 a68d58de4956fd0f041164993dd677aa99f03226 data/agotmod/worldgen/configured_feature/topaz_ore.json
 f6b25999f2806e2c923788a30fbefa8e870e46e6 data/agotmod/worldgen/configured_feature/tourmaline_ore.json
-3aeb00871bfcea7ce9226fadb2419b07d77d8e08 data/agotmod/worldgen/configured_feature/weirwood.json
-3aeb00871bfcea7ce9226fadb2419b07d77d8e08 data/agotmod/worldgen/configured_feature/weirwood_rare.json
+edcc429c531ea96a6f20a86cf14127cad9b5867a data/agotmod/worldgen/configured_feature/weirwood.json
+edcc429c531ea96a6f20a86cf14127cad9b5867a data/agotmod/worldgen/configured_feature/weirwood_rare.json
 7f01a29796097345a2f55f53a1ebf6f7fcff79ae data/agotmod/worldgen/configured_feature/white_cherry.json
 7f01a29796097345a2f55f53a1ebf6f7fcff79ae data/agotmod/worldgen/configured_feature/white_cherry_rare.json
 5233be702685d9c5b3fb6daeb8859d8e44a8ccf9 data/agotmod/worldgen/configured_feature/white_rose_bush.json

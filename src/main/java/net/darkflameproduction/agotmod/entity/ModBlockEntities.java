@@ -4,6 +4,10 @@ import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.darkflameproduction.agotmod.block.custom.JobBarrelBlockEntity;
 import net.darkflameproduction.agotmod.block.custom.TownHallBlockEntity;
+import net.darkflameproduction.agotmod.block.custom.barrel.BarrelDummyBlockEntity;
+import net.darkflameproduction.agotmod.block.custom.barrel.BarrelLargeBlockEntity;
+import net.darkflameproduction.agotmod.block.custom.barrel.BarrelMediumBlockEntity;
+import net.darkflameproduction.agotmod.block.custom.barrel.BarrelSmallBlockEntity;
 import net.darkflameproduction.agotmod.block.custom.furniture.ArmChairBlockEntity;
 import net.darkflameproduction.agotmod.block.custom.furniture.ChairBlockEntity;
 import net.darkflameproduction.agotmod.block.custom.furniture.StoolBlockEntity;
@@ -102,7 +106,7 @@ public class ModBlockEntities {
                     ModBLocks.YEW_TABLE.get(),
                     ModBLocks.SOLDIER_PINE_TABLE.get(),
                     ModBLocks.BLUE_SOLDIER_PINE_TABLE.get()
-                    ));
+            ));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<StoolBlockEntity>> STOOL =
             BLOCK_ENTITIES.register("stool", () -> new BlockEntityType<>(
@@ -212,8 +216,6 @@ public class ModBlockEntities {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<JobBarrelBlockEntity>> JOB_BARREL =
             BLOCK_ENTITIES.register("job_barrel", () -> {
                 List<Block> barrelBlocks = new ArrayList<>();
-
-                // Add all job barrel blocks
                 barrelBlocks.add(ModBLocks.ALEHOUSE_BARREL.get());
                 barrelBlocks.add(ModBLocks.ARMORSMITH_BARREL.get());
                 barrelBlocks.add(ModBLocks.BAKER_BARREL.get());
@@ -253,127 +255,77 @@ public class ModBlockEntities {
                 barrelBlocks.add(ModBLocks.TAILOR_BARREL.get());
                 barrelBlocks.add(ModBLocks.TANNER_BARREL.get());
                 barrelBlocks.add(ModBLocks.TRADER_BARREL.get());
-
-                Block[] barrelBlocksArray = barrelBlocks.toArray(new Block[0]);
-
-                return new BlockEntityType<>(
-                        JobBarrelBlockEntity::new,
-                        barrelBlocksArray);
+                return new BlockEntityType<>(JobBarrelBlockEntity::new,
+                        barrelBlocks.toArray(new Block[0]));
             });
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TownHallBlockEntity>> TOWN_HALL =
             BLOCK_ENTITIES.register("town_hall", () ->
-                    new BlockEntityType<>(
-                            TownHallBlockEntity::new,
-                            ModBLocks.TOWN_HALL.get()));
+                    new BlockEntityType<>(TownHallBlockEntity::new, ModBLocks.TOWN_HALL.get()));
 
-    // Define the wood types array (excluding weirwood as it's handled separately)
+    // ── Decorative barrels ────────────────────────────────────────────────────
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BarrelLargeBlockEntity>> BARREL_LARGE =
+            BLOCK_ENTITIES.register("barrel_large", () ->
+                    new BlockEntityType<>(BarrelLargeBlockEntity::new, ModBLocks.BARREL_LARGE.get()));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BarrelMediumBlockEntity>> BARREL_MEDIUM =
+            BLOCK_ENTITIES.register("barrel_medium", () ->
+                    new BlockEntityType<>(BarrelMediumBlockEntity::new, ModBLocks.BARREL_MEDIUM.get()));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BarrelSmallBlockEntity>> BARREL_SMALL =
+            BLOCK_ENTITIES.register("barrel_small", () ->
+                    new BlockEntityType<>(BarrelSmallBlockEntity::new, ModBLocks.BARREL_SMALL.get()));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BarrelDummyBlockEntity>> BARREL_DUMMY =
+            BLOCK_ENTITIES.register("barrel_dummy", () ->
+                    new BlockEntityType<>(BarrelDummyBlockEntity::new, ModBLocks.BARREL_DUMMY.get()));
+
     private static final String[] ALL_WOOD_TYPES = {
-            "sycamore",
-            "pine",
-            "ash",
-            "beech",
-            "cedar",
-            "chestnut",
-            "hawthorn",
-            "ironwood",
-            "sentinel",
-            "blackbark",
-            "aspen",
-            "black_cherry",
-            "black_olive",
-            "crabapple",
-            "olive",
-            "white_cherry",
-            "red_cherry",
-            "fir",
-            "willow",
-            "wormtree",
-            "alder",
-            "almond",
-            "apple",
-            "apricot",
-            "baobab",
-            "black_cottonwood",
-            "blackthorn",
-            "blood_orange",
-            "bloodwood",
-            "blue_mahoe",
-            "cottonwood",
-            "datepalm",
-            "ebony",
-            "fig",
-            "fireplum",
-            "goldenheart",
-            "lemon",
-            "lime",
-            "linden",
-            "mahogany",
-            "maple",
-            "myrrh",
-            "nightwood",
-            "nutmeg",
-            "orange",
-            "peach",
-            "pear",
-            "pecan",
-            "persimmon",
-            "pink_ivory",
-            "plum",
-            "pomegranate",
-            "purpleheart",
-            "redwood",
-            "sandalwood",
-            "sandbeggar",
-            "tigerwood",
-            "yew",
-            "soldier_pine",
-            "blue_soldier_pine"
-
+            "sycamore", "pine", "ash", "beech", "cedar", "chestnut", "hawthorn",
+            "ironwood", "sentinel", "blackbark", "aspen", "black_cherry", "black_olive",
+            "crabapple", "olive", "white_cherry", "red_cherry", "fir", "willow",
+            "wormtree", "alder", "almond", "apple", "apricot", "baobab",
+            "black_cottonwood", "blackthorn", "blood_orange", "bloodwood", "blue_mahoe",
+            "cottonwood", "datepalm", "ebony", "fig", "fireplum", "goldenheart",
+            "lemon", "lime", "linden", "mahogany", "maple", "myrrh", "nightwood",
+            "nutmeg", "orange", "peach", "pear", "pecan", "persimmon", "pink_ivory",
+            "plum", "pomegranate", "purpleheart", "redwood", "sandalwood", "sandbeggar",
+            "tigerwood", "yew", "soldier_pine", "blue_soldier_pine"
     };
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ModSignBlockEntity>> MOD_SIGN =
             BLOCK_ENTITIES.register("mod_sign", () -> {
                 List<Block> signBlocks = new ArrayList<>();
-
                 signBlocks.add(ModBLocks.WEIRWOOD_SIGN.get());
                 signBlocks.add(ModBLocks.WEIRWOOD_WALL_SIGN.get());
                 signBlocks.add(ModBLocks.ROTTEN_SIGN.get());
                 signBlocks.add(ModBLocks.ROTTEN_WALL_SIGN.get());
                 signBlocks.add(ModBLocks.CHARRED_SIGN.get());
                 signBlocks.add(ModBLocks.CHARRED_WALL_SIGN.get());
-
                 for (String woodType : ALL_WOOD_TYPES) {
                     signBlocks.add(ModBLocks.SIGNS.get(woodType).get());
                     signBlocks.add(ModBLocks.WALL_SIGNS.get(woodType).get());
                 }
-
-                Block first = signBlocks.get(0);
-                Block[] rest = signBlocks.subList(1, signBlocks.size()).toArray(new Block[0]);
-                Block[] signBlocksArray = signBlocks.toArray(new Block[0]);
-                return new BlockEntityType<ModSignBlockEntity>(ModSignBlockEntity::new, signBlocksArray);
+                return new BlockEntityType<>(ModSignBlockEntity::new,
+                        signBlocks.toArray(new Block[0]));
             });
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ModHangingSignBlockEntity>> MOD_HANGING_SIGN =
             BLOCK_ENTITIES.register("mod_hanging_sign", () -> {
                 List<Block> hangingSignBlocks = new ArrayList<>();
-
                 hangingSignBlocks.add(ModBLocks.WEIRWOOD_HANGING_SIGN.get());
                 hangingSignBlocks.add(ModBLocks.WEIRWOOD_WALL_HANGING_SIGN.get());
                 hangingSignBlocks.add(ModBLocks.ROTTEN_HANGING_SIGN.get());
                 hangingSignBlocks.add(ModBLocks.ROTTEN_WALL_HANGING_SIGN.get());
                 hangingSignBlocks.add(ModBLocks.CHARRED_HANGING_SIGN.get());
                 hangingSignBlocks.add(ModBLocks.CHARRED_WALL_HANGING_SIGN.get());
-
                 for (String woodType : ALL_WOOD_TYPES) {
                     hangingSignBlocks.add(ModBLocks.HANGING_SIGNS.get(woodType).get());
                     hangingSignBlocks.add(ModBLocks.WALL_HANGING_SIGNS.get(woodType).get());
                 }
-
-                Block first = hangingSignBlocks.get(0);
-                Block[] rest = hangingSignBlocks.subList(1, hangingSignBlocks.size()).toArray(new Block[0]);
-                Block[] hangingSignBlocksArray = hangingSignBlocks.toArray(new Block[0]);
-                return new BlockEntityType<ModHangingSignBlockEntity>(ModHangingSignBlockEntity::new, hangingSignBlocksArray);
+                return new BlockEntityType<>(ModHangingSignBlockEntity::new,
+                        hangingSignBlocks.toArray(new Block[0]));
             });
 
     public static void register(IEventBus eventBus) {

@@ -188,34 +188,40 @@ public class ServerPacketHandler {
 
     public static void handleRequestOwnedTowns(RequestOwnedTownsPacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
-            if (context.player() instanceof ServerPlayer serverPlayer) {
-                java.util.List<SyncOwnedTownsPacket.TownInfo> ownedTowns = new java.util.ArrayList<>();
-                ServerLevel level = serverPlayer.serverLevel();
+            if (!(context.player() instanceof ServerPlayer serverPlayer)) return;
 
-                int viewDistance = level.getServer().getPlayerList().getViewDistance();
-                net.minecraft.world.level.ChunkPos playerChunkPos = new net.minecraft.world.level.ChunkPos(serverPlayer.blockPosition());
+            java.util.List<SyncOwnedTownsPacket.TownInfo> ownedTowns = new java.util.ArrayList<>();
+            ServerLevel level = serverPlayer.serverLevel();
 
-                for (int chunkX = playerChunkPos.x - viewDistance; chunkX <= playerChunkPos.x + viewDistance; chunkX++) {
-                    for (int chunkZ = playerChunkPos.z - viewDistance; chunkZ <= playerChunkPos.z + viewDistance; chunkZ++) {
-                        if (level.getChunkSource().hasChunk(chunkX, chunkZ)) {
-                            net.minecraft.world.level.chunk.LevelChunk chunk = level.getChunk(chunkX, chunkZ);
-                            for (BlockEntity blockEntity : chunk.getBlockEntities().values()) {
-                                if (blockEntity instanceof TownHallBlockEntity townHall) {
-                                    if (townHall.isClaimed() && serverPlayer.getUUID().equals(townHall.getClaimedByPlayerUUID())) {
-                                        ownedTowns.add(new SyncOwnedTownsPacket.TownInfo(
-                                                townHall.getTownName(),
-                                                townHall.getCitizenCount()
-                                        ));
-                                    }
-                                }
-                            }
-                        }
+            int viewDistance = level.getServer().getPlayerList().getViewDistance();
+            net.minecraft.world.level.ChunkPos playerChunkPos =
+                    new net.minecraft.world.level.ChunkPos(serverPlayer.blockPosition());
+
+            for (int chunkX = playerChunkPos.x - viewDistance;
+                 chunkX <= playerChunkPos.x + viewDistance; chunkX++) {
+                for (int chunkZ = playerChunkPos.z - viewDistance;
+                     chunkZ <= playerChunkPos.z + viewDistance; chunkZ++) {
+                    if (!level.getChunkSource().hasChunk(chunkX, chunkZ)) continue;
+
+                    net.minecraft.world.level.chunk.LevelChunk chunk = level.getChunk(chunkX, chunkZ);
+                    for (net.minecraft.world.level.block.entity.BlockEntity blockEntity
+                            : chunk.getBlockEntities().values()) {
+                        if (!(blockEntity instanceof net.darkflameproduction.agotmod.block.custom.TownHallBlockEntity townHall))
+                            continue;
+                        if (!townHall.isClaimed()) continue;
+                        if (!serverPlayer.getUUID().equals(townHall.getClaimedByPlayerUUID())) continue;
+
+                        ownedTowns.add(new SyncOwnedTownsPacket.TownInfo(
+                                townHall.getTownName(),
+                                townHall.getCitizenCount(),
+                                townHall.getClaimedByHouse() // already "Player of House X"
+                        ));
                     }
                 }
-
-                ownedTowns.sort((a, b) -> Integer.compare(b.population(), a.population()));
-                PacketDistributor.sendToPlayer(serverPlayer, new SyncOwnedTownsPacket(ownedTowns));
             }
+
+            ownedTowns.sort((a, b) -> Integer.compare(b.population(), a.population()));
+            PacketDistributor.sendToPlayer(serverPlayer, new SyncOwnedTownsPacket(ownedTowns));
         });
     }
 

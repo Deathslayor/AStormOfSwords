@@ -1324,98 +1324,72 @@ public class CustomGuiScreen extends Screen {
         g.fill(x + 1, y + 1, x + 59, y + 119, 0xFFFF4500);
     }
 
+    // ── Complete rewrite: drawOwnedTownsSection in CustomGuiScreen ────────────
+
     private void drawOwnedTownsSection(GuiGraphics g, int x, int y, int w, int h) {
         String title = "Owned Towns";
-        int tw = (int)(font.width(title) * 1.1f);
-
-        // Title
+        int titleW = (int)(font.width(title) * 1.1f);
         g.pose().pushPose();
         g.pose().scale(1.1f, 1.1f, 1.0f);
-        g.drawString(
-                font,
-                title,
-                (int)((x + (w - tw) / 2) / 1.1f),
+        g.drawString(font, title,
+                (int)((x + (w - titleW) / 2) / 1.1f),
                 (int)(y / 1.1f),
-                SUBMENU_TEXT_COLOR,
-                false
-        );
+                SUBMENU_TEXT_COLOR, false);
         g.pose().popPose();
 
-        // Separator line
-        int separatorY = y + (int)(font.lineHeight * 1.1f) + 5;
-        g.fill(
-                x + w / 8,
-                separatorY,
-                x + w - w / 8,
-                separatorY + 1,
-                SUBMENU_TEXT_COLOR
-        );
+        g.fill(x + w / 8, y + (int)(font.lineHeight * 1.1f) + 5,
+                x + w - w / 8, y + (int)(font.lineHeight * 1.1f) + 6,
+                SUBMENU_TEXT_COLOR);
 
-        int listY = separatorY + 10;
+        int listY = y + (int)(font.lineHeight * 1.1f) + 15;
         java.util.List<SyncOwnedTownsPacket.TownInfo> towns = HouseData.getOwnedTowns();
 
         if (towns.isEmpty()) {
             String empty = "No towns claimed";
-            g.drawString(
-                    font,
-                    empty,
-                    x + (w - font.width(empty)) / 2,
-                    listY + 20,
-                    0xFF666666,
-                    false
-            );
+            g.drawString(font, empty, x + (w - font.width(empty)) / 2, listY + 20, 0xFF666666, false);
             return;
         }
 
-        int curY = listY;
-        int lineHeight = font.lineHeight + 4;
+        int lh = font.lineHeight + 6;
+        for (int i = 0; i < towns.size(); i++) {
+            int rowY = listY + (i * lh * 2); // two lines per town
+            if (rowY + lh * 2 > y + h) break;
 
-        for (SyncOwnedTownsPacket.TownInfo town : towns) {
-            // Prevent drawing into button area
-            if (curY + lineHeight > y + h - 20) break;
+            SyncOwnedTownsPacket.TownInfo town = towns.get(i);
 
-            String text = town.townName() + " - Population: " + town.population();
+            // Line 1: town name
+            String townText = town.townName() + " — Population: " + town.population();
+            int color = town.population() >= 100 ? 0xFF2E7D32
+                    : town.population() >= 50  ? 0xFF1565C0
+                    : town.population() >= 20  ? 0xFF6A4C93
+                    : SUBMENU_TEXT_COLOR;
+            g.drawString(font, townText, x + (w - font.width(townText)) / 2, rowY, color, false);
 
-            int color =
-                    town.population() >= 100 ? 0xFF2E7D32 :
-                            town.population() >= 50 ? 0xFF1565C0 :
-                                    town.population() >= 20 ? 0xFF6A4C93 :
-                                            SUBMENU_TEXT_COLOR;
-
-            g.drawString(
-                    font,
-                    text,
-                    x + (w - font.width(text)) / 2,
-                    curY,
-                    color,
-                    false
-            );
-
-            curY += lineHeight;
+            // Line 2: owner string ("PlayerName of House HouseName")
+            String ownerText = town.ownerString();
+            if (ownerText != null && !ownerText.isEmpty()) {
+                g.pose().pushPose();
+                g.pose().scale(0.85f, 0.85f, 1.0f);
+                g.drawString(font, ownerText,
+                        (int)((x + (w - (int)(font.width(ownerText) * 0.85f)) / 2) / 0.85f),
+                        (int)((rowY + font.lineHeight + 2) / 0.85f),
+                        0xFF888888, false);
+                g.pose().popPose();
+            }
         }
+
         // Total population footer
-        if (towns.size() > 1 && curY + 18 < y + h) {
-            int total = towns.stream()
-                    .mapToInt(SyncOwnedTownsPacket.TownInfo::population)
-                    .sum();
+        if (towns.size() > 1) {
+            int total = towns.stream().mapToInt(SyncOwnedTownsPacket.TownInfo::population).sum();
             String totalText = "Total Population: " + total;
-            g.fill(
-                    x + w / 6,
-                    curY + 5,
-                    x + w - w / 6,
-                    curY + 6,
-                    SUBMENU_TEXT_COLOR
-            );
+            int footerY = listY + towns.size() * lh * 2 + 5;
+            g.fill(x + w / 6, footerY, x + w - w / 6, footerY + 1, SUBMENU_TEXT_COLOR);
             g.pose().pushPose();
             g.pose().scale(0.9f, 0.9f, 1.0f);
-            g.drawString(
-                    font,
-                    totalText,
-                    (int)((x + (w - font.width(totalText)) / 2) / 0.9f),
-                    (int)((curY + 10) / 0.9f),
-                    0xFF1A237E,
-                    false
-            );
+            g.drawString(font, totalText,
+                    (int)((x + (w - (int)(font.width(totalText) * 0.9f)) / 2) / 0.9f),
+                    (int)((footerY + 5) / 0.9f),
+                    0xFF1A237E, false);
             g.pose().popPose();
         }
     }
