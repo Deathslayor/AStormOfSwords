@@ -38,6 +38,7 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 
@@ -399,208 +400,20 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBLocks.REDKEEP_STONE_SLAB.get());
         this.dropSelf(ModBLocks.REDKEEP_STONE_WALL.get());
 
-        for (int i = 1; i <= 38; i++) {
-            if (i == 15 || i == 22 || i == 31) continue; // Skip BLACKSTONE_15 and BLACKSTONE_22
-            ModBLocks.BlockSet set = ModBLocks.BLACKSTONE_VARIANTS.get(i);
-            if (set != null) {
-                this.dropSelf(set.base().get());
-                this.dropSelf(set.stairs().get());
-                this.dropSelf(set.slab().get());
-                this.dropSelf(set.wall().get());
-            }
-        }
-        for (int i = 1; i <= 38; i++) {
-            if (i == 1 || i == 15) continue;
-            ModBLocks.BlockSet set = ModBLocks.BASALT_VARIANTS.get(i);
-            if (set != null) {
-                this.dropSelf(set.base().get());
-                this.dropSelf(set.stairs().get());
-                this.dropSelf(set.slab().get());
-                this.dropSelf(set.wall().get());
-            }
-        }
 
-        for (int i = 1; i <= 38; i++) {
-            if (i == 2 || i == 15) continue;
-            ModBLocks.BlockSet set = ModBLocks.BRICKS_VARIANTS.get(i);
-            if (set != null) {
-                this.dropSelf(set.base().get());
-                this.dropSelf(set.stairs().get());
-                this.dropSelf(set.slab().get());
-                this.dropSelf(set.wall().get());
-            }
-        }
-
-        for (int i = 1; i <= 38; i++) {
-            if (i == 15) continue;
-            ModBLocks.BlockSet set = ModBLocks.CALCITE_VARIANTS.get(i);
-            if (set != null) {
-                this.dropSelf(set.base().get());
-                this.dropSelf(set.stairs().get());
-                this.dropSelf(set.slab().get());
-                this.dropSelf(set.wall().get());
-            }
-        }
-
-        for (int i = 1; i <= 38; i++) {
-            if (i == 4 || i == 15 || i == 19) continue;
-            ModBLocks.BlockSet set = ModBLocks.CDEEPSLATE_VARIANTS.get(i);
-            if (set != null) {
-                this.dropSelf(set.base().get());
-                this.dropSelf(set.stairs().get());
-                this.dropSelf(set.slab().get());
-                this.dropSelf(set.wall().get());
-            }
-        }
-
-        for (int i = 1; i <= 38; i++) {
-            if (i == 15) continue;
-            ModBLocks.BlockSet set = ModBLocks.GRANITE_VARIANTS.get(i);
-            if (set != null) {
-                this.dropSelf(set.base().get());
-                this.dropSelf(set.stairs().get());
-                this.dropSelf(set.slab().get());
-                this.dropSelf(set.wall().get());
-            }
-        }
-
-        for (int i = 1; i <= 38; i++) {
-            if (i == 15) continue;
-            ModBLocks.BlockSet set = ModBLocks.REDKEEP_VARIANTS.get(i);
-            if (set != null) {
-                this.dropSelf(set.base().get());
-                this.dropSelf(set.stairs().get());
-                this.dropSelf(set.slab().get());
-                this.dropSelf(set.wall().get());
-            }
-        }
-
-        for (int i = 1; i <= 38; i++) {
-            if (i == 15 || i == 16 || i == 17 || i == 18) continue; // Skip BLACKSTONE_15 and BLACKSTONE_22
-            ModBLocks.BlockSet set = ModBLocks.RSANDSTONE_VARIANTS.get(i);
-            if (set != null) {
-                this.dropSelf(set.base().get());
-                this.dropSelf(set.stairs().get());
-                this.dropSelf(set.slab().get());
-                this.dropSelf(set.wall().get());
-            }
-        }
-
-        for (int i = 1; i <= 38; i++) {
-            if (i == 15 || i == 16 || i == 17 || i == 18) continue; // Skip BLACKSTONE_15 and BLACKSTONE_22
-            ModBLocks.BlockSet set = ModBLocks.SANDSTONE_VARIANTS.get(i);
-            if (set != null) {
-                this.dropSelf(set.base().get());
-                this.dropSelf(set.stairs().get());
-                this.dropSelf(set.slab().get());
-                this.dropSelf(set.wall().get());
-            }
-        }
-
-        for (int i = 1; i <= 38; i++) {
-            if (i == 5 || i == 15 || i == 19 || i == 23) continue; // Skip BLACKSTONE_15 and BLACKSTONE_22
-            ModBLocks.BlockSet set = ModBLocks.STONE_VARIANTS.get(i);
-            if (set != null) {
-                this.dropSelf(set.base().get());
-                this.dropSelf(set.stairs().get());
-                this.dropSelf(set.slab().get());
-                this.dropSelf(set.wall().get());
-            }
-        }
-
-        for (int i = 1; i <= 38; i++) {
-            if (i == 15 || i == 23) continue;
-            ModBLocks.BlockSet set = ModBLocks.SSTONE_VARIANTS.get(i);
-            if (set != null) {
-                this.dropSelf(set.base().get());
-                this.dropSelf(set.stairs().get());
-                this.dropSelf(set.slab().get());
-                this.dropSelf(set.wall().get());
-            }
-        }
-
-        for (int i = 1; i <= 38; i++) {
-            if (i == 15 || i == 35) continue;
-            ModBLocks.BlockSet set = ModBLocks.BONE_VARIANTS.get(i);
-            if (set != null) {
-                this.dropSelf(set.base().get());
-                this.dropSelf(set.stairs().get());
-                this.dropSelf(set.slab().get());
-                this.dropSelf(set.wall().get());
-            }
-        }
-
-        for (int i = 1; i <= 38; i++) {
-            if (i == 15) continue;
-            ModBLocks.BlockSet set = ModBLocks.DRIPSTONE_VARIANTS.get(i);
-            if (set != null) {
-                this.dropSelf(set.base().get());
-                this.dropSelf(set.stairs().get());
-                this.dropSelf(set.slab().get());
-                this.dropSelf(set.wall().get());
-            }
-        }
-
-        for (int i = 1; i <= 38; i++) {
-            if (i == 15) continue;
-            ModBLocks.BlockSet set = ModBLocks.PACKED_ICE_VARIANTS.get(i);
-            if (set != null) {
-                this.dropSelf(set.base().get());
-                this.dropSelf(set.stairs().get());
-                this.dropSelf(set.slab().get());
-                this.dropSelf(set.wall().get());
-            }
-        }
-
-        for (int i = 1; i <= 38; i++) {
-            if (i == 14 || i == 15) continue;
-            ModBLocks.BlockSet set = ModBLocks.QUARTZ_VARIANTS.get(i);
-            if (set != null) {
-                this.dropSelf(set.base().get());
-                this.dropSelf(set.stairs().get());
-                this.dropSelf(set.slab().get());
-                this.dropSelf(set.wall().get());
-            }
-        }
-
-        for (int i = 1; i <= 38; i++) {
-            if (i == 15) continue;
-            ModBLocks.BlockSet set = ModBLocks.ANDESITE_VARIANTS.get(i);
-            if (set != null) {
-                this.dropSelf(set.base().get());
-                this.dropSelf(set.stairs().get());
-                this.dropSelf(set.slab().get());
-                this.dropSelf(set.wall().get());
-            }
-        }
-
-        for (int i = 1; i <= 38; i++) {
-            if (i == 10 || i == 15 || i == 20 || i == 21) continue;
-            ModBLocks.BlockSet set = ModBLocks.TUFF_VARIANTS.get(i);
-            if (set != null) {
-                this.dropSelf(set.base().get());
-                this.dropSelf(set.stairs().get());
-                this.dropSelf(set.slab().get());
-                this.dropSelf(set.wall().get());
-            }
-        }
-
-
-        for (int i = 1; i <= 38; i++) {
-            if (i == 15) continue;
-            ModBLocks.BlockSet set = ModBLocks.DIORITE_VARIANTS.get(i);
-            if (set != null) {
-                this.dropSelf(set.base().get());
-                this.dropSelf(set.stairs().get());
-                this.dropSelf(set.slab().get());
-                this.dropSelf(set.wall().get());
-            }
-        }
-
-        for (int i = 1; i <= 38; i++) {
-            if (i == 7 || i == 9 || i == 15) continue; // Skip BLACKSTONE_15 and BLACKSTONE_22
-            ModBLocks.BlockSet set = ModBLocks.MUD_BRICK_VARIANTS.get(i);
-            if (set != null) {
+        for (Map<Integer, ModBLocks.BlockSet> variants : List.of(
+                ModBLocks.BLACKSTONE_VARIANTS,  ModBLocks.BASALT_VARIANTS,
+                ModBLocks.BRICKS_VARIANTS,      ModBLocks.CALCITE_VARIANTS,
+                ModBLocks.CDEEPSLATE_VARIANTS,  ModBLocks.GRANITE_VARIANTS,
+                ModBLocks.REDKEEP_VARIANTS,     ModBLocks.RSANDSTONE_VARIANTS,
+                ModBLocks.SANDSTONE_VARIANTS,   ModBLocks.STONE_VARIANTS,
+                ModBLocks.SSTONE_VARIANTS,      ModBLocks.BONE_VARIANTS,
+                ModBLocks.DRIPSTONE_VARIANTS,   ModBLocks.PACKED_ICE_VARIANTS,
+                ModBLocks.QUARTZ_VARIANTS,      ModBLocks.ANDESITE_VARIANTS,
+                ModBLocks.TUFF_VARIANTS,        ModBLocks.DIORITE_VARIANTS,
+                ModBLocks.MUD_BRICK_VARIANTS
+        )) {
+            for (ModBLocks.BlockSet set : variants.values()) {
                 this.dropSelf(set.base().get());
                 this.dropSelf(set.stairs().get());
                 this.dropSelf(set.slab().get());
@@ -1063,6 +876,11 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBLocks.TAILOR_BARREL.get());
         this.dropSelf(ModBLocks.TANNER_BARREL.get());
         this.dropSelf(ModBLocks.TRADER_BARREL.get());
+
+        this.dropSelf(ModBLocks.BARREL_LARGE.get());
+        this.dropSelf(ModBLocks.BARREL_MEDIUM.get());
+        this.dropSelf(ModBLocks.BARREL_SMALL.get());
+        this.add(ModBLocks.BARREL_DUMMY.get(), this.noDrop());
 
 
         this.dropSelf(ModBLocks.DARK_OAK_TABLE.get());

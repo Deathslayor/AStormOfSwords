@@ -137,8 +137,28 @@
               "pixel_weight": 40.0
             },
             {
+              "biome": "agotmod:the_north",
+              "color": "#878f8b",
+              "terrain_modifier": 5.0
+            },
+            {
+              "biome": "agotmod:the_north",
+              "color": "#69776f",
+              "terrain_modifier": 20.0
+            },
+            {
+              "biome": "agotmod:the_north",
+              "color": "#909f99",
+              "terrain_modifier": 40.0
+            },
+            {
+              "biome": "agotmod:the_north",
+              "color": "#909f99",
+              "terrain_modifier": 60.0
+            },
+            {
               "biome": "agotmod:barrowlands",
-              "color": "#627b40",
+              "color": "#ccd0ce",
               "terrain_modifier": 20.0
             }
           ]

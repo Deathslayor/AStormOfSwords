@@ -44,6 +44,9 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+import java.util.Map;
+
 import static net.darkflameproduction.agotmod.block.ModBLocks.BLACKSTONE_VARIANTS;
 
 public class ModItemModelProvider extends ItemModelProvider {
@@ -1355,232 +1358,24 @@ public class ModItemModelProvider extends ItemModelProvider {
         evenSimplerBlockItem(ModBLocks.REDKEEP_STONE_SLAB);
 
 
-        for (int i = 1; i <= 38; i++) {
-            // Skip variants 15 and 22 as in your block registration
-            if (i == 15 || i == 22 || i == 31) continue;
+        // Replace all 19 variant model loops with this
 
-            ModBLocks.BlockSet blockSet = ModBLocks.BLACKSTONE_VARIANTS.get(i);
-            if (blockSet != null) {
-                wallItem(blockSet.wall(), blockSet.base());
-                evenSimplerBlockItem(blockSet.stairs());
-                evenSimplerBlockItem(blockSet.slab());
-            }
-        }
-        for (int i = 1; i <= 38; i++) {
-            // Skip variants 15 and 22 and 31 as in your block registration
-            if (i == 1 || i == 15) continue;
-
-            ModBLocks.BlockSet blockSet = ModBLocks.BASALT_VARIANTS.get(i);
-            if (blockSet != null) {
-                wallItem(blockSet.wall(), blockSet.base());
-                evenSimplerBlockItem(blockSet.stairs());
-                evenSimplerBlockItem(blockSet.slab());
-            }
-        }
-
-        for (int i = 1; i <= 38; i++) {
-            // Skip variants 15 and 22 and 31 as in your block registration
-            if (i == 2 || i == 15) continue;
-
-            ModBLocks.BlockSet blockSet = ModBLocks.BRICKS_VARIANTS.get(i);
-            if (blockSet != null) {
-                wallItem(blockSet.wall(), blockSet.base());
-                evenSimplerBlockItem(blockSet.stairs());
-                evenSimplerBlockItem(blockSet.slab());
-            }
-        }
-
-        for (int i = 1; i <= 38; i++) {
-            // Skip variants 15 and 22 and 31 as in your block registration
-            if (i == 15) continue;
-
-            ModBLocks.BlockSet blockSet = ModBLocks.CALCITE_VARIANTS.get(i);
-            if (blockSet != null) {
-                wallItem(blockSet.wall(), blockSet.base());
-                evenSimplerBlockItem(blockSet.stairs());
-                evenSimplerBlockItem(blockSet.slab());
-            }
-        }
-
-        for (int i = 1; i <= 38; i++) {
-            // Skip variants 15 and 22 and 31 as in your block registration
-            if (i == 4 || i == 15 || i == 19) continue;
-
-            ModBLocks.BlockSet blockSet = ModBLocks.CDEEPSLATE_VARIANTS.get(i);
-            if (blockSet != null) {
-                wallItem(blockSet.wall(), blockSet.base());
-                evenSimplerBlockItem(blockSet.stairs());
-                evenSimplerBlockItem(blockSet.slab());
-            }
-        }
-
-        for (int i = 1; i <= 38; i++) {
-            // Skip variants 15 and 22 and 31 as in your block registration
-            if (i == 15) continue;
-
-            ModBLocks.BlockSet blockSet = ModBLocks.GRANITE_VARIANTS.get(i);
-            if (blockSet != null) {
-                wallItem(blockSet.wall(), blockSet.base());
-                evenSimplerBlockItem(blockSet.stairs());
-                evenSimplerBlockItem(blockSet.slab());
-            }
-        }
-
-        for (int i = 1; i <= 38; i++) {
-            // Skip variants 15 and 22 and 31 as in your block registration
-            if (i == 15) continue;
-
-            ModBLocks.BlockSet blockSet = ModBLocks.REDKEEP_VARIANTS.get(i);
-            if (blockSet != null) {
-                wallItem(blockSet.wall(), blockSet.base());
-                evenSimplerBlockItem(blockSet.stairs());
-                evenSimplerBlockItem(blockSet.slab());
-            }
-        }
-
-        for (int i = 1; i <= 38; i++) {
-            // Skip variants 15 and 22 and 31 as in your block registration
-            if (i == 15) continue;
-
-            ModBLocks.BlockSet blockSet = ModBLocks.ANDESITE_VARIANTS.get(i);
-            if (blockSet != null) {
-                wallItem(blockSet.wall(), blockSet.base());
-                evenSimplerBlockItem(blockSet.stairs());
-                evenSimplerBlockItem(blockSet.slab());
-            }
-        }
-
-        for (int i = 1; i <= 38; i++) {
-            // Skip variants 10, 15, 20, and 21 as in your block registration
-            if (i == 10 || i == 15 || i == 20 || i == 21) continue;
-
-            ModBLocks.BlockSet blockSet = ModBLocks.TUFF_VARIANTS.get(i);
-            if (blockSet != null) {
-                wallItem(blockSet.wall(), blockSet.base());
-                evenSimplerBlockItem(blockSet.stairs());
-                evenSimplerBlockItem(blockSet.slab());
-            }
-        }
-
-
-        for (int i = 1; i <= 38; i++) {
-            // Skip variants 15 and 22 and 31 as in your block registration
-            if (i == 15) continue;
-
-            ModBLocks.BlockSet blockSet = ModBLocks.DIORITE_VARIANTS.get(i);
-            if (blockSet != null) {
-                wallItem(blockSet.wall(), blockSet.base());
-                evenSimplerBlockItem(blockSet.stairs());
-                evenSimplerBlockItem(blockSet.slab());
-            }
-        }
-
-        for (int i = 1; i <= 38; i++) {
-            // Skip variants 15 and 22 and 31 as in your block registration
-            if (i == 14 || i == 15) continue;
-
-            ModBLocks.BlockSet blockSet = ModBLocks.QUARTZ_VARIANTS.get(i);
-            if (blockSet != null) {
-                wallItem(blockSet.wall(), blockSet.base());
-                evenSimplerBlockItem(blockSet.stairs());
-                evenSimplerBlockItem(blockSet.slab());
-            }
-        }
-
-        for (int i = 1; i <= 38; i++) {
-            // Skip variants 15 and 22 as in your block registration
-            if (i == 15 || i == 16 || i == 17 || i == 18) continue;
-
-            ModBLocks.BlockSet blockSet = ModBLocks.RSANDSTONE_VARIANTS.get(i);
-            if (blockSet != null) {
-                wallItem(blockSet.wall(), blockSet.base());
-                evenSimplerBlockItem(blockSet.stairs());
-                evenSimplerBlockItem(blockSet.slab());
-            }
-        }
-
-        for (int i = 1; i <= 38; i++) {
-            // Skip variants 7, 9, and 15
-            if (i == 7 || i == 9 || i == 15) continue;
-
-            ModBLocks.BlockSet blockSet = ModBLocks.MUD_BRICK_VARIANTS.get(i);
-            if (blockSet != null) {
-                wallItem(blockSet.wall(), blockSet.base());
-                evenSimplerBlockItem(blockSet.stairs());
-                evenSimplerBlockItem(blockSet.slab());
-            }
-        }
-
-
-        for (int i = 1; i <= 38; i++) {
-            // Skip variants 15 and 22 as in your block registration
-            if (i == 15 || i == 16 || i == 17 || i == 18) continue;
-
-            ModBLocks.BlockSet blockSet = ModBLocks.SANDSTONE_VARIANTS.get(i);
-            if (blockSet != null) {
-                wallItem(blockSet.wall(), blockSet.base());
-                evenSimplerBlockItem(blockSet.stairs());
-                evenSimplerBlockItem(blockSet.slab());
-            }
-        }
-
-        for (int i = 1; i <= 38; i++) {
-            // Skip variants 15 and 22 as in your block registration
-            if (i == 5 || i == 15 || i == 19 || i == 23) continue;
-
-            ModBLocks.BlockSet blockSet = ModBLocks.STONE_VARIANTS.get(i);
-            if (blockSet != null) {
-                wallItem(blockSet.wall(), blockSet.base());
-                evenSimplerBlockItem(blockSet.stairs());
-                evenSimplerBlockItem(blockSet.slab());
-            }
-        }
-
-        for (int i = 1; i <= 38; i++) {
-            // Skip variants 15 and 23
-            if (i == 15 || i == 23) continue;
-
-            ModBLocks.BlockSet blockSet = ModBLocks.SSTONE_VARIANTS.get(i);
-            if (blockSet != null) {
-                wallItem(blockSet.wall(), blockSet.base());
-                evenSimplerBlockItem(blockSet.stairs());
-                evenSimplerBlockItem(blockSet.slab());
-            }
-        }
-
-        for (int i = 1; i <= 38; i++) {
-            // Skip variants 15 and 22 and 31 as in your block registration
-            if (i == 15 || i == 35) continue;
-
-            ModBLocks.BlockSet blockSet = ModBLocks.BONE_VARIANTS.get(i);
-            if (blockSet != null) {
-                wallItem(blockSet.wall(), blockSet.base());
-                evenSimplerBlockItem(blockSet.stairs());
-                evenSimplerBlockItem(blockSet.slab());
-            }
-        }
-
-        for (int i = 1; i <= 38; i++) {
-            // Skip variants 15 and 22 and 31 as in your block registration
-            if (i == 15) continue;
-
-            ModBLocks.BlockSet blockSet = ModBLocks.DRIPSTONE_VARIANTS.get(i);
-            if (blockSet != null) {
-                wallItem(blockSet.wall(), blockSet.base());
-                evenSimplerBlockItem(blockSet.stairs());
-                evenSimplerBlockItem(blockSet.slab());
-            }
-        }
-
-        for (int i = 1; i <= 38; i++) {
-            // Skip variants 15 and 22 and 31 as in your block registration
-            if (i == 15) continue;
-
-            ModBLocks.BlockSet blockSet = ModBLocks.PACKED_ICE_VARIANTS.get(i);
-            if (blockSet != null) {
-                wallItem(blockSet.wall(), blockSet.base());
-                evenSimplerBlockItem(blockSet.stairs());
-                evenSimplerBlockItem(blockSet.slab());
+        for (Map<Integer, ModBLocks.BlockSet> variants : List.of(
+                ModBLocks.BLACKSTONE_VARIANTS,  ModBLocks.BASALT_VARIANTS,
+                ModBLocks.BRICKS_VARIANTS,      ModBLocks.CALCITE_VARIANTS,
+                ModBLocks.CDEEPSLATE_VARIANTS,  ModBLocks.GRANITE_VARIANTS,
+                ModBLocks.REDKEEP_VARIANTS,     ModBLocks.ANDESITE_VARIANTS,
+                ModBLocks.TUFF_VARIANTS,        ModBLocks.DIORITE_VARIANTS,
+                ModBLocks.QUARTZ_VARIANTS,      ModBLocks.RSANDSTONE_VARIANTS,
+                ModBLocks.MUD_BRICK_VARIANTS,   ModBLocks.SANDSTONE_VARIANTS,
+                ModBLocks.STONE_VARIANTS,       ModBLocks.SSTONE_VARIANTS,
+                ModBLocks.BONE_VARIANTS,        ModBLocks.DRIPSTONE_VARIANTS,
+                ModBLocks.PACKED_ICE_VARIANTS
+        )) {
+            for (ModBLocks.BlockSet set : variants.values()) {
+                wallItem(set.wall(), set.base());
+                evenSimplerBlockItem(set.stairs());
+                evenSimplerBlockItem(set.slab());
             }
         }
 

@@ -1,4 +1,4 @@
-// 1.21.3	2026-05-16T20:40:14.4493791	Loot Tables
+// 1.21.3	2026-05-24T14:22:30.5524228	Loot Tables
 e9bd72b39150226eea7e9f8651090f64a2f92e26 data/agotmod/loot_table/blocks/acacia_arm_chair.json
 8b853b189990b99a15ea85034eba5c841663807f data/agotmod/loot_table/blocks/acacia_chair.json
 25731f80a799127a902c25a58ea1c9ee6aa06d85 data/agotmod/loot_table/blocks/acacia_stool.json
@@ -337,6 +337,10 @@ b7d075f6a6e073317e8134fc93c3af34eccb81b0 data/agotmod/loot_table/blocks/baobab_w
 e711c4fb994ba1da0add9f8bbde9585d748bba0b data/agotmod/loot_table/blocks/baobab_wood_stripped.json
 a86eba2d8174b69e6defa815d0a9a56cc7571ab2 data/agotmod/loot_table/blocks/bard_barrel.json
 c9506717d248b0c66c736a61839ecdb042ba2db6 data/agotmod/loot_table/blocks/barley_crop.json
+e446d698e6eae831879c9baed1973d1693c33673 data/agotmod/loot_table/blocks/barrel_dummy.json
+9617c86f6544b2d07b9aa4d419aa1a3c0669dfbf data/agotmod/loot_table/blocks/barrel_large.json
+dda4cfdaacf37744c67e23b852d94733bcb2d5c3 data/agotmod/loot_table/blocks/barrel_medium.json
+2b0ec0dd0d8ecdd28227d21ce13884aec39254e4 data/agotmod/loot_table/blocks/barrel_small.json
 42c724755cf2f9135a89c9a51aa5cb4e1beeb950 data/agotmod/loot_table/blocks/basalt_10_block.json
 39718df5c479b5250945147b5d64727b97f4d69b data/agotmod/loot_table/blocks/basalt_10_slab.json
 20e8cddbfc43b9d1ed0e57b6b4fb177447088851 data/agotmod/loot_table/blocks/basalt_10_stairs.json

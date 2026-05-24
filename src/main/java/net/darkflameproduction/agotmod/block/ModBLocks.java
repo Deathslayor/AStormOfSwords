@@ -62,159 +62,6 @@ import java.util.List;
 public class ModBLocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(AGoTMod.MOD_ID);
 
-    // ✅ Store valid blackstone indices for use in data generators
-    public static final List<Integer> VALID_BLACKSTONE_INDICES = new ArrayList<>(
-            IntStream.rangeClosed(1, 38)
-                    .filter(i -> i != 15 && i != 22 && i != 31)
-                    .boxed()
-                    .collect(Collectors.toList())
-    );
-    public static final List<Integer> VALID_BASALT_INDICES = new ArrayList<>(
-            IntStream.rangeClosed(1, 38)
-                    .filter(i -> i != 1 && i != 15)
-                    .boxed()
-                    .collect(Collectors.toList())
-    );
-    public static final List<Integer> VALID_TUFF_INDICES = new ArrayList<>(
-            IntStream.rangeClosed(1, 38)
-                    .filter(i -> i != 10 && i != 15 && i != 20 && i != 21)
-                    .boxed()
-                    .collect(Collectors.toList())
-    );
-    public static final List<Integer> VALID_BRICKS_INDICES = new ArrayList<>(
-            IntStream.rangeClosed(1, 38)
-                    .filter(i -> i != 2 && i != 15)
-                    .boxed()
-                    .collect(Collectors.toList())
-    );
-    public static final List<Integer> VALID_CALCITE_INDICES = new ArrayList<>(
-            IntStream.rangeClosed(1, 38)
-                    .filter(i -> i != 15)
-                    .boxed()
-                    .collect(Collectors.toList())
-    );
-
-    public static final List<Integer> VALID_DIORITE_INDICES = new ArrayList<>(
-            IntStream.rangeClosed(1, 38)
-                    .filter(i -> i != 15)
-                    .boxed()
-                    .collect(Collectors.toList())
-    );
-
-    public static final List<Integer> VALID_QUARTZ_INDICES = new ArrayList<>(
-            IntStream.rangeClosed(1, 38)
-                    .filter(i -> i != 14 && i != 15)
-                    .boxed()
-                    .collect(Collectors.toList())
-    );
-
-    public static final List<Integer> VALID_CDEEPSLATE_INDICES = new ArrayList<>(
-            IntStream.rangeClosed(1, 38)
-                    .filter(i -> i != 4 && i != 15 && i != 19)
-                    .boxed()
-                    .collect(Collectors.toList())
-    );
-
-    public static final List<Integer> VALID_GRANITE_INDICES = new ArrayList<>(
-            IntStream.rangeClosed(1, 38)
-                    .filter(i -> i != 15)
-                    .boxed()
-                    .collect(Collectors.toList())
-    );
-
-    public static final List<Integer> VALID_ANDESITE_INDICES = new ArrayList<>(
-            IntStream.rangeClosed(1, 38)
-                    .filter(i -> i != 15)
-                    .boxed()
-                    .collect(Collectors.toList())
-    );
-
-    public static final List<Integer> VALID_REDKEEP_INDICES = new ArrayList<>(
-            IntStream.rangeClosed(1, 38)
-                    .filter(i -> i != 15)
-                    .boxed()
-                    .collect(Collectors.toList())
-    );
-
-    public static final List<Integer> VALID_RSANDSTONE_INDICES = new ArrayList<>(
-            IntStream.rangeClosed(1, 38)
-                    .filter(i -> i != 15 && i != 16 && i != 17 && i != 18)
-                    .boxed()
-                    .collect(Collectors.toList())
-    );
-
-    public static final List<Integer> VALID_SANDSTONE_INDICES = new ArrayList<>(
-            IntStream.rangeClosed(1, 38)
-                    .filter(i -> i != 15 && i != 16 && i != 17 && i != 18)
-                    .boxed()
-                    .collect(Collectors.toList())
-    );
-
-    public static final List<Integer> VALID_STONE_INDICES = new ArrayList<>(
-            IntStream.rangeClosed(1, 38)
-                    .filter(i -> i != 5 && i != 15 && i != 19 && i != 23)
-                    .boxed()
-                    .collect(Collectors.toList())
-    );
-    public static final List<Integer> VALID_SSTONE_INDICES = new ArrayList<>(
-            IntStream.rangeClosed(1, 38)
-                    .filter(i -> i != 15 && i != 23)
-                    .boxed()
-                    .collect(Collectors.toList())
-    );
-
-    public static final List<Integer> VALID_BONE_INDICES = new ArrayList<>(
-            IntStream.rangeClosed(1, 38)
-                    .filter(i -> i != 15 && i != 35)
-                    .boxed()
-                    .collect(Collectors.toList())
-    );
-
-    public static final List<Integer> VALID_DRIPSTONE_INDICES = new ArrayList<>(
-            IntStream.rangeClosed(1, 38)
-                    .filter(i -> i != 15)
-                    .boxed()
-                    .collect(Collectors.toList())
-    );
-
-    public static final List<Integer> VALID_PACKED_ICE_INDICES = new ArrayList<>(
-            IntStream.rangeClosed(1, 38)
-                    .filter(i -> i != 15)
-                    .boxed()
-                    .collect(Collectors.toList())
-    );
-
-    public static final List<Integer> VALID_MUD_BRICK_INDICES = new ArrayList<>(
-            IntStream.rangeClosed(1, 38)
-                    .filter(i -> i != 7 && i != 9 && i != 15)
-                    .boxed()
-                    .collect(Collectors.toList())
-    );
-
-
-    public static final Map<Integer, BlockSet> BLACKSTONE_VARIANTS = new HashMap<>();
-    public static final Map<Integer, BlockSet> BASALT_VARIANTS = new HashMap<>();
-    public static final Map<Integer, BlockSet> BRICKS_VARIANTS = new HashMap<>();
-    public static final Map<Integer, BlockSet> CALCITE_VARIANTS = new HashMap<>();
-    public static final Map<Integer, BlockSet> CDEEPSLATE_VARIANTS = new HashMap<>();
-    public static final Map<Integer, BlockSet> GRANITE_VARIANTS = new HashMap<>();
-    public static final Map<Integer, BlockSet> REDKEEP_VARIANTS = new HashMap<>();
-    public static final Map<Integer, BlockSet> RSANDSTONE_VARIANTS = new HashMap<>();
-    public static final Map<Integer, BlockSet> SANDSTONE_VARIANTS = new HashMap<>();
-    public static final Map<Integer, BlockSet> STONE_VARIANTS = new HashMap<>();
-    public static final Map<Integer, BlockSet> SSTONE_VARIANTS = new HashMap<>();
-    public static final Map<Integer, BlockSet> BONE_VARIANTS = new HashMap<>();
-    public static final Map<Integer, BlockSet> DRIPSTONE_VARIANTS = new HashMap<>();
-    public static final Map<Integer, BlockSet> PACKED_ICE_VARIANTS = new HashMap<>();
-    public static final Map<Integer, BlockSet> MUD_BRICK_VARIANTS = new HashMap<>();
-    public static final Map<Integer, BlockSet> ANDESITE_VARIANTS = new HashMap<>();
-    public static final Map<Integer, BlockSet> QUARTZ_VARIANTS = new HashMap<>();
-    public static final Map<Integer, BlockSet> DIORITE_VARIANTS = new HashMap<>();
-    public static final Map<Integer, BlockSet> TUFF_VARIANTS = new HashMap<>();
-
-
-
-
     private static <T extends Block> @NotNull DeferredBlock<T> registerBlock(String name, Function<BlockBehaviour.Properties, T> block, BlockBehaviour.Properties properties, boolean registerItem) {
         DeferredBlock<T> toReturn = BLOCKS.registerBlock(name, block, properties);
         // Register the block item only if the flag is true
@@ -228,617 +75,84 @@ public class ModBLocks {
         return ModItems.ITEMS.registerSimpleBlockItem(name, block);
     }
 
+    // ── Replace everything from the VALID_BLACKSTONE_INDICES declarations
+// through the closing brace of the static { } block with this ──────────────
 
-    private static void registerBlackstoneVariants() {
-        BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(Blocks.BLACKSTONE).strength(3f);
+    public static final List<Integer> VALID_BLACKSTONE_INDICES  = new ArrayList<>(IntStream.rangeClosed(1, 38).filter(i -> i != 15 && i != 22 && i != 31).boxed().collect(Collectors.toList()));
+    public static final List<Integer> VALID_BASALT_INDICES      = new ArrayList<>(IntStream.rangeClosed(1, 38).filter(i -> i != 1  && i != 15).boxed().collect(Collectors.toList()));
+    public static final List<Integer> VALID_TUFF_INDICES        = new ArrayList<>(IntStream.rangeClosed(1, 38).filter(i -> i != 10 && i != 15 && i != 20 && i != 21).boxed().collect(Collectors.toList()));
+    public static final List<Integer> VALID_BRICKS_INDICES      = new ArrayList<>(IntStream.rangeClosed(1, 38).filter(i -> i != 2  && i != 15).boxed().collect(Collectors.toList()));
+    public static final List<Integer> VALID_CALCITE_INDICES     = new ArrayList<>(IntStream.rangeClosed(1, 38).filter(i -> i != 15).boxed().collect(Collectors.toList()));
+    public static final List<Integer> VALID_DIORITE_INDICES     = new ArrayList<>(IntStream.rangeClosed(1, 38).filter(i -> i != 15).boxed().collect(Collectors.toList()));
+    public static final List<Integer> VALID_QUARTZ_INDICES      = new ArrayList<>(IntStream.rangeClosed(1, 38).filter(i -> i != 14 && i != 15).boxed().collect(Collectors.toList()));
+    public static final List<Integer> VALID_CDEEPSLATE_INDICES  = new ArrayList<>(IntStream.rangeClosed(1, 38).filter(i -> i != 4  && i != 15 && i != 19).boxed().collect(Collectors.toList()));
+    public static final List<Integer> VALID_GRANITE_INDICES     = new ArrayList<>(IntStream.rangeClosed(1, 38).filter(i -> i != 15).boxed().collect(Collectors.toList()));
+    public static final List<Integer> VALID_ANDESITE_INDICES    = new ArrayList<>(IntStream.rangeClosed(1, 38).filter(i -> i != 15).boxed().collect(Collectors.toList()));
+    public static final List<Integer> VALID_REDKEEP_INDICES     = new ArrayList<>(IntStream.rangeClosed(1, 38).filter(i -> i != 15).boxed().collect(Collectors.toList()));
+    public static final List<Integer> VALID_RSANDSTONE_INDICES  = new ArrayList<>(IntStream.rangeClosed(1, 38).filter(i -> i != 15 && i != 16 && i != 17 && i != 18).boxed().collect(Collectors.toList()));
+    public static final List<Integer> VALID_SANDSTONE_INDICES   = new ArrayList<>(IntStream.rangeClosed(1, 38).filter(i -> i != 15 && i != 16 && i != 17 && i != 18).boxed().collect(Collectors.toList()));
+    public static final List<Integer> VALID_STONE_INDICES       = new ArrayList<>(IntStream.rangeClosed(1, 38).filter(i -> i != 5  && i != 15 && i != 19 && i != 23).boxed().collect(Collectors.toList()));
+    public static final List<Integer> VALID_SSTONE_INDICES      = new ArrayList<>(IntStream.rangeClosed(1, 38).filter(i -> i != 15 && i != 23).boxed().collect(Collectors.toList()));
+    public static final List<Integer> VALID_BONE_INDICES        = new ArrayList<>(IntStream.rangeClosed(1, 38).filter(i -> i != 15 && i != 35).boxed().collect(Collectors.toList()));
+    public static final List<Integer> VALID_DRIPSTONE_INDICES   = new ArrayList<>(IntStream.rangeClosed(1, 38).filter(i -> i != 15).boxed().collect(Collectors.toList()));
+    public static final List<Integer> VALID_PACKED_ICE_INDICES  = new ArrayList<>(IntStream.rangeClosed(1, 38).filter(i -> i != 15).boxed().collect(Collectors.toList()));
+    public static final List<Integer> VALID_MUD_BRICK_INDICES   = new ArrayList<>(IntStream.rangeClosed(1, 38).filter(i -> i != 7  && i != 9 && i != 15).boxed().collect(Collectors.toList()));
 
-        for (int i : VALID_BLACKSTONE_INDICES) {
-            String baseName = "blackstone_" + i;
+    public static final Map<Integer, BlockSet> BLACKSTONE_VARIANTS  = new HashMap<>();
+    public static final Map<Integer, BlockSet> BASALT_VARIANTS      = new HashMap<>();
+    public static final Map<Integer, BlockSet> BRICKS_VARIANTS      = new HashMap<>();
+    public static final Map<Integer, BlockSet> CALCITE_VARIANTS     = new HashMap<>();
+    public static final Map<Integer, BlockSet> CDEEPSLATE_VARIANTS  = new HashMap<>();
+    public static final Map<Integer, BlockSet> GRANITE_VARIANTS     = new HashMap<>();
+    public static final Map<Integer, BlockSet> REDKEEP_VARIANTS     = new HashMap<>();
+    public static final Map<Integer, BlockSet> RSANDSTONE_VARIANTS  = new HashMap<>();
+    public static final Map<Integer, BlockSet> SANDSTONE_VARIANTS   = new HashMap<>();
+    public static final Map<Integer, BlockSet> STONE_VARIANTS       = new HashMap<>();
+    public static final Map<Integer, BlockSet> SSTONE_VARIANTS      = new HashMap<>();
+    public static final Map<Integer, BlockSet> BONE_VARIANTS        = new HashMap<>();
+    public static final Map<Integer, BlockSet> DRIPSTONE_VARIANTS   = new HashMap<>();
+    public static final Map<Integer, BlockSet> PACKED_ICE_VARIANTS  = new HashMap<>();
+    public static final Map<Integer, BlockSet> MUD_BRICK_VARIANTS   = new HashMap<>();
+    public static final Map<Integer, BlockSet> ANDESITE_VARIANTS    = new HashMap<>();
+    public static final Map<Integer, BlockSet> QUARTZ_VARIANTS      = new HashMap<>();
+    public static final Map<Integer, BlockSet> DIORITE_VARIANTS     = new HashMap<>();
+    public static final Map<Integer, BlockSet> TUFF_VARIANTS        = new HashMap<>();
 
-            // Resource-safe lowercase names
-            String blockName = baseName + "_block";
-            String stairsName = baseName + "_stairs";
-            String slabName = baseName + "_slab";
-            String wallName = baseName + "_wall";
-
-            DeferredBlock<Block> base = registerBlock(blockName, Block::new, properties, true);
-            DeferredBlock<Block> stairs = registerBlock(stairsName, p -> new StairBlock(base.get().defaultBlockState(), p), properties, true);
-            DeferredBlock<Block> slab = registerBlock(slabName, SlabBlock::new, properties, true);
-            DeferredBlock<Block> wall = registerBlock(wallName, WallBlock::new, properties, true);
-
-            BLACKSTONE_VARIANTS.put(i, new BlockSet(base, stairs, slab, wall));
-
-            System.out.println("✅ Registered: " + baseName);
-        }
-
-        // Optional sanity check
-        for (int i = 1; i <= 38; i++) {
-            if (!BLACKSTONE_VARIANTS.containsKey(i)) {
-                System.err.println("⚠ Skipped blackstone variant: blackstone_" + i);
-            }
-        }
-    }
-
-    private static void registerTuffVariants() {
-        BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(Blocks.TUFF).strength(3f);
-
-        for (int i : VALID_TUFF_INDICES) {
-            String baseName = "tuff_brick_" + i;
-
-            // Resource-safe lowercase names
-            String blockName = baseName + "_block";
-            String stairsName = baseName + "_stairs";
-            String slabName = baseName + "_slab";
-            String wallName = baseName + "_wall";
-
-            DeferredBlock<Block> base = registerBlock(blockName, Block::new, properties, true);
-            DeferredBlock<Block> stairs = registerBlock(stairsName, p -> new StairBlock(base.get().defaultBlockState(), p), properties, true);
-            DeferredBlock<Block> slab = registerBlock(slabName, SlabBlock::new, properties, true);
-            DeferredBlock<Block> wall = registerBlock(wallName, WallBlock::new, properties, true);
-
-            TUFF_VARIANTS.put(i, new BlockSet(base, stairs, slab, wall));
-
-            System.out.println("✅ Registered: " + baseName);
-        }
-
-        // Optional sanity check
-        for (int i = 1; i <= 38; i++) {
-            if (!TUFF_VARIANTS.containsKey(i)) {
-                System.err.println("⚠ Skipped tuff variant: tuff_" + i);
-            }
+    private static void registerVariants(String prefix, BlockBehaviour.Properties props,
+                                         List<Integer> indices, Map<Integer, BlockSet> map) {
+        for (int i : indices) {
+            String b = prefix + "_" + i;
+            DeferredBlock<Block> bl = registerBlock(b + "_block",  Block::new, props, true);
+            DeferredBlock<Block> st = registerBlock(b + "_stairs", p -> new StairBlock(bl.get().defaultBlockState(), p), props, true);
+            DeferredBlock<Block> sl = registerBlock(b + "_slab",   SlabBlock::new, props, true);
+            DeferredBlock<Block> wa = registerBlock(b + "_wall",   WallBlock::new, props, true);
+            map.put(i, new BlockSet(bl, st, sl, wa));
         }
     }
 
-
-    private static void registerDioriteVariants() {
-        BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(Blocks.DIORITE).strength(3f);
-
-        for (int i : VALID_DIORITE_INDICES) {
-            String baseName = "diorite_" + i;
-
-            // Resource-safe lowercase names
-            String blockName = baseName + "_block";
-            String stairsName = baseName + "_stairs";
-            String slabName = baseName + "_slab";
-            String wallName = baseName + "_wall";
-
-            DeferredBlock<Block> base = registerBlock(blockName, Block::new, properties, true);
-            DeferredBlock<Block> stairs = registerBlock(stairsName, p -> new StairBlock(base.get().defaultBlockState(), p), properties, true);
-            DeferredBlock<Block> slab = registerBlock(slabName, SlabBlock::new, properties, true);
-            DeferredBlock<Block> wall = registerBlock(wallName, WallBlock::new, properties, true);
-
-            DIORITE_VARIANTS.put(i, new BlockSet(base, stairs, slab, wall));
-
-            System.out.println("✅ Registered: " + baseName);
-        }
-
-        // Optional sanity check
-        for (int i = 1; i <= 38; i++) {
-            if (!DIORITE_VARIANTS.containsKey(i)) {
-                System.err.println("⚠ Skipped diorite variant: diorite_" + i);
-            }
-        }
-    }
-
-
-    private static void registerQuartzVariants() {
-        BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(Blocks.QUARTZ_BLOCK).strength(3f);
-
-        for (int i : VALID_QUARTZ_INDICES) {
-            String baseName = "quartz_" + i;
-
-            // Resource-safe lowercase names
-            String blockName = baseName + "_block";
-            String stairsName = baseName + "_stairs";
-            String slabName = baseName + "_slab";
-            String wallName = baseName + "_wall";
-
-            DeferredBlock<Block> base = registerBlock(blockName, Block::new, properties, true);
-            DeferredBlock<Block> stairs = registerBlock(stairsName, p -> new StairBlock(base.get().defaultBlockState(), p), properties, true);
-            DeferredBlock<Block> slab = registerBlock(slabName, SlabBlock::new, properties, true);
-            DeferredBlock<Block> wall = registerBlock(wallName, WallBlock::new, properties, true);
-
-            QUARTZ_VARIANTS.put(i, new BlockSet(base, stairs, slab, wall));
-
-            System.out.println("✅ Registered: " + baseName);
-        }
-
-        // Optional sanity check
-        for (int i = 1; i <= 38; i++) {
-            if (!QUARTZ_VARIANTS.containsKey(i)) {
-                System.err.println("⚠ Skipped quartz variant: quartz_" + i);
-            }
-        }
-    }
-
-
-
-    private static void registerStoneVariants() {
-        BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f);
-
-        for (int i : VALID_STONE_INDICES) {
-            String baseName = "stone_" + i;
-
-            // Resource-safe lowercase names
-            String blockName = baseName + "_block";
-            String stairsName = baseName + "_stairs";
-            String slabName = baseName + "_slab";
-            String wallName = baseName + "_wall";
-
-            DeferredBlock<Block> base = registerBlock(blockName, Block::new, properties, true);
-            DeferredBlock<Block> stairs = registerBlock(stairsName, p -> new StairBlock(base.get().defaultBlockState(), p), properties, true);
-            DeferredBlock<Block> slab = registerBlock(slabName, SlabBlock::new, properties, true);
-            DeferredBlock<Block> wall = registerBlock(wallName, WallBlock::new, properties, true);
-
-            STONE_VARIANTS.put(i, new BlockSet(base, stairs, slab, wall));
-
-            System.out.println("✅ Registered: " + baseName);
-        }
-
-        // Optional sanity check
-        for (int i = 1; i <= 38; i++) {
-            if (!STONE_VARIANTS.containsKey(i)) {
-                System.err.println("⚠ Skipped stone variant: stone_" + i);
-            }
-        }
-    }
-
-    private static void registerAndesiteVariants() {
-        BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(Blocks.ANDESITE).strength(3f);
-
-        for (int i : VALID_ANDESITE_INDICES) {
-            String baseName = "andesite_" + i;
-
-            // Resource-safe lowercase names
-            String blockName = baseName + "_block";
-            String stairsName = baseName + "_stairs";
-            String slabName = baseName + "_slab";
-            String wallName = baseName + "_wall";
-
-            DeferredBlock<Block> base = registerBlock(blockName, Block::new, properties, true);
-            DeferredBlock<Block> stairs = registerBlock(stairsName, p -> new StairBlock(base.get().defaultBlockState(), p), properties, true);
-            DeferredBlock<Block> slab = registerBlock(slabName, SlabBlock::new, properties, true);
-            DeferredBlock<Block> wall = registerBlock(wallName, WallBlock::new, properties, true);
-
-            ANDESITE_VARIANTS.put(i, new BlockSet(base, stairs, slab, wall));
-
-            System.out.println("✅ Registered: " + baseName);
-        }
-
-        // Optional sanity check
-        for (int i = 1; i <= 38; i++) {
-            if (!ANDESITE_VARIANTS.containsKey(i)) {
-                System.err.println("⚠ Skipped andesite variant: andesite_" + i);
-            }
-        }
-    }
-
-
-
-    private static void registerBasaltVariants() {
-        BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f);
-
-        for (int i : VALID_BASALT_INDICES) {
-            String baseName = "basalt_" + i;
-
-            // Resource-safe lowercase names
-            String blockName = baseName + "_block";
-            String stairsName = baseName + "_stairs";
-            String slabName = baseName + "_slab";
-            String wallName = baseName + "_wall";
-
-            DeferredBlock<Block> base = registerBlock(blockName, Block::new, properties, true);
-            DeferredBlock<Block> stairs = registerBlock(stairsName, p -> new StairBlock(base.get().defaultBlockState(), p), properties, true);
-            DeferredBlock<Block> slab = registerBlock(slabName, SlabBlock::new, properties, true);
-            DeferredBlock<Block> wall = registerBlock(wallName, WallBlock::new, properties, true);
-
-            BASALT_VARIANTS.put(i, new BlockSet(base, stairs, slab, wall));
-
-            System.out.println("✅ Registered: " + baseName);
-        }
-
-        // Optional sanity check
-        for (int i = 1; i <= 38; i++) {
-            if (!BASALT_VARIANTS.containsKey(i)) {
-                System.err.println("⚠ Skipped basalt variant: basalt_" + i);
-            }
-        }
-    }
-    private static void registerBricksVariants() {
-        BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(Blocks.BRICKS).strength(3f);
-
-        for (int i : VALID_BRICKS_INDICES) {
-            String baseName = "bricks_" + i;
-
-            // Resource-safe lowercase names
-            String blockName = baseName + "_block";
-            String stairsName = baseName + "_stairs";
-            String slabName = baseName + "_slab";
-            String wallName = baseName + "_wall";
-
-            DeferredBlock<Block> base = registerBlock(blockName, Block::new, properties, true);
-            DeferredBlock<Block> stairs = registerBlock(stairsName, p -> new StairBlock(base.get().defaultBlockState(), p), properties, true);
-            DeferredBlock<Block> slab = registerBlock(slabName, SlabBlock::new, properties, true);
-            DeferredBlock<Block> wall = registerBlock(wallName, WallBlock::new, properties, true);
-
-            BRICKS_VARIANTS.put(i, new BlockSet(base, stairs, slab, wall));
-
-            System.out.println("✅ Registered: " + baseName);
-        }
-
-        // Optional sanity check
-        for (int i = 1; i <= 38; i++) {
-            if (!BRICKS_VARIANTS.containsKey(i)) {
-                System.err.println("⚠ Skipped bricks variant: bricks_" + i);
-            }
-        }
-    }
-
-    private static void registerCalciteVariants() {
-        BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f);
-
-        for (int i : VALID_CALCITE_INDICES) { // Changed from VALID_BASALT_INDICES to VALID_CALCITE_INDICES
-            String baseName = "calcite_" + i; // Changed to calcite_
-
-            // Resource-safe lowercase names
-            String blockName = baseName + "_block";
-            String stairsName = baseName + "_stairs";
-            String slabName = baseName + "_slab";
-            String wallName = baseName + "_wall";
-
-            DeferredBlock<Block> base = registerBlock(blockName, Block::new, properties, true);
-            DeferredBlock<Block> stairs = registerBlock(stairsName, p -> new StairBlock(base.get().defaultBlockState(), p), properties, true);
-            DeferredBlock<Block> slab = registerBlock(slabName, SlabBlock::new, properties, true);
-            DeferredBlock<Block> wall = registerBlock(wallName, WallBlock::new, properties, true);
-
-            CALCITE_VARIANTS.put(i, new BlockSet(base, stairs, slab, wall)); // Changed to CALCITE_VARIANTS
-
-            System.out.println("✅ Registered: " + baseName);
-        }
-
-        // Optional sanity check
-        for (int i = 1; i <= 38; i++) {
-            if (!CALCITE_VARIANTS.containsKey(i)) { // Changed to CALCITE_VARIANTS
-                System.err.println("⚠ Skipped calcite variant: calcite_" + i); // Changed to calcite_
-            }
-        }
-    }
-
-    private static void registerCDeepslateVariants() {
-        BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f); // Replaced BLACKSTONE with CDEEPSLATE
-
-        for (int i : VALID_CDEEPSLATE_INDICES) { // Changed to CDEEPSLATE_INDICES
-            String baseName = "cdeepslate_" + i; // Changed to cdeepslate_
-
-            // Resource-safe lowercase names
-            String blockName = baseName + "_block";
-            String stairsName = baseName + "_stairs";
-            String slabName = baseName + "_slab";
-            String wallName = baseName + "_wall";
-
-            DeferredBlock<Block> base = registerBlock(blockName, Block::new, properties, true);
-            DeferredBlock<Block> stairs = registerBlock(stairsName, p -> new StairBlock(base.get().defaultBlockState(), p), properties, true);
-            DeferredBlock<Block> slab = registerBlock(slabName, SlabBlock::new, properties, true);
-            DeferredBlock<Block> wall = registerBlock(wallName, WallBlock::new, properties, true);
-
-            CDEEPSLATE_VARIANTS.put(i, new BlockSet(base, stairs, slab, wall)); // Replaced BLACKSTONE_VARIANTS with CDEEPSLATE_VARIANTS
-
-            System.out.println("✅ Registered: " + baseName);
-        }
-
-        // Optional sanity check
-        for (int i = 1; i <= 38; i++) {
-            if (!CDEEPSLATE_VARIANTS.containsKey(i)) { // Replaced BLACKSTONE_VARIANTS with CDEEPSLATE_VARIANTS
-                System.err.println("⚠ Skipped cdeepslate variant: cdeepslate_" + i); // Replaced blackstone_ with cdeepslate_
-            }
-        }
-    }
-    private static void registerGraniteVariants() {
-        BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f);
-
-        for (int i : VALID_GRANITE_INDICES) {
-            String baseName = "granite_" + i;
-
-            // Resource-safe lowercase names
-            String blockName = baseName + "_block";
-            String stairsName = baseName + "_stairs";
-            String slabName = baseName + "_slab";
-            String wallName = baseName + "_wall";
-
-            DeferredBlock<Block> base = registerBlock(blockName, Block::new, properties, true);
-            DeferredBlock<Block> stairs = registerBlock(stairsName, p -> new StairBlock(base.get().defaultBlockState(), p), properties, true);
-            DeferredBlock<Block> slab = registerBlock(slabName, SlabBlock::new, properties, true);
-            DeferredBlock<Block> wall = registerBlock(wallName, WallBlock::new, properties, true);
-
-            GRANITE_VARIANTS.put(i, new BlockSet(base, stairs, slab, wall));
-
-            System.out.println("✅ Registered: " + baseName);
-        }
-
-        // Optional sanity check
-        for (int i = 1; i <= 38; i++) {
-            if (!GRANITE_VARIANTS.containsKey(i)) {
-                System.err.println("⚠ Skipped granite variant: granite_" + i);
-            }
-        }
-    }
-
-    private static void registerRedkeepVariants() {
-        BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f);
-
-        for (int i : VALID_REDKEEP_INDICES) {
-            String baseName = "redkeep_" + i;
-
-            // Resource-safe lowercase names
-            String blockName = baseName + "_block";
-            String stairsName = baseName + "_stairs";
-            String slabName = baseName + "_slab";
-            String wallName = baseName + "_wall";
-
-            DeferredBlock<Block> base = registerBlock(blockName, Block::new, properties, true);
-            DeferredBlock<Block> stairs = registerBlock(stairsName, p -> new StairBlock(base.get().defaultBlockState(), p), properties, true);
-            DeferredBlock<Block> slab = registerBlock(slabName, SlabBlock::new, properties, true);
-            DeferredBlock<Block> wall = registerBlock(wallName, WallBlock::new, properties, true);
-
-            REDKEEP_VARIANTS.put(i, new BlockSet(base, stairs, slab, wall));
-
-            System.out.println("✅ Registered: " + baseName);
-        }
-
-        // Optional sanity check
-        for (int i = 1; i <= 38; i++) {
-            if (!REDKEEP_VARIANTS.containsKey(i)) {
-                System.err.println("⚠ Skipped redkeep variant: redkeep_" + i);
-            }
-        }
-    }
-
-    private static void registerRsandstoneVariants() {
-        BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(Blocks.RED_SANDSTONE).strength(3f);
-
-        for (int i : VALID_RSANDSTONE_INDICES) {
-            String baseName = "rsandstone_" + i;
-
-            // Resource-safe lowercase names
-            String blockName = baseName + "_block";
-            String stairsName = baseName + "_stairs";
-            String slabName = baseName + "_slab";
-            String wallName = baseName + "_wall";
-
-            DeferredBlock<Block> base = registerBlock(blockName, Block::new, properties, true);
-            DeferredBlock<Block> stairs = registerBlock(stairsName, p -> new StairBlock(base.get().defaultBlockState(), p), properties, true);
-            DeferredBlock<Block> slab = registerBlock(slabName, SlabBlock::new, properties, true);
-            DeferredBlock<Block> wall = registerBlock(wallName, WallBlock::new, properties, true);
-
-            RSANDSTONE_VARIANTS.put(i, new BlockSet(base, stairs, slab, wall));
-
-            System.out.println("✅ Registered: " + baseName);
-        }
-
-        // Optional sanity check
-        for (int i = 1; i <= 38; i++) {
-            if (!RSANDSTONE_VARIANTS.containsKey(i)) {
-                System.err.println("⚠ Skipped rsandstone variant: rsandstone_" + i);
-            }
-        }
-    }
-
-    private static void registerSandstoneVariants() {
-        BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(Blocks.SANDSTONE).strength(3f);
-
-        for (int i : VALID_SANDSTONE_INDICES) {
-            String baseName = "sandstone_" + i;
-
-            // Resource-safe lowercase names
-            String blockName = baseName + "_block";
-            String stairsName = baseName + "_stairs";
-            String slabName = baseName + "_slab";
-            String wallName = baseName + "_wall";
-
-            DeferredBlock<Block> base = registerBlock(blockName, Block::new, properties, true);
-            DeferredBlock<Block> stairs = registerBlock(stairsName, p -> new StairBlock(base.get().defaultBlockState(), p), properties, true);
-            DeferredBlock<Block> slab = registerBlock(slabName, SlabBlock::new, properties, true);
-            DeferredBlock<Block> wall = registerBlock(wallName, WallBlock::new, properties, true);
-
-            SANDSTONE_VARIANTS.put(i, new BlockSet(base, stairs, slab, wall));
-
-            System.out.println("✅ Registered: " + baseName);
-        }
-
-        // Optional sanity check
-        for (int i = 1; i <= 38; i++) {
-            if (!SANDSTONE_VARIANTS.containsKey(i)) {
-                System.err.println("⚠ Skipped sandstone variant: sandstone_" + i);
-            }
-        }
-    }
-
-    private static void registerSstoneVariants() {
-        BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(Blocks.SMOOTH_STONE).strength(3f);
-
-        for (int i : VALID_SSTONE_INDICES) {
-            String baseName = "sstone_" + i;
-
-            // Resource-safe lowercase names
-            String blockName = baseName + "_block";
-            String stairsName = baseName + "_stairs";
-            String slabName = baseName + "_slab";
-            String wallName = baseName + "_wall";
-
-            DeferredBlock<Block> base = registerBlock(blockName, Block::new, properties, true);
-            DeferredBlock<Block> stairs = registerBlock(stairsName, p -> new StairBlock(base.get().defaultBlockState(), p), properties, true);
-            DeferredBlock<Block> slab = registerBlock(slabName, SlabBlock::new, properties, true);
-            DeferredBlock<Block> wall = registerBlock(wallName, WallBlock::new, properties, true);
-
-            SSTONE_VARIANTS.put(i, new BlockSet(base, stairs, slab, wall));
-
-            System.out.println("✅ Registered: " + baseName);
-        }
-
-        // Optional sanity check
-        for (int i = 1; i <= 38; i++) {
-            if (!SSTONE_VARIANTS.containsKey(i)) {
-                System.err.println("⚠ Skipped sstone variant: sstone_" + i);
-            }
-        }
-
-    }
-
-    private static void registerBoneVariants() {
-        BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(Blocks.BONE_BLOCK).strength(3f);
-
-        for (int i : VALID_BONE_INDICES) {
-            String baseName = "bone_" + i;
-
-            // Resource-safe lowercase names
-            String blockName = baseName + "_block";
-            String stairsName = baseName + "_stairs";
-            String slabName = baseName + "_slab";
-            String wallName = baseName + "_wall";
-
-            DeferredBlock<Block> base = registerBlock(blockName, Block::new, properties, true);
-            DeferredBlock<Block> stairs = registerBlock(stairsName, p -> new StairBlock(base.get().defaultBlockState(), p), properties, true);
-            DeferredBlock<Block> slab = registerBlock(slabName, SlabBlock::new, properties, true);
-            DeferredBlock<Block> wall = registerBlock(wallName, WallBlock::new, properties, true);
-
-            BONE_VARIANTS.put(i, new BlockSet(base, stairs, slab, wall));
-
-            System.out.println("✅ Registered: " + baseName);
-        }
-
-        // Optional sanity check
-        for (int i = 1; i <= 38; i++) {
-            if (!BONE_VARIANTS.containsKey(i)) {
-                System.err.println("⚠ Skipped bone variant: bone_" + i);
-            }
-        }
-    }
-
-    private static void registerDripstoneVariants() {
-        BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(Blocks.DRIPSTONE_BLOCK).strength(3f);
-
-        for (int i : VALID_DRIPSTONE_INDICES) {
-            String baseName = "dripstone_" + i;
-
-            // Resource-safe lowercase names
-            String blockName = baseName + "_block";
-            String stairsName = baseName + "_stairs";
-            String slabName = baseName + "_slab";
-            String wallName = baseName + "_wall";
-
-            DeferredBlock<Block> base = registerBlock(blockName, Block::new, properties, true);
-            DeferredBlock<Block> stairs = registerBlock(stairsName, p -> new StairBlock(base.get().defaultBlockState(), p), properties, true);
-            DeferredBlock<Block> slab = registerBlock(slabName, SlabBlock::new, properties, true);
-            DeferredBlock<Block> wall = registerBlock(wallName, WallBlock::new, properties, true);
-
-            DRIPSTONE_VARIANTS.put(i, new BlockSet(base, stairs, slab, wall));
-
-            System.out.println("✅ Registered: " + baseName);
-        }
-
-        // Optional sanity check
-        for (int i = 1; i <= 38; i++) {
-            if (!DRIPSTONE_VARIANTS.containsKey(i)) {
-                System.err.println("⚠ Skipped dripstone variant: dripstone_" + i);
-            }
-        }
-    }
-
-    private static void registerPackedIceVariants() {
-        BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(Blocks.PACKED_ICE).strength(3f);
-
-        for (int i : VALID_PACKED_ICE_INDICES) {
-            String baseName = "packed_ice_" + i;
-
-            // Resource-safe lowercase names
-            String blockName = baseName + "_block";
-            String stairsName = baseName + "_stairs";
-            String slabName = baseName + "_slab";
-            String wallName = baseName + "_wall";
-
-            DeferredBlock<Block> base = registerBlock(blockName, Block::new, properties, true);
-            DeferredBlock<Block> stairs = registerBlock(stairsName, p -> new StairBlock(base.get().defaultBlockState(), p), properties, true);
-            DeferredBlock<Block> slab = registerBlock(slabName, SlabBlock::new, properties, true);
-            DeferredBlock<Block> wall = registerBlock(wallName, WallBlock::new, properties, true);
-
-            PACKED_ICE_VARIANTS.put(i, new BlockSet(base, stairs, slab, wall));
-
-            System.out.println("✅ Registered: " + baseName);
-        }
-
-        // Optional sanity check
-        for (int i = 1; i <= 38; i++) {
-            if (!PACKED_ICE_VARIANTS.containsKey(i)) {
-                System.err.println("⚠ Skipped packed_ice variant: packed_ice_" + i);
-            }
-        }
-    }
-
-    private static void registerMudBrickVariants() {
-        BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(Blocks.MUD_BRICKS).strength(3f);
-
-        for (int i : VALID_MUD_BRICK_INDICES) {
-            String baseName = "mud_brick_" + i;
-
-            // Resource-safe lowercase names
-            String blockName = baseName + "_block";
-            String stairsName = baseName + "_stairs";
-            String slabName = baseName + "_slab";
-            String wallName = baseName + "_wall";
-
-            DeferredBlock<Block> base = registerBlock(blockName, Block::new, properties, true);
-            DeferredBlock<Block> stairs = registerBlock(stairsName, p -> new StairBlock(base.get().defaultBlockState(), p), properties, true);
-            DeferredBlock<Block> slab = registerBlock(slabName, SlabBlock::new, properties, true);
-            DeferredBlock<Block> wall = registerBlock(wallName, WallBlock::new, properties, true);
-
-            MUD_BRICK_VARIANTS.put(i, new BlockSet(base, stairs, slab, wall));
-
-            System.out.println("✅ Registered: " + baseName);
-        }
-
-        // Optional sanity check
-        for (int i = 1; i <= 38; i++) {
-            if (!MUD_BRICK_VARIANTS.containsKey(i)) {
-                System.err.println("⚠ Skipped mud_brick variant: mud_brick_" + i);
-            }
-        }
-    }
-
-
-
-
-
-
-
-
-    public record BlockSet(
-            DeferredBlock<Block> base,
-            DeferredBlock<Block> stairs,
-            DeferredBlock<Block> slab,
-            DeferredBlock<Block> wall
-    ) {}
+    public record BlockSet(DeferredBlock<Block> base, DeferredBlock<Block> stairs,
+                           DeferredBlock<Block> slab, DeferredBlock<Block> wall) {}
 
     static {
-        registerBlackstoneVariants();
-        registerBasaltVariants();
-        registerBricksVariants();
-        registerCalciteVariants();
-        registerCDeepslateVariants();
-        registerGraniteVariants();
-        registerRedkeepVariants();
-        registerRsandstoneVariants();
-        registerSandstoneVariants();
-        registerStoneVariants();
-        registerSstoneVariants();
-        registerBoneVariants();
-        registerDripstoneVariants();
-        registerPackedIceVariants();
-        registerMudBrickVariants();
-        registerAndesiteVariants();
-        registerQuartzVariants();
-        registerDioriteVariants();
-        registerTuffVariants();
-
+        registerVariants("blackstone",  BlockBehaviour.Properties.ofFullCopy(Blocks.BLACKSTONE).strength(3f),       VALID_BLACKSTONE_INDICES,  BLACKSTONE_VARIANTS);
+        registerVariants("basalt",      BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(3f),            VALID_BASALT_INDICES,      BASALT_VARIANTS);
+        registerVariants("tuff_brick",  BlockBehaviour.Properties.ofFullCopy(Blocks.TUFF).strength(3f),              VALID_TUFF_INDICES,        TUFF_VARIANTS);
+        registerVariants("bricks",      BlockBehaviour.Properties.ofFullCopy(Blocks.BRICKS).strength(3f),            VALID_BRICKS_INDICES,      BRICKS_VARIANTS);
+        registerVariants("calcite",     BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).strength(3f),           VALID_CALCITE_INDICES,     CALCITE_VARIANTS);
+        registerVariants("diorite",     BlockBehaviour.Properties.ofFullCopy(Blocks.DIORITE).strength(3f),           VALID_DIORITE_INDICES,     DIORITE_VARIANTS);
+        registerVariants("quartz",      BlockBehaviour.Properties.ofFullCopy(Blocks.QUARTZ_BLOCK).strength(3f),      VALID_QUARTZ_INDICES,      QUARTZ_VARIANTS);
+        registerVariants("cdeepslate",  BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).strength(3f), VALID_CDEEPSLATE_INDICES,  CDEEPSLATE_VARIANTS);
+        registerVariants("granite",     BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f),           VALID_GRANITE_INDICES,     GRANITE_VARIANTS);
+        registerVariants("andesite",    BlockBehaviour.Properties.ofFullCopy(Blocks.ANDESITE).strength(3f),          VALID_ANDESITE_INDICES,    ANDESITE_VARIANTS);
+        registerVariants("redkeep",     BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).strength(3f),           VALID_REDKEEP_INDICES,     REDKEEP_VARIANTS);
+        registerVariants("rsandstone",  BlockBehaviour.Properties.ofFullCopy(Blocks.RED_SANDSTONE).strength(3f),     VALID_RSANDSTONE_INDICES,  RSANDSTONE_VARIANTS);
+        registerVariants("sandstone",   BlockBehaviour.Properties.ofFullCopy(Blocks.SANDSTONE).strength(3f),         VALID_SANDSTONE_INDICES,   SANDSTONE_VARIANTS);
+        registerVariants("stone",       BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f),             VALID_STONE_INDICES,       STONE_VARIANTS);
+        registerVariants("sstone",      BlockBehaviour.Properties.ofFullCopy(Blocks.SMOOTH_STONE).strength(3f),      VALID_SSTONE_INDICES,      SSTONE_VARIANTS);
+        registerVariants("bone",        BlockBehaviour.Properties.ofFullCopy(Blocks.BONE_BLOCK).strength(3f),        VALID_BONE_INDICES,        BONE_VARIANTS);
+        registerVariants("dripstone",   BlockBehaviour.Properties.ofFullCopy(Blocks.DRIPSTONE_BLOCK).strength(3f),   VALID_DRIPSTONE_INDICES,   DRIPSTONE_VARIANTS);
+        registerVariants("packed_ice",  BlockBehaviour.Properties.ofFullCopy(Blocks.PACKED_ICE).strength(3f),        VALID_PACKED_ICE_INDICES,  PACKED_ICE_VARIANTS);
+        registerVariants("mud_brick",   BlockBehaviour.Properties.ofFullCopy(Blocks.MUD_BRICKS).strength(3f),        VALID_MUD_BRICK_INDICES,   MUD_BRICK_VARIANTS);
     }
 
 
