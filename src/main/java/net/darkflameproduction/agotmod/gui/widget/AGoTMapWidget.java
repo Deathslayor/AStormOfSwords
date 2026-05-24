@@ -287,15 +287,7 @@ public class AGoTMapWidget extends AbstractWidget {
         }
 
         if (showTexts) {
-            double readableZoom = getReadableZoom();
             for (MapText overlay : textOverlays) {
-                if (readableZoom <= overlay.minZoom()) {
-                    continue;
-                }
-                if (overlay.maxZoom() != -1.0F && readableZoom >= overlay.maxZoom()) {
-                    continue;
-                }
-
                 int textX = getTextureX() + (int) (overlay.x() * zoom);
                 int textY = getTextureY() + (int) (overlay.y() * zoom);
 

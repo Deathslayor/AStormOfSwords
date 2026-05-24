@@ -12,6 +12,9 @@
             "terrain_modifier": 33.0
           },
           "noise_gen_settings": "ctgen:overworld",
+          "scale": 29,
+          "transition": 10,
+          "border_noise": 1.0,
           "zones": [
             {
               "biome": "minecraft:frozen_peaks",
@@ -102,11 +105,6 @@
               "terrain_modifier": 3.0
             },
             {
-              "biome": "agotmod:the_north",
-              "color": "#395f39",
-              "terrain_modifier": 3.0
-            },
-            {
               "biome": "agotmod:rills",
               "color": "#3d5133",
               "terrain_modifier": 12.0
@@ -137,28 +135,28 @@
               "pixel_weight": 40.0
             },
             {
-              "biome": "agotmod:the_north",
-              "color": "#878f8b",
-              "terrain_modifier": 5.0
-            },
-            {
-              "biome": "agotmod:the_north",
+              "biome": "agotmod:stony_shores",
               "color": "#69776f",
-              "terrain_modifier": 20.0
+              "terrain_modifier": 3.0
             },
             {
-              "biome": "agotmod:the_north",
+              "biome": "agotmod:stony_shores",
+              "color": "#69776f",
+              "terrain_modifier": 3.0
+            },
+            {
+              "biome": "agotmod:northern_hills",
               "color": "#909f99",
               "terrain_modifier": 40.0
             },
             {
-              "biome": "agotmod:the_north",
-              "color": "#909f99",
-              "terrain_modifier": 60.0
+              "biome": "agotmod:northern_mountains",
+              "color": "#ccd0ce",
+              "terrain_modifier": 80.0
             },
             {
               "biome": "agotmod:barrowlands",
-              "color": "#ccd0ce",
+              "color": "#525f4d",
               "terrain_modifier": 20.0
             }
           ]

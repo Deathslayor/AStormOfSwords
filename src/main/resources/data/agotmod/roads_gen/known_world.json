@@ -1,0 +1,20 @@
+{
+  "road_types": {
+    "kings_road": {
+      "blocks": ["minecraft:stone_bricks", "minecraft:cobblestone"],
+      "slabs": ["minecraft:stone_brick_slab", "minecraft:cobblestone_slab"],
+      "width": 7
+    }
+  },
+  "roads": [
+    {
+      "type": "kings_road",
+      "y_level": 70,
+      "transition": 12,
+      "waypoints": [
+        {"x": 7540, "z": 117856},
+        {"x": 20996, "z": 134560, "curve": 0.15}
+      ]
+    }
+  ]
+}
