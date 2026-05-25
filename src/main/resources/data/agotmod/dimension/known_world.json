@@ -13,6 +13,20 @@
       "scale": 29,
       "transition": 10,
       "border_noise": 1.0,
+      "disabled_structure_sets": [
+        "minecraft:stronghold",
+        "minecraft:mineshaft",
+        "minecraft:ancient_city",
+        "minecraft:trial_chambers",
+        "minecraft:trial_ruins",
+        "minecraft:ruined_portal"
+      ],
+      "disabled_features": [
+        "minecraft:monster_room",
+        "minecraft:amethyst_geode",
+        "minecraft:ice_spike",
+        "minecraft:ice_patch"
+      ],
       "zones": [
         {
           "biomes": [

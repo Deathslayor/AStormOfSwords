@@ -9,7 +9,7 @@
           "default_map_biome": {
             "biomes": [{"biome": "minecraft:deep_cold_ocean", "weight": 1.0}],
             "color": "#002355",
-            "terrain_modifier": 33.0
+            "terrain_modifier": -33.0
           },
           "noise_gen_settings": "ctgen:overworld",
           "scale": 29,
@@ -44,12 +44,12 @@
             {
               "biomes": [{"biome": "minecraft:cold_ocean", "weight": 1.0}],
               "color": "#002a67",
-              "terrain_modifier": 16.0
+              "terrain_modifier": -16.0
             },
             {
               "biomes": [{"biome": "minecraft:deep_cold_ocean", "weight": 1.0}],
               "color": "#002355",
-              "terrain_modifier": 33.0
+              "terrain_modifier": -33.0
             },
             {
               "biomes": [{"biome": "minecraft:basalt_deltas", "weight": 1.0}],
