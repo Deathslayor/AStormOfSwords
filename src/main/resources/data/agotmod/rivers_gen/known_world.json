@@ -1,0 +1,22 @@
+{
+  "rivers": [
+    {
+      "type": {
+        "width": 50,
+        "depth": 15,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 6.0,
+        "meander_strength": 0.2,
+        "biome": "minecraft:river"
+      },
+      "waypoints": [
+        {"x": 27054, "z": 111156, "curve": 0.0},
+        {"x": 15000, "z": 116000, "curve": 0.4},
+        {"x": 5000,  "z": 124000, "curve": 0.4},
+        {"x": -7540, "z": 131312, "curve": 0.0}
+      ],
+      "connects_to": []
+    }
+  ]
+}

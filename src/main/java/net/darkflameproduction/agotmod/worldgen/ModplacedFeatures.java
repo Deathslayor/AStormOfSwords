@@ -229,7 +229,6 @@ public class ModplacedFeatures {
 
 
 
-
     // Bootstrap method for initializing placed features
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         // Get a holder for configured features from the context
@@ -1262,7 +1261,6 @@ public class ModplacedFeatures {
                                 )
                         )
                 ));
-
 
 
 

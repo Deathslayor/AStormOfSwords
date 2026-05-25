@@ -77,7 +77,6 @@ public class AGoTMod {
         ModBLocks.register(modEventBus);
         ModItems.register(modEventBus);
         ModMenuTypes.register(modEventBus);
-
         // Register banner patterns
         BannerPatterns.register(modEventBus);
 

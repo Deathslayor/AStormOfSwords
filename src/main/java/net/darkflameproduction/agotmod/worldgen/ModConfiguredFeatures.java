@@ -1983,6 +1983,7 @@ public class ModConfiguredFeatures {
 
         register(context, KELP_KEY, Feature.KELP, NoneFeatureConfiguration.INSTANCE);
 
+
     }
 
     // Register a ResourceKey for a configured feature

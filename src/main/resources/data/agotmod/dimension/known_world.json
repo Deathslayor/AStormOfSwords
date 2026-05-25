@@ -23,7 +23,6 @@
       ],
       "disabled_features": [
         "minecraft:monster_room",
-        "minecraft:amethyst_geode",
         "minecraft:ice_spike",
         "minecraft:ice_patch"
       ],
