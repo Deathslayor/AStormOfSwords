@@ -1,0 +1,26 @@
+{
+  "waypoints": [
+    {
+      "name": "Winterfell",
+      "x": 7540,
+      "z": 107856,
+      "inner_color": "#FFD700",
+      "outer_color": "#FFA500",
+      "min_zoom": 0.5,
+      "max_zoom": 100,
+      "text_min_zoom": 1.5,
+      "text_max_zoom": 100
+    },
+    {
+      "name": "Castle Black",
+      "x": 20996,
+      "z": 124560,
+      "inner_color": "#FFD700",
+      "outer_color": "#FFA500",
+      "min_zoom": 0.5,
+      "max_zoom": 100,
+      "text_min_zoom": 1.5,
+      "text_max_zoom": 100
+    }
+  ]
+}

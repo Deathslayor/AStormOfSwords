@@ -11,6 +11,8 @@
       "type": "kings_road",
       "y_level": 70,
       "transition": 12,
+      "min_zoom": 2.0,
+      "max_zoom": -1,
       "waypoints": [
         {"x": 7540, "z": 117856},
         {"x": 20996, "z": 134560, "curve": 0.15}
