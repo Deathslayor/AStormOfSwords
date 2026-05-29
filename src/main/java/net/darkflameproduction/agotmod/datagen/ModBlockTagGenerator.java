@@ -731,3 +731,4 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         tag.add(key);
     }
 }
+

@@ -7,20 +7,18 @@ import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.armor.custom.stark.StarkLevyArmorItem;
 import net.darkflameproduction.agotmod.armor.custom.thenn.ThennLevyArmorItem;
 import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.model.GeoModel;
-import software.bernie.geckolib.renderer.GeoRenderer;
 
 // Stark1ArmorModel class extending GeoModel for Stark1ArmorItem
 public class ThennLevyArmorModel extends GeoModel<ThennLevyArmorItem> {
     @Override
-    public ResourceLocation getModelResource(ThennLevyArmorItem animatable, @Nullable GeoRenderer<ThennLevyArmorItem> renderer) {
+    public ResourceLocation getModelResource(ThennLevyArmorItem animatable) {
         // Return the resource location for the model
         return AGoTMod.id("geo/thenn_levy.geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureResource(ThennLevyArmorItem animatable, @Nullable GeoRenderer<ThennLevyArmorItem> renderer) {
+    public ResourceLocation getTextureResource(ThennLevyArmorItem animatable) {
         // Return the resource location for the texture
         return AGoTMod.id("textures/item/armor/thenn_levy.png");
     }
@@ -32,3 +30,5 @@ public class ThennLevyArmorModel extends GeoModel<ThennLevyArmorItem> {
         return AGoTMod.id("animations/idle.animation.json");
     }
 }
+
+

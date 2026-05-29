@@ -12,3 +12,4 @@ public class ManderlyPlateArmorRenderer extends GeoArmorRenderer<ManderlyPlateAr
         super(new ManderlyPlateArmorModel());
     }
 }
+

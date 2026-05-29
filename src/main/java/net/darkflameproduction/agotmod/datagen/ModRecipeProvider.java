@@ -24,15 +24,17 @@ import java.util.concurrent.CompletableFuture;
 
 // Class for generating data pack recipes
 public class ModRecipeProvider extends RecipeProvider implements IConditionBuilder {
+    private RecipeOutput output;
+
     // Constructor
-    public ModRecipeProvider(HolderLookup.Provider provider, RecipeOutput pOutput) {
-        super(provider, pOutput);
+    public ModRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+        super(output, registries);
     }
 
     private void generateStonecutterRecipes() {
 
-        // Each entry: variant map → vanilla source block (used for "from vanilla" recipes)
-        // REDKEEP uses ModBLocks.REDKEEP_STONE_BLOCK instead of a vanilla block — handled separately below
+        // Each entry: variant map â†’ vanilla source block (used for "from vanilla" recipes)
+        // REDKEEP uses ModBLocks.REDKEEP_STONE_BLOCK instead of a vanilla block â€” handled separately below
         record VariantEntry(Map<Integer, ModBLocks.BlockSet> variants, ItemLike source, String prefix) {}
 
         List<VariantEntry> entries = List.of(
@@ -70,7 +72,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         }
     }
 
-// ── Helper ────────────────────────────────────────────────────────────────
+// â”€â”€ Helper â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     private void stonecutVariant(ModBLocks.BlockSet set, ItemLike source, String pattern) {
         ItemLike base   = set.base().get().asItem();
@@ -78,13 +80,13 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         ItemLike slab   = set.slab().get().asItem();
         ItemLike wall   = set.wall().get().asItem();
 
-        // From vanilla source → each variant shape
+        // From vanilla source â†’ each variant shape
         cut(source, base,   1);
         cut(source, stairs, 1);
         cut(source, slab,   2);
         cut(source, wall,   1);
 
-        // From variant base → its shaped versions (named to avoid recipe ID collision)
+        // From variant base â†’ its shaped versions (named to avoid recipe ID collision)
         cut(base, stairs, 1, pattern + "_stairs_from_" + pattern + "_block");
         cut(base, slab,   2, pattern + "_slab_from_"   + pattern + "_block");
         cut(base, wall,   1, pattern + "_wall_from_"   + pattern + "_block");
@@ -106,21 +108,22 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
     // Main method for building recipes
     @Override
-    protected void buildRecipes() {
+    protected void buildRecipes(RecipeOutput recipeOutput, HolderLookup.Provider holderLookup) {
+        this.output = recipeOutput;
         List<ItemLike> tinSmeltables = List.of(
                 ModItems.RAW_TIN.get(),
                 ModBLocks.TIN_ORE.get(),
                 ModBLocks.DEEPSLATE_TIN_ORE.get());
         generateStonecutterRecipes();
 
-        oreSmelting(tinSmeltables, RecipeCategory.MISC, ModItems.TIN_INGOT.get(), 0.25f, 200, "tin");
-        oreBlasting(tinSmeltables, RecipeCategory.MISC, ModItems.TIN_INGOT.get(), 0.25f, 100, "tin");
+        oreSmelting(this.output, tinSmeltables, RecipeCategory.MISC, ModItems.TIN_INGOT.get(), 0.25f, 200, "tin");
+        oreBlasting(this.output, tinSmeltables, RecipeCategory.MISC, ModItems.TIN_INGOT.get(), 0.25f, 100, "tin");
         List<ItemLike> silverSmeltables = List.of(
                 ModItems.RAW_SILVER.get(),
                 ModBLocks.SILVER_ORE.get(),
                 ModBLocks.DEEPSLATE_SILVER_ORE.get());
-        oreSmelting(silverSmeltables, RecipeCategory.MISC, ModItems.SILVER_INGOT.get(), 0.25f, 200, "silver");
-        oreBlasting(silverSmeltables, RecipeCategory.MISC, ModItems.SILVER_INGOT.get(), 0.25f, 100, "silver");
+        oreSmelting(this.output, silverSmeltables, RecipeCategory.MISC, ModItems.SILVER_INGOT.get(), 0.25f, 200, "silver");
+        oreBlasting(this.output, silverSmeltables, RecipeCategory.MISC, ModItems.SILVER_INGOT.get(), 0.25f, 100, "silver");
         this.shaped(RecipeCategory.MISC, ModItems.SILVER_INGOT.get())
                 .pattern("SSS")
                 .pattern("SSS")
@@ -573,9 +576,9 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
         // -------------------------------------------------(STONE CUTTER)------------------------------------------------- //
         // Stonecutting recipes
-        stonecutterResultFromBase(RecipeCategory.BUILDING_BLOCKS, Blocks.STONE_BRICKS, ModBLocks.DARK_STONE_BRICK.get());
-        stonecutterResultFromBase(RecipeCategory.BUILDING_BLOCKS, Blocks.STONE_BRICKS, ModBLocks.STONE_BRICK_BUT_COOLER.get());
-        stonecutterResultFromBase(RecipeCategory.BUILDING_BLOCKS, Blocks.STONE_BRICKS, ModBLocks.KINGS_LANDING_BRICK_LARGE.get());
+        stonecutterResultFromBase(this.output, RecipeCategory.BUILDING_BLOCKS, Blocks.STONE_BRICKS, ModBLocks.DARK_STONE_BRICK.get());
+        stonecutterResultFromBase(this.output, RecipeCategory.BUILDING_BLOCKS, Blocks.STONE_BRICKS, ModBLocks.STONE_BRICK_BUT_COOLER.get());
+        stonecutterResultFromBase(this.output, RecipeCategory.BUILDING_BLOCKS, Blocks.STONE_BRICKS, ModBLocks.KINGS_LANDING_BRICK_LARGE.get());
         // -------------------------------------------------(BLOCKS)------------------------------------------------- //
         this.shaped(RecipeCategory.BUILDING_BLOCKS, ModBLocks.MUD_STAIRS.get(), 4)
                 .pattern("B  ")
@@ -1553,7 +1556,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
         // -------------------------------------------------(FOODS)------------------------------------------------- //
         // Food smelting recipes Furnace
-        // ── Furnace ───────────────────────────────────────────────────────────
+        // â”€â”€ Furnace â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
         // Meats
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.RAW_AUROCHS.get()), RecipeCategory.FOOD, ModItems.COOKED_AUROCHS.get(), 0.35f, 200)
@@ -1724,7 +1727,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy(getHasName(ModItems.RAW_WINKLES.get()), has(ModItems.RAW_WINKLES.get()))
                 .save(this.output, "cooked_winkles_with_furnace");
 
-        // ── Smoker ────────────────────────────────────────────────────────────
+        // â”€â”€ Smoker â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
         // Meats
         SimpleCookingRecipeBuilder.smoking(Ingredient.of(ModItems.RAW_AUROCHS.get()), RecipeCategory.FOOD, ModItems.COOKED_AUROCHS.get(), 0.35f, 100)
@@ -1895,7 +1898,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy(getHasName(ModItems.RAW_WINKLES.get()), has(ModItems.RAW_WINKLES.get()))
                 .save(this.output, "cooked_winkles_with_smoker");
 
-        // ── Campfire ─────────────────────────────────────────────────────────
+        // â”€â”€ Campfire â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_AUROCHS.get()), RecipeCategory.FOOD, ModItems.COOKED_AUROCHS.get(), 0.35f, 600)
                 .unlockedBy(getHasName(ModItems.RAW_AUROCHS.get()), has(ModItems.RAW_AUROCHS.get()))
                 .save(this.output, "cooked_aurochs_with_campfire");
@@ -2082,7 +2085,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
         // -------------------------------------------------(FURNITURE)------------------------------------------------- //
 
-// ── Vanilla wood furniture ────────────────────────────────────────────────
+// â”€â”€ Vanilla wood furniture â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
         record WoodEntry(String name, Object planks, Object stick) {}
 
@@ -2119,10 +2122,10 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
             ItemLike planks = (ItemLike) wood.planks();
             ItemLike stick  = (ItemLike) wood.stick();
 
-            ItemLike stoolItem    = BuiltInRegistries.ITEM.getValue(ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, n + "_stool"));
-            ItemLike chairItem    = BuiltInRegistries.ITEM.getValue(ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, n + "_chair"));
-            ItemLike armChairItem = BuiltInRegistries.ITEM.getValue(ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, n + "_arm_chair"));
-            ItemLike tableItem    = BuiltInRegistries.ITEM.getValue(ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, n + "_table"));
+            ItemLike stoolItem    = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, n + "_stool"));
+            ItemLike chairItem    = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, n + "_chair"));
+            ItemLike armChairItem = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, n + "_arm_chair"));
+            ItemLike tableItem    = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, n + "_table"));
 
             // Stool
             this.shaped(RecipeCategory.MISC, stoolItem)
@@ -3657,19 +3660,21 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
     }
 
-    public static class Runner extends RecipeProvider.Runner {
-        public Runner(PackOutput p_365442_, CompletableFuture<HolderLookup.Provider> p_362168_) {
-            super(p_365442_, p_362168_);
-        }
-
-        @Override
-        protected @NotNull RecipeProvider createRecipeProvider(HolderLookup.@NotNull Provider p_364945_, @NotNull RecipeOutput p_362956_) {
-            return new ModRecipeProvider(p_364945_, p_362956_);
-        }
-
-        @Override
-        public @NotNull String getName() {
-            return "ASOS Recipes";
-        }
+    private ShapedRecipeBuilder shaped(RecipeCategory category, ItemLike result) {
+        return ShapedRecipeBuilder.shaped(category, result);
     }
+
+    private ShapedRecipeBuilder shaped(RecipeCategory category, ItemLike result, int count) {
+        return ShapedRecipeBuilder.shaped(category, result, count);
+    }
+
+    private ShapelessRecipeBuilder shapeless(RecipeCategory category, ItemLike result) {
+        return ShapelessRecipeBuilder.shapeless(category, result);
+    }
+
+    private ShapelessRecipeBuilder shapeless(RecipeCategory category, ItemLike result, int count) {
+        return ShapelessRecipeBuilder.shapeless(category, result, count);
+    }
+
 }
+

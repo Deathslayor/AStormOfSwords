@@ -65,7 +65,7 @@ public class ModEventBusClientEvents {
                 item.get());
     }
 
-    // ── Client event class — register both block and item color handlers ───────
+    // â”€â”€ Client event class â€” register both block and item color handlers â”€â”€â”€â”€â”€â”€â”€
 
     @SubscribeEvent
     public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {

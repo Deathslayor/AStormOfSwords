@@ -11,8 +11,7 @@ public class StoolBlockEntityRenderer extends GeoBlockRenderer<StoolBlockEntity>
     public StoolBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
         super(new DefaultedBlockGeoModel<>(AGoTMod.id("stool")) {
             @Override
-            public ResourceLocation getTextureResource(StoolBlockEntity animatable,
-                                                       software.bernie.geckolib.renderer.GeoRenderer<StoolBlockEntity> renderer) {
+            public ResourceLocation getTextureResource(StoolBlockEntity animatable) {
                 return animatable.getTextureLocation();
             }
         });

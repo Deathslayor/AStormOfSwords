@@ -65,3 +65,4 @@ public class DirewolfPersistentMoveTowardsTargetGoal extends Goal {
         }
     }
 }
+

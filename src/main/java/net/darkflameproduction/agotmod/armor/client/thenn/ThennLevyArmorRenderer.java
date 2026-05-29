@@ -13,3 +13,4 @@ public class ThennLevyArmorRenderer extends GeoArmorRenderer<ThennLevyArmorItem>
         super(new ThennLevyArmorModel());
     }
 }
+

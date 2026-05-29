@@ -11,8 +11,7 @@ public class ChairBlockEntityRenderer extends GeoBlockRenderer<ChairBlockEntity>
     public ChairBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
         super(new DefaultedBlockGeoModel<>(AGoTMod.id("chair")) {
             @Override
-            public ResourceLocation getTextureResource(ChairBlockEntity animatable,
-                                                       software.bernie.geckolib.renderer.GeoRenderer<ChairBlockEntity> renderer) {
+            public ResourceLocation getTextureResource(ChairBlockEntity animatable) {
                 return animatable.getTextureLocation();
             }
         });

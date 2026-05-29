@@ -12,3 +12,4 @@ public class StarkLevyArmorRenderer extends GeoArmorRenderer<StarkLevyArmorItem>
         super(new StarkLevyArmorModel());
     }
 }
+

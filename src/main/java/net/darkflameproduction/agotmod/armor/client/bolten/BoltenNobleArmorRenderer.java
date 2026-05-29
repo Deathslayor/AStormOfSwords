@@ -12,3 +12,4 @@ public class BoltenNobleArmorRenderer extends GeoArmorRenderer<BoltenNobleArmorI
         super(new BoltenNobleArmorModel());
     }
 }
+

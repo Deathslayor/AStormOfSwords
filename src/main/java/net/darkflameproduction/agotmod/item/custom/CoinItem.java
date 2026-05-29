@@ -7,6 +7,7 @@ import net.darkflameproduction.agotmod.sound.ModSounds;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -23,7 +24,7 @@ public class CoinItem extends Item {
     }
 
     @Override
-    public InteractionResult use(Level level, Player player, InteractionHand hand) {
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
 
         AGoTMod.LOGGER.info("CoinItem.use() called - Level: {}, Player: {}, Hand: {}, Item: {}",
@@ -71,10 +72,10 @@ public class CoinItem extends Item {
             itemStack.shrink(1);
             AGoTMod.LOGGER.info("Item consumed, stack size now: {}", itemStack.getCount());
 
-            return InteractionResult.SUCCESS;
+            return InteractionResultHolder.success(itemStack);
         }
 
         AGoTMod.LOGGER.info("Client side - returning CONSUME");
-        return InteractionResult.CONSUME;
+        return InteractionResultHolder.consume(itemStack);
     }
 }

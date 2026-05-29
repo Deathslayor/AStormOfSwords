@@ -29,3 +29,4 @@ public class ModPoiTypeTagsProvider extends PoiTypeTagsProvider {
                 .addOptional(AGoTMod.id("mint_poi"));
     }
 }
+

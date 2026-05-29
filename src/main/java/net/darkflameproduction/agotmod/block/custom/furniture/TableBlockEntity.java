@@ -45,12 +45,12 @@ public class TableBlockEntity extends BlockEntity implements GeoBlockEntity {
 
         int count = (n?1:0) + (s?1:0) + (e?1:0) + (w?1:0);
 
-        // ── 0 sides ───────────────────────────────────────────────────────────
+        // â”€â”€ 0 sides â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         if (count == 0) {
             return new TableModelInfo("geo/block/table.geo.json", 0);
         }
 
-        // ── 1 side ────────────────────────────────────────────────────────────
+        // â”€â”€ 1 side â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         if (count == 1) {
             if (n) return new TableModelInfo("geo/block/table_side.geo.json", 0);
             if (s) return new TableModelInfo("geo/block/table_side.geo.json", 180);
@@ -58,20 +58,20 @@ public class TableBlockEntity extends BlockEntity implements GeoBlockEntity {
             if (w) return new TableModelInfo("geo/block/table_side.geo.json", 90);
         }
 
-        // ── 2 sides ───────────────────────────────────────────────────────────
+        // â”€â”€ 2 sides â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         if (count == 2) {
-            // Opposite sides → middle
+            // Opposite sides â†’ middle
             if (n && s) return new TableModelInfo("geo/block/table_middle.geo.json", 0);
             if (e && w) return new TableModelInfo("geo/block/table_middle.geo.json", 90);
 
-            // Corner — no rotation needed
+            // Corner â€” no rotation needed
             if (n && e) return new TableModelInfo("geo/block/table_corner.geo.json", 0);
             if (e && s) return new TableModelInfo("geo/block/table_corner.geo.json", 0);
             if (s && w) return new TableModelInfo("geo/block/table_corner.geo.json", 0);
             if (w && n) return new TableModelInfo("geo/block/table_corner.geo.json", 0);
         }
 
-        // ── 3 or 4 sides → middle ─────────────────────────────────────────────
+        // â”€â”€ 3 or 4 sides â†’ middle â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         return new TableModelInfo("geo/block/table_middle.geo.json", 0);
     }
 

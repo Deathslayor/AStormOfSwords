@@ -5,9 +5,10 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
@@ -21,23 +22,22 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class TableBlock extends Block implements EntityBlock {
-
     public static final BooleanProperty NORTH = BooleanProperty.create("north");
     public static final BooleanProperty SOUTH = BooleanProperty.create("south");
-    public static final BooleanProperty EAST  = BooleanProperty.create("east");
-    public static final BooleanProperty WEST  = BooleanProperty.create("west");
+    public static final BooleanProperty EAST = BooleanProperty.create("east");
+    public static final BooleanProperty WEST = BooleanProperty.create("west");
 
     public TableBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(NORTH, false)
                 .setValue(SOUTH, false)
-                .setValue(EAST,  false)
-                .setValue(WEST,  false));
+                .setValue(EAST, false)
+                .setValue(WEST, false));
     }
 
     @Override
-    public boolean propagatesSkylightDown(BlockState state) {
+    protected boolean propagatesSkylightDown(BlockState state, BlockGetter level, BlockPos pos) {
         return true;
     }
 
@@ -48,7 +48,7 @@ public class TableBlock extends Block implements EntityBlock {
 
     @SuppressWarnings("deprecation")
     @Override
-    public VoxelShape getOcclusionShape(BlockState state) {
+    public VoxelShape getOcclusionShape(BlockState state, BlockGetter level, BlockPos pos) {
         return Shapes.empty();
     }
 
@@ -69,36 +69,21 @@ public class TableBlock extends Block implements EntityBlock {
         return getConnectionState(context.getLevel(), context.getClickedPos());
     }
 
-    // This is the correct 1.21.3 hook — fires when any neighbouring block changes
     @Override
-    protected BlockState updateShape(
-            BlockState state,
-            LevelReader level,
-            ScheduledTickAccess tickAccess,
-            BlockPos pos,
-            Direction direction,
-            BlockPos neighbourPos,
-            BlockState neighbourState,
-            RandomSource random) {
-
-        // Only care about horizontal neighbours
+    protected BlockState updateShape(BlockState state, Direction direction, BlockState neighbourState, LevelAccessor level, BlockPos pos, BlockPos neighbourPos) {
         if (direction.getAxis() == Direction.Axis.Y) {
-            return super.updateShape(state, level, tickAccess, pos, direction,
-                    neighbourPos, neighbourState, random);
+            return super.updateShape(state, direction, neighbourState, level, pos, neighbourPos);
         }
 
-        // Schedule a tick to update our connection state
         if (!level.isClientSide()) {
-            tickAccess.scheduleTick(pos, this, 1);
+            level.scheduleTick(pos, this, 1);
         }
 
-        return super.updateShape(state, level, tickAccess, pos, direction,
-                neighbourPos, neighbourState, random);
+        return super.updateShape(state, direction, neighbourState, level, pos, neighbourPos);
     }
 
     @Override
-    public void onPlace(BlockState state, Level level, BlockPos pos,
-                        BlockState oldState, boolean movedByPiston) {
+    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
         super.onPlace(state, level, pos, oldState, movedByPiston);
         if (!level.isClientSide()) {
             level.scheduleTick(pos, this, 1);
@@ -106,11 +91,9 @@ public class TableBlock extends Block implements EntityBlock {
     }
 
     @Override
-    public void onRemove(BlockState state, Level level, BlockPos pos,
-                         BlockState newState, boolean movedByPiston) {
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
         if (!(newState.getBlock() instanceof TableBlock)) {
-            for (Direction dir : new Direction[]{
-                    Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST}) {
+            for (Direction dir : new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST}) {
                 BlockPos neighbourPos = pos.relative(dir);
                 if (level.getBlockState(neighbourPos).getBlock() instanceof TableBlock) {
                     level.scheduleTick(neighbourPos, this, 1);
@@ -129,16 +112,11 @@ public class TableBlock extends Block implements EntityBlock {
     }
 
     private BlockState getConnectionState(Level level, BlockPos pos) {
-        boolean north = isTable(level, pos.north());
-        boolean south = isTable(level, pos.south());
-        boolean east  = isTable(level, pos.east());
-        boolean west  = isTable(level, pos.west());
-
         return this.defaultBlockState()
-                .setValue(NORTH, north)
-                .setValue(SOUTH, south)
-                .setValue(EAST,  east)
-                .setValue(WEST,  west);
+                .setValue(NORTH, isTable(level, pos.north()))
+                .setValue(SOUTH, isTable(level, pos.south()))
+                .setValue(EAST, isTable(level, pos.east()))
+                .setValue(WEST, isTable(level, pos.west()));
     }
 
     private boolean isTable(LevelReader level, BlockPos pos) {

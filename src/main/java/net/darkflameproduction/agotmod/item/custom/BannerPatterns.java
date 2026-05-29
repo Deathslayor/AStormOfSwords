@@ -165,189 +165,189 @@ public class BannerPatterns {
                 net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
                         Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "arryn_banner_pattern"));
                 return new BannerPatternItem(ARRYN_PATTERN_TAG, new Item.Properties()
-                        .setId(itemKey).stacksTo(1).rarity(Rarity.EPIC));
+                        .stacksTo(1).rarity(Rarity.EPIC));
             });
     public static final DeferredHolder<Item, BannerPatternItem> BAELISH_BANNER_PATTERN =
             BANNER_PATTERN_ITEMS.register("baelish_banner_pattern", () -> {
                 net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
                         Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "baelish_banner_pattern"));
                 return new BannerPatternItem(BAELISH_PATTERN_TAG, new Item.Properties()
-                        .setId(itemKey).stacksTo(1).rarity(Rarity.EPIC));
+                        .stacksTo(1).rarity(Rarity.EPIC));
             });
     public static final DeferredHolder<Item, BannerPatternItem> BARATHEON_BANNER_PATTERN =
             BANNER_PATTERN_ITEMS.register("baratheon_banner_pattern", () -> {
                 net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
                         Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "baratheon_banner_pattern"));
                 return new BannerPatternItem(BARATHEON_PATTERN_TAG, new Item.Properties()
-                        .setId(itemKey).stacksTo(1).rarity(Rarity.EPIC));
+                        .stacksTo(1).rarity(Rarity.EPIC));
             });
     public static final DeferredHolder<Item, BannerPatternItem> BLACKWOOD_BANNER_PATTERN =
             BANNER_PATTERN_ITEMS.register("blackwood_banner_pattern", () -> {
                 net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
                         Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "blackwood_banner_pattern"));
                 return new BannerPatternItem(BLACKWOOD_PATTERN_TAG, new Item.Properties()
-                        .setId(itemKey).stacksTo(1).rarity(Rarity.EPIC));
+                        .stacksTo(1).rarity(Rarity.EPIC));
             });
     public static final DeferredHolder<Item, BannerPatternItem> BOLTON_BANNER_PATTERN =
             BANNER_PATTERN_ITEMS.register("bolton_banner_pattern", () -> {
                 net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
                         Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "bolton_banner_pattern"));
                 return new BannerPatternItem(BOLTON_PATTERN_TAG, new Item.Properties()
-                        .setId(itemKey).stacksTo(1).rarity(Rarity.EPIC));
+                        .stacksTo(1).rarity(Rarity.EPIC));
             });
     public static final DeferredHolder<Item, BannerPatternItem> BRACKEN_BANNER_PATTERN =
             BANNER_PATTERN_ITEMS.register("bracken_banner_pattern", () -> {
                 net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
                         Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "bracken_banner_pattern"));
                 return new BannerPatternItem(BRACKEN_PATTERN_TAG, new Item.Properties()
-                        .setId(itemKey).stacksTo(1).rarity(Rarity.EPIC));
+                        .stacksTo(1).rarity(Rarity.EPIC));
             });
     public static final DeferredHolder<Item, BannerPatternItem> CLEGANE_BANNER_PATTERN =
             BANNER_PATTERN_ITEMS.register("clegane_banner_pattern", () -> {
                 net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
                         Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "clegane_banner_pattern"));
                 return new BannerPatternItem(CLEGANE_PATTERN_TAG, new Item.Properties()
-                        .setId(itemKey).stacksTo(1).rarity(Rarity.EPIC));
+                        .stacksTo(1).rarity(Rarity.EPIC));
             });
     public static final DeferredHolder<Item, BannerPatternItem> DAYNE_BANNER_PATTERN =
             BANNER_PATTERN_ITEMS.register("dayne_banner_pattern", () -> {
                 net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
                         Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "dayne_banner_pattern"));
                 return new BannerPatternItem(DAYNE_PATTERN_TAG, new Item.Properties()
-                        .setId(itemKey).stacksTo(1).rarity(Rarity.EPIC));
+                        .stacksTo(1).rarity(Rarity.EPIC));
             });
     public static final DeferredHolder<Item, BannerPatternItem> FREY_BANNER_PATTERN =
             BANNER_PATTERN_ITEMS.register("frey_banner_pattern", () -> {
                 net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
                         Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "frey_banner_pattern"));
                 return new BannerPatternItem(FREY_PATTERN_TAG, new Item.Properties()
-                        .setId(itemKey).stacksTo(1).rarity(Rarity.EPIC));
+                        .stacksTo(1).rarity(Rarity.EPIC));
             });
     public static final DeferredHolder<Item, BannerPatternItem> GREYJOY_BANNER_PATTERN =
             BANNER_PATTERN_ITEMS.register("greyjoy_banner_pattern", () -> {
                 net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
                         Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "greyjoy_banner_pattern"));
                 return new BannerPatternItem(GREYJOY_PATTERN_TAG, new Item.Properties()
-                        .setId(itemKey).stacksTo(1).rarity(Rarity.EPIC));
+                        .stacksTo(1).rarity(Rarity.EPIC));
             });
     public static final DeferredHolder<Item, BannerPatternItem> HARLAW_BANNER_PATTERN =
             BANNER_PATTERN_ITEMS.register("harlaw_banner_pattern", () -> {
                 net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
                         Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "harlaw_banner_pattern"));
                 return new BannerPatternItem(HARLAW_PATTERN_TAG, new Item.Properties()
-                        .setId(itemKey).stacksTo(1).rarity(Rarity.EPIC));
+                        .stacksTo(1).rarity(Rarity.EPIC));
             });
     public static final DeferredHolder<Item, BannerPatternItem> HIGHTOWER_BANNER_PATTERN =
             BANNER_PATTERN_ITEMS.register("hightower_banner_pattern", () -> {
                 net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
                         Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "hightower_banner_pattern"));
                 return new BannerPatternItem(HIGHTOWER_PATTERN_TAG, new Item.Properties()
-                        .setId(itemKey).stacksTo(1).rarity(Rarity.EPIC));
+                        .stacksTo(1).rarity(Rarity.EPIC));
             });
     public static final DeferredHolder<Item, BannerPatternItem> KARSTARK_BANNER_PATTERN =
             BANNER_PATTERN_ITEMS.register("karstark_banner_pattern", () -> {
                 net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
                         Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "karstark_banner_pattern"));
                 return new BannerPatternItem(KARSTARK_PATTERN_TAG, new Item.Properties()
-                        .setId(itemKey).stacksTo(1).rarity(Rarity.EPIC));
+                        .stacksTo(1).rarity(Rarity.EPIC));
             });
     public static final DeferredHolder<Item, BannerPatternItem> LANNISTER_BANNER_PATTERN =
             BANNER_PATTERN_ITEMS.register("lannister_banner_pattern", () -> {
                 net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
                         Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "lannister_banner_pattern"));
                 return new BannerPatternItem(LANNISTER_PATTERN_TAG, new Item.Properties()
-                        .setId(itemKey).stacksTo(1).rarity(Rarity.EPIC));
+                        .stacksTo(1).rarity(Rarity.EPIC));
             });
     public static final DeferredHolder<Item, BannerPatternItem> MANDERLY_BANNER_PATTERN =
             BANNER_PATTERN_ITEMS.register("manderly_banner_pattern", () -> {
                 net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
                         Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "manderly_banner_pattern"));
                 return new BannerPatternItem(MANDERLY_PATTERN_TAG, new Item.Properties()
-                        .setId(itemKey).stacksTo(1).rarity(Rarity.EPIC));
+                        .stacksTo(1).rarity(Rarity.EPIC));
             });
     public static final DeferredHolder<Item, BannerPatternItem> MORMONT_BANNER_PATTERN =
             BANNER_PATTERN_ITEMS.register("mormont_banner_pattern", () -> {
                 net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
                         Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "mormont_banner_pattern"));
                 return new BannerPatternItem(MORMONT_PATTERN_TAG, new Item.Properties()
-                        .setId(itemKey).stacksTo(1).rarity(Rarity.EPIC));
+                        .stacksTo(1).rarity(Rarity.EPIC));
             });
     public static final DeferredHolder<Item, BannerPatternItem> REDWYNE_BANNER_PATTERN =
             BANNER_PATTERN_ITEMS.register("redwyne_banner_pattern", () -> {
                 net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
                         Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "redwyne_banner_pattern"));
                 return new BannerPatternItem(REDWYNE_PATTERN_TAG, new Item.Properties()
-                        .setId(itemKey).stacksTo(1).rarity(Rarity.EPIC));
+                        .stacksTo(1).rarity(Rarity.EPIC));
             });
     public static final DeferredHolder<Item, BannerPatternItem> REED_BANNER_PATTERN =
             BANNER_PATTERN_ITEMS.register("reed_banner_pattern", () -> {
                 net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
                         Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "reed_banner_pattern"));
                 return new BannerPatternItem(REED_PATTERN_TAG, new Item.Properties()
-                        .setId(itemKey).stacksTo(1).rarity(Rarity.EPIC));
+                        .stacksTo(1).rarity(Rarity.EPIC));
             });
     public static final DeferredHolder<Item, BannerPatternItem> REYNE_BANNER_PATTERN =
             BANNER_PATTERN_ITEMS.register("reyne_banner_pattern", () -> {
                 net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
                         Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "reyne_banner_pattern"));
                 return new BannerPatternItem(REYNE_PATTERN_TAG, new Item.Properties()
-                        .setId(itemKey).stacksTo(1).rarity(Rarity.EPIC));
+                        .stacksTo(1).rarity(Rarity.EPIC));
             });
     public static final DeferredHolder<Item, BannerPatternItem> ROYCE_BANNER_PATTERN =
             BANNER_PATTERN_ITEMS.register("royce_banner_pattern", () -> {
                 net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
                         Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "royce_banner_pattern"));
                 return new BannerPatternItem(ROYCE_PATTERN_TAG, new Item.Properties()
-                        .setId(itemKey).stacksTo(1).rarity(Rarity.EPIC));
+                        .stacksTo(1).rarity(Rarity.EPIC));
             });
     public static final DeferredHolder<Item, BannerPatternItem> STARK_BANNER_PATTERN =
             BANNER_PATTERN_ITEMS.register("stark_banner_pattern", () -> {
                 net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
                         Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "stark_banner_pattern"));
                 return new BannerPatternItem(STARK_PATTERN_TAG, new Item.Properties()
-                        .setId(itemKey).stacksTo(1).rarity(Rarity.EPIC));
+                        .stacksTo(1).rarity(Rarity.EPIC));
             });
     public static final DeferredHolder<Item, BannerPatternItem> TARGARYEN_BANNER_PATTERN =
             BANNER_PATTERN_ITEMS.register("targaryen_banner_pattern", () -> {
                 net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
                         Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "targaryen_banner_pattern"));
                 return new BannerPatternItem(TARGARYEN_PATTERN_TAG, new Item.Properties()
-                        .setId(itemKey).stacksTo(1).rarity(Rarity.EPIC));
+                        .stacksTo(1).rarity(Rarity.EPIC));
             });
     public static final DeferredHolder<Item, BannerPatternItem> TARLY_BANNER_PATTERN =
             BANNER_PATTERN_ITEMS.register("tarly_banner_pattern", () -> {
                 net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
                         Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "tarly_banner_pattern"));
                 return new BannerPatternItem(TARLY_PATTERN_TAG, new Item.Properties()
-                        .setId(itemKey).stacksTo(1).rarity(Rarity.EPIC));
+                        .stacksTo(1).rarity(Rarity.EPIC));
             });
     public static final DeferredHolder<Item, BannerPatternItem> TULLY_BANNER_PATTERN =
             BANNER_PATTERN_ITEMS.register("tully_banner_pattern", () -> {
                 net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
                         Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "tully_banner_pattern"));
                 return new BannerPatternItem(TULLY_PATTERN_TAG, new Item.Properties()
-                        .setId(itemKey).stacksTo(1).rarity(Rarity.EPIC));
+                        .stacksTo(1).rarity(Rarity.EPIC));
             });
     public static final DeferredHolder<Item, BannerPatternItem> TYRELL_BANNER_PATTERN =
             BANNER_PATTERN_ITEMS.register("tyrell_banner_pattern", () -> {
                 net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
                         Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "tyrell_banner_pattern"));
                 return new BannerPatternItem(TYRELL_PATTERN_TAG, new Item.Properties()
-                        .setId(itemKey).stacksTo(1).rarity(Rarity.EPIC));
+                        .stacksTo(1).rarity(Rarity.EPIC));
             });
     public static final DeferredHolder<Item, BannerPatternItem> UMBER_BANNER_PATTERN =
             BANNER_PATTERN_ITEMS.register("umber_banner_pattern", () -> {
                 net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
                         Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "umber_banner_pattern"));
                 return new BannerPatternItem(UMBER_PATTERN_TAG, new Item.Properties()
-                        .setId(itemKey).stacksTo(1).rarity(Rarity.EPIC));
+                        .stacksTo(1).rarity(Rarity.EPIC));
             });
     public static final DeferredHolder<Item, BannerPatternItem> VELARYON_BANNER_PATTERN =
             BANNER_PATTERN_ITEMS.register("velaryon_banner_pattern", () -> {
                 net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
                         Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "velaryon_banner_pattern"));
                 return new BannerPatternItem(VELARYON_PATTERN_TAG, new Item.Properties()
-                        .setId(itemKey).stacksTo(1).rarity(Rarity.EPIC));
+                        .stacksTo(1).rarity(Rarity.EPIC));
             });
 
     public static void register(IEventBus eventBus) {

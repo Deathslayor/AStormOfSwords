@@ -32,7 +32,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -254,7 +254,7 @@ public class TownHallBlockEntity extends BlockEntity implements
             setChanged();
 
             if (level instanceof ServerLevel sl) {
-                // Resolve house UUID — may be null if player has no house yet
+                // Resolve house UUID â€” may be null if player has no house yet
                 ServerPlayer claimingPlayer = sl.getServer().getPlayerList().getPlayer(playerUUID);
                 UUID houseUUID = claimingPlayer != null
                         ? net.darkflameproduction.agotmod.network.ServerHouseHandler
@@ -455,7 +455,7 @@ public class TownHallBlockEntity extends BlockEntity implements
     public void onCarpenterCollectionRequestPosted(CarpenterCollectionTicketSystem.CarpenterRequest request) {
         List<ItemStack> toGive = new ArrayList<>();
 
-        // Pull logs — any item ending in _log, _wood, _stem, _hyphae (skip charred)
+        // Pull logs â€” any item ending in _log, _wood, _stem, _hyphae (skip charred)
         int logsNeeded = net.darkflameproduction.agotmod.entity.custom.npc.system.carpenter.CarpenterSystem.LOGS_PER_CYCLE;
         int logsRemaining = logsNeeded;
 
@@ -476,7 +476,7 @@ public class TownHallBlockEntity extends BlockEntity implements
             removeFromTownInventory(logKey, toTake);
             ResourceLocation loc = ResourceLocation.tryParse(logKey);
             if (loc != null) {
-                net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.getValue(loc);
+                net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.get(loc);
                 if (item != null && item != Items.AIR) toGive.add(new ItemStack(item, toTake));
             }
             logsRemaining -= toTake;
@@ -490,7 +490,7 @@ public class TownHallBlockEntity extends BlockEntity implements
             removeFromTownInventory("agotmod:nail", toTake);
             ResourceLocation loc = ResourceLocation.tryParse("agotmod:nail");
             if (loc != null) {
-                net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.getValue(loc);
+                net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.get(loc);
                 if (item != null && item != Items.AIR) toGive.add(new ItemStack(item, toTake));
             }
         }
@@ -503,7 +503,7 @@ public class TownHallBlockEntity extends BlockEntity implements
             removeFromTownInventory("minecraft:stick", toTake);
             ResourceLocation loc = ResourceLocation.tryParse("minecraft:stick");
             if (loc != null) {
-                net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.getValue(loc);
+                net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.get(loc);
                 if (item != null && item != Items.AIR) toGive.add(new ItemStack(item, toTake));
             }
         }
@@ -572,7 +572,7 @@ public class TownHallBlockEntity extends BlockEntity implements
             removeFromTownInventory(flowerKey, toTake);
             ResourceLocation loc = ResourceLocation.tryParse(flowerKey);
             if (loc != null) {
-                net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.getValue(loc);
+                net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.get(loc);
                 if (item != null && item != Items.AIR) {
                     toGive.add(new ItemStack(item, toTake));
                 }
@@ -593,7 +593,7 @@ public class TownHallBlockEntity extends BlockEntity implements
             removeFromTownInventory(matKey, toTake);
             ResourceLocation loc = ResourceLocation.tryParse(matKey);
             if (loc != null) {
-                net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.getValue(loc);
+                net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.get(loc);
                 if (item != null && item != Items.AIR) toGive.add(new ItemStack(item, toTake));
             }
         }
@@ -625,7 +625,7 @@ public class TownHallBlockEntity extends BlockEntity implements
             removeFromTownInventory("minecraft:rabbit_hide", toTake);
             ResourceLocation hideLoc = ResourceLocation.tryParse("minecraft:rabbit_hide");
             if (hideLoc != null) {
-                net.minecraft.world.item.Item hideItem = BuiltInRegistries.ITEM.getValue(hideLoc);
+                net.minecraft.world.item.Item hideItem = BuiltInRegistries.ITEM.get(hideLoc);
                 if (hideItem != null && hideItem != Items.AIR) {
                     toGive.add(new ItemStack(hideItem, toTake));
                 }
@@ -639,7 +639,7 @@ public class TownHallBlockEntity extends BlockEntity implements
             removeFromTownInventory("minecraft:leather", toTake);
             ResourceLocation leatherLoc = ResourceLocation.tryParse("minecraft:leather");
             if (leatherLoc != null) {
-                net.minecraft.world.item.Item leatherItem = BuiltInRegistries.ITEM.getValue(leatherLoc);
+                net.minecraft.world.item.Item leatherItem = BuiltInRegistries.ITEM.get(leatherLoc);
                 if (leatherItem != null && leatherItem != Items.AIR) {
                     toGive.add(new ItemStack(leatherItem, toTake));
                 }
@@ -653,7 +653,7 @@ public class TownHallBlockEntity extends BlockEntity implements
             removeFromTownInventory("minecraft:string", toTake);
             ResourceLocation stringLoc = ResourceLocation.tryParse("minecraft:string");
             if (stringLoc != null) {
-                net.minecraft.world.item.Item stringItem = BuiltInRegistries.ITEM.getValue(stringLoc);
+                net.minecraft.world.item.Item stringItem = BuiltInRegistries.ITEM.get(stringLoc);
                 if (stringItem != null && stringItem != Items.AIR) {
                     toGive.add(new ItemStack(stringItem, toTake));
                 }
@@ -670,7 +670,7 @@ public class TownHallBlockEntity extends BlockEntity implements
         List<ItemStack> toGive = new ArrayList<>();
         int remaining = logsNeeded;
 
-        // Pull logs from town inventory — any item ending in _log, _wood, _stem, _hyphae
+        // Pull logs from town inventory â€” any item ending in _log, _wood, _stem, _hyphae
         // except charred variants
         List<String> logKeys = townInventory.keySet().stream()
                 .filter(key -> {
@@ -689,7 +689,7 @@ public class TownHallBlockEntity extends BlockEntity implements
             removeFromTownInventory(logKey, toTake);
             ResourceLocation loc = ResourceLocation.tryParse(logKey);
             if (loc != null) {
-                net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.getValue(loc);
+                net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.get(loc);
                 if (item != null && item != Items.AIR) toGive.add(new ItemStack(item, toTake));
             }
             remaining -= toTake;
@@ -716,7 +716,7 @@ public class TownHallBlockEntity extends BlockEntity implements
             removeFromTownInventory(coalKey, toTake);
             ResourceLocation loc = ResourceLocation.tryParse(coalKey);
             if (loc != null) {
-                net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.getValue(loc);
+                net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.get(loc);
                 if (item != null && item != Items.AIR) toGive.add(new ItemStack(item, toTake));
             }
             coalRemaining -= toTake;
@@ -737,7 +737,7 @@ public class TownHallBlockEntity extends BlockEntity implements
             removeFromTownInventory(oreKey, toTake);
             ResourceLocation loc = ResourceLocation.tryParse(oreKey);
             if (loc != null) {
-                net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.getValue(loc);
+                net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.get(loc);
                 if (item != null && item != Items.AIR) toGive.add(new ItemStack(item, toTake));
             }
             oreRemaining -= toTake;
@@ -770,7 +770,7 @@ public class TownHallBlockEntity extends BlockEntity implements
             removeFromTownInventory(breedingItemKey, toTake);
             ResourceLocation loc = ResourceLocation.tryParse(breedingItemKey);
             if (loc != null) {
-                net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.getValue(loc);
+                net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.get(loc);
                 if (item != null && item != Items.AIR) toGive.add(new ItemStack(item, toTake));
             }
         }
@@ -1176,7 +1176,7 @@ public class TownHallBlockEntity extends BlockEntity implements
     }
 
     private void spawnChildAtBed(ServerLevel level, BlockPos bedPos, RandomSource random) {
-        Peasant_Entity child = ModEntities.PEASANT_ENTITY.get().create(level, EntitySpawnReason.SPAWNER);
+        Peasant_Entity child = ModEntities.PEASANT_ENTITY.get().create(level);
         if (child == null) return;
 
         child.setPos(bedPos.getX() + 0.5, bedPos.getY() + 1.0, bedPos.getZ() + 0.5);
@@ -1607,7 +1607,7 @@ public class TownHallBlockEntity extends BlockEntity implements
             if (loc == null) continue;
 
             net.minecraft.world.item.Item item =
-                    net.minecraft.core.registries.BuiltInRegistries.ITEM.getValue(loc);
+                    net.minecraft.core.registries.BuiltInRegistries.ITEM.get(loc);
             if (item == null || item == net.minecraft.world.item.Items.AIR) continue;
 
             if (!isTownHallFood(item)) continue;
@@ -1638,7 +1638,7 @@ public class TownHallBlockEntity extends BlockEntity implements
             if (totalValue > 0) {
                 addToTownBalance(totalValue);
 
-                // Apply 20% tax — move from townBalance to townIncome
+                // Apply 20% tax â€” move from townBalance to townIncome
                 long taxAmount = (long) Math.floor(totalValue * 0.2);
                 if (taxAmount > 0) {
                     deductFromTownBalance(taxAmount);

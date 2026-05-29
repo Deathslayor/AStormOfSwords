@@ -13,3 +13,4 @@ public class WildlingChiefArmorRenderer extends GeoArmorRenderer<WildlingChiefAr
         super(new WildlingChiefArmorModel());
     }
 }
+

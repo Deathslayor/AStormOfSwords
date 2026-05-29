@@ -43,3 +43,4 @@ public class ModBiomeModifiers {
         return ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, AGoTMod.id(name));
     }
 }
+

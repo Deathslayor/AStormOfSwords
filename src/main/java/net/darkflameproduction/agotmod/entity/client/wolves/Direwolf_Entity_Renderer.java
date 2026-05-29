@@ -44,7 +44,6 @@ public class Direwolf_Entity_Renderer extends GeoEntityRenderer<Direwolf_Entity>
         }
     }
 
-    @Override
     protected float getDeathMaxRotation(Direwolf_Entity entityLivingBaseIn, float partialTick) {
         return 0.0F;
     }

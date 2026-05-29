@@ -35,3 +35,4 @@ public class ModCreativeAnimals {
         CREATIVE_MODE_TAB.register(eventBus);
     }
 }
+

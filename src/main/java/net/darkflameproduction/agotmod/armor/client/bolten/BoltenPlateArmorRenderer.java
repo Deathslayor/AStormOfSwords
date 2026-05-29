@@ -12,3 +12,4 @@ public class BoltenPlateArmorRenderer extends GeoArmorRenderer<BoltenPlateArmorI
         super(new BoltenPlateArmorModel());
     }
 }
+

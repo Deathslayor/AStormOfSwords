@@ -17,3 +17,4 @@ public class ModStandingSignBlock extends StandingSignBlock {
         return new ModSignBlockEntity(pos, state);
     }
 }
+

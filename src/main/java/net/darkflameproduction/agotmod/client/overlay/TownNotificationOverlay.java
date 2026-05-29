@@ -244,21 +244,12 @@ public class TownNotificationOverlay {
                                          net.minecraft.world.item.DyeColor color,
                                          ResourceLocation texture, float alpha) {
         int dyeColor = color.getTextureDiffuseColor();
-        int tint = ((int)(alpha * 255) & 0xFF) << 24
-                | ((dyeColor >> 16) & 0xFF) << 16
-                | ((dyeColor >>  8) & 0xFF) <<  8
-                |  (dyeColor        & 0xFF);
+        float red = ((dyeColor >> 16) & 0xFF) / 255.0F;
+        float green = ((dyeColor >> 8) & 0xFF) / 255.0F;
+        float blue = (dyeColor & 0xFF) / 255.0F;
 
+        RenderSystem.setShaderColor(red, green, blue, alpha);
+        guiGraphics.blit(texture, x, y, 1, 0, BANNER_WIDTH, BANNER_HEIGHT, 64, 64);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        guiGraphics.blit(
-                net.minecraft.client.renderer.RenderType::guiTextured,
-                texture,
-                x, y,
-                1.0f, 0.0f,
-                BANNER_WIDTH, BANNER_HEIGHT,
-                20, 40,
-                64, 64,
-                tint
-        );
     }
 }

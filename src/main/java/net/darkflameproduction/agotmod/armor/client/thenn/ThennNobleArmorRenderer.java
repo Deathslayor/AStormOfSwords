@@ -13,3 +13,4 @@ public class ThennNobleArmorRenderer extends GeoArmorRenderer<ThennNobleArmorIte
         super(new ThennNobleArmorModel());
     }
 }
+

@@ -15,6 +15,7 @@ import net.darkflameproduction.agotmod.block.custom.furniture.TableBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.IEventBus;
@@ -29,8 +30,12 @@ public class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, AGoTMod.MOD_ID);
 
+    private static <T extends BlockEntity> BlockEntityType<T> create(BlockEntityType.BlockEntitySupplier<T> factory, Block... validBlocks) {
+        return BlockEntityType.Builder.of(factory, validBlocks).build(null);
+    }
+
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TableBlockEntity>> TABLE =
-            BLOCK_ENTITIES.register("table", () -> new BlockEntityType<>(
+            BLOCK_ENTITIES.register("table", () -> create(
                     TableBlockEntity::new,
                     ModBLocks.DARK_OAK_TABLE.get(),
                     ModBLocks.OAK_TABLE.get(),
@@ -109,7 +114,7 @@ public class ModBlockEntities {
             ));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<StoolBlockEntity>> STOOL =
-            BLOCK_ENTITIES.register("stool", () -> new BlockEntityType<>(
+            BLOCK_ENTITIES.register("stool", () -> create(
                     StoolBlockEntity::new,
                     ModBLocks.DARK_OAK_STOOL.get(), ModBLocks.OAK_STOOL.get(),
                     ModBLocks.SPRUCE_STOOL.get(), ModBLocks.BIRCH_STOOL.get(),
@@ -152,7 +157,7 @@ public class ModBlockEntities {
             ));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ChairBlockEntity>> CHAIR =
-            BLOCK_ENTITIES.register("chair", () -> new BlockEntityType<>(ChairBlockEntity::new,
+            BLOCK_ENTITIES.register("chair", () -> create(ChairBlockEntity::new,
                     ModBLocks.DARK_OAK_CHAIR.get(), ModBLocks.OAK_CHAIR.get(), ModBLocks.SPRUCE_CHAIR.get(),
                     ModBLocks.BIRCH_CHAIR.get(), ModBLocks.JUNGLE_CHAIR.get(), ModBLocks.ACACIA_CHAIR.get(),
                     ModBLocks.MANGROVE_CHAIR.get(), ModBLocks.CHERRY_CHAIR.get(), ModBLocks.BAMBOO_CHAIR.get(),
@@ -183,7 +188,7 @@ public class ModBlockEntities {
             ));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ArmChairBlockEntity>> ARM_CHAIR =
-            BLOCK_ENTITIES.register("arm_chair", () -> new BlockEntityType<>(ArmChairBlockEntity::new,
+            BLOCK_ENTITIES.register("arm_chair", () -> create(ArmChairBlockEntity::new,
                     ModBLocks.DARK_OAK_ARM_CHAIR.get(), ModBLocks.OAK_ARM_CHAIR.get(), ModBLocks.SPRUCE_ARM_CHAIR.get(),
                     ModBLocks.BIRCH_ARM_CHAIR.get(), ModBLocks.JUNGLE_ARM_CHAIR.get(), ModBLocks.ACACIA_ARM_CHAIR.get(),
                     ModBLocks.MANGROVE_ARM_CHAIR.get(), ModBLocks.CHERRY_ARM_CHAIR.get(), ModBLocks.BAMBOO_ARM_CHAIR.get(),
@@ -255,31 +260,31 @@ public class ModBlockEntities {
                 barrelBlocks.add(ModBLocks.TAILOR_BARREL.get());
                 barrelBlocks.add(ModBLocks.TANNER_BARREL.get());
                 barrelBlocks.add(ModBLocks.TRADER_BARREL.get());
-                return new BlockEntityType<>(JobBarrelBlockEntity::new,
+                return create(JobBarrelBlockEntity::new,
                         barrelBlocks.toArray(new Block[0]));
             });
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TownHallBlockEntity>> TOWN_HALL =
             BLOCK_ENTITIES.register("town_hall", () ->
-                    new BlockEntityType<>(TownHallBlockEntity::new, ModBLocks.TOWN_HALL.get()));
+                    create(TownHallBlockEntity::new, ModBLocks.TOWN_HALL.get()));
 
     // ── Decorative barrels ────────────────────────────────────────────────────
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BarrelLargeBlockEntity>> BARREL_LARGE =
             BLOCK_ENTITIES.register("barrel_large", () ->
-                    new BlockEntityType<>(BarrelLargeBlockEntity::new, ModBLocks.BARREL_LARGE.get()));
+                    create(BarrelLargeBlockEntity::new, ModBLocks.BARREL_LARGE.get()));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BarrelMediumBlockEntity>> BARREL_MEDIUM =
             BLOCK_ENTITIES.register("barrel_medium", () ->
-                    new BlockEntityType<>(BarrelMediumBlockEntity::new, ModBLocks.BARREL_MEDIUM.get()));
+                    create(BarrelMediumBlockEntity::new, ModBLocks.BARREL_MEDIUM.get()));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BarrelSmallBlockEntity>> BARREL_SMALL =
             BLOCK_ENTITIES.register("barrel_small", () ->
-                    new BlockEntityType<>(BarrelSmallBlockEntity::new, ModBLocks.BARREL_SMALL.get()));
+                    create(BarrelSmallBlockEntity::new, ModBLocks.BARREL_SMALL.get()));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BarrelDummyBlockEntity>> BARREL_DUMMY =
             BLOCK_ENTITIES.register("barrel_dummy", () ->
-                    new BlockEntityType<>(BarrelDummyBlockEntity::new, ModBLocks.BARREL_DUMMY.get()));
+                    create(BarrelDummyBlockEntity::new, ModBLocks.BARREL_DUMMY.get()));
 
     private static final String[] ALL_WOOD_TYPES = {
             "sycamore", "pine", "ash", "beech", "cedar", "chestnut", "hawthorn",
@@ -307,7 +312,7 @@ public class ModBlockEntities {
                     signBlocks.add(ModBLocks.SIGNS.get(woodType).get());
                     signBlocks.add(ModBLocks.WALL_SIGNS.get(woodType).get());
                 }
-                return new BlockEntityType<>(ModSignBlockEntity::new,
+                return create(ModSignBlockEntity::new,
                         signBlocks.toArray(new Block[0]));
             });
 
@@ -324,7 +329,7 @@ public class ModBlockEntities {
                     hangingSignBlocks.add(ModBLocks.HANGING_SIGNS.get(woodType).get());
                     hangingSignBlocks.add(ModBLocks.WALL_HANGING_SIGNS.get(woodType).get());
                 }
-                return new BlockEntityType<>(ModHangingSignBlockEntity::new,
+                return create(ModHangingSignBlockEntity::new,
                         hangingSignBlocks.toArray(new Block[0]));
             });
 
@@ -332,3 +337,4 @@ public class ModBlockEntities {
         BLOCK_ENTITIES.register(eventBus);
     }
 }
+

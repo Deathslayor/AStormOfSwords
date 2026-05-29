@@ -119,7 +119,7 @@ public class LumberjackDepositGoal extends Goal {
     }
 
     /**
-     * A lumberjack item is anything collected from trees —
+     * A lumberjack item is anything collected from trees â€”
      * logs, leaves, saplings, sticks, apples, etc.
      * Excludes tools (axes) so he keeps his iron axe.
      */

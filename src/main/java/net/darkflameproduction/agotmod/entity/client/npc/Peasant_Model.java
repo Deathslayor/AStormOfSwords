@@ -4,7 +4,6 @@ import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
-import software.bernie.geckolib.renderer.GeoRenderer;
 
 public class Peasant_Model extends GeoModel<Peasant_Entity> {
 
@@ -23,7 +22,7 @@ public class Peasant_Model extends GeoModel<Peasant_Entity> {
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "animations/entity/peasant_child.animation.json");
 
     @Override
-    public ResourceLocation getModelResource(Peasant_Entity animatable, GeoRenderer<Peasant_Entity> renderer) {
+    public ResourceLocation getModelResource(Peasant_Entity animatable) {
         // Debug logging
         String age = animatable.getAge();
         String gender = animatable.getGender();
@@ -47,7 +46,7 @@ public class Peasant_Model extends GeoModel<Peasant_Entity> {
     }
 
     @Override
-    public ResourceLocation getTextureResource(Peasant_Entity animatable, GeoRenderer<Peasant_Entity> renderer) {
+    public ResourceLocation getTextureResource(Peasant_Entity animatable) {
         // This will be handled by the renderer for variants
         // Return a default based on age and gender for fallback purposes
         if (animatable.isChild()) {
@@ -80,3 +79,4 @@ public class Peasant_Model extends GeoModel<Peasant_Entity> {
         }
     }
 }
+

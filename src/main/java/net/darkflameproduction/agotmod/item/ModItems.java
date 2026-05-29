@@ -34,7 +34,6 @@ import net.darkflameproduction.agotmod.entity.ModEntities;
 import net.darkflameproduction.agotmod.item.custom.CoinItem;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.equipment.ArmorType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -54,7 +53,7 @@ public class ModItems {
             PotionItem::new);
     // Magical Dagger
     public static final DeferredItem<Item> BLOOD_DAGGER = ITEMS.registerItem("blood_dagger",
-            properties -> new SwordItem(ModToolTiers.STEEL, 3, 1, properties));
+            properties -> new SwordItem(ModToolTiers.STEEL, properties.attributes(SwordItem.createAttributes(ModToolTiers.STEEL, 3, 1.0F))));
 
     // ---------------------------(COINS)--------------------------- //
     // Main currency Coin
@@ -67,319 +66,319 @@ public class ModItems {
 
     //Bolten Levy
     public static final DeferredItem<BoltenLevyArmorItem> BOLTEN_LEVY_HELMET = ITEMS.registerItem("bolton_levy_helmet",
-            properties -> new BoltenLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorType.HELMET, properties));
+            properties -> new BoltenLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorItem.Type.HELMET, properties));
 
     public static final DeferredItem<BoltenLevyArmorItem> BOLTEN_LEVY_CHESTPLATE = ITEMS.registerItem("bolton_levy_chestplate",
-            properties -> new BoltenLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorType.CHESTPLATE, properties));
+            properties -> new BoltenLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorItem.Type.CHESTPLATE, properties));
 
     public static final DeferredItem<BoltenLevyArmorItem> BOLTEN_LEVY_LEGGINGS = ITEMS.registerItem("bolton_levy_leggings",
-            properties -> new BoltenLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorType.LEGGINGS, properties));
+            properties -> new BoltenLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorItem.Type.LEGGINGS, properties));
 
     public static final DeferredItem<BoltenLevyArmorItem> BOLTEN_LEVY_BOOTS = ITEMS.registerItem("bolton_levy_boots",
-            properties -> new BoltenLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorType.BOOTS, properties));
+            properties -> new BoltenLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorItem.Type.BOOTS, properties));
 
     //Bolten Plate
     public static final DeferredItem<BoltenPlateArmorItem> BOLTEN_PLATE_HELMET = ITEMS.registerItem("bolton_plate_helmet",
-            properties -> new BoltenPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorType.HELMET, properties));
+            properties -> new BoltenPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorItem.Type.HELMET, properties));
 
     public static final DeferredItem<BoltenPlateArmorItem> BOLTEN_PLATE_CHESTPLATE = ITEMS.registerItem("bolton_plate_chestplate",
-            properties -> new BoltenPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorType.CHESTPLATE, properties));
+            properties -> new BoltenPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorItem.Type.CHESTPLATE, properties));
 
     public static final DeferredItem<BoltenPlateArmorItem> BOLTEN_PLATE_LEGGINGS = ITEMS.registerItem("bolton_plate_leggings",
-            properties -> new BoltenPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorType.LEGGINGS, properties));
+            properties -> new BoltenPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorItem.Type.LEGGINGS, properties));
 
     public static final DeferredItem<BoltenPlateArmorItem> BOLTEN_PLATE_BOOTS = ITEMS.registerItem("bolton_plate_boots",
-            properties -> new BoltenPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorType.BOOTS, properties));
+            properties -> new BoltenPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorItem.Type.BOOTS, properties));
 
     //Bolten Noble
     public static final DeferredItem<BoltenNobleArmorItem> BOLTEN_NOBLE_HELMET = ITEMS.registerItem("bolton_noble_helmet",
-            properties -> new BoltenNobleArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorType.HELMET, properties));
+            properties -> new BoltenNobleArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorItem.Type.HELMET, properties));
 
     public static final DeferredItem<BoltenNobleArmorItem> BOLTEN_NOBLE_CHESTPLATE = ITEMS.registerItem("bolton_noble_chestplate",
-            properties -> new BoltenNobleArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorType.CHESTPLATE, properties));
+            properties -> new BoltenNobleArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorItem.Type.CHESTPLATE, properties));
 
     public static final DeferredItem<BoltenNobleArmorItem> BOLTEN_NOBLE_LEGGINGS = ITEMS.registerItem("bolton_noble_leggings",
-            properties -> new BoltenNobleArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorType.LEGGINGS, properties));
+            properties -> new BoltenNobleArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorItem.Type.LEGGINGS, properties));
 
     public static final DeferredItem<BoltenNobleArmorItem> BOLTEN_NOBLE_BOOTS = ITEMS.registerItem("bolton_noble_boots",
-            properties -> new BoltenNobleArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorType.BOOTS, properties));
+            properties -> new BoltenNobleArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorItem.Type.BOOTS, properties));
 
     //Manderly Levy
     public static final DeferredItem<ManderlyLevyArmorItem> MANDERLY_LEVY_HELMET = ITEMS.registerItem("manderly_levy_helmet",
-            properties -> new ManderlyLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorType.HELMET, properties));
+            properties -> new ManderlyLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorItem.Type.HELMET, properties));
 
     public static final DeferredItem<ManderlyLevyArmorItem> MANDERLY_LEVY_CHESTPLATE = ITEMS.registerItem("manderly_levy_chestplate",
-            properties -> new ManderlyLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorType.CHESTPLATE, properties));
+            properties -> new ManderlyLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorItem.Type.CHESTPLATE, properties));
 
     public static final DeferredItem<ManderlyLevyArmorItem> MANDERLY_LEVY_LEGGINGS = ITEMS.registerItem("manderly_levy_leggings",
-            properties -> new ManderlyLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorType.LEGGINGS, properties));
+            properties -> new ManderlyLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorItem.Type.LEGGINGS, properties));
 
     public static final DeferredItem<ManderlyLevyArmorItem> MANDERLY_LEVY_BOOTS = ITEMS.registerItem("manderly_levy_boots",
-            properties -> new ManderlyLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorType.BOOTS, properties));
+            properties -> new ManderlyLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorItem.Type.BOOTS, properties));
 
     //Manderly Plate
     public static final DeferredItem<ManderlyPlateArmorItem> MANDERLY_PLATE_HELMET = ITEMS.registerItem("manderly_plate_helmet",
-            properties -> new ManderlyPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorType.HELMET, properties));
+            properties -> new ManderlyPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorItem.Type.HELMET, properties));
 
     public static final DeferredItem<ManderlyPlateArmorItem> MANDERLY_PLATE_CHESTPLATE = ITEMS.registerItem("manderly_plate_chestplate",
-            properties -> new ManderlyPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorType.CHESTPLATE, properties));
+            properties -> new ManderlyPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorItem.Type.CHESTPLATE, properties));
 
     public static final DeferredItem<ManderlyPlateArmorItem> MANDERLY_PLATE_LEGGINGS = ITEMS.registerItem("manderly_plate_leggings",
-            properties -> new ManderlyPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorType.LEGGINGS, properties));
+            properties -> new ManderlyPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorItem.Type.LEGGINGS, properties));
 
     public static final DeferredItem<ManderlyPlateArmorItem> MANDERLY_PLATE_BOOTS = ITEMS.registerItem("manderly_plate_boots",
-            properties -> new ManderlyPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorType.BOOTS, properties));
+            properties -> new ManderlyPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorItem.Type.BOOTS, properties));
 
     //Manderly Noble
     public static final DeferredItem<ManderlyNobleArmorItem> MANDERLY_NOBLE_HELMET = ITEMS.registerItem("manderly_noble_helmet",
-            properties -> new ManderlyNobleArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorType.HELMET, properties));
+            properties -> new ManderlyNobleArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorItem.Type.HELMET, properties));
 
     public static final DeferredItem<ManderlyNobleArmorItem> MANDERLY_NOBLE_CHESTPLATE = ITEMS.registerItem("manderly_noble_chestplate",
-            properties -> new ManderlyNobleArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorType.CHESTPLATE, properties));
+            properties -> new ManderlyNobleArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorItem.Type.CHESTPLATE, properties));
 
     public static final DeferredItem<ManderlyNobleArmorItem> MANDERLY_NOBLE_LEGGINGS = ITEMS.registerItem("manderly_noble_leggings",
-            properties -> new ManderlyNobleArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorType.LEGGINGS, properties));
+            properties -> new ManderlyNobleArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorItem.Type.LEGGINGS, properties));
 
     public static final DeferredItem<ManderlyNobleArmorItem> MANDERLY_NOBLE_BOOTS = ITEMS.registerItem("manderly_noble_boots",
-            properties -> new ManderlyNobleArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorType.BOOTS, properties));
+            properties -> new ManderlyNobleArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorItem.Type.BOOTS, properties));
 
     // Adding Stark Armour
 
     //Stark Levy
     public static final DeferredItem<StarkLevyArmorItem> STARK_LEVY_HELMET = ITEMS.registerItem("stark_levy_helmet",
-            properties -> new StarkLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorType.HELMET, properties));
+            properties -> new StarkLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorItem.Type.HELMET, properties));
 
     public static final DeferredItem<StarkLevyArmorItem> STARK_LEVY_CHESTPLATE = ITEMS.registerItem("stark_levy_chestplate",
-            properties -> new StarkLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorType.CHESTPLATE, properties));
+            properties -> new StarkLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorItem.Type.CHESTPLATE, properties));
 
     public static final DeferredItem<StarkLevyArmorItem> STARK_LEVY_LEGGINGS = ITEMS.registerItem("stark_levy_leggings",
-            properties -> new StarkLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorType.LEGGINGS, properties));
+            properties -> new StarkLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorItem.Type.LEGGINGS, properties));
 
     public static final DeferredItem<StarkLevyArmorItem> STARK_LEVY_BOOTS = ITEMS.registerItem("stark_levy_boots",
-            properties -> new StarkLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorType.BOOTS, properties));
+            properties -> new StarkLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorItem.Type.BOOTS, properties));
 
     //Stark PLate
     public static final DeferredItem<StarkPlateArmorItem> STARK_PLATE_HELMET = ITEMS.registerItem("stark_plate_helmet",
-            properties -> new StarkPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorType.HELMET, properties));
+            properties -> new StarkPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorItem.Type.HELMET, properties));
 
     public static final DeferredItem<StarkPlateArmorItem> STARK_PLATE_CHESTPLATE = ITEMS.registerItem("stark_plate_chestplate",
-            properties -> new StarkPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorType.CHESTPLATE, properties));
+            properties -> new StarkPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorItem.Type.CHESTPLATE, properties));
 
     public static final DeferredItem<StarkPlateArmorItem> STARK_PLATE_LEGGINGS = ITEMS.registerItem("stark_plate_leggings",
-            properties -> new StarkPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorType.LEGGINGS, properties));
+            properties -> new StarkPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorItem.Type.LEGGINGS, properties));
 
     public static final DeferredItem<StarkPlateArmorItem> STARK_PLATE_BOOTS = ITEMS.registerItem("stark_plate_boots",
-            properties -> new StarkPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorType.BOOTS, properties));
+            properties -> new StarkPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorItem.Type.BOOTS, properties));
 
     //Stark Noble
     public static final DeferredItem<StarkNoblePlateArmorItem> STARK_NOBLE_PLATE_HELMET = ITEMS.registerItem("stark_noble_plate_helmet",
-            properties -> new StarkNoblePlateArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorType.HELMET, properties));
+            properties -> new StarkNoblePlateArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorItem.Type.HELMET, properties));
 
     public static final DeferredItem<StarkNoblePlateArmorItem> STARK_NOBLE_PLATE_CHESTPLATE = ITEMS.registerItem("stark_noble_plate_chestplate",
-            properties -> new StarkNoblePlateArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorType.CHESTPLATE, properties));
+            properties -> new StarkNoblePlateArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorItem.Type.CHESTPLATE, properties));
 
     public static final DeferredItem<StarkNoblePlateArmorItem> STARK_NOBLE_PLATE_LEGGINGS = ITEMS.registerItem("stark_noble_plate_leggings",
-            properties -> new StarkNoblePlateArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorType.LEGGINGS, properties));
+            properties -> new StarkNoblePlateArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorItem.Type.LEGGINGS, properties));
 
     public static final DeferredItem<StarkNoblePlateArmorItem> STARK_NOBLE_PLATE_BOOTS = ITEMS.registerItem("stark_noble_plate_boots",
-            properties -> new StarkNoblePlateArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorType.BOOTS, properties));
+            properties -> new StarkNoblePlateArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorItem.Type.BOOTS, properties));
 
     //Stark Noble
     public static final DeferredItem<MountainClanLevyArmorItem> MOUNTAIN_CLAN_LEVY_HELMET = ITEMS.registerItem("northern_mountain_clan_leather_helmet",
-            properties -> new MountainClanLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorType.HELMET, properties));
+            properties -> new MountainClanLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorItem.Type.HELMET, properties));
 
     public static final DeferredItem<MountainClanLevyArmorItem> MOUNTAIN_CLAN_LEVY_CHESTPLATE = ITEMS.registerItem("northern_mountain_clan_leather_chestplate",
-            properties -> new MountainClanLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorType.CHESTPLATE, properties));
+            properties -> new MountainClanLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorItem.Type.CHESTPLATE, properties));
 
     public static final DeferredItem<MountainClanLevyArmorItem> MOUNTAIN_CLAN_LEVY_LEGGINGS = ITEMS.registerItem("northern_mountain_clan_leather_leggings",
-            properties -> new MountainClanLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorType.LEGGINGS, properties));
+            properties -> new MountainClanLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorItem.Type.LEGGINGS, properties));
 
     public static final DeferredItem<MountainClanLevyArmorItem> MOUNTAIN_CLAN_LEVY_BOOTS = ITEMS.registerItem("northern_mountain_clan_leather_boots",
-            properties -> new MountainClanLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorType.BOOTS, properties));
+            properties -> new MountainClanLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorItem.Type.BOOTS, properties));
 
     //Stark Noble
     public static final DeferredItem<MountainClanPlateArmorItem> MOUNTAIN_CLAN_PLATE_HELMET = ITEMS.registerItem("northern_mountain_clan_chain_helmet",
-            properties -> new MountainClanPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorType.HELMET, properties));
+            properties -> new MountainClanPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorItem.Type.HELMET, properties));
 
     public static final DeferredItem<MountainClanPlateArmorItem> MOUNTAIN_CLAN_PLATE_CHESTPLATE = ITEMS.registerItem("northern_mountain_clan_chain_chestplate",
-            properties -> new MountainClanPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorType.CHESTPLATE, properties));
+            properties -> new MountainClanPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorItem.Type.CHESTPLATE, properties));
 
     public static final DeferredItem<MountainClanPlateArmorItem> MOUNTAIN_CLAN_PLATE_LEGGINGS = ITEMS.registerItem("northern_mountain_clan_chain_leggings",
-            properties -> new MountainClanPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorType.LEGGINGS, properties));
+            properties -> new MountainClanPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorItem.Type.LEGGINGS, properties));
 
     public static final DeferredItem<MountainClanPlateArmorItem> MOUNTAIN_CLAN_PLATE_BOOTS = ITEMS.registerItem("northern_mountain_clan_chain_boots",
-            properties -> new MountainClanPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorType.BOOTS, properties));
+            properties -> new MountainClanPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorItem.Type.BOOTS, properties));
 
     //Stark Noble
     public static final DeferredItem<MountainClanChiefArmorItem> MOUNTAIN_CLAN_CHIEF_HELMET = ITEMS.registerItem("northern_mountain_clan_noble_helmet",
-            properties -> new MountainClanChiefArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorType.HELMET, properties));
+            properties -> new MountainClanChiefArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorItem.Type.HELMET, properties));
 
     public static final DeferredItem<MountainClanChiefArmorItem> MOUNTAIN_CLAN_CHIEF_CHESTPLATE = ITEMS.registerItem("northern_mountain_clan_noble_chestplate",
-            properties -> new MountainClanChiefArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorType.CHESTPLATE, properties));
+            properties -> new MountainClanChiefArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorItem.Type.CHESTPLATE, properties));
 
     public static final DeferredItem<MountainClanChiefArmorItem> MOUNTAIN_CLAN_CHIEF_LEGGINGS = ITEMS.registerItem("northern_mountain_clan_noble_leggings",
-            properties -> new MountainClanChiefArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorType.LEGGINGS, properties));
+            properties -> new MountainClanChiefArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorItem.Type.LEGGINGS, properties));
 
     public static final DeferredItem<MountainClanChiefArmorItem> MOUNTAIN_CLAN_CHIEF_BOOTS = ITEMS.registerItem("northern_mountain_clan_noble_boots",
-            properties -> new MountainClanChiefArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorType.BOOTS, properties));
+            properties -> new MountainClanChiefArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorItem.Type.BOOTS, properties));
 
     //Stark Noble
     public static final DeferredItem<IronBornLevyArmorItem> IRONBORN_LEVY_HELMET = ITEMS.registerItem("ironborn_levy_helmet",
-            properties -> new IronBornLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorType.HELMET, properties));
+            properties -> new IronBornLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorItem.Type.HELMET, properties));
 
     public static final DeferredItem<IronBornLevyArmorItem> IRONBORN_LEVY_CHESTPLATE = ITEMS.registerItem("ironborn_levy_chestplate",
-            properties -> new IronBornLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorType.CHESTPLATE, properties));
+            properties -> new IronBornLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorItem.Type.CHESTPLATE, properties));
 
     public static final DeferredItem<IronBornLevyArmorItem> IRONBORN_LEVY_LEGGINGS = ITEMS.registerItem("ironborn_levy_leggings",
-            properties -> new IronBornLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorType.LEGGINGS, properties));
+            properties -> new IronBornLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorItem.Type.LEGGINGS, properties));
 
     public static final DeferredItem<IronBornLevyArmorItem> IRONBORN_LEVY_BOOTS = ITEMS.registerItem("ironborn_levy_boots",
-            properties -> new IronBornLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorType.BOOTS, properties));
+            properties -> new IronBornLevyArmorItem(ModArmorMaterials.NORTHERN_LEVY, ArmorItem.Type.BOOTS, properties));
 
     //Stark Noble
     public static final DeferredItem<IronBornPlateArmorItem> IRONBORN_PLATE_HELMET = ITEMS.registerItem("ironborn_plate_helmet",
-            properties -> new IronBornPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorType.HELMET, properties));
+            properties -> new IronBornPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorItem.Type.HELMET, properties));
 
     public static final DeferredItem<IronBornPlateArmorItem> IRONBORN_PLATE_CHESTPLATE = ITEMS.registerItem("ironborn_plate_chestplate",
-            properties -> new IronBornPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorType.CHESTPLATE, properties));
+            properties -> new IronBornPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorItem.Type.CHESTPLATE, properties));
 
     public static final DeferredItem<IronBornPlateArmorItem> IRONBORN_PLATE_LEGGINGS = ITEMS.registerItem("ironborn_plate_leggings",
-            properties -> new IronBornPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorType.LEGGINGS, properties));
+            properties -> new IronBornPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorItem.Type.LEGGINGS, properties));
 
     public static final DeferredItem<IronBornPlateArmorItem> IRONBORN_PLATE_BOOTS = ITEMS.registerItem("ironborn_plate_boots",
-            properties -> new IronBornPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorType.BOOTS, properties));
+            properties -> new IronBornPlateArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorItem.Type.BOOTS, properties));
 
     //Stark Noble
     public static final DeferredItem<IronBornNobleArmorItem> IRONBORN_NOBLE_HELMET = ITEMS.registerItem("ironborn_noble_helmet",
-            properties -> new IronBornNobleArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorType.HELMET, properties));
+            properties -> new IronBornNobleArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorItem.Type.HELMET, properties));
 
     public static final DeferredItem<IronBornNobleArmorItem> IRONBORN_NOBLE_CHESTPLATE = ITEMS.registerItem("ironborn_noble_chestplate",
-            properties -> new IronBornNobleArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorType.CHESTPLATE, properties));
+            properties -> new IronBornNobleArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorItem.Type.CHESTPLATE, properties));
 
     public static final DeferredItem<IronBornNobleArmorItem> IRONBORN_NOBLE_LEGGINGS = ITEMS.registerItem("ironborn_noble_leggings",
-            properties -> new IronBornNobleArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorType.LEGGINGS, properties));
+            properties -> new IronBornNobleArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorItem.Type.LEGGINGS, properties));
 
     public static final DeferredItem<IronBornNobleArmorItem> IRONBORN_NOBLE_BOOTS = ITEMS.registerItem("ironborn_noble_boots",
-            properties -> new IronBornNobleArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorType.BOOTS, properties));
+            properties -> new IronBornNobleArmorItem(ModArmorMaterials.NORTHERN_NOBLE, ArmorItem.Type.BOOTS, properties));
 
     //Stark Noble
 
 
     //Stark Noble
     public static final DeferredItem<WildlingFurArmorItem> WILDLING_FUR_HELMET = ITEMS.registerItem("wildling_fur_helmet",
-            properties -> new WildlingFurArmorItem(ModArmorMaterials.FUR, ArmorType.HELMET, properties));
+            properties -> new WildlingFurArmorItem(ModArmorMaterials.FUR, ArmorItem.Type.HELMET, properties));
 
     public static final DeferredItem<WildlingFurArmorItem> WILDLING_FUR_CHESTPLATE = ITEMS.registerItem("wildling_fur_chestplate",
-            properties -> new WildlingFurArmorItem(ModArmorMaterials.FUR, ArmorType.CHESTPLATE, properties));
+            properties -> new WildlingFurArmorItem(ModArmorMaterials.FUR, ArmorItem.Type.CHESTPLATE, properties));
 
     public static final DeferredItem<WildlingFurArmorItem> WILDLING_FUR_LEGGINGS = ITEMS.registerItem("wildling_fur_leggings",
-            properties -> new WildlingFurArmorItem(ModArmorMaterials.FUR, ArmorType.LEGGINGS, properties));
+            properties -> new WildlingFurArmorItem(ModArmorMaterials.FUR, ArmorItem.Type.LEGGINGS, properties));
 
     public static final DeferredItem<WildlingFurArmorItem> WILDLING_FUR_BOOTS = ITEMS.registerItem("wildling_fur_boots",
-            properties -> new WildlingFurArmorItem(ModArmorMaterials.FUR, ArmorType.BOOTS, properties));
+            properties -> new WildlingFurArmorItem(ModArmorMaterials.FUR, ArmorItem.Type.BOOTS, properties));
 
     public static final DeferredItem<WildlingLeatherArmorItem> WILDLING_LEATHER_HELMET = ITEMS.registerItem("wildling_leather_helmet",
-            properties -> new WildlingLeatherArmorItem(ModArmorMaterials.LEATHER, ArmorType.HELMET, properties));
+            properties -> new WildlingLeatherArmorItem(ModArmorMaterials.LEATHER, ArmorItem.Type.HELMET, properties));
 
     public static final DeferredItem<WildlingLeatherArmorItem> WILDLING_LEATHER_CHESTPLATE = ITEMS.registerItem("wildling_leather_chestplate",
-            properties -> new WildlingLeatherArmorItem(ModArmorMaterials.LEATHER, ArmorType.CHESTPLATE, properties));
+            properties -> new WildlingLeatherArmorItem(ModArmorMaterials.LEATHER, ArmorItem.Type.CHESTPLATE, properties));
 
     public static final DeferredItem<WildlingLeatherArmorItem> WILDLING_LEATHER_LEGGINGS = ITEMS.registerItem("wildling_leather_leggings",
-            properties -> new WildlingLeatherArmorItem(ModArmorMaterials.LEATHER, ArmorType.LEGGINGS, properties));
+            properties -> new WildlingLeatherArmorItem(ModArmorMaterials.LEATHER, ArmorItem.Type.LEGGINGS, properties));
 
     public static final DeferredItem<WildlingLeatherArmorItem> WILDLING_LEATHER_BOOTS = ITEMS.registerItem("wildling_leather_boots",
-            properties -> new WildlingLeatherArmorItem(ModArmorMaterials.LEATHER, ArmorType.BOOTS, properties));
+            properties -> new WildlingLeatherArmorItem(ModArmorMaterials.LEATHER, ArmorItem.Type.BOOTS, properties));
     //Stark Noble
     public static final DeferredItem<WildlingChiefArmorItem> WILDLING_CHIEF_HELMET = ITEMS.registerItem("wildling_chief_helmet",
-            properties -> new WildlingChiefArmorItem(ModArmorMaterials.CHIEF, ArmorType.HELMET, properties));
+            properties -> new WildlingChiefArmorItem(ModArmorMaterials.CHIEF, ArmorItem.Type.HELMET, properties));
 
     public static final DeferredItem<WildlingChiefArmorItem> WILDLING_CHIEF_CHESTPLATE = ITEMS.registerItem("wildling_chief_chestplate",
-            properties -> new WildlingChiefArmorItem(ModArmorMaterials.CHIEF, ArmorType.CHESTPLATE, properties));
+            properties -> new WildlingChiefArmorItem(ModArmorMaterials.CHIEF, ArmorItem.Type.CHESTPLATE, properties));
 
     public static final DeferredItem<WildlingChiefArmorItem> WILDLING_CHIEF_LEGGINGS = ITEMS.registerItem("wildling_chief_leggings",
-            properties -> new WildlingChiefArmorItem(ModArmorMaterials.CHIEF, ArmorType.LEGGINGS, properties));
+            properties -> new WildlingChiefArmorItem(ModArmorMaterials.CHIEF, ArmorItem.Type.LEGGINGS, properties));
 
     public static final DeferredItem<WildlingChiefArmorItem> WILDLING_CHIEF_BOOTS = ITEMS.registerItem("wildling_chief_boots",
-            properties -> new WildlingChiefArmorItem(ModArmorMaterials.CHIEF, ArmorType.BOOTS, properties));
+            properties -> new WildlingChiefArmorItem(ModArmorMaterials.CHIEF, ArmorItem.Type.BOOTS, properties));
 
     //Thenn Leather
     public static final DeferredItem<ThennLevyArmorItem> THENN_LEVY_HELMET = ITEMS.registerItem("thenn_leather_helmet",
-            properties -> new ThennLevyArmorItem(ModArmorMaterials.FUR, ArmorType.HELMET, properties));
+            properties -> new ThennLevyArmorItem(ModArmorMaterials.FUR, ArmorItem.Type.HELMET, properties));
 
     public static final DeferredItem<ThennLevyArmorItem> THENN_LEVY_CHESTPLATE = ITEMS.registerItem("thenn_leather_chestplate",
-            properties -> new ThennLevyArmorItem(ModArmorMaterials.FUR, ArmorType.CHESTPLATE, properties));
+            properties -> new ThennLevyArmorItem(ModArmorMaterials.FUR, ArmorItem.Type.CHESTPLATE, properties));
 
     public static final DeferredItem<ThennLevyArmorItem> THENN_LEVY_LEGGINGS = ITEMS.registerItem("thenn_leather_leggings",
-            properties -> new ThennLevyArmorItem(ModArmorMaterials.FUR, ArmorType.LEGGINGS, properties));
+            properties -> new ThennLevyArmorItem(ModArmorMaterials.FUR, ArmorItem.Type.LEGGINGS, properties));
 
     public static final DeferredItem<ThennLevyArmorItem> THENN_LEVY_BOOTS = ITEMS.registerItem("thenn_leather_boots",
-            properties -> new ThennLevyArmorItem(ModArmorMaterials.FUR, ArmorType.BOOTS, properties));
+            properties -> new ThennLevyArmorItem(ModArmorMaterials.FUR, ArmorItem.Type.BOOTS, properties));
 
     //Thenn Bronze
     public static final DeferredItem<ThennPlateArmorItem> THENN_PLATE_HELMET = ITEMS.registerItem("thenn_bronze_helmet",
-            properties -> new ThennPlateArmorItem(ModArmorMaterials.LEATHER, ArmorType.HELMET, properties));
+            properties -> new ThennPlateArmorItem(ModArmorMaterials.LEATHER, ArmorItem.Type.HELMET, properties));
 
     public static final DeferredItem<ThennPlateArmorItem> THENN_PLATE_CHESTPLATE = ITEMS.registerItem("thenn_bronze_chestplate",
-            properties -> new ThennPlateArmorItem(ModArmorMaterials.LEATHER, ArmorType.CHESTPLATE, properties));
+            properties -> new ThennPlateArmorItem(ModArmorMaterials.LEATHER, ArmorItem.Type.CHESTPLATE, properties));
 
     public static final DeferredItem<ThennPlateArmorItem> THENN_PLATE_LEGGINGS = ITEMS.registerItem("thenn_bronze_leggings",
-            properties -> new ThennPlateArmorItem(ModArmorMaterials.LEATHER, ArmorType.LEGGINGS, properties));
+            properties -> new ThennPlateArmorItem(ModArmorMaterials.LEATHER, ArmorItem.Type.LEGGINGS, properties));
 
     public static final DeferredItem<ThennPlateArmorItem> THENN_PLATE_BOOTS = ITEMS.registerItem("thenn_bronze_boots",
-            properties -> new ThennPlateArmorItem(ModArmorMaterials.LEATHER, ArmorType.BOOTS, properties));
+            properties -> new ThennPlateArmorItem(ModArmorMaterials.LEATHER, ArmorItem.Type.BOOTS, properties));
 
     //Thenn Chieftain
     public static final DeferredItem<ThennNobleArmorItem> THENN_NOBLE_HELMET = ITEMS.registerItem("thenn_chief_helmet",
-            properties -> new ThennNobleArmorItem(ModArmorMaterials.CHIEF, ArmorType.HELMET, properties));
+            properties -> new ThennNobleArmorItem(ModArmorMaterials.CHIEF, ArmorItem.Type.HELMET, properties));
 
     public static final DeferredItem<ThennNobleArmorItem> THENN_NOBLE_CHESTPLATE = ITEMS.registerItem("thenn_chief_chestplate",
-            properties -> new ThennNobleArmorItem(ModArmorMaterials.CHIEF, ArmorType.CHESTPLATE, properties));
+            properties -> new ThennNobleArmorItem(ModArmorMaterials.CHIEF, ArmorItem.Type.CHESTPLATE, properties));
 
     public static final DeferredItem<ThennNobleArmorItem> THENN_NOBLE_LEGGINGS = ITEMS.registerItem("thenn_chief_leggings",
-            properties -> new ThennNobleArmorItem(ModArmorMaterials.CHIEF, ArmorType.LEGGINGS, properties));
+            properties -> new ThennNobleArmorItem(ModArmorMaterials.CHIEF, ArmorItem.Type.LEGGINGS, properties));
 
     public static final DeferredItem<ThennNobleArmorItem> THENN_NOBLE_BOOTS = ITEMS.registerItem("thenn_chief_boots",
-            properties -> new ThennNobleArmorItem(ModArmorMaterials.CHIEF, ArmorType.BOOTS, properties));
+            properties -> new ThennNobleArmorItem(ModArmorMaterials.CHIEF, ArmorItem.Type.BOOTS, properties));
 
     //Stark Noble
 
     //Stark Noble
     public static final DeferredItem<NightsWatchRangerArmorItem> NIGHT_WATCH_RANGER_HELMET = ITEMS.registerItem("night_watch_ranger_helmet",
-            properties -> new NightsWatchRangerArmorItem(ModArmorMaterials.LEATHER, ArmorType.HELMET, properties));
+            properties -> new NightsWatchRangerArmorItem(ModArmorMaterials.LEATHER, ArmorItem.Type.HELMET, properties));
 
     public static final DeferredItem<NightsWatchRangerArmorItem> NIGHT_WATCH_RANGER_CHESTPLATE = ITEMS.registerItem("night_watch_ranger_chestplate",
-            properties -> new NightsWatchRangerArmorItem(ModArmorMaterials.LEATHER, ArmorType.CHESTPLATE, properties));
+            properties -> new NightsWatchRangerArmorItem(ModArmorMaterials.LEATHER, ArmorItem.Type.CHESTPLATE, properties));
 
     public static final DeferredItem<NightsWatchRangerArmorItem> NIGHT_WATCH_RANGER_LEGGINGS = ITEMS.registerItem("night_watch_ranger_leggings",
-            properties -> new NightsWatchRangerArmorItem(ModArmorMaterials.LEATHER, ArmorType.LEGGINGS, properties));
+            properties -> new NightsWatchRangerArmorItem(ModArmorMaterials.LEATHER, ArmorItem.Type.LEGGINGS, properties));
 
     public static final DeferredItem<NightsWatchRangerArmorItem> NIGHT_WATCH_RANGER_BOOTS = ITEMS.registerItem("night_watch_ranger_boots",
-            properties -> new NightsWatchRangerArmorItem(ModArmorMaterials.LEATHER, ArmorType.BOOTS, properties));
+            properties -> new NightsWatchRangerArmorItem(ModArmorMaterials.LEATHER, ArmorItem.Type.BOOTS, properties));
 
     public static final DeferredItem<NightsWatchLeatherArmorItem> NIGHT_WATCH_LEATHER_HELMET = ITEMS.registerItem("night_watch_leather_helmet",
-            properties -> new NightsWatchLeatherArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorType.HELMET, properties));
+            properties -> new NightsWatchLeatherArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorItem.Type.HELMET, properties));
 
     public static final DeferredItem<NightsWatchLeatherArmorItem> NIGHT_WATCH_LEATHER_CHESTPLATE = ITEMS.registerItem("night_watch_leather_chestplate",
-            properties -> new NightsWatchLeatherArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorType.CHESTPLATE, properties));
+            properties -> new NightsWatchLeatherArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorItem.Type.CHESTPLATE, properties));
 
     public static final DeferredItem<NightsWatchLeatherArmorItem> NIGHT_WATCH_LEATHER_LEGGINGS = ITEMS.registerItem("night_watch_leather_leggings",
-            properties -> new NightsWatchLeatherArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorType.LEGGINGS, properties));
+            properties -> new NightsWatchLeatherArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorItem.Type.LEGGINGS, properties));
 
     public static final DeferredItem<NightsWatchLeatherArmorItem> NIGHT_WATCH_LEATHER_BOOTS = ITEMS.registerItem("night_watch_leather_boots",
-            properties -> new NightsWatchLeatherArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorType.BOOTS, properties));
+            properties -> new NightsWatchLeatherArmorItem(ModArmorMaterials.NORTHERN_PLATE, ArmorItem.Type.BOOTS, properties));
 
     //Stark Noble
     public static final DeferredItem<NightsWatchEliteArmorItem> NIGHT_WATCH_ELITE_HELMET = ITEMS.registerItem("night_watch_elite_helmet",
-            properties -> new NightsWatchEliteArmorItem(ModArmorMaterials.CHIEF, ArmorType.HELMET, properties));
+            properties -> new NightsWatchEliteArmorItem(ModArmorMaterials.CHIEF, ArmorItem.Type.HELMET, properties));
 
     public static final DeferredItem<NightsWatchEliteArmorItem> NIGHT_WATCH_ELITE_CHESTPLATE = ITEMS.registerItem("night_watch_elite_chestplate",
-            properties -> new NightsWatchEliteArmorItem(ModArmorMaterials.CHIEF, ArmorType.CHESTPLATE, properties));
+            properties -> new NightsWatchEliteArmorItem(ModArmorMaterials.CHIEF, ArmorItem.Type.CHESTPLATE, properties));
 
     public static final DeferredItem<NightsWatchEliteArmorItem> NIGHT_WATCH_ELITE_LEGGINGS = ITEMS.registerItem("night_watch_elite_leggings",
-            properties -> new NightsWatchEliteArmorItem(ModArmorMaterials.CHIEF, ArmorType.LEGGINGS, properties));
+            properties -> new NightsWatchEliteArmorItem(ModArmorMaterials.CHIEF, ArmorItem.Type.LEGGINGS, properties));
 
     public static final DeferredItem<NightsWatchEliteArmorItem> NIGHT_WATCH_ELITE_BOOTS = ITEMS.registerItem("night_watch_elite_boots",
-            properties -> new NightsWatchEliteArmorItem(ModArmorMaterials.CHIEF, ArmorType.BOOTS, properties));
+            properties -> new NightsWatchEliteArmorItem(ModArmorMaterials.CHIEF, ArmorItem.Type.BOOTS, properties));
     // ---------------------------(COINS)--------------------------- //
     public static final DeferredItem<Item> GOLD_DRAGON = ITEMS.registerItem("gold_dragon",
             properties -> new CoinItem(properties, 23520L)); // 1 dragon = 23520 halfpennies
@@ -486,13 +485,13 @@ public class ModItems {
     // ---------------------------(TOOLS)--------------------------- //
     // Bronze TOOLS
     public static final DeferredItem<Item> BRONZE_PICKAXE = ITEMS.registerItem("bronze_pickaxe",
-            properties -> new PickaxeItem(ModToolTiers.BRONZE, 0, 0, properties));
+            properties -> new PickaxeItem(ModToolTiers.BRONZE, properties.attributes(DiggerItem.createAttributes(ModToolTiers.BRONZE, 0, 0.0F))));
     public static final DeferredItem<Item> BRONZE_SHOVEL = ITEMS.registerItem("bronze_shovel",
-            properties -> new ShovelItem(ModToolTiers.BRONZE, 0, 0, properties));
+            properties -> new ShovelItem(ModToolTiers.BRONZE, properties.attributes(DiggerItem.createAttributes(ModToolTiers.BRONZE, 0, 0.0F))));
     public static final DeferredItem<Item> BRONZE_AXE = ITEMS.registerItem("bronze_axe",
-            properties -> new AxeItem(ModToolTiers.BRONZE, 6F, 0.9F, properties));
+            properties -> new AxeItem(ModToolTiers.BRONZE, properties.attributes(DiggerItem.createAttributes(ModToolTiers.BRONZE, 6.0F, 0.9F))));
     public static final DeferredItem<Item> BRONZE_HOE = ITEMS.registerItem("bronze_hoe",
-            properties -> new HoeItem(ModToolTiers.BRONZE, 0, 0, properties));
+            properties -> new HoeItem(ModToolTiers.BRONZE, properties.attributes(DiggerItem.createAttributes(ModToolTiers.BRONZE, 0, 0.0F))));
 
     // DRAGONGLASS WEAPONS
     public static final DeferredItem<Item> DRAGONGLASS_SPEAR = ITEMS.registerItem("dragonglass_spear",
@@ -530,24 +529,24 @@ public class ModItems {
                     String name = "iron_sword_h" + h + "_b" + b + "_c" + c;
                     IRON_SWORDS.put(name, ITEMS.registerItem(name,
                             properties -> new LevelRequiredSwordItem(
-                                    ToolMaterial.IRON, 9, -2.6F, properties,
+                                    Tiers.IRON, 9, -2.6F, properties,
                                     WeaponRequirements.TWO_HANDED)));
                 }
             }
         }
     }
     public static final DeferredItem<Item> IRON_LONGSWORD = ITEMS.registerItem("iron_longsword",
-            properties -> new LevelRequiredSwordItem(ToolMaterial.IRON, 9, -2.6F, properties, WeaponRequirements.TWO_HANDED));
+            properties -> new LevelRequiredSwordItem(Tiers.IRON, 9, -2.6F, properties, WeaponRequirements.TWO_HANDED));
     public static final DeferredItem<Item> IRON_SPEAR = ITEMS.registerItem("iron_spear",
-            properties -> new LevelRequiredSwordItem(ToolMaterial.IRON, 7, -2.2F, properties, WeaponRequirements.POLEARM));
+            properties -> new LevelRequiredSwordItem(Tiers.IRON, 7, -2.2F, properties, WeaponRequirements.POLEARM));
     public static final DeferredItem<Item> IRON_PIKE = ITEMS.registerItem("iron_pike",
-            properties -> new LevelRequiredSwordItem(ToolMaterial.IRON, 8, -3F, properties, WeaponRequirements.LONG_POLEARM));
+            properties -> new LevelRequiredSwordItem(Tiers.IRON, 8, -3F, properties, WeaponRequirements.LONG_POLEARM));
     public static final DeferredItem<Item> IRON_MACE = ITEMS.registerItem("iron_mace",
-            properties -> new LevelRequiredSwordItem(ToolMaterial.IRON, 7, -2.6F, properties, WeaponRequirements.ONE_HANDED));
+            properties -> new LevelRequiredSwordItem(Tiers.IRON, 7, -2.6F, properties, WeaponRequirements.ONE_HANDED));
     public static final DeferredItem<Item> IRON_DAGGER = ITEMS.registerItem("iron_dagger",
-            properties -> new LevelRequiredSwordItem(ToolMaterial.IRON, 4, -1.5F, properties, WeaponRequirements.SHORT_BLADE));
+            properties -> new LevelRequiredSwordItem(Tiers.IRON, 4, -1.5F, properties, WeaponRequirements.SHORT_BLADE));
     public static final DeferredItem<Item> IRON_BATTLEAXE = ITEMS.registerItem("iron_battleaxe",
-            properties -> new LevelRequiredSwordItem(ToolMaterial.IRON, 10, -3F, properties, WeaponRequirements.ONE_HANDED));
+            properties -> new LevelRequiredSwordItem(Tiers.IRON, 10, -3F, properties, WeaponRequirements.ONE_HANDED));
 
 
     // STEEL WEAPONS
@@ -628,13 +627,13 @@ public class ModItems {
 
     // Steel TOOLS
     public static final DeferredItem<Item> STEEL_PICKAXE = ITEMS.registerItem("steel_pickaxe",
-            properties -> new PickaxeItem(ModToolTiers.STEEL, 1, 1, properties));
+            properties -> new PickaxeItem(ModToolTiers.STEEL, properties.attributes(DiggerItem.createAttributes(ModToolTiers.STEEL, 1, 1.0F))));
     public static final DeferredItem<Item> STEEL_SHOVEL = ITEMS.registerItem("steel_shovel",
-            properties -> new ShovelItem(ModToolTiers.STEEL, 0, 0, properties));
+            properties -> new ShovelItem(ModToolTiers.STEEL, properties.attributes(DiggerItem.createAttributes(ModToolTiers.STEEL, 0, 0.0F))));
     public static final DeferredItem<Item> STEEL_AXE = ITEMS.registerItem("steel_axe",
-            properties -> new AxeItem(ModToolTiers.STEEL, 7, 1, properties));
+            properties -> new AxeItem(ModToolTiers.STEEL, properties.attributes(DiggerItem.createAttributes(ModToolTiers.STEEL, 7.0F, 1.0F))));
     public static final DeferredItem<Item> STEEL_HOE = ITEMS.registerItem("steel_hoe",
-            properties -> new HoeItem(ModToolTiers.STEEL, 0, 0, properties));
+            properties -> new HoeItem(ModToolTiers.STEEL, properties.attributes(DiggerItem.createAttributes(ModToolTiers.STEEL, 0, 0.0F))));
     // ---------------------------(TOOLS)--------------------------- //
     // ---------------------------(BOW & ARROW)--------------------------- //
     //Bows
@@ -711,151 +710,151 @@ public class ModItems {
     // ── FOWL ────────────────────────────────────────────────────
 // ── FOWL ─────────────────────────────────────────────────────────────────
     public static final DeferredItem<Item> RAW_PIGEON = ITEMS.registerItem("raw_pigeon",
-            properties -> new Item(properties.food(ModFoods.RAW_PIGEON, ModConsumables.RAW_FOWL)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_PIGEON = ITEMS.registerItem("cooked_pigeon",
             properties -> new Item(properties.food(ModFoods.COOKED_PIGEON)));
     public static final DeferredItem<Item> RAW_DUCK = ITEMS.registerItem("raw_duck",
-            properties -> new Item(properties.food(ModFoods.RAW_DUCK, ModConsumables.RAW_FOWL)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_DUCK = ITEMS.registerItem("cooked_duck",
             properties -> new Item(properties.food(ModFoods.COOKED_DUCK)));
     public static final DeferredItem<Item> RAW_GOOSE = ITEMS.registerItem("raw_goose",
-            properties -> new Item(properties.food(ModFoods.RAW_GOOSE, ModConsumables.RAW_FOWL)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_GOOSE = ITEMS.registerItem("cooked_goose",
             properties -> new Item(properties.food(ModFoods.COOKED_GOOSE)));
     public static final DeferredItem<Item> RAW_GULL = ITEMS.registerItem("raw_gull",
-            properties -> new Item(properties.food(ModFoods.RAW_GULL, ModConsumables.RAW_FOWL)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_GULL = ITEMS.registerItem("cooked_gull",
             properties -> new Item(properties.food(ModFoods.COOKED_GULL)));
     public static final DeferredItem<Item> RAW_HERON = ITEMS.registerItem("raw_heron",
-            properties -> new Item(properties.food(ModFoods.RAW_HERON, ModConsumables.RAW_FOWL)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_HERON = ITEMS.registerItem("cooked_heron",
             properties -> new Item(properties.food(ModFoods.COOKED_HERON)));
     public static final DeferredItem<Item> RAW_LARK = ITEMS.registerItem("raw_lark",
-            properties -> new Item(properties.food(ModFoods.RAW_LARK, ModConsumables.RAW_FOWL)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_LARK = ITEMS.registerItem("cooked_lark",
             properties -> new Item(properties.food(ModFoods.COOKED_LARK)));
     public static final DeferredItem<Item> RAW_PARTRIDGE = ITEMS.registerItem("raw_partridge",
-            properties -> new Item(properties.food(ModFoods.RAW_PARTRIDGE, ModConsumables.RAW_FOWL)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_PARTRIDGE = ITEMS.registerItem("cooked_partridge",
             properties -> new Item(properties.food(ModFoods.COOKED_PARTRIDGE)));
     public static final DeferredItem<Item> RAW_PEACOCK = ITEMS.registerItem("raw_peacock",
-            properties -> new Item(properties.food(ModFoods.RAW_PEACOCK, ModConsumables.RAW_FOWL)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_PEACOCK = ITEMS.registerItem("cooked_peacock",
             properties -> new Item(properties.food(ModFoods.COOKED_PEACOCK)));
     public static final DeferredItem<Item> RAW_QUAIL = ITEMS.registerItem("raw_quail",
-            properties -> new Item(properties.food(ModFoods.RAW_QUAIL, ModConsumables.RAW_FOWL)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_QUAIL = ITEMS.registerItem("cooked_quail",
             properties -> new Item(properties.food(ModFoods.COOKED_QUAIL)));
     public static final DeferredItem<Item> RAW_SWAN = ITEMS.registerItem("raw_swan",
-            properties -> new Item(properties.food(ModFoods.RAW_SWAN, ModConsumables.RAW_FOWL)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_SWAN = ITEMS.registerItem("cooked_swan",
             properties -> new Item(properties.food(ModFoods.COOKED_SWAN)));
     public static final DeferredItem<Item> RAW_CHICKEN_NUGGETS = ITEMS.registerItem("raw_chicken_nuggets",
-            properties -> new Item(properties.food(ModFoods.RAW_CHICKEN_NUGGETS, ModConsumables.RAW_FOWL)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_CHICKEN_NUGGETS = ITEMS.registerItem("cooked_chicken_nuggets",
             properties -> new Item(properties.food(ModFoods.COOKED_CHICKEN_NUGGETS)));
 
     // ── MEATS ────────────────────────────────────────────────────────────────
     public static final DeferredItem<Item> RAW_AUROCHS = ITEMS.registerItem("raw_aurochs",
-            properties -> new Item(properties.food(ModFoods.RAW_AUROCHS, ModConsumables.RAW_MEAT)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_AUROCHS = ITEMS.registerItem("cooked_aurochs",
             properties -> new Item(properties.food(ModFoods.COOKED_AUROCHS)));
     public static final DeferredItem<Item> RAW_BEAR_MEAT = ITEMS.registerItem("raw_bear_meat",
-            properties -> new Item(properties.food(ModFoods.RAW_BEAR_MEAT, ModConsumables.RAW_MEAT)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_BEAR_MEAT = ITEMS.registerItem("cooked_bear_meat",
             properties -> new Item(properties.food(ModFoods.COOKED_BEAR_MEAT)));
     public static final DeferredItem<Item> RAW_BOAR_VENISON = ITEMS.registerItem("raw_boar_venison",
-            properties -> new Item(properties.food(ModFoods.RAW_BOAR_VENISON, ModConsumables.RAW_MEAT)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_BOAR_VENISON = ITEMS.registerItem("cooked_boar_venison",
             properties -> new Item(properties.food(ModFoods.COOKED_BOAR_VENISON)));
     public static final DeferredItem<Item> RAW_DEER_VENISON = ITEMS.registerItem("raw_deer_venison",
-            properties -> new Item(properties.food(ModFoods.RAW_DEER_VENISON, ModConsumables.RAW_MEAT)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_DEER_VENISON = ITEMS.registerItem("cooked_deer_venison",
             properties -> new Item(properties.food(ModFoods.COOKED_DEER_VENISON)));
     public static final DeferredItem<Item> RAW_DOG = ITEMS.registerItem("raw_dog",
-            properties -> new Item(properties.food(ModFoods.RAW_DOG, ModConsumables.RAW_MEAT)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_DOG = ITEMS.registerItem("cooked_dog",
             properties -> new Item(properties.food(ModFoods.COOKED_DOG)));
     public static final DeferredItem<Item> RAW_DORMICE = ITEMS.registerItem("raw_dormice",
-            properties -> new Item(properties.food(ModFoods.RAW_DORMICE, ModConsumables.RAW_MEAT)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_DORMICE = ITEMS.registerItem("cooked_dormice",
             properties -> new Item(properties.food(ModFoods.COOKED_DORMICE)));
     public static final DeferredItem<Item> RAW_FROG = ITEMS.registerItem("raw_frog",
-            properties -> new Item(properties.food(ModFoods.RAW_FROG, ModConsumables.RAW_MEAT)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_FROG = ITEMS.registerItem("cooked_frog",
             properties -> new Item(properties.food(ModFoods.COOKED_FROG)));
     public static final DeferredItem<Item> RAW_GOAT_MEAT = ITEMS.registerItem("raw_goat_meat",
-            properties -> new Item(properties.food(ModFoods.RAW_GOAT_MEAT, ModConsumables.RAW_MEAT)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_GOAT_MEAT = ITEMS.registerItem("cooked_goat_meat",
             properties -> new Item(properties.food(ModFoods.COOKED_GOAT_MEAT)));
     public static final DeferredItem<Item> RAW_HARE_MEAT = ITEMS.registerItem("raw_hare_meat",
-            properties -> new Item(properties.food(ModFoods.RAW_HARE_MEAT, ModConsumables.RAW_MEAT)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_HARE_MEAT = ITEMS.registerItem("cooked_hare_meat",
             properties -> new Item(properties.food(ModFoods.COOKED_HARE_MEAT)));
     public static final DeferredItem<Item> RAW_HORSE_MEAT = ITEMS.registerItem("raw_horse_meat",
-            properties -> new Item(properties.food(ModFoods.RAW_HORSE_MEAT, ModConsumables.RAW_MEAT)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_HORSE_MEAT = ITEMS.registerItem("cooked_horse_meat",
             properties -> new Item(properties.food(ModFoods.COOKED_HORSE_MEAT)));
     public static final DeferredItem<Item> RAW_LAMB = ITEMS.registerItem("raw_lamb",
-            properties -> new Item(properties.food(ModFoods.RAW_LAMB, ModConsumables.RAW_MEAT)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_LAMB = ITEMS.registerItem("cooked_lamb",
             properties -> new Item(properties.food(ModFoods.COOKED_LAMB)));
     public static final DeferredItem<Item> RAW_LOCUSTS = ITEMS.registerItem("raw_locusts",
-            properties -> new Item(properties.food(ModFoods.RAW_LOCUSTS)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_LOCUSTS = ITEMS.registerItem("cooked_locusts",
             properties -> new Item(properties.food(ModFoods.COOKED_LOCUSTS)));
     public static final DeferredItem<Item> RAW_MAMMOTH_MEAT = ITEMS.registerItem("raw_mammoth_meat",
-            properties -> new Item(properties.food(ModFoods.RAW_MAMMOTH_MEAT, ModConsumables.RAW_MEAT)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_MAMMOTH_MEAT = ITEMS.registerItem("cooked_mammoth_meat",
             properties -> new Item(properties.food(ModFoods.COOKED_MAMMOTH_MEAT)));
     public static final DeferredItem<Item> RAW_MAN_FLESH = ITEMS.registerItem("raw_man_flesh",
-            properties -> new Item(properties.food(ModFoods.RAW_MAN_FLESH, ModConsumables.RAW_MEAT)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_MAN_FLESH = ITEMS.registerItem("cooked_man_flesh",
             properties -> new Item(properties.food(ModFoods.COOKED_MAN_FLESH)));
     public static final DeferredItem<Item> RAW_RAT = ITEMS.registerItem("raw_rat",
-            properties -> new Item(properties.food(ModFoods.RAW_RAT, ModConsumables.RAW_MEAT)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_RAT = ITEMS.registerItem("cooked_rat",
             properties -> new Item(properties.food(ModFoods.COOKED_RAT)));
     public static final DeferredItem<Item> RAW_SNAKE = ITEMS.registerItem("raw_snake",
-            properties -> new Item(properties.food(ModFoods.RAW_SNAKE, ModConsumables.RAW_MEAT)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_SNAKE = ITEMS.registerItem("cooked_snake",
             properties -> new Item(properties.food(ModFoods.COOKED_SNAKE)));
     public static final DeferredItem<Item> RAW_SNAIL = ITEMS.registerItem("raw_snail",
-            properties -> new Item(properties.food(ModFoods.RAW_SNAIL, ModConsumables.RAW_MEAT)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_SNAIL = ITEMS.registerItem("cooked_snail",
             properties -> new Item(properties.food(ModFoods.COOKED_SNAIL)));
     public static final DeferredItem<Item> RAW_SQUIRREL = ITEMS.registerItem("raw_squirrel",
-            properties -> new Item(properties.food(ModFoods.RAW_SQUIRREL, ModConsumables.RAW_MEAT)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_SQUIRREL = ITEMS.registerItem("cooked_squirrel",
             properties -> new Item(properties.food(ModFoods.COOKED_SQUIRREL)));
     public static final DeferredItem<Item> RAW_SUCKLING_PIG = ITEMS.registerItem("raw_suckling_pig",
-            properties -> new Item(properties.food(ModFoods.RAW_SUCKLING_PIG, ModConsumables.RAW_MEAT)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_SUCKLING_PIG = ITEMS.registerItem("cooked_suckling_pig",
             properties -> new Item(properties.food(ModFoods.COOKED_SUCKLING_PIG)));
 
     // ── OFFAL & ORGAN MEATS ───────────────────────────────────────────────────
     public static final DeferredItem<Item> RAW_BACON = ITEMS.registerItem("raw_bacon",
-            properties -> new Item(properties.food(ModFoods.RAW_BACON, ModConsumables.RAW_MEAT)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_BACON = ITEMS.registerItem("cooked_bacon",
             properties -> new Item(properties.food(ModFoods.COOKED_BACON)));
     public static final DeferredItem<Item> RAW_PIG_KIDNEYS = ITEMS.registerItem("raw_pig_kidneys",
-            properties -> new Item(properties.food(ModFoods.RAW_PIG_KIDNEYS, ModConsumables.RAW_MEAT)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_PIG_KIDNEYS = ITEMS.registerItem("cooked_pig_kidneys",
             properties -> new Item(properties.food(ModFoods.COOKED_PIG_KIDNEYS)));
     public static final DeferredItem<Item> RAW_PIG_LIVER = ITEMS.registerItem("raw_pig_liver",
-            properties -> new Item(properties.food(ModFoods.RAW_PIG_LIVER, ModConsumables.RAW_MEAT)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_PIG_LIVER = ITEMS.registerItem("cooked_pig_liver",
             properties -> new Item(properties.food(ModFoods.COOKED_PIG_LIVER)));
     public static final DeferredItem<Item> RAW_PIG_RIBS = ITEMS.registerItem("raw_pig_ribs",
-            properties -> new Item(properties.food(ModFoods.RAW_PIG_RIBS, ModConsumables.RAW_MEAT)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_PIG_RIBS = ITEMS.registerItem("cooked_pig_ribs",
             properties -> new Item(properties.food(ModFoods.COOKED_PIG_RIBS)));
     public static final DeferredItem<Item> RAW_GOOSE_LIVER = ITEMS.registerItem("raw_goose_liver",
-            properties -> new Item(properties.food(ModFoods.RAW_GOOSE_LIVER, ModConsumables.RAW_MEAT)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_GOOSE_LIVER = ITEMS.registerItem("cooked_goose_liver",
             properties -> new Item(properties.food(ModFoods.COOKED_GOOSE_LIVER)));
     public static final DeferredItem<Item> RAW_CALF_PANCREAS = ITEMS.registerItem("raw_calf_pancreas",
-            properties -> new Item(properties.food(ModFoods.RAW_CALF_PANCREAS, ModConsumables.RAW_MEAT)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_CALF_PANCREAS = ITEMS.registerItem("cooked_calf_pancreas",
             properties -> new Item(properties.food(ModFoods.COOKED_CALF_PANCREAS)));
     public static final DeferredItem<Item> HORSE_HEART = ITEMS.registerItem("horse_heart",
@@ -865,15 +864,15 @@ public class ModItems {
 
     // ── SAUSAGES ─────────────────────────────────────────────────────────────
     public static final DeferredItem<Item> RAW_SAUSAGE = ITEMS.registerItem("raw_sausage",
-            properties -> new Item(properties.food(ModFoods.RAW_SAUSAGE, ModConsumables.RAW_MEAT)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_SAUSAGE = ITEMS.registerItem("cooked_sausage",
             properties -> new Item(properties.food(ModFoods.COOKED_SAUSAGE)));
     public static final DeferredItem<Item> RAW_BLOOD_SAUSAGE = ITEMS.registerItem("raw_blood_sausage",
-            properties -> new Item(properties.food(ModFoods.RAW_BLOOD_SAUSAGE, ModConsumables.RAW_MEAT)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_BLOOD_SAUSAGE = ITEMS.registerItem("cooked_blood_sausage",
             properties -> new Item(properties.food(ModFoods.COOKED_BLOOD_SAUSAGE)));
     public static final DeferredItem<Item> RAW_WHITE_SAUSAGE = ITEMS.registerItem("raw_white_sausage",
-            properties -> new Item(properties.food(ModFoods.RAW_WHITE_SAUSAGE, ModConsumables.RAW_MEAT)));
+            ModConsumables.rawMeat());
     public static final DeferredItem<Item> COOKED_WHITE_SAUSAGE = ITEMS.registerItem("cooked_white_sausage",
             properties -> new Item(properties.food(ModFoods.COOKED_WHITE_SAUSAGE)));
 
@@ -887,59 +886,59 @@ public class ModItems {
 
     // ── FISH & SEAFOOD ────────────────────────────────────────────────────────
     public static final DeferredItem<Item> RAW_HERRING = ITEMS.registerItem("raw_herring",
-            properties -> new Item(properties.food(ModFoods.RAW_HERRING, ModConsumables.RAW_FISH)));
+            ModConsumables.rawFish());
     public static final DeferredItem<Item> COOKED_HERRING = ITEMS.registerItem("cooked_herring",
             properties -> new Item(properties.food(ModFoods.COOKED_HERRING)));
     public static final DeferredItem<Item> RAW_TROUT = ITEMS.registerItem("raw_trout",
-            properties -> new Item(properties.food(ModFoods.RAW_TROUT, ModConsumables.RAW_FISH)));
+            ModConsumables.rawFish());
     public static final DeferredItem<Item> COOKED_TROUT = ITEMS.registerItem("cooked_trout",
             properties -> new Item(properties.food(ModFoods.COOKED_TROUT)));
     public static final DeferredItem<Item> RAW_EEL = ITEMS.registerItem("raw_eel",
-            properties -> new Item(properties.food(ModFoods.RAW_EEL, ModConsumables.RAW_FISH)));
+            ModConsumables.rawFish());
     public static final DeferredItem<Item> COOKED_EEL = ITEMS.registerItem("cooked_eel",
             properties -> new Item(properties.food(ModFoods.COOKED_EEL)));
     public static final DeferredItem<Item> RAW_LAMPREY = ITEMS.registerItem("raw_lamprey",
-            properties -> new Item(properties.food(ModFoods.RAW_LAMPREY, ModConsumables.RAW_FISH)));
+            ModConsumables.rawFish());
     public static final DeferredItem<Item> COOKED_LAMPREY = ITEMS.registerItem("cooked_lamprey",
             properties -> new Item(properties.food(ModFoods.COOKED_LAMPREY)));
     public static final DeferredItem<Item> RAW_PIKE = ITEMS.registerItem("raw_pike",
-            properties -> new Item(properties.food(ModFoods.RAW_PIKE, ModConsumables.RAW_FISH)));
+            ModConsumables.rawFish());
     public static final DeferredItem<Item> COOKED_PIKE = ITEMS.registerItem("cooked_pike",
             properties -> new Item(properties.food(ModFoods.COOKED_PIKE)));
     public static final DeferredItem<Item> RAW_SARDINE = ITEMS.registerItem("raw_sardine",
-            properties -> new Item(properties.food(ModFoods.RAW_SARDINE, ModConsumables.RAW_FISH)));
+            ModConsumables.rawFish());
     public static final DeferredItem<Item> COOKED_SARDINE = ITEMS.registerItem("cooked_sardine",
             properties -> new Item(properties.food(ModFoods.COOKED_SARDINE)));
     public static final DeferredItem<Item> RAW_MONKFISH = ITEMS.registerItem("raw_monkfish",
-            properties -> new Item(properties.food(ModFoods.RAW_MONKFISH, ModConsumables.RAW_FISH)));
+            ModConsumables.rawFish());
     public static final DeferredItem<Item> COOKED_MONKFISH = ITEMS.registerItem("cooked_monkfish",
             properties -> new Item(properties.food(ModFoods.COOKED_MONKFISH)));
     public static final DeferredItem<Item> RAW_OCTOPUS = ITEMS.registerItem("raw_octopus",
-            properties -> new Item(properties.food(ModFoods.RAW_OCTOPUS, ModConsumables.RAW_FISH)));
+            ModConsumables.rawFish());
     public static final DeferredItem<Item> COOKED_OCTOPUS = ITEMS.registerItem("cooked_octopus",
             properties -> new Item(properties.food(ModFoods.COOKED_OCTOPUS)));
     public static final DeferredItem<Item> RAW_WHITEFISH = ITEMS.registerItem("raw_whitefish",
-            properties -> new Item(properties.food(ModFoods.RAW_WHITEFISH, ModConsumables.RAW_FISH)));
+            ModConsumables.rawFish());
     public static final DeferredItem<Item> COOKED_WHITEFISH = ITEMS.registerItem("cooked_whitefish",
             properties -> new Item(properties.food(ModFoods.COOKED_WHITEFISH)));
     public static final DeferredItem<Item> RAW_CRAB = ITEMS.registerItem("raw_crab",
-            properties -> new Item(properties.food(ModFoods.RAW_CRAB, ModConsumables.RAW_FISH)));
+            ModConsumables.rawFish());
     public static final DeferredItem<Item> COOKED_CRAB = ITEMS.registerItem("cooked_crab",
             properties -> new Item(properties.food(ModFoods.COOKED_CRAB)));
     public static final DeferredItem<Item> RAW_LOBSTER = ITEMS.registerItem("raw_lobster",
-            properties -> new Item(properties.food(ModFoods.RAW_LOBSTER, ModConsumables.RAW_FISH)));
+            ModConsumables.rawFish());
     public static final DeferredItem<Item> COOKED_LOBSTER = ITEMS.registerItem("cooked_lobster",
             properties -> new Item(properties.food(ModFoods.COOKED_LOBSTER)));
     public static final DeferredItem<Item> RAW_CLAM = ITEMS.registerItem("raw_clam",
-            properties -> new Item(properties.food(ModFoods.RAW_CLAM, ModConsumables.RAW_FISH)));
+            ModConsumables.rawFish());
     public static final DeferredItem<Item> COOKED_CLAM = ITEMS.registerItem("cooked_clam",
             properties -> new Item(properties.food(ModFoods.COOKED_CLAM)));
     public static final DeferredItem<Item> RAW_MUSSELS = ITEMS.registerItem("raw_mussels",
-            properties -> new Item(properties.food(ModFoods.RAW_MUSSELS, ModConsumables.RAW_FISH)));
+            ModConsumables.rawFish());
     public static final DeferredItem<Item> COOKED_MUSSELS = ITEMS.registerItem("cooked_mussels",
             properties -> new Item(properties.food(ModFoods.COOKED_MUSSELS)));
     public static final DeferredItem<Item> RAW_WINKLES = ITEMS.registerItem("raw_winkles",
-            properties -> new Item(properties.food(ModFoods.RAW_WINKLES, ModConsumables.RAW_FISH)));
+            ModConsumables.rawFish());
     public static final DeferredItem<Item> COOKED_WINKLES = ITEMS.registerItem("cooked_winkles",
             properties -> new Item(properties.food(ModFoods.COOKED_WINKLES)));
 
@@ -1140,87 +1139,87 @@ public class ModItems {
 
     // ── DRINKS — Beer ───────────────────────────────────────────
     public static final DeferredItem<Item> BEER = ITEMS.registerItem("beer",
-            properties -> new Item(properties.food(ModFoods.BEER)));
+            ModConsumables.alcohol());
     public static final DeferredItem<Item> ALE = ITEMS.registerItem("ale",
-            properties -> new Item(properties.food(ModFoods.ALE)));
+            ModConsumables.alcohol());
     public static final DeferredItem<Item> STOUT = ITEMS.registerItem("stout",
-            properties -> new Item(properties.food(ModFoods.STOUT)));
+            ModConsumables.alcohol());
 
     // ── DRINKS — Liquor ─────────────────────────────────────────
     public static final DeferredItem<Item> RUM = ITEMS.registerItem("rum",
-            properties -> new Item(properties.food(ModFoods.RUM)));
+            ModConsumables.alcohol());
     public static final DeferredItem<Item> BLACKBELLY_RUM = ITEMS.registerItem("blackbelly_rum",
-            properties -> new Item(properties.food(ModFoods.BLACKBELLY_RUM)));
+            ModConsumables.alcohol());
     public static final DeferredItem<Item> BLACK_TAR_RUM = ITEMS.registerItem("black_tar_rum",
-            properties -> new Item(properties.food(ModFoods.BLACK_TAR_RUM)));
+            ModConsumables.alcohol());
     public static final DeferredItem<Item> SPICED_RUM = ITEMS.registerItem("spiced_rum",
-            properties -> new Item(properties.food(ModFoods.SPICED_RUM)));
+            ModConsumables.alcohol());
     public static final DeferredItem<Item> MYRISH_FIRE = ITEMS.registerItem("myrish_fire",
-            properties -> new Item(properties.food(ModFoods.MYRISH_FIRE)));
+            ModConsumables.alcohol());
     public static final DeferredItem<Item> TYROSHI_PEAR_BRANDY = ITEMS.registerItem("tyroshi_pear_brandy",
-            properties -> new Item(properties.food(ModFoods.TYROSHI_PEAR_BRANDY)));
+            ModConsumables.alcohol());
 
     // ── DRINKS — Milk ───────────────────────────────────────────
     public static final DeferredItem<Item> ALMOND_MILK = ITEMS.registerItem("almond_milk",
-            properties -> new Item(properties.food(ModFoods.ALMOND_MILK)));
+            ModConsumables.drink());
     public static final DeferredItem<Item> GOAT_MILK = ITEMS.registerItem("goat_milk",
-            properties -> new Item(properties.food(ModFoods.GOAT_MILK)));
+            ModConsumables.drink());
     public static final DeferredItem<Item> MARES_MILK = ITEMS.registerItem("mares_milk",
-            properties -> new Item(properties.food(ModFoods.MARES_MILK)));
+            ModConsumables.drink());
     public static final DeferredItem<Item> FERMENTED_MILK = ITEMS.registerItem("fermented_milk",
-            properties -> new Item(properties.food(ModFoods.FERMENTED_MILK)));
+            ModConsumables.drink());
     public static final DeferredItem<Item> NAHSA = ITEMS.registerItem("nahsa",
-            properties -> new Item(properties.food(ModFoods.NAHSA)));
+            ModConsumables.drink());
     public static final DeferredItem<Item> ICED_MILK = ITEMS.registerItem("iced_milk",
-            properties -> new Item(properties.food(ModFoods.ICED_MILK)));
+            ModConsumables.drink());
 
     // ── DRINKS — Tea ────────────────────────────────────────────
     public static final DeferredItem<Item> TEA = ITEMS.registerItem("tea",
-            properties -> new Item(properties.food(ModFoods.TEA)));
+            ModConsumables.drink());
     public static final DeferredItem<Item> MINT_TEA = ITEMS.registerItem("mint_tea",
-            properties -> new Item(properties.food(ModFoods.MINT_TEA)));
+            ModConsumables.drink());
     public static final DeferredItem<Item> NETTLE_TEA = ITEMS.registerItem("nettle_tea",
-            properties -> new Item(properties.food(ModFoods.NETTLE_TEA)));
+            ModConsumables.drink());
     public static final DeferredItem<Item> MOON_TEA = ITEMS.registerItem("moon_tea",
-            properties -> new Item(properties.food(ModFoods.MOON_TEA)));
+            ModConsumables.drink());
 
     // ── DRINKS — Wine ───────────────────────────────────────────
     public static final DeferredItem<Item> WINE = ITEMS.registerItem("wine",
-            properties -> new Item(properties.food(ModFoods.WINE)));
+            ModConsumables.alcohol());
     public static final DeferredItem<Item> APPLE_WINE = ITEMS.registerItem("apple_wine",
-            properties -> new Item(properties.food(ModFoods.APPLE_WINE)));
+            ModConsumables.alcohol());
     public static final DeferredItem<Item> GREEN_APPLE_WINE = ITEMS.registerItem("green_apple_wine",
-            properties -> new Item(properties.food(ModFoods.GREEN_APPLE_WINE)));
+            ModConsumables.alcohol());
     public static final DeferredItem<Item> ARBOR_GOLD = ITEMS.registerItem("arbor_gold",
-            properties -> new Item(properties.food(ModFoods.ARBOR_GOLD)));
+            ModConsumables.alcohol());
     public static final DeferredItem<Item> ARBOR_RED = ITEMS.registerItem("arbor_red",
-            properties -> new Item(properties.food(ModFoods.ARBOR_RED)));
+            ModConsumables.alcohol());
     public static final DeferredItem<Item> DORNISH_RED = ITEMS.registerItem("dornish_red",
-            properties -> new Item(properties.food(ModFoods.DORNISH_RED)));
+            ModConsumables.alcohol());
     public static final DeferredItem<Item> DREAMWINE = ITEMS.registerItem("dreamwine",
-            properties -> new Item(properties.food(ModFoods.DREAMWINE)));
+            ModConsumables.alcohol());
     public static final DeferredItem<Item> HONEYED_WINE = ITEMS.registerItem("honeyed_wine",
-            properties -> new Item(properties.food(ModFoods.HONEYED_WINE)));
+            ModConsumables.alcohol());
     public static final DeferredItem<Item> SPICED_WINE = ITEMS.registerItem("spiced_wine",
-            properties -> new Item(properties.food(ModFoods.SPICED_WINE)));
+            ModConsumables.alcohol());
     public static final DeferredItem<Item> STRONGWINE = ITEMS.registerItem("strongwine",
-            properties -> new Item(properties.food(ModFoods.STRONGWINE)));
+            ModConsumables.alcohol());
     public static final DeferredItem<Item> SUMMERWINE = ITEMS.registerItem("summerwine",
-            properties -> new Item(properties.food(ModFoods.SUMMERWINE)));
+            ModConsumables.alcohol());
     public static final DeferredItem<Item> WINE_OF_COURAGE = ITEMS.registerItem("wine_of_courage",
-            properties -> new Item(properties.food(ModFoods.WINE_OF_COURAGE)));
+            ModConsumables.alcohol());
 
     // ── DRINKS — Other ──────────────────────────────────────────
     public static final DeferredItem<Item> CIDER = ITEMS.registerItem("cider",
-            properties -> new Item(properties.food(ModFoods.CIDER)));
+            ModConsumables.alcohol());
     public static final DeferredItem<Item> HIPPOCRAS = ITEMS.registerItem("hippocras",
-            properties -> new Item(properties.food(ModFoods.HIPPOCRAS)));
+            ModConsumables.alcohol());
     public static final DeferredItem<Item> MEAD = ITEMS.registerItem("mead",
-            properties -> new Item(properties.food(ModFoods.MEAD)));
+            ModConsumables.alcohol());
     public static final DeferredItem<Item> SHADE_OF_THE_EVENING = ITEMS.registerItem("shade_of_the_evening",
-            properties -> new Item(properties.food(ModFoods.SHADE_OF_THE_EVENING)));
+            ModConsumables.shadeOfTheEvening());
     public static final DeferredItem<Item> SUGAR_WATER = ITEMS.registerItem("sugar_water",
-            properties -> new Item(properties.food(ModFoods.SUGAR_WATER)));
+            ModConsumables.drink());
 
     // ---------------------------(CRAFTING INGREDIENTS)--------------------------- //
     public static final DeferredItem<Item> BOAR_INTESTINES = ITEMS.registerItem("boar_intestines",
@@ -1250,10 +1249,15 @@ public class ModItems {
     public static final DeferredItem<Item> STEEL_CHAIN_LINK = ITEMS.registerItem("steel_chain_link", Item::new);
     public static final DeferredItem<Item> STEEL_CHAIN = ITEMS.registerItem("steel_chain", Item::new);
     public static final DeferredItem<Item> HAMMER = ITEMS.registerItem("hammer", properties ->
-            new PickaxeItem(ModToolTiers.STEEL, 1, 1, properties) {
-                @Override
-                public ItemStack getCraftingRemainder(ItemStack stack) {
-                    return stack.copy();
+            new PickaxeItem(ModToolTiers.STEEL, properties.attributes(DiggerItem.createAttributes(ModToolTiers.STEEL, 1, 1.0F))) {
+                {
+                    try {
+                        java.lang.reflect.Field craftingRemainingItemField = Item.class.getDeclaredField("craftingRemainingItem");
+                        craftingRemainingItemField.setAccessible(true);
+                        craftingRemainingItemField.set(this, this);
+                    } catch (ReflectiveOperationException e) {
+                        throw new IllegalStateException("Failed to configure hammer crafting remainder", e);
+                    }
                 }
             }
     );
@@ -1300,16 +1304,16 @@ public class ModItems {
 
 
     public static final DeferredItem<Item> WEIRWOOD_SIGN = ITEMS.registerItem("weirwood_sign",
-            properties -> new SignItem(ModBLocks.WEIRWOOD_SIGN.get(),
-                    ModBLocks.WEIRWOOD_WALL_SIGN.get(), properties.stacksTo(16)));
+            properties -> new SignItem(properties.stacksTo(16), ModBLocks.WEIRWOOD_SIGN.get(),
+                    ModBLocks.WEIRWOOD_WALL_SIGN.get()));
 
     public static final DeferredItem<Item> WEIRWOOD_HANGING_SIGN = ITEMS.registerItem("weirwood_hanging_sign",
             properties -> new HangingSignItem(ModBLocks.WEIRWOOD_HANGING_SIGN.get(),
                     ModBLocks.WEIRWOOD_WALL_HANGING_SIGN.get(), properties.stacksTo(16)));
 
     public static final DeferredItem<Item> ROTTEN_SIGN = ITEMS.registerItem("rotten_sign",
-            properties -> new SignItem(ModBLocks.ROTTEN_SIGN.get(),
-                    ModBLocks.ROTTEN_WALL_SIGN.get(), properties.stacksTo(16)));
+            properties -> new SignItem(properties.stacksTo(16), ModBLocks.ROTTEN_SIGN.get(),
+                    ModBLocks.ROTTEN_WALL_SIGN.get()));
 
     public static final DeferredItem<Item> ROTTEN_HANGING_SIGN = ITEMS.registerItem("rotten_hanging_sign",
             properties -> new HangingSignItem(ModBLocks.ROTTEN_HANGING_SIGN.get(),
@@ -1317,8 +1321,8 @@ public class ModItems {
 
 
     public static final DeferredItem<Item> CHARRED_SIGN = ITEMS.registerItem("charred_sign",
-            properties -> new SignItem(ModBLocks.CHARRED_SIGN.get(),
-                    ModBLocks.CHARRED_WALL_SIGN.get(), properties.stacksTo(16)));
+            properties -> new SignItem(properties.stacksTo(16), ModBLocks.CHARRED_SIGN.get(),
+                    ModBLocks.CHARRED_WALL_SIGN.get()));
 
     public static final DeferredItem<Item> CHARRED_HANGING_SIGN = ITEMS.registerItem("charred_hanging_sign",
             properties -> new HangingSignItem(ModBLocks.CHARRED_HANGING_SIGN.get(),
@@ -1399,9 +1403,9 @@ public class ModItems {
             // Regular signs
             SIGN_ITEMS.put(woodType, ITEMS.registerItem(woodType + "_sign",
                     properties -> new SignItem(
+                            properties.stacksTo(16),
                             ModBLocks.SIGNS.get(woodType).get(),
-                            ModBLocks.WALL_SIGNS.get(woodType).get(),
-                            properties.stacksTo(16)
+                            ModBLocks.WALL_SIGNS.get(woodType).get()
                     )
             ));
 
@@ -1980,3 +1984,7 @@ public class ModItems {
         ITEMS.register(eventBus);
     }
 }
+
+
+
+

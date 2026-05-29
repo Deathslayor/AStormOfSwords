@@ -46,7 +46,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     protected void registerStatesAndModels() {
 
 
-        // Variant models 2–24
+        // Variant models 2â€“24
         Map<Integer, BlockModelBuilder> variantModels = new HashMap<>();
         for (int i = 2; i <= 24; i++) {
             variantModels.put(i, wattleModel("wattle_and_daub" + i + "_base", i));
@@ -2006,7 +2006,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 .texture("particle", modLoc("block/wattle_and_daub1"))
                 .texture("daub",     modLoc("block/wattle_and_daub1"));
 
-        // Element 1 — full cube, daub texture (tinted) on all faces
+        // Element 1 â€” full cube, daub texture (tinted) on all faces
         builder.element()
                 .from(0, 0, 0).to(16, 16, 16)
                 .face(Direction.NORTH).uvs(0, 0, 16, 16).texture("#daub").tintindex(0).end()
@@ -2018,7 +2018,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 .end();
 
         if (wattleIndex > 0) {
-            // Element 2 — side faces only, wattle overlay (no tint)
+            // Element 2 â€” side faces only, wattle overlay (no tint)
             builder.texture("wattle", modLoc("block/wattle_and_daub" + wattleIndex));
             builder.element()
                     .from(0, 0, 0).to(16, 16, 16)
@@ -2044,10 +2044,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 .partialState().with(RotatedPillarBlock.AXIS, Direction.Axis.Z)
                 .modelForState().modelFile(model).rotationX(90).addModel();
 
-        // Same pattern as blockItem() — UncheckedModelFile references the model we just generated
+        // Same pattern as blockItem() â€” UncheckedModelFile references the model we just generated
         simpleBlockItem(block.get(), new ModelFile.UncheckedModelFile(
                 AGoTMod.MOD_ID + ":block/" + blockName));
     }
 
 
 }
+

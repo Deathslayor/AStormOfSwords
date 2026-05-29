@@ -7,20 +7,18 @@ import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.armor.custom.ironborn.IronBornNobleArmorItem;
 import net.darkflameproduction.agotmod.armor.custom.stark.StarkLevyArmorItem;
 import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.model.GeoModel;
-import software.bernie.geckolib.renderer.GeoRenderer;
 
 // Stark1ArmorModel class extending GeoModel for Stark1ArmorItem
 public class IronBornNobleArmorModel extends GeoModel<IronBornNobleArmorItem> {
     @Override
-    public ResourceLocation getModelResource(IronBornNobleArmorItem animatable, @Nullable GeoRenderer<IronBornNobleArmorItem> renderer) {
+    public ResourceLocation getModelResource(IronBornNobleArmorItem animatable) {
         // Return the resource location for the model
         return AGoTMod.id("geo/ironborn_noble.geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureResource(IronBornNobleArmorItem animatable, @Nullable GeoRenderer<IronBornNobleArmorItem> renderer) {
+    public ResourceLocation getTextureResource(IronBornNobleArmorItem animatable) {
         // Return the resource location for the texture
         return AGoTMod.id("textures/item/armor/ironborn_noble.png");
     }
@@ -32,3 +30,5 @@ public class IronBornNobleArmorModel extends GeoModel<IronBornNobleArmorItem> {
         return AGoTMod.id("animations/idle.animation.json");
     }
 }
+
+

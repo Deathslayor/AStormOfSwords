@@ -184,8 +184,6 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         super(entityType, level);
         ((GroundPathNavigation)this.getNavigation()).setCanOpenDoors(true);
         this.getNavigation().setCanFloat(true);
-        this.getNavigation().setRequiredPathLength(48.0F);
-
         this.sleepSystem          = new SleepSystem(this);
         this.hungerSystem         = new HungerSystem(this);
         this.inventorySystem      = new InventorySystem(this, inventory);
@@ -942,7 +940,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                     net.minecraft.resources.ResourceLocation.tryParse(itemKey);
             if (loc == null) continue;
             net.minecraft.world.item.Item item =
-                    net.minecraft.core.registries.BuiltInRegistries.ITEM.getValue(loc);
+                    net.minecraft.core.registries.BuiltInRegistries.ITEM.get(loc);
             if (item == null || item == net.minecraft.world.item.Items.AIR) continue;
             String displayName = new net.minecraft.world.item.ItemStack(item).getHoverName().getString();
             entries.add(new GrocerSystem.GrocerInventoryEntry(displayName, amount, itemKey));
@@ -1069,12 +1067,12 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         return super.mobInteract(player, hand);
     }
     @Override
-    public boolean hurtServer(ServerLevel level, DamageSource source, float amount) {
-        if (source == level.damageSources().sweetBerryBush()) {
+    public boolean hurt(DamageSource source, float amount) {
+        if (source == this.damageSources().sweetBerryBush()) {
             return false;
         }
 
-        boolean result = super.hurtServer(level, source, amount);
+        boolean result = super.hurt(source, amount);
 
         if (result) {
             sleepSystem.onHurt();
@@ -1135,7 +1133,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     @Nullable
     @Override
     public SpawnGroupData finalizeSpawn(
-            ServerLevelAccessor p_35439_, DifficultyInstance p_35440_, EntitySpawnReason p_363222_, @Nullable SpawnGroupData p_35442_
+            ServerLevelAccessor p_35439_, DifficultyInstance p_35440_, MobSpawnType p_363222_, @Nullable SpawnGroupData p_35442_
     ) {
         if (!this.level().isClientSide) {
             String gender = p_35439_.getRandom().nextBoolean() ? GENDER_FEMALE : GENDER_MALE;

@@ -250,7 +250,7 @@ public class AGoTMapWidget extends AbstractWidget {
 
         context.enableScissor(getX(), getY(), getX() + width, getY() + height);
 
-        context.blit(RenderType::guiTextured, mapTextureId,
+        context.blit( mapTextureId,
                 getTextureX(), getTextureY(), 0, 0,
                 zoomedWidth, zoomedHeight, zoomedWidth, zoomedHeight);
 
@@ -265,8 +265,8 @@ public class AGoTMapWidget extends AbstractWidget {
             playerY = Mth.clamp(playerY, getTextureY() + 4, getTextureY() - 4 + zoomedHeight);
 
             ResourceLocation skin = minecraft.player.getSkin().texture();
-            context.blit(RenderType::guiTextured, skin, playerX - 4, playerY - 4, 8.0f,  8, 8, 8, 8, 8, 64, 64);
-            context.blit(RenderType::guiTextured, skin, playerX - 4, playerY - 4, 40.0f, 8, 8, 8, 8, 8, 64, 64);
+            context.blit( skin, playerX - 4, playerY - 4, 8,  8, 8, 8, 8, 8, 64, 64);
+            context.blit( skin, playerX - 4, playerY - 4, 40, 8, 8, 8, 8, 8, 64, 64);
         }
 
         if (isHovered && showCursorPos) {

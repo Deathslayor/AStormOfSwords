@@ -11,8 +11,7 @@ public class ArmChairBlockEntityRenderer extends GeoBlockRenderer<ArmChairBlockE
     public ArmChairBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
         super(new DefaultedBlockGeoModel<>(AGoTMod.id("arm_chair")) {
             @Override
-            public ResourceLocation getTextureResource(ArmChairBlockEntity animatable,
-                                                       software.bernie.geckolib.renderer.GeoRenderer<ArmChairBlockEntity> renderer) {
+            public ResourceLocation getTextureResource(ArmChairBlockEntity animatable) {
                 return animatable.getTextureLocation();
             }
         });

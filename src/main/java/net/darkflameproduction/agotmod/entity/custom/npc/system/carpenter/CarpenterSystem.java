@@ -188,9 +188,9 @@ public class CarpenterSystem {
     }
 
     private Item resolveItem(String itemName) {
-        Item item = BuiltInRegistries.ITEM.getValue(ResourceLocation.fromNamespaceAndPath("agotmod", itemName));
+        Item item = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath("agotmod", itemName));
         if (item != null && item != Items.AIR) return item;
-        item = BuiltInRegistries.ITEM.getValue(ResourceLocation.fromNamespaceAndPath("minecraft", itemName));
+        item = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath("minecraft", itemName));
         return (item != null) ? item : Items.AIR;
     }
 

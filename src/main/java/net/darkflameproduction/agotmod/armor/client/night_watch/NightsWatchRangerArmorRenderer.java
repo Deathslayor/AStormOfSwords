@@ -13,3 +13,4 @@ public class NightsWatchRangerArmorRenderer extends GeoArmorRenderer<NightsWatch
         super(new NightsWatchRangerArmorModel());
     }
 }
+

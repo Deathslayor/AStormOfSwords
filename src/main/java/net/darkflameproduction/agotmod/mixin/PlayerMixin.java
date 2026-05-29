@@ -31,9 +31,9 @@ public abstract class PlayerMixin extends LivingEntity {
         if (level() instanceof ServerLevel level) {
             float temperature = TemperatureHelper.getTemperature(this.level(), this.blockPosition());
             if (TemperatureHelper.isCold(temperature) && this.getRandom().nextInt(COOLDOWN_TME) == 0) {
-                this.hurtServer(level, this.damageSources().freeze(), DAMAGE_AMOUNT + Math.abs(temperature - TemperatureHelper.COLD_TEMP));
+                this.hurt(this.damageSources().freeze(), DAMAGE_AMOUNT + Math.abs(temperature - TemperatureHelper.COLD_TEMP));
             } else if (TemperatureHelper.isHot(temperature) && this.getRandom().nextInt(COOLDOWN_TME) == 0) {
-                this.hurtServer(level, this.damageSources().onFire(), DAMAGE_AMOUNT + Math.abs(temperature - TemperatureHelper.HOT_TEMP));
+                this.hurt(this.damageSources().onFire(), DAMAGE_AMOUNT + Math.abs(temperature - TemperatureHelper.HOT_TEMP));
             }
         }
     }
@@ -43,4 +43,5 @@ public abstract class PlayerMixin extends LivingEntity {
         return (super.isFreezing() || TemperatureHelper.isCold(TemperatureHelper.getTemperature(this.level(), this.blockPosition()))) && this.canFreeze();
     }
 }
+
 

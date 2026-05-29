@@ -41,3 +41,4 @@ public class ModCreativeMagic {
         CREATIVE_MODE_TAB.register(eventBus);
     }
 }
+

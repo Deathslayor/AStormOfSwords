@@ -13,3 +13,4 @@ public class WildlingFurArmorRenderer extends GeoArmorRenderer<WildlingFurArmorI
         super(new WildlingFurArmorModel());
     }
 }
+

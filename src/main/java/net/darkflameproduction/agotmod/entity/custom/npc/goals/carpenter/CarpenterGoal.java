@@ -345,16 +345,16 @@ public class CarpenterGoal extends Goal {
 
     private String itemKey(String name) {
         ResourceLocation mod = ResourceLocation.fromNamespaceAndPath("agotmod", name);
-        if (BuiltInRegistries.ITEM.getValue(mod) != Items.AIR) return mod.toString();
+        if (BuiltInRegistries.ITEM.get(mod) != Items.AIR) return mod.toString();
         ResourceLocation mc = ResourceLocation.fromNamespaceAndPath("minecraft", name);
-        if (BuiltInRegistries.ITEM.getValue(mc) != Items.AIR) return mc.toString();
+        if (BuiltInRegistries.ITEM.get(mc) != Items.AIR) return mc.toString();
         return "agotmod:" + name;
     }
 
     private void give(String name, int count) {
-        Item item = BuiltInRegistries.ITEM.getValue(ResourceLocation.fromNamespaceAndPath("agotmod", name));
+        Item item = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath("agotmod", name));
         if (item == null || item == Items.AIR)
-            item = BuiltInRegistries.ITEM.getValue(ResourceLocation.fromNamespaceAndPath("minecraft", name));
+            item = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath("minecraft", name));
         if (item != null && item != Items.AIR)
             peasant.getInventorySystem().addItem(new ItemStack(item, count));
         else

@@ -180,7 +180,7 @@ public class MinerGoal extends Goal {
     private void spawnItem(String itemKey) {
         ResourceLocation loc = ResourceLocation.tryParse(itemKey);
         if (loc == null) return;
-        net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.getValue(loc);
+        net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.get(loc);
         if (item == null || item == Items.AIR) return;
         peasant.getInventorySystem().addItem(new ItemStack(item, 1));
     }

@@ -12,3 +12,4 @@ public class ManderlyLevyArmorRenderer extends GeoArmorRenderer<ManderlyLevyArmo
         super(new ManderlyLevyArmorModel());
     }
 }
+

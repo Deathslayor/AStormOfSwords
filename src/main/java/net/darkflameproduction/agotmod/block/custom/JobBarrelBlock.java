@@ -69,7 +69,7 @@ public class JobBarrelBlock extends BaseEntityBlock implements WorldlyContainerH
 
             // Only anger piglins in the nether or if they're nearby
             if (level instanceof ServerLevel serverLevel) {
-                PiglinAi.angerNearbyPiglins(serverLevel, player, true);
+                PiglinAi.angerNearbyPiglins(player, true);
             }
 
             return InteractionResult.CONSUME;

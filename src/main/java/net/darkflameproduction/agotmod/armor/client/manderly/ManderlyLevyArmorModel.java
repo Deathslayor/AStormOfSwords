@@ -6,20 +6,18 @@ package net.darkflameproduction.agotmod.armor.client.manderly;
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.armor.custom.manderly.ManderlyLevyArmorItem;
 import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.model.GeoModel;
-import software.bernie.geckolib.renderer.GeoRenderer;
 
 // Stark1ArmorModel class extending GeoModel for Stark1ArmorItem
 public class ManderlyLevyArmorModel extends GeoModel<ManderlyLevyArmorItem> {
     @Override
-    public ResourceLocation getModelResource(ManderlyLevyArmorItem animatable, @Nullable GeoRenderer<ManderlyLevyArmorItem> renderer) {
+    public ResourceLocation getModelResource(ManderlyLevyArmorItem animatable) {
         // Return the resource location for the model
         return AGoTMod.id("geo/manderly_levy.geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureResource(ManderlyLevyArmorItem animatable, @Nullable GeoRenderer<ManderlyLevyArmorItem> renderer) {
+    public ResourceLocation getTextureResource(ManderlyLevyArmorItem animatable) {
         // Return the resource location for the texture
         return AGoTMod.id("textures/item/armor/manderly_levy.png");
     }
@@ -31,3 +29,5 @@ public class ManderlyLevyArmorModel extends GeoModel<ManderlyLevyArmorItem> {
         return AGoTMod.id("animations/idle.animation.json");
     }
 }
+
+

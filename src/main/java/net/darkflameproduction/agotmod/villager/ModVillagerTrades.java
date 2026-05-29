@@ -88,3 +88,4 @@ public final class ModVillagerTrades {
         return new BasicItemListing(1, new ItemStack(nuggetItem), MAX_TRADES, XP, PRICE_MULTIPLIER);
     }
 }
+

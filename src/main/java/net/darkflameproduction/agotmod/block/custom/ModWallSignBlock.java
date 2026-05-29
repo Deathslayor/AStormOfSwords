@@ -18,3 +18,4 @@ public class ModWallSignBlock extends WallSignBlock {
         return new ModSignBlockEntity(pos, state);
     }
 }
+

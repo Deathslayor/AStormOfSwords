@@ -7,20 +7,18 @@ import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.armor.custom.mountin_clan.MountainClanLevyArmorItem;
 import net.darkflameproduction.agotmod.armor.custom.stark.StarkNoblePlateArmorItem;
 import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.model.GeoModel;
-import software.bernie.geckolib.renderer.GeoRenderer;
 
 // Stark1ArmorModel class extending GeoModel for Stark1ArmorItem
 public class MountainClanLevyArmorModel extends GeoModel<MountainClanLevyArmorItem> {
     @Override
-    public ResourceLocation getModelResource(MountainClanLevyArmorItem animatable, @Nullable GeoRenderer<MountainClanLevyArmorItem> renderer) {
+    public ResourceLocation getModelResource(MountainClanLevyArmorItem animatable) {
         // Return the resource location for the model
         return AGoTMod.id("geo/mountain_clan_levy.geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureResource(MountainClanLevyArmorItem animatable, @Nullable GeoRenderer<MountainClanLevyArmorItem> renderer) {
+    public ResourceLocation getTextureResource(MountainClanLevyArmorItem animatable) {
         // Return the resource location for the texture
         return AGoTMod.id("textures/item/armor/mountain_clan_levy.png");
     }
@@ -32,3 +30,5 @@ public class MountainClanLevyArmorModel extends GeoModel<MountainClanLevyArmorIt
         return AGoTMod.id("animations/idle.animation.json");
     }
 }
+
+

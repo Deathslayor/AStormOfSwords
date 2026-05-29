@@ -2534,3 +2534,4 @@ public class ModBLocks {
         BLOCKS.register(eventBus);
     }
 }
+

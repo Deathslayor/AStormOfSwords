@@ -28,15 +28,15 @@ public class AnimalHerderDepositGoal extends Goal {
     static {
         CATTLE_ITEMS.add("minecraft:leather");
         CATTLE_ITEMS.add("minecraft:beef");
-        // wheat excluded — breeding item
+        // wheat excluded â€” breeding item
 
         CHICKEN_ITEMS.add("minecraft:feather");
         CHICKEN_ITEMS.add("minecraft:chicken");
         CHICKEN_ITEMS.add("minecraft:egg");
-        // wheat_seeds excluded — breeding item
+        // wheat_seeds excluded â€” breeding item
 
         PIG_ITEMS.add("minecraft:porkchop");
-        // carrot excluded — breeding item
+        // carrot excluded â€” breeding item
 
         SHEEP_ITEMS.add("minecraft:mutton");
         SHEEP_ITEMS.add("minecraft:white_wool");
@@ -55,7 +55,7 @@ public class AnimalHerderDepositGoal extends Goal {
         SHEEP_ITEMS.add("minecraft:green_wool");
         SHEEP_ITEMS.add("minecraft:red_wool");
         SHEEP_ITEMS.add("minecraft:black_wool");
-        // wheat excluded — breeding item
+        // wheat excluded â€” breeding item
     }
 
     public AnimalHerderDepositGoal(Peasant_Entity peasant) {

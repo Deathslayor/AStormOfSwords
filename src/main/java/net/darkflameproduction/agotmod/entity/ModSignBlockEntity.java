@@ -15,3 +15,4 @@ public class ModSignBlockEntity extends SignBlockEntity {
         return ModBlockEntities.MOD_SIGN.get();
     }
 }
+

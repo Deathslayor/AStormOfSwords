@@ -13,3 +13,4 @@ public class ThennPlateArmorRenderer extends GeoArmorRenderer<ThennPlateArmorIte
         super(new ThennPlateArmorModel());
     }
 }
+

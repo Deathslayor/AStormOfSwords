@@ -59,7 +59,7 @@ public final class TitleScreenIconOverlay {
 
         RenderSystem.enableBlend();
         guiGraphics.blit(
-                RenderType::guiTextured,
+                
                 ICON_TEXTURE,
                 ICON_X,
                 ICON_Y,
@@ -79,3 +79,4 @@ public final class TitleScreenIconOverlay {
                 && mouseY <= ICON_Y + ICON_SIZE + FRAME_PADDING;
     }
 }
+

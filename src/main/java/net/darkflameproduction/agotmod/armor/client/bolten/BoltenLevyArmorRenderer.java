@@ -12,3 +12,4 @@ public class BoltenLevyArmorRenderer extends GeoArmorRenderer<BoltenLevyArmorIte
         super(new BoltenLevyArmorModel());
     }
 }
+

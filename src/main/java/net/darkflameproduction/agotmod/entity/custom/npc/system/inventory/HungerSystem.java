@@ -235,7 +235,7 @@ public class HungerSystem {
                         if (!peasant.getInventorySystem().addItem(previousMainHandItem)) {
                             // No space in inventory - drop the item
                             if (peasant.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
-                                peasant.spawnAtLocation(serverLevel, previousMainHandItem);
+                                peasant.spawnAtLocation(previousMainHandItem);
                             }
                         }
                         previousMainHandItem = ItemStack.EMPTY; // Clear since we handled it

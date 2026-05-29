@@ -20,3 +20,4 @@ public class Crow_Entity_Model extends DefaultedEntityGeoModel<Crow_Entity> {
 
 
 }
+

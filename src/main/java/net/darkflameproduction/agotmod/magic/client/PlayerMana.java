@@ -34,3 +34,4 @@ public class PlayerMana {
         mana = nbt.getInt("mana");
     }
 }
+

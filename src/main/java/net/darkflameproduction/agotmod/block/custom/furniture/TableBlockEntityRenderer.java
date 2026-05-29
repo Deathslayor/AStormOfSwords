@@ -9,11 +9,9 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoBlockRenderer;
-import software.bernie.geckolib.renderer.GeoRenderer;
 
 public class TableBlockEntityRenderer extends GeoBlockRenderer<TableBlockEntity> {
 
@@ -37,14 +35,12 @@ public class TableBlockEntityRenderer extends GeoBlockRenderer<TableBlockEntity>
     public static class TableModel extends GeoModel<TableBlockEntity> {
 
         @Override
-        public ResourceLocation getModelResource(TableBlockEntity animatable,
-                                                 @Nullable GeoRenderer<TableBlockEntity> renderer) {
+        public ResourceLocation getModelResource(TableBlockEntity animatable) {
             return AGoTMod.id(animatable.getModelInfo().modelPath());
         }
 
         @Override
-        public ResourceLocation getTextureResource(TableBlockEntity animatable,
-                                                   @Nullable GeoRenderer<TableBlockEntity> renderer) {
+        public ResourceLocation getTextureResource(TableBlockEntity animatable) {
             return animatable.getTextureLocation();
         }
 
@@ -54,3 +50,4 @@ public class TableBlockEntityRenderer extends GeoBlockRenderer<TableBlockEntity>
         }
     }
 }
+

@@ -12,3 +12,4 @@ public class IronBornLevyArmorRenderer extends GeoArmorRenderer<IronBornLevyArmo
         super(new IronBornLevyArmorModel());
     }
 }
+

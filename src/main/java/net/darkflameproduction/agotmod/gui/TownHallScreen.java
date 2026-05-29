@@ -66,7 +66,7 @@ public class TownHallScreen extends Screen {
     // Inventory data
     private Map<String, Long> townInventory = new LinkedHashMap<>();
 
-    // Tab state — 0 = Town Overview, 1 = Inventory
+    // Tab state Ã¢â‚¬â€ 0 = Town Overview, 1 = Inventory
     private int activeTab = 0;
 
     // Scroll state for inventory tab
@@ -122,7 +122,7 @@ public class TownHallScreen extends Screen {
         int pw = getPanelWidth();
         int ph = getPanelHeight();
 
-        // ── Tab buttons ───────────────────────────────────────────────────────
+        // Ã¢â€â‚¬Ã¢â€â‚¬ Tab buttons Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
         int tabY       = py + 60;
         int tabW       = 100;
         int tabGap     = 4;
@@ -140,7 +140,7 @@ public class TownHallScreen extends Screen {
         ).pos(tabsStartX + tabW + tabGap, tabY).size(tabW, 16).build();
         addRenderableWidget(tabInventoryButton);
 
-        // ── Rename button ─────────────────────────────────────────────────────
+        // Ã¢â€â‚¬Ã¢â€â‚¬ Rename button Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
         int renameBtnX = px + pw - 90;
         int renameBtnY = py + 15;
 
@@ -151,7 +151,7 @@ public class TownHallScreen extends Screen {
         renameButton.visible = !renameModeActive;
         addRenderableWidget(renameButton);
 
-        // ── Name input + confirm ──────────────────────────────────────────────
+        // Ã¢â€â‚¬Ã¢â€â‚¬ Name input + confirm Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
         int inputWidth = 180;
         int inputX     = px + pw / 2 - inputWidth / 2;
         int inputY     = py + 13;
@@ -173,7 +173,7 @@ public class TownHallScreen extends Screen {
         confirmRenameButton.visible = renameModeActive;
         addRenderableWidget(confirmRenameButton);
 
-        // ── Claim button ──────────────────────────────────────────────────────
+        // Ã¢â€â‚¬Ã¢â€â‚¬ Claim button Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
         int claimBtnWidth = 120;
         int claimBtnX     = px + (pw - claimBtnWidth) / 2;
         int claimBtnY     = py + ph - 40;
@@ -185,7 +185,7 @@ public class TownHallScreen extends Screen {
         claimButton.visible = !isClaimed;
         addRenderableWidget(claimButton);
 
-        // ── Choose Culture button (only when claimed by this player, no culture yet) ──
+        // Ã¢â€â‚¬Ã¢â€â‚¬ Choose Culture button (only when claimed by this player, no culture yet) Ã¢â€â‚¬Ã¢â€â‚¬
         int cultureBtnWidth = 140;
         int cultureBtnX     = px + (pw - cultureBtnWidth) / 2;
         int cultureBtnY     = claimBtnY - 28;
@@ -209,7 +209,7 @@ public class TownHallScreen extends Screen {
         updateTabButtonStates();
     }
     private void updateTabButtonStates() {
-        // Visually distinguish active tab — active tab is not active (looks pressed)
+        // Visually distinguish active tab Ã¢â‚¬â€ active tab is not active (looks pressed)
         if (tabOverviewButton  != null) tabOverviewButton.active  = (activeTab != 0);
         if (tabInventoryButton != null) tabInventoryButton.active = (activeTab != 1);
     }
@@ -363,7 +363,7 @@ public class TownHallScreen extends Screen {
             g.drawString(font, townName, titleX, titleY, COLOR_HEADER, false);
             g.pose().popPose();
 
-            String category = "— " + getTownSizeCategory() + " —";
+            String category = "Ã¢â‚¬â€ " + getTownSizeCategory() + " Ã¢â‚¬â€";
             int catWidth = font.width(category);
             g.drawString(font, category, px + (pw - catWidth) / 2, py + 38, COLOR_GOLD, false);
         }
@@ -383,7 +383,7 @@ public class TownHallScreen extends Screen {
         int y = getContentStartY();
         int w = getColWidth();
 
-        // ── Town Info ─────────────────────────────────────────────────────────
+        // Ã¢â€â‚¬Ã¢â€â‚¬ Town Info Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
         drawSectionHeader(g, "Town Info", x, y, w, COLOR_HEADER);
         y += 20;
 
@@ -397,7 +397,7 @@ public class TownHallScreen extends Screen {
         drawLabelValue(g, "Beds",     String.valueOf(bedCount),      x, y, COLOR_GREEN); y += 16;
         drawLabelValue(g, "Citizens", String.valueOf(citizenCount),  x, y, COLOR_GREEN); y += 20;
 
-        // ── Culture ───────────────────────────────────────────────────────────
+        // Ã¢â€â‚¬Ã¢â€â‚¬ Culture Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
         drawSectionHeader(g, "Culture", x, y, w, COLOR_HEADER);
         y += 20;
 
@@ -410,7 +410,7 @@ public class TownHallScreen extends Screen {
             drawLabelValue(g, "Culture", "Claim town first", x, y, COLOR_GRAY); y += 20;
         }
 
-        // ── Finances ──────────────────────────────────────────────────────────
+        // Ã¢â€â‚¬Ã¢â€â‚¬ Finances Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
         drawSectionHeader(g, "Finances", x, y, w, COLOR_HEADER);
         y += 20;
 
@@ -423,7 +423,7 @@ public class TownHallScreen extends Screen {
         int y = getContentStartY();
         int w = getColWidth();
 
-        // ── Employment ────────────────────────────────────────────────────────
+        // Ã¢â€â‚¬Ã¢â€â‚¬ Employment Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
         drawSectionHeader(g, "Employment", x, y, w, COLOR_PURPLE);
         y += 20;
 
@@ -488,7 +488,7 @@ public class TownHallScreen extends Screen {
         // Light header underline
         g.fill(ix, listY - 2, ix + iw, listY - 1, 0x40000000);
 
-        // Clipping region — only draw rows within bounds
+        // Clipping region Ã¢â‚¬â€ only draw rows within bounds
         int clipTop    = listY;
         int clipBottom = iy + ih;
         int visibleRows = getVisibleRows();
@@ -509,7 +509,7 @@ public class TownHallScreen extends Screen {
                 g.fill(ix, rowY, ix + iw, rowY + ROW_HEIGHT, 0x18000000);
             }
 
-            // Item name — strip namespace, replace underscores, capitalise
+            // Item name Ã¢â‚¬â€ strip namespace, replace underscores, capitalise
             String displayName = formatItemName(entry.getKey());
             g.drawString(font, displayName, ix + 4, rowY + 2, TEXT_COLOR, false);
 
@@ -545,7 +545,7 @@ public class TownHallScreen extends Screen {
     // ===== FORMAT HELPERS =====
 
     private String formatItemName(String itemKey) {
-        // Strip namespace (e.g. "minecraft:raw_iron" → "raw_iron", "agotmod:amber" → "amber")
+        // Strip namespace (e.g. "minecraft:raw_iron" Ã¢â€ â€™ "raw_iron", "agotmod:amber" Ã¢â€ â€™ "amber")
         String name = itemKey.contains(":") ? itemKey.substring(itemKey.indexOf(':') + 1) : itemKey;
         // Replace underscores with spaces and title-case each word
         String[] words = name.split("_");
@@ -641,7 +641,7 @@ public class TownHallScreen extends Screen {
             for (int ty = 0; ty < innerH; ty += tileSize) {
                 int tw = Math.min(tileSize, innerW - tx);
                 int th = Math.min(tileSize, innerH - ty);
-                g.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                g.blit(
                         PAPER_TEXTURE, innerX + tx, innerY + ty, 0, 0, tw, th, tileSize, tileSize);
             }
         }
@@ -676,7 +676,7 @@ public class TownHallScreen extends Screen {
                 int tw = Math.min(ts, w - tx);
                 int th = Math.min(ts, h - ty);
                 if (tw <= 0 || th <= 0) continue;
-                g.blit(net.minecraft.client.renderer.RenderType::guiTextured, tex, tx, ty, 0, 0, tw, th, ts, ts);
+                g.blit( tex, tx, ty, 0, 0, tw, th, ts, ts);
             }
         }
         g.pose().popPose();
@@ -689,9 +689,9 @@ public class TownHallScreen extends Screen {
             g.pose().translate(x + w / 2f, y + h / 2f, 0);
             g.pose().mulPose(com.mojang.math.Axis.ZP.rotationDegrees(rot));
             g.pose().translate(-w / 2f, -h / 2f, 0);
-            g.blit(net.minecraft.client.renderer.RenderType::guiTextured, tex, 0, 0, 0, 0, w, h, 32, 32);
+            g.blit( tex, 0, 0, 0, 0, w, h, 32, 32);
         } else {
-            g.blit(net.minecraft.client.renderer.RenderType::guiTextured, tex, x, y, 0, 0, w, h, 32, 32);
+            g.blit( tex, x, y, 0, 0, w, h, 32, 32);
         }
         g.pose().popPose();
     }

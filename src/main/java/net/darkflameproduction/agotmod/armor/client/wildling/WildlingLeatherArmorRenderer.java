@@ -13,3 +13,4 @@ public class WildlingLeatherArmorRenderer extends GeoArmorRenderer<WildlingLeath
         super(new WildlingLeatherArmorModel());
     }
 }
+

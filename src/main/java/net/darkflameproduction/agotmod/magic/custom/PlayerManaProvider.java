@@ -44,3 +44,4 @@ public class PlayerManaProvider implements ICapabilityProvider<Player, Void, Pla
         createPlayerMana().loadNBTData(nbt);
     }
 }
+

@@ -19,3 +19,4 @@ public class TemperatureHelper {
         return temperature >= HOT_TEMP;
     }
 }
+

@@ -12,3 +12,4 @@ public class ManderlyNobleArmorRenderer extends GeoArmorRenderer<ManderlyNobleAr
         super(new ManderlyNobleArmorModel());
     }
 }
+

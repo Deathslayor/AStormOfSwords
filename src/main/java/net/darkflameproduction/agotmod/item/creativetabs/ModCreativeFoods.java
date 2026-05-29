@@ -354,3 +354,4 @@ public class ModCreativeFoods {
         CREATIVE_MODE_TAB.register(eventBus);
     }
 }
+

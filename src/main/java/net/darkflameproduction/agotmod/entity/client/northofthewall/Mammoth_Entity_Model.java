@@ -19,3 +19,4 @@ public class Mammoth_Entity_Model extends DefaultedEntityGeoModel<Mammoth_Entity
 
 
 }
+

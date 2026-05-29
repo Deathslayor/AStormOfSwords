@@ -370,7 +370,7 @@ public class GrocerInventoryScreen extends Screen {
             // Draw item icon 50% larger (1.5x scale)
             net.minecraft.resources.ResourceLocation itemLocation = net.minecraft.resources.ResourceLocation.tryParse(itemKey);
             if (itemLocation != null) {
-                net.minecraft.world.item.Item item = net.minecraft.core.registries.BuiltInRegistries.ITEM.getValue(itemLocation);
+                net.minecraft.world.item.Item item = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(itemLocation);
                 if (item != null && item != net.minecraft.world.item.Items.AIR) {
                     net.minecraft.world.item.ItemStack itemStack = new net.minecraft.world.item.ItemStack(item);
 
@@ -769,8 +769,8 @@ public class GrocerInventoryScreen extends Screen {
                 0xFFC6C6C6);
 
         // Draw scroll arrows
-        String upArrow = "↑";
-        String downArrow = "↓";
+        String upArrow = "Ã¢â€ â€˜";
+        String downArrow = "Ã¢â€ â€œ";
         int arrowX = scrollBarX + (scrollBarWidth - font.width(upArrow)) / 2;
 
         int upColor = transactionScrollOffset > 0 ? SUBMENU_TEXT_COLOR : 0xFF666666;
@@ -1124,7 +1124,7 @@ public class GrocerInventoryScreen extends Screen {
             // Render item icon
             net.minecraft.resources.ResourceLocation itemLocation = net.minecraft.resources.ResourceLocation.tryParse(itemKey);
             if (itemLocation != null) {
-                net.minecraft.world.item.Item item = net.minecraft.core.registries.BuiltInRegistries.ITEM.getValue(itemLocation);
+                net.minecraft.world.item.Item item = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(itemLocation);
                 if (item != null && item != net.minecraft.world.item.Items.AIR) {
                     net.minecraft.world.item.ItemStack itemStack = new net.minecraft.world.item.ItemStack(item);
 
@@ -1389,8 +1389,8 @@ public class GrocerInventoryScreen extends Screen {
                 0xFFC6C6C6);
 
         // Draw scroll arrows
-        String upArrow = "↑";
-        String downArrow = "↓";
+        String upArrow = "Ã¢â€ â€˜";
+        String downArrow = "Ã¢â€ â€œ";
         int arrowX = scrollBarX + (scrollBarWidth - font.width(upArrow)) / 2;
 
         int upColor = scrollOffset > 0 ? SUBMENU_TEXT_COLOR : 0xFF666666;
@@ -1401,7 +1401,7 @@ public class GrocerInventoryScreen extends Screen {
     }
 
     private void drawHelpText(GuiGraphics guiGraphics, int panelX, int panelY, int panelWidth, int panelHeight) {
-        String helpText = "Use mouse wheel or arrow keys to scroll • Press ESC to close";
+        String helpText = "Use mouse wheel or arrow keys to scroll Ã¢â‚¬Â¢ Press ESC to close";
 
         // CHANGED: Scale down the help text further
         float scale = 0.7f; // CHANGED: Reduced from 0.8f to 0.7f
@@ -1463,7 +1463,7 @@ public class GrocerInventoryScreen extends Screen {
                 int tileWidth = Math.min(tileSize, innerWidth - tileX);
                 int tileHeight = Math.min(tileSize, innerHeight - tileY);
 
-                guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                guiGraphics.blit(
                         PAPER_TEXTURE, innerX + tileX, innerY + tileY, 0, 0,
                         tileWidth, tileHeight, tileSize, tileSize);
             }
@@ -1527,10 +1527,10 @@ public class GrocerInventoryScreen extends Screen {
             poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(rotationDegrees));
             poseStack.translate(-width / 2.0f, -height / 2.0f, 0);
 
-            guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+            guiGraphics.blit(
                     texture, 0, 0, 0, 0, width, height, 32, 32);
         } else {
-            guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+            guiGraphics.blit(
                     texture, x, y, 0, 0, width, height, 32, 32);
         }
 
@@ -1560,7 +1560,7 @@ public class GrocerInventoryScreen extends Screen {
 
                 if (tileWidth <= 0 || tileHeight <= 0) continue;
 
-                guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+                guiGraphics.blit(
                         texture, tileX, tileY, 0, 0,
                         tileWidth, tileHeight, textureSize, textureSize);
             }
@@ -1570,19 +1570,19 @@ public class GrocerInventoryScreen extends Screen {
     }
 
     private void drawPanelBorders(GuiGraphics guiGraphics, int x, int y, int width, int height) {
-        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+        guiGraphics.blit(
                 PILLAR_TEXTURE, x, y, 0, 0, BORDER_PILLAR_WIDTH, height, 16, 64);
 
-        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+        guiGraphics.blit(
                 PILLAR_TEXTURE, x + width - BORDER_PILLAR_WIDTH, y, 0, 0,
                 BORDER_PILLAR_WIDTH, height, 16, 64);
 
-        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+        guiGraphics.blit(
                 BORDER_TEXTURE, x, y, 0, 0, width, BORDER_HEIGHT, 64, 16);
 
         RenderSystem.setShaderColor(0.8f, 0.8f, 0.8f, 1.0f);
 
-        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+        guiGraphics.blit(
                 BORDER_TEXTURE, x, y + height - BORDER_HEIGHT, 0, 0,
                 width, BORDER_HEIGHT, 64, 16);
 
@@ -1594,7 +1594,7 @@ public class GrocerInventoryScreen extends Screen {
         com.mojang.blaze3d.vertex.PoseStack poseStack = guiGraphics.pose();
 
         poseStack.pushPose();
-        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+        guiGraphics.blit(
                 CORNER_TEXTURE, x, y + height - BORDER_HEIGHT - CORNER_SIZE / 2,
                 0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
         poseStack.popPose();
@@ -1603,7 +1603,7 @@ public class GrocerInventoryScreen extends Screen {
         poseStack.translate(x + width - CORNER_SIZE / 2, y + height - BORDER_HEIGHT, 0);
         poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(270));
         poseStack.translate(-CORNER_SIZE / 2, -CORNER_SIZE / 2, 0);
-        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+        guiGraphics.blit(
                 CORNER_TEXTURE, 0, 0, 0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
         poseStack.popPose();
 
@@ -1611,7 +1611,7 @@ public class GrocerInventoryScreen extends Screen {
         poseStack.translate(x + width - CORNER_SIZE / 2, y + CORNER_SIZE / 2, 0);
         poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(180));
         poseStack.translate(-CORNER_SIZE / 2, -CORNER_SIZE / 2, 0);
-        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+        guiGraphics.blit(
                 CORNER_TEXTURE, 0, 0, 0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
         poseStack.popPose();
 
@@ -1619,7 +1619,7 @@ public class GrocerInventoryScreen extends Screen {
         poseStack.translate(x + CORNER_SIZE / 2, y + CORNER_SIZE / 2, 0);
         poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(90));
         poseStack.translate(-CORNER_SIZE / 2, -CORNER_SIZE / 2, 0);
-        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+        guiGraphics.blit(
                 CORNER_TEXTURE, 0, 0, 0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
         poseStack.popPose();
     }

@@ -108,3 +108,4 @@ public class ModEntityLootTables extends EntityLootSubProvider {
         return builder;
     }
 }
+

@@ -27,3 +27,4 @@ public class ModFlammableLeaves extends LeavesBlock {
         return 30;
     }
 }
+

@@ -22,3 +22,4 @@ public final class ModParticles {
         PARTICLE_TYPES.register(eventBus);
     }
 }
+

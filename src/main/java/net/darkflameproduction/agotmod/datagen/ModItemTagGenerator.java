@@ -817,3 +817,4 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         tag.add(key);
     }
 }
+

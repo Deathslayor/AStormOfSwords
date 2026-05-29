@@ -1281,3 +1281,4 @@ public class ModplacedFeatures {
         context.register(key, new PlacedFeature(configuration, List.copyOf(modifiers)));
     }
 }
+

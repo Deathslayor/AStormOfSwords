@@ -7,20 +7,18 @@ import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.armor.custom.stark.StarkLevyArmorItem;
 import net.darkflameproduction.agotmod.armor.custom.wildling.WildlingChiefArmorItem;
 import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.model.GeoModel;
-import software.bernie.geckolib.renderer.GeoRenderer;
 
 // Stark1ArmorModel class extending GeoModel for Stark1ArmorItem
 public class WildlingChiefArmorModel extends GeoModel<WildlingChiefArmorItem> {
     @Override
-    public ResourceLocation getModelResource(WildlingChiefArmorItem animatable, @Nullable GeoRenderer<WildlingChiefArmorItem> renderer) {
+    public ResourceLocation getModelResource(WildlingChiefArmorItem animatable) {
         // Return the resource location for the model
         return AGoTMod.id("geo/wildling_chief.geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureResource(WildlingChiefArmorItem animatable, @Nullable GeoRenderer<WildlingChiefArmorItem> renderer) {
+    public ResourceLocation getTextureResource(WildlingChiefArmorItem animatable) {
         // Return the resource location for the texture
         return AGoTMod.id("textures/item/armor/wildling_chief.png");
     }
@@ -32,3 +30,5 @@ public class WildlingChiefArmorModel extends GeoModel<WildlingChiefArmorItem> {
         return AGoTMod.id("animations/idle.animation.json");
     }
 }
+
+

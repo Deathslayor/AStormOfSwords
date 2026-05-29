@@ -28,7 +28,7 @@ public class DataGenerators {
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
         // Server-side data generation
-        generator.addProvider(event.includeServer(), new ModRecipeProvider.Runner(packOutput, lookupProvider));
+        generator.addProvider(event.includeServer(), new ModRecipeProvider(packOutput, lookupProvider));
         generator.addProvider(event.includeServer(), ModLootTableProvider.create(packOutput, lookupProvider));
 
         // Block and Item Tags (order matters - blocks first, then items)

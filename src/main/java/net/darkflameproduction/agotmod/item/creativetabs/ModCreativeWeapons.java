@@ -78,3 +78,4 @@ public class ModCreativeWeapons {
         CREATIVE_MODE_TAB.register(eventBus);
     }
 }
+

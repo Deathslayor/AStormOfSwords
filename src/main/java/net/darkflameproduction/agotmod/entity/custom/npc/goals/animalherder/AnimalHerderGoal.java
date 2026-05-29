@@ -122,7 +122,7 @@ public class AnimalHerderGoal extends Goal {
                 peasant.getNavigation().moveTo(targetToKill, 0.7D);
                 if (peasant.distanceToSqr(targetToKill) <= INTERACT_RANGE_SQ) {
                     if (peasant.level() instanceof ServerLevel serverLevel) {
-                        targetToKill.kill(serverLevel);
+                        targetToKill.kill();
                     }
                     peasant.triggerInteractAnimation();
                     targetToKill = null;
@@ -140,7 +140,7 @@ public class AnimalHerderGoal extends Goal {
                 if (peasant.distanceToSqr(targetToShear) <= INTERACT_RANGE_SQ) {
                     if (targetToShear instanceof Sheep sheep && sheep.readyForShearing()
                             && peasant.level() instanceof ServerLevel serverLevel) {
-                        sheep.shear(serverLevel, net.minecraft.sounds.SoundSource.NEUTRAL, ItemStack.EMPTY);
+                        sheep.shear(net.minecraft.sounds.SoundSource.NEUTRAL);
                         peasant.triggerInteractAnimation();
                     }
                     targetToShear = null;

@@ -155,3 +155,4 @@ public class ModCreativeArmour {
         CREATIVE_MODE_TAB.register(eventBus);
     }
 }
+

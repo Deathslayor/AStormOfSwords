@@ -17,3 +17,4 @@ public class ModHangingSignBlock extends CeilingHangingSignBlock {
         return new ModHangingSignBlockEntity(pos, state);
     }
 }
+

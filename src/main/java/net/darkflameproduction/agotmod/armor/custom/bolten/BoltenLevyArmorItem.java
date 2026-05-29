@@ -8,7 +8,6 @@ import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.darkflameproduction.agotmod.armor.client.bolten.BoltenLevyArmorRenderer;
 import net.darkflameproduction.agotmod.item.ModItems;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -19,9 +18,8 @@ import net.minecraft.world.entity.player.PlayerModelPart;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.equipment.ArmorMaterial;
-import net.minecraft.world.item.equipment.ArmorType;
-import net.minecraft.world.item.equipment.EquipmentModel;
+import net.minecraft.core.Holder;
+import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -46,9 +44,9 @@ import net.minecraft.world.entity.player.Player;
 // Stark1ArmorItem class extending ArmorItem and implementing GeoItem
 public class BoltenLevyArmorItem extends ArmorItem implements GeoItem {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-    private final ArmorType armorType;
+    private final ArmorItem.Type armorType;
 
-    public BoltenLevyArmorItem(ArmorMaterial armorMaterial, ArmorType type, Properties properties) {
+    public BoltenLevyArmorItem(Holder<ArmorMaterial> armorMaterial, ArmorItem.Type type, Properties properties) {
         super(armorMaterial, type, properties);
         this.armorType = type;
     }
@@ -65,7 +63,7 @@ public class BoltenLevyArmorItem extends ArmorItem implements GeoItem {
      * Gets the armor type for this item.
      * Can be used by client code to determine which skin layers to hide.
      */
-    public ArmorType getArmorType() {
+    public ArmorItem.Type getArmorType() {
         return this.armorType;
     }
 
@@ -76,7 +74,7 @@ public class BoltenLevyArmorItem extends ArmorItem implements GeoItem {
             private GeoArmorRenderer<?> renderer;
 
             @Override
-            public <E extends LivingEntity, S extends HumanoidRenderState> @NotNull HumanoidModel<?> getGeoArmorRenderer(@Nullable E livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, EquipmentModel.LayerType type, HumanoidModel<S> original) {
+            public <T extends LivingEntity> @NotNull HumanoidModel<?> getGeoArmorRenderer(@Nullable T livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<T> original) {
                 if (this.renderer == null) {
                     this.renderer = new BoltenLevyArmorRenderer();
                 }
@@ -133,3 +131,5 @@ public class BoltenLevyArmorItem extends ArmorItem implements GeoItem {
         return this.cache;
     }
 }
+
+

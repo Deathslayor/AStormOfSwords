@@ -19,7 +19,7 @@ public class SmelterGoal extends Goal {
 
     private static final int SMELT_INTERVAL = 40; // swing every 2 seconds
 
-    // Ore → Ingot in priority order: gold > silver > iron > copper > tin
+    // Ore â†’ Ingot in priority order: gold > silver > iron > copper > tin
     private static final LinkedHashMap<String, String> ORE_TO_INGOT = new LinkedHashMap<>();
     static {
         ORE_TO_INGOT.put("minecraft:raw_gold",   "minecraft:gold_ingot");
@@ -218,7 +218,7 @@ public class SmelterGoal extends Goal {
     private void spawnItem(String itemKey, int count) {
         ResourceLocation loc = ResourceLocation.tryParse(itemKey);
         if (loc == null) return;
-        net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.getValue(loc);
+        net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.get(loc);
         if (item == null || item == Items.AIR) return;
         peasant.getInventorySystem().addItem(new ItemStack(item, count));
     }

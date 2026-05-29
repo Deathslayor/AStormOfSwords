@@ -7,20 +7,18 @@ import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.armor.custom.night_watch.NightsWatchRangerArmorItem;
 import net.darkflameproduction.agotmod.armor.custom.stark.StarkPlateArmorItem;
 import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.model.GeoModel;
-import software.bernie.geckolib.renderer.GeoRenderer;
 
 // Stark1ArmorModel class extending GeoModel for Stark1ArmorItem
 public class NightsWatchRangerArmorModel extends GeoModel<NightsWatchRangerArmorItem> {
     @Override
-    public ResourceLocation getModelResource(NightsWatchRangerArmorItem animatable, @Nullable GeoRenderer<NightsWatchRangerArmorItem> renderer) {
+    public ResourceLocation getModelResource(NightsWatchRangerArmorItem animatable) {
         // Return the resource location for the model
         return AGoTMod.id("geo/nights_watch_ranger.geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureResource(NightsWatchRangerArmorItem animatable, @Nullable GeoRenderer<NightsWatchRangerArmorItem> renderer) {
+    public ResourceLocation getTextureResource(NightsWatchRangerArmorItem animatable) {
         // Return the resource location for the texture
         return AGoTMod.id("textures/item/armor/nights_watch_ranger.png");
     }
@@ -32,3 +30,5 @@ public class NightsWatchRangerArmorModel extends GeoModel<NightsWatchRangerArmor
         return AGoTMod.id("animations/idle.animation.json");
     }
 }
+
+

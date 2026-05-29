@@ -9,7 +9,6 @@ import net.darkflameproduction.agotmod.armor.client.bolten.BoltenNobleArmorRende
 import net.darkflameproduction.agotmod.armor.client.mountin_clan.MountainClanChiefArmorRenderer;
 import net.darkflameproduction.agotmod.item.ModItems;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,9 +16,8 @@ import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.equipment.ArmorMaterial;
-import net.minecraft.world.item.equipment.ArmorType;
-import net.minecraft.world.item.equipment.EquipmentModel;
+import net.minecraft.core.Holder;
+import net.minecraft.world.item.ArmorMaterial;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoItem;
@@ -40,7 +38,7 @@ import java.util.function.Consumer;
 public class MountainClanChiefArmorItem extends ArmorItem implements GeoItem {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
-    public MountainClanChiefArmorItem(ArmorMaterial armorMaterial, ArmorType type, Properties properties) {
+    public MountainClanChiefArmorItem(Holder<ArmorMaterial> armorMaterial, ArmorItem.Type type, Properties properties) {
         super(armorMaterial, type, properties);
     }
 
@@ -51,7 +49,7 @@ public class MountainClanChiefArmorItem extends ArmorItem implements GeoItem {
             private GeoArmorRenderer<?> renderer;
 
             @Override
-            public <E extends LivingEntity, S extends HumanoidRenderState> @NotNull HumanoidModel<?> getGeoArmorRenderer(@Nullable E livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, EquipmentModel.LayerType type, HumanoidModel<S> original) {
+            public <T extends LivingEntity> @NotNull HumanoidModel<?> getGeoArmorRenderer(@Nullable T livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<T> original) {
                 if (this.renderer == null) {
                     this.renderer = new MountainClanChiefArmorRenderer();
                 }
@@ -108,3 +106,5 @@ public class MountainClanChiefArmorItem extends ArmorItem implements GeoItem {
         return this.cache;
     }
 }
+
+

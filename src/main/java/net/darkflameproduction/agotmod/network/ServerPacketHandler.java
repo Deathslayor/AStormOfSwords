@@ -249,13 +249,13 @@ public class ServerPacketHandler {
         if (houseName == null || houseName.trim().isEmpty()) return false;
         String trimmed = houseName.trim();
 
-        // Online players — use live persistent data
+        // Online players â€” use live persistent data
         for (ServerPlayer player : requestingPlayer.getServer().getPlayerList().getPlayers()) {
             if (player.getUUID().equals(requestingPlayer.getUUID())) continue;
             if (trimmed.equalsIgnoreCase(getPlayerHouseName(player))) return false;
         }
 
-        // Offline players — scan .dat files
+        // Offline players â€” scan .dat files
         try {
             java.nio.file.Path playersDir = requestingPlayer.getServer()
                     .getWorldPath(net.minecraft.world.level.storage.LevelResource.ROOT)
@@ -463,7 +463,7 @@ public class ServerPacketHandler {
         ResourceLocation itemLocation = ResourceLocation.tryParse(itemKey);
         if (itemLocation == null) return;
 
-        Item item = BuiltInRegistries.ITEM.getValue(itemLocation);
+        Item item = BuiltInRegistries.ITEM.get(itemLocation);
         if (item == null || item == Items.AIR) return;
 
         Vec3 pos = player.position();

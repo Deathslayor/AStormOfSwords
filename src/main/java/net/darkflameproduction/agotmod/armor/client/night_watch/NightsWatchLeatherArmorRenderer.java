@@ -13,3 +13,4 @@ public class NightsWatchLeatherArmorRenderer extends GeoArmorRenderer<NightsWatc
         super(new NightsWatchLeatherArmorModel());
     }
 }
+

@@ -1270,3 +1270,4 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
 
 }
+

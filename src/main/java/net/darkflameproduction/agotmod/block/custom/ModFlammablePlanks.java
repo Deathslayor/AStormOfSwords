@@ -27,3 +27,4 @@ public class ModFlammablePlanks extends Block {
         return 5;
     }
 }
+

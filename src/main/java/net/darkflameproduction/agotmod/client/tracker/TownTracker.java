@@ -217,11 +217,11 @@ public class TownTracker {
      * Save town names and populations to file
      */
     private static void saveTownNames() {
-        // No longer persisted — server resends on world load
+        // No longer persisted â€” server resends on world load
     }
 
     private static void loadTownNames() {
-        // No longer persisted — server resends on world load
+        // No longer persisted â€” server resends on world load
     }
 
     /**

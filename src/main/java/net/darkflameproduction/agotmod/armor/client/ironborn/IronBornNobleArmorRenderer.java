@@ -13,3 +13,4 @@ public class IronBornNobleArmorRenderer extends GeoArmorRenderer<IronBornNobleAr
         super(new IronBornNobleArmorModel());
     }
 }
+

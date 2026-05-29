@@ -98,7 +98,7 @@ public class GrocerSystem {
             ResourceLocation itemLocation = ResourceLocation.tryParse(itemKey);
             if (itemLocation == null) continue;
 
-            Item item = BuiltInRegistries.ITEM.getValue(itemLocation);
+            Item item = BuiltInRegistries.ITEM.get(itemLocation);
             if (item == null || item == net.minecraft.world.item.Items.AIR) continue;
 
             String displayName = new ItemStack(item).getHoverName().getString();

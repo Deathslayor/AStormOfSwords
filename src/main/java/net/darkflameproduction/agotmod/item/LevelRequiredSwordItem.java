@@ -1,15 +1,14 @@
 package net.darkflameproduction.agotmod.item;
 
-import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.Multimap;
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.util.ModAttributes;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Item;
@@ -22,19 +21,24 @@ import java.util.List;
 
 public class LevelRequiredSwordItem extends SwordItem {
     private final String weaponType;
-    private final Multimap<Attribute, AttributeModifier> defaultModifiers;
-
-    // Constructor for ToolMaterial
-    public LevelRequiredSwordItem(net.minecraft.world.item.ToolMaterial material, int attackDamage, float attackSpeed, Item.Properties properties, String weaponType) {
-        super(material, attackDamage, attackSpeed, properties);
+    public LevelRequiredSwordItem(net.minecraft.world.item.Tier material, int attackDamage, float attackSpeed, Item.Properties properties, String weaponType) {
+        super(material, properties.attributes(buildAttributes(material, attackDamage, attackSpeed, weaponType)));
         this.weaponType = weaponType;
+    }
 
-        // Create a builder based on the parent's default modifiers
-        ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+    private static ItemAttributeModifiers buildAttributes(net.minecraft.world.item.Tier material, int attackDamage, float attackSpeed, String weaponType) {
+        ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder()
+                .add(
+                        Attributes.ATTACK_DAMAGE,
+                        new AttributeModifier(SwordItem.BASE_ATTACK_DAMAGE_ID, attackDamage + material.getAttackDamageBonus(), AttributeModifier.Operation.ADD_VALUE),
+                        EquipmentSlotGroup.MAINHAND
+                )
+                .add(
+                        Attributes.ATTACK_SPEED,
+                        new AttributeModifier(SwordItem.BASE_ATTACK_SPEED_ID, attackSpeed, AttributeModifier.Operation.ADD_VALUE),
+                        EquipmentSlotGroup.MAINHAND
+                );
 
-        // Add the parent's attribute modifiers for an empty ItemStack
-
-        // Add our custom reach modifier if needed
         double reachModifier = 0.0;
 
         switch (weaponType) {
@@ -55,26 +59,19 @@ public class LevelRequiredSwordItem extends SwordItem {
                 break;
         }
 
-        // Only add modifier if it's not zero
         if (reachModifier != 0.0) {
-            // Add the reach attribute modifier
-            builder.put(
-                    ModAttributes.ATTACK_REACH,
+            builder.add(
+                    Attributes.BLOCK_INTERACTION_RANGE,
                     new AttributeModifier(
                             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "weapon_reach_modifier"),
                             reachModifier,
                             AttributeModifier.Operation.ADD_VALUE
-                    )
+                    ),
+                    EquipmentSlotGroup.MAINHAND
             );
         }
 
-        // Store the combined modifiers
-        this.defaultModifiers = builder.build();
-    }
-
-
-    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(ItemStack stack) {
-        return this.defaultModifiers;
+        return builder.build();
     }
 
     // The correct signature for appendHoverText in 1.21.3
@@ -121,3 +118,4 @@ public class LevelRequiredSwordItem extends SwordItem {
         }
     }
 }
+

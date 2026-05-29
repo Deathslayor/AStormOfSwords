@@ -197,7 +197,7 @@ public class LumberjackSystem {
                     net.minecraft.resources.ResourceLocation.tryParse(saplingKey);
 
             if (saplingLoc != null && BuiltInRegistries.BLOCK.containsKey(saplingLoc)) {
-                Block saplingBlock = BuiltInRegistries.BLOCK.getValue(saplingLoc);
+                Block saplingBlock = BuiltInRegistries.BLOCK.get(saplingLoc);
                 if (saplingBlock != null) {
                     BlockState below = level.getBlockState(stumpPos.below());
                     if (level.getBlockState(stumpPos).isAir() &&

@@ -89,11 +89,11 @@ public class Crow_Entity extends PathfinderMob implements GeoEntity {
     }
 
     @Override
-    public boolean hurtServer(ServerLevel p_376275_, DamageSource p_376205_, float p_376647_) {
+    public boolean hurt(DamageSource p_376205_, float p_376647_) {
         if (this.isResting()) {
             this.setResting(false);
         }
-        return super.hurtServer(p_376275_, p_376205_, p_376647_);
+        return super.hurt(p_376205_, p_376647_);
     }
 
 
@@ -107,8 +107,9 @@ public class Crow_Entity extends PathfinderMob implements GeoEntity {
     private int restingTicks = 0;
 
     @Override
-    protected void customServerAiStep(ServerLevel level) {
-        super.customServerAiStep(level);
+    protected void customServerAiStep() {
+        super.customServerAiStep();
+        ServerLevel level = (ServerLevel) this.level();
         BlockPos blockpos = this.blockPosition();
         BlockPos blockBelow = blockpos.below();
 
@@ -308,3 +309,4 @@ public class Crow_Entity extends PathfinderMob implements GeoEntity {
         return ModSounds.CROW_DEATH.get();
     }
 }
+

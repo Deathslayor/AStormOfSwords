@@ -13,3 +13,4 @@ public class MountainClanChiefArmorRenderer extends GeoArmorRenderer<MountainCla
         super(new MountainClanChiefArmorModel());
     }
 }
+

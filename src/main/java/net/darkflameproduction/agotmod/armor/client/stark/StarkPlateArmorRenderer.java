@@ -12,3 +12,4 @@ public class StarkPlateArmorRenderer extends GeoArmorRenderer<StarkPlateArmorIte
         super(new StarkPlateArmorModel());
     }
 }
+

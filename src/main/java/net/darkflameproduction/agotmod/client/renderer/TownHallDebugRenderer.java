@@ -160,11 +160,11 @@ public class TownHallDebugRenderer {
      * Save town hall data to file
      */
     private static void saveTownHallData() {
-        // No longer persisted — server resends on world load
+        // No longer persisted â€” server resends on world load
     }
 
     private static void loadTownHallData() {
-        // No longer persisted — server resends on world load
+        // No longer persisted â€” server resends on world load
     }
 
     /**

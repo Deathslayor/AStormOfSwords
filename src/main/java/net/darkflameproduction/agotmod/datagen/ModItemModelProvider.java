@@ -466,7 +466,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
 
 
-// ── Fowl ─────────────────────────────────────────────────────────────────
+// â”€â”€ Fowl â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         simpleItem(ModItems.RAW_PIGEON);
         simpleItem(ModItems.COOKED_PIGEON);
         simpleItem(ModItems.RAW_DUCK);
@@ -490,7 +490,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.RAW_CHICKEN_NUGGETS);
         simpleItem(ModItems.COOKED_CHICKEN_NUGGETS);
 
-// ── Meats ─────────────────────────────────────────────────────────────────
+// â”€â”€ Meats â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         simpleItem(ModItems.RAW_AUROCHS);
         simpleItem(ModItems.COOKED_AUROCHS);
         simpleItem(ModItems.RAW_BEAR_MEAT);
@@ -530,7 +530,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.RAW_SUCKLING_PIG);
         simpleItem(ModItems.COOKED_SUCKLING_PIG);
 
-// ── Offal & Organ Meats ───────────────────────────────────────────────────
+// â”€â”€ Offal & Organ Meats â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         simpleItem(ModItems.RAW_BACON);
         simpleItem(ModItems.COOKED_BACON);
         simpleItem(ModItems.RAW_PIG_KIDNEYS);
@@ -546,7 +546,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.HORSE_HEART);
         simpleItem(ModItems.JELLIED_CALVES_BRAIN);
 
-// ── Sausages ─────────────────────────────────────────────────────────────
+// â”€â”€ Sausages â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         simpleItem(ModItems.RAW_SAUSAGE);
         simpleItem(ModItems.COOKED_SAUSAGE);
         simpleItem(ModItems.RAW_BLOOD_SAUSAGE);
@@ -554,12 +554,12 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.RAW_WHITE_SAUSAGE);
         simpleItem(ModItems.COOKED_WHITE_SAUSAGE);
 
-// ── Other Ingredient Meats ────────────────────────────────────────────────
+// â”€â”€ Other Ingredient Meats â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         simpleItem(ModItems.MINCED_MEAT);
         simpleItem(ModItems.PIG_INTESTINES);
         simpleItem(ModItems.CALF_BRAIN);
 
-// ── Fish & Seafood ────────────────────────────────────────────────────────
+// â”€â”€ Fish & Seafood â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         simpleItem(ModItems.RAW_HERRING);
         simpleItem(ModItems.COOKED_HERRING);
         simpleItem(ModItems.RAW_TROUT);
@@ -589,7 +589,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.RAW_WINKLES);
         simpleItem(ModItems.COOKED_WINKLES);
 
-// ── Prepared & Preserved ─────────────────────────────────────────────────
+// â”€â”€ Prepared & Preserved â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         simpleItem(ModItems.PICKLED_HERRING);
         simpleItem(ModItems.HONEYED_LOCUSTS);
         simpleItem(ModItems.BEEF_AND_BARLEY_STEW);
@@ -601,7 +601,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.JERKY);
         simpleItem(ModItems.HAM);
 
-// ── Baked Goods & Prepared Dishes ───────────────────────────
+// â”€â”€ Baked Goods & Prepared Dishes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         simpleItem(ModItems.BISCUITS);
         simpleItem(ModItems.BOWL_OF_BROWN);
         simpleItem(ModItems.BARLEY_BREAD);
@@ -629,7 +629,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.SISTERS_STEW);
         simpleItem(ModItems.PEA_SOUP);
 
-// ── General ─────────────────────────────────────────────────
+// â”€â”€ General â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         simpleItem(ModItems.CHEESE);
         simpleItem(ModItems.GRAVY);
         simpleItem(ModItems.HONEYCOMB_FOOD);
@@ -637,7 +637,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.JELLIES);
         simpleItem(ModItems.SHERBET);
 
-// ── Cereals ─────────────────────────────────────────────────
+// â”€â”€ Cereals â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         simpleItem(ModItems.BARLEY);
         simpleItem(ModItems.BLACK_RICE);
         simpleItem(ModItems.OAT);
@@ -646,7 +646,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.WINTER_WHEAT);
         simpleItem(ModItems.CORN);
 
-// ── Vegetables ──────────────────────────────────────────────
+// â”€â”€ Vegetables â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         simpleItem(ModItems.BEAN);
         simpleItem(ModItems.CABBAGE);
         simpleItem(ModItems.CHICKPEA);
@@ -672,11 +672,11 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.TURNIP);
         simpleItem(ModItems.WILD_ONION);
 
-// ── Vegetable Pies ──────────────────────────────────────────────
+// â”€â”€ Vegetable Pies â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         vegetablePie(ModItems.SPINACH_PIE);
 
 
-// ── Fruits ──────────────────────────────────────────────────
+// â”€â”€ Fruits â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         simpleItem(ModItems.APRICOT);
         simpleItem(ModItems.BLACKBERRY);
         simpleItem(ModItems.BLOOD_ORANGE);
@@ -705,14 +705,14 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.STRAWBERRY);
         simpleItem(ModItems.WINTER_PEACH);
 
-// ── Nuts ────────────────────────────────────────────────────
+// â”€â”€ Nuts â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         simpleItem(ModItems.ALMOND);
         simpleItem(ModItems.CHESTNUT);
         simpleItem(ModItems.PECAN);
         simpleItem(ModItems.PINE_NUT);
         simpleItem(ModItems.WALNUT);
 
-// ── Herbs & Spices ──────────────────────────────────────────
+// â”€â”€ Herbs & Spices â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         simpleItem(ModItems.CARDAMOM);
         simpleItem(ModItems.CINNAMON);
         simpleItem(ModItems.CLARY_SAGE);
@@ -734,12 +734,12 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.SAGE);
         simpleItem(ModItems.SALT);
 
-// ── Drinks — Beer ───────────────────────────────────────────
+// â”€â”€ Drinks â€” Beer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         simpleItem(ModItems.BEER);
         simpleItem(ModItems.ALE);
         simpleItem(ModItems.STOUT);
 
-// ── Drinks — Liquor ─────────────────────────────────────────
+// â”€â”€ Drinks â€” Liquor â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         simpleItem(ModItems.RUM);
         simpleItem(ModItems.BLACKBELLY_RUM);
         simpleItem(ModItems.BLACK_TAR_RUM);
@@ -747,7 +747,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.MYRISH_FIRE);
         simpleItem(ModItems.TYROSHI_PEAR_BRANDY);
 
-// ── Drinks — Milk ───────────────────────────────────────────
+// â”€â”€ Drinks â€” Milk â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         simpleItem(ModItems.ALMOND_MILK);
         simpleItem(ModItems.GOAT_MILK);
         simpleItem(ModItems.MARES_MILK);
@@ -755,13 +755,13 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.NAHSA);
         simpleItem(ModItems.ICED_MILK);
 
-// ── Drinks — Tea ────────────────────────────────────────────
+// â”€â”€ Drinks â€” Tea â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         simpleItem(ModItems.TEA);
         simpleItem(ModItems.MINT_TEA);
         simpleItem(ModItems.NETTLE_TEA);
         simpleItem(ModItems.MOON_TEA);
 
-// ── Drinks — Wine ───────────────────────────────────────────
+// â”€â”€ Drinks â€” Wine â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         simpleItem(ModItems.WINE);
         simpleItem(ModItems.APPLE_WINE);
         simpleItem(ModItems.GREEN_APPLE_WINE);
@@ -775,7 +775,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.SUMMERWINE);
         simpleItem(ModItems.WINE_OF_COURAGE);
 
-// ── Drinks — Other ──────────────────────────────────────────
+// â”€â”€ Drinks â€” Other â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         simpleItem(ModItems.CIDER);
         simpleItem(ModItems.HIPPOCRAS);
         simpleItem(ModItems.MEAD);
@@ -1894,7 +1894,7 @@ public class ModItemModelProvider extends ItemModelProvider {
                 .end();
     }
 
-// ── Three convenience wrappers ────────────────────────────────────────────
+// â”€â”€ Three convenience wrappers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     private ItemModelBuilder ironSwordItem(DeferredHolder<Item, Item> item,
                                            int hilt, int blade, int crossguard,
@@ -1941,3 +1941,4 @@ public class ModItemModelProvider extends ItemModelProvider {
     }
 
 }
+

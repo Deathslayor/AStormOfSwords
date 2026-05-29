@@ -220,7 +220,7 @@ public class TailorGoal extends Goal {
     }
 
     private void tryCraft() {
-        // Step 1: Cotton → String (1:1)
+        // Step 1: Cotton â†’ String (1:1)
         if (hasItemInInventory("agotmod:cotton", 1)) {
             removeItemFromInventory("agotmod:cotton", 1);
             addItemToInventory(new ItemStack(Items.STRING, 1));
@@ -228,7 +228,7 @@ public class TailorGoal extends Goal {
             return;
         }
 
-        // Step 2: String → Wool (4 string = 1 white wool)
+        // Step 2: String â†’ Wool (4 string = 1 white wool)
         if (hasItemInInventory("minecraft:string", 4)) {
             removeItemFromInventory("minecraft:string", 4);
             addItemToInventory(new ItemStack(Items.WHITE_WOOL, 1));
@@ -236,7 +236,7 @@ public class TailorGoal extends Goal {
             return;
         }
 
-        // Step 3: Wool → Cloth (2 wool = 1 cloth)
+        // Step 3: Wool â†’ Cloth (2 wool = 1 cloth)
         if (hasItemInInventory("minecraft:white_wool", 2)) {
             removeItemFromInventory("minecraft:white_wool", 2);
             addItemToInventory(new ItemStack(ModItems.CLOTH.get(), 1));
@@ -244,7 +244,7 @@ public class TailorGoal extends Goal {
             return;
         }
 
-        // Step 4: Flowers → Dye (1 flower = 1 dye)
+        // Step 4: Flowers â†’ Dye (1 flower = 1 dye)
         for (Map.Entry<String, String> entry : FLOWER_TO_DYE.entrySet()) {
             if (hasItemInInventory(entry.getKey(), 1)) {
                 removeItemFromInventory(entry.getKey(), 1);
@@ -310,7 +310,7 @@ public class TailorGoal extends Goal {
     private void spawnItem(String itemKey, int count) {
         ResourceLocation loc = ResourceLocation.tryParse(itemKey);
         if (loc == null) return;
-        net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.getValue(loc);
+        net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.get(loc);
         if (item == null || item == Items.AIR) return;
         peasant.getInventorySystem().addItem(new ItemStack(item, count));
     }

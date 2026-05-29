@@ -289,3 +289,4 @@ public class AGoTMod {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }
 }
+

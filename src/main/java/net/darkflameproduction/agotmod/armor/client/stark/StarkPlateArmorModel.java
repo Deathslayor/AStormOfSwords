@@ -6,20 +6,18 @@ package net.darkflameproduction.agotmod.armor.client.stark;
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.armor.custom.stark.StarkPlateArmorItem;
 import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.model.GeoModel;
-import software.bernie.geckolib.renderer.GeoRenderer;
 
 // Stark1ArmorModel class extending GeoModel for Stark1ArmorItem
 public class StarkPlateArmorModel extends GeoModel<StarkPlateArmorItem> {
     @Override
-    public ResourceLocation getModelResource(StarkPlateArmorItem animatable, @Nullable GeoRenderer<StarkPlateArmorItem> renderer) {
+    public ResourceLocation getModelResource(StarkPlateArmorItem animatable) {
         // Return the resource location for the model
         return AGoTMod.id("geo/stark_plate.geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureResource(StarkPlateArmorItem animatable, @Nullable GeoRenderer<StarkPlateArmorItem> renderer) {
+    public ResourceLocation getTextureResource(StarkPlateArmorItem animatable) {
         // Return the resource location for the texture
         return AGoTMod.id("textures/item/armor/stark_plate.png");
     }
@@ -31,3 +29,5 @@ public class StarkPlateArmorModel extends GeoModel<StarkPlateArmorItem> {
         return AGoTMod.id("animations/idle.animation.json");
     }
 }
+
+

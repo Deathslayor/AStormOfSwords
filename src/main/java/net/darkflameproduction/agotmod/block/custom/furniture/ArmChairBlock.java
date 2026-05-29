@@ -50,7 +50,7 @@ public class ArmChairBlock extends Block implements EntityBlock {
     }
 
     @Override
-    public boolean propagatesSkylightDown(BlockState state) {
+    protected boolean propagatesSkylightDown(BlockState state, BlockGetter level, BlockPos pos) {
         return true;
     }
 
@@ -61,7 +61,7 @@ public class ArmChairBlock extends Block implements EntityBlock {
 
     @SuppressWarnings("deprecation")
     @Override
-    public VoxelShape getOcclusionShape(BlockState state) {
+    public VoxelShape getOcclusionShape(BlockState state, BlockGetter level, BlockPos pos) {
         return Shapes.empty();
     }
 

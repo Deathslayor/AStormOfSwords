@@ -347,7 +347,7 @@ public class InventorySystem {
             for (int i = 0; i < inventory.getContainerSize(); i++) {
                 ItemStack stack = inventory.getItem(i);
                 if (!stack.isEmpty()) {
-                    peasant.spawnAtLocation(serverLevel, stack);
+                    peasant.spawnAtLocation(stack);
                     inventory.setItem(i, ItemStack.EMPTY);
                 }
             }
@@ -356,7 +356,7 @@ public class InventorySystem {
             for (EquipmentSlot slot : EquipmentSlot.values()) {
                 ItemStack stack = peasant.getItemBySlot(slot);
                 if (!stack.isEmpty()) {
-                    peasant.spawnAtLocation(serverLevel, stack);
+                    peasant.spawnAtLocation(stack);
                     peasant.setItemSlot(slot, ItemStack.EMPTY);
                 }
             }

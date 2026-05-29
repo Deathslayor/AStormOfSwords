@@ -36,7 +36,6 @@ public class Mammoth_Entity_Renderer extends GeoEntityRenderer<Mammoth_Entity> {
         }
     }
 
-    @Override
     protected float getDeathMaxRotation(Mammoth_Entity entityLivingBaseIn, float partialTick) {
         return 0.0F;
     }

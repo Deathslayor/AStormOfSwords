@@ -40,11 +40,11 @@ public class NPCInventoryScreen extends AbstractContainerScreen<NPCInventoryMenu
         int y = (this.height - this.imageHeight) / 2;
 
         // Render main inventory background (NPC inventory) - using the working blit signature
-        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+        guiGraphics.blit(
                 TEXTURE, x + 36, y, 0, 0, 176, 132, 256, 256);
 
         // Render player inventory background
-        guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+        guiGraphics.blit(
                 PLAYER_INVENTORY, x + 36, y + 132, 0, 84, 176, 90, 256, 256);
 
         // Render equipment slots backgrounds
@@ -90,11 +90,11 @@ public class NPCInventoryScreen extends AbstractContainerScreen<NPCInventoryMenu
         // For now, we'll just use the slot positions
 
         // Main hand icon (sword silhouette)
-        // guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+        // guiGraphics.blit(
         //         PLAYER_INVENTORY, x + 8, y + 18, 16, 16, 16, 16, 256, 256);
 
         // Off hand icon (shield silhouette)
-        // guiGraphics.blit(net.minecraft.client.renderer.RenderType::guiTextured,
+        // guiGraphics.blit(
         //         PLAYER_INVENTORY, x + 8, y + 36, 32, 16, 16, 16, 256, 256);
 
         // Armor slot icons could be rendered here as well

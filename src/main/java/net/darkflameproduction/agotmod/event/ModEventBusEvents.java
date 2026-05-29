@@ -36,3 +36,4 @@ public class ModEventBusEvents {
         event.registerEntity(PlayerManaProvider.PLAYER_MANA, EntityType.PLAYER, new PlayerManaProvider());
     }
 }
+

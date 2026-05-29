@@ -39,3 +39,4 @@ public class ModCreativeArchery {
         CREATIVE_MODE_TAB.register(eventBus);
     }
 }
+

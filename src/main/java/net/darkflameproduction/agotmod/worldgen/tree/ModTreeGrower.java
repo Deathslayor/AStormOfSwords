@@ -69,3 +69,4 @@ public class ModTreeGrower {
     public static final TreeGrower BLUE_SOLDIER_PINE = new TreeGrower("blue_soldier_pine", Optional.empty(), Optional.of(ModConfiguredFeatures.BLUE_SOLDIER_PINE_KEY), Optional.empty());
 
 }
+

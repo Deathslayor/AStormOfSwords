@@ -107,3 +107,4 @@ public class DirewolfAttackGoal extends Goal {
         this.hasDealtDamage = false;
     }
 }
+

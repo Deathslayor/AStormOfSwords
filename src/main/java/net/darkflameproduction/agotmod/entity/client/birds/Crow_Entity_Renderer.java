@@ -31,7 +31,6 @@ public class Crow_Entity_Renderer extends GeoEntityRenderer<Crow_Entity> {
         }
     }
 
-    @Override
     protected float getDeathMaxRotation(Crow_Entity entityLivingBaseIn, float partialTick) {
         return 0.0F;
     }

@@ -1999,3 +1999,4 @@ public class ModConfiguredFeatures {
         context.register(key, new ConfiguredFeature<>(feature, configuration));
     }
 }
+

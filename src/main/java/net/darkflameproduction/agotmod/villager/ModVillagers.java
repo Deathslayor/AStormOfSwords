@@ -49,3 +49,4 @@ public class ModVillagers {
         VILLAGER_PROFESSIONS.register(eventBus);
     }
 }
+

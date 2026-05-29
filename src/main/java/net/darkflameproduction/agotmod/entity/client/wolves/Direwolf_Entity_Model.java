@@ -19,3 +19,4 @@ public class Direwolf_Entity_Model extends DefaultedEntityGeoModel<Direwolf_Enti
 
 
 }
+

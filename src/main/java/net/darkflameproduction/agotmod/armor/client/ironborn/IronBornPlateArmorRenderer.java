@@ -13,3 +13,4 @@ public class IronBornPlateArmorRenderer extends GeoArmorRenderer<IronBornPlateAr
         super(new IronBornPlateArmorModel());
     }
 }
+
