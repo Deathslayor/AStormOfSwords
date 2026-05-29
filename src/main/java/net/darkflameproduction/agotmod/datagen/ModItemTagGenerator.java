@@ -490,6 +490,11 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModItems.RADISH.get().asItem())
                 .add(ModItems.SQUASH.get().asItem())
 
+                // Vegetable pies
+                .add(ModItems.SPINACH_PIE.get().asItem())
+
+
+
                 // Fruits and berries
                 .add(ModItems.STRAWBERRY.get().asItem())
                 .add(ModItems.BLACKBERRY.get().asItem())

@@ -23,6 +23,8 @@ public class ModTags {
         // Tag for blocks that require STEEL tools
         public static final TagKey<Block> NEEDS_STEEL_TOOL = tag("needs_steel_tool");
         public static final TagKey<Block> NEEDS_DRAGONGLASS_TOOL = tag("needs_dragonglass_tool");
+        public static final TagKey<Block> WATTLE_AND_DAUB = tag("wattle_and_daub");
+
 
         // Helper method to create a block tag
         private static TagKey<Block> tag(String name) {

@@ -500,6 +500,8 @@ public class ModItems {
     public static final DeferredItem<Item> DRAGONGLASS_DAGGER = ITEMS.registerItem("dragonglass_dagger",
             properties -> new LevelRequiredSwordItem(ModToolTiers.DRAGONGLASS, 2, -1.5F, properties, WeaponRequirements.SHORT_BLADE));
 
+
+
     // BRONZE WEAPONS
     public static final DeferredItem<Item> BRONZE_SWORD = ITEMS.registerItem("bronze_sword",
             properties -> new LevelRequiredSwordItem(ModToolTiers.BRONZE, 5, -2.4F, properties, WeaponRequirements.ONE_HANDED));
@@ -515,6 +517,25 @@ public class ModItems {
             properties -> new LevelRequiredSwordItem(ModToolTiers.BRONZE, 8, -3F, properties, WeaponRequirements.ONE_HANDED));
 
     // IRON WEAPONS
+    private static final int IRON_SWORD_HILTS       = 6;
+    private static final int IRON_SWORD_BLADES      = 3;
+    private static final int IRON_SWORD_CROSSGUARDS = 4;
+
+    public static final Map<String, DeferredItem<Item>> IRON_SWORDS = new HashMap<>();
+
+    static {
+        for (int h = 1; h <= IRON_SWORD_HILTS; h++) {
+            for (int b = 1; b <= IRON_SWORD_BLADES; b++) {
+                for (int c = 1; c <= IRON_SWORD_CROSSGUARDS; c++) {
+                    String name = "iron_sword_h" + h + "_b" + b + "_c" + c;
+                    IRON_SWORDS.put(name, ITEMS.registerItem(name,
+                            properties -> new LevelRequiredSwordItem(
+                                    ToolMaterial.IRON, 9, -2.6F, properties,
+                                    WeaponRequirements.TWO_HANDED)));
+                }
+            }
+        }
+    }
     public static final DeferredItem<Item> IRON_LONGSWORD = ITEMS.registerItem("iron_longsword",
             properties -> new LevelRequiredSwordItem(ToolMaterial.IRON, 9, -2.6F, properties, WeaponRequirements.TWO_HANDED));
     public static final DeferredItem<Item> IRON_SPEAR = ITEMS.registerItem("iron_spear",
@@ -527,6 +548,28 @@ public class ModItems {
             properties -> new LevelRequiredSwordItem(ToolMaterial.IRON, 4, -1.5F, properties, WeaponRequirements.SHORT_BLADE));
     public static final DeferredItem<Item> IRON_BATTLEAXE = ITEMS.registerItem("iron_battleaxe",
             properties -> new LevelRequiredSwordItem(ToolMaterial.IRON, 10, -3F, properties, WeaponRequirements.ONE_HANDED));
+
+
+    // STEEL WEAPONS
+    private static final int STEEL_SWORD_HILTS       = 6;
+    private static final int STEEL_SWORD_BLADES      = 3;
+    private static final int STEEL_SWORD_CROSSGUARDS = 12;
+
+    public static final Map<String, DeferredItem<Item>> STEEL_SWORDS = new HashMap<>();
+
+    static {
+        for (int h = 1; h <= STEEL_SWORD_HILTS; h++) {
+            for (int b = 1; b <= STEEL_SWORD_BLADES; b++) {
+                for (int c = 1; c <= STEEL_SWORD_CROSSGUARDS; c++) {
+                    String name = "steel_sword_h" + h + "_b" + b + "_c" + c;
+                    STEEL_SWORDS.put(name, ITEMS.registerItem(name,
+                            properties -> new LevelRequiredSwordItem(
+                                    ModToolTiers.STEEL, 9, -2.6F, properties,
+                                    WeaponRequirements.TWO_HANDED)));
+                }
+            }
+        }
+    }
 
     // STEEL WEAPONS
     public static final DeferredItem<Item> STEEL_SWORD = ITEMS.registerItem("steel_sword",
@@ -546,6 +589,27 @@ public class ModItems {
     public static final DeferredItem<Item> STEEL_HALBERD = ITEMS.registerItem("steel_halberd",
             properties -> new LevelRequiredSwordItem(ModToolTiers.STEEL, 9, -3.2F, properties, WeaponRequirements.POLEARM));
 
+
+    // NOBLE WEAPONS
+    private static final int NOBLE_SWORD_HILTS       = 6;
+    private static final int NOBLE_SWORD_BLADES      = 3;
+    private static final int NOBLE_SWORD_CROSSGUARDS = 80;
+
+    public static final Map<String, DeferredItem<Item>> NOBLE_SWORDS = new HashMap<>();
+
+    static {
+        for (int h = 1; h <= NOBLE_SWORD_HILTS; h++) {
+            for (int b = 1; b <= NOBLE_SWORD_BLADES; b++) {
+                for (int c = 1; c <= NOBLE_SWORD_CROSSGUARDS; c++) {
+                    String name = "noble_sword_h" + h + "_b" + b + "_c" + c;
+                    NOBLE_SWORDS.put(name, ITEMS.registerItem(name,
+                            properties -> new LevelRequiredSwordItem(
+                                    ModToolTiers.NOBLE, 9, -2.6F, properties,
+                                    WeaponRequirements.TWO_HANDED)));
+                }
+            }
+        }
+    }
     // NOBLE WEAPONS
     public static final DeferredItem<Item> NOBLE_LONGSWORD = ITEMS.registerItem("noble_longsword",
             properties -> new LevelRequiredSwordItem(ModToolTiers.NOBLE, 7, -2.6F, properties, WeaponRequirements.TWO_HANDED));
@@ -986,6 +1050,12 @@ public class ModItems {
             properties -> new Item(properties.food(ModFoods.LENTILS)));
     public static final DeferredItem<Item> SQUASH = ITEMS.registerItem("squash",
             properties -> new Item(properties.food(ModFoods.SQUASH)));
+
+    // ── VEGETABLE PIE ──────────────────────────────────────────────
+    public static final DeferredItem<Item> SPINACH_PIE = ITEMS.registerItem("spinach_pie",
+            properties -> new Item(properties.food(ModFoods.SPINACH_PIE)));
+
+
 
     // ── FRUITS ──────────────────────────────────────────────────
     public static final DeferredItem<Item> CHERRY = ITEMS.registerItem("cherry",

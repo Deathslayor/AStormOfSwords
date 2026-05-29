@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "agotmod:item/vegetable_pie_bottom_template",
+    "layer1": "agotmod:item/vegetable_pie_top_template"
+  }
+}

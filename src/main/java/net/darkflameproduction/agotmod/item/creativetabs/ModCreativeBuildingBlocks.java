@@ -7,7 +7,9 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -171,6 +173,13 @@ public class ModCreativeBuildingBlocks {
                         pOutput.accept(ModBLocks.CHARRED_TRAPDOOR.get());
                         pOutput.accept(ModItems.CHARRED_SIGN.get());
                         pOutput.accept(ModItems.CHARRED_HANGING_SIGN.get());
+
+                        for (String color : ModBLocks.WATTLE_DAUB_COLORS.keySet()) {
+                            pOutput.accept(ModBLocks.WATTLE_AND_DAUB_PLAIN.get(color).get());
+                            for (DeferredBlock<Block> block : ModBLocks.WATTLE_AND_DAUB_VARIANTS.get(color).values()) {
+                                pOutput.accept(block.get());
+                            }
+                        }
 
 
                         // Handle all other wood types with map-based access

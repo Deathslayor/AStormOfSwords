@@ -1,9 +1,10 @@
-// 1.21.3	2026-05-24T14:22:30.5874062	Tags for minecraft:block mod id agotmod
+// 1.21.3	2026-05-29T13:18:22.3416582	Tags for minecraft:block mod id agotmod
 7ce4ba32d6429dbf27a7ccd68d70690dbe80eb19 data/agotmod/tags/block/incorrect_for_bronze_tool.json
 a249c46329a41538f49a564e1f14338aaf1be5a0 data/agotmod/tags/block/incorrect_for_steel_tool.json
 a5270b76c9036b19927822a14ea7db103ebf5a0d data/agotmod/tags/block/needs_bronze_tool.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/agotmod/tags/block/needs_dragonglass_tool.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/agotmod/tags/block/needs_steel_tool.json
+13bc19a01a7bc13594c25fc3e0c884b1bc4b025c data/agotmod/tags/block/wattle_and_daub.json
 7697a2db0694279c840d415a6dc0c503cf99679d data/minecraft/tags/block/crops.json
 aa239540a540fded2eb052462a8c6ac88fd2f51b data/minecraft/tags/block/dirt.json
 7fd219ca9712234345cf4658f7c9a3cf52034783 data/minecraft/tags/block/fences.json
@@ -14,7 +15,7 @@ a2787d1e34eb959461d223ed2e8d1c065d9ed99e data/minecraft/tags/block/incorrect_for
 a2787d1e34eb959461d223ed2e8d1c065d9ed99e data/minecraft/tags/block/incorrect_for_stone_tool.json
 a2787d1e34eb959461d223ed2e8d1c065d9ed99e data/minecraft/tags/block/incorrect_for_wooden_tool.json
 be37ff673c59752331fbb415c6625a2dbc2ae48e data/minecraft/tags/block/logs_that_burn.json
-a5fbe1eeec8ae8a84f50a50bdc7b1937110eaa81 data/minecraft/tags/block/mineable/axe.json
+0dac29ab7ceccf72475f6cbb6049d8385a1d6d97 data/minecraft/tags/block/mineable/axe.json
 ce681cbe2b839614141b6a5ee92dcfd8acf55434 data/minecraft/tags/block/mineable/hoe.json
 1adf261eef1c5b7a22511311f4de1196aec93e15 data/minecraft/tags/block/mineable/pickaxe.json
 aec17cd704d1b095ff06303c63da62036cf1470f data/minecraft/tags/block/mineable/shovel.json

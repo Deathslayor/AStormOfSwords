@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
@@ -28,6 +29,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -42,6 +44,21 @@ public class ModBlockStateProvider extends BlockStateProvider {
     // Method to register block states and models
     @Override
     protected void registerStatesAndModels() {
+
+
+        // Variant models 2–24
+        Map<Integer, BlockModelBuilder> variantModels = new HashMap<>();
+        for (int i = 2; i <= 24; i++) {
+            variantModels.put(i, wattleModel("wattle_and_daub" + i + "_base", i));
+        }
+
+        for (String color : ModBLocks.WATTLE_DAUB_COLORS.keySet()) {
+            wattleAndDaubBlock(ModBLocks.WATTLE_AND_DAUB_PLAIN.get(color), 0);
+            for (int i = 2; i <= 24; i++) {
+                wattleAndDaubBlock(ModBLocks.WATTLE_AND_DAUB_VARIANTS.get(color).get(i), i);
+            }
+        }
+
         // ---------------------------(TIN)--------------------------- //
         // Register block states and models for tin-related blocks
         GhostGrassBlock(ModBLocks.GHOST_GRASS_BLOCK.get());
@@ -1981,8 +1998,56 @@ public class ModBlockStateProvider extends BlockStateProvider {
         }
     }
 
+    private BlockModelBuilder wattleModel(String name, int wattleIndex) {
+        BlockModelBuilder builder = models()
+                .getBuilder(name)
+                .parent(models().getExistingFile(mcLoc("block/block")))
+                .renderType("cutout")
+                .texture("particle", modLoc("block/wattle_and_daub1"))
+                .texture("daub",     modLoc("block/wattle_and_daub1"));
 
+        // Element 1 — full cube, daub texture (tinted) on all faces
+        builder.element()
+                .from(0, 0, 0).to(16, 16, 16)
+                .face(Direction.NORTH).uvs(0, 0, 16, 16).texture("#daub").tintindex(0).end()
+                .face(Direction.SOUTH).uvs(0, 0, 16, 16).texture("#daub").tintindex(0).end()
+                .face(Direction.EAST ).uvs(0, 0, 16, 16).texture("#daub").tintindex(0).end()
+                .face(Direction.WEST ).uvs(0, 0, 16, 16).texture("#daub").tintindex(0).end()
+                .face(Direction.UP   ).uvs(0, 0, 16, 16).texture("#daub").tintindex(0).end()
+                .face(Direction.DOWN ).uvs(0, 0, 16, 16).texture("#daub").tintindex(0).end()
+                .end();
 
+        if (wattleIndex > 0) {
+            // Element 2 — side faces only, wattle overlay (no tint)
+            builder.texture("wattle", modLoc("block/wattle_and_daub" + wattleIndex));
+            builder.element()
+                    .from(0, 0, 0).to(16, 16, 16)
+                    .face(Direction.NORTH).uvs(0, 0, 16, 16).texture("#wattle").end()
+                    .face(Direction.SOUTH).uvs(0, 0, 16, 16).texture("#wattle").end()
+                    .face(Direction.EAST ).uvs(0, 0, 16, 16).texture("#wattle").end()
+                    .face(Direction.WEST ).uvs(0, 0, 16, 16).texture("#wattle").end()
+                    .end();
+        }
+
+        return builder;
+    }
+
+    private void wattleAndDaubBlock(DeferredBlock<Block> block, int wattleIndex) {
+        String blockName = BuiltInRegistries.BLOCK.getKey(block.get()).getPath();
+        BlockModelBuilder model = wattleModel(blockName, wattleIndex);
+
+        getVariantBuilder(block.get())
+                .partialState().with(RotatedPillarBlock.AXIS, Direction.Axis.Y)
+                .modelForState().modelFile(model).addModel()
+                .partialState().with(RotatedPillarBlock.AXIS, Direction.Axis.X)
+                .modelForState().modelFile(model).rotationX(90).rotationY(90).addModel()
+                .partialState().with(RotatedPillarBlock.AXIS, Direction.Axis.Z)
+                .modelForState().modelFile(model).rotationX(90).addModel();
+
+        // Same pattern as blockItem() — UncheckedModelFile references the model we just generated
+        simpleBlockItem(block.get(), new ModelFile.UncheckedModelFile(
+                AGoTMod.MOD_ID + ":block/" + blockName));
+    }
 
 
 }

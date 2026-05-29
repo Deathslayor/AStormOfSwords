@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "agotmod:block/wattle_and_daubpurple_9",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "agotmod:block/wattle_and_daubpurple_9"
+    },
+    "axis=z": {
+      "model": "agotmod:block/wattle_and_daubpurple_9",
+      "x": 90
+    }
+  }
+}

@@ -35,6 +35,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import net.neoforged.neoforge.registries.DeferredBlock;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -418,6 +419,13 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 this.dropSelf(set.stairs().get());
                 this.dropSelf(set.slab().get());
                 this.dropSelf(set.wall().get());
+            }
+        }
+
+        for (String color : ModBLocks.WATTLE_DAUB_COLORS.keySet()) {
+            this.dropSelf(ModBLocks.WATTLE_AND_DAUB_PLAIN.get(color).get());
+            for (DeferredBlock<Block> block : ModBLocks.WATTLE_AND_DAUB_VARIANTS.get(color).values()) {
+                this.dropSelf(block.get());
             }
         }
 

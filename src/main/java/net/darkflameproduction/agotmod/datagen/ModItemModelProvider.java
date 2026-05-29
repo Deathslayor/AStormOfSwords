@@ -422,6 +422,30 @@ public class ModItemModelProvider extends ItemModelProvider {
                 new float[]{0.0f, 90.0f, 25.0f}  // firstpersonRotation [x, y, z]
         );
 
+        for (Map.Entry<String, DeferredItem<Item>> entry : ModItems.IRON_SWORDS.entrySet()) {
+            String[] parts = entry.getKey().split("_h|_b|_c");
+            ironSwordItem(entry.getValue(),
+                    Integer.parseInt(parts[1]), Integer.parseInt(parts[2]), Integer.parseInt(parts[3]),
+                    new float[]{0.0f, 6.0f, 1.0f}, new float[]{1.3f, 1.3f, 1.0f}, new float[]{0.0f, 90.0f, 55.0f},
+                    new float[]{0.0f, 3.0f, 0.0f}, new float[]{1.2f, 1.2f, 1.0f}, new float[]{0.0f, 90.0f, 25.0f});
+        }
+
+        for (Map.Entry<String, DeferredItem<Item>> entry : ModItems.STEEL_SWORDS.entrySet()) {
+            String[] parts = entry.getKey().split("_h|_b|_c");
+            steelSwordItem(entry.getValue(),
+                    Integer.parseInt(parts[1]), Integer.parseInt(parts[2]), Integer.parseInt(parts[3]),
+                    new float[]{0.0f, 6.0f, 1.0f}, new float[]{1.3f, 1.3f, 1.0f}, new float[]{0.0f, 90.0f, 55.0f},
+                    new float[]{0.0f, 3.0f, 0.0f}, new float[]{1.2f, 1.2f, 1.0f}, new float[]{0.0f, 90.0f, 25.0f});
+        }
+
+        for (Map.Entry<String, DeferredItem<Item>> entry : ModItems.NOBLE_SWORDS.entrySet()) {
+            String[] parts = entry.getKey().split("_h|_b|_c");
+            nobleSwordItem(entry.getValue(),
+                    Integer.parseInt(parts[1]), Integer.parseInt(parts[2]), Integer.parseInt(parts[3]),
+                    new float[]{0.0f, 6.0f, 1.0f}, new float[]{1.3f, 1.3f, 1.0f}, new float[]{0.0f, 90.0f, 55.0f},
+                    new float[]{0.0f, 3.0f, 0.0f}, new float[]{1.2f, 1.2f, 1.0f}, new float[]{0.0f, 90.0f, 25.0f});
+        }
+
 
         // ---------------------------(TOOLS)--------------------------- //
         handheldItem(ModItems.BRONZE_AXE);
@@ -647,6 +671,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.SQUASH);
         simpleItem(ModItems.TURNIP);
         simpleItem(ModItems.WILD_ONION);
+
+// ── Vegetable Pies ──────────────────────────────────────────────
+        vegetablePie(ModItems.SPINACH_PIE);
+
 
 // ── Fruits ──────────────────────────────────────────────────
         simpleItem(ModItems.APRICOT);
@@ -1822,6 +1850,83 @@ public class ModItemModelProvider extends ItemModelProvider {
                 .texture("layer0", modLoc(texturePath));
     }
 
+    private ItemModelBuilder swordItem(DeferredHolder<Item, Item> item,
+                                       int hilt, int blade, int crossguard,
+                                       String hiltMaterial, String bladeMaterial, String crossguardMaterial,
+                                       float[] thirdpersonTranslation,
+                                       float[] thirdpersonScale,
+                                       float[] thirdpersonRotation,
+                                       float[] firstpersonTranslation,
+                                       float[] firstpersonScale,
+                                       float[] firstpersonRotation) {
+        return withExistingParent(item.getId().getPath(), mcLoc("item/handheld"))
+                .texture("layer0", modLoc("item/sword_hilt_"       + hiltMaterial       + hilt))
+                .texture("layer1", modLoc("item/sword_blade_"      + bladeMaterial      + blade))
+                .texture("layer2", modLoc("item/sword_crossguard_" + crossguardMaterial + crossguard))
+                .transforms()
+                .transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND)
+                .rotation(thirdpersonRotation[0], -Math.abs(thirdpersonRotation[1]), thirdpersonRotation[2])
+                .translation(thirdpersonTranslation[0], thirdpersonTranslation[1], thirdpersonTranslation[2])
+                .scale(thirdpersonScale[0], thirdpersonScale[1], thirdpersonScale[2])
+                .end()
+                .transform(ItemDisplayContext.THIRD_PERSON_LEFT_HAND)
+                .rotation(thirdpersonRotation[0], Math.abs(thirdpersonRotation[1]), -thirdpersonRotation[2])
+                .translation(thirdpersonTranslation[0], thirdpersonTranslation[1], thirdpersonTranslation[2])
+                .scale(thirdpersonScale[0], thirdpersonScale[1], thirdpersonScale[2])
+                .end()
+                .transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND)
+                .rotation(firstpersonRotation[0], -Math.abs(firstpersonRotation[1]), firstpersonRotation[2])
+                .translation(firstpersonTranslation[0], firstpersonTranslation[1], firstpersonTranslation[2])
+                .scale(firstpersonScale[0], firstpersonScale[1], firstpersonScale[2])
+                .end()
+                .transform(ItemDisplayContext.FIRST_PERSON_LEFT_HAND)
+                .rotation(firstpersonRotation[0], Math.abs(firstpersonRotation[1]), -firstpersonRotation[2])
+                .translation(firstpersonTranslation[0], firstpersonTranslation[1], firstpersonTranslation[2])
+                .scale(firstpersonScale[0], firstpersonScale[1], firstpersonScale[2])
+                .end()
+                .transform(ItemDisplayContext.GROUND)
+                .scale(1.0f, 1.0f, 1.0f)
+                .end()
+                .transform(ItemDisplayContext.GUI)
+                .rotation(0, 0, 0)
+                .scale(1.2f, 1.2f, 1.2f)
+                .end()
+                .end();
+    }
+
+// ── Three convenience wrappers ────────────────────────────────────────────
+
+    private ItemModelBuilder ironSwordItem(DeferredHolder<Item, Item> item,
+                                           int hilt, int blade, int crossguard,
+                                           float[] tpTrans, float[] tpScale, float[] tpRot,
+                                           float[] fpTrans, float[] fpScale, float[] fpRot) {
+        return swordItem(item, hilt, blade, crossguard, "iron", "iron", "iron",
+                tpTrans, tpScale, tpRot, fpTrans, fpScale, fpRot);
+    }
+
+    private ItemModelBuilder steelSwordItem(DeferredHolder<Item, Item> item,
+                                            int hilt, int blade, int crossguard,
+                                            float[] tpTrans, float[] tpScale, float[] tpRot,
+                                            float[] fpTrans, float[] fpScale, float[] fpRot) {
+        return swordItem(item, hilt, blade, crossguard, "steel", "steel", "steel",
+                tpTrans, tpScale, tpRot, fpTrans, fpScale, fpRot);
+    }
+
+    private ItemModelBuilder nobleSwordItem(DeferredHolder<Item, Item> item,
+                                            int hilt, int blade, int crossguard,
+                                            float[] tpTrans, float[] tpScale, float[] tpRot,
+                                            float[] fpTrans, float[] fpScale, float[] fpRot) {
+        // noble uses "jeweled" for crossguards
+        return swordItem(item, hilt, blade, crossguard, "noble", "noble", "jeweled",
+                tpTrans, tpScale, tpRot, fpTrans, fpScale, fpRot);
+    }
+
+
+    private ItemModelBuilder vegetablePie(DeferredHolder<Item, Item> item) {
+        return withExistingParent(item.getId().getPath(), mcLoc("item/generated"))
+                .texture("layer0", modLoc("item/vegetable_pie_bottom_template"))
+                .texture("layer1", modLoc("item/vegetable_pie_top_template"));
+    }
 
     private ItemModelBuilder spawnEggItem(DeferredHolder<Item, Item> item) {
         return withExistingParent(item.getId().getPath(),

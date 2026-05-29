@@ -232,6 +232,12 @@ public class ModCreativeFoods {
                         pOutput.accept(ModItems.TURNIP.get());
                         pOutput.accept(ModItems.WILD_ONION.get());
 
+
+// ── Vegetables ──────────────────────────────────────────────
+                        pOutput.accept(ModItems.SPINACH_PIE.get());
+
+
+
 // ── Fruits ──────────────────────────────────────────────────
                         pOutput.accept(ModItems.APRICOT.get());
                         pOutput.accept(ModItems.BLACKBERRY.get());

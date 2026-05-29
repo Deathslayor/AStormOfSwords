@@ -48,14 +48,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.List;
 
 
 // ModBLocks class for registering custom blocks
@@ -153,6 +150,50 @@ public class ModBLocks {
         registerVariants("dripstone",   BlockBehaviour.Properties.ofFullCopy(Blocks.DRIPSTONE_BLOCK).strength(3f),   VALID_DRIPSTONE_INDICES,   DRIPSTONE_VARIANTS);
         registerVariants("packed_ice",  BlockBehaviour.Properties.ofFullCopy(Blocks.PACKED_ICE).strength(3f),        VALID_PACKED_ICE_INDICES,  PACKED_ICE_VARIANTS);
         registerVariants("mud_brick",   BlockBehaviour.Properties.ofFullCopy(Blocks.MUD_BRICKS).strength(3f),        VALID_MUD_BRICK_INDICES,   MUD_BRICK_VARIANTS);
+    }
+
+    public static final Map<String, Integer> WATTLE_DAUB_COLORS = new LinkedHashMap<>();
+    static {
+        WATTLE_DAUB_COLORS.put("white",      0xFFFFFFFF);
+        WATTLE_DAUB_COLORS.put("orange",     0xFFD87F33);
+        WATTLE_DAUB_COLORS.put("magenta",    0xFFB24CD8);
+        WATTLE_DAUB_COLORS.put("light_blue", 0xFF6699D8);
+        WATTLE_DAUB_COLORS.put("yellow",     0xFFE5E533);
+        WATTLE_DAUB_COLORS.put("lime",       0xFF7FCC19);
+        WATTLE_DAUB_COLORS.put("pink",       0xFFF27FA5);
+        WATTLE_DAUB_COLORS.put("gray",       0xFF4C4C4C);
+        WATTLE_DAUB_COLORS.put("light_gray", 0xFF999999);
+        WATTLE_DAUB_COLORS.put("cyan",       0xFF4C7F99);
+        WATTLE_DAUB_COLORS.put("purple",     0xFF7F3FB2);
+        WATTLE_DAUB_COLORS.put("blue",       0xFF334CB2);
+        WATTLE_DAUB_COLORS.put("brown",      0xFF664C33);
+        WATTLE_DAUB_COLORS.put("green",      0xFF667F33);
+        WATTLE_DAUB_COLORS.put("red",        0xFFCC4C4C);
+        WATTLE_DAUB_COLORS.put("black",      0xFF191919);
+    }
+
+    // wattle_and_daub_<color>         — plain (texture 1 only, tinted)
+// wattle_and_daub_<color>_<2-24>  — wattle variants (texture 1 tinted + wattle overlay on sides)
+    public static final Map<String, DeferredBlock<Block>> WATTLE_AND_DAUB_PLAIN    = new HashMap<>();
+    public static final Map<String, Map<Integer, DeferredBlock<Block>>> WATTLE_AND_DAUB_VARIANTS = new HashMap<>();
+
+    static {
+        BlockBehaviour.Properties props = BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(1.5f);
+
+        for (String color : WATTLE_DAUB_COLORS.keySet()) {
+            // plain block
+            WATTLE_AND_DAUB_PLAIN.put(color,
+                    registerBlock("wattle_and_daub" + color, WattleAndDaubBlock::new, props, true));
+
+            // wattle variants 2–24
+            Map<Integer, DeferredBlock<Block>> variants = new HashMap<>();
+            for (int i = 2; i <= 24; i++) {
+                variants.put(i, registerBlock(
+                        "wattle_and_daub" + color + "_" + i,
+                        WattleAndDaubBlock::new, props, true));
+            }
+            WATTLE_AND_DAUB_VARIANTS.put(color, variants);
+        }
     }
 
 

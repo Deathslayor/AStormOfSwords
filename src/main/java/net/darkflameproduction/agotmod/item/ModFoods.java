@@ -8,6 +8,10 @@ import net.minecraft.world.food.FoodProperties;
 // A utility class for defining custom food properties
 public class ModFoods {
 
+    public static final FoodProperties SPINACH_PIE = new FoodProperties.Builder()
+            .nutrition(5) // Amount of hunger restored
+            .saturationModifier(0.8F) // Saturation modifier
+            .build();
 
     // Food properties for horseradish
     public static final FoodProperties HORSERADISH = new FoodProperties.Builder()

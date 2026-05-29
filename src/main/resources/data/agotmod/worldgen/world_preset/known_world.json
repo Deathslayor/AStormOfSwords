@@ -205,8 +205,8 @@
             },
             {
               "biomes": [
-                {"biome": "agotmod:stony_shores", "weight": 0.6},
-                {"biome": "minecraft:stony_shore", "weight": 0.4}
+                {"biome": "agotmod:the_north", "weight": 0.6},
+                {"biome": "agotmod:wolfswood", "weight": 0.4}
               ],
               "color": "#69776f",
               "terrain_modifier": 3.0,

@@ -75,16 +75,22 @@ public class Peasant_Renderer extends GeoEntityRenderer<Peasant_Entity> {
     private static final Map<String, TextureSet> TEXTURE_SETS = new HashMap<>();
 
     static {
+        // northernpeasant texture counts per category:
+        // male:         body=6, eyes=1, legs=1, shirt=1, hair=24, boots=2, tunic=4, hood=3
+        // female:       body=6, eyes=1, legs=1, shirt=1, hair=9,  boots=2, tunic=4, hood=4
+        // male child:   body=3, eyes=1, legs=1, shirt=1, hair=7,  boots=2, tunic=4, hood=1
+        // female child: not yet — all 1 (fallback to first texture)
         buildTextureSet("northernpeasant",
-                6, 1, 1, 1, 24, 2, 4, 3,
-                6, 1, 1, 1,  1, 2, 4, 1,
-                3, 1, 1, 1,  7, 2, 4, 1,
-                1, 1, 1, 1,  1, 1, 1, 1);
+                6, 1, 1, 1, 24, 2, 4, 3,   // male
+                6, 1, 1, 2,  9, 2, 6, 6,   // female
+                3, 1, 1, 1,  7, 2, 4, 1,   // male child
+                3, 1, 1, 1,  6, 0, 3, 0);  // female child (body=3,eyes=1,legs=1,shirt=1,hair=6,boots=fallback,tunic=3,hood=fallback)
+
         buildTextureSet("wildlingpeasant",
                 6, 1, 1, 1, 24, 2, 4, 3,
-                6, 1, 1, 1,  1, 2, 4, 1,
+                6, 1, 1, 2,  9, 2, 6, 6,
                 3, 1, 1, 1,  7, 2, 4, 1,
-                1, 1, 1, 1,  1, 1, 1, 1);
+                3, 1, 1, 1,  6, 0, 3, 0);
     }
 
     private static void buildTextureSet(String folder,
@@ -95,38 +101,47 @@ public class Peasant_Renderer extends GeoEntityRenderer<Peasant_Entity> {
 
         String base = "textures/entity/" + folder + "/";
         TextureSet ts = new TextureSet();
-        ts.mBody  = build(base, "body",             mBody);
-        ts.mEyes  = build(base, "eyes",             mEyes);
-        ts.mLegs  = build(base, "legs",             mLegs);
-        ts.mShirt = build(base, "shirt",            mShirt);
-        ts.mHair  = build(base, "hair",             mHair);
-        ts.mBoots = build(base, "boots",            mBoots);
-        ts.mTunic = build(base, "tunic",            mTunic);
-        ts.mHood  = build(base, "hood",             mHood);
-        ts.fBody  = build(base, "body_woman",       fBody);
-        ts.fEyes  = ts.mEyes;
-        ts.fLegs  = build(base, "legs_woman",       fLegs);
-        ts.fShirt = build(base, "shirt_woman",      fShirt);
-        ts.fHair  = build(base, "hair_woman",       fHair);
-        ts.fBoots = build(base, "boots_woman",      fBoots);
-        ts.fTunic = build(base, "tunic_woman",      fTunic);
-        ts.fHood  = build(base, "hood_woman",       fHood);
-        ts.cmBody  = build(base, "body_child",       cmBody);
-        ts.cmEyes  = build(base, "eyes_child",       cmEyes);
-        ts.cmLegs  = build(base, "legs_child",       cmLegs);
-        ts.cmShirt = build(base, "shirt_child",      cmShirt);
-        ts.cmHair  = build(base, "hair_child",       cmHair);
-        ts.cmBoots = build(base, "boots_child",      cmBoots);
-        ts.cmTunic = build(base, "tunic_child",      cmTunic);
-        ts.cmHood  = build(base, "hood_child",       cmHood);
-        ts.cfBody  = build(base, "body_woman_child",  cfBody);
-        ts.cfEyes  = build(base, "eyes_woman_child",  cfEyes);
-        ts.cfLegs  = build(base, "legs_woman_child",  cfLegs);
-        ts.cfShirt = build(base, "shirt_woman_child", cfShirt);
-        ts.cfHair  = build(base, "hair_woman_child",  cfHair);
-        ts.cfBoots = build(base, "boots_woman_child", cfBoots);
-        ts.cfTunic = build(base, "tunic_woman_child", cfTunic);
-        ts.cfHood  = build(base, "hood_woman_child",  cfHood);
+
+        // male
+        ts.mBody  = build(base, "body",          mBody);
+        ts.mEyes  = build(base, "eyes",          mEyes);
+        ts.mLegs  = build(base, "legs",          mLegs);
+        ts.mShirt = build(base, "shirt",         mShirt);
+        ts.mHair  = build(base, "hair",          mHair);
+        ts.mBoots = build(base, "boots",         mBoots);
+        ts.mTunic = build(base, "tunic",         mTunic);
+        ts.mHood  = build(base, "hood",          mHood);
+
+        // female
+        ts.fBody  = build(base, "body_woman",    fBody);
+        ts.fEyes  = build(base, "eyes_woman",    fEyes);
+        ts.fLegs  = build(base, "legs_woman",    fLegs);
+        ts.fShirt = build(base, "shirt_woman",   fShirt);
+        ts.fHair  = build(base, "hair_woman",    fHair);
+        ts.fBoots = build(base, "boots_woman",   fBoots);
+        ts.fTunic = build(base, "tunic_woman",   fTunic);
+        ts.fHood  = build(base, "hood_woman",    fHood);
+
+        // male child
+        ts.cmBody  = build(base, "body_child",   cmBody);
+        ts.cmEyes  = build(base, "eyes_child",   cmEyes);
+        ts.cmLegs  = build(base, "legs_child",   cmLegs);
+        ts.cmShirt = build(base, "shirt_child",  cmShirt);
+        ts.cmHair  = build(base, "hair_child",   cmHair);
+        ts.cmBoots = build(base, "boots_child",  cmBoots);
+        ts.cmTunic = build(base, "tunic_child",  cmTunic);
+        ts.cmHood  = build(base, "hood_child",   cmHood);
+
+        // female child — 0 means texture not yet available, falls back to male child
+        ts.cfBody  = cfBody  > 0 ? build(base, "body_woman_child",  cfBody)  : ts.cmBody;
+        ts.cfEyes  = cfEyes  > 0 ? build(base, "eyes_woman_child",  cfEyes)  : ts.cmEyes;
+        ts.cfLegs  = cfLegs  > 0 ? build(base, "legs_woman_child",  cfLegs)  : ts.cmLegs;
+        ts.cfShirt = cfShirt > 0 ? build(base, "shirt_woman_child", cfShirt) : ts.cmShirt;
+        ts.cfHair  = cfHair  > 0 ? build(base, "hair_woman_child",  cfHair)  : ts.cmHair;
+        ts.cfBoots = cfBoots > 0 ? build(base, "boots_woman_child", cfBoots) : ts.cmBoots;  // fallback — no file yet
+        ts.cfTunic = cfTunic > 0 ? build(base, "tunic_woman_child", cfTunic) : ts.cmTunic;
+        ts.cfHood  = cfHood  > 0 ? build(base, "hood_woman_child",  cfHood)  : ts.cmHood;   // fallback — no file yet
+
         TEXTURE_SETS.put(folder, ts);
     }
 
@@ -138,8 +153,8 @@ public class Peasant_Renderer extends GeoEntityRenderer<Peasant_Entity> {
     }
 
     private static class TextureSet {
-        ResourceLocation[] mBody, mEyes, mLegs, mShirt, mHair, mBoots, mTunic, mHood;
-        ResourceLocation[] fBody, fEyes, fLegs, fShirt, fHair, fBoots, fTunic, fHood;
+        ResourceLocation[] mBody,  mEyes,  mLegs,  mShirt,  mHair,  mBoots,  mTunic,  mHood;
+        ResourceLocation[] fBody,  fEyes,  fLegs,  fShirt,  fHair,  fBoots,  fTunic,  fHood;
         ResourceLocation[] cmBody, cmEyes, cmLegs, cmShirt, cmHair, cmBoots, cmTunic, cmHood;
         ResourceLocation[] cfBody, cfEyes, cfLegs, cfShirt, cfHair, cfBoots, cfTunic, cfHood;
     }
@@ -224,8 +239,6 @@ public class Peasant_Renderer extends GeoEntityRenderer<Peasant_Entity> {
         });
     }
 
-    // ── Texture location — reads from synced entity data ─────────────────────
-
     @Override
     public ResourceLocation getTextureLocation(Peasant_Entity entity) {
         TextureSet ts = getTextureSet(entity);
@@ -268,16 +281,20 @@ public class Peasant_Renderer extends GeoEntityRenderer<Peasant_Entity> {
         if (ts == null) return;
 
         if (animatable.isChild()) {
-            if (animatable.isFemale()) renderLayers(poseStack, animatable, model, bufferSource, isReRender, partialTick, packedLight, packedOverlay, animatable, ts.cfEyes, ts.cfHair, ts.cfLegs, ts.cfShirt, ts.cfTunic, ts.cfHood, ts.cfBoots);
-            else                       renderLayers(poseStack, animatable, model, bufferSource, isReRender, partialTick, packedLight, packedOverlay, animatable, ts.cmEyes, ts.cmHair, ts.cmLegs, ts.cmShirt, ts.cmTunic, ts.cmHood, ts.cmBoots);
+            if (animatable.isFemale())
+                renderLayers(poseStack, animatable, model, bufferSource, isReRender, partialTick, packedLight, packedOverlay,
+                        animatable, ts.cfEyes, ts.cfHair, ts.cfLegs, ts.cfShirt, ts.cfTunic, ts.cfHood, ts.cfBoots);
+            else
+                renderLayers(poseStack, animatable, model, bufferSource, isReRender, partialTick, packedLight, packedOverlay,
+                        animatable, ts.cmEyes, ts.cmHair, ts.cmLegs, ts.cmShirt, ts.cmTunic, ts.cmHood, ts.cmBoots);
         } else if (animatable.isFemale()) {
-            renderLayers(poseStack, animatable, model, bufferSource, isReRender, partialTick, packedLight, packedOverlay, animatable, ts.fEyes, ts.fHair, ts.fLegs, ts.fShirt, ts.fTunic, ts.fHood, ts.fBoots);
+            renderLayers(poseStack, animatable, model, bufferSource, isReRender, partialTick, packedLight, packedOverlay,
+                    animatable, ts.fEyes, ts.fHair, ts.fLegs, ts.fShirt, ts.fTunic, ts.fHood, ts.fBoots);
         } else {
-            renderLayers(poseStack, animatable, model, bufferSource, isReRender, partialTick, packedLight, packedOverlay, animatable, ts.mEyes, ts.mHair, ts.mLegs, ts.mShirt, ts.mTunic, ts.mHood, ts.mBoots);
+            renderLayers(poseStack, animatable, model, bufferSource, isReRender, partialTick, packedLight, packedOverlay,
+                    animatable, ts.mEyes, ts.mHair, ts.mLegs, ts.mShirt, ts.mTunic, ts.mHood, ts.mBoots);
         }
     }
-
-    // ── Reads all indices from synced entity data (client-safe) ──────────────
 
     private void renderLayers(PoseStack poseStack, Peasant_Entity entity, BakedGeoModel model,
                               MultiBufferSource bufferSource, boolean isReRender, float partialTick,
@@ -287,10 +304,10 @@ public class Peasant_Renderer extends GeoEntityRenderer<Peasant_Entity> {
                               ResourceLocation[] tunic, ResourceLocation[] hood,
                               ResourceLocation[] boots) {
 
-        int eyesColor  = EYES_COLORS     [src.getSyncedEyesColor()  % EYES_COLORS.length];
-        int hairColor  = HAIR_COLORS     [src.getSyncedHairColor()  % HAIR_COLORS.length];
-        int legsColor  = PANTS_COLORS    [src.getSyncedPantsColor() % PANTS_COLORS.length];
-        int shirtColor = SHIRT_COLORS    [src.getSyncedShirtColor() % SHIRT_COLORS.length];
+        int eyesColor  = EYES_COLORS      [src.getSyncedEyesColor()  % EYES_COLORS.length];
+        int hairColor  = HAIR_COLORS      [src.getSyncedHairColor()  % HAIR_COLORS.length];
+        int legsColor  = PANTS_COLORS     [src.getSyncedPantsColor() % PANTS_COLORS.length];
+        int shirtColor = SHIRT_COLORS     [src.getSyncedShirtColor() % SHIRT_COLORS.length];
         int tunicColor = TUNIC_HOOD_COLORS[src.getSyncedTunicColor() % TUNIC_HOOD_COLORS.length];
         int hoodColor  = TUNIC_HOOD_COLORS[src.getSyncedHoodColor()  % TUNIC_HOOD_COLORS.length];
 
@@ -312,9 +329,13 @@ public class Peasant_Renderer extends GeoEntityRenderer<Peasant_Entity> {
                     tunicColor, tunic[src.getSyncedTunic() % tunic.length]);
         }
 
-        if (entity.getItemBySlot(EquipmentSlot.HEAD).isEmpty())
-            renderLayer(poseStack, entity, model, bufferSource, isReRender, partialTick, packedLight, packedOverlay,
-                    hoodColor, hood[src.getSyncedHood() % hood.length]);
+        if (entity.getItemBySlot(EquipmentSlot.HEAD).isEmpty()) {
+            // Females have a 1/2 chance of wearing a hood, determined by UUID so it's stable per entity
+            boolean wearHood = !entity.isFemale() || (entity.getUUID().getLeastSignificantBits() & 1) == 0;
+            if (wearHood)
+                renderLayer(poseStack, entity, model, bufferSource, isReRender, partialTick, packedLight, packedOverlay,
+                        hoodColor, hood[src.getSyncedHood() % hood.length]);
+        }
 
         if (entity.getItemBySlot(EquipmentSlot.FEET).isEmpty())
             renderLayer(poseStack, entity, model, bufferSource, isReRender, partialTick, packedLight, packedOverlay,

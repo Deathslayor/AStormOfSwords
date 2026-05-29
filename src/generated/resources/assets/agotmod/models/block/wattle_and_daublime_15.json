@@ -1,0 +1,75 @@
+{
+  "parent": "minecraft:block/block",
+  "elements": [
+    {
+      "faces": {
+        "down": {
+          "texture": "#daub",
+          "tintindex": 0
+        },
+        "east": {
+          "texture": "#daub",
+          "tintindex": 0
+        },
+        "north": {
+          "texture": "#daub",
+          "tintindex": 0
+        },
+        "south": {
+          "texture": "#daub",
+          "tintindex": 0
+        },
+        "up": {
+          "texture": "#daub",
+          "tintindex": 0
+        },
+        "west": {
+          "texture": "#daub",
+          "tintindex": 0
+        }
+      },
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "faces": {
+        "east": {
+          "texture": "#wattle"
+        },
+        "north": {
+          "texture": "#wattle"
+        },
+        "south": {
+          "texture": "#wattle"
+        },
+        "west": {
+          "texture": "#wattle"
+        }
+      },
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ]
+    }
+  ],
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "daub": "agotmod:block/wattle_and_daub1",
+    "particle": "agotmod:block/wattle_and_daub1",
+    "wattle": "agotmod:block/wattle_and_daub15"
+  }
+}

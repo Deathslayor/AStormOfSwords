@@ -38,12 +38,17 @@ public class ModCreativeWeapons {
                         pOutput.accept(ModItems.BRONZE_BATTLEAXE.get());
 
 
+                        ModItems.IRON_SWORDS.values().forEach(sword -> pOutput.accept(sword.get()));
+
                         pOutput.accept(ModItems.IRON_LONGSWORD.get());
                         pOutput.accept(ModItems.IRON_SPEAR.get());
                         pOutput.accept(ModItems.IRON_PIKE.get());
                         pOutput.accept(ModItems.IRON_DAGGER.get());
                         pOutput.accept(ModItems.IRON_MACE.get());
                         pOutput.accept(ModItems.IRON_BATTLEAXE.get());
+
+                        ModItems.STEEL_SWORDS.values().forEach(sword -> pOutput.accept(sword.get()));
+
 
                         pOutput.accept(ModItems.STEEL_SWORD.get());
                         pOutput.accept(ModItems.STEEL_LONGSWORD.get());
@@ -53,6 +58,8 @@ public class ModCreativeWeapons {
                         pOutput.accept(ModItems.STEEL_MACE.get());
                         pOutput.accept(ModItems.STEEL_BATTLEAXE.get());
                         pOutput.accept(ModItems.STEEL_HALBERD.get());
+
+                        ModItems.NOBLE_SWORDS.values().forEach(sword -> pOutput.accept(sword.get()));
 
                         pOutput.accept(ModItems.NOBLE_LONGSWORD.get());
                         pOutput.accept(ModItems.NOBLE_SPEAR.get());

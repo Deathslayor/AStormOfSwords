@@ -17,6 +17,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -264,6 +265,22 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
 
 
         ;
+
+
+        List<Block> allWattleBlocks = new ArrayList<>();
+        for (String color : ModBLocks.WATTLE_DAUB_COLORS.keySet()) {
+            allWattleBlocks.add(ModBLocks.WATTLE_AND_DAUB_PLAIN.get(color).get());
+            ModBLocks.WATTLE_AND_DAUB_VARIANTS.get(color).values()
+                    .forEach(b -> allWattleBlocks.add(b.get()));
+        }
+
+        this.tag(ModTags.Blocks.WATTLE_AND_DAUB)
+                .add(allWattleBlocks.toArray(new Block[0]));
+
+        this.tag(BlockTags.MINEABLE_WITH_AXE)
+                .add(allWattleBlocks.toArray(new Block[0]));
+
+
 
 
 
