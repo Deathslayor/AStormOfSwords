@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": "agotmod:dragons_breath"
+    "B": {
+      "item": "agotmod:dragons_breath"
+    }
   },
   "pattern": [
     "B",

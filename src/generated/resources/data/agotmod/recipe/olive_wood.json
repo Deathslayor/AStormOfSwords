@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:olive_log",
-    "agotmod:olive_log",
-    "agotmod:olive_log",
-    "agotmod:olive_log"
+    {
+      "item": "agotmod:olive_log"
+    },
+    {
+      "item": "agotmod:olive_log"
+    },
+    {
+      "item": "agotmod:olive_log"
+    },
+    {
+      "item": "agotmod:olive_log"
+    }
   ],
   "result": {
     "count": 3,

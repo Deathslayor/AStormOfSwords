@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": "minecraft:coarse_dirt"
+    "B": {
+      "item": "minecraft:coarse_dirt"
+    }
   },
   "pattern": [
     "B  ",

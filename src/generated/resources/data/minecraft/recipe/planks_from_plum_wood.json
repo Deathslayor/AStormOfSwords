@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:plum_wood"
+    {
+      "item": "agotmod:plum_wood"
+    }
   ],
   "result": {
     "count": 4,

@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:ironwood_log_stripped",
-    "agotmod:ironwood_log_stripped",
-    "agotmod:ironwood_log_stripped",
-    "agotmod:ironwood_log_stripped"
+    {
+      "item": "agotmod:ironwood_log_stripped"
+    },
+    {
+      "item": "agotmod:ironwood_log_stripped"
+    },
+    {
+      "item": "agotmod:ironwood_log_stripped"
+    },
+    {
+      "item": "agotmod:ironwood_log_stripped"
+    }
   ],
   "result": {
     "count": 3,

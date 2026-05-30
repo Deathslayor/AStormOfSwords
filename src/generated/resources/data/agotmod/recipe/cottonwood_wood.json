@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:cottonwood_log",
-    "agotmod:cottonwood_log",
-    "agotmod:cottonwood_log",
-    "agotmod:cottonwood_log"
+    {
+      "item": "agotmod:cottonwood_log"
+    },
+    {
+      "item": "agotmod:cottonwood_log"
+    },
+    {
+      "item": "agotmod:cottonwood_log"
+    },
+    {
+      "item": "agotmod:cottonwood_log"
+    }
   ],
   "result": {
     "count": 3,

@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:maple_log_stripped",
-    "agotmod:maple_log_stripped",
-    "agotmod:maple_log_stripped",
-    "agotmod:maple_log_stripped"
+    {
+      "item": "agotmod:maple_log_stripped"
+    },
+    {
+      "item": "agotmod:maple_log_stripped"
+    },
+    {
+      "item": "agotmod:maple_log_stripped"
+    },
+    {
+      "item": "agotmod:maple_log_stripped"
+    }
   ],
   "result": {
     "count": 3,

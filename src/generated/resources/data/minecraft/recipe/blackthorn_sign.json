@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": "minecraft:stick",
-    "B": "agotmod:blackthorn_planks"
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "B": {
+      "item": "agotmod:blackthorn_planks"
+    }
   },
   "pattern": [
     "BBB",

@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:pear_log"
+    {
+      "item": "agotmod:pear_log"
+    }
   ],
   "result": {
     "count": 4,

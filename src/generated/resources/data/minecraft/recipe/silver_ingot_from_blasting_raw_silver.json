@@ -4,7 +4,9 @@
   "cookingtime": 100,
   "experience": 0.25,
   "group": "silver",
-  "ingredient": "agotmod:raw_silver",
+  "ingredient": {
+    "item": "agotmod:raw_silver"
+  },
   "result": {
     "count": 1,
     "id": "agotmod:silver_ingot"

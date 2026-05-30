@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": "agotmod:cotton"
+    "A": {
+      "item": "agotmod:cotton"
+    }
   },
   "pattern": [
     "A"

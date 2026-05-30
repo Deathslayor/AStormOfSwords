@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:bronze_block"
+    {
+      "item": "agotmod:bronze_block"
+    }
   ],
   "result": {
     "count": 9,

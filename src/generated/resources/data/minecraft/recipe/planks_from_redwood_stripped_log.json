@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:redwood_log_stripped"
+    {
+      "item": "agotmod:redwood_log_stripped"
+    }
   ],
   "result": {
     "count": 4,

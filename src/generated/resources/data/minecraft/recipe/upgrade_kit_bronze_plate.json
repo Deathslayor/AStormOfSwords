@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": "minecraft:bundle",
-    "C": "agotmod:cloth",
-    "H": "agotmod:hammer",
-    "P": "agotmod:bronze_plate"
+    "B": {
+      "item": "minecraft:bundle"
+    },
+    "C": {
+      "item": "agotmod:cloth"
+    },
+    "H": {
+      "item": "agotmod:hammer"
+    },
+    "P": {
+      "item": "agotmod:bronze_plate"
+    }
   },
   "pattern": [
     "PPP",

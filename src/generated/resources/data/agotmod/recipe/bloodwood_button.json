@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "B": "agotmod:bloodwood_planks"
+    "B": {
+      "item": "agotmod:bloodwood_planks"
+    }
   },
   "pattern": [
     "B"

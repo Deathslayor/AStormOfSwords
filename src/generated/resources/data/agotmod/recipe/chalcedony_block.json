@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": "agotmod:chalcedony"
+    "B": {
+      "item": "agotmod:chalcedony"
+    }
   },
   "pattern": [
     "BBB",

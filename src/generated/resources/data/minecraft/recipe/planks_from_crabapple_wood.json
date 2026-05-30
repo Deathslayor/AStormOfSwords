@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:crabapple_wood"
+    {
+      "item": "agotmod:crabapple_wood"
+    }
   ],
   "result": {
     "count": 4,

@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:beech_log_stripped",
-    "agotmod:beech_log_stripped",
-    "agotmod:beech_log_stripped",
-    "agotmod:beech_log_stripped"
+    {
+      "item": "agotmod:beech_log_stripped"
+    },
+    {
+      "item": "agotmod:beech_log_stripped"
+    },
+    {
+      "item": "agotmod:beech_log_stripped"
+    },
+    {
+      "item": "agotmod:beech_log_stripped"
+    }
   ],
   "result": {
     "count": 3,

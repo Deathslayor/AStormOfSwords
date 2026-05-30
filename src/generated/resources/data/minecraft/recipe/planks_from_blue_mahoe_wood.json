@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:blue_mahoe_wood"
+    {
+      "item": "agotmod:blue_mahoe_wood"
+    }
   ],
   "result": {
     "count": 4,

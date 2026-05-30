@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:fig_wood"
+    {
+      "item": "agotmod:fig_wood"
+    }
   ],
   "result": {
     "count": 4,

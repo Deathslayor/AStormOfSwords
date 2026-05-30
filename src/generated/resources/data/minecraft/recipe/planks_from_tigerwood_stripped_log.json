@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:tigerwood_log_stripped"
+    {
+      "item": "agotmod:tigerwood_log_stripped"
+    }
   ],
   "result": {
     "count": 4,

@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:tin_ingot",
-    "minecraft:copper_ingot"
+    {
+      "item": "agotmod:tin_ingot"
+    },
+    {
+      "item": "minecraft:copper_ingot"
+    }
   ],
   "result": {
     "count": 1,

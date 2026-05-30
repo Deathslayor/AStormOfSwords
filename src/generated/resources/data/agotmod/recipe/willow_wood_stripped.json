@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:willow_log_stripped",
-    "agotmod:willow_log_stripped",
-    "agotmod:willow_log_stripped",
-    "agotmod:willow_log_stripped"
+    {
+      "item": "agotmod:willow_log_stripped"
+    },
+    {
+      "item": "agotmod:willow_log_stripped"
+    },
+    {
+      "item": "agotmod:willow_log_stripped"
+    },
+    {
+      "item": "agotmod:willow_log_stripped"
+    }
   ],
   "result": {
     "count": 3,

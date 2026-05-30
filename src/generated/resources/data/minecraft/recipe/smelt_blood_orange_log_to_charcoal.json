@@ -3,7 +3,9 @@
   "category": "misc",
   "cookingtime": 200,
   "experience": 0.15,
-  "ingredient": "agotmod:blood_orange_log",
+  "ingredient": {
+    "item": "agotmod:blood_orange_log"
+  },
   "result": {
     "count": 1,
     "id": "minecraft:charcoal"

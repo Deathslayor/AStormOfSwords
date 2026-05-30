@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:wormtree_wood"
+    {
+      "item": "agotmod:wormtree_wood"
+    }
   ],
   "result": {
     "count": 4,

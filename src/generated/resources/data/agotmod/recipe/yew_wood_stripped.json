@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:yew_log_stripped",
-    "agotmod:yew_log_stripped",
-    "agotmod:yew_log_stripped",
-    "agotmod:yew_log_stripped"
+    {
+      "item": "agotmod:yew_log_stripped"
+    },
+    {
+      "item": "agotmod:yew_log_stripped"
+    },
+    {
+      "item": "agotmod:yew_log_stripped"
+    },
+    {
+      "item": "agotmod:yew_log_stripped"
+    }
   ],
   "result": {
     "count": 3,

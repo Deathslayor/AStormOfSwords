@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:hawthorn_wood"
+    {
+      "item": "agotmod:hawthorn_wood"
+    }
   ],
   "result": {
     "count": 4,

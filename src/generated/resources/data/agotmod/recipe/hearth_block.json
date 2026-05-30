@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": "minecraft:charcoal",
-    "O": "agotmod:peat"
+    "B": {
+      "item": "minecraft:charcoal"
+    },
+    "O": {
+      "item": "agotmod:peat"
+    }
   },
   "pattern": [
     "BB",

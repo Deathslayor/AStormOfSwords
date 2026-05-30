@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:silver_block"
+    {
+      "item": "agotmod:silver_block"
+    }
   ],
   "result": {
     "count": 9,

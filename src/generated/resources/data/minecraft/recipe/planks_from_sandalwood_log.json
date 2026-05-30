@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:sandalwood_log"
+    {
+      "item": "agotmod:sandalwood_log"
+    }
   ],
   "result": {
     "count": 4,

@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "S": "agotmod:strawberry"
+    "S": {
+      "item": "agotmod:strawberry"
+    }
   },
   "pattern": [
     "S",

@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": "minecraft:chain",
-    "B": "agotmod:goldenheart_log_stripped"
+    "#": {
+      "item": "minecraft:chain"
+    },
+    "B": {
+      "item": "agotmod:goldenheart_log_stripped"
+    }
   },
   "pattern": [
     "# #",

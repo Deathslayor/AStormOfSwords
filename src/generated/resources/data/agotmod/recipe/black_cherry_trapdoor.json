@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "B": "agotmod:black_cherry_planks"
+    "B": {
+      "item": "agotmod:black_cherry_planks"
+    }
   },
   "pattern": [
     "BBB",

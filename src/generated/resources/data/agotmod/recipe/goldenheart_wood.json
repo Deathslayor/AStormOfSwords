@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:goldenheart_log",
-    "agotmod:goldenheart_log",
-    "agotmod:goldenheart_log",
-    "agotmod:goldenheart_log"
+    {
+      "item": "agotmod:goldenheart_log"
+    },
+    {
+      "item": "agotmod:goldenheart_log"
+    },
+    {
+      "item": "agotmod:goldenheart_log"
+    },
+    {
+      "item": "agotmod:goldenheart_log"
+    }
   ],
   "result": {
     "count": 3,

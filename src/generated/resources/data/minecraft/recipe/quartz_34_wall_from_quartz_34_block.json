@@ -1,6 +1,8 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "agotmod:quartz_34_block",
+  "ingredient": {
+    "item": "agotmod:quartz_34_block"
+  },
   "result": {
     "count": 1,
     "id": "agotmod:quartz_34_wall"

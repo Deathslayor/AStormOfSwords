@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:sycamore_log_stripped",
-    "agotmod:sycamore_log_stripped",
-    "agotmod:sycamore_log_stripped",
-    "agotmod:sycamore_log_stripped"
+    {
+      "item": "agotmod:sycamore_log_stripped"
+    },
+    {
+      "item": "agotmod:sycamore_log_stripped"
+    },
+    {
+      "item": "agotmod:sycamore_log_stripped"
+    },
+    {
+      "item": "agotmod:sycamore_log_stripped"
+    }
   ],
   "result": {
     "count": 3,

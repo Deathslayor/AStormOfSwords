@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:pomegranate_log",
-    "agotmod:pomegranate_log",
-    "agotmod:pomegranate_log",
-    "agotmod:pomegranate_log"
+    {
+      "item": "agotmod:pomegranate_log"
+    },
+    {
+      "item": "agotmod:pomegranate_log"
+    },
+    {
+      "item": "agotmod:pomegranate_log"
+    },
+    {
+      "item": "agotmod:pomegranate_log"
+    }
   ],
   "result": {
     "count": 3,

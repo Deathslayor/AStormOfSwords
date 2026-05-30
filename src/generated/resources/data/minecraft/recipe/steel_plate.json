@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "H": "agotmod:hammer",
-    "S": "agotmod:steel_ingot"
+    "H": {
+      "item": "agotmod:hammer"
+    },
+    "S": {
+      "item": "agotmod:steel_ingot"
+    }
   },
   "pattern": [
     "HS ",

@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:pecan_log",
-    "agotmod:pecan_log",
-    "agotmod:pecan_log",
-    "agotmod:pecan_log"
+    {
+      "item": "agotmod:pecan_log"
+    },
+    {
+      "item": "agotmod:pecan_log"
+    },
+    {
+      "item": "agotmod:pecan_log"
+    },
+    {
+      "item": "agotmod:pecan_log"
+    }
   ],
   "result": {
     "count": 3,

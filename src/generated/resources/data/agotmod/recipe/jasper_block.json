@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": "agotmod:jasper"
+    "B": {
+      "item": "agotmod:jasper"
+    }
   },
   "pattern": [
     "BBB",

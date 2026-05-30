@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:myrrh_log_stripped",
-    "agotmod:myrrh_log_stripped",
-    "agotmod:myrrh_log_stripped",
-    "agotmod:myrrh_log_stripped"
+    {
+      "item": "agotmod:myrrh_log_stripped"
+    },
+    {
+      "item": "agotmod:myrrh_log_stripped"
+    },
+    {
+      "item": "agotmod:myrrh_log_stripped"
+    },
+    {
+      "item": "agotmod:myrrh_log_stripped"
+    }
   ],
   "result": {
     "count": 3,

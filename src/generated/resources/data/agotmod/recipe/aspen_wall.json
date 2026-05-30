@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": "agotmod:aspen_planks"
+    "B": {
+      "item": "agotmod:aspen_planks"
+    }
   },
   "pattern": [
     "BBB",

@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": "agotmod:forget_me_not"
+    "B": {
+      "item": "agotmod:forget_me_not"
+    }
   },
   "pattern": [
     "B",

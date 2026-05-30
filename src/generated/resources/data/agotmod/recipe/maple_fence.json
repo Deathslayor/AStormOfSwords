@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": "minecraft:stick",
-    "B": "agotmod:maple_planks"
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "B": {
+      "item": "agotmod:maple_planks"
+    }
   },
   "pattern": [
     "B#B",

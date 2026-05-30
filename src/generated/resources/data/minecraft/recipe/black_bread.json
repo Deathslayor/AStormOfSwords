@@ -3,9 +3,15 @@
   "category": "misc",
   "key": {
     "W": [
-      "minecraft:wheat",
-      "agotmod:barley",
-      "agotmod:oat"
+      {
+        "item": "minecraft:wheat"
+      },
+      {
+        "item": "agotmod:barley"
+      },
+      {
+        "item": "agotmod:oat"
+      }
     ]
   },
   "pattern": [

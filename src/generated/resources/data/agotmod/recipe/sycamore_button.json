@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "B": "agotmod:sycamore_planks"
+    "B": {
+      "item": "agotmod:sycamore_planks"
+    }
   },
   "pattern": [
     "B"

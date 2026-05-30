@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": "minecraft:acacia_planks"
+    "B": {
+      "item": "minecraft:acacia_planks"
+    }
   },
   "pattern": [
     "BBB",

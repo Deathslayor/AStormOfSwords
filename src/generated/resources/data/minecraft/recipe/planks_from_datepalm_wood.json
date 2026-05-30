@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:datepalm_wood"
+    {
+      "item": "agotmod:datepalm_wood"
+    }
   ],
   "result": {
     "count": 4,

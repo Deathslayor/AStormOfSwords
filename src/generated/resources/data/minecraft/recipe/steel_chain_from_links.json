@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "H": "agotmod:hammer",
-    "L": "agotmod:steel_chain_link"
+    "H": {
+      "item": "agotmod:hammer"
+    },
+    "L": {
+      "item": "agotmod:steel_chain_link"
+    }
   },
   "pattern": [
     " L ",

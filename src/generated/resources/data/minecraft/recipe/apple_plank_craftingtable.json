@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": "agotmod:apple_planks"
+    "B": {
+      "item": "agotmod:apple_planks"
+    }
   },
   "pattern": [
     "BB",

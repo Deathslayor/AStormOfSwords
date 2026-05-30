@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": "minecraft:chain",
-    "B": "agotmod:blue_mahoe_log_stripped"
+    "#": {
+      "item": "minecraft:chain"
+    },
+    "B": {
+      "item": "agotmod:blue_mahoe_log_stripped"
+    }
   },
   "pattern": [
     "# #",

@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": "minecraft:spruce_planks"
+    "B": {
+      "item": "minecraft:spruce_planks"
+    }
   },
   "pattern": [
     "BBB",

@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:white_cherry_wood"
+    {
+      "item": "agotmod:white_cherry_wood"
+    }
   ],
   "result": {
     "count": 4,

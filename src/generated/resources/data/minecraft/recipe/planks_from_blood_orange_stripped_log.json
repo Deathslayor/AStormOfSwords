@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:blood_orange_log_stripped"
+    {
+      "item": "agotmod:blood_orange_log_stripped"
+    }
   ],
   "result": {
     "count": 4,

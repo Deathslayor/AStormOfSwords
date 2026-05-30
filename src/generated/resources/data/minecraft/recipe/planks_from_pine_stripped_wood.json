@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:pine_wood_stripped"
+    {
+      "item": "agotmod:pine_wood_stripped"
+    }
   ],
   "result": {
     "count": 4,

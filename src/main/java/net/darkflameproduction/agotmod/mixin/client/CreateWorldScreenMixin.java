@@ -23,7 +23,7 @@ public class CreateWorldScreenMixin {
             );
 
     @Redirect(
-            method = "openFresh(Lnet/minecraft/client/Minecraft;Lnet/minecraft/client/gui/screens/Screen;Lnet/minecraft/client/gui/screens/worldselection/CreateWorldCallback;)V",
+            method = "openFresh(Lnet/minecraft/client/Minecraft;Lnet/minecraft/client/gui/screens/Screen;)V",
             at = @At(
                     value = "FIELD",
                     opcode = Opcodes.GETSTATIC,

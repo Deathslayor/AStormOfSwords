@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:chestnut_wood"
+    {
+      "item": "agotmod:chestnut_wood"
+    }
   ],
   "result": {
     "count": 4,

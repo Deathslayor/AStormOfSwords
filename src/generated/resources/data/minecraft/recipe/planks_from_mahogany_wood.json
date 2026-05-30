@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:mahogany_wood"
+    {
+      "item": "agotmod:mahogany_wood"
+    }
   ],
   "result": {
     "count": 4,

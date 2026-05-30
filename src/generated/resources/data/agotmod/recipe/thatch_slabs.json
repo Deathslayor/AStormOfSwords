@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": "agotmod:thatch_slabs"
+    "B": {
+      "item": "agotmod:thatch_slabs"
+    }
   },
   "pattern": [
     "BBB"

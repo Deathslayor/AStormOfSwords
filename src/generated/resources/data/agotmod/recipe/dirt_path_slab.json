@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": "minecraft:dirt_path"
+    "B": {
+      "item": "minecraft:dirt_path"
+    }
   },
   "pattern": [
     "BBB"

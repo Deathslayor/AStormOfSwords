@@ -3,7 +3,9 @@
   "category": "misc",
   "cookingtime": 200,
   "experience": 0.15,
-  "ingredient": "agotmod:pecan_wood",
+  "ingredient": {
+    "item": "agotmod:pecan_wood"
+  },
   "result": {
     "count": 1,
     "id": "minecraft:charcoal"

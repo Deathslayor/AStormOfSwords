@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:amethyst_block"
+    {
+      "item": "agotmod:amethyst_block"
+    }
   ],
   "result": {
     "count": 9,

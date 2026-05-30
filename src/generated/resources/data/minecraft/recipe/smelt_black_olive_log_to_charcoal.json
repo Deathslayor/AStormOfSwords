@@ -3,7 +3,9 @@
   "category": "misc",
   "cookingtime": 200,
   "experience": 0.15,
-  "ingredient": "agotmod:black_olive_log",
+  "ingredient": {
+    "item": "agotmod:black_olive_log"
+  },
   "result": {
     "count": 1,
     "id": "minecraft:charcoal"

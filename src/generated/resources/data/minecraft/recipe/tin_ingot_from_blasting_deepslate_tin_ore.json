@@ -4,7 +4,9 @@
   "cookingtime": 100,
   "experience": 0.25,
   "group": "tin",
-  "ingredient": "agotmod:deepslate_tin_ore",
+  "ingredient": {
+    "item": "agotmod:deepslate_tin_ore"
+  },
   "result": {
     "count": 1,
     "id": "agotmod:tin_ingot"

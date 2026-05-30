@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:sentinel_log",
-    "agotmod:sentinel_log",
-    "agotmod:sentinel_log",
-    "agotmod:sentinel_log"
+    {
+      "item": "agotmod:sentinel_log"
+    },
+    {
+      "item": "agotmod:sentinel_log"
+    },
+    {
+      "item": "agotmod:sentinel_log"
+    },
+    {
+      "item": "agotmod:sentinel_log"
+    }
   ],
   "result": {
     "count": 3,

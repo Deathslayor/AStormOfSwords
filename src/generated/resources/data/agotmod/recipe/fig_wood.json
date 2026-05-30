@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:fig_log",
-    "agotmod:fig_log",
-    "agotmod:fig_log",
-    "agotmod:fig_log"
+    {
+      "item": "agotmod:fig_log"
+    },
+    {
+      "item": "agotmod:fig_log"
+    },
+    {
+      "item": "agotmod:fig_log"
+    },
+    {
+      "item": "agotmod:fig_log"
+    }
   ],
   "result": {
     "count": 3,

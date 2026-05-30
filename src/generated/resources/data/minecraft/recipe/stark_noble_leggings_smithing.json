@@ -1,10 +1,16 @@
 {
   "type": "minecraft:smithing_transform",
-  "addition": "agotmod:stark_noble_smithing_scroll",
-  "base": "agotmod:stark_plate_leggings",
+  "addition": {
+    "item": "agotmod:stark_noble_smithing_scroll"
+  },
+  "base": {
+    "item": "agotmod:stark_plate_leggings"
+  },
   "result": {
     "count": 1,
     "id": "agotmod:stark_noble_plate_leggings"
   },
-  "template": "agotmod:upgrade_kit_noble"
+  "template": {
+    "item": "agotmod:upgrade_kit_noble"
+  }
 }

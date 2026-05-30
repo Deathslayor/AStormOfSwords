@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "B": "agotmod:wormtree_planks"
+    "B": {
+      "item": "agotmod:wormtree_planks"
+    }
   },
   "pattern": [
     "B"

@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": "minecraft:chain",
-    "B": "agotmod:sandbeggar_log_stripped"
+    "#": {
+      "item": "minecraft:chain"
+    },
+    "B": {
+      "item": "agotmod:sandbeggar_log_stripped"
+    }
   },
   "pattern": [
     "# #",

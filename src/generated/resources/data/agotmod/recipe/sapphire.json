@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:sapphire_block"
+    {
+      "item": "agotmod:sapphire_block"
+    }
   ],
   "result": {
     "count": 9,

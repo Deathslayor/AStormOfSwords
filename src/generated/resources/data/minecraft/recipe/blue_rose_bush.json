@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": "agotmod:blue_rose"
+    "B": {
+      "item": "agotmod:blue_rose"
+    }
   },
   "pattern": [
     "B",

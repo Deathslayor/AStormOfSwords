@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:apricot_log",
-    "agotmod:apricot_log",
-    "agotmod:apricot_log",
-    "agotmod:apricot_log"
+    {
+      "item": "agotmod:apricot_log"
+    },
+    {
+      "item": "agotmod:apricot_log"
+    },
+    {
+      "item": "agotmod:apricot_log"
+    },
+    {
+      "item": "agotmod:apricot_log"
+    }
   ],
   "result": {
     "count": 3,

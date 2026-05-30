@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:nightwood_wood"
+    {
+      "item": "agotmod:nightwood_wood"
+    }
   ],
   "result": {
     "count": 4,

@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "B": "agotmod:mahogany_planks"
+    "B": {
+      "item": "agotmod:mahogany_planks"
+    }
   },
   "pattern": [
     "BB"

@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": "agotmod:thistle"
+    "B": {
+      "item": "agotmod:thistle"
+    }
   },
   "pattern": [
     "B",

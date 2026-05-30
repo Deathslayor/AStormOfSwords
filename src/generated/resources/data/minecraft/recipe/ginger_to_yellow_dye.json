@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": "agotmod:ginger"
+    "B": {
+      "item": "agotmod:ginger"
+    }
   },
   "pattern": [
     "B",

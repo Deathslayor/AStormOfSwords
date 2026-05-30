@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": "agotmod:saffron_crocus"
+    "B": {
+      "item": "agotmod:saffron_crocus"
+    }
   },
   "pattern": [
     "B",

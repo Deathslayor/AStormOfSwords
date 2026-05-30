@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": "minecraft:chain",
-    "B": "agotmod:crabapple_log_stripped"
+    "#": {
+      "item": "minecraft:chain"
+    },
+    "B": {
+      "item": "agotmod:crabapple_log_stripped"
+    }
   },
   "pattern": [
     "# #",

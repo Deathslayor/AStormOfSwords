@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:stripped_weirwood_log"
+    {
+      "item": "agotmod:stripped_weirwood_log"
+    }
   ],
   "result": {
     "count": 4,

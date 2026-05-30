@@ -3,7 +3,9 @@
   "category": "misc",
   "cookingtime": 200,
   "experience": 0.15,
-  "ingredient": "agotmod:purpleheart_log",
+  "ingredient": {
+    "item": "agotmod:purpleheart_log"
+  },
   "result": {
     "count": 1,
     "id": "minecraft:charcoal"

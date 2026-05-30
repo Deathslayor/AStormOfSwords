@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:orange_wood_stripped"
+    {
+      "item": "agotmod:orange_wood_stripped"
+    }
   ],
   "result": {
     "count": 4,

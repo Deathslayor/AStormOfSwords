@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:nutmeg_log"
+    {
+      "item": "agotmod:nutmeg_log"
+    }
   ],
   "result": {
     "count": 4,

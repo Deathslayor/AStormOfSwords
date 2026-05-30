@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "S": "agotmod:silver_nugget"
+    "S": {
+      "item": "agotmod:silver_nugget"
+    }
   },
   "pattern": [
     "SSS",

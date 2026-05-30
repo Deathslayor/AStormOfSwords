@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": "agotmod:ebony_planks"
+    "B": {
+      "item": "agotmod:ebony_planks"
+    }
   },
   "pattern": [
     "BBB"

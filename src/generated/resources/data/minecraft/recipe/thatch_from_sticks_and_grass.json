@@ -3,8 +3,12 @@
   "category": "building",
   "key": {
     "O": [
-      "minecraft:stick",
-      "minecraft:short_grass"
+      {
+        "item": "minecraft:stick"
+      },
+      {
+        "item": "minecraft:short_grass"
+      }
     ]
   },
   "pattern": [

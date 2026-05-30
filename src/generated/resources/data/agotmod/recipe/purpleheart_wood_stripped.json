@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:purpleheart_log_stripped",
-    "agotmod:purpleheart_log_stripped",
-    "agotmod:purpleheart_log_stripped",
-    "agotmod:purpleheart_log_stripped"
+    {
+      "item": "agotmod:purpleheart_log_stripped"
+    },
+    {
+      "item": "agotmod:purpleheart_log_stripped"
+    },
+    {
+      "item": "agotmod:purpleheart_log_stripped"
+    },
+    {
+      "item": "agotmod:purpleheart_log_stripped"
+    }
   ],
   "result": {
     "count": 3,

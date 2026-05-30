@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:charred_wood"
+    {
+      "item": "agotmod:charred_wood"
+    }
   ],
   "result": {
     "count": 4,

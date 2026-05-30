@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:ash_log"
+    {
+      "item": "agotmod:ash_log"
+    }
   ],
   "result": {
     "count": 4,

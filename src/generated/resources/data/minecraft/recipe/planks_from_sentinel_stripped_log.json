@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:sentinel_log_stripped"
+    {
+      "item": "agotmod:sentinel_log_stripped"
+    }
   ],
   "result": {
     "count": 4,

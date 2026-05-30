@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "S": "agotmod:blackberry"
+    "S": {
+      "item": "agotmod:blackberry"
+    }
   },
   "pattern": [
     "S",

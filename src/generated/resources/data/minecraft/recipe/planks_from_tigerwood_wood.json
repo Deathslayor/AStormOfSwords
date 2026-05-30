@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:tigerwood_wood"
+    {
+      "item": "agotmod:tigerwood_wood"
+    }
   ],
   "result": {
     "count": 4,

@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:moonstone_block"
+    {
+      "item": "agotmod:moonstone_block"
+    }
   ],
   "result": {
     "count": 9,

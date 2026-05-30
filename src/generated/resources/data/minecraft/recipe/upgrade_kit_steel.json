@@ -2,11 +2,21 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": "minecraft:bundle",
-    "C": "agotmod:cloth",
-    "H": "agotmod:hammer",
-    "I": "agotmod:steel_chain",
-    "P": "agotmod:steel_plate"
+    "B": {
+      "item": "minecraft:bundle"
+    },
+    "C": {
+      "item": "agotmod:cloth"
+    },
+    "H": {
+      "item": "agotmod:hammer"
+    },
+    "I": {
+      "item": "agotmod:steel_chain"
+    },
+    "P": {
+      "item": "agotmod:steel_plate"
+    }
   },
   "pattern": [
     "PCP",

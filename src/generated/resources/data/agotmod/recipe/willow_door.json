@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "B": "agotmod:willow_planks"
+    "B": {
+      "item": "agotmod:willow_planks"
+    }
   },
   "pattern": [
     "BB",

@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:orange_wood"
+    {
+      "item": "agotmod:orange_wood"
+    }
   ],
   "result": {
     "count": 4,

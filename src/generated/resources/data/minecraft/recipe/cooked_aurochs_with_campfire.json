@@ -3,7 +3,9 @@
   "category": "food",
   "cookingtime": 600,
   "experience": 0.35,
-  "ingredient": "agotmod:raw_aurochs",
+  "ingredient": {
+    "item": "agotmod:raw_aurochs"
+  },
   "result": {
     "count": 1,
     "id": "agotmod:cooked_aurochs"

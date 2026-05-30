@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": "agotmod:pomegranate_planks"
+    "B": {
+      "item": "agotmod:pomegranate_planks"
+    }
   },
   "pattern": [
     "B",

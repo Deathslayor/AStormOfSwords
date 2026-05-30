@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:fireplum_log_stripped",
-    "agotmod:fireplum_log_stripped",
-    "agotmod:fireplum_log_stripped",
-    "agotmod:fireplum_log_stripped"
+    {
+      "item": "agotmod:fireplum_log_stripped"
+    },
+    {
+      "item": "agotmod:fireplum_log_stripped"
+    },
+    {
+      "item": "agotmod:fireplum_log_stripped"
+    },
+    {
+      "item": "agotmod:fireplum_log_stripped"
+    }
   ],
   "result": {
     "count": 3,

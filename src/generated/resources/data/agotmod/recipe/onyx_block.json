@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": "agotmod:onyx"
+    "B": {
+      "item": "agotmod:onyx"
+    }
   },
   "pattern": [
     "BBB",

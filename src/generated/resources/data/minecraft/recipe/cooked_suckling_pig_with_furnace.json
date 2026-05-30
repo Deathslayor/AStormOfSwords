@@ -3,7 +3,9 @@
   "category": "food",
   "cookingtime": 200,
   "experience": 0.35,
-  "ingredient": "agotmod:raw_suckling_pig",
+  "ingredient": {
+    "item": "agotmod:raw_suckling_pig"
+  },
   "result": {
     "count": 1,
     "id": "agotmod:cooked_suckling_pig"

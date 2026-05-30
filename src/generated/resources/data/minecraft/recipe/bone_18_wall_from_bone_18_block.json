@@ -1,6 +1,8 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "agotmod:bone_18_block",
+  "ingredient": {
+    "item": "agotmod:bone_18_block"
+  },
   "result": {
     "count": 1,
     "id": "agotmod:bone_18_wall"

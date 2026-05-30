@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:lemon_log",
-    "agotmod:lemon_log",
-    "agotmod:lemon_log",
-    "agotmod:lemon_log"
+    {
+      "item": "agotmod:lemon_log"
+    },
+    {
+      "item": "agotmod:lemon_log"
+    },
+    {
+      "item": "agotmod:lemon_log"
+    },
+    {
+      "item": "agotmod:lemon_log"
+    }
   ],
   "result": {
     "count": 3,

@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": "agotmod:charred_planks"
+    "B": {
+      "item": "agotmod:charred_planks"
+    }
   },
   "pattern": [
     "B  ",

@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": "agotmod:sandbeggar_planks"
+    "B": {
+      "item": "agotmod:sandbeggar_planks"
+    }
   },
   "pattern": [
     "BBB",

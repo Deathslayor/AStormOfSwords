@@ -3,7 +3,9 @@
   "category": "food",
   "cookingtime": 600,
   "experience": 0.35,
-  "ingredient": "agotmod:raw_mussels",
+  "ingredient": {
+    "item": "agotmod:raw_mussels"
+  },
   "result": {
     "count": 1,
     "id": "agotmod:cooked_mussels"

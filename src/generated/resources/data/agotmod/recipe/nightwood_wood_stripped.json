@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:nightwood_log_stripped",
-    "agotmod:nightwood_log_stripped",
-    "agotmod:nightwood_log_stripped",
-    "agotmod:nightwood_log_stripped"
+    {
+      "item": "agotmod:nightwood_log_stripped"
+    },
+    {
+      "item": "agotmod:nightwood_log_stripped"
+    },
+    {
+      "item": "agotmod:nightwood_log_stripped"
+    },
+    {
+      "item": "agotmod:nightwood_log_stripped"
+    }
   ],
   "result": {
     "count": 3,

@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "B": "agotmod:beech_planks"
+    "B": {
+      "item": "agotmod:beech_planks"
+    }
   },
   "pattern": [
     "BB"

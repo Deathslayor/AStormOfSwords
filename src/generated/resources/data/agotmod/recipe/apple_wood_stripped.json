@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:apple_log_stripped",
-    "agotmod:apple_log_stripped",
-    "agotmod:apple_log_stripped",
-    "agotmod:apple_log_stripped"
+    {
+      "item": "agotmod:apple_log_stripped"
+    },
+    {
+      "item": "agotmod:apple_log_stripped"
+    },
+    {
+      "item": "agotmod:apple_log_stripped"
+    },
+    {
+      "item": "agotmod:apple_log_stripped"
+    }
   ],
   "result": {
     "count": 3,

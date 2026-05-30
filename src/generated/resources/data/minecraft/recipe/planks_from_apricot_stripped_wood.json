@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:apricot_wood_stripped"
+    {
+      "item": "agotmod:apricot_wood_stripped"
+    }
   ],
   "result": {
     "count": 4,

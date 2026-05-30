@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:black_diamond_block"
+    {
+      "item": "agotmod:black_diamond_block"
+    }
   ],
   "result": {
     "count": 9,

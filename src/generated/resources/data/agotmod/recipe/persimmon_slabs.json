@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": "agotmod:persimmon_planks"
+    "B": {
+      "item": "agotmod:persimmon_planks"
+    }
   },
   "pattern": [
     "BBB"

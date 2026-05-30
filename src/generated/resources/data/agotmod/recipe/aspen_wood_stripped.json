@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:aspen_log_stripped",
-    "agotmod:aspen_log_stripped",
-    "agotmod:aspen_log_stripped",
-    "agotmod:aspen_log_stripped"
+    {
+      "item": "agotmod:aspen_log_stripped"
+    },
+    {
+      "item": "agotmod:aspen_log_stripped"
+    },
+    {
+      "item": "agotmod:aspen_log_stripped"
+    },
+    {
+      "item": "agotmod:aspen_log_stripped"
+    }
   ],
   "result": {
     "count": 3,

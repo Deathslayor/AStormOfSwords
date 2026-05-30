@@ -1,6 +1,8 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "agotmod:basalt_12_block",
+  "ingredient": {
+    "item": "agotmod:basalt_12_block"
+  },
   "result": {
     "count": 1,
     "id": "agotmod:basalt_12_wall"

@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:black_cottonwood_wood_stripped"
+    {
+      "item": "agotmod:black_cottonwood_wood_stripped"
+    }
   ],
   "result": {
     "count": 4,

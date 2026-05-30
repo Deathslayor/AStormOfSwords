@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:malachite_block"
+    {
+      "item": "agotmod:malachite_block"
+    }
   ],
   "result": {
     "count": 9,

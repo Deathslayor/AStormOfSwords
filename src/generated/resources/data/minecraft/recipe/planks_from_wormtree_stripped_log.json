@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:wormtree_log_stripped"
+    {
+      "item": "agotmod:wormtree_log_stripped"
+    }
   ],
   "result": {
     "count": 4,

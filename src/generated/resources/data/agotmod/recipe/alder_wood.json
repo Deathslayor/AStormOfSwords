@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:alder_log",
-    "agotmod:alder_log",
-    "agotmod:alder_log",
-    "agotmod:alder_log"
+    {
+      "item": "agotmod:alder_log"
+    },
+    {
+      "item": "agotmod:alder_log"
+    },
+    {
+      "item": "agotmod:alder_log"
+    },
+    {
+      "item": "agotmod:alder_log"
+    }
   ],
   "result": {
     "count": 3,

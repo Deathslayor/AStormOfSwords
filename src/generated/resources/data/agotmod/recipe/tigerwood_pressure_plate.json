@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "B": "agotmod:tigerwood_planks"
+    "B": {
+      "item": "agotmod:tigerwood_planks"
+    }
   },
   "pattern": [
     "BB"

@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:aspen_wood"
+    {
+      "item": "agotmod:aspen_wood"
+    }
   ],
   "result": {
     "count": 4,

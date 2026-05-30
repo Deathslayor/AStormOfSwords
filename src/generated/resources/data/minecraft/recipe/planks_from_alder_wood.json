@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:alder_wood"
+    {
+      "item": "agotmod:alder_wood"
+    }
   ],
   "result": {
     "count": 4,

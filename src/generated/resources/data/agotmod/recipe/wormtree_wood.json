@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:wormtree_log",
-    "agotmod:wormtree_log",
-    "agotmod:wormtree_log",
-    "agotmod:wormtree_log"
+    {
+      "item": "agotmod:wormtree_log"
+    },
+    {
+      "item": "agotmod:wormtree_log"
+    },
+    {
+      "item": "agotmod:wormtree_log"
+    },
+    {
+      "item": "agotmod:wormtree_log"
+    }
   ],
   "result": {
     "count": 3,

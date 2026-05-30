@@ -2,9 +2,15 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": "agotmod:weirwood_planks",
-    "B": "agotmod:weirwood_stick",
-    "O": "agotmod:nail"
+    "A": {
+      "item": "agotmod:weirwood_planks"
+    },
+    "B": {
+      "item": "agotmod:weirwood_stick"
+    },
+    "O": {
+      "item": "agotmod:nail"
+    }
   },
   "pattern": [
     "OO",

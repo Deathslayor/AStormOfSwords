@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:soldier_pine_log_stripped",
-    "agotmod:soldier_pine_log_stripped",
-    "agotmod:soldier_pine_log_stripped",
-    "agotmod:soldier_pine_log_stripped"
+    {
+      "item": "agotmod:soldier_pine_log_stripped"
+    },
+    {
+      "item": "agotmod:soldier_pine_log_stripped"
+    },
+    {
+      "item": "agotmod:soldier_pine_log_stripped"
+    },
+    {
+      "item": "agotmod:soldier_pine_log_stripped"
+    }
   ],
   "result": {
     "count": 3,

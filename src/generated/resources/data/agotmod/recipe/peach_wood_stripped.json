@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:peach_log_stripped",
-    "agotmod:peach_log_stripped",
-    "agotmod:peach_log_stripped",
-    "agotmod:peach_log_stripped"
+    {
+      "item": "agotmod:peach_log_stripped"
+    },
+    {
+      "item": "agotmod:peach_log_stripped"
+    },
+    {
+      "item": "agotmod:peach_log_stripped"
+    },
+    {
+      "item": "agotmod:peach_log_stripped"
+    }
   ],
   "result": {
     "count": 3,

@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:plum_log",
-    "agotmod:plum_log",
-    "agotmod:plum_log",
-    "agotmod:plum_log"
+    {
+      "item": "agotmod:plum_log"
+    },
+    {
+      "item": "agotmod:plum_log"
+    },
+    {
+      "item": "agotmod:plum_log"
+    },
+    {
+      "item": "agotmod:plum_log"
+    }
   ],
   "result": {
     "count": 3,

@@ -3,7 +3,9 @@
   "category": "food",
   "cookingtime": 200,
   "experience": 0.35,
-  "ingredient": "agotmod:raw_quail",
+  "ingredient": {
+    "item": "agotmod:raw_quail"
+  },
   "result": {
     "count": 1,
     "id": "agotmod:cooked_quail"

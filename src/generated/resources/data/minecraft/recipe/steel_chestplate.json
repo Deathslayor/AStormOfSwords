@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "X": "agotmod:steel_ingot"
+    "X": {
+      "item": "agotmod:steel_ingot"
+    }
   },
   "pattern": [
     "X X",

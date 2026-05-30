@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": "agotmod:black_diamond"
+    "B": {
+      "item": "agotmod:black_diamond"
+    }
   },
   "pattern": [
     "BBB",

@@ -4,7 +4,9 @@
   "cookingtime": 200,
   "experience": 0.25,
   "group": "silver",
-  "ingredient": "agotmod:deepslate_silver_ore",
+  "ingredient": {
+    "item": "agotmod:deepslate_silver_ore"
+  },
   "result": {
     "count": 1,
     "id": "agotmod:silver_ingot"

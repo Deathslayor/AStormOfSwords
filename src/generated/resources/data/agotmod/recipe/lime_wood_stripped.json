@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:lime_log_stripped",
-    "agotmod:lime_log_stripped",
-    "agotmod:lime_log_stripped",
-    "agotmod:lime_log_stripped"
+    {
+      "item": "agotmod:lime_log_stripped"
+    },
+    {
+      "item": "agotmod:lime_log_stripped"
+    },
+    {
+      "item": "agotmod:lime_log_stripped"
+    },
+    {
+      "item": "agotmod:lime_log_stripped"
+    }
   ],
   "result": {
     "count": 3,

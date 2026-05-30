@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": "agotmod:yellow_diamond"
+    "B": {
+      "item": "agotmod:yellow_diamond"
+    }
   },
   "pattern": [
     "BBB",

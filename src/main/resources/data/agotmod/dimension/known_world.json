@@ -8,7 +8,7 @@
         "color": "#002355",
         "terrain_modifier": 33.0
       },
-      "map_id": "agotmod:westeros",
+      "map_id": "agotmod:known_world",
       "noise_gen_settings": "ctgen:overworld",
       "scale": 29,
       "transition": 10,

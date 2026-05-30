@@ -3,7 +3,9 @@
   "category": "food",
   "cookingtime": 100,
   "experience": 0.35,
-  "ingredient": "agotmod:raw_calf_pancreas",
+  "ingredient": {
+    "item": "agotmod:raw_calf_pancreas"
+  },
   "result": {
     "count": 1,
     "id": "agotmod:cooked_calf_pancreas"

@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "H": "agotmod:hammer",
-    "P": "agotmod:steel_plate"
+    "H": {
+      "item": "agotmod:hammer"
+    },
+    "P": {
+      "item": "agotmod:steel_plate"
+    }
   },
   "pattern": [
     " P ",

@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:black_olive_wood"
+    {
+      "item": "agotmod:black_olive_wood"
+    }
   ],
   "result": {
     "count": 4,

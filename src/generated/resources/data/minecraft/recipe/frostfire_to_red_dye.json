@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": "agotmod:frostfire"
+    "B": {
+      "item": "agotmod:frostfire"
+    }
   },
   "pattern": [
     "B",

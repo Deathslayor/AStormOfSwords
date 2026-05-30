@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": "agotmod:moonbloom"
+    "B": {
+      "item": "agotmod:moonbloom"
+    }
   },
   "pattern": [
     "B",

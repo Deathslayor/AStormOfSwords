@@ -3,7 +3,9 @@
   "category": "misc",
   "cookingtime": 200,
   "experience": 0.15,
-  "ingredient": "agotmod:blue_soldier_pine_wood_stripped",
+  "ingredient": {
+    "item": "agotmod:blue_soldier_pine_wood_stripped"
+  },
   "result": {
     "count": 1,
     "id": "minecraft:charcoal"

@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": "agotmod:wild_radish"
+    "B": {
+      "item": "agotmod:wild_radish"
+    }
   },
   "pattern": [
     "B",

@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:chestnut_log",
-    "agotmod:chestnut_log",
-    "agotmod:chestnut_log",
-    "agotmod:chestnut_log"
+    {
+      "item": "agotmod:chestnut_log"
+    },
+    {
+      "item": "agotmod:chestnut_log"
+    },
+    {
+      "item": "agotmod:chestnut_log"
+    },
+    {
+      "item": "agotmod:chestnut_log"
+    }
   ],
   "result": {
     "count": 3,

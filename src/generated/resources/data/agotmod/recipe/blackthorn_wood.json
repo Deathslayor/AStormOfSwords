@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:blackthorn_log",
-    "agotmod:blackthorn_log",
-    "agotmod:blackthorn_log",
-    "agotmod:blackthorn_log"
+    {
+      "item": "agotmod:blackthorn_log"
+    },
+    {
+      "item": "agotmod:blackthorn_log"
+    },
+    {
+      "item": "agotmod:blackthorn_log"
+    },
+    {
+      "item": "agotmod:blackthorn_log"
+    }
   ],
   "result": {
     "count": 3,

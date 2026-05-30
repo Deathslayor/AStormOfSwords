@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": "minecraft:warped_planks"
+    "B": {
+      "item": "minecraft:warped_planks"
+    }
   },
   "pattern": [
     "BBB",

@@ -2,9 +2,15 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": "agotmod:lemon_planks",
-    "B": "minecraft:stick",
-    "O": "agotmod:nail"
+    "A": {
+      "item": "agotmod:lemon_planks"
+    },
+    "B": {
+      "item": "minecraft:stick"
+    },
+    "O": {
+      "item": "agotmod:nail"
+    }
   },
   "pattern": [
     "OO",

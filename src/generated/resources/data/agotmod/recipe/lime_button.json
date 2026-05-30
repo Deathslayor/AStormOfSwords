@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "B": "agotmod:lime_planks"
+    "B": {
+      "item": "agotmod:lime_planks"
+    }
   },
   "pattern": [
     "B"

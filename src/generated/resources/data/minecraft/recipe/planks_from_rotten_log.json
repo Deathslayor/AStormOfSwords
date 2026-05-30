@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:rotten_log"
+    {
+      "item": "agotmod:rotten_log"
+    }
   ],
   "result": {
     "count": 4,

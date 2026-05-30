@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:mahogany_log_stripped",
-    "agotmod:mahogany_log_stripped",
-    "agotmod:mahogany_log_stripped",
-    "agotmod:mahogany_log_stripped"
+    {
+      "item": "agotmod:mahogany_log_stripped"
+    },
+    {
+      "item": "agotmod:mahogany_log_stripped"
+    },
+    {
+      "item": "agotmod:mahogany_log_stripped"
+    },
+    {
+      "item": "agotmod:mahogany_log_stripped"
+    }
   ],
   "result": {
     "count": 3,

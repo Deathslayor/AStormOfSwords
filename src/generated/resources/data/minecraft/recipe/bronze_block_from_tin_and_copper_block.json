@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:tin_block",
-    "minecraft:copper_block"
+    {
+      "item": "agotmod:tin_block"
+    },
+    {
+      "item": "minecraft:copper_block"
+    }
   ],
   "result": {
     "count": 1,

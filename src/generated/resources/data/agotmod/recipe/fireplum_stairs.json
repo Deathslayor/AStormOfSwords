@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": "agotmod:fireplum_planks"
+    "B": {
+      "item": "agotmod:fireplum_planks"
+    }
   },
   "pattern": [
     "B  ",

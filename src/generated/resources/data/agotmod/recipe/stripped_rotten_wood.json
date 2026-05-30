@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:stripped_rotten_log",
-    "agotmod:stripped_rotten_log",
-    "agotmod:stripped_rotten_log",
-    "agotmod:stripped_rotten_log"
+    {
+      "item": "agotmod:stripped_rotten_log"
+    },
+    {
+      "item": "agotmod:stripped_rotten_log"
+    },
+    {
+      "item": "agotmod:stripped_rotten_log"
+    },
+    {
+      "item": "agotmod:stripped_rotten_log"
+    }
   ],
   "result": {
     "count": 3,

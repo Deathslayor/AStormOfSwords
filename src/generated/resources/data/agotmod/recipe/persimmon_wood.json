@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:persimmon_log",
-    "agotmod:persimmon_log",
-    "agotmod:persimmon_log",
-    "agotmod:persimmon_log"
+    {
+      "item": "agotmod:persimmon_log"
+    },
+    {
+      "item": "agotmod:persimmon_log"
+    },
+    {
+      "item": "agotmod:persimmon_log"
+    },
+    {
+      "item": "agotmod:persimmon_log"
+    }
   ],
   "result": {
     "count": 3,

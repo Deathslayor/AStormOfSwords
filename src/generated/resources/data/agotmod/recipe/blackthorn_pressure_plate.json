@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "B": "agotmod:blackthorn_planks"
+    "B": {
+      "item": "agotmod:blackthorn_planks"
+    }
   },
   "pattern": [
     "BB"

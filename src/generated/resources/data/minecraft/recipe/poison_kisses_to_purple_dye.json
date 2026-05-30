@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": "agotmod:poison_kisses"
+    "B": {
+      "item": "agotmod:poison_kisses"
+    }
   },
   "pattern": [
     "B",

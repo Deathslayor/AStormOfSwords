@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": "agotmod:coldsnap"
+    "B": {
+      "item": "agotmod:coldsnap"
+    }
   },
   "pattern": [
     "B",

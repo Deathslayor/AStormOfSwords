@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:white_cherry_log_stripped"
+    {
+      "item": "agotmod:white_cherry_log_stripped"
+    }
   ],
   "result": {
     "count": 4,

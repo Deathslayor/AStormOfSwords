@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:yew_wood"
+    {
+      "item": "agotmod:yew_wood"
+    }
   ],
   "result": {
     "count": 4,

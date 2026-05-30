@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:onyx_block"
+    {
+      "item": "agotmod:onyx_block"
+    }
   ],
   "result": {
     "count": 9,

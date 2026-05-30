@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:peach_wood"
+    {
+      "item": "agotmod:peach_wood"
+    }
   ],
   "result": {
     "count": 4,

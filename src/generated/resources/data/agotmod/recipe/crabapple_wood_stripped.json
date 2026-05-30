@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:crabapple_log_stripped",
-    "agotmod:crabapple_log_stripped",
-    "agotmod:crabapple_log_stripped",
-    "agotmod:crabapple_log_stripped"
+    {
+      "item": "agotmod:crabapple_log_stripped"
+    },
+    {
+      "item": "agotmod:crabapple_log_stripped"
+    },
+    {
+      "item": "agotmod:crabapple_log_stripped"
+    },
+    {
+      "item": "agotmod:crabapple_log_stripped"
+    }
   ],
   "result": {
     "count": 3,

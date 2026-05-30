@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": "agotmod:blood_orange_planks"
+    "B": {
+      "item": "agotmod:blood_orange_planks"
+    }
   },
   "pattern": [
     "B  ",

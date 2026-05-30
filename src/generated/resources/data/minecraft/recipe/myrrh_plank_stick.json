@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": "agotmod:myrrh_planks"
+    "B": {
+      "item": "agotmod:myrrh_planks"
+    }
   },
   "pattern": [
     "B",

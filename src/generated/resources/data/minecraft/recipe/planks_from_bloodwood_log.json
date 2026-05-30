@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:bloodwood_log"
+    {
+      "item": "agotmod:bloodwood_log"
+    }
   ],
   "result": {
     "count": 4,

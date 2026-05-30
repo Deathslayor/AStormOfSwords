@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:baobab_log"
+    {
+      "item": "agotmod:baobab_log"
+    }
   ],
   "result": {
     "count": 4,

@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:sandbeggar_log_stripped"
+    {
+      "item": "agotmod:sandbeggar_log_stripped"
+    }
   ],
   "result": {
     "count": 4,

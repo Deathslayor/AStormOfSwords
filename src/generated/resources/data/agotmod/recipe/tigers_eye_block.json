@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": "agotmod:tigers_eye"
+    "B": {
+      "item": "agotmod:tigers_eye"
+    }
   },
   "pattern": [
     "BBB",

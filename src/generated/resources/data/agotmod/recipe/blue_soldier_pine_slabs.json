@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": "agotmod:blue_soldier_pine_planks"
+    "B": {
+      "item": "agotmod:blue_soldier_pine_planks"
+    }
   },
   "pattern": [
     "BBB"

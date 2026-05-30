@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "S": "agotmod:raw_tin"
+    "S": {
+      "item": "agotmod:raw_tin"
+    }
   },
   "pattern": [
     "SSS",

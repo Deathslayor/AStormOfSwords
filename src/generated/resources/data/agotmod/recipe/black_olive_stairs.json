@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": "agotmod:black_olive_planks"
+    "B": {
+      "item": "agotmod:black_olive_planks"
+    }
   },
   "pattern": [
     "B  ",

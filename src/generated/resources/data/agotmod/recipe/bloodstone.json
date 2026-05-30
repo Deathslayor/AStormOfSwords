@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:bloodstone_block"
+    {
+      "item": "agotmod:bloodstone_block"
+    }
   ],
   "result": {
     "count": 9,

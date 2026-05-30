@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": "agotmod:rotten_planks"
+    "B": {
+      "item": "agotmod:rotten_planks"
+    }
   },
   "pattern": [
     "B  ",

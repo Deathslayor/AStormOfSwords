@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:pine_log"
+    {
+      "item": "agotmod:pine_log"
+    }
   ],
   "result": {
     "count": 4,

@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:white_cherry_log",
-    "agotmod:white_cherry_log",
-    "agotmod:white_cherry_log",
-    "agotmod:white_cherry_log"
+    {
+      "item": "agotmod:white_cherry_log"
+    },
+    {
+      "item": "agotmod:white_cherry_log"
+    },
+    {
+      "item": "agotmod:white_cherry_log"
+    },
+    {
+      "item": "agotmod:white_cherry_log"
+    }
   ],
   "result": {
     "count": 3,

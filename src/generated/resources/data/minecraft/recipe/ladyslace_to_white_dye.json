@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": "agotmod:ladys_lace"
+    "B": {
+      "item": "agotmod:ladys_lace"
+    }
   },
   "pattern": [
     "B",

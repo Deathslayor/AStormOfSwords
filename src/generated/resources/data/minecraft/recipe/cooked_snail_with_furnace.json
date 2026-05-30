@@ -3,7 +3,9 @@
   "category": "food",
   "cookingtime": 200,
   "experience": 0.35,
-  "ingredient": "agotmod:raw_snail",
+  "ingredient": {
+    "item": "agotmod:raw_snail"
+  },
   "result": {
     "count": 1,
     "id": "agotmod:cooked_snail"

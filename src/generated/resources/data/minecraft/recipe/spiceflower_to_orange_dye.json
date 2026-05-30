@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": "agotmod:spiceflower"
+    "B": {
+      "item": "agotmod:spiceflower"
+    }
   },
   "pattern": [
     "B",

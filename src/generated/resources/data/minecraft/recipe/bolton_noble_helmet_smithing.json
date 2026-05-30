@@ -1,10 +1,16 @@
 {
   "type": "minecraft:smithing_transform",
-  "addition": "agotmod:bolton_noble_smithing_scroll",
-  "base": "agotmod:bolton_plate_helmet",
+  "addition": {
+    "item": "agotmod:bolton_noble_smithing_scroll"
+  },
+  "base": {
+    "item": "agotmod:bolton_plate_helmet"
+  },
   "result": {
     "count": 1,
     "id": "agotmod:bolton_noble_helmet"
   },
-  "template": "agotmod:upgrade_kit_noble"
+  "template": {
+    "item": "agotmod:upgrade_kit_noble"
+  }
 }

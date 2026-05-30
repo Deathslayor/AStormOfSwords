@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:blood_orange_log",
-    "agotmod:blood_orange_log",
-    "agotmod:blood_orange_log",
-    "agotmod:blood_orange_log"
+    {
+      "item": "agotmod:blood_orange_log"
+    },
+    {
+      "item": "agotmod:blood_orange_log"
+    },
+    {
+      "item": "agotmod:blood_orange_log"
+    },
+    {
+      "item": "agotmod:blood_orange_log"
+    }
   ],
   "result": {
     "count": 3,

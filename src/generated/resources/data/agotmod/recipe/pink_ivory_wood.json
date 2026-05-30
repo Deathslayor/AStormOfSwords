@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:pink_ivory_log",
-    "agotmod:pink_ivory_log",
-    "agotmod:pink_ivory_log",
-    "agotmod:pink_ivory_log"
+    {
+      "item": "agotmod:pink_ivory_log"
+    },
+    {
+      "item": "agotmod:pink_ivory_log"
+    },
+    {
+      "item": "agotmod:pink_ivory_log"
+    },
+    {
+      "item": "agotmod:pink_ivory_log"
+    }
   ],
   "result": {
     "count": 3,

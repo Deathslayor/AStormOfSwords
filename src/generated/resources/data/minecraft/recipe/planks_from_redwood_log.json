@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "agotmod:redwood_log"
+    {
+      "item": "agotmod:redwood_log"
+    }
   ],
   "result": {
     "count": 4,

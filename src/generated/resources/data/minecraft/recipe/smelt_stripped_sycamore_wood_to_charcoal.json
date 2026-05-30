@@ -3,7 +3,9 @@
   "category": "misc",
   "cookingtime": 200,
   "experience": 0.15,
-  "ingredient": "agotmod:sycamore_wood_stripped",
+  "ingredient": {
+    "item": "agotmod:sycamore_wood_stripped"
+  },
   "result": {
     "count": 1,
     "id": "minecraft:charcoal"
