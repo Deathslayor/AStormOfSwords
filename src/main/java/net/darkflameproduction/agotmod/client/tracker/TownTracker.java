@@ -24,7 +24,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @OnlyIn(Dist.CLIENT)
-@EventBusSubscriber(modid = AGoTMod.MOD_ID, bus = EventBusSubscriber.Bus.GAME, value = Dist.CLIENT)
 public class TownTracker {
 
     private static final int SCAN_HEIGHT = 64; // Same as debug renderer

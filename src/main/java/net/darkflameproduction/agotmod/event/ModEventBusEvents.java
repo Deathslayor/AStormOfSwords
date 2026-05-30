@@ -18,7 +18,7 @@ import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import org.jetbrains.annotations.NotNull;
 
 // Changed bus to Bus.MOD for NeoForge (same as Forge)
-@EventBusSubscriber(modid = AGoTMod.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = AGoTMod.MOD_ID)
 public class ModEventBusEvents {
 
     @SubscribeEvent

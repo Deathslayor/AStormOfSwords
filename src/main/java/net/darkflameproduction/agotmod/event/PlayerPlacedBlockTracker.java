@@ -25,7 +25,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-@EventBusSubscriber(modid = AGoTMod.MOD_ID, bus = EventBusSubscriber.Bus.GAME)
 public class PlayerPlacedBlockTracker {
 
     private static final String SAVE_KEY = "agotmod_placed_blocks";

@@ -18,7 +18,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @OnlyIn(Dist.CLIENT)
-@EventBusSubscriber(modid = "agotmod", bus = EventBusSubscriber.Bus.GAME, value = Dist.CLIENT)
 public class ClientTownAreaManager {
 
     private static final int CHECK_INTERVAL = 20;

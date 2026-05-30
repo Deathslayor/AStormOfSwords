@@ -36,7 +36,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
-@EventBusSubscriber(modid = AGoTMod.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = AGoTMod.MOD_ID, value = Dist.CLIENT)
 public class ModEventBusClientEvents {
 
     @SubscribeEvent

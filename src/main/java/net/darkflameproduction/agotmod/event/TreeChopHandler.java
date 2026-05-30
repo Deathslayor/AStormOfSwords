@@ -18,7 +18,6 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 import java.util.*;
 
-@EventBusSubscriber(modid = AGoTMod.MOD_ID, bus = EventBusSubscriber.Bus.GAME)
 public class TreeChopHandler {
 
     private static final int MAX_LOGS   = 256;

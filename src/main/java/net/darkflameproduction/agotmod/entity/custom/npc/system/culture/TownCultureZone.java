@@ -13,7 +13,6 @@ import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-@EventBusSubscriber(modid = AGoTMod.MOD_ID, bus = EventBusSubscriber.Bus.GAME)
 public class TownCultureZone {
 
     public static class ZoneEntry {

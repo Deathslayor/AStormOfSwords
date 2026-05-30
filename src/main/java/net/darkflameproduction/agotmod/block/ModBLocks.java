@@ -155,20 +155,20 @@ public class ModBLocks {
     public static final Map<String, Integer> WATTLE_DAUB_COLORS = new LinkedHashMap<>();
     static {
         WATTLE_DAUB_COLORS.put("white",      0xFFFFFFFF);
-        WATTLE_DAUB_COLORS.put("orange",     0xFFD87F33);
-        WATTLE_DAUB_COLORS.put("magenta",    0xFFB24CD8);
-        WATTLE_DAUB_COLORS.put("light_blue", 0xFF6699D8);
-        WATTLE_DAUB_COLORS.put("yellow",     0xFFE5E533);
-        WATTLE_DAUB_COLORS.put("lime",       0xFF7FCC19);
-        WATTLE_DAUB_COLORS.put("pink",       0xFFF27FA5);
+        WATTLE_DAUB_COLORS.put("orange",     0xFF8A6B52);
+        WATTLE_DAUB_COLORS.put("magenta",    0xFF866184);
+        WATTLE_DAUB_COLORS.put("light_blue", 0xFF62778A);
+        WATTLE_DAUB_COLORS.put("yellow",     0xFF9C9460);
+        WATTLE_DAUB_COLORS.put("lime",       0xFF72845A);
+        WATTLE_DAUB_COLORS.put("pink",       0xFF957076);
         WATTLE_DAUB_COLORS.put("gray",       0xFF4C4C4C);
         WATTLE_DAUB_COLORS.put("light_gray", 0xFF999999);
-        WATTLE_DAUB_COLORS.put("cyan",       0xFF4C7F99);
-        WATTLE_DAUB_COLORS.put("purple",     0xFF7F3FB2);
-        WATTLE_DAUB_COLORS.put("blue",       0xFF334CB2);
-        WATTLE_DAUB_COLORS.put("brown",      0xFF664C33);
-        WATTLE_DAUB_COLORS.put("green",      0xFF667F33);
-        WATTLE_DAUB_COLORS.put("red",        0xFFCC4C4C);
+        WATTLE_DAUB_COLORS.put("cyan",       0xFF58777A);
+        WATTLE_DAUB_COLORS.put("purple",     0xFF67547A);
+        WATTLE_DAUB_COLORS.put("blue",       0xFF536887);
+        WATTLE_DAUB_COLORS.put("brown",      0xFFBBA98A);
+        WATTLE_DAUB_COLORS.put("green",      0xFF627350);
+        WATTLE_DAUB_COLORS.put("red",        0xFF8A615C);
         WATTLE_DAUB_COLORS.put("black",      0xFF191919);
     }
 

@@ -1,4 +1,4 @@
-// 1.21.3	2026-05-29T13:18:22.1960342	Loot Tables
+// 1.21.1	2026-05-30T17:11:04.1493674	Loot Tables
 e9bd72b39150226eea7e9f8651090f64a2f92e26 data/agotmod/loot_table/blocks/acacia_arm_chair.json
 8b853b189990b99a15ea85034eba5c841663807f data/agotmod/loot_table/blocks/acacia_chair.json
 25731f80a799127a902c25a58ea1c9ee6aa06d85 data/agotmod/loot_table/blocks/acacia_stool.json
@@ -4975,4 +4975,3 @@ ef5dbeeec6445a06c3dde89e46a8009b4eb8dddd data/agotmod/loot_table/entities/crow.j
 9af9935e7ffdba21f36588ae7bfac832e30a0171 data/agotmod/loot_table/entities/direwolf.json
 13ac30e53a3536a54a7ae487ca3e38bcbc9ac182 data/agotmod/loot_table/entities/mammoth.json
 923bcafa82ea88762f3e192b5764baeb16d8198d data/agotmod/loot_table/entities/peasant.json
-153cab91c7df6abadaba2d3ec22a22887b0d394a data/agotmod/loot_table/entities/seat.json

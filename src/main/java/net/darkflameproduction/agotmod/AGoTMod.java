@@ -4,7 +4,14 @@ import dev.tocraft.ctgen.impl.CTGClient;
 import net.darkflameproduction.agotmod.client.ClientKeyInputEvents;
 import net.darkflameproduction.agotmod.client.ModAttachments;
 import net.darkflameproduction.agotmod.client.particle.WeirwoodLeavesParticle;
+import net.darkflameproduction.agotmod.client.renderer.TownHallDebugRenderer;
+import net.darkflameproduction.agotmod.client.town.ClientTownAreaManager;
+import net.darkflameproduction.agotmod.client.tracker.TownTracker;
 import net.darkflameproduction.agotmod.command.SetHouseBannerCommand;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.culture.TownCultureZone;
+import net.darkflameproduction.agotmod.event.PlayerPlacedBlockTracker;
+import net.darkflameproduction.agotmod.event.ServerPlayerEvents;
+import net.darkflameproduction.agotmod.event.TreeChopHandler;
 import net.darkflameproduction.agotmod.gui.CustomGuiScreen;
 import net.darkflameproduction.agotmod.init.ModMenuTypes;
 import net.darkflameproduction.agotmod.item.custom.BannerPatterns;
@@ -77,7 +84,6 @@ public class AGoTMod {
         ModBLocks.register(modEventBus);
         ModItems.register(modEventBus);
         ModMenuTypes.register(modEventBus);
-        // Register banner patterns
         BannerPatterns.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
@@ -89,7 +95,17 @@ public class AGoTMod {
         LOGGER.info("AGOT Mod initialized");
         ModAttachments.ATTACHMENT_TYPES.register(modEventBus);
 
+        // Server-safe game bus registrations
+        NeoForge.EVENT_BUS.register(TownCultureZone.class);
+        NeoForge.EVENT_BUS.register(PlayerPlacedBlockTracker.class);
+        NeoForge.EVENT_BUS.register(ServerPlayerEvents.class);
+        NeoForge.EVENT_BUS.register(TreeChopHandler.class);
+
         if (FMLEnvironment.dist == Dist.CLIENT) {
+            // Client-only game bus registrations
+            NeoForge.EVENT_BUS.register(TownHallDebugRenderer.class);
+            NeoForge.EVENT_BUS.register(ClientTownAreaManager.class);
+            NeoForge.EVENT_BUS.register(TownTracker.class);
             registerClientEvents();
         }
     }
@@ -137,17 +153,14 @@ public class AGoTMod {
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBLocks.BLOODBLOOM.getId(), ModBLocks.POTTED_BLOODBLOOM);
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBLocks.BLACK_LOTUS.getId(), ModBLocks.POTTED_BLACK_LOTUS);
 
-// Weirwood
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBLocks.WEIRWOOD_SAPLING.getId(), ModBLocks.POTTED_WEIRWOOD_SAPLING);
 
-// All map-based wood types
             for (String woodType : ModBLocks.WOOD_TYPES) {
                 ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(
                         ModBLocks.SAPLINGS.get(woodType).getId(),
                         ModBLocks.POTTED_SAPLINGS.get(woodType)
                 );
             }
-
         });
     }
 
@@ -164,14 +177,12 @@ public class AGoTMod {
         LOGGER.info("Registered SetHouseBannerCommand");
     }
 
-    // Client-side event handler for item count display
     @OnlyIn(Dist.CLIENT)
     public static class ClientEventHandler {
         @SubscribeEvent
         public static void onTooltipEvent(ItemTooltipEvent event) {
             ItemStack stack = event.getItemStack();
             if (!stack.isEmpty() && stack.getCount() > 64) {
-                // Make it very obvious when there are large stacks
                 event.getToolTip().add(1, Component.literal("━━━━━━━━━━━━━━━━━━━━").withStyle(ChatFormatting.GOLD));
                 event.getToolTip().add(2, Component.literal("⚡ LARGE STACK: " + stack.getCount() + " items").withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD));
                 event.getToolTip().add(3, Component.literal("━━━━━━━━━━━━━━━━━━━━").withStyle(ChatFormatting.GOLD));
@@ -179,7 +190,7 @@ public class AGoTMod {
         }
     }
 
-    @EventBusSubscriber(modid = MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @EventBusSubscriber(modid = MOD_ID, value = Dist.CLIENT)
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(@NotNull FMLClientSetupEvent event) {
@@ -247,7 +258,6 @@ public class AGoTMod {
             Sheets.addWoodType(ModWoodTypes.SOLDIER_PINE);
             Sheets.addWoodType(ModWoodTypes.BLUE_SOLDIER_PINE);
 
-
             event.enqueueWork(ModItemProperties::addCustomItemProperties);
         }
 
@@ -258,6 +268,7 @@ public class AGoTMod {
                     net.darkflameproduction.agotmod.inventory.NPCInventoryScreen::new
             );
         }
+
         @SubscribeEvent
         public static void registerBlockColors(net.neoforged.neoforge.client.event.RegisterColorHandlersEvent.Block event) {
             event.register(
@@ -289,4 +300,3 @@ public class AGoTMod {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }
 }
-

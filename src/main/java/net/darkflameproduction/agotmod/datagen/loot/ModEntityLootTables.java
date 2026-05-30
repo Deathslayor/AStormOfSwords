@@ -31,8 +31,6 @@ public class ModEntityLootTables extends EntityLootSubProvider {
 
     @Override
     public void generate() {
-        this.add(ModEntities.SEAT_ENTITY.get(), LootTable.lootTable());
-
         this.add(ModEntities.MAMMOTH_ENTITY.get(),
                 LootTable.lootTable()
                         .withPool(LootPool.lootPool()

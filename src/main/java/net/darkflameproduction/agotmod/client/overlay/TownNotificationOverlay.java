@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @OnlyIn(Dist.CLIENT)
-@EventBusSubscriber(modid = AGoTMod.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = AGoTMod.MOD_ID, value = Dist.CLIENT)
 public class TownNotificationOverlay {
 
     private static String currentMessage = "";

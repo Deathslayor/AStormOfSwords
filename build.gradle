@@ -24,11 +24,7 @@ repositories {
         url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
     }
     maven {
-        name "ToCraft"
-        url "https://maven.tocraft.dev/public"
-    }
-    maven {
-        name = "MinecrafTForge"
+        name = "MinecraftForge"
         url 'https://maven.minecraftforge.net/'
     }
 }
@@ -61,7 +57,7 @@ runs {
     }
 
     data {
-        programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+        arguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
     }
 }
 
@@ -79,13 +75,13 @@ dependencies {
     compileOnly "mezz.jei:jei-${jei_mc_version}-neoforge-api:${jei_version}"
     runtimeOnly "mezz.jei:jei-${jei_mc_version}-neoforge:${jei_version}"
 
-    // MixinExtras
-    //jarJar(implementation(jarJar("io.github.llamalad7:mixinextras-neoforge:[${mixinextras_version},)")))
-
     // GeckoLib
     jarJar(implementation "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:[${geckolib_version},)")
-    // CTGen
-    jarJar(implementation "dev.tocraft:ctgen-neoforge:2.1")
+
+    // CTGen — local build for 1.21.1
+    jarJar(implementation fileTree(dir: 'libs', include: ['*.jar']))
+
+    // TerraBlender
     jarJar(implementation "com.github.glitchfiend:TerraBlender-neoforge:${minecraft_version}-${terrablender_version}")
 }
 
@@ -104,10 +100,9 @@ tasks.withType(ProcessResources).configureEach {
             mod_license            : mod_license,
             mod_version            : mod_version,
             mod_authors            : mod_authors,
-            mod_description : mod_description,
-            geckolib_version: geckolib_version,
-            ctgen_version   : ctgen_version,
-            jei_version     : jei_version
+            mod_description        : mod_description,
+            geckolib_version       : geckolib_version,
+            jei_version            : jei_version
     ]
     inputs.properties replaceProperties
 
@@ -117,7 +112,7 @@ tasks.withType(ProcessResources).configureEach {
 }
 
 tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+    options.encoding = 'UTF-8'
 }
 
 idea {
