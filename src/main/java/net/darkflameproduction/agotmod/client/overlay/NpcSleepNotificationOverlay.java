@@ -14,7 +14,7 @@ import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.minecraft.resources.ResourceLocation;
 
 @OnlyIn(Dist.CLIENT)
-@EventBusSubscriber(modid = AGoTMod.MOD_ID)
+@EventBusSubscriber(modid = AGoTMod.MOD_ID, value = Dist.CLIENT)
 public class NpcSleepNotificationOverlay {
 
     private static final long DISPLAY_DURATION = 3000;
