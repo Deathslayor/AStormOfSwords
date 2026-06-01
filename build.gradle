@@ -27,6 +27,10 @@ repositories {
         name = "MinecraftForge"
         url 'https://maven.minecraftforge.net/'
     }
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+    }
 }
 
 base {
@@ -83,6 +87,10 @@ dependencies {
 
     // TerraBlender
     jarJar(implementation "com.github.glitchfiend:TerraBlender-neoforge:${minecraft_version}-${terrablender_version}")
+
+    // Epic Fight
+    compileOnly "maven.modrinth:epic-fight:${epicfight_version}"
+    localRuntime "maven.modrinth:epic-fight:${epicfight_version}"
 }
 
 jarJar {

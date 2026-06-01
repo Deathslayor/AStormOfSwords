@@ -26,7 +26,7 @@ import java.util.UUID;
 @OnlyIn(Dist.CLIENT)
 public class CustomGuiScreen extends Screen {
 
-    // â”€â”€ Textures â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Textures ──────────────────────────────────────────────────────────────
 
     private static final ResourceLocation BLUR_LOCATION =
             ResourceLocation.fromNamespaceAndPath("minecraft", "shaders/post/blur.json");
@@ -51,17 +51,24 @@ public class CustomGuiScreen extends Screen {
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/stained_glass_magenta_transparant.png")
     };
 
-    private static final ResourceLocation PILLAR_TEXTURE    = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/pillar.png");
-    private static final ResourceLocation BORDER_TEXTURE    = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/bottom.png");
-    private static final ResourceLocation CORNER_TEXTURE    = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/corner.png");
-    private static final ResourceLocation STONE_TEXTURE     = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/background.png");
+    private static final ResourceLocation PILLAR_TEXTURE        = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/pillar.png");
+    private static final ResourceLocation BORDER_TEXTURE        = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/bottom.png");
+    private static final ResourceLocation CORNER_TEXTURE        = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/corner.png");
+    private static final ResourceLocation STONE_TEXTURE         = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/gui_asset_bg_main.png");
     private static final ResourceLocation PAPER_SIDE_TEXTURE    = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/paperside.png");
     private static final ResourceLocation PAPER_SIDETOP_TEXTURE = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/papersidetop.png");
     private static final ResourceLocation PAPER_CORNER_TEXTURE  = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/papercorner.png");
     private static final ResourceLocation PAPER_TEXTURE         = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/paper.png");
     private static final ResourceLocation BANNER_BASE_TEXTURE   = ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner_base.png");
 
-    // â”€â”€ Constants â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Prototype identity frame textures ─────────────────────────────────────
+    private static final ResourceLocation FRAME_TEXTURE         = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/gui_asset_bg_prototype_identity.png");
+    private static final ResourceLocation FRAME_GLASS_TEXTURE   = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/gui_asset_bg_prototype_identity_glass.png");
+    private static final int GLASS_TEXTURE_WIDTH  = 382;
+    private static final int GLASS_TEXTURE_HEIGHT = 212;
+    private static final ResourceLocation BOOK_TEXTURE          = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/book.png");
+
+    // ── Constants ─────────────────────────────────────────────────────────────
 
     private static final String[] SECTION_LABELS      = { "Map", "Quests", "Skills", "Stats", "House", "Faction", "Guilds" };
     private static final String[] STAT_SUBMENU_LABELS = { "General Stats", "Combat Stats", "Crime", "Magic", "Weapon Usage", "Tool Usage" };
@@ -80,103 +87,134 @@ public class CustomGuiScreen extends Screen {
     private static final int    STATS_UPDATE_INTERVAL = 100;
     private static final double TELEPORT_THRESHOLD    = 5.0;
 
+    /**
+     * Actual pixel dimensions of gui_asset_bg_prototype_identity.png.
+     * Change these if the texture is replaced with a differently sized image.
+     * The GUI will always be scaled so TEXTURE_HEIGHT exactly fills the screen height.
+     * TEXTURE_WIDTH determines how wide the canvas is at that scale.
+     */
+    private static final int TEXTURE_WIDTH  = 1082;
+    private static final int TEXTURE_HEIGHT = 212;
+
+    // These are derived — do not change them manually.
+    private static final int BASE_GUI_WIDTH  = TEXTURE_WIDTH;
+    private static final int BASE_GUI_HEIGHT = TEXTURE_HEIGHT;
+
+    // Content void position within the texture (virtual pixels) — used by all non-map sections
+    private static final int VOID_X = 431;
+    private static final int VOID_Y = 64;
+    private static final int VOID_W = 221;
+    private static final int VOID_H = 131;
+
+    // Map widget position — separate from the content void, keeps its original area
+    private static final int MAP_X = 423;
+    private static final int MAP_Y = 56;
+    private static final int MAP_W = 239;
+    private static final int MAP_H = 140;
+
+    // Scale applied to all section content so it fits inside the void area.
+    // Adjust if text is too large or too small.
+    private static final float CONTENT_SCALE = 0.5f;
+    private static final int TAB_X = 431;
+    private static final int TAB_Y = 8;
+    private static final int TAB_W = 220;
+    private static final int TAB_H = 24;
+
+    // ── House UI state ─────────────────────────────────────────────────────────
+
     private int selectedHouseTab = 0;
     private net.minecraft.client.gui.components.EditBox inviteEditBox;
-    private net.minecraft.client.gui.components.Button  inviteButton;   // "Invite" button on Members tab
-    private net.minecraft.client.gui.components.Button  closeInviteButton; // "Back" button on Invite tab
-    private net.minecraft.client.gui.components.Button setBannerButton;
-    private net.minecraft.client.gui.components.Button leaveButton;
+    private net.minecraft.client.gui.components.Button  inviteButton;
+    private net.minecraft.client.gui.components.Button  closeInviteButton;
+    private net.minecraft.client.gui.components.Button  setBannerButton;
+    private net.minecraft.client.gui.components.Button  leaveButton;
     private boolean showingLeaveConfirm = false;
-    private UUID kickTargetUUID      = null;   // non-null when kick confirm is showing
+    private UUID    kickTargetUUID      = null;
     private String  kickTargetUsername  = "";
 
-
-    // â”€â”€ Banner pattern map â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Banner pattern map ─────────────────────────────────────────────────────
 
     private static final Map<String, ResourceLocation> BANNER_PATTERN_TEXTURES = createBannerPatternMap();
 
     private static Map<String, ResourceLocation> createBannerPatternMap() {
         Map<String, ResourceLocation> map = new java.util.HashMap<>();
-        map.put("base", ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner_base.png"));
-        map.put("arryn",      ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/arryn.png"));
-        map.put("baelish",    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/baelish.png"));
-        map.put("baratheon",  ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/baratheon.png"));
-        map.put("blackwood",  ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/blackwood.png"));
-        map.put("bolton",     ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/bolton.png"));
-        map.put("bracken",    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/bracken.png"));
-        map.put("clegane",    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/clegane.png"));
-        map.put("dayne",      ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/dayne.png"));
-        map.put("frey",       ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/frey.png"));
-        map.put("greyjoy",    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/greyjoy.png"));
-        map.put("harlaw",     ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/harlaw.png"));
-        map.put("hightower",  ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/hightower.png"));
-        map.put("karstark",   ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/karstark.png"));
-        map.put("lannister",  ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/lannister.png"));
-        map.put("manderly",   ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/manderly.png"));
-        map.put("mormont",    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/mormont.png"));
-        map.put("redwyne",    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/redwyne.png"));
-        map.put("reed",       ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/reed.png"));
-        map.put("reyne",      ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/reyne.png"));
-        map.put("royce",      ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/royce.png"));
-        map.put("stark",      ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/stark.png"));
-        map.put("targaryen",  ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/targaryen.png"));
-        map.put("tarly",      ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/tarly.png"));
-        map.put("tully",      ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/tully.png"));
-        map.put("tyrell",     ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/tyrell.png"));
-        map.put("umber",      ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/umber.png"));
-        map.put("velaryon",   ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/velaryon.png"));
-        map.put("stripe_bottom",     ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/stripe_bottom.png"));
-        map.put("stripe_top",        ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/stripe_top.png"));
-        map.put("stripe_left",       ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/stripe_left.png"));
-        map.put("stripe_right",      ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/stripe_right.png"));
-        map.put("stripe_center",     ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/stripe_center.png"));
-        map.put("stripe_middle",     ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/stripe_middle.png"));
-        map.put("cross",             ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/cross.png"));
-        map.put("straight_cross",    ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/straight_cross.png"));
-        map.put("diagonal_left",     ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/diagonal_left.png"));
-        map.put("diagonal_right",    ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/diagonal_right.png"));
-        map.put("half_vertical",     ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/half_vertical.png"));
-        map.put("half_horizontal",   ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/half_horizontal.png"));
-        map.put("half_vertical_right",   ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/half_vertical_right.png"));
-        map.put("half_horizontal_bottom",ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/half_horizontal_bottom.png"));
-        map.put("circle",    ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/circle.png"));
-        map.put("border",    ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/border.png"));
+        map.put("base",      ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner_base.png"));
+        map.put("arryn",     ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/arryn.png"));
+        map.put("baelish",   ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/baelish.png"));
+        map.put("baratheon", ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/baratheon.png"));
+        map.put("blackwood", ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/blackwood.png"));
+        map.put("bolton",    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/bolton.png"));
+        map.put("bracken",   ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/bracken.png"));
+        map.put("clegane",   ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/clegane.png"));
+        map.put("dayne",     ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/dayne.png"));
+        map.put("frey",      ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/frey.png"));
+        map.put("greyjoy",   ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/greyjoy.png"));
+        map.put("harlaw",    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/harlaw.png"));
+        map.put("hightower", ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/hightower.png"));
+        map.put("karstark",  ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/karstark.png"));
+        map.put("lannister", ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/lannister.png"));
+        map.put("manderly",  ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/manderly.png"));
+        map.put("mormont",   ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/mormont.png"));
+        map.put("redwyne",   ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/redwyne.png"));
+        map.put("reed",      ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/reed.png"));
+        map.put("reyne",     ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/reyne.png"));
+        map.put("royce",     ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/royce.png"));
+        map.put("stark",     ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/stark.png"));
+        map.put("targaryen", ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/targaryen.png"));
+        map.put("tarly",     ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/tarly.png"));
+        map.put("tully",     ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/tully.png"));
+        map.put("tyrell",    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/tyrell.png"));
+        map.put("umber",     ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/umber.png"));
+        map.put("velaryon",  ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/velaryon.png"));
+        map.put("stripe_bottom",          ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/stripe_bottom.png"));
+        map.put("stripe_top",             ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/stripe_top.png"));
+        map.put("stripe_left",            ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/stripe_left.png"));
+        map.put("stripe_right",           ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/stripe_right.png"));
+        map.put("stripe_center",          ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/stripe_center.png"));
+        map.put("stripe_middle",          ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/stripe_middle.png"));
+        map.put("cross",                  ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/cross.png"));
+        map.put("straight_cross",         ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/straight_cross.png"));
+        map.put("diagonal_left",          ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/diagonal_left.png"));
+        map.put("diagonal_right",         ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/diagonal_right.png"));
+        map.put("half_vertical",          ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/half_vertical.png"));
+        map.put("half_horizontal",        ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/half_horizontal.png"));
+        map.put("half_vertical_right",    ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/half_vertical_right.png"));
+        map.put("half_horizontal_bottom", ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/half_horizontal_bottom.png"));
+        map.put("circle",          ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/circle.png"));
+        map.put("border",          ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/border.png"));
         map.put("triangle_top",    ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/triangle_top.png"));
         map.put("triangle_bottom", ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/triangle_bottom.png"));
         return Collections.unmodifiableMap(map);
     }
 
-    // â”€â”€ State â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Persistent / instance state ───────────────────────────────────────────
 
-    private static int lastSelectedSection     = 2;
+    private static int lastSelectedSection      = 2;
     private static int lastSelectedStatsSubmenu = 0;
     private static CustomGuiScreen currentInstance = null;
 
     private int selectedSection;
     private int selectedStatsSubmenu;
 
-    private double lastPlayerX, lastPlayerY, lastPlayerZ;
-    private boolean hasInitializedPosition = false;
-    private float lastPlayerHealth = 0;
-    private boolean isUsingShader  = false;
-    private int statsUpdateTimer   = 0;
+    private double  lastPlayerX, lastPlayerY, lastPlayerZ;
+    private boolean hasInitializedPosition  = false;
+    private float   lastPlayerHealth        = 0;
+    private boolean isUsingShader           = false;
+    private int     statsUpdateTimer        = 0;
     private boolean hasRequestedInitialStats = false;
 
     private final SyncMapPacket mapPacket;
     private AGoTMapWidget mapWidget;
 
-    // â”€â”€ Extracted data objects â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-
     private final PlayerSkillData skills = new PlayerSkillData();
-    private final HouseData house = new HouseData();
+    private final HouseData       house  = new HouseData();
 
-    // â”€â”€ House UI widgets (must stay here as they are Screen widgets) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-
+    // House edit-box widgets (must live on Screen so Minecraft tracks focus)
     private net.minecraft.client.gui.components.EditBox houseNameEditBox;
     private net.minecraft.client.gui.components.Button  saveHouseButton;
     private net.minecraft.client.gui.components.Button  editHouseButton;
 
-    // â”€â”€ Constructors â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Constructors ──────────────────────────────────────────────────────────
 
     public CustomGuiScreen(Minecraft minecraft) {
         this(minecraft, isMapPacketValid(CTGClient.LAST_SYNC_MAP_PACKET.get())
@@ -185,10 +223,10 @@ public class CustomGuiScreen extends Screen {
 
     public CustomGuiScreen(Minecraft minecraft, SyncMapPacket mapPacket) {
         super(Component.translatable("screen.agotmod.custom_gui"));
-        this.selectedSection     = lastSelectedSection;
+        this.selectedSection      = lastSelectedSection;
         this.selectedStatsSubmenu = lastSelectedStatsSubmenu;
-        this.mapPacket           = mapPacket;
-        currentInstance          = this;
+        this.mapPacket            = mapPacket;
+        currentInstance           = this;
         if (mapPacket == null && this.selectedSection == 0) {
             this.selectedSection = 2;
             lastSelectedSection  = 2;
@@ -201,19 +239,17 @@ public class CustomGuiScreen extends Screen {
         return packet.getMapWidth() > 0 && packet.getMapHeight() > 0;
     }
 
-    // â”€â”€ Static packet-handler entry points â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Static packet-handler entry points ────────────────────────────────────
 
     public static void setSyncedHouseName(String name)          { HouseData.setSyncedHouseName(name); }
     public static void setSyncedHouseBanner(CompoundTag banner) { HouseData.setSyncedHouseBanner(banner); }
     public static void setOwnedTowns(java.util.List<SyncOwnedTownsPacket.TownInfo> towns) { HouseData.setOwnedTowns(towns); }
 
     public static void handleHouseNameValidation(boolean isAvailable, String message) {
-        if (currentInstance != null) {
-            currentInstance.house.onValidationResult(isAvailable, message);
-        }
+        if (currentInstance != null) currentInstance.house.onValidationResult(isAvailable, message);
     }
 
-    // â”€â”€ Screen lifecycle â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Screen lifecycle ──────────────────────────────────────────────────────
 
     @Override
     public void onClose() {
@@ -238,22 +274,24 @@ public class CustomGuiScreen extends Screen {
         house.load();
 
         ScreenLayout layout = new ScreenLayout(width, height);
-        int innerX = layout.contentX + BORDER_PILLAR_WIDTH;
-        int innerY = layout.contentY + BORDER_HEIGHT;
-        int innerW = layout.contentWidth  - (BORDER_PILLAR_WIDTH * 2);
-        int innerH = layout.contentHeight - (BORDER_HEIGHT * 2);
 
+        // Map widget — uses its own position constants, independent of the content void
         if (mapPacket != null) {
-            mapWidget = AGoTMapWidget.ofPacket(minecraft, innerX, innerY, innerW, innerH, mapPacket);
+            int wx = Math.round(MAP_X * layout.scale + layout.offsetX);
+            int wy = Math.round(MAP_Y * layout.scale) - 1;
+            int ww = Math.round(MAP_W * layout.scale) + 2;
+            int wh = Math.round(MAP_H * layout.scale) + 1;
+            mapWidget = AGoTMapWidget.ofPacket(minecraft, wx, wy, ww, wh, mapPacket);
             if (mapWidget != null) mapWidget.setMinZoom(mapWidget.defaultZoom());
         } else {
             mapWidget = null;
         }
 
-        if (houseNameEditBox != null) { removeWidget(houseNameEditBox); houseNameEditBox = null; }
-        if (saveHouseButton  != null) { removeWidget(saveHouseButton);  saveHouseButton  = null; }
-        if (editHouseButton  != null) { removeWidget(editHouseButton);  editHouseButton  = null; }
-        if (setBannerButton != null) { removeWidget(setBannerButton); setBannerButton = null; }
+        // Clear any leftover house widgets
+        removeWidgetIfPresent(houseNameEditBox, () -> houseNameEditBox = null);
+        removeWidgetIfPresent(saveHouseButton,  () -> saveHouseButton  = null);
+        removeWidgetIfPresent(editHouseButton,  () -> editHouseButton  = null);
+        removeWidgetIfPresent(setBannerButton,  () -> setBannerButton  = null);
 
         applyBlurEffect();
     }
@@ -263,6 +301,7 @@ public class CustomGuiScreen extends Screen {
         super.tick();
         if (minecraft == null || minecraft.player == null) return;
 
+        // Close if player teleports away
         if (hasInitializedPosition) {
             double dx = minecraft.player.getX() - lastPlayerX;
             double dy = minecraft.player.getY() - lastPlayerY;
@@ -320,26 +359,31 @@ public class CustomGuiScreen extends Screen {
         }
     }
 
-    // â”€â”€ Input â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Input ─────────────────────────────────────────────────────────────────
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        ScreenLayout layout = new ScreenLayout(width, height);
+
+        // Inverse-transform mouse into virtual coordinate space.
+        int mx = (int)((mouseX - layout.offsetX) / layout.scale);
+        int my = (int)((mouseY - layout.offsetY) / layout.scale);
+
+        // Content-local coords: undo the VOID translate + CONTENT_SCALE
+        // used when rendering section content.
+        int cmx = (int)((mx - VOID_X) / CONTENT_SCALE);
+        int cmy = (int)((my - VOID_Y) / CONTENT_SCALE);
+
         if (mapWidget != null && mapWidget.isActive() && mapWidget.mouseClicked(mouseX, mouseY, button))
             return true;
 
-        ScreenLayout layout = new ScreenLayout(width, height);
-
-        // â”€â”€ Section tab bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // Section tab bar
+        int perTabW = TAB_W / SECTION_LABELS.length;
         for (int i = 0; i < SECTION_LABELS.length; i++) {
             if (i == 0 && mapPacket == null) continue;
-
-            int startX = layout.sideMargin + (i * layout.sectionButtonWidth);
-            int endX   = (i == SECTION_LABELS.length - 1)
-                    ? width - layout.sideMargin
-                    : layout.sideMargin + ((i + 1) * layout.sectionButtonWidth);
-
-            if (isMouseOverRect((int)mouseX, (int)mouseY, startX, layout.topMargin,
-                    endX - startX, layout.sectionButtonHeight)) {
+            int startX = TAB_X + (i * perTabW);
+            int endX   = (i == SECTION_LABELS.length - 1) ? TAB_X + TAB_W : TAB_X + ((i + 1) * perTabW);
+            if (isMouseOverRect(mx, my, startX, TAB_Y, endX - startX, TAB_H)) {
                 selectedSection     = i;
                 lastSelectedSection = i;
                 if (i == 3 && !skills.areStatsLoaded && minecraft != null) requestStats();
@@ -348,7 +392,7 @@ public class CustomGuiScreen extends Screen {
             }
         }
 
-        // â”€â”€ Stats submenu â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // Stats submenu
         if (selectedSection == 3) {
             int submenuWidth   = layout.contentWidth / 6;
             int submenuStartX  = layout.contentX + layout.contentWidth / 128;
@@ -362,7 +406,7 @@ public class CustomGuiScreen extends Screen {
 
             for (int i = 0; i < STAT_SUBMENU_LABELS.length; i++) {
                 int buttonY = submenuStartYC + (i * (buttonHeight + buttonSpacing));
-                if (isMouseOverRect((int)mouseX, (int)mouseY,
+                if (isMouseOverRect(cmx, cmy,
                         submenuStartX + 10, buttonY, submenuWidth - 10, buttonHeight)) {
                     selectedStatsSubmenu     = i;
                     lastSelectedStatsSubmenu = i;
@@ -372,7 +416,7 @@ public class CustomGuiScreen extends Screen {
             }
         }
 
-        // â”€â”€ House section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // House section
         if (selectedSection == 4) {
             int cX = layout.contentX + layout.contentWidth / 20;
             int cY = layout.contentY + layout.contentHeight / 16;
@@ -387,10 +431,9 @@ public class CustomGuiScreen extends Screen {
             int contentY  = tabY + tabH + 8;
             int contentH  = cY + cH - contentY - 10;
 
-            // â”€â”€ Player has a house â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
             if (!house.houseName.isEmpty() && !house.isEditingHouseName) {
 
-                // â”€â”€ Members tab: confirmation dialogs eat all clicks first â”€â”€â”€â”€â”€â”€â”€â”€
+                // Confirm dialogs eat clicks first
                 if (selectedHouseTab == 1) {
                     if (showingLeaveConfirm || kickTargetUUID != null) {
                         int dialogW = 200, dialogH = 70;
@@ -401,7 +444,7 @@ public class CustomGuiScreen extends Screen {
                         int noX     = dialogX + dialogW / 2 + 6;
                         int btnY    = dialogY + dialogH - btnH - 8;
 
-                        if (isMouseOverRect((int)mouseX, (int)mouseY, yesX, btnY, btnW, btnH)) {
+                        if (isMouseOverRect(cmx, cmy, yesX, btnY, btnW, btnH)) {
                             if (showingLeaveConfirm) {
                                 net.neoforged.neoforge.network.PacketDistributor.sendToServer(
                                         new net.darkflameproduction.agotmod.network.LeaveHousePacket());
@@ -417,43 +460,40 @@ public class CustomGuiScreen extends Screen {
                             playButtonSound();
                             return true;
                         }
-                        if (isMouseOverRect((int)mouseX, (int)mouseY, noX, btnY, btnW, btnH)) {
+                        if (isMouseOverRect(cmx, cmy, noX, btnY, btnW, btnH)) {
                             showingLeaveConfirm = false;
                             kickTargetUUID      = null;
                             kickTargetUsername  = "";
                             playButtonSound();
                             return true;
                         }
-                        return true; // eat all other clicks while dialog is open
+                        return true;
                     }
 
-                    // â”€â”€ Red X kick buttons (founder only) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                    // Red X kick buttons (founder only)
                     if (HouseData.isFounder()) {
                         java.util.List<HouseData.MemberEntry> members = HouseData.getHouseMembers();
-                        int safeLeft = cX + 90;
+                        int safeLeft  = cX + 90;
                         int safeRight = cX + cW - 90;
-                        int safeW    = safeRight - safeLeft;
-                        int faceSize = 16;
-                        int rowH     = faceSize + 6;
-                        int listY    = contentY + 10;
+                        int safeW     = safeRight - safeLeft;
+                        int faceSize  = 16;
+                        int rowH      = faceSize + 6;
+                        int listY     = contentY + 10;
 
                         for (int i = 0; i < members.size(); i++) {
                             HouseData.MemberEntry entry = members.get(i);
                             boolean isSelf = minecraft.player != null
                                     && minecraft.player.getUUID().equals(entry.uuid);
                             if (isSelf) continue;
-
-                            int rowY = listY + (i * rowH);
+                            int rowY  = listY + (i * rowH);
                             if (rowY + rowH > contentY + contentH - 10) break;
-
                             int nameW    = font.width(entry.username);
                             int rowW     = faceSize + 6 + nameW;
                             int rowX     = safeLeft + (safeW - rowW) / 2;
                             int xBtnSize = 12;
-                            int xBtnX   = rowX + faceSize + 6 + nameW + 6;
-                            int xBtnY   = rowY + (faceSize - xBtnSize) / 2;
-
-                            if (isMouseOverRect((int)mouseX, (int)mouseY, xBtnX, xBtnY, xBtnSize, xBtnSize)) {
+                            int xBtnX    = rowX + faceSize + 6 + nameW + 6;
+                            int xBtnY    = rowY + (faceSize - xBtnSize) / 2;
+                            if (isMouseOverRect(cmx, cmy, xBtnX, xBtnY, xBtnSize, xBtnSize)) {
                                 kickTargetUUID     = entry.uuid;
                                 kickTargetUsername = entry.username;
                                 playButtonSound();
@@ -463,10 +503,8 @@ public class CustomGuiScreen extends Screen {
                     }
                 }
 
-                // â”€â”€ Tab bar clicks â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-
-                // Towns tab
-                if (isMouseOverRect((int)mouseX, (int)mouseY, tabsStart, tabY, tabW, tabH)) {
+                // Tab bar
+                if (isMouseOverRect(cmx, cmy, tabsStart, tabY, tabW, tabH)) {
                     if (selectedHouseTab != 0) {
                         removeWidgetIfPresent(inviteEditBox,     () -> inviteEditBox     = null);
                         removeWidgetIfPresent(closeInviteButton, () -> closeInviteButton = null);
@@ -480,9 +518,7 @@ public class CustomGuiScreen extends Screen {
                     }
                     return true;
                 }
-
-                // Members tab
-                if (isMouseOverRect((int)mouseX, (int)mouseY, tabsStart + tabW + tabGap, tabY, tabW, tabH)) {
+                if (isMouseOverRect(cmx, cmy, tabsStart + tabW + tabGap, tabY, tabW, tabH)) {
                     if (selectedHouseTab != 1) {
                         removeWidgetIfPresent(inviteEditBox,     () -> inviteEditBox     = null);
                         removeWidgetIfPresent(closeInviteButton, () -> closeInviteButton = null);
@@ -494,7 +530,7 @@ public class CustomGuiScreen extends Screen {
                     return true;
                 }
 
-                // â”€â”€ Invite tab: Send button (drawn manually) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                // Invite-tab send button
                 if (selectedHouseTab == 2) {
                     int centerX = cX + cW / 2;
                     int midY    = contentY + contentH / 2 - 20;
@@ -503,8 +539,7 @@ public class CustomGuiScreen extends Screen {
                     int btnW    = 55;
                     int btnX    = boxX + boxW + 6;
                     int btnY    = midY + 2;
-
-                    if (isMouseOverRect((int)mouseX, (int)mouseY, btnX, btnY, btnW, 18)) {
+                    if (isMouseOverRect(cmx, cmy, btnX, btnY, btnW, 18)) {
                         if (inviteEditBox != null) {
                             String target = inviteEditBox.getValue().trim();
                             if (!target.isEmpty()) {
@@ -519,7 +554,7 @@ public class CustomGuiScreen extends Screen {
                 }
             }
 
-            // â”€â”€ No house, pending invite: accept / decline â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            // No house, pending invite: accept / decline
             if (house.houseName.isEmpty() && HouseData.hasPendingInvite()) {
                 int centerX = cX + cW / 2;
                 int centerY = cY + cH / 2;
@@ -527,14 +562,13 @@ public class CustomGuiScreen extends Screen {
                 int acceptX = centerX - btnW - 10;
                 int rejectX = centerX + 10;
                 int btnY    = centerY + 20;
-
-                if (isMouseOverRect((int)mouseX, (int)mouseY, acceptX, btnY, btnW, btnH)) {
+                if (isMouseOverRect(cmx, cmy, acceptX, btnY, btnW, btnH)) {
                     net.neoforged.neoforge.network.PacketDistributor.sendToServer(
                             new net.darkflameproduction.agotmod.network.RespondHouseInvitePacket(true));
                     playButtonSound();
                     return true;
                 }
-                if (isMouseOverRect((int)mouseX, (int)mouseY, rejectX, btnY, btnW, btnH)) {
+                if (isMouseOverRect(cmx, cmy, rejectX, btnY, btnW, btnH)) {
                     net.neoforged.neoforge.network.PacketDistributor.sendToServer(
                             new net.darkflameproduction.agotmod.network.RespondHouseInvitePacket(false));
                     playButtonSound();
@@ -566,7 +600,7 @@ public class CustomGuiScreen extends Screen {
         return super.mouseDragged(mouseX, mouseY, button, dragX, dragY);
     }
 
-    // â”€â”€ Render â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Render ────────────────────────────────────────────────────────────────
 
     @Override
     public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
@@ -579,63 +613,115 @@ public class CustomGuiScreen extends Screen {
             skills.updateFromStats(minecraft.player.getStats());
         }
 
-        g.fill(0, 0, width, height, 0x40E6D8B7);
         ScreenLayout layout = new ScreenLayout(width, height);
-        drawSectionButtons(g, mouseX, mouseY, layout);
 
+        // ── Push virtual canvas pose ──────────────────────────────────────────
+        g.pose().pushPose();
+        g.pose().translate(layout.offsetX, layout.offsetY, 0);
+        g.pose().scale(layout.scale, layout.scale, 1f);
+
+        int scaledMouseX = (int)((mouseX - layout.offsetX) / layout.scale);
+        int scaledMouseY = (int)((mouseY - layout.offsetY) / layout.scale);
+
+        // ── Layer 1: tab buttons (behind frame) ───────────────────────────────
+        drawSectionButtons(g, scaledMouseX, scaledMouseY, layout);
+
+        // ── Layer 2: glass texture centred (382x212 inside 1082x212) ─────────
         if (selectedSection >= 0 && selectedSection < RAINBOW_COLORS.length) {
-            renderStonePanel(g, layout.contentX, layout.contentY, layout.contentWidth, layout.contentHeight);
-            drawSectionTitle(g, SECTION_LABELS[selectedSection], layout.contentX, layout.contentY, layout.contentWidth);
+            int glassX = (BASE_GUI_WIDTH - GLASS_TEXTURE_WIDTH) / 2;
+            int col = RAINBOW_COLORS[selectedSection];
+            float r   = ((col >> 16) & 0xFF) / 255f;
+            float gg2 = ((col >>  8) & 0xFF) / 255f;
+            float b2  =  (col        & 0xFF) / 255f;
+            com.mojang.blaze3d.systems.RenderSystem.enableBlend();
+            com.mojang.blaze3d.systems.RenderSystem.setShaderColor(r, gg2, b2, 1f);
+            g.blit(FRAME_GLASS_TEXTURE, glassX, 0, 0, 0, GLASS_TEXTURE_WIDTH, GLASS_TEXTURE_HEIGHT, GLASS_TEXTURE_WIDTH, GLASS_TEXTURE_HEIGHT);
+            com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
+            com.mojang.blaze3d.systems.RenderSystem.disableBlend();
+        }
+
+        // ── Layer 2: frame texture on top ─────────────────────────────────────
+        g.blit(FRAME_TEXTURE, 0, 0, 0, 0, BASE_GUI_WIDTH, BASE_GUI_HEIGHT, BASE_GUI_WIDTH, BASE_GUI_HEIGHT);
+
+        // ── Layer 3: section content in the void ──────────────────────────────
+        if (selectedSection >= 0 && selectedSection < RAINBOW_COLORS.length) {
             switch (selectedSection) {
-                case 0 -> drawMapSection(g, mouseX, mouseY, layout, partialTick);
-                case 2 -> drawSkillsSection(g, mouseX, mouseY, layout);
-                case 3 -> drawStatsSection(g, mouseX, mouseY, layout);
-                case 4 -> drawHouseSection(g, mouseX, mouseY, layout);
+                case 0 -> {
+                    // Map widget uses real screen coords — render outside the virtual pose
+                    g.pose().popPose();
+                    drawMapSection(g, mouseX, mouseY, layout, partialTick);
+                    g.pose().pushPose();
+                    g.pose().translate(layout.offsetX, layout.offsetY, 0);
+                    g.pose().scale(layout.scale, layout.scale, 1f);
+                }
+                default -> {
+                    g.pose().pushPose();
+                    g.pose().translate(VOID_X, VOID_Y, 0);
+                    g.pose().scale(CONTENT_SCALE, CONTENT_SCALE, 1f);
+                    // Mouse coords relative to void origin, scaled back
+                    int cmx = (int)((scaledMouseX - VOID_X) / CONTENT_SCALE);
+                    int cmy = (int)((scaledMouseY - VOID_Y) / CONTENT_SCALE);
+                    switch (selectedSection) {
+                        case 2 -> drawSkillsSection(g, cmx, cmy, layout);
+                        case 3 -> drawStatsSection(g, cmx, cmy, layout);
+                        case 4 -> drawHouseSection(g, cmx, cmy, (int)mouseX, (int)mouseY, layout);
+                    }
+                    g.pose().popPose();
+                }
             }
         }
+
+        g.pose().popPose();
     }
 
     @Override
     public void renderBackground(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
-        // suppress vanilla blur/dim
+        // Suppress vanilla blur / dim — we handle that ourselves
     }
 
     @Override
     public boolean isPauseScreen() { return false; }
 
-    // â”€â”€ Section renderers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Section renderers ─────────────────────────────────────────────────────
 
     private void drawSectionButtons(GuiGraphics g, int mouseX, int mouseY, ScreenLayout layout) {
+        int perTabW = TAB_W / SECTION_LABELS.length;
         for (int i = 0; i < SECTION_LABELS.length; i++) {
-            int startX = layout.sideMargin + (i * layout.sectionButtonWidth);
-            int endX   = (i == SECTION_LABELS.length - 1)
-                    ? width - layout.sideMargin
-                    : layout.sideMargin + ((i + 1) * layout.sectionButtonWidth);
-            boolean mapUnavail = (i == 0 && mapPacket == null);
-            boolean hovered    = !mapUnavail && isMouseOverRect(mouseX, mouseY, startX, layout.topMargin, endX - startX, layout.sectionButtonHeight);
-            boolean selected   = (i == selectedSection);
-            int bw = endX - startX;
-            ResourceLocation tex = (hovered || selected) ? STAINED_GLASS_TRANSPARENT_TEXTURES[i] : STAINED_GLASS_TEXTURES[i];
+            int startX = TAB_X + (i * perTabW);
+            int endX   = (i == SECTION_LABELS.length - 1) ? TAB_X + TAB_W : TAB_X + ((i + 1) * perTabW);
+            int bw     = endX - startX;
 
-            // Dim the map tab when unavailable
-            if (mapUnavail) {
-                com.mojang.blaze3d.systems.RenderSystem.setShaderColor(0.4f, 0.4f, 0.4f, 0.6f);
-            }
-            renderTexturedPanel(g, tex, startX, layout.topMargin, bw, layout.sectionButtonHeight, true);
+            boolean mapUnavail = (i == 0 && mapPacket == null);
+            boolean selected   = (i == selectedSection);
+            ResourceLocation tex = selected
+                    ? STAINED_GLASS_TRANSPARENT_TEXTURES[i]
+                    : STAINED_GLASS_TEXTURES[i];
+
+            if (mapUnavail) com.mojang.blaze3d.systems.RenderSystem.setShaderColor(0.4f, 0.4f, 0.4f, 0.6f);
+            int tileSize = 32;
+            for (int tx = 0; tx < bw; tx += tileSize)
+                for (int ty = 0; ty < TAB_H; ty += tileSize)
+                    g.blit(tex, startX + tx, TAB_Y + ty, 0, 0,
+                            Math.min(tileSize, bw - tx), Math.min(tileSize, TAB_H - ty),
+                            tileSize, tileSize);
             com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
 
-            String text = SECTION_LABELS[i];
-            int tw = font.width(text);
-            int textColor = mapUnavail ? 0xFF444444 : (selected ? 0xFFFFFFFF : PARCHMENT_COLOR);
-            g.drawString(font, text, startX + (bw - tw) / 2, layout.topMargin + (layout.sectionButtonHeight - font.lineHeight) / 2, textColor);
+            String text      = SECTION_LABELS[i];
+            int    textColor = mapUnavail ? 0xFF444444 : (selected ? 0xFFFFFFFF : PARCHMENT_COLOR);
+            float  textScale = 0.7f;
+            int    tw        = (int)(font.width(text) * textScale);
+            g.pose().pushPose();
+            g.pose().scale(textScale, textScale, 1f);
+            g.drawString(font, text,
+                    (int)((startX + (bw - tw) / 2) / textScale),
+                    (int)((TAB_Y + (TAB_H - font.lineHeight * textScale) / 2) / textScale),
+                    textColor, false);
+            g.pose().popPose();
         }
     }
 
     private void drawMapSection(GuiGraphics g, int mouseX, int mouseY, ScreenLayout layout, float partialTick) {
-        if (mapPacket == null || mapWidget == null) {
-            // Render an empty stone panel â€” no text, no interaction
-            return;
-        }
+        if (mapPacket == null || mapWidget == null) return;
         if (mapWidget.isActive() && mapWidget.getMapTextureId() != null &&
                 minecraft.getResourceManager().getResource(mapWidget.getMapTextureId()).isPresent()) {
             mapWidget.render(g, mouseX, mouseY, partialTick);
@@ -651,22 +737,21 @@ public class CustomGuiScreen extends Screen {
         int panelY      = layout.contentY + layout.contentHeight / 16;
         int panelHeight = layout.contentHeight - (layout.contentHeight / 8);
 
-        renderPaperPanel(g, leftPanelX,  panelY, panelWidth, panelHeight);
-        renderPaperPanel(g, rightPanelX, panelY, panelWidth, panelHeight);
 
-        drawSubmenuTitle(g, "General Skills",        leftPanelX  + (panelWidth - font.width("General Skills")) / 2,        panelY);
-        drawSubmenuTitle(g, "Specification Skills",  rightPanelX + (panelWidth - font.width("Specification Skills")) / 2,  panelY);
+
+        drawSubmenuTitle(g, "General Skills",
+                leftPanelX  + (panelWidth - font.width("General Skills")) / 2,       panelY);
+        drawSubmenuTitle(g, "Specification Skills",
+                rightPanelX + (panelWidth - font.width("Specification Skills")) / 2,  panelY);
 
         int columnWidth = panelWidth / 2;
         int headerY     = panelY + layout.contentHeight / 10 + 10;
         float scale     = 0.9f;
-        String col1Title = "Skill Level";
-        String col2Title = "Progress";
 
-        drawColumnHeaders(g, leftPanelX,  panelWidth, columnWidth, headerY, scale, col1Title, col2Title);
-        drawColumnHeaders(g, rightPanelX, panelWidth, columnWidth, headerY, scale, col1Title, col2Title);
+        drawColumnHeaders(g, leftPanelX,  panelWidth, columnWidth, headerY, scale, "Skill Level", "Progress");
+        drawColumnHeaders(g, rightPanelX, panelWidth, columnWidth, headerY, scale, "Skill Level", "Progress");
 
-        int statsY     = headerY + (int)(font.lineHeight * scale) + 10;
+        int statsY      = headerY + (int)(font.lineHeight * scale) + 10;
         int lineSpacing = layout.contentHeight / 18;
 
         drawGeneralSkill2Col(g, "Agility",   skills.agilityLevel,   skills.agilityProgress,   leftPanelX, statsY,                 columnWidth, scale);
@@ -692,12 +777,13 @@ public class CustomGuiScreen extends Screen {
         g.drawString(font, col2, (int)(c2x / scale), (int)(headerY / scale), SUBMENU_TEXT_COLOR, false);
         g.pose().popPose();
         g.fill(panelX + panelWidth/10, headerY + (int)(font.lineHeight * scale) + 2,
-                panelX + panelWidth - panelWidth/10, headerY + (int)(font.lineHeight * scale) + 3, SUBMENU_TEXT_COLOR);
+                panelX + panelWidth - panelWidth/10, headerY + (int)(font.lineHeight * scale) + 3,
+                SUBMENU_TEXT_COLOR);
     }
 
     private void drawGeneralSkill2Col(GuiGraphics g, String name, int level, double progress,
                                       int x, int y, int columnWidth, float scale) {
-        int barHeight = 6;
+        int barHeight   = 6;
         int maxBarWidth = columnWidth - 25;
         g.pose().pushPose();
         g.pose().scale(scale, scale, 1.0f);
@@ -713,15 +799,15 @@ public class CustomGuiScreen extends Screen {
         g.fill(barX, cy - barHeight/2, barX + (int)(barW * progress), cy + barHeight/2, RAINBOW_COLORS[0]);
         g.pose().pushPose();
         g.pose().scale(scale, scale, 1.0f);
-        String pct = level < 100 ? String.format("%.0f%%", progress * 100) : "Max";
-        int textColor = level < 100 ? SUBMENU_TEXT_COLOR : 0xFF55FF55;
+        String pct       = level < 100 ? String.format("%.0f%%", progress * 100) : "Max";
+        int    textColor = level < 100 ? SUBMENU_TEXT_COLOR : 0xFF55FF55;
         g.drawString(font, pct, (int)((barX + barW + 5) / scale), (int)(y / scale), textColor, false);
         g.pose().popPose();
     }
 
     private void drawWeaponSkill2Col(GuiGraphics g, String skillName, int level, double progress,
                                      double nextReq, int x, int y, int columnWidth, float scale, int color) {
-        int barHeight = 6;
+        int barHeight   = 6;
         int maxBarWidth = columnWidth - 25;
         g.pose().pushPose();
         g.pose().scale(scale, scale, 1.0f);
@@ -734,11 +820,12 @@ public class CustomGuiScreen extends Screen {
         int barW = maxBarWidth - 20;
         int cy   = y + (int)((font.lineHeight * scale) / 2);
         g.fill(barX, cy - barHeight/2, barX + barW, cy + barHeight/2, 0xFF555555);
-        g.fill(barX, cy - barHeight/2, barX + (int)(barW * progress), cy + barHeight/2, level < 100 ? color : RAINBOW_COLORS[4]);
+        g.fill(barX, cy - barHeight/2, barX + (int)(barW * progress), cy + barHeight/2,
+                level < 100 ? color : RAINBOW_COLORS[4]);
         g.pose().pushPose();
         g.pose().scale(scale, scale, 1.0f);
-        String pct = level < 100 ? String.format("%.0f%%", progress * 100) : "Max";
-        int textColor = level < 100 ? SUBMENU_TEXT_COLOR : 0xFF55FF55;
+        String pct       = level < 100 ? String.format("%.0f%%", progress * 100) : "Max";
+        int    textColor = level < 100 ? SUBMENU_TEXT_COLOR : 0xFF55FF55;
         g.drawString(font, pct, (int)((barX + barW + 5) / scale), (int)(y / scale), textColor, false);
         g.pose().popPose();
     }
@@ -761,20 +848,22 @@ public class CustomGuiScreen extends Screen {
             renderTexturedPanel(g, tex, submenuStartX + 10, buttonY, submenuWidth - 10, buttonHeight, true);
             String label = STAT_SUBMENU_LABELS[i];
             int lw = font.width(label);
-            g.drawString(font, label, submenuStartX + 10 + (submenuWidth - 10 - lw) / 2,
-                    buttonY + (buttonHeight - font.lineHeight) / 2, sel ? 0xFFFFFFFF : SUBMENU_TEXT_COLOR, false);
+            g.drawString(font, label,
+                    submenuStartX + 10 + (submenuWidth - 10 - lw) / 2,
+                    buttonY + (buttonHeight - font.lineHeight) / 2,
+                    sel ? 0xFFFFFFFF : SUBMENU_TEXT_COLOR, false);
         }
 
-        int origCX    = submenuStartX + submenuWidth + layout.contentWidth / 32;
-        int origCY    = submenuStartY;
-        int origCW    = layout.contentWidth - submenuWidth - (layout.contentWidth / 16);
-        int origCH    = submenuHeight;
-        int cW        = (int)(origCW * 0.75);
-        int cH        = (int)(origCH * 0.75);
-        int cX        = origCX + origCW / 2 - cW / 2;
-        int cY        = origCY + origCH / 2 - cH / 2;
+        int origCX = submenuStartX + submenuWidth + layout.contentWidth / 32;
+        int origCY = submenuStartY;
+        int origCW = layout.contentWidth  - submenuWidth - (layout.contentWidth / 16);
+        int origCH = submenuHeight;
+        int cW     = (int)(origCW * 0.75);
+        int cH     = (int)(origCH * 0.75);
+        int cX     = origCX + origCW / 2 - cW / 2;
+        int cY     = origCY + origCH / 2 - cH / 2;
 
-        renderPaperPanel(g, cX, cY, cW, cH);
+
         drawSubmenuTitle(g, STAT_SUBMENU_LABELS[selectedStatsSubmenu],
                 cX + (cW - font.width(STAT_SUBMENU_LABELS[selectedStatsSubmenu])) / 2, cY);
 
@@ -787,15 +876,15 @@ public class CustomGuiScreen extends Screen {
     private void drawSubmenuContent(GuiGraphics g, int x, int y, int ls, int cX, int cW) {
         switch (selectedStatsSubmenu) {
             case 0 -> {
-                drawStatCentered(g, "Deaths",            skills.cachedDeaths,        cX, cW, y);
-                drawStatCentered(g, "Jumps",             skills.cachedJumps,         cX, cW, y + ls);
+                drawStatCentered(g, "Deaths",           skills.cachedDeaths,       cX, cW, y);
+                drawStatCentered(g, "Jumps",            skills.cachedJumps,        cX, cW, y + ls);
                 drawDistanceStatCentered(g, "Distance Traveled", skills.cachedTotalDistance, cX, cW, y + ls*2);
             }
             case 1 -> {
-                drawStatCentered(g, "Mob Kills",     skills.cachedMobKills,    cX, cW, y);
-                drawStatCentered(g, "Player Kills",  skills.cachedPlayerKills, cX, cW, y + ls);
-                drawStatCentered(g, "Damage Dealt",  skills.cachedDamageDealt, cX, cW, y + ls*2);
-                drawStatCentered(g, "Damage Taken",  skills.cachedDamageTaken, cX, cW, y + ls*3);
+                drawStatCentered(g, "Mob Kills",    skills.cachedMobKills,    cX, cW, y);
+                drawStatCentered(g, "Player Kills", skills.cachedPlayerKills, cX, cW, y + ls);
+                drawStatCentered(g, "Damage Dealt", skills.cachedDamageDealt, cX, cW, y + ls*2);
+                drawStatCentered(g, "Damage Taken", skills.cachedDamageTaken, cX, cW, y + ls*3);
             }
             case 2 -> {
                 drawStatCentered(g, "Items Stolen", 0, cX, cW, y);
@@ -821,12 +910,9 @@ public class CustomGuiScreen extends Screen {
     }
 
     private void drawStatCentered(GuiGraphics g, String label, int value, int cX, int cW, int y) {
-        String text;
-        if (label.equals("Damage Dealt") || label.equals("Damage Taken")) {
-            text = label + ": " + String.format("%.0f", value / 10.0);
-        } else {
-            text = label + ": " + value;
-        }
+        String text = (label.equals("Damage Dealt") || label.equals("Damage Taken"))
+                ? label + ": " + String.format("%.0f", value / 10.0)
+                : label + ": " + value;
         g.drawString(font, text, cX + (cW - font.width(text)) / 2, y, SUBMENU_TEXT_COLOR, false);
     }
 
@@ -841,29 +927,26 @@ public class CustomGuiScreen extends Screen {
         g.drawString(font, text, cX + (cW - font.width(text)) / 2, y, SUBMENU_TEXT_COLOR, false);
     }
 
-    // â”€â”€ House section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── House section ─────────────────────────────────────────────────────────
 
-    private void drawHouseSection(GuiGraphics g, int mouseX, int mouseY, ScreenLayout layout) {
+    private void drawHouseSection(GuiGraphics g, int mouseX, int mouseY, int rawMouseX, int rawMouseY, ScreenLayout layout) {
         int cX = layout.contentX + layout.contentWidth / 20;
         int cY = layout.contentY + layout.contentHeight / 16;
         int cW = layout.contentWidth  - (layout.contentWidth  / 10);
         int cH = layout.contentHeight - (layout.contentHeight / 8);
 
-        renderPaperPanel(g, cX, cY, cW, cH);
 
-        // Case 1: no house, pending invite
+
         if (house.houseName.isEmpty() && HouseData.hasPendingInvite()) {
             drawInvitePanel(g, mouseX, mouseY, cX, cY, cW, cH);
             return;
         }
 
-        // Case 2: no house / editing
         if (house.houseName.isEmpty() || house.isEditingHouseName) {
-            drawHouseCreationPanel(g, mouseX, mouseY, cX, cY, cW, cH);
+            drawHouseCreationPanel(g, rawMouseX, rawMouseY, cX, cY, cW, cH);
             return;
         }
 
-        // Case 3: has a house
         if (!house.hasRequestedTowns) {
             net.neoforged.neoforge.network.PacketDistributor.sendToServer(
                     new net.darkflameproduction.agotmod.network.RequestOwnedTownsPacket());
@@ -872,7 +955,6 @@ public class CustomGuiScreen extends Screen {
 
         boolean founder = HouseData.isFounder();
 
-        // House title
         String houseTitle = "House " + house.houseName;
         int titleW = (int)(font.width(houseTitle) * 1.3f);
         int titleX = cX + (cW - titleW) / 2;
@@ -881,20 +963,14 @@ public class CustomGuiScreen extends Screen {
         g.drawString(font, houseTitle, (int)(titleX / 1.3f), (int)((cY + 18) / 1.3f), SUBMENU_TEXT_COLOR, false);
         g.pose().popPose();
 
-        // Banners
         int bannerY = cY + (cH - 120) / 2;
-        drawHouseBanner(g, cX + 20, bannerY);
-        drawHouseBanner(g, cX + cW - 80, bannerY);
+        drawHouseBanner(g, cX + 20,          bannerY);
+        drawHouseBanner(g, cX + cW - 80,     bannerY);
 
-        // â”€â”€ Corner button â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        // Founder + Towns tab  â†’ Edit
-        // Founder + Members tab â†’ Invite
-        // Founder + Invite tab  â†’ Back
-        // Member  + any tab     â†’ no corner button
-        int cornerBtnX = cX + cW - 60;
-        int cornerBtnY = cY + 14;
-        int cornerBtnW = 44;
-        int cornerBtnH = 16;
+        int cornerBtnX = toScreenX(cX + cW - 60);
+        int cornerBtnY = toScreenY(cY + 14);
+        int cornerBtnW = toScreenSize(44);
+        int cornerBtnH = toScreenSize(16);
 
         if (founder) {
             if (selectedHouseTab == 0) {
@@ -909,8 +985,7 @@ public class CustomGuiScreen extends Screen {
                             }).bounds(cornerBtnX, cornerBtnY, cornerBtnW, cornerBtnH).build();
                     addWidget(editHouseButton);
                 }
-                editHouseButton.render(g, mouseX, mouseY, 0);
-
+                editHouseButton.render(g, rawMouseX, rawMouseY, 0);
             } else if (selectedHouseTab == 1) {
                 removeWidgetIfPresent(editHouseButton,   () -> editHouseButton   = null);
                 removeWidgetIfPresent(closeInviteButton, () -> closeInviteButton = null);
@@ -923,10 +998,8 @@ public class CustomGuiScreen extends Screen {
                             }).bounds(cornerBtnX, cornerBtnY, cornerBtnW, cornerBtnH).build();
                     addWidget(inviteButton);
                 }
-                inviteButton.render(g, mouseX, mouseY, 0);
-
+                inviteButton.render(g, rawMouseX, rawMouseY, 0);
             } else {
-                // Tab 2: Back
                 removeWidgetIfPresent(editHouseButton, () -> editHouseButton = null);
                 removeWidgetIfPresent(inviteButton,    () -> inviteButton    = null);
                 if (closeInviteButton == null) {
@@ -939,26 +1012,23 @@ public class CustomGuiScreen extends Screen {
                             }).bounds(cornerBtnX, cornerBtnY, cornerBtnW, cornerBtnH).build();
                     addWidget(closeInviteButton);
                 }
-                closeInviteButton.render(g, mouseX, mouseY, 0);
+                closeInviteButton.render(g, rawMouseX, rawMouseY, 0);
             }
         } else {
-            // Member â€” remove all founder corner buttons
             removeWidgetIfPresent(editHouseButton,   () -> editHouseButton   = null);
             removeWidgetIfPresent(inviteButton,      () -> inviteButton      = null);
             removeWidgetIfPresent(closeInviteButton, () -> closeInviteButton = null);
         }
 
-        // â”€â”€ Two visible tabs: Towns | Members â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         int tabY      = cY + 44;
         int tabH      = 18;
         int tabW      = 80;
         int tabGap    = 4;
         int tabsStart = cX + (cW - (tabW * 2 + tabGap)) / 2;
 
-        drawTab(g, mouseX, mouseY, tabsStart,                  tabY, tabW, tabH, "Towns",   selectedHouseTab == 0);
-        drawTab(g, mouseX, mouseY, tabsStart + tabW + tabGap,  tabY, tabW, tabH, "Members", selectedHouseTab >= 1);
-
-        g.fill(cX + cW / 10, tabY + tabH + 2, cX + cW - cW / 10, tabY + tabH + 3, SUBMENU_TEXT_COLOR);
+        drawTab(g, mouseX, mouseY, tabsStart,                 tabY, tabW, tabH, "Towns",   selectedHouseTab == 0);
+        drawTab(g, mouseX, mouseY, tabsStart + tabW + tabGap, tabY, tabW, tabH, "Members", selectedHouseTab >= 1);
+        g.fill(cX + cW/10, tabY + tabH + 2, cX + cW - cW/10, tabY + tabH + 3, SUBMENU_TEXT_COLOR);
 
         int contentY = tabY + tabH + 8;
         int contentH = cY + cH - contentY - 10;
@@ -969,28 +1039,22 @@ public class CustomGuiScreen extends Screen {
                 int townsX = cX + (cW - townsW) / 2;
                 drawOwnedTownsSection(g, townsX, contentY, townsW, contentH);
             }
-            case 1 -> drawMembersTab(g, mouseX, mouseY, cX, contentY, cW, contentH);
-            case 2 -> drawInviteTab(g, mouseX, mouseY, cX, contentY, cW, contentH);
+            case 1 -> drawMembersTab(g, mouseX, mouseY, rawMouseX, rawMouseY, cX, contentY, cW, contentH);
+            case 2 -> drawInviteTab(g, mouseX, mouseY, rawMouseX, rawMouseY, cX, contentY, cW, contentH);
         }
     }
 
     private void removeWidgetIfPresent(net.minecraft.client.gui.components.events.GuiEventListener widget,
                                        Runnable nullify) {
-        if (widget != null) {
-            removeWidget(widget);
-            nullify.run();
-        }
+        if (widget != null) { removeWidget(widget); nullify.run(); }
     }
 
-    private void drawInviteTab(GuiGraphics g, int mouseX, int mouseY,
+    private void drawInviteTab(GuiGraphics g, int mouseX, int mouseY, int rawMouseX, int rawMouseY,
                                int cX, int contentY, int cW, int contentH) {
         int centerX = cX + cW / 2;
         int midY    = contentY + contentH / 2 - 20;
-
         String label = "Invite a player to your house:";
-        g.drawString(font, label,
-                centerX - font.width(label) / 2,
-                midY - 14, SUBMENU_TEXT_COLOR, false);
+        g.drawString(font, label, centerX - font.width(label) / 2, midY - 14, SUBMENU_TEXT_COLOR, false);
 
         int boxW = (int)(cW * 0.45f);
         int boxX = centerX - boxW / 2 - 30;
@@ -1000,15 +1064,14 @@ public class CustomGuiScreen extends Screen {
 
         if (inviteEditBox == null) {
             inviteEditBox = new net.minecraft.client.gui.components.EditBox(
-                    font, boxX, boxY, boxW, 18,
+                    font, toScreenX(boxX), toScreenY(boxY), toScreenSize(boxW), toScreenSize(18),
                     net.minecraft.network.chat.Component.literal("Player name"));
             inviteEditBox.setMaxLength(40);
             inviteEditBox.setHint(net.minecraft.network.chat.Component.literal("Player name..."));
             addWidget(inviteEditBox);
         }
-        if (inviteEditBox != null) inviteEditBox.render(g, mouseX, mouseY, 0);
+        if (inviteEditBox != null) inviteEditBox.render(g, rawMouseX, rawMouseY, 0);
 
-        // Send button â€” separate from the corner button
         int sendBtnY = boxY;
         g.fill(btnX, sendBtnY, btnX + btnW, sendBtnY + 18, 0xFF888888);
         g.fill(btnX, sendBtnY, btnX + btnW, sendBtnY + 1, 0xFFCCCCCC);
@@ -1016,18 +1079,16 @@ public class CustomGuiScreen extends Screen {
         g.fill(btnX + btnW - 1, sendBtnY, btnX + btnW, sendBtnY + 18, 0xFF444444);
         g.fill(btnX, sendBtnY + 17, btnX + btnW, sendBtnY + 18, 0xFF444444);
         String sendLabel = "Send";
-        g.drawString(font, sendLabel,
-                btnX + (btnW - font.width(sendLabel)) / 2,
-                sendBtnY + (18 - font.lineHeight) / 2,
-                0xFFFFFFFF, false);
+        g.drawString(font, sendLabel, btnX + (btnW - font.width(sendLabel)) / 2,
+                sendBtnY + (18 - font.lineHeight) / 2, 0xFFFFFFFF, false);
     }
 
     private void drawInvitePanel(GuiGraphics g, int mouseX, int mouseY,
                                  int cX, int cY, int cW, int cH) {
-        String from    = HouseData.getPendingInviteFrom();
-        String by      = HouseData.getPendingInviteBy();
-        int centerX    = cX + cW / 2;
-        int centerY    = cY + cH / 2;
+        String from  = HouseData.getPendingInviteFrom();
+        String by    = HouseData.getPendingInviteBy();
+        int centerX  = cX + cW / 2;
+        int centerY  = cY + cH / 2;
 
         String line1 = by + " has invited you to join:";
         String line2 = "House " + from;
@@ -1040,13 +1101,11 @@ public class CustomGuiScreen extends Screen {
                 (int)((centerY - 12) / 1.3f), SUBMENU_TEXT_COLOR, false);
         g.pose().popPose();
 
-        // Accept button
-        int btnW = 80, btnH = 20;
+        int btnW    = 80, btnH = 20;
         int acceptX = centerX - btnW - 10;
         int rejectX = centerX + 10;
         int btnY    = centerY + 20;
-
-        drawSimpleButton(g, acceptX, btnY, btnW, btnH, "Accept", 0xFF2E7D32);
+        drawSimpleButton(g, acceptX, btnY, btnW, btnH, "Accept",  0xFF2E7D32);
         drawSimpleButton(g, rejectX, btnY, btnW, btnH, "Decline", 0xFF8B0000);
     }
 
@@ -1060,12 +1119,11 @@ public class CustomGuiScreen extends Screen {
         g.drawString(font, label, x + (w - lw) / 2, y + (h - font.lineHeight) / 2, 0xFFFFFFFF, false);
     }
 
-    private void drawMembersTab(GuiGraphics g, int mouseX, int mouseY,
+    private void drawMembersTab(GuiGraphics g, int mouseX, int mouseY, int rawMouseX, int rawMouseY,
                                 int cX, int contentY, int cW, int contentH) {
         java.util.List<HouseData.MemberEntry> members = HouseData.getHouseMembers();
         boolean founder = HouseData.isFounder();
 
-        // â”€â”€ Confirmation dialogs drawn over everything â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         if (showingLeaveConfirm) {
             drawConfirmDialog(g, mouseX, mouseY, cX, contentY, cW, contentH,
                     "Are you sure you want to leave this house?");
@@ -1077,25 +1135,22 @@ public class CustomGuiScreen extends Screen {
             return;
         }
 
-        // â”€â”€ Leave button â€” members only, in the corner button position â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        // Founder never sees it. Member sees it instead of Invite/Edit.
         if (!founder) {
-            int leaveBtnX = cX + cW - 60;
-            int leaveBtnY = (contentY - 18) - 30; // same Y as corner buttons
+            int leaveBtnX = toScreenX(cX + cW - 60);
+            int leaveBtnY = toScreenY((contentY - 18) - 30);
             if (leaveButton == null) {
                 leaveButton = net.minecraft.client.gui.components.Button.builder(
                         net.minecraft.network.chat.Component.literal("Leave"), btn -> {
                             showingLeaveConfirm = true;
                             playButtonSound();
-                        }).bounds(leaveBtnX, leaveBtnY, 44, 16).build();
+                        }).bounds(leaveBtnX, leaveBtnY, toScreenSize(44), toScreenSize(16)).build();
                 addWidget(leaveButton);
             }
-            leaveButton.render(g, mouseX, mouseY, 0);
+            leaveButton.render(g, rawMouseX, rawMouseY, 0);
         } else {
             removeWidgetIfPresent(leaveButton, () -> leaveButton = null);
         }
 
-        // â”€â”€ Member list â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         int safeLeft  = cX + 90;
         int safeRight = cX + cW - 90;
         int safeW     = safeRight - safeLeft;
@@ -1105,8 +1160,7 @@ public class CustomGuiScreen extends Screen {
 
         if (members.isEmpty()) {
             String empty = "No members found";
-            g.drawString(font, empty,
-                    safeLeft + (safeW - font.width(empty)) / 2,
+            g.drawString(font, empty, safeLeft + (safeW - font.width(empty)) / 2,
                     listY + 10, 0xFF666666, false);
             return;
         }
@@ -1114,30 +1168,21 @@ public class CustomGuiScreen extends Screen {
         for (int i = 0; i < members.size(); i++) {
             int rowY = listY + (i * rowH);
             if (rowY + rowH > contentY + contentH - 10) break;
-
             HouseData.MemberEntry entry = members.get(i);
-            boolean isSelf = minecraft.player != null
-                    && minecraft.player.getUUID().equals(entry.uuid);
-
+            boolean isSelf = minecraft.player != null && minecraft.player.getUUID().equals(entry.uuid);
             int nameW = font.width(entry.username);
             int rowW  = faceSize + 6 + nameW;
             int rowX  = safeLeft + (safeW - rowW) / 2;
 
-            // Resolve skin
             net.minecraft.resources.ResourceLocation skinTex = null;
             if (minecraft.level != null) {
                 for (net.minecraft.client.player.AbstractClientPlayer p : minecraft.level.players()) {
-                    if (p.getUUID().equals(entry.uuid)) {
-                        skinTex = p.getSkin().texture();
-                        entry.skinTexture = skinTex;
-                        break;
-                    }
+                    if (p.getUUID().equals(entry.uuid)) { skinTex = p.getSkin().texture(); entry.skinTexture = skinTex; break; }
                 }
             }
             if (skinTex == null && entry.skinTexture != null) skinTex = entry.skinTexture;
             if (skinTex == null && minecraft.getSkinManager() != null) {
-                com.mojang.authlib.GameProfile profile =
-                        new com.mojang.authlib.GameProfile(entry.uuid, entry.username);
+                com.mojang.authlib.GameProfile profile = new com.mojang.authlib.GameProfile(entry.uuid, entry.username);
                 minecraft.getSkinManager().getOrLoad(profile).thenAccept(skins -> {
                     net.minecraft.resources.ResourceLocation r = skins.texture();
                     if (r != null) entry.skinTexture = r;
@@ -1145,22 +1190,17 @@ public class CustomGuiScreen extends Screen {
             }
 
             if (skinTex != null) {
-                g.blit(
-                        skinTex, rowX, rowY, 8, 8, faceSize, faceSize, 8, 8, 64, 64);
-                g.blit(
-                        skinTex, rowX, rowY, 40, 8, faceSize, faceSize, 8, 8, 64, 64);
+                g.blit(skinTex, rowX, rowY, 8,  8, faceSize, faceSize, 8, 8, 64, 64);
+                g.blit(skinTex, rowX, rowY, 40, 8, faceSize, faceSize, 8, 8, 64, 64);
             } else {
                 g.fill(rowX, rowY, rowX + faceSize, rowY + faceSize, 0xFF888888);
                 g.fill(rowX + 1, rowY + 1, rowX + faceSize - 1, rowY + faceSize - 1, 0xFFAAAAAA);
             }
 
-            int nameColor = isSelf ? 0xFF4CAF50 : SUBMENU_TEXT_COLOR;
-            g.drawString(font, entry.username,
-                    rowX + faceSize + 6,
+            g.drawString(font, entry.username, rowX + faceSize + 6,
                     rowY + (faceSize - font.lineHeight) / 2,
-                    nameColor, false);
+                    isSelf ? 0xFF4CAF50 : SUBMENU_TEXT_COLOR, false);
 
-            // Red X â€” founder only, not on self
             if (founder && !isSelf) {
                 int xBtnSize = 12;
                 int xBtnX    = rowX + faceSize + 6 + nameW + 6;
@@ -1182,44 +1222,27 @@ public class CustomGuiScreen extends Screen {
     }
 
     private void drawConfirmDialog(GuiGraphics g, int mouseX, int mouseY,
-                                   int cX, int contentY, int cW, int contentH,
-                                   String question) {
-        // Dim background
+                                   int cX, int contentY, int cW, int contentH, String question) {
         g.fill(cX, contentY, cX + cW, contentY + contentH, 0xA0000000);
-
-        int dialogW = 200;
-        int dialogH = 70;
+        int dialogW = 200, dialogH = 70;
         int dialogX = cX + (cW - dialogW) / 2;
         int dialogY = contentY + (contentH - dialogH) / 2;
-
-        // Dialog box
         g.fill(dialogX, dialogY, dialogX + dialogW, dialogY + dialogH, 0xFF2A2A2A);
         g.fill(dialogX, dialogY, dialogX + dialogW, dialogY + 1, 0xFF888888);
         g.fill(dialogX, dialogY, dialogX + 1, dialogY + dialogH, 0xFF888888);
         g.fill(dialogX + dialogW - 1, dialogY, dialogX + dialogW, dialogY + dialogH, 0xFF444444);
         g.fill(dialogX, dialogY + dialogH - 1, dialogX + dialogW, dialogY + dialogH, 0xFF444444);
-
-        // Question text â€” wrap if needed
-        int textX = dialogX + 10;
-        int textY = dialogY + 10;
         g.pose().pushPose();
         g.pose().scale(0.85f, 0.85f, 1.0f);
-        g.drawString(font, question,
-                (int)(textX / 0.85f), (int)(textY / 0.85f), 0xFFFFFFFF, false);
+        g.drawString(font, question, (int)((dialogX + 10) / 0.85f), (int)((dialogY + 10) / 0.85f), 0xFFFFFFFF, false);
         g.pose().popPose();
-
-        // Yes / No buttons
         int btnW = 60, btnH = 18;
         int yesX = dialogX + dialogW / 2 - btnW - 6;
         int noX  = dialogX + dialogW / 2 + 6;
         int btnY = dialogY + dialogH - btnH - 8;
-
         drawSimpleButton(g, yesX, btnY, btnW, btnH, "Yes", 0xFF2E7D32);
         drawSimpleButton(g, noX,  btnY, btnW, btnH, "No",  0xFF8B0000);
     }
-
-
-
 
     private void drawTab(GuiGraphics g, int mouseX, int mouseY,
                          int x, int y, int w, int h, String label, boolean selected) {
@@ -1229,7 +1252,6 @@ public class CustomGuiScreen extends Screen {
         g.fill(x, y,         x + 1, y + h,     0xFF666666);
         g.fill(x + w - 1, y, x + w, y + h,     0xFF666666);
         if (!selected) g.fill(x, y + h - 1, x + w, y + h, 0xFF666666);
-
         int lw = font.width(label);
         g.drawString(font, label, x + (w - lw) / 2, y + (h - font.lineHeight) / 2,
                 selected ? SUBMENU_TEXT_COLOR : 0xFF444444, false);
@@ -1237,12 +1259,36 @@ public class CustomGuiScreen extends Screen {
 
     private void drawHouseCreationPanel(GuiGraphics g, int mouseX, int mouseY,
                                         int cX, int cY, int cW, int cH) {
-        String instruction = house.houseName.isEmpty() ? "Enter your noble house name:" : "Edit your house name:";
-        g.drawString(font, instruction, cX + 20, cY + 40, SUBMENU_TEXT_COLOR, false);
+        // Everything here is in real screen coordinates.
+        // The void centre in real screen pixels:
+        ScreenLayout layout = new ScreenLayout(width, height);
+        int voidCentreX = Math.round((VOID_X + VOID_W / 2f) * layout.scale + layout.offsetX);
+        int voidCentreY = Math.round((VOID_Y + VOID_H / 2f) * layout.scale);
+
+        String instruction = house.houseName.isEmpty() ? "Enter your house name:" : "Edit your house name:";
+
+        // Fixed widget sizes in real screen pixels
+        int boxW = Math.round(VOID_W * 0.55f * layout.scale);
+        int btnW = Math.round(36 * layout.scale);
+        int rowH = Math.max(10, Math.round(12 * layout.scale));
+        int gap  = Math.round(4 * layout.scale);
+        int rowW = boxW + gap + btnW;
+        int rowX = voidCentreX - rowW / 2;
+        int rowY = voidCentreY;
+
+        // Draw label directly at real screen coords (pop/push pose to draw unscaled)
+        g.pose().popPose();
+        int labelW = font.width(instruction);
+        int labelX = voidCentreX - labelW / 2;
+        int labelY = rowY - font.lineHeight - Math.round(4 * layout.scale);
+        g.drawString(font, instruction, labelX, labelY, SUBMENU_TEXT_COLOR, false);
+        g.pose().pushPose();
+        g.pose().translate(VOID_X, VOID_Y, 0);
+        g.pose().scale(CONTENT_SCALE, CONTENT_SCALE, 1f);
 
         if (houseNameEditBox == null) {
             houseNameEditBox = new net.minecraft.client.gui.components.EditBox(
-                    font, cX + 20, cY + 60, cW - 140, 20,
+                    font, rowX, rowY, boxW, rowH,
                     net.minecraft.network.chat.Component.literal("House Name"));
             houseNameEditBox.setMaxLength(30);
             houseNameEditBox.setValue(house.houseName);
@@ -1253,7 +1299,7 @@ public class CustomGuiScreen extends Screen {
                     net.minecraft.network.chat.Component.literal("Save"), button -> {
                         String entered = houseNameEditBox.getValue().trim();
                         if (!entered.isEmpty()) {
-                            house.houseName = entered;
+                            house.houseName          = entered;
                             house.isEditingHouseName = false;
                             removeWidget(houseNameEditBox); houseNameEditBox = null;
                             removeWidget(saveHouseButton);  saveHouseButton  = null;
@@ -1261,7 +1307,7 @@ public class CustomGuiScreen extends Screen {
                             house.hasRequestedTowns = false;
                             playButtonSound();
                         }
-                    }).bounds(cX + cW - 110, cY + 60, 60, 20).build();
+                    }).bounds(rowX + boxW + gap, rowY, btnW, rowH).build();
             addWidget(saveHouseButton);
         }
         if (houseNameEditBox != null) houseNameEditBox.render(g, mouseX, mouseY, 0);
@@ -1281,16 +1327,14 @@ public class CustomGuiScreen extends Screen {
             net.minecraft.world.item.DyeColor baseColor = bannerItem.getColor();
             net.minecraft.world.level.block.entity.BannerPatternLayers patterns =
                     bannerStack.get(net.minecraft.core.component.DataComponents.BANNER_PATTERNS);
-
             int bW = 60, bH = 120;
             com.mojang.blaze3d.systems.RenderSystem.enableBlend();
             com.mojang.blaze3d.systems.RenderSystem.defaultBlendFunc();
             g.pose().pushPose();
             drawTextureLayer(g, x, y, bW, bH, BANNER_BASE_TEXTURE, baseColor);
             if (patterns != null) {
-                for (net.minecraft.world.level.block.entity.BannerPatternLayers.Layer layer : patterns.layers()) {
+                for (net.minecraft.world.level.block.entity.BannerPatternLayers.Layer layer : patterns.layers())
                     drawPatternLayer(g, x, y, bW, bH, layer);
-                }
             }
             g.pose().popPose();
             com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
@@ -1303,9 +1347,9 @@ public class CustomGuiScreen extends Screen {
     private void drawTextureLayer(GuiGraphics g, int x, int y, int w, int h,
                                   ResourceLocation texture, net.minecraft.world.item.DyeColor color) {
         int dyeColor = color.getTextureDiffuseColor();
-        float red = ((dyeColor >> 16) & 0xFF) / 255.0F;
-        float green = ((dyeColor >> 8) & 0xFF) / 255.0F;
-        float blue = (dyeColor & 0xFF) / 255.0F;
+        float red   = ((dyeColor >> 16) & 0xFF) / 255.0F;
+        float green = ((dyeColor >>  8) & 0xFF) / 255.0F;
+        float blue  =  (dyeColor        & 0xFF) / 255.0F;
         com.mojang.blaze3d.systems.RenderSystem.setShaderColor(red, green, blue, 1f);
         g.blit(texture, x, y, 1, 0, w, h, 64, 64);
         com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
@@ -1313,9 +1357,10 @@ public class CustomGuiScreen extends Screen {
 
     private void drawPatternLayer(GuiGraphics g, int x, int y, int w, int h,
                                   net.minecraft.world.level.block.entity.BannerPatternLayers.Layer layer) {
-        ResourceLocation id = layer.pattern().value().assetId();
+        ResourceLocation id  = layer.pattern().value().assetId();
         ResourceLocation tex = BANNER_PATTERN_TEXTURES.getOrDefault(id.getPath(),
-                ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/" + id.getPath() + ".png"));
+                ResourceLocation.fromNamespaceAndPath("minecraft",
+                        "textures/entity/banner/" + id.getPath() + ".png"));
         drawTextureLayer(g, x, y, w, h, tex, layer.color());
     }
 
@@ -1329,22 +1374,17 @@ public class CustomGuiScreen extends Screen {
         g.fill(x + 1, y + 1, x + 59, y + 119, 0xFFFF4500);
     }
 
-    // â”€â”€ Complete rewrite: drawOwnedTownsSection in CustomGuiScreen â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-
     private void drawOwnedTownsSection(GuiGraphics g, int x, int y, int w, int h) {
         String title = "Owned Towns";
         int titleW = (int)(font.width(title) * 1.1f);
         g.pose().pushPose();
         g.pose().scale(1.1f, 1.1f, 1.0f);
         g.drawString(font, title,
-                (int)((x + (w - titleW) / 2) / 1.1f),
-                (int)(y / 1.1f),
+                (int)((x + (w - titleW) / 2) / 1.1f), (int)(y / 1.1f),
                 SUBMENU_TEXT_COLOR, false);
         g.pose().popPose();
-
-        g.fill(x + w / 8, y + (int)(font.lineHeight * 1.1f) + 5,
-                x + w - w / 8, y + (int)(font.lineHeight * 1.1f) + 6,
-                SUBMENU_TEXT_COLOR);
+        g.fill(x + w/8, y + (int)(font.lineHeight * 1.1f) + 5,
+                x + w - w/8, y + (int)(font.lineHeight * 1.1f) + 6, SUBMENU_TEXT_COLOR);
 
         int listY = y + (int)(font.lineHeight * 1.1f) + 15;
         java.util.List<SyncOwnedTownsPacket.TownInfo> towns = HouseData.getOwnedTowns();
@@ -1357,59 +1397,48 @@ public class CustomGuiScreen extends Screen {
 
         int lh = font.lineHeight + 6;
         for (int i = 0; i < towns.size(); i++) {
-            int rowY = listY + (i * lh * 2); // two lines per town
+            int rowY = listY + (i * lh * 2);
             if (rowY + lh * 2 > y + h) break;
-
             SyncOwnedTownsPacket.TownInfo town = towns.get(i);
-
-            // Line 1: town name
-            String townText = town.townName() + " â€” Population: " + town.population();
+            String townText = town.townName() + " — Population: " + town.population();
             int color = town.population() >= 100 ? 0xFF2E7D32
-                    : town.population() >= 50  ? 0xFF1565C0
-                    : town.population() >= 20  ? 0xFF6A4C93
+                    : town.population() >= 50    ? 0xFF1565C0
+                    : town.population() >= 20    ? 0xFF6A4C93
                     : SUBMENU_TEXT_COLOR;
             g.drawString(font, townText, x + (w - font.width(townText)) / 2, rowY, color, false);
-
-            // Line 2: owner string ("PlayerName of House HouseName")
             String ownerText = town.ownerString();
             if (ownerText != null && !ownerText.isEmpty()) {
                 g.pose().pushPose();
                 g.pose().scale(0.85f, 0.85f, 1.0f);
                 g.drawString(font, ownerText,
                         (int)((x + (w - (int)(font.width(ownerText) * 0.85f)) / 2) / 0.85f),
-                        (int)((rowY + font.lineHeight + 2) / 0.85f),
-                        0xFF888888, false);
+                        (int)((rowY + font.lineHeight + 2) / 0.85f), 0xFF888888, false);
                 g.pose().popPose();
             }
         }
 
-        // Total population footer
         if (towns.size() > 1) {
-            int total = towns.stream().mapToInt(SyncOwnedTownsPacket.TownInfo::population).sum();
+            int total     = towns.stream().mapToInt(SyncOwnedTownsPacket.TownInfo::population).sum();
             String totalText = "Total Population: " + total;
-            int footerY = listY + towns.size() * lh * 2 + 5;
-            g.fill(x + w / 6, footerY, x + w - w / 6, footerY + 1, SUBMENU_TEXT_COLOR);
+            int footerY   = listY + towns.size() * lh * 2 + 5;
+            g.fill(x + w/6, footerY, x + w - w/6, footerY + 1, SUBMENU_TEXT_COLOR);
             g.pose().pushPose();
             g.pose().scale(0.9f, 0.9f, 1.0f);
             g.drawString(font, totalText,
                     (int)((x + (w - (int)(font.width(totalText) * 0.9f)) / 2) / 0.9f),
-                    (int)((footerY + 5) / 0.9f),
-                    0xFF1A237E, false);
+                    (int)((footerY + 5) / 0.9f), 0xFF1A237E, false);
             g.pose().popPose();
         }
     }
 
-    // â”€â”€ Panel rendering helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Panel rendering helpers ───────────────────────────────────────────────
 
     private void renderStonePanel(GuiGraphics g, int x, int y, int w, int h) {
         g.flush();
-        com.mojang.blaze3d.systems.RenderSystem.enableBlend();
-        com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1f, 1f, 1f, 0.9f);
         int tile = 16;
         for (int tx = 0; tx < w; tx += tile)
             for (int ty = 0; ty < h; ty += tile)
-                g.blit( STONE_TEXTURE, x+tx, y+ty, 0, 0, Math.min(tile, w-tx), Math.min(tile, h-ty), tile, tile);
-        com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
+                g.blit(STONE_TEXTURE, x+tx, y+ty, 0, 0, Math.min(tile, w-tx), Math.min(tile, h-ty), tile, tile);
         drawPanelBorders(g, x, y, w, h);
     }
 
@@ -1417,18 +1446,15 @@ public class CustomGuiScreen extends Screen {
         g.flush();
         int bpw = BORDER_PILLAR_WIDTH * 2, bh = BORDER_HEIGHT * 2, cs = CORNER_SIZE * 2;
         int ix = x + bpw, iy = y + bh, iw = w - bpw*2, ih = h - bh*2;
-        com.mojang.blaze3d.systems.RenderSystem.enableBlend();
-        com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1f, 1f, 1f, 0.9f);
         int tile = 256;
         for (int tx = 0; tx < iw; tx += tile)
             for (int ty = 0; ty < ih; ty += tile)
-                g.blit( PAPER_TEXTURE, ix+tx, iy+ty, 0, 0, Math.min(tile, iw-tx), Math.min(tile, ih-ty), tile, tile);
-        com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
-        drawRotatableBorder(g, PAPER_SIDE_TEXTURE, x, y + cs, bpw, h - cs*2, 0);
-        drawRotatableBorder(g, PAPER_SIDE_TEXTURE, x + w - bpw, y + cs, bpw, h - cs*2, 180);
-        drawRotatableBorder(g, PAPER_SIDETOP_TEXTURE, x + cs, y, w - cs*2, bh, 0);
+                g.blit(PAPER_TEXTURE, ix+tx, iy+ty, 0, 0, Math.min(tile, iw-tx), Math.min(tile, ih-ty), tile, tile);
+        drawRotatableBorder(g, PAPER_SIDE_TEXTURE,    x,             y + cs,          bpw,        h - cs*2, 0);
+        drawRotatableBorder(g, PAPER_SIDE_TEXTURE,    x + w - bpw,  y + cs,          bpw,        h - cs*2, 180);
+        drawRotatableBorder(g, PAPER_SIDETOP_TEXTURE, x + cs,       y,               w - cs*2,   bh,       0);
         com.mojang.blaze3d.systems.RenderSystem.setShaderColor(0.8f, 0.8f, 0.8f, 1f);
-        drawRotatableBorder(g, PAPER_SIDETOP_TEXTURE, x + cs, y + h - bh, w - cs*2, bh, 180);
+        drawRotatableBorder(g, PAPER_SIDETOP_TEXTURE, x + cs,       y + h - bh,      w - cs*2,   bh,       180);
         com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
         drawRotatableCorner(g, PAPER_CORNER_TEXTURE, x,         y,         cs, cs, 0);
         drawRotatableCorner(g, PAPER_CORNER_TEXTURE, x + w - cs, y,         cs, cs, 90);
@@ -1438,19 +1464,16 @@ public class CustomGuiScreen extends Screen {
 
     private void renderTexturedPanel(GuiGraphics g, ResourceLocation tex, int x, int y, int w, int h, boolean borders) {
         g.flush();
-        com.mojang.blaze3d.systems.RenderSystem.enableBlend();
-        com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1f, 1f, 1f, 0.9f);
-        g.blit( tex, x, y, 0, 0, w, h, 32, 32);
-        com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
+        g.blit(tex, x, y, 0, 0, w, h, 32, 32);
         if (borders) drawPanelBorders(g, x, y, w, h);
     }
 
     private void drawPanelBorders(GuiGraphics g, int x, int y, int w, int h) {
-        g.blit( PILLAR_TEXTURE, x, y, 0, 0, BORDER_PILLAR_WIDTH, h, 16, 64);
-        g.blit( PILLAR_TEXTURE, x + w - BORDER_PILLAR_WIDTH, y, 0, 0, BORDER_PILLAR_WIDTH, h, 16, 64);
-        g.blit( BORDER_TEXTURE, x, y, 0, 0, w, BORDER_HEIGHT, 64, 16);
+        g.blit(PILLAR_TEXTURE, x,             y, 0, 0, BORDER_PILLAR_WIDTH, h, 16, 64);
+        g.blit(PILLAR_TEXTURE, x + w - BORDER_PILLAR_WIDTH, y, 0, 0, BORDER_PILLAR_WIDTH, h, 16, 64);
+        g.blit(BORDER_TEXTURE, x, y,         0, 0, w, BORDER_HEIGHT, 64, 16);
         com.mojang.blaze3d.systems.RenderSystem.setShaderColor(0.8f, 0.8f, 0.8f, 1f);
-        g.blit( BORDER_TEXTURE, x, y + h - BORDER_HEIGHT, 0, 0, w, BORDER_HEIGHT, 64, 16);
+        g.blit(BORDER_TEXTURE, x, y + h - BORDER_HEIGHT, 0, 0, w, BORDER_HEIGHT, 64, 16);
         com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
         drawCorners(g, x, y, w, h);
     }
@@ -1458,25 +1481,25 @@ public class CustomGuiScreen extends Screen {
     private void drawCorners(GuiGraphics g, int x, int y, int w, int h) {
         com.mojang.blaze3d.vertex.PoseStack ps = g.pose();
         ps.pushPose();
-        g.blit( CORNER_TEXTURE, x, y + h - BORDER_HEIGHT - CORNER_SIZE / 2, 0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
+        g.blit(CORNER_TEXTURE, x, y + h - BORDER_HEIGHT - CORNER_SIZE / 2, 0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
         ps.popPose();
         ps.pushPose();
         ps.translate(x + w - CORNER_SIZE / 2, y + h - BORDER_HEIGHT, 0);
         ps.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(270));
         ps.translate(-CORNER_SIZE / 2.0, -CORNER_SIZE / 2.0, 0);
-        g.blit( CORNER_TEXTURE, 0, 0, 0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
+        g.blit(CORNER_TEXTURE, 0, 0, 0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
         ps.popPose();
         ps.pushPose();
         ps.translate(x + w - CORNER_SIZE / 2, y + CORNER_SIZE / 2, 0);
         ps.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(180));
         ps.translate(-CORNER_SIZE / 2.0, -CORNER_SIZE / 2.0, 0);
-        g.blit( CORNER_TEXTURE, 0, 0, 0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
+        g.blit(CORNER_TEXTURE, 0, 0, 0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
         ps.popPose();
         ps.pushPose();
         ps.translate(x + CORNER_SIZE / 2, y + CORNER_SIZE / 2, 0);
         ps.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(90));
         ps.translate(-CORNER_SIZE / 2.0, -CORNER_SIZE / 2.0, 0);
-        g.blit( CORNER_TEXTURE, 0, 0, 0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
+        g.blit(CORNER_TEXTURE, 0, 0, 0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
         ps.popPose();
     }
 
@@ -1486,9 +1509,9 @@ public class CustomGuiScreen extends Screen {
             g.pose().translate(x + w / 2.0, y + h / 2.0, 0);
             g.pose().mulPose(com.mojang.math.Axis.ZP.rotationDegrees(deg));
             g.pose().translate(-w / 2.0, -h / 2.0, 0);
-            g.blit( tex, 0, 0, 0, 0, w, h, 32, 32);
+            g.blit(tex, 0, 0, 0, 0, w, h, 32, 32);
         } else {
-            g.blit( tex, x, y, 0, 0, w, h, 32, 32);
+            g.blit(tex, x, y, 0, 0, w, h, 32, 32);
         }
         g.pose().popPose();
     }
@@ -1502,19 +1525,22 @@ public class CustomGuiScreen extends Screen {
         for (int tx = 0; tx < w; tx += tile)
             for (int ty = 0; ty < h; ty += tile) {
                 int tw = Math.min(tile, w - tx), th = Math.min(tile, h - ty);
-                if (tw > 0 && th > 0) g.blit( tex, tx, ty, 0, 0, tw, th, tile, tile);
+                if (tw > 0 && th > 0) g.blit(tex, tx, ty, 0, 0, tw, th, tile, tile);
             }
         g.pose().popPose();
     }
 
-    // â”€â”€ Shared draw helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Shared draw helpers ───────────────────────────────────────────────────
 
     private void drawSectionTitle(GuiGraphics g, String title, int x, int y, int w) {
         float scale = 1.5f;
         int tw = (int)(font.width(title) * scale);
         g.pose().pushPose();
         g.pose().scale(scale, scale, 1.0f);
-        g.drawString(font, title, (int)((x + (w - tw) / 2) / scale), (int)((y + 12) / scale), SUBMENU_TEXT_COLOR, false);
+        g.drawString(font, title,
+                (int)((x + (w - tw) / 2) / scale),
+                (int)((y + 12) / scale),
+                SUBMENU_TEXT_COLOR, false);
         g.pose().popPose();
     }
 
@@ -1530,6 +1556,31 @@ public class CustomGuiScreen extends Screen {
         return mx >= x && mx < x + w && my >= y && my < y + h;
     }
 
+    /**
+     * Convert a content-local X coordinate to a real screen X coordinate.
+     * Used to position Minecraft Button/EditBox widgets that ignore the pose matrix.
+     */
+    private int toScreenX(int contentLocalX) {
+        ScreenLayout layout = new ScreenLayout(width, height);
+        return Math.round((VOID_X + contentLocalX * CONTENT_SCALE) * layout.scale + layout.offsetX);
+    }
+
+    /**
+     * Convert a content-local Y coordinate to a real screen Y coordinate.
+     */
+    private int toScreenY(int contentLocalY) {
+        ScreenLayout layout = new ScreenLayout(width, height);
+        return Math.round((VOID_Y + contentLocalY * CONTENT_SCALE) * layout.scale);
+    }
+
+    /**
+     * Convert a content-local size (width or height) to real screen pixels.
+     */
+    private int toScreenSize(int contentLocalSize) {
+        ScreenLayout layout = new ScreenLayout(width, height);
+        return Math.round(contentLocalSize * CONTENT_SCALE * layout.scale);
+    }
+
     private void playButtonSound() {
         if (minecraft != null && minecraft.player != null) {
             minecraft.getSoundManager().play(
@@ -1537,21 +1588,39 @@ public class CustomGuiScreen extends Screen {
         }
     }
 
-    // â”€â”€ Layout â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Layout ────────────────────────────────────────────────────────────────
 
+    /**
+     * Computes a letterboxed / pillarboxed 16:9 canvas that fits inside the
+     * real Minecraft window (width × height).
+     *
+     * All coordinates used by the draw methods are expressed in the virtual
+     * BASE_GUI_WIDTH × BASE_GUI_HEIGHT space.  The render method pushes a
+     * pose that maps from virtual → real pixels before any drawing happens,
+     * so every sub-method can use simple integer arithmetic without caring
+     * about the actual window size.
+     *
+     * Mouse coordinates are inverse-transformed in render() before being
+     * passed to sub-methods, so hit-testing also works correctly.
+     */
     private class ScreenLayout {
-        final int topMargin, sideMargin, sectionButtonWidth, sectionButtonHeight;
+
+        final float scale;    // screenH / BASE_GUI_HEIGHT — nothing else
+        final float offsetX;  // centres canvas horizontally
+        final float offsetY = 0f;
+
         final int contentX, contentY, contentWidth, contentHeight;
 
-        ScreenLayout(int sw, int sh) {
-            topMargin           = sh / 32;
-            sideMargin          = sw / 32;
-            sectionButtonHeight = sh / 8;
-            sectionButtonWidth  = (sw - 2 * sideMargin) / 7;
-            contentX            = sideMargin;
-            contentY            = topMargin + sectionButtonHeight + 5;
-            contentWidth        = sw - 2 * sideMargin;
-            contentHeight       = sh - topMargin - sectionButtonHeight - sh / 32;
+        ScreenLayout(int screenW, int screenH) {
+            scale   = (float) screenH / TEXTURE_HEIGHT;
+            offsetX = (screenW - TEXTURE_WIDTH * scale) / 2f;
+
+            // Content coords are relative to the void origin (0,0 after translate).
+            // Width/height are in the unscaled virtual space the section renderers use.
+            contentX      = 0;
+            contentY      = 0;
+            contentWidth  = (int)(VOID_W / CONTENT_SCALE);
+            contentHeight = (int)(VOID_H / CONTENT_SCALE);
         }
     }
 }
