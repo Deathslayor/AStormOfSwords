@@ -64,6 +64,8 @@ public class CustomGuiScreen extends Screen {
     // ── Prototype identity frame textures ─────────────────────────────────────
     private static final ResourceLocation FRAME_TEXTURE         = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/gui_asset_bg_prototype_identity.png");
     private static final ResourceLocation FRAME_GLASS_TEXTURE   = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/gui_asset_bg_prototype_identity_glass.png");
+    private static final ResourceLocation MIDDLE_PAPER_TEXTURE  = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/gui_asset_middle_paper.png");
+    private static final ResourceLocation BUTTONS_BG_TEXTURE    = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/gui_asset_bg_buttons.png");
     private static final int GLASS_TEXTURE_WIDTH  = 382;
     private static final int GLASS_TEXTURE_HEIGHT = 212;
     private static final ResourceLocation BOOK_TEXTURE          = ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/book.png");
@@ -114,11 +116,19 @@ public class CustomGuiScreen extends Screen {
 
     // Scale applied to all section content so it fits inside the void area.
     // Adjust if text is too large or too small.
+    // Fixed hit areas for each section button (left to right), in texture virtual pixels.
+    private static final int[][] BUTTON_RECTS = {
+            { 386, 8, 38, 24 },
+            { 432, 8, 38, 24 },
+            { 478, 8, 38, 24 },
+            { 524, 8, 38, 24 },
+            { 570, 8, 38, 24 },
+            { 616, 8, 38, 24 },
+            { 662, 8, 38, 24 },
+    };
+
+    // Scale applied to all section content so it fits inside the void area.
     private static final float CONTENT_SCALE = 0.5f;
-    private static final int TAB_X = 431;
-    private static final int TAB_Y = 8;
-    private static final int TAB_W = 220;
-    private static final int TAB_H = 24;
 
     // ── House UI state ─────────────────────────────────────────────────────────
 
@@ -377,13 +387,11 @@ public class CustomGuiScreen extends Screen {
         if (mapWidget != null && mapWidget.isActive() && mapWidget.mouseClicked(mouseX, mouseY, button))
             return true;
 
-        // Section tab bar
-        int perTabW = TAB_W / SECTION_LABELS.length;
+        // Section tab bar — fixed hit areas
         for (int i = 0; i < SECTION_LABELS.length; i++) {
             if (i == 0 && mapPacket == null) continue;
-            int startX = TAB_X + (i * perTabW);
-            int endX   = (i == SECTION_LABELS.length - 1) ? TAB_X + TAB_W : TAB_X + ((i + 1) * perTabW);
-            if (isMouseOverRect(mx, my, startX, TAB_Y, endX - startX, TAB_H)) {
+            int[] r = BUTTON_RECTS[i];
+            if (isMouseOverRect(mx, my, r[0], r[1], r[2], r[3])) {
                 selectedSection     = i;
                 lastSelectedSection = i;
                 if (i == 3 && !skills.areStatsLoaded && minecraft != null) requestStats();
@@ -623,10 +631,22 @@ public class CustomGuiScreen extends Screen {
         int scaledMouseX = (int)((mouseX - layout.offsetX) / layout.scale);
         int scaledMouseY = (int)((mouseY - layout.offsetY) / layout.scale);
 
-        // ── Layer 1: tab buttons (behind frame) ───────────────────────────────
-        drawSectionButtons(g, scaledMouseX, scaledMouseY, layout);
+        // ── Layer 1: middle paper (backmost, full frame size) ─────────────────
+        g.blit(MIDDLE_PAPER_TEXTURE, 0, 0, 0, 0, BASE_GUI_WIDTH, BASE_GUI_HEIGHT, BASE_GUI_WIDTH, BASE_GUI_HEIGHT);
 
-        // ── Layer 2: glass texture centred (382x212 inside 1082x212) ─────────
+        // ── Layer 2: map widget (behind the frame) ────────────────────────────
+        if (selectedSection == 0) {
+            g.pose().popPose();
+            drawMapSection(g, mouseX, mouseY, layout, partialTick);
+            g.pose().pushPose();
+            g.pose().translate(layout.offsetX, layout.offsetY, 0);
+            g.pose().scale(layout.scale, layout.scale, 1f);
+        }
+
+        // ── Layer 3: tab buttons (behind frame) ───────────────────────────────
+        g.blit(BUTTONS_BG_TEXTURE, 0, 0, 0, 0, BASE_GUI_WIDTH, BASE_GUI_HEIGHT, BASE_GUI_WIDTH, BASE_GUI_HEIGHT);
+
+        // ── Layer 4: glass texture centred (382x212 inside 1082x212) ─────────
         if (selectedSection >= 0 && selectedSection < RAINBOW_COLORS.length) {
             int glassX = (BASE_GUI_WIDTH - GLASS_TEXTURE_WIDTH) / 2;
             int col = RAINBOW_COLORS[selectedSection];
@@ -640,35 +660,22 @@ public class CustomGuiScreen extends Screen {
             com.mojang.blaze3d.systems.RenderSystem.disableBlend();
         }
 
-        // ── Layer 2: frame texture on top ─────────────────────────────────────
+        // ── Layer 5: frame texture (on top of map and paper) ──────────────────
         g.blit(FRAME_TEXTURE, 0, 0, 0, 0, BASE_GUI_WIDTH, BASE_GUI_HEIGHT, BASE_GUI_WIDTH, BASE_GUI_HEIGHT);
 
-        // ── Layer 3: section content in the void ──────────────────────────────
-        if (selectedSection >= 0 && selectedSection < RAINBOW_COLORS.length) {
+        // ── Layer 6: section content in the void (non-map sections only) ──────
+        if (selectedSection >= 0 && selectedSection < RAINBOW_COLORS.length && selectedSection != 0) {
+            g.pose().pushPose();
+            g.pose().translate(VOID_X, VOID_Y, 0);
+            g.pose().scale(CONTENT_SCALE, CONTENT_SCALE, 1f);
+            int cmx = (int)((scaledMouseX - VOID_X) / CONTENT_SCALE);
+            int cmy = (int)((scaledMouseY - VOID_Y) / CONTENT_SCALE);
             switch (selectedSection) {
-                case 0 -> {
-                    // Map widget uses real screen coords — render outside the virtual pose
-                    g.pose().popPose();
-                    drawMapSection(g, mouseX, mouseY, layout, partialTick);
-                    g.pose().pushPose();
-                    g.pose().translate(layout.offsetX, layout.offsetY, 0);
-                    g.pose().scale(layout.scale, layout.scale, 1f);
-                }
-                default -> {
-                    g.pose().pushPose();
-                    g.pose().translate(VOID_X, VOID_Y, 0);
-                    g.pose().scale(CONTENT_SCALE, CONTENT_SCALE, 1f);
-                    // Mouse coords relative to void origin, scaled back
-                    int cmx = (int)((scaledMouseX - VOID_X) / CONTENT_SCALE);
-                    int cmy = (int)((scaledMouseY - VOID_Y) / CONTENT_SCALE);
-                    switch (selectedSection) {
-                        case 2 -> drawSkillsSection(g, cmx, cmy, layout);
-                        case 3 -> drawStatsSection(g, cmx, cmy, layout);
-                        case 4 -> drawHouseSection(g, cmx, cmy, (int)mouseX, (int)mouseY, layout);
-                    }
-                    g.pose().popPose();
-                }
+                case 2 -> drawSkillsSection(g, cmx, cmy, layout);
+                case 3 -> drawStatsSection(g, cmx, cmy, layout);
+                case 4 -> drawHouseSection(g, cmx, cmy, (int)mouseX, (int)mouseY, layout);
             }
+            g.pose().popPose();
         }
 
         g.pose().popPose();
@@ -685,39 +692,8 @@ public class CustomGuiScreen extends Screen {
     // ── Section renderers ─────────────────────────────────────────────────────
 
     private void drawSectionButtons(GuiGraphics g, int mouseX, int mouseY, ScreenLayout layout) {
-        int perTabW = TAB_W / SECTION_LABELS.length;
-        for (int i = 0; i < SECTION_LABELS.length; i++) {
-            int startX = TAB_X + (i * perTabW);
-            int endX   = (i == SECTION_LABELS.length - 1) ? TAB_X + TAB_W : TAB_X + ((i + 1) * perTabW);
-            int bw     = endX - startX;
-
-            boolean mapUnavail = (i == 0 && mapPacket == null);
-            boolean selected   = (i == selectedSection);
-            ResourceLocation tex = selected
-                    ? STAINED_GLASS_TRANSPARENT_TEXTURES[i]
-                    : STAINED_GLASS_TEXTURES[i];
-
-            if (mapUnavail) com.mojang.blaze3d.systems.RenderSystem.setShaderColor(0.4f, 0.4f, 0.4f, 0.6f);
-            int tileSize = 32;
-            for (int tx = 0; tx < bw; tx += tileSize)
-                for (int ty = 0; ty < TAB_H; ty += tileSize)
-                    g.blit(tex, startX + tx, TAB_Y + ty, 0, 0,
-                            Math.min(tileSize, bw - tx), Math.min(tileSize, TAB_H - ty),
-                            tileSize, tileSize);
-            com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
-
-            String text      = SECTION_LABELS[i];
-            int    textColor = mapUnavail ? 0xFF444444 : (selected ? 0xFFFFFFFF : PARCHMENT_COLOR);
-            float  textScale = 0.7f;
-            int    tw        = (int)(font.width(text) * textScale);
-            g.pose().pushPose();
-            g.pose().scale(textScale, textScale, 1f);
-            g.drawString(font, text,
-                    (int)((startX + (bw - tw) / 2) / textScale),
-                    (int)((TAB_Y + (TAB_H - font.lineHeight * textScale) / 2) / textScale),
-                    textColor, false);
-            g.pose().popPose();
-        }
+        // Buttons are part of the rendered asset — nothing to draw here.
+        // Hit areas are handled in mouseClicked via BUTTON_RECTS.
     }
 
     private void drawMapSection(GuiGraphics g, int mouseX, int mouseY, ScreenLayout layout, float partialTick) {
@@ -1259,32 +1235,24 @@ public class CustomGuiScreen extends Screen {
 
     private void drawHouseCreationPanel(GuiGraphics g, int mouseX, int mouseY,
                                         int cX, int cY, int cW, int cH) {
-        // Everything here is in real screen coordinates.
-        // The void centre in real screen pixels:
+        // Pop BOTH poses so label + widgets all draw in real screen space.
+        g.pose().popPose(); // content scale+translate
+        g.pose().popPose(); // canvas scale+translate
+
         ScreenLayout layout = new ScreenLayout(width, height);
-        int voidCentreX = Math.round((VOID_X + VOID_W / 2f) * layout.scale + layout.offsetX);
-        int voidCentreY = Math.round((VOID_Y + VOID_H / 2f) * layout.scale);
+        int voidCX = Math.round((VOID_X + VOID_W / 2f) * layout.scale + layout.offsetX);
+        int voidCY = Math.round((VOID_Y + VOID_H / 2f) * layout.scale);
 
         String instruction = house.houseName.isEmpty() ? "Enter your house name:" : "Edit your house name:";
+        int labelW = font.width(instruction);
+        g.drawString(font, instruction, voidCX - labelW / 2, voidCY - font.lineHeight - 4, SUBMENU_TEXT_COLOR, false);
 
-        // Fixed widget sizes in real screen pixels
         int boxW = Math.round(VOID_W * 0.55f * layout.scale);
         int btnW = Math.round(36 * layout.scale);
         int rowH = Math.max(10, Math.round(12 * layout.scale));
         int gap  = Math.round(4 * layout.scale);
-        int rowW = boxW + gap + btnW;
-        int rowX = voidCentreX - rowW / 2;
-        int rowY = voidCentreY;
-
-        // Draw label directly at real screen coords (pop/push pose to draw unscaled)
-        g.pose().popPose();
-        int labelW = font.width(instruction);
-        int labelX = voidCentreX - labelW / 2;
-        int labelY = rowY - font.lineHeight - Math.round(4 * layout.scale);
-        g.drawString(font, instruction, labelX, labelY, SUBMENU_TEXT_COLOR, false);
-        g.pose().pushPose();
-        g.pose().translate(VOID_X, VOID_Y, 0);
-        g.pose().scale(CONTENT_SCALE, CONTENT_SCALE, 1f);
+        int rowX = voidCX - (boxW + gap + btnW) / 2;
+        int rowY = voidCY;
 
         if (houseNameEditBox == null) {
             houseNameEditBox = new net.minecraft.client.gui.components.EditBox(
@@ -1312,6 +1280,14 @@ public class CustomGuiScreen extends Screen {
         }
         if (houseNameEditBox != null) houseNameEditBox.render(g, mouseX, mouseY, 0);
         if (saveHouseButton  != null) saveHouseButton.render(g, mouseX, mouseY, 0);
+
+        // Restore both poses
+        g.pose().pushPose();
+        g.pose().translate(layout.offsetX, layout.offsetY, 0);
+        g.pose().scale(layout.scale, layout.scale, 1f);
+        g.pose().pushPose();
+        g.pose().translate(VOID_X, VOID_Y, 0);
+        g.pose().scale(CONTENT_SCALE, CONTENT_SCALE, 1f);
     }
 
     private void drawHouseBanner(GuiGraphics g, int x, int y) {
@@ -1590,33 +1566,21 @@ public class CustomGuiScreen extends Screen {
 
     // ── Layout ────────────────────────────────────────────────────────────────
 
-    /**
-     * Computes a letterboxed / pillarboxed 16:9 canvas that fits inside the
-     * real Minecraft window (width × height).
-     *
-     * All coordinates used by the draw methods are expressed in the virtual
-     * BASE_GUI_WIDTH × BASE_GUI_HEIGHT space.  The render method pushes a
-     * pose that maps from virtual → real pixels before any drawing happens,
-     * so every sub-method can use simple integer arithmetic without caring
-     * about the actual window size.
-     *
-     * Mouse coordinates are inverse-transformed in render() before being
-     * passed to sub-methods, so hit-testing also works correctly.
-     */
     private class ScreenLayout {
 
-        final float scale;    // screenH / BASE_GUI_HEIGHT — nothing else
-        final float offsetX;  // centres canvas horizontally
-        final float offsetY = 0f;
+        // scale = screenH / TEXTURE_HEIGHT — height-only scaling, no aspect ratio enforcement.
+        // offsetX centres the canvas horizontally; clamped to 0 if canvas is wider than screen.
+        final float scale;
+        final float offsetX;
+        final float offsetY;
 
         final int contentX, contentY, contentWidth, contentHeight;
 
         ScreenLayout(int screenW, int screenH) {
             scale   = (float) screenH / TEXTURE_HEIGHT;
             offsetX = (screenW - TEXTURE_WIDTH * scale) / 2f;
+            offsetY = 0f;
 
-            // Content coords are relative to the void origin (0,0 after translate).
-            // Width/height are in the unscaled virtual space the section renderers use.
             contentX      = 0;
             contentY      = 0;
             contentWidth  = (int)(VOID_W / CONTENT_SCALE);
