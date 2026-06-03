@@ -34,16 +34,16 @@ public class GrocerInventoryScreen extends Screen {
     private static final int TEXTURE_HEIGHT = 212;
 
     /** Left panel — inventory/products area (in texture virtual pixels). */
-    private static final int LEFT_X = 368;
-    private static final int LEFT_Y = 64;
+    private static final int LEFT_X = 356;
+    private static final int LEFT_Y = 34;
     private static final int LEFT_W = 221;
-    private static final int LEFT_H = 126;
+    private static final int LEFT_H = 156;
 
     /** Right panel — transaction area (in texture virtual pixels). */
-    private static final int RIGHT_X = 638;
-    private static final int RIGHT_Y = 87;
-    private static final int RIGHT_W = 61;
-    private static final int RIGHT_H = 102;
+    private static final int RIGHT_X = 615;
+    private static final int RIGHT_Y = 62;
+    private static final int RIGHT_W = 102;
+    private static final int RIGHT_H = 125;
 
     // ── Colors ────────────────────────────────────────────────────────────────
 
