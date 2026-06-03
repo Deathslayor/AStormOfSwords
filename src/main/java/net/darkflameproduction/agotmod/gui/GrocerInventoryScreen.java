@@ -23,1650 +23,654 @@ import java.util.Set;
 
 @OnlyIn(Dist.CLIENT)
 public class GrocerInventoryScreen extends Screen {
-    // Texture resources matching your custom GUI style
-    private static final ResourceLocation STONE_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/background.png");
-    private static final ResourceLocation PAPER_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/paper.png");
-    private static final ResourceLocation PAPER_SIDE_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/paperside.png");
-    private static final ResourceLocation PAPER_SIDETOP_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/papersidetop.png");
-    private static final ResourceLocation PAPER_CORNER_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/papercorner.png");
-    private static final ResourceLocation PILLAR_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/pillar.png");
-    private static final ResourceLocation BORDER_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/bottom.png");
-    private static final ResourceLocation CORNER_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/corner.png");
 
-    // Colors matching your custom GUI
-    private static final int SUBMENU_TEXT_COLOR = 0xFF000000;
-    private static final int PARCHMENT_COLOR = 0xFFF5E7C1;
+    // ── Trader GUI texture ────────────────────────────────────────────────────
 
-    // Border constants matching your custom GUI
-    private static final int BORDER_PILLAR_WIDTH = 6;
-    private static final int BORDER_HEIGHT = 6;
-    private static final int CORNER_SIZE = 12;
+    private static final ResourceLocation TRADER_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/gui_asset_trader_book.png");
 
-    private int totalItems = 0;
-    private int totalPrice = 0;
+    /** Actual pixel dimensions of gui_asset_trader_book.png. */
+    private static final int TEXTURE_WIDTH  = 1082;
+    private static final int TEXTURE_HEIGHT = 212;
+
+    /** Left panel — inventory/products area (in texture virtual pixels). */
+    private static final int LEFT_X = 368;
+    private static final int LEFT_Y = 64;
+    private static final int LEFT_W = 221;
+    private static final int LEFT_H = 126;
+
+    /** Right panel — transaction area (in texture virtual pixels). */
+    private static final int RIGHT_X = 638;
+    private static final int RIGHT_Y = 87;
+    private static final int RIGHT_W = 61;
+    private static final int RIGHT_H = 102;
+
+    // ── Colors ────────────────────────────────────────────────────────────────
+
+    private static final int TEXT_COLOR      = 0xFF000000;
+    private static final int TEXT_COLOR_GREEN = 0xFF4CAF50;
+    private static final int TEXT_COLOR_RED   = 0xFFFF5722;
+    private static final int TEXT_COLOR_GOLD  = 0xFFFFD700;
+
+    // ── Item grid constants ───────────────────────────────────────────────────
+
+    private static final int ITEM_SLOT_SIZE = 18;
+    private static final int ITEM_SPACING   = 2;
+    private static final int GRID_MARGIN    = 4;
+
+    // ── State ─────────────────────────────────────────────────────────────────
+
+    private int  totalItems = 0;
+    private int  totalPrice = 0;
     private long playerBalance = 0;
-
     private float buyMultiplier  = 1.0f;
     private float sellMultiplier = 0.5f;
+    private long grocerBalance   = 0;
 
-    // NEW: Grocer balance
-    private long grocerBalance = 0;
-
-    // NEW: Add these fields to the class
-    public enum TradeMode {
-        BUY,
-        SELL
-    }
-
+    public enum TradeMode { BUY, SELL }
     private TradeMode currentMode = TradeMode.BUY;
+
+    private List<GrocerSystem.GrocerInventoryEntry>          grocerEntries = new ArrayList<>();
     private List<OpenGrocerInventoryPacket.PlayerInventoryEntry> playerEntries = new ArrayList<>();
-
-    private int getTransactionAvailableHeight() {
-        ScreenLayout layout = getOrCreateLayout();
-        int bottomSectionHeight = 80;
-        return (layout.contentHeight - 80 - bottomSectionHeight) * 2;
-    }
-    // NEW: Add this method
-    private void toggleMode() {
-        currentMode = currentMode == TradeMode.BUY ? TradeMode.SELL : TradeMode.BUY;
-
-        // Clear selections when switching modes
-        selectedEntryIndices.clear();
-        transactionAmounts.clear();
-        scrollOffset = 0;
-        transactionScrollOffset = 0;
-
-        // Clear tooltip
-        currentTooltipEntry = null;
-        tooltipPositioned = false;
-
-        playButtonSound();
-    }
-
-    private List<?> getCurrentInventoryEntries() {
-        return currentMode == TradeMode.BUY ? grocerEntries : playerEntries;
-    }
-
-    private String getItemKeyFromEntry(Object entry) {
-        if (entry instanceof GrocerSystem.GrocerInventoryEntry grocerEntry) {
-            return grocerEntry.itemKey;
-        } else if (entry instanceof OpenGrocerInventoryPacket.PlayerInventoryEntry playerEntry) {
-            return playerEntry.itemKey;
-        }
-        return null;
-    }
-
-    private String getDisplayNameFromEntry(Object entry) {
-        if (entry instanceof GrocerSystem.GrocerInventoryEntry grocerEntry) {
-            return grocerEntry.displayName;
-        } else if (entry instanceof OpenGrocerInventoryPacket.PlayerInventoryEntry playerEntry) {
-            return playerEntry.displayName;
-        }
-        return "";
-    }
-
-    private long getAmountFromEntry(Object entry) {
-        if (entry instanceof GrocerSystem.GrocerInventoryEntry grocerEntry) {
-            return grocerEntry.amount;
-        } else if (entry instanceof OpenGrocerInventoryPacket.PlayerInventoryEntry playerEntry) {
-            return playerEntry.amount;
-        }
-        return 0;
-    }
-
-    // NEW: Add this method
-    private void drawModeToggleButton(GuiGraphics guiGraphics, int leftPanelX, int leftPanelY, int leftPanelWidth, int leftPanelHeight) {
-        int buttonWidth = 50;
-        int buttonHeight = 14;
-        int buttonX = leftPanelX + 25;
-        int buttonY = leftPanelY + leftPanelHeight - buttonHeight - 15;
-
-        int buttonColor = 0xFF888888;
-        guiGraphics.fill(buttonX, buttonY, buttonX + buttonWidth, buttonY + buttonHeight, buttonColor);
-
-        guiGraphics.fill(buttonX, buttonY, buttonX + buttonWidth, buttonY + 1, 0xFFCCCCCC);
-        guiGraphics.fill(buttonX, buttonY, buttonX + 1, buttonY + buttonHeight, 0xFFCCCCCC);
-        guiGraphics.fill(buttonX + buttonWidth - 1, buttonY, buttonX + buttonWidth, buttonY + buttonHeight, 0xFF444444);
-        guiGraphics.fill(buttonX, buttonY + buttonHeight - 1, buttonX + buttonWidth, buttonY + buttonHeight, 0xFF444444);
-
-        String buttonText = currentMode == TradeMode.BUY ? "BUY" : "SELL";
-        float textScale = 0.8f;
-
-        guiGraphics.pose().pushPose();
-        guiGraphics.pose().scale(textScale, textScale, 1.0f);
-
-        int textWidth = (int)(font.width(buttonText) * textScale);
-        int textX = (int)((buttonX + (buttonWidth - textWidth) / 2) / textScale);
-        int textY = (int)((buttonY + (buttonHeight - (font.lineHeight * textScale)) / 2) / textScale);
-
-        guiGraphics.drawString(font, buttonText, textX, textY, 0xFFFFFFFF, false);
-        guiGraphics.pose().popPose();
-    }
-
-    // Item pricing map - only items in this map can be stored by the grocer
-
-
-    private void drawTransactionMenu(GuiGraphics guiGraphics, int panelX, int panelY, int panelWidth, int panelHeight) {
-        // Draw separator line below title (accounting for mode button)
-        guiGraphics.fill(panelX + panelWidth/8, panelY + 45,
-                panelX + panelWidth - panelWidth/8, panelY + 46,
-                SUBMENU_TEXT_COLOR);
-
-        // Draw balance info based on mode
-        String balanceText = currentMode == TradeMode.BUY ?
-                "Grocer Balance: " + formatCurrency(grocerBalance) :
-                "Your Balance: " + formatCurrency(getPlayerBalance());
-
-        float balanceScale = 0.8f;
-        guiGraphics.pose().pushPose();
-        guiGraphics.pose().scale(balanceScale, balanceScale, 1.0f);
-
-        int balanceWidth = (int)(font.width(balanceText) * balanceScale);
-        int balanceX = (int)((panelX + (panelWidth - balanceWidth) / 2) / balanceScale);
-        int balanceY = (int)((panelY + 55) / balanceScale);
-
-        guiGraphics.drawString(font, balanceText, balanceX, balanceY, 0xFF4CAF50, false);
-        guiGraphics.pose().popPose();
-
-        // Draw another separator
-        guiGraphics.fill(panelX + panelWidth/8, panelY + 70,
-                panelX + panelWidth - panelWidth/8, panelY + 71,
-                SUBMENU_TEXT_COLOR);
-
-        calculateTotals();
-
-        int contentStartY = panelY + 80;
-        int bottomSectionHeight = 80;
-        int availableHeight = getTransactionAvailableHeight() / 2;
-
-        guiGraphics.pose().pushPose();
-        guiGraphics.pose().scale(0.5f, 0.5f, 1.0f);
-
-        if (selectedEntryIndices.isEmpty()) {
-            String instructionText = currentMode == TradeMode.BUY ? "Select items to buy" : "Select items to sell";
-            String instructionText2 = "from the left";
-
-            int text1Width = (int)(font.width(instructionText) * 0.5f);
-            int text2Width = (int)(font.width(instructionText2) * 0.5f);
-
-            int text1X = (panelX + (panelWidth - text1Width) / 2) * 2;
-            int text2X = (panelX + (panelWidth - text2Width) / 2) * 2;
-
-            int textY = (contentStartY + availableHeight / 2 - font.lineHeight) * 2;
-
-            guiGraphics.drawString(font, instructionText, text1X, textY, SUBMENU_TEXT_COLOR, false);
-            textY += (font.lineHeight + 4) * 2;
-            guiGraphics.drawString(font, instructionText2, text2X, textY, SUBMENU_TEXT_COLOR, false);
-        } else {
-            drawTransactionItems(guiGraphics, panelX * 2, contentStartY * 2, panelWidth * 2, availableHeight * 2);
-
-            if (needsTransactionScroll(availableHeight * 2)) {
-                drawTransactionScrollIndicator(guiGraphics, panelX * 2, contentStartY * 2, panelWidth * 2, availableHeight * 2);
-            }
-        }
-
-        guiGraphics.pose().popPose();
-
-        drawBottomSection(guiGraphics, panelX, panelY + panelHeight - bottomSectionHeight, panelWidth, bottomSectionHeight);
-    }
-
-    private void finishTransaction() {
-        if (totalItems <= 0) return;
-
-        Map<String, Integer> itemsToTransact = new HashMap<>();
-        Map<String, Integer> playerSlots = new HashMap<>();
-
-        for (Map.Entry<String, Integer> entry : transactionAmounts.entrySet()) {
-            int amount = entry.getValue();
-            if (amount > 0) {
-                itemsToTransact.put(entry.getKey(), amount);
-
-                // For selling, we need to track slots (server will find actual slots)
-                if (currentMode == TradeMode.SELL) {
-                    playerSlots.put(entry.getKey(), 0);
-                }
-            }
-        }
-
-        // Send appropriate packet
-        FinishTransactionPacket packet;
-        if (currentMode == TradeMode.BUY) {
-            packet = new FinishTransactionPacket(grocerName, itemsToTransact);
-        } else {
-            packet = new FinishTransactionPacket(grocerName, itemsToTransact, playerSlots);
-        }
-
-        net.neoforged.neoforge.network.PacketDistributor.sendToServer(packet);
-        this.onClose();
-    }
-
-    // NEW: Helper method to format currency display
-    private String formatCurrency(long halfpennies) {
-        if (halfpennies == 0) {
-            return "0 coins";
-        }
-
-        // Simple format - you can make this more complex with gold/silver/copper later
-        return halfpennies + " coins";
-    }
-
-    private void drawBottomSection(GuiGraphics guiGraphics, int panelX, int panelY, int panelWidth, int panelHeight) {
-        // Draw separator line
-        guiGraphics.fill(panelX + panelWidth/8, panelY,
-                panelX + panelWidth - panelWidth/8, panelY + 1,
-                SUBMENU_TEXT_COLOR);
-
-        long currentBalance = currentMode == TradeMode.BUY ? getPlayerBalance() : grocerBalance;
-        long limitingBalance = currentMode == TradeMode.BUY ? getPlayerBalance() : grocerBalance;
-
-        // Draw totals
-        String totalItemsText = "Total items: " + totalItems;
-        String totalPriceText = "Total " + (currentMode == TradeMode.BUY ? "Cost" : "Earnings") + ": " + totalPrice + " coins";
-        String balanceText = (currentMode == TradeMode.BUY ? "Your" : "Grocer") + " Balance: " + formatCurrency(currentBalance);
-
-        float bottomTextScale = 0.85f;
-        guiGraphics.pose().pushPose();
-        guiGraphics.pose().scale(bottomTextScale, bottomTextScale, 1.0f);
-
-        int textY = (int)((panelY + 10) / bottomTextScale);
-        int textX = (int)((panelX + 20) / bottomTextScale);
-
-        guiGraphics.drawString(font, totalItemsText, textX, textY, SUBMENU_TEXT_COLOR, false);
-        textY += (int)((font.lineHeight + 2) / bottomTextScale);
-        guiGraphics.drawString(font, totalPriceText, textX, textY, SUBMENU_TEXT_COLOR, false);
-        textY += (int)((font.lineHeight + 2) / bottomTextScale);
-
-        int balanceColor = limitingBalance >= totalPrice ? 0xFF4CAF50 : 0xFFFF5722;
-        guiGraphics.drawString(font, balanceText, textX, textY, balanceColor, false);
-
-        guiGraphics.pose().popPose();
-
-        // Draw transaction button
-        int buttonWidth = 120;
-        int buttonHeight = 20;
-        int buttonX = panelX + (panelWidth - buttonWidth) / 2;
-        int buttonY = panelY + panelHeight - buttonHeight - 20;
-
-        boolean hasItems = totalItems > 0;
-        boolean hasEnoughMoney = limitingBalance >= totalPrice;
-        boolean canComplete = hasItems && hasEnoughMoney;
-
-        int buttonColor;
-        if (!hasItems) {
-            buttonColor = 0xFF666666;
-        } else if (!hasEnoughMoney) {
-            buttonColor = 0xFF8B0000;
-        } else {
-            buttonColor = 0xFF888888;
-        }
-
-        guiGraphics.fill(buttonX, buttonY, buttonX + buttonWidth, buttonY + buttonHeight, buttonColor);
-
-        // Button border
-        guiGraphics.fill(buttonX, buttonY, buttonX + buttonWidth, buttonY + 1, 0xFFCCCCCC);
-        guiGraphics.fill(buttonX, buttonY, buttonX + 1, buttonY + buttonHeight, 0xFFCCCCCC);
-        guiGraphics.fill(buttonX + buttonWidth - 1, buttonY, buttonX + buttonWidth, buttonY + buttonHeight, 0xFF444444);
-        guiGraphics.fill(buttonX, buttonY + buttonHeight - 1, buttonX + buttonWidth, buttonY + buttonHeight, 0xFF444444);
-
-        String buttonText;
-        int textColor;
-
-        if (!hasItems) {
-            buttonText = "No Items Selected";
-            textColor = 0xFF666666;
-        } else if (!hasEnoughMoney) {
-            buttonText = "Insufficient Funds";
-            textColor = 0xFFFF0000;
-        } else {
-            buttonText = "Finish " + (currentMode == TradeMode.BUY ? "Purchase" : "Sale");
-            textColor = 0xFFFFFFFF;
-        }
-
-        int textWidth = font.width(buttonText);
-        int buttonTextX = buttonX + (buttonWidth - textWidth) / 2;
-        int buttonTextY = buttonY + (buttonHeight - font.lineHeight) / 2;
-
-        guiGraphics.drawString(font, buttonText, buttonTextX, buttonTextY, textColor, false);
-    }
-
-
-    private void drawTransactionItems(GuiGraphics guiGraphics, int panelX, int startY, int panelWidth, int availableHeight) {
-        int itemHeight = 16 * 2;
-        int margin = 6 * 2;
-        int contentWidth = panelWidth - (margin * 8);
-        int centeredX = panelX + (margin * 4);
-
-        // Calculate which items to show based on transaction scroll
-        int maxVisibleItems = Math.max(1, (availableHeight - 32) / itemHeight);
-        List<Integer> sortedIndices = new ArrayList<>(selectedEntryIndices);
-        sortedIndices.sort(Integer::compareTo);
-
-        int startIndex = transactionScrollOffset;
-        int endIndex = Math.min(startIndex + maxVisibleItems, sortedIndices.size());
-
-        List<?> currentEntries = getCurrentInventoryEntries();
-        int itemY = startY;
-
-        for (int i = startIndex; i < endIndex; i++) {
-            Integer entryIndex = sortedIndices.get(i);
-            if (entryIndex >= currentEntries.size()) continue;
-
-            Object entry = currentEntries.get(entryIndex);
-            String itemKey = getItemKeyFromEntry(entry);
-            long maxAmount = getAmountFromEntry(entry);
-
-            if (itemKey == null) continue;
-
-            int transactionAmount = transactionAmounts.getOrDefault(itemKey, 0);
-
-            // Draw item icon 50% larger (1.5x scale)
-            net.minecraft.resources.ResourceLocation itemLocation = net.minecraft.resources.ResourceLocation.tryParse(itemKey);
-            if (itemLocation != null) {
-                net.minecraft.world.item.Item item = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(itemLocation);
-                if (item != null && item != net.minecraft.world.item.Items.AIR) {
-                    net.minecraft.world.item.ItemStack itemStack = new net.minecraft.world.item.ItemStack(item);
-
-                    guiGraphics.pose().pushPose();
-                    guiGraphics.pose().scale(1.5f, 1.5f, 1.0f);
-                    guiGraphics.renderItem(itemStack, (int)(centeredX / 1.5f), (int)((itemY + 2) / 1.5f));
-                    guiGraphics.pose().popPose();
-                }
-            }
-
-            // Draw transaction amount
-            String amountText = String.valueOf(transactionAmount);
-            int amountX = centeredX + 40;
-            guiGraphics.drawString(font, amountText, amountX, itemY + 8, SUBMENU_TEXT_COLOR, false);
-
-            // Draw buttons
-            int buttonSize = 20;
-            int totalButtonWidth = buttonSize * 6;
-            int buttonsStartX = centeredX + contentWidth - totalButtonWidth + 20;
-            int buttonY = itemY + 2;
-
-            drawTransactionButton(guiGraphics, buttonsStartX, buttonY, buttonSize, "-64", itemKey, maxAmount, false);
-            drawTransactionButton(guiGraphics, buttonsStartX + buttonSize, buttonY, buttonSize, "-10", itemKey, maxAmount, false);
-            drawTransactionButton(guiGraphics, buttonsStartX + (buttonSize * 2), buttonY, buttonSize, "-", itemKey, maxAmount, false);
-            drawTransactionButton(guiGraphics, buttonsStartX + (buttonSize * 3), buttonY, buttonSize, "+", itemKey, maxAmount, true);
-            drawTransactionButton(guiGraphics, buttonsStartX + (buttonSize * 4), buttonY, buttonSize, "+10", itemKey, maxAmount, true);
-            drawTransactionButton(guiGraphics, buttonsStartX + (buttonSize * 5), buttonY, buttonSize, "+64", itemKey, maxAmount, true);
-
-            itemY += itemHeight;
-        }
-    }
-
-    private void drawTransactionButton(GuiGraphics guiGraphics, int x, int y, int size, String text, String itemKey, long maxAmount, boolean isPlus) {
-        // Button background
-        guiGraphics.fill(x, y, x + size, y + size, 0xFF888888);
-
-        // Button border (scaled)
-        guiGraphics.fill(x, y, x + size, y + 2, 0xFFCCCCCC); // Top
-        guiGraphics.fill(x, y, x + 2, y + size, 0xFFCCCCCC); // Left
-        guiGraphics.fill(x + size - 2, y, x + size, y + size, 0xFF444444); // Right
-        guiGraphics.fill(x, y + size - 2, x + size, y + size, 0xFF444444); // Bottom
-
-        // Button text (smaller scale for multi-character buttons)
-        float textScale = text.length() > 1 ? 0.6f : 1.0f;
-        guiGraphics.pose().pushPose();
-        guiGraphics.pose().scale(textScale, textScale, 1.0f);
-
-        int textWidth = (int)(font.width(text) * textScale);
-        int textX = (int)((x + (size - textWidth) / 2) / textScale);
-        int textY = (int)((y + (size - (font.lineHeight * textScale)) / 2) / textScale);
-        guiGraphics.drawString(font, text, textX, textY, 0xFFFFFFFF, false);
-
-        guiGraphics.pose().popPose();
-    }
-
-    // Data that will be updated from server
-    private List<GrocerSystem.GrocerInventoryEntry> inventoryEntries;
-    private List<GrocerSystem.GrocerInventoryEntry> grocerEntries;
     private final String grocerName;
     private boolean dataLoaded = false;
-    private Set<Integer> selectedEntryIndices = new HashSet<>();
-    private Map<String, Integer> transactionAmounts = new HashMap<>();
 
-    // Tooltip state tracking
-    private Object currentTooltipEntry = null;
-    private int tooltipX = 0;
-    private int tooltipY = 0;
+    private Set<Integer>         selectedEntryIndices  = new HashSet<>();
+    private Map<String, Integer> transactionAmounts    = new HashMap<>();
+
+    private int scrollOffset            = 0;
+    private int transactionScrollOffset = 0;
+
+    private Object  currentTooltipEntry = null;
+    private int     tooltipX = 0, tooltipY = 0;
     private boolean tooltipPositioned = false;
 
-    // Dynamic grid layout - calculated based on submenu width
-    private int scrollOffset = 0;
-    private static final int VISIBLE_ROWS = 4; // Number of visible rows
-    private static final int ITEM_SLOT_SIZE = 32; // Smaller size since we only show icon + amount
-    private static final int ITEM_SPACING = 4; // Closer spacing between items
-    private static final int GRID_MARGIN = 16;
-    private int transactionScrollOffset = 0; // Add this with your other scroll variables// Margin from submenu edges
-
-    // Performance optimization - cached layout
-    private ScreenLayout cachedLayout;
-    private boolean layoutDirty = true;
-
-    // Static instance for client-side access
     private static GrocerInventoryScreen currentInstance = null;
 
-    public GrocerInventoryScreen(String grocerName) {
-        super(Component.literal("Grocer Inventory - " + grocerName));
-        this.grocerName = grocerName;
-        this.inventoryEntries = new ArrayList<>(); // Start empty, will be populated by packet
+    // ── Constructor ───────────────────────────────────────────────────────────
 
-        // Set as current instance for packet handling
+    public GrocerInventoryScreen(String grocerName) {
+        super(Component.literal("Grocer - " + grocerName));
+        this.grocerName = grocerName;
         currentInstance = this;
     }
 
-    // Method to check if an item is allowed to be stored by the grocer
-    // NEW - REPLACE WITH THESE:
-// Method to check if an item is allowed to be stored by the grocer
-    public static boolean isItemAllowed(String itemKey) {
-        return ItemPricing.isItemAllowed(itemKey);
-    }
+    // ── Static helpers ────────────────────────────────────────────────────────
 
-    // Method to get item price
-    public static int getItemPrice(String itemKey) {
-        return ItemPricing.getItemPrice(itemKey);
-    }
-
-    // Method to get item sell price with special rules
-    public static int getItemSellPrice(String itemKey) {
-        return ItemPricing.getItemSellPrice(itemKey);
-    }
+    public static boolean isItemAllowed(String itemKey)  { return ItemPricing.isItemAllowed(itemKey); }
+    public static int     getItemPrice(String itemKey)   { return ItemPricing.getItemPrice(itemKey); }
+    public static int     getItemSellPrice(String itemKey){ return ItemPricing.getItemSellPrice(itemKey); }
+    public static GrocerInventoryScreen getCurrentInstance() { return currentInstance; }
 
     public static void updateInventoryData(String grocerName,
                                            List<GrocerSystem.GrocerInventoryEntry> grocerEntries,
                                            List<OpenGrocerInventoryPacket.PlayerInventoryEntry> playerEntries,
-                                           long grocerBalance,
-                                           float buyMultiplier,
-                                           float sellMultiplier) {
+                                           long grocerBalance, float buyMultiplier, float sellMultiplier) {
         if (currentInstance != null && currentInstance.grocerName.equals(grocerName)) {
-            List<GrocerSystem.GrocerInventoryEntry> filteredGrocerEntries = new ArrayList<>();
-            for (GrocerSystem.GrocerInventoryEntry entry : grocerEntries) {
-                if (ItemPricing.isItemAllowed(entry.itemKey)) {
-                    filteredGrocerEntries.add(entry);
-                }
-            }
+            List<GrocerSystem.GrocerInventoryEntry> filtered = new ArrayList<>();
+            for (GrocerSystem.GrocerInventoryEntry e : grocerEntries)
+                if (ItemPricing.isItemAllowed(e.itemKey)) filtered.add(e);
 
-            currentInstance.grocerEntries    = filteredGrocerEntries;
-            currentInstance.playerEntries    = playerEntries;
-            currentInstance.grocerBalance    = grocerBalance;
-            currentInstance.buyMultiplier    = buyMultiplier;
-            currentInstance.sellMultiplier   = sellMultiplier;
-            currentInstance.dataLoaded       = true;
+            currentInstance.grocerEntries   = filtered;
+            currentInstance.playerEntries   = playerEntries;
+            currentInstance.grocerBalance   = grocerBalance;
+            currentInstance.buyMultiplier   = buyMultiplier;
+            currentInstance.sellMultiplier  = sellMultiplier;
+            currentInstance.dataLoaded      = true;
 
-            Set<Integer> validIndices = new HashSet<>();
-            for (Integer idx : currentInstance.selectedEntryIndices) {
-                List<?> current = currentInstance.getCurrentInventoryEntries();
-                if (idx < current.size()) {
-                    validIndices.add(idx);
-                }
-            }
-            currentInstance.selectedEntryIndices = validIndices;
-
+            currentInstance.selectedEntryIndices.removeIf(
+                    idx -> idx >= currentInstance.getCurrentInventoryEntries().size());
             currentInstance.transactionAmounts.entrySet().removeIf(e -> {
-                List<?> current = currentInstance.getCurrentInventoryEntries();
-                for (Object entry : current) {
+                for (Object entry : currentInstance.getCurrentInventoryEntries())
                     if (e.getKey().equals(currentInstance.getItemKeyFromEntry(entry))) return false;
-                }
                 return true;
             });
         }
     }
 
-    // Static method to get current instance (for packet handler)
-    public static GrocerInventoryScreen getCurrentInstance() {
-        return currentInstance;
+    public static void updatePlayerBalance(long newBalance) {
+        if (currentInstance != null) currentInstance.playerBalance = newBalance;
     }
 
-    @Override
-    protected void init() {
-        super.init();
-        // Mark layout as dirty when screen is resized
-        this.layoutDirty = true;
-        this.cachedLayout = null;
-    }
+    // ── Screen lifecycle ──────────────────────────────────────────────────────
 
-    @Override
-    public void tick() {
-        super.tick();
-        // Removed render frequency limitation to prevent flickering
-    }
+    @Override protected void init()    { super.init(); }
+    @Override public boolean isPauseScreen() { return false; }
+    @Override public void renderBackground(GuiGraphics g, int mx, int my, float pt) { }
 
     @Override
     public void onClose() {
         super.onClose();
-        // Clear current instance when closing
-        if (currentInstance == this) {
-            currentInstance = null;
-            transactionAmounts.clear();
-        }
+        if (currentInstance == this) { currentInstance = null; transactionAmounts.clear(); }
     }
 
-    private ScreenLayout getOrCreateLayout() {
-        if (cachedLayout == null || layoutDirty) {
-            cachedLayout = new ScreenLayout(width, height);
-            layoutDirty = false;
-        }
-        return cachedLayout;
+    // ── Layout ────────────────────────────────────────────────────────────────
+
+    /**
+     * Returns the uniform scale: screenH / TEXTURE_HEIGHT.
+     * The canvas is centred horizontally; it may extend beyond screen edges.
+     */
+    private float getScale()   { return (float) height / TEXTURE_HEIGHT; }
+    private float getOffsetX() { return (width - TEXTURE_WIDTH * getScale()) / 2f; }
+
+    /** Convert a virtual X coord to real screen X. */
+    private int toRealX(int vx) { return Math.round(vx * getScale() + getOffsetX()); }
+    /** Convert a virtual Y coord to real screen Y. */
+    private int toRealY(int vy) { return Math.round(vy * getScale()); }
+    /** Convert a virtual size to real screen pixels. */
+    private int toRealS(int vs) { return Math.round(vs * getScale()); }
+
+    /** Convert a real screen X to virtual texture X. */
+    private int toVirtX(double rx) { return (int)((rx - getOffsetX()) / getScale()); }
+    /** Convert a real screen Y to virtual texture Y. */
+    private int toVirtY(double ry) { return (int)(ry / getScale()); }
+
+    // ── Entry helpers ─────────────────────────────────────────────────────────
+
+    private List<?> getCurrentInventoryEntries() {
+        return currentMode == TradeMode.BUY ? grocerEntries : playerEntries;
     }
 
-    // NEW: Get player's current balance
-    private long getPlayerBalance() {
-        if (minecraft != null && minecraft.player != null) {
-            return minecraft.player.getPersistentData().getLong("agotmod.coin_balance");
-        }
+    private String getItemKeyFromEntry(Object e) {
+        if (e instanceof GrocerSystem.GrocerInventoryEntry g) return g.itemKey;
+        if (e instanceof OpenGrocerInventoryPacket.PlayerInventoryEntry p) return p.itemKey;
+        return null;
+    }
+
+    private String getDisplayNameFromEntry(Object e) {
+        if (e instanceof GrocerSystem.GrocerInventoryEntry g) return g.displayName;
+        if (e instanceof OpenGrocerInventoryPacket.PlayerInventoryEntry p) return p.displayName;
+        return "";
+    }
+
+    private long getAmountFromEntry(Object e) {
+        if (e instanceof GrocerSystem.GrocerInventoryEntry g) return g.amount;
+        if (e instanceof OpenGrocerInventoryPacket.PlayerInventoryEntry p) return p.amount;
         return 0;
     }
 
-    // Add this method to GrocerInventoryScreen class
-    public static void updatePlayerBalance(long newBalance) {
-        if (currentInstance != null) {
-            currentInstance.playerBalance = newBalance;
-        }
+    private long getPlayerBalance() {
+        if (minecraft != null && minecraft.player != null)
+            return minecraft.player.getPersistentData().getLong("agotmod.coin_balance");
+        return 0;
     }
 
+    // ── Render ────────────────────────────────────────────────────────────────
+
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
-        ScreenLayout layout = getOrCreateLayout();
-        int panelSpacing = 10;
-        int leftPanelWidth = (layout.contentWidth * 2) / 3 - (panelSpacing / 2);
-        int rightPanelWidth = layout.contentWidth / 3 - (panelSpacing / 2);
-        int leftPanelX = layout.contentX;
-        int rightPanelX = layout.contentX + leftPanelWidth + panelSpacing;
+    public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
+        super.render(g, mouseX, mouseY, partialTick);
 
-        // Check if mouse is in left panel (inventory)
-        if (mouseX >= leftPanelX && mouseX < leftPanelX + leftPanelWidth &&
-                mouseY >= layout.contentY && mouseY < layout.contentY + layout.contentHeight) {
+        float scale   = getScale();
+        float offsetX = getOffsetX();
 
-            int paperWidth = layout.contentWidth - 40;
-            int itemsPerRow = calculateItemsPerRow(paperWidth);
-            int availableHeight = layout.contentHeight - 80;
-            int maxRowsThatFit = availableHeight / (ITEM_SLOT_SIZE + ITEM_SPACING);
-            int actualVisibleRows = Math.min(VISIBLE_ROWS, Math.max(1, maxRowsThatFit));
+        // Push virtual canvas pose
+        g.pose().pushPose();
+        g.pose().translate(offsetX, 0, 0);
+        g.pose().scale(scale, scale, 1f);
 
-            List<?> currentEntries = getCurrentInventoryEntries();
-            int totalRows = (int) Math.ceil((double) currentEntries.size() / itemsPerRow);
+        // Virtual mouse coords
+        int vmx = toVirtX(mouseX);
+        int vmy = toVirtY(mouseY);
 
-            if (totalRows > actualVisibleRows) {
-                if (scrollY > 0) {
-                    scrollUp();
-                    return true;
-                } else if (scrollY < 0) {
-                    scrollDown();
-                    return true;
-                }
-            }
+        // ── Layer 1: trader texture ───────────────────────────────────────────
+        g.blit(TRADER_TEXTURE, 0, 0, 0, 0, TEXTURE_WIDTH, TEXTURE_HEIGHT, TEXTURE_WIDTH, TEXTURE_HEIGHT);
+
+        // ── Layer 2: left panel content ───────────────────────────────────────
+        drawLeftPanel(g, vmx, vmy);
+
+        // ── Layer 3: right panel content ──────────────────────────────────────
+        drawRightPanel(g, vmx, vmy);
+
+        g.pose().popPose();
+
+        // Tooltip is drawn outside pose in real screen coords
+        if (currentTooltipEntry != null && tooltipPositioned)
+            drawItemTooltip(g, currentTooltipEntry);
+    }
+
+    // ── Left panel ────────────────────────────────────────────────────────────
+
+    private void drawLeftPanel(GuiGraphics g, int vmx, int vmy) {
+        // Mode toggle button at top of left panel
+        int btnX = LEFT_X + 2;
+        int btnY = LEFT_Y + 2;
+        int btnW = 28;
+        int btnH = 10;
+        drawSimpleButton(g, btnX, btnY, btnW, btnH,
+                currentMode == TradeMode.BUY ? "BUY" : "SELL", 0xFF888888);
+
+        if (!dataLoaded) {
+            drawTextCentered(g, "Loading...", LEFT_X + LEFT_W / 2, LEFT_Y + LEFT_H / 2, TEXT_COLOR);
+            return;
         }
-        // Check if mouse is in right panel (transaction)
-        else if (mouseX >= rightPanelX && mouseX < rightPanelX + rightPanelWidth &&
-                mouseY >= layout.contentY && mouseY < layout.contentY + layout.contentHeight) {
 
-            int bottomSectionHeight = 80;
-            int bottomSectionY = layout.contentY + layout.contentHeight - bottomSectionHeight;
-            int balanceAreaHeight = 35;
-            int scrollableAreaStartY = layout.contentY + balanceAreaHeight;
+        List<?> entries = getCurrentInventoryEntries();
+        if (entries.isEmpty()) {
+            String msg = currentMode == TradeMode.BUY ? "Nothing for sale" : "Nothing to sell";
+            drawTextCentered(g, msg, LEFT_X + LEFT_W / 2, LEFT_Y + LEFT_H / 2, TEXT_COLOR);
+            return;
+        }
 
-            if (mouseY >= scrollableAreaStartY && mouseY < bottomSectionY) {
-                if (needsTransactionScroll(getTransactionAvailableHeight())) {
-                    if (scrollY > 0) {
-                        transactionScrollUp();
-                        return true;
-                    } else if (scrollY < 0) {
-                        transactionScrollDown();
-                        return true;
+        // Grid of items below the button row
+        int gridStartY = LEFT_Y + btnH + 4;
+        int availW     = LEFT_W - GRID_MARGIN * 2;
+        int availH     = LEFT_H - (btnH + 4) - GRID_MARGIN;
+        int itemsPerRow = Math.max(1, (availW + ITEM_SPACING) / (ITEM_SLOT_SIZE + ITEM_SPACING));
+        int rowsVisible = Math.max(1, availH / (ITEM_SLOT_SIZE + ITEM_SPACING));
+
+        int totalGridW = itemsPerRow * ITEM_SLOT_SIZE + (itemsPerRow - 1) * ITEM_SPACING;
+        int gridX      = LEFT_X + GRID_MARGIN + (availW - totalGridW) / 2;
+
+        int startIdx = scrollOffset * itemsPerRow;
+        int endIdx   = Math.min(startIdx + rowsVisible * itemsPerRow, entries.size());
+
+        Object hovered = null;
+
+        for (int i = startIdx; i < endIdx; i++) {
+            Object entry  = entries.get(i);
+            int rel       = i - startIdx;
+            int col       = rel % itemsPerRow;
+            int row       = rel / itemsPerRow;
+            int slotX     = gridX + col * (ITEM_SLOT_SIZE + ITEM_SPACING);
+            int slotY     = gridStartY + row * (ITEM_SLOT_SIZE + ITEM_SPACING);
+
+            boolean selected = selectedEntryIndices.contains(i);
+            // Slot background
+            g.fill(slotX, slotY, slotX + ITEM_SLOT_SIZE, slotY + ITEM_SLOT_SIZE,
+                    selected ? 0x80FFFFFF : 0x40000000);
+
+            String itemKey = getItemKeyFromEntry(entry);
+            net.minecraft.resources.ResourceLocation loc =
+                    net.minecraft.resources.ResourceLocation.tryParse(itemKey);
+            if (loc != null) {
+                net.minecraft.world.item.Item item =
+                        net.minecraft.core.registries.BuiltInRegistries.ITEM.get(loc);
+                if (item != null && item != net.minecraft.world.item.Items.AIR) {
+                    g.renderItem(new net.minecraft.world.item.ItemStack(item),
+                            slotX + 1, slotY + 1);
+
+                    if (vmx >= slotX && vmx < slotX + ITEM_SLOT_SIZE &&
+                            vmy >= slotY && vmy < slotY + ITEM_SLOT_SIZE) {
+                        hovered = entry;
+                        if (currentTooltipEntry != entry || !tooltipPositioned) {
+                            currentTooltipEntry  = entry;
+                            tooltipPositioned    = true;
+                            // tooltip position calculated in real screen coords
+                            tooltipX = Math.round((slotX + ITEM_SLOT_SIZE + 2) * getScale() + getOffsetX());
+                            tooltipY = Math.round(slotY * getScale());
+                        }
                     }
                 }
             }
+
+            // Amount text
+            String amtText = formatNumber(getAmountFromEntry(entry));
+            g.pose().pushPose();
+            g.pose().scale(0.5f, 0.5f, 1f);
+            g.drawString(font, amtText,
+                    (int)((slotX + 1) / 0.5f),
+                    (int)((slotY + ITEM_SLOT_SIZE - 5) / 0.5f),
+                    TEXT_COLOR_GREEN, false);
+            g.pose().popPose();
         }
 
-        return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
+        if (hovered == null) { currentTooltipEntry = null; tooltipPositioned = false; }
+
+        // Scroll indicator if needed
+        int totalRows = (int) Math.ceil((double) entries.size() / itemsPerRow);
+        if (totalRows > rowsVisible) {
+            int barX = LEFT_X + LEFT_W - 4;
+            int barY = gridStartY;
+            int barH = availH;
+            g.fill(barX, barY, barX + 3, barY + barH, 0xFF555555);
+            int thumbH   = Math.max(8, rowsVisible * barH / totalRows);
+            int maxScroll = Math.max(1, totalRows - rowsVisible);
+            int thumbY   = barY + scrollOffset * (barH - thumbH) / maxScroll;
+            g.fill(barX, thumbY, barX + 3, thumbY + thumbH, 0xFFC6C6C6);
+        }
     }
 
-    @Override
-    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        // Handle arrow keys for scrolling
-        if (keyCode == 265) { // UP arrow
-            scrollUp();
-            return true;
-        } else if (keyCode == 264) { // DOWN arrow
-            scrollDown();
-            return true;
+    // ── Right panel ───────────────────────────────────────────────────────────
+
+    private void drawRightPanel(GuiGraphics g, int vmx, int vmy) {
+        calculateTotals();
+
+        int cx = RIGHT_X + RIGHT_W / 2;
+        int y  = RIGHT_Y + 2;
+
+        // Balance
+        String balLabel = currentMode == TradeMode.BUY ? "Bal:" : "Groc:";
+        long   bal      = currentMode == TradeMode.BUY ? getPlayerBalance() : grocerBalance;
+        drawTextCenteredScaled(g, balLabel, cx, y, TEXT_COLOR, 0.6f);
+        y += 7;
+        drawTextCenteredScaled(g, formatCurrency(bal), cx, y, TEXT_COLOR_GREEN, 0.6f);
+        y += 9;
+
+        // Separator
+        g.fill(RIGHT_X + 2, y, RIGHT_X + RIGHT_W - 2, y + 1, TEXT_COLOR);
+        y += 3;
+
+        if (selectedEntryIndices.isEmpty()) {
+            drawTextCenteredScaled(g, "Select", cx, y + 20, TEXT_COLOR, 0.6f);
+            drawTextCenteredScaled(g, "items", cx, y + 28, TEXT_COLOR, 0.6f);
+        } else {
+            // Transaction items
+            int itemH = 14;
+            int availH = RIGHT_H - (y - RIGHT_Y) - 30;
+            int maxVisible = Math.max(1, availH / itemH);
+
+            List<Integer> sorted = new ArrayList<>(selectedEntryIndices);
+            sorted.sort(Integer::compareTo);
+            List<?> entries = getCurrentInventoryEntries();
+
+            int shown = 0;
+            for (int i = transactionScrollOffset; i < sorted.size() && shown < maxVisible; i++, shown++) {
+                Integer idx = sorted.get(i);
+                if (idx >= entries.size()) continue;
+                Object entry   = entries.get(idx);
+                String itemKey = getItemKeyFromEntry(entry);
+                int    amount  = transactionAmounts.getOrDefault(itemKey, 0);
+
+                // Item icon tiny
+                net.minecraft.resources.ResourceLocation loc =
+                        net.minecraft.resources.ResourceLocation.tryParse(itemKey);
+                if (loc != null) {
+                    net.minecraft.world.item.Item item =
+                            net.minecraft.core.registries.BuiltInRegistries.ITEM.get(loc);
+                    if (item != null && item != net.minecraft.world.item.Items.AIR) {
+                        g.pose().pushPose();
+                        g.pose().scale(0.5f, 0.5f, 1f);
+                        g.renderItem(new net.minecraft.world.item.ItemStack(item),
+                                (int)((RIGHT_X + 2) / 0.5f), (int)(y / 0.5f));
+                        g.pose().popPose();
+                    }
+                }
+
+                // Amount
+                drawTextScaled(g, "x" + amount, RIGHT_X + 12, y + 1, TEXT_COLOR, 0.5f);
+
+                // +/- buttons
+                int bx = RIGHT_X + RIGHT_W - 14;
+                drawSimpleButton(g, bx,     y, 6, 6, "-", 0xFF888888);
+                drawSimpleButton(g, bx + 7, y, 6, 6, "+", 0xFF888888);
+
+                y += itemH;
+            }
         }
-        return super.keyPressed(keyCode, scanCode, modifiers);
+
+        // Separator before totals
+        int sepY = RIGHT_Y + RIGHT_H - 28;
+        g.fill(RIGHT_X + 2, sepY, RIGHT_X + RIGHT_W - 2, sepY + 1, TEXT_COLOR);
+
+        // Totals
+        drawTextCenteredScaled(g, "Items: " + totalItems, cx, sepY + 3, TEXT_COLOR, 0.55f);
+        drawTextCenteredScaled(g, totalPrice + " coins",  cx, sepY + 10, TEXT_COLOR, 0.55f);
+
+        // Finish button
+        int btnY = RIGHT_Y + RIGHT_H - 14;
+        long limBal = currentMode == TradeMode.BUY ? getPlayerBalance() : grocerBalance;
+        boolean canFinish = totalItems > 0 && limBal >= totalPrice;
+        int btnColor = canFinish ? 0xFF888888 : 0xFF666666;
+        String btnText = canFinish ?
+                (currentMode == TradeMode.BUY ? "Buy" : "Sell") : "N/A";
+        drawSimpleButton(g, RIGHT_X + 4, btnY, RIGHT_W - 8, 12, btnText, btnColor);
     }
+
+    // ── Draw helpers ──────────────────────────────────────────────────────────
+
+    private void drawSimpleButton(GuiGraphics g, int x, int y, int w, int h, String label, int color) {
+        g.fill(x, y, x + w, y + h, color);
+        g.fill(x, y, x + w, y + 1, 0xFFCCCCCC);
+        g.fill(x, y, x + 1, y + h, 0xFFCCCCCC);
+        g.fill(x + w - 1, y, x + w, y + h, 0xFF444444);
+        g.fill(x, y + h - 1, x + w, y + h, 0xFF444444);
+        float s = 0.5f;
+        int tw = (int)(font.width(label) * s);
+        g.pose().pushPose();
+        g.pose().scale(s, s, 1f);
+        g.drawString(font, label, (int)((x + (w - tw) / 2) / s), (int)((y + (h - font.lineHeight * s) / 2) / s), 0xFFFFFFFF, false);
+        g.pose().popPose();
+    }
+
+    private void drawTextCentered(GuiGraphics g, String text, int cx, int y, int color) {
+        g.drawString(font, text, cx - font.width(text) / 2, y, color, false);
+    }
+
+    private void drawTextCenteredScaled(GuiGraphics g, String text, int cx, int y, int color, float s) {
+        int tw = (int)(font.width(text) * s);
+        g.pose().pushPose();
+        g.pose().scale(s, s, 1f);
+        g.drawString(font, text, (int)((cx - tw / 2) / s), (int)(y / s), color, false);
+        g.pose().popPose();
+    }
+
+    private void drawTextScaled(GuiGraphics g, String text, int x, int y, int color, float s) {
+        g.pose().pushPose();
+        g.pose().scale(s, s, 1f);
+        g.drawString(font, text, (int)(x / s), (int)(y / s), color, false);
+        g.pose().popPose();
+    }
+
+    private void drawItemTooltip(GuiGraphics g, Object entry) {
+        String name     = getDisplayNameFromEntry(entry);
+        String itemKey  = getItemKeyFromEntry(entry);
+        long   amount   = getAmountFromEntry(entry);
+        int    buyP     = (int) Math.ceil(ItemPricing.getItemPrice(itemKey) * buyMultiplier);
+        int    sellP    = (int) Math.ceil(ItemPricing.getItemPrice(itemKey) * sellMultiplier);
+
+        String[] lines = { name, "Amount: " + amount, "Buy: " + buyP, "Sell: " + sellP };
+        int tw = 0;
+        for (String l : lines) tw = Math.max(tw, font.width(l));
+        int bw = tw + 12, bh = lines.length * (font.lineHeight + 2) + 8;
+
+        int tx = tooltipX, ty = tooltipY;
+        if (tx + bw > width  - 4) tx = width  - bw - 4;
+        if (ty + bh > height - 4) ty = height - bh - 4;
+
+        g.pose().pushPose();
+        g.pose().translate(0, 0, 300);
+        g.fill(tx, ty, tx + bw, ty + bh, 0xE0000000);
+        g.fill(tx, ty, tx + bw, ty + 1, 0xFF555555);
+        g.fill(tx, ty, tx + 1, ty + bh, 0xFF555555);
+        g.fill(tx + bw - 1, ty, tx + bw, ty + bh, 0xFF555555);
+        g.fill(tx, ty + bh - 1, tx + bw, ty + bh, 0xFF555555);
+        int ly = ty + 5;
+        for (String l : lines) {
+            g.drawString(font, l, tx + 6, ly, 0xFFFFFF, false);
+            ly += font.lineHeight + 2;
+        }
+        g.pose().popPose();
+    }
+
+    // ── Input ─────────────────────────────────────────────────────────────────
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (button == 0 && dataLoaded) {
-            ScreenLayout layout = getOrCreateLayout();
-            int panelSpacing = 10;
-            int leftPanelWidth = (layout.contentWidth * 2) / 3 - (panelSpacing / 2);
-            int rightPanelWidth = layout.contentWidth / 3 - (panelSpacing / 2);
-            int leftPanelX = layout.contentX;
-            int rightPanelX = layout.contentX + leftPanelWidth + panelSpacing;
+        if (button != 0 || !dataLoaded) return super.mouseClicked(mouseX, mouseY, button);
 
-            int toggleButtonX = leftPanelX + 25;
-            int toggleButtonY = layout.contentY + layout.contentHeight - 14 - 15;
-            int toggleButtonWidth = 50;
-            int toggleButtonHeight = 14;
+        int vmx = toVirtX(mouseX);
+        int vmy = toVirtY(mouseY);
 
-            if (mouseX >= toggleButtonX && mouseX < toggleButtonX + toggleButtonWidth &&
-                    mouseY >= toggleButtonY && mouseY < toggleButtonY + toggleButtonHeight) {
-                toggleMode();
+        // Mode toggle button
+        int btnX = LEFT_X + 2, btnY = LEFT_Y + 2, btnW = 28, btnH = 10;
+        if (vmx >= btnX && vmx < btnX + btnW && vmy >= btnY && vmy < btnY + btnH) {
+            toggleMode(); return true;
+        }
+
+        // Left panel — item selection
+        if (vmx >= LEFT_X && vmx < LEFT_X + LEFT_W && vmy >= LEFT_Y && vmy < LEFT_Y + LEFT_H) {
+            int idx = getClickedItemIndex(vmx, vmy);
+            if (idx >= 0) { toggleEntrySelection(idx); playButtonSound(); return true; }
+        }
+
+        // Right panel — transaction buttons + finish
+        if (vmx >= RIGHT_X && vmx < RIGHT_X + RIGHT_W && vmy >= RIGHT_Y && vmy < RIGHT_Y + RIGHT_H) {
+            // Finish button
+            int finBtnY = RIGHT_Y + RIGHT_H - 14;
+            if (vmy >= finBtnY && vmy < finBtnY + 12 &&
+                    vmx >= RIGHT_X + 4 && vmx < RIGHT_X + RIGHT_W - 4) {
+                long limBal = currentMode == TradeMode.BUY ? getPlayerBalance() : grocerBalance;
+                if (totalItems > 0 && limBal >= totalPrice) { finishTransaction(); return true; }
                 return true;
             }
 
-            if (mouseX >= leftPanelX && mouseX < leftPanelX + leftPanelWidth &&
-                    mouseY >= layout.contentY && mouseY < layout.contentY + layout.contentHeight) {
-
-                int clickedEntryIndex = getClickedEntryIndex((int)mouseX, (int)mouseY, leftPanelX, layout.contentY, leftPanelWidth, layout.contentHeight);
-                if (clickedEntryIndex >= 0) {
-                    toggleEntrySelection(clickedEntryIndex);
-                    playButtonSound();
-                    return true;
-                }
-            }
-
-            if (mouseX >= rightPanelX && mouseX < rightPanelX + rightPanelWidth &&
-                    mouseY >= layout.contentY && mouseY < layout.contentY + layout.contentHeight) {
-
-                int bottomSectionHeight = 80;
-                int bottomSectionY = layout.contentY + layout.contentHeight - bottomSectionHeight;
-
-                if (mouseY >= bottomSectionY) {
-                    int finishButtonWidth = 120;
-                    int finishButtonHeight = 20;
-                    int finishButtonX = rightPanelX + (rightPanelWidth - finishButtonWidth) / 2;
-                    int finishButtonY = bottomSectionY + bottomSectionHeight - finishButtonHeight - 10;
-
-                    if (mouseX >= finishButtonX && mouseX < finishButtonX + finishButtonWidth &&
-                            mouseY >= finishButtonY && mouseY < finishButtonY + finishButtonHeight) {
-
-                        boolean hasItems = totalItems > 0;
-                        long limitingBalance = currentMode == TradeMode.BUY ? getPlayerBalance() : grocerBalance;
-                        boolean hasEnoughMoney = limitingBalance >= totalPrice;
-
-                        if (hasItems && hasEnoughMoney) {
-                            finishTransaction();
-                            playButtonSound();
-                            return true;
-                        }
-                        return true;
-                    }
-                } else {
-                    int availableHeight = layout.contentHeight - 80 - bottomSectionHeight;
-                    if (handleTransactionClick((int)mouseX, (int)mouseY, rightPanelX, layout.contentY + 80, rightPanelWidth, availableHeight)) {
-                        return true;
-                    }
-                }
-            }
+            // +/- buttons on transaction items
+            handleTransactionButtonClick(vmx, vmy); return true;
         }
+
         return super.mouseClicked(mouseX, mouseY, button);
     }
 
+    private int getClickedItemIndex(int vmx, int vmy) {
+        int gridStartY = LEFT_Y + 10 + 4;
+        int availW     = LEFT_W - GRID_MARGIN * 2;
+        int itemsPerRow = Math.max(1, (availW + ITEM_SPACING) / (ITEM_SLOT_SIZE + ITEM_SPACING));
+        int totalGridW  = itemsPerRow * ITEM_SLOT_SIZE + (itemsPerRow - 1) * ITEM_SPACING;
+        int gridX       = LEFT_X + GRID_MARGIN + (availW - totalGridW) / 2;
 
-    private boolean needsTransactionScroll(int availableHeight) {
-        if (selectedEntryIndices.isEmpty()) return false;
+        int availH     = LEFT_H - (10 + 4) - GRID_MARGIN;
+        int rowsVisible = Math.max(1, availH / (ITEM_SLOT_SIZE + ITEM_SPACING));
+        int startIdx    = scrollOffset * itemsPerRow;
+        List<?> entries = getCurrentInventoryEntries();
 
-        int itemHeight = 16 * 2;
-        int maxVisibleItems = Math.max(1, (availableHeight - 32) / itemHeight);
-        return selectedEntryIndices.size() > maxVisibleItems;
-    }
-
-    private void transactionScrollUp() {
-        if (transactionScrollOffset > 0) {
-            transactionScrollOffset--;
-        }
-    }
-
-    private void transactionScrollDown() {
-        if (selectedEntryIndices.isEmpty()) return;
-
-        int scaledAvailableHeight = getTransactionAvailableHeight();
-
-        int itemHeight = 16 * 2;
-        int maxVisibleItems = Math.max(1, (scaledAvailableHeight - 32) / itemHeight);
-        int maxScroll = Math.max(0, selectedEntryIndices.size() - maxVisibleItems);
-
-        if (transactionScrollOffset < maxScroll) {
-            transactionScrollOffset++;
-        }
-    }
-
-    private void drawTransactionScrollIndicator(GuiGraphics guiGraphics, int panelX, int startY, int panelWidth, int availableHeight) {
-        int itemHeight = 16 * 2;
-        int maxVisibleItems = Math.max(1, (availableHeight - 32) / itemHeight);
-        int totalItems = selectedEntryIndices.size();
-
-        if (totalItems <= maxVisibleItems) return;
-
-        int scrollBarX = panelX + panelWidth - 20; // Exactly between -16 and -24
-        int scrollBarY = startY + 20;
-        int scrollBarHeight = availableHeight - 60;
-        int scrollBarWidth = 16;
-
-        // Draw scroll bar background
-        guiGraphics.fill(scrollBarX, scrollBarY,
-                scrollBarX + scrollBarWidth, scrollBarY + scrollBarHeight,
-                0xFF555555);
-
-        // Calculate scroll thumb
-        int thumbHeight = Math.max(40, (maxVisibleItems * scrollBarHeight) / totalItems);
-        int maxScroll = Math.max(1, totalItems - maxVisibleItems);
-        int thumbY = scrollBarY + (transactionScrollOffset * (scrollBarHeight - thumbHeight)) / maxScroll;
-
-        // Draw scroll thumb
-        guiGraphics.fill(scrollBarX, thumbY,
-                scrollBarX + scrollBarWidth, thumbY + thumbHeight,
-                0xFFC6C6C6);
-
-        // Draw scroll arrows
-        String upArrow = "Ã¢â€ â€˜";
-        String downArrow = "Ã¢â€ â€œ";
-        int arrowX = scrollBarX + (scrollBarWidth - font.width(upArrow)) / 2;
-
-        int upColor = transactionScrollOffset > 0 ? SUBMENU_TEXT_COLOR : 0xFF666666;
-        guiGraphics.drawString(font, upArrow, arrowX, scrollBarY - 30, upColor, false);
-
-        int downColor = transactionScrollOffset < maxScroll ? SUBMENU_TEXT_COLOR : 0xFF666666;
-        guiGraphics.drawString(font, downArrow, arrowX, scrollBarY + scrollBarHeight + 10, downColor, false);
-    }
-
-    private boolean handleTransactionClick(int mouseX, int mouseY, int panelX, int startY, int panelWidth, int availableHeight) {
-        // Get which transaction item was clicked
-        int clickedTransactionIndex = getClickedTransactionIndex(mouseX, mouseY, panelX, startY, panelWidth, availableHeight);
-
-        if (clickedTransactionIndex >= 0) {
-            // Get the actual entry
-            List<Integer> sortedIndices = new ArrayList<>(selectedEntryIndices);
-            sortedIndices.sort(Integer::compareTo);
-
-            if (clickedTransactionIndex < sortedIndices.size()) {
-                Integer entryIndex = sortedIndices.get(clickedTransactionIndex);
-                List<?> currentEntries = getCurrentInventoryEntries();
-                if (entryIndex < currentEntries.size()) {
-                    Object entry = currentEntries.get(entryIndex);
-
-                    // Now check which button within that item was clicked
-                    return checkTransactionButtons(mouseX, mouseY, panelX, startY, panelWidth, availableHeight, clickedTransactionIndex, entry);
-                }
-            }
-        }
-
-        return false;
-    }
-
-    private int getClickedTransactionIndex(int mouseX, int mouseY, int panelX, int startY, int panelWidth, int availableHeight) {
-        int scaledMouseY = mouseY * 2;
-        int scaledStartY = startY * 2;
-        int scaledAvailableHeight = availableHeight * 2;
-
-        int itemHeight = 16 * 2;
-        int maxVisibleItems = Math.max(1, (scaledAvailableHeight - 32) / itemHeight);
-
-        // Calculate which visible item was clicked
-        int relativeIndex = (scaledMouseY - scaledStartY) / itemHeight;
-
-        if (relativeIndex >= 0 && relativeIndex < maxVisibleItems) {
-            int actualIndex = transactionScrollOffset + relativeIndex;
-            // Check against the sorted list size, not selectedEntryIndices.size()
-            List<Integer> sortedIndices = new ArrayList<>(selectedEntryIndices);
-            sortedIndices.sort(Integer::compareTo);
-
-            if (actualIndex < sortedIndices.size()) {
-                return actualIndex;
-            }
-        }
-
-        return -1;
-    }
-
-    private boolean checkTransactionButtons(int mouseX, int mouseY, int panelX, int startY, int panelWidth, int availableHeight, int transactionIndex, Object entry) {
-        // Convert to scaled coordinates
-        int scaledMouseX = mouseX * 2;
-        int scaledMouseY = mouseY * 2;
-        int scaledPanelX = panelX * 2;
-        int scaledStartY = startY * 2;
-        int scaledPanelWidth = panelWidth * 2;
-
-        int itemHeight = 16 * 2;
-        int margin = 6 * 2;
-
-        // Calculate this specific item's Y position based on its visible position
-        int visibleIndex = transactionIndex - transactionScrollOffset;
-        int itemY = scaledStartY + (visibleIndex * itemHeight);
-
-        int contentWidth = scaledPanelWidth - (margin * 8);
-        int centeredX = scaledPanelX + (margin * 4);
-
-        int buttonSize = 20;
-        int totalButtonWidth = buttonSize * 6;
-        int buttonsStartX = centeredX + contentWidth - totalButtonWidth + 20;
-        int buttonY = itemY + 2;
-
-        String itemKey = getItemKeyFromEntry(entry);
-        long maxAmount = getAmountFromEntry(entry);
-
-// Check each button
-        for (int j = 0; j < 6; j++) {
-            int buttonX = buttonsStartX + (j * buttonSize);
-
-            if (scaledMouseX >= buttonX && scaledMouseX < buttonX + buttonSize &&
-                    scaledMouseY >= buttonY && scaledMouseY < buttonY + buttonSize) {
-
-                switch (j) {
-                    case 0: adjustTransactionAmount(itemKey, maxAmount, false, 64); break;
-                    case 1: adjustTransactionAmount(itemKey, maxAmount, false, 10); break;
-                    case 2: adjustTransactionAmount(itemKey, maxAmount, false, 1); break;
-                    case 3: adjustTransactionAmount(itemKey, maxAmount, true, 1); break;
-                    case 4: adjustTransactionAmount(itemKey, maxAmount, true, 10); break;
-                    case 5: adjustTransactionAmount(itemKey, maxAmount, true, 64); break;
-                }
-
-                playButtonSound();
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private void adjustTransactionAmount(String itemKey, long maxAmount, boolean increase, int changeAmount) {
-        int currentAmount = transactionAmounts.getOrDefault(itemKey, 0);
-        int newAmount;
-
-        if (increase) {
-            newAmount = (int) Math.min(currentAmount + changeAmount, maxAmount);
-        } else {
-            newAmount = Math.max(currentAmount - changeAmount, 0);
-        }
-
-        transactionAmounts.put(itemKey, newAmount);
-    }
-
-    private int getClickedEntryIndex(int mouseX, int mouseY, int panelX, int panelY, int panelWidth, int panelHeight) {
-        int startY = panelY + 60;
-        int availableWidth = panelWidth - (GRID_MARGIN * 2);
-        int itemsPerRow = calculateItemsPerRow(availableWidth);
-        int availableHeight = panelHeight - 80;
-        int maxRowsThatFit = availableHeight / (ITEM_SLOT_SIZE + ITEM_SPACING);
-        int actualVisibleRows = Math.min(VISIBLE_ROWS, Math.max(1, maxRowsThatFit));
-        int totalGridWidth = (itemsPerRow * ITEM_SLOT_SIZE) + ((itemsPerRow - 1) * ITEM_SPACING);
-        int gridStartX = panelX + (panelWidth - totalGridWidth) / 2;
-        int startIndex = scrollOffset * itemsPerRow;
-
-        List<?> currentEntries = getCurrentInventoryEntries();
-        int endIndex = Math.min(startIndex + (actualVisibleRows * itemsPerRow), currentEntries.size());
-
-        for (int i = startIndex; i < endIndex; i++) {
-            int relativeIndex = i - startIndex;
-            int gridX = relativeIndex % itemsPerRow;
-            int gridY = relativeIndex / itemsPerRow;
-            if (gridY >= actualVisibleRows) break;
-
-            int slotX = gridStartX + (gridX * (ITEM_SLOT_SIZE + ITEM_SPACING));
-            int slotY = startY + (gridY * (ITEM_SLOT_SIZE + ITEM_SPACING));
-
-            if (mouseX >= slotX && mouseX < slotX + ITEM_SLOT_SIZE &&
-                    mouseY >= slotY && mouseY < slotY + ITEM_SLOT_SIZE) {
-                return i;
-            }
+        for (int i = startIdx; i < Math.min(startIdx + rowsVisible * itemsPerRow, entries.size()); i++) {
+            int rel  = i - startIdx;
+            int col  = rel % itemsPerRow;
+            int row  = rel / itemsPerRow;
+            int slotX = gridX + col * (ITEM_SLOT_SIZE + ITEM_SPACING);
+            int slotY = gridStartY + row * (ITEM_SLOT_SIZE + ITEM_SPACING);
+            if (vmx >= slotX && vmx < slotX + ITEM_SLOT_SIZE &&
+                    vmy >= slotY && vmy < slotY + ITEM_SLOT_SIZE) return i;
         }
         return -1;
     }
 
-    private void toggleEntrySelection(int entryIndex) {
-        List<?> currentEntries = getCurrentInventoryEntries();
+    private void handleTransactionButtonClick(int vmx, int vmy) {
+        List<Integer> sorted  = new ArrayList<>(selectedEntryIndices);
+        sorted.sort(Integer::compareTo);
+        List<?> entries = getCurrentInventoryEntries();
 
-        if (entryIndex >= currentEntries.size()) return;
+        int y      = RIGHT_Y + 2 + 7 + 9 + 3; // matches drawRightPanel layout
+        int itemH  = 14;
+        int availH = RIGHT_H - (y - RIGHT_Y) - 30;
+        int maxVis = Math.max(1, availH / itemH);
 
-        if (selectedEntryIndices.contains(entryIndex)) {
-            selectedEntryIndices.remove(entryIndex);
-
-            // Remove from transaction amounts
-            Object entry = currentEntries.get(entryIndex);
+        for (int i = transactionScrollOffset; i < sorted.size() && (i - transactionScrollOffset) < maxVis; i++) {
+            Integer idx = sorted.get(i);
+            if (idx >= entries.size()) continue;
+            Object entry   = entries.get(idx);
             String itemKey = getItemKeyFromEntry(entry);
-            if (itemKey != null) {
-                transactionAmounts.remove(itemKey);
+            long   maxAmt  = getAmountFromEntry(entry);
+
+            int bx = RIGHT_X + RIGHT_W - 14;
+            // Minus
+            if (vmx >= bx && vmx < bx + 6 && vmy >= y && vmy < y + 6) {
+                adjustAmount(itemKey, maxAmt, false, 1); playButtonSound(); return;
             }
+            // Plus
+            if (vmx >= bx + 7 && vmx < bx + 13 && vmy >= y && vmy < y + 6) {
+                adjustAmount(itemKey, maxAmt, true, 1); playButtonSound(); return;
+            }
+            y += itemH;
+        }
+    }
+
+    @Override
+    public boolean mouseScrolled(double mouseX, double mouseY, double sx, double sy) {
+        int vmx = toVirtX(mouseX);
+        int vmy = toVirtY(mouseY);
+
+        if (vmx >= LEFT_X && vmx < LEFT_X + LEFT_W && vmy >= LEFT_Y && vmy < LEFT_Y + LEFT_H) {
+            if (sy > 0) scrollUp(); else scrollDown(); return true;
+        }
+        if (vmx >= RIGHT_X && vmx < RIGHT_X + RIGHT_W && vmy >= RIGHT_Y && vmy < RIGHT_Y + RIGHT_H) {
+            if (sy > 0) transactionScrollUp(); else transactionScrollDown(); return true;
+        }
+        return super.mouseScrolled(mouseX, mouseY, sx, sy);
+    }
+
+    // ── Trade logic ───────────────────────────────────────────────────────────
+
+    private void toggleMode() {
+        currentMode = currentMode == TradeMode.BUY ? TradeMode.SELL : TradeMode.BUY;
+        selectedEntryIndices.clear(); transactionAmounts.clear();
+        scrollOffset = 0; transactionScrollOffset = 0;
+        currentTooltipEntry = null; tooltipPositioned = false;
+        playButtonSound();
+    }
+
+    private void toggleEntrySelection(int idx) {
+        List<?> entries = getCurrentInventoryEntries();
+        if (idx >= entries.size()) return;
+        String itemKey = getItemKeyFromEntry(entries.get(idx));
+        if (selectedEntryIndices.contains(idx)) {
+            selectedEntryIndices.remove(idx);
+            if (itemKey != null) transactionAmounts.remove(itemKey);
         } else {
-            selectedEntryIndices.add(entryIndex);
-
-            // Add to transaction amounts
-            Object entry = currentEntries.get(entryIndex);
-            String itemKey = getItemKeyFromEntry(entry);
-            if (itemKey != null) {
-                transactionAmounts.put(itemKey, 0);
-            }
+            selectedEntryIndices.add(idx);
+            if (itemKey != null) transactionAmounts.put(itemKey, 0);
         }
         transactionScrollOffset = 0;
     }
 
-    private void playButtonSound() {
-        if (minecraft != null && minecraft.player != null) {
-            minecraft.getSoundManager().play(
-                    net.minecraft.client.resources.sounds.SimpleSoundInstance.forUI(
-                            ModSounds.PAGE, 1.0F
-                    )
-            );
-        }
-    }
-
-    private void scrollUp() {
-        if (scrollOffset > 0) {
-            scrollOffset--;
-            // Removed scroll sound to avoid audio spam
-        }
-    }
-
-    private void scrollDown() {
-        List<?> currentEntries = getCurrentInventoryEntries();
-        ScreenLayout layout = getOrCreateLayout();
-        int leftPanelWidth = (layout.contentWidth * 2) / 3 - 5;
-        int paperWidth = leftPanelWidth - 40;
-        int itemsPerRow = calculateItemsPerRow(paperWidth);
-        int availableHeight = layout.contentHeight - 80;
-        int maxRowsThatFit = availableHeight / (ITEM_SLOT_SIZE + ITEM_SPACING);
-        int actualVisibleRows = Math.min(VISIBLE_ROWS, Math.max(1, maxRowsThatFit));
-        int totalRows = (int) Math.ceil((double) currentEntries.size() / itemsPerRow);
-        int maxScroll = Math.max(0, totalRows - actualVisibleRows);
-
-        if (scrollOffset < maxScroll) {
-            scrollOffset++;
-        }
-    }
-
-    @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        guiGraphics.fill(0, 0, width, height, 0x40E6D8B7);
-
-        ScreenLayout layout = getOrCreateLayout();
-
-        int panelSpacing = 10;
-        int leftPanelWidth = (layout.contentWidth * 2) / 3 - (panelSpacing / 2);
-        int rightPanelWidth = layout.contentWidth / 3 - (panelSpacing / 2);
-
-        int leftPanelX = layout.contentX;
-        int leftPanelY = layout.contentY;
-        int rightPanelX = layout.contentX + leftPanelWidth + panelSpacing;
-        int rightPanelY = layout.contentY;
-
-        renderPaperPanel(guiGraphics, leftPanelX, leftPanelY, leftPanelWidth, layout.contentHeight);
-        renderPaperPanel(guiGraphics, rightPanelX, rightPanelY, rightPanelWidth, layout.contentHeight);
-
-        String leftTitle = currentMode == TradeMode.BUY ? grocerName : "Your Items";
-        drawSectionTitle(guiGraphics, leftTitle, leftPanelX, leftPanelY, leftPanelWidth);
-        drawSectionTitle(guiGraphics, "Transaction", rightPanelX, rightPanelY, rightPanelWidth);
-
-        drawModeToggleButton(guiGraphics, leftPanelX, leftPanelY, leftPanelWidth, layout.contentHeight);
-
-        if (!dataLoaded) {
-            drawLoadingMessage(guiGraphics, leftPanelX, leftPanelY, leftPanelWidth, layout.contentHeight);
-        } else {
-            drawInventoryEntries(guiGraphics, leftPanelX, leftPanelY, leftPanelWidth, layout.contentHeight, mouseX, mouseY);
-
-            List<?> currentEntries = getCurrentInventoryEntries();
-            if (needsScrollIndicator(currentEntries.size(), leftPanelWidth, layout.contentHeight)) {
-                drawScrollIndicator(guiGraphics, leftPanelX, leftPanelY, leftPanelWidth, layout.contentHeight);
-            }
-        }
-
-        drawTransactionMenu(guiGraphics, rightPanelX, rightPanelY, rightPanelWidth, layout.contentHeight);
-
-        drawHelpText(guiGraphics, leftPanelX, leftPanelY, leftPanelWidth, layout.contentHeight);
-
-        if (currentTooltipEntry != null && tooltipPositioned) {
-            drawItemTooltip(guiGraphics, currentTooltipEntry);
-        }
-
-        super.render(guiGraphics, mouseX, mouseY, partialTick);
-    }
-
-    private boolean needsScrollIndicator(int entryCount, int panelWidth, int panelHeight) {
-        int availableWidth = panelWidth - (GRID_MARGIN * 2);
-        int itemsPerRow = calculateItemsPerRow(availableWidth);
-        int availableHeight = panelHeight - 80;
-        int maxRowsThatFit = availableHeight / (ITEM_SLOT_SIZE + ITEM_SPACING);
-        int actualVisibleRows = Math.min(VISIBLE_ROWS, Math.max(1, maxRowsThatFit));
-        int totalRows = (int) Math.ceil((double) entryCount / itemsPerRow);
-        return totalRows > actualVisibleRows;
-    }
-
-    private void drawLoadingMessage(GuiGraphics guiGraphics, int panelX, int panelY, int panelWidth, int panelHeight) {
-        String loadingMessage = "Loading inventory data...";
-        int messageWidth = font.width(loadingMessage);
-        int messageX = panelX + (panelWidth - messageWidth) / 2;
-        int messageY = panelY + panelHeight / 2;
-
-        guiGraphics.drawString(font, loadingMessage, messageX, messageY, SUBMENU_TEXT_COLOR, false);
-    }
-
-    private void drawInventoryEntries(GuiGraphics guiGraphics, int panelX, int panelY, int panelWidth, int panelHeight, int mouseX, int mouseY) {
-        List<?> currentEntries = getCurrentInventoryEntries();
-
-        if (currentEntries.isEmpty()) {
-            String emptyMessage = currentMode == TradeMode.BUY ?
-                    "No items available for purchase." :
-                    "No sellable items in your inventory.";
-            int messageWidth = font.width(emptyMessage);
-            int messageX = panelX + (panelWidth - messageWidth) / 2;
-            int messageY = panelY + panelHeight / 2;
-            guiGraphics.drawString(font, emptyMessage, messageX, messageY, SUBMENU_TEXT_COLOR, false);
-            return;
-        }
-
-        int startY = panelY + 60;
-
-        // Draw separator line
-        guiGraphics.fill(panelX + panelWidth/8, startY - 25,
-                panelX + panelWidth - panelWidth/8, startY - 24,
-                SUBMENU_TEXT_COLOR);
-
-        // Calculate dynamic grid layout
-        int availableWidth = panelWidth - (GRID_MARGIN * 2);
-        int itemsPerRow = calculateItemsPerRow(availableWidth);
-        int reservedTopSpace = 50;
-        int reservedBottomSpace = 30;
-        int availableHeight = panelHeight - reservedTopSpace - reservedBottomSpace;
-        int maxRowsThatFit = availableHeight / (ITEM_SLOT_SIZE + ITEM_SPACING);
-        int actualVisibleRows = Math.min(VISIBLE_ROWS, maxRowsThatFit);
-
-        if (actualVisibleRows < 1) {
-            actualVisibleRows = 1;
-        }
-
-        int totalGridWidth = (itemsPerRow * ITEM_SLOT_SIZE) + ((itemsPerRow - 1) * ITEM_SPACING);
-        int gridStartX = panelX + (panelWidth - totalGridWidth) / 2;
-        int startIndex = scrollOffset * itemsPerRow;
-        int endIndex = Math.min(startIndex + (actualVisibleRows * itemsPerRow), currentEntries.size());
-
-        Object hoveredEntry = null;
-
-        // Draw items
-        for (int i = startIndex; i < endIndex; i++) {
-            Object entry = currentEntries.get(i);
-
-            int relativeIndex = i - startIndex;
-            int gridX = relativeIndex % itemsPerRow;
-            int gridY = relativeIndex / itemsPerRow;
-
-            if (gridY >= actualVisibleRows) {
-                break;
-            }
-
-            int slotX = gridStartX + (gridX * (ITEM_SLOT_SIZE + ITEM_SPACING));
-            int slotY = startY + (gridY * (ITEM_SLOT_SIZE + ITEM_SPACING));
-
-            if (slotY + ITEM_SLOT_SIZE > panelY + panelHeight - 30) {
-                break;
-            }
-
-            // Draw item slot background
-            int iconSlotSize = 18;
-            int iconSlotX = slotX + (ITEM_SLOT_SIZE - iconSlotSize) / 2;
-            int iconSlotY = slotY + 2;
-            boolean isSelected = selectedEntryIndices.contains(i);
-            drawItemSlotBackground(guiGraphics, iconSlotX, iconSlotY, iconSlotSize, iconSlotSize, isSelected);
-
-            // Get item data
-            String itemKey = getItemKeyFromEntry(entry);
-            String displayName = getDisplayNameFromEntry(entry);
-            long amount = getAmountFromEntry(entry);
-
-            // Render item icon
-            net.minecraft.resources.ResourceLocation itemLocation = net.minecraft.resources.ResourceLocation.tryParse(itemKey);
-            if (itemLocation != null) {
-                net.minecraft.world.item.Item item = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(itemLocation);
-                if (item != null && item != net.minecraft.world.item.Items.AIR) {
-                    net.minecraft.world.item.ItemStack itemStack = new net.minecraft.world.item.ItemStack(item);
-
-                    int iconX = slotX + (ITEM_SLOT_SIZE - 16) / 2;
-                    int iconY = slotY + 3;
-                    guiGraphics.renderItem(itemStack, iconX, iconY);
-
-                    // Check for hover
-                    if (mouseX >= iconX && mouseX < iconX + 16 && mouseY >= iconY && mouseY < iconY + 16) {
-                        hoveredEntry = entry;
-
-                        if (currentTooltipEntry != entry || !tooltipPositioned) {
-                            currentTooltipEntry = entry;
-                            calculateTooltipPosition(entry, mouseX, mouseY);
-                            tooltipPositioned = true;
-                        }
-                    }
-
-                    // Render amount
-                    String amountText = formatNumber(amount);
-                    float amountScale = 0.7f;
-                    guiGraphics.pose().pushPose();
-                    guiGraphics.pose().scale(amountScale, amountScale, 1.0f);
-
-                    int amountWidth = (int)(font.width(amountText) * amountScale);
-                    int amountX = (int)((slotX + (ITEM_SLOT_SIZE - amountWidth) / 2) / amountScale);
-                    int amountY = (int)((slotY + 22) / amountScale);
-
-                    guiGraphics.drawString(font, amountText, amountX, amountY, 0xFF4CAF50, false);
-                    guiGraphics.pose().popPose();
-                }
-            }
-        }
-
-        // Reset tooltip if not hovering
-        if (hoveredEntry == null) {
-            currentTooltipEntry = null;
-            tooltipPositioned = false;
-        }
-    }
-
-    // Calculate and save tooltip position (called once per tooltip)
-    private void calculateTooltipPosition(Object entry, int mouseX, int mouseY) {
-        String itemName = getDisplayNameFromEntry(entry);
-        String itemKey  = getItemKeyFromEntry(entry);
-        long amount     = getAmountFromEntry(entry);
-
-        String amountText = "Amount: " + amount;
-
-        int buyPrice  = (int) Math.ceil(ItemPricing.getItemPrice(itemKey) * buyMultiplier);
-        int sellPrice = (int) Math.ceil(ItemPricing.getItemPrice(itemKey) * sellMultiplier);
-        long totalValue = (long) buyPrice * amount;
-
-        String buyText   = "Buy Price: " + buyPrice + " coins";
-        String sellText  = "Sell Price: " + sellPrice + " coins";
-        String valueText = "Total Value: " + formatNumber((int) Math.min(totalValue, Integer.MAX_VALUE)) + " coins";
-
-        int nameWidth  = font.width(itemName);
-        int amountWidth = font.width(amountText);
-        int buyWidth   = font.width(buyText);
-        int sellWidth  = font.width(sellText);
-        int valueWidth = font.width(valueText);
-        int tooltipWidth  = Math.max(Math.max(Math.max(nameWidth, amountWidth), Math.max(buyWidth, sellWidth)), valueWidth) + 16;
-        int tooltipHeight = font.lineHeight * 5 + 18;
-
-        tooltipX = mouseX;
-        tooltipY = mouseY;
-
-        if (tooltipX + tooltipWidth > width - 5)   tooltipX = width - tooltipWidth - 5;
-        if (tooltipY + tooltipHeight > height - 5)  tooltipY = height - tooltipHeight - 5;
-        if (tooltipX < 5) tooltipX = 5;
-        if (tooltipY < 5) tooltipY = 5;
-    }
-
-    private void drawItemTooltip(GuiGraphics guiGraphics, Object entry) {
-        String itemName = getDisplayNameFromEntry(entry);
-        String itemKey  = getItemKeyFromEntry(entry);
-        long amount     = getAmountFromEntry(entry);
-
-        String amountText = "Amount: " + amount;
-
-        int buyPrice  = (int) Math.ceil(ItemPricing.getItemPrice(itemKey) * buyMultiplier);
-        int sellPrice = (int) Math.ceil(ItemPricing.getItemPrice(itemKey) * sellMultiplier);
-        long totalValue = (long) buyPrice * amount;
-
-        String buyText   = "Buy Price: " + buyPrice + " coins";
-        String sellText  = "Sell Price: " + sellPrice + " coins";
-        String valueText = "Total Value: " + formatNumber((int) Math.min(totalValue, Integer.MAX_VALUE)) + " coins";
-
-        int nameWidth   = font.width(itemName);
-        int amountWidth = font.width(amountText);
-        int buyWidth    = font.width(buyText);
-        int sellWidth   = font.width(sellText);
-        int valueWidth  = font.width(valueText);
-        int tooltipWidth  = Math.max(Math.max(Math.max(nameWidth, amountWidth), Math.max(buyWidth, sellWidth)), valueWidth) + 16;
-        int tooltipHeight = font.lineHeight * 5 + 18;
-
-        guiGraphics.pose().pushPose();
-        guiGraphics.pose().translate(0, 0, 300);
-
-        guiGraphics.fill(tooltipX, tooltipY, tooltipX + tooltipWidth, tooltipY + tooltipHeight, 0xE0000000);
-        guiGraphics.fill(tooltipX, tooltipY, tooltipX + tooltipWidth, tooltipY + 1, 0xFF555555);
-        guiGraphics.fill(tooltipX, tooltipY, tooltipX + 1, tooltipY + tooltipHeight, 0xFF555555);
-        guiGraphics.fill(tooltipX + tooltipWidth - 1, tooltipY, tooltipX + tooltipWidth, tooltipY + tooltipHeight, 0xFF555555);
-        guiGraphics.fill(tooltipX, tooltipY + tooltipHeight - 1, tooltipX + tooltipWidth, tooltipY + tooltipHeight, 0xFF555555);
-
-        int textY = tooltipY + 8;
-        guiGraphics.drawString(font, itemName,    tooltipX + 8, textY, 0xFFFFFF, false);
-        textY += font.lineHeight;
-        guiGraphics.drawString(font, amountText,  tooltipX + 8, textY, 0xFF4CAF50, false);
-        textY += font.lineHeight;
-        guiGraphics.drawString(font, buyText,     tooltipX + 8, textY, 0xFFFFD700, false);
-        textY += font.lineHeight;
-        guiGraphics.drawString(font, sellText,    tooltipX + 8, textY, 0xFF00CED1, false);
-        textY += font.lineHeight;
-        guiGraphics.drawString(font, valueText,   tooltipX + 8, textY, 0xFFFFD700, false);
-
-        guiGraphics.pose().popPose();
-    }
-
-    // Calculate how many items can fit per row based on available width
-    private int calculateItemsPerRow(int availableWidth) {
-        // Calculate maximum items that can fit: (width - margins) / (item_size + spacing)
-        // We need to account for the fact that the last item doesn't need spacing after it
-        int maxItems = (availableWidth + ITEM_SPACING) / (ITEM_SLOT_SIZE + ITEM_SPACING);
-
-        // Ensure at least 1 item per row, and reasonable maximum
-        return Math.max(1, Math.min(maxItems, 10)); // Max 10 items per row for sanity
-    }
-
-    // Smart text wrapping method
-    private java.util.List<String> wrapText(String text, int maxWidth, float scale) {
-        java.util.List<String> lines = new java.util.ArrayList<>();
-
-        // Split by spaces first to handle word boundaries
-        String[] words = text.split(" ");
-
-        if (words.length == 1) {
-            // Single word - handle hyphenation if too long
-            String word = words[0];
-            if (font.width(word) * scale <= maxWidth) {
-                lines.add(word);
-            } else {
-                // Break long word with hyphen
-                String currentLine = "";
-                for (int i = 0; i < word.length(); i++) {
-                    String testLine = currentLine + word.charAt(i);
-                    String testLineWithHyphen = testLine + "-";
-
-                    if (font.width(testLineWithHyphen) * scale > maxWidth && !currentLine.isEmpty()) {
-                        lines.add(currentLine + "-");
-                        currentLine = "" + word.charAt(i);
-                    } else {
-                        currentLine = testLine;
-                    }
-                }
-                if (!currentLine.isEmpty()) {
-                    lines.add(currentLine);
-                }
-            }
-        } else {
-            // Multiple words - wrap by words
-            String currentLine = "";
-
-            for (String word : words) {
-                String testLine = currentLine.isEmpty() ? word : currentLine + " " + word;
-
-                if (font.width(testLine) * scale <= maxWidth) {
-                    currentLine = testLine;
-                } else {
-                    // Current line is full, start new line
-                    if (!currentLine.isEmpty()) {
-                        lines.add(currentLine);
-                    }
-
-                    // Check if single word is too long
-                    if (font.width(word) * scale > maxWidth) {
-                        // Break the word with hyphen
-                        String partialWord = "";
-                        for (int i = 0; i < word.length(); i++) {
-                            String testChar = partialWord + word.charAt(i);
-                            String testWithHyphen = testChar + "-";
-
-                            if (font.width(testWithHyphen) * scale > maxWidth && !partialWord.isEmpty()) {
-                                lines.add(partialWord + "-");
-                                partialWord = "" + word.charAt(i);
-                            } else {
-                                partialWord = testChar;
-                            }
-                        }
-                        currentLine = partialWord;
-                    } else {
-                        currentLine = word;
-                    }
-                }
-            }
-
-            if (!currentLine.isEmpty()) {
-                lines.add(currentLine);
-            }
-        }
-
-        // Limit to maximum 3 lines to prevent overflow
-        if (lines.size() > 3) {
-            lines = lines.subList(0, 2);
-            String lastLine = lines.get(1);
-            if (lastLine.length() > 3) {
-                lines.set(1, lastLine.substring(0, lastLine.length() - 3) + "...");
-            } else {
-                lines.set(1, "...");
-            }
-        }
-
-        return lines;
-    }
-
-    private void drawItemSlotBackground(GuiGraphics guiGraphics, int x, int y, int width, int height, boolean isSelected) {        // Draw slot background (slightly darker)
-        if (isSelected) {
-            guiGraphics.fill(x, y, x + width, y + height, 0x80FFFFFF); // Semi-transparent white background
-            guiGraphics.fill(x, y, x + width, y + 1, 0xFFFFFFFF); // Bright white border - top
-            guiGraphics.fill(x, y, x + 1, y + height, 0xFFFFFFFF); // Bright white border - left
-            guiGraphics.fill(x + width - 1, y, x + width, y + height, 0xFFFFFFFF); // Bright white border - right
-            guiGraphics.fill(x, y + height - 1, x + width, y + height, 0xFFFFFFFF); // Bright white border - bottom
-        } else {
-            guiGraphics.fill(x, y, x + width, y + height, 0x40000000);
-            guiGraphics.fill(x, y, x + width, y + 1, 0x80FFFFFF);
-            guiGraphics.fill(x, y, x + 1, y + height, 0x80FFFFFF);
-            guiGraphics.fill(x + width - 1, y, x + width, y + height, 0x60000000);
-            guiGraphics.fill(x, y + height - 1, x + width, y + height, 0x60000000);
-        }
-    }
-
-    // REPLACE: Complete drawScrollIndicator method
-    private void drawScrollIndicator(GuiGraphics guiGraphics, int panelX, int panelY, int panelWidth, int panelHeight) {
-        int availableWidth = panelWidth - (GRID_MARGIN * 2);
-        int itemsPerRow = calculateItemsPerRow(availableWidth);
-        List<?> currentEntries = getCurrentInventoryEntries();
-        int totalRows = (int) Math.ceil((double) currentEntries.size() / itemsPerRow);
-
-        if (totalRows <= VISIBLE_ROWS) {
-            return;
-        }
-
-        int scrollBarX = panelX + panelWidth - 10;
-        int scrollBarY = panelY + 80;
-        int scrollBarHeight = panelHeight - 140;
-        int scrollBarWidth = 8;
-
-        // Draw scroll bar background
-        guiGraphics.fill(scrollBarX, scrollBarY,
-                scrollBarX + scrollBarWidth, scrollBarY + scrollBarHeight,
-                0xFF555555);
-
-        // Calculate scroll thumb
-        int thumbHeight = Math.max(20, (VISIBLE_ROWS * scrollBarHeight) / totalRows);
-        int maxScroll = Math.max(1, totalRows - VISIBLE_ROWS);
-        int thumbY = scrollBarY + (scrollOffset * (scrollBarHeight - thumbHeight)) / maxScroll;
-
-        // Draw scroll thumb
-        guiGraphics.fill(scrollBarX, thumbY,
-                scrollBarX + scrollBarWidth, thumbY + thumbHeight,
-                0xFFC6C6C6);
-
-        // Draw scroll arrows
-        String upArrow = "Ã¢â€ â€˜";
-        String downArrow = "Ã¢â€ â€œ";
-        int arrowX = scrollBarX + (scrollBarWidth - font.width(upArrow)) / 2;
-
-        int upColor = scrollOffset > 0 ? SUBMENU_TEXT_COLOR : 0xFF666666;
-        guiGraphics.drawString(font, upArrow, arrowX, scrollBarY - 15, upColor, false);
-
-        int downColor = scrollOffset < maxScroll ? SUBMENU_TEXT_COLOR : 0xFF666666;
-        guiGraphics.drawString(font, downArrow, arrowX, scrollBarY + scrollBarHeight + 5, downColor, false);
-    }
-
-    private void drawHelpText(GuiGraphics guiGraphics, int panelX, int panelY, int panelWidth, int panelHeight) {
-        String helpText = "Use mouse wheel or arrow keys to scroll Ã¢â‚¬Â¢ Press ESC to close";
-
-        // CHANGED: Scale down the help text further
-        float scale = 0.7f; // CHANGED: Reduced from 0.8f to 0.7f
-        guiGraphics.pose().pushPose();
-        guiGraphics.pose().scale(scale, scale, 1.0f);
-
-        int helpWidth = (int)(font.width(helpText) * scale);
-        int helpX = (int)((panelX + (panelWidth - helpWidth) / 2) / scale);
-        int helpY = (int)((panelY + panelHeight - 25) / scale);
-
-        guiGraphics.drawString(font, helpText, helpX, helpY, 0xFF666666, false);
-
-        guiGraphics.pose().popPose();
-    }
-
-    private String formatNumber(long number) {
-        if (number >= 1000000) {
-            return String.format("%.1fM", number / 1000000.0);
-        } else if (number >= 1000) {
-            return String.format("%.1fK", number / 1000.0);
-        } else {
-            return String.valueOf(number);
-        }
-    }
-
-    private void drawSectionTitle(GuiGraphics guiGraphics, String title, int x, int y, int width) {
-        float titleScale = 0.9f; // CHANGED: Reduced from 1.2f to 0.9f
-        int titleWidth = (int) (font.width(title) * titleScale);
-        int titleX = x + (width - titleWidth) / 2;
-        int titleY = y + 18;
-
-        guiGraphics.pose().pushPose();
-        guiGraphics.pose().scale(titleScale, titleScale, 1.0f);
-        guiGraphics.drawString(font, title,
-                (int) (titleX / titleScale),
-                (int) (titleY / titleScale),
-                SUBMENU_TEXT_COLOR, false);
-        guiGraphics.pose().popPose();
-    }
-
-    private void renderPaperPanel(GuiGraphics guiGraphics, int x, int y, int width, int height) {
-        guiGraphics.flush();
-
-        int borderPillarWidth = BORDER_PILLAR_WIDTH * 2;
-        int borderHeight = BORDER_HEIGHT * 2;
-        int cornerSize = CORNER_SIZE * 2;
-
-        int innerX = x + borderPillarWidth;
-        int innerY = y + borderHeight;
-        int innerWidth = width - (borderPillarWidth * 2);
-        int innerHeight = height - (borderHeight * 2);
-
-        RenderSystem.enableBlend();
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.9F);
-
-        int tileSize = 256;
-        for (int tileX = 0; tileX < innerWidth; tileX += tileSize) {
-            for (int tileY = 0; tileY < innerHeight; tileY += tileSize) {
-                int tileWidth = Math.min(tileSize, innerWidth - tileX);
-                int tileHeight = Math.min(tileSize, innerHeight - tileY);
-
-                guiGraphics.blit(
-                        PAPER_TEXTURE, innerX + tileX, innerY + tileY, 0, 0,
-                        tileWidth, tileHeight, tileSize, tileSize);
-            }
-        }
-
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        drawPaperPanelBorders(guiGraphics, x, y, width, height, borderPillarWidth, borderHeight, cornerSize);
-    }
-
-    private void drawPaperPanelBorders(GuiGraphics guiGraphics, int x, int y, int width, int height,
-                                       int borderPillarWidth, int borderHeight, int cornerSize) {
-        drawRotatableBorder(guiGraphics, PAPER_SIDE_TEXTURE,
-                x, y + cornerSize,
-                borderPillarWidth, height - (cornerSize * 2),
-                0);
-
-        drawRotatableBorder(guiGraphics, PAPER_SIDE_TEXTURE,
-                x + width - borderPillarWidth, y + cornerSize,
-                borderPillarWidth, height - (cornerSize * 2),
-                180);
-
-        drawRotatableBorder(guiGraphics, PAPER_SIDETOP_TEXTURE,
-                x + cornerSize, y,
-                width - (cornerSize * 2), borderHeight,
-                0);
-
-        RenderSystem.setShaderColor(0.8f, 0.8f, 0.8f, 1.0f);
-
-        drawRotatableBorder(guiGraphics, PAPER_SIDETOP_TEXTURE,
-                x + cornerSize, y + height - borderHeight,
-                width - (cornerSize * 2), borderHeight,
-                180);
-
-        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-        drawPaperCorners(guiGraphics, x, y, width, height, cornerSize);
-    }
-
-    private void drawPaperCorners(GuiGraphics guiGraphics, int x, int y, int width, int height, int cornerSize) {
-        drawRotatableCorner(guiGraphics, PAPER_CORNER_TEXTURE,
-                x, y, cornerSize, cornerSize, 0);
-
-        drawRotatableCorner(guiGraphics, PAPER_CORNER_TEXTURE,
-                x + width - cornerSize, y, cornerSize, cornerSize, 90);
-
-        drawRotatableCorner(guiGraphics, PAPER_CORNER_TEXTURE,
-                x + width - cornerSize, y + height - cornerSize, cornerSize, cornerSize, 180);
-
-        drawRotatableCorner(guiGraphics, PAPER_CORNER_TEXTURE,
-                x, y + height - cornerSize, cornerSize, cornerSize, 270);
-    }
-
-    private void drawRotatableCorner(GuiGraphics guiGraphics,
-                                     ResourceLocation texture,
-                                     int x, int y, int width, int height, float rotationDegrees) {
-        com.mojang.blaze3d.vertex.PoseStack poseStack = guiGraphics.pose();
-
-        poseStack.pushPose();
-
-        if (rotationDegrees != 0) {
-            poseStack.translate(x + width / 2.0f, y + height / 2.0f, 0);
-            poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(rotationDegrees));
-            poseStack.translate(-width / 2.0f, -height / 2.0f, 0);
-
-            guiGraphics.blit(
-                    texture, 0, 0, 0, 0, width, height, 32, 32);
-        } else {
-            guiGraphics.blit(
-                    texture, x, y, 0, 0, width, height, 32, 32);
-        }
-
-        poseStack.popPose();
-    }
-
-    private void drawRotatableBorder(GuiGraphics guiGraphics,
-                                     ResourceLocation texture,
-                                     int x, int y, int width, int height, float rotationDegrees) {
-        com.mojang.blaze3d.vertex.PoseStack poseStack = guiGraphics.pose();
-
-        poseStack.pushPose();
-
-        float centerX = x + width / 2.0f;
-        float centerY = y + height / 2.0f;
-
-        poseStack.translate(centerX, centerY, 0);
-        poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(rotationDegrees));
-        poseStack.translate(-width / 2.0f, -height / 2.0f, 0);
-
-        int textureSize = 32;
-
-        for (int tileX = 0; tileX < width; tileX += textureSize) {
-            for (int tileY = 0; tileY < height; tileY += textureSize) {
-                int tileWidth = Math.min(textureSize, width - tileX);
-                int tileHeight = Math.min(textureSize, height - tileY);
-
-                if (tileWidth <= 0 || tileHeight <= 0) continue;
-
-                guiGraphics.blit(
-                        texture, tileX, tileY, 0, 0,
-                        tileWidth, tileHeight, textureSize, textureSize);
-            }
-        }
-
-        poseStack.popPose();
-    }
-
-    private void drawPanelBorders(GuiGraphics guiGraphics, int x, int y, int width, int height) {
-        guiGraphics.blit(
-                PILLAR_TEXTURE, x, y, 0, 0, BORDER_PILLAR_WIDTH, height, 16, 64);
-
-        guiGraphics.blit(
-                PILLAR_TEXTURE, x + width - BORDER_PILLAR_WIDTH, y, 0, 0,
-                BORDER_PILLAR_WIDTH, height, 16, 64);
-
-        guiGraphics.blit(
-                BORDER_TEXTURE, x, y, 0, 0, width, BORDER_HEIGHT, 64, 16);
-
-        RenderSystem.setShaderColor(0.8f, 0.8f, 0.8f, 1.0f);
-
-        guiGraphics.blit(
-                BORDER_TEXTURE, x, y + height - BORDER_HEIGHT, 0, 0,
-                width, BORDER_HEIGHT, 64, 16);
-
-        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-        drawCorners(guiGraphics, x, y, width, height);
-    }
-
-    private void drawCorners(GuiGraphics guiGraphics, int x, int y, int width, int height) {
-        com.mojang.blaze3d.vertex.PoseStack poseStack = guiGraphics.pose();
-
-        poseStack.pushPose();
-        guiGraphics.blit(
-                CORNER_TEXTURE, x, y + height - BORDER_HEIGHT - CORNER_SIZE / 2,
-                0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
-        poseStack.popPose();
-
-        poseStack.pushPose();
-        poseStack.translate(x + width - CORNER_SIZE / 2, y + height - BORDER_HEIGHT, 0);
-        poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(270));
-        poseStack.translate(-CORNER_SIZE / 2, -CORNER_SIZE / 2, 0);
-        guiGraphics.blit(
-                CORNER_TEXTURE, 0, 0, 0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
-        poseStack.popPose();
-
-        poseStack.pushPose();
-        poseStack.translate(x + width - CORNER_SIZE / 2, y + CORNER_SIZE / 2, 0);
-        poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(180));
-        poseStack.translate(-CORNER_SIZE / 2, -CORNER_SIZE / 2, 0);
-        guiGraphics.blit(
-                CORNER_TEXTURE, 0, 0, 0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
-        poseStack.popPose();
-
-        poseStack.pushPose();
-        poseStack.translate(x + CORNER_SIZE / 2, y + CORNER_SIZE / 2, 0);
-        poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(90));
-        poseStack.translate(-CORNER_SIZE / 2, -CORNER_SIZE / 2, 0);
-        guiGraphics.blit(
-                CORNER_TEXTURE, 0, 0, 0, 0, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
-        poseStack.popPose();
+    private void adjustAmount(String itemKey, long max, boolean increase, int delta) {
+        int cur = transactionAmounts.getOrDefault(itemKey, 0);
+        transactionAmounts.put(itemKey, (int)(increase
+                ? Math.min(cur + delta, max)
+                : Math.max(cur - delta, 0)));
     }
 
     private void calculateTotals() {
-        totalItems = 0;
-        totalPrice = 0;
-
-        for (Map.Entry<String, Integer> entry : transactionAmounts.entrySet()) {
-            int amount = entry.getValue();
-            if (amount > 0) {
-                totalItems += amount;
-                int basePrice = ItemPricing.getItemPrice(entry.getKey());
-                float multiplier = currentMode == TradeMode.BUY ? buyMultiplier : sellMultiplier;
-                totalPrice += (int) Math.ceil(basePrice * multiplier) * amount;
-            }
+        totalItems = 0; totalPrice = 0;
+        for (Map.Entry<String, Integer> e : transactionAmounts.entrySet()) {
+            int amt = e.getValue();
+            if (amt <= 0) continue;
+            totalItems += amt;
+            float mul = currentMode == TradeMode.BUY ? buyMultiplier : sellMultiplier;
+            totalPrice += (int) Math.ceil(ItemPricing.getItemPrice(e.getKey()) * mul) * amt;
         }
     }
 
-    // Override to disable background blur
-    @Override
-    public boolean isPauseScreen() {
-        return false; // This prevents the game from pausing and adding blur
-    }
-
-    // Override to disable background rendering
-    @Override
-    public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        // Don't call super.renderBackground() to avoid blur effect
-        // Just render a simple transparent overlay instead
-    }
-
-    // Layout class matching your custom GUI structure
-    private class ScreenLayout {
-        final int contentX;
-        final int contentY;
-        final int contentWidth;
-        final int contentHeight;
-
-        ScreenLayout(int screenWidth, int screenHeight) {
-            int sideMargin = screenWidth / 16;
-            int topMargin = screenHeight / 16;
-
-            contentX = sideMargin;
-            contentY = topMargin;
-            contentWidth = screenWidth - (2 * sideMargin);
-            contentHeight = screenHeight - (2 * topMargin);
+    private void finishTransaction() {
+        if (totalItems <= 0) return;
+        Map<String, Integer> items = new HashMap<>();
+        Map<String, Integer> slots = new HashMap<>();
+        for (Map.Entry<String, Integer> e : transactionAmounts.entrySet()) {
+            if (e.getValue() > 0) { items.put(e.getKey(), e.getValue()); if (currentMode == TradeMode.SELL) slots.put(e.getKey(), 0); }
         }
+        FinishTransactionPacket pkt = currentMode == TradeMode.BUY
+                ? new FinishTransactionPacket(grocerName, items)
+                : new FinishTransactionPacket(grocerName, items, slots);
+        net.neoforged.neoforge.network.PacketDistributor.sendToServer(pkt);
+        this.onClose();
+    }
+
+    private void scrollUp()   { if (scrollOffset > 0) scrollOffset--; }
+    private void scrollDown() {
+        List<?> entries = getCurrentInventoryEntries();
+        int availW = LEFT_W - GRID_MARGIN * 2;
+        int ipr    = Math.max(1, (availW + ITEM_SPACING) / (ITEM_SLOT_SIZE + ITEM_SPACING));
+        int availH = LEFT_H - 14 - GRID_MARGIN;
+        int vis    = Math.max(1, availH / (ITEM_SLOT_SIZE + ITEM_SPACING));
+        int total  = (int) Math.ceil((double) entries.size() / ipr);
+        if (scrollOffset < total - vis) scrollOffset++;
+    }
+    private void transactionScrollUp()   { if (transactionScrollOffset > 0) transactionScrollOffset--; }
+    private void transactionScrollDown() { if (transactionScrollOffset < selectedEntryIndices.size() - 1) transactionScrollOffset++; }
+
+    // ── Utilities ─────────────────────────────────────────────────────────────
+
+    private String formatCurrency(long coins) { return coins == 0 ? "0c" : coins + "c"; }
+    private String formatNumber(long n) {
+        if (n >= 1_000_000) return String.format("%.1fM", n / 1_000_000.0);
+        if (n >= 1_000)     return String.format("%.1fK", n / 1_000.0);
+        return String.valueOf(n);
+    }
+
+    private void playButtonSound() {
+        if (minecraft != null && minecraft.player != null)
+            minecraft.getSoundManager().play(
+                    net.minecraft.client.resources.sounds.SimpleSoundInstance.forUI(ModSounds.PAGE, 1.0F));
     }
 }
