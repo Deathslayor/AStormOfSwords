@@ -28,19 +28,21 @@ public class GrocerInventoryScreen extends Screen {
 
     private static final ResourceLocation TRADER_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/gui_asset_trader_book.png");
+    private static final ResourceLocation SEAL_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/gui_asset_trader_seal.png");
 
     /** Actual pixel dimensions of gui_asset_trader_book.png. */
     private static final int TEXTURE_WIDTH  = 1082;
     private static final int TEXTURE_HEIGHT = 212;
 
     /** Left panel — inventory/products area (in texture virtual pixels). */
-    private static final int LEFT_X = 356;
-    private static final int LEFT_Y = 34;
-    private static final int LEFT_W = 221;
-    private static final int LEFT_H = 156;
+    private static final int LEFT_X = 366;
+    private static final int LEFT_Y = 40;
+    private static final int LEFT_W = 210;
+    private static final int LEFT_H = 117;
 
     /** Right panel — transaction area (in texture virtual pixels). */
-    private static final int RIGHT_X = 615;
+    private static final int RIGHT_X = 611;
     private static final int RIGHT_Y = 62;
     private static final int RIGHT_W = 102;
     private static final int RIGHT_H = 125;
@@ -54,6 +56,20 @@ public class GrocerInventoryScreen extends Screen {
 
     // ── Item grid constants ───────────────────────────────────────────────────
 
+    private static final int BUY_BTN_X  = 442;
+    private static final int BUY_BTN_Y  = 158;
+    private static final int BUY_BTN_W  = 24;
+    private static final int BUY_BTN_H  = 24;
+
+    private static final int SELL_BTN_X = 475;
+    private static final int SELL_BTN_Y = 158;
+    private static final int SELL_BTN_W = 24;
+    private static final int SELL_BTN_H = 24;
+
+    private static final int SEAL_BTN_X = 611;
+    private static final int SEAL_BTN_Y = 158;
+    private static final int SEAL_BTN_W = 25;
+    private static final int SEAL_BTN_H = 26;
     private static final int ITEM_SLOT_SIZE = 18;
     private static final int ITEM_SPACING   = 2;
     private static final int GRID_MARGIN    = 4;
@@ -134,12 +150,18 @@ public class GrocerInventoryScreen extends Screen {
 
     // ── Screen lifecycle ──────────────────────────────────────────────────────
 
-    @Override protected void init()    { super.init(); }
+    @Override
+    protected void init() {
+        super.init();
+        if (minecraft != null) minecraft.options.hideGui = true;
+    }
+
     @Override public boolean isPauseScreen() { return false; }
     @Override public void renderBackground(GuiGraphics g, int mx, int my, float pt) { }
 
     @Override
     public void onClose() {
+        if (minecraft != null) minecraft.options.hideGui = false;
         super.onClose();
         if (currentInstance == this) { currentInstance = null; transactionAmounts.clear(); }
     }
@@ -216,10 +238,16 @@ public class GrocerInventoryScreen extends Screen {
         // ── Layer 1: trader texture ───────────────────────────────────────────
         g.blit(TRADER_TEXTURE, 0, 0, 0, 0, TEXTURE_WIDTH, TEXTURE_HEIGHT, TEXTURE_WIDTH, TEXTURE_HEIGHT);
 
-        // ── Layer 2: left panel content ───────────────────────────────────────
+        // ── Layer 2: seal texture (only when cart has items) ──────────────────
+        calculateTotals();
+        if (totalItems > 0) {
+            g.blit(SEAL_TEXTURE, 0, 0, 0, 0, TEXTURE_WIDTH, TEXTURE_HEIGHT, TEXTURE_WIDTH, TEXTURE_HEIGHT);
+        }
+
+        // ── Layer 3: left panel content ───────────────────────────────────────
         drawLeftPanel(g, vmx, vmy);
 
-        // ── Layer 3: right panel content ──────────────────────────────────────
+        // ── Layer 4: right panel content ──────────────────────────────────────
         drawRightPanel(g, vmx, vmy);
 
         g.pose().popPose();
@@ -232,14 +260,6 @@ public class GrocerInventoryScreen extends Screen {
     // ── Left panel ────────────────────────────────────────────────────────────
 
     private void drawLeftPanel(GuiGraphics g, int vmx, int vmy) {
-        // Mode toggle button at top of left panel
-        int btnX = LEFT_X + 2;
-        int btnY = LEFT_Y + 2;
-        int btnW = 28;
-        int btnH = 10;
-        drawSimpleButton(g, btnX, btnY, btnW, btnH,
-                currentMode == TradeMode.BUY ? "BUY" : "SELL", 0xFF888888);
-
         if (!dataLoaded) {
             drawTextCentered(g, "Loading...", LEFT_X + LEFT_W / 2, LEFT_Y + LEFT_H / 2, TEXT_COLOR);
             return;
@@ -253,9 +273,9 @@ public class GrocerInventoryScreen extends Screen {
         }
 
         // Grid of items below the button row
-        int gridStartY = LEFT_Y + btnH + 4;
+        int gridStartY = LEFT_Y + GRID_MARGIN;
         int availW     = LEFT_W - GRID_MARGIN * 2;
-        int availH     = LEFT_H - (btnH + 4) - GRID_MARGIN;
+        int availH     = LEFT_H - GRID_MARGIN * 2;
         int itemsPerRow = Math.max(1, (availW + ITEM_SPACING) / (ITEM_SLOT_SIZE + ITEM_SPACING));
         int rowsVisible = Math.max(1, availH / (ITEM_SLOT_SIZE + ITEM_SPACING));
 
@@ -267,6 +287,7 @@ public class GrocerInventoryScreen extends Screen {
 
         Object hovered = null;
 
+        // Pass 1: slot backgrounds and item icons
         for (int i = startIdx; i < endIdx; i++) {
             Object entry  = entries.get(i);
             int rel       = i - startIdx;
@@ -276,7 +297,6 @@ public class GrocerInventoryScreen extends Screen {
             int slotY     = gridStartY + row * (ITEM_SLOT_SIZE + ITEM_SPACING);
 
             boolean selected = selectedEntryIndices.contains(i);
-            // Slot background
             g.fill(slotX, slotY, slotX + ITEM_SLOT_SIZE, slotY + ITEM_SLOT_SIZE,
                     selected ? 0x80FFFFFF : 0x40000000);
 
@@ -294,25 +314,43 @@ public class GrocerInventoryScreen extends Screen {
                             vmy >= slotY && vmy < slotY + ITEM_SLOT_SIZE) {
                         hovered = entry;
                         if (currentTooltipEntry != entry || !tooltipPositioned) {
-                            currentTooltipEntry  = entry;
-                            tooltipPositioned    = true;
-                            // tooltip position calculated in real screen coords
+                            currentTooltipEntry = entry;
+                            tooltipPositioned   = true;
                             tooltipX = Math.round((slotX + ITEM_SLOT_SIZE + 2) * getScale() + getOffsetX());
                             tooltipY = Math.round(slotY * getScale());
                         }
                     }
                 }
             }
+        }
 
-            // Amount text
+        // Pass 2: amount text on top using Minecraft's item decoration system
+        for (int i = startIdx; i < endIdx; i++) {
+            Object entry = entries.get(i);
+            int rel      = i - startIdx;
+            int col      = rel % itemsPerRow;
+            int row      = rel / itemsPerRow;
+            int slotX    = gridX + col * (ITEM_SLOT_SIZE + ITEM_SPACING);
+            int slotY    = gridStartY + row * (ITEM_SLOT_SIZE + ITEM_SPACING);
+
             String amtText = formatNumber(getAmountFromEntry(entry));
-            g.pose().pushPose();
-            g.pose().scale(0.5f, 0.5f, 1f);
-            g.drawString(font, amtText,
-                    (int)((slotX + 1) / 0.5f),
-                    (int)((slotY + ITEM_SLOT_SIZE - 5) / 0.5f),
-                    TEXT_COLOR_GREEN, false);
-            g.pose().popPose();
+            String itemKey = getItemKeyFromEntry(entry);
+            net.minecraft.resources.ResourceLocation loc =
+                    net.minecraft.resources.ResourceLocation.tryParse(itemKey);
+            if (loc != null) {
+                net.minecraft.world.item.Item item =
+                        net.minecraft.core.registries.BuiltInRegistries.ITEM.get(loc);
+                if (item != null && item != net.minecraft.world.item.Items.AIR) {
+                    net.minecraft.world.item.ItemStack stack =
+                            new net.minecraft.world.item.ItemStack(item, 1);
+                    // Scale down slightly for smaller text
+                    g.pose().pushPose();
+                    g.pose().translate(slotX + 1, slotY + 1, 0);
+                    g.pose().scale(0.8f, 0.8f, 1f);
+                    g.renderItemDecorations(font, stack, 0, 0, amtText);
+                    g.pose().popPose();
+                }
+            }
         }
 
         if (hovered == null) { currentTooltipEntry = null; tooltipPositioned = false; }
@@ -391,9 +429,8 @@ public class GrocerInventoryScreen extends Screen {
                 drawTextScaled(g, "x" + amount, RIGHT_X + 12, y + 1, TEXT_COLOR, 0.5f);
 
                 // +/- buttons
-                int bx = RIGHT_X + RIGHT_W - 14;
-                drawSimpleButton(g, bx,     y, 6, 6, "-", 0xFF888888);
-                drawSimpleButton(g, bx + 7, y, 6, 6, "+", 0xFF888888);
+                drawSimpleButton(g, RIGHT_X + 2,            y, 10, 10, "-", 0xFF888888);
+                drawSimpleButton(g, RIGHT_X + RIGHT_W - 12, y, 10, 10, "+", 0xFF888888);
 
                 y += itemH;
             }
@@ -406,15 +443,6 @@ public class GrocerInventoryScreen extends Screen {
         // Totals
         drawTextCenteredScaled(g, "Items: " + totalItems, cx, sepY + 3, TEXT_COLOR, 0.55f);
         drawTextCenteredScaled(g, totalPrice + " coins",  cx, sepY + 10, TEXT_COLOR, 0.55f);
-
-        // Finish button
-        int btnY = RIGHT_Y + RIGHT_H - 14;
-        long limBal = currentMode == TradeMode.BUY ? getPlayerBalance() : grocerBalance;
-        boolean canFinish = totalItems > 0 && limBal >= totalPrice;
-        int btnColor = canFinish ? 0xFF888888 : 0xFF666666;
-        String btnText = canFinish ?
-                (currentMode == TradeMode.BUY ? "Buy" : "Sell") : "N/A";
-        drawSimpleButton(g, RIGHT_X + 4, btnY, RIGHT_W - 8, 12, btnText, btnColor);
     }
 
     // ── Draw helpers ──────────────────────────────────────────────────────────
@@ -492,10 +520,18 @@ public class GrocerInventoryScreen extends Screen {
         int vmx = toVirtX(mouseX);
         int vmy = toVirtY(mouseY);
 
-        // Mode toggle button
-        int btnX = LEFT_X + 2, btnY = LEFT_Y + 2, btnW = 28, btnH = 10;
-        if (vmx >= btnX && vmx < btnX + btnW && vmy >= btnY && vmy < btnY + btnH) {
-            toggleMode(); return true;
+        // Buy button
+        if (vmx >= BUY_BTN_X && vmx < BUY_BTN_X + BUY_BTN_W &&
+                vmy >= BUY_BTN_Y && vmy < BUY_BTN_Y + BUY_BTN_H) {
+            if (currentMode != TradeMode.BUY) toggleMode();
+            return true;
+        }
+
+        // Sell button
+        if (vmx >= SELL_BTN_X && vmx < SELL_BTN_X + SELL_BTN_W &&
+                vmy >= SELL_BTN_Y && vmy < SELL_BTN_Y + SELL_BTN_H) {
+            if (currentMode != TradeMode.SELL) toggleMode();
+            return true;
         }
 
         // Left panel — item selection
@@ -504,18 +540,20 @@ public class GrocerInventoryScreen extends Screen {
             if (idx >= 0) { toggleEntrySelection(idx); playButtonSound(); return true; }
         }
 
-        // Right panel — transaction buttons + finish
-        if (vmx >= RIGHT_X && vmx < RIGHT_X + RIGHT_W && vmy >= RIGHT_Y && vmy < RIGHT_Y + RIGHT_H) {
-            // Finish button
-            int finBtnY = RIGHT_Y + RIGHT_H - 14;
-            if (vmy >= finBtnY && vmy < finBtnY + 12 &&
-                    vmx >= RIGHT_X + 4 && vmx < RIGHT_X + RIGHT_W - 4) {
-                long limBal = currentMode == TradeMode.BUY ? getPlayerBalance() : grocerBalance;
-                if (totalItems > 0 && limBal >= totalPrice) { finishTransaction(); return true; }
-                return true;
+        // Seal button — finish transaction (only active when cart has items)
+        if (vmx >= SEAL_BTN_X && vmx < SEAL_BTN_X + SEAL_BTN_W &&
+                vmy >= SEAL_BTN_Y && vmy < SEAL_BTN_Y + SEAL_BTN_H) {
+            calculateTotals();
+            long limBal = currentMode == TradeMode.BUY ? getPlayerBalance() : grocerBalance;
+            if (totalItems > 0 && limBal >= totalPrice) {
+                finishTransaction();
+                playButtonSound();
             }
+            return true;
+        }
 
-            // +/- buttons on transaction items
+        // Right panel — +/- buttons on transaction items
+        if (vmx >= RIGHT_X && vmx < RIGHT_X + RIGHT_W && vmy >= RIGHT_Y && vmy < RIGHT_Y + RIGHT_H) {
             handleTransactionButtonClick(vmx, vmy); return true;
         }
 
@@ -523,7 +561,7 @@ public class GrocerInventoryScreen extends Screen {
     }
 
     private int getClickedItemIndex(int vmx, int vmy) {
-        int gridStartY = LEFT_Y + 10 + 4;
+        int gridStartY  = LEFT_Y + GRID_MARGIN;
         int availW     = LEFT_W - GRID_MARGIN * 2;
         int itemsPerRow = Math.max(1, (availW + ITEM_SPACING) / (ITEM_SLOT_SIZE + ITEM_SPACING));
         int totalGridW  = itemsPerRow * ITEM_SLOT_SIZE + (itemsPerRow - 1) * ITEM_SPACING;
@@ -551,7 +589,12 @@ public class GrocerInventoryScreen extends Screen {
         sorted.sort(Integer::compareTo);
         List<?> entries = getCurrentInventoryEntries();
 
-        int y      = RIGHT_Y + 2 + 7 + 9 + 3; // matches drawRightPanel layout
+        // Determine amount delta from modifier keys
+        boolean shift = hasShiftDown();
+        boolean ctrl  = hasControlDown();
+        int delta = (shift && ctrl) ? 100 : shift ? 10 : ctrl ? 5 : 1;
+
+        int y      = RIGHT_Y + 2 + 7 + 9 + 3;
         int itemH  = 14;
         int availH = RIGHT_H - (y - RIGHT_Y) - 30;
         int maxVis = Math.max(1, availH / itemH);
@@ -563,14 +606,13 @@ public class GrocerInventoryScreen extends Screen {
             String itemKey = getItemKeyFromEntry(entry);
             long   maxAmt  = getAmountFromEntry(entry);
 
-            int bx = RIGHT_X + RIGHT_W - 14;
-            // Minus
-            if (vmx >= bx && vmx < bx + 6 && vmy >= y && vmy < y + 6) {
-                adjustAmount(itemKey, maxAmt, false, 1); playButtonSound(); return;
+            int bx = RIGHT_X + 2;
+            int plusX = RIGHT_X + RIGHT_W - 12;
+            if (vmx >= bx && vmx < bx + 10 && vmy >= y && vmy < y + 10) {
+                adjustAmount(itemKey, maxAmt, false, delta); playButtonSound(); return;
             }
-            // Plus
-            if (vmx >= bx + 7 && vmx < bx + 13 && vmy >= y && vmy < y + 6) {
-                adjustAmount(itemKey, maxAmt, true, 1); playButtonSound(); return;
+            if (vmx >= plusX && vmx < plusX + 10 && vmy >= y && vmy < y + 10) {
+                adjustAmount(itemKey, maxAmt, true, delta); playButtonSound(); return;
             }
             y += itemH;
         }
@@ -651,7 +693,7 @@ public class GrocerInventoryScreen extends Screen {
         List<?> entries = getCurrentInventoryEntries();
         int availW = LEFT_W - GRID_MARGIN * 2;
         int ipr    = Math.max(1, (availW + ITEM_SPACING) / (ITEM_SLOT_SIZE + ITEM_SPACING));
-        int availH = LEFT_H - 14 - GRID_MARGIN;
+        int availH = LEFT_H - GRID_MARGIN * 2;
         int vis    = Math.max(1, availH / (ITEM_SLOT_SIZE + ITEM_SPACING));
         int total  = (int) Math.ceil((double) entries.size() / ipr);
         if (scrollOffset < total - vis) scrollOffset++;
@@ -663,8 +705,8 @@ public class GrocerInventoryScreen extends Screen {
 
     private String formatCurrency(long coins) { return coins == 0 ? "0c" : coins + "c"; }
     private String formatNumber(long n) {
-        if (n >= 1_000_000) return String.format("%.1fM", n / 1_000_000.0);
-        if (n >= 1_000)     return String.format("%.1fK", n / 1_000.0);
+        if (n >= 1_000_000) return String.format("%.1fm", n / 1_000_000.0);
+        if (n >= 1_000)     return String.format("%.1fk", n / 1_000.0);
         return String.valueOf(n);
     }
 

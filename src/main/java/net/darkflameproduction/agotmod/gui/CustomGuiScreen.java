@@ -263,6 +263,7 @@ public class CustomGuiScreen extends Screen {
 
     @Override
     public void onClose() {
+        if (minecraft != null) minecraft.options.hideGui = false;
         super.onClose();
         if (currentInstance == this) currentInstance = null;
     }
@@ -271,6 +272,7 @@ public class CustomGuiScreen extends Screen {
     protected void init() {
         super.init();
         currentInstance = this;
+        if (minecraft != null) minecraft.options.hideGui = true;
 
         if (minecraft != null && minecraft.player != null) {
             lastPlayerHealth = minecraft.player.getHealth();
