@@ -30,6 +30,8 @@ public class GrocerInventoryScreen extends Screen {
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/gui_asset_trader_book.png");
     private static final ResourceLocation SEAL_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/gui_asset_trader_seal.png");
+    private static final ResourceLocation CHANGE_AMOUNT_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/gui/gui_asset_trader_change_amount_icon.png");
 
     /** Actual pixel dimensions of gui_asset_trader_book.png. */
     private static final int TEXTURE_WIDTH  = 1082;
@@ -70,6 +72,16 @@ public class GrocerInventoryScreen extends Screen {
     private static final int SEAL_BTN_Y = 158;
     private static final int SEAL_BTN_W = 25;
     private static final int SEAL_BTN_H = 26;
+
+    private static final int BOTTOM_X = 637;
+    private static final int BOTTOM_Y = 158;
+    private static final int BOTTOM_W = 76;
+    private static final int BOTTOM_H = 27;
+
+    private static final int INFO_X = 631;
+    private static final int INFO_Y = 47;
+    private static final int INFO_W = 78;
+    private static final int INFO_H = 15;
     private static final int ITEM_SLOT_SIZE = 18;
     private static final int ITEM_SPACING   = 2;
     private static final int GRID_MARGIN    = 4;
@@ -241,7 +253,10 @@ public class GrocerInventoryScreen extends Screen {
         // ── Layer 2: seal texture (only when cart has items) ──────────────────
         calculateTotals();
         if (totalItems > 0) {
+            com.mojang.blaze3d.systems.RenderSystem.enableBlend();
+            com.mojang.blaze3d.systems.RenderSystem.defaultBlendFunc();
             g.blit(SEAL_TEXTURE, 0, 0, 0, 0, TEXTURE_WIDTH, TEXTURE_HEIGHT, TEXTURE_WIDTH, TEXTURE_HEIGHT);
+            com.mojang.blaze3d.systems.RenderSystem.disableBlend();
         }
 
         // ── Layer 3: left panel content ───────────────────────────────────────
@@ -249,6 +264,9 @@ public class GrocerInventoryScreen extends Screen {
 
         // ── Layer 4: right panel content ──────────────────────────────────────
         drawRightPanel(g, vmx, vmy);
+
+        // ── Layer 5: trader info (name, balance, mode) ────────────────────────
+        drawTraderInfo(g);
 
         g.pose().popPose();
 
@@ -324,7 +342,7 @@ public class GrocerInventoryScreen extends Screen {
             }
         }
 
-        // Pass 2: amount text on top using Minecraft's item decoration system
+        // Pass 2: amount text at bottom-right of slot, 0.6 scale, on top of items
         for (int i = startIdx; i < endIdx; i++) {
             Object entry = entries.get(i);
             int rel      = i - startIdx;
@@ -334,23 +352,24 @@ public class GrocerInventoryScreen extends Screen {
             int slotY    = gridStartY + row * (ITEM_SLOT_SIZE + ITEM_SPACING);
 
             String amtText = formatNumber(getAmountFromEntry(entry));
-            String itemKey = getItemKeyFromEntry(entry);
-            net.minecraft.resources.ResourceLocation loc =
-                    net.minecraft.resources.ResourceLocation.tryParse(itemKey);
-            if (loc != null) {
-                net.minecraft.world.item.Item item =
-                        net.minecraft.core.registries.BuiltInRegistries.ITEM.get(loc);
-                if (item != null && item != net.minecraft.world.item.Items.AIR) {
-                    net.minecraft.world.item.ItemStack stack =
-                            new net.minecraft.world.item.ItemStack(item, 1);
-                    // Scale down slightly for smaller text
-                    g.pose().pushPose();
-                    g.pose().translate(slotX + 1, slotY + 1, 0);
-                    g.pose().scale(0.8f, 0.8f, 1f);
-                    g.renderItemDecorations(font, stack, 0, 0, amtText);
-                    g.pose().popPose();
-                }
-            }
+            float s  = 0.6f;
+            int   tw = (int)(font.width(amtText) * s);
+            int   th = (int)(font.lineHeight * s);
+            // Centre within the bottom-right quarter of the slot
+            int   tx = (int)((slotX + ITEM_SLOT_SIZE - tw / 2 - 2) / s);
+            int   ty = (int)((slotY + ITEM_SLOT_SIZE - th - 1)      / s);
+
+            g.pose().pushPose();
+            g.pose().translate(0, 0, 300);
+            g.pose().scale(s, s, 1f);
+            // Black outline
+            g.drawString(font, amtText, tx - 1, ty,     0xFF000000, false);
+            g.drawString(font, amtText, tx + 1, ty,     0xFF000000, false);
+            g.drawString(font, amtText, tx,     ty - 1, 0xFF000000, false);
+            g.drawString(font, amtText, tx,     ty + 1, 0xFF000000, false);
+            // White text
+            g.drawString(font, amtText, tx, ty, 0xFFFFFFFF, false);
+            g.pose().popPose();
         }
 
         if (hovered == null) { currentTooltipEntry = null; tooltipPositioned = false; }
@@ -374,31 +393,15 @@ public class GrocerInventoryScreen extends Screen {
     private void drawRightPanel(GuiGraphics g, int vmx, int vmy) {
         calculateTotals();
 
-        int cx = RIGHT_X + RIGHT_W / 2;
-        int y  = RIGHT_Y + 2;
-
-        // Balance
-        String balLabel = currentMode == TradeMode.BUY ? "Bal:" : "Groc:";
-        long   bal      = currentMode == TradeMode.BUY ? getPlayerBalance() : grocerBalance;
-        drawTextCenteredScaled(g, balLabel, cx, y, TEXT_COLOR, 0.6f);
-        y += 7;
-        drawTextCenteredScaled(g, formatCurrency(bal), cx, y, TEXT_COLOR_GREEN, 0.6f);
-        y += 9;
-
-        // Separator
-        g.fill(RIGHT_X + 2, y, RIGHT_X + RIGHT_W - 2, y + 1, TEXT_COLOR);
-        y += 3;
+        int y     = RIGHT_Y + 3;
+        int lineH = 13;
+        int availH = BOTTOM_Y - 1 - y;
+        int maxVisible = Math.max(1, availH / lineH);
 
         if (selectedEntryIndices.isEmpty()) {
-            drawTextCenteredScaled(g, "Select", cx, y + 20, TEXT_COLOR, 0.6f);
-            drawTextCenteredScaled(g, "items", cx, y + 28, TEXT_COLOR, 0.6f);
+            drawTextCenteredScaled(g, "No items", RIGHT_X + RIGHT_W / 2, RIGHT_Y + RIGHT_H / 2 - 4, TEXT_COLOR, 0.55f);
         } else {
-            // Transaction items
-            int itemH = 14;
-            int availH = RIGHT_H - (y - RIGHT_Y) - 30;
-            int maxVisible = Math.max(1, availH / itemH);
-
-            List<Integer> sorted = new ArrayList<>(selectedEntryIndices);
+            List<Integer> sorted  = new ArrayList<>(selectedEntryIndices);
             sorted.sort(Integer::compareTo);
             List<?> entries = getCurrentInventoryEntries();
 
@@ -406,11 +409,18 @@ public class GrocerInventoryScreen extends Screen {
             for (int i = transactionScrollOffset; i < sorted.size() && shown < maxVisible; i++, shown++) {
                 Integer idx = sorted.get(i);
                 if (idx >= entries.size()) continue;
-                Object entry   = entries.get(idx);
-                String itemKey = getItemKeyFromEntry(entry);
-                int    amount  = transactionAmounts.getOrDefault(itemKey, 0);
 
-                // Item icon tiny
+                Object entry    = entries.get(idx);
+                String itemKey  = getItemKeyFromEntry(entry);
+                String dispName = getDisplayNameFromEntry(entry);
+                int    amount   = transactionAmounts.getOrDefault(itemKey, 0);
+                float  mul      = currentMode == TradeMode.BUY ? buyMultiplier : sellMultiplier;
+                int    unitPrice = (int) Math.ceil(ItemPricing.getItemPrice(itemKey) * mul);
+                int    lineTotal = unitPrice * amount;
+
+                int rowY = y + shown * lineH;
+
+                // Item icon at 0.4 scale (6px tall)
                 net.minecraft.resources.ResourceLocation loc =
                         net.minecraft.resources.ResourceLocation.tryParse(itemKey);
                 if (loc != null) {
@@ -418,31 +428,54 @@ public class GrocerInventoryScreen extends Screen {
                             net.minecraft.core.registries.BuiltInRegistries.ITEM.get(loc);
                     if (item != null && item != net.minecraft.world.item.Items.AIR) {
                         g.pose().pushPose();
-                        g.pose().scale(0.5f, 0.5f, 1f);
+                        g.pose().scale(0.4f, 0.4f, 1f);
                         g.renderItem(new net.minecraft.world.item.ItemStack(item),
-                                (int)((RIGHT_X + 2) / 0.5f), (int)(y / 0.5f));
+                                (int)((RIGHT_X + 1) / 0.4f), (int)(rowY / 0.4f));
                         g.pose().popPose();
                     }
                 }
 
-                // Amount
-                drawTextScaled(g, "x" + amount, RIGHT_X + 12, y + 1, TEXT_COLOR, 0.5f);
+                // "name x amount = price" — full name, small text
+                String line = dispName + " x " + amount + " = " + lineTotal + "c";
+                drawTextScaled(g, line, RIGHT_X + 8, rowY + 2, TEXT_COLOR, 0.4f);
 
-                // +/- buttons
-                drawSimpleButton(g, RIGHT_X + 2,            y, 10, 10, "-", 0xFF888888);
-                drawSimpleButton(g, RIGHT_X + RIGHT_W - 12, y, 10, 10, "+", 0xFF888888);
-
-                y += itemH;
+                // +/- icon texture at same 0.4f scale as item icon (16px tall → 6px on screen)
+                int iconX = RIGHT_X + RIGHT_W - 16;
+                g.pose().pushPose();
+                g.pose().scale(0.4f, 0.4f, 1f);
+                g.blit(CHANGE_AMOUNT_TEXTURE,
+                        (int)(iconX / 0.4f), (int)(rowY / 0.4f),
+                        0, 0, 37, 16, 37, 16);
+                g.pose().popPose();
             }
         }
 
-        // Separator before totals
-        int sepY = RIGHT_Y + RIGHT_H - 28;
-        g.fill(RIGHT_X + 2, sepY, RIGHT_X + RIGHT_W - 2, sepY + 1, TEXT_COLOR);
+        // Separator just above the bottom area
+        g.fill(RIGHT_X + 1, BOTTOM_Y - 1, RIGHT_X + RIGHT_W - 1, BOTTOM_Y, TEXT_COLOR);
 
-        // Totals
-        drawTextCenteredScaled(g, "Items: " + totalItems, cx, sepY + 3, TEXT_COLOR, 0.55f);
-        drawTextCenteredScaled(g, totalPrice + " coins",  cx, sepY + 10, TEXT_COLOR, 0.55f);
+        // Total price inside the bottom area, centred
+        String totalStr = "Total: " + totalPrice + "c";
+        drawTextCenteredScaled(g, totalStr, BOTTOM_X + BOTTOM_W / 2, BOTTOM_Y + 4, TEXT_COLOR, 0.55f);
+
+        // Player balance below total
+        String balStr = "Your Bal: " + formatCurrency(getPlayerBalance());
+        drawTextCenteredScaled(g, balStr, BOTTOM_X + BOTTOM_W / 2, BOTTOM_Y + 13, TEXT_COLOR_GREEN, 0.55f);
+    }
+
+    private void drawTraderInfo(GuiGraphics g) {
+        int cx    = INFO_X + INFO_W / 2;
+        int lineH = 5;
+        int y     = INFO_Y;
+        float s   = 0.4f;
+
+        drawTextCenteredScaled(g, grocerName, cx, y, TEXT_COLOR, s);
+        y += lineH;
+
+        long bal = grocerBalance;
+        drawTextCenteredScaled(g, "Balance: " + formatCurrency(bal), cx, y, TEXT_COLOR_GREEN, s);
+        y += lineH;
+
+        drawTextCenteredScaled(g, currentMode == TradeMode.BUY ? "Buying" : "Selling", cx, y, TEXT_COLOR, s);
     }
 
     // ── Draw helpers ──────────────────────────────────────────────────────────
@@ -562,24 +595,28 @@ public class GrocerInventoryScreen extends Screen {
 
     private int getClickedItemIndex(int vmx, int vmy) {
         int gridStartY  = LEFT_Y + GRID_MARGIN;
-        int availW     = LEFT_W - GRID_MARGIN * 2;
+        int availW      = LEFT_W - GRID_MARGIN * 2;
         int itemsPerRow = Math.max(1, (availW + ITEM_SPACING) / (ITEM_SLOT_SIZE + ITEM_SPACING));
         int totalGridW  = itemsPerRow * ITEM_SLOT_SIZE + (itemsPerRow - 1) * ITEM_SPACING;
         int gridX       = LEFT_X + GRID_MARGIN + (availW - totalGridW) / 2;
 
-        int availH     = LEFT_H - (10 + 4) - GRID_MARGIN;
+        int availH      = LEFT_H - GRID_MARGIN * 2;
         int rowsVisible = Math.max(1, availH / (ITEM_SLOT_SIZE + ITEM_SPACING));
         int startIdx    = scrollOffset * itemsPerRow;
         List<?> entries = getCurrentInventoryEntries();
+        int     total   = Math.min(startIdx + rowsVisible * itemsPerRow, entries.size());
 
-        for (int i = startIdx; i < Math.min(startIdx + rowsVisible * itemsPerRow, entries.size()); i++) {
-            int rel  = i - startIdx;
-            int col  = rel % itemsPerRow;
-            int row  = rel / itemsPerRow;
+        for (int i = startIdx; i < total; i++) {
+            int rel   = i - startIdx;
+            int col   = rel % itemsPerRow;
+            int row   = rel / itemsPerRow;
             int slotX = gridX + col * (ITEM_SLOT_SIZE + ITEM_SPACING);
             int slotY = gridStartY + row * (ITEM_SLOT_SIZE + ITEM_SPACING);
+            // Extend the click bottom of the last row to the panel bottom
+            boolean isLastRow = (row == rowsVisible - 1);
+            int     slotBot   = isLastRow ? LEFT_Y + LEFT_H : slotY + ITEM_SLOT_SIZE;
             if (vmx >= slotX && vmx < slotX + ITEM_SLOT_SIZE &&
-                    vmy >= slotY && vmy < slotY + ITEM_SLOT_SIZE) return i;
+                    vmy >= slotY && vmy < slotBot) return i;
         }
         return -1;
     }
@@ -589,32 +626,34 @@ public class GrocerInventoryScreen extends Screen {
         sorted.sort(Integer::compareTo);
         List<?> entries = getCurrentInventoryEntries();
 
-        // Determine amount delta from modifier keys
         boolean shift = hasShiftDown();
         boolean ctrl  = hasControlDown();
         int delta = (shift && ctrl) ? 100 : shift ? 10 : ctrl ? 5 : 1;
 
-        int y      = RIGHT_Y + 2 + 7 + 9 + 3;
-        int itemH  = 14;
-        int availH = RIGHT_H - (y - RIGHT_Y) - 30;
-        int maxVis = Math.max(1, availH / itemH);
+        int y      = RIGHT_Y + 3;
+        int lineH  = 13;
+        int availH = BOTTOM_Y - 1 - y;
+        int maxVis = Math.max(1, availH / lineH);
 
         for (int i = transactionScrollOffset; i < sorted.size() && (i - transactionScrollOffset) < maxVis; i++) {
-            Integer idx = sorted.get(i);
+            Integer idx   = sorted.get(i);
             if (idx >= entries.size()) continue;
-            Object entry   = entries.get(idx);
+            Object entry  = entries.get(idx);
             String itemKey = getItemKeyFromEntry(entry);
             long   maxAmt  = getAmountFromEntry(entry);
+            int    shown   = i - transactionScrollOffset;
+            int    rowY    = y + shown * lineH;
 
-            int bx = RIGHT_X + 2;
-            int plusX = RIGHT_X + RIGHT_W - 12;
-            if (vmx >= bx && vmx < bx + 10 && vmy >= y && vmy < y + 10) {
+            int iconX     = RIGHT_X + RIGHT_W - 16;
+            int minusBtnX = iconX;
+            int plusBtnX  = iconX + 8; // 6px minus icon + 2px gap
+
+            if (vmx >= minusBtnX && vmx < minusBtnX + 6 && vmy >= rowY && vmy < rowY + 6) {
                 adjustAmount(itemKey, maxAmt, false, delta); playButtonSound(); return;
             }
-            if (vmx >= plusX && vmx < plusX + 10 && vmy >= y && vmy < y + 10) {
+            if (vmx >= plusBtnX && vmx < plusBtnX + 6 && vmy >= rowY && vmy < rowY + 6) {
                 adjustAmount(itemKey, maxAmt, true, delta); playButtonSound(); return;
             }
-            y += itemH;
         }
     }
 
