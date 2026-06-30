@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "agotmod:block/oily_bricks_cycle",
+    "side": "agotmod:block/oily_bricks_cycle",
+    "top": "agotmod:block/oily_bricks_cycle"
+  }
+}

@@ -14,13 +14,13 @@ public class WildlingFurArmorModel extends GeoModel<WildlingFurArmorItem> {
     @Override
     public ResourceLocation getModelResource(WildlingFurArmorItem animatable) {
         // Return the resource location for the model
-        return AGoTMod.id("geo/wildling_fur.geo.json");
+        return AGoTMod.id("geo/wildling_tier1.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureResource(WildlingFurArmorItem animatable) {
         // Return the resource location for the texture
-        return AGoTMod.id("textures/item/armor/wildling_fur.png");
+        return AGoTMod.id("textures/item/armor/wildling_tier1.png");
     }
 
     // Override method to get the animation resource location

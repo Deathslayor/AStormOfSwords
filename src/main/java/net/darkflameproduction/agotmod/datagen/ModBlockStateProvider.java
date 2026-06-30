@@ -59,6 +59,61 @@ public class ModBlockStateProvider extends BlockStateProvider {
             }
         }
 
+
+        ModelFile oilyStoneModel = models().cubeAll("oily_stone_cycle",
+                modLoc("block/oily_stone_cycle"));
+        simpleBlock(ModBLocks.OILY_STONE.get(), oilyStoneModel);
+        simpleBlockItem(ModBLocks.OILY_STONE.get(), oilyStoneModel);
+
+        ModelFile polishedOilyStoneModel = models().cubeAll("polished_oily_stone_cycle",
+                modLoc("block/polished_oily_stone_cycle"));
+        simpleBlock(ModBLocks.POLISHED_OILY_STONE.get(), polishedOilyStoneModel);
+        simpleBlockItem(ModBLocks.POLISHED_OILY_STONE.get(), polishedOilyStoneModel);
+
+        ModelFile oilyBricksModel = models().cubeAll("oily_bricks_cycle",
+                modLoc("block/oily_bricks_cycle"));
+        simpleBlock(ModBLocks.OILY_BRICKS.get(), oilyBricksModel);
+        simpleBlockItem(ModBLocks.OILY_BRICKS.get(), oilyBricksModel);
+
+        ModelFile chiseledOilyStoneModel = models().cubeAll("chiseled_oily_stone_cycle",
+                modLoc("block/chiseled_oily_stone_cycle"));
+        simpleBlock(ModBLocks.CHISELED_OILY_STONE.get(), chiseledOilyStoneModel);
+        simpleBlockItem(ModBLocks.CHISELED_OILY_STONE.get(), chiseledOilyStoneModel);
+
+        ModelFile carvedOilyStoneModel = models().cubeAll("carved_oily_stone_cycle",
+                modLoc("block/carved_oily_stone_cycle"));
+        simpleBlock(ModBLocks.CARVED_OILY_STONE.get(), carvedOilyStoneModel);
+        simpleBlockItem(ModBLocks.CARVED_OILY_STONE.get(), carvedOilyStoneModel);
+
+        ModelFile patternedOilyStoneModel = models().cubeAll("patterned_oily_stone_cycle",
+                modLoc("block/patterned_oily_stone_cycle"));
+        simpleBlock(ModBLocks.PATTERNED_OILY_STONE.get(), patternedOilyStoneModel);
+        simpleBlockItem(ModBLocks.PATTERNED_OILY_STONE.get(), patternedOilyStoneModel);
+
+        slabBlock(((SlabBlock) ModBLocks.OILY_STONE_SLAB.get()),
+                modLoc("block/oily_stone_cycle"), modLoc("block/oily_stone_cycle"));
+        stairsBlock(((StairBlock) ModBLocks.OILY_STONE_STAIRS.get()), modLoc("block/oily_stone_cycle"));
+
+        slabBlock(((SlabBlock) ModBLocks.POLISHED_OILY_STONE_SLAB.get()),
+                modLoc("block/polished_oily_stone_cycle"), modLoc("block/polished_oily_stone_cycle"));
+        stairsBlock(((StairBlock) ModBLocks.POLISHED_OILY_STONE_STAIRS.get()), modLoc("block/polished_oily_stone_cycle"));
+
+        slabBlock(((SlabBlock) ModBLocks.OILY_BRICKS_SLAB.get()),
+                modLoc("block/oily_bricks_cycle"), modLoc("block/oily_bricks_cycle"));
+        stairsBlock(((StairBlock) ModBLocks.OILY_BRICKS_STAIRS.get()), modLoc("block/oily_bricks_cycle"));
+
+        slabBlock(((SlabBlock) ModBLocks.CHISELED_OILY_STONE_SLAB.get()),
+                modLoc("block/chiseled_oily_stone_cycle"), modLoc("block/chiseled_oily_stone_cycle"));
+        stairsBlock(((StairBlock) ModBLocks.CHISELED_OILY_STONE_STAIRS.get()), modLoc("block/chiseled_oily_stone_cycle"));
+
+        slabBlock(((SlabBlock) ModBLocks.CARVED_OILY_STONE_SLAB.get()),
+                modLoc("block/carved_oily_stone_cycle"), modLoc("block/carved_oily_stone_cycle"));
+        stairsBlock(((StairBlock) ModBLocks.CARVED_OILY_STONE_STAIRS.get()), modLoc("block/carved_oily_stone_cycle"));
+
+        slabBlock(((SlabBlock) ModBLocks.PATTERNED_OILY_STONE_SLAB.get()),
+                modLoc("block/patterned_oily_stone_cycle"), modLoc("block/patterned_oily_stone_cycle"));
+        stairsBlock(((StairBlock) ModBLocks.PATTERNED_OILY_STONE_STAIRS.get()), modLoc("block/patterned_oily_stone_cycle"));
+
         // ---------------------------(TIN)--------------------------- //
         // Register block states and models for tin-related blocks
         GhostGrassBlock(ModBLocks.GHOST_GRASS_BLOCK.get());

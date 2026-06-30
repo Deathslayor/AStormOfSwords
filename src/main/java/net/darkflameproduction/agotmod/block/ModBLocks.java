@@ -196,6 +196,90 @@ public class ModBLocks {
         }
     }
 
+    public static final DeferredBlock<Block> OILY_STONE = registerBlock("oily_stone",
+            Block::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(10f, 60f).requiresCorrectToolForDrops(),
+            true);
+
+    public static final DeferredBlock<Block> POLISHED_OILY_STONE = registerBlock("polished_oily_stone",
+            Block::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(10f, 60f).requiresCorrectToolForDrops(),
+            true);
+
+    public static final DeferredBlock<Block> OILY_BRICKS = registerBlock("oily_bricks",
+            Block::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(10f, 60f).requiresCorrectToolForDrops(),
+            true);
+
+    public static final DeferredBlock<Block> CHISELED_OILY_STONE = registerBlock("chiseled_oily_stone",
+            Block::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(10f, 60f).requiresCorrectToolForDrops(),
+            true);
+
+    public static final DeferredBlock<Block> CARVED_OILY_STONE = registerBlock("carved_oily_stone",
+            Block::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(10f, 60f).requiresCorrectToolForDrops(),
+            true);
+
+    public static final DeferredBlock<Block> PATTERNED_OILY_STONE = registerBlock("patterned_oily_stone",
+            Block::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(10f, 60f).requiresCorrectToolForDrops(),
+            true);
+
+    public static final DeferredBlock<Block> OILY_STONE_SLAB = registerBlock("oily_stone_slab",
+            properties -> new SlabBlock(properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(10f, 60f).requiresCorrectToolForDrops(),
+            true);
+    public static final DeferredBlock<Block> OILY_STONE_STAIRS = registerBlock("oily_stone_stairs",
+            properties -> new StairBlock(Blocks.STONE.defaultBlockState(), properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(10f, 60f).requiresCorrectToolForDrops(),
+            true);
+
+    public static final DeferredBlock<Block> POLISHED_OILY_STONE_SLAB = registerBlock("polished_oily_stone_slab",
+            properties -> new SlabBlock(properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(10f, 60f).requiresCorrectToolForDrops(),
+            true);
+    public static final DeferredBlock<Block> POLISHED_OILY_STONE_STAIRS = registerBlock("polished_oily_stone_stairs",
+            properties -> new StairBlock(Blocks.STONE.defaultBlockState(), properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(10f, 60f).requiresCorrectToolForDrops(),
+            true);
+
+    public static final DeferredBlock<Block> OILY_BRICKS_SLAB = registerBlock("oily_bricks_slab",
+            properties -> new SlabBlock(properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(10f, 60f).requiresCorrectToolForDrops(),
+            true);
+    public static final DeferredBlock<Block> OILY_BRICKS_STAIRS = registerBlock("oily_bricks_stairs",
+            properties -> new StairBlock(Blocks.STONE.defaultBlockState(), properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(10f, 60f).requiresCorrectToolForDrops(),
+            true);
+
+    public static final DeferredBlock<Block> CHISELED_OILY_STONE_SLAB = registerBlock("chiseled_oily_stone_slab",
+            properties -> new SlabBlock(properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(10f, 60f).requiresCorrectToolForDrops(),
+            true);
+    public static final DeferredBlock<Block> CHISELED_OILY_STONE_STAIRS = registerBlock("chiseled_oily_stone_stairs",
+            properties -> new StairBlock(Blocks.STONE.defaultBlockState(), properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(10f, 60f).requiresCorrectToolForDrops(),
+            true);
+
+    public static final DeferredBlock<Block> CARVED_OILY_STONE_SLAB = registerBlock("carved_oily_stone_slab",
+            properties -> new SlabBlock(properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(10f, 60f).requiresCorrectToolForDrops(),
+            true);
+    public static final DeferredBlock<Block> CARVED_OILY_STONE_STAIRS = registerBlock("carved_oily_stone_stairs",
+            properties -> new StairBlock(Blocks.STONE.defaultBlockState(), properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(10f, 60f).requiresCorrectToolForDrops(),
+            true);
+
+    public static final DeferredBlock<Block> PATTERNED_OILY_STONE_SLAB = registerBlock("patterned_oily_stone_slab",
+            properties -> new SlabBlock(properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(10f, 60f).requiresCorrectToolForDrops(),
+            true);
+    public static final DeferredBlock<Block> PATTERNED_OILY_STONE_STAIRS = registerBlock("patterned_oily_stone_stairs",
+            properties -> new StairBlock(Blocks.STONE.defaultBlockState(), properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(10f, 60f).requiresCorrectToolForDrops(),
+            true);
+
 
     // Adding a workstation for villagers
     public static final DeferredBlock<Block> MINT_BLOCK = registerBlock("mint_block", Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK), true);

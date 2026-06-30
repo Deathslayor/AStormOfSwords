@@ -181,6 +181,25 @@ public class ModCreativeBuildingBlocks {
                             }
                         }
 
+                        pOutput.accept(ModBLocks.OILY_STONE.get());
+                        pOutput.accept(ModBLocks.OILY_STONE_SLAB.get());
+                        pOutput.accept(ModBLocks.OILY_STONE_STAIRS.get());
+                        pOutput.accept(ModBLocks.POLISHED_OILY_STONE.get());
+                        pOutput.accept(ModBLocks.POLISHED_OILY_STONE_SLAB.get());
+                        pOutput.accept(ModBLocks.POLISHED_OILY_STONE_STAIRS.get());
+                        pOutput.accept(ModBLocks.OILY_BRICKS.get());
+                        pOutput.accept(ModBLocks.OILY_BRICKS_SLAB.get());
+                        pOutput.accept(ModBLocks.OILY_BRICKS_STAIRS.get());
+                        pOutput.accept(ModBLocks.CHISELED_OILY_STONE.get());
+                        pOutput.accept(ModBLocks.CHISELED_OILY_STONE_SLAB.get());
+                        pOutput.accept(ModBLocks.CHISELED_OILY_STONE_STAIRS.get());
+                        pOutput.accept(ModBLocks.CARVED_OILY_STONE.get());
+                        pOutput.accept(ModBLocks.CARVED_OILY_STONE_SLAB.get());
+                        pOutput.accept(ModBLocks.CARVED_OILY_STONE_STAIRS.get());
+                        pOutput.accept(ModBLocks.PATTERNED_OILY_STONE.get());
+                        pOutput.accept(ModBLocks.PATTERNED_OILY_STONE_SLAB.get());
+                        pOutput.accept(ModBLocks.PATTERNED_OILY_STONE_STAIRS.get());
+
 
                         // Handle all other wood types with map-based access
                         for (String woodType : WOOD_TYPES) {

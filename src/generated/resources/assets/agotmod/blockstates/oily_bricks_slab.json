@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "agotmod:block/oily_bricks_slab"
+    },
+    "type=double": {
+      "model": "agotmod:block/oily_bricks_cycle"
+    },
+    "type=top": {
+      "model": "agotmod:block/oily_bricks_slab_top"
+    }
+  }
+}

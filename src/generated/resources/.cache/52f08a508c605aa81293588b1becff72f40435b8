@@ -1,4 +1,4 @@
-// 1.21.1	2026-05-30T17:11:04.0987063	Item Models: agotmod
+// 1.21.1	2026-06-30T17:30:15.0574836	Item Models: agotmod
 86b3bc001a8c3e96b638adacef2b383fc88b3224 assets/agotmod/models/item/acacia_arm_chair.json
 caa0341d904c99eda5466b0ee72a08927339e8cd assets/agotmod/models/item/acacia_chair.json
 137c592a4f98dd55f02148642ba7f0beff49f584 assets/agotmod/models/item/acacia_stool.json
@@ -1031,6 +1031,8 @@ d88193669df0bcd7be09017ac624395b66323dd9 assets/agotmod/models/item/caravan_mast
 73cb681e6e86056e57b950b1b0561ad3e9013855 assets/agotmod/models/item/cardamom.json
 fa9639c1847398a12a0a223559f6c29dc0cd2069 assets/agotmod/models/item/carnelian.json
 89a7374c9c9caeb09a5a565bcd594f9a7888bacf assets/agotmod/models/item/carpenter_barrel_icon.json
+5b808150ec58185d71986074d1a3b0ee050e1a78 assets/agotmod/models/item/carved_oily_stone_slab.json
+c17bb0752553307cd88615d29531839191aef613 assets/agotmod/models/item/carved_oily_stone_stairs.json
 a135990ba5f0cf4f717991f31b51662cebb96580 assets/agotmod/models/item/cattle_herder_barrel_icon.json
 aacda99691b219f541976613fd585212ab95b0b9 assets/agotmod/models/item/cdeepslate_10_slab.json
 59ca0fa747ff0c24d0c9899fe922cb0539449ccf assets/agotmod/models/item/cdeepslate_10_stairs.json
@@ -1197,6 +1199,8 @@ df4161db43710379489d343075af014de042deef assets/agotmod/models/item/chestnut_pre
 4c783998f493eacbee60772084c3831a7f6c86d8 assets/agotmod/models/item/chicken_breeder_barrel_icon.json
 672a3550f2ce40a06cf670d7df90df16ca95388d assets/agotmod/models/item/chickpea.json
 1a60fd707b83d410230eb24bbf85032783796e65 assets/agotmod/models/item/chickpea_seeds.json
+b3f064cf373fed2186ca8227fb06128784ac98bd assets/agotmod/models/item/chiseled_oily_stone_slab.json
+9a02803fd628ea9520c81edb98bc4e9a92f3ccb3 assets/agotmod/models/item/chiseled_oily_stone_stairs.json
 0e5d3bd16e0c2913fe97ff6c3920c4cf95c74a82 assets/agotmod/models/item/cider.json
 2cad1f7a88bebf58b147da1a137e86cbc07336d1 assets/agotmod/models/item/cinnamon.json
 3925a75cdcb9edc35a06234b0e15da6777856a8f assets/agotmod/models/item/clary_sage.json
@@ -3747,6 +3751,10 @@ ce65939a7d723def60f992e1baf155d282a26d90 assets/agotmod/models/item/oak_stool.js
 48751852d6ae81a09b7395dd51da5dc0043b7908 assets/agotmod/models/item/oat.json
 b1eceeaa3df2101c408be7ac509bafa831d9337c assets/agotmod/models/item/oatcake.json
 65a1e101d52d598a40f5cf3853c3bfc838ac20a9 assets/agotmod/models/item/oat_seeds.json
+92e8fed11c4e92852c3784afc0f46b9d89ab634a assets/agotmod/models/item/oily_bricks_slab.json
+035bad7f2780222e16af7090b75a6729fcdf5d91 assets/agotmod/models/item/oily_bricks_stairs.json
+2e421660933795926e24926845a40fc467a275b2 assets/agotmod/models/item/oily_stone_slab.json
+fe56aa0d2614f5309242d0c25705d62d152f814a assets/agotmod/models/item/oily_stone_stairs.json
 ddd8b0ab6318fc9e823a615697e6cb9bd6f7cbdc assets/agotmod/models/item/olives.json
 0e31359d347596b8771d07c5b3fdfe6594313beb assets/agotmod/models/item/olive_arm_chair.json
 e2ec9d36da7e457a3d99480c228d577b93132200 assets/agotmod/models/item/olive_button.json
@@ -3901,6 +3909,8 @@ ca4d3df440bce4dad5460b71b66c05c2b7d3958f assets/agotmod/models/item/packed_ice_9
 e7cf592425eb9e2e55ee192b661bfa8c0cf9580f assets/agotmod/models/item/packed_ice_9_wall.json
 8999b923d61877760b06afbc6a9f21ba3aaa1be5 assets/agotmod/models/item/parsley.json
 57e959a4ad914e4a1713dbfa8a936d0e2e4a8ae9 assets/agotmod/models/item/parsley_seeds.json
+44aa635ccf81226998265fef206f9a9b32f3eeeb assets/agotmod/models/item/patterned_oily_stone_slab.json
+9b403edd082490819fe825bfd34db5e5698b6e8c assets/agotmod/models/item/patterned_oily_stone_stairs.json
 09360333f6920bf2e507f3f9c216dae3fb73e079 assets/agotmod/models/item/peach.json
 05af1b79b04447f5a97628a93653753be44bc484 assets/agotmod/models/item/peach_arm_chair.json
 6a830fd35cfb5e98606a2fcb90835a22db408e85 assets/agotmod/models/item/peach_button.json
@@ -4035,6 +4045,8 @@ d60cddd54b9ec344537b27832b1e774c37fe4999 assets/agotmod/models/item/plum_table.j
 6517aaadfea1aa969aa73b61d512a74b17500ac2 assets/agotmod/models/item/podzol_slab.json
 db430131776d2b52e4c13a3bdb01c306d4195e07 assets/agotmod/models/item/podzol_stairs.json
 74cbb4e3c96ecebb9516fc9056ff1c4a807f94dd assets/agotmod/models/item/poison_kisses.json
+93876dd8126f4df423566c8b631a5dc18be42802 assets/agotmod/models/item/polished_oily_stone_slab.json
+f60183b8539a6d8afc89174f94258e01445cface assets/agotmod/models/item/polished_oily_stone_stairs.json
 cbaab11c896afec48fd2ffe79467fa94cb8bb245 assets/agotmod/models/item/pomegranate.json
 f5b2befb50d0f9e4c3d444fda730eeb2ed96e3d4 assets/agotmod/models/item/pomegranate_arm_chair.json
 08789433e08f42e284e6e6fccb024325992e15ef assets/agotmod/models/item/pomegranate_button.json

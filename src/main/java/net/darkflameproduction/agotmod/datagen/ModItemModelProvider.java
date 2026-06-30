@@ -1297,6 +1297,40 @@ public class ModItemModelProvider extends ItemModelProvider {
         evenSimplerBlockItemVanillaMultiTexture(ModBLocks.THATCH_SLAB,         "thatch_block_side",       "thatch_block_top",       "thatch_block_side", false, false, false);
         evenSimplerBlockItemVanillaMultiTexture(ModBLocks.THATCH_STAIRS,         "thatch_block_side",       "thatch_block_top",       "thatch_block_side", false, false, false);
 
+        // ── Add to your item model provider ──────────────────────────────────
+
+        // ── Add to your item model provider ──────────────────────────────────
+
+        evenSimplerBlockItemVanillaMultiTexture(ModBLocks.OILY_STONE_STAIRS,
+                "oily_stone_cycle", "oily_stone_cycle", "oily_stone_cycle", false, false, false);
+        evenSimplerBlockItemVanillaMultiTexture(ModBLocks.OILY_STONE_SLAB,
+                "oily_stone_cycle", "oily_stone_cycle", "oily_stone_cycle", false, false, false);
+
+        evenSimplerBlockItemVanillaMultiTexture(ModBLocks.POLISHED_OILY_STONE_STAIRS,
+                "polished_oily_stone_cycle", "polished_oily_stone_cycle", "polished_oily_stone_cycle", false, false, false);
+        evenSimplerBlockItemVanillaMultiTexture(ModBLocks.POLISHED_OILY_STONE_SLAB,
+                "polished_oily_stone_cycle", "polished_oily_stone_cycle", "polished_oily_stone_cycle", false, false, false);
+
+        evenSimplerBlockItemVanillaMultiTexture(ModBLocks.OILY_BRICKS_STAIRS,
+                "oily_bricks_cycle", "oily_bricks_cycle", "oily_bricks_cycle", false, false, false);
+        evenSimplerBlockItemVanillaMultiTexture(ModBLocks.OILY_BRICKS_SLAB,
+                "oily_bricks_cycle", "oily_bricks_cycle", "oily_bricks_cycle", false, false, false);
+
+        evenSimplerBlockItemVanillaMultiTexture(ModBLocks.CHISELED_OILY_STONE_STAIRS,
+                "chiseled_oily_stone_cycle", "chiseled_oily_stone_cycle", "chiseled_oily_stone_cycle", false, false, false);
+        evenSimplerBlockItemVanillaMultiTexture(ModBLocks.CHISELED_OILY_STONE_SLAB,
+                "chiseled_oily_stone_cycle", "chiseled_oily_stone_cycle", "chiseled_oily_stone_cycle", false, false, false);
+
+        evenSimplerBlockItemVanillaMultiTexture(ModBLocks.CARVED_OILY_STONE_STAIRS,
+                "carved_oily_stone_cycle", "carved_oily_stone_cycle", "carved_oily_stone_cycle", false, false, false);
+        evenSimplerBlockItemVanillaMultiTexture(ModBLocks.CARVED_OILY_STONE_SLAB,
+                "carved_oily_stone_cycle", "carved_oily_stone_cycle", "carved_oily_stone_cycle", false, false, false);
+
+        evenSimplerBlockItemVanillaMultiTexture(ModBLocks.PATTERNED_OILY_STONE_STAIRS,
+                "patterned_oily_stone_cycle", "patterned_oily_stone_cycle", "patterned_oily_stone_cycle", false, false, false);
+        evenSimplerBlockItemVanillaMultiTexture(ModBLocks.PATTERNED_OILY_STONE_SLAB,
+                "patterned_oily_stone_cycle", "patterned_oily_stone_cycle", "patterned_oily_stone_cycle", false, false, false);
+
 
 
         // ---------------------------(WOODBLOCKS)--------------------------- //

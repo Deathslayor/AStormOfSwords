@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "agotmod:block/patterned_oily_stone_slab"
+    },
+    "type=double": {
+      "model": "agotmod:block/patterned_oily_stone_cycle"
+    },
+    "type=top": {
+      "model": "agotmod:block/patterned_oily_stone_slab_top"
+    }
+  }
+}

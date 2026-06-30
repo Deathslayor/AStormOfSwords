@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "agotmod:block/oily_stone_cycle",
+    "side": "agotmod:block/oily_stone_cycle",
+    "top": "agotmod:block/oily_stone_cycle"
+  }
+}
