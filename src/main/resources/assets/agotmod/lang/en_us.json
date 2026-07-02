@@ -2675,6 +2675,12 @@
   "block.agotmod.patterned_oily_stone": "Patterned Oily Stone",
   "block.agotmod.patterned_oily_stone_slab": "Patterned Oily Stone Slab",
   "block.agotmod.patterned_oily_stone_stairs": "Patterned Oily Stone Stairs",
+  "block.agotmod.oily_stone_wall": "Oily Stone Wall",
+  "block.agotmod.polished_oily_stone_wall": "Polished Oily Stone Wall",
+  "block.agotmod.oily_bricks_wall": "Oily Brick Wall",
+  "block.agotmod.chiseled_oily_stone_wall": "Chiseled Oily Stone Wall",
+  "block.agotmod.carved_oily_stone_wall": "Carved Oily Stone Wall",
+  "block.agotmod.patterned_oily_stone_wall": "Patterned Oily Stone Wall",
 
 
   "item.agotmod.boar_intestines": "Boar Intestines",

@@ -26,6 +26,19 @@
         "minecraft:ice_spike",
         "minecraft:ice_patch"
       ],
+      "structure_overrides": [
+        "agotmod:old_bailey_1",
+        "agotmod:old_bailey_2",
+        "agotmod:ringfort_1",
+        "agotmod:ringfort_2",
+        "agotmod:ringfort_3",
+        "agotmod:tower_ruin_1",
+        "agotmod:tower_ruin_2",
+        "agotmod:tower_ruin_3",
+        "agotmod:whitehb_castle_keep_1",
+        "agotmod:whitehb_castle_keep_2",
+        "agotmod:whitehb_castle_keep_3"
+      ],
       "zones": [
         {
           "biomes": [

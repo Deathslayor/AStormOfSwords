@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "agotmod:block/oily_stone_eye_circle_slab"
+    },
+    "type=double": {
+      "model": "agotmod:block/oily_stone_eye_circle_cycle"
+    },
+    "type=top": {
+      "model": "agotmod:block/oily_stone_eye_circle_slab_top"
+    }
+  }
+}

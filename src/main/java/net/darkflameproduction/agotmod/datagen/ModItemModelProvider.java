@@ -1306,6 +1306,11 @@ public class ModItemModelProvider extends ItemModelProvider {
         evenSimplerBlockItemVanillaMultiTexture(ModBLocks.OILY_STONE_SLAB,
                 "oily_stone_cycle", "oily_stone_cycle", "oily_stone_cycle", false, false, false);
 
+        evenSimplerBlockItemVanillaMultiTexture(ModBLocks.OILY_STONE_EYE_CIRCLE_STAIRS,
+                "oily_stone_eye_circle_cycle", "oily_stone_eye_circle_cycle", "oily_stone_eye_circle_cycle", false, false, false);
+        evenSimplerBlockItemVanillaMultiTexture(ModBLocks.OILY_STONE_EYE_CIRCLE_SLAB,
+                "oily_stone_eye_circle_cycle", "oily_stone_eye_circle_cycle", "oily_stone_eye_circle_cycle", false, false, false);
+
         evenSimplerBlockItemVanillaMultiTexture(ModBLocks.POLISHED_OILY_STONE_STAIRS,
                 "polished_oily_stone_cycle", "polished_oily_stone_cycle", "polished_oily_stone_cycle", false, false, false);
         evenSimplerBlockItemVanillaMultiTexture(ModBLocks.POLISHED_OILY_STONE_SLAB,
@@ -1331,8 +1336,19 @@ public class ModItemModelProvider extends ItemModelProvider {
         evenSimplerBlockItemVanillaMultiTexture(ModBLocks.PATTERNED_OILY_STONE_SLAB,
                 "patterned_oily_stone_cycle", "patterned_oily_stone_cycle", "patterned_oily_stone_cycle", false, false, false);
 
+        modWallItem(ModBLocks.OILY_STONE_WALL, "oily_stone_cycle");
 
+        modWallItem(ModBLocks.OILY_STONE_EYE_CIRCLE_WALL, "oily_stone_eye_circle_cycle");
 
+        modWallItem(ModBLocks.POLISHED_OILY_STONE_WALL, "polished_oily_stone_cycle");
+
+        modWallItem(ModBLocks.OILY_BRICKS_WALL, "oily_bricks_cycle");
+
+        modWallItem(ModBLocks.CHISELED_OILY_STONE_WALL, "chiseled_oily_stone_cycle");
+
+        modWallItem(ModBLocks.CARVED_OILY_STONE_WALL, "carved_oily_stone_cycle");
+
+        modWallItem(ModBLocks.PATTERNED_OILY_STONE_WALL, "patterned_oily_stone_cycle");
         // ---------------------------(WOODBLOCKS)--------------------------- //
         //Weirwood
         saplingItem(ModBLocks.WEIRWOOD_SAPLING);
@@ -1802,6 +1818,13 @@ public class ModItemModelProvider extends ItemModelProvider {
     private void vanillaWallItem(DeferredHolder<Block, Block> block, Block baseBlock) {
         this.withExistingParent(BuiltInRegistries.BLOCK.getKey(block.get()).getPath(), mcLoc("block/wall_inventory"))
                 .texture("wall", ResourceLocation.withDefaultNamespace("block/" + BuiltInRegistries.BLOCK.getKey(baseBlock).getPath()));
+    }
+
+    private void modWallItem(DeferredHolder<Block, Block> block, String texture) {
+        this.withExistingParent(
+                        BuiltInRegistries.BLOCK.getKey(block.get()).getPath(),
+                        mcLoc("block/wall_inventory"))
+                .texture("wall", modLoc("block/" + texture));
     }
 
     private ItemModelBuilder simpleBlockItem(DeferredHolder<Block, Block> block) {

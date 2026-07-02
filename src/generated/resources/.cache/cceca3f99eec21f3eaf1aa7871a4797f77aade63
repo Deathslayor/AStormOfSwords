@@ -1,4 +1,4 @@
-// 1.21.1	2026-05-30T17:11:04.4670884	Tags for minecraft:block mod id agotmod
+// 1.21.1	2026-07-02T13:53:39.560042	Tags for minecraft:block mod id agotmod
 7ce4ba32d6429dbf27a7ccd68d70690dbe80eb19 data/agotmod/tags/block/incorrect_for_bronze_tool.json
 a249c46329a41538f49a564e1f14338aaf1be5a0 data/agotmod/tags/block/incorrect_for_steel_tool.json
 a5270b76c9036b19927822a14ea7db103ebf5a0d data/agotmod/tags/block/needs_bronze_tool.json
@@ -28,4 +28,4 @@ ab56050b5932b622471ee1722b8bb030fe8caf40 data/minecraft/tags/block/slabs.json
 d2782cd543433d74025a864e0032fe738a77450d data/minecraft/tags/block/stone_bricks.json
 cb8e1d20ca7cd40223ff3aff872feef5aacdf15d data/minecraft/tags/block/stone_ore_replaceables.json
 9c711b618a49ea337707210db7a33bb33f4348a2 data/minecraft/tags/block/tall_flowers.json
-11b1395a66c088457d42fd609abbb2bc437e3469 data/minecraft/tags/block/walls.json
+9c6b52c9966103001836ad3f2fe34b98b5e713b0 data/minecraft/tags/block/walls.json

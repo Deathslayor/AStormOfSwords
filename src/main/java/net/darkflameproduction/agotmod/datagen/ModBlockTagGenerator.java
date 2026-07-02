@@ -593,7 +593,15 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBLocks.CHERRY_WALL.get())
                 .add(ModBLocks.BAMBOO_WALL.get())
                 .add(ModBLocks.CRIMSON_WALL.get())
-                .add(ModBLocks.WARPED_WALL.get());
+                .add(ModBLocks.WARPED_WALL.get())
+
+                .add(ModBLocks.OILY_STONE_WALL.get())
+                .add(ModBLocks.OILY_STONE_EYE_CIRCLE_WALL.get())
+                .add(ModBLocks.POLISHED_OILY_STONE_WALL.get())
+                .add(ModBLocks.OILY_BRICKS_WALL.get())
+                .add(ModBLocks.CHISELED_OILY_STONE_WALL.get())
+                .add(ModBLocks.CARVED_OILY_STONE_WALL.get())
+                .add(ModBLocks.PATTERNED_OILY_STONE_WALL.get());
 
         this.tag(BlockTags.PLANKS)
                 .add(ModBLocks.WEIRWOOD_PLANKS.get())

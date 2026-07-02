@@ -213,6 +213,10 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 // ── Add to your block loot table provider ────────────────────────────────
 
         this.add(ModBLocks.OILY_STONE.get(), this.noDrop());
+        this.add(ModBLocks.OILY_STONE_EYE_CIRCLE.get(), this.noDrop());
+        this.add(ModBLocks.OILY_STONE_EYE_CIRCLE_SLAB.get(), this.noDrop());
+        this.add(ModBLocks.OILY_STONE_EYE_CIRCLE_STAIRS.get(), this.noDrop());
+        this.add(ModBLocks.OILY_STONE_EYE_CIRCLE_WALL.get(), this.noDrop());
         this.add(ModBLocks.POLISHED_OILY_STONE.get(), this.noDrop());
         this.add(ModBLocks.OILY_BRICKS.get(), this.noDrop());
         this.add(ModBLocks.CHISELED_OILY_STONE.get(), this.noDrop());
@@ -230,6 +234,12 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(ModBLocks.CARVED_OILY_STONE_STAIRS.get(), this.noDrop());
         this.add(ModBLocks.PATTERNED_OILY_STONE_SLAB.get(), this.noDrop());
         this.add(ModBLocks.PATTERNED_OILY_STONE_STAIRS.get(), this.noDrop());
+        this.add(ModBLocks.OILY_STONE_WALL.get(), this.noDrop());
+        this.add(ModBLocks.POLISHED_OILY_STONE_WALL.get(), this.noDrop());
+        this.add(ModBLocks.OILY_BRICKS_WALL.get(), this.noDrop());
+        this.add(ModBLocks.CHISELED_OILY_STONE_WALL.get(), this.noDrop());
+        this.add(ModBLocks.CARVED_OILY_STONE_WALL.get(), this.noDrop());
+        this.add(ModBLocks.PATTERNED_OILY_STONE_WALL.get(), this.noDrop());
 
 
         // ---------------------------(TREES)--------------------------- //

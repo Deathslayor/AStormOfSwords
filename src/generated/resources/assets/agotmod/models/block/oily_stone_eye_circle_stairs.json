@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "agotmod:block/oily_stone_eye_circle_cycle",
+    "side": "agotmod:block/oily_stone_eye_circle_cycle",
+    "top": "agotmod:block/oily_stone_eye_circle_cycle"
+  }
+}
