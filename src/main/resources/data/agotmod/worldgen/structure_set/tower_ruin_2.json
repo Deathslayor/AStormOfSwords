@@ -1,0 +1,9 @@
+{
+  "structures": [{ "structure": "agotmod:tower_ruin_2", "weight": 1 }],
+  "placement": {
+    "salt": 641893194,
+    "spacing": 120,
+    "separation": 20,
+    "type": "minecraft:random_spread"
+  }
+}

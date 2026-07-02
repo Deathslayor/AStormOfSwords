@@ -1,1 +1,4 @@
-{ "structure": "agotmod:old_bailey_1", "transition_width": 6 }
+{
+  "transition_width": 50,
+  "y_offset": -2
+}
