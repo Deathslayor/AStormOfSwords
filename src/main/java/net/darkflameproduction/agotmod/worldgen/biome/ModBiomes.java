@@ -51,6 +51,34 @@ public class ModBiomes {
     public static final ResourceKey<Biome> THE_NECK = ResourceKey.create(Registries.BIOME,
             AGoTMod.id("the_neck"));
 
+    public static final ResourceKey<Biome> SKAGOS_TUNDRA = ResourceKey.create(Registries.BIOME,
+            AGoTMod.id("skagos_tundra"));
+
+    public static final ResourceKey<Biome> SKAGOS_WOODS = ResourceKey.create(Registries.BIOME,
+            AGoTMod.id("skagos_woods"));
+
+    public static final ResourceKey<Biome> SKAGOS_BARRENS = ResourceKey.create(Registries.BIOME,
+            AGoTMod.id("skagos_barrens"));
+
+    public static final ResourceKey<Biome> SKAGOS_HILLS = ResourceKey.create(Registries.BIOME,
+            AGoTMod.id("skagos_hills"));
+
+    public static final ResourceKey<Biome> SKAGOS_VALLEY = ResourceKey.create(Registries.BIOME,
+            AGoTMod.id("skagos_valley"));
+
+    public static final ResourceKey<Biome> SKAGOS_MOUNTAINS = ResourceKey.create(Registries.BIOME,
+            AGoTMod.id("skagos_mountains"));
+
+    public static final ResourceKey<Biome> SKAGOS_FROZEN_PEAKS = ResourceKey.create(Registries.BIOME,
+            AGoTMod.id("skagos_frozen_peaks"));
+
+    public static final ResourceKey<Biome> SKAGOS_RIVER = ResourceKey.create(Registries.BIOME,
+            AGoTMod.id("skagos_river"));
+
+    public static final ResourceKey<Biome> SKAGOS_BOG = ResourceKey.create(Registries.BIOME,
+            AGoTMod.id("skagos_bog"));
+
+
     public static void boostrap(BootstrapContext<Biome> context) {
         context.register(LANDS_OF_ALWAYS_WINTER, alwayswinter(context));
         context.register(HAUNTED_FOREST, hauntedforest(context));
@@ -68,6 +96,17 @@ public class ModBiomes {
         context.register(NORTHERN_WATERS, northernwaters(context));
         context.register(STONY_SHORES, stonyshores(context));
         context.register(THE_NECK, theneck(context));
+
+        context.register(SKAGOS_TUNDRA, skagosTundra(context));
+        context.register(SKAGOS_WOODS, skagosWoods(context));
+        context.register(SKAGOS_BARRENS, skagosBarrens(context));
+        context.register(SKAGOS_HILLS, skagosHills(context));
+        context.register(SKAGOS_VALLEY, skagosValley(context));
+        context.register(SKAGOS_MOUNTAINS, skagosMountains(context));
+        context.register(SKAGOS_FROZEN_PEAKS, skagosFrozenPeaks(context));
+        context.register(SKAGOS_RIVER, skagosRiver(context));
+        context.register(SKAGOS_BOG, skagosBog(context));
+
     }
 
     public static void globalOverworldGeneration(BiomeGenerationSettings.Builder builder) {
@@ -179,6 +218,139 @@ public class ModBiomes {
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.WINTER_ROSE_BUSH_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.GRASS_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.TALL_GRASS_KEY);
+    }
+
+    private static void addSkagosTundra(BiomeGenerationSettings.Builder biomeBuilder, BootstrapContext<Biome> context) {
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FIR_RARE_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.PINE_RARE_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SOLDIER_PINE_RARE_KEY);
+
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.GRASS_BLOCK_PATCH_PLACED_KEY);
+
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FROSTFIRE_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.LIVERWORT_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.LUNGWORT_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SEDGE_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.THISTLE_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.THORN_BUSH_KEY);
+
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.GRASS_KEY);
+    }
+
+    private static void addSkagosWoods(BiomeGenerationSettings.Builder biomeBuilder, BootstrapContext<Biome> context) {
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FIR_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.PINE_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SOLDIER_PINE_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SENTINEL_RARE_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.WEIRWOOD_RARE_KEY);
+
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.GRASS_BLOCK_PATCH_PLACED_KEY);
+
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FORGET_ME_NOT_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FROSTFIRE_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.LIVERWORT_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.LUNGWORT_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.PENNYROYAL_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.THISTLE_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.THORN_BUSH_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.WINTER_ROSE_BUSH_KEY);
+
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FERN_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.LARGE_FERN_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.GRASS_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.TALL_GRASS_KEY);
+    }
+
+    private static void addSkagosBarrens(BiomeGenerationSettings.Builder biomeBuilder, BootstrapContext<Biome> context) {
+
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FROSTFIRE_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.LIVERWORT_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.THISTLE_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.THORN_BUSH_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SEDGE_KEY);
+
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.GRASS_KEY);
+    }
+
+    private static void addSkagosHills(BiomeGenerationSettings.Builder biomeBuilder, BootstrapContext<Biome> context) {
+
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FIR_RARE_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.PINE_RARE_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SOLDIER_PINE_RARE_KEY);
+
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.GRASS_BLOCK_PATCH_PLACED_KEY);
+
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FROSTFIRE_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.LIVERWORT_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.LUNGWORT_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SEDGE_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.THISTLE_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.THORN_BUSH_KEY);
+
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.GRASS_KEY);
+    }
+
+    private static void addSkagosValley(BiomeGenerationSettings.Builder biomeBuilder, BootstrapContext<Biome> context) {
+
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FIR_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.PINE_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SOLDIER_PINE_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SENTINEL_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.WEIRWOOD_RARE_KEY);
+
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.GRASS_BLOCK_PATCH_PLACED_KEY);
+
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FORGET_ME_NOT_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FROSTFIRE_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.LIVERWORT_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.LUNGWORT_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.PENNYROYAL_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SEDGE_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.THISTLE_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.THORN_BUSH_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.WINTER_ROSE_BUSH_KEY);
+
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FERN_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.LARGE_FERN_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.GRASS_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.TALL_GRASS_KEY);
+    }
+
+    private static void addSkagosMountains(BiomeGenerationSettings.Builder biomeBuilder, BootstrapContext<Biome> context) {
+
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FIR_RARE_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.PINE_RARE_KEY);
+
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FROSTFIRE_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.LIVERWORT_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.THISTLE_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SEDGE_KEY);
+    }
+
+    private static void addSkagosFrozenPeaks(BiomeGenerationSettings.Builder biomeBuilder, BootstrapContext<Biome> context) {
+
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FROSTFIRE_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.LIVERWORT_KEY);
+    }
+
+    private static void addSkagosBog(BiomeGenerationSettings.Builder biomeBuilder, BootstrapContext<Biome> context) {
+
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.CLAY_PATCH_PLACED_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.QUAGMIRE_PATCH_PLACED_KEY);
+
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FIR_RARE_KEY);
+
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.GRASS_BLOCK_PATCH_PLACED_KEY);
+
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SEDGE_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.LIVERWORT_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.LUNGWORT_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FROSTFIRE_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.THORN_BUSH_KEY);
+
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FERN_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.LARGE_FERN_KEY);
+        //biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.GRASS_KEY);
     }
 
     private static void addModOres (BiomeGenerationSettings.Builder biomeBuilder, BootstrapContext<Biome> context) {
@@ -764,6 +936,277 @@ public class ModBiomes {
                 .build();
     }
 
+    public static Biome skagosTundra(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+
+        BiomeGenerationSettings.Builder biomeBuilder =
+                new BiomeGenerationSettings.Builder(context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addSkagosTundra(biomeBuilder, context);
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true)
+                .downfall(0.85f)
+                .temperature(-0.45f)
+                .generationSettings(biomeBuilder.build())
+                .mobSpawnSettings(spawnBuilder.build())
+                .specialEffects((new BiomeSpecialEffects.Builder())
+                        .waterColor(0x3d4ed1)
+                        .waterFogColor(0x0c113b)
+                        .skyColor(0x8f97c4)
+                        .grassColorOverride(0x8a9582)
+                        .foliageColorOverride(0x6e7867)
+                        .fogColor(0xc9ced7)
+                        .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
+                        .ambientLoopSound(ModSounds.WINTER_WIND)
+                        .backgroundMusic(Musics.createGameMusic(ModSounds.WINTER_WIND)).build())
+                .build();
+    }
+
+    public static Biome skagosWoods(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+
+        BiomeGenerationSettings.Builder biomeBuilder =
+                new BiomeGenerationSettings.Builder(context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addSkagosWoods(biomeBuilder, context);
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true)
+                .downfall(0.9f)
+                .temperature(-0.25f)
+                .generationSettings(biomeBuilder.build())
+                .mobSpawnSettings(spawnBuilder.build())
+                .specialEffects((new BiomeSpecialEffects.Builder())
+                        .waterColor(0x3d4ed1)
+                        .waterFogColor(0x0c113b)
+                        .skyColor(0x8a94c4)
+                        .grassColorOverride(0x61755b)
+                        .foliageColorOverride(0x455843)
+                        .fogColor(0x9fa7b4)
+                        .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
+                        .ambientLoopSound(ModSounds.FOREST_WIND)
+                        .backgroundMusic(Musics.createGameMusic(ModSounds.WINTER_WIND)).build())
+                .build();
+    }
+
+    public static Biome skagosBarrens(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+
+        BiomeGenerationSettings.Builder biomeBuilder =
+                new BiomeGenerationSettings.Builder(context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addSkagosBarrens(biomeBuilder, context);
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true)
+                .downfall(0.7f)
+                .temperature(-0.7f)
+                .generationSettings(biomeBuilder.build())
+                .mobSpawnSettings(spawnBuilder.build())
+                .specialEffects((new BiomeSpecialEffects.Builder())
+                        .waterColor(0x3d4ed1)
+                        .waterFogColor(0x0c113b)
+                        .skyColor(0x98a0c8)
+                        .grassColorOverride(0x909090)
+                        .foliageColorOverride(0x777777)
+                        .fogColor(0xd7d7d7)
+                        .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
+                        .ambientLoopSound(ModSounds.WINTER_WIND)
+                        .backgroundMusic(Musics.createGameMusic(ModSounds.WINTER_WIND)).build())
+                .build();
+    }
+
+    public static Biome skagosHills(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+
+        BiomeGenerationSettings.Builder biomeBuilder =
+                new BiomeGenerationSettings.Builder(context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addSkagosHills(biomeBuilder, context);
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true)
+                .downfall(0.8f)
+                .temperature(-0.55f)
+                .generationSettings(biomeBuilder.build())
+                .mobSpawnSettings(spawnBuilder.build())
+                .specialEffects((new BiomeSpecialEffects.Builder())
+                        .waterColor(0x3d4ed1)
+                        .waterFogColor(0x0c113b)
+                        .skyColor(0x9099c8)
+                        .grassColorOverride(0x7b866f)
+                        .foliageColorOverride(0x66715c)
+                        .fogColor(0xbec4cd)
+                        .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
+                        .ambientLoopSound(ModSounds.WINTER_WIND)
+                        .backgroundMusic(Musics.createGameMusic(ModSounds.WINTER_WIND)).build())
+                .build();
+    }
+
+    public static Biome skagosValley(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+
+        BiomeGenerationSettings.Builder biomeBuilder =
+                new BiomeGenerationSettings.Builder(context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addSkagosValley(biomeBuilder, context);
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true)
+                .downfall(0.95f)
+                .temperature(-0.1f)
+                .generationSettings(biomeBuilder.build())
+                .mobSpawnSettings(spawnBuilder.build())
+                .specialEffects((new BiomeSpecialEffects.Builder())
+                        .waterColor(0x3d4ed1)
+                        .waterFogColor(0x0c113b)
+                        .skyColor(0x8895c6)
+                        .grassColorOverride(0x5c7d55)
+                        .foliageColorOverride(0x476444)
+                        .fogColor(0xa4adb9)
+                        .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
+                        .ambientLoopSound(ModSounds.FOREST_WIND)
+                        .backgroundMusic(Musics.createGameMusic(ModSounds.WINTER_WIND)).build())
+                .build();
+    }
+
+    public static Biome skagosMountains(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+
+        BiomeGenerationSettings.Builder biomeBuilder =
+                new BiomeGenerationSettings.Builder(context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addSkagosMountains(biomeBuilder, context);
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true)
+                .downfall(0.75f)
+                .temperature(-0.8f)
+                .generationSettings(biomeBuilder.build())
+                .mobSpawnSettings(spawnBuilder.build())
+                .specialEffects((new BiomeSpecialEffects.Builder())
+                        .waterColor(0x3d4ed1)
+                        .waterFogColor(0x0c113b)
+                        .skyColor(0x9ba4cc)
+                        .grassColorOverride(0xc4c4c4)
+                        .foliageColorOverride(0xaaaaaa)
+                        .fogColor(0xe6e6e6)
+                        .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
+                        .ambientLoopSound(ModSounds.WINTER_WIND)
+                        .backgroundMusic(Musics.createGameMusic(ModSounds.WINTER_WIND)).build())
+                .build();
+    }
+
+    public static Biome skagosFrozenPeaks(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+
+        BiomeGenerationSettings.Builder biomeBuilder =
+                new BiomeGenerationSettings.Builder(context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addSkagosFrozenPeaks(biomeBuilder, context);
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true)
+                .downfall(0.8f)
+                .temperature(-1.0f)
+                .generationSettings(biomeBuilder.build())
+                .mobSpawnSettings(spawnBuilder.build())
+                .specialEffects((new BiomeSpecialEffects.Builder())
+                        .waterColor(0x3d4ed1)
+                        .waterFogColor(0x0c113b)
+                        .skyColor(0xb5c2e0)
+                        .grassColorOverride(0xececec)
+                        .foliageColorOverride(0xececec)
+                        .fogColor(0xffffff)
+                        .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
+                        .ambientLoopSound(ModSounds.WINTER_WIND)
+                        .backgroundMusic(Musics.createGameMusic(ModSounds.WINTER_WIND)).build())
+                .build();
+    }
+
+    public static Biome skagosRiver(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+
+        BiomeGenerationSettings.Builder biomeBuilder =
+                new BiomeGenerationSettings.Builder(
+                        context.lookup(Registries.PLACED_FEATURE),
+                        context.lookup(Registries.CONFIGURED_CARVER));
+
+        globalOverworldGeneration(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultSoftDisks(biomeBuilder);
+
+        addRiverFeatures(biomeBuilder, context);
+        addRiverMobs(spawnBuilder);
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true)
+                .temperature(0.2f)
+                .downfall(0.8f)
+                .generationSettings(biomeBuilder.build())
+                .mobSpawnSettings(spawnBuilder.build())
+                .specialEffects(new BiomeSpecialEffects.Builder()
+                        .waterColor(0x315d7d)
+                        .waterFogColor(0x1b3850)
+                        .skyColor(0x647c91)
+                        .grassColorOverride(0x566b4b)
+                        .foliageColorOverride(0x4f6245)
+                        .fogColor(0x8294a3)
+                        .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
+                        .backgroundMusic(Musics.createGameMusic(ModSounds.WINTER_WIND))
+                        .build())
+                .build();
+    }
+
+    public static Biome skagosBog(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+
+        BiomeGenerationSettings.Builder biomeBuilder =
+                new BiomeGenerationSettings.Builder(
+                        context.lookup(Registries.PLACED_FEATURE),
+                        context.lookup(Registries.CONFIGURED_CARVER));
+
+        globalOverworldGeneration(biomeBuilder);
+
+        BiomeDefaultFeatures.addSwampVegetation(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
+
+        addModOres(biomeBuilder, context);
+        addSkagosBog(biomeBuilder, context);
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true)
+                .temperature(0.3f)
+                .downfall(0.9f)
+                .generationSettings(biomeBuilder.build())
+                .mobSpawnSettings(spawnBuilder.build())
+                .specialEffects(new BiomeSpecialEffects.Builder()
+                        .waterColor(0x263c32)
+                        .waterFogColor(0x18251e)
+                        .skyColor(0x596b65)
+                        .grassColorOverride(0x354d32)
+                        .foliageColorOverride(0x2e422b)
+                        .fogColor(0x69756e)
+                        .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
+                        .backgroundMusic(Musics.createGameMusic(ModSounds.WINTER_WIND))
+                        .build())
+                .build();
+    }
 
 }
 

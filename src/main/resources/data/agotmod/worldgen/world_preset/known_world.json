@@ -239,6 +239,71 @@
               "color": "#525f4d",
               "terrain_modifier": 20.0,
               "blob_scale": 500
+            },
+            {
+              "biomes": [
+                {"biome": "agotmod:skagos_bog", "weight": 0.7},
+                {"biome": "agotmod:skagos_tundra", "weight": 0.2},
+                {"biome": "agotmod:skagos_barrens", "weight": 0.1}
+              ],
+              "color": "#354d32",
+              "terrain_modifier": 5.0,
+              "blob_scale": 500
+            },
+            {
+              "biomes": [
+                {"biome": "agotmod:skagos_tundra", "weight": 0.7},
+                {"biome": "agotmod:skagos_barrens", "weight": 0.3}
+              ],
+              "color": "#69776f",
+              "terrain_modifier": 5.0,
+              "blob_scale": 500
+            },
+            {
+              "biomes": [
+                {"biome": "agotmod:skagos_tundra", "weight": 0.7},
+                {"biome": "agotmod:skagos_hills", "weight": 0.2},
+                {"biome": "agotmod:skagos_valley", "weight": 0.1}
+              ],
+              "color": "#878f8b",
+              "terrain_modifier": 12.0,
+              "blob_scale": 600
+            },
+            {
+              "biomes": [
+                {"biome": "agotmod:skagos_hills", "weight": 0.6},
+                {"biome": "agotmod:skagos_tundra", "weight": 0.25},
+                {"biome": "agotmod:skagos_woods", "weight": 0.15}
+              ],
+              "color": "#909f99",
+              "terrain_modifier": 40.0,
+              "blob_scale": 600
+            },
+            {
+              "biomes": [
+                {"biome": "agotmod:skagos_mountains", "weight": 0.7},
+                {"biome": "agotmod:skagos_hills", "weight": 0.2},
+                {"biome": "agotmod:skagos_barrens", "weight": 0.1}
+              ],
+              "color": "#ccd0ce",
+              "terrain_modifier": 80.0,
+              "blob_scale": 700
+            },
+            {
+              "biomes": [
+                {"biome": "agotmod:skagos_frozen_peaks", "weight": 0.8},
+                {"biome": "agotmod:skagos_mountains", "weight": 0.2}
+              ],
+              "color": "#ffffff",
+              "terrain_modifier": 100.0,
+              "pixel_weight": 100.0
+            },
+            {
+              "biomes": [
+                {"biome": "agotmod:skagos_river", "weight": 1.0}
+              ],
+              "color": "#5791f0",
+              "pixel_weight": 40.0
             }
           ]
         }

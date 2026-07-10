@@ -36,6 +36,24 @@ public class ModOverworldRegion extends Region {
             modifiedVanillaOverworldBuilder.replaceBiome(Biomes.RIVER, ModBiomes.NORTHERN_WATERS);
             modifiedVanillaOverworldBuilder.replaceBiome(Biomes.STONY_SHORE, ModBiomes.STONY_SHORES);
             modifiedVanillaOverworldBuilder.replaceBiome(Biomes.MANGROVE_SWAMP, ModBiomes.THE_NECK);
+            modifiedVanillaOverworldBuilder.replaceBiome(Biomes.SNOWY_PLAINS, ModBiomes.SKAGOS_TUNDRA);
+            modifiedVanillaOverworldBuilder.replaceBiome(Biomes.SNOWY_TAIGA, ModBiomes.SKAGOS_WOODS);
+            modifiedVanillaOverworldBuilder.replaceBiome(Biomes.OLD_GROWTH_SPRUCE_TAIGA, ModBiomes.SKAGOS_WOODS);
+            modifiedVanillaOverworldBuilder.replaceBiome(Biomes.SNOWY_SLOPES, ModBiomes.SKAGOS_HILLS);
+            modifiedVanillaOverworldBuilder.replaceBiome(Biomes.FROZEN_PEAKS, ModBiomes.SKAGOS_FROZEN_PEAKS);
+            modifiedVanillaOverworldBuilder.replaceBiome(Biomes.JAGGED_PEAKS, ModBiomes.SKAGOS_MOUNTAINS);
+            modifiedVanillaOverworldBuilder.replaceBiome(Biomes.MEADOW, ModBiomes.SKAGOS_VALLEY);
+            modifiedVanillaOverworldBuilder.replaceBiome(Biomes.PLAINS, ModBiomes.SKAGOS_TUNDRA);
+            modifiedVanillaOverworldBuilder.replaceBiome(Biomes.WINDSWEPT_HILLS, ModBiomes.SKAGOS_HILLS);
+            modifiedVanillaOverworldBuilder.replaceBiome(Biomes.WINDSWEPT_FOREST, ModBiomes.SKAGOS_WOODS);
+            modifiedVanillaOverworldBuilder.replaceBiome(Biomes.STONY_PEAKS, ModBiomes.SKAGOS_BARRENS);
+            modifiedVanillaOverworldBuilder.replaceBiome(Biomes.STONY_SHORE, ModBiomes.SKAGOS_BARRENS);
+            modifiedVanillaOverworldBuilder.replaceBiome(Biomes.SWAMP, ModBiomes.SKAGOS_BOG);
+            modifiedVanillaOverworldBuilder.replaceBiome(Biomes.MANGROVE_SWAMP, ModBiomes.SKAGOS_BOG);
+            modifiedVanillaOverworldBuilder.replaceBiome(Biomes.FOREST, ModBiomes.SKAGOS_VALLEY);
+            modifiedVanillaOverworldBuilder.replaceBiome(Biomes.BIRCH_FOREST, ModBiomes.SKAGOS_VALLEY);
+            modifiedVanillaOverworldBuilder.replaceBiome(Biomes.DARK_FOREST, ModBiomes.SKAGOS_WOODS);
+            modifiedVanillaOverworldBuilder.replaceBiome(Biomes.TAIGA, ModBiomes.SKAGOS_WOODS);
         });
     }
 }

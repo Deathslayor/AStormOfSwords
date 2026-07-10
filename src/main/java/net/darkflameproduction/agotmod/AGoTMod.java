@@ -1,6 +1,5 @@
 package net.darkflameproduction.agotmod;
 
-import dev.tocraft.ctgen.impl.CTGClient;
 import net.darkflameproduction.agotmod.client.ClientKeyInputEvents;
 import net.darkflameproduction.agotmod.client.ModAttachments;
 import net.darkflameproduction.agotmod.client.particle.WeirwoodLeavesParticle;

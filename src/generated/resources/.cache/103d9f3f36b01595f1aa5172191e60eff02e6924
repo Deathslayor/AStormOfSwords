@@ -1,4 +1,4 @@
-// 1.21.1	2026-05-30T17:11:04.4626239	Registries
+// 1.21.1	2026-07-10T17:14:28.1555893	Registries
 04959ff97a94a491f8a432926d521f167e9531be data/agotmod/banner_pattern/arryn.json
 e17fd35d2836802979bf988c2a96a06599d04697 data/agotmod/banner_pattern/baelish.json
 e19718623618fa07d759962c4e924b518ca9ca5f data/agotmod/banner_pattern/baratheon.json
@@ -37,6 +37,15 @@ ffe3d912e363745b0043a61fc7b67f35a53f2228 data/agotmod/neoforge/biome_modifier/ad
 62b2f20e798b89a583630eb2bfd0abbbfe061d8d data/agotmod/worldgen/biome/northern_mountains.json
 5d2935cd91b41a6c270732786700377b95831cba data/agotmod/worldgen/biome/northern_waters.json
 5a8486f007dfdc3e40d8c2be12f129ef4933176c data/agotmod/worldgen/biome/rills.json
+5be9d24b04a8c9ae09eba2a651361f6c5383a4bb data/agotmod/worldgen/biome/skagos_barrens.json
+56c632e09e79fdea17d725e66565101daebe194f data/agotmod/worldgen/biome/skagos_bog.json
+2c0c86049aae1e19d1e143f372977a7ba349a0c5 data/agotmod/worldgen/biome/skagos_frozen_peaks.json
+017cead089bb8741006c61eeeb89528711a579e6 data/agotmod/worldgen/biome/skagos_hills.json
+1e41db9895655b8a2850bd56c4ca26bca8de4a66 data/agotmod/worldgen/biome/skagos_mountains.json
+9bac7a4354bed01cfa785f84222cc08315d1f1f4 data/agotmod/worldgen/biome/skagos_river.json
+a25f84d422dc97b7376bd1d4155a3353f24532f1 data/agotmod/worldgen/biome/skagos_tundra.json
+11e0d30afb57861073c28c4b0cc56ac1dc82e9b3 data/agotmod/worldgen/biome/skagos_valley.json
+131843411aaac3484ad00016ad2a0672b9ab295b data/agotmod/worldgen/biome/skagos_woods.json
 6280f3ab38e51c32ace3933899060a21b0e243ad data/agotmod/worldgen/biome/stony_shores.json
 8897d97c96a6a557c42c6547452f18f83b763910 data/agotmod/worldgen/biome/the_neck.json
 6280f3ab38e51c32ace3933899060a21b0e243ad data/agotmod/worldgen/biome/the_north.json

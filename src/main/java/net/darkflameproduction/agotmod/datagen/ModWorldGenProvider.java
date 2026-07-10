@@ -1,6 +1,5 @@
 package net.darkflameproduction.agotmod.datagen;
 
-import dev.tocraft.ctgen.xtend.CTRegistries;
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.worldgen.ModBiomeModifiers;
 import net.darkflameproduction.agotmod.worldgen.ModConfiguredFeatures;
