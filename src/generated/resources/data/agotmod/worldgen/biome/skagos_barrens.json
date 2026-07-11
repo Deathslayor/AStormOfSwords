@@ -71,7 +71,15 @@
     ],
     [],
     [
-      "minecraft:glow_lichen"
+      "minecraft:glow_lichen",
+      "agotmod:grass_block_patch",
+      "agotmod:frostfire",
+      "agotmod:liverwort",
+      "agotmod:thistle",
+      "agotmod:thorn_bush",
+      "agotmod:sedge",
+      "agotmod:grass",
+      "agotmod:tall_grass"
     ],
     [
       "minecraft:freeze_top_layer"

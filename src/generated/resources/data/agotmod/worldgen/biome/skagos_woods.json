@@ -71,7 +71,24 @@
     ],
     [],
     [
-      "minecraft:glow_lichen"
+      "minecraft:glow_lichen",
+      "agotmod:sentinel",
+      "agotmod:fir",
+      "agotmod:pine",
+      "agotmod:soldier_pine",
+      "agotmod:weirwood_rare",
+      "agotmod:grass_block_patch",
+      "agotmod:forget_me_not",
+      "agotmod:frostfire",
+      "agotmod:liverwort",
+      "agotmod:lungwort",
+      "agotmod:pennyroyal",
+      "agotmod:thistle",
+      "agotmod:thorn_bush",
+      "agotmod:grass",
+      "agotmod:tall_grass",
+      "agotmod:fern",
+      "agotmod:large_fern"
     ],
     [
       "minecraft:freeze_top_layer"

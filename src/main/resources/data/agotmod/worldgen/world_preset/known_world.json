@@ -17,23 +17,71 @@
           "border_noise": 1.0,
           "zones": [
             {
-              "biomes": [{"biome": "minecraft:frozen_peaks", "weight": 1.0}],
-              "color": "#ffffff",
-              "terrain_modifier": 0.0,
-              "pixel_weight": 100.0
+              "biomes": [
+                {"biome": "agotmod:skagos_bog", "weight": 0.7},
+                {"biome": "agotmod:skagos_tundra", "weight": 0.2},
+                {"biome": "agotmod:skagos_barrens", "weight": 0.1}
+              ],
+              "color": "#354d32",
+              "terrain_modifier": 5.0,
+              "blob_scale": 5000
             },
             {
               "biomes": [
-                {"biome": "agotmod:haunted_forest", "weight": 0.6},
-                {"biome": "minecraft:old_growth_spruce_taiga", "weight": 0.2},
-                {"biome": "minecraft:old_growth_pine_taiga", "weight": 0.2}
+                {"biome": "agotmod:skagos_tundra", "weight": 0.7},
+                {"biome": "agotmod:skagos_barrens", "weight": 0.3}
               ],
-              "color": "#828c82",
-              "blob_scale": 600
+              "color": "#69776f",
+              "terrain_modifier": 5.0,
+              "blob_scale": 5000
             },
             {
-              "biomes": [{"biome": "minecraft:frozen_river", "weight": 1.0}],
+              "biomes": [
+                {"biome": "agotmod:skagos_tundra", "weight": 0.7},
+                {"biome": "agotmod:skagos_hills", "weight": 0.2},
+                {"biome": "agotmod:skagos_valley", "weight": 0.1}
+              ],
+              "color": "#878f8b",
+              "terrain_modifier": 12.0,
+              "blob_scale": 6000
+            },
+            {
+              "biomes": [
+                {"biome": "agotmod:skagos_hills", "weight": 0.6},
+                {"biome": "agotmod:skagos_tundra", "weight": 0.25},
+                {"biome": "agotmod:skagos_woods", "weight": 0.15}
+              ],
+              "color": "#909f99",
+              "terrain_modifier": 40.0,
+              "blob_scale": 6000
+            },
+            {
+              "biomes": [
+                {"biome": "agotmod:skagos_mountains", "weight": 0.7},
+                {"biome": "agotmod:skagos_hills", "weight": 0.2},
+                {"biome": "agotmod:skagos_barrens", "weight": 0.1}
+              ],
+              "color": "#ccd0ce",
+              "terrain_modifier": 80.0,
+              "blob_scale": 7000
+            },
+            {
+              "biomes": [
+                {"biome": "agotmod:skagos_frozen_peaks", "weight": 0.8},
+                {"biome": "agotmod:skagos_mountains", "weight": 0.2}
+              ],
+              "color": "#ffffff",
+              "terrain_modifier": 100.0,
+              "pixel_weight": 100.0
+            },
+            {
+              "biomes": [{"biome": "agotmod:skagos_river", "weight": 1.0}],
               "color": "#5791f0",
+              "pixel_weight": 40.0
+            },
+            {
+              "biomes": [{"biome": "agotmod:skagos_river", "weight": 1.0}],
+              "color": "#315d7d",
               "pixel_weight": 40.0
             },
             {
@@ -50,260 +98,6 @@
               "biomes": [{"biome": "minecraft:deep_cold_ocean", "weight": 1.0}],
               "color": "#002355",
               "terrain_modifier": -33.0
-            },
-            {
-              "biomes": [{"biome": "minecraft:basalt_deltas", "weight": 1.0}],
-              "color": "#000000",
-              "terrain_modifier": 20.0,
-              "pixel_weight": 1.5
-            },
-            {
-              "biomes": [
-                {"biome": "agotmod:frostfang_foothills", "weight": 0.6},
-                {"biome": "minecraft:snowy_slopes", "weight": 0.25},
-                {"biome": "minecraft:grove", "weight": 0.15}
-              ],
-              "color": "#c0c0c0",
-              "terrain_modifier": 20.0,
-              "pixel_weight": 1.5,
-              "blob_scale": 500
-            },
-            {
-              "biomes": [
-                {"biome": "agotmod:frostfangs", "weight": 0.7},
-                {"biome": "minecraft:jagged_peaks", "weight": 0.2},
-                {"biome": "minecraft:frozen_peaks", "weight": 0.1}
-              ],
-              "color": "#aeaeae",
-              "terrain_modifier": 80.0,
-              "blob_scale": 700
-            },
-            {
-              "biomes": [
-                {"biome": "agotmod:valley_of_thenn", "weight": 0.6},
-                {"biome": "minecraft:meadow", "weight": 0.25},
-                {"biome": "minecraft:cherry_grove", "weight": 0.15}
-              ],
-              "color": "#6b8f6b",
-              "blob_scale": 500
-            },
-            {
-              "biomes": [
-                {"biome": "agotmod:lands_of_always_winter", "weight": 0.6},
-                {"biome": "minecraft:snowy_plains", "weight": 0.25},
-                {"biome": "minecraft:ice_spikes", "weight": 0.15}
-              ],
-              "color": "#d9d9d9",
-              "terrain_modifier": 6.0,
-              "pixel_weight": 1.5,
-              "blob_scale": 600
-            },
-            {
-              "biomes": [
-                {"biome": "agotmod:wolfswood", "weight": 0.6},
-                {"biome": "minecraft:old_growth_spruce_taiga", "weight": 0.25},
-                {"biome": "minecraft:taiga", "weight": 0.15}
-              ],
-              "color": "#2b462b",
-              "terrain_modifier": 6.0,
-              "blob_scale": 600
-            },
-            {
-              "biomes": [
-                {"biome": "agotmod:wolfswood_clearing", "weight": 0.5},
-                {"biome": "minecraft:forest", "weight": 0.3},
-                {"biome": "minecraft:meadow", "weight": 0.2}
-              ],
-              "color": "#487a48",
-              "terrain_modifier": 6.0,
-              "blob_scale": 500
-            },
-            {
-              "biomes": [
-                {"biome": "agotmod:ironwood", "weight": 0.6},
-                {"biome": "minecraft:dark_forest", "weight": 0.25},
-                {"biome": "minecraft:old_growth_pine_taiga", "weight": 0.15}
-              ],
-              "color": "#263b26",
-              "terrain_modifier": 6.0,
-              "blob_scale": 600
-            },
-            {
-              "biomes": [
-                {"biome": "agotmod:northern_hills", "weight": 0.6},
-                {"biome": "minecraft:windswept_hills", "weight": 0.25},
-                {"biome": "minecraft:windswept_gravelly_hills", "weight": 0.15}
-              ],
-              "color": "#979797",
-              "terrain_modifier": 40.0,
-              "pixel_weight": 1.5,
-              "blob_scale": 600
-            },
-            {
-              "biomes": [
-                {"biome": "agotmod:northern_mountains", "weight": 0.6},
-                {"biome": "minecraft:jagged_peaks", "weight": 0.25},
-                {"biome": "minecraft:stony_peaks", "weight": 0.15}
-              ],
-              "color": "#828282",
-              "terrain_modifier": 80.0,
-              "blob_scale": 700
-            },
-            {
-              "biomes": [
-                {"biome": "agotmod:the_north", "weight": 0.5},
-                {"biome": "minecraft:plains", "weight": 0.3},
-                {"biome": "minecraft:meadow", "weight": 0.2}
-              ],
-              "color": "#395f39",
-              "terrain_modifier": 3.0,
-              "blob_scale": 500
-            },
-            {
-              "biomes": [
-                {"biome": "agotmod:rills", "weight": 0.6},
-                {"biome": "minecraft:windswept_forest", "weight": 0.25},
-                {"biome": "minecraft:forest", "weight": 0.15}
-              ],
-              "color": "#3d5133",
-              "terrain_modifier": 12.0,
-              "blob_scale": 500
-            },
-            {
-              "biomes": [{"biome": "agotmod:northern_waters", "weight": 1.0}],
-              "color": "#0162ff",
-              "pixel_weight": 40.0
-            },
-            {
-              "biomes": [{"biome": "agotmod:northern_waters", "weight": 1.0}],
-              "color": "#0053d9",
-              "pixel_weight": 3.0
-            },
-            {
-              "biomes": [
-                {"biome": "agotmod:stony_shores", "weight": 0.6},
-                {"biome": "minecraft:stony_shore", "weight": 0.4}
-              ],
-              "color": "#506250",
-              "terrain_modifier": 6.0,
-              "blob_scale": 400
-            },
-            {
-              "biomes": [
-                {"biome": "agotmod:the_neck", "weight": 0.6},
-                {"biome": "minecraft:swamp", "weight": 0.25},
-                {"biome": "minecraft:mangrove_swamp", "weight": 0.15}
-              ],
-              "color": "#223322",
-              "terrain_modifier": 8.0,
-              "blob_scale": 500
-            },
-            {
-              "biomes": [{"biome": "agotmod:the_neck", "weight": 1.0}],
-              "color": "#574c2f",
-              "pixel_weight": 40.0
-            },
-            {
-              "biomes": [
-                {"biome": "agotmod:the_north", "weight": 0.6},
-                {"biome": "agotmod:wolfswood", "weight": 0.4}
-              ],
-              "color": "#69776f",
-              "terrain_modifier": 3.0,
-              "blob_scale": 400
-            },
-            {
-              "biomes": [
-                {"biome": "agotmod:northern_hills", "weight": 0.6},
-                {"biome": "minecraft:windswept_hills", "weight": 0.4}
-              ],
-              "color": "#909f99",
-              "terrain_modifier": 40.0,
-              "blob_scale": 600
-            },
-            {
-              "biomes": [
-                {"biome": "agotmod:northern_mountains", "weight": 0.6},
-                {"biome": "minecraft:jagged_peaks", "weight": 0.4}
-              ],
-              "color": "#ccd0ce",
-              "terrain_modifier": 80.0,
-              "blob_scale": 700
-            },
-            {
-              "biomes": [
-                {"biome": "agotmod:barrowlands", "weight": 0.6},
-                {"biome": "minecraft:plains", "weight": 0.25},
-                {"biome": "minecraft:windswept_hills", "weight": 0.15}
-              ],
-              "color": "#525f4d",
-              "terrain_modifier": 20.0,
-              "blob_scale": 500
-            },
-            {
-              "biomes": [
-                {"biome": "agotmod:skagos_bog", "weight": 0.7},
-                {"biome": "agotmod:skagos_tundra", "weight": 0.2},
-                {"biome": "agotmod:skagos_barrens", "weight": 0.1}
-              ],
-              "color": "#354d32",
-              "terrain_modifier": 5.0,
-              "blob_scale": 500
-            },
-            {
-              "biomes": [
-                {"biome": "agotmod:skagos_tundra", "weight": 0.7},
-                {"biome": "agotmod:skagos_barrens", "weight": 0.3}
-              ],
-              "color": "#69776f",
-              "terrain_modifier": 5.0,
-              "blob_scale": 500
-            },
-            {
-              "biomes": [
-                {"biome": "agotmod:skagos_tundra", "weight": 0.7},
-                {"biome": "agotmod:skagos_hills", "weight": 0.2},
-                {"biome": "agotmod:skagos_valley", "weight": 0.1}
-              ],
-              "color": "#878f8b",
-              "terrain_modifier": 12.0,
-              "blob_scale": 600
-            },
-            {
-              "biomes": [
-                {"biome": "agotmod:skagos_hills", "weight": 0.6},
-                {"biome": "agotmod:skagos_tundra", "weight": 0.25},
-                {"biome": "agotmod:skagos_woods", "weight": 0.15}
-              ],
-              "color": "#909f99",
-              "terrain_modifier": 40.0,
-              "blob_scale": 600
-            },
-            {
-              "biomes": [
-                {"biome": "agotmod:skagos_mountains", "weight": 0.7},
-                {"biome": "agotmod:skagos_hills", "weight": 0.2},
-                {"biome": "agotmod:skagos_barrens", "weight": 0.1}
-              ],
-              "color": "#ccd0ce",
-              "terrain_modifier": 80.0,
-              "blob_scale": 700
-            },
-            {
-              "biomes": [
-                {"biome": "agotmod:skagos_frozen_peaks", "weight": 0.8},
-                {"biome": "agotmod:skagos_mountains", "weight": 0.2}
-              ],
-              "color": "#ffffff",
-              "terrain_modifier": 100.0,
-              "pixel_weight": 100.0
-            },
-            {
-              "biomes": [
-                {"biome": "agotmod:skagos_river", "weight": 1.0}
-              ],
-              "color": "#5791f0",
-              "pixel_weight": 40.0
             }
           ]
         }

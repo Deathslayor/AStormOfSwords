@@ -3,7 +3,13 @@
   "start_pool": "agotmod:old_bailey_1/start_pool",
   "size": 2,
   "max_distance_from_center": 80,
-  "biomes": ["agotmod:the_north"],
+  "biomes": [
+    "agotmod:the_north",
+    "agotmod:skagos_tundra",
+    "agotmod:skagos_barrens",
+    "agotmod:skagos_woods",
+    "agotmod:skagos_bog"
+  ],
   "step": "surface_structures",
   "start_height": { "absolute": 5 },
   "project_start_to_heightmap": "WORLD_SURFACE_WG",

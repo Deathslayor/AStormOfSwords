@@ -86,10 +86,10 @@
       "agotmod:thistle",
       "agotmod:thorn_bush",
       "agotmod:winter_rose_bush",
-      "agotmod:fern",
-      "agotmod:large_fern",
       "agotmod:grass",
-      "agotmod:tall_grass"
+      "agotmod:tall_grass",
+      "agotmod:fern",
+      "agotmod:large_fern"
     ],
     [
       "minecraft:freeze_top_layer"
