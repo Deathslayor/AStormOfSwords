@@ -1,0 +1,9 @@
+{
+  "structures": [{ "structure": "agotmod:cairn", "weight": 1 }],
+  "placement": {
+    "salt": 918273645,
+    "spacing": 1200,
+    "separation": 400,
+    "type": "minecraft:random_spread"
+  }
+}

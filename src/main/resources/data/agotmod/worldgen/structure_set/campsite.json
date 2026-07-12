@@ -1,0 +1,9 @@
+{
+  "structures": [{ "structure": "agotmod:campsite", "weight": 1 }],
+  "placement": {
+    "salt": 347261893,
+    "spacing": 500,
+    "separation": 120,
+    "type": "minecraft:random_spread"
+  }
+}

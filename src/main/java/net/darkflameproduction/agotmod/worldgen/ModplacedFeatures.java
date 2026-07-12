@@ -218,6 +218,7 @@ public class ModplacedFeatures {
     public static final ResourceKey<PlacedFeature> SEAGRASS_KEY = registerKey("seagrass");
     public static final ResourceKey<PlacedFeature> KELP_KEY = registerKey("kelp");
     public static final ResourceKey<PlacedFeature> QUAGMIRE_PATCH_PLACED_KEY = registerKey("quagmire");
+    public static final ResourceKey<PlacedFeature> MUD_PATCH_PLACED_KEY = registerKey("mud");
     public static final ResourceKey<PlacedFeature> FERN_KEY = registerKey("fern");
     public static final ResourceKey<PlacedFeature> LARGE_FERN_KEY = registerKey("large_fern");
     public static final ResourceKey<PlacedFeature> GRASS_KEY = registerKey("grass");
@@ -1216,16 +1217,32 @@ public class ModplacedFeatures {
         register(context, QUAGMIRE_PATCH_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.QUAGMIRE_PATCH_KEY),
                 List.of(
-                        // Try placing clay 10 times per chunk — tweak this number as needed
-                        CountPlacement.of(10),
-
-                        // Spread attempts randomly in the chunk
+                        CountPlacement.of(3),
                         InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        // ensure we only place where the block above is air or water
+                        // prevents patches from generating underground
+                        BlockPredicateFilter.forPredicate(
+                                BlockPredicate.anyOf(
+                                        BlockPredicate.matchesBlocks(new BlockPos(0, 1, 0), Blocks.AIR),
+                                        BlockPredicate.matchesBlocks(new BlockPos(0, 1, 0), Blocks.WATER)
+                                )
+                        ),
+                        BiomeFilter.biome()
+                ));
 
-                        // Allow full vertical generation, including underwater
-                        PlacementUtils.FULL_RANGE,
-
-                        // Only place in valid biomes (make sure rivers are included in biome modifiers)
+        register(context, MUD_PATCH_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.MUD_PATCH_KEY),
+                List.of(
+                        CountPlacement.of(3),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        BlockPredicateFilter.forPredicate(
+                                BlockPredicate.anyOf(
+                                        BlockPredicate.matchesBlocks(new BlockPos(0, 1, 0), Blocks.AIR),
+                                        BlockPredicate.matchesBlocks(new BlockPos(0, 1, 0), Blocks.WATER)
+                                )
+                        ),
                         BiomeFilter.biome()
                 ));
 

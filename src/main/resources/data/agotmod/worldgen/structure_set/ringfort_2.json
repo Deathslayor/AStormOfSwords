@@ -2,8 +2,8 @@
   "structures": [{ "structure": "agotmod:ringfort_2", "weight": 1 }],
   "placement": {
     "salt": 294613843,
-    "spacing": 120,
-    "separation": 20,
+    "spacing": 1200,
+    "separation": 400,
     "type": "minecraft:random_spread"
   }
 }

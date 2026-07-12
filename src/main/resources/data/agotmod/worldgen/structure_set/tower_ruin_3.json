@@ -2,8 +2,8 @@
   "structures": [{ "structure": "agotmod:tower_ruin_3", "weight": 1 }],
   "placement": {
     "salt": 787993194,
-    "spacing": 120,
-    "separation": 20,
+    "spacing": 1200,
+    "separation": 400,
     "type": "minecraft:random_spread"
   }
 }

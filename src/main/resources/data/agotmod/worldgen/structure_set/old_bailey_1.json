@@ -2,8 +2,8 @@
   "structures": [{ "structure": "agotmod:old_bailey_1", "weight": 1 }],
   "placement": {
     "salt": 272583873,
-    "spacing": 120,
-    "separation": 20,
+    "spacing": 1200,
+    "separation": 400,
     "type": "minecraft:random_spread"
   }
 }

@@ -1,0 +1,9 @@
+{
+  "structures": [{ "structure": "agotmod:bone_totem2", "weight": 1 }],
+  "placement": {
+    "salt": 573819264,
+    "spacing": 120,
+    "separation": 20,
+    "type": "minecraft:random_spread"
+  }
+}

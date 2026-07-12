@@ -455,7 +455,7 @@ public class ModBLocks {
 
     public static final DeferredBlock<Block> QUAGMIRE = registerBlock("quagmire",
             properties -> new QuagmireBlock(properties),
-            BlockBehaviour.Properties.ofFullCopy(Blocks.SNOW_BLOCK)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.MUD)
                     .sound(SoundType.MUD)
                     .friction(0.8F)
                     .speedFactor(0.1F)

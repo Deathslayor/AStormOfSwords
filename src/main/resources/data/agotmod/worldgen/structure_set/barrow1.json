@@ -1,0 +1,9 @@
+{
+  "structures": [{ "structure": "agotmod:barrow1", "weight": 1 }],
+  "placement": {
+    "salt": 183749265,
+    "spacing": 1200,
+    "separation": 400,
+    "type": "minecraft:random_spread"
+  }
+}

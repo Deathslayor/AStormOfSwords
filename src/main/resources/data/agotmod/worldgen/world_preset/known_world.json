@@ -9,27 +9,62 @@
           "default_map_biome": {
             "biomes": [{"biome": "minecraft:deep_cold_ocean", "weight": 1.0}],
             "color": "#002355",
-            "terrain_modifier": -33.0
+            "terrain_modifier": 33.0
           },
           "noise_gen_settings": "ctgen:overworld",
           "scale": 29,
           "transition": 10,
           "border_noise": 1.0,
+          "disabled_structure_sets": [
+            "minecraft:stronghold",
+            "minecraft:mineshaft",
+            "minecraft:ancient_city",
+            "minecraft:trial_chambers",
+            "minecraft:trial_ruins",
+            "minecraft:ruined_portal"
+          ],
+          "disabled_features": [
+            "minecraft:monster_room",
+            "minecraft:ice_spike",
+            "minecraft:ice_patch"
+          ],
+          "structure_overrides": [
+            "agotmod:barrow1",
+            "agotmod:barrow2",
+            "agotmod:barrow3",
+            "agotmod:barrow4",
+            "agotmod:cairn",
+            "agotmod:campsite",
+            "agotmod:collapsed_barrow1",
+            "agotmod:collapsed_barrow2",
+            "agotmod:old_bailey_1",
+            "agotmod:old_bailey_2",
+            "agotmod:ringfort_1",
+            "agotmod:ringfort_2",
+            "agotmod:ringfort_3",
+            "agotmod:tower_ruin_1",
+            "agotmod:tower_ruin_2",
+            "agotmod:tower_ruin_3",
+            "agotmod:whitehb_castle_keep_1",
+            "agotmod:whitehb_castle_keep_2",
+            "agotmod:whitehb_castle_keep_3"
+          ],
           "zones": [
             {
               "biomes": [
-                {"biome": "agotmod:skagos_bog", "weight": 0.7},
-                {"biome": "agotmod:skagos_tundra", "weight": 0.2},
-                {"biome": "agotmod:skagos_barrens", "weight": 0.1}
+                {"biome": "agotmod:skagos_bog", "weight": 0.5},
+                {"biome": "agotmod:skagos_tundra", "weight": 0.3},
+                {"biome": "agotmod:skagos_barrens", "weight": 0.2}
               ],
-              "color": "#354d32",
-              "terrain_modifier": 5.0,
+              "color": "#878f8b",
+              "terrain_modifier": 10.0,
               "blob_scale": 5000
             },
             {
               "biomes": [
-                {"biome": "agotmod:skagos_tundra", "weight": 0.7},
-                {"biome": "agotmod:skagos_barrens", "weight": 0.3}
+                {"biome": "agotmod:skagos_tundra", "weight": 0.6},
+                {"biome": "agotmod:skagos_barrens", "weight": 0.35},
+                {"biome": "agotmod:skagos_bog", "weight": 0.05}
               ],
               "color": "#69776f",
               "terrain_modifier": 5.0,
@@ -37,33 +72,28 @@
             },
             {
               "biomes": [
-                {"biome": "agotmod:skagos_tundra", "weight": 0.7},
-                {"biome": "agotmod:skagos_hills", "weight": 0.2},
-                {"biome": "agotmod:skagos_valley", "weight": 0.1}
-              ],
-              "color": "#878f8b",
-              "terrain_modifier": 12.0,
-              "blob_scale": 6000
-            },
-            {
-              "biomes": [
-                {"biome": "agotmod:skagos_hills", "weight": 0.6},
-                {"biome": "agotmod:skagos_tundra", "weight": 0.25},
-                {"biome": "agotmod:skagos_woods", "weight": 0.15}
+                {"biome": "agotmod:skagos_woods", "weight": 0.6},
+                {"biome": "agotmod:skagos_hills", "weight": 0.4}
               ],
               "color": "#909f99",
-              "terrain_modifier": 40.0,
-              "blob_scale": 6000
+              "terrain_modifier": 50.0,
+              "blob_scale": 6000,
+              "cliff_chance": 0.3,
+              "cliff_min_height": 60,
+              "cliff_jaggedness": 0.3
             },
             {
               "biomes": [
-                {"biome": "agotmod:skagos_mountains", "weight": 0.7},
-                {"biome": "agotmod:skagos_hills", "weight": 0.2},
-                {"biome": "agotmod:skagos_barrens", "weight": 0.1}
+                {"biome": "agotmod:skagos_mountains", "weight": 0.5},
+                {"biome": "agotmod:skagos_frozen_peaks", "weight": 0.3},
+                {"biome": "agotmod:skagos_valley", "weight": 0.2}
               ],
               "color": "#ccd0ce",
-              "terrain_modifier": 80.0,
-              "blob_scale": 7000
+              "terrain_modifier": 90.0,
+              "blob_scale": 7000,
+              "cliff_chance": 0.85,
+              "cliff_min_height": 50,
+              "cliff_jaggedness": 0.15
             },
             {
               "biomes": [
@@ -71,8 +101,11 @@
                 {"biome": "agotmod:skagos_mountains", "weight": 0.2}
               ],
               "color": "#ffffff",
-              "terrain_modifier": 100.0,
-              "pixel_weight": 100.0
+              "terrain_modifier": 110.0,
+              "pixel_weight": 100.0,
+              "cliff_chance": 0.9,
+              "cliff_min_height": 60,
+              "cliff_jaggedness": 0.1
             },
             {
               "biomes": [{"biome": "agotmod:skagos_river", "weight": 1.0}],
@@ -92,12 +125,21 @@
             {
               "biomes": [{"biome": "minecraft:cold_ocean", "weight": 1.0}],
               "color": "#002a67",
-              "terrain_modifier": -16.0
+              "terrain_modifier": 16.0
             },
             {
               "biomes": [{"biome": "minecraft:deep_cold_ocean", "weight": 1.0}],
               "color": "#002355",
-              "terrain_modifier": -33.0
+              "terrain_modifier": 33.0
+            },
+            {
+              "biomes": [
+                {"biome": "agotmod:skagos_bog", "weight": 0.7},
+                {"biome": "minecraft:swamp", "weight": 0.3}
+              ],
+              "color": "#354d32",
+              "terrain_modifier": 5.0,
+              "blob_scale": 5000
             }
           ]
         }

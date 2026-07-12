@@ -116,6 +116,7 @@ public class ModBiomes {
     private static void addRiverFeatures(BiomeGenerationSettings.Builder biomeBuilder, BootstrapContext<Biome> context) {
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.CLAY_PATCH_PLACED_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.QUAGMIRE_PATCH_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.MUD_PATCH_PLACED_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SEAGRASS_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.KELP_KEY);
     }
@@ -353,6 +354,7 @@ public class ModBiomes {
         // clay/quagmire patches must come first — consistent with addRiverFeatures ordering
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.CLAY_PATCH_PLACED_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.QUAGMIRE_PATCH_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.MUD_PATCH_PLACED_KEY);
         // then skagos vegetation in master order
         addSkagosVegetation(biomeBuilder, context, true, false, false, true, true, true, false);
     }
@@ -988,26 +990,27 @@ public class ModBiomes {
     public static Biome skagosBog(BootstrapContext<Biome> context) {
         MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder biomeBuilder =
-                new BiomeGenerationSettings.Builder(context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+                new BiomeGenerationSettings.Builder(
+                        context.lookup(Registries.PLACED_FEATURE),
+                        context.lookup(Registries.CONFIGURED_CARVER));
         globalOverworldGeneration(biomeBuilder);
-        // do NOT call BiomeDefaultFeatures.addSwampVegetation — it adds vanilla features
-        // in an order that conflicts with our master feature ordering
         addModOres(biomeBuilder, context);
         addSkagosBog(biomeBuilder, context);
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true)
-                .temperature(0.3f)
-                .downfall(0.9f)
+                .temperature(-0.45f)
+                .downfall(0.85f)
                 .generationSettings(biomeBuilder.build())
                 .mobSpawnSettings(spawnBuilder.build())
                 .specialEffects(new BiomeSpecialEffects.Builder()
-                        .waterColor(0x263c32)
-                        .waterFogColor(0x18251e)
-                        .skyColor(0x596b65)
-                        .grassColorOverride(0x354d32)
-                        .foliageColorOverride(0x2e422b)
-                        .fogColor(0x69756e)
+                        .waterColor(0x3d4ed1)
+                        .waterFogColor(0x0c113b)
+                        .skyColor(0x8f97c4)
+                        .grassColorOverride(0x8a9582)
+                        .foliageColorOverride(0x6e7867)
+                        .fogColor(0xc9ced7)
                         .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
+                        .ambientLoopSound(ModSounds.WINTER_WIND)
                         .backgroundMusic(Musics.createGameMusic(ModSounds.WINTER_WIND))
                         .build())
                 .build();
