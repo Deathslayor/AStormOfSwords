@@ -72,9 +72,7 @@
     [],
     [
       "minecraft:glow_lichen",
-      "agotmod:grass_block_patch",
-      "agotmod:frostfire",
-      "agotmod:liverwort"
+      "agotmod:frostfire"
     ],
     [
       "minecraft:freeze_top_layer"

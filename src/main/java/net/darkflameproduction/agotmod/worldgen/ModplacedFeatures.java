@@ -229,11 +229,15 @@ public class ModplacedFeatures {
 
 
 
-
     // Bootstrap method for initializing placed features
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
+
+
+
         // Get a holder for configured features from the context
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
+
+        //Mountains
 
         // Register the placed feature for tin ore with specified configuration and modifiers
         register(context, TIN_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_TIN_ORE),

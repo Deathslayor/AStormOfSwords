@@ -91,7 +91,8 @@
           "blob_scale": 7000,
           "cliff_chance": 0.85,
           "cliff_min_height": 50,
-          "cliff_jaggedness": 0.15
+          "cliff_jaggedness": 0.15,
+          "is_mountain": true
         },
         {
           "biomes": [
@@ -103,7 +104,8 @@
           "pixel_weight": 100.0,
           "cliff_chance": 0.9,
           "cliff_min_height": 60,
-          "cliff_jaggedness": 0.1
+          "cliff_jaggedness": 0.1,
+          "is_mountain": true
         },
         {
           "biomes": [{"biome": "agotmod:skagos_river", "weight": 1.0}],

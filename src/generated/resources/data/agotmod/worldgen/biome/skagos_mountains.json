@@ -72,16 +72,7 @@
     [],
     [
       "minecraft:glow_lichen",
-      "agotmod:sentinel_rare",
-      "agotmod:fir_rare",
-      "agotmod:pine_rare",
-      "agotmod:soldier_pine_rare",
-      "agotmod:grass_block_patch",
-      "agotmod:frostfire",
-      "agotmod:liverwort",
-      "agotmod:thistle",
-      "agotmod:thorn_bush",
-      "agotmod:sedge"
+      "agotmod:frostfire"
     ],
     [
       "minecraft:freeze_top_layer"

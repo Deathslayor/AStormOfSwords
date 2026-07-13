@@ -335,19 +335,24 @@ public class ModBiomes {
     }
 
     private static void addSkagosValley(BiomeGenerationSettings.Builder biomeBuilder, BootstrapContext<Biome> context) {
-        addSkagosVegetation(biomeBuilder, context, true, true, true, true, true, true, true);
+        // sparse trees only — valley is sheltered but cold
+        addSkagosVegetation(biomeBuilder, context,
+                true,   // includeTrees
+                false,  // denseTrees — sparse only
+                true,   // includeFlowers
+                true,   // includeGrass
+                true,   // includeSedge
+                true,   // includeFerns
+                true    // includeWeirwood
+        );
     }
 
     private static void addSkagosMountains(BiomeGenerationSettings.Builder biomeBuilder, BootstrapContext<Biome> context) {
-        addSkagosVegetation(biomeBuilder, context, true, false, false, false, true, false, false);
+        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FROSTFIRE_KEY);
     }
 
     private static void addSkagosFrozenPeaks(BiomeGenerationSettings.Builder biomeBuilder, BootstrapContext<Biome> context) {
-        // minimal vegetation — anchor with grass_block_patch so frostfire/liverwort
-        // maintain correct relative order with all other biomes
-        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.GRASS_BLOCK_PATCH_PLACED_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FROSTFIRE_KEY);
-        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.LIVERWORT_KEY);
     }
 
     private static void addSkagosBog(BiomeGenerationSettings.Builder biomeBuilder, BootstrapContext<Biome> context) {
