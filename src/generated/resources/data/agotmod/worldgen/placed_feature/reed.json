@@ -1,5 +1,5 @@
 {
-  "feature": "agotmod:grass_block_patch",
+  "feature": "agotmod:reed",
   "placement": [
     {
       "type": "minecraft:count",
@@ -7,9 +7,9 @@
     },
     {
       "type": "minecraft:noise_based_count",
-      "noise_factor": 10.0,
+      "noise_factor": 0.3,
       "noise_offset": 0.0,
-      "noise_to_count_ratio": 5
+      "noise_to_count_ratio": 3
     },
     {
       "type": "minecraft:in_square"

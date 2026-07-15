@@ -41,7 +41,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         super(output, AGoTMod.MOD_ID, existingFileHelper);
     }
 
-    // Method to register block states and models
+    // Method to register block states and models²
     @Override
     protected void registerStatesAndModels() {
 
@@ -726,8 +726,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
             simpleBlockWithItem(planksBlock.get(), cubeAll(planksBlock.get()));
 
             simpleBlockWithItem(leavesBlock.get(),
-                    models().cubeAll(name(leavesBlock.get()), blockTexture(leavesBlock.get()))
-                            .renderType("cutout"));
+                    models().withExistingParent(name(leavesBlock.get()), mcLoc("block/leaves"))
+                            .texture("all", blockTexture(leavesBlock.get()))
+                            .renderType("translucent"));
 
 
             // Sapling with cross rendering
@@ -1528,6 +1529,34 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 .texture("layer0", modLoc("block/blue_rose_bush_top"))
                 .renderType("cutout");
 
+        // First register the bottom half
+        models().withExistingParent("block/" + ModBLocks.REED.getId().getPath() + "_bottom",
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/reed_bottom"))
+                .renderType("cutout");
+
+// Then register the top half
+        models().withExistingParent("block/" + ModBLocks.REED.getId().getPath() + "_top",
+                        mcLoc("block/cross"))
+                .texture("cross", modLoc("block/reed_top"))
+                .renderType("cutout");
+
+// Register the item model (using bottom texture typically)
+        models().withExistingParent("item/" + ModBLocks.REED.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", modLoc("item/reed"))
+                .renderType("cutout");
+
+// Now register the blockstate that references both models
+        getVariantBuilder(ModBLocks.REED.get())
+                .partialState().with(TallFlowerBlock.HALF, DoubleBlockHalf.LOWER)
+                .modelForState().modelFile(models().getExistingFile(
+                        modLoc("block/" + ModBLocks.REED.getId().getPath() + "_bottom"))).addModel()
+                .partialState().with(TallFlowerBlock.HALF, DoubleBlockHalf.UPPER)
+                .modelForState().modelFile(models().getExistingFile(
+                        modLoc("block/" + ModBLocks.REED.getId().getPath() + "_top"))).addModel();
+
+
         // Ghost Grass Bottom
         models().withExistingParent("block/" + ModBLocks.GHOST_GRASS.getId().getPath(),
                         mcLoc("block/cross"))
@@ -1927,8 +1956,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     private void leavesBlock(@NotNull DeferredHolder<Block, Block> blockRegistryObject) {
         simpleBlockWithItem(blockRegistryObject.get(),
-                models().singleTexture(BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get()).getPath(), ResourceLocation.parse("minecraft:block/leaves"),
-                        "all", blockTexture(blockRegistryObject.get())).renderType("cutout"));
+                models().singleTexture(
+                                BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get()).getPath(),
+                                ResourceLocation.parse("minecraft:block/leaves"),
+                                "all", blockTexture(blockRegistryObject.get()))
+                        .renderType("translucent"));
     }
 
     private void blockItem(@NotNull DeferredHolder<Block, Block> blockRegistryObject) {

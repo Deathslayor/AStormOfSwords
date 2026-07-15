@@ -1367,7 +1367,9 @@ public class ModBLocks {
             TallFlowerBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.ROSE_BUSH), true);
 
-
+    public static final DeferredBlock<Block> REED = registerBlock("reed",
+            TallFlowerBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.ROSE_BUSH), true);
 
 
 

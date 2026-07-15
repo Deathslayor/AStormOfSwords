@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:disk",
+  "config": {
+    "half_height": 3,
+    "radius": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 5,
+      "min_inclusive": 2
+    },
+    "state_provider": {
+      "fallback": {
+        "type": "minecraft:simple_state_provider",
+        "state": {
+          "Name": "minecraft:stone"
+        }
+      },
+      "rules": []
+    },
+    "target": {
+      "type": "minecraft:matching_blocks",
+      "blocks": [
+        "minecraft:dirt",
+        "minecraft:gravel",
+        "minecraft:grass_block",
+        "minecraft:sand",
+        "minecraft:coarse_dirt"
+      ]
+    }
+  }
+}

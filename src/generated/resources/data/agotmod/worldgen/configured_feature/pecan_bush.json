@@ -1,0 +1,7 @@
+{
+  "type": "agotmod:bush",
+  "config": {
+    "leaves_block": "agotmod:pecan_leaves",
+    "wood_block": "agotmod:pecan_wood"
+  }
+}

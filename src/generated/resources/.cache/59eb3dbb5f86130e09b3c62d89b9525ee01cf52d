@@ -1,4 +1,4 @@
-// 1.21.1	2026-07-02T13:12:29.8621542	Loot Tables
+// 1.21.1	2026-07-15T16:48:15.2264245	Loot Tables
 e9bd72b39150226eea7e9f8651090f64a2f92e26 data/agotmod/loot_table/blocks/acacia_arm_chair.json
 8b853b189990b99a15ea85034eba5c841663807f data/agotmod/loot_table/blocks/acacia_chair.json
 25731f80a799127a902c25a58ea1c9ee6aa06d85 data/agotmod/loot_table/blocks/acacia_stool.json
@@ -3575,6 +3575,7 @@ b8feb108b3d35315399c2eddfa153469c64a624a data/agotmod/loot_table/blocks/red_cher
 dd5926cd30c9cf6332bd128ae1971fa1ffb9d99f data/agotmod/loot_table/blocks/red_cherry_wood_stripped.json
 4fedbd690de4b056dc447e66bdd2bd5e721d6fbc data/agotmod/loot_table/blocks/red_onion_crop.json
 c1228c52faa1fc2439253f2f12da6628278cd41d data/agotmod/loot_table/blocks/red_rose_bush.json
+173eb252f24ed234d3ab2153f68069afdc03be11 data/agotmod/loot_table/blocks/reed.json
 6c664a297bffbc4eb5ef2733a146af55dceddd57 data/agotmod/loot_table/blocks/rose.json
 2438cff9fc6eb26527a825780f83a1a5667ee672 data/agotmod/loot_table/blocks/rotten_arm_chair.json
 13d5e87efe9ce1226a251f16668c466b97b24b8f data/agotmod/loot_table/blocks/rotten_button.json

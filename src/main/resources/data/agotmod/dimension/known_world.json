@@ -10,7 +10,7 @@
       },
       "map_id": "agotmod:known_world",
       "noise_gen_settings": "ctgen:overworld",
-      "scale": 74,
+      "scale": 147,
       "transition": 10,
       "border_noise": 1.0,
       "disabled_structure_sets": [

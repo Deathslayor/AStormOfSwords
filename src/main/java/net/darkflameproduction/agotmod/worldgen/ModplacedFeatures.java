@@ -26,7 +26,9 @@ import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraft.world.level.block.Blocks;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ModplacedFeatures {
 
@@ -213,16 +215,21 @@ public class ModplacedFeatures {
     public static final ResourceKey<PlacedFeature> DUSKY_ROSE_BUSH_KEY = registerKey("dusky_rose_bush");
     public static final ResourceKey<PlacedFeature> WINTER_ROSE_BUSH_KEY = registerKey("winter_rose_bush");
     public static final ResourceKey<PlacedFeature> RED_ROSE_BUSH_KEY = registerKey("red_rose_bush");
-    public static final ResourceKey<PlacedFeature> GRASS_BLOCK_PATCH_PLACED_KEY = registerKey("grass_block_patch");
     public static final ResourceKey<PlacedFeature> CLAY_PATCH_PLACED_KEY = registerKey("clay_patch");
     public static final ResourceKey<PlacedFeature> SEAGRASS_KEY = registerKey("seagrass");
     public static final ResourceKey<PlacedFeature> KELP_KEY = registerKey("kelp");
     public static final ResourceKey<PlacedFeature> QUAGMIRE_PATCH_PLACED_KEY = registerKey("quagmire");
     public static final ResourceKey<PlacedFeature> MUD_PATCH_PLACED_KEY = registerKey("mud");
+    public static final ResourceKey<PlacedFeature> STONE_PATCH_PLACED_KEY = ResourceKey.create(
+            Registries.PLACED_FEATURE, AGoTMod.id("stone_patch"));
+    public static final ResourceKey<PlacedFeature> GRAVEL_PATCH_PLACED_KEY = ResourceKey.create(
+            Registries.PLACED_FEATURE, AGoTMod.id("gravel_patch"));
     public static final ResourceKey<PlacedFeature> FERN_KEY = registerKey("fern");
     public static final ResourceKey<PlacedFeature> LARGE_FERN_KEY = registerKey("large_fern");
     public static final ResourceKey<PlacedFeature> GRASS_KEY = registerKey("grass");
     public static final ResourceKey<PlacedFeature> TALL_GRASS_KEY = registerKey("tall_grass");
+    public static final ResourceKey<PlacedFeature> REED_KEY = registerKey("reed");
+
 
     //Custom Features
 
@@ -231,6 +238,25 @@ public class ModplacedFeatures {
 
     public static final ResourceKey<PlacedFeature> TOR_KEY = ResourceKey.create(
             Registries.PLACED_FEATURE, AGoTMod.id("tor"));
+
+    public static final Map<String, ResourceKey<PlacedFeature>> BUSH_PLACED_KEYS = new HashMap<>();
+    public static final ResourceKey<PlacedFeature> WEIRWOOD_BUSH_PLACED_KEY = ResourceKey.create(
+            Registries.PLACED_FEATURE, AGoTMod.id("weirwood_bush"));
+    public static final Map<String, ResourceKey<PlacedFeature>> VANILLA_BUSH_PLACED_KEYS = new HashMap<>();
+
+    static {
+        for (String woodType : ModBLocks.WOOD_TYPES) {
+            BUSH_PLACED_KEYS.put(woodType, ResourceKey.create(
+                    Registries.PLACED_FEATURE, AGoTMod.id(woodType + "_bush")));
+        }
+
+        for (String vanillaType : new String[]{
+                "oak", "spruce", "birch", "jungle", "acacia",
+                "dark_oak", "mangrove", "cherry"}) {
+            VANILLA_BUSH_PLACED_KEYS.put(vanillaType, ResourceKey.create(
+                    Registries.PLACED_FEATURE, AGoTMod.id(vanillaType + "_bush")));
+        }
+    }
 
 
 
@@ -260,11 +286,37 @@ public class ModplacedFeatures {
         register(context, TOR_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.TOR_KEY),
                 List.of(
-                        RarityFilter.onAverageOnceEvery(5),
+                        RarityFilter.onAverageOnceEvery(15),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                         BiomeFilter.biome()
                 ));
+
+        List<PlacementModifier> bushPlacement = List.of(
+                RarityFilter.onAverageOnceEvery(6),
+                InSquarePlacement.spread(),
+                PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                BiomeFilter.biome()
+        );
+
+        // modded wood bushes
+        for (String woodType : ModBLocks.WOOD_TYPES) {
+            register(context, BUSH_PLACED_KEYS.get(woodType),
+                    configuredFeatures.getOrThrow(ModConfiguredFeatures.BUSH_KEYS.get(woodType)),
+                    bushPlacement);
+        }
+
+        // weirwood bush
+        register(context, WEIRWOOD_BUSH_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.WEIRWOOD_BUSH_KEY),
+                bushPlacement);
+
+        // vanilla bushes
+        for (String vanillaType : ModConfiguredFeatures.VANILLA_BUSH_KEYS.keySet()) {
+            register(context, VANILLA_BUSH_PLACED_KEYS.get(vanillaType),
+                    configuredFeatures.getOrThrow(ModConfiguredFeatures.VANILLA_BUSH_KEYS.get(vanillaType)),
+                    bushPlacement);
+        }
 
         //Mountains
 
@@ -1218,18 +1270,21 @@ public class ModplacedFeatures {
                         BiomeFilter.biome()
                 ));
 
-
-        register(context, GRASS_BLOCK_PATCH_PLACED_KEY,
-                configuredFeatures.getOrThrow(ModConfiguredFeatures.GRASS_BLOCK_PATCH_KEY),
+        register(context, REED_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.REED_KEY),
                 List.of(
+                        // Reduce base count by 50%
                         CountPlacement.of(4),
-                        NoiseBasedCountPlacement.of(5, 10.0, 0.0),
+                        // Reduce noise count by 50%
+                        NoiseBasedCountPlacement.of(3, 0.3, 0.0),
                         InSquarePlacement.spread(),
-                        // Ensures placement only at or above Y=64
+                        // Keep height range the same
                         HeightRangePlacement.uniform(VerticalAnchor.absolute(65), VerticalAnchor.top()),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()
                 ));
+
+
 
         register(context, CLAY_PATCH_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.CLAY_PATCH_KEY),
@@ -1268,6 +1323,36 @@ public class ModplacedFeatures {
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.MUD_PATCH_KEY),
                 List.of(
                         CountPlacement.of(3),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        BlockPredicateFilter.forPredicate(
+                                BlockPredicate.anyOf(
+                                        BlockPredicate.matchesBlocks(new BlockPos(0, 1, 0), Blocks.AIR),
+                                        BlockPredicate.matchesBlocks(new BlockPos(0, 1, 0), Blocks.WATER)
+                                )
+                        ),
+                        BiomeFilter.biome()
+                ));
+
+        register(context, STONE_PATCH_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.STONE_PATCH_KEY),
+                List.of(
+                        CountPlacement.of(4),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        BlockPredicateFilter.forPredicate(
+                                BlockPredicate.anyOf(
+                                        BlockPredicate.matchesBlocks(new BlockPos(0, 1, 0), Blocks.AIR),
+                                        BlockPredicate.matchesBlocks(new BlockPos(0, 1, 0), Blocks.WATER)
+                                )
+                        ),
+                        BiomeFilter.biome()
+                ));
+
+        register(context, GRAVEL_PATCH_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.GRAVEL_PATCH_KEY),
+                List.of(
+                        CountPlacement.of(4),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                         BlockPredicateFilter.forPredicate(

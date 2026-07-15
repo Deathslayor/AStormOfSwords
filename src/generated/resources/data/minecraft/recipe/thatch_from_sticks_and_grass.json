@@ -8,6 +8,9 @@
       },
       {
         "item": "minecraft:short_grass"
+      },
+      {
+        "item": "agotmod:reed"
       }
     ]
   },

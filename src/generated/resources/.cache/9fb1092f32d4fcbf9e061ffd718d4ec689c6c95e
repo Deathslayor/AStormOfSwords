@@ -1,4 +1,4 @@
-// 1.21.1	2026-05-30T17:11:04.3659437	Recipes
+// 1.21.1	2026-07-15T16:48:15.4075446	Recipes
 7b2ca6f0110f3b8eec6df36c94100dfa1c11daf3 data/agotmod/advancement/recipes/building_blocks/acacia_wall.json
 822a5dc54b4509f28c5659a0e3c6c3f5cfd1834a data/agotmod/advancement/recipes/building_blocks/alder_slabs.json
 a169551e82dfb675b8952441658c421d625418b2 data/agotmod/advancement/recipes/building_blocks/alder_stairs.json
@@ -13635,7 +13635,7 @@ a0e59fc85222abe194bcdb57720285f7bd16fc9b data/minecraft/recipe/sycamore_sign.jso
 cc4ea24f951b711289528c388f624e42b3a14daa data/minecraft/recipe/sycamore_table.json
 2e162724ef7ba41c9afe56f84d02f3bc209c5a39 data/minecraft/recipe/tansy_to_yellow_dye.json
 b0b82555f648a2e4ece7d9bef94ff98cec5c04e0 data/minecraft/recipe/targaryen_decorated_banner.json
-dd51774987c248bd32714ec83a866f465e2c5c92 data/minecraft/recipe/thatch_from_sticks_and_grass.json
+09c9cfcb35e5c995783aea27b69e647f3c5614b6 data/minecraft/recipe/thatch_from_sticks_and_grass.json
 12d1d4d51a73cabe61e9906d37cf456d530bc9e0 data/minecraft/recipe/thenn_levy_boots_smithing.json
 7ef19aab10dedab5c645c7f67cae03e70f5b1e14 data/minecraft/recipe/thenn_levy_chestplate_smithing.json
 7a801735b61d6e64b854f793a30115570aa993d4 data/minecraft/recipe/thenn_levy_helmet_smithing.json

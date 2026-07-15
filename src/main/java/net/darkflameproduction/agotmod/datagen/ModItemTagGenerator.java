@@ -296,7 +296,11 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModBLocks.WHITE_ROSE_BUSH.get().asItem())
                 .add(ModBLocks.DUSKY_ROSE_BUSH.get().asItem())
                 .add(ModBLocks.WINTER_ROSE_BUSH.get().asItem())
-                .add(ModBLocks.RED_ROSE_BUSH.get().asItem());
+                .add(ModBLocks.RED_ROSE_BUSH.get().asItem())
+                .add(ModBLocks.REED.get().asItem())
+
+        ;
+
 
         this.tag(ItemTags.MEAT)
                 // Meats and sausages

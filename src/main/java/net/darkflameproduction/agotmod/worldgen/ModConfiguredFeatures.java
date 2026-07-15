@@ -2,8 +2,10 @@ package net.darkflameproduction.agotmod.worldgen;
 
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.block.ModBLocks;
+import net.darkflameproduction.agotmod.worldgen.feature.BushFeature;
 import net.darkflameproduction.agotmod.worldgen.feature.StonePileFeature;
 import net.darkflameproduction.agotmod.worldgen.feature.TorFeature;
+import net.darkflameproduction.agotmod.worldgen.feature.configuration.BushConfiguration;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
@@ -11,6 +13,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
@@ -31,7 +34,9 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ModConfiguredFeatures {
     // Define a ResourceKey for the configured feature of overworld tin ore
@@ -223,16 +228,21 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> DUSKY_ROSE_BUSH_KEY = registerKey("dusky_rose_bush");
     public static final ResourceKey<ConfiguredFeature<?, ?>> WINTER_ROSE_BUSH_KEY = registerKey("winter_rose_bush");
     public static final ResourceKey<ConfiguredFeature<?, ?>> RED_ROSE_BUSH_KEY = registerKey("red_rose_bush");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> GRASS_BLOCK_PATCH_KEY = registerKey("grass_block_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> CLAY_PATCH_KEY = registerKey("clay_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SEAGRASS_KEY = registerKey("seagrass");
     public static final ResourceKey<ConfiguredFeature<?, ?>> KELP_KEY = registerKey("kelp");
     public static final ResourceKey<ConfiguredFeature<?, ?>> QUAGMIRE_PATCH_KEY = registerKey("quagmire");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MUD_PATCH_KEY = registerKey("mud");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> STONE_PATCH_KEY = ResourceKey.create(
+            Registries.CONFIGURED_FEATURE, AGoTMod.id("stone_patch"));
+    public static final ResourceKey<ConfiguredFeature<?, ?>> GRAVEL_PATCH_KEY = ResourceKey.create(
+            Registries.CONFIGURED_FEATURE, AGoTMod.id("gravel_patch"));
     public static final ResourceKey<ConfiguredFeature<?, ?>> FERN_KEY = registerKey("fern");
     public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_FERN_KEY = registerKey("large_fern");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GRASS_KEY = registerKey("grass");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TALL_GRASS_KEY = registerKey("tall_grass");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> REED_KEY = registerKey("reed");
+
 
     //curstom features
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> STONE_PILE =
@@ -249,7 +259,33 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> TOR_KEY = ResourceKey.create(
             Registries.CONFIGURED_FEATURE, AGoTMod.id("tor"));
 
+    public static final DeferredHolder<Feature<?>, Feature<BushConfiguration>> BUSH =
+            FEATURES.register("bush",
+                    () -> new BushFeature(BushConfiguration.CODEC));
 
+    // bush keys — one per wood type
+    public static final Map<String, ResourceKey<ConfiguredFeature<?, ?>>> BUSH_KEYS = new HashMap<>();
+
+    // weirwood bush key — separate since it uses dedicated block fields
+    public static final ResourceKey<ConfiguredFeature<?, ?>> WEIRWOOD_BUSH_KEY = ResourceKey.create(
+            Registries.CONFIGURED_FEATURE, AGoTMod.id("weirwood_bush"));
+
+    // vanilla bush keys
+    public static final Map<String, ResourceKey<ConfiguredFeature<?, ?>>> VANILLA_BUSH_KEYS = new HashMap<>();
+
+    static {
+        for (String woodType : ModBLocks.WOOD_TYPES) {
+            BUSH_KEYS.put(woodType, ResourceKey.create(
+                    Registries.CONFIGURED_FEATURE, AGoTMod.id(woodType + "_bush")));
+        }
+
+        for (String vanillaType : new String[]{
+                "oak", "spruce", "birch", "jungle", "acacia",
+                "dark_oak", "mangrove", "cherry"}) {
+            VANILLA_BUSH_KEYS.put(vanillaType, ResourceKey.create(
+                    Registries.CONFIGURED_FEATURE, AGoTMod.id(vanillaType + "_bush")));
+        }
+    }
 
     // Bootstrap method for initializing configured features
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
@@ -263,6 +299,54 @@ public class ModConfiguredFeatures {
         register(context, TOR_KEY,
                 ModConfiguredFeatures.TOR.get(),
                 NoneFeatureConfiguration.INSTANCE);
+
+        for (String woodType : ModBLocks.WOOD_TYPES) {
+            register(context, BUSH_KEYS.get(woodType),
+                    ModConfiguredFeatures.BUSH.get(),
+                    new BushConfiguration(
+                            ModBLocks.WOODS.get(woodType).get(),
+                            ModBLocks.LEAVES.get(woodType).get()
+                    ));
+        }
+
+        // weirwood bush
+        register(context, WEIRWOOD_BUSH_KEY,
+                ModConfiguredFeatures.BUSH.get(),
+                new BushConfiguration(
+                        ModBLocks.WEIRWOOD_WOOD.get(),
+                        ModBLocks.WEIRWOOD_LEAVES.get()
+                ));
+
+        // vanilla bushes
+        Map<String, Block> vanillaWoods = Map.of(
+                "oak", Blocks.OAK_WOOD,
+                "spruce", Blocks.SPRUCE_WOOD,
+                "birch", Blocks.BIRCH_WOOD,
+                "jungle", Blocks.JUNGLE_WOOD,
+                "acacia", Blocks.ACACIA_WOOD,
+                "dark_oak", Blocks.DARK_OAK_WOOD,
+                "mangrove", Blocks.MANGROVE_WOOD,
+                "cherry", Blocks.CHERRY_WOOD
+        );
+        Map<String, Block> vanillaLeaves = Map.of(
+                "oak", Blocks.OAK_LEAVES,
+                "spruce", Blocks.SPRUCE_LEAVES,
+                "birch", Blocks.BIRCH_LEAVES,
+                "jungle", Blocks.JUNGLE_LEAVES,
+                "acacia", Blocks.ACACIA_LEAVES,
+                "dark_oak", Blocks.DARK_OAK_LEAVES,
+                "mangrove", Blocks.MANGROVE_LEAVES,
+                "cherry", Blocks.CHERRY_LEAVES
+        );
+
+        for (String vanillaType : VANILLA_BUSH_KEYS.keySet()) {
+            register(context, VANILLA_BUSH_KEYS.get(vanillaType),
+                    ModConfiguredFeatures.BUSH.get(),
+                    new BushConfiguration(
+                            vanillaWoods.get(vanillaType),
+                            vanillaLeaves.get(vanillaType)
+                    ));
+        }
 
         // Define rule tests for replaceable blocks in different dimensions
         RuleTest stoneReplaceables = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
@@ -1964,22 +2048,19 @@ public class ModConfiguredFeatures {
                         )
                 ));
 
-        register(context, GRASS_BLOCK_PATCH_KEY, Feature.DISK,
-                new DiskConfiguration(
-                        RuleBasedBlockStateProvider.simple(Blocks.GRASS_BLOCK),  // The block to place (grass instead of clay)
-                        BlockPredicate.matchesBlocks(
-                                Blocks.DIRT,
-                                Blocks.CLAY,
-                                Blocks.GRAVEL,
-                                Blocks.SAND,
-                                Blocks.PODZOL,
-                                Blocks.MUD,
-                                Blocks.STONE
-                        ),  // Blocks that can be replaced (same as vanilla clay)
-                        UniformInt.of(3, 6),  // Random radius between 2-3 blocks (same as vanilla)
-                        2  // Height (same as vanilla)
-                )
-        );
+        register(context, REED_KEY, Feature.FLOWER,
+                new RandomPatchConfiguration(
+                        64,  // tries
+                        16,   // xz spread
+                        2,   // y spread
+                        PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
+                                new SimpleBlockConfiguration(
+                                        BlockStateProvider.simple(ModBLocks.REED.get())
+                                )
+                        )
+                ));
+
+
 
         register(context, CLAY_PATCH_KEY, Feature.DISK,
                 new DiskConfiguration(
@@ -2024,6 +2105,36 @@ public class ModConfiguredFeatures {
                         ),
                         UniformInt.of(3, 6),
                         4
+                )
+        );
+
+        register(context, STONE_PATCH_KEY, Feature.DISK,
+                new DiskConfiguration(
+                        RuleBasedBlockStateProvider.simple(Blocks.STONE),
+                        BlockPredicate.matchesBlocks(
+                                Blocks.DIRT,
+                                Blocks.GRAVEL,
+                                Blocks.GRASS_BLOCK,
+                                Blocks.SAND,
+                                Blocks.COARSE_DIRT
+                        ),
+                        UniformInt.of(2, 5),
+                        3
+                )
+        );
+
+        register(context, GRAVEL_PATCH_KEY, Feature.DISK,
+                new DiskConfiguration(
+                        RuleBasedBlockStateProvider.simple(Blocks.GRAVEL),
+                        BlockPredicate.matchesBlocks(
+                                Blocks.DIRT,
+                                Blocks.STONE,
+                                Blocks.GRASS_BLOCK,
+                                Blocks.SAND,
+                                Blocks.COARSE_DIRT
+                        ),
+                        UniformInt.of(2, 5),
+                        3
                 )
         );
 

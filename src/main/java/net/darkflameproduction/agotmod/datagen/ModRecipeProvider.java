@@ -655,7 +655,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern(" OOO ")
                 .pattern(" OOO ")
                 .pattern(" OOO ")
-                .define('O', Ingredient.of(Items.STICK, Items.SHORT_GRASS)) // Your custom hammer
+                .define('O', Ingredient.of(Items.STICK, Items.SHORT_GRASS, ModBLocks.REED)) // Your custom hammer
                 .unlockedBy(getHasName(Items.STICK), has(Items.STICK))
                 .save(this.output, "thatch_from_sticks_and_grass");
 

@@ -1,0 +1,7 @@
+{
+  "type": "agotmod:bush",
+  "config": {
+    "leaves_block": "agotmod:yew_leaves",
+    "wood_block": "agotmod:yew_wood"
+  }
+}

@@ -135,6 +135,8 @@ public class ModCreativeNaturalBlocks {
                                 // Miscellaneous
                                 pOutput.accept(ModBLocks.GOATHEAD.get());
                                 pOutput.accept(ModBLocks.GHOST_GRASS_BLOCK.get());
+                                pOutput.accept(ModBLocks.REED.get());
+
 
                                 // Weirwood
                                 pOutput.accept(ModBLocks.WEIRWOOD_LOG.get());

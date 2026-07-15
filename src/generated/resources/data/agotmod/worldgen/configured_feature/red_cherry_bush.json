@@ -1,0 +1,7 @@
+{
+  "type": "agotmod:bush",
+  "config": {
+    "leaves_block": "agotmod:red_cherry_leaves",
+    "wood_block": "agotmod:red_cherry_wood"
+  }
+}

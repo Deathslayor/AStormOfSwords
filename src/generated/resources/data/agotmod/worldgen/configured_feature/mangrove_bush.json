@@ -1,0 +1,7 @@
+{
+  "type": "agotmod:bush",
+  "config": {
+    "leaves_block": "minecraft:mangrove_leaves",
+    "wood_block": "minecraft:mangrove_wood"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "type": "agotmod:bush",
+  "config": {
+    "leaves_block": "agotmod:aspen_leaves",
+    "wood_block": "agotmod:aspen_wood"
+  }
+}

@@ -12,7 +12,7 @@
             "terrain_modifier": 33.0
           },
           "noise_gen_settings": "ctgen:overworld",
-          "scale": 74,
+          "scale": 147,
           "transition": 10,
           "border_noise": 1.0,
           "disabled_structure_sets": [
@@ -121,7 +121,7 @@
                 {"biome": "agotmod:skagos_barrens", "weight": 0.2}
               ],
               "color": "#878f8b",
-              "terrain_modifier": 10.0,
+              "terrain_modifier": 20.0,
               "blob_scale": 5000
             },
             {
@@ -131,7 +131,7 @@
                 {"biome": "agotmod:skagos_bog", "weight": 0.05}
               ],
               "color": "#69776f",
-              "terrain_modifier": 5.0,
+              "terrain_modifier": 15.0,
               "blob_scale": 5000
             },
             {

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/leaves",
-  "render_type": "minecraft:cutout",
+  "render_type": "minecraft:translucent",
   "textures": {
     "all": "agotmod:block/weirwood_leaves"
   }

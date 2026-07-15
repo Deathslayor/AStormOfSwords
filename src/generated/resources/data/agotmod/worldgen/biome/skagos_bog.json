@@ -87,7 +87,8 @@
       "agotmod:grass",
       "agotmod:tall_grass",
       "agotmod:fern",
-      "agotmod:large_fern"
+      "agotmod:large_fern",
+      "agotmod:reed"
     ],
     [
       "minecraft:freeze_top_layer"

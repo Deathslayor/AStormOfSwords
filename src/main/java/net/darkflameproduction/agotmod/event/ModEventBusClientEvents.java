@@ -17,10 +17,12 @@ import net.darkflameproduction.agotmod.entity.client.wolves.Direwolf_Entity_Rend
 import net.darkflameproduction.agotmod.entity.client.npc.Peasant_Renderer;
 import net.darkflameproduction.agotmod.event.KeyMappings.KeyBindings;
 import net.darkflameproduction.agotmod.item.ModItems;
+import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -69,19 +71,34 @@ public class ModEventBusClientEvents {
 
     @SubscribeEvent
     public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
+        // existing wattle and daub colors
         for (Map.Entry<String, Integer> entry : ModBLocks.WATTLE_DAUB_COLORS.entrySet()) {
             int color = entry.getValue();
             String colorName = entry.getKey();
 
-            // plain
             event.register((state, level, pos, tintIndex) -> tintIndex == 0 ? color : 0xFFFFFFFF,
                     ModBLocks.WATTLE_AND_DAUB_PLAIN.get(colorName).get());
 
-            // variants
             for (DeferredBlock<Block> block : ModBLocks.WATTLE_AND_DAUB_VARIANTS.get(colorName).values()) {
                 event.register((state, level, pos, tintIndex) -> tintIndex == 0 ? color : 0xFFFFFFFF,
                         block.get());
             }
+        }
+
+        java.util.Set<String> excludedLeaves = java.util.Set.of(
+                "black_cherry", "blackbark", "white_cherry", "blackthorn", "ash", "ironwood", "nightwood", "pine"
+                , "soldier_pine", "blue_soldier_pine", "hawthorn", "fir", "sentinel"
+        );
+
+        for (String woodType : ModBLocks.WOOD_TYPES) {
+            if (excludedLeaves.contains(woodType)) continue;
+            event.register(
+                    (state, level, pos, tintIndex) ->
+                            level != null && pos != null
+                                    ? BiomeColors.getAverageFoliageColor(level, pos)
+                                    : FoliageColor.getDefaultColor(),
+                    ModBLocks.LEAVES.get(woodType).get()
+            );
         }
     }
 

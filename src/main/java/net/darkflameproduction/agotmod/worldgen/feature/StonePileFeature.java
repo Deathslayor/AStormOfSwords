@@ -5,9 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
@@ -45,6 +43,7 @@ public class StonePileFeature extends Feature<NoneFeatureConfiguration> {
                 || state.is(Blocks.SNOW)
                 || state.is(Blocks.SNOW_BLOCK);
     }
+
     @Override
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
         WorldGenLevel level = context.level();
@@ -63,46 +62,91 @@ public class StonePileFeature extends Feature<NoneFeatureConfiguration> {
 
         if (surfaceY <= level.getMinBuildHeight()) return false;
 
-        // 50% stone, 25% andesite, 12.5% diorite, 12.5% granite
-        BlockState boulderBlock;
-        BlockState boulderSlab;
-        int stoneType = random.nextInt(4);
-        switch (stoneType) {
-            case 0, 1 -> {
-                boulderBlock = Blocks.STONE.defaultBlockState();
-                boulderSlab = Blocks.STONE_SLAB.defaultBlockState()
-                        .setValue(SlabBlock.TYPE, SlabType.BOTTOM);
-            }
-            case 2 -> {
-                boulderBlock = Blocks.ANDESITE.defaultBlockState();
-                boulderSlab = Blocks.ANDESITE_SLAB.defaultBlockState()
-                        .setValue(SlabBlock.TYPE, SlabType.BOTTOM);
-            }
-            default -> {
-                if (random.nextBoolean()) {
-                    boulderBlock = Blocks.DIORITE.defaultBlockState();
-                    boulderSlab = Blocks.DIORITE_SLAB.defaultBlockState()
-                            .setValue(SlabBlock.TYPE, SlabType.BOTTOM);
-                } else {
-                    boulderBlock = Blocks.GRANITE.defaultBlockState();
-                    boulderSlab = Blocks.GRANITE_SLAB.defaultBlockState()
-                            .setValue(SlabBlock.TYPE, SlabType.BOTTOM);
+        // small boulder — much smaller than tor
+        // always wider than tall, max 3-4 blocks above ground
+        int radiusY = 1 + random.nextInt(3);           // 1-3
+        int minRadius = (int)(radiusY * 1.5);
+        int radiusX = Math.min(6, Math.max(minRadius,
+                minRadius + random.nextInt(Math.max(1, 6 - minRadius))));
+        int radiusZ = Math.min(6, Math.max(minRadius,
+                minRadius + random.nextInt(Math.max(1, 6 - minRadius))));
+        int halfY = Math.max(1, radiusY / 2);
+
+        // scan footprint for trees
+        for (int dx = -radiusX; dx <= radiusX; dx++) {
+            for (int dz = -radiusZ; dz <= radiusZ; dz++) {
+                int worldX = origin.getX() + dx;
+                int worldZ = origin.getZ() + dz;
+                for (int checkY = surfaceY; checkY <= surfaceY + radiusY + 3; checkY++) {
+                    pos.set(worldX, checkY, worldZ);
+                    BlockState cs = level.getBlockState(pos);
+                    if (cs.is(BlockTags.LOGS) || cs.is(BlockTags.LEAVES)) {
+                        return false;
+                    }
                 }
             }
         }
 
-        int radiusX = 2 + random.nextInt(3);
-        int radiusY = 2 + random.nextInt(2);
-        int radiusZ = 2 + random.nextInt(3);
+        // 50% stone, 25% andesite, 12.5% diorite, 12.5% granite
+        BlockState boulderBlock;
+        int stoneType = random.nextInt(4);
+        switch (stoneType) {
+            case 0, 1 -> boulderBlock = Blocks.STONE.defaultBlockState();
+            case 2 -> boulderBlock = Blocks.ANDESITE.defaultBlockState();
+            default -> {
+                if (random.nextBoolean()) {
+                    boulderBlock = Blocks.DIORITE.defaultBlockState();
+                } else {
+                    boulderBlock = Blocks.GRANITE.defaultBlockState();
+                }
+            }
+        }
 
-        long boulderSeed = origin.getX() * 341873128712L ^ origin.getZ() * 132897987541L;
+        long pileSeed = origin.getX() * 341873128712L ^ origin.getZ() * 132897987541L;
 
+        // offset peak slightly from center for natural look
+        double peakOffsetX = (((pileSeed >> 8) & 0xFF) - 128) / 128.0 * 0.3;
+        double peakOffsetZ = (((pileSeed >> 16) & 0xFF) - 128) / 128.0 * 0.3;
+
+        // place boulder using same dome logic as tor
         for (int dx = -radiusX; dx <= radiusX; dx++) {
             for (int dz = -radiusZ; dz <= radiusZ; dz++) {
                 int worldX = origin.getX() + dx;
                 int worldZ = origin.getZ() + dz;
 
-                // find actual surface at this X/Z column
+                double nx = (double) dx / radiusX;
+                double nz = (double) dz / radiusZ;
+                double horizDist = Math.sqrt(nx * nx + nz * nz);
+                if (horizDist > 1.0) continue;
+
+                // shape noise for irregular outline
+                double shapeNoise =
+                        Math.sin(dx * 0.7 + pileSeed * 0.00001) * 0.08
+                                + Math.sin(dz * 0.8 + pileSeed * 0.00002) * 0.08
+                                + Math.sin((dx + dz) * 0.5 + pileSeed * 0.00004) * 0.06
+                                + Math.sin((dx - dz) * 0.6 + pileSeed * 0.00005) * 0.06;
+
+                if (horizDist + shapeNoise > 1.0) continue;
+
+                // distance from offset peak
+                double peakNx = nx - peakOffsetX;
+                double peakNz = nz - peakOffsetZ;
+                double peakDist = Math.min(1.0,
+                        Math.sqrt(peakNx * peakNx + peakNz * peakNz));
+
+                // height warp for natural lopsided shape
+                double heightWarp =
+                        Math.sin(dx * 0.3 + pileSeed * 0.00009) * 0.2
+                                + Math.sin(dz * 0.25 + pileSeed * 0.00010) * 0.2;
+
+                double heightProfile = Math.cos(peakDist * Math.PI * 0.5) + heightWarp;
+                int colMaxHeight = (int)(radiusY * Math.max(0.0,
+                        Math.min(1.0, heightProfile)));
+
+                // skip columns with no above-ground height
+                if (colMaxHeight <= 0) continue;
+
+                // find actual surface at this column
                 int localSurface = surfaceY + radiusY + 1;
                 pos.set(worldX, localSurface, worldZ);
                 while (localSurface > level.getMinBuildHeight()
@@ -111,111 +155,19 @@ public class StonePileFeature extends Feature<NoneFeatureConfiguration> {
                     pos.set(worldX, localSurface, worldZ);
                 }
 
-                // skip column if tree is above
-                boolean hasTreeAbove = false;
-                for (int checkY = localSurface + 1; checkY <= localSurface + radiusY + 4; checkY++) {
-                    pos.set(worldX, checkY, worldZ);
-                    BlockState checkState = level.getBlockState(pos);
-                    if (checkState.is(BlockTags.LOGS) || checkState.is(BlockTags.LEAVES)) {
-                        hasTreeAbove = true;
-                        break;
-                    }
-                }
-                if (hasTreeAbove) continue;
+                // underground depth proportional to above-ground height
+                int colUnderground = Math.max(1,
+                        (colMaxHeight * halfY) / Math.max(1, radiusY));
 
-                boolean placedAnyInColumn = false;
-
-                for (int dy = -radiusY; dy <= radiusY; dy++) {
+                for (int dy = -colUnderground; dy <= colMaxHeight; dy++) {
                     int worldY = localSurface + dy;
-
                     if (worldY <= level.getMinBuildHeight()
                             || worldY >= level.getMaxBuildHeight()) continue;
-
-                    double nx = (double) dx / radiusX;
-                    double ny = (double) dy / radiusY;
-                    double nz = (double) dz / radiusZ;
-
-                    double dist = nx * nx + ny * ny + nz * nz;
-
-                    double shapeNoise =
-                            Math.sin(dx * 1.2 + boulderSeed * 0.00001) * 0.06
-                                    + Math.sin(dz * 1.4 + boulderSeed * 0.00002) * 0.06
-                                    + Math.sin(dy * 1.6 + boulderSeed * 0.00003) * 0.05
-                                    + Math.sin((dx + dz) * 0.9 + boulderSeed * 0.00004) * 0.04
-                                    + Math.sin((dx - dz) * 1.0 + boulderSeed * 0.00005) * 0.04;
-
-                    boolean insideEllipsoid = dist + shapeNoise <= 1.0;
-
-                    if (!insideEllipsoid) {
-                        if (placedAnyInColumn && dy > 0) break;
-                        continue;
-                    }
-
                     pos.set(worldX, worldY, worldZ);
-                    BlockState existing = level.getBlockState(pos);
-                    if (!isReplaceable(existing)) {
-                        placedAnyInColumn = true;
-                        continue;
-                    }
-
-                    level.setBlock(pos, boulderBlock, 2);
-                    placedAnyInColumn = true;
-
-                    // only consider slab if above ground
-                    if (dy > 0) {
-                        double nextNy = (double)(dy + 1) / radiusY;
-                        double nextDist = nx * nx + nextNy * nextNy + nz * nz;
-                        double nextNoise =
-                                Math.sin(dx * 1.2 + boulderSeed * 0.00001) * 0.06
-                                        + Math.sin(dz * 1.4 + boulderSeed * 0.00002) * 0.06
-                                        + Math.sin((dy + 1) * 1.6 + boulderSeed * 0.00003) * 0.05
-                                        + Math.sin((dx + dz) * 0.9 + boulderSeed * 0.00004) * 0.04
-                                        + Math.sin((dx - dz) * 1.0 + boulderSeed * 0.00005) * 0.04;
-
-                        boolean nextIsOutside = nextDist + nextNoise > 1.0;
-
-                        if (nextIsOutside && random.nextInt(5) == 0) {
-                            pos.set(worldX, worldY + 1, worldZ);
-                            BlockState above = level.getBlockState(pos);
-                            // never place slab on top of another slab
-                            boolean belowIsSlab = level.getBlockState(
-                                    new BlockPos(worldX, worldY, worldZ)).getBlock() instanceof SlabBlock;
-                            if ((above.isAir() || isVegetation(above)) && !belowIsSlab) {
-                                level.setBlock(pos, boulderSlab, 2);
-                            }
-                            break;
-                        }
+                    if (isReplaceable(level.getBlockState(pos))) {
+                        level.setBlock(pos, boulderBlock, 2);
                     }
                 }
-            }
-        }
-
-        // scatter 0-2 lone slabs around base — only on solid non-slab ground
-        int scatterCount = random.nextInt(3);
-        for (int i = 0; i < scatterCount; i++) {
-            double angle = random.nextDouble() * Math.PI * 2;
-            int scatterDist = radiusX + 1 + random.nextInt(3);
-            int scatterX = origin.getX() + (int)(Math.cos(angle) * scatterDist);
-            int scatterZ = origin.getZ() + (int)(Math.sin(angle) * scatterDist);
-
-            int scatterY = surfaceY + 3;
-            pos.set(scatterX, scatterY, scatterZ);
-            while (scatterY > level.getMinBuildHeight() && level.getBlockState(pos).isAir()) {
-                scatterY--;
-                pos.set(scatterX, scatterY, scatterZ);
-            }
-
-            BlockState surfaceBlock = level.getBlockState(pos);
-            if (surfaceBlock.isAir() || isVegetation(surfaceBlock)) continue;
-
-            // never place slab on top of another slab
-            boolean surfaceIsSlab = surfaceBlock.getBlock() instanceof SlabBlock;
-            if (surfaceIsSlab) continue;
-
-            pos.set(scatterX, scatterY + 1, scatterZ);
-            BlockState above = level.getBlockState(pos);
-            if (above.isAir() || isVegetation(above)) {
-                level.setBlock(pos, boulderSlab, 2);
             }
         }
 

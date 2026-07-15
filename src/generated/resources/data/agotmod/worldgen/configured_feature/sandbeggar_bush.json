@@ -1,0 +1,7 @@
+{
+  "type": "agotmod:bush",
+  "config": {
+    "leaves_block": "agotmod:sandbeggar_leaves",
+    "wood_block": "agotmod:sandbeggar_wood"
+  }
+}

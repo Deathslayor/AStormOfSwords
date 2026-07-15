@@ -1,0 +1,7 @@
+{
+  "type": "agotmod:bush",
+  "config": {
+    "leaves_block": "minecraft:spruce_leaves",
+    "wood_block": "minecraft:spruce_wood"
+  }
+}
