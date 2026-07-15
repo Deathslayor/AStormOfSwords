@@ -2,9 +2,10 @@
   "carvers": {},
   "downfall": 0.8,
   "effects": {
-    "fog_color": 6523501,
-    "foliage_color": 2574111,
-    "grass_color": 2574111,
+    "ambient_sound": "agotmod:forest_wind",
+    "fog_color": 10989019,
+    "foliage_color": 1060112,
+    "grass_color": 1193234,
     "mood_sound": {
       "block_search_extent": 8,
       "offset": 2.0,
@@ -17,9 +18,9 @@
       "replace_current_music": false,
       "sound": "agotmod:winter_wind"
     },
-    "sky_color": 3166779,
-    "water_color": 2703384,
-    "water_fog_color": 2036488
+    "sky_color": 10989019,
+    "water_color": 4017873,
+    "water_fog_color": 790843
   },
   "features": [
     [],
@@ -71,15 +72,27 @@
     [],
     [
       "minecraft:glow_lichen",
-      "minecraft:trees_mangrove",
-      "minecraft:patch_grass_normal",
-      "minecraft:patch_dead_bush",
-      "minecraft:patch_waterlily",
-      "agotmod:clay_patch",
-      "agotmod:quagmire",
-      "agotmod:mud",
-      "agotmod:seagrass",
-      "agotmod:kelp"
+      "agotmod:ironwood",
+      "agotmod:sentinel",
+      "agotmod:fir",
+      "agotmod:pine",
+      "agotmod:soldier_pine",
+      "agotmod:oak_rare",
+      "agotmod:hawthorn_rare",
+      "agotmod:forget_me_not",
+      "agotmod:frostfire",
+      "agotmod:liverwort",
+      "agotmod:lungwort",
+      "agotmod:pennyroyal",
+      "agotmod:red_rose_bush",
+      "agotmod:thistle",
+      "agotmod:thorn_bush",
+      "agotmod:winter_rose_bush",
+      "agotmod:sedge",
+      "agotmod:grass",
+      "agotmod:tall_grass",
+      "agotmod:fern",
+      "agotmod:large_fern"
     ],
     [
       "minecraft:freeze_top_layer"
@@ -97,5 +110,5 @@
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": 0.5
+  "temperature": 0.2
 }

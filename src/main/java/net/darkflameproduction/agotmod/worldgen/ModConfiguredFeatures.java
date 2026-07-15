@@ -2,6 +2,8 @@ package net.darkflameproduction.agotmod.worldgen;
 
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.block.ModBLocks;
+import net.darkflameproduction.agotmod.worldgen.feature.StonePileFeature;
+import net.darkflameproduction.agotmod.worldgen.feature.TorFeature;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
@@ -232,11 +234,35 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> GRASS_KEY = registerKey("grass");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TALL_GRASS_KEY = registerKey("tall_grass");
 
+    //curstom features
+    public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> STONE_PILE =
+            FEATURES.register("stone_pile",
+                    () -> new StonePileFeature(NoneFeatureConfiguration.CODEC));
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> STONE_PILE_KEY = ResourceKey.create(
+            Registries.CONFIGURED_FEATURE, AGoTMod.id("stone_pile"));
+
+    public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> TOR =
+            FEATURES.register("tor",
+                    () -> new TorFeature(NoneFeatureConfiguration.CODEC));
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TOR_KEY = ResourceKey.create(
+            Registries.CONFIGURED_FEATURE, AGoTMod.id("tor"));
 
 
 
     // Bootstrap method for initializing configured features
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
+
+        // Custom Features
+
+        register(context, STONE_PILE_KEY,
+                ModConfiguredFeatures.STONE_PILE.value(),
+                NoneFeatureConfiguration.INSTANCE);
+
+        register(context, TOR_KEY,
+                ModConfiguredFeatures.TOR.get(),
+                NoneFeatureConfiguration.INSTANCE);
 
         // Define rule tests for replaceable blocks in different dimensions
         RuleTest stoneReplaceables = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);

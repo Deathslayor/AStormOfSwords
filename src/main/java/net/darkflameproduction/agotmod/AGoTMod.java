@@ -86,6 +86,9 @@ public class AGoTMod {
         ModMenuTypes.register(modEventBus);
         BannerPatterns.register(modEventBus);
 
+        //Custom Features under this
+        ModConfiguredFeatures.FEATURES.register(modEventBus);
+
         modEventBus.addListener(this::commonSetup);
         NeoForge.EVENT_BUS.register(this);
         NeoForge.EVENT_BUS.addListener(ModVillagerTrades::onVillagerInteract);

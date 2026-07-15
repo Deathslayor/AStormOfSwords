@@ -1,7 +1,7 @@
 {
   "structures": [{ "structure": "agotmod:collapsed_barrow1", "weight": 1 }],
   "placement": {
-    "salt": 837261948,
+    "salt": 514908372,
     "spacing": 1200,
     "separation": 400,
     "type": "minecraft:random_spread"

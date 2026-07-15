@@ -4,8 +4,8 @@
   "effects": {
     "ambient_sound": "agotmod:forest_wind",
     "fog_color": 10989019,
-    "foliage_color": 4360777,
-    "grass_color": 4360777,
+    "foliage_color": 1851419,
+    "grass_color": 2181409,
     "mood_sound": {
       "block_search_extent": 8,
       "offset": 2.0,
@@ -74,16 +74,13 @@
       "minecraft:glow_lichen",
       "agotmod:ash",
       "agotmod:chestnut",
-      "agotmod:ironwood",
-      "agotmod:sentinel",
-      "agotmod:fir",
-      "agotmod:pine",
-      "agotmod:soldier_pine",
-      "agotmod:weirwood",
+      "agotmod:ironwood_rare",
+      "agotmod:sentinel_rare",
+      "agotmod:fir_rare",
+      "agotmod:pine_rare",
       "agotmod:oak",
       "agotmod:hawthorn",
       "agotmod:beech",
-      "agotmod:grass_block_patch",
       "agotmod:forget_me_not",
       "agotmod:frostfire",
       "agotmod:liverwort",
@@ -93,6 +90,7 @@
       "agotmod:thistle",
       "agotmod:thorn_bush",
       "agotmod:winter_rose_bush",
+      "agotmod:sedge",
       "agotmod:grass",
       "agotmod:tall_grass",
       "agotmod:fern",
@@ -107,19 +105,12 @@
   "spawners": {
     "ambient": [],
     "axolotls": [],
-    "creature": [
-      {
-        "type": "minecraft:wolf",
-        "maxCount": 4,
-        "minCount": 4,
-        "weight": 1
-      }
-    ],
+    "creature": [],
     "misc": [],
     "monster": [],
     "underground_water_creature": [],
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": 0.5
+  "temperature": 0.2
 }

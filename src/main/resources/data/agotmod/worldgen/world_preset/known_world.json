@@ -12,7 +12,7 @@
             "terrain_modifier": 33.0
           },
           "noise_gen_settings": "ctgen:overworld",
-          "scale": 29,
+          "scale": 74,
           "transition": 10,
           "border_noise": 1.0,
           "disabled_structure_sets": [
@@ -50,6 +50,70 @@
             "agotmod:whitehb_castle_keep_3"
           ],
           "zones": [
+            {
+              "biomes": [
+                {"biome": "agotmod:northern_forest_clearing", "weight": 0.5},
+                {"biome": "agotmod:northern_open_woodland", "weight": 0.5}
+              ],
+              "color": "#487a48",
+              "terrain_modifier": 3.0,
+              "blob_scale": 5000
+            },
+            {
+              "biomes": [
+                {"biome": "agotmod:northern_forest_clearing", "weight": 0.15},
+                {"biome": "agotmod:northern_open_woodland", "weight": 0.6},
+                {"biome": "agotmod:northern_broadleaf_forest", "weight": 0.25}
+              ],
+              "color": "#0b4a0b",
+              "terrain_modifier": 5.0,
+              "blob_scale": 5000,
+              "cliff_chance": 0.1,
+              "cliff_min_height": 70,
+              "cliff_jaggedness": 0.2
+            },
+            {
+              "biomes": [
+                {"biome": "agotmod:northern_forest", "weight": 0.4},
+                {"biome": "agotmod:northern_broadleaf_forest", "weight": 0.25},
+                {"biome": "agotmod:northern_beech_forest", "weight": 0.2},
+                {"biome": "agotmod:northern_forest_edge", "weight": 0.15}
+              ],
+              "color": "#083a08",
+              "terrain_modifier": 8.0,
+              "blob_scale": 5500,
+              "cliff_chance": 0.2,
+              "cliff_min_height": 65,
+              "cliff_jaggedness": 0.25
+            },
+            {
+              "biomes": [
+                {"biome": "agotmod:northern_deep_forest", "weight": 0.4},
+                {"biome": "agotmod:northern_pine_forest", "weight": 0.25},
+                {"biome": "agotmod:northern_ironwood_forest", "weight": 0.2},
+                {"biome": "agotmod:northern_ancient_forest", "weight": 0.15}
+              ],
+              "color": "#062d06",
+              "terrain_modifier": 11.0,
+              "blob_scale": 6000,
+              "cliff_chance": 0.3,
+              "cliff_min_height": 60,
+              "cliff_jaggedness": 0.35
+            },
+            {
+              "biomes": [
+                {"biome": "agotmod:northern_dense_ironwood", "weight": 0.4},
+                {"biome": "agotmod:northern_ancient_forest", "weight": 0.3},
+                {"biome": "agotmod:northern_ironwood_forest", "weight": 0.2},
+                {"biome": "agotmod:northern_conifer_scrub", "weight": 0.1}
+              ],
+              "color": "#042304",
+              "terrain_modifier": 15.0,
+              "blob_scale": 6000,
+              "cliff_chance": 0.4,
+              "cliff_min_height": 55,
+              "cliff_jaggedness": 0.45
+            },
             {
               "biomes": [
                 {"biome": "agotmod:skagos_bog", "weight": 0.5},

@@ -224,8 +224,13 @@ public class ModplacedFeatures {
     public static final ResourceKey<PlacedFeature> GRASS_KEY = registerKey("grass");
     public static final ResourceKey<PlacedFeature> TALL_GRASS_KEY = registerKey("tall_grass");
 
+    //Custom Features
 
+    public static final ResourceKey<PlacedFeature> STONE_PILE_KEY = ResourceKey.create(
+            Registries.PLACED_FEATURE, AGoTMod.id("stone_pile"));
 
+    public static final ResourceKey<PlacedFeature> TOR_KEY = ResourceKey.create(
+            Registries.PLACED_FEATURE, AGoTMod.id("tor"));
 
 
 
@@ -234,8 +239,32 @@ public class ModplacedFeatures {
 
 
 
+
+
+
         // Get a holder for configured features from the context
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
+
+
+        // Custom Features
+
+        register(context, STONE_PILE_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.STONE_PILE_KEY),
+                List.of(
+                        RarityFilter.onAverageOnceEvery(1),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
+                ));
+
+        register(context, TOR_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.TOR_KEY),
+                List.of(
+                        RarityFilter.onAverageOnceEvery(5),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
+                ));
 
         //Mountains
 

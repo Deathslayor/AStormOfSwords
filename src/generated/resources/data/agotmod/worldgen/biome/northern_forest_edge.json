@@ -2,9 +2,10 @@
   "carvers": {},
   "downfall": 0.8,
   "effects": {
+    "ambient_sound": "agotmod:forest_wind",
     "fog_color": 10989019,
-    "foliage_color": 4695633,
-    "grass_color": 4695633,
+    "foliage_color": 3825972,
+    "grass_color": 4352827,
     "mood_sound": {
       "block_search_extent": 8,
       "offset": 2.0,
@@ -81,7 +82,6 @@
       "agotmod:oak_rare",
       "agotmod:hawthorn_rare",
       "agotmod:beech_rare",
-      "agotmod:grass_block_patch",
       "agotmod:forget_me_not",
       "agotmod:frostfire",
       "agotmod:liverwort",
@@ -91,8 +91,11 @@
       "agotmod:thistle",
       "agotmod:thorn_bush",
       "agotmod:winter_rose_bush",
+      "agotmod:sedge",
       "agotmod:grass",
-      "agotmod:tall_grass"
+      "agotmod:tall_grass",
+      "agotmod:fern",
+      "agotmod:large_fern"
     ],
     [
       "minecraft:freeze_top_layer"
@@ -110,5 +113,5 @@
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": 0.5
+  "temperature": 0.2
 }

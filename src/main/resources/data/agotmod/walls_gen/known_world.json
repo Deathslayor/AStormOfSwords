@@ -3,8 +3,8 @@
     {
       "base_width": 48,
       "waypoints": [
-        {"x": -60000, "z": 181771},
-        {"x": -30000, "z": 181771}
+        { "x": 124335, "z": -33643 },
+        { "x": 52200, "z": -33643 }
       ],
       "sections": [
         {
@@ -136,8 +136,141 @@
     {
       "base_width": 48,
       "waypoints": [
-        {"x": -30000, "z": 181771},
-        {"x": -28303, "z": 179452}
+        { "x": 132016, "z": -85544 },
+        { "x": 87912, "z": -59200 }
+      ],
+      "sections": [
+        {
+          "height": 17,
+          "blocks": ["agotmod:packed_ice_30_block", "agotmod:packed_ice_36_block"],
+          "jagged_ice": true,
+          "snow": true
+        },
+        {
+          "height": 19,
+          "blocks": ["agotmod:packed_ice_30_block", "agotmod:packed_ice_36_block"],
+          "jagged_ice": true,
+          "snow": true
+        },
+        {
+          "height": 5,
+          "blocks": ["agotmod:packed_ice_30_block", "agotmod:packed_ice_36_block"],
+          "jagged_ice": true,
+          "snow": true
+        },
+        {
+          "height": 17,
+          "blocks": ["agotmod:packed_ice_1_block", "agotmod:packed_ice_33_block", "agotmod:packed_ice_4_block"],
+          "jagged_ice": true,
+          "snow": true
+        },
+        {
+          "height": 18,
+          "blocks": ["agotmod:packed_ice_1_block", "agotmod:packed_ice_33_block", "agotmod:packed_ice_4_block"],
+          "jagged_ice": true,
+          "snow": true
+        },
+        {
+          "height": 4,
+          "blocks": ["agotmod:packed_ice_1_block", "agotmod:packed_ice_33_block", "agotmod:packed_ice_4_block"],
+          "jagged_ice": true,
+          "snow": true
+        },
+        {
+          "height": 17,
+          "blocks": ["agotmod:packed_ice_19_block", "agotmod:packed_ice_31_block"],
+          "jagged_ice": true,
+          "snow": true
+        },
+        {
+          "height": 19,
+          "blocks": ["agotmod:packed_ice_19_block", "agotmod:packed_ice_31_block"],
+          "jagged_ice": true,
+          "snow": true
+        },
+        {
+          "height": 4,
+          "blocks": ["agotmod:packed_ice_19_block", "agotmod:packed_ice_21_block", "agotmod:packed_ice_14_block"],
+          "jagged_ice": true,
+          "snow": true
+        },
+        {
+          "height": 17,
+          "blocks": ["agotmod:packed_ice_19_block", "agotmod:packed_ice_21_block", "agotmod:packed_ice_14_block"],
+          "jagged_ice": true,
+          "snow": true
+        },
+        {
+          "height": 15,
+          "blocks": ["agotmod:packed_ice_19_block", "agotmod:packed_ice_21_block", "agotmod:packed_ice_14_block"],
+          "jagged_ice": true,
+          "snow": true
+        },
+        {
+          "height": 15,
+          "blocks": ["agotmod:packed_ice_19_block", "agotmod:packed_ice_21_block", "agotmod:packed_ice_14_block"],
+          "jagged_ice": true,
+          "snow": true
+        },
+        {
+          "height": 8,
+          "blocks": ["agotmod:packed_ice_19_block", "agotmod:packed_ice_21_block", "agotmod:packed_ice_14_block"],
+          "jagged_ice": true,
+          "snow": true
+        },
+        {
+          "height": 8,
+          "blocks": ["agotmod:packed_ice_19_block", "agotmod:packed_ice_21_block", "agotmod:packed_ice_14_block"],
+          "jagged_ice": true,
+          "snow": true
+        },
+        {
+          "height": 8,
+          "blocks": ["agotmod:packed_ice_19_block", "agotmod:packed_ice_21_block", "agotmod:packed_ice_14_block"],
+          "jagged_ice": true,
+          "snow": true
+        },
+        {
+          "height": 8,
+          "blocks": ["agotmod:packed_ice_19_block", "agotmod:packed_ice_21_block", "agotmod:packed_ice_14_block"],
+          "jagged_ice": true,
+          "snow": true
+        },
+        {
+          "height": 11,
+          "blocks": ["agotmod:packed_ice_19_block", "agotmod:packed_ice_21_block", "agotmod:packed_ice_14_block"],
+          "jagged_ice": false,
+          "snow": false
+        }
+      ],
+      "battlement": {
+        "floor_blocks": [
+          "agotmod:packed_ice_19_block",
+          "agotmod:packed_ice_21_block",
+          "agotmod:packed_ice_14_block"
+        ],
+        "battlement_blocks": [
+          "agotmod:packed_ice_19_block",
+          "agotmod:packed_ice_21_block",
+          "agotmod:packed_ice_14_block"
+        ],
+        "battlement_slabs": [
+          "agotmod:packed_ice_19_slab",
+          "agotmod:packed_ice_21_slab",
+          "agotmod:packed_ice_14_slab"
+        ],
+        "battlement_stairs": [
+          "agotmod:packed_ice_19_stairs",
+          "agotmod:packed_ice_21_stairs",
+          "agotmod:packed_ice_14_stairs"
+        ]
+      }
+    },
+    {
+      "base_width": 48,
+      "waypoints": [
+        { "x": 87912, "z": -59200 },
+        { "x": 80512, "z": -59200 }
       ],
       "sections": [
         {
