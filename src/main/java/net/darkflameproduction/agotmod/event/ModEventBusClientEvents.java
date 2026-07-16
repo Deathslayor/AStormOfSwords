@@ -87,7 +87,7 @@ public class ModEventBusClientEvents {
 
         java.util.Set<String> excludedLeaves = java.util.Set.of(
                 "black_cherry", "blackbark", "white_cherry", "blackthorn", "ash", "ironwood", "nightwood", "pine"
-                , "soldier_pine", "blue_soldier_pine", "hawthorn", "fir", "sentinel"
+                , "soldier_pine", "blue_soldier_pine", "hawthorn", "fir", "sentinel", "chestnut", "beech"
         );
 
         for (String woodType : ModBLocks.WOOD_TYPES) {

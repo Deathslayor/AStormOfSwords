@@ -3,8 +3,8 @@
   "downfall": 0.8,
   "effects": {
     "fog_color": 10989019,
-    "foliage_color": 995087,
-    "grass_color": 1391893,
+    "foliage_color": 3558710,
+    "grass_color": 4547141,
     "mood_sound": {
       "block_search_extent": 8,
       "offset": 2.0,
@@ -71,10 +71,16 @@
     [],
     [
       "minecraft:glow_lichen",
+      "agotmod:ash_rare",
+      "agotmod:chestnut_rare",
+      "agotmod:ironwood_rare",
       "agotmod:sentinel_rare",
       "agotmod:fir_rare",
       "agotmod:pine_rare",
       "agotmod:soldier_pine_rare",
+      "agotmod:oak_rare",
+      "agotmod:hawthorn_rare",
+      "agotmod:beech_rare",
       "agotmod:forget_me_not",
       "agotmod:frostfire",
       "agotmod:liverwort",

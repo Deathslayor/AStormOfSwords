@@ -48,6 +48,7 @@
         "agotmod:whitehb_castle_keep_3"
       ],
       "zones": [
+
         {
           "biomes": [
             {"biome": "agotmod:northern_forest_clearing", "weight": 0.5},
@@ -112,6 +113,137 @@
           "cliff_min_height": 55,
           "cliff_jaggedness": 0.45
         },
+
+        {
+          "biomes": [
+            {"biome": "agotmod:wolfswood_clearing", "weight": 0.5},
+            {"biome": "agotmod:wolfswood_open_woodland", "weight": 0.5}
+          ],
+          "color": "#487948",
+          "terrain_modifier": 3.0,
+          "blob_scale": 1500
+        },
+        {
+          "biomes": [
+            {"biome": "agotmod:wolfswood_clearing", "weight": 0.15},
+            {"biome": "agotmod:wolfswood_open_woodland", "weight": 0.6},
+            {"biome": "agotmod:wolfswood_broadleaf_forest", "weight": 0.25}
+          ],
+          "color": "#0b4b0b",
+          "terrain_modifier": 5.0,
+          "blob_scale": 1800,
+          "cliff_chance": 0.1,
+          "cliff_min_height": 70,
+          "cliff_jaggedness": 0.2
+        },
+        {
+          "biomes": [
+            {"biome": "agotmod:wolfswood_forest", "weight": 0.4},
+            {"biome": "agotmod:wolfswood_broadleaf_forest", "weight": 0.25},
+            {"biome": "agotmod:wolfswood_beech_forest", "weight": 0.2},
+            {"biome": "agotmod:wolfswood_forest_edge", "weight": 0.15}
+          ],
+          "color": "#083908",
+          "terrain_modifier": 8.0,
+          "blob_scale": 2000,
+          "cliff_chance": 0.2,
+          "cliff_min_height": 65,
+          "cliff_jaggedness": 0.25
+        },
+        {
+          "biomes": [
+            {"biome": "agotmod:wolfswood_deep_forest", "weight": 0.4},
+            {"biome": "agotmod:wolfswood_pine_forest", "weight": 0.25},
+            {"biome": "agotmod:wolfswood_ironwood_forest", "weight": 0.2},
+            {"biome": "agotmod:wolfswood_ancient_forest", "weight": 0.15}
+          ],
+          "color": "#062e06",
+          "terrain_modifier": 11.0,
+          "blob_scale": 2200,
+          "cliff_chance": 0.3,
+          "cliff_min_height": 60,
+          "cliff_jaggedness": 0.35
+        },
+        {
+          "biomes": [
+            {"biome": "agotmod:wolfswood_dense_ironwood", "weight": 0.4},
+            {"biome": "agotmod:wolfswood_ancient_forest", "weight": 0.3},
+            {"biome": "agotmod:wolfswood_ironwood_forest", "weight": 0.2},
+            {"biome": "agotmod:wolfswood_conifer_scrub", "weight": 0.1}
+          ],
+          "color": "#042404",
+          "terrain_modifier": 15.0,
+          "blob_scale": 2500,
+          "cliff_chance": 0.4,
+          "cliff_min_height": 55,
+          "cliff_jaggedness": 0.45
+        },
+
+        {
+          "biomes": [
+            {"biome": "agotmod:bear_island", "weight": 0.7},
+            {"biome": "agotmod:bear_island_clearing", "weight": 0.3}
+          ],
+          "color": "#456245",
+          "terrain_modifier": 3.0,
+          "blob_scale": 1500
+        },
+        {
+          "biomes": [
+            {"biome": "agotmod:bear_island_clearing", "weight": 0.15},
+            {"biome": "agotmod:bear_island_open_woodland", "weight": 0.6},
+            {"biome": "agotmod:bear_island_broadleaf_forest", "weight": 0.25}
+          ],
+          "color": "#052305",
+          "terrain_modifier": 5.0,
+          "blob_scale": 1800,
+          "cliff_chance": 0.1,
+          "cliff_min_height": 70,
+          "cliff_jaggedness": 0.2
+        },
+        {
+          "biomes": [
+            {"biome": "agotmod:bear_island_forest", "weight": 0.4},
+            {"biome": "agotmod:bear_island_broadleaf_forest", "weight": 0.25},
+            {"biome": "agotmod:bear_island_beech_forest", "weight": 0.2},
+            {"biome": "agotmod:bear_island_forest_edge", "weight": 0.15}
+          ],
+          "color": "#052d05",
+          "terrain_modifier": 8.0,
+          "blob_scale": 2000,
+          "cliff_chance": 0.2,
+          "cliff_min_height": 65,
+          "cliff_jaggedness": 0.25
+        },
+        {
+          "biomes": [
+            {"biome": "agotmod:bear_island_deep_forest", "weight": 0.4},
+            {"biome": "agotmod:bear_island_pine_forest", "weight": 0.25},
+            {"biome": "agotmod:bear_island_ironwood_forest", "weight": 0.2},
+            {"biome": "agotmod:bear_island_ancient_forest", "weight": 0.15}
+          ],
+          "color": "#073a07",
+          "terrain_modifier": 11.0,
+          "blob_scale": 2200,
+          "cliff_chance": 0.3,
+          "cliff_min_height": 60,
+          "cliff_jaggedness": 0.35
+        },
+        {
+          "biomes": [
+            {"biome": "agotmod:bear_island_dense_ironwood", "weight": 0.4},
+            {"biome": "agotmod:bear_island_ancient_forest", "weight": 0.3},
+            {"biome": "agotmod:bear_island_ironwood_forest", "weight": 0.2},
+            {"biome": "agotmod:bear_island_conifer_scrub", "weight": 0.1}
+          ],
+          "color": "#0a4a0a",
+          "terrain_modifier": 15.0,
+          "blob_scale": 2500,
+          "cliff_chance": 0.4,
+          "cliff_min_height": 55,
+          "cliff_jaggedness": 0.45
+        },
+
         {
           "biomes": [
             {"biome": "agotmod:skagos_bog", "weight": 0.5},
@@ -119,7 +251,7 @@
             {"biome": "agotmod:skagos_barrens", "weight": 0.2}
           ],
           "color": "#878f8b",
-          "terrain_modifier": 10.0,
+          "terrain_modifier": 20.0,
           "blob_scale": 5000
         },
         {
@@ -129,7 +261,7 @@
             {"biome": "agotmod:skagos_bog", "weight": 0.05}
           ],
           "color": "#69776f",
-          "terrain_modifier": 5.0,
+          "terrain_modifier": 15.0,
           "blob_scale": 5000
         },
         {
@@ -181,6 +313,7 @@
           "color": "#315d7d",
           "pixel_weight": 40.0
         },
+
         {
           "biomes": [{"biome": "minecraft:frozen_ocean", "weight": 1.0}],
           "color": "#4e7ecc",

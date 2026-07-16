@@ -72,7 +72,13 @@
     [],
     [
       "minecraft:glow_lichen",
-      "agotmod:frostfire"
+      "agotmod:frostfire",
+      "agotmod:stone_patch",
+      "agotmod:gravel_patch",
+      "agotmod:stone_pile",
+      "agotmod:tor",
+      "agotmod:birch_bush",
+      "agotmod:willow_bush"
     ],
     [
       "minecraft:freeze_top_layer"
