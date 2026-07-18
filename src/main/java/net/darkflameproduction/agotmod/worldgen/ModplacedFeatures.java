@@ -216,6 +216,8 @@ public class ModplacedFeatures {
     public static final ResourceKey<PlacedFeature> WINTER_ROSE_BUSH_KEY = registerKey("winter_rose_bush");
     public static final ResourceKey<PlacedFeature> RED_ROSE_BUSH_KEY = registerKey("red_rose_bush");
     public static final ResourceKey<PlacedFeature> CLAY_PATCH_PLACED_KEY = registerKey("clay_patch");
+    public static final ResourceKey<PlacedFeature> CALCITE_DEPOSIT_PLACED_KEY = ResourceKey.create(
+            Registries.PLACED_FEATURE, AGoTMod.id("calcite_deposit"));
     public static final ResourceKey<PlacedFeature> SEAGRASS_KEY = registerKey("seagrass");
     public static final ResourceKey<PlacedFeature> KELP_KEY = registerKey("kelp");
     public static final ResourceKey<PlacedFeature> QUAGMIRE_PATCH_PLACED_KEY = registerKey("quagmire");
@@ -1299,6 +1301,15 @@ public class ModplacedFeatures {
                         PlacementUtils.FULL_RANGE,
 
                         // Only place in valid biomes (make sure rivers are included in biome modifiers)
+                        BiomeFilter.biome()
+                ));
+
+        register(context, CALCITE_DEPOSIT_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.CALCITE_DEPOSIT_KEY),
+                List.of(
+                        CountPlacement.of(4),
+                        InSquarePlacement.spread(),
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(32)),
                         BiomeFilter.biome()
                 ));
 

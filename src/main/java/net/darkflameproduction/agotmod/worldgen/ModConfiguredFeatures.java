@@ -237,6 +237,8 @@ public class ModConfiguredFeatures {
             Registries.CONFIGURED_FEATURE, AGoTMod.id("stone_patch"));
     public static final ResourceKey<ConfiguredFeature<?, ?>> GRAVEL_PATCH_KEY = ResourceKey.create(
             Registries.CONFIGURED_FEATURE, AGoTMod.id("gravel_patch"));
+    public static final ResourceKey<ConfiguredFeature<?, ?>> CALCITE_DEPOSIT_KEY = ResourceKey.create(
+            Registries.CONFIGURED_FEATURE, AGoTMod.id("calcite_deposit"));
     public static final ResourceKey<ConfiguredFeature<?, ?>> FERN_KEY = registerKey("fern");
     public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_FERN_KEY = registerKey("large_fern");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GRASS_KEY = registerKey("grass");
@@ -2073,6 +2075,22 @@ public class ModConfiguredFeatures {
                         ),  // Blocks that can be replaced (same as vanilla clay)
                         UniformInt.of(3, 6),  // Random radius between 2-3 blocks (same as vanilla)
                         2  // Height (same as vanilla)
+                )
+        );
+
+        register(context, CALCITE_DEPOSIT_KEY, Feature.DISK,
+                new DiskConfiguration(
+                        RuleBasedBlockStateProvider.simple(Blocks.CALCITE),
+                        BlockPredicate.matchesBlocks(
+                                Blocks.STONE,
+                                Blocks.ANDESITE,
+                                Blocks.DIORITE,
+                                Blocks.GRANITE,
+                                Blocks.TUFF,
+                                Blocks.DEEPSLATE
+                        ),
+                        UniformInt.of(2, 5),
+                        2
                 )
         );
 
