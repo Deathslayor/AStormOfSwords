@@ -48,6 +48,33 @@
         "agotmod:whitehb_castle_keep_3"
       ],
       "zones": [
+        {
+          "biomes": [
+            {"biome": "agotmod:northern_hills", "weight": 0.7},
+            {"biome": "agotmod:northern_forest_edge", "weight": 0.2},
+            {"biome": "agotmod:northern_conifer_scrub", "weight": 0.1}
+          ],
+          "color": "#8f9e98",
+          "terrain_modifier": 35.0,
+          "blob_scale": 4000,
+          "cliff_chance": 0.2,
+          "cliff_min_height": 65,
+          "cliff_jaggedness": 0.25
+        },
+        {
+          "biomes": [
+            {"biome": "agotmod:northern_mountains", "weight": 0.6},
+            {"biome": "agotmod:northern_hills", "weight": 0.3},
+            {"biome": "agotmod:northern_conifer_scrub", "weight": 0.1}
+          ],
+          "color": "#cbcfcd",
+          "terrain_modifier": 75.0,
+          "blob_scale": 5000,
+          "cliff_chance": 0.6,
+          "cliff_min_height": 55,
+          "cliff_jaggedness": 0.3,
+          "is_mountain": true
+        },
 
         {
           "biomes": [
@@ -112,6 +139,15 @@
           "cliff_chance": 0.4,
           "cliff_min_height": 55,
           "cliff_jaggedness": 0.45
+        },
+
+        {
+          "biomes": [
+            {"biome": "agotmod:northern_plains", "weight": 1.0}
+          ],
+          "color": "#4d5f55",
+          "terrain_modifier": 3.0,
+          "blob_scale": 4000
         },
 
         {
@@ -243,6 +279,29 @@
           "cliff_min_height": 55,
           "cliff_jaggedness": 0.45
         },
+        {
+          "biomes": [
+            {"biome": "agotmod:umber_domain_tundra", "weight": 0.5},
+            {"biome": "agotmod:umber_domain_barrens", "weight": 0.25},
+            {"biome": "agotmod:umber_domain_woods", "weight": 0.25}
+          ],
+          "color": "#2a5d3e",
+          "terrain_modifier": 8.0,
+          "blob_scale": 3000
+        },
+        {
+          "biomes": [
+            {"biome": "agotmod:umber_domain_deep_tundra", "weight": 0.5},
+            {"biome": "agotmod:umber_domain_deep_barrens", "weight": 0.25},
+            {"biome": "agotmod:umber_domain_deep_woods", "weight": 0.25}
+          ],
+          "color": "#326647",
+          "terrain_modifier": 15.0,
+          "blob_scale": 3000,
+          "cliff_chance": 0.2,
+          "cliff_min_height": 65,
+          "cliff_jaggedness": 0.25
+        },
 
         {
           "biomes": [
@@ -337,6 +396,180 @@
           "color": "#354d32",
           "terrain_modifier": 5.0,
           "blob_scale": 5000
+        },
+        {
+          "biomes": [{"biome": "agotmod:the_wall", "weight": 1.0}],
+          "color": "#fffffd",
+          "terrain_modifier": 5.0,
+          "blob_scale": 3000
+        },
+        {
+          "biomes": [
+            {"biome": "agotmod:the_gift_tundra", "weight": 0.6},
+            {"biome": "agotmod:the_gift_barrens", "weight": 0.3},
+            {"biome": "agotmod:the_gift_woods", "weight": 0.1}
+          ],
+          "color": "#6a7b71",
+          "terrain_modifier": 4.0,
+          "blob_scale": 3000
+        },
+        {
+          "biomes": [
+            {"biome": "agotmod:the_new_gift_tundra", "weight": 0.6},
+            {"biome": "agotmod:the_new_gift_barrens", "weight": 0.3},
+            {"biome": "agotmod:the_new_gift_woods", "weight": 0.1}
+          ],
+          "color": "#5b6d63",
+          "terrain_modifier": 4.0,
+          "blob_scale": 3000
+        },
+        {
+          "biomes": [
+            {"biome": "agotmod:haunted_forest_clearing", "weight": 0.5},
+            {"biome": "agotmod:haunted_open_woodland", "weight": 0.5}
+          ],
+          "color": "#828c82",
+          "terrain_modifier": 3.0,
+          "blob_scale": 1500
+        },
+        {
+          "biomes": [
+            {"biome": "agotmod:haunted_forest_main", "weight": 0.4},
+            {"biome": "agotmod:haunted_broadleaf_forest", "weight": 0.3},
+            {"biome": "agotmod:haunted_forest_edge", "weight": 0.3}
+          ],
+          "color": "#778277",
+          "terrain_modifier": 8.0,
+          "blob_scale": 2000,
+          "cliff_chance": 0.15,
+          "cliff_min_height": 65,
+          "cliff_jaggedness": 0.2
+        },
+        {
+          "biomes": [
+            {"biome": "agotmod:haunted_deep_forest", "weight": 0.4},
+            {"biome": "agotmod:haunted_pine_forest", "weight": 0.3},
+            {"biome": "agotmod:haunted_ironwood_forest", "weight": 0.3}
+          ],
+          "color": "#6d786d",
+          "terrain_modifier": 11.0,
+          "blob_scale": 2200,
+          "cliff_chance": 0.25,
+          "cliff_min_height": 60,
+          "cliff_jaggedness": 0.3
+        },
+        {
+          "biomes": [
+            {"biome": "agotmod:haunted_ancient_forest", "weight": 0.5},
+            {"biome": "agotmod:haunted_dense_ironwood", "weight": 0.5}
+          ],
+          "color": "#5a635a",
+          "terrain_modifier": 15.0,
+          "blob_scale": 2500,
+          "cliff_chance": 0.35,
+          "cliff_min_height": 55,
+          "cliff_jaggedness": 0.4
+        },
+        {
+          "biomes": [{"biome": "agotmod:beyond_the_wall", "weight": 1.0}],
+          "color": "#d9d9d9",
+          "terrain_modifier": 15.0,
+          "blob_scale": 4000
+        },
+        {
+          "biomes": [{"biome": "agotmod:beyond_the_wall_ice_river_valley", "weight": 1.0}],
+          "color": "#d6d3bb",
+          "terrain_modifier": 5.0,
+          "blob_scale": 3000
+        },
+        {
+          "biomes": [{"biome": "agotmod:beyond_the_wall_frozen_shore", "weight": 1.0}],
+          "color": "#d9caca",
+          "terrain_modifier": 5.0,
+          "blob_scale": 3000
+        },
+        {
+          "biomes": [{"biome": "agotmod:beyond_the_wall_river_valley", "weight": 1.0}],
+          "color": "#c5c5c5",
+          "terrain_modifier": 5.0,
+          "blob_scale": 3000
+        },
+        {
+          "biomes": [{"biome": "agotmod:giants_stair", "weight": 1.0}],
+          "color": "#bfc0cd",
+          "terrain_modifier": 70.0,
+          "blob_scale": 5000,
+          "cliff_chance": 0.7,
+          "cliff_min_height": 50,
+          "cliff_jaggedness": 0.2,
+          "is_mountain": true
+        },
+        {
+          "biomes": [{"biome": "agotmod:giants_stair_river_valley", "weight": 1.0}],
+          "color": "#adaec5",
+          "terrain_modifier": 5.0,
+          "blob_scale": 3000
+        },
+        {
+          "biomes": [{"biome": "agotmod:frostfang_hills", "weight": 1.0}],
+          "color": "#969494",
+          "terrain_modifier": 35.0,
+          "blob_scale": 4000,
+          "cliff_chance": 0.3,
+          "cliff_min_height": 60,
+          "cliff_jaggedness": 0.3
+        },
+        {
+          "biomes": [{"biome": "agotmod:frostfang_mountains", "weight": 1.0}],
+          "color": "#c6c6c6",
+          "terrain_modifier": 90.0,
+          "blob_scale": 6000,
+          "cliff_chance": 0.8,
+          "cliff_min_height": 50,
+          "cliff_jaggedness": 0.15,
+          "is_mountain": true
+        },
+        {
+          "biomes": [
+            {"biome": "agotmod:thenn_valley_plains", "weight": 0.5},
+            {"biome": "agotmod:thenn_valley_tundra", "weight": 0.3},
+            {"biome": "agotmod:thenn_valley_woods", "weight": 0.2}
+          ],
+          "color": "#6b8f6b",
+          "terrain_modifier": 6.0,
+          "blob_scale": 3000
+        },
+        {
+          "biomes": [
+            {"biome": "agotmod:thenn_upper_valley_plains", "weight": 0.5},
+            {"biome": "agotmod:thenn_upper_valley_tundra", "weight": 0.3},
+            {"biome": "agotmod:thenn_upper_valley_woods", "weight": 0.2}
+          ],
+          "color": "#5f835f",
+          "terrain_modifier": 10.0,
+          "blob_scale": 3000,
+          "cliff_chance": 0.15,
+          "cliff_min_height": 65,
+          "cliff_jaggedness": 0.2
+        },
+        {
+          "biomes": [{"biome": "agotmod:thenn_hills", "weight": 1.0}],
+          "color": "#ad9f9f",
+          "terrain_modifier": 35.0,
+          "blob_scale": 4000,
+          "cliff_chance": 0.3,
+          "cliff_min_height": 60,
+          "cliff_jaggedness": 0.3
+        },
+        {
+          "biomes": [{"biome": "agotmod:thenn_mountains", "weight": 1.0}],
+          "color": "#c5b4b4",
+          "terrain_modifier": 80.0,
+          "blob_scale": 5000,
+          "cliff_chance": 0.7,
+          "cliff_min_height": 50,
+          "cliff_jaggedness": 0.2,
+          "is_mountain": true
         }
       ]
     }

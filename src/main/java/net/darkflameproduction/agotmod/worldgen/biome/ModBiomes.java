@@ -17,12 +17,6 @@ public class ModBiomes {
     // RESOURCE KEYS
     // =========================================================================
 
-    public static final ResourceKey<Biome> LANDS_OF_ALWAYS_WINTER = ResourceKey.create(Registries.BIOME, AGoTMod.id("lands_of_always_winter"));
-    public static final ResourceKey<Biome> HAUNTED_FOREST = ResourceKey.create(Registries.BIOME, AGoTMod.id("haunted_forest"));
-    public static final ResourceKey<Biome> FROSTFANG_FOOTHILLS = ResourceKey.create(Registries.BIOME, AGoTMod.id("frostfang_foothills"));
-    public static final ResourceKey<Biome> FROSTFANGS = ResourceKey.create(Registries.BIOME, AGoTMod.id("frostfangs"));
-    public static final ResourceKey<Biome> VALLEY_OF_THENN = ResourceKey.create(Registries.BIOME, AGoTMod.id("valley_of_thenn"));
-
     // Northern Forest
     public static final ResourceKey<Biome> NORTHERN_FOREST = ResourceKey.create(Registries.BIOME, AGoTMod.id("northern_forest"));
     public static final ResourceKey<Biome> NORTHERN_DEEP_FOREST = ResourceKey.create(Registries.BIOME, AGoTMod.id("northern_deep_forest"));
@@ -70,11 +64,20 @@ public class ModBiomes {
     public static final ResourceKey<Biome> NORTHERN_HILLS = ResourceKey.create(Registries.BIOME, AGoTMod.id("northern_hills"));
     public static final ResourceKey<Biome> NORTHERN_MOUNTAINS = ResourceKey.create(Registries.BIOME, AGoTMod.id("northern_mountains"));
     public static final ResourceKey<Biome> BARROWLANDS = ResourceKey.create(Registries.BIOME, AGoTMod.id("barrowlands"));
-    public static final ResourceKey<Biome> THE_NORTH = ResourceKey.create(Registries.BIOME, AGoTMod.id("the_north"));
+    public static final ResourceKey<Biome> NORTHERN_PLAINS = ResourceKey.create(Registries.BIOME, AGoTMod.id("northern_plains"));
     public static final ResourceKey<Biome> RILLS = ResourceKey.create(Registries.BIOME, AGoTMod.id("rills"));
     public static final ResourceKey<Biome> NORTHERN_WATERS = ResourceKey.create(Registries.BIOME, AGoTMod.id("northern_waters"));
     public static final ResourceKey<Biome> STONY_SHORES = ResourceKey.create(Registries.BIOME, AGoTMod.id("stony_shores"));
     public static final ResourceKey<Biome> THE_NECK = ResourceKey.create(Registries.BIOME, AGoTMod.id("the_neck"));
+
+    // Umber
+
+    public static final ResourceKey<Biome> UMBER_DOMAIN_TUNDRA = ResourceKey.create(Registries.BIOME, AGoTMod.id("umber_domain_tundra"));
+    public static final ResourceKey<Biome> UMBER_DOMAIN_BARRENS = ResourceKey.create(Registries.BIOME, AGoTMod.id("umber_domain_barrens"));
+    public static final ResourceKey<Biome> UMBER_DOMAIN_WOODS = ResourceKey.create(Registries.BIOME, AGoTMod.id("umber_domain_woods"));
+    public static final ResourceKey<Biome> UMBER_DOMAIN_DEEP_TUNDRA = ResourceKey.create(Registries.BIOME, AGoTMod.id("umber_domain_deep_tundra"));
+    public static final ResourceKey<Biome> UMBER_DOMAIN_DEEP_BARRENS = ResourceKey.create(Registries.BIOME, AGoTMod.id("umber_domain_deep_barrens"));
+    public static final ResourceKey<Biome> UMBER_DOMAIN_DEEP_WOODS = ResourceKey.create(Registries.BIOME, AGoTMod.id("umber_domain_deep_woods"));
 
     // Skagos
     public static final ResourceKey<Biome> SKAGOS_TUNDRA = ResourceKey.create(Registries.BIOME, AGoTMod.id("skagos_tundra"));
@@ -87,16 +90,82 @@ public class ModBiomes {
     public static final ResourceKey<Biome> SKAGOS_RIVER = ResourceKey.create(Registries.BIOME, AGoTMod.id("skagos_river"));
     public static final ResourceKey<Biome> SKAGOS_BOG = ResourceKey.create(Registries.BIOME, AGoTMod.id("skagos_bog"));
 
+    // Night's Watch
+    public static final ResourceKey<Biome> THE_WALL = ResourceKey.create(Registries.BIOME, AGoTMod.id("the_wall"));
+    public static final ResourceKey<Biome> THE_GIFT_TUNDRA = ResourceKey.create(Registries.BIOME, AGoTMod.id("the_gift_tundra"));
+    public static final ResourceKey<Biome> THE_GIFT_BARRENS = ResourceKey.create(Registries.BIOME, AGoTMod.id("the_gift_barrens"));
+    public static final ResourceKey<Biome> THE_GIFT_WOODS = ResourceKey.create(Registries.BIOME, AGoTMod.id("the_gift_woods"));
+    public static final ResourceKey<Biome> THE_NEW_GIFT_TUNDRA = ResourceKey.create(Registries.BIOME, AGoTMod.id("the_new_gift_tundra"));
+    public static final ResourceKey<Biome> THE_NEW_GIFT_BARRENS = ResourceKey.create(Registries.BIOME, AGoTMod.id("the_new_gift_barrens"));
+    public static final ResourceKey<Biome> THE_NEW_GIFT_WOODS = ResourceKey.create(Registries.BIOME, AGoTMod.id("the_new_gift_woods"));
+
+    // Beyond The Wall
+
+    public static final ResourceKey<Biome> BEYOND_THE_WALL = ResourceKey.create(Registries.BIOME, AGoTMod.id("beyond_the_wall"));
+    public static final ResourceKey<Biome> BEYOND_THE_WALL_ICE_RIVER_VALLEY = ResourceKey.create(Registries.BIOME, AGoTMod.id("beyond_the_wall_ice_river_valley"));
+    public static final ResourceKey<Biome> BEYOND_THE_WALL_FROZEN_SHORE = ResourceKey.create(Registries.BIOME, AGoTMod.id("beyond_the_wall_frozen_shore"));
+    public static final ResourceKey<Biome> BEYOND_THE_WALL_RIVER_VALLEY = ResourceKey.create(Registries.BIOME, AGoTMod.id("beyond_the_wall_river_valley"));
+    public static final ResourceKey<Biome> GIANTS_STAIR = ResourceKey.create(Registries.BIOME, AGoTMod.id("giants_stair"));
+    public static final ResourceKey<Biome> GIANTS_STAIR_RIVER_VALLEY = ResourceKey.create(Registries.BIOME, AGoTMod.id("giants_stair_river_valley"));
+    public static final ResourceKey<Biome> FROSTFANG_HILLS = ResourceKey.create(Registries.BIOME, AGoTMod.id("frostfang_hills"));
+    public static final ResourceKey<Biome> FROSTFANG_MOUNTAINS = ResourceKey.create(Registries.BIOME, AGoTMod.id("frostfang_mountains"));
+
+    // Haunted Forest
+    public static final ResourceKey<Biome> HAUNTED_FOREST_CLEARING = ResourceKey.create(Registries.BIOME, AGoTMod.id("haunted_forest_clearing"));
+    public static final ResourceKey<Biome> HAUNTED_OPEN_WOODLAND = ResourceKey.create(Registries.BIOME, AGoTMod.id("haunted_open_woodland"));
+    public static final ResourceKey<Biome> HAUNTED_FOREST_EDGE = ResourceKey.create(Registries.BIOME, AGoTMod.id("haunted_forest_edge"));
+    public static final ResourceKey<Biome> HAUNTED_FOREST_MAIN = ResourceKey.create(Registries.BIOME, AGoTMod.id("haunted_forest_main"));
+    public static final ResourceKey<Biome> HAUNTED_BROADLEAF_FOREST = ResourceKey.create(Registries.BIOME, AGoTMod.id("haunted_broadleaf_forest"));
+    public static final ResourceKey<Biome> HAUNTED_DEEP_FOREST = ResourceKey.create(Registries.BIOME, AGoTMod.id("haunted_deep_forest"));
+    public static final ResourceKey<Biome> HAUNTED_PINE_FOREST = ResourceKey.create(Registries.BIOME, AGoTMod.id("haunted_pine_forest"));
+    public static final ResourceKey<Biome> HAUNTED_IRONWOOD_FOREST = ResourceKey.create(Registries.BIOME, AGoTMod.id("haunted_ironwood_forest"));
+    public static final ResourceKey<Biome> HAUNTED_ANCIENT_FOREST = ResourceKey.create(Registries.BIOME, AGoTMod.id("haunted_ancient_forest"));
+    public static final ResourceKey<Biome> HAUNTED_DENSE_IRONWOOD = ResourceKey.create(Registries.BIOME, AGoTMod.id("haunted_dense_ironwood"));
+
+    public static final ResourceKey<Biome> THENN_VALLEY_PLAINS = ResourceKey.create(Registries.BIOME, AGoTMod.id("thenn_valley_plains"));
+    public static final ResourceKey<Biome> THENN_VALLEY_TUNDRA = ResourceKey.create(Registries.BIOME, AGoTMod.id("thenn_valley_tundra"));
+    public static final ResourceKey<Biome> THENN_VALLEY_WOODS = ResourceKey.create(Registries.BIOME, AGoTMod.id("thenn_valley_woods"));
+    public static final ResourceKey<Biome> THENN_UPPER_VALLEY_PLAINS = ResourceKey.create(Registries.BIOME, AGoTMod.id("thenn_upper_valley_plains"));
+    public static final ResourceKey<Biome> THENN_UPPER_VALLEY_TUNDRA = ResourceKey.create(Registries.BIOME, AGoTMod.id("thenn_upper_valley_tundra"));
+    public static final ResourceKey<Biome> THENN_UPPER_VALLEY_WOODS = ResourceKey.create(Registries.BIOME, AGoTMod.id("thenn_upper_valley_woods"));
+    public static final ResourceKey<Biome> THENN_HILLS = ResourceKey.create(Registries.BIOME, AGoTMod.id("thenn_hills"));
+    public static final ResourceKey<Biome> THENN_MOUNTAINS = ResourceKey.create(Registries.BIOME, AGoTMod.id("thenn_mountains"));
+
     // =========================================================================
     // BOOTSTRAP
     // =========================================================================
 
     public static void boostrap(BootstrapContext<Biome> context) {
-        context.register(LANDS_OF_ALWAYS_WINTER, alwayswinter(context));
-        context.register(HAUNTED_FOREST, hauntedforest(context));
-        context.register(FROSTFANG_FOOTHILLS, frostfangfoothills(context));
-        context.register(FROSTFANGS, frostfangs(context));
-        context.register(VALLEY_OF_THENN, valleyofthenn(context));
+
+        // Haunted Forest
+
+        context.register(HAUNTED_FOREST_CLEARING, hauntedForestClearing(context));
+        context.register(HAUNTED_OPEN_WOODLAND, hauntedOpenWoodland(context));
+        context.register(HAUNTED_FOREST_EDGE, hauntedForestEdge(context));
+        context.register(HAUNTED_FOREST_MAIN, hauntedForestMain(context));
+        context.register(HAUNTED_BROADLEAF_FOREST, hauntedBroadleafForest(context));
+        context.register(HAUNTED_DEEP_FOREST, hauntedDeepForest(context));
+        context.register(HAUNTED_PINE_FOREST, hauntedPineForest(context));
+        context.register(HAUNTED_IRONWOOD_FOREST, hauntedIronwoodForest(context));
+        context.register(HAUNTED_ANCIENT_FOREST, hauntedAncientForest(context));
+        context.register(HAUNTED_DENSE_IRONWOOD, hauntedDenseIronwood(context));
+
+        context.register(BEYOND_THE_WALL, beyondTheWall(context));
+        context.register(BEYOND_THE_WALL_ICE_RIVER_VALLEY, beyondTheWallIceRiverValley(context));
+        context.register(BEYOND_THE_WALL_FROZEN_SHORE, beyondTheWallFrozenShore(context));
+        context.register(BEYOND_THE_WALL_RIVER_VALLEY, beyondTheWallRiverValley(context));
+        context.register(GIANTS_STAIR, giantsStair(context));
+        context.register(GIANTS_STAIR_RIVER_VALLEY, giantsStairRiverValley(context));
+        context.register(FROSTFANG_HILLS, frostfangHills(context));
+        context.register(FROSTFANG_MOUNTAINS, frostfangMountains(context));
+        context.register(THENN_VALLEY_PLAINS, thennValleyPlains(context));
+        context.register(THENN_VALLEY_TUNDRA, thennValleyTundra(context));
+        context.register(THENN_VALLEY_WOODS, thennValleyWoods(context));
+        context.register(THENN_UPPER_VALLEY_PLAINS, thennUpperValleyPlains(context));
+        context.register(THENN_UPPER_VALLEY_TUNDRA, thennUpperValleyTundra(context));
+        context.register(THENN_UPPER_VALLEY_WOODS, thennUpperValleyWoods(context));
+        context.register(THENN_HILLS, thennHills(context));
+        context.register(THENN_MOUNTAINS, thennMountains(context));
 
         // Northern Forest
         context.register(NORTHERN_FOREST, northernForest(context));
@@ -145,11 +214,20 @@ public class ModBiomes {
         context.register(NORTHERN_HILLS, northernhills(context));
         context.register(NORTHERN_MOUNTAINS, northernmountains(context));
         context.register(BARROWLANDS, barrowlands(context));
-        context.register(THE_NORTH, the_north(context));
+        context.register(NORTHERN_PLAINS, northernPlains(context));
         context.register(RILLS, rills(context));
         context.register(NORTHERN_WATERS, northernwaters(context));
         context.register(STONY_SHORES, stonyshores(context));
         context.register(THE_NECK, theneck(context));
+
+        // Umber
+
+        context.register(UMBER_DOMAIN_TUNDRA, umberDomainTundra(context));
+        context.register(UMBER_DOMAIN_BARRENS, umberDomainBarrens(context));
+        context.register(UMBER_DOMAIN_WOODS, umberDomainWoods(context));
+        context.register(UMBER_DOMAIN_DEEP_TUNDRA, umberDomainDeepTundra(context));
+        context.register(UMBER_DOMAIN_DEEP_BARRENS, umberDomainDeepBarrens(context));
+        context.register(UMBER_DOMAIN_DEEP_WOODS, umberDomainDeepWoods(context));
 
         // Skagos
         context.register(SKAGOS_TUNDRA, skagosTundra(context));
@@ -161,6 +239,17 @@ public class ModBiomes {
         context.register(SKAGOS_FROZEN_PEAKS, skagosFrozenPeaks(context));
         context.register(SKAGOS_RIVER, skagosRiver(context));
         context.register(SKAGOS_BOG, skagosBog(context));
+
+        // Night's Watch
+        context.register(THE_WALL, theWall(context));
+        context.register(THE_GIFT_TUNDRA, theGiftTundra(context));
+        context.register(THE_GIFT_BARRENS, theGiftBarrens(context));
+        context.register(THE_GIFT_WOODS, theGiftWoods(context));
+        context.register(THE_NEW_GIFT_TUNDRA, theNewGiftTundra(context));
+        context.register(THE_NEW_GIFT_BARRENS, theNewGiftBarrens(context));
+        context.register(THE_NEW_GIFT_WOODS, theNewGiftWoods(context));
+
+
     }
 
     // =========================================================================
@@ -231,6 +320,274 @@ public class ModBiomes {
     // sparseTrees         — use rare variants instead of dense
     // includeWeirwood     — add weirwood (rare)
     // =========================================================================
+
+    // Haunted Forest
+
+    private static void addHauntedForestVegetation(
+            BiomeGenerationSettings.Builder b,
+            BootstrapContext<Biome> context,
+            boolean includeAllTrees,
+            boolean includeIronwood,
+            boolean includeBroadleaf,
+            boolean includePine,
+            boolean includeAncient,
+            boolean sparseTrees,
+            boolean includeWeirwood,
+            boolean denseWeirwood
+    ) {
+        // trees — master order always respected
+        if (includeAllTrees) {
+            if (sparseTrees) {
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.ASH_RARE_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.CHESTNUT_RARE_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.IRONWOOD_RARE_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SENTINEL_RARE_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FIR_RARE_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.PINE_RARE_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SOLDIER_PINE_RARE_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.OAK2_RARE_KEY);
+            } else {
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.ASH_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.CHESTNUT_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.IRONWOOD_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SENTINEL_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FIR_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.PINE_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SOLDIER_PINE_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.OAK2_KEY);
+            }
+        }
+
+        if (includeIronwood) {
+            if (sparseTrees) {
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.IRONWOOD_RARE_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SENTINEL_RARE_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FIR_RARE_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.PINE_RARE_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SOLDIER_PINE_RARE_KEY);
+            } else {
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.IRONWOOD_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SENTINEL_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FIR_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.PINE_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SOLDIER_PINE_KEY);
+            }
+        }
+
+        if (includeBroadleaf) {
+            if (sparseTrees) {
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.ASH_RARE_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.CHESTNUT_RARE_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.OAK2_RARE_KEY);
+            } else {
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.ASH_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.CHESTNUT_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.IRONWOOD_RARE_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SENTINEL_RARE_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.OAK2_KEY);
+            }
+        }
+
+        if (includePine) {
+            if (sparseTrees) {
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SENTINEL_RARE_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FIR_RARE_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.PINE_RARE_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SOLDIER_PINE_RARE_KEY);
+            } else {
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SENTINEL_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FIR_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.PINE_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SOLDIER_PINE_KEY);
+            }
+        }
+
+        if (includeAncient) {
+            if (sparseTrees) {
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.IRONWOOD_RARE_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SENTINEL_RARE_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FIR_RARE_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.PINE_RARE_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SOLDIER_PINE_RARE_KEY);
+            } else {
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.IRONWOOD_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SENTINEL_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FIR_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.PINE_KEY);
+                b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SOLDIER_PINE_KEY);
+            }
+        }
+
+        if (includeWeirwood) {
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                    denseWeirwood ? ModplacedFeatures.WEIRWOOD_KEY : ModplacedFeatures.WEIRWOOD_RARE_KEY);
+        }
+
+        // haunted ground cover — always the same, no extra flowers
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FROSTFIRE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.THISTLE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.THORN_BUSH_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.WINTER_ROSE_BUSH_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.GRASS_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.TALL_GRASS_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FERN_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.LARGE_FERN_KEY);
+    }
+
+    // Haunted Forest Clearing — sparse, open, ghostly
+    private static void addVegetationHauntedForestClearing(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        addHauntedForestVegetation(b, context, true, false, false, false, false, true, true, false);
+    }
+
+    // Haunted Open Woodland — sparse mix, more variety
+    private static void addVegetationHauntedOpenWoodland(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        addHauntedForestVegetation(b, context, true, false, false, false, false, true, true, false);
+    }
+
+    // Haunted Forest Edge — sparse all types, transitional
+    private static void addVegetationHauntedForestEdge(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        addHauntedForestVegetation(b, context, true, false, false, false, false, true, true, false);
+    }
+
+    // Haunted Forest — full dense mix
+    private static void addVegetationHauntedForestMain(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        addHauntedForestVegetation(b, context, true, false, false, false, false, false, true, false);
+    }
+
+    // Haunted Broadleaf — ash/chestnut/oak heavy
+    private static void addVegetationHauntedBroadleafForest(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        addHauntedForestVegetation(b, context, false, false, true, false, false, false, true, false);
+    }
+
+    // Haunted Deep Forest — full dense, darker via colors
+    private static void addVegetationHauntedDeepForest(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        addHauntedForestVegetation(b, context, true, false, false, false, false, false, true, true);
+    }
+
+    // Haunted Pine Forest — conifer dominant
+    private static void addVegetationHauntedPineForest(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        addHauntedForestVegetation(b, context, false, false, false, true, false, false, true, false);
+    }
+
+    // Haunted Ironwood Forest — ironwood/conifer dominant
+    private static void addVegetationHauntedIronwoodForest(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        addHauntedForestVegetation(b, context, false, true, false, false, false, false, true, false);
+    }
+
+    // Haunted Ancient Forest — weirwood heavy, old growth
+    private static void addVegetationHauntedAncientForest(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        addHauntedForestVegetation(b, context, false, false, false, false, true, false, true, true);
+    }
+
+    // Haunted Dense Ironwood — darkest, pure ironwood/conifer
+    private static void addVegetationHauntedDenseIronwood(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        addHauntedForestVegetation(b, context, false, true, false, false, false, false, true, true);
+    }
+
+    private static void addBeyondTheWallVegetation(
+            BiomeGenerationSettings.Builder b,
+            BootstrapContext<Biome> context,
+            boolean includeGrass,
+            boolean includeTrees,
+            boolean includeBushes,
+            boolean includeRocks
+    ) {
+        // trees always first — matches master order
+        if (includeTrees) {
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.IRONWOOD_RARE_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SENTINEL_RARE_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FIR_RARE_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.PINE_RARE_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SOLDIER_PINE_RARE_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.WEIRWOOD_RARE_KEY);
+        }
+
+        // ground cover always after trees
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FROSTFIRE_KEY);
+
+        if (includeGrass) {
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.THISTLE_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SEDGE_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.GRASS_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.TALL_GRASS_KEY);
+        }
+
+        if (includeRocks) {
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.STONE_PATCH_PLACED_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.GRAVEL_PATCH_PLACED_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.STONE_PILE_KEY);
+        }
+
+        if (includeBushes) {
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.VANILLA_BUSH_PLACED_KEYS.get("birch"));
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.BUSH_PLACED_KEYS.get("willow"));
+        }
+    }
+
+    // beyond the wall standard — sparse grass, no trees, no rocks
+    private static void addVegetationBeyondTheWall(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        addBeyondTheWallVegetation(b, context, true, false, false, false);
+    }
+
+    // ice river valley — completely frozen, rocks and gravel only
+    private static void addVegetationBeyondTheWallIceRiverValley(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        addBeyondTheWallVegetation(b, context, false, false, false, true);
+    }
+
+    // frozen shore — same as ice river valley
+    private static void addVegetationBeyondTheWallFrozenShore(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        addBeyondTheWallVegetation(b, context, false, false, false, true);
+    }
+
+    // river valley — grass, occasional trees, bushes
+    private static void addVegetationBeyondTheWallRiverValley(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        addBeyondTheWallVegetation(b, context, true, true, true, false);
+    }
+
+    private static void addFrostfangVegetation(
+            BiomeGenerationSettings.Builder b,
+            boolean includeGrass,
+            boolean includeBushes,
+            boolean includeTor
+    ) {
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FROSTFIRE_KEY);
+
+        if (includeGrass) {
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.THISTLE_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SEDGE_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.GRASS_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.TALL_GRASS_KEY);
+        }
+
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.STONE_PATCH_PLACED_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.GRAVEL_PATCH_PLACED_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.STONE_PILE_KEY);
+
+        if (includeTor) {
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.TOR_KEY);
+        }
+
+        if (includeBushes) {
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.VANILLA_BUSH_PLACED_KEYS.get("birch"));
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.BUSH_PLACED_KEYS.get("willow"));
+        }
+    }
+
+    private static void addVegetationGiantsStair(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        addFrostfangVegetation(b, false, false, true);
+    }
+
+    private static void addVegetationGiantsStairRiverValley(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        addFrostfangVegetation(b, true, true, false);
+    }
+
+    private static void addVegetationFrostfangHills(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        addFrostfangVegetation(b, true, false, true);
+    }
+
+    private static void addVegetationFrostfangMountains(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        addFrostfangVegetation(b, false, false, true);
+    }
 
     private static void addForestVegetation(
             BiomeGenerationSettings.Builder b,
@@ -532,6 +889,64 @@ public class ModBiomes {
         addForestVegetation(b, context, false, false, false, false, true, false, true, false);
     }
 
+    // Umber
+
+    private static void addVegetationUmberDomainTundra(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.PINE_RARE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.OAK2_RARE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FORGET_ME_NOT_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FROSTFIRE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.LIVERWORT_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.LUNGWORT_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.PENNYROYAL_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.RED_ROSE_BUSH_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.THISTLE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.THORN_BUSH_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.WINTER_ROSE_BUSH_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SEDGE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.GRASS_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.TALL_GRASS_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FERN_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.LARGE_FERN_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.STONE_PILE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.VANILLA_BUSH_PLACED_KEYS.get("birch"));
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.BUSH_PLACED_KEYS.get("willow"));
+    }
+
+    private static void addVegetationUmberDomainBarrens(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.PINE_RARE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.OAK2_RARE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FROSTFIRE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.THISTLE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.THORN_BUSH_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SEDGE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.GRASS_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.TALL_GRASS_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.STONE_PILE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.VANILLA_BUSH_PLACED_KEYS.get("birch"));
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.BUSH_PLACED_KEYS.get("willow"));
+    }
+
+    private static void addVegetationUmberDomainWoods(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.PINE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.OAK2_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FORGET_ME_NOT_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FROSTFIRE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.LIVERWORT_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.LUNGWORT_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.PENNYROYAL_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.RED_ROSE_BUSH_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.THISTLE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.THORN_BUSH_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.WINTER_ROSE_BUSH_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SEDGE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.GRASS_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.TALL_GRASS_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FERN_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.LARGE_FERN_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.STONE_PILE_KEY);
+    }
+
     // =========================================================================
     // NON-FOREST VEGETATION
     // =========================================================================
@@ -544,7 +959,7 @@ public class ModBiomes {
         addForestVegetation(b, context, true, false, false, false, false, false, true, false);
     }
 
-    private static void addVegetationTheNorth(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+    private static void addVegetationNorthernPlains(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
         addForestVegetation(b, context, true, false, false, false, false, false, true, false);
     }
 
@@ -674,6 +1089,180 @@ public class ModBiomes {
         addSkagosBushes(b);
     }
 
+    private static void addVegetationTheWall(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        // wolfswood ground cover — no trees
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FORGET_ME_NOT_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FROSTFIRE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.LIVERWORT_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.LUNGWORT_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.PENNYROYAL_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.RED_ROSE_BUSH_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.THISTLE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.THORN_BUSH_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.WINTER_ROSE_BUSH_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SEDGE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.GRASS_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.TALL_GRASS_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FERN_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.LARGE_FERN_KEY);
+        // skagos bushes
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.VANILLA_BUSH_PLACED_KEYS.get("birch"));
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.BUSH_PLACED_KEYS.get("willow"));
+    }
+
+    private static void addVegetationGiftTundra(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        // rare trees
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.ASH_RARE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.CHESTNUT_RARE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.IRONWOOD_RARE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SENTINEL_RARE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FIR_RARE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.PINE_RARE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SOLDIER_PINE_RARE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.OAK2_RARE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.HAWTHORN_RARE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.BEECH_RARE_KEY);
+        // ground cover
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FORGET_ME_NOT_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FROSTFIRE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.LIVERWORT_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.LUNGWORT_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.PENNYROYAL_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.RED_ROSE_BUSH_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.THISTLE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.THORN_BUSH_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.WINTER_ROSE_BUSH_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SEDGE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.GRASS_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.TALL_GRASS_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FERN_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.LARGE_FERN_KEY);
+        // bushes
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.VANILLA_BUSH_PLACED_KEYS.get("birch"));
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.BUSH_PLACED_KEYS.get("willow"));
+    }
+
+    private static void addVegetationGiftBarrens(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        // rare trees
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SENTINEL_RARE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FIR_RARE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.PINE_RARE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SOLDIER_PINE_RARE_KEY);
+        // ground cover
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FROSTFIRE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.THISTLE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.THORN_BUSH_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SEDGE_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.GRASS_KEY);
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.TALL_GRASS_KEY);
+        // bushes
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.VANILLA_BUSH_PLACED_KEYS.get("birch"));
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.BUSH_PLACED_KEYS.get("willow"));
+    }
+
+    // woods — full northern forest but trees are rare (0.1 weight in zone)
+    private static void addVegetationGiftWoods(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        addForestVegetation(b, context, true, false, false, false, false, false, false, true);
+    }
+    private static void addThennVegetation(
+            BiomeGenerationSettings.Builder b,
+            BootstrapContext<Biome> context,
+            boolean denseTrees,
+            boolean sparseTrees,
+            boolean includeGrass,
+            boolean includeRocks,
+            boolean includeTor,
+            boolean includeBushes
+    ) {
+        if (sparseTrees) {
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.ASH_RARE_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.CHESTNUT_RARE_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.IRONWOOD_RARE_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SENTINEL_RARE_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FIR_RARE_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.PINE_RARE_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SOLDIER_PINE_RARE_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.WEIRWOOD_RARE_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.OAK2_RARE_KEY);
+        }
+
+        if (denseTrees) {
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.ASH_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.CHESTNUT_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.IRONWOOD_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SENTINEL_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FIR_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.PINE_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SOLDIER_PINE_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.WEIRWOOD_RARE_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.OAK2_KEY);
+        }
+
+        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FROSTFIRE_KEY);
+
+        if (includeGrass) {
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FROSTFIRE_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.THISTLE_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.THORN_BUSH_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.WINTER_ROSE_BUSH_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SEDGE_KEY); // add this
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.GRASS_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.TALL_GRASS_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FERN_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.LARGE_FERN_KEY);
+        }
+
+        if (includeRocks) {
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.STONE_PATCH_PLACED_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.GRAVEL_PATCH_PLACED_KEY);
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.STONE_PILE_KEY);
+        }
+
+        if (includeTor) {
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.TOR_KEY);
+        }
+
+        if (includeBushes) {
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.VANILLA_BUSH_PLACED_KEYS.get("birch"));
+            b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.BUSH_PLACED_KEYS.get("willow"));
+        }
+    }
+    // Valley 1 — lower, warmer
+    private static void addVegetationThennValleyPlains(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        addThennVegetation(b, context, false, true, true, false, false, true);
+    }
+
+    private static void addVegetationThennValleyTundra(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        addThennVegetation(b, context, false, true, true, false, false, false);
+    }
+
+    private static void addVegetationThennValleyWoods(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        addThennVegetation(b, context, true, false, true, false, false, true);
+    }
+
+    // Valley 2 — higher, slightly more exposed
+    private static void addVegetationThennUpperValleyPlains(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        addThennVegetation(b, context, false, true, true, false, false, true);
+    }
+
+    private static void addVegetationThennUpperValleyTundra(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        addThennVegetation(b, context, false, true, true, false, false, false);
+    }
+
+    private static void addVegetationThennUpperValleyWoods(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        addThennVegetation(b, context, true, false, true, false, false, true);
+    }
+
+    // Hills — rocky, sparse trees, tors
+    private static void addVegetationThennHills(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        addThennVegetation(b, context, false, true, true, true, true, false);
+    }
+
+    // Mountains — cold, barren, heavy rocks
+    private static void addVegetationThennMountains(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
+        addThennVegetation(b, context, false, false, false, true, true, false);
+    }
+
     // =========================================================================
     // BIOME BUILDER HELPER
     // =========================================================================
@@ -732,80 +1321,220 @@ public class ModBiomes {
                 ModSounds.WINTER_WIND, false);
     }
 
-    public static Biome hauntedforest(BootstrapContext<Biome> context) {
+    public static Biome hauntedForestClearing(BootstrapContext<Biome> context) {
         MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
                 context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
         globalOverworldGeneration(biomeBuilder);
         addModOres(biomeBuilder, context);
-        addForestHauntedForest(biomeBuilder, context);
+        addVegetationHauntedForestClearing(biomeBuilder, context);
         return buildBiome(biomeBuilder, spawnBuilder, -0.8f, 0.8f,
-                0x3d4ed1, 0x0c113b, 0x7988b5, 0x577a5f, 0x324d38, 0x000000,
+                0x3d4ed1, 0x0c113b, 0x7988b5, 0x828c82, 0x6a746a, 0x000000,
                 ModSounds.FOREST_WIND, true);
     }
 
-    private static void addForestHauntedForest(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> context) {
-        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.ASH_KEY);
-        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.CHESTNUT_KEY);
-        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.IRONWOOD_KEY);
-        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SENTINEL_KEY);
-        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FIR_KEY);
-        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.PINE_KEY);
-        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.SOLDIER_PINE_KEY);
-        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.WEIRWOOD_KEY);
-        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.OAK2_KEY);
-        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FROSTFIRE_KEY);
-        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.THISTLE_KEY);
-        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.THORN_BUSH_KEY);
-        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.WINTER_ROSE_BUSH_KEY);
-        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.GRASS_KEY);
-        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.TALL_GRASS_KEY);
-        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.FERN_KEY);
-        b.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModplacedFeatures.LARGE_FERN_KEY);
-    }
-
-    public static Biome frostfangfoothills(BootstrapContext<Biome> context) {
+    public static Biome hauntedOpenWoodland(BootstrapContext<Biome> context) {
         MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
                 context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
         globalOverworldGeneration(biomeBuilder);
         addModOres(biomeBuilder, context);
+        addVegetationHauntedOpenWoodland(biomeBuilder, context);
         return buildBiome(biomeBuilder, spawnBuilder, -0.8f, 0.8f,
-                0x3d4ed1, 0x0c113b, 0x7988b5, 0x577a5f, 0x324d38, 0x000000,
-                ModSounds.WINTER_WIND, false);
+                0x3d4ed1, 0x0c113b, 0x7988b5, 0x828c82, 0x6a746a, 0x000000,
+                ModSounds.FOREST_WIND, true);
     }
 
-    public static Biome frostfangs(BootstrapContext<Biome> context) {
+    public static Biome hauntedForestEdge(BootstrapContext<Biome> context) {
         MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
                 context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
         globalOverworldGeneration(biomeBuilder);
         addModOres(biomeBuilder, context);
+        addVegetationHauntedForestEdge(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, -0.8f, 0.8f,
+                0x3d4ed1, 0x0c113b, 0x7988b5, 0x778277, 0x616b61, 0x000000,
+                ModSounds.FOREST_WIND, true);
+    }
+
+    public static Biome hauntedForestMain(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationHauntedForestMain(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, -0.8f, 0.8f,
+                0x3d4ed1, 0x0c113b, 0x7988b5, 0x778277, 0x616b61, 0x000000,
+                ModSounds.FOREST_WIND, true);
+    }
+
+    public static Biome hauntedBroadleafForest(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationHauntedBroadleafForest(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, -0.8f, 0.8f,
+                0x3d4ed1, 0x0c113b, 0x7988b5, 0x778277, 0x616b61, 0x000000,
+                ModSounds.FOREST_WIND, true);
+    }
+
+    public static Biome hauntedDeepForest(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationHauntedDeepForest(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, -0.8f, 0.8f,
+                0x3d4ed1, 0x0c113b, 0x7988b5, 0x6d786d, 0x586258, 0x000000,
+                ModSounds.FOREST_WIND, true);
+    }
+
+    public static Biome hauntedPineForest(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationHauntedPineForest(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, -0.8f, 0.8f,
+                0x3d4ed1, 0x0c113b, 0x7988b5, 0x6d786d, 0x586258, 0x000000,
+                ModSounds.FOREST_WIND, true);
+    }
+
+    public static Biome hauntedIronwoodForest(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationHauntedIronwoodForest(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, -0.8f, 0.8f,
+                0x3d4ed1, 0x0c113b, 0x7988b5, 0x6d786d, 0x586258, 0x000000,
+                ModSounds.FOREST_WIND, true);
+    }
+
+    public static Biome hauntedAncientForest(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationHauntedAncientForest(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, -0.8f, 0.8f,
+                0x3d4ed1, 0x0c113b, 0x7988b5, 0x5a635a, 0x474f47, 0x000000,
+                ModSounds.FOREST_WIND, true);
+    }
+
+    public static Biome hauntedDenseIronwood(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationHauntedDenseIronwood(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, -0.8f, 0.8f,
+                0x3d4ed1, 0x0c113b, 0x7988b5, 0x5a635a, 0x474f47, 0x000000,
+                ModSounds.FOREST_WIND, true);
+    }
+
+    public static Biome beyondTheWall(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationBeyondTheWall(biomeBuilder, context);
         return buildBiome(biomeBuilder, spawnBuilder, -1.0f, 0.8f,
-                0x3d4ed1, 0x0c113b, 0x7988b5, 0x577a5f, 0x324d38, 0x000000,
+                0x3d4ed1, 0x0c113b, 0xc8d0d8, 0xd9d9d9, 0xc8c8c8, 0xe8e8e8,
                 ModSounds.WINTER_WIND, false);
     }
 
-    public static Biome valleyofthenn(BootstrapContext<Biome> context) {
+    public static Biome beyondTheWallIceRiverValley(BootstrapContext<Biome> context) {
         MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
                 context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
         globalOverworldGeneration(biomeBuilder);
-        BiomeDefaultFeatures.addDefaultCarversAndLakes(biomeBuilder);
-        BiomeDefaultFeatures.addDefaultSprings(biomeBuilder);
         addModOres(biomeBuilder, context);
-        return new Biome.BiomeBuilder()
-                .hasPrecipitation(true)
-                .downfall(0.8f)
-                .temperature(0.5f)
-                .generationSettings(biomeBuilder.build())
-                .mobSpawnSettings(spawnBuilder.build())
-                .specialEffects(new BiomeSpecialEffects.Builder()
-                        .waterColor(0x3d4ed1).waterFogColor(0x0c113b).skyColor(0x5a6ef2)
-                        .grassColorOverride(0x5c9967).foliageColorOverride(0x324d38).fogColor(0x000000)
-                        .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
-                        .backgroundMusic(Musics.createGameMusic(ModSounds.MAMMOTH_SOUNDS)).build())
-                .build();
+        addVegetationBeyondTheWallIceRiverValley(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, -1.0f, 0.8f,
+                0x3d4ed1, 0x0c113b, 0xc8d0d8, 0xd6d3bb, 0xc4c1aa, 0xe8e8e8,
+                ModSounds.WINTER_WIND, false);
+    }
+
+    public static Biome beyondTheWallFrozenShore(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationBeyondTheWallFrozenShore(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, -1.0f, 0.8f,
+                0x3d4ed1, 0x0c113b, 0xc8d0d8, 0xd9caca, 0xc8b9b9, 0xe8e8e8,
+                ModSounds.WINTER_WIND, false);
+    }
+
+    public static Biome beyondTheWallRiverValley(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationBeyondTheWallRiverValley(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, -1.0f, 0.8f,
+                0x3d4ed1, 0x0c113b, 0xc8d0d8, 0xc5c5c5, 0xb4b4b4, 0xe8e8e8,
+                ModSounds.WINTER_WIND, false);
+    }
+
+    public static Biome giantsStair(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationGiantsStair(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, -1.0f, 0.8f,
+                0x3d4ed1, 0x0c113b, 0xb8b9cc, 0xbfc0cd, 0xaeafbc, 0xd8d8e8,
+                ModSounds.WINTER_WIND, false);
+    }
+
+    public static Biome giantsStairRiverValley(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationGiantsStairRiverValley(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, -1.0f, 0.8f,
+                0x3d4ed1, 0x0c113b, 0xb8b9cc, 0xadaec5, 0x9c9db4, 0xd8d8e8,
+                ModSounds.WINTER_WIND, false);
+    }
+
+    public static Biome frostfangHills(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationFrostfangHills(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, -1.0f, 0.6f,
+                0x3d4ed1, 0x0c113b, 0xa8aab8, 0x969494, 0x848282, 0xc8c8c8,
+                ModSounds.WINTER_WIND, false);
+    }
+
+    public static Biome frostfangMountains(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationFrostfangMountains(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, -1.0f, 0.5f,
+                0x3d4ed1, 0x0c113b, 0xb8bac8, 0xc6c6c6, 0xb4b4b4, 0xe0e0e0,
+                ModSounds.WINTER_WIND, false);
     }
 
     public static Biome northernhills(BootstrapContext<Biome> context) {
@@ -815,8 +1544,8 @@ public class ModBiomes {
         globalOverworldGeneration(biomeBuilder);
         addModOres(biomeBuilder, context);
         addVegetationNorthernHills(biomeBuilder, context);
-        return buildBiome(biomeBuilder, spawnBuilder, 0.2f, 0.8f,
-                0x3d4ed1, 0x0c113b, 0xa7addb, 0x47a651, 0x47a651, 0xa7addb,
+        return buildBiome(biomeBuilder, spawnBuilder, 0.15f, 0.8f,
+                0x3d4ed1, 0x0c113b, 0xa7addb, 0x8f9e98, 0x7a8a83, 0xa7addb,
                 null, false);
     }
 
@@ -826,8 +1555,8 @@ public class ModBiomes {
                 context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
         globalOverworldGeneration(biomeBuilder);
         addModOres(biomeBuilder, context);
-        return buildBiome(biomeBuilder, spawnBuilder, -0.5f, 0.8f,
-                0x3d4ed1, 0x0c113b, 0xa7addb, 0x47a651, 0x47a651, 0xa7addb,
+        return buildBiome(biomeBuilder, spawnBuilder, 0.2f, 0.8f,
+                0x3d4ed1, 0x0c113b, 0xa7addb, 0xcbcfcd, 0xb0b5b2, 0xe0e3e2,
                 ModSounds.WINTER_WIND, false);
     }
 
@@ -843,15 +1572,15 @@ public class ModBiomes {
                 null, false);
     }
 
-    public static Biome the_north(BootstrapContext<Biome> context) {
+    public static Biome northernPlains(BootstrapContext<Biome> context) {
         MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
                 context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
         globalOverworldGeneration(biomeBuilder);
         addModOres(biomeBuilder, context);
-        addVegetationTheNorth(biomeBuilder, context);
-        return buildBiome(biomeBuilder, spawnBuilder, 0.5f, 0.8f,
-                0x3d4ed1, 0x0c113b, 0xa7addb, 0x47a651, 0x47a651, 0xa7addb,
+        addVegetationNorthernPlains(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, 0.2f, 0.8f,
+                0x3d4ed1, 0x0c113b, 0xa7addb, 0x4d5f55, 0x3d4f45, 0xa7addb,
                 null, false);
     }
 
@@ -1470,6 +2199,258 @@ public class ModBiomes {
         addSkagosBog(biomeBuilder, context);
         return buildBiome(biomeBuilder, spawnBuilder, -0.45f, 0.85f,
                 0x3d4ed1, 0x0c113b, 0x8f97c4, 0x8a9582, 0x6e7867, 0xc9ced7,
+                ModSounds.WINTER_WIND, false);
+    }
+
+    public static Biome theWall(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationTheWall(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, -0.8f, 0.8f,
+                0x3d4ed1, 0x0c113b, 0xd0e0f0, 0xe8f0e8, 0xe0ece0, 0xffffff,
+                ModSounds.WINTER_WIND, false);
+    }
+
+    public static Biome theGiftTundra(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationGiftTundra(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, 0.1f, 0.8f,
+                0x3d4ed1, 0x0c113b, 0x9ab0a6, 0x6a7b71, 0x576866, 0xb0c4bb,
+                null, false);
+    }
+
+    public static Biome theGiftBarrens(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationGiftBarrens(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, 0.1f, 0.7f,
+                0x3d4ed1, 0x0c113b, 0x9ab0a6, 0x6a7b71, 0x576866, 0xb0c4bb,
+                null, false);
+    }
+
+    public static Biome theGiftWoods(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationGiftWoods(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, 0.1f, 0.8f,
+                0x3d4ed1, 0x0c113b, 0x9ab0a6, 0x6a7b71, 0x576866, 0xb0c4bb,
+                ModSounds.FOREST_WIND, true);
+    }
+
+    public static Biome theNewGiftTundra(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationGiftTundra(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, 0.20f, 0.8f,
+                0x3d4ed1, 0x0c113b, 0xa0b8ac, 0x5b6d63, 0x4a5c52, 0xbacec6,
+                null, false);
+    }
+
+    public static Biome theNewGiftBarrens(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationGiftBarrens(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, 0.20f, 0.7f,
+                0x3d4ed1, 0x0c113b, 0xa0b8ac, 0x5b6d63, 0x4a5c52, 0xbacec6,
+                null, false);
+    }
+
+    public static Biome theNewGiftWoods(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationGiftWoods(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, 0.20f, 0.8f,
+                0x3d4ed1, 0x0c113b, 0xa0b8ac, 0x5b6d63, 0x4a5c52, 0xbacec6,
+                ModSounds.FOREST_WIND, true);
+    }
+
+    public static Biome umberDomainTundra(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationUmberDomainTundra(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, 0.2f, 0.8f,
+                0x3d4ed1, 0x0c113b, 0x8aaa96, 0x2a5d3e, 0x1f4a30, 0xa8c4b4,
+                null, false);
+    }
+
+    public static Biome umberDomainBarrens(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationUmberDomainBarrens(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, 0.2f, 0.7f,
+                0x3d4ed1, 0x0c113b, 0x8aaa96, 0x2a5d3e, 0x1f4a30, 0xa8c4b4,
+                null, false);
+    }
+
+    public static Biome umberDomainWoods(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationUmberDomainWoods(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, 0.2f, 0.8f,
+                0x3d4ed1, 0x0c113b, 0x8aaa96, 0x2a5d3e, 0x1f4a30, 0xa8c4b4,
+                ModSounds.FOREST_WIND, true);
+    }
+
+    public static Biome umberDomainDeepTundra(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationUmberDomainTundra(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, 0.2f, 0.8f,
+                0x3d4ed1, 0x0c113b, 0x82a28e, 0x326647, 0x265237, 0xa0bcaa,
+                null, false);
+    }
+
+    public static Biome umberDomainDeepBarrens(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationUmberDomainBarrens(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, 0.2f, 0.7f,
+                0x3d4ed1, 0x0c113b, 0x82a28e, 0x326647, 0x265237, 0xa0bcaa,
+                null, false);
+    }
+
+    public static Biome umberDomainDeepWoods(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationUmberDomainWoods(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, 0.2f, 0.8f,
+                0x3d4ed1, 0x0c113b, 0x82a28e, 0x326647, 0x265237, 0xa0bcaa,
+                ModSounds.FOREST_WIND, true);
+    }
+
+    public static Biome thennValleyPlains(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationThennValleyPlains(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, 0.3f, 0.8f,
+                0x3d4ed1, 0x0c113b, 0x96b096, 0x6b8f6b, 0x587a58, 0xb0c8b0,
+                null, false);
+    }
+
+    public static Biome thennValleyTundra(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationThennValleyTundra(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, 0.3f, 0.8f,
+                0x3d4ed1, 0x0c113b, 0x96b096, 0x6b8f6b, 0x587a58, 0xb0c8b0,
+                null, false);
+    }
+
+    public static Biome thennValleyWoods(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationThennValleyWoods(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, 0.3f, 0.8f,
+                0x3d4ed1, 0x0c113b, 0x96b096, 0x6b8f6b, 0x587a58, 0xb0c8b0,
+                ModSounds.FOREST_WIND, true);
+    }
+
+    public static Biome thennUpperValleyPlains(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationThennUpperValleyPlains(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, 0.3f, 0.8f,
+                0x3d4ed1, 0x0c113b, 0x8ea88e, 0x5f835f, 0x4e6e4e, 0xa8c0a8,
+                null, false);
+    }
+
+    public static Biome thennUpperValleyTundra(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationThennUpperValleyTundra(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, 0.3f, 0.8f,
+                0x3d4ed1, 0x0c113b, 0x8ea88e, 0x5f835f, 0x4e6e4e, 0xa8c0a8,
+                null, false);
+    }
+
+    public static Biome thennUpperValleyWoods(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationThennUpperValleyWoods(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, 0.3f, 0.8f,
+                0x3d4ed1, 0x0c113b, 0x8ea88e, 0x5f835f, 0x4e6e4e, 0xa8c0a8,
+                ModSounds.FOREST_WIND, true);
+    }
+
+    public static Biome thennHills(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationThennHills(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, 0.15f, 0.7f,
+                0x3d4ed1, 0x0c113b, 0xb0a8a8, 0xad9f9f, 0x9c8e8e, 0xd0c8c8,
+                ModSounds.WINTER_WIND, false);
+    }
+
+    public static Biome thennMountains(BootstrapContext<Biome> context) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        globalOverworldGeneration(biomeBuilder);
+        addModOres(biomeBuilder, context);
+        addVegetationThennMountains(biomeBuilder, context);
+        return buildBiome(biomeBuilder, spawnBuilder, 0.15f, 0.6f,
+                0x3d4ed1, 0x0c113b, 0xc0b8b8, 0xc5b4b4, 0xb4a3a3, 0xe0d8d8,
                 ModSounds.WINTER_WIND, false);
     }
 }

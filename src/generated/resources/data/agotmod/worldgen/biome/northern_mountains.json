@@ -3,9 +3,9 @@
   "downfall": 0.8,
   "effects": {
     "ambient_sound": "agotmod:winter_wind",
-    "fog_color": 10989019,
-    "foliage_color": 4695633,
-    "grass_color": 4695633,
+    "fog_color": 14738402,
+    "foliage_color": 11580850,
+    "grass_color": 13357005,
     "mood_sound": {
       "block_search_extent": 8,
       "offset": 2.0,
@@ -89,5 +89,5 @@
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": -0.5
+  "temperature": 0.2
 }

@@ -4,7 +4,6 @@
   "size": 2,
   "max_distance_from_center": 80,
   "biomes": [
-    "agotmod:the_north",
     "agotmod:skagos_tundra",
     "agotmod:skagos_barrens",
     "agotmod:skagos_woods",

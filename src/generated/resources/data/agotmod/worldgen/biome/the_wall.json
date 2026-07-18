@@ -3,9 +3,9 @@
   "downfall": 0.8,
   "effects": {
     "ambient_sound": "agotmod:winter_wind",
-    "fog_color": 0,
-    "foliage_color": 14277081,
-    "grass_color": 14277081,
+    "fog_color": 16777215,
+    "foliage_color": 14740704,
+    "grass_color": 15266024,
     "mood_sound": {
       "block_search_extent": 8,
       "offset": 2.0,
@@ -18,7 +18,7 @@
       "replace_current_music": false,
       "sound": "agotmod:winter_wind"
     },
-    "sky_color": 7964853,
+    "sky_color": 13689072,
     "water_color": 4017873,
     "water_fog_color": 790843
   },
@@ -72,7 +72,22 @@
     [],
     [
       "minecraft:glow_lichen",
-      "agotmod:weirwood"
+      "agotmod:forget_me_not",
+      "agotmod:frostfire",
+      "agotmod:liverwort",
+      "agotmod:lungwort",
+      "agotmod:pennyroyal",
+      "agotmod:red_rose_bush",
+      "agotmod:thistle",
+      "agotmod:thorn_bush",
+      "agotmod:winter_rose_bush",
+      "agotmod:sedge",
+      "agotmod:grass",
+      "agotmod:tall_grass",
+      "agotmod:fern",
+      "agotmod:large_fern",
+      "agotmod:birch_bush",
+      "agotmod:willow_bush"
     ],
     [
       "minecraft:freeze_top_layer"
@@ -90,5 +105,5 @@
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": -1.0
+  "temperature": -0.8
 }

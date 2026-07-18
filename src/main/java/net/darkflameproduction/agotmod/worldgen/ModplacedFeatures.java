@@ -973,7 +973,7 @@ public class ModplacedFeatures {
         register(context, THISTLE_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.THISTLE_KEY),
                 List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(32),
+                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
@@ -981,7 +981,7 @@ public class ModplacedFeatures {
         register(context, TANSY_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.TANSY_KEY),
                 List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(32),
+                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
@@ -989,7 +989,7 @@ public class ModplacedFeatures {
         register(context, SPICEFLOWER_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.SPICEFLOWER_KEY),
                 List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(32),
+                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
@@ -997,7 +997,7 @@ public class ModplacedFeatures {
         register(context, SEDGE_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.SEDGE_KEY),
                 List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(32),
+                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
@@ -1005,7 +1005,7 @@ public class ModplacedFeatures {
         register(context, SAFFRON_CROCUS_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.SAFFRON_CROCUS_KEY),
                 List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(32),
+                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
@@ -1013,7 +1013,7 @@ public class ModplacedFeatures {
         register(context, POISON_KISSES_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.POISON_KISSES_KEY),
                 List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(32),
+                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
@@ -1021,7 +1021,7 @@ public class ModplacedFeatures {
         register(context, PENNYROYAL_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.PENNYROYAL_KEY),
                 List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(32),
+                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
@@ -1029,7 +1029,7 @@ public class ModplacedFeatures {
         register(context, OPIUM_POPPY_WILD_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.OPIUM_POPPY_WILD_KEY),
                 List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(32),
+                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
@@ -1037,7 +1037,7 @@ public class ModplacedFeatures {
         register(context, NIGHTSHADE_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.NIGHTSHADE_KEY),
                 List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(32),
+                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
@@ -1045,7 +1045,7 @@ public class ModplacedFeatures {
         register(context, MOONBLOOM_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.MOONBLOOM_KEY),
                 List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(32),
+                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
@@ -1053,7 +1053,7 @@ public class ModplacedFeatures {
         register(context, LUNGWORT_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.LUNGWORT_KEY),
                 List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(32),
+                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
@@ -1061,7 +1061,7 @@ public class ModplacedFeatures {
         register(context, LIVERWORT_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.LIVERWORT_KEY),
                 List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(32),
+                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
@@ -1069,7 +1069,7 @@ public class ModplacedFeatures {
         register(context, LAVENDER_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.LAVENDER_KEY),
                 List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(32),
+                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
@@ -1077,7 +1077,7 @@ public class ModplacedFeatures {
         register(context, LADYS_LACE_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.LADYS_LACE_KEY),
                 List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(32),
+                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
@@ -1085,7 +1085,7 @@ public class ModplacedFeatures {
         register(context, GORSE_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.GORSE_KEY),
                 List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(32),
+                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
@@ -1093,7 +1093,7 @@ public class ModplacedFeatures {
         register(context, GOLDENROD_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.GOLDENROD_KEY),
                 List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(32),
+                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
@@ -1101,7 +1101,7 @@ public class ModplacedFeatures {
         register(context, GOLDENCUP_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.GOLDENCUP_KEY),
                 List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(32),
+                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
@@ -1109,7 +1109,7 @@ public class ModplacedFeatures {
         register(context, GOATHEAD_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.GOATHEAD_KEY),
                 List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(32),
+                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
@@ -1117,7 +1117,7 @@ public class ModplacedFeatures {
         register(context, GINGER_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.GINGER_KEY),
                 List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(32),
+                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
@@ -1125,7 +1125,7 @@ public class ModplacedFeatures {
         register(context, GILLYFLOWER_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.GILLYFLOWER_KEY),
                 List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(32),
+                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
@@ -1133,7 +1133,7 @@ public class ModplacedFeatures {
         register(context, FROSTFIRE_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.FROSTFIRE_KEY),
                 List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(32),
+                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
@@ -1141,7 +1141,7 @@ public class ModplacedFeatures {
         register(context, FORGET_ME_NOT_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.FORGET_ME_NOT_KEY),
                 List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(32),
+                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
@@ -1149,7 +1149,7 @@ public class ModplacedFeatures {
         register(context, EVENING_STAR_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.EVENING_STAR_KEY),
                 List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(32),
+                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
@@ -1157,7 +1157,7 @@ public class ModplacedFeatures {
         register(context, DRAGONS_BREATH_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.DRAGONS_BREATH_KEY),
                 List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(32),
+                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
@@ -1165,7 +1165,7 @@ public class ModplacedFeatures {
         register(context, COLDSNAP_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.COLDSNAP_KEY),
                 List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(32),
+                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
@@ -1173,7 +1173,7 @@ public class ModplacedFeatures {
         register(context, BLOODBLOOM_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.BLOODBLOOM_KEY),
                 List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(32),
+                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
@@ -1181,7 +1181,7 @@ public class ModplacedFeatures {
         register(context, BLACK_LOTUS_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.BLACK_LOTUS_KEY),
                 List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(32),
+                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
@@ -1189,7 +1189,7 @@ public class ModplacedFeatures {
         register(context, BLUE_ROSE_BUSH_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.BLUE_ROSE_BUSH_KEY),
                 List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(32),
+                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
@@ -1197,7 +1197,7 @@ public class ModplacedFeatures {
         register(context, WHITE_ROSE_BUSH_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.WHITE_ROSE_BUSH_KEY),
                 List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(32),
+                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
@@ -1205,7 +1205,7 @@ public class ModplacedFeatures {
         register(context, DUSKY_ROSE_BUSH_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.DUSKY_ROSE_BUSH_KEY),
                 List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(32),
+                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
@@ -1213,7 +1213,7 @@ public class ModplacedFeatures {
         register(context, WINTER_ROSE_BUSH_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.WINTER_ROSE_BUSH_KEY),
                 List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(32),
+                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));
@@ -1221,7 +1221,7 @@ public class ModplacedFeatures {
         register(context, RED_ROSE_BUSH_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.RED_ROSE_BUSH_KEY),
                 List.of(CountPlacement.of(1),
-                        RarityFilter.onAverageOnceEvery(32),
+                        RarityFilter.onAverageOnceEvery(64),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome()));

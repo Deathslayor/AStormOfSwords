@@ -97,7 +97,7 @@ public class StonePileFeature extends Feature<NoneFeatureConfiguration> {
                 if (random.nextBoolean()) {
                     boulderBlock = Blocks.DIORITE.defaultBlockState();
                 } else {
-                    boulderBlock = Blocks.GRANITE.defaultBlockState();
+                    boulderBlock = Blocks.ANDESITE.defaultBlockState();
                 }
             }
         }

@@ -1,16 +1,10 @@
 {
-  "carvers": {
-    "air": [
-      "minecraft:cave",
-      "minecraft:cave_extra_underground",
-      "minecraft:canyon"
-    ]
-  },
+  "carvers": {},
   "downfall": 0.8,
   "effects": {
-    "fog_color": 0,
-    "foliage_color": 3296568,
-    "grass_color": 6068583,
+    "fog_color": 11059368,
+    "foliage_color": 5140046,
+    "grass_color": 6259551,
     "mood_sound": {
       "block_search_extent": 8,
       "offset": 2.0,
@@ -21,18 +15,15 @@
       "max_delay": 24000,
       "min_delay": 12000,
       "replace_current_music": false,
-      "sound": "agotmod:mammoth_sounds"
+      "sound": "agotmod:winter_wind"
     },
-    "sky_color": 5926642,
+    "sky_color": 9349262,
     "water_color": 4017873,
     "water_fog_color": 790843
   },
   "features": [
     [],
-    [
-      "minecraft:lake_lava_underground",
-      "minecraft:lake_lava_surface"
-    ],
+    [],
     [
       "minecraft:amethyst_geode"
     ],
@@ -77,12 +68,30 @@
       "agotmod:topaz_ore_placed",
       "agotmod:tourmaline_ore_placed"
     ],
+    [],
     [
-      "minecraft:spring_water",
-      "minecraft:spring_lava"
-    ],
-    [
-      "minecraft:glow_lichen"
+      "minecraft:glow_lichen",
+      "agotmod:ash_rare",
+      "agotmod:chestnut_rare",
+      "agotmod:ironwood_rare",
+      "agotmod:sentinel_rare",
+      "agotmod:fir_rare",
+      "agotmod:pine_rare",
+      "agotmod:soldier_pine_rare",
+      "agotmod:weirwood_rare",
+      "agotmod:oak_rare",
+      "agotmod:frostfire",
+      "agotmod:frostfire",
+      "agotmod:thistle",
+      "agotmod:thorn_bush",
+      "agotmod:winter_rose_bush",
+      "agotmod:sedge",
+      "agotmod:grass",
+      "agotmod:tall_grass",
+      "agotmod:fern",
+      "agotmod:large_fern",
+      "agotmod:birch_bush",
+      "agotmod:willow_bush"
     ],
     [
       "minecraft:freeze_top_layer"
@@ -100,5 +109,5 @@
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": 0.5
+  "temperature": 0.3
 }
