@@ -97,11 +97,11 @@
       "agotmod:tall_grass",
       "agotmod:fern",
       "agotmod:large_fern",
-      "agotmod:birch_bush",
-      "agotmod:willow_bush",
       "agotmod:stone_patch",
       "agotmod:gravel_patch",
-      "agotmod:stone_pile"
+      "agotmod:stone_pile",
+      "agotmod:birch_bush",
+      "agotmod:willow_bush"
     ],
     [
       "minecraft:freeze_top_layer"

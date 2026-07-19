@@ -1,10 +1,10 @@
 {
   "carvers": {},
-  "downfall": 0.8,
+  "downfall": 0.9,
   "effects": {
     "fog_color": 10989019,
-    "foliage_color": 3515969,
-    "grass_color": 3515969,
+    "foliage_color": 2571568,
+    "grass_color": 3230781,
     "mood_sound": {
       "block_search_extent": 8,
       "offset": 2.0,
@@ -83,23 +83,21 @@
       "agotmod:fir_rare",
       "agotmod:pine_rare",
       "agotmod:soldier_pine_rare",
+      "agotmod:weirwood_rare",
       "agotmod:oak_rare",
       "agotmod:hawthorn_rare",
       "agotmod:beech_rare",
-      "agotmod:forget_me_not",
       "agotmod:frostfire",
       "agotmod:liverwort",
-      "agotmod:lungwort",
-      "agotmod:pennyroyal",
-      "agotmod:red_rose_bush",
       "agotmod:thistle",
       "agotmod:thorn_bush",
-      "agotmod:winter_rose_bush",
       "agotmod:sedge",
       "agotmod:grass",
       "agotmod:tall_grass",
       "agotmod:fern",
-      "agotmod:large_fern"
+      "agotmod:large_fern",
+      "agotmod:birch_bush",
+      "agotmod:willow_bush"
     ],
     [
       "minecraft:freeze_top_layer"

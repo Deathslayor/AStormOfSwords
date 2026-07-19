@@ -73,6 +73,8 @@
     [
       "minecraft:glow_lichen",
       "agotmod:frostfire",
+      "agotmod:fern",
+      "agotmod:large_fern",
       "agotmod:stone_patch",
       "agotmod:gravel_patch",
       "agotmod:stone_pile"

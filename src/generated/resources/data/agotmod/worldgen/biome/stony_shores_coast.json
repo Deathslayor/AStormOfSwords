@@ -1,10 +1,10 @@
 {
   "carvers": {},
-  "downfall": 0.7,
+  "downfall": 0.6,
   "effects": {
-    "fog_color": 11584699,
-    "foliage_color": 5728358,
-    "grass_color": 6978417,
+    "fog_color": 10989019,
+    "foliage_color": 5263183,
+    "grass_color": 6447457,
     "mood_sound": {
       "block_search_extent": 8,
       "offset": 2.0,
@@ -17,7 +17,7 @@
       "replace_current_music": false,
       "sound": "agotmod:winter_wind"
     },
-    "sky_color": 10137766,
+    "sky_color": 10989019,
     "water_color": 4017873,
     "water_fog_color": 790843
   },
@@ -71,18 +71,16 @@
     [],
     [
       "minecraft:glow_lichen",
-      "agotmod:sentinel_rare",
-      "agotmod:fir_rare",
-      "agotmod:pine_rare",
-      "agotmod:soldier_pine_rare",
       "agotmod:frostfire",
-      "agotmod:thistle",
-      "agotmod:thorn_bush",
       "agotmod:sedge",
       "agotmod:grass",
       "agotmod:tall_grass",
       "agotmod:fern",
       "agotmod:large_fern",
+      "agotmod:stone_patch",
+      "agotmod:gravel_patch",
+      "agotmod:stone_pile",
+      "agotmod:tor",
       "agotmod:birch_bush",
       "agotmod:willow_bush"
     ],
@@ -102,5 +100,5 @@
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": 0.1
+  "temperature": 0.3
 }

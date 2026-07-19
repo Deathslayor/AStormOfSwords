@@ -1307,9 +1307,9 @@ public class ModplacedFeatures {
         register(context, CALCITE_DEPOSIT_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.CALCITE_DEPOSIT_KEY),
                 List.of(
-                        CountPlacement.of(4),
+                        CountPlacement.of(30),
                         InSquarePlacement.spread(),
-                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(32)),
+                        HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.top()),
                         BiomeFilter.biome()
                 ));
 

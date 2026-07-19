@@ -3,8 +3,8 @@
   "downfall": 0.8,
   "effects": {
     "fog_color": 10989019,
-    "foliage_color": 4695633,
-    "grass_color": 4695633,
+    "foliage_color": 4280384,
+    "grass_color": 5398349,
     "mood_sound": {
       "block_search_extent": 8,
       "offset": 2.0,
@@ -78,6 +78,7 @@
       "agotmod:fir_rare",
       "agotmod:pine_rare",
       "agotmod:soldier_pine_rare",
+      "agotmod:weirwood_rare",
       "agotmod:oak_rare",
       "agotmod:hawthorn_rare",
       "agotmod:beech_rare",

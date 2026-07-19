@@ -1,21 +1,59 @@
 {
   "road_types": {
     "kings_road": {
-      "blocks": ["minecraft:stone_bricks", "minecraft:cobblestone"],
-      "slabs": ["minecraft:stone_brick_slab", "minecraft:cobblestone_slab"],
+      "blocks": [
+        "minecraft:dirt_path",
+        "minecraft:gravel",
+        "agotmod:stone_4_block"
+      ],
+      "slabs": [
+        "agotmod:stone_4_slab"
+      ],
       "width": 7
     }
   },
   "roads": [
     {
       "type": "kings_road",
-      "y_level": 70,
+      "y_level": 80,
       "transition": 12,
       "min_zoom": 2.0,
       "max_zoom": -1,
       "waypoints": [
-        {"x": 7540, "z": 117856},
-        {"x": 20996, "z": 134560, "curve": 0.15}
+        {"x": 99372,   "z": 1220100},
+        {"x": 55272,   "z": 1034292},
+        {"x": -279725, "z": 1080796}
+      ]
+    },
+    {
+      "type": "kings_road",
+      "y_level": 80,
+      "transition": 12,
+      "min_zoom": 2.0,
+      "max_zoom": -1,
+      "waypoints": [
+        {"x": 55272,  "z": 1034292},
+        {"x": 276948, "z": 1106028},
+        {"x": 313404, "z": 1158948}
+      ]
+    },
+    {
+      "type": "kings_road",
+      "y_level": 80,
+      "transition": 12,
+      "min_zoom": 2.0,
+      "max_zoom": -1,
+      "waypoints": [
+        {"x": 55272,  "z": 1034292},
+        {"x": 28812,  "z": 739116},
+        {"x": 9996,   "z": 727944},
+        {"x": 47040,  "z": 653268},
+        {"x": 93492,  "z": 540372},
+        {"x": 137004, "z": 475692},
+        {"x": 234024, "z": 381024},
+        {"x": 259896, "z": 346332},
+        {"x": 336336, "z": 248724},
+        {"x": 417480, "z": -100000}
       ]
     }
   ]

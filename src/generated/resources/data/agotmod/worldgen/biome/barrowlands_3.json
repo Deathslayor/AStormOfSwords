@@ -1,10 +1,10 @@
 {
   "carvers": {},
-  "downfall": 0.7,
+  "downfall": 0.8,
   "effects": {
-    "fog_color": 11584699,
-    "foliage_color": 5728358,
-    "grass_color": 6978417,
+    "fog_color": 10989019,
+    "foliage_color": 3819319,
+    "grass_color": 4872005,
     "mood_sound": {
       "block_search_extent": 8,
       "offset": 2.0,
@@ -17,7 +17,7 @@
       "replace_current_music": false,
       "sound": "agotmod:winter_wind"
     },
-    "sky_color": 10137766,
+    "sky_color": 10989019,
     "water_color": 4017873,
     "water_fog_color": 790843
   },
@@ -71,20 +71,31 @@
     [],
     [
       "minecraft:glow_lichen",
+      "agotmod:ash_rare",
+      "agotmod:chestnut_rare",
+      "agotmod:ironwood_rare",
       "agotmod:sentinel_rare",
       "agotmod:fir_rare",
       "agotmod:pine_rare",
       "agotmod:soldier_pine_rare",
+      "agotmod:weirwood_rare",
+      "agotmod:oak_rare",
+      "agotmod:hawthorn_rare",
+      "agotmod:beech_rare",
+      "agotmod:forget_me_not",
       "agotmod:frostfire",
+      "agotmod:liverwort",
+      "agotmod:lungwort",
+      "agotmod:pennyroyal",
+      "agotmod:red_rose_bush",
       "agotmod:thistle",
       "agotmod:thorn_bush",
+      "agotmod:winter_rose_bush",
       "agotmod:sedge",
       "agotmod:grass",
       "agotmod:tall_grass",
       "agotmod:fern",
-      "agotmod:large_fern",
-      "agotmod:birch_bush",
-      "agotmod:willow_bush"
+      "agotmod:large_fern"
     ],
     [
       "minecraft:freeze_top_layer"
@@ -102,5 +113,5 @@
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": 0.1
+  "temperature": 0.4
 }

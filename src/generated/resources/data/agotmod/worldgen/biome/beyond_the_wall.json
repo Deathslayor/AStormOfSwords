@@ -76,7 +76,9 @@
       "agotmod:thistle",
       "agotmod:sedge",
       "agotmod:grass",
-      "agotmod:tall_grass"
+      "agotmod:tall_grass",
+      "agotmod:fern",
+      "agotmod:large_fern"
     ],
     [
       "minecraft:freeze_top_layer"

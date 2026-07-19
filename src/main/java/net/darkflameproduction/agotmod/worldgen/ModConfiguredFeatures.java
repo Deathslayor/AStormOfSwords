@@ -2089,8 +2089,8 @@ public class ModConfiguredFeatures {
                                 Blocks.TUFF,
                                 Blocks.DEEPSLATE
                         ),
-                        UniformInt.of(2, 5),
-                        2
+                        UniformInt.of(5, 8),
+                        4
                 )
         );
 

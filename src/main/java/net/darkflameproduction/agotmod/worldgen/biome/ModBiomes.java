@@ -150,12 +150,37 @@ public class ModBiomes {
     // Other Northern
     public static final ResourceKey<Biome> NORTHERN_HILLS    = key("northern_hills");
     public static final ResourceKey<Biome> NORTHERN_MOUNTAINS= key("northern_mountains");
-    public static final ResourceKey<Biome> BARROWLANDS       = key("barrowlands");
+    public static final ResourceKey<Biome> BARROWLANDS         = key("barrowlands");
+    public static final ResourceKey<Biome> BARROWLANDS_2       = key("barrowlands_2");
+    public static final ResourceKey<Biome> BARROWLANDS_3       = key("barrowlands_3");
+    public static final ResourceKey<Biome> BARROWLANDS_BARRENS = key("barrowlands_barrens");
     public static final ResourceKey<Biome> NORTHERN_PLAINS   = key("northern_plains");
     public static final ResourceKey<Biome> RILLS             = key("rills");
-    public static final ResourceKey<Biome> NORTHERN_WATERS   = key("northern_waters");
-    public static final ResourceKey<Biome> STONY_SHORES      = key("stony_shores");
-    public static final ResourceKey<Biome> THE_NECK          = key("the_neck");
+    public static final ResourceKey<Biome> RILLS_RIVER_VALLEY= key("rills_river_valley");
+    public static final ResourceKey<Biome> RILLS_COAST           = key("rills_coast");
+    public static final ResourceKey<Biome> NORTHERN_WATERS       = key("northern_waters");
+    public static final ResourceKey<Biome> SHALLOW_OCEAN         = key("shallow_ocean");
+    public static final ResourceKey<Biome> COLD_SHALLOW_OCEAN    = key("cold_shallow_ocean");
+    public static final ResourceKey<Biome> DEEP_OCEAN_NORTH      = key("deep_ocean_north");
+    public static final ResourceKey<Biome> NECK_WETLANDS         = key("neck_wetlands");
+    public static final ResourceKey<Biome> NORTHERN_WETLANDS     = key("northern_wetlands");
+    public static final ResourceKey<Biome> NORTHERN_LAKE         = key("northern_lake");
+    public static final ResourceKey<Biome> ARCTIC_LAKE           = key("arctic_lake");
+    public static final ResourceKey<Biome> NECK_RIVER            = key("neck_river");
+    public static final ResourceKey<Biome> NORTHERN_RIVER        = key("northern_river");
+    public static final ResourceKey<Biome> ARCTIC_RIVER          = key("arctic_river");
+    public static final ResourceKey<Biome> STONY_SHORES       = key("stony_shores");
+    public static final ResourceKey<Biome> STONY_SHORES_2     = key("stony_shores_2");
+    public static final ResourceKey<Biome> STONY_SHORES_COAST       = key("stony_shores_coast");
+    public static final ResourceKey<Biome> NORTHERN_CLANS_HIGHLANDS = key("northern_clans_highlands");
+    public static final ResourceKey<Biome> NORTHERN_CLANS_UPPER     = key("northern_clans_upper");
+    public static final ResourceKey<Biome> NORTHERN_CLANS_COAST     = key("northern_clans_coast");
+    public static final ResourceKey<Biome> CAPE_KRAKEN_INLAND       = key("cape_kraken_inland");
+    public static final ResourceKey<Biome> CAPE_KRAKEN_NORTH_COAST  = key("cape_kraken_north_coast");
+    public static final ResourceKey<Biome> CAPE_KRAKEN_COAST_MID    = key("cape_kraken_coast_mid");
+    public static final ResourceKey<Biome> CAPE_KRAKEN_COAST_SOUTH  = key("cape_kraken_coast_south");
+    public static final ResourceKey<Biome> THE_NECK                  = key("the_neck");
+    public static final ResourceKey<Biome> THE_NECK_2                = key("the_neck_2");
 
     // Umber Domain
     public static final ResourceKey<Biome> UMBER_DOMAIN_TUNDRA       = key("umber_domain_tundra");
@@ -331,14 +356,65 @@ public class ModBiomes {
         // Other Northern
         reg(context, NORTHERN_HILLS,    0.15f,0.8f, 0x3d4ed1, 0x0c113b, 0xa7addb, 0x8f9e98, 0x7a8a83, 0xa7addb, null,                  (b,ctx)->addForest(b,ctx,true,false,false,false,false,false,true,false));
         reg(context, NORTHERN_MOUNTAINS,0.2f, 0.8f, 0x3d4ed1, 0x0c113b, 0xa7addb, 0xcbcfcd, 0xb0b5b2, 0xe0e3e2, ModSounds.WINTER_WIND, (b,ctx)->{});
-        reg(context, BARROWLANDS,       0.5f, 0.8f, 0x3d4ed1, 0x0c113b, 0xa7addb, 0x47a651, 0x47a651, 0xa7addb, null,                  (b,ctx)->addForest(b,ctx,true,false,false,false,false,false,true,false));
+        reg(context, BARROWLANDS,         0.5f, 0.8f, 0x3d4ed1, 0x0c113b, 0xa7addb, 0x525f4d, 0x415040, 0xa7addb, null, (b,ctx)->addBarrowlands(b,ctx));
+        reg(context, BARROWLANDS_2,       0.5f, 0.8f, 0x3d4ed1, 0x0c113b, 0xa7addb, 0x576452, 0x475443, 0xa7addb, null, (b,ctx)->addBarrowlands(b,ctx));
+        reg(context, BARROWLANDS_3,       0.4f, 0.8f, 0x3d4ed1, 0x0c113b, 0xa7addb, 0x4a5745, 0x3a4737, 0xa7addb, null, (b,ctx)->addBarrowlands(b,ctx));
+        reg(context, BARROWLANDS_BARRENS, 0.5f, 0.7f, 0x3d4ed1, 0x0c113b, 0xa7addb, 0x4a5745, 0x3a4737, 0xa7addb, null, (b,ctx)->addBarrowlandsBarrens(b,ctx));
         reg(context, NORTHERN_PLAINS,   0.2f, 0.8f, 0x3d4ed1, 0x0c113b, 0xa7addb, 0x4d5f55, 0x3d4f45, 0xa7addb, null,                  (b,ctx)->addForest(b,ctx,true,false,false,false,false,false,true,false));
-        reg(context, RILLS,             0.5f, 0.8f, 0x3d4ed1, 0x0c113b, 0xa7addb, 0x35a641, 0x35a641, 0xa7addb, null,
-                (b,ctx)->{ addRiverFeatures(b,ctx); addForest(b,ctx,true,false,false,false,false,false,true,false); });
-        reg(context, NORTHERN_WATERS,   0.5f, 0.8f, 0x3d4ed1, 0x0c113b, 0xa7addb, 0x47a651, 0x47a651, 0xa7addb, null,   (b,ctx)->addRiverFeatures(b,ctx));
-        reg(context, STONY_SHORES,      0.5f, 0.8f, 0x3d4ed1, 0x0c113b, 0xa7addb, 0x47a651, 0x47a651, 0xa7addb, null,   (b,ctx)->addForest(b,ctx,true,false,false,false,false,false,true,false));
-        reg(context, THE_NECK,          0.5f, 0.8f, 0x294018, 0x1f1308, 0x638a6d, 0x27471f, 0x27471f, 0x30523b, null,
-                (b,ctx)->{ BiomeDefaultFeatures.addMangroveSwampVegetation(b); addRiverFeatures(b,ctx); });
+        reg(context, RILLS,              0.5f, 0.9f, 0x3d4ed1, 0x0c113b, 0xa7addb, 0x314c3d, 0x273d30, 0xa7addb, null, (b,ctx)->addRillsVegetation(b,ctx,true));
+        reg(context, RILLS_RIVER_VALLEY, 0.5f, 0.9f, 0x3d4ed1, 0x0c113b, 0xa7addb, 0x2b4336, 0x21342a, 0xa7addb, null, (b,ctx)->addRillsVegetation(b,ctx,true));
+        reg(context, RILLS_COAST,        0.5f, 0.9f, 0x3d4ed1, 0x0c113b, 0xa7addb, 0x355945, 0x294737, 0xa7addb, null, (b,ctx)->addRillsVegetation(b,ctx,false));
+
+        // wetlands — rills vegetation, flat boggy terrain
+        reg(context, NECK_WETLANDS,     0.5f, 1.0f, 0x617b64, 0x232317, 0x2a3d1e, 0x6a7039, 0x6a7039, 0x1a2510, null, (b,ctx)->addRillsVegetation(b,ctx,false));
+        reg(context, NORTHERN_WETLANDS, 0.2f, 0.9f, 0x3d4ed1, 0x0c113b, 0xa7addb, 0x314c3d, 0x273d30, 0xa7addb, null, (b,ctx)->addRillsVegetation(b,ctx,true));
+
+        // lakes — same vegetation as wetlands, height variation creates water
+        reg(context, NORTHERN_LAKE,     0.2f, 0.9f, 0x0e5cda, 0x0a4ab8, 0xa7addb, 0x314c3d, 0x273d30, 0xa7addb, null, (b,ctx)->addRillsVegetation(b,ctx,true));
+        reg(context, ARCTIC_LAKE,      -0.5f, 0.9f, 0x7da5e5, 0x6090d0, 0xb5c2e0, 0x8a9582, 0x6e7867, 0xc9ced7, null, (b,ctx)->addRillsVegetation(b,ctx,false));
+
+        // CTgen river biomes — water features only, no land vegetation
+        reg(context, NECK_RIVER,     0.5f, 1.0f, 0x617b64, 0x232317, 0x2a3d1e, 0x6a7039, 0x6a7039, 0x1a2510, null,
+                (b,ctx)->{ f(b,ModplacedFeatures.SEAGRASS_KEY); f(b,ModplacedFeatures.KELP_KEY); });
+        reg(context, NORTHERN_RIVER, 0.2f, 0.9f, 0x1971ff, 0x1560e0, 0xa7addb, 0x314c3d, 0x273d30, 0xa7addb, null,
+                (b,ctx)->{ f(b,ModplacedFeatures.SEAGRASS_KEY); f(b,ModplacedFeatures.KELP_KEY); });
+        reg(context, ARCTIC_RIVER,  -0.5f, 0.8f, 0x7da5e5, 0x6090d0, 0xb5c2e0, 0xd9d9d9, 0xd9d9d9, 0xe8e8e8, null,
+                (b,ctx)->{ f(b,ModplacedFeatures.SEAGRASS_KEY); f(b,ModplacedFeatures.KELP_KEY); });
+
+        reg(context, NORTHERN_WATERS,    0.5f, 0.8f, 0x3d4ed1, 0x0c113b, 0xa7addb, 0x47a651, 0x47a651, 0xa7addb, null, (b,ctx)->addRiverFeatures(b,ctx));
+        reg(context, SHALLOW_OCEAN,      0.5f, 0.8f, 0x060060, 0x040040, 0x7a9dbd, 0x4a6e4a, 0x3a5a3a, 0x060060, null,
+                (b,ctx)->{ f(b,ModplacedFeatures.SEAGRASS_KEY); f(b,ModplacedFeatures.KELP_KEY); });
+        reg(context, COLD_SHALLOW_OCEAN, 0.0f, 0.8f, 0x120e4f, 0x0c0a3a, 0x7a9dbd, 0x4a5a6a, 0x3a4a5a, 0x120e4f, null,
+                (b,ctx)->{ f(b,ModplacedFeatures.SEAGRASS_KEY); f(b,ModplacedFeatures.KELP_KEY); });
+        reg(context, DEEP_OCEAN_NORTH,  -0.5f, 0.8f, 0x040040, 0x020020, 0x7a9dbd, 0x3a4a4a, 0x2a3a3a, 0x040040, null,
+                (b,ctx)->{ f(b,ModplacedFeatures.SEAGRASS_KEY); f(b,ModplacedFeatures.KELP_KEY); });
+        reg(context, STONY_SHORES,       0.3f, 0.7f, 0x3d4ed1, 0x0c113b, 0xa7addb, 0x475948, 0x384739, 0xa7addb, null, (b,ctx)->addStonyShoresVegetation(b));
+        reg(context, STONY_SHORES_2,     0.3f, 0.7f, 0x3d4ed1, 0x0c113b, 0xa7addb, 0x515b52, 0x404941, 0xa7addb, null, (b,ctx)->addStonyShoresVegetation(b));
+        reg(context, STONY_SHORES_COAST, 0.3f, 0.6f, 0x3d4ed1, 0x0c113b, 0xa7addb, 0x626161, 0x504f4f, 0xa7addb, null, (b,ctx)->addStonyShoresVegetation(b));
+
+        // Northern Clans — cold conifer highlands
+        reg(context, NORTHERN_CLANS_HIGHLANDS, 0.2f, 0.8f, 0x3d4ed1, 0x0c113b, 0xa7addb, 0x56635c, 0x44504a, 0xa7addb, null,                  (b,ctx)->addConiferLand(b,ctx,false,true,false));
+        reg(context, NORTHERN_CLANS_UPPER,     0.1f, 0.7f, 0x3d4ed1, 0x0c113b, 0xa7addb, 0x495850, 0x384540, 0xa7addb, ModSounds.WINTER_WIND, (b,ctx)->addConiferLand(b,ctx,false,false,true));
+        reg(context, NORTHERN_CLANS_COAST,     0.2f, 0.7f, 0x3d4ed1, 0x0c113b, 0xa7addb, 0x515d56, 0x404a44, 0xa7addb, null,                  (b,ctx)->addConiferLand(b,ctx,true,false,false));
+
+        // Cape Kraken — conifer coast, sparse forests
+        reg(context, CAPE_KRAKEN_INLAND,      0.3f, 0.8f, 0x3d4ed1, 0x0c113b, 0xa7addb, 0x3f6751, 0x315240, 0xa7addb, ModSounds.FOREST_WIND, (b,ctx)->addConiferLand(b,ctx,false,true,false));
+        reg(context, CAPE_KRAKEN_NORTH_COAST, 0.3f, 0.8f, 0x3d4ed1, 0x0c113b, 0xa7addb, 0x476856, 0x385444, 0xa7addb, null,                  (b,ctx)->addConiferLand(b,ctx,true,false,false));
+        reg(context, CAPE_KRAKEN_COAST_MID,   0.3f, 0.8f, 0x3d4ed1, 0x0c113b, 0xa7addb, 0x4d6759, 0x3d5247, 0xa7addb, null,                  (b,ctx)->addConiferLand(b,ctx,true,false,false));
+        reg(context, CAPE_KRAKEN_COAST_SOUTH, 0.3f, 0.8f, 0x3d4ed1, 0x0c113b, 0xa7addb, 0x54625b, 0x424e49, 0xa7addb, null, (b,ctx)->addConiferLand(b,ctx,true,false,false));
+        reg(context, THE_NECK,   0.5f, 1.0f, 0x294018, 0x1f1308, 0x2a3d1e, 0x1d2517, 0x162010, 0x1a2510, null,
+                (b,ctx)->{ BiomeDefaultFeatures.addMangroveSwampVegetation(b);
+                    f(b,ModplacedFeatures.CLAY_PATCH_PLACED_KEY);
+                    f(b,ModplacedFeatures.QUAGMIRE_PATCH_PLACED_KEY);
+                    f(b,ModplacedFeatures.MUD_PATCH_PLACED_KEY);
+                    f(b,ModplacedFeatures.SEAGRASS_KEY);
+                    f(b,ModplacedFeatures.KELP_KEY); });
+        reg(context, THE_NECK_2, 0.5f, 1.0f, 0x294018, 0x1f1308, 0x263818, 0x12160e, 0x0e1009, 0x161d0c, null,
+                (b,ctx)->{ BiomeDefaultFeatures.addMangroveSwampVegetation(b);
+                    f(b,ModplacedFeatures.QUAGMIRE_PATCH_PLACED_KEY);
+                    f(b,ModplacedFeatures.MUD_PATCH_PLACED_KEY);
+                    f(b,ModplacedFeatures.SEAGRASS_KEY);
+                    f(b,ModplacedFeatures.KELP_KEY); });
 
         // Umber Domain
         reg(context, UMBER_DOMAIN_TUNDRA,       0.2f, 0.8f, 0x3d4ed1, 0x0c113b, 0x8aaa96, 0x2a5d3e, 0x1f4a30, 0xa8c4b4, null,                  (b,ctx)->addUmber(b,ctx));
@@ -360,6 +436,7 @@ public class ModBiomes {
         reg(context, SKAGOS_BOG,          -0.45f,0.85f,0x3d4ed1,0x0c113b,0x8f97c4,0x8a9582,0x6e7867,0xc9ced7, ModSounds.WINTER_WIND,
                 (b,ctx)->{ f(b,ModplacedFeatures.CLAY_PATCH_PLACED_KEY); f(b,ModplacedFeatures.QUAGMIRE_PATCH_PLACED_KEY); f(b,ModplacedFeatures.MUD_PATCH_PLACED_KEY);
                     addSkagos(b,ctx,true,false,false,true,true,true,false);
+                    f(b,ModplacedFeatures.STONE_PATCH_PLACED_KEY); f(b,ModplacedFeatures.GRAVEL_PATCH_PLACED_KEY); f(b,ModplacedFeatures.STONE_PILE_KEY);
                     addSkagosBushes(b); });
 
         // Night's Watch
@@ -620,6 +697,8 @@ public class ModBiomes {
             f(b,ModplacedFeatures.THISTLE_KEY); f(b,ModplacedFeatures.SEDGE_KEY);
             f(b,ModplacedFeatures.GRASS_KEY); f(b,ModplacedFeatures.TALL_GRASS_KEY);
         }
+        // ferns always before rocks and bushes
+        f(b,ModplacedFeatures.FERN_KEY); f(b,ModplacedFeatures.LARGE_FERN_KEY);
         if (rocks) { f(b,ModplacedFeatures.STONE_PATCH_PLACED_KEY); f(b,ModplacedFeatures.GRAVEL_PATCH_PLACED_KEY); f(b,ModplacedFeatures.STONE_PILE_KEY); }
         if (bushes) { f(b,ModplacedFeatures.VANILLA_BUSH_PLACED_KEYS.get("birch")); f(b,ModplacedFeatures.BUSH_PLACED_KEYS.get("willow")); }
     }
@@ -628,10 +707,10 @@ public class ModBiomes {
 
     private static void addFrostfang(BiomeGenerationSettings.Builder b, boolean grass, boolean bushes, boolean tor) {
         f(b,ModplacedFeatures.FROSTFIRE_KEY);
-        if (grass) {
-            f(b,ModplacedFeatures.THISTLE_KEY); f(b,ModplacedFeatures.SEDGE_KEY);
-            f(b,ModplacedFeatures.GRASS_KEY); f(b,ModplacedFeatures.TALL_GRASS_KEY);
-        }
+        f(b,ModplacedFeatures.THISTLE_KEY); f(b,ModplacedFeatures.THORN_BUSH_KEY);
+        f(b,ModplacedFeatures.SEDGE_KEY);
+        f(b,ModplacedFeatures.GRASS_KEY); f(b,ModplacedFeatures.TALL_GRASS_KEY);
+        f(b,ModplacedFeatures.FERN_KEY); f(b,ModplacedFeatures.LARGE_FERN_KEY);
         f(b,ModplacedFeatures.STONE_PATCH_PLACED_KEY); f(b,ModplacedFeatures.GRAVEL_PATCH_PLACED_KEY); f(b,ModplacedFeatures.STONE_PILE_KEY);
         if (tor) f(b,ModplacedFeatures.TOR_KEY);
         if (bushes) { f(b,ModplacedFeatures.VANILLA_BUSH_PLACED_KEYS.get("birch")); f(b,ModplacedFeatures.BUSH_PLACED_KEYS.get("willow")); }
@@ -658,16 +737,110 @@ public class ModBiomes {
             f(b,ModplacedFeatures.THISTLE_KEY); f(b,ModplacedFeatures.THORN_BUSH_KEY); f(b,ModplacedFeatures.WINTER_ROSE_BUSH_KEY);
             f(b,ModplacedFeatures.SEDGE_KEY);
             f(b,ModplacedFeatures.GRASS_KEY); f(b,ModplacedFeatures.TALL_GRASS_KEY);
-            f(b,ModplacedFeatures.FERN_KEY); f(b,ModplacedFeatures.LARGE_FERN_KEY);
         }
+        // ferns always before rocks regardless of grass flag
+        f(b,ModplacedFeatures.FERN_KEY); f(b,ModplacedFeatures.LARGE_FERN_KEY);
         if (rocks) { f(b,ModplacedFeatures.STONE_PATCH_PLACED_KEY); f(b,ModplacedFeatures.GRAVEL_PATCH_PLACED_KEY); f(b,ModplacedFeatures.STONE_PILE_KEY); }
         if (tor)   f(b,ModplacedFeatures.TOR_KEY);
         if (bushes) { f(b,ModplacedFeatures.VANILLA_BUSH_PLACED_KEYS.get("birch")); f(b,ModplacedFeatures.BUSH_PLACED_KEYS.get("willow")); }
     }
 
+    // ── CONIFER LAND (Northern Clans + Cape Kraken) ───────────────────────────
+    // rocks = stone piles on coast, sparse = scattered trees, dense = sparse forest
+
+    private static void addConiferLand(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> ctx,
+                                       boolean rocks, boolean sparseForest, boolean barren) {
+        if (sparseForest) {
+            f(b,ModplacedFeatures.SENTINEL_RARE_KEY); f(b,ModplacedFeatures.FIR_RARE_KEY);
+            f(b,ModplacedFeatures.PINE_RARE_KEY); f(b,ModplacedFeatures.SOLDIER_PINE_RARE_KEY);
+        }
+        f(b,ModplacedFeatures.FORGET_ME_NOT_KEY); f(b,ModplacedFeatures.FROSTFIRE_KEY);
+        f(b,ModplacedFeatures.LIVERWORT_KEY);
+        f(b,ModplacedFeatures.THISTLE_KEY); f(b,ModplacedFeatures.THORN_BUSH_KEY);
+        f(b,ModplacedFeatures.SEDGE_KEY);
+        f(b,ModplacedFeatures.GRASS_KEY); f(b,ModplacedFeatures.TALL_GRASS_KEY);
+        f(b,ModplacedFeatures.FERN_KEY); f(b,ModplacedFeatures.LARGE_FERN_KEY);
+        if (rocks) {
+            f(b,ModplacedFeatures.STONE_PATCH_PLACED_KEY); f(b,ModplacedFeatures.GRAVEL_PATCH_PLACED_KEY);
+            f(b,ModplacedFeatures.STONE_PILE_KEY);
+        }
+        if (!barren) {
+            f(b,ModplacedFeatures.VANILLA_BUSH_PLACED_KEYS.get("birch")); f(b,ModplacedFeatures.BUSH_PLACED_KEYS.get("willow"));
+        }
+    }
+
+    // ── STONY SHORES ──────────────────────────────────────────────────────────
+
+    private static void addStonyShoresVegetation(BiomeGenerationSettings.Builder b) {
+        f(b,ModplacedFeatures.FROSTFIRE_KEY);
+        f(b,ModplacedFeatures.SEDGE_KEY);
+        f(b,ModplacedFeatures.GRASS_KEY); f(b,ModplacedFeatures.TALL_GRASS_KEY);
+        f(b,ModplacedFeatures.FERN_KEY); f(b,ModplacedFeatures.LARGE_FERN_KEY);
+        f(b,ModplacedFeatures.STONE_PATCH_PLACED_KEY); f(b,ModplacedFeatures.GRAVEL_PATCH_PLACED_KEY);
+        f(b,ModplacedFeatures.STONE_PILE_KEY); f(b,ModplacedFeatures.TOR_KEY);
+        f(b,ModplacedFeatures.VANILLA_BUSH_PLACED_KEYS.get("birch")); f(b,ModplacedFeatures.BUSH_PLACED_KEYS.get("willow"));
+    }
+
+    // ── RILLS ─────────────────────────────────────────────────────────────────
+
+    private static void addRillsVegetation(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> ctx, boolean sparseForest) {
+        // river bed features first
+        f(b,ModplacedFeatures.CLAY_PATCH_PLACED_KEY);
+        f(b,ModplacedFeatures.QUAGMIRE_PATCH_PLACED_KEY);
+        f(b,ModplacedFeatures.MUD_PATCH_PLACED_KEY);
+        f(b,ModplacedFeatures.SEAGRASS_KEY);
+        f(b,ModplacedFeatures.KELP_KEY);
+        // sparse trees
+        if (sparseForest) {
+            f(b,ModplacedFeatures.ASH_RARE_KEY); f(b,ModplacedFeatures.CHESTNUT_RARE_KEY);
+            f(b,ModplacedFeatures.IRONWOOD_RARE_KEY); f(b,ModplacedFeatures.SENTINEL_RARE_KEY);
+            f(b,ModplacedFeatures.FIR_RARE_KEY); f(b,ModplacedFeatures.PINE_RARE_KEY); f(b,ModplacedFeatures.SOLDIER_PINE_RARE_KEY);
+            f(b,ModplacedFeatures.WEIRWOOD_RARE_KEY);
+            f(b,ModplacedFeatures.OAK2_RARE_KEY); f(b,ModplacedFeatures.HAWTHORN_RARE_KEY); f(b,ModplacedFeatures.BEECH_RARE_KEY);
+        }
+        // wetland ground cover — sedge and fern heavy
+        f(b,ModplacedFeatures.FROSTFIRE_KEY);
+        f(b,ModplacedFeatures.LIVERWORT_KEY);
+        f(b,ModplacedFeatures.THISTLE_KEY); f(b,ModplacedFeatures.THORN_BUSH_KEY);
+        f(b,ModplacedFeatures.SEDGE_KEY);
+        f(b,ModplacedFeatures.GRASS_KEY); f(b,ModplacedFeatures.TALL_GRASS_KEY);
+        f(b,ModplacedFeatures.FERN_KEY); f(b,ModplacedFeatures.LARGE_FERN_KEY);
+        f(b,ModplacedFeatures.VANILLA_BUSH_PLACED_KEYS.get("birch")); f(b,ModplacedFeatures.BUSH_PLACED_KEYS.get("willow"));
+    }
+
+    // ── BARROWLANDS ───────────────────────────────────────────────────────────
+
+    private static void addBarrowlands(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> ctx) {
+        // rare full northern mix — no forests, just scattered trees
+        f(b,ModplacedFeatures.ASH_RARE_KEY); f(b,ModplacedFeatures.CHESTNUT_RARE_KEY);
+        f(b,ModplacedFeatures.IRONWOOD_RARE_KEY); f(b,ModplacedFeatures.SENTINEL_RARE_KEY);
+        f(b,ModplacedFeatures.FIR_RARE_KEY); f(b,ModplacedFeatures.PINE_RARE_KEY); f(b,ModplacedFeatures.SOLDIER_PINE_RARE_KEY);
+        f(b,ModplacedFeatures.WEIRWOOD_RARE_KEY);
+        f(b,ModplacedFeatures.OAK2_RARE_KEY); f(b,ModplacedFeatures.HAWTHORN_RARE_KEY); f(b,ModplacedFeatures.BEECH_RARE_KEY);
+        // full flower and grass cover
+        f(b,ModplacedFeatures.FORGET_ME_NOT_KEY); f(b,ModplacedFeatures.FROSTFIRE_KEY);
+        f(b,ModplacedFeatures.LIVERWORT_KEY); f(b,ModplacedFeatures.LUNGWORT_KEY);
+        f(b,ModplacedFeatures.PENNYROYAL_KEY); f(b,ModplacedFeatures.RED_ROSE_BUSH_KEY);
+        f(b,ModplacedFeatures.THISTLE_KEY); f(b,ModplacedFeatures.THORN_BUSH_KEY); f(b,ModplacedFeatures.WINTER_ROSE_BUSH_KEY);
+        f(b,ModplacedFeatures.SEDGE_KEY);
+        f(b,ModplacedFeatures.GRASS_KEY); f(b,ModplacedFeatures.TALL_GRASS_KEY);
+        f(b,ModplacedFeatures.FERN_KEY); f(b,ModplacedFeatures.LARGE_FERN_KEY);
+    }
+
+    private static void addBarrowlandsBarrens(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> ctx) {
+        // no flowers, no trees — just grass and stone piles
+        f(b,ModplacedFeatures.FROSTFIRE_KEY);
+        f(b,ModplacedFeatures.THISTLE_KEY); f(b,ModplacedFeatures.THORN_BUSH_KEY);
+        f(b,ModplacedFeatures.SEDGE_KEY);
+        f(b,ModplacedFeatures.GRASS_KEY); f(b,ModplacedFeatures.TALL_GRASS_KEY);
+        f(b,ModplacedFeatures.FERN_KEY); f(b,ModplacedFeatures.LARGE_FERN_KEY);
+        f(b,ModplacedFeatures.STONE_PATCH_PLACED_KEY); f(b,ModplacedFeatures.GRAVEL_PATCH_PLACED_KEY); f(b,ModplacedFeatures.STONE_PILE_KEY);
+    }
+
     // ── NOBLE DOMAIN VEGETATION ───────────────────────────────────────────────
     // shared ground cover for Bolton, Karstark (no calcite)
 
+    // ground cover without bushes — bushes must always come after rocks
     private static void addDomainGroundCover(BiomeGenerationSettings.Builder b) {
         f(b,ModplacedFeatures.FORGET_ME_NOT_KEY); f(b,ModplacedFeatures.FROSTFIRE_KEY);
         f(b,ModplacedFeatures.LIVERWORT_KEY); f(b,ModplacedFeatures.LUNGWORT_KEY);
@@ -676,10 +849,14 @@ public class ModBiomes {
         f(b,ModplacedFeatures.SEDGE_KEY);
         f(b,ModplacedFeatures.GRASS_KEY); f(b,ModplacedFeatures.TALL_GRASS_KEY);
         f(b,ModplacedFeatures.FERN_KEY); f(b,ModplacedFeatures.LARGE_FERN_KEY);
+        // NO bushes here — always added after rocks by each caller
+    }
+
+    private static void addDomainBushes(BiomeGenerationSettings.Builder b) {
         f(b,ModplacedFeatures.VANILLA_BUSH_PLACED_KEYS.get("birch")); f(b,ModplacedFeatures.BUSH_PLACED_KEYS.get("willow"));
     }
 
-    // plains/tundra — rare trees, optional rocks
+    // plains/tundra — rare trees, rocks, then bushes last
     private static void addDomain(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> ctx,
                                   boolean rocks, boolean calcite) {
         f(b,ModplacedFeatures.ASH_RARE_KEY); f(b,ModplacedFeatures.CHESTNUT_RARE_KEY);
@@ -689,9 +866,10 @@ public class ModBiomes {
         f(b,ModplacedFeatures.OAK2_RARE_KEY); f(b,ModplacedFeatures.HAWTHORN_RARE_KEY); f(b,ModplacedFeatures.BEECH_RARE_KEY);
         addDomainGroundCover(b);
         if (rocks) { f(b,ModplacedFeatures.STONE_PATCH_PLACED_KEY); f(b,ModplacedFeatures.GRAVEL_PATCH_PLACED_KEY); f(b,ModplacedFeatures.STONE_PILE_KEY); }
+        addDomainBushes(b);
     }
 
-    // woods — full trees
+    // woods — full trees, rocks, then bushes last
     private static void addDomainWoods(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> ctx,
                                        boolean rocks, boolean calcite) {
         f(b,ModplacedFeatures.ASH_KEY); f(b,ModplacedFeatures.CHESTNUT_KEY);
@@ -701,9 +879,10 @@ public class ModBiomes {
         f(b,ModplacedFeatures.OAK2_KEY); f(b,ModplacedFeatures.HAWTHORN_KEY); f(b,ModplacedFeatures.BEECH_KEY);
         addDomainGroundCover(b);
         if (rocks) { f(b,ModplacedFeatures.STONE_PATCH_PLACED_KEY); f(b,ModplacedFeatures.GRAVEL_PATCH_PLACED_KEY); f(b,ModplacedFeatures.STONE_PILE_KEY); }
+        addDomainBushes(b);
     }
 
-    // calcite variants — same as above but with underground calcite deposit
+    // calcite variants — underground calcite, bushes still last
     private static void addDomainCalcite(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> ctx, boolean rocks) {
         addDomain(b, ctx, rocks, false);
         b.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ModplacedFeatures.CALCITE_DEPOSIT_PLACED_KEY);
@@ -714,39 +893,29 @@ public class ModBiomes {
         b.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ModplacedFeatures.CALCITE_DEPOSIT_PLACED_KEY);
     }
 
+    // Karstark inland — tors and stone piles, no patches, bushes last
     private static void addKarstarkInland(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> ctx) {
         f(b,ModplacedFeatures.ASH_RARE_KEY); f(b,ModplacedFeatures.CHESTNUT_RARE_KEY);
         f(b,ModplacedFeatures.IRONWOOD_RARE_KEY); f(b,ModplacedFeatures.SENTINEL_RARE_KEY);
         f(b,ModplacedFeatures.FIR_RARE_KEY); f(b,ModplacedFeatures.PINE_RARE_KEY); f(b,ModplacedFeatures.SOLDIER_PINE_RARE_KEY);
         f(b,ModplacedFeatures.WEIRWOOD_RARE_KEY);
         f(b,ModplacedFeatures.OAK2_RARE_KEY); f(b,ModplacedFeatures.HAWTHORN_RARE_KEY); f(b,ModplacedFeatures.BEECH_RARE_KEY);
-        f(b,ModplacedFeatures.FORGET_ME_NOT_KEY); f(b,ModplacedFeatures.FROSTFIRE_KEY);
-        f(b,ModplacedFeatures.LIVERWORT_KEY); f(b,ModplacedFeatures.LUNGWORT_KEY);
-        f(b,ModplacedFeatures.PENNYROYAL_KEY); f(b,ModplacedFeatures.RED_ROSE_BUSH_KEY);
-        f(b,ModplacedFeatures.THISTLE_KEY); f(b,ModplacedFeatures.THORN_BUSH_KEY); f(b,ModplacedFeatures.WINTER_ROSE_BUSH_KEY);
-        f(b,ModplacedFeatures.SEDGE_KEY);
-        f(b,ModplacedFeatures.GRASS_KEY); f(b,ModplacedFeatures.TALL_GRASS_KEY);
-        f(b,ModplacedFeatures.FERN_KEY); f(b,ModplacedFeatures.LARGE_FERN_KEY);
+        addDomainGroundCover(b);
         f(b,ModplacedFeatures.STONE_PILE_KEY); f(b,ModplacedFeatures.TOR_KEY);
-        f(b,ModplacedFeatures.VANILLA_BUSH_PLACED_KEYS.get("birch")); f(b,ModplacedFeatures.BUSH_PLACED_KEYS.get("willow"));
+        addDomainBushes(b);
     }
 
+    // Karstark coast — full patches, tors, bushes last
     private static void addKarstarkCoast(BiomeGenerationSettings.Builder b, BootstrapContext<Biome> ctx) {
         f(b,ModplacedFeatures.ASH_RARE_KEY); f(b,ModplacedFeatures.CHESTNUT_RARE_KEY);
         f(b,ModplacedFeatures.IRONWOOD_RARE_KEY); f(b,ModplacedFeatures.SENTINEL_RARE_KEY);
         f(b,ModplacedFeatures.FIR_RARE_KEY); f(b,ModplacedFeatures.PINE_RARE_KEY); f(b,ModplacedFeatures.SOLDIER_PINE_RARE_KEY);
         f(b,ModplacedFeatures.WEIRWOOD_RARE_KEY);
         f(b,ModplacedFeatures.OAK2_RARE_KEY); f(b,ModplacedFeatures.HAWTHORN_RARE_KEY); f(b,ModplacedFeatures.BEECH_RARE_KEY);
-        f(b,ModplacedFeatures.FORGET_ME_NOT_KEY); f(b,ModplacedFeatures.FROSTFIRE_KEY);
-        f(b,ModplacedFeatures.LIVERWORT_KEY); f(b,ModplacedFeatures.LUNGWORT_KEY);
-        f(b,ModplacedFeatures.PENNYROYAL_KEY); f(b,ModplacedFeatures.RED_ROSE_BUSH_KEY);
-        f(b,ModplacedFeatures.THISTLE_KEY); f(b,ModplacedFeatures.THORN_BUSH_KEY); f(b,ModplacedFeatures.WINTER_ROSE_BUSH_KEY);
-        f(b,ModplacedFeatures.SEDGE_KEY);
-        f(b,ModplacedFeatures.GRASS_KEY); f(b,ModplacedFeatures.TALL_GRASS_KEY);
-        f(b,ModplacedFeatures.FERN_KEY); f(b,ModplacedFeatures.LARGE_FERN_KEY);
+        addDomainGroundCover(b);
         f(b,ModplacedFeatures.STONE_PATCH_PLACED_KEY); f(b,ModplacedFeatures.GRAVEL_PATCH_PLACED_KEY);
         f(b,ModplacedFeatures.STONE_PILE_KEY); f(b,ModplacedFeatures.TOR_KEY);
-        f(b,ModplacedFeatures.VANILLA_BUSH_PLACED_KEYS.get("birch")); f(b,ModplacedFeatures.BUSH_PLACED_KEYS.get("willow"));
+        addDomainBushes(b);
     }
 
     // ── SKAGOS ────────────────────────────────────────────────────────────────
@@ -767,6 +936,7 @@ public class ModBiomes {
         f(b,ModplacedFeatures.FROSTFIRE_KEY); f(b,ModplacedFeatures.LIVERWORT_KEY);
         if (flowers)  { f(b,ModplacedFeatures.LUNGWORT_KEY); f(b,ModplacedFeatures.PENNYROYAL_KEY); }
         f(b,ModplacedFeatures.THISTLE_KEY); f(b,ModplacedFeatures.THORN_BUSH_KEY);
+        // sedge, grass, ferns always emitted — ordering must be consistent across all biomes
         f(b,ModplacedFeatures.SEDGE_KEY);
         f(b,ModplacedFeatures.GRASS_KEY); f(b,ModplacedFeatures.TALL_GRASS_KEY);
         f(b,ModplacedFeatures.FERN_KEY); f(b,ModplacedFeatures.LARGE_FERN_KEY);
@@ -819,6 +989,7 @@ public class ModBiomes {
         f(b,ModplacedFeatures.THISTLE_KEY); f(b,ModplacedFeatures.THORN_BUSH_KEY);
         f(b,ModplacedFeatures.SEDGE_KEY);
         f(b,ModplacedFeatures.GRASS_KEY); f(b,ModplacedFeatures.TALL_GRASS_KEY);
+        f(b,ModplacedFeatures.FERN_KEY); f(b,ModplacedFeatures.LARGE_FERN_KEY);
         f(b,ModplacedFeatures.VANILLA_BUSH_PLACED_KEYS.get("birch")); f(b,ModplacedFeatures.BUSH_PLACED_KEYS.get("willow"));
     }
 
@@ -843,6 +1014,7 @@ public class ModBiomes {
         f(b,ModplacedFeatures.THISTLE_KEY); f(b,ModplacedFeatures.THORN_BUSH_KEY);
         f(b,ModplacedFeatures.SEDGE_KEY);
         f(b,ModplacedFeatures.GRASS_KEY); f(b,ModplacedFeatures.TALL_GRASS_KEY);
+        f(b,ModplacedFeatures.FERN_KEY); f(b,ModplacedFeatures.LARGE_FERN_KEY);
         f(b,ModplacedFeatures.STONE_PATCH_PLACED_KEY); f(b,ModplacedFeatures.GRAVEL_PATCH_PLACED_KEY); f(b,ModplacedFeatures.STONE_PILE_KEY);
         f(b,ModplacedFeatures.VANILLA_BUSH_PLACED_KEYS.get("birch")); f(b,ModplacedFeatures.BUSH_PLACED_KEYS.get("willow"));
     }
