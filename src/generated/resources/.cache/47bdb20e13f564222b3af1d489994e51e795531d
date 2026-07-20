@@ -1,4 +1,4 @@
-// 1.21.1	2026-07-15T22:06:23.0327278	Block States: agotmod
+// 1.21.1	2026-07-20T20:11:37.0516457	Block States: agotmod
 69b31e30ac1a8b1abd0b3ba9309ae37f01857a47 assets/agotmod/blockstates/acacia_wall.json
 78b6cf02fa0f02bb58a5d7645020281ff8bc4c59 assets/agotmod/blockstates/alder_button.json
 4babc4c353cbdf68af13d112a9b9311de8af4fe1 assets/agotmod/blockstates/alder_door.json
@@ -1527,6 +1527,7 @@ d5113238a84284709d7ca3d9cd69c93aa01b18f7 assets/agotmod/blockstates/datepalm_wal
 a3965b8f3348e6cb8ab5229bc7d0fc383d070521 assets/agotmod/blockstates/datepalm_wood_stripped.json
 ef4a5212f47a398a14adfcf7efd1357ccca3b978 assets/agotmod/blockstates/deepslate_silver_ore.json
 df31d72dd7ce74965809089f52b54abd0f239919 assets/agotmod/blockstates/deepslate_tin_ore.json
+63908f0c09200951eacc5974f2d5204bf34e034a assets/agotmod/blockstates/derpy_dragon_block.json
 c4dfe6612de0a0a4ba5ca7ff1487f536f34aadfd assets/agotmod/blockstates/diamonds_deepslate_ore.json
 52f4caffe003967c4868384b64d7d984077f9b9e assets/agotmod/blockstates/diamonds_ore.json
 0706f7c32653814bd1f574b2d33efd054ce940d5 assets/agotmod/blockstates/diorite_10_block.json
@@ -8298,6 +8299,7 @@ f313cda62f446e8ac24a108113c5215de54cc142 assets/agotmod/models/block/datepalm_wa
 5b89b2af89e94962ef6c1466073c605ca84b8559 assets/agotmod/models/block/datepalm_wood_stripped_horizontal.json
 0b08c67ab9bb414b81288ecbd509e2da0f2e00a7 assets/agotmod/models/block/deepslate_silver_ore.json
 f20b3d7983b9692aa2e3dd8997c55e8e857055fb assets/agotmod/models/block/deepslate_tin_ore.json
+82c5a4c8592024c1f98897c5976a9983b6f4830b assets/agotmod/models/block/derpy_dragon_block.json
 736a57bb2fb301aaf343a7ca3e03bbc9dc1b83bb assets/agotmod/models/block/diamonds_deepslate_ore.json
 ae79ba05c7e3108e59f1a37394dbf6376404c0fd assets/agotmod/models/block/diamonds_ore.json
 51745d2c28b2049c250580d05499c16c44129143 assets/agotmod/models/block/diorite_10_block.json
@@ -15478,6 +15480,7 @@ a419c18303cedb24113c04e51f1ccd74997d2159 assets/agotmod/models/item/datepalm_pla
 f43714c25ed5ecf4cbec61fec5958f5476d3f600 assets/agotmod/models/item/datepalm_wood_stripped.json
 5417d399bf496e3133cc629554d9ff6d02dea420 assets/agotmod/models/item/deepslate_silver_ore.json
 22bd49eecede7f6f20241c85277bf1975bb8d7d2 assets/agotmod/models/item/deepslate_tin_ore.json
+8a6d4d2320d01abd6db47391ea6e53b07f30d10c assets/agotmod/models/item/derpy_dragon_block.json
 0bb90de6d2242d3402f20a7925f59c9d9fb6bbd5 assets/agotmod/models/item/diamonds_deepslate_ore.json
 a1157eac23478f8bfbbb69d0974f23941ad193b8 assets/agotmod/models/item/diamonds_ore.json
 929c64437945d2e4f0f71adbc5564d69aa21cee9 assets/agotmod/models/item/diorite_10_block.json

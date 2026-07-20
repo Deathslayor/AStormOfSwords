@@ -1,4 +1,4 @@
-// 1.21.1	2026-07-15T16:48:15.4075446	Recipes
+// 1.21.1	2026-07-20T20:11:37.1414821	Recipes
 7b2ca6f0110f3b8eec6df36c94100dfa1c11daf3 data/agotmod/advancement/recipes/building_blocks/acacia_wall.json
 822a5dc54b4509f28c5659a0e3c6c3f5cfd1834a data/agotmod/advancement/recipes/building_blocks/alder_slabs.json
 a169551e82dfb675b8952441658c421d625418b2 data/agotmod/advancement/recipes/building_blocks/alder_stairs.json
@@ -1084,6 +1084,7 @@ d5e950e67bb3955fa13affd9268dbceff5f30358 data/agotmod/advancement/recipes/buildi
 152c02ba97346e4d51d5c20969db62acf21c7445 data/agotmod/advancement/recipes/building_blocks/datepalm_slabs.json
 ea78cdd0c5f30d522d37c49957b4dbc3363f3073 data/agotmod/advancement/recipes/building_blocks/datepalm_stairs.json
 06076906bb118615bc5126f59508ef11b0f9ff93 data/agotmod/advancement/recipes/building_blocks/datepalm_wall.json
+e46781e0f0e75e7a489b1e330ddfa8ef4446d84e data/agotmod/advancement/recipes/building_blocks/derpy_dragon_block.json
 5d217875aa5cc2e07f0c4dee76a1c8102ec5f307 data/agotmod/advancement/recipes/building_blocks/diorite_10_block.json
 71145ef14c810259cfb935531018ce002442ca1b data/agotmod/advancement/recipes/building_blocks/diorite_10_slab.json
 1bf5f7349ea3036f2a0cbb703917b3e84005e2cf data/agotmod/advancement/recipes/building_blocks/diorite_10_stairs.json
@@ -4769,6 +4770,7 @@ bbaa900ea08e7fd03def211f3ea2bb70ad83f3c2 data/agotmod/recipe/datepalm_pressure_p
 3ee02ed76ae4036193590e1967835088f865f1c6 data/agotmod/recipe/datepalm_wall.json
 40ff30516159308b942c8f67575e84745e10c00e data/agotmod/recipe/datepalm_wood.json
 46692ec17a67a24e439d31d3e8ef520f8c15ce52 data/agotmod/recipe/datepalm_wood_stripped.json
+ae55151d4703a3573b941a00639e347db1453d9c data/agotmod/recipe/derpy_dragon_block.json
 0cfff5d7f50054ab64b6c435c686475daa2331cf data/agotmod/recipe/diorite_10_block.json
 30aa8efa643492be954ffe415b27f26e0bf5aba0 data/agotmod/recipe/diorite_10_slab.json
 31314ad79ffe0e5143bee91296aa8ee2074fdb21 data/agotmod/recipe/diorite_10_stairs.json

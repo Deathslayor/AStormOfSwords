@@ -789,6 +789,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
 
         // ---------------------------(STONE BLOCKS)--------------------------- //
+        blockWithItem(ModBLocks.DERPY_DRAGON_BLOCK);
 
         //Redkeep
         blockWithItem(ModBLocks.REDKEEP_STONE_BLOCK);

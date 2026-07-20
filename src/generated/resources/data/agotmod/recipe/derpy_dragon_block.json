@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "S": {
+      "item": "minecraft:dragon_egg"
+    },
+    "X": {
+      "item": "minecraft:dragon_head"
+    }
+  },
+  "pattern": [
+    "XSX",
+    "SXS",
+    "XSX"
+  ],
+  "result": {
+    "count": 1,
+    "id": "agotmod:derpy_dragon_block"
+  }
+}

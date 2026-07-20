@@ -2,6 +2,7 @@ package net.darkflameproduction.agotmod.item.creativetabs;
 
 
 import net.darkflameproduction.agotmod.AGoTMod;
+import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.darkflameproduction.agotmod.item.ModItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -26,6 +27,8 @@ public class ModCreativeAnimals {
                         pOutput.accept(ModItems.DIREWOLF_SPAWN_EGG.get());
                         pOutput.accept(ModItems.CROW_SPAWN_EGG.get());
                         pOutput.accept(ModItems.PEASANT_SPAWN_EGG.get());
+
+                        pOutput.accept(ModBLocks.DERPY_DRAGON_BLOCK.get());
 
 
                     })

@@ -1,4 +1,4 @@
-// 1.21.1	2026-07-15T17:02:31.2050623	Tags for minecraft:block mod id agotmod
+// 1.21.1	2026-07-20T20:11:37.2013613	Tags for minecraft:block mod id agotmod
 7ce4ba32d6429dbf27a7ccd68d70690dbe80eb19 data/agotmod/tags/block/incorrect_for_bronze_tool.json
 a249c46329a41538f49a564e1f14338aaf1be5a0 data/agotmod/tags/block/incorrect_for_steel_tool.json
 a5270b76c9036b19927822a14ea7db103ebf5a0d data/agotmod/tags/block/needs_bronze_tool.json
@@ -14,6 +14,7 @@ a2787d1e34eb959461d223ed2e8d1c065d9ed99e data/minecraft/tags/block/incorrect_for
 a2787d1e34eb959461d223ed2e8d1c065d9ed99e data/minecraft/tags/block/incorrect_for_iron_tool.json
 a2787d1e34eb959461d223ed2e8d1c065d9ed99e data/minecraft/tags/block/incorrect_for_stone_tool.json
 a2787d1e34eb959461d223ed2e8d1c065d9ed99e data/minecraft/tags/block/incorrect_for_wooden_tool.json
+646cce171fef5604f8663faaa1b088d3e23bd33e data/minecraft/tags/block/leaves.json
 be37ff673c59752331fbb415c6625a2dbc2ae48e data/minecraft/tags/block/logs_that_burn.json
 0dac29ab7ceccf72475f6cbb6049d8385a1d6d97 data/minecraft/tags/block/mineable/axe.json
 ce681cbe2b839614141b6a5ee92dcfd8acf55434 data/minecraft/tags/block/mineable/hoe.json

@@ -31,6 +31,8 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         super(output, registries);
     }
 
+
+
     private void generateStonecutterRecipes() {
 
         // Each entry: variant map â†’ vanilla source block (used for "from vanilla" recipes)
@@ -188,6 +190,15 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
         // ---------------------------(CRAFTING)--------------------------- //
         // -------------------------------------------------(TIN)------------------------------------------------- //
+
+        this.shaped(RecipeCategory.BUILDING_BLOCKS, ModBLocks.DERPY_DRAGON_BLOCK.get())
+                .pattern("XSX")
+                .pattern("SXS")
+                .pattern("XSX")
+                .define('S', Blocks.DRAGON_EGG)
+                .define('X', Blocks.DRAGON_HEAD)
+                .unlockedBy(getHasName(Blocks.DRAGON_EGG), has(Blocks.DRAGON_HEAD))
+                .save(this.output);
 
         // -------------------------------------------------(BRONZE)------------------------------------------------- //
         // ---------------------------(CRAFTING)--------------------------- //

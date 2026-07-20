@@ -470,6 +470,9 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
 
         //FLOWERS
 
+        this.tag(BlockTags.LEAVES)
+                .add(ModBLocks.DERPY_DRAGON_BLOCK.get());
+
 
         this.tag(BlockTags.FLOWERS)
                 .add(ModBLocks.WINTER_ROSE.get())

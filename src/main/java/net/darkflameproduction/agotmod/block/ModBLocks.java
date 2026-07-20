@@ -1188,6 +1188,8 @@ public class ModBLocks {
 
 
     // ---------------------------(STONE)--------------------------- //
+    public static final DeferredBlock<Block> DERPY_DRAGON_BLOCK = registerBlock("derpy_dragon_block",
+            Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SLIME_BLOCK).strength(1f), true);
 
     public static final DeferredBlock<Block> REDKEEP_STONE_BLOCK = registerBlock("redkeep_stone",
             Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(3f), true);

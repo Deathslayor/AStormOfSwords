@@ -429,6 +429,9 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         }
         // ---------------------------(STONE)--------------------------- //
         //redkeep
+        this.dropSelf(ModBLocks.DERPY_DRAGON_BLOCK.get());
+
+
         this.dropSelf(ModBLocks.REDKEEP_STONE_BLOCK.get());
         this.dropSelf(ModBLocks.REDKEEP_STONE_STAIRS.get());
         this.dropSelf(ModBLocks.REDKEEP_STONE_SLAB.get());
