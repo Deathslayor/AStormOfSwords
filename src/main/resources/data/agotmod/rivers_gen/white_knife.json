@@ -1,0 +1,350 @@
+{
+  "rivers": [
+    {
+      "name": "white_knife_upper",
+      "type": {
+        "width": 80,
+        "depth": 18,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 6.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 279306, "z": 1131347},
+        {"x": 278178, "z": 1119969},
+        {"x": 261759, "z": 1098116},
+        {"x": 253554, "z": 1078218},
+        {"x": 253118, "z": 1069342},
+        {"x": 258626, "z": 1057425},
+        {"x": 257060, "z": 1046668},
+        {"x": 235750, "z": 1024638},
+        {"x": 228904, "z": 993987},
+        {"x": 223919, "z": 983383}
+      ],
+      "connects_to": ["white_knife_lower", "white_knife_tributary"]
+    },
+    {
+      "name": "white_knife_lower",
+      "type": {
+        "width": 80,
+        "depth": 18,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 6.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 223919, "z": 983383},
+        {"x": 208375, "z": 968827},
+        {"x": 196101, "z": 957254},
+        {"x": 193448, "z": 942064},
+        {"x": 186978, "z": 929237},
+        {"x": 187081, "z": 921408}
+      ],
+      "connects_to": ["white_knife_continuation"]
+    },
+    {
+      "name": "white_knife_tributary",
+      "type": {
+        "width": 40,
+        "depth": 12,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 223919, "z": 983383},
+        {"x": 225680, "z": 973971},
+        {"x": 232469, "z": 964356},
+        {"x": 234775, "z": 958964},
+        {"x": 250139, "z": 948429},
+        {"x": 259258, "z": 935027},
+        {"x": 260730, "z": 929094},
+        {"x": 260200, "z": 915197}
+      ],
+      "connects_to": []
+    },
+    {
+      "name": "white_knife_main",
+      "type": {
+        "width": 70,
+        "depth": 16,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 6.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 187081, "z": 921408},
+        {"x": 181512, "z": 916053},
+        {"x": 158457, "z": 911527},
+        {"x": 146182, "z": 901947},
+        {"x": 143177, "z": 892109},
+        {"x": 145259, "z": 881917},
+        {"x": 142885, "z": 876972},
+        {"x": 141556, "z": 867634},
+        {"x": 132831, "z": 857228},
+        {"x": 124848, "z": 849661},
+        {"x": 114674, "z": 845496},
+        {"x": 96860, "z": 837419},
+        {"x": 82967, "z": 813609},
+        {"x": 82040, "z": 806721},
+        {"x": 82075, "z": 786304},
+        {"x": 74032, "z": 773588},
+        {"x": 56112, "z": 766379},
+        {"x": 25005, "z": 756517}
+      ],
+      "connects_to": ["white_knife_west_fork", "white_knife_south_fork"]
+    },
+    {
+      "name": "white_knife_west_tributary",
+      "type": {
+        "width": 30,
+        "depth": 10,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 187081, "z": 921408},
+        {"x": 181512, "z": 916053},
+        {"x": 158457, "z": 911527},
+        {"x": 146182, "z": 901947},
+        {"x": 143177, "z": 892109},
+        {"x": 145259, "z": 881917},
+        {"x": 142885, "z": 876972},
+        {"x": 141556, "z": 867634},
+        {"x": 132831, "z": 857228},
+        {"x": 124848, "z": 849661},
+        {"x": 114674, "z": 845496},
+        {"x": 96860, "z": 837419},
+        {"x": 82967, "z": 813609},
+        {"x": 82040, "z": 806721},
+        {"x": 82075, "z": 786304},
+        {"x": 74032, "z": 773588},
+        {"x": 56112, "z": 766379},
+        {"x": 25005, "z": 756517}
+      ],
+      "connects_to": []
+    },
+    {
+      "name": "white_knife_west_fork",
+      "type": {
+        "width": 35,
+        "depth": 11,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 25005, "z": 756517},
+        {"x": 9627, "z": 761649},
+        {"x": -1185, "z": 764019},
+        {"x": -11767, "z": 768702},
+        {"x": -18510, "z": 768716},
+        {"x": -21898, "z": 768184},
+        {"x": -23352, "z": 766935}
+      ],
+      "connects_to": []
+    },
+    {
+      "name": "white_knife_south_fork",
+      "type": {
+        "width": 50,
+        "depth": 14,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 25005, "z": 756517},
+        {"x": 20502, "z": 743812},
+        {"x": 10360, "z": 739264},
+        {"x": 1043, "z": 734752},
+        {"x": -690, "z": 726651},
+        {"x": -639, "z": 722194}
+      ],
+      "connects_to": ["white_knife_delta_west", "white_knife_delta_east"]
+    },
+    {
+      "name": "white_knife_delta_west",
+      "type": {
+        "width": 30,
+        "depth": 10,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": -639, "z": 722194},
+        {"x": -13100, "z": 712269}
+      ],
+      "connects_to": []
+    },
+    {
+      "name": "white_knife_delta_east",
+      "type": {
+        "width": 30,
+        "depth": 10,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": -639, "z": 722194},
+        {"x": 2137, "z": 716456},
+        {"x": 2019, "z": 703099},
+        {"x": 4788, "z": 697590},
+        {"x": 8956, "z": 688245},
+        {"x": 14026, "z": 679807},
+        {"x": 22939, "z": 672288},
+        {"x": 31224, "z": 663009},
+        {"x": 32477, "z": 653538},
+        {"x": 29937, "z": 643975},
+        {"x": 31149, "z": 639013}
+      ],
+      "connects_to": []
+    },
+    {
+      "name": "white_knife_after_lake",
+      "type": {
+        "width": 30,
+        "depth": 10,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": -52310, "z": 688604},
+        {"x": -56207, "z": 681720},
+        {"x": -56970, "z": 672386},
+        {"x": -63621, "z": 663802},
+        {"x": -71131, "z": 660213},
+        {"x": -80767, "z": 656872},
+        {"x": -96112, "z": 640296},
+        {"x": -96675, "z": 636406},
+        {"x": -93541, "z": 628993},
+        {"x": -93672, "z": 622110},
+        {"x": -95005, "z": 618841}
+      ],
+      "connects_to": []
+    },
+    {
+      "name": "white_knife_continuation",
+      "type": {
+        "width": 80,
+        "depth": 18,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 6.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 187081, "z": 921408},
+        {"x": 193812, "z": 907562},
+        {"x": 189188, "z": 898594},
+        {"x": 187556, "z": 886557},
+        {"x": 191048, "z": 879835},
+        {"x": 198494, "z": 868644},
+        {"x": 195986, "z": 862025},
+        {"x": 200165, "z": 852370},
+        {"x": 202572, "z": 842806},
+        {"x": 200769, "z": 832457},
+        {"x": 200937, "z": 825030},
+        {"x": 195599, "z": 793365},
+        {"x": 202469, "z": 780498},
+        {"x": 202592, "z": 770366},
+        {"x": 206109, "z": 759091},
+        {"x": 208833, "z": 753062},
+        {"x": 207355, "z": 746602},
+        {"x": 210131, "z": 736591},
+        {"x": 206186, "z": 722980},
+        {"x": 212408, "z": 718575},
+        {"x": 215257, "z": 700106},
+        {"x": 224888, "z": 685810},
+        {"x": 233044, "z": 677537},
+        {"x": 251262, "z": 661311},
+        {"x": 253437, "z": 653984},
+        {"x": 262446, "z": 641875},
+        {"x": 260967, "z": 631093},
+        {"x": 257989, "z": 620225},
+        {"x": 263646, "z": 607574},
+        {"x": 269843, "z": 598638},
+        {"x": 283250, "z": 581029},
+        {"x": 288718, "z": 570152},
+        {"x": 289145, "z": 552023}
+      ],
+      "connects_to": ["white_knife_east_fork", "white_knife_west_fork_lower"]
+    },
+    {
+      "name": "white_knife_east_fork",
+      "type": {
+        "width": 60,
+        "depth": 15,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 6.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 289145, "z": 552023},
+        {"x": 297782, "z": 544282},
+        {"x": 304414, "z": 534233},
+        {"x": 319018, "z": 527054},
+        {"x": 331845, "z": 524279},
+        {"x": 350710, "z": 515250},
+        {"x": 366898, "z": 509118},
+        {"x": 371239, "z": 503280},
+        {"x": 376439, "z": 491455},
+        {"x": 388080, "z": 481110},
+        {"x": 405525, "z": 469345},
+        {"x": 406601, "z": 465944},
+        {"x": 411513, "z": 458380},
+        {"x": 411231, "z": 441972},
+        {"x": 414682, "z": 437516}
+      ],
+      "connects_to": []
+    },
+    {
+      "name": "white_knife_west_fork_lower",
+      "type": {
+        "width": 50,
+        "depth": 13,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 289145, "z": 552023},
+        {"x": 280582, "z": 543879},
+        {"x": 263706, "z": 525160},
+        {"x": 263596, "z": 519129},
+        {"x": 270581, "z": 509579},
+        {"x": 272783, "z": 503182}
+      ],
+      "connects_to": []
+    }
+  ]
+}

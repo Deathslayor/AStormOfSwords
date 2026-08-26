@@ -515,6 +515,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBLocks.WINTER_ROSE_BUSH.get())
                 .add(ModBLocks.RED_ROSE_BUSH.get())
                 .add(ModBLocks.REED.get())
+                .add(ModBLocks.REED_MIDDLE.get())
+                .add(ModBLocks.REED_TOP.get())
 
         ;
 
@@ -560,7 +562,9 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBLocks.DUSKY_ROSE_BUSH.get())
                 .add(ModBLocks.WINTER_ROSE_BUSH.get())
                 .add(ModBLocks.RED_ROSE_BUSH.get())
-                .add(ModBLocks.REED.get());
+                .add(ModBLocks.REED.get())
+                .add(ModBLocks.REED_MIDDLE.get())
+                .add(ModBLocks.REED_TOP.get());
 
         this.tag(BlockTags.LOGS_THAT_BURN)
                 .add(ModBLocks.WEIRWOOD_LOG.get())

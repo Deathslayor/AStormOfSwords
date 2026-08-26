@@ -75,7 +75,8 @@
       "agotmod:quagmire",
       "agotmod:mud",
       "agotmod:seagrass",
-      "agotmod:kelp"
+      "agotmod:kelp",
+      "agotmod:reed"
     ],
     [
       "minecraft:freeze_top_layer"

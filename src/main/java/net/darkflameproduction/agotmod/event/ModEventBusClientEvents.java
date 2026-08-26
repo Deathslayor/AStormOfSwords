@@ -23,6 +23,7 @@ import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.FoliageColor;
+import net.minecraft.world.level.GrassColor;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -67,6 +68,20 @@ public class ModEventBusClientEvents {
                 item.get());
     }
 
+    // How far to blend the reed's biome grass tint toward white (0 = untouched, 1 = pure white).
+    private static final float REED_BRIGHTEN_AMOUNT = 0.2F;
+
+    /** Blends an 0xRRGGBB color toward white by {@code amount} (0-1) to lighten it. */
+    private static int brighten(int color, float amount) {
+        int r = (color >> 16) & 0xFF;
+        int g = (color >> 8) & 0xFF;
+        int b = color & 0xFF;
+        r += (int) ((255 - r) * amount);
+        g += (int) ((255 - g) * amount);
+        b += (int) ((255 - b) * amount);
+        return (r << 16) | (g << 8) | b;
+    }
+
     // â”€â”€ Client event class â€” register both block and item color handlers â”€â”€â”€â”€â”€â”€â”€
 
     @SubscribeEvent
@@ -100,6 +115,17 @@ public class ModEventBusClientEvents {
                     ModBLocks.LEAVES.get(woodType).get()
             );
         }
+
+        // Reed uses the "tinted_cross" model (same as vanilla short_grass/fern), so tint it
+        // with the biome's grass color like grass does — nudged a bit brighter so the reeds
+        // don't look as dark/muted as the surrounding grass.
+        event.register(
+                (state, level, pos, tintIndex) ->
+                        brighten(level != null && pos != null
+                                ? BiomeColors.getAverageGrassColor(level, pos)
+                                : GrassColor.getDefaultColor(), REED_BRIGHTEN_AMOUNT),
+                ModBLocks.REED.get(), ModBLocks.REED_MIDDLE.get(), ModBLocks.REED_TOP.get()
+        );
     }
 
     @SubscribeEvent

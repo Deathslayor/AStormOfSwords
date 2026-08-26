@@ -3,6 +3,7 @@ package net.darkflameproduction.agotmod.worldgen;
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.darkflameproduction.agotmod.worldgen.feature.BushFeature;
+import net.darkflameproduction.agotmod.worldgen.feature.ReedFeature;
 import net.darkflameproduction.agotmod.worldgen.feature.StonePileFeature;
 import net.darkflameproduction.agotmod.worldgen.feature.TorFeature;
 import net.darkflameproduction.agotmod.worldgen.feature.configuration.BushConfiguration;
@@ -250,6 +251,10 @@ public class ModConfiguredFeatures {
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> STONE_PILE =
             FEATURES.register("stone_pile",
                     () -> new StonePileFeature(NoneFeatureConfiguration.CODEC));
+
+    public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> REED_PLANT =
+            FEATURES.register("reed_plant",
+                    () -> new ReedFeature(NoneFeatureConfiguration.CODEC));
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> STONE_PILE_KEY = ResourceKey.create(
             Registries.CONFIGURED_FEATURE, AGoTMod.id("stone_pile"));
@@ -2055,11 +2060,9 @@ public class ModConfiguredFeatures {
                         64,  // tries
                         16,   // xz spread
                         2,   // y spread
-                        PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
-                                new SimpleBlockConfiguration(
-                                        BlockStateProvider.simple(ModBLocks.REED.get())
-                                )
-                        )
+                        // No onlyWhenEmpty filter here: ReedFeature validates and waterlogs its own
+                        // 3 positions, and needs to be able to place into shallow water too.
+                        PlacementUtils.inlinePlaced(REED_PLANT.value(), NoneFeatureConfiguration.INSTANCE)
                 ));
 
 

@@ -1,0 +1,31 @@
+{
+  "rivers": [
+    {
+      "name": "river_d",
+      "type": {
+        "width": 50,
+        "depth": 13,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 906063, "z": 462802},
+        {"x": 907135, "z": 446468},
+        {"x": 911151, "z": 439974},
+        {"x": 901045, "z": 429848},
+        {"x": 888586, "z": 423496},
+        {"x": 884067, "z": 412780},
+        {"x": 886463, "z": 403982},
+        {"x": 890127, "z": 397210},
+        {"x": 889165, "z": 391412},
+        {"x": 882170, "z": 382603},
+        {"x": 882229, "z": 378534},
+        {"x": 883678, "z": 376426}
+      ],
+      "connects_to": []
+    }
+  ]
+}

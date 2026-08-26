@@ -554,6 +554,16 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                         .withPool(LootPool.lootPool()
                                 .setRolls(ConstantValue.exactly(1))
                                 .add(LootItem.lootTableItem(ModBLocks.REED.get()))));
+        this.add(ModBLocks.REED_MIDDLE.get(),
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1))
+                                .add(LootItem.lootTableItem(ModBLocks.REED.get()))));
+        this.add(ModBLocks.REED_TOP.get(),
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1))
+                                .add(LootItem.lootTableItem(ModBLocks.REED.get()))));
 
         // ---------------------------(POTTED PLANTS)--------------------------- //
         this.add(ModBLocks.POTTED_WINTER_ROSE.get(), createPotFlowerItemTable(ModBLocks.WINTER_ROSE.get()));

@@ -1,5 +1,6 @@
 {
-  "variants": {
-    "": { "model": "agotmod:block/barrel_medium" }
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "agotmod:block/barrel_medium"
   }
 }

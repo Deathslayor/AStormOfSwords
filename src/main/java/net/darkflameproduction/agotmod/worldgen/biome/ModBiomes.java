@@ -530,6 +530,7 @@ public class ModBiomes {
         f(b, ModplacedFeatures.MUD_PATCH_PLACED_KEY);
         f(b, ModplacedFeatures.SEAGRASS_KEY);
         f(b, ModplacedFeatures.KELP_KEY);
+        f(b, ModplacedFeatures.REED_KEY);
     }
 
     // =========================================================================

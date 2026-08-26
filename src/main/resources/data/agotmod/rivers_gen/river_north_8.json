@@ -1,0 +1,73 @@
+{
+  "rivers": [
+    {
+      "name": "river_g",
+      "type": {
+        "width": 40,
+        "depth": 12,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": -262431, "z": 856829},
+        {"x": -262689, "z": 849171},
+        {"x": -268362, "z": 841043},
+        {"x": -274616, "z": 837602},
+        {"x": -280489, "z": 835399},
+        {"x": -284620, "z": 831752},
+        {"x": -287207, "z": 831406},
+        {"x": -294549, "z": 823122},
+        {"x": -294920, "z": 816243},
+        {"x": -292008, "z": 809491},
+        {"x": -295091, "z": 804652}
+      ],
+      "connects_to": []
+    },
+    {
+      "name": "river_h",
+      "type": {
+        "width": 35,
+        "depth": 11,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": -233299, "z": 875249},
+        {"x": -221428, "z": 868661},
+        {"x": -218507, "z": 860709},
+        {"x": -205762, "z": 857089},
+        {"x": -186106, "z": 853887},
+        {"x": -173766, "z": 841671},
+        {"x": -174237, "z": 825557},
+        {"x": -170476, "z": 818246},
+        {"x": -165825, "z": 814748}
+      ],
+      "connects_to": []
+    },
+    {
+      "name": "river_i",
+      "type": {
+        "width": 30,
+        "depth": 10,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": -210611, "z": 911990},
+        {"x": -187965, "z": 922740},
+        {"x": -177761, "z": 921224},
+        {"x": -175382, "z": 918665}
+      ],
+      "connects_to": []
+    }
+  ]
+}

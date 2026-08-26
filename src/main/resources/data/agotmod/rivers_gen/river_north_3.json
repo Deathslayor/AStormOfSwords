@@ -1,0 +1,81 @@
+{
+  "rivers": [
+    {
+      "name": "river_b_upper",
+      "type": {
+        "width": 60,
+        "depth": 15,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 6.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 687590, "z": 694566},
+        {"x": 674738, "z": 687080},
+        {"x": 665373, "z": 684323},
+        {"x": 653574, "z": 676275},
+        {"x": 642765, "z": 672930},
+        {"x": 631661, "z": 666570},
+        {"x": 622703, "z": 655233},
+        {"x": 589234, "z": 638722},
+        {"x": 580108, "z": 637436}
+      ],
+      "connects_to": ["river_b_north_fork", "river_b_south_fork"]
+    },
+    {
+      "name": "river_b_north_fork",
+      "type": {
+        "width": 40,
+        "depth": 12,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 580108, "z": 637436},
+        {"x": 572263, "z": 637648},
+        {"x": 561552, "z": 634796},
+        {"x": 555121, "z": 635292},
+        {"x": 551721, "z": 639370},
+        {"x": 551422, "z": 646626},
+        {"x": 544302, "z": 650910},
+        {"x": 537333, "z": 652122},
+        {"x": 529592, "z": 657846},
+        {"x": 526073, "z": 662793},
+        {"x": 526252, "z": 670961}
+      ],
+      "connects_to": []
+    },
+    {
+      "name": "river_b_south_fork",
+      "type": {
+        "width": 40,
+        "depth": 12,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 580108, "z": 637436},
+        {"x": 573456, "z": 627773},
+        {"x": 569352, "z": 618804},
+        {"x": 563871, "z": 611099},
+        {"x": 560466, "z": 602241},
+        {"x": 545389, "z": 592923},
+        {"x": 531755, "z": 585331},
+        {"x": 517919, "z": 576735},
+        {"x": 504887, "z": 568151},
+        {"x": 498166, "z": 562586},
+        {"x": 493694, "z": 558096},
+        {"x": 490452, "z": 556066}
+      ],
+      "connects_to": []
+    }
+  ]
+}

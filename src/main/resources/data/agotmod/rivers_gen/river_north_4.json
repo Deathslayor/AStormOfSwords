@@ -1,0 +1,274 @@
+{
+  "rivers": [
+    {
+      "name": "river_c_upper",
+      "type": {
+        "width": 65,
+        "depth": 16,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 6.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 707491, "z": 623009},
+        {"x": 702716, "z": 613516},
+        {"x": 688437, "z": 595722},
+        {"x": 686861, "z": 587760},
+        {"x": 687340, "z": 571372},
+        {"x": 683044, "z": 554141},
+        {"x": 674768, "z": 543656},
+        {"x": 672722, "z": 535565},
+        {"x": 664847, "z": 515292},
+        {"x": 665419, "z": 502841},
+        {"x": 668554, "z": 494287},
+        {"x": 668842, "z": 478138},
+        {"x": 671480, "z": 473836},
+        {"x": 671039, "z": 461317},
+        {"x": 646375, "z": 440197}
+      ],
+      "connects_to": ["river_c_after_lake"]
+    },
+    {
+      "name": "river_c_after_lake",
+      "type": {
+        "width": 60,
+        "depth": 15,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 6.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 629551, "z": 408167},
+        {"x": 625359, "z": 398912},
+        {"x": 615706, "z": 390127},
+        {"x": 596422, "z": 384642},
+        {"x": 576304, "z": 377480},
+        {"x": 549832, "z": 359946},
+        {"x": 539519, "z": 344054},
+        {"x": 533750, "z": 329815},
+        {"x": 524609, "z": 319235},
+        {"x": 512355, "z": 300071},
+        {"x": 502536, "z": 294339},
+        {"x": 486159, "z": 292044},
+        {"x": 484636, "z": 283197},
+        {"x": 468238, "z": 277107},
+        {"x": 444702, "z": 276981},
+        {"x": 444691, "z": 283086},
+        {"x": 447424, "z": 288766},
+        {"x": 431687, "z": 286774}
+      ],
+      "connects_to": ["river_c_fork_north", "river_c_fork_south"]
+    },
+    {
+      "name": "river_c_fork_north",
+      "type": {
+        "width": 40,
+        "depth": 12,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 431687, "z": 286774},
+        {"x": 424667, "z": 293946},
+        {"x": 418548, "z": 286752},
+        {"x": 411606, "z": 288178},
+        {"x": 408791, "z": 295045},
+        {"x": 394507, "z": 294687},
+        {"x": 394157, "z": 310838},
+        {"x": 396769, "z": 317912},
+        {"x": 391735, "z": 324776},
+        {"x": 383653, "z": 328303},
+        {"x": 376171, "z": 328301}
+      ],
+      "connects_to": []
+    },
+    {
+      "name": "river_c_fork_south",
+      "type": {
+        "width": 40,
+        "depth": 12,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 431687, "z": 286774},
+        {"x": 430311, "z": 281813},
+        {"x": 423879, "z": 275301},
+        {"x": 426096, "z": 268562},
+        {"x": 428771, "z": 261952},
+        {"x": 421921, "z": 250941},
+        {"x": 413306, "z": 246031},
+        {"x": 409481, "z": 232170},
+        {"x": 380192, "z": 219669},
+        {"x": 359754, "z": 218788},
+        {"x": 344286, "z": 224046},
+        {"x": 315139, "z": 214016},
+        {"x": 307498, "z": 207773}
+      ],
+      "connects_to": ["river_c_side", "river_c_south_a", "river_c_south_b"]
+    },
+    {
+      "name": "river_c_side",
+      "type": {
+        "width": 25,
+        "depth": 9,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 315139, "z": 214016},
+        {"x": 315075, "z": 202244},
+        {"x": 310221, "z": 191185},
+        {"x": 310065, "z": 184909},
+        {"x": 316561, "z": 172668},
+        {"x": 318578, "z": 164703},
+        {"x": 322412, "z": 158040},
+        {"x": 321815, "z": 142564},
+        {"x": 320097, "z": 135108},
+        {"x": 324397, "z": 124657},
+        {"x": 328839, "z": 115527},
+        {"x": 329560, "z": 114194},
+        {"x": 329723, "z": 113251},
+        {"x": 330284, "z": 112679}
+      ],
+      "connects_to": []
+    },
+    {
+      "name": "river_c_south_a",
+      "type": {
+        "width": 30,
+        "depth": 10,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 307498, "z": 207773},
+        {"x": 295650, "z": 207462},
+        {"x": 283432, "z": 199952},
+        {"x": 275557, "z": 200157},
+        {"x": 265885, "z": 207219},
+        {"x": 252836, "z": 208721},
+        {"x": 247543, "z": 207330},
+        {"x": 244846, "z": 208832}
+      ],
+      "connects_to": []
+    },
+    {
+      "name": "river_c_south_b",
+      "type": {
+        "width": 30,
+        "depth": 10,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 307498, "z": 207773},
+        {"x": 305750, "z": 200319},
+        {"x": 282801, "z": 182310},
+        {"x": 270759, "z": 180145}
+      ],
+      "connects_to": ["river_c_south_b1", "river_c_south_b2"]
+    },
+    {
+      "name": "river_c_south_b1",
+      "type": {
+        "width": 20,
+        "depth": 8,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 270759, "z": 180145},
+        {"x": 269269, "z": 171815},
+        {"x": 266353, "z": 168176},
+        {"x": 268080, "z": 158414},
+        {"x": 263505, "z": 148465},
+        {"x": 263898, "z": 136073},
+        {"x": 271871, "z": 115028}
+      ],
+      "connects_to": []
+    },
+    {
+      "name": "river_c_south_b2",
+      "type": {
+        "width": 20,
+        "depth": 8,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 270759, "z": 180145},
+        {"x": 261836, "z": 179542},
+        {"x": 251590, "z": 180425},
+        {"x": 233237, "z": 167337},
+        {"x": 230056, "z": 161159}
+      ],
+      "connects_to": ["river_c_south_b2a", "river_c_south_b2b"]
+    },
+    {
+      "name": "river_c_south_b2a",
+      "type": {
+        "width": 15,
+        "depth": 7,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 230056, "z": 161159},
+        {"x": 218469, "z": 155544},
+        {"x": 202270, "z": 149524},
+        {"x": 192428, "z": 142118}
+      ],
+      "connects_to": []
+    },
+    {
+      "name": "river_c_south_b2b",
+      "type": {
+        "width": 15,
+        "depth": 7,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 230056, "z": 161159},
+        {"x": 229538, "z": 150914},
+        {"x": 223728, "z": 143238},
+        {"x": 223561, "z": 130967},
+        {"x": 225474, "z": 125838},
+        {"x": 224866, "z": 120102}
+      ],
+      "connects_to": []
+    }
+  ]
+}

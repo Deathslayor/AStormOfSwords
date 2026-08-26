@@ -1530,32 +1530,52 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 .texture("layer0", modLoc("block/blue_rose_bush_top"))
                 .renderType("cutout");
 
-        // First register the bottom half
-        models().withExistingParent("block/" + ModBLocks.REED.getId().getPath() + "_bottom",
-                        mcLoc("block/cross"))
+        // Reed is now 3 separate stacked blocks (bottom/middle/top) so each can be
+        // independently waterlogged. The middle segment reuses the bottom's texture.
+        // Uses "tinted_cross" (same template vanilla short_grass/fern use) instead of
+        // plain "cross" so the texture picks up the biome grass color — see the block
+        // color handler registration in ModEventBusClientEvents.
+
+        // Reed Bottom
+        models().withExistingParent("block/" + ModBLocks.REED.getId().getPath(),
+                        mcLoc("block/tinted_cross"))
                 .texture("cross", modLoc("block/reed_bottom"))
                 .renderType("cutout");
 
-// Then register the top half
-        models().withExistingParent("block/" + ModBLocks.REED.getId().getPath() + "_top",
-                        mcLoc("block/cross"))
-                .texture("cross", modLoc("block/reed_top"))
-                .renderType("cutout");
-
-// Register the item model (using bottom texture typically)
         models().withExistingParent("item/" + ModBLocks.REED.getId().getPath(),
                         mcLoc("item/generated"))
                 .texture("layer0", modLoc("item/reed"))
                 .renderType("cutout");
 
-// Now register the blockstate that references both models
         getVariantBuilder(ModBLocks.REED.get())
-                .partialState().with(TallFlowerBlock.HALF, DoubleBlockHalf.LOWER)
-                .modelForState().modelFile(models().getExistingFile(
-                        modLoc("block/" + ModBLocks.REED.getId().getPath() + "_bottom"))).addModel()
-                .partialState().with(TallFlowerBlock.HALF, DoubleBlockHalf.UPPER)
-                .modelForState().modelFile(models().getExistingFile(
-                        modLoc("block/" + ModBLocks.REED.getId().getPath() + "_top"))).addModel();
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.REED.getId().getPath())))
+                .addModel();
+
+        // Reed Middle — reuses the bottom texture
+        models().withExistingParent("block/" + ModBLocks.REED_MIDDLE.getId().getPath(),
+                        mcLoc("block/tinted_cross"))
+                .texture("cross", modLoc("block/reed_bottom"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.REED_MIDDLE.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.REED_MIDDLE.getId().getPath())))
+                .addModel();
+
+        // Reed Top
+        models().withExistingParent("block/" + ModBLocks.REED_TOP.getId().getPath(),
+                        mcLoc("block/tinted_cross"))
+                .texture("cross", modLoc("block/reed_top"))
+                .renderType("cutout");
+
+        getVariantBuilder(ModBLocks.REED_TOP.get())
+                .partialState()
+                .modelForState()
+                .modelFile(models().getExistingFile(modLoc("block/" + ModBLocks.REED_TOP.getId().getPath())))
+                .addModel();
 
 
         // Ghost Grass Bottom
@@ -1863,8 +1883,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
 
 
-
-
     }
 
     public void makeBush(SweetBerryBushBlock block, String modelName, String textureName) {
@@ -1945,6 +1963,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     private String name(Block block) {
         return key(block).getPath();
     }
+
 
     private ResourceLocation key(Block block) {
         return BuiltInRegistries.BLOCK.getKey(block);

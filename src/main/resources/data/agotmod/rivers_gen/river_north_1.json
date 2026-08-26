@@ -1,0 +1,120 @@
+{
+  "rivers": [
+    {
+      "name": "lake_tributary_1",
+      "type": {
+        "width": 30,
+        "depth": 10,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 270725, "z": 435491},
+        {"x": 261212, "z": 429525},
+        {"x": 252101, "z": 434214},
+        {"x": 247004, "z": 427951},
+        {"x": 246334, "z": 420625},
+        {"x": 238547, "z": 411140},
+        {"x": 236420, "z": 405579},
+        {"x": 239284, "z": 400044},
+        {"x": 238740, "z": 394723},
+        {"x": 237709, "z": 392150},
+        {"x": 236642, "z": 390775}
+      ],
+      "connects_to": []
+    },
+    {
+      "name": "lake_tributary_2",
+      "type": {
+        "width": 30,
+        "depth": 10,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 276698, "z": 351792},
+        {"x": 269888, "z": 341560},
+        {"x": 259749, "z": 338044},
+        {"x": 253100, "z": 328781},
+        {"x": 252830, "z": 322333},
+        {"x": 242224, "z": 316409},
+        {"x": 230827, "z": 309350},
+        {"x": 228315, "z": 306117}
+      ],
+      "connects_to": []
+    },
+    {
+      "name": "lake_tributary_3",
+      "type": {
+        "width": 30,
+        "depth": 10,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 298766, "z": 303182},
+        {"x": 300247, "z": 298455},
+        {"x": 291379, "z": 286170}
+      ],
+      "connects_to": ["lake_tributary_3_north", "lake_tributary_3_west"]
+    },
+    {
+      "name": "lake_tributary_3_north",
+      "type": {
+        "width": 20,
+        "depth": 8,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 291379, "z": 286170},
+        {"x": 293773, "z": 275681},
+        {"x": 294471, "z": 267479},
+        {"x": 294133, "z": 261490},
+        {"x": 290929, "z": 258439}
+      ],
+      "connects_to": []
+    },
+    {
+      "name": "lake_tributary_3_west",
+      "type": {
+        "width": 20,
+        "depth": 8,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 291379, "z": 286170},
+        {"x": 275897, "z": 281433},
+        {"x": 272642, "z": 275573},
+        {"x": 267065, "z": 270123},
+        {"x": 264581, "z": 266341},
+        {"x": 245037, "z": 262856},
+        {"x": 234639, "z": 259255},
+        {"x": 225134, "z": 257855},
+        {"x": 218905, "z": 255194},
+        {"x": 212098, "z": 254204},
+        {"x": 203961, "z": 249312},
+        {"x": 197619, "z": 246358},
+        {"x": 197158, "z": 245177},
+        {"x": 193833, "z": 242367}
+      ],
+      "connects_to": []
+    }
+  ]
+}

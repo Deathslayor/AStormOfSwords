@@ -1,0 +1,73 @@
+{
+  "rivers": [
+    {
+      "name": "river_e_upper",
+      "type": {
+        "width": 60,
+        "depth": 15,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 6.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": -385209, "z": 1269545},
+        {"x": -346059, "z": 1217516},
+        {"x": -347719, "z": 1203332},
+        {"x": -329179, "z": 1185131},
+        {"x": -312081, "z": 1176355},
+        {"x": -303092, "z": 1166617},
+        {"x": -293771, "z": 1148541},
+        {"x": -293376, "z": 1132505},
+        {"x": -298481, "z": 1117960},
+        {"x": -296879, "z": 1113658}
+      ],
+      "connects_to": ["river_e_fork_west", "river_e_fork_east"]
+    },
+    {
+      "name": "river_e_fork_west",
+      "type": {
+        "width": 40,
+        "depth": 12,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": -296879, "z": 1113658},
+        {"x": -300673, "z": 1106013},
+        {"x": -302763, "z": 1101067},
+        {"x": -321352, "z": 1085833},
+        {"x": -324165, "z": 1080590},
+        {"x": -328596, "z": 1076314}
+      ],
+      "connects_to": []
+    },
+    {
+      "name": "river_e_fork_east",
+      "type": {
+        "width": 40,
+        "depth": 12,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": -296879, "z": 1113658},
+        {"x": -293531, "z": 1108818},
+        {"x": -293134, "z": 1099122},
+        {"x": -288502, "z": 1090507},
+        {"x": -279814, "z": 1079250},
+        {"x": -265659, "z": 1070628},
+        {"x": -262668, "z": 1064537},
+        {"x": -262388, "z": 1062793}
+      ],
+      "connects_to": []
+    }
+  ]
+}

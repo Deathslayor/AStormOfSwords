@@ -1,0 +1,127 @@
+{
+  "rivers": [
+    {
+      "name": "eastern_river_upper",
+      "type": {
+        "width": 70,
+        "depth": 16,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 6.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 675347, "z": 1031409},
+        {"x": 665384, "z": 1022580},
+        {"x": 660986, "z": 1011713},
+        {"x": 658123, "z": 1003325},
+        {"x": 653976, "z": 998139},
+        {"x": 648927, "z": 986810},
+        {"x": 644841, "z": 979517},
+        {"x": 633558, "z": 974872},
+        {"x": 624834, "z": 966161},
+        {"x": 614392, "z": 959038},
+        {"x": 602420, "z": 954525}
+      ],
+      "connects_to": ["eastern_river_west_fork", "eastern_river_south_fork"]
+    },
+    {
+      "name": "eastern_river_west_fork",
+      "type": {
+        "width": 50,
+        "depth": 13,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 602420, "z": 954525},
+        {"x": 579798, "z": 941814},
+        {"x": 561160, "z": 941095},
+        {"x": 543184, "z": 931742},
+        {"x": 531110, "z": 931924},
+        {"x": 512868, "z": 940854},
+        {"x": 490379, "z": 942178},
+        {"x": 471386, "z": 949365},
+        {"x": 456565, "z": 949352},
+        {"x": 447863, "z": 952958},
+        {"x": 440101, "z": 952515},
+        {"x": 431756, "z": 954070},
+        {"x": 424864, "z": 952072},
+        {"x": 419234, "z": 950829}
+      ],
+      "connects_to": []
+    },
+    {
+      "name": "eastern_river_south_fork",
+      "type": {
+        "width": 50,
+        "depth": 13,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 602420, "z": 954525},
+        {"x": 599924, "z": 934953},
+        {"x": 588159, "z": 916032},
+        {"x": 580814, "z": 899210},
+        {"x": 580921, "z": 882351},
+        {"x": 583633, "z": 877007},
+        {"x": 580818, "z": 864692},
+        {"x": 578988, "z": 856273},
+        {"x": 569738, "z": 846634}
+      ],
+      "connects_to": ["eastern_river_south_west", "eastern_river_south_east"]
+    },
+    {
+      "name": "eastern_river_south_west",
+      "type": {
+        "width": 35,
+        "depth": 11,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 569738, "z": 846634},
+        {"x": 551562, "z": 841601},
+        {"x": 543015, "z": 833923},
+        {"x": 527456, "z": 827679},
+        {"x": 507107, "z": 824411},
+        {"x": 500107, "z": 820572},
+        {"x": 485496, "z": 810757}
+      ],
+      "connects_to": []
+    },
+    {
+      "name": "eastern_river_south_east",
+      "type": {
+        "width": 35,
+        "depth": 11,
+        "visible_on_map": true,
+        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 5.0,
+        "meander_strength": 0.2,
+        "biome": "agotmod:northern_river"
+      },
+      "waypoints": [
+        {"x": 569738, "z": 846634},
+        {"x": 571774, "z": 837681},
+        {"x": 575061, "z": 827768},
+        {"x": 579198, "z": 821909},
+        {"x": 579702, "z": 804161},
+        {"x": 575476, "z": 796926},
+        {"x": 570811, "z": 786418}
+      ],
+      "connects_to": []
+    }
+  ]
+}
