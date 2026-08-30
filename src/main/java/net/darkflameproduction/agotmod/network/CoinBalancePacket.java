@@ -1,7 +1,7 @@
 package net.darkflameproduction.agotmod.network;
 
 import net.darkflameproduction.agotmod.AGoTMod;
-import net.darkflameproduction.agotmod.gui.GrocerInventoryScreen;
+import net.darkflameproduction.agotmod.gui.TradingInventoryScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -35,10 +35,8 @@ public record CoinBalancePacket(long balance) implements CustomPacketPayload {
                 // Update the player's persistent data on client side
                 minecraft.player.getPersistentData().putLong("agotmod.coin_balance", packet.balance());
 
-                // Also update the grocer GUI if it's open
-                GrocerInventoryScreen.updatePlayerBalance(packet.balance());
-
-                System.out.println("DEBUG: Updated client coin balance to: " + packet.balance());
+                // Also update the trading GUI if it's open
+                TradingInventoryScreen.updatePlayerBalance(packet.balance());
             }
         });
     }

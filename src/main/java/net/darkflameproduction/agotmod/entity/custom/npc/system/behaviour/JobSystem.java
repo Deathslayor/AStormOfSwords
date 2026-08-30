@@ -6,6 +6,7 @@ import net.darkflameproduction.agotmod.entity.custom.npc.system.charcoalburner.C
 import net.darkflameproduction.agotmod.entity.custom.npc.system.farmer.FarmingSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.lumberjack.LumberjackSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.miner.MinerSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.quarry.QuarrySystem;
 import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -26,6 +27,7 @@ public class JobSystem {
     public static final String JOB_FARMER          = "farmer";
     public static final String JOB_GUARD           = "guard";
     public static final String JOB_MINER           = "miner";
+    public static final String JOB_QUARRY          = "quarry";
     public static final String JOB_SMELTER         = "smelter";
     public static final String JOB_CATTLE_HERDER   = "cattle_herder";
     public static final String JOB_CHICKEN_BREEDER = "chicken_breeder";
@@ -54,9 +56,6 @@ public class JobSystem {
     private static final int GUARD_WORK_RADIUS_X           = 96;
     private static final int GUARD_WORK_RADIUS_Z           = 96;
     private static final int GUARD_WORK_RADIUS_Y           = 32;
-    private static final int MINER_WORK_RADIUS_X           = 64;
-    private static final int MINER_WORK_RADIUS_Z           = 64;
-    private static final int MINER_WORK_RADIUS_Y           = 48;
     private static final int SMELTER_WORK_RADIUS_X         = 8;
     private static final int SMELTER_WORK_RADIUS_Z         = 8;
     private static final int SMELTER_WORK_RADIUS_Y         = 16;
@@ -140,6 +139,7 @@ public class JobSystem {
         if (getJobType().equals(JOB_BLACKSMITH))      return jobBlockState.is(ModBLocks.BLACKSMITH_BARREL.get());
         if (getJobType().equals(JOB_GUARD))           return jobBlockState.is(ModBLocks.GUARD_BARREL.get());
         if (getJobType().equals(JOB_MINER))           return jobBlockState.is(ModBLocks.MINER_BARREL.get());
+        if (getJobType().equals(JOB_QUARRY))          return jobBlockState.is(ModBLocks.QUARRY_BARREL.get());
         if (getJobType().equals(JOB_SMELTER))         return jobBlockState.is(ModBLocks.SMELTER_BARREL.get());
         if (getJobType().equals(JOB_CATTLE_HERDER))   return jobBlockState.is(ModBLocks.CATTLE_HERDER_BARREL.get());
         if (getJobType().equals(JOB_CHICKEN_BREEDER)) return jobBlockState.is(ModBLocks.CHICKEN_BREEDER_BARREL.get());
@@ -174,6 +174,8 @@ public class JobSystem {
             peasant.getGuardSystem().onRemove();
         } else if (oldJobType.equals(JOB_MINER)) {
             peasant.getMinerSystem().setCurrentMinerState(MinerSystem.MinerState.GOING_TO_JOB_BLOCK);
+        } else if (oldJobType.equals(JOB_QUARRY)) {
+            peasant.getQuarrySystem().setCurrentQuarryState(QuarrySystem.QuarryState.GOING_TO_JOB_BLOCK);
         } else if (oldJobType.equals(JOB_SMELTER)) {
             peasant.getSmelterSystem().setCurrentState(
                     net.darkflameproduction.agotmod.entity.custom.npc.system.smelter.SmelterSystem.SmelterState.GOING_TO_JOB_BLOCK);
@@ -233,6 +235,7 @@ public class JobSystem {
         if (peasant.level().isClientSide) return;
         if (newJob.equals(JOB_FARMER))      giveIronHoe();
         else if (newJob.equals(JOB_MINER))  giveMinerEquipment();
+        else if (newJob.equals(JOB_QUARRY)) giveMinerEquipment();
         else if (newJob.equals(JOB_LUMBERJACK))  giveLumberjackEquipment();
         else if (newJob.equals(JOB_CARPENTER))   giveCarpenterEquipment();
     }
@@ -363,6 +366,7 @@ public class JobSystem {
         if (getJobType().equals(JOB_GUARD))
             return deltaX <= GUARD_WORK_RADIUS_X && deltaZ <= GUARD_WORK_RADIUS_Z && deltaY <= GUARD_WORK_RADIUS_Y;
         if (getJobType().equals(JOB_MINER)) return true;
+        if (getJobType().equals(JOB_QUARRY)) return true;
         if (getJobType().equals(JOB_SMELTER))
             return deltaX <= SMELTER_WORK_RADIUS_X && deltaZ <= SMELTER_WORK_RADIUS_Z && deltaY <= SMELTER_WORK_RADIUS_Y;
         if (getJobType().equals(JOB_CATTLE_HERDER)
@@ -392,6 +396,7 @@ public class JobSystem {
         if (getJobType().equals(JOB_BLACKSMITH))  return true;
         if (getJobType().equals(JOB_CARPENTER))   return true;
         if (getJobType().equals(JOB_MINER))       return true;
+        if (getJobType().equals(JOB_QUARRY))      return true;
         if (getJobType().equals(JOB_SMELTER))     return true;
         if (getJobType().equals(JOB_CATTLE_HERDER)
                 || getJobType().equals(JOB_CHICKEN_BREEDER)
@@ -437,6 +442,7 @@ public class JobSystem {
         if (getJobType().equals(JOB_GUARD))
             return distanceSquared > ((GUARD_WORK_RADIUS_X + 10) * (GUARD_WORK_RADIUS_X + 10));
         if (getJobType().equals(JOB_MINER)) return false;
+        if (getJobType().equals(JOB_QUARRY)) return false;
         if (getJobType().equals(JOB_SMELTER))
             return distanceSquared > ((SMELTER_WORK_RADIUS_X + 10) * (SMELTER_WORK_RADIUS_X + 10));
         if (getJobType().equals(JOB_CATTLE_HERDER)
@@ -462,12 +468,6 @@ public class JobSystem {
     }
 
     // Ã¢â€â‚¬Ã¢â€â‚¬ Job block reservations Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
-
-    public static boolean isJobBlockReserved(BlockPos blockPos, UUID excludeUUID) {
-        cleanupExpiredJobReservations();
-        UUID reservedBy = jobBlockReservations.get(blockPos);
-        return reservedBy != null && !reservedBy.equals(excludeUUID);
-    }
 
     public static boolean reserveJobBlock(BlockPos blockPos, UUID peasantUUID) {
         cleanupExpiredJobReservations();

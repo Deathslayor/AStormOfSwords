@@ -3,11 +3,11 @@
     {
       "name": "river_c_upper",
       "type": {
-        "width": 65,
-        "depth": 16,
+        "width": 365,
+        "depth": 36,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 6.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },
@@ -33,11 +33,11 @@
     {
       "name": "river_c_after_lake",
       "type": {
-        "width": 60,
-        "depth": 15,
+        "width": 340,
+        "depth": 35,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 6.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },
@@ -66,11 +66,11 @@
     {
       "name": "river_c_fork_north",
       "type": {
-        "width": 40,
-        "depth": 12,
+        "width": 225,
+        "depth": 28,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 5.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },
@@ -92,11 +92,11 @@
     {
       "name": "river_c_fork_south",
       "type": {
-        "width": 40,
-        "depth": 12,
+        "width": 225,
+        "depth": 28,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 5.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },
@@ -120,11 +120,11 @@
     {
       "name": "river_c_side",
       "type": {
-        "width": 25,
-        "depth": 9,
+        "width": 140,
+        "depth": 22,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 5.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },
@@ -149,11 +149,11 @@
     {
       "name": "river_c_south_a",
       "type": {
-        "width": 30,
-        "depth": 10,
+        "width": 170,
+        "depth": 25,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 5.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },
@@ -172,11 +172,11 @@
     {
       "name": "river_c_south_b",
       "type": {
-        "width": 30,
-        "depth": 10,
+        "width": 170,
+        "depth": 25,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 5.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },
@@ -191,11 +191,11 @@
     {
       "name": "river_c_south_b1",
       "type": {
-        "width": 20,
-        "depth": 8,
+        "width": 115,
+        "depth": 20,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 5.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },
@@ -213,11 +213,11 @@
     {
       "name": "river_c_south_b2",
       "type": {
-        "width": 20,
-        "depth": 8,
+        "width": 115,
+        "depth": 20,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 5.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },
@@ -233,11 +233,11 @@
     {
       "name": "river_c_south_b2a",
       "type": {
-        "width": 15,
-        "depth": 7,
+        "width": 85,
+        "depth": 17,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 5.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },
@@ -252,11 +252,11 @@
     {
       "name": "river_c_south_b2b",
       "type": {
-        "width": 15,
-        "depth": 7,
+        "width": 85,
+        "depth": 17,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 5.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },

@@ -14,7 +14,7 @@
         "terrain_modifier": 33.0
       },
       "map_id": "agotmod:known_world",
-      "noise_gen_settings": "ctgen:overworld",
+      "noise_gen_settings": "minecraft:overworld",
       "scale": 147,
       "transition": 10,
       "border_noise": 1.0,

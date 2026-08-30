@@ -37,9 +37,6 @@ public class CharcoalBurnerBarrelDropOffGoal extends Goal {
         this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
     }
 
-    public long getLastDropOffDay()          { return lastDropOffDay; }
-    public void setLastDropOffDay(long day)  { this.lastDropOffDay = day; }
-
     @Override
     public boolean canUse() {
         if (!peasant.getJobType().equals(JobSystem.JOB_CHARCOAL_BURNER)) return false;

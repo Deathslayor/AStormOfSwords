@@ -11,7 +11,6 @@ import java.util.concurrent.ConcurrentHashMap;
 public class SimpleBedWarningSystem {
     // Static map to track home beds only
     private static final Map<BlockPos, HomeBedClaim> homeBedClaims = new ConcurrentHashMap<>();
-    private static final long HOME_BED_WARNING_DURATION = Long.MAX_VALUE;
 
     public static class HomeBedClaim {
         public final UUID npcUUID;
@@ -61,23 +60,6 @@ public class SimpleBedWarningSystem {
         if (homeBedPos != null) {
             homeBedClaims.put(homeBedPos, new HomeBedClaim(npcUUID, null, null));
         }
-    }
-
-    // Check if a bed is claimed as someone's home bed
-    public static boolean isHomeBedClaimed(BlockPos bedPos, UUID excludeUUID) {
-        cleanupExpiredClaims();
-
-        HomeBedClaim claim = homeBedClaims.get(bedPos);
-        if (claim == null) {
-            return false;
-        }
-
-        // Not claimed if it's our own claim
-        if (claim.npcUUID.equals(excludeUUID)) {
-            return false;
-        }
-
-        return !claim.isExpired();
     }
 
     // Get all home bed claims within a radius (for bed searching NPCs to avoid)
@@ -139,60 +121,6 @@ public class SimpleBedWarningSystem {
         return citizenNames;
     }
 
-    /**
-     * Get all citizen names within a radius as a simple list (for easier processing)
-     */
-    public static List<String> getCitizenNamesListInRadius(BlockPos center, int radius) {
-        Map<UUID, String> nameMap = getCitizenNamesInRadius(center, radius);
-        return new ArrayList<>(nameMap.values());
-    }
-
-    /**
-     * Get all unique last names within a radius
-     */
-    public static List<String> getCitizenLastNamesInRadius(BlockPos center, int radius) {
-        Map<UUID, String> citizenNames = getCitizenNamesInRadius(center, radius);
-        Set<String> lastNames = new HashSet<>();
-
-        for (String fullName : citizenNames.values()) {
-            if (fullName != null && !fullName.isEmpty()) {
-                String lastName = extractLastName(fullName);
-                if (!lastName.isEmpty() && !lastName.equals("Snow")) { // Filter out default/bastard names
-                    lastNames.add(lastName);
-                }
-            }
-        }
-
-        return new ArrayList<>(lastNames);
-    }
-
-    /**
-     * Helper method to extract last name from full name
-     */
-    private static String extractLastName(String fullName) {
-        if (fullName == null || fullName.isEmpty()) return "";
-
-        String[] parts = fullName.split(" ");
-        if (parts.length > 1) {
-            return parts[parts.length - 1];
-        }
-        return "";
-    }
-
-    /**
-     * Update the name for an existing claim (when NPC name changes)
-     */
-    public static void updateClaimName(UUID npcUUID, String newName) {
-        for (Map.Entry<BlockPos, HomeBedClaim> entry : homeBedClaims.entrySet()) {
-            HomeBedClaim claim = entry.getValue();
-            if (claim.npcUUID.equals(npcUUID)) {
-                // Replace the claim with updated name
-                homeBedClaims.put(entry.getKey(), new HomeBedClaim(npcUUID, newName, claim.level));
-                break; // Assuming one home per NPC
-            }
-        }
-    }
-
     // Remove home bed claim when NPC loses home or is removed
     public static void removeHomeBedClaim(UUID npcUUID) {
         homeBedClaims.entrySet().removeIf(entry -> entry.getValue().npcUUID.equals(npcUUID));
@@ -209,14 +137,6 @@ public class SimpleBedWarningSystem {
     // Clean up expired claims
     private static void cleanupExpiredClaims() {
         homeBedClaims.entrySet().removeIf(entry -> entry.getValue().isExpired());
-    }
-
-    /**
-     * Debug method to get all current claims (useful for testing)
-     */
-    public static Map<BlockPos, HomeBedClaim> getAllClaims() {
-        cleanupExpiredClaims();
-        return new HashMap<>(homeBedClaims);
     }
 
     /**

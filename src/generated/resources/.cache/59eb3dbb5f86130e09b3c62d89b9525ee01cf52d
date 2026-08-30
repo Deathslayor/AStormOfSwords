@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-26T20:36:11.8673916	Loot Tables
+// 1.21.1	2026-08-30T18:05:54.5897658	Loot Tables
 e9bd72b39150226eea7e9f8651090f64a2f92e26 data/agotmod/loot_table/blocks/acacia_arm_chair.json
 8b853b189990b99a15ea85034eba5c841663807f data/agotmod/loot_table/blocks/acacia_chair.json
 25731f80a799127a902c25a58ea1c9ee6aa06d85 data/agotmod/loot_table/blocks/acacia_stool.json
@@ -1649,8 +1649,8 @@ bec1746e1974e39bac4db9d1483c364d5e458b5f data/agotmod/loot_table/blocks/datepalm
 acb8f8506fd18510cd8b859a6b4623a395ec2f06 data/agotmod/loot_table/blocks/deepslate_silver_ore.json
 455ef89ae6d341337d987ea3eaff6f058d687168 data/agotmod/loot_table/blocks/deepslate_tin_ore.json
 45d2646563add4d68cc55acc9d13ffb571518a91 data/agotmod/loot_table/blocks/derpy_dragon_block.json
-c6acb68fae83b7cce358281bae49c6b602938479 data/agotmod/loot_table/blocks/diamonds_deepslate_ore.json
-2766c60681a2a79277152243fde4f9c16d411386 data/agotmod/loot_table/blocks/diamonds_ore.json
+4aac632d9fd38a5f30ad8b8ab1a3a2cac6010c97 data/agotmod/loot_table/blocks/diamonds_deepslate_ore.json
+37379465cea247452638e2354658e933ba818c61 data/agotmod/loot_table/blocks/diamonds_ore.json
 8e1b58058565fdedbe8f6bc8e67184351eb7e468 data/agotmod/loot_table/blocks/diorite_10_block.json
 d6ace48889200a59b7f2cc55a055e21ba89ad1cf data/agotmod/loot_table/blocks/diorite_10_slab.json
 22aab689fe81af160626eddeafade39bd6074e61 data/agotmod/loot_table/blocks/diorite_10_stairs.json
@@ -3576,8 +3576,8 @@ b8feb108b3d35315399c2eddfa153469c64a624a data/agotmod/loot_table/blocks/red_cher
 dd5926cd30c9cf6332bd128ae1971fa1ffb9d99f data/agotmod/loot_table/blocks/red_cherry_wood_stripped.json
 4fedbd690de4b056dc447e66bdd2bd5e721d6fbc data/agotmod/loot_table/blocks/red_onion_crop.json
 c1228c52faa1fc2439253f2f12da6628278cd41d data/agotmod/loot_table/blocks/red_rose_bush.json
-173eb252f24ed234d3ab2153f68069afdc03be11 data/agotmod/loot_table/blocks/reed.json
-94bf31d135c477947d6649ae35b79ade3d4fe231 data/agotmod/loot_table/blocks/reed_middle.json
+f23cb362055fb19bcf2ace86d70a21a2688cead7 data/agotmod/loot_table/blocks/reed.json
+da88d1caaa6822c52261f3a1cf2246a6f9d6f72a data/agotmod/loot_table/blocks/reed_middle.json
 ef33ea0664a8d35af5b03c0e9466dc63871d6bee data/agotmod/loot_table/blocks/reed_top.json
 6c664a297bffbc4eb5ef2733a146af55dceddd57 data/agotmod/loot_table/blocks/rose.json
 2438cff9fc6eb26527a825780f83a1a5667ee672 data/agotmod/loot_table/blocks/rotten_arm_chair.json

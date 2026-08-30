@@ -2,9 +2,9 @@
   "carvers": {},
   "downfall": 1.0,
   "effects": {
-    "fog_color": 1713424,
-    "foliage_color": 1450000,
-    "grass_color": 1910039,
+    "fog_color": 4881589,
+    "foliage_color": 2371112,
+    "grass_color": 3029042,
     "mood_sound": {
       "block_search_extent": 8,
       "offset": 2.0,
@@ -17,7 +17,7 @@
       "replace_current_music": false,
       "sound": "agotmod:winter_wind"
     },
-    "sky_color": 2768158,
+    "sky_color": 4881333,
     "water_color": 2703384,
     "water_fog_color": 2036488
   },
@@ -79,7 +79,8 @@
       "agotmod:quagmire",
       "agotmod:mud",
       "agotmod:seagrass",
-      "agotmod:kelp"
+      "agotmod:kelp",
+      "agotmod:reed"
     ],
     [
       "minecraft:freeze_top_layer"

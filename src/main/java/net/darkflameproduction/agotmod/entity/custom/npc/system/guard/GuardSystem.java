@@ -319,27 +319,14 @@ public class GuardSystem {
     public boolean shouldSleep() {
         if (assignedShift == null) {
             // No shift assigned yet, use normal sleep schedule temporarily
-            // DEBUG: Add logging
-            if (!peasant.level().isClientSide) {
-            }
             return peasant.getSleepSystem().shouldSleep();
         }
 
         long dayTime = peasant.level().getDayTime() % 24000;
-        boolean sleepTime = assignedShift.isSleepTime(dayTime);
-
-        // DEBUG: Add logging
-        if (!peasant.level().isClientSide) {
-        }
-
-        return sleepTime;
+        return assignedShift.isSleepTime(dayTime);
     }
 
     // Getters
-    public GuardShift getAssignedShift() {
-        return assignedShift;
-    }
-
     public boolean hasAssignedShift() {
         return assignedShift != null;
     }
@@ -359,22 +346,6 @@ public class GuardSystem {
 
     private static void cleanupExpiredBroadcasts() {
         activeShiftBroadcasts.entrySet().removeIf(entry -> entry.getValue().isExpired());
-    }
-
-    public static Map<GuardShift, Integer> getShiftCounts() {
-        cleanupExpiredBroadcasts();
-        Map<GuardShift, Integer> counts = new HashMap<>();
-        counts.put(GuardShift.DAY_SHIFT, 0);
-        counts.put(GuardShift.EVENING_SHIFT, 0);
-        counts.put(GuardShift.NIGHT_SHIFT, 0);
-
-        for (GuardShiftBroadcast broadcast : activeShiftBroadcasts.values()) {
-            if (!broadcast.isExpired()) {
-                counts.put(broadcast.shift, counts.get(broadcast.shift) + 1);
-            }
-        }
-
-        return counts;
     }
 
     // Save/Load methods

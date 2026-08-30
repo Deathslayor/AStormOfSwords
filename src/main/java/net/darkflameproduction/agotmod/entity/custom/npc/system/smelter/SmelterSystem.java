@@ -28,11 +28,9 @@ public class SmelterSystem {
 
     public int getMaxOreSlots() { return coalCollected * 8; }
 
-    public int getOreSlotsFilled() { return oreSlotsFilled; }
     public void setOreSlotsFilled(int slots) { this.oreSlotsFilled = slots; }
     public void addOreSlotsFilled(int amount) { this.oreSlotsFilled += amount; }
     public boolean hasOreCapacity() { return oreSlotsFilled < getMaxOreSlots(); }
-    public int getRemainingOreSlots() { return Math.max(0, getMaxOreSlots() - oreSlotsFilled); }
 
     public void saveData(CompoundTag tag) {
         tag.putString("SmelterState", currentState.name());

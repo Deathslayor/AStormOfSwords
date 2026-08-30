@@ -32,9 +32,4 @@ public enum Culture {
         this.group       = group;
         this.displayName = displayName;
     }
-
-    /** Placeholder for future crafting restrictions. */
-    public String getCraftingTag() {
-        return group.name().toLowerCase();
-    }
 }

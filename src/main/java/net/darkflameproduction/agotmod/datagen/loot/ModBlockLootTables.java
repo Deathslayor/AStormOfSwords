@@ -123,8 +123,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(ModBLocks.TOURMALINE_DEEPSLATE_ORE.get(), block -> oreDropBetween2And5(registrylookup, ModBLocks.TOURMALINE_DEEPSLATE_ORE.get(), ModItems.TOURMALINE.get()));
 
 
-        this.add(ModBLocks.DIAMONDS_ORE.get(), block -> oreDropBetween1And3(registrylookup, ModBLocks.DIAMONDS_ORE.get(), Items.DIAMOND));
-        this.add(ModBLocks.DIAMONDS_DEEPSLATE_ORE.get(), block -> oreDropBetween1And3(registrylookup, ModBLocks.DIAMONDS_DEEPSLATE_ORE.get(), Items.DIAMOND));
+        this.add(ModBLocks.DIAMONDS_ORE.get(), block -> diamondsOreDrop(registrylookup, ModBLocks.DIAMONDS_ORE.get()));
+        this.add(ModBLocks.DIAMONDS_DEEPSLATE_ORE.get(), block -> diamondsOreDrop(registrylookup, ModBLocks.DIAMONDS_DEEPSLATE_ORE.get()));
 
         // ---------------------------(GEMS)--------------------------- //
 
@@ -549,16 +549,9 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                                 .setRolls(ConstantValue.exactly(1))
                                 .add(LootItem.lootTableItem(ModBLocks.ROSE.get()))));
 
-        this.add(ModBLocks.REED.get(),
-                LootTable.lootTable()
-                        .withPool(LootPool.lootPool()
-                                .setRolls(ConstantValue.exactly(1))
-                                .add(LootItem.lootTableItem(ModBLocks.REED.get()))));
-        this.add(ModBLocks.REED_MIDDLE.get(),
-                LootTable.lootTable()
-                        .withPool(LootPool.lootPool()
-                                .setRolls(ConstantValue.exactly(1))
-                                .add(LootItem.lootTableItem(ModBLocks.REED.get()))));
+        // Only the top segment drops reed — breaking the bottom/middle drops nothing.
+        this.add(ModBLocks.REED.get(), this.noDrop());
+        this.add(ModBLocks.REED_MIDDLE.get(), this.noDrop());
         this.add(ModBLocks.REED_TOP.get(),
                 LootTable.lootTable()
                         .withPool(LootPool.lootPool()
@@ -1268,6 +1261,31 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     protected LootTable.Builder oreDropBetween1And3(HolderLookup.RegistryLookup<Enchantment> registrylookup, Block pBlock, Item item) {
         // Create a loot table for ore drops with random count between 1 and 3
         return createSilkTouchDispatchTable(pBlock, this.applyExplosionDecay(pBlock, LootItem.lootTableItem(item).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))).apply(ApplyBonusCount.addOreBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE)))));
+    }
+
+    /**
+     * Silk touch drops the ore block itself; otherwise drops 1-3 (fortune-scaled) of
+     * a RANDOMLY CHOSEN one of the modded diamond colours (see the {@code diamonds}
+     * field) - vanilla's own weighted pool selection does the random pick, since all
+     * three candidate entries are equally weighted and mutually exclusive with the
+     * silk-touch entry via their conditions.
+     */
+    protected LootTable.Builder diamondsOreDrop(HolderLookup.RegistryLookup<Enchantment> registrylookup, Block pBlock) {
+        LootItemCondition.Builder noSilkTouch = InvertedLootItemCondition.invert(this.hasSilkTouch());
+
+        LootPool.Builder pool = this.applyExplosionCondition(pBlock,
+                LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)));
+
+        pool.add(LootItem.lootTableItem(pBlock).when(this.hasSilkTouch()));
+
+        for (ItemLike diamondItem : diamonds) {
+            pool.add(LootItem.lootTableItem(diamondItem)
+                    .when(noSilkTouch)
+                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
+                    .apply(ApplyBonusCount.addOreBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE))));
+        }
+
+        return LootTable.lootTable().withPool(pool);
     }
 
     protected LootTable.Builder cropDrop(Block cropBlock, IntegerProperty ageProperty, int maxAge, Item dropItem, float minDrop, float maxDrop, Item seedItem) {

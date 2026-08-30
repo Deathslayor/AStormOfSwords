@@ -4,20 +4,37 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
-import net.darkflameproduction.agotmod.entity.custom.npc.system.grocer.GrocerSystem;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public record OpenGrocerInventoryPacket(
-        String grocerName,
-        List<GrocerSystem.GrocerInventoryEntry> grocerEntries,
+/**
+ * Opens the trading GUI for any shop-type NPC (Grocer, Butcher, Tanner,
+ * Tailor, Blacksmith, Carpenter, Trader) - the catalog/entries are just
+ * whatever the town inventory has, pre-filtered by job on the server.
+ */
+public record OpenTradingInventoryPacket(
+        String tradingName,
+        List<TradingInventoryEntry> tradingEntries,
         List<PlayerInventoryEntry> playerEntries,
-        long grocerBalance,
+        long tradingBalance,
         long playerBalance,
         float buyMultiplier,
         float sellMultiplier
 ) implements CustomPacketPayload {
+
+    /** A single catalog entry offered by the trading NPC. */
+    public static class TradingInventoryEntry {
+        public final String displayName;
+        public final long amount;
+        public final String itemKey;
+
+        public TradingInventoryEntry(String displayName, long amount, String itemKey) {
+            this.displayName = displayName;
+            this.amount      = amount;
+            this.itemKey     = itemKey;
+        }
+    }
 
     public static class PlayerInventoryEntry {
         public final String displayName;
@@ -33,23 +50,23 @@ public record OpenGrocerInventoryPacket(
         }
     }
 
-    public static final CustomPacketPayload.Type<OpenGrocerInventoryPacket> TYPE =
-            new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath("agotmod", "open_grocer_inventory"));
+    public static final CustomPacketPayload.Type<OpenTradingInventoryPacket> TYPE =
+            new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath("agotmod", "open_trading_inventory"));
 
-    public static final StreamCodec<FriendlyByteBuf, OpenGrocerInventoryPacket> STREAM_CODEC = StreamCodec.of(
-            OpenGrocerInventoryPacket::write,
-            OpenGrocerInventoryPacket::read
+    public static final StreamCodec<FriendlyByteBuf, OpenTradingInventoryPacket> STREAM_CODEC = StreamCodec.of(
+            OpenTradingInventoryPacket::write,
+            OpenTradingInventoryPacket::read
     );
 
-    public static void write(FriendlyByteBuf buf, OpenGrocerInventoryPacket packet) {
-        buf.writeUtf(packet.grocerName);
-        buf.writeLong(packet.grocerBalance);
+    public static void write(FriendlyByteBuf buf, OpenTradingInventoryPacket packet) {
+        buf.writeUtf(packet.tradingName);
+        buf.writeLong(packet.tradingBalance);
         buf.writeLong(packet.playerBalance);
         buf.writeFloat(packet.buyMultiplier);
         buf.writeFloat(packet.sellMultiplier);
 
-        buf.writeInt(packet.grocerEntries.size());
-        for (GrocerSystem.GrocerInventoryEntry entry : packet.grocerEntries) {
+        buf.writeInt(packet.tradingEntries.size());
+        for (TradingInventoryEntry entry : packet.tradingEntries) {
             buf.writeUtf(entry.displayName);
             buf.writeLong(entry.amount);
             buf.writeUtf(entry.itemKey);
@@ -64,20 +81,20 @@ public record OpenGrocerInventoryPacket(
         }
     }
 
-    public static OpenGrocerInventoryPacket read(FriendlyByteBuf buf) {
-        String grocerName    = buf.readUtf();
-        long grocerBalance   = buf.readLong();
+    public static OpenTradingInventoryPacket read(FriendlyByteBuf buf) {
+        String tradingName   = buf.readUtf();
+        long tradingBalance  = buf.readLong();
         long playerBalance   = buf.readLong();
         float buyMultiplier  = buf.readFloat();
         float sellMultiplier = buf.readFloat();
 
-        int grocerSize = buf.readInt();
-        List<GrocerSystem.GrocerInventoryEntry> grocerEntries = new ArrayList<>();
-        for (int i = 0; i < grocerSize; i++) {
+        int tradingSize = buf.readInt();
+        List<TradingInventoryEntry> tradingEntries = new ArrayList<>();
+        for (int i = 0; i < tradingSize; i++) {
             String displayName = buf.readUtf();
             long amount        = buf.readLong();
             String itemKey     = buf.readUtf();
-            grocerEntries.add(new GrocerSystem.GrocerInventoryEntry(displayName, amount, itemKey));
+            tradingEntries.add(new TradingInventoryEntry(displayName, amount, itemKey));
         }
 
         int playerSize = buf.readInt();
@@ -90,8 +107,8 @@ public record OpenGrocerInventoryPacket(
             playerEntries.add(new PlayerInventoryEntry(displayName, amount, itemKey, slot));
         }
 
-        return new OpenGrocerInventoryPacket(grocerName, grocerEntries, playerEntries,
-                grocerBalance, playerBalance, buyMultiplier, sellMultiplier);
+        return new OpenTradingInventoryPacket(tradingName, tradingEntries, playerEntries,
+                tradingBalance, playerBalance, buyMultiplier, sellMultiplier);
     }
 
     @Override

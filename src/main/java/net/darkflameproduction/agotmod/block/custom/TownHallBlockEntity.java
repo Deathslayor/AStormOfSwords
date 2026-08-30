@@ -32,7 +32,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -127,13 +126,6 @@ public class TownHallBlockEntity extends BlockEntity implements
     public int getJoblessCount() {
         return joblessQueue.size();
     }
-    public List<CitizenInfo> getRegisteredCitizens() {
-        return new ArrayList<>(registeredCitizens.values());
-    }
-    public List<JobBlockInfo> getAvailableJobs() {
-        return new ArrayList<>(availableJobs.values());
-    }
-
     private Culture culture = Culture.NONE;
 
     public Culture getCulture() { return culture; }
@@ -283,30 +275,6 @@ public class TownHallBlockEntity extends BlockEntity implements
         return "";
     }
 
-    // Helper method to get house name from offline player
-    private String getOfflinePlayerHouseName(UUID playerUUID) {
-        try {
-            Path worldPath = level.getServer().getWorldPath(LevelResource.ROOT);
-            Path playerFile = worldPath.resolve("playerdata").resolve(playerUUID.toString() + ".dat");
-
-            if (Files.exists(playerFile)) {
-                CompoundTag playerData = NbtIo.readCompressed(
-                        playerFile, NbtAccounter.unlimitedHeap());
-
-                if (playerData.contains("agotmod.house")) {
-                    CompoundTag houseTag = playerData.getCompound("agotmod.house");
-                    if (houseTag.contains("house_name")) {
-                        return houseTag.getString("house_name");
-                    }
-                }
-            }
-        } catch (Exception e) {
-            // Failed to load offline player house name - return empty string
-        }
-
-        return "";
-    }
-
     private final Map<UUID, CitizenInfo> registeredCitizens = new HashMap<>();
     private final Map<BlockPos, JobBlockInfo> availableJobs = new HashMap<>();
     private final Queue<UUID> joblessQueue = new LinkedList<>();
@@ -394,6 +362,7 @@ public class TownHallBlockEntity extends BlockEntity implements
         if (state.is(ModBLocks.BLACKSMITH_BARREL.get()))      return JobSystem.JOB_BLACKSMITH;
         if (state.is(ModBLocks.GUARD_BARREL.get()))           return JobSystem.JOB_GUARD;
         if (state.is(ModBLocks.MINER_BARREL.get()))           return JobSystem.JOB_MINER;
+        if (state.is(ModBLocks.QUARRY_BARREL.get()))          return JobSystem.JOB_QUARRY;
         if (state.is(ModBLocks.SMELTER_BARREL.get()))         return JobSystem.JOB_SMELTER;
         if (state.is(ModBLocks.CATTLE_HERDER_BARREL.get()))   return JobSystem.JOB_CATTLE_HERDER;
         if (state.is(ModBLocks.CHICKEN_BREEDER_BARREL.get())) return JobSystem.JOB_CHICKEN_BREEDER;
@@ -1324,34 +1293,6 @@ public class TownHallBlockEntity extends BlockEntity implements
         return dx <= radius && dy <= currentHeight && dz <= radius;
     }
 
-    public void triggerJobAssignment() {
-        if (level != null && !level.isClientSide()) {
-            processJobAssignments((ServerLevel) level);
-        }
-    }
-
-    public String getDebugInfo() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("=== TOWN HALL DEBUG INFO ===\n");
-        sb.append("Town: ").append(townName).append("\n");
-        sb.append("Citizens: ").append(citizenCount).append("\n");
-        sb.append("Beds: ").append(bedCount).append("\n");
-        sb.append("Scan Radius: ").append(getCurrentScanRadius()).append("\n");
-        sb.append("Jobs - Total: ").append(getTotalJobCount())
-                .append(", Available: ").append(availableJobCount)
-                .append(", Assigned: ").append(assignedJobCount).append("\n");
-        sb.append("Jobless Citizens: ").append(getJoblessCount()).append("\n");
-        sb.append("Registered Citizens: ").append(registeredCitizens.size()).append("\n");
-
-        if (isClaimed) {
-            sb.append("Claimed by: ").append(getClaimedByHouse()).append("\n");
-        } else {
-            sb.append("Unclaimed\n");
-        }
-
-        return sb.toString();
-    }
-
     private void performBedScan(Level level) {
         int bedCount = 0;
         int currentRadius = getCurrentScanRadius();
@@ -1907,7 +1848,7 @@ public class TownHallBlockEntity extends BlockEntity implements
                 citizen.lastSeen   = lastSeen;
                 registeredCitizens.put(uuid, citizen);
             } catch (Exception e) {
-                System.err.println("Failed to load citizen data at index " + i + ": " + e.getMessage());
+                net.darkflameproduction.agotmod.AGoTMod.LOGGER.warn("Failed to load citizen data at index {}: {}", i, e.getMessage());
             }
         }
 
@@ -1925,7 +1866,7 @@ public class TownHallBlockEntity extends BlockEntity implements
                 if (jobTag.hasUUID("AssignedNPC")) job.assignedNPC = jobTag.getUUID("AssignedNPC");
                 availableJobs.put(jobPos, job);
             } catch (Exception e) {
-                System.err.println("Failed to load job data at index " + i + ": " + e.getMessage());
+                net.darkflameproduction.agotmod.AGoTMod.LOGGER.warn("Failed to load job data at index {}: {}", i, e.getMessage());
             }
         }
 
@@ -1934,7 +1875,7 @@ public class TownHallBlockEntity extends BlockEntity implements
         for (int i = 0; i < joblessCount; i++) {
             if (!tag.hasUUID("JoblessUUID_" + i)) continue;
             try { joblessQueue.offer(tag.getUUID("JoblessUUID_" + i)); }
-            catch (Exception e) { System.err.println("Failed to load jobless UUID at index " + i); }
+            catch (Exception e) { net.darkflameproduction.agotmod.AGoTMod.LOGGER.warn("Failed to load jobless UUID at index {}", i); }
         }
 
         townInventory.clear();

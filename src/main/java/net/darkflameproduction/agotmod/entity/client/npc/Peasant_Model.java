@@ -79,4 +79,3 @@ public class Peasant_Model extends GeoModel<Peasant_Entity> {
         }
     }
 }
-

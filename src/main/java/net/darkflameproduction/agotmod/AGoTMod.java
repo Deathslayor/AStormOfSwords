@@ -15,7 +15,7 @@ import net.darkflameproduction.agotmod.gui.CustomGuiScreen;
 import net.darkflameproduction.agotmod.init.ModMenuTypes;
 import net.darkflameproduction.agotmod.item.custom.BannerPatterns;
 import net.darkflameproduction.agotmod.network.ClientPacketHandler;
-import net.darkflameproduction.agotmod.network.OpenGrocerInventoryPacket;
+import net.darkflameproduction.agotmod.network.OpenTradingInventoryPacket;
 import net.darkflameproduction.agotmod.particle.ModParticles;
 import net.darkflameproduction.agotmod.worldgen.ModConfiguredFeatures;
 import net.neoforged.api.distmarker.Dist;

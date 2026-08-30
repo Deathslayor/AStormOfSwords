@@ -52,35 +52,6 @@ public class JobWarningSystem {
         return !warning.isExpired();
     }
 
-    // Get all job blocks that are currently warned within a certain radius
-    public static Set<BlockPos> getWarnedJobBlocksInRadius(BlockPos center, int radius, UUID excludeUUID) {
-        cleanupExpiredWarnings();
-        Set<BlockPos> warnedBlocks = new HashSet<>();
-
-        for (Map.Entry<BlockPos, JobBlockWarning> entry : activeWarnings.entrySet()) {
-            BlockPos warnedPos = entry.getKey();
-            JobBlockWarning warning = entry.getValue();
-
-            // Skip our own warnings
-            if (warning.npcUUID.equals(excludeUUID)) {
-                continue;
-            }
-
-            // Skip expired warnings
-            if (warning.isExpired()) {
-                continue;
-            }
-
-            // Check if within radius
-            double distanceSquared = center.distSqr(warnedPos);
-            if (distanceSquared <= radius * radius) {
-                warnedBlocks.add(warnedPos);
-            }
-        }
-
-        return warnedBlocks;
-    }
-
     // Remove warning when NPC loses job or is removed
     public static void removeJobBlockWarning(UUID npcUUID) {
         activeWarnings.entrySet().removeIf(entry -> entry.getValue().npcUUID.equals(npcUUID));

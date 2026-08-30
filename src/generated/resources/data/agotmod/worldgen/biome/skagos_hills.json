@@ -3,9 +3,9 @@
   "downfall": 0.8,
   "effects": {
     "ambient_sound": "agotmod:winter_wind",
-    "fog_color": 12502221,
-    "foliage_color": 6713692,
-    "grass_color": 8095343,
+    "fog_color": 11581144,
+    "foliage_color": 5597276,
+    "grass_color": 6847343,
     "mood_sound": {
       "block_search_extent": 8,
       "offset": 2.0,
@@ -18,7 +18,7 @@
       "replace_current_music": false,
       "sound": "agotmod:winter_wind"
     },
-    "sky_color": 9476552,
+    "sky_color": 10002380,
     "water_color": 4017873,
     "water_fog_color": 790843
   },

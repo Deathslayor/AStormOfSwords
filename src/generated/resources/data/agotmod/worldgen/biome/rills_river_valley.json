@@ -3,8 +3,8 @@
   "downfall": 0.9,
   "effects": {
     "fog_color": 10989019,
-    "foliage_color": 2176042,
-    "grass_color": 2835254,
+    "foliage_color": 2832433,
+    "grass_color": 3687742,
     "mood_sound": {
       "block_search_extent": 8,
       "offset": 2.0,
@@ -76,6 +76,7 @@
       "agotmod:mud",
       "agotmod:seagrass",
       "agotmod:kelp",
+      "agotmod:reed",
       "agotmod:ash_rare",
       "agotmod:chestnut_rare",
       "agotmod:ironwood_rare",

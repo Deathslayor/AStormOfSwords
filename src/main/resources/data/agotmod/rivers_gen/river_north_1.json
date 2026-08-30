@@ -3,11 +3,11 @@
     {
       "name": "lake_tributary_1",
       "type": {
-        "width": 30,
-        "depth": 10,
+        "width": 170,
+        "depth": 25,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 5.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },
@@ -29,11 +29,11 @@
     {
       "name": "lake_tributary_2",
       "type": {
-        "width": 30,
-        "depth": 10,
+        "width": 170,
+        "depth": 25,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 5.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },
@@ -52,11 +52,11 @@
     {
       "name": "lake_tributary_3",
       "type": {
-        "width": 30,
-        "depth": 10,
+        "width": 170,
+        "depth": 25,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 5.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },
@@ -70,11 +70,11 @@
     {
       "name": "lake_tributary_3_north",
       "type": {
-        "width": 20,
-        "depth": 8,
+        "width": 115,
+        "depth": 20,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 5.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },
@@ -90,11 +90,11 @@
     {
       "name": "lake_tributary_3_west",
       "type": {
-        "width": 20,
-        "depth": 8,
+        "width": 115,
+        "depth": 20,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 5.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },

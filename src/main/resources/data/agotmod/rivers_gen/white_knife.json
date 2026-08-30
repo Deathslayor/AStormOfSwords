@@ -3,11 +3,11 @@
     {
       "name": "white_knife_upper",
       "type": {
-        "width": 80,
-        "depth": 18,
+        "width": 450,
+        "depth": 40,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 6.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },
@@ -28,11 +28,11 @@
     {
       "name": "white_knife_lower",
       "type": {
-        "width": 80,
-        "depth": 18,
+        "width": 450,
+        "depth": 40,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 6.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },
@@ -44,16 +44,16 @@
         {"x": 186978, "z": 929237},
         {"x": 187081, "z": 921408}
       ],
-      "connects_to": ["white_knife_continuation"]
+      "connects_to": ["white_knife_continuation", "white_knife_main"]
     },
     {
       "name": "white_knife_tributary",
       "type": {
-        "width": 40,
-        "depth": 12,
+        "width": 225,
+        "depth": 28,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 5.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },
@@ -72,11 +72,11 @@
     {
       "name": "white_knife_main",
       "type": {
-        "width": 70,
-        "depth": 16,
+        "width": 395,
+        "depth": 37,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 6.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },
@@ -103,46 +103,13 @@
       "connects_to": ["white_knife_west_fork", "white_knife_south_fork"]
     },
     {
-      "name": "white_knife_west_tributary",
-      "type": {
-        "width": 30,
-        "depth": 10,
-        "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 5.0,
-        "meander_strength": 0.2,
-        "biome": "agotmod:northern_river"
-      },
-      "waypoints": [
-        {"x": 187081, "z": 921408},
-        {"x": 181512, "z": 916053},
-        {"x": 158457, "z": 911527},
-        {"x": 146182, "z": 901947},
-        {"x": 143177, "z": 892109},
-        {"x": 145259, "z": 881917},
-        {"x": 142885, "z": 876972},
-        {"x": 141556, "z": 867634},
-        {"x": 132831, "z": 857228},
-        {"x": 124848, "z": 849661},
-        {"x": 114674, "z": 845496},
-        {"x": 96860, "z": 837419},
-        {"x": 82967, "z": 813609},
-        {"x": 82040, "z": 806721},
-        {"x": 82075, "z": 786304},
-        {"x": 74032, "z": 773588},
-        {"x": 56112, "z": 766379},
-        {"x": 25005, "z": 756517}
-      ],
-      "connects_to": []
-    },
-    {
       "name": "white_knife_west_fork",
       "type": {
-        "width": 35,
-        "depth": 11,
+        "width": 195,
+        "depth": 26,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 5.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },
@@ -160,11 +127,11 @@
     {
       "name": "white_knife_south_fork",
       "type": {
-        "width": 50,
-        "depth": 14,
+        "width": 280,
+        "depth": 32,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 5.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },
@@ -181,11 +148,11 @@
     {
       "name": "white_knife_delta_west",
       "type": {
-        "width": 30,
-        "depth": 10,
+        "width": 170,
+        "depth": 25,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 5.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },
@@ -198,11 +165,11 @@
     {
       "name": "white_knife_delta_east",
       "type": {
-        "width": 30,
-        "depth": 10,
+        "width": 170,
+        "depth": 25,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 5.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },
@@ -224,11 +191,11 @@
     {
       "name": "white_knife_after_lake",
       "type": {
-        "width": 30,
-        "depth": 10,
+        "width": 170,
+        "depth": 25,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 5.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },
@@ -250,11 +217,11 @@
     {
       "name": "white_knife_continuation",
       "type": {
-        "width": 80,
-        "depth": 18,
+        "width": 450,
+        "depth": 40,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 6.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },
@@ -298,11 +265,11 @@
     {
       "name": "white_knife_east_fork",
       "type": {
-        "width": 60,
-        "depth": 15,
+        "width": 340,
+        "depth": 35,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 6.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },
@@ -328,11 +295,11 @@
     {
       "name": "white_knife_west_fork_lower",
       "type": {
-        "width": 50,
-        "depth": 13,
+        "width": 280,
+        "depth": 32,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 5.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },

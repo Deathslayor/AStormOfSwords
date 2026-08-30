@@ -203,24 +203,6 @@ public class SleepSystem {
         }
     }
 
-    public int getBedSearchCooldown() {
-        return bedSearchCooldown;
-    }
-
-    public boolean canUseBedSearch() {
-        return bedSearchCooldown <= 0;
-    }
-
-    public void setBedSearchCooldown(int cooldown) {
-        if (peasant.shouldSleep() && !peasant.isSleeping() && peasant.getBedPos() == null) {
-            this.bedSearchCooldown = Math.min(cooldown, 200); // Max 10 seconds
-        } else if (peasant.shouldSleep() && !peasant.isSleeping() && !peasant.needsFoodCollection()) {
-            this.bedSearchCooldown = Math.min(cooldown, 300);
-        } else {
-            this.bedSearchCooldown = cooldown;
-        }
-    }
-
     public void onHurt() {
         if (isSleeping()) {
             stopSleeping();

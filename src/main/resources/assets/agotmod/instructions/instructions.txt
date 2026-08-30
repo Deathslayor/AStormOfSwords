@@ -1,0 +1,542 @@
+====================================================================
+ CTGen (Crafted Terrain Generation) - Data Pack Author Instructions
+====================================================================
+
+This file explains how to configure CTGen entirely through JSON, as a
+data pack - no Java required. Everything below lives under your data
+pack's namespace folder:
+
+    <datapack>/data/<namespace>/<folder>/...
+
+All of CTGen's file-based systems reload with the vanilla "/reload"
+command (or on world load), except where noted otherwise.
+
+Throughout this file, "block id" means a normal block resource
+location such as "minecraft:stone", and "biome id" means a biome
+resource location such as "minecraft:plains" (can also be one of your
+own data pack's custom biomes).
+
+Colors (used for zone colors, waypoint colors, etc.) can be written
+either as a hex string:
+
+    "color": "#395f39"
+
+or as an explicit object:
+
+    "color": { "red": 57, "green": 95, "blue": 57 }
+
+
+--------------------------------------------------------------------
+ 1. THE THREE MAP IMAGES
+--------------------------------------------------------------------
+
+CTGen builds a world from up to three PNG images, all registered
+under the same "map id" (a resource location you choose, e.g.
+"mymod:known_world"). Each image type lives in its own folder, and
+the file path after the folder must match the map id's path:
+
+    data/<namespace>/worldgen/map_based/biomes/<path>.png       (required)
+    data/<namespace>/worldgen/map_based/heightmaps/<path>.png   (required)
+    data/<namespace>/worldgen/map_based/maps/<path>.png         (optional, detail/decor map)
+
+Example: map id "mymod:known_world" needs
+    data/mymod/worldgen/map_based/biomes/known_world.png
+    data/mymod/worldgen/map_based/heightmaps/known_world.png
+
+BIOME MAP (biomes/*.png):
+  Each pixel's exact RGB color is matched against your zones' "color"
+  field (see section 2). A pixel whose color doesn't match ANY zone
+  falls back to the "default_map_biome" zone. Colors must match
+  exactly - use the same hex value in the image and in the zone file.
+
+HEIGHT MAP (heightmaps/*.png):
+  Only the RED channel is used (0-255). The red value of a pixel is
+  the base terrain height in blocks at that location, before zone
+  terrain_modifier noise, cliffs, and river carving are applied.
+  Paint the height map in grayscale/red to avoid surprises: a pixel
+  with red=0 is very low, red=255 is very high.
+
+DETAIL MAP (maps/*.png, optional):
+  A separate, higher-detail decorative image used for the in-game map
+  UI overlay (not for actual terrain shape). Not required for basic
+  worldgen.
+
+
+--------------------------------------------------------------------
+ 2. ZONES (registry)
+--------------------------------------------------------------------
+
+Folder:
+    data/<namespace>/worldgen/map_based/zones/<name>.json
+
+A "zone" ties one biome-map color to a biome (or a weighted mix of
+biomes) plus terrain behavior for that region. This is a real data
+pack REGISTRY, so each zone gets its own file and is referenced
+elsewhere by id ("<namespace>:<name>").
+
+Fields:
+  biomes                (list, required)   list of { "biome": <biome id>, "weight": <double> }
+                                            at least one entry is required. With one entry, that
+                                            biome is always used. With multiple, a blob-noise
+                                            pattern picks between them per the given weights.
+  color                  (color, required) the biome-map pixel color this zone matches.
+  terrain_modifier        (double, optional, default 4)
+                                            amplitude of the perlin height noise added on top of
+                                            the height-map value in this zone. Higher = bumpier.
+  pixel_weight            (double, optional, default 1)   currently used for map-authoring tools.
+  blob_scale              (int, optional, default 2000)   size (in blocks) of the biome-mix blobs
+                                            when "biomes" has more than one entry. Smaller = more
+                                            frequent switching between biomes.
+  cliff_chance            (double 0-1, optional, default 0.0)
+                                            chance that a coarse grid cell touching this zone snaps
+                                            into a hard plateau/cliff instead of smoothly sloping.
+  cliff_min_height        (int, optional, default 0)      cliffs only snap above this height.
+  cliff_jaggedness        (double, optional, default 0.3) extra noise breaking up flat cliff faces.
+  is_mountain             (bool, optional, default false) enables CTGen's mountain surface pass
+                                            (stone/snow/ice banding, glacier blobs) above y=90 for
+                                            this zone. Leave false for normal terrain.
+
+Example (data/mymod/worldgen/map_based/zones/plains.json):
+{
+  "biomes": [ { "biome": "minecraft:plains", "weight": 1.0 } ],
+  "color": "#395f39",
+  "terrain_modifier": 4.0
+}
+
+Example with a biome mix and mountains enabled:
+{
+  "biomes": [
+    { "biome": "minecraft:snowy_slopes", "weight": 0.6 },
+    { "biome": "minecraft:frozen_peaks", "weight": 0.4 }
+  ],
+  "color": "#828282",
+  "terrain_modifier": 50.0,
+  "blob_scale": 1200,
+  "cliff_chance": 0.4,
+  "cliff_min_height": 90,
+  "is_mountain": true
+}
+
+
+--------------------------------------------------------------------
+ 3. THE CHUNK GENERATOR (worldgen settings + dimension)
+--------------------------------------------------------------------
+
+CTGen's chunk generator is used like any vanilla chunk generator: set
+it as the "generator" of a dimension json
+(data/<namespace>/dimension/<name>.json), with type
+"ctgen:map_based_chunk_generator".
+
+  "generator": {
+    "type": "ctgen:map_based_chunk_generator",
+    "settings": { ...MapSettings fields, see below... }
+  }
+
+MapSettings fields:
+  map_id                  (resource location, required) the map id from section 1.
+  zones                   (list, required)              every zone your biome map can reference.
+                                            each entry is either a zone id string (e.g.
+                                            "mymod:plains") pointing at a section 2 file, or a
+                                            full zone object inlined directly here.
+  default_map_biome       (zone id or inline zone, required)
+                                            fallback zone for unmatched pixel colors. Same
+                                            id-or-inline rule as "zones" above.
+  transition              (int, optional, default 16)   size, in map pixels, of the interpolation
+                                            grid used to smooth between height/zone samples.
+                                            Smaller = more detail but blockier transitions between
+                                            pixels; larger = smoother but blurrier.
+  scale                   (int, optional, default 1)    how many blocks (x4, since sampling is per
+                                            quart-position) each map pixel represents. Increase this
+                                            to make a small image cover a large world.
+  border_noise            (double, optional, default 0.0) 0-1 strength of domain-warp noise applied
+                                            to biome borders so they don't look pixel-perfect.
+  spawn_pixel_x           (int, optional)                which map pixel column is world X=0.
+                                            Defaults to the image's horizontal center.
+  spawn_pixel_y           (int, optional)                which map pixel row is world Z=0.
+                                            Defaults to the image's vertical center.
+  noise_gen_settings      (noise settings id, required)  a normal vanilla/data pack noise settings
+                                            registry entry (data/<namespace>/worldgen/noise_settings/
+                                            <name>.json) - controls sea level, caves, default block,
+                                            build height, etc. CTGen overrides surface HEIGHT itself,
+                                            but still uses this for everything else.
+  disabled_structure_sets (list of ids, optional, default [])
+                                            structure_set ids to fully disable in this world.
+  disabled_features       (list of ids, optional, default [])
+                                            placed_feature ids to fully disable in this world.
+
+Example:
+  "generator": {
+    "type": "ctgen:map_based_chunk_generator",
+    "settings": {
+      "map_id": "mymod:known_world",
+      "zones": [ "mymod:plains", "mymod:mountains", "mymod:ocean" ],
+      "default_map_biome": {
+        "biomes": [ { "biome": "minecraft:plains", "weight": 1.0 } ],
+        "color": "#000000"
+      },
+      "scale": 4,
+      "transition": 16,
+      "border_noise": 0.3,
+      "noise_gen_settings": "minecraft:overworld",
+      "disabled_structure_sets": [ "minecraft:villages" ]
+    }
+  }
+
+
+--------------------------------------------------------------------
+ 4. RIVERS
+--------------------------------------------------------------------
+
+Folder:
+    data/<namespace>/rivers_gen/<any name>.json
+
+Each file is an object with a "rivers" array. Rivers are carved into
+the terrain automatically wherever their path runs (no need to also
+edit the height map).
+
+River fields:
+  name                    (string, optional, default "")  a name you can reference from another
+                                            river's "connects_to". Give a river a name if you want
+                                            other rivers to flow into it.
+  type                    (RiverType, required)  see below.
+  waypoints               (list of Waypoint, required, 2+) the river's path. Waypoint = { "x": int,
+                                            "z": int } (world block coordinates). A smooth curved
+                                            spline is generated through these points automatically.
+  connects_to             (list of strings, optional, default [])
+                                            names of OTHER rivers this one flows into at its end.
+                                            Invalid/unknown names are ignored (with a warning in the
+                                            log) rather than breaking the river.
+
+RiverType fields:
+  width                   (int, required)  river width in blocks.
+  depth                   (int, required)  how far below sea level the riverbed is carved.
+  visible_on_map          (bool, optional, default false) show this river as a line on the in-game
+                                            map UI.
+  bed_blocks              (list of block ids, optional, default [gravel, sand, clay])
+                                            blocks used for the riverbed, blended with noise.
+  transition_multiplier   (double, optional, default 2.5) width of the smooth bank-to-terrain
+                                            transition band beyond each bank, as a multiple of the
+                                            river's own width. 2.0 = the fade zone is twice as wide
+                                            as the river. 0 = a hard edge with no transition.
+  meander_strength        (double, optional, default 0.0) 0-1+, adds natural wandering/curving
+                                            noise along the river's length instead of a straight
+                                            spline between waypoints. 0 = follows waypoints exactly.
+  biome                   (biome id, optional)  if set, this biome is forced along the river's
+                                            course (e.g. "minecraft:river").
+
+Example (data/mymod/rivers_gen/main_river.json):
+{
+  "rivers": [
+    {
+      "name": "highland_creek",
+      "type": {
+        "width": 6,
+        "depth": 4,
+        "meander_strength": 0.3,
+        "visible_on_map": true
+      },
+      "waypoints": [
+        { "x": 0, "z": 0 },
+        { "x": 200, "z": 150 },
+        { "x": 350, "z": 100 }
+      ],
+      "connects_to": [ "grand_river" ]
+    },
+    {
+      "name": "grand_river",
+      "type": {
+        "width": 14,
+        "depth": 6,
+        "bed_blocks": [ "minecraft:gravel", "minecraft:sand" ],
+        "biome": "minecraft:river",
+        "visible_on_map": true
+      },
+      "waypoints": [
+        { "x": 350, "z": 100 },
+        { "x": 600, "z": 40 },
+        { "x": 900, "z": 0 }
+      ]
+    }
+  ]
+}
+
+
+--------------------------------------------------------------------
+ 5. ROADS
+--------------------------------------------------------------------
+
+Folder:
+    data/<namespace>/roads_gen/<any name>.json
+
+Each file is a single object (NOT wrapped in an array) with:
+  road_types              (map of name -> RoadType, required) reusable road styles.
+  roads                   (list of Road, required)             the actual road paths.
+
+RoadType fields (each entry in "road_types"):
+  blocks                  (list of block ids, required) surface blocks, blended with noise.
+  slabs                   (list of block ids, required) matching slabs, used on slopes/edges.
+  width                   (int, optional, default 3)    road width in blocks.
+
+Road fields:
+  type                    (string, required)  the road_types key this road uses.
+  waypoints               (list of Waypoint, required, 2+) Waypoint = { "x": int, "z": int,
+                                            "curve": float (optional, default 0.0) }. "curve" bends
+                                            the path near that waypoint instead of a straight corner
+                                            (roads use a quadratic bezier between waypoints, not a
+                                            full spline like rivers).
+  transition              (int, optional, default 4)   blend width, in blocks, into surrounding
+                                            terrain on either side of the road.
+  y_level                 (int, optional, default 64)  reference height the road tries to hold to.
+  min_zoom / max_zoom     (float, optional, default 0.0 / -1) map UI zoom range the road is
+                                            visible at (-1 = no upper limit).
+
+Example (data/mymod/roads_gen/king_road.json):
+{
+  "road_types": {
+    "cobblestone_road": {
+      "blocks": [ "minecraft:cobblestone", "minecraft:stone" ],
+      "slabs": [ "minecraft:cobblestone_slab" ],
+      "width": 5
+    }
+  },
+  "roads": [
+    {
+      "type": "cobblestone_road",
+      "waypoints": [
+        { "x": 0, "z": 0 },
+        { "x": 100, "z": 40, "curve": 0.3 },
+        { "x": 250, "z": 30 }
+      ],
+      "transition": 4
+    }
+  ]
+}
+
+
+--------------------------------------------------------------------
+ 6. WALLS
+--------------------------------------------------------------------
+
+Folder:
+    data/<namespace>/walls_gen/<any name>.json
+
+Each file is an object with a "walls" array (each entry is a whole
+wall, path + cross-section combined - unlike roads, style isn't
+shared by name).
+
+WallType fields:
+  base_width              (int, optional, default 48)  influence width of the wall for terrain
+                                            blending/smoothing purposes.
+  sections                (list of WallSection, required) the wall's vertical cross-section,
+                                            stacked bottom to top (see below).
+  waypoints               (list of Waypoint, required, 2+) the wall's path, same format as rivers.
+  battlement              (WallBattlement, optional)   an optional walkway + parapet placed on
+                                            top of the wall (see below).
+
+WallSection fields (one "layer" of the wall):
+  height                  (int, required)               how tall this section is.
+  blocks                  (list of block ids, optional, default [ice]) blocks used for this
+                                            section, blended with noise.
+  jagged_ice              (bool, optional, default false) rough/jagged ice texture for this
+                                            section instead of flat blocks.
+  snow                    (bool, optional, default false) cap this section with snow.
+
+WallBattlement fields:
+  floor_blocks            (list of block ids, optional, default [stone_bricks])
+  battlement_blocks       (list of block ids, optional, default [stone_bricks])
+  battlement_slabs        (list of block ids, optional, default [stone_brick_slab])
+  battlement_stairs       (list of block ids, optional, default [stone_brick_stairs])
+
+Example (data/mymod/walls_gen/ice_wall.json):
+{
+  "walls": [
+    {
+      "base_width": 40,
+      "sections": [
+        { "height": 30, "blocks": [ "minecraft:packed_ice" ] },
+        { "height": 10, "blocks": [ "minecraft:blue_ice" ], "jagged_ice": true, "snow": true }
+      ],
+      "waypoints": [
+        { "x": -500, "z": 0 },
+        { "x": 500, "z": 0 }
+      ],
+      "battlement": {
+        "floor_blocks": [ "minecraft:stone_bricks" ],
+        "battlement_blocks": [ "minecraft:stone_bricks" ]
+      }
+    }
+  ]
+}
+
+
+--------------------------------------------------------------------
+ 7. UNDERGROUND BIOMES
+--------------------------------------------------------------------
+
+Folder:
+    data/<namespace>/underground_biomes/<any name>.json
+
+Lets you assign special biomes below y=0 based on what's on the
+surface directly above (matched by biome-map pixel color) and depth.
+
+Top-level:
+  underground_biomes      (list of UndergroundZone, required)
+
+UndergroundZone fields:
+  surface_colors          (list of colors, required)  which biome-map pixel colors above trigger
+                                            this underground zone.
+  depth_min / depth_max   (int, required)   the Y range (inclusive) this zone applies in.
+  biomes                  (list, required)  same weighted format as a Zone's "biomes":
+                                            [ { "biome": <id>, "weight": <double> }, ... ]
+  blob_scale              (int, optional, default 1000) size of the biome-mix blobs, same idea
+                                            as a surface zone's blob_scale.
+
+Example (data/mymod/underground_biomes/deep_caves.json):
+{
+  "underground_biomes": [
+    {
+      "surface_colors": [ "#828282" ],
+      "depth_min": -64,
+      "depth_max": -20,
+      "biomes": [
+        { "biome": "minecraft:deep_dark", "weight": 0.3 },
+        { "biome": "minecraft:lush_caves", "weight": 0.7 }
+      ],
+      "blob_scale": 800
+    }
+  ]
+}
+
+
+--------------------------------------------------------------------
+ 8. STRUCTURE LANDSCAPE SMOOTHING
+--------------------------------------------------------------------
+
+Folder:
+    data/<namespace>/ctgen_structure_smoothing/<structure id path>.json
+
+The FILE'S RESOURCE LOCATION must exactly match the structure you
+want smoothed, using its real registry id. For example, to smooth
+vanilla plains villages, the file must be:
+    data/minecraft/ctgen_structure_smoothing/village_plains.json
+(namespace "minecraft", because "minecraft:village_plains" is the
+structure's id).
+
+Without a config, a structure just uses vanilla's normal placement -
+CTGen only reshapes terrain around structures that have a config
+here. This automatically adapts the correction to how far off the
+natural terrain is at each individual spawn (steeper mismatch = wider
+blend), so villages on flat ground and villages near a mountain edge
+both look right without separate tuning.
+
+Fields:
+  transition_width        (int, optional, default 6)   MINIMUM blend radius (in blocks) around the
+                                            structure's footprint, used as-is when the structure
+                                            already matches its surroundings closely.
+  y_offset                (int, optional, default 0)   vertical correction between the structure's
+                                            first piece's internal origin and its intended "ground"
+                                            plane (a property of that structure's own layout, not of
+                                            the terrain - tune this once per structure by trial and
+                                            error until the structure sits right on flat ground).
+  max_transition_width    (int, optional, default 48)  hard cap on how wide the blend radius is
+                                            allowed to grow for a badly-mismatched spawn.
+  slope                   (double, optional, default 2.0) horizontal blend blocks added per 1
+                                            block of height mismatch (2.0 = a gentle grade). Only
+                                            matters once the mismatch needs more room than
+                                            transition_width already provides.
+  max_foundation_depth    (int, optional, default 32)  how far below the structure the solid fill
+                                            is allowed to reach looking for real ground, so a
+                                            structure spawning over a cliff/ravine gets a deep but
+                                            bounded foundation instead of an endless pillar.
+
+Example (data/minecraft/ctgen_structure_smoothing/village_plains.json):
+{
+  "transition_width": 8,
+  "y_offset": 1,
+  "max_transition_width": 40,
+  "slope": 2.5,
+  "max_foundation_depth": 24
+}
+
+
+--------------------------------------------------------------------
+ 9. MAP UI EXTRAS (client-side)
+--------------------------------------------------------------------
+
+MAP WAYPOINTS - folder:
+    data/<namespace>/waypoints/<path>.json
+  The file's own resource location (namespace + path, extension
+  dropped) must match the "map_id" from section 1/3 it applies to -
+  NOT the dimension id (they only look the same if you name your map
+  id after the dimension). So for map_id "mymod:known_world", the
+  file must be at data/mymod/waypoints/known_world.json.
+
+  Top-level: { "waypoints": [ ... ] }
+  MapWaypoint fields:
+    name                  (string, required)
+    x / z                 (int, required)        world block position.
+    inner_color           (color, required)
+    outer_color           (color, required)
+    min_zoom / max_zoom   (float, optional, default 0.5 / -1)  icon visibility zoom range.
+    text_min_zoom /
+    text_max_zoom         (float, optional, default 0.5 / -1)  label visibility zoom range.
+
+  Example:
+  {
+    "waypoints": [
+      {
+        "name": "Capital City",
+        "x": 0, "z": 0,
+        "inner_color": "#ffd700",
+        "outer_color": "#000000",
+        "min_zoom": 0.25
+      }
+    ]
+  }
+
+  Players/commands can also add "runtime" waypoints in-game; those are
+  saved per-world separately from this data pack file and are additive
+  with it, not a replacement.
+
+MAP OVERLAY TEXT - folder:
+    data/<namespace>/map_texts/<path>.json
+  Same id rule as waypoints above: the file's resource location must
+  match the "map_id" it decorates (e.g. map_texts/known_world.json
+  for map_id "mymod:known_world").
+
+  Unlike the other files in this document, the file's TOP LEVEL is a
+  plain JSON ARRAY (not an object), where each entry is a MapText:
+    { "x": int, "y": int,             (map pixel position, not block position)
+      "size": float (optional, default 50),
+      "min_zoom": float, "max_zoom": float (optional, default -1/-1),
+      "fade_range": float (optional, default 0.5),
+      "rotation": float (optional, default 0),
+      "text": <Minecraft text component> }
+  Used for painting map labels (region names, etc.) directly onto the
+  map UI. This loader only runs on the client.
+
+
+--------------------------------------------------------------------
+ 10. TROUBLESHOOTING
+--------------------------------------------------------------------
+
+- Run "/reload" after editing any of the files above and check the
+  log for lines like "Loaded river file", "Applied wall network",
+  "Registered biome map image" etc. - if a system's log line doesn't
+  appear, its folder name or file structure is wrong.
+- A zone that never shows up in-game almost always means its "color"
+  doesn't exactly match the corresponding pixels in the biome map PNG
+  (double check for anti-aliasing/compression artifacts in the image -
+  export as a flat, non-interlaced PNG with exact colors, no gradients).
+- "connects_to" on a river that doesn't seem to work: check the log
+  for a warning that the target name wasn't found - names are
+  case-sensitive and must match another river's "name" field exactly.
+- Structure smoothing doing nothing: the file path must match the
+  structure's real registry id/namespace exactly (see section 8) -
+  a typo there fails silently (the structure just isn't in CONFIGS).
+- The chunk generator ("noise_gen_settings", "type": ...) is chosen
+  once, when the dimension/world is created - changing it on an
+  existing world does not retroactively change already-generated
+  chunks. Everything else in this file (zones, rivers, roads, walls,
+  underground biomes, structure smoothing, map UI extras) applies to
+  newly-generated chunks immediately on "/reload".

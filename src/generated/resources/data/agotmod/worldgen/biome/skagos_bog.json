@@ -3,9 +3,9 @@
   "downfall": 0.85,
   "effects": {
     "ambient_sound": "agotmod:winter_wind",
-    "fog_color": 13225687,
-    "foliage_color": 7239783,
-    "grass_color": 9082242,
+    "fog_color": 12173278,
+    "foliage_color": 5927010,
+    "grass_color": 7571835,
     "mood_sound": {
       "block_search_extent": 8,
       "offset": 2.0,
@@ -18,7 +18,7 @@
       "replace_current_music": false,
       "sound": "agotmod:winter_wind"
     },
-    "sky_color": 9410500,
+    "sky_color": 9805004,
     "water_color": 4017873,
     "water_fog_color": 790843
   },
@@ -75,6 +75,7 @@
       "agotmod:clay_patch",
       "agotmod:quagmire",
       "agotmod:mud",
+      "agotmod:reed",
       "agotmod:sentinel_rare",
       "agotmod:fir_rare",
       "agotmod:pine_rare",

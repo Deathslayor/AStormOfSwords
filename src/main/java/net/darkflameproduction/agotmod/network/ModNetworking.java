@@ -16,10 +16,10 @@ public class ModNetworking {
         // ── Server -> Client ──────────────────────────────────────────────────
 
         registrar.playToClient(
-                OpenGrocerInventoryPacket.TYPE,
-                OpenGrocerInventoryPacket.STREAM_CODEC,
+                OpenTradingInventoryPacket.TYPE,
+                OpenTradingInventoryPacket.STREAM_CODEC,
                 (packet, context) -> context.enqueueWork(() ->
-                        ClientPacketHandler.handleOpenGrocerInventory(packet, context))
+                        ClientPacketHandler.handleOpenTradingInventory(packet, context))
         );
         registrar.playToClient(
                 OpenTownHallMenuPacket.TYPE,

@@ -66,7 +66,7 @@ public class TownHallScreen extends Screen {
     // Inventory data
     private Map<String, Long> townInventory = new LinkedHashMap<>();
 
-    // Tab state Ã¢â‚¬â€ 0 = Town Overview, 1 = Inventory
+    // Tab state — 0 = Town Overview, 1 = Inventory
     private int activeTab = 0;
 
     // Scroll state for inventory tab
@@ -209,7 +209,7 @@ public class TownHallScreen extends Screen {
         updateTabButtonStates();
     }
     private void updateTabButtonStates() {
-        // Visually distinguish active tab Ã¢â‚¬â€ active tab is not active (looks pressed)
+        // Visually distinguish active tab — active tab is not active (looks pressed)
         if (tabOverviewButton  != null) tabOverviewButton.active  = (activeTab != 0);
         if (tabInventoryButton != null) tabInventoryButton.active = (activeTab != 1);
     }
@@ -363,7 +363,7 @@ public class TownHallScreen extends Screen {
             g.drawString(font, townName, titleX, titleY, COLOR_HEADER, false);
             g.pose().popPose();
 
-            String category = "Ã¢â‚¬â€ " + getTownSizeCategory() + " Ã¢â‚¬â€";
+            String category = "— " + getTownSizeCategory() + " —";
             int catWidth = font.width(category);
             g.drawString(font, category, px + (pw - catWidth) / 2, py + 38, COLOR_GOLD, false);
         }
@@ -488,7 +488,7 @@ public class TownHallScreen extends Screen {
         // Light header underline
         g.fill(ix, listY - 2, ix + iw, listY - 1, 0x40000000);
 
-        // Clipping region Ã¢â‚¬â€ only draw rows within bounds
+        // Clipping region — only draw rows within bounds
         int clipTop    = listY;
         int clipBottom = iy + ih;
         int visibleRows = getVisibleRows();
@@ -509,7 +509,7 @@ public class TownHallScreen extends Screen {
                 g.fill(ix, rowY, ix + iw, rowY + ROW_HEIGHT, 0x18000000);
             }
 
-            // Item name Ã¢â‚¬â€ strip namespace, replace underscores, capitalise
+            // Item name — strip namespace, replace underscores, capitalise
             String displayName = formatItemName(entry.getKey());
             g.drawString(font, displayName, ix + 4, rowY + 2, TEXT_COLOR, false);
 

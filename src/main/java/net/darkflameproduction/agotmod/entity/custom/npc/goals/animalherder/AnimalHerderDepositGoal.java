@@ -63,9 +63,6 @@ public class AnimalHerderDepositGoal extends Goal {
         this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
     }
 
-    public long getLastDropOffDay() { return lastDropOffDay; }
-    public void setLastDropOffDay(long day) { this.lastDropOffDay = day; }
-
     private boolean isAnimalHerder() {
         String job = peasant.getJobType();
         return job.equals(JobSystem.JOB_CATTLE_HERDER)

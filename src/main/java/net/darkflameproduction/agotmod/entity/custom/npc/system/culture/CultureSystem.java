@@ -58,10 +58,6 @@ public class CultureSystem {
         return culture;
     }
 
-    public CultureGroup getGroup() {
-        return culture.group;
-    }
-
     /**
      * Assigns a culture and rolls all skin/color indices from server-side counts.
      * Safe to call on the server — no client classes involved.

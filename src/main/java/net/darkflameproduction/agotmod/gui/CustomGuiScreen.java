@@ -1168,8 +1168,13 @@ public class CustomGuiScreen extends Screen {
             }
 
             if (skinTex != null) {
-                g.blit(skinTex, rowX, rowY, 8,  8, faceSize, faceSize, 8, 8, 64, 64);
-                g.blit(skinTex, rowX, rowY, 40, 8, faceSize, faceSize, 8, 8, 64, 64);
+                // Face layer (8,8)-(16,16), then the semi-transparent hat overlay
+                // layer (40,8)-(48,16) blended on top - matches vanilla's own
+                // PlayerFaceRenderer UV box for the head icon.
+                g.blit(skinTex, rowX, rowY, faceSize, faceSize, 8f, 8f, 8, 8, 64, 64);
+                com.mojang.blaze3d.systems.RenderSystem.enableBlend();
+                g.blit(skinTex, rowX, rowY, faceSize, faceSize, 40f, 8f, 8, 8, 64, 64);
+                com.mojang.blaze3d.systems.RenderSystem.disableBlend();
             } else {
                 g.fill(rowX, rowY, rowX + faceSize, rowY + faceSize, 0xFF888888);
                 g.fill(rowX + 1, rowY + 1, rowX + faceSize - 1, rowY + faceSize - 1, 0xFFAAAAAA);
@@ -1329,7 +1334,12 @@ public class CustomGuiScreen extends Screen {
         float green = ((dyeColor >>  8) & 0xFF) / 255.0F;
         float blue  =  (dyeColor        & 0xFF) / 255.0F;
         com.mojang.blaze3d.systems.RenderSystem.setShaderColor(red, green, blue, 1f);
-        g.blit(texture, x, y, 1, 0, w, h, 64, 64);
+        // Sample only the real flag-front design box (1,1)-(21,41) on the 64x64
+        // banner texture and scale THAT up to (w,h), instead of using (w,h) as
+        // the sample crop too - that went far outside the 64x64 texture bounds
+        // (w=60,h=120 here) and left only the tinted base colour visible with
+        // no actual pattern artwork showing.
+        g.blit(texture, x, y, w, h, 1.0F, 1.0F, 20, 40, 64, 64);
         com.mojang.blaze3d.systems.RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
     }
 

@@ -4,8 +4,7 @@ import net.darkflameproduction.agotmod.client.overlay.TownNotificationOverlay;
 import net.darkflameproduction.agotmod.client.renderer.TownHallDebugRenderer;
 import net.darkflameproduction.agotmod.client.town.ClientTownAreaManager;
 import net.darkflameproduction.agotmod.gui.CustomGuiScreen;
-import net.darkflameproduction.agotmod.gui.GrocerInventoryScreen;
-import net.darkflameproduction.agotmod.entity.custom.npc.system.grocer.GrocerSystem;
+import net.darkflameproduction.agotmod.gui.TradingInventoryScreen;
 import net.darkflameproduction.agotmod.gui.HouseData;
 import net.darkflameproduction.agotmod.gui.TownHallScreen;
 import net.darkflameproduction.agotmod.client.tracker.TownTracker;
@@ -23,7 +22,7 @@ public class ClientPacketHandler {
             Minecraft minecraft = Minecraft.getInstance();
             if (minecraft.player != null) {
                 minecraft.player.getPersistentData().putLong("agotmod.coin_balance", packet.balance());
-                GrocerInventoryScreen.updatePlayerBalance(packet.balance());
+                TradingInventoryScreen.updatePlayerBalance(packet.balance());
             }
         });
     }
@@ -89,32 +88,32 @@ public class ClientPacketHandler {
         });
     }
 
-    public static void handleOpenGrocerInventory(OpenGrocerInventoryPacket packet, IPayloadContext context) {
+    public static void handleOpenTradingInventory(OpenTradingInventoryPacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
             Minecraft mc = Minecraft.getInstance();
             if (mc.player != null) {
-                String grocerName    = packet.grocerName();
-                java.util.List<GrocerSystem.GrocerInventoryEntry> grocerEntries = packet.grocerEntries();
-                java.util.List<OpenGrocerInventoryPacket.PlayerInventoryEntry> playerEntries = packet.playerEntries();
-                long grocerBalance   = packet.grocerBalance();
+                String tradingName   = packet.tradingName();
+                java.util.List<OpenTradingInventoryPacket.TradingInventoryEntry> tradingEntries = packet.tradingEntries();
+                java.util.List<OpenTradingInventoryPacket.PlayerInventoryEntry> playerEntries = packet.playerEntries();
+                long tradingBalance  = packet.tradingBalance();
                 long playerBalance   = packet.playerBalance();
                 float buyMultiplier  = packet.buyMultiplier();
                 float sellMultiplier = packet.sellMultiplier();
 
                 mc.player.getPersistentData().putLong("agotmod.coin_balance", playerBalance);
 
-                GrocerInventoryScreen currentScreen = GrocerInventoryScreen.getCurrentInstance();
+                TradingInventoryScreen currentScreen = TradingInventoryScreen.getCurrentInstance();
 
                 if (currentScreen != null && mc.screen == currentScreen) {
-                    GrocerInventoryScreen.updateInventoryData(grocerName, grocerEntries, playerEntries,
-                            grocerBalance, buyMultiplier, sellMultiplier);
-                    GrocerInventoryScreen.updatePlayerBalance(playerBalance);
+                    TradingInventoryScreen.updateInventoryData(tradingName, tradingEntries, playerEntries,
+                            tradingBalance, buyMultiplier, sellMultiplier);
+                    TradingInventoryScreen.updatePlayerBalance(playerBalance);
                 } else {
-                    GrocerInventoryScreen newScreen = new GrocerInventoryScreen(grocerName);
+                    TradingInventoryScreen newScreen = new TradingInventoryScreen(tradingName);
                     mc.setScreen(newScreen);
-                    GrocerInventoryScreen.updateInventoryData(grocerName, grocerEntries, playerEntries,
-                            grocerBalance, buyMultiplier, sellMultiplier);
-                    GrocerInventoryScreen.updatePlayerBalance(playerBalance);
+                    TradingInventoryScreen.updateInventoryData(tradingName, tradingEntries, playerEntries,
+                            tradingBalance, buyMultiplier, sellMultiplier);
+                    TradingInventoryScreen.updatePlayerBalance(playerBalance);
                 }
             }
         });

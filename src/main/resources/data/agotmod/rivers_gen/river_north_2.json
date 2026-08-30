@@ -3,11 +3,11 @@
     {
       "name": "eastern_river_upper",
       "type": {
-        "width": 70,
-        "depth": 16,
+        "width": 395,
+        "depth": 37,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 6.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },
@@ -29,11 +29,11 @@
     {
       "name": "eastern_river_west_fork",
       "type": {
-        "width": 50,
-        "depth": 13,
+        "width": 280,
+        "depth": 32,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 5.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },
@@ -58,11 +58,11 @@
     {
       "name": "eastern_river_south_fork",
       "type": {
-        "width": 50,
-        "depth": 13,
+        "width": 280,
+        "depth": 32,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 5.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },
@@ -82,11 +82,11 @@
     {
       "name": "eastern_river_south_west",
       "type": {
-        "width": 35,
-        "depth": 11,
+        "width": 195,
+        "depth": 26,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 5.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },
@@ -104,11 +104,11 @@
     {
       "name": "eastern_river_south_east",
       "type": {
-        "width": 35,
-        "depth": 11,
+        "width": 195,
+        "depth": 26,
         "visible_on_map": true,
-        "bed_blocks": ["minecraft:gravel", "minecraft:sand", "minecraft:clay", "minecraft:coarse_dirt"],
-        "transition_multiplier": 5.0,
+        "bed_blocks": ["minecraft:gravel", "minecraft:mud", "minecraft:clay", "minecraft:coarse_dirt"],
+        "transition_multiplier": 2.0,
         "meander_strength": 0.2,
         "biome": "agotmod:northern_river"
       },

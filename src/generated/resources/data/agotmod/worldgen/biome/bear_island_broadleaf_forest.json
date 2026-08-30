@@ -4,8 +4,8 @@
   "effects": {
     "ambient_sound": "agotmod:forest_wind",
     "fog_color": 10989019,
-    "foliage_color": 2312227,
-    "grass_color": 2972717,
+    "foliage_color": 3293496,
+    "grass_color": 4280647,
     "mood_sound": {
       "block_search_extent": 8,
       "offset": 2.0,

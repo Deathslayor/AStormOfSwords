@@ -23,21 +23,15 @@ public class TannerSystem {
     public long getLastCollectionDay()                { return lastCollectionDay; }
     public void setLastCollectionDay(long day)        { this.lastCollectionDay = day; }
 
-    public int getRabbitHidesCollected()              { return rabbitHidesCollected; }
     public void setRabbitHidesCollected(int amount)   { this.rabbitHidesCollected = amount; }
 
-    public int getLeatherCollected()                  { return leatherCollected; }
     public void setLeatherCollected(int amount)       { this.leatherCollected = amount; }
 
-    public int getStringCollected()                   { return stringCollected; }
     public void setStringCollected(int amount)        { this.stringCollected = amount; }
 
     public int getHidesProcessed()                    { return hidesProcessed; }
     public void setHidesProcessed(int amount)         { this.hidesProcessed = amount; }
 
-    public int getHideTicks()                         { return hideTicks; }
-    public void setHideTicks(int ticks)               { this.hideTicks = ticks; }
-    public void incrementHideTicks()                  { this.hideTicks++; }
     public void resetHideTicks()                      { this.hideTicks = 0; }
 
     public void saveData(CompoundTag tag) {

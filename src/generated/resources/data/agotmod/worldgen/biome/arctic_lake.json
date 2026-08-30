@@ -2,9 +2,9 @@
   "carvers": {},
   "downfall": 0.9,
   "effects": {
-    "fog_color": 13225687,
-    "foliage_color": 7239783,
-    "grass_color": 9082242,
+    "fog_color": 12238813,
+    "foliage_color": 5927010,
+    "grass_color": 7571835,
     "mood_sound": {
       "block_search_extent": 8,
       "offset": 2.0,
@@ -17,7 +17,7 @@
       "replace_current_music": false,
       "sound": "agotmod:winter_wind"
     },
-    "sky_color": 11911904,
+    "sky_color": 11909851,
     "water_color": 8234469,
     "water_fog_color": 6328528
   },
@@ -76,6 +76,7 @@
       "agotmod:mud",
       "agotmod:seagrass",
       "agotmod:kelp",
+      "agotmod:reed",
       "agotmod:frostfire",
       "agotmod:liverwort",
       "agotmod:thistle",

@@ -16,7 +16,7 @@
             "color": "#040040",
             "terrain_modifier": 33.0
           },
-          "noise_gen_settings": "ctgen:overworld",
+          "noise_gen_settings": "minecraft:overworld",
           "scale": 147,
           "transition": 10,
           "border_noise": 1.0,

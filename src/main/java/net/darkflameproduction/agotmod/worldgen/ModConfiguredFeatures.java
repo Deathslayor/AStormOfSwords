@@ -2057,9 +2057,9 @@ public class ModConfiguredFeatures {
 
         register(context, REED_KEY, Feature.FLOWER,
                 new RandomPatchConfiguration(
-                        64,  // tries
-                        16,   // xz spread
-                        2,   // y spread
+                        128,  // tries — high relative to the tight spread below for a dense reed bed
+                        8,    // xz spread — kept tight so stalks land right next to each other
+                        2,    // y spread
                         // No onlyWhenEmpty filter here: ReedFeature validates and waterlogs its own
                         // 3 positions, and needs to be able to place into shallow water too.
                         PlacementUtils.inlinePlaced(REED_PLANT.value(), NoneFeatureConfiguration.INSTANCE)
@@ -2076,7 +2076,7 @@ public class ModConfiguredFeatures {
                                 Blocks.MUD,
                                 Blocks.SAND
                         ),  // Blocks that can be replaced (same as vanilla clay)
-                        UniformInt.of(3, 6),  // Random radius between 2-3 blocks (same as vanilla)
+                        UniformInt.of(4, 8),  // Larger radius so patches spread further onto dry land from the bank
                         2  // Height (same as vanilla)
                 )
         );
@@ -2108,7 +2108,7 @@ public class ModConfiguredFeatures {
                                 Blocks.SAND,
                                 Blocks.STONE
                         ),
-                        UniformInt.of(3, 6),
+                        UniformInt.of(4, 8),  // Larger radius so patches spread further onto dry land from the bank
                         4
                 )
         );
@@ -2124,7 +2124,7 @@ public class ModConfiguredFeatures {
                                 Blocks.SAND,
                                 Blocks.STONE
                         ),
-                        UniformInt.of(3, 6),
+                        UniformInt.of(4, 8),  // Larger radius so patches spread further onto dry land from the bank
                         4
                 )
         );

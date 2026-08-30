@@ -2,14 +2,13 @@ package net.darkflameproduction.agotmod.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.darkflameproduction.agotmod.network.FinishTransactionPacket;
-import net.darkflameproduction.agotmod.network.OpenGrocerInventoryPacket;
+import net.darkflameproduction.agotmod.network.OpenTradingInventoryPacket;
 import net.darkflameproduction.agotmod.util.ItemPricing;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.darkflameproduction.agotmod.AGoTMod;
-import net.darkflameproduction.agotmod.entity.custom.npc.system.grocer.GrocerSystem;
 import net.darkflameproduction.agotmod.sound.ModSounds;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -22,7 +21,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @OnlyIn(Dist.CLIENT)
-public class GrocerInventoryScreen extends Screen {
+public class TradingInventoryScreen extends Screen {
 
     // ── Trader GUI texture ────────────────────────────────────────────────────
 
@@ -93,14 +92,14 @@ public class GrocerInventoryScreen extends Screen {
     private long playerBalance = 0;
     private float buyMultiplier  = 1.0f;
     private float sellMultiplier = 0.5f;
-    private long grocerBalance   = 0;
+    private long tradingBalance  = 0;
 
     public enum TradeMode { BUY, SELL }
     private TradeMode currentMode = TradeMode.BUY;
 
-    private List<GrocerSystem.GrocerInventoryEntry>          grocerEntries = new ArrayList<>();
-    private List<OpenGrocerInventoryPacket.PlayerInventoryEntry> playerEntries = new ArrayList<>();
-    private final String grocerName;
+    private List<OpenTradingInventoryPacket.TradingInventoryEntry>  tradingEntries = new ArrayList<>();
+    private List<OpenTradingInventoryPacket.PlayerInventoryEntry> playerEntries = new ArrayList<>();
+    private final String tradingName;
     private boolean dataLoaded = false;
 
     private Set<Integer>         selectedEntryIndices  = new HashSet<>();
@@ -113,13 +112,13 @@ public class GrocerInventoryScreen extends Screen {
     private int     tooltipX = 0, tooltipY = 0;
     private boolean tooltipPositioned = false;
 
-    private static GrocerInventoryScreen currentInstance = null;
+    private static TradingInventoryScreen currentInstance = null;
 
     // ── Constructor ───────────────────────────────────────────────────────────
 
-    public GrocerInventoryScreen(String grocerName) {
-        super(Component.literal("Grocer - " + grocerName));
-        this.grocerName = grocerName;
+    public TradingInventoryScreen(String tradingName) {
+        super(Component.literal("Trading - " + tradingName));
+        this.tradingName = tradingName;
         currentInstance = this;
     }
 
@@ -128,20 +127,20 @@ public class GrocerInventoryScreen extends Screen {
     public static boolean isItemAllowed(String itemKey)  { return ItemPricing.isItemAllowed(itemKey); }
     public static int     getItemPrice(String itemKey)   { return ItemPricing.getItemPrice(itemKey); }
     public static int     getItemSellPrice(String itemKey){ return ItemPricing.getItemSellPrice(itemKey); }
-    public static GrocerInventoryScreen getCurrentInstance() { return currentInstance; }
+    public static TradingInventoryScreen getCurrentInstance() { return currentInstance; }
 
-    public static void updateInventoryData(String grocerName,
-                                           List<GrocerSystem.GrocerInventoryEntry> grocerEntries,
-                                           List<OpenGrocerInventoryPacket.PlayerInventoryEntry> playerEntries,
-                                           long grocerBalance, float buyMultiplier, float sellMultiplier) {
-        if (currentInstance != null && currentInstance.grocerName.equals(grocerName)) {
-            List<GrocerSystem.GrocerInventoryEntry> filtered = new ArrayList<>();
-            for (GrocerSystem.GrocerInventoryEntry e : grocerEntries)
+    public static void updateInventoryData(String tradingName,
+                                           List<OpenTradingInventoryPacket.TradingInventoryEntry> tradingEntries,
+                                           List<OpenTradingInventoryPacket.PlayerInventoryEntry> playerEntries,
+                                           long tradingBalance, float buyMultiplier, float sellMultiplier) {
+        if (currentInstance != null && currentInstance.tradingName.equals(tradingName)) {
+            List<OpenTradingInventoryPacket.TradingInventoryEntry> filtered = new ArrayList<>();
+            for (OpenTradingInventoryPacket.TradingInventoryEntry e : tradingEntries)
                 if (ItemPricing.isItemAllowed(e.itemKey)) filtered.add(e);
 
-            currentInstance.grocerEntries   = filtered;
+            currentInstance.tradingEntries  = filtered;
             currentInstance.playerEntries   = playerEntries;
-            currentInstance.grocerBalance   = grocerBalance;
+            currentInstance.tradingBalance  = tradingBalance;
             currentInstance.buyMultiplier   = buyMultiplier;
             currentInstance.sellMultiplier  = sellMultiplier;
             currentInstance.dataLoaded      = true;
@@ -202,24 +201,24 @@ public class GrocerInventoryScreen extends Screen {
     // ── Entry helpers ─────────────────────────────────────────────────────────
 
     private List<?> getCurrentInventoryEntries() {
-        return currentMode == TradeMode.BUY ? grocerEntries : playerEntries;
+        return currentMode == TradeMode.BUY ? tradingEntries : playerEntries;
     }
 
     private String getItemKeyFromEntry(Object e) {
-        if (e instanceof GrocerSystem.GrocerInventoryEntry g) return g.itemKey;
-        if (e instanceof OpenGrocerInventoryPacket.PlayerInventoryEntry p) return p.itemKey;
+        if (e instanceof OpenTradingInventoryPacket.TradingInventoryEntry g) return g.itemKey;
+        if (e instanceof OpenTradingInventoryPacket.PlayerInventoryEntry p) return p.itemKey;
         return null;
     }
 
     private String getDisplayNameFromEntry(Object e) {
-        if (e instanceof GrocerSystem.GrocerInventoryEntry g) return g.displayName;
-        if (e instanceof OpenGrocerInventoryPacket.PlayerInventoryEntry p) return p.displayName;
+        if (e instanceof OpenTradingInventoryPacket.TradingInventoryEntry g) return g.displayName;
+        if (e instanceof OpenTradingInventoryPacket.PlayerInventoryEntry p) return p.displayName;
         return "";
     }
 
     private long getAmountFromEntry(Object e) {
-        if (e instanceof GrocerSystem.GrocerInventoryEntry g) return g.amount;
-        if (e instanceof OpenGrocerInventoryPacket.PlayerInventoryEntry p) return p.amount;
+        if (e instanceof OpenTradingInventoryPacket.TradingInventoryEntry g) return g.amount;
+        if (e instanceof OpenTradingInventoryPacket.PlayerInventoryEntry p) return p.amount;
         return 0;
     }
 
@@ -468,10 +467,10 @@ public class GrocerInventoryScreen extends Screen {
         int y     = INFO_Y;
         float s   = 0.4f;
 
-        drawTextCenteredScaled(g, grocerName, cx, y, TEXT_COLOR, s);
+        drawTextCenteredScaled(g, tradingName, cx, y, TEXT_COLOR, s);
         y += lineH;
 
-        long bal = grocerBalance;
+        long bal = tradingBalance;
         drawTextCenteredScaled(g, "Balance: " + formatCurrency(bal), cx, y, TEXT_COLOR_GREEN, s);
         y += lineH;
 
@@ -577,7 +576,7 @@ public class GrocerInventoryScreen extends Screen {
         if (vmx >= SEAL_BTN_X && vmx < SEAL_BTN_X + SEAL_BTN_W &&
                 vmy >= SEAL_BTN_Y && vmy < SEAL_BTN_Y + SEAL_BTN_H) {
             calculateTotals();
-            long limBal = currentMode == TradeMode.BUY ? getPlayerBalance() : grocerBalance;
+            long limBal = currentMode == TradeMode.BUY ? getPlayerBalance() : tradingBalance;
             if (totalItems > 0 && limBal >= totalPrice) {
                 finishTransaction();
                 playButtonSound();
@@ -721,8 +720,8 @@ public class GrocerInventoryScreen extends Screen {
             if (e.getValue() > 0) { items.put(e.getKey(), e.getValue()); if (currentMode == TradeMode.SELL) slots.put(e.getKey(), 0); }
         }
         FinishTransactionPacket pkt = currentMode == TradeMode.BUY
-                ? new FinishTransactionPacket(grocerName, items)
-                : new FinishTransactionPacket(grocerName, items, slots);
+                ? new FinishTransactionPacket(tradingName, items)
+                : new FinishTransactionPacket(tradingName, items, slots);
         net.neoforged.neoforge.network.PacketDistributor.sendToServer(pkt);
         this.onClose();
     }

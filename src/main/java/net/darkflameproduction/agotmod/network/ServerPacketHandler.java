@@ -46,7 +46,7 @@ public class ServerPacketHandler {
                                 job.equals(JobSystem.JOB_BLACKSMITH)||
                                 job.equals(JobSystem.JOB_CARPENTER) ||
                                 job.equals(JobSystem.JOB_TRADER);
-                if (isTradeJob && peasant.getDisplayName().getString().equals(packet.grocerName())) {
+                if (isTradeJob && peasant.getDisplayName().getString().equals(packet.tradingName())) {
                     targetNpc = peasant;
                     break;
                 }
@@ -87,7 +87,7 @@ public class ServerPacketHandler {
     }
 
     private static void handleBuyTransaction(FinishTransactionPacket packet, ServerPlayer player,
-                                             Peasant_Entity grocer, TownHallBlockEntity townHall,
+                                             Peasant_Entity trader, TownHallBlockEntity townHall,
                                              ServerLevel level, String jobType) {
         long totalCost = calculateBuyTotalCost(packet.getItemAmounts(), jobType);
         long playerBalance = getPlayerBalance(player);
@@ -125,7 +125,7 @@ public class ServerPacketHandler {
     }
 
     private static void handleSellTransaction(FinishTransactionPacket packet, ServerPlayer player,
-                                              Peasant_Entity grocer, TownHallBlockEntity townHall,
+                                              Peasant_Entity trader, TownHallBlockEntity townHall,
                                               ServerLevel level, String jobType) {
         long totalEarnings = calculateSellTotalEarnings(packet.getItemAmounts(), jobType);
         long townBalance = townHall.getTownBalance();

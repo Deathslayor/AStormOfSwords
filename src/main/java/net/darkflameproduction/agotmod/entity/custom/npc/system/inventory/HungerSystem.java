@@ -17,7 +17,6 @@ public class HungerSystem {
     private static final int HUNGER_DECAY_INTERVAL = 1200; // 60 seconds
     private static final int PASSIVE_HEAL_INTERVAL = 200; // 10 seconds
     private static final int FOOD_CHECK_INTERVAL = 60; // 3 seconds when hungry
-    private static final int HEAL_COOLDOWN_TIME = 600; // 30 seconds
     private static final int MIN_FOOD_COUNT = 15; // Minimum meat items to have in inventory
 
     // Eating variables
@@ -153,10 +152,6 @@ public class HungerSystem {
         return isEating;
     }
 
-    public ItemStack getEatingItem() {
-        return isEating ? peasant.getInventorySystem().getItemInHand(InteractionHand.MAIN_HAND) : ItemStack.EMPTY;
-    }
-
     public void stopEating() {
         if (isEating) {
             // Restore the previous main hand item if we have one
@@ -187,17 +182,6 @@ public class HungerSystem {
     private boolean isFood(ItemStack stack) {
         return stack.is(ItemTags.create(
                 ResourceLocation.fromNamespaceAndPath("minecraft", "meat")));
-    }
-
-    private ItemStack findFoodInInventory() {
-        var inventory = peasant.getInventorySystem().getInventory();
-        for (int i = 0; i < inventory.getContainerSize(); i++) {
-            ItemStack stack = inventory.getItem(i);
-            if (isFood(stack)) {
-                return stack;
-            }
-        }
-        return ItemStack.EMPTY;
     }
 
     private int findFoodSlotInInventory() {

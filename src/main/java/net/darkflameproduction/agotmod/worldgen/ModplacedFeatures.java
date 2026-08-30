@@ -26,6 +26,7 @@ import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraft.world.level.block.Blocks;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -431,14 +432,17 @@ public class ModplacedFeatures {
         //Forest Trees
 
         register(context, WEIRWOOD_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.WEIRWOOD_KEY),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.1f, 1),
+                // 20x rarer than the original 1-in-10 (countExtra(0, 0.1f, 1)); RarityFilter avoids
+                // countExtra's float-precision cliff (it requires 1/chance to land exactly on an int).
+                VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(200),
                         ModBLocks.WEIRWOOD_SAPLING.get()));
 
         register(context, OAK2_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OAK2_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
                         Blocks.OAK_SAPLING));
         register(context, WEIRWOOD_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.WEIRWOOD_KEY),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                // 20x rarer than the original 1-in-100 (countExtra(0, 0.01f, 1)).
+                VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(2000),
                         ModBLocks.WEIRWOOD_SAPLING.get()));
 
         register(context, OAK2_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OAK2_KEY),
@@ -1275,14 +1279,19 @@ public class ModplacedFeatures {
         register(context, REED_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.REED_KEY),
                 List.of(
-                        // Reduce base count by 50%
-                        CountPlacement.of(4),
-                        // Reduce noise count by 50%
-                        NoiseBasedCountPlacement.of(3, 0.3, 0.0),
+                        // Patchy density, same shape as grass — more patches per chunk than
+                        // before since each patch is now confined to within reach of water
+                        CountPlacement.of(6),
+                        NoiseBasedCountPlacement.of(4, 0.3, 0.0),
                         InSquarePlacement.spread(),
-                        // Keep height range the same
-                        HeightRangePlacement.uniform(VerticalAnchor.absolute(65), VerticalAnchor.top()),
-                        PlacementUtils.HEIGHTMAP,
+                        // Height targeting like underwater plants (seagrass/kelp): land on the
+                        // true ground surface even if water covers it, instead of grass's
+                        // heightmap which lands on top of the water and always misses the bank.
+                        // ReedFeature itself then clamps the final Y to the 61-65 sea-level band.
+                        PlacementUtils.HEIGHTMAP_TOP_SOLID,
+                        // Reed beds only start within 15 blocks of a water source — further out
+                        // and it's not a reed bed anymore, just grass
+                        BlockPredicateFilter.forPredicate(nearWaterPredicate(REED_WATER_RADIUS)),
                         BiomeFilter.biome()
                 ));
 
@@ -1291,14 +1300,26 @@ public class ModplacedFeatures {
         register(context, CLAY_PATCH_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.CLAY_PATCH_KEY),
                 List.of(
-                        // Try placing clay 10 times per chunk — tweak this number as needed
-                        CountPlacement.of(10),
+                        // High attempt count so a shoreline spot is basically guaranteed to be found per chunk
+                        CountPlacement.of(24),
 
                         // Spread attempts randomly in the chunk
                         InSquarePlacement.spread(),
 
-                        // Allow full vertical generation, including underwater
-                        PlacementUtils.FULL_RANGE,
+                        PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+
+                        // ensure we only place where the block above is air or water (prevents
+                        // generating underground) and require water near the placement so clay
+                        // only forms along shorelines/riverbanks instead of anywhere in the biome
+                        BlockPredicateFilter.forPredicate(
+                                BlockPredicate.allOf(
+                                        BlockPredicate.anyOf(
+                                                BlockPredicate.matchesBlocks(new BlockPos(0, 1, 0), Blocks.AIR),
+                                                BlockPredicate.matchesBlocks(new BlockPos(0, 1, 0), Blocks.WATER)
+                                        ),
+                                        nearWaterPredicate()
+                                )
+                        ),
 
                         // Only place in valid biomes (make sure rivers are included in biome modifiers)
                         BiomeFilter.biome()
@@ -1316,15 +1337,21 @@ public class ModplacedFeatures {
         register(context, QUAGMIRE_PATCH_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.QUAGMIRE_PATCH_KEY),
                 List.of(
-                        CountPlacement.of(3),
+                        // High attempt count so a shoreline spot is basically guaranteed to be found per chunk
+                        CountPlacement.of(24),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                         // ensure we only place where the block above is air or water
-                        // prevents patches from generating underground
+                        // prevents patches from generating underground, and require a
+                        // water block right next to the placement so quagmire only forms
+                        // along shorelines/riverbanks instead of anywhere in the biome
                         BlockPredicateFilter.forPredicate(
-                                BlockPredicate.anyOf(
-                                        BlockPredicate.matchesBlocks(new BlockPos(0, 1, 0), Blocks.AIR),
-                                        BlockPredicate.matchesBlocks(new BlockPos(0, 1, 0), Blocks.WATER)
+                                BlockPredicate.allOf(
+                                        BlockPredicate.anyOf(
+                                                BlockPredicate.matchesBlocks(new BlockPos(0, 1, 0), Blocks.AIR),
+                                                BlockPredicate.matchesBlocks(new BlockPos(0, 1, 0), Blocks.WATER)
+                                        ),
+                                        nearWaterPredicate()
                                 )
                         ),
                         BiomeFilter.biome()
@@ -1333,13 +1360,21 @@ public class ModplacedFeatures {
         register(context, MUD_PATCH_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.MUD_PATCH_KEY),
                 List.of(
-                        CountPlacement.of(3),
+                        // High attempt count so a shoreline spot is basically guaranteed to be found per chunk
+                        CountPlacement.of(24),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                        // ensure we only place where the block above is air or water
+                        // prevents patches from generating underground, and require a
+                        // water block right next to the placement so mud only forms
+                        // along shorelines/riverbanks instead of anywhere in the biome
                         BlockPredicateFilter.forPredicate(
-                                BlockPredicate.anyOf(
-                                        BlockPredicate.matchesBlocks(new BlockPos(0, 1, 0), Blocks.AIR),
-                                        BlockPredicate.matchesBlocks(new BlockPos(0, 1, 0), Blocks.WATER)
+                                BlockPredicate.allOf(
+                                        BlockPredicate.anyOf(
+                                                BlockPredicate.matchesBlocks(new BlockPos(0, 1, 0), Blocks.AIR),
+                                                BlockPredicate.matchesBlocks(new BlockPos(0, 1, 0), Blocks.WATER)
+                                        ),
+                                        nearWaterPredicate()
                                 )
                         ),
                         BiomeFilter.biome()
@@ -1425,6 +1460,36 @@ public class ModplacedFeatures {
                                  List<PlacementModifier> modifiers) {
         // Use the context to register a new PlacedFeature with the specified key, configuration, and modifiers
         context.register(key, new PlacedFeature(configuration, List.copyOf(modifiers)));
+    }
+
+    // Builds a predicate that matches true if any block in the 5x5 area around the placement
+    // position (at the same height or one below, to catch riverbanks/shorelines) is water.
+    // Used to restrict features (e.g. quagmire, mud, clay) to spawning only near the edge of
+    // water instead of anywhere in the biome. The radius is wider than a single block so that
+    // combined with a higher placement count, a shoreline patch is basically guaranteed to
+    // find a valid spot in any chunk that touches water.
+    private static final int NEAR_WATER_RADIUS = 2;
+
+    // How far a reed patch is allowed to start from the nearest water block (in blocks).
+    // Wider than NEAR_WATER_RADIUS since reed beds are meant to spread back from the bank a
+    // ways, not hug the literal edge like quagmire/mud/clay do.
+    private static final int REED_WATER_RADIUS = 7;
+
+    private static BlockPredicate nearWaterPredicate() {
+        return nearWaterPredicate(NEAR_WATER_RADIUS);
+    }
+
+    private static BlockPredicate nearWaterPredicate(int radius) {
+        List<BlockPredicate> checks = new ArrayList<>();
+        for (int dx = -radius; dx <= radius; dx++) {
+            for (int dz = -radius; dz <= radius; dz++) {
+                for (int dy = -1; dy <= 0; dy++) {
+                    if (dx == 0 && dz == 0 && dy == 0) continue;
+                    checks.add(BlockPredicate.matchesBlocks(new BlockPos(dx, dy, dz), Blocks.WATER));
+                }
+            }
+        }
+        return BlockPredicate.anyOf(checks.toArray(new BlockPredicate[0]));
     }
 }
 

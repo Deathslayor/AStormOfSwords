@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public record FinishTransactionPacket(
-        String grocerName,
+        String tradingName,
         Map<String, Integer> itemAmounts,
         TransactionType transactionType,  // NEW: BUY or SELL
         Map<String, Integer> playerSlots  // NEW: For selling - tracks which slots items come from
@@ -22,13 +22,13 @@ public record FinishTransactionPacket(
     }
 
     // Convenience constructor for BUY transactions (backwards compatibility)
-    public FinishTransactionPacket(String grocerName, Map<String, Integer> itemAmounts) {
-        this(grocerName, itemAmounts, TransactionType.BUY, new HashMap<>());
+    public FinishTransactionPacket(String tradingName, Map<String, Integer> itemAmounts) {
+        this(tradingName, itemAmounts, TransactionType.BUY, new HashMap<>());
     }
 
     // Constructor for SELL transactions
-    public FinishTransactionPacket(String grocerName, Map<String, Integer> itemAmounts, Map<String, Integer> playerSlots) {
-        this(grocerName, itemAmounts, TransactionType.SELL, playerSlots);
+    public FinishTransactionPacket(String tradingName, Map<String, Integer> itemAmounts, Map<String, Integer> playerSlots) {
+        this(tradingName, itemAmounts, TransactionType.SELL, playerSlots);
     }
 
     public static final CustomPacketPayload.Type<FinishTransactionPacket> TYPE =
@@ -40,7 +40,7 @@ public record FinishTransactionPacket(
     );
 
     public static void write(FriendlyByteBuf buf, FinishTransactionPacket packet) {
-        buf.writeUtf(packet.grocerName);
+        buf.writeUtf(packet.tradingName);
 
         // Write transaction type
         buf.writeEnum(packet.transactionType);
@@ -61,7 +61,7 @@ public record FinishTransactionPacket(
     }
 
     public static FinishTransactionPacket read(FriendlyByteBuf buf) {
-        String grocerName = buf.readUtf();
+        String tradingName = buf.readUtf();
 
         // Read transaction type
         TransactionType transactionType = buf.readEnum(TransactionType.class);
@@ -84,12 +84,12 @@ public record FinishTransactionPacket(
             playerSlots.put(itemKey, slot);
         }
 
-        return new FinishTransactionPacket(grocerName, itemAmounts, transactionType, playerSlots);
+        return new FinishTransactionPacket(tradingName, itemAmounts, transactionType, playerSlots);
     }
 
     // Convenience methods
-    public String getGrocerName() {
-        return grocerName;
+    public String getTradingName() {
+        return tradingName;
     }
 
     public Map<String, Integer> getItemAmounts() {

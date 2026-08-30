@@ -50,13 +50,6 @@ public class TownProtectionZone {
 
     public static void clearAll() { ZONES.clear(); }
 
-    public static ZoneEntry getZoneAt(BlockPos pos, ResourceKey<Level> dimension) {
-        for (ZoneEntry zone : ZONES.values()) {
-            if (zone.contains(pos, dimension)) return zone;
-        }
-        return null;
-    }
-
     /** Exposed so EnterTownPacket can iterate all zones to find owner match. */
     public static Collection<ZoneEntry> getAllZones() {
         return ZONES.values();

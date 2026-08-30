@@ -26,11 +26,9 @@ public class CharcoalBurnerSystem {
     public int getLogsCollected()                              { return logsCollected; }
     public void setLogsCollected(int logs)                     { this.logsCollected = logs; }
 
-    public int getLogsBurned()                                 { return logsBurned; }
     public void setLogsBurned(int logs)                        { this.logsBurned = logs; }
     public void addLogsBurned(int amount)                      { this.logsBurned += amount; }
     public boolean hasLogCapacity()                            { return logsBurned < logsCollected; }
-    public int getRemainingLogs()                              { return Math.max(0, logsCollected - logsBurned); }
 
     public void saveData(CompoundTag tag) {
         tag.putString("CharcoalBurnerState", currentState.name());

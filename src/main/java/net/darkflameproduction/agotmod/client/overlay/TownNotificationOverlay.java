@@ -249,7 +249,11 @@ public class TownNotificationOverlay {
         float blue = (dyeColor & 0xFF) / 255.0F;
 
         RenderSystem.setShaderColor(red, green, blue, alpha);
-        guiGraphics.blit(texture, x, y, 1, 0, BANNER_WIDTH, BANNER_HEIGHT, 64, 64);
+        // Sample only the real flag-front design box (1,1)-(21,41) on the 64x64
+        // banner texture and scale THAT up to the on-screen size, instead of
+        // using the on-screen size as the sample crop too (which bled into the
+        // side/back UV strips and left the icon looking wrong/incomplete).
+        guiGraphics.blit(texture, x, y, BANNER_WIDTH, BANNER_HEIGHT, 1.0F, 1.0F, 20, 40, 64, 64);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
     }
 }

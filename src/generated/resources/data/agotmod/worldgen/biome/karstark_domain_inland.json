@@ -2,9 +2,9 @@
   "carvers": {},
   "downfall": 0.8,
   "effects": {
-    "fog_color": 11057328,
-    "foliage_color": 3162160,
-    "grass_color": 4084285,
+    "fog_color": 9874132,
+    "foliage_color": 3425082,
+    "grass_color": 4412234,
     "mood_sound": {
       "block_search_extent": 8,
       "offset": 2.0,
@@ -17,7 +17,7 @@
       "replace_current_music": false,
       "sound": "agotmod:winter_wind"
     },
-    "sky_color": 9347220,
+    "sky_color": 8296649,
     "water_color": 4017873,
     "water_fog_color": 790843
   },

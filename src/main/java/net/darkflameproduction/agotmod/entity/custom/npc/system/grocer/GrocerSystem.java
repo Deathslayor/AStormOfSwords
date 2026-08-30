@@ -4,6 +4,7 @@ import net.darkflameproduction.agotmod.block.custom.TownHallBlockEntity;
 import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem;
 import net.darkflameproduction.agotmod.block.ModBLocks;
+import net.darkflameproduction.agotmod.network.OpenTradingInventoryPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -83,12 +84,12 @@ public class GrocerSystem {
         return townHall.getTownInventoryAmount(itemKey);
     }
 
-    public List<GrocerInventoryEntry> getSortedInventoryEntries() {
+    public List<OpenTradingInventoryPacket.TradingInventoryEntry> getSortedInventoryEntries() {
         TownHallBlockEntity townHall = getRegisteredTownHall();
         if (townHall == null) return Collections.emptyList();
 
         Map<String, Long> inventory = townHall.getTownInventory();
-        List<GrocerInventoryEntry> entries = new ArrayList<>();
+        List<OpenTradingInventoryPacket.TradingInventoryEntry> entries = new ArrayList<>();
 
         for (Map.Entry<String, Long> entry : inventory.entrySet()) {
             String itemKey = entry.getKey();
@@ -102,7 +103,7 @@ public class GrocerSystem {
             if (item == null || item == net.minecraft.world.item.Items.AIR) continue;
 
             String displayName = new ItemStack(item).getHoverName().getString();
-            entries.add(new GrocerInventoryEntry(displayName, amount, itemKey));
+            entries.add(new OpenTradingInventoryPacket.TradingInventoryEntry(displayName, amount, itemKey));
         }
 
         entries.sort(Comparator.comparing(e -> e.displayName));
@@ -112,20 +113,6 @@ public class GrocerSystem {
     public void refreshInventoryDisplay() {
         TownHallBlockEntity townHall = getRegisteredTownHall();
         if (townHall != null) townHall.cleanupTownInventory();
-    }
-
-    // ===== HELPER CLASS FOR GUI =====
-
-    public static class GrocerInventoryEntry {
-        public final String displayName;
-        public final long amount;
-        public final String itemKey;
-
-        public GrocerInventoryEntry(String displayName, long amount, String itemKey) {
-            this.displayName = displayName;
-            this.amount = amount;
-            this.itemKey = itemKey;
-        }
     }
 
     // ===== LIFECYCLE =====

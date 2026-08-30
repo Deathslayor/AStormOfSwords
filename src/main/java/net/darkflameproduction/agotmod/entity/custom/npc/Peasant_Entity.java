@@ -18,6 +18,8 @@ import net.darkflameproduction.agotmod.entity.custom.npc.goals.sleep.FindBedGoal
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.sleep.SleepGoal;
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.miner.MinerGoal;
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.miner.MinerBarrelDropOffGoal;
+import net.darkflameproduction.agotmod.entity.custom.npc.goals.quarry.QuarryGoal;
+import net.darkflameproduction.agotmod.entity.custom.npc.goals.quarry.QuarryBarrelDropOffGoal;
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.smelter.CollectSmelterMaterialsGoal;
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.smelter.SmelterBarrelDropOffGoal;
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.smelter.SmelterGoal;
@@ -33,13 +35,14 @@ import net.darkflameproduction.agotmod.entity.custom.npc.system.grocer.GrocerInv
 import net.darkflameproduction.agotmod.entity.custom.npc.system.grocer.GrocerSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.guard.GuardSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.miner.MinerSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.quarry.QuarrySystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.inventory.HungerSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.inventory.InventorySystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.sleep.HomeSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.sleep.SleepSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.sleep.TeleportSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.smelter.SmelterSystem;
-import net.darkflameproduction.agotmod.network.OpenGrocerInventoryPacket;
+import net.darkflameproduction.agotmod.network.OpenTradingInventoryPacket;
 import net.darkflameproduction.agotmod.sound.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -151,6 +154,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     private final NameSystem nameSystem;
     private final GuardSystem guardSystem;
     private final MinerSystem minerSystem;
+    private final QuarrySystem quarrySystem;
     private final SmelterSystem smelterSystem;
     private final net.darkflameproduction.agotmod.entity.custom.npc.system.animalherder.AnimalHerderSystem animalHerderSystem;
     private final net.darkflameproduction.agotmod.entity.custom.npc.system.butcher.ButcherSystem butcherSystem;
@@ -198,6 +202,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         this.nameSystem           = new NameSystem(this);
         this.guardSystem          = new GuardSystem(this);
         this.minerSystem          = new MinerSystem(this);
+        this.quarrySystem         = new QuarrySystem(this);
         this.smelterSystem        = new SmelterSystem();
         this.animalHerderSystem   = new net.darkflameproduction.agotmod.entity.custom.npc.system.animalherder.AnimalHerderSystem();
         this.lumberjackSystem     = new LumberjackSystem(this);
@@ -220,6 +225,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     public NameSystem getNameSystem() { return nameSystem; }
     public GuardSystem getGuardSystem() { return guardSystem; }
     public MinerSystem getMinerSystem() { return minerSystem; }
+    public QuarrySystem getQuarrySystem() { return quarrySystem; }
     public SmelterSystem getSmelterSystem()           { return smelterSystem; }
     public net.darkflameproduction.agotmod.entity.custom.npc.system.animalherder.AnimalHerderSystem getAnimalHerderSystem() { return animalHerderSystem; }
     public net.darkflameproduction.agotmod.entity.custom.npc.system.butcher.ButcherSystem getButcherSystem() { return butcherSystem; }
@@ -411,12 +417,14 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         if (isAdult()) {
             this.goalSelector.addGoal(4, new FarmerBarrelDropOffGoal(this));
             this.goalSelector.addGoal(4, new MinerBarrelDropOffGoal(this));
+            this.goalSelector.addGoal(4, new QuarryBarrelDropOffGoal(this));
             this.goalSelector.addGoal(4, new SmelterBarrelDropOffGoal(this));
             this.goalSelector.addGoal(4, new net.darkflameproduction.agotmod.entity.custom.npc.goals.animalherder.AnimalHerderDepositGoal(this));
             this.goalSelector.addGoal(4, new net.darkflameproduction.agotmod.entity.custom.npc.goals.tanner.TannerBarrelDropOffGoal(this));
             this.goalSelector.addGoal(4, new net.darkflameproduction.agotmod.entity.custom.npc.goals.tailor.TailorBarrelDropOffGoal(this));
             this.goalSelector.addGoal(4, new net.darkflameproduction.agotmod.entity.custom.npc.goals.lumberjack.LumberjackDepositGoal(this));
             this.goalSelector.addGoal(4, new CarpenterBarrelDropOffGoal(this));
+            this.goalSelector.addGoal(4, new CharcoalBurnerBarrelDropOffGoal(this));
         }
 
         this.goalSelector.addGoal(5, new FindBedGoal(this));
@@ -434,6 +442,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
             this.goalSelector.addGoal(8, new CharcoalBurnerGoal(this));
             this.goalSelector.addGoal(8, new SmelterGoal(this));
             this.goalSelector.addGoal(8, new MinerGoal(this));
+            this.goalSelector.addGoal(8, new QuarryGoal(this));
             this.goalSelector.addGoal(8, new net.darkflameproduction.agotmod.entity.custom.npc.goals.animalherder.AnimalHerderGoal(this));
             this.goalSelector.addGoal(8, new net.darkflameproduction.agotmod.entity.custom.npc.goals.tanner.TannerGoal(this));
             this.goalSelector.addGoal(8, new net.darkflameproduction.agotmod.entity.custom.npc.goals.tailor.TailorGoal(this));
@@ -631,6 +640,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         nameSystem.saveData(compound, this.registryAccess());
         guardSystem.saveData(compound);
         minerSystem.saveData(compound);
+        quarrySystem.saveData(compound);
         smelterSystem.saveData(compound);
         animalHerderSystem.saveData(compound);
         inventorySystem.saveData(compound, this.registryAccess());
@@ -683,6 +693,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         nameSystem.loadData(compound, this.registryAccess());
         guardSystem.loadData(compound);
         minerSystem.loadData(compound);
+        quarrySystem.loadData(compound);
         smelterSystem.loadData(compound);
         animalHerderSystem.loadData(compound);
         inventorySystem.loadData(compound, this.registryAccess());
@@ -764,6 +775,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         teleportSystem.tick();
         guardSystem.tick();
         minerSystem.tick();
+        quarrySystem.tick();
 
         if (!this.level().isClientSide && getJobType().equals(JobSystem.JOB_GROCER)) {
             if (GrocerInventoryTicketSystem.hasPendingResponse(this.getUUID())) {
@@ -773,13 +785,13 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                     this.registerWithTownHall(response.townHallPos);
                     ServerPlayer serverPlayer = serverLevel.getServer().getPlayerList().getPlayer(response.playerUUID);
                     if (serverPlayer != null) {
-                        List<GrocerSystem.GrocerInventoryEntry> entries = buildFilteredEntries(
+                        List<OpenTradingInventoryPacket.TradingInventoryEntry> entries = buildFilteredEntries(
                                 response.items, net.darkflameproduction.agotmod.util.ItemPricing::isGrocerItem);
-                        List<OpenGrocerInventoryPacket.PlayerInventoryEntry> playerEntries =
+                        List<OpenTradingInventoryPacket.PlayerInventoryEntry> playerEntries =
                                 buildPlayerEntries(serverPlayer, net.darkflameproduction.agotmod.util.ItemPricing::isGrocerItem);
                         long playerBalance = serverPlayer.getPersistentData().getLong(COIN_BALANCE_KEY);
                         net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
-                                new OpenGrocerInventoryPacket(this.getDisplayName().getString(),
+                                new OpenTradingInventoryPacket(this.getDisplayName().getString(),
                                         entries, playerEntries, response.townBalance, playerBalance,
                                         getBuyMultiplier(), getSellMultiplier()));
                     }
@@ -795,13 +807,13 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                     this.registerWithTownHall(response.townHallPos);
                     ServerPlayer serverPlayer = serverLevel.getServer().getPlayerList().getPlayer(response.playerUUID);
                     if (serverPlayer != null) {
-                        List<GrocerSystem.GrocerInventoryEntry> entries = buildFilteredEntries(
+                        List<OpenTradingInventoryPacket.TradingInventoryEntry> entries = buildFilteredEntries(
                                 response.items, net.darkflameproduction.agotmod.util.ItemPricing::isButcherItem);
-                        List<OpenGrocerInventoryPacket.PlayerInventoryEntry> playerEntries =
+                        List<OpenTradingInventoryPacket.PlayerInventoryEntry> playerEntries =
                                 buildPlayerEntries(serverPlayer, net.darkflameproduction.agotmod.util.ItemPricing::isButcherItem);
                         long playerBalance = serverPlayer.getPersistentData().getLong(COIN_BALANCE_KEY);
                         net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
-                                new OpenGrocerInventoryPacket(this.getDisplayName().getString(),
+                                new OpenTradingInventoryPacket(this.getDisplayName().getString(),
                                         entries, playerEntries, response.townBalance, playerBalance,
                                         getBuyMultiplier(), getSellMultiplier()));
                     }
@@ -817,13 +829,13 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                     this.registerWithTownHall(response.townHallPos);
                     ServerPlayer serverPlayer = serverLevel.getServer().getPlayerList().getPlayer(response.playerUUID);
                     if (serverPlayer != null) {
-                        List<GrocerSystem.GrocerInventoryEntry> entries = buildFilteredEntries(
+                        List<OpenTradingInventoryPacket.TradingInventoryEntry> entries = buildFilteredEntries(
                                 response.items, net.darkflameproduction.agotmod.util.ItemPricing::isTannerItem);
-                        List<OpenGrocerInventoryPacket.PlayerInventoryEntry> playerEntries =
+                        List<OpenTradingInventoryPacket.PlayerInventoryEntry> playerEntries =
                                 buildPlayerEntries(serverPlayer, net.darkflameproduction.agotmod.util.ItemPricing::isTannerItem);
                         long playerBalance = serverPlayer.getPersistentData().getLong(COIN_BALANCE_KEY);
                         net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
-                                new OpenGrocerInventoryPacket(this.getDisplayName().getString(),
+                                new OpenTradingInventoryPacket(this.getDisplayName().getString(),
                                         entries, playerEntries, response.townBalance, playerBalance,
                                         getBuyMultiplier(), getSellMultiplier()));
                     }
@@ -839,13 +851,13 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                     this.registerWithTownHall(response.townHallPos);
                     ServerPlayer serverPlayer = serverLevel.getServer().getPlayerList().getPlayer(response.playerUUID);
                     if (serverPlayer != null) {
-                        List<GrocerSystem.GrocerInventoryEntry> entries = buildFilteredEntries(
+                        List<OpenTradingInventoryPacket.TradingInventoryEntry> entries = buildFilteredEntries(
                                 response.items, net.darkflameproduction.agotmod.util.ItemPricing::isTailorItem);
-                        List<OpenGrocerInventoryPacket.PlayerInventoryEntry> playerEntries =
+                        List<OpenTradingInventoryPacket.PlayerInventoryEntry> playerEntries =
                                 buildPlayerEntries(serverPlayer, net.darkflameproduction.agotmod.util.ItemPricing::isTailorItem);
                         long playerBalance = serverPlayer.getPersistentData().getLong(COIN_BALANCE_KEY);
                         net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
-                                new OpenGrocerInventoryPacket(this.getDisplayName().getString(),
+                                new OpenTradingInventoryPacket(this.getDisplayName().getString(),
                                         entries, playerEntries, response.townBalance, playerBalance,
                                         getBuyMultiplier(), getSellMultiplier()));
                     }
@@ -861,13 +873,13 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                     this.registerWithTownHall(response.townHallPos);
                     ServerPlayer serverPlayer = serverLevel.getServer().getPlayerList().getPlayer(response.playerUUID);
                     if (serverPlayer != null) {
-                        List<GrocerSystem.GrocerInventoryEntry> entries = buildFilteredEntries(
+                        List<OpenTradingInventoryPacket.TradingInventoryEntry> entries = buildFilteredEntries(
                                 response.items, net.darkflameproduction.agotmod.util.ItemPricing::isBlacksmithItem);
-                        List<OpenGrocerInventoryPacket.PlayerInventoryEntry> playerEntries =
+                        List<OpenTradingInventoryPacket.PlayerInventoryEntry> playerEntries =
                                 buildPlayerEntries(serverPlayer, net.darkflameproduction.agotmod.util.ItemPricing::isBlacksmithItem);
                         long playerBalance = serverPlayer.getPersistentData().getLong(COIN_BALANCE_KEY);
                         net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
-                                new OpenGrocerInventoryPacket(this.getDisplayName().getString(),
+                                new OpenTradingInventoryPacket(this.getDisplayName().getString(),
                                         entries, playerEntries, response.townBalance, playerBalance,
                                         getBuyMultiplier(), getSellMultiplier()));
                     }
@@ -883,13 +895,13 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                     this.registerWithTownHall(response.townHallPos);
                     ServerPlayer serverPlayer = serverLevel.getServer().getPlayerList().getPlayer(response.playerUUID);
                     if (serverPlayer != null) {
-                        List<GrocerSystem.GrocerInventoryEntry> entries = buildFilteredEntries(
+                        List<OpenTradingInventoryPacket.TradingInventoryEntry> entries = buildFilteredEntries(
                                 response.items, net.darkflameproduction.agotmod.util.ItemPricing::isCarpenterItem);
-                        List<OpenGrocerInventoryPacket.PlayerInventoryEntry> playerEntries =
+                        List<OpenTradingInventoryPacket.PlayerInventoryEntry> playerEntries =
                                 buildPlayerEntries(serverPlayer, net.darkflameproduction.agotmod.util.ItemPricing::isCarpenterItem);
                         long playerBalance = serverPlayer.getPersistentData().getLong(COIN_BALANCE_KEY);
                         net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
-                                new OpenGrocerInventoryPacket(this.getDisplayName().getString(),
+                                new OpenTradingInventoryPacket(this.getDisplayName().getString(),
                                         entries, playerEntries, response.townBalance, playerBalance,
                                         getBuyMultiplier(), getSellMultiplier()));
                     }
@@ -905,13 +917,13 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                     this.registerWithTownHall(response.townHallPos);
                     ServerPlayer serverPlayer = serverLevel.getServer().getPlayerList().getPlayer(response.playerUUID);
                     if (serverPlayer != null) {
-                        List<GrocerSystem.GrocerInventoryEntry> entries = buildFilteredEntries(
+                        List<OpenTradingInventoryPacket.TradingInventoryEntry> entries = buildFilteredEntries(
                                 response.items, net.darkflameproduction.agotmod.util.ItemPricing::isTraderItem);
-                        List<OpenGrocerInventoryPacket.PlayerInventoryEntry> playerEntries =
+                        List<OpenTradingInventoryPacket.PlayerInventoryEntry> playerEntries =
                                 buildPlayerEntries(serverPlayer, net.darkflameproduction.agotmod.util.ItemPricing::isTraderItem);
                         long playerBalance = serverPlayer.getPersistentData().getLong(COIN_BALANCE_KEY);
                         net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
-                                new OpenGrocerInventoryPacket(this.getDisplayName().getString(),
+                                new OpenTradingInventoryPacket(this.getDisplayName().getString(),
                                         entries, playerEntries, response.townBalance, playerBalance,
                                         getBuyMultiplier(), getSellMultiplier()));
                     }
@@ -929,9 +941,9 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         }
     }
 
-    private List<GrocerSystem.GrocerInventoryEntry> buildFilteredEntries(
+    private List<OpenTradingInventoryPacket.TradingInventoryEntry> buildFilteredEntries(
             Map<String, Long> items, java.util.function.Predicate<String> filter) {
-        List<GrocerSystem.GrocerInventoryEntry> entries = new ArrayList<>();
+        List<OpenTradingInventoryPacket.TradingInventoryEntry> entries = new ArrayList<>();
         for (Map.Entry<String, Long> entry : items.entrySet()) {
             String itemKey = entry.getKey();
             long amount    = entry.getValue();
@@ -943,16 +955,16 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                     net.minecraft.core.registries.BuiltInRegistries.ITEM.get(loc);
             if (item == null || item == net.minecraft.world.item.Items.AIR) continue;
             String displayName = new net.minecraft.world.item.ItemStack(item).getHoverName().getString();
-            entries.add(new GrocerSystem.GrocerInventoryEntry(displayName, amount, itemKey));
+            entries.add(new OpenTradingInventoryPacket.TradingInventoryEntry(displayName, amount, itemKey));
         }
         entries.sort(Comparator.comparing(e -> e.displayName));
         return entries;
     }
 
-    private List<OpenGrocerInventoryPacket.PlayerInventoryEntry> buildPlayerEntries(
+    private List<OpenTradingInventoryPacket.PlayerInventoryEntry> buildPlayerEntries(
             net.minecraft.server.level.ServerPlayer serverPlayer,
             java.util.function.Predicate<String> filter) {
-        List<OpenGrocerInventoryPacket.PlayerInventoryEntry> playerEntries = new ArrayList<>();
+        List<OpenTradingInventoryPacket.PlayerInventoryEntry> playerEntries = new ArrayList<>();
         net.minecraft.world.Container playerInventory = serverPlayer.getInventory();
         for (int slot = 0; slot < playerInventory.getContainerSize(); slot++) {
             net.minecraft.world.item.ItemStack stack = playerInventory.getItem(slot);
@@ -966,16 +978,16 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
             int amount         = stack.getCount();
             boolean found      = false;
             for (int i = 0; i < playerEntries.size(); i++) {
-                OpenGrocerInventoryPacket.PlayerInventoryEntry existing = playerEntries.get(i);
+                OpenTradingInventoryPacket.PlayerInventoryEntry existing = playerEntries.get(i);
                 if (existing.itemKey.equals(itemKey)) {
-                    playerEntries.set(i, new OpenGrocerInventoryPacket.PlayerInventoryEntry(
+                    playerEntries.set(i, new OpenTradingInventoryPacket.PlayerInventoryEntry(
                             existing.displayName, existing.amount + amount, existing.itemKey, existing.slot));
                     found = true;
                     break;
                 }
             }
             if (!found) {
-                playerEntries.add(new OpenGrocerInventoryPacket.PlayerInventoryEntry(
+                playerEntries.add(new OpenTradingInventoryPacket.PlayerInventoryEntry(
                         displayName, amount, itemKey, slot));
             }
         }
@@ -1104,21 +1116,6 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     public boolean removeWhenFarAway(double distanceToClosestPlayer) {
         return false;
     }
-
-    //@Nullable
-    //@Override
-    //protected SoundEvent getAmbientSound() {
-        // List of your throat clearing and cough sounds
-    // SoundEvent[] ambientSounds = new SoundEvent[] {
-    //           ModSounds.NPC_COUGH.get(),
-    //           ModSounds.NPC_CLEAR_THROAT_1.get(),
-    //           ModSounds.NPC_CLEAR_THROAT_2.get(),
-    //           ModSounds.NPC_CLEAR_THROAT_3.get(),
-    //            ModSounds.NPC_CLEAR_THROAT_4.get()
-    //   };
-        // Randomly pick one to play
-    //   return ambientSounds[RANDOM.nextInt(ambientSounds.length)];
-    //}
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSource) {

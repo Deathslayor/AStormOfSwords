@@ -4,7 +4,6 @@ import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.SimpleContainer;
@@ -15,20 +14,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ArmorItem;
 import net.darkflameproduction.agotmod.inventory.NPCInventoryMenu;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class InventorySystem {
     private final Peasant_Entity peasant;
     private final SimpleContainer inventory;
-
-    // Equipment slot indices (matching Minecraft's conventions)
-    private static final int MAINHAND_SLOT = 0;
-    private static final int OFFHAND_SLOT = 1;
-    private static final int FEET_SLOT = 0;
-    private static final int LEGS_SLOT = 1;
-    private static final int CHEST_SLOT = 2;
-    private static final int HEAD_SLOT = 3;
 
     public InventorySystem(Peasant_Entity peasant, SimpleContainer inventory) {
         this.peasant = peasant;
@@ -255,13 +243,6 @@ public class InventorySystem {
     }
 
     /**
-     * Forces an immediate check and equipping of any available armor, weapons, and shields
-     */
-    public void forceArmorUpdate() {
-        autoEquipBestArmor();
-    }
-
-    /**
      * Public method to force equipment check - can be called externally
      */
     public void forceEquipmentCheck() {
@@ -278,15 +259,6 @@ public class InventorySystem {
         return i >= 0 && i < inventory.getContainerSize() ?
                 SlotAccess.forContainer(inventory, i) :
                 SlotAccess.NULL;
-    }
-
-    public boolean hasSpace() {
-        for (int i = 0; i < inventory.getContainerSize(); i++) {
-            if (inventory.getItem(i).isEmpty()) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public boolean addItem(ItemStack stack) {
@@ -341,29 +313,6 @@ public class InventorySystem {
         return false;
     }
 
-    public void dropAllItems() {
-        if (peasant.level() instanceof ServerLevel serverLevel) {
-            // Drop inventory items
-            for (int i = 0; i < inventory.getContainerSize(); i++) {
-                ItemStack stack = inventory.getItem(i);
-                if (!stack.isEmpty()) {
-                    peasant.spawnAtLocation(stack);
-                    inventory.setItem(i, ItemStack.EMPTY);
-                }
-            }
-
-            // Drop equipped items using native system
-            for (EquipmentSlot slot : EquipmentSlot.values()) {
-                ItemStack stack = peasant.getItemBySlot(slot);
-                if (!stack.isEmpty()) {
-                    peasant.spawnAtLocation(stack);
-                    peasant.setItemSlot(slot, ItemStack.EMPTY);
-                }
-            }
-        }
-    }
-
-
     public ItemStack getItemInHand(InteractionHand hand) {
         return hand == InteractionHand.MAIN_HAND ?
                 peasant.getItemBySlot(EquipmentSlot.MAINHAND) :
@@ -400,75 +349,6 @@ public class InventorySystem {
         if (slot == EquipmentSlot.MAINHAND) {
             peasant.getEntityData().set(peasant.getMainHandItemAccessor(), stack);
         }
-    }
-
-
-    public boolean autoEquipItem(ItemStack stack) {
-        if (stack.isEmpty()) return false;
-
-        EquipmentSlot preferredSlot = getPreferredSlotForItem(stack);
-        if (preferredSlot != null) {
-            ItemStack currentItem = peasant.getItemBySlot(preferredSlot);
-            if (currentItem.isEmpty()) {
-                peasant.setItemSlot(preferredSlot, stack.copy());
-                if (preferredSlot == EquipmentSlot.MAINHAND) {
-                    peasant.getEntityData().set(peasant.getMainHandItemAccessor(), stack);
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private EquipmentSlot getPreferredSlotForItem(ItemStack stack) {
-        if (stack.isEmpty()) return null;
-
-        if (stack.getItem() instanceof net.minecraft.world.item.ArmorItem armorItem) {
-            return armorItem.getEquipmentSlot(stack);
-        } else if (stack.getItem() instanceof net.minecraft.world.item.ShieldItem) {
-            return EquipmentSlot.OFFHAND;
-        } else if (isWeapon(stack)) {
-            return EquipmentSlot.MAINHAND;
-        }
-
-        return EquipmentSlot.MAINHAND;
-    }
-
-    public boolean hasFullArmor() {
-        return !peasant.getItemBySlot(EquipmentSlot.HEAD).isEmpty() &&
-                !peasant.getItemBySlot(EquipmentSlot.CHEST).isEmpty() &&
-                !peasant.getItemBySlot(EquipmentSlot.LEGS).isEmpty() &&
-                !peasant.getItemBySlot(EquipmentSlot.FEET).isEmpty();
-    }
-
-    public List<ItemStack> getAllEquippedItems() {
-        return Arrays.asList(
-                peasant.getItemBySlot(EquipmentSlot.MAINHAND),
-                peasant.getItemBySlot(EquipmentSlot.OFFHAND),
-                peasant.getItemBySlot(EquipmentSlot.HEAD),
-                peasant.getItemBySlot(EquipmentSlot.CHEST),
-                peasant.getItemBySlot(EquipmentSlot.LEGS),
-                peasant.getItemBySlot(EquipmentSlot.FEET)
-        );
-    }
-
-    public ItemStack unequipItem(EquipmentSlot slot) {
-        ItemStack item = peasant.getItemBySlot(slot);
-        if (!item.isEmpty()) {
-            peasant.setItemSlot(slot, ItemStack.EMPTY);
-            if (slot == EquipmentSlot.MAINHAND) {
-                peasant.getEntityData().set(peasant.getMainHandItemAccessor(), ItemStack.EMPTY);
-            }
-            return item;
-        }
-        return ItemStack.EMPTY;
-    }
-
-    public Iterable<ItemStack> getHandSlots() {
-        return Arrays.asList(
-                peasant.getItemBySlot(EquipmentSlot.MAINHAND),
-                peasant.getItemBySlot(EquipmentSlot.OFFHAND)
-        );
     }
 
 
