@@ -1,0 +1,427 @@
+====================================================================
+ NPCs, Jobs, Crafting & Trading - Reference
+====================================================================
+
+This file documents the peasant/NPC job system: how jobs are assigned,
+what each job produces, and what each job buys/sells. It reflects the
+actual behavior implemented in code, not a design target - if a job
+says "no crafting", that's because no crafting logic exists for it
+yet, not because one was intentionally left out.
+
+Source root:
+    src/main/java/net/darkflameproduction/agotmod/entity/custom/npc/
+        goals/<job>/...      - the AI goals that do the actual work
+        system/<job>/...     - state machines + collection/deposit logic
+    src/main/java/net/darkflameproduction/agotmod/block/ModBLocks.java
+        - all "<JOB>_BARREL" job block definitions
+    src/main/java/net/darkflameproduction/agotmod/util/ItemPricing.java
+        - the shared buy/sell price list used by every trading job
+
+
+--------------------------------------------------------------------
+ 1. HOW A PEASANT GETS A JOB
+--------------------------------------------------------------------
+
+There is no player-driven job assignment UI. Job assignment is fully
+automatic, handled by the town hall:
+
+  - TownHallBlockEntity.assignJobsToUnemployed() periodically scans
+    for unoccupied "<JOB>_BARREL" blocks within range of the town
+    hall (getJobTypeFromBlock reads the block type to know which job
+    it grants).
+  - The nearest free job block is handed to the closest unemployed
+    ADULT peasant in the town's jobless queue (assignJobToNPC calls
+    peasant.setJobType(...) and peasant.setJobBlockPos(...)).
+  - Children can never hold a job - Peasant_Entity short-circuits
+    hasJob()/getJobType()/setJobType() for child peasants.
+  - On assignment, JobSystem.giveJobEquipment() hands out starting
+    tools: Farmer -> iron hoe, Miner -> iron pickaxe + 32 torches,
+    Lumberjack/Carpenter -> iron axe. Other jobs get no starting gear.
+  - Culture (Culture.java / CultureSystem.java - visual appearance
+    and name generation) is completely independent of job assignment.
+    A peasant's house/culture never influences which job it can get.
+  - Right-clicking a peasant opens a dialogue/trading GUI keyed by
+    its current job type - this is where players buy/sell (see
+    section 2), not a way to assign or change jobs.
+
+
+--------------------------------------------------------------------
+ 2. THE SHARED TRADING/ECONOMY SYSTEM
+--------------------------------------------------------------------
+
+Grocer, Butcher, Tanner, Tailor, Blacksmith, Carpenter and Trader all
+work the same way under the hood: none of them hold their own private
+shop stock. Instead they expose the TOWN HALL'S shared item inventory
+(TownHallBlockEntity.townInventory) to the player through a per-job
+GUI. What each job is allowed to buy/sell, and at what price, is
+defined centrally in util/ItemPricing.java:
+
+  - ItemPricing.ITEMS is a map of item -> (base price, job(s) that
+    can trade it). Some items are shared between jobs (e.g. cotton
+    is both a Grocer and a Tailor item).
+  - Player BUYS from the NPC: cost = base price for the six normal
+    shop jobs. For the Trader, cost = ceil(base price x 1.25) - a
+    25% markup.
+  - Player SELLS to the NPC: payout = base price / 2 for the six
+    normal shop jobs. For the Trader, payout = ceil(base price x
+    0.75) - noticeably better than the 50% every other shop pays.
+  - The Trader's catalog is the UNION of every other shop job's
+    catalog (isTraderItem() = Grocer or Butcher or Tanner or Tailor
+    or Blacksmith or Carpenter). A Trader will buy or sell anything
+    any specialist shop would, just at Trader prices.
+
+In short: specialist shops are cheaper to sell to and cheaper to buy
+from than the Trader, but the Trader is a one-stop shop for
+everything at a worse (but still convenient) rate.
+
+
+--------------------------------------------------------------------
+ 3. PRODUCTION JOBS (gather or craft raw materials into goods)
+--------------------------------------------------------------------
+
+Each of these jobs runs on a daily cycle: collect materials from the
+town inventory in the morning (if it needs any), work throughout the
+day, then deposit whatever it made back into the town inventory once
+a day so a shop job can sell it.
+
+FARMER
+  Job block:  agotmod:farmer_barrel
+  Collects:   nothing - grows its own seed stock.
+  Process:    NEEDS_FARM_SETUP -> PLANTING_CROPS -> HARVESTING_CROPS
+              -> PATROLLING. Scans a 37x37 area around its barrel for
+              farmland, plants whatever crop/seed it already holds,
+              and continuously harvests + replants grown crops. No
+              fixed input->output ratio - it just farms whatever seed
+              type it's carrying.
+  Deposits:   every crop and seed it holds once per day - wheat, and
+              all AGoT grains/vegetables/berries and their seeds
+              (pumpkin, melon, beetroot, carrot, potato, etc).
+  Trades:     none directly - the Grocer sells what the Farmer grows.
+
+MINER
+  Job block:  agotmod:miner_barrel
+  Collects:   nothing.
+  Process:    doesn't mine the world directly - every 2 seconds it
+              rolls for one item while stood at its barrel. There's
+              no fixed loot table any more: on first roll it takes a
+              one-time, EXACT census of every recognized ore/stone
+              block in every loaded chunk within a 5-chunk radius of
+              the job block (unloaded/ungenerated chunks are skipped,
+              never force-loaded), using each chunk section's block
+              palette for an exact count rather than a sample.
+              The census splits into two families - plain rock
+              (cobblestone/cobbled_deepslate/gravel) vs. ore
+              (everything else: coal, every metal/gem ore, the
+              diamond group) - and rolling happens in two steps:
+                1. A flat 1-in-20 chance decides whether this roll is
+                   even ALLOWED to be an ore at all, regardless of how
+                   ore-rich the area is (unless only one family exists
+                   nearby at all, in which case that's the only thing
+                   it can produce, gate or no gate). This keeps ore
+                   feeling special even sitting on a dense vein,
+                   instead of flooding the output with ore.
+                2. Only once that gate is passed does the real census
+                   decide WHICH ore: 50 iron ore blocks vs. 1 gold ore
+                   block makes iron 50x more likely than gold that
+                   roll, and a type with zero blocks nearby can never
+                   come up. The same weighting applies within the rock
+                   family too (e.g. mostly-deepslate terrain yields
+                   mostly cobbled_deepslate).
+              If the census finds nothing minable at all, that roll
+              produces nothing.
+                Recognized blocks -> yielded item (normal + deepslate
+                variants of the same ore count together):
+                  stone -> cobblestone, deepslate -> cobbled_deepslate,
+                  gravel -> gravel, coal_ore -> coal, iron_ore ->
+                  raw_iron, copper_ore -> raw_copper, gold_ore ->
+                  raw_gold, lapis_ore -> lapis_lazuli, tin_ore ->
+                  raw_tin, silver_ore -> raw_silver, and all 18 other
+                  AGoT gemstone ores (amber, amethyst, bloodstone,
+                  carnelian, chalcedony, garnet, jade, jasper,
+                  malachite, moonstone, onyx, opal, ruby, sapphire,
+                  tigers_eye, topaz, tourmaline) each to their
+                  matching gem item.
+              Diamonds are a special case: there's only one physical
+              diamond ore block in the mod (no separate block per
+              colour), and its own loot table randomly drops ONE of
+              yellow_diamond/transparent_diamond/black_diamond per
+              break (vanilla's own weighted loot-pool selection - see
+              ModBlockLootTables.diamondsOreDrop). The miner's census
+              buckets diamonds_ore/diamonds_deepslate_ore under one
+              shared "diamond group" weight matching the block's real
+              count, then rolls which of the 3 colours to actually
+              give at the moment it spawns the item - so the 3 colours
+              come out roughly equally often, weighted overall by how
+              much diamond ore is really nearby, never diverging from
+              what's really mineable there.
+              The census is cached for the job block's lifetime (it
+              only re-scans if reassigned to a different barrel) -
+              exactly like the Quarry's chunk scan, just over a wider
+              area and covering ores as well as stone.
+  Deposits:   everything it's produced, once per day.
+  Trades:     none directly - ore/ingots are sold by the Blacksmith
+              once smelted.
+
+QUARRY
+  Job block:  agotmod:quarry_barrel
+  Collects:   nothing.
+  Process:    stationary, like the Miner - every 2 seconds it rolls
+              for one item while stood at its barrel. Like the
+              Miner, there's no fixed loot table: on first roll it
+              takes an EXACT census (via chunk-section block palette
+              counts, not a sample) of the 12 vanilla stone types
+              below within the job block's own chunk, and the roll is
+              weighted by that real census - a chunk with far more
+              granite than diorite yields granite far more often, not
+              a flat per-type chance. A quarry on a chunk with only a
+              couple of those types present will only ever produce
+              those types; if the census finds none of them, it
+              produces nothing that cycle.
+                stone, cobblestone, deepslate, cobbled_deepslate,
+                diorite, andesite, granite, calcite, blackstone,
+                basalt, sandstone, red_sandstone
+              Once the census picks WHICH type got mined, stone and
+              deepslate get one extra step: 2/3 of the time they come
+              out as their cobbled form (stone -> cobblestone,
+              deepslate -> cobbled_deepslate) and 1/3 of the time stay
+              uncobbled, matching how hand-mining normally turns stone
+              into cobblestone. No other type has a cobbled
+              counterpart, so everything else always yields itself.
+              The census is cached for the job block's lifetime (it
+              only re-scans if reassigned to a different barrel) -
+              same principle as the Miner's radius scan, just over a
+              single chunk and limited to stone rather than ores.
+  Deposits:   everything it's produced, once per day.
+  Trades:     none directly - nothing currently buys raw stone from
+              town storage (no stonemason/stone-shop job exists yet).
+
+SMELTER
+  Job block:  agotmod:smelter_barrel
+  Collects:   up to 15 coal/charcoal from the town inventory each
+              morning (this sets its fuel budget for the day).
+  Recipe:     1 coal/charcoal smelts up to 8 ore -> 1:1 into ingots.
+              Ore is prioritized gold > silver > iron > copper > tin
+              when more than one type is available. Max ore processed
+              per day = coal collected x 8.
+                raw_gold   -> gold_ingot
+                raw_silver -> silver_ingot (agotmod)
+                raw_iron   -> iron_ingot
+                raw_copper -> copper_ingot
+                raw_tin    -> tin_ingot (agotmod)
+  Deposits:   finished ingots plus any unused coal/charcoal/raw ore,
+              once per day.
+  Trades:     none directly - the Blacksmith sells the ingots.
+
+LUMBERJACK
+  Job block:  agotmod:lumberjack_barrel
+  Collects:   nothing - chops real trees in the world.
+  Process:    GOING_TO_JOB_BLOCK -> IDLING -> GOING_TO_TREE ->
+              CHOPPING -> COLLECTING -> REPLANTING. Searches a
+              96-block radius for a tree, flood-fills its connected
+              logs and leaves, chops the whole tree, collects the
+              drops, then plants the matching sapling on the stump
+              if there's dirt/grass to plant into.
+  Deposits:   logs and whatever the tree dropped (saplings, sticks,
+              apples), once per day (evening).
+  Trades:     none directly - the Carpenter turns logs into goods,
+              and also sells raw logs itself.
+
+CHARCOAL BURNER
+  Job block:  agotmod:charcoal_burner_barrel
+  Collects:   up to 128 logs per day from the town inventory (any
+              log/wood/stem/hyphae block item).
+  Recipe:     1 log burns (every 2 seconds) into:
+                90% chance -> 1 charcoal
+                10% chance -> 1 charred_log (agotmod)
+              Limited to the logs collected that morning.
+  Deposits:   charcoal, charred_log, and any leftover unburned logs,
+              once per day.
+  Trades:     none directly - the Smelter consumes the charcoal.
+
+CARPENTER
+  Job block:  agotmod:carpenter_barrel
+  Collects:   up to 64 logs + 64 nails (agotmod:nail) + 64 sticks per
+              day from the town inventory.
+  Recipes:    (one craft per cycle; wood type is auto-detected from
+              whatever's in its inventory)
+                1 log                          -> 4 planks
+              then, keeping at least 4 planks in reserve at all times
+              (never lets crafted-goods output outpace planks made):
+                2 planks + 2 sticks + 1 nail    -> 1 stool
+                1 stool  + 2 sticks + 1 nail    -> 1 chair
+                1 chair  + 2 sticks + 1 nail    -> 1 arm_chair
+                3 planks + 2 sticks + 1 nail    -> 1 table
+                6 planks                        -> 4 stairs
+                4 planks + 2 sticks             -> 3 fences
+                2 planks + 4 sticks             -> 1 fence_gate
+                6 planks                        -> 6 walls
+                3 planks                        -> 6 slabs
+                6 planks                        -> 3 doors
+                6 planks                        -> 2 trapdoors
+  Deposits:   every wood product made (plus any leftover saplings),
+              once per day.
+  Trades:     sells planks, stairs, slabs, fences, gates, walls,
+              doors, trapdoors, signs, saplings, logs, stools,
+              chairs, arm_chairs, tables, nails and sticks - across
+              every wood type in the mod (~70 AGoT wood types).
+
+TANNER
+  Job block:  agotmod:tanner_barrel
+  Collects:   up to 64 each of rabbit_hide, leather and string from
+              the town inventory each morning.
+  Recipes:    (one craft per cycle, tried in this order)
+                4 rabbit_hide          -> 1 leather
+                1 leather + 1 string   -> 1 bundle
+                1 leather (only once out of rabbit_hide)
+                                       -> 1 boiled_leather (agotmod)
+  Deposits:   leather, rabbit_hide, string, bundle and boiled_leather,
+              once per day.
+  Trades:     sells leather, rabbit_hide, bundle, boiled_leather.
+
+TAILOR
+  Job block:  agotmod:tailor_barrel
+  Collects:   only flowers from the town inventory each morning (up
+              to 64/day, ~70 flower types including all AGoT
+              flowers). Cotton, string, wool and leather used below
+              are NOT auto-collected - the peasant must already be
+              carrying them.
+  Recipes:    (one craft per cycle, tried in this order)
+                1 cotton (agotmod)            -> 1 string
+                4 string                      -> 1 white_wool
+                2 white_wool                  -> 1 cloth (agotmod)
+                1 flower                      -> 1 matching dye
+                  (hardcoded table covering ~70 flowers, e.g. rose ->
+                  red_dye, blue_rose -> blue_dye, etc.)
+              once per day, additionally:
+                5 leather  -> 1 leather_helmet
+                8 leather  -> 1 leather_chestplate
+                7 leather  -> 1 leather_leggings
+                4 leather  -> 1 leather_boots
+              (one random armor piece is chosen and crafted per day,
+              cost taken from the list above)
+  Deposits:   string, white_wool, cloth, fur, any leather armor made,
+              and all 16 dye colors, once per day.
+  Trades:     sells string, wool, cloth, fur, leather armor, dyes,
+              and raw flowers.
+
+ANIMAL HERDERS (Cattle Herder / Chicken Breeder / Pig Breeder /
+Sheep Herder)
+  Job blocks: agotmod:cattle_herder_barrel, chicken_breeder_barrel,
+              pig_breeder_barrel, sheep_herder_barrel
+  Collects:   one breeding item per job, up to 64 in stock, requested
+              from the town inventory as needed:
+                Cattle Herder    -> wheat
+                Chicken Breeder  -> wheat_seeds
+                Pig Breeder      -> carrot
+                Sheep Herder     -> wheat
+  Process:    patrols a pen (5-block radius/height around its
+              barrel), breeds one adult pair per day when it holds a
+              breeding item (consumes 1 item per breeding), and culls
+              extra adults past a cap of 10 to keep the pen from
+              overflowing. The Sheep Herder additionally shears any
+              sheep that's ready. Drops from natural deaths/shearing
+              inside the pen are picked up automatically.
+  "Crafts":   nothing manufactured - just collects what the animals
+              naturally produce:
+                Cattle  -> leather, beef
+                Chicken -> feather, chicken, egg
+                Pig     -> porkchop
+                Sheep   -> mutton, wool (all 16 colors)
+  Deposits:   the above loot (never the breeding item itself), once
+              per day.
+  Trades:     none directly - the Butcher/Tanner/Tailor/Grocer sell
+              this produce onward.
+
+
+--------------------------------------------------------------------
+ 4. PURE SHOP JOBS (no collection or crafting - trade only)
+--------------------------------------------------------------------
+
+These jobs never produce anything themselves. They just stand at
+their barrel and let players buy/sell from the town's shared
+inventory (see section 2), filtered to their own item category.
+
+GROCER
+  Job block:  agotmod:grocer_barrel
+  Sells:      everything the Farmer grows - wheat, eggs, and every
+              AGoT vegetable/grain/legume/berry plus their seeds -
+              and cotton (shared with the Tailor). Base prices range
+              roughly 1-46 coins depending on the item.
+
+BUTCHER
+  Job block:  agotmod:butcher_barrel
+  Sells:      raw meats only - beef, porkchop, chicken, mutton,
+              rabbit, plus ~25 AGoT raw meat variants (sausage, duck,
+              goose, venison, bear, mammoth, etc). There is currently
+              no raw-meat-to-cooked-meat processing, and no
+              hide-to-leather processing on this job - it's a pure
+              shop for whatever raw meat ends up in town storage.
+
+BLACKSMITH
+  Job block:  agotmod:blacksmith_barrel
+  Sells:      the largest catalog in the game - ores, ingots,
+              nuggets, tools, weapons, armor, upgrade kits and
+              smithing scrolls. Nothing is actively produced by this
+              job; it only resells whatever ends up in town storage
+              (e.g. ingots from the Smelter).
+
+TRADER
+  Job block:  agotmod:trader_barrel
+  Sells/buys: the union of every other shop's catalog (Grocer +
+              Butcher + Tanner + Tailor + Blacksmith + Carpenter), at
+              Trader prices (see section 2: 125% to buy from, 75%
+              paid when selling to it - worse to buy from but better
+              to sell to than a specialist shop).
+
+GUARD
+  Job block:  agotmod:guard_barrel
+  No trading, no crafting. Assigned a day/evening/night patrol shift,
+  stays within its patrol radius, and fights back against monsters
+  and any player who attacks it first. Purely a combat/labor job.
+
+
+--------------------------------------------------------------------
+ 5. QUICK REFERENCE TABLE
+--------------------------------------------------------------------
+
+  Job              Job Block                    Produces?   Trades?
+  ---------------  ---------------------------  ----------  -------
+  Farmer           farmer_barrel                yes         no
+  Miner            miner_barrel                 yes         no
+  Quarry           quarry_barrel                yes         no
+  Smelter          smelter_barrel               yes         no
+  Lumberjack       lumberjack_barrel            yes         no
+  Charcoal Burner  charcoal_burner_barrel       yes         no
+  Carpenter        carpenter_barrel             yes         yes
+  Tanner           tanner_barrel                yes         yes
+  Tailor           tailor_barrel                yes         yes
+  Cattle Herder    cattle_herder_barrel         yes         no
+  Chicken Breeder  chicken_breeder_barrel       yes         no
+  Pig Breeder      pig_breeder_barrel           yes         no
+  Sheep Herder     sheep_herder_barrel          yes         no
+  Grocer           grocer_barrel                no          yes
+  Butcher          butcher_barrel               no          yes
+  Blacksmith       blacksmith_barrel            no          yes
+  Trader           trader_barrel                no          yes
+  Guard            guard_barrel                 no          no
+
+
+--------------------------------------------------------------------
+ 6. NOTES FOR FUTURE WORK
+--------------------------------------------------------------------
+
+- None of the "<JOB>_BARREL" blocks have a crafting recipe in
+  ModRecipeProvider.java - there is currently no in-game way to craft
+  a job block; they must be placed via creative mode, another datagen
+  path, or structure loot.
+- CarpenterSystem.doWorkCycle() implements a second, batch-style
+  version of the Carpenter's recipe set (and also auto-sells half of
+  all planks made) but is DEAD CODE - it's never called from
+  anywhere. The live Carpenter logic is entirely in CarpenterGoal.
+  If you're touching Carpenter behavior, edit CarpenterGoal, not
+  CarpenterSystem.doWorkCycle().
+- Butcher, Blacksmith, Grocer and Trader have no dedicated "Goal"
+  class at all - they're pure shop-inventory lookups. If you want
+  butchers to actually cook meat, or blacksmiths to actually forge
+  gear, that logic doesn't exist yet and would need to be added from
+  scratch (there's no partial implementation to extend).

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "agotmod:block/chair/chair3yew"
+  }
+}
