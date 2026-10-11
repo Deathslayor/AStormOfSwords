@@ -40,6 +40,9 @@ public class DataGenerators {
         generator.addProvider(event.includeServer(), new ModPoiTypeTagsProvider(packOutput, lookupProvider, existingFileHelper));
         generator.addProvider(event.includeServer(), new ModBannerPatternProvider(packOutput, lookupProvider, existingFileHelper));
 
+        // Epic Fight armour stats (weight, stun armour) for the 3D armour sets
+        generator.addProvider(event.includeServer(), new ModEpicFightArmorProvider(packOutput));
+
         // World Generation (includes banner patterns now)
         ModWorldGenProvider worldGenProvider = generator.addProvider(event.includeServer(), new ModWorldGenProvider(packOutput, lookupProvider));
 

@@ -40,7 +40,11 @@ public class TownHallScreen extends Screen {
     private static final int BORDER_HEIGHT       = 6;
     private static final int CORNER_SIZE         = 12;
 
-    private static final int ROW_HEIGHT = 14;
+    private static final int ROW_HEIGHT = 18;
+    private static final int ICON_SIZE  = 16;
+
+    // Inventory list is drawn scaled down to fit more items
+    private static final float INV_SCALE   = 2f / 3f;
 
     private final BlockPos townHallPos;
 
@@ -66,11 +70,22 @@ public class TownHallScreen extends Screen {
     // Inventory data
     private Map<String, Long> townInventory = new LinkedHashMap<>();
 
-    // Tab state — 0 = Town Overview, 1 = Inventory
-    private int activeTab = 0;
+    // Citizens (name + job) reported by the town hall
+    private List<net.darkflameproduction.agotmod.network.TownHallDataPacket.CitizenEntry> citizens = new ArrayList<>();
 
-    // Scroll state for inventory tab
-    private int inventoryScrollOffset = 0;
+    // Tab state
+    private static final int TAB_OVERVIEW   = 0;
+    private static final int TAB_CULTURE    = 1;
+    private static final int TAB_FINANCES   = 2;
+    private static final int TAB_EMPLOYMENT = 3;
+    private static final int TAB_INVENTORY  = 4;
+    private static final int TAB_JOBS       = 5;
+    private static final int TAB_CITIZENS   = 6;
+    private static final String[] TAB_NAMES = { "Overview", "Culture", "Finances", "Employment", "Inventory", "Jobs", "Citizens" };
+    private int activeTab = TAB_OVERVIEW;
+
+    // Scroll state for the list tabs (inventory, jobs, citizens)
+    private int listScrollOffset = 0;
 
     // Rename UI state
     private boolean renameModeActive = false;
@@ -78,8 +93,7 @@ public class TownHallScreen extends Screen {
     private net.minecraft.client.gui.components.Button  confirmRenameButton = null;
     private net.minecraft.client.gui.components.Button  renameButton        = null;
     private net.minecraft.client.gui.components.Button  claimButton         = null;
-    private net.minecraft.client.gui.components.Button  tabOverviewButton   = null;
-    private net.minecraft.client.gui.components.Button  tabInventoryButton  = null;
+    private final List<net.minecraft.client.gui.components.Button> tabButtons = new ArrayList<>();
 
     private static TownHallScreen currentInstance = null;
 
@@ -96,17 +110,16 @@ public class TownHallScreen extends Screen {
     private int getPanelX()       { return (width  - getPanelWidth())  / 2; }
     private int getPanelY()       { return (height - getPanelHeight()) / 2; }
 
-    private int getLeftColX()      { return getPanelX() + 20; }
-    private int getRightColX()     { return getPanelX() + getPanelWidth() / 2 + 10; }
-    private int getColWidth()      { return getPanelWidth() / 2 - 30; }
+    private int getContentX()      { return getPanelX() + 20; }
+    private int getContentWidth()  { return getPanelWidth() - 40; }
     private int getContentStartY() { return getPanelY() + 80; }
 
     // Inventory panel inner bounds
     private int getInvPanelX()     { return getPanelX() + 20; }
     private int getInvPanelY()     { return getContentStartY(); }
     private int getInvPanelW()     { return getPanelWidth() - 40; }
-    private int getInvPanelH()     { return getPanelHeight() - 130; }
-    private int getVisibleRows()   { return getInvPanelH() / ROW_HEIGHT; }
+    private int getInvPanelH()     { return getPanelHeight() - 100; }
+    private int getVisibleRows()   { return Math.max(1, (int) (getInvPanelH() / (ROW_HEIGHT * INV_SCALE))); }
 
     // ===== INIT =====
 
@@ -123,22 +136,22 @@ public class TownHallScreen extends Screen {
         int ph = getPanelHeight();
 
         // Ã¢â€â‚¬Ã¢â€â‚¬ Tab buttons Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+        int tabCount   = TAB_NAMES.length;
         int tabY       = py + 60;
-        int tabW       = 100;
         int tabGap     = 4;
-        int tabsStartX = px + (pw - (tabW * 2 + tabGap)) / 2;
+        int tabW       = Math.min(100, (getContentWidth() - tabGap * (tabCount - 1)) / tabCount);
+        int tabsStartX = px + (pw - (tabW * tabCount + tabGap * (tabCount - 1))) / 2;
 
-        tabOverviewButton = net.minecraft.client.gui.components.Button.builder(
-                Component.literal("Overview"),
-                btn -> switchTab(0)
-        ).pos(tabsStartX, tabY).size(tabW, 16).build();
-        addRenderableWidget(tabOverviewButton);
-
-        tabInventoryButton = net.minecraft.client.gui.components.Button.builder(
-                Component.literal("Inventory"),
-                btn -> switchTab(1)
-        ).pos(tabsStartX + tabW + tabGap, tabY).size(tabW, 16).build();
-        addRenderableWidget(tabInventoryButton);
+        tabButtons.clear();
+        for (int i = 0; i < tabCount; i++) {
+            final int tab = i;
+            net.minecraft.client.gui.components.Button tabButton = net.minecraft.client.gui.components.Button.builder(
+                    Component.literal(TAB_NAMES[i]),
+                    btn -> switchTab(tab)
+            ).pos(tabsStartX + i * (tabW + tabGap), tabY).size(tabW, 16).build();
+            tabButtons.add(tabButton);
+            addRenderableWidget(tabButton);
+        }
 
         // Ã¢â€â‚¬Ã¢â€â‚¬ Rename button Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
         int renameBtnX = px + pw - 90;
@@ -195,23 +208,24 @@ public class TownHallScreen extends Screen {
                 btn -> net.minecraft.client.Minecraft.getInstance().setScreen(
                         new CultureSelectionScreen(townHallPos, this))
         ).pos(cultureBtnX, cultureBtnY).size(cultureBtnWidth, 20).build();
-        chooseCultureButton.visible = isClaimed && townCulture == Culture.NONE && activeTab == 0;
         addRenderableWidget(chooseCultureButton);
 
-        updateTabButtonStates();
+        refreshButtonStates();
     }
 
     private void switchTab(int tab) {
         activeTab = tab;
-        inventoryScrollOffset = 0;
-        if (claimButton       != null) claimButton.visible        = !isClaimed && activeTab == 0;
-        if (chooseCultureButton != null) chooseCultureButton.visible = isClaimed && townCulture == Culture.NONE && activeTab == 0;
-        updateTabButtonStates();
+        listScrollOffset = 0;
+        refreshButtonStates();
     }
-    private void updateTabButtonStates() {
+
+    private void refreshButtonStates() {
+        if (claimButton         != null) claimButton.visible         = !isClaimed && activeTab == TAB_OVERVIEW;
+        if (chooseCultureButton != null) chooseCultureButton.visible = isClaimed && townCulture == Culture.NONE && activeTab == TAB_CULTURE;
         // Visually distinguish active tab — active tab is not active (looks pressed)
-        if (tabOverviewButton  != null) tabOverviewButton.active  = (activeTab != 0);
-        if (tabInventoryButton != null) tabInventoryButton.active = (activeTab != 1);
+        for (int i = 0; i < tabButtons.size(); i++) {
+            tabButtons.get(i).active = (activeTab != i);
+        }
     }
 
     // ===== RENAME =====
@@ -272,11 +286,7 @@ public class TownHallScreen extends Screen {
         } catch (IllegalArgumentException e) {
             currentInstance.townCulture = Culture.NONE;
         }
-        if (currentInstance.claimButton != null)
-            currentInstance.claimButton.visible = !isClaimed && currentInstance.activeTab == 0;
-        if (currentInstance.chooseCultureButton != null)
-            currentInstance.chooseCultureButton.visible =
-                    isClaimed && currentInstance.townCulture == Culture.NONE && currentInstance.activeTab == 0;
+        currentInstance.refreshButtonStates();
         if (!currentInstance.renameModeActive && currentInstance.townNameInput != null)
             currentInstance.townNameInput.setValue(townName);
     }
@@ -302,16 +312,29 @@ public class TownHallScreen extends Screen {
                 ));
     }
 
+    public static void updateCitizens(BlockPos packetPos,
+                                      List<net.darkflameproduction.agotmod.network.TownHallDataPacket.CitizenEntry> citizens) {
+        if (currentInstance == null) return;
+        if (!packetPos.equals(currentInstance.townHallPos)) return;
+        currentInstance.citizens = new ArrayList<>(citizens);
+    }
+
     public static TownHallScreen getCurrentInstance() { return currentInstance; }
 
     // ===== SCROLL =====
 
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
-        if (activeTab == 1) {
-            int maxScroll = Math.max(0, townInventory.size() - getVisibleRows());
-            inventoryScrollOffset = (int) Math.max(0, Math.min(maxScroll,
-                    inventoryScrollOffset - scrollY));
+        int listSize = switch (activeTab) {
+            case TAB_INVENTORY -> townInventory.size();
+            case TAB_JOBS      -> getJobCounts().size();
+            case TAB_CITIZENS  -> citizens.size();
+            default            -> -1;
+        };
+        if (listSize >= 0) {
+            int maxScroll = Math.max(0, listSize - getVisibleRows());
+            listScrollOffset = (int) Math.max(0, Math.min(maxScroll,
+                    listScrollOffset - scrollY));
             return true;
         }
         return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
@@ -341,12 +364,17 @@ public class TownHallScreen extends Screen {
         drawHeader(g, px, py, pw);
         drawDivider(g, px, py, pw, ph);
 
-        if (activeTab == 0) {
-            drawLeftColumn(g);
-            drawRightColumn(g);
-            drawFooter(g, px, py, pw, ph);
-        } else {
-            drawInventoryTab(g, px, py, pw, ph);
+        switch (activeTab) {
+            case TAB_OVERVIEW -> {
+                drawOverviewTab(g);
+                drawFooter(g, px, py, pw, ph);
+            }
+            case TAB_CULTURE    -> drawCultureTab(g);
+            case TAB_FINANCES   -> drawFinancesTab(g);
+            case TAB_EMPLOYMENT -> drawEmploymentTab(g);
+            case TAB_INVENTORY  -> drawInventoryTab(g);
+            case TAB_JOBS       -> drawJobsTab(g);
+            case TAB_CITIZENS   -> drawCitizensTab(g);
         }
 
         super.render(g, mouseX, mouseY, partialTick);
@@ -378,12 +406,11 @@ public class TownHallScreen extends Screen {
 
     // ===== OVERVIEW TAB =====
 
-    private void drawLeftColumn(GuiGraphics g) {
-        int x = getLeftColX();
+    private void drawOverviewTab(GuiGraphics g) {
+        int x = getContentX();
         int y = getContentStartY();
-        int w = getColWidth();
+        int w = getContentWidth();
 
-        // Ã¢â€â‚¬Ã¢â€â‚¬ Town Info Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
         drawSectionHeader(g, "Town Info", x, y, w, COLOR_HEADER);
         y += 20;
 
@@ -393,24 +420,39 @@ public class TownHallScreen extends Screen {
             drawLabelValue(g, "Status", "Unclaimed", x, y, COLOR_RED);
         }
         y += 16;
+        drawLabelValue(g, "Size",     getTownSizeCategory(),        x, y, COLOR_GOLD);  y += 16;
         drawLabelValue(g, "Radius",   currentRadius + " blocks",    x, y, COLOR_GREEN); y += 16;
         drawLabelValue(g, "Beds",     String.valueOf(bedCount),      x, y, COLOR_GREEN); y += 16;
-        drawLabelValue(g, "Citizens", String.valueOf(citizenCount),  x, y, COLOR_GREEN); y += 20;
+        drawLabelValue(g, "Citizens", String.valueOf(citizenCount),  x, y, COLOR_GREEN);
+    }
 
-        // Ã¢â€â‚¬Ã¢â€â‚¬ Culture Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+    // ===== CULTURE TAB =====
+
+    private void drawCultureTab(GuiGraphics g) {
+        int x = getContentX();
+        int y = getContentStartY();
+        int w = getContentWidth();
+
         drawSectionHeader(g, "Culture", x, y, w, COLOR_HEADER);
         y += 20;
 
         if (townCulture != Culture.NONE) {
             drawLabelValue(g, "Culture", townCulture.displayName,        x, y, COLOR_PURPLE); y += 16;
-            drawLabelValue(g, "Group",   townCulture.group.displayName,  x, y, COLOR_BLUE);   y += 20;
+            drawLabelValue(g, "Group",   townCulture.group.displayName,  x, y, COLOR_BLUE);
         } else if (isClaimed) {
-            drawLabelValue(g, "Culture", "Not yet chosen", x, y, COLOR_ORANGE); y += 20;
+            drawLabelValue(g, "Culture", "Not yet chosen", x, y, COLOR_ORANGE);
         } else {
-            drawLabelValue(g, "Culture", "Claim town first", x, y, COLOR_GRAY); y += 20;
+            drawLabelValue(g, "Culture", "Claim town first", x, y, COLOR_GRAY);
         }
+    }
 
-        // Ã¢â€â‚¬Ã¢â€â‚¬ Finances Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+    // ===== FINANCES TAB =====
+
+    private void drawFinancesTab(GuiGraphics g) {
+        int x = getContentX();
+        int y = getContentStartY();
+        int w = getContentWidth();
+
         drawSectionHeader(g, "Finances", x, y, w, COLOR_HEADER);
         y += 20;
 
@@ -418,12 +460,13 @@ public class TownHallScreen extends Screen {
         drawLabelValue(g, "Treasury",     formatCurrency(townIncome),  x, y, COLOR_GOLD);
     }
 
-    private void drawRightColumn(GuiGraphics g) {
-        int x = getRightColX();
-        int y = getContentStartY();
-        int w = getColWidth();
+    // ===== EMPLOYMENT TAB =====
 
-        // Ã¢â€â‚¬Ã¢â€â‚¬ Employment Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+    private void drawEmploymentTab(GuiGraphics g) {
+        int x = getContentX();
+        int y = getContentStartY();
+        int w = getContentWidth();
+
         drawSectionHeader(g, "Employment", x, y, w, COLOR_PURPLE);
         y += 20;
 
@@ -462,84 +505,166 @@ public class TownHallScreen extends Screen {
 
     // ===== INVENTORY TAB =====
 
-    private void drawInventoryTab(GuiGraphics g, int px, int py, int pw, int ph) {
+    private void drawInventoryTab(GuiGraphics g) {
         int ix = getInvPanelX();
         int iy = getInvPanelY();
         int iw = getInvPanelW();
         int ih = getInvPanelH();
 
-        // Section header
-        drawSectionHeader(g, "Town Stores", ix, iy, iw, COLOR_HEADER);
-        int headerH = font.lineHeight + 8;
-
         if (townInventory.isEmpty()) {
             String empty = "The town stores are empty.";
             int ew = font.width(empty);
-            g.drawString(font, empty, ix + (iw - ew) / 2, iy + headerH + 20, COLOR_GRAY, false);
+            g.drawString(font, empty, ix + (iw - ew) / 2, iy + 20, COLOR_GRAY, false);
             return;
         }
 
-        // Column headers
-        int listY = iy + headerH + 4;
-        g.drawString(font, "Item",     ix + 4,        listY, COLOR_GRAY, false);
-        g.drawString(font, "Quantity", ix + iw - 70,  listY, COLOR_GRAY, false);
-        listY += font.lineHeight + 4;
-
-        // Light header underline
-        g.fill(ix, listY - 2, ix + iw, listY - 1, 0x40000000);
-
-        // Clipping region — only draw rows within bounds
-        int clipTop    = listY;
-        int clipBottom = iy + ih;
         int visibleRows = getVisibleRows();
+        int totalRows   = townInventory.size();
 
         List<Map.Entry<String, Long>> entries = new ArrayList<>(townInventory.entrySet());
-        int totalRows  = entries.size();
-        int startIndex = inventoryScrollOffset;
+        int startIndex = listScrollOffset;
         int endIndex   = Math.min(startIndex + visibleRows, totalRows);
+
+        // Rows are laid out in unscaled units inside a scaled pose
+        int scaledW = Math.round(iw / INV_SCALE);
+
+        g.pose().pushPose();
+        g.pose().translate(ix, iy, 0);
+        g.pose().scale(INV_SCALE, INV_SCALE, 1f);
 
         for (int i = startIndex; i < endIndex; i++) {
             Map.Entry<String, Long> entry = entries.get(i);
-            int rowY = listY + (i - startIndex) * ROW_HEIGHT;
-
-            if (rowY + ROW_HEIGHT < clipTop || rowY > clipBottom) continue;
+            int rowY = (i - startIndex) * ROW_HEIGHT;
 
             // Alternating row background
             if ((i % 2) == 0) {
-                g.fill(ix, rowY, ix + iw, rowY + ROW_HEIGHT, 0x18000000);
+                g.fill(0, rowY, scaledW, rowY + ROW_HEIGHT, 0x18000000);
+            }
+
+            int textY = rowY + (ROW_HEIGHT - font.lineHeight) / 2 + 1;
+
+            // Item icon on the far left
+            net.minecraft.resources.ResourceLocation loc =
+                    net.minecraft.resources.ResourceLocation.tryParse(entry.getKey());
+            if (loc != null) {
+                net.minecraft.world.item.Item item =
+                        net.minecraft.core.registries.BuiltInRegistries.ITEM.get(loc);
+                if (item != null && item != net.minecraft.world.item.Items.AIR) {
+                    g.renderItem(new net.minecraft.world.item.ItemStack(item),
+                            2, rowY + (ROW_HEIGHT - ICON_SIZE) / 2);
+                }
             }
 
             // Item name — strip namespace, replace underscores, capitalise
             String displayName = formatItemName(entry.getKey());
-            g.drawString(font, displayName, ix + 4, rowY + 2, TEXT_COLOR, false);
+            g.drawString(font, displayName, 2 + ICON_SIZE + 4, textY, TEXT_COLOR, false);
 
             // Quantity right-aligned
-            String qty    = formatQuantity(entry.getValue());
-            int qtyW      = font.width(qty);
-            g.drawString(font, qty, ix + iw - qtyW - 4, rowY + 2, COLOR_GOLD, false);
+            String qty = formatQuantity(entry.getValue());
+            g.drawString(font, qty, scaledW - font.width(qty) - 4, textY, COLOR_GOLD, false);
         }
+
+        g.pose().popPose();
 
         // Scroll indicator on the right edge
         if (totalRows > visibleRows) {
-            int scrollTrackH = ih - headerH - font.lineHeight - 8;
-            int scrollTrackY = iy + headerH + font.lineHeight + 8;
             int scrollTrackX = ix + iw + 4;
 
             // Track
-            g.fill(scrollTrackX, scrollTrackY, scrollTrackX + 3, scrollTrackY + scrollTrackH, 0x40000000);
+            g.fill(scrollTrackX, iy, scrollTrackX + 3, iy + ih, 0x40000000);
 
             // Thumb
-            float thumbRatio   = (float) visibleRows / totalRows;
-            int   thumbH       = Math.max(10, (int)(scrollTrackH * thumbRatio));
-            float scrollRatio  = (float) inventoryScrollOffset / Math.max(1, totalRows - visibleRows);
-            int   thumbY       = scrollTrackY + (int)((scrollTrackH - thumbH) * scrollRatio);
+            float thumbRatio  = (float) visibleRows / totalRows;
+            int   thumbH      = Math.max(10, (int)(ih * thumbRatio));
+            float scrollRatio = (float) listScrollOffset / Math.max(1, totalRows - visibleRows);
+            int   thumbY      = iy + (int)((ih - thumbH) * scrollRatio);
             g.fill(scrollTrackX, thumbY, scrollTrackX + 3, thumbY + thumbH, 0xA0000000);
         }
+    }
 
-        // Item count summary at bottom
-        String summary = totalRows + " item type" + (totalRows != 1 ? "s" : "") + " stored";
-        int sumW = font.width(summary);
-        g.drawString(font, summary, px + (pw - sumW) / 2, py + ph - 38, COLOR_GRAY, false);
+    // ===== JOBS TAB =====
+
+    /** How many citizens have each job, most common first ("Unemployed" for citizens without one). */
+    private List<Map.Entry<String, Integer>> getJobCounts() {
+        Map<String, Integer> counts = new HashMap<>();
+        for (var citizen : citizens) {
+            counts.merge(formatJobName(citizen.jobType()), 1, Integer::sum);
+        }
+        List<Map.Entry<String, Integer>> sorted = new ArrayList<>(counts.entrySet());
+        sorted.sort(Map.Entry.<String, Integer>comparingByValue().reversed().thenComparing(Map.Entry.comparingByKey()));
+        return sorted;
+    }
+
+    private void drawJobsTab(GuiGraphics g) {
+        List<String[]> rows = new ArrayList<>();
+        for (Map.Entry<String, Integer> entry : getJobCounts()) {
+            rows.add(new String[]{ entry.getKey(), String.valueOf(entry.getValue()) });
+        }
+        drawTwoColumnList(g, rows, "No citizens yet.");
+    }
+
+    // ===== CITIZENS TAB =====
+
+    private void drawCitizensTab(GuiGraphics g) {
+        List<String[]> rows = new ArrayList<>();
+        for (var citizen : citizens) {
+            rows.add(new String[]{ citizen.name(), formatJobName(citizen.jobType()) });
+        }
+        drawTwoColumnList(g, rows, "No citizens yet.");
+    }
+
+    /** A scrollable list of rows with text on the left and right, drawn like the inventory list. */
+    private void drawTwoColumnList(GuiGraphics g, List<String[]> rows, String emptyText) {
+        int ix = getInvPanelX();
+        int iy = getInvPanelY();
+        int iw = getInvPanelW();
+        int ih = getInvPanelH();
+
+        if (rows.isEmpty()) {
+            int ew = font.width(emptyText);
+            g.drawString(font, emptyText, ix + (iw - ew) / 2, iy + 20, COLOR_GRAY, false);
+            return;
+        }
+
+        int visibleRows = getVisibleRows();
+        int totalRows   = rows.size();
+        listScrollOffset = Math.max(0, Math.min(listScrollOffset, Math.max(0, totalRows - visibleRows)));
+        int endIndex    = Math.min(listScrollOffset + visibleRows, totalRows);
+        int scaledW     = Math.round(iw / INV_SCALE);
+
+        g.pose().pushPose();
+        g.pose().translate(ix, iy, 0);
+        g.pose().scale(INV_SCALE, INV_SCALE, 1f);
+
+        for (int i = listScrollOffset; i < endIndex; i++) {
+            String[] row = rows.get(i);
+            int rowY  = (i - listScrollOffset) * ROW_HEIGHT;
+            int textY = rowY + (ROW_HEIGHT - font.lineHeight) / 2 + 1;
+
+            if ((i % 2) == 0) {
+                g.fill(0, rowY, scaledW, rowY + ROW_HEIGHT, 0x18000000);
+            }
+            g.drawString(font, row[0], 4, textY, TEXT_COLOR, false);
+            g.drawString(font, row[1], scaledW - font.width(row[1]) - 4, textY, COLOR_GOLD, false);
+        }
+
+        g.pose().popPose();
+
+        // Scroll indicator on the right edge
+        if (totalRows > visibleRows) {
+            int scrollTrackX = ix + iw + 4;
+            g.fill(scrollTrackX, iy, scrollTrackX + 3, iy + ih, 0x40000000);
+            int   thumbH      = Math.max(10, (int)(ih * (float) visibleRows / totalRows));
+            float scrollRatio = (float) listScrollOffset / Math.max(1, totalRows - visibleRows);
+            int   thumbY      = iy + (int)((ih - thumbH) * scrollRatio);
+            g.fill(scrollTrackX, thumbY, scrollTrackX + 3, thumbY + thumbH, 0xA0000000);
+        }
+    }
+
+    /** "cattle_herder" -> "Cattle Herder", "" -> "Unemployed". */
+    private String formatJobName(String jobType) {
+        if (jobType == null || jobType.isEmpty()) return "Unemployed";
+        return formatItemName(jobType);
     }
 
     // ===== FORMAT HELPERS =====
@@ -634,7 +759,7 @@ public class TownHallScreen extends Screen {
         int innerH = height - bh  * 2;
 
         RenderSystem.enableBlend();
-        RenderSystem.setShaderColor(1f, 1f, 1f, 0.92f);
+        RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
 
         int tileSize = 256;
         for (int tx = 0; tx < innerW; tx += tileSize) {

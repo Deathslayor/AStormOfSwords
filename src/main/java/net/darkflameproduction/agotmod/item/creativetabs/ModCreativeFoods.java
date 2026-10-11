@@ -25,6 +25,7 @@ public class ModCreativeFoods {
             () -> CreativeModeTab.builder()
                     .icon(() -> new ItemStack(ModItems.RAW_BACON.get())) // Icon for the creative mode tab
                     .title(Component.translatable("creativetab.agot_tab_foods")) // Title for the creative mode tab
+                    .withTabsBefore(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "agot_tab_animals"))
                     .displayItems((pParameters, pOutput) -> {
 
 

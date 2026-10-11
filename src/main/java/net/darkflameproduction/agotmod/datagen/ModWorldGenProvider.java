@@ -76,6 +76,112 @@ public class ModWorldGenProvider extends DatapackBuiltinEntriesProvider {
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "umber"));
     public static final ResourceKey<BannerPattern> VELARYON = ResourceKey.create(Registries.BANNER_PATTERN,
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "velaryon"));
+    public static final ResourceKey<BannerPattern> BLACKWOOD2 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "blackwood2"));
+    public static final ResourceKey<BannerPattern> BOLTON1 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "bolton1"));
+    public static final ResourceKey<BannerPattern> BOLTON2 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "bolton2"));
+    public static final ResourceKey<BannerPattern> BOOK_STARK = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "book_stark"));
+    public static final ResourceKey<BannerPattern> BURLEY1 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "burley1"));
+    public static final ResourceKey<BannerPattern> CASSEL = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "cassel"));
+    public static final ResourceKey<BannerPattern> CELTIGAR = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "celtigar"));
+    public static final ResourceKey<BannerPattern> CERWYN = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "cerwyn"));
+    public static final ResourceKey<BannerPattern> CONDON = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "condon"));
+    public static final ResourceKey<BannerPattern> DAYNE2 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "dayne2"));
+    public static final ResourceKey<BannerPattern> DUSTIN1 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "dustin1"));
+    public static final ResourceKey<BannerPattern> DUSTIN2 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "dustin2"));
+    public static final ResourceKey<BannerPattern> FLINT1 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "flint1"));
+    public static final ResourceKey<BannerPattern> FLINT2 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "flint2"));
+    public static final ResourceKey<BannerPattern> FORRESTER1 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "forrester1"));
+    public static final ResourceKey<BannerPattern> FORRESTER2 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "forrester2"));
+    public static final ResourceKey<BannerPattern> FREY2 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "frey2"));
+    public static final ResourceKey<BannerPattern> GLOVER = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "glover"));
+    public static final ResourceKey<BannerPattern> HARCLAY = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "harclay"));
+    public static final ResourceKey<BannerPattern> HIGHTOWER1 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "hightower1"));
+    public static final ResourceKey<BannerPattern> HORNWOOD1 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "hornwood1"));
+    public static final ResourceKey<BannerPattern> HORNWOOD2 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "hornwood2"));
+    public static final ResourceKey<BannerPattern> KARSTARK2 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "karstark2"));
+    public static final ResourceKey<BannerPattern> KNOTT = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "knott"));
+    public static final ResourceKey<BannerPattern> LIDDLE1 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "liddle1"));
+    public static final ResourceKey<BannerPattern> LIDDLE2 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "liddle2"));
+    public static final ResourceKey<BannerPattern> LOCKE = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "locke"));
+    public static final ResourceKey<BannerPattern> MAGNAR1 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "magnar1"));
+    public static final ResourceKey<BannerPattern> MAGNAR2 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "magnar2"));
+    public static final ResourceKey<BannerPattern> MANDERLY1 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "manderly1"));
+    public static final ResourceKey<BannerPattern> MANDERLY2 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "manderly2"));
+    public static final ResourceKey<BannerPattern> MANDERLY3 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "manderly3"));
+    public static final ResourceKey<BannerPattern> MARSH = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "marsh"));
+    public static final ResourceKey<BannerPattern> MOLLEN1 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "mollen1"));
+    public static final ResourceKey<BannerPattern> MOLLEN2 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "mollen2"));
+    public static final ResourceKey<BannerPattern> NORREY = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "norrey"));
+    public static final ResourceKey<BannerPattern> ROYCE2 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "royce2"));
+    public static final ResourceKey<BannerPattern> RYSWELL1 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "ryswell1"));
+    public static final ResourceKey<BannerPattern> RYSWELL2 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "ryswell2"));
+    public static final ResourceKey<BannerPattern> RYSWELL3 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "ryswell3"));
+    public static final ResourceKey<BannerPattern> STONEY_FISHER1 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "stoney_fisher1"));
+    public static final ResourceKey<BannerPattern> STONEY_FISHER2 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "stoney_fisher2"));
+    public static final ResourceKey<BannerPattern> STOUT = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "stout"));
+    public static final ResourceKey<BannerPattern> TALLHART = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "tallhart"));
+    public static final ResourceKey<BannerPattern> TARGARYEN2 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "targaryen2"));
+    public static final ResourceKey<BannerPattern> UMBER1 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "umber1"));
+    public static final ResourceKey<BannerPattern> UMBER2 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "umber2"));
+    public static final ResourceKey<BannerPattern> UMBER3 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "umber3"));
+    public static final ResourceKey<BannerPattern> WHITEHILL = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "whitehill"));
+    public static final ResourceKey<BannerPattern> WIDOWSWATCH1 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "widowswatch1"));
+    public static final ResourceKey<BannerPattern> WIDOWSWATCH2 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "widowswatch2"));
+    public static final ResourceKey<BannerPattern> WOOLFIELD = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "woolfield"));
+    public static final ResourceKey<BannerPattern> WULL = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "wull"));
 
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
             .add(Registries.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap)
@@ -116,5 +222,58 @@ public class ModWorldGenProvider extends DatapackBuiltinEntriesProvider {
         context.register(TYRELL, new BannerPattern(TYRELL.location(), "tyrell"));
         context.register(UMBER, new BannerPattern(UMBER.location(), "umber"));
         context.register(VELARYON, new BannerPattern(VELARYON.location(), "velaryon"));
+        context.register(BLACKWOOD2, new BannerPattern(BLACKWOOD2.location(), "blackwood2"));
+        context.register(BOLTON1, new BannerPattern(BOLTON1.location(), "bolton1"));
+        context.register(BOLTON2, new BannerPattern(BOLTON2.location(), "bolton2"));
+        context.register(BOOK_STARK, new BannerPattern(BOOK_STARK.location(), "book_stark"));
+        context.register(BURLEY1, new BannerPattern(BURLEY1.location(), "burley1"));
+        context.register(CASSEL, new BannerPattern(CASSEL.location(), "cassel"));
+        context.register(CELTIGAR, new BannerPattern(CELTIGAR.location(), "celtigar"));
+        context.register(CERWYN, new BannerPattern(CERWYN.location(), "cerwyn"));
+        context.register(CONDON, new BannerPattern(CONDON.location(), "condon"));
+        context.register(DAYNE2, new BannerPattern(DAYNE2.location(), "dayne2"));
+        context.register(DUSTIN1, new BannerPattern(DUSTIN1.location(), "dustin1"));
+        context.register(DUSTIN2, new BannerPattern(DUSTIN2.location(), "dustin2"));
+        context.register(FLINT1, new BannerPattern(FLINT1.location(), "flint1"));
+        context.register(FLINT2, new BannerPattern(FLINT2.location(), "flint2"));
+        context.register(FORRESTER1, new BannerPattern(FORRESTER1.location(), "forrester1"));
+        context.register(FORRESTER2, new BannerPattern(FORRESTER2.location(), "forrester2"));
+        context.register(FREY2, new BannerPattern(FREY2.location(), "frey2"));
+        context.register(GLOVER, new BannerPattern(GLOVER.location(), "glover"));
+        context.register(HARCLAY, new BannerPattern(HARCLAY.location(), "harclay"));
+        context.register(HIGHTOWER1, new BannerPattern(HIGHTOWER1.location(), "hightower1"));
+        context.register(HORNWOOD1, new BannerPattern(HORNWOOD1.location(), "hornwood1"));
+        context.register(HORNWOOD2, new BannerPattern(HORNWOOD2.location(), "hornwood2"));
+        context.register(KARSTARK2, new BannerPattern(KARSTARK2.location(), "karstark2"));
+        context.register(KNOTT, new BannerPattern(KNOTT.location(), "knott"));
+        context.register(LIDDLE1, new BannerPattern(LIDDLE1.location(), "liddle1"));
+        context.register(LIDDLE2, new BannerPattern(LIDDLE2.location(), "liddle2"));
+        context.register(LOCKE, new BannerPattern(LOCKE.location(), "locke"));
+        context.register(MAGNAR1, new BannerPattern(MAGNAR1.location(), "magnar1"));
+        context.register(MAGNAR2, new BannerPattern(MAGNAR2.location(), "magnar2"));
+        context.register(MANDERLY1, new BannerPattern(MANDERLY1.location(), "manderly1"));
+        context.register(MANDERLY2, new BannerPattern(MANDERLY2.location(), "manderly2"));
+        context.register(MANDERLY3, new BannerPattern(MANDERLY3.location(), "manderly3"));
+        context.register(MARSH, new BannerPattern(MARSH.location(), "marsh"));
+        context.register(MOLLEN1, new BannerPattern(MOLLEN1.location(), "mollen1"));
+        context.register(MOLLEN2, new BannerPattern(MOLLEN2.location(), "mollen2"));
+        context.register(NORREY, new BannerPattern(NORREY.location(), "norrey"));
+        context.register(ROYCE2, new BannerPattern(ROYCE2.location(), "royce2"));
+        context.register(RYSWELL1, new BannerPattern(RYSWELL1.location(), "ryswell1"));
+        context.register(RYSWELL2, new BannerPattern(RYSWELL2.location(), "ryswell2"));
+        context.register(RYSWELL3, new BannerPattern(RYSWELL3.location(), "ryswell3"));
+        context.register(STONEY_FISHER1, new BannerPattern(STONEY_FISHER1.location(), "stoney_fisher1"));
+        context.register(STONEY_FISHER2, new BannerPattern(STONEY_FISHER2.location(), "stoney_fisher2"));
+        context.register(STOUT, new BannerPattern(STOUT.location(), "stout"));
+        context.register(TALLHART, new BannerPattern(TALLHART.location(), "tallhart"));
+        context.register(TARGARYEN2, new BannerPattern(TARGARYEN2.location(), "targaryen2"));
+        context.register(UMBER1, new BannerPattern(UMBER1.location(), "umber1"));
+        context.register(UMBER2, new BannerPattern(UMBER2.location(), "umber2"));
+        context.register(UMBER3, new BannerPattern(UMBER3.location(), "umber3"));
+        context.register(WHITEHILL, new BannerPattern(WHITEHILL.location(), "whitehill"));
+        context.register(WIDOWSWATCH1, new BannerPattern(WIDOWSWATCH1.location(), "widowswatch1"));
+        context.register(WIDOWSWATCH2, new BannerPattern(WIDOWSWATCH2.location(), "widowswatch2"));
+        context.register(WOOLFIELD, new BannerPattern(WOOLFIELD.location(), "woolfield"));
+        context.register(WULL, new BannerPattern(WULL.location(), "wull"));
     }
 }

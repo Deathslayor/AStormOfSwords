@@ -414,7 +414,7 @@ public class TradingInventoryScreen extends Screen {
                 String dispName = getDisplayNameFromEntry(entry);
                 int    amount   = transactionAmounts.getOrDefault(itemKey, 0);
                 float  mul      = currentMode == TradeMode.BUY ? buyMultiplier : sellMultiplier;
-                int    unitPrice = (int) Math.ceil(ItemPricing.getItemPrice(itemKey) * mul);
+                int    unitPrice = ItemPricing.applyMultiplier(itemKey, mul);
                 int    lineTotal = unitPrice * amount;
 
                 int rowY = y + shown * lineH;
@@ -516,8 +516,8 @@ public class TradingInventoryScreen extends Screen {
         String name     = getDisplayNameFromEntry(entry);
         String itemKey  = getItemKeyFromEntry(entry);
         long   amount   = getAmountFromEntry(entry);
-        int    buyP     = (int) Math.ceil(ItemPricing.getItemPrice(itemKey) * buyMultiplier);
-        int    sellP    = (int) Math.ceil(ItemPricing.getItemPrice(itemKey) * sellMultiplier);
+        int    buyP     = ItemPricing.applyMultiplier(itemKey, buyMultiplier);
+        int    sellP    = ItemPricing.applyMultiplier(itemKey, sellMultiplier);
 
         String[] lines = { name, "Amount: " + amount, "Buy: " + buyP, "Sell: " + sellP };
         int tw = 0;
@@ -708,7 +708,7 @@ public class TradingInventoryScreen extends Screen {
             if (amt <= 0) continue;
             totalItems += amt;
             float mul = currentMode == TradeMode.BUY ? buyMultiplier : sellMultiplier;
-            totalPrice += (int) Math.ceil(ItemPricing.getItemPrice(e.getKey()) * mul) * amt;
+            totalPrice += ItemPricing.applyMultiplier(e.getKey(), mul) * amt;
         }
     }
 

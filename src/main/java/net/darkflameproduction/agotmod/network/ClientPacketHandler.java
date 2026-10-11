@@ -73,6 +73,7 @@ public class ClientPacketHandler {
 
             TownHallScreen.updateFinances(pos, packet.townBalance(), packet.townIncome());
             TownHallScreen.updateInventory(pos, packet.townInventory());
+            TownHallScreen.updateCitizens(pos, packet.citizens());
 
             TownHallDebugRenderer.updateTownHallData(pos, packet.bedCount(),
                     packet.citizenCount(), packet.currentRadius());

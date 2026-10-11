@@ -11,6 +11,10 @@ import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * Guard shift scheduling and threat detection.
+ * Movement while on duty (patrols, visits, standing guard) is handled by GuardPatrolGoal.
+ */
 public class GuardSystem {
     private final Peasant_Entity peasant;
 
@@ -69,14 +73,16 @@ public class GuardSystem {
     // Instance variables
     private GuardShift assignedShift = null;
     private int shiftAssignmentTimer = 0;
+    // The kind of melee weapon this guard fights with ("spear", "sword"...). Only upgraded within this kind.
+    private String weaponKind = "";
+    // The shift (see currentShiftNumber) in which the guard last checked the town hall for better gear
+    private long lastArmoryCheckShift = Long.MIN_VALUE;
     private static final int SHIFT_ASSIGNMENT_DELAY = 100; // Wait 100 ticks to gather shift info
-    private BlockPos patrolTarget = null;
-    private int patrolCooldown = 0;
-    private static final int PATROL_RADIUS = 96;
-    private static final int PATROL_CHANGE_INTERVAL = 400; // Change patrol target every 20 seconds
+    private static final int HOUSE_BANNER_CHECK_INTERVAL = 100; // Re-check the shield's house banner every 5 seconds
 
     // Combat tracking
     private LivingEntity currentTarget = null;
+    private LivingEntity alertTarget = null; // a threat we ran to after a call for help
     private int targetScanCooldown = 0;
     private static final int TARGET_SCAN_INTERVAL = 20; // Scan for targets every second
     private static final int COMBAT_RANGE = 48; // Range to detect and chase monsters
@@ -96,7 +102,6 @@ public class GuardSystem {
             return;
         }
 
-        // CHANGED: Verify the job block still exists (guard_barrel instead of anvil)
         BlockPos jobBlockPos = peasant.getJobBlockPos();
         if (!peasant.level().getBlockState(jobBlockPos).is(ModBLocks.GUARD_BARREL.get())) {
             return; // Job block is gone, let JobSystem handle job loss
@@ -111,15 +116,19 @@ public class GuardSystem {
         // Broadcast our shift periodically
         broadcastShiftInfo();
 
-        // Check if we should be sleeping or working
-        long dayTime = peasant.level().getDayTime() % 24000;
+        // Keep the controlling house's banner painted on our shield
+        if ((peasant.tickCount + peasant.getId()) % HOUSE_BANNER_CHECK_INTERVAL == 0) {
+            GuardEquipment.applyHouseBanner(peasant);
+        }
 
-        if (assignedShift.isSleepTime(dayTime)) {
-            // We should be sleeping - guard sleep logic is handled by modified sleep system
+        long dayTime = peasant.level().getDayTime() % 24000;
+        boolean onDuty = assignedShift.isActiveTime(dayTime);
+
+        if (!onDuty) {
+            // Off duty - guard sleep logic is handled by the sleep system
             return;
         }
 
-        // We're on duty - handle guard behavior
         handleGuardDuty();
     }
 
@@ -155,11 +164,9 @@ public class GuardSystem {
             }
         }
 
-        // Assign the least populated shift
         assignedShift = leastPopulatedShift;
-
-        // Immediately broadcast our new shift
         broadcastShiftInfo();
+
     }
 
     private void broadcastShiftInfo() {
@@ -170,6 +177,13 @@ public class GuardSystem {
     }
 
     private void handleGuardDuty() {
+        // Badly hurt - don't hunt monsters until recovered (NpcRetreatGoal keeps the guard away from them)
+        if (peasant.isRetreating()) {
+            currentTarget = null;
+            alertTarget = null;
+            return;
+        }
+
         // Scan for monsters periodically
         if (targetScanCooldown <= 0) {
             scanForTargets();
@@ -178,14 +192,9 @@ public class GuardSystem {
             targetScanCooldown--;
         }
 
-        // Handle combat if we have a target
         if (currentTarget != null) {
             handleCombat();
-            return; // Combat takes priority over patrol
         }
-
-        // Handle patrol when not in combat
-        handlePatrol();
     }
 
     private void scanForTargets() {
@@ -200,7 +209,6 @@ public class GuardSystem {
         );
 
         if (!nearbyMonsters.isEmpty()) {
-            // Find closest monster
             Monster closestMonster = null;
             double closestDistance = Double.MAX_VALUE;
 
@@ -216,11 +224,20 @@ public class GuardSystem {
                 currentTarget = closestMonster;
                 peasant.setTarget(closestMonster); // Set entity target for combat AI
             }
+        } else if (currentTarget != null && currentTarget == alertTarget && currentTarget.isAlive()) {
+            // Answering a call for help away from our post - keep fighting that threat
         } else {
-            // No monsters found, clear target
             currentTarget = null;
+            alertTarget = null;
             peasant.setTarget(null);
         }
+    }
+
+    /** Engage a threat another NPC called for help about. */
+    public void engage(LivingEntity threat) {
+        currentTarget = threat;
+        alertTarget = threat;
+        peasant.setTarget(threat);
     }
 
     private void handleCombat() {
@@ -230,89 +247,13 @@ public class GuardSystem {
             return;
         }
 
-        // Check if target is still within combat range
-        double distanceToTarget = peasant.distanceToSqr(currentTarget);
-        if (distanceToTarget > COMBAT_RANGE * COMBAT_RANGE) {
-            // Target too far away, abandon pursuit
+        // Abandon pursuit if the target left combat range
+        if (peasant.distanceToSqr(currentTarget) > COMBAT_RANGE * COMBAT_RANGE) {
             currentTarget = null;
             peasant.setTarget(null);
-            return;
         }
 
-        // Combat is handled by the existing PeasantDefenseGoal
-        // We just need to maintain the target
-    }
-
-    private void handlePatrol() {
-        BlockPos jobBlockPos = peasant.getJobBlockPos();
-        if (jobBlockPos == null) return;
-
-        // Update patrol cooldown
-        if (patrolCooldown > 0) {
-            patrolCooldown--;
-        }
-
-        // Check if we need a new patrol target or reached current one
-        boolean needNewTarget = false;
-
-        if (patrolTarget == null) {
-            needNewTarget = true;
-        } else if (patrolCooldown <= 0) {
-            needNewTarget = true;
-        } else if (peasant.distanceToSqr(patrolTarget.getX(), patrolTarget.getY(), patrolTarget.getZ()) <= 4.0D) {
-            // Reached current patrol point
-            needNewTarget = true;
-        }
-
-        if (needNewTarget) {
-            generateNewPatrolTarget(jobBlockPos);
-            patrolCooldown = PATROL_CHANGE_INTERVAL;
-        }
-
-        // Move to patrol target
-        if (patrolTarget != null && !peasant.getNavigation().isInProgress()) {
-            peasant.getNavigation().moveTo(
-                    patrolTarget.getX() + 0.5,
-                    patrolTarget.getY(),
-                    patrolTarget.getZ() + 0.5,
-                    0.6D
-            );
-        }
-    }
-
-    private void generateNewPatrolTarget(BlockPos center) {
-        net.minecraft.util.RandomSource random = peasant.getRandom();
-
-        // Generate random position within patrol radius
-        int attempts = 0;
-        while (attempts < 10) {
-            int offsetX = random.nextInt(PATROL_RADIUS * 2 + 1) - PATROL_RADIUS;
-            int offsetZ = random.nextInt(PATROL_RADIUS * 2 + 1) - PATROL_RADIUS;
-            int offsetY = random.nextInt(17) - 8; // -8 to +8 Y offset
-
-            BlockPos candidatePos = center.offset(offsetX, offsetY, offsetZ);
-
-            // Check if position is valid (within home area and pathable)
-            if (peasant.isWithinHomeArea(candidatePos)) {
-                // Basic ground check - make sure there's solid ground
-                BlockPos groundPos = candidatePos.below();
-                if (peasant.level().getBlockState(groundPos).isSolid() &&
-                        peasant.level().getBlockState(candidatePos).isAir() &&
-                        peasant.level().getBlockState(candidatePos.above()).isAir()) {
-
-                    patrolTarget = candidatePos;
-                    return;
-                }
-            }
-            attempts++;
-        }
-
-        // Fallback - just patrol around the job block
-        patrolTarget = center.offset(
-                random.nextInt(21) - 10,  // -10 to +10
-                0,
-                random.nextInt(21) - 10   // -10 to +10
-        );
+        // Actual fighting is handled by GuardCombatGoal
     }
 
     // Override normal sleep behavior for guards
@@ -327,16 +268,42 @@ public class GuardSystem {
     }
 
     // Getters
+    public String getWeaponKind() {
+        return weaponKind;
+    }
+
+    public void setWeaponKind(String kind) {
+        this.weaponKind = kind == null ? "" : kind;
+    }
+
     public boolean hasAssignedShift() {
         return assignedShift != null;
     }
 
-    public LivingEntity getCurrentTarget() {
-        return currentTarget;
+    /**
+     * Counts this guard's shifts: goes up by one each time its shift starts (a night shift
+     * keeps the same number past midnight). Long.MIN_VALUE when no shift is assigned.
+     */
+    public long currentShiftNumber() {
+        if (assignedShift == null) return Long.MIN_VALUE;
+        return Math.floorDiv(peasant.level().getDayTime() - assignedShift.startTime, 24000L);
     }
 
-    public BlockPos getPatrolTarget() {
-        return patrolTarget;
+    /** True until the guard has done its town hall gear check this shift. */
+    public boolean needsArmoryCheck() {
+        return assignedShift != null && lastArmoryCheckShift != currentShiftNumber();
+    }
+
+    public void markArmoryChecked() {
+        lastArmoryCheckShift = currentShiftNumber();
+    }
+
+    public GuardShift getAssignedShift() {
+        return assignedShift;
+    }
+
+    public LivingEntity getCurrentTarget() {
+        return currentTarget;
     }
 
     // Static methods for system management
@@ -354,14 +321,9 @@ public class GuardSystem {
             compound.putString("AssignedShift", assignedShift.name());
         }
         compound.putInt("ShiftAssignmentTimer", shiftAssignmentTimer);
-        compound.putInt("PatrolCooldown", patrolCooldown);
         compound.putInt("TargetScanCooldown", targetScanCooldown);
-
-        if (patrolTarget != null) {
-            compound.putInt("PatrolTargetX", patrolTarget.getX());
-            compound.putInt("PatrolTargetY", patrolTarget.getY());
-            compound.putInt("PatrolTargetZ", patrolTarget.getZ());
-        }
+        compound.putString("WeaponKind", weaponKind);
+        compound.putLong("LastArmoryCheckShift", lastArmoryCheckShift);
     }
 
     public void loadData(CompoundTag compound) {
@@ -374,15 +336,10 @@ public class GuardSystem {
         }
 
         shiftAssignmentTimer = compound.getInt("ShiftAssignmentTimer");
-        patrolCooldown = compound.getInt("PatrolCooldown");
         targetScanCooldown = compound.getInt("TargetScanCooldown");
-
-        if (compound.contains("PatrolTargetX")) {
-            patrolTarget = new BlockPos(
-                    compound.getInt("PatrolTargetX"),
-                    compound.getInt("PatrolTargetY"),
-                    compound.getInt("PatrolTargetZ")
-            );
+        weaponKind = compound.getString("WeaponKind");
+        if (compound.contains("LastArmoryCheckShift")) {
+            lastArmoryCheckShift = compound.getLong("LastArmoryCheckShift");
         }
     }
 

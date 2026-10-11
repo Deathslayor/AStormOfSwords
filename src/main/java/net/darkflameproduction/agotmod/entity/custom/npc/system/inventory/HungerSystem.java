@@ -180,8 +180,18 @@ public class HungerSystem {
     }
 
     private boolean isFood(ItemStack stack) {
+        return isNpcFood(stack);
+    }
+
+    /** The food NPCs eat (and count towards their food supply): meat. */
+    public static boolean isNpcFood(ItemStack stack) {
         return stack.is(ItemTags.create(
                 ResourceLocation.fromNamespaceAndPath("minecraft", "meat")));
+    }
+
+    /** How much NPC food an NPC wants to carry. */
+    public static int getMinFoodCount() {
+        return MIN_FOOD_COUNT;
     }
 
     private int findFoodSlotInInventory() {
@@ -201,43 +211,19 @@ public class HungerSystem {
             eatingTime = 0;
             foodInventorySlot = foodSlot;
 
-            // Store the current main hand item before replacing it
-            ItemStack currentMainHand = peasant.getInventorySystem().getMainHandItem();
-            if (!currentMainHand.isEmpty()) {
-                previousMainHandItem = currentMainHand.copy();
+            // Hold on to what was in the hand (weapon, tool) - it goes straight back into the hand after
+            // eating. It isn't moved into the inventory, where it could be swapped for another item,
+            // deposited or dropped.
+            previousMainHandItem = peasant.getInventorySystem().getMainHandItem().copy();
 
-                // Try to put the previous item back into the inventory slot where the food was
-                var inventory = peasant.getInventorySystem().getInventory();
-                if (foodSlot >= 0 && foodSlot < inventory.getContainerSize()) {
-                    // Remove one food item from the slot
-                    ItemStack foodInSlot = inventory.getItem(foodSlot);
-                    if (!foodInSlot.isEmpty() && foodInSlot.getCount() > 1) {
-                        // Multiple food items in this slot - just reduce count
-                        foodInSlot.shrink(1);
-
-                        // Try to find another empty slot for the previous item
-                        if (!peasant.getInventorySystem().addItem(previousMainHandItem)) {
-                            // No space in inventory - drop the item
-                            if (peasant.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
-                                peasant.spawnAtLocation(previousMainHandItem);
-                            }
-                        }
-                        previousMainHandItem = ItemStack.EMPTY; // Clear since we handled it
-                    } else {
-                        // Only one food item - we'll replace it with the previous item after eating
+            // Take one food item from its slot
+            var inventory = peasant.getInventorySystem().getInventory();
+            if (foodSlot >= 0 && foodSlot < inventory.getContainerSize()) {
+                ItemStack foodInSlot = inventory.getItem(foodSlot);
+                if (!foodInSlot.isEmpty()) {
+                    foodInSlot.shrink(1);
+                    if (foodInSlot.isEmpty()) {
                         inventory.setItem(foodSlot, ItemStack.EMPTY);
-                    }
-                }
-            } else {
-                // No previous item, just remove the food from inventory
-                var inventory = peasant.getInventorySystem().getInventory();
-                if (foodSlot >= 0 && foodSlot < inventory.getContainerSize()) {
-                    ItemStack foodInSlot = inventory.getItem(foodSlot);
-                    if (!foodInSlot.isEmpty()) {
-                        foodInSlot.shrink(1);
-                        if (foodInSlot.isEmpty()) {
-                            inventory.setItem(foodSlot, ItemStack.EMPTY);
-                        }
                     }
                 }
             }
@@ -271,32 +257,17 @@ public class HungerSystem {
         }
     }
 
+    /** Puts whatever was held before eating back into the hand. */
     private void restorePreviousMainHandItem() {
-        if (!previousMainHandItem.isEmpty()) {
-            var inventory = peasant.getInventorySystem().getInventory();
-
-            // Try to put the previous item back in the slot where food was taken from
-            if (foodInventorySlot >= 0 && foodInventorySlot < inventory.getContainerSize()) {
-                ItemStack slotItem = inventory.getItem(foodInventorySlot);
-                if (slotItem.isEmpty()) {
-                    // Slot is empty, put the previous item there
-                    inventory.setItem(foodInventorySlot, previousMainHandItem.copy());
-                    peasant.getInventorySystem().setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
-                    return;
-                }
+        // Normally the hand holds the food being eaten (used up). If something else ended up in the hand
+        // meanwhile, keep it rather than overwrite it.
+        ItemStack inHand = peasant.getInventorySystem().getMainHandItem();
+        if (!inHand.isEmpty() && !isFood(inHand)) {
+            if (!peasant.getInventorySystem().addItem(inHand.copy())) {
+                peasant.spawnAtLocation(inHand.copy());
             }
-
-            // If we can't put it back in the original slot, try to add it to inventory
-            if (peasant.getInventorySystem().addItem(previousMainHandItem)) {
-                peasant.getInventorySystem().setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
-            } else {
-                // No space in inventory, restore it to main hand
-                peasant.getInventorySystem().setItemInHand(InteractionHand.MAIN_HAND, previousMainHandItem);
-            }
-        } else {
-            // No previous item, just clear main hand
-            peasant.getInventorySystem().setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
         }
+        peasant.getInventorySystem().setItemInHand(InteractionHand.MAIN_HAND, previousMainHandItem.copy());
     }
 
     public void saveData(CompoundTag compound) {

@@ -84,7 +84,8 @@ public class ModCreativeNaturalBlocks {
                     () -> CreativeModeTab.builder()
                             .icon(() -> new ItemStack(ModBLocks.WEIRWOOD_SAPLING.get()))
                             .title(Component.translatable("creativetab.agot_tab_natural_blocks"))
-                            .displayItems((pParameters, pOutput) -> {
+                            .withTabsBefore(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "agot_tab_building_blocks"))
+                    .displayItems((pParameters, pOutput) -> {
 
                                 // Roses
                                 pOutput.accept(ModBLocks.ROSE.get());

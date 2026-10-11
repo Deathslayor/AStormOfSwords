@@ -1,16 +1,16 @@
-// 1.21.1	2026-07-15T16:48:15.4955379	Tags for minecraft:item mod id agotmod
+// 1.21.1	2026-10-11T16:00:23.0507558	Tags for minecraft:item mod id agotmod
 eef23bfe9f45027b3b8670ec55cfa37f8a45a919 data/agotmod/tags/item/bronze_tool_materials.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/agotmod/tags/item/dragonglass_tool_materials.json
 ef380d32ef9f54efeffc7c1c7d9ccf13299c2588 data/agotmod/tags/item/steel_tool_materials.json
 ccaa5ea118f5f98977a2930eae09d9dfdb9d50c8 data/minecraft/tags/item/banners.json
-1c497fba17b6a9f9253a0830c209442e05caf4ef data/minecraft/tags/item/chest_armor.json
+452b450f70c1148042f986cf1d4cef4f6327150c data/minecraft/tags/item/chest_armor.json
 394bed877f8903e3bc682bd5492655c94f621b5e data/minecraft/tags/item/dirt.json
 d6876d211d94e675b0f70275f5d24df57d9b545d data/minecraft/tags/item/flowers.json
-29ad99f68b61290cd1b5967658b94476f8481410 data/minecraft/tags/item/foot_armor.json
-cb733be41d71abc68eb6b02bc03a02b09175d0ee data/minecraft/tags/item/freeze_immune_wearables.json
-22d68ed3266c04f508a8a5afd9e4996411737e6f data/minecraft/tags/item/head_armor.json
+d65a0cf4b55dbc7d04e43889c41c4c83eadbca15 data/minecraft/tags/item/foot_armor.json
+d039dc2927366e3712122624b870200f68f44770 data/minecraft/tags/item/freeze_immune_wearables.json
+412291294552d867b82a2d9386cf398378b238db data/minecraft/tags/item/head_armor.json
 cade2721df8498d5156e289b84a472216c963ece data/minecraft/tags/item/leaves.json
-8de518102c8a348cff71dda1fd2069c7241f974e data/minecraft/tags/item/leg_armor.json
+7530f824d921bee89f42a3f241689a7389020faa data/minecraft/tags/item/leg_armor.json
 2a2abf6923369d113398d586a3b649457e2040dc data/minecraft/tags/item/logs_that_burn.json
 175541f9df945a46c3465342e298debfff585ff3 data/minecraft/tags/item/meat.json
 1f1ff90dc4a365d3b265da5f2f41de0da69f3184 data/minecraft/tags/item/planks.json

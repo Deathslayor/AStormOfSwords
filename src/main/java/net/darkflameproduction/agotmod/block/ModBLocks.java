@@ -2094,6 +2094,7 @@ public class ModBLocks {
                     .strength(-1.0f, 3600000.0f)  // unbreakable in survival, like barrier
                     .noOcclusion()
                     .noCollission()                 // no collision so it doesn't interfere
+                    .dynamicShape()                 // hitbox depends on the controller (block entity)
                     .isSuffocating((s,l,p) -> false)
                     .isViewBlocking((s,l,p) -> false),
             false);

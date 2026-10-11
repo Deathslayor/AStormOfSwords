@@ -112,6 +112,10 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     private static final EntityDataAccessor<Long> LAST_DAY_TRACKED = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.LONG);
     private static final EntityDataAccessor<Boolean> IS_INTERACTING = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> IS_ATTACKING = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.BOOLEAN);
+    // Synced for Epic Fight animations (the client can't see navigation speed or the hunger system)
+    private static final EntityDataAccessor<Boolean> IS_RUNNING = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> IS_EATING = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> IS_GUARDING = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<String> GENDER = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<String> AGE = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<Integer> AGING_TIMER = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.INT);
@@ -153,6 +157,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     private final TeleportSystem teleportSystem;
     private final NameSystem nameSystem;
     private final GuardSystem guardSystem;
+    private final net.darkflameproduction.agotmod.entity.custom.npc.system.combat.RangedCombatSystem rangedCombat;
     private final MinerSystem minerSystem;
     private final QuarrySystem quarrySystem;
     private final SmelterSystem smelterSystem;
@@ -184,8 +189,15 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     // Coin balance constant for compatibility
     private static final String COIN_BALANCE_KEY = "agotmod.coin_balance";
 
+    /** Ground navigation that walks straight lines instead of node-to-node staircases. */
+    @Override
+    protected net.minecraft.world.entity.ai.navigation.PathNavigation createNavigation(Level level) {
+        return new NpcGroundPathNavigation(this, level);
+    }
+
     public Peasant_Entity(EntityType<? extends Peasant_Entity> entityType, Level level) {
         super(entityType, level);
+        this.moveControl = new NpcMoveControl(this);
         ((GroundPathNavigation)this.getNavigation()).setCanOpenDoors(true);
         this.getNavigation().setCanFloat(true);
         this.sleepSystem          = new SleepSystem(this);
@@ -201,6 +213,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         this.teleportSystem       = new TeleportSystem(this);
         this.nameSystem           = new NameSystem(this);
         this.guardSystem          = new GuardSystem(this);
+        this.rangedCombat         = new net.darkflameproduction.agotmod.entity.custom.npc.system.combat.RangedCombatSystem(this);
         this.minerSystem          = new MinerSystem(this);
         this.quarrySystem         = new QuarrySystem(this);
         this.smelterSystem        = new SmelterSystem();
@@ -224,6 +237,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     public TeleportSystem getTeleportSystem() { return teleportSystem; }
     public NameSystem getNameSystem() { return nameSystem; }
     public GuardSystem getGuardSystem() { return guardSystem; }
+    public net.darkflameproduction.agotmod.entity.custom.npc.system.combat.RangedCombatSystem getRangedCombat() { return rangedCombat; }
     public MinerSystem getMinerSystem() { return minerSystem; }
     public QuarrySystem getQuarrySystem() { return quarrySystem; }
     public SmelterSystem getSmelterSystem()           { return smelterSystem; }
@@ -314,16 +328,20 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         this.targetSelector.removeAllGoals(goal -> true);
         this.registerGoals();
 
+        // Clearing the goals also removed Epic Fight's combat AI - set it up again for the adult
+        net.darkflameproduction.agotmod.compat.epicfight.EpicFightCompat.reinitCombatAI(this);
+
         // Note: Names, memories, inventory, gender, and all other data are preserved automatically
         // Only the model and textures will change through the renderer/model system
     }
 
+    // Sent to the trading GUI; the server prices transactions with the same values (ItemPricing)
     private float getBuyMultiplier() {
-        return getJobType().equals(JobSystem.JOB_TRADER) ? 1.25f : 1.0f;
+        return net.darkflameproduction.agotmod.util.ItemPricing.playerBuyMultiplier(getJobType().equals(JobSystem.JOB_TRADER));
     }
 
     private float getSellMultiplier() {
-        return getJobType().equals(JobSystem.JOB_TRADER) ? 0.375f : 0.5f;
+        return net.darkflameproduction.agotmod.util.ItemPricing.playerSellMultiplier(getJobType().equals(JobSystem.JOB_TRADER));
     }
 
 
@@ -398,6 +416,56 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         this.entityData.set(IS_ATTACKING, attacking);
     }
 
+    /** True while moving faster than walking pace (combat, fleeing, hurrying to bed). Synced to clients. */
+    public boolean isRunning() {
+        return this.entityData.get(IS_RUNNING);
+    }
+
+    /** True while eating. Synced to clients. */
+    public boolean isEatingSynced() {
+        return this.entityData.get(IS_EATING);
+    }
+
+    /** True while holding an Epic Fight guard. Synced to clients for the guard pose. */
+    public boolean isGuarding() {
+        return this.entityData.get(IS_GUARDING);
+    }
+
+    public void setGuarding(boolean guarding) {
+        this.entityData.set(IS_GUARDING, guarding);
+    }
+
+    // ===== MOVEMENT SPEED =====
+    // A mob's speed works differently from a player's: mobs move with speed^2, players with
+    // 0.98 * speed. These mob speeds match a player exactly:
+    //   walking   (player 0.10): sqrt(0.98 * 0.10) = 0.313
+    //   sprinting (player 0.13): sqrt(0.98 * 0.13) = 0.357
+    private static final double PLAYER_WALK_MOB_SPEED = 0.313D;
+    private static final double PLAYER_SPRINT_MOB_SPEED = 0.357D;
+
+    /**
+     * The speed modifier every move uses (applied by NpcMoveControl, whatever speed a goal asked for).
+     * NPCs walk at a player's walking pace. Only a guard that is fighting - or any NPC running from
+     * danger while badly hurt - moves at a player's sprinting pace.
+     */
+    public double getMovementSpeedModifier() {
+        double baseSpeed = getAttributeBaseValue(Attributes.MOVEMENT_SPEED);
+        return (isRunningPace() ? PLAYER_SPRINT_MOB_SPEED : PLAYER_WALK_MOB_SPEED) / baseSpeed;
+    }
+
+    /** Running: a guard in a fight, or an NPC fleeing while badly hurt. */
+    public boolean isRunningPace() {
+        if (retreating) return true;
+        LivingEntity target = getTarget();
+        return getJobType().equals(JobSystem.JOB_GUARD) && target != null && target.isAlive();
+    }
+
+    private void updateAnimationFlags() {
+        boolean running = !getNavigation().isDone() && isRunningPace();
+        this.entityData.set(IS_RUNNING, running);
+        this.entityData.set(IS_EATING, hungerSystem.isEating());
+    }
+
     public boolean isAttacking() {
         return this.entityData.get(IS_ATTACKING);
     }
@@ -405,10 +473,14 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
+        this.goalSelector.addGoal(0, new net.darkflameproduction.agotmod.entity.custom.npc.goals.combat.NpcRetreatGoal(this));
 
         if (isAdult()) {
             this.goalSelector.addGoal(1, new GuardCombatGoal(this));
+            this.goalSelector.addGoal(1, new net.darkflameproduction.agotmod.entity.custom.npc.goals.combat.NpcBowAttackGoal(this));
             this.goalSelector.addGoal(2, new PeasantDefenseGoal(this));
+            this.goalSelector.addGoal(2, new net.darkflameproduction.agotmod.entity.custom.npc.goals.guard.GuardAlertResponseGoal(this));
+            this.goalSelector.addGoal(10, new net.darkflameproduction.agotmod.entity.custom.npc.goals.guard.GuardTownHallGoal(this));
         }
 
         this.doorGoal = new OpenAndCloseDoorGoal(this);
@@ -511,7 +583,20 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                 .add(Attributes.MAX_HEALTH, 40.0)
                 .add(Attributes.FOLLOW_RANGE, 48.0)
                 .add(Attributes.ATTACK_DAMAGE, 4.0)
-                .add(Attributes.STEP_HEIGHT, 0.6); // Default, overridden per job
+                // Player base attack speed - held weapons modify it exactly like the player's,
+                // so Epic Fight combos play at the player's speed (sword 1.6, axe 1.0, fists 4.0...)
+                .add(Attributes.ATTACK_SPEED, 4.0)
+                .add(Attributes.STEP_HEIGHT, 0.6) // Default, overridden per job
+                // Epic Fight combat attributes, same set and defaults Epic Fight gives humanoid mobs
+                .add(yesman.epicfight.registry.entries.EpicFightAttributes.WEIGHT)
+                .add(yesman.epicfight.registry.entries.EpicFightAttributes.ARMOR_NEGATION)
+                .add(yesman.epicfight.registry.entries.EpicFightAttributes.IMPACT)
+                .add(yesman.epicfight.registry.entries.EpicFightAttributes.MAX_STRIKES)
+                .add(yesman.epicfight.registry.entries.EpicFightAttributes.STUN_ARMOR)
+                .add(yesman.epicfight.registry.entries.EpicFightAttributes.OFFHAND_ATTACK_SPEED)
+                .add(yesman.epicfight.registry.entries.EpicFightAttributes.OFFHAND_MAX_STRIKES)
+                .add(yesman.epicfight.registry.entries.EpicFightAttributes.OFFHAND_ARMOR_NEGATION)
+                .add(yesman.epicfight.registry.entries.EpicFightAttributes.OFFHAND_IMPACT);
     }
 
     @Override
@@ -540,10 +625,61 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         return super.maxUpStep();
     }
 
+    // ===== NPCs never fight each other =====
+
+    /** All NPCs are on the same side. */
+    @Override
+    public boolean isAlliedTo(Entity other) {
+        return other instanceof Peasant_Entity || super.isAlliedTo(other);
+    }
+
+    /** Another NPC can never become a target, whatever tried to set it. */
+    @Override
+    public void setTarget(@Nullable LivingEntity target) {
+        if (target instanceof Peasant_Entity) return;
+        // Badly hurt NPCs don't pick fights - NpcRetreatGoal keeps them away from threats instead
+        if (target != null && retreating) return;
+        super.setTarget(target);
+    }
+
+    // ===== RETREATING WHEN BADLY HURT =====
+
+    private static final float RETREAT_HEALTH_FRACTION = 0.2F;   // retreat at 1/5 health or less
+    private static final float RECOVERED_HEALTH_FRACTION = 0.5F; // fight again from half health
+    private boolean retreating = false;
+
+    /** True while the NPC is too hurt to fight and keeps away from threats. */
+    public boolean isRetreating() {
+        return retreating;
+    }
+
+    private void updateRetreating() {
+        float health = getHealth() / getMaxHealth();
+        if (!retreating && health <= RETREAT_HEALTH_FRACTION && isAlive()) {
+            retreating = true;
+            setGuarding(false);
+            if (isUsingItem()) stopUsingItem();
+            setTarget(null);
+            setAggressive(false);
+        } else if (retreating && health >= RECOVERED_HEALTH_FRACTION) {
+            retreating = false;
+        }
+    }
+
+    /** Damage from another NPC - a stray swing or arrow meant for a monster. */
+    private static boolean isFriendlyFire(DamageSource source) {
+        return source.getEntity() instanceof Peasant_Entity || source.getDirectEntity() instanceof Peasant_Entity;
+    }
+
     @Override
     public boolean canAttack(LivingEntity target) {
         // Children cannot attack anyone
         if (isChild()) {
+            return false;
+        }
+
+        // NPCs never attack each other
+        if (target instanceof Peasant_Entity) {
             return false;
         }
 
@@ -572,6 +708,9 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         builder.define(LAST_DAY_TRACKED, -1L);
         builder.define(IS_INTERACTING, false);
         builder.define(IS_ATTACKING, false);
+        builder.define(IS_RUNNING, false);
+        builder.define(IS_EATING, false);
+        builder.define(IS_GUARDING, false);
         builder.define(GENDER, GENDER_MALE); // Default to male
         builder.define(AGE, AGE_ADULT); // Default to adult
         builder.define(AGING_TIMER, 0); // Default aging timer
@@ -738,6 +877,12 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         if (!this.level().isClientSide) {
             checkForNewDay();
 
+            // Tell the town our name and job (read by the town hall for its citizen list)
+            if ((this.tickCount + this.getId()) % net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.CitizenReportSystem.REPORT_INTERVAL == 0) {
+                net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.CitizenReportSystem.report(
+                        this.getUUID(), this.getName().getString(), this.getJobType());
+            }
+
             if (!isRegisteredToTownHall() && this.tickCount % 200 == 0) {
                 findAndRegisterWithNearestTownHall();
             }
@@ -774,8 +919,17 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         butcherSystem.tick();
         teleportSystem.tick();
         guardSystem.tick();
+        rangedCombat.tick();
+        net.darkflameproduction.agotmod.entity.custom.npc.system.guard.GuardAlertSystem.tickSpotting(this);
+        net.darkflameproduction.agotmod.entity.custom.npc.system.guard.GuardLoot.tick(this);
         minerSystem.tick();
         quarrySystem.tick();
+
+        if (!this.level().isClientSide) {
+            updateAnimationFlags();
+            updateRetreating();
+            net.darkflameproduction.agotmod.compat.epicfight.EpicFightCompat.tickCombat(this);
+        }
 
         if (!this.level().isClientSide && getJobType().equals(JobSystem.JOB_GROCER)) {
             if (GrocerInventoryTicketSystem.hasPendingResponse(this.getUUID())) {
@@ -1029,10 +1183,17 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
 
     @Override
     public void aiStep() {
-        if (isInteractingWithPlayer() || interactionCooldown > 0 || isPlayingInteractAnimation()) {
+        // The server freezes the NPC; the client just follows the server's position. (Freezing on the
+        // client too skipped its position updates, so after a conversation the NPC snapped forward.)
+        if (!this.level().isClientSide
+                && (isInteractingWithPlayer() || interactionCooldown > 0 || isPlayingInteractAnimation())) {
             // Stop all movement but still allow look control
             this.setDeltaMovement(0, this.getDeltaMovement().y, 0);
             this.getNavigation().stop();
+            // The walk animation is only updated in travel(), which is skipped while frozen - without
+            // this it stays at its last speed and the NPC keeps walking on the spot. Standing still,
+            // it winds down to idle.
+            this.calculateEntityAnimation(false);
 
             // Force look at interacting player
             if (currentInteractingPlayer != null) {
@@ -1061,7 +1222,11 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
             if (sleepSystem.isSleeping()) return InteractionResult.PASS;
             if (isChild()) return InteractionResult.PASS;
 
-            setInteractingPlayer(player);
+            // Only the server tracks the conversation - it's the one that freezes the NPC and is told
+            // when the conversation closes. A client-side copy was never cleared.
+            if (!this.level().isClientSide) {
+                setInteractingPlayer(player);
+            }
 
             double dx = player.getX() - this.getX();
             double dz = player.getZ() - this.getZ();
@@ -1084,6 +1249,16 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
             return false;
         }
 
+        // No friendly fire between NPCs - no damage, and so nothing to retaliate against
+        if (isFriendlyFire(source)) {
+            return false;
+        }
+
+        // Blocked with an Epic Fight guard - no damage and no stun
+        if (net.darkflameproduction.agotmod.compat.epicfight.EpicFightCompat.tryBlock(this, source, amount)) {
+            return false;
+        }
+
         boolean result = super.hurt(source, amount);
 
         if (result) {
@@ -1103,11 +1278,19 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         }
 
         jobSystem.onRemove();
+        // Dead or discarded (not just unloaded with its chunk): free its job block for someone else
+        if (reason.shouldDestroy() && this.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+            net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobClaims.get(serverLevel)
+                    .releaseAll(this.getUUID());
+            net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.CitizenReportSystem.remove(this.getUUID());
+        }
         sleepSystem.onRemove();
         homeSystem.onRemove();
         grocerSystem.onRemove();
         butcherSystem.onRemove();
         guardSystem.onRemove();
+        net.darkflameproduction.agotmod.entity.custom.npc.system.guard.GuardAlertSystem.onRemove(this.getUUID());
+        net.darkflameproduction.agotmod.entity.custom.npc.system.guard.GuardLoot.onRemove(this.getUUID());
 
         super.remove(reason);
     }
@@ -1250,29 +1433,11 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     // Sleep delegates
     @Override
     public void startSleeping(BlockPos pos) {
-        // For guards, bypass vanilla time restrictions during their designated sleep time
-        if (getJobType().equals(JobSystem.JOB_GUARD) && guardSystem.shouldSleep()) {
-            // Manually set sleeping state without calling super (which has time restrictions)
-            this.setSleepingPos(pos);
-            this.setPos(pos.getX() + 0.5, pos.getY() + 0.0625, pos.getZ() + 0.5);
-            this.setDeltaMovement(Vec3.ZERO);
-            this.hasImpulse = true;
-
-            // Set our custom sleep system state
-            sleepSystem.setSleeping(true);
-            sleepSystem.setBedPos(pos);
-
-            // Establish home bed if this is their first sleep
-            homeSystem.establishHomeBed(pos);
-
-            // Stop eating and navigation
-            hungerSystem.stopEating();
-            this.getNavigation().stop();
-        } else {
-            // For regular NPCs, use vanilla behavior (which includes time restrictions)
-            super.startSleeping(pos);
-            sleepSystem.startSleeping(pos);
-        }
+        // LivingEntity.startSleeping has no time-of-day restriction (that's only Player.startSleepInBed),
+        // so guards can use it during daytime sleep shifts too. It sets Pose.SLEEPING (lying in the bed),
+        // positions the entity in the bed and marks the bed as occupied.
+        super.startSleeping(pos);
+        sleepSystem.startSleeping(pos);
     }
 
     @Override

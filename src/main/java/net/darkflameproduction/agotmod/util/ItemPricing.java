@@ -478,30 +478,6 @@ public class ItemPricing {
         reg("agotmod:upgrade_kit_iron",     550000,  BLACKSMITH);
         reg("agotmod:upgrade_kit_steel",    550000,  BLACKSMITH);
         reg("agotmod:upgrade_kit_noble",   2750000,  BLACKSMITH);
-        reg("agotmod:nights_watch_ranger_smithing_scroll",             22000,  BLACKSMITH);
-        reg("agotmod:wildling_fur_smithing_scroll",                    22000,  BLACKSMITH);
-        reg("agotmod:thenn_levy_smithing_scroll",                      22000,  BLACKSMITH);
-        reg("agotmod:nights_watch_leather_smithing_scroll",           110000,  BLACKSMITH);
-        reg("agotmod:wildling_leather_smithing_scroll",               110000,  BLACKSMITH);
-        reg("agotmod:wildling_chief_smithing_scroll",                 110000,  BLACKSMITH);
-        reg("agotmod:thenn_plate_smithing_scroll",                    110000,  BLACKSMITH);
-        reg("agotmod:bolton_levy_smithing_scroll",                    110000,  BLACKSMITH);
-        reg("agotmod:manderly_levy_smithing_scroll",                  110000,  BLACKSMITH);
-        reg("agotmod:stark_levy_smithing_scroll",                     110000,  BLACKSMITH);
-        reg("agotmod:ironborn_levy_smithing_scroll",                  110000,  BLACKSMITH);
-        reg("agotmod:northern_mountain_clan_leather_smithing_scroll", 110000,  BLACKSMITH);
-        reg("agotmod:nights_watch_elite_smithing_scroll",             550000,  BLACKSMITH);
-        reg("agotmod:thenn_noble_smithing_scroll",                    550000,  BLACKSMITH);
-        reg("agotmod:bolton_plate_smithing_scroll",                   550000,  BLACKSMITH);
-        reg("agotmod:manderly_plate_smithing_scroll",                 550000,  BLACKSMITH);
-        reg("agotmod:stark_plate_smithing_scroll",                    550000,  BLACKSMITH);
-        reg("agotmod:ironborn_plate_smithing_scroll",                 550000,  BLACKSMITH);
-        reg("agotmod:northern_mountain_clan_chain_smithing_scroll",   550000,  BLACKSMITH);
-        reg("agotmod:bolton_noble_smithing_scroll",                  2750000,  BLACKSMITH);
-        reg("agotmod:manderly_noble_smithing_scroll",                2750000,  BLACKSMITH);
-        reg("agotmod:stark_noble_smithing_scroll",                   2750000,  BLACKSMITH);
-        reg("agotmod:ironborn_noble_smithing_scroll",                2750000,  BLACKSMITH);
-        reg("agotmod:northern_mountain_clan_noble_smithing_scroll",  2750000,  BLACKSMITH);
         reg("minecraft:iron_sword",         320,  BLACKSMITH);
         reg("minecraft:iron_pickaxe",       480,  BLACKSMITH);
         reg("minecraft:iron_axe",           480,  BLACKSMITH);
@@ -566,102 +542,25 @@ public class ItemPricing {
         reg("agotmod:noble_halberd",      65000,  BLACKSMITH);
         reg("agotmod:dragonglass_spear",  100000,  BLACKSMITH);
         reg("agotmod:dragonglass_dagger",  80000,  BLACKSMITH);
-        reg("agotmod:night_watch_ranger_helmet",     2000,  BLACKSMITH);
-        reg("agotmod:night_watch_ranger_chestplate", 4000,  BLACKSMITH);
-        reg("agotmod:night_watch_ranger_leggings",   3000,  BLACKSMITH);
-        reg("agotmod:night_watch_ranger_boots",      2000,  BLACKSMITH);
-        reg("agotmod:wildling_fur_helmet",           2000,  BLACKSMITH);
-        reg("agotmod:wildling_fur_chestplate",       4000,  BLACKSMITH);
-        reg("agotmod:wildling_fur_leggings",         3000,  BLACKSMITH);
-        reg("agotmod:wildling_fur_boots",            2000,  BLACKSMITH);
-        reg("agotmod:thenn_leather_helmet",          2000,  BLACKSMITH);
-        reg("agotmod:thenn_leather_chestplate",      4000,  BLACKSMITH);
-        reg("agotmod:thenn_leather_leggings",        3000,  BLACKSMITH);
-        reg("agotmod:thenn_leather_boots",           2000,  BLACKSMITH);
-        reg("agotmod:night_watch_leather_helmet",     10000,  BLACKSMITH);
-        reg("agotmod:night_watch_leather_chestplate", 20000,  BLACKSMITH);
-        reg("agotmod:night_watch_leather_leggings",   15000,  BLACKSMITH);
-        reg("agotmod:night_watch_leather_boots",      10000,  BLACKSMITH);
-        reg("agotmod:wildling_leather_helmet",        10000,  BLACKSMITH);
-        reg("agotmod:wildling_leather_chestplate",    20000,  BLACKSMITH);
-        reg("agotmod:wildling_leather_leggings",      15000,  BLACKSMITH);
-        reg("agotmod:wildling_leather_boots",         10000,  BLACKSMITH);
-        reg("agotmod:wildling_chief_helmet",          10000,  BLACKSMITH);
-        reg("agotmod:wildling_chief_chestplate",      20000,  BLACKSMITH);
-        reg("agotmod:wildling_chief_leggings",        15000,  BLACKSMITH);
-        reg("agotmod:wildling_chief_boots",           10000,  BLACKSMITH);
-        reg("agotmod:thenn_bronze_helmet",            10000,  BLACKSMITH);
-        reg("agotmod:thenn_bronze_chestplate",        20000,  BLACKSMITH);
-        reg("agotmod:thenn_bronze_leggings",          15000,  BLACKSMITH);
-        reg("agotmod:thenn_bronze_boots",             10000,  BLACKSMITH);
-        reg("agotmod:bolton_levy_helmet",             10000,  BLACKSMITH);
-        reg("agotmod:bolton_levy_chestplate",         20000,  BLACKSMITH);
-        reg("agotmod:bolton_levy_leggings",           15000,  BLACKSMITH);
-        reg("agotmod:bolton_levy_boots",              10000,  BLACKSMITH);
-        reg("agotmod:manderly_levy_helmet",           10000,  BLACKSMITH);
-        reg("agotmod:manderly_levy_chestplate",       20000,  BLACKSMITH);
-        reg("agotmod:manderly_levy_leggings",         15000,  BLACKSMITH);
-        reg("agotmod:manderly_levy_boots",            10000,  BLACKSMITH);
-        reg("agotmod:stark_levy_helmet",              10000,  BLACKSMITH);
-        reg("agotmod:stark_levy_chestplate",          20000,  BLACKSMITH);
-        reg("agotmod:stark_levy_leggings",            15000,  BLACKSMITH);
-        reg("agotmod:stark_levy_boots",               10000,  BLACKSMITH);
-        reg("agotmod:ironborn_levy_helmet",           10000,  BLACKSMITH);
-        reg("agotmod:ironborn_levy_chestplate",       20000,  BLACKSMITH);
-        reg("agotmod:ironborn_levy_leggings",         15000,  BLACKSMITH);
-        reg("agotmod:ironborn_levy_boots",            10000,  BLACKSMITH);
-        reg("agotmod:northern_mountain_clan_leather_helmet",      10000,  BLACKSMITH);
-        reg("agotmod:northern_mountain_clan_leather_chestplate",  20000,  BLACKSMITH);
-        reg("agotmod:northern_mountain_clan_leather_leggings",    15000,  BLACKSMITH);
-        reg("agotmod:northern_mountain_clan_leather_boots",       10000,  BLACKSMITH);
-        reg("agotmod:night_watch_elite_helmet",        50000,  BLACKSMITH);
-        reg("agotmod:night_watch_elite_chestplate",   100000,  BLACKSMITH);
-        reg("agotmod:night_watch_elite_leggings",      75000,  BLACKSMITH);
-        reg("agotmod:night_watch_elite_boots",         50000,  BLACKSMITH);
-        reg("agotmod:thenn_chief_helmet",              50000,  BLACKSMITH);
-        reg("agotmod:thenn_chief_chestplate",         100000,  BLACKSMITH);
-        reg("agotmod:thenn_chief_leggings",            75000,  BLACKSMITH);
-        reg("agotmod:thenn_chief_boots",               50000,  BLACKSMITH);
-        reg("agotmod:bolton_plate_helmet",             50000,  BLACKSMITH);
-        reg("agotmod:bolton_plate_chestplate",        100000,  BLACKSMITH);
-        reg("agotmod:bolton_plate_leggings",           75000,  BLACKSMITH);
-        reg("agotmod:bolton_plate_boots",              50000,  BLACKSMITH);
-        reg("agotmod:manderly_plate_helmet",           50000,  BLACKSMITH);
-        reg("agotmod:manderly_plate_chestplate",      100000,  BLACKSMITH);
-        reg("agotmod:manderly_plate_leggings",         75000,  BLACKSMITH);
-        reg("agotmod:manderly_plate_boots",            50000,  BLACKSMITH);
-        reg("agotmod:stark_plate_helmet",              50000,  BLACKSMITH);
-        reg("agotmod:stark_plate_chestplate",         100000,  BLACKSMITH);
-        reg("agotmod:stark_plate_leggings",            75000,  BLACKSMITH);
-        reg("agotmod:stark_plate_boots",               50000,  BLACKSMITH);
-        reg("agotmod:ironborn_plate_helmet",           50000,  BLACKSMITH);
-        reg("agotmod:ironborn_plate_chestplate",      100000,  BLACKSMITH);
-        reg("agotmod:ironborn_plate_leggings",         75000,  BLACKSMITH);
-        reg("agotmod:ironborn_plate_boots",            50000,  BLACKSMITH);
-        reg("agotmod:northern_mountain_clan_chain_helmet",      50000,  BLACKSMITH);
-        reg("agotmod:northern_mountain_clan_chain_chestplate", 100000,  BLACKSMITH);
-        reg("agotmod:northern_mountain_clan_chain_leggings",    75000,  BLACKSMITH);
-        reg("agotmod:northern_mountain_clan_chain_boots",       50000,  BLACKSMITH);
-        reg("agotmod:bolton_noble_helmet",            250000,  BLACKSMITH);
-        reg("agotmod:bolton_noble_chestplate",        500000,  BLACKSMITH);
-        reg("agotmod:bolton_noble_leggings",          375000,  BLACKSMITH);
-        reg("agotmod:bolton_noble_boots",             250000,  BLACKSMITH);
-        reg("agotmod:manderly_noble_helmet",          250000,  BLACKSMITH);
-        reg("agotmod:manderly_noble_chestplate",      500000,  BLACKSMITH);
-        reg("agotmod:manderly_noble_leggings",        375000,  BLACKSMITH);
-        reg("agotmod:manderly_noble_boots",           250000,  BLACKSMITH);
-        reg("agotmod:stark_noble_plate_helmet",       250000,  BLACKSMITH);
-        reg("agotmod:stark_noble_plate_chestplate",   500000,  BLACKSMITH);
-        reg("agotmod:stark_noble_plate_leggings",     375000,  BLACKSMITH);
-        reg("agotmod:stark_noble_plate_boots",        250000,  BLACKSMITH);
-        reg("agotmod:ironborn_noble_helmet",          250000,  BLACKSMITH);
-        reg("agotmod:ironborn_noble_chestplate",      500000,  BLACKSMITH);
-        reg("agotmod:ironborn_noble_leggings",        375000,  BLACKSMITH);
-        reg("agotmod:ironborn_noble_boots",           250000,  BLACKSMITH);
-        reg("agotmod:northern_mountain_clan_noble_helmet",      250000,  BLACKSMITH);
-        reg("agotmod:northern_mountain_clan_noble_chestplate",  500000,  BLACKSMITH);
-        reg("agotmod:northern_mountain_clan_noble_leggings",    375000,  BLACKSMITH);
-        reg("agotmod:northern_mountain_clan_noble_boots",       250000,  BLACKSMITH);
+        registerArmorSets();
+    }
+
+    /**
+     * Blacksmiths sell every 3D armour set and its smithing scroll (ModArmorSets). Prices go up 5x per
+     * level; the plate families (north, ironborn) start a level above the fur and leather families,
+     * as the old Levy/Plate/Noble and Fur/Leather/Chief sets did.
+     */
+    private static void registerArmorSets() {
+        int[] pieceBase = { 2000, 4000, 3000, 2000 }; // helmet, chestplate, leggings, boots at level 1
+        for (net.darkflameproduction.agotmod.armor.ModArmorSets.ArmorSet set : net.darkflameproduction.agotmod.armor.ModArmorSets.all()) {
+            int level = set.tier + (set.chain.fromLeather ? 0 : 1); // 1..4
+            int factor = (int) Math.pow(5, level - 1);
+            net.minecraft.world.item.ArmorItem.Type[] pieces = net.darkflameproduction.agotmod.armor.ModArmorSets.PIECES;
+            for (int i = 0; i < pieces.length; i++) {
+                reg("agotmod:" + set.itemId(pieces[i]), pieceBase[i] * factor, BLACKSMITH);
+            }
+            reg("agotmod:" + set.id + "_smithing_scroll", 22000 * factor, BLACKSMITH);
+        }
     }
 
     public static boolean isTraderItem(String itemKey) {
@@ -674,14 +573,37 @@ public class ItemPricing {
                 || isCarpenterItem(itemKey);
     }
 
+    // ── Trade multipliers ─────────────────────────────────────────────────────
+    // The single source of truth for trade prices: the server charges/pays with these, and the same
+    // multipliers are sent to the trading GUI, which prices with applyMultiplier too - so they always match.
+
+    /** Shops (grocer, butcher...) sell to the player at 100% of base price. */
+    public static final float SHOP_SELL_MULTIPLIER   = 1.0f;
+    /** Shops buy from the player at 50% of base price. */
+    public static final float SHOP_BUY_MULTIPLIER    = 0.5f;
+    /** The trader sells to the player at 125% of base price. */
+    public static final float TRADER_SELL_MULTIPLIER = 1.25f;
+    /** The trader buys from the player at 75% of base price. */
+    public static final float TRADER_BUY_MULTIPLIER  = 0.75f;
+
+    /** What the NPC charges the player per item (the GUI's "buy" mode). */
+    public static float playerBuyMultiplier(boolean trader)  { return trader ? TRADER_SELL_MULTIPLIER : SHOP_SELL_MULTIPLIER; }
+    /** What the NPC pays the player per item (the GUI's "sell" mode). */
+    public static float playerSellMultiplier(boolean trader) { return trader ? TRADER_BUY_MULTIPLIER : SHOP_BUY_MULTIPLIER; }
+
+    /** Unit price after a multiplier, rounded up. Used by both the server and the GUI. */
+    public static int applyMultiplier(String itemKey, float multiplier) {
+        return (int) Math.ceil(getItemPrice(itemKey) * multiplier);
+    }
+
     /** Trader sells at 125% of base price */
     public static int getTraderSellPrice(String itemKey) {
-        return (int) Math.ceil(getItemPrice(itemKey) * 1.25);
+        return applyMultiplier(itemKey, TRADER_SELL_MULTIPLIER);
     }
 
     /** Trader buys (from player) at 75% of base price */
     public static int getTraderBuyPrice(String itemKey) {
-        return (int) Math.ceil(getItemPrice(itemKey) * 0.75);
+        return applyMultiplier(itemKey, TRADER_BUY_MULTIPLIER);
     }
 
     // ── Public API ────────────────────────────────────────────────────────────
@@ -707,8 +629,9 @@ public class ItemPricing {
         return data != null ? data.price : 0;
     }
 
+    /** What a shop pays the player per item (50% of base price, rounded up like the GUI shows). */
     public static int getItemSellPrice(String itemKey) {
-        return getItemPrice(itemKey) / 2;
+        return applyMultiplier(itemKey, SHOP_BUY_MULTIPLIER);
     }
 
     public static java.util.Map<String, Integer> getAllPricing() {

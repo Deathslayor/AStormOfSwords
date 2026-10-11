@@ -388,7 +388,8 @@ public class ServerPacketHandler {
                             townHall.getTownBalance(),
                             townHall.getTownIncome(),
                             new java.util.HashMap<>(townHall.getTownInventory()),
-                            townHall.getCulture().name()
+                            townHall.getCulture().name(),
+                            townHall.getCitizenEntries()
                     ));
                 }
             }
@@ -402,13 +403,13 @@ public class ServerPacketHandler {
         return "";
     }
 
+    // Same multipliers and rounding as the trading GUI (ItemPricing), so the charged total matches what it shows
     private static long calculateBuyTotalCost(Map<String, Integer> itemAmounts, String jobType) {
+        float multiplier = net.darkflameproduction.agotmod.util.ItemPricing.playerBuyMultiplier(jobType.equals(JobSystem.JOB_TRADER));
         long totalCost = 0;
         for (Map.Entry<String, Integer> entry : itemAmounts.entrySet()) {
             if (entry.getValue() > 0) {
-                int price = jobType.equals(JobSystem.JOB_TRADER)
-                        ? net.darkflameproduction.agotmod.util.ItemPricing.getTraderSellPrice(entry.getKey())
-                        : net.darkflameproduction.agotmod.util.ItemPricing.getItemPrice(entry.getKey());
+                int price = net.darkflameproduction.agotmod.util.ItemPricing.applyMultiplier(entry.getKey(), multiplier);
                 totalCost += (long) price * entry.getValue();
             }
         }
@@ -416,12 +417,11 @@ public class ServerPacketHandler {
     }
 
     private static long calculateSellTotalEarnings(Map<String, Integer> itemAmounts, String jobType) {
+        float multiplier = net.darkflameproduction.agotmod.util.ItemPricing.playerSellMultiplier(jobType.equals(JobSystem.JOB_TRADER));
         long totalEarnings = 0;
         for (Map.Entry<String, Integer> entry : itemAmounts.entrySet()) {
             if (entry.getValue() > 0) {
-                int price = jobType.equals(JobSystem.JOB_TRADER)
-                        ? net.darkflameproduction.agotmod.util.ItemPricing.getTraderBuyPrice(entry.getKey())
-                        : net.darkflameproduction.agotmod.util.ItemPricing.getItemSellPrice(entry.getKey());
+                int price = net.darkflameproduction.agotmod.util.ItemPricing.applyMultiplier(entry.getKey(), multiplier);
                 totalEarnings += (long) price * entry.getValue();
             }
         }

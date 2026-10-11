@@ -121,6 +121,57 @@ public class SimpleBedWarningSystem {
         return citizenNames;
     }
 
+    /**
+     * True if pos is inside the town column: a horizontal square of the given radius
+     * around center, with no height or depth limit.
+     */
+    private static boolean isInColumn(BlockPos center, BlockPos pos, int radius) {
+        return Math.abs(pos.getX() - center.getX()) <= radius
+                && Math.abs(pos.getZ() - center.getZ()) <= radius;
+    }
+
+    // Get all home bed claims within a town column (square radius, unlimited height/depth)
+    public static Set<BlockPos> getHomeBedClaimsInColumn(BlockPos center, int radius, UUID excludeUUID) {
+        cleanupExpiredClaims();
+        Set<BlockPos> claimedBeds = new HashSet<>();
+
+        for (Map.Entry<BlockPos, HomeBedClaim> entry : homeBedClaims.entrySet()) {
+            BlockPos claimedPos = entry.getKey();
+            HomeBedClaim claim = entry.getValue();
+
+            if (excludeUUID != null && claim.npcUUID.equals(excludeUUID)) continue;
+            if (claim.isExpired()) continue;
+
+            if (isInColumn(center, claimedPos, radius)) {
+                claimedBeds.add(claimedPos);
+            }
+        }
+
+        return claimedBeds;
+    }
+
+    // Get citizen names within a town column (square radius, unlimited height/depth)
+    public static Map<UUID, String> getCitizenNamesInColumn(BlockPos center, int radius) {
+        cleanupExpiredClaims();
+        Map<UUID, String> citizenNames = new HashMap<>();
+
+        for (Map.Entry<BlockPos, HomeBedClaim> entry : homeBedClaims.entrySet()) {
+            BlockPos claimedPos = entry.getKey();
+            HomeBedClaim claim = entry.getValue();
+
+            if (claim.isExpired()) continue;
+
+            if (isInColumn(center, claimedPos, radius)) {
+                String currentName = claim.getCurrentName();
+                if (currentName != null && !currentName.isEmpty() && !currentName.equals("Unknown")) {
+                    citizenNames.put(claim.npcUUID, currentName);
+                }
+            }
+        }
+
+        return citizenNames;
+    }
+
     // Remove home bed claim when NPC loses home or is removed
     public static void removeHomeBedClaim(UUID npcUUID) {
         homeBedClaims.entrySet().removeIf(entry -> entry.getValue().npcUUID.equals(npcUUID));

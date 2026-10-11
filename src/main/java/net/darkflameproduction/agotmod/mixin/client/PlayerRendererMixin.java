@@ -25,22 +25,22 @@ public class PlayerRendererMixin {
         PlayerRenderer renderer = (PlayerRenderer) (Object) this;
         PlayerModel<AbstractClientPlayer> model = renderer.getModel();
 
-        if (ModArmorSkinRenderer.HELMETS.values().stream().anyMatch(supplier -> supplier.get().isWearingHelmet(player))) {
+        if (ModArmorSkinRenderer.isWearing3dArmor(player, net.minecraft.world.entity.EquipmentSlot.HEAD)) {
             model.hat.visible = false;
         }
 
-        if (ModArmorSkinRenderer.CHESTPLATES.values().stream().anyMatch(supplier -> supplier.get().isWearingChestplate(player))) {
+        if (ModArmorSkinRenderer.isWearing3dArmor(player, net.minecraft.world.entity.EquipmentSlot.CHEST)) {
             model.jacket.visible = false;
             model.leftSleeve.visible = false;
             model.rightSleeve.visible = false;
         }
 
-        if (ModArmorSkinRenderer.LEGGINGS.values().stream().anyMatch(supplier -> supplier.get().isWearingLeggings(player))) {
+        if (ModArmorSkinRenderer.isWearing3dArmor(player, net.minecraft.world.entity.EquipmentSlot.LEGS)) {
             model.leftPants.visible = false;
             model.rightPants.visible = false;
         }
 
-        if (ModArmorSkinRenderer.BOOTS.values().stream().anyMatch(supplier -> supplier.get().isWearingBoots(player))) {
+        if (ModArmorSkinRenderer.isWearing3dArmor(player, net.minecraft.world.entity.EquipmentSlot.FEET)) {
             model.leftPants.visible = false;
             model.rightPants.visible = false;
         }

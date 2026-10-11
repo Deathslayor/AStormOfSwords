@@ -30,7 +30,6 @@ import java.util.concurrent.ConcurrentHashMap;
 @OnlyIn(Dist.CLIENT)
 public class TownHallDebugRenderer {
 
-    private static final int SCAN_HEIGHT = 384; // Updated height
     private static final String SAVE_FILE = "townhall_debug_data.json";
 
     // Thread-safe map to store Town Hall positions with their current radius
@@ -222,9 +221,10 @@ public class TownHallDebugRenderer {
             BlockPos townHallPos = entry.getKey();
             TownHallData data = entry.getValue();
 
-            // Only render if within reasonable distance to avoid performance issues
-            double distance = cameraPos.distanceToSqr(townHallPos.getX(), townHallPos.getY(), townHallPos.getZ());
-            if (distance < 512 * 512) { // Render within 512 blocks
+            // Only render if within reasonable horizontal distance (the column has no height limit)
+            double dx = cameraPos.x - townHallPos.getX();
+            double dz = cameraPos.z - townHallPos.getZ();
+            if (dx * dx + dz * dz < 512 * 512) { // Render within 512 blocks
                 renderTownHallBounds(poseStack, bufferSource, townHallPos, data, cameraPos);
             }
         }
@@ -247,25 +247,23 @@ public class TownHallDebugRenderer {
 
         // Use the dynamic radius from the data
         int currentRadius = data.radius;
+        Minecraft mc = Minecraft.getInstance();
 
-        // Calculate the scan bounds using dynamic radius
+        // The town area is a column with no height/depth limit - draw it across the full build height
         double minX = -currentRadius;
         double maxX = currentRadius + 1; // +1 to include the edge blocks
-        double minY = -SCAN_HEIGHT;
-        double maxY = SCAN_HEIGHT + 1;
+        double minY = mc.level.getMinBuildHeight() - townHallPos.getY();
+        double maxY = mc.level.getMaxBuildHeight() - townHallPos.getY();
         double minZ = -currentRadius;
         double maxZ = currentRadius + 1;
 
-        // Check if player is inside the scan area
-        Minecraft mc = Minecraft.getInstance();
+        // Check if player is inside the column (horizontal only)
         boolean isInside = false;
         if (mc.player != null) {
             double playerRelX = mc.player.getX() - townHallPos.getX();
-            double playerRelY = mc.player.getY() - townHallPos.getY();
             double playerRelZ = mc.player.getZ() - townHallPos.getZ();
 
             isInside = playerRelX >= minX && playerRelX <= maxX &&
-                    playerRelY >= minY && playerRelY <= maxY &&
                     playerRelZ >= minZ && playerRelZ <= maxZ;
         }
 
@@ -295,21 +293,7 @@ public class TownHallDebugRenderer {
         float lineWidth = 0.04f;
         int gridSpacing = 16; // Grid lines every 16 blocks
 
-        // Render horizontal grid lines on bottom face
-        for (double x = Math.ceil(minX / gridSpacing) * gridSpacing; x <= maxX; x += gridSpacing) {
-            addQuadLine(poseStack, consumer, (float)x, (float)minY, (float)minZ, (float)x, (float)minY, (float)maxZ, lineWidth, red, green, blue, alpha);
-        }
-        for (double z = Math.ceil(minZ / gridSpacing) * gridSpacing; z <= maxZ; z += gridSpacing) {
-            addQuadLine(poseStack, consumer, (float)minX, (float)minY, (float)z, (float)maxX, (float)minY, (float)z, lineWidth, red, green, blue, alpha);
-        }
-
-        // Render horizontal grid lines on top face
-        for (double x = Math.ceil(minX / gridSpacing) * gridSpacing; x <= maxX; x += gridSpacing) {
-            addQuadLine(poseStack, consumer, (float)x, (float)maxY, (float)minZ, (float)x, (float)maxY, (float)maxZ, lineWidth, red, green, blue, alpha);
-        }
-        for (double z = Math.ceil(minZ / gridSpacing) * gridSpacing; z <= maxZ; z += gridSpacing) {
-            addQuadLine(poseStack, consumer, (float)minX, (float)maxY, (float)z, (float)maxX, (float)maxY, (float)z, lineWidth, red, green, blue, alpha);
-        }
+        // Column walls only - no top or bottom face, the area has no height/depth limit
 
         // Render vertical grid lines on X faces
         for (double y = Math.ceil(minY / gridSpacing) * gridSpacing; y <= maxY; y += gridSpacing) {
@@ -331,20 +315,7 @@ public class TownHallDebugRenderer {
             addQuadLine(poseStack, consumer, (float)x, (float)minY, (float)maxZ, (float)x, (float)maxY, (float)maxZ, lineWidth, red, green, blue, alpha);
         }
 
-        // Render boundary edges to clearly define the area
-        // Bottom boundary
-        addQuadLine(poseStack, consumer, (float)minX, (float)minY, (float)minZ, (float)maxX, (float)minY, (float)minZ, lineWidth * 2, red, green, blue, alpha);
-        addQuadLine(poseStack, consumer, (float)maxX, (float)minY, (float)minZ, (float)maxX, (float)minY, (float)maxZ, lineWidth * 2, red, green, blue, alpha);
-        addQuadLine(poseStack, consumer, (float)maxX, (float)minY, (float)maxZ, (float)minX, (float)minY, (float)maxZ, lineWidth * 2, red, green, blue, alpha);
-        addQuadLine(poseStack, consumer, (float)minX, (float)minY, (float)maxZ, (float)minX, (float)minY, (float)minZ, lineWidth * 2, red, green, blue, alpha);
-
-        // Top boundary
-        addQuadLine(poseStack, consumer, (float)minX, (float)maxY, (float)minZ, (float)maxX, (float)maxY, (float)minZ, lineWidth * 2, red, green, blue, alpha);
-        addQuadLine(poseStack, consumer, (float)maxX, (float)maxY, (float)minZ, (float)maxX, (float)maxY, (float)maxZ, lineWidth * 2, red, green, blue, alpha);
-        addQuadLine(poseStack, consumer, (float)maxX, (float)maxY, (float)maxZ, (float)minX, (float)maxY, (float)maxZ, lineWidth * 2, red, green, blue, alpha);
-        addQuadLine(poseStack, consumer, (float)minX, (float)maxY, (float)maxZ, (float)minX, (float)maxY, (float)minZ, lineWidth * 2, red, green, blue, alpha);
-
-        // Vertical boundary edges
+        // Vertical corner edges to clearly define the column
         addQuadLine(poseStack, consumer, (float)minX, (float)minY, (float)minZ, (float)minX, (float)maxY, (float)minZ, lineWidth * 2, red, green, blue, alpha);
         addQuadLine(poseStack, consumer, (float)maxX, (float)minY, (float)minZ, (float)maxX, (float)maxY, (float)minZ, lineWidth * 2, red, green, blue, alpha);
         addQuadLine(poseStack, consumer, (float)maxX, (float)minY, (float)maxZ, (float)maxX, (float)maxY, (float)maxZ, lineWidth * 2, red, green, blue, alpha);

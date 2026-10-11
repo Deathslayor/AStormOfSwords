@@ -25,6 +25,7 @@ public class ModCreativeWeapons {
             () -> CreativeModeTab.builder()
                     .icon(() -> new ItemStack(ModItems.STEEL_SWORD.get())) // Icon for the creative mode tab
                     .title(Component.translatable("creativetab.agot_tab_weapons")) // Title for the creative mode tab
+                    .withTabsBefore(net.minecraft.world.item.CreativeModeTabs.SPAWN_EGGS)
                     .displayItems((pParameters, pOutput) -> {
                         /** TOOLS */
                         pOutput.accept(ModItems.DRAGONGLASS_SPEAR.get());
@@ -69,6 +70,15 @@ public class ModCreativeWeapons {
                         pOutput.accept(ModItems.NOBLE_BATTLEAXE.get());
                         pOutput.accept(ModItems.NOBLE_HALBERD.get());
 
+                        pOutput.accept(ModItems.BLOOD_DAGGER.get());
+
+                        /** ARCHERY */
+                        pOutput.accept(ModItems.STEEL_BOW.get());
+
+                        pOutput.accept(ModItems.ARROW_BRONZE.get());
+                        pOutput.accept(ModItems.ARROW_DRAGONGLASS.get());
+                        pOutput.accept(ModItems.ARROW_STEEL.get());
+                        pOutput.accept(ModItems.ARROW_IRON.get());
 
                     })
                     .build());

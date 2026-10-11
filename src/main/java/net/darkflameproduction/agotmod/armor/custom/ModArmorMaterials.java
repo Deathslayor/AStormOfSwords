@@ -21,7 +21,7 @@ public interface ModArmorMaterials {
             25,
             4.0F,
             0.15F,
-            "stark_levy"
+            "geo_armor"
     ));
 
     Holder<ArmorMaterial> NORTHERN_PLATE = Holder.direct(createMaterial(
@@ -34,7 +34,7 @@ public interface ModArmorMaterials {
             30,
             5.0F,
             0.25F,
-            "stark_levy"
+            "geo_armor"
     ));
 
     Holder<ArmorMaterial> NORTHERN_NOBLE = Holder.direct(createMaterial(
@@ -47,7 +47,7 @@ public interface ModArmorMaterials {
             40,
             6.0F,
             0.40F,
-            "stark_levy"
+            "geo_armor"
     ));
 
     Holder<ArmorMaterial> FUR = Holder.direct(createMaterial(
@@ -60,7 +60,7 @@ public interface ModArmorMaterials {
             20,
             3.0F,
             0.10F,
-            "stark_levy"
+            "geo_armor"
     ));
 
     Holder<ArmorMaterial> LEATHER = Holder.direct(createMaterial(
@@ -73,7 +73,7 @@ public interface ModArmorMaterials {
             25,
             4.0F,
             0.15F,
-            "stark_levy"
+            "geo_armor"
     ));
 
     Holder<ArmorMaterial> CHIEF = Holder.direct(createMaterial(
@@ -86,7 +86,7 @@ public interface ModArmorMaterials {
             30,
             5.0F,
             0.20F,
-            "stark_levy"
+            "geo_armor"
     ));
 
     private static ArmorMaterial createMaterial(Map<ArmorItem.Type, Integer> defense, int enchantmentValue, float toughness, float knockbackResistance, String modelId) {

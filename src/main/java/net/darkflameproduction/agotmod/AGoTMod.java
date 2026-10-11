@@ -75,8 +75,8 @@ public class AGoTMod {
         ModCreativeFoods.register(modEventBus);
         ModCreativeIngredients.register(modEventBus);
         ModCreativeAnimals.register(modEventBus);
-        ModCreativeMagic.register(modEventBus);
-        ModCreativeArchery.register(modEventBus);
+        ModCreativeUtilities.register(modEventBus);
+        ModCreativeScrolls.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModSounds.register(modEventBus);
         ModParticles.register(modEventBus);
@@ -104,6 +104,9 @@ public class AGoTMod {
         NeoForge.EVENT_BUS.register(ServerPlayerEvents.class);
         NeoForge.EVENT_BUS.register(TreeChopHandler.class);
 
+        // Epic Fight: peasants use the player's model, animations and combat
+        net.darkflameproduction.agotmod.compat.epicfight.EpicFightCompat.register();
+
         if (FMLEnvironment.dist == Dist.CLIENT) {
             // Client-only game bus registrations
             NeoForge.EVENT_BUS.register(TownHallDebugRenderer.class);
@@ -117,6 +120,7 @@ public class AGoTMod {
     private void registerClientEvents() {
         NeoForge.EVENT_BUS.register(ClientKeyInputEvents.class);
         NeoForge.EVENT_BUS.register(ClientEventHandler.class);
+        net.darkflameproduction.agotmod.compat.epicfight.client.EpicFightClientCompat.register();
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

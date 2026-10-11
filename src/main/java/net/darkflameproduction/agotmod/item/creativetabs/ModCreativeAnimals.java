@@ -21,6 +21,7 @@ public class ModCreativeAnimals {
             () -> CreativeModeTab.builder()
                     .title(Component.translatable("creativetab.agot_tab_animals"))
                     .icon(() -> new ItemStack(ModItems.MAMMOTH_SPAWN_EGG.get()))
+                    .withTabsBefore(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "agot_tab_tools_utilities"))
                     .displayItems((pParameters, pOutput) -> {
 
                         pOutput.accept(ModItems.MAMMOTH_SPAWN_EGG.get());

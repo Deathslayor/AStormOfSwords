@@ -62,6 +62,12 @@ public class JobWarningSystem {
         activeWarnings.entrySet().removeIf(entry -> entry.getValue().isExpired());
     }
 
+    // All job blocks currently in use by a working NPC
+    public static List<JobBlockWarning> getActiveWarnings() {
+        cleanupExpiredWarnings();
+        return new ArrayList<>(activeWarnings.values());
+    }
+
     // Get warning info for debugging
     public static JobBlockWarning getWarningInfo(BlockPos jobBlockPos) {
         cleanupExpiredWarnings();

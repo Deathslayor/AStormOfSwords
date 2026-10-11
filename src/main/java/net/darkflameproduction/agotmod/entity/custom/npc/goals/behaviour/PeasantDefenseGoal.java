@@ -29,6 +29,16 @@ public class PeasantDefenseGoal extends Goal {
 
     @Override
     public boolean canUse() {
+        // Epic Fight fights with the held weapon's combos against the same target;
+        // this goal only fights for items Epic Fight can't use.
+        if (net.darkflameproduction.agotmod.compat.epicfight.EpicFightCompat.isCombatHandledByEpicFight(this.peasant)) {
+            return false;
+        }
+        // With a bow in hand, NpcBowAttackGoal does the fighting
+        if (this.peasant.getRangedCombat().isHoldingBow()) {
+            return false;
+        }
+
         this.target = this.peasant.getTarget();
 
         // Only defend if we have a target and we're not sleeping/interacting

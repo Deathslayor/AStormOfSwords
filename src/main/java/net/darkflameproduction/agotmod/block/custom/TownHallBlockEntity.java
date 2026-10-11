@@ -4,6 +4,7 @@ import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.animalherder.AnimalHerderCollectionTicketSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobWarningSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobClaims;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.blacksmith.BlacksmithInventoryTicketSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.butcher.ButcherInventoryTicketSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.charcoalburner.CharcoalBurnerCollectionTicketSystem;
@@ -69,7 +70,6 @@ public class TownHallBlockEntity extends BlockEntity implements
 
     private static final int SCAN_TIME = 10000; // Time of day to perform scan
     private static final int CHILD_SPAWN_TIME = 18000; // Time of day to spawn children (midnight)
-    private static final int SCAN_HEIGHT = 384; // Vertical radius (up and down)
     private static final int REGISTER_INTERVAL = 100; // Ticks between registration updates (5 seconds)
     private static final int CITIZEN_CHECK_INTERVAL = 200; // Check for citizens every 10 seconds
     private static final double CHILD_SPAWN_CHANCE = 0.05; // 5% chance per unclaimed bed
@@ -123,6 +123,32 @@ public class TownHallBlockEntity extends BlockEntity implements
     public int getTotalJobCount() {
         return availableJobs.size();
     }
+
+    /**
+     * Positions of every known job block in town (used by guards to plan patrols).
+     * Merges the daily job block scan with job blocks that working NPCs are currently
+     * broadcasting, so blocks placed since the last scan are included too.
+     * Blocks that are no longer job blocks are left out.
+     */
+    public List<BlockPos> getJobBlockPositions() {
+        Set<BlockPos> positions = new LinkedHashSet<>(availableJobs.keySet());
+        int radius = getCurrentScanRadius();
+        for (JobWarningSystem.JobBlockWarning warning : JobWarningSystem.getActiveWarnings()) {
+            if (isWithinStableScanArea(warning.jobBlockPos, radius)) {
+                positions.add(warning.jobBlockPos);
+            }
+        }
+
+        List<BlockPos> result = new ArrayList<>();
+        for (BlockPos pos : positions) {
+            if (level != null && level.isLoaded(pos)
+                    && getJobTypeFromBlock(level.getBlockState(pos)).equals(JobSystem.JOB_NONE)) {
+                continue; // Job block was removed
+            }
+            result.add(pos);
+        }
+        return result;
+    }
     public int getJoblessCount() {
         return joblessQueue.size();
     }
@@ -169,10 +195,15 @@ public class TownHallBlockEntity extends BlockEntity implements
     }
 
     /**
-     * Gets the current scan height (unchanged)
+     * The town area is a column: it spans the full build height of the world,
+     * so it has no height or depth limit.
      */
-    public int getCurrentScanHeight() {
-        return SCAN_HEIGHT;
+    private static int getColumnMinY(Level level) {
+        return level.getMinBuildHeight();
+    }
+
+    private static int getColumnMaxY(Level level) {
+        return level.getMaxBuildHeight() - 1;
     }
 
     public boolean isClaimed() {
@@ -313,13 +344,12 @@ public class TownHallBlockEntity extends BlockEntity implements
     private void performJobBlockScan(Level level) {
         availableJobs.clear();
         int currentRadius = getCurrentScanRadius();
-        int currentHeight = getCurrentScanHeight();
 
         BlockPos centerPos = this.getBlockPos();
         int minX = centerPos.getX() - currentRadius;
         int maxX = centerPos.getX() + currentRadius;
-        int minY = Math.max(centerPos.getY() - currentHeight, level.dimensionType().minY());
-        int maxY = Math.min(centerPos.getY() + currentHeight, level.dimensionType().minY() + level.dimensionType().height() - 1);
+        int minY = getColumnMinY(level);
+        int maxY = getColumnMaxY(level);
         int minZ = centerPos.getZ() - currentRadius;
         int maxZ = centerPos.getZ() + currentRadius;
 
@@ -340,6 +370,14 @@ public class TownHallBlockEntity extends BlockEntity implements
                         if (warning != null) {
                             jobInfo.isOccupied = true;
                             jobInfo.assignedNPC = warning.npcUUID;
+                        }
+                    }
+                    // A saved claim counts even if its worker is asleep, far away or in an unloaded chunk
+                    if (!jobInfo.isOccupied && level instanceof ServerLevel serverLevel) {
+                        UUID owner = JobClaims.get(serverLevel).getOwner(serverLevel, scanPos);
+                        if (owner != null) {
+                            jobInfo.isOccupied = true;
+                            jobInfo.assignedNPC = owner;
                         }
                     }
 
@@ -790,6 +828,20 @@ public class TownHallBlockEntity extends BlockEntity implements
         Entity entity = level.getEntity(npcUUID);
 
         if (entity instanceof Peasant_Entity peasant && peasant.isAdult()) {
+            // Never give a second job to someone who already has one
+            if (peasant.hasJob()) {
+                CitizenInfo citizen = registeredCitizens.get(npcUUID);
+                if (citizen != null) citizen.currentJob = peasant.getJobType();
+                return;
+            }
+            // The job block must be free - claim it first, or leave it with whoever holds it
+            JobClaims claims = JobClaims.get(level);
+            if (!claims.tryClaim(level, jobInfo.jobBlockPos, npcUUID)) {
+                jobInfo.isOccupied = true;
+                jobInfo.assignedNPC = claims.getOwner(level, jobInfo.jobBlockPos);
+                return;
+            }
+
             peasant.setJobType(jobInfo.jobType);
             peasant.setJobBlockPos(jobInfo.jobBlockPos);
 
@@ -879,10 +931,10 @@ public class TownHallBlockEntity extends BlockEntity implements
     private void updateCitizenRegistryFromBeds() {
         int scanRadius = getCurrentScanRadius();
 
-        Set<BlockPos> homeBedClaims = SimpleBedWarningSystem.getHomeBedClaimsInRadius(
+        Set<BlockPos> homeBedClaims = SimpleBedWarningSystem.getHomeBedClaimsInColumn(
                 this.getBlockPos(), scanRadius, null);
 
-        Map<UUID, String> citizenNamesMap = SimpleBedWarningSystem.getCitizenNamesInRadius(
+        Map<UUID, String> citizenNamesMap = SimpleBedWarningSystem.getCitizenNamesInColumn(
                 this.getBlockPos(), scanRadius);
 
         Set<UUID> foundCitizens = new HashSet<>();
@@ -913,15 +965,26 @@ public class TownHallBlockEntity extends BlockEntity implements
                 }
             }
 
-            if (registeredCitizens.containsKey(npcUUID)) {
-                CitizenInfo citizen = registeredCitizens.get(npcUUID);
-                citizen.npcName  = npcName;
-                citizen.lastSeen = System.currentTimeMillis();
-                if (foundPeasant != null) citizen.currentJob = foundPeasant.getJobType();
-            } else {
-                CitizenInfo newCitizen = new CitizenInfo(npcUUID, bedPos, npcName);
-                if (foundPeasant != null) newCitizen.currentJob = foundPeasant.getJobType();
-                registeredCitizens.put(npcUUID, newCitizen);
+            // The NPC's own report (CitizenReportSystem) is the source for its name and job - it is kept
+            // while the NPC is unloaded. Fall back to the bed claim / loaded entity before the first report.
+            net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.CitizenReportSystem.CitizenReport report =
+                    net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.CitizenReportSystem.get(npcUUID);
+            if (report != null && !report.name().isEmpty()) npcName = report.name();
+            String job = report != null ? report.jobType()
+                    : foundPeasant != null ? foundPeasant.getJobType() : null;
+
+            CitizenInfo citizen = registeredCitizens.get(npcUUID);
+            if (citizen == null) {
+                citizen = new CitizenInfo(npcUUID, bedPos, npcName);
+                registeredCitizens.put(npcUUID, citizen);
+                shouldSendDataUpdate = true;
+            } else if (!npcName.equals(citizen.npcName)) {
+                shouldSendDataUpdate = true;
+            }
+            citizen.npcName  = npcName;
+            citizen.lastSeen = System.currentTimeMillis();
+            if (job != null && !job.equals(citizen.currentJob)) {
+                citizen.currentJob = job;
                 shouldSendDataUpdate = true;
             }
         }
@@ -1058,7 +1121,7 @@ public class TownHallBlockEntity extends BlockEntity implements
 
         // Get all beds in town and claimed beds
         List<BlockPos> allBeds = getAllBedsInTown(level);
-        Set<BlockPos> claimedBeds = SimpleBedWarningSystem.getHomeBedClaimsInRadius(
+        Set<BlockPos> claimedBeds = SimpleBedWarningSystem.getHomeBedClaimsInColumn(
                 this.getBlockPos(), getCurrentScanRadius(), null);
 
         // Find unclaimed beds
@@ -1086,19 +1149,14 @@ public class TownHallBlockEntity extends BlockEntity implements
     private List<BlockPos> getAllBedsInTown(Level level) {
         List<BlockPos> beds = new ArrayList<>();
         int currentRadius = getCurrentScanRadius();
-        int currentHeight = getCurrentScanHeight();
 
         BlockPos centerPos = this.getBlockPos();
         int minX = centerPos.getX() - currentRadius;
         int maxX = centerPos.getX() + currentRadius;
-        int minY = centerPos.getY() - currentHeight;
-        int maxY = centerPos.getY() + currentHeight;
+        int minY = getColumnMinY(level);
+        int maxY = getColumnMaxY(level);
         int minZ = centerPos.getZ() - currentRadius;
         int maxZ = centerPos.getZ() + currentRadius;
-
-        // Ensure Y bounds are within world limits
-        minY = Math.max(minY, level.dimensionType().minY());
-        maxY = Math.min(maxY, level.dimensionType().minY() + level.dimensionType().height() - 1);
 
         // Scan for bed heads
         for (int x = minX; x <= maxX; x++) {
@@ -1123,9 +1181,16 @@ public class TownHallBlockEntity extends BlockEntity implements
     }
 
     private void processSingleDeposit(FarmerDepositTicketSystem.DepositTicket ticket) {
-        for (Map.Entry<String, Integer> entry : ticket.items.entrySet()) {
+        depositItems(ticket.items);
+        FarmerDepositTicketSystem.confirmDeposit(ticket.farmerUUID);
+    }
+
+    /** Adds deposited items to the town's stores; the town earns 10% of their value. */
+    public void depositItems(Map<String, Integer> items) {
+        for (Map.Entry<String, Integer> entry : items.entrySet()) {
             String itemKey = entry.getKey();
             int count = entry.getValue();
+            if (count <= 0) continue;
             addToTownInventory(itemKey, count);
             int itemPrice = net.darkflameproduction.agotmod.util.ItemPricing.getItemPrice(itemKey);
             if (itemPrice > 0) {
@@ -1133,7 +1198,6 @@ public class TownHallBlockEntity extends BlockEntity implements
                 addToTownBalance(income);
             }
         }
-        FarmerDepositTicketSystem.confirmDeposit(ticket.farmerUUID);
     }
 
     private void processFarmerDepositTickets() {
@@ -1174,7 +1238,7 @@ public class TownHallBlockEntity extends BlockEntity implements
      */
     private void generateChildName(Peasant_Entity child, RandomSource random) {
         // Get fresh list of citizen names from the bed warning system
-        Map<UUID, String> citizenNamesMap = SimpleBedWarningSystem.getCitizenNamesInRadius(
+        Map<UUID, String> citizenNamesMap = SimpleBedWarningSystem.getCitizenNamesInColumn(
                 this.getBlockPos(), getCurrentScanRadius());
 
         // Extract last names from the citizen names
@@ -1225,6 +1289,10 @@ public class TownHallBlockEntity extends BlockEntity implements
      */
     private String extractLastName(String fullName) {
         if (fullName == null || fullName.isEmpty()) return "Snow";
+        // Guards are titled ("Guard Stinky Joe") and have no family name to pass on
+        if (fullName.startsWith(net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.NameSystem.GUARD_TITLE + " ")) {
+            return "Snow";
+        }
 
         String[] parts = fullName.split(" ");
         if (parts.length > 1) {
@@ -1239,10 +1307,10 @@ public class TownHallBlockEntity extends BlockEntity implements
     private void updateCitizenRegistry(Level level) {
         int scanRadius = getCurrentScanRadius();
 
-        Set<BlockPos> homeBedClaims = SimpleBedWarningSystem.getHomeBedClaimsInRadius(
+        Set<BlockPos> homeBedClaims = SimpleBedWarningSystem.getHomeBedClaimsInColumn(
                 this.getBlockPos(), scanRadius, null);
 
-        Map<UUID, String> citizenNamesMap = SimpleBedWarningSystem.getCitizenNamesInRadius(
+        Map<UUID, String> citizenNamesMap = SimpleBedWarningSystem.getCitizenNamesInColumn(
                 this.getBlockPos(), scanRadius);
 
         citizenLastNames.clear();
@@ -1280,35 +1348,28 @@ public class TownHallBlockEntity extends BlockEntity implements
     }
 
     /**
-     * Helper method to check if a bed is within a specific radius
+     * Checks if a position is within the town column (square radius, unlimited height/depth)
      */
     public boolean isWithinStableScanArea(BlockPos pos, int radius) {
         BlockPos townHallPos = this.getBlockPos();
-        int currentHeight = getCurrentScanHeight();
 
         int dx = Math.abs(pos.getX() - townHallPos.getX());
-        int dy = Math.abs(pos.getY() - townHallPos.getY());
         int dz = Math.abs(pos.getZ() - townHallPos.getZ());
 
-        return dx <= radius && dy <= currentHeight && dz <= radius;
+        return dx <= radius && dz <= radius;
     }
 
     private void performBedScan(Level level) {
         int bedCount = 0;
         int currentRadius = getCurrentScanRadius();
-        int currentHeight = getCurrentScanHeight();
 
         BlockPos centerPos = this.getBlockPos();
         int minX = centerPos.getX() - currentRadius;
         int maxX = centerPos.getX() + currentRadius;
-        int minY = centerPos.getY() - currentHeight;
-        int maxY = centerPos.getY() + currentHeight;
+        int minY = getColumnMinY(level);
+        int maxY = getColumnMaxY(level);
         int minZ = centerPos.getZ() - currentRadius;
         int maxZ = centerPos.getZ() + currentRadius;
-
-        // Ensure Y bounds are within world limits
-        minY = Math.max(minY, level.dimensionType().minY());
-        maxY = Math.min(maxY, level.dimensionType().minY() + level.dimensionType().height() - 1);
 
         // Scan the area for beds - only count HEAD blocks to avoid double counting
         for (int x = minX; x <= maxX; x++) {
@@ -1365,7 +1426,8 @@ public class TownHallBlockEntity extends BlockEntity implements
                                     this.townBalance,
                                     this.townIncome,
                                     new java.util.HashMap<>(this.townInventory),
-                                    this.culture.name()
+                                    this.culture.name(),
+                                    this.getCitizenEntries()
                             ));
                 }
             }
@@ -1394,7 +1456,8 @@ public class TownHallBlockEntity extends BlockEntity implements
                                     this.townBalance,
                                     this.townIncome,
                                     new java.util.HashMap<>(this.townInventory),
-                                    this.culture.name()
+                                    this.culture.name(),
+                                    this.getCitizenEntries()
                             ));
                 }
             }
@@ -1427,7 +1490,8 @@ public class TownHallBlockEntity extends BlockEntity implements
                                     this.townBalance,
                                     this.townIncome,
                                     new java.util.HashMap<>(this.townInventory),
-                                    this.culture.name()
+                                    this.culture.name(),
+                                    this.getCitizenEntries()
                             ));
                 }
             }
@@ -1501,6 +1565,23 @@ public class TownHallBlockEntity extends BlockEntity implements
                         .registerZone(this.worldPosition, getCurrentScanRadius(), houseUUID, sl.dimension());
             }
         }
+    }
+
+    // The controlling house, cached: resolving it for an offline owner reads their player file
+    private UUID cachedHouseUUID = null;
+    private long houseUUIDResolvedAt = Long.MIN_VALUE / 2;
+    private static final long HOUSE_UUID_REFRESH_TICKS = 20 * 60;
+
+    /** The house controlling this town (the claiming player's house), or null if unclaimed or houseless. */
+    @org.jetbrains.annotations.Nullable
+    public UUID getControllingHouseUUID() {
+        if (!isClaimed || claimedByPlayerUUID == null || !(level instanceof ServerLevel sl)) return null;
+        long now = sl.getGameTime();
+        if (now - houseUUIDResolvedAt >= HOUSE_UUID_REFRESH_TICKS) {
+            cachedHouseUUID = resolveHouseUUIDFromPlayer(sl, claimedByPlayerUUID);
+            houseUUIDResolvedAt = now;
+        }
+        return cachedHouseUUID;
     }
 
     private UUID resolveHouseUUIDFromPlayer(ServerLevel serverLevel, UUID playerUUID) {
@@ -1598,6 +1679,10 @@ public class TownHallBlockEntity extends BlockEntity implements
         // Must be a food item
         if (!stack.has(net.minecraft.core.component.DataComponents.FOOD)) return false;
 
+        // Only hand out food NPCs can actually eat - anything else isn't counted as food by them,
+        // so they'd keep coming back for more
+        if (!net.darkflameproduction.agotmod.entity.custom.npc.system.inventory.HungerSystem.isNpcFood(stack)) return false;
+
         // Exclude golden apples explicitly
         if (item == net.minecraft.world.item.Items.GOLDEN_APPLE) return false;
         if (item == net.minecraft.world.item.Items.ENCHANTED_GOLDEN_APPLE) return false;
@@ -1683,6 +1768,19 @@ public class TownHallBlockEntity extends BlockEntity implements
 
     public Map<String, Long> getTownInventory() {
         return Collections.unmodifiableMap(townInventory);
+    }
+
+    /** The town's citizens (name and job, from their CitizenReportSystem reports), sorted by name, for the client. */
+    public List<net.darkflameproduction.agotmod.network.TownHallDataPacket.CitizenEntry> getCitizenEntries() {
+        List<net.darkflameproduction.agotmod.network.TownHallDataPacket.CitizenEntry> entries = new ArrayList<>();
+        for (CitizenInfo citizen : registeredCitizens.values()) {
+            entries.add(new net.darkflameproduction.agotmod.network.TownHallDataPacket.CitizenEntry(
+                    citizen.npcName == null ? "Unknown" : citizen.npcName,
+                    citizen.currentJob == null ? JobSystem.JOB_NONE : citizen.currentJob));
+        }
+        entries.sort(Comparator.comparing(net.darkflameproduction.agotmod.network.TownHallDataPacket.CitizenEntry::name,
+                String.CASE_INSENSITIVE_ORDER));
+        return entries;
     }
 
     public boolean hasTownInventoryItem(String itemKey, long amount) {

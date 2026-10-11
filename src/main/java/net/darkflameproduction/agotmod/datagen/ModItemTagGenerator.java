@@ -629,161 +629,18 @@ public class ModItemTagGenerator extends ItemTagsProvider {
 
 
 
-        this.tag(ItemTags.FREEZE_IMMUNE_WEARABLES)
-                // Wildling Fur
-                .add(ModItems.WILDLING_FUR_HELMET.get().asItem())
-                .add(ModItems.WILDLING_FUR_CHESTPLATE.get().asItem())
-                .add(ModItems.WILDLING_FUR_LEGGINGS.get().asItem())
-                .add(ModItems.WILDLING_FUR_BOOTS.get().asItem())
-
-                // Wildling Leather
-                .add(ModItems.WILDLING_LEATHER_HELMET.get().asItem())
-                .add(ModItems.WILDLING_LEATHER_CHESTPLATE.get().asItem())
-                .add(ModItems.WILDLING_LEATHER_LEGGINGS.get().asItem())
-                .add(ModItems.WILDLING_LEATHER_BOOTS.get().asItem())
-
-                // Wildling Chief
-                .add(ModItems.WILDLING_CHIEF_HELMET.get().asItem())
-                .add(ModItems.WILDLING_CHIEF_CHESTPLATE.get().asItem())
-                .add(ModItems.WILDLING_CHIEF_LEGGINGS.get().asItem())
-                .add(ModItems.WILDLING_CHIEF_BOOTS.get().asItem())
-
-                // Thenn Levy
-                .add(ModItems.THENN_LEVY_HELMET.get().asItem())
-                .add(ModItems.THENN_LEVY_CHESTPLATE.get().asItem())
-                .add(ModItems.THENN_LEVY_LEGGINGS.get().asItem())
-                .add(ModItems.THENN_LEVY_BOOTS.get().asItem())
-
-                // Thenn Plate
-                .add(ModItems.THENN_PLATE_HELMET.get().asItem())
-                .add(ModItems.THENN_PLATE_CHESTPLATE.get().asItem())
-                .add(ModItems.THENN_PLATE_LEGGINGS.get().asItem())
-                .add(ModItems.THENN_PLATE_BOOTS.get().asItem())
-
-                // Thenn Noble
-                .add(ModItems.THENN_NOBLE_HELMET.get().asItem())
-                .add(ModItems.THENN_NOBLE_CHESTPLATE.get().asItem())
-                .add(ModItems.THENN_NOBLE_LEGGINGS.get().asItem())
-                .add(ModItems.THENN_NOBLE_BOOTS.get().asItem())
-                //Nights Watch Ranger
-                .add(ModItems.NIGHT_WATCH_RANGER_HELMET.get().asItem())
-                .add(ModItems.NIGHT_WATCH_RANGER_CHESTPLATE.get().asItem())
-                .add(ModItems.NIGHT_WATCH_RANGER_LEGGINGS.get().asItem())
-                .add(ModItems.NIGHT_WATCH_RANGER_BOOTS.get().asItem())
-                //Nights Watch Leather
-                .add(ModItems.NIGHT_WATCH_LEATHER_HELMET.get().asItem())
-                .add(ModItems.NIGHT_WATCH_LEATHER_CHESTPLATE.get().asItem())
-                .add(ModItems.NIGHT_WATCH_LEATHER_LEGGINGS.get().asItem())
-                .add(ModItems.NIGHT_WATCH_LEATHER_BOOTS.get().asItem())
-                //Nights Watch Elite
-                .add(ModItems.NIGHT_WATCH_ELITE_HELMET.get().asItem())
-                .add(ModItems.NIGHT_WATCH_ELITE_CHESTPLATE.get().asItem())
-                .add(ModItems.NIGHT_WATCH_ELITE_LEGGINGS.get().asItem())
-                .add(ModItems.NIGHT_WATCH_ELITE_BOOTS.get().asItem());
-
-        this.tag(ItemTags.HEAD_ARMOR)
-                .add(ModItems.WILDLING_FUR_HELMET.get().asItem())
-                .add(ModItems.WILDLING_LEATHER_HELMET.get().asItem())
-                .add(ModItems.WILDLING_CHIEF_HELMET.get().asItem())
-                .add(ModItems.THENN_LEVY_HELMET.get().asItem())
-                .add(ModItems.THENN_PLATE_HELMET.get().asItem())
-                .add(ModItems.THENN_NOBLE_HELMET.get().asItem())
-                .add(ModItems.NIGHT_WATCH_RANGER_HELMET.get().asItem())
-                .add(ModItems.NIGHT_WATCH_LEATHER_HELMET.get().asItem())
-                .add(ModItems.NIGHT_WATCH_ELITE_HELMET.get().asItem())
-                .add(ModItems.BOLTEN_LEVY_HELMET.get().asItem())
-                .add(ModItems.BOLTEN_PLATE_HELMET.get().asItem())
-                .add(ModItems.BOLTEN_NOBLE_HELMET.get().asItem())
-                .add(ModItems.MANDERLY_LEVY_HELMET.get().asItem())
-                .add(ModItems.MANDERLY_PLATE_HELMET.get().asItem())
-                .add(ModItems.MANDERLY_NOBLE_HELMET.get().asItem())
-                .add(ModItems.STARK_LEVY_HELMET.get().asItem())
-                .add(ModItems.STARK_PLATE_HELMET.get().asItem())
-                .add(ModItems.STARK_NOBLE_PLATE_HELMET.get().asItem())
-                .add(ModItems.MOUNTAIN_CLAN_LEVY_HELMET.get().asItem())
-                .add(ModItems.MOUNTAIN_CLAN_PLATE_HELMET.get().asItem())
-                .add(ModItems.MOUNTAIN_CLAN_CHIEF_HELMET.get().asItem())
-                .add(ModItems.IRONBORN_LEVY_HELMET.get().asItem())
-                .add(ModItems.IRONBORN_PLATE_HELMET.get().asItem())
-                .add(ModItems.IRONBORN_NOBLE_HELMET.get().asItem());
-
-        this.tag(ItemTags.CHEST_ARMOR)
-                .add(ModItems.WILDLING_FUR_CHESTPLATE.get().asItem())
-                .add(ModItems.WILDLING_LEATHER_CHESTPLATE.get().asItem())
-                .add(ModItems.WILDLING_CHIEF_CHESTPLATE.get().asItem())
-                .add(ModItems.THENN_LEVY_CHESTPLATE.get().asItem())
-                .add(ModItems.THENN_PLATE_CHESTPLATE.get().asItem())
-                .add(ModItems.THENN_NOBLE_CHESTPLATE.get().asItem())
-                .add(ModItems.NIGHT_WATCH_RANGER_CHESTPLATE.get().asItem())
-                .add(ModItems.NIGHT_WATCH_LEATHER_CHESTPLATE.get().asItem())
-                .add(ModItems.NIGHT_WATCH_ELITE_CHESTPLATE.get().asItem())
-                .add(ModItems.BOLTEN_LEVY_CHESTPLATE.get().asItem())
-                .add(ModItems.BOLTEN_PLATE_CHESTPLATE.get().asItem())
-                .add(ModItems.BOLTEN_NOBLE_CHESTPLATE.get().asItem())
-                .add(ModItems.MANDERLY_LEVY_CHESTPLATE.get().asItem())
-                .add(ModItems.MANDERLY_PLATE_CHESTPLATE.get().asItem())
-                .add(ModItems.MANDERLY_NOBLE_CHESTPLATE.get().asItem())
-                .add(ModItems.STARK_LEVY_CHESTPLATE.get().asItem())
-                .add(ModItems.STARK_PLATE_CHESTPLATE.get().asItem())
-                .add(ModItems.STARK_NOBLE_PLATE_CHESTPLATE.get().asItem())
-                .add(ModItems.MOUNTAIN_CLAN_LEVY_CHESTPLATE.get().asItem())
-                .add(ModItems.MOUNTAIN_CLAN_PLATE_CHESTPLATE.get().asItem())
-                .add(ModItems.MOUNTAIN_CLAN_CHIEF_CHESTPLATE.get().asItem())
-                .add(ModItems.IRONBORN_LEVY_CHESTPLATE.get().asItem())
-                .add(ModItems.IRONBORN_PLATE_CHESTPLATE.get().asItem())
-                .add(ModItems.IRONBORN_NOBLE_CHESTPLATE.get().asItem());
-
-        this.tag(ItemTags.LEG_ARMOR)
-                .add(ModItems.WILDLING_FUR_LEGGINGS.get().asItem())
-                .add(ModItems.WILDLING_LEATHER_LEGGINGS.get().asItem())
-                .add(ModItems.WILDLING_CHIEF_LEGGINGS.get().asItem())
-                .add(ModItems.THENN_LEVY_LEGGINGS.get().asItem())
-                .add(ModItems.THENN_PLATE_LEGGINGS.get().asItem())
-                .add(ModItems.THENN_NOBLE_LEGGINGS.get().asItem())
-                .add(ModItems.NIGHT_WATCH_RANGER_LEGGINGS.get().asItem())
-                .add(ModItems.NIGHT_WATCH_LEATHER_LEGGINGS.get().asItem())
-                .add(ModItems.NIGHT_WATCH_ELITE_LEGGINGS.get().asItem())
-                .add(ModItems.BOLTEN_LEVY_LEGGINGS.get().asItem())
-                .add(ModItems.BOLTEN_PLATE_LEGGINGS.get().asItem())
-                .add(ModItems.BOLTEN_NOBLE_LEGGINGS.get().asItem())
-                .add(ModItems.MANDERLY_LEVY_LEGGINGS.get().asItem())
-                .add(ModItems.MANDERLY_PLATE_LEGGINGS.get().asItem())
-                .add(ModItems.MANDERLY_NOBLE_LEGGINGS.get().asItem())
-                .add(ModItems.STARK_LEVY_LEGGINGS.get().asItem())
-                .add(ModItems.STARK_PLATE_LEGGINGS.get().asItem())
-                .add(ModItems.STARK_NOBLE_PLATE_LEGGINGS.get().asItem())
-                .add(ModItems.MOUNTAIN_CLAN_LEVY_LEGGINGS.get().asItem())
-                .add(ModItems.MOUNTAIN_CLAN_PLATE_LEGGINGS.get().asItem())
-                .add(ModItems.MOUNTAIN_CLAN_CHIEF_LEGGINGS.get().asItem())
-                .add(ModItems.IRONBORN_LEVY_LEGGINGS.get().asItem())
-                .add(ModItems.IRONBORN_PLATE_LEGGINGS.get().asItem())
-                .add(ModItems.IRONBORN_NOBLE_LEGGINGS.get().asItem());
-
-        this.tag(ItemTags.FOOT_ARMOR)
-                .add(ModItems.WILDLING_FUR_BOOTS.get().asItem())
-                .add(ModItems.WILDLING_LEATHER_BOOTS.get().asItem())
-                .add(ModItems.WILDLING_CHIEF_BOOTS.get().asItem())
-                .add(ModItems.THENN_LEVY_BOOTS.get().asItem())
-                .add(ModItems.THENN_PLATE_BOOTS.get().asItem())
-                .add(ModItems.THENN_NOBLE_BOOTS.get().asItem())
-                .add(ModItems.NIGHT_WATCH_RANGER_BOOTS.get().asItem())
-                .add(ModItems.NIGHT_WATCH_LEATHER_BOOTS.get().asItem())
-                .add(ModItems.NIGHT_WATCH_ELITE_BOOTS.get().asItem())
-                .add(ModItems.BOLTEN_LEVY_BOOTS.get().asItem())
-                .add(ModItems.BOLTEN_PLATE_BOOTS.get().asItem())
-                .add(ModItems.BOLTEN_NOBLE_BOOTS.get().asItem())
-                .add(ModItems.MANDERLY_LEVY_BOOTS.get().asItem())
-                .add(ModItems.MANDERLY_PLATE_BOOTS.get().asItem())
-                .add(ModItems.MANDERLY_NOBLE_BOOTS.get().asItem())
-                .add(ModItems.STARK_LEVY_BOOTS.get().asItem())
-                .add(ModItems.STARK_PLATE_BOOTS.get().asItem())
-                .add(ModItems.STARK_NOBLE_PLATE_BOOTS.get().asItem())
-                .add(ModItems.MOUNTAIN_CLAN_LEVY_BOOTS.get().asItem())
-                .add(ModItems.MOUNTAIN_CLAN_PLATE_BOOTS.get().asItem())
-                .add(ModItems.MOUNTAIN_CLAN_CHIEF_BOOTS.get().asItem())
-                .add(ModItems.IRONBORN_LEVY_BOOTS.get().asItem())
-                .add(ModItems.IRONBORN_PLATE_BOOTS.get().asItem())
-                .add(ModItems.IRONBORN_NOBLE_BOOTS.get().asItem());
+        // 3D armour sets: armour slot tags, and freeze immunity (powder snow) for the fur and leather families
+        for (net.darkflameproduction.agotmod.armor.ModArmorSets.ArmorSet set : net.darkflameproduction.agotmod.armor.ModArmorSets.all()) {
+            this.tag(ItemTags.HEAD_ARMOR).add(set.piece(net.minecraft.world.item.ArmorItem.Type.HELMET).get());
+            this.tag(ItemTags.CHEST_ARMOR).add(set.piece(net.minecraft.world.item.ArmorItem.Type.CHESTPLATE).get());
+            this.tag(ItemTags.LEG_ARMOR).add(set.piece(net.minecraft.world.item.ArmorItem.Type.LEGGINGS).get());
+            this.tag(ItemTags.FOOT_ARMOR).add(set.piece(net.minecraft.world.item.ArmorItem.Type.BOOTS).get());
+            if (set.chain.fromLeather) {
+                for (net.minecraft.world.item.ArmorItem.Type type : net.darkflameproduction.agotmod.armor.ModArmorSets.PIECES) {
+                    this.tag(ItemTags.FREEZE_IMMUNE_WEARABLES).add(set.piece(type).get());
+                }
+            }
+        }
 
         this.tag(ItemTags.WALLS)
         ;

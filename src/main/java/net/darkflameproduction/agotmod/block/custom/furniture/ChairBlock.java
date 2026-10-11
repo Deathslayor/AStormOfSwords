@@ -1,5 +1,6 @@
 package net.darkflameproduction.agotmod.block.custom.furniture;
 
+import net.darkflameproduction.agotmod.block.custom.GeoShapes;
 import net.darkflameproduction.agotmod.entity.custom.SeatEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -41,12 +42,27 @@ public class ChairBlock extends Block implements EntityBlock {
                 .setValue(FACING, Direction.NORTH));
     }
 
-    // Chair and ArmChair
-    private static final VoxelShape SHAPE = Block.box(1, 0, 1, 15, 10, 15);
+    // Cubes from geo/block/chair.geo.json, rotated per facing like the renderer does
+    private static final java.util.Map<Direction, VoxelShape> SHAPES = GeoShapes.forAllFacings(GeoShapes.fromCubes(new double[][]{
+            {4, 0, -6, 2, 8, 2},
+            {4, 0, 4, 2, 25, 2},
+            {4, 3, -4, 1, 2, 8},
+            {-5, 3, -4, 1, 2, 8},
+            {-4, 3, -5, 8, 2, 1},
+            {-4, 3, 4, 8, 2, 1},
+            {-4, 13, 4.5, 8, 2, 1},
+            {-4, 18, 4.5, 8, 2, 1},
+            {-4, 23, 4.5, 8, 2, 1},
+            {-6, 0, 4, 2, 25, 2},
+            {-6, 8, -7, 12, 2, 11},
+            {-4, 8, 4, 8, 2, 1},
+            {-6, 0, -6, 2, 8, 2}
+    }, 8, 8));
+
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos,
                                   CollisionContext context) {
-        return SHAPE;
+        return SHAPES.get(state.getValue(FACING));
     }
 
     @Override

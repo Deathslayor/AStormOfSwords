@@ -4,6 +4,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.model.DefaultedBlockGeoModel;
@@ -23,18 +25,17 @@ public class BarrelMediumBlockEntityRenderer extends GeoBlockRenderer<BarrelMedi
                           int packedLight, int packedOverlay, int colour) {
         super.preRender(poseStack, animatable, model, bufferSource, buffer,
                 isReRender, partialTick, packedLight, packedOverlay, colour);
-        poseStack.translate(0.5f, 0.0f, 0.5f);
+        // The renderer already centres on the controller block; shift to the corner the barrel is centred on
+        BlockState state = animatable.getBlockState();
+        poseStack.translate(BarrelMediumBlock.centreOffsetX(state) - 0.5, 0.0, BarrelMediumBlock.centreOffsetZ(state) - 0.5);
     }
 
     @Override
     public AABB getRenderBoundingBox(BarrelMediumBlockEntity blockEntity) {
-        return new AABB(
-                blockEntity.getBlockPos().getX(),
-                blockEntity.getBlockPos().getY(),
-                blockEntity.getBlockPos().getZ(),
-                blockEntity.getBlockPos().getX() + 2,
-                blockEntity.getBlockPos().getY() + 2,
-                blockEntity.getBlockPos().getZ() + 2
-        );
+        BlockPos pos = blockEntity.getBlockPos();
+        BlockState state = blockEntity.getBlockState();
+        double minX = pos.getX() + BarrelMediumBlock.centreOffsetX(state) - 1;
+        double minZ = pos.getZ() + BarrelMediumBlock.centreOffsetZ(state) - 1;
+        return new AABB(minX, pos.getY(), minZ, minX + 2, pos.getY() + 2, minZ + 2);
     }
 }

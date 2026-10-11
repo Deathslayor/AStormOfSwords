@@ -26,6 +26,7 @@ public class ModCreativeIngredients {
             () -> CreativeModeTab.builder()
                     .icon(() -> new ItemStack(ModItems.STEEL_INGOT.get())) // Icon for the creative mode tab
                     .title(Component.translatable("creativetab.agot_tab_ingredients")) // Title for the creative mode tab
+                    .withTabsBefore(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "agot_tab_foods"))
                     .displayItems((pParameters, pOutput) -> {
                         /** Blocks */
                         pOutput.accept(ModItems.GOLD_DRAGON.get());
@@ -37,36 +38,6 @@ public class ModCreativeIngredients {
                         pOutput.accept(ModItems.COPPER_PENNY.get());
                         pOutput.accept(ModItems.COPPER_HALFPENNY.get());
 
-                        /** Banner Patterns */
-                        pOutput.accept(BannerPatterns.ARRYN_BANNER_PATTERN.get());
-                        pOutput.accept(BannerPatterns.BAELISH_BANNER_PATTERN.get());
-                        pOutput.accept(BannerPatterns.BARATHEON_BANNER_PATTERN.get());
-                        pOutput.accept(BannerPatterns.BLACKWOOD_BANNER_PATTERN.get());
-                        pOutput.accept(BannerPatterns.BOLTON_BANNER_PATTERN.get());
-                        pOutput.accept(BannerPatterns.BRACKEN_BANNER_PATTERN.get());
-                        pOutput.accept(BannerPatterns.CLEGANE_BANNER_PATTERN.get());
-                        pOutput.accept(BannerPatterns.DAYNE_BANNER_PATTERN.get());
-                        pOutput.accept(BannerPatterns.FREY_BANNER_PATTERN.get());
-                        pOutput.accept(BannerPatterns.GREYJOY_BANNER_PATTERN.get());
-                        pOutput.accept(BannerPatterns.HARLAW_BANNER_PATTERN.get());
-                        pOutput.accept(BannerPatterns.HIGHTOWER_BANNER_PATTERN.get());
-                        pOutput.accept(BannerPatterns.KARSTARK_BANNER_PATTERN.get());
-                        pOutput.accept(BannerPatterns.LANNISTER_BANNER_PATTERN.get());
-                        pOutput.accept(BannerPatterns.MANDERLY_BANNER_PATTERN.get());
-                        pOutput.accept(BannerPatterns.MORMONT_BANNER_PATTERN.get());
-                        pOutput.accept(BannerPatterns.REDWYNE_BANNER_PATTERN.get());
-                        pOutput.accept(BannerPatterns.REED_BANNER_PATTERN.get());
-                        pOutput.accept(BannerPatterns.REYNE_BANNER_PATTERN.get());
-                        pOutput.accept(BannerPatterns.ROYCE_BANNER_PATTERN.get());
-                        pOutput.accept(BannerPatterns.STARK_BANNER_PATTERN.get());
-                        pOutput.accept(BannerPatterns.TARGARYEN_BANNER_PATTERN.get());
-                        pOutput.accept(BannerPatterns.TARLY_BANNER_PATTERN.get());
-                        pOutput.accept(BannerPatterns.TULLY_BANNER_PATTERN.get());
-                        pOutput.accept(BannerPatterns.TYRELL_BANNER_PATTERN.get());
-                        pOutput.accept(BannerPatterns.UMBER_BANNER_PATTERN.get());
-                        pOutput.accept(BannerPatterns.VELARYON_BANNER_PATTERN.get());
-
-
                         /** Items */
                         //INGREDIENTS
                         pOutput.accept(ModItems.WEIRWOOD_STICK.get());
@@ -76,6 +47,7 @@ public class ModCreativeIngredients {
                         pOutput.accept(ModItems.IVORY_SHARD.get());
                         pOutput.accept(ModItems.BOILED_LEATHER.get());
                         pOutput.accept(ModItems.FUR.get());
+                        pOutput.accept(ModItems.BLOOD_BOTTLED.get());
 
 
 
@@ -174,37 +146,6 @@ public class ModCreativeIngredients {
                         pOutput.accept(ModItems.TOPAZ.get());
                         pOutput.accept(ModItems.TOURMALINE.get());
 
-                        pOutput.accept(ModItems.STARK_LEVY_SMITHING_SCROLL.get());
-                        pOutput.accept(ModItems.STARK_PLATE_SMITHING_SCROLL.get());
-                        pOutput.accept(ModItems.STARK_NOBLE_SMITHING_SCROLL.get());
-
-                        pOutput.accept(ModItems.BOLTON_LEVY_SMITHING_SCROLL.get());
-                        pOutput.accept(ModItems.BOLTON_PLATE_SMITHING_SCROLL.get());
-                        pOutput.accept(ModItems.BOLTON_NOBLE_SMITHING_SCROLL.get());
-
-                        pOutput.accept(ModItems.MANDERLY_LEVY_SMITHING_SCROLL.get());
-                        pOutput.accept(ModItems.MANDERLY_PLATE_SMITHING_SCROLL.get());
-                        pOutput.accept(ModItems.MANDERLY_NOBLE_SMITHING_SCROLL.get());
-
-                        pOutput.accept(ModItems.NORTHERN_MOUNTAIN_CLAN_LEATHER_SMITHING_SCROLL.get());
-                        pOutput.accept(ModItems.NORTHERN_MOUNTAIN_CLAN_CHAIN_SMITHING_SCROLL.get());
-                        pOutput.accept(ModItems.NORTHERN_MOUNTAIN_CLAN_NOBLE_SMITHING_SCROLL.get());
-
-                        pOutput.accept(ModItems.NIGHTS_WATCH_RANGER_SMITHING_SCROLL.get());
-                        pOutput.accept(ModItems.NIGHTS_WATCH_LEATHER_SMITHING_SCROLL.get());
-                        pOutput.accept(ModItems.NIGHTS_WATCH_ELITE_SMITHING_SCROLL.get());
-
-                        pOutput.accept(ModItems.WILDLING_FUR_SMITHING_SCROLL.get());
-                        pOutput.accept(ModItems.WILDLING_LEATHER_SMITHING_SCROLL.get());
-                        pOutput.accept(ModItems.WILDLING_CHIEF_SMITHING_SCROLL.get());
-
-                        pOutput.accept(ModItems.THENN_LEVY_SMITHING_SCROLL.get());
-                        pOutput.accept(ModItems.THENN_PLATE_SMITHING_SCROLL.get());
-                        pOutput.accept(ModItems.THENN_NOBLE_SMITHING_SCROLL.get());
-
-                        pOutput.accept(ModItems.IRONBORN_LEVY_SMITHING_SCROLL.get());
-                        pOutput.accept(ModItems.IRONBORN_PLATE_SMITHING_SCROLL.get());
-                        pOutput.accept(ModItems.IRONBORN_NOBLE_SMITHING_SCROLL.get());
 
                     })
                     .build());

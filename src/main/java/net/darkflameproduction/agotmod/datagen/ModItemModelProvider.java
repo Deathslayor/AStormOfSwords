@@ -1,30 +1,6 @@
 package net.darkflameproduction.agotmod.datagen;
 
 import net.darkflameproduction.agotmod.AGoTMod;
-import net.darkflameproduction.agotmod.armor.custom.bolten.BoltenLevyArmorItem;
-import net.darkflameproduction.agotmod.armor.custom.bolten.BoltenNobleArmorItem;
-import net.darkflameproduction.agotmod.armor.custom.bolten.BoltenPlateArmorItem;
-import net.darkflameproduction.agotmod.armor.custom.manderly.ManderlyLevyArmorItem;
-import net.darkflameproduction.agotmod.armor.custom.manderly.ManderlyNobleArmorItem;
-import net.darkflameproduction.agotmod.armor.custom.manderly.ManderlyPlateArmorItem;
-import net.darkflameproduction.agotmod.armor.custom.stark.StarkLevyArmorItem;
-import net.darkflameproduction.agotmod.armor.custom.stark.StarkNoblePlateArmorItem;
-import net.darkflameproduction.agotmod.armor.custom.stark.StarkPlateArmorItem;
-import net.darkflameproduction.agotmod.armor.custom.thenn.ThennLevyArmorItem;
-import net.darkflameproduction.agotmod.armor.custom.thenn.ThennNobleArmorItem;
-import net.darkflameproduction.agotmod.armor.custom.thenn.ThennPlateArmorItem;
-import net.darkflameproduction.agotmod.armor.custom.ironborn.IronBornLevyArmorItem;
-import net.darkflameproduction.agotmod.armor.custom.ironborn.IronBornNobleArmorItem;
-import net.darkflameproduction.agotmod.armor.custom.ironborn.IronBornPlateArmorItem;
-import net.darkflameproduction.agotmod.armor.custom.mountin_clan.MountainClanLevyArmorItem;
-import net.darkflameproduction.agotmod.armor.custom.mountin_clan.MountainClanPlateArmorItem;
-import net.darkflameproduction.agotmod.armor.custom.mountin_clan.MountainClanChiefArmorItem;
-import net.darkflameproduction.agotmod.armor.custom.wildling.WildlingFurArmorItem;
-import net.darkflameproduction.agotmod.armor.custom.wildling.WildlingLeatherArmorItem;
-import net.darkflameproduction.agotmod.armor.custom.wildling.WildlingChiefArmorItem;
-import net.darkflameproduction.agotmod.armor.custom.night_watch.NightsWatchRangerArmorItem;
-import net.darkflameproduction.agotmod.armor.custom.night_watch.NightsWatchLeatherArmorItem;
-import net.darkflameproduction.agotmod.armor.custom.night_watch.NightsWatchEliteArmorItem;
 import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.darkflameproduction.agotmod.item.ModItems;
 import net.darkflameproduction.agotmod.item.custom.BannerPatterns;
@@ -73,126 +49,13 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         // ---------------------------(ARMOUR)--------------------------- //
         // Register item models for Armour
-        //Stark
-        simpleItemStarkLevy(ModItems.STARK_LEVY_HELMET);
-        simpleItemStarkLevy(ModItems.STARK_LEVY_CHESTPLATE);
-        simpleItemStarkLevy(ModItems.STARK_LEVY_LEGGINGS);
-        simpleItemStarkLevy(ModItems.STARK_LEVY_BOOTS);
-        //
-        simpleItemStarkPlate(ModItems.STARK_PLATE_HELMET);
-        simpleItemStarkPlate(ModItems.STARK_PLATE_CHESTPLATE);
-        simpleItemStarkPlate(ModItems.STARK_PLATE_LEGGINGS);
-        simpleItemStarkPlate(ModItems.STARK_PLATE_BOOTS);
-        //
-        simpleItemStarkNoblePlate(ModItems.STARK_NOBLE_PLATE_HELMET);
-        simpleItemStarkNoblePlate(ModItems.STARK_NOBLE_PLATE_CHESTPLATE);
-        simpleItemStarkNoblePlate(ModItems.STARK_NOBLE_PLATE_LEGGINGS);
-        simpleItemStarkNoblePlate(ModItems.STARK_NOBLE_PLATE_BOOTS);
-        //Bolten
-        simpleItemBoltenLevy(ModItems.BOLTEN_LEVY_HELMET);
-        simpleItemBoltenLevy(ModItems.BOLTEN_LEVY_CHESTPLATE);
-        simpleItemBoltenLevy(ModItems.BOLTEN_LEVY_LEGGINGS);
-        simpleItemBoltenLevy(ModItems.BOLTEN_LEVY_BOOTS);
-        //
-        simpleItemBoltenPlate(ModItems.BOLTEN_PLATE_HELMET);
-        simpleItemBoltenPlate(ModItems.BOLTEN_PLATE_CHESTPLATE);
-        simpleItemBoltenPlate(ModItems.BOLTEN_PLATE_LEGGINGS);
-        simpleItemBoltenPlate(ModItems.BOLTEN_PLATE_BOOTS);
-        //
-        simpleItemBoltenNoblePlate(ModItems.BOLTEN_NOBLE_HELMET);
-        simpleItemBoltenNoblePlate(ModItems.BOLTEN_NOBLE_CHESTPLATE);
-        simpleItemBoltenNoblePlate(ModItems.BOLTEN_NOBLE_LEGGINGS);
-        simpleItemBoltenNoblePlate(ModItems.BOLTEN_NOBLE_BOOTS);
-        //Manderly
-        simpleItemManderlyLevy(ModItems.MANDERLY_LEVY_HELMET);
-        simpleItemManderlyLevy(ModItems.MANDERLY_LEVY_CHESTPLATE);
-        simpleItemManderlyLevy(ModItems.MANDERLY_LEVY_LEGGINGS);
-        simpleItemManderlyLevy(ModItems.MANDERLY_LEVY_BOOTS);
-        //
-        simpleItemManderlyPlate(ModItems.MANDERLY_PLATE_HELMET);
-        simpleItemManderlyPlate(ModItems.MANDERLY_PLATE_CHESTPLATE);
-        simpleItemManderlyPlate(ModItems.MANDERLY_PLATE_LEGGINGS);
-        simpleItemManderlyPlate(ModItems.MANDERLY_PLATE_BOOTS);
-        //
-        simpleItemManderlyNoble(ModItems.MANDERLY_NOBLE_HELMET);
-        simpleItemManderlyNoble(ModItems.MANDERLY_NOBLE_CHESTPLATE);
-        simpleItemManderlyNoble(ModItems.MANDERLY_NOBLE_LEGGINGS);
-        simpleItemManderlyNoble(ModItems.MANDERLY_NOBLE_BOOTS);
-        //
-        simpleItemThennLevy(ModItems.THENN_LEVY_HELMET);
-        simpleItemThennLevy(ModItems.THENN_LEVY_CHESTPLATE);
-        simpleItemThennLevy(ModItems.THENN_LEVY_LEGGINGS);
-        simpleItemThennLevy(ModItems.THENN_LEVY_BOOTS);
-        //
-        simpleItemThennPlate(ModItems.THENN_PLATE_HELMET);
-        simpleItemThennPlate(ModItems.THENN_PLATE_CHESTPLATE);
-        simpleItemThennPlate(ModItems.THENN_PLATE_LEGGINGS);
-        simpleItemThennPlate(ModItems.THENN_PLATE_BOOTS);
-        //
-        simpleItemThennNoble(ModItems.THENN_NOBLE_HELMET);
-        simpleItemThennNoble(ModItems.THENN_NOBLE_CHESTPLATE);
-        simpleItemThennNoble(ModItems.THENN_NOBLE_LEGGINGS);
-        simpleItemThennNoble(ModItems.THENN_NOBLE_BOOTS);
-        //
-        simpleItemWildlingLeather(ModItems.WILDLING_LEATHER_HELMET);
-        simpleItemWildlingLeather(ModItems.WILDLING_LEATHER_CHESTPLATE);
-        simpleItemWildlingLeather(ModItems.WILDLING_LEATHER_LEGGINGS);
-        simpleItemWildlingLeather(ModItems.WILDLING_LEATHER_BOOTS);
-        //
-        simpleItemWildlingFur(ModItems.WILDLING_FUR_HELMET);
-        simpleItemWildlingFur(ModItems.WILDLING_FUR_CHESTPLATE);
-        simpleItemWildlingFur(ModItems.WILDLING_FUR_LEGGINGS);
-        simpleItemWildlingFur(ModItems.WILDLING_FUR_BOOTS);
-        //
-        simpleItemWildlingChief(ModItems.WILDLING_CHIEF_HELMET);
-        simpleItemWildlingChief(ModItems.WILDLING_CHIEF_CHESTPLATE);
-        simpleItemWildlingChief(ModItems.WILDLING_CHIEF_LEGGINGS);
-        simpleItemWildlingChief(ModItems.WILDLING_CHIEF_BOOTS);
-        //
-        simpleItemIronbornLevy(ModItems.IRONBORN_LEVY_HELMET);
-        simpleItemIronbornLevy(ModItems.IRONBORN_LEVY_CHESTPLATE);
-        simpleItemIronbornLevy(ModItems.IRONBORN_LEVY_LEGGINGS);
-        simpleItemIronbornLevy(ModItems.IRONBORN_LEVY_BOOTS);
-        //
-        simpleItemIronbornPlate(ModItems.IRONBORN_PLATE_HELMET);
-        simpleItemIronbornPlate(ModItems.IRONBORN_PLATE_CHESTPLATE);
-        simpleItemIronbornPlate(ModItems.IRONBORN_PLATE_LEGGINGS);
-        simpleItemIronbornPlate(ModItems.IRONBORN_PLATE_BOOTS);
-        //
-        simpleItemIronbornNoble(ModItems.IRONBORN_NOBLE_HELMET);
-        simpleItemIronbornNoble(ModItems.IRONBORN_NOBLE_CHESTPLATE);
-        simpleItemIronbornNoble(ModItems.IRONBORN_NOBLE_LEGGINGS);
-        simpleItemIronbornNoble(ModItems.IRONBORN_NOBLE_BOOTS);
-        //
-        simpleItemMountainClanLevy(ModItems.MOUNTAIN_CLAN_LEVY_HELMET);
-        simpleItemMountainClanLevy(ModItems.MOUNTAIN_CLAN_LEVY_CHESTPLATE);
-        simpleItemMountainClanLevy(ModItems.MOUNTAIN_CLAN_LEVY_LEGGINGS);
-        simpleItemMountainClanLevy(ModItems.MOUNTAIN_CLAN_LEVY_BOOTS);
-        //
-        simpleItemMountainClanPlate(ModItems.MOUNTAIN_CLAN_PLATE_HELMET);
-        simpleItemMountainClanPlate(ModItems.MOUNTAIN_CLAN_PLATE_CHESTPLATE);
-        simpleItemMountainClanPlate(ModItems.MOUNTAIN_CLAN_PLATE_LEGGINGS);
-        simpleItemMountainClanPlate(ModItems.MOUNTAIN_CLAN_PLATE_BOOTS);
-        //
-        simpleItemMountainClanChief(ModItems.MOUNTAIN_CLAN_CHIEF_HELMET);
-        simpleItemMountainClanChief(ModItems.MOUNTAIN_CLAN_CHIEF_CHESTPLATE);
-        simpleItemMountainClanChief(ModItems.MOUNTAIN_CLAN_CHIEF_LEGGINGS);
-        simpleItemMountainClanChief(ModItems.MOUNTAIN_CLAN_CHIEF_BOOTS);
-        //
-        simpleItemNightWatchRanger(ModItems.NIGHT_WATCH_RANGER_HELMET);
-        simpleItemNightWatchRanger(ModItems.NIGHT_WATCH_RANGER_CHESTPLATE);
-        simpleItemNightWatchRanger(ModItems.NIGHT_WATCH_RANGER_LEGGINGS);
-        simpleItemNightWatchRanger(ModItems.NIGHT_WATCH_RANGER_BOOTS);
-        //
-        simpleItemNightWatchLeather(ModItems.NIGHT_WATCH_LEATHER_HELMET);
-        simpleItemNightWatchLeather(ModItems.NIGHT_WATCH_LEATHER_CHESTPLATE);
-        simpleItemNightWatchLeather(ModItems.NIGHT_WATCH_LEATHER_LEGGINGS);
-        simpleItemNightWatchLeather(ModItems.NIGHT_WATCH_LEATHER_BOOTS);
-        //
-        simpleItemNightWatchElite(ModItems.NIGHT_WATCH_ELITE_HELMET);
-        simpleItemNightWatchElite(ModItems.NIGHT_WATCH_ELITE_CHESTPLATE);
-        simpleItemNightWatchElite(ModItems.NIGHT_WATCH_ELITE_LEGGINGS);
-        simpleItemNightWatchElite(ModItems.NIGHT_WATCH_ELITE_BOOTS);
+        // Every 3D armour set: flat inventory icons (textures/item/<item id>.png) and the set's smithing scroll
+        for (net.darkflameproduction.agotmod.armor.ModArmorSets.ArmorSet set : net.darkflameproduction.agotmod.armor.ModArmorSets.all()) {
+            for (net.minecraft.world.item.ArmorItem.Type type : net.darkflameproduction.agotmod.armor.ModArmorSets.PIECES) {
+                basicItem(set.piece(type).get());
+            }
+            basicItem(set.scroll().get());
+        }
 
         // ---------------------------(COINS)--------------------------- //
         simpleItem(ModItems.COPPER_STAR);
@@ -1493,37 +1356,13 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.UPGRADE_KIT_FUR);
         simpleItem(ModItems.UPGRADE_KIT_LEATHER);
 
-        simpleItem(ModItems.STARK_LEVY_SMITHING_SCROLL);
-        simpleItem(ModItems.STARK_PLATE_SMITHING_SCROLL);
-        simpleItem(ModItems.STARK_NOBLE_SMITHING_SCROLL);
 
-        simpleItem(ModItems.BOLTON_LEVY_SMITHING_SCROLL);
-        simpleItem(ModItems.BOLTON_PLATE_SMITHING_SCROLL);
-        simpleItem(ModItems.BOLTON_NOBLE_SMITHING_SCROLL);
 
-        simpleItem(ModItems.MANDERLY_LEVY_SMITHING_SCROLL);
-        simpleItem(ModItems.MANDERLY_PLATE_SMITHING_SCROLL);
-        simpleItem(ModItems.MANDERLY_NOBLE_SMITHING_SCROLL);
 
-        simpleItem(ModItems.NORTHERN_MOUNTAIN_CLAN_LEATHER_SMITHING_SCROLL);
-        simpleItem(ModItems.NORTHERN_MOUNTAIN_CLAN_CHAIN_SMITHING_SCROLL);
-        simpleItem(ModItems.NORTHERN_MOUNTAIN_CLAN_NOBLE_SMITHING_SCROLL);
 
-        simpleItem(ModItems.NIGHTS_WATCH_RANGER_SMITHING_SCROLL);
-        simpleItem(ModItems.NIGHTS_WATCH_LEATHER_SMITHING_SCROLL);
-        simpleItem(ModItems.NIGHTS_WATCH_ELITE_SMITHING_SCROLL);
 
-        simpleItem(ModItems.WILDLING_FUR_SMITHING_SCROLL);
-        simpleItem(ModItems.WILDLING_LEATHER_SMITHING_SCROLL);
-        simpleItem(ModItems.WILDLING_CHIEF_SMITHING_SCROLL);
 
-        simpleItem(ModItems.THENN_LEVY_SMITHING_SCROLL);
-        simpleItem(ModItems.THENN_PLATE_SMITHING_SCROLL);
-        simpleItem(ModItems.THENN_NOBLE_SMITHING_SCROLL);
 
-        simpleItem(ModItems.IRONBORN_LEVY_SMITHING_SCROLL);
-        simpleItem(ModItems.IRONBORN_PLATE_SMITHING_SCROLL);
-        simpleItem(ModItems.IRONBORN_NOBLE_SMITHING_SCROLL);
 
 
 
@@ -1566,6 +1405,59 @@ public class ModItemModelProvider extends ItemModelProvider {
         bannerPatternItem(BannerPatterns.TYRELL_BANNER_PATTERN);
         bannerPatternItem(BannerPatterns.UMBER_BANNER_PATTERN);
         bannerPatternItem(BannerPatterns.VELARYON_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.BLACKWOOD2_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.BOLTON1_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.BOLTON2_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.BOOK_STARK_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.BURLEY1_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.CASSEL_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.CELTIGAR_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.CERWYN_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.CONDON_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.DAYNE2_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.DUSTIN1_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.DUSTIN2_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.FLINT1_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.FLINT2_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.FORRESTER1_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.FORRESTER2_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.FREY2_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.GLOVER_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.HARCLAY_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.HIGHTOWER1_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.HORNWOOD1_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.HORNWOOD2_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.KARSTARK2_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.KNOTT_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.LIDDLE1_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.LIDDLE2_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.LOCKE_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.MAGNAR1_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.MAGNAR2_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.MANDERLY1_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.MANDERLY2_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.MANDERLY3_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.MARSH_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.MOLLEN1_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.MOLLEN2_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.NORREY_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.ROYCE2_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.RYSWELL1_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.RYSWELL2_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.RYSWELL3_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.STONEY_FISHER1_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.STONEY_FISHER2_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.STOUT_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.TALLHART_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.TARGARYEN2_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.UMBER1_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.UMBER2_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.UMBER3_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.WHITEHILL_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.WIDOWSWATCH1_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.WIDOWSWATCH2_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.WOOLFIELD_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.WULL_BANNER_PATTERN);
 
 
 
@@ -1592,158 +1484,6 @@ public class ModItemModelProvider extends ItemModelProvider {
                 modLoc("item/" + item.getId().getPath()));
     }
 
-    // Method to create a simple Armor item model
-    //Stark
-    private ItemModelBuilder simpleItemStarkLevy(DeferredHolder<Item, StarkLevyArmorItem> item) {
-        return withExistingParent(item.getId().getPath(),
-                mcLoc("item/generated")).texture("layer0",
-                modLoc("item/" + item.getId().getPath()));
-    }
-
-    private ItemModelBuilder simpleItemStarkPlate(DeferredHolder<Item, StarkPlateArmorItem> item) {
-        return withExistingParent(item.getId().getPath(),
-                mcLoc("item/generated")).texture("layer0",
-                modLoc("item/" + item.getId().getPath()));
-    }
-
-    private ItemModelBuilder simpleItemStarkNoblePlate(DeferredHolder<Item, StarkNoblePlateArmorItem> item) {
-        return withExistingParent(item.getId().getPath(),
-                mcLoc("item/generated")).texture("layer0",
-                modLoc("item/" + item.getId().getPath()));
-    }
-
-    //Bolten
-    private ItemModelBuilder simpleItemBoltenLevy(DeferredHolder<Item, BoltenLevyArmorItem> item) {
-        return withExistingParent(item.getId().getPath(),
-                mcLoc("item/generated")).texture("layer0",
-                modLoc("item/" + item.getId().getPath()));
-    }
-
-    private ItemModelBuilder simpleItemBoltenPlate(DeferredHolder<Item, BoltenPlateArmorItem> item) {
-        return withExistingParent(item.getId().getPath(),
-                mcLoc("item/generated")).texture("layer0",
-                modLoc("item/" + item.getId().getPath()));
-    }
-
-    private ItemModelBuilder simpleItemBoltenNoblePlate(DeferredHolder<Item, BoltenNobleArmorItem> item) {
-        return withExistingParent(item.getId().getPath(),
-                mcLoc("item/generated")).texture("layer0",
-                modLoc("item/" + item.getId().getPath()));
-    }
-
-    //Manderly
-    private ItemModelBuilder simpleItemManderlyLevy(DeferredHolder<Item, ManderlyLevyArmorItem> item) {
-        return withExistingParent(item.getId().getPath(),
-                mcLoc("item/generated")).texture("layer0",
-                modLoc("item/" + item.getId().getPath()));
-    }
-
-    private ItemModelBuilder simpleItemManderlyPlate(DeferredHolder<Item, ManderlyPlateArmorItem> item) {
-        return withExistingParent(item.getId().getPath(),
-                mcLoc("item/generated")).texture("layer0",
-                modLoc("item/" + item.getId().getPath()));
-    }
-
-    private ItemModelBuilder simpleItemManderlyNoble(DeferredHolder<Item, ManderlyNobleArmorItem> item) {
-        return withExistingParent(item.getId().getPath(),
-                mcLoc("item/generated")).texture("layer0",
-                modLoc("item/" + item.getId().getPath()));
-    }
-
-    // Thenn
-    private ItemModelBuilder simpleItemThennLevy(DeferredHolder<Item, ThennLevyArmorItem> item) {
-        return withExistingParent(item.getId().getPath(),
-                mcLoc("item/generated")).texture("layer0",
-                modLoc("item/" + item.getId().getPath()));
-    }
-
-    private ItemModelBuilder simpleItemThennPlate(DeferredHolder<Item, ThennPlateArmorItem> item) {
-        return withExistingParent(item.getId().getPath(),
-                mcLoc("item/generated")).texture("layer0",
-                modLoc("item/" + item.getId().getPath()));
-    }
-
-    private ItemModelBuilder simpleItemThennNoble(DeferredHolder<Item, ThennNobleArmorItem> item) {
-        return withExistingParent(item.getId().getPath(),
-                mcLoc("item/generated")).texture("layer0",
-                modLoc("item/" + item.getId().getPath()));
-    }
-
-    // Nothern Mountain Clans
-    private ItemModelBuilder simpleItemMountainClanLevy(DeferredHolder<Item, MountainClanLevyArmorItem> item) {
-        return withExistingParent(item.getId().getPath(),
-                mcLoc("item/generated")).texture("layer0",
-                modLoc("item/" + item.getId().getPath()));
-    }
-
-    private ItemModelBuilder simpleItemMountainClanPlate(DeferredHolder<Item, MountainClanPlateArmorItem> item) {
-        return withExistingParent(item.getId().getPath(),
-                mcLoc("item/generated")).texture("layer0",
-                modLoc("item/" + item.getId().getPath()));
-    }
-
-    private ItemModelBuilder simpleItemMountainClanChief(DeferredHolder<Item, MountainClanChiefArmorItem> item) {
-        return withExistingParent(item.getId().getPath(),
-                mcLoc("item/generated")).texture("layer0",
-                modLoc("item/" + item.getId().getPath()));
-    }
-
-    // Ironborn
-    private ItemModelBuilder simpleItemIronbornLevy(DeferredHolder<Item, IronBornLevyArmorItem> item) {
-        return withExistingParent(item.getId().getPath(),
-                mcLoc("item/generated")).texture("layer0",
-                modLoc("item/" + item.getId().getPath()));
-    }
-
-    private ItemModelBuilder simpleItemIronbornPlate(DeferredHolder<Item, IronBornPlateArmorItem> item) {
-        return withExistingParent(item.getId().getPath(),
-                mcLoc("item/generated")).texture("layer0",
-                modLoc("item/" + item.getId().getPath()));
-    }
-
-    private ItemModelBuilder simpleItemIronbornNoble(DeferredHolder<Item, IronBornNobleArmorItem> item) {
-        return withExistingParent(item.getId().getPath(),
-                mcLoc("item/generated")).texture("layer0",
-                modLoc("item/" + item.getId().getPath()));
-    }
-
-    // Wildling
-    private ItemModelBuilder simpleItemWildlingFur(DeferredHolder<Item, WildlingFurArmorItem> item) {
-        return withExistingParent(item.getId().getPath(),
-                mcLoc("item/generated")).texture("layer0",
-                modLoc("item/" + item.getId().getPath()));
-    }
-
-    private ItemModelBuilder simpleItemWildlingLeather(DeferredHolder<Item, WildlingLeatherArmorItem> item) {
-        return withExistingParent(item.getId().getPath(),
-                mcLoc("item/generated")).texture("layer0",
-                modLoc("item/" + item.getId().getPath()));
-    }
-
-    private ItemModelBuilder simpleItemWildlingChief(DeferredHolder<Item, WildlingChiefArmorItem> item) {
-        return withExistingParent(item.getId().getPath(),
-                mcLoc("item/generated")).texture("layer0",
-                modLoc("item/" + item.getId().getPath()));
-    }
-
-    // Night's Watch
-    private ItemModelBuilder simpleItemNightWatchRanger(DeferredHolder<Item, NightsWatchRangerArmorItem> item) {
-        return withExistingParent(item.getId().getPath(),
-                mcLoc("item/generated")).texture("layer0",
-                modLoc("item/" + item.getId().getPath()));
-    }
-
-    private ItemModelBuilder simpleItemNightWatchLeather(DeferredHolder<Item, NightsWatchLeatherArmorItem> item) {
-        return withExistingParent(item.getId().getPath(),
-                mcLoc("item/generated")).texture("layer0",
-                modLoc("item/" + item.getId().getPath()));
-    }
-
-    private ItemModelBuilder simpleItemNightWatchElite(DeferredHolder<Item, NightsWatchEliteArmorItem> item) {
-        return withExistingParent(item.getId().getPath(),
-                mcLoc("item/generated")).texture("layer0",
-                modLoc("item/" + item.getId().getPath()));
-    }
 
 
     // Method to create a handheld item model
@@ -1992,9 +1732,9 @@ public class ModItemModelProvider extends ItemModelProvider {
                 .texture("layer1", modLoc("item/spawn_egg_overlay"));
     }
     private @NotNull ItemModelBuilder bannerPatternItem(DeferredHolder<Item, BannerPatternItem> item) {
-        return withExistingParent(item.getId().getPath(),
-                mcLoc("item/generated")).texture("layer0",
-                modLoc("item/targaryen_banner_pattern")); // Always uses targaryen texture
+        // Same as vanilla: flat item using its own item/<name>_banner_pattern texture
+        return withExistingParent(item.getId().getPath(), mcLoc("item/generated"))
+                .texture("layer0", modLoc("item/" + item.getId().getPath()));
     }
 
 }

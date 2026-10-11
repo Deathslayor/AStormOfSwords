@@ -21,7 +21,6 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ClientTownAreaManager {
 
     private static final int CHECK_INTERVAL = 20;
-    private static final int SCAN_HEIGHT    = 64;
 
     private static final Map<BlockPos, TownAreaData> townAreas = new ConcurrentHashMap<>();
 
@@ -152,7 +151,6 @@ public class ClientTownAreaManager {
 
     private static boolean isPlayerInTownArea(BlockPos playerPos, BlockPos townHallPos, int radius) {
         return Math.abs(playerPos.getX() - townHallPos.getX()) <= radius
-                && Math.abs(playerPos.getY() - townHallPos.getY()) <= SCAN_HEIGHT
                 && Math.abs(playerPos.getZ() - townHallPos.getZ()) <= radius;
     }
 

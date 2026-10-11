@@ -121,7 +121,7 @@ public class InventorySystem {
      */
     private EquipmentSlot getEquipmentSlotFromItemName(ItemStack stack) {
         String itemName = stack.getItem().toString().toLowerCase();
-        if (itemName.contains("helmet") || itemName.contains("cap") || itemName.contains("crown")) {
+        if (itemName.contains("helmet") || itemName.contains("hood") || itemName.contains("cap") || itemName.contains("crown")) {
             return EquipmentSlot.HEAD;
         } else if (itemName.contains("chestplate") || itemName.contains("tunic") || itemName.contains("shirt")) {
             return EquipmentSlot.CHEST;
@@ -137,9 +137,12 @@ public class InventorySystem {
      * Auto-equips weapons and shields from inventory using native system
      */
     private void autoEquipWeaponsAndShields() {
-        // Check main hand - equip weapons if empty
+        // Check main hand - equip weapons if empty.
+        // Guards pick their own weapon (their kind of weapon, the best one) - see GuardEquipment.upgrade.
+        boolean isGuard = peasant.getJobType().equals(
+                net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem.JOB_GUARD);
         ItemStack currentMainHand = peasant.getItemBySlot(EquipmentSlot.MAINHAND);
-        if (currentMainHand.isEmpty()) {
+        if (currentMainHand.isEmpty() && !isGuard && !peasant.getHungerSystem().isEating()) {
             int weaponSlotIndex = findFirstWeaponInInventory();
             if (weaponSlotIndex != -1) {
                 ItemStack weaponToEquip = inventory.getItem(weaponSlotIndex).copy();
@@ -166,13 +169,25 @@ public class InventorySystem {
     }
 
     private int findFirstWeaponInInventory() {
+        // Workers also take their tools (hoe, pickaxe, shovel) into their hand; guards only real weapons
+        boolean isGuard = peasant.getJobType().equals(
+                net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem.JOB_GUARD);
         for (int i = 0; i < inventory.getContainerSize(); i++) {
             ItemStack stack = inventory.getItem(i);
-            if (!stack.isEmpty() && isWeapon(stack)) {
+            // Bows are equipped by RangedCombatSystem when a threat is at range, not here
+            if (!stack.isEmpty() && (isWeapon(stack) || (!isGuard && isTool(stack)))
+                    && !(stack.getItem() instanceof net.minecraft.world.item.ProjectileWeaponItem)) {
                 return i;
             }
         }
         return -1;
+    }
+
+    /** Work tools - not weapons: pickaxes, shovels and hoes. */
+    public static boolean isTool(ItemStack stack) {
+        return stack.getItem() instanceof net.minecraft.world.item.PickaxeItem
+                || stack.getItem() instanceof net.minecraft.world.item.ShovelItem
+                || stack.getItem() instanceof net.minecraft.world.item.HoeItem;
     }
 
     private int findFirstShieldInInventory() {
@@ -185,13 +200,17 @@ public class InventorySystem {
         return -1;
     }
 
-    private boolean isWeapon(ItemStack stack) {
+    /**
+     * Actual weapons only: swords of any type, axes, the mod's spears/pikes/maces/daggers/battleaxes/
+     * halberds, maces, tridents and bows. Work tools (pickaxes, shovels, hoes) are not weapons - see isTool.
+     */
+    public static boolean isWeapon(ItemStack stack) {
+        if (isTool(stack)) return false;
+
         // Check vanilla weapon types
         if (stack.getItem() instanceof net.minecraft.world.item.SwordItem ||
                 stack.getItem() instanceof net.minecraft.world.item.AxeItem ||
-                stack.getItem() instanceof net.minecraft.world.item.PickaxeItem ||
-                stack.getItem() instanceof net.minecraft.world.item.ShovelItem ||
-                stack.getItem() instanceof net.minecraft.world.item.HoeItem ||
+                stack.getItem() instanceof net.minecraft.world.item.MaceItem ||
                 stack.getItem() instanceof net.minecraft.world.item.BowItem ||
                 stack.getItem() instanceof net.minecraft.world.item.CrossbowItem ||
                 stack.getItem() instanceof net.minecraft.world.item.TridentItem) {

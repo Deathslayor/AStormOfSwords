@@ -125,6 +125,7 @@ public class NameSystem {
     private static final String[] TAILOR_NAMES     = { "Taylor", "Schneider", "Clothier", "Draper", "Weaver", "Fuller", "Tucker" };
     private static final String[] BLACKSMITH_NAMES = { "Smith", "Blacksmith", "Smyth", "Faber", "Schmidt", "Kovacs", "Kowalski", "Ironmonger", "Steele" };
     private static final String[] GUARD_NAMES      = { "Ward", "Warden", "Constable", "Bailey", "Waite", "Watchman", "Keepe" };
+    public static final String GUARD_TITLE = "Guard";
     private static final String[] MINER_NAMES      = { "Miner", "Collier", "Pitman", "Hodder", "Eisenhauer", "Digger", "Delver" };
     private static final String[] QUARRY_NAMES     = { "Quarrier", "Stonier", "Delf", "Hewer", "Slater", "Crag", "Rockman", "Stonecutter" };
     private static final String[] SMELTER_NAMES    = { "Bloomer", "Steele", "Brenner", "Stoker", "Smelter", "Forger", "Ironsmith" };
@@ -184,7 +185,8 @@ public class NameSystem {
      * Called when the NPC gets a job. Assigns a job-appropriate last name.
      */
     public void onJobAssigned(String jobType, RandomSource random) {
-        lastName = pickLastName(jobType, random);
+        // Guards don't get a job last name - they're titled "Guard" instead (see applyName)
+        lastName = jobType.equals(JobSystem.JOB_GUARD) ? "" : pickLastName(jobType, random);
         applyName();
     }
 
@@ -200,7 +202,10 @@ public class NameSystem {
 
     private void applyName() {
         String full;
-        if (!lastName.isEmpty() && !nickname.isEmpty()) {
+        if (peasant.getJobType().equals(JobSystem.JOB_GUARD)) {
+            // Guards: title instead of a last name - "Guard Stinky Joe", "Guard Joe"
+            full = GUARD_TITLE + " " + (nickname.isEmpty() ? firstName : nickname + " " + firstName);
+        } else if (!lastName.isEmpty() && !nickname.isEmpty()) {
             // "Carl Draper the Dirty"
             full = firstName + " " + lastName + " the " + nickname;
         } else if (!lastName.isEmpty()) {

@@ -26,7 +26,6 @@ import java.util.Map;
 @OnlyIn(Dist.CLIENT)
 public class TownTracker {
 
-    private static final int SCAN_HEIGHT = 64; // Same as debug renderer
     private static final int CHECK_INTERVAL = 20; // Check every second (20 ticks)
     private static final String TOWN_NAMES_FILE = "townhall_names.json";
 
@@ -124,14 +123,13 @@ public class TownTracker {
     }
 
     /**
-     * Check if player is within town boundaries
+     * Check if player is within town boundaries (square radius, unlimited height/depth)
      */
     private static boolean isPlayerInTown(BlockPos playerPos, BlockPos townHallPos, int radius) {
         int dx = Math.abs(playerPos.getX() - townHallPos.getX());
-        int dy = Math.abs(playerPos.getY() - townHallPos.getY());
         int dz = Math.abs(playerPos.getZ() - townHallPos.getZ());
 
-        return dx <= radius && dy <= SCAN_HEIGHT && dz <= radius;
+        return dx <= radius && dz <= radius;
     }
 
     /**

@@ -75,6 +75,112 @@ public class BannerPatterns {
             Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/umber"));
     public static final TagKey<BannerPattern> VELARYON_PATTERN_TAG = TagKey.create(
             Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/velaryon"));
+    public static final TagKey<BannerPattern> BLACKWOOD2_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/blackwood2"));
+    public static final TagKey<BannerPattern> BOLTON1_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/bolton1"));
+    public static final TagKey<BannerPattern> BOLTON2_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/bolton2"));
+    public static final TagKey<BannerPattern> BOOK_STARK_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/book_stark"));
+    public static final TagKey<BannerPattern> BURLEY1_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/burley1"));
+    public static final TagKey<BannerPattern> CASSEL_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/cassel"));
+    public static final TagKey<BannerPattern> CELTIGAR_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/celtigar"));
+    public static final TagKey<BannerPattern> CERWYN_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/cerwyn"));
+    public static final TagKey<BannerPattern> CONDON_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/condon"));
+    public static final TagKey<BannerPattern> DAYNE2_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/dayne2"));
+    public static final TagKey<BannerPattern> DUSTIN1_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/dustin1"));
+    public static final TagKey<BannerPattern> DUSTIN2_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/dustin2"));
+    public static final TagKey<BannerPattern> FLINT1_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/flint1"));
+    public static final TagKey<BannerPattern> FLINT2_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/flint2"));
+    public static final TagKey<BannerPattern> FORRESTER1_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/forrester1"));
+    public static final TagKey<BannerPattern> FORRESTER2_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/forrester2"));
+    public static final TagKey<BannerPattern> FREY2_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/frey2"));
+    public static final TagKey<BannerPattern> GLOVER_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/glover"));
+    public static final TagKey<BannerPattern> HARCLAY_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/harclay"));
+    public static final TagKey<BannerPattern> HIGHTOWER1_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/hightower1"));
+    public static final TagKey<BannerPattern> HORNWOOD1_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/hornwood1"));
+    public static final TagKey<BannerPattern> HORNWOOD2_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/hornwood2"));
+    public static final TagKey<BannerPattern> KARSTARK2_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/karstark2"));
+    public static final TagKey<BannerPattern> KNOTT_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/knott"));
+    public static final TagKey<BannerPattern> LIDDLE1_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/liddle1"));
+    public static final TagKey<BannerPattern> LIDDLE2_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/liddle2"));
+    public static final TagKey<BannerPattern> LOCKE_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/locke"));
+    public static final TagKey<BannerPattern> MAGNAR1_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/magnar1"));
+    public static final TagKey<BannerPattern> MAGNAR2_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/magnar2"));
+    public static final TagKey<BannerPattern> MANDERLY1_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/manderly1"));
+    public static final TagKey<BannerPattern> MANDERLY2_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/manderly2"));
+    public static final TagKey<BannerPattern> MANDERLY3_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/manderly3"));
+    public static final TagKey<BannerPattern> MARSH_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/marsh"));
+    public static final TagKey<BannerPattern> MOLLEN1_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/mollen1"));
+    public static final TagKey<BannerPattern> MOLLEN2_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/mollen2"));
+    public static final TagKey<BannerPattern> NORREY_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/norrey"));
+    public static final TagKey<BannerPattern> ROYCE2_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/royce2"));
+    public static final TagKey<BannerPattern> RYSWELL1_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/ryswell1"));
+    public static final TagKey<BannerPattern> RYSWELL2_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/ryswell2"));
+    public static final TagKey<BannerPattern> RYSWELL3_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/ryswell3"));
+    public static final TagKey<BannerPattern> STONEY_FISHER1_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/stoney_fisher1"));
+    public static final TagKey<BannerPattern> STONEY_FISHER2_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/stoney_fisher2"));
+    public static final TagKey<BannerPattern> STOUT_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/stout"));
+    public static final TagKey<BannerPattern> TALLHART_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/tallhart"));
+    public static final TagKey<BannerPattern> TARGARYEN2_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/targaryen2"));
+    public static final TagKey<BannerPattern> UMBER1_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/umber1"));
+    public static final TagKey<BannerPattern> UMBER2_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/umber2"));
+    public static final TagKey<BannerPattern> UMBER3_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/umber3"));
+    public static final TagKey<BannerPattern> WHITEHILL_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/whitehill"));
+    public static final TagKey<BannerPattern> WIDOWSWATCH1_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/widowswatch1"));
+    public static final TagKey<BannerPattern> WIDOWSWATCH2_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/widowswatch2"));
+    public static final TagKey<BannerPattern> WOOLFIELD_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/woolfield"));
+    public static final TagKey<BannerPattern> WULL_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/wull"));
 
     // Register banner patterns for runtime
     public static final DeferredHolder<BannerPattern, BannerPattern> ARRYN_PATTERN =
@@ -158,6 +264,165 @@ public class BannerPatterns {
     public static final DeferredHolder<BannerPattern, BannerPattern> VELARYON_PATTERN =
             BANNER_PATTERNS.register("velaryon", () -> new BannerPattern(
                     ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "velaryon"), "velaryon"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> BLACKWOOD2_PATTERN =
+            BANNER_PATTERNS.register("blackwood2", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "blackwood2"), "blackwood2"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> BOLTON1_PATTERN =
+            BANNER_PATTERNS.register("bolton1", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "bolton1"), "bolton1"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> BOLTON2_PATTERN =
+            BANNER_PATTERNS.register("bolton2", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "bolton2"), "bolton2"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> BOOK_STARK_PATTERN =
+            BANNER_PATTERNS.register("book_stark", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "book_stark"), "book_stark"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> BURLEY1_PATTERN =
+            BANNER_PATTERNS.register("burley1", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "burley1"), "burley1"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> CASSEL_PATTERN =
+            BANNER_PATTERNS.register("cassel", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "cassel"), "cassel"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> CELTIGAR_PATTERN =
+            BANNER_PATTERNS.register("celtigar", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "celtigar"), "celtigar"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> CERWYN_PATTERN =
+            BANNER_PATTERNS.register("cerwyn", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "cerwyn"), "cerwyn"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> CONDON_PATTERN =
+            BANNER_PATTERNS.register("condon", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "condon"), "condon"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> DAYNE2_PATTERN =
+            BANNER_PATTERNS.register("dayne2", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "dayne2"), "dayne2"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> DUSTIN1_PATTERN =
+            BANNER_PATTERNS.register("dustin1", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "dustin1"), "dustin1"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> DUSTIN2_PATTERN =
+            BANNER_PATTERNS.register("dustin2", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "dustin2"), "dustin2"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> FLINT1_PATTERN =
+            BANNER_PATTERNS.register("flint1", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "flint1"), "flint1"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> FLINT2_PATTERN =
+            BANNER_PATTERNS.register("flint2", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "flint2"), "flint2"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> FORRESTER1_PATTERN =
+            BANNER_PATTERNS.register("forrester1", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "forrester1"), "forrester1"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> FORRESTER2_PATTERN =
+            BANNER_PATTERNS.register("forrester2", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "forrester2"), "forrester2"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> FREY2_PATTERN =
+            BANNER_PATTERNS.register("frey2", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "frey2"), "frey2"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> GLOVER_PATTERN =
+            BANNER_PATTERNS.register("glover", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "glover"), "glover"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> HARCLAY_PATTERN =
+            BANNER_PATTERNS.register("harclay", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "harclay"), "harclay"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> HIGHTOWER1_PATTERN =
+            BANNER_PATTERNS.register("hightower1", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "hightower1"), "hightower1"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> HORNWOOD1_PATTERN =
+            BANNER_PATTERNS.register("hornwood1", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "hornwood1"), "hornwood1"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> HORNWOOD2_PATTERN =
+            BANNER_PATTERNS.register("hornwood2", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "hornwood2"), "hornwood2"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> KARSTARK2_PATTERN =
+            BANNER_PATTERNS.register("karstark2", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "karstark2"), "karstark2"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> KNOTT_PATTERN =
+            BANNER_PATTERNS.register("knott", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "knott"), "knott"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> LIDDLE1_PATTERN =
+            BANNER_PATTERNS.register("liddle1", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "liddle1"), "liddle1"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> LIDDLE2_PATTERN =
+            BANNER_PATTERNS.register("liddle2", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "liddle2"), "liddle2"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> LOCKE_PATTERN =
+            BANNER_PATTERNS.register("locke", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "locke"), "locke"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> MAGNAR1_PATTERN =
+            BANNER_PATTERNS.register("magnar1", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "magnar1"), "magnar1"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> MAGNAR2_PATTERN =
+            BANNER_PATTERNS.register("magnar2", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "magnar2"), "magnar2"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> MANDERLY1_PATTERN =
+            BANNER_PATTERNS.register("manderly1", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "manderly1"), "manderly1"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> MANDERLY2_PATTERN =
+            BANNER_PATTERNS.register("manderly2", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "manderly2"), "manderly2"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> MANDERLY3_PATTERN =
+            BANNER_PATTERNS.register("manderly3", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "manderly3"), "manderly3"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> MARSH_PATTERN =
+            BANNER_PATTERNS.register("marsh", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "marsh"), "marsh"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> MOLLEN1_PATTERN =
+            BANNER_PATTERNS.register("mollen1", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "mollen1"), "mollen1"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> MOLLEN2_PATTERN =
+            BANNER_PATTERNS.register("mollen2", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "mollen2"), "mollen2"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> NORREY_PATTERN =
+            BANNER_PATTERNS.register("norrey", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "norrey"), "norrey"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> ROYCE2_PATTERN =
+            BANNER_PATTERNS.register("royce2", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "royce2"), "royce2"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> RYSWELL1_PATTERN =
+            BANNER_PATTERNS.register("ryswell1", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "ryswell1"), "ryswell1"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> RYSWELL2_PATTERN =
+            BANNER_PATTERNS.register("ryswell2", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "ryswell2"), "ryswell2"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> RYSWELL3_PATTERN =
+            BANNER_PATTERNS.register("ryswell3", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "ryswell3"), "ryswell3"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> STONEY_FISHER1_PATTERN =
+            BANNER_PATTERNS.register("stoney_fisher1", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "stoney_fisher1"), "stoney_fisher1"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> STONEY_FISHER2_PATTERN =
+            BANNER_PATTERNS.register("stoney_fisher2", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "stoney_fisher2"), "stoney_fisher2"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> STOUT_PATTERN =
+            BANNER_PATTERNS.register("stout", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "stout"), "stout"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> TALLHART_PATTERN =
+            BANNER_PATTERNS.register("tallhart", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "tallhart"), "tallhart"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> TARGARYEN2_PATTERN =
+            BANNER_PATTERNS.register("targaryen2", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "targaryen2"), "targaryen2"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> UMBER1_PATTERN =
+            BANNER_PATTERNS.register("umber1", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "umber1"), "umber1"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> UMBER2_PATTERN =
+            BANNER_PATTERNS.register("umber2", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "umber2"), "umber2"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> UMBER3_PATTERN =
+            BANNER_PATTERNS.register("umber3", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "umber3"), "umber3"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> WHITEHILL_PATTERN =
+            BANNER_PATTERNS.register("whitehill", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "whitehill"), "whitehill"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> WIDOWSWATCH1_PATTERN =
+            BANNER_PATTERNS.register("widowswatch1", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "widowswatch1"), "widowswatch1"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> WIDOWSWATCH2_PATTERN =
+            BANNER_PATTERNS.register("widowswatch2", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "widowswatch2"), "widowswatch2"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> WOOLFIELD_PATTERN =
+            BANNER_PATTERNS.register("woolfield", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "woolfield"), "woolfield"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> WULL_PATTERN =
+            BANNER_PATTERNS.register("wull", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "wull"), "wull"));
 
     // Register banner pattern items
     public static final DeferredHolder<Item, BannerPatternItem> ARRYN_BANNER_PATTERN =
@@ -347,6 +612,378 @@ public class BannerPatterns {
                 net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
                         Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "velaryon_banner_pattern"));
                 return new BannerPatternItem(VELARYON_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+
+    public static final DeferredHolder<Item, BannerPatternItem> BLACKWOOD2_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("blackwood2_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "blackwood2_banner_pattern"));
+                return new BannerPatternItem(BLACKWOOD2_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> BOLTON1_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("bolton1_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "bolton1_banner_pattern"));
+                return new BannerPatternItem(BOLTON1_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> BOLTON2_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("bolton2_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "bolton2_banner_pattern"));
+                return new BannerPatternItem(BOLTON2_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> BOOK_STARK_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("book_stark_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "book_stark_banner_pattern"));
+                return new BannerPatternItem(BOOK_STARK_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> BURLEY1_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("burley1_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "burley1_banner_pattern"));
+                return new BannerPatternItem(BURLEY1_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> CASSEL_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("cassel_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "cassel_banner_pattern"));
+                return new BannerPatternItem(CASSEL_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> CELTIGAR_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("celtigar_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "celtigar_banner_pattern"));
+                return new BannerPatternItem(CELTIGAR_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> CERWYN_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("cerwyn_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "cerwyn_banner_pattern"));
+                return new BannerPatternItem(CERWYN_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> CONDON_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("condon_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "condon_banner_pattern"));
+                return new BannerPatternItem(CONDON_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> DAYNE2_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("dayne2_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "dayne2_banner_pattern"));
+                return new BannerPatternItem(DAYNE2_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> DUSTIN1_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("dustin1_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "dustin1_banner_pattern"));
+                return new BannerPatternItem(DUSTIN1_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> DUSTIN2_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("dustin2_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "dustin2_banner_pattern"));
+                return new BannerPatternItem(DUSTIN2_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> FLINT1_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("flint1_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "flint1_banner_pattern"));
+                return new BannerPatternItem(FLINT1_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> FLINT2_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("flint2_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "flint2_banner_pattern"));
+                return new BannerPatternItem(FLINT2_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> FORRESTER1_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("forrester1_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "forrester1_banner_pattern"));
+                return new BannerPatternItem(FORRESTER1_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> FORRESTER2_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("forrester2_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "forrester2_banner_pattern"));
+                return new BannerPatternItem(FORRESTER2_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> FREY2_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("frey2_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "frey2_banner_pattern"));
+                return new BannerPatternItem(FREY2_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> GLOVER_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("glover_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "glover_banner_pattern"));
+                return new BannerPatternItem(GLOVER_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> HARCLAY_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("harclay_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "harclay_banner_pattern"));
+                return new BannerPatternItem(HARCLAY_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> HIGHTOWER1_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("hightower1_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "hightower1_banner_pattern"));
+                return new BannerPatternItem(HIGHTOWER1_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> HORNWOOD1_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("hornwood1_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "hornwood1_banner_pattern"));
+                return new BannerPatternItem(HORNWOOD1_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> HORNWOOD2_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("hornwood2_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "hornwood2_banner_pattern"));
+                return new BannerPatternItem(HORNWOOD2_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> KARSTARK2_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("karstark2_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "karstark2_banner_pattern"));
+                return new BannerPatternItem(KARSTARK2_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> KNOTT_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("knott_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "knott_banner_pattern"));
+                return new BannerPatternItem(KNOTT_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> LIDDLE1_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("liddle1_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "liddle1_banner_pattern"));
+                return new BannerPatternItem(LIDDLE1_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> LIDDLE2_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("liddle2_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "liddle2_banner_pattern"));
+                return new BannerPatternItem(LIDDLE2_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> LOCKE_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("locke_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "locke_banner_pattern"));
+                return new BannerPatternItem(LOCKE_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> MAGNAR1_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("magnar1_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "magnar1_banner_pattern"));
+                return new BannerPatternItem(MAGNAR1_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> MAGNAR2_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("magnar2_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "magnar2_banner_pattern"));
+                return new BannerPatternItem(MAGNAR2_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> MANDERLY1_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("manderly1_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "manderly1_banner_pattern"));
+                return new BannerPatternItem(MANDERLY1_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> MANDERLY2_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("manderly2_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "manderly2_banner_pattern"));
+                return new BannerPatternItem(MANDERLY2_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> MANDERLY3_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("manderly3_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "manderly3_banner_pattern"));
+                return new BannerPatternItem(MANDERLY3_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> MARSH_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("marsh_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "marsh_banner_pattern"));
+                return new BannerPatternItem(MARSH_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> MOLLEN1_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("mollen1_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "mollen1_banner_pattern"));
+                return new BannerPatternItem(MOLLEN1_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> MOLLEN2_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("mollen2_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "mollen2_banner_pattern"));
+                return new BannerPatternItem(MOLLEN2_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> NORREY_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("norrey_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "norrey_banner_pattern"));
+                return new BannerPatternItem(NORREY_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> ROYCE2_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("royce2_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "royce2_banner_pattern"));
+                return new BannerPatternItem(ROYCE2_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> RYSWELL1_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("ryswell1_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "ryswell1_banner_pattern"));
+                return new BannerPatternItem(RYSWELL1_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> RYSWELL2_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("ryswell2_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "ryswell2_banner_pattern"));
+                return new BannerPatternItem(RYSWELL2_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> RYSWELL3_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("ryswell3_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "ryswell3_banner_pattern"));
+                return new BannerPatternItem(RYSWELL3_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> STONEY_FISHER1_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("stoney_fisher1_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "stoney_fisher1_banner_pattern"));
+                return new BannerPatternItem(STONEY_FISHER1_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> STONEY_FISHER2_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("stoney_fisher2_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "stoney_fisher2_banner_pattern"));
+                return new BannerPatternItem(STONEY_FISHER2_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> STOUT_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("stout_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "stout_banner_pattern"));
+                return new BannerPatternItem(STOUT_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> TALLHART_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("tallhart_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "tallhart_banner_pattern"));
+                return new BannerPatternItem(TALLHART_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> TARGARYEN2_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("targaryen2_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "targaryen2_banner_pattern"));
+                return new BannerPatternItem(TARGARYEN2_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> UMBER1_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("umber1_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "umber1_banner_pattern"));
+                return new BannerPatternItem(UMBER1_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> UMBER2_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("umber2_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "umber2_banner_pattern"));
+                return new BannerPatternItem(UMBER2_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> UMBER3_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("umber3_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "umber3_banner_pattern"));
+                return new BannerPatternItem(UMBER3_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> WHITEHILL_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("whitehill_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "whitehill_banner_pattern"));
+                return new BannerPatternItem(WHITEHILL_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> WIDOWSWATCH1_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("widowswatch1_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "widowswatch1_banner_pattern"));
+                return new BannerPatternItem(WIDOWSWATCH1_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> WIDOWSWATCH2_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("widowswatch2_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "widowswatch2_banner_pattern"));
+                return new BannerPatternItem(WIDOWSWATCH2_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> WOOLFIELD_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("woolfield_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "woolfield_banner_pattern"));
+                return new BannerPatternItem(WOOLFIELD_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> WULL_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("wull_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "wull_banner_pattern"));
+                return new BannerPatternItem(WULL_PATTERN_TAG, new Item.Properties()
                         .stacksTo(1).rarity(Rarity.EPIC));
             });
 

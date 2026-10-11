@@ -2,6 +2,8 @@ package net.darkflameproduction.agotmod.event;
 
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.block.ModBLocks;
+import net.darkflameproduction.agotmod.block.custom.barrel.BarrelDummyBlock;
+import net.minecraft.core.BlockPos;
 import net.darkflameproduction.agotmod.block.custom.barrel.BarrelLargeBlockEntityRenderer;
 import net.darkflameproduction.agotmod.block.custom.barrel.BarrelMediumBlockEntityRenderer;
 import net.darkflameproduction.agotmod.block.custom.barrel.BarrelSmallBlockEntityRenderer;
@@ -14,7 +16,7 @@ import net.darkflameproduction.agotmod.entity.ModEntities;
 import net.darkflameproduction.agotmod.entity.client.birds.Crow_Entity_Renderer;
 import net.darkflameproduction.agotmod.entity.client.northofthewall.Mammoth_Entity_Renderer;
 import net.darkflameproduction.agotmod.entity.client.wolves.Direwolf_Entity_Renderer;
-import net.darkflameproduction.agotmod.entity.client.npc.Peasant_Renderer;
+import net.darkflameproduction.agotmod.entity.client.npc.PeasantHumanoidRenderer;
 import net.darkflameproduction.agotmod.event.KeyMappings.KeyBindings;
 import net.darkflameproduction.agotmod.item.ModItems;
 import net.minecraft.client.renderer.BiomeColors;
@@ -50,9 +52,62 @@ public class ModEventBusClientEvents {
         EntityRenderers.register(ModEntities.MAMMOTH_ENTITY.get(),  Mammoth_Entity_Renderer::new);
         EntityRenderers.register(ModEntities.CROW_ENTITY.get(),     Crow_Entity_Renderer::new);
         EntityRenderers.register(ModEntities.DIREWOLF_ENTITY.get(), Direwolf_Entity_Renderer::new);
-        EntityRenderers.register(ModEntities.PEASANT_ENTITY.get(),  Peasant_Renderer::new);
+        // Adults: player model (taken over by Epic Fight). Children: GeckoLib model.
+        EntityRenderers.register(ModEntities.PEASANT_ENTITY.get(),  PeasantHumanoidRenderer::new);
         EntityRenderers.register(ModEntities.SEAT_ENTITY.get(),
                 ctx -> new net.minecraft.client.renderer.entity.NoopRenderer<>(ctx));
+    }
+
+    @SubscribeEvent
+    public static void registerClientExtensions(net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent event) {
+        // Barrel filler blocks are invisible: show the hit (mining) particles of the barrel they belong to
+        event.registerBlock(new net.neoforged.neoforge.client.extensions.common.IClientBlockExtensions() {
+            @Override
+            public boolean addHitEffects(net.minecraft.world.level.block.state.BlockState state, net.minecraft.world.level.Level level,
+                                         net.minecraft.world.phys.HitResult target, net.minecraft.client.particle.ParticleEngine manager) {
+                if (target instanceof net.minecraft.world.phys.BlockHitResult hit) {
+                    BlockPos controllerPos = BarrelDummyBlock.getControllerPos(level, hit.getBlockPos());
+                    if (controllerPos != null) {
+                        manager.crack(controllerPos, hit.getDirection());
+                    }
+                }
+                return true;
+            }
+
+            @Override
+            public boolean addDestroyEffects(net.minecraft.world.level.block.state.BlockState state, net.minecraft.world.level.Level level,
+                                             BlockPos pos, net.minecraft.client.particle.ParticleEngine manager) {
+                // Break particles come from the barrel itself (BarrelControllerBlock.removeStructure)
+                return true;
+            }
+        }, ModBLocks.BARREL_DUMMY.get());
+
+        // 3D armour: also expose the GeckoLib armour renderer through IClientItemExtensions.
+        // GeckoLib 4.9 renders armour through its own GeoRenderProvider and no longer provides it here, but
+        // Epic Fight's GeckoLib support only asks IClientItemExtensions.getHumanoidArmorModel for the model.
+        // Without this Epic Fight sees vanilla armour and draws a flat piece with the material's (missing)
+        // texture instead of baking the 3D model. GeckoLib checks this first as well and uses what it returns.
+        event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions() {
+            @Override
+            @SuppressWarnings({"unchecked", "rawtypes"})
+            public @NotNull net.minecraft.client.model.HumanoidModel<?> getHumanoidArmorModel(
+                    net.minecraft.world.entity.LivingEntity entity, net.minecraft.world.item.ItemStack stack,
+                    net.minecraft.world.entity.EquipmentSlot slot, net.minecraft.client.model.HumanoidModel<?> original) {
+                net.minecraft.client.model.HumanoidModel<?> model = software.bernie.geckolib.animatable.client.GeoRenderProvider.of(stack)
+                        .getGeoArmorRenderer(entity, stack, slot, (net.minecraft.client.model.HumanoidModel) original);
+                if (model instanceof software.bernie.geckolib.renderer.GeoArmorRenderer<?> renderer) {
+                    // Rendering an unprepared GeckoLib armour renderer does nothing (and logs an error)
+                    net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getInstance();
+                    renderer.prepForRender(entity, stack, slot, original, mc.renderBuffers().bufferSource(),
+                            mc.getTimer().getGameTimeDeltaPartialTick(true), 0, 0, 0, 0);
+                    return renderer;
+                }
+                return original;
+            }
+        }, net.darkflameproduction.agotmod.armor.ModArmorSets.all().stream()
+                .flatMap(set -> java.util.Arrays.stream(net.darkflameproduction.agotmod.armor.ModArmorSets.PIECES)
+                        .map(type -> (Item) set.piece(type).get()))
+                .toArray(Item[]::new));
     }
 
     @OnlyIn(Dist.CLIENT)

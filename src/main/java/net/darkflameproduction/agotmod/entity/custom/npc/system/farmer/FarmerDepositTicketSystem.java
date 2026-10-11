@@ -83,6 +83,11 @@ public class FarmerDepositTicketSystem {
         return pendingConfirmations.get(farmerUUID);
     }
 
+    /** Withdraws a deposit no town hall picked up, so it doesn't block the next one. */
+    public static void cancelDeposit(UUID farmerUUID) {
+        pendingDeposits.remove(farmerUUID);
+    }
+
     public static void consumeConfirmation(UUID farmerUUID) {
         pendingConfirmations.remove(farmerUUID);
     }

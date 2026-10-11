@@ -50,6 +50,16 @@ public class GuardCombatGoal extends Goal {
             return false;
         }
 
+        // Epic Fight fights with the held weapon's combos; the guard system's target (set on
+        // the mob) is what it attacks. This goal only fights for items Epic Fight can't use.
+        if (net.darkflameproduction.agotmod.compat.epicfight.EpicFightCompat.isCombatHandledByEpicFight(guard)) {
+            return false;
+        }
+        // With a bow in hand, NpcBowAttackGoal does the fighting
+        if (guard.getRangedCombat().isHoldingBow()) {
+            return false;
+        }
+
         // Get target from guard system (it scans for monsters)
         this.target = guard.getGuardSystem().getCurrentTarget();
 

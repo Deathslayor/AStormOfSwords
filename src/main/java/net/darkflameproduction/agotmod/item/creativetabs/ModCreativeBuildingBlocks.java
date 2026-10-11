@@ -85,6 +85,7 @@ public class ModCreativeBuildingBlocks {
             () -> CreativeModeTab.builder()
                     .icon(() -> new ItemStack(ModBLocks.DARK_STONE_BRICK.get()))
                     .title(Component.translatable("creativetab.agot_tab_building_blocks"))
+                    .withTabsBefore(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "agot_tab_ingredients"))
                     .displayItems((pParameters, pOutput) -> {
 
                         //DIRT

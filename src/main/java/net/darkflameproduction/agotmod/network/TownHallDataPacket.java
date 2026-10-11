@@ -7,7 +7,9 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public record TownHallDataPacket(
@@ -25,8 +27,12 @@ public record TownHallDataPacket(
         long townBalance,
         long townIncome,
         Map<String, Long> townInventory,
-        String culture
+        String culture,
+        List<CitizenEntry> citizens
 ) implements CustomPacketPayload {
+
+    /** A citizen of the town: its name and job type (JobSystem.JOB_*, "" for none). */
+    public record CitizenEntry(String name, String jobType) {}
 
     public static final Type<TownHallDataPacket> TYPE = new Type<>(
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "town_hall_data")
@@ -57,6 +63,11 @@ public record TownHallDataPacket(
             buf.writeLong(entry.getValue());
         }
         buf.writeUtf(packet.culture);
+        buf.writeVarInt(packet.citizens.size());
+        for (CitizenEntry citizen : packet.citizens) {
+            buf.writeUtf(citizen.name());
+            buf.writeUtf(citizen.jobType());
+        }
     }
 
     private static TownHallDataPacket decode(FriendlyByteBuf buf) {
@@ -79,12 +90,17 @@ public record TownHallDataPacket(
             townInventory.put(buf.readUtf(), buf.readLong());
         }
         String culture = buf.readUtf();
+        int citizenListSize = buf.readVarInt();
+        List<CitizenEntry> citizens = new ArrayList<>(citizenListSize);
+        for (int i = 0; i < citizenListSize; i++) {
+            citizens.add(new CitizenEntry(buf.readUtf(), buf.readUtf()));
+        }
 
         return new TownHallDataPacket(
                 pos, bedCount, citizenCount, currentRadius,
                 townName, isClaimed, claimedByHouse,
                 availableJobCount, assignedJobCount, totalJobCount, joblessCount,
-                townBalance, townIncome, townInventory, culture
+                townBalance, townIncome, townInventory, culture, citizens
         );
     }
 

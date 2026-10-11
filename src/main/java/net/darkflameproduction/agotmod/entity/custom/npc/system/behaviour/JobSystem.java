@@ -117,8 +117,17 @@ public class JobSystem {
         if (!peasant.level().isClientSide && hasJob() && getJobBlockPos() != null) {
             warningBroadcastTimer++;
             if (warningBroadcastTimer >= 40) {
-                JobWarningSystem.broadcastJobBlockInUse(peasant.getUUID(), getJobType(), getJobBlockPos());
                 warningBroadcastTimer = 0;
+                // Only one NPC may work a job block. If someone else holds the claim, this job isn't ours.
+                if (peasant.level() instanceof net.minecraft.server.level.ServerLevel serverLevel
+                        && !JobClaims.get(serverLevel).confirm(serverLevel, getJobBlockPos(), peasant.getUUID())) {
+                    net.darkflameproduction.agotmod.AGoTMod.LOGGER.info(
+                            "[Jobs] {} gave up {} job at {} - that job block already belongs to another NPC",
+                            peasant.getName().getString(), getJobType(), getJobBlockPos().toShortString());
+                    loseJob();
+                    return;
+                }
+                JobWarningSystem.broadcastJobBlockInUse(peasant.getUUID(), getJobType(), getJobBlockPos());
             }
         } else {
             warningBroadcastTimer = 0;
@@ -157,6 +166,9 @@ public class JobSystem {
     private void loseJob() {
         String oldJobType = getJobType();
 
+        if (getJobBlockPos() != null && peasant.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+            JobClaims.get(serverLevel).release(getJobBlockPos(), peasant.getUUID());
+        }
         setJobType(JOB_NONE);
         setJobBlockPos(null);
         releaseJobBlockReservation(peasant.getUUID());
@@ -439,8 +451,16 @@ public class JobSystem {
             return distanceSquared > ((CARPENTER_IDLE_RADIUS_X + 10) * (CARPENTER_IDLE_RADIUS_X + 10));
         if (getJobType().equals(JOB_TRADER))
             return distanceSquared > ((TRADER_IDLE_RADIUS_X + 10) * (TRADER_IDLE_RADIUS_X + 10));
-        if (getJobType().equals(JOB_GUARD))
+        if (getJobType().equals(JOB_GUARD)) {
+            // Guards patrol the whole town - only too far once they leave the town area
+            Optional<BlockPos> townHallPos = peasant.getTownHallPos();
+            if (townHallPos.isPresent() && peasant.level().isLoaded(townHallPos.get())
+                    && peasant.level().getBlockEntity(townHallPos.get())
+                            instanceof net.darkflameproduction.agotmod.block.custom.TownHallBlockEntity townHall) {
+                return !townHall.isWithinStableScanArea(currentPos, townHall.getCurrentScanRadius() + 16);
+            }
             return distanceSquared > ((GUARD_WORK_RADIUS_X + 10) * (GUARD_WORK_RADIUS_X + 10));
+        }
         if (getJobType().equals(JOB_MINER)) return false;
         if (getJobType().equals(JOB_QUARRY)) return false;
         if (getJobType().equals(JOB_SMELTER))

@@ -1,5 +1,8 @@
 {
   "variants": {
-    "": { "model": "agotmod:block/barrel_medium" }
+    "east=false,south=false": { "model": "agotmod:block/barrel_medium" },
+    "east=false,south=true":  { "model": "agotmod:block/barrel_medium" },
+    "east=true,south=false":  { "model": "agotmod:block/barrel_medium" },
+    "east=true,south=true":   { "model": "agotmod:block/barrel_medium" }
   }
 }
