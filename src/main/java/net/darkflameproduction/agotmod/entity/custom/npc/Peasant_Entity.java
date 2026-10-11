@@ -335,13 +335,18 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         // Only the model and textures will change through the renderer/model system
     }
 
-    // Sent to the trading GUI; the server prices transactions with the same values (ItemPricing)
-    private float getBuyMultiplier() {
-        return net.darkflameproduction.agotmod.util.ItemPricing.playerBuyMultiplier(getJobType().equals(JobSystem.JOB_TRADER));
+    // Sent to the trading GUI; the server prices transactions with the same values (TownReputation: the
+    // base prices of ItemPricing, adjusted for the player's reputation with this NPC's town)
+    private float getBuyMultiplier(net.minecraft.server.level.ServerPlayer player) {
+        return net.darkflameproduction.agotmod.entity.custom.npc.system.reputation.TownReputation.buyMultiplier(
+                getJobType().equals(JobSystem.JOB_TRADER),
+                net.darkflameproduction.agotmod.entity.custom.npc.system.reputation.TownReputation.with(player, this));
     }
 
-    private float getSellMultiplier() {
-        return net.darkflameproduction.agotmod.util.ItemPricing.playerSellMultiplier(getJobType().equals(JobSystem.JOB_TRADER));
+    private float getSellMultiplier(net.minecraft.server.level.ServerPlayer player) {
+        return net.darkflameproduction.agotmod.entity.custom.npc.system.reputation.TownReputation.sellMultiplier(
+                getJobType().equals(JobSystem.JOB_TRADER),
+                net.darkflameproduction.agotmod.entity.custom.npc.system.reputation.TownReputation.with(player, this));
     }
 
 
@@ -480,7 +485,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
             this.goalSelector.addGoal(1, new net.darkflameproduction.agotmod.entity.custom.npc.goals.combat.NpcBowAttackGoal(this));
             this.goalSelector.addGoal(2, new PeasantDefenseGoal(this));
             this.goalSelector.addGoal(2, new net.darkflameproduction.agotmod.entity.custom.npc.goals.guard.GuardAlertResponseGoal(this));
-            this.goalSelector.addGoal(10, new net.darkflameproduction.agotmod.entity.custom.npc.goals.guard.GuardTownHallGoal(this));
+            this.goalSelector.addGoal(10, new net.darkflameproduction.agotmod.entity.custom.npc.goals.guard.GuardBarrelGoal(this));
         }
 
         this.doorGoal = new OpenAndCloseDoorGoal(this);
@@ -499,6 +504,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
             this.goalSelector.addGoal(4, new CharcoalBurnerBarrelDropOffGoal(this));
         }
 
+        this.goalSelector.addGoal(4, new net.darkflameproduction.agotmod.entity.custom.npc.goals.behaviour.CollectToolGoal(this));
         this.goalSelector.addGoal(5, new FindBedGoal(this));
         this.goalSelector.addGoal(6, new SleepGoal(this));
         this.goalSelector.addGoal(6, new LumberjackGoal(this));
@@ -520,6 +526,18 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
             this.goalSelector.addGoal(8, new net.darkflameproduction.agotmod.entity.custom.npc.goals.tailor.TailorGoal(this));
             this.goalSelector.addGoal(8, new TraderGoal(this));
             this.goalSelector.addGoal(8, new CarpenterGoal(this));
+            this.goalSelector.addGoal(7, new net.darkflameproduction.agotmod.entity.custom.npc.goals.blacksmith.BlacksmithSupplyGoal(this));
+            this.goalSelector.addGoal(8, new net.darkflameproduction.agotmod.entity.custom.npc.goals.blacksmith.BlacksmithGoal(this));
+            // The baker feeds the town: bakes what it is short of (SupplyChain / Bakery), one thing every 2 seconds,
+            // up to 4 stacks (256 items) a day, restocking ingredients from the town hall when he runs out
+            this.goalSelector.addGoal(7, new net.darkflameproduction.agotmod.entity.custom.npc.goals.supply.SupplyRunGoal(
+                    this, JobSystem.JOB_BAKER, 20 * 120));
+            this.goalSelector.addGoal(8, new net.darkflameproduction.agotmod.entity.custom.npc.goals.supply.SupplyCraftGoal(
+                    this, JobSystem.JOB_BAKER, net.darkflameproduction.agotmod.block.ModBLocks.BAKER_BARREL::get, 20 * 2, 64 * 4));
+            // The stonemason cuts the town's raw stone into its stairs, slabs, walls and variants (Stonework), one every 3 seconds
+            this.goalSelector.addGoal(7, new net.darkflameproduction.agotmod.entity.custom.npc.goals.supply.SupplyRunGoal(this, JobSystem.JOB_STONEMASON));
+            this.goalSelector.addGoal(8, new net.darkflameproduction.agotmod.entity.custom.npc.goals.supply.SupplyCraftGoal(
+                    this, JobSystem.JOB_STONEMASON, net.darkflameproduction.agotmod.block.ModBLocks.STONEMASON_BARREL::get, 20 * 3));
             this.goalSelector.addGoal(9, new ReturnToJobBlockGoal(this));
             this.goalSelector.addGoal(11, new FarmingGoal(this));
             this.goalSelector.addGoal(13, new GuardPatrolGoal(this));
@@ -881,6 +899,8 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
             if ((this.tickCount + this.getId()) % net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.CitizenReportSystem.REPORT_INTERVAL == 0) {
                 net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.CitizenReportSystem.report(
                         this.getUUID(), this.getName().getString(), this.getJobType());
+                // ...and post (or withdraw) our request for the tool our job needs
+                net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobTools.updateRequest(this);
             }
 
             if (!isRegisteredToTownHall() && this.tickCount % 200 == 0) {
@@ -947,7 +967,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                         net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
                                 new OpenTradingInventoryPacket(this.getDisplayName().getString(),
                                         entries, playerEntries, response.townBalance, playerBalance,
-                                        getBuyMultiplier(), getSellMultiplier()));
+                                        getBuyMultiplier(serverPlayer), getSellMultiplier(serverPlayer)));
                     }
                 }
             }
@@ -969,7 +989,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                         net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
                                 new OpenTradingInventoryPacket(this.getDisplayName().getString(),
                                         entries, playerEntries, response.townBalance, playerBalance,
-                                        getBuyMultiplier(), getSellMultiplier()));
+                                        getBuyMultiplier(serverPlayer), getSellMultiplier(serverPlayer)));
                     }
                 }
             }
@@ -991,7 +1011,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                         net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
                                 new OpenTradingInventoryPacket(this.getDisplayName().getString(),
                                         entries, playerEntries, response.townBalance, playerBalance,
-                                        getBuyMultiplier(), getSellMultiplier()));
+                                        getBuyMultiplier(serverPlayer), getSellMultiplier(serverPlayer)));
                     }
                 }
             }
@@ -1013,13 +1033,14 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                         net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
                                 new OpenTradingInventoryPacket(this.getDisplayName().getString(),
                                         entries, playerEntries, response.townBalance, playerBalance,
-                                        getBuyMultiplier(), getSellMultiplier()));
+                                        getBuyMultiplier(serverPlayer), getSellMultiplier(serverPlayer)));
                     }
                 }
             }
         }
 
-        if (!this.level().isClientSide && getJobType().equals(JobSystem.JOB_BLACKSMITH)) {
+        if (!this.level().isClientSide && (JobSystem.isSmith(getJobType()) || getJobType().equals(JobSystem.JOB_BAKER)
+                || getJobType().equals(JobSystem.JOB_STONEMASON))) {
             if (net.darkflameproduction.agotmod.entity.custom.npc.system.blacksmith.BlacksmithInventoryTicketSystem.hasPendingResponse(this.getUUID())) {
                 net.darkflameproduction.agotmod.entity.custom.npc.system.blacksmith.BlacksmithInventoryTicketSystem.InventoryResponseTicket response =
                         net.darkflameproduction.agotmod.entity.custom.npc.system.blacksmith.BlacksmithInventoryTicketSystem.consumeResponse(this.getUUID());
@@ -1028,14 +1049,14 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                     ServerPlayer serverPlayer = serverLevel.getServer().getPlayerList().getPlayer(response.playerUUID);
                     if (serverPlayer != null) {
                         List<OpenTradingInventoryPacket.TradingInventoryEntry> entries = buildFilteredEntries(
-                                response.items, net.darkflameproduction.agotmod.util.ItemPricing::isBlacksmithItem);
+                                response.items, smithTradeFilter());
                         List<OpenTradingInventoryPacket.PlayerInventoryEntry> playerEntries =
-                                buildPlayerEntries(serverPlayer, net.darkflameproduction.agotmod.util.ItemPricing::isBlacksmithItem);
+                                buildPlayerEntries(serverPlayer, smithTradeFilter());
                         long playerBalance = serverPlayer.getPersistentData().getLong(COIN_BALANCE_KEY);
                         net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
                                 new OpenTradingInventoryPacket(this.getDisplayName().getString(),
                                         entries, playerEntries, response.townBalance, playerBalance,
-                                        getBuyMultiplier(), getSellMultiplier()));
+                                        getBuyMultiplier(serverPlayer), getSellMultiplier(serverPlayer)));
                     }
                 }
             }
@@ -1057,7 +1078,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                         net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
                                 new OpenTradingInventoryPacket(this.getDisplayName().getString(),
                                         entries, playerEntries, response.townBalance, playerBalance,
-                                        getBuyMultiplier(), getSellMultiplier()));
+                                        getBuyMultiplier(serverPlayer), getSellMultiplier(serverPlayer)));
                     }
                 }
             }
@@ -1079,7 +1100,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                         net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
                                 new OpenTradingInventoryPacket(this.getDisplayName().getString(),
                                         entries, playerEntries, response.townBalance, playerBalance,
-                                        getBuyMultiplier(), getSellMultiplier()));
+                                        getBuyMultiplier(serverPlayer), getSellMultiplier(serverPlayer)));
                     }
                 }
             }
@@ -1093,6 +1114,17 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                 ageToAdult();
             }
         }
+    }
+
+    /** What a smith or the baker trades: the blacksmith metals and the basic goods, the others their own work. */
+    private java.util.function.Predicate<String> smithTradeFilter() {
+        return switch (getJobType()) {
+            case JobSystem.JOB_ARMORSMITH -> net.darkflameproduction.agotmod.util.ItemPricing::isArmorsmithItem;
+            case JobSystem.JOB_SWORDSMITH -> net.darkflameproduction.agotmod.util.ItemPricing::isSwordsmithItem;
+            case JobSystem.JOB_BAKER -> net.darkflameproduction.agotmod.util.ItemPricing::isBakerItem;
+            case JobSystem.JOB_STONEMASON -> net.darkflameproduction.agotmod.util.ItemPricing::isStonemasonItem;
+            default -> net.darkflameproduction.agotmod.util.ItemPricing::isBlacksmithItem;
+        };
     }
 
     private List<OpenTradingInventoryPacket.TradingInventoryEntry> buildFilteredEntries(
@@ -1283,6 +1315,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
             net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobClaims.get(serverLevel)
                     .releaseAll(this.getUUID());
             net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.CitizenReportSystem.remove(this.getUUID());
+            net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobTools.removeRequest(this.getUUID());
         }
         sleepSystem.onRemove();
         homeSystem.onRemove();

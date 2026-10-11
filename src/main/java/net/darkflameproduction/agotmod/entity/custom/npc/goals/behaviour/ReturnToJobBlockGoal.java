@@ -23,7 +23,9 @@ public class ReturnToJobBlockGoal extends Goal {
                 || job.equals(JobSystem.JOB_BUTCHER)
                 || job.equals(JobSystem.JOB_TANNER)
                 || job.equals(JobSystem.JOB_TAILOR)
-                || job.equals(JobSystem.JOB_BLACKSMITH);
+                || JobSystem.isSmith(job)
+                || job.equals(JobSystem.JOB_BAKER)
+                || job.equals(JobSystem.JOB_STONEMASON);
     }
 
     @Override

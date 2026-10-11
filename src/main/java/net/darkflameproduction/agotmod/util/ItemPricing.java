@@ -9,6 +9,10 @@ public class ItemPricing {
     public static final String TANNER     = "tanner";
     public static final String TAILOR     = "tailor";
     public static final String BLACKSMITH = "blacksmith";
+    public static final String ARMORSMITH = "armorsmith";
+    public static final String SWORDSMITH = "swordsmith";
+    public static final String BAKER      = "baker";
+    public static final String STONEMASON = "stonemason";
     public static final String CARPENTER  = "carpenter";
     public static final String TRADER = "trader";
 
@@ -75,103 +79,44 @@ public class ItemPricing {
         reg("minecraft:potato",              4,  GROCER);
         reg("minecraft:poisonous_potato",    1,  GROCER);
         reg("minecraft:egg",                 5,  GROCER);
+        reg("minecraft:sugar",               4,  GROCER);
+        reg("minecraft:honey_bottle",       12,  GROCER);
+        reg("minecraft:milk_bucket",        20,  GROCER);
+        reg("minecraft:bucket",             60,  BLACKSMITH);
+        // Vanilla bakes (the baker makes them too)
+        reg("minecraft:bread",               8,  GROCER, BAKER);
+        reg("minecraft:pumpkin_pie",        40,  GROCER, BAKER);
+        reg("minecraft:cake",               90,  GROCER, BAKER);
 
-        reg("agotmod:horseradish",           7,  GROCER);
         reg("agotmod:horseradish_seeds",    28,  GROCER);
-        reg("agotmod:onion",                 4,  GROCER);
         reg("agotmod:onion_seeds",          16,  GROCER);
-        reg("agotmod:red_onion",             5,  GROCER);
         reg("agotmod:red_onion_seeds",      19,  GROCER);
-        reg("agotmod:wild_onion",            7,  GROCER);
         reg("agotmod:wild_onion_seeds",     25,  GROCER);
-        reg("agotmod:leek",                  6,  GROCER);
         reg("agotmod:leek_seeds",           23,  GROCER);
-        reg("agotmod:neep",                  8,  GROCER);
         reg("agotmod:neep_seeds",           31,  GROCER);
-        reg("agotmod:turnip",                6,  GROCER);
         reg("agotmod:turnip_seeds",         23,  GROCER);
-        reg("agotmod:parsley",               4,  GROCER);
         reg("agotmod:parsley_seeds",        16,  GROCER);
-        reg("agotmod:bean",                  4,  GROCER);
         reg("agotmod:bean_seeds",           13,  GROCER);
-        reg("agotmod:green_bean",            4,  GROCER);
         reg("agotmod:green_bean_seeds",     16,  GROCER);
-        reg("agotmod:chickpea",              6,  GROCER);
         reg("agotmod:chickpea_seeds",       22,  GROCER);
-        reg("agotmod:cabbage",               8,  GROCER);
         reg("agotmod:cabbage_seeds",        31,  GROCER);
-        reg("agotmod:spinach",               5,  GROCER);
         reg("agotmod:spinach_seeds",        19,  GROCER);
-        reg("agotmod:cucumber",              8,  GROCER);
         reg("agotmod:cucumber_seeds",       31,  GROCER);
-        reg("agotmod:dragon_pepper",        10,  GROCER);
         reg("agotmod:dragon_pepper_seeds",  37,  GROCER);
-        reg("agotmod:pepper",                9,  GROCER);
         reg("agotmod:pepper_seeds",         34,  GROCER);
-        reg("agotmod:peppercorn",           12,  GROCER);
         reg("agotmod:peppercorn_seeds",     46,  GROCER);
-        reg("agotmod:barley",                2,  GROCER);
-        reg("agotmod:barley_seeds",          8,  GROCER);
-        reg("agotmod:oat",                   3,  GROCER);
-        reg("agotmod:oat_seeds",            10,  GROCER);
         reg("agotmod:opium_poppy_seeds",    46,  GROCER);
-        reg("agotmod:hemp",                 12,  GROCER);
-        reg("agotmod:hemp_seeds",           46,  GROCER);
-        reg("agotmod:cotton",               10,  GROCER, TAILOR);
-        reg("agotmod:cotton_seeds",         37,  GROCER);
 
-        reg("agotmod:strawberry",           17,  GROCER);
         reg("agotmod:strawberry_seeds",     68,  GROCER);
-        reg("agotmod:blackberry",           17,  GROCER);
         reg("agotmod:blackberry_seeds",     68,  GROCER);
-        reg("agotmod:blueberry",            17,  GROCER);
         reg("agotmod:blueberry_seeds",      68,  GROCER);
-        reg("agotmod:mulberry",             17,  GROCER);
         reg("agotmod:mulberry_seeds",       68,  GROCER);
-        reg("agotmod:raspberry",            17,  GROCER);
         reg("agotmod:raspberry_seeds",      68,  GROCER);
-        reg("agotmod:smokeberry",           17,  GROCER);
         reg("agotmod:smokeberry_seeds",     68,  GROCER);
 
-        reg("agotmod:garlic",                5,  GROCER);
-        reg("agotmod:olives",                6,  GROCER);
-        reg("agotmod:peas",                  4,  GROCER);
-        reg("agotmod:radish",                4,  GROCER);
-        reg("agotmod:lentils",               5,  GROCER);
-        reg("agotmod:squash",                6,  GROCER);
-        reg("agotmod:corn",                  4,  GROCER);
 
-        reg("agotmod:cherry",                8,  GROCER);
-        reg("agotmod:crabapple",             7,  GROCER);
-        reg("agotmod:apricot",               8,  GROCER);
-        reg("agotmod:date",                  9,  GROCER);
-        reg("agotmod:fig",                   8,  GROCER);
-        reg("agotmod:grape",                 8,  GROCER);
-        reg("agotmod:raisins",               9,  GROCER);
-        reg("agotmod:dried_apples",          8,  GROCER);
-        reg("agotmod:lemon",                 7,  GROCER);
-        reg("agotmod:lime",                  7,  GROCER);
-        reg("agotmod:orange",                9,  GROCER);
-        reg("agotmod:blood_orange",         10,  GROCER);
-        reg("agotmod:peach",                 9,  GROCER);
-        reg("agotmod:winter_peach",         10,  GROCER);
-        reg("agotmod:pear",                  9,  GROCER);
-        reg("agotmod:persimmon",             9,  GROCER);
-        reg("agotmod:plum",                  8,  GROCER);
-        reg("agotmod:dornish_plum",         10,  GROCER);
-        reg("agotmod:fireplum",             10,  GROCER);
-        reg("agotmod:pomegranate",          10,  GROCER);
 
-        reg("agotmod:almond",                8,  GROCER);
-        reg("agotmod:chestnut",              9,  GROCER);
-        reg("agotmod:pecan",                 8,  GROCER);
-        reg("agotmod:pine_nut",              9,  GROCER);
-        reg("agotmod:walnut",                8,  GROCER);
 
-        reg("agotmod:fennel",                4,  GROCER);
-        reg("agotmod:mint",                  4,  GROCER);
-        reg("agotmod:honey",                 7,  GROCER);
-        reg("agotmod:molasses",              6,  GROCER);
 
         // ══════════════════════════════════════════════════════════════════════
         // BUTCHER
@@ -183,38 +128,6 @@ public class ItemPricing {
         reg("minecraft:mutton",             16,  BUTCHER);
         reg("minecraft:rabbit",             24,  BUTCHER);
 
-        reg("agotmod:raw_sausage",          16,  BUTCHER);
-        reg("agotmod:raw_white_sausage",    16,  BUTCHER);
-        reg("agotmod:raw_blood_sausage",    16,  BUTCHER);
-        reg("agotmod:raw_pigeon",            8,  BUTCHER);
-        reg("agotmod:raw_gull",              8,  BUTCHER);
-        reg("agotmod:raw_lark",              8,  BUTCHER);
-        reg("agotmod:raw_quail",             8,  BUTCHER);
-        reg("agotmod:raw_duck",             16,  BUTCHER);
-        reg("agotmod:raw_capon",            16,  BUTCHER);
-        reg("agotmod:raw_heron",            16,  BUTCHER);
-        reg("agotmod:raw_partridge",        16,  BUTCHER);
-        reg("agotmod:raw_goose",            24,  BUTCHER);
-        reg("agotmod:raw_peacock",          24,  BUTCHER);
-        reg("agotmod:raw_swan",             24,  BUTCHER);
-        reg("agotmod:raw_chicken_nuggets",   8,  BUTCHER);
-        reg("agotmod:raw_bacon",             8,  BUTCHER);
-        reg("agotmod:raw_frog",              8,  BUTCHER);
-        reg("agotmod:raw_squirrel",          8,  BUTCHER);
-        reg("agotmod:raw_rat",               8,  BUTCHER);
-        reg("agotmod:raw_hare_meat",        16,  BUTCHER);
-        reg("agotmod:raw_horse_meat",       16,  BUTCHER);
-        reg("agotmod:raw_goat_meat",        16,  BUTCHER);
-        reg("agotmod:raw_deer_venison",     16,  BUTCHER);
-        reg("agotmod:raw_lamb",             16,  BUTCHER);
-        reg("agotmod:raw_venison",          16,  BUTCHER);
-        reg("agotmod:raw_dog",              16,  BUTCHER);
-        reg("agotmod:raw_snake",            16,  BUTCHER);
-        reg("agotmod:raw_boar_venison",     24,  BUTCHER);
-        reg("agotmod:raw_pork",             24,  BUTCHER);
-        reg("agotmod:raw_bear_meat",        32,  BUTCHER);
-        reg("agotmod:raw_mammoth_meat",     32,  BUTCHER);
-        reg("agotmod:raw_aurochs",          32,  BUTCHER);
 
         // ══════════════════════════════════════════════════════════════════════
         // TANNER
@@ -291,7 +204,6 @@ public class ItemPricing {
         reg("agotmod:goldenrod",             6,  TAILOR);
         reg("agotmod:goldencup",             6,  TAILOR);
         reg("agotmod:goathead",              6,  TAILOR);
-        reg("agotmod:ginger",                6,  TAILOR);
         reg("agotmod:gillyflower",           6,  TAILOR);
         reg("agotmod:frostfire",             6,  TAILOR);
         reg("agotmod:forget_me_not",         6,  TAILOR);
@@ -455,6 +367,18 @@ public class ItemPricing {
         reg("agotmod:silver_ingot",        300,  BLACKSMITH);
         reg("agotmod:steel_ingot",         600,  BLACKSMITH);
         reg("minecraft:gold_ingot",       1000,  BLACKSMITH);
+        // Metal and raw ore blocks: 9 ingots / raw ores each - the blacksmith buys and sells any metal
+        reg("minecraft:copper_block",      1260,  BLACKSMITH);
+        reg("agotmod:tin_block",           1350,  BLACKSMITH);
+        reg("minecraft:iron_block",        1440,  BLACKSMITH);
+        reg("agotmod:bronze_block",        1800,  BLACKSMITH);
+        reg("agotmod:silver_block",        2700,  BLACKSMITH);
+        reg("minecraft:gold_block",        9000,  BLACKSMITH);
+        reg("minecraft:raw_copper_block",   882,  BLACKSMITH);
+        reg("agotmod:raw_tin_block",        945,  BLACKSMITH);
+        reg("minecraft:raw_iron_block",    1008,  BLACKSMITH);
+        reg("agotmod:raw_silver_block",    1890,  BLACKSMITH);
+        reg("minecraft:raw_gold_block",    6300,  BLACKSMITH);
         reg("agotmod:bronze_chain_link",   220,  BLACKSMITH);
         reg("agotmod:bronze_chain",        700,  BLACKSMITH);
         reg("agotmod:bronze_plate",        900,  BLACKSMITH);
@@ -525,24 +449,45 @@ public class ItemPricing {
         reg("agotmod:iron_mace",           1200,  BLACKSMITH);
         reg("agotmod:iron_dagger",          800,  BLACKSMITH);
         reg("agotmod:iron_battleaxe",      1600,  BLACKSMITH);
-        reg("agotmod:steel_sword",         1600,  BLACKSMITH);
-        reg("agotmod:steel_longsword",     2200,  BLACKSMITH);
-        reg("agotmod:steel_spear",         1600,  BLACKSMITH);
-        reg("agotmod:steel_pike",          2000,  BLACKSMITH);
-        reg("agotmod:steel_mace",          1600,  BLACKSMITH);
-        reg("agotmod:steel_dagger",        1200,  BLACKSMITH);
-        reg("agotmod:steel_battleaxe",     2200,  BLACKSMITH);
-        reg("agotmod:steel_halberd",       2500,  BLACKSMITH);
-        reg("agotmod:noble_longsword",    60000,  BLACKSMITH);
-        reg("agotmod:noble_spear",        50000,  BLACKSMITH);
-        reg("agotmod:noble_pike",         55000,  BLACKSMITH);
-        reg("agotmod:noble_mace",         50000,  BLACKSMITH);
-        reg("agotmod:noble_dagger",       35000,  BLACKSMITH);
-        reg("agotmod:noble_battleaxe",    60000,  BLACKSMITH);
-        reg("agotmod:noble_halberd",      65000,  BLACKSMITH);
+        reg("agotmod:steel_sword",         1600,  BLACKSMITH, SWORDSMITH);
+        reg("agotmod:steel_longsword",     2200,  BLACKSMITH, SWORDSMITH);
+        reg("agotmod:steel_spear",         1600,  BLACKSMITH, SWORDSMITH);
+        reg("agotmod:steel_pike",          2000,  BLACKSMITH, SWORDSMITH);
+        reg("agotmod:steel_mace",          1600,  BLACKSMITH, SWORDSMITH);
+        reg("agotmod:steel_dagger",        1200,  BLACKSMITH, SWORDSMITH);
+        reg("agotmod:steel_battleaxe",     2200,  BLACKSMITH, SWORDSMITH);
+        reg("agotmod:steel_halberd",       2500,  BLACKSMITH, SWORDSMITH);
+        reg("agotmod:noble_longsword",    60000,  BLACKSMITH, SWORDSMITH);
+        reg("agotmod:noble_spear",        50000,  BLACKSMITH, SWORDSMITH);
+        reg("agotmod:noble_pike",         55000,  BLACKSMITH, SWORDSMITH);
+        reg("agotmod:noble_mace",         50000,  BLACKSMITH, SWORDSMITH);
+        reg("agotmod:noble_dagger",       35000,  BLACKSMITH, SWORDSMITH);
+        reg("agotmod:noble_battleaxe",    60000,  BLACKSMITH, SWORDSMITH);
+        reg("agotmod:noble_halberd",      65000,  BLACKSMITH, SWORDSMITH);
         reg("agotmod:dragonglass_spear",  100000,  BLACKSMITH);
         reg("agotmod:dragonglass_dagger",  80000,  BLACKSMITH);
         registerArmorSets();
+        // The stonemason: the raw stone of every family he works, and every variant he cuts from it (Stonework)
+        for (net.darkflameproduction.agotmod.entity.custom.npc.system.supply.Stonework.Family family
+                : net.darkflameproduction.agotmod.entity.custom.npc.system.supply.Stonework.families()) {
+            reg(family.sourceKey(), 2, STONEMASON);
+            for (net.darkflameproduction.agotmod.block.ModBLocks.BlockSet set : family.variants().values()) {
+                reg(set.base().getId().toString(), 4, STONEMASON);
+                reg(set.stairs().getId().toString(), 4, STONEMASON);
+                reg(set.slab().getId().toString(), 2, STONEMASON);
+                reg(set.wall().getId().toString(), 4, STONEMASON);
+            }
+        }
+        // Every food (FoodCatalog), sold by the grocer or the butcher
+        for (net.darkflameproduction.agotmod.item.food.FoodCatalog.Food food
+                : net.darkflameproduction.agotmod.item.food.FoodCatalog.FOODS) {
+            String shop = food.shop() == net.darkflameproduction.agotmod.item.food.FoodCatalog.Shop.BUTCHER ? BUTCHER : GROCER;
+            if (net.darkflameproduction.agotmod.entity.custom.npc.system.supply.Bakery.bakes(food)) reg("agotmod:" + food.id(), food.price(), shop, BAKER);
+            else reg("agotmod:" + food.id(), food.price(), shop);
+        }
+        // Every style of steel and noble sword sells like the plain one
+        for (String name : net.darkflameproduction.agotmod.item.ModItems.STEEL_SWORDS.keySet()) reg("agotmod:" + name, 1600, BLACKSMITH, SWORDSMITH);
+        for (String name : net.darkflameproduction.agotmod.item.ModItems.NOBLE_SWORDS.keySet()) reg("agotmod:" + name, 60000, BLACKSMITH, SWORDSMITH);
     }
 
     /**
@@ -557,9 +502,11 @@ public class ItemPricing {
             int factor = (int) Math.pow(5, level - 1);
             net.minecraft.world.item.ArmorItem.Type[] pieces = net.darkflameproduction.agotmod.armor.ModArmorSets.PIECES;
             for (int i = 0; i < pieces.length; i++) {
-                reg("agotmod:" + set.itemId(pieces[i]), pieceBase[i] * factor, BLACKSMITH);
+                if (set.tier >= 2) reg("agotmod:" + set.itemId(pieces[i]), pieceBase[i] * factor, BLACKSMITH, ARMORSMITH);
+                else reg("agotmod:" + set.itemId(pieces[i]), pieceBase[i] * factor, BLACKSMITH);
             }
-            reg("agotmod:" + set.id + "_smithing_scroll", 22000 * factor, BLACKSMITH);
+            if (set.tier >= 2) reg("agotmod:" + set.id + "_smithing_scroll", 22000 * factor, BLACKSMITH, ARMORSMITH);
+            else reg("agotmod:" + set.id + "_smithing_scroll", 22000 * factor, BLACKSMITH);
         }
     }
 
@@ -581,10 +528,13 @@ public class ItemPricing {
     public static final float SHOP_SELL_MULTIPLIER   = 1.0f;
     /** Shops buy from the player at 50% of base price. */
     public static final float SHOP_BUY_MULTIPLIER    = 0.5f;
-    /** The trader sells to the player at 125% of base price. */
+    // The generic trader deals in everything any shop deals in, but on worse terms than the shop whose
+    // goods they are: he charges more than the shop (125% vs 100%) and pays less (35% vs 50%).
+
+    /** The trader sells to the player at 125% of base price - more than the item's own shop charges. */
     public static final float TRADER_SELL_MULTIPLIER = 1.25f;
-    /** The trader buys from the player at 75% of base price. */
-    public static final float TRADER_BUY_MULTIPLIER  = 0.75f;
+    /** The trader buys from the player at 35% of base price - less than the item's own shop pays. */
+    public static final float TRADER_BUY_MULTIPLIER  = 0.35f;
 
     /** What the NPC charges the player per item (the GUI's "buy" mode). */
     public static float playerBuyMultiplier(boolean trader)  { return trader ? TRADER_SELL_MULTIPLIER : SHOP_SELL_MULTIPLIER; }
@@ -623,6 +573,10 @@ public class ItemPricing {
     public static boolean isTailorItem(String itemKey)     { return isJobItem(itemKey, TAILOR);     }
     public static boolean isBlacksmithItem(String itemKey) { return isJobItem(itemKey, BLACKSMITH); }
     public static boolean isCarpenterItem(String itemKey)  { return isJobItem(itemKey, CARPENTER);  }
+    public static boolean isArmorsmithItem(String itemKey) { return isJobItem(itemKey, ARMORSMITH); }
+    public static boolean isSwordsmithItem(String itemKey) { return isJobItem(itemKey, SWORDSMITH); }
+    public static boolean isBakerItem(String itemKey)      { return isJobItem(itemKey, BAKER);      }
+    public static boolean isStonemasonItem(String itemKey) { return isJobItem(itemKey, STONEMASON); }
 
     public static int getItemPrice(String itemKey) {
         ItemData data = ITEMS.get(itemKey);

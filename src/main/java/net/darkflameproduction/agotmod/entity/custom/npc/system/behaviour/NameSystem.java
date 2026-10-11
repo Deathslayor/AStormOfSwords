@@ -124,6 +124,10 @@ public class NameSystem {
     private static final String[] TANNER_NAMES     = { "Tanner", "Barker", "Currier", "Skinner", "Leathersmith", "Peltier", "Garber" };
     private static final String[] TAILOR_NAMES     = { "Taylor", "Schneider", "Clothier", "Draper", "Weaver", "Fuller", "Tucker" };
     private static final String[] BLACKSMITH_NAMES = { "Smith", "Blacksmith", "Smyth", "Faber", "Schmidt", "Kovacs", "Kowalski", "Ironmonger", "Steele" };
+    private static final String[] ARMORSMITH_NAMES = { "Armourer", "Armstrong", "Mailer", "Platt", "Harness", "Brynner", "Hauberk" };
+    private static final String[] SWORDSMITH_NAMES = { "Sworder", "Bladesmith", "Cutler", "Blade", "Edge", "Brand", "Fuller" };
+    private static final String[] BAKER_NAMES      = { "Baker", "Baxter", "Miller", "Pastry", "Bun", "Becker", "Loafe" };
+    private static final String[] STONEMASON_NAMES = { "Mason", "Stone", "Carver", "Hewer", "Steinmetz", "Quarrel", "Rook" };
     private static final String[] GUARD_NAMES      = { "Ward", "Warden", "Constable", "Bailey", "Waite", "Watchman", "Keepe" };
     public static final String GUARD_TITLE = "Guard";
     private static final String[] MINER_NAMES      = { "Miner", "Collier", "Pitman", "Hodder", "Eisenhauer", "Digger", "Delver" };
@@ -230,6 +234,10 @@ public class NameSystem {
             case net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem.JOB_TANNER          -> TANNER_NAMES;
             case net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem.JOB_TAILOR          -> TAILOR_NAMES;
             case net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem.JOB_BLACKSMITH      -> BLACKSMITH_NAMES;
+            case net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem.JOB_ARMORSMITH      -> ARMORSMITH_NAMES;
+            case net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem.JOB_SWORDSMITH      -> SWORDSMITH_NAMES;
+            case net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem.JOB_BAKER           -> BAKER_NAMES;
+            case net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem.JOB_STONEMASON      -> STONEMASON_NAMES;
             case net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem.JOB_GUARD           -> GUARD_NAMES;
             case net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem.JOB_MINER           -> MINER_NAMES;
             case net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem.JOB_QUARRY          -> QUARRY_NAMES;

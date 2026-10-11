@@ -73,6 +73,9 @@ public class TownHallScreen extends Screen {
     // Citizens (name + job) reported by the town hall
     private List<net.darkflameproduction.agotmod.network.TownHallDataPacket.CitizenEntry> citizens = new ArrayList<>();
 
+    // What the town's blacksmith still has to make
+    private List<net.darkflameproduction.agotmod.network.TownHallDataPacket.CraftingNeed> craftingNeeds = new ArrayList<>();
+
     // Tab state
     private static final int TAB_OVERVIEW   = 0;
     private static final int TAB_CULTURE    = 1;
@@ -81,7 +84,8 @@ public class TownHallScreen extends Screen {
     private static final int TAB_INVENTORY  = 4;
     private static final int TAB_JOBS       = 5;
     private static final int TAB_CITIZENS   = 6;
-    private static final String[] TAB_NAMES = { "Overview", "Culture", "Finances", "Employment", "Inventory", "Jobs", "Citizens" };
+    private static final int TAB_CRAFTING   = 7;
+    private static final String[] TAB_NAMES = { "Overview", "Culture", "Finances", "Employment", "Inventory", "Jobs", "Citizens", "Crafting" };
     private int activeTab = TAB_OVERVIEW;
 
     // Scroll state for the list tabs (inventory, jobs, citizens)
@@ -163,6 +167,12 @@ public class TownHallScreen extends Screen {
         ).pos(renameBtnX, renameBtnY).size(70, 16).build();
         renameButton.visible = !renameModeActive;
         addRenderableWidget(renameButton);
+
+        // Donate: give items or coins to the town (the trade menu on your own inventory, for nothing)
+        addRenderableWidget(net.minecraft.client.gui.components.Button.builder(
+                Component.literal("Donate"),
+                btn -> TradingInventoryScreen.openDonate(townHallPos, townName)
+        ).pos(px + 20, renameBtnY).size(70, 16).build());
 
         // Ã¢â€â‚¬Ã¢â€â‚¬ Name input + confirm Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
         int inputWidth = 180;
@@ -281,11 +291,7 @@ public class TownHallScreen extends Screen {
         currentInstance.assignedJobCount  = assignedJobCount;
         currentInstance.totalJobCount     = totalJobCount;
         currentInstance.joblessCount      = joblessCount;
-        try {
-            currentInstance.townCulture = Culture.valueOf(cultureName);
-        } catch (IllegalArgumentException e) {
-            currentInstance.townCulture = Culture.NONE;
-        }
+        currentInstance.townCulture = Culture.fromName(cultureName);
         currentInstance.refreshButtonStates();
         if (!currentInstance.renameModeActive && currentInstance.townNameInput != null)
             currentInstance.townNameInput.setValue(townName);
@@ -312,6 +318,13 @@ public class TownHallScreen extends Screen {
                 ));
     }
 
+    public static void updateCraftingNeeds(BlockPos packetPos,
+                                           List<net.darkflameproduction.agotmod.network.TownHallDataPacket.CraftingNeed> needs) {
+        if (currentInstance == null) return;
+        if (!packetPos.equals(currentInstance.townHallPos)) return;
+        currentInstance.craftingNeeds = new ArrayList<>(needs);
+    }
+
     public static void updateCitizens(BlockPos packetPos,
                                       List<net.darkflameproduction.agotmod.network.TownHallDataPacket.CitizenEntry> citizens) {
         if (currentInstance == null) return;
@@ -329,6 +342,7 @@ public class TownHallScreen extends Screen {
             case TAB_INVENTORY -> townInventory.size();
             case TAB_JOBS      -> getJobCounts().size();
             case TAB_CITIZENS  -> citizens.size();
+            case TAB_CRAFTING  -> craftingNeeds.size();
             default            -> -1;
         };
         if (listSize >= 0) {
@@ -375,6 +389,7 @@ public class TownHallScreen extends Screen {
             case TAB_INVENTORY  -> drawInventoryTab(g);
             case TAB_JOBS       -> drawJobsTab(g);
             case TAB_CITIZENS   -> drawCitizensTab(g);
+            case TAB_CRAFTING   -> drawCraftingTab(g);
         }
 
         super.render(g, mouseX, mouseY, partialTick);
@@ -601,6 +616,99 @@ public class TownHallScreen extends Screen {
             rows.add(new String[]{ entry.getKey(), String.valueOf(entry.getValue()) });
         }
         drawTwoColumnList(g, rows, "No citizens yet.");
+    }
+
+    // ===== CRAFTING TAB =====
+
+    /**
+     * The town's supply chain: everything its crafting NPCs can make that the town hall holds too little of -
+     * tools workers have requested first (highlighted), then the blacksmith's work, then every other job's.
+     * Each row shows the item, the job(s) that make it and have / want; the name is red when no citizen
+     * has one of those jobs.
+     */
+    private void drawCraftingTab(GuiGraphics g) {
+        int ix = getInvPanelX();
+        int iy = getInvPanelY();
+        int iw = getInvPanelW();
+        int ih = getInvPanelH();
+
+        if (craftingNeeds.isEmpty()) {
+            String empty = "Nothing needs to be crafted.";
+            g.drawString(font, empty, ix + (iw - font.width(empty)) / 2, iy + 20, COLOR_GRAY, false);
+            return;
+        }
+
+        int visibleRows = getVisibleRows();
+        int totalRows   = craftingNeeds.size();
+        listScrollOffset = Math.max(0, Math.min(listScrollOffset, Math.max(0, totalRows - visibleRows)));
+        int endIndex    = Math.min(listScrollOffset + visibleRows, totalRows);
+        int scaledW     = Math.round(iw / INV_SCALE);
+
+        g.pose().pushPose();
+        g.pose().translate(ix, iy, 0);
+        g.pose().scale(INV_SCALE, INV_SCALE, 1f);
+
+        for (int i = listScrollOffset; i < endIndex; i++) {
+            var need  = craftingNeeds.get(i);
+            int rowY  = (i - listScrollOffset) * ROW_HEIGHT;
+            int textY = rowY + (ROW_HEIGHT - font.lineHeight) / 2 + 1;
+
+            if (need.toolRequest()) {
+                g.fill(0, rowY, scaledW, rowY + ROW_HEIGHT, 0x30FF8F00); // requested tools stand out
+            } else if ((i % 2) == 0) {
+                g.fill(0, rowY, scaledW, rowY + ROW_HEIGHT, 0x18000000);
+            }
+
+            // Icon (the "any sword style" entries show a plain or first-style sword)
+            String iconKey = switch (need.itemKey()) {
+                case "agotmod:iron_sword_variant"  -> "minecraft:iron_sword";
+                case "agotmod:steel_sword_variant" -> "agotmod:steel_sword";
+                case "agotmod:noble_sword_variant" -> "agotmod:noble_sword_h1_b1_c1";
+                default -> need.itemKey();
+            };
+            net.minecraft.resources.ResourceLocation loc = net.minecraft.resources.ResourceLocation.tryParse(iconKey);
+            if (loc != null) {
+                net.minecraft.world.item.Item item = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(loc);
+                if (item != net.minecraft.world.item.Items.AIR) {
+                    g.renderItem(new net.minecraft.world.item.ItemStack(item), 2, rowY + (ROW_HEIGHT - ICON_SIZE) / 2);
+                }
+            }
+
+            // Icon | Name (red: no citizen in town has a job that makes it) | Job | have / want
+            String count = need.have() + " / " + need.want();
+            int countX = scaledW - font.width(count) - 4;
+            g.drawString(font, count, countX, textY, need.have() == 0 ? COLOR_RED : COLOR_GOLD, false);
+
+            StringBuilder jobs = new StringBuilder();
+            for (String job : need.jobs().split("/")) {
+                if (job.isEmpty()) continue;
+                if (!jobs.isEmpty()) jobs.append(" / ");
+                jobs.append(formatJobName(job));
+            }
+            int jobRight = countX - 8;
+            int jobX = Math.max(jobRight - font.width(jobs.toString()), scaledW / 2);
+            g.drawString(font, font.plainSubstrByWidth(jobs.toString(), jobRight - jobX), jobX, textY,
+                    need.hasWorker() ? COLOR_BLUE : COLOR_RED, false);
+
+            String name = !need.label().isEmpty() ? need.label()
+                    : need.itemKey().endsWith("_sword_variant")
+                            ? formatItemName(need.itemKey().replace("_variant", "")) + " (any style)"
+                    : formatItemName(need.itemKey());
+            int nameX = 2 + ICON_SIZE + 4;
+            int nameColor = !need.hasWorker() ? COLOR_RED : need.toolRequest() ? COLOR_ORANGE : TEXT_COLOR;
+            g.drawString(font, font.plainSubstrByWidth(name, jobX - nameX - 6), nameX, textY, nameColor, false);
+        }
+
+        g.pose().popPose();
+
+        if (totalRows > visibleRows) {
+            int scrollTrackX = ix + iw + 4;
+            g.fill(scrollTrackX, iy, scrollTrackX + 3, iy + ih, 0x40000000);
+            int   thumbH      = Math.max(10, (int)(ih * (float) visibleRows / totalRows));
+            float scrollRatio = (float) listScrollOffset / Math.max(1, totalRows - visibleRows);
+            int   thumbY      = iy + (int)((ih - thumbH) * scrollRatio);
+            g.fill(scrollTrackX, thumbY, scrollTrackX + 3, thumbY + thumbH, 0xA0000000);
+        }
     }
 
     // ===== CITIZENS TAB =====

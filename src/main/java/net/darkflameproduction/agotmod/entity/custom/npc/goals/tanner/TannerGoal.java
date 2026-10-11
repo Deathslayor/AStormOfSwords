@@ -3,6 +3,7 @@ package net.darkflameproduction.agotmod.entity.custom.npc.goals.tanner;
 import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.supply.SupplyChain;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.tanner.TannerSystem;
 import net.darkflameproduction.agotmod.item.ModItems;
 import net.minecraft.core.BlockPos;
@@ -58,9 +59,11 @@ public class TannerGoal extends Goal {
     }
 
     private boolean hasAnythingToCraft() {
+        if (SupplyChain.nextCraft(peasant, JobSystem.JOB_TANNER) != null) return true;
         return hasItemInInventory("minecraft:rabbit_hide", 4)
                 || (!hasItemInInventory("minecraft:rabbit_hide", 1)
-                && (hasItemInInventory("minecraft:leather", 1)));
+                && hasItemInInventory("minecraft:leather", 1)
+                && !SupplyChain.isShort(peasant, JobSystem.JOB_TANNER, "minecraft:leather"));
     }
 
     @Override
@@ -113,6 +116,15 @@ public class TannerGoal extends Goal {
     }
 
     private void tryCraft(TannerSystem system) {
+        // What the town's supply chain is short of comes first (see SupplyChain)
+        SupplyChain.Recipe needed = SupplyChain.nextCraft(peasant, JobSystem.JOB_TANNER);
+        if (needed != null && SupplyChain.craft(peasant, needed)) {
+            if (needed.inputs().containsKey("minecraft:rabbit_hide")) {
+                system.setHidesProcessed(system.getHidesProcessed() + needed.inputs().get("minecraft:rabbit_hide"));
+            }
+            return;
+        }
+
         // Step 1: Convert rabbit hides to leather (4 hides = 1 leather)
         if (hasItemInInventory("minecraft:rabbit_hide", 4)) {
             removeItemFromInventory("minecraft:rabbit_hide", 4);
@@ -135,8 +147,9 @@ public class TannerGoal extends Goal {
             return;
         }
 
-        // Step 3: Convert remaining leather to boiled leather
-        if (hasItemInInventory("minecraft:leather", 1)) {
+        // Step 3: Convert spare leather to boiled leather - not while the town is short of leather itself
+        if (hasItemInInventory("minecraft:leather", 1)
+                && !SupplyChain.isShort(peasant, JobSystem.JOB_TANNER, "minecraft:leather")) {
             removeItemFromInventory("minecraft:leather", 1);
             addItemToInventory(new ItemStack(ModItems.BOILED_LEATHER.get(), 1));
             peasant.triggerInteractAnimation();

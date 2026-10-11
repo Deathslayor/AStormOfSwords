@@ -38,6 +38,12 @@ public class ModTags {
         public static final TagKey<Item> BRONZE_TOOL_MATERIALS = tag("bronze_tool_materials");
         public static final TagKey<Item> STEEL_TOOL_MATERIALS = tag("steel_tool_materials");
 
+        // Food groups (FoodCatalog categories), used by recipes that take any of a kind
+        public static final TagKey<Item> VEGETABLES = tag("vegetables");
+        public static final TagKey<Item> FRUITS = tag("fruits");
+        public static final TagKey<Item> RAW_MEATS = tag("raw_meats");
+        public static final TagKey<Item> COOKED_MEATS = tag("cooked_meats");
+
         // Helper method to create an item tag
         private static TagKey<Item> tag(String name) {
             return ItemTags.create(AGoTMod.id(name));

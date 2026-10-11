@@ -40,6 +40,12 @@ public class ModNetworking {
                         ClientPacketHandler.handleTownHallRegister(packet, context))
         );
         registrar.playToClient(
+                ReputationPacket.TYPE,
+                ReputationPacket.STREAM_CODEC,
+                (packet, context) -> context.enqueueWork(() ->
+                        ClientPacketHandler.handleReputation(packet, context))
+        );
+        registrar.playToClient(
                 CoinBalancePacket.TYPE,
                 CoinBalancePacket.STREAM_CODEC,
                 (packet, context) -> context.enqueueWork(() ->
@@ -94,6 +100,11 @@ public class ModNetworking {
                 FinishTransactionPacket.TYPE,
                 FinishTransactionPacket.STREAM_CODEC,
                 ServerPacketHandler::handleFinishTransaction
+        );
+        registrar.playToServer(
+                DonatePacket.TYPE,
+                DonatePacket.STREAM_CODEC,
+                ServerPacketHandler::handleDonate
         );
         registrar.playToServer(
                 UpdateTownNamePacket.TYPE,

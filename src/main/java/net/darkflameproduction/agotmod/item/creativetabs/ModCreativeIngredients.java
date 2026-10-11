@@ -52,12 +52,7 @@ public class ModCreativeIngredients {
 
 
                         //SEEDS
-                        pOutput.accept(ModItems.BARLEY.get());
-                        pOutput.accept(ModItems.OAT.get());
-                        pOutput.accept(ModItems.COTTON.get());
-                        pOutput.accept(ModItems.HEMP.get());
                         pOutput.accept(ModItems.HORSERADISH_SEEDS.get());
-                        pOutput.accept(ModItems.GARLIC.get());
                         pOutput.accept(ModItems.ONION_SEEDS.get());
                         pOutput.accept(ModItems.RED_ONION_SEEDS.get());
                         pOutput.accept(ModItems.WILD_ONION_SEEDS.get());
@@ -74,11 +69,7 @@ public class ModCreativeIngredients {
                         pOutput.accept(ModItems.DRAGON_PEPPER_SEEDS.get());
                         pOutput.accept(ModItems.PEPPER_SEEDS.get());
                         pOutput.accept(ModItems.PEPPERCORN_SEEDS.get());
-                        pOutput.accept(ModItems.BARLEY_SEEDS.get());
-                        pOutput.accept(ModItems.OAT_SEEDS.get());
                         pOutput.accept(ModItems.OPIUM_POPPY_SEEDS.get());
-                        pOutput.accept(ModItems.COTTON_SEEDS.get());
-                        pOutput.accept(ModItems.HEMP_SEEDS.get());
                         pOutput.accept(ModItems.STRAWBERRY_SEEDS.get());
                         pOutput.accept(ModItems.BLACKBERRY_SEEDS.get());
                         pOutput.accept(ModItems.BLUEBERRY_SEEDS.get());

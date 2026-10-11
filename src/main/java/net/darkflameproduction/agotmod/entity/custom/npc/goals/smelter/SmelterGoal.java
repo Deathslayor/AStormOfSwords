@@ -3,6 +3,9 @@ package net.darkflameproduction.agotmod.entity.custom.npc.goals.smelter;
 import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.smelter.SmelterSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.guard.GuardLoot;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.supply.SupplyChain;
+import net.darkflameproduction.agotmod.block.custom.TownHallBlockEntity;
 import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -13,6 +16,7 @@ import net.minecraft.world.item.Items;
 
 import java.util.EnumSet;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SmelterGoal extends Goal {
@@ -169,14 +173,20 @@ public class SmelterGoal extends Goal {
     }
 
     /**
-     * Greedily collects up to `slots` ores from inventory in priority order.
+     * Greedily collects up to `slots` ores from inventory: ores of ingots the town's supply chain is short
+     * of first (SupplyChain.oresByNeed), then the default priority order.
      */
     private Map<String, Integer> collectOres(int slots) {
         Map<String, Integer> result = new LinkedHashMap<>();
         var inventory = peasant.getInventorySystem().getInventory();
         int remaining = slots;
 
-        for (String oreKey : ORE_TO_INGOT.keySet()) {
+        TownHallBlockEntity townHall = GuardLoot.townHallOf(peasant);
+        List<String> ores = SupplyChain.oresByNeed(
+                townHall == null ? Map.of() : townHall.getTownInventory(),
+                key -> SupplyChain.count(peasant, key));
+
+        for (String oreKey : ores) {
             if (remaining <= 0) break;
 
             // Count available in inventory

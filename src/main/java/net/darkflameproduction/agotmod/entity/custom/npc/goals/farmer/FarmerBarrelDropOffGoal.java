@@ -68,15 +68,7 @@ public class FarmerBarrelDropOffGoal extends Goal {
         ALLOWED_ITEMS.add("agotmod:pepper_seeds");
         ALLOWED_ITEMS.add("agotmod:peppercorn");
         ALLOWED_ITEMS.add("agotmod:peppercorn_seeds");
-        ALLOWED_ITEMS.add("agotmod:barley");
-        ALLOWED_ITEMS.add("agotmod:barley_seeds");
-        ALLOWED_ITEMS.add("agotmod:oat");
-        ALLOWED_ITEMS.add("agotmod:oat_seeds");
         ALLOWED_ITEMS.add("agotmod:opium_poppy_seeds");
-        ALLOWED_ITEMS.add("agotmod:cotton");
-        ALLOWED_ITEMS.add("agotmod:cotton_seeds");
-        ALLOWED_ITEMS.add("agotmod:hemp");
-        ALLOWED_ITEMS.add("agotmod:hemp_seeds");
         ALLOWED_ITEMS.add("agotmod:strawberry");
         ALLOWED_ITEMS.add("agotmod:strawberry_seeds");
         ALLOWED_ITEMS.add("agotmod:blackberry");

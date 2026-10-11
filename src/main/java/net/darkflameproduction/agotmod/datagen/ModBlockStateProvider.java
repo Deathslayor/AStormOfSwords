@@ -1848,11 +1848,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         // ---------------------(CROPS)--------------------- //
         makeCrop((CropBlock) ModBLocks.HORSERADISH_CROP.get(), "horseradish_crop_stage", "horseradish_crop_stage");
-        makeCrop((CropBlock) ModBLocks.BARLEY_CROP.get(), "barley_crop_stage", "barley_crop_stage");
         makeCrop((CropBlock) ModBLocks.GARLIC_CROP.get(), "garlic_crop_stage", "garlic_crop_stage");
         makeCrop((CropBlock) ModBLocks.LEEK_CROP.get(), "leek_crop_stage", "leek_crop_stage");
         makeCrop((CropBlock) ModBLocks.NEEP_CROP.get(), "neep_crop_stage", "neep_crop_stage");
-        makeCrop((CropBlock) ModBLocks.OAT_CROP.get(), "oat_crop_stage", "oat_crop_stage");
         makeCrop((CropBlock) ModBLocks.PARSLEY_CROP.get(), "parsley_crop_stage", "parsley_crop_stage");
         makeCrop((CropBlock) ModBLocks.RED_ONION_CROP.get(), "red_onion_crop_stage", "red_onion_crop_stage");
         makeCrop((CropBlock) ModBLocks.TURNIP_CROP.get(), "turnip_crop_stage", "turnip_crop_stage");
@@ -1868,8 +1866,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
         makeTorchflowerStyleCrop((CropBlock) ModBLocks.DRAGON_PEPPER_CROP.get(), "dragon_pepper_crop_stage", "dragon_pepper_crop_stage");
         makeTorchflowerStyleCrop((CropBlock) ModBLocks.PEPPER_CROP.get(), "pepper_crop_stage", "pepper_crop_stage");
         makeTorchflowerStyleCrop((CropBlock) ModBLocks.PEPPERCORN_CROP.get(), "peppercorn_crop_stage", "peppercorn_crop_stage");
-        makeTorchflowerStyleCrop((CropBlock) ModBLocks.COTTON_CROP.get(), "cotton_crop_stage", "cotton_crop_stage");
-        makeTorchflowerStyleCrop((CropBlock) ModBLocks.HEMP_CROP.get(), "hemp_crop_stage", "hemp_crop_stage");
         makeBush(((SweetBerryBushBlock) ModBLocks.STRAWBERRY_BUSH.get()), "strawberry_bush_stage", "strawberry_bush_stage");
         makeBush(((SweetBerryBushBlock) ModBLocks.BLACKBERRY_BUSH.get()), "blackberry_bush_stage", "blackberry_bush_stage");
         makeBush(((SweetBerryBushBlock) ModBLocks.BLUEBERRY_BUSH.get()), "blueberry_bush_stage", "blueberry_bush_stage");

@@ -28,6 +28,7 @@ public class AnimalHerderDepositGoal extends Goal {
     static {
         CATTLE_ITEMS.add("minecraft:leather");
         CATTLE_ITEMS.add("minecraft:beef");
+        CATTLE_ITEMS.add("minecraft:milk_bucket"); // empty buckets he keeps for tomorrow (Milking)
         // wheat excluded â€” breeding item
 
         CHICKEN_ITEMS.add("minecraft:feather");

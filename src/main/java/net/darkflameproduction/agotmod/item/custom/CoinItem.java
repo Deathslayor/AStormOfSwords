@@ -23,6 +23,11 @@ public class CoinItem extends Item {
         AGoTMod.LOGGER.info("CoinItem created with value: {}", valueInHalfpennies);
     }
 
+    /** Value of one coin, in halfpennies (the unit of coin balances and town balances). */
+    public long getCoinValue() {
+        return coinValue;
+    }
+
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);

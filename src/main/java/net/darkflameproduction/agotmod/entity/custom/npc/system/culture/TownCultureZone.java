@@ -79,7 +79,7 @@ public class TownCultureZone {
         }
 
         Culture culture = findCultureAtPos(peasant.blockPosition(), level.dimension());
-        if (culture == Culture.NONE) culture = Culture.GENERIC_NORTH;
+        if (culture == Culture.NONE) culture = Culture.STARK;
 
         peasant.getCultureSystem().assignCulture(
                 culture,

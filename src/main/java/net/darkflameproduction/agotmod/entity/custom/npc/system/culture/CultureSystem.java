@@ -133,8 +133,7 @@ public class CultureSystem {
 
     public void loadData(CompoundTag tag) {
         if (tag.contains("Culture")) {
-            try { culture = Culture.valueOf(tag.getString("Culture")); }
-            catch (IllegalArgumentException e) { culture = Culture.NONE; }
+            culture = Culture.fromName(tag.getString("Culture")); // also converts cultures from older saves
         }
         bodyVariant   = tag.contains("CultureBodyVariant")   ? tag.getInt("CultureBodyVariant")   : -1;
         eyesVariant   = tag.contains("CultureEyesVariant")   ? tag.getInt("CultureEyesVariant")   : -1;

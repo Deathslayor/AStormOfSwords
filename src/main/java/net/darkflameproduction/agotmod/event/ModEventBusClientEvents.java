@@ -185,7 +185,11 @@ public class ModEventBusClientEvents {
 
     @SubscribeEvent
     public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
-        registerPie(event, ModItems.SPINACH_PIE, 0xFF1a5c00);
+        // Procedural pies and cakes: the template's top layer takes the colour of what's in them (FoodCatalog)
+        for (net.darkflameproduction.agotmod.item.food.FoodCatalog.Food food
+                : net.darkflameproduction.agotmod.item.food.FoodCatalog.FOODS) {
+            if (food.procedural()) registerPie(event, net.darkflameproduction.agotmod.item.food.ModFoodItems.get(food.id()), food.tint());
+        }
         for (Map.Entry<String, Integer> entry : ModBLocks.WATTLE_DAUB_COLORS.entrySet()) {
             int color = entry.getValue();
             String colorName = entry.getKey();

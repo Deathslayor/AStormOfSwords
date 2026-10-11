@@ -109,6 +109,9 @@ public class TownHallBlockEntity extends BlockEntity implements
     // ===== TOWN HALL SHARED INVENTORY =====
     private final Map<String, Long> townInventory = new HashMap<>();
     private long townBalance = 0;
+
+    /** Each player's reputation with this town (TownReputation): -100 to 100, 5 from their first visit. */
+    private final Map<UUID, Integer> playerReputation = new HashMap<>();
     private long townIncome = 0;
 
     // Cache for citizen last names (refreshed during citizen checks)
@@ -398,6 +401,10 @@ public class TownHallBlockEntity extends BlockEntity implements
         if (state.is(ModBLocks.TANNER_BARREL.get()))          return JobSystem.JOB_TANNER;
         if (state.is(ModBLocks.TAILOR_BARREL.get()))          return JobSystem.JOB_TAILOR;
         if (state.is(ModBLocks.BLACKSMITH_BARREL.get()))      return JobSystem.JOB_BLACKSMITH;
+        if (state.is(ModBLocks.ARMORSMITH_BARREL.get()))      return JobSystem.JOB_ARMORSMITH;
+        if (state.is(ModBLocks.SWORDSMITH_BARREL.get()))      return JobSystem.JOB_SWORDSMITH;
+        if (state.is(ModBLocks.BAKER_BARREL.get()))           return JobSystem.JOB_BAKER;
+        if (state.is(ModBLocks.STONEMASON_BARREL.get()))      return JobSystem.JOB_STONEMASON;
         if (state.is(ModBLocks.GUARD_BARREL.get()))           return JobSystem.JOB_GUARD;
         if (state.is(ModBLocks.MINER_BARREL.get()))           return JobSystem.JOB_MINER;
         if (state.is(ModBLocks.QUARRY_BARREL.get()))          return JobSystem.JOB_QUARRY;
@@ -589,7 +596,6 @@ public class TownHallBlockEntity extends BlockEntity implements
 
         // Pull up to 64 of each textile material
         for (String matKey : new String[]{
-                "agotmod:cotton",
                 "minecraft:string",
                 "minecraft:white_wool",
                 "minecraft:leather"
@@ -732,11 +738,10 @@ public class TownHallBlockEntity extends BlockEntity implements
         int coalActuallyTaken = coalNeeded - coalRemaining;
         int oreCapacity = coalActuallyTaken * 8;
 
-        // Pull ores in priority order: gold > silver > iron > copper > tin
+        // Pull ores of the ingots the town is short of first, then gold > silver > iron > copper > tin
         int oreRemaining = oreCapacity;
-        for (String oreKey : new String[]{
-                "minecraft:raw_gold", "agotmod:raw_silver",
-                "minecraft:raw_iron", "minecraft:raw_copper", "agotmod:raw_tin"}) {
+        for (String oreKey : net.darkflameproduction.agotmod.entity.custom.npc.system.supply.SupplyChain.oresByNeed(
+                townInventory, key -> 0)) {
             if (oreRemaining <= 0) break;
             long available = townInventory.getOrDefault(oreKey, 0L);
             if (available <= 0) continue;
@@ -779,6 +784,15 @@ public class TownHallBlockEntity extends BlockEntity implements
             if (loc != null) {
                 net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.get(loc);
                 if (item != null && item != Items.AIR) toGive.add(new ItemStack(item, toTake));
+            }
+        }
+
+        // The cattle herder also gets empty buckets to milk with - only as many as the town is short of milk
+        if (JobSystem.JOB_CATTLE_HERDER.equals(ticket.jobType) && level instanceof ServerLevel serverLevel
+                && serverLevel.getEntity(ticket.peasantUUID) instanceof Peasant_Entity herder) {
+            int buckets = net.darkflameproduction.agotmod.entity.custom.npc.system.supply.Milking.bucketsToHandOut(this, herder);
+            if (buckets > 0 && removeFromTownInventory("minecraft:bucket", buckets)) {
+                for (int i = 0; i < buckets; i++) toGive.add(new ItemStack(Items.BUCKET));
             }
         }
 
@@ -925,6 +939,32 @@ public class TownHallBlockEntity extends BlockEntity implements
         if (blockEntity.shouldSendDataUpdate) {
             blockEntity.sendDataToClients(level);
             blockEntity.shouldSendDataUpdate = false;
+        }
+
+        // Keep the town hall screen current for players at the town hall (stores, crafting needs...)
+        if (level.getGameTime() % SCREEN_REFRESH_INTERVAL == 0) {
+            blockEntity.refreshNearbyScreens(level);
+        }
+    }
+
+    private static final int SCREEN_REFRESH_INTERVAL = 100; // 5 seconds
+    private static final double SCREEN_REFRESH_RANGE = 8.0D;
+
+    /** Sends fresh town data to players close enough to have the town hall screen open. */
+    private void refreshNearbyScreens(Level level) {
+        net.darkflameproduction.agotmod.network.TownHallDataPacket packet = null;
+        for (net.minecraft.world.entity.player.Player player : level.players()) {
+            if (!(player instanceof ServerPlayer serverPlayer)) continue;
+            if (serverPlayer.distanceToSqr(worldPosition.getX() + 0.5, worldPosition.getY() + 0.5, worldPosition.getZ() + 0.5)
+                    > SCREEN_REFRESH_RANGE * SCREEN_REFRESH_RANGE) continue;
+            if (packet == null) {
+                packet = new net.darkflameproduction.agotmod.network.TownHallDataPacket(
+                        worldPosition, bedCount, citizenCount, getCurrentScanRadius(), townName, isClaimed,
+                        getClaimedByHouse(), getAvailableJobCount(), getAssignedJobCount(), getTotalJobCount(),
+                        getJoblessCount(), townBalance, townIncome, new java.util.HashMap<>(townInventory),
+                        culture.name(), getCitizenEntries(), getCraftingNeeds());
+            }
+            net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer, packet);
         }
     }
 
@@ -1427,7 +1467,8 @@ public class TownHallBlockEntity extends BlockEntity implements
                                     this.townIncome,
                                     new java.util.HashMap<>(this.townInventory),
                                     this.culture.name(),
-                                    this.getCitizenEntries()
+                                    this.getCitizenEntries(),
+                                    this.getCraftingNeeds()
                             ));
                 }
             }
@@ -1457,7 +1498,8 @@ public class TownHallBlockEntity extends BlockEntity implements
                                     this.townIncome,
                                     new java.util.HashMap<>(this.townInventory),
                                     this.culture.name(),
-                                    this.getCitizenEntries()
+                                    this.getCitizenEntries(),
+                                    this.getCraftingNeeds()
                             ));
                 }
             }
@@ -1491,7 +1533,8 @@ public class TownHallBlockEntity extends BlockEntity implements
                                     this.townIncome,
                                     new java.util.HashMap<>(this.townInventory),
                                     this.culture.name(),
-                                    this.getCitizenEntries()
+                                    this.getCitizenEntries(),
+                                    this.getCraftingNeeds()
                             ));
                 }
             }
@@ -1770,6 +1813,19 @@ public class TownHallBlockEntity extends BlockEntity implements
         return Collections.unmodifiableMap(townInventory);
     }
 
+    /**
+     * The town's supply chain needs (SupplyChain.townNeeds): everything its crafting NPCs can make that the
+     * town hall holds too little of, with the jobs that make it and whether the town has anyone with one.
+     * A row only goes once the town hall itself holds enough - what NPCs carry doesn't count.
+     */
+    public List<net.darkflameproduction.agotmod.network.TownHallDataPacket.CraftingNeed> getCraftingNeeds() {
+        Set<String> jobsInTown = new HashSet<>();
+        for (CitizenInfo citizen : registeredCitizens.values()) {
+            if (citizen.currentJob != null) jobsInTown.add(citizen.currentJob);
+        }
+        return net.darkflameproduction.agotmod.entity.custom.npc.system.supply.SupplyChain.townNeeds(this, jobsInTown);
+    }
+
     /** The town's citizens (name and job, from their CitizenReportSystem reports), sorted by name, for the client. */
     public List<net.darkflameproduction.agotmod.network.TownHallDataPacket.CitizenEntry> getCitizenEntries() {
         List<net.darkflameproduction.agotmod.network.TownHallDataPacket.CitizenEntry> entries = new ArrayList<>();
@@ -1816,6 +1872,22 @@ public class TownHallBlockEntity extends BlockEntity implements
 
     public long getTownIncome() {
         return townIncome;
+    }
+
+    /** A player's reputation with this town; the starting value on their first visit (see TownReputation). */
+    public int getReputation(UUID player) {
+        Integer reputation = playerReputation.get(player);
+        if (reputation != null) return reputation;
+        int start = net.darkflameproduction.agotmod.entity.custom.npc.system.reputation.TownReputation.START;
+        playerReputation.put(player, start);
+        setChanged();
+        return start;
+    }
+
+    /** Sets it (clamped to -100..100). Use TownReputation.change, which also tells the player. */
+    public void setReputation(UUID player, int reputation) {
+        playerReputation.put(player, net.darkflameproduction.agotmod.entity.custom.npc.system.reputation.TownReputation.clamp(reputation));
+        setChanged();
     }
 
     @Override
@@ -1890,6 +1962,12 @@ public class TownHallBlockEntity extends BlockEntity implements
 
         tag.putLong("TownBalance", townBalance);
         tag.putLong("TownIncome", townIncome);
+
+        CompoundTag reputationTag = new CompoundTag();
+        for (Map.Entry<UUID, Integer> entry : playerReputation.entrySet()) {
+            reputationTag.putInt(entry.getKey().toString(), entry.getValue());
+        }
+        tag.put("PlayerReputation", reputationTag);
     }
 
     @Override
@@ -1905,8 +1983,7 @@ public class TownHallBlockEntity extends BlockEntity implements
         claimedByPlayerUUID = tag.hasUUID("ClaimedByPlayerUUID") ? tag.getUUID("ClaimedByPlayerUUID") : null;
 
         if (tag.contains("Culture")) {
-            try { culture = Culture.valueOf(tag.getString("Culture")); }
-            catch (IllegalArgumentException e) { culture = Culture.NONE; }
+            culture = Culture.fromName(tag.getString("Culture")); // also converts cultures from older saves
         }
 
         lastScanDay      = tag.getLong("LastScanDay");
@@ -1988,6 +2065,14 @@ public class TownHallBlockEntity extends BlockEntity implements
 
         townBalance = tag.getLong("TownBalance");
         townIncome  = tag.getLong("TownIncome");
+
+        playerReputation.clear();
+        CompoundTag reputationTag = tag.getCompound("PlayerReputation");
+        for (String key : reputationTag.getAllKeys()) {
+            try {
+                playerReputation.put(UUID.fromString(key), reputationTag.getInt(key));
+            } catch (IllegalArgumentException ignored) {}
+        }
 
         if (!availableJobs.isEmpty()) {
             long actualAvailable = availableJobs.values().stream().filter(j -> !j.isOccupied).count();

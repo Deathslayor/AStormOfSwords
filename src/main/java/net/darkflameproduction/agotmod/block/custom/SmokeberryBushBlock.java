@@ -21,7 +21,7 @@ public class SmokeberryBushBlock extends SweetBerryBushBlock {
 
     @Override
     public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
-        return new ItemStack(ModItems.SMOKEBERRY.get()) ;
+        return new ItemStack(net.darkflameproduction.agotmod.item.food.ModFoodItems.get("smokeberry").get()) ;
     }
 
     @Override
@@ -30,7 +30,7 @@ public class SmokeberryBushBlock extends SweetBerryBushBlock {
         boolean flag = i == 3;
         if (i > 1) {
             int j = 1 + level.random.nextInt(2);
-            popResource(level, pos, new ItemStack(ModItems.SMOKEBERRY.get(), j + (flag ? 1 : 0)));
+            popResource(level, pos, new ItemStack(net.darkflameproduction.agotmod.item.food.ModFoodItems.get("smokeberry").get(), j + (flag ? 1 : 0)));
             level.playSound(
                     null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F
             );

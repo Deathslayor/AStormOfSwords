@@ -57,7 +57,7 @@ public class ClientTownAreaManager {
     public static void removeTownArea(BlockPos pos) {
         TownAreaData removed = townAreas.remove(pos);
         if (removed != null && pos.equals(currentTownPos)) {
-            TownNotificationOverlay.showExitMessage(removed.townName);
+            TownNotificationOverlay.showExitMessage(pos, removed.townName);
             sendLeaveTownPacket();
             currentTownPos  = null;
             currentTownName = null;
@@ -105,7 +105,7 @@ public class ClientTownAreaManager {
             // Leaving old town (if any)
             if (currentTownPos != null) {
                 TownAreaData oldData = townAreas.get(currentTownPos);
-                TownNotificationOverlay.showExitMessage(oldData != null ? oldData.townName : currentTownName);
+                TownNotificationOverlay.showExitMessage(currentTownPos, oldData != null ? oldData.townName : currentTownName);
                 sendLeaveTownPacket();
 
                 pendingEntryTownPos  = foundTownPos;
@@ -117,14 +117,14 @@ public class ClientTownAreaManager {
 
             // Entering new town
             String ownerDisplay = foundTownData.isClaimed ? foundTownData.claimedByHouse : null;
-            TownNotificationOverlay.showEntryMessage(foundTownData.townName, ownerDisplay, foundTownData.population);
-            sendEnterTownPacket(foundTownData);
+            TownNotificationOverlay.showEntryMessage(foundTownPos, foundTownData.townName, ownerDisplay, foundTownData.population);
+            sendEnterTownPacket(foundTownPos, foundTownData);
             currentTownPos  = foundTownPos;
             currentTownName = foundTownData.townName;
 
         } else if (foundTownPos == null && currentTownPos != null) {
             // Left all towns
-            TownNotificationOverlay.showExitMessage(currentTownName);
+            TownNotificationOverlay.showExitMessage(currentTownPos, currentTownName);
             sendLeaveTownPacket();
             currentTownPos  = null;
             currentTownName = null;
@@ -133,16 +133,16 @@ public class ClientTownAreaManager {
         // Deferred entry after town-to-town transition
         if (pendingEntryTownPos != null && pendingEntryTownData != null) {
             String ownerDisplay = pendingEntryTownData.isClaimed ? pendingEntryTownData.claimedByHouse : null;
-            TownNotificationOverlay.showEntryMessage(pendingEntryTownData.townName, ownerDisplay, pendingEntryTownData.population);
-            sendEnterTownPacket(pendingEntryTownData);
+            TownNotificationOverlay.showEntryMessage(pendingEntryTownPos, pendingEntryTownData.townName, ownerDisplay, pendingEntryTownData.population);
+            sendEnterTownPacket(pendingEntryTownPos, pendingEntryTownData);
             pendingEntryTownPos  = null;
             pendingEntryTownData = null;
         }
     }
 
-    private static void sendEnterTownPacket(TownAreaData data) {
+    private static void sendEnterTownPacket(BlockPos townHallPos, TownAreaData data) {
         net.neoforged.neoforge.network.PacketDistributor.sendToServer(
-                new EnterTownPacket(data.isClaimed, data.claimedByHouse != null ? data.claimedByHouse : ""));
+                new EnterTownPacket(townHallPos, data.isClaimed, data.claimedByHouse != null ? data.claimedByHouse : ""));
     }
 
     private static void sendLeaveTownPacket() {

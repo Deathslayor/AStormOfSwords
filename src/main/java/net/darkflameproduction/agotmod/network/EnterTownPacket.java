@@ -14,7 +14,7 @@ import java.util.UUID;
 // ── EnterTownPacket ───────────────────────────────────────────────────────
 // Client -> Server. Sent when player enters a town area.
 
-public record EnterTownPacket(boolean isClaimed, String ownerHouseDisplay)
+public record EnterTownPacket(net.minecraft.core.BlockPos townHallPos, boolean isClaimed, String ownerHouseDisplay)
         implements CustomPacketPayload {
 
     public static final Type<EnterTownPacket> TYPE = new Type<>(
@@ -22,10 +22,11 @@ public record EnterTownPacket(boolean isClaimed, String ownerHouseDisplay)
 
     public static final StreamCodec<FriendlyByteBuf, EnterTownPacket> STREAM_CODEC = StreamCodec.of(
             (buf, pkt) -> {
+                buf.writeBlockPos(pkt.townHallPos());
                 buf.writeBoolean(pkt.isClaimed());
                 buf.writeUtf(pkt.ownerHouseDisplay());
             },
-            buf -> new EnterTownPacket(buf.readBoolean(), buf.readUtf())
+            buf -> new EnterTownPacket(buf.readBlockPos(), buf.readBoolean(), buf.readUtf())
     );
 
     @Override public Type<? extends CustomPacketPayload> type() { return TYPE; }
@@ -33,6 +34,13 @@ public record EnterTownPacket(boolean isClaimed, String ownerHouseDisplay)
     public static void handle(EnterTownPacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
             if (!(context.player() instanceof ServerPlayer player)) return;
+
+            // Their reputation with the town, for the entry notification (5 on a first visit)
+            if (player.level().isLoaded(packet.townHallPos())
+                    && player.level().getBlockEntity(packet.townHallPos())
+                            instanceof net.darkflameproduction.agotmod.block.custom.TownHallBlockEntity townHall) {
+                net.darkflameproduction.agotmod.entity.custom.npc.system.reputation.TownReputation.sync(townHall, player);
+            }
 
             // Only switch survival -> adventure
             if (player.gameMode.getGameModeForPlayer() != GameType.SURVIVAL) return;

@@ -85,7 +85,11 @@ public class CollectBreedingItemGoal extends Goal {
         int currentStock = countBreedingItemsInInventory();
         int needed       = MAX_BREEDING_ITEM_STOCK - currentStock;
 
-        if (needed <= 0) {
+        // A cattle herder always asks: the town hall also hands him empty buckets to milk with (Milking)
+        boolean wantsBuckets = peasant.getJobType().equals(JobSystem.JOB_CATTLE_HERDER)
+                && net.darkflameproduction.agotmod.entity.custom.npc.system.supply.Milking.milkShortfall(
+                        net.darkflameproduction.agotmod.entity.custom.npc.system.guard.GuardLoot.townHallOf(peasant), peasant) > 0;
+        if (needed <= 0 && !wantsBuckets) {
             // Already fully stocked, mark collection done
             itemsReceived = true;
             long currentDay = peasant.level().getDayTime() / 24000;
@@ -98,7 +102,7 @@ public class CollectBreedingItemGoal extends Goal {
         AnimalHerderCollectionTicketSystem.postRequest(
                 peasant.getUUID(),
                 peasant.getJobType(),
-                needed,
+                Math.max(0, needed),
                 currentDay,
                 peasant.blockPosition());
         ticketPosted = true;

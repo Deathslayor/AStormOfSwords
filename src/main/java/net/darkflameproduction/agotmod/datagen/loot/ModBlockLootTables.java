@@ -632,31 +632,24 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 ModBLocks.HORSERADISH_CROP.get(),
                 HorseradishCropBlock.AGE,
                 HorseradishCropBlock.MAX_AGE,
-                ModItems.HORSERADISH.get(), 0.0F, 3.0F,
+                net.darkflameproduction.agotmod.item.food.ModFoodItems.get("horseradish").get(), 0.0F, 3.0F,
                 ModItems.HORSERADISH_SEEDS.get()
         ));
 
-        this.add(ModBLocks.BARLEY_CROP.get(), cropDrop(
-                ModBLocks.BARLEY_CROP.get(),
-                BarleyCropBlock.AGE,
-                BarleyCropBlock.MAX_AGE,
-                ModItems.BARLEY.get(), 1.0F, 1.0F,
-                ModItems.BARLEY_SEEDS.get()
-        ));
 
         this.add(ModBLocks.GARLIC_CROP.get(), cropDrop(
                 ModBLocks.GARLIC_CROP.get(),
                 GarlicCropBlock.AGE,
                 GarlicCropBlock.MAX_AGE,
-                ModItems.GARLIC.get(), 0.0F, 3.0F,
-                ModItems.GARLIC.get()
+                net.darkflameproduction.agotmod.item.food.ModFoodItems.get("garlic").get(), 0.0F, 3.0F,
+                net.darkflameproduction.agotmod.item.food.ModFoodItems.get("garlic").get()
         ));
 
         this.add(ModBLocks.LEEK_CROP.get(), cropDrop(
                 ModBLocks.LEEK_CROP.get(),
                 LeekCropBlock.AGE,
                 LeekCropBlock.MAX_AGE,
-                ModItems.LEEK.get(), 0.0F, 3.0F,
+                net.darkflameproduction.agotmod.item.food.ModFoodItems.get("leek").get(), 0.0F, 3.0F,
                 ModItems.LEEK_SEEDS.get()
         ));
 
@@ -664,23 +657,16 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 ModBLocks.NEEP_CROP.get(),
                 NeepCropBlock.AGE,
                 NeepCropBlock.MAX_AGE,
-                ModItems.NEEP.get(), 0.0F, 3.0F,
+                net.darkflameproduction.agotmod.item.food.ModFoodItems.get("neep").get(), 0.0F, 3.0F,
                 ModItems.NEEP_SEEDS.get()
         ));
 
-        this.add(ModBLocks.OAT_CROP.get(), cropDrop(
-                ModBLocks.OAT_CROP.get(),
-                OatCropBlock.AGE,
-                OatCropBlock.MAX_AGE,
-                ModItems.OAT.get(), 1.0F, 1.0F,
-                ModItems.OAT_SEEDS.get()
-        ));
 
         this.add(ModBLocks.PARSLEY_CROP.get(), cropDrop(
                 ModBLocks.PARSLEY_CROP.get(),
                 ParsleyCropBlock.AGE,
                 ParsleyCropBlock.MAX_AGE,
-                ModItems.PARSLEY.get(), 0.0F, 3.0F,
+                net.darkflameproduction.agotmod.item.food.ModFoodItems.get("parsley").get(), 0.0F, 3.0F,
                 ModItems.PARSLEY_SEEDS.get()
         ));
 
@@ -688,7 +674,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 ModBLocks.RED_ONION_CROP.get(),
                 RedOnionCropBlock.AGE,
                 RedOnionCropBlock.MAX_AGE,
-                ModItems.RED_ONION.get(), 0.0F, 3.0F,
+                net.darkflameproduction.agotmod.item.food.ModFoodItems.get("red_onion").get(), 0.0F, 3.0F,
                 ModItems.RED_ONION_SEEDS.get()
         ));
 
@@ -696,7 +682,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 ModBLocks.TURNIP_CROP.get(),
                 TurnipCropBlock.AGE,
                 TurnipCropBlock.MAX_AGE,
-                ModItems.TURNIP.get(), 0.0F, 3.0F,
+                net.darkflameproduction.agotmod.item.food.ModFoodItems.get("turnip").get(), 0.0F, 3.0F,
                 ModItems.TURNIP_SEEDS.get()
         ));
 
@@ -704,7 +690,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 ModBLocks.WILD_ONION_CROP.get(),
                 WildOnionCropBlock.AGE,
                 WildOnionCropBlock.MAX_AGE,
-                ModItems.WILD_ONION.get(), 0.0F, 3.0F,
+                net.darkflameproduction.agotmod.item.food.ModFoodItems.get("wild_onion").get(), 0.0F, 3.0F,
                 ModItems.WILD_ONION_SEEDS.get()
         ));
 
@@ -712,7 +698,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 ModBLocks.ONION_CROP.get(),
                 OnionCropBlock.AGE,
                 OnionCropBlock.MAX_AGE,
-                ModItems.ONION.get(), 0.0F, 3.0F,
+                net.darkflameproduction.agotmod.item.food.ModFoodItems.get("onion").get(), 0.0F, 3.0F,
                 ModItems.ONION_SEEDS.get()
         ));
 
@@ -728,7 +714,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 ModBLocks.CABBAGE_CROP.get(),
                 CabbageCropBlock.AGE,
                 CabbageCropBlock.MAX_AGE,
-                ModItems.CABBAGE.get(), 1.0F, 1.0F,
+                net.darkflameproduction.agotmod.item.food.ModFoodItems.get("cabbage").get(), 1.0F, 1.0F,
                 ModItems.CABBAGE_SEEDS.get()
         ));
 
@@ -736,7 +722,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 ModBLocks.BEAN_CROP.get(),
                 BeanCropBlock.AGE,
                 BeanCropBlock.MAX_AGE,
-                ModItems.BEAN.get(), 0.0F, 3.0F,
+                net.darkflameproduction.agotmod.item.food.ModFoodItems.get("bean").get(), 0.0F, 3.0F,
                 ModItems.BEAN_SEEDS.get()
         ));
 
@@ -744,7 +730,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 ModBLocks.CHICKPEA_CROP.get(),
                 ChickpeaCropBlock.AGE,
                 ChickpeaCropBlock.MAX_AGE,
-                ModItems.CHICKPEA.get(), 0.0F, 3.0F,
+                net.darkflameproduction.agotmod.item.food.ModFoodItems.get("chickpea").get(), 0.0F, 3.0F,
                 ModItems.CHICKPEA_SEEDS.get()
         ));
 
@@ -752,7 +738,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 ModBLocks.CUCUMBER_CROP.get(),
                 CucumberCropBlock.AGE,
                 CucumberCropBlock.MAX_AGE,
-                ModItems.CUCUMBER.get(), 0.0F, 3.0F,
+                net.darkflameproduction.agotmod.item.food.ModFoodItems.get("cucumber").get(), 0.0F, 3.0F,
                 ModItems.CUCUMBER_SEEDS.get()
         ));
 
@@ -760,7 +746,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 ModBLocks.GREEN_BEAN_CROP.get(),
                 GreenBeanCropBlock.AGE,
                 GreenBeanCropBlock.MAX_AGE,
-                ModItems.GREEN_BEAN.get(), 0.0F, 3.0F,
+                net.darkflameproduction.agotmod.item.food.ModFoodItems.get("green_bean").get(), 0.0F, 3.0F,
                 ModItems.GREEN_BEAN_SEEDS.get()
         ));
 
@@ -768,7 +754,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 ModBLocks.SPINACH_CROP.get(),
                 SpinachCropBlock.AGE,
                 SpinachCropBlock.MAX_AGE,
-                ModItems.SPINACH.get(), 0.0F, 3.0F,
+                net.darkflameproduction.agotmod.item.food.ModFoodItems.get("spinach").get(), 0.0F, 3.0F,
                 ModItems.SPINACH_SEEDS.get()
         ));
 
@@ -776,7 +762,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 ModBLocks.DRAGON_PEPPER_CROP.get(),
                 DragonPepperCropBlock.AGE,
                 DragonPepperCropBlock.MAX_AGE,
-                ModItems.DRAGON_PEPPER.get(), 0.0F, 3.0F,
+                net.darkflameproduction.agotmod.item.food.ModFoodItems.get("dragon_pepper").get(), 0.0F, 3.0F,
                 ModItems.DRAGON_PEPPER_SEEDS.get()
         ));
 
@@ -784,7 +770,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 ModBLocks.PEPPER_CROP.get(),
                 PepperCropBlock.AGE,
                 PepperCropBlock.MAX_AGE,
-                ModItems.PEPPER.get(), 0.0F, 3.0F,
+                net.darkflameproduction.agotmod.item.food.ModFoodItems.get("pepper").get(), 0.0F, 3.0F,
                 ModItems.PEPPER_SEEDS.get()
         ));
 
@@ -792,25 +778,11 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 ModBLocks.PEPPERCORN_CROP.get(),
                 PeppercornCropBlock.AGE,
                 PeppercornCropBlock.MAX_AGE,
-                ModItems.PEPPERCORN.get(), 0.0F, 3.0F,
+                net.darkflameproduction.agotmod.item.food.ModFoodItems.get("peppercorn").get(), 0.0F, 3.0F,
                 ModItems.PEPPERCORN_SEEDS.get()
         ));
 
-        this.add(ModBLocks.COTTON_CROP.get(), cropDrop(
-                ModBLocks.COTTON_CROP.get(),
-                CottonCropBlock.AGE,
-                CottonCropBlock.MAX_AGE,
-                ModItems.COTTON.get(), 0.0F, 3.0F,
-                ModItems.COTTON_SEEDS.get()
-        ));
 
-        this.add(ModBLocks.HEMP_CROP.get(), cropDrop(
-                ModBLocks.HEMP_CROP.get(),
-                HempCropBlock.AGE,
-                HempCropBlock.MAX_AGE,
-                ModItems.HEMP.get(), 0.0F, 3.0F,
-                ModItems.HEMP_SEEDS.get()
-        ));
 
         this.add(ModBLocks.STRAWBERRY_BUSH.get(), block ->
                 this.applyExplosionDecay(
@@ -818,7 +790,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                                 ModBLocks.STRAWBERRY_BUSH.get(),
                                 SweetBerryBushBlock.AGE,
                                 3,
-                                ModItems.STRAWBERRY.get())));
+                                net.darkflameproduction.agotmod.item.food.ModFoodItems.get("strawberry").get())));
 
         this.add(ModBLocks.BLACKBERRY_BUSH.get(), block ->
                 this.applyExplosionDecay(
@@ -826,7 +798,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                                 ModBLocks.BLACKBERRY_BUSH.get(),
                                 SweetBerryBushBlock.AGE,
                                 3,
-                                ModItems.BLACKBERRY.get())));
+                                net.darkflameproduction.agotmod.item.food.ModFoodItems.get("blackberry").get())));
 
         this.add(ModBLocks.BLUEBERRY_BUSH.get(), block ->
                 this.applyExplosionDecay(
@@ -834,7 +806,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                                 ModBLocks.BLUEBERRY_BUSH.get(),
                                 SweetBerryBushBlock.AGE,
                                 3,
-                                ModItems.BLUEBERRY.get())));
+                                net.darkflameproduction.agotmod.item.food.ModFoodItems.get("blueberry").get())));
 
         this.add(ModBLocks.MULBERRY_BUSH.get(), block ->
                 this.applyExplosionDecay(
@@ -842,7 +814,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                                 ModBLocks.MULBERRY_BUSH.get(),
                                 SweetBerryBushBlock.AGE,
                                 3,
-                                ModItems.MULBERRY.get())));
+                                net.darkflameproduction.agotmod.item.food.ModFoodItems.get("mulberry").get())));
 
         this.add(ModBLocks.RASPBERRY_BUSH.get(), block ->
                 this.applyExplosionDecay(
@@ -850,7 +822,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                                 ModBLocks.RASPBERRY_BUSH.get(),
                                 SweetBerryBushBlock.AGE,
                                 3,
-                                ModItems.RASPBERRY.get())));
+                                net.darkflameproduction.agotmod.item.food.ModFoodItems.get("raspberry").get())));
 
         this.add(ModBLocks.SMOKEBERRY_BUSH.get(), block ->
                 this.applyExplosionDecay(
@@ -858,7 +830,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                                 ModBLocks.SMOKEBERRY_BUSH.get(),
                                 SweetBerryBushBlock.AGE,
                                 3,
-                                ModItems.SMOKEBERRY.get())));
+                                net.darkflameproduction.agotmod.item.food.ModFoodItems.get("smokeberry").get())));
 
         this.add(ModBLocks.CORN_CROP.get(), block ->
                 this.applyExplosionDecay(

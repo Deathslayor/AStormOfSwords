@@ -37,6 +37,8 @@ public class ModItemModelProvider extends ItemModelProvider {
     // Method to register item models
     @Override
     protected void registerModels() {
+        foodModels();
+
         // ---------------------------(COINS)--------------------------- //
         // Register the item model for the COIN
         simpleItem(ModItems.COIN);
@@ -330,331 +332,55 @@ public class ModItemModelProvider extends ItemModelProvider {
 
 
 // â”€â”€ Fowl â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        simpleItem(ModItems.RAW_PIGEON);
-        simpleItem(ModItems.COOKED_PIGEON);
-        simpleItem(ModItems.RAW_DUCK);
-        simpleItem(ModItems.COOKED_DUCK);
-        simpleItem(ModItems.RAW_GOOSE);
-        simpleItem(ModItems.COOKED_GOOSE);
-        simpleItem(ModItems.RAW_GULL);
-        simpleItem(ModItems.COOKED_GULL);
-        simpleItem(ModItems.RAW_HERON);
-        simpleItem(ModItems.COOKED_HERON);
-        simpleItem(ModItems.RAW_LARK);
-        simpleItem(ModItems.COOKED_LARK);
-        simpleItem(ModItems.RAW_PARTRIDGE);
-        simpleItem(ModItems.COOKED_PARTRIDGE);
-        simpleItem(ModItems.RAW_PEACOCK);
-        simpleItem(ModItems.COOKED_PEACOCK);
-        simpleItem(ModItems.RAW_QUAIL);
-        simpleItem(ModItems.COOKED_QUAIL);
-        simpleItem(ModItems.RAW_SWAN);
-        simpleItem(ModItems.COOKED_SWAN);
-        simpleItem(ModItems.RAW_CHICKEN_NUGGETS);
-        simpleItem(ModItems.COOKED_CHICKEN_NUGGETS);
 
 // â”€â”€ Meats â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        simpleItem(ModItems.RAW_AUROCHS);
-        simpleItem(ModItems.COOKED_AUROCHS);
-        simpleItem(ModItems.RAW_BEAR_MEAT);
-        simpleItem(ModItems.COOKED_BEAR_MEAT);
-        simpleItem(ModItems.RAW_BOAR_VENISON);
-        simpleItem(ModItems.COOKED_BOAR_VENISON);
-        simpleItem(ModItems.RAW_DEER_VENISON);
-        simpleItem(ModItems.COOKED_DEER_VENISON);
-        simpleItem(ModItems.RAW_DOG);
-        simpleItem(ModItems.COOKED_DOG);
-        simpleItem(ModItems.RAW_DORMICE);
-        simpleItem(ModItems.COOKED_DORMICE);
-        simpleItem(ModItems.RAW_FROG);
-        simpleItem(ModItems.COOKED_FROG);
-        simpleItem(ModItems.RAW_GOAT_MEAT);
-        simpleItem(ModItems.COOKED_GOAT_MEAT);
-        simpleItem(ModItems.RAW_HARE_MEAT);
-        simpleItem(ModItems.COOKED_HARE_MEAT);
-        simpleItem(ModItems.RAW_HORSE_MEAT);
-        simpleItem(ModItems.COOKED_HORSE_MEAT);
-        simpleItem(ModItems.RAW_LAMB);
-        simpleItem(ModItems.COOKED_LAMB);
-        simpleItem(ModItems.RAW_LOCUSTS);
-        simpleItem(ModItems.COOKED_LOCUSTS);
-        simpleItem(ModItems.RAW_MAMMOTH_MEAT);
-        simpleItem(ModItems.COOKED_MAMMOTH_MEAT);
-        simpleItem(ModItems.RAW_MAN_FLESH);
-        simpleItem(ModItems.COOKED_MAN_FLESH);
-        simpleItem(ModItems.RAW_RAT);
-        simpleItem(ModItems.COOKED_RAT);
-        simpleItem(ModItems.RAW_SNAKE);
-        simpleItem(ModItems.COOKED_SNAKE);
-        simpleItem(ModItems.RAW_SNAIL);
-        simpleItem(ModItems.COOKED_SNAIL);
-        simpleItem(ModItems.RAW_SQUIRREL);
-        simpleItem(ModItems.COOKED_SQUIRREL);
-        simpleItem(ModItems.RAW_SUCKLING_PIG);
-        simpleItem(ModItems.COOKED_SUCKLING_PIG);
 
 // â”€â”€ Offal & Organ Meats â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        simpleItem(ModItems.RAW_BACON);
-        simpleItem(ModItems.COOKED_BACON);
-        simpleItem(ModItems.RAW_PIG_KIDNEYS);
-        simpleItem(ModItems.COOKED_PIG_KIDNEYS);
-        simpleItem(ModItems.RAW_PIG_LIVER);
-        simpleItem(ModItems.COOKED_PIG_LIVER);
-        simpleItem(ModItems.RAW_PIG_RIBS);
-        simpleItem(ModItems.COOKED_PIG_RIBS);
-        simpleItem(ModItems.RAW_GOOSE_LIVER);
-        simpleItem(ModItems.COOKED_GOOSE_LIVER);
-        simpleItem(ModItems.RAW_CALF_PANCREAS);
-        simpleItem(ModItems.COOKED_CALF_PANCREAS);
-        simpleItem(ModItems.HORSE_HEART);
-        simpleItem(ModItems.JELLIED_CALVES_BRAIN);
 
 // â”€â”€ Sausages â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        simpleItem(ModItems.RAW_SAUSAGE);
-        simpleItem(ModItems.COOKED_SAUSAGE);
-        simpleItem(ModItems.RAW_BLOOD_SAUSAGE);
-        simpleItem(ModItems.COOKED_BLOOD_SAUSAGE);
-        simpleItem(ModItems.RAW_WHITE_SAUSAGE);
-        simpleItem(ModItems.COOKED_WHITE_SAUSAGE);
 
 // â”€â”€ Other Ingredient Meats â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        simpleItem(ModItems.MINCED_MEAT);
-        simpleItem(ModItems.PIG_INTESTINES);
-        simpleItem(ModItems.CALF_BRAIN);
 
 // â”€â”€ Fish & Seafood â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        simpleItem(ModItems.RAW_HERRING);
-        simpleItem(ModItems.COOKED_HERRING);
-        simpleItem(ModItems.RAW_TROUT);
-        simpleItem(ModItems.COOKED_TROUT);
-        simpleItem(ModItems.RAW_EEL);
-        simpleItem(ModItems.COOKED_EEL);
-        simpleItem(ModItems.RAW_LAMPREY);
-        simpleItem(ModItems.COOKED_LAMPREY);
-        simpleItem(ModItems.RAW_PIKE);
-        simpleItem(ModItems.COOKED_PIKE);
-        simpleItem(ModItems.RAW_SARDINE);
-        simpleItem(ModItems.COOKED_SARDINE);
-        simpleItem(ModItems.RAW_MONKFISH);
-        simpleItem(ModItems.COOKED_MONKFISH);
-        simpleItem(ModItems.RAW_OCTOPUS);
-        simpleItem(ModItems.COOKED_OCTOPUS);
-        simpleItem(ModItems.RAW_WHITEFISH);
-        simpleItem(ModItems.COOKED_WHITEFISH);
-        simpleItem(ModItems.RAW_CRAB);
-        simpleItem(ModItems.COOKED_CRAB);
-        simpleItem(ModItems.RAW_LOBSTER);
-        simpleItem(ModItems.COOKED_LOBSTER);
-        simpleItem(ModItems.RAW_CLAM);
-        simpleItem(ModItems.COOKED_CLAM);
-        simpleItem(ModItems.RAW_MUSSELS);
-        simpleItem(ModItems.COOKED_MUSSELS);
-        simpleItem(ModItems.RAW_WINKLES);
-        simpleItem(ModItems.COOKED_WINKLES);
 
 // â”€â”€ Prepared & Preserved â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        simpleItem(ModItems.PICKLED_HERRING);
-        simpleItem(ModItems.HONEYED_LOCUSTS);
-        simpleItem(ModItems.BEEF_AND_BARLEY_STEW);
-        simpleItem(ModItems.BEEF_STEW);
-        simpleItem(ModItems.MUTTON_STEW);
-        simpleItem(ModItems.SISTERS_STEW);
-        simpleItem(ModItems.BOWL_OF_BROWN);
-        simpleItem(ModItems.BREWIS);
-        simpleItem(ModItems.JERKY);
-        simpleItem(ModItems.HAM);
 
 // â”€â”€ Baked Goods & Prepared Dishes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        simpleItem(ModItems.BISCUITS);
-        simpleItem(ModItems.BOWL_OF_BROWN);
-        simpleItem(ModItems.BARLEY_BREAD);
-        simpleItem(ModItems.BLACK_BREAD);
-        simpleItem(ModItems.HARD_BREAD);
-        simpleItem(ModItems.OATCAKE);
-        simpleItem(ModItems.BLACKBERRY_OATCAKE);
-        simpleItem(ModItems.PINENUT_OATCAKE);
-        simpleItem(ModItems.COD_CAKE);
-        simpleItem(ModItems.CREAM_CAKES);
-        simpleItem(ModItems.HONEY_CAKE);
-        simpleItem(ModItems.HONEYFINGERS);
-        simpleItem(ModItems.LEMON_CAKE);
-        simpleItem(ModItems.SPECIAL_CAKE);
-        simpleItem(ModItems.STALE_CAKE);
-        simpleItem(ModItems.SWEET_CAKE);
-        simpleItem(ModItems.WINTERCAKE);
-        simpleItem(ModItems.PIGEON_PIE);
-        simpleItem(ModItems.VENISON_PIE);
-        simpleItem(ModItems.LAMPREY_PIE);
-        simpleItem(ModItems.LOCUST_PIE);
-        simpleItem(ModItems.STRAWBERRY_PIE);
-        simpleItem(ModItems.APPLE_TART);
-        simpleItem(ModItems.BERRY_TARTS);
-        simpleItem(ModItems.SISTERS_STEW);
-        simpleItem(ModItems.PEA_SOUP);
 
 // â”€â”€ General â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        simpleItem(ModItems.CHEESE);
-        simpleItem(ModItems.GRAVY);
-        simpleItem(ModItems.HONEYCOMB_FOOD);
-        simpleItem(ModItems.JAMS);
-        simpleItem(ModItems.JELLIES);
-        simpleItem(ModItems.SHERBET);
 
 // â”€â”€ Cereals â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        simpleItem(ModItems.BARLEY);
-        simpleItem(ModItems.BLACK_RICE);
-        simpleItem(ModItems.OAT);
-        simpleItem(ModItems.RYE);
-        simpleItem(ModItems.AUTUMN_WHEAT);
-        simpleItem(ModItems.WINTER_WHEAT);
-        simpleItem(ModItems.CORN);
 
 // â”€â”€ Vegetables â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        simpleItem(ModItems.BEAN);
-        simpleItem(ModItems.CABBAGE);
-        simpleItem(ModItems.CHICKPEA);
-        simpleItem(ModItems.CUCUMBER);
-        simpleItem(ModItems.DRAGON_PEPPER);
-        simpleItem(ModItems.GARLIC);
-        simpleItem(ModItems.GREEN_BEAN);
-        simpleItem(ModItems.HORSERADISH);
-        simpleItem(ModItems.LEEK);
-        simpleItem(ModItems.LENTILS);
-        simpleItem(ModItems.NEEP);
-        simpleItem(ModItems.OLIVES);
-        simpleItem(ModItems.OLIVE_OIL);
-        simpleItem(ModItems.ONION);
-        simpleItem(ModItems.PARSLEY);
-        simpleItem(ModItems.PEAS);
-        simpleItem(ModItems.PEPPER);
-        simpleItem(ModItems.PEPPERCORN);
-        simpleItem(ModItems.RADISH);
-        simpleItem(ModItems.RED_ONION);
-        simpleItem(ModItems.SPINACH);
-        simpleItem(ModItems.SQUASH);
-        simpleItem(ModItems.TURNIP);
-        simpleItem(ModItems.WILD_ONION);
 
 // â”€â”€ Vegetable Pies â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        vegetablePie(ModItems.SPINACH_PIE);
 
 
 // â”€â”€ Fruits â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        simpleItem(ModItems.APRICOT);
-        simpleItem(ModItems.BLACKBERRY);
-        simpleItem(ModItems.BLOOD_ORANGE);
-        simpleItem(ModItems.BLUEBERRY);
-        simpleItem(ModItems.CHERRY);
-        simpleItem(ModItems.CRABAPPLE);
-        simpleItem(ModItems.DATE);
-        simpleItem(ModItems.DORNISH_PLUM);
-        simpleItem(ModItems.DRIED_APPLES);
-        simpleItem(ModItems.FIG);
-        simpleItem(ModItems.FIREPLUM);
-        simpleItem(ModItems.GRAPE);
-        simpleItem(ModItems.LEMON);
-        simpleItem(ModItems.LIME);
-        simpleItem(ModItems.MELON_SLICE_AGOT);
-        simpleItem(ModItems.MULBERRY);
-        simpleItem(ModItems.ORANGE);
-        simpleItem(ModItems.PEACH);
-        simpleItem(ModItems.PEAR);
-        simpleItem(ModItems.PERSIMMON);
-        simpleItem(ModItems.PLUM);
-        simpleItem(ModItems.POMEGRANATE);
-        simpleItem(ModItems.RAISINS);
-        simpleItem(ModItems.RASPBERRY);
-        simpleItem(ModItems.SMOKEBERRY);
-        simpleItem(ModItems.STRAWBERRY);
-        simpleItem(ModItems.WINTER_PEACH);
 
 // â”€â”€ Nuts â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        simpleItem(ModItems.ALMOND);
-        simpleItem(ModItems.CHESTNUT);
-        simpleItem(ModItems.PECAN);
-        simpleItem(ModItems.PINE_NUT);
-        simpleItem(ModItems.WALNUT);
 
 // â”€â”€ Herbs & Spices â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        simpleItem(ModItems.CARDAMOM);
-        simpleItem(ModItems.CINNAMON);
-        simpleItem(ModItems.CLARY_SAGE);
-        simpleItem(ModItems.CLOVES);
-        simpleItem(ModItems.CORIANDER);
-        simpleItem(ModItems.COTTON);
-        simpleItem(ModItems.CURRY);
-        simpleItem(ModItems.FENNEL);
-        //simpleItem(ModItems.GINGER);
-        simpleItem(ModItems.HEMP);
-        simpleItem(ModItems.HONEY);
-        simpleItem(ModItems.LEMONGRASS);
-        simpleItem(ModItems.MINT);
-        simpleItem(ModItems.MOLASSES);
-        simpleItem(ModItems.MUSTARD_SEED);
-        simpleItem(ModItems.NUTMEG);
-        simpleItem(ModItems.PARSLEY);
-        simpleItem(ModItems.SAFFRON);
-        simpleItem(ModItems.SAGE);
-        simpleItem(ModItems.SALT);
 
 // â”€â”€ Drinks â€” Beer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        simpleItem(ModItems.BEER);
-        simpleItem(ModItems.ALE);
-        simpleItem(ModItems.STOUT);
 
 // â”€â”€ Drinks â€” Liquor â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        simpleItem(ModItems.RUM);
-        simpleItem(ModItems.BLACKBELLY_RUM);
-        simpleItem(ModItems.BLACK_TAR_RUM);
-        simpleItem(ModItems.SPICED_RUM);
-        simpleItem(ModItems.MYRISH_FIRE);
-        simpleItem(ModItems.TYROSHI_PEAR_BRANDY);
 
 // â”€â”€ Drinks â€” Milk â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        simpleItem(ModItems.ALMOND_MILK);
-        simpleItem(ModItems.GOAT_MILK);
-        simpleItem(ModItems.MARES_MILK);
-        simpleItem(ModItems.FERMENTED_MILK);
-        simpleItem(ModItems.NAHSA);
-        simpleItem(ModItems.ICED_MILK);
 
 // â”€â”€ Drinks â€” Tea â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        simpleItem(ModItems.TEA);
-        simpleItem(ModItems.MINT_TEA);
-        simpleItem(ModItems.NETTLE_TEA);
-        simpleItem(ModItems.MOON_TEA);
 
 // â”€â”€ Drinks â€” Wine â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        simpleItem(ModItems.WINE);
-        simpleItem(ModItems.APPLE_WINE);
-        simpleItem(ModItems.GREEN_APPLE_WINE);
-        simpleItem(ModItems.ARBOR_GOLD);
-        simpleItem(ModItems.ARBOR_RED);
-        simpleItem(ModItems.DORNISH_RED);
-        simpleItem(ModItems.DREAMWINE);
-        simpleItem(ModItems.HONEYED_WINE);
-        simpleItem(ModItems.SPICED_WINE);
-        simpleItem(ModItems.STRONGWINE);
-        simpleItem(ModItems.SUMMERWINE);
-        simpleItem(ModItems.WINE_OF_COURAGE);
 
 // â”€â”€ Drinks â€” Other â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        simpleItem(ModItems.CIDER);
-        simpleItem(ModItems.HIPPOCRAS);
-        simpleItem(ModItems.MEAD);
-        simpleItem(ModItems.SHADE_OF_THE_EVENING);
-        simpleItem(ModItems.SUGAR_WATER);
 
 
 
 
         // ---------------------------(SEEDS)--------------------------- //
         simpleItem(ModItems.HORSERADISH_SEEDS);
-        simpleItem(ModItems.BARLEY_SEEDS);
-        simpleItem(ModItems.GARLIC);
         simpleItem(ModItems.LEEK_SEEDS);
         simpleItem(ModItems.NEEP_SEEDS);
-        simpleItem(ModItems.OAT_SEEDS);
         simpleItem(ModItems.PARSLEY_SEEDS);
         simpleItem(ModItems.RED_ONION_SEEDS);
         simpleItem(ModItems.TURNIP_SEEDS);
@@ -670,8 +396,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.DRAGON_PEPPER_SEEDS);
         simpleItem(ModItems.PEPPER_SEEDS);
         simpleItem(ModItems.PEPPERCORN_SEEDS);
-        simpleItem(ModItems.COTTON_SEEDS);
-        simpleItem(ModItems.HEMP_SEEDS);
         simpleItem(ModItems.STRAWBERRY_SEEDS);
         simpleItem(ModItems.BLACKBERRY_SEEDS);
         simpleItem(ModItems.BLUEBERRY_SEEDS);
@@ -1337,7 +1061,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.NAIL);
         simpleItem(ModItems.IRON_CHAIN_LINK);
         simpleItem(ModItems.IRON_CHAIN);
-        simpleItem(ModItems.HAMMER);
+        handheldItem(ModItems.HAMMER); // a tool: held like a pickaxe
         simpleItem(ModItems.IRON_PLATE);
         simpleItem(ModItems.NOBLE_PLATE);
         simpleItem(ModItems.STEEL_BOOTS);
@@ -1719,10 +1443,21 @@ public class ModItemModelProvider extends ItemModelProvider {
     }
 
 
-    private ItemModelBuilder vegetablePie(DeferredHolder<Item, Item> item) {
-        return withExistingParent(item.getId().getPath(), mcLoc("item/generated"))
-                .texture("layer0", modLoc("item/vegetable_pie_bottom_template"))
-                .texture("layer1", modLoc("item/vegetable_pie_top_template"));
+    /**
+     * Every food (FoodCatalog): its own texture, or for a procedural pie or cake the template's untinted
+     * bottom and its top, which the client tints with the food's colour (layer1, ModEventBusClientEvents).
+     */
+    private void foodModels() {
+        for (net.darkflameproduction.agotmod.item.food.FoodCatalog.Food food
+                : net.darkflameproduction.agotmod.item.food.FoodCatalog.FOODS) {
+            ItemModelBuilder model = withExistingParent(food.id(), mcLoc("item/generated"));
+            if (food.procedural()) {
+                model.texture("layer0", modLoc("item/" + food.template().prefix + "_bottom_template"))
+                        .texture("layer1", modLoc("item/" + food.template().prefix + "_top_template"));
+            } else {
+                model.texture("layer0", modLoc("item/" + food.id()));
+            }
+        }
     }
 
     private ItemModelBuilder spawnEggItem(DeferredHolder<Item, Item> item) {

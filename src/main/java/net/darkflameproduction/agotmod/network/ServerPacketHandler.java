@@ -43,7 +43,9 @@ public class ServerPacketHandler {
                                 job.equals(JobSystem.JOB_BUTCHER)   ||
                                 job.equals(JobSystem.JOB_TANNER)    ||
                                 job.equals(JobSystem.JOB_TAILOR)    ||
-                                job.equals(JobSystem.JOB_BLACKSMITH)||
+                                JobSystem.isSmith(job)||
+                                job.equals(JobSystem.JOB_BAKER) ||
+                                job.equals(JobSystem.JOB_STONEMASON) ||
                                 job.equals(JobSystem.JOB_CARPENTER) ||
                                 job.equals(JobSystem.JOB_TRADER);
                 if (isTradeJob && peasant.getDisplayName().getString().equals(packet.tradingName())) {
@@ -89,7 +91,8 @@ public class ServerPacketHandler {
     private static void handleBuyTransaction(FinishTransactionPacket packet, ServerPlayer player,
                                              Peasant_Entity trader, TownHallBlockEntity townHall,
                                              ServerLevel level, String jobType) {
-        long totalCost = calculateBuyTotalCost(packet.getItemAmounts(), jobType);
+        int reputation = townHall.getReputation(player.getUUID());
+        long totalCost = calculateBuyTotalCost(packet.getItemAmounts(), jobType, reputation);
         long playerBalance = getPlayerBalance(player);
 
         if (playerBalance < totalCost) {
@@ -122,12 +125,14 @@ public class ServerPacketHandler {
         PacketDistributor.sendToPlayer(player, new CoinBalancePacket(newPlayerBalance));
         player.sendSystemMessage(Component.literal(
                 "Purchase completed! Spent " + totalCost + " coins. Remaining balance: " + newPlayerBalance));
+        rewardBigTrade(townHall, player, totalCost);
     }
 
     private static void handleSellTransaction(FinishTransactionPacket packet, ServerPlayer player,
                                               Peasant_Entity trader, TownHallBlockEntity townHall,
                                               ServerLevel level, String jobType) {
-        long totalEarnings = calculateSellTotalEarnings(packet.getItemAmounts(), jobType);
+        int reputation = townHall.getReputation(player.getUUID());
+        long totalEarnings = calculateSellTotalEarnings(packet.getItemAmounts(), jobType, reputation);
         long townBalance = townHall.getTownBalance();
 
         if (townBalance < totalEarnings) {
@@ -151,6 +156,7 @@ public class ServerPacketHandler {
             PacketDistributor.sendToPlayer(player, new CoinBalancePacket(newPlayerBalance));
             player.sendSystemMessage(Component.literal(
                     "Sale completed! Earned " + totalEarnings + " coins. New balance: " + newPlayerBalance));
+            rewardBigTrade(townHall, player, totalEarnings);
         } else {
             player.sendSystemMessage(Component.literal("Transaction failed!"));
         }
@@ -298,6 +304,56 @@ public class ServerPacketHandler {
         return "";
     }
 
+    /**
+     * Donation to a town: the chosen items leave the player's inventory (what they actually have, never
+     * more than asked) and go into the town's stores - except coins, which add their value to the
+     * town's balance.
+     */
+    public static void handleDonate(DonatePacket packet, IPayloadContext context) {
+        context.enqueueWork(() -> {
+            if (!(context.player() instanceof ServerPlayer player)) return;
+            BlockPos pos = packet.townHallPos();
+            Level level = player.level();
+            if (!level.isLoaded(pos) || !(level.getBlockEntity(pos) instanceof TownHallBlockEntity townHall)) return;
+            if (player.distanceToSqr(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) > 16 * 16) {
+                player.sendSystemMessage(Component.literal("You must be closer to the town hall to donate."));
+                return;
+            }
+
+            int itemsGiven = 0;
+            long coinsGiven = 0;
+            for (Map.Entry<String, Integer> entry : packet.items().entrySet()) {
+                String itemKey = entry.getKey();
+                int left = Math.max(0, entry.getValue());
+                for (int slot = 0; slot < player.getInventory().getContainerSize() && left > 0; slot++) {
+                    ItemStack stack = player.getInventory().getItem(slot);
+                    if (stack.isEmpty() || !BuiltInRegistries.ITEM.getKey(stack.getItem()).toString().equals(itemKey)) continue;
+                    int take = Math.min(left, stack.getCount());
+                    if (stack.getItem() instanceof net.darkflameproduction.agotmod.item.custom.CoinItem coin) {
+                        long value = coin.getCoinValue() * take;
+                        townHall.addToTownBalance(value);
+                        coinsGiven += value;
+                    } else {
+                        townHall.addToTownInventory(itemKey, take);
+                        itemsGiven += take;
+                    }
+                    stack.shrink(take);
+                    player.getInventory().setItem(slot, stack.isEmpty() ? ItemStack.EMPTY : stack);
+                    left -= take;
+                }
+            }
+            player.getInventory().setChanged();
+            if (itemsGiven == 0 && coinsGiven == 0) return;
+
+            StringBuilder message = new StringBuilder("Donated to " + townHall.getTownName() + ": ");
+            if (itemsGiven > 0) message.append(itemsGiven).append(itemsGiven == 1 ? " item" : " items");
+            if (itemsGiven > 0 && coinsGiven > 0) message.append(" and ");
+            if (coinsGiven > 0) message.append(coinsGiven).append(" coins");
+            player.sendSystemMessage(Component.literal(message.append(".").toString()));
+            broadcastTownHallData(level, pos, townHall, 64);
+        });
+    }
+
     public static void handleUpdateTownName(UpdateTownNamePacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
             if (context.player() instanceof ServerPlayer serverPlayer) {
@@ -389,7 +445,8 @@ public class ServerPacketHandler {
                             townHall.getTownIncome(),
                             new java.util.HashMap<>(townHall.getTownInventory()),
                             townHall.getCulture().name(),
-                            townHall.getCitizenEntries()
+                            townHall.getCitizenEntries(),
+                            townHall.getCraftingNeeds()
                     ));
                 }
             }
@@ -403,9 +460,18 @@ public class ServerPacketHandler {
         return "";
     }
 
+    /** A trade worth more than TownReputation.TRADE_THRESHOLD coins earns 1 reputation with the town. */
+    private static void rewardBigTrade(TownHallBlockEntity townHall, ServerPlayer player, long value) {
+        if (value > net.darkflameproduction.agotmod.entity.custom.npc.system.reputation.TownReputation.TRADE_THRESHOLD) {
+            net.darkflameproduction.agotmod.entity.custom.npc.system.reputation.TownReputation.change(
+                    townHall, player, 1, "a trade worth " + value + " coins");
+        }
+    }
+
     // Same multipliers and rounding as the trading GUI (ItemPricing), so the charged total matches what it shows
-    private static long calculateBuyTotalCost(Map<String, Integer> itemAmounts, String jobType) {
-        float multiplier = net.darkflameproduction.agotmod.util.ItemPricing.playerBuyMultiplier(jobType.equals(JobSystem.JOB_TRADER));
+    private static long calculateBuyTotalCost(Map<String, Integer> itemAmounts, String jobType, int reputation) {
+        float multiplier = net.darkflameproduction.agotmod.entity.custom.npc.system.reputation.TownReputation
+                .buyMultiplier(jobType.equals(JobSystem.JOB_TRADER), reputation);
         long totalCost = 0;
         for (Map.Entry<String, Integer> entry : itemAmounts.entrySet()) {
             if (entry.getValue() > 0) {
@@ -416,8 +482,9 @@ public class ServerPacketHandler {
         return totalCost;
     }
 
-    private static long calculateSellTotalEarnings(Map<String, Integer> itemAmounts, String jobType) {
-        float multiplier = net.darkflameproduction.agotmod.util.ItemPricing.playerSellMultiplier(jobType.equals(JobSystem.JOB_TRADER));
+    private static long calculateSellTotalEarnings(Map<String, Integer> itemAmounts, String jobType, int reputation) {
+        float multiplier = net.darkflameproduction.agotmod.entity.custom.npc.system.reputation.TownReputation
+                .sellMultiplier(jobType.equals(JobSystem.JOB_TRADER), reputation);
         long totalEarnings = 0;
         for (Map.Entry<String, Integer> entry : itemAmounts.entrySet()) {
             if (entry.getValue() > 0) {
@@ -544,7 +611,7 @@ public class ServerPacketHandler {
                         case JobSystem.JOB_TAILOR ->
                                 net.darkflameproduction.agotmod.entity.custom.npc.system.tailor.TailorInventoryTicketSystem.postRequest(
                                         peasant.getUUID(), serverPlayer.getUUID(), peasant.blockPosition());
-                        case JobSystem.JOB_BLACKSMITH ->
+                        case JobSystem.JOB_BLACKSMITH, JobSystem.JOB_ARMORSMITH, JobSystem.JOB_SWORDSMITH, JobSystem.JOB_BAKER, JobSystem.JOB_STONEMASON ->
                                 net.darkflameproduction.agotmod.entity.custom.npc.system.blacksmith.BlacksmithInventoryTicketSystem.postRequest(
                                         peasant.getUUID(), serverPlayer.getUUID(), peasant.blockPosition());
                         case JobSystem.JOB_CARPENTER ->

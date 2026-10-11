@@ -2,7 +2,6 @@ package net.darkflameproduction.agotmod.block;// Importing necessary classes fro
 
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.block.custom.*;
-import net.darkflameproduction.agotmod.block.custom.BarleyCropBlock;
 import net.darkflameproduction.agotmod.block.custom.barrel.BarrelDummyBlock;
 import net.darkflameproduction.agotmod.block.custom.barrel.BarrelLargeBlock;
 import net.darkflameproduction.agotmod.block.custom.barrel.BarrelMediumBlock;
@@ -1664,8 +1663,6 @@ public class ModBLocks {
 
     public static final DeferredBlock<Block> HORSERADISH_CROP = registerBlock("horseradish_crop",
             HorseradishCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
-    public static final DeferredBlock<Block> BARLEY_CROP = registerBlock("barley_crop",
-            BarleyCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.WHEAT), false);
     public static final DeferredBlock<Block> GARLIC_CROP = registerBlock("garlic_crop",
             GarlicCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
 
@@ -1675,8 +1672,6 @@ public class ModBLocks {
     public static final DeferredBlock<Block> NEEP_CROP = registerBlock("neep_crop",
             NeepCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
 
-    public static final DeferredBlock<Block> OAT_CROP = registerBlock("oat_crop",
-            OatCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.WHEAT), false);
 
     public static final DeferredBlock<Block> PARSLEY_CROP = registerBlock("parsley_crop",
             ParsleyCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
@@ -1723,11 +1718,7 @@ public class ModBLocks {
     public static final DeferredBlock<Block> PEPPERCORN_CROP = registerBlock("peppercorn_crop",
             PeppercornCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
 
-    public static final DeferredBlock<Block> COTTON_CROP = registerBlock("cotton_crop",
-            CottonCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
 
-    public static final DeferredBlock<Block> HEMP_CROP = registerBlock("hemp_crop",
-            HempCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
 
     public static final DeferredBlock<Block> CORN_CROP = registerBlock("corn_crop",
             CornCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH).noCollission().noOcclusion(), false);

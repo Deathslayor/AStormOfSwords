@@ -31,6 +31,7 @@ public class LumberjackGoal extends Goal {
 
     @Override
     public boolean canUse() {
+        if (!net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobTools.hasRequiredTool(peasant)) return false; // no work without the job's tool (see JobTools)
         return peasant.getJobType().equals(JobSystem.JOB_LUMBERJACK)
                 && !peasant.shouldSleep()
                 && !peasant.needsFoodCollection();
@@ -38,6 +39,7 @@ public class LumberjackGoal extends Goal {
 
     @Override
     public boolean canContinueToUse() {
+        if (!net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobTools.hasRequiredTool(peasant)) return false;
         return canUse();
     }
 
@@ -57,8 +59,15 @@ public class LumberjackGoal extends Goal {
         }
     }
 
+    // The work step runs once per tick with an iron tool, more often with faster tools and less with slower ones
     @Override
     public void tick() {
+        for (int i = net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobTools.workTicks(peasant); i > 0; i--) {
+            workTick();
+        }
+    }
+
+    private void workTick() {
         if (peasant.level().isClientSide) return;
 
         LumberjackSystem system = getSystem();

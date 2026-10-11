@@ -40,7 +40,7 @@ public class CarpenterSystem {
         for (String suffix : CARPENTER_SUFFIXES) {
             if (path.endsWith(suffix)) return true;
         }
-        return path.endsWith("_sapling") || path.equals("nail");
+        return path.endsWith("_sapling") || path.equals("nail") || path.equals("stick");
     }
 
     private static final String[] CARPENTER_SUFFIXES = {

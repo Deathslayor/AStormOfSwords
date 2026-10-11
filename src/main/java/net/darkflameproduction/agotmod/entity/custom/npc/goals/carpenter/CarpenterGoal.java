@@ -5,6 +5,7 @@ import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.carpenter.CarpenterSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.supply.SupplyChain;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -45,6 +46,7 @@ public class CarpenterGoal extends Goal {
 
     @Override
     public boolean canUse() {
+        if (!net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobTools.hasRequiredTool(peasant)) return false; // no work without the job's tool (see JobTools)
         if (!peasant.getJobType().equals(JobSystem.JOB_CARPENTER)) return false;
         if (peasant.getJobBlockPos() == null) return false;
         if (!isJobBlockValid()) return false;
@@ -60,6 +62,7 @@ public class CarpenterGoal extends Goal {
 
     @Override
     public boolean canContinueToUse() {
+        if (!net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobTools.hasRequiredTool(peasant)) return false;
         if (!peasant.getJobType().equals(JobSystem.JOB_CARPENTER)) return false;
         if (peasant.getJobBlockPos() == null) return false;
         if (peasant.isSleeping() || peasant.getHungerSystem().isEating()) return false;
@@ -93,8 +96,15 @@ public class CarpenterGoal extends Goal {
         craftTick = 0;
     }
 
+    // The work step runs once per tick with an iron tool, more often with faster tools and less with slower ones
     @Override
     public void tick() {
+        for (int i = net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobTools.workTicks(peasant); i > 0; i--) {
+            workTick();
+        }
+    }
+
+    private void workTick() {
         if (peasant.level().isClientSide) return;
 
         BlockPos jobBlock = peasant.getJobBlockPos();
@@ -126,6 +136,10 @@ public class CarpenterGoal extends Goal {
     // ── Crafting logic ────────────────────────────────────────────────────────
 
     private void tryCraft() {
+        // What the town's supply chain is short of comes first (see SupplyChain)
+        SupplyChain.Recipe needed = SupplyChain.nextCraft(peasant, JobSystem.JOB_CARPENTER);
+        if (needed != null && SupplyChain.craft(peasant, needed)) return;
+
         String logKey    = resolveLogKey(woodType);
         String planksKey = itemKey(woodType + "_planks");
         String nailKey   = "agotmod:nail";
@@ -289,6 +303,7 @@ public class CarpenterGoal extends Goal {
     // ── Helpers ───────────────────────────────────────────────────────────────
 
     private boolean hasAnythingToProcess() {
+        if (SupplyChain.nextCraft(peasant, JobSystem.JOB_CARPENTER) != null) return true;
         String logKey    = resolveLogKey(woodType);
         String planksKey = itemKey(woodType + "_planks");
         String stickKey  = "minecraft:stick";

@@ -31,6 +31,9 @@ public class TownNotificationOverlay {
     private static String currentOwnership = "";
     private static String currentPopulation = "";
     private static String currentHouseName = "";
+    // The town the message is about, and the player's reputation with each town (from ReputationPacket)
+    private static net.minecraft.core.BlockPos currentTownPos = null;
+    private static final Map<net.minecraft.core.BlockPos, Integer> REPUTATION = new HashMap<>();
     private static long messageStartTime = 0;
     private static final long DISPLAY_DURATION = 5000;
     private static final long FADE_DURATION = 500;
@@ -91,7 +94,13 @@ public class TownNotificationOverlay {
                 (guiGraphics, deltaTracker) -> renderTownNotification(guiGraphics, deltaTracker));
     }
 
-    public static void showEntryMessage(String townName, String ownerString, int population) {
+    /** The server sent the player's reputation with a town (on entering it, and whenever it changes). */
+    public static void setReputation(net.minecraft.core.BlockPos townHallPos, int reputation) {
+        REPUTATION.put(townHallPos, reputation);
+    }
+
+    public static void showEntryMessage(net.minecraft.core.BlockPos townHallPos, String townName, String ownerString, int population) {
+        currentTownPos    = townHallPos;
         currentMessage    = "You Have Entered " + townName;
         currentHouseName  = ownerString != null ? ownerString.toLowerCase().trim() : "";
         currentOwnership  = (ownerString != null && !ownerString.trim().isEmpty())
@@ -100,7 +109,8 @@ public class TownNotificationOverlay {
         messageStartTime  = System.currentTimeMillis();
     }
 
-    public static void showExitMessage(String townName) {
+    public static void showExitMessage(net.minecraft.core.BlockPos townHallPos, String townName) {
+        currentTownPos    = townHallPos;
         currentMessage    = "You Have Left " + townName;
         currentOwnership  = "";
         currentPopulation = "";
@@ -150,13 +160,17 @@ public class TownNotificationOverlay {
         Component messageComponent    = Component.literal(currentMessage);
         Component ownershipComponent  = currentOwnership.isEmpty()  ? null : Component.literal(currentOwnership);
         Component populationComponent = currentPopulation.isEmpty() ? null : Component.literal(currentPopulation);
+        Integer reputation = currentTownPos != null ? REPUTATION.get(currentTownPos) : null;
+        Component reputationComponent = reputation == null ? null : Component.literal("Reputation: " + reputation);
 
         int messageWidth    = font.width(messageComponent);
         int ownershipWidth  = ownershipComponent  != null ? font.width(ownershipComponent)  : 0;
         int populationWidth = populationComponent != null ? font.width(populationComponent) : 0;
-        int maxTextWidth    = Math.max(messageWidth, Math.max(ownershipWidth, populationWidth));
+        int reputationWidth = reputationComponent != null ? font.width(reputationComponent) : 0;
+        int maxTextWidth    = Math.max(Math.max(messageWidth, reputationWidth), Math.max(ownershipWidth, populationWidth));
         int textHeight      = font.lineHeight;
-        int lineCount       = 1 + (ownershipComponent != null ? 1 : 0) + (populationComponent != null ? 1 : 0);
+        int lineCount       = 1 + (ownershipComponent != null ? 1 : 0) + (populationComponent != null ? 1 : 0)
+                + (reputationComponent != null ? 1 : 0);
         int totalTextHeight = (textHeight * lineCount) + ((lineCount - 1) * 2);
 
         int padding = 10;
@@ -206,6 +220,13 @@ public class TownNotificationOverlay {
         if (populationComponent != null) {
             guiGraphics.drawString(font, populationComponent,
                     panelX + padding + (maxTextWidth - populationWidth) / 2, currentY, colorPopulation, false);
+            currentY += textHeight + 2;
+        }
+
+        if (reputationComponent != null) {
+            int repColor = (a << 24) | (reputation > 0 ? 0x0066FF66 : reputation < 0 ? 0x00FF6666 : 0x00FFFFFF);
+            guiGraphics.drawString(font, reputationComponent,
+                    panelX + padding + (maxTextWidth - reputationWidth) / 2, currentY, repColor, false);
         }
 
         if (hasBanner) {

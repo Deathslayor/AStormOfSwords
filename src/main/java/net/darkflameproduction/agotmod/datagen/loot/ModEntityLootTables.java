@@ -39,7 +39,7 @@ public class ModEntityLootTables extends EntityLootSubProvider {
                                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))))
                         .withPool(LootPool.lootPool()
                                 .setRolls(ConstantValue.exactly(1))
-                                .add(LootItem.lootTableItem(ModItems.RAW_MAMMOTH_MEAT.get())
+                                .add(LootItem.lootTableItem(net.darkflameproduction.agotmod.item.food.ModFoodItems.get("raw_mammoth_meat").get())
                                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(8.0F, 32.0F)))))
                         .withPool(LootPool.lootPool()
                                 .setRolls(ConstantValue.exactly(1))
@@ -64,7 +64,7 @@ public class ModEntityLootTables extends EntityLootSubProvider {
                 LootTable.lootTable()
                         .withPool(LootPool.lootPool()
                                 .setRolls(ConstantValue.exactly(1))
-                                .add(LootItem.lootTableItem(ModItems.RAW_BLOOD_SAUSAGE.get())
+                                .add(LootItem.lootTableItem(net.darkflameproduction.agotmod.item.food.ModFoodItems.get("raw_blood_sausage").get())
                                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))));
 
 

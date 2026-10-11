@@ -27,6 +27,10 @@ public class ClientPacketHandler {
         });
     }
 
+    public static void handleReputation(ReputationPacket packet, IPayloadContext context) {
+        context.enqueueWork(() -> TownNotificationOverlay.setReputation(packet.townHallPos(), packet.reputation()));
+    }
+
     public static void handleTownHallRegister(TownHallRegisterPacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
             if (packet.register()) {
@@ -74,6 +78,7 @@ public class ClientPacketHandler {
             TownHallScreen.updateFinances(pos, packet.townBalance(), packet.townIncome());
             TownHallScreen.updateInventory(pos, packet.townInventory());
             TownHallScreen.updateCitizens(pos, packet.citizens());
+            TownHallScreen.updateCraftingNeeds(pos, packet.craftingNeeds());
 
             TownHallDebugRenderer.updateTownHallData(pos, packet.bedCount(),
                     packet.citizenCount(), packet.currentRadius());

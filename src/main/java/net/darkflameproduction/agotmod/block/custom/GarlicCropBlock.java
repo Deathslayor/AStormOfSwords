@@ -35,7 +35,7 @@ public class GarlicCropBlock extends CropBlock {
 
     @Override
     protected ItemLike getBaseSeedId() {
-        return ModItems.GARLIC;
+        return net.darkflameproduction.agotmod.item.food.ModFoodItems.get("garlic");
     }
 
     @Override

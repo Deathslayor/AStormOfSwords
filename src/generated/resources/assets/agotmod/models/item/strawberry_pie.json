@@ -1,6 +1,7 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "agotmod:item/strawberry_pie"
+    "layer0": "agotmod:item/tart_bottom_template",
+    "layer1": "agotmod:item/tart_top_template"
   }
 }

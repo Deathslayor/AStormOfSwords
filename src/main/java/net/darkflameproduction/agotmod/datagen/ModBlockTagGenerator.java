@@ -234,12 +234,10 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
 
 
         this.tag(BlockTags.CROPS)
-                .add(ModBLocks.BARLEY_CROP.get())
                 .add(ModBLocks.HORSERADISH_CROP.get())
                 .add(ModBLocks.GARLIC_CROP.get())
                 .add(ModBLocks.LEEK_CROP.get())
                 .add(ModBLocks.NEEP_CROP.get())
-                .add(ModBLocks.OAT_CROP.get())
                 .add(ModBLocks.PARSLEY_CROP.get())
                 .add(ModBLocks.RED_ONION_CROP.get())
                 .add(ModBLocks.TURNIP_CROP.get())
@@ -255,8 +253,6 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBLocks.DRAGON_PEPPER_CROP.get())
                 .add(ModBLocks.PEPPER_CROP.get())
                 .add(ModBLocks.PEPPERCORN_CROP.get())
-                .add(ModBLocks.COTTON_CROP.get())
-                .add(ModBLocks.HEMP_CROP.get())
                 .add(ModBLocks.CORN_CROP.get())
                 .add(ModBLocks.CORN_CROP_MIDDLE.get())
                 .add(ModBLocks.CORN_CROP_TOP.get())

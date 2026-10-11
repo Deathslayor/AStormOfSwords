@@ -3,6 +3,7 @@ package net.darkflameproduction.agotmod.entity.custom.npc.goals.tailor;
 import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.supply.SupplyChain;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.tailor.TailorSystem;
 import net.darkflameproduction.agotmod.item.ModItems;
 import net.minecraft.core.BlockPos;
@@ -30,7 +31,8 @@ public class TailorGoal extends Goal {
 
     private static final int[] ARMOR_COSTS = { 5, 8, 7, 4 };
 
-    private static final Map<String, String> FLOWER_TO_DYE = new LinkedHashMap<>();
+    /** Flower -> dye, in the order he works through them. Also the supply chain's dye recipes (SupplyChain). */
+    public static final Map<String, String> FLOWER_TO_DYE = new LinkedHashMap<>();
     static {
         // Red dye
         FLOWER_TO_DYE.put("agotmod:rose",            "minecraft:red_dye");
@@ -142,10 +144,10 @@ public class TailorGoal extends Goal {
     }
 
     private boolean hasAnythingToCraft() {
+        if (SupplyChain.nextCraft(peasant, JobSystem.JOB_TAILOR) != null) return true;
         for (String flowerKey : FLOWER_TO_DYE.keySet()) {
             if (hasItemInInventory(flowerKey, 1)) return true;
         }
-        if (hasItemInInventory("agotmod:cotton", 1)) return true;
         if (hasItemInInventory("minecraft:string", 4)) return true;
         if (hasItemInInventory("minecraft:white_wool", 2)) return true;
         // Armor only counts if we haven't made one today
@@ -220,13 +222,9 @@ public class TailorGoal extends Goal {
     }
 
     private void tryCraft() {
-        // Step 1: Cotton â†’ String (1:1)
-        if (hasItemInInventory("agotmod:cotton", 1)) {
-            removeItemFromInventory("agotmod:cotton", 1);
-            addItemToInventory(new ItemStack(Items.STRING, 1));
-            peasant.triggerInteractAnimation();
-            return;
-        }
+        // What the town's supply chain is short of comes first (see SupplyChain)
+        SupplyChain.Recipe needed = SupplyChain.nextCraft(peasant, JobSystem.JOB_TAILOR);
+        if (needed != null && SupplyChain.craft(peasant, needed)) return;
 
         // Step 2: String â†’ Wool (4 string = 1 white wool)
         if (hasItemInInventory("minecraft:string", 4)) {

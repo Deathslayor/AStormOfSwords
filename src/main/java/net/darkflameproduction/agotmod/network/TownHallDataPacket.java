@@ -28,11 +28,20 @@ public record TownHallDataPacket(
         long townIncome,
         Map<String, Long> townInventory,
         String culture,
-        List<CitizenEntry> citizens
+        List<CitizenEntry> citizens,
+        List<CraftingNeed> craftingNeeds
 ) implements CustomPacketPayload {
 
     /** A citizen of the town: its name and job type (JobSystem.JOB_*, "" for none). */
     public record CitizenEntry(String name, String jobType) {}
+
+    /** Something the town's blacksmith still has to make: have / want; label names requested tools. */
+    /**
+     * One row of the Crafting tab: {@code have} of {@code want} of an item in the town hall. {@code jobs} are the
+     * jobs that make it ("tailor/blacksmith"), {@code hasWorker} whether the town has a citizen with one of them.
+     */
+    public record CraftingNeed(String itemKey, String label, String jobs, int have, int want,
+                               boolean toolRequest, boolean hasWorker) {}
 
     public static final Type<TownHallDataPacket> TYPE = new Type<>(
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "town_hall_data")
@@ -68,6 +77,16 @@ public record TownHallDataPacket(
             buf.writeUtf(citizen.name());
             buf.writeUtf(citizen.jobType());
         }
+        buf.writeVarInt(packet.craftingNeeds.size());
+        for (CraftingNeed need : packet.craftingNeeds) {
+            buf.writeUtf(need.itemKey());
+            buf.writeUtf(need.label());
+            buf.writeUtf(need.jobs());
+            buf.writeVarInt(need.have());
+            buf.writeVarInt(need.want());
+            buf.writeBoolean(need.toolRequest());
+            buf.writeBoolean(need.hasWorker());
+        }
     }
 
     private static TownHallDataPacket decode(FriendlyByteBuf buf) {
@@ -95,12 +114,18 @@ public record TownHallDataPacket(
         for (int i = 0; i < citizenListSize; i++) {
             citizens.add(new CitizenEntry(buf.readUtf(), buf.readUtf()));
         }
+        int needCount = buf.readVarInt();
+        List<CraftingNeed> craftingNeeds = new ArrayList<>(needCount);
+        for (int i = 0; i < needCount; i++) {
+            craftingNeeds.add(new CraftingNeed(buf.readUtf(), buf.readUtf(), buf.readUtf(), buf.readVarInt(),
+                    buf.readVarInt(), buf.readBoolean(), buf.readBoolean()));
+        }
 
         return new TownHallDataPacket(
                 pos, bedCount, citizenCount, currentRadius,
                 townName, isClaimed, claimedByHouse,
                 availableJobCount, assignedJobCount, totalJobCount, joblessCount,
-                townBalance, townIncome, townInventory, culture, citizens
+                townBalance, townIncome, townInventory, culture, citizens, craftingNeeds
         );
     }
 

@@ -2,6 +2,7 @@ package net.darkflameproduction.agotmod.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.darkflameproduction.agotmod.network.FinishTransactionPacket;
+import net.minecraft.core.BlockPos;
 import net.darkflameproduction.agotmod.network.OpenTradingInventoryPacket;
 import net.darkflameproduction.agotmod.util.ItemPricing;
 import net.minecraft.client.gui.GuiGraphics;
@@ -122,6 +123,52 @@ public class TradingInventoryScreen extends Screen {
         currentInstance = this;
     }
 
+
+    // ── Donate mode ───────────────────────────────────────────────────────────
+    // The town hall's Donate button opens this same menu on the player's own inventory: any item can be
+    // given to the town for nothing (coins add their value to the town's balance). No prices, no trader side.
+
+    /** Set in donate mode: the town hall the items go to. */
+    private BlockPos donateTownHall = null;
+
+    private boolean isDonate() { return donateTownHall != null; }
+
+    public static void openDonate(BlockPos townHallPos, String townName) {
+        net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getInstance();
+        if (mc.player == null) return;
+        TradingInventoryScreen screen = new TradingInventoryScreen(townName);
+        screen.donateTownHall = townHallPos.immutable();
+        screen.currentMode = TradeMode.SELL;
+
+        // The player's whole inventory, one entry per kind of item
+        Map<String, OpenTradingInventoryPacket.PlayerInventoryEntry> byKey = new java.util.LinkedHashMap<>();
+        var inventory = mc.player.getInventory();
+        for (int slot = 0; slot < inventory.getContainerSize(); slot++) {
+            net.minecraft.world.item.ItemStack stack = inventory.getItem(slot);
+            if (stack.isEmpty()) continue;
+            String key = net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(stack.getItem()).toString();
+            OpenTradingInventoryPacket.PlayerInventoryEntry existing = byKey.get(key);
+            int amount = stack.getCount() + (existing != null ? existing.amount : 0);
+            byKey.put(key, new OpenTradingInventoryPacket.PlayerInventoryEntry(
+                    stack.getHoverName().getString(), amount, key, existing != null ? existing.slot : slot));
+        }
+        screen.playerEntries = new ArrayList<>(byKey.values());
+        screen.dataLoaded = true;
+        mc.setScreen(screen);
+    }
+
+    /** Value of the coins being donated (coin items), in the same unit as balances. */
+    private long donatedCoinValue() {
+        long total = 0;
+        for (Map.Entry<String, Integer> e : transactionAmounts.entrySet()) {
+            net.minecraft.resources.ResourceLocation id = net.minecraft.resources.ResourceLocation.tryParse(e.getKey());
+            if (id == null) continue;
+            if (net.minecraft.core.registries.BuiltInRegistries.ITEM.get(id) instanceof net.darkflameproduction.agotmod.item.custom.CoinItem coin) {
+                total += coin.getCoinValue() * e.getValue();
+            }
+        }
+        return total;
+    }
     // ── Static helpers ────────────────────────────────────────────────────────
 
     public static boolean isItemAllowed(String itemKey)  { return ItemPricing.isItemAllowed(itemKey); }
@@ -435,7 +482,7 @@ public class TradingInventoryScreen extends Screen {
                 }
 
                 // "name x amount = price" — full name, small text
-                String line = dispName + " x " + amount + " = " + lineTotal + "c";
+                String line = isDonate() ? dispName + " x " + amount : dispName + " x " + amount + " = " + lineTotal + "c";
                 drawTextScaled(g, line, RIGHT_X + 8, rowY + 2, TEXT_COLOR, 0.4f);
 
                 // +/- icon texture at same 0.4f scale as item icon (16px tall → 6px on screen)
@@ -451,6 +498,14 @@ public class TradingInventoryScreen extends Screen {
 
         // Separator just above the bottom area
         g.fill(RIGHT_X + 1, BOTTOM_Y - 1, RIGHT_X + RIGHT_W - 1, BOTTOM_Y, TEXT_COLOR);
+
+        if (isDonate()) {
+            // Donating: how much, and what the coins add to the town's balance
+            drawTextCenteredScaled(g, "Donating: " + totalItems, BOTTOM_X + BOTTOM_W / 2, BOTTOM_Y + 4, TEXT_COLOR, 0.55f);
+            long coins = donatedCoinValue();
+            if (coins > 0) drawTextCenteredScaled(g, "Coins: +" + formatCurrency(coins), BOTTOM_X + BOTTOM_W / 2, BOTTOM_Y + 13, TEXT_COLOR_GREEN, 0.55f);
+            return;
+        }
 
         // Total price inside the bottom area, centred
         String totalStr = "Total: " + totalPrice + "c";
@@ -469,6 +524,11 @@ public class TradingInventoryScreen extends Screen {
 
         drawTextCenteredScaled(g, tradingName, cx, y, TEXT_COLOR, s);
         y += lineH;
+
+        if (isDonate()) {
+            drawTextCenteredScaled(g, "Donating to the town", cx, y, TEXT_COLOR_GREEN, s);
+            return;
+        }
 
         long bal = tradingBalance;
         drawTextCenteredScaled(g, "Balance: " + formatCurrency(bal), cx, y, TEXT_COLOR_GREEN, s);
@@ -519,7 +579,9 @@ public class TradingInventoryScreen extends Screen {
         int    buyP     = ItemPricing.applyMultiplier(itemKey, buyMultiplier);
         int    sellP    = ItemPricing.applyMultiplier(itemKey, sellMultiplier);
 
-        String[] lines = { name, "Amount: " + amount, "Buy: " + buyP, "Sell: " + sellP };
+        String[] lines = isDonate()
+                ? new String[]{ name, "Amount: " + amount }
+                : new String[]{ name, "Amount: " + amount, "Buy: " + buyP, "Sell: " + sellP };
         int tw = 0;
         for (String l : lines) tw = Math.max(tw, font.width(l));
         int bw = tw + 12, bh = lines.length * (font.lineHeight + 2) + 8;
@@ -552,15 +614,18 @@ public class TradingInventoryScreen extends Screen {
         int vmx = toVirtX(mouseX);
         int vmy = toVirtY(mouseY);
 
+        // Donate mode: only the player's inventory - no buy/sell switch
+        boolean donate = isDonate();
+
         // Buy button
-        if (vmx >= BUY_BTN_X && vmx < BUY_BTN_X + BUY_BTN_W &&
+        if (!donate && vmx >= BUY_BTN_X && vmx < BUY_BTN_X + BUY_BTN_W &&
                 vmy >= BUY_BTN_Y && vmy < BUY_BTN_Y + BUY_BTN_H) {
             if (currentMode != TradeMode.BUY) toggleMode();
             return true;
         }
 
         // Sell button
-        if (vmx >= SELL_BTN_X && vmx < SELL_BTN_X + SELL_BTN_W &&
+        if (!donate && vmx >= SELL_BTN_X && vmx < SELL_BTN_X + SELL_BTN_W &&
                 vmy >= SELL_BTN_Y && vmy < SELL_BTN_Y + SELL_BTN_H) {
             if (currentMode != TradeMode.SELL) toggleMode();
             return true;
@@ -577,7 +642,7 @@ public class TradingInventoryScreen extends Screen {
                 vmy >= SEAL_BTN_Y && vmy < SEAL_BTN_Y + SEAL_BTN_H) {
             calculateTotals();
             long limBal = currentMode == TradeMode.BUY ? getPlayerBalance() : tradingBalance;
-            if (totalItems > 0 && limBal >= totalPrice) {
+            if (totalItems > 0 && (donate || limBal >= totalPrice)) {
                 finishTransaction();
                 playButtonSound();
             }
@@ -714,6 +779,16 @@ public class TradingInventoryScreen extends Screen {
 
     private void finishTransaction() {
         if (totalItems <= 0) return;
+        if (isDonate()) {
+            Map<String, Integer> donation = new HashMap<>();
+            for (Map.Entry<String, Integer> e : transactionAmounts.entrySet()) {
+                if (e.getValue() > 0) donation.put(e.getKey(), e.getValue());
+            }
+            net.neoforged.neoforge.network.PacketDistributor.sendToServer(
+                    new net.darkflameproduction.agotmod.network.DonatePacket(donateTownHall, donation));
+            this.onClose();
+            return;
+        }
         Map<String, Integer> items = new HashMap<>();
         Map<String, Integer> slots = new HashMap<>();
         for (Map.Entry<String, Integer> e : transactionAmounts.entrySet()) {

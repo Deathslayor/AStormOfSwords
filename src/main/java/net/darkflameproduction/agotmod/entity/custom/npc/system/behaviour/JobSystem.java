@@ -37,6 +37,15 @@ public class JobSystem {
     public static final String JOB_TANNER          = "tanner";
     public static final String JOB_TAILOR          = "tailor";
     public static final String JOB_BLACKSMITH      = "blacksmith";
+    public static final String JOB_ARMORSMITH      = "armorsmith";
+    public static final String JOB_SWORDSMITH      = "swordsmith";
+    public static final String JOB_BAKER           = "baker";
+    public static final String JOB_STONEMASON      = "stonemason";
+
+    /** The smiths: the blacksmith, and the armorsmith and swordsmith who make the high tier armour and weapons. */
+    public static boolean isSmith(String job) {
+        return JOB_BLACKSMITH.equals(job) || JOB_ARMORSMITH.equals(job) || JOB_SWORDSMITH.equals(job);
+    }
     public static final String JOB_LUMBERJACK      = "lumberjack";
     public static final String JOB_CHARCOAL_BURNER = "charcoal_burner";
     public static final String JOB_CARPENTER       = "carpenter";
@@ -146,6 +155,10 @@ public class JobSystem {
         if (getJobType().equals(JOB_TANNER))          return jobBlockState.is(ModBLocks.TANNER_BARREL.get());
         if (getJobType().equals(JOB_TAILOR))          return jobBlockState.is(ModBLocks.TAILOR_BARREL.get());
         if (getJobType().equals(JOB_BLACKSMITH))      return jobBlockState.is(ModBLocks.BLACKSMITH_BARREL.get());
+        if (getJobType().equals(JOB_ARMORSMITH))      return jobBlockState.is(ModBLocks.ARMORSMITH_BARREL.get());
+        if (getJobType().equals(JOB_SWORDSMITH))      return jobBlockState.is(ModBLocks.SWORDSMITH_BARREL.get());
+        if (getJobType().equals(JOB_BAKER))           return jobBlockState.is(ModBLocks.BAKER_BARREL.get());
+        if (getJobType().equals(JOB_STONEMASON))      return jobBlockState.is(ModBLocks.STONEMASON_BARREL.get());
         if (getJobType().equals(JOB_GUARD))           return jobBlockState.is(ModBLocks.GUARD_BARREL.get());
         if (getJobType().equals(JOB_MINER))           return jobBlockState.is(ModBLocks.MINER_BARREL.get());
         if (getJobType().equals(JOB_QUARRY))          return jobBlockState.is(ModBLocks.QUARRY_BARREL.get());
@@ -243,91 +256,20 @@ public class JobSystem {
 
     // Ã¢â€â‚¬Ã¢â€â‚¬ Equipment Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 
+    // Workers no longer get their tools for free: they request one and the town's blacksmith makes it
+    // (see JobTools and CollectToolGoal). Miners still bring their own torches.
     private void giveJobEquipment(String oldJob, String newJob) {
         if (peasant.level().isClientSide) return;
-        if (newJob.equals(JOB_FARMER))      giveIronHoe();
-        else if (newJob.equals(JOB_MINER))  giveMinerEquipment();
-        else if (newJob.equals(JOB_QUARRY)) giveMinerEquipment();
-        else if (newJob.equals(JOB_LUMBERJACK))  giveLumberjackEquipment();
-        else if (newJob.equals(JOB_CARPENTER))   giveCarpenterEquipment();
+        if (newJob.equals(JOB_MINER) || newJob.equals(JOB_QUARRY)) giveTorches();
+        JobTools.updateRequest(peasant);
     }
 
-    private void giveIronHoe() {
-        if (hasHoe()) return;
-        ItemStack ironHoe = new ItemStack(Items.IRON_HOE);
-        if (peasant.getInventorySystem().addItem(ironHoe)) {
-            peasant.getInventorySystem().forceEquipmentCheck();
-        } else if (peasant.getInventorySystem().getMainHandItem().isEmpty()) {
-            peasant.getInventorySystem().setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, ironHoe);
-        } else if (peasant.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
-            peasant.spawnAtLocation(ironHoe);
-        }
-    }
 
-    private void giveLumberjackEquipment() {
-        if (hasAxe()) return;
-        ItemStack ironAxe = new ItemStack(Items.IRON_AXE);
-        if (peasant.getInventorySystem().addItem(ironAxe)) {
-            peasant.getInventorySystem().forceEquipmentCheck();
-        } else if (peasant.getInventorySystem().getMainHandItem().isEmpty()) {
-            peasant.getInventorySystem().setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, ironAxe);
-        } else if (peasant.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
-            peasant.spawnAtLocation(ironAxe);
-        }
-    }
 
-    private void giveCarpenterEquipment() {
-        if (hasAxe()) return;
-        ItemStack ironAxe = new ItemStack(Items.IRON_AXE);
-        if (peasant.getInventorySystem().addItem(ironAxe)) {
-            peasant.getInventorySystem().forceEquipmentCheck();
-        } else if (peasant.getInventorySystem().getMainHandItem().isEmpty()) {
-            peasant.getInventorySystem().setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, ironAxe);
-        } else if (peasant.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
-            peasant.spawnAtLocation(ironAxe);
-        }
-    }
 
-    private void giveMinerEquipment() {
-        if (!hasPickaxe()) {
-            ItemStack ironPickaxe = new ItemStack(Items.IRON_PICKAXE);
-            if (peasant.getInventorySystem().addItem(ironPickaxe)) {
-                peasant.getInventorySystem().forceEquipmentCheck();
-            } else if (peasant.getInventorySystem().getMainHandItem().isEmpty()) {
-                peasant.getInventorySystem().setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, ironPickaxe);
-            } else if (peasant.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
-                peasant.spawnAtLocation(ironPickaxe);
-            }
-        }
-        giveTorches();
-    }
 
-    private boolean hasHoe() {
-        if (peasant.getInventorySystem().getMainHandItem().getItem() instanceof net.minecraft.world.item.HoeItem ||
-                peasant.getInventorySystem().getOffhandItem().getItem() instanceof net.minecraft.world.item.HoeItem) return true;
-        var inventory = peasant.getInventorySystem().getInventory();
-        for (int i = 0; i < inventory.getContainerSize(); i++)
-            if (inventory.getItem(i).getItem() instanceof net.minecraft.world.item.HoeItem) return true;
-        return false;
-    }
 
-    private boolean hasAxe() {
-        if (peasant.getInventorySystem().getMainHandItem().getItem() instanceof net.minecraft.world.item.AxeItem ||
-                peasant.getInventorySystem().getOffhandItem().getItem() instanceof net.minecraft.world.item.AxeItem) return true;
-        var inventory = peasant.getInventorySystem().getInventory();
-        for (int i = 0; i < inventory.getContainerSize(); i++)
-            if (inventory.getItem(i).getItem() instanceof net.minecraft.world.item.AxeItem) return true;
-        return false;
-    }
 
-    private boolean hasPickaxe() {
-        if (peasant.getInventorySystem().getMainHandItem().getItem() instanceof net.minecraft.world.item.PickaxeItem ||
-                peasant.getInventorySystem().getOffhandItem().getItem() instanceof net.minecraft.world.item.PickaxeItem) return true;
-        var inventory = peasant.getInventorySystem().getInventory();
-        for (int i = 0; i < inventory.getContainerSize(); i++)
-            if (inventory.getItem(i).getItem() instanceof net.minecraft.world.item.PickaxeItem) return true;
-        return false;
-    }
 
     private void giveTorches() {
         ItemStack torches = new ItemStack(Items.TORCH, 32);
@@ -373,7 +315,7 @@ public class JobSystem {
         if (getJobType().equals(JOB_BUTCHER))    return deltaX <= BUTCHER_IDLE_RADIUS_X    && deltaZ <= BUTCHER_IDLE_RADIUS_Z    && deltaY <= BUTCHER_IDLE_RADIUS_Y;
         if (getJobType().equals(JOB_TANNER))     return deltaX <= TANNER_IDLE_RADIUS_X     && deltaZ <= TANNER_IDLE_RADIUS_Z     && deltaY <= TANNER_IDLE_RADIUS_Y;
         if (getJobType().equals(JOB_TAILOR))     return deltaX <= TAILOR_IDLE_RADIUS_X     && deltaZ <= TAILOR_IDLE_RADIUS_Z     && deltaY <= TAILOR_IDLE_RADIUS_Y;
-        if (getJobType().equals(JOB_BLACKSMITH)) return deltaX <= BLACKSMITH_IDLE_RADIUS_X && deltaZ <= BLACKSMITH_IDLE_RADIUS_Z && deltaY <= BLACKSMITH_IDLE_RADIUS_Y;
+        if (isSmith(getJobType()) || getJobType().equals(JOB_BAKER) || getJobType().equals(JOB_STONEMASON)) return deltaX <= BLACKSMITH_IDLE_RADIUS_X && deltaZ <= BLACKSMITH_IDLE_RADIUS_Z && deltaY <= BLACKSMITH_IDLE_RADIUS_Y;
         if (getJobType().equals(JOB_CARPENTER))  return deltaX <= CARPENTER_IDLE_RADIUS_X  && deltaZ <= CARPENTER_IDLE_RADIUS_Z  && deltaY <= CARPENTER_IDLE_RADIUS_Y;
         if (getJobType().equals(JOB_GUARD))
             return deltaX <= GUARD_WORK_RADIUS_X && deltaZ <= GUARD_WORK_RADIUS_Z && deltaY <= GUARD_WORK_RADIUS_Y;
@@ -405,7 +347,7 @@ public class JobSystem {
         if (getJobType().equals(JOB_BUTCHER))     return true;
         if (getJobType().equals(JOB_TANNER))      return true;
         if (getJobType().equals(JOB_TAILOR))      return true;
-        if (getJobType().equals(JOB_BLACKSMITH))  return true;
+        if (isSmith(getJobType()) || getJobType().equals(JOB_BAKER) || getJobType().equals(JOB_STONEMASON))  return true;
         if (getJobType().equals(JOB_CARPENTER))   return true;
         if (getJobType().equals(JOB_MINER))       return true;
         if (getJobType().equals(JOB_QUARRY))      return true;
@@ -445,7 +387,7 @@ public class JobSystem {
             return distanceSquared > ((TANNER_IDLE_RADIUS_X + 10) * (TANNER_IDLE_RADIUS_X + 10));
         if (getJobType().equals(JOB_TAILOR))
             return distanceSquared > ((TAILOR_IDLE_RADIUS_X + 10) * (TAILOR_IDLE_RADIUS_X + 10));
-        if (getJobType().equals(JOB_BLACKSMITH))
+        if (isSmith(getJobType()) || getJobType().equals(JOB_BAKER) || getJobType().equals(JOB_STONEMASON))
             return distanceSquared > ((BLACKSMITH_IDLE_RADIUS_X + 10) * (BLACKSMITH_IDLE_RADIUS_X + 10));
         if (getJobType().equals(JOB_CARPENTER))
             return distanceSquared > ((CARPENTER_IDLE_RADIUS_X + 10) * (CARPENTER_IDLE_RADIUS_X + 10));

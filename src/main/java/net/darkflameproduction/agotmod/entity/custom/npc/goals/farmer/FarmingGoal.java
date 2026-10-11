@@ -21,6 +21,7 @@ public class FarmingGoal extends Goal {
 
     @Override
     public boolean canUse() {
+        if (!net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobTools.hasRequiredTool(peasant)) return false; // no work without the job's tool (see JobTools)
         if (!peasant.getJobType().equals(JobSystem.JOB_FARMER) || peasant.getJobBlockPos() == null) {
             return false;
         }
@@ -51,6 +52,7 @@ public class FarmingGoal extends Goal {
 
     @Override
     public boolean canContinueToUse() {
+        if (!net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobTools.hasRequiredTool(peasant)) return false;
         if (peasant.shouldSleep() || peasant.isSleeping() ||
                 peasant.needsFoodCollection() || peasant.getHungerSystem().isEating()) {
             return false;
@@ -72,8 +74,15 @@ public class FarmingGoal extends Goal {
         currentWorkTarget = null;
     }
 
+    // The work step runs once per tick with an iron tool, more often with faster tools and less with slower ones
     @Override
     public void tick() {
+        for (int i = net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobTools.workTicks(peasant); i > 0; i--) {
+            workTick();
+        }
+    }
+
+    private void workTick() {
         workTimer++;
         FarmState currentState = peasant.getFarmingSystem().getCurrentFarmState();
         switch (currentState) {

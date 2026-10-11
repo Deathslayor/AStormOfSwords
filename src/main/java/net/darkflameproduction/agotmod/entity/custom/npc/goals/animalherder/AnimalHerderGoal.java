@@ -2,6 +2,7 @@ package net.darkflameproduction.agotmod.entity.custom.npc.goals.animalherder;
 
 import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.supply.Milking;
 import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -30,6 +31,7 @@ public class AnimalHerderGoal extends Goal {
 
     private AgeableMob targetToKill  = null;
     private AgeableMob targetToShear = null;
+    private Cow targetToMilk = null;
 
     public AnimalHerderGoal(Peasant_Entity peasant) {
         this.peasant = peasant;
@@ -88,6 +90,7 @@ public class AnimalHerderGoal extends Goal {
         workTimer    = 0;
         targetToKill  = null;
         targetToShear = null;
+        targetToMilk  = null;
         long currentDay = peasant.level().getDayTime() / 24000;
         if (peasant.getAnimalHerderSystem().getLastBreedDay() != currentDay) {
             peasant.getAnimalHerderSystem().setHasBreedToday(false);
@@ -100,6 +103,7 @@ public class AnimalHerderGoal extends Goal {
         workTimer     = 0;
         targetToKill  = null;
         targetToShear = null;
+        targetToMilk  = null;
     }
 
     @Override
@@ -149,6 +153,21 @@ public class AnimalHerderGoal extends Goal {
             }
         }
 
+        // Navigate to and milk target (cattle herder - see Milking)
+        if (targetToMilk != null) {
+            long day = peasant.level().getDayTime() / 24000;
+            if (!targetToMilk.isAlive() || targetToMilk.isBaby() || Milking.milkedToday(targetToMilk, day)) {
+                targetToMilk = null;
+            } else {
+                peasant.getNavigation().moveTo(targetToMilk, 0.7D);
+                if (peasant.distanceToSqr(targetToMilk) <= INTERACT_RANGE_SQ) {
+                    Milking.milk(peasant, targetToMilk, day);
+                    targetToMilk = null;
+                }
+                return;
+            }
+        }
+
         // Return near job block when idle
         double dist = peasant.distanceToSqr(jobBlock.getX() + 0.5, jobBlock.getY(), jobBlock.getZ() + 0.5);
         if (dist > 16.0D && !peasant.getNavigation().isInProgress()) {
@@ -186,6 +205,16 @@ public class AnimalHerderGoal extends Goal {
             }
             peasant.getAnimalHerderSystem().setHasBreedToday(true);
             peasant.getAnimalHerderSystem().setLastBreedDay(currentDay);
+        }
+
+        // Pick a cow to milk: only while the town wants milk and he has an empty bucket, each cow once a day
+        if (job.equals(JobSystem.JOB_CATTLE_HERDER) && Milking.wantsToMilk(peasant)) {
+            for (AgeableMob animal : adults) {
+                if (animal instanceof Cow cow && !Milking.milkedToday(cow, currentDay)) {
+                    targetToMilk = cow;
+                    return;
+                }
+            }
         }
 
         // Pick a sheep to shear
