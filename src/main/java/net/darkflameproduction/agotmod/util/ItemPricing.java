@@ -578,6 +578,12 @@ public class ItemPricing {
     public static boolean isBakerItem(String itemKey)      { return isJobItem(itemKey, BAKER);      }
     public static boolean isStonemasonItem(String itemKey) { return isJobItem(itemKey, STONEMASON); }
 
+    /** The shops (GROCER, BAKER...) that deal in an item; empty if none. */
+    public static Set<String> jobsOf(String itemKey) {
+        ItemData data = ITEMS.get(itemKey);
+        return data != null ? Collections.unmodifiableSet(data.jobs) : Set.of();
+    }
+
     public static int getItemPrice(String itemKey) {
         ItemData data = ITEMS.get(itemKey);
         return data != null ? data.price : 0;

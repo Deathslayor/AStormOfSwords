@@ -49,6 +49,7 @@ import java.util.Collections;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
+import org.jetbrains.annotations.Nullable;
 
 public class TownHallBlockEntity extends BlockEntity implements
         GrocerInventoryTicketSystem.TicketListener,
@@ -98,6 +99,7 @@ public class TownHallBlockEntity extends BlockEntity implements
     private String townName = "Unnamed Town"; // Default town name
     private long lastScanDay = -1;
     private long lastChildSpawnDay = -1; // Track last day children were spawned
+    private long lastTraderRestockDay = -1; // The day the town's trader last bought supplies (TraderPurchasing)
     private boolean hasScannedToday = false;
     private int ticksSinceLastRegister = 0;
     private int ticksSinceLastCitizenCheck = 0;
@@ -109,6 +111,10 @@ public class TownHallBlockEntity extends BlockEntity implements
     // ===== TOWN HALL SHARED INVENTORY =====
     private final Map<String, Long> townInventory = new HashMap<>();
     private long townBalance = 0;
+    /** Earnings memory for the trader's budget (TraderPurchasing): the day being counted, its earnings so far, and the day before's. */
+    private long earningsDay = -1;
+    private long earnedToday = 0;
+    private long earnedYesterday = 0;
 
     /** Each player's reputation with this town (TownReputation): -100 to 100, 5 from their first visit. */
     private final Map<UUID, Integer> playerReputation = new HashMap<>();
@@ -422,8 +428,10 @@ public class TownHallBlockEntity extends BlockEntity implements
 
     @Override
     public void onLumberjackDepositPosted(LumberjackDepositTicketSystem.DepositTicket ticket) {
-        ticket.items.forEach((key, amount) ->
-                townInventory.merge(key, amount, Long::sum));
+        // Paid for like every NPC's deposit (depositItems)
+        Map<String, Integer> items = new HashMap<>();
+        ticket.items.forEach((key, amount) -> items.put(key, (int) Math.min(Integer.MAX_VALUE, amount)));
+        depositItems(ticket.lumberjackUUID, items);
         LumberjackDepositTicketSystem.consumeDeposit(ticket.lumberjackUUID);
         setChanged();
     }
@@ -487,7 +495,7 @@ public class TownHallBlockEntity extends BlockEntity implements
             long available = townInventory.getOrDefault(logKey, 0L);
             if (available <= 0) continue;
             int toTake = (int) Math.min(logsRemaining, available);
-            removeFromTownInventory(logKey, toTake);
+            takeForNpc(request.carpenterUUID, logKey, toTake);
             ResourceLocation loc = ResourceLocation.tryParse(logKey);
             if (loc != null) {
                 net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.get(loc);
@@ -501,7 +509,7 @@ public class TownHallBlockEntity extends BlockEntity implements
         long nailsAvailable = townInventory.getOrDefault("agotmod:nail", 0L);
         if (nailsAvailable > 0) {
             int toTake = (int) Math.min(nailsNeeded, nailsAvailable);
-            removeFromTownInventory("agotmod:nail", toTake);
+            takeForNpc(request.carpenterUUID, "agotmod:nail", toTake);
             ResourceLocation loc = ResourceLocation.tryParse("agotmod:nail");
             if (loc != null) {
                 net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.get(loc);
@@ -514,7 +522,7 @@ public class TownHallBlockEntity extends BlockEntity implements
         long sticksAvailable = townInventory.getOrDefault("minecraft:stick", 0L);
         if (sticksAvailable > 0) {
             int toTake = (int) Math.min(sticksNeeded, sticksAvailable);
-            removeFromTownInventory("minecraft:stick", toTake);
+            takeForNpc(request.carpenterUUID, "minecraft:stick", toTake);
             ResourceLocation loc = ResourceLocation.tryParse("minecraft:stick");
             if (loc != null) {
                 net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.get(loc);
@@ -583,7 +591,7 @@ public class TownHallBlockEntity extends BlockEntity implements
             long available = townInventory.getOrDefault(flowerKey, 0L);
             if (available <= 0) continue;
             int toTake = (int) Math.min(flowersToTake - taken, available);
-            removeFromTownInventory(flowerKey, toTake);
+            takeForNpc(request.tailorUUID, flowerKey, toTake);
             ResourceLocation loc = ResourceLocation.tryParse(flowerKey);
             if (loc != null) {
                 net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.get(loc);
@@ -603,7 +611,7 @@ public class TownHallBlockEntity extends BlockEntity implements
             long available = townInventory.getOrDefault(matKey, 0L);
             if (available <= 0) continue;
             int toTake = (int) Math.min(64, available);
-            removeFromTownInventory(matKey, toTake);
+            takeForNpc(request.tailorUUID, matKey, toTake);
             ResourceLocation loc = ResourceLocation.tryParse(matKey);
             if (loc != null) {
                 net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.get(loc);
@@ -635,7 +643,7 @@ public class TownHallBlockEntity extends BlockEntity implements
         long hidesAvailable = townInventory.getOrDefault("minecraft:rabbit_hide", 0L);
         if (hidesAvailable > 0) {
             int toTake = (int) Math.min(64, hidesAvailable);
-            removeFromTownInventory("minecraft:rabbit_hide", toTake);
+            takeForNpc(request.tannerUUID, "minecraft:rabbit_hide", toTake);
             ResourceLocation hideLoc = ResourceLocation.tryParse("minecraft:rabbit_hide");
             if (hideLoc != null) {
                 net.minecraft.world.item.Item hideItem = BuiltInRegistries.ITEM.get(hideLoc);
@@ -649,7 +657,7 @@ public class TownHallBlockEntity extends BlockEntity implements
         long leatherAvailable = townInventory.getOrDefault("minecraft:leather", 0L);
         if (leatherAvailable > 0) {
             int toTake = (int) Math.min(42, leatherAvailable);
-            removeFromTownInventory("minecraft:leather", toTake);
+            takeForNpc(request.tannerUUID, "minecraft:leather", toTake);
             ResourceLocation leatherLoc = ResourceLocation.tryParse("minecraft:leather");
             if (leatherLoc != null) {
                 net.minecraft.world.item.Item leatherItem = BuiltInRegistries.ITEM.get(leatherLoc);
@@ -663,7 +671,7 @@ public class TownHallBlockEntity extends BlockEntity implements
         long stringAvailable = townInventory.getOrDefault("minecraft:string", 0L);
         if (stringAvailable > 0) {
             int toTake = (int) Math.min(10, stringAvailable);
-            removeFromTownInventory("minecraft:string", toTake);
+            takeForNpc(request.tannerUUID, "minecraft:string", toTake);
             ResourceLocation stringLoc = ResourceLocation.tryParse("minecraft:string");
             if (stringLoc != null) {
                 net.minecraft.world.item.Item stringItem = BuiltInRegistries.ITEM.get(stringLoc);
@@ -699,7 +707,7 @@ public class TownHallBlockEntity extends BlockEntity implements
             long available = townInventory.getOrDefault(logKey, 0L);
             if (available <= 0) continue;
             int toTake = (int) Math.min(remaining, available);
-            removeFromTownInventory(logKey, toTake);
+            takeForNpc(ticket.charcoalBurnerUUID, logKey, toTake);
             ResourceLocation loc = ResourceLocation.tryParse(logKey);
             if (loc != null) {
                 net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.get(loc);
@@ -726,7 +734,7 @@ public class TownHallBlockEntity extends BlockEntity implements
             long available = townInventory.getOrDefault(coalKey, 0L);
             if (available <= 0) continue;
             int toTake = (int) Math.min(coalRemaining, available);
-            removeFromTownInventory(coalKey, toTake);
+            takeForNpc(ticket.smelterUUID, coalKey, toTake);
             ResourceLocation loc = ResourceLocation.tryParse(coalKey);
             if (loc != null) {
                 net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.get(loc);
@@ -746,7 +754,7 @@ public class TownHallBlockEntity extends BlockEntity implements
             long available = townInventory.getOrDefault(oreKey, 0L);
             if (available <= 0) continue;
             int toTake = (int) Math.min(oreRemaining, available);
-            removeFromTownInventory(oreKey, toTake);
+            takeForNpc(ticket.smelterUUID, oreKey, toTake);
             ResourceLocation loc = ResourceLocation.tryParse(oreKey);
             if (loc != null) {
                 net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.get(loc);
@@ -779,7 +787,7 @@ public class TownHallBlockEntity extends BlockEntity implements
 
         if (available > 0) {
             int toTake = (int) Math.min(ticket.amountNeeded, available);
-            removeFromTownInventory(breedingItemKey, toTake);
+            takeForNpc(ticket.peasantUUID, breedingItemKey, toTake);
             ResourceLocation loc = ResourceLocation.tryParse(breedingItemKey);
             if (loc != null) {
                 net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.get(loc);
@@ -791,7 +799,7 @@ public class TownHallBlockEntity extends BlockEntity implements
         if (JobSystem.JOB_CATTLE_HERDER.equals(ticket.jobType) && level instanceof ServerLevel serverLevel
                 && serverLevel.getEntity(ticket.peasantUUID) instanceof Peasant_Entity herder) {
             int buckets = net.darkflameproduction.agotmod.entity.custom.npc.system.supply.Milking.bucketsToHandOut(this, herder);
-            if (buckets > 0 && removeFromTownInventory("minecraft:bucket", buckets)) {
+            if (buckets > 0 && takeForNpc(ticket.peasantUUID, "minecraft:bucket", buckets)) {
                 for (int i = 0; i < buckets; i++) toGive.add(new ItemStack(Items.BUCKET));
             }
         }
@@ -941,8 +949,10 @@ public class TownHallBlockEntity extends BlockEntity implements
             blockEntity.shouldSendDataUpdate = false;
         }
 
-        // Keep the town hall screen current for players at the town hall (stores, crafting needs...)
+        // Settle the day that ended (its tax) as a new one starts, and keep the town hall screen current for players at the
+        // town hall (stores, crafting needs...)
         if (level.getGameTime() % SCREEN_REFRESH_INTERVAL == 0) {
+            blockEntity.settleDay();
             blockEntity.refreshNearbyScreens(level);
         }
     }
@@ -962,7 +972,7 @@ public class TownHallBlockEntity extends BlockEntity implements
                         worldPosition, bedCount, citizenCount, getCurrentScanRadius(), townName, isClaimed,
                         getClaimedByHouse(), getAvailableJobCount(), getAssignedJobCount(), getTotalJobCount(),
                         getJoblessCount(), townBalance, townIncome, new java.util.HashMap<>(townInventory),
-                        culture.name(), getCitizenEntries(), getCraftingNeeds());
+                        culture.name(), getCitizenEntries(), getCraftingNeeds(), getEarnings());
             }
             net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer, packet);
         }
@@ -1221,23 +1231,113 @@ public class TownHallBlockEntity extends BlockEntity implements
     }
 
     private void processSingleDeposit(FarmerDepositTicketSystem.DepositTicket ticket) {
-        depositItems(ticket.items);
+        depositItems(ticket.farmerUUID, ticket.items);
         FarmerDepositTicketSystem.confirmDeposit(ticket.farmerUUID);
     }
 
     /** Adds deposited items to the town's stores; the town earns 10% of their value. */
     public void depositItems(Map<String, Integer> items) {
+        depositItems(null, items);
+    }
+
+    /**
+     * An NPC ({@code npc}, null if unknown) hands items in. What he took from the stores and paid for since he
+     * last handed anything in and now brings back unused is refunded what he paid (takeForNpc). The rest he
+     * sells to the town like a player selling to a shop (ItemPricing.SHOP_BUY_MULTIPLIER - halved while the
+     * town is in debt): the town pays for it out of its balance, which may go below zero. The NPC himself
+     * gets nothing. Whatever he took and doesn't bring back he used up - paid for.
+     */
+    public void depositItems(@Nullable UUID npc, Map<String, Integer> items) {
+        Map<String, long[]> taken = npc == null ? null : npcWithdrawals.remove(npc);
+        String job = jobOf(npc);
+        float sellMultiplier = net.darkflameproduction.agotmod.util.ItemPricing.SHOP_BUY_MULTIPLIER * sellPriceFactor();
         for (Map.Entry<String, Integer> entry : items.entrySet()) {
             String itemKey = entry.getKey();
             int count = entry.getValue();
             if (count <= 0) continue;
             addToTownInventory(itemKey, count);
-            int itemPrice = net.darkflameproduction.agotmod.util.ItemPricing.getItemPrice(itemKey);
-            if (itemPrice > 0) {
-                long income = (long) Math.ceil(count * itemPrice * 0.1);
-                addToTownBalance(income);
+            long[] took = taken == null ? null : taken.get(itemKey);
+            long returned = took == null ? 0 : Math.min(count, took[0]);
+            if (returned > 0) refundWithdrawal(took[1] * returned / took[0], job);
+            long deposited = count - returned;
+            if (deposited > 0) {
+                chargeTownBalance(deposited * net.darkflameproduction.agotmod.util.ItemPricing.applyMultiplier(itemKey, sellMultiplier),
+                        CashFlow.NPC_DEPOSITS, job);
             }
         }
+        setChanged();
+    }
+
+    /** What each NPC has taken from the stores since he last handed anything in: item -> {count, coins paid}. */
+    private final Map<UUID, Map<String, long[]>> npcWithdrawals = new HashMap<>();
+
+    /**
+     * An NPC ({@code npc}, null if unknown) takes {@code amount} of {@code itemKey} from the stores: the town is
+     * paid its value (ItemPricing - doubled while the town is in debt), counted as income. False (nothing
+     * taken) if the stores have too little.
+     */
+    public boolean takeForNpc(@Nullable UUID npc, String itemKey, long amount) {
+        if (!removeFromTownInventory(itemKey, amount)) return false;
+        payForWithdrawal(npc, itemKey, amount);
+        return true;
+    }
+
+    /** The payment of takeForNpc, for an NPC that has already taken the items out of the stores. */
+    public void payForWithdrawal(@Nullable UUID npc, String itemKey, long amount) {
+        if (amount <= 0) return;
+        long paid = amount * net.darkflameproduction.agotmod.util.ItemPricing.applyMultiplier(itemKey, buyPriceFactor());
+        addToTownBalance(paid, CashFlow.NPC_SUPPLIES, jobOf(npc));
+        if (npc != null) {
+            long[] took = npcWithdrawals.computeIfAbsent(npc, k -> new HashMap<>()).computeIfAbsent(itemKey, k -> new long[2]);
+            took[0] += amount;
+            took[1] += paid;
+        }
+        setChanged();
+    }
+
+    /** Pays back {@code value} for items returned unused: off the balance (into debt if need be) and today's earnings. */
+    private void refundWithdrawal(long value, @Nullable String job) {
+        if (value <= 0) return;
+        townBalance -= value;
+        rollEarningsDay();
+        earnedToday = Math.max(0, earnedToday - value);
+        book(CashFlow.REFUNDS, job, value);
+        setChanged();
+    }
+
+    // ===== TAX AND DEBT =====
+
+    /** The share of the day's net earnings that goes to the treasury - only on a day the town made money (rollEarningsDay). */
+    public static final double TAX_RATE = 0.05;
+
+    /** A town with a negative balance is in debt. */
+    public boolean isInDebt() {
+        return townBalance < 0;
+    }
+
+    /** What anyone buying from the town pays, as a share of the usual price: double while it is in debt. */
+    public float buyPriceFactor() {
+        return isInDebt() ? 2.0f : 1.0f;
+    }
+
+    /** What the town pays anyone selling to it, as a share of the usual price: half while it is in debt. */
+    public float sellPriceFactor() {
+        return isInDebt() ? 0.5f : 1.0f;
+    }
+
+    /** Takes {@code amount} off the balance even if that puts the town in debt (NPC deposits). */
+    public void chargeTownBalance(long amount, CashFlow flow, @Nullable String job) {
+        if (amount <= 0) return;
+        townBalance -= amount;
+        book(flow, job, amount);
+        setChanged();
+    }
+
+    /** The job of one of the town's citizens (for the cash flow table); null if unknown or jobless. */
+    @Nullable
+    private String jobOf(@Nullable UUID npc) {
+        CitizenInfo citizen = npc == null ? null : registeredCitizens.get(npc);
+        return citizen == null || citizen.currentJob == null || citizen.currentJob.isEmpty() ? null : citizen.currentJob;
     }
 
     private void processFarmerDepositTickets() {
@@ -1468,7 +1568,8 @@ public class TownHallBlockEntity extends BlockEntity implements
                                     new java.util.HashMap<>(this.townInventory),
                                     this.culture.name(),
                                     this.getCitizenEntries(),
-                                    this.getCraftingNeeds()
+                                    this.getCraftingNeeds(),
+                                    this.getEarnings()
                             ));
                 }
             }
@@ -1499,7 +1600,8 @@ public class TownHallBlockEntity extends BlockEntity implements
                                     new java.util.HashMap<>(this.townInventory),
                                     this.culture.name(),
                                     this.getCitizenEntries(),
-                                    this.getCraftingNeeds()
+                                    this.getCraftingNeeds(),
+                                    this.getEarnings()
                             ));
                 }
             }
@@ -1534,7 +1636,8 @@ public class TownHallBlockEntity extends BlockEntity implements
                                     new java.util.HashMap<>(this.townInventory),
                                     this.culture.name(),
                                     this.getCitizenEntries(),
-                                    this.getCraftingNeeds()
+                                    this.getCraftingNeeds(),
+                                    this.getEarnings()
                             ));
                 }
             }
@@ -1694,21 +1797,15 @@ public class TownHallBlockEntity extends BlockEntity implements
                         net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(stack.getItem());
                 if (itemLoc != null) {
                     String itemKey = itemLoc.toString();
-                    long unitPrice = net.darkflameproduction.agotmod.util.ItemPricing.getItemPrice(itemKey);
+                    // Doubled while the town is in debt, like everything bought from it
+                    long unitPrice = net.darkflameproduction.agotmod.util.ItemPricing.applyMultiplier(itemKey, buyPriceFactor());
                     totalValue += unitPrice * stack.getCount();
                 }
             }
 
-            // Add total value to town balance
+            // Add total value to town balance (taxed once a day, on the day's net earnings - rollEarningsDay)
             if (totalValue > 0) {
-                addToTownBalance(totalValue);
-
-                // Apply 20% tax â€” move from townBalance to townIncome
-                long taxAmount = (long) Math.floor(totalValue * 0.2);
-                if (taxAmount > 0) {
-                    deductFromTownBalance(taxAmount);
-                    addToTownIncome(taxAmount);
-                }
+                addToTownBalance(totalValue, CashFlow.NPC_FOOD, jobOf(ticket.peasantUUID));
             }
         }
 
@@ -1817,13 +1914,80 @@ public class TownHallBlockEntity extends BlockEntity implements
      * The town's supply chain needs (SupplyChain.townNeeds): everything its crafting NPCs can make that the
      * town hall holds too little of, with the jobs that make it and whether the town has anyone with one.
      * A row only goes once the town hall itself holds enough - what NPCs carry doesn't count.
+     *
+     * Above them, the required trades: the basic goods the town's jobs need that it is short of (TownDemand),
+     * which its trader buys. An item listed as a trade isn't listed again as a craft. Below them, the sell
+     * list: what the town holds more of than it may (TownSurplus), which its trader sells off.
      */
     public List<net.darkflameproduction.agotmod.network.TownHallDataPacket.CraftingNeed> getCraftingNeeds() {
         Set<String> jobsInTown = new HashSet<>();
         for (CitizenInfo citizen : registeredCitizens.values()) {
             if (citizen.currentJob != null) jobsInTown.add(citizen.currentJob);
         }
-        return net.darkflameproduction.agotmod.entity.custom.npc.system.supply.SupplyChain.townNeeds(this, jobsInTown);
+        List<net.darkflameproduction.agotmod.network.TownHallDataPacket.CraftingNeed> needs = new ArrayList<>();
+        Set<String> traded = new HashSet<>();
+        boolean hasTrader = jobsInTown.contains(JobSystem.JOB_TRADER);
+        for (net.darkflameproduction.agotmod.entity.custom.npc.system.trader.TownDemand.Demand demand : getDemands()) {
+            if (demand.shortfall() <= 0) continue;
+            String item = net.darkflameproduction.agotmod.entity.custom.npc.system.trader.TownDemand.displayItem(demand.key());
+            needs.add(new net.darkflameproduction.agotmod.network.TownHallDataPacket.CraftingNeed(item,
+                    net.darkflameproduction.agotmod.entity.custom.npc.system.trader.TownDemand.label(demand.key()),
+                    JobSystem.JOB_TRADER, (int) Math.min(Integer.MAX_VALUE, demand.have()),
+                    (int) Math.min(Integer.MAX_VALUE, demand.want()), false, hasTrader, true, false));
+            traded.add(demand.key());
+        }
+        for (var need : net.darkflameproduction.agotmod.entity.custom.npc.system.supply.SupplyChain.townNeeds(this, jobsInTown)) {
+            if (!traded.contains(need.itemKey())) needs.add(need);
+        }
+        // Last, the sell list: what the town holds too much of, which its trader sells off
+        for (var surplus : getSurplus()) {
+            needs.add(new net.darkflameproduction.agotmod.network.TownHallDataPacket.CraftingNeed(surplus.itemKey(), "",
+                    JobSystem.JOB_TRADER, (int) Math.min(Integer.MAX_VALUE, surplus.have()),
+                    (int) Math.min(Integer.MAX_VALUE, surplus.cap()), false, hasTrader, false, true));
+        }
+        return needs;
+    }
+
+    /** How many citizens have each job (jobless citizens aside). */
+    public Map<String, Integer> getJobCounts() {
+        Map<String, Integer> counts = new HashMap<>();
+        for (CitizenInfo citizen : registeredCitizens.values()) {
+            if (citizen.currentJob != null && !citizen.currentJob.isEmpty()) counts.merge(citizen.currentJob, 1, Integer::sum);
+        }
+        return counts;
+    }
+
+    /** The registered citizens - everyone the town feeds. */
+    public int getRegisteredCitizenCount() {
+        return registeredCitizens.size();
+    }
+
+    /** The basic goods the town needs for its citizens to work and eat (TownDemand), most important first. */
+    public List<net.darkflameproduction.agotmod.entity.custom.npc.system.trader.TownDemand.Demand> getDemands() {
+        return net.darkflameproduction.agotmod.entity.custom.npc.system.trader.TownDemand.of(this);
+    }
+
+    /** True once a day: the first trader to ask gets to buy the town's supplies (TraderPurchasing). */
+    public boolean claimTraderRestock(long day) {
+        if (lastTraderRestockDay == day) return false;
+        lastTraderRestockDay = day;
+        setChanged();
+        return true;
+    }
+
+    /** When the town's trader last sold off its surplus (TownSurplus) - game time, not saved. */
+    private long lastTraderSaleTime = Long.MIN_VALUE / 2;
+
+    /** True at most once every {@code interval} ticks: the trader that asks gets to sell the town's surplus. */
+    public boolean claimTraderSale(long gameTime, int interval) {
+        if (gameTime - lastTraderSaleTime < interval && gameTime >= lastTraderSaleTime) return false;
+        lastTraderSaleTime = gameTime;
+        return true;
+    }
+
+    /** The town's sell list: what it holds more of than it may (TownSurplus). */
+    public List<net.darkflameproduction.agotmod.entity.custom.npc.system.trader.TownSurplus.Surplus> getSurplus() {
+        return net.darkflameproduction.agotmod.entity.custom.npc.system.trader.TownSurplus.of(this);
     }
 
     /** The town's citizens (name and job, from their CitizenReportSystem reports), sorted by name, for the client. */
@@ -1847,15 +2011,111 @@ public class TownHallBlockEntity extends BlockEntity implements
         townInventory.entrySet().removeIf(entry -> entry.getValue() <= 0);
     }
 
-    public void addToTownBalance(long amount) {
+    /** Adds income to the balance, booked under {@code flow} (an income CashFlow) and counted in today's earnings. */
+    public void addToTownBalance(long amount, CashFlow flow) {
+        addToTownBalance(amount, flow, null);
+    }
+
+    /** Adds income to the balance from a citizen with {@code job} (null if none), for the cash flow table. */
+    public void addToTownBalance(long amount, CashFlow flow, @Nullable String job) {
         if (amount <= 0) return;
         townBalance += amount;
+        rollEarningsDay();
+        earnedToday += amount;
+        book(flow, job, amount);
         setChanged();
     }
 
-    public boolean deductFromTownBalance(long amount) {
+    /**
+     * Today's and yesterday's money in and out, by CashFlow and the job of the citizen it came from or went to:
+     * "FLOW|job" (job empty when it's not a citizen's) -> coins.
+     */
+    private Map<String, Long> flowToday = new HashMap<>();
+    private Map<String, Long> flowYesterday = new HashMap<>();
+
+    /** Books {@code amount} under {@code flow} for a citizen with {@code job} (null if none). */
+    private void book(CashFlow flow, @Nullable String job, long amount) {
+        if (amount <= 0) return;
+        rollEarningsDay();
+        flowToday.merge(flow.name() + "|" + (job == null ? "" : job), amount, Long::sum);
+    }
+
+    private static CompoundTag flowsTag(Map<String, Long> flows) {
+        CompoundTag tag = new CompoundTag();
+        flows.forEach(tag::putLong);
+        return tag;
+    }
+
+    private static Map<String, Long> flowsFrom(CompoundTag tag) {
+        Map<String, Long> flows = new HashMap<>();
+        for (String key : tag.getAllKeys()) flows.put(key.contains("|") ? key : key + "|", tag.getLong(key)); // older saves: no job
+        return flows;
+    }
+
+    /** What the town earned yesterday - everything added to its balance that day (0 if it earned nothing). */
+    public long getEarnedYesterday() {
+        rollEarningsDay();
+        return earnedYesterday;
+    }
+
+    /** Today's and yesterday's earnings and cash flow and the trader's budget, for the town hall screen. */
+    public net.darkflameproduction.agotmod.network.TownHallDataPacket.Earnings getEarnings() {
+        rollEarningsDay();
+        return new net.darkflameproduction.agotmod.network.TownHallDataPacket.Earnings(earnedToday, earnedYesterday,
+                net.darkflameproduction.agotmod.entity.custom.npc.system.trader.TraderPurchasing.budget(this),
+                new HashMap<>(flowToday), new HashMap<>(flowYesterday));
+    }
+
+    /**
+     * On a new day: the day that ended is taxed - {@link #TAX_RATE} of what it made, if it made money (its income
+     * less its expenses), moved from the balance to the treasury; a day that lost money pays no tax. Then today's
+     * earnings and cash flow become yesterday's (nothing, if a day or more went by without any).
+     */
+    private void rollEarningsDay() {
+        if (level == null) return;
+        long day = level.getDayTime() / 24000;
+        if (day == earningsDay) return;
+        long net = 0;
+        for (Map.Entry<String, Long> entry : flowToday.entrySet()) {
+            CashFlow flow = flowOf(entry.getKey());
+            if (flow != null) net += flow.income ? entry.getValue() : -entry.getValue();
+        }
+        long tax = net > 0 ? (long) Math.floor(net * TAX_RATE) : 0;
+        if (tax > 0) {
+            townBalance -= tax;
+            townIncome += tax;
+            flowToday.merge(CashFlow.TAXES.name() + "|", tax, Long::sum);
+        }
+        boolean consecutive = day == earningsDay + 1;
+        earnedYesterday = consecutive ? earnedToday : 0;
+        earnedToday = 0;
+        flowYesterday = consecutive ? flowToday : new HashMap<>();
+        flowToday = new HashMap<>();
+        earningsDay = day;
+        setChanged();
+    }
+
+    /** The CashFlow of a "FLOW|job" key; null if there is none by that name. */
+    @Nullable
+    public static CashFlow flowOf(String key) {
+        int bar = key.indexOf('|');
+        try {
+            return CashFlow.valueOf(bar < 0 ? key : key.substring(0, bar));
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
+    }
+
+    /** Called regularly so the day's tax is settled as soon as a new day starts, not only on the next payment. */
+    public void settleDay() {
+        rollEarningsDay();
+    }
+
+    /** Spends {@code amount} if the town has it (never into debt), booked under {@code flow} (an expense CashFlow). */
+    public boolean deductFromTownBalance(long amount, CashFlow flow) {
         if (townBalance < amount) return false;
         townBalance -= amount;
+        book(flow, null, amount);
         setChanged();
         return true;
     }
@@ -1905,6 +2165,12 @@ public class TownHallBlockEntity extends BlockEntity implements
 
         tag.putLong("LastScanDay", lastScanDay);
         tag.putLong("LastChildSpawnDay", lastChildSpawnDay);
+        tag.putLong("LastTraderRestockDay", lastTraderRestockDay);
+        tag.putLong("EarningsDay", earningsDay);
+        tag.putLong("EarnedToday", earnedToday);
+        tag.putLong("EarnedYesterday", earnedYesterday);
+        tag.put("CashFlowToday", flowsTag(flowToday));
+        tag.put("CashFlowYesterday", flowsTag(flowYesterday));
         tag.putBoolean("HasScannedToday", hasScannedToday);
 
         tag.putInt("TicksSinceLastRegister", ticksSinceLastRegister);
@@ -1968,6 +2234,14 @@ public class TownHallBlockEntity extends BlockEntity implements
             reputationTag.putInt(entry.getKey().toString(), entry.getValue());
         }
         tag.put("PlayerReputation", reputationTag);
+
+        CompoundTag withdrawalsTag = new CompoundTag();
+        for (Map.Entry<UUID, Map<String, long[]>> npc : npcWithdrawals.entrySet()) {
+            CompoundTag itemsTag = new CompoundTag();
+            npc.getValue().forEach((item, took) -> itemsTag.putLongArray(item, took.clone())); // {count, coins paid}
+            withdrawalsTag.put(npc.getKey().toString(), itemsTag);
+        }
+        tag.put("NpcWithdrawals", withdrawalsTag);
     }
 
     @Override
@@ -1988,6 +2262,12 @@ public class TownHallBlockEntity extends BlockEntity implements
 
         lastScanDay      = tag.getLong("LastScanDay");
         lastChildSpawnDay = tag.getLong("LastChildSpawnDay");
+        lastTraderRestockDay = tag.contains("LastTraderRestockDay") ? tag.getLong("LastTraderRestockDay") : -1;
+        earningsDay     = tag.contains("EarningsDay") ? tag.getLong("EarningsDay") : -1;
+        earnedToday     = tag.getLong("EarnedToday");
+        earnedYesterday = tag.getLong("EarnedYesterday");
+        flowToday       = flowsFrom(tag.getCompound("CashFlowToday"));
+        flowYesterday   = flowsFrom(tag.getCompound("CashFlowYesterday"));
         hasScannedToday  = tag.getBoolean("HasScannedToday");
 
         ticksSinceLastRegister      = tag.getInt("TicksSinceLastRegister");
@@ -2071,6 +2351,24 @@ public class TownHallBlockEntity extends BlockEntity implements
         for (String key : reputationTag.getAllKeys()) {
             try {
                 playerReputation.put(UUID.fromString(key), reputationTag.getInt(key));
+            } catch (IllegalArgumentException ignored) {}
+        }
+
+        npcWithdrawals.clear();
+        CompoundTag withdrawalsTag = tag.getCompound("NpcWithdrawals");
+        for (String key : withdrawalsTag.getAllKeys()) {
+            try {
+                CompoundTag itemsTag = withdrawalsTag.getCompound(key);
+                Map<String, long[]> items = new HashMap<>();
+                for (String item : itemsTag.getAllKeys()) {
+                    long[] took = itemsTag.getLongArray(item);
+                    if (took.length != 2) { // older saves kept only the count: paid at the base price
+                        long count = itemsTag.getLong(item);
+                        took = new long[]{count, count * net.darkflameproduction.agotmod.util.ItemPricing.getItemPrice(item)};
+                    }
+                    if (took[0] > 0) items.put(item, took);
+                }
+                npcWithdrawals.put(UUID.fromString(key), items);
             } catch (IllegalArgumentException ignored) {}
         }
 

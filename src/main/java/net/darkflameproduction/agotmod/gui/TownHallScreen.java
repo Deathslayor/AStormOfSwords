@@ -60,6 +60,8 @@ public class TownHallScreen extends Screen {
     private String claimedByHouse = "";
     private long   townBalance    = 0;
     private long   townIncome     = 0;
+    private net.darkflameproduction.agotmod.network.TownHallDataPacket.Earnings earnings =
+            new net.darkflameproduction.agotmod.network.TownHallDataPacket.Earnings(0, 0, 0, Map.of(), Map.of());
 
     // Job data
     private int availableJobCount = 0;
@@ -297,11 +299,13 @@ public class TownHallScreen extends Screen {
             currentInstance.townNameInput.setValue(townName);
     }
 
-    public static void updateFinances(BlockPos packetPos, long townBalance, long townIncome) {
+    public static void updateFinances(BlockPos packetPos, long townBalance, long townIncome,
+                                      net.darkflameproduction.agotmod.network.TownHallDataPacket.Earnings earnings) {
         if (currentInstance == null) return;
         if (!packetPos.equals(currentInstance.townHallPos)) return;
         currentInstance.townBalance = townBalance;
         currentInstance.townIncome  = townIncome;
+        currentInstance.earnings    = earnings;
     }
 
     public static void updateInventory(BlockPos packetPos, Map<String, Long> inventory) {
@@ -463,6 +467,10 @@ public class TownHallScreen extends Screen {
 
     // ===== FINANCES TAB =====
 
+    /**
+     * The town's finances: its balance, treasury, trader budget and debt at the top, and below them a cash
+     * flow table - every kind of money in and out (CashFlow), today and yesterday, with totals and the net.
+     */
     private void drawFinancesTab(GuiGraphics g) {
         int x = getContentX();
         int y = getContentStartY();
@@ -471,8 +479,193 @@ public class TownHallScreen extends Screen {
         drawSectionHeader(g, "Finances", x, y, w, COLOR_HEADER);
         y += 20;
 
-        drawLabelValue(g, "Town Balance", formatCurrency(townBalance), x, y, COLOR_GOLD); y += 16;
-        drawLabelValue(g, "Treasury",     formatCurrency(townIncome),  x, y, COLOR_GOLD);
+        // Summary, two columns
+        int right = x + w / 2;
+        drawLabelValue(g, "Town Balance", formatCurrency(townBalance), x, y, townBalance < 0 ? COLOR_RED : COLOR_GOLD);
+        boolean hasTrader = citizens.stream().anyMatch(c ->
+                net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem.JOB_TRADER.equals(c.jobType()));
+        if (hasTrader) {
+            drawLabelValue(g, "Trader Budget", formatCurrency(earnings.traderBudget()) + " / day", right, y,
+                    earnings.traderBudget() > 0 ? COLOR_GOLD : COLOR_RED);
+        } else {
+            drawLabelValue(g, "Trader Budget", "No trader", right, y, COLOR_GRAY);
+        }
+        y += 14;
+        drawLabelValue(g, "Treasury", formatCurrency(townIncome), x, y, COLOR_GOLD);
+        // A town in debt charges double and pays half (TownHallBlockEntity.buyPriceFactor / sellPriceFactor)
+        if (townBalance < 0) drawLabelValue(g, "In Debt", "prices x2, sell value x0.5", right, y, COLOR_RED);
+        else drawLabelValue(g, "Status", "Solvent", right, y, COLOR_GREEN);
+        y += 20;
+
+        drawCashFlowTable(g, x, y, w, getInvPanelY() + getInvPanelH() - y);
+    }
+
+    private static final int TABLE_ROW = 12;
+    private static final int TABLE_LINE = 0x40000000;
+    /** The cash flow tables are drawn small - at most like the other lists (INV_SCALE), smaller if need be to fit. */
+    private static final float TABLE_MAX_SCALE = INV_SCALE;
+    /** Room between the income and expenses tables, in table units. */
+    private static final int TABLE_GAP = 10;
+
+    // Kinds of row in the cash flow tables
+    private static final int ROW_FLOW = 1, ROW_JOB = 2, ROW_TOTAL = 3;
+
+    /** A row of a cash flow table. */
+    private record FinanceRow(int kind, String label, long today, long yesterday) {}
+
+    /**
+     * The cash flow, spreadsheet style: income on the left and expenses on the right - each kind of money in
+     * or out, with what each kind of citizen paid or was paid ("Farmer ×5": the town's 5 farmers) and the
+     * total - and the net below both. Scaled down until it all fits: no scrolling.
+     */
+    private void drawCashFlowTable(GuiGraphics g, int x, int y, int w, int maxH) {
+        long[] incomeTotal = new long[2];
+        long[] expenseTotal = new long[2];
+        List<FinanceRow> income = financeRows(true, incomeTotal);
+        List<FinanceRow> expenses = financeRows(false, expenseTotal);
+
+        // Header, the longer table's rows, a gap and the net row
+        int shown = Math.max(income.size(), expenses.size());
+        int neededH = (shown + 1) * TABLE_ROW + 6 + TABLE_ROW + 3;
+        float scale = Math.min(TABLE_MAX_SCALE, maxH / (float) neededH);
+        listScrollOffset = 0;
+
+        int tw = Math.round(w / scale);
+        int tableW = (tw - TABLE_GAP) / 2;
+
+        g.pose().pushPose();
+        g.pose().translate(x, y, 0);
+        g.pose().scale(scale, scale, 1f);
+
+        drawFinanceTable(g, 0, tableW, "Income", income, shown, COLOR_GREEN, false);
+        drawFinanceTable(g, tableW + TABLE_GAP, tableW, "Expenses", expenses, shown, COLOR_RED, true);
+
+        // Net, under both tables
+        int netTop = (shown + 1) * TABLE_ROW + 6;
+        long netToday = incomeTotal[0] - expenseTotal[0];
+        long netYesterday = incomeTotal[1] - expenseTotal[1];
+        g.fill(0, netTop, tw, netTop + TABLE_ROW + 2, 0x50000000);
+        int textY = netTop + (TABLE_ROW + 2 - font.lineHeight) / 2 + 1;
+        g.drawString(font, "Net", 4, textY, TEXT_COLOR, false);
+        String today = "Today: " + signed(netToday);
+        String yesterday = "Yesterday: " + signed(netYesterday);
+        g.drawString(font, today, tw / 2 - font.width(today) - 10, textY, netToday < 0 ? COLOR_RED : COLOR_GREEN, false);
+        g.drawString(font, yesterday, tw - font.width(yesterday) - 4, textY, netYesterday < 0 ? COLOR_RED : COLOR_GREEN, false);
+        g.fill(0, netTop, tw, netTop + 1, 0x80000000);
+        g.fill(0, netTop + TABLE_ROW + 2, tw, netTop + TABLE_ROW + 3, 0x80000000);
+        g.fill(0, netTop, 1, netTop + TABLE_ROW + 3, 0x80000000);
+        g.fill(tw - 1, netTop, tw, netTop + TABLE_ROW + 3, 0x80000000);
+
+        g.pose().popPose();
+    }
+
+    /** One table (income or expenses) at {@code left}: its header, its rows ({@code shown} high) and its grid. */
+    private void drawFinanceTable(GuiGraphics g, int left, int w, String title, List<FinanceRow> rows, int shown,
+                                  int color, boolean expense) {
+        int catW = w / 2;
+        int colW = (w - catW) / 2;
+        int todayX = left + catW + colW - 4;
+        int yesterdayX = left + catW + 2 * colW - 4;
+
+        g.fill(left, 0, left + w, TABLE_ROW, COLOR_HEADER);
+        drawCellText(g, 0, title, left + 4, false, 0xFFFFFFFF);
+        drawCellText(g, 0, "Today", todayX, true, 0xFFFFFFFF);
+        drawCellText(g, 0, "Yesterday", yesterdayX, true, 0xFFFFFFFF);
+
+        for (int i = 0; i < shown; i++) {
+            int row = i + 1;
+            int index = i;
+            if (index >= rows.size()) continue;
+            FinanceRow r = rows.get(index);
+            int top = row * TABLE_ROW;
+            boolean job = r.kind() == ROW_JOB;
+            if (r.kind() == ROW_TOTAL) g.fill(left, top, left + w, top + TABLE_ROW, expense ? 0x40D32F2F : 0x402E7D32);
+            else if (r.kind() == ROW_FLOW) g.fill(left, top, left + w, top + TABLE_ROW, 0x14000000);
+            int valueColor = job ? lighter(color) : color;
+            drawCellText(g, row, r.label(), left + (job ? 14 : 4), false, job ? COLOR_GRAY : TEXT_COLOR);
+            drawCellText(g, row, amount(r.today(), expense), todayX, true, r.today() == 0 ? COLOR_GRAY : valueColor);
+            drawCellText(g, row, amount(r.yesterday(), expense), yesterdayX, true, r.yesterday() == 0 ? COLOR_GRAY : valueColor);
+        }
+
+        // Grid: a line under every row, column dividers and the border
+        int h = (shown + 1) * TABLE_ROW;
+        for (int row = 1; row <= shown; row++) g.fill(left, row * TABLE_ROW, left + w, row * TABLE_ROW + 1, TABLE_LINE);
+        g.fill(left + catW, 0, left + catW + 1, h, TABLE_LINE);
+        g.fill(left + catW + colW, 0, left + catW + colW + 1, h, TABLE_LINE);
+        g.fill(left, 0, left + w, 1, 0x80000000);
+        g.fill(left, h, left + w, h + 1, 0x80000000);
+        g.fill(left, 0, left + 1, h, 0x80000000);
+        g.fill(left + w - 1, 0, left + w, h + 1, 0x80000000);
+    }
+
+    /**
+     * The rows of the income ({@code income}) or expenses table: each kind of flow, broken down by job, and the
+     * total. Its {today, yesterday} total goes into {@code total}.
+     */
+    private List<FinanceRow> financeRows(boolean income, long[] total) {
+        // "FLOW|job" -> {today, yesterday}
+        Map<String, long[]> amounts = new HashMap<>();
+        earnings.flowsToday().forEach((key, value) -> amounts.computeIfAbsent(key, k -> new long[2])[0] += value);
+        earnings.flowsYesterday().forEach((key, value) -> amounts.computeIfAbsent(key, k -> new long[2])[1] += value);
+        Map<String, Integer> jobCounts = new HashMap<>();
+        for (var citizen : citizens) jobCounts.merge(citizen.jobType(), 1, Integer::sum);
+
+        List<FinanceRow> rows = new ArrayList<>();
+        for (var flow : net.darkflameproduction.agotmod.block.custom.CashFlow.values()) {
+            if (flow.income != income) continue;
+            long[] sum = new long[2];
+            Map<String, long[]> byJob = new HashMap<>();
+            for (Map.Entry<String, long[]> entry : amounts.entrySet()) {
+                String key = entry.getKey();
+                int bar = key.indexOf('|');
+                if (!(bar < 0 ? key : key.substring(0, bar)).equals(flow.name())) continue;
+                sum[0] += entry.getValue()[0];
+                sum[1] += entry.getValue()[1];
+                String job = bar < 0 ? "" : key.substring(bar + 1);
+                long[] jobSum = byJob.computeIfAbsent(job, k -> new long[2]);
+                jobSum[0] += entry.getValue()[0];
+                jobSum[1] += entry.getValue()[1];
+            }
+            rows.add(new FinanceRow(ROW_FLOW, flow.label, sum[0], sum[1]));
+            // Who it came from or went to - only when a citizen's job is known for some of it
+            if (byJob.keySet().stream().anyMatch(job -> !job.isEmpty())) {
+                byJob.entrySet().stream()
+                        .sorted((a, b) -> Long.compare(b.getValue()[0] + b.getValue()[1], a.getValue()[0] + a.getValue()[1]))
+                        .forEach(entry -> {
+                            String job = entry.getKey();
+                            String label = job.isEmpty() ? "Other"
+                                    : formatJobName(job) + " ×" + jobCounts.getOrDefault(job, 0);
+                            rows.add(new FinanceRow(ROW_JOB, label, entry.getValue()[0], entry.getValue()[1]));
+                        });
+            }
+            total[0] += sum[0];
+            total[1] += sum[1];
+        }
+        rows.add(new FinanceRow(ROW_TOTAL, "Total " + (income ? "income" : "expenses"), total[0], total[1]));
+        return rows;
+    }
+
+    /** A paler shade of a colour, for the job rows under a flow. */
+    private static int lighter(int color) {
+        int r = (color >> 16) & 0xFF, g = (color >> 8) & 0xFF, b = color & 0xFF;
+        return 0xFF000000 | ((r + 255) / 2 << 16) | ((g + 255) / 2 << 8) | (b + 255) / 2;
+    }
+
+    /** Text in a table row: left-aligned from {@code x}, or right-aligned to it. */
+    private void drawCellText(GuiGraphics g, int row, String text, int x, boolean alignRight, int color) {
+        int textY = row * TABLE_ROW + (TABLE_ROW - font.lineHeight) / 2 + 1;
+        g.drawString(font, text, alignRight ? x - font.width(text) : x, textY, color, false);
+    }
+
+    /** An amount in coins, thousands separated; expenses with a minus. */
+    private static String amount(long value, boolean expense) {
+        if (value == 0) return "0";
+        return (expense ? "-" : "") + String.format("%,d", value);
+    }
+
+    /** The net: with a + or - sign. */
+    private static String signed(long value) {
+        return (value > 0 ? "+" : value < 0 ? "-" : "") + String.format("%,d", Math.abs(value));
     }
 
     // ===== EMPLOYMENT TAB =====
@@ -621,8 +814,10 @@ public class TownHallScreen extends Screen {
     // ===== CRAFTING TAB =====
 
     /**
-     * The town's supply chain: everything its crafting NPCs can make that the town hall holds too little of -
-     * tools workers have requested first (highlighted), then the blacksmith's work, then every other job's.
+     * The town's supply chain: first the required trades (red) - basic goods its jobs need and it is short
+     * of, which the trader buys - then everything its crafting NPCs can make that the town hall holds too
+     * little of: tools workers have requested (orange), then the blacksmith's work, then every other job's.
+     * Last, the sell list (green): what the town holds more of than it may, which the trader sells off.
      * Each row shows the item, the job(s) that make it and have / want; the name is red when no citizen
      * has one of those jobs.
      */
@@ -633,7 +828,7 @@ public class TownHallScreen extends Screen {
         int ih = getInvPanelH();
 
         if (craftingNeeds.isEmpty()) {
-            String empty = "Nothing needs to be crafted.";
+            String empty = "Nothing needs to be crafted, bought or sold.";
             g.drawString(font, empty, ix + (iw - font.width(empty)) / 2, iy + 20, COLOR_GRAY, false);
             return;
         }
@@ -653,7 +848,11 @@ public class TownHallScreen extends Screen {
             int rowY  = (i - listScrollOffset) * ROW_HEIGHT;
             int textY = rowY + (ROW_HEIGHT - font.lineHeight) / 2 + 1;
 
-            if (need.toolRequest()) {
+            if (need.sell()) {
+                g.fill(0, rowY, scaledW, rowY + ROW_HEIGHT, 0x302E7D32); // the sell list stands out in green
+            } else if (need.trade()) {
+                g.fill(0, rowY, scaledW, rowY + ROW_HEIGHT, 0x30D32F2F); // required trades stand out in red
+            } else if (need.toolRequest()) {
                 g.fill(0, rowY, scaledW, rowY + ROW_HEIGHT, 0x30FF8F00); // requested tools stand out
             } else if ((i % 2) == 0) {
                 g.fill(0, rowY, scaledW, rowY + ROW_HEIGHT, 0x18000000);
@@ -677,10 +876,12 @@ public class TownHallScreen extends Screen {
             // Icon | Name (red: no citizen in town has a job that makes it) | Job | have / want
             String count = need.have() + " / " + need.want();
             int countX = scaledW - font.width(count) - 4;
-            g.drawString(font, count, countX, textY, need.have() == 0 ? COLOR_RED : COLOR_GOLD, false);
+            g.drawString(font, count, countX, textY, need.sell() ? COLOR_GREEN : need.have() == 0 ? COLOR_RED : COLOR_GOLD, false);
 
             StringBuilder jobs = new StringBuilder();
-            for (String job : need.jobs().split("/")) {
+            if (need.sell()) jobs.append(need.hasWorker() ? "Sell" : "Sell (no trader)");
+            else if (need.trade()) jobs.append(need.hasWorker() ? "Trade" : "Trade (no trader)");
+            else for (String job : need.jobs().split("/")) {
                 if (job.isEmpty()) continue;
                 if (!jobs.isEmpty()) jobs.append(" / ");
                 jobs.append(formatJobName(job));
@@ -695,7 +896,8 @@ public class TownHallScreen extends Screen {
                             ? formatItemName(need.itemKey().replace("_variant", "")) + " (any style)"
                     : formatItemName(need.itemKey());
             int nameX = 2 + ICON_SIZE + 4;
-            int nameColor = !need.hasWorker() ? COLOR_RED : need.toolRequest() ? COLOR_ORANGE : TEXT_COLOR;
+            int nameColor = need.sell() ? COLOR_GREEN
+                    : need.trade() || !need.hasWorker() ? COLOR_RED : need.toolRequest() ? COLOR_ORANGE : TEXT_COLOR;
             g.drawString(font, font.plainSubstrByWidth(name, jobX - nameX - 6), nameX, textY, nameColor, false);
         }
 
@@ -811,8 +1013,8 @@ public class TownHallScreen extends Screen {
     }
 
     private String formatCurrency(long amount) {
-        if (amount >= 1_000_000) return String.format("%.1fM coins", amount / 1_000_000.0);
-        if (amount >= 1_000)     return String.format("%.1fK coins", amount / 1_000.0);
+        if (Math.abs(amount) >= 1_000_000) return String.format("%.1fM coins", amount / 1_000_000.0);
+        if (Math.abs(amount) >= 1_000)     return String.format("%.1fK coins", amount / 1_000.0);
         return amount + " coins";
     }
 

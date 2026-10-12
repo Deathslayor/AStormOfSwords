@@ -4,10 +4,15 @@ import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.carpenter.CarpenterCollectionTicketSystem;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.carpenter.CarpenterSystem;
+import net.darkflameproduction.agotmod.block.custom.TownHallBlockEntity;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.guard.GuardLoot;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.supply.SupplyChain;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.EnumSet;
+import java.util.Map;
 
 public class CollectCarpenterMaterialsGoal extends Goal {
 
@@ -16,6 +21,9 @@ public class CollectCarpenterMaterialsGoal extends Goal {
     private boolean itemsReceived = false;
     private int waitTicks         = 0;
     private static final int MAX_WAIT_TICKS = 100;
+    /** The least time between two pickups in a day. */
+    private static final int RESTOCK_TICKS = 20 * 120;
+    private long lastCollectTime = -RESTOCK_TICKS;
 
     public CollectCarpenterMaterialsGoal(Peasant_Entity peasant) {
         this.peasant = peasant;
@@ -30,7 +38,8 @@ public class CollectCarpenterMaterialsGoal extends Goal {
         if (peasant.shouldSleep()) return false;
 
         long currentDay = peasant.level().getDayTime() / 24000;
-        if (peasant.getCarpenterSystem().getLastWorkDay() == currentDay) return false;
+        // No limit on his work: after the morning's pickup he comes back whenever he runs out
+        if (peasant.getCarpenterSystem().getLastWorkDay() == currentDay && !needsRestock()) return false;
 
         // Clear stuck pending request
         if (CarpenterCollectionTicketSystem.hasPendingRequest(peasant.getUUID())
@@ -95,10 +104,31 @@ public class CollectCarpenterMaterialsGoal extends Goal {
             }
 
             itemsReceived = true;
+            lastCollectTime = peasant.level().getGameTime();
             long currentDay = peasant.level().getDayTime() / 24000;
             peasant.getCarpenterSystem().setLastWorkDay(currentDay);
             peasant.getCarpenterSystem().setCurrentState(CarpenterSystem.CarpenterState.WORKING);
         }
+    }
+
+    /**
+     * A restock during the day: at most every {@link #RESTOCK_TICKS}, when he has no logs and too few planks
+     * to make anything, and the town hall has logs.
+     */
+    private boolean needsRestock() {
+        if (peasant.level().getGameTime() - lastCollectTime < RESTOCK_TICKS) return false;
+        if (SupplyChain.count(peasant, SupplyChain.ANY_LOG) > 0) return false;
+        var inventory = peasant.getInventorySystem().getInventory();
+        for (int i = 0; i < inventory.getContainerSize(); i++) {
+            ItemStack stack = inventory.getItem(i);
+            if (stack.getCount() >= 2 && BuiltInRegistries.ITEM.getKey(stack.getItem()).getPath().endsWith("_planks")) return false;
+        }
+        TownHallBlockEntity townHall = GuardLoot.townHallOf(peasant);
+        if (townHall == null) return false;
+        for (Map.Entry<String, Long> entry : townHall.getTownInventory().entrySet()) {
+            if (entry.getValue() > 0 && SupplyChain.isLog(entry.getKey())) return true;
+        }
+        return false;
     }
 
     @Override

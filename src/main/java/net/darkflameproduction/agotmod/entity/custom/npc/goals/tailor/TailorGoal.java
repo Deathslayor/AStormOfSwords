@@ -231,6 +231,7 @@ public class TailorGoal extends Goal {
             removeItemFromInventory("minecraft:string", 4);
             addItemToInventory(new ItemStack(Items.WHITE_WOOL, 1));
             peasant.triggerInteractAnimation();
+            net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.CraftingDisplay.crafted(peasant, "minecraft:string");
             return;
         }
 
@@ -239,6 +240,7 @@ public class TailorGoal extends Goal {
             removeItemFromInventory("minecraft:white_wool", 2);
             addItemToInventory(new ItemStack(ModItems.CLOTH.get(), 1));
             peasant.triggerInteractAnimation();
+            net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.CraftingDisplay.crafted(peasant, "minecraft:white_wool");
             return;
         }
 
@@ -248,6 +250,7 @@ public class TailorGoal extends Goal {
                 removeItemFromInventory(entry.getKey(), 1);
                 spawnItem(entry.getValue(), 1);
                 peasant.triggerInteractAnimation();
+                net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.CraftingDisplay.crafted(peasant, entry.getKey());
                 return;
             }
         }
@@ -260,6 +263,7 @@ public class TailorGoal extends Goal {
                 addItemToInventory(new ItemStack(ARMOR_PIECES[todaysArmorIndex], 1));
                 madeArmorToday = true;
                 peasant.triggerInteractAnimation();
+                net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.CraftingDisplay.crafted(peasant, "minecraft:leather");
             }
         }
     }

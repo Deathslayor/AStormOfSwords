@@ -23,7 +23,6 @@ public class CarpenterGoal extends Goal {
 
     // All craftable product types in rotation order (excluding planks)
     // The carpenter cycles through these in order, one per craft tick.
-    // Planks are kept at 50% of total output by allowing one product per plank batch.
     private static final String[] PRODUCT_ROTATION = {
             "stool", "chair", "arm_chair", "table",
             "stairs", "fence", "fence_gate", "wall", "slab", "door", "trapdoor"
@@ -33,11 +32,6 @@ public class CarpenterGoal extends Goal {
     private int craftTick    = 0;
     private int rotationIndex = 0; // which product to attempt next
     private String woodType  = "oak";
-
-    // Track how many planks and non-plank items produced this session
-    // to maintain the 50/50 split
-    private int planksProduced      = 0;
-    private int nonPlanksProduced   = 0;
 
     public CarpenterGoal(Peasant_Entity peasant) {
         this.peasant = peasant;
@@ -76,11 +70,7 @@ public class CarpenterGoal extends Goal {
     @Override
     public void start() {
         craftTick         = 0;
-        nonPlanksProduced = 0;
         woodType          = detectWoodType();
-        // Seed planksProduced from actual inventory so the balance check works
-        // even when planks were received directly rather than converted from logs
-        planksProduced    = countInInventory(itemKey(woodType + "_planks"));
         peasant.getCarpenterSystem().setCurrentState(CarpenterSystem.CarpenterState.WORKING);
 
         BlockPos jobBlock = peasant.getJobBlockPos();
@@ -149,29 +139,14 @@ public class CarpenterGoal extends Goal {
         if (logKey != null && has(logKey, 1)) {
             remove(logKey, 1);
             give(woodType + "_planks", 4);
-            planksProduced += 4;
-            AGoTMod.LOGGER.debug("[Carpenter] log->planks, planks={} nonPlanks={}", planksProduced, nonPlanksProduced);
+            AGoTMod.LOGGER.debug("[Carpenter] log->planks");
             peasant.triggerInteractAnimation();
+            net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.CraftingDisplay.crafted(peasant, logKey);
             return;
         }
 
-        int planksAvail = countInInventory(planksKey);
-
-        // Reserve half the planks — only craft products if we have more planks
-        // than what we've already set aside for selling
-        // Rule: non-plank items produced should not exceed planks produced.
-        // Also always keep at least 4 planks in reserve so we don't empty the supply.
-        boolean canMakeProducts = nonPlanksProduced < planksProduced && planksAvail > 4;
-
-        if (!canMakeProducts) {
-            // Nothing to do this tick — we're either waiting for logs
-            // or maintaining the 50/50 split
-            AGoTMod.LOGGER.debug("[Carpenter] Waiting for balance. planks={} nonPlanks={} avail={}",
-                    planksProduced, nonPlanksProduced, planksAvail);
-            return;
-        }
-
-        // Try the next product in rotation, skipping ones we can't make
+        // No limit: once the town's planks and sticks are stocked (nextCraft above), every plank he has
+        // goes into products. Try the next product in rotation, skipping ones we can't make
         int attempts = 0;
         while (attempts < PRODUCT_ROTATION.length) {
             String product = PRODUCT_ROTATION[rotationIndex];
@@ -180,6 +155,7 @@ public class CarpenterGoal extends Goal {
 
             if (tryCraftProduct(product, planksKey, stickKey, nailKey)) {
                 peasant.triggerInteractAnimation();
+                net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.CraftingDisplay.crafted(peasant, planksKey);
                 return;
             }
         }
@@ -198,7 +174,6 @@ public class CarpenterGoal extends Goal {
                 if (has(planksKey, 2) && has(stickKey, 2) && has(nailKey, 1)) {
                     remove(planksKey, 2); remove(stickKey, 2); remove(nailKey, 1);
                     give(woodType + "_stool", 1);
-                    nonPlanksProduced++;
                     AGoTMod.LOGGER.debug("[Carpenter] crafted stool");
                     return true;
                 }
@@ -208,7 +183,6 @@ public class CarpenterGoal extends Goal {
                 if (has(stoolKey, 1) && has(stickKey, 2) && has(nailKey, 1)) {
                     remove(stoolKey, 1); remove(stickKey, 2); remove(nailKey, 1);
                     give(woodType + "_chair", 1);
-                    nonPlanksProduced++;
                     AGoTMod.LOGGER.debug("[Carpenter] crafted chair");
                     return true;
                 }
@@ -218,7 +192,6 @@ public class CarpenterGoal extends Goal {
                 if (has(chairKey, 1) && has(stickKey, 2) && has(nailKey, 1)) {
                     remove(chairKey, 1); remove(stickKey, 2); remove(nailKey, 1);
                     give(woodType + "_arm_chair", 1);
-                    nonPlanksProduced++;
                     AGoTMod.LOGGER.debug("[Carpenter] crafted arm_chair");
                     return true;
                 }
@@ -227,7 +200,6 @@ public class CarpenterGoal extends Goal {
                 if (has(planksKey, 3) && has(stickKey, 2) && has(nailKey, 1)) {
                     remove(planksKey, 3); remove(stickKey, 2); remove(nailKey, 1);
                     give(woodType + "_table", 1);
-                    nonPlanksProduced += 3; // costs 3 planks worth
                     AGoTMod.LOGGER.debug("[Carpenter] crafted table");
                     return true;
                 }
@@ -236,7 +208,6 @@ public class CarpenterGoal extends Goal {
                 if (has(planksKey, 6)) {
                     remove(planksKey, 6);
                     give(woodType + "_stairs", 4);
-                    nonPlanksProduced += 6;
                     AGoTMod.LOGGER.debug("[Carpenter] crafted stairs");
                     return true;
                 }
@@ -245,7 +216,6 @@ public class CarpenterGoal extends Goal {
                 if (has(planksKey, 4) && has(stickKey, 2)) {
                     remove(planksKey, 4); remove(stickKey, 2);
                     give(woodType + "_fence", 3);
-                    nonPlanksProduced += 4;
                     AGoTMod.LOGGER.debug("[Carpenter] crafted fence");
                     return true;
                 }
@@ -254,7 +224,6 @@ public class CarpenterGoal extends Goal {
                 if (has(planksKey, 2) && has(stickKey, 4)) {
                     remove(planksKey, 2); remove(stickKey, 4);
                     give(woodType + "_fence_gate", 1);
-                    nonPlanksProduced += 2;
                     AGoTMod.LOGGER.debug("[Carpenter] crafted fence_gate");
                     return true;
                 }
@@ -263,7 +232,6 @@ public class CarpenterGoal extends Goal {
                 if (has(planksKey, 6)) {
                     remove(planksKey, 6);
                     give(woodType + "_wall", 6);
-                    nonPlanksProduced += 6;
                     AGoTMod.LOGGER.debug("[Carpenter] crafted wall");
                     return true;
                 }
@@ -273,7 +241,6 @@ public class CarpenterGoal extends Goal {
                     remove(planksKey, 3);
                     String slabName = woodType + (isVanillaWood(woodType) ? "_slab" : "_slabs");
                     give(slabName, 6);
-                    nonPlanksProduced += 3;
                     AGoTMod.LOGGER.debug("[Carpenter] crafted slab");
                     return true;
                 }
@@ -282,7 +249,6 @@ public class CarpenterGoal extends Goal {
                 if (has(planksKey, 6)) {
                     remove(planksKey, 6);
                     give(woodType + "_door", 3);
-                    nonPlanksProduced += 6;
                     AGoTMod.LOGGER.debug("[Carpenter] crafted door");
                     return true;
                 }
@@ -291,7 +257,6 @@ public class CarpenterGoal extends Goal {
                 if (has(planksKey, 6)) {
                     remove(planksKey, 6);
                     give(woodType + "_trapdoor", 2);
-                    nonPlanksProduced += 6;
                     AGoTMod.LOGGER.debug("[Carpenter] crafted trapdoor");
                     return true;
                 }

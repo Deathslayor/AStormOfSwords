@@ -53,7 +53,8 @@ public class TownHallBlock extends Block implements EntityBlock {
                                     new java.util.HashMap<>(townHallBE.getTownInventory()),
                                     townHallBE.getCulture().name(),
                                     townHallBE.getCitizenEntries(),
-                                    townHallBE.getCraftingNeeds()
+                                    townHallBE.getCraftingNeeds(),
+                                    townHallBE.getEarnings()
                             ));
                 }
             }

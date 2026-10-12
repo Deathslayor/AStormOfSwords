@@ -3,6 +3,8 @@ package net.darkflameproduction.agotmod.entity.custom.npc.goals.trader;
 import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.trader.TownSurplus;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.trader.TraderPurchasing;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.trader.TraderSystem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -13,6 +15,11 @@ import java.util.EnumSet;
 public class TraderGoal extends Goal {
 
     private final Peasant_Entity peasant;
+    /** The day this trader last tried to buy the town's supplies - one try a day. */
+    private long lastRestockDay = -1;
+    /** Ticks at his barrel since he last checked whether the town's surplus is due to be sold (TownSurplus). */
+    private int sellCheckTimer;
+    private static final int SELL_CHECK_TICKS = 100;
 
     public TraderGoal(Peasant_Entity peasant) {
         this.peasant = peasant;
@@ -80,6 +87,19 @@ public class TraderGoal extends Goal {
         peasant.getNavigation().stop();
         peasant.getLookControl().setLookAt(
                 jobBlock.getX() + 0.5, jobBlock.getY() + 0.5, jobBlock.getZ() + 0.5);
+
+        // Once a day, buy in the basic goods the town is short of
+        long day = peasant.level().getDayTime() / 24000;
+        if (day != lastRestockDay) {
+            lastRestockDay = day;
+            TraderPurchasing.restockIfDue(peasant);
+        }
+
+        // Every so often, sell off some of what the town holds too much of
+        if (++sellCheckTimer >= SELL_CHECK_TICKS) {
+            sellCheckTimer = 0;
+            TownSurplus.sellIfDue(peasant);
+        }
     }
 
     private boolean isJobBlockValid() {

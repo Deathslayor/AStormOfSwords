@@ -154,6 +154,7 @@ public class SmelterGoal extends Goal {
 
         peasant.getSmelterSystem().addOreSlotsFilled(totalOre);
         peasant.triggerInteractAnimation();
+        net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.CraftingDisplay.crafted(peasant, oreToSmelt.keySet().iterator().next());
     }
 
     /**

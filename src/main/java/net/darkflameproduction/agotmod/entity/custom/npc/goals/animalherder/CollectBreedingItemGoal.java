@@ -87,8 +87,7 @@ public class CollectBreedingItemGoal extends Goal {
 
         // A cattle herder always asks: the town hall also hands him empty buckets to milk with (Milking)
         boolean wantsBuckets = peasant.getJobType().equals(JobSystem.JOB_CATTLE_HERDER)
-                && net.darkflameproduction.agotmod.entity.custom.npc.system.supply.Milking.milkShortfall(
-                        net.darkflameproduction.agotmod.entity.custom.npc.system.guard.GuardLoot.townHallOf(peasant), peasant) > 0;
+                && net.darkflameproduction.agotmod.entity.custom.npc.system.supply.Milking.wantsBuckets(peasant);
         if (needed <= 0 && !wantsBuckets) {
             // Already fully stocked, mark collection done
             itemsReceived = true;

@@ -29,7 +29,8 @@ public record TownHallDataPacket(
         Map<String, Long> townInventory,
         String culture,
         List<CitizenEntry> citizens,
-        List<CraftingNeed> craftingNeeds
+        List<CraftingNeed> craftingNeeds,
+        Earnings earnings
 ) implements CustomPacketPayload {
 
     /** A citizen of the town: its name and job type (JobSystem.JOB_*, "" for none). */
@@ -39,9 +40,23 @@ public record TownHallDataPacket(
     /**
      * One row of the Crafting tab: {@code have} of {@code want} of an item in the town hall. {@code jobs} are the
      * jobs that make it ("tailor/blacksmith"), {@code hasWorker} whether the town has a citizen with one of them.
+     * {@code trade}: a basic good the town's jobs need (TownDemand) that its trader buys rather than anyone crafts.
+     * {@code sell}: on the sell list - the town holds {@code have} but may hold only {@code want} (TownSurplus).
      */
     public record CraftingNeed(String itemKey, String label, String jobs, int have, int want,
-                               boolean toolRequest, boolean hasWorker) {}
+                               boolean toolRequest, boolean hasWorker, boolean trade, boolean sell) {
+        public CraftingNeed(String itemKey, String label, String jobs, int have, int want,
+                            boolean toolRequest, boolean hasWorker) {
+            this(itemKey, label, jobs, have, want, toolRequest, hasWorker, false, false);
+        }
+    }
+
+    /**
+     * What the town has earned today and yesterday, what its trader may spend today (TraderPurchasing), and its
+     * money in and out today and yesterday: "FLOW|job" (CashFlow and the citizen's job, empty if none) -> coins.
+     */
+    public record Earnings(long today, long yesterday, long traderBudget,
+                           Map<String, Long> flowsToday, Map<String, Long> flowsYesterday) {}
 
     public static final Type<TownHallDataPacket> TYPE = new Type<>(
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "town_hall_data")
@@ -86,7 +101,29 @@ public record TownHallDataPacket(
             buf.writeVarInt(need.want());
             buf.writeBoolean(need.toolRequest());
             buf.writeBoolean(need.hasWorker());
+            buf.writeBoolean(need.trade());
+            buf.writeBoolean(need.sell());
         }
+        buf.writeLong(packet.earnings.today());
+        buf.writeLong(packet.earnings.yesterday());
+        buf.writeLong(packet.earnings.traderBudget());
+        writeFlows(buf, packet.earnings.flowsToday());
+        writeFlows(buf, packet.earnings.flowsYesterday());
+    }
+
+    private static void writeFlows(FriendlyByteBuf buf, Map<String, Long> flows) {
+        buf.writeVarInt(flows.size());
+        for (Map.Entry<String, Long> entry : flows.entrySet()) {
+            buf.writeUtf(entry.getKey());
+            buf.writeLong(entry.getValue());
+        }
+    }
+
+    private static Map<String, Long> readFlows(FriendlyByteBuf buf) {
+        int size = buf.readVarInt();
+        Map<String, Long> flows = new HashMap<>(size);
+        for (int i = 0; i < size; i++) flows.put(buf.readUtf(), buf.readLong());
+        return flows;
     }
 
     private static TownHallDataPacket decode(FriendlyByteBuf buf) {
@@ -118,14 +155,15 @@ public record TownHallDataPacket(
         List<CraftingNeed> craftingNeeds = new ArrayList<>(needCount);
         for (int i = 0; i < needCount; i++) {
             craftingNeeds.add(new CraftingNeed(buf.readUtf(), buf.readUtf(), buf.readUtf(), buf.readVarInt(),
-                    buf.readVarInt(), buf.readBoolean(), buf.readBoolean()));
+                    buf.readVarInt(), buf.readBoolean(), buf.readBoolean(), buf.readBoolean(), buf.readBoolean()));
         }
 
         return new TownHallDataPacket(
                 pos, bedCount, citizenCount, currentRadius,
                 townName, isClaimed, claimedByHouse,
                 availableJobCount, assignedJobCount, totalJobCount, joblessCount,
-                townBalance, townIncome, townInventory, culture, citizens, craftingNeeds
+                townBalance, townIncome, townInventory, culture, citizens, craftingNeeds,
+                new Earnings(buf.readLong(), buf.readLong(), buf.readLong(), readFlows(buf), readFlows(buf))
         );
     }
 

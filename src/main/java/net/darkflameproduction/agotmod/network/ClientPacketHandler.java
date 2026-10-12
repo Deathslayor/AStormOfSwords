@@ -75,7 +75,7 @@ public class ClientPacketHandler {
                     packet.culture()
             );
 
-            TownHallScreen.updateFinances(pos, packet.townBalance(), packet.townIncome());
+            TownHallScreen.updateFinances(pos, packet.townBalance(), packet.townIncome(), packet.earnings());
             TownHallScreen.updateInventory(pos, packet.townInventory());
             TownHallScreen.updateCitizens(pos, packet.citizens());
             TownHallScreen.updateCraftingNeeds(pos, packet.craftingNeeds());

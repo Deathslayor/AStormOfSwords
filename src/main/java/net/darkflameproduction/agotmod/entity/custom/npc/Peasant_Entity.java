@@ -105,6 +105,8 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     private static final EntityDataAccessor<Boolean> IS_SLEEPING = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Long> LAST_SLEEP_TIME = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.LONG);
     private static final EntityDataAccessor<ItemStack> DATA_ITEM_IN_MAIN_HAND = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.ITEM_STACK);
+    /** The item a crafter is working with, shown in his left hand (display only - his real off-hand stays empty). */
+    private static final EntityDataAccessor<ItemStack> DATA_CRAFTING_ITEM = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.ITEM_STACK);
     private static final EntityDataAccessor<Integer> HUNGER_LEVEL = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> NEEDS_FOOD_COLLECTION = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<String> JOB_TYPE = SynchedEntityData.defineId(Peasant_Entity.class, EntityDataSerializers.STRING);
@@ -337,16 +339,21 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
 
     // Sent to the trading GUI; the server prices transactions with the same values (TownReputation: the
     // base prices of ItemPricing, adjusted for the player's reputation with this NPC's town)
+    // A town in debt charges double and pays half (TownHallBlockEntity.buyPriceFactor / sellPriceFactor)
     private float getBuyMultiplier(net.minecraft.server.level.ServerPlayer player) {
+        var townHall = net.darkflameproduction.agotmod.entity.custom.npc.system.reputation.TownReputation.townHallOf(this);
         return net.darkflameproduction.agotmod.entity.custom.npc.system.reputation.TownReputation.buyMultiplier(
                 getJobType().equals(JobSystem.JOB_TRADER),
-                net.darkflameproduction.agotmod.entity.custom.npc.system.reputation.TownReputation.with(player, this));
+                net.darkflameproduction.agotmod.entity.custom.npc.system.reputation.TownReputation.with(player, this))
+                * (townHall == null ? 1.0f : townHall.buyPriceFactor());
     }
 
     private float getSellMultiplier(net.minecraft.server.level.ServerPlayer player) {
+        var townHall = net.darkflameproduction.agotmod.entity.custom.npc.system.reputation.TownReputation.townHallOf(this);
         return net.darkflameproduction.agotmod.entity.custom.npc.system.reputation.TownReputation.sellMultiplier(
                 getJobType().equals(JobSystem.JOB_TRADER),
-                net.darkflameproduction.agotmod.entity.custom.npc.system.reputation.TownReputation.with(player, this));
+                net.darkflameproduction.agotmod.entity.custom.npc.system.reputation.TownReputation.with(player, this))
+                * (townHall == null ? 1.0f : townHall.sellPriceFactor());
     }
 
 
@@ -398,6 +405,28 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     /**
      * Triggers the interact animation - stops movement and plays animation
      */
+    /** Ticks left to show the crafting item (server side). */
+    private int craftingItemTimer;
+
+    /**
+     * Shows {@code stack} in his left hand for {@code ticks} - what he is crafting with (CraftingDisplay). Only for
+     * display: it is drawn on the client while his real off-hand is empty, and is never an item he holds, so it
+     * can't be taken, dropped or counted.
+     */
+    public void showCraftingItem(ItemStack stack, int ticks) {
+        if (this.level().isClientSide) return;
+        this.getEntityData().set(DATA_CRAFTING_ITEM, stack.copyWithCount(1));
+        craftingItemTimer = ticks;
+    }
+
+    /** On the client, an empty off-hand shows the item he's crafting with (showCraftingItem). */
+    @Override
+    public ItemStack getOffhandItem() {
+        ItemStack real = super.getOffhandItem();
+        if (this.level().isClientSide && real.isEmpty()) return this.getEntityData().get(DATA_CRAFTING_ITEM);
+        return real;
+    }
+
     public void triggerInteractAnimation() {
         if (!this.level().isClientSide) {
             // Stop current navigation
@@ -534,8 +563,10 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                     this, JobSystem.JOB_BAKER, 20 * 120));
             this.goalSelector.addGoal(8, new net.darkflameproduction.agotmod.entity.custom.npc.goals.supply.SupplyCraftGoal(
                     this, JobSystem.JOB_BAKER, net.darkflameproduction.agotmod.block.ModBLocks.BAKER_BARREL::get, 20 * 2, 64 * 4));
-            // The stonemason cuts the town's raw stone into its stairs, slabs, walls and variants (Stonework), one every 3 seconds
-            this.goalSelector.addGoal(7, new net.darkflameproduction.agotmod.entity.custom.npc.goals.supply.SupplyRunGoal(this, JobSystem.JOB_STONEMASON));
+            // The stonemason cuts the town's raw stone into its stairs, slabs, walls and variants (Stonework), one every 3 seconds -
+            // all the stone the town hall has, with no limit (SupplyChain.UNLIMITED), fetching more whenever he runs out
+            this.goalSelector.addGoal(7, new net.darkflameproduction.agotmod.entity.custom.npc.goals.supply.SupplyRunGoal(
+                    this, JobSystem.JOB_STONEMASON, 20 * 120));
             this.goalSelector.addGoal(8, new net.darkflameproduction.agotmod.entity.custom.npc.goals.supply.SupplyCraftGoal(
                     this, JobSystem.JOB_STONEMASON, net.darkflameproduction.agotmod.block.ModBLocks.STONEMASON_BARREL::get, 20 * 3));
             this.goalSelector.addGoal(9, new ReturnToJobBlockGoal(this));
@@ -719,6 +750,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         builder.define(IS_SLEEPING, false);
         builder.define(LAST_SLEEP_TIME, 0L);
         builder.define(DATA_ITEM_IN_MAIN_HAND, ItemStack.EMPTY);
+        builder.define(DATA_CRAFTING_ITEM, ItemStack.EMPTY);
         builder.define(HUNGER_LEVEL, HungerSystem.MAX_HUNGER);
         builder.define(NEEDS_FOOD_COLLECTION, false);
         builder.define(JOB_TYPE, JobSystem.JOB_NONE);
@@ -878,6 +910,10 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         super.tick();
 
         if (interactionCooldown > 0) interactionCooldown--;
+
+        if (craftingItemTimer > 0 && --craftingItemTimer == 0 && !this.level().isClientSide) {
+            this.getEntityData().set(DATA_CRAFTING_ITEM, ItemStack.EMPTY);
+        }
 
         if (interactAnimationTimer > 0) {
             interactAnimationTimer--;

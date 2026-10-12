@@ -131,6 +131,7 @@ public class TannerGoal extends Goal {
             addItemToInventory(new ItemStack(Items.LEATHER, 1));
             system.setHidesProcessed(system.getHidesProcessed() + 4);
             peasant.triggerInteractAnimation();
+            net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.CraftingDisplay.crafted(peasant, "minecraft:rabbit_hide");
             return;
         }
 
@@ -144,6 +145,7 @@ public class TannerGoal extends Goal {
             removeItemFromInventory("minecraft:string", 1);
             addItemToInventory(new ItemStack(Items.BUNDLE, 1));
             peasant.triggerInteractAnimation();
+            net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.CraftingDisplay.crafted(peasant, "minecraft:leather");
             return;
         }
 
@@ -153,6 +155,7 @@ public class TannerGoal extends Goal {
             removeItemFromInventory("minecraft:leather", 1);
             addItemToInventory(new ItemStack(ModItems.BOILED_LEATHER.get(), 1));
             peasant.triggerInteractAnimation();
+            net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.CraftingDisplay.crafted(peasant, "minecraft:leather");
         }
     }
 

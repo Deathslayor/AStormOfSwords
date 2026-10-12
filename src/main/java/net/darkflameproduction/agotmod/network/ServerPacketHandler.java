@@ -92,7 +92,7 @@ public class ServerPacketHandler {
                                              Peasant_Entity trader, TownHallBlockEntity townHall,
                                              ServerLevel level, String jobType) {
         int reputation = townHall.getReputation(player.getUUID());
-        long totalCost = calculateBuyTotalCost(packet.getItemAmounts(), jobType, reputation);
+        long totalCost = calculateBuyTotalCost(packet.getItemAmounts(), jobType, reputation, townHall);
         long playerBalance = getPlayerBalance(player);
 
         if (playerBalance < totalCost) {
@@ -114,12 +114,8 @@ public class ServerPacketHandler {
         }
 
         deductPlayerBalance(player, totalCost);
-        townHall.addToTownBalance(totalCost);
-        long taxAmount = (long) Math.floor(totalCost * 0.2);
-        if (taxAmount > 0) {
-            townHall.deductFromTownBalance(taxAmount);
-            townHall.addToTownIncome(taxAmount);
-        }
+        townHall.addToTownBalance(totalCost, net.darkflameproduction.agotmod.block.custom.CashFlow.PLAYER_SALES);
+        // Taxed once a day, on the town's net earnings (TownHallBlockEntity.TAX_RATE)
 
         long newPlayerBalance = getPlayerBalance(player);
         PacketDistributor.sendToPlayer(player, new CoinBalancePacket(newPlayerBalance));
@@ -132,7 +128,7 @@ public class ServerPacketHandler {
                                               Peasant_Entity trader, TownHallBlockEntity townHall,
                                               ServerLevel level, String jobType) {
         int reputation = townHall.getReputation(player.getUUID());
-        long totalEarnings = calculateSellTotalEarnings(packet.getItemAmounts(), jobType, reputation);
+        long totalEarnings = calculateSellTotalEarnings(packet.getItemAmounts(), jobType, reputation, townHall);
         long townBalance = townHall.getTownBalance();
 
         if (townBalance < totalEarnings) {
@@ -150,7 +146,7 @@ public class ServerPacketHandler {
 
         if (success) {
             addPlayerBalance(player, totalEarnings);
-            townHall.deductFromTownBalance(totalEarnings);
+            townHall.deductFromTownBalance(totalEarnings, net.darkflameproduction.agotmod.block.custom.CashFlow.PLAYER_PURCHASES);
 
             long newPlayerBalance = getPlayerBalance(player);
             PacketDistributor.sendToPlayer(player, new CoinBalancePacket(newPlayerBalance));
@@ -331,7 +327,7 @@ public class ServerPacketHandler {
                     int take = Math.min(left, stack.getCount());
                     if (stack.getItem() instanceof net.darkflameproduction.agotmod.item.custom.CoinItem coin) {
                         long value = coin.getCoinValue() * take;
-                        townHall.addToTownBalance(value);
+                        townHall.addToTownBalance(value, net.darkflameproduction.agotmod.block.custom.CashFlow.DONATIONS);
                         coinsGiven += value;
                     } else {
                         townHall.addToTownInventory(itemKey, take);
@@ -446,7 +442,8 @@ public class ServerPacketHandler {
                             new java.util.HashMap<>(townHall.getTownInventory()),
                             townHall.getCulture().name(),
                             townHall.getCitizenEntries(),
-                            townHall.getCraftingNeeds()
+                            townHall.getCraftingNeeds(),
+                            townHall.getEarnings()
                     ));
                 }
             }
@@ -469,9 +466,10 @@ public class ServerPacketHandler {
     }
 
     // Same multipliers and rounding as the trading GUI (ItemPricing), so the charged total matches what it shows
-    private static long calculateBuyTotalCost(Map<String, Integer> itemAmounts, String jobType, int reputation) {
+    private static long calculateBuyTotalCost(Map<String, Integer> itemAmounts, String jobType, int reputation,
+                                              TownHallBlockEntity townHall) {
         float multiplier = net.darkflameproduction.agotmod.entity.custom.npc.system.reputation.TownReputation
-                .buyMultiplier(jobType.equals(JobSystem.JOB_TRADER), reputation);
+                .buyMultiplier(jobType.equals(JobSystem.JOB_TRADER), reputation) * townHall.buyPriceFactor(); // doubled while the town is in debt
         long totalCost = 0;
         for (Map.Entry<String, Integer> entry : itemAmounts.entrySet()) {
             if (entry.getValue() > 0) {
@@ -482,9 +480,10 @@ public class ServerPacketHandler {
         return totalCost;
     }
 
-    private static long calculateSellTotalEarnings(Map<String, Integer> itemAmounts, String jobType, int reputation) {
+    private static long calculateSellTotalEarnings(Map<String, Integer> itemAmounts, String jobType, int reputation,
+                                                   TownHallBlockEntity townHall) {
         float multiplier = net.darkflameproduction.agotmod.entity.custom.npc.system.reputation.TownReputation
-                .sellMultiplier(jobType.equals(JobSystem.JOB_TRADER), reputation);
+                .sellMultiplier(jobType.equals(JobSystem.JOB_TRADER), reputation) * townHall.sellPriceFactor(); // halved while the town is in debt
         long totalEarnings = 0;
         for (Map.Entry<String, Integer> entry : itemAmounts.entrySet()) {
             if (entry.getValue() > 0) {

@@ -123,6 +123,7 @@ public class CharcoalBurnerGoal extends Goal {
 
         peasant.getCharcoalBurnerSystem().addLogsBurned(1);
         peasant.triggerInteractAnimation();
+        net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.CraftingDisplay.crafted(peasant, logKey);
     }
 
     private String findLogInInventory() {
