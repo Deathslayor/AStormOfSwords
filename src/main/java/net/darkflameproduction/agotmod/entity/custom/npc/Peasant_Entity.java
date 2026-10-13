@@ -338,7 +338,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     }
 
     // Sent to the trading GUI; the server prices transactions with the same values (TownReputation: the
-    // base prices of ItemPricing, adjusted for the player's reputation with this NPC's town)
+    // town's market prices (VillageMarket), adjusted for the player's reputation with this NPC's town)
     // A town in debt charges double and pays half (TownHallBlockEntity.buyPriceFactor / sellPriceFactor)
     private float getBuyMultiplier(net.minecraft.server.level.ServerPlayer player) {
         var townHall = net.darkflameproduction.agotmod.entity.custom.npc.system.reputation.TownReputation.townHallOf(this);
@@ -346,6 +346,23 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                 getJobType().equals(JobSystem.JOB_TRADER),
                 net.darkflameproduction.agotmod.entity.custom.npc.system.reputation.TownReputation.with(player, this))
                 * (townHall == null ? 1.0f : townHall.buyPriceFactor());
+    }
+
+    /**
+     * The trading GUI's data, with the town market's stock of every item on either side - the GUI prices
+     * with it exactly as the server does (VillageMarket.quote).
+     */
+    private OpenTradingInventoryPacket tradingPacket(String name, List<OpenTradingInventoryPacket.TradingInventoryEntry> entries,
+                                                     List<OpenTradingInventoryPacket.PlayerInventoryEntry> playerEntries,
+                                                     long townBalance, long playerBalance, float buyMultiplier, float sellMultiplier) {
+        var townHall = net.darkflameproduction.agotmod.entity.custom.npc.system.reputation.TownReputation.townHallOf(this);
+        java.util.Map<String, Double> stocks = new java.util.HashMap<>();
+        if (townHall != null) {
+            for (OpenTradingInventoryPacket.TradingInventoryEntry entry : entries) stocks.put(entry.itemKey, townHall.getMarket().stock(entry.itemKey));
+            for (OpenTradingInventoryPacket.PlayerInventoryEntry entry : playerEntries) stocks.put(entry.itemKey, townHall.getMarket().stock(entry.itemKey));
+        }
+        return new OpenTradingInventoryPacket(name, entries, playerEntries, townBalance, playerBalance,
+                buyMultiplier, sellMultiplier, stocks);
     }
 
     private float getSellMultiplier(net.minecraft.server.level.ServerPlayer player) {
@@ -1001,7 +1018,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                                 buildPlayerEntries(serverPlayer, net.darkflameproduction.agotmod.util.ItemPricing::isGrocerItem);
                         long playerBalance = serverPlayer.getPersistentData().getLong(COIN_BALANCE_KEY);
                         net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
-                                new OpenTradingInventoryPacket(this.getDisplayName().getString(),
+                                tradingPacket(this.getDisplayName().getString(),
                                         entries, playerEntries, response.townBalance, playerBalance,
                                         getBuyMultiplier(serverPlayer), getSellMultiplier(serverPlayer)));
                     }
@@ -1023,7 +1040,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                                 buildPlayerEntries(serverPlayer, net.darkflameproduction.agotmod.util.ItemPricing::isButcherItem);
                         long playerBalance = serverPlayer.getPersistentData().getLong(COIN_BALANCE_KEY);
                         net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
-                                new OpenTradingInventoryPacket(this.getDisplayName().getString(),
+                                tradingPacket(this.getDisplayName().getString(),
                                         entries, playerEntries, response.townBalance, playerBalance,
                                         getBuyMultiplier(serverPlayer), getSellMultiplier(serverPlayer)));
                     }
@@ -1045,7 +1062,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                                 buildPlayerEntries(serverPlayer, net.darkflameproduction.agotmod.util.ItemPricing::isTannerItem);
                         long playerBalance = serverPlayer.getPersistentData().getLong(COIN_BALANCE_KEY);
                         net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
-                                new OpenTradingInventoryPacket(this.getDisplayName().getString(),
+                                tradingPacket(this.getDisplayName().getString(),
                                         entries, playerEntries, response.townBalance, playerBalance,
                                         getBuyMultiplier(serverPlayer), getSellMultiplier(serverPlayer)));
                     }
@@ -1067,7 +1084,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                                 buildPlayerEntries(serverPlayer, net.darkflameproduction.agotmod.util.ItemPricing::isTailorItem);
                         long playerBalance = serverPlayer.getPersistentData().getLong(COIN_BALANCE_KEY);
                         net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
-                                new OpenTradingInventoryPacket(this.getDisplayName().getString(),
+                                tradingPacket(this.getDisplayName().getString(),
                                         entries, playerEntries, response.townBalance, playerBalance,
                                         getBuyMultiplier(serverPlayer), getSellMultiplier(serverPlayer)));
                     }
@@ -1090,7 +1107,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                                 buildPlayerEntries(serverPlayer, smithTradeFilter());
                         long playerBalance = serverPlayer.getPersistentData().getLong(COIN_BALANCE_KEY);
                         net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
-                                new OpenTradingInventoryPacket(this.getDisplayName().getString(),
+                                tradingPacket(this.getDisplayName().getString(),
                                         entries, playerEntries, response.townBalance, playerBalance,
                                         getBuyMultiplier(serverPlayer), getSellMultiplier(serverPlayer)));
                     }
@@ -1112,7 +1129,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                                 buildPlayerEntries(serverPlayer, net.darkflameproduction.agotmod.util.ItemPricing::isCarpenterItem);
                         long playerBalance = serverPlayer.getPersistentData().getLong(COIN_BALANCE_KEY);
                         net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
-                                new OpenTradingInventoryPacket(this.getDisplayName().getString(),
+                                tradingPacket(this.getDisplayName().getString(),
                                         entries, playerEntries, response.townBalance, playerBalance,
                                         getBuyMultiplier(serverPlayer), getSellMultiplier(serverPlayer)));
                     }
@@ -1134,7 +1151,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                                 buildPlayerEntries(serverPlayer, net.darkflameproduction.agotmod.util.ItemPricing::isTraderItem);
                         long playerBalance = serverPlayer.getPersistentData().getLong(COIN_BALANCE_KEY);
                         net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
-                                new OpenTradingInventoryPacket(this.getDisplayName().getString(),
+                                tradingPacket(this.getDisplayName().getString(),
                                         entries, playerEntries, response.townBalance, playerBalance,
                                         getBuyMultiplier(serverPlayer), getSellMultiplier(serverPlayer)));
                     }

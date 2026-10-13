@@ -5,15 +5,6 @@
     {
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "agotmod:whitehb_castle_wall_1",
-        "processors": "minecraft:empty",
-        "projection": "rigid"
-      },
-      "weight": 1
-    },
-    {
-      "element": {
-        "element_type": "minecraft:single_pool_element",
         "location": "agotmod:whitehb_castle_wall_2",
         "processors": "minecraft:empty",
         "projection": "rigid"
@@ -24,15 +15,6 @@
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "agotmod:whitehb_castle_wall_3",
-        "processors": "minecraft:empty",
-        "projection": "rigid"
-      },
-      "weight": 1
-    },
-    {
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "location": "agotmod:whitehb_castle_ws_1",
         "processors": "minecraft:empty",
         "projection": "rigid"
       },

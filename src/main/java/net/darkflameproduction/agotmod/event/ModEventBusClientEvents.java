@@ -45,7 +45,10 @@ import java.util.Map;
 public class ModEventBusClientEvents {
 
     @SubscribeEvent
-    public static void registerLayer(EntityRenderersEvent.@NotNull RegisterLayerDefinitions event) {}
+    public static void registerLayer(EntityRenderersEvent.@NotNull RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(net.darkflameproduction.agotmod.entity.client.boat.FishingBoatModel.LAYER,
+                net.darkflameproduction.agotmod.entity.client.boat.FishingBoatModel::createBodyLayer);
+    }
 
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
@@ -54,6 +57,8 @@ public class ModEventBusClientEvents {
         EntityRenderers.register(ModEntities.DIREWOLF_ENTITY.get(), Direwolf_Entity_Renderer::new);
         // Adults: player model (taken over by Epic Fight). Children: GeckoLib model.
         EntityRenderers.register(ModEntities.PEASANT_ENTITY.get(),  PeasantHumanoidRenderer::new);
+        EntityRenderers.register(ModEntities.FISHING_BOAT.get(),
+                net.darkflameproduction.agotmod.entity.client.boat.FishingBoatRenderer::new);
         EntityRenderers.register(ModEntities.SEAT_ENTITY.get(),
                 ctx -> new net.minecraft.client.renderer.entity.NoopRenderer<>(ctx));
     }

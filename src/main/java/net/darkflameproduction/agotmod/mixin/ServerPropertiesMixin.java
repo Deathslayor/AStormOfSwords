@@ -45,7 +45,8 @@ public class ServerPropertiesMixin {
                 )
         )
         private ResourceKey<WorldPreset> replaceDefault() {
-            return KNOWN_WORLD_PRESET;
+            // Not the outer mixin's field: that one only exists in DedicatedServerProperties, not in this target
+            return ResourceKey.create(Registries.WORLD_PRESET, AGoTMod.id("known_world"));
         }
     }
 }

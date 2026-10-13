@@ -25,6 +25,8 @@ import org.jetbrains.annotations.Nullable;
  * the controller barrel it belongs to.
  */
 public class BarrelDummyBlock extends Block implements EntityBlock {
+    /** How far a dummy can be from its barrel's controller (the large barrel is 3x3x3, controller bottom centre). */
+    private static final int REACH = 2;
 
     public BarrelDummyBlock(Properties properties) {
         super(properties);
@@ -61,9 +63,49 @@ public class BarrelDummyBlock extends Block implements EntityBlock {
         return Shapes.block();
     }
 
+    /**
+     * The barrel this dummy belongs to, or null if there is none. The saved position is only trusted when a
+     * barrel there really covers this block: a dummy placed from a structure template still holds the
+     * position its barrel had in the world the template was saved in, which can be anywhere - reading it
+     * would point at the wrong block, or crash the client's chunk renderer, which only sees nearby blocks.
+     * Otherwise the barrel is looked for among the nearby blocks.
+     */
     @Nullable
     public static BlockPos getControllerPos(BlockGetter level, BlockPos pos) {
-        return level.getBlockEntity(pos) instanceof BarrelDummyBlockEntity dummy ? dummy.getControllerPos() : null;
+        BlockPos saved = level.getBlockEntity(pos) instanceof BarrelDummyBlockEntity dummy ? dummy.getControllerPos() : null;
+        if (saved != null && isControllerOf(level, saved, pos)) return saved;
+        return findController(level, pos);
+    }
+
+    /** Whether the barrel at controllerPos has a dummy at pos. */
+    private static boolean isControllerOf(BlockGetter level, BlockPos controllerPos, BlockPos pos) {
+        BlockPos offset = pos.subtract(controllerPos);
+        if (Math.abs(offset.getX()) > REACH || Math.abs(offset.getY()) > REACH || Math.abs(offset.getZ()) > REACH) {
+            return false;
+        }
+        BlockState state = level.getBlockState(controllerPos);
+        return state.getBlock() instanceof BarrelControllerBlock controller
+                && controller.getStructureOffsets(state).contains(offset);
+    }
+
+    @Nullable
+    private static BlockPos findController(BlockGetter level, BlockPos pos) {
+        for (BlockPos candidate : BlockPos.betweenClosed(pos.offset(-REACH, -REACH, -REACH), pos.offset(REACH, REACH, REACH))) {
+            if (!candidate.equals(pos) && isControllerOf(level, candidate, pos)) return candidate.immutable();
+        }
+        return null;
+    }
+
+    /** Points a dummy whose saved barrel position is wrong (see getControllerPos) at its real barrel. */
+    @Override
+    protected void tick(BlockState state, ServerLevel level, BlockPos pos, net.minecraft.util.RandomSource random) {
+        if (level.getBlockEntity(pos) instanceof BarrelDummyBlockEntity dummy
+                && level.hasChunksAt(pos.offset(-REACH, -REACH, -REACH), pos.offset(REACH, REACH, REACH))) {
+            BlockPos controllerPos = getControllerPos(level, pos);
+            if (controllerPos != null && !controllerPos.equals(dummy.getControllerPos())) {
+                dummy.setControllerPos(controllerPos);
+            }
+        }
     }
 
     /** The state of the barrel this dummy belongs to, or null if it can't be found. */

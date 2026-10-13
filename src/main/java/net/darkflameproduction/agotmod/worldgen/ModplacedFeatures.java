@@ -312,7 +312,7 @@ public class ModplacedFeatures {
         // weirwood bush
         register(context, WEIRWOOD_BUSH_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.WEIRWOOD_BUSH_KEY),
-                bushPlacement);
+                notInVillage(bushPlacement));
 
         // vanilla bushes
         for (String vanillaType : ModConfiguredFeatures.VANILLA_BUSH_KEYS.keySet()) {
@@ -434,16 +434,16 @@ public class ModplacedFeatures {
         register(context, WEIRWOOD_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.WEIRWOOD_KEY),
                 // 20x rarer than the original 1-in-10 (countExtra(0, 0.1f, 1)); RarityFilter avoids
                 // countExtra's float-precision cliff (it requires 1/chance to land exactly on an int).
-                VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(200),
-                        ModBLocks.WEIRWOOD_SAPLING.get()));
+                notInVillage(VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(200),
+                        ModBLocks.WEIRWOOD_SAPLING.get())));
 
         register(context, OAK2_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OAK2_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
                         Blocks.OAK_SAPLING));
         register(context, WEIRWOOD_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.WEIRWOOD_KEY),
                 // 20x rarer than the original 1-in-100 (countExtra(0, 0.01f, 1)).
-                VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(2000),
-                        ModBLocks.WEIRWOOD_SAPLING.get()));
+                notInVillage(VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(2000),
+                        ModBLocks.WEIRWOOD_SAPLING.get())));
 
         register(context, OAK2_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OAK2_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
@@ -1456,6 +1456,13 @@ public class ModplacedFeatures {
     }
 
     // Helper method to register a placed feature
+    /** The modifiers with a filter that keeps the feature out of villages (no weirwoods in villages). */
+    private static List<PlacementModifier> notInVillage(List<PlacementModifier> modifiers) {
+        List<PlacementModifier> list = new ArrayList<>(modifiers);
+        list.add(net.darkflameproduction.agotmod.worldgen.structure.NotInVillageFilter.INSTANCE);
+        return list;
+    }
+
     private static void register(BootstrapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key, Holder<ConfiguredFeature<?, ?>> configuration,
                                  List<PlacementModifier> modifiers) {
         // Use the context to register a new PlacedFeature with the specified key, configuration, and modifiers

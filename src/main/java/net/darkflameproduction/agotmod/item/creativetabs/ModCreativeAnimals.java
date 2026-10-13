@@ -28,6 +28,7 @@ public class ModCreativeAnimals {
                         pOutput.accept(ModItems.DIREWOLF_SPAWN_EGG.get());
                         pOutput.accept(ModItems.CROW_SPAWN_EGG.get());
                         pOutput.accept(ModItems.PEASANT_SPAWN_EGG.get());
+                        pOutput.accept(ModItems.FISHING_BOAT.get());
 
                         pOutput.accept(ModBLocks.DERPY_DRAGON_BLOCK.get());
 

@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 
 public record TownHallDataPacket(
         BlockPos pos,
@@ -25,12 +27,12 @@ public record TownHallDataPacket(
         int totalJobCount,
         int joblessCount,
         long townBalance,
-        long townIncome,
         Map<String, Long> townInventory,
         String culture,
         List<CitizenEntry> citizens,
         List<CraftingNeed> craftingNeeds,
-        Earnings earnings
+        Earnings earnings,
+        Economy economy
 ) implements CustomPacketPayload {
 
     /** A citizen of the town: its name and job type (JobSystem.JOB_*, "" for none). */
@@ -58,6 +60,21 @@ public record TownHallDataPacket(
     public record Earnings(long today, long yesterday, long traderBudget,
                            Map<String, Long> flowsToday, Map<String, Long> flowsYesterday) {}
 
+    /**
+     * The town's economy (VillageEconomy): its tax rate, happiness H and food dissatisfaction F; its population
+     * now and on the last day evaluated, and the servings of each FoodCategory (by name) eaten today and that
+     * day; its liege's reputation and owner; its traders' daily capacity and what they imported and exported
+     * today; and its market's stock M of the goods it holds or trades (VillageMarket).
+     */
+    public record Economy(int taxPercent, double happiness, double foodDissatisfaction, int population,
+                          int evaluatedPopulation, Map<String, Long> mealsToday, Map<String, Long> mealsYesterday,
+                          int liegeReputation, Optional<UUID> owner, int tradeCapacity, int importedToday,
+                          int exportedToday, Map<String, Double> marketStock) {
+
+        public static final Economy EMPTY = new Economy(0, 50, 0, 0, 0, Map.of(), Map.of(), 0, Optional.empty(),
+                0, 0, 0, Map.of());
+    }
+
     public static final Type<TownHallDataPacket> TYPE = new Type<>(
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "town_hall_data")
     );
@@ -80,7 +97,6 @@ public record TownHallDataPacket(
         buf.writeVarInt(packet.totalJobCount);
         buf.writeVarInt(packet.joblessCount);
         buf.writeLong(packet.townBalance);
-        buf.writeLong(packet.townIncome);
         buf.writeVarInt(packet.townInventory.size());
         for (Map.Entry<String, Long> entry : packet.townInventory.entrySet()) {
             buf.writeUtf(entry.getKey());
@@ -109,6 +125,46 @@ public record TownHallDataPacket(
         buf.writeLong(packet.earnings.traderBudget());
         writeFlows(buf, packet.earnings.flowsToday());
         writeFlows(buf, packet.earnings.flowsYesterday());
+
+        Economy economy = packet.economy;
+        buf.writeVarInt(economy.taxPercent());
+        buf.writeDouble(economy.happiness());
+        buf.writeDouble(economy.foodDissatisfaction());
+        buf.writeVarInt(economy.population());
+        buf.writeVarInt(economy.evaluatedPopulation());
+        writeFlows(buf, economy.mealsToday());
+        writeFlows(buf, economy.mealsYesterday());
+        buf.writeInt(economy.liegeReputation());
+        buf.writeBoolean(economy.owner().isPresent());
+        economy.owner().ifPresent(buf::writeUUID);
+        buf.writeVarInt(economy.tradeCapacity());
+        buf.writeVarInt(economy.importedToday());
+        buf.writeVarInt(economy.exportedToday());
+        buf.writeVarInt(economy.marketStock().size());
+        for (Map.Entry<String, Double> entry : economy.marketStock().entrySet()) {
+            buf.writeUtf(entry.getKey());
+            buf.writeDouble(entry.getValue());
+        }
+    }
+
+    private static Economy readEconomy(FriendlyByteBuf buf) {
+        int taxPercent = buf.readVarInt();
+        double happiness = buf.readDouble();
+        double foodDissatisfaction = buf.readDouble();
+        int population = buf.readVarInt();
+        int evaluatedPopulation = buf.readVarInt();
+        Map<String, Long> mealsToday = readFlows(buf);
+        Map<String, Long> mealsYesterday = readFlows(buf);
+        int liegeReputation = buf.readInt();
+        Optional<UUID> owner = buf.readBoolean() ? Optional.of(buf.readUUID()) : Optional.empty();
+        int tradeCapacity = buf.readVarInt();
+        int importedToday = buf.readVarInt();
+        int exportedToday = buf.readVarInt();
+        int stocks = buf.readVarInt();
+        Map<String, Double> marketStock = new HashMap<>(stocks);
+        for (int i = 0; i < stocks; i++) marketStock.put(buf.readUtf(), buf.readDouble());
+        return new Economy(taxPercent, happiness, foodDissatisfaction, population, evaluatedPopulation, mealsToday,
+                mealsYesterday, liegeReputation, owner, tradeCapacity, importedToday, exportedToday, marketStock);
     }
 
     private static void writeFlows(FriendlyByteBuf buf, Map<String, Long> flows) {
@@ -139,7 +195,6 @@ public record TownHallDataPacket(
         int totalJobCount     = buf.readVarInt();
         int joblessCount      = buf.readVarInt();
         long townBalance      = buf.readLong();
-        long townIncome       = buf.readLong();
         int inventorySize     = buf.readVarInt();
         Map<String, Long> townInventory = new HashMap<>();
         for (int i = 0; i < inventorySize; i++) {
@@ -162,8 +217,9 @@ public record TownHallDataPacket(
                 pos, bedCount, citizenCount, currentRadius,
                 townName, isClaimed, claimedByHouse,
                 availableJobCount, assignedJobCount, totalJobCount, joblessCount,
-                townBalance, townIncome, townInventory, culture, citizens, craftingNeeds,
-                new Earnings(buf.readLong(), buf.readLong(), buf.readLong(), readFlows(buf), readFlows(buf))
+                townBalance, townInventory, culture, citizens, craftingNeeds,
+                new Earnings(buf.readLong(), buf.readLong(), buf.readLong(), readFlows(buf), readFlows(buf)),
+                readEconomy(buf)
         );
     }
 

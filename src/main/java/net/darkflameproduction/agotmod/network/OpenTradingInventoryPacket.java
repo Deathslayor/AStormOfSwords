@@ -6,7 +6,9 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Opens the trading GUI for any shop-type NPC (Grocer, Butcher, Tanner,
@@ -20,7 +22,8 @@ public record OpenTradingInventoryPacket(
         long tradingBalance,
         long playerBalance,
         float buyMultiplier,
-        float sellMultiplier
+        float sellMultiplier,
+        Map<String, Double> marketStock
 ) implements CustomPacketPayload {
 
     /** A single catalog entry offered by the trading NPC. */
@@ -64,6 +67,11 @@ public record OpenTradingInventoryPacket(
         buf.writeLong(packet.playerBalance);
         buf.writeFloat(packet.buyMultiplier);
         buf.writeFloat(packet.sellMultiplier);
+        buf.writeVarInt(packet.marketStock.size());
+        for (Map.Entry<String, Double> entry : packet.marketStock.entrySet()) {
+            buf.writeUtf(entry.getKey());
+            buf.writeDouble(entry.getValue());
+        }
 
         buf.writeInt(packet.tradingEntries.size());
         for (TradingInventoryEntry entry : packet.tradingEntries) {
@@ -87,6 +95,9 @@ public record OpenTradingInventoryPacket(
         long playerBalance   = buf.readLong();
         float buyMultiplier  = buf.readFloat();
         float sellMultiplier = buf.readFloat();
+        int stocks = buf.readVarInt();
+        Map<String, Double> marketStock = new HashMap<>(stocks);
+        for (int i = 0; i < stocks; i++) marketStock.put(buf.readUtf(), buf.readDouble());
 
         int tradingSize = buf.readInt();
         List<TradingInventoryEntry> tradingEntries = new ArrayList<>();
@@ -108,7 +119,7 @@ public record OpenTradingInventoryPacket(
         }
 
         return new OpenTradingInventoryPacket(tradingName, tradingEntries, playerEntries,
-                tradingBalance, playerBalance, buyMultiplier, sellMultiplier);
+                tradingBalance, playerBalance, buyMultiplier, sellMultiplier, marketStock);
     }
 
     @Override

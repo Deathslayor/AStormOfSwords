@@ -586,6 +586,11 @@ public class ModItems {
 
 
 
+    // ---------------------------(BOATS)--------------------------- //
+
+    public static final DeferredItem<Item> FISHING_BOAT = ITEMS.registerItem("fishing_boat",
+            properties -> new net.darkflameproduction.agotmod.item.custom.FishingBoatItem(properties.stacksTo(1)));
+
     // ---------------------------(SPAWN EGGS)--------------------------- //
 
     public static final DeferredItem<Item> MAMMOTH_SPAWN_EGG = ITEMS.registerItem("mammoth_spawn_egg",

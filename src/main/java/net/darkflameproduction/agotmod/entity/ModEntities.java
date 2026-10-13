@@ -61,6 +61,14 @@ public class ModEntities {
                             .clientTrackingRange(10)
                             .build("seat"));
 
+    public static final DeferredHolder<EntityType<?>, EntityType<net.darkflameproduction.agotmod.entity.custom.boat.FishingBoatEntity>> FISHING_BOAT =
+            ENTITY_TYPES.register("fishing_boat",
+                    () -> EntityType.Builder.<net.darkflameproduction.agotmod.entity.custom.boat.FishingBoatEntity>of(
+                                    net.darkflameproduction.agotmod.entity.custom.boat.FishingBoatEntity::new, MobCategory.MISC)
+                            .sized(1.40625F, 0.5625F) // as wide as the hull (15 px x MODEL_SCALE), as high as a vanilla boat (it floats by its height)
+                            .clientTrackingRange(10)
+                            .build("fishing_boat"));
+
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);
     }

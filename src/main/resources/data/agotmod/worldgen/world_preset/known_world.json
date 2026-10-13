@@ -50,9 +50,10 @@
             "agotmod:tower_ruin_1",
             "agotmod:tower_ruin_2",
             "agotmod:tower_ruin_3",
-            "agotmod:whitehb_castle_keep_1",
             "agotmod:whitehb_castle_keep_2",
-            "agotmod:whitehb_castle_keep_3"
+            "agotmod:whitehb_castle_keep_3",
+            "agotmod:whitehb_castle_manor",
+            "agotmod:whitehb_village"
           ],
           "zones": [
             {

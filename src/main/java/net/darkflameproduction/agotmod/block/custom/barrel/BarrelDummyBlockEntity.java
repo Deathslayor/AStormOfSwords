@@ -47,6 +47,20 @@ public class BarrelDummyBlockEntity extends BlockEntity {
         return controllerPos;
     }
 
+    /**
+     * Has the block check its barrel position on the next tick: dummies from a structure template carry the
+     * position from the world the template was saved in (BarrelDummyBlock#getControllerPos).
+     */
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        if (level != null && !level.isClientSide && level.getServer() != null) {
+            level.getServer().execute(() -> {
+                if (!isRemoved()) level.scheduleTick(worldPosition, getBlockState().getBlock(), 1);
+            });
+        }
+    }
+
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);

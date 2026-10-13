@@ -5,6 +5,7 @@ import net.darkflameproduction.agotmod.network.FinishTransactionPacket;
 import net.minecraft.core.BlockPos;
 import net.darkflameproduction.agotmod.network.OpenTradingInventoryPacket;
 import net.darkflameproduction.agotmod.util.ItemPricing;
+import net.darkflameproduction.agotmod.economy.VillageMarket;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -94,6 +95,25 @@ public class TradingInventoryScreen extends Screen {
     private float buyMultiplier  = 1.0f;
     private float sellMultiplier = 0.5f;
     private long tradingBalance  = 0;
+    /** The town market's stock of each item (VillageMarket): prices follow it, unit by unit. */
+    private Map<String, Double> marketStock = new HashMap<>();
+
+    /** The town market's stock of an item; its desired stock (the base price) if unknown. */
+    private double stockOf(String itemKey) {
+        Double stock = marketStock.get(itemKey);
+        return stock != null ? stock : VillageMarket.desiredStock(itemKey);
+    }
+
+    /** The price of the next unit of an item in the current mode. */
+    private int unitPrice(String itemKey, TradeMode mode) {
+        return VillageMarket.unitPrice(itemKey, stockOf(itemKey), mode == TradeMode.BUY ? buyMultiplier : sellMultiplier);
+    }
+
+    /** What {@code amount} of an item cost or pay in the current mode - as the server prices it. */
+    private long linePrice(String itemKey, int amount) {
+        boolean buying = currentMode == TradeMode.BUY;
+        return VillageMarket.quote(itemKey, stockOf(itemKey), amount, buying ? buyMultiplier : sellMultiplier, buying);
+    }
 
     public enum TradeMode { BUY, SELL }
     private TradeMode currentMode = TradeMode.BUY;
@@ -179,7 +199,8 @@ public class TradingInventoryScreen extends Screen {
     public static void updateInventoryData(String tradingName,
                                            List<OpenTradingInventoryPacket.TradingInventoryEntry> tradingEntries,
                                            List<OpenTradingInventoryPacket.PlayerInventoryEntry> playerEntries,
-                                           long tradingBalance, float buyMultiplier, float sellMultiplier) {
+                                           long tradingBalance, float buyMultiplier, float sellMultiplier,
+                                           Map<String, Double> marketStock) {
         if (currentInstance != null && currentInstance.tradingName.equals(tradingName)) {
             List<OpenTradingInventoryPacket.TradingInventoryEntry> filtered = new ArrayList<>();
             for (OpenTradingInventoryPacket.TradingInventoryEntry e : tradingEntries)
@@ -190,6 +211,7 @@ public class TradingInventoryScreen extends Screen {
             currentInstance.tradingBalance  = tradingBalance;
             currentInstance.buyMultiplier   = buyMultiplier;
             currentInstance.sellMultiplier  = sellMultiplier;
+            currentInstance.marketStock     = new HashMap<>(marketStock);
             currentInstance.dataLoaded      = true;
 
             currentInstance.selectedEntryIndices.removeIf(
@@ -460,9 +482,7 @@ public class TradingInventoryScreen extends Screen {
                 String itemKey  = getItemKeyFromEntry(entry);
                 String dispName = getDisplayNameFromEntry(entry);
                 int    amount   = transactionAmounts.getOrDefault(itemKey, 0);
-                float  mul      = currentMode == TradeMode.BUY ? buyMultiplier : sellMultiplier;
-                int    unitPrice = ItemPricing.applyMultiplier(itemKey, mul);
-                int    lineTotal = unitPrice * amount;
+                long   lineTotal = linePrice(itemKey, amount); // each unit priced at the market stock it leaves
 
                 int rowY = y + shown * lineH;
 
@@ -576,12 +596,14 @@ public class TradingInventoryScreen extends Screen {
         String name     = getDisplayNameFromEntry(entry);
         String itemKey  = getItemKeyFromEntry(entry);
         long   amount   = getAmountFromEntry(entry);
-        int    buyP     = ItemPricing.applyMultiplier(itemKey, buyMultiplier);
-        int    sellP    = ItemPricing.applyMultiplier(itemKey, sellMultiplier);
+        int    buyP     = unitPrice(itemKey, TradeMode.BUY);
+        int    sellP    = unitPrice(itemKey, TradeMode.SELL);
 
         String[] lines = isDonate()
                 ? new String[]{ name, "Amount: " + amount }
-                : new String[]{ name, "Amount: " + amount, "Buy: " + buyP, "Sell: " + sellP };
+                : new String[]{ name, "Amount: " + amount, "Buy now: " + buyP + "c", "Sell now: " + sellP + "c",
+                        "Base price: " + ItemPricing.getItemPrice(itemKey) + "c (here " + Math.round(VillageMarket.priceFactor(stockOf(itemKey), VillageMarket.desiredStock(itemKey)) * 100) + "%)",
+                        "Each unit moves the price" };
         int tw = 0;
         for (String l : lines) tw = Math.max(tw, font.width(l));
         int bw = tw + 12, bh = lines.length * (font.lineHeight + 2) + 8;
@@ -772,8 +794,7 @@ public class TradingInventoryScreen extends Screen {
             int amt = e.getValue();
             if (amt <= 0) continue;
             totalItems += amt;
-            float mul = currentMode == TradeMode.BUY ? buyMultiplier : sellMultiplier;
-            totalPrice += ItemPricing.applyMultiplier(e.getKey(), mul) * amt;
+            totalPrice += (int) linePrice(e.getKey(), amt);
         }
     }
 

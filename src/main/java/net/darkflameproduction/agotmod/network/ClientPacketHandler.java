@@ -75,7 +75,7 @@ public class ClientPacketHandler {
                     packet.culture()
             );
 
-            TownHallScreen.updateFinances(pos, packet.townBalance(), packet.townIncome(), packet.earnings());
+            TownHallScreen.updateFinances(pos, packet.townBalance(), packet.earnings(), packet.economy());
             TownHallScreen.updateInventory(pos, packet.townInventory());
             TownHallScreen.updateCitizens(pos, packet.citizens());
             TownHallScreen.updateCraftingNeeds(pos, packet.craftingNeeds());
@@ -112,13 +112,13 @@ public class ClientPacketHandler {
 
                 if (currentScreen != null && mc.screen == currentScreen) {
                     TradingInventoryScreen.updateInventoryData(tradingName, tradingEntries, playerEntries,
-                            tradingBalance, buyMultiplier, sellMultiplier);
+                            tradingBalance, buyMultiplier, sellMultiplier, packet.marketStock());
                     TradingInventoryScreen.updatePlayerBalance(playerBalance);
                 } else {
                     TradingInventoryScreen newScreen = new TradingInventoryScreen(tradingName);
                     mc.setScreen(newScreen);
                     TradingInventoryScreen.updateInventoryData(tradingName, tradingEntries, playerEntries,
-                            tradingBalance, buyMultiplier, sellMultiplier);
+                            tradingBalance, buyMultiplier, sellMultiplier, packet.marketStock());
                     TradingInventoryScreen.updatePlayerBalance(playerBalance);
                 }
             }

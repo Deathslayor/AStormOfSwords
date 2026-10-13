@@ -110,6 +110,7 @@ public class TownHallBlockEntity extends BlockEntity implements
 
     // ===== TOWN HALL SHARED INVENTORY =====
     private final Map<String, Long> townInventory = new HashMap<>();
+    /** The treasury: the town's money (VillageEconomy - taxes, wages, imports, exports...). Below 0 is debt. */
     private long townBalance = 0;
     /** Earnings memory for the trader's budget (TraderPurchasing): the day being counted, its earnings so far, and the day before's. */
     private long earningsDay = -1;
@@ -118,7 +119,22 @@ public class TownHallBlockEntity extends BlockEntity implements
 
     /** Each player's reputation with this town (TownReputation): -100 to 100, 5 from their first visit. */
     private final Map<UUID, Integer> playerReputation = new HashMap<>();
-    private long townIncome = 0;
+
+    // ===== VILLAGE ECONOMY (VillageEconomy) =====
+    /** t, in percent: set by the town's owner; unclaimed towns keep the default. */
+    private int taxPercent = net.darkflameproduction.agotmod.economy.VillageEconomy.DEFAULT_TAX_PERCENT;
+    /** The servings of each food category the town's NPCs ate today, and on the last day evaluated. */
+    private final Map<net.darkflameproduction.agotmod.economy.FoodCategory, Long> mealsToday =
+            new java.util.EnumMap<>(net.darkflameproduction.agotmod.economy.FoodCategory.class);
+    private Map<net.darkflameproduction.agotmod.economy.FoodCategory, Long> mealsYesterday =
+            new java.util.EnumMap<>(net.darkflameproduction.agotmod.economy.FoodCategory.class);
+    /** The population on the last day evaluated, and its food dissatisfaction F (0 until a day is evaluated). */
+    private int evaluatedPopulation = 0;
+    private double foodDissatisfaction = 0;
+    /** The village's local market (VillageMarket), and what its traders imported and exported today (units). */
+    private final net.darkflameproduction.agotmod.economy.VillageMarket market;
+    private int importedToday = 0;
+    private int exportedToday = 0;
 
     // Cache for citizen last names (refreshed during citizen checks)
     private List<String> citizenLastNames = new ArrayList<>();
@@ -183,6 +199,7 @@ public class TownHallBlockEntity extends BlockEntity implements
 
     public TownHallBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.TOWN_HALL.get(), pos, blockState);
+        this.market = new net.darkflameproduction.agotmod.economy.VillageMarket(pos.asLong());
     }
 
     /**
@@ -971,8 +988,8 @@ public class TownHallBlockEntity extends BlockEntity implements
                 packet = new net.darkflameproduction.agotmod.network.TownHallDataPacket(
                         worldPosition, bedCount, citizenCount, getCurrentScanRadius(), townName, isClaimed,
                         getClaimedByHouse(), getAvailableJobCount(), getAssignedJobCount(), getTotalJobCount(),
-                        getJoblessCount(), townBalance, townIncome, new java.util.HashMap<>(townInventory),
-                        culture.name(), getCitizenEntries(), getCraftingNeeds(), getEarnings());
+                        getJoblessCount(), townBalance, new java.util.HashMap<>(townInventory),
+                        culture.name(), getCitizenEntries(), getCraftingNeeds(), getEarnings(), getEconomy());
             }
             net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer, packet);
         }
@@ -1235,82 +1252,33 @@ public class TownHallBlockEntity extends BlockEntity implements
         FarmerDepositTicketSystem.confirmDeposit(ticket.farmerUUID);
     }
 
-    /** Adds deposited items to the town's stores; the town earns 10% of their value. */
+    /** Adds produced or returned items to the town's stores. */
     public void depositItems(Map<String, Integer> items) {
         depositItems(null, items);
     }
 
     /**
-     * An NPC ({@code npc}, null if unknown) hands items in. What he took from the stores and paid for since he
-     * last handed anything in and now brings back unused is refunded what he paid (takeForNpc). The rest he
-     * sells to the town like a player selling to a shop (ItemPricing.SHOP_BUY_MULTIPLIER - halved while the
-     * town is in debt): the town pays for it out of its balance, which may go below zero. The NPC himself
-     * gets nothing. Whatever he took and doesn't bring back he used up - paid for.
+     * An NPC ({@code npc}, null if unknown) hands items in: they go into the stores. Production creates goods;
+     * the town pays its workers wages for it (VillageEconomy), not for the goods.
      */
     public void depositItems(@Nullable UUID npc, Map<String, Integer> items) {
-        Map<String, long[]> taken = npc == null ? null : npcWithdrawals.remove(npc);
-        String job = jobOf(npc);
-        float sellMultiplier = net.darkflameproduction.agotmod.util.ItemPricing.SHOP_BUY_MULTIPLIER * sellPriceFactor();
         for (Map.Entry<String, Integer> entry : items.entrySet()) {
-            String itemKey = entry.getKey();
-            int count = entry.getValue();
-            if (count <= 0) continue;
-            addToTownInventory(itemKey, count);
-            long[] took = taken == null ? null : taken.get(itemKey);
-            long returned = took == null ? 0 : Math.min(count, took[0]);
-            if (returned > 0) refundWithdrawal(took[1] * returned / took[0], job);
-            long deposited = count - returned;
-            if (deposited > 0) {
-                chargeTownBalance(deposited * net.darkflameproduction.agotmod.util.ItemPricing.applyMultiplier(itemKey, sellMultiplier),
-                        CashFlow.NPC_DEPOSITS, job);
-            }
+            if (entry.getValue() > 0) addToTownInventory(entry.getKey(), entry.getValue());
         }
         setChanged();
     }
-
-    /** What each NPC has taken from the stores since he last handed anything in: item -> {count, coins paid}. */
-    private final Map<UUID, Map<String, long[]>> npcWithdrawals = new HashMap<>();
 
     /**
-     * An NPC ({@code npc}, null if unknown) takes {@code amount} of {@code itemKey} from the stores: the town is
-     * paid its value (ItemPricing - doubled while the town is in debt), counted as income. False (nothing
-     * taken) if the stores have too little.
+     * An NPC ({@code npc}, null if unknown) takes {@code amount} of {@code itemKey} from the stores for his
+     * work. False (nothing taken) if the stores have too little.
      */
     public boolean takeForNpc(@Nullable UUID npc, String itemKey, long amount) {
-        if (!removeFromTownInventory(itemKey, amount)) return false;
-        payForWithdrawal(npc, itemKey, amount);
-        return true;
+        return removeFromTownInventory(itemKey, amount);
     }
 
-    /** The payment of takeForNpc, for an NPC that has already taken the items out of the stores. */
-    public void payForWithdrawal(@Nullable UUID npc, String itemKey, long amount) {
-        if (amount <= 0) return;
-        long paid = amount * net.darkflameproduction.agotmod.util.ItemPricing.applyMultiplier(itemKey, buyPriceFactor());
-        addToTownBalance(paid, CashFlow.NPC_SUPPLIES, jobOf(npc));
-        if (npc != null) {
-            long[] took = npcWithdrawals.computeIfAbsent(npc, k -> new HashMap<>()).computeIfAbsent(itemKey, k -> new long[2]);
-            took[0] += amount;
-            took[1] += paid;
-        }
-        setChanged();
-    }
+    // ===== DEBT =====
 
-    /** Pays back {@code value} for items returned unused: off the balance (into debt if need be) and today's earnings. */
-    private void refundWithdrawal(long value, @Nullable String job) {
-        if (value <= 0) return;
-        townBalance -= value;
-        rollEarningsDay();
-        earnedToday = Math.max(0, earnedToday - value);
-        book(CashFlow.REFUNDS, job, value);
-        setChanged();
-    }
-
-    // ===== TAX AND DEBT =====
-
-    /** The share of the day's net earnings that goes to the treasury - only on a day the town made money (rollEarningsDay). */
-    public static final double TAX_RATE = 0.05;
-
-    /** A town with a negative balance is in debt. */
+    /** A town with a negative treasury is in debt. */
     public boolean isInDebt() {
         return townBalance < 0;
     }
@@ -1325,7 +1293,7 @@ public class TownHallBlockEntity extends BlockEntity implements
         return isInDebt() ? 0.5f : 1.0f;
     }
 
-    /** Takes {@code amount} off the balance even if that puts the town in debt (NPC deposits). */
+    /** Takes {@code amount} off the treasury even if that puts the town in debt (wages). */
     public void chargeTownBalance(long amount, CashFlow flow, @Nullable String job) {
         if (amount <= 0) return;
         townBalance -= amount;
@@ -1564,12 +1532,12 @@ public class TownHallBlockEntity extends BlockEntity implements
                                     this.getTotalJobCount(),
                                     this.getJoblessCount(),
                                     this.townBalance,
-                                    this.townIncome,
                                     new java.util.HashMap<>(this.townInventory),
                                     this.culture.name(),
                                     this.getCitizenEntries(),
                                     this.getCraftingNeeds(),
-                                    this.getEarnings()
+                                    this.getEarnings(),
+                                    this.getEconomy()
                             ));
                 }
             }
@@ -1596,12 +1564,12 @@ public class TownHallBlockEntity extends BlockEntity implements
                                     this.getTotalJobCount(),
                                     this.getJoblessCount(),
                                     this.townBalance,
-                                    this.townIncome,
                                     new java.util.HashMap<>(this.townInventory),
                                     this.culture.name(),
                                     this.getCitizenEntries(),
                                     this.getCraftingNeeds(),
-                                    this.getEarnings()
+                                    this.getEarnings(),
+                                    this.getEconomy()
                             ));
                 }
             }
@@ -1632,12 +1600,12 @@ public class TownHallBlockEntity extends BlockEntity implements
                                     this.getTotalJobCount(),
                                     this.getJoblessCount(),
                                     this.townBalance,
-                                    this.townIncome,
                                     new java.util.HashMap<>(this.townInventory),
                                     this.culture.name(),
                                     this.getCitizenEntries(),
                                     this.getCraftingNeeds(),
-                                    this.getEarnings()
+                                    this.getEarnings(),
+                                    this.getEconomy()
                             ));
                 }
             }
@@ -1762,78 +1730,45 @@ public class TownHallBlockEntity extends BlockEntity implements
 
     @Override
     public void onFoodRequestPosted(FoodCollectionTicketSystem.FoodRequestTicket ticket) {
+        // A varied diet keeps the town happy (VillageEconomy): hand out a mix - one serving of each category
+        // the stores hold in turn, the best stocked of each first - until the NPC has what he asked for.
+        Map<net.darkflameproduction.agotmod.economy.FoodCategory, List<String>> byCategory =
+                new java.util.EnumMap<>(net.darkflameproduction.agotmod.economy.FoodCategory.class);
+        for (Map.Entry<String, Long> entry : townInventory.entrySet()) {
+            if (entry.getValue() <= 0) continue;
+            net.darkflameproduction.agotmod.economy.FoodCategory category =
+                    net.darkflameproduction.agotmod.economy.FoodCategory.of(entry.getKey());
+            if (category != null) byCategory.computeIfAbsent(category, k -> new ArrayList<>()).add(entry.getKey());
+        }
+        for (List<String> keys : byCategory.values()) {
+            keys.sort((a, b) -> Long.compare(townInventory.getOrDefault(b, 0L), townInventory.getOrDefault(a, 0L)));
+        }
+
+        Map<String, Integer> given = new LinkedHashMap<>();
         int remaining = ticket.amountNeeded;
+        boolean gaveAny = true;
+        while (remaining > 0 && gaveAny) {
+            gaveAny = false;
+            for (List<String> keys : byCategory.values()) {
+                if (remaining <= 0) break;
+                keys.removeIf(key -> townInventory.getOrDefault(key, 0L) <= 0);
+                if (keys.isEmpty()) continue;
+                String key = keys.get(0);
+                removeFromTownInventory(key, 1);
+                given.merge(key, 1, Integer::sum);
+                remaining--;
+                gaveAny = true;
+            }
+        }
+
         List<ItemStack> toGive = new ArrayList<>();
-
-        List<String> keys = new ArrayList<>(townInventory.keySet());
-
-        for (String itemKey : keys) {
-            if (remaining <= 0) break;
-
-            net.minecraft.resources.ResourceLocation loc =
-                    net.minecraft.resources.ResourceLocation.tryParse(itemKey);
-            if (loc == null) continue;
-
-            net.minecraft.world.item.Item item =
-                    net.minecraft.core.registries.BuiltInRegistries.ITEM.get(loc);
-            if (item == null || item == net.minecraft.world.item.Items.AIR) continue;
-
-            if (!isTownHallFood(item)) continue;
-
-            long available = townInventory.getOrDefault(itemKey, 0L);
-            if (available <= 0) continue;
-
-            int toTake = (int) Math.min(remaining, available);
-            removeFromTownInventory(itemKey, toTake);
-            toGive.add(new net.minecraft.world.item.ItemStack(item, toTake));
-            remaining -= toTake;
+        for (Map.Entry<String, Integer> entry : given.entrySet()) {
+            net.minecraft.world.item.Item item = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(
+                    net.minecraft.resources.ResourceLocation.parse(entry.getKey()));
+            toGive.add(new ItemStack(item, entry.getValue()));
         }
-
-        // Calculate total value of food given using ItemPricing
-        if (!toGive.isEmpty()) {
-            long totalValue = 0;
-            for (ItemStack stack : toGive) {
-                net.minecraft.resources.ResourceLocation itemLoc =
-                        net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(stack.getItem());
-                if (itemLoc != null) {
-                    String itemKey = itemLoc.toString();
-                    // Doubled while the town is in debt, like everything bought from it
-                    long unitPrice = net.darkflameproduction.agotmod.util.ItemPricing.applyMultiplier(itemKey, buyPriceFactor());
-                    totalValue += unitPrice * stack.getCount();
-                }
-            }
-
-            // Add total value to town balance (taxed once a day, on the day's net earnings - rollEarningsDay)
-            if (totalValue > 0) {
-                addToTownBalance(totalValue, CashFlow.NPC_FOOD, jobOf(ticket.peasantUUID));
-            }
-        }
-
         FoodCollectionTicketSystem.postResponse(ticket.peasantUUID, toGive);
         setChanged();
-    }
-
-    private boolean isTownHallFood(net.minecraft.world.item.Item item) {
-        net.minecraft.world.item.ItemStack stack = new net.minecraft.world.item.ItemStack(item);
-
-        // Must be a food item
-        if (!stack.has(net.minecraft.core.component.DataComponents.FOOD)) return false;
-
-        // Only hand out food NPCs can actually eat - anything else isn't counted as food by them,
-        // so they'd keep coming back for more
-        if (!net.darkflameproduction.agotmod.entity.custom.npc.system.inventory.HungerSystem.isNpcFood(stack)) return false;
-
-        // Exclude golden apples explicitly
-        if (item == net.minecraft.world.item.Items.GOLDEN_APPLE) return false;
-        if (item == net.minecraft.world.item.Items.ENCHANTED_GOLDEN_APPLE) return false;
-
-        // Exclude known poisonous foods explicitly
-        if (item == net.minecraft.world.item.Items.POISONOUS_POTATO) return false;
-        if (item == net.minecraft.world.item.Items.PUFFERFISH) return false;
-        if (item == net.minecraft.world.item.Items.ROTTEN_FLESH) return false;
-        if (item == net.minecraft.world.item.Items.SPIDER_EYE) return false;
-
-        return true;
     }
 
     @Override
@@ -2067,32 +2002,178 @@ public class TownHallBlockEntity extends BlockEntity implements
     }
 
     /**
-     * On a new day: the day that ended is taxed - {@link #TAX_RATE} of what it made, if it made money (its income
-     * less its expenses), moved from the balance to the treasury; a day that lost money pays no tax. Then today's
-     * earnings and cash flow become yesterday's (nothing, if a day or more went by without any).
+     * On a new day: today's earnings and cash flow become yesterday's (nothing, if a day or more went by
+     * without any), and the new day starts (startOfDay).
      */
     private void rollEarningsDay() {
         if (level == null) return;
         long day = level.getDayTime() / 24000;
         if (day == earningsDay) return;
-        long net = 0;
-        for (Map.Entry<String, Long> entry : flowToday.entrySet()) {
-            CashFlow flow = flowOf(entry.getKey());
-            if (flow != null) net += flow.income ? entry.getValue() : -entry.getValue();
-        }
-        long tax = net > 0 ? (long) Math.floor(net * TAX_RATE) : 0;
-        if (tax > 0) {
-            townBalance -= tax;
-            townIncome += tax;
-            flowToday.merge(CashFlow.TAXES.name() + "|", tax, Long::sum);
-        }
         boolean consecutive = day == earningsDay + 1;
+        boolean firstDay = earningsDay < 0;
         earnedYesterday = consecutive ? earnedToday : 0;
         earnedToday = 0;
         flowYesterday = consecutive ? flowToday : new HashMap<>();
         flowToday = new HashMap<>();
         earningsDay = day;
+        if (!firstDay) startOfDay(consecutive);
+        else mealsFullDay = false;
         setChanged();
+    }
+
+    // ===== VILLAGE ECONOMY (VillageEconomy) =====
+
+    /** Whether today's meals have been counted since the day began - only a whole day is evaluated. */
+    private boolean mealsFullDay = false;
+
+    /**
+     * The start of an evaluation period (a day): the food of the day that ended is evaluated (F), the market
+     * recovers and the traders' capacity resets, then the town collects its taxes and pays its workers - at
+     * today's happiness.
+     */
+    private void startOfDay(boolean consecutive) {
+        int population = registeredCitizens.size();
+        if (consecutive && mealsFullDay) {
+            mealsYesterday = new java.util.EnumMap<>(net.darkflameproduction.agotmod.economy.FoodCategory.class);
+            mealsYesterday.putAll(mealsToday);
+            evaluatedPopulation = population;
+            long eaten = mealsToday.values().stream().mapToLong(Long::longValue).sum();
+            double quantity = net.darkflameproduction.agotmod.economy.VillageEconomy.quantitySatisfaction(eaten, population);
+            double variety = net.darkflameproduction.agotmod.economy.VillageEconomy.varietySatisfaction(
+                    net.darkflameproduction.agotmod.economy.VillageEconomy.categoriesEaten(mealsToday, population));
+            foodDissatisfaction = net.darkflameproduction.agotmod.economy.VillageEconomy.foodDissatisfaction(quantity, variety, population);
+        }
+        mealsToday.clear();
+        mealsFullDay = true;
+
+        market.recover();
+        importedToday = 0;
+        exportedToday = 0;
+
+        // T = t * P: every citizen pays, booked by job
+        Map<String, Integer> byJob = new HashMap<>();
+        for (CitizenInfo citizen : registeredCitizens.values()) {
+            byJob.merge(citizen.currentJob == null ? JobSystem.JOB_NONE : citizen.currentJob, 1, Integer::sum);
+        }
+        long perVillager = net.darkflameproduction.agotmod.economy.VillageEconomy.taxPerVillager(taxPercent);
+        double happiness = getHappiness();
+        long taxes = 0, wages = 0;
+        for (Map.Entry<String, Integer> entry : byJob.entrySet()) {
+            String job = entry.getKey().isEmpty() ? null : entry.getKey();
+            long tax = perVillager * entry.getValue();
+            addToTownBalance(tax, CashFlow.TAXES, job);
+            taxes += tax;
+            // W = sum of Wi: every worker is paid, into debt if need be
+            long wage = net.darkflameproduction.agotmod.economy.VillageEconomy.wage(job, happiness) * entry.getValue();
+            chargeTownBalance(wage, CashFlow.WAGES, job);
+            wages += wage;
+        }
+        net.darkflameproduction.agotmod.AGoTMod.LOGGER.info(
+                "[Economy] {}: day {} - taxes {} at {}%, wages {} at happiness {} (food dissatisfaction {}), treasury {}",
+                townName, earningsDay, taxes, taxPercent, wages, Math.round(happiness),
+                Math.round(foodDissatisfaction), townBalance);
+    }
+
+    /** One of the town's NPCs ate a serving of {@code category} (HungerSystem). */
+    public void recordMeal(net.darkflameproduction.agotmod.economy.FoodCategory category) {
+        rollEarningsDay();
+        mealsToday.merge(category, 1L, Long::sum);
+        setChanged();
+    }
+
+    /** t, in percent. */
+    public int getTaxPercent() {
+        return taxPercent;
+    }
+
+    /** Sets t (0 to MAX_TAX_PERCENT). Only for the town's owner - ServerPacketHandler checks. */
+    public void setTaxPercent(int percent) {
+        taxPercent = Math.max(0, Math.min(net.darkflameproduction.agotmod.economy.VillageEconomy.MAX_TAX_PERCENT, percent));
+        setChanged();
+    }
+
+    /** R: the reputation of the town's liege (the player who claimed it) with it; 0 for an unclaimed town. */
+    public int getLiegeReputation() {
+        return claimedByPlayerUUID == null ? 0 : getReputation(claimedByPlayerUUID);
+    }
+
+    /** F of the last day evaluated. */
+    public double getFoodDissatisfaction() {
+        return foodDissatisfaction;
+    }
+
+    /** H, now: from the current tax rate, the last day's food and the liege's reputation. */
+    public double getHappiness() {
+        return net.darkflameproduction.agotmod.economy.VillageEconomy.happiness(taxPercent, foodDissatisfaction, getLiegeReputation());
+    }
+
+    public net.darkflameproduction.agotmod.economy.VillageMarket getMarket() {
+        return market;
+    }
+
+    /** How many units the town's traders may import, and export, a day (none without a trader). */
+    public int getTradeCapacity() {
+        return getJobCounts().getOrDefault(JobSystem.JOB_TRADER, 0)
+                * net.darkflameproduction.agotmod.economy.VillageMarket.TRADE_CAPACITY_PER_TRADER;
+    }
+
+    /** Units the traders may still import today. */
+    public int getImportCapacityLeft() {
+        rollEarningsDay();
+        return Math.max(0, getTradeCapacity() - importedToday);
+    }
+
+    /** Units the traders may still export today. */
+    public int getExportCapacityLeft() {
+        rollEarningsDay();
+        return Math.max(0, getTradeCapacity() - exportedToday);
+    }
+
+    /**
+     * The trader imports {@code amount} of {@code itemKey} from the market for {@code cost} (its quote): paid
+     * from the treasury, taken from the market's stock, put into the stores. False (nothing done) if the town
+     * can't afford it.
+     */
+    public boolean importGoods(String itemKey, int amount, long cost) {
+        if (amount <= 0 || !deductFromTownBalance(cost, CashFlow.IMPORTS)) return false;
+        market.take(itemKey, amount);
+        addToTownInventory(itemKey, amount);
+        importedToday += amount;
+        setChanged();
+        return true;
+    }
+
+    /**
+     * The trader exports {@code amount} of {@code itemKey} from the stores to the market, for its quote, paid
+     * into the treasury. Returns what it earned; 0 (nothing done) if the stores have too little.
+     */
+    public long exportGoods(String itemKey, int amount) {
+        if (amount <= 0) return 0;
+        long value = market.quote(itemKey, amount, 1f, false);
+        if (!removeFromTownInventory(itemKey, amount)) return 0;
+        market.put(itemKey, amount);
+        addToTownBalance(value, CashFlow.EXPORTS);
+        exportedToday += amount;
+        setChanged();
+        return value;
+    }
+
+    /** The town's economy for the town hall screen: taxes, happiness, food, trade and its market's stocks. */
+    public net.darkflameproduction.agotmod.network.TownHallDataPacket.Economy getEconomy() {
+        rollEarningsDay();
+        Map<String, Double> stocks = new HashMap<>();
+        for (String itemKey : townInventory.keySet()) {
+            if (net.darkflameproduction.agotmod.economy.VillageMarket.desiredStock(itemKey) > 0) stocks.put(itemKey, market.stock(itemKey));
+        }
+        stocks.putAll(market.changedStocks());
+        Map<String, Long> today = new HashMap<>();
+        mealsToday.forEach((category, eaten) -> today.put(category.name(), eaten));
+        Map<String, Long> yesterday = new HashMap<>();
+        mealsYesterday.forEach((category, eaten) -> yesterday.put(category.name(), eaten));
+        return new net.darkflameproduction.agotmod.network.TownHallDataPacket.Economy(taxPercent, getHappiness(),
+                foodDissatisfaction, registeredCitizens.size(), evaluatedPopulation, today, yesterday,
+                getLiegeReputation(), java.util.Optional.ofNullable(claimedByPlayerUUID), getTradeCapacity(),
+                importedToday, exportedToday, stocks);
     }
 
     /** The CashFlow of a "FLOW|job" key; null if there is none by that name. */
@@ -2106,7 +2187,7 @@ public class TownHallBlockEntity extends BlockEntity implements
         }
     }
 
-    /** Called regularly so the day's tax is settled as soon as a new day starts, not only on the next payment. */
+    /** Called regularly so a new day starts (taxes, wages...) as soon as it begins, not only on the next payment. */
     public void settleDay() {
         rollEarningsDay();
     }
@@ -2122,16 +2203,6 @@ public class TownHallBlockEntity extends BlockEntity implements
 
     public long getTownBalance() {
         return townBalance;
-    }
-
-    public void addToTownIncome(long amount) {
-        if (amount <= 0) return;
-        townIncome += amount;
-        setChanged();
-    }
-
-    public long getTownIncome() {
-        return townIncome;
     }
 
     /** A player's reputation with this town; the starting value on their first visit (see TownReputation). */
@@ -2227,7 +2298,6 @@ public class TownHallBlockEntity extends BlockEntity implements
         tag.put("TownInventory", townInventoryTag);
 
         tag.putLong("TownBalance", townBalance);
-        tag.putLong("TownIncome", townIncome);
 
         CompoundTag reputationTag = new CompoundTag();
         for (Map.Entry<UUID, Integer> entry : playerReputation.entrySet()) {
@@ -2235,13 +2305,30 @@ public class TownHallBlockEntity extends BlockEntity implements
         }
         tag.put("PlayerReputation", reputationTag);
 
-        CompoundTag withdrawalsTag = new CompoundTag();
-        for (Map.Entry<UUID, Map<String, long[]>> npc : npcWithdrawals.entrySet()) {
-            CompoundTag itemsTag = new CompoundTag();
-            npc.getValue().forEach((item, took) -> itemsTag.putLongArray(item, took.clone())); // {count, coins paid}
-            withdrawalsTag.put(npc.getKey().toString(), itemsTag);
+        tag.putInt("TaxPercent", taxPercent);
+        tag.put("MealsToday", mealsTag(mealsToday));
+        tag.put("MealsYesterday", mealsTag(mealsYesterday));
+        tag.putBoolean("MealsFullDay", mealsFullDay);
+        tag.putInt("EvaluatedPopulation", evaluatedPopulation);
+        tag.putDouble("FoodDissatisfaction", foodDissatisfaction);
+        tag.put("Market", market.save());
+        tag.putInt("ImportedToday", importedToday);
+        tag.putInt("ExportedToday", exportedToday);
+    }
+
+    private static CompoundTag mealsTag(Map<net.darkflameproduction.agotmod.economy.FoodCategory, Long> meals) {
+        CompoundTag tag = new CompoundTag();
+        meals.forEach((category, eaten) -> tag.putLong(category.name(), eaten));
+        return tag;
+    }
+
+    private static void mealsFrom(CompoundTag tag, Map<net.darkflameproduction.agotmod.economy.FoodCategory, Long> meals) {
+        meals.clear();
+        for (String key : tag.getAllKeys()) {
+            try {
+                meals.put(net.darkflameproduction.agotmod.economy.FoodCategory.valueOf(key), tag.getLong(key));
+            } catch (IllegalArgumentException ignored) {}
         }
-        tag.put("NpcWithdrawals", withdrawalsTag);
     }
 
     @Override
@@ -2343,32 +2430,26 @@ public class TownHallBlockEntity extends BlockEntity implements
         }
         cleanupTownInventory();
 
-        townBalance = tag.getLong("TownBalance");
-        townIncome  = tag.getLong("TownIncome");
+        // Older saves kept a separate treasury (taxes): it is all one treasury now
+        townBalance = tag.getLong("TownBalance") + tag.getLong("TownIncome");
+
+        taxPercent = tag.contains("TaxPercent") ? tag.getInt("TaxPercent")
+                : net.darkflameproduction.agotmod.economy.VillageEconomy.DEFAULT_TAX_PERCENT;
+        mealsFrom(tag.getCompound("MealsToday"), mealsToday);
+        mealsYesterday = new java.util.EnumMap<>(net.darkflameproduction.agotmod.economy.FoodCategory.class);
+        mealsFrom(tag.getCompound("MealsYesterday"), mealsYesterday);
+        mealsFullDay = tag.getBoolean("MealsFullDay");
+        evaluatedPopulation = tag.getInt("EvaluatedPopulation");
+        foodDissatisfaction = tag.getDouble("FoodDissatisfaction");
+        market.load(tag.getCompound("Market"));
+        importedToday = tag.getInt("ImportedToday");
+        exportedToday = tag.getInt("ExportedToday");
 
         playerReputation.clear();
         CompoundTag reputationTag = tag.getCompound("PlayerReputation");
         for (String key : reputationTag.getAllKeys()) {
             try {
                 playerReputation.put(UUID.fromString(key), reputationTag.getInt(key));
-            } catch (IllegalArgumentException ignored) {}
-        }
-
-        npcWithdrawals.clear();
-        CompoundTag withdrawalsTag = tag.getCompound("NpcWithdrawals");
-        for (String key : withdrawalsTag.getAllKeys()) {
-            try {
-                CompoundTag itemsTag = withdrawalsTag.getCompound(key);
-                Map<String, long[]> items = new HashMap<>();
-                for (String item : itemsTag.getAllKeys()) {
-                    long[] took = itemsTag.getLongArray(item);
-                    if (took.length != 2) { // older saves kept only the count: paid at the base price
-                        long count = itemsTag.getLong(item);
-                        took = new long[]{count, count * net.darkflameproduction.agotmod.util.ItemPricing.getItemPrice(item)};
-                    }
-                    if (took[0] > 0) items.put(item, took);
-                }
-                npcWithdrawals.put(UUID.fromString(key), items);
             } catch (IllegalArgumentException ignored) {}
         }
 

@@ -5,6 +5,8 @@ import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -64,6 +66,30 @@ public class BarrelMediumBlock extends BarrelControllerBlock {
         boolean east  = hit.x - pos.getX() >= 0.5;
         boolean south = hit.z - pos.getZ() >= 0.5;
         return defaultBlockState().setValue(EAST, east).setValue(SOUTH, south);
+    }
+
+    /**
+     * Turns the way the barrel extends with the block, so a barrel in a rotated structure template still
+     * covers its dummies. Clockwise 90 turns the extent (x, z) into (-z, x).
+     */
+    @Override
+    protected BlockState rotate(BlockState state, Rotation rotation) {
+        boolean east = state.getValue(EAST), south = state.getValue(SOUTH);
+        return switch (rotation) {
+            case CLOCKWISE_90 -> state.setValue(EAST, !south).setValue(SOUTH, east);
+            case CLOCKWISE_180 -> state.setValue(EAST, !east).setValue(SOUTH, !south);
+            case COUNTERCLOCKWISE_90 -> state.setValue(EAST, south).setValue(SOUTH, !east);
+            default -> state;
+        };
+    }
+
+    @Override
+    protected BlockState mirror(BlockState state, Mirror mirror) {
+        return switch (mirror) {
+            case LEFT_RIGHT -> state.setValue(SOUTH, !state.getValue(SOUTH));
+            case FRONT_BACK -> state.setValue(EAST, !state.getValue(EAST));
+            default -> state;
+        };
     }
 
     /** Model centre relative to the controller, in blocks (used by the renderer too). */

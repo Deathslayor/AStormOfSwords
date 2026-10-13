@@ -95,6 +95,7 @@ public class AGoTMod {
         modEventBus.addListener(this::addCreative);
         ModTerrablender.registerBiomes();
         ModEntities.register(modEventBus);
+        net.darkflameproduction.agotmod.worldgen.structure.ModStructures.register(modEventBus);
         LOGGER.info("AGOT Mod initialized");
         ModAttachments.ATTACHMENT_TYPES.register(modEventBus);
 
@@ -181,6 +182,7 @@ public class AGoTMod {
     @SubscribeEvent
     public void onRegisterCommands(RegisterCommandsEvent event) {
         SetHouseBannerCommand.register(event.getDispatcher());
+        net.darkflameproduction.agotmod.command.ReputationCommand.register(event.getDispatcher());
         LOGGER.info("Registered SetHouseBannerCommand");
     }
 

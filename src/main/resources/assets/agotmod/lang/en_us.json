@@ -3005,6 +3005,8 @@
   "entity.agotmod.mammoth": "Mammoth",
   "entity.agotmod.crow": "Crow",
   "entity.agotmod.direwolf": "Direwolf",
+  "entity.agotmod.fishing_boat": "Fishing Boat",
+  "item.agotmod.fishing_boat": "Fishing Boat",
 
   "key.agotmod.open_custom_gui": "Open Custom GUI",
   "screen.agotmod.custom_gui": "Custom GUI",

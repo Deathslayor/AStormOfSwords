@@ -110,6 +110,7 @@ public class ServerPacketHandler {
 
         for (Map.Entry<String, Integer> entry : packet.getItemAmounts().entrySet()) {
             townHall.removeFromTownInventory(entry.getKey(), entry.getValue());
+            townHall.getMarket().take(entry.getKey(), entry.getValue()); // scarcer here now: dearer
             spawnItemsAtPlayer(entry.getKey(), entry.getValue(), player, level);
         }
 
@@ -145,6 +146,9 @@ public class ServerPacketHandler {
         boolean success = processSellTransaction(townHall, packet.getItemAmounts(), player);
 
         if (success) {
+            for (Map.Entry<String, Integer> entry : packet.getItemAmounts().entrySet()) {
+                townHall.getMarket().put(entry.getKey(), entry.getValue()); // more of it here now: cheaper
+            }
             addPlayerBalance(player, totalEarnings);
             townHall.deductFromTownBalance(totalEarnings, net.darkflameproduction.agotmod.block.custom.CashFlow.PLAYER_PURCHASES);
 
@@ -374,6 +378,23 @@ public class ServerPacketHandler {
         });
     }
 
+    /** The town's owner sets its tax rate - nobody else may, and only from near the town hall. */
+    public static void handleSetTaxRate(SetTaxRatePacket packet, IPayloadContext context) {
+        context.enqueueWork(() -> {
+            if (!(context.player() instanceof ServerPlayer serverPlayer)) return;
+            Level level = serverPlayer.level();
+            BlockPos pos = packet.pos();
+            if (!level.isLoaded(pos) || !(level.getBlockEntity(pos) instanceof TownHallBlockEntity townHall)) return;
+            if (serverPlayer.distanceToSqr(pos.getX(), pos.getY(), pos.getZ()) > 64 * 64) return;
+            if (!serverPlayer.getUUID().equals(townHall.getClaimedByPlayerUUID())) {
+                serverPlayer.sendSystemMessage(Component.literal("Only the lord of " + townHall.getTownName() + " can set its taxes."));
+                return;
+            }
+            townHall.setTaxPercent(packet.taxPercent());
+            broadcastTownHallData(level, pos, townHall, 64);
+        });
+    }
+
     public static void handleClaimTownHall(ClaimTownHallPacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
             if (context.player() instanceof ServerPlayer serverPlayer) {
@@ -438,12 +459,12 @@ public class ServerPacketHandler {
                             townHall.getTotalJobCount(),
                             townHall.getJoblessCount(),
                             townHall.getTownBalance(),
-                            townHall.getTownIncome(),
                             new java.util.HashMap<>(townHall.getTownInventory()),
                             townHall.getCulture().name(),
                             townHall.getCitizenEntries(),
                             townHall.getCraftingNeeds(),
-                            townHall.getEarnings()
+                            townHall.getEarnings(),
+                            townHall.getEconomy()
                     ));
                 }
             }
@@ -470,12 +491,10 @@ public class ServerPacketHandler {
                                               TownHallBlockEntity townHall) {
         float multiplier = net.darkflameproduction.agotmod.entity.custom.npc.system.reputation.TownReputation
                 .buyMultiplier(jobType.equals(JobSystem.JOB_TRADER), reputation) * townHall.buyPriceFactor(); // doubled while the town is in debt
+        // At the town's local market price, each unit dearer than the last (VillageMarket.quote - the GUI shows the same)
         long totalCost = 0;
         for (Map.Entry<String, Integer> entry : itemAmounts.entrySet()) {
-            if (entry.getValue() > 0) {
-                int price = net.darkflameproduction.agotmod.util.ItemPricing.applyMultiplier(entry.getKey(), multiplier);
-                totalCost += (long) price * entry.getValue();
-            }
+            if (entry.getValue() > 0) totalCost += townHall.getMarket().quote(entry.getKey(), entry.getValue(), multiplier, true);
         }
         return totalCost;
     }
@@ -484,12 +503,10 @@ public class ServerPacketHandler {
                                                    TownHallBlockEntity townHall) {
         float multiplier = net.darkflameproduction.agotmod.entity.custom.npc.system.reputation.TownReputation
                 .sellMultiplier(jobType.equals(JobSystem.JOB_TRADER), reputation) * townHall.sellPriceFactor(); // halved while the town is in debt
+        // At the town's local market price, each unit cheaper than the last (VillageMarket.quote - the GUI shows the same)
         long totalEarnings = 0;
         for (Map.Entry<String, Integer> entry : itemAmounts.entrySet()) {
-            if (entry.getValue() > 0) {
-                int price = net.darkflameproduction.agotmod.util.ItemPricing.applyMultiplier(entry.getKey(), multiplier);
-                totalEarnings += (long) price * entry.getValue();
-            }
+            if (entry.getValue() > 0) totalEarnings += townHall.getMarket().quote(entry.getKey(), entry.getValue(), multiplier, false);
         }
         return totalEarnings;
     }

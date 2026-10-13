@@ -112,6 +112,16 @@ public class ModNetworking {
                 ServerPacketHandler::handleUpdateTownName
         );
         registrar.playToServer(
+                FishingBoatControlPacket.TYPE,
+                FishingBoatControlPacket.STREAM_CODEC,
+                FishingBoatControlPacket::handle
+        );
+        registrar.playToServer(
+                SetTaxRatePacket.TYPE,
+                SetTaxRatePacket.STREAM_CODEC,
+                ServerPacketHandler::handleSetTaxRate
+        );
+        registrar.playToServer(
                 SaveHouseNamePacket.TYPE,
                 SaveHouseNamePacket.STREAM_CODEC,
                 SaveHouseNamePacket::handle

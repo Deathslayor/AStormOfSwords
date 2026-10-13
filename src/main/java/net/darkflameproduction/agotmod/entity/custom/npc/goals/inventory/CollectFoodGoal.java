@@ -49,7 +49,7 @@ public class CollectFoodGoal extends Goal {
         foodReceived = false;
         waitTicks    = 0;
 
-        int currentFood = peasant.getHungerSystem().countMeatInInventory();
+        int currentFood = peasant.getHungerSystem().countFoodInInventory();
         int needed      = MIN_FOOD_COUNT - currentFood;
 
         if (needed <= 0) {
