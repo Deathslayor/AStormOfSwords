@@ -678,6 +678,23 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 ModItems.RED_ONION_SEEDS.get()
         ));
 
+        this.add(ModBLocks.RYE_CROP.get(), cropDrop(
+                ModBLocks.RYE_CROP.get(),
+                RyeCropBlock.AGE,
+                RyeCropBlock.MAX_AGE,
+                ModItems.RYE.get(), 1.0F, 3.0F,
+                ModItems.RYE_SEEDS.get()
+        ));
+        // The top half drops nothing: breaking it breaks the bottom half, which drops the rye
+        this.add(ModBLocks.RYE_CROP_TOP.get(), this.noDrop());
+        this.add(ModBLocks.BARLEY_CROP.get(), cropDrop(ModBLocks.BARLEY_CROP.get(), BarleyCropBlock.AGE, BarleyCropBlock.MAX_AGE,
+                ModItems.BARLEY.get(), 1.0F, 1.0F, ModItems.BARLEY_SEEDS.get()));
+        this.add(ModBLocks.OAT_CROP.get(), cropDrop(ModBLocks.OAT_CROP.get(), OatCropBlock.AGE, OatCropBlock.MAX_AGE,
+                ModItems.OAT.get(), 1.0F, 1.0F, ModItems.OAT_SEEDS.get()));
+        this.add(ModBLocks.COTTON_CROP.get(), cropDrop(ModBLocks.COTTON_CROP.get(), CottonCropBlock.AGE, CottonCropBlock.MAX_AGE,
+                ModItems.COTTON.get(), 0.0F, 3.0F, ModItems.COTTON_SEEDS.get()));
+        this.add(ModBLocks.HEMP_CROP.get(), cropDrop(ModBLocks.HEMP_CROP.get(), HempCropBlock.AGE, HempCropBlock.MAX_AGE,
+                ModItems.HEMP.get(), 0.0F, 3.0F, ModItems.HEMP_SEEDS.get()));
         this.add(ModBLocks.TURNIP_CROP.get(), cropDrop(
                 ModBLocks.TURNIP_CROP.get(),
                 TurnipCropBlock.AGE,

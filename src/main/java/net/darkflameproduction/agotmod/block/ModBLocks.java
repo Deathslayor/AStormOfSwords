@@ -1682,6 +1682,24 @@ public class ModBLocks {
     public static final DeferredBlock<Block> TURNIP_CROP = registerBlock("turnip_crop",
             TurnipCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
 
+    public static final DeferredBlock<Block> RYE_CROP = registerBlock("rye_crop",
+            RyeCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.WHEAT), false);
+
+    public static final DeferredBlock<Block> RYE_CROP_TOP = registerBlock("rye_crop_top",
+            RyeCropTopBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.WHEAT), false);
+
+    public static final DeferredBlock<Block> BARLEY_CROP = registerBlock("barley_crop",
+            BarleyCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.WHEAT), false);
+
+    public static final DeferredBlock<Block> OAT_CROP = registerBlock("oat_crop",
+            OatCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.WHEAT), false);
+
+    public static final DeferredBlock<Block> COTTON_CROP = registerBlock("cotton_crop",
+            CottonCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
+
+    public static final DeferredBlock<Block> HEMP_CROP = registerBlock("hemp_crop",
+            HempCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
+
     public static final DeferredBlock<Block> WILD_ONION_CROP = registerBlock("wild_onion_crop",
             WildOnionCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), false);
 

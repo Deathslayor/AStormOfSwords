@@ -1,11 +1,11 @@
-// 1.21.1	2026-10-11T22:08:23.3677947	Tags for minecraft:block mod id agotmod
+// 1.21.1	2026-10-14T22:02:23.8712099	Tags for minecraft:block mod id agotmod
 7ce4ba32d6429dbf27a7ccd68d70690dbe80eb19 data/agotmod/tags/block/incorrect_for_bronze_tool.json
 a249c46329a41538f49a564e1f14338aaf1be5a0 data/agotmod/tags/block/incorrect_for_steel_tool.json
 a5270b76c9036b19927822a14ea7db103ebf5a0d data/agotmod/tags/block/needs_bronze_tool.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/agotmod/tags/block/needs_dragonglass_tool.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/agotmod/tags/block/needs_steel_tool.json
 13bc19a01a7bc13594c25fc3e0c884b1bc4b025c data/agotmod/tags/block/wattle_and_daub.json
-78bcd7566cf6cc60a75be9737b54e583f35f0b91 data/minecraft/tags/block/crops.json
+18fce5cae2718f94b5524b5b250b5db615866856 data/minecraft/tags/block/crops.json
 aa239540a540fded2eb052462a8c6ac88fd2f51b data/minecraft/tags/block/dirt.json
 7fd219ca9712234345cf4658f7c9a3cf52034783 data/minecraft/tags/block/fences.json
 55b4e09946db167425800b49d7d9d17ba8e73d1c data/minecraft/tags/block/fence_gates.json

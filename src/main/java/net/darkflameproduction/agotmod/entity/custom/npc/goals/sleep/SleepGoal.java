@@ -6,6 +6,7 @@ import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.darkflameproduction.agotmod.entity.custom.npc.Peasant_Entity;
 import net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobSystem;
+import net.darkflameproduction.agotmod.entity.custom.npc.system.sleep.BedAccess;
 
 import java.util.EnumSet;
 
@@ -114,16 +115,13 @@ public class SleepGoal extends Goal {
             );
 
             // If close enough, start sleeping immediately
-            if (distanceToBed <= 9.0D) { // Within 3 blocks
+            if (distanceToBed <= BedAccess.SLEEP_REACH_SQR) { // Within 3 blocks
                 peasant.startSleeping(bedPos);
             } else {
-                // If not close enough, move closer first
-                peasant.getNavigation().moveTo(
-                        bedPos.getX() + 0.5,
-                        bedPos.getY(),
-                        bedPos.getZ() + 0.5,
-                        1.0
-                );
+                // If not close enough, move closer first - beside the bed, never onto it
+                BlockPos bedside = BedAccess.findBedside(peasant.level(), bedPos, peasant.blockPosition());
+                BlockPos goal = bedside != null ? bedside : bedPos;
+                peasant.getNavigation().moveTo(goal.getX() + 0.5, goal.getY(), goal.getZ() + 0.5, 1.0);
             }
         }
     }

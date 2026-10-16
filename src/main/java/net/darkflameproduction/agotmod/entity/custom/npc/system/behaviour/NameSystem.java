@@ -178,8 +178,8 @@ public class NameSystem {
             }
         }
 
-        // 50% chance of a nickname
-        nickname = random.nextBoolean() ? NICKNAMES[random.nextInt(NICKNAMES.length)] : "";
+        // 1 in 20 has a nickname
+        nickname = random.nextInt(20) == 0 ? NICKNAMES[random.nextInt(NICKNAMES.length)] : "";
         lastName = ""; // no job yet
 
         applyName();

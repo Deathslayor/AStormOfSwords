@@ -81,6 +81,8 @@ public class JobBarrelBlock extends BaseEntityBlock implements WorldlyContainerH
     @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         if (!state.is(newState.getBlock())) {
+            // The job is gone: off its town's job list
+            if (level instanceof ServerLevel serverLevel) TownHallBlockEntity.pingJobBlock(serverLevel, pos, null);
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof JobBarrelBlockEntity barrelEntity) {
                 if (level instanceof ServerLevel) {

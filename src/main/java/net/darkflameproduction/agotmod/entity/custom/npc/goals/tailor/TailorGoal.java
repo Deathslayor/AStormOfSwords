@@ -148,6 +148,7 @@ public class TailorGoal extends Goal {
         for (String flowerKey : FLOWER_TO_DYE.keySet()) {
             if (hasItemInInventory(flowerKey, 1)) return true;
         }
+        if (hasItemInInventory("agotmod:cotton", 1)) return true;
         if (hasItemInInventory("minecraft:string", 4)) return true;
         if (hasItemInInventory("minecraft:white_wool", 2)) return true;
         // Armor only counts if we haven't made one today
@@ -225,6 +226,15 @@ public class TailorGoal extends Goal {
         // What the town's supply chain is short of comes first (see SupplyChain)
         SupplyChain.Recipe needed = SupplyChain.nextCraft(peasant, JobSystem.JOB_TAILOR);
         if (needed != null && SupplyChain.craft(peasant, needed)) return;
+
+        // Step 1: Cotton -> String (1:1)
+        if (hasItemInInventory("agotmod:cotton", 1)) {
+            removeItemFromInventory("agotmod:cotton", 1);
+            addItemToInventory(new ItemStack(Items.STRING, 1));
+            peasant.triggerInteractAnimation();
+            net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.CraftingDisplay.crafted(peasant, "agotmod:cotton");
+            return;
+        }
 
         // Step 2: String â†’ Wool (4 string = 1 white wool)
         if (hasItemInInventory("minecraft:string", 4)) {

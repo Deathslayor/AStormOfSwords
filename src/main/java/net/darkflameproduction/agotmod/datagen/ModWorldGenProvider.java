@@ -182,6 +182,24 @@ public class ModWorldGenProvider extends DatapackBuiltinEntriesProvider {
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "woolfield"));
     public static final ResourceKey<BannerPattern> WULL = ResourceKey.create(Registries.BANNER_PATTERN,
             ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "wull"));
+    public static final ResourceKey<BannerPattern> ARRYN1 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "arryn1"));
+    public static final ResourceKey<BannerPattern> ARRYN2 = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "arryn2"));
+    public static final ResourceKey<BannerPattern> LIPPS = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "lipps"));
+    public static final ResourceKey<BannerPattern> MOORE = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "moore"));
+    public static final ResourceKey<BannerPattern> UPCLIFF = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "upcliff"));
+    public static final ResourceKey<BannerPattern> WAYNWOOD = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "waynwood"));
+    public static final ResourceKey<BannerPattern> DOWNWARDS_WEDGE = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "downwards_wedge"));
+    public static final ResourceKey<BannerPattern> UPWARDS_WEDGE = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "upwards_wedge"));
+    public static final ResourceKey<BannerPattern> SHIELD = ResourceKey.create(Registries.BANNER_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "shield"));
 
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
             .add(Registries.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap)
@@ -275,5 +293,14 @@ public class ModWorldGenProvider extends DatapackBuiltinEntriesProvider {
         context.register(WIDOWSWATCH2, new BannerPattern(WIDOWSWATCH2.location(), "widowswatch2"));
         context.register(WOOLFIELD, new BannerPattern(WOOLFIELD.location(), "woolfield"));
         context.register(WULL, new BannerPattern(WULL.location(), "wull"));
+        context.register(ARRYN1, new BannerPattern(ARRYN1.location(), "arryn1"));
+        context.register(ARRYN2, new BannerPattern(ARRYN2.location(), "arryn2"));
+        context.register(LIPPS, new BannerPattern(LIPPS.location(), "lipps"));
+        context.register(MOORE, new BannerPattern(MOORE.location(), "moore"));
+        context.register(UPCLIFF, new BannerPattern(UPCLIFF.location(), "upcliff"));
+        context.register(WAYNWOOD, new BannerPattern(WAYNWOOD.location(), "waynwood"));
+        context.register(DOWNWARDS_WEDGE, new BannerPattern(DOWNWARDS_WEDGE.location(), "downwards_wedge"));
+        context.register(UPWARDS_WEDGE, new BannerPattern(UPWARDS_WEDGE.location(), "upwards_wedge"));
+        context.register(SHIELD, new BannerPattern(SHIELD.location(), "shield"));
     }
 }

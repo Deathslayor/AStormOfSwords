@@ -13,7 +13,6 @@ import net.darkflameproduction.agotmod.entity.custom.npc.goals.farmer.FarmerBarr
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.farmer.FarmingGoal;
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.guard.GuardCombatGoal;
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.guard.GuardPatrolGoal;
-import net.darkflameproduction.agotmod.entity.custom.npc.goals.inventory.CollectFoodGoal;
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.sleep.FindBedGoal;
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.sleep.SleepGoal;
 import net.darkflameproduction.agotmod.entity.custom.npc.goals.miner.MinerGoal;
@@ -160,6 +159,10 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     private final NameSystem nameSystem;
     private final GuardSystem guardSystem;
     private final net.darkflameproduction.agotmod.entity.custom.npc.system.combat.RangedCombatSystem rangedCombat;
+    /** The tavern visit (jobless adults) - kept, so bedtime can wait while it is at the tavern. */
+    private net.darkflameproduction.agotmod.entity.custom.npc.goals.behaviour.TavernVisitGoal tavernVisitGoal;
+    /** Gets it down from wall tops and ledges it is stranded on. */
+    private final LedgeEscape ledgeEscape = new LedgeEscape(this);
     private final MinerSystem minerSystem;
     private final QuarrySystem quarrySystem;
     private final SmelterSystem smelterSystem;
@@ -202,6 +205,15 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         this.moveControl = new NpcMoveControl(this);
         ((GroundPathNavigation)this.getNavigation()).setCanOpenDoors(true);
         this.getNavigation().setCanFloat(true);
+        // Never path onto or through anything that hurts: fire, magma, lit campfires, lava, cactus, berry bushes,
+        // wither roses, dripstone, powder snow. Vanilla only makes most of these costly, so NPCs crossed them to
+        // save a few steps. Walking beside them stays merely costly (vanilla), or a kitchen fire would wall off the room.
+        this.setPathfindingMalus(net.minecraft.world.level.pathfinder.PathType.DAMAGE_FIRE, -1.0F);
+        this.setPathfindingMalus(net.minecraft.world.level.pathfinder.PathType.DAMAGE_OTHER, -1.0F);
+        this.setPathfindingMalus(net.minecraft.world.level.pathfinder.PathType.DAMAGE_CAUTIOUS, -1.0F);
+        this.setPathfindingMalus(net.minecraft.world.level.pathfinder.PathType.LAVA, -1.0F);
+        this.setPathfindingMalus(net.minecraft.world.level.pathfinder.PathType.POWDER_SNOW, -1.0F);
+        this.setPathfindingMalus(net.minecraft.world.level.pathfinder.PathType.DANGER_POWDER_SNOW, -1.0F);
         this.sleepSystem          = new SleepSystem(this);
         this.hungerSystem         = new HungerSystem(this);
         this.inventorySystem      = new InventorySystem(this, inventory);
@@ -237,6 +249,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     public FarmingSystem getFarmingSystem() { return farmingSystem; }
     public GrocerSystem getGrocerSystem() { return grocerSystem; }
     public TeleportSystem getTeleportSystem() { return teleportSystem; }
+
     public NameSystem getNameSystem() { return nameSystem; }
     public GuardSystem getGuardSystem() { return guardSystem; }
     public net.darkflameproduction.agotmod.entity.custom.npc.system.combat.RangedCombatSystem getRangedCombat() { return rangedCombat; }
@@ -496,17 +509,21 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
 
     /**
      * The speed modifier every move uses (applied by NpcMoveControl, whatever speed a goal asked for).
-     * NPCs walk at a player's walking pace. Only a guard that is fighting - or any NPC running from
-     * danger while badly hurt - moves at a player's sprinting pace.
+     * NPCs walk at a player's walking pace. Only a guard that is fighting
+     * - or any NPC running from danger while badly hurt - moves at a player's sprinting pace.
      */
     public double getMovementSpeedModifier() {
         double baseSpeed = getAttributeBaseValue(Attributes.MOVEMENT_SPEED);
-        return (isRunningPace() ? PLAYER_SPRINT_MOB_SPEED : PLAYER_WALK_MOB_SPEED) / baseSpeed;
+        double pace = isRunningPace() ? PLAYER_SPRINT_MOB_SPEED : PLAYER_WALK_MOB_SPEED;
+        return pace / baseSpeed;
     }
 
-    /** Running: a guard in a fight, or an NPC fleeing while badly hurt. */
+    /**
+     * Running: a guard in a fight, or an NPC fleeing from a threat while badly hurt (NpcRetreatGoal). Only while
+     * it actually flees - badly hurt with nothing to flee from (starving, say) it walks like anyone else.
+     */
     public boolean isRunningPace() {
-        if (retreating) return true;
+        if (fleeing) return true;
         LivingEntity target = getTarget();
         return getJobType().equals(JobSystem.JOB_GUARD) && target != null && target.isAlive();
     }
@@ -554,7 +571,6 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         this.goalSelector.addGoal(5, new FindBedGoal(this));
         this.goalSelector.addGoal(6, new SleepGoal(this));
         this.goalSelector.addGoal(6, new LumberjackGoal(this));
-        this.goalSelector.addGoal(7, new CollectFoodGoal(this));
 
         if (isAdult()) {
             this.goalSelector.addGoal(7, new CollectSmelterMaterialsGoal(this));
@@ -591,6 +607,9 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
             this.goalSelector.addGoal(13, new GuardPatrolGoal(this));
         }
 
+        // Jobless adults spend a few hours a day at the tavern (into the night)
+        this.tavernVisitGoal = new net.darkflameproduction.agotmod.entity.custom.npc.goals.behaviour.TavernVisitGoal(this);
+        this.goalSelector.addGoal(13, tavernVisitGoal);
         this.goalSelector.addGoal(14, new RestrictedWanderGoal(this, 0.6D));
         this.goalSelector.addGoal(15, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(16, new RandomLookAroundGoal(this));
@@ -605,42 +624,29 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     }
 
 
+    /**
+     * Joins the town it lives in: the town whose area holds its home bed, else the one it stands in (the
+     * nearest, where areas overlap). Towns are known by their areas (TownProtectionZone, every loaded town
+     * hall) - the old search probed one block every 16 and almost never hit the town hall.
+     */
     public void findAndRegisterWithNearestTownHall() {
-        if (!isRegisteredToTownHall() && !level().isClientSide()) {
-            // Search for town halls within a reasonable distance (128 blocks)
-            BlockPos myPos = this.blockPosition();
-            int searchRadius = 128;
+        if (isRegisteredToTownHall() || level().isClientSide()) return;
+        BlockPos home = homeSystem.getHomeBedPos();
+        BlockPos townHall = home != null ? townContaining(home) : null;
+        if (townHall == null) townHall = townContaining(this.blockPosition());
+        if (townHall != null) registerWithTownHall(townHall);
+    }
 
-            BlockPos nearestTownHall = null;
-            double nearestDistance = Double.MAX_VALUE;
-
-            // Search in chunks to be more efficient
-            for (int x = -searchRadius; x <= searchRadius; x += 16) {
-                for (int y = -64; y <= 64; y += 16) {
-                    for (int z = -searchRadius; z <= searchRadius; z += 16) {
-                        BlockPos checkPos = myPos.offset(x, y, z);
-
-                        if (level().isLoaded(checkPos)) {
-                            BlockEntity blockEntity = level().getBlockEntity(checkPos);
-                            if (blockEntity instanceof TownHallBlockEntity townHall) {
-                                // Check if this NPC is within the town hall's scan radius
-                                if (townHall.isWithinStableScanArea(myPos, townHall.getCurrentScanRadius())) {
-                                    double distance = myPos.distSqr(checkPos);
-                                    if (distance < nearestDistance) {
-                                        nearestDistance = distance;
-                                        nearestTownHall = checkPos;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (nearestTownHall != null) {
-                registerWithTownHall(nearestTownHall);
-            }
+    /** The town hall of the loaded town whose area holds pos - the nearest, where areas overlap. */
+    @Nullable
+    private BlockPos townContaining(BlockPos pos) {
+        BlockPos nearest = null;
+        for (net.darkflameproduction.agotmod.entity.custom.npc.system.protection.TownProtectionZone.ZoneEntry zone
+                : net.darkflameproduction.agotmod.entity.custom.npc.system.protection.TownProtectionZone.getAllZones()) {
+            if (!zone.contains(pos, level().dimension())) continue;
+            if (nearest == null || zone.townHallPos.distSqr(pos) < nearest.distSqr(pos)) nearest = zone.townHallPos;
         }
+        return nearest;
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -713,6 +719,12 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     private static final float RETREAT_HEALTH_FRACTION = 0.2F;   // retreat at 1/5 health or less
     private static final float RECOVERED_HEALTH_FRACTION = 0.5F; // fight again from half health
     private boolean retreating = false;
+    /** Running from a threat right now (NpcRetreatGoal) - the pace and animation of a run. */
+    private boolean fleeing = false;
+
+    public void setFleeing(boolean fleeing) {
+        this.fleeing = fleeing;
+    }
 
     /** True while the NPC is too hurt to fight and keeps away from threats. */
     public boolean isRetreating() {
@@ -987,6 +999,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         inventorySystem.tick();
         homeSystem.tick();
         jobSystem.tick();
+        ledgeEscape.tick();
         farmingSystem.tick();
         grocerSystem.tick();
         butcherSystem.tick();
@@ -1233,21 +1246,16 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         return playerEntries;
     }
 
+    /**
+     * Drops its town only if the town hall is really gone - not when its chunk isn't loaded, and not when the
+     * NPC is out of town (working in the woods, on patrol): it lost its town that way, and with it its food.
+     */
     private void validateTownHallRegistration() {
         Optional<BlockPos> townHallPos = getTownHallPos();
-        if (townHallPos.isPresent()) {
-            BlockEntity blockEntity = level().getBlockEntity(townHallPos.get());
-            if (!(blockEntity instanceof TownHallBlockEntity townHall)) {
-                // Town hall no longer exists, unregister
-                unregisterFromTownHall();
-            } else {
-                // Check if we're still within the town hall's radius
-                if (!townHall.isWithinStableScanArea(this.blockPosition(), townHall.getCurrentScanRadius())) {
-                    // Outside town hall's radius, unregister and look for a new one
-                    unregisterFromTownHall();
-                    findAndRegisterWithNearestTownHall();
-                }
-            }
+        if (townHallPos.isEmpty() || !level().isLoaded(townHallPos.get())) return;
+        if (!(level().getBlockEntity(townHallPos.get()) instanceof TownHallBlockEntity)) {
+            unregisterFromTownHall();
+            findAndRegisterWithNearestTownHall();
         }
     }
 
@@ -1270,15 +1278,11 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
     public void aiStep() {
         // The server freezes the NPC; the client just follows the server's position. (Freezing on the
         // client too skipped its position updates, so after a conversation the NPC snapped forward.)
-        if (!this.level().isClientSide
-                && (isInteractingWithPlayer() || interactionCooldown > 0 || isPlayingInteractAnimation())) {
-            // Stop all movement but still allow look control
+        if (isFrozenForConversation()) {
+            // No walking, but gravity and the rest of the physics still apply (isImmobile stops only its AI
+            // and its own movement - returning before super.aiStep left it hanging in the air)
             this.setDeltaMovement(0, this.getDeltaMovement().y, 0);
             this.getNavigation().stop();
-            // The walk animation is only updated in travel(), which is skipped while frozen - without
-            // this it stays at its last speed and the NPC keeps walking on the spot. Standing still,
-            // it winds down to idle.
-            this.calculateEntityAnimation(false);
 
             // Force look at interacting player
             if (currentInteractingPlayer != null) {
@@ -1289,6 +1293,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                 this.getLookControl().setLookAt(currentInteractingPlayer, 30.0F, 30.0F);
                 this.getLookControl().tick();
             }
+            super.aiStep();
             return;
         }
 
@@ -1299,6 +1304,18 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
             this.setYRot(this.yRotO);
             this.setXRot(this.xRotO);
         }
+    }
+
+    /** Talking to a player (or just after): it stands still, facing them. The server decides; the client follows. */
+    private boolean isFrozenForConversation() {
+        return !this.level().isClientSide
+                && (isInteractingWithPlayer() || interactionCooldown > 0 || isPlayingInteractAnimation());
+    }
+
+    /** While talking, no AI and no walking - but unlike skipping aiStep, it still falls (LivingEntity.aiStep). */
+    @Override
+    protected boolean isImmobile() {
+        return super.isImmobile() || isFrozenForConversation();
     }
 
     @Override
@@ -1376,7 +1393,6 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         butcherSystem.onRemove();
         guardSystem.onRemove();
         net.darkflameproduction.agotmod.entity.custom.npc.system.guard.GuardAlertSystem.onRemove(this.getUUID());
-        net.darkflameproduction.agotmod.entity.custom.npc.system.guard.GuardLoot.onRemove(this.getUUID());
 
         super.remove(reason);
     }
@@ -1432,6 +1448,11 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         // Guards use their own sleep system
         if (getJobType().equals(JobSystem.JOB_GUARD)) {
             return guardSystem.shouldSleep();
+        }
+        // At the tavern: up until last call, shortly before midnight - then off to bed
+        if (tavernVisitGoal != null && tavernVisitGoal.isVisiting()
+                && level().getDayTime() % 24000 < net.darkflameproduction.agotmod.entity.custom.npc.goals.behaviour.TavernVisitGoal.LAST_CALL) {
+            return false;
         }
         return sleepSystem.shouldSleep();
     }

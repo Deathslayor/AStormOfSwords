@@ -93,6 +93,7 @@ public class AGoTMod {
         NeoForge.EVENT_BUS.register(this);
         NeoForge.EVENT_BUS.addListener(ModVillagerTrades::onVillagerInteract);
         modEventBus.addListener(this::addCreative);
+        modEventBus.addListener(net.darkflameproduction.agotmod.entity.custom.npc.system.town.TownChunkLoader::registerTicketController);
         ModTerrablender.registerBiomes();
         ModEntities.register(modEventBus);
         net.darkflameproduction.agotmod.worldgen.structure.ModStructures.register(modEventBus);

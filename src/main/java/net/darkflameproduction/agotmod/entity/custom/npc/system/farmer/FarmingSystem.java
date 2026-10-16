@@ -68,6 +68,7 @@ public class FarmingSystem {
 
     public int plantCrops() {
         if (!hasFarm || peasant.getJobBlockPos() == null) return 0;
+        ensureSeeds();
 
         net.minecraft.world.level.block.Block cropToPlant = determineCropType();
         if (cropToPlant == null) return 0;
@@ -113,6 +114,7 @@ public class FarmingSystem {
 
     public int plantSeedsOnEmptyFarmland() {
         if (!hasFarm || peasant.getJobBlockPos() == null) return 0;
+        ensureSeeds();
 
         net.minecraft.world.level.block.Block cropToPlant = determineCropType();
         if (cropToPlant == null) return 0;
@@ -202,7 +204,9 @@ public class FarmingSystem {
                 BlockPos cropPos = new BlockPos(jobBlock.getX() + x, jobBlock.getY(), jobBlock.getZ() + z);
                 BlockState state = peasant.level().getBlockState(cropPos);
 
-                if (state.getBlock() instanceof net.minecraft.world.level.block.CropBlock) {
+                // The crop already growing here - if he has its seed (else whatever seed he has)
+                if (state.getBlock() instanceof net.minecraft.world.level.block.CropBlock
+                        && hasSeedInInventory(state.getBlock().asItem())) {
                     return state.getBlock();
                 }
             }
@@ -217,6 +221,123 @@ public class FarmingSystem {
         }
 
         return null;
+    }
+
+    // ===== SEEDS FROM THE TOWN =====
+
+    /** How many seeds he takes at most at once. */
+    private static final int MAX_SEED_WITHDRAWAL = 64;
+    /** After asking the town for seeds (got them or not), the soonest he asks again. */
+    private static final long SEED_FETCH_COOLDOWN = 20 * 30;
+    private long nextSeedFetch = 0;
+
+    /**
+     * Tilled farmland lies empty and he has no seed to plant: he takes seeds from his town's stores - enough for
+     * the empty farmland. The crop is the one already growing in his field if the town has its seed, else the seed
+     * the town holds most of. Seeds that are also food (carrots, potatoes) are only taken when there is no other
+     * seed - the town eats those.
+     */
+    private void ensureSeeds() {
+        if (peasant.level().isClientSide || peasant.getJobBlockPos() == null) return;
+        long now = peasant.level().getGameTime();
+        if (now < nextSeedFetch) return;
+
+        int empty = countEmptyFarmland();
+        if (empty <= 0) return;
+        int carried = countSeedsInInventory();
+        if (carried >= empty) return;
+        nextSeedFetch = now + SEED_FETCH_COOLDOWN;
+
+        var townHall = net.darkflameproduction.agotmod.entity.custom.npc.system.reputation.TownReputation.townHallOf(peasant);
+        if (townHall == null) return;
+
+        String seed = chooseSeed(townHall.getTownInventory());
+        if (seed == null) return;
+        long stock = townHall.getTownInventory().getOrDefault(seed, 0L);
+        int amount = (int) Math.min(Math.min(empty - carried, MAX_SEED_WITHDRAWAL), stock);
+        if (amount <= 0 || !townHall.removeFromTownInventory(seed, amount)) return;
+
+        net.minecraft.world.item.Item item = net.minecraft.core.registries.BuiltInRegistries.ITEM
+                .get(net.minecraft.resources.ResourceLocation.parse(seed));
+        ItemStack seeds = new ItemStack(item, amount);
+        peasant.getInventorySystem().addItem(seeds); // takes what fits, leaves the rest in `seeds`
+        if (!seeds.isEmpty()) townHall.addToTownInventory(seed, seeds.getCount()); // no room: stays in the stores
+        if (seeds.getCount() < amount) triggerInteractAnimation();
+    }
+
+    /** The seed to take from the stores (an item key), or null if the town has none. */
+    private String chooseSeed(Map<String, Long> stores) {
+        // The crop already in his field, if the town has its seed
+        net.minecraft.world.level.block.Block fieldCrop = cropInField();
+        if (fieldCrop != null) {
+            String key = net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(fieldCrop.asItem()).toString();
+            if (stores.getOrDefault(key, 0L) > 0) return key;
+        }
+        // Else the seed the town has most of - real seeds before food crops
+        String best = null;
+        long bestStock = 0;
+        boolean bestIsFood = true;
+        for (Map.Entry<String, Long> entry : stores.entrySet()) {
+            if (entry.getValue() <= 0 || !isSeedKey(entry.getKey())) continue;
+            boolean food = net.darkflameproduction.agotmod.economy.FoodCategory.of(entry.getKey()) != null;
+            if (best == null || (bestIsFood && !food) || (bestIsFood == food && entry.getValue() > bestStock)) {
+                best = entry.getKey();
+                bestStock = entry.getValue();
+                bestIsFood = food;
+            }
+        }
+        return best;
+    }
+
+    /** An item that plants a crop on farmland. */
+    private static boolean isSeedKey(String itemKey) {
+        net.minecraft.resources.ResourceLocation id = net.minecraft.resources.ResourceLocation.tryParse(itemKey);
+        if (id == null) return false;
+        net.minecraft.world.item.Item item = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(id);
+        return item instanceof net.minecraft.world.item.BlockItem blockItem
+                && blockItem.getBlock() instanceof net.minecraft.world.level.block.CropBlock;
+    }
+
+    /** A crop growing in his field, or null. */
+    private net.minecraft.world.level.block.Block cropInField() {
+        BlockPos jobBlock = peasant.getJobBlockPos();
+        for (int x = -18; x <= 18; x++) {
+            for (int z = -18; z <= 18; z++) {
+                BlockState state = peasant.level().getBlockState(jobBlock.offset(x, 0, z));
+                if (state.getBlock() instanceof net.minecraft.world.level.block.CropBlock) return state.getBlock();
+            }
+        }
+        return null;
+    }
+
+    /** Tilled farmland in his field with nothing growing on it. */
+    private int countEmptyFarmland() {
+        BlockPos jobBlock = peasant.getJobBlockPos();
+        int empty = 0;
+        for (int x = -18; x <= 18; x++) {
+            for (int z = -18; z <= 18; z++) {
+                BlockPos farmland = new BlockPos(jobBlock.getX() + x, jobBlock.getY() - 1, jobBlock.getZ() + z);
+                if (peasant.level().getBlockState(farmland).getBlock() == net.minecraft.world.level.block.Blocks.FARMLAND
+                        && peasant.level().getBlockState(farmland.above()).isAir()) {
+                    empty++;
+                }
+            }
+        }
+        return empty;
+    }
+
+    /** All the seeds he carries, of any crop. */
+    private int countSeedsInInventory() {
+        int count = 0;
+        var inventory = peasant.getInventorySystem().getInventory();
+        for (int i = 0; i < inventory.getContainerSize(); i++) {
+            ItemStack stack = inventory.getItem(i);
+            if (stack.getItem() instanceof net.minecraft.world.item.BlockItem blockItem
+                    && blockItem.getBlock() instanceof net.minecraft.world.level.block.CropBlock) {
+                count += stack.getCount();
+            }
+        }
+        return count;
     }
 
     public boolean isAtJobBlock() {

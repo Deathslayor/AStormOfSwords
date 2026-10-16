@@ -65,7 +65,8 @@ public class TownNotificationOverlay {
                 "manderly2","manderly3","marsh","mollen1","mollen2","norrey",
                 "royce2","ryswell1","ryswell2","ryswell3","stoney_fisher1","stoney_fisher2",
                 "stout","tallhart","targaryen2","umber1","umber2","umber3",
-                "whitehill","widowswatch1","widowswatch2","woolfield","wull"
+                "whitehill","widowswatch1","widowswatch2","woolfield","wull",
+                "arryn1","arryn2","lipps","moore","upcliff","waynwood","downwards_wedge","upwards_wedge","shield"
         }) {
             map.put(house, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID,
                     "textures/entity/banner/" + house + ".png"));

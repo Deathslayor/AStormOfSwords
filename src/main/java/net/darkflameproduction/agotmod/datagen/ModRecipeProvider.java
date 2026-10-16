@@ -1569,7 +1569,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         // Every food recipe - cooking and crafting - is in FoodRecipes (from the FoodCatalog)
         FoodRecipes.build(this.output);
 
-        // Cloth is woven from wool (cotton is gone)
+        // Cloth is woven from wool, or from cotton (cloth_from_cotton, with the other cloth recipes)
         this.shapeless(RecipeCategory.MISC, ModItems.CLOTH.get())
                 .requires(Items.WHITE_WOOL, 2)
                 .unlockedBy(getHasName(Items.WHITE_WOOL), has(Items.WHITE_WOOL))
@@ -1754,6 +1754,16 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('W', Items.WHITE_WOOL) // Vanilla white wool
                 .unlockedBy(getHasName(Items.WHITE_WOOL), has(Items.WHITE_WOOL))
                 .save(this.output, "cloth");
+        this.shaped(RecipeCategory.MISC, ModItems.CLOTH.get())
+                .pattern("AA")
+                .pattern("AA")
+                .define('A', ModItems.COTTON.get())
+                .unlockedBy(getHasName(ModItems.COTTON.get()), has(ModItems.COTTON.get()))
+                .save(this.output, "cloth_from_cotton");
+        this.shapeless(RecipeCategory.MISC, Items.STRING)
+                .requires(ModItems.COTTON.get())
+                .unlockedBy(getHasName(ModItems.COTTON.get()), has(ModItems.COTTON.get()))
+                .save(this.output, "string_from_cotton");
         this.shaped(RecipeCategory.MISC, ModItems.STEEL_HELMET.get())
                 .pattern("XXX")
                 .pattern("X X")

@@ -34,6 +34,12 @@ public class ModNetworking {
                         ClientPacketHandler.handleTownHallData(packet, context))
         );
         registrar.playToClient(
+                TownHallSummaryPacket.TYPE,
+                TownHallSummaryPacket.STREAM_CODEC,
+                (packet, context) -> context.enqueueWork(() ->
+                        ClientPacketHandler.handleTownHallSummary(packet, context))
+        );
+        registrar.playToClient(
                 TownHallRegisterPacket.TYPE,
                 TownHallRegisterPacket.STREAM_CODEC,
                 (packet, context) -> context.enqueueWork(() ->

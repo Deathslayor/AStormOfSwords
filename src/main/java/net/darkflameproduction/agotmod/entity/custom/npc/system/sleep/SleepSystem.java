@@ -217,9 +217,8 @@ public class SleepSystem {
     }
 
     private void onWakeUp() {
-        if (!peasant.getHungerSystem().hasEnoughFood()) {
-            peasant.setNeedsFoodCollection(true);
-        }
+        // Top up food from the town hall (HungerSystem's morning top-up)
+        peasant.getHungerSystem().onWakeUp();
 
         if (peasant.getJobType().equals(JobSystem.JOB_FARMER)) {
             peasant.getFarmingSystem().setCurrentFarmState(

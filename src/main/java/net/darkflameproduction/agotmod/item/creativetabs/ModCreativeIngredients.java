@@ -59,6 +59,16 @@ public class ModCreativeIngredients {
                         pOutput.accept(ModItems.LEEK_SEEDS.get());
                         pOutput.accept(ModItems.NEEP_SEEDS.get());
                         pOutput.accept(ModItems.TURNIP_SEEDS.get());
+                        pOutput.accept(ModItems.RYE_SEEDS.get());
+                        pOutput.accept(ModItems.RYE.get());
+                        pOutput.accept(ModItems.BARLEY_SEEDS.get());
+                        pOutput.accept(ModItems.BARLEY.get());
+                        pOutput.accept(ModItems.OAT_SEEDS.get());
+                        pOutput.accept(ModItems.OAT.get());
+                        pOutput.accept(ModItems.COTTON_SEEDS.get());
+                        pOutput.accept(ModItems.COTTON.get());
+                        pOutput.accept(ModItems.HEMP_SEEDS.get());
+                        pOutput.accept(ModItems.HEMP.get());
                         pOutput.accept(ModItems.PARSLEY_SEEDS.get());
                         pOutput.accept(ModItems.BEAN_SEEDS.get());
                         pOutput.accept(ModItems.GREEN_BEAN_SEEDS.get());

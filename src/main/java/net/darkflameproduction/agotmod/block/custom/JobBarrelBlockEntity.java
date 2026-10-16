@@ -110,6 +110,27 @@ public class JobBarrelBlockEntity extends BlockEntity implements WorldlyContaine
         this.jobType = extractJobType(blockState);
     }
 
+    /** Placed, or loaded in with its chunk: tells the town it is in that this job is there (TownHallBlockEntity.pingJobBlock). */
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        if (level instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+            net.darkflameproduction.agotmod.block.custom.TownHallBlockEntity.pingJobBlock(serverLevel, worldPosition, getBlockState());
+            if (net.darkflameproduction.agotmod.entity.custom.npc.system.tavern.Taverns.isTavern(getBlockState())) {
+                net.darkflameproduction.agotmod.entity.custom.npc.system.tavern.Taverns.add(serverLevel, worldPosition);
+            }
+        }
+    }
+
+    /** Unloaded or broken: no longer a tavern anyone can visit. */
+    @Override
+    public void setRemoved() {
+        super.setRemoved();
+        if (level != null && !level.isClientSide) {
+            net.darkflameproduction.agotmod.entity.custom.npc.system.tavern.Taverns.remove(level, worldPosition);
+        }
+    }
+
     /**
      * Extracts the job type from the block state using the job type map
      */

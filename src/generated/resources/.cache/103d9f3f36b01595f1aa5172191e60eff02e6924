@@ -1,4 +1,4 @@
-// 1.21.1	2026-10-11T12:56:44.3854389	Registries
+// 1.21.1	2026-10-14T21:34:52.0179765	Registries
 04959ff97a94a491f8a432926d521f167e9531be data/agotmod/banner_pattern/arryn.json
 e17fd35d2836802979bf988c2a96a06599d04697 data/agotmod/banner_pattern/baelish.json
 e19718623618fa07d759962c4e924b518ca9ca5f data/agotmod/banner_pattern/baratheon.json
@@ -753,9 +753,9 @@ a05d0ee9d79575c6afea0d3c3c1df951c568e294 data/agotmod/worldgen/placed_feature/ti
 5a43763ebe1e2bd9a0b45c7ce84687a5a347bfb4 data/agotmod/worldgen/placed_feature/topaz_ore_placed.json
 b5a83c7a6fa399090ba3ea08441893d978b9a6fe data/agotmod/worldgen/placed_feature/tor.json
 b335d392bbc3b1ab7cce1de84550316be97f75fd data/agotmod/worldgen/placed_feature/tourmaline_ore_placed.json
-94742290efb0bff30d225e08c5e1c4ff8cf12da2 data/agotmod/worldgen/placed_feature/weirwood.json
-175d741b5d2e818099e386f9b6f8cf123963b161 data/agotmod/worldgen/placed_feature/weirwood_bush.json
-6e35140ffa3161eba2df6a9ee98e5ba364ac7c6f data/agotmod/worldgen/placed_feature/weirwood_rare.json
+d8c0d0a20bc224604a2196444d518c233d41e44d data/agotmod/worldgen/placed_feature/weirwood.json
+59fb3b09072391af9be642168a6ff8a80487ae98 data/agotmod/worldgen/placed_feature/weirwood_bush.json
+69cafd0904cc96a944436e94e30dc0ec2fe276a4 data/agotmod/worldgen/placed_feature/weirwood_rare.json
 f7a5c79f915579659a978e33eb90bbad8ec81940 data/agotmod/worldgen/placed_feature/white_cherry.json
 452136c0b97df944786580c5f3fb3f01cc738302 data/agotmod/worldgen/placed_feature/white_cherry_bush.json
 4ea296d0dc3a36c2440bc18636903f4103c32e0f data/agotmod/worldgen/placed_feature/white_cherry_rare.json

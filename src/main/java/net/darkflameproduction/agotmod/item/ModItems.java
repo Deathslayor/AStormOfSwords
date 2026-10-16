@@ -519,6 +519,29 @@ public class ModItems {
     public static final DeferredItem<Item> TURNIP_SEEDS = ITEMS.registerItem("turnip_seeds",
             properties -> new BlockItem(ModBLocks.TURNIP_CROP.get(), properties));
 
+    public static final DeferredItem<Item> RYE_SEEDS = ITEMS.registerItem("rye_seeds",
+            properties -> new BlockItem(ModBLocks.RYE_CROP.get(), properties));
+
+    // Rye grain: like wheat, not eaten as it is but baked (rye bread, black bread)
+    public static final DeferredItem<Item> RYE = ITEMS.registerItem("rye", Item::new);
+
+    public static final DeferredItem<Item> BARLEY_SEEDS = ITEMS.registerItem("barley_seeds",
+            properties -> new BlockItem(ModBLocks.BARLEY_CROP.get(), properties));
+    public static final DeferredItem<Item> BARLEY = ITEMS.registerItem("barley", Item::new);
+
+    public static final DeferredItem<Item> OAT_SEEDS = ITEMS.registerItem("oat_seeds",
+            properties -> new BlockItem(ModBLocks.OAT_CROP.get(), properties));
+    public static final DeferredItem<Item> OAT = ITEMS.registerItem("oat", Item::new);
+
+    // Cotton spins into string (the tailor does it too) and is woven into cloth; hemp is a cash crop
+    public static final DeferredItem<Item> COTTON_SEEDS = ITEMS.registerItem("cotton_seeds",
+            properties -> new BlockItem(ModBLocks.COTTON_CROP.get(), properties));
+    public static final DeferredItem<Item> COTTON = ITEMS.registerItem("cotton", Item::new);
+
+    public static final DeferredItem<Item> HEMP_SEEDS = ITEMS.registerItem("hemp_seeds",
+            properties -> new BlockItem(ModBLocks.HEMP_CROP.get(), properties));
+    public static final DeferredItem<Item> HEMP = ITEMS.registerItem("hemp", Item::new);
+
     public static final DeferredItem<Item> WILD_ONION_SEEDS = ITEMS.registerItem("wild_onion_seeds",
             properties -> new BlockItem(ModBLocks.WILD_ONION_CROP.get(), properties));
 

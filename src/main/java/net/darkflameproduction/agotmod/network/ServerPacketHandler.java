@@ -441,34 +441,19 @@ public class ServerPacketHandler {
 
     // ===== HELPERS =====
 
+    /**
+     * A player changed the town (name, claim...): the players near it see it at once - one packet, built once -
+     * and everyone else around the town with the next summary batch.
+     */
     private static void broadcastTownHallData(Level level, BlockPos pos, TownHallBlockEntity townHall, int range) {
-        level.players().forEach(player -> {
-            if (player instanceof ServerPlayer nearbyPlayer) {
-                double dist = nearbyPlayer.distanceToSqr(pos.getX(), pos.getY(), pos.getZ());
-                if (dist < range * range) {
-                    PacketDistributor.sendToPlayer(nearbyPlayer, new TownHallDataPacket(
-                            pos,
-                            townHall.getBedCount(),
-                            townHall.getCitizenCount(),
-                            townHall.getCurrentScanRadius(),
-                            townHall.getTownName(),
-                            townHall.isClaimed(),
-                            townHall.getClaimedByHouse(),
-                            townHall.getAvailableJobCount(),
-                            townHall.getAssignedJobCount(),
-                            townHall.getTotalJobCount(),
-                            townHall.getJoblessCount(),
-                            townHall.getTownBalance(),
-                            new java.util.HashMap<>(townHall.getTownInventory()),
-                            townHall.getCulture().name(),
-                            townHall.getCitizenEntries(),
-                            townHall.getCraftingNeeds(),
-                            townHall.getEarnings(),
-                            townHall.getEconomy()
-                    ));
-                }
-            }
-        });
+        TownHallDataPacket packet = null;
+        for (net.minecraft.world.entity.player.Player player : level.players()) {
+            if (!(player instanceof ServerPlayer nearbyPlayer)) continue;
+            if (nearbyPlayer.distanceToSqr(pos.getX(), pos.getY(), pos.getZ()) >= range * range) continue;
+            if (packet == null) packet = townHall.createDataPacket();
+            PacketDistributor.sendToPlayer(nearbyPlayer, packet);
+        }
+        townHall.syncToClients();
     }
 
     private static String getPlayerHouseName(ServerPlayer player) {

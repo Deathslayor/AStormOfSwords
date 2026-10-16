@@ -4,6 +4,8 @@ import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.darkflameproduction.agotmod.block.custom.GhostGrassBlock;
 import net.darkflameproduction.agotmod.block.custom.HorseradishCropBlock;
+import net.darkflameproduction.agotmod.block.custom.RyeCropBlock;
+import net.darkflameproduction.agotmod.block.custom.RyeCropTopBlock;
 import net.darkflameproduction.agotmod.block.custom.WeirwoodFaceLogBlock;
 import net.minecraft.commands.arguments.ResourceLocationArgument;
 import net.minecraft.core.Direction;
@@ -1854,6 +1856,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
         makeCrop((CropBlock) ModBLocks.PARSLEY_CROP.get(), "parsley_crop_stage", "parsley_crop_stage");
         makeCrop((CropBlock) ModBLocks.RED_ONION_CROP.get(), "red_onion_crop_stage", "red_onion_crop_stage");
         makeCrop((CropBlock) ModBLocks.TURNIP_CROP.get(), "turnip_crop_stage", "turnip_crop_stage");
+        makeRye();
+        makeCrop((CropBlock) ModBLocks.BARLEY_CROP.get(), "barley_crop_stage", "barley_crop_stage");
+        makeCrop((CropBlock) ModBLocks.OAT_CROP.get(), "oat_crop_stage", "oat_crop_stage");
+        makeCrop((CropBlock) ModBLocks.COTTON_CROP.get(), "cotton_crop_stage", "cotton_crop_stage");
+        makeTorchflowerStyleCrop((CropBlock) ModBLocks.HEMP_CROP.get(), "hemp_crop_stage", "hemp_crop_stage");
         makeCrop((CropBlock) ModBLocks.WILD_ONION_CROP.get(), "wild_onion_crop_stage", "wild_onion_crop_stage");
         makeCrop((CropBlock) ModBLocks.ONION_CROP.get(), "onion_crop_stage", "onion_crop_stage");
         makeCrop((CropBlock) ModBLocks.OPIUM_POPPY_CROP.get(), "opium_poppy_crop_stage", "opium_poppy_crop_stage");
@@ -1894,6 +1901,19 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "block/" + textureName + age)).renderType("cutout"));
 
         return models;
+    }
+
+    /** Rye: one crop model per stage, stages 6 and 7 as a bottom and a top half (on the top block). */
+    private void makeRye() {
+        getVariantBuilder(ModBLocks.RYE_CROP.get()).forAllStates(state -> {
+            int age = state.getValue(RyeCropBlock.AGE);
+            String name = "rye_crop_stage" + age + (age >= RyeCropBlock.TALL_AGE ? "_bottom" : "");
+            return new ConfiguredModel[]{new ConfiguredModel(models().crop(name, modLoc("block/" + name)).renderType("cutout"))};
+        });
+        getVariantBuilder(ModBLocks.RYE_CROP_TOP.get()).forAllStates(state -> {
+            String name = "rye_crop_stage" + state.getValue(RyeCropTopBlock.AGE) + "_top";
+            return new ConfiguredModel[]{new ConfiguredModel(models().crop(name, modLoc("block/" + name)).renderType("cutout"))};
+        });
     }
 
     public void makeCrop(CropBlock block, String modelName, String textureName) {

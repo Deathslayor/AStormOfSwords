@@ -181,6 +181,24 @@ public class BannerPatterns {
             Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/woolfield"));
     public static final TagKey<BannerPattern> WULL_PATTERN_TAG = TagKey.create(
             Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/wull"));
+    public static final TagKey<BannerPattern> ARRYN1_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/arryn1"));
+    public static final TagKey<BannerPattern> ARRYN2_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/arryn2"));
+    public static final TagKey<BannerPattern> LIPPS_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/lipps"));
+    public static final TagKey<BannerPattern> MOORE_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/moore"));
+    public static final TagKey<BannerPattern> UPCLIFF_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/upcliff"));
+    public static final TagKey<BannerPattern> WAYNWOOD_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/waynwood"));
+    public static final TagKey<BannerPattern> DOWNWARDS_WEDGE_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/downwards_wedge"));
+    public static final TagKey<BannerPattern> UPWARDS_WEDGE_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/upwards_wedge"));
+    public static final TagKey<BannerPattern> SHIELD_PATTERN_TAG = TagKey.create(
+            Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "pattern_item/shield"));
 
     // Register banner patterns for runtime
     public static final DeferredHolder<BannerPattern, BannerPattern> ARRYN_PATTERN =
@@ -423,6 +441,33 @@ public class BannerPatterns {
     public static final DeferredHolder<BannerPattern, BannerPattern> WULL_PATTERN =
             BANNER_PATTERNS.register("wull", () -> new BannerPattern(
                     ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "wull"), "wull"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> ARRYN1_PATTERN =
+            BANNER_PATTERNS.register("arryn1", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "arryn1"), "arryn1"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> ARRYN2_PATTERN =
+            BANNER_PATTERNS.register("arryn2", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "arryn2"), "arryn2"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> LIPPS_PATTERN =
+            BANNER_PATTERNS.register("lipps", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "lipps"), "lipps"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> MOORE_PATTERN =
+            BANNER_PATTERNS.register("moore", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "moore"), "moore"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> UPCLIFF_PATTERN =
+            BANNER_PATTERNS.register("upcliff", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "upcliff"), "upcliff"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> WAYNWOOD_PATTERN =
+            BANNER_PATTERNS.register("waynwood", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "waynwood"), "waynwood"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> DOWNWARDS_WEDGE_PATTERN =
+            BANNER_PATTERNS.register("downwards_wedge", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "downwards_wedge"), "downwards_wedge"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> UPWARDS_WEDGE_PATTERN =
+            BANNER_PATTERNS.register("upwards_wedge", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "upwards_wedge"), "upwards_wedge"));
+    public static final DeferredHolder<BannerPattern, BannerPattern> SHIELD_PATTERN =
+            BANNER_PATTERNS.register("shield", () -> new BannerPattern(
+                    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "shield"), "shield"));
 
     // Register banner pattern items
     public static final DeferredHolder<Item, BannerPatternItem> ARRYN_BANNER_PATTERN =
@@ -984,6 +1029,69 @@ public class BannerPatterns {
                 net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
                         Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "wull_banner_pattern"));
                 return new BannerPatternItem(WULL_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> ARRYN1_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("arryn1_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "arryn1_banner_pattern"));
+                return new BannerPatternItem(ARRYN1_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> ARRYN2_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("arryn2_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "arryn2_banner_pattern"));
+                return new BannerPatternItem(ARRYN2_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> LIPPS_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("lipps_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "lipps_banner_pattern"));
+                return new BannerPatternItem(LIPPS_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> MOORE_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("moore_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "moore_banner_pattern"));
+                return new BannerPatternItem(MOORE_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> UPCLIFF_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("upcliff_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "upcliff_banner_pattern"));
+                return new BannerPatternItem(UPCLIFF_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> WAYNWOOD_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("waynwood_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "waynwood_banner_pattern"));
+                return new BannerPatternItem(WAYNWOOD_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> DOWNWARDS_WEDGE_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("downwards_wedge_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "downwards_wedge_banner_pattern"));
+                return new BannerPatternItem(DOWNWARDS_WEDGE_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> UPWARDS_WEDGE_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("upwards_wedge_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "upwards_wedge_banner_pattern"));
+                return new BannerPatternItem(UPWARDS_WEDGE_PATTERN_TAG, new Item.Properties()
+                        .stacksTo(1).rarity(Rarity.EPIC));
+            });
+    public static final DeferredHolder<Item, BannerPatternItem> SHIELD_BANNER_PATTERN =
+            BANNER_PATTERN_ITEMS.register("shield_banner_pattern", () -> {
+                net.minecraft.resources.ResourceKey<Item> itemKey = net.minecraft.resources.ResourceKey.create(
+                        Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "shield_banner_pattern"));
+                return new BannerPatternItem(SHIELD_PATTERN_TAG, new Item.Properties()
                         .stacksTo(1).rarity(Rarity.EPIC));
             });
 

@@ -87,6 +87,7 @@ public class TownHallBlockEntity extends BlockEntity implements
     private static final int JOB_ASSIGNMENT_INTERVAL = 80; // 4 seconds (assign one job every 4 seconds)
     private static final int JOBLESS_UPDATE_INTERVAL = 120; // 6 seconds (update jobless queue)
     private static final int JOB_CLEANUP_INTERVAL = 400;
+    private static final int JOBS_PER_ASSIGNMENT = 8;  // Jobs handed out per assignment pass
     private int ticksSinceLastJobAssignment = 0;
     private int ticksSinceLastJoblessUpdate = 0;
     private int ticksSinceLastJobCleanup = 0;//
@@ -102,6 +103,8 @@ public class TownHallBlockEntity extends BlockEntity implements
     private long lastTraderRestockDay = -1; // The day the town's trader last bought supplies (TraderPurchasing)
     private boolean hasScannedToday = false;
     private int ticksSinceLastRegister = 0;
+    /** Look for job blocks on the next tick - set when the town hall loads; after that job blocks ping it (JobBarrelBlock). */
+    private boolean needsJobScan = false;
     private int ticksSinceLastCitizenCheck = 0;
 
     // Updated fields for dynamic house name system
@@ -202,22 +205,82 @@ public class TownHallBlockEntity extends BlockEntity implements
         this.market = new net.darkflameproduction.agotmod.economy.VillageMarket(pos.asLong());
     }
 
+    // A village built with the world (VillageStructure) starts with a border round all of it: 0 for a town a
+    // player made. Its founders are the residents it was built with.
+    private int villageBorder = 0;
+    private int founders = 0;
+    /** Set when the village is built: scan for beds and jobs on the first tick, not at the next day's scan. */
+    private boolean needsFirstScan = false;
+
     /**
-     * Calculates the current scan radius based on citizen count
+     * The town's area, a square this far from the town hall. A town a player made starts small and grows with
+     * its citizens (the expansion tiers). A village built with the world has a border round the whole village,
+     * and grows past it the same way, but only for citizens beyond its founders.
      */
     public int getCurrentScanRadius() {
-        if (citizenCount <= FIRST_TIER_CITIZENS) {
-            return BASE_RADIUS + (citizenCount * FIRST_TIER_EXPANSION);
-        } else if (citizenCount <= SECOND_TIER_CITIZENS) {
+        if (villageBorder > 0) {
+            return villageBorder + Math.max(0, expansion(citizenCount) - expansion(founders));
+        }
+        return BASE_RADIUS + expansion(citizenCount);
+    }
+
+    /** How far the expansion tiers have grown a town of this many citizens past its base. */
+    private static int expansion(int citizens) {
+        if (citizens <= FIRST_TIER_CITIZENS) {
+            return citizens * FIRST_TIER_EXPANSION;
+        } else if (citizens <= SECOND_TIER_CITIZENS) {
             int firstTierBonus = FIRST_TIER_CITIZENS * FIRST_TIER_EXPANSION;
-            int secondTierBonus = (citizenCount - FIRST_TIER_CITIZENS) * SECOND_TIER_EXPANSION;
-            return BASE_RADIUS + firstTierBonus + secondTierBonus;
+            int secondTierBonus = (citizens - FIRST_TIER_CITIZENS) * SECOND_TIER_EXPANSION;
+            return firstTierBonus + secondTierBonus;
         } else {
             int firstTierBonus = FIRST_TIER_CITIZENS * FIRST_TIER_EXPANSION; // 10 * 5 = 50
             int secondTierBonus = (SECOND_TIER_CITIZENS - FIRST_TIER_CITIZENS) * SECOND_TIER_EXPANSION; // 10 * 1 = 10
-            int thirdTierBonus = (citizenCount - SECOND_TIER_CITIZENS) / THIRD_TIER_EXPANSION; // Every 5 citizens = 1 block
-            return BASE_RADIUS + firstTierBonus + secondTierBonus + thirdTierBonus;
+            int thirdTierBonus = (citizens - SECOND_TIER_CITIZENS) / THIRD_TIER_EXPANSION; // Every 5 citizens = 1 block
+            return firstTierBonus + secondTierBonus + thirdTierBonus;
         }
+    }
+
+    /**
+     * Makes this the town hall of a village built with the world (VillageStructure, during worldgen - so no
+     * level calls): its culture, the border round the whole village, and how many residents it was built with.
+     * The culture and protection zones are registered when it loads (onLoad).
+     */
+    public void foundVillage(Culture culture, int border, int founders) {
+        boolean firstFounding = this.villageBorder <= 0;
+        if (culture != Culture.NONE) this.culture = culture;
+        this.villageBorder = border;
+        this.founders = founders;
+        this.needsFirstScan = true;
+        if (firstFounding) stockStartingFood(founders);
+        setChanged();
+    }
+
+    /** Food a village built with the world starts with, per resident, of every food category - it has no farms going yet. */
+    private static final int STARTING_FOOD_PER_CITIZEN = 50;
+    /** One food of each category for the starting stores (FoodCategory): GRAIN, VEGETABLES, FRUIT, MEAT, FISH, DAIRY. */
+    private static final Map<net.darkflameproduction.agotmod.economy.FoodCategory, String> STARTING_FOODS = Map.of(
+            net.darkflameproduction.agotmod.economy.FoodCategory.GRAIN, "minecraft:bread",
+            net.darkflameproduction.agotmod.economy.FoodCategory.VEGETABLES, "minecraft:carrot",
+            net.darkflameproduction.agotmod.economy.FoodCategory.FRUIT, "minecraft:apple",
+            net.darkflameproduction.agotmod.economy.FoodCategory.MEAT, "minecraft:cooked_beef",
+            net.darkflameproduction.agotmod.economy.FoodCategory.FISH, "minecraft:cooked_cod",
+            net.darkflameproduction.agotmod.economy.FoodCategory.DAIRY, "agotmod:cheese");
+
+    /** A new village's stores: STARTING_FOOD_PER_CITIZEN of every food category for each of its residents. */
+    private void stockStartingFood(int residents) {
+        if (residents <= 0) return;
+        for (net.darkflameproduction.agotmod.economy.FoodCategory category
+                : net.darkflameproduction.agotmod.economy.FoodCategory.values()) {
+            String food = STARTING_FOODS.get(category);
+            // Only an item NPCs really eat as this category (a missing mod item would just be a dead entry)
+            if (food != null && net.darkflameproduction.agotmod.economy.FoodCategory.of(food) == category) {
+                addToTownInventory(food, (long) STARTING_FOOD_PER_CITIZEN * residents);
+            }
+        }
+    }
+
+    public boolean isGeneratedVillage() {
+        return villageBorder > 0;
     }
 
     /**
@@ -342,6 +405,8 @@ public class TownHallBlockEntity extends BlockEntity implements
         public String currentJob;
         public String npcName;
         public long lastSeen;
+        /** Whether it was an adult when last loaded - only adults get jobs (not saved: known once it loads). */
+        public boolean adult = false;
 
         public CitizenInfo(UUID npcUUID, BlockPos homeBedPos, String npcName) {
             this.npcUUID = npcUUID;
@@ -366,81 +431,144 @@ public class TownHallBlockEntity extends BlockEntity implements
         }
     }
 
-    // Add to TownHallBlockEntity
-    private void performJobBlockScan(Level level) {
-        availableJobs.clear();
-        int currentRadius = getCurrentScanRadius();
-
-        BlockPos centerPos = this.getBlockPos();
-        int minX = centerPos.getX() - currentRadius;
-        int maxX = centerPos.getX() + currentRadius;
-        int minY = getColumnMinY(level);
-        int maxY = getColumnMaxY(level);
-        int minZ = centerPos.getZ() - currentRadius;
-        int maxZ = centerPos.getZ() + currentRadius;
-
-        for (int x = minX; x <= maxX; x++) {
-            for (int y = minY; y <= maxY; y++) {
-                for (int z = minZ; z <= maxZ; z++) {
-                    BlockPos scanPos = new BlockPos(x, y, z);
-                    if (!level.isLoaded(scanPos)) continue;
-
-                    BlockState state = level.getBlockState(scanPos);
-                    String jobType = getJobTypeFromBlock(state);
-                    if (jobType.equals(JobSystem.JOB_NONE)) continue;
-
-                    JobBlockInfo jobInfo = new JobBlockInfo(scanPos, jobType);
-
-                    if (JobWarningSystem.isJobBlockWarned(scanPos, null)) {
-                        JobWarningSystem.JobBlockWarning warning = JobWarningSystem.getWarningInfo(scanPos);
-                        if (warning != null) {
-                            jobInfo.isOccupied = true;
-                            jobInfo.assignedNPC = warning.npcUUID;
+    /**
+     * Every block in the town's loaded chunks (the whole column) that matches: chunk sections whose palette can't
+     * hold one are skipped without looking at their blocks, so even a whole village is quick to scan.
+     */
+    private void forEachTownBlock(Level level, java.util.function.Predicate<BlockState> filter,
+                                  java.util.function.BiConsumer<BlockPos, BlockState> action) {
+        int radius = getCurrentScanRadius();
+        BlockPos center = this.getBlockPos();
+        int minX = center.getX() - radius, maxX = center.getX() + radius;
+        int minZ = center.getZ() - radius, maxZ = center.getZ() + radius;
+        for (int cx = minX >> 4; cx <= maxX >> 4; cx++) {
+            for (int cz = minZ >> 4; cz <= maxZ >> 4; cz++) {
+                if (!level.hasChunk(cx, cz)) continue;
+                net.minecraft.world.level.chunk.LevelChunk chunk = level.getChunk(cx, cz);
+                net.minecraft.world.level.chunk.LevelChunkSection[] sections = chunk.getSections();
+                for (int i = 0; i < sections.length; i++) {
+                    net.minecraft.world.level.chunk.LevelChunkSection section = sections[i];
+                    if (section.hasOnlyAir() || !section.maybeHas(filter)) continue;
+                    int baseY = net.minecraft.core.SectionPos.sectionToBlockCoord(chunk.getSectionYFromSectionIndex(i));
+                    for (int lx = 0; lx < 16; lx++) {
+                        int x = (cx << 4) + lx;
+                        if (x < minX || x > maxX) continue;
+                        for (int lz = 0; lz < 16; lz++) {
+                            int z = (cz << 4) + lz;
+                            if (z < minZ || z > maxZ) continue;
+                            for (int ly = 0; ly < 16; ly++) {
+                                BlockState state = section.getBlockState(lx, ly, lz);
+                                if (filter.test(state)) action.accept(new BlockPos(x, baseY + ly, z), state);
+                            }
                         }
                     }
-                    // A saved claim counts even if its worker is asleep, far away or in an unloaded chunk
-                    if (!jobInfo.isOccupied && level instanceof ServerLevel serverLevel) {
-                        UUID owner = JobClaims.get(serverLevel).getOwner(serverLevel, scanPos);
-                        if (owner != null) {
-                            jobInfo.isOccupied = true;
-                            jobInfo.assignedNPC = owner;
-                        }
-                    }
-
-                    availableJobs.put(scanPos, jobInfo);
                 }
             }
         }
+    }
 
+    private static boolean isBedHead(BlockState state) {
+        return state.getBlock() instanceof BedBlock
+                && state.getValue(BedBlock.PART) == net.minecraft.world.level.block.state.properties.BedPart.HEAD;
+    }
+
+    private void performJobBlockScan(Level level) {
+        // Job blocks in chunks that aren't loaded can't be seen - they stay on the list as they were
+        availableJobs.keySet().removeIf(pos -> level.isLoaded(pos));
+        forEachTownBlock(level, state -> !getJobTypeFromBlock(state).equals(JobSystem.JOB_NONE),
+                (scanPos, state) -> availableJobs.put(scanPos, describeJob(level, scanPos, getJobTypeFromBlock(state))));
+        recountJobs();
+    }
+
+    /** A job block, with whoever works it (its warning, or its saved claim). */
+    private JobBlockInfo describeJob(Level level, BlockPos pos, String jobType) {
+        JobBlockInfo jobInfo = new JobBlockInfo(pos, jobType);
+        if (JobWarningSystem.isJobBlockWarned(pos, null)) {
+            JobWarningSystem.JobBlockWarning warning = JobWarningSystem.getWarningInfo(pos);
+            if (warning != null) {
+                jobInfo.isOccupied = true;
+                jobInfo.assignedNPC = warning.npcUUID;
+            }
+        }
+        // A saved claim counts even if its worker is asleep, far away or in an unloaded chunk
+        if (!jobInfo.isOccupied && level instanceof ServerLevel serverLevel) {
+            UUID owner = JobClaims.get(serverLevel).getOwner(serverLevel, pos);
+            if (owner != null) {
+                jobInfo.isOccupied = true;
+                jobInfo.assignedNPC = owner;
+            }
+        }
+        return jobInfo;
+    }
+
+    private void recountJobs() {
         availableJobCount = (int) availableJobs.values().stream().filter(job -> !job.isOccupied).count();
         assignedJobCount  = (int) availableJobs.values().stream().filter(job -> job.isOccupied).count();
         shouldSendDataUpdate = true;
     }
 
-    private String getJobTypeFromBlock(BlockState state) {
-        if (state.is(ModBLocks.FARMER_BARREL.get()))          return JobSystem.JOB_FARMER;
-        if (state.is(ModBLocks.GROCER_BARREL.get()))          return JobSystem.JOB_GROCER;
-        if (state.is(ModBLocks.BUTCHER_BARREL.get()))         return JobSystem.JOB_BUTCHER;
-        if (state.is(ModBLocks.TANNER_BARREL.get()))          return JobSystem.JOB_TANNER;
-        if (state.is(ModBLocks.TAILOR_BARREL.get()))          return JobSystem.JOB_TAILOR;
-        if (state.is(ModBLocks.BLACKSMITH_BARREL.get()))      return JobSystem.JOB_BLACKSMITH;
-        if (state.is(ModBLocks.ARMORSMITH_BARREL.get()))      return JobSystem.JOB_ARMORSMITH;
-        if (state.is(ModBLocks.SWORDSMITH_BARREL.get()))      return JobSystem.JOB_SWORDSMITH;
-        if (state.is(ModBLocks.BAKER_BARREL.get()))           return JobSystem.JOB_BAKER;
-        if (state.is(ModBLocks.STONEMASON_BARREL.get()))      return JobSystem.JOB_STONEMASON;
-        if (state.is(ModBLocks.GUARD_BARREL.get()))           return JobSystem.JOB_GUARD;
-        if (state.is(ModBLocks.MINER_BARREL.get()))           return JobSystem.JOB_MINER;
-        if (state.is(ModBLocks.QUARRY_BARREL.get()))          return JobSystem.JOB_QUARRY;
-        if (state.is(ModBLocks.SMELTER_BARREL.get()))         return JobSystem.JOB_SMELTER;
-        if (state.is(ModBLocks.CATTLE_HERDER_BARREL.get()))   return JobSystem.JOB_CATTLE_HERDER;
-        if (state.is(ModBLocks.CHICKEN_BREEDER_BARREL.get())) return JobSystem.JOB_CHICKEN_BREEDER;
-        if (state.is(ModBLocks.PIG_BREEDER_BARREL.get()))     return JobSystem.JOB_PIG_BREEDER;
-        if (state.is(ModBLocks.SHEEP_HERDER_BARREL.get()))    return JobSystem.JOB_SHEEP_HERDER;
-        if (state.is(ModBLocks.LUMBERJACK_BARREL.get()))      return JobSystem.JOB_LUMBERJACK;
-        if (state.is(ModBLocks.CHARCOAL_BURNER_BARREL.get())) return JobSystem.JOB_CHARCOAL_BURNER;
-        if (state.is(ModBLocks.CARPENTER_BARREL.get()))       return JobSystem.JOB_CARPENTER;
-        if (state.is(ModBLocks.TRADER_BARREL.get()))          return JobSystem.JOB_TRADER;
-        return JobSystem.JOB_NONE;
+    /**
+     * A job block in this town was placed, or loaded in with its chunk: it goes on the job list (a ping, in place
+     * of rescanning the town for job blocks).
+     */
+    public void onJobBlockAppeared(BlockPos pos, BlockState state) {
+        if (level == null || !isWithinStableScanArea(pos, getCurrentScanRadius())) return;
+        String jobType = getJobTypeFromBlock(state);
+        if (jobType.equals(JobSystem.JOB_NONE)) return;
+        JobBlockInfo known = availableJobs.get(pos);
+        if (known != null && known.jobType.equals(jobType)) return;
+        availableJobs.put(pos.immutable(), describeJob(level, pos, jobType));
+        recountJobs();
+    }
+
+    /** A job block in this town was broken: off the job list. */
+    public void onJobBlockRemoved(BlockPos pos) {
+        if (availableJobs.remove(pos) != null) recountJobs();
+    }
+
+    /** Tells every loaded town hall whose area holds {@code pos} that a job block appeared there, or went. */
+    public static void pingJobBlock(ServerLevel level, BlockPos pos, @Nullable BlockState state) {
+        for (net.darkflameproduction.agotmod.entity.custom.npc.system.protection.TownProtectionZone.ZoneEntry zone
+                : net.darkflameproduction.agotmod.entity.custom.npc.system.protection.TownProtectionZone.getAllZones()) {
+            if (!zone.contains(pos, level.dimension()) || !level.isLoaded(zone.townHallPos)) continue;
+            if (level.getBlockEntity(zone.townHallPos) instanceof TownHallBlockEntity townHall) {
+                if (state != null) townHall.onJobBlockAppeared(pos, state);
+                else townHall.onJobBlockRemoved(pos);
+            }
+        }
+    }
+
+    /** Job block -> its job, built on first use: one map lookup per block while scanning the town. */
+    private static Map<net.minecraft.world.level.block.Block, String> jobBlocks;
+
+    public static String getJobTypeFromBlock(BlockState state) {
+        if (jobBlocks == null) {
+            Map<net.minecraft.world.level.block.Block, String> map = new IdentityHashMap<>();
+            map.put(ModBLocks.FARMER_BARREL.get(),          JobSystem.JOB_FARMER);
+            map.put(ModBLocks.GROCER_BARREL.get(),          JobSystem.JOB_GROCER);
+            map.put(ModBLocks.BUTCHER_BARREL.get(),         JobSystem.JOB_BUTCHER);
+            map.put(ModBLocks.TANNER_BARREL.get(),          JobSystem.JOB_TANNER);
+            map.put(ModBLocks.TAILOR_BARREL.get(),          JobSystem.JOB_TAILOR);
+            map.put(ModBLocks.BLACKSMITH_BARREL.get(),      JobSystem.JOB_BLACKSMITH);
+            map.put(ModBLocks.ARMORSMITH_BARREL.get(),      JobSystem.JOB_ARMORSMITH);
+            map.put(ModBLocks.SWORDSMITH_BARREL.get(),      JobSystem.JOB_SWORDSMITH);
+            map.put(ModBLocks.BAKER_BARREL.get(),           JobSystem.JOB_BAKER);
+            map.put(ModBLocks.STONEMASON_BARREL.get(),      JobSystem.JOB_STONEMASON);
+            map.put(ModBLocks.GUARD_BARREL.get(),           JobSystem.JOB_GUARD);
+            map.put(ModBLocks.MINER_BARREL.get(),           JobSystem.JOB_MINER);
+            map.put(ModBLocks.QUARRY_BARREL.get(),          JobSystem.JOB_QUARRY);
+            map.put(ModBLocks.SMELTER_BARREL.get(),         JobSystem.JOB_SMELTER);
+            map.put(ModBLocks.CATTLE_HERDER_BARREL.get(),   JobSystem.JOB_CATTLE_HERDER);
+            map.put(ModBLocks.CHICKEN_BREEDER_BARREL.get(), JobSystem.JOB_CHICKEN_BREEDER);
+            map.put(ModBLocks.PIG_BREEDER_BARREL.get(),     JobSystem.JOB_PIG_BREEDER);
+            map.put(ModBLocks.SHEEP_HERDER_BARREL.get(),    JobSystem.JOB_SHEEP_HERDER);
+            map.put(ModBLocks.LUMBERJACK_BARREL.get(),      JobSystem.JOB_LUMBERJACK);
+            map.put(ModBLocks.CHARCOAL_BURNER_BARREL.get(), JobSystem.JOB_CHARCOAL_BURNER);
+            map.put(ModBLocks.CARPENTER_BARREL.get(),       JobSystem.JOB_CARPENTER);
+            map.put(ModBLocks.TRADER_BARREL.get(),          JobSystem.JOB_TRADER);
+            jobBlocks = map;
+        }
+        return jobBlocks.getOrDefault(state.getBlock(), JobSystem.JOB_NONE);
     }
 
     @Override
@@ -621,6 +749,7 @@ public class TownHallBlockEntity extends BlockEntity implements
 
         // Pull up to 64 of each textile material
         for (String matKey : new String[]{
+                "agotmod:cotton",
                 "minecraft:string",
                 "minecraft:white_wool",
                 "minecraft:leather"
@@ -828,13 +957,10 @@ public class TownHallBlockEntity extends BlockEntity implements
 
     // Add to TownHallBlockEntity
     private void processJobAssignments(ServerLevel level) {
-        // Update citizen registry from bed warning system
-        updateCitizenRegistryFromBeds();
-
-        // Find unemployed citizens
-        updateJoblessQueue();
-
-        // Assign jobs to unemployed citizens
+        // The registry and the jobless queue are kept current on their own intervals (CITIZEN_CHECK_INTERVAL,
+        // JOBLESS_UPDATE_INTERVAL) - rebuilding them here too only repeated the work. Nothing to do without a free job.
+        if (availableJobCount <= 0) return;
+        if (joblessQueue.isEmpty()) updateJoblessQueue();
         assignJobsToUnemployed(level);
     }
 
@@ -846,25 +972,41 @@ public class TownHallBlockEntity extends BlockEntity implements
                 .filter(job -> !job.isOccupied)
                 .toList();
 
-        if (availableJobsList.isEmpty()) return;
-
-        // Assign one job per tick to prevent lag
-        UUID unemployedNPC = joblessQueue.poll();
-        if (unemployedNPC != null) {
+        // A few per pass, each to the free job nearest home (a new village has many to fill)
+        for (int n = 0; n < JOBS_PER_ASSIGNMENT && !availableJobsList.isEmpty(); n++) {
+            UUID unemployedNPC = joblessQueue.poll();
+            if (unemployedNPC == null) break;
             CitizenInfo citizen = registeredCitizens.get(unemployedNPC);
-            if (citizen != null && citizen.currentJob.equals(JobSystem.JOB_NONE)) {
-
-                // Find closest available job
-                JobBlockInfo closestJob = findClosestJob(citizen.homeBedPos, availableJobsList);
-                if (closestJob != null) {
-                    assignJobToNPC(level, unemployedNPC, closestJob);
-                }
-            }
+            if (citizen == null || !citizen.currentJob.equals(JobSystem.JOB_NONE)) continue;
+            JobBlockInfo closestJob = findClosestJob(citizen.homeBedPos, availableJobsList);
+            if (closestJob == null) continue;
+            assignJobToNPC(level, unemployedNPC, closestJob);
+            availableJobsList = availableJobsList.stream().filter(job -> !job.isOccupied).toList();
         }
     }
 
     private void assignJobToNPC(ServerLevel level, UUID npcUUID, JobBlockInfo jobInfo) {
         Entity entity = level.getEntity(npcUUID);
+
+        if (entity == null) {
+            // Not loaded: the job is claimed for it, and it takes the job up when it loads (JobSystem). One
+            // waiting job at most.
+            JobClaims claims = JobClaims.get(level);
+            if (claims.claimOf(level, npcUUID) != null) return;
+            if (!claims.tryClaim(level, jobInfo.jobBlockPos, npcUUID)) {
+                jobInfo.isOccupied = true;
+                jobInfo.assignedNPC = claims.getOwner(level, jobInfo.jobBlockPos);
+                return;
+            }
+            CitizenInfo citizen = registeredCitizens.get(npcUUID);
+            if (citizen != null) citizen.currentJob = jobInfo.jobType;
+            jobInfo.isOccupied = true;
+            jobInfo.assignedNPC = npcUUID;
+            availableJobCount = Math.max(0, availableJobCount - 1);
+            assignedJobCount++;
+            shouldSendDataUpdate = true;
+            return;
+        }
 
         if (entity instanceof Peasant_Entity peasant && peasant.isAdult()) {
             // Never give a second job to someone who already has one
@@ -889,6 +1031,9 @@ public class TownHallBlockEntity extends BlockEntity implements
 
             jobInfo.isOccupied = true;
             jobInfo.assignedNPC = npcUUID;
+            availableJobCount = Math.max(0, availableJobCount - 1);
+            assignedJobCount++;
+            shouldSendDataUpdate = true;
         }
     }
 
@@ -897,6 +1042,20 @@ public class TownHallBlockEntity extends BlockEntity implements
 
         long currentTime = level.getDayTime() % 24000;
         long currentDay  = level.getDayTime() / 24000;
+
+        // A village built with the world finds its beds and jobs straight away. Every town hall looks for its job
+        // blocks once when it loads; after that they tell it themselves when they are placed, broken, or load
+        // in with their chunk (JobBarrelBlock / JobBarrelBlockEntity) - no rescanning while anyone is jobless.
+        if (blockEntity.needsFirstScan) {
+            blockEntity.performBedScan(level);
+            blockEntity.performJobBlockScan(level);
+            blockEntity.needsFirstScan = false;
+            blockEntity.needsJobScan = false;
+            blockEntity.setChanged();
+        } else if (blockEntity.needsJobScan) {
+            blockEntity.performJobBlockScan(level);
+            blockEntity.needsJobScan = false;
+        }
 
         if (currentTime >= SCAN_TIME &&
                 (blockEntity.lastScanDay != currentDay || !blockEntity.hasScannedToday)) {
@@ -955,44 +1114,71 @@ public class TownHallBlockEntity extends BlockEntity implements
             blockEntity.ticksSinceLastJobCleanup = 0;
         }
 
-        blockEntity.ticksSinceLastRegister++;
-        if (blockEntity.ticksSinceLastRegister >= REGISTER_INTERVAL) {
-            blockEntity.registerWithNearbyPlayers();
-            blockEntity.ticksSinceLastRegister = 0;
+        // Every town queues its summary on the same tick, so TownHallSync sends each player one packet for all of them
+        if (level.getGameTime() % REGISTER_INTERVAL == 0) {
+            blockEntity.queueSummary();
         }
 
-        if (blockEntity.shouldSendDataUpdate) {
-            blockEntity.sendDataToClients(level);
+        // Changes go out at most once a second, however many there were
+        blockEntity.ticksSinceLastRegister++;
+        if (blockEntity.shouldSendDataUpdate && blockEntity.ticksSinceLastRegister >= DATA_SEND_INTERVAL) {
+            blockEntity.sendDataToScreens(level);
+            blockEntity.queueSummary();
             blockEntity.shouldSendDataUpdate = false;
+            blockEntity.ticksSinceLastRegister = 0;
         }
 
         // Settle the day that ended (its tax) as a new one starts, and keep the town hall screen current for players at the
         // town hall (stores, crafting needs...)
         if (level.getGameTime() % SCREEN_REFRESH_INTERVAL == 0) {
             blockEntity.settleDay();
-            blockEntity.refreshNearbyScreens(level);
+            blockEntity.sendDataToScreens(level);
         }
     }
 
     private static final int SCREEN_REFRESH_INTERVAL = 100; // 5 seconds
     private static final double SCREEN_REFRESH_RANGE = 8.0D;
+    private static final int DATA_SEND_INTERVAL = 20; // Least ticks between sends of changed town data
 
-    /** Sends fresh town data to players close enough to have the town hall screen open. */
-    private void refreshNearbyScreens(Level level) {
+    /**
+     * Sends the full town data to the players close enough to have the town hall screen open - nobody else
+     * needs it (TownHallSummaryPacket covers the rest). Built once, and only if someone is there.
+     */
+    private void sendDataToScreens(Level level) {
         net.darkflameproduction.agotmod.network.TownHallDataPacket packet = null;
         for (net.minecraft.world.entity.player.Player player : level.players()) {
             if (!(player instanceof ServerPlayer serverPlayer)) continue;
             if (serverPlayer.distanceToSqr(worldPosition.getX() + 0.5, worldPosition.getY() + 0.5, worldPosition.getZ() + 0.5)
                     > SCREEN_REFRESH_RANGE * SCREEN_REFRESH_RANGE) continue;
-            if (packet == null) {
-                packet = new net.darkflameproduction.agotmod.network.TownHallDataPacket(
-                        worldPosition, bedCount, citizenCount, getCurrentScanRadius(), townName, isClaimed,
-                        getClaimedByHouse(), getAvailableJobCount(), getAssignedJobCount(), getTotalJobCount(),
-                        getJoblessCount(), townBalance, new java.util.HashMap<>(townInventory),
-                        culture.name(), getCitizenEntries(), getCraftingNeeds(), getEarnings(), getEconomy());
-            }
+            if (packet == null) packet = createDataPacket();
             net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer, packet);
         }
+    }
+
+    /** Everything the town hall screen shows. Building it is the costly part (crafting needs, economy). */
+    public net.darkflameproduction.agotmod.network.TownHallDataPacket createDataPacket() {
+        return new net.darkflameproduction.agotmod.network.TownHallDataPacket(
+                worldPosition, bedCount, citizenCount, getCurrentScanRadius(), townName, isClaimed,
+                getClaimedByHouse(), getAvailableJobCount(), getAssignedJobCount(), getTotalJobCount(),
+                getJoblessCount(), townBalance, new java.util.HashMap<>(townInventory),
+                culture.name(), getCitizenEntries(), getCraftingNeeds(), getEarnings(), getEconomy());
+    }
+
+    /** Queues this town's summary for the players around it, sent in bulk with every other town's (TownHallSync). */
+    private void queueSummary() {
+        if (level instanceof ServerLevel serverLevel) {
+            net.darkflameproduction.agotmod.network.TownHallSync.queue(serverLevel,
+                    new net.darkflameproduction.agotmod.network.TownHallSummaryPacket.Entry(worldPosition, bedCount,
+                            citizenCount, getCurrentScanRadius(), townName, isClaimed, getClaimedByHouse()));
+        }
+    }
+
+    /**
+     * Marks the town's data as changed: within a second the players at the town hall get the full data and
+     * everyone around the town its summary. Changes made in the same second go out together.
+     */
+    public void syncToClients() {
+        shouldSendDataUpdate = true;
     }
 
     private void updateCitizenRegistryFromBeds() {
@@ -1112,10 +1298,14 @@ public class TownHallBlockEntity extends BlockEntity implements
             if (level == null || level.isClientSide()) continue;
 
             Entity entity = ((ServerLevel) level).getEntity(citizen.npcUUID);
-            if (!(entity instanceof Peasant_Entity peasant) || !peasant.isAdult()) continue;
-
-            // Always sync the cached job from the actual entity
-            citizen.currentJob = peasant.getJobType();
+            if (entity instanceof Peasant_Entity peasant) {
+                citizen.adult = peasant.isAdult();
+                // Always sync the cached job from the actual entity
+                citizen.currentJob = peasant.getJobType();
+            }
+            // Citizens that aren't loaded count too, by what was last known of them - they are given a job
+            // waiting for them (assignJobToNPC)
+            if (!citizen.adult) continue;
 
             if (citizen.currentJob.equals(JobSystem.JOB_NONE)) {
                 joblessQueue.offer(citizen.npcUUID);
@@ -1153,6 +1343,8 @@ public class TownHallBlockEntity extends BlockEntity implements
             if (job.isOccupied && job.assignedNPC != null) {
                 // Check if the NPC still exists and has this job
                 Entity entity = level.getEntity(job.assignedNPC);
+                // Not loaded, but still holds the job's claim: it keeps the job (it may be waiting to take it up)
+                if (entity == null && job.assignedNPC.equals(JobClaims.get(level).getOwner(level, job.jobBlockPos))) continue;
                 if (!(entity instanceof Peasant_Entity peasant) ||
                         peasant.getJobBlockPos() == null ||
                         !peasant.getJobBlockPos().equals(job.jobBlockPos) ||
@@ -1215,35 +1407,7 @@ public class TownHallBlockEntity extends BlockEntity implements
      */
     private List<BlockPos> getAllBedsInTown(Level level) {
         List<BlockPos> beds = new ArrayList<>();
-        int currentRadius = getCurrentScanRadius();
-
-        BlockPos centerPos = this.getBlockPos();
-        int minX = centerPos.getX() - currentRadius;
-        int maxX = centerPos.getX() + currentRadius;
-        int minY = getColumnMinY(level);
-        int maxY = getColumnMaxY(level);
-        int minZ = centerPos.getZ() - currentRadius;
-        int maxZ = centerPos.getZ() + currentRadius;
-
-        // Scan for bed heads
-        for (int x = minX; x <= maxX; x++) {
-            for (int y = minY; y <= maxY; y++) {
-                for (int z = minZ; z <= maxZ; z++) {
-                    BlockPos scanPos = new BlockPos(x, y, z);
-
-                    if (level.isLoaded(scanPos)) {
-                        BlockState blockState = level.getBlockState(scanPos);
-
-                        if (blockState.getBlock() instanceof BedBlock) {
-                            if (blockState.getValue(BedBlock.PART) == net.minecraft.world.level.block.state.properties.BedPart.HEAD) {
-                                beds.add(scanPos);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
+        forEachTownBlock(level, TownHallBlockEntity::isBedHead, (pos, state) -> beds.add(pos));
         return beds;
     }
 
@@ -1442,6 +1606,9 @@ public class TownHallBlockEntity extends BlockEntity implements
             citizenCount = newCitizenCount;
             sendDataToClients(level);
             setChanged();
+            if (level instanceof ServerLevel serverLevel) {
+                net.darkflameproduction.agotmod.entity.custom.npc.system.town.TownChunkLoader.registerTown(serverLevel, worldPosition, getCurrentScanRadius());
+            }
 
             // Re-register zone with updated radius as town grows
             if (culture != Culture.NONE && level instanceof ServerLevel sl) {
@@ -1468,148 +1635,18 @@ public class TownHallBlockEntity extends BlockEntity implements
     }
 
     private void performBedScan(Level level) {
-        int bedCount = 0;
-        int currentRadius = getCurrentScanRadius();
-
-        BlockPos centerPos = this.getBlockPos();
-        int minX = centerPos.getX() - currentRadius;
-        int maxX = centerPos.getX() + currentRadius;
-        int minY = getColumnMinY(level);
-        int maxY = getColumnMaxY(level);
-        int minZ = centerPos.getZ() - currentRadius;
-        int maxZ = centerPos.getZ() + currentRadius;
-
-        // Scan the area for beds - only count HEAD blocks to avoid double counting
-        for (int x = minX; x <= maxX; x++) {
-            for (int y = minY; y <= maxY; y++) {
-                for (int z = minZ; z <= maxZ; z++) {
-                    BlockPos scanPos = new BlockPos(x, y, z);
-
-                    // Check if the chunk is loaded before scanning
-                    if (level.isLoaded(scanPos)) {
-                        BlockState blockState = level.getBlockState(scanPos);
-
-                        // Check if the block is a bed HEAD (only count head blocks to avoid double counting)
-                        if (blockState.getBlock() instanceof BedBlock) {
-                            // Only count if this is the HEAD part of the bed
-                            if (blockState.getValue(BedBlock.PART) == net.minecraft.world.level.block.state.properties.BedPart.HEAD) {
-                                bedCount++;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        this.bedCount = bedCount;
+        // Only bed heads count, so each bed counts once
+        int[] bedCount = {0};
+        forEachTownBlock(level, TownHallBlockEntity::isBedHead, (pos, state) -> bedCount[0]++);
+        this.bedCount = bedCount[0];
 
         // Send update packet to any players who have the GUI open AND debug renderer updates
         sendDataToClients(level);
     }
 
-    private void registerWithNearbyPlayers() {
-        int renderDistance = level.getServer().getPlayerList().getViewDistance() * 16;
-
-        level.players().forEach(player -> {
-            if (player instanceof ServerPlayer serverPlayer) {
-                double distance = serverPlayer.distanceToSqr(
-                        this.worldPosition.getX(), this.worldPosition.getY(), this.worldPosition.getZ());
-                if (distance < renderDistance * renderDistance) {
-                    net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
-                            new net.darkflameproduction.agotmod.network.TownHallRegisterPacket(
-                                    this.worldPosition, true));
-                    net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
-                            new net.darkflameproduction.agotmod.network.TownHallDataPacket(
-                                    this.worldPosition,
-                                    this.bedCount,
-                                    this.citizenCount,
-                                    getCurrentScanRadius(),
-                                    this.townName,
-                                    this.isClaimed,
-                                    this.getClaimedByHouse(),
-                                    this.getAvailableJobCount(),
-                                    this.getAssignedJobCount(),
-                                    this.getTotalJobCount(),
-                                    this.getJoblessCount(),
-                                    this.townBalance,
-                                    new java.util.HashMap<>(this.townInventory),
-                                    this.culture.name(),
-                                    this.getCitizenEntries(),
-                                    this.getCraftingNeeds(),
-                                    this.getEarnings(),
-                                    this.getEconomy()
-                            ));
-                }
-            }
-        });
-    }
-
+    /** Any change to what clients show: sent with the next batch (syncToClients). */
     private void sendDataToClients(Level level) {
-        level.players().forEach(player -> {
-            if (player instanceof ServerPlayer serverPlayer) {
-                double distance = serverPlayer.distanceToSqr(
-                        this.worldPosition.getX(), this.worldPosition.getY(), this.worldPosition.getZ());
-                if (distance < 64 * 64) {
-                    net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
-                            new net.darkflameproduction.agotmod.network.TownHallDataPacket(
-                                    this.worldPosition,
-                                    this.bedCount,
-                                    this.citizenCount,
-                                    getCurrentScanRadius(),
-                                    this.townName,
-                                    this.isClaimed,
-                                    this.getClaimedByHouse(),
-                                    this.getAvailableJobCount(),
-                                    this.getAssignedJobCount(),
-                                    this.getTotalJobCount(),
-                                    this.getJoblessCount(),
-                                    this.townBalance,
-                                    new java.util.HashMap<>(this.townInventory),
-                                    this.culture.name(),
-                                    this.getCitizenEntries(),
-                                    this.getCraftingNeeds(),
-                                    this.getEarnings(),
-                                    this.getEconomy()
-                            ));
-                }
-            }
-        });
-
-        sendDebugDataToClients(level);
-    }
-
-    private void sendDebugDataToClients(Level level) {
-        int renderDistance = level.getServer().getPlayerList().getViewDistance() * 16;
-
-        level.players().forEach(player -> {
-            if (player instanceof ServerPlayer serverPlayer) {
-                double distance = serverPlayer.distanceToSqr(
-                        this.worldPosition.getX(), this.worldPosition.getY(), this.worldPosition.getZ());
-                if (distance < renderDistance * renderDistance) {
-                    net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer,
-                            new net.darkflameproduction.agotmod.network.TownHallDataPacket(
-                                    this.worldPosition,
-                                    this.bedCount,
-                                    this.citizenCount,
-                                    getCurrentScanRadius(),
-                                    this.townName,
-                                    this.isClaimed,
-                                    this.getClaimedByHouse(),
-                                    this.getAvailableJobCount(),
-                                    this.getAssignedJobCount(),
-                                    this.getTotalJobCount(),
-                                    this.getJoblessCount(),
-                                    this.townBalance,
-                                    new java.util.HashMap<>(this.townInventory),
-                                    this.culture.name(),
-                                    this.getCitizenEntries(),
-                                    this.getCraftingNeeds(),
-                                    this.getEarnings(),
-                                    this.getEconomy()
-                            ));
-                }
-            }
-        });
+        syncToClients();
     }
 
     public int getBedCount() {
@@ -1643,7 +1680,11 @@ public class TownHallBlockEntity extends BlockEntity implements
     public void onLoad() {
         super.onLoad();
         if (!level.isClientSide()) {
-            registerWithNearbyPlayers();
+            queueSummary();
+            needsJobScan = true;
+            if (level instanceof ServerLevel sl) {
+                net.darkflameproduction.agotmod.entity.custom.npc.system.town.TownChunkLoader.registerTown(sl, worldPosition, getCurrentScanRadius());
+            }
             GrocerInventoryTicketSystem.registerListener(this);
             ButcherInventoryTicketSystem.registerListener(this);
             TannerInventoryTicketSystem.registerListener(this);
@@ -1730,8 +1771,33 @@ public class TownHallBlockEntity extends BlockEntity implements
 
     @Override
     public void onFoodRequestPosted(FoodCollectionTicketSystem.FoodRequestTicket ticket) {
-        // A varied diet keeps the town happy (VillageEconomy): hand out a mix - one serving of each category
-        // the stores hold in turn, the best stocked of each first - until the NPC has what he asked for.
+        FoodCollectionTicketSystem.postResponse(ticket.peasantUUID,
+                handOutFoodRation(ticket.peasantUUID, Map.of(), ticket.amountNeeded));
+    }
+
+    /** Servings of each food category handed out today (handOutFoodRation) - not saved, a day's tally. */
+    private final Map<net.darkflameproduction.agotmod.economy.FoodCategory, Long> rationsHandedOut =
+            new java.util.EnumMap<>(net.darkflameproduction.agotmod.economy.FoodCategory.class);
+    private long rationsDay = -1;
+
+    /**
+     * An NPC's daily food (HungerSystem): {@code amount} servings from the stores, as varied as they allow.
+     * Serving by serving, it gets the category it carries least of ({@code carried}, servings per category), so
+     * its food stays a mix; between categories it carries equally little of, the one the town has handed out
+     * least today - so across the town every category in stock is eaten in about equal shares (the town's
+     * variety, VillageEconomy) - then the best stocked. Of a category, the item the town holds most of.
+     * Less than {@code amount} if the stores run short.
+     */
+    public List<ItemStack> handOutFoodRation(@Nullable UUID npc,
+                                             Map<net.darkflameproduction.agotmod.economy.FoodCategory, Integer> carried,
+                                             int amount) {
+        long today = level == null ? 0 : level.getDayTime() / 24000;
+        if (today != rationsDay) {
+            rationsHandedOut.clear();
+            rationsDay = today;
+        }
+
+        // What the stores hold of each category: its items, best stocked first, and the servings in all
         Map<net.darkflameproduction.agotmod.economy.FoodCategory, List<String>> byCategory =
                 new java.util.EnumMap<>(net.darkflameproduction.agotmod.economy.FoodCategory.class);
         for (Map.Entry<String, Long> entry : townInventory.entrySet()) {
@@ -1740,35 +1806,52 @@ public class TownHallBlockEntity extends BlockEntity implements
                     net.darkflameproduction.agotmod.economy.FoodCategory.of(entry.getKey());
             if (category != null) byCategory.computeIfAbsent(category, k -> new ArrayList<>()).add(entry.getKey());
         }
-        for (List<String> keys : byCategory.values()) {
-            keys.sort((a, b) -> Long.compare(townInventory.getOrDefault(b, 0L), townInventory.getOrDefault(a, 0L)));
-        }
 
+        Map<net.darkflameproduction.agotmod.economy.FoodCategory, Integer> holding =
+                new java.util.EnumMap<>(net.darkflameproduction.agotmod.economy.FoodCategory.class);
+        holding.putAll(carried);
         Map<String, Integer> given = new LinkedHashMap<>();
-        int remaining = ticket.amountNeeded;
-        boolean gaveAny = true;
-        while (remaining > 0 && gaveAny) {
-            gaveAny = false;
-            for (List<String> keys : byCategory.values()) {
-                if (remaining <= 0) break;
-                keys.removeIf(key -> townInventory.getOrDefault(key, 0L) <= 0);
-                if (keys.isEmpty()) continue;
-                String key = keys.get(0);
-                removeFromTownInventory(key, 1);
-                given.merge(key, 1, Integer::sum);
-                remaining--;
-                gaveAny = true;
+        for (int n = 0; n < amount; n++) {
+            net.darkflameproduction.agotmod.economy.FoodCategory best = null;
+            long bestStock = 0;
+            for (var entry : byCategory.entrySet()) {
+                entry.getValue().removeIf(key -> townInventory.getOrDefault(key, 0L) <= 0);
+                if (entry.getValue().isEmpty()) continue;
+                long stock = 0;
+                for (String key : entry.getValue()) stock += townInventory.getOrDefault(key, 0L);
+                if (best == null || isBetterRation(entry.getKey(), stock, best, bestStock, holding)) {
+                    best = entry.getKey();
+                    bestStock = stock;
+                }
             }
+            if (best == null) break; // the stores are out of food
+
+            String key = byCategory.get(best).stream()
+                    .max(Comparator.comparingLong(k -> townInventory.getOrDefault(k, 0L))).orElseThrow();
+            removeFromTownInventory(key, 1);
+            given.merge(key, 1, Integer::sum);
+            holding.merge(best, 1, Integer::sum);
+            rationsHandedOut.merge(best, 1L, Long::sum);
         }
 
-        List<ItemStack> toGive = new ArrayList<>();
+        List<ItemStack> food = new ArrayList<>();
         for (Map.Entry<String, Integer> entry : given.entrySet()) {
-            net.minecraft.world.item.Item item = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(
-                    net.minecraft.resources.ResourceLocation.parse(entry.getKey()));
-            toGive.add(new ItemStack(item, entry.getValue()));
+            net.minecraft.world.item.Item item = BuiltInRegistries.ITEM.get(ResourceLocation.parse(entry.getKey()));
+            food.add(new ItemStack(item, entry.getValue()));
         }
-        FoodCollectionTicketSystem.postResponse(ticket.peasantUUID, toGive);
-        setChanged();
+        if (!given.isEmpty()) setChanged();
+        return food;
+    }
+
+    /** Whether category {@code a} (with {@code aStock} in the stores) makes a better next serving than {@code b}. */
+    private boolean isBetterRation(net.darkflameproduction.agotmod.economy.FoodCategory a, long aStock,
+                                   net.darkflameproduction.agotmod.economy.FoodCategory b, long bStock,
+                                   Map<net.darkflameproduction.agotmod.economy.FoodCategory, Integer> holding) {
+        int aHeld = holding.getOrDefault(a, 0), bHeld = holding.getOrDefault(b, 0);
+        if (aHeld != bHeld) return aHeld < bHeld;
+        long aOut = rationsHandedOut.getOrDefault(a, 0L), bOut = rationsHandedOut.getOrDefault(b, 0L);
+        if (aOut != bOut) return aOut < bOut;
+        return aStock > bStock;
     }
 
     @Override
@@ -1816,6 +1899,17 @@ public class TownHallBlockEntity extends BlockEntity implements
     }
 
     // ===== TOWN HALL INVENTORY API =====
+
+    /** How much NPC food the stores hold, in servings. */
+    public long countFoodInStores() {
+        long food = 0;
+        for (Map.Entry<String, Long> entry : townInventory.entrySet()) {
+            if (entry.getValue() > 0 && net.darkflameproduction.agotmod.economy.FoodCategory.of(entry.getKey()) != null) {
+                food += entry.getValue();
+            }
+        }
+        return food;
+    }
 
     public void addToTownInventory(String itemKey, long amount) {
         if (itemKey == null || itemKey.isEmpty() || amount <= 0) return;
@@ -2074,10 +2168,14 @@ public class TownHallBlockEntity extends BlockEntity implements
                 Math.round(foodDissatisfaction), townBalance);
     }
 
-    /** One of the town's NPCs ate a serving of {@code category} (HungerSystem). */
-    public void recordMeal(net.darkflameproduction.agotmod.economy.FoodCategory category) {
+    /**
+     * One of the town's NPCs reports the servings it ate since its last report, by category - once a day, when it
+     * takes its food in the morning (HungerSystem), rather than a call per meal.
+     */
+    public void recordMeals(Map<net.darkflameproduction.agotmod.economy.FoodCategory, Integer> meals) {
+        if (meals.isEmpty()) return;
         rollEarningsDay();
-        mealsToday.merge(category, 1L, Long::sum);
+        meals.forEach((category, eaten) -> mealsToday.merge(category, (long) eaten, Long::sum));
         setChanged();
     }
 
@@ -2233,6 +2331,9 @@ public class TownHallBlockEntity extends BlockEntity implements
         if (claimedByPlayerUUID != null) tag.putUUID("ClaimedByPlayerUUID", claimedByPlayerUUID);
 
         tag.putString("Culture", culture.name());
+        tag.putInt("VillageBorder", villageBorder);
+        tag.putInt("Founders", founders);
+        tag.putBoolean("NeedsFirstScan", needsFirstScan);
 
         tag.putLong("LastScanDay", lastScanDay);
         tag.putLong("LastChildSpawnDay", lastChildSpawnDay);
@@ -2343,6 +2444,9 @@ public class TownHallBlockEntity extends BlockEntity implements
         isClaimed           = tag.getBoolean("IsClaimed");
         claimedByPlayerUUID = tag.hasUUID("ClaimedByPlayerUUID") ? tag.getUUID("ClaimedByPlayerUUID") : null;
 
+        villageBorder = tag.getInt("VillageBorder");
+        founders = tag.getInt("Founders");
+        needsFirstScan = tag.getBoolean("NeedsFirstScan");
         if (tag.contains("Culture")) {
             culture = Culture.fromName(tag.getString("Culture")); // also converts cultures from older saves
         }

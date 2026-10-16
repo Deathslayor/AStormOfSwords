@@ -1,4 +1,4 @@
-// 1.21.1	2026-10-11T22:08:23.2118675	Loot Tables
+// 1.21.1	2026-10-14T22:02:23.6876298	Loot Tables
 e9bd72b39150226eea7e9f8651090f64a2f92e26 data/agotmod/loot_table/blocks/acacia_arm_chair.json
 8b853b189990b99a15ea85034eba5c841663807f data/agotmod/loot_table/blocks/acacia_chair.json
 25731f80a799127a902c25a58ea1c9ee6aa06d85 data/agotmod/loot_table/blocks/acacia_stool.json
@@ -336,6 +336,7 @@ b7d075f6a6e073317e8134fc93c3af34eccb81b0 data/agotmod/loot_table/blocks/baobab_w
 274ae7e0bb4d3ce677b5f6e467ec3257dc406c89 data/agotmod/loot_table/blocks/baobab_wood.json
 e711c4fb994ba1da0add9f8bbde9585d748bba0b data/agotmod/loot_table/blocks/baobab_wood_stripped.json
 a86eba2d8174b69e6defa815d0a9a56cc7571ab2 data/agotmod/loot_table/blocks/bard_barrel.json
+c9506717d248b0c66c736a61839ecdb042ba2db6 data/agotmod/loot_table/blocks/barley_crop.json
 e446d698e6eae831879c9baed1973d1693c33673 data/agotmod/loot_table/blocks/barrel_dummy.json
 9617c86f6544b2d07b9aa4d419aa1a3c0669dfbf data/agotmod/loot_table/blocks/barrel_large.json
 dda4cfdaacf37744c67e23b852d94733bcb2d5c3 data/agotmod/loot_table/blocks/barrel_medium.json
@@ -1584,6 +1585,7 @@ c45bf69fbdcade24f16ec6df928fd2193b0ced08 data/agotmod/loot_table/blocks/cottonwo
 67120e3c7ce1e039c519f952f042b4f29734c381 data/agotmod/loot_table/blocks/cottonwood_wall_sign.json
 68315cdcb96167c9c0b4202b91c80c255560e98a data/agotmod/loot_table/blocks/cottonwood_wood.json
 b8a81738e5e3a5d35e8651d6266690d4424b2cd4 data/agotmod/loot_table/blocks/cottonwood_wood_stripped.json
+b81b37c4b109224c97499077cc628f4c461d2985 data/agotmod/loot_table/blocks/cotton_crop.json
 ccac5251558b78802fc6ef9bec6e8e4521589e6e data/agotmod/loot_table/blocks/crabapple_arm_chair.json
 8db16e6a3bee99fb81832bfffa6d28841a153425 data/agotmod/loot_table/blocks/crabapple_button.json
 6f83faa98231644e173d3a450e6b5bc09687bb34 data/agotmod/loot_table/blocks/crabapple_chair.json
@@ -2270,6 +2272,7 @@ ec5c814abd39ce607a574189abd44bdaf035dc38 data/agotmod/loot_table/blocks/hawthorn
 55383bbdf1e4ea12df97b8ac7a10a15a95c9a9fb data/agotmod/loot_table/blocks/hawthorn_wood.json
 4a9c209d50ed9347f4b43d61650a8b4a069ad68d data/agotmod/loot_table/blocks/hawthorn_wood_stripped.json
 0752a7188d054aad120e708d4f7f2f06ad946a1d data/agotmod/loot_table/blocks/hearth_block.json
+38dcb11c74a274592938f0793c81309bde51d32d data/agotmod/loot_table/blocks/hemp_crop.json
 7b12faad4249d1392ff55dd23ad9abfb7054a502 data/agotmod/loot_table/blocks/herbalist_barrel.json
 fe14289b450881179e2eb1137cfb18055afdc385 data/agotmod/loot_table/blocks/horseradish_crop.json
 8b524056858eeac711b8aa9769ce57e2071defba data/agotmod/loot_table/blocks/horse_breeder_barrel.json
@@ -2675,6 +2678,7 @@ c74a73aa5f071cbd98b4de80ba41828096c6f90e data/agotmod/loot_table/blocks/oak_arm_
 65a388055f60467cefcc916139532e17b8d256ed data/agotmod/loot_table/blocks/oak_stool.json
 7673998d8b289a89f2419f52bb5233ab76a977f9 data/agotmod/loot_table/blocks/oak_table.json
 cc412a29a556bd04978600040f51a722c1269ba3 data/agotmod/loot_table/blocks/oak_wall.json
+db87f2e70ea52a872f3e43d310c1b4a41b479105 data/agotmod/loot_table/blocks/oat_crop.json
 592dc36c4a337fa04c9ac5cb773c873df2ec7bf7 data/agotmod/loot_table/blocks/oily_bricks.json
 0fca8d4d483874de8fccd46b468dc94ce985b125 data/agotmod/loot_table/blocks/oily_bricks_slab.json
 0855142eb6cf27d5a7657ca94ed21b118af44a44 data/agotmod/loot_table/blocks/oily_bricks_stairs.json
@@ -3735,6 +3739,8 @@ a1a0ed8a0ee56b4afae5cb851cdae374cf30fce0 data/agotmod/loot_table/blocks/rsandsto
 d6c62002605e338086c4daee93e65bf3a499650b data/agotmod/loot_table/blocks/ruby_block.json
 b02e114be2421801076c9df3bf6486c032f1cca5 data/agotmod/loot_table/blocks/ruby_deepslate_ore.json
 273cae6e8d62131f749b267ef63dfe0c8b31549e data/agotmod/loot_table/blocks/ruby_ore.json
+f6a308125cb02fdfbebdb62a569f582fb8be7680 data/agotmod/loot_table/blocks/rye_crop.json
+ad530904b0c7be3ca99c59fdb0fa0a041ec7f502 data/agotmod/loot_table/blocks/rye_crop_top.json
 f7efd5fdba25f7b0e97ee79a0f2ce63422b57c45 data/agotmod/loot_table/blocks/saffron_crocus.json
 aa16a4ba9bd5cff9ea0567be7d08510b2dcce223 data/agotmod/loot_table/blocks/sandalwood_arm_chair.json
 a63602f65b7fce8eef095dc17cfab974826ccbef data/agotmod/loot_table/blocks/sandalwood_button.json

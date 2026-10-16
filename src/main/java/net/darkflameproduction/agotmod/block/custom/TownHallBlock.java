@@ -35,27 +35,7 @@ public class TownHallBlock extends Block implements EntityBlock {
                     PacketDistributor.sendToPlayer(serverPlayer,
                             new OpenTownHallMenuPacket(pos));
 
-                    PacketDistributor.sendToPlayer(serverPlayer,
-                            new TownHallDataPacket(
-                                    pos,
-                                    townHallBE.getBedCount(),
-                                    townHallBE.getCitizenCount(),
-                                    townHallBE.getCurrentScanRadius(),
-                                    townHallBE.getTownName(),
-                                    townHallBE.isClaimed(),
-                                    townHallBE.getClaimedByHouse(),
-                                    townHallBE.getAvailableJobCount(),
-                                    townHallBE.getAssignedJobCount(),
-                                    townHallBE.getTotalJobCount(),
-                                    townHallBE.getJoblessCount(),
-                                    townHallBE.getTownBalance(),
-                                    new java.util.HashMap<>(townHallBE.getTownInventory()),
-                                    townHallBE.getCulture().name(),
-                                    townHallBE.getCitizenEntries(),
-                                    townHallBE.getCraftingNeeds(),
-                                    townHallBE.getEarnings(),
-                                    townHallBE.getEconomy()
-                            ));
+                    PacketDistributor.sendToPlayer(serverPlayer, townHallBE.createDataPacket());
                 }
             }
         }
@@ -83,6 +63,15 @@ public class TownHallBlock extends Block implements EntityBlock {
         }
 
         return null;
+    }
+
+    /** Broken: the town is forgotten by the town loader (TownChunkLoader). */
+    @Override
+    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+        if (!state.is(newState.getBlock()) && level instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+            net.darkflameproduction.agotmod.entity.custom.npc.system.town.TownChunkLoader.removeTown(serverLevel, pos);
+        }
+        super.onRemove(state, level, pos, newState, isMoving);
     }
 
     @Override

@@ -47,7 +47,12 @@ public class ModEntities {
                                     (EntityType<Peasant_Entity> entityType, Level level) ->
                                             new Peasant_Entity(entityType, level),
                                     MobCategory.CREATURE)
-                            .sized(0.6f, 1.95f)
+                            // A player's size (they are drawn as one): at 1.95 tall, a jump onto a block with a carpet
+                            // on it hit the ceiling of a three-high room just short of the top, so they never made it
+                            .sized(0.6f, 1.8f)
+                            .eyeHeight(1.62f)
+                            // Sits in a seat (chair, boat, horse) as low as a player does - without it, 0.6 above them
+                            .vehicleAttachment(net.minecraft.world.entity.player.Player.DEFAULT_VEHICLE_ATTACHMENT)
                             .clientTrackingRange(10)
                             .build("peasant"));
 

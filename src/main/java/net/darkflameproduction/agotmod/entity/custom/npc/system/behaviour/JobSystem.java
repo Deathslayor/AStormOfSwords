@@ -110,6 +110,8 @@ public class JobSystem {
     // Ã¢â€â‚¬Ã¢â€â‚¬ Tick Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 
     public void tick() {
+        takeUpWaitingJob();
+
         if (hasJob() && getJobBlockPos() != null) {
             if (!isJobBlockValid()) {
                 loseJob();
@@ -117,10 +119,11 @@ public class JobSystem {
             }
         }
 
+        if (workTeleportCooldown > 0) workTeleportCooldown--;
         if (!peasant.level().isClientSide && shouldBeAtWorkArea() && isTooFarFromWork() && !peasant.isSleeping()) {
-            peasant.getNavigation().stop();
-            BlockPos workCenter = getWorkCenter();
-            peasant.getNavigation().moveTo(workCenter.getX(), workCenter.getY(), workCenter.getZ(), 0.8D);
+            headToWork();
+        } else {
+            resetWorkProgress();
         }
 
         if (!peasant.level().isClientSide && hasJob() && getJobBlockPos() != null) {
@@ -144,6 +147,116 @@ public class JobSystem {
     }
 
     // Ã¢â€â‚¬Ã¢â€â‚¬ Job block validation Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+
+    // ===== GETTING TO WORK =====
+
+    private static final int WORK_CHECK_INTERVAL = 20;
+    private static final int WORK_STUCK_TICKS = 20 * 30;        // no closer to the job block in 30 seconds: teleport
+    private static final int WORK_FAILED_PATHS = 3;             // no path to the job block this many times running: teleport
+    private static final int WORK_TELEPORT_COOLDOWN = 20 * 60;
+    private static final int WORK_SPOT_RADIUS = 3;              // how far from the job block it may land
+
+    private double closestToWorkSqr = Double.MAX_VALUE;
+    private int ticksWithoutWorkProgress = 0;
+    private int failedWorkPaths = 0;
+    private int workTeleportCooldown = 0;
+
+    /**
+     * Out of its work area during work hours: walk back to the job block. A path is planned only when it has none
+     * (it used to be planned again every tick). If it can't get there - no path, a path that can't reach it, or no
+     * closer for WORK_STUCK_TICKS - it is teleported beside its job block.
+     */
+    private void headToWork() {
+        if ((peasant.tickCount + peasant.getId()) % WORK_CHECK_INTERVAL != 0) return;
+        BlockPos jobBlock = getJobBlockPos();
+        if (jobBlock == null) return;
+        // Busy with something that matters more - the walk to work waits
+        if (peasant.getHungerSystem().isEating() || peasant.isInteractingWithPlayer() || peasant.isPassenger()
+                || peasant.isRetreating() || (peasant.getTarget() != null && peasant.getTarget().isAlive())) {
+            resetWorkProgress();
+            return;
+        }
+
+        double distanceSqr = peasant.distanceToSqr(jobBlock.getX() + 0.5D, jobBlock.getY(), jobBlock.getZ() + 0.5D);
+        if (closestToWorkSqr == Double.MAX_VALUE || Math.sqrt(distanceSqr) < Math.sqrt(closestToWorkSqr) - 1.0D) {
+            closestToWorkSqr = distanceSqr;
+            ticksWithoutWorkProgress = 0;
+        } else {
+            ticksWithoutWorkProgress += WORK_CHECK_INTERVAL;
+        }
+
+        if (!peasant.getNavigation().isInProgress()) {
+            boolean planned = peasant.getNavigation().moveTo(jobBlock.getX() + 0.5D, jobBlock.getY(), jobBlock.getZ() + 0.5D, 1.0D);
+            net.minecraft.world.level.pathfinder.Path path = peasant.getNavigation().getPath();
+            if (!planned || path == null || !path.canReach()) failedWorkPaths++;
+            else failedWorkPaths = 0;
+        }
+
+        if ((ticksWithoutWorkProgress >= WORK_STUCK_TICKS || failedWorkPaths >= WORK_FAILED_PATHS)
+                && workTeleportCooldown <= 0) {
+            teleportToWork(jobBlock);
+        }
+    }
+
+    private void resetWorkProgress() {
+        closestToWorkSqr = Double.MAX_VALUE;
+        ticksWithoutWorkProgress = 0;
+        failedWorkPaths = 0;
+    }
+
+    /** Puts the NPC on a free spot beside its job block - the nearest one. False if there is none (or it isn't loaded). */
+    public boolean teleportToWork(BlockPos jobBlock) {
+        if (!peasant.level().isLoaded(jobBlock)) return false;
+        BlockPos spot = null;
+        double best = Double.MAX_VALUE;
+        for (int dx = -WORK_SPOT_RADIUS; dx <= WORK_SPOT_RADIUS; dx++) {
+            for (int dz = -WORK_SPOT_RADIUS; dz <= WORK_SPOT_RADIUS; dz++) {
+                for (int dy = -1; dy <= 1; dy++) {
+                    if (dx == 0 && dz == 0) continue;
+                    BlockPos candidate = jobBlock.offset(dx, dy, dz);
+                    double distance = candidate.distSqr(jobBlock);
+                    if (distance >= best) continue;
+                    if (!net.darkflameproduction.agotmod.entity.custom.npc.system.sleep.BedAccess.canStandAt(peasant.level(), candidate)) continue;
+                    if (net.darkflameproduction.agotmod.entity.custom.npc.NpcNodeEvaluator.isForbiddenFloor(
+                            peasant.level().getBlockState(candidate.below()))) continue;
+                    spot = candidate;
+                    best = distance;
+                }
+            }
+        }
+        workTeleportCooldown = WORK_TELEPORT_COOLDOWN; // found or not: don't search every second
+        resetWorkProgress();
+        if (spot == null) return false;
+
+        peasant.level().playSound(null, peasant.getX(), peasant.getY(), peasant.getZ(),
+                net.minecraft.sounds.SoundEvents.ENDERMAN_TELEPORT, net.minecraft.sounds.SoundSource.NEUTRAL, 0.5F, 1.0F);
+        peasant.getNavigation().stop();
+        peasant.teleportTo(spot.getX() + 0.5D, spot.getY(), spot.getZ() + 0.5D);
+        return true;
+    }
+
+    private static final int WAITING_JOB_CHECK_INTERVAL = 100;
+
+    /**
+     * A jobless NPC's town may have given it a job while it wasn't loaded: the job block is claimed in its name
+     * (JobClaims). It takes that job up - once it is loaded, and the job block's chunk is too.
+     */
+    private void takeUpWaitingJob() {
+        if (hasJob() || !peasant.isAdult()) return;
+        if (!(peasant.level() instanceof net.minecraft.server.level.ServerLevel serverLevel)) return;
+        if ((peasant.tickCount + peasant.getId()) % WAITING_JOB_CHECK_INTERVAL != 0) return;
+
+        BlockPos jobBlock = JobClaims.get(serverLevel).claimOf(serverLevel, peasant.getUUID());
+        if (jobBlock == null || !serverLevel.isLoaded(jobBlock)) return;
+        String jobType = net.darkflameproduction.agotmod.block.custom.TownHallBlockEntity
+                .getJobTypeFromBlock(serverLevel.getBlockState(jobBlock));
+        if (jobType.equals(JOB_NONE)) {
+            JobClaims.get(serverLevel).release(jobBlock, peasant.getUUID()); // the job block is gone
+            return;
+        }
+        setJobType(jobType);
+        setJobBlockPos(jobBlock);
+    }
 
     private boolean isJobBlockValid() {
         BlockPos jobBlockPos = getJobBlockPos();
@@ -261,7 +374,34 @@ public class JobSystem {
     private void giveJobEquipment(String oldJob, String newJob) {
         if (peasant.level().isClientSide) return;
         if (newJob.equals(JOB_MINER) || newJob.equals(JOB_QUARRY)) giveTorches();
+        giveStarterTool(newJob);
         JobTools.updateRequest(peasant);
+    }
+
+    /** Set on the residents a village is built with: their first job that needs a tool comes with one. */
+    public static final String STARTER_TOOL_TAG = "StarterTool";
+
+    /**
+     * A village founder starts out with its job's tool (iron, which works at normal speed) - a village built with
+     * the world has no blacksmith making tools yet, and its workers would wait for them. Once only: later tools
+     * come from the blacksmith like everyone else's.
+     */
+    private void giveStarterTool(String job) {
+        if (!peasant.getPersistentData().getBoolean(STARTER_TOOL_TAG)) return;
+        JobTools.ToolKind kind = JobTools.requiredTool(job);
+        if (kind == null) return; // keep the gift for a job that needs a tool
+        if (!JobTools.findTool(peasant, kind).isEmpty()) {
+            peasant.getPersistentData().remove(STARTER_TOOL_TAG);
+            return;
+        }
+        ItemStack tool = switch (kind) {
+            case HOE -> new ItemStack(Items.IRON_HOE);
+            case PICKAXE -> new ItemStack(Items.IRON_PICKAXE);
+            case AXE -> new ItemStack(Items.IRON_AXE);
+            case HAMMER -> new ItemStack(net.darkflameproduction.agotmod.item.ModItems.HAMMER.get());
+        };
+        if (!peasant.getInventorySystem().addItem(tool)) peasant.spawnAtLocation(tool);
+        peasant.getPersistentData().remove(STARTER_TOOL_TAG);
     }
 
 

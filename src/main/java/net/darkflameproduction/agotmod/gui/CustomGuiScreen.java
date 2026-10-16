@@ -229,6 +229,15 @@ public class CustomGuiScreen extends Screen {
         map.put("widowswatch2",    ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/widowswatch2.png"));
         map.put("woolfield",       ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/woolfield.png"));
         map.put("wull",            ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/wull.png"));
+        map.put("arryn1",          ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/arryn1.png"));
+        map.put("arryn2",          ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/arryn2.png"));
+        map.put("lipps",           ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/lipps.png"));
+        map.put("moore",           ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/moore.png"));
+        map.put("upcliff",         ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/upcliff.png"));
+        map.put("waynwood",        ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/waynwood.png"));
+        map.put("downwards_wedge", ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/downwards_wedge.png"));
+        map.put("upwards_wedge",   ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/upwards_wedge.png"));
+        map.put("shield",          ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, "textures/entity/banner/shield.png"));
         map.put("stripe_bottom",          ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/stripe_bottom.png"));
         map.put("stripe_top",             ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/stripe_top.png"));
         map.put("stripe_left",            ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/banner/stripe_left.png"));

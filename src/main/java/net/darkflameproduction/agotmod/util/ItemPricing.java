@@ -95,6 +95,16 @@ public class ItemPricing {
         reg("agotmod:leek_seeds",           23,  GROCER);
         reg("agotmod:neep_seeds",           31,  GROCER);
         reg("agotmod:turnip_seeds",         23,  GROCER);
+        reg("agotmod:rye_seeds",            10,  GROCER);
+        reg("agotmod:rye",                   3,  GROCER);
+        reg("agotmod:barley",                2,  GROCER);
+        reg("agotmod:barley_seeds",          8,  GROCER);
+        reg("agotmod:oat",                   3,  GROCER);
+        reg("agotmod:oat_seeds",            10,  GROCER);
+        reg("agotmod:hemp",                 12,  GROCER);
+        reg("agotmod:hemp_seeds",           46,  GROCER);
+        reg("agotmod:cotton",               10,  GROCER, TAILOR);
+        reg("agotmod:cotton_seeds",         37,  GROCER);
         reg("agotmod:parsley_seeds",        16,  GROCER);
         reg("agotmod:bean_seeds",           13,  GROCER);
         reg("agotmod:green_bean_seeds",     16,  GROCER);

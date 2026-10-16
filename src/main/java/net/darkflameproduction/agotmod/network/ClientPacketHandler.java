@@ -43,6 +43,19 @@ public class ClientPacketHandler {
         });
     }
 
+    /** The towns near the player, in bulk (TownHallSync): registers each and refreshes what is shown outside its screen. */
+    public static void handleTownHallSummary(TownHallSummaryPacket packet, IPayloadContext context) {
+        context.enqueueWork(() -> {
+            for (TownHallSummaryPacket.Entry town : packet.towns()) {
+                TownHallDebugRenderer.addTownHall(town.pos());
+                TownHallDebugRenderer.updateTownHallData(town.pos(), town.bedCount(), town.citizenCount(), town.radius());
+                TownTracker.updateTownData(town.pos(), town.townName(), town.citizenCount());
+                ClientTownAreaManager.updateTownArea(town.pos(), town.townName(), town.isClaimed(),
+                        town.claimedByHouse(), town.citizenCount(), town.radius());
+            }
+        });
+    }
+
     public static void handleOpenTownHallMenu(OpenTownHallMenuPacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
             Minecraft mc = Minecraft.getInstance();

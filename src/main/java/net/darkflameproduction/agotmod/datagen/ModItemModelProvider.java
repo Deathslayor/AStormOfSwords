@@ -384,6 +384,16 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.PARSLEY_SEEDS);
         simpleItem(ModItems.RED_ONION_SEEDS);
         simpleItem(ModItems.TURNIP_SEEDS);
+        simpleItem(ModItems.RYE_SEEDS);
+        simpleItem(ModItems.RYE);
+        simpleItem(ModItems.BARLEY_SEEDS);
+        simpleItem(ModItems.BARLEY);
+        simpleItem(ModItems.OAT_SEEDS);
+        simpleItem(ModItems.OAT);
+        simpleItem(ModItems.COTTON_SEEDS);
+        simpleItem(ModItems.COTTON);
+        simpleItem(ModItems.HEMP_SEEDS);
+        simpleItem(ModItems.HEMP);
         simpleItem(ModItems.WILD_ONION_SEEDS);
         simpleItem(ModItems.ONION_SEEDS);
         simpleItem(ModItems.OPIUM_POPPY_SEEDS);
@@ -1182,6 +1192,15 @@ public class ModItemModelProvider extends ItemModelProvider {
         bannerPatternItem(BannerPatterns.WIDOWSWATCH2_BANNER_PATTERN);
         bannerPatternItem(BannerPatterns.WOOLFIELD_BANNER_PATTERN);
         bannerPatternItem(BannerPatterns.WULL_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.ARRYN1_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.ARRYN2_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.LIPPS_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.MOORE_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.UPCLIFF_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.WAYNWOOD_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.DOWNWARDS_WEDGE_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.UPWARDS_WEDGE_BANNER_PATTERN);
+        bannerPatternItem(BannerPatterns.SHIELD_BANNER_PATTERN);
 
 
 

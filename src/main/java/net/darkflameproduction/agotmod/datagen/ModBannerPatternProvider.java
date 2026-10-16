@@ -105,6 +105,15 @@ public class ModBannerPatternProvider extends TagsProvider<BannerPattern> {
         createBannerPatternTag("widowswatch2");
         createBannerPatternTag("woolfield");
         createBannerPatternTag("wull");
+        createBannerPatternTag("arryn1");
+        createBannerPatternTag("arryn2");
+        createBannerPatternTag("lipps");
+        createBannerPatternTag("moore");
+        createBannerPatternTag("upcliff");
+        createBannerPatternTag("waynwood");
+        createBannerPatternTag("downwards_wedge");
+        createBannerPatternTag("upwards_wedge");
+        createBannerPatternTag("shield");
 
         System.out.println("DEBUG: Added all Game of Thrones house banner pattern tags");
     }

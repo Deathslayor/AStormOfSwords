@@ -1,4 +1,4 @@
-// 1.21.1	2026-10-11T22:45:26.1847475	Recipes
+// 1.21.1	2026-10-14T22:02:23.8057357	Recipes
 7b2ca6f0110f3b8eec6df36c94100dfa1c11daf3 data/agotmod/advancement/recipes/building_blocks/acacia_wall.json
 822a5dc54b4509f28c5659a0e3c6c3f5cfd1834a data/agotmod/advancement/recipes/building_blocks/alder_slabs.json
 a169551e82dfb675b8952441658c421d625418b2 data/agotmod/advancement/recipes/building_blocks/alder_stairs.json
@@ -3054,13 +3054,14 @@ adf677adc20628ac3b4b6aadb5cca0eabf69bbec data/agotmod/advancement/recipes/decora
 e1b59d49ae7471e2d498f213fd31e28e5fb74625 data/agotmod/advancement/recipes/decorations/wormtree_fence_gate.json
 56ab57d1ee7140478f20b04cae83d711289c16fb data/agotmod/advancement/recipes/decorations/yew_fence.json
 ad56aeb7d539c89035b04a65ff774cfd70179afe data/agotmod/advancement/recipes/decorations/yew_fence_gate.json
+96e061264cf87e5aea497d9bc34c471fef4e1e4d data/agotmod/advancement/recipes/food/food/almond_pie.json
 8d97dbe60c708c9aea6e354517c00ba705607095 data/agotmod/advancement/recipes/food/food/apple_cake.json
 e50dfea2537c4bab421f026d8fb94146dfcdb805 data/agotmod/advancement/recipes/food/food/apple_tart.json
 c593248dc3979160345a8f58b0e840540214d813 data/agotmod/advancement/recipes/food/food/apricot_cake.json
 620cbd4edb8249696ac052e661c31885df129db8 data/agotmod/advancement/recipes/food/food/apricot_pie.json
 6d4f42ccd1d22f194fe2d09e9364475479305943 data/agotmod/advancement/recipes/food/food/aurochs_pie.json
 ad134417081f8a654a0c2182325d595dee7ef117 data/agotmod/advancement/recipes/food/food/bacon_pie.json
-883b726a0d7dabf69c6d0224cfe18d02f38545e8 data/agotmod/advancement/recipes/food/food/barley_bread.json
+cf21177a1e406f16e2f13e309da01b2050c256f1 data/agotmod/advancement/recipes/food/food/barley_bread.json
 7f070d741514f758fdf04bbaa0df7cb10eb88824 data/agotmod/advancement/recipes/food/food/bean_pie.json
 345984d769836fb5bacc43e63b6038dd648dd5fe data/agotmod/advancement/recipes/food/food/bear_pie.json
 646deaebb06814614d6dd3e7396db5963257c2bd data/agotmod/advancement/recipes/food/food/beef_and_barley_stew.json
@@ -3069,7 +3070,7 @@ b8f86bb2b0779869a64931505526e221bb868a08 data/agotmod/advancement/recipes/food/f
 4161ea0f8448693b792a122a207bea631750852f data/agotmod/advancement/recipes/food/food/blackberry_cake.json
 92390a379276b86deb12deadfb7bf741061b6291 data/agotmod/advancement/recipes/food/food/blackberry_oatcake.json
 66570ba48e617d341e1251acf24b2c790b60ab86 data/agotmod/advancement/recipes/food/food/blackberry_pie.json
-70fd7ccee94d9f1ef744f1d816dbef2e3988338f data/agotmod/advancement/recipes/food/food/black_bread.json
+6e6c2f91d86c40c1f506bc83a75192b32d7b01af data/agotmod/advancement/recipes/food/food/black_bread.json
 83d445ce27711b1e7602feeaf82b3208eca2a6ba data/agotmod/advancement/recipes/food/food/black_olive_pie.json
 06c41c3c3ed9ce196d512b5ef6c8039f75ae2b62 data/agotmod/advancement/recipes/food/food/black_salsify_pie.json
 50b730adc70f6d8fd6b9c530ed6171522a18ab9e data/agotmod/advancement/recipes/food/food/blood_orange_cake.json
@@ -3296,6 +3297,8 @@ f1fc139ed9c5fdfeb4a0e023f0ec5ef0f0a8b4ce data/agotmod/advancement/recipes/food/f
 8626121211d9011e3007a2f43d8f05d767ad6af1 data/agotmod/advancement/recipes/food/food/hard_bread_from_smelting.json
 6485569607256822b05a3d880b845f41b31348b3 data/agotmod/advancement/recipes/food/food/hard_bread_from_smoking.json
 077c65a0875875815d42993b3e1d2a5c1213183e data/agotmod/advancement/recipes/food/food/hare_pie.json
+75a6b9442b29df12e741a573381b75bacfee6581 data/agotmod/advancement/recipes/food/food/hawthorn_cake.json
+e6e5a4acf0a3475fa9b2f63d69ec9a98d6b24fc9 data/agotmod/advancement/recipes/food/food/hawthorn_pie.json
 832a24cba9d99bdcf40b0b9be64feb7c18e0f5f9 data/agotmod/advancement/recipes/food/food/heron_pie.json
 1c8336770314eb51d90476c511485e7f0e0f835a data/agotmod/advancement/recipes/food/food/herring_pie.json
 b7a262b364b09acbe0228312f91beee2bd335e5c data/agotmod/advancement/recipes/food/food/honeyed_locusts.json
@@ -3303,6 +3306,8 @@ b7a262b364b09acbe0228312f91beee2bd335e5c data/agotmod/advancement/recipes/food/f
 b9a4088a9b9884aa731696cb8c820293a0fcc766 data/agotmod/advancement/recipes/food/food/honey_cake.json
 38d8204019ba0d72d47cb3027cc76e53c85af870 data/agotmod/advancement/recipes/food/food/horseradish_pie.json
 cfcd5e13e7c9e35ffaa61526daaa0ee3de108870 data/agotmod/advancement/recipes/food/food/horse_pie.json
+5c35f2c031f78787ccb670303a0ebed21191c82c data/agotmod/advancement/recipes/food/food/ivory_berry_cake.json
+3ffb402a1df7ba38c61c2d0a14c8317b0cb07125 data/agotmod/advancement/recipes/food/food/ivory_berry_pie.json
 70fb561b1e294da925af66057e2e5fb129c10c84 data/agotmod/advancement/recipes/food/food/jellied_calves_brain.json
 ba76b658bae96ac0f0c1d940b11942c001e2739b data/agotmod/advancement/recipes/food/food/jerky.json
 e5b0114842b64d2b5d49238a05497c16489a5dde data/agotmod/advancement/recipes/food/food/lamb_pie.json
@@ -3328,7 +3333,7 @@ e9e5bddf9cc939dc6f58d39be90c5378dea6d761 data/agotmod/advancement/recipes/food/f
 ad1b9ca7aa9e8c30b5d22dc7e15abb6aa9faf035 data/agotmod/advancement/recipes/food/food/mutton_stew.json
 eface4d3b23029572f9ba2aa4f9e6f96dd35ca70 data/agotmod/advancement/recipes/food/food/neep_pie.json
 097dd976e90499fad2b01a41937ca4738753c3b1 data/agotmod/advancement/recipes/food/food/nutmeg_pie.json
-31fbbeda1800471f2458d95b2d2b2f495db78445 data/agotmod/advancement/recipes/food/food/oatcake.json
+6a35e8ff4d1bc9f7fc13cecbf32b442a75caa22a data/agotmod/advancement/recipes/food/food/oatcake.json
 f6493201c99d505d8ab34ee55318e47753a16f7f data/agotmod/advancement/recipes/food/food/octopus_pie.json
 a0c01e70d716b87e36f69dc09230ee324a551a0a data/agotmod/advancement/recipes/food/food/olive_pie.json
 326e82d01b45cbd0ef65a73e6d504988a1a2241c data/agotmod/advancement/recipes/food/food/onion_pie.json
@@ -3372,13 +3377,14 @@ af3ffa6b8936797cf5fe369a10df8c1662c003f6 data/agotmod/advancement/recipes/food/f
 4869828dac479000a09d03e5000978e81f35fda1 data/agotmod/advancement/recipes/food/food/red_grape_cake.json
 21927c051e31fd5f5e444a10d623d9546db23245 data/agotmod/advancement/recipes/food/food/red_grape_pie.json
 a8f4f417876d4de3cfd160cf9941f922e8b32dae data/agotmod/advancement/recipes/food/food/red_onion_pie.json
-42b60d9b68c463c0c003cf03317a81ab011537a2 data/agotmod/advancement/recipes/food/food/rye_bread.json
+5bbb852c641c08e28730dd1a0efccc99b082370c data/agotmod/advancement/recipes/food/food/rye_bread.json
 841e332a69d9a3c3a27b14b15975c8de627d1cc7 data/agotmod/advancement/recipes/food/food/sardine_pie.json
 092babec33bc38670dba74e8cab6c4c656b77928 data/agotmod/advancement/recipes/food/food/sausage_pie.json
 b1766b6b750ca6a4a79932ac2357756a3857e129 data/agotmod/advancement/recipes/food/food/seal_pie.json
 24694d8a5c043b46c36d28d3a81d6f1bb4da2957 data/agotmod/advancement/recipes/food/food/sisters_stew.json
 b7963a011521045edd1953f0ddebdcadbfde70ca data/agotmod/advancement/recipes/food/food/smokeberry_cake.json
 b8a3059a015cfbd3e0b898a7e002d45c15486eec data/agotmod/advancement/recipes/food/food/smokeberry_pie.json
+4410ed3126581e68d30099fbfabb7d19afa16828 data/agotmod/advancement/recipes/food/food/smokeberry_root_pie.json
 3fd59732af35355e6a2957945d9da41ea73cab4f data/agotmod/advancement/recipes/food/food/smoked_cheese_from_campfire.json
 a8ea2eb6421d3fb5262845f352f54596faa678a9 data/agotmod/advancement/recipes/food/food/smoked_cheese_from_smoking.json
 6c7ceee9bd5eee6f8000b8b389e72497e23acabd data/agotmod/advancement/recipes/food/food/smoked_cheese_slice.json
@@ -5472,23 +5478,24 @@ cebcd1475c2211ef6bab158796c3f38d956253de data/agotmod/recipe/fir_slabs.json
 8903c29fa6c2c80921603195414887689bcd539b data/agotmod/recipe/fir_wall.json
 e19268683d9ca1dbb56273a5424086a7095c90d6 data/agotmod/recipe/fir_wood.json
 9e71a2f85edc95bfbb107c65146eb50c9e981f54 data/agotmod/recipe/fir_wood_stripped.json
+5043ce8a4e8fb495eb614a39d463b3579e6473d5 data/agotmod/recipe/food/almond_pie.json
 03f398e541dd89d077827a073e0986fecb1f6a4d data/agotmod/recipe/food/apple_cake.json
 2eb8242cdb0f88b57988c819ec1ac355ee8c1e1b data/agotmod/recipe/food/apple_tart.json
 2641e15be8a815eeb06e9ae6ed3710394db6e272 data/agotmod/recipe/food/apricot_cake.json
 ef8c0e63c9ae86d911740b2e6009bd85c3873969 data/agotmod/recipe/food/apricot_pie.json
 929e7d5aad0f3a19cce118d3be2fb3368d5f0b55 data/agotmod/recipe/food/aurochs_pie.json
 b61cd83315ccc377a822b1fd210e52c99249dce1 data/agotmod/recipe/food/bacon_pie.json
-bbe3adc0f5c1795a68b91561ec053aae3a794358 data/agotmod/recipe/food/barley_bread.json
+6a1aeac5f1dce467d74239ed84c3ce2a28eaa2af data/agotmod/recipe/food/barley_bread.json
 b79bf112302a576457cf1282dac120cdd71cc1d9 data/agotmod/recipe/food/bean_pie.json
 e9d5d6c230cce1b6616861f8735031ff78189344 data/agotmod/recipe/food/bear_pie.json
-e535fcce44bf38e1b223556750475faf299a4787 data/agotmod/recipe/food/beef_and_barley_stew.json
+ca8817e8e355c0e651dfce036d0bf0c8ce1573e0 data/agotmod/recipe/food/beef_and_barley_stew.json
 14b6a04874ec26bc7c3ce45a09b351c4ce73697a data/agotmod/recipe/food/beef_stew.json
 107e6dc7dbaca122d9f4b7e5a755bb4642f81b1b data/agotmod/recipe/food/biscuit.json
 1cee212e1435ea07b63e2e391a3433a57895430a data/agotmod/recipe/food/blackberry_cake.json
 603ea091bcb919eb5be073eacd0d9efd780103a2 data/agotmod/recipe/food/blackberry_oatcake.json
 b86bcd1f0a9bbcefa9a6903179524dfff53a8a21 data/agotmod/recipe/food/blackberry_pie.json
 33f08901678228aaab79b7d6b026fdb03a6cf363 data/agotmod/recipe/food/blackberry_to_seeds.json
-6bd6a3e00333626efb548a050bd81032803b7d43 data/agotmod/recipe/food/black_bread.json
+dbff5df4aad96c13501b112129ddd44a9af9a992 data/agotmod/recipe/food/black_bread.json
 63ee4600e1a15193133e840f35432c297634815e data/agotmod/recipe/food/black_olive_pie.json
 62dada4d4ff991633a9927fd56554e9770b635ad data/agotmod/recipe/food/black_salsify_pie.json
 584652c55d4fa13228c5d82455dd0a87e365326d data/agotmod/recipe/food/blood_orange_cake.json
@@ -5716,6 +5723,8 @@ d14494b4384ff56a5c580f2e601bcde8e7779bf5 data/agotmod/recipe/food/hardtack_from_
 7d4049f902c17be8a865154c44fc0ab68f6ae47a data/agotmod/recipe/food/hard_bread_from_smelting.json
 b4a04224a60bc3df64d1c8cdb01bb1434b89c870 data/agotmod/recipe/food/hard_bread_from_smoking.json
 3ae085964a289bc48630a55d485c31c8fa70551c data/agotmod/recipe/food/hare_pie.json
+e7b330732206e1e7bc5fe14fd3995e5dada23381 data/agotmod/recipe/food/hawthorn_cake.json
+1bbbb18cd707bbe511c40306b7df08b04d797a87 data/agotmod/recipe/food/hawthorn_pie.json
 d48b7c905329d9eb0a62cfecbf80d0f7c94a3cdd data/agotmod/recipe/food/heron_pie.json
 73daf878121e7cf5fcde31712c3a3a91195a604b data/agotmod/recipe/food/herring_pie.json
 2d9a6e3df90190f886977602b4095c483a931ee3 data/agotmod/recipe/food/honeyed_locusts.json
@@ -5723,6 +5732,8 @@ d48b7c905329d9eb0a62cfecbf80d0f7c94a3cdd data/agotmod/recipe/food/heron_pie.json
 d1829e24ee819aefdfb1e98883a17628633e8ae8 data/agotmod/recipe/food/honey_cake.json
 4ea60a5ef992e7a2070d5dfaeeda07e161c6c9fc data/agotmod/recipe/food/horseradish_pie.json
 8a55cf3ce7e5e747a0255f2604af9c3103dacd1f data/agotmod/recipe/food/horse_pie.json
+3e9ab74dc4ce03d30ca83b51238ce8f68df6db38 data/agotmod/recipe/food/ivory_berry_cake.json
+22432ccee5ed993dba888547b49d7c31f65b6031 data/agotmod/recipe/food/ivory_berry_pie.json
 8744745834e9302dbfe8d13f6f5747cf09c970a1 data/agotmod/recipe/food/jellied_calves_brain.json
 894e3950898456e4efc8748f4f6f3a46878b0bb9 data/agotmod/recipe/food/jerky.json
 d88cfcb91335fc9fd8912154e7c510bc920fd840 data/agotmod/recipe/food/lamb_pie.json
@@ -5749,7 +5760,7 @@ bf2928f2d46234fe58f547e220b3c287846a1935 data/agotmod/recipe/food/mussel_pie.jso
 9be6fe807b7a5b15054feb55db3311577d2e5425 data/agotmod/recipe/food/mutton_stew.json
 18e0eefb8c0a6cdd1da8f85361a16d6303ee165a data/agotmod/recipe/food/neep_pie.json
 99a792cc5b969cbdfd8b8368c24199db183d3ff9 data/agotmod/recipe/food/nutmeg_pie.json
-7594bdb5ab2fad276df4e4762c38ef93b6cfd7f5 data/agotmod/recipe/food/oatcake.json
+83b62429061e434ab1e26935643b551394c1ea16 data/agotmod/recipe/food/oatcake.json
 772ce750417f437604c247cb095fe00fbc36c430 data/agotmod/recipe/food/octopus_pie.json
 5d06b3ad26659abfae8913208a3fb393d23bdf2a data/agotmod/recipe/food/olive_pie.json
 b5492d2fc30456df505505790244d81483568379 data/agotmod/recipe/food/onion_pie.json
@@ -5794,13 +5805,14 @@ f24440cc8608122986cc4d22eb43dc993fad8b5f data/agotmod/recipe/food/raw_chicken_nu
 c0d58d74117a0f25e1cc705044759079b537cb14 data/agotmod/recipe/food/red_grape_cake.json
 de5d9d1770901f12c2b47d515f25657c87ba9e5e data/agotmod/recipe/food/red_grape_pie.json
 0fe4d286ac21f68039a3865381d3e39f8f068dc6 data/agotmod/recipe/food/red_onion_pie.json
-f3d379ffc3dc21d19507f940aa02ca3442544f20 data/agotmod/recipe/food/rye_bread.json
+7c08031634a03b6692a8bffad3cbc9bd5c509385 data/agotmod/recipe/food/rye_bread.json
 9656d6b5fad87971313061037174b1a1c9bc91c5 data/agotmod/recipe/food/sardine_pie.json
 b093f8837218cb946ae1ecf14736ca574b78ae71 data/agotmod/recipe/food/sausage_pie.json
 fad3dffe8ec20921d48eeeae9eb25814af5e8d22 data/agotmod/recipe/food/seal_pie.json
 7d4278fef7dd47b20682f4ed5711b52fab9981fd data/agotmod/recipe/food/sisters_stew.json
 5af258e80ee5d9443b931eb4a5f8d4b43795a799 data/agotmod/recipe/food/smokeberry_cake.json
 313fb5f321e08c2f3e0baf102492c4666ec0d840 data/agotmod/recipe/food/smokeberry_pie.json
+1a87db8277705f8ba0f97c7d8becd6595d5c73d0 data/agotmod/recipe/food/smokeberry_root_pie.json
 1689bfb41608c00a30cc241142839696cf340729 data/agotmod/recipe/food/smokeberry_to_seeds.json
 eb32cad4c91ed9b9b26ca4914baa3d2bebe86bfa data/agotmod/recipe/food/smoked_cheese_from_campfire.json
 405145bc978d671ac2b7db58f35d15d3c274db77 data/agotmod/recipe/food/smoked_cheese_from_smoking.json
@@ -10149,6 +10161,7 @@ d03a4adb21462f3478a4ef570878566a43c61316 data/minecraft/advancement/recipes/misc
 bc9b72ad8d8c1312275a1936841946789cc3e8c8 data/minecraft/advancement/recipes/misc/chestnut_stool.json
 8af9fb246d31e1fe485f3d4d116c89adb1d7467f data/minecraft/advancement/recipes/misc/chestnut_table.json
 7a5d1f410992534ce852492a14b70f75daa770ce data/minecraft/advancement/recipes/misc/cloth.json
+c7d8aeba4a98552afec6931aa73f05b4491556bd data/minecraft/advancement/recipes/misc/cloth_from_cotton.json
 298a311cf4af3e7492bfdfbc480bff6a08279fce data/minecraft/advancement/recipes/misc/cloth_from_wool.json
 2d7dae4dbc64411af82f0ddacf68c15963865326 data/minecraft/advancement/recipes/misc/coldsnap_to_light_blue_dye.json
 b22afaf6fb8a2bbbb410eaeeba92f8c529457d18 data/minecraft/advancement/recipes/misc/cottonwood_arm_chair.json
@@ -10943,6 +10956,7 @@ a38432a6fd6ce1013c50fd88be59f31b4e1054c8 data/minecraft/advancement/recipes/misc
 a9499eb05b56fbe38654daa2e2ea17153e93c19f data/minecraft/advancement/recipes/misc/steel_plate.json
 4aafb5ce33972de2ef6b7fb76c05d66f6886f9cf data/minecraft/advancement/recipes/misc/steel_with_charcoal.json
 3f81fcd04a54ea8a186f6c347c83ff1955d27593 data/minecraft/advancement/recipes/misc/steel_with_coal.json
+ae5210f224dd9c81eb4f1d9c7786585f76412510 data/minecraft/advancement/recipes/misc/string_from_cotton.json
 5cb00dede19642c8e37cf82ac3c61dac18ad4794 data/minecraft/advancement/recipes/misc/sycamore_arm_chair.json
 b46890b9ca03f46b28473995e112696ddbc66010 data/minecraft/advancement/recipes/misc/sycamore_chair.json
 7aba437ba0f8166b89dc3eca81d84d0c787227fc data/minecraft/advancement/recipes/misc/sycamore_plank_craftingtable.json
@@ -11964,6 +11978,7 @@ df1054f2ca5c60821edaf08e38866198de999ca9 data/minecraft/recipe/chestnut_plank_st
 c951d0cc267b7981591db5edefef032697b1206a data/minecraft/recipe/chestnut_stool.json
 b0b2e481358460a6ee778c732621a8018e1774ae data/minecraft/recipe/chestnut_table.json
 f411e9fb32056670ecc5a608306de9743f0cdc6f data/minecraft/recipe/cloth.json
+89f19cb965d4eba61221c9bc222de3950d3c896e data/minecraft/recipe/cloth_from_cotton.json
 a6e0463aba30dfea2c316d27fdc8f19b718e0d0e data/minecraft/recipe/cloth_from_wool.json
 7073b6c5dbec514125c1294e3d863233abacde01 data/minecraft/recipe/coldsnap_to_light_blue_dye.json
 0686ac0b32e92cbcb394cfa6affc755b6c12817c data/minecraft/recipe/cottonwood_arm_chair.json
@@ -14123,6 +14138,7 @@ c72ceed4a574eb08a1864c35c858b3844c75c725 data/minecraft/recipe/stone_9_wall_from
 0ba370663b7a9d322d85bb18997195be3738e653 data/minecraft/recipe/stone_bricks_from_dark_stone_brick_stonecutting.json
 984aa417b7fb5e6a9155d1b80ee7435217bc7eb3 data/minecraft/recipe/stone_bricks_from_kings_landing_brick_large_stonecutting.json
 b385c7406859c371ec7070b660189225b9394bbd data/minecraft/recipe/stone_bricks_from_stone_brick_but_cooler_stonecutting.json
+9d45340de9482b3272c3df711b6b4e08bf304b61 data/minecraft/recipe/string_from_cotton.json
 165e95d2b2aa115ad2a345a3cbd457e99b0c29b8 data/minecraft/recipe/sycamore_arm_chair.json
 698d197b883e9e1ee2ab7a0d5b4cc2dacfbcda4b data/minecraft/recipe/sycamore_chair.json
 ddc225ecc1543d0fe81ef08b9ec85d1778b9b456 data/minecraft/recipe/sycamore_hanging_sign.json
