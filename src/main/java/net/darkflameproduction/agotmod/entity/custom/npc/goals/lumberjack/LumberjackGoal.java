@@ -34,6 +34,7 @@ public class LumberjackGoal extends Goal {
         if (!net.darkflameproduction.agotmod.entity.custom.npc.system.behaviour.JobTools.hasRequiredTool(peasant)) return false; // no work without the job's tool (see JobTools)
         return peasant.getJobType().equals(JobSystem.JOB_LUMBERJACK)
                 && !peasant.shouldSleep()
+                && peasant.level().getDayTime() % 24000 < net.darkflameproduction.agotmod.entity.custom.npc.system.sleep.NpcSchedule.WORK_END // done at dusk, like every job
                 && !peasant.needsFoodCollection();
     }
 

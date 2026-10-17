@@ -1,6 +1,7 @@
 package net.darkflameproduction.agotmod.entity.custom;
 
 import net.darkflameproduction.agotmod.block.custom.furniture.ArmChairBlock;
+import net.darkflameproduction.agotmod.block.custom.furniture.BenchBlock;
 import net.darkflameproduction.agotmod.block.custom.furniture.ChairBlock;
 import net.darkflameproduction.agotmod.block.custom.furniture.StoolBlock;
 import net.darkflameproduction.agotmod.entity.ModEntities;
@@ -60,7 +61,8 @@ public class SeatEntity extends Entity {
             net.minecraft.world.level.block.Block block = level().getBlockState(stoolPos).getBlock();
             boolean isValidSeat = block instanceof StoolBlock
                     || block instanceof ChairBlock
-                    || block instanceof ArmChairBlock;
+                    || block instanceof ArmChairBlock
+                    || block instanceof BenchBlock;
             if (!isValidSeat) {
                 ejectPassengers();
                 this.discard();

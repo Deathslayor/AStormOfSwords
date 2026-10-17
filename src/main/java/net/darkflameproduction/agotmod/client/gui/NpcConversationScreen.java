@@ -52,6 +52,7 @@ public class NpcConversationScreen extends Screen {
                 || JobSystem.isSmith(jobType)
                 || jobType.equals(JobSystem.JOB_BAKER)
                 || jobType.equals(JobSystem.JOB_STONEMASON)
+                || JobSystem.isTavernKeeper(jobType)
                 || jobType.equals(JobSystem.JOB_TRADER)
                 || jobType.equals(JobSystem.JOB_CARPENTER);
 

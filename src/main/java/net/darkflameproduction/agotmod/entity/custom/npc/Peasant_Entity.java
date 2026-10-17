@@ -602,12 +602,30 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
                     this, JobSystem.JOB_STONEMASON, 20 * 120));
             this.goalSelector.addGoal(8, new net.darkflameproduction.agotmod.entity.custom.npc.goals.supply.SupplyCraftGoal(
                     this, JobSystem.JOB_STONEMASON, net.darkflameproduction.agotmod.block.ModBLocks.STONEMASON_BARREL::get, 20 * 3));
+            // The innkeeper cooks the town's meat and makes cheese and the savoury pies (Kitchen); the alehouse keeper
+            // cooks meat and makes sausages for it. One thing every 2 seconds, up to 2 stacks a day - and both keep
+            // their tavern open, working at their barrel until it closes (NpcSchedule.CLOSING)
+            this.goalSelector.addGoal(7, new net.darkflameproduction.agotmod.entity.custom.npc.goals.supply.SupplyRunGoal(
+                    this, JobSystem.JOB_INNKEEPER, 20 * 120));
+            this.goalSelector.addGoal(8, new net.darkflameproduction.agotmod.entity.custom.npc.goals.supply.SupplyCraftGoal(
+                    this, JobSystem.JOB_INNKEEPER, net.darkflameproduction.agotmod.block.ModBLocks.INNKEEPER_BARREL::get, 20 * 2, 64 * 2,
+                    net.darkflameproduction.agotmod.entity.custom.npc.system.sleep.NpcSchedule.CLOSING));
+            this.goalSelector.addGoal(7, new net.darkflameproduction.agotmod.entity.custom.npc.goals.supply.SupplyRunGoal(
+                    this, JobSystem.JOB_ALEHOUSE_KEEPER, 20 * 120));
+            this.goalSelector.addGoal(8, new net.darkflameproduction.agotmod.entity.custom.npc.goals.supply.SupplyCraftGoal(
+                    this, JobSystem.JOB_ALEHOUSE_KEEPER, net.darkflameproduction.agotmod.block.ModBLocks.ALEHOUSE_BARREL::get, 20 * 2, 64 * 2,
+                    net.darkflameproduction.agotmod.entity.custom.npc.system.sleep.NpcSchedule.CLOSING));
+            // The butcher minces the town's meat and makes the uncooked sausages from it (Butchery), one every 2 seconds
+            this.goalSelector.addGoal(7, new net.darkflameproduction.agotmod.entity.custom.npc.goals.supply.SupplyRunGoal(
+                    this, JobSystem.JOB_BUTCHER, 20 * 120));
+            this.goalSelector.addGoal(8, new net.darkflameproduction.agotmod.entity.custom.npc.goals.supply.SupplyCraftGoal(
+                    this, JobSystem.JOB_BUTCHER, net.darkflameproduction.agotmod.block.ModBLocks.BUTCHER_BARREL::get, 20 * 2));
             this.goalSelector.addGoal(9, new ReturnToJobBlockGoal(this));
             this.goalSelector.addGoal(11, new FarmingGoal(this));
             this.goalSelector.addGoal(13, new GuardPatrolGoal(this));
         }
 
-        // Jobless adults spend a few hours a day at the tavern (into the night)
+        // Adults spend a few hours a day at the tavern (into the night) - workers once they're done for the day
         this.tavernVisitGoal = new net.darkflameproduction.agotmod.entity.custom.npc.goals.behaviour.TavernVisitGoal(this);
         this.goalSelector.addGoal(13, tavernVisitGoal);
         this.goalSelector.addGoal(14, new RestrictedWanderGoal(this, 0.6D));
@@ -879,6 +897,28 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         if (doorGoal != null) {
             doorGoal.saveOpenedBlocks(compound);
         }
+        if (tavernVisitGoal != null) {
+            tavernVisitGoal.saveData(compound);
+        }
+    }
+
+    /**
+     * Sitting on a chair it rides a SeatEntity, which is never saved - and vanilla saves a passenger only with its
+     * vehicle, so a seated NPC was lost when the game saved or its chunk unloaded. It is saved by itself instead
+     * (standing where it sat); its tavern visit (TavernVisitGoal) sits it down again once it loads.
+     */
+    @Override
+    public boolean shouldBeSaved() {
+        if (getVehicle() instanceof net.darkflameproduction.agotmod.entity.custom.SeatEntity) {
+            return getRemovalReason() == null || getRemovalReason().shouldSave();
+        }
+        return super.shouldBeSaved();
+    }
+
+    @Override
+    public boolean save(CompoundTag compound) {
+        if (getVehicle() instanceof net.darkflameproduction.agotmod.entity.custom.SeatEntity) return saveAsPassenger(compound);
+        return super.save(compound);
     }
 
 
@@ -928,6 +968,9 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
 
         if (doorGoal != null) {
             doorGoal.loadOpenedBlocks(compound);
+        }
+        if (tavernVisitGoal != null) {
+            tavernVisitGoal.loadData(compound);
         }
 
         this.getEntityData().set(DATA_ITEM_IN_MAIN_HAND, this.getMainHandItem());
@@ -1105,8 +1148,7 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
             }
         }
 
-        if (!this.level().isClientSide && (JobSystem.isSmith(getJobType()) || getJobType().equals(JobSystem.JOB_BAKER)
-                || getJobType().equals(JobSystem.JOB_STONEMASON))) {
+        if (!this.level().isClientSide && JobSystem.isBarrelCrafter(getJobType())) {
             if (net.darkflameproduction.agotmod.entity.custom.npc.system.blacksmith.BlacksmithInventoryTicketSystem.hasPendingResponse(this.getUUID())) {
                 net.darkflameproduction.agotmod.entity.custom.npc.system.blacksmith.BlacksmithInventoryTicketSystem.InventoryResponseTicket response =
                         net.darkflameproduction.agotmod.entity.custom.npc.system.blacksmith.BlacksmithInventoryTicketSystem.consumeResponse(this.getUUID());
@@ -1182,9 +1224,14 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         }
     }
 
-    /** What a smith or the baker trades: the blacksmith metals and the basic goods, the others their own work. */
+    /**
+     * What a smith, the baker, the stonemason or a tavern keeper trades: the blacksmith metals and the basic goods, the
+     * innkeeper every kind of food, the alehouse keeper cooked meat, the others their own work.
+     */
     private java.util.function.Predicate<String> smithTradeFilter() {
         return switch (getJobType()) {
+            case JobSystem.JOB_INNKEEPER -> net.darkflameproduction.agotmod.util.ItemPricing::isInnkeeperItem;
+            case JobSystem.JOB_ALEHOUSE_KEEPER -> net.darkflameproduction.agotmod.util.ItemPricing::isAlehouseItem;
             case JobSystem.JOB_ARMORSMITH -> net.darkflameproduction.agotmod.util.ItemPricing::isArmorsmithItem;
             case JobSystem.JOB_SWORDSMITH -> net.darkflameproduction.agotmod.util.ItemPricing::isSwordsmithItem;
             case JobSystem.JOB_BAKER -> net.darkflameproduction.agotmod.util.ItemPricing::isBakerItem;
@@ -1449,12 +1496,18 @@ public class Peasant_Entity extends PathfinderMob implements GeoEntity, Inventor
         if (getJobType().equals(JobSystem.JOB_GUARD)) {
             return guardSystem.shouldSleep();
         }
-        // At the tavern: up until last call, shortly before midnight - then off to bed
-        if (tavernVisitGoal != null && tavernVisitGoal.isVisiting()
-                && level().getDayTime() % 24000 < net.darkflameproduction.agotmod.entity.custom.npc.goals.behaviour.TavernVisitGoal.LAST_CALL) {
-            return false;
+        // The innkeeper and alehouse keeper are up exactly while their tavern is open (NpcSchedule)
+        if (JobSystem.isTavernKeeper(getJobType())) {
+            return net.darkflameproduction.agotmod.entity.custom.npc.system.sleep.NpcSchedule.isClosed(level().getDayTime());
         }
+        // Going to (or at) the tavern: up until its bedtime after a night out (TavernVisitGoal). Never woken up for it.
+        if (tavernVisitGoal != null && !sleepSystem.isSleeping() && tavernVisitGoal.staysUp()) return false;
         return sleepSystem.shouldSleep();
+    }
+
+    /** On its way to the tavern, or sitting in it (TavernVisitGoal) - a worker who does is done for the day. */
+    public boolean isVisitingTavern() {
+        return tavernVisitGoal != null && tavernVisitGoal.isVisiting();
     }
 
     public boolean isSleeping() { return sleepSystem.isSleeping(); }

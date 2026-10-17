@@ -46,6 +46,7 @@ public class ServerPacketHandler {
                                 JobSystem.isSmith(job)||
                                 job.equals(JobSystem.JOB_BAKER) ||
                                 job.equals(JobSystem.JOB_STONEMASON) ||
+                                JobSystem.isTavernKeeper(job) ||
                                 job.equals(JobSystem.JOB_CARPENTER) ||
                                 job.equals(JobSystem.JOB_TRADER);
                 if (isTradeJob && peasant.getDisplayName().getString().equals(packet.tradingName())) {
@@ -612,7 +613,7 @@ public class ServerPacketHandler {
                         case JobSystem.JOB_TAILOR ->
                                 net.darkflameproduction.agotmod.entity.custom.npc.system.tailor.TailorInventoryTicketSystem.postRequest(
                                         peasant.getUUID(), serverPlayer.getUUID(), peasant.blockPosition());
-                        case JobSystem.JOB_BLACKSMITH, JobSystem.JOB_ARMORSMITH, JobSystem.JOB_SWORDSMITH, JobSystem.JOB_BAKER, JobSystem.JOB_STONEMASON ->
+                        case JobSystem.JOB_BLACKSMITH, JobSystem.JOB_ARMORSMITH, JobSystem.JOB_SWORDSMITH, JobSystem.JOB_BAKER, JobSystem.JOB_STONEMASON, JobSystem.JOB_INNKEEPER, JobSystem.JOB_ALEHOUSE_KEEPER ->
                                 net.darkflameproduction.agotmod.entity.custom.npc.system.blacksmith.BlacksmithInventoryTicketSystem.postRequest(
                                         peasant.getUUID(), serverPlayer.getUUID(), peasant.blockPosition());
                         case JobSystem.JOB_CARPENTER ->

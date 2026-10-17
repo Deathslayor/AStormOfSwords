@@ -9,6 +9,7 @@ import net.darkflameproduction.agotmod.block.custom.barrel.BarrelSmallBlock;
 import net.darkflameproduction.agotmod.block.custom.furniture.ArmChairBlock;
 import net.darkflameproduction.agotmod.block.custom.furniture.ChairBlock;
 import net.darkflameproduction.agotmod.block.custom.furniture.StoolBlock;
+import net.darkflameproduction.agotmod.block.custom.furniture.BenchBlock;
 import net.darkflameproduction.agotmod.block.custom.furniture.TableBlock;
 import net.darkflameproduction.agotmod.block.custom.specialleaves.WeirwoodLeavesBlock;
 import net.darkflameproduction.agotmod.item.ModItems;
@@ -22,6 +23,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.*;
@@ -2081,6 +2083,157 @@ public class ModBLocks {
     public static final DeferredBlock<Block> BLUE_SOLDIER_PINE_STOOL = registerBlock("blue_soldier_pine_stool",
             StoolBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
 
+// ── BENCHES ────────────────────────────────────────────────────────────────
+
+    public static final DeferredBlock<Block> DARK_OAK_BENCH = registerBlock("dark_oak_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> OAK_BENCH = registerBlock("oak_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> SPRUCE_BENCH = registerBlock("spruce_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BIRCH_BENCH = registerBlock("birch_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> JUNGLE_BENCH = registerBlock("jungle_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ACACIA_BENCH = registerBlock("acacia_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> MANGROVE_BENCH = registerBlock("mangrove_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> CHERRY_BENCH = registerBlock("cherry_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BAMBOO_BENCH = registerBlock("bamboo_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BAMBOO_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> CRIMSON_BENCH = registerBlock("crimson_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CRIMSON_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> WARPED_BENCH = registerBlock("warped_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.WARPED_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> WEIRWOOD_BENCH = registerBlock("weirwood_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> CHARRED_BENCH = registerBlock("charred_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ROTTEN_BENCH = registerBlock("rotten_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PINE_BENCH = registerBlock("pine_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ASH_BENCH = registerBlock("ash_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BEECH_BENCH = registerBlock("beech_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> CEDAR_BENCH = registerBlock("cedar_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> CHESTNUT_BENCH = registerBlock("chestnut_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> HAWTHORN_BENCH = registerBlock("hawthorn_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> IRONWOOD_BENCH = registerBlock("ironwood_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> SENTINEL_BENCH = registerBlock("sentinel_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> SYCAMORE_BENCH = registerBlock("sycamore_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLACKBARK_BENCH = registerBlock("blackbark_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ASPEN_BENCH = registerBlock("aspen_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ALDER_BENCH = registerBlock("alder_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLACK_CHERRY_BENCH = registerBlock("black_cherry_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLACK_OLIVE_BENCH = registerBlock("black_olive_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> CRABAPPLE_BENCH = registerBlock("crabapple_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> OLIVE_BENCH = registerBlock("olive_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> WHITE_CHERRY_BENCH = registerBlock("white_cherry_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> RED_CHERRY_BENCH = registerBlock("red_cherry_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> FIR_BENCH = registerBlock("fir_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> WILLOW_BENCH = registerBlock("willow_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> WORMTREE_BENCH = registerBlock("wormtree_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ALMOND_BENCH = registerBlock("almond_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> APPLE_BENCH = registerBlock("apple_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> APRICOT_BENCH = registerBlock("apricot_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BAOBAB_BENCH = registerBlock("baobab_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLACK_COTTONWOOD_BENCH = registerBlock("black_cottonwood_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLACKTHORN_BENCH = registerBlock("blackthorn_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLOOD_ORANGE_BENCH = registerBlock("blood_orange_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLOODWOOD_BENCH = registerBlock("bloodwood_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLUE_MAHOE_BENCH = registerBlock("blue_mahoe_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> COTTONWOOD_BENCH = registerBlock("cottonwood_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> DATEPALM_BENCH = registerBlock("datepalm_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> EBONY_BENCH = registerBlock("ebony_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> FIG_BENCH = registerBlock("fig_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> FIREPLUM_BENCH = registerBlock("fireplum_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> GOLDENHEART_BENCH = registerBlock("goldenheart_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> LEMON_BENCH = registerBlock("lemon_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> LIME_BENCH = registerBlock("lime_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> LINDEN_BENCH = registerBlock("linden_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> MAHOGANY_BENCH = registerBlock("mahogany_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> MAPLE_BENCH = registerBlock("maple_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> MYRRH_BENCH = registerBlock("myrrh_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> NIGHTWOOD_BENCH = registerBlock("nightwood_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> NUTMEG_BENCH = registerBlock("nutmeg_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> ORANGE_BENCH = registerBlock("orange_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PEACH_BENCH = registerBlock("peach_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PEAR_BENCH = registerBlock("pear_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PECAN_BENCH = registerBlock("pecan_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PERSIMMON_BENCH = registerBlock("persimmon_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PINK_IVORY_BENCH = registerBlock("pink_ivory_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PLUM_BENCH = registerBlock("plum_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> POMEGRANATE_BENCH = registerBlock("pomegranate_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> PURPLEHEART_BENCH = registerBlock("purpleheart_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> REDWOOD_BENCH = registerBlock("redwood_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> SANDALWOOD_BENCH = registerBlock("sandalwood_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> SANDBEGGAR_BENCH = registerBlock("sandbeggar_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> TIGERWOOD_BENCH = registerBlock("tigerwood_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> YEW_BENCH = registerBlock("yew_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> SOLDIER_PINE_BENCH = registerBlock("soldier_pine_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+    public static final DeferredBlock<Block> BLUE_SOLDIER_PINE_BENCH = registerBlock("blue_soldier_pine_bench",
+            BenchBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
+
     public static final DeferredBlock<Block> BARREL_LARGE = registerBlock("barrel_large",
             BarrelLargeBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion()
@@ -2108,7 +2261,40 @@ public class ModBLocks {
                     .isViewBlocking((s,l,p) -> false),
             false);
 
+    // ── CHANDELIERS ────────────────────────────────────────────────────────
+    // <metal>_chandelier (plain candles) and <metal>_chandelier_<colour> for each dye colour of candle
+    public static final String[] CHANDELIER_METALS = {"bronze", "copper", "gold", "iron", "silver"};
+    public static final Map<String, DeferredBlock<Block>> CHANDELIERS = new LinkedHashMap<>();
 
+    static {
+        BlockBehaviour.Properties props = BlockBehaviour.Properties.of()
+                .mapColor(MapColor.METAL).strength(3.5f).requiresCorrectToolForDrops()
+                .sound(SoundType.LANTERN).noOcclusion().pushReaction(PushReaction.DESTROY)
+                .lightLevel(state -> 14);
+        for (String metal : CHANDELIER_METALS) {
+            CHANDELIERS.put(metal + "_chandelier",
+                    registerBlock(metal + "_chandelier", ChandelierBlock::new, props, true));
+            for (DyeColor colour : DyeColor.values()) {
+                String name = metal + "_chandelier_" + colour.getName();
+                CHANDELIERS.put(name, registerBlock(name, ChandelierBlock::new, props, true));
+            }
+        }
+    }
+
+    // ── POTS WITH STAND ──────────────────────────────────────────────────────
+    // <metal>_pot_stand, standing free or on top of a campfire (PotStandBlock)
+    public static final String[] POT_STAND_METALS = {"metal", "bronze", "copper"};
+    public static final Map<String, DeferredBlock<Block>> POT_STANDS = new LinkedHashMap<>();
+
+    static {
+        BlockBehaviour.Properties props = BlockBehaviour.Properties.of()
+                .mapColor(MapColor.METAL).strength(2f).requiresCorrectToolForDrops()
+                .sound(SoundType.METAL).noOcclusion();
+        for (String metal : POT_STAND_METALS) {
+            POT_STANDS.put(metal + "_pot_stand",
+                    registerBlock(metal + "_pot_stand", PotStandBlock::new, props, true));
+        }
+    }
 
     public static final DeferredBlock<Block> DARK_OAK_CHAIR = registerBlock("dark_oak_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);
     public static final DeferredBlock<Block> OAK_CHAIR = registerBlock("oak_chair", ChairBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2f).noOcclusion().isSuffocating((s,l,p) -> false).isViewBlocking((s,l,p) -> false), false);

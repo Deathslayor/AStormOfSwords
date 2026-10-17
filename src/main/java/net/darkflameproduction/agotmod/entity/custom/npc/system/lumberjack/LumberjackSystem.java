@@ -55,7 +55,8 @@ public class LumberjackSystem {
 
     public void tick() {
         if (!(peasant.level() instanceof ServerLevel level)) return;
-        if (peasant.shouldSleep()) return;
+        // Done at dusk like every job (NpcSchedule.WORK_END) - its evening is its own
+        if (peasant.shouldSleep() || peasant.level().getDayTime() % 24000 >= net.darkflameproduction.agotmod.entity.custom.npc.system.sleep.NpcSchedule.WORK_END) return;
 
         stuckTimer++;
         if (stuckTimer > MAX_STATE_TICKS) {

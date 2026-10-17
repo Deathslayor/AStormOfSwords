@@ -48,7 +48,7 @@ public class CarpenterSystem {
             "_fence_gate", "_fence",
             "_wall", "_door", "_trapdoor",
             "_sign", "_hanging_sign",
-            "_stool", "_arm_chair", "_chair", "_table",
+            "_stool", "_arm_chair", "_chair", "_table", "_bench",
             "_log", "_wood"
     };
 

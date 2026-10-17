@@ -25,8 +25,8 @@ public class HungerSystem {
     private static final int RATION_RETRY_TICKS = 20 * 60 * 2; // the town was short: ask again 2 minutes later
     /** A day's servings (VillageEconomy) - what everyone gets first when food is short. */
     private static final int DAYS_SERVINGS = VillageEconomy.SERVINGS_PER_VILLAGER;
-    /** When NPCs get up (SleepSystem's end of night): a new morning, and a new top-up, starts here. */
-    private static final long MORNING_TIME = 23460;
+    /** When the first NPCs get up (NpcSchedule): a new morning, and a new top-up, starts here. */
+    private static final long MORNING_TIME = net.darkflameproduction.agotmod.entity.custom.npc.system.sleep.NpcSchedule.WAKE_EARLIEST;
 
     // The morning top-up: due after waking (and for a new NPC), the morning it was last done, and the
     // earliest game time to ask again after a short one

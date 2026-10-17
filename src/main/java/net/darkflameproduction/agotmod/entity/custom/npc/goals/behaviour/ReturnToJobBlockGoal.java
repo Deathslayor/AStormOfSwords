@@ -25,13 +25,15 @@ public class ReturnToJobBlockGoal extends Goal {
                 || job.equals(JobSystem.JOB_TAILOR)
                 || JobSystem.isSmith(job)
                 || job.equals(JobSystem.JOB_BAKER)
-                || job.equals(JobSystem.JOB_STONEMASON);
+                || job.equals(JobSystem.JOB_STONEMASON)
+                || JobSystem.isTavernKeeper(job);
     }
 
     @Override
     public boolean canUse() {
         if (!peasant.hasJob()) return false;
         if (!isJobThatNeedsReturn()) return false;
+        if (peasant.isVisitingTavern()) return false;
         if (peasant.needsFoodCollection()) return false;
         if (peasant.isSleeping()) return false;
         if (peasant.getHungerSystem().isEating()) return false;
@@ -59,6 +61,7 @@ public class ReturnToJobBlockGoal extends Goal {
     @Override
     public boolean canContinueToUse() {
         if (!isJobThatNeedsReturn()) return false;
+        if (peasant.isVisitingTavern()) return false;
         if (peasant.isSleeping()) return false;
         if (peasant.getHungerSystem().isEating()) return false;
         if (peasant.needsFoodCollection()) return false;

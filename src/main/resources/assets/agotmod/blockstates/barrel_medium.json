@@ -1,8 +1,24 @@
 {
   "variants": {
-    "east=false,south=false": { "model": "agotmod:block/barrel_medium" },
-    "east=false,south=true":  { "model": "agotmod:block/barrel_medium" },
-    "east=true,south=false":  { "model": "agotmod:block/barrel_medium" },
-    "east=true,south=true":   { "model": "agotmod:block/barrel_medium" }
+    "east=false,facing=up,south=false": { "model": "agotmod:block/barrel_medium" },
+    "east=false,facing=north,south=false": { "model": "agotmod:block/barrel_medium" },
+    "east=false,facing=east,south=false": { "model": "agotmod:block/barrel_medium" },
+    "east=false,facing=south,south=false": { "model": "agotmod:block/barrel_medium" },
+    "east=false,facing=west,south=false": { "model": "agotmod:block/barrel_medium" },
+    "east=false,facing=up,south=true": { "model": "agotmod:block/barrel_medium" },
+    "east=false,facing=north,south=true": { "model": "agotmod:block/barrel_medium" },
+    "east=false,facing=east,south=true": { "model": "agotmod:block/barrel_medium" },
+    "east=false,facing=south,south=true": { "model": "agotmod:block/barrel_medium" },
+    "east=false,facing=west,south=true": { "model": "agotmod:block/barrel_medium" },
+    "east=true,facing=up,south=false": { "model": "agotmod:block/barrel_medium" },
+    "east=true,facing=north,south=false": { "model": "agotmod:block/barrel_medium" },
+    "east=true,facing=east,south=false": { "model": "agotmod:block/barrel_medium" },
+    "east=true,facing=south,south=false": { "model": "agotmod:block/barrel_medium" },
+    "east=true,facing=west,south=false": { "model": "agotmod:block/barrel_medium" },
+    "east=true,facing=up,south=true": { "model": "agotmod:block/barrel_medium" },
+    "east=true,facing=north,south=true": { "model": "agotmod:block/barrel_medium" },
+    "east=true,facing=east,south=true": { "model": "agotmod:block/barrel_medium" },
+    "east=true,facing=south,south=true": { "model": "agotmod:block/barrel_medium" },
+    "east=true,facing=west,south=true": { "model": "agotmod:block/barrel_medium" }
   }
 }

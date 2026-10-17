@@ -8,6 +8,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.data.recipes.*;
@@ -106,6 +107,17 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                         Ingredient.of(from), RecipeCategory.BUILDING_BLOCKS, to, count)
                 .unlockedBy(getHasName(from), has(from))
                 .save(this.output, id);
+    }
+
+    private void chandelierRecipe(ItemLike chandelier, ItemLike ingot, ItemLike candle) {
+        this.shaped(RecipeCategory.DECORATIONS, chandelier)
+                .pattern(" I ")
+                .pattern("CIC")
+                .pattern("C C")
+                .define('I', ingot)
+                .define('C', candle)
+                .unlockedBy(getHasName(ingot), has(ingot))
+                .save(this.output);
     }
 
     // Main method for building recipes
@@ -1661,6 +1673,51 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                     .define('B', planks)
                     .unlockedBy(getHasName(planks), has(planks))
                     .save(this.output, n + "_table");
+
+            // Bench
+            ItemLike benchItem = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(AGoTMod.MOD_ID, n + "_bench"));
+            this.shaped(RecipeCategory.MISC, benchItem)
+                    .pattern("BBB")
+                    .pattern("AOA")
+                    .define('O', ModItems.NAIL.get())
+                    .define('A', stick)
+                    .define('B', planks)
+                    .unlockedBy(getHasName(planks), has(planks))
+                    .save(this.output, n + "_bench");
+        }
+
+
+        // Chandeliers: two ingots of the metal and four candles of the colour
+        Map<String, ItemLike> chandelierIngots = Map.of(
+                "bronze", ModItems.BRONZE_INGOT.get(),
+                "copper", Items.COPPER_INGOT,
+                "gold",   Items.GOLD_INGOT,
+                "iron",   Items.IRON_INGOT,
+                "silver", ModItems.SILVER_INGOT.get());
+        for (String metal : ModBLocks.CHANDELIER_METALS) {
+            ItemLike ingot = chandelierIngots.get(metal);
+            chandelierRecipe(ModBLocks.CHANDELIERS.get(metal + "_chandelier").get(), ingot, Items.CANDLE);
+            for (DyeColor colour : DyeColor.values()) {
+                ItemLike candle = BuiltInRegistries.ITEM.get(ResourceLocation.withDefaultNamespace(colour.getName() + "_candle"));
+                chandelierRecipe(ModBLocks.CHANDELIERS.get(metal + "_chandelier_" + colour.getName()).get(), ingot, candle);
+            }
+        }
+
+        // Pots with stand: a pot of five ingots hanging from a chain
+        Map<String, ItemLike> potIngots = Map.of(
+                "metal",  Items.IRON_INGOT,
+                "bronze", ModItems.BRONZE_INGOT.get(),
+                "copper", Items.COPPER_INGOT);
+        for (String metal : ModBLocks.POT_STAND_METALS) {
+            ItemLike ingot = potIngots.get(metal);
+            this.shaped(RecipeCategory.DECORATIONS, ModBLocks.POT_STANDS.get(metal + "_pot_stand").get())
+                    .pattern("ICI")
+                    .pattern("I I")
+                    .pattern(" I ")
+                    .define('I', ingot)
+                    .define('C', Items.CHAIN)
+                    .unlockedBy(getHasName(ingot), has(ingot))
+                    .save(this.output);
         }
 
 

@@ -41,6 +41,21 @@ public class JobSystem {
     public static final String JOB_SWORDSMITH      = "swordsmith";
     public static final String JOB_BAKER           = "baker";
     public static final String JOB_STONEMASON      = "stonemason";
+    public static final String JOB_INNKEEPER       = "innkeeper";
+    public static final String JOB_ALEHOUSE_KEEPER = "alehouse_keeper";
+
+    /** The tavern keepers: awake while their tavern is open, asleep while it's closed (NpcSchedule). */
+    public static boolean isTavernKeeper(String job) {
+        return JOB_INNKEEPER.equals(job) || JOB_ALEHOUSE_KEEPER.equals(job);
+    }
+
+    /**
+     * The jobs that work standing at their barrel, crafting for the town's supply chain or the smiths' work: they
+     * keep to a few blocks around it.
+     */
+    public static boolean isBarrelCrafter(String job) {
+        return isSmith(job) || JOB_BAKER.equals(job) || JOB_STONEMASON.equals(job) || isTavernKeeper(job);
+    }
 
     /** The smiths: the blacksmith, and the armorsmith and swordsmith who make the high tier armour and weapons. */
     public static boolean isSmith(String job) {
@@ -272,7 +287,9 @@ public class JobSystem {
         if (getJobType().equals(JOB_SWORDSMITH))      return jobBlockState.is(ModBLocks.SWORDSMITH_BARREL.get());
         if (getJobType().equals(JOB_BAKER))           return jobBlockState.is(ModBLocks.BAKER_BARREL.get());
         if (getJobType().equals(JOB_STONEMASON))      return jobBlockState.is(ModBLocks.STONEMASON_BARREL.get());
-        if (getJobType().equals(JOB_GUARD))           return jobBlockState.is(ModBLocks.GUARD_BARREL.get());
+        if (getJobType().equals(JOB_INNKEEPER))       return jobBlockState.is(ModBLocks.INNKEEPER_BARREL.get());
+        if (getJobType().equals(JOB_ALEHOUSE_KEEPER)) return jobBlockState.is(ModBLocks.ALEHOUSE_BARREL.get());
+        if (getJobType().equals(JOB_GUARD))         return jobBlockState.is(ModBLocks.GUARD_BARREL.get());
         if (getJobType().equals(JOB_MINER))           return jobBlockState.is(ModBLocks.MINER_BARREL.get());
         if (getJobType().equals(JOB_QUARRY))          return jobBlockState.is(ModBLocks.QUARRY_BARREL.get());
         if (getJobType().equals(JOB_SMELTER))         return jobBlockState.is(ModBLocks.SMELTER_BARREL.get());
@@ -455,7 +472,7 @@ public class JobSystem {
         if (getJobType().equals(JOB_BUTCHER))    return deltaX <= BUTCHER_IDLE_RADIUS_X    && deltaZ <= BUTCHER_IDLE_RADIUS_Z    && deltaY <= BUTCHER_IDLE_RADIUS_Y;
         if (getJobType().equals(JOB_TANNER))     return deltaX <= TANNER_IDLE_RADIUS_X     && deltaZ <= TANNER_IDLE_RADIUS_Z     && deltaY <= TANNER_IDLE_RADIUS_Y;
         if (getJobType().equals(JOB_TAILOR))     return deltaX <= TAILOR_IDLE_RADIUS_X     && deltaZ <= TAILOR_IDLE_RADIUS_Z     && deltaY <= TAILOR_IDLE_RADIUS_Y;
-        if (isSmith(getJobType()) || getJobType().equals(JOB_BAKER) || getJobType().equals(JOB_STONEMASON)) return deltaX <= BLACKSMITH_IDLE_RADIUS_X && deltaZ <= BLACKSMITH_IDLE_RADIUS_Z && deltaY <= BLACKSMITH_IDLE_RADIUS_Y;
+        if (isBarrelCrafter(getJobType())) return deltaX <= BLACKSMITH_IDLE_RADIUS_X && deltaZ <= BLACKSMITH_IDLE_RADIUS_Z && deltaY <= BLACKSMITH_IDLE_RADIUS_Y;
         if (getJobType().equals(JOB_CARPENTER))  return deltaX <= CARPENTER_IDLE_RADIUS_X  && deltaZ <= CARPENTER_IDLE_RADIUS_Z  && deltaY <= CARPENTER_IDLE_RADIUS_Y;
         if (getJobType().equals(JOB_GUARD))
             return deltaX <= GUARD_WORK_RADIUS_X && deltaZ <= GUARD_WORK_RADIUS_Z && deltaY <= GUARD_WORK_RADIUS_Y;
@@ -482,12 +499,13 @@ public class JobSystem {
         if (getJobType().equals(JOB_GUARD))
             return !peasant.getGuardSystem().shouldSleep() && !peasant.needsFoodCollection();
         if (peasant.shouldSleep() || peasant.needsFoodCollection()) return false;
+        if (peasant.isVisitingTavern()) return false; // done for the day, and off to the tavern
         if (getJobType().equals(JOB_FARMER))      return peasant.getFarmingSystem().hasReturnedToJobBlockAfterFood();
         if (getJobType().equals(JOB_GROCER))      return true;
         if (getJobType().equals(JOB_BUTCHER))     return true;
         if (getJobType().equals(JOB_TANNER))      return true;
         if (getJobType().equals(JOB_TAILOR))      return true;
-        if (isSmith(getJobType()) || getJobType().equals(JOB_BAKER) || getJobType().equals(JOB_STONEMASON))  return true;
+        if (isBarrelCrafter(getJobType()))  return true;
         if (getJobType().equals(JOB_CARPENTER))   return true;
         if (getJobType().equals(JOB_MINER))       return true;
         if (getJobType().equals(JOB_QUARRY))      return true;
@@ -527,7 +545,7 @@ public class JobSystem {
             return distanceSquared > ((TANNER_IDLE_RADIUS_X + 10) * (TANNER_IDLE_RADIUS_X + 10));
         if (getJobType().equals(JOB_TAILOR))
             return distanceSquared > ((TAILOR_IDLE_RADIUS_X + 10) * (TAILOR_IDLE_RADIUS_X + 10));
-        if (isSmith(getJobType()) || getJobType().equals(JOB_BAKER) || getJobType().equals(JOB_STONEMASON))
+        if (isBarrelCrafter(getJobType()))
             return distanceSquared > ((BLACKSMITH_IDLE_RADIUS_X + 10) * (BLACKSMITH_IDLE_RADIUS_X + 10));
         if (getJobType().equals(JOB_CARPENTER))
             return distanceSquared > ((CARPENTER_IDLE_RADIUS_X + 10) * (CARPENTER_IDLE_RADIUS_X + 10));

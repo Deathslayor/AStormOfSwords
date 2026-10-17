@@ -11,6 +11,7 @@ import net.darkflameproduction.agotmod.block.custom.barrel.BarrelSmallBlockEntit
 import net.darkflameproduction.agotmod.block.custom.furniture.ArmChairBlockEntity;
 import net.darkflameproduction.agotmod.block.custom.furniture.ChairBlockEntity;
 import net.darkflameproduction.agotmod.block.custom.furniture.StoolBlockEntity;
+import net.darkflameproduction.agotmod.block.custom.furniture.BenchBlockEntity;
 import net.darkflameproduction.agotmod.block.custom.furniture.TableBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -154,6 +155,49 @@ public class ModBlockEntities {
                     ModBLocks.TIGERWOOD_STOOL.get(), ModBLocks.YEW_STOOL.get(),
                     ModBLocks.SOLDIER_PINE_STOOL.get(),
                     ModBLocks.BLUE_SOLDIER_PINE_STOOL.get()
+            ));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BenchBlockEntity>> BENCH =
+            BLOCK_ENTITIES.register("bench", () -> create(
+                    BenchBlockEntity::new,
+                    ModBLocks.DARK_OAK_BENCH.get(), ModBLocks.OAK_BENCH.get(),
+                    ModBLocks.SPRUCE_BENCH.get(), ModBLocks.BIRCH_BENCH.get(),
+                    ModBLocks.JUNGLE_BENCH.get(), ModBLocks.ACACIA_BENCH.get(),
+                    ModBLocks.MANGROVE_BENCH.get(), ModBLocks.CHERRY_BENCH.get(),
+                    ModBLocks.BAMBOO_BENCH.get(), ModBLocks.CRIMSON_BENCH.get(),
+                    ModBLocks.WARPED_BENCH.get(), ModBLocks.WEIRWOOD_BENCH.get(),
+                    ModBLocks.CHARRED_BENCH.get(), ModBLocks.ROTTEN_BENCH.get(),
+                    ModBLocks.PINE_BENCH.get(), ModBLocks.ASH_BENCH.get(),
+                    ModBLocks.BEECH_BENCH.get(), ModBLocks.CEDAR_BENCH.get(),
+                    ModBLocks.CHESTNUT_BENCH.get(), ModBLocks.HAWTHORN_BENCH.get(),
+                    ModBLocks.IRONWOOD_BENCH.get(), ModBLocks.SENTINEL_BENCH.get(),
+                    ModBLocks.SYCAMORE_BENCH.get(), ModBLocks.BLACKBARK_BENCH.get(),
+                    ModBLocks.ASPEN_BENCH.get(), ModBLocks.ALDER_BENCH.get(),
+                    ModBLocks.BLACK_CHERRY_BENCH.get(), ModBLocks.BLACK_OLIVE_BENCH.get(),
+                    ModBLocks.CRABAPPLE_BENCH.get(), ModBLocks.OLIVE_BENCH.get(),
+                    ModBLocks.WHITE_CHERRY_BENCH.get(), ModBLocks.RED_CHERRY_BENCH.get(),
+                    ModBLocks.FIR_BENCH.get(), ModBLocks.WILLOW_BENCH.get(),
+                    ModBLocks.WORMTREE_BENCH.get(), ModBLocks.ALMOND_BENCH.get(),
+                    ModBLocks.APPLE_BENCH.get(), ModBLocks.APRICOT_BENCH.get(),
+                    ModBLocks.BAOBAB_BENCH.get(), ModBLocks.BLACK_COTTONWOOD_BENCH.get(),
+                    ModBLocks.BLACKTHORN_BENCH.get(), ModBLocks.BLOOD_ORANGE_BENCH.get(),
+                    ModBLocks.BLOODWOOD_BENCH.get(), ModBLocks.BLUE_MAHOE_BENCH.get(),
+                    ModBLocks.COTTONWOOD_BENCH.get(), ModBLocks.DATEPALM_BENCH.get(),
+                    ModBLocks.EBONY_BENCH.get(), ModBLocks.FIG_BENCH.get(),
+                    ModBLocks.FIREPLUM_BENCH.get(), ModBLocks.GOLDENHEART_BENCH.get(),
+                    ModBLocks.LEMON_BENCH.get(), ModBLocks.LIME_BENCH.get(),
+                    ModBLocks.LINDEN_BENCH.get(), ModBLocks.MAHOGANY_BENCH.get(),
+                    ModBLocks.MAPLE_BENCH.get(), ModBLocks.MYRRH_BENCH.get(),
+                    ModBLocks.NIGHTWOOD_BENCH.get(), ModBLocks.NUTMEG_BENCH.get(),
+                    ModBLocks.ORANGE_BENCH.get(), ModBLocks.PEACH_BENCH.get(),
+                    ModBLocks.PEAR_BENCH.get(), ModBLocks.PECAN_BENCH.get(),
+                    ModBLocks.PERSIMMON_BENCH.get(), ModBLocks.PINK_IVORY_BENCH.get(),
+                    ModBLocks.PLUM_BENCH.get(), ModBLocks.POMEGRANATE_BENCH.get(),
+                    ModBLocks.PURPLEHEART_BENCH.get(), ModBLocks.REDWOOD_BENCH.get(),
+                    ModBLocks.SANDALWOOD_BENCH.get(), ModBLocks.SANDBEGGAR_BENCH.get(),
+                    ModBLocks.TIGERWOOD_BENCH.get(), ModBLocks.YEW_BENCH.get(),
+                    ModBLocks.SOLDIER_PINE_BENCH.get(),
+                    ModBLocks.BLUE_SOLDIER_PINE_BENCH.get()
             ));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ChairBlockEntity>> CHAIR =

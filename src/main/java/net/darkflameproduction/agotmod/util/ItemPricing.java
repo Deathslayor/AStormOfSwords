@@ -13,6 +13,10 @@ public class ItemPricing {
     public static final String SWORDSMITH = "swordsmith";
     public static final String BAKER      = "baker";
     public static final String STONEMASON = "stonemason";
+    /** Sells every food: see isInnkeeperItem. */
+    public static final String INNKEEPER  = "innkeeper";
+    /** Sells cooked meat: see isAlehouseItem. */
+    public static final String ALEHOUSE_KEEPER = "alehouse_keeper";
     public static final String CARPENTER  = "carpenter";
     public static final String TRADER = "trader";
 
@@ -137,6 +141,14 @@ public class ItemPricing {
         reg("minecraft:chicken",            16,  BUTCHER);
         reg("minecraft:mutton",             16,  BUTCHER);
         reg("minecraft:rabbit",             24,  BUTCHER);
+        // Cooked (by the innkeeper and alehouse keeper - Kitchen): about a quarter more, like the mod's meats
+        reg("minecraft:cooked_beef",        30,  BUTCHER);
+        reg("minecraft:cooked_porkchop",    30,  BUTCHER);
+        reg("minecraft:cooked_chicken",     20,  BUTCHER);
+        reg("minecraft:cooked_mutton",      20,  BUTCHER);
+        reg("minecraft:cooked_rabbit",      30,  BUTCHER);
+        reg("minecraft:cooked_cod",         20,  BUTCHER);
+        reg("minecraft:cooked_salmon",      24,  BUTCHER);
 
 
         // ══════════════════════════════════════════════════════════════════════
@@ -329,6 +341,7 @@ public class ItemPricing {
             reg(prefix + "_chair",     60,  CARPENTER);
             reg(prefix + "_arm_chair", 80,  CARPENTER);
             reg(prefix + "_table",     70,  CARPENTER);
+            reg(prefix + "_bench",     60,  CARPENTER);
         }
 
         for (String wood : MOD_WOODS) {
@@ -588,10 +601,43 @@ public class ItemPricing {
     public static boolean isBakerItem(String itemKey)      { return isJobItem(itemKey, BAKER);      }
     public static boolean isStonemasonItem(String itemKey) { return isJobItem(itemKey, STONEMASON); }
 
+    /** isInnkeeperItem results: the item registry doesn't change once the game has loaded. */
+    private static final Map<String, Boolean> INNKEEPER_ITEMS = new java.util.concurrent.ConcurrentHashMap<>();
+
+    /**
+     * The innkeeper sells every kind of food any shop sells: the mod's foods (FoodCatalog), anything edible, and
+     * cake. Worked out on first use rather than registered, as the item registry isn't there when prices are.
+     */
+    public static boolean isInnkeeperItem(String itemKey) {
+        if (!ITEMS.containsKey(itemKey)) return false;
+        return INNKEEPER_ITEMS.computeIfAbsent(itemKey, key -> {
+            net.minecraft.resources.ResourceLocation loc = net.minecraft.resources.ResourceLocation.tryParse(key);
+            if (loc == null) return false;
+            if (loc.getNamespace().equals("agotmod") && net.darkflameproduction.agotmod.item.food.FoodCatalog.has(loc.getPath())) return true;
+            net.minecraft.world.item.Item item = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(loc);
+            if (item == net.minecraft.world.item.Items.AIR) return false;
+            return item == net.minecraft.world.item.Items.CAKE
+                    || new net.minecraft.world.item.ItemStack(item).has(net.minecraft.core.component.DataComponents.FOOD);
+        });
+    }
+
+    /** The alehouse keeper sells cooked meat (and fish) only - no pies, fruit or anything else. */
+    public static boolean isAlehouseItem(String itemKey) {
+        return ITEMS.containsKey(itemKey)
+                && net.darkflameproduction.agotmod.entity.custom.npc.system.supply.Kitchen.isCookedMeat(itemKey);
+    }
+
     /** The shops (GROCER, BAKER...) that deal in an item; empty if none. */
     public static Set<String> jobsOf(String itemKey) {
         ItemData data = ITEMS.get(itemKey);
-        return data != null ? Collections.unmodifiableSet(data.jobs) : Set.of();
+        if (data == null) return Set.of();
+        boolean innkeeper = isInnkeeperItem(itemKey);
+        boolean alehouse = isAlehouseItem(itemKey);
+        if (!innkeeper && !alehouse) return Collections.unmodifiableSet(data.jobs);
+        Set<String> jobs = new HashSet<>(data.jobs);
+        if (innkeeper) jobs.add(INNKEEPER);
+        if (alehouse) jobs.add(ALEHOUSE_KEEPER);
+        return Collections.unmodifiableSet(jobs);
     }
 
     public static int getItemPrice(String itemKey) {

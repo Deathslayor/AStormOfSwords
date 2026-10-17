@@ -24,7 +24,7 @@ public class CarpenterGoal extends Goal {
     // All craftable product types in rotation order (excluding planks)
     // The carpenter cycles through these in order, one per craft tick.
     private static final String[] PRODUCT_ROTATION = {
-            "stool", "chair", "arm_chair", "table",
+            "stool", "chair", "arm_chair", "table", "bench",
             "stairs", "fence", "fence_gate", "wall", "slab", "door", "trapdoor"
     };
 
@@ -201,6 +201,14 @@ public class CarpenterGoal extends Goal {
                     remove(planksKey, 3); remove(stickKey, 2); remove(nailKey, 1);
                     give(woodType + "_table", 1);
                     AGoTMod.LOGGER.debug("[Carpenter] crafted table");
+                    return true;
+                }
+            }
+            case "bench" -> {
+                if (has(planksKey, 3) && has(stickKey, 2) && has(nailKey, 1)) {
+                    remove(planksKey, 3); remove(stickKey, 2); remove(nailKey, 1);
+                    give(woodType + "_bench", 1);
+                    AGoTMod.LOGGER.debug("[Carpenter] crafted bench");
                     return true;
                 }
             }

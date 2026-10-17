@@ -1,5 +1,7 @@
-// 1.21.1	2026-10-14T21:34:52.0179765	Registries
+// 1.21.1	2026-10-17T22:47:13.9471428	Registries
 04959ff97a94a491f8a432926d521f167e9531be data/agotmod/banner_pattern/arryn.json
+77cd58fc0fba14a7e16b72c4472f6fb32ab6fb43 data/agotmod/banner_pattern/arryn1.json
+5c98becf5653789788d2ea6165fdf65a0a52a32b data/agotmod/banner_pattern/arryn2.json
 e17fd35d2836802979bf988c2a96a06599d04697 data/agotmod/banner_pattern/baelish.json
 e19718623618fa07d759962c4e924b518ca9ca5f data/agotmod/banner_pattern/baratheon.json
 23addeadeee73d4a93cefe5565735459b543d634 data/agotmod/banner_pattern/blackwood.json
@@ -17,6 +19,7 @@ aa4a9ffabdef2e23af80e12dd307941666a3b0d6 data/agotmod/banner_pattern/cassel.json
 4b11d33257f5e30c8ba037b284624a4ebee1b6a4 data/agotmod/banner_pattern/condon.json
 149ae089ad962c148039c00ebaa3073e805a07f6 data/agotmod/banner_pattern/dayne.json
 b657cf47014fd4d080d9ce28ea6974d621efc75a data/agotmod/banner_pattern/dayne2.json
+d48aad91ad6abceaaab11cfcd554870acddbfa79 data/agotmod/banner_pattern/downwards_wedge.json
 cedb61a075a786989dce26a4b2642289d307fa13 data/agotmod/banner_pattern/dustin1.json
 a0e843de383dc04c884c8a105d7c8267f1b28d5d data/agotmod/banner_pattern/dustin2.json
 2cf1fc89d77fd4d8a3a10683c62bc260eae92a29 data/agotmod/banner_pattern/flint1.json
@@ -39,6 +42,7 @@ d37cddaa5634a3c384e594b14dba47501bccfa9a data/agotmod/banner_pattern/karstark.js
 1daf8e322eb1a09352a52f1e94c2451fa92f4c38 data/agotmod/banner_pattern/lannister.json
 1f3fed43a998ad74fd46041c93c137d9cf9bf7cd data/agotmod/banner_pattern/liddle1.json
 237c8b019b61c31a0704e17f54aaad4e768348b7 data/agotmod/banner_pattern/liddle2.json
+ba23562896317a12b04b55ba7cc5225b9719748a data/agotmod/banner_pattern/lipps.json
 6b997a692480691e2cb39694430b63da4edaee8f data/agotmod/banner_pattern/locke.json
 3cbe00a7efe7c7d54d25fb60470e48ead221ea15 data/agotmod/banner_pattern/magnar1.json
 1ce0171138b35b5fbe49a3a7db7057590067e0ab data/agotmod/banner_pattern/magnar2.json
@@ -49,6 +53,7 @@ d37cddaa5634a3c384e594b14dba47501bccfa9a data/agotmod/banner_pattern/karstark.js
 44242f2a161f26352a6e585528af31dcf9620a99 data/agotmod/banner_pattern/marsh.json
 adbe5f04342de5b90007718e63a72f9daa52528b data/agotmod/banner_pattern/mollen1.json
 0d345125745c8b199ce6484a52c4b7bf619e42de data/agotmod/banner_pattern/mollen2.json
+2bd0b580ca252adcbf64bffef815b4968291b45f data/agotmod/banner_pattern/moore.json
 1d009c87bd298d5f45d0ab3b4cded70c4fdd81fa data/agotmod/banner_pattern/mormont.json
 57fe0d9c512ff7369784131066cf2feea607bcbe data/agotmod/banner_pattern/norrey.json
 28dad5d40e07817a62394409a5354d3876ff47b4 data/agotmod/banner_pattern/redwyne.json
@@ -59,6 +64,7 @@ c1383735d8c56ed08120143864ee3ba53ee95e25 data/agotmod/banner_pattern/royce.json
 cb03a1d4429d25a2d64e053b6cc3f80727bb6509 data/agotmod/banner_pattern/ryswell1.json
 8d6df490ab5bbdba87c7c332ab7aeae4796a166d data/agotmod/banner_pattern/ryswell2.json
 f04e568b4066dae5a99f940f71b005c64f459f67 data/agotmod/banner_pattern/ryswell3.json
+ffa06013075bdcc3aa2ce9d70f0134fea25c21df data/agotmod/banner_pattern/shield.json
 21247a374f989ae30e29942a144484f3c3ae395a data/agotmod/banner_pattern/stark.json
 4967e662985321969eaf16aab1143008542029a0 data/agotmod/banner_pattern/stoney_fisher1.json
 def9ea40b1df3583e5fd70bc97c92497baec85c5 data/agotmod/banner_pattern/stoney_fisher2.json
@@ -73,7 +79,10 @@ def9ea40b1df3583e5fd70bc97c92497baec85c5 data/agotmod/banner_pattern/stoney_fish
 d8b6de52d477b3301a9236cfa47c5f4eccde1a74 data/agotmod/banner_pattern/umber1.json
 9f1f07ae5e3340640d7bd2b29d2b76591e0c252e data/agotmod/banner_pattern/umber2.json
 27ab829de1b701ca09b8bc8384b46c0d9254a208 data/agotmod/banner_pattern/umber3.json
+e1ad42ee855ed12c7cadf0cfc1ad496c29da495b data/agotmod/banner_pattern/upcliff.json
+4d1df8857cd6b6bda4d3dfef6a4df0b41b92f12b data/agotmod/banner_pattern/upwards_wedge.json
 835e6517ef63d9c923420dac19e536eb3cdadb28 data/agotmod/banner_pattern/velaryon.json
+73db148907017203d73bb331b58fe0810ce12bbe data/agotmod/banner_pattern/waynwood.json
 cdc7a80a6618412755b89497e3c93177d77408d6 data/agotmod/banner_pattern/whitehill.json
 9e19474979dd088a61344b7bf2f07e41c1225c68 data/agotmod/banner_pattern/widowswatch1.json
 061f3c3cc7d511230035493793cf3dbb09974706 data/agotmod/banner_pattern/widowswatch2.json

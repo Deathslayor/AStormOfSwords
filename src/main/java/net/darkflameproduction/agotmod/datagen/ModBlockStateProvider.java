@@ -3,6 +3,7 @@ package net.darkflameproduction.agotmod.datagen;
 import net.darkflameproduction.agotmod.AGoTMod;
 import net.darkflameproduction.agotmod.block.ModBLocks;
 import net.darkflameproduction.agotmod.block.custom.GhostGrassBlock;
+import net.darkflameproduction.agotmod.block.custom.PotStandBlock;
 import net.darkflameproduction.agotmod.block.custom.HorseradishCropBlock;
 import net.darkflameproduction.agotmod.block.custom.RyeCropBlock;
 import net.darkflameproduction.agotmod.block.custom.RyeCropTopBlock;
@@ -59,6 +60,29 @@ public class ModBlockStateProvider extends BlockStateProvider {
             for (int i = 2; i <= 24; i++) {
                 wattleAndDaubBlock(ModBLocks.WATTLE_AND_DAUB_VARIANTS.get(color).get(i), i);
             }
+        }
+
+        // Chandeliers: models/block/chandelier.json with each metal and candle colour's texture
+        for (Map.Entry<String, DeferredBlock<Block>> chandelier : ModBLocks.CHANDELIERS.entrySet()) {
+            String name = chandelier.getKey();
+            ModelFile model = models().withExistingParent(name, modLoc("block/chandelier"))
+                    .texture("chandelier", modLoc("block/chandelier/" + name));
+            simpleBlockWithItem(chandelier.getValue().get(), model);
+        }
+
+        // Pots with stand: models/block/pot_stand.json standing free, pot_stand_on_campfire.json (one block lower,
+        // around the campfire) on a campfire; both turned by FACING
+        for (Map.Entry<String, DeferredBlock<Block>> pot : ModBLocks.POT_STANDS.entrySet()) {
+            String name = pot.getKey();
+            ModelFile standing = models().withExistingParent(name, modLoc("block/pot_stand"))
+                    .texture("pot", modLoc("block/pot_stand/" + name));
+            ModelFile onCampfire = models().withExistingParent(name + "_on_campfire", modLoc("block/pot_stand_on_campfire"))
+                    .texture("pot", modLoc("block/pot_stand/" + name));
+            getVariantBuilder(pot.getValue().get()).forAllStates(state -> ConfiguredModel.builder()
+                    .modelFile(state.getValue(PotStandBlock.ON_CAMPFIRE) ? onCampfire : standing)
+                    .rotationY(((int) state.getValue(PotStandBlock.FACING).toYRot() + 180) % 360)
+                    .build());
+            simpleBlockItem(pot.getValue().get(), standing);
         }
 
 

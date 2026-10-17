@@ -25,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
  * the controller barrel it belongs to.
  */
 public class BarrelDummyBlock extends Block implements EntityBlock {
-    /** How far a dummy can be from its barrel's controller (the large barrel is 3x3x3, controller bottom centre). */
+    /** How far a dummy can be from its barrel's controller (the large barrel is 3x3x3, controller bottom centre - or the middle of its side against the wall when lying). */
     private static final int REACH = 2;
 
     public BarrelDummyBlock(Properties properties) {

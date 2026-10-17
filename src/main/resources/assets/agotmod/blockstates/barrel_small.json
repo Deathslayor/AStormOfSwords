@@ -1,5 +1,9 @@
 {
   "variants": {
-    "": { "model": "agotmod:block/barrel_small" }
+    "facing=up": { "model": "agotmod:block/barrel_small" },
+    "facing=north": { "model": "agotmod:block/barrel_small" },
+    "facing=east": { "model": "agotmod:block/barrel_small" },
+    "facing=south": { "model": "agotmod:block/barrel_small" },
+    "facing=west": { "model": "agotmod:block/barrel_small" }
   }
 }

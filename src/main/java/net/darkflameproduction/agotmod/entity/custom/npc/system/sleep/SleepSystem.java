@@ -12,9 +12,7 @@ import net.minecraft.world.level.Level;
 public class SleepSystem {
     private final Peasant_Entity peasant;
 
-    // Sleep timing constants for regular NPCs
-    private static final int SLEEP_START_TIME = 12542;
-    private static final int SLEEP_END_TIME = 23460;
+    // Sleep times: each NPC's own (NpcSchedule)
 
     // Bed management
     private BlockPos bedPos;
@@ -142,9 +140,8 @@ public class SleepSystem {
                     bedSearchCooldown = 0; // Force immediate bed search for guards
                 }
             } else {
-                // For regular NPCs, use standard sleep timing
-                long sleepStartTime = 12542;
-                if (dayTime > sleepStartTime + 6000 && bedPos == null && bedSearchCooldown > 20) {
+                // For regular NPCs: 5 minutes after the latest bedtime
+                if (NpcSchedule.sinceWorkEnd(dayTime) > NpcSchedule.TAVERN_BED_SPREAD + 6000 && bedPos == null && bedSearchCooldown > 20) {
                     bedSearchCooldown = 0; // Force immediate bed search
                 }
             }
@@ -152,14 +149,11 @@ public class SleepSystem {
     }
 
     /**
-     * Determines if this NPC should sleep - guards override this in the main entity
-     * This method only handles regular NPCs (non-guards)
+     * Whether it is this NPC's usual time to sleep: after its bedtime, before it gets up (NpcSchedule). Guards,
+     * tavern keepers and an evening at the tavern change that - see Peasant_Entity.shouldSleep.
      */
     public boolean shouldSleep() {
-        // Guards use their own sleep schedule handled by GuardSystem
-        // This method is overridden in Peasant_Entity for guards
-        long dayTime = peasant.level().getDayTime() % 24000;
-        return dayTime >= SLEEP_START_TIME && dayTime <= SLEEP_END_TIME;
+        return NpcSchedule.isSleepTime(peasant.getUUID(), peasant.level().getDayTime(), false);
     }
 
     public boolean isSleeping() {

@@ -1,5 +1,7 @@
-// 1.21.1	2026-10-11T12:56:44.3616269	Tags for minecraft:banner_pattern mod id agotmod
+// 1.21.1	2026-10-17T22:47:13.8091223	Tags for minecraft:banner_pattern mod id agotmod
 bb54a625a6759d4aaef0e5c7f54fcdb4c31b6e25 data/agotmod/tags/banner_pattern/pattern_item/arryn.json
+ae84c8748b131634ba24c2e738903b170759ac2e data/agotmod/tags/banner_pattern/pattern_item/arryn1.json
+5aa91d6af88a6c5dec7ddaa8d2a754374248528d data/agotmod/tags/banner_pattern/pattern_item/arryn2.json
 463a13f99f336988ee351101830775bd7b1af604 data/agotmod/tags/banner_pattern/pattern_item/baelish.json
 1dba4dac1fac4e540a12a2b232b2aab850898696 data/agotmod/tags/banner_pattern/pattern_item/baratheon.json
 a6cfcdd60c47cd6dcf63562bd881d998c49f6210 data/agotmod/tags/banner_pattern/pattern_item/blackwood.json
@@ -17,6 +19,7 @@ c0f87e40ff19c254f37b7e258474cbf48c675b86 data/agotmod/tags/banner_pattern/patter
 70d2090a9ca19157556008091435d643b9ec0b32 data/agotmod/tags/banner_pattern/pattern_item/condon.json
 94d634a5fd7017a09b25599bae13f903d5dd6b40 data/agotmod/tags/banner_pattern/pattern_item/dayne.json
 f16044a89d6befee8b508a15cd251d36d2d782ed data/agotmod/tags/banner_pattern/pattern_item/dayne2.json
+ba8e93a1949a159855f7a60fde0561ff97c67ba9 data/agotmod/tags/banner_pattern/pattern_item/downwards_wedge.json
 5a9acd6d8fbc8901b41ff06068f87278bc61b56b data/agotmod/tags/banner_pattern/pattern_item/dustin1.json
 0eb587034bc599cb4b8e7949c11637bb8f95dcbb data/agotmod/tags/banner_pattern/pattern_item/dustin2.json
 0f2fb7552a983c727007f92c8be88985414c872d data/agotmod/tags/banner_pattern/pattern_item/flint1.json
@@ -39,6 +42,7 @@ cb8d0d204cb61fc254ac7fca1b215805ea61b68a data/agotmod/tags/banner_pattern/patter
 f071dec2df89985616c0e0fc3682e86b7f4a02df data/agotmod/tags/banner_pattern/pattern_item/lannister.json
 479ab35859df82095038144da49f28b54ad3455d data/agotmod/tags/banner_pattern/pattern_item/liddle1.json
 a93d15bd662e9d28f06723972880f448da2bbf22 data/agotmod/tags/banner_pattern/pattern_item/liddle2.json
+61418382703de43f2fd16f378ce11c0a1cb47919 data/agotmod/tags/banner_pattern/pattern_item/lipps.json
 917deb4216262b61d2b6fad9e86f10c1ae5b77aa data/agotmod/tags/banner_pattern/pattern_item/locke.json
 eee6e189e2c54bf2d0e5978b18f900cc3120ebc0 data/agotmod/tags/banner_pattern/pattern_item/magnar1.json
 669883c3db3c46a056f6a16b2a77c97fe49847cb data/agotmod/tags/banner_pattern/pattern_item/magnar2.json
@@ -49,6 +53,7 @@ a42d2d54020caa41941097ed8a487f159865b15f data/agotmod/tags/banner_pattern/patter
 78147e099dff419d3f45074d9287c97c1ba2bda5 data/agotmod/tags/banner_pattern/pattern_item/marsh.json
 0c8829866296e98e9f626f656d0a4aeda8bb3844 data/agotmod/tags/banner_pattern/pattern_item/mollen1.json
 1ecbff4c416b610945ca0e48ae4e2dc9225d157a data/agotmod/tags/banner_pattern/pattern_item/mollen2.json
+4fd4afef83c7a34b64140accea23498e05e94972 data/agotmod/tags/banner_pattern/pattern_item/moore.json
 ea3e2cf438e276bbb476f420279011936c2034a7 data/agotmod/tags/banner_pattern/pattern_item/mormont.json
 47da899ebc08d3121801e0ca1a251f4bab775ea7 data/agotmod/tags/banner_pattern/pattern_item/norrey.json
 11c25b1e1fc3587134e0a3e1cd1ab73c311c24e4 data/agotmod/tags/banner_pattern/pattern_item/redwyne.json
@@ -59,6 +64,7 @@ e2ff69a13167a395d7535e5fcd28b816d25665c1 data/agotmod/tags/banner_pattern/patter
 073d57e6dece5f9ed9d6f1b5daad8d3e3ed3c111 data/agotmod/tags/banner_pattern/pattern_item/ryswell1.json
 aff80d64e0c21a12108e597fcc0cbd64d9f2fe5f data/agotmod/tags/banner_pattern/pattern_item/ryswell2.json
 da289b1c9c8c7a6ec4d5f6cb0590243e826573c5 data/agotmod/tags/banner_pattern/pattern_item/ryswell3.json
+13e497ab38deb717bf7e9055ef8d66c4049b33ac data/agotmod/tags/banner_pattern/pattern_item/shield.json
 3130327ccee02665ba77269ce5b464e173aa9475 data/agotmod/tags/banner_pattern/pattern_item/stark.json
 7f510dbf7a9263d54b005d75748449e0672a7da3 data/agotmod/tags/banner_pattern/pattern_item/stoney_fisher1.json
 c02f52dbdf6a4965bb5263fe83a98ed3d0de7ecf data/agotmod/tags/banner_pattern/pattern_item/stoney_fisher2.json
@@ -73,7 +79,10 @@ a26afa57b8a1ecaea722cff5c211da76fbb482b1 data/agotmod/tags/banner_pattern/patter
 3ad291cf2f5f39ca00a875fcf1a8861c82f5d5c5 data/agotmod/tags/banner_pattern/pattern_item/umber1.json
 7aa535585e58685ffec256fa9dfa08585b9d7ec1 data/agotmod/tags/banner_pattern/pattern_item/umber2.json
 a05512703088bb8fe53f9b3f56d7522dde1870b0 data/agotmod/tags/banner_pattern/pattern_item/umber3.json
+9e02ad65c2aed9ae46bd0bf49fbac1901208ab70 data/agotmod/tags/banner_pattern/pattern_item/upcliff.json
+ee1d0bb01f231b2e1a46a48905ccc73504299bba data/agotmod/tags/banner_pattern/pattern_item/upwards_wedge.json
 fd8cafe192deca08ccbb7b7091dfb211ba9ec31d data/agotmod/tags/banner_pattern/pattern_item/velaryon.json
+34a7006fbd19594e505268970f1e509370daf05d data/agotmod/tags/banner_pattern/pattern_item/waynwood.json
 96f0489595ca23cb484f38e599e0984db5758a85 data/agotmod/tags/banner_pattern/pattern_item/whitehill.json
 16cfc3d1cacc7e7387ec3ff9dd4c822ec376a100 data/agotmod/tags/banner_pattern/pattern_item/widowswatch1.json
 49df78838f7bb8456361f4023064538a46d94524 data/agotmod/tags/banner_pattern/pattern_item/widowswatch2.json

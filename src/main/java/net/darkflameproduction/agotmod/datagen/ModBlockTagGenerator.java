@@ -688,6 +688,14 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
             this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(bases).add(stairs).add(slabs).add(walls);
         }
 
+        // Chandeliers: metal, broken with a pickaxe like a lantern
+        for (DeferredBlock<Block> chandelier : ModBLocks.CHANDELIERS.values()) {
+            this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(chandelier.get());
+        }
+        for (DeferredBlock<Block> pot : ModBLocks.POT_STANDS.values()) {
+            this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(pot.get());
+        }
+
 
 
 

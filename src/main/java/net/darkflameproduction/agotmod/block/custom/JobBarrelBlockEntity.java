@@ -36,7 +36,7 @@ public class JobBarrelBlockEntity extends BlockEntity implements WorldlyContaine
     // Map for job type lookup - handles all job types including compound names
     private static final Map<String, String> JOB_TYPE_MAP = new HashMap<>();
     static {
-        JOB_TYPE_MAP.put("alehouse_barrel", "alehouse");
+        JOB_TYPE_MAP.put("alehouse_barrel", "alehouse_keeper");
         JOB_TYPE_MAP.put("armorsmith_barrel", "armorsmith");
         JOB_TYPE_MAP.put("baker_barrel", "baker");
         JOB_TYPE_MAP.put("banker_barrel", "banker");

@@ -1,20 +1,19 @@
 package net.darkflameproduction.agotmod.block.custom.barrel;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.darkflameproduction.agotmod.AGoTMod;
+import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
-import software.bernie.geckolib.model.DefaultedBlockGeoModel;
 import software.bernie.geckolib.renderer.GeoBlockRenderer;
 
 public class BarrelMediumBlockEntityRenderer extends GeoBlockRenderer<BarrelMediumBlockEntity> {
 
     public BarrelMediumBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
-        super(new DefaultedBlockGeoModel<>(AGoTMod.id("barrel_medium")));
+        super(new BarrelGeoModel<>("barrel_medium"));
     }
 
     @Override
@@ -28,6 +27,10 @@ public class BarrelMediumBlockEntityRenderer extends GeoBlockRenderer<BarrelMedi
         // The renderer already centres on the controller block; shift to the corner the barrel is centred on
         BlockState state = animatable.getBlockState();
         poseStack.translate(BarrelMediumBlock.centreOffsetX(state) - 0.5, 0.0, BarrelMediumBlock.centreOffsetZ(state) - 0.5);
+        // Lying on its side: turn the model around its centre the way its top points
+        if (BarrelOrientation.isLying(state)) {
+            poseStack.mulPose(Axis.YP.rotationDegrees(BarrelOrientation.renderRotation(state.getValue(BarrelOrientation.FACING))));
+        }
     }
 
     @Override

@@ -554,6 +554,8 @@ public class TownHallBlockEntity extends BlockEntity implements
             map.put(ModBLocks.SWORDSMITH_BARREL.get(),      JobSystem.JOB_SWORDSMITH);
             map.put(ModBLocks.BAKER_BARREL.get(),           JobSystem.JOB_BAKER);
             map.put(ModBLocks.STONEMASON_BARREL.get(),      JobSystem.JOB_STONEMASON);
+            map.put(ModBLocks.INNKEEPER_BARREL.get(),       JobSystem.JOB_INNKEEPER);
+            map.put(ModBLocks.ALEHOUSE_BARREL.get(),        JobSystem.JOB_ALEHOUSE_KEEPER);
             map.put(ModBLocks.GUARD_BARREL.get(),           JobSystem.JOB_GUARD);
             map.put(ModBLocks.MINER_BARREL.get(),           JobSystem.JOB_MINER);
             map.put(ModBLocks.QUARRY_BARREL.get(),          JobSystem.JOB_QUARRY);

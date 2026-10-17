@@ -465,6 +465,14 @@ public class ModBlockLootTables extends BlockLootSubProvider {
             }
         }
 
+        for (DeferredBlock<Block> chandelier : ModBLocks.CHANDELIERS.values()) {
+            this.dropSelf(chandelier.get());
+        }
+
+        for (DeferredBlock<Block> pot : ModBLocks.POT_STANDS.values()) {
+            this.dropSelf(pot.get());
+        }
+
         // ---------------------------(FLOWERS)--------------------------- //
         this.dropSelf(ModBLocks.WINTER_ROSE.get());
         this.dropSelf(ModBLocks.WILD_RADISH.get());
@@ -1227,6 +1235,82 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBLocks.SANDBEGGAR_STOOL.get());
         this.dropSelf(ModBLocks.TIGERWOOD_STOOL.get());
         this.dropSelf(ModBLocks.YEW_STOOL.get());
+
+// ── BENCHES ────────────────────────────────────────────────────────────────
+        this.dropSelf(ModBLocks.DARK_OAK_BENCH.get());
+        this.dropSelf(ModBLocks.OAK_BENCH.get());
+        this.dropSelf(ModBLocks.SPRUCE_BENCH.get());
+        this.dropSelf(ModBLocks.BIRCH_BENCH.get());
+        this.dropSelf(ModBLocks.JUNGLE_BENCH.get());
+        this.dropSelf(ModBLocks.ACACIA_BENCH.get());
+        this.dropSelf(ModBLocks.MANGROVE_BENCH.get());
+        this.dropSelf(ModBLocks.CHERRY_BENCH.get());
+        this.dropSelf(ModBLocks.BAMBOO_BENCH.get());
+        this.dropSelf(ModBLocks.CRIMSON_BENCH.get());
+        this.dropSelf(ModBLocks.WARPED_BENCH.get());
+        this.dropSelf(ModBLocks.WEIRWOOD_BENCH.get());
+        this.dropSelf(ModBLocks.CHARRED_BENCH.get());
+        this.dropSelf(ModBLocks.ROTTEN_BENCH.get());
+        this.dropSelf(ModBLocks.PINE_BENCH.get());
+        this.dropSelf(ModBLocks.SOLDIER_PINE_BENCH.get());
+        this.dropSelf(ModBLocks.BLUE_SOLDIER_PINE_BENCH.get());
+        this.dropSelf(ModBLocks.ASH_BENCH.get());
+        this.dropSelf(ModBLocks.BEECH_BENCH.get());
+        this.dropSelf(ModBLocks.CEDAR_BENCH.get());
+        this.dropSelf(ModBLocks.CHESTNUT_BENCH.get());
+        this.dropSelf(ModBLocks.HAWTHORN_BENCH.get());
+        this.dropSelf(ModBLocks.IRONWOOD_BENCH.get());
+        this.dropSelf(ModBLocks.SENTINEL_BENCH.get());
+        this.dropSelf(ModBLocks.SYCAMORE_BENCH.get());
+        this.dropSelf(ModBLocks.BLACKBARK_BENCH.get());
+        this.dropSelf(ModBLocks.ASPEN_BENCH.get());
+        this.dropSelf(ModBLocks.ALDER_BENCH.get());
+        this.dropSelf(ModBLocks.BLACK_CHERRY_BENCH.get());
+        this.dropSelf(ModBLocks.BLACK_OLIVE_BENCH.get());
+        this.dropSelf(ModBLocks.CRABAPPLE_BENCH.get());
+        this.dropSelf(ModBLocks.OLIVE_BENCH.get());
+        this.dropSelf(ModBLocks.WHITE_CHERRY_BENCH.get());
+        this.dropSelf(ModBLocks.RED_CHERRY_BENCH.get());
+        this.dropSelf(ModBLocks.FIR_BENCH.get());
+        this.dropSelf(ModBLocks.WILLOW_BENCH.get());
+        this.dropSelf(ModBLocks.WORMTREE_BENCH.get());
+        this.dropSelf(ModBLocks.ALMOND_BENCH.get());
+        this.dropSelf(ModBLocks.APPLE_BENCH.get());
+        this.dropSelf(ModBLocks.APRICOT_BENCH.get());
+        this.dropSelf(ModBLocks.BAOBAB_BENCH.get());
+        this.dropSelf(ModBLocks.BLACK_COTTONWOOD_BENCH.get());
+        this.dropSelf(ModBLocks.BLACKTHORN_BENCH.get());
+        this.dropSelf(ModBLocks.BLOOD_ORANGE_BENCH.get());
+        this.dropSelf(ModBLocks.BLOODWOOD_BENCH.get());
+        this.dropSelf(ModBLocks.BLUE_MAHOE_BENCH.get());
+        this.dropSelf(ModBLocks.COTTONWOOD_BENCH.get());
+        this.dropSelf(ModBLocks.DATEPALM_BENCH.get());
+        this.dropSelf(ModBLocks.EBONY_BENCH.get());
+        this.dropSelf(ModBLocks.FIG_BENCH.get());
+        this.dropSelf(ModBLocks.FIREPLUM_BENCH.get());
+        this.dropSelf(ModBLocks.GOLDENHEART_BENCH.get());
+        this.dropSelf(ModBLocks.LEMON_BENCH.get());
+        this.dropSelf(ModBLocks.LIME_BENCH.get());
+        this.dropSelf(ModBLocks.LINDEN_BENCH.get());
+        this.dropSelf(ModBLocks.MAHOGANY_BENCH.get());
+        this.dropSelf(ModBLocks.MAPLE_BENCH.get());
+        this.dropSelf(ModBLocks.MYRRH_BENCH.get());
+        this.dropSelf(ModBLocks.NIGHTWOOD_BENCH.get());
+        this.dropSelf(ModBLocks.NUTMEG_BENCH.get());
+        this.dropSelf(ModBLocks.ORANGE_BENCH.get());
+        this.dropSelf(ModBLocks.PEACH_BENCH.get());
+        this.dropSelf(ModBLocks.PEAR_BENCH.get());
+        this.dropSelf(ModBLocks.PECAN_BENCH.get());
+        this.dropSelf(ModBLocks.PERSIMMON_BENCH.get());
+        this.dropSelf(ModBLocks.PINK_IVORY_BENCH.get());
+        this.dropSelf(ModBLocks.PLUM_BENCH.get());
+        this.dropSelf(ModBLocks.POMEGRANATE_BENCH.get());
+        this.dropSelf(ModBLocks.PURPLEHEART_BENCH.get());
+        this.dropSelf(ModBLocks.REDWOOD_BENCH.get());
+        this.dropSelf(ModBLocks.SANDALWOOD_BENCH.get());
+        this.dropSelf(ModBLocks.SANDBEGGAR_BENCH.get());
+        this.dropSelf(ModBLocks.TIGERWOOD_BENCH.get());
+        this.dropSelf(ModBLocks.YEW_BENCH.get());
 
 
 

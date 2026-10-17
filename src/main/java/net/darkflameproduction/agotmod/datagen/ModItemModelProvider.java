@@ -617,6 +617,82 @@ public class ModItemModelProvider extends ItemModelProvider {
         furnitureItem(ModItems.SOLDIER_PINE_STOOL);
         furnitureItem(ModItems.BLUE_SOLDIER_PINE_STOOL);
 
+// Benches
+        furnitureItem(ModItems.DARK_OAK_BENCH);
+        furnitureItem(ModItems.OAK_BENCH);
+        furnitureItem(ModItems.SPRUCE_BENCH);
+        furnitureItem(ModItems.BIRCH_BENCH);
+        furnitureItem(ModItems.JUNGLE_BENCH);
+        furnitureItem(ModItems.ACACIA_BENCH);
+        furnitureItem(ModItems.MANGROVE_BENCH);
+        furnitureItem(ModItems.CHERRY_BENCH);
+        furnitureItem(ModItems.BAMBOO_BENCH);
+        furnitureItem(ModItems.CRIMSON_BENCH);
+        furnitureItem(ModItems.WARPED_BENCH);
+        furnitureItem(ModItems.WEIRWOOD_BENCH);
+        furnitureItem(ModItems.CHARRED_BENCH);
+        furnitureItem(ModItems.ROTTEN_BENCH);
+        furnitureItem(ModItems.PINE_BENCH);
+        furnitureItem(ModItems.ASH_BENCH);
+        furnitureItem(ModItems.BEECH_BENCH);
+        furnitureItem(ModItems.CEDAR_BENCH);
+        furnitureItem(ModItems.CHESTNUT_BENCH);
+        furnitureItem(ModItems.HAWTHORN_BENCH);
+        furnitureItem(ModItems.IRONWOOD_BENCH);
+        furnitureItem(ModItems.SENTINEL_BENCH);
+        furnitureItem(ModItems.SYCAMORE_BENCH);
+        furnitureItem(ModItems.BLACKBARK_BENCH);
+        furnitureItem(ModItems.ASPEN_BENCH);
+        furnitureItem(ModItems.ALDER_BENCH);
+        furnitureItem(ModItems.BLACK_CHERRY_BENCH);
+        furnitureItem(ModItems.BLACK_OLIVE_BENCH);
+        furnitureItem(ModItems.CRABAPPLE_BENCH);
+        furnitureItem(ModItems.OLIVE_BENCH);
+        furnitureItem(ModItems.WHITE_CHERRY_BENCH);
+        furnitureItem(ModItems.RED_CHERRY_BENCH);
+        furnitureItem(ModItems.FIR_BENCH);
+        furnitureItem(ModItems.WILLOW_BENCH);
+        furnitureItem(ModItems.WORMTREE_BENCH);
+        furnitureItem(ModItems.ALMOND_BENCH);
+        furnitureItem(ModItems.APPLE_BENCH);
+        furnitureItem(ModItems.APRICOT_BENCH);
+        furnitureItem(ModItems.BAOBAB_BENCH);
+        furnitureItem(ModItems.BLACK_COTTONWOOD_BENCH);
+        furnitureItem(ModItems.BLACKTHORN_BENCH);
+        furnitureItem(ModItems.BLOOD_ORANGE_BENCH);
+        furnitureItem(ModItems.BLOODWOOD_BENCH);
+        furnitureItem(ModItems.BLUE_MAHOE_BENCH);
+        furnitureItem(ModItems.COTTONWOOD_BENCH);
+        furnitureItem(ModItems.DATEPALM_BENCH);
+        furnitureItem(ModItems.EBONY_BENCH);
+        furnitureItem(ModItems.FIG_BENCH);
+        furnitureItem(ModItems.FIREPLUM_BENCH);
+        furnitureItem(ModItems.GOLDENHEART_BENCH);
+        furnitureItem(ModItems.LEMON_BENCH);
+        furnitureItem(ModItems.LIME_BENCH);
+        furnitureItem(ModItems.LINDEN_BENCH);
+        furnitureItem(ModItems.MAHOGANY_BENCH);
+        furnitureItem(ModItems.MAPLE_BENCH);
+        furnitureItem(ModItems.MYRRH_BENCH);
+        furnitureItem(ModItems.NIGHTWOOD_BENCH);
+        furnitureItem(ModItems.NUTMEG_BENCH);
+        furnitureItem(ModItems.ORANGE_BENCH);
+        furnitureItem(ModItems.PEACH_BENCH);
+        furnitureItem(ModItems.PEAR_BENCH);
+        furnitureItem(ModItems.PECAN_BENCH);
+        furnitureItem(ModItems.PERSIMMON_BENCH);
+        furnitureItem(ModItems.PINK_IVORY_BENCH);
+        furnitureItem(ModItems.PLUM_BENCH);
+        furnitureItem(ModItems.POMEGRANATE_BENCH);
+        furnitureItem(ModItems.PURPLEHEART_BENCH);
+        furnitureItem(ModItems.REDWOOD_BENCH);
+        furnitureItem(ModItems.SANDALWOOD_BENCH);
+        furnitureItem(ModItems.SANDBEGGAR_BENCH);
+        furnitureItem(ModItems.TIGERWOOD_BENCH);
+        furnitureItem(ModItems.YEW_BENCH);
+        // furnitureItem(ModItems.SOLDIER_PINE_BENCH); // needs item/soldier_pine_bench_icon.png
+        furnitureItem(ModItems.BLUE_SOLDIER_PINE_BENCH);
+
 
 
 // Chairs
@@ -1371,7 +1447,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         String texturePath;
 
-        if (itemPath.endsWith("_table")) {
+        if (itemPath.endsWith("_table") || itemPath.endsWith("_bench")) {
             texturePath = "item/" + itemPath + "_icon";
         } else if (itemPath.endsWith("_stool")) {
             String woodType = itemPath.replace("_stool", "");
